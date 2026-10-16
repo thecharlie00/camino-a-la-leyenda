@@ -650,8 +650,8 @@ function mgrFinish(f) {
     var st = p.st; st.apps++; if (!sub) st.st++; st.min += mn; st.g += g; st.a += a; st.rs += r; st.rn++;
     if ((grp === "DEF" || grp === "POR") && gt === 0 && mn >= 60) st.cs++;
     p.bmin = (p.bmin || 0) + mn;
-    p.fit = clamp(p.fit - frac * (7 + (p.age >= 31 ? 2 : 0) + (f.ment === 2 || f.ment === "press" ? 1.5 : 0)), 5, 100);
-    var risk = 0.0075 * frac * (1 + Math.max(0, 60 - p.fit) / 30) * (m.focus === "fisico" ? 0.85 : 1) * (p.tr === "profesional" ? 0.85 : p.tr === "fiestero" ? 1.2 : 1);
+    p.fit = clamp(p.fit - frac * (7 + (p.age >= 31 ? 2 : 0) + (f.ment === 2 || f.ment === "press" ? 1.5 : 0)) * (typeof wkFitK === "function" ? wkFitK(f) : 1), 5, 100);
+    var risk = 0.0075 * frac * (typeof wkInjK === "function" ? wkInjK() : 1) * (1 + Math.max(0, 60 - p.fit) / 30) * (m.focus === "fisico" ? 0.85 : 1) * (p.tr === "profesional" ? 0.85 : p.tr === "fiestero" ? 1.2 : 1);
     if (chance(risk)) mInjure(p);
     if (chance(({DFC: 0.17, MCD: 0.17, LD: 0.12, LI: 0.12, MC: 0.12}[p.pos] || 0.07) * frac)) { st.yc++; p.ycA = (p.ycA || 0) + 1; if (p.ycA >= 5) { p.ycA = 0; p.sus += 1; S.bnews.push({t: "bad", x: tr("{name} cumplirá un partido por acumulación de amarillas.", {name: plName(p)})}); } }
     if (p.id === f.redId || (f.redId == null && chance(0.008 * frac))) { if (p.id !== f.redId) f.redId = p.id; st.rc++; p.sus += 1; S.bnews.push({t: "bad", x: tr("Roja para {name} ante el {club}.", {name: plName(p), club: clubName(f.opp)})}); }

@@ -1,7 +1,8 @@
 # Compila el juego y el Android App Bundle (.aab) firmado en GitHub.
-# - En cada push a main: compila, pasa las pruebas rápidas y deja el .aab como artefacto descargable.
-# - Al subir una etiqueta vX.Y (p. ej. v2.8): además crea una release privada de borrador con el .aab.
-# - También se puede lanzar a mano desde la pestaña Actions («Run workflow»).
+# Solo compila cuando se pide:
+# - a mano, desde la pestaña Actions («Run workflow»), o
+# - con un commit en main cuyo mensaje incluya «[compilar]».
+# Los demás push a main no compilan. Al subir una etiqueta vX.Y también crea una release de borrador con el .aab.
 #
 # Secretos necesarios (Settings → Secrets and variables → Actions):
 #   CAMINO_KEYSTORE_B64  el archivo camino.keystore en base64
@@ -23,6 +24,7 @@ concurrency:
 
 jobs:
   aab:
+    if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/') || contains(github.event.head_commit.message, '[compilar]')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:

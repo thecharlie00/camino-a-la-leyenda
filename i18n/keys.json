@@ -161,7 +161,7 @@
  "Mundial de Clubes": {
   "w": [
    "engine-core.js:700",
-   "ui.js:1123"
+   "ui.js:1124"
   ],
   "ctx": "return mkGroups(\"CWC\", \"Mundial de Clubes \" + year, N_(\"Mundial de Clubes\"), teams, {ng: 8, double: false, mdW: [41, 42, 43], perGroup: 2, thirds: 0, koW: koWeeksFrom(44, 4), lvl: 7});"
  },
@@ -195,7 +195,7 @@
   "w": [
    "engine-player.js:16",
    "engine-extra.js:675",
-   "ui-guide.js:49"
+   "ui-guide.js:51"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
@@ -204,21 +204,21 @@
    "engine-player.js:16",
    "minigame.js:482",
    "minigame.js:681",
-   "ui-guide.js:50"
+   "ui-guide.js:52"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
  "Pase": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:51"
+   "ui-guide.js:53"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
  "Regate": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:52"
+   "ui-guide.js:54"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
@@ -226,7 +226,7 @@
   "w": [
    "engine-player.js:16",
    "engine-player.js:31",
-   "ui-guide.js:53"
+   "ui-guide.js:55"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
@@ -242,7 +242,7 @@
  "Estirada": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:55"
+   "ui-guide.js:57"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
@@ -250,35 +250,35 @@
   "w": [
    "engine-player.js:16",
    "ui-life.js:259",
-   "ui-guide.js:56"
+   "ui-guide.js:58"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
  "Saque": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:57"
+   "ui-guide.js:59"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
  "Reflejos": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:58"
+   "ui-guide.js:60"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
  "Velocidad": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:59"
+   "ui-guide.js:61"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
  "Colocación": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:60"
+   "ui-guide.js:62"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
@@ -344,8 +344,8 @@
  "Mentalidad": {
   "w": [
    "engine-player.js:33",
-   "ui.js:1273",
-   "ui.js:2023",
+   "ui.js:1274",
+   "ui.js:2024",
    "ui-guide.js:17"
   ],
   "ctx": "mental: {n: tr(\"Mentalidad\"), d: tr(\"Más regularidad y moral bajo presión.\"), att: [], gk: []}"
@@ -552,7 +552,8 @@
  "Grupo {g}": {
   "w": [
    "engine-player.js:354",
-   "ui.js:1062"
+   "ui.js:1062",
+   "ui-cups.js:52"
   ],
   "ctx": "if (f.kind === \"tb\") return c.typ === \"grp\" ? (c.sub ? tr(c.sub) : tr(\"Grupo {g}\", {g: String.fromCharCode(65 + f.gi)})) : tr(\"J{n}\", {n: f.md + 1});"
  },
@@ -901,7 +902,8 @@
  "Fase de liga": {
   "w": [
    "engine-player.js:831",
-   "draw.js:85"
+   "draw.js:85",
+   "ui-cups.js:51"
   ],
   "ctx": "return c.typ === \"grp\" ? N_(\"Fase de grupos\") : N_(\"Fase de liga\");"
  },
@@ -910,7 +912,7 @@
    "engine-player.js:884",
    "life.js:462",
    "ui.js:968",
-   "ui.js:1129"
+   "ui.js:1130"
   ],
   "ctx": "if (myPos === 1) { out.push(awd(\"bdo\", \"Balón de Oro {year}\", {year: yEnd})); p.fame = clamp(p.fame + 15, 0, 100); }"
  },
@@ -1047,7 +1049,7 @@
   "w": [
    "engine-player.js:1069",
    "engine-manager.js:1124",
-   "ui.js:1376",
+   "ui.js:1377",
    "ui-shootout.js:190"
   ],
   "ctx": "case \"blk\": case \"sblk\": return tr(\"Continuar\");"
@@ -1252,8 +1254,8 @@
  "Potencial": {
   "w": [
    "engine-player.js:1202",
-   "ui.js:1679",
-   "ui-guide.js:62"
+   "ui.js:1680",
+   "ui-guide.js:64"
   ],
   "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo"
  },
@@ -1286,7 +1288,7 @@
   "w": [
    "engine-player.js:1202",
    "ui.js:992",
-   "ui-guide.js:69",
+   "ui-guide.js:71",
    "evento:documental"
   ],
   "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo"
@@ -1334,7 +1336,7 @@
   "w": [
    "engine-player.js:1202",
    "ui.js:1009",
-   "ui.js:1686"
+   "ui.js:1687"
   ],
   "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo"
  },
@@ -11201,7 +11203,7 @@
    "engine-manager.js:1222",
    "achieve.js:51",
    "ui.js:779",
-   "ui-guide.js:68"
+   "ui-guide.js:70"
   ],
   "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; "
  },
@@ -11210,7 +11212,7 @@
    "engine-manager.js:1222",
    "ui.js:529",
    "ui.js:779",
-   "ui.js:1198"
+   "ui.js:1199"
   ],
   "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; "
  },
@@ -11218,7 +11220,7 @@
   "w": [
    "engine-manager.js:1222",
    "ui.js:779",
-   "ui-guide.js:27"
+   "ui-guide.js:29"
   ],
   "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; "
  },
@@ -11523,7 +11525,7 @@
   "w": [
    "events-manager.js:86",
    "minigame.js:343",
-   "ui-guide.js:70"
+   "ui-guide.js:72"
   ],
   "ctx": "ko: {txt: tr(\"Te convierten en meme y tus jugadores notan la presión.\"), fx: {sqMor: -5, rep: -3, buff: {v: -0.8, b: 1, n: tr(\"Presión\")}}}},"
  },
@@ -14705,7 +14707,7 @@
    "events-manager-extra.js:152",
    "events-manager-extra.js:245",
    "events-manager-more.js:502",
-   "ui.js:1274"
+   "ui.js:1275"
   ],
   "ctx": "{t: tr(\"Darles la titularidad en la copa\"), ok: {txt: tr(\"Todos tienen su día. Menos intensidad en liga, más unión.\"), fx: {sqMor: 5, chem: 2, buff: {v: -0.5, b: 1, n: tr(\"Rotaciones\")}}}},"
  },
@@ -16399,6 +16401,7 @@
  "Balón parado": {
   "w": [
    "events-manager-more.js:269",
+   "week29.js:16",
    "minigame.js:680"
   ],
   "ctx": "ok: {txt: tr(\"Jugadas ensayadas que parecen coreografías. Los goles llegan.\"), fx: {bud: -g, buff: {v: 1, b: 2, n: tr(\"Balón parado\")}}},"
@@ -25945,7 +25948,7 @@
  "Porterías a cero": {
   "w": [
    "engine-extra.js:45",
-   "ui.js:1175",
+   "ui.js:1176",
    "ui-life.js:257",
    "ui-life.js:265"
   ],
@@ -26909,7 +26912,7 @@
  "Simular lo que queda": {
   "w": [
    "engine-extra.js:633",
-   "ui.js:2035"
+   "ui.js:2036"
   ],
   "ctx": "{t: tr(\"Simular lo que queda\"), ok: {txt: tr(\"Simulas el resto del partido.\"), then: function () { if (!S.live) liveStart(x.fi); liveFinish(); }}}"
  },
@@ -26922,7 +26925,7 @@
  "Objetivos": {
   "w": [
    "engine-extra.js:654",
-   "ui.js:1825"
+   "ui.js:1826"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),"
  },
@@ -26931,14 +26934,14 @@
    "engine-extra.js:654",
    "mgr-plus.js:769",
    "ui.js:513",
-   "ui.js:1825"
+   "ui.js:1826"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),"
  },
  "Elige tus objetivos de la temporada": {
   "w": [
    "engine-extra.js:654",
-   "ui.js:1826"
+   "ui.js:1827"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),"
  },
@@ -26952,7 +26955,7 @@
   "w": [
    "engine-extra.js:655",
    "engine-extra.js:661",
-   "ui.js:1834"
+   "ui.js:1835"
   ],
   "ctx": "text: tr(\"Cuanto más difícil, mayor recompensa si lo cumples.\"), opts: [descOpt({t: tr(\"Confirmar objetivos\"), ok: {txt: \"\"}}, function () { return []; })]};"
  },
@@ -27442,7 +27445,7 @@
  "Negociación rota": {
   "w": [
    "engine-market.js:287",
-   "ui.js:1302"
+   "ui.js:1303"
   ],
   "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Fichaje\"), title: tr(\"Negociación rota\"), choice: t.fn + \" \" + t.ln, txt: txt, chips: [], y: S.yr});"
  },
@@ -30893,7 +30896,7 @@
    "life.js:173",
    "life.js:191",
    "ui-life.js:106",
-   "ui-guide.js:41"
+   "ui-guide.js:43"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Decisión de carrera\"), cls: \"\", cat: tr(\"Dorsal\"), title: tr(\"¿Pides el {n}?\", {n: x.n}),"
  },
@@ -32667,6 +32670,197 @@
   ],
   "ctx": "[\"m_best\", \"🥇\", N_(\"Mejor entrenador\"), N_(\"Gana el premio al mejor entrenador del año.\"), function (c) { return S.m.awards.some(function (a) { return a.k === \"mgr_year\"; }); }]"
  },
+ "Suave": {
+  "w": [
+   "week29.js:8"
+  ],
+  "ctx": "{n: N_(\"Suave\"), d: N_(\"Recuperan más y se lesionan menos, pero progresan algo menos.\")},"
+ },
+ "Recuperan más y se lesionan menos, pero progresan algo menos.": {
+  "w": [
+   "week29.js:8"
+  ],
+  "ctx": "{n: N_(\"Suave\"), d: N_(\"Recuperan más y se lesionan menos, pero progresan algo menos.\")},"
+ },
+ "Equilibrio entre progresión y descanso.": {
+  "w": [
+   "week29.js:9"
+  ],
+  "ctx": "{n: N_(\"Normal\"), d: N_(\"Equilibrio entre progresión y descanso.\")},"
+ },
+ "Intensa": {
+  "w": [
+   "week29.js:10"
+  ],
+  "ctx": "{n: N_(\"Intensa\"), d: N_(\"Progresan más, pero se cansan y se lesionan más. Al vestuario no le encanta.\")}"
+ },
+ "Progresan más, pero se cansan y se lesionan más. Al vestuario no le encanta.": {
+  "w": [
+   "week29.js:10"
+  ],
+  "ctx": "{n: N_(\"Intensa\"), d: N_(\"Progresan más, pero se cansan y se lesionan más. Al vestuario no le encanta.\")}"
+ },
+ "General": {
+  "w": [
+   "week29.js:13"
+  ],
+  "ctx": "gen: {n: N_(\"General\"), d: N_(\"Sin plan específico.\"), fx: [1, 1]},"
+ },
+ "Sin plan específico.": {
+  "w": [
+   "week29.js:13"
+  ],
+  "ctx": "gen: {n: N_(\"General\"), d: N_(\"Sin plan específico.\"), fx: [1, 1]},"
+ },
+ "Frenar su ataque": {
+  "w": [
+   "week29.js:14"
+  ],
+  "ctx": "def: {n: N_(\"Frenar su ataque\"), d: N_(\"Encajas menos, generas algo menos.\"), fx: [0.98, 0.92], vs: \"ofe\"},"
+ },
+ "Encajas menos, generas algo menos.": {
+  "w": [
+   "week29.js:14"
+  ],
+  "ctx": "def: {n: N_(\"Frenar su ataque\"), d: N_(\"Encajas menos, generas algo menos.\"), fx: [0.98, 0.92], vs: \"ofe\"},"
+ },
+ "Atacar su punto débil": {
+  "w": [
+   "week29.js:15"
+  ],
+  "ctx": "att: {n: N_(\"Atacar su punto débil\"), d: N_(\"Más ocasiones a favor, algo más expuesto.\"), fx: [1.08, 1.02], vs: \"def\"},"
+ },
+ "Más ocasiones a favor, algo más expuesto.": {
+  "w": [
+   "week29.js:15"
+  ],
+  "ctx": "att: {n: N_(\"Atacar su punto débil\"), d: N_(\"Más ocasiones a favor, algo más expuesto.\"), fx: [1.08, 1.02], vs: \"def\"},"
+ },
+ "Jugadas ensayadas: un pequeño plus en las dos áreas.": {
+  "w": [
+   "week29.js:16"
+  ],
+  "ctx": "sp: {n: N_(\"Balón parado\"), d: N_(\"Jugadas ensayadas: un pequeño plus en las dos áreas.\"), fx: [1.04, 0.97], vs: \"pos\"},"
+ },
+ "Dosificar esfuerzos": {
+  "w": [
+   "week29.js:17"
+  ],
+  "ctx": "fresh: {n: N_(\"Dosificar esfuerzos\"), d: N_(\"Menos desgaste físico; algo menos de chispa.\"), fx: [0.98, 1], vs: \"con\"}"
+ },
+ "Menos desgaste físico; algo menos de chispa.": {
+  "w": [
+   "week29.js:17"
+  ],
+  "ctx": "fresh: {n: N_(\"Dosificar esfuerzos\"), d: N_(\"Menos desgaste físico; algo menos de chispa.\"), fx: [0.98, 1], vs: \"con\"}"
+ },
+ "ofensivo": {
+  "w": [
+   "week29.js:20"
+  ],
+  "ctx": "ofe: {n: N_(\"ofensivo\"), w: N_(\"deja espacios atrás\")},"
+ },
+ "deja espacios atrás": {
+  "w": [
+   "week29.js:20"
+  ],
+  "ctx": "ofe: {n: N_(\"ofensivo\"), w: N_(\"deja espacios atrás\")},"
+ },
+ "muy defensivo": {
+  "w": [
+   "week29.js:21"
+  ],
+  "ctx": "def: {n: N_(\"muy defensivo\"), w: N_(\"le cuesta salir jugando\")},"
+ },
+ "le cuesta salir jugando": {
+  "w": [
+   "week29.js:21"
+  ],
+  "ctx": "def: {n: N_(\"muy defensivo\"), w: N_(\"le cuesta salir jugando\")},"
+ },
+ "de contraataque": {
+  "w": [
+   "week29.js:22"
+  ],
+  "ctx": "con: {n: N_(\"de contraataque\"), w: N_(\"sufre si le quitas la pelota y le obligas a atacar\")},"
+ },
+ "sufre si le quitas la pelota y le obligas a atacar": {
+  "w": [
+   "week29.js:22"
+  ],
+  "ctx": "con: {n: N_(\"de contraataque\"), w: N_(\"sufre si le quitas la pelota y le obligas a atacar\")},"
+ },
+ "de posesión": {
+  "w": [
+   "week29.js:23"
+  ],
+  "ctx": "pos: {n: N_(\"de posesión\"), w: N_(\"defiende mal el balón parado\")}"
+ },
+ "defiende mal el balón parado": {
+  "w": [
+   "week29.js:23"
+  ],
+  "ctx": "pos: {n: N_(\"de posesión\"), w: N_(\"defiende mal el balón parado\")}"
+ },
+ "Segundo entrenador": {
+  "w": [
+   "week29.js:26"
+  ],
+  "ctx": "as: {n: N_(\"Segundo entrenador\"), d: N_(\"Mejora la preparación de los partidos y los informes del rival.\")},"
+ },
+ "Mejora la preparación de los partidos y los informes del rival.": {
+  "w": [
+   "week29.js:26"
+  ],
+  "ctx": "as: {n: N_(\"Segundo entrenador\"), d: N_(\"Mejora la preparación de los partidos y los informes del rival.\")},"
+ },
+ "Preparador físico": {
+  "w": [
+   "week29.js:27"
+  ],
+  "ctx": "fis: {n: N_(\"Preparador físico\"), d: N_(\"Más recuperación y menos lesiones.\")},"
+ },
+ "Más recuperación y menos lesiones.": {
+  "w": [
+   "week29.js:27"
+  ],
+  "ctx": "fis: {n: N_(\"Preparador físico\"), d: N_(\"Más recuperación y menos lesiones.\")},"
+ },
+ "Médico": {
+  "w": [
+   "week29.js:28",
+   "evento:m_lesion",
+   "evento:mx_prevencion",
+   "evento:my_psicologo"
+  ],
+  "ctx": "med: {n: N_(\"Médico\"), d: N_(\"Las lesiones duran menos.\")}"
+ },
+ "Las lesiones duran menos.": {
+  "w": [
+   "week29.js:28"
+  ],
+  "ctx": "med: {n: N_(\"Médico\"), d: N_(\"Las lesiones duran menos.\")}"
+ },
+ "Informe del rival: el {opp} es un equipo {st}.": {
+  "w": [
+   "week29.js:91"
+  ],
+  "ctx": "notify(tr(\"Informe del rival: el {opp} es un equipo {st}.\", {opp: clubName(f.opp), st: tr(WK_STYLE[rp.style].n)}) + (rp.weak ? \" \" + tr(\"Punto débil: {w}.\", {w: tr(rp.weak)}) : \"\") +"
+ },
+ "Punto débil: {w}.": {
+  "w": [
+   "week29.js:91",
+   "ui-week.js:14"
+  ],
+  "ctx": "notify(tr(\"Informe del rival: el {opp} es un equipo {st}.\", {opp: clubName(f.opp), st: tr(WK_STYLE[rp.style].n)}) + (rp.weak ? \" \" + tr(\"Punto débil: {w}.\", {w: tr(rp.weak)}) : \"\") +"
+ },
+ "Tu segundo recomienda: {p}.": {
+  "w": [
+   "week29.js:92",
+   "ui-week.js:15"
+  ],
+  "ctx": "(rp.rec ? \" \" + tr(\"Tu segundo recomienda: {p}.\", {p: tr(WK_PREP[rp.rec].n)}) : \"\"), \"info\");"
+ },
  "Escudo clásico": {
   "w": [
    "crest.js:8"
@@ -33244,9 +33438,9 @@
  "Atrás": {
   "w": [
    "minigame.js:1155",
-   "ui.js:1383",
-   "ui.js:1394",
-   "ui.js:1449"
+   "ui.js:1384",
+   "ui.js:1395",
+   "ui.js:1450"
   ],
   "ctx": "var ui = shell({cls: \"mg-fk mg-gkf\", gk: true, steps: 3, kicker: t(\"Bajo palos\"), title: t(\"Falta en contra\"), sec: t(\"Atrás\"),"
  },
@@ -33309,7 +33503,7 @@
  "Tu posición": {
   "w": [
    "minigame.js:1334",
-   "ui.js:1409"
+   "ui.js:1410"
   ],
   "ctx": "posL.textContent = t(\"Tu posición\");"
  },
@@ -33334,7 +33528,7 @@
  "FUERA DE JUEGO": {
   "w": [
    "pitch.js:812",
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "Snd.whistle([0.28]); P.stopUntil = P.ck + 2.2; P.msg = {t: P.lab.off || tr(\"FUERA DE JUEGO\"), s: -1, at: P.ck, small: true};"
  },
@@ -33385,7 +33579,8 @@
  "¡Campeones!": {
   "w": [
    "ui.js:318",
-   "ui.js:1054"
+   "ui.js:1054",
+   "ui-cups.js:48"
   ],
   "ctx": "el.innerHTML = '<div class=\"tropanel\"><div class=\"trorays\" aria-hidden=\"true\"></div><div class=\"trokick\">' + h(tr(\"¡Campeones!\")) + '</div><div class=\"troimg\">' + (typeof trophySVG === \"function\" ? trophySVG(t.k, 132) : "
  },
@@ -33443,7 +33638,7 @@
   "w": [
    "ui.js:410",
    "ui.js:416",
-   "ui.js:1613"
+   "ui.js:1614"
   ],
   "ctx": "'<button class=\"iconbtn\" data-a=\"menu\" aria-label=\"' + h(tr(\"Menú\")) + '\">' + ICON.dots + \"</button></header>\";"
  },
@@ -33457,8 +33652,8 @@
  "DT": {
   "w": [
    "ui.js:414",
-   "ui.js:1375",
-   "ui.js:1655"
+   "ui.js:1376",
+   "ui.js:1656"
   ],
   "ctx": "return '<header class=\"top\"><div class=\"ovr tier-' + repTier(r) + '\" aria-label=\"' + h(tr(\"Prestigio {n}\", {n: r})) + '\"><b class=\"num\">' + r + \"</b><small>\" + tr(\"DT\") + \"</small></div>\" +"
  },
@@ -33483,8 +33678,8 @@
  "Nueva partida": {
   "w": [
    "ui.js:422",
-   "ui.js:1358",
-   "ui.js:1390"
+   "ui.js:1359",
+   "ui.js:1391"
   ],
   "ctx": "return '<div class=\"dock\"><button class=\"go\" data-a=\"newgame\">' + tr(\"Nueva partida\") + \" \" + ICON.play + \"</button></div>\";"
  },
@@ -33665,9 +33860,9 @@
  "Guía del juego": {
   "w": [
    "ui.js:459",
-   "ui.js:1358",
-   "ui-guide.js:81",
-   "ui-guide.js:98"
+   "ui.js:1359",
+   "ui-guide.js:83",
+   "ui-guide.js:100"
   ],
   "ctx": "rows.push([\"guide\", \"\", ICON.book, tr(\"Guía del juego\"), tr(\"Cómo funciona cada parte\")]);"
  },
@@ -33776,9 +33971,9 @@
  "Siguiente": {
   "w": [
    "ui.js:545",
-   "ui.js:1211",
-   "ui.js:1449",
-   "ui.js:1460"
+   "ui.js:1212",
+   "ui.js:1450",
+   "ui.js:1461"
   ],
   "ctx": "return '<section class=\"card\"><div class=\"head\"><span class=\"tag ok\"><span class=\"dot\"></span>' + tr(\"Siguiente\") + '</span><span class=\"eyebrow\">' + h(tr(roleNow())) + \"</span></div>\" +"
  },
@@ -33957,14 +34152,14 @@
  "año": {
   "w": [
    "ui.js:670",
-   "ui.js:2404"
+   "ui.js:2405"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
  "{pct} % de lo que piden": {
   "w": [
    "ui.js:670",
-   "ui.js:2405"
+   "ui.js:2406"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
@@ -34112,7 +34307,7 @@
  "Rol": {
   "w": [
    "ui.js:748",
-   "ui-guide.js:67"
+   "ui-guide.js:69"
   ],
   "ctx": "'<div class=\"kv\"><div><span>' + tr(\"Rol\") + '</span><b>' + h(tr(of.role)) + \"</b></div><div><span>\" + (of.loan ? tr(\"Tipo\") : tr(\"Traspaso\")) + \"</span><b>\" + (of.loan ? tr(\"Cesión 1 año\") : of.fee ? fmtMoney(of.fee) : t"
  },
@@ -34141,7 +34336,7 @@
    "ui.js:748",
    "ui.js:851",
    "ui.js:881",
-   "ui.js:1168"
+   "ui.js:1169"
   ],
   "ctx": "'<div class=\"kv\"><div><span>' + tr(\"Rol\") + '</span><b>' + h(tr(of.role)) + \"</b></div><div><span>\" + (of.loan ? tr(\"Tipo\") : tr(\"Traspaso\")) + \"</span><b>\" + (of.loan ? tr(\"Cesión 1 año\") : of.fee ? fmtMoney(of.fee) : t"
  },
@@ -34224,7 +34419,7 @@
  "Presupuesto": {
   "w": [
    "ui.js:768",
-   "ui.js:1296"
+   "ui.js:1297"
   ],
   "ctx": "'<div class=\"kv\"><div><span>' + tr(\"Presupuesto\") + '</span><b>' + fmtMoney(mBudgetFor(of.club)) + \"</b></div><div><span>\" + tr(\"Sueldo/año\") + \"</span><b>\" + fmtMoney(of.sal) + \"</b></div>\" +"
  },
@@ -34532,7 +34727,7 @@
  "Club propio": {
   "w": [
    "ui.js:863",
-   "ui.js:1369"
+   "ui.js:1370"
   ],
   "ctx": "return '<article class=\"card' + fl + '\"><div class=\"head\"><span class=\"tag real\">' + tr(\"Club propio\") + '</span><span class=\"eyebrow\">' + seasonLabel(c.y) + '</span></div><div style=\"display:flex;align-items:center;gap:"
  },
@@ -34547,7 +34742,7 @@
    "ui.js:864",
    "ui.js:867",
    "ui.js:870",
-   "ui.js:1555"
+   "ui.js:1556"
   ],
   "ctx": "'<div style=\"min-width:0\"><h3>' + tr(\"Nace el {c}\", {c: h(clubName(c.club))}) + '</h3><div class=\"muted\" style=\"font-size:13px\">' + h(lgName(c.lg)) + \" · \" + tr(\"nivel {n}\", {n: c.r}) + \" · \" + tr(\"presupuesto {m}\", {m: "
  },
@@ -34659,7 +34854,7 @@
   "w": [
    "ui.js:910",
    "ui.js:920",
-   "ui.js:1330"
+   "ui.js:1331"
   ],
   "ctx": "o += \"<h3>\" + tr(\"{w}V {d}E {l}D\", {w: W_, d: D, l: L}) + (c.st.apps ? \" · \" + trn(g, \"{n} gol\", \"{n} goles\") + \" · \" + tr(\"{n} asist.\", {n: a}) : \" · \" + tr(\"sin minutos\")) + \"</h3>\";"
  },
@@ -34682,7 +34877,7 @@
   "w": [
    "ui.js:911",
    "ui.js:934",
-   "ui.js:1175"
+   "ui.js:1176"
   ],
   "ctx": "o += '<div class=\"statline\"><div class=\"stat\"><b>' + c.st.apps + '</b><span>' + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' + avg + '</b><span>' + tr(\"Nota\") + '</span></div><div class=\"stat\"><b>' + Math.round("
  },
@@ -34743,7 +34938,7 @@
    "ui.js:934",
    "ui.js:958",
    "ui.js:980",
-   "ui.js:1164"
+   "ui.js:1165"
   ],
   "ctx": ": '<div class=\"stat\"><b>' + r.g + '</b><span>' + tr(\"Goles\") + '</span></div><div class=\"stat\"><b>' + r.a + '</b><span>' + tr(\"Asist.\") + '</span></div>') + '<div class=\"stat\"><b>' + (r.rt ? dec(r.rt) : \"—\") + '</b><span"
  },
@@ -34776,8 +34971,8 @@
  "Victorias": {
   "w": [
    "ui.js:948",
-   "ui.js:1226",
-   "ui.js:1319"
+   "ui.js:1227",
+   "ui.js:1320"
   ],
   "ctx": "o += '<div class=\"statline\"><div class=\"stat\"><b>' + r.w + \"</b><span>\" + tr(\"Victorias\") + '</span></div><div class=\"stat\"><b>' + r.d + \"</b><span>\" + tr(\"Empates\") + '</span></div><div class=\"stat\"><b>' + r.l + \"</b><s"
  },
@@ -34857,24 +35052,24 @@
  "{name} se retira a los {age} años. Su club de referencia: {club}.": {
   "w": [
    "ui.js:979",
-   "ui.js:1225"
+   "ui.js:1226"
   ],
   "ctx": "return '<section class=\"card decision\"><div class=\"legacy\"><div class=\"eyebrow\">' + tr(\"Tu legado\") + '</div><div class=\"big num\">' + r.lg.sc + \"</div><h2>\" + h(tr(r.lg.title)) + '</h2><p class=\"lead\" style=\"margin:8px a"
  },
  "Títulos": {
   "w": [
    "ui.js:980",
-   "ui.js:1164",
-   "ui.js:1226",
-   "ui.js:1319"
+   "ui.js:1165",
+   "ui.js:1227",
+   "ui.js:1320"
   ],
   "ctx": "'<div class=\"statline\"><div class=\"stat\"><b>' + r.tot.apps + \"</b><span>\" + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' + r.tot.g + \"</b><span>\" + tr(\"Goles\") + '</span></div><div class=\"stat\"><b>' + r.tot.a + "
  },
  "Internac.": {
   "w": [
    "ui.js:980",
-   "ui.js:1164",
-   "ui.js:1338"
+   "ui.js:1165",
+   "ui.js:1339"
   ],
   "ctx": "'<div class=\"statline\"><div class=\"stat\"><b>' + r.tot.apps + \"</b><span>\" + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' + r.tot.g + \"</b><span>\" + tr(\"Goles\") + '</span></div><div class=\"stat\"><b>' + r.tot.a + "
  },
@@ -34905,7 +35100,7 @@
  "Ver el Salón de la fama": {
   "w": [
    "ui.js:982",
-   "ui.js:1227"
+   "ui.js:1228"
   ],
   "ctx": "'<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"startmgr\">' + tr(\"Empezar carrera de entrenador\") + '</button><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Ver el Salón de la fama\") + '</button><button class=\"btn"
  },
@@ -34918,7 +35113,7 @@
  "Estado": {
   "w": [
    "ui.js:991",
-   "ui.js:1685"
+   "ui.js:1686"
   ],
   "ctx": "s += '<section class=\"card\"><div class=\"head\"><h3>' + tr(\"Estado\") + '</h3><span class=\"eyebrow\">' + tr(\"Potencial {a}–{b}\", {a: est[0], b: est[1]}) + \"</span></div>\";"
  },
@@ -34951,7 +35146,7 @@
  "{n} sem.": {
   "w": [
    "ui.js:995",
-   "ui.js:1685"
+   "ui.js:1686"
   ],
   "ctx": "var inj = p.inj && p.injT > S.tw ? h(tr(p.inj.n)) + \" · \" + tr(\"{n} sem.\", {n: p.injT - S.tw}) : tr(\"Disponible\");"
  },
@@ -34971,8 +35166,8 @@
   "w": [
    "ui.js:998",
    "ui.js:1029",
-   "ui.js:1175",
-   "ui.js:1323"
+   "ui.js:1176",
+   "ui.js:1324"
   ],
   "ctx": "\"<div><span>\" + tr(\"Club\") + \"</span><span>\" + h(clubName(p.club)) + (p.loan ? \" \" + tr(\"(cedido por el {club})\", {club: h(clubName(p.loan.from))}) : \"\") + \"</span></div>\" +"
  },
@@ -34985,7 +35180,7 @@
  "Entrenador": {
   "w": [
    "ui.js:1000",
-   "ui.js:1658"
+   "ui.js:1659"
   ],
   "ctx": "\"<div><span>\" + tr(\"Entrenador\") + \"</span><span>\" + h(coachName(p.club)) + \"</span></div>\" +"
  },
@@ -35004,7 +35199,7 @@
  "Valor de mercado": {
   "w": [
    "ui.js:1003",
-   "ui.js:1681"
+   "ui.js:1682"
   ],
   "ctx": "\"<div><span>\" + tr(\"Valor de mercado\") + \"</span><span>\" + fmtMoney(marketValue()) + \"</span></div>\" +"
  },
@@ -35036,14 +35231,14 @@
  "Edad": {
   "w": [
    "ui.js:1007",
-   "ui.js:1465"
+   "ui.js:1466"
   ],
   "ctx": "\"<div><span>\" + tr(\"Edad\") + \"</span><span>\" + tr(\"{n} años\", {n: p.age}) + \"</span></div>\" +"
  },
  "Estado físico": {
   "w": [
    "ui.js:1008",
-   "ui-guide.js:64"
+   "ui-guide.js:66"
   ],
   "ctx": "\"<div><span>\" + tr(\"Estado físico\") + \"</span><span\" + (p.inj && p.injT > S.tw ? ' class=\"neg\"' : \"\") + \">\" + inj + \"</span></div>\" +"
  },
@@ -35117,7 +35312,7 @@
   "w": [
    "ui.js:1029",
    "ui.js:1082",
-   "ui.js:1175"
+   "ui.js:1176"
   ],
   "ctx": "var o = '<div class=\"tablewrap\"><table><thead><tr><th>#</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th><th>' + tr(\"DG\") + '</th><th>' + tr(\"Pts\") + '</th></tr></thead><tbody>';"
  },
@@ -35188,7 +35383,8 @@
  },
  "Campeón: {team}": {
   "w": [
-   "ui.js:1054"
+   "ui.js:1054",
+   "ui-cups.js:48"
   ],
   "ctx": "if (c.win >= 0 && c.done) o += '<p class=\"lead\">' + (c.win === me ? '<b class=\"pos\">' + tr(\"¡Campeones!\") + \"</b>\" : tr(\"Campeón: {team}\", {team: team(nat, c.win)})) + \"</p>\";"
  },
@@ -35200,7 +35396,8 @@
  },
  "Exento": {
   "w": [
-   "ui.js:1070"
+   "ui.js:1070",
+   "ui-cups.js:25"
   ],
   "ctx": "if (t.b < 0) { rows.push(\"<div><span>\" + h(tr(rd.n)) + \"</span><span>\" + tr(\"Exento\") + \"</span></div>\"); return; }"
  },
@@ -35213,7 +35410,8 @@
  "(pen.)": {
   "w": [
    "ui.js:1072",
-   "ui.js:1072"
+   "ui.js:1072",
+   "ui-cups.js:28"
   ],
   "ctx": "var stt = t.w < 0 ? (sc || tr(\"Por jugar\")) : (t.w === me ? '<b class=\"pos\">' + sc + (t.p ? \" \" + tr(\"(pen.)\") : \"\") + \"</b>\" : '<b class=\"neg\">' + sc + (t.p ? \" \" + tr(\"(pen.)\") : \"\") + \"</b>\");"
  },
@@ -35223,34 +35421,41 @@
   ],
   "ctx": "if (!rows.length && c.ko.ri < c.ko.r.length) rows.push(\"<div><span>\" + tr(\"Siguiente ronda\") + \"</span><span>\" + h(tr(c.ko.r[c.ko.ri].n)) + \"</span></div>\");"
  },
+ "Copas y torneos": {
+  "w": [
+   "ui.js:1106",
+   "ui-guide.js:24"
+  ],
+  "ctx": "var li = curLeague(), me = myClub(), seg = UIX.cupsView && S.C ? '<div class=\"seg compseg\"><button data-a=\"compseg\" data-v=\"lg\" aria-pressed=\"' + (UI.compSeg !== \"cup\") + '\">' + tr(\"Liga\") + '</button><button data-a=\"com"
+ },
  "Jornada {a}/{b}": {
   "w": [
-   "ui.js:1107"
+   "ui.js:1108"
   ],
-  "ctx": "var s = '<div class=\"stack\"><section class=\"card\"><div class=\"head\"><h3>' + flag(W.lg[li].ci) + \" \" + h(lgName(li)) + '</h3><span class=\"eyebrow\">' + tr(\"Jornada {a}/{b}\", {a: Math.min(S.L[li].md, S.L[li].N), b: S.L[li]."
+  "ctx": "var s = '<div class=\"stack\">' + seg + '<section class=\"card\"><div class=\"head\"><h3>' + flag(W.lg[li].ci) + \" \" + h(lgName(li)) + '</h3><span class=\"eyebrow\">' + tr(\"Jornada {a}/{b}\", {a: Math.min(S.L[li].md, S.L[li].N), "
  },
  "Clasificación con tu selección": {
   "w": [
-   "ui.js:1113"
+   "ui.js:1114"
   ],
   "ctx": "if (qk.length) s += '<section class=\"card\"><h3>' + tr(\"Clasificación con tu selección\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + qk.map(function (k) { var q = S.q[k]; return \"<div><span>\" + h(k.replace(/(\\D"
  },
  "{pts} pts en {gp} partidos ({gf}-{ga})": {
   "w": [
-   "ui.js:1113"
+   "ui.js:1114"
   ],
   "ctx": "if (qk.length) s += '<section class=\"card\"><h3>' + tr(\"Clasificación con tu selección\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + qk.map(function (k) { var q = S.q[k]; return \"<div><span>\" + h(k.replace(/(\\D"
  },
  "Todas las ligas": {
   "w": [
-   "ui.js:1117",
-   "ui.js:1185"
+   "ui.js:1118",
+   "ui.js:1186"
   ],
   "ctx": "s += '<section class=\"card\"><label class=\"lbl\" for=\"wl\">' + tr(\"Todas las ligas\") + '</label>' + leagueSelect(\"wl\", UI.wl) + '<div style=\"margin-top:10px\">' + leagueTable(UI.wl, me) + \"</div></section>\";"
  },
  "Champions League": {
   "w": [
-   "ui.js:1123",
+   "ui.js:1124",
    "data:competición",
    "data:competición",
    "data:competición"
@@ -35259,7 +35464,7 @@
  },
  "Copa Libertadores": {
   "w": [
-   "ui.js:1123",
+   "ui.js:1124",
    "data:competición",
    "data:competición",
    "data:competición"
@@ -35268,7 +35473,7 @@
  },
  "Europa League": {
   "w": [
-   "ui.js:1123",
+   "ui.js:1124",
    "data:competición",
    "data:competición-corta",
    "data:competición"
@@ -35277,14 +35482,14 @@
  },
  "Mundial": {
   "w": [
-   "ui.js:1123",
+   "ui.js:1124",
    "data:torneo"
   ],
   "ctx": "var comps = [[\"UCL\", N_(\"Champions League\"), 0], [\"LIB\", N_(\"Copa Libertadores\"), 0], [\"UEL\", N_(\"Europa League\"), 0], [\"CWC\", N_(\"Mundial de Clubes\"), 0], [\"WC\", N_(\"Mundial\"), 1], [\"EURO\", N_(\"Eurocopa\"), 1], [\"CA\", N_"
  },
  "Eurocopa": {
   "w": [
-   "ui.js:1123",
+   "ui.js:1124",
    "data:torneo",
    "data:competición",
    "data:competición-corta"
@@ -35293,7 +35498,7 @@
  },
  "Copa América": {
   "w": [
-   "ui.js:1123",
+   "ui.js:1124",
    "data:torneo",
    "data:competición",
    "data:competición-corta"
@@ -35302,7 +35507,7 @@
  },
  "Copa África": {
   "w": [
-   "ui.js:1123",
+   "ui.js:1124",
    "data:torneo",
    "data:competición",
    "data:competición-corta"
@@ -35311,733 +35516,733 @@
  },
  "(tú)": {
   "w": [
-   "ui.js:1129"
+   "ui.js:1130"
   ],
   "ctx": "var bdo = (S.hist.BDO || []).slice(-6).reverse().map(function (x) { var a = String(x[2] || \"\").split(\"|\"); return \"<div><span>\" + tr(\"Balón de Oro {year}\", {year: x[0]}) + \"</span><span>\" + flag(+a[1]) + \" \" + h(a[0]) + "
  },
  "Palmarés reciente": {
   "w": [
-   "ui.js:1130"
+   "ui.js:1131"
   ],
   "ctx": "return '<section class=\"card\"><h3>' + tr(\"Palmarés reciente\") + '</h3>' + (rows || bdo ? '<div class=\"kvlist\" style=\"margin-top:6px\">' + rows + bdo + \"</div>\" : '<p class=\"empty\">' + tr(\"Los campeones aparecerán al termi"
  },
  "Los campeones aparecerán al terminar la primera temporada.": {
   "w": [
-   "ui.js:1130"
+   "ui.js:1131"
   ],
   "ctx": "return '<section class=\"card\"><h3>' + tr(\"Palmarés reciente\") + '</h3>' + (rows || bdo ? '<div class=\"kvlist\" style=\"margin-top:6px\">' + rows + bdo + \"</div>\" : '<p class=\"empty\">' + tr(\"Los campeones aparecerán al termi"
  },
  "Legado {sc}": {
   "w": [
-   "ui.js:1163",
-   "ui.js:1318"
+   "ui.js:1164",
+   "ui.js:1319"
   ],
   "ctx": "var s = '<div class=\"stack\"><section class=\"card\"><div class=\"eyebrow\">' + tr(\"Legado {sc}\", {sc: lg.sc}) + \" · \" + h(tr(lg.title)) + '</div><h3 style=\"margin-top:4px\">' + tr(\"Tu carrera\") + '</h3>' + nickLine(p);"
  },
  "Tu carrera": {
   "w": [
-   "ui.js:1163"
+   "ui.js:1164"
   ],
   "ctx": "var s = '<div class=\"stack\"><section class=\"card\"><div class=\"eyebrow\">' + tr(\"Legado {sc}\", {sc: lg.sc}) + \" · \" + h(tr(lg.title)) + '</div><h3 style=\"margin-top:4px\">' + tr(\"Tu carrera\") + '</h3>' + nickLine(p);"
  },
  "Temporadas": {
   "w": [
-   "ui.js:1164",
-   "ui.js:1226",
-   "ui.js:1319"
+   "ui.js:1165",
+   "ui.js:1227",
+   "ui.js:1320"
   ],
   "ctx": "s += '<div class=\"statline\"><div class=\"stat\"><b>' + tot.seasons + '</b><span>' + tr(\"Temporadas\") + '</span></div><div class=\"stat\"><b>' + tot.apps + '</b><span>' + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' "
  },
  "Vitrina": {
   "w": [
-   "ui.js:1165"
+   "ui.js:1166"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Vitrina\") + '</h3>' + vitrina(p.trophies, tr(\"Todavía no has levantado ningún título.\")) + \"</section>\";"
  },
  "Todavía no has levantado ningún título.": {
   "w": [
-   "ui.js:1165"
+   "ui.js:1166"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Vitrina\") + '</h3>' + vitrina(p.trophies, tr(\"Todavía no has levantado ningún título.\")) + \"</section>\";"
  },
  "Premios individuales": {
   "w": [
-   "ui.js:1166"
+   "ui.js:1167"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Premios individuales\") + '</h3>' + awardsGrid(p.awards, tr(\"Los premios llegarán con las grandes temporadas.\")) + \"</section>\";"
  },
  "Los premios llegarán con las grandes temporadas.": {
   "w": [
-   "ui.js:1166"
+   "ui.js:1167"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Premios individuales\") + '</h3>' + awardsGrid(p.awards, tr(\"Los premios llegarán con las grandes temporadas.\")) + \"</section>\";"
  },
  "Fichajes": {
   "w": [
-   "ui.js:1168"
+   "ui.js:1169"
   ],
   "ctx": "if (p.tx.length) s += '<section class=\"card\"><h3>' + tr(\"Fichajes\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + p.tx.slice().reverse().map(function (t) { return \"<div><span>\" + seasonLabel(t.y) + \" · \" + h(clu"
  },
  "Hitos": {
   "w": [
-   "ui.js:1169"
+   "ui.js:1170"
   ],
   "ctx": "if (p.ms.length) s += '<section class=\"card\"><h3>' + tr(\"Hitos\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + p.ms.slice().reverse().map(function (m) { return \"<div><span>\" + h(tr(m.t)) + \"</span><span>\" + seas"
  },
  "Temporada a temporada": {
   "w": [
-   "ui.js:1175",
-   "ui.js:1323"
+   "ui.js:1176",
+   "ui.js:1324"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
  "Año": {
   "w": [
-   "ui.js:1175",
-   "ui.js:1323"
+   "ui.js:1176",
+   "ui.js:1324"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
  "PC": {
   "w": [
-   "ui.js:1175"
+   "ui.js:1176"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
  "Goles encajados": {
   "w": [
-   "ui.js:1175",
+   "ui.js:1176",
    "ui-life.js:258"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
  "GE": {
   "w": [
-   "ui.js:1175"
+   "ui.js:1176"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
  "G": {
   "w": [
-   "ui.js:1175"
+   "ui.js:1176"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
  "A": {
   "w": [
-   "ui.js:1175"
+   "ui.js:1176"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
  "Med.": {
   "w": [
-   "ui.js:1175"
+   "ui.js:1176"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
  "(c)": {
   "w": [
-   "ui.js:1177"
+   "ui.js:1178"
   ],
   "ctx": "s += \"<tr><td>\" + seasonLabel(r.y) + '</td><td class=\"club\"><div class=\"cl\">' + crest(r.club) + \"<span>\" + h(clubName(r.club)) + (r.loan ? \" \" + tr(\"(c)\") : \"\") + \"</span></div></td><td>\" + r.apps + \"</td><td>\" + (gk ? r"
  },
  "Ranking de selecciones": {
   "w": [
-   "ui.js:1189"
+   "ui.js:1190"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Ranking de selecciones\") + '</h3><div style=\"margin-top:6px\">' + nr.map(function (n, i) {"
  },
  "Mercado abierto": {
   "w": [
-   "ui.js:1211"
+   "ui.js:1212"
   ],
   "ctx": "var win = m.mk.open ? '<span class=\"tag ok\"><span class=\"dot\"></span>' + tr(\"Mercado abierto\") + \"</span>\" : '<span class=\"tag ok\"><span class=\"dot\"></span>' + tr(\"Siguiente\") + \"</span>\";"
  },
  "Nivel {n}": {
   "w": [
-   "ui.js:1212",
-   "ui.js:1263"
+   "ui.js:1213",
+   "ui.js:1264"
   ],
   "ctx": "var o = '<section class=\"card\"><div class=\"head\">' + win + '<span class=\"eyebrow\">' + tr(\"Nivel {n}\", {n: Math.round(mTeamRating(m.xi))}) + \"</span></div>\";"
  },
  "Pretemporada en el {club}": {
   "w": [
-   "ui.js:1213"
+   "ui.js:1214"
   ],
   "ctx": "o += \"<h3>\" + (S.ph === \"pre\" ? tr(\"Pretemporada en el {club}\", {club: h(clubName(m.club))}) : tr(\"Tramo {n} de 5: {blk}\", {n: S.bi + 1, blk: tr(BLOCKS[S.bi][2])})) + \"</h3>\";"
  },
  "Tramo {n} de 5: {blk}": {
   "w": [
-   "ui.js:1213"
+   "ui.js:1214"
   ],
   "ctx": "o += \"<h3>\" + (S.ph === \"pre\" ? tr(\"Pretemporada en el {club}\", {club: h(clubName(m.club))}) : tr(\"Tramo {n} de 5: {blk}\", {n: S.bi + 1, blk: tr(BLOCKS[S.bi][2])})) + \"</h3>\";"
  },
  "Revisa el once y la táctica, y aprovecha el mercado de verano antes de empezar.": {
   "w": [
-   "ui.js:1214"
+   "ui.js:1215"
   ],
   "ctx": "o += '<p class=\"lead\">' + (S.ph === \"pre\" ? tr(\"Revisa el once y la táctica, y aprovecha el mercado de verano antes de empezar.\") : (pos > 0 ? tr(\"{pos} en {lg}.\", {pos: ord(pos), lg: h(lgName(li))}) + \" \" : \"\") + (inj ?"
  },
  "{pos} en {lg}.": {
   "w": [
-   "ui.js:1214"
+   "ui.js:1215"
   ],
   "ctx": "o += '<p class=\"lead\">' + (S.ph === \"pre\" ? tr(\"Revisa el once y la táctica, y aprovecha el mercado de verano antes de empezar.\") : (pos > 0 ? tr(\"{pos} en {lg}.\", {pos: ord(pos), lg: h(lgName(li))}) + \" \" : \"\") + (inj ?"
  },
  "{n} lesionado.": {
   "w": [
-   "ui.js:1214"
+   "ui.js:1215"
   ],
   "ctx": "o += '<p class=\"lead\">' + (S.ph === \"pre\" ? tr(\"Revisa el once y la táctica, y aprovecha el mercado de verano antes de empezar.\") : (pos > 0 ? tr(\"{pos} en {lg}.\", {pos: ord(pos), lg: h(lgName(li))}) + \" \" : \"\") + (inj ?",
   "note": "plural:singular"
  },
  "{n} lesionados.": {
   "w": [
-   "ui.js:1214"
+   "ui.js:1215"
   ],
   "ctx": "o += '<p class=\"lead\">' + (S.ph === \"pre\" ? tr(\"Revisa el once y la táctica, y aprovecha el mercado de verano antes de empezar.\") : (pos > 0 ? tr(\"{pos} en {lg}.\", {pos: ord(pos), lg: h(lgName(li))}) + \" \" : \"\") + (inj ?",
   "note": "plural:plural"
  },
  "Sin lesionados.": {
   "w": [
-   "ui.js:1214"
+   "ui.js:1215"
   ],
   "ctx": "o += '<p class=\"lead\">' + (S.ph === \"pre\" ? tr(\"Revisa el once y la táctica, y aprovecha el mercado de verano antes de empezar.\") : (pos > 0 ? tr(\"{pos} en {lg}.\", {pos: ord(pos), lg: h(lgName(li))}) + \" \" : \"\") + (inj ?"
  },
  "El mercado cierra cuando empiece el tramo.": {
   "w": [
-   "ui.js:1215"
+   "ui.js:1216"
   ],
   "ctx": "(m.mk.open ? \" \" + tr(\"El mercado cierra cuando empiece el tramo.\") : \"\") + \"</p>\";"
  },
  "Plantilla y once": {
   "w": [
-   "ui.js:1220"
+   "ui.js:1221"
   ],
   "ctx": "o += '<div class=\"row2\" style=\"margin-top:12px\"><button class=\"btn wide\" data-a=\"tab\" data-t=\"plantilla\">' + tr(\"Plantilla y once\") + '</button><button class=\"btn wide\" data-a=\"tab\" data-t=\"mercado\">' + (m.mk.open ? tr(\""
  },
  "Ir al mercado": {
   "w": [
-   "ui.js:1220"
+   "ui.js:1221"
   ],
   "ctx": "o += '<div class=\"row2\" style=\"margin-top:12px\"><button class=\"btn wide\" data-a=\"tab\" data-t=\"plantilla\">' + tr(\"Plantilla y once\") + '</button><button class=\"btn wide\" data-a=\"tab\" data-t=\"mercado\">' + (m.mk.open ? tr(\""
  },
  "Ver el mercado": {
   "w": [
-   "ui.js:1220"
+   "ui.js:1221"
   ],
   "ctx": "o += '<div class=\"row2\" style=\"margin-top:12px\"><button class=\"btn wide\" data-a=\"tab\" data-t=\"plantilla\">' + tr(\"Plantilla y once\") + '</button><button class=\"btn wide\" data-a=\"tab\" data-t=\"mercado\">' + (m.mk.open ? tr(\""
  },
  "Tu legado en los banquillos": {
   "w": [
-   "ui.js:1225"
+   "ui.js:1226"
   ],
   "ctx": "return '<section class=\"card decision\"><div class=\"legacy\"><div class=\"eyebrow\">' + tr(\"Tu legado en los banquillos\") + '</div><div class=\"big num\">' + r.lg.sc + \"</div><h2>\" + h(tr(r.lg.title)) + '</h2><p class=\"lead\" s"
  },
  "Prestigio máx.": {
   "w": [
-   "ui.js:1226",
-   "ui.js:1319"
+   "ui.js:1227",
+   "ui.js:1320"
   ],
   "ctx": "'<div class=\"statline\"><div class=\"stat\"><b>' + m.seasons.length + '</b><span>' + tr(\"Temporadas\") + '</span></div><div class=\"stat\"><b>' + r.tot.n + '</b><span>' + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' +"
  },
  "LES": {
   "w": [
-   "ui.js:1231",
-   "ui.js:1247"
+   "ui.js:1232",
+   "ui.js:1248"
   ],
   "ctx": "if (p.inj > S.tw) t += '<span class=\"ptag bad\">' + tr(\"LES\") + \" \" + (p.inj - S.tw) + \"</span>\";"
  },
  "SANC": {
   "w": [
-   "ui.js:1232",
-   "ui.js:1247"
+   "ui.js:1233",
+   "ui.js:1248"
   ],
   "ctx": "if (p.sus > 0) t += '<span class=\"ptag bad\">' + tr(\"SANC\") + \"</span>\";"
  },
  "QUIERE SALIR": {
   "w": [
-   "ui.js:1233"
+   "ui.js:1234"
   ],
   "ctx": "if (p.req) t += '<span class=\"ptag bad\">' + tr(\"QUIERE SALIR\") + \"</span>\";"
  },
  "EN VENTA": {
   "w": [
-   "ui.js:1234"
+   "ui.js:1235"
   ],
   "ctx": "if (p.list) t += '<span class=\"ptag warn\">' + tr(\"EN VENTA\") + \"</span>\";"
  },
  "SE VA": {
   "w": [
-   "ui.js:1235"
+   "ui.js:1236"
   ],
   "ctx": "if (p.leaveTo) t += '<span class=\"ptag warn\">' + tr(\"SE VA\") + \"</span>\";"
  },
  "RENOVAR": {
   "w": [
-   "ui.js:1236"
+   "ui.js:1237"
   ],
   "ctx": "if (p.yrs <= 1 && !p.noRenew) t += '<span class=\"ptag warn\">' + tr(\"RENOVAR\") + \"</span>\";"
  },
  "Físico {f}, moral {m}": {
   "w": [
-   "ui.js:1243"
+   "ui.js:1244"
   ],
   "ctx": "'<span class=\"pbars\" aria-label=\"' + h(tr(\"Físico {f}, moral {m}\", {f: Math.round(p.fit), m: Math.round(p.mor)})) + '\"><i style=\"--w:' + Math.round(p.fit) + '%;--c:var(--sky)\"></i><i style=\"--w:' + Math.round(p.mor) + \"%"
  },
  "Porteros": {
   "w": [
-   "ui.js:1249"
+   "ui.js:1250"
   ],
   "ctx": "var SQ_GROUPS = [[N_(\"Porteros\"), [\"POR\"]], [N_(\"Defensas\"), [\"LD\", \"DFC\", \"LI\"]], [N_(\"Centrocampistas\"), [\"MCD\", \"MC\", \"MD\", \"MI\", \"MCO\"]], [N_(\"Delanteros\"), [\"ED\", \"EI\", \"DC\"]]];"
  },
  "Defensas": {
   "w": [
-   "ui.js:1249"
+   "ui.js:1250"
   ],
   "ctx": "var SQ_GROUPS = [[N_(\"Porteros\"), [\"POR\"]], [N_(\"Defensas\"), [\"LD\", \"DFC\", \"LI\"]], [N_(\"Centrocampistas\"), [\"MCD\", \"MC\", \"MD\", \"MI\", \"MCO\"]], [N_(\"Delanteros\"), [\"ED\", \"EI\", \"DC\"]]];"
  },
  "Centrocampistas": {
   "w": [
-   "ui.js:1249"
+   "ui.js:1250"
   ],
   "ctx": "var SQ_GROUPS = [[N_(\"Porteros\"), [\"POR\"]], [N_(\"Defensas\"), [\"LD\", \"DFC\", \"LI\"]], [N_(\"Centrocampistas\"), [\"MCD\", \"MC\", \"MD\", \"MI\", \"MCO\"]], [N_(\"Delanteros\"), [\"ED\", \"EI\", \"DC\"]]];"
  },
  "Delanteros": {
   "w": [
-   "ui.js:1249"
+   "ui.js:1250"
   ],
   "ctx": "var SQ_GROUPS = [[N_(\"Porteros\"), [\"POR\"]], [N_(\"Defensas\"), [\"LD\", \"DFC\", \"LI\"]], [N_(\"Centrocampistas\"), [\"MCD\", \"MC\", \"MD\", \"MI\", \"MCO\"]], [N_(\"Delanteros\"), [\"ED\", \"EI\", \"DC\"]]];"
  },
  "Mejora a tu titular (+{n})": {
   "w": [
-   "ui.js:1254"
+   "ui.js:1255"
   ],
   "ctx": "if (r >= 0.5) return '<em class=\"mkfit up\">' + tr(\"Mejora a tu titular (+{n})\", {n: Math.round(r)}) + \"</em>\";"
  },
  "Nivel de tu titular": {
   "w": [
-   "ui.js:1255"
+   "ui.js:1256"
   ],
   "ctx": "if (r > -0.5) return '<em class=\"mkfit eq\">' + tr(\"Nivel de tu titular\") + \"</em>\";"
  },
  "Recambio con proyección": {
   "w": [
-   "ui.js:1256"
+   "ui.js:1257"
   ],
   "ctx": "return '<em class=\"mkfit pro\">' + tr(\"Recambio con proyección\") + \"</em>\";"
  },
  "Ahora mismo no diriges a ningún equipo.": {
   "w": [
-   "ui.js:1260"
+   "ui.js:1261"
   ],
   "ctx": "if (m.club < 0) return '<div class=\"stack\"><p class=\"empty\">' + tr(\"Ahora mismo no diriges a ningún equipo.\") + \"</p></div>\";"
  },
  "Once titular": {
   "w": [
-   "ui.js:1263",
-   "ui.js:1264"
+   "ui.js:1264",
+   "ui.js:1265"
   ],
   "ctx": "var s = '<div class=\"stack\">' + xiWarn(false) + '<section class=\"card\"><div class=\"head\"><h3>' + tr(\"Once titular\") + '</h3><span class=\"eyebrow\">' + tr(\"Nivel {n}\", {n: dec(mTeamRating(m.xi))}) + \"</span></div>\";"
  },
  "vacío": {
   "w": [
-   "ui.js:1266"
+   "ui.js:1267"
   ],
   "ctx": "return '<button class=\"slot' + (out ? \" out\" : \"\") + (p && posFit(p.pos, sp) > 3 ? \" off\" : \"\") + (p ? \"\" : \" empty\") + '\" data-a=\"slot\" data-i=\"' + i + '\"' + (p ? ' data-drag=\"xi:' + i + '\"' : \"\") + ' data-drop=\"xi:' + "
  },
  "Vacío": {
   "w": [
-   "ui.js:1266"
+   "ui.js:1267"
   ],
   "ctx": "return '<button class=\"slot' + (out ? \" out\" : \"\") + (p && posFit(p.pos, sp) > 3 ? \" off\" : \"\") + (p ? \"\" : \" empty\") + '\" data-a=\"slot\" data-i=\"' + i + '\"' + (p ? ' data-drag=\"xi:' + i + '\"' : \"\") + ' data-drop=\"xi:' + "
  },
  "Arrastra aquí a tus suplentes.": {
   "w": [
-   "ui.js:1270"
+   "ui.js:1271"
   ],
   "ctx": "s += '<div class=\"bstrip\" data-drop=\"bench\">' + (bench.length ? bench.map(benchChip).join(\"\") : '<p class=\"empty\" style=\"margin:0\">' + tr(\"Arrastra aquí a tus suplentes.\") + \"</p>\") + \"</div>\";"
  },
  "Mantén pulsado un jugador y arrástralo al campo, al banquillo o a los no convocados; si lo sueltas encima de otro, se cambian. Toca un hueco del campo para elegir de una lista.": {
   "w": [
-   "ui.js:1271"
+   "ui.js:1272"
   ],
   "ctx": "s += '<p class=\"muted\" style=\"font-size:12.5px;margin:8px 0 0\">' + tr(\"Mantén pulsado un jugador y arrástralo al campo, al banquillo o a los no convocados; si lo sueltas encima de otro, se cambian. Toca un hueco del camp"
  },
  "Formación": {
   "w": [
-   "ui.js:1272"
+   "ui.js:1273"
   ],
   "ctx": "s += '<div class=\"row2\" style=\"margin-top:10px\"><div><label class=\"lbl\" for=\"mform\">' + tr(\"Formación\") + '</label><select id=\"mform\">' + Object.keys(FORMATIONS).map(function (f) { return '<option value=\"' + f + '\"' + (f"
  },
  "Once ideal": {
   "w": [
-   "ui.js:1272"
+   "ui.js:1273"
   ],
   "ctx": "s += '<div class=\"row2\" style=\"margin-top:10px\"><div><label class=\"lbl\" for=\"mform\">' + tr(\"Formación\") + '</label><select id=\"mform\">' + Object.keys(FORMATIONS).map(function (f) { return '<option value=\"' + f + '\"' + (f"
  },
  "Más rotación descansa a los cansados en los partidos menores; en los grandes siempre juegan los mejores. Los cambios salen del banquillo.": {
   "w": [
-   "ui.js:1274"
+   "ui.js:1275"
   ],
   "ctx": "s += '<div style=\"margin-top:10px\"><label class=\"lbl\">' + tr(\"Rotaciones\") + '</label><div class=\"seg\">' + ROT_NAMES.map(function (n, i) { return '<button data-a=\"rot\" data-v=\"' + i + '\" aria-pressed=\"' + (m.rot === i) +"
  },
  "No convocados": {
   "w": [
-   "ui.js:1280"
+   "ui.js:1281"
   ],
   "ctx": "s += '<section class=\"card zone\" data-drop=\"nc\"><div class=\"head\"><h3>' + tr(\"No convocados\") + '</h3><span class=\"eyebrow\">' + nc.length + \"</span></div>\";"
  },
  "Todos tus jugadores están en el once o en el banquillo.": {
   "w": [
-   "ui.js:1285"
+   "ui.js:1286"
   ],
   "ctx": "if (!nc.length) s += '<p class=\"empty\">' + tr(\"Todos tus jugadores están en el once o en el banquillo.\") + \"</p>\";"
  },
  "Barras: físico (azul) y moral.": {
   "w": [
-   "ui.js:1286"
+   "ui.js:1287"
   ],
   "ctx": "s += '<p class=\"muted\" style=\"font-size:12px;margin:8px 0 0\">' + tr(\"Barras: físico (azul) y moral.\") + \" \" + tr(\"Masa salarial: {m} al año.\", {m: fmtMoney(mWageBill())}) + \"</p></section>\";"
  },
  "Masa salarial: {m} al año.": {
   "w": [
-   "ui.js:1286"
+   "ui.js:1287"
   ],
   "ctx": "s += '<p class=\"muted\" style=\"font-size:12px;margin:8px 0 0\">' + tr(\"Barras: físico (azul) y moral.\") + \" \" + tr(\"Masa salarial: {m} al año.\", {m: fmtMoney(mWageBill())}) + \"</p></section>\";"
  },
  "Cedidos": {
   "w": [
-   "ui.js:1288"
+   "ui.js:1289"
   ],
   "ctx": "if (loans.length) s += '<section class=\"card\"><h3>' + tr(\"Cedidos\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + loans.map(function (p) { return \"<div><span>\" + h(plName(p)) + \" (\" + h(posAb(p.pos)) + \", \" + Ma"
  },
  "Sin equipo no hay mercado.": {
   "w": [
-   "ui.js:1293"
+   "ui.js:1294"
   ],
   "ctx": "if (m.club < 0) return '<div class=\"stack\"><p class=\"empty\">' + tr(\"Sin equipo no hay mercado.\") + '</p></div>';"
  },
  "Abierto": {
   "w": [
-   "ui.js:1295"
+   "ui.js:1296"
   ],
   "ctx": "var s = '<div class=\"stack\"><section class=\"card\"><div class=\"head\"><h3>' + tr(\"Mercado\") + '</h3>' + (open ? '<span class=\"tag ok\"><span class=\"dot\"></span>' + tr(\"Abierto\") + \" · \" + h(tr(m.mk.open)) + \"</span>\" : '<sp"
  },
  "Cerrado": {
   "w": [
-   "ui.js:1295",
-   "ui.js:1302"
+   "ui.js:1296",
+   "ui.js:1303"
   ],
   "ctx": "var s = '<div class=\"stack\"><section class=\"card\"><div class=\"head\"><h3>' + tr(\"Mercado\") + '</h3>' + (open ? '<span class=\"tag ok\"><span class=\"dot\"></span>' + tr(\"Abierto\") + \" · \" + h(tr(m.mk.open)) + \"</span>\" : '<sp"
  },
  "Masa salarial": {
   "w": [
-   "ui.js:1296"
+   "ui.js:1297"
   ],
   "ctx": "s += '<div class=\"statline\"><div class=\"stat\"><b>' + fmtMoney(m.bud) + '</b><span>' + tr(\"Presupuesto\") + '</span></div><div class=\"stat\"><b class=\"' + (bill > m.wcap ? \"neg\" : \"\") + '\">' + fmtMoney(bill) + '</b><span>' "
  },
  "Tope salarial": {
   "w": [
-   "ui.js:1296"
+   "ui.js:1297"
   ],
   "ctx": "s += '<div class=\"statline\"><div class=\"stat\"><b>' + fmtMoney(m.bud) + '</b><span>' + tr(\"Presupuesto\") + '</span></div><div class=\"stat\"><b class=\"' + (bill > m.wcap ? \"neg\" : \"\") + '\">' + fmtMoney(bill) + '</b><span>' "
  },
  "Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.": {
   "w": [
-   "ui.js:1297"
+   "ui.js:1298"
   ],
   "ctx": "s += '<p class=\"muted\" style=\"font-size:13px;margin:10px 0 0\">' + (open ? tr(\"Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.\") : tr"
  },
  "Puedes estudiar la lista, pero solo se ficha en verano (pretemporada) y en invierno (antes del tramo Feb–Mar).": {
   "w": [
-   "ui.js:1297"
+   "ui.js:1298"
   ],
   "ctx": "s += '<p class=\"muted\" style=\"font-size:13px;margin:10px 0 0\">' + (open ? tr(\"Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.\") : tr"
  },
  "Informes de ojeadores": {
   "w": [
-   "ui.js:1299"
+   "ui.js:1300"
   ],
   "ctx": "s += '<section class=\"card\"><div class=\"head\"><h3>' + tr(\"Informes de ojeadores\") + '</h3><span class=\"eyebrow\">' + trn((m.mk.list || []).length, \"{n} jugador\", \"{n} jugadores\") + \"</span></div>\";"
  },
  "{n} jugador": {
   "w": [
-   "ui.js:1299"
+   "ui.js:1300"
   ],
   "ctx": "s += '<section class=\"card\"><div class=\"head\"><h3>' + tr(\"Informes de ojeadores\") + '</h3><span class=\"eyebrow\">' + trn((m.mk.list || []).length, \"{n} jugador\", \"{n} jugadores\") + \"</span></div>\";",
   "note": "plural:singular"
  },
  "{n} jugadores": {
   "w": [
-   "ui.js:1299"
+   "ui.js:1300"
   ],
   "ctx": "s += '<section class=\"card\"><div class=\"head\"><h3>' + tr(\"Informes de ojeadores\") + '</h3><span class=\"eyebrow\">' + trn((m.mk.list || []).length, \"{n} jugador\", \"{n} jugadores\") + \"</span></div>\";",
   "note": "plural:plural"
  },
  "Todos": {
   "w": [
-   "ui.js:1300",
-   "ui.js:1655"
+   "ui.js:1301",
+   "ui.js:1656"
   ],
   "ctx": "s += '<div class=\"seg\" style=\"margin-bottom:6px\">' + [[tr(\"Todos\"), \"ALL\"], [\"POR\", \"POR\"], [\"DEF\", \"DEF\"], [\"MED\", \"MED\"], [\"DEL\", \"DEL\"]].map(function (x) { return '<button data-a=\"mkf\" data-v=\"' + x[1] + '\" aria-press"
  },
  "Fichado": {
   "w": [
-   "ui.js:1302"
+   "ui.js:1303"
   ],
   "ctx": "var st = t.done ? {fichado: tr(\"Fichado\"), rechazado: tr(\"Negociación rota\"), \"rechazó\": tr(\"No quiso venir\"), descartado: tr(\"Descartado\")}[t.done] || tr(\"Cerrado\") : null;"
  },
  "No quiso venir": {
   "w": [
-   "ui.js:1302"
+   "ui.js:1303"
   ],
   "ctx": "var st = t.done ? {fichado: tr(\"Fichado\"), rechazado: tr(\"Negociación rota\"), \"rechazó\": tr(\"No quiso venir\"), descartado: tr(\"Descartado\")}[t.done] || tr(\"Cerrado\") : null;"
  },
  "Descartado": {
   "w": [
-   "ui.js:1302"
+   "ui.js:1303"
   ],
   "ctx": "var st = t.done ? {fichado: tr(\"Fichado\"), rechazado: tr(\"Negociación rota\"), \"rechazó\": tr(\"No quiso venir\"), descartado: tr(\"Descartado\")}[t.done] || tr(\"Cerrado\") : null;"
  },
  "Sin equipo": {
   "w": [
-   "ui.js:1304"
+   "ui.js:1305"
   ],
   "ctx": "return '<div class=\"trow' + (t.done ? \" done\" : \"\") + '\"><span class=\"pp\">' + h(posAb(t.pos)) + '</span><span class=\"pn\"><b>' + flag(t.nat) + \" \" + h(t.fn.charAt(0) + \". \" + t.ln) + '</b><small>' + tr(\"{n} años\", {n: t.a"
  },
  "pot. {a}–{b}": {
   "w": [
-   "ui.js:1304"
+   "ui.js:1305"
   ],
   "ctx": "return '<div class=\"trow' + (t.done ? \" done\" : \"\") + '\"><span class=\"pp\">' + h(posAb(t.pos)) + '</span><span class=\"pn\"><b>' + flag(t.nat) + \" \" + h(t.fn.charAt(0) + \". \" + t.ln) + '</b><small>' + tr(\"{n} años\", {n: t.a"
  },
  "Piden {x}": {
   "w": [
-   "ui.js:1305"
+   "ui.js:1306"
   ],
   "ctx": "(t.club >= 0 ? tr(\"Piden {x}\", {x: fmtMoney(t.ask)}) : tr(\"Gratis\")) + \" · \" + tr(\"{sal}/año\", {sal: fmtMoney(t.sal)}) + \"</small>\" + mkFitTag(t) + \"</span><span class=\\\"po\\\">\" + Math.round(t.ovr) + \"</span>\" +"
  },
  "Gratis": {
   "w": [
-   "ui.js:1305"
+   "ui.js:1306"
   ],
   "ctx": "(t.club >= 0 ? tr(\"Piden {x}\", {x: fmtMoney(t.ask)}) : tr(\"Gratis\")) + \" · \" + tr(\"{sal}/año\", {sal: fmtMoney(t.sal)}) + \"</small>\" + mkFitTag(t) + \"</span><span class=\\\"po\\\">\" + Math.round(t.ovr) + \"</span>\" +"
  },
  "Fichar": {
   "w": [
-   "ui.js:1306"
+   "ui.js:1307"
   ],
   "ctx": "(st ? '<span class=\"dim\" style=\"font-size:12px\">' + st + \"</span>\" : '<button class=\"btn sm pri\" data-a=\"mbid\" data-id=\"' + t.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + (t.club >= 0 ? tr(\"Fichar\") : tr(\"Negociar\")) + \"<"
  },
  "Negociar": {
   "w": [
-   "ui.js:1306",
-   "ui-guide.js:33"
+   "ui.js:1307",
+   "ui-guide.js:35"
   ],
   "ctx": "(st ? '<span class=\"dim\" style=\"font-size:12px\">' + st + \"</span>\" : '<button class=\"btn sm pri\" data-a=\"mbid\" data-id=\"' + t.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + (t.club >= 0 ? tr(\"Fichar\") : tr(\"Negociar\")) + \"<"
  },
  "No hay jugadores en esta posición.": {
   "w": [
-   "ui.js:1307"
+   "ui.js:1308"
   ],
   "ctx": "}).join(\"\") : '<p class=\"empty\">' + tr(\"No hay jugadores en esta posición.\") + \"</p>\";"
  },
  "Pedir otro informe a los ojeadores": {
   "w": [
-   "ui.js:1308"
+   "ui.js:1309"
   ],
   "ctx": "if (open && !m.mk.ref) s += '<button class=\"btn wide\" style=\"margin-top:10px\" data-a=\"mscout\">' + tr(\"Pedir otro informe a los ojeadores\") + '</button>';"
  },
  "Movimientos de la temporada": {
   "w": [
-   "ui.js:1311"
+   "ui.js:1312"
   ],
   "ctx": "if (tx.length) s += '<section class=\"card\"><h3>' + tr(\"Movimientos de la temporada\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + tx.map(function (t) {"
  },
  "desde {club}": {
   "w": [
-   "ui.js:1312"
+   "ui.js:1313"
   ],
   "ctx": "return \"<div><span>\" + (t.inn ? \"↘ \" : \"↗ \") + h(t.n) + \" (\" + h(posAb(t.pos)) + \")\" + (t.inn ? \" · \" + (t.from >= 0 ? tr(\"desde {club}\", {club: h(clubName(t.from))}) : tr(\"desde libre\")) : t.to >= 0 ? \" · \" + tr(\"al {cl"
  },
  "desde libre": {
   "w": [
-   "ui.js:1312"
+   "ui.js:1313"
   ],
   "ctx": "return \"<div><span>\" + (t.inn ? \"↘ \" : \"↗ \") + h(t.n) + \" (\" + h(posAb(t.pos)) + \")\" + (t.inn ? \" · \" + (t.from >= 0 ? tr(\"desde {club}\", {club: h(clubName(t.from))}) : tr(\"desde libre\")) : t.to >= 0 ? \" · \" + tr(\"al {cl"
  },
  "al {club}": {
   "w": [
-   "ui.js:1312"
+   "ui.js:1313"
   ],
   "ctx": "return \"<div><span>\" + (t.inn ? \"↘ \" : \"↗ \") + h(t.n) + \" (\" + h(posAb(t.pos)) + \")\" + (t.inn ? \" · \" + (t.from >= 0 ? tr(\"desde {club}\", {club: h(clubName(t.from))}) : tr(\"desde libre\")) : t.to >= 0 ? \" · \" + tr(\"al {cl"
  },
  "En los banquillos": {
   "w": [
-   "ui.js:1318"
+   "ui.js:1319"
   ],
   "ctx": "var s = '<div class=\"stack\"><section class=\"card\"><div class=\"eyebrow\">' + tr(\"Legado {sc}\", {sc: lg.sc}) + \" · \" + h(tr(lg.title)) + '</div><h3 style=\"margin-top:4px\">' + tr(\"En los banquillos\") + '</h3>' + nickLine(m);"
  },
  "Vitrina del entrenador": {
   "w": [
-   "ui.js:1320"
+   "ui.js:1321"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Vitrina del entrenador\") + '</h3>' + vitrina(m.trophies, tr(\"Tu primer título como entrenador está por llegar.\")) + \"</section>\";"
  },
  "Tu primer título como entrenador está por llegar.": {
   "w": [
-   "ui.js:1320"
+   "ui.js:1321"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Vitrina del entrenador\") + '</h3>' + vitrina(m.trophies, tr(\"Tu primer título como entrenador está por llegar.\")) + \"</section>\";"
  },
  "Premios": {
   "w": [
-   "ui.js:1321",
+   "ui.js:1322",
    "evento:gala_bdo"
   ],
   "ctx": "if (m.awards.length) s += '<section class=\"card\"><h3>' + tr(\"Premios\") + '</h3>' + awardsGrid(m.awards, \"\") + \"</section>\";"
  },
  "Pos": {
   "w": [
-   "ui.js:1323"
+   "ui.js:1324"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"Pos\") + '</th><th>'"
  },
  "V-E-D": {
   "w": [
-   "ui.js:1323"
+   "ui.js:1324"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"Pos\") + '</th><th>'"
  },
  "Tít.": {
   "w": [
-   "ui.js:1323"
+   "ui.js:1324"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"Pos\") + '</th><th>'"
  },
  "* Llegaste a mitad de temporada.": {
   "w": [
-   "ui.js:1327"
+   "ui.js:1328"
   ],
   "ctx": "s += '</tbody></table></div><p class=\"muted\" style=\"font-size:12px;margin:6px 0 0\">' + tr(\"* Llegaste a mitad de temporada.\") + \"</p></section>\";"
  },
  "Clubes dirigidos": {
   "w": [
-   "ui.js:1329"
+   "ui.js:1330"
   ],
   "ctx": "if (m.spells.length) s += '<section class=\"card\"><h3>' + tr(\"Clubes dirigidos\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + m.spells.slice().reverse().map(function (sp) {"
  },
  "hoy": {
   "w": [
-   "ui.js:1330"
+   "ui.js:1331"
   ],
   "ctx": "return '<div><span><span style=\"display:inline-flex;align-items:center;gap:6px\">' + crest(sp.club) + h(clubName(sp.club)) + \"</span> · \" + sp.y0 + \"–\" + (sp.y1 || tr(\"hoy\")) + \"</span><span>\" + tr(\"{w}V {d}E {l}D\", {w: s"
  },
  "{n} tít.": {
   "w": [
-   "ui.js:1330"
+   "ui.js:1331"
   ],
   "ctx": "return '<div><span><span style=\"display:inline-flex;align-items:center;gap:6px\">' + crest(sp.club) + h(clubName(sp.club)) + \"</span> · \" + sp.y0 + \"–\" + (sp.y1 || tr(\"hoy\")) + \"</span><span>\" + tr(\"{w}V {d}E {l}D\", {w: s"
  },
  "Jugadores que dejaron huella": {
   "w": [
-   "ui.js:1332"
+   "ui.js:1333"
   ],
   "ctx": "if (m.alumni.length) s += '<section class=\"card\"><h3>' + tr(\"Jugadores que dejaron huella\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + m.alumni.slice(0, 20).map(function (a) {"
  },
  "{a} PJ, {g} G": {
   "w": [
-   "ui.js:1333"
+   "ui.js:1334"
   ],
   "ctx": "return \"<div><span>\" + flag(a.nat) + \" \" + h(a.n) + \" (\" + h(posAb(a.pos)) + \") · \" + tr(\"{a} PJ, {g} G\", {a: a.apps, g: a.g}) + \"</span><span>\" + h(tr(a.why)) + \"</span></div>\";"
  },
  "Como jugador · legado {sc}": {
   "w": [
-   "ui.js:1337"
+   "ui.js:1338"
   ],
   "ctx": "s += '<section class=\"card\"><div class=\"eyebrow\">' + tr(\"Como jugador · legado {sc}\", {sc: pr.lg.sc}) + \" · \" + h(tr(pr.lg.title)) + '</div><h3 style=\"margin-top:4px\">' + h(p.fn + \" \" + p.ln) + \"</h3>\";"
  },
  "Sin títulos como jugador.": {
   "w": [
-   "ui.js:1339"
+   "ui.js:1340"
   ],
   "ctx": "s += vitrina(p.trophies, tr(\"Sin títulos como jugador.\")) + \"</section>\";"
  },
  "Camino": {
   "w": [
-   "ui.js:1346"
+   "ui.js:1347"
   ],
   "ctx": "function titleHTML() { return \"<h1>\" + h(tr(\"Camino\")) + \"<em>\" + h(tr(\"a la leyenda\")) + \"</em></h1>\"; }"
  },
  "a la leyenda": {
   "w": [
-   "ui.js:1346"
+   "ui.js:1347"
   ],
   "ctx": "function titleHTML() { return \"<h1>\" + h(tr(\"Camino\")) + \"<em>\" + h(tr(\"a la leyenda\")) + \"</em></h1>\"; }"
  },
  "Jugador, míster o tu propio club": {
   "w": [
-   "ui.js:1355"
+   "ui.js:1356"
   ],
   "ctx": "var s = '<main id=\"main\"><div class=\"stack\">' + updBanner(false) + '<section class=\"hero\"><div class=\"eyebrow\">' + tr(\"Jugador, míster o tu propio club\") + \"</div>\" + titleHTML() +"
  },
  "{n} ligas de los cinco continentes, todas las selecciones del mundo, copas, Champions, Libertadores, Mundiales y el Balón de Oro.": {
   "w": [
-   "ui.js:1356"
+   "ui.js:1357"
   ],
   "ctx": "\"<p>\" + tr(\"{n} ligas de los cinco continentes, todas las selecciones del mundo, copas, Champions, Libertadores, Mundiales y el Balón de Oro.\", {n: W.lg.length}) + \"</p>\" +"
  },
  "{n} LIGAS": {
   "w": [
-   "ui.js:1357"
+   "ui.js:1358"
   ],
   "ctx": "'<div class=\"scoreline\"><span>' + tr(\"{n} LIGAS\", {n: W.lg.length}) + \"</span><span>\" + tr(\"{n} CLUBES\", {n: W.clubs.length - 2}) + \"</span><span>\" + tr(\"{n} SELECCIONES\", {n: W.ctry.length}) + \"</span></div></section>\";"
  },
  "{n} CLUBES": {
   "w": [
-   "ui.js:1357"
+   "ui.js:1358"
   ],
   "ctx": "'<div class=\"scoreline\"><span>' + tr(\"{n} LIGAS\", {n: W.lg.length}) + \"</span><span>\" + tr(\"{n} CLUBES\", {n: W.clubs.length - 2}) + \"</span><span>\" + tr(\"{n} SELECCIONES\", {n: W.ctry.length}) + \"</span></div></section>\";"
  },
  "{n} SELECCIONES": {
   "w": [
-   "ui.js:1357"
+   "ui.js:1358"
   ],
   "ctx": "'<div class=\"scoreline\"><span>' + tr(\"{n} LIGAS\", {n: W.lg.length}) + \"</span><span>\" + tr(\"{n} CLUBES\", {n: W.clubs.length - 2}) + \"</span><span>\" + tr(\"{n} SELECCIONES\", {n: W.ctry.length}) + \"</span></div></section>\";"
  },
  "Cargar partida": {
   "w": [
-   "ui.js:1358",
-   "ui.js:1380",
-   "ui.js:1652"
+   "ui.js:1359",
+   "ui.js:1381",
+   "ui.js:1653"
   ],
   "ctx": "s += '<div class=\"opts\"><button class=\"go\" data-a=\"goload\"' + (n ? \"\" : \" disabled\") + \">\" + tr(\"Cargar partida\") + (n ? \" · \" + n : \"\") + \" \" + ICON.play + '</button><button class=\"go ghost\" data-a=\"newgame\">' + tr(\"Nue"
  },
  "Salón de la fama": {
   "w": [
-   "ui.js:1359",
-   "ui.js:1616",
-   "ui.js:1655"
+   "ui.js:1360",
+   "ui.js:1617",
+   "ui.js:1656"
   ],
   "ctx": "s += '<div class=\"opts\"><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Salón de la fama\") + '</button><button class=\"btn wide\" data-a=\"import\">' + tr(\"Cargar una partida con código\") + '</button><button class=\"btn wide\" d"
  },
  "Cargar una partida con código": {
   "w": [
-   "ui.js:1359"
+   "ui.js:1360"
   ],
   "ctx": "s += '<div class=\"opts\"><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Salón de la fama\") + '</button><button class=\"btn wide\" data-a=\"import\">' + tr(\"Cargar una partida con código\") + '</button><button class=\"btn wide\" d"
  },
  "Idioma": {
   "w": [
-   "ui.js:1359",
-   "ui.js:1613"
+   "ui.js:1360",
+   "ui.js:1614"
   ],
   "ctx": "s += '<div class=\"opts\"><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Salón de la fama\") + '</button><button class=\"btn wide\" data-a=\"import\">' + tr(\"Cargar una partida con código\") + '</button><button class=\"btn wide\" d"
  },
  "Accesibilidad": {
   "w": [
-   "ui.js:1359",
+   "ui.js:1360",
    "ui-steps.js:30",
    "ui-steps.js:31"
   ],
@@ -36045,941 +36250,941 @@
  },
  "Política de privacidad": {
   "w": [
-   "ui.js:1359",
-   "ui.js:1617",
-   "ui.js:1635"
+   "ui.js:1360",
+   "ui.js:1618",
+   "ui.js:1636"
   ],
   "ctx": "s += '<div class=\"opts\"><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Salón de la fama\") + '</button><button class=\"btn wide\" data-a=\"import\">' + tr(\"Cargar una partida con código\") + '</button><button class=\"btn wide\" d"
  },
  "Opciones de privacidad de anuncios": {
   "w": [
-   "ui.js:1359",
-   "ui.js:1617"
+   "ui.js:1360",
+   "ui.js:1618"
   ],
   "ctx": "s += '<div class=\"opts\"><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Salón de la fama\") + '</button><button class=\"btn wide\" data-a=\"import\">' + tr(\"Cargar una partida con código\") + '</button><button class=\"btn wide\" d"
  },
  "hoy, {t}": {
   "w": [
-   "ui.js:1366"
+   "ui.js:1367"
   ],
   "ctx": "return same ? tr(\"hoy, {t}\", {t: t}) : d.toLocaleDateString(LANG, {day: \"numeric\", month: \"short\"}) + \", \" + t;"
  },
  "Carrera de jugador": {
   "w": [
-   "ui.js:1369",
-   "ui.js:1387"
+   "ui.js:1370",
+   "ui.js:1388"
   ],
   "ctx": "var MODE_NAMES = {p: N_(\"Carrera de jugador\"), pm: N_(\"Jugador y míster\"), mgr: N_(\"Carrera de míster\"), club: N_(\"Club propio\")};"
  },
  "Jugador y míster": {
   "w": [
-   "ui.js:1369"
+   "ui.js:1370"
   ],
   "ctx": "var MODE_NAMES = {p: N_(\"Carrera de jugador\"), pm: N_(\"Jugador y míster\"), mgr: N_(\"Carrera de míster\"), club: N_(\"Club propio\")};"
  },
  "Carrera de míster": {
   "w": [
-   "ui.js:1369",
-   "ui.js:1388"
+   "ui.js:1370",
+   "ui.js:1389"
   ],
   "ctx": "var MODE_NAMES = {p: N_(\"Carrera de jugador\"), pm: N_(\"Jugador y míster\"), mgr: N_(\"Carrera de míster\"), club: N_(\"Club propio\")};"
  },
  "Femenino": {
   "w": [
-   "ui.js:1373"
+   "ui.js:1374"
   ],
   "ctx": "return '<section class=\"card slotc\"><div class=\"head\"><span class=\"tag' + (e.ret ? \"\" : \" ok\") + '\"><span class=\"dot\"></span>' + h(tr(MODE_NAMES[e.mode] || \"\")) + (e.g === \"f\" ? \" · \" + h(tr(\"Femenino\")) : \"\") + '</span>"
  },
  "Sin club": {
   "w": [
-   "ui.js:1374"
+   "ui.js:1375"
   ],
   "ctx": "'<div class=\"slotrow\">' + cr + '<div class=\"grow\"><h3>' + h(e.n) + '</h3><div class=\"muted\" style=\"font-size:13px\">' + h(e.cn || tr(\"Sin club\")) + (e.ret ? \" · \" + tr(\"retirado\") : \"\") + (e.ts ? \" · \" + h(fmtWhen(e.ts)) "
  },
  "retirado": {
   "w": [
-   "ui.js:1374"
+   "ui.js:1375"
   ],
   "ctx": "'<div class=\"slotrow\">' + cr + '<div class=\"grow\"><h3>' + h(e.n) + '</h3><div class=\"muted\" style=\"font-size:13px\">' + h(e.cn || tr(\"Sin club\")) + (e.ret ? \" · \" + tr(\"retirado\") : \"\") + (e.ts ? \" · \" + h(fmtWhen(e.ts)) "
  },
  "en tu cuenta": {
   "w": [
-   "ui.js:1374"
+   "ui.js:1375"
   ],
   "ctx": "'<div class=\"slotrow\">' + cr + '<div class=\"grow\"><h3>' + h(e.n) + '</h3><div class=\"muted\" style=\"font-size:13px\">' + h(e.cn || tr(\"Sin club\")) + (e.ret ? \" · \" + tr(\"retirado\") : \"\") + (e.ts ? \" · \" + h(fmtWhen(e.ts)) "
  },
  "Borrar": {
   "w": [
-   "ui.js:1376",
-   "ui.js:1644"
+   "ui.js:1377",
+   "ui.js:1645"
   ],
   "ctx": "'<div class=\"row2\" style=\"margin-top:12px\"><button class=\"btn wide danger\" data-a=\"askdel\" data-v=\"' + h(e.id) + '\">' + tr(\"Borrar\") + '</button><button class=\"btn pri wide\" data-a=\"loadslot\" data-v=\"' + h(e.id) + '\">' +"
  },
  "Jugar": {
   "w": [
-   "ui.js:1376"
+   "ui.js:1377"
   ],
   "ctx": "'<div class=\"row2\" style=\"margin-top:12px\"><button class=\"btn wide danger\" data-a=\"askdel\" data-v=\"' + h(e.id) + '\">' + tr(\"Borrar\") + '</button><button class=\"btn pri wide\" data-a=\"loadslot\" data-v=\"' + h(e.id) + '\">' +"
  },
  "Tus partidas": {
   "w": [
-   "ui.js:1380"
+   "ui.js:1381"
   ],
   "ctx": "var s = '<main id=\"main\"><div class=\"stack\"><section><div class=\"eyebrow\">' + tr(\"Tus partidas\") + '</div><h2 class=\"vtitle\">' + tr(\"Cargar partida\") + \"</h2></section>\";"
  },
  "Todavía no tienes partidas guardadas.": {
   "w": [
-   "ui.js:1381"
+   "ui.js:1382"
   ],
   "ctx": "if (!l.length) s += '<p class=\"empty\">' + tr(\"Todavía no tienes partidas guardadas.\") + \"</p>\";"
  },
  "Cargar con código": {
   "w": [
-   "ui.js:1383"
+   "ui.js:1384"
   ],
   "ctx": "s += '<div class=\"row2\"><button class=\"btn wide\" data-a=\"gohome\">' + tr(\"Atrás\") + '</button><button class=\"btn wide\" data-a=\"import\">' + tr(\"Cargar con código\") + \"</button></div>\";"
  },
  "Crea a tu futbolista y vive su carrera entera. Cuando te retires, puedes seguir como entrenador.": {
   "w": [
-   "ui.js:1387"
+   "ui.js:1388"
   ],
   "ctx": "var modes = [[\"p\", ICON.route, N_(\"Carrera de jugador\"), N_(\"Crea a tu futbolista y vive su carrera entera. Cuando te retires, puedes seguir como entrenador.\")],"
  },
  "Empieza directamente en el banquillo del club que elijas: fichajes, alineación, renovaciones y moral del vestuario.": {
   "w": [
-   "ui.js:1388"
+   "ui.js:1389"
   ],
   "ctx": "[\"mgr\", ICON.board, N_(\"Carrera de míster\"), N_(\"Empieza directamente en el banquillo del club que elijas: fichajes, alineación, renovaciones y moral del vestuario.\")],"
  },
  "Crea tu club": {
   "w": [
-   "ui.js:1389",
-   "ui.js:1554"
+   "ui.js:1390",
+   "ui.js:1555"
   ],
   "ctx": "[\"club\", ICON.shirt, N_(\"Crea tu club\"), N_(\"Inventa un club, ponlo en la liga que quieras y empieza con una plantilla nueva según la dificultad.\")]];"
  },
  "Inventa un club, ponlo en la liga que quieras y empieza con una plantilla nueva según la dificultad.": {
   "w": [
-   "ui.js:1389"
+   "ui.js:1390"
   ],
   "ctx": "[\"club\", ICON.shirt, N_(\"Crea tu club\"), N_(\"Inventa un club, ponlo en la liga que quieras y empieza con una plantilla nueva según la dificultad.\")]];"
  },
  "Elige un modo": {
   "w": [
-   "ui.js:1390"
+   "ui.js:1391"
   ],
   "ctx": "var s = '<main id=\"main\"><div class=\"stack\"><section><div class=\"eyebrow\">' + tr(\"Nueva partida\") + '</div><h2 class=\"vtitle\">' + tr(\"Elige un modo\") + '</h2></section>';"
  },
  "Fútbol masculino": {
   "w": [
-   "ui.js:1391"
+   "ui.js:1392"
   ],
   "ctx": "s += '<div class=\"seg gseg\">' + [[\"m\", N_(\"Fútbol masculino\")], [\"f\", N_(\"Fútbol femenino\")]].map(function (x) { return '<button data-a=\"gsel\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((UI.gsel || \"m\") === x[0]) + '\">' + "
  },
  "Fútbol femenino": {
   "w": [
-   "ui.js:1391"
+   "ui.js:1392"
   ],
   "ctx": "s += '<div class=\"seg gseg\">' + [[\"m\", N_(\"Fútbol masculino\")], [\"f\", N_(\"Fútbol femenino\")]].map(function (x) { return '<button data-a=\"gsel\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((UI.gsel || \"m\") === x[0]) + '\">' + "
  },
  "Ninguna": {
   "w": [
-   "ui.js:1399"
+   "ui.js:1400"
   ],
   "ctx": "return (allowNone ? '<option value=\"\">' + tr(\"Ninguna\") + \"</option>\" : \"\") + list.map(function (i) { var c = W.ctry[i]; return '<option value=\"' + c.code + '\"' + (c.code === sel ? \" selected\" : \"\") + \">\" + c.flag + \" \" "
  },
  "Paso {n} de 4": {
   "w": [
-   "ui.js:1404",
-   "ui.js:1409",
-   "ui.js:1418",
-   "ui.js:1423"
+   "ui.js:1405",
+   "ui.js:1410",
+   "ui.js:1419",
+   "ui.js:1424"
   ],
   "ctx": "s += '<section><div class=\"eyebrow\">' + tr(\"Paso {n} de 4\", {n: 1}) + '</div><h2 style=\"font-size:34px;text-transform:uppercase\">' + tr(\"¿Quién eres?\") + \"</h2></section>\";"
  },
  "¿Quién eres?": {
   "w": [
-   "ui.js:1404",
-   "ui.js:1499"
+   "ui.js:1405",
+   "ui.js:1500"
   ],
   "ctx": "s += '<section><div class=\"eyebrow\">' + tr(\"Paso {n} de 4\", {n: 1}) + '</div><h2 style=\"font-size:34px;text-transform:uppercase\">' + tr(\"¿Quién eres?\") + \"</h2></section>\";"
  },
  "Nombre": {
   "w": [
-   "ui.js:1405",
-   "ui.js:1463",
-   "ui.js:1648",
-   "ui.js:1894"
+   "ui.js:1406",
+   "ui.js:1464",
+   "ui.js:1649",
+   "ui.js:1895"
   ],
   "ctx": "s += '<div class=\"row2\"><div><label class=\"lbl\" for=\"fn\">' + tr(\"Nombre\") + '</label><input type=\"text\" id=\"fn\" data-f=\"fn\" value=\"' + h(c.fn) + '\" maxlength=\"18\" autocomplete=\"off\"></div><div><label class=\"lbl\" for=\"ln\""
  },
  "Apellido": {
   "w": [
-   "ui.js:1405",
-   "ui.js:1463",
-   "ui.js:1648"
+   "ui.js:1406",
+   "ui.js:1464",
+   "ui.js:1649"
   ],
   "ctx": "s += '<div class=\"row2\"><div><label class=\"lbl\" for=\"fn\">' + tr(\"Nombre\") + '</label><input type=\"text\" id=\"fn\" data-f=\"fn\" value=\"' + h(c.fn) + '\" maxlength=\"18\" autocomplete=\"off\"></div><div><label class=\"lbl\" for=\"ln\""
  },
  "Nacionalidad": {
   "w": [
-   "ui.js:1406",
-   "ui.js:1464"
+   "ui.js:1407",
+   "ui.js:1465"
   ],
   "ctx": "s += '<div><label class=\"lbl\" for=\"nat\">' + tr(\"Nacionalidad\") + '</label><select id=\"nat\" data-f=\"nat\">' + natOptions(c.nat) + \"</select></div>\";"
  },
  "Segunda nacionalidad (opcional)": {
   "w": [
-   "ui.js:1407"
+   "ui.js:1408"
   ],
   "ctx": "s += '<div><label class=\"lbl\" for=\"nat2\">' + tr(\"Segunda nacionalidad (opcional)\") + '</label><select id=\"nat2\" data-f=\"nat2\">' + natOptions(c.nat2, true) + '</select><p class=\"muted\" style=\"font-size:13px;margin:6px 0 0"
  },
  "Si tienes dos, cuando destaques te tocará elegir selección.": {
   "w": [
-   "ui.js:1407"
+   "ui.js:1408"
   ],
   "ctx": "s += '<div><label class=\"lbl\" for=\"nat2\">' + tr(\"Segunda nacionalidad (opcional)\") + '</label><select id=\"nat2\" data-f=\"nat2\">' + natOptions(c.nat2, true) + '</select><p class=\"muted\" style=\"font-size:13px;margin:6px 0 0"
  },
  "Elige posición": {
   "w": [
-   "ui.js:1410"
+   "ui.js:1411"
   ],
   "ctx": "s += '<div class=\"pitch\" role=\"group\" aria-label=\"' + h(tr(\"Elige posición\")) + '\"><div class=\"box t\"></div><div class=\"box b\"></div>' + Object.keys(POS_XY).map(function (k) {"
  },
  "Pierna buena": {
   "w": [
-   "ui.js:1414"
+   "ui.js:1415"
   ],
   "ctx": "s += '<div class=\"row2\"><div><label class=\"lbl\">' + tr(\"Pierna buena\") + '</label><div class=\"seg\">' + [N_(\"Diestro\"), N_(\"Zurdo\")].map(function (f) { return '<button data-a=\"cset\" data-k=\"foot\" data-v=\"' + f + '\" aria-p"
  },
  "Diestro": {
   "w": [
-   "ui.js:1414"
+   "ui.js:1415"
   ],
   "ctx": "s += '<div class=\"row2\"><div><label class=\"lbl\">' + tr(\"Pierna buena\") + '</label><div class=\"seg\">' + [N_(\"Diestro\"), N_(\"Zurdo\")].map(function (f) { return '<button data-a=\"cset\" data-k=\"foot\" data-v=\"' + f + '\" aria-p"
  },
  "Zurdo": {
   "w": [
-   "ui.js:1414"
+   "ui.js:1415"
   ],
   "ctx": "s += '<div class=\"row2\"><div><label class=\"lbl\">' + tr(\"Pierna buena\") + '</label><div class=\"seg\">' + [N_(\"Diestro\"), N_(\"Zurdo\")].map(function (f) { return '<button data-a=\"cset\" data-k=\"foot\" data-v=\"' + f + '\" aria-p"
  },
  "Edad al debutar": {
   "w": [
-   "ui.js:1415"
+   "ui.js:1416"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Edad al debutar\") + '</label><div class=\"seg\">' + [16, 17, 18, 19].map(function (a) { return '<button data-a=\"cset\" data-k=\"age\" data-v=\"' + a + '\" aria-pressed=\"' + (c.age === a) + "
  },
  "Tu talento": {
   "w": [
-   "ui.js:1418"
+   "ui.js:1419"
   ],
   "ctx": "s += '<section><div class=\"eyebrow\">' + tr(\"Paso {n} de 4\", {n: 3}) + '</div><h2 style=\"font-size:34px;text-transform:uppercase\">' + tr(\"Tu talento\") + '</h2></section><div class=\"opts\">';"
  },
  "Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.": {
   "w": [
-   "ui.js:1419"
+   "ui.js:1420"
   ],
   "ctx": "var desc = {promesa: tr(\"Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.\"), joya: tr(\"Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.\"), elegido: t"
  },
  "Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.": {
   "w": [
-   "ui.js:1419"
+   "ui.js:1420"
   ],
   "ctx": "var desc = {promesa: tr(\"Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.\"), joya: tr(\"Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.\"), elegido: t"
  },
  "Empiezas con 65. Todos esperan mucho de ti, y eso también pesa.": {
   "w": [
-   "ui.js:1419"
+   "ui.js:1420"
   ],
   "ctx": "var desc = {promesa: tr(\"Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.\"), joya: tr(\"Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.\"), elegido: t"
  },
  "Tu media inicial es una sorpresa. Nadie sabe qué futbolista puedes llegar a ser.": {
   "w": [
-   "ui.js:1419"
+   "ui.js:1420"
   ],
   "ctx": "var desc = {promesa: tr(\"Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.\"), joya: tr(\"Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.\"), elegido: t"
  },
  "Ritmo de decisiones": {
   "w": [
-   "ui.js:1421",
-   "ui.js:1478",
-   "ui.js:1614",
+   "ui.js:1422",
+   "ui.js:1479",
+   "ui.js:1615",
    "ui-guide.js:13"
   ],
   "ctx": "s += '</div><div><label class=\"lbl\">' + tr(\"Ritmo de decisiones\") + '</label><div class=\"seg\">' + [[tr(\"Tranquilo\"), 0], [tr(\"Normal\"), 1], [tr(\"Intenso\"), 2]].map(function (x) { return '<button data-a=\"cset\" data-k=\"ev\""
  },
  "Tranquilo": {
   "w": [
-   "ui.js:1421",
-   "ui.js:1478",
-   "ui.js:1614"
+   "ui.js:1422",
+   "ui.js:1479",
+   "ui.js:1615"
   ],
   "ctx": "s += '</div><div><label class=\"lbl\">' + tr(\"Ritmo de decisiones\") + '</label><div class=\"seg\">' + [[tr(\"Tranquilo\"), 0], [tr(\"Normal\"), 1], [tr(\"Intenso\"), 2]].map(function (x) { return '<button data-a=\"cset\" data-k=\"ev\""
  },
  "Intenso": {
   "w": [
-   "ui.js:1421",
-   "ui.js:1478",
-   "ui.js:1614"
+   "ui.js:1422",
+   "ui.js:1479",
+   "ui.js:1615"
   ],
   "ctx": "s += '</div><div><label class=\"lbl\">' + tr(\"Ritmo de decisiones\") + '</label><div class=\"seg\">' + [[tr(\"Tranquilo\"), 0], [tr(\"Normal\"), 1], [tr(\"Intenso\"), 2]].map(function (x) { return '<button data-a=\"cset\" data-k=\"ev\""
  },
  "Tu primer club": {
   "w": [
-   "ui.js:1423"
+   "ui.js:1424"
   ],
   "ctx": "s += '<section><div class=\"eyebrow\">' + tr(\"Paso {n} de 4\", {n: 4}) + '</div><h2 style=\"font-size:34px;text-transform:uppercase\">' + tr(\"Tu primer club\") + \"</h2></section>\";"
  },
  "Cantera de mi país": {
   "w": [
-   "ui.js:1424"
+   "ui.js:1425"
   ],
   "ctx": "s += '<div class=\"seg\"><button data-a=\"cset\" data-k=\"mode\" data-v=\"rand\" aria-pressed=\"' + (c.mode === \"rand\") + '\">' + tr(\"Cantera de mi país\") + '</button><button data-a=\"cset\" data-k=\"mode\" data-v=\"pick\" aria-pressed="
  },
  "Elegir club": {
   "w": [
-   "ui.js:1424",
-   "ui.js:1503"
+   "ui.js:1425",
+   "ui.js:1504"
   ],
   "ctx": "s += '<div class=\"seg\"><button data-a=\"cset\" data-k=\"mode\" data-v=\"rand\" aria-pressed=\"' + (c.mode === \"rand\") + '\">' + tr(\"Cantera de mi país\") + '</button><button data-a=\"cset\" data-k=\"mode\" data-v=\"pick\" aria-pressed="
  },
  "Tres clubes modestos quieren subirte de la cantera. Elige dónde debutar.": {
   "w": [
-   "ui.js:1428"
+   "ui.js:1429"
   ],
   "ctx": "s += '<p class=\"lead\">' + tr(\"Tres clubes modestos quieren subirte de la cantera. Elige dónde debutar.\") + '</p><div class=\"list\">' + offerRows(c, pb) + \"</div>\";"
  },
  "Buscar otras ofertas": {
   "w": [
-   "ui.js:1429",
-   "ui.js:1507"
+   "ui.js:1430",
+   "ui.js:1508"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-a=\"reoffer\">' + tr(\"Buscar otras ofertas\") + \"</button>\";"
  },
  "Rol esperado: {role}": {
   "w": [
-   "ui.js:1443"
+   "ui.js:1444"
   ],
   "ctx": "s += '<button class=\"pickrow\" data-a=\"cclub\" data-v=\"' + ci + '\" aria-pressed=\"' + (c.club === ci) + '\">' + crest(ci, true) + '<div class=\"grow\"><b>' + h(W.clubs[ci].n) + \"</b><small>\" + tr(\"Rol esperado: {role}\", {role:"
  },
  "Un grande te da prestigio, pero quizá no minutos. Un club pequeño, el escaparate para crecer.": {
   "w": [
-   "ui.js:1445"
+   "ui.js:1446"
   ],
   "ctx": "s += '</div><p class=\"muted\" style=\"font-size:13px;margin:0\">' + tr(\"Un grande te da prestigio, pero quizá no minutos. Un club pequeño, el escaparate para crecer.\") + \"</p>\";"
  },
  "Empezar carrera": {
   "w": [
-   "ui.js:1449"
+   "ui.js:1450"
   ],
   "ctx": "s += '<div class=\"row2\" style=\"margin-top:6px\"><button class=\"btn wide\" data-a=\"cback\">' + (st === 0 ? tr(\"Cancelar\") : tr(\"Atrás\")) + '</button><button class=\"btn pri wide\" data-a=\"cnext\"' + (canNext ? \"\" : \" disabled\")"
  },
  "Escribe nombre y apellido para seguir.": {
   "w": [
-   "ui.js:1450",
-   "ui.js:1521",
-   "ui.js:1549"
+   "ui.js:1451",
+   "ui.js:1522",
+   "ui.js:1550"
   ],
   "ctx": "if (st === 0 && !canNext) s += '<p class=\"muted\" style=\"font-size:13px;margin:0\">' + tr(\"Escribe nombre y apellido para seguir.\") + \"</p>\";"
  },
  "Paso {a} de {b}": {
   "w": [
-   "ui.js:1458"
+   "ui.js:1459"
   ],
   "ctx": "function stepHead(st, n, title) { return '<section><div class=\"eyebrow\">' + tr(\"Paso {a} de {b}\", {a: st + 1, b: n}) + '</div><h2 class=\"vtitle\">' + h(title) + \"</h2></section>\"; }"
  },
  "Directiva paciente, un 30 % más de presupuesto y buen prestigio de partida.": {
   "w": [
-   "ui.js:1468"
+   "ui.js:1469"
   ],
   "ctx": "var DIFF_DESC_M = [N_(\"Directiva paciente, un 30 % más de presupuesto y buen prestigio de partida.\"), N_(\"La experiencia equilibrada.\"), N_(\"Menos dinero y una directiva con prisa. Casi nadie te conoce.\"), N_(\"Presupuest"
  },
  "La experiencia equilibrada.": {
   "w": [
-   "ui.js:1468"
+   "ui.js:1469"
   ],
   "ctx": "var DIFF_DESC_M = [N_(\"Directiva paciente, un 30 % más de presupuesto y buen prestigio de partida.\"), N_(\"La experiencia equilibrada.\"), N_(\"Menos dinero y una directiva con prisa. Casi nadie te conoce.\"), N_(\"Presupuest"
  },
  "Menos dinero y una directiva con prisa. Casi nadie te conoce.": {
   "w": [
-   "ui.js:1468"
+   "ui.js:1469"
   ],
   "ctx": "var DIFF_DESC_M = [N_(\"Directiva paciente, un 30 % más de presupuesto y buen prestigio de partida.\"), N_(\"La experiencia equilibrada.\"), N_(\"Menos dinero y una directiva con prisa. Casi nadie te conoce.\"), N_(\"Presupuest"
  },
  "Presupuesto mínimo y cero paciencia. Nadie da un duro por ti.": {
   "w": [
-   "ui.js:1468"
+   "ui.js:1469"
   ],
   "ctx": "var DIFF_DESC_M = [N_(\"Directiva paciente, un 30 % más de presupuesto y buen prestigio de partida.\"), N_(\"La experiencia equilibrada.\"), N_(\"Menos dinero y una directiva con prisa. Casi nadie te conoce.\"), N_(\"Presupuest"
  },
  "Plantilla para pelear la liga y un 60 % más de presupuesto.": {
   "w": [
-   "ui.js:1469"
+   "ui.js:1470"
   ],
   "ctx": "var DIFF_DESC_C = [N_(\"Plantilla para pelear la liga y un 60 % más de presupuesto.\"), N_(\"Plantilla de mitad de tabla y presupuesto normal.\"), N_(\"Plantilla para no descender y poco dinero.\"), N_(\"La peor plantilla de la"
  },
  "Plantilla de mitad de tabla y presupuesto normal.": {
   "w": [
-   "ui.js:1469"
+   "ui.js:1470"
   ],
   "ctx": "var DIFF_DESC_C = [N_(\"Plantilla para pelear la liga y un 60 % más de presupuesto.\"), N_(\"Plantilla de mitad de tabla y presupuesto normal.\"), N_(\"Plantilla para no descender y poco dinero.\"), N_(\"La peor plantilla de la"
  },
  "Plantilla para no descender y poco dinero.": {
   "w": [
-   "ui.js:1469"
+   "ui.js:1470"
   ],
   "ctx": "var DIFF_DESC_C = [N_(\"Plantilla para pelear la liga y un 60 % más de presupuesto.\"), N_(\"Plantilla de mitad de tabla y presupuesto normal.\"), N_(\"Plantilla para no descender y poco dinero.\"), N_(\"La peor plantilla de la"
  },
  "La peor plantilla de la liga y casi sin dinero.": {
   "w": [
-   "ui.js:1469"
+   "ui.js:1470"
   ],
   "ctx": "var DIFF_DESC_C = [N_(\"Plantilla para pelear la liga y un 60 % más de presupuesto.\"), N_(\"Plantilla de mitad de tabla y presupuesto normal.\"), N_(\"Plantilla para no descender y poco dinero.\"), N_(\"La peor plantilla de la"
  },
  "Intenso: más decisiones y momentos clave. Además, antes de cada partido eliges si verlo en directo, con cambios tácticos y sustituciones, o simularlo.": {
   "w": [
-   "ui.js:1472"
+   "ui.js:1473"
   ],
   "ctx": "if (ev === 2) return mgr ? tr(\"Intenso: más decisiones y momentos clave. Además, antes de cada partido eliges si verlo en directo, con cambios tácticos y sustituciones, o simularlo.\") : tr(\"Intenso: más decisiones, impre"
  },
  "Intenso: más decisiones, imprevistos y momentos clave en los partidos.": {
   "w": [
-   "ui.js:1472"
+   "ui.js:1473"
   ],
   "ctx": "if (ev === 2) return mgr ? tr(\"Intenso: más decisiones y momentos clave. Además, antes de cada partido eliges si verlo en directo, con cambios tácticos y sustituciones, o simularlo.\") : tr(\"Intenso: más decisiones, impre"
  },
  "Tranquilo: pocas decisiones; la carrera avanza rápido.": {
   "w": [
-   "ui.js:1473"
+   "ui.js:1474"
   ],
   "ctx": "if (ev === 0) return tr(\"Tranquilo: pocas decisiones; la carrera avanza rápido.\");"
  },
  "Normal: un equilibrio entre decisiones y partidos.": {
   "w": [
-   "ui.js:1474"
+   "ui.js:1475"
   ],
   "ctx": "return tr(\"Normal: un equilibrio entre decisiones y partidos.\");"
  },
  "{lg} · rol esperado: {role}": {
   "w": [
-   "ui.js:1493"
+   "ui.js:1494"
   ],
   "ctx": "var cl = W.clubs[ci], li = cl.lg0, sub = base != null ? tr(\"{lg} · rol esperado: {role}\", {lg: h(lgName(li)), role: h(tr(roleFor(base - cl.r0, c.age)))}) : flag(cl.ci) + \" \" + h(lgName(li));"
  },
  "Dificultad": {
   "w": [
-   "ui.js:1500",
-   "ui.js:1544"
+   "ui.js:1501",
+   "ui.js:1545"
   ],
   "ctx": "else if (st === 1) { s += stepHead(st, n, tr(\"Dificultad\")) + diffFields(c, DIFF_DESC_M); }"
  },
  "Tu banquillo": {
   "w": [
-   "ui.js:1502"
+   "ui.js:1503"
   ],
   "ctx": "s += stepHead(st, n, tr(\"Tu banquillo\"));"
  },
  "Empezar desde abajo": {
   "w": [
-   "ui.js:1503"
+   "ui.js:1504"
   ],
   "ctx": "s += '<div class=\"seg\"><button data-a=\"cset\" data-k=\"mmode\" data-v=\"off\" aria-pressed=\"' + (c.mmode === \"off\") + '\">' + tr(\"Empezar desde abajo\") + '</button><button data-a=\"cset\" data-k=\"mmode\" data-v=\"pick\" aria-presse"
  },
  "Tres clubes de ligas menos potentes te ofrecen su banquillo. Gana allí y llamarán los grandes.": {
   "w": [
-   "ui.js:1506"
+   "ui.js:1507"
   ],
   "ctx": "s += '<p class=\"lead\">' + tr(\"Tres clubes de ligas menos potentes te ofrecen su banquillo. Gana allí y llamarán los grandes.\") + '</p><div class=\"list\">' + offerRows(c, null) + \"</div>\";"
  },
  "Un grande: la afición no tendrá paciencia": {
   "w": [
-   "ui.js:1515"
+   "ui.js:1516"
   ],
   "ctx": "s += '<button class=\"pickrow\" data-a=\"cclub\" data-v=\"' + ci + '\" aria-pressed=\"' + (c.club === ci) + '\">' + crest(ci, true) + '<div class=\"grow\"><b>' + h(W.clubs[ci].n) + \"</b><small>\" + (big ? tr(\"Un grande: la afición "
  },
  "Nivel adecuado para empezar": {
   "w": [
-   "ui.js:1515"
+   "ui.js:1516"
   ],
   "ctx": "s += '<button class=\"pickrow\" data-a=\"cclub\" data-v=\"' + ci + '\" aria-pressed=\"' + (c.club === ci) + '\">' + crest(ci, true) + '<div class=\"grow\"><b>' + h(W.clubs[ci].n) + \"</b><small>\" + (big ? tr(\"Un grande: la afición "
  },
  "Puedes empezar en cualquier club. Si ganas, llegarán ofertas de clubes más grandes.": {
   "w": [
-   "ui.js:1517"
+   "ui.js:1518"
   ],
   "ctx": "s += '</div><p class=\"muted\" style=\"font-size:13px;margin:0\">' + tr(\"Puedes empezar en cualquier club. Si ganas, llegarán ofertas de clubes más grandes.\") + \"</p>\";"
  },
  "Empezar": {
   "w": [
-   "ui.js:1520"
+   "ui.js:1521"
   ],
   "ctx": "s += navRow(st, n, canNext, tr(\"Empezar\"));"
  },
  "Tu club": {
   "w": [
-   "ui.js:1529"
+   "ui.js:1530"
   ],
   "ctx": "s += stepHead(st, n, tr(\"Tu club\"));"
  },
  "Nombre del club": {
   "w": [
-   "ui.js:1530",
    "ui.js:1531",
-   "ui.js:2416"
+   "ui.js:1532",
+   "ui.js:2417"
   ],
   "ctx": "s += '<div class=\"clubprev\">' + crestRaw(c.col, ab, true, c.crest) + (typeof kitSVG === \"function\" ? kitSVG({pat: c.kit.pat, col: [c.col[0], c.col[1], c.kit.col3], big: true}) : \"\") + '<div class=\"grow\"><b>' + h(c.cn || "
  },
  "Por ejemplo: Atlético Vallès": {
   "w": [
-   "ui.js:1531"
+   "ui.js:1532"
   ],
   "ctx": "s += '<div><label class=\"lbl\" for=\"cn\">' + tr(\"Nombre del club\") + '</label><input type=\"text\" id=\"cn\" data-f=\"cn\" value=\"' + h(c.cn) + '\" maxlength=\"26\" autocomplete=\"off\" placeholder=\"' + h(tr(\"Por ejemplo: Atlético Va"
  },
  "Abreviatura": {
   "w": [
-   "ui.js:1532"
+   "ui.js:1533"
   ],
   "ctx": "s += '<div><label class=\"lbl\" for=\"ab\">' + tr(\"Abreviatura\") + '</label><input type=\"text\" id=\"ab\" data-f=\"ab\" value=\"' + h(c.ab) + '\" maxlength=\"4\" autocomplete=\"off\" placeholder=\"' + h(ab) + '\" style=\"text-transform:up"
  },
  "Color secundario": {
   "w": [
-   "ui.js:1534"
+   "ui.js:1535"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + (k ? tr(\"Color secundario\") : tr(\"Color principal\")) + '</label><div class=\"swatches\">' + CLUB_COLS.map(function (col) { return '<button class=\"sw\" data-a=\"ccol\" data-k=\"' + k + '\" data-"
  },
  "Color principal": {
   "w": [
-   "ui.js:1534"
+   "ui.js:1535"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + (k ? tr(\"Color secundario\") : tr(\"Color principal\")) + '</label><div class=\"swatches\">' + CLUB_COLS.map(function (col) { return '<button class=\"sw\" data-a=\"ccol\" data-k=\"' + k + '\" data-"
  },
  "¿Dónde juega?": {
   "w": [
-   "ui.js:1538"
+   "ui.js:1539"
   ],
   "ctx": "s += stepHead(st, n, tr(\"¿Dónde juega?\")) + leagueField(c);"
  },
  "Tu club ocupará la plaza de uno de estos equipos, que desaparece de la liga.": {
   "w": [
-   "ui.js:1541"
+   "ui.js:1542"
   ],
   "ctx": "s += '<p class=\"muted\" style=\"font-size:13px;margin:0\">' + tr(\"Tu club ocupará la plaza de uno de estos equipos, que desaparece de la liga.\") + '</p><div class=\"list\">';"
  },
  "Tu club ocupa su plaza": {
   "w": [
-   "ui.js:1542"
+   "ui.js:1543"
   ],
   "ctx": "cl.forEach(function (ci) { s += '<button class=\"pickrow\" data-a=\"cclub\" data-v=\"' + ci + '\" aria-pressed=\"' + (c.club === ci) + '\">' + crest(ci, true) + '<div class=\"grow\"><b>' + h(W.clubs[ci].n) + \"</b><small>\" + (c.clu"
  },
  "Sustituir a este club": {
   "w": [
-   "ui.js:1542"
+   "ui.js:1543"
   ],
   "ctx": "cl.forEach(function (ci) { s += '<button class=\"pickrow\" data-a=\"cclub\" data-v=\"' + ci + '\" aria-pressed=\"' + (c.club === ci) + '\">' + crest(ci, true) + '<div class=\"grow\"><b>' + h(W.clubs[ci].n) + \"</b><small>\" + (c.clu"
  },
  "Tú, el míster": {
   "w": [
-   "ui.js:1545"
+   "ui.js:1546"
   ],
   "ctx": "else { s += stepHead(st, n, tr(\"Tú, el míster\")) + whoFields(c, [30, 35, 40, 45, 50, 55]); }"
  },
  "Crear el club": {
   "w": [
-   "ui.js:1547"
+   "ui.js:1548"
   ],
   "ctx": "s += navRow(st, n, canNext, tr(\"Crear el club\"));"
  },
  "Ponle un nombre a tu club para seguir.": {
   "w": [
-   "ui.js:1548"
+   "ui.js:1549"
   ],
   "ctx": "if (st === 0 && !canNext) s += '<p class=\"muted\" style=\"font-size:13px;margin:0\">' + tr(\"Ponle un nombre a tu club para seguir.\") + \"</p>\";"
  },
  "Tu plantilla": {
   "w": [
-   "ui.js:1554"
+   "ui.js:1555"
   ],
   "ctx": "var s = '<main id=\"main\"><div class=\"stack\"><section><div class=\"eyebrow\">' + tr(\"Crea tu club\") + '</div><h2 class=\"vtitle\">' + tr(\"Tu plantilla\") + \"</h2></section>\";"
  },
  "Estos son tus jugadores. Toca cualquier nombre para cambiarlo, o genera otra plantilla si no te convence.": {
   "w": [
-   "ui.js:1556"
+   "ui.js:1557"
   ],
   "ctx": "s += '<p class=\"lead\" style=\"margin:10px 0 0\">' + tr(\"Estos son tus jugadores. Toca cualquier nombre para cambiarlo, o genera otra plantilla si no te convence.\") + \"</p></section>\";"
  },
  "Nombre del jugador": {
   "w": [
-   "ui.js:1563"
+   "ui.js:1564"
   ],
   "ctx": "return '<div class=\"drow\"><span class=\"pp\">' + h(posAb(p.pos)) + '</span><input type=\"text\" data-rn=\"' + p.id + '\" value=\"' + h(plName(p)) + '\" maxlength=\"40\" autocomplete=\"off\" aria-label=\"' + h(tr(\"Nombre del jugador\")"
  },
  "Generar otra plantilla": {
   "w": [
-   "ui.js:1567"
+   "ui.js:1568"
   ],
   "ctx": "s += '<div class=\"opts\"><button class=\"btn wide\" data-a=\"redraft\">' + tr(\"Generar otra plantilla\") + '</button><button class=\"go\" data-a=\"startclub\">' + tr(\"Empezar la temporada\") + \" \" + ICON.play + \"</button></div>\";"
  },
  "Empezar la temporada": {
   "w": [
-   "ui.js:1567"
+   "ui.js:1568"
   ],
   "ctx": "s += '<div class=\"opts\"><button class=\"btn wide\" data-a=\"redraft\">' + tr(\"Generar otra plantilla\") + '</button><button class=\"go\" data-a=\"startclub\">' + tr(\"Empezar la temporada\") + \" \" + ICON.play + \"</button></div>\";"
  },
  "Menú principal": {
   "w": [
-   "ui.js:1568",
-   "ui.js:1616"
+   "ui.js:1569",
+   "ui.js:1617"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-a=\"gohome\">' + tr(\"Menú principal\") + \"</button>\";"
  },
  "No se pudo crear la partida.": {
   "w": [
-   "ui.js:1585"
+   "ui.js:1586"
   ],
   "ctx": "} catch (e) { console.error(e); toast(tr(\"No se pudo crear la partida.\")); return; }"
  },
  "Estado del club": {
   "w": [
-   "ui.js:1608"
+   "ui.js:1609"
   ],
   "ctx": "return \"<h2>\" + (isMgr() ? tr(\"Estado del club\") : tr(\"Tu estado\")) + '</h2><div class=\"stack\"><div class=\"stlist\">' + it.map(function (x) { var w = lvlWord(x[1]), v = Math.round(x[1]); return '<div class=\"stli\"><div cla"
  },
  "Tu estado": {
   "w": [
-   "ui.js:1608"
+   "ui.js:1609"
   ],
   "ctx": "return \"<h2>\" + (isMgr() ? tr(\"Estado del club\") : tr(\"Tu estado\")) + '</h2><div class=\"stack\"><div class=\"stlist\">' + it.map(function (x) { var w = lvlWord(x[1]), v = Math.round(x[1]); return '<div class=\"stli\"><div cla"
  },
  "Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.": {
   "w": [
-   "ui.js:1609"
+   "ui.js:1610"
   ],
   "ctx": "'<p class=\"muted\" style=\"font-size:13px;margin:0\">' + (isMgr() ? tr(\"Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.\") : tr(\"Forma, moral y físico deciden cómo rindes; el míster y"
  },
  "Forma, moral y físico deciden cómo rindes; el míster y la afición, tus minutos y tu fama.": {
   "w": [
-   "ui.js:1609"
+   "ui.js:1610"
   ],
   "ctx": "'<p class=\"muted\" style=\"font-size:13px;margin:0\">' + (isMgr() ? tr(\"Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.\") : tr(\"Forma, moral y físico deciden cómo rindes; el míster y"
  },
  "Cerrar": {
   "w": [
-   "ui.js:1609",
-   "ui.js:1617",
-   "ui.js:1635",
-   "ui.js:1651"
+   "ui.js:1610",
+   "ui.js:1618",
+   "ui.js:1636",
+   "ui.js:1652"
   ],
   "ctx": "'<p class=\"muted\" style=\"font-size:13px;margin:0\">' + (isMgr() ? tr(\"Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.\") : tr(\"Forma, moral y físico deciden cómo rindes; el míster y"
  },
  "Tu partida se guarda sola en tu cuenta y en este dispositivo.": {
   "w": [
-   "ui.js:1615"
+   "ui.js:1616"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:0;font-size:13px\">' + (Store.cloud ? tr(\"Tu partida se guarda sola en tu cuenta y en este dispositivo.\") : tr(\"Tu partida se guarda sola en este dispositivo. Usa el código para pasarla a o"
  },
  "Tu partida se guarda sola en este dispositivo. Usa el código para pasarla a otro móvil.": {
   "w": [
-   "ui.js:1615"
+   "ui.js:1616"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:0;font-size:13px\">' + (Store.cloud ? tr(\"Tu partida se guarda sola en tu cuenta y en este dispositivo.\") : tr(\"Tu partida se guarda sola en este dispositivo. Usa el código para pasarla a o"
  },
  "Copiar código de partida": {
   "w": [
-   "ui.js:1616"
+   "ui.js:1617"
   ],
   "ctx": "'<button class=\"btn wide\" data-a=\"home\">' + tr(\"Menú principal\") + '</button><button class=\"btn wide\" data-a=\"export\">' + tr(\"Copiar código de partida\") + '</button><button class=\"btn wide\" data-a=\"import\">' + tr(\"Cargar"
  },
  "Cargar partida con código": {
   "w": [
-   "ui.js:1616"
+   "ui.js:1617"
   ],
   "ctx": "'<button class=\"btn wide\" data-a=\"home\">' + tr(\"Menú principal\") + '</button><button class=\"btn wide\" data-a=\"export\">' + tr(\"Copiar código de partida\") + '</button><button class=\"btn wide\" data-a=\"import\">' + tr(\"Cargar"
  },
  "Resumen": {
   "w": [
-   "ui.js:1620",
-   "ui.js:1630"
+   "ui.js:1621",
+   "ui.js:1631"
   ],
   "ctx": "var P = [[N_(\"Resumen\"), N_(\"Camino a la Leyenda es gratis gracias a los anuncios: la app muestra anuncios de Google AdMob entre partidas. No vendemos tus datos y no necesitas crear una cuenta para jugar.\")],"
  },
  "Camino a la Leyenda es gratis gracias a los anuncios: la app muestra anuncios de Google AdMob entre partidas. No vendemos tus datos y no necesitas crear una cuenta para jugar.": {
   "w": [
-   "ui.js:1620"
+   "ui.js:1621"
   ],
   "ctx": "var P = [[N_(\"Resumen\"), N_(\"Camino a la Leyenda es gratis gracias a los anuncios: la app muestra anuncios de Google AdMob entre partidas. No vendemos tus datos y no necesitas crear una cuenta para jugar.\")],"
  },
  "Qué datos guarda": {
   "w": [
-   "ui.js:1621"
+   "ui.js:1622"
   ],
   "ctx": "[N_(\"Qué datos guarda\"), N_(\"Solo lo que tú creas al jugar: los nombres que escribes, tus partidas, el idioma elegido y el Salón de la fama. Todo se guarda en el almacenamiento local de tu dispositivo.\")],"
  },
  "Solo lo que tú creas al jugar: los nombres que escribes, tus partidas, el idioma elegido y el Salón de la fama. Todo se guarda en el almacenamiento local de tu dispositivo.": {
   "w": [
-   "ui.js:1621"
+   "ui.js:1622"
   ],
   "ctx": "[N_(\"Qué datos guarda\"), N_(\"Solo lo que tú creas al jugar: los nombres que escribes, tus partidas, el idioma elegido y el Salón de la fama. Todo se guarda en el almacenamiento local de tu dispositivo.\")],"
  },
  "Anuncios": {
   "w": [
-   "ui.js:1622"
+   "ui.js:1623"
   ],
   "ctx": "[N_(\"Anuncios\"), N_(\"Para mostrar y medir los anuncios, Google AdMob puede recoger el identificador de publicidad del dispositivo, la dirección IP, la ubicación aproximada, datos técnicos del dispositivo e información so"
  },
  "Para mostrar y medir los anuncios, Google AdMob puede recoger el identificador de publicidad del dispositivo, la dirección IP, la ubicación aproximada, datos técnicos del dispositivo e información sobre cómo interactúas con los anuncios. Google trata estos datos según su política de privacidad: policies.google.com/privacy.": {
   "w": [
-   "ui.js:1622"
+   "ui.js:1623"
   ],
   "ctx": "[N_(\"Anuncios\"), N_(\"Para mostrar y medir los anuncios, Google AdMob puede recoger el identificador de publicidad del dispositivo, la dirección IP, la ubicación aproximada, datos técnicos del dispositivo e información so"
  },
  "Tu consentimiento": {
   "w": [
-   "ui.js:1623"
+   "ui.js:1624"
   ],
   "ctx": "[N_(\"Tu consentimiento\"), N_(\"Si estás en el Espacio Económico Europeo, el Reino Unido o Suiza, la app te pregunta al abrirla si aceptas anuncios personalizados. Puedes cambiar tu elección cuando quieras en «Opciones de "
  },
  "Si estás en el Espacio Económico Europeo, el Reino Unido o Suiza, la app te pregunta al abrirla si aceptas anuncios personalizados. Puedes cambiar tu elección cuando quieras en «Opciones de privacidad de anuncios», en el menú. También puedes restablecer o eliminar el ID de publicidad en los ajustes de Android.": {
   "w": [
-   "ui.js:1623"
+   "ui.js:1624"
   ],
   "ctx": "[N_(\"Tu consentimiento\"), N_(\"Si estás en el Espacio Económico Europeo, el Reino Unido o Suiza, la app te pregunta al abrirla si aceptas anuncios personalizados. Puedes cambiar tu elección cuando quieras en «Opciones de "
  },
  "Conexión a internet": {
   "w": [
-   "ui.js:1624",
-   "ui.js:1632"
+   "ui.js:1625",
+   "ui.js:1633"
   ],
   "ctx": "[N_(\"Conexión a internet\"), N_(\"La app usa internet solo para cargar los anuncios y para comprobar en Google Play si hay una versión nueva: el juego funciona sin conexión y tus partidas nunca se envían a ningún servidor."
  },
  "La app usa internet solo para cargar los anuncios y para comprobar en Google Play si hay una versión nueva: el juego funciona sin conexión y tus partidas nunca se envían a ningún servidor.": {
   "w": [
-   "ui.js:1624"
+   "ui.js:1625"
   ],
   "ctx": "[N_(\"Conexión a internet\"), N_(\"La app usa internet solo para cargar los anuncios y para comprobar en Google Play si hay una versión nueva: el juego funciona sin conexión y tus partidas nunca se envían a ningún servidor."
  },
  "Código de partida": {
   "w": [
-   "ui.js:1625",
-   "ui.js:1651"
+   "ui.js:1626",
+   "ui.js:1652"
   ],
   "ctx": "[N_(\"Código de partida\"), N_(\"El código para copiar tu partida solo se genera cuando lo pides y lo compartes tú. Contiene tus partidas, nada más.\")],"
  },
  "El código para copiar tu partida solo se genera cuando lo pides y lo compartes tú. Contiene tus partidas, nada más.": {
   "w": [
-   "ui.js:1625"
+   "ui.js:1626"
   ],
   "ctx": "[N_(\"Código de partida\"), N_(\"El código para copiar tu partida solo se genera cuando lo pides y lo compartes tú. Contiene tus partidas, nada más.\")],"
  },
  "Borrar tus datos": {
   "w": [
-   "ui.js:1626",
-   "ui.js:1633"
+   "ui.js:1627",
+   "ui.js:1634"
   ],
   "ctx": "[N_(\"Borrar tus datos\"), N_(\"Puedes borrar cualquier partida desde «Cargar partida». Desinstalar la app elimina todo lo guardado en el dispositivo. Para borrar los datos publicitarios que tiene Google, restablece tu ID d"
  },
  "Puedes borrar cualquier partida desde «Cargar partida». Desinstalar la app elimina todo lo guardado en el dispositivo. Para borrar los datos publicitarios que tiene Google, restablece tu ID de publicidad o entra en myadcenter.google.com.": {
   "w": [
-   "ui.js:1626"
+   "ui.js:1627"
   ],
   "ctx": "[N_(\"Borrar tus datos\"), N_(\"Puedes borrar cualquier partida desde «Cargar partida». Desinstalar la app elimina todo lo guardado en el dispositivo. Para borrar los datos publicitarios que tiene Google, restablece tu ID d"
  },
  "Menores": {
   "w": [
-   "ui.js:1627"
+   "ui.js:1628"
   ],
   "ctx": "[N_(\"Menores\"), N_(\"El juego no está dirigido a menores de 13 años y no recoge a sabiendas datos personales de menores.\")],"
  },
  "El juego no está dirigido a menores de 13 años y no recoge a sabiendas datos personales de menores.": {
   "w": [
-   "ui.js:1627"
+   "ui.js:1628"
   ],
   "ctx": "[N_(\"Menores\"), N_(\"El juego no está dirigido a menores de 13 años y no recoge a sabiendas datos personales de menores.\")],"
  },
  "Nombres de jugadores": {
   "w": [
-   "ui.js:1628"
+   "ui.js:1629"
   ],
   "ctx": "[N_(\"Nombres de jugadores\"), N_(\"Los nombres de futbolistas y entrenadores son versiones inventadas inspiradas en el fútbol real; el juego no está afiliado a ningún club, liga ni jugador.\")],"
  },
  "Los nombres de futbolistas y entrenadores son versiones inventadas inspiradas en el fútbol real; el juego no está afiliado a ningún club, liga ni jugador.": {
   "w": [
-   "ui.js:1628"
+   "ui.js:1629"
   ],
   "ctx": "[N_(\"Nombres de jugadores\"), N_(\"Los nombres de futbolistas y entrenadores son versiones inventadas inspiradas en el fútbol real; el juego no está afiliado a ningún club, liga ni jugador.\")],"
  },
  "Cambios y contacto": {
   "w": [
-   "ui.js:1629"
+   "ui.js:1630"
   ],
   "ctx": "[N_(\"Cambios y contacto\"), N_(\"Si esta política cambia, lo verás aquí con la fecha de actualización. Para cualquier duda, escribe al correo de contacto del desarrollador que aparece en la ficha de Google Play.\")]];"
  },
  "Si esta política cambia, lo verás aquí con la fecha de actualización. Para cualquier duda, escribe al correo de contacto del desarrollador que aparece en la ficha de Google Play.": {
   "w": [
-   "ui.js:1629"
+   "ui.js:1630"
   ],
   "ctx": "[N_(\"Cambios y contacto\"), N_(\"Si esta política cambia, lo verás aquí con la fecha de actualización. Para cualquier duda, escribe al correo de contacto del desarrollador que aparece en la ficha de Google Play.\")]];"
  },
  "Camino a la Leyenda no tiene anuncios, no usa analíticas ni rastreadores y no vende ni comparte datos con nadie. No necesitas crear una cuenta para jugar.": {
   "w": [
-   "ui.js:1630"
+   "ui.js:1631"
   ],
   "ctx": "if (NO_ADS) P = [[N_(\"Resumen\"), N_(\"Camino a la Leyenda no tiene anuncios, no usa analíticas ni rastreadores y no vende ni comparte datos con nadie. No necesitas crear una cuenta para jugar.\")],"
  },
  "La app solo se conecta a internet para comprobar en Google Play si hay una versión nueva: el juego funciona sin conexión y no envía tus datos ni tus partidas a ningún servidor.": {
   "w": [
-   "ui.js:1632"
+   "ui.js:1633"
   ],
   "ctx": "[N_(\"Conexión a internet\"), N_(\"La app solo se conecta a internet para comprobar en Google Play si hay una versión nueva: el juego funciona sin conexión y no envía tus datos ni tus partidas a ningún servidor.\")],"
  },
  "Puedes borrar cualquier partida desde «Cargar partida». Desinstalar la app elimina todo lo guardado en el dispositivo.": {
   "w": [
-   "ui.js:1633"
+   "ui.js:1634"
   ],
   "ctx": "P[5], [N_(\"Borrar tus datos\"), N_(\"Puedes borrar cualquier partida desde «Cargar partida». Desinstalar la app elimina todo lo guardado en el dispositivo.\")],"
  },
  "Última actualización: {d}": {
   "w": [
-   "ui.js:1635"
+   "ui.js:1636"
   ],
   "ctx": "return \"<h2>\" + tr(\"Política de privacidad\") + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px;font-size:13px\">' + tr(\"Última actualización: {d}\", {d: \"10/10/2026\"}) + '</p><div class=\"policy\">' + P.map(function (x) { r"
  },
  "¡Nueva versión disponible!": {
   "w": [
-   "ui.js:1638"
+   "ui.js:1639"
   ],
   "ctx": "return '<div class=\"upd\">' + ICON.play + '</div><h2>' + tr(\"¡Nueva versión disponible!\") + '</h2><p class=\"lead\">' + tr(\"Hay una actualización de Camino a la Leyenda con novedades y mejoras. Tus partidas se conservan.\") "
  },
  "Hay una actualización de Camino a la Leyenda con novedades y mejoras. Tus partidas se conservan.": {
   "w": [
-   "ui.js:1638"
+   "ui.js:1639"
   ],
   "ctx": "return '<div class=\"upd\">' + ICON.play + '</div><h2>' + tr(\"¡Nueva versión disponible!\") + '</h2><p class=\"lead\">' + tr(\"Hay una actualización de Camino a la Leyenda con novedades y mejoras. Tus partidas se conservan.\") "
  },
  "Más tarde": {
   "w": [
-   "ui.js:1639"
+   "ui.js:1640"
   ],
   "ctx": "'<div class=\"row2\" style=\"margin-top:14px\"><button class=\"btn wide\" data-a=\"close\">' + tr(\"Más tarde\") + '</button><button class=\"btn pri wide\" data-a=\"doupdate\">' + tr(\"Actualizar\") + \"</button></div>\";"
  },
  "Actualizar": {
   "w": [
-   "ui.js:1639",
-   "ui.js:1804"
+   "ui.js:1640",
+   "ui.js:1805"
   ],
   "ctx": "'<div class=\"row2\" style=\"margin-top:14px\"><button class=\"btn wide\" data-a=\"close\">' + tr(\"Más tarde\") + '</button><button class=\"btn pri wide\" data-a=\"doupdate\">' + tr(\"Actualizar\") + \"</button></div>\";"
  },
  "¿Borrar la partida?": {
   "w": [
-   "ui.js:1644"
+   "ui.js:1645"
   ],
   "ctx": "return \"<h2>\" + tr(\"¿Borrar la partida?\") + '</h2><p class=\"lead\">' + tr(\"Se borrará la partida de {n} de este dispositivo y de tu cuenta. No se puede deshacer.\", {n: h(e ? e.n : \"\")}) + '</p><div class=\"row2\" style=\"mar"
  },
  "Se borrará la partida de {n} de este dispositivo y de tu cuenta. No se puede deshacer.": {
   "w": [
-   "ui.js:1644"
+   "ui.js:1645"
   ],
   "ctx": "return \"<h2>\" + tr(\"¿Borrar la partida?\") + '</h2><p class=\"lead\">' + tr(\"Se borrará la partida de {n} de este dispositivo y de tu cuenta. No se puede deshacer.\", {n: h(e ? e.n : \"\")}) + '</p><div class=\"row2\" style=\"mar"
  },
  "Cambiar nombre": {
   "w": [
-   "ui.js:1648",
-   "ui.js:1696",
+   "ui.js:1649",
+   "ui.js:1697",
    "ui-pets.js:50"
   ],
   "ctx": "return \"<h2>\" + tr(\"Cambiar nombre\") + '</h2><div class=\"stack\"><div class=\"row2\"><div><label class=\"lbl\" for=\"rfn\">' + tr(\"Nombre\") + '</label><input type=\"text\" id=\"rfn\" value=\"' + h(rp.fn) + '\" maxlength=\"20\" autocomp"
  },
  "Puedes dejar el nombre en blanco si se le conoce por un solo nombre.": {
   "w": [
-   "ui.js:1649"
+   "ui.js:1650"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:0;font-size:13px\">' + tr(\"Puedes dejar el nombre en blanco si se le conoce por un solo nombre.\") + '</p><div class=\"row2\"><button class=\"btn wide\" data-a=\"pl\" data-id=\"' + rp.id + '\">' + t"
  },
  "Guardar": {
   "w": [
-   "ui.js:1649",
-   "ui.js:1899"
+   "ui.js:1650",
+   "ui.js:1900"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:0;font-size:13px\">' + tr(\"Puedes dejar el nombre en blanco si se le conoce por un solo nombre.\") + '</p><div class=\"row2\"><button class=\"btn wide\" data-a=\"pl\" data-id=\"' + rp.id + '\">' + t"
  },
  "Cópialo y guárdalo donde quieras. Pegándolo en «Cargar partida» recuperas esta carrera en cualquier dispositivo.": {
   "w": [
-   "ui.js:1651"
+   "ui.js:1652"
   ],
   "ctx": "if (t.k === \"export\") return \"<h2>\" + tr(\"Código de partida\") + '</h2><p class=\"muted\" style=\"margin:0 0 10px;font-size:14px\">' + tr(\"Cópialo y guárdalo donde quieras. Pegándolo en «Cargar partida» recuperas esta carrera"
  },
  "Generando…": {
   "w": [
-   "ui.js:1651"
+   "ui.js:1652"
   ],
   "ctx": "if (t.k === \"export\") return \"<h2>\" + tr(\"Código de partida\") + '</h2><p class=\"muted\" style=\"margin:0 0 10px;font-size:14px\">' + tr(\"Cópialo y guárdalo donde quieras. Pegándolo en «Cargar partida» recuperas esta carrera"
  },
  "Copiar": {
   "w": [
-   "ui.js:1651"
+   "ui.js:1652"
   ],
   "ctx": "if (t.k === \"export\") return \"<h2>\" + tr(\"Código de partida\") + '</h2><p class=\"muted\" style=\"margin:0 0 10px;font-size:14px\">' + tr(\"Cópialo y guárdalo donde quieras. Pegándolo en «Cargar partida» recuperas esta carrera"
  },
  "Pega el código de una partida. Se añadirá a tus partidas guardadas.": {
   "w": [
-   "ui.js:1652"
+   "ui.js:1653"
   ],
   "ctx": "if (t.k === \"import\") return \"<h2>\" + tr(\"Cargar partida\") + '</h2><p class=\"muted\" style=\"margin:0 0 10px;font-size:14px\">' + tr(\"Pega el código de una partida. Se añadirá a tus partidas guardadas.\") + '</p><textarea id"
  },
  "Cargar": {
   "w": [
-   "ui.js:1652"
+   "ui.js:1653"
   ],
   "ctx": "if (t.k === \"import\") return \"<h2>\" + tr(\"Cargar partida\") + '</h2><p class=\"muted\" style=\"margin:0 0 10px;font-size:14px\">' + tr(\"Pega el código de una partida. Se añadirá a tus partidas guardadas.\") + '</p><textarea id"
  },
  "POR": {
   "w": [
-   "ui.js:1655"
+   "ui.js:1656"
   ],
   "ctx": "return \"<h2>\" + tr(\"Salón de la fama\") + '</h2><div class=\"seg\" style=\"margin-bottom:12px\">' + [[N_(\"Todos\"), \"ALL\"], [N_(\"POR\"), \"POR\"], [N_(\"DEF\"), \"DEF\"], [N_(\"MED\"), \"MED\"], [N_(\"DEL\"), \"DEL\"], [N_(\"DT\"), \"DT\"]].map("
  },
  "DEF": {
   "w": [
-   "ui.js:1655"
+   "ui.js:1656"
   ],
   "ctx": "return \"<h2>\" + tr(\"Salón de la fama\") + '</h2><div class=\"seg\" style=\"margin-bottom:12px\">' + [[N_(\"Todos\"), \"ALL\"], [N_(\"POR\"), \"POR\"], [N_(\"DEF\"), \"DEF\"], [N_(\"MED\"), \"MED\"], [N_(\"DEL\"), \"DEL\"], [N_(\"DT\"), \"DT\"]].map("
  },
  "MED": {
   "w": [
-   "ui.js:1655"
+   "ui.js:1656"
   ],
   "ctx": "return \"<h2>\" + tr(\"Salón de la fama\") + '</h2><div class=\"seg\" style=\"margin-bottom:12px\">' + [[N_(\"Todos\"), \"ALL\"], [N_(\"POR\"), \"POR\"], [N_(\"DEF\"), \"DEF\"], [N_(\"MED\"), \"MED\"], [N_(\"DEL\"), \"DEL\"], [N_(\"DT\"), \"DT\"]].map("
  },
  "DEL": {
   "w": [
-   "ui.js:1655"
+   "ui.js:1656"
   ],
   "ctx": "return \"<h2>\" + tr(\"Salón de la fama\") + '</h2><div class=\"seg\" style=\"margin-bottom:12px\">' + [[N_(\"Todos\"), \"ALL\"], [N_(\"POR\"), \"POR\"], [N_(\"DEF\"), \"DEF\"], [N_(\"MED\"), \"MED\"], [N_(\"DEL\"), \"DEL\"], [N_(\"DT\"), \"DT\"]].map("
  },
  "Cargando…": {
   "w": [
-   "ui.js:1656"
+   "ui.js:1657"
   ],
   "ctx": "(t.list == null ? '<p class=\"empty\">' + tr(\"Cargando…\") + \"</p>\" : list.length ? list.map(function (e, i) {"
  },
  "{n} victoria": {
   "w": [
-   "ui.js:1658"
+   "ui.js:1659"
   ],
   "ctx": "var det = e.g === \"DT\" ? tr(\"Entrenador\") + \" · \" + h(e.club) + \" · \" + e.y0 + \"–\" + e.y1 + \" · \" + trn(e.apps, \"{n} partido\", \"{n} partidos\") + \", \" + trn(e.gl, \"{n} victoria\", \"{n} victorias\") + \" · \" + trn(e.tro, \"{n}",
   "note": "plural:singular"
  },
  "{n} victorias": {
   "w": [
-   "ui.js:1658"
+   "ui.js:1659"
   ],
   "ctx": "var det = e.g === \"DT\" ? tr(\"Entrenador\") + \" · \" + h(e.club) + \" · \" + e.y0 + \"–\" + e.y1 + \" · \" + trn(e.apps, \"{n} partido\", \"{n} partidos\") + \", \" + trn(e.gl, \"{n} victoria\", \"{n} victorias\") + \" · \" + trn(e.tro, \"{n}",
   "note": "plural:plural"
  },
  "{n} título": {
   "w": [
-   "ui.js:1658",
    "ui.js:1659",
+   "ui.js:1660",
    "ui-life.js:203"
   ],
   "ctx": "var det = e.g === \"DT\" ? tr(\"Entrenador\") + \" · \" + h(e.club) + \" · \" + e.y0 + \"–\" + e.y1 + \" · \" + trn(e.apps, \"{n} partido\", \"{n} partidos\") + \", \" + trn(e.gl, \"{n} victoria\", \"{n} victorias\") + \" · \" + trn(e.tro, \"{n}",
@@ -36987,8 +37192,8 @@
  },
  "{n} títulos": {
   "w": [
-   "ui.js:1658",
    "ui.js:1659",
+   "ui.js:1660",
    "ui-life.js:203"
   ],
   "ctx": "var det = e.g === \"DT\" ? tr(\"Entrenador\") + \" · \" + h(e.club) + \" · \" + e.y0 + \"–\" + e.y1 + \" · \" + trn(e.apps, \"{n} partido\", \"{n} partidos\") + \", \" + trn(e.gl, \"{n} victoria\", \"{n} victorias\") + \" · \" + trn(e.tro, \"{n}",
@@ -36996,124 +37201,124 @@
  },
  "{apps} PJ, {goals} G": {
   "w": [
-   "ui.js:1659",
-   "ui.js:1683"
+   "ui.js:1660",
+   "ui.js:1684"
   ],
   "ctx": ": h(posAb(e.pos)) + \" · \" + h(e.club) + \" · \" + e.y0 + \"–\" + e.y1 + \" · \" + tr(\"{apps} PJ, {goals} G\", {apps: e.apps, goals: e.gl}) + \" · \" + trn(e.tro, \"{n} título\", \"{n} títulos\") + (e.bdo ? \" · \" + tr(\"{n} BdO\", {n: e"
  },
  "{n} BdO": {
   "w": [
-   "ui.js:1659"
+   "ui.js:1660"
   ],
   "ctx": ": h(posAb(e.pos)) + \" · \" + h(e.club) + \" · \" + e.y0 + \"–\" + e.y1 + \" · \" + tr(\"{apps} PJ, {goals} G\", {apps: e.apps, goals: e.gl}) + \" · \" + trn(e.tro, \"{n} título\", \"{n} títulos\") + (e.bdo ? \" · \" + tr(\"{n} BdO\", {n: e"
  },
  "Aquí aparecerán tus jugadores y entrenadores cuando se retiren.": {
   "w": [
-   "ui.js:1661"
+   "ui.js:1662"
   ],
   "ctx": "}).join(\"\") : '<p class=\"empty\">' + tr(\"Aquí aparecerán tus jugadores y entrenadores cuando se retiren.\") + \"</p>\") +"
  },
  "Cerrar sin decidir": {
   "w": [
-   "ui.js:1666"
+   "ui.js:1667"
   ],
   "ctx": "return pendingCard(x) + (x.k === \"clausm\" ? \"\" : '<button class=\"btn wide\" style=\"margin-top:12px\" data-a=\"close\">' + tr(\"Cerrar sin decidir\") + \"</button>\");"
  },
  "{m}/año": {
   "w": [
-   "ui.js:1680"
+   "ui.js:1681"
   ],
   "ctx": "\"<div><span>\" + tr(\"Contrato\") + \"</span><span>\" + tr(\"{m}/año\", {m: fmtMoney(p.sal)}) + \" · \" + trn(p.yrs, \"{n} temporada\", \"{n} temporadas\") + (p.noRenew ? \" · \" + tr(\"no renovará\") : \"\") + \"</span></div>\" +"
  },
  "{n} temporada": {
   "w": [
-   "ui.js:1680"
+   "ui.js:1681"
   ],
   "ctx": "\"<div><span>\" + tr(\"Contrato\") + \"</span><span>\" + tr(\"{m}/año\", {m: fmtMoney(p.sal)}) + \" · \" + trn(p.yrs, \"{n} temporada\", \"{n} temporadas\") + (p.noRenew ? \" · \" + tr(\"no renovará\") : \"\") + \"</span></div>\" +",
   "note": "plural:singular"
  },
  "{n} temporadas": {
   "w": [
-   "ui.js:1680"
+   "ui.js:1681"
   ],
   "ctx": "\"<div><span>\" + tr(\"Contrato\") + \"</span><span>\" + tr(\"{m}/año\", {m: fmtMoney(p.sal)}) + \" · \" + trn(p.yrs, \"{n} temporada\", \"{n} temporadas\") + (p.noRenew ? \" · \" + tr(\"no renovará\") : \"\") + \"</span></div>\" +",
   "note": "plural:plural"
  },
  "no renovará": {
   "w": [
-   "ui.js:1680"
+   "ui.js:1681"
   ],
   "ctx": "\"<div><span>\" + tr(\"Contrato\") + \"</span><span>\" + tr(\"{m}/año\", {m: fmtMoney(p.sal)}) + \" · \" + trn(p.yrs, \"{n} temporada\", \"{n} temporadas\") + (p.noRenew ? \" · \" + tr(\"no renovará\") : \"\") + \"</span></div>\" +"
  },
  "Temporada": {
   "w": [
-   "ui.js:1682"
+   "ui.js:1683"
   ],
   "ctx": "\"<div><span>\" + tr(\"Temporada\") + \"</span><span>\" + tr(\"{apps} PJ · {goals} G · {assists} A\", {apps: st.apps, goals: st.g, assists: st.a}) + (st.rn ? \" · \" + tr(\"nota {rating}\", {rating: dec(st.rs / st.rn)}) : \"\") + \"</s"
  },
  "{apps} PJ · {goals} G · {assists} A": {
   "w": [
-   "ui.js:1682"
+   "ui.js:1683"
   ],
   "ctx": "\"<div><span>\" + tr(\"Temporada\") + \"</span><span>\" + tr(\"{apps} PJ · {goals} G · {assists} A\", {apps: st.apps, goals: st.g, assists: st.a}) + (st.rn ? \" · \" + tr(\"nota {rating}\", {rating: dec(st.rs / st.rn)}) : \"\") + \"</s"
  },
  "nota {rating}": {
   "w": [
-   "ui.js:1682"
+   "ui.js:1683"
   ],
   "ctx": "\"<div><span>\" + tr(\"Temporada\") + \"</span><span>\" + tr(\"{apps} PJ · {goals} G · {assists} A\", {apps: st.apps, goals: st.g, assists: st.a}) + (st.rn ? \" · \" + tr(\"nota {rating}\", {rating: dec(st.rs / st.rn)}) : \"\") + \"</s"
  },
  "En el club": {
   "w": [
-   "ui.js:1683"
+   "ui.js:1684"
   ],
   "ctx": "\"<div><span>\" + tr(\"En el club\") + \"</span><span>\" + tr(\"desde {year}\", {year: p.since}) + \" · \" + tr(\"{apps} PJ, {goals} G\", {apps: p.tot.apps + st.apps, goals: p.tot.g + st.g}) + (p.yth ? \" · \" + tr(\"canterano\") : \"\") "
  },
  "desde {year}": {
   "w": [
-   "ui.js:1683"
+   "ui.js:1684"
   ],
   "ctx": "\"<div><span>\" + tr(\"En el club\") + \"</span><span>\" + tr(\"desde {year}\", {year: p.since}) + \" · \" + tr(\"{apps} PJ, {goals} G\", {apps: p.tot.apps + st.apps, goals: p.tot.g + st.g}) + (p.yth ? \" · \" + tr(\"canterano\") : \"\") "
  },
  "canterano": {
   "w": [
-   "ui.js:1683"
+   "ui.js:1684"
   ],
   "ctx": "\"<div><span>\" + tr(\"En el club\") + \"</span><span>\" + tr(\"desde {year}\", {year: p.since}) + \" · \" + tr(\"{apps} PJ, {goals} G\", {apps: p.tot.apps + st.apps, goals: p.tot.g + st.g}) + (p.yth ? \" · \" + tr(\"canterano\") : \"\") "
  },
  "Carácter": {
   "w": [
-   "ui.js:1684"
+   "ui.js:1685"
   ],
   "ctx": "(p.tr ? \"<div><span>\" + tr(\"Carácter\") + \"</span><span>\" + h(tr(TRAITS[p.tr])) + \"</span></div>\" : \"\") +"
  },
  "Lesionado": {
   "w": [
-   "ui.js:1685"
+   "ui.js:1686"
   ],
   "ctx": "(p.inj > S.tw ? \"<div><span>\" + tr(\"Estado\") + '</span><span class=\"neg\">' + h(p.injN ? tr(p.injN) : tr(\"Lesionado\")) + \" · \" + tr(\"{n} sem.\", {n: p.inj - S.tw}) + \"</span></div>\" : \"\") +"
  },
  "<span>Promesa</span><span>Le prometiste ser Clave</span>": {
   "w": [
-   "ui.js:1687"
+   "ui.js:1688"
   ],
   "ctx": "(p.prom ? \"<div>\" + tr(\"<span>Promesa</span><span>Le prometiste ser Clave</span>\") + \"</div>\" : \"\") +"
  },
  "Rol en la plantilla": {
   "w": [
-   "ui.js:1689"
+   "ui.js:1690"
   ],
   "ctx": "s += '<label class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Rol en la plantilla\") + '</label><div class=\"seg\">' + ROLE_ORDER.map(function (r) { return '<button data-a=\"mrole\" data-id=\"' + p.id + '\" data-v=\"' + r + '\" aria-p"
  },
  "Espera jugar alrededor del {pct} % de los minutos. Bajarle el rol le sienta mal.": {
   "w": [
-   "ui.js:1690"
+   "ui.js:1691"
   ],
   "ctx": "s += '<p class=\"muted\" style=\"font-size:12.5px;margin:6px 0 0\">' + tr(\"Espera jugar alrededor del {pct} % de los minutos. Bajarle el rol le sienta mal.\", {pct: Math.round(ROLES[p.role].s * 100)}) + \"</p>\";"
  },
  "Convocatoria": {
   "w": [
-   "ui.js:1692",
+   "ui.js:1693",
    "ui-mgrplus.js:64",
    "ui-mgrplus.js:82"
   ],
@@ -37121,704 +37326,704 @@
  },
  "En el once titular": {
   "w": [
-   "ui.js:1692"
+   "ui.js:1693"
   ],
   "ctx": "s += '<label class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Convocatoria\") + '</label><div class=\"kvlist\"><div><span>' + (zn === \"xi\" ? tr(\"En el once titular\") : zn === \"bench\" ? tr(\"En el banquillo\") : tr(\"No convocado\"))"
  },
  "En el banquillo": {
   "w": [
-   "ui.js:1692"
+   "ui.js:1693"
   ],
   "ctx": "s += '<label class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Convocatoria\") + '</label><div class=\"kvlist\"><div><span>' + (zn === \"xi\" ? tr(\"En el once titular\") : zn === \"bench\" ? tr(\"En el banquillo\") : tr(\"No convocado\"))"
  },
  "No convocado": {
   "w": [
-   "ui.js:1692",
-   "ui.js:1720"
+   "ui.js:1693",
+   "ui.js:1721"
   ],
   "ctx": "s += '<label class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Convocatoria\") + '</label><div class=\"kvlist\"><div><span>' + (zn === \"xi\" ? tr(\"En el once titular\") : zn === \"bench\" ? tr(\"En el banquillo\") : tr(\"No convocado\"))"
  },
  "Al banquillo": {
   "w": [
-   "ui.js:1693"
+   "ui.js:1694"
   ],
   "ctx": "(zn !== \"bench\" ? '<button class=\"btn sm\" data-a=\"mzone\" data-id=\"' + p.id + '\" data-v=\"bench\">' + tr(\"Al banquillo\") + \"</button> \" : \"\") +"
  },
  "Dejar fuera": {
   "w": [
-   "ui.js:1694"
+   "ui.js:1695"
   ],
   "ctx": "(zn !== \"nc\" ? '<button class=\"btn sm\" data-a=\"mzone\" data-id=\"' + p.id + '\" data-v=\"nc\">' + tr(\"Dejar fuera\") + \"</button>\" : \"\") + \"</span></div></div>\";"
  },
  "Renovar contrato (el próximo tramo)": {
   "w": [
-   "ui.js:1697"
+   "ui.js:1698"
   ],
   "ctx": "if (p.yrs <= 2 && !p.noRenew) s += '<button class=\"btn wide\" data-a=\"mrenew\" data-id=\"' + p.id + '\"' + (p.rnT === now ? \" disabled\" : \"\") + \">\" + (p.rnT === now ? tr(\"Renovar contrato (el próximo tramo)\") : tr(\"Renovar c"
  },
  "Renovar contrato": {
   "w": [
-   "ui.js:1697"
+   "ui.js:1698"
   ],
   "ctx": "if (p.yrs <= 2 && !p.noRenew) s += '<button class=\"btn wide\" data-a=\"mrenew\" data-id=\"' + p.id + '\"' + (p.rnT === now ? \" disabled\" : \"\") + \">\" + (p.rnT === now ? tr(\"Renovar contrato (el próximo tramo)\") : tr(\"Renovar c"
  },
  "Hablar con él (ya hablasteis)": {
   "w": [
-   "ui.js:1698"
+   "ui.js:1699"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-a=\"mtalk\" data-id=\"' + p.id + '\"' + (p.tkT === now ? \" disabled\" : \"\") + \">\" + (p.tkT === now ? tr(\"Hablar con él (ya hablasteis)\") : tr(\"Hablar con él\")) + \"</button>\";"
  },
  "Hablar con él": {
   "w": [
-   "ui.js:1698"
+   "ui.js:1699"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-a=\"mtalk\" data-id=\"' + p.id + '\"' + (p.tkT === now ? \" disabled\" : \"\") + \">\" + (p.tkT === now ? tr(\"Hablar con él (ya hablasteis)\") : tr(\"Hablar con él\")) + \"</button>\";"
  },
  "Escuchar ofertas": {
   "w": [
-   "ui.js:1699"
+   "ui.js:1700"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-a=\"msell\" data-id=\"' + p.id + '\"' + (open ? \"\" : \" disabled\") + \">\" + (open ? tr(\"Escuchar ofertas\") : tr(\"Escuchar ofertas (mercado cerrado)\")) + \"</button>\";"
  },
  "Escuchar ofertas (mercado cerrado)": {
   "w": [
-   "ui.js:1699"
+   "ui.js:1700"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-a=\"msell\" data-id=\"' + p.id + '\"' + (open ? \"\" : \" disabled\") + \">\" + (open ? tr(\"Escuchar ofertas\") : tr(\"Escuchar ofertas (mercado cerrado)\")) + \"</button>\";"
  },
  "Quitar de la lista de venta": {
   "w": [
-   "ui.js:1700"
+   "ui.js:1701"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-a=\"mlist\" data-id=\"' + p.id + '\">' + (p.list ? tr(\"Quitar de la lista de venta\") : tr(\"Poner en la lista de venta\")) + \"</button>\";"
  },
  "Poner en la lista de venta": {
   "w": [
-   "ui.js:1700"
+   "ui.js:1701"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-a=\"mlist\" data-id=\"' + p.id + '\">' + (p.list ? tr(\"Quitar de la lista de venta\") : tr(\"Poner en la lista de venta\")) + \"</button>\";"
  },
  "Ceder una temporada": {
   "w": [
-   "ui.js:1701"
+   "ui.js:1702"
   ],
   "ctx": "if (p.age <= 23) s += '<button class=\"btn wide\" data-a=\"mloan\" data-id=\"' + p.id + '\"' + (open ? \"\" : \" disabled\") + \">\" + (open ? tr(\"Ceder una temporada\") : tr(\"Ceder una temporada (mercado cerrado)\")) + \"</button>\";"
  },
  "Ceder una temporada (mercado cerrado)": {
   "w": [
-   "ui.js:1701"
+   "ui.js:1702"
   ],
   "ctx": "if (p.age <= 23) s += '<button class=\"btn wide\" data-a=\"mloan\" data-id=\"' + p.id + '\"' + (open ? \"\" : \" disabled\") + \">\" + (open ? tr(\"Ceder una temporada\") : tr(\"Ceder una temporada (mercado cerrado)\")) + \"</button>\";"
  },
  "Rescindir contrato": {
   "w": [
-   "ui.js:1702"
+   "ui.js:1703"
   ],
   "ctx": "s += '<button class=\"btn wide danger\" data-a=\"mrelease\" data-id=\"' + p.id + '\">' + tr(\"Rescindir contrato\") + \"</button>\";"
  },
  "Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.": {
   "w": [
-   "ui.js:1717"
+   "ui.js:1718"
   ],
   "ctx": "var s = \"<h2>\" + h(posName(sp)) + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px;font-size:13px\">' + tr(\"Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.\") + (hid ? \" \" + trn(hid, \"{n"
  },
  "{n} jugador no aparece porque no puede jugar ahí.": {
   "w": [
-   "ui.js:1717"
+   "ui.js:1718"
   ],
   "ctx": "var s = \"<h2>\" + h(posName(sp)) + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px;font-size:13px\">' + tr(\"Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.\") + (hid ? \" \" + trn(hid, \"{n",
   "note": "plural:singular"
  },
  "{n} jugadores no aparecen porque no pueden jugar ahí.": {
   "w": [
-   "ui.js:1717"
+   "ui.js:1718"
   ],
   "ctx": "var s = \"<h2>\" + h(posName(sp)) + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px;font-size:13px\">' + tr(\"Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.\") + (hid ? \" \" + trn(hid, \"{n",
   "note": "plural:plural"
  },
  "Titular de {p}": {
   "w": [
-   "ui.js:1720"
+   "ui.js:1721"
   ],
   "ctx": "var zn = xi >= 0 ? (xi !== i ? tr(\"Titular de {p}\", {p: posAb(FORMATIONS[m.form][xi])}) + \" · \" : \"\") : (m.bench || []).indexOf(p.id) >= 0 ? tr(\"Banquillo\") + \" · \" : tr(\"No convocado\") + \" · \";"
  },
  "físico {f} · moral {m}": {
   "w": [
-   "ui.js:1721"
+   "ui.js:1722"
   ],
   "ctx": "return '<button class=\"pickrow\" data-a=\"setslot\" data-i=\"' + i + '\" data-id=\"' + p.id + '\" aria-pressed=\"' + (p.id === cur) + '\"' + (mAvail(p) ? \"\" : ' style=\"opacity:.55\"') + '><span class=\"pp\">' + h(posAb(p.pos)) + '</"
  },
  "Ver la ficha de {n}": {
   "w": [
-   "ui.js:1724"
+   "ui.js:1725"
   ],
   "ctx": "if (cur != null && mPl(cur)) s += '<button class=\"btn wide\" style=\"margin-top:12px\" data-a=\"pl\" data-id=\"' + cur + '\">' + tr(\"Ver la ficha de {n}\", {n: h(plShort(mPl(cur)))}) + \"</button>\";"
  },
  "Buscar banquillo": {
   "w": [
-   "ui.js:1730"
+   "ui.js:1731"
   ],
   "ctx": "var s = \"<h2>\" + tr(\"Buscar banquillo\") + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px;font-size:13px\">' + tr(\"Con tu prestigio puedes dirigir clubes de nivel {n} o menos.\", {n: Math.round(max)}) + \"</p>\" + leagueSel"
  },
  "Con tu prestigio puedes dirigir clubes de nivel {n} o menos.": {
   "w": [
-   "ui.js:1730"
+   "ui.js:1731"
   ],
   "ctx": "var s = \"<h2>\" + tr(\"Buscar banquillo\") + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px;font-size:13px\">' + tr(\"Con tu prestigio puedes dirigir clubes de nivel {n} o menos.\", {n: Math.round(max)}) + \"</p>\" + leagueSel"
  },
  "Presupuesto {m}": {
   "w": [
-   "ui.js:1733"
+   "ui.js:1734"
   ],
   "ctx": "return '<button class=\"pickrow\" data-a=\"takejob\" data-v=\"' + c + '\"' + (ok ? \"\" : \" disabled\") + \">\" + crest(c, true) + '<div class=\"grow\"><b>' + h(clubName(c)) + \"</b><small>\" + (ok ? tr(\"Presupuesto {m}\", {m: fmtMoney("
  },
  "Tu club actual": {
   "w": [
-   "ui.js:1733"
+   "ui.js:1734"
   ],
   "ctx": "return '<button class=\"pickrow\" data-a=\"takejob\" data-v=\"' + c + '\"' + (ok ? \"\" : \" disabled\") + \">\" + crest(c, true) + '<div class=\"grow\"><b>' + h(clubName(c)) + \"</b><small>\" + (ok ? tr(\"Presupuesto {m}\", {m: fmtMoney("
  },
  "Te falta prestigio": {
   "w": [
-   "ui.js:1733"
+   "ui.js:1734"
   ],
   "ctx": "return '<button class=\"pickrow\" data-a=\"takejob\" data-v=\"' + c + '\"' + (ok ? \"\" : \" disabled\") + \">\" + crest(c, true) + '<div class=\"grow\"><b>' + h(clubName(c)) + \"</b><small>\" + (ok ? tr(\"Presupuesto {m}\", {m: fmtMoney("
  },
  "Ese código no parece de esta app. Debe empezar por CAMINO1:": {
   "w": [
-   "ui.js:1744"
+   "ui.js:1745"
   ],
   "ctx": "if (!m) { UI.sheet.err = tr(\"Ese código no parece de esta app. Debe empezar por CAMINO1:\"); renderSheet(); return; }"
  },
  "No se pudo leer el código. Comprueba que lo has pegado entero.": {
   "w": [
-   "ui.js:1751",
-   "ui.js:1754"
+   "ui.js:1752",
+   "ui.js:1755"
   ],
   "ctx": "try { restore(json); } catch (e) { toast(tr(\"No se pudo leer el código. Comprueba que lo has pegado entero.\")); return; }"
  },
  "Partida cargada": {
   "w": [
-   "ui.js:1752"
+   "ui.js:1753"
   ],
   "ctx": "enterGame(); persist(); refreshSlots(); render(true); toast(tr(\"Partida cargada\"));"
  },
  "Versión {v} disponible": {
   "w": [
-   "ui.js:1804"
+   "ui.js:1805"
   ],
   "ctx": "return '<section class=\"updbar' + (inMenu ? \" inmenu\" : \"\") + '\"><div class=\"ui\">' + ICON.play + '</div><div class=\"grow\"><b>' + (UI.upd.name ? tr(\"Versión {v} disponible\", {v: h(UI.upd.name)}) : tr(\"Nueva versión dispon"
  },
  "Nueva versión disponible": {
   "w": [
-   "ui.js:1804"
+   "ui.js:1805"
   ],
   "ctx": "return '<section class=\"updbar' + (inMenu ? \" inmenu\" : \"\") + '\"><div class=\"ui\">' + ICON.play + '</div><div class=\"grow\"><b>' + (UI.upd.name ? tr(\"Versión {v} disponible\", {v: h(UI.upd.name)}) : tr(\"Nueva versión dispon"
  },
  "Actualiza desde Google Play. Tus partidas se conservan.": {
   "w": [
-   "ui.js:1804"
+   "ui.js:1805"
   ],
   "ctx": "return '<section class=\"updbar' + (inMenu ? \" inmenu\" : \"\") + '\"><div class=\"ui\">' + ICON.play + '</div><div class=\"grow\"><b>' + (UI.upd.name ? tr(\"Versión {v} disponible\", {v: h(UI.upd.name)}) : tr(\"Nueva versión dispon"
  },
  "No se pudo cargar esa partida.": {
   "w": [
-   "ui.js:1812"
+   "ui.js:1813"
   ],
   "ctx": "}).catch(function (e) { console.error(e); toast(tr(\"No se pudo cargar esa partida.\")); refreshSlots(); });"
  },
  "La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiva.": {
   "w": [
-   "ui.js:1826"
+   "ui.js:1827"
   ],
   "ctx": "o += \"<h3>\" + tr(\"Elige tus objetivos de la temporada\") + '</h3><p class=\"lead\">' + (isMgr() ? tr(\"La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiv"
  },
  "La dificultad depende de tu media y de tu contrato con el club. Cuanto más difícil, mayor recompensa si lo cumples.": {
   "w": [
-   "ui.js:1826"
+   "ui.js:1827"
   ],
   "ctx": "o += \"<h3>\" + tr(\"Elige tus objetivos de la temporada\") + '</h3><p class=\"lead\">' + (isMgr() ? tr(\"La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiv"
  },
  "La afición te llama «{nick}»": {
   "w": [
-   "ui.js:1837"
+   "ui.js:1838"
   ],
   "ctx": "function nickLine(o) { var n = nickName(o); return n ? '<p class=\"nick\">' + tr(\"La afición te llama «{nick}»\", {nick: h(n)}) + \"</p>\" : \"\"; }"
  },
  "Forma del escudo": {
   "w": [
-   "ui.js:1841"
+   "ui.js:1842"
   ],
   "ctx": "var s = '<div><label class=\"lbl\">' + tr(\"Forma del escudo\") + '</label><div class=\"shapes\">' + CREST_SHAPES.map(function (x) {"
  },
  "Diseño del escudo": {
   "w": [
-   "ui.js:1844"
+   "ui.js:1845"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Diseño del escudo\") + '</label><div class=\"chips\">' + CREST_PATS.map(function (x) {"
  },
  "Equipación": {
   "w": [
-   "ui.js:1847"
+   "ui.js:1848"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Equipación\") + '</label><div class=\"shapes\">' + KIT_PATS.map(function (x) {"
  },
  "Color de los detalles": {
   "w": [
-   "ui.js:1850"
+   "ui.js:1851"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Color de los detalles\") + '</label><div class=\"swatches\">' + CLUB_COLS.map(function (col) { return '<button class=\"sw\" data-a=\"ccol\" data-k=\"2\" data-v=\"' + col + '\" style=\"background"
  },
  "Verificado": {
   "w": [
-   "ui.js:1870"
+   "ui.js:1871"
   ],
   "ctx": "return '<article class=\"spost' + (p.m < 0 ? \" neg\" : p.m > 0 ? \" posm\" : \"\") + '\">' + avHTML + '<div class=\"sbody\"><div class=\"shead\"><b>' + h(nm) + \"</b>\" + (ver ? '<span class=\"sver\" aria-label=\"' + h(tr(\"Verificado\"))"
  },
  "Editar perfil": {
   "w": [
-   "ui.js:1877",
-   "ui.js:1894"
+   "ui.js:1878",
+   "ui.js:1895"
   ],
   "ctx": "var s = '<div class=\"stack\"><section class=\"card sprof\"><div class=\"sban\" style=\"background:' + h(prof.col) + '\"></div><div class=\"sinfo\"><div class=\"srow\"><span class=\"sav big\" style=\"background:' + h(prof.col) + '\">' +"
  },
  "Para la afición: «{nick}»": {
   "w": [
-   "ui.js:1881"
+   "ui.js:1882"
   ],
   "ctx": "if (n) s += '<p class=\"muted\" style=\"margin:6px 0 0;font-size:13px\">' + tr(\"Para la afición: «{nick}»\", {nick: h(n)}) + \"</p>\";"
  },
  "seguidores": {
   "w": [
-   "ui.js:1882"
+   "ui.js:1883"
   ],
   "ctx": "s += '<div class=\"sfol\"><span><b>' + h(fmtFol(fol)) + \"</b> \" + tr(\"seguidores\") + \"</span><span><b>\" + (180 + (hashStr(prof.handle) % 400)) + \"</b> \" + tr(\"siguiendo\") + \"</span></div></div></section>\";"
  },
  "siguiendo": {
   "w": [
-   "ui.js:1882"
+   "ui.js:1883"
   ],
   "ctx": "s += '<div class=\"sfol\"><span><b>' + h(fmtFol(fol)) + \"</b> \" + tr(\"seguidores\") + \"</span><span><b>\" + (180 + (hashStr(prof.handle) % 400)) + \"</b> \" + tr(\"siguiendo\") + \"</span></div></div></section>\";"
  },
  "Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.": {
   "w": [
-   "ui.js:1883"
+   "ui.js:1884"
   ],
   "ctx": "if (!soc.posts.length) s += '<p class=\"empty\">' + tr(\"Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.\") + \"</p>\";"
  },
  "Usuario": {
   "w": [
-   "ui.js:1895"
+   "ui.js:1896"
   ],
   "ctx": "'<div><label class=\"lbl\" for=\"shandle\">' + tr(\"Usuario\") + '</label><input type=\"text\" id=\"shandle\" value=\"' + h(p.handle) + '\" maxlength=\"15\" autocomplete=\"off\"></div>' +"
  },
  "Biografía": {
   "w": [
-   "ui.js:1896"
+   "ui.js:1897"
   ],
   "ctx": "'<div><label class=\"lbl\" for=\"sbio\">' + tr(\"Biografía\") + '</label><textarea id=\"sbio\" maxlength=\"140\" style=\"min-height:70px\">' + h(p.bio) + \"</textarea></div>\" +"
  },
  "Avatar": {
   "w": [
-   "ui.js:1897"
+   "ui.js:1898"
   ],
   "ctx": "'<div><label class=\"lbl\">' + tr(\"Avatar\") + '</label><div class=\"chips\">' + SOC_AV.map(function (a) { return '<button class=\"chipb av\" data-a=\"socav\" data-v=\"' + h(a) + '\" aria-pressed=\"' + (p.av === a) + '\">' + h(a) + \""
  },
  "Color del perfil": {
   "w": [
-   "ui.js:1898"
+   "ui.js:1899"
   ],
   "ctx": "'<div><label class=\"lbl\">' + tr(\"Color del perfil\") + '</label><div class=\"swatches\">' + SOC_COL.map(function (c) { return '<button class=\"sw\" data-a=\"soccol\" data-v=\"' + c + '\" style=\"background:' + c + '\" aria-pressed="
  },
  "Cambios": {
   "w": [
-   "ui.js:1942"
+   "ui.js:1943"
   ],
   "ctx": "var s = '<div class=\"lsubhd\"><span class=\"lbl\">' + tr(\"Cambios\") + '</span><ol class=\"lsteps\">' +"
  },
  "Quién sale": {
   "w": [
-   "ui.js:1943"
+   "ui.js:1944"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Quién entra": {
   "w": [
-   "ui.js:1943"
+   "ui.js:1944"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Confirmar": {
   "w": [
-   "ui.js:1943"
+   "ui.js:1944"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Sale": {
   "w": [
-   "ui.js:1950"
+   "ui.js:1951"
   ],
   "ctx": "'<div class=\"lswap\"><div class=\"out\"><span class=\"ar\">↓</span><div><small>' + tr(\"Sale\") + \"</small><b>\" + h(plName(po)) + \"</b></div></div>\" +"
  },
  "Entra de {pos}": {
   "w": [
-   "ui.js:1951"
+   "ui.js:1952"
   ],
   "ctx": "'<div class=\"in\"><span class=\"ar\">↑</span><div><small>' + tr(\"Entra de {pos}\", {pos: posAb(sp)}) + \"</small><b>\" + h(plName(pi)) + \"</b>\" +"
  },
  "Posición afín ({p})": {
   "w": [
-   "ui.js:1952"
+   "ui.js:1953"
   ],
   "ctx": "(pi && pi.pos !== sp ? '<em class=\"aff\">' + tr(\"Posición afín ({p})\", {p: posAb(pi.pos)}) + \"</em>\" : \"\") + \"</div></div></div>\" +"
  },
  "Confirmar cambio": {
   "w": [
-   "ui.js:1953"
+   "ui.js:1954"
   ],
   "ctx": "'<div class=\"lprevb\"><button class=\"btn\" data-a=\"lsubx\">' + tr(\"Cancelar\") + '</button><button class=\"go\" data-a=\"lsubok\">' + tr(\"Confirmar cambio\") + \"</button></div></div>\";"
  },
  "En el campo": {
   "w": [
-   "ui.js:1956"
+   "ui.js:1957"
   ],
   "ctx": "s += '<div class=\"lsubs\"><div><div class=\"lbl\">' + tr(\"En el campo\") + \"</div>\" + L.xi.map(function (id, i) {"
  },
  "Sin suplentes": {
   "w": [
-   "ui.js:1962"
+   "ui.js:1963"
   ],
   "ctx": "if (!L.bench.length) s += '<p class=\"muted\" style=\"font-size:13px\">' + tr(\"Sin suplentes\") + \"</p>\";"
  },
  "afín": {
   "w": [
-   "ui.js:1968"
+   "ui.js:1969"
   ],
   "ctx": "return '<button class=\"lpl cand\" data-a=\"lin\" data-id=\"' + id + '\"><span class=\"pp\">' + h(posAb(p.pos)) + '</span><span class=\"ar\">↑</span>' + h(plShort(p)) + '<span class=\"fit\">' + Math.round(p.ovr) + \"</span>\" + (p.pos"
  },
  "Nadie en el banquillo puede jugar de {pos}.": {
   "w": [
-   "ui.js:1970"
+   "ui.js:1971"
   ],
   "ctx": "if (!ok.length) s += '<p class=\"muted\" style=\"font-size:12.5px\">' + tr(\"Nadie en el banquillo puede jugar de {pos}.\", {pos: posAb(sp)}) + \"</p>\";"
  },
  "{n} suplente oculto: no puede jugar de {pos}.": {
   "w": [
-   "ui.js:1972"
+   "ui.js:1973"
   ],
   "ctx": "if (hid && ok.length) s += '<p class=\"muted\" style=\"font-size:12px;margin:2px 0 0\">' + trn(hid, \"{n} suplente oculto: no puede jugar de {pos}.\", \"{n} suplentes ocultos: no pueden jugar de {pos}.\").replace(\"{pos}\", h(posA",
   "note": "plural:singular"
  },
  "{n} suplentes ocultos: no pueden jugar de {pos}.": {
   "w": [
-   "ui.js:1972"
+   "ui.js:1973"
   ],
   "ctx": "if (hid && ok.length) s += '<p class=\"muted\" style=\"font-size:12px;margin:2px 0 0\">' + trn(hid, \"{n} suplente oculto: no puede jugar de {pos}.\", \"{n} suplentes ocultos: no pueden jugar de {pos}.\").replace(\"{pos}\", h(posA",
   "note": "plural:plural"
  },
  "Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.": {
   "w": [
-   "ui.js:1975"
+   "ui.js:1976"
   ],
   "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
  },
  "Elige quién entra. Solo ves a quien puede jugar en su puesto.": {
   "w": [
-   "ui.js:1975"
+   "ui.js:1976"
   ],
   "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
  },
  "Posesión": {
   "w": [
-   "ui.js:2009",
-   "ui.js:2010"
+   "ui.js:2010",
+   "ui.js:2011"
   ],
   "ctx": "s += '<div class=\"lmo\" role=\"img\" aria-label=\"' + h(tr(\"Posesión\")) + '\"><div class=\"lmot\"><i class=\"a\" style=\"width:' + (LV.mo == null ? left : LV.mo) + '%;background:' + cl + '\"></i><i class=\"b\" style=\"background:' + c"
  },
  "Tiros": {
   "w": [
-   "ui.js:2017"
+   "ui.js:2018"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "A puerta": {
   "w": [
-   "ui.js:2017"
+   "ui.js:2018"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "Ocasiones claras": {
   "w": [
-   "ui.js:2017"
+   "ui.js:2018"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "Comentarios": {
   "w": [
-   "ui.js:2019"
+   "ui.js:2020"
   ],
   "ctx": "s += '<div class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Comentarios\") + '</div><div class=\"lfeed\">' + L.ev.slice(0, 18).map(function (e) { return '<div class=\"lev ' + e.t + (e.us === 1 ? \" us\" : e.us === 0 ? \" them\" : \"\")"
  },
  "Velocidad {n}": {
   "w": [
-   "ui.js:2022"
+   "ui.js:2023"
   ],
   "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L"
  },
  "Pausa": {
   "w": [
-   "ui.js:2022",
+   "ui.js:2023",
    "ui-shootout.js:209"
   ],
   "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L"
  },
  "Sistema": {
   "w": [
-   "ui.js:2028"
+   "ui.js:2029"
   ],
   "ctx": "s += '<div class=\"lrow\"><label class=\"lbl\" for=\"lform\">' + tr(\"Sistema\") + '</label><select id=\"lform\" data-live=\"form\">' + Object.keys(FORMATIONS).map(function (k) { return '<option value=\"' + k + '\"' + (k === L.form ? "
  },
  "Te queda {n} cambio": {
   "w": [
-   "ui.js:2029"
+   "ui.js:2030"
   ],
   "ctx": "'<span class=\"muted\" style=\"font-size:13px\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
   "note": "plural:singular"
  },
  "Te quedan {n} cambios": {
   "w": [
-   "ui.js:2029"
+   "ui.js:2030"
   ],
   "ctx": "'<span class=\"muted\" style=\"font-size:13px\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
   "note": "plural:plural"
  },
  "Volver al vestuario": {
   "w": [
-   "ui.js:2035"
+   "ui.js:2036"
   ],
   "ctx": "s += L.done ? '<button class=\"go\" data-a=\"lend\">' + tr(\"Volver al vestuario\") + \" \" + ICON.play + \"</button>\" : '<button class=\"btn wide\" data-a=\"lsim\">' + tr(\"Simular lo que queda\") + \"</button>\";"
  },
  "Velocidad de simulación": {
   "w": [
-   "ui.js:2039"
+   "ui.js:2040"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr(\"Velocidad de simulación\"),"
  },
  "GOL": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "¡GOL DE {n}!": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "¡PALO!": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "FIN DEL PRIMER TIEMPO": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "FINAL": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "FALTA": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "SAQUE DE BANDA": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "CÓRNER": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "SAQUE DE PUERTA": {
   "w": [
-   "ui.js:2040"
+   "ui.js:2041"
   ],
   "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
  },
  "El banquillo está completo: suéltalo encima de un suplente para cambiarlos.": {
   "w": [
-   "ui.js:2179",
-   "ui.js:2314"
+   "ui.js:2180",
+   "ui.js:2315"
   ],
   "ctx": "if (res === \"full\") toast(tr(\"El banquillo está completo: suéltalo encima de un suplente para cambiarlos.\"));"
  },
  "Ese jugador no puede jugar en esa posición.": {
   "w": [
-   "ui.js:2180",
-   "ui.js:2310"
+   "ui.js:2181",
+   "ui.js:2311"
   ],
   "ctx": "else if (res === \"pos\") toast(tr(\"Ese jugador no puede jugar en esa posición.\"));"
  },
  "Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.": {
   "w": [
-   "ui.js:2253",
-   "ui.js:2263"
+   "ui.js:2254",
+   "ui.js:2264"
   ],
   "ctx": "if (slotsNow().length >= MAX_SLOTS) { toast(tr(\"Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.\", {n: MAX_SLOTS})); UI.view = \"load\"; render(true); break; }"
  },
  "Partida borrada": {
   "w": [
-   "ui.js:2276"
+   "ui.js:2277"
   ],
   "ctx": "UI.sheet = null; render(false); toast(tr(\"Partida borrada\"));"
  },
  "Código copiado": {
   "w": [
-   "ui.js:2282",
-   "ui.js:2284"
+   "ui.js:2283",
+   "ui.js:2285"
   ],
   "ctx": "if (window.AndroidBridge && window.AndroidBridge.copy) { try { window.AndroidBridge.copy(code); toast(tr(\"Código copiado\")); break; } catch (err) {} }"
  },
  "Selecciona y copia el texto": {
   "w": [
-   "ui.js:2284",
-   "ui.js:2285"
+   "ui.js:2285",
+   "ui.js:2286"
   ],
   "ctx": "navigator.clipboard.writeText(code).then(function () { toast(tr(\"Código copiado\")); }, function () { ta.select(); toast(tr(\"Selecciona y copia el texto\")); });"
  },
  "No se pudo empezar la carrera de entrenador.": {
   "w": [
-   "ui.js:2294"
+   "ui.js:2295"
   ],
   "ctx": "try { startManager(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la carrera de entrenador.\")); break; }"
  },
  "No puedes fichar por ese club ahora.": {
   "w": [
-   "ui.js:2298"
+   "ui.js:2299"
   ],
   "ctx": "if (mgrTakeJob(+v)) { UI.sheet = null; UI.tab = \"club\"; persist(); render(true); } else toast(tr(\"No puedes fichar por ese club ahora.\"));"
  },
  "Hecho: {n} cambio en el once.": {
   "w": [
-   "ui.js:2307"
+   "ui.js:2308"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:singular"
  },
  "Hecho: {n} cambios en el once.": {
   "w": [
-   "ui.js:2307"
+   "ui.js:2308"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:plural"
  },
  "No hay suplentes disponibles para esas posiciones.": {
   "w": [
-   "ui.js:2307"
+   "ui.js:2308"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;"
  },
  "Once ideal y banquillo colocados": {
   "w": [
-   "ui.js:2317"
+   "ui.js:2318"
   ],
   "ctx": "case \"bestxi\": S.m.xi = mBestXI(S.m.form); S.m.bench = mBestBench(S.m.xi); persist(); render(false); toast(tr(\"Once ideal y banquillo colocados\")); break;"
  },
  "En la lista de venta: llegarán más ofertas": {
   "w": [
-   "ui.js:2321"
+   "ui.js:2322"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya no está en venta": {
   "w": [
-   "ui.js:2321"
+   "ui.js:2322"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya negociasteis en este tramo.": {
   "w": [
-   "ui.js:2322"
+   "ui.js:2323"
   ],
   "ctx": "case \"mrenew\": openPend(mgrStartRenew(id), tr(\"Ya negociasteis en este tramo.\")); break;"
  },
  "Ya hablasteis en este tramo.": {
   "w": [
-   "ui.js:2323"
+   "ui.js:2324"
   ],
   "ctx": "case \"mtalk\": openPend(mgrStartTalk(id), tr(\"Ya hablasteis en este tramo.\")); break;"
  },
  "Nadie ha preguntado por él ahora mismo.": {
   "w": [
-   "ui.js:2324"
+   "ui.js:2325"
   ],
   "ctx": "case \"msell\": openPend(mgrStartSell(id), tr(\"Nadie ha preguntado por él ahora mismo.\")); break;"
  },
  "Ningún club puede acogerle ahora.": {
   "w": [
-   "ui.js:2325"
+   "ui.js:2326"
   ],
   "ctx": "case \"mloan\": openPend(mgrStartLoan(id), tr(\"Ningún club puede acogerle ahora.\")); break;"
  },
  "Nombre cambiado": {
   "w": [
-   "ui.js:2330"
+   "ui.js:2331"
   ],
   "ctx": "if (mgrRename(id, nf ? nf.value : \"\", nl ? nl.value : \"\")) { persist(); UI.sheet = {k: \"pl\", id: id}; renderSheet(); render(false); toast(tr(\"Nombre cambiado\")); }"
  },
  "Escribe al menos un nombre.": {
   "w": [
-   "ui.js:2331"
+   "ui.js:2332"
   ],
   "ctx": "else toast(tr(\"Escribe al menos un nombre.\"));"
  },
  "Ahora no se puede negociar.": {
   "w": [
-   "ui.js:2335",
+   "ui.js:2336",
    "ui-mgrplus.js:50"
   ],
   "ctx": "case \"mbid\": openPend(mgrStartBid(b.getAttribute(\"data-id\")), tr(\"Ahora no se puede negociar.\")); break;"
  },
  "Nuevo informe de ojeadores": {
   "w": [
-   "ui.js:2336"
+   "ui.js:2337"
   ],
   "ctx": "case \"mscout\": var mk = S.m.mk; if (mk.open && !mk.ref) { mk.ref = true; mk.list = mk.list.filter(function (t) { return t.done; }).concat(mgrScoutList(12)); persist(); render(false); toast(tr(\"Nuevo informe de ojeadores\""
  },
  "Objetivos fijados. ¡A por ellos!": {
   "w": [
-   "ui.js:2346"
+   "ui.js:2347"
   ],
   "ctx": "case \"objok\": if (confirmObjChoice()) { persist(); toast(tr(\"Objetivos fijados. ¡A por ellos!\")); render(true); } break;"
  },
  "Perfil actualizado": {
   "w": [
-   "ui.js:2371"
+   "ui.js:2372"
   ],
   "ctx": "UI.sheet = null; persist(); render(false); toast(tr(\"Perfil actualizado\"));"
  },
  "Plantilla nueva generada": {
   "w": [
-   "ui.js:2390"
+   "ui.js:2391"
   ],
   "ctx": "case \"redraft\": clubRedraft(); persist(); render(false); toast(tr(\"Plantilla nueva generada\")); break;"
  },
  "No se pudo empezar la temporada.": {
   "w": [
-   "ui.js:2392"
+   "ui.js:2393"
   ],
   "ctx": "try { clubStart(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la temporada.\")); break; }"
  },
@@ -38705,7 +38910,7 @@
  "Ojeadores": {
   "w": [
    "ui-mgrplus.js:20",
-   "ui-guide.js:34"
+   "ui-guide.js:36"
   ],
   "ctx": "var m = S.m, sc = mpSc(), regs = mpRegions(), o = '<details class=\"card mpcard fold\" data-fold=\"scouts\"' + (foldOpen(\"scouts\", !sc.l.length) ? \" open\" : \"\") + '><summary class=\"head\"><span class=\"tag real\"><span class=\"d"
  },
@@ -39151,501 +39356,538 @@
   ],
   "ctx": "{t: tr(\"Bajas en el once\"), b: [tr(\"Si un lesionado o sancionado sigue en tu once, verás un aviso rojo.\"), tr(\"Pulsa «Corregir automáticamente» o cámbialo tú.\"), tr(\"Si juegas sin corregirlo, entra un suplente de urgenci"
  },
- "Leer el campo 2D": {
+ "La semana de trabajo": {
+  "w": [
+   "ui-guide.js:23",
+   "ui-week.js:21"
+  ],
+  "ctx": "{t: tr(\"La semana de trabajo\"), b: [tr(\"En «Inicio» eliges la carga de entrenamiento: intensa hace progresar más, suave descansa y previene lesiones.\"), tr(\"Prepara cada partido según el rival: tu segundo entrenador te d"
+ },
+ "En «Inicio» eliges la carga de entrenamiento: intensa hace progresar más, suave descansa y previene lesiones.": {
   "w": [
    "ui-guide.js:23"
+  ],
+  "ctx": "{t: tr(\"La semana de trabajo\"), b: [tr(\"En «Inicio» eliges la carga de entrenamiento: intensa hace progresar más, suave descansa y previene lesiones.\"), tr(\"Prepara cada partido según el rival: tu segundo entrenador te d"
+ },
+ "Prepara cada partido según el rival: tu segundo entrenador te dice su estilo y, con 3 estrellas o más, su punto débil.": {
+  "w": [
+   "ui-guide.js:23"
+  ],
+  "ctx": "{t: tr(\"La semana de trabajo\"), b: [tr(\"En «Inicio» eliges la carga de entrenamiento: intensa hace progresar más, suave descansa y previene lesiones.\"), tr(\"Prepara cada partido según el rival: tu segundo entrenador te d"
+ },
+ "Mejora a tu cuerpo técnico con el presupuesto de fichajes: segundo, preparador físico y médico.": {
+  "w": [
+   "ui-guide.js:23"
+  ],
+  "ctx": "{t: tr(\"La semana de trabajo\"), b: [tr(\"En «Inicio» eliges la carga de entrenamiento: intensa hace progresar más, suave descansa y previene lesiones.\"), tr(\"Prepara cada partido según el rival: tu segundo entrenador te d"
+ },
+ "En la clasificación, pulsa «Copas y torneos» para ver cualquier competición: fase de liga, grupos y todas las eliminatorias.": {
+  "w": [
+   "ui-guide.js:24"
+  ],
+  "ctx": "{t: tr(\"Copas y torneos\"), b: [tr(\"En la clasificación, pulsa «Copas y torneos» para ver cualquier competición: fase de liga, grupos y todas las eliminatorias.\"), tr(\"Tus competiciones salen arriba; el resto, en la lista"
+ },
+ "Tus competiciones salen arriba; el resto, en la lista desplegable.": {
+  "w": [
+   "ui-guide.js:24"
+  ],
+  "ctx": "{t: tr(\"Copas y torneos\"), b: [tr(\"En la clasificación, pulsa «Copas y torneos» para ver cualquier competición: fase de liga, grupos y todas las eliminatorias.\"), tr(\"Tus competiciones salen arriba; el resto, en la lista"
+ },
+ "Leer el campo 2D": {
+  "w": [
+   "ui-guide.js:25"
   ],
   "ctx": "{t: tr(\"Leer el campo 2D\"), b: [tr(\"Cada punto es un jugador con su dorsal y los colores de su equipo.\"), tr(\"Las estelas muestran pases y tiros; el texto de abajo narra la jugada.\"), tr(\"Faltas, fueras de juego y tarjet"
  },
  "Cada punto es un jugador con su dorsal y los colores de su equipo.": {
   "w": [
-   "ui-guide.js:23"
+   "ui-guide.js:25"
   ],
   "ctx": "{t: tr(\"Leer el campo 2D\"), b: [tr(\"Cada punto es un jugador con su dorsal y los colores de su equipo.\"), tr(\"Las estelas muestran pases y tiros; el texto de abajo narra la jugada.\"), tr(\"Faltas, fueras de juego y tarjet"
  },
  "Las estelas muestran pases y tiros; el texto de abajo narra la jugada.": {
   "w": [
-   "ui-guide.js:23"
+   "ui-guide.js:25"
   ],
   "ctx": "{t: tr(\"Leer el campo 2D\"), b: [tr(\"Cada punto es un jugador con su dorsal y los colores de su equipo.\"), tr(\"Las estelas muestran pases y tiros; el texto de abajo narra la jugada.\"), tr(\"Faltas, fueras de juego y tarjet"
  },
  "Faltas, fueras de juego y tarjetas se marcan sobre el césped: destello, línea del fuera de juego y tarjeta sobre el jugador.": {
   "w": [
-   "ui-guide.js:23"
+   "ui-guide.js:25"
   ],
   "ctx": "{t: tr(\"Leer el campo 2D\"), b: [tr(\"Cada punto es un jugador con su dorsal y los colores de su equipo.\"), tr(\"Las estelas muestran pases y tiros; el texto de abajo narra la jugada.\"), tr(\"Faltas, fueras de juego y tarjet"
  },
  "Prensa y moral": {
   "w": [
-   "ui-guide.js:25"
+   "ui-guide.js:27"
   ],
   "ctx": "{k: \"press\", ic: \"🎙️\", n: tr(\"Prensa y moral\"), cards: ["
  },
  "Ruedas de prensa": {
   "w": [
-   "ui-guide.js:26"
+   "ui-guide.js:28"
   ],
   "ctx": "{t: tr(\"Ruedas de prensa\"), b: [tr(\"Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…\"), tr(\"Debajo de cada respuesta ves su efecto antes de elegir.\"), tr(\"Las respuestas valientes suben "
  },
  "Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…": {
   "w": [
-   "ui-guide.js:26"
+   "ui-guide.js:28"
   ],
   "ctx": "{t: tr(\"Ruedas de prensa\"), b: [tr(\"Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…\"), tr(\"Debajo de cada respuesta ves su efecto antes de elegir.\"), tr(\"Las respuestas valientes suben "
  },
  "Debajo de cada respuesta ves su efecto antes de elegir.": {
   "w": [
-   "ui-guide.js:26"
+   "ui-guide.js:28"
   ],
   "ctx": "{t: tr(\"Ruedas de prensa\"), b: [tr(\"Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…\"), tr(\"Debajo de cada respuesta ves su efecto antes de elegir.\"), tr(\"Las respuestas valientes suben "
  },
  "Las respuestas valientes suben la ilusión, pero pueden enfadar a la directiva o al rival.": {
   "w": [
-   "ui-guide.js:26"
+   "ui-guide.js:28"
   ],
   "ctx": "{t: tr(\"Ruedas de prensa\"), b: [tr(\"Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…\"), tr(\"Debajo de cada respuesta ves su efecto antes de elegir.\"), tr(\"Las respuestas valientes suben "
  },
  "Con la moral alta, tus jugadores rinden más.": {
   "w": [
-   "ui-guide.js:27"
+   "ui-guide.js:29"
   ],
   "ctx": "{t: tr(\"Moral del vestuario\"), b: [tr(\"Con la moral alta, tus jugadores rinden más.\"), tr(\"Baja con derrotas, promesas incumplidas, poco protagonismo o alinear bajas.\"), tr(\"Sube con victorias, charlas acertadas y minuto"
  },
  "Baja con derrotas, promesas incumplidas, poco protagonismo o alinear bajas.": {
   "w": [
-   "ui-guide.js:27"
+   "ui-guide.js:29"
   ],
   "ctx": "{t: tr(\"Moral del vestuario\"), b: [tr(\"Con la moral alta, tus jugadores rinden más.\"), tr(\"Baja con derrotas, promesas incumplidas, poco protagonismo o alinear bajas.\"), tr(\"Sube con victorias, charlas acertadas y minuto"
  },
  "Sube con victorias, charlas acertadas y minutos para quien los pide.": {
   "w": [
-   "ui-guide.js:27"
+   "ui-guide.js:29"
   ],
   "ctx": "{t: tr(\"Moral del vestuario\"), b: [tr(\"Con la moral alta, tus jugadores rinden más.\"), tr(\"Baja con derrotas, promesas incumplidas, poco protagonismo o alinear bajas.\"), tr(\"Sube con victorias, charlas acertadas y minuto"
  },
  "Directiva, afición y prensa": {
   "w": [
-   "ui-guide.js:28"
+   "ui-guide.js:30"
   ],
   "ctx": "{t: tr(\"Directiva, afición y prensa\"), b: [tr(\"Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.\"), tr(\"Afición: aplaude los resultados y los gestos con el club.\"), tr(\"Prensa: te trata mejor si"
  },
  "Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.": {
   "w": [
-   "ui-guide.js:28"
+   "ui-guide.js:30"
   ],
   "ctx": "{t: tr(\"Directiva, afición y prensa\"), b: [tr(\"Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.\"), tr(\"Afición: aplaude los resultados y los gestos con el club.\"), tr(\"Prensa: te trata mejor si"
  },
  "Afición: aplaude los resultados y los gestos con el club.": {
   "w": [
-   "ui-guide.js:28"
+   "ui-guide.js:30"
   ],
   "ctx": "{t: tr(\"Directiva, afición y prensa\"), b: [tr(\"Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.\"), tr(\"Afición: aplaude los resultados y los gestos con el club.\"), tr(\"Prensa: te trata mejor si"
  },
  "Prensa: te trata mejor si eres claro y no la ignoras.": {
   "w": [
-   "ui-guide.js:28"
+   "ui-guide.js:30"
   ],
   "ctx": "{t: tr(\"Directiva, afición y prensa\"), b: [tr(\"Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.\"), tr(\"Afición: aplaude los resultados y los gestos con el club.\"), tr(\"Prensa: te trata mejor si"
  },
  "Motes": {
   "w": [
-   "ui-guide.js:29"
+   "ui-guide.js:31"
   ],
   "ctx": "{t: tr(\"Motes\"), b: [tr(\"Si destacas (o metes la pata), la grada y las redes te pondrán un mote.\"), tr(\"Los periodistas lo usarán en sus preguntas.\")]}"
  },
  "Si destacas (o metes la pata), la grada y las redes te pondrán un mote.": {
   "w": [
-   "ui-guide.js:29"
+   "ui-guide.js:31"
   ],
   "ctx": "{t: tr(\"Motes\"), b: [tr(\"Si destacas (o metes la pata), la grada y las redes te pondrán un mote.\"), tr(\"Los periodistas lo usarán en sus preguntas.\")]}"
  },
  "Los periodistas lo usarán en sus preguntas.": {
   "w": [
-   "ui-guide.js:29"
+   "ui-guide.js:31"
   ],
   "ctx": "{t: tr(\"Motes\"), b: [tr(\"Si destacas (o metes la pata), la grada y las redes te pondrán un mote.\"), tr(\"Los periodistas lo usarán en sus preguntas.\")]}"
  },
  "Mercado y ojeo": {
   "w": [
-   "ui-guide.js:31"
+   "ui-guide.js:33"
   ],
   "ctx": "{k: \"mkt\", ic: \"💼\", n: tr(\"Mercado y ojeo\"), cards: ["
  },
  "Lista de traspasos": {
   "w": [
-   "ui-guide.js:32"
+   "ui-guide.js:34"
   ],
   "ctx": "{t: tr(\"Lista de traspasos\"), b: [tr(\"Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.\"), tr(\"La etiqueta de cada uno te dice qué aporta.\"), tr(\"Cuanto más mejore al "
  },
  "Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.": {
   "w": [
-   "ui-guide.js:32"
+   "ui-guide.js:34"
   ],
   "ctx": "{t: tr(\"Lista de traspasos\"), b: [tr(\"Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.\"), tr(\"La etiqueta de cada uno te dice qué aporta.\"), tr(\"Cuanto más mejore al "
  },
  "La etiqueta de cada uno te dice qué aporta.": {
   "w": [
-   "ui-guide.js:32"
+   "ui-guide.js:34"
   ],
   "ctx": "{t: tr(\"Lista de traspasos\"), b: [tr(\"Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.\"), tr(\"La etiqueta de cada uno te dice qué aporta.\"), tr(\"Cuanto más mejore al "
  },
  "Cuanto más mejore al equipo, más caro será el traspaso y más alto el sueldo, siempre según tu presupuesto.": {
   "w": [
-   "ui-guide.js:32"
+   "ui-guide.js:34"
   ],
   "ctx": "{t: tr(\"Lista de traspasos\"), b: [tr(\"Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.\"), tr(\"La etiqueta de cada uno te dice qué aporta.\"), tr(\"Cuanto más mejore al "
  },
  "Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.": {
   "w": [
-   "ui-guide.js:33"
+   "ui-guide.js:35"
   ],
   "ctx": "{t: tr(\"Negociar\"), b: [tr(\"Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.\"), tr(\"Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.\"), tr(\""
  },
  "Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.": {
   "w": [
-   "ui-guide.js:33"
+   "ui-guide.js:35"
   ],
   "ctx": "{t: tr(\"Negociar\"), b: [tr(\"Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.\"), tr(\"Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.\"), tr(\""
  },
  "Ofertas muy bajas llenan el medidor de frustración; si llega al 100 %, se rompe la negociación.": {
   "w": [
-   "ui-guide.js:33"
+   "ui-guide.js:35"
   ],
   "ctx": "{t: tr(\"Negociar\"), b: [tr(\"Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.\"), tr(\"Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.\"), tr(\""
  },
  "El porcentaje solo marca 100 % cuando igualas lo que piden.": {
   "w": [
-   "ui-guide.js:33"
+   "ui-guide.js:35"
   ],
   "ctx": "{t: tr(\"Negociar\"), b: [tr(\"Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.\"), tr(\"Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.\"), tr(\""
  },
  "Contrata ojeadores con más estrellas para informes más precisos sobre el potencial.": {
   "w": [
-   "ui-guide.js:34"
+   "ui-guide.js:36"
   ],
   "ctx": "{t: tr(\"Ojeadores\"), b: [tr(\"Contrata ojeadores con más estrellas para informes más precisos sobre el potencial.\"), tr(\"Envíalos a una región: traerán jugadores de esa zona que encajan en tus necesidades.\"), tr(\"Sus info"
  },
  "Envíalos a una región: traerán jugadores de esa zona que encajan en tus necesidades.": {
   "w": [
-   "ui-guide.js:34"
+   "ui-guide.js:36"
   ],
   "ctx": "{t: tr(\"Ojeadores\"), b: [tr(\"Contrata ojeadores con más estrellas para informes más precisos sobre el potencial.\"), tr(\"Envíalos a una región: traerán jugadores de esa zona que encajan en tus necesidades.\"), tr(\"Sus info"
  },
  "Sus informes llegan aunque el mercado esté cerrado.": {
   "w": [
-   "ui-guide.js:34"
+   "ui-guide.js:36"
   ],
   "ctx": "{t: tr(\"Ojeadores\"), b: [tr(\"Contrata ojeadores con más estrellas para informes más precisos sobre el potencial.\"), tr(\"Envíalos a una región: traerán jugadores de esa zona que encajan en tus necesidades.\"), tr(\"Sus info"
  },
  "Cláusulas y cesiones": {
   "w": [
-   "ui-guide.js:35"
+   "ui-guide.js:37"
   ],
   "ctx": "{t: tr(\"Cláusulas y cesiones\"), b: [tr(\"Si alguien paga la cláusula de un jugador, se va sin que puedas impedirlo.\"), tr(\"Cesiones: con opción de compra decides tú al final; con obligación, la compra es automática.\")]}"
  },
  "Si alguien paga la cláusula de un jugador, se va sin que puedas impedirlo.": {
   "w": [
-   "ui-guide.js:35"
+   "ui-guide.js:37"
   ],
   "ctx": "{t: tr(\"Cláusulas y cesiones\"), b: [tr(\"Si alguien paga la cláusula de un jugador, se va sin que puedas impedirlo.\"), tr(\"Cesiones: con opción de compra decides tú al final; con obligación, la compra es automática.\")]}"
  },
  "Cesiones: con opción de compra decides tú al final; con obligación, la compra es automática.": {
   "w": [
-   "ui-guide.js:35"
+   "ui-guide.js:37"
   ],
   "ctx": "{t: tr(\"Cláusulas y cesiones\"), b: [tr(\"Si alguien paga la cláusula de un jugador, se va sin que puedas impedirlo.\"), tr(\"Cesiones: con opción de compra decides tú al final; con obligación, la compra es automática.\")]}"
  },
  "Modo jugador/a y portero/a": {
   "w": [
-   "ui-guide.js:37"
+   "ui-guide.js:39"
   ],
   "ctx": "{k: \"ply\", ic: \"⚽\", n: tr(\"Modo jugador/a y portero/a\"), cards: ["
  },
  "Momentos del partido": {
   "w": [
-   "ui-guide.js:38"
+   "ui-guide.js:40"
   ],
   "ctx": "{t: tr(\"Momentos del partido\"), b: [tr(\"En las jugadas clave decides qué hacer; tus atributos cambian la probabilidad de éxito.\"), tr(\"Al terminar ves el resultado del partido.\")]},"
  },
  "En las jugadas clave decides qué hacer; tus atributos cambian la probabilidad de éxito.": {
   "w": [
-   "ui-guide.js:38"
+   "ui-guide.js:40"
   ],
   "ctx": "{t: tr(\"Momentos del partido\"), b: [tr(\"En las jugadas clave decides qué hacer; tus atributos cambian la probabilidad de éxito.\"), tr(\"Al terminar ves el resultado del partido.\")]},"
  },
  "Al terminar ves el resultado del partido.": {
   "w": [
-   "ui-guide.js:38"
+   "ui-guide.js:40"
   ],
   "ctx": "{t: tr(\"Momentos del partido\"), b: [tr(\"En las jugadas clave decides qué hacer; tus atributos cambian la probabilidad de éxito.\"), tr(\"Al terminar ves el resultado del partido.\")]},"
  },
  "Penaltis y la barra de tensión": {
   "w": [
-   "ui-guide.js:39"
+   "ui-guide.js:41"
   ],
   "ctx": "{t: tr(\"Penaltis y la barra de tensión\"), b: [tr(\"Elige la zona y para la barra de potencia dentro de la franja ideal.\"), tr(\"Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.\""
  },
  "Elige la zona y para la barra de potencia dentro de la franja ideal.": {
   "w": [
-   "ui-guide.js:39"
+   "ui-guide.js:41"
   ],
   "ctx": "{t: tr(\"Penaltis y la barra de tensión\"), b: [tr(\"Elige la zona y para la barra de potencia dentro de la franja ideal.\"), tr(\"Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.\""
  },
  "Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.": {
   "w": [
-   "ui-guide.js:39"
+   "ui-guide.js:41"
   ],
   "ctx": "{t: tr(\"Penaltis y la barra de tensión\"), b: [tr(\"Elige la zona y para la barra de potencia dentro de la franja ideal.\"), tr(\"Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.\""
  },
  "Como portero/a, eliges hacia dónde tirarte y cuándo.": {
   "w": [
-   "ui-guide.js:39"
+   "ui-guide.js:41"
   ],
   "ctx": "{t: tr(\"Penaltis y la barra de tensión\"), b: [tr(\"Elige la zona y para la barra de potencia dentro de la franja ideal.\"), tr(\"Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.\""
  },
  "Faltas directas": {
   "w": [
-   "ui-guide.js:40"
+   "ui-guide.js:42"
   ],
   "ctx": "{t: tr(\"Faltas directas\"), b: [tr(\"Como lanzador eliges dónde apuntar y la potencia; como portero/a, colocas la barrera y cuántos jugadores la forman.\")]},"
  },
  "Como lanzador eliges dónde apuntar y la potencia; como portero/a, colocas la barrera y cuántos jugadores la forman.": {
   "w": [
-   "ui-guide.js:40"
+   "ui-guide.js:42"
   ],
   "ctx": "{t: tr(\"Faltas directas\"), b: [tr(\"Como lanzador eliges dónde apuntar y la potencia; como portero/a, colocas la barrera y cuántos jugadores la forman.\")]},"
  },
  "Puedes pedir el dorsal que quieras. Si lo lleva un compañero, quizá tengas que esperar a la próxima temporada.": {
   "w": [
-   "ui-guide.js:41"
+   "ui-guide.js:43"
   ],
   "ctx": "{t: tr(\"Dorsal\"), b: [tr(\"Puedes pedir el dorsal que quieras. Si lo lleva un compañero, quizá tengas que esperar a la próxima temporada.\")]},"
  },
  "Vida fuera del campo": {
   "w": [
-   "ui-guide.js:42"
+   "ui-guide.js:44"
   ],
   "ctx": "{t: tr(\"Vida fuera del campo\"), b: [tr(\"Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.\"), tr(\"Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un ti"
  },
  "Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.": {
   "w": [
-   "ui-guide.js:42"
+   "ui-guide.js:44"
   ],
   "ctx": "{t: tr(\"Vida fuera del campo\"), b: [tr(\"Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.\"), tr(\"Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un ti"
  },
  "Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un tiempo.": {
   "w": [
-   "ui-guide.js:42"
+   "ui-guide.js:44"
   ],
   "ctx": "{t: tr(\"Vida fuera del campo\"), b: [tr(\"Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.\"), tr(\"Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un ti"
  },
  "Tienes un rival asignado: compara tu carrera con la suya en el panel.": {
   "w": [
-   "ui-guide.js:42"
+   "ui-guide.js:44"
   ],
   "ctx": "{t: tr(\"Vida fuera del campo\"), b: [tr(\"Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.\"), tr(\"Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un ti"
  },
  "Glosario": {
   "w": [
-   "ui-guide.js:44"
+   "ui-guide.js:46"
   ],
   "ctx": "{k: \"gloss\", ic: \"📖\", n: tr(\"Glosario\"), gloss: true}"
  },
  "Aceleración y velocidad punta: ganar carreras al espacio y llegar al contraataque.": {
   "w": [
-   "ui-guide.js:49"
+   "ui-guide.js:51"
   ],
   "ctx": "[tr(\"Ritmo\"), tr(\"Aceleración y velocidad punta: ganar carreras al espacio y llegar al contraataque.\")],"
  },
  "Precisión y potencia al rematar; pesa mucho en goles y penaltis.": {
   "w": [
-   "ui-guide.js:50"
+   "ui-guide.js:52"
   ],
   "ctx": "[tr(\"Tiro\"), tr(\"Precisión y potencia al rematar; pesa mucho en goles y penaltis.\")],"
  },
  "Visión y precisión: asistencias y jugadas que acaban en ocasión.": {
   "w": [
-   "ui-guide.js:51"
+   "ui-guide.js:53"
   ],
   "ctx": "[tr(\"Pase\"), tr(\"Visión y precisión: asistencias y jugadas que acaban en ocasión.\")],"
  },
  "Control y desborde en el uno contra uno.": {
   "w": [
-   "ui-guide.js:52"
+   "ui-guide.js:54"
   ],
   "ctx": "[tr(\"Regate\"), tr(\"Control y desborde en el uno contra uno.\")],"
  },
  "Anticipación, entradas y marcaje; evita ocasiones del rival.": {
   "w": [
-   "ui-guide.js:53"
+   "ui-guide.js:55"
   ],
   "ctx": "[tr(\"Defensa\"), tr(\"Anticipación, entradas y marcaje; evita ocasiones del rival.\")],"
  },
  "Fuerza y resistencia: aguantar choques, lesionarse menos y no cansarse.": {
   "w": [
-   "ui-guide.js:54"
+   "ui-guide.js:56"
   ],
   "ctx": "[tr(\"Físico\"), tr(\"Fuerza y resistencia: aguantar choques, lesionarse menos y no cansarse.\")],"
  },
  "Alcance del portero/a en los disparos a las esquinas.": {
   "w": [
-   "ui-guide.js:55"
+   "ui-guide.js:57"
   ],
   "ctx": "[tr(\"Estirada\"), tr(\"Alcance del portero/a en los disparos a las esquinas.\")],"
  },
  "Seguridad para atrapar o despejar los tiros.": {
   "w": [
-   "ui-guide.js:56"
+   "ui-guide.js:58"
   ],
   "ctx": "[tr(\"Paradas\"), tr(\"Seguridad para atrapar o despejar los tiros.\")],"
  },
  "Juego con los pies y saques largos para iniciar jugadas.": {
   "w": [
-   "ui-guide.js:57"
+   "ui-guide.js:59"
   ],
   "ctx": "[tr(\"Saque\"), tr(\"Juego con los pies y saques largos para iniciar jugadas.\")],"
  },
  "Reacción a tiros cercanos y penaltis.": {
   "w": [
-   "ui-guide.js:58"
+   "ui-guide.js:60"
   ],
   "ctx": "[tr(\"Reflejos\"), tr(\"Reacción a tiros cercanos y penaltis.\")],"
  },
  "Salidas del portero/a y rapidez para cerrar el ángulo.": {
   "w": [
-   "ui-guide.js:59"
+   "ui-guide.js:61"
   ],
   "ctx": "[tr(\"Velocidad\"), tr(\"Salidas del portero/a y rapidez para cerrar el ángulo.\")],"
  },
  "Posicionamiento bajo palos: estar en el sitio antes de que llegue el tiro.": {
   "w": [
-   "ui-guide.js:60"
+   "ui-guide.js:62"
   ],
   "ctx": "[tr(\"Colocación\"), tr(\"Posicionamiento bajo palos: estar en el sitio antes de que llegue el tiro.\")],"
  },
  "Nivel general del jugador o jugadora, de 1 a 99.": {
   "w": [
-   "ui-guide.js:61"
+   "ui-guide.js:63"
   ],
   "ctx": "[tr(\"Media\"), tr(\"Nivel general del jugador o jugadora, de 1 a 99.\")],"
  },
  "Hasta dónde puede llegar su media; los ojeadores te dan una horquilla.": {
   "w": [
-   "ui-guide.js:62"
+   "ui-guide.js:64"
   ],
   "ctx": "[tr(\"Potencial\"), tr(\"Hasta dónde puede llegar su media; los ojeadores te dan una horquilla.\")],"
  },
  "Cómo llega a los partidos según sus últimas actuaciones.": {
   "w": [
-   "ui-guide.js:63"
+   "ui-guide.js:65"
   ],
   "ctx": "[tr(\"Forma\"), tr(\"Cómo llega a los partidos según sus últimas actuaciones.\")],"
  },
  "Cansancio acumulado; por debajo de la mitad rinde peor y se lesiona más.": {
   "w": [
-   "ui-guide.js:64"
+   "ui-guide.js:66"
   ],
   "ctx": "[tr(\"Estado físico\"), tr(\"Cansancio acumulado; por debajo de la mitad rinde peor y se lesiona más.\")],"
  },
  "Ánimo del jugador o jugadora; con moral alta rinde más.": {
   "w": [
-   "ui-guide.js:65"
+   "ui-guide.js:67"
   ],
   "ctx": "[tr(\"Moral\"), tr(\"Ánimo del jugador o jugadora; con moral alta rinde más.\")],"
  },
  "Lo bien que se entiende el equipo; sube con estabilidad y victorias.": {
   "w": [
-   "ui-guide.js:66"
+   "ui-guide.js:68"
   ],
   "ctx": "[tr(\"Química\"), tr(\"Lo bien que se entiende el equipo; sube con estabilidad y victorias.\")],"
  },
  "Clave, Importante, Rotación, Suplente o Promesa: lo que espera jugar. Si no se cumple, baja su moral.": {
   "w": [
-   "ui-guide.js:67"
+   "ui-guide.js:69"
   ],
   "ctx": "[tr(\"Rol\"), tr(\"Clave, Importante, Rotación, Suplente o Promesa: lo que espera jugar. Si no se cumple, baja su moral.\")],"
  },
  "Tu reputación como míster: abre las puertas de clubes más grandes.": {
   "w": [
-   "ui-guide.js:68"
+   "ui-guide.js:70"
   ],
   "ctx": "[tr(\"Prestigio\"), tr(\"Tu reputación como míster: abre las puertas de clubes más grandes.\")],"
  },
  "Lo conocido que eres como futbolista; atrae ofertas, patrocinios y prensa.": {
   "w": [
-   "ui-guide.js:69"
+   "ui-guide.js:71"
   ],
   "ctx": "[tr(\"Fama\"), tr(\"Lo conocido que eres como futbolista; atrae ofertas, patrocinios y prensa.\")],"
  },
  "Tensión del momento: estrecha la franja ideal en penaltis y minijuegos.": {
   "w": [
-   "ui-guide.js:70"
+   "ui-guide.js:72"
   ],
   "ctx": "[tr(\"Presión\"), tr(\"Tensión del momento: estrecha la franja ideal en penaltis y minijuegos.\")],"
  },
  "Frustración": {
   "w": [
-   "ui-guide.js:71"
+   "ui-guide.js:73"
   ],
   "ctx": "[tr(\"Frustración\"), tr(\"En una negociación, el enfado del club o del jugador con tus ofertas.\")],"
  },
  "En una negociación, el enfado del club o del jugador con tus ofertas.": {
   "w": [
-   "ui-guide.js:71"
+   "ui-guide.js:73"
   ],
   "ctx": "[tr(\"Frustración\"), tr(\"En una negociación, el enfado del club o del jugador con tus ofertas.\")],"
  },
  "Cláusula": {
   "w": [
-   "ui-guide.js:72"
+   "ui-guide.js:74"
   ],
   "ctx": "[tr(\"Cláusula\"), tr(\"Precio que libera a un jugador sin negociar.\")],"
  },
  "Precio que libera a un jugador sin negociar.": {
   "w": [
-   "ui-guide.js:72"
+   "ui-guide.js:74"
   ],
   "ctx": "[tr(\"Cláusula\"), tr(\"Precio que libera a un jugador sin negociar.\")],"
  },
  "Bloque defensivo": {
   "w": [
-   "ui-guide.js:73"
+   "ui-guide.js:75"
   ],
   "ctx": "[tr(\"Bloque defensivo\"), tr(\"Altura de tu línea de defensas: baja, media o alta.\")],"
  },
  "Altura de tu línea de defensas: baja, media o alta.": {
   "w": [
-   "ui-guide.js:73"
+   "ui-guide.js:75"
   ],
   "ctx": "[tr(\"Bloque defensivo\"), tr(\"Altura de tu línea de defensas: baja, media o alta.\")],"
  },
  "Posición afín": {
   "w": [
-   "ui-guide.js:74"
+   "ui-guide.js:76"
   ],
   "ctx": "[tr(\"Posición afín\"), tr(\"Una posición de la misma línea o vecina a la suya; rinde algo menos.\")]"
  },
  "Una posición de la misma línea o vecina a la suya; rinde algo menos.": {
   "w": [
-   "ui-guide.js:74"
+   "ui-guide.js:76"
   ],
   "ctx": "[tr(\"Posición afín\"), tr(\"Una posición de la misma línea o vecina a la suya; rinde algo menos.\")]"
  },
  "Tutorial": {
   "w": [
-   "ui-guide.js:98"
+   "ui-guide.js:100"
   ],
   "ctx": "G.el.innerHTML = '<div class=\"gde-in\"><header class=\"gde-top\"><div><span class=\"eyebrow\">' + tr(\"Tutorial\") + '</span><h2>' + tr(\"Guía del juego\") + '</h2></div><button class=\"gde-x\" data-g=\"close\" aria-label=\"' + h(tr(\""
  },
  "Buscar un atributo o término…": {
   "w": [
-   "ui-guide.js:109"
+   "ui-guide.js:111"
   ],
   "ctx": "body.innerHTML = '<input id=\"gdeq\" class=\"gde-q\" type=\"search\" placeholder=\"' + h(tr(\"Buscar un atributo o término…\")) + '\" autocomplete=\"off\"><dl class=\"gde-gl\"></dl>';"
  },
  "Nada coincide con tu búsqueda.": {
   "w": [
-   "ui-guide.js:111"
+   "ui-guide.js:113"
   ],
   "ctx": "body.querySelector(\".gde-gl\").innerHTML = l.length ? l.map(function (g) { return \"<div><dt>\" + h(g[0]) + \"</dt><dd>\" + h(g[1]) + \"</dd></div>\"; }).join(\"\") : '<p class=\"muted\">' + tr(\"Nada coincide con tu búsqueda.\") + \""
  },
@@ -39895,6 +40137,207 @@
    "ui-steps.js:118"
   ],
   "ctx": "U.actions.tutoff = function () { S.tut = S.tut || {seen: {}}; S.tut.off = 1; U.persist(); U.render(false); U.toast(tr(\"Guía cerrada. La tienes siempre en «Más» → «Guía del juego».\")); };"
+ },
+ "en juego": {
+  "w": [
+   "ui-cups.js:38"
+  ],
+  "ctx": "out += '<div class=\"cupround\"><div class=\"lbl\">' + h(tr(rd.n)) + (i === c.ko.ri && c.win < 0 ? ' · <span class=\"led\">' + tr(\"en juego\") + \"</span>\" : \"\") + '</div><ul class=\"cupties\">' + ties.map(function (t) { return ti"
+ },
+ "Y {n} eliminatoria más.": {
+  "w": [
+   "ui-cups.js:39"
+  ],
+  "ctx": "(more ? '<p class=\"muted cupmore\">' + trn(more, \"Y {n} eliminatoria más.\", \"Y {n} eliminatorias más.\") + \"</p>\" : \"\") + \"</div>\";",
+  "note": "plural:singular"
+ },
+ "Y {n} eliminatorias más.": {
+  "w": [
+   "ui-cups.js:39"
+  ],
+  "ctx": "(more ? '<p class=\"muted cupmore\">' + trn(more, \"Y {n} eliminatoria más.\", \"Y {n} eliminatorias más.\") + \"</p>\" : \"\") + \"</div>\";",
+  "note": "plural:plural"
+ },
+ "Siguiente ronda: {r}": {
+  "w": [
+   "ui-cups.js:42"
+  ],
+  "ctx": "if (c.win < 0 && nx) out = '<p class=\"muted cupmore\">' + tr(\"Siguiente ronda: {r}\", {r: h(tr(nx.n))}) + \"</p>\" + out;"
+ },
+ "Esta temporada no la disputas: aquí solo se guarda el campeón.": {
+  "w": [
+   "ui-cups.js:49"
+  ],
+  "ctx": "if (c.typ === \"lite\") return o + '<p class=\"muted\">' + tr(\"Esta temporada no la disputas: aquí solo se guarda el campeón.\") + \"</p>\";"
+ },
+ "Aún no se ha jugado ningún partido.": {
+  "w": [
+   "ui-cups.js:53"
+  ],
+  "ctx": "return o || '<p class=\"muted\">' + tr(\"Aún no se ha jugado ningún partido.\") + \"</p>\";"
+ },
+ "No hay copas ni torneos en juego ahora mismo.": {
+  "w": [
+   "ui-cups.js:57"
+  ],
+  "ctx": "if (!all.length) return '<section class=\"card\"><p class=\"empty\">' + tr(\"No hay copas ni torneos en juego ahora mismo.\") + \"</p></section>\";"
+ },
+ "Tus competiciones": {
+  "w": [
+   "ui-cups.js:60",
+   "ui-cups.js:62"
+  ],
+  "ctx": "var chips = g.mine.length ? '<div class=\"cupchips\" role=\"group\" aria-label=\"' + h(tr(\"Tus competiciones\")) + '\">' + g.mine.map(function (k) { return '<button class=\"chipb\" data-a=\"cupsel\" data-v=\"' + h(k) + '\" aria-press"
+ },
+ "Todas las competiciones": {
+  "w": [
+   "ui-cups.js:62"
+  ],
+  "ctx": "var sel = '<label class=\"lbl\" for=\"cupsel\">' + tr(\"Todas las competiciones\") + '</label><select id=\"cupsel\">' + opt(tr(\"Tus competiciones\"), g.mine) + opt(tr(\"Clubes\"), g.club) + opt(tr(\"Selecciones\"), g.nat) + opt(tr(\"C"
+ },
+ "Clubes": {
+  "w": [
+   "ui-cups.js:62"
+  ],
+  "ctx": "var sel = '<label class=\"lbl\" for=\"cupsel\">' + tr(\"Todas las competiciones\") + '</label><select id=\"cupsel\">' + opt(tr(\"Tus competiciones\"), g.mine) + opt(tr(\"Clubes\"), g.club) + opt(tr(\"Selecciones\"), g.nat) + opt(tr(\"C"
+ },
+ "Selecciones": {
+  "w": [
+   "ui-cups.js:62"
+  ],
+  "ctx": "var sel = '<label class=\"lbl\" for=\"cupsel\">' + tr(\"Todas las competiciones\") + '</label><select id=\"cupsel\">' + opt(tr(\"Tus competiciones\"), g.mine) + opt(tr(\"Clubes\"), g.club) + opt(tr(\"Selecciones\"), g.nat) + opt(tr(\"C"
+ },
+ "Copas nacionales": {
+  "w": [
+   "ui-cups.js:62"
+  ],
+  "ctx": "var sel = '<label class=\"lbl\" for=\"cupsel\">' + tr(\"Todas las competiciones\") + '</label><select id=\"cupsel\">' + opt(tr(\"Tus competiciones\"), g.mine) + opt(tr(\"Clubes\"), g.club) + opt(tr(\"Selecciones\"), g.nat) + opt(tr(\"C"
+ },
+ "Participas": {
+  "w": [
+   "ui-cups.js:64"
+  ],
+  "ctx": "'<section class=\"card\"><div class=\"head\"><h3>' + h(trComp(c.n)) + '</h3><span class=\"eyebrow\">' + (U.involved(c) ? tr(\"Participas\") : c.typ === \"lite\" ? tr(\"Terminada\") : tr(\"Sigue en juego\")) + \"</span></div>\" + cupDeta"
+ },
+ "Terminada": {
+  "w": [
+   "ui-cups.js:64"
+  ],
+  "ctx": "'<section class=\"card\"><div class=\"head\"><h3>' + h(trComp(c.n)) + '</h3><span class=\"eyebrow\">' + (U.involved(c) ? tr(\"Participas\") : c.typ === \"lite\" ? tr(\"Terminada\") : tr(\"Sigue en juego\")) + \"</span></div>\" + cupDeta"
+ },
+ "Sigue en juego": {
+  "w": [
+   "ui-cups.js:64"
+  ],
+  "ctx": "'<section class=\"card\"><div class=\"head\"><h3>' + h(trComp(c.n)) + '</h3><span class=\"eyebrow\">' + (U.involved(c) ? tr(\"Participas\") : c.typ === \"lite\" ? tr(\"Terminada\") : tr(\"Sigue en juego\")) + \"</span></div>\" + cupDeta"
+ },
+ "{n} de 5": {
+  "w": [
+   "ui-week.js:7"
+  ],
+  "ctx": "function stars(n) { var s = \"\"; for (var i = 1; i <= 5; i++) s += i <= n ? \"★\" : \"☆\"; return '<span class=\"wkst\" aria-label=\"' + h(tr(\"{n} de 5\", {n: n})) + '\">' + s + \"</span>\"; }"
+ },
+ "Próximo rival de liga": {
+  "w": [
+   "ui-week.js:13"
+  ],
+  "ctx": "return '<div class=\"wkopp\">' + U.crest(opp) + '<div class=\"grow\"><div class=\"eyebrow\">' + tr(\"Próximo rival de liga\") + \"</div><b>\" + h(clubName(opp)) + \"</b><small>\" +"
+ },
+ "Equipo {st}.": {
+  "w": [
+   "ui-week.js:14"
+  ],
+  "ctx": "tr(\"Equipo {st}.\", {st: h(tr(st.n))}) + (rp.weak ? \" \" + tr(\"Punto débil: {w}.\", {w: h(tr(rp.weak))}) : \" \" + tr(\"Con un segundo de 3 estrellas sabrás su punto débil.\")) + \"</small>\" +"
+ },
+ "Con un segundo de 3 estrellas sabrás su punto débil.": {
+  "w": [
+   "ui-week.js:14"
+  ],
+  "ctx": "tr(\"Equipo {st}.\", {st: h(tr(st.n))}) + (rp.weak ? \" \" + tr(\"Punto débil: {w}.\", {w: h(tr(rp.weak))}) : \" \" + tr(\"Con un segundo de 3 estrellas sabrás su punto débil.\")) + \"</small>\" +"
+ },
+ "Carga {l} · {p}": {
+  "w": [
+   "ui-week.js:20"
+  ],
+  "ctx": "var sum = tr(\"Carga {l} · {p}\", {l: tr(WK_LOAD[w.load].n).toLowerCase(), p: tr(P.n)});"
+ },
+ "Carga de entrenamiento": {
+  "w": [
+   "ui-week.js:23"
+  ],
+  "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Carga de entrenamiento\") + \"</label>\" + seg(\"wkload\", w.load, WK_LOAD.map(function (x, i) { return [i, tr(x.n)]; })) + '<p class=\"muted wkd\">' + h(tr(WK_LOAD[w.load].d)) + \"</p></div"
+ },
+ "Preparación del partido": {
+  "w": [
+   "ui-week.js:24"
+  ],
+  "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Preparación del partido\") + '</label><div class=\"wkchips\">' + Object.keys(WK_PREP).map(function (k) { return '<button class=\"chipb\" data-a=\"wkprep\" data-v=\"' + k + '\" aria-pressed=\"'"
+ },
+ "Estilo y roles": {
+  "w": [
+   "ui-week.js:25"
+  ],
+  "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Estilo y roles\") + \"</label>\" +"
+ },
+ "Bloque bajo": {
+  "w": [
+   "ui-week.js:26"
+  ],
+  "ctx": "'<label class=\"wktg\"><input type=\"checkbox\" data-wk=\"low\"' + (w.low ? \" checked\" : \"\") + \"><span><b>\" + tr(\"Bloque bajo\") + \"</b><small>\" + tr(\"Todos atrás y a la contra. Encajas mucho menos, sobre todo ante rivales mejo"
+ },
+ "Todos atrás y a la contra. Encajas mucho menos, sobre todo ante rivales mejores, pero creas poco.": {
+  "w": [
+   "ui-week.js:26"
+  ],
+  "ctx": "'<label class=\"wktg\"><input type=\"checkbox\" data-wk=\"low\"' + (w.low ? \" checked\" : \"\") + \"><span><b>\" + tr(\"Bloque bajo\") + \"</b><small>\" + tr(\"Todos atrás y a la contra. Encajas mucho menos, sobre todo ante rivales mejo"
+ },
+ "Laterales invertidos": {
+  "w": [
+   "ui-week.js:27"
+  ],
+  "ctx": "'<label class=\"wktg\"><input type=\"checkbox\" data-wk=\"inv\"' + (w.inv ? \" checked\" : \"\") + \"><span><b>\" + tr(\"Laterales invertidos\") + \"</b><small>\" + tr(\"Tus laterales se meten por dentro: más control y ocasiones, pero su"
+ },
+ "Tus laterales se meten por dentro: más control y ocasiones, pero sufres ante equipos de contraataque.": {
+  "w": [
+   "ui-week.js:27"
+  ],
+  "ctx": "'<label class=\"wktg\"><input type=\"checkbox\" data-wk=\"inv\"' + (w.inv ? \" checked\" : \"\") + \"><span><b>\" + tr(\"Laterales invertidos\") + \"</b><small>\" + tr(\"Tus laterales se meten por dentro: más control y ocasiones, pero su"
+ },
+ "Cuerpo técnico": {
+  "w": [
+   "ui-week.js:28"
+  ],
+  "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Cuerpo técnico\") + '</label><ul class=\"wkstaff\">' + Object.keys(WK_STAFF).map(function (k) {"
+ },
+ "Al máximo": {
+  "w": [
+   "ui-week.js:31"
+  ],
+  "ctx": "(max ? '<span class=\"muted wkmax\">' + tr(\"Al máximo\") + \"</span>\" : '<button class=\"btn sm\" data-a=\"wkhire\" data-v=\"' + k + '\">' + tr(\"Mejorar · {c}\", {c: fmtMoney(wkStaffCost(k))}) + \"</button>\") + \"</li>\";"
+ },
+ "Mejorar · {c}": {
+  "w": [
+   "ui-week.js:31"
+  ],
+  "ctx": "(max ? '<span class=\"muted wkmax\">' + tr(\"Al máximo\") + \"</span>\" : '<button class=\"btn sm\" data-a=\"wkhire\" data-v=\"' + k + '\">' + tr(\"Mejorar · {c}\", {c: fmtMoney(wkStaffCost(k))}) + \"</button>\") + \"</li>\";"
+ },
+ "Se paga del presupuesto de fichajes ({b} disponibles). Tu cuerpo técnico te sigue si cambias de club.": {
+  "w": [
+   "ui-week.js:32"
+  ],
+  "ctx": "}).join(\"\") + '</ul><p class=\"muted wkd\">' + tr(\"Se paga del presupuesto de fichajes ({b} disponibles). Tu cuerpo técnico te sigue si cambias de club.\", {b: fmtMoney(S.m.bud)}) + \"</p></div>\";"
+ },
+ "No te llega el presupuesto: cuesta {c}.": {
+  "w": [
+   "ui-week.js:40"
+  ],
+  "ctx": "if (r.poor) U.toast(tr(\"No te llega el presupuesto: cuesta {c}.\", {c: fmtMoney(r.cost)}));"
+ },
+ "{n}: ahora {s} estrellas.": {
+  "w": [
+   "ui-week.js:41"
+  ],
+  "ctx": "else if (r.ok) { U.toast(tr(\"{n}: ahora {s} estrellas.\", {n: tr(WK_STAFF[v].n), s: r.lv})); U.edgeFlash(true); save(); }"
  },
  "España": {
   "w": [
@@ -44431,14 +44874,6 @@
    "evento:m_lesion"
   ],
   "ctx": "Título de la decisión «m_lesion»"
- },
- "Médico": {
-  "w": [
-   "evento:m_lesion",
-   "evento:mx_prevencion",
-   "evento:my_psicologo"
-  ],
-  "ctx": "Categoría (etiqueta corta) de decisiones"
  },
  "La prensa señala a un jugador": {
   "w": [

@@ -1160,3 +1160,38 @@ html.fs2 body { zoom: 1.25; }
 .achi:not(.on) .achic { filter: grayscale(1); font-size: 20px; }
 .achy { font-size: 12px; color: var(--mist); flex: none; }
 details.a11y > summary { font-weight: 700; }
+/* ===== 2.9 · Copas y torneos ===== */
+.compseg { margin-bottom: 2px; }
+.cupchips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 4px; scrollbar-width: none; }
+.cupchips::-webkit-scrollbar { display: none; }
+.chipb { flex: none; border: 1px solid var(--line); background: var(--tunnel); color: var(--chalk); border-radius: 999px; padding: 7px 12px; font: 600 13.5px/1.2 var(--f-body); cursor: pointer; }
+.chipb[aria-pressed="true"] { background: var(--led); color: var(--led-ink); border-color: var(--led); }
+#cupsel { width: 100%; }
+.cupround { margin: 4px 0 12px; }
+.cupties { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.cuptie { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 10px; background: var(--tunnel); font-size: 13.5px; }
+.cuptie.me { outline: 1.5px solid var(--led); }
+.cuptie > span { min-width: 0; display: flex; align-items: center; gap: 6px; overflow: hidden; white-space: nowrap; }
+.cuptie > span > span { overflow: hidden; text-overflow: ellipsis; }
+.cuptie .ct-b { justify-content: flex-end; flex-direction: row-reverse; }
+.cuptie .ct-s { font: 700 14px/1.2 var(--f-body); justify-content: center; flex-direction: column; gap: 0; text-align: center; }
+.cuptie .ct-s small { font-size: 10.5px; color: var(--mist); font-weight: 600; }
+.cuptie .w { font-weight: 700; } .cuptie .l { opacity: .55; }
+.cupmore { font-size: 13px; margin: 4px 0 8px; }
+.cupchamp { margin: 0 0 10px; }
+.led { color: var(--led); }
+/* ===== 2.9 · La semana de trabajo ===== */
+.wkbody { margin-top: 10px; }
+.wkd { font-size: 13px; margin: 6px 0 0; }
+.wkopp { display: flex; gap: 12px; align-items: center; padding: 10px; border-radius: 12px; background: var(--tunnel); }
+.wkopp .grow > b { display: block; } .wkopp small { display: block; color: var(--mist); font-size: 13px; margin-top: 2px; }
+.wkopp small.wkrec { color: var(--chalk); }
+.wkchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.wktg { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; cursor: pointer; }
+.wktg input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--led); flex: none; }
+.wktg b { display: block; } .wktg small { display: block; color: var(--mist); font-size: 13px; }
+.wkstaff { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.wkstaff li { display: flex; gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--line); border-radius: 12px; }
+.wkstaff small { display: block; color: var(--mist); font-size: 12.5px; }
+.wkst { color: var(--led); letter-spacing: 1px; font-size: 13px; }
+.wkmax { font-size: 12.5px; }

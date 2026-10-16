@@ -1103,8 +1103,9 @@
     return s + "</select>";
   }
   function tabComp() {
-    var li = curLeague(), me = myClub();
-    var s = '<div class="stack"><section class="card"><div class="head"><h3>' + flag(W.lg[li].ci) + " " + h(lgName(li)) + '</h3><span class="eyebrow">' + tr("Jornada {a}/{b}", {a: Math.min(S.L[li].md, S.L[li].N), b: S.L[li].N}) + "</span></div>" + leagueTable(li, me) + "</section>";
+    var li = curLeague(), me = myClub(), seg = UIX.cupsView && S.C ? '<div class="seg compseg"><button data-a="compseg" data-v="lg" aria-pressed="' + (UI.compSeg !== "cup") + '">' + tr("Liga") + '</button><button data-a="compseg" data-v="cup" aria-pressed="' + (UI.compSeg === "cup") + '">' + tr("Copas y torneos") + "</button></div>" : "";
+    if (seg && UI.compSeg === "cup") return '<div class="stack">' + seg + UIX.cupsView() + "</div>";
+    var s = '<div class="stack">' + seg + '<section class="card"><div class="head"><h3>' + flag(W.lg[li].ci) + " " + h(lgName(li)) + '</h3><span class="eyebrow">' + tr("Jornada {a}/{b}", {a: Math.min(S.L[li].md, S.L[li].N), b: S.L[li].N}) + "</span></div>" + leagueTable(li, me) + "</section>";
     var keys = Object.keys(S.C).filter(function (k) { return involved(S.C[k]); });
     keys.sort(function (a, b) { return (S.C[b].lvl || 0) - (S.C[a].lvl || 0); });
     keys.forEach(function (k) { s += compBox(S.C[k]); });
@@ -2480,7 +2481,7 @@
   })();
 
   /* helpers para los módulos ui-*.js */
-  Object.assign(UIX, {h: h, render: render, persist: persist, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag,
+  Object.assign(UIX, {h: h, render: render, persist: persist, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
     chip: chip, edgeFlash: edgeFlash, confetti: confetti, openLive: function () { openLive(); }, isMgr: isMgr, ui: function () { return UI; }, icon: ICON,
     open: function (k, d) { UI.sheet = Object.assign({k: k}, d || {}); renderSheet(); }, slot: slot, choose: function (i) { doChoose(i); }});
 
