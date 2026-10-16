@@ -5,6 +5,7 @@
     android:versionName="3.3">
     <uses-sdk android:minSdkVersion="24" android:targetSdkVersion="36" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <queries>
         <package android:name="com.android.vending" />
         <intent>
@@ -29,5 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".Remind" android:exported="false" />
     </application>
 </manifest>

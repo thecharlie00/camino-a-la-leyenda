@@ -12,7 +12,7 @@ rm -rf build-aab && mkdir -p build-aab/gen build-aab/obj build-aab/module assets
 cp ../dist/index-noads.html assets/index.html
 $AAPT2 compile --dir res -o build-aab/res.zip
 $AAPT2 link --proto-format -o build-aab/base.apk -I "$SDK" --manifest AndroidManifest.xml -R build-aab/res.zip -A assets --auto-add-overlay --java build-aab/gen
-javac -nowarn -source 8 -target 8 -bootclasspath "$SDK" -classpath "$SDK" -d build-aab/obj build-aab/gen/com/caminoleyenda/app/R.java src/com/caminoleyenda/app/MainActivity.java 2>build-aab/javac.log || { cat build-aab/javac.log; exit 1; }
+javac -nowarn -source 8 -target 8 -bootclasspath "$SDK" -classpath "$SDK" -d build-aab/obj build-aab/gen/com/caminoleyenda/app/R.java src/com/caminoleyenda/app/MainActivity.java src/com/caminoleyenda/app/Remind.java 2>build-aab/javac.log || { cat build-aab/javac.log; exit 1; }
 grep -v warning build-aab/javac.log | grep -v "^Note:" || true
 if [ -n "$D8" ]; then "$D8" --min-api 24 --lib "$SDK" --output build-aab $(find build-aab/obj -name '*.class'); else dalvik-exchange --dex --min-sdk-version=24 --output=build-aab/classes.dex build-aab/obj; fi
 cd build-aab/module && unzip -q ../base.apk && mkdir -p manifest dex && mv AndroidManifest.xml manifest/ && cp ../classes.dex dex/ && zip -q -r ../base.zip . && cd ../..

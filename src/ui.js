@@ -50,6 +50,8 @@
   }
   function crest(ci, big) {
     var c = W.clubs[ci]; if (!c) return "";
+    var ed = typeof edClub === "function" ? edClub(ci) : null;
+    if (ed && (ed.ab || ed.col)) { var col0 = ed.col ? [ed.col[0] || c.col[0], ed.col[1] || c.col[1]] : c.col, ab0 = ed.ab || c.ab; if (c.cs && typeof crestSVG === "function") return crestRaw(col0, ab0, big, c.cs); if (typeof crestAuto === "function") return crestAuto(c.n0 || c.n, col0, ab0, big); return crestRaw(col0, ab0, big); }
     if (c.cs && typeof crestSVG === "function") return crestRaw(c.col, c.ab, big, c.cs);
     if (typeof crestAuto === "function") return crestAuto(c.n0 || c.n, c.col, c.ab, big);
     return crestRaw(c.col, c.ab, big);
@@ -457,6 +459,7 @@
     if (!mgr) rows.push(["tab", "mundo", ICON.globe, tr("Mundo"), tr("Otras ligas, selecciones y rivales")]);
     if (typeof achCount === "function") { achCheck(); var ac = achCount(); rows.push(["ach", "", ICON.medal, tr("Logros"), tr("{n} de {m} conseguidos", {n: ac[0], m: ac[1]})]); }
     if (typeof diaryAdd === "function") rows.push(["diary", "", ICON.route, tr("Diario de tu carrera"), tr("Tus partidos, fichajes y momentos clave")]);
+    if (typeof edOf === "function") rows.push(["editor", "", ICON.gear, tr("Editor de la partida"), tr("Nombres, escudos y competiciones")]);
     rows.push(["guide", "", ICON.book, tr("Guía del juego"), tr("Cómo funciona cada parte")]);
     rows.push(["menu", "", ICON.gear, tr("Ajustes y partidas"), tr("Idioma, ritmo, guardar y cargar")]);
     return '<div class="stack"><h2 class="scrt">' + tr("Más") + '</h2><div class="mlist">' + rows.map(function (r) {
@@ -1420,7 +1423,7 @@
       s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 3}) + '</div><h2 style="font-size:34px;text-transform:uppercase">' + tr("Tu talento") + '</h2></section><div class="opts">';
       var desc = {promesa: tr("Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti."), joya: tr("Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba."), elegido: tr("Empiezas con 65. Todos esperan mucho de ti, y eso también pesa."), misterio: tr("Tu media inicial es una sorpresa. Nadie sabe qué futbolista puedes llegar a ser.")};
       Object.keys(TALENT).forEach(function (k) { s += '<button class="pickrow" data-a="cset" data-k="talent" data-v="' + k + '" aria-pressed="' + (c.talent === k) + '"><div class="grow"><b>' + h(TALENT[k].n) + "</b><small>" + h(desc[k]) + "</small></div></button>"; });
-      s += '</div><div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[tr("Tranquilo"), 0], [tr("Normal"), 1], [tr("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + x[0] + "</button>"; }).join("") + '</div><p class="muted" style="font-size:13px;margin:6px 0 0">' + evDesc(c.ev, false) + "</p></div>";
+      s += '</div><div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[tr("Tranquilo"), 0], [tr("Normal"), 1], [tr("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + x[0] + "</button>"; }).join("") + '</div><p class="muted" style="font-size:13px;margin:6px 0 0">' + evDesc(c.ev, false) + "</p></div>" + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:13px;margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
     } else {
       s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 4}) + '</div><h2 style="font-size:34px;text-transform:uppercase">' + tr("Tu primer club") + "</h2></section>";
       s += '<div class="seg"><button data-a="cset" data-k="mode" data-v="rand" aria-pressed="' + (c.mode === "rand") + '">' + tr("Cantera de mi país") + '</button><button data-a="cset" data-k="mode" data-v="pick" aria-pressed="' + (c.mode === "pick") + '">' + tr("Elegir club") + "</button></div>";
@@ -1477,7 +1480,7 @@
   }
   function diffFields(c, desc) {
     var s = '<div class="opts">' + DIFFS.map(function (n, i) { return '<button class="pickrow" data-a="cset" data-k="diff" data-v="' + i + '" aria-pressed="' + (c.diff === i) + '"><div class="grow"><b>' + h(tr(n)) + "</b><small>" + h(tr(desc[i])) + "</small></div></button>"; }).join("") + "</div>";
-    s += '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:13px;margin:6px 0 0">' + evDesc(c.ev, true) + "</p></div>";
+    s += '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:13px;margin:6px 0 0">' + evDesc(c.ev, true) + "</p></div>" + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:13px;margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
     return s;
   }
   function leagueField(c) {
@@ -1584,9 +1587,9 @@
     var c = UI.cr;
     switchGame(function () {
       try {
-        if (c.kind === "mgr") newManagerCareer({fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, club: c.club, g: c.g, chal: c.mmode === "chal" ? c.chal : null});
-        else if (c.kind === "club") newClubCareer({role: c.role, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, cn: c.cn.trim(), ab: (c.ab || clubAbbr(c.cn)).toUpperCase().slice(0, 4), col: c.col, repl: c.club, g: c.g, crest: c.crest, kit: c.kit});
-        else newCareer({fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, nat2: c.nat2 || null, pos: c.pos, foot: c.foot, age: c.age, talent: c.talent, club: c.club, ev: c.ev, g: c.g});
+        if (c.kind === "mgr") newManagerCareer({quick: !!c.quick, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, club: c.club, g: c.g, chal: c.mmode === "chal" ? c.chal : null});
+        else if (c.kind === "club") newClubCareer({quick: !!c.quick, role: c.role, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, cn: c.cn.trim(), ab: (c.ab || clubAbbr(c.cn)).toUpperCase().slice(0, 4), col: c.col, repl: c.club, g: c.g, crest: c.crest, kit: c.kit});
+        else newCareer({quick: !!c.quick, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, nat2: c.nat2 || null, pos: c.pos, foot: c.foot, age: c.age, talent: c.talent, club: c.club, ev: c.ev, g: c.g});
       } catch (e) { console.error(e); toast(tr("No se pudo crear la partida.")); return; }
       UI.cr = null; UI.exp = {}; UI.wl = null; UI.flash = null; UI.sheet = null;
       UI.view = S.ph === "draft" ? "draft" : "game"; UI.tab = isMgr() ? "club" : "carrera";
@@ -2485,7 +2488,7 @@
   })();
 
   /* helpers para los módulos ui-*.js */
-  Object.assign(UIX, {h: h, render: render, persist: persist, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, leagueField: function (c) { return leagueField(c); }, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
+  Object.assign(UIX, {h: h, render: render, persist: persist, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, pack: function (j) { return pack(j); }, importCode: function (t) { UI.sheet = {k: "import"}; importCode(t); }, b64: function (u) { return b64(u); }, leagueField: function (c) { return leagueField(c); }, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
     chip: chip, edgeFlash: edgeFlash, confetti: confetti, openLive: function () { openLive(); }, isMgr: isMgr, ui: function () { return UI; }, icon: ICON,
     open: function (k, d) { UI.sheet = Object.assign({k: k}, d || {}); renderSheet(); }, slot: slot, choose: function (i) { doChoose(i); }});
 

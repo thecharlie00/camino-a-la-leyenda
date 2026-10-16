@@ -38,6 +38,19 @@ public class MainActivity extends Activity {
 
     /* Puente con el juego (JavaScript). */
     public class Bridge {
+        /* versión 3.5: recordatorio local si el jugador lo activa */
+        @JavascriptInterface
+        public void remind(String title, String text, int minutes) { Remind.schedule(MainActivity.this, title, text, minutes); }
+        @JavascriptInterface
+        public void cancelRemind() { Remind.cancel(MainActivity.this); }
+        @JavascriptInterface
+        public void askNotify() {
+            runOnUiThread(new Runnable() { public void run() {
+                if (android.os.Build.VERSION.SDK_INT >= 33 && checkSelfPermission("android.permission.POST_NOTIFICATIONS") != android.content.pm.PackageManager.PERMISSION_GRANTED)
+                    requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, 7);
+            } });
+        }
+
         @JavascriptInterface
         public void copy(final String text) {
             if (text == null || text.length() > 2000000) return;

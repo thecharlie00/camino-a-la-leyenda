@@ -7,7 +7,7 @@ SDK=/usr/lib/android-sdk/platforms/android-23/android.jar
 rm -rf build && mkdir -p build/gen build/obj build/apk assets
 cp ../dist/index-noads.html assets/index.html
 aapt package -f -m -J build/gen -M AndroidManifest.xml -S res -I "$SDK"
-javac -nowarn -source 8 -target 8 -bootclasspath "$SDK" -classpath "$SDK" -d build/obj build/gen/com/caminoleyenda/app/R.java src/com/caminoleyenda/app/MainActivity.java 2>&1 | grep -v "warning" || true
+javac -nowarn -source 8 -target 8 -bootclasspath "$SDK" -classpath "$SDK" -d build/obj build/gen/com/caminoleyenda/app/R.java src/com/caminoleyenda/app/MainActivity.java src/com/caminoleyenda/app/Remind.java 2>&1 | grep -v "warning" || true
 dalvik-exchange --dex --min-sdk-version=24 --output=build/apk/classes.dex build/obj
 aapt package -f -M AndroidManifest.xml -S res -A assets -I "$SDK" -F build/unsigned.apk
 (cd build/apk && aapt add ../unsigned.apk classes.dex >/dev/null)
