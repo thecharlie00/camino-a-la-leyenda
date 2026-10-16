@@ -104,7 +104,7 @@ EV({id: "s33_pique", tipo: "aleatoria", cat: "Vestuario", title: "Pique con un c
 
 /* ---------- familia y momentos personales ---------- */
 EV({id: "s33_bebe", tipo: "aleatoria", cat: "Familia", title: "Vas a ser padre", w: 1, once: true,
-  when: function (x) { return x.inSeason && x.age >= 25 && x.age <= 36; },
+  when: function (x) { return x.inSeason && x.age >= 25 && x.age <= 36 && S.g !== "f"; },
   text: function () { return tr("Tu pareja sale de cuentas justo la semana de un partido importante. El club te deja decidir."); },
   opts: function () { return [
     {t: tr("Estar en el parto aunque te pierdas el partido"), ok: {txt: tr("Nace tu primer hijo. No hay partido que valga más que esto."), fx: {mor: 12, coach: -2}}},

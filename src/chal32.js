@@ -10,6 +10,7 @@ var CHAL = {
 };
 var MEDAL_IC = {gold: "🥇", silver: "🥈", bronze: "🥉"};
 var MEDAL_N = {gold: N_("Oro"), silver: N_("Plata"), bronze: N_("Bronce")};
+function medalW(m) { var t = tr(MEDAL_N[m]); return typeof LANG !== "undefined" && LANG === "de" ? t : t.toLowerCase(); }
 function chalOn() { return !!(S && S.mode === "mgr" && S.ch && !S.ch.res); }
 function chalClub(k, li) {
   var cl = W.lg[li].cl0.slice().sort(function (a, b) { return W.clubs[b].r0 - W.clubs[a].r0; });
@@ -37,7 +38,7 @@ function chalEnd(medal, why) {
   var c = S.ch; if (!c || c.res) return;
   c.res = {medal: medal, y: S.yr, why: why || ""};
   var name = tr(CHAL[c.k].n);
-  if (medal) notify(MEDAL_IC[medal] + " " + tr("Desafío «{n}» superado: medalla de {m}.", {n: name, m: tr(MEDAL_N[medal]).toLowerCase()}), "good");
+  if (medal) notify(MEDAL_IC[medal] + " " + tr("Desafío «{n}» superado: medalla de {m}.", {n: name, m: medalW(medal)}), "good");
   else notify(tr("Desafío «{n}» no superado. Puedes seguir la partida igualmente.", {n: name}), "bad");
   diaryAdd("chal", {k: c.k, m: medal || ""});
 }

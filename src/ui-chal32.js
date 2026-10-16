@@ -28,7 +28,7 @@
     if (S.ch) {
       var x = CHAL[S.ch.k], r = S.ch.res;
       o += '<section class="card chcard"><div class="head"><span class="tag hot"><span class="dot"></span>' + tr("Desafío") + '</span><span class="eyebrow">' + h(tr(x.n)) + "</span></div>" +
-        (r ? '<p class="chres">' + (r.medal ? MEDAL_IC[r.medal] + " " + tr("Superado: medalla de {m}.", {m: h(tr(MEDAL_N[r.medal]).toLowerCase())}) : tr("No superado. La partida sigue: puedes intentarlo de nuevo en otra.")) + "</p>"
+        (r ? '<p class="chres">' + (r.medal ? MEDAL_IC[r.medal] + " " + tr("Superado: medalla de {m}.", {m: h(medalW(r.medal))}) : tr("No superado. La partida sigue: puedes intentarlo de nuevo en otra.")) + "</p>"
           : '<p class="muted" style="margin:6px 0 0;font-size:13.5px">' + h(tr(x.goal)) + "</p>" + (S.ch.k === "cant" ? '<p class="muted" style="margin:4px 0 0;font-size:13px">' + tr("Temporada {n} de 3. El mercado de fichajes está cerrado para ti.", {n: Math.min(3, S.m.seasons.length - S.ch.n0 + 1)}) + "</p>" : "")) + "</section>";
     }
     var cr = S.m.crisis || 0;
@@ -75,7 +75,7 @@
       case "pmatch": return ["⚽", (a.g >= 3 ? tr("{n} goles tuyos", {n: a.g}) + " · " : "") + tr("{a}-{b} ante el {club}", {a: a.a, b: a.b, club: a.nat ? natName(a.c) : cn(a.c)}) + (a.fin ? " · " + tr("final") : "")];
       case "rv": return ["🔥", tr("Nace la rivalidad con el {club}.", {club: cn(a.c)})];
       case "crisis": return ["⚠️", tr("El club entra en crisis.")];
-      case "chal": return [a.m ? MEDAL_IC[a.m] : "❌", a.m ? tr("Desafío «{n}»: medalla de {m}.", {n: tr(CHAL[a.k].n), m: tr(MEDAL_N[a.m]).toLowerCase()}) : tr("Desafío «{n}» no superado.", {n: tr(CHAL[a.k].n)})];
+      case "chal": return [a.m ? MEDAL_IC[a.m] : "❌", a.m ? tr("Desafío «{n}»: medalla de {m}.", {n: tr(CHAL[a.k].n), m: medalW(a.m)}) : tr("Desafío «{n}» no superado.", {n: tr(CHAL[a.k].n)})];
       case "ach": var A = (typeof ACH_P !== "undefined" ? ACH_P.concat(ACH_M) : []).filter(function (x) { return x[0] === a.id; })[0]; return A ? [A[1], tr("Logro: {n}", {n: tr(A[2])})] : null;
     }
     return null;
