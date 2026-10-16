@@ -1213,3 +1213,7 @@ details.a11y > summary { font-weight: 700; }
 .dlist { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
 .dlist li { display: flex; gap: 10px; align-items: baseline; font-size: 14px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .dlist li > span:first-child { flex: none; width: 22px; text-align: center; }
+/* ===== 3.3 · Historias de vestuario ===== */
+.farewell { border-color: var(--gold); background: linear-gradient(180deg, rgba(232,195,90,.12), var(--stand) 60%); text-align: center; }
+.farewell h2 { margin: 6px 0 8px; }
+.fwq { margin: 6px 0 0; padding: 12px 14px; border-left: 3px solid var(--gold); background: var(--tunnel); border-radius: 8px; font-style: italic; text-align: left; }
