@@ -1,0 +1,212 @@
+code	nombre (castellano)	confederación
+ES	España	UEFA
+FR	Francia	UEFA
+ENG	Inglaterra	UEFA
+PT	Portugal	UEFA
+DE	Alemania	UEFA
+NL	Países Bajos	UEFA
+IT	Italia	UEFA
+BE	Bélgica	UEFA
+HR	Croacia	UEFA
+CH	Suiza	UEFA
+DK	Dinamarca	UEFA
+AT	Austria	UEFA
+TR	Turquía	UEFA
+NO	Noruega	UEFA
+SE	Suecia	UEFA
+UA	Ucrania	UEFA
+PL	Polonia	UEFA
+RS	Serbia	UEFA
+RU	Rusia	UEFA
+CZ	Chequia	UEFA
+HU	Hungría	UEFA
+SCO	Escocia	UEFA
+GR	Grecia	UEFA
+WAL	Gales	UEFA
+SK	Eslovaquia	UEFA
+RO	Rumanía	UEFA
+GE	Georgia	UEFA
+SI	Eslovenia	UEFA
+IE	Irlanda	UEFA
+AL	Albania	UEFA
+BA	Bosnia y Herzegovina	UEFA
+NIR	Irlanda del Norte	UEFA
+IS	Islandia	UEFA
+FI	Finlandia	UEFA
+IL	Israel	UEFA
+MK	Macedonia del Norte	UEFA
+ME	Montenegro	UEFA
+BG	Bulgaria	UEFA
+XK	Kosovo	UEFA
+KZ	Kazajistán	UEFA
+AM	Armenia	UEFA
+BY	Bielorrusia	UEFA
+LU	Luxemburgo	UEFA
+CY	Chipre	UEFA
+AZ	Azerbaiyán	UEFA
+LT	Lituania	UEFA
+EE	Estonia	UEFA
+LV	Letonia	UEFA
+FO	Islas Feroe	UEFA
+MD	Moldavia	UEFA
+MT	Malta	UEFA
+AD	Andorra	UEFA
+LI	Liechtenstein	UEFA
+GI	Gibraltar	UEFA
+SM	San Marino	UEFA
+AR	Argentina	CONMEBOL
+BR	Brasil	CONMEBOL
+UY	Uruguay	CONMEBOL
+CO	Colombia	CONMEBOL
+EC	Ecuador	CONMEBOL
+PY	Paraguay	CONMEBOL
+CL	Chile	CONMEBOL
+PE	Perú	CONMEBOL
+VE	Venezuela	CONMEBOL
+BO	Bolivia	CONMEBOL
+MX	México	CONCACAF
+US	Estados Unidos	CONCACAF
+CA	Canadá	CONCACAF
+PA	Panamá	CONCACAF
+CR	Costa Rica	CONCACAF
+JM	Jamaica	CONCACAF
+HN	Honduras	CONCACAF
+CW	Curazao	CONCACAF
+SV	El Salvador	CONCACAF
+HT	Haití	CONCACAF
+GT	Guatemala	CONCACAF
+TT	Trinidad y Tobago	CONCACAF
+SR	Surinam	CONCACAF
+NI	Nicaragua	CONCACAF
+DO	República Dominicana	CONCACAF
+CU	Cuba	CONCACAF
+GY	Guyana	CONCACAF
+PR	Puerto Rico	CONCACAF
+BZ	Belice	CONCACAF
+BM	Bermudas	CONCACAF
+GD	Granada	CONCACAF
+KN	San Cristóbal y Nieves	CONCACAF
+LC	Santa Lucía	CONCACAF
+VC	San Vicente y las Granadinas	CONCACAF
+AG	Antigua y Barbuda	CONCACAF
+DM	Dominica	CONCACAF
+BB	Barbados	CONCACAF
+AW	Aruba	CONCACAF
+KY	Islas Caimán	CONCACAF
+BS	Bahamas	CONCACAF
+MS	Montserrat	CONCACAF
+VG	Islas Vírgenes Británicas	CONCACAF
+TC	Islas Turcas y Caicos	CONCACAF
+VI	Islas Vírgenes de EE. UU.	CONCACAF
+AI	Anguila	CONCACAF
+MA	Marruecos	CAF
+SN	Senegal	CAF
+CI	Costa de Marfil	CAF
+NG	Nigeria	CAF
+EG	Egipto	CAF
+DZ	Argelia	CAF
+CM	Camerún	CAF
+ML	Malí	CAF
+GH	Ghana	CAF
+TN	Túnez	CAF
+CD	RD Congo	CAF
+ZA	Sudáfrica	CAF
+BF	Burkina Faso	CAF
+CV	Cabo Verde	CAF
+GN	Guinea	CAF
+GA	Gabón	CAF
+AO	Angola	CAF
+GQ	Guinea Ecuatorial	CAF
+ZM	Zambia	CAF
+UG	Uganda	CAF
+BJ	Benín	CAF
+MR	Mauritania	CAF
+LY	Libia	CAF
+CG	Congo	CAF
+KE	Kenia	CAF
+TZ	Tanzania	CAF
+MZ	Mozambique	CAF
+MG	Madagascar	CAF
+GM	Gambia	CAF
+NA	Namibia	CAF
+SD	Sudán	CAF
+ZW	Zimbabue	CAF
+SL	Sierra Leona	CAF
+TG	Togo	CAF
+MW	Malaui	CAF
+GW	Guinea-Bisáu	CAF
+KM	Comoras	CAF
+RW	Ruanda	CAF
+NE	Níger	CAF
+LR	Liberia	CAF
+ET	Etiopía	CAF
+BW	Botsuana	CAF
+BI	Burundi	CAF
+CF	República Centroafricana	CAF
+LS	Lesoto	CAF
+SZ	Esuatini	CAF
+SS	Sudán del Sur	CAF
+TD	Chad	CAF
+MU	Mauricio	CAF
+ST	Santo Tomé y Príncipe	CAF
+DJ	Yibuti	CAF
+SC	Seychelles	CAF
+ER	Eritrea	CAF
+SO	Somalia	CAF
+JP	Japón	AFC
+IR	Irán	AFC
+KR	Corea del Sur	AFC
+AU	Australia	AFC
+SA	Arabia Saudí	AFC
+UZ	Uzbekistán	AFC
+QA	Catar	AFC
+IQ	Irak	AFC
+AE	Emiratos Árabes Unidos	AFC
+JO	Jordania	AFC
+OM	Omán	AFC
+CN	China	AFC
+BH	Baréin	AFC
+SY	Siria	AFC
+PS	Palestina	AFC
+ID	Indonesia	AFC
+VN	Vietnam	AFC
+TH	Tailandia	AFC
+KW	Kuwait	AFC
+LB	Líbano	AFC
+KP	Corea del Norte	AFC
+KG	Kirguistán	AFC
+TJ	Tayikistán	AFC
+MY	Malasia	AFC
+TM	Turkmenistán	AFC
+IN	India	AFC
+PH	Filipinas	AFC
+YE	Yemen	AFC
+HK	Hong Kong	AFC
+SG	Singapur	AFC
+AF	Afganistán	AFC
+MM	Myanmar	AFC
+MV	Maldivas	AFC
+NP	Nepal	AFC
+BD	Bangladés	AFC
+TW	Taiwán	AFC
+KH	Camboya	AFC
+LA	Laos	AFC
+MN	Mongolia	AFC
+PK	Pakistán	AFC
+LK	Sri Lanka	AFC
+BT	Bután	AFC
+GU	Guam	AFC
+BN	Brunéi	AFC
+TL	Timor Oriental	AFC
+MO	Macao	AFC
+NZ	Nueva Zelanda	OFC
+NC	Nueva Caledonia	OFC
+FJ	Fiyi	OFC
+SB	Islas Salomón	OFC
+PF	Tahití	OFC
+PG	Papúa Nueva Guinea	OFC
+VU	Vanuatu	OFC
+WS	Samoa	OFC
+TO	Tonga	OFC
+CK	Islas Cook	OFC
+AS	Samoa Americana	OFC

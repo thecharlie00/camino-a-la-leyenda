@@ -1,0 +1,918 @@
+{
+ "¿Esa foto? No salgo ni de lejos bien parado. Debería haberme puesto el otro pantalón. Eso sí que me preocupa.": {
+  "ctx": "{t: N_(\"¿Esa foto? No salgo ni de lejos bien parado. Debería haberme puesto el otro pantalón. Eso sí que me preocupa.\"), fx: {fol: 30, fans: 3, mor: 2, coach: -2, prof: -2}, ref: N_(\"Inspirada en Zlatan\")}",
+  "where": "press-data.js:564"
+ },
+ "Perdieron el derbi con un error suyo. ¿Cómo lo lleva?": {
+  "ctx": "{id: \"p33\", ctx: [\"loss\", \"derby\"], q: N_(\"Perdieron el derbi con un error suyo. ¿Cómo lo lleva?\"),",
+  "where": "press-data.js:566"
+ },
+ "Es culpa mía. Cometí un error y costó el partido. Pido perdón a la afición y a mis compañeros. Lo asumo.": {
+  "ctx": "{t: N_(\"Es culpa mía. Cometí un error y costó el partido. Pido perdón a la afición y a mis compañeros. Lo asumo.\"), fx: {coach: 3, fans: 3, prof: 3, mor: -3, fame: -2}, ref: N_(\"Inspirada en Iniesta\")},",
+  "where": "press-data.js:568"
+ },
+ "Un error lo tiene cualquiera. Lo importante es seguir adelante. Los errores son humanos; los fallos, repetirlos.": {
+  "ctx": "{t: N_(\"Un error lo tiene cualquiera. Lo importante es seguir adelante. Los errores son humanos; los fallos, repetirlos.\"), fx: {mor: 2, prof: 2, fans: -3, coach: 1, fol: 5}, ref: N_(\"Inspirada en Maldini\")},",
+  "where": "press-data.js:569"
+ },
+ "Eso es fútbol. Si no lo hubiera hecho yo, lo habría hecho otro. Pero nadie me lo recordará en diez años.": {
+  "ctx": "{t: N_(\"Eso es fútbol. Si no lo hubiera hecho yo, lo habría hecho otro. Pero nadie me lo recordará en diez años.\"), fx: {mor: 3, fol: 10, fans: -3, coach: -2, prof: -2}, ref: N_(\"Inspirada en Del Piero\")},",
+  "where": "press-data.js:570"
+ },
+ "No voy a hablar de mis errores. Los analizaré en casa, a solas. Aquí hablo de los aciertos, y esos los recordaré.": {
+  "ctx": "{t: N_(\"No voy a hablar de mis errores. Los analizaré en casa, a solas. Aquí hablo de los aciertos, y esos los recordaré.\"), fx: {coach: 1, prof: 2, fans: -2, fame: 1, mor: 1}, ref: N_(\"Inspirada en Cristiano\")}",
+  "where": "press-data.js:571"
+ },
+ "Descenso casi consumado. ¿Qué siente en este momento?": {
+  "ctx": "{id: \"p34\", ctx: [\"relegation\", \"loss\", \"crisis\"], q: N_(\"Descenso casi consumado. ¿Qué siente en este momento?\"),",
+  "where": "press-data.js:573"
+ },
+ "Tristeza y rabia. Pero aún queda un 1% de esperanza. Y con el 1% he ganado partidos, ahora a por la liga.": {
+  "ctx": "{t: N_(\"Tristeza y rabia. Pero aún queda un 1% de esperanza. Y con el 1% he ganado partidos, ahora a por la liga.\"), fx: {fans: 4, mor: 2, coach: 1, fame: -1, prof: -1}, ref: N_(\"Inspirada en Raúl\")},",
+  "where": "press-data.js:575"
+ },
+ "Nada que no sintiera antes. El club me ha dado mucho, y sigo aquí. Bajar o no, seré del club hasta el final.": {
+  "ctx": "{t: N_(\"Nada que no sintiera antes. El club me ha dado mucho, y sigo aquí. Bajar o no, seré del club hasta el final.\"), fx: {fans: 5, coach: 3, fame: -3, fol: -5, mor: -1}, ref: N_(\"Inspirada en Totti\")},",
+  "where": "press-data.js:576"
+ },
+ "Siento haber fallado. Todos nos equivocamos. Los jugadores, la directiva, el entrenador. Hoy toca asumirlo juntos.": {
+  "ctx": "{t: N_(\"Siento haber fallado. Todos nos equivocamos. Los jugadores, la directiva, el entrenador. Hoy toca asumirlo juntos.\"), fx: {coach: 2, prof: 3, fans: -1, mor: -3, fol: 5}, ref: N_(\"Inspirada en Del Piero\")},",
+  "where": "press-data.js:577"
+ },
+ "Siento que mi carrera no merece acabar aquí. Si bajamos, ya sabéis que no seguiré. Un jugador como yo no está para esto.": {
+  "ctx": "{t: N_(\"Siento que mi carrera no merece acabar aquí. Si bajamos, ya sabéis que no seguiré. Un jugador como yo no está para esto.\"), fx: {fame: 3, fol: 15, fans: -5, coach: -3, mor: 1}, ref: N_(\"Inspirada en Zlatan\")}",
+  "where": "press-data.js:578"
+ },
+ "Empataron y usted tuvo que retirarse con molestias. ¿Cómo está?": {
+  "ctx": "{id: \"p35\", ctx: [\"draw\", \"injury\"], q: N_(\"Empataron y usted tuvo que retirarse con molestias. ¿Cómo está?\"),",
+  "where": "press-data.js:580"
+ },
+ "Estoy bien. Es solo un golpe. Mañana me hacen pruebas, pero si dependiera de mí, jugaba el domingo con una pierna.": {
+  "ctx": "{t: N_(\"Estoy bien. Es solo un golpe. Mañana me hacen pruebas, pero si dependiera de mí, jugaba el domingo con una pierna.\"), fx: {fans: 3, mor: 2, coach: -2, prof: -2}, ref: N_(\"Inspirada en Ramos\")},",
+  "where": "press-data.js:582"
+ },
+ "No lo sé. El médico dirá. Yo no soy médico, soy delantero. Y los delanteros somos de dolor corto.": {
+  "ctx": "{t: N_(\"No lo sé. El médico dirá. Yo no soy médico, soy delantero. Y los delanteros somos de dolor corto.\"), fx: {coach: 2, prof: 2, fans: -2, fol: 10, mor: -1}, ref: N_(\"Inspirada en Zlatan\")},",
+  "where": "press-data.js:583"
+ },
+ "Me paré porque lo vi venir. Es mejor perderse un partido que un año entero. Ya aprendí de otras lesiones.": {
+  "ctx": "{t: N_(\"Me paré porque lo vi venir. Es mejor perderse un partido que un año entero. Ya aprendí de otras lesiones.\"), fx: {coach: 3, prof: 3, fans: -3, mor: -1}, ref: N_(\"Inspirada en Alexia Putellas\")},",
+  "where": "press-data.js:584"
+ },
+ "Un poco mal, sí. Pero el empate me duele más que la rodilla. Eso sí que no tiene hielo ni vendaje.": {
+  "ctx": "{t: N_(\"Un poco mal, sí. Pero el empate me duele más que la rodilla. Eso sí que no tiene hielo ni vendaje.\"), fx: {fans: 3, mor: 1, prof: 1, fol: 5, coach: -2}, ref: N_(\"Inspirada en Totti\")}",
+  "where": "press-data.js:585"
+ },
+ "Tras la goleada, un aficionado le insultó en la calle. ¿Qué piensa?": {
+  "ctx": "{id: \"p36\", ctx: [\"bigloss\", \"controversy\"], q: N_(\"Tras la goleada, un aficionado le insultó en la calle. ¿Qué piensa?\"),",
+  "where": "press-data.js:587"
+ },
+ "Tiene derecho a estar enfadado. Pagan la entrada y esperan más. Le entiendo y prometo que lo compensaremos.": {
+  "ctx": "{t: N_(\"Tiene derecho a estar enfadado. Pagan la entrada y esperan más. Le entiendo y prometo que lo compensaremos.\"), fx: {fans: 4, coach: 2, fame: -2, mor: -2}, ref: N_(\"Inspirada en Iniesta\")},",
+  "where": "press-data.js:589"
+ },
+ "Se lo perdono porque no lo conozco. Si lo conociera, a lo mejor le invitaba a jugar el próximo partido en mi lugar.": {
+  "ctx": "{t: N_(\"Se lo perdono porque no lo conozco. Si lo conociera, a lo mejor le invitaba a jugar el próximo partido en mi lugar.\"), fx: {fol: 30, fame: 2, fans: -3, coach: -2, prof: -2}, ref: N_(\"Inspirada en Zlatan\")},",
+  "where": "press-data.js:590"
+ },
+ "Eso no se hace. Hay que respetar a las personas, también a los jugadores. Esto no es el espíritu del fútbol.": {
+  "ctx": "{t: N_(\"Eso no se hace. Hay que respetar a las personas, también a los jugadores. Esto no es el espíritu del fútbol.\"), fx: {coach: 2, prof: 2, fans: -4, mor: 2, fol: 5}, ref: N_(\"Inspirada en Rapinoe\")},",
+  "where": "press-data.js:591"
+ },
+ "Es parte del trabajo. Si no te insultan es que no importas. Y me insultaron mucho, así que algo importo.": {
+  "ctx": "{t: N_(\"Es parte del trabajo. Si no te insultan es que no importas. Y me insultaron mucho, así que algo importo.\"), fx: {mor: 2, fol: 15, fans: 1, prof: -2, coach: -1}, ref: N_(\"Inspirada en Cantona, 1995\")}",
+  "where": "press-data.js:592"
+ },
+ "Otro empate en la lucha por {lg}. ¿Se escapa el título?": {
+  "ctx": "{id: \"p37\", ctx: [\"draw\", \"title\"], q: N_(\"Otro empate en la lucha por {lg}. ¿Se escapa el título?\"),",
+  "where": "press-data.js:594"
+ },
+ "No se escapa nada. Lo importante es mantener la calma y no mirar la clasificación. Nos quedan muchas balas.": {
+  "ctx": "{t: N_(\"No se escapa nada. Lo importante es mantener la calma y no mirar la clasificación. Nos quedan muchas balas.\"), fx: {coach: 3, prof: 2, fans: -2, fame: -1}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:596"
+ },
+ "Si se escapa, lo cogeremos de nuevo. Somos como un perro con un hueso: no lo soltamos hasta el final.": {
+  "ctx": "{t: N_(\"Si se escapa, lo cogeremos de nuevo. Somos como un perro con un hueso: no lo soltamos hasta el final.\"), fx: {fans: 4, mor: 2, fame: 1, coach: -1, prof: -2}, ref: N_(\"Inspirada en Rapinoe\")},",
+  "where": "press-data.js:597"
+ },
+ "Con lo que ha pasado hoy, probablemente sí. No tiene sentido mentir. Habría que ganarlo todo, y eso es difícil.": {
+  "ctx": "{t: N_(\"Con lo que ha pasado hoy, probablemente sí. No tiene sentido mentir. Habría que ganarlo todo, y eso es difícil.\"), fx: {fans: 2, prof: 2, mor: -4, coach: 1, fol: 5}, ref: N_(\"Inspirada en Piqué\")},",
+  "where": "press-data.js:598"
+ },
+ "El título es del que menos falle. Hoy hemos fallado nosotros, pero los de arriba también lo harán. Es ley.": {
+  "ctx": "{t: N_(\"El título es del que menos falle. Hoy hemos fallado nosotros, pero los de arriba también lo harán. Es ley.\"), fx: {mor: 3, fol: 10, fans: -2, coach: -1, fame: 1}, ref: N_(\"Inspirada en Del Piero\")}",
+  "where": "press-data.js:599"
+ },
+ "VICTORIA del {club} por {score} ante el {opp}. Qué ganas de domingo así 💪 #{club}": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"VICTORIA del {club} por {score} ante el {opp}. Qué ganas de domingo así 💪 #{club}\")},",
+  "where": "social-data.js:36"
+ },
+ "Tres puntos más y a seguir. Ni tan mal, ¿eh? 😏 {score}": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Tres puntos más y a seguir. Ni tan mal, ¿eh? 😏 {score}\")},",
+  "where": "social-data.js:37"
+ },
+ "{name} y compañía lo vuelven a hacer. SE VIENE 🔥🔥": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{name} y compañía lo vuelven a hacer. SE VIENE 🔥🔥\")},",
+  "where": "social-data.js:38"
+ },
+ "Gané la porra, gané el partido y gané el día. Gracias {club} 🙏": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Gané la porra, gané el partido y gané el día. Gracias {club} 🙏\")},",
+  "where": "social-data.js:39"
+ },
+ "Ojo al dato: el {club} suma otra victoria. Que alguien despierte a la afición, que está soñando 😴➡️🤩": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Ojo al dato: el {club} suma otra victoria. Que alguien despierte a la afición, que está soñando 😴➡️🤩\")},",
+  "where": "social-data.js:40"
+ },
+ "{score} y a casa con la sonrisa puesta. Esto sí es fútbol 🥳": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{score} y a casa con la sonrisa puesta. Esto sí es fútbol 🥳\")},",
+  "where": "social-data.js:41"
+ },
+ "Gana el {club}. Sin florituras, sin drama. Pasamos página y a por el siguiente.": {
+  "ctx": "{by: \"fan\", t: N_(\"Gana el {club}. Sin florituras, sin drama. Pasamos página y a por el siguiente.\")},",
+  "where": "social-data.js:42"
+ },
+ "Que me quiten lo bailado: {score} al {opp} y a dormir tranquilo ✅": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Que me quiten lo bailado: {score} al {opp} y a dormir tranquilo ✅\")},",
+  "where": "social-data.js:43"
+ },
+ "¡¡Qué equipo, qué gente, qué pasión!! Victoria y a celebrar 🎉 #{club}": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡Qué equipo, qué gente, qué pasión!! Victoria y a celebrar 🎉 #{club}\")},",
+  "where": "social-data.js:44"
+ },
+ "Han ganado, vale. Pero el juego sigue siendo un tostón. A ver el próximo día 🙄": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Han ganado, vale. Pero el juego sigue siendo un tostón. A ver el próximo día 🙄\")},",
+  "where": "social-data.js:45"
+ },
+ "{score}… con suerte. Que no se lo crean demasiado, que luego pasa lo que pasa.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"{score}… con suerte. Que no se lo crean demasiado, que luego pasa lo que pasa.\")},",
+  "where": "social-data.js:46"
+ },
+ "CRÓNICA | El {club} se impone al {opp} ({score}) y se hace fuerte en la tabla.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"CRÓNICA | El {club} se impone al {opp} ({score}) y se hace fuerte en la tabla.\")},",
+  "where": "social-data.js:47"
+ },
+ "El {club} vence {score} al {opp} y respira: tres puntos de oro.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"El {club} vence {score} al {opp} y respira: tres puntos de oro.\")},",
+  "where": "social-data.js:48"
+ },
+ "✅ ¡FINAL DEL PARTIDO! {club} {score} {opp}. ¡Gracias por el apoyo, familia! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"✅ ¡FINAL DEL PARTIDO! {club} {score} {opp}. ¡Gracias por el apoyo, familia! 💙\")},",
+  "where": "social-data.js:49"
+ },
+ "📊 El {club} gana {score} al {opp}. Cuarto partido de la temporada con la portería a cero o casi. Dato curioso, ¿no?": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 El {club} gana {score} al {opp}. Cuarto partido de la temporada con la portería a cero o casi. Dato curioso, ¿no?\")},",
+  "where": "social-data.js:50"
+ },
+ "Vale, os han regalado el partido. Disfrutad, que dura poco 😜": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Vale, os han regalado el partido. Disfrutad, que dura poco 😜\")},",
+  "where": "social-data.js:51"
+ },
+ "Gran victoria de equipo, así se hace. Vamos a por la siguiente 🤝 #UnidosSomosMás": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"Gran victoria de equipo, así se hace. Vamos a por la siguiente 🤝 #UnidosSomosMás\")},",
+  "where": "social-data.js:52"
+ },
+ "VICTORIA | {club}-{opp}, {score}: el equipo no falla y mira hacia arriba.": {
+  "ctx": "{by: \"marka\", mood: 1, t: N_(\"VICTORIA | {club}-{opp}, {score}: el equipo no falla y mira hacia arriba.\")},",
+  "where": "social-data.js:53"
+ },
+ "Cuando ganas y todo el grupo de WhatsApp se llena de audios de 3 minutos 🗣️🗣️🗣️": {
+  "ctx": "{by: \"memefut\", t: N_(\"Cuando ganas y todo el grupo de WhatsApp se llena de audios de 3 minutos 🗣️🗣️🗣️\")},",
+  "where": "social-data.js:54"
+ },
+ "Another three points for {club}. Not bad at all, not bad at all.": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Another three points for {club}. Not bad at all, not bad at all.\")},",
+  "where": "social-data.js:55"
+ },
+ "¡Tres puntos que valen oro! Gracias a la afición por empujar hasta el final 💪 {score}": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"¡Tres puntos que valen oro! Gracias a la afición por empujar hasta el final 💪 {score}\")}",
+  "where": "social-data.js:56"
+ },
+ "¡¡{score}!! ¿Qué ha pasado hoy? ¡Ha sido un BAILE! 💃🕺": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡{score}!! ¿Qué ha pasado hoy? ¡Ha sido un BAILE! 💃🕺\")},",
+  "where": "social-data.js:59"
+ },
+ "Esto es una MASACRE. {opp} se va a casa llorando 😭 #{club}": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Esto es una MASACRE. {opp} se va a casa llorando 😭 #{club}\")},",
+  "where": "social-data.js:60"
+ },
+ "Que alguien pare el partido, que ya es delito 🚨 {score}": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Que alguien pare el partido, que ya es delito 🚨 {score}\")},",
+  "where": "social-data.js:61"
+ },
+ "Si me lo cuentan, no me lo creo. {score} al {opp}. Hoy brindamos 🍻": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Si me lo cuentan, no me lo creo. {score} al {opp}. Hoy brindamos 🍻\")},",
+  "where": "social-data.js:62"
+ },
+ "No he parado de gritar desde el minuto 10. ¡¡GOLEADA!! ⚽⚽⚽": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"No he parado de gritar desde el minuto 10. ¡¡GOLEADA!! ⚽⚽⚽\")},",
+  "where": "social-data.js:63"
+ },
+ "Pasen y vean cómo se juega al fútbol. {score}. Punto.": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Pasen y vean cómo se juega al fútbol. {score}. Punto.\")},",
+  "where": "social-data.js:64"
+ },
+ "Vale, {score}… contra un {opp} que no ha aparecido. No nos flipemos.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Vale, {score}… contra un {opp} que no ha aparecido. No nos flipemos.\")},",
+  "where": "social-data.js:65"
+ },
+ "GOLEADA | El {club} arrasa al {opp} ({score}) y manda un aviso a toda la liga.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"GOLEADA | El {club} arrasa al {opp} ({score}) y manda un aviso a toda la liga.\")},",
+  "where": "social-data.js:66"
+ },
+ "Exhibición del {club}: {score} que dejan al {opp} sin respuesta.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"Exhibición del {club}: {score} que dejan al {opp} sin respuesta.\")},",
+  "where": "social-data.js:67"
+ },
+ "📊 {score}: la mayor goleada del {club} en esta temporada. Se dice pronto.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {score}: la mayor goleada del {club} en esta temporada. Se dice pronto.\")},",
+  "where": "social-data.js:68"
+ },
+ "El {opp} saliendo del estadio después del {score}: 🚶💨": {
+  "ctx": "{by: \"memefut\", t: N_(\"El {opp} saliendo del estadio después del {score}: 🚶💨\")},",
+  "where": "social-data.js:69"
+ },
+ "🔥 ¡¡GOLEADA!! {club} {score} {opp}. ¡Noche para recordar! 🔵": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🔥 ¡¡GOLEADA!! {club} {score} {opp}. ¡Noche para recordar! 🔵\")},",
+  "where": "social-data.js:70"
+ },
+ "Qué mala suerte tiene el {opp}… ¡Esto no le pasa a nadie! 😅 (con respeto, eh)": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Qué mala suerte tiene el {opp}… ¡Esto no le pasa a nadie! 😅 (con respeto, eh)\")},",
+  "where": "social-data.js:71"
+ },
+ "Qué noche, qué equipo, qué locura. A disfrutar, pero mañana a currar 😄": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"Qué noche, qué equipo, qué locura. A disfrutar, pero mañana a currar 😄\")},",
+  "where": "social-data.js:72"
+ },
+ "El {club} ha marcado con {score} su mejor resultado de la temporada. Efectividad total.": {
+  "ctx": "{by: \"optajoel\", t: N_(\"El {club} ha marcado con {score} su mejor resultado de la temporada. Efectividad total.\")},",
+  "where": "social-data.js:73"
+ },
+ "Rodillo del {club}: {score} al {opp} para la historia reciente.": {
+  "ctx": "{by: \"az\", mood: 1, t: N_(\"Rodillo del {club}: {score} al {opp} para la historia reciente.\")}",
+  "where": "social-data.js:74"
+ },
+ "Otra derrota. Otra vez el mismo guion. Así no hay manera 😤 #{club}": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Otra derrota. Otra vez el mismo guion. Así no hay manera 😤 #{club}\")},",
+  "where": "social-data.js:77"
+ },
+ "{score} ante el {opp}. Vergüenza ajena. Hoy no hay excusas.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"{score} ante el {opp}. Vergüenza ajena. Hoy no hay excusas.\")},",
+  "where": "social-data.js:78"
+ },
+ "Yo ya no sé si ir al estadio o quedarme en casa viendo pintar paredes 🧱": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Yo ya no sé si ir al estadio o quedarme en casa viendo pintar paredes 🧱\")},",
+  "where": "social-data.js:79"
+ },
+ "Me voy a dormir a las 20h porque ver esto cada semana me acorta la vida 💀": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Me voy a dormir a las 20h porque ver esto cada semana me acorta la vida 💀\")},",
+  "where": "social-data.js:80"
+ },
+ "Cada vez que creo que no pueden jugar peor… lo hacen. Impresionante 👏 (ironía)": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Cada vez que creo que no pueden jugar peor… lo hacen. Impresionante 👏 (ironía)\")},",
+  "where": "social-data.js:81"
+ },
+ "{name}, hay que mirar adentro. Esto no puede seguir así.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"{name}, hay que mirar adentro. Esto no puede seguir así.\")},",
+  "where": "social-data.js:82"
+ },
+ "Derrota dura. Toca levantarse y a seguir. Esto no se acaba hoy.": {
+  "ctx": "{by: \"fan\", t: N_(\"Derrota dura. Toca levantarse y a seguir. Esto no se acaba hoy.\")},",
+  "where": "social-data.js:83"
+ },
+ "Pierde el {club}, pero yo sigo aquí. En las buenas y en las malas 💙 #SiempreContigo": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Pierde el {club}, pero yo sigo aquí. En las buenas y en las malas 💙 #SiempreContigo\")},",
+  "where": "social-data.js:84"
+ },
+ "Que alguien me explique la alineación de hoy, por favor 🙏": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Que alguien me explique la alineación de hoy, por favor 🙏\")},",
+  "where": "social-data.js:85"
+ },
+ "Os lo dije. LO DIJE. Y todavía hay gente que defiende esto 🤷": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Os lo dije. LO DIJE. Y todavía hay gente que defiende esto 🤷\")},",
+  "where": "social-data.js:86"
+ },
+ "{score}. Mi abuela defiende mejor y tiene 87 años 👵": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"{score}. Mi abuela defiende mejor y tiene 87 años 👵\")},",
+  "where": "social-data.js:87"
+ },
+ "CRÓNICA | El {club} cae ante el {opp} ({score}) y las dudas aumentan.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"CRÓNICA | El {club} cae ante el {opp} ({score}) y las dudas aumentan.\")},",
+  "where": "social-data.js:88"
+ },
+ "Derrota del {club} ({score}): errores atrás y poca pegada arriba.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"Derrota del {club} ({score}): errores atrás y poca pegada arriba.\")},",
+  "where": "social-data.js:89"
+ },
+ "JAJAJA {score}. Gracias por los tres puntos, {club} 🫡": {
+  "ctx": "{by: \"rival\", mood: 1, t: N_(\"JAJAJA {score}. Gracias por los tres puntos, {club} 🫡\")},",
+  "where": "social-data.js:90"
+ },
+ "Yo después de ver otra derrota del {club}: 🫠 'esto es lo que hay'": {
+  "ctx": "{by: \"memefut\", t: N_(\"Yo después de ver otra derrota del {club}: 🫠 'esto es lo que hay'\")},",
+  "where": "social-data.js:91"
+ },
+ "Final del partido. {club} {score} {opp}. Hay que levantarse. Gracias por vuestro apoyo, siempre. 💙": {
+  "ctx": "{by: \"club\", t: N_(\"Final del partido. {club} {score} {opp}. Hay que levantarse. Gracias por vuestro apoyo, siempre. 💙\")},",
+  "where": "social-data.js:92"
+ },
+ "📊 El {club} cae por {score}. Es la derrota más dolorosa de las últimas jornadas.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 El {club} cae por {score}. Es la derrota más dolorosa de las últimas jornadas.\")},",
+  "where": "social-data.js:93"
+ },
+ "Golpe duro, hay que reconocerlo. A trabajar para la próxima, juntos 💪": {
+  "ctx": "{by: \"teammate\", t: N_(\"Golpe duro, hay que reconocerlo. A trabajar para la próxima, juntos 💪\")},",
+  "where": "social-data.js:94"
+ },
+ "Duele perder así. Pido disculpas a la afición. Vamos a levantarnos 🙏": {
+  "ctx": "{by: \"self\", t: N_(\"Duele perder así. Pido disculpas a la afición. Vamos a levantarnos 🙏\")}",
+  "where": "social-data.js:95"
+ },
+ "{score}. SIN PALABRAS. Que alguien apague el estadio 🔦": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"{score}. SIN PALABRAS. Que alguien apague el estadio 🔦\")},",
+  "where": "social-data.js:98"
+ },
+ "Hoy ha sido una vergüenza absoluta. Me devuelven la entrada o qué 😡": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Hoy ha sido una vergüenza absoluta. Me devuelven la entrada o qué 😡\")},",
+  "where": "social-data.js:99"
+ },
+ "¿Esto es un equipo profesional? Parecía el Día del Niño en el parque.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"¿Esto es un equipo profesional? Parecía el Día del Niño en el parque.\")},",
+  "where": "social-data.js:100"
+ },
+ "Me ha dado más miedo ver el partido que una peli de terror 😱 {score}": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Me ha dado más miedo ver el partido que una peli de terror 😱 {score}\")},",
+  "where": "social-data.js:101"
+ },
+ "Dimisiones ya. TODOS. Esto es un desastre.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Dimisiones ya. TODOS. Esto es un desastre.\")},",
+  "where": "social-data.js:102"
+ },
+ "Duele. Mucho. Pero hay que aguantar y seguir. Así es el fútbol.": {
+  "ctx": "{by: \"fan\", t: N_(\"Duele. Mucho. Pero hay que aguantar y seguir. Así es el fútbol.\")},",
+  "where": "social-data.js:103"
+ },
+ "Y todavía había quien decía que íbamos a pelear arriba. JAJAJA 🤡": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Y todavía había quien decía que íbamos a pelear arriba. JAJAJA 🤡\")},",
+  "where": "social-data.js:104"
+ },
+ "HUMILLACIÓN | El {opp} destroza al {club} ({score}) y deja una imagen preocupante.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"HUMILLACIÓN | El {opp} destroza al {club} ({score}) y deja una imagen preocupante.\")},",
+  "where": "social-data.js:105"
+ },
+ "Naufragio del {club}: {score} en contra y toda una plantilla en entredicho.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"Naufragio del {club}: {score} en contra y toda una plantilla en entredicho.\")},",
+  "where": "social-data.js:106"
+ },
+ "Qué paliza, madre mía. {score}. Vamos a guardar el vídeo para los nietos 📹": {
+  "ctx": "{by: \"rival\", mood: 1, t: N_(\"Qué paliza, madre mía. {score}. Vamos a guardar el vídeo para los nietos 📹\")},",
+  "where": "social-data.js:107"
+ },
+ "El vestuario del {club} después del {score}: 🪦": {
+  "ctx": "{by: \"memefut\", t: N_(\"El vestuario del {club} después del {score}: 🪦\")},",
+  "where": "social-data.js:108"
+ },
+ "📊 {score}: el peor resultado de la temporada para el {club} y de los peores de la década.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {score}: el peor resultado de la temporada para el {club} y de los peores de la década.\")},",
+  "where": "social-data.js:109"
+ },
+ "Noche complicada. {club} {score} {opp}. Asumimos la responsabilidad y trabajaremos para revertirlo.": {
+  "ctx": "{by: \"club\", t: N_(\"Noche complicada. {club} {score} {opp}. Asumimos la responsabilidad y trabajaremos para revertirlo.\")},",
+  "where": "social-data.js:110"
+ },
+ "No hay palabras. Pedimos perdón a la afición. Hoy no estuvimos a la altura.": {
+  "ctx": "{by: \"teammate\", mood: -1, t: N_(\"No hay palabras. Pedimos perdón a la afición. Hoy no estuvimos a la altura.\")},",
+  "where": "social-data.js:111"
+ },
+ "Una noche para olvidar. Toca asumir y trabajar el doble. Lo siento, de verdad.": {
+  "ctx": "{by: \"self\", mood: -1, t: N_(\"Una noche para olvidar. Toca asumir y trabajar el doble. Lo siento, de verdad.\")}",
+  "where": "social-data.js:112"
+ },
+ "{score}. Ni fu ni fa. Un punto que sabe a poco… o a mucho, según se mire 🤷": {
+  "ctx": "{by: \"fan\", t: N_(\"{score}. Ni fu ni fa. Un punto que sabe a poco… o a mucho, según se mire 🤷\")},",
+  "where": "social-data.js:115"
+ },
+ "Empate y a seguir. Así es el fútbol, ni todo blanco ni todo negro.": {
+  "ctx": "{by: \"fan\", t: N_(\"Empate y a seguir. Así es el fútbol, ni todo blanco ni todo negro.\")},",
+  "where": "social-data.js:116"
+ },
+ "Dos puntos tirados a la basura. Otra vez. Así no se gana una liga 😩": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Dos puntos tirados a la basura. Otra vez. Así no se gana una liga 😩\")},",
+  "where": "social-data.js:117"
+ },
+ "Un puntito de oro ante el {opp}. Sumar siempre suma 🙌": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Un puntito de oro ante el {opp}. Sumar siempre suma 🙌\")},",
+  "where": "social-data.js:118"
+ },
+ "Partido de ida y vuelta, mucha emoción y reparto de puntos. Justo.": {
+  "ctx": "{by: \"fan\", t: N_(\"Partido de ida y vuelta, mucha emoción y reparto de puntos. Justo.\")},",
+  "where": "social-data.js:119"
+ },
+ "Empate. Mediocridad. Es lo que da este equipo cada semana.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Empate. Mediocridad. Es lo que da este equipo cada semana.\")},",
+  "where": "social-data.js:120"
+ },
+ "CRÓNICA | Reparto de puntos entre {club} y {opp} ({score}) en un duelo igualado.": {
+  "ctx": "{by: \"press\", t: N_(\"CRÓNICA | Reparto de puntos entre {club} y {opp} ({score}) en un duelo igualado.\")},",
+  "where": "social-data.js:121"
+ },
+ "El {club} no pasa del empate ({score}) ante el {opp}.": {
+  "ctx": "{by: \"press\", t: N_(\"El {club} no pasa del empate ({score}) ante el {opp}.\")},",
+  "where": "social-data.js:122"
+ },
+ "📊 Empate {score}: tercera igualada del {club} en lo que va de temporada.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 Empate {score}: tercera igualada del {club} en lo que va de temporada.\")},",
+  "where": "social-data.js:123"
+ },
+ "Empate {score}: el resultado que no hace feliz a nadie 😐": {
+  "ctx": "{by: \"memefut\", t: N_(\"Empate {score}: el resultado que no hace feliz a nadie 😐\")},",
+  "where": "social-data.js:124"
+ },
+ "Un punto para cada uno, y todos nos vamos igual de enfadados 🤝": {
+  "ctx": "{by: \"rival\", t: N_(\"Un punto para cada uno, y todos nos vamos igual de enfadados 🤝\")},",
+  "where": "social-data.js:125"
+ },
+ "Final: {club} {score} {opp}. Un punto que sumamos en una tarde dura. ¡Vamos!": {
+  "ctx": "{by: \"club\", t: N_(\"Final: {club} {score} {opp}. Un punto que sumamos en una tarde dura. ¡Vamos!\")}",
+  "where": "social-data.js:126"
+ },
+ "¡¡EL DERBI ES NUESTRO!! {score} ¡¡Y A CELEBRAR!! 🎉🔥": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡EL DERBI ES NUESTRO!! {score} ¡¡Y A CELEBRAR!! 🎉🔥\")},",
+  "where": "social-data.js:129"
+ },
+ "Hoy no hay trabajo, hoy no hay estudios, hoy HAY DERBI GANADO 🥇": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hoy no hay trabajo, hoy no hay estudios, hoy HAY DERBI GANADO 🥇\")},",
+  "where": "social-data.js:130"
+ },
+ "Ya se pueden callar unos cuantos. ¡{score}! 🤐": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Ya se pueden callar unos cuantos. ¡{score}! 🤐\")},",
+  "where": "social-data.js:131"
+ },
+ "Dedicado a todos los que decían que {opp} nos ganaba. ¡Saludos! 👋😎": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Dedicado a todos los que decían que {opp} nos ganaba. ¡Saludos! 👋😎\")},",
+  "where": "social-data.js:132"
+ },
+ "El derbi se gana en la calle y en el campo. ¡{club}, {club}, {club}! 🎶": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"El derbi se gana en la calle y en el campo. ¡{club}, {club}, {club}! 🎶\")},",
+  "where": "social-data.js:133"
+ },
+ "Un derbi no hace una temporada. Que no se les suba a la cabeza.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Un derbi no hace una temporada. Que no se les suba a la cabeza.\")},",
+  "where": "social-data.js:134"
+ },
+ "DERBI | El {club} gana en un partido de máxima tensión ({score}) y se queda con la ciudad.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"DERBI | El {club} gana en un partido de máxima tensión ({score}) y se queda con la ciudad.\")},",
+  "where": "social-data.js:135"
+ },
+ "El {club} se lleva el derbi ({score}) ante el {opp} en un ambiente de gala.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"El {club} se lleva el derbi ({score}) ante el {opp} en un ambiente de gala.\")},",
+  "where": "social-data.js:136"
+ },
+ "Se acabó. Hoy os toca callarnos a nosotros. Disfrutad, que ya os llegará 😤": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Se acabó. Hoy os toca callarnos a nosotros. Disfrutad, que ya os llegará 😤\")},",
+  "where": "social-data.js:137"
+ },
+ "Aficionado del {opp} el lunes por la mañana en la oficina: 🫥": {
+  "ctx": "{by: \"memefut\", t: N_(\"Aficionado del {opp} el lunes por la mañana en la oficina: 🫥\")},",
+  "where": "social-data.js:138"
+ },
+ "🏟️ ¡EL DERBI ES NUESTRO! {club} {score} {opp}. ¡Gracias a toda la afición! 🙌": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🏟️ ¡EL DERBI ES NUESTRO! {club} {score} {opp}. ¡Gracias a toda la afición! 🙌\")},",
+  "where": "social-data.js:139"
+ },
+ "📊 El {club} gana el derbi por {score}. Es su victoria más reciente en el cruce.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 El {club} gana el derbi por {score}. Es su victoria más reciente en el cruce.\")},",
+  "where": "social-data.js:140"
+ },
+ "¡DERBI GANADO! Lo hemos dado todo. Esto va por la gente 🫶": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"¡DERBI GANADO! Lo hemos dado todo. Esto va por la gente 🫶\")},",
+  "where": "social-data.js:141"
+ },
+ "Hay partidos que se juegan por el escudo, y este era uno. ¡Gracias, afición! 🏆": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"Hay partidos que se juegan por el escudo, y este era uno. ¡Gracias, afición! 🏆\")}",
+  "where": "social-data.js:142"
+ },
+ "PERDER EL DERBI. Lo peor de lo peor. No puedo ni mirar el móvil 💔": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"PERDER EL DERBI. Lo peor de lo peor. No puedo ni mirar el móvil 💔\")},",
+  "where": "social-data.js:145"
+ },
+ "Un año entero aguantando bromas por este {score}. Gracias, de verdad, gracias 😑": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Un año entero aguantando bromas por este {score}. Gracias, de verdad, gracias 😑\")},",
+  "where": "social-data.js:146"
+ },
+ "Todo lo demás me da igual, pero el derbi no se pierde. ¡EL DERBI NO SE PIERDE!": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Todo lo demás me da igual, pero el derbi no se pierde. ¡EL DERBI NO SE PIERDE!\")},",
+  "where": "social-data.js:147"
+ },
+ "Perdimos el derbi. Duele, pero seguimos. Fútbol.": {
+  "ctx": "{by: \"fan\", t: N_(\"Perdimos el derbi. Duele, pero seguimos. Fútbol.\")},",
+  "where": "social-data.js:148"
+ },
+ "Se acabó el cuento. A casa, que mañana tocará aguantar a la familia del {opp}.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Se acabó el cuento. A casa, que mañana tocará aguantar a la familia del {opp}.\")},",
+  "where": "social-data.js:149"
+ },
+ "DERBI | El {opp} gana ({score}) y deja tocado al {club}.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"DERBI | El {opp} gana ({score}) y deja tocado al {club}.\")},",
+  "where": "social-data.js:150"
+ },
+ "El {club} pierde el derbi y queda en el centro de la crítica.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"El {club} pierde el derbi y queda en el centro de la crítica.\")},",
+  "where": "social-data.js:151"
+ },
+ "¡¡EL DERBI ES NUESTRO!! {score}. ¡Os esperamos para la vuelta! 🤣🔥": {
+  "ctx": "{by: \"rival\", mood: 1, t: N_(\"¡¡EL DERBI ES NUESTRO!! {score}. ¡Os esperamos para la vuelta! 🤣🔥\")},",
+  "where": "social-data.js:152"
+ },
+ "Aficionado del {club} yendo a trabajar tras perder el derbi: 🚶‍♂️💨": {
+  "ctx": "{by: \"memefut\", t: N_(\"Aficionado del {club} yendo a trabajar tras perder el derbi: 🚶‍♂️💨\")},",
+  "where": "social-data.js:153"
+ },
+ "Duele perder el derbi. Pero este escudo se levanta siempre. #SiempreJuntos": {
+  "ctx": "{by: \"club\", t: N_(\"Duele perder el derbi. Pero este escudo se levanta siempre. #SiempreJuntos\")},",
+  "where": "social-data.js:154"
+ },
+ "Un derbi no se puede perder. Pedimos perdón por no darle la alegría que merecía la gente.": {
+  "ctx": "{by: \"teammate\", mood: -1, t: N_(\"Un derbi no se puede perder. Pedimos perdón por no darle la alegría que merecía la gente.\")},",
+  "where": "social-data.js:155"
+ },
+ "Derbi perdido. Es duro, y me duele más por la gente. A levantar la cabeza.": {
+  "ctx": "{by: \"self\", mood: -1, t: N_(\"Derbi perdido. Es duro, y me duele más por la gente. A levantar la cabeza.\")}",
+  "where": "social-data.js:156"
+ },
+ "¡¡GOLAZO DE {name}!! Ese zurdazo… ¡DE PELÍCULA! 🎬⚽": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡GOLAZO DE {name}!! Ese zurdazo… ¡DE PELÍCULA! 🎬⚽\")},",
+  "where": "social-data.js:159"
+ },
+ "Gol de {name} al {opp} en el {min}'. ¡Qué MAQUINA! 🔥": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Gol de {name} al {opp} en el {min}'. ¡Qué MAQUINA! 🔥\")},",
+  "where": "social-data.js:160"
+ },
+ "{name} marca, el estadio explota y yo con la voz rota. Inolvidable 🎶": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{name} marca, el estadio explota y yo con la voz rota. Inolvidable 🎶\")},",
+  "where": "social-data.js:161"
+ },
+ "Cada día se nota más lo que vale {name}. Otro gol y van {goals}. ¡CRACK!": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Cada día se nota más lo que vale {name}. Otro gol y van {goals}. ¡CRACK!\")},",
+  "where": "social-data.js:162"
+ },
+ "¡QUÉ MANERA DE ENTRAR AL ÁREA! {name} es un fenómeno ✨": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡QUÉ MANERA DE ENTRAR AL ÁREA! {name} es un fenómeno ✨\")},",
+  "where": "social-data.js:163"
+ },
+ "Si {name} sigue así, nos va a traer algo grande. ¡A por todas!": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Si {name} sigue así, nos va a traer algo grande. ¡A por todas!\")},",
+  "where": "social-data.js:164"
+ },
+ "Gol de {name} y mi vecino pegando gritos. Se ha enterado hasta el gato 🐱⚽": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Gol de {name} y mi vecino pegando gritos. Se ha enterado hasta el gato 🐱⚽\")},",
+  "where": "social-data.js:165"
+ },
+ "Marca {name}. Bien. Ahora a mantener el resultado.": {
+  "ctx": "{by: \"fan\", t: N_(\"Marca {name}. Bien. Ahora a mantener el resultado.\")},",
+  "where": "social-data.js:166"
+ },
+ "Vale, ha metido un gol. ¿Y los otros 80 minutos qué?": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Vale, ha metido un gol. ¿Y los otros 80 minutos qué?\")},",
+  "where": "social-data.js:167"
+ },
+ "Un gol de rebote y ya lo quieren de Balón de Oro 🙄": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Un gol de rebote y ya lo quieren de Balón de Oro 🙄\")},",
+  "where": "social-data.js:168"
+ },
+ "{name} marca en el {min}' y adelanta/da aire al {club} ante el {opp}.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"{name} marca en el {min}' y adelanta/da aire al {club} ante el {opp}.\")},",
+  "where": "social-data.js:169"
+ },
+ "GOL | {name} aparece en el área y la manda a la red en el {min}'. Van {goals} en la temporada.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"GOL | {name} aparece en el área y la manda a la red en el {min}'. Van {goals} en la temporada.\")},",
+  "where": "social-data.js:170"
+ },
+ "⚽ ¡¡GOOOOOL DEL {club}!! {name} lo hace en el minuto {min}. ¡Vamos! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"⚽ ¡¡GOOOOOL DEL {club}!! {name} lo hace en el minuto {min}. ¡Vamos! 💙\")},",
+  "where": "social-data.js:171"
+ },
+ "📊 {name} ha marcado {goals} goles esta temporada. Mejor registro del {club} en los últimos años.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} ha marcado {goals} goles esta temporada. Mejor registro del {club} en los últimos años.\")},",
+  "where": "social-data.js:172"
+ },
+ "¡Qué golazo, {name}! Te lo mereces, crack. Abrazo 🤗": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"¡Qué golazo, {name}! Te lo mereces, crack. Abrazo 🤗\")},",
+  "where": "social-data.js:173"
+ },
+ "{name} después de marcar: *celebración épica sin saber cuál escoger* 🕺": {
+  "ctx": "{by: \"memefut\", t: N_(\"{name} después de marcar: *celebración épica sin saber cuál escoger* 🕺\")},",
+  "where": "social-data.js:174"
+ },
+ "Qué suerte tiene este chico. Otro gol al {opp}… 🫤": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Qué suerte tiene este chico. Otro gol al {opp}… 🫤\")},",
+  "where": "social-data.js:175"
+ },
+ "GOOOOL DE {name}. Esto sí que es un gol. Qué máquina, de verdad. Me voy a quedar sin voz.": {
+  "ctx": "{by: \"ibai\", mood: 1, t: N_(\"GOOOOL DE {name}. Esto sí que es un gol. Qué máquina, de verdad. Me voy a quedar sin voz.\")},",
+  "where": "social-data.js:176"
+ },
+ "{name} ha anotado {goals} goles en la temporada, a un ritmo de 0,6 por partido.": {
+  "ctx": "{by: \"optajoel\", t: N_(\"{name} ha anotado {goals} goles en la temporada, a un ritmo de 0,6 por partido.\")},",
+  "where": "social-data.js:177"
+ },
+ "¡Gol! Gracias a mis compañeros por el pase y a la afición por el ánimo 💪⚽": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"¡Gol! Gracias a mis compañeros por el pase y a la afición por el ánimo 💪⚽\")}",
+  "where": "social-data.js:178"
+ },
+ "¡¡HAT-TRICK DE {name}!! ¡LLÉVATE EL BALÓN, CAMPEÓN/A! 🎩⚽⚽⚽": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡HAT-TRICK DE {name}!! ¡LLÉVATE EL BALÓN, CAMPEÓN/A! 🎩⚽⚽⚽\")},",
+  "where": "social-data.js:181"
+ },
+ "Tres. TRES. ¡¡TRES!! ¿Alguien más quiere hablar de {name}? ¿No? Pues eso 😎": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Tres. TRES. ¡¡TRES!! ¿Alguien más quiere hablar de {name}? ¿No? Pues eso 😎\")},",
+  "where": "social-data.js:182"
+ },
+ "Hoy me he quedado sin palabras. {name} se ha salido con ese triplete 🔥": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hoy me he quedado sin palabras. {name} se ha salido con ese triplete 🔥\")},",
+  "where": "social-data.js:183"
+ },
+ "Fichaje que vale oro. {name} y su triplete. Se viene lo bueno 🚀": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Fichaje que vale oro. {name} y su triplete. Se viene lo bueno 🚀\")},",
+  "where": "social-data.js:184"
+ },
+ "Un triplete contra un rival que ha dejado de defender. A ver cuando sea contra uno bueno.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Un triplete contra un rival que ha dejado de defender. A ver cuando sea contra uno bueno.\")},",
+  "where": "social-data.js:185"
+ },
+ "TRIPLETE | {name} firma un hat-trick y lidera al {club} ante el {opp}.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"TRIPLETE | {name} firma un hat-trick y lidera al {club} ante el {opp}.\")},",
+  "where": "social-data.js:186"
+ },
+ "{name} se lleva el balón a casa tras un triplete que resuelve el partido.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"{name} se lleva el balón a casa tras un triplete que resuelve el partido.\")},",
+  "where": "social-data.js:187"
+ },
+ "🎩 ¡HAT-TRICK! {name} firma tres goles en el {club} - {opp}. ¡Leyenda!": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🎩 ¡HAT-TRICK! {name} firma tres goles en el {club} - {opp}. ¡Leyenda!\")},",
+  "where": "social-data.js:188"
+ },
+ "📊 Triplete de {name}: {goals} goles en la temporada. Rendimiento fuera de serie.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 Triplete de {name}: {goals} goles en la temporada. Rendimiento fuera de serie.\")},",
+  "where": "social-data.js:189"
+ },
+ "¡TRIPLETE! Te lo has ganado, {name}. ¡La cena de hoy la pagas tú! 😂": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"¡TRIPLETE! Te lo has ganado, {name}. ¡La cena de hoy la pagas tú! 😂\")},",
+  "where": "social-data.js:190"
+ },
+ "{name} después del triplete: 'solo hago mi trabajo' (mientras mira la hoja del balón de oro) 👀": {
+  "ctx": "{by: \"memefut\", t: N_(\"{name} después del triplete: 'solo hago mi trabajo' (mientras mira la hoja del balón de oro) 👀\")},",
+  "where": "social-data.js:191"
+ },
+ "Hay que reconocerlo: un triplete es un triplete. Respeto, aunque duela.": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Hay que reconocerlo: un triplete es un triplete. Respeto, aunque duela.\")},",
+  "where": "social-data.js:192"
+ },
+ "Hat-trick! The ball goes home with {name}. Lovely stuff.": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Hat-trick! The ball goes home with {name}. Lovely stuff.\")},",
+  "where": "social-data.js:193"
+ },
+ "TRIPLETE DE {name}. ¿Alguien tiene un pulso? Yo no. Qué barbaridad.": {
+  "ctx": "{by: \"ibai\", mood: 1, t: N_(\"TRIPLETE DE {name}. ¿Alguien tiene un pulso? Yo no. Qué barbaridad.\")}",
+  "where": "social-data.js:194"
+ },
+ "¡Menudo pase de {name}! Ese pase vale tanto como el gol 🎯": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡Menudo pase de {name}! Ese pase vale tanto como el gol 🎯\")},",
+  "where": "social-data.js:197"
+ },
+ "Asistencia de {name} y ya van {n}. Visión de juego de otro planeta 🪐": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Asistencia de {name} y ya van {n}. Visión de juego de otro planeta 🪐\")},",
+  "where": "social-data.js:198"
+ },
+ "Hay quien marca, y hay quien ve lo que otros no ven. ¡{name}! 👁️": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hay quien marca, y hay quien ve lo que otros no ven. ¡{name}! 👁️\")},",
+  "where": "social-data.js:199"
+ },
+ "Pase al hueco, gol cantado. {name}, qué crack 🙌": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Pase al hueco, gol cantado. {name}, qué crack 🙌\")},",
+  "where": "social-data.js:200"
+ },
+ "Una asistencia y ya lo quieren de MVP. A ver cuando defienda.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Una asistencia y ya lo quieren de MVP. A ver cuando defienda.\")},",
+  "where": "social-data.js:201"
+ },
+ "{name} asiste y el {club} encuentra el camino al gol ante el {opp}.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"{name} asiste y el {club} encuentra el camino al gol ante el {opp}.\")},",
+  "where": "social-data.js:202"
+ },
+ "📊 {name} suma {n} asistencias esta temporada, dato que lo coloca entre los mejores pasadores.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} suma {n} asistencias esta temporada, dato que lo coloca entre los mejores pasadores.\")},",
+  "where": "social-data.js:203"
+ },
+ "🎯 Asistencia de {name} para el gol del {club}. ¡Visión de águila!": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🎯 Asistencia de {name} para el gol del {club}. ¡Visión de águila!\")},",
+  "where": "social-data.js:204"
+ },
+ "Gracias por el pase, {name}. Solo tuve que empujarla 😅🙏": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"Gracias por el pase, {name}. Solo tuve que empujarla 😅🙏\")},",
+  "where": "social-data.js:205"
+ },
+ "Delantero tras recibir un pase perfecto de {name}: 'Hoy toca invitar a una cena' 🍽️": {
+  "ctx": "{by: \"memefut\", t: N_(\"Delantero tras recibir un pase perfecto de {name}: 'Hoy toca invitar a una cena' 🍽️\")},",
+  "where": "social-data.js:206"
+ },
+ "Lo mejor del fútbol es compartirlo. ¡Qué golazo de mi compañero! 🤝": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"Lo mejor del fútbol es compartirlo. ¡Qué golazo de mi compañero! 🤝\")}",
+  "where": "social-data.js:207"
+ },
+ "MVP indiscutible: {name}. Qué partido. Qué nivel. ¡Qué orgullo! 👏": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"MVP indiscutible: {name}. Qué partido. Qué nivel. ¡Qué orgullo! 👏\")},",
+  "where": "social-data.js:210"
+ },
+ "Si esto no es el mejor jugador del partido, que baje Dios y lo vea. {name} 🌟": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Si esto no es el mejor jugador del partido, que baje Dios y lo vea. {name} 🌟\")},",
+  "where": "social-data.js:211"
+ },
+ "{name} está en un momento que da miedo. Quiero que dure para siempre 🙌": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{name} está en un momento que da miedo. Quiero que dure para siempre 🙌\")},",
+  "where": "social-data.js:212"
+ },
+ "Ni los rivales pueden con {name} hoy. Qué nivel 😮‍💨": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Ni los rivales pueden con {name} hoy. Qué nivel 😮‍💨\")},",
+  "where": "social-data.js:213"
+ },
+ "MVP… ya, bueno, contra este rival cualquiera sería MVP.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"MVP… ya, bueno, contra este rival cualquiera sería MVP.\")},",
+  "where": "social-data.js:214"
+ },
+ "{name}, MVP del {club}-{opp}: control, intensidad y decisión.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"{name}, MVP del {club}-{opp}: control, intensidad y decisión.\")},",
+  "where": "social-data.js:215"
+ },
+ "Partidazo de {name}: el motor del {club}.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"Partidazo de {name}: el motor del {club}.\")},",
+  "where": "social-data.js:216"
+ },
+ "⭐ Jugador del partido: {name}. ¡Enhorabuena, crack! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"⭐ Jugador del partido: {name}. ¡Enhorabuena, crack! 💙\")},",
+  "where": "social-data.js:217"
+ },
+ "📊 {name} lidera todos los datos del partido: duelos ganados, pases clave y recuperaciones.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} lidera todos los datos del partido: duelos ganados, pases clave y recuperaciones.\")},",
+  "where": "social-data.js:218"
+ },
+ "Un lujo jugar contigo, {name}. Hoy eres el mejor 👏": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"Un lujo jugar contigo, {name}. Hoy eres el mejor 👏\")},",
+  "where": "social-data.js:219"
+ },
+ "Los defensas rivales tras enfrentarse a {name}: 😵‍💫": {
+  "ctx": "{by: \"memefut\", t: N_(\"Los defensas rivales tras enfrentarse a {name}: 😵‍💫\")},",
+  "where": "social-data.js:220"
+ },
+ "{name} ha completado el 92% de sus pases y ganado 11 duelos. Partido perfecto.": {
+  "ctx": "{by: \"optajoel\", t: N_(\"{name} ha completado el 92% de sus pases y ganado 11 duelos. Partido perfecto.\")}",
+  "where": "social-data.js:221"
+ },
+ "{name} hoy desaparecido del partido. ¿Alguien lo ha visto? 🔍": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"{name} hoy desaparecido del partido. ¿Alguien lo ha visto? 🔍\")},",
+  "where": "social-data.js:224"
+ },
+ "Mal, muy mal. {name} se ha dejado ver poco y mal. Toca reaccionar.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Mal, muy mal. {name} se ha dejado ver poco y mal. Toca reaccionar.\")},",
+  "where": "social-data.js:225"
+ },
+ "Hoy no fue el día de {name}, pero hay que seguir confiando. Todos tenemos una mala tarde.": {
+  "ctx": "{by: \"fan\", t: N_(\"Hoy no fue el día de {name}, pero hay que seguir confiando. Todos tenemos una mala tarde.\")},",
+  "where": "social-data.js:226"
+ },
+ "Tranquilos con {name}, un mal partido lo tiene cualquiera. ¡Confianza!": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Tranquilos con {name}, un mal partido lo tiene cualquiera. ¡Confianza!\")},",
+  "where": "social-data.js:227"
+ },
+ "Con ese nivel de {name}, mejor que entre otro, de verdad.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Con ese nivel de {name}, mejor que entre otro, de verdad.\")},",
+  "where": "social-data.js:228"
+ },
+ "{name} está inflado. Lo vengo diciendo desde agosto. El partido de hoy me da la razón.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"{name} está inflado. Lo vengo diciendo desde agosto. El partido de hoy me da la razón.\")},",
+  "where": "social-data.js:229"
+ },
+ "{name}, el punto débil del {club} ante el {opp}: perdió balones y no ayudó atrás.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"{name}, el punto débil del {club} ante el {opp}: perdió balones y no ayudó atrás.\")},",
+  "where": "social-data.js:230"
+ },
+ "Mala noche de {name}: errores y poca incidencia en el juego del {club}.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"Mala noche de {name}: errores y poca incidencia en el juego del {club}.\")},",
+  "where": "social-data.js:231"
+ },
+ "📊 {name} perdió 22 balones y ganó solo 2 duelos. Partido para olvidar.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} perdió 22 balones y ganó solo 2 duelos. Partido para olvidar.\")},",
+  "where": "social-data.js:232"
+ },
+ "{name} en el minuto 70: 'esperando que me cambien' 🙈": {
+  "ctx": "{by: \"memefut\", t: N_(\"{name} en el minuto 70: 'esperando que me cambien' 🙈\")},",
+  "where": "social-data.js:233"
+ },
+ "Hoy {name} ha sido nuestro mejor jugador (del {opp}), gracias por tanto 😂": {
+  "ctx": "{by: \"rival\", mood: 1, t: N_(\"Hoy {name} ha sido nuestro mejor jugador (del {opp}), gracias por tanto 😂\")},",
+  "where": "social-data.js:234"
+ },
+ "Todos tenemos malos días. {name}, aquí estamos contigo. Mañana mejor 🤝": {
+  "ctx": "{by: \"teammate\", t: N_(\"Todos tenemos malos días. {name}, aquí estamos contigo. Mañana mejor 🤝\")},",
+  "where": "social-data.js:235"
+ },
+ "No fue mi día. Sé que puedo dar mucho más. A trabajar para la próxima 💪": {
+  "ctx": "{by: \"self\", mood: -1, t: N_(\"No fue mi día. Sé que puedo dar mucho más. A trabajar para la próxima 💪\")}",
+  "where": "social-data.js:236"
+ },
+ "¡{name} EXPULSADo! Hay que tener sangre fría, por favor… 🟥": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"¡{name} EXPULSADo! Hay que tener sangre fría, por favor… 🟥\")},",
+  "where": "social-data.js:239"
+ },
+ "Lo de la roja de {name} no tiene perdón. ¡Nos deja con uno menos y se acabó!": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Lo de la roja de {name} no tiene perdón. ¡Nos deja con uno menos y se acabó!\")},",
+  "where": "social-data.js:240"
+ },
+ "Roja injusta, ¡injustísima! El árbitro nos está robando hoy 😡 #ArbitroVete": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Roja injusta, ¡injustísima! El árbitro nos está robando hoy 😡 #ArbitroVete\")},",
+  "where": "social-data.js:241"
+ },
+ "Tarjeta roja a {name}. Es lo que hay, ahora a defender como leones.": {
+  "ctx": "{by: \"fan\", t: N_(\"Tarjeta roja a {name}. Es lo que hay, ahora a defender como leones.\")},",
+  "where": "social-data.js:242"
+ },
+ "Otra roja. Cada vez que {name} sale, la liamos. Qué profesionalidad 🙄": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Otra roja. Cada vez que {name} sale, la liamos. Qué profesionalidad 🙄\")},",
+  "where": "social-data.js:243"
+ },
+ "{name} ve la roja en el minuto {min} y deja al {club} con diez ante el {opp}.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"{name} ve la roja en el minuto {min} y deja al {club} con diez ante el {opp}.\")},",
+  "where": "social-data.js:244"
+ },
+ "Expulsión de {name} en el {min}': giro clave en el {club}-{opp}.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"Expulsión de {name} en el {min}': giro clave en el {club}-{opp}.\")},",
+  "where": "social-data.js:245"
+ },
+ "📊 La roja de {name} es la tercera del {club} esta temporada. Disciplina en el punto de mira.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 La roja de {name} es la tercera del {club} esta temporada. Disciplina en el punto de mira.\")},",
+  "where": "social-data.js:246"
+ },
+ "Árbitro sacando la roja a {name} mientras todos gritan: 'PERO ¡¡SI ES AMARILLA!!' 🟥🟨": {
+  "ctx": "{by: \"memefut\", t: N_(\"Árbitro sacando la roja a {name} mientras todos gritan: 'PERO ¡¡SI ES AMARILLA!!' 🟥🟨\")},",
+  "where": "social-data.js:247"
+ },
+ "Con diez el {club} es más simpático. Gracias, {name} 🤝": {
+  "ctx": "{by: \"rival\", mood: 1, t: N_(\"Con diez el {club} es más simpático. Gracias, {name} 🤝\")},",
+  "where": "social-data.js:248"
+ },
+ "Todos hemos tenido nuestra roja. A {name} le toca aprender y a nosotros, apoyar.": {
+  "ctx": "{by: \"teammate\", t: N_(\"Todos hemos tenido nuestra roja. A {name} le toca aprender y a nosotros, apoyar.\")},",
+  "where": "social-data.js:249"
+ },
+ "Perdí los nervios y le hice daño al equipo. Pido perdón a todos 🙏": {
+  "ctx": "{by: \"self\", mood: -1, t: N_(\"Perdí los nervios y le hice daño al equipo. Pido perdón a todos 🙏\")}",
+  "where": "social-data.js:250"
+ },
+ "Que no sea grave, que no sea grave, que no sea grave… 😰 Ánimo, {name}": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Que no sea grave, que no sea grave, que no sea grave… 😰 Ánimo, {name}\")},",
+  "where": "social-data.js:253"
+ },
+ "Lesión de {name}. Ahora sí que estamos perdidos 😭": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Lesión de {name}. Ahora sí que estamos perdidos 😭\")},",
+  "where": "social-data.js:254"
+ },
+ "Fuerza, {name}. Vuelve más fuerte, te esperamos aquí. 💙": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Fuerza, {name}. Vuelve más fuerte, te esperamos aquí. 💙\")},",
+  "where": "social-data.js:255"
+ },
+ "Todos juntos con {name}. Recupérate sin prisas. Estarás de vuelta como una leyenda 💪": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Todos juntos con {name}. Recupérate sin prisas. Estarás de vuelta como una leyenda 💪\")},",
+  "where": "social-data.js:256"
+ },
+ "Con tanta lesión, ¿alguien ha revisado el césped o los preparadores físicos? 🤔": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Con tanta lesión, ¿alguien ha revisado el césped o los preparadores físicos? 🤔\")},",
+  "where": "social-data.js:257"
+ },
+ "{name} se lesiona en el {club}-{opp} y es duda para las próximas semanas.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"{name} se lesiona en el {club}-{opp} y es duda para las próximas semanas.\")},",
+  "where": "social-data.js:258"
+ },
+ "Mala noticia para el {club}: {name} sufre una lesión y estará de baja.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"Mala noticia para el {club}: {name} sufre una lesión y estará de baja.\")},",
+  "where": "social-data.js:259"
+ },
+ "🏥 Parte médico: {name} sufre una lesión y comenzará de inmediato su recuperación. ¡Fuerza!": {
+  "ctx": "{by: \"club\", t: N_(\"🏥 Parte médico: {name} sufre una lesión y comenzará de inmediato su recuperación. ¡Fuerza!\")},",
+  "where": "social-data.js:260"
+ },
+ "Ánimo, {name}. Aquí estamos para lo que necesites. Vuelve pronto 🫂": {
+  "ctx": "{by: \"teammate\", t: N_(\"Ánimo, {name}. Aquí estamos para lo que necesites. Vuelve pronto 🫂\")},",
+  "where": "social-data.js:261"
+ },
+ "📊 {name} es la {n}.ª baja por lesión del {club} esta temporada.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} es la {n}.ª baja por lesión del {club} esta temporada.\")},",
+  "where": "social-data.js:262"
+ },
+ "NEWS | {name} se perderá varias semanas por lesión. El {club} analiza el reemplazo.": {
+  "ctx": "{by: \"ornstain\", t: N_(\"NEWS | {name} se perderá varias semanas por lesión. El {club} analiza el reemplazo.\")},",
+  "where": "social-data.js:263"
+ },
+ "Ánimo, {name}. Se te espera en el campo, no en la camilla 🤝": {
+  "ctx": "{by: \"rival\", t: N_(\"Ánimo, {name}. Se te espera en el campo, no en la camilla 🤝\")},",
+  "where": "social-data.js:264"
+ }
+}

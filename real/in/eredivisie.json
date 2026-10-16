@@ -1,0 +1,79 @@
+{
+ "id": "eredivisie",
+ "league": "Eredivisie",
+ "country": "NL",
+ "clubs": [
+  {
+   "club": "PSV",
+   "gameRating": 80
+  },
+  {
+   "club": "Feyenoord",
+   "gameRating": 78.8
+  },
+  {
+   "club": "Ajax",
+   "gameRating": 77.9
+  },
+  {
+   "club": "AZ Alkmaar",
+   "gameRating": 77
+  },
+  {
+   "club": "FC Twente",
+   "gameRating": 76.2
+  },
+  {
+   "club": "FC Utrecht",
+   "gameRating": 75.4
+  },
+  {
+   "club": "NEC Nijmegen",
+   "gameRating": 74.6
+  },
+  {
+   "club": "Go Ahead Eagles",
+   "gameRating": 73.9
+  },
+  {
+   "club": "SC Heerenveen",
+   "gameRating": 73.2
+  },
+  {
+   "club": "FC Groningen",
+   "gameRating": 72.4
+  },
+  {
+   "club": "Sparta Rotterdam",
+   "gameRating": 71.7
+  },
+  {
+   "club": "PEC Zwolle",
+   "gameRating": 71
+  },
+  {
+   "club": "Fortuna Sittard",
+   "gameRating": 70.3
+  },
+  {
+   "club": "Excelsior",
+   "gameRating": 69.7
+  },
+  {
+   "club": "Telstar",
+   "gameRating": 69
+  },
+  {
+   "club": "ADO Den Haag",
+   "gameRating": 68.3
+  },
+  {
+   "club": "Willem II",
+   "gameRating": 67.7
+  },
+  {
+   "club": "SC Cambuur",
+   "gameRating": 67
+  }
+ ]
+}

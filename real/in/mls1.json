@@ -1,0 +1,67 @@
+{
+ "id": "mls1",
+ "league": "MLS",
+ "country": "US",
+ "clubs": [
+  {
+   "club": "Inter Miami",
+   "gameRating": 75
+  },
+  {
+   "club": "Los Angeles FC",
+   "gameRating": 74.5
+  },
+  {
+   "club": "Columbus Crew",
+   "gameRating": 74.1
+  },
+  {
+   "club": "FC Cincinnati",
+   "gameRating": 73.7
+  },
+  {
+   "club": "Philadelphia Union",
+   "gameRating": 73.3
+  },
+  {
+   "club": "Seattle Sounders",
+   "gameRating": 73
+  },
+  {
+   "club": "Vancouver Whitecaps",
+   "gameRating": 72.6
+  },
+  {
+   "club": "LA Galaxy",
+   "gameRating": 72.3
+  },
+  {
+   "club": "Charlotte FC",
+   "gameRating": 72
+  },
+  {
+   "club": "Nashville SC",
+   "gameRating": 71.7
+  },
+  {
+   "club": "Orlando City",
+   "gameRating": 71.4
+  },
+  {
+   "club": "New York City FC",
+   "gameRating": 71.1
+  },
+  {
+   "club": "New York Red Bulls",
+   "gameRating": 70.7
+  },
+  {
+   "club": "Minnesota United",
+   "gameRating": 70.4
+  },
+  {
+   "club": "San Diego FC",
+   "gameRating": 70.2
+  }
+ ]
+}

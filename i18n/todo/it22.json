@@ -1,0 +1,1358 @@
+{
+ "Poner límites claros": {
+  "ctx": "{t: tr(\"Poner límites claros\"), ok: {txt: tr(\"Bromas sí, humillaciones no. Todos lo entienden.\"), fx: {chem: 3}}},",
+  "where": "events-manager-more.js:232"
+ },
+ "Bromas sí, humillaciones no. Todos lo entienden.": {
+  "ctx": "{t: tr(\"Poner límites claros\"), ok: {txt: tr(\"Bromas sí, humillaciones no. Todos lo entienden.\"), fx: {chem: 3}}},",
+  "where": "events-manager-more.js:232"
+ },
+ "Prohibirlas del todo": {
+  "ctx": "{t: tr(\"Prohibirlas del todo\"), ok: {txt: tr(\"Paz en el vestuario… y algo menos de chispa.\"), fx: {chem: -2, board: 2}}}",
+  "where": "events-manager-more.js:233"
+ },
+ "Paz en el vestuario… y algo menos de chispa.": {
+  "ctx": "{t: tr(\"Prohibirlas del todo\"), ok: {txt: tr(\"Paz en el vestuario… y algo menos de chispa.\"), fx: {chem: -2, board: 2}}}",
+  "where": "events-manager-more.js:233"
+ },
+ "{name}, tu capitán, se queja delante de todos de las instalaciones, los viajes y el nivel de exigencia. Dice que así no se puede competir y te señala a ti.": {
+  "ctx": "text: function (y) { return tr(\"{name}, tu capitán, se queja delante de todos de las instalaciones, los viajes y el nivel de exigencia. Dice que así no se puede competir y te señala a ti.\", {name: plName(y.pl)}); },",
+  "where": "events-manager-more.js:240"
+ },
+ "Quitarle el brazalete": {
+  "ctx": "{t: tr(\"Quitarle el brazalete\"), p: 0.5,",
+  "where": "events-manager-more.js:242"
+ },
+ "Golpe de autoridad. El vestuario entiende quién manda.": {
+  "ctx": "ok: {txt: tr(\"Golpe de autoridad. El vestuario entiende quién manda.\"), fx: {pmor: -15, board: 3, chem: 2}, then: function () { S.m.cap = mPickCaptain(); if (S.m.cap === pl.id) S.m.cap = null; }},",
+  "where": "events-manager-more.js:243"
+ },
+ "Medio vestuario se pone de su lado y el ambiente se envenena.": {
+  "ctx": "ko: {txt: tr(\"Medio vestuario se pone de su lado y el ambiente se envenena.\"), fx: {pmor: -20, chem: -8, sqMor: -4}, then: function () { S.m.cap = null; }}},",
+  "where": "events-manager-more.js:244"
+ },
+ "Darle la razón y pedir mejoras al club ({cost})": {
+  "ctx": "{t: tr(\"Darle la razón y pedir mejoras al club ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Se mejoran las condiciones. El capitán se siente escuchado, la directiva no tanto.\"), fx: {bud: -g, pmor: 10, chem: 3, board: ",
+  "where": "events-manager-more.js:245"
+ },
+ "Se mejoran las condiciones. El capitán se siente escuchado, la directiva no tanto.": {
+  "ctx": "{t: tr(\"Darle la razón y pedir mejoras al club ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Se mejoran las condiciones. El capitán se siente escuchado, la directiva no tanto.\"), fx: {bud: -g, pmor: 10, chem: 3, board: ",
+  "where": "events-manager-more.js:245"
+ },
+ "Hablarlo a solas": {
+  "ctx": "{t: tr(\"Hablarlo a solas\"), p: 0.6,",
+  "where": "events-manager-more.js:246"
+ },
+ "Os decís las verdades y salís con un plan común.": {
+  "ctx": "ok: {txt: tr(\"Os decís las verdades y salís con un plan común.\"), fx: {pmor: 6, chem: 2}},",
+  "where": "events-manager-more.js:247"
+ },
+ "La conversación acaba a gritos y se filtra a la prensa.": {
+  "ctx": "ko: {txt: tr(\"La conversación acaba a gritos y se filtra a la prensa.\"), fx: {pmor: -8, rep: -2}}}",
+  "where": "events-manager-more.js:248"
+ },
+ "Lleváis varias semanas ganando muy poco. Tu utillero, muy supersticioso, te trae un frasco de agua bendita y jura que hay que rociar el banquillo antes del partido.": {
+  "ctx": "text: function () { return tr(\"Lleváis varias semanas ganando muy poco. Tu utillero, muy supersticioso, te trae un frasco de agua bendita y jura que hay que rociar el banquillo antes del partido.\"); },",
+  "where": "events-manager-more.js:254"
+ },
+ "Rociar el banquillo delante de las cámaras": {
+  "ctx": "{t: tr(\"Rociar el banquillo delante de las cámaras\"), p: 0.5,",
+  "where": "events-manager-more.js:256"
+ },
+ "Ganáis y el gesto se convierte en leyenda. La grada se lo pasa en grande.": {
+  "ctx": "ok: {txt: tr(\"Ganáis y el gesto se convierte en leyenda. La grada se lo pasa en grande.\"), fx: {fans: 5, sqMor: 3}},",
+  "where": "events-manager-more.js:257"
+ },
+ "Tampoco ganáis y las imágenes dan la vuelta a las redes entre burlas.": {
+  "ctx": "ko: {txt: tr(\"Tampoco ganáis y las imágenes dan la vuelta a las redes entre burlas.\"), fx: {rep: -3, fans: -2}}},",
+  "where": "events-manager-more.js:258"
+ },
+ "Hacerlo a escondidas": {
+  "ctx": "{t: tr(\"Hacerlo a escondidas\"), ok: {txt: tr(\"Nadie se entera. El utillero se queda tranquilo y tú también.\"), fx: {chem: 1, sqMor: 1}}},",
+  "where": "events-manager-more.js:259"
+ },
+ "Nadie se entera. El utillero se queda tranquilo y tú también.": {
+  "ctx": "{t: tr(\"Hacerlo a escondidas\"), ok: {txt: tr(\"Nadie se entera. El utillero se queda tranquilo y tú también.\"), fx: {chem: 1, sqMor: 1}}},",
+  "where": "events-manager-more.js:259"
+ },
+ "«Aquí se gana entrenando»": {
+  "ctx": "{t: tr(\"«Aquí se gana entrenando»\"), ok: {txt: tr(\"Sesión extra de táctica en lugar de rituales.\"), fx: {sfit: -4, buff: {v: 0.5, b: 1, n: tr(\"Trabajo\")}}}}",
+  "where": "events-manager-more.js:260"
+ },
+ "Sesión extra de táctica en lugar de rituales.": {
+  "ctx": "{t: tr(\"«Aquí se gana entrenando»\"), ok: {txt: tr(\"Sesión extra de táctica en lugar de rituales.\"), fx: {sfit: -4, buff: {v: 0.5, b: 1, n: tr(\"Trabajo\")}}}}",
+  "where": "events-manager-more.js:260"
+ },
+ "Trabajo": {
+  "ctx": "{t: tr(\"«Aquí se gana entrenando»\"), ok: {txt: tr(\"Sesión extra de táctica en lugar de rituales.\"), fx: {sfit: -4, buff: {v: 0.5, b: 1, n: tr(\"Trabajo\")}}}}",
+  "where": "events-manager-more.js:260"
+ },
+ "Un entrenador especialista en balón parado se ofrece al club. Sus equipos marcan uno de cada tres goles en córneres y faltas, pero quiere libertad para robar horas de entrenamiento.": {
+  "ctx": "text: function () { return tr(\"Un entrenador especialista en balón parado se ofrece al club. Sus equipos marcan uno de cada tres goles en córneres y faltas, pero quiere libertad para robar horas de entrenamiento.\"); },",
+  "where": "events-manager-more.js:266"
+ },
+ "Ficharle y darle carta blanca ({cost})": {
+  "ctx": "{t: tr(\"Ficharle y darle carta blanca ({cost})\", {cost: fmtMoney(g)}), p: 0.65,",
+  "where": "events-manager-more.js:268"
+ },
+ "Jugadas ensayadas que parecen coreografías. Los goles llegan.": {
+  "ctx": "ok: {txt: tr(\"Jugadas ensayadas que parecen coreografías. Los goles llegan.\"), fx: {bud: -g, buff: {v: 1, b: 2, n: tr(\"Balón parado\")}}},",
+  "where": "events-manager-more.js:269"
+ },
+ "Tantas jugadas nuevas confunden a los jugadores y los demás entrenamientos se resienten.": {
+  "ctx": "ko: {txt: tr(\"Tantas jugadas nuevas confunden a los jugadores y los demás entrenamientos se resienten.\"), fx: {bud: -g, chem: -3}}},",
+  "where": "events-manager-more.js:270"
+ },
+ "Contratarle como asesor puntual": {
+  "ctx": "{t: tr(\"Contratarle como asesor puntual\"), ok: {txt: tr(\"Unas cuantas jugadas buenas sin cambiar la rutina.\"), fx: {bud: -Math.max(5e4, myR5(g / 2)), buff: {v: 0.5, b: 1, n: tr(\"Estrategia\")}}}},",
+  "where": "events-manager-more.js:271"
+ },
+ "Unas cuantas jugadas buenas sin cambiar la rutina.": {
+  "ctx": "{t: tr(\"Contratarle como asesor puntual\"), ok: {txt: tr(\"Unas cuantas jugadas buenas sin cambiar la rutina.\"), fx: {bud: -Math.max(5e4, myR5(g / 2)), buff: {v: 0.5, b: 1, n: tr(\"Estrategia\")}}}},",
+  "where": "events-manager-more.js:271"
+ },
+ "Estrategia": {
+  "ctx": "{t: tr(\"Contratarle como asesor puntual\"), ok: {txt: tr(\"Unas cuantas jugadas buenas sin cambiar la rutina.\"), fx: {bud: -Math.max(5e4, myR5(g / 2)), buff: {v: 0.5, b: 1, n: tr(\"Estrategia\")}}}},",
+  "where": "events-manager-more.js:271"
+ },
+ "Que se encargue tu segundo": {
+  "ctx": "{t: tr(\"Que se encargue tu segundo\"), ok: {txt: tr(\"Tu segundo se lo toma como un reto personal.\"), fx: {chem: 1}}}",
+  "where": "events-manager-more.js:272"
+ },
+ "Tu segundo se lo toma como un reto personal.": {
+  "ctx": "{t: tr(\"Que se encargue tu segundo\"), ok: {txt: tr(\"Tu segundo se lo toma como un reto personal.\"), fx: {chem: 1}}}",
+  "where": "events-manager-more.js:272"
+ },
+ "Por segunda semana seguida, tu alineación aparece publicada en un periódico horas antes del partido. Hay un topo en el vestuario o en el cuerpo técnico.": {
+  "ctx": "text: function () { return tr(\"Por segunda semana seguida, tu alineación aparece publicada en un periódico horas antes del partido. Hay un topo en el vestuario o en el cuerpo técnico.\"); },",
+  "where": "events-manager-more.js:277"
+ },
+ "Dar alineaciones falsas para cazarle": {
+  "ctx": "{t: tr(\"Dar alineaciones falsas para cazarle\"), p: 0.5,",
+  "where": "events-manager-more.js:279"
+ },
+ "La trampa funciona: el topo queda retratado y la filtración se acaba.": {
+  "ctx": "ok: {txt: tr(\"La trampa funciona: el topo queda retratado y la filtración se acaba.\"), fx: {chem: 4, board: 2}},",
+  "where": "events-manager-more.js:280"
+ },
+ "No caza a nadie y los jugadores se sienten vigilados.": {
+  "ctx": "ko: {txt: tr(\"No caza a nadie y los jugadores se sienten vigilados.\"), fx: {chem: -5, sqMor: -2}}},",
+  "where": "events-manager-more.js:281"
+ },
+ "Dar el once solo una hora antes": {
+  "ctx": "{t: tr(\"Dar el once solo una hora antes\"), ok: {txt: tr(\"Se acaban las filtraciones, pero los jugadores se preparan peor.\"), fx: {buff: {v: -0.3, b: 1, n: tr(\"Once tardío\")}, chem: 1}}},",
+  "where": "events-manager-more.js:282"
+ },
+ "Se acaban las filtraciones, pero los jugadores se preparan peor.": {
+  "ctx": "{t: tr(\"Dar el once solo una hora antes\"), ok: {txt: tr(\"Se acaban las filtraciones, pero los jugadores se preparan peor.\"), fx: {buff: {v: -0.3, b: 1, n: tr(\"Once tardío\")}, chem: 1}}},",
+  "where": "events-manager-more.js:282"
+ },
+ "Once tardío": {
+  "ctx": "{t: tr(\"Dar el once solo una hora antes\"), ok: {txt: tr(\"Se acaban las filtraciones, pero los jugadores se preparan peor.\"), fx: {buff: {v: -0.3, b: 1, n: tr(\"Once tardío\")}, chem: 1}}},",
+  "where": "events-manager-more.js:282"
+ },
+ "Encararlo delante de todos": {
+  "ctx": "{t: tr(\"Encararlo delante de todos\"), p: 0.4,",
+  "where": "events-manager-more.js:283"
+ },
+ "Tu discurso hace que el culpable dé un paso al frente. Asunto zanjado.": {
+  "ctx": "ok: {txt: tr(\"Tu discurso hace que el culpable dé un paso al frente. Asunto zanjado.\"), fx: {chem: 5, rep: 1}},",
+  "where": "events-manager-more.js:284"
+ },
+ "Nadie habla y el ambiente se enrarece.": {
+  "ctx": "ko: {txt: tr(\"Nadie habla y el ambiente se enrarece.\"), fx: {chem: -4}}}",
+  "where": "events-manager-more.js:285"
+ },
+ "El agente de {name} representa también a otros dos de tus jugadores. Ahora exige que su cliente cobre como los mejores, o «se lo pensarán todos».": {
+  "ctx": "text: function (y) { return tr(\"El agente de {name} representa también a otros dos de tus jugadores. Ahora exige que su cliente cobre como los mejores, o «se lo pensarán todos».\", {name: plName(y.pl)}); },",
+  "where": "events-manager-more.js:291"
+ },
+ "Subirle el sueldo": {
+  "ctx": "{t: tr(\"Subirle el sueldo\"), d: tr(\"Unos {sal} más al año.\", {sal: fmtMoney(rise)}), ok: {txt: tr(\"Paz con el agente… hasta la próxima. Otros jugadores toman nota.\"), fx: {pmor: 10, chem: -2, board: -2}, then: function (",
+  "where": "events-manager-more.js:293"
+ },
+ "Unos {sal} más al año.": {
+  "ctx": "{t: tr(\"Subirle el sueldo\"), d: tr(\"Unos {sal} más al año.\", {sal: fmtMoney(rise)}), ok: {txt: tr(\"Paz con el agente… hasta la próxima. Otros jugadores toman nota.\"), fx: {pmor: 10, chem: -2, board: -2}, then: function (",
+  "where": "events-manager-more.js:293 events-manager-more.js:489"
+ },
+ "Paz con el agente… hasta la próxima. Otros jugadores toman nota.": {
+  "ctx": "{t: tr(\"Subirle el sueldo\"), d: tr(\"Unos {sal} más al año.\", {sal: fmtMoney(rise)}), ok: {txt: tr(\"Paz con el agente… hasta la próxima. Otros jugadores toman nota.\"), fx: {pmor: 10, chem: -2, board: -2}, then: function (",
+  "where": "events-manager-more.js:293"
+ },
+ "Plantarte ante el agente": {
+  "ctx": "{t: tr(\"Plantarte ante el agente\"), p: 0.5,",
+  "where": "events-manager-more.js:294"
+ },
+ "El agente recula: su cliente no quiere irse. Ganas autoridad.": {
+  "ctx": "ok: {txt: tr(\"El agente recula: su cliente no quiere irse. Ganas autoridad.\"), fx: {board: 4, rep: 2}},",
+  "where": "events-manager-more.js:295"
+ },
+ "El agente cumple su amenaza y tres jugadores se ponen tensos.": {
+  "ctx": "ko: {txt: tr(\"El agente cumple su amenaza y tres jugadores se ponen tensos.\"), fx: {pmor: -12, sqMor: -3, preq: true}}},",
+  "where": "events-manager-more.js:296"
+ },
+ "Hablar directamente con el jugador": {
+  "ctx": "{t: tr(\"Hablar directamente con el jugador\"), p: 0.6,",
+  "where": "events-manager-more.js:297"
+ },
+ "El jugador se compromete con el proyecto, digan lo que digan.": {
+  "ctx": "ok: {txt: tr(\"El jugador se compromete con el proyecto, digan lo que digan.\") , fx: {pmor: 6, chem: 2}},",
+  "where": "events-manager-more.js:298"
+ },
+ "El jugador te remite a su agente. Te sientes ninguneado.": {
+  "ctx": "ko: {txt: tr(\"El jugador te remite a su agente. Te sientes ninguneado.\"), fx: {pmor: -4}}}",
+  "where": "events-manager-more.js:299"
+ },
+ "El propietario te manda un mensaje la víspera del partido: quiere ver a {name} de titular. Dice que es «una sugerencia».": {
+  "ctx": "text: function (y) { return tr(\"El propietario te manda un mensaje la víspera del partido: quiere ver a {name} de titular. Dice que es «una sugerencia».\", {name: plName(y.pl)}); },",
+  "where": "events-manager-more.js:305"
+ },
+ "Hacerle caso": {
+  "ctx": "{t: tr(\"Hacerle caso\"), p: 0.55,",
+  "where": "events-manager-more.js:307"
+ },
+ "El jugador cumple y el dueño presume de ojo clínico. Tú tragas saliva.": {
+  "ctx": "ok: {txt: tr(\"El jugador cumple y el dueño presume de ojo clínico. Tú tragas saliva.\"), fx: {board: 6, pmor: 8, rep: -1}},",
+  "where": "events-manager-more.js:308"
+ },
+ "Partido para olvidar y el vestuario sabe por qué jugó.": {
+  "ctx": "ko: {txt: tr(\"Partido para olvidar y el vestuario sabe por qué jugó.\"), fx: {board: 2, chem: -5, rep: -2}}},",
+  "where": "events-manager-more.js:309"
+ },
+ "Ignorarle con educación": {
+  "ctx": "{t: tr(\"Ignorarle con educación\"), ok: {txt: tr(\"Tú decides las alineaciones. El dueño no lo olvidará.\"), fx: {board: -6, chem: 3, rep: 2}}},",
+  "where": "events-manager-more.js:310"
+ },
+ "Tú decides las alineaciones. El dueño no lo olvidará.": {
+  "ctx": "{t: tr(\"Ignorarle con educación\"), ok: {txt: tr(\"Tú decides las alineaciones. El dueño no lo olvidará.\"), fx: {board: -6, chem: 3, rep: 2}}},",
+  "where": "events-manager-more.js:310"
+ },
+ "Darle minutos en la segunda parte": {
+  "ctx": "{t: tr(\"Darle minutos en la segunda parte\"), ok: {txt: tr(\"Un término medio que deja a todos casi contentos.\"), fx: {board: 2, pmor: 3}}}",
+  "where": "events-manager-more.js:311"
+ },
+ "Un término medio que deja a todos casi contentos.": {
+  "ctx": "{t: tr(\"Darle minutos en la segunda parte\"), ok: {txt: tr(\"Un término medio que deja a todos casi contentos.\"), fx: {board: 2, pmor: 3}}}",
+  "where": "events-manager-more.js:311"
+ },
+ "Las lluvias y un concierto han dejado el césped de tu estadio lleno de calvas y barro. Tu juego de toque se resiente y el jardinero pide una solución cara.": {
+  "ctx": "text: function () { return tr(\"Las lluvias y un concierto han dejado el césped de tu estadio lleno de calvas y barro. Tu juego de toque se resiente y el jardinero pide una solución cara.\"); },",
+  "where": "events-manager-more.js:316"
+ },
+ "Instalar césped híbrido nuevo ({cost})": {
+  "ctx": "{t: tr(\"Instalar césped híbrido nuevo ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Una alfombra. El balón vuelve a correr.\"), fx: {bud: -g, buff: {v: 0.6, b: 2, n: tr(\"Césped perfecto\")}, board: -1}}},",
+  "where": "events-manager-more.js:318"
+ },
+ "Una alfombra. El balón vuelve a correr.": {
+  "ctx": "{t: tr(\"Instalar césped híbrido nuevo ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Una alfombra. El balón vuelve a correr.\"), fx: {bud: -g, buff: {v: 0.6, b: 2, n: tr(\"Césped perfecto\")}, board: -1}}},",
+  "where": "events-manager-more.js:318"
+ },
+ "Césped perfecto": {
+  "ctx": "{t: tr(\"Instalar césped híbrido nuevo ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Una alfombra. El balón vuelve a correr.\"), fx: {bud: -g, buff: {v: 0.6, b: 2, n: tr(\"Césped perfecto\")}, board: -1}}},",
+  "where": "events-manager-more.js:318"
+ },
+ "Adaptar el juego: balones largos": {
+  "ctx": "{t: tr(\"Adaptar el juego: balones largos\"), p: 0.55,",
+  "where": "events-manager-more.js:319"
+ },
+ "Fútbol directo y segundas jugadas. Funciona en ese barrizal.": {
+  "ctx": "ok: {txt: tr(\"Fútbol directo y segundas jugadas. Funciona en ese barrizal.\"), fx: {buff: {v: 0.5, b: 1, n: tr(\"Juego directo\")}}},",
+  "where": "events-manager-more.js:320"
+ },
+ "Juego directo": {
+  "ctx": "ok: {txt: tr(\"Fútbol directo y segundas jugadas. Funciona en ese barrizal.\"), fx: {buff: {v: 0.5, b: 1, n: tr(\"Juego directo\")}}},",
+  "where": "events-manager-more.js:320"
+ },
+ "Los jugadores no saben jugar así y la grada pita.": {
+  "ctx": "ko: {txt: tr(\"Los jugadores no saben jugar así y la grada pita.\"), fx: {fans: -4, chem: -2}}},",
+  "where": "events-manager-more.js:321"
+ },
+ "Parchearlo y aguantar": {
+  "ctx": "{t: tr(\"Parchearlo y aguantar\"), ok: {txt: tr(\"Unos tepes nuevos y a rezar. Alguna torcedura de tobillo.\"), fx: {sfit: -4}}}",
+  "where": "events-manager-more.js:322"
+ },
+ "Unos tepes nuevos y a rezar. Alguna torcedura de tobillo.": {
+  "ctx": "{t: tr(\"Parchearlo y aguantar\"), ok: {txt: tr(\"Unos tepes nuevos y a rezar. Alguna torcedura de tobillo.\"), fx: {sfit: -4}}}",
+  "where": "events-manager-more.js:322"
+ },
+ "Tu vuelo para el partido fuera de casa se cancela por una tormenta. Las alternativas: diez horas de autobús esta noche o un vuelo privado carísimo mañana a primera hora.": {
+  "ctx": "text: function () { return tr(\"Tu vuelo para el partido fuera de casa se cancela por una tormenta. Las alternativas: diez horas de autobús esta noche o un vuelo privado carísimo mañana a primera hora.\"); },",
+  "where": "events-manager-more.js:327"
+ },
+ "Pagar el vuelo privado ({cost})": {
+  "ctx": "{t: tr(\"Pagar el vuelo privado ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Llegáis descansados. El director financiero no tanto.\"), fx: {bud: -g, board: -1}}},",
+  "where": "events-manager-more.js:329"
+ },
+ "Llegáis descansados. El director financiero no tanto.": {
+  "ctx": "{t: tr(\"Pagar el vuelo privado ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Llegáis descansados. El director financiero no tanto.\"), fx: {bud: -g, board: -1}}},",
+  "where": "events-manager-more.js:329"
+ },
+ "Autobús nocturno": {
+  "ctx": "{t: tr(\"Autobús nocturno\"), p: 0.5,",
+  "where": "events-manager-more.js:330"
+ },
+ "La odisea une al grupo: canciones, cartas y una victoria con épica.": {
+  "ctx": "ok: {txt: tr(\"La odisea une al grupo: canciones, cartas y una victoria con épica.\"), fx: {chem: 4, sfit: -5}},",
+  "where": "events-manager-more.js:331"
+ },
+ "Llegáis destrozados y se nota desde el primer minuto.": {
+  "ctx": "ko: {txt: tr(\"Llegáis destrozados y se nota desde el primer minuto.\"), fx: {sfit: -8, buff: {v: -0.6, b: 1, n: tr(\"Viaje infernal\")}}}},",
+  "where": "events-manager-more.js:332"
+ },
+ "Viaje infernal": {
+  "ctx": "ko: {txt: tr(\"Llegáis destrozados y se nota desde el primer minuto.\"), fx: {sfit: -8, buff: {v: -0.6, b: 1, n: tr(\"Viaje infernal\")}}}},",
+  "where": "events-manager-more.js:332"
+ },
+ "Pedir aplazar el partido": {
+  "ctx": "{t: tr(\"Pedir aplazar el partido\"), p: 0.35,",
+  "where": "events-manager-more.js:333"
+ },
+ "La liga acepta y ganáis un día de descanso.": {
+  "ctx": "ok: {txt: tr(\"La liga acepta y ganáis un día de descanso.\"), fx: {sfit: 3}},",
+  "where": "events-manager-more.js:334"
+ },
+ "La liga se niega y llegáis con lo justo y de mal humor.": {
+  "ctx": "ko: {txt: tr(\"La liga se niega y llegáis con lo justo y de mal humor.\"), fx: {sfit: -6, sqMor: -2}}}",
+  "where": "events-manager-more.js:335"
+ },
+ "Tras el parón de selecciones, cuatro de tus titulares vuelven el jueves tras cruzar medio mundo, con el partido el sábado. Llegan cansados y con jet lag.": {
+  "ctx": "text: function () { return tr(\"Tras el parón de selecciones, cuatro de tus titulares vuelven el jueves tras cruzar medio mundo, con el partido el sábado. Llegan cansados y con jet lag.\"); },",
+  "where": "events-manager-more.js:340"
+ },
+ "Que jueguen igualmente": {
+  "ctx": "{t: tr(\"Que jueguen igualmente\"), p: 0.55,",
+  "where": "events-manager-more.js:342"
+ },
+ "Son profesionales y responden aunque vayan justos.": {
+  "ctx": "ok: {txt: tr(\"Son profesionales y responden aunque vayan justos.\"), fx: {sfit: -4}},",
+  "where": "events-manager-more.js:343"
+ },
+ "Se arrastran por el campo y uno acaba con una sobrecarga.": {
+  "ctx": "ko: {txt: tr(\"Se arrastran por el campo y uno acaba con una sobrecarga.\"), fx: {sfit: -7, buff: {v: -0.7, b: 1, n: tr(\"Jet lag\")}}}},",
+  "where": "events-manager-more.js:344"
+ },
+ "Jet lag": {
+  "ctx": "ko: {txt: tr(\"Se arrastran por el campo y uno acaba con una sobrecarga.\"), fx: {sfit: -7, buff: {v: -0.7, b: 1, n: tr(\"Jet lag\")}}}},",
+  "where": "events-manager-more.js:344"
+ },
+ "Reservarles y tirar de suplentes": {
+  "ctx": "{t: tr(\"Reservarles y tirar de suplentes\"), ok: {txt: tr(\"Los menos habituales tienen su oportunidad y se dejan la piel.\"), fx: {sqMor: 3, buff: {v: -0.4, b: 1, n: tr(\"Once alternativo\")}}}},",
+  "where": "events-manager-more.js:345"
+ },
+ "Los menos habituales tienen su oportunidad y se dejan la piel.": {
+  "ctx": "{t: tr(\"Reservarles y tirar de suplentes\"), ok: {txt: tr(\"Los menos habituales tienen su oportunidad y se dejan la piel.\"), fx: {sqMor: 3, buff: {v: -0.4, b: 1, n: tr(\"Once alternativo\")}}}},",
+  "where": "events-manager-more.js:345"
+ },
+ "Once alternativo": {
+  "ctx": "{t: tr(\"Reservarles y tirar de suplentes\"), ok: {txt: tr(\"Los menos habituales tienen su oportunidad y se dejan la piel.\"), fx: {sqMor: 3, buff: {v: -0.4, b: 1, n: tr(\"Once alternativo\")}}}},",
+  "where": "events-manager-more.js:345"
+ },
+ "Plan de recuperación con el cuerpo médico": {
+  "ctx": "{t: tr(\"Plan de recuperación con el cuerpo médico\"), ok: {txt: tr(\"Crioterapia, siestas pautadas y luz solar. Llegan algo mejor.\"), fx: {sfit: 2, bud: -30000}}}",
+  "where": "events-manager-more.js:346"
+ },
+ "Crioterapia, siestas pautadas y luz solar. Llegan algo mejor.": {
+  "ctx": "{t: tr(\"Plan de recuperación con el cuerpo médico\"), ok: {txt: tr(\"Crioterapia, siestas pautadas y luz solar. Llegan algo mejor.\"), fx: {sfit: 2, bud: -30000}}}",
+  "where": "events-manager-more.js:346"
+ },
+ "En la cantera hay un chico de quince años que lo hace todo con una facilidad insultante. Los grandes de Europa ya preguntan por él y su familia duda.": {
+  "ctx": "text: function () { return tr(\"En la cantera hay un chico de quince años que lo hace todo con una facilidad insultante. Los grandes de Europa ya preguntan por él y su familia duda.\"); },",
+  "where": "events-manager-more.js:351"
+ },
+ "Subirle al primer equipo ya": {
+  "ctx": "{t: tr(\"Subirle al primer equipo ya\"), p: 0.6,",
+  "where": "events-manager-more.js:355"
+ },
+ "Firma su primer contrato y entrena con los mayores. La grada ya corea su nombre.": {
+  "ctx": "ok: {txt: tr(\"Firma su primer contrato y entrena con los mayores. La grada ya corea su nombre.\"), fx: {youth: 1, fans: 5, rep: 2}, n: tr(\"Un prodigio en la plantilla\"), then: promote(10)},",
+  "where": "events-manager-more.js:356"
+ },
+ "Un prodigio en la plantilla": {
+  "ctx": "ok: {txt: tr(\"Firma su primer contrato y entrena con los mayores. La grada ya corea su nombre.\"), fx: {youth: 1, fans: 5, rep: 2}, n: tr(\"Un prodigio en la plantilla\"), then: promote(10)},",
+  "where": "events-manager-more.js:356 events-manager-more.js:358"
+ },
+ "Sube, pero la presión le supera y tarda en adaptarse.": {
+  "ctx": "ko: {txt: tr(\"Sube, pero la presión le supera y tarda en adaptarse.\"), fx: {youth: 1, fans: 2}, then: promote(5)}},",
+  "where": "events-manager-more.js:357"
+ },
+ "Blindarle con un contrato de formación ({cost})": {
+  "ctx": "{t: tr(\"Blindarle con un contrato de formación ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"La familia confía en el club y el chico sube con calma.\"), fx: {bud: -g, youth: 1, board: 2}, n: tr(\"Un prodigio en la plantil",
+  "where": "events-manager-more.js:358"
+ },
+ "La familia confía en el club y el chico sube con calma.": {
+  "ctx": "{t: tr(\"Blindarle con un contrato de formación ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"La familia confía en el club y el chico sube con calma.\"), fx: {bud: -g, youth: 1, board: 2}, n: tr(\"Un prodigio en la plantil",
+  "where": "events-manager-more.js:358"
+ },
+ "Venderle a un grande": {
+  "ctx": "{t: tr(\"Venderle a un grande\"), ok: {txt: tr(\"Una cantidad muy jugosa. La cantera llora la pérdida.\"), fx: {bud: myBud(y, 0.08, 3e5), fans: -5, board: 3}}}",
+  "where": "events-manager-more.js:359"
+ },
+ "Una cantidad muy jugosa. La cantera llora la pérdida.": {
+  "ctx": "{t: tr(\"Venderle a un grande\"), ok: {txt: tr(\"Una cantidad muy jugosa. La cantera llora la pérdida.\"), fx: {bud: myBud(y, 0.08, 3e5), fans: -5, board: 3}}}",
+  "where": "events-manager-more.js:359"
+ },
+ "{young}, joven y con carisma, se ha convertido en un líder del grupo. Algunos piden que herede el brazalete de {cap}.": {
+  "ctx": "text: function (y) { var c = y.m.cap != null ? mPl(y.m.cap) : null; return c ? tr(\"{young}, joven y con carisma, se ha convertido en un líder del grupo. Algunos piden que herede el brazalete de {cap}.\", {young: plName(y.",
+  "where": "events-manager-more.js:365"
+ },
+ "{young}, joven y con carisma, se ha convertido en un líder del grupo. Algunos piden que sea el nuevo capitán.": {
+  "ctx": "text: function (y) { var c = y.m.cap != null ? mPl(y.m.cap) : null; return c ? tr(\"{young}, joven y con carisma, se ha convertido en un líder del grupo. Algunos piden que herede el brazalete de {cap}.\", {young: plName(y.",
+  "where": "events-manager-more.js:365"
+ },
+ "Darle el brazalete": {
+  "ctx": "{t: tr(\"Darle el brazalete\"), p: 0.55,",
+  "where": "events-manager-more.js:367"
+ },
+ "Un nuevo líder para una nueva etapa. Los jóvenes se sienten representados.": {
+  "ctx": "ok: {txt: tr(\"Un nuevo líder para una nueva etapa. Los jóvenes se sienten representados.\"), fx: {pmor: 12, chem: 3}, then: function () { S.m.cap = pl.id; }},",
+  "where": "events-manager-more.js:368"
+ },
+ "Los veteranos se sienten desplazados y el vestuario se divide.": {
+  "ctx": "ko: {txt: tr(\"Los veteranos se sienten desplazados y el vestuario se divide.\"), fx: {pmor: 8, chem: -6}, then: function () { S.m.cap = pl.id; }}},",
+  "where": "events-manager-more.js:369"
+ },
+ "Que vote la plantilla": {
+  "ctx": "{t: tr(\"Que vote la plantilla\"), ok: {txt: tr(\"Votación democrática. Gane quien gane, todos lo aceptan.\"), fx: {chem: 4, sqMor: 2}}},",
+  "where": "events-manager-more.js:370"
+ },
+ "Votación democrática. Gane quien gane, todos lo aceptan.": {
+  "ctx": "{t: tr(\"Que vote la plantilla\"), ok: {txt: tr(\"Votación democrática. Gane quien gane, todos lo aceptan.\"), fx: {chem: 4, sqMor: 2}}},",
+  "where": "events-manager-more.js:370"
+ },
+ "Mantener al capitán actual": {
+  "ctx": "{t: tr(\"Mantener al capitán actual\"), ok: {txt: tr(\"Jerarquía ante todo. El joven tendrá que esperar.\"), fx: {pmor: -5, chem: 1}}}",
+  "where": "events-manager-more.js:371"
+ },
+ "Jerarquía ante todo. El joven tendrá que esperar.": {
+  "ctx": "{t: tr(\"Mantener al capitán actual\"), ok: {txt: tr(\"Jerarquía ante todo. El joven tendrá que esperar.\"), fx: {pmor: -5, chem: 1}}}",
+  "where": "events-manager-more.js:371"
+ },
+ "Desde que un gato callejero se coló en el campo de entrenamiento, no habéis perdido. La plantilla quiere adoptarlo como mascota y la prensa ya le ha puesto nombre.": {
+  "ctx": "text: function () { return tr(\"Desde que un gato callejero se coló en el campo de entrenamiento, no habéis perdido. La plantilla quiere adoptarlo como mascota y la prensa ya le ha puesto nombre.\"); },",
+  "where": "events-manager-more.js:376"
+ },
+ "Adoptarlo como mascota oficial": {
+  "ctx": "{t: tr(\"Adoptarlo como mascota oficial\"), p: 0.7,",
+  "where": "events-manager-more.js:378"
+ },
+ "El gato se convierte en un fenómeno y las camisetas con su cara se agotan.": {
+  "ctx": "ok: {txt: tr(\"El gato se convierte en un fenómeno y las camisetas con su cara se agotan.\"), fx: {fans: 5, chem: 3, bud: 50000}},",
+  "where": "events-manager-more.js:379"
+ },
+ "Llega la primera derrota y alguien culpa al gato. Ridículo nacional.": {
+  "ctx": "ko: {txt: tr(\"Llega la primera derrota y alguien culpa al gato. Ridículo nacional.\"), fx: {rep: -2, chem: -1}}},",
+  "where": "events-manager-more.js:380"
+ },
+ "Dejarlo a cargo del utillero, sin publicidad": {
+  "ctx": "{t: tr(\"Dejarlo a cargo del utillero, sin publicidad\"), ok: {txt: tr(\"El gato vive feliz en el vestuario. Todos sonríen al verlo.\"), fx: {chem: 2}}},",
+  "where": "events-manager-more.js:381"
+ },
+ "El gato vive feliz en el vestuario. Todos sonríen al verlo.": {
+  "ctx": "{t: tr(\"Dejarlo a cargo del utillero, sin publicidad\"), ok: {txt: tr(\"El gato vive feliz en el vestuario. Todos sonríen al verlo.\"), fx: {chem: 2}}},",
+  "where": "events-manager-more.js:381"
+ },
+ "Pedir que se lo lleve una protectora": {
+  "ctx": "{t: tr(\"Pedir que se lo lleve una protectora\"), ok: {txt: tr(\"Decisión sensata. Algún jugador supersticioso no lo lleva bien.\"), fx: {sqMor: -2}}}",
+  "where": "events-manager-more.js:382"
+ },
+ "Decisión sensata. Algún jugador supersticioso no lo lleva bien.": {
+  "ctx": "{t: tr(\"Pedir que se lo lleve una protectora\"), ok: {txt: tr(\"Decisión sensata. Algún jugador supersticioso no lo lleva bien.\"), fx: {sqMor: -2}}}",
+  "where": "events-manager-more.js:382"
+ },
+ "Tras otro partido sin apenas ocasiones, la grada saca los pañuelos. No piden tu cabeza: piden que el equipo ataque.": {
+  "ctx": "text: function () { return tr(\"Tras otro partido sin apenas ocasiones, la grada saca los pañuelos. No piden tu cabeza: piden que el equipo ataque.\"); },",
+  "where": "events-manager-more.js:387"
+ },
+ "Pasar a un plan más ofensivo": {
+  "ctx": "{t: tr(\"Pasar a un plan más ofensivo\"), p: 0.5,",
+  "where": "events-manager-more.js:389"
+ },
+ "El equipo se suelta y la grada vuelve a disfrutar.": {
+  "ctx": "ok: {txt: tr(\"El equipo se suelta y la grada vuelve a disfrutar.\"), fx: {fans: 6, buff: {v: 0.6, b: 1, n: tr(\"Más ataque\")}}},",
+  "where": "events-manager-more.js:390"
+ },
+ "Más ataque": {
+  "ctx": "ok: {txt: tr(\"El equipo se suelta y la grada vuelve a disfrutar.\"), fx: {fans: 6, buff: {v: 0.6, b: 1, n: tr(\"Más ataque\")}}},",
+  "where": "events-manager-more.js:390"
+ },
+ "Os abrís y os pillan a la contra. Ahora pitan más.": {
+  "ctx": "ko: {txt: tr(\"Os abrís y os pillan a la contra. Ahora pitan más.\"), fx: {fans: -3, sqMor: -3}}},",
+  "where": "events-manager-more.js:391"
+ },
+ "Defender tu idea en rueda de prensa": {
+  "ctx": "{t: tr(\"Defender tu idea en rueda de prensa\"), ok: {txt: tr(\"«Los resultados llegarán». La directiva te respalda; la grada, a medias.\"), fx: {board: 2, fans: -3}}},",
+  "where": "events-manager-more.js:392"
+ },
+ "«Los resultados llegarán». La directiva te respalda; la grada, a medias.": {
+  "ctx": "{t: tr(\"Defender tu idea en rueda de prensa\"), ok: {txt: tr(\"«Los resultados llegarán». La directiva te respalda; la grada, a medias.\"), fx: {board: 2, fans: -3}}},",
+  "where": "events-manager-more.js:392"
+ },
+ "Reunirte con las peñas": {
+  "ctx": "{t: tr(\"Reunirte con las peñas\"), p: 0.6,",
+  "where": "events-manager-more.js:393"
+ },
+ "Explicas tu plan cara a cara y te ganas algo de crédito.": {
+  "ctx": "ok: {txt: tr(\"Explicas tu plan cara a cara y te ganas algo de crédito.\"), fx: {fans: 5, rep: 1}},",
+  "where": "events-manager-more.js:394"
+ },
+ "La reunión acaba en reproches y se filtra a la prensa.": {
+  "ctx": "ko: {txt: tr(\"La reunión acaba en reproches y se filtra a la prensa.\"), fx: {fans: -2, board: -2}}}",
+  "where": "events-manager-more.js:395"
+ },
+ "El patrocinador principal organiza un acto con toda la plantilla la víspera de un partido importante: fotos, firmas y una cena que acabará tarde. El contrato lo permite.": {
+  "ctx": "text: function () { return tr(\"El patrocinador principal organiza un acto con toda la plantilla la víspera de un partido importante: fotos, firmas y una cena que acabará tarde. El contrato lo permite.\"); },",
+  "where": "events-manager-more.js:400"
+ },
+ "Ir con toda la plantilla": {
+  "ctx": "{t: tr(\"Ir con toda la plantilla\"), ok: {txt: tr(\"El patrocinador está encantado y promete más dinero. Los jugadores, agotados.\"), fx: {bud: g, board: 3, sfit: -5}}},",
+  "where": "events-manager-more.js:402"
+ },
+ "El patrocinador está encantado y promete más dinero. Los jugadores, agotados.": {
+  "ctx": "{t: tr(\"Ir con toda la plantilla\"), ok: {txt: tr(\"El patrocinador está encantado y promete más dinero. Los jugadores, agotados.\"), fx: {bud: g, board: 3, sfit: -5}}},",
+  "where": "events-manager-more.js:402"
+ },
+ "Mandar solo a los capitanes": {
+  "ctx": "{t: tr(\"Mandar solo a los capitanes\"), p: 0.6,",
+  "where": "events-manager-more.js:403"
+ },
+ "El patrocinador lo acepta con una sonrisa.": {
+  "ctx": "ok: {txt: tr(\"El patrocinador lo acepta con una sonrisa.\"), fx: {board: 1}},",
+  "where": "events-manager-more.js:404"
+ },
+ "El patrocinador se queja a la directiva.": {
+  "ctx": "ko: {txt: tr(\"El patrocinador se queja a la directiva.\"), fx: {board: -3}}},",
+  "where": "events-manager-more.js:405"
+ },
+ "Pedir que se cambie la fecha": {
+  "ctx": "{t: tr(\"Pedir que se cambie la fecha\"), p: 0.45,",
+  "where": "events-manager-more.js:406"
+ },
+ "Lo trasladan a después del partido. Todos contentos.": {
+  "ctx": "ok: {txt: tr(\"Lo trasladan a después del partido. Todos contentos.\"), fx: {board: 2, chem: 1}},",
+  "where": "events-manager-more.js:407"
+ },
+ "No hay manera y el patrocinador se molesta.": {
+  "ctx": "ko: {txt: tr(\"No hay manera y el patrocinador se molesta.\"), fx: {board: -4}}}",
+  "where": "events-manager-more.js:408"
+ },
+ "El filial se juega el ascenso este fin de semana y su entrenador te pide a dos jugadores del primer equipo que apenas juegan contigo.": {
+  "ctx": "text: function () { return tr(\"El filial se juega el ascenso este fin de semana y su entrenador te pide a dos jugadores del primer equipo que apenas juegan contigo.\"); },",
+  "where": "events-manager-more.js:413"
+ },
+ "Cederles para el partido": {
+  "ctx": "{t: tr(\"Cederles para el partido\"), p: 0.6,",
+  "where": "events-manager-more.js:415"
+ },
+ "Ascenso del filial. La cantera tiene un escaparate mejor.": {
+  "ctx": "ok: {txt: tr(\"Ascenso del filial. La cantera tiene un escaparate mejor.\"), fx: {youth: 1, board: 3, fans: 2}},",
+  "where": "events-manager-more.js:416"
+ },
+ "El filial no asciende y los dos jugadores se sienten degradados.": {
+  "ctx": "ko: {txt: tr(\"El filial no asciende y los dos jugadores se sienten degradados.\"), fx: {sqMor: -2}}},",
+  "where": "events-manager-more.js:417"
+ },
+ "Negarte: los necesitas en el banquillo": {
+  "ctx": "{t: tr(\"Negarte: los necesitas en el banquillo\"), ok: {txt: tr(\"El primer equipo es lo primero. En la cantera hay malestar.\"), fx: {board: -2}}},",
+  "where": "events-manager-more.js:418"
+ },
+ "El primer equipo es lo primero. En la cantera hay malestar.": {
+  "ctx": "{t: tr(\"Negarte: los necesitas en el banquillo\"), ok: {txt: tr(\"El primer equipo es lo primero. En la cantera hay malestar.\"), fx: {board: -2}}},",
+  "where": "events-manager-more.js:418"
+ },
+ "Mandar juveniles que entrenan contigo": {
+  "ctx": "{t: tr(\"Mandar juveniles que entrenan contigo\"), ok: {txt: tr(\"Una solución intermedia. Los chavales lo viven con ilusión.\"), fx: {chem: 1, fans: 1}}}",
+  "where": "events-manager-more.js:419"
+ },
+ "Una solución intermedia. Los chavales lo viven con ilusión.": {
+  "ctx": "{t: tr(\"Mandar juveniles que entrenan contigo\"), ok: {txt: tr(\"Una solución intermedia. Los chavales lo viven con ilusión.\"), fx: {chem: 1, fans: 1}}}",
+  "where": "events-manager-more.js:419"
+ },
+ "Una empresa te ofrece una plataforma de inteligencia artificial que analiza miles de partidos y te sugiere fichajes. Tus ojeadores temen quedarse sin trabajo.": {
+  "ctx": "text: function () { return tr(\"Una empresa te ofrece una plataforma de inteligencia artificial que analiza miles de partidos y te sugiere fichajes. Tus ojeadores temen quedarse sin trabajo.\"); },",
+  "where": "events-manager-more.js:424"
+ },
+ "Contratarla y reducir ojeadores ({cost})": {
+  "ctx": "{t: tr(\"Contratarla y reducir ojeadores ({cost})\", {cost: fmtMoney(g)}), p: 0.6,",
+  "where": "events-manager-more.js:426"
+ },
+ "La plataforma encuentra gangas que nadie había visto.": {
+  "ctx": "ok: {txt: tr(\"La plataforma encuentra gangas que nadie había visto.\"), fx: {bud: -g, board: 3, flag: {data: true}}, n: tr(\"Fichajes un 10 % más baratos y potencial más preciso\")},",
+  "where": "events-manager-more.js:427"
+ },
+ "El algoritmo recomienda jugadores que ya no existen o están retirados. Hazmerreír.": {
+  "ctx": "ko: {txt: tr(\"El algoritmo recomienda jugadores que ya no existen o están retirados. Hazmerreír.\"), fx: {bud: -g, rep: -3}}},",
+  "where": "events-manager-more.js:428"
+ },
+ "Usarla como apoyo de los ojeadores": {
+  "ctx": "{t: tr(\"Usarla como apoyo de los ojeadores\"), ok: {txt: tr(\"Datos y ojo humano juntos. Más caro, pero sólido.\"), fx: {bud: -myR5(g * 1.3), flag: {data: true}}, n: tr(\"Fichajes un 10 % más baratos y potencial más preciso\"",
+  "where": "events-manager-more.js:429"
+ },
+ "Datos y ojo humano juntos. Más caro, pero sólido.": {
+  "ctx": "{t: tr(\"Usarla como apoyo de los ojeadores\"), ok: {txt: tr(\"Datos y ojo humano juntos. Más caro, pero sólido.\"), fx: {bud: -myR5(g * 1.3), flag: {data: true}}, n: tr(\"Fichajes un 10 % más baratos y potencial más preciso\"",
+  "where": "events-manager-more.js:429"
+ },
+ "Rechazarla": {
+  "ctx": "{t: tr(\"Rechazarla\"), ok: {txt: tr(\"Los ojeadores de siempre siguen viajando por medio mundo.\"), fx: {chem: 1}}}",
+  "where": "events-manager-more.js:430"
+ },
+ "Los ojeadores de siempre siguen viajando por medio mundo.": {
+  "ctx": "{t: tr(\"Rechazarla\"), ok: {txt: tr(\"Los ojeadores de siempre siguen viajando por medio mundo.\"), fx: {chem: 1}}}",
+  "where": "events-manager-more.js:430"
+ },
+ "{name} ha publicado un mensaje enigmático en sus redes tras quedarse en el banquillo: «Hay cosas que no se entienden». La prensa ya lo interpreta como un ataque a ti.": {
+  "ctx": "text: function (y) { return tr(\"{name} ha publicado un mensaje enigmático en sus redes tras quedarse en el banquillo: «Hay cosas que no se entienden». La prensa ya lo interpreta como un ataque a ti.\", {name: plName(y.pl)",
+  "where": "events-manager-more.js:436"
+ },
+ "Multarle": {
+  "ctx": "{t: tr(\"Multarle\"), ok: {txt: tr(\"Mensaje claro para todo el vestuario. Él lo encaja mal.\"), fx: {pmor: -10, board: 2, chem: 1}}},",
+  "where": "events-manager-more.js:438"
+ },
+ "Mensaje claro para todo el vestuario. Él lo encaja mal.": {
+  "ctx": "{t: tr(\"Multarle\"), ok: {txt: tr(\"Mensaje claro para todo el vestuario. Él lo encaja mal.\"), fx: {pmor: -10, board: 2, chem: 1}}},",
+  "where": "events-manager-more.js:438"
+ },
+ "Restarle importancia en rueda de prensa": {
+  "ctx": "{t: tr(\"Restarle importancia en rueda de prensa\"), p: 0.6,",
+  "where": "events-manager-more.js:439"
+ },
+ "«Es normal querer jugar». Se acaba la polémica.": {
+  "ctx": "ok: {txt: tr(\"«Es normal querer jugar». Se acaba la polémica.\"), fx: {pmor: 4, rep: 1}},",
+  "where": "events-manager-more.js:440"
+ },
+ "Lo vuelve a hacer la semana siguiente.": {
+  "ctx": "ko: {txt: tr(\"Lo vuelve a hacer la semana siguiente.\"), fx: {pmor: -3, chem: -3}}},",
+  "where": "events-manager-more.js:441"
+ },
+ "Darle la titularidad el próximo partido": {
+  "ctx": "{t: tr(\"Darle la titularidad el próximo partido\"), p: 0.5,",
+  "where": "events-manager-more.js:442"
+ },
+ "Responde en el campo y pide perdón.": {
+  "ctx": "ok: {txt: tr(\"Responde en el campo y pide perdón.\"), fx: {pmor: 10, chem: 1}},",
+  "where": "events-manager-more.js:443"
+ },
+ "El vestuario entiende que quejarse en redes tiene premio.": {
+  "ctx": "ko: {txt: tr(\"El vestuario entiende que quejarse en redes tiene premio.\"), fx: {pmor: 6, chem: -5}}}",
+  "where": "events-manager-more.js:444"
+ },
+ "El analista te enseña los datos del GPS: {name}, tu mejor jugador, es el que menos corre y menos presiona de todo el equipo. Teme que el resto empiece a imitarle.": {
+  "ctx": "text: function (y) { return tr(\"El analista te enseña los datos del GPS: {name}, tu mejor jugador, es el que menos corre y menos presiona de todo el equipo. Teme que el resto empiece a imitarle.\", {name: plName(y.pl)}); ",
+  "where": "events-manager-more.js:450"
+ },
+ "Enseñarle los datos en privado": {
+  "ctx": "{t: tr(\"Enseñarle los datos en privado\"), p: 0.6,",
+  "where": "events-manager-more.js:452"
+ },
+ "Se pica y empieza a presionar como el que más.": {
+  "ctx": "ok: {txt: tr(\"Se pica y empieza a presionar como el que más.\"), fx: {pmor: 2, chem: 3, buff: {v: 0.6, b: 2, n: tr(\"Presión de todos\")}}},",
+  "where": "events-manager-more.js:453"
+ },
+ "Presión de todos": {
+  "ctx": "ok: {txt: tr(\"Se pica y empieza a presionar como el que más.\"), fx: {pmor: 2, chem: 3, buff: {v: 0.6, b: 2, n: tr(\"Presión de todos\")}}},",
+  "where": "events-manager-more.js:453"
+ },
+ "«Yo estoy para decidir partidos, no para correr». Se ofende.": {
+  "ctx": "ko: {txt: tr(\"«Yo estoy para decidir partidos, no para correr». Se ofende.\"), fx: {pmor: -8}}},",
+  "where": "events-manager-more.js:454"
+ },
+ "Diseñar el sistema para liberarle": {
+  "ctx": "{t: tr(\"Diseñar el sistema para liberarle\"), ok: {txt: tr(\"Los demás corren por él. Su talento brilla, el resto se cansa más.\"), fx: {pmor: 6, sfit: -4, chem: -2}}},",
+  "where": "events-manager-more.js:455"
+ },
+ "Los demás corren por él. Su talento brilla, el resto se cansa más.": {
+  "ctx": "{t: tr(\"Diseñar el sistema para liberarle\"), ok: {txt: tr(\"Los demás corren por él. Su talento brilla, el resto se cansa más.\"), fx: {pmor: 6, sfit: -4, chem: -2}}},",
+  "where": "events-manager-more.js:455"
+ },
+ "Publicar los datos de todos en el vestuario": {
+  "ctx": "{t: tr(\"Publicar los datos de todos en el vestuario\"), p: 0.45,",
+  "where": "events-manager-more.js:456"
+ },
+ "La competencia interna dispara la intensidad.": {
+  "ctx": "ok: {txt: tr(\"La competencia interna dispara la intensidad.\"), fx: {buff: {v: 0.8, b: 1, n: tr(\"Competencia interna\")}, sqMor: 1}},",
+  "where": "events-manager-more.js:457"
+ },
+ "Competencia interna": {
+  "ctx": "ok: {txt: tr(\"La competencia interna dispara la intensidad.\"), fx: {buff: {v: 0.8, b: 1, n: tr(\"Competencia interna\")}, sqMor: 1}},",
+  "where": "events-manager-more.js:457"
+ },
+ "Se sienten expuestos y el ambiente se tensa.": {
+  "ctx": "ko: {txt: tr(\"Se sienten expuestos y el ambiente se tensa.\"), fx: {chem: -5, pmor: -5}}}",
+  "where": "events-manager-more.js:458"
+ },
+ "Un club de una categoría inferior ofrece a tu segundo entrenador ser primer técnico. Es tu mano derecha y conoce a todos los jugadores.": {
+  "ctx": "text: function () { return tr(\"Un club de una categoría inferior ofrece a tu segundo entrenador ser primer técnico. Es tu mano derecha y conoce a todos los jugadores.\"); },",
+  "where": "events-manager-more.js:463"
+ },
+ "Dejarle marchar con tu bendición": {
+  "ctx": "{t: tr(\"Dejarle marchar con tu bendición\"), ok: {txt: tr(\"Se despide emocionado. Tú pierdes a tu mejor apoyo.\"), fx: {rep: 2, chem: -3}}},",
+  "where": "events-manager-more.js:465"
+ },
+ "Se despide emocionado. Tú pierdes a tu mejor apoyo.": {
+  "ctx": "{t: tr(\"Dejarle marchar con tu bendición\"), ok: {txt: tr(\"Se despide emocionado. Tú pierdes a tu mejor apoyo.\"), fx: {rep: 2, chem: -3}}},",
+  "where": "events-manager-more.js:465"
+ },
+ "Pedir al club que le mejore el contrato ({cost})": {
+  "ctx": "{t: tr(\"Pedir al club que le mejore el contrato ({cost})\", {cost: fmtMoney(g)}), p: 0.6,",
+  "where": "events-manager-more.js:466"
+ },
+ "Se queda contigo. El cuerpo técnico sale reforzado.": {
+  "ctx": "ok: {txt: tr(\"Se queda contigo. El cuerpo técnico sale reforzado.\"), fx: {bud: -g, chem: 3}},",
+  "where": "events-manager-more.js:467"
+ },
+ "Agradece el gesto, pero se va igualmente.": {
+  "ctx": "ko: {txt: tr(\"Agradece el gesto, pero se va igualmente.\"), fx: {bud: -g, chem: -3}}},",
+  "where": "events-manager-more.js:468"
+ },
+ "Promocionar a un técnico de la cantera": {
+  "ctx": "{t: tr(\"Promocionar a un técnico de la cantera\"), ok: {txt: tr(\"Savia nueva en el staff. Los canteranos tienen un aliado.\"), fx: {chem: -1, sqMor: 2}}}",
+  "where": "events-manager-more.js:469"
+ },
+ "Savia nueva en el staff. Los canteranos tienen un aliado.": {
+  "ctx": "{t: tr(\"Promocionar a un técnico de la cantera\"), ok: {txt: tr(\"Savia nueva en el staff. Los canteranos tienen un aliado.\"), fx: {chem: -1, sqMor: 2}}}",
+  "where": "events-manager-more.js:469"
+ },
+ "La plantilla tiene la moral por los suelos. El médico propone incorporar un psicólogo deportivo; algunos veteranos dicen que «eso es para los débiles».": {
+  "ctx": "text: function () { return tr(\"La plantilla tiene la moral por los suelos. El médico propone incorporar un psicólogo deportivo; algunos veteranos dicen que «eso es para los débiles».\"); },",
+  "where": "events-manager-more.js:474"
+ },
+ "Incorporar un psicólogo ({cost})": {
+  "ctx": "{t: tr(\"Incorporar un psicólogo ({cost})\", {cost: fmtMoney(g)}), p: 0.7,",
+  "where": "events-manager-more.js:476"
+ },
+ "Sesiones voluntarias que acaban llenas. El grupo respira.": {
+  "ctx": "ok: {txt: tr(\"Sesiones voluntarias que acaban llenas. El grupo respira.\"), fx: {bud: -g, sqMor: 6, chem: 2}},",
+  "where": "events-manager-more.js:477"
+ },
+ "Pocos acuden y los veteranos se burlan de la iniciativa.": {
+  "ctx": "ko: {txt: tr(\"Pocos acuden y los veteranos se burlan de la iniciativa.\"), fx: {bud: -g, sqMor: 1, chem: -2}}},",
+  "where": "events-manager-more.js:478"
+ },
+ "Unos días libres para desconectar": {
+  "ctx": "{t: tr(\"Unos días libres para desconectar\"), ok: {txt: tr(\"Familia, playa y móvil apagado. Vuelven con otra cara.\"), fx: {sqMor: 4, sfit: 3, buff: {v: -0.3, b: 1, n: tr(\"Poco rodaje\")}}}},",
+  "where": "events-manager-more.js:479"
+ },
+ "Familia, playa y móvil apagado. Vuelven con otra cara.": {
+  "ctx": "{t: tr(\"Unos días libres para desconectar\"), ok: {txt: tr(\"Familia, playa y móvil apagado. Vuelven con otra cara.\"), fx: {sqMor: 4, sfit: 3, buff: {v: -0.3, b: 1, n: tr(\"Poco rodaje\")}}}},",
+  "where": "events-manager-more.js:479"
+ },
+ "Poco rodaje": {
+  "ctx": "{t: tr(\"Unos días libres para desconectar\"), ok: {txt: tr(\"Familia, playa y móvil apagado. Vuelven con otra cara.\"), fx: {sqMor: 4, sfit: 3, buff: {v: -0.3, b: 1, n: tr(\"Poco rodaje\")}}}},",
+  "where": "events-manager-more.js:479"
+ },
+ "Más trabajo y menos lamentos": {
+  "ctx": "{t: tr(\"Más trabajo y menos lamentos\"), ok: {txt: tr(\"Doble sesión. Algunos lo agradecen; otros se hunden más.\"), fx: {sqMor: -2, buff: {v: 0.5, b: 1, n: tr(\"Mano dura\")}}}}",
+  "where": "events-manager-more.js:480"
+ },
+ "Doble sesión. Algunos lo agradecen; otros se hunden más.": {
+  "ctx": "{t: tr(\"Más trabajo y menos lamentos\"), ok: {txt: tr(\"Doble sesión. Algunos lo agradecen; otros se hunden más.\"), fx: {sqMor: -2, buff: {v: 0.5, b: 1, n: tr(\"Mano dura\")}}}}",
+  "where": "events-manager-more.js:480"
+ },
+ "{name} quiere renovar, pero con una cláusula de salida asequible por si llama un grande. Sin ella, se niega a firmar.": {
+  "ctx": "text: function (y) { return tr(\"{name} quiere renovar, pero con una cláusula de salida asequible por si llama un grande. Sin ella, se niega a firmar.\", {name: plName(y.pl)}); },",
+  "where": "events-manager-more.js:486"
+ },
+ "Aceptar la cláusula": {
+  "ctx": "{t: tr(\"Aceptar la cláusula\"), ok: {txt: tr(\"Firma feliz. Quizá algún día te arrepientas.\"), fx: {pmor: 10, board: -3}, then: function () { pl.yrs = Math.max(pl.yrs, 3); }}},",
+  "where": "events-manager-more.js:488"
+ },
+ "Firma feliz. Quizá algún día te arrepientas.": {
+  "ctx": "{t: tr(\"Aceptar la cláusula\"), ok: {txt: tr(\"Firma feliz. Quizá algún día te arrepientas.\"), fx: {pmor: 10, board: -3}, then: function () { pl.yrs = Math.max(pl.yrs, 3); }}},",
+  "where": "events-manager-more.js:488"
+ },
+ "Ofrecer más sueldo sin cláusula": {
+  "ctx": "{t: tr(\"Ofrecer más sueldo sin cláusula\"), d: tr(\"Unos {sal} más al año.\", {sal: fmtMoney(rise)}), p: 0.55,",
+  "where": "events-manager-more.js:489"
+ },
+ "El dinero le convence y firma sin cláusula.": {
+  "ctx": "ok: {txt: tr(\"El dinero le convence y firma sin cláusula.\"), fx: {pmor: 6, board: 2}, then: function () { pl.sal += rise; pl.yrs = Math.max(pl.yrs, 4); }},",
+  "where": "events-manager-more.js:490"
+ },
+ "No le interesa el dinero, sino la libertad. Se enfada.": {
+  "ctx": "ko: {txt: tr(\"No le interesa el dinero, sino la libertad. Se enfada.\"), fx: {pmor: -8}}},",
+  "where": "events-manager-more.js:491"
+ },
+ "No negociar": {
+  "ctx": "{t: tr(\"No negociar\"), ok: {txt: tr(\"Si no firma, se irá cuando acabe su contrato.\"), fx: {pmor: -10, preq: true, board: 1}}}",
+  "where": "events-manager-more.js:492"
+ },
+ "Si no firma, se irá cuando acabe su contrato.": {
+  "ctx": "{t: tr(\"No negociar\"), ok: {txt: tr(\"Si no firma, se irá cuando acabe su contrato.\"), fx: {pmor: -10, preq: true, board: 1}}}",
+  "where": "events-manager-more.js:492"
+ },
+ "La televisión mueve vuestro partido al lunes por la noche, tres días después de un duelo de copa fuera de casa y justo antes de otro viaje. La afición, indignada.": {
+  "ctx": "text: function () { return tr(\"La televisión mueve vuestro partido al lunes por la noche, tres días después de un duelo de copa fuera de casa y justo antes de otro viaje. La afición, indignada.\"); },",
+  "where": "events-manager-more.js:497"
+ },
+ "Protestar públicamente": {
+  "ctx": "{t: tr(\"Protestar públicamente\"), p: 0.4,",
+  "where": "events-manager-more.js:499"
+ },
+ "La presión funciona y la liga recoloca el partido.": {
+  "ctx": "ok: {txt: tr(\"La presión funciona y la liga recoloca el partido.\"), fx: {fans: 4, sfit: 3}},",
+  "where": "events-manager-more.js:500"
+ },
+ "La liga no cede y la federación te abre expediente.": {
+  "ctx": "ko: {txt: tr(\"La liga no cede y la federación te abre expediente.\"), fx: {bud: -30000, board: -2, fans: 3}}},",
+  "where": "events-manager-more.js:501"
+ },
+ "Aceptarlo y rotar": {
+  "ctx": "{t: tr(\"Aceptarlo y rotar\"), ok: {txt: tr(\"Sin dramas. Media plantilla nueva el lunes.\"), fx: {buff: {v: -0.4, b: 1, n: tr(\"Rotaciones\")}, sqMor: 2}}},",
+  "where": "events-manager-more.js:502"
+ },
+ "Sin dramas. Media plantilla nueva el lunes.": {
+  "ctx": "{t: tr(\"Aceptarlo y rotar\"), ok: {txt: tr(\"Sin dramas. Media plantilla nueva el lunes.\"), fx: {buff: {v: -0.4, b: 1, n: tr(\"Rotaciones\")}, sqMor: 2}}},",
+  "where": "events-manager-more.js:502"
+ },
+ "Pedir al club que compense a los abonados": {
+  "ctx": "{t: tr(\"Pedir al club que compense a los abonados\"), ok: {txt: tr(\"Descuentos para los que no puedan ir. La grada lo agradece.\"), fx: {fans: 5, bud: -50000, board: -1}}}",
+  "where": "events-manager-more.js:503"
+ },
+ "Descuentos para los que no puedan ir. La grada lo agradece.": {
+  "ctx": "{t: tr(\"Pedir al club que compense a los abonados\"), ok: {txt: tr(\"Descuentos para los que no puedan ir. La grada lo agradece.\"), fx: {fans: 5, bud: -50000, board: -1}}}",
+  "where": "events-manager-more.js:503"
+ },
+ "🚨🔵 {name} → {club}, HERE WE GO! Acuerdo verbal cerrado, documentos listos. Firma hasta {year}. 🤝": {
+  "ctx": "[\"signing\", 1, N_(\"🚨🔵 {name} → {club}, HERE WE GO! Acuerdo verbal cerrado, documentos listos. Firma hasta {year}. 🤝\")],",
+  "where": "social-data.js:839"
+ },
+ "🚨 Exclusivo: {name} ha dicho SÍ al {club}. Traspaso desde {from} por {fee}. Here we go pronto. ⏳": {
+  "ctx": "[\"signing\", 1, N_(\"🚨 Exclusivo: {name} ha dicho SÍ al {club}. Traspaso desde {from} por {fee}. Here we go pronto. ⏳\")],",
+  "where": "social-data.js:840"
+ },
+ "🚨✍️ {name} al {club}, ¡confirmado! Reconocimiento médico hecho, foto con la camiseta mañana. Here we go! ✅": {
+  "ctx": "[\"signing\", 1, N_(\"🚨✍️ {name} al {club}, ¡confirmado! Reconocimiento médico hecho, foto con la camiseta mañana. Here we go! ✅\")],",
+  "where": "social-data.js:841"
+ },
+ "🚨 {name} se va cedido al {club} desde {from}. Acuerdo total entre clubes. Here we go! 🔄": {
+  "ctx": "[\"loan\", 1, N_(\"🚨 {name} se va cedido al {club} desde {from}. Acuerdo total entre clubes. Here we go! 🔄\")],",
+  "where": "social-data.js:842"
+ },
+ "🚨 {name} deja el {from}: HERE WE GO al {to} por {fee}. Contrato hasta {year}. 🤝": {
+  "ctx": "[\"sold\", 0, N_(\"🚨 {name} deja el {from}: HERE WE GO al {to} por {fee}. Contrato hasta {year}. 🤝\")],",
+  "where": "social-data.js:843"
+ },
+ "🚨 Todo cerrado: {name} será nuevo jugador del {to}. Documentos firmados. ✅ #HereWeGo": {
+  "ctx": "[\"sold\", 0, N_(\"🚨 Todo cerrado: {name} será nuevo jugador del {to}. Documentos firmados. ✅ #HereWeGo\")],",
+  "where": "social-data.js:844"
+ },
+ "🚨 {name}, nuevo entrenador del {club}. HERE WE GO! Contrato listo, presentación esta semana. 🧠": {
+  "ctx": "[\"hired\", 1, N_(\"🚨 {name}, nuevo entrenador del {club}. HERE WE GO! Contrato listo, presentación esta semana. 🧠\")],",
+  "where": "social-data.js:845"
+ },
+ "🚨 Confirmado: {name} ya no es entrenador. Decisión tomada por la directiva esta mañana. ❌": {
+  "ctx": "[\"sacked\", -1, N_(\"🚨 Confirmado: {name} ya no es entrenador. Decisión tomada por la directiva esta mañana. ❌\")],",
+  "where": "social-data.js:846"
+ },
+ "🏆 {name} y el {club} campeones de {trophy}. Esta vez el «here we go» es para la vuelta de honor. 🎉": {
+  "ctx": "[\"trophy\", 1, N_(\"🏆 {name} y el {club} campeones de {trophy}. Esta vez el «here we go» es para la vuelta de honor. 🎉\")],",
+  "where": "social-data.js:847"
+ },
+ "🎙️ {name}: «{quote}». Mensaje claro. Seguiremos informando. 🔜": {
+  "ctx": "[\"press\", 0, N_(\"🎙️ {name}: «{quote}». Mensaje claro. Seguiremos informando. 🔜\")],",
+  "where": "social-data.js:848"
+ },
+ "🚨 {player} ({club}) está en la agenda de varios grandes tras su temporada en {lg}. Contactos iniciados. 👀": {
+  "ctx": "[\"league_news\", 0, N_(\"🚨 {player} ({club}) está en la agenda de varios grandes tras su temporada en {lg}. Contactos iniciados. 👀\")],",
+  "where": "social-data.js:849"
+ },
+ "🚨 {name} alcanza los {n} seguidores. Here we go, ¡a por más! 📈": {
+  "ctx": "[\"followers\", 1, N_(\"🚨 {name} alcanza los {n} seguidores. Here we go, ¡a por más! 📈\")]",
+  "where": "social-data.js:850"
+ },
+ "Os lo contaba hace semanas: {name} ya es del {club}. Firma hasta {year}. Cerrado. 🔵🔴": {
+  "ctx": "[\"signing\", 1, N_(\"Os lo contaba hace semanas: {name} ya es del {club}. Firma hasta {year}. Cerrado. 🔵🔴\")],",
+  "where": "social-data.js:853"
+ },
+ "Información: el {club} cierra a {name} por {fee}. El vestuario ya lo sabe. Mañana, oficial.": {
+  "ctx": "[\"signing\", 1, N_(\"Información: el {club} cierra a {name} por {fee}. El vestuario ya lo sabe. Mañana, oficial.\")],",
+  "where": "social-data.js:854"
+ },
+ "{name} sale hacia el {to} por {fee}. Operación que se cocinaba en silencio. Hecha.": {
+  "ctx": "[\"sold\", 0, N_(\"{name} sale hacia el {to} por {fee}. Operación que se cocinaba en silencio. Hecha.\")],",
+  "where": "social-data.js:855"
+ },
+ "Partidazo del {club}: {score} al {opp}. Con este fútbol, el estilo vuelve a casa. 🔵🔴": {
+  "ctx": "[\"win\", 1, N_(\"Partidazo del {club}: {score} al {opp}. Con este fútbol, el estilo vuelve a casa. 🔵🔴\")],",
+  "where": "social-data.js:856"
+ },
+ "Derbi para el {club} ({score}). Hoy en la ciudad solo se habla un idioma. 💙❤️": {
+  "ctx": "[\"derby_win\", 1, N_(\"Derbi para el {club} ({score}). Hoy en la ciudad solo se habla un idioma. 💙❤️\")],",
+  "where": "social-data.js:857"
+ },
+ "Me confirman que {name} será el nuevo técnico del {club}. Idea de juego clara, apuesta valiente.": {
+  "ctx": "[\"hired\", 1, N_(\"Me confirman que {name} será el nuevo técnico del {club}. Idea de juego clara, apuesta valiente.\")],",
+  "where": "social-data.js:858"
+ },
+ "Me dicen desde dentro que las palabras de {name} («{quote}») han gustado mucho en el vestuario.": {
+  "ctx": "[\"press\", 0, N_(\"Me dicen desde dentro que las palabras de {name} («{quote}») han gustado mucho en el vestuario.\")]",
+  "where": "social-data.js:859"
+ },
+ "¡¡BOMBAZO!! {name} es del {club}. Lo dijimos aquí antes que nadie. ¡Esto es periodismo! 🧨": {
+  "ctx": "[\"signing\", 1, N_(\"¡¡BOMBAZO!! {name} es del {club}. Lo dijimos aquí antes que nadie. ¡Esto es periodismo! 🧨\")],",
+  "where": "social-data.js:862"
+ },
+ "Silencio… que llega {name} al {club}. Por {fee}. ¡Qué es esto, señores! 📺": {
+  "ctx": "[\"signing\", 1, N_(\"Silencio… que llega {name} al {club}. Por {fee}. ¡Qué es esto, señores! 📺\")],",
+  "where": "social-data.js:863"
+ },
+ "¡{score}! El {club} es un equipo de JIJANTES. Esta noche lo debatimos todo. 📺🔥": {
+  "ctx": "[\"bigwin\", 1, N_(\"¡{score}! El {club} es un equipo de JIJANTES. Esta noche lo debatimos todo. 📺🔥\")],",
+  "where": "social-data.js:864"
+ },
+ "Gana el {club} al {opp} ({score}). Mesa, debatid: ¿es el mejor momento de {name}?": {
+  "ctx": "[\"win\", 1, N_(\"Gana el {club} al {opp} ({score}). Mesa, debatid: ¿es el mejor momento de {name}?\")],",
+  "where": "social-data.js:865"
+ },
+ "¡{score}! ¿Qué es esto? El {club} se ha borrado. Esta noche, en la mesa, no se salva nadie. 😤": {
+  "ctx": "[\"bigloss\", -1, N_(\"¡{score}! ¿Qué es esto? El {club} se ha borrado. Esta noche, en la mesa, no se salva nadie. 😤\")],",
+  "where": "social-data.js:866"
+ },
+ "Pierde el {club}. Señores, abro el debate: ¿tiene que seguir {name}? Esta noche, a las doce.": {
+  "ctx": "[\"loss\", -1, N_(\"Pierde el {club}. Señores, abro el debate: ¿tiene que seguir {name}? Esta noche, a las doce.\")],",
+  "where": "social-data.js:867"
+ },
+ "¡Última hora! {name} deja de ser entrenador. Lo veníamos avisando. 📺": {
+  "ctx": "[\"sacked\", -1, N_(\"¡Última hora! {name} deja de ser entrenador. Lo veníamos avisando. 📺\")],",
+  "where": "social-data.js:868"
+ },
+ "¡CAMPEONES! El {club} gana {trophy}. ¡JIJANTES! Esta noche, programa especial. 🏆": {
+  "ctx": "[\"trophy\", 1, N_(\"¡CAMPEONES! El {club} gana {trophy}. ¡JIJANTES! Esta noche, programa especial. 🏆\")],",
+  "where": "social-data.js:869"
+ },
+ "{name} decide: «{choice}». Abro el debate: ¿acierto o error histórico? ¡Opinad! 📺": {
+  "ctx": "[\"decision\", 0, N_(\"{name} decide: «{choice}». Abro el debate: ¿acierto o error histórico? ¡Opinad! 📺\")],",
+  "where": "social-data.js:870"
+ },
+ "La grada ha dicho basta. {name} tiene un problema serio y esta noche lo vamos a hablar claro.": {
+  "ctx": "[\"fans_low\", -1, N_(\"La grada ha dicho basta. {name} tiene un problema serio y esta noche lo vamos a hablar claro.\")],",
+  "where": "social-data.js:871"
+ },
+ "¡HAT-TRICK de {name}! ¡Señores, esto es un JIJANTE! Mañana portada en todo el país. 🔥": {
+  "ctx": "[\"hattrick\", 1, N_(\"¡HAT-TRICK de {name}! ¡Señores, esto es un JIJANTE! Mañana portada en todo el país. 🔥\")],",
+  "where": "social-data.js:872"
+ },
+ "¿Han oído a {name}? «{quote}». ¡Toma ya! Esta noche lo analizamos con lupa. 🔎": {
+  "ctx": "[\"press\", 0, N_(\"¿Han oído a {name}? «{quote}». ¡Toma ya! Esta noche lo analizamos con lupa. 🔎\")]",
+  "where": "social-data.js:873"
+ },
+ "Gana el {club}. Lo de {name} ya es otra cosa, amigos. Esto es grandeza, señorío. 🤍": {
+  "ctx": "[\"win\", 1, N_(\"Gana el {club}. Lo de {name} ya es otra cosa, amigos. Esto es grandeza, señorío. 🤍\")],",
+  "where": "social-data.js:876"
+ },
+ "{score}. Lo que estamos viendo es historia, ¡HISTORIA! Que nadie diga que no lo avisé. 🤍👑": {
+  "ctx": "[\"bigwin\", 1, N_(\"{score}. Lo que estamos viendo es historia, ¡HISTORIA! Que nadie diga que no lo avisé. 🤍👑\")],",
+  "where": "social-data.js:877"
+ },
+ "Mal partido, sí. Pero un tropiezo no borra nada. Se volverá, como siempre se vuelve. 🤍": {
+  "ctx": "[\"loss\", -1, N_(\"Mal partido, sí. Pero un tropiezo no borra nada. Se volverá, como siempre se vuelve. 🤍\")],",
+  "where": "social-data.js:878"
+ },
+ "{trophy} para el {club}. Es el ADN, es la historia, es la camiseta. Lo de siempre: ganar. 🏆🤍": {
+  "ctx": "[\"trophy\", 1, N_(\"{trophy} para el {club}. Es el ADN, es la historia, es la camiseta. Lo de siempre: ganar. 🏆🤍\")],",
+  "where": "social-data.js:879"
+ },
+ "Llega {name} al {club}. Les digo una cosa: este fichaje es de los que marcan una época. 🤍": {
+  "ctx": "[\"signing\", 1, N_(\"Llega {name} al {club}. Les digo una cosa: este fichaje es de los que marcan una época. 🤍\")],",
+  "where": "social-data.js:880"
+ },
+ "{name} gana {trophy}. Se veía venir, amigos. Calidad, carácter y escudo. 🤍": {
+  "ctx": "[\"award\", 1, N_(\"{name} gana {trophy}. Se veía venir, amigos. Calidad, carácter y escudo. 🤍\")]",
+  "where": "social-data.js:881"
+ },
+ "Me confirman fuentes del {club}: {name} firmará hasta {year}. Operación por {fee}. Cerrada.": {
+  "ctx": "[\"signing\", 1, N_(\"Me confirman fuentes del {club}: {name} firmará hasta {year}. Operación por {fee}. Cerrada.\")],",
+  "where": "social-data.js:884"
+ },
+ "Dato: el {to} paga {fee} por {name}. Cláusulas y variables ya acordadas. Sin marcha atrás.": {
+  "ctx": "[\"sold\", 0, N_(\"Dato: el {to} paga {fee} por {name}. Cláusulas y variables ya acordadas. Sin marcha atrás.\")],",
+  "where": "social-data.js:885"
+ },
+ "{name}, cedido al {club}. Sin opción de compra obligatoria, según he podido saber.": {
+  "ctx": "[\"loan\", 0, N_(\"{name}, cedido al {club}. Sin opción de compra obligatoria, según he podido saber.\")],",
+  "where": "social-data.js:886"
+ },
+ "Información: {name} es el elegido por la directiva del {club}. Contrato hasta {year}.": {
+  "ctx": "[\"hired\", 1, N_(\"Información: {name} es el elegido por la directiva del {club}. Contrato hasta {year}.\")],",
+  "where": "social-data.js:887"
+ },
+ "La directiva ha comunicado a {name} su destitución. Mañana, el comunicado oficial.": {
+  "ctx": "[\"sacked\", -1, N_(\"La directiva ha comunicado a {name} su destitución. Mañana, el comunicado oficial.\")],",
+  "where": "social-data.js:888"
+ },
+ "Ojo a {player} ({club}). Tras lo visto en {lg}, varios clubes ya han preguntado por su situación.": {
+  "ctx": "[\"league_news\", 0, N_(\"Ojo a {player} ({club}). Tras lo visto en {lg}, varios clubes ya han preguntado por su situación.\")]",
+  "where": "social-data.js:889"
+ },
+ "Buen partido del {club}. Lo que ha hecho {name} hoy tiene mérito: orden, paciencia y ritmo. Premier style. ☕": {
+  "ctx": "[\"win\", 1, N_(\"Buen partido del {club}. Lo que ha hecho {name} hoy tiene mérito: orden, paciencia y ritmo. Premier style. ☕\")],",
+  "where": "social-data.js:892"
+ },
+ "{name} al {club}: me cuentan que es una apuesta personal y meditada. Muy buen fichaje.": {
+  "ctx": "[\"signing\", 1, N_(\"{name} al {club}: me cuentan que es una apuesta personal y meditada. Muy buen fichaje.\")],",
+  "where": "social-data.js:893"
+ },
+ "Desde Inglaterra, ojo a {player}: lo de {club} en {lg} se está estudiando aquí con mucho interés.": {
+  "ctx": "[\"league_news\", 0, N_(\"Desde Inglaterra, ojo a {player}: lo de {club} en {lg} se está estudiando aquí con mucho interés.\")],",
+  "where": "social-data.js:894"
+ },
+ "El fútbol es así de injusto a veces. {name} se va, pero deja trabajo bien hecho.": {
+  "ctx": "[\"sacked\", -1, N_(\"El fútbol es así de injusto a veces. {name} se va, pero deja trabajo bien hecho.\")],",
+  "where": "social-data.js:895"
+ },
+ "Interesante lo de {name}: «{quote}». Hay mensaje detrás, y no solo para la prensa.": {
+  "ctx": "[\"press\", 0, N_(\"Interesante lo de {name}: «{quote}». Hay mensaje detrás, y no solo para la prensa.\")],",
+  "where": "social-data.js:896"
+ },
+ "{trophy} para el {club}. Detrás hay método, gestión de grupo y mucho trabajo invisible. Enhorabuena, {name}.": {
+  "ctx": "[\"trophy\", 1, N_(\"{trophy} para el {club}. Detrás hay método, gestión de grupo y mucho trabajo invisible. Enhorabuena, {name}.\")]",
+  "where": "social-data.js:897"
+ },
+ "Gana el {club} {score}. Buenas noches, y que nadie se emocione, que esto es muy largo. 📻": {
+  "ctx": "[\"win\", 1, N_(\"Gana el {club} {score}. Buenas noches, y que nadie se emocione, que esto es muy largo. 📻\")],",
+  "where": "social-data.js:901"
+ },
+ "Pierde el {club}. Mañana saldrá el sol igual, pero hoy, sinceramente, poca cosa. 📻": {
+  "ctx": "[\"loss\", -1, N_(\"Pierde el {club}. Mañana saldrá el sol igual, pero hoy, sinceramente, poca cosa. 📻\")],",
+  "where": "social-data.js:902"
+ },
+ "Empate, {score}. Ni chicha ni limonada. Como la cena de hoy en la redacción. 🥪": {
+  "ctx": "[\"draw\", 0, N_(\"Empate, {score}. Ni chicha ni limonada. Como la cena de hoy en la redacción. 🥪\")],",
+  "where": "social-data.js:903"
+ },
+ "{score}. Lo bueno es que ya no se puede jugar peor. Lo malo es que siempre se puede. 📻": {
+  "ctx": "[\"bigloss\", -1, N_(\"{score}. Lo bueno es que ya no se puede jugar peor. Lo malo es que siempre se puede. 📻\")],",
+  "where": "social-data.js:904"
+ },
+ "Destituido {name}. Ya lo dije: en el fútbol los entrenadores llevan la maleta hecha desde el primer día.": {
+  "ctx": "[\"sacked\", -1, N_(\"Destituido {name}. Ya lo dije: en el fútbol los entrenadores llevan la maleta hecha desde el primer día.\")],",
+  "where": "social-data.js:905"
+ },
+ "{name} ha elegido «{choice}». Tiene toda la lógica del mundo… o ninguna. Lo sabremos en mayo.": {
+  "ctx": "[\"decision\", 0, N_(\"{name} ha elegido «{choice}». Tiene toda la lógica del mundo… o ninguna. Lo sabremos en mayo.\")],",
+  "where": "social-data.js:906"
+ },
+ "Roja para {name}. Es lo que tiene ir con prisa: llegas antes, pero a la ducha. 🚿": {
+  "ctx": "[\"redcard\", -1, N_(\"Roja para {name}. Es lo que tiene ir con prisa: llegas antes, pero a la ducha. 🚿\")]",
+  "where": "social-data.js:907"
+ },
+ "Buenas noches. El {club} gana {score} al {opp} y en el Partidazo esta noche estamos de buen humor. 🌙": {
+  "ctx": "[\"win\", 1, N_(\"Buenas noches. El {club} gana {score} al {opp} y en el Partidazo esta noche estamos de buen humor. 🌙\")],",
+  "where": "social-data.js:910"
+ },
+ "Pierde el {club}. Esta noche abrimos líneas: ¿qué le pasa al equipo de {name}? 🌙📞": {
+  "ctx": "[\"loss\", -1, N_(\"Pierde el {club}. Esta noche abrimos líneas: ¿qué le pasa al equipo de {name}? 🌙📞\")],",
+  "where": "social-data.js:911"
+ },
+ "{score}. Ojo, que esto hay que celebrarlo con calma… o sin calma. Buenas noches, el {club} vuela. 🌙": {
+  "ctx": "[\"bigwin\", 1, N_(\"{score}. Ojo, que esto hay que celebrarlo con calma… o sin calma. Buenas noches, el {club} vuela. 🌙\")],",
+  "where": "social-data.js:912"
+ },
+ "«{quote}». Lo ha dicho {name}. Y yo, que llevo años en esto, no lo había oído nunca así. 🌙": {
+  "ctx": "[\"press\", 0, N_(\"«{quote}». Lo ha dicho {name}. Y yo, que llevo años en esto, no lo había oído nunca así. 🌙\")],",
+  "where": "social-data.js:913"
+ },
+ "La afición del {club} está encantada con {name}. Y mira que es una afición exigente. 🌙": {
+  "ctx": "[\"fans_high\", 1, N_(\"La afición del {club} está encantada con {name}. Y mira que es una afición exigente. 🌙\")],",
+  "where": "social-data.js:914"
+ },
+ "Hora de cerrar el programa y aún no sé si el {club} juega bien o es que los demás juegan peor. Buenas noches. 🌙": {
+  "ctx": "[\"meme\", 0, N_(\"Hora de cerrar el programa y aún no sé si el {club} juega bien o es que los demás juegan peor. Buenas noches. 🌙\")]",
+  "where": "social-data.js:915"
+ },
+ "El {club} no solo ganó: compitió con una idea. Eso, hoy, es casi revolucionario. {name} ha creado un equipo.": {
+  "ctx": "[\"win\", 1, N_(\"El {club} no solo ganó: compitió con una idea. Eso, hoy, es casi revolucionario. {name} ha creado un equipo.\")],",
+  "where": "social-data.js:918"
+ },
+ "La derrota no es el problema. El problema es no saber a qué juegas. El {club} tiene que encontrarse.": {
+  "ctx": "[\"loss\", -1, N_(\"La derrota no es el problema. El problema es no saber a qué juegas. El {club} tiene que encontrarse.\")],",
+  "where": "social-data.js:919"
+ },
+ "Despedir a {name} es la solución fácil. La difícil es asumir que el problema venía de arriba. ✒️": {
+  "ctx": "[\"sacked\", -1, N_(\"Despedir a {name} es la solución fácil. La difícil es asumir que el problema venía de arriba. ✒️\")],",
+  "where": "social-data.js:920"
+ },
+ "{trophy}. Hay títulos que se ganan y títulos que se construyen. Este, {name}, se ha construido. ✒️": {
+  "ctx": "[\"trophy\", 1, N_(\"{trophy}. Hay títulos que se ganan y títulos que se construyen. Este, {name}, se ha construido. ✒️\")],",
+  "where": "social-data.js:921"
+ },
+ "«{choice}». Se puede discutir. Pero {name} decide con argumentos, y eso no abunda. ✒️": {
+  "ctx": "[\"decision\", 0, N_(\"«{choice}». Se puede discutir. Pero {name} decide con argumentos, y eso no abunda. ✒️\")]",
+  "where": "social-data.js:922"
+ },
+ "Desde la portería se ve todo: el {club} ha estado serio, muy serio. Así se gana. 🧤": {
+  "ctx": "[\"win\", 1, N_(\"Desde la portería se ve todo: el {club} ha estado serio, muy serio. Así se gana. 🧤\")],",
+  "where": "social-data.js:925"
+ },
+ "Hay goles que el portero lo vive como un drama. Hoy al {club} le han hecho daño. Toca levantarse. 🧤": {
+  "ctx": "[\"loss\", -1, N_(\"Hay goles que el portero lo vive como un drama. Hoy al {club} le han hecho daño. Toca levantarse. 🧤\")],",
+  "where": "social-data.js:926"
+ },
+ "{score}… Como exportero os digo: eso no es culpa de uno, es de todo el equipo. 🧤": {
+  "ctx": "[\"bigloss\", -1, N_(\"{score}… Como exportero os digo: eso no es culpa de uno, es de todo el equipo. 🧤\")],",
+  "where": "social-data.js:927"
+ },
+ "Empate {score}. Partido de porteros, de los que me gustan a mí. 🧤": {
+  "ctx": "[\"draw\", 0, N_(\"Empate {score}. Partido de porteros, de los que me gustan a mí. 🧤\")],",
+  "where": "social-data.js:928"
+ },
+ "Roja a {name}. Te calientas, y en un segundo dejas al equipo con diez. Cabeza fría, chaval. 🧤": {
+  "ctx": "[\"redcard\", -1, N_(\"Roja a {name}. Te calientas, y en un segundo dejas al equipo con diez. Cabeza fría, chaval. 🧤\")],",
+  "where": "social-data.js:929"
+ },
+ "{trophy} para el {club}. Se ganan los títulos con defensa. Siempre lo he dicho. 🧤🏆": {
+  "ctx": "[\"trophy\", 1, N_(\"{trophy} para el {club}. Se ganan los títulos con defensa. Siempre lo he dicho. 🧤🏆\")]",
+  "where": "social-data.js:930"
+ },
+ "Ganó el {club}, sí. ¿Y? Ganarle al {opp} no te convierte en grande. Que no se confundan. 🌶️": {
+  "ctx": "[\"win\", 1, N_(\"Ganó el {club}, sí. ¿Y? Ganarle al {opp} no te convierte en grande. Que no se confundan. 🌶️\")],",
+  "where": "social-data.js:933"
+ },
+ "Lo dije, lo sostengo y lo firmo: con {name} así, el {club} no da para más. 🌶️": {
+  "ctx": "[\"loss\", -1, N_(\"Lo dije, lo sostengo y lo firmo: con {name} así, el {club} no da para más. 🌶️\")],",
+  "where": "social-data.js:934"
+ },
+ "{score}. Vergüenza deportiva. Y lo voy a decir aunque me lluevan críticas. 🌶️": {
+  "ctx": "[\"bigloss\", -1, N_(\"{score}. Vergüenza deportiva. Y lo voy a decir aunque me lluevan críticas. 🌶️\")],",
+  "where": "social-data.js:935"
+ },
+ "{trophy} para el {club}. Me equivoqué con {name}. Lo reconozco. Hoy, felicidades. Mañana, ya veremos. 🌶️": {
+  "ctx": "[\"trophy\", 1, N_(\"{trophy} para el {club}. Me equivoqué con {name}. Lo reconozco. Hoy, felicidades. Mañana, ya veremos. 🌶️\")],",
+  "where": "social-data.js:936"
+ },
+ "¿Era el culpable {name}? Para mí, una parte. La otra está en los despachos. 🌶️": {
+  "ctx": "[\"sacked\", -1, N_(\"¿Era el culpable {name}? Para mí, una parte. La otra está en los despachos. 🌶️\")],",
+  "where": "social-data.js:937"
+ },
+ "«{quote}». Muy bonito, {name}. Pero el fútbol se juega en la cancha, no en el micrófono. 🌶️": {
+  "ctx": "[\"press\", 0, N_(\"«{quote}». Muy bonito, {name}. Pero el fútbol se juega en la cancha, no en el micrófono. 🌶️\")]",
+  "where": "social-data.js:938"
+ },
+ "Victoria del {club} ({score}). Trabajo, orden y oficio. Así se construyen las temporadas.": {
+  "ctx": "[\"win\", 1, N_(\"Victoria del {club} ({score}). Trabajo, orden y oficio. Así se construyen las temporadas.\")],",
+  "where": "social-data.js:941"
+ },
+ "Derrota del {club}. Toca autocrítica y trabajo. Hay tiempo para corregir. 🎤": {
+  "ctx": "[\"loss\", -1, N_(\"Derrota del {club}. Toca autocrítica y trabajo. Hay tiempo para corregir. 🎤\")],",
+  "where": "social-data.js:942"
+ },
+ "Con la llegada de {name}, el {club} suma calidad. Habrá que ver cómo encaja en el grupo.": {
+  "ctx": "[\"signing\", 1, N_(\"Con la llegada de {name}, el {club} suma calidad. Habrá que ver cómo encaja en el grupo.\")],",
+  "where": "social-data.js:943"
+ },
+ "Bienvenida a {name} al {club}. Reto grande. Paciencia, que los proyectos necesitan tiempo. 🎤": {
+  "ctx": "[\"hired\", 1, N_(\"Bienvenida a {name} al {club}. Reto grande. Paciencia, que los proyectos necesitan tiempo. 🎤\")],",
+  "where": "social-data.js:944"
+ },
+ "Ojo a {player}: en {lg} está haciendo una temporada notable con el {club}. 🎤": {
+  "ctx": "[\"league_news\", 0, N_(\"Ojo a {player}: en {lg} está haciendo una temporada notable con el {club}. 🎤\")]",
+  "where": "social-data.js:945"
+ },
+ "¡GANA EL {club}! ¡{score}! ¡Que lo sepa el mundo, que lo sepa la galaxia, que lo sepa tu abuelita! 🌋": {
+  "ctx": "[\"win\", 1, N_(\"¡GANA EL {club}! ¡{score}! ¡Que lo sepa el mundo, que lo sepa la galaxia, que lo sepa tu abuelita! 🌋\")],",
+  "where": "social-data.js:949"
+ },
+ "¡{score}! ¡ESTO ES UNA EXHIBICIÓN! ¡Pásenme el extintor que el {club} está ARDIENDO! 🔥🌋": {
+  "ctx": "[\"bigwin\", 1, N_(\"¡{score}! ¡ESTO ES UNA EXHIBICIÓN! ¡Pásenme el extintor que el {club} está ARDIENDO! 🔥🌋\")],",
+  "where": "social-data.js:950"
+ },
+ "¡GOLEADA! ¡Al {opp} le pasó un camión, una aplanadora, un tren bala! ¡{score}! 🚄": {
+  "ctx": "[\"bigwin\", 1, N_(\"¡GOLEADA! ¡Al {opp} le pasó un camión, una aplanadora, un tren bala! ¡{score}! 🚄\")],",
+  "where": "social-data.js:951"
+ },
+ "¡GOOOOOOOOL DE {name}! ¡GOOOOL! ¡Le pegó con el alma, con el corazón y con la quincena! ⚽🌋": {
+  "ctx": "[\"goal_me\", 1, N_(\"¡GOOOOOOOOL DE {name}! ¡GOOOOL! ¡Le pegó con el alma, con el corazón y con la quincena! ⚽🌋\")],",
+  "where": "social-data.js:952"
+ },
+ "¡GOOOOL! ¡{name}! ¡Qué manera de definir! ¡Abran paso que viene el tren de las alegrías! 🚂": {
+  "ctx": "[\"goal_me\", 1, N_(\"¡GOOOOL! ¡{name}! ¡Qué manera de definir! ¡Abran paso que viene el tren de las alegrías! 🚂\")],",
+  "where": "social-data.js:953"
+ },
+ "¡TRES! ¡TRES GOLES DE {name}! ¡Que alguien le dé una calculadora a la defensa del {opp}! 🎩🎩🎩": {
+  "ctx": "[\"hattrick\", 1, N_(\"¡TRES! ¡TRES GOLES DE {name}! ¡Que alguien le dé una calculadora a la defensa del {opp}! 🎩🎩🎩\")],",
+  "where": "social-data.js:954"
+ },
+ "¡DERBI PARA EL {club}! ¡{score}! ¡Esto es éxtasis, es locura, es fiesta nacional! 🌋🎉": {
+  "ctx": "[\"derby_win\", 1, N_(\"¡DERBI PARA EL {club}! ¡{score}! ¡Esto es éxtasis, es locura, es fiesta nacional! 🌋🎉\")],",
+  "where": "social-data.js:955"
+ },
+ "Se cae el {club}… {score}… ¡Qué dolor, señores! ¡Duele como pisar un lego descalzo! 😭": {
+  "ctx": "[\"loss\", -1, N_(\"Se cae el {club}… {score}… ¡Qué dolor, señores! ¡Duele como pisar un lego descalzo! 😭\")],",
+  "where": "social-data.js:956"
+ },
+ "¡{score}! ¡NO, NO, NO! ¡Eso no es un partido, es una película de terror! 😱": {
+  "ctx": "[\"bigloss\", -1, N_(\"¡{score}! ¡NO, NO, NO! ¡Eso no es un partido, es una película de terror! 😱\")],",
+  "where": "social-data.js:957"
+ },
+ "¡{name}, el mejor de la cancha! ¡Jugó como si tuviera tres pulmones y dos corazones! 💓": {
+  "ctx": "[\"motm\", 1, N_(\"¡{name}, el mejor de la cancha! ¡Jugó como si tuviera tres pulmones y dos corazones! 💓\")],",
+  "where": "social-data.js:958"
+ },
+ "¡CAMPEÓN! ¡CAMPEÓN! ¡EL {club} GANA {trophy}! ¡Que suenen las trompetas, los mariachis y el despertador! 🏆🎺": {
+  "ctx": "[\"trophy\", 1, N_(\"¡CAMPEÓN! ¡CAMPEÓN! ¡EL {club} GANA {trophy}! ¡Que suenen las trompetas, los mariachis y el despertador! 🏆🎺\")],",
+  "where": "social-data.js:959"
+ },
+ "¡ROJA para {name}! ¡A las regaderas! ¡Se fue más caliente que un comal al mediodía! 🟥🔥": {
+  "ctx": "[\"redcard\", -1, N_(\"¡ROJA para {name}! ¡A las regaderas! ¡Se fue más caliente que un comal al mediodía! 🟥🔥\")],",
+  "where": "social-data.js:960"
+ },
+ "{score}. Empate. Repartieron puntos como quien reparte tamales: uno pa' ti, uno pa' mí. 🫔": {
+  "ctx": "[\"draw\", 0, N_(\"{score}. Empate. Repartieron puntos como quien reparte tamales: uno pa' ti, uno pa' mí. 🫔\")]",
+  "where": "social-data.js:961"
+ },
+ "📒 El {club} gana {score} al {opp}. Ojo: es la primera victoria con este marcador exacto esta temporada. Dato.": {
+  "ctx": "[\"win\", 1, N_(\"📒 El {club} gana {score} al {opp}. Ojo: es la primera victoria con este marcador exacto esta temporada. Dato.\")],",
+  "where": "social-data.js:964"
+ },
+ "📒 {score}. La mayor diferencia del {club} en lo que va de curso. Y mi libreta no miente.": {
+  "ctx": "[\"bigwin\", 1, N_(\"📒 {score}. La mayor diferencia del {club} en lo que va de curso. Y mi libreta no miente.\")],",
+  "where": "social-data.js:965"
+ },
+ "📒 Derrota del {club} ({score}). Apunto: equipo que encaja primero, este año pierde en 7 de cada 10 casos.": {
+  "ctx": "[\"loss\", -1, N_(\"📒 Derrota del {club} ({score}). Apunto: equipo que encaja primero, este año pierde en 7 de cada 10 casos.\")],",
+  "where": "social-data.js:966"
+ },
+ "📒 {score}. Empate número… lo tengo apuntado, pero me lo guardo para la segunda parte. 😉": {
+  "ctx": "[\"draw\", 0, N_(\"📒 {score}. Empate número… lo tengo apuntado, pero me lo guardo para la segunda parte. 😉\")],",
+  "where": "social-data.js:967"
+ },
+ "📒 Gol de {name}. Dato: marca con su pierna menos buena, cosa que no hacía desde hace meses. Ahí queda.": {
+  "ctx": "[\"goal_me\", 1, N_(\"📒 Gol de {name}. Dato: marca con su pierna menos buena, cosa que no hacía desde hace meses. Ahí queda.\")],",
+  "where": "social-data.js:968"
+ },
+ "📒 Hat-trick de {name}. Primer jugador del {club} en lograrlo ante el {opp} en años. Mi libreta se emociona.": {
+  "ctx": "[\"hattrick\", 1, N_(\"📒 Hat-trick de {name}. Primer jugador del {club} en lograrlo ante el {opp} en años. Mi libreta se emociona.\")],",
+  "where": "social-data.js:969"
+ },
+ "📒 Asistencia de {name}. Su pase número… no, no lo digo, que luego me lo copian. 📒": {
+  "ctx": "[\"assist\", 1, N_(\"📒 Asistencia de {name}. Su pase número… no, no lo digo, que luego me lo copian. 📒\")],",
+  "where": "social-data.js:970"
+ },
+ "📒 {name}: más balones tocados, más duelos ganados y más kilómetros que nadie. MVP de libreta.": {
+  "ctx": "[\"motm\", 1, N_(\"📒 {name}: más balones tocados, más duelos ganados y más kilómetros que nadie. MVP de libreta.\")],",
+  "where": "social-data.js:971"
+ },
+ "📒 {trophy} para el {club}. Apunto la fecha, el once, el árbitro y hasta la temperatura. Histórico.": {
+  "ctx": "[\"trophy\", 1, N_(\"📒 {trophy} para el {club}. Apunto la fecha, el once, el árbitro y hasta la temperatura. Histórico.\")],",
+  "where": "social-data.js:972"
+ },
+ "📒 En {lg}, {player} lleva al {club} a una racha que no se veía desde hace varias temporadas. Dato.": {
+  "ctx": "[\"league_news\", 0, N_(\"📒 En {lg}, {player} lleva al {club} a una racha que no se veía desde hace varias temporadas. Dato.\")],",
+  "where": "social-data.js:973"
+ },
+ "📒 {name} cumple {n} años. Dato curioso: muy pocos en su posición rinden así a esta edad.": {
+  "ctx": "[\"birthday\", 1, N_(\"📒 {name} cumple {n} años. Dato curioso: muy pocos en su posición rinden así a esta edad.\")]",
+  "where": "social-data.js:974"
+ },
+ "¡Gana el {club}! ¡{score}! ¡Sí señor! ¡Qué manera de competir, qué manera de sufrir! 🔥": {
+  "ctx": "[\"win\", 1, N_(\"¡Gana el {club}! ¡{score}! ¡Sí señor! ¡Qué manera de competir, qué manera de sufrir! 🔥\")],",
+  "where": "social-data.js:977"
+ },
+ "¡GOL GOL GOL GOL! ¡{name}! ¡Qué pedazo de gol, señores, qué pedazo de gol! 🔥": {
+  "ctx": "[\"goal_me\", 1, N_(\"¡GOL GOL GOL GOL! ¡{name}! ¡Qué pedazo de gol, señores, qué pedazo de gol! 🔥\")],",
+  "where": "social-data.js:978"
+ },
+ "¡{score}! ¡Esto es una fiesta! ¡Que no pare, que no pare el {club}! 🎉": {
+  "ctx": "[\"bigwin\", 1, N_(\"¡{score}! ¡Esto es una fiesta! ¡Que no pare, que no pare el {club}! 🎉\")],",
+  "where": "social-data.js:979"
+ },
+ "Pierde el {club}, {score}. Hoy no ha sido el día. Pero ojo, que esto es muy largo. 📻": {
+  "ctx": "[\"loss\", -1, N_(\"Pierde el {club}, {score}. Hoy no ha sido el día. Pero ojo, que esto es muy largo. 📻\")],",
+  "where": "social-data.js:980"
+ },
+ "¡DERBI! ¡El {club} se lleva el derbi! ¡Qué noche, qué noche, qué noche! 🔥": {
+  "ctx": "[\"derby_win\", 1, N_(\"¡DERBI! ¡El {club} se lleva el derbi! ¡Qué noche, qué noche, qué noche! 🔥\")]",
+  "where": "social-data.js:981"
+ },
+ "¡GOLAZO de {name}! Qué maravilla. Qué manera de golpear. Eso es poesía con botas. 🎙️": {
+  "ctx": "[\"goal_me\", 1, N_(\"¡GOLAZO de {name}! Qué maravilla. Qué manera de golpear. Eso es poesía con botas. 🎙️\")],",
+  "where": "social-data.js:984"
+ },
+ "Final: {club} {score} {opp}. Un partido de los que se cuentan despacio, saboreándolos. 🎙️": {
+  "ctx": "[\"win\", 1, N_(\"Final: {club} {score} {opp}. Un partido de los que se cuentan despacio, saboreándolos. 🎙️\")],",
+  "where": "social-data.js:985"
+ },
+ "{score}. Hay noches en las que el fútbol te pide quedarte callado y disfrutar. Esta es una. 🎙️": {
+  "ctx": "[\"bigwin\", 1, N_(\"{score}. Hay noches en las que el fútbol te pide quedarte callado y disfrutar. Esta es una. 🎙️\")],",
+  "where": "social-data.js:986"
+ },
+ "Tres goles de {name}. Hay jugadores que juegan al fútbol. Y otros que lo escriben. 🎙️": {
+  "ctx": "[\"hattrick\", 1, N_(\"Tres goles de {name}. Hay jugadores que juegan al fútbol. Y otros que lo escriben. 🎙️\")],",
+  "where": "social-data.js:987"
+ },
+ "Derrota del {club}. Hoy el fútbol ha sido cruel, pero también justo. Así es este juego. 🎙️": {
+  "ctx": "[\"loss\", -1, N_(\"Derrota del {club}. Hoy el fútbol ha sido cruel, pero también justo. Así es este juego. 🎙️\")]",
+  "where": "social-data.js:988"
+ },
+ "¡Gol de {name}! Un vuelo, una caricia, una paloma que se posa en la red. 🕊️": {
+  "ctx": "[\"goal_me\", 1, N_(\"¡Gol de {name}! Un vuelo, una caricia, una paloma que se posa en la red. 🕊️\")],",
+  "where": "social-data.js:991"
+ },
+ "El {club} gana {score}. El fútbol como arte, la victoria como consecuencia. 🕊️": {
+  "ctx": "[\"win\", 1, N_(\"El {club} gana {score}. El fútbol como arte, la victoria como consecuencia. 🕊️\")],",
+  "where": "social-data.js:992"
+ },
+ "{trophy} para el {club}. Hay alegrías que no caben en una narración. Esta es una de ellas. 🕊️🏆": {
+  "ctx": "[\"trophy\", 1, N_(\"{trophy} para el {club}. Hay alegrías que no caben en una narración. Esta es una de ellas. 🕊️🏆\")],",
+  "where": "social-data.js:993"
+ },
+ "Pierde el {club}. Pero el fútbol siempre da revancha. Siempre. 🕊️": {
+  "ctx": "[\"loss\", -1, N_(\"Pierde el {club}. Pero el fútbol siempre da revancha. Siempre. 🕊️\")],",
+  "where": "social-data.js:994"
+ },
+ "{name} jugó con la cabeza levantada toda la noche. Eso, señores, es el fútbol que enamora. 🕊️": {
+  "ctx": "[\"motm\", 1, N_(\"{name} jugó con la cabeza levantada toda la noche. Eso, señores, es el fútbol que enamora. 🕊️\")]",
+  "where": "social-data.js:995"
+ },
+ "El {club} gana {score}. Esto es como un triple sobre la bocina: feo, pero vale igual. 🏀": {
+  "ctx": "[\"win\", 1, N_(\"El {club} gana {score}. Esto es como un triple sobre la bocina: feo, pero vale igual. 🏀\")],",
+  "where": "social-data.js:998"
+ },
+ "{score}. Esto en la NBA sería un «blowout» de los que se ven desde el banquillo con toalla al cuello. 🏀": {
+  "ctx": "[\"bigwin\", 1, N_(\"{score}. Esto en la NBA sería un «blowout» de los que se ven desde el banquillo con toalla al cuello. 🏀\")],",
+  "where": "social-data.js:999"
+ },
+ "Gol de {name}. Si esto fuera baloncesto, lo pondríamos en el Top 10 de la noche. 🏀": {
+  "ctx": "[\"goal_me\", 1, N_(\"Gol de {name}. Si esto fuera baloncesto, lo pondríamos en el Top 10 de la noche. 🏀\")],",
+  "where": "social-data.js:1000"
+ },
+ "Asistencia de {name}. Visión de base de los buenos, de los que ven la jugada antes que nadie. 🏀": {
+  "ctx": "[\"assist\", 1, N_(\"Asistencia de {name}. Visión de base de los buenos, de los que ven la jugada antes que nadie. 🏀\")],",
+  "where": "social-data.js:1001"
+ },
+ "Derrota del {club}. Hay partidos que se pierden como un tapón en el último segundo. Duele, pero se aprende. 🏀": {
+  "ctx": "[\"loss\", -1, N_(\"Derrota del {club}. Hay partidos que se pierden como un tapón en el último segundo. Duele, pero se aprende. 🏀\")],",
+  "where": "social-data.js:1002"
+ },
+ "{trophy} para el {club}. Esto es el anillo, amigos. El anillo. 💍🏀": {
+  "ctx": "[\"trophy\", 1, N_(\"{trophy} para el {club}. Esto es el anillo, amigos. El anillo. 💍🏀\")]",
+  "where": "social-data.js:1003"
+ },
+ "Victoria del {club}, {score}. Ha sabido leer el partido y ajustar a tiempo. Bien trabajado. 🎧": {
+  "ctx": "[\"win\", 1, N_(\"Victoria del {club}, {score}. Ha sabido leer el partido y ajustar a tiempo. Bien trabajado. 🎧\")],",
+  "where": "social-data.js:1006"
+ },
+ "Gol de {name}. Desmarque perfecto, timing perfecto. Para enseñar en las escuelas. 🎧": {
+  "ctx": "[\"goal_me\", 1, N_(\"Gol de {name}. Desmarque perfecto, timing perfecto. Para enseñar en las escuelas. 🎧\")],",
+  "where": "social-data.js:1007"
+ },
+ "{score}. Partido muy táctico, de ajedrez. Ninguno quiso arriesgar más de la cuenta. 🎧": {
+  "ctx": "[\"draw\", 0, N_(\"{score}. Partido muy táctico, de ajedrez. Ninguno quiso arriesgar más de la cuenta. 🎧\")],",
+  "where": "social-data.js:1008"
+ },
+ "Pierde el {club}. Hoy le faltó claridad en el último tercio. Se corregirá. 🎧": {
+  "ctx": "[\"loss\", -1, N_(\"Pierde el {club}. Hoy le faltó claridad en el último tercio. Se corregirá. 🎧\")]",
+  "where": "social-data.js:1009"
+ },
+ "¡GOOOL! ¡{name}! ¡Me gustó, me gustó, ME GUSTÓ! ¡Qué golazo, por favor! 🇨🇱": {
+  "ctx": "[\"goal_me\", 1, N_(\"¡GOOOL! ¡{name}! ¡Me gustó, me gustó, ME GUSTÓ! ¡Qué golazo, por favor! 🇨🇱\")],",
+  "where": "social-data.js:1012"
+ },
+ "¡Ganó el {club}! {score}. ¡Qué lindo es el fútbol cuando se juega así! 🇨🇱": {
+  "ctx": "[\"win\", 1, N_(\"¡Ganó el {club}! {score}. ¡Qué lindo es el fútbol cuando se juega así! 🇨🇱\")],",
+  "where": "social-data.js:1013"
+ },
+ "¡{score}! ¡Paliza, paliza, paliza! ¡El {club} hoy fue una aplanadora! 🇨🇱": {
+  "ctx": "[\"bigwin\", 1, N_(\"¡{score}! ¡Paliza, paliza, paliza! ¡El {club} hoy fue una aplanadora! 🇨🇱\")],",
+  "where": "social-data.js:1014"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "portugal",
+ "league": "Liga Portugal",
+ "country": "PT",
+ "clubs": [
+  {
+   "club": "SL Benfica",
+   "gameRating": 82
+  },
+  {
+   "club": "Sporting CP",
+   "gameRating": 80.7
+  },
+  {
+   "club": "FC Porto",
+   "gameRating": 79.7
+  },
+  {
+   "club": "SC Braga",
+   "gameRating": 78.8
+  },
+  {
+   "club": "Vitória SC",
+   "gameRating": 77.9
+  },
+  {
+   "club": "FC Famalicão",
+   "gameRating": 77.1
+  },
+  {
+   "club": "Gil Vicente",
+   "gameRating": 76.2
+  },
+  {
+   "club": "Casa Pia",
+   "gameRating": 75.4
+  },
+  {
+   "club": "Estoril Praia",
+   "gameRating": 74.6
+  },
+  {
+   "club": "Rio Ave",
+   "gameRating": 73.8
+  },
+  {
+   "club": "Moreirense",
+   "gameRating": 73.1
+  },
+  {
+   "club": "Santa Clara",
+   "gameRating": 72.3
+  },
+  {
+   "club": "FC Arouca",
+   "gameRating": 71.6
+  },
+  {
+   "club": "Estrela da Amadora",
+   "gameRating": 70.9
+  },
+  {
+   "club": "FC Alverca",
+   "gameRating": 70.1
+  },
+  {
+   "club": "CD Nacional",
+   "gameRating": 69.4
+  },
+  {
+   "club": "CS Marítimo",
+   "gameRating": 68.7
+  },
+  {
+   "club": "Académico de Viseu",
+   "gameRating": 68
+  }
+ ]
+}

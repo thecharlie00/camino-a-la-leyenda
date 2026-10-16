@@ -1,0 +1,1407 @@
+{
+ "Me fui por algo. El domingo lo verán.": {
+  "w": [
+   "press-ctx.js:531"
+  ],
+  "ctx": "A(N_(\"Me fui por algo. El domingo lo verán.\"), {fans: 3, img: -2, team: 1, press: 10}, \"agr\")"
+ },
+ "Acabas de enfrentarte al {opp}, tu antiguo club. ¿Qué has sentido?": {
+  "w": [
+   "press-ctx.js:533"
+  ],
+  "ctx": "return {q: N_(\"Acabas de enfrentarte al {opp}, tu antiguo club. ¿Qué has sentido?\"), tp: tp, a: ["
+ },
+ "Mucho cariño. Saludar a la gente de allí ha sido emocionante.": {
+  "w": [
+   "press-ctx.js:534"
+  ],
+  "ctx": "A(N_(\"Mucho cariño. Saludar a la gente de allí ha sido emocionante.\"), {img: 3, fans: -1, press: -2}, \"dip\"),"
+ },
+ "Nada especial. Un rival más.": {
+  "w": [
+   "press-ctx.js:535"
+  ],
+  "ctx": "A(N_(\"Nada especial. Un rival más.\"), {fans: 2, img: -1, press: 3}, \"eva\"),"
+ },
+ "Que quizá alguno de allí se arrepiente de dejarme ir.": {
+  "w": [
+   "press-ctx.js:536"
+  ],
+  "ctx": "A(N_(\"Que quizá alguno de allí se arrepiente de dejarme ir.\"), {fans: 3, img: -2, press: 9}, \"agr\"),"
+ },
+ "He ido al vestuario equivocado del puro hábito.": {
+  "w": [
+   "press-ctx.js:537"
+  ],
+  "ctx": "A(N_(\"He ido al vestuario equivocado del puro hábito.\"), {fans: 2, press: 2}, \"hum\")"
+ },
+ "El {opp} maneja un presupuesto {x} veces mayor que el vuestro. ¿David contra Goliat?": {
+  "w": [
+   "press-ctx.js:546"
+  ],
+  "ctx": "if (r >= 1) return {pre: 1, q: N_(\"El {opp} maneja un presupuesto {x} veces mayor que el vuestro. ¿David contra Goliat?\"), tp: tp, a: ["
+ },
+ "El dinero no juega. Once contra once, cualquiera puede ganar.": {
+  "w": [
+   "press-ctx.js:547"
+  ],
+  "ctx": "A(N_(\"El dinero no juega. Once contra once, cualquiera puede ganar.\"), {team: 3, fans: 2, press: 4}, \"agr\"),"
+ },
+ "Son favoritos, sin duda. Nosotros intentaremos ponérselo difícil.": {
+  "w": [
+   "press-ctx.js:548"
+  ],
+  "ctx": "A(N_(\"Son favoritos, sin duda. Nosotros intentaremos ponérselo difícil.\"), {boss: 2, fans: -1, press: -3}, \"dip\"),"
+ },
+ "Con lo que cuesta su banquillo nos pagamos la temporada entera. Y ojo, que nos sobra ilusión.": {
+  "w": [
+   "press-ctx.js:549"
+  ],
+  "ctx": "A(N_(\"Con lo que cuesta su banquillo nos pagamos la temporada entera. Y ojo, que nos sobra ilusión.\"), {fans: 3, team: 2, press: 3}, \"hum\"),"
+ },
+ "Que se preocupen ellos: tienen mucho más que perder.": {
+  "w": [
+   "press-ctx.js:550"
+  ],
+  "ctx": "A(N_(\"Que se preocupen ellos: tienen mucho más que perder.\"), {fans: 2, img: 1, press: 6}, \"agr\")"
+ },
+ "Vuestro presupuesto es {x} veces el del {opp}. ¿Estáis obligados a ganar?": {
+  "w": [
+   "press-ctx.js:552"
+  ],
+  "ctx": "return {pre: 1, q: N_(\"Vuestro presupuesto es {x} veces el del {opp}. ¿Estáis obligados a ganar?\"), tp: tp, a: ["
+ },
+ "Obligados no; responsables, sí. Hay que demostrarlo en el campo.": {
+  "w": [
+   "press-ctx.js:553"
+  ],
+  "ctx": "A(N_(\"Obligados no; responsables, sí. Hay que demostrarlo en el campo.\"), {boss: 2, team: 1, press: -2}, \"dip\"),"
+ },
+ "Si no ganamos ese partido, que me lo reprochen a mí.": {
+  "w": [
+   "press-ctx.js:554"
+  ],
+  "ctx": "A(N_(\"Si no ganamos ese partido, que me lo reprochen a mí.\"), {boss: 2, fans: 2, press: 6}, \"agr\"),"
+ },
+ "El presupuesto no marca goles. Ojalá fuera tan fácil.": {
+  "w": [
+   "press-ctx.js:555"
+  ],
+  "ctx": "A(N_(\"El presupuesto no marca goles. Ojalá fuera tan fácil.\"), {fans: -1, press: 2}, \"eva\"),"
+ },
+ "Ningún partido es fácil. Ellos querrán dar la sorpresa.": {
+  "w": [
+   "press-ctx.js:556"
+  ],
+  "ctx": "A(N_(\"Ningún partido es fácil. Ellos querrán dar la sorpresa.\"), {team: 2, press: -3}, \"dip\")"
+ },
+ "Campeones tras ganar la final al {opp}. ¿Qué significa este título?": {
+  "w": [
+   "press-ctx.js:561"
+  ],
+  "ctx": "if (f.r === \"W\") return {q: N_(\"Campeones tras ganar la final al {opp}. ¿Qué significa este título?\"), tp: tp, a: ["
+ },
+ "Es de todos: jugadores, cuerpo técnico, afición. Yo solo he puesto un granito.": {
+  "w": [
+   "press-ctx.js:562"
+  ],
+  "ctx": "A(N_(\"Es de todos: jugadores, cuerpo técnico, afición. Yo solo he puesto un granito.\"), {team: 3, fans: 3, press: -2}, \"dip\"),"
+ },
+ "Que esto solo es el principio. Vamos a por todo.": {
+  "w": [
+   "press-ctx.js:563"
+  ],
+  "ctx": "A(N_(\"Que esto solo es el principio. Vamos a por todo.\"), {fans: 4, img: 2, boss: 1, press: 7}, \"agr\"),"
+ },
+ "Que esta noche no me esperen en casa temprano.": {
+  "w": [
+   "press-ctx.js:564"
+  ],
+  "ctx": "A(N_(\"Que esta noche no me esperen en casa temprano.\"), {fans: 3, team: 2, press: 2}, \"hum\"),"
+ },
+ "Lo disfruto hoy y mañana a trabajar. Así se ganan los siguientes.": {
+  "w": [
+   "press-ctx.js:565"
+  ],
+  "ctx": "A(N_(\"Lo disfruto hoy y mañana a trabajar. Así se ganan los siguientes.\"), {boss: 3, press: -3}, \"dip\")"
+ },
+ "Habéis perdido la final ante el {opp}. ¿Cómo se levanta uno de esto?": {
+  "w": [
+   "press-ctx.js:567"
+  ],
+  "ctx": "return {q: N_(\"Habéis perdido la final ante el {opp}. ¿Cómo se levanta uno de esto?\"), tp: tp, a: ["
+ },
+ "Con la cabeza alta. Llegar hasta aquí ya dice mucho de este grupo.": {
+  "w": [
+   "press-ctx.js:568"
+  ],
+  "ctx": "A(N_(\"Con la cabeza alta. Llegar hasta aquí ya dice mucho de este grupo.\"), {team: 3, fans: 1, press: -2}, \"dip\"),"
+ },
+ "Nos han robado la final y todo el mundo lo ha visto.": {
+  "w": [
+   "press-ctx.js:569"
+  ],
+  "ctx": "A(N_(\"Nos han robado la final y todo el mundo lo ha visto.\"), {fans: 3, img: -3, press: 12}, \"agr\"),"
+ },
+ "Volveremos. Y la próxima vez, la ganaremos.": {
+  "w": [
+   "press-ctx.js:570"
+  ],
+  "ctx": "A(N_(\"Volveremos. Y la próxima vez, la ganaremos.\"), {fans: 4, team: 2, press: 3}, \"agr\"),"
+ },
+ "Hoy no es día de hablar. Lo siento.": {
+  "w": [
+   "press-ctx.js:571"
+  ],
+  "ctx": "A(N_(\"Hoy no es día de hablar. Lo siento.\"), {fans: -2, press: 2}, \"eva\")"
+ },
+ "En redes te han bautizado como «{nick}». ¿Te duele?": {
+  "w": [
+   "press-ctx.js:582"
+  ],
+  "ctx": "if (bad) return {q: N_(\"En redes te han bautizado como «{nick}». ¿Te duele?\"), tp: tp, a: ["
+ },
+ "Me lo he ganado con mi rendimiento. Me toca a mí cambiarlo.": {
+  "w": [
+   "press-ctx.js:583"
+  ],
+  "ctx": "A(N_(\"Me lo he ganado con mi rendimiento. Me toca a mí cambiarlo.\"), {boss: 2, fans: 2, press: -3}, \"dip\"),"
+ },
+ "Los que lo dicen no han tocado un balón en su vida.": {
+  "w": [
+   "press-ctx.js:584"
+  ],
+  "ctx": "A(N_(\"Los que lo dicen no han tocado un balón en su vida.\"), {fans: -3, img: -1, press: 10}, \"agr\"),"
+ },
+ "Me he hecho una camiseta con el mote. Hay que saber reírse de uno mismo.": {
+  "w": [
+   "press-ctx.js:585"
+  ],
+  "ctx": "A(N_(\"Me he hecho una camiseta con el mote. Hay que saber reírse de uno mismo.\"), {fans: 4, team: 1, press: -1}, \"hum\"),"
+ },
+ "No leo las redes. Ni pienso empezar ahora.": {
+  "w": [
+   "press-ctx.js:586"
+  ],
+  "ctx": "A(N_(\"No leo las redes. Ni pienso empezar ahora.\"), {press: -2}, \"eva\")"
+ },
+ "La grada ya te llama «{nick}». ¿Te gusta el mote?": {
+  "w": [
+   "press-ctx.js:588"
+  ],
+  "ctx": "return {q: N_(\"La grada ya te llama «{nick}». ¿Te gusta el mote?\"), tp: tp, a: ["
+ },
+ "Me encanta. Intentaré estar a la altura cada domingo.": {
+  "w": [
+   "press-ctx.js:589"
+  ],
+  "ctx": "A(N_(\"Me encanta. Intentaré estar a la altura cada domingo.\"), {fans: 4, img: 1, press: 1}, \"dip\"),"
+ },
+ "Me lo he ganado. Y todavía no habéis visto nada.": {
+  "w": [
+   "press-ctx.js:590"
+  ],
+  "ctx": "A(N_(\"Me lo he ganado. Y todavía no habéis visto nada.\"), {fans: 3, img: 2, team: -1, press: 7}, \"agr\"),"
+ },
+ "Mi familia ya me llama así en casa. Estoy perdido.": {
+  "w": [
+   "press-ctx.js:591"
+  ],
+  "ctx": "A(N_(\"Mi familia ya me llama así en casa. Estoy perdido.\"), {fans: 3, team: 1, press: 1}, \"hum\"),"
+ },
+ "Prefiero que me recuerden por mi nombre y por lo que gane.": {
+  "w": [
+   "press-ctx.js:592"
+  ],
+  "ctx": "A(N_(\"Prefiero que me recuerden por mi nombre y por lo que gane.\"), {boss: 1, fans: -1, press: -2}, \"eva\")"
+ },
+ "Tras tu debut, los periodistas quieren conocerte.": {
+  "w": [
+   "press-ctx.js:658"
+  ],
+  "ctx": "debut: N_(\"Tras tu debut, los periodistas quieren conocerte.\"),"
+ },
+ "Con el premio recién recibido, la prensa te reclama.": {
+  "w": [
+   "press-ctx.js:659"
+  ],
+  "ctx": "award: N_(\"Con el premio recién recibido, la prensa te reclama.\"),"
+ },
+ "La final todavía da que hablar y la sala está a rebosar.": {
+  "w": [
+   "press-ctx.js:660"
+  ],
+  "ctx": "final: N_(\"La final todavía da que hablar y la sala está a rebosar.\"),"
+ },
+ "Partido especial a la vista: te mides a tu antiguo club.": {
+  "w": [
+   "press-ctx.js:662"
+  ],
+  "ctx": "former: N_(\"Partido especial a la vista: te mides a tu antiguo club.\"),"
+ },
+ "Tu racha no pasa desapercibida: todos quieren preguntarte.": {
+  "w": [
+   "press-ctx.js:663"
+  ],
+  "ctx": "streak: N_(\"Tu racha no pasa desapercibida: todos quieren preguntarte.\"),"
+ },
+ "Se juega mucho en las próximas jornadas y nadie quiere perderse tus palabras.": {
+  "w": [
+   "press-ctx.js:664"
+  ],
+  "ctx": "decisive: N_(\"Se juega mucho en las próximas jornadas y nadie quiere perderse tus palabras.\"),"
+ },
+ "La expulsión sigue dando que hablar.": {
+  "w": [
+   "press-ctx.js:665"
+  ],
+  "ctx": "red: N_(\"La expulsión sigue dando que hablar.\")"
+ },
+ "Previa del partido ante el {opp}: la sala de prensa espera.": {
+  "w": [
+   "press-ctx.js:711"
+  ],
+  "ctx": "else if (mgr && x.pre && tp.nopp) t = tr(\"Previa del partido ante el {opp}: la sala de prensa espera.\", {opp: tp.nopp});"
+ },
+ "Rueda de prensa tras el partido ante el {opp}.": {
+  "w": [
+   "press-ctx.js:712"
+  ],
+  "ctx": "else if (mgr && tp.opp && tp.opp !== tr(\"rival\")) t = tr(\"Rueda de prensa tras el partido ante el {opp}.\", {opp: tp.opp});"
+ },
+ "Los periodistas esperan a «{nick}».": {
+  "w": [
+   "press-ctx.js:715"
+  ],
+  "ctx": "if (nk) t += \" \" + tr(\"Los periodistas esperan a «{nick}».\", {nick: nk});"
+ },
+ "La presión mediática está por las nubes.": {
+  "w": [
+   "press-ctx.js:717"
+  ],
+  "ctx": "if (lv >= 2) t += \" \" + tr(\"La presión mediática está por las nubes.\");"
+ },
+ "Tres preguntas. Verás el efecto de cada respuesta antes de elegir.": {
+  "w": [
+   "press-ctx.js:724"
+  ],
+  "ctx": "{t: tr(\"Ir a la rueda de prensa\"), d: tr(\"Tres preguntas. Verás el efecto de cada respuesta antes de elegir.\"), ok: {txt: tr(\"Te sientas ante los micrófonos.\"), fx: {}}},"
+ },
+ "La afición y el vestuario lo notarán, y la prensa hablará de tu silencio.": {
+  "w": [
+   "press-ctx.js:725"
+  ],
+  "ctx": "{t: tr(\"No ir\"), d: tr(\"La afición y el vestuario lo notarán, y la prensa hablará de tu silencio.\"), ok: {txt: tr(\"Mandas a un portavoz. A la afición no le gusta nada.\"), fx: mgr ? {fans: -4, sqMor: -2, press: 6} : {fans"
+ },
+ "Previa": {
+  "w": [
+   "press-ctx.js:731"
+  ],
+  "ctx": "return {scene: \"press\", tag: \"real\", tagTxt: tr(\"Rueda de prensa\"), cls: \"\", cat: x.pre ? tr(\"Previa\") : tr(\"Prensa\"), title: tr(\"¿Vas a la rueda de prensa?\"), text: prxIntro(x) + \" \" + tr(\"Si vas, te harán tres pregunta"
+ },
+ "Pregunta con datos en la mano. ¿Qué respondes?": {
+  "w": [
+   "press-ctx.js:743"
+  ],
+  "ctx": "text: q.bank ? tr(\"Todas las cámaras te enfocan. ¿Qué respondes?\") : tr(\"Pregunta con datos en la mano. ¿Qué respondes?\"), mp: mpGet(), top: q.top ? tr(q.top) : null, ctxq: !q.bank,"
+ },
+ "«{quote}». {name} ha incendiado la sala de prensa. Mañana, portadas 🔥📰": {
+  "w": [
+   "press-ctx.js:785"
+  ],
+  "ctx": "var PX_SOC_HOT = [N_(\"«{quote}». {name} ha incendiado la sala de prensa. Mañana, portadas 🔥📰\"), N_(\"Lo de {name} en rueda de prensa no tiene nombre: «{quote}» 😳\"),"
+ },
+ "Lo de {name} en rueda de prensa no tiene nombre: «{quote}» 😳": {
+  "w": [
+   "press-ctx.js:785"
+  ],
+  "ctx": "var PX_SOC_HOT = [N_(\"«{quote}». {name} ha incendiado la sala de prensa. Mañana, portadas 🔥📰\"), N_(\"Lo de {name} en rueda de prensa no tiene nombre: «{quote}» 😳\"),"
+ },
+ "Titular servido: «{quote}» ({name}). La tertulia de esta noche ya tiene tema 🎙️🍿": {
+  "w": [
+   "press-ctx.js:786"
+  ],
+  "ctx": "N_(\"Titular servido: «{quote}» ({name}). La tertulia de esta noche ya tiene tema 🎙️🍿\")];"
+ },
+ "La lupa sobre {name}: cada palabra suya abre tertulias. La presión mediática está al máximo 🔥🎙️": {
+  "w": [
+   "press-ctx.js:824"
+  ],
+  "ctx": "{by: \"press\", m: 0, t: N_(\"La lupa sobre {name}: cada palabra suya abre tertulias. La presión mediática está al máximo 🔥🎙️\")},"
+ },
+ "Ya está bien de {name}. Mucho titular y poco fútbol 🙄": {
+  "w": [
+   "press-ctx.js:825"
+  ],
+  "ctx": "{by: \"hater\", m: -1, t: N_(\"Ya está bien de {name}. Mucho titular y poco fútbol 🙄\")},"
+ },
+ "Dejad trabajar a {name}, que la prensa no para de buscar polémica 😤": {
+  "w": [
+   "press-ctx.js:826"
+  ],
+  "ctx": "{by: \"fan\", m: 1, t: N_(\"Dejad trabajar a {name}, que la prensa no para de buscar polémica 😤\")},"
+ },
+ "Los periodistas esperando a {name} a la salida del entrenamiento: 📸📸📸📸📸": {
+  "w": [
+   "press-ctx.js:827"
+  ],
+  "ctx": "{by: \"meme\", m: 0, t: N_(\"Los periodistas esperando a {name} a la salida del entrenamiento: 📸📸📸📸📸\")}"
+ },
+ "{name} lleva {n} partidos seguidos sin encajar. Han puesto un candado y han tirado la llave 🔒🧤": {
+  "w": [
+   "press-ctx.js:830"
+  ],
+  "ctx": "cs: [{by: \"meme\", t: N_(\"{name} lleva {n} partidos seguidos sin encajar. Han puesto un candado y han tirado la llave 🔒🧤\"), m: 1},"
+ },
+ "Con {name} bajo palos dormimos tranquilos. {n} porterías a cero seguidas 🧤💤": {
+  "w": [
+   "press-ctx.js:831"
+  ],
+  "ctx": "{by: \"fan\", t: N_(\"Con {name} bajo palos dormimos tranquilos. {n} porterías a cero seguidas 🧤💤\"), m: 1},"
+ },
+ "📊 {name}: {n} partidos consecutivos con la portería a cero.": {
+  "w": [
+   "press-ctx.js:832"
+  ],
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name}: {n} partidos consecutivos con la portería a cero.\"), m: 0}],"
+ },
+ "{n} goles encajados ante el {opp}. ¿{name} juega con guantes o con manoplas de cocina? 🧈": {
+  "w": [
+   "press-ctx.js:833"
+  ],
+  "ctx": "leak: [{by: \"hater\", t: N_(\"{n} goles encajados ante el {opp}. ¿{name} juega con guantes o con manoplas de cocina? 🧈\"), m: -1},"
+ },
+ "La defensa del {club} y {name} ante el {opp}: 👋⚽👋⚽👋⚽": {
+  "w": [
+   "press-ctx.js:834"
+  ],
+  "ctx": "{by: \"meme\", t: N_(\"La defensa del {club} y {name} ante el {opp}: 👋⚽👋⚽👋⚽\"), m: -1},"
+ },
+ "{name}, levanta la cabeza. Un mal día lo tiene cualquiera ({n} encajados ante el {opp}) 💪": {
+  "w": [
+   "press-ctx.js:835"
+  ],
+  "ctx": "{by: \"fan\", t: N_(\"{name}, levanta la cabeza. Un mal día lo tiene cualquiera ({n} encajados ante el {opp}) 💪\"), m: 1}],"
+ },
+ "Paradón tras paradón: {name} firma un {rt} ante el {opp}. ¡Qué portero tenemos! 🧱": {
+  "w": [
+   "press-ctx.js:836"
+  ],
+  "ctx": "star: [{by: \"fan\", t: N_(\"Paradón tras paradón: {name} firma un {rt} ante el {opp}. ¡Qué portero tenemos! 🧱\"), m: 1},"
+ },
+ "Los delanteros del {opp} intentando marcarle a {name}: 🚪🔒🧱": {
+  "w": [
+   "press-ctx.js:837"
+  ],
+  "ctx": "{by: \"meme\", t: N_(\"Los delanteros del {opp} intentando marcarle a {name}: 🚪🔒🧱\"), m: 1},"
+ },
+ "📊 {name} firmó un {rt} ante el {opp}. Actuación de muro.": {
+  "w": [
+   "press-ctx.js:838"
+  ],
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} firmó un {rt} ante el {opp}. Actuación de muro.\"), m: 0}],"
+ },
+ "{name} adivina el lado OTRA VEZ. Que alguien compruebe si tiene poderes 🔮🧤": {
+  "w": [
+   "press-ctx.js:839"
+  ],
+  "ctx": "pen: [{by: \"meme\", t: N_(\"{name} adivina el lado OTRA VEZ. Que alguien compruebe si tiene poderes 🔮🧤\"), m: 1},"
+ },
+ "¡Penalti parado por {name}! Tenemos un gato bajo palos 🐈🧤": {
+  "w": [
+   "press-ctx.js:840"
+  ],
+  "ctx": "{by: \"fan\", t: N_(\"¡Penalti parado por {name}! Tenemos un gato bajo palos 🐈🧤\"), m: 1}]"
+ },
+ "{x} de {club}": {
+  "w": [
+   "press-ctx.js:882",
+   "press-ctx.js:883",
+   "press-ctx.js:884"
+  ],
+  "ctx": "pos: [N_(\"{x} de {club}\"), N_(\"{x} de Hierro\"), N_(\"{x} de Oro\"), N_(\"{x} del Área\")],"
+ },
+ "{x} de Hierro": {
+  "w": [
+   "press-ctx.js:882"
+  ],
+  "ctx": "pos: [N_(\"{x} de {club}\"), N_(\"{x} de Hierro\"), N_(\"{x} de Oro\"), N_(\"{x} del Área\")],"
+ },
+ "{x} de Oro": {
+  "w": [
+   "press-ctx.js:882",
+   "press-ctx.js:884"
+  ],
+  "ctx": "pos: [N_(\"{x} de {club}\"), N_(\"{x} de Hierro\"), N_(\"{x} de Oro\"), N_(\"{x} del Área\")],"
+ },
+ "{x} del Área": {
+  "w": [
+   "press-ctx.js:882"
+  ],
+  "ctx": "pos: [N_(\"{x} de {club}\"), N_(\"{x} de Hierro\"), N_(\"{x} de Oro\"), N_(\"{x} del Área\")],"
+ },
+ "{x} de Cristal": {
+  "w": [
+   "press-ctx.js:883"
+  ],
+  "ctx": "neg: [N_(\"{x} de Cristal\"), N_(\"{x} de Papel\"), N_(\"{x} de {club}\")],"
+ },
+ "{x} de Papel": {
+  "w": [
+   "press-ctx.js:883"
+  ],
+  "ctx": "neg: [N_(\"{x} de Cristal\"), N_(\"{x} de Papel\"), N_(\"{x} de {club}\")],"
+ },
+ "{x} del Banquillo": {
+  "w": [
+   "press-ctx.js:884"
+  ],
+  "ctx": "dt: [N_(\"{x} del Banquillo\"), N_(\"{x} de {club}\"), N_(\"{x} de Oro\")]"
+ },
+ "El Felino": {
+  "w": [
+   "press-ctx.js:887"
+  ],
+  "ctx": "gk: {m: 1, sf: \"pos\", l: [N_(\"El Gato\"), N_(\"La Muralla\"), N_(\"El Pulpo\"), N_(\"Manos de Seda\"), N_(\"El Candado\"), N_(\"San {ln}\"), N_(\"El Felino\"), N_(\"La Pared\"), N_(\"El Ángel de la Guarda\"),"
+ },
+ "La Pared": {
+  "w": [
+   "press-ctx.js:887"
+  ],
+  "ctx": "gk: {m: 1, sf: \"pos\", l: [N_(\"El Gato\"), N_(\"La Muralla\"), N_(\"El Pulpo\"), N_(\"Manos de Seda\"), N_(\"El Candado\"), N_(\"San {ln}\"), N_(\"El Felino\"), N_(\"La Pared\"), N_(\"El Ángel de la Guarda\"),"
+ },
+ "El Ángel de la Guarda": {
+  "w": [
+   "press-ctx.js:887"
+  ],
+  "ctx": "gk: {m: 1, sf: \"pos\", l: [N_(\"El Gato\"), N_(\"La Muralla\"), N_(\"El Pulpo\"), N_(\"Manos de Seda\"), N_(\"El Candado\"), N_(\"San {ln}\"), N_(\"El Felino\"), N_(\"La Pared\"), N_(\"El Ángel de la Guarda\"),"
+ },
+ "La Araña": {
+  "w": [
+   "press-ctx.js:888"
+  ],
+  "ctx": "N_(\"La Araña\"), N_(\"El Halcón\"), N_(\"Manos de Tenaza\"), N_(\"El Cerrojo\"), N_(\"{ln} el Invencible\"), N_(\"El Muro de {club}\"), N_(\"El Guardián\"), N_(\"El Imbatible\")]},"
+ },
+ "El Halcón": {
+  "w": [
+   "press-ctx.js:888"
+  ],
+  "ctx": "N_(\"La Araña\"), N_(\"El Halcón\"), N_(\"Manos de Tenaza\"), N_(\"El Cerrojo\"), N_(\"{ln} el Invencible\"), N_(\"El Muro de {club}\"), N_(\"El Guardián\"), N_(\"El Imbatible\")]},"
+ },
+ "Manos de Tenaza": {
+  "w": [
+   "press-ctx.js:888"
+  ],
+  "ctx": "N_(\"La Araña\"), N_(\"El Halcón\"), N_(\"Manos de Tenaza\"), N_(\"El Cerrojo\"), N_(\"{ln} el Invencible\"), N_(\"El Muro de {club}\"), N_(\"El Guardián\"), N_(\"El Imbatible\")]},"
+ },
+ "El Cerrojo": {
+  "w": [
+   "press-ctx.js:888",
+   "press-ctx.js:910"
+  ],
+  "ctx": "N_(\"La Araña\"), N_(\"El Halcón\"), N_(\"Manos de Tenaza\"), N_(\"El Cerrojo\"), N_(\"{ln} el Invencible\"), N_(\"El Muro de {club}\"), N_(\"El Guardián\"), N_(\"El Imbatible\")]},"
+ },
+ "{ln} el Invencible": {
+  "w": [
+   "press-ctx.js:888"
+  ],
+  "ctx": "N_(\"La Araña\"), N_(\"El Halcón\"), N_(\"Manos de Tenaza\"), N_(\"El Cerrojo\"), N_(\"{ln} el Invencible\"), N_(\"El Muro de {club}\"), N_(\"El Guardián\"), N_(\"El Imbatible\")]},"
+ },
+ "El Muro de {club}": {
+  "w": [
+   "press-ctx.js:888"
+  ],
+  "ctx": "N_(\"La Araña\"), N_(\"El Halcón\"), N_(\"Manos de Tenaza\"), N_(\"El Cerrojo\"), N_(\"{ln} el Invencible\"), N_(\"El Muro de {club}\"), N_(\"El Guardián\"), N_(\"El Imbatible\")]},"
+ },
+ "El Imbatible": {
+  "w": [
+   "press-ctx.js:888"
+  ],
+  "ctx": "N_(\"La Araña\"), N_(\"El Halcón\"), N_(\"Manos de Tenaza\"), N_(\"El Cerrojo\"), N_(\"{ln} el Invencible\"), N_(\"El Muro de {club}\"), N_(\"El Guardián\"), N_(\"El Imbatible\")]},"
+ },
+ "El Coladero": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "Manos de Mantequilla": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "El Colador": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "El Flan": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "Manos de Trapo": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "La Puerta Giratoria": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "{ln} Mantequilla": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "El Recogepelotas": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "La Gelatina": {
+  "w": [
+   "press-ctx.js:889"
+  ],
+  "ctx": "gkbad: {m: -1, sf: \"neg\", l: [N_(\"El Coladero\"), N_(\"Manos de Mantequilla\"), N_(\"El Colador\"), N_(\"El Flan\"), N_(\"Manos de Trapo\"), N_(\"La Puerta Giratoria\"), N_(\"{ln} Mantequilla\"), N_(\"El Recogepelotas\"), N_(\"La Gelati"
+ },
+ "El Mariscal": {
+  "w": [
+   "press-ctx.js:890"
+  ],
+  "ctx": "def: {m: 1, sf: \"pos\", l: [N_(\"El Muro\"), N_(\"El Káiser\"), N_(\"El Sheriff\"), N_(\"La Roca\"), N_(\"El Jefe\"), N_(\"El Mariscal\"), N_(\"El Comandante\"), N_(\"La Aduana\"), N_(\"El Faro\"), N_(\"El Tanque\"), N_(\"El Búfalo\"), N_(\"El "
+ },
+ "La Aduana": {
+  "w": [
+   "press-ctx.js:890"
+  ],
+  "ctx": "def: {m: 1, sf: \"pos\", l: [N_(\"El Muro\"), N_(\"El Káiser\"), N_(\"El Sheriff\"), N_(\"La Roca\"), N_(\"El Jefe\"), N_(\"El Mariscal\"), N_(\"El Comandante\"), N_(\"La Aduana\"), N_(\"El Faro\"), N_(\"El Tanque\"), N_(\"El Búfalo\"), N_(\"El "
+ },
+ "El Faro": {
+  "w": [
+   "press-ctx.js:890"
+  ],
+  "ctx": "def: {m: 1, sf: \"pos\", l: [N_(\"El Muro\"), N_(\"El Káiser\"), N_(\"El Sheriff\"), N_(\"La Roca\"), N_(\"El Jefe\"), N_(\"El Mariscal\"), N_(\"El Comandante\"), N_(\"La Aduana\"), N_(\"El Faro\"), N_(\"El Tanque\"), N_(\"El Búfalo\"), N_(\"El "
+ },
+ "El Búfalo": {
+  "w": [
+   "press-ctx.js:890"
+  ],
+  "ctx": "def: {m: 1, sf: \"pos\", l: [N_(\"El Muro\"), N_(\"El Káiser\"), N_(\"El Sheriff\"), N_(\"La Roca\"), N_(\"El Jefe\"), N_(\"El Mariscal\"), N_(\"El Comandante\"), N_(\"La Aduana\"), N_(\"El Faro\"), N_(\"El Tanque\"), N_(\"El Búfalo\"), N_(\"El "
+ },
+ "El General {ln}": {
+  "w": [
+   "press-ctx.js:890"
+  ],
+  "ctx": "def: {m: 1, sf: \"pos\", l: [N_(\"El Muro\"), N_(\"El Káiser\"), N_(\"El Sheriff\"), N_(\"La Roca\"), N_(\"El Jefe\"), N_(\"El Mariscal\"), N_(\"El Comandante\"), N_(\"La Aduana\"), N_(\"El Faro\"), N_(\"El Tanque\"), N_(\"El Búfalo\"), N_(\"El "
+ },
+ "El Cono": {
+  "w": [
+   "press-ctx.js:891"
+  ],
+  "ctx": "defbad: {m: -1, sf: \"neg\", l: [N_(\"El Cono\"), N_(\"El Despiste\"), N_(\"El Semáforo en Verde\"), N_(\"El Pasillo\"), N_(\"El Botones\")]},"
+ },
+ "El Despiste": {
+  "w": [
+   "press-ctx.js:891"
+  ],
+  "ctx": "defbad: {m: -1, sf: \"neg\", l: [N_(\"El Cono\"), N_(\"El Despiste\"), N_(\"El Semáforo en Verde\"), N_(\"El Pasillo\"), N_(\"El Botones\")]},"
+ },
+ "El Semáforo en Verde": {
+  "w": [
+   "press-ctx.js:891"
+  ],
+  "ctx": "defbad: {m: -1, sf: \"neg\", l: [N_(\"El Cono\"), N_(\"El Despiste\"), N_(\"El Semáforo en Verde\"), N_(\"El Pasillo\"), N_(\"El Botones\")]},"
+ },
+ "El Pasillo": {
+  "w": [
+   "press-ctx.js:891"
+  ],
+  "ctx": "defbad: {m: -1, sf: \"neg\", l: [N_(\"El Cono\"), N_(\"El Despiste\"), N_(\"El Semáforo en Verde\"), N_(\"El Pasillo\"), N_(\"El Botones\")]},"
+ },
+ "El Botones": {
+  "w": [
+   "press-ctx.js:891"
+  ],
+  "ctx": "defbad: {m: -1, sf: \"neg\", l: [N_(\"El Cono\"), N_(\"El Despiste\"), N_(\"El Semáforo en Verde\"), N_(\"El Pasillo\"), N_(\"El Botones\")]},"
+ },
+ "El Reloj": {
+  "w": [
+   "press-ctx.js:892"
+  ],
+  "ctx": "mid: {m: 1, sf: \"pos\", l: [N_(\"El Arquitecto\"), N_(\"El Profesor\"), N_(\"El Metrónomo\"), N_(\"El Cerebro\"), N_(\"El Director de Orquesta\"), N_(\"El Reloj\"), N_(\"La Brújula\"), N_(\"El Pulmón\"), N_(\"El GPS\"), N_(\"El Motor\"), N_("
+ },
+ "La Brújula": {
+  "w": [
+   "press-ctx.js:892"
+  ],
+  "ctx": "mid: {m: 1, sf: \"pos\", l: [N_(\"El Arquitecto\"), N_(\"El Profesor\"), N_(\"El Metrónomo\"), N_(\"El Cerebro\"), N_(\"El Director de Orquesta\"), N_(\"El Reloj\"), N_(\"La Brújula\"), N_(\"El Pulmón\"), N_(\"El GPS\"), N_(\"El Motor\"), N_("
+ },
+ "El Pulmón": {
+  "w": [
+   "press-ctx.js:892"
+  ],
+  "ctx": "mid: {m: 1, sf: \"pos\", l: [N_(\"El Arquitecto\"), N_(\"El Profesor\"), N_(\"El Metrónomo\"), N_(\"El Cerebro\"), N_(\"El Director de Orquesta\"), N_(\"El Reloj\"), N_(\"La Brújula\"), N_(\"El Pulmón\"), N_(\"El GPS\"), N_(\"El Motor\"), N_("
+ },
+ "El GPS": {
+  "w": [
+   "press-ctx.js:892"
+  ],
+  "ctx": "mid: {m: 1, sf: \"pos\", l: [N_(\"El Arquitecto\"), N_(\"El Profesor\"), N_(\"El Metrónomo\"), N_(\"El Cerebro\"), N_(\"El Director de Orquesta\"), N_(\"El Reloj\"), N_(\"La Brújula\"), N_(\"El Pulmón\"), N_(\"El GPS\"), N_(\"El Motor\"), N_("
+ },
+ "El Motor": {
+  "w": [
+   "press-ctx.js:892"
+  ],
+  "ctx": "mid: {m: 1, sf: \"pos\", l: [N_(\"El Arquitecto\"), N_(\"El Profesor\"), N_(\"El Metrónomo\"), N_(\"El Cerebro\"), N_(\"El Director de Orquesta\"), N_(\"El Reloj\"), N_(\"La Brújula\"), N_(\"El Pulmón\"), N_(\"El GPS\"), N_(\"El Motor\"), N_("
+ },
+ "El Maestro {ln}": {
+  "w": [
+   "press-ctx.js:892"
+  ],
+  "ctx": "mid: {m: 1, sf: \"pos\", l: [N_(\"El Arquitecto\"), N_(\"El Profesor\"), N_(\"El Metrónomo\"), N_(\"El Cerebro\"), N_(\"El Director de Orquesta\"), N_(\"El Reloj\"), N_(\"La Brújula\"), N_(\"El Pulmón\"), N_(\"El GPS\"), N_(\"El Motor\"), N_("
+ },
+ "El Fantasma": {
+  "w": [
+   "press-ctx.js:893"
+  ],
+  "ctx": "midbad: {m: -1, sf: \"neg\", l: [N_(\"El Fantasma\"), N_(\"El Desaparecido\"), N_(\"El Turista\"), N_(\"El Paseante\"), N_(\"El Holograma\")]},"
+ },
+ "El Desaparecido": {
+  "w": [
+   "press-ctx.js:893",
+   "press-ctx.js:896"
+  ],
+  "ctx": "midbad: {m: -1, sf: \"neg\", l: [N_(\"El Fantasma\"), N_(\"El Desaparecido\"), N_(\"El Turista\"), N_(\"El Paseante\"), N_(\"El Holograma\")]},"
+ },
+ "El Turista": {
+  "w": [
+   "press-ctx.js:893"
+  ],
+  "ctx": "midbad: {m: -1, sf: \"neg\", l: [N_(\"El Fantasma\"), N_(\"El Desaparecido\"), N_(\"El Turista\"), N_(\"El Paseante\"), N_(\"El Holograma\")]},"
+ },
+ "El Paseante": {
+  "w": [
+   "press-ctx.js:893"
+  ],
+  "ctx": "midbad: {m: -1, sf: \"neg\", l: [N_(\"El Fantasma\"), N_(\"El Desaparecido\"), N_(\"El Turista\"), N_(\"El Paseante\"), N_(\"El Holograma\")]},"
+ },
+ "El Holograma": {
+  "w": [
+   "press-ctx.js:893"
+  ],
+  "ctx": "midbad: {m: -1, sf: \"neg\", l: [N_(\"El Fantasma\"), N_(\"El Desaparecido\"), N_(\"El Turista\"), N_(\"El Paseante\"), N_(\"El Holograma\")]},"
+ },
+ "El Goleador": {
+  "w": [
+   "press-ctx.js:894"
+  ],
+  "ctx": "att: {m: 1, sf: \"pos\", l: [N_(\"El Killer\"), N_(\"El Pistolero\"), N_(\"El Matador\"), N_(\"El Depredador\"), N_(\"El Goleador\"), N_(\"El Verdugo\"), N_(\"El Tiburón\"), N_(\"El Martillo\"), N_(\"Míster Gol\"),"
+ },
+ "El Verdugo": {
+  "w": [
+   "press-ctx.js:894"
+  ],
+  "ctx": "att: {m: 1, sf: \"pos\", l: [N_(\"El Killer\"), N_(\"El Pistolero\"), N_(\"El Matador\"), N_(\"El Depredador\"), N_(\"El Goleador\"), N_(\"El Verdugo\"), N_(\"El Tiburón\"), N_(\"El Martillo\"), N_(\"Míster Gol\"),"
+ },
+ "El Tiburón": {
+  "w": [
+   "press-ctx.js:894"
+  ],
+  "ctx": "att: {m: 1, sf: \"pos\", l: [N_(\"El Killer\"), N_(\"El Pistolero\"), N_(\"El Matador\"), N_(\"El Depredador\"), N_(\"El Goleador\"), N_(\"El Verdugo\"), N_(\"El Tiburón\"), N_(\"El Martillo\"), N_(\"Míster Gol\"),"
+ },
+ "El Martillo": {
+  "w": [
+   "press-ctx.js:894"
+  ],
+  "ctx": "att: {m: 1, sf: \"pos\", l: [N_(\"El Killer\"), N_(\"El Pistolero\"), N_(\"El Matador\"), N_(\"El Depredador\"), N_(\"El Goleador\"), N_(\"El Verdugo\"), N_(\"El Tiburón\"), N_(\"El Martillo\"), N_(\"Míster Gol\"),"
+ },
+ "Míster Gol": {
+  "w": [
+   "press-ctx.js:894"
+  ],
+  "ctx": "att: {m: 1, sf: \"pos\", l: [N_(\"El Killer\"), N_(\"El Pistolero\"), N_(\"El Matador\"), N_(\"El Depredador\"), N_(\"El Goleador\"), N_(\"El Verdugo\"), N_(\"El Tiburón\"), N_(\"El Martillo\"), N_(\"Míster Gol\"),"
+ },
+ "{ln}gol": {
+  "w": [
+   "press-ctx.js:895"
+  ],
+  "ctx": "N_(\"{ln}gol\"), N_(\"El Rey del Área\"), N_(\"El Cazador\"), N_(\"El Lobo\"), N_(\"La Cobra\")]},"
+ },
+ "El Rey del Área": {
+  "w": [
+   "press-ctx.js:895"
+  ],
+  "ctx": "N_(\"{ln}gol\"), N_(\"El Rey del Área\"), N_(\"El Cazador\"), N_(\"El Lobo\"), N_(\"La Cobra\")]},"
+ },
+ "El Cazador": {
+  "w": [
+   "press-ctx.js:895"
+  ],
+  "ctx": "N_(\"{ln}gol\"), N_(\"El Rey del Área\"), N_(\"El Cazador\"), N_(\"El Lobo\"), N_(\"La Cobra\")]},"
+ },
+ "El Lobo": {
+  "w": [
+   "press-ctx.js:895"
+  ],
+  "ctx": "N_(\"{ln}gol\"), N_(\"El Rey del Área\"), N_(\"El Cazador\"), N_(\"El Lobo\"), N_(\"La Cobra\")]},"
+ },
+ "La Cobra": {
+  "w": [
+   "press-ctx.js:895"
+  ],
+  "ctx": "N_(\"{ln}gol\"), N_(\"El Rey del Área\"), N_(\"El Cazador\"), N_(\"El Lobo\"), N_(\"La Cobra\")]},"
+ },
+ "Pólvora Mojada": {
+  "w": [
+   "press-ctx.js:896"
+  ],
+  "ctx": "attbad: {m: -1, sf: \"neg\", l: [N_(\"Pólvora Mojada\"), N_(\"Señor Poste\"), N_(\"El Desaparecido\"), N_(\"El Fallón\"), N_(\"El Larguero\"), N_(\"Mira Torcida\"), N_(\"El Sin Gol\")]},"
+ },
+ "Señor Poste": {
+  "w": [
+   "press-ctx.js:896"
+  ],
+  "ctx": "attbad: {m: -1, sf: \"neg\", l: [N_(\"Pólvora Mojada\"), N_(\"Señor Poste\"), N_(\"El Desaparecido\"), N_(\"El Fallón\"), N_(\"El Larguero\"), N_(\"Mira Torcida\"), N_(\"El Sin Gol\")]},"
+ },
+ "El Fallón": {
+  "w": [
+   "press-ctx.js:896"
+  ],
+  "ctx": "attbad: {m: -1, sf: \"neg\", l: [N_(\"Pólvora Mojada\"), N_(\"Señor Poste\"), N_(\"El Desaparecido\"), N_(\"El Fallón\"), N_(\"El Larguero\"), N_(\"Mira Torcida\"), N_(\"El Sin Gol\")]},"
+ },
+ "El Larguero": {
+  "w": [
+   "press-ctx.js:896"
+  ],
+  "ctx": "attbad: {m: -1, sf: \"neg\", l: [N_(\"Pólvora Mojada\"), N_(\"Señor Poste\"), N_(\"El Desaparecido\"), N_(\"El Fallón\"), N_(\"El Larguero\"), N_(\"Mira Torcida\"), N_(\"El Sin Gol\")]},"
+ },
+ "Mira Torcida": {
+  "w": [
+   "press-ctx.js:896"
+  ],
+  "ctx": "attbad: {m: -1, sf: \"neg\", l: [N_(\"Pólvora Mojada\"), N_(\"Señor Poste\"), N_(\"El Desaparecido\"), N_(\"El Fallón\"), N_(\"El Larguero\"), N_(\"Mira Torcida\"), N_(\"El Sin Gol\")]},"
+ },
+ "El Sin Gol": {
+  "w": [
+   "press-ctx.js:896"
+  ],
+  "ctx": "attbad: {m: -1, sf: \"neg\", l: [N_(\"Pólvora Mojada\"), N_(\"Señor Poste\"), N_(\"El Desaparecido\"), N_(\"El Fallón\"), N_(\"El Larguero\"), N_(\"Mira Torcida\"), N_(\"El Sin Gol\")]},"
+ },
+ "El Guepardo": {
+  "w": [
+   "press-ctx.js:897"
+  ],
+  "ctx": "fast: {m: 1, sf: \"pos\", l: [N_(\"El Rayo\"), N_(\"El Correcaminos\"), N_(\"La Bala\"), N_(\"El Guepardo\"), N_(\"El Expreso\"), N_(\"La Moto\"), N_(\"El Cohete\"), N_(\"La Gacela\")]},"
+ },
+ "El Expreso": {
+  "w": [
+   "press-ctx.js:897"
+  ],
+  "ctx": "fast: {m: 1, sf: \"pos\", l: [N_(\"El Rayo\"), N_(\"El Correcaminos\"), N_(\"La Bala\"), N_(\"El Guepardo\"), N_(\"El Expreso\"), N_(\"La Moto\"), N_(\"El Cohete\"), N_(\"La Gacela\")]},"
+ },
+ "La Moto": {
+  "w": [
+   "press-ctx.js:897"
+  ],
+  "ctx": "fast: {m: 1, sf: \"pos\", l: [N_(\"El Rayo\"), N_(\"El Correcaminos\"), N_(\"La Bala\"), N_(\"El Guepardo\"), N_(\"El Expreso\"), N_(\"La Moto\"), N_(\"El Cohete\"), N_(\"La Gacela\")]},"
+ },
+ "El Cohete": {
+  "w": [
+   "press-ctx.js:897"
+  ],
+  "ctx": "fast: {m: 1, sf: \"pos\", l: [N_(\"El Rayo\"), N_(\"El Correcaminos\"), N_(\"La Bala\"), N_(\"El Guepardo\"), N_(\"El Expreso\"), N_(\"La Moto\"), N_(\"El Cohete\"), N_(\"La Gacela\")]},"
+ },
+ "La Gacela": {
+  "w": [
+   "press-ctx.js:897"
+  ],
+  "ctx": "fast: {m: 1, sf: \"pos\", l: [N_(\"El Rayo\"), N_(\"El Correcaminos\"), N_(\"La Bala\"), N_(\"El Guepardo\"), N_(\"El Expreso\"), N_(\"La Moto\"), N_(\"El Cohete\"), N_(\"La Gacela\")]},"
+ },
+ "El Malabarista": {
+  "w": [
+   "press-ctx.js:898"
+  ],
+  "ctx": "skill: {m: 1, sf: \"pos\", l: [N_(\"El Mago\"), N_(\"El Bailarín\"), N_(\"El Ilusionista\"), N_(\"El Malabarista\"), N_(\"El Duende\"), N_(\"Pies de Seda\")]},"
+ },
+ "El Duende": {
+  "w": [
+   "press-ctx.js:898"
+  ],
+  "ctx": "skill: {m: 1, sf: \"pos\", l: [N_(\"El Mago\"), N_(\"El Bailarín\"), N_(\"El Ilusionista\"), N_(\"El Malabarista\"), N_(\"El Duende\"), N_(\"Pies de Seda\")]},"
+ },
+ "Pies de Seda": {
+  "w": [
+   "press-ctx.js:898"
+  ],
+  "ctx": "skill: {m: 1, sf: \"pos\", l: [N_(\"El Mago\"), N_(\"El Bailarín\"), N_(\"El Ilusionista\"), N_(\"El Malabarista\"), N_(\"El Duende\"), N_(\"Pies de Seda\")]},"
+ },
+ "El Misil": {
+  "w": [
+   "press-ctx.js:899"
+  ],
+  "ctx": "shot: {m: 1, sf: \"pos\", l: [N_(\"El Cañonero\"), N_(\"El Francotirador\"), N_(\"El Misil\"), N_(\"El Bazuca\"), N_(\"Pierna de Dinamita\")]},"
+ },
+ "El Bazuca": {
+  "w": [
+   "press-ctx.js:899"
+  ],
+  "ctx": "shot: {m: 1, sf: \"pos\", l: [N_(\"El Cañonero\"), N_(\"El Francotirador\"), N_(\"El Misil\"), N_(\"El Bazuca\"), N_(\"Pierna de Dinamita\")]},"
+ },
+ "Pierna de Dinamita": {
+  "w": [
+   "press-ctx.js:899"
+  ],
+  "ctx": "shot: {m: 1, sf: \"pos\", l: [N_(\"El Cañonero\"), N_(\"El Francotirador\"), N_(\"El Misil\"), N_(\"El Bazuca\"), N_(\"Pierna de Dinamita\")]},"
+ },
+ "El Niño": {
+  "w": [
+   "press-ctx.js:900"
+  ],
+  "ctx": "young: {m: 1, sf: \"\", l: [N_(\"El Niño\"), N_(\"El Niño Maravilla\"), N_(\"La Perla de {club}\"), N_(\"El Chaval\"), N_(\"La Joya\"), N_(\"El Prodigio\")]},"
+ },
+ "La Perla de {club}": {
+  "w": [
+   "press-ctx.js:900"
+  ],
+  "ctx": "young: {m: 1, sf: \"\", l: [N_(\"El Niño\"), N_(\"El Niño Maravilla\"), N_(\"La Perla de {club}\"), N_(\"El Chaval\"), N_(\"La Joya\"), N_(\"El Prodigio\")]},"
+ },
+ "El Chaval": {
+  "w": [
+   "press-ctx.js:900"
+  ],
+  "ctx": "young: {m: 1, sf: \"\", l: [N_(\"El Niño\"), N_(\"El Niño Maravilla\"), N_(\"La Perla de {club}\"), N_(\"El Chaval\"), N_(\"La Joya\"), N_(\"El Prodigio\")]},"
+ },
+ "La Joya": {
+  "w": [
+   "press-ctx.js:900"
+  ],
+  "ctx": "young: {m: 1, sf: \"\", l: [N_(\"El Niño\"), N_(\"El Niño Maravilla\"), N_(\"La Perla de {club}\"), N_(\"El Chaval\"), N_(\"La Joya\"), N_(\"El Prodigio\")]},"
+ },
+ "El Prodigio": {
+  "w": [
+   "press-ctx.js:900"
+  ],
+  "ctx": "young: {m: 1, sf: \"\", l: [N_(\"El Niño\"), N_(\"El Niño Maravilla\"), N_(\"La Perla de {club}\"), N_(\"El Chaval\"), N_(\"La Joya\"), N_(\"El Prodigio\")]},"
+ },
+ "El Eterno": {
+  "w": [
+   "press-ctx.js:901"
+  ],
+  "ctx": "vet: {m: 1, sf: \"\", l: [N_(\"El Eterno\"), N_(\"El Abuelo\"), N_(\"El Sabio\"), N_(\"El Inoxidable\"), N_(\"Matusalén\"), N_(\"El Capitán Eterno\")]},"
+ },
+ "El Abuelo": {
+  "w": [
+   "press-ctx.js:901"
+  ],
+  "ctx": "vet: {m: 1, sf: \"\", l: [N_(\"El Eterno\"), N_(\"El Abuelo\"), N_(\"El Sabio\"), N_(\"El Inoxidable\"), N_(\"Matusalén\"), N_(\"El Capitán Eterno\")]},"
+ },
+ "El Inoxidable": {
+  "w": [
+   "press-ctx.js:901"
+  ],
+  "ctx": "vet: {m: 1, sf: \"\", l: [N_(\"El Eterno\"), N_(\"El Abuelo\"), N_(\"El Sabio\"), N_(\"El Inoxidable\"), N_(\"Matusalén\"), N_(\"El Capitán Eterno\")]},"
+ },
+ "Matusalén": {
+  "w": [
+   "press-ctx.js:901"
+  ],
+  "ctx": "vet: {m: 1, sf: \"\", l: [N_(\"El Eterno\"), N_(\"El Abuelo\"), N_(\"El Sabio\"), N_(\"El Inoxidable\"), N_(\"Matusalén\"), N_(\"El Capitán Eterno\")]},"
+ },
+ "El Capitán Eterno": {
+  "w": [
+   "press-ctx.js:901"
+  ],
+  "ctx": "vet: {m: 1, sf: \"\", l: [N_(\"El Eterno\"), N_(\"El Abuelo\"), N_(\"El Sabio\"), N_(\"El Inoxidable\"), N_(\"Matusalén\"), N_(\"El Capitán Eterno\")]},"
+ },
+ "El Carnicero": {
+  "w": [
+   "press-ctx.js:902"
+  ],
+  "ctx": "hard: {m: -1, sf: \"\", l: [N_(\"El Carnicero\"), N_(\"El Leñero\"), N_(\"El Tarjetitas\"), N_(\"El Pitbull\"), N_(\"El Guerrero\")]},"
+ },
+ "El Leñero": {
+  "w": [
+   "press-ctx.js:902"
+  ],
+  "ctx": "hard: {m: -1, sf: \"\", l: [N_(\"El Carnicero\"), N_(\"El Leñero\"), N_(\"El Tarjetitas\"), N_(\"El Pitbull\"), N_(\"El Guerrero\")]},"
+ },
+ "El Tarjetitas": {
+  "w": [
+   "press-ctx.js:902"
+  ],
+  "ctx": "hard: {m: -1, sf: \"\", l: [N_(\"El Carnicero\"), N_(\"El Leñero\"), N_(\"El Tarjetitas\"), N_(\"El Pitbull\"), N_(\"El Guerrero\")]},"
+ },
+ "El Pitbull": {
+  "w": [
+   "press-ctx.js:902"
+  ],
+  "ctx": "hard: {m: -1, sf: \"\", l: [N_(\"El Carnicero\"), N_(\"El Leñero\"), N_(\"El Tarjetitas\"), N_(\"El Pitbull\"), N_(\"El Guerrero\")]},"
+ },
+ "El Guerrero": {
+  "w": [
+   "press-ctx.js:902"
+  ],
+  "ctx": "hard: {m: -1, sf: \"\", l: [N_(\"El Carnicero\"), N_(\"El Leñero\"), N_(\"El Tarjetitas\"), N_(\"El Pitbull\"), N_(\"El Guerrero\")]},"
+ },
+ "El Bocazas": {
+  "w": [
+   "press-ctx.js:903",
+   "press-ctx.js:915"
+  ],
+  "ctx": "loud: {m: -1, sf: \"\", l: [N_(\"El Bocazas\"), N_(\"El Provocador\"), N_(\"El Incendiario\"), N_(\"El Showman\"), N_(\"Boca de Trueno\")]},"
+ },
+ "El Provocador": {
+  "w": [
+   "press-ctx.js:903",
+   "press-ctx.js:915"
+  ],
+  "ctx": "loud: {m: -1, sf: \"\", l: [N_(\"El Bocazas\"), N_(\"El Provocador\"), N_(\"El Incendiario\"), N_(\"El Showman\"), N_(\"Boca de Trueno\")]},"
+ },
+ "El Incendiario": {
+  "w": [
+   "press-ctx.js:903",
+   "press-ctx.js:915"
+  ],
+  "ctx": "loud: {m: -1, sf: \"\", l: [N_(\"El Bocazas\"), N_(\"El Provocador\"), N_(\"El Incendiario\"), N_(\"El Showman\"), N_(\"Boca de Trueno\")]},"
+ },
+ "El Showman": {
+  "w": [
+   "press-ctx.js:903",
+   "press-ctx.js:905"
+  ],
+  "ctx": "loud: {m: -1, sf: \"\", l: [N_(\"El Bocazas\"), N_(\"El Provocador\"), N_(\"El Incendiario\"), N_(\"El Showman\"), N_(\"Boca de Trueno\")]},"
+ },
+ "Boca de Trueno": {
+  "w": [
+   "press-ctx.js:903"
+  ],
+  "ctx": "loud: {m: -1, sf: \"\", l: [N_(\"El Bocazas\"), N_(\"El Provocador\"), N_(\"El Incendiario\"), N_(\"El Showman\"), N_(\"Boca de Trueno\")]},"
+ },
+ "El Diplomático": {
+  "w": [
+   "press-ctx.js:904",
+   "press-ctx.js:916"
+  ],
+  "ctx": "calm: {m: 1, sf: \"\", l: [N_(\"El Diplomático\"), N_(\"El Caballero\"), N_(\"El Señor\"), N_(\"El Monje\"), N_(\"Don Tranquilo\")]},"
+ },
+ "El Caballero": {
+  "w": [
+   "press-ctx.js:904",
+   "press-ctx.js:916"
+  ],
+  "ctx": "calm: {m: 1, sf: \"\", l: [N_(\"El Diplomático\"), N_(\"El Caballero\"), N_(\"El Señor\"), N_(\"El Monje\"), N_(\"Don Tranquilo\")]},"
+ },
+ "El Señor": {
+  "w": [
+   "press-ctx.js:904"
+  ],
+  "ctx": "calm: {m: 1, sf: \"\", l: [N_(\"El Diplomático\"), N_(\"El Caballero\"), N_(\"El Señor\"), N_(\"El Monje\"), N_(\"Don Tranquilo\")]},"
+ },
+ "El Monje": {
+  "w": [
+   "press-ctx.js:904",
+   "press-ctx.js:916"
+  ],
+  "ctx": "calm: {m: 1, sf: \"\", l: [N_(\"El Diplomático\"), N_(\"El Caballero\"), N_(\"El Señor\"), N_(\"El Monje\"), N_(\"Don Tranquilo\")]},"
+ },
+ "Don Tranquilo": {
+  "w": [
+   "press-ctx.js:904"
+  ],
+  "ctx": "calm: {m: 1, sf: \"\", l: [N_(\"El Diplomático\"), N_(\"El Caballero\"), N_(\"El Señor\"), N_(\"El Monje\"), N_(\"Don Tranquilo\")]},"
+ },
+ "El Cómico": {
+  "w": [
+   "press-ctx.js:905"
+  ],
+  "ctx": "joker: {m: 1, sf: \"\", l: [N_(\"El Cómico\"), N_(\"El Bromista\"), N_(\"El Showman\"), N_(\"El Risas\")]},"
+ },
+ "El Bromista": {
+  "w": [
+   "press-ctx.js:905"
+  ],
+  "ctx": "joker: {m: 1, sf: \"\", l: [N_(\"El Cómico\"), N_(\"El Bromista\"), N_(\"El Showman\"), N_(\"El Risas\")]},"
+ },
+ "El Risas": {
+  "w": [
+   "press-ctx.js:905"
+  ],
+  "ctx": "joker: {m: 1, sf: \"\", l: [N_(\"El Cómico\"), N_(\"El Bromista\"), N_(\"El Showman\"), N_(\"El Risas\")]},"
+ },
+ "La Esfinge": {
+  "w": [
+   "press-ctx.js:906"
+  ],
+  "ctx": "mute: {m: 0, sf: \"\", l: [N_(\"La Esfinge\"), N_(\"El Mudo\"), N_(\"El Silencioso\"), N_(\"El Hermético\")]},"
+ },
+ "El Mudo": {
+  "w": [
+   "press-ctx.js:906"
+  ],
+  "ctx": "mute: {m: 0, sf: \"\", l: [N_(\"La Esfinge\"), N_(\"El Mudo\"), N_(\"El Silencioso\"), N_(\"El Hermético\")]},"
+ },
+ "El Silencioso": {
+  "w": [
+   "press-ctx.js:906"
+  ],
+  "ctx": "mute: {m: 0, sf: \"\", l: [N_(\"La Esfinge\"), N_(\"El Mudo\"), N_(\"El Silencioso\"), N_(\"El Hermético\")]},"
+ },
+ "El Hermético": {
+  "w": [
+   "press-ctx.js:906"
+  ],
+  "ctx": "mute: {m: 0, sf: \"\", l: [N_(\"La Esfinge\"), N_(\"El Mudo\"), N_(\"El Silencioso\"), N_(\"El Hermético\")]},"
+ },
+ "El Rey de {club}": {
+  "w": [
+   "press-ctx.js:907"
+  ],
+  "ctx": "star: {m: 1, sf: \"\", l: [N_(\"El Rey de {club}\"), N_(\"El Elegido\"), N_(\"El Fenómeno\"), N_(\"El Crack\"), N_(\"Su Majestad\"), N_(\"El Emperador\"), N_(\"San {ln}\"), N_(\"{fn} el Grande\")]},"
+ },
+ "El Elegido": {
+  "w": [
+   "press-ctx.js:907"
+  ],
+  "ctx": "star: {m: 1, sf: \"\", l: [N_(\"El Rey de {club}\"), N_(\"El Elegido\"), N_(\"El Fenómeno\"), N_(\"El Crack\"), N_(\"Su Majestad\"), N_(\"El Emperador\"), N_(\"San {ln}\"), N_(\"{fn} el Grande\")]},"
+ },
+ "El Fenómeno": {
+  "w": [
+   "press-ctx.js:907"
+  ],
+  "ctx": "star: {m: 1, sf: \"\", l: [N_(\"El Rey de {club}\"), N_(\"El Elegido\"), N_(\"El Fenómeno\"), N_(\"El Crack\"), N_(\"Su Majestad\"), N_(\"El Emperador\"), N_(\"San {ln}\"), N_(\"{fn} el Grande\")]},"
+ },
+ "El Crack": {
+  "w": [
+   "press-ctx.js:907"
+  ],
+  "ctx": "star: {m: 1, sf: \"\", l: [N_(\"El Rey de {club}\"), N_(\"El Elegido\"), N_(\"El Fenómeno\"), N_(\"El Crack\"), N_(\"Su Majestad\"), N_(\"El Emperador\"), N_(\"San {ln}\"), N_(\"{fn} el Grande\")]},"
+ },
+ "Su Majestad": {
+  "w": [
+   "press-ctx.js:907"
+  ],
+  "ctx": "star: {m: 1, sf: \"\", l: [N_(\"El Rey de {club}\"), N_(\"El Elegido\"), N_(\"El Fenómeno\"), N_(\"El Crack\"), N_(\"Su Majestad\"), N_(\"El Emperador\"), N_(\"San {ln}\"), N_(\"{fn} el Grande\")]},"
+ },
+ "El Emperador": {
+  "w": [
+   "press-ctx.js:907",
+   "press-ctx.js:912"
+  ],
+  "ctx": "star: {m: 1, sf: \"\", l: [N_(\"El Rey de {club}\"), N_(\"El Elegido\"), N_(\"El Fenómeno\"), N_(\"El Crack\"), N_(\"Su Majestad\"), N_(\"El Emperador\"), N_(\"San {ln}\"), N_(\"{fn} el Grande\")]},"
+ },
+ "{fn} el Grande": {
+  "w": [
+   "press-ctx.js:907"
+  ],
+  "ctx": "star: {m: 1, sf: \"\", l: [N_(\"El Rey de {club}\"), N_(\"El Elegido\"), N_(\"El Fenómeno\"), N_(\"El Crack\"), N_(\"Su Majestad\"), N_(\"El Emperador\"), N_(\"San {ln}\"), N_(\"{fn} el Grande\")]},"
+ },
+ "Míster {ln}": {
+  "w": [
+   "press-ctx.js:908"
+  ],
+  "ctx": "dt: {m: 1, sf: \"dt\", l: [N_(\"El Profe\"), N_(\"El Sabio\"), N_(\"El Ingeniero\"), N_(\"El Comandante\"), N_(\"El Filósofo\"), N_(\"El Alquimista\"), N_(\"El Sargento\"), N_(\"El Estratega\"), N_(\"Míster {ln}\"), N_(\"Don {ln}\")]},"
+ },
+ "Don {ln}": {
+  "w": [
+   "press-ctx.js:908"
+  ],
+  "ctx": "dt: {m: 1, sf: \"dt\", l: [N_(\"El Profe\"), N_(\"El Sabio\"), N_(\"El Ingeniero\"), N_(\"El Comandante\"), N_(\"El Filósofo\"), N_(\"El Alquimista\"), N_(\"El Sargento\"), N_(\"El Estratega\"), N_(\"Míster {ln}\"), N_(\"Don {ln}\")]},"
+ },
+ "El Ajedrecista": {
+  "w": [
+   "press-ctx.js:909"
+  ],
+  "ctx": "dttac: {m: 1, sf: \"dt\", l: [N_(\"El Ajedrecista\"), N_(\"El Pizarras\"), N_(\"El Científico\"), N_(\"El Arquitecto\"), N_(\"El Ingeniero\"), N_(\"El Profesor {ln}\")]},"
+ },
+ "El Pizarras": {
+  "w": [
+   "press-ctx.js:909"
+  ],
+  "ctx": "dttac: {m: 1, sf: \"dt\", l: [N_(\"El Ajedrecista\"), N_(\"El Pizarras\"), N_(\"El Científico\"), N_(\"El Arquitecto\"), N_(\"El Ingeniero\"), N_(\"El Profesor {ln}\")]},"
+ },
+ "El Científico": {
+  "w": [
+   "press-ctx.js:909"
+  ],
+  "ctx": "dttac: {m: 1, sf: \"dt\", l: [N_(\"El Ajedrecista\"), N_(\"El Pizarras\"), N_(\"El Científico\"), N_(\"El Arquitecto\"), N_(\"El Ingeniero\"), N_(\"El Profesor {ln}\")]},"
+ },
+ "El Profesor {ln}": {
+  "w": [
+   "press-ctx.js:909"
+  ],
+  "ctx": "dttac: {m: 1, sf: \"dt\", l: [N_(\"El Ajedrecista\"), N_(\"El Pizarras\"), N_(\"El Científico\"), N_(\"El Arquitecto\"), N_(\"El Ingeniero\"), N_(\"El Profesor {ln}\")]},"
+ },
+ "El Autobusero": {
+  "w": [
+   "press-ctx.js:910"
+  ],
+  "ctx": "dtdef: {m: 0, sf: \"dt\", l: [N_(\"El Cerrojo\"), N_(\"El Autobusero\"), N_(\"El Candado\"), N_(\"El Muro\"), N_(\"Catenaccio {ln}\")]},"
+ },
+ "Catenaccio {ln}": {
+  "w": [
+   "press-ctx.js:910"
+  ],
+  "ctx": "dtdef: {m: 0, sf: \"dt\", l: [N_(\"El Cerrojo\"), N_(\"El Autobusero\"), N_(\"El Candado\"), N_(\"El Muro\"), N_(\"Catenaccio {ln}\")]},"
+ },
+ "El Kamikaze": {
+  "w": [
+   "press-ctx.js:911"
+  ],
+  "ctx": "dtatt: {m: 1, sf: \"dt\", l: [N_(\"El Kamikaze\"), N_(\"El Loco\"), N_(\"El Romántico\"), N_(\"El Valiente\"), N_(\"El Profeta del Gol\")]},"
+ },
+ "El Loco": {
+  "w": [
+   "press-ctx.js:911"
+  ],
+  "ctx": "dtatt: {m: 1, sf: \"dt\", l: [N_(\"El Kamikaze\"), N_(\"El Loco\"), N_(\"El Romántico\"), N_(\"El Valiente\"), N_(\"El Profeta del Gol\")]},"
+ },
+ "El Romántico": {
+  "w": [
+   "press-ctx.js:911"
+  ],
+  "ctx": "dtatt: {m: 1, sf: \"dt\", l: [N_(\"El Kamikaze\"), N_(\"El Loco\"), N_(\"El Romántico\"), N_(\"El Valiente\"), N_(\"El Profeta del Gol\")]},"
+ },
+ "El Valiente": {
+  "w": [
+   "press-ctx.js:911"
+  ],
+  "ctx": "dtatt: {m: 1, sf: \"dt\", l: [N_(\"El Kamikaze\"), N_(\"El Loco\"), N_(\"El Romántico\"), N_(\"El Valiente\"), N_(\"El Profeta del Gol\")]},"
+ },
+ "El Profeta del Gol": {
+  "w": [
+   "press-ctx.js:911"
+  ],
+  "ctx": "dtatt: {m: 1, sf: \"dt\", l: [N_(\"El Kamikaze\"), N_(\"El Loco\"), N_(\"El Romántico\"), N_(\"El Valiente\"), N_(\"El Profeta del Gol\")]},"
+ },
+ "El Rey Midas": {
+  "w": [
+   "press-ctx.js:912"
+  ],
+  "ctx": "dtwin: {m: 1, sf: \"dt\", l: [N_(\"El Rey Midas\"), N_(\"El Emperador\"), N_(\"El Mago\"), N_(\"El Ganador\"), N_(\"Míster Títulos\"), N_(\"San {ln}\")]},"
+ },
+ "El Ganador": {
+  "w": [
+   "press-ctx.js:912"
+  ],
+  "ctx": "dtwin: {m: 1, sf: \"dt\", l: [N_(\"El Rey Midas\"), N_(\"El Emperador\"), N_(\"El Mago\"), N_(\"El Ganador\"), N_(\"Míster Títulos\"), N_(\"San {ln}\")]},"
+ },
+ "Míster Títulos": {
+  "w": [
+   "press-ctx.js:912"
+  ],
+  "ctx": "dtwin: {m: 1, sf: \"dt\", l: [N_(\"El Rey Midas\"), N_(\"El Emperador\"), N_(\"El Mago\"), N_(\"El Ganador\"), N_(\"Míster Títulos\"), N_(\"San {ln}\")]},"
+ },
+ "El Jardinero": {
+  "w": [
+   "press-ctx.js:913"
+  ],
+  "ctx": "dtyouth: {m: 1, sf: \"dt\", l: [N_(\"El Jardinero\"), N_(\"El Padre de la Cantera\"), N_(\"El Pastor\"), N_(\"El Profe de la Cantera\")]},"
+ },
+ "El Padre de la Cantera": {
+  "w": [
+   "press-ctx.js:913"
+  ],
+  "ctx": "dtyouth: {m: 1, sf: \"dt\", l: [N_(\"El Jardinero\"), N_(\"El Padre de la Cantera\"), N_(\"El Pastor\"), N_(\"El Profe de la Cantera\")]},"
+ },
+ "El Pastor": {
+  "w": [
+   "press-ctx.js:913"
+  ],
+  "ctx": "dtyouth: {m: 1, sf: \"dt\", l: [N_(\"El Jardinero\"), N_(\"El Padre de la Cantera\"), N_(\"El Pastor\"), N_(\"El Profe de la Cantera\")]},"
+ },
+ "El Profe de la Cantera": {
+  "w": [
+   "press-ctx.js:913"
+  ],
+  "ctx": "dtyouth: {m: 1, sf: \"dt\", l: [N_(\"El Jardinero\"), N_(\"El Padre de la Cantera\"), N_(\"El Pastor\"), N_(\"El Profe de la Cantera\")]},"
+ },
+ "El Interino": {
+  "w": [
+   "press-ctx.js:914"
+  ],
+  "ctx": "dtbad: {m: -1, sf: \"\", l: [N_(\"El Interino\"), N_(\"El Funambulista\"), N_(\"Silla Eléctrica\"), N_(\"El Desahuciado\"), N_(\"El Equilibrista\"), N_(\"El Último Tren\")]},"
+ },
+ "El Funambulista": {
+  "w": [
+   "press-ctx.js:914"
+  ],
+  "ctx": "dtbad: {m: -1, sf: \"\", l: [N_(\"El Interino\"), N_(\"El Funambulista\"), N_(\"Silla Eléctrica\"), N_(\"El Desahuciado\"), N_(\"El Equilibrista\"), N_(\"El Último Tren\")]},"
+ },
+ "Silla Eléctrica": {
+  "w": [
+   "press-ctx.js:914"
+  ],
+  "ctx": "dtbad: {m: -1, sf: \"\", l: [N_(\"El Interino\"), N_(\"El Funambulista\"), N_(\"Silla Eléctrica\"), N_(\"El Desahuciado\"), N_(\"El Equilibrista\"), N_(\"El Último Tren\")]},"
+ },
+ "El Desahuciado": {
+  "w": [
+   "press-ctx.js:914"
+  ],
+  "ctx": "dtbad: {m: -1, sf: \"\", l: [N_(\"El Interino\"), N_(\"El Funambulista\"), N_(\"Silla Eléctrica\"), N_(\"El Desahuciado\"), N_(\"El Equilibrista\"), N_(\"El Último Tren\")]},"
+ },
+ "El Equilibrista": {
+  "w": [
+   "press-ctx.js:914"
+  ],
+  "ctx": "dtbad: {m: -1, sf: \"\", l: [N_(\"El Interino\"), N_(\"El Funambulista\"), N_(\"Silla Eléctrica\"), N_(\"El Desahuciado\"), N_(\"El Equilibrista\"), N_(\"El Último Tren\")]},"
+ },
+ "El Último Tren": {
+  "w": [
+   "press-ctx.js:914"
+  ],
+  "ctx": "dtbad: {m: -1, sf: \"\", l: [N_(\"El Interino\"), N_(\"El Funambulista\"), N_(\"Silla Eléctrica\"), N_(\"El Desahuciado\"), N_(\"El Equilibrista\"), N_(\"El Último Tren\")]},"
+ },
+ "El Polémico": {
+  "w": [
+   "press-ctx.js:915"
+  ],
+  "ctx": "dtloud: {m: -1, sf: \"\", l: [N_(\"El Polémico\"), N_(\"El Bocazas\"), N_(\"El Incendiario\"), N_(\"El Provocador\")]},"
+ },
+ "El Señor del Banquillo": {
+  "w": [
+   "press-ctx.js:916"
+  ],
+  "ctx": "dtcalm: {m: 1, sf: \"\", l: [N_(\"El Caballero\"), N_(\"El Diplomático\"), N_(\"El Señor del Banquillo\"), N_(\"El Monje\")]}"
+ },
+ "Nuevo mote desbloqueado: {name} pasa a ser «{nick}» 👑": {
+  "w": [
+   "press-ctx.js:971"
+  ],
+  "ctx": "var NK_SOC_POS = [N_(\"Ya es oficial: para la grada, {name} es «{nick}» 🔥\"), N_(\"Nuevo mote desbloqueado: {name} pasa a ser «{nick}» 👑\"), N_(\"La grada ya lo canta: «¡{nick}, {nick}!» 🎶 ({name})\")];"
+ },
+ "La grada ya lo canta: «¡{nick}, {nick}!» 🎶 ({name})": {
+  "w": [
+   "press-ctx.js:971"
+  ],
+  "ctx": "var NK_SOC_POS = [N_(\"Ya es oficial: para la grada, {name} es «{nick}» 🔥\"), N_(\"Nuevo mote desbloqueado: {name} pasa a ser «{nick}» 👑\"), N_(\"La grada ya lo canta: «¡{nick}, {nick}!» 🎶 ({name})\")];"
+ },
+ "Lo siento, pero desde hoy {name} es «{nick}» para todo el mundo 😂": {
+  "w": [
+   "press-ctx.js:972"
+  ],
+  "ctx": "var NK_SOC_NEG = [N_(\"Lo siento, pero desde hoy {name} es «{nick}» para todo el mundo 😂\"), N_(\"Las redes no perdonan: a {name} ya le llaman «{nick}» 🙃\"), N_(\"Mote nuevo y no es bonito: «{nick}». {name}, toca reaccionar"
+ },
+ "Las redes no perdonan: a {name} ya le llaman «{nick}» 🙃": {
+  "w": [
+   "press-ctx.js:972"
+  ],
+  "ctx": "var NK_SOC_NEG = [N_(\"Lo siento, pero desde hoy {name} es «{nick}» para todo el mundo 😂\"), N_(\"Las redes no perdonan: a {name} ya le llaman «{nick}» 🙃\"), N_(\"Mote nuevo y no es bonito: «{nick}». {name}, toca reaccionar"
+ },
+ "Mote nuevo y no es bonito: «{nick}». {name}, toca reaccionar 😬": {
+  "w": [
+   "press-ctx.js:972"
+  ],
+  "ctx": "var NK_SOC_NEG = [N_(\"Lo siento, pero desde hoy {name} es «{nick}» para todo el mundo 😂\"), N_(\"Las redes no perdonan: a {name} ya le llaman «{nick}» 🙃\"), N_(\"Mote nuevo y no es bonito: «{nick}». {name}, toca reaccionar"
+ },
+ "La grada te cuelga un mote: «{nick}»": {
+  "w": [
+   "press-ctx.js:981"
+  ],
+  "ctx": "milestone(nk.m < 0 ? tr(\"La grada te cuelga un mote: «{nick}»\", {nick: txt}) : first ? tr(\"La afición te bautiza: «{nick}»\", {nick: txt}) : tr(\"Nuevo mote de la afición: «{nick}»\", {nick: txt}));"
+ },
+ "Nuevo mote de la afición: «{nick}»": {
+  "w": [
+   "press-ctx.js:981"
+  ],
+  "ctx": "milestone(nk.m < 0 ? tr(\"La grada te cuelga un mote: «{nick}»\", {nick: txt}) : first ? tr(\"La afición te bautiza: «{nick}»\", {nick: txt}) : tr(\"Nuevo mote de la afición: «{nick}»\", {nick: txt}));"
+ },
+ "Te han puesto un mote que escuece: «{nick}»": {
+  "w": [
+   "press-ctx.js:983"
+  ],
+  "ctx": "if (typeof notify === \"function\") notify(nk.m < 0 ? tr(\"Te han puesto un mote que escuece: «{nick}»\", {nick: txt}) : tr(\"La grada te llama ahora «{nick}»\", {nick: txt}), nk.m < 0 ? \"amber\" : \"good\");"
+ },
+ "La grada te llama ahora «{nick}»": {
+  "w": [
+   "press-ctx.js:983"
+  ],
+  "ctx": "if (typeof notify === \"function\") notify(nk.m < 0 ? tr(\"Te han puesto un mote que escuece: «{nick}»\", {nick: txt}) : tr(\"La grada te llama ahora «{nick}»\", {nick: txt}), nk.m < 0 ? \"amber\" : \"good\");"
+ },
+ "¡«{nick}» no perdona! {s} vuelve a marcar.": {
+  "w": [
+   "press-ctx.js:1051"
+  ],
+  "ctx": "var LNK_GOAL = [N_(\"¡«{nick}» no perdona! {s} vuelve a marcar.\"), N_(\"La grada lo corea: «¡{nick}, {nick}!». Gol de {s}.\")];"
+ },
+ "La grada lo corea: «¡{nick}, {nick}!». Gol de {s}.": {
+  "w": [
+   "press-ctx.js:1051"
+  ],
+  "ctx": "var LNK_GOAL = [N_(\"¡«{nick}» no perdona! {s} vuelve a marcar.\"), N_(\"La grada lo corea: «¡{nick}, {nick}!». Gol de {s}.\")];"
+ },
+ "«{nick}» lo vuelve a hacer: ¡qué parada de {k}!": {
+  "w": [
+   "press-ctx.js:1052"
+  ],
+  "ctx": "var LNK_SAVE = [N_(\"«{nick}» lo vuelve a hacer: ¡qué parada de {k}!\"), N_(\"Por algo le llaman «{nick}»: {k} lo saca todo.\")];"
+ },
+ "Por algo le llaman «{nick}»: {k} lo saca todo.": {
+  "w": [
+   "press-ctx.js:1052"
+  ],
+  "ctx": "var LNK_SAVE = [N_(\"«{nick}» lo vuelve a hacer: ¡qué parada de {k}!\"), N_(\"Por algo le llaman «{nick}»: {k} lo saca todo.\")];"
+ },
+ "La grada corea el nombre de «{nick}» hacia el banquillo.": {
+  "w": [
+   "press-ctx.js:1053"
+  ],
+  "ctx": "var LNK_MGR = [N_(\"La grada corea el nombre de «{nick}» hacia el banquillo.\"), N_(\"Las cámaras enfocan a «{nick}», que da instrucciones sin parar desde la banda.\")];"
+ },
+ "Las cámaras enfocan a «{nick}», que da instrucciones sin parar desde la banda.": {
+  "w": [
+   "press-ctx.js:1053"
+  ],
+  "ctx": "var LNK_MGR = [N_(\"La grada corea el nombre de «{nick}» hacia el banquillo.\"), N_(\"Las cámaras enfocan a «{nick}», que da instrucciones sin parar desde la banda.\")];"
+ },
+ "Cabezas de serie": {
+  "w": [
+   "draw.js:115"
+  ],
+  "ctx": "x.pl = [N_(\"Cabezas de serie\"), N_(\"Sin cabeza de serie\")];"
+ },
+ "Sin cabeza de serie": {
+  "w": [
+   "draw.js:115"
+  ],
+  "ctx": "x.pl = [N_(\"Cabezas de serie\"), N_(\"Sin cabeza de serie\")];"
+ },
+ "Clasificados": {
+  "w": [
+   "draw.js:120"
+  ],
+  "ctx": "x.pl = [x.fix ? N_(\"Clasificados\") : N_(\"Bombo único\")];"
+ },
+ "Bombo único": {
+  "w": [
+   "draw.js:120"
+  ],
+  "ctx": "x.pl = [x.fix ? N_(\"Clasificados\") : N_(\"Bombo único\")];"
+ },
+ "¡Grupo de la muerte para {team}!": {
+  "w": [
+   "draw.js:159"
+  ],
+  "ctx": "if (sums[gi] >= maxS - 0.01 && x.res.length > 1) { tone = -1; hl.push({tk: N_(\"¡Grupo de la muerte para {team}!\"), tp: tp, t: -1}); }"
+ },
+ "Grupo asequible: {team} parte como favorito del grupo {group}": {
+  "w": [
+   "draw.js:160"
+  ],
+  "ctx": "else if (riv.every(function (t) { return drawRt(c, t) < rm - 2.5; })) { tone = 1; hl.push({tk: N_(\"Grupo asequible: {team} parte como favorito del grupo {group}\"), tp: tp, t: 1}); }"
+ },
+ "Grupo con trampa: {opp} manda en el grupo {group}": {
+  "w": [
+   "draw.js:161"
+  ],
+  "ctx": "else if (stronger >= 1 && avgO > rm) { tone = -1; hl.push({tk: N_(\"Grupo con trampa: {opp} manda en el grupo {group}\"), tp: tp, t: -1}); }"
+ }
+}

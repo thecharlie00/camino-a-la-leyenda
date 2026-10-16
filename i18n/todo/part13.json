@@ -1,0 +1,537 @@
+{
+ "Pararlo tú: eliges zona y momento": {
+  "ctx": "return [{t: tr(\"Pararlo tú: eliges zona y momento\"), mini: \"gkpen\", p: dive(0), ok: ok, ko: ko},",
+  "where": "events.js:1060 events.js:1213"
+ },
+ "Minuto {min}. Falta peligrosa para el {opp} al borde del área. Te toca organizar la barrera.": {
+  "ctx": "text: function (c) { return tr(\"Minuto {min}. Falta peligrosa para el {opp} al borde del área. Te toca organizar la barrera.\", {min: c.min, opp: c.opp}); },",
+  "where": "events.js:1066"
+ },
+ "¡Atajada! Te estiras y la sacas de la escuadra.": {
+  "ctx": "var ok = {txt: tr(\"¡Atajada! Te estiras y la sacas de la escuadra.\"), rating: 0.8, save: true, fx: {fame: 1}}, ko = {txt: tr(\"La pone imposible. Gol del {opp}.\", {opp: c.opp}), concede: 1, rating: -0.2};",
+  "where": "events.js:1069"
+ },
+ "La pone imposible. Gol del {opp}.": {
+  "ctx": "var ok = {txt: tr(\"¡Atajada! Te estiras y la sacas de la escuadra.\"), rating: 0.8, save: true, fx: {fame: 1}}, ko = {txt: tr(\"La pone imposible. Gol del {opp}.\", {opp: c.opp}), concede: 1, rating: -0.2};",
+  "where": "events.js:1069"
+ },
+ "Montarla tú: barrera, posición y reacción": {
+  "ctx": "{t: tr(\"Montarla tú: barrera, posición y reacción\"), mini: \"gkfk\", p: pr(0.62 + (rf2 - 75) * 0.005), ok: ok, ko: ko},",
+  "where": "events.js:1071"
+ },
+ "Barrera de cinco y cubrir tu palo": {
+  "ctx": "{t: tr(\"Barrera de cinco y cubrir tu palo\"), p: pr(0.66 + (e - 75) * 0.004), ok: ok, ko: ko},",
+  "where": "events.js:1072"
+ },
+ "Barrera de dos y adelantarte": {
+  "ctx": "{t: tr(\"Barrera de dos y adelantarte\"), p: pr(0.55 + (rf2 - 75) * 0.006), ok: ok, ko: ko}",
+  "where": "events.js:1073"
+ },
+ "¡LO PARAS! Te lanzas al sitio justo.": {
+  "ctx": "ok: {txt: tr(\"¡LO PARAS! Te lanzas al sitio justo.\"), rating: 0.4, fx: {fame: 2}}, ko: {txt: tr(\"Te engaña. Entra.\"), rating: -0.3, fx: {mor: -4}}});",
+  "where": "events.js:1214"
+ },
+ "Te engaña. Entra.": {
+  "ctx": "ok: {txt: tr(\"¡LO PARAS! Te lanzas al sitio justo.\"), rating: 0.4, fx: {fame: 2}}, ko: {txt: tr(\"Te engaña. Entra.\"), rating: -0.3, fx: {mor: -4}}});",
+  "where": "events.js:1214"
+ },
+ "🚑 Lesión: {inj}. {n} semana de baja.": {
+  "ctx": "if (p.inj && p.injT > before) notify(trn(p.inj.w, \"🚑 Lesión: {inj}. {n} semana de baja.\", \"🚑 Lesión: {inj}. {n} semanas de baja.\", {inj: lcName(p.inj.n)}), \"red\");",
+  "where": "engine-market.js:18",
+  "note": "plural:singular"
+ },
+ "🚑 Lesión: {inj}. {n} semanas de baja.": {
+  "ctx": "if (p.inj && p.injT > before) notify(trn(p.inj.w, \"🚑 Lesión: {inj}. {n} semana de baja.\", \"🚑 Lesión: {inj}. {n} semanas de baja.\", {inj: lcName(p.inj.n)}), \"red\");",
+  "where": "engine-market.js:18",
+  "note": "plural:plural"
+ },
+ "🟥 Expulsado ante el {opp}: {n} partido de sanción.": {
+  "ctx": "if (f.red && !f.isNat && !f.redNtf) { f.redNtf = 1; notify(trn(Math.max(1, p.susp), \"🟥 Expulsado ante el {opp}: {n} partido de sanción.\", \"🟥 Expulsado ante el {opp}: {n} partidos de sanción.\", {opp: f.isNat ? natName(f",
+  "where": "engine-market.js:24",
+  "note": "plural:singular"
+ },
+ "🟥 Expulsado ante el {opp}: {n} partidos de sanción.": {
+  "ctx": "if (f.red && !f.isNat && !f.redNtf) { f.redNtf = 1; notify(trn(Math.max(1, p.susp), \"🟥 Expulsado ante el {opp}: {n} partido de sanción.\", \"🟥 Expulsado ante el {opp}: {n} partidos de sanción.\", {opp: f.isNat ? natName(f",
+  "where": "engine-market.js:24",
+  "note": "plural:plural"
+ },
+ "🚑 {name}: {inj}. {n} semana de baja.": {
+  "ctx": "notify(trn(n, \"🚑 {name}: {inj}. {n} semana de baja.\", \"🚑 {name}: {inj}. {n} semanas de baja.\", {name: plShort(p), inj: LANG === \"es\" ? String(p.injN).toLowerCase() : p.injN}), \"red\");",
+  "where": "engine-market.js:34",
+  "note": "plural:singular"
+ },
+ "🚑 {name}: {inj}. {n} semanas de baja.": {
+  "ctx": "notify(trn(n, \"🚑 {name}: {inj}. {n} semana de baja.\", \"🚑 {name}: {inj}. {n} semanas de baja.\", {name: plShort(p), inj: LANG === \"es\" ? String(p.injN).toLowerCase() : p.injN}), \"red\");",
+  "where": "engine-market.js:34",
+  "note": "plural:plural"
+ },
+ "🟥 {name}: {n} partido de sanción.": {
+  "ctx": "if (sus[p.id] != null && p.sus > sus[p.id]) notify(trn(p.sus, \"🟥 {name}: {n} partido de sanción.\", \"🟥 {name}: {n} partidos de sanción.\", {name: plShort(p)}), \"red\");",
+  "where": "engine-market.js:43",
+  "note": "plural:singular"
+ },
+ "🟥 {name}: {n} partidos de sanción.": {
+  "ctx": "if (sus[p.id] != null && p.sus > sus[p.id]) notify(trn(p.sus, \"🟥 {name}: {n} partido de sanción.\", \"🟥 {name}: {n} partidos de sanción.\", {name: plShort(p)}), \"red\");",
+  "where": "engine-market.js:43",
+  "note": "plural:plural"
+ },
+ "pen.": {
+  "ctx": "var sc = gu + \"-\" + gt + (pens ? \" (\" + pens[0] + \"-\" + pens[1] + \" \" + tr(\"pen.\") + \")\" : \"\");",
+  "where": "engine-market.js:51"
+ },
+ "{score} ante el {opp}": {
+  "ctx": "return (win ? \"✅ \" : loss ? \"❌ \" : \"➖ \") + tr(\"{score} ante el {opp}\", {score: sc, opp: opp});",
+  "where": "engine-market.js:53"
+ },
+ "Final: {us} {a}-{b} {opp} tras la prórroga. Se decide en los penaltis.": {
+  "ctx": "var txt = pendSo ? tr(\"Final: {us} {a}-{b} {opp} tras la prórroga. Se decide en los penaltis.\", {us: us, opp: opp, a: gu, b: gt})",
+  "where": "engine-market.js:76"
+ },
+ "Final: {us} {a}-{b} {opp}. ¡Victoria!": {
+  "ctx": ": r > 0 ? tr(\"Final: {us} {a}-{b} {opp}. ¡Victoria!\", {us: us, opp: opp, a: gu, b: gt})",
+  "where": "engine-market.js:77"
+ },
+ "Final: {us} {a}-{b} {opp}. Derrota.": {
+  "ctx": ": r < 0 ? tr(\"Final: {us} {a}-{b} {opp}. Derrota.\", {us: us, opp: opp, a: gu, b: gt})",
+  "where": "engine-market.js:78"
+ },
+ "Final: {us} {a}-{b} {opp}. Empate.": {
+  "ctx": ": tr(\"Final: {us} {a}-{b} {opp}. Empate.\", {us: us, opp: opp, a: gu, b: gt});",
+  "where": "engine-market.js:79"
+ },
+ "Penaltis: {a}-{b}.": {
+  "ctx": "if (f.pens && !pendSo) txt += \" \" + tr(\"Penaltis: {a}-{b}.\", {a: f.pens[0], b: f.pens[1]});",
+  "where": "engine-market.js:80"
+ },
+ "{name} lo leyó desde el banquillo: {subs} cambios y victoria {score} ante el {opp}. 🧠": {
+  "ctx": "win: [{by: \"press\", t: N_(\"{name} lo leyó desde el banquillo: {subs} cambios y victoria {score} ante el {opp}. 🧠\")}, {by: \"fan\", t: N_(\"¡Qué manera de mover el banquillo! {score} y a casa contentos. Gracias, míster 🙌\")",
+  "where": "engine-market.js:87"
+ },
+ "¡Qué manera de mover el banquillo! {score} y a casa contentos. Gracias, míster 🙌": {
+  "ctx": "win: [{by: \"press\", t: N_(\"{name} lo leyó desde el banquillo: {subs} cambios y victoria {score} ante el {opp}. 🧠\")}, {by: \"fan\", t: N_(\"¡Qué manera de mover el banquillo! {score} y a casa contentos. Gracias, míster 🙌\")",
+  "where": "engine-market.js:87"
+ },
+ "Los cambios de {name} no funcionaron. {score} ante el {opp} y muchas dudas. 🤔": {
+  "ctx": "loss: [{by: \"press\", t: N_(\"Los cambios de {name} no funcionaron. {score} ante el {opp} y muchas dudas. 🤔\")}, {by: \"hater\", t: N_(\"{score}. Alguien que le explique a {name} para qué sirve el banquillo 🙄\")}],",
+  "where": "engine-market.js:88"
+ },
+ "{score}. Alguien que le explique a {name} para qué sirve el banquillo 🙄": {
+  "ctx": "loss: [{by: \"press\", t: N_(\"Los cambios de {name} no funcionaron. {score} ante el {opp} y muchas dudas. 🤔\")}, {by: \"hater\", t: N_(\"{score}. Alguien que le explique a {name} para qué sirve el banquillo 🙄\")}],",
+  "where": "engine-market.js:88"
+ },
+ "Empate {score} ante el {opp}. ¿Faltó valentía en el banquillo? {name} tendrá que explicarlo.": {
+  "ctx": "draw: [{by: \"press\", t: N_(\"Empate {score} ante el {opp}. ¿Faltó valentía en el banquillo? {name} tendrá que explicarlo.\")}, {by: \"fan\", t: N_(\"Un punto y gracias. Con ese {score} no se gana una liga, {name} 😤\")}],",
+  "where": "engine-market.js:89"
+ },
+ "Un punto y gracias. Con ese {score} no se gana una liga, {name} 😤": {
+  "ctx": "draw: [{by: \"press\", t: N_(\"Empate {score} ante el {opp}. ¿Faltó valentía en el banquillo? {name} tendrá que explicarlo.\")}, {by: \"fan\", t: N_(\"Un punto y gracias. Con ese {score} no se gana una liga, {name} 😤\")}],",
+  "where": "engine-market.js:89"
+ },
+ "¡Eso es ir a por el partido! {name} metió más gente arriba y llegó el premio ⚡": {
+  "ctx": "attack: [{by: \"fan\", t: N_(\"¡Eso es ir a por el partido! {name} metió más gente arriba y llegó el premio ⚡\")}],",
+  "where": "engine-market.js:90"
+ },
+ "Encerrarse atrás nunca sale bien. Gracias por nada, {name} 🙄": {
+  "ctx": "defend: [{by: \"hater\", t: N_(\"Encerrarse atrás nunca sale bien. Gracias por nada, {name} 🙄\")}],",
+  "where": "engine-market.js:91"
+ },
+ "{name} no hizo ni un cambio. Confianza total en los once… o pereza 😅": {
+  "ctx": "nosubs: [{by: \"meme\", t: N_(\"{name} no hizo ni un cambio. Confianza total en los once… o pereza 😅\")}],",
+  "where": "engine-market.js:92"
+ },
+ "¡{player} entró desde el banquillo y lo cambió todo! Cambio de genio de {name} 🔥": {
+  "ctx": "hero: [{by: \"fan\", t: N_(\"¡{player} entró desde el banquillo y lo cambió todo! Cambio de genio de {name} 🔥\")}]",
+  "where": "engine-market.js:93"
+ },
+ "Las redes reaccionan a tu partido.": {
+  "ctx": "notify(\"📱 \" + tr(\"Las redes reaccionan a tu partido.\"), \"info\");",
+  "where": "engine-market.js:112"
+ },
+ "¡Se abre el mercado de verano! Tienes {bud} para fichar.": {
+  "ctx": "mgrStartSeason = function () { _mss.apply(this, arguments); if (S.m.club >= 0) notify(\"🔔 \" + tr(\"¡Se abre el mercado de verano! Tienes {bud} para fichar.\", {bud: fmtMoney(S.m.bud)}), \"amber\"); maybeClausM(\"verano\"); };",
+  "where": "engine-market.js:118"
+ },
+ "¡Se abre el mercado de invierno! Tienes {bud} para fichar.": {
+  "ctx": "mgrQueueBetween = function (nextBi) { _mqb(nextBi); if (nextBi === 3 && S.m.club >= 0) { notify(\"🔔 \" + tr(\"¡Se abre el mercado de invierno! Tienes {bud} para fichar.\", {bud: fmtMoney(S.m.bud)}), \"amber\"); maybeClausM(\"i",
+  "where": "engine-market.js:120"
+ },
+ "¡Se abre el mercado de verano!": {
+  "ctx": "startSeason = function (first) { _ss(first); if (!first) { notify(\"🔔 \" + tr(\"¡Se abre el mercado de verano!\"), \"amber\"); maybeClausP(\"verano\"); } };",
+  "where": "engine-market.js:122"
+ },
+ "¡Se abre el mercado de invierno!": {
+  "ctx": "queueBetween = function (nextBi) { _qb(nextBi); if (nextBi === 3) { notify(\"🔔 \" + tr(\"¡Se abre el mercado de invierno!\"), \"amber\"); maybeClausP(\"invierno\"); } };",
+  "where": "engine-market.js:124"
+ },
+ "¡Clausulazo! El {club} paga tu cláusula.": {
+  "ctx": "notify(\"💥 \" + tr(\"¡Clausulazo! El {club} paga tu cláusula.\", {club: clubName(club)}), \"amber\");",
+  "where": "engine-market.js:143"
+ },
+ "Clausulazo": {
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"Clausulazo\"), cls: \"hotc\", cat: x.kind === \"invierno\" ? tr(\"Mercado de invierno\") : tr(\"Mercado de verano\"), title: tr(\"El {club} paga tu cláusula\", {club: clubName(d.club)}),",
+  "where": "engine-market.js:147 engine-market.js:157 engine-market.js:182"
+ },
+ "El {club} paga tu cláusula": {
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"Clausulazo\"), cls: \"hotc\", cat: x.kind === \"invierno\" ? tr(\"Mercado de invierno\") : tr(\"Mercado de verano\"), title: tr(\"El {club} paga tu cláusula\", {club: clubName(d.club)}),",
+  "where": "engine-market.js:147"
+ },
+ "El {club} ha depositado {fee} en la federación. Tu cláusula está pagada: no hay nada que negociar ni nadie que pueda pararlo. Firmas {sal} al año hasta {end}.": {
+  "ctx": "text: tr(\"El {club} ha depositado {fee} en la federación. Tu cláusula está pagada: no hay nada que negociar ni nadie que pueda pararlo. Firmas {sal} al año hasta {end}.\", {club: clubName(d.club), fee: fmtMoney(d.fee), sa",
+  "where": "engine-market.js:148"
+ },
+ "En 2017 el PSG depositó los 222 millones de la cláusula de Neymar y el Barcelona no pudo hacer nada.": {
+  "ctx": "ref: tr(\"En 2017 el PSG depositó los 222 millones de la cláusula de Neymar y el Barcelona no pudo hacer nada.\"),",
+  "where": "engine-market.js:149"
+ },
+ "Hacer las maletas": {
+  "ctx": "opts: [descOpt({t: tr(\"Hacer las maletas\"), ok: {txt: tr(\"Te despides del vestuario. Empieza una nueva etapa.\")}}, function () { return [[\"note\", 0, tr(\"Fichas por el {club}\", {club: clubName(d.club)})]]; })]};",
+  "where": "engine-market.js:150 engine-market.js:157"
+ },
+ "Te despides del vestuario. Empieza una nueva etapa.": {
+  "ctx": "opts: [descOpt({t: tr(\"Hacer las maletas\"), ok: {txt: tr(\"Te despides del vestuario. Empieza una nueva etapa.\")}}, function () { return [[\"note\", 0, tr(\"Fichas por el {club}\", {club: clubName(d.club)})]]; })]};",
+  "where": "engine-market.js:150"
+ },
+ "El {club} pagó {fee} por tu cláusula. Dejas el {old}.": {
+  "ctx": "var card = {t: \"decision\", tipo: \"real\", cat: tr(\"Mercado\"), title: tr(\"Clausulazo\"), choice: tr(\"Hacer las maletas\"), txt: tr(\"El {club} pagó {fee} por tu cláusula. Dejas el {old}.\", {club: clubName(d.club), fee: fmtMon",
+  "where": "engine-market.js:157"
+ },
+ "¡Clausulazo! El {club} paga la cláusula de {name}.": {
+  "ctx": "notify(\"💥 \" + tr(\"¡Clausulazo! El {club} paga la cláusula de {name}.\", {club: clubName(club), name: plShort(p)}), \"red\");",
+  "where": "engine-market.js:176"
+ },
+ "El {club} se lleva a {name}": {
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"Clausulazo\"), cls: \"hotc\", cat: tr(\"Mercado\"), title: tr(\"El {club} se lleva a {name}\", {club: clubName(x.club), name: plShort(p)}),",
+  "where": "engine-market.js:182"
+ },
+ "El {club} ha pagado los {fee} de la cláusula de {desc} No hay negociación posible: el jugador se marcha y el dinero entra en tu presupuesto.": {
+  "ctx": "text: tr(\"El {club} ha pagado los {fee} de la cláusula de {desc} No hay negociación posible: el jugador se marcha y el dinero entra en tu presupuesto.\", {club: clubName(x.club), fee: fmtMoney(x.fee), desc: plDesc(p)})}; ",
+  "where": "engine-market.js:183"
+ },
+ "Asumirlo": {
+  "ctx": "opts: function (x) { var p = mPl(x.pid); return [{t: tr(\"Asumirlo\"), ok: {txt: tr(\"{name} se despide del vestuario. Toca buscar recambio.\", {name: plShort(p)})}}]; },",
+  "where": "engine-market.js:184"
+ },
+ "{name} se despide del vestuario. Toca buscar recambio.": {
+  "ctx": "opts: function (x) { var p = mPl(x.pid); return [{t: tr(\"Asumirlo\"), ok: {txt: tr(\"{name} se despide del vestuario. Toca buscar recambio.\", {name: plShort(p)})}}]; },",
+  "where": "engine-market.js:184"
+ },
+ "Clausulazo del {club}": {
+  "ctx": "mgrRemovePlayer(p, tr(\"Clausulazo del {club}\", {club: clubName(x.club)}), x.club, x.fee);",
+  "where": "engine-market.js:188"
+ },
+ "Superarías el tope salarial: vende o renegocia antes.": {
+  "ctx": "if (bill + v > m.wcap * 1.1) { out.r = \"cap\"; out.txt = tr(\"Superarías el tope salarial: vende o renegocia antes.\"); x.tries--; x.log.unshift(out); return out; }",
+  "where": "engine-market.js:234"
+ },
+ "{name} acepta {sal} al año. ¡Fichado!": {
+  "ctx": "out.txt = fee ? tr(\"El {club} acepta {fee}. Ahora falta convencer al jugador.\", {club: who, fee: fmtMoney(v)}) : tr(\"{name} acepta {sal} al año. ¡Fichado!\", {name: who, sal: fmtMoney(v)});",
+  "where": "engine-market.js:238"
+ },
+ "El {club} se cansa y rompe las negociaciones.": {
+  "ctx": "out.txt = fee ? tr(\"El {club} se cansa y rompe las negociaciones.\", {club: who}) : tr(\"{name} se cansa de regatear y elige otra oferta.\", {name: who});",
+  "where": "engine-market.js:244"
+ },
+ "{name} se cansa de regatear y elige otra oferta.": {
+  "ctx": "out.txt = fee ? tr(\"El {club} se cansa y rompe las negociaciones.\", {club: who}) : tr(\"{name} se cansa de regatear y elige otra oferta.\", {name: who});",
+  "where": "engine-market.js:244"
+ },
+ "«¿Esto es una broma?» El {club} ni se lo plantea. Siguen pidiendo {ask}.": {
+  "ctx": "out.txt = fee ? tr(\"«¿Esto es una broma?» El {club} ni se lo plantea. Siguen pidiendo {ask}.\", {club: who, ask: fmtMoney(x.ask)}) : tr(\"«Así no vamos a ningún sitio.» {name} sigue pidiendo {ask}.\", {name: who, ask: fmtMo",
+  "where": "engine-market.js:247"
+ },
+ "«Así no vamos a ningún sitio.» {name} sigue pidiendo {ask}.": {
+  "ctx": "out.txt = fee ? tr(\"«¿Esto es una broma?» El {club} ni se lo plantea. Siguen pidiendo {ask}.\", {club: who, ask: fmtMoney(x.ask)}) : tr(\"«Así no vamos a ningún sitio.» {name} sigue pidiendo {ask}.\", {name: who, ask: fmtMo",
+  "where": "engine-market.js:247"
+ },
+ "El {club} rechaza {fee} y baja su petición a {ask}.": {
+  "ctx": "out.txt = fee ? tr(\"El {club} rechaza {fee} y baja su petición a {ask}.\", {club: who, fee: fmtMoney(v), ask: fmtMoney(x.ask)}) : tr(\"{name} rechaza {sal} y pide {ask}.\", {name: who, sal: fmtMoney(v), ask: fmtMoney(x.ask)",
+  "where": "engine-market.js:252"
+ },
+ "{name} rechaza {sal} y pide {ask}.": {
+  "ctx": "out.txt = fee ? tr(\"El {club} rechaza {fee} y baja su petición a {ask}.\", {club: who, fee: fmtMoney(v), ask: fmtMoney(x.ask)}) : tr(\"{name} rechaza {sal} y pide {ask}.\", {name: who, sal: fmtMoney(v), ask: fmtMoney(x.ask)",
+  "where": "engine-market.js:252"
+ },
+ "Fichaje cerrado": {
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Fichaje\"), title: tr(\"Fichaje cerrado\"), choice: trn(x.tries, \"Negociación: {n} oferta\", \"Negociación: {n} ofertas\"), txt: tr(\"¡Fichado! {name} firma hasta {end}.\", {name: plNam",
+  "where": "engine-market.js:277"
+ },
+ "Negociación: {n} oferta": {
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Fichaje\"), title: tr(\"Fichaje cerrado\"), choice: trn(x.tries, \"Negociación: {n} oferta\", \"Negociación: {n} ofertas\"), txt: tr(\"¡Fichado! {name} firma hasta {end}.\", {name: plNam",
+  "where": "engine-market.js:277",
+  "note": "plural:singular"
+ },
+ "Negociación: {n} ofertas": {
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Fichaje\"), title: tr(\"Fichaje cerrado\"), choice: trn(x.tries, \"Negociación: {n} oferta\", \"Negociación: {n} ofertas\"), txt: tr(\"¡Fichado! {name} firma hasta {end}.\", {name: plNam",
+  "where": "engine-market.js:277",
+  "note": "plural:plural"
+ },
+ "¡Fichado! {name} es nuevo jugador del {club}.": {
+  "ctx": "notify(\"✍️ \" + tr(\"¡Fichado! {name} es nuevo jugador del {club}.\", {name: plShort(p), club: clubName(m.club)}), \"good\");",
+  "where": "engine-market.js:278"
+ },
+ "Negociar por {name}": {
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Fichaje\"), cls: \"\", cat: tr(\"Negociación\"), title: tr(\"Negociar por {name}\", {name: t.fn + \" \" + t.ln}), text: tr(\"Piden {ask}.\", {ask: fmtMoney(x.ask)})}; },",
+  "where": "engine-market.js:299"
+ },
+ "Piden {ask}.": {
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Fichaje\"), cls: \"\", cat: tr(\"Negociación\"), title: tr(\"Negociar por {name}\", {name: t.fn + \" \" + t.ln}), text: tr(\"Piden {ask}.\", {ask: fmtMoney(x.ask)})}; },",
+  "where": "engine-market.js:299"
+ },
+ "Pagar lo que piden": {
+  "ctx": "{t: tr(\"Pagar lo que piden\"), ok: {txt: tr(\"Aceptas sus condiciones.\")}},",
+  "where": "engine-market.js:301"
+ },
+ "Aceptas sus condiciones.": {
+  "ctx": "{t: tr(\"Pagar lo que piden\"), ok: {txt: tr(\"Aceptas sus condiciones.\")}},",
+  "where": "engine-market.js:301"
+ },
+ "Paso {n} de 3": {
+  "ctx": "ui.stepN.textContent = ui.steps === 3 ? t(\"Paso {n} de 3\", {n: n}) : t(\"Paso {n} de 2\", {n: n});",
+  "where": "minigame.js:355"
+ },
+ "¡AL PALO!": {
+  "ctx": "var txt = {gol: t(\"¡GOL!\"), parada: t(\"¡PARADA!\"), fuera: t(\"¡FUERA!\"), barrera: t(\"¡A LA BARRERA!\"), palo: t(\"¡AL PALO!\")}[how];",
+  "where": "minigame.js:404"
+ },
+ "TÚ": {
+  "ctx": "sv(\"text\", {\"class\": \"mg-you\", x: 0, y: 6 + 10 * Math.max(s, 0.6), \"text-anchor\": \"middle\"}, g).textContent = t(\"TÚ\");",
+  "where": "minigame.js:921"
+ },
+ "Informe": {
+  "ctx": "hv(\"i\", \"\", d, t(\"Informe\"));",
+  "where": "minigame.js:926"
+ },
+ "Pronto": {
+  "ctx": "function timingWord(v) { return v < IDEAL0 ? t(\"Pronto\") : v > IDEAL1 ? t(\"Tarde\") : t(\"Justo\"); }",
+  "where": "minigame.js:942 minigame.js:1003 minigame.js:1139"
+ },
+ "Tarde": {
+  "ctx": "function timingWord(v) { return v < IDEAL0 ? t(\"Pronto\") : v > IDEAL1 ? t(\"Tarde\") : t(\"Justo\"); }",
+  "where": "minigame.js:942 minigame.js:1003 minigame.js:1139"
+ },
+ "Justo": {
+  "ctx": "function timingWord(v) { return v < IDEAL0 ? t(\"Pronto\") : v > IDEAL1 ? t(\"Tarde\") : t(\"Justo\"); }",
+  "where": "minigame.js:942 minigame.js:1003 minigame.js:1139"
+ },
+ "Suele tirar a su izquierda": {
+  "ctx": "{k: \"izq\", txt: t(\"Suele tirar a su izquierda\"), m: [2.6, 1, 1, 2.6, 1, 1]},",
+  "where": "minigame.js:962"
+ },
+ "Suele tirar a su derecha": {
+  "ctx": "{k: \"der\", txt: t(\"Suele tirar a su derecha\"), m: [1, 1, 2.6, 1, 1, 2.6]},",
+  "where": "minigame.js:963"
+ },
+ "Busca la escuadra": {
+  "ctx": "{k: \"esc\", txt: t(\"Busca la escuadra\"), m: [3.2, 0.6, 3.2, 0.8, 0.6, 0.8]},",
+  "where": "minigame.js:964"
+ },
+ "Le gusta abrir el pie y tirar raso": {
+  "ctx": "{k: \"raso\", txt: t(\"Le gusta abrir el pie y tirar raso\"), m: [0.45, 0.5, 0.45, 1.7, 0.8, 1.7]},",
+  "where": "minigame.js:965"
+ },
+ "Le gusta tirar fuerte al centro": {
+  "ctx": "{k: \"cen\", txt: t(\"Le gusta tirar fuerte al centro\"), m: [1, 3.4, 1, 1, 3.4, 1]},",
+  "where": "minigame.js:966"
+ },
+ "Duda en los penaltis decisivos": {
+  "ctx": "{k: \"duda\", txt: t(\"Duda en los penaltis decisivos\"), m: [1, hp, 1, 1, hp, 1]},",
+  "where": "minigame.js:967"
+ },
+ "Espera a que te tires": {
+  "ctx": "{k: \"esp\", txt: t(\"Espera a que te tires\"), m: [1, 1, 1, 1, 1, 1]}",
+  "where": "minigame.js:968"
+ },
+ "Bajo palos": {
+  "ctx": "var ui = shell({cls: \"mg-pen\", gk: true, kicker: t(\"Bajo palos\"), title: t(\"Penalti en contra\"), chips: [[t(\"Portero\"), gk], [t(\"Tirador\"), skill]],",
+  "where": "minigame.js:1002 minigame.js:1137"
+ },
+ "Tirador": {
+  "ctx": "var ui = shell({cls: \"mg-pen\", gk: true, kicker: t(\"Bajo palos\"), title: t(\"Penalti en contra\"), chips: [[t(\"Portero\"), gk], [t(\"Tirador\"), skill]],",
+  "where": "minigame.js:1002 minigame.js:1138"
+ },
+ "Reacción": {
+  "ctx": "barTitle: t(\"Reacción\"), barLabs: [t(\"Pronto\"), t(\"Justo\"), t(\"Tarde\")], priText: t(\"Elegir momento\")});",
+  "where": "minigame.js:1003 minigame.js:1139"
+ },
+ "Elegir momento": {
+  "ctx": "barTitle: t(\"Reacción\"), barLabs: [t(\"Pronto\"), t(\"Justo\"), t(\"Tarde\")], priText: t(\"Elegir momento\")});",
+  "where": "minigame.js:1003 minigame.js:1318"
+ },
+ "Probabilidad de parada: {p} %": {
+  "ctx": "\"aria-label\": t(\"Probabilidad de parada: {p} %\", {p: pct(info.p)})}, cellsG);",
+  "where": "minigame.js:1015"
+ },
+ "Toca la zona a la que te vas a tirar": {
+  "ctx": "setStep(ui, 1, t(\"Toca la zona a la que te vas a tirar\"));",
+  "where": "minigame.js:1053"
+ },
+ "Tírate a tiempo: para la barra en la zona verde": {
+  "ctx": "setStep(ui, 2, t(\"Tírate a tiempo: para la barra en la zona verde\"));",
+  "where": "minigame.js:1058 minigame.js:1328"
+ },
+ "¡Tirarse!": {
+  "ctx": "startPower(ui, pressure, dive, {btn: t(\"¡Tirarse!\"), word: timingWord});",
+  "where": "minigame.js:1059 minigame.js:1329"
+ },
+ "¡Atento!": {
+  "ctx": "setStep(ui, 2, t(\"¡Atento!\"));",
+  "where": "minigame.js:1069 minigame.js:1340"
+ },
+ "Falta en contra": {
+  "ctx": "var ui = shell({cls: \"mg-fk mg-gkf\", gk: true, steps: 3, kicker: t(\"Bajo palos\"), title: t(\"Falta en contra\"), sec: t(\"Atrás\"),",
+  "where": "minigame.js:1137 evento:falta_contra_gk"
+ },
+ "Colocarme": {
+  "ctx": "barTitle: t(\"Reacción\"), barLabs: [t(\"Pronto\"), t(\"Justo\"), t(\"Tarde\")], priText: t(\"Colocarme\")});",
+  "where": "minigame.js:1139 minigame.js:1308"
+ },
+ "Jugadores en barrera": {
+  "ctx": "hv(\"span\", \"mg-rowl\", rowN, t(\"Jugadores en barrera\"));",
+  "where": "minigame.js:1220"
+ },
+ "Quitar jugador": {
+  "ctx": "minus.setAttribute(\"aria-label\", t(\"Quitar jugador\"));",
+  "where": "minigame.js:1224"
+ },
+ "Añadir jugador": {
+  "ctx": "plus.setAttribute(\"aria-label\", t(\"Añadir jugador\"));",
+  "where": "minigame.js:1225"
+ },
+ "Barrera": {
+  "ctx": "var rowP = hv(\"div\", \"mg-row\", set), posL = hv(\"span\", \"mg-rowl\", rowP, t(\"Barrera\")), seg = hv(\"div\", \"mg-seg\", rowP);",
+  "where": "minigame.js:1227 minigame.js:1306"
+ },
+ "Palo izq.": {
+  "ctx": "var segB = [t(\"Palo izq.\"), t(\"Centro\"), t(\"Palo der.\")].map(function (txt, i) {",
+  "where": "minigame.js:1228"
+ },
+ "Centro": {
+  "ctx": "var segB = [t(\"Palo izq.\"), t(\"Centro\"), t(\"Palo der.\")].map(function (txt, i) {",
+  "where": "minigame.js:1228"
+ },
+ "Palo der.": {
+  "ctx": "var segB = [t(\"Palo izq.\"), t(\"Centro\"), t(\"Palo der.\")].map(function (txt, i) {",
+  "where": "minigame.js:1228"
+ },
+ "Monta la barrera: jugadores y posición": {
+  "ctx": "setStep(ui, 1, t(\"Monta la barrera: jugadores y posición\"));",
+  "where": "minigame.js:1307"
+ },
+ "Colócate: arrastra por la portería": {
+  "ctx": "setStep(ui, 2, t(\"Colócate: arrastra por la portería\"));",
+  "where": "minigame.js:1317"
+ },
+ "Si la paras": {
+  "ctx": "lines += '<span class=\"out ' + cls + '\"><span class=\"op\">' + (o.mini ? h(/^gk/.test(o.mini) ? (u.good ? tr(\"Si la paras\") : tr(\"Si entra\")) : u.good ? tr(\"Si entra\") : tr(\"Si no entra\")) : h(u.lab || (u.good ? tr(\"Bien\")",
+  "where": "ui.js:488"
+ },
+ "A los penaltis": {
+  "ctx": "var lab = f.so ? tr(\"A los penaltis\") : f.r > 0 ? tr(\"Victoria\") : f.r < 0 ? tr(\"Derrota\") : tr(\"Empate\");",
+  "where": "ui.js:559"
+ },
+ "prórroga": {
+  "ctx": "return '<div class=\"finbox ' + r + '\"><span class=\"ft\">' + tr(\"Final\") + (f.et ? \" · \" + tr(\"prórroga\") : \"\") + '</span><div class=\"fs\"><span>' + h(f.us) + \"</span><b>\" + f.gu + \"–\" + f.gt + \"</b><span>\" + h(f.opp) + \"</",
+  "where": "ui.js:560"
+ },
+ "Penaltis: {a}-{b}": {
+  "ctx": "(f.pens ? '<span class=\"fp\">' + tr(\"Penaltis: {a}-{b}\", {a: f.pens[0], b: f.pens[1]}) + \"</span>\" : \"\") + '<em>' + h(lab) + \"</em></div>\";",
+  "where": "ui.js:561"
+ },
+ "Paso 1 de 2 · con su club": {
+  "ctx": "var o = '<section class=\"card decision nego\"><div class=\"head\"><span class=\"tag real\"><span class=\"dot\"></span>' + tr(\"Fichaje\") + '</span><span class=\"eyebrow\">' + (fee ? tr(\"Paso 1 de 2 · con su club\") : tr(\"Paso 2 de ",
+  "where": "ui.js:567"
+ },
+ "Paso 2 de 2 · con el jugador": {
+  "ctx": "var o = '<section class=\"card decision nego\"><div class=\"head\"><span class=\"tag real\"><span class=\"dot\"></span>' + tr(\"Fichaje\") + '</span><span class=\"eyebrow\">' + (fee ? tr(\"Paso 1 de 2 · con su club\") : tr(\"Paso 2 de ",
+  "where": "ui.js:567"
+ },
+ "El {club} pide {ask}. Tienes {bud} de presupuesto.": {
+  "ctx": "o += '<p class=\"lead\">' + h(tDesc(t)) + \" \" + (fee ? tr(\"El {club} pide {ask}. Tienes {bud} de presupuesto.\", {club: h(who), ask: \"<b>\" + fmtMoney(x.ask) + \"</b>\", bud: fmtMoney(S.m.bud)})",
+  "where": "ui.js:569"
+ },
+ "Pide {ask} al año durante {n} año.": {
+  "ctx": ": (x.fee ? tr(\"Acuerdo cerrado con el {club} por {fee}.\", {club: h(clubName(t.club)), fee: fmtMoney(x.fee)}) + \" \" : tr(\"Está sin equipo y escucha ofertas.\") + \" \") + trn(t.yrsD, \"Pide {ask} al año durante {n} año.\", \"Pi",
+  "where": "ui.js:570",
+  "note": "plural:singular"
+ },
+ "Pide {ask} al año durante {n} años.": {
+  "ctx": ": (x.fee ? tr(\"Acuerdo cerrado con el {club} por {fee}.\", {club: h(clubName(t.club)), fee: fmtMoney(x.fee)}) + \" \" : tr(\"Está sin equipo y escucha ofertas.\") + \" \") + trn(t.yrsD, \"Pide {ask} al año durante {n} año.\", \"Pi",
+  "where": "ui.js:570",
+  "note": "plural:plural"
+ },
+ "Frustración del {club}": {
+  "ctx": "o += '<div class=\"frus ' + frc + '\"><div class=\"frl\"><span>' + (fee ? tr(\"Frustración del {club}\", {club: h(who)}) : tr(\"Frustración de {name}\", {name: h(t.ln)})) + \"</span><b>\" + fr + ' %</b></div><div class=\"frb\"><i st",
+  "where": "ui.js:572"
+ },
+ "Frustración de {name}": {
+  "ctx": "o += '<div class=\"frus ' + frc + '\"><div class=\"frl\"><span>' + (fee ? tr(\"Frustración del {club}\", {club: h(who)}) : tr(\"Frustración de {name}\", {name: h(t.ln)})) + \"</span><b>\" + fr + ' %</b></div><div class=\"frb\"><i st",
+  "where": "ui.js:572"
+ },
+ "Si llega al 100 %, se rompe la negociación.": {
+  "ctx": "'<small class=\"muted\">' + tr(\"Si llega al 100 %, se rompe la negociación.\") + \"</small></div>\";",
+  "where": "ui.js:573"
+ },
+ "año": {
+  "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">'",
+  "where": "ui.js:575 ui.js:2066"
+ },
+ "{pct} % de lo que piden": {
+  "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">'",
+  "where": "ui.js:575 ui.js:2067"
+ },
+ "Bajar": {
+  "ctx": "'<div class=\"nrow\"><button class=\"btn sm\" data-a=\"negostep\" data-v=\"-1\" aria-label=\"' + h(tr(\"Bajar\")) + '\">−</button><input type=\"range\" id=\"negov\" min=\"' + x.lo + '\" max=\"' + mx + '\" step=\"' + negoStep(x) + '\" value=\"'",
+  "where": "ui.js:576"
+ },
+ "Tu oferta": {
+  "ctx": "'<div class=\"nrow\"><button class=\"btn sm\" data-a=\"negostep\" data-v=\"-1\" aria-label=\"' + h(tr(\"Bajar\")) + '\">−</button><input type=\"range\" id=\"negov\" min=\"' + x.lo + '\" max=\"' + mx + '\" step=\"' + negoStep(x) + '\" value=\"'",
+  "where": "ui.js:576"
+ },
+ "Subir": {
+  "ctx": "'<div class=\"nrow\"><button class=\"btn sm\" data-a=\"negostep\" data-v=\"-1\" aria-label=\"' + h(tr(\"Bajar\")) + '\">−</button><input type=\"range\" id=\"negov\" min=\"' + x.lo + '\" max=\"' + mx + '\" step=\"' + negoStep(x) + '\" value=\"'",
+  "where": "ui.js:576"
+ },
+ "Lo convence más, pero si no juega se sentirá engañado.": {
+  "ctx": "if (!fee) o += '<button class=\"pickrow\" data-a=\"negoprom\" aria-pressed=\"' + !!x.prom + '\"><div class=\"grow\"><b>' + tr(\"Prometerle que será Clave\") + \"</b><small>\" + tr(\"Lo convence más, pero si no juega se sentirá engaña",
+  "where": "ui.js:578"
+ },
+ "Hacer la oferta": {
+  "ctx": "o += '<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"negooff\">' + (fee ? tr(\"Hacer la oferta\") : tr(\"Ofrecer este sueldo\")) + '</button><button class=\"btn wide\" data-a=\"negoquit\">' + tr(\"Retirarte de la operación",
+  "where": "ui.js:580"
+ },
+ "Ofrecer este sueldo": {
+  "ctx": "o += '<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"negooff\">' + (fee ? tr(\"Hacer la oferta\") : tr(\"Ofrecer este sueldo\")) + '</button><button class=\"btn wide\" data-a=\"negoquit\">' + tr(\"Retirarte de la operación",
+  "where": "ui.js:580"
+ },
+ "{n} oferta hecha.": {
+  "ctx": "o += '<p class=\"muted\" style=\"font-size:12.5px;margin:8px 0 0\">' + trn(x.tries, \"{n} oferta hecha.\", \"{n} ofertas hechas.\") + \" \" + tr(\"Ofertas muy bajas los enfadan más.\") + \"</p>\";",
+  "where": "ui.js:581",
+  "note": "plural:singular"
+ },
+ "{n} ofertas hechas.": {
+  "ctx": "o += '<p class=\"muted\" style=\"font-size:12.5px;margin:8px 0 0\">' + trn(x.tries, \"{n} oferta hecha.\", \"{n} ofertas hechas.\") + \" \" + tr(\"Ofertas muy bajas los enfadan más.\") + \"</p>\";",
+  "where": "ui.js:581",
+  "note": "plural:plural"
+ },
+ "Ofertas muy bajas los enfadan más.": {
+  "ctx": "o += '<p class=\"muted\" style=\"font-size:12.5px;margin:8px 0 0\">' + trn(x.tries, \"{n} oferta hecha.\", \"{n} ofertas hechas.\") + \" \" + tr(\"Ofertas muy bajas los enfadan más.\") + \"</p>\";",
+  "where": "ui.js:581"
+ },
+ "Resultado": {
+  "ctx": "add(\"res\", '<b>' + (res.length === 1 ? tr(\"Resultado\") : tr(\"Resultados\")) + (res.length > 1 ? ' <small>' + tr(\"{w}V · {d}E · {l}D\", {w: w, d: res.length - w - l, l: l}) + \"</small>\" : \"\") + \"</b>\" + shown.map(function (",
+  "where": "ui.js:600"
+ },
+ "Resultados": {
+  "ctx": "add(\"res\", '<b>' + (res.length === 1 ? tr(\"Resultado\") : tr(\"Resultados\")) + (res.length > 1 ? ' <small>' + tr(\"{w}V · {d}E · {l}D\", {w: w, d: res.length - w - l, l: l}) + \"</small>\" : \"\") + \"</b>\" + shown.map(function (",
+  "where": "ui.js:600"
+ },
+ "{w}V · {d}E · {l}D": {
+  "ctx": "add(\"res\", '<b>' + (res.length === 1 ? tr(\"Resultado\") : tr(\"Resultados\")) + (res.length > 1 ? ' <small>' + tr(\"{w}V · {d}E · {l}D\", {w: w, d: res.length - w - l, l: l}) + \"</small>\" : \"\") + \"</b>\" + shown.map(function (",
+  "where": "ui.js:600"
+ },
+ "y {n} más": {
+  "ctx": "add(\"res\", '<b>' + (res.length === 1 ? tr(\"Resultado\") : tr(\"Resultados\")) + (res.length > 1 ? ' <small>' + tr(\"{w}V · {d}E · {l}D\", {w: w, d: res.length - w - l, l: l}) + \"</small>\" : \"\") + \"</b>\" + shown.map(function (",
+  "where": "ui.js:600 ui.js:600",
+  "note": "plural:plural"
+ }
+}

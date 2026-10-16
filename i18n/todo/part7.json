@@ -1,0 +1,918 @@
+{
+ "Es culpa mía. Me responsabilizo de todo; los jugadores han dado lo que tenían.": {
+  "ctx": "{t: N_(\"Es culpa mía. Me responsabilizo de todo; los jugadores han dado lo que tenían.\"), fx: {chem: 4, sqMor: 3, board: -2, rep: -1}, ref: N_(\"Inspirada en el estilo de Guardiola\")},",
+  "where": "press-data.js:8"
+ },
+ "Inspirada en el estilo de Guardiola": {
+  "ctx": "{t: N_(\"Es culpa mía. Me responsabilizo de todo; los jugadores han dado lo que tenían.\"), fx: {chem: 4, sqMor: 3, board: -2, rep: -1}, ref: N_(\"Inspirada en el estilo de Guardiola\")},",
+  "where": "press-data.js:8 press-data.js:156"
+ },
+ "Prefiero no hablar. Cualquier cosa que diga me costará una multa y mi cuenta corriente no está para bromas.": {
+  "ctx": "{t: N_(\"Prefiero no hablar. Cualquier cosa que diga me costará una multa y mi cuenta corriente no está para bromas.\"), fx: {rep: 2, board: 1, fans: -3, chem: -1}, ref: N_(\"Inspirada en Mourinho, 'prefiero no hablar'\")}",
+  "where": "press-data.js:9"
+ },
+ "Inspirada en Mourinho, 'prefiero no hablar'": {
+  "ctx": "{t: N_(\"Prefiero no hablar. Cualquier cosa que diga me costará una multa y mi cuenta corriente no está para bromas.\"), fx: {rep: 2, board: 1, fans: -3, chem: -1}, ref: N_(\"Inspirada en Mourinho, 'prefiero no hablar'\")}",
+  "where": "press-data.js:9"
+ },
+ "Tres puntos más. ¿Está satisfecho con el juego del equipo?": {
+  "ctx": "{id: \"m2\", ctx: [\"win\"], q: N_(\"Tres puntos más. ¿Está satisfecho con el juego del equipo?\"),",
+  "where": "press-data.js:11"
+ },
+ "Salid y disfrutad. Hoy lo han hecho y eso es lo que importa: jugar bien, sin miedo.": {
+  "ctx": "{t: N_(\"Salid y disfrutad. Hoy lo han hecho y eso es lo que importa: jugar bien, sin miedo.\"), fx: {fans: 4, chem: 2, board: -2}, ref: N_(\"Inspirada en Cruyff, final de 1992\")},",
+  "where": "press-data.js:13"
+ },
+ "Inspirada en Cruyff, final de 1992": {
+  "ctx": "{t: N_(\"Salid y disfrutad. Hoy lo han hecho y eso es lo que importa: jugar bien, sin miedo.\"), fx: {fans: 4, chem: 2, board: -2}, ref: N_(\"Inspirada en Cruyff, final de 1992\")},",
+  "where": "press-data.js:13"
+ },
+ "Ganar, ganar y volver a ganar. Lo demás es literatura.": {
+  "ctx": "{t: N_(\"Ganar, ganar y volver a ganar. Lo demás es literatura.\"), fx: {board: 3, sqMor: 1, fans: -2}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:14"
+ },
+ "Inspirada en Luis Aragonés": {
+  "ctx": "{t: N_(\"Ganar, ganar y volver a ganar. Lo demás es literatura.\"), fx: {board: 3, sqMor: 1, fans: -2}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:14 press-data.js:56 press-data.js:99 press-data.js:113"
+ },
+ "Football, bloody hell! No sé cómo, pero nunca se acaba hasta que termina.": {
+  "ctx": "{t: N_(\"Football, bloody hell! No sé cómo, pero nunca se acaba hasta que termina.\"), fx: {fans: 3, rep: 2, chem: -2}, ref: N_(\"Inspirada en Ferguson, 1999\")},",
+  "where": "press-data.js:15"
+ },
+ "Inspirada en Ferguson, 1999": {
+  "ctx": "{t: N_(\"Football, bloody hell! No sé cómo, pero nunca se acaba hasta que termina.\"), fx: {fans: 3, rep: 2, chem: -2}, ref: N_(\"Inspirada en Ferguson, 1999\")},",
+  "where": "press-data.js:15"
+ },
+ "Hemos ganado, pero no me he divertido. Hay mucho que mejorar y mañana empiezo a trabajar.": {
+  "ctx": "{t: N_(\"Hemos ganado, pero no me he divertido. Hay mucho que mejorar y mañana empiezo a trabajar.\"), fx: {board: 2, rep: 1, sqMor: -3}, ref: N_(\"Inspirada en el estilo de Klopp\")}",
+  "where": "press-data.js:16"
+ },
+ "Inspirada en el estilo de Klopp": {
+  "ctx": "{t: N_(\"Hemos ganado, pero no me he divertido. Hay mucho que mejorar y mañana empiezo a trabajar.\"), fx: {board: 2, rep: 1, sqMor: -3}, ref: N_(\"Inspirada en el estilo de Klopp\")}",
+  "where": "press-data.js:16"
+ },
+ "¿Se ve ya campeón de {lg}?": {
+  "ctx": "{id: \"m3\", ctx: [\"title\", \"win\"], q: N_(\"¿Se ve ya campeón de {lg}?\"),",
+  "where": "press-data.js:18"
+ },
+ "Yo soy el normal. Me veo en el banquillo del {club}, con una cerveza y mucha humildad.": {
+  "ctx": "{t: N_(\"Yo soy el normal. Me veo en el banquillo del {club}, con una cerveza y mucha humildad.\"), fx: {fans: 4, rep: 2, board: -2}, ref: N_(\"Inspirada en Klopp, 'the normal one', 2015\")},",
+  "where": "press-data.js:20"
+ },
+ "Inspirada en Klopp, 'the normal one', 2015": {
+  "ctx": "{t: N_(\"Yo soy el normal. Me veo en el banquillo del {club}, con una cerveza y mucha humildad.\"), fx: {fans: 4, rep: 2, board: -2}, ref: N_(\"Inspirada en Klopp, 'the normal one', 2015\")},",
+  "where": "press-data.js:20"
+ },
+ "Ni lo pienso. Un partido, solo uno. El del domingo es el más importante de mi vida.": {
+  "ctx": "{t: N_(\"Ni lo pienso. Un partido, solo uno. El del domingo es el más importante de mi vida.\"), fx: {sqMor: 3, chem: 2, fans: -2}, ref: N_(\"Inspirada en Simeone, 'partido a partido'\")},",
+  "where": "press-data.js:21"
+ },
+ "Claro que sí. Soy campeón. Lo que pasa es que otros todavía no se han enterado.": {
+  "ctx": "{t: N_(\"Claro que sí. Soy campeón. Lo que pasa es que otros todavía no se han enterado.\"), fx: {fans: 5, rep: 3, chem: -3, board: -2}, ref: N_(\"Inspirada en Mourinho, 'The Special One', 2004\")},",
+  "where": "press-data.js:22"
+ },
+ "Inspirada en Mourinho, 'The Special One', 2004": {
+  "ctx": "{t: N_(\"Claro que sí. Soy campeón. Lo que pasa es que otros todavía no se han enterado.\"), fx: {fans: 5, rep: 3, chem: -3, board: -2}, ref: N_(\"Inspirada en Mourinho, 'The Special One', 2004\")},",
+  "where": "press-data.js:22"
+ },
+ "No lo sé. Pregunte a mi ceja: si se levanta, es que podemos ganarla.": {
+  "ctx": "{t: N_(\"No lo sé. Pregunte a mi ceja: si se levanta, es que podemos ganarla.\"), fx: {rep: 3, sqMor: 2, board: -1, fans: -1}, ref: N_(\"Inspirada en Ancelotti, la ceja\")}",
+  "where": "press-data.js:23"
+ },
+ "Inspirada en Ancelotti, la ceja": {
+  "ctx": "{t: N_(\"No lo sé. Pregunte a mi ceja: si se levanta, es que podemos ganarla.\"), fx: {rep: 3, sqMor: 2, board: -1, fans: -1}, ref: N_(\"Inspirada en Ancelotti, la ceja\")}",
+  "where": "press-data.js:23"
+ },
+ "Se han dejado dos puntos ante el {opp}. ¿Qué opina?": {
+  "ctx": "{id: \"m4\", ctx: [\"draw\"], q: N_(\"Se han dejado dos puntos ante el {opp}. ¿Qué opina?\"),",
+  "where": "press-data.js:25"
+ },
+ "Un empate no es un mal resultado. En este fútbol hay que saber sufrir.": {
+  "ctx": "{t: N_(\"Un empate no es un mal resultado. En este fútbol hay que saber sufrir.\"), fx: {board: 2, sqMor: 1, fans: -3}, ref: N_(\"Inspirada en Del Bosque\")},",
+  "where": "press-data.js:27"
+ },
+ "Inspirada en Del Bosque": {
+  "ctx": "{t: N_(\"Un empate no es un mal resultado. En este fútbol hay que saber sufrir.\"), fx: {board: 2, sqMor: 1, fans: -3}, ref: N_(\"Inspirada en Del Bosque\")},",
+  "where": "press-data.js:27 press-data.js:41 press-data.js:51 press-data.js:64"
+ },
+ "Nos hemos dejado dos puntos por falta de ambición. No volverá a pasar, os lo aseguro.": {
+  "ctx": "{t: N_(\"Nos hemos dejado dos puntos por falta de ambición. No volverá a pasar, os lo aseguro.\"), fx: {fans: 3, board: 1, sqMor: -3, chem: -1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:28"
+ },
+ "Inspirada en Ferguson": {
+  "ctx": "{t: N_(\"Nos hemos dejado dos puntos por falta de ambición. No volverá a pasar, os lo aseguro.\"), fx: {fans: 3, board: 1, sqMor: -3, chem: -1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:28 press-data.js:44 press-data.js:48 press-data.js:78"
+ },
+ "El balón no entró, pero tuvimos más que ellos. Quien tiene el balón, tiene el partido.": {
+  "ctx": "{t: N_(\"El balón no entró, pero tuvimos más que ellos. Quien tiene el balón, tiene el partido.\"), fx: {fans: 2, chem: 2, board: -2}, ref: N_(\"Inspirada en Cruyff\")},",
+  "where": "press-data.js:29"
+ },
+ "Inspirada en Cruyff": {
+  "ctx": "{t: N_(\"El balón no entró, pero tuvimos más que ellos. Quien tiene el balón, tiene el partido.\"), fx: {fans: 2, chem: 2, board: -2}, ref: N_(\"Inspirada en Cruyff\")},",
+  "where": "press-data.js:29 press-data.js:84 press-data.js:104 press-data.js:183"
+ },
+ "Si pasamos un partido sin recibir gol, sumamos un punto. Y a veces es el que más pesa.": {
+  "ctx": "{t: N_(\"Si pasamos un partido sin recibir gol, sumamos un punto. Y a veces es el que más pesa.\"), fx: {board: 3, sqMor: 1, fans: -2, rep: -1}, ref: N_(\"Inspirada en el estilo de Simeone\")}",
+  "where": "press-data.js:30"
+ },
+ "Inspirada en el estilo de Simeone": {
+  "ctx": "{t: N_(\"Si pasamos un partido sin recibir gol, sumamos un punto. Y a veces es el que más pesa.\"), fx: {board: 3, sqMor: 1, fans: -2, rep: -1}, ref: N_(\"Inspirada en el estilo de Simeone\")}",
+  "where": "press-data.js:30 press-data.js:49"
+ },
+ "Goleada al {opp}. ¿Le sorprende el resultado?": {
+  "ctx": "{id: \"m5\", ctx: [\"bigwin\"], q: N_(\"Goleada al {opp}. ¿Le sorprende el resultado?\"),",
+  "where": "press-data.js:32"
+ },
+ "Nada me sorprende. Sabía que aquí, con esta gente, los goles iban a llegar.": {
+  "ctx": "{t: N_(\"Nada me sorprende. Sabía que aquí, con esta gente, los goles iban a llegar.\"), fx: {rep: 3, fans: 2, sqMor: -2}, ref: N_(\"Inspirada en Luis Enrique\")},",
+  "where": "press-data.js:34"
+ },
+ "Inspirada en Luis Enrique": {
+  "ctx": "{t: N_(\"Nada me sorprende. Sabía que aquí, con esta gente, los goles iban a llegar.\"), fx: {rep: 3, fans: 2, sqMor: -2}, ref: N_(\"Inspirada en Luis Enrique\")},",
+  "where": "press-data.js:34 press-data.js:42 press-data.js:77 press-data.js:168"
+ },
+ "No celebramos nada. La semana que viene nos tocará otro rival y habrá que repetirlo.": {
+  "ctx": "{t: N_(\"No celebramos nada. La semana que viene nos tocará otro rival y habrá que repetirlo.\"), fx: {board: 3, sqMor: 1, fans: -3}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:35"
+ },
+ "Inspirada en Simeone": {
+  "ctx": "{t: N_(\"No celebramos nada. La semana que viene nos tocará otro rival y habrá que repetirlo.\"), fx: {board: 3, sqMor: 1, fans: -3}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:35 press-data.js:76 press-data.js:91 press-data.js:106"
+ },
+ "Es el fútbol, amigo. A veces la pelota entra y a veces el poste manda. Hoy, nos amó.": {
+  "ctx": "{t: N_(\"Es el fútbol, amigo. A veces la pelota entra y a veces el poste manda. Hoy, nos amó.\"), fx: {fans: 3, chem: 2, rep: -2}, ref: N_(\"Inspirada en Bielsa\")},",
+  "where": "press-data.js:36"
+ },
+ "Inspirada en Bielsa": {
+  "ctx": "{t: N_(\"Es el fútbol, amigo. A veces la pelota entra y a veces el poste manda. Hoy, nos amó.\"), fx: {fans: 3, chem: 2, rep: -2}, ref: N_(\"Inspirada en Bielsa\")},",
+  "where": "press-data.js:36 press-data.js:58 press-data.js:65 press-data.js:86"
+ },
+ "Que celebren los jugadores. Yo me quedo en el hotel viendo el partido del {coach} y tomando notas.": {
+  "ctx": "{t: N_(\"Que celebren los jugadores. Yo me quedo en el hotel viendo el partido del {coach} y tomando notas.\"), fx: {rep: 2, board: 2, chem: -3}, ref: N_(\"Inspirada en Wenger\")}",
+  "where": "press-data.js:37"
+ },
+ "Inspirada en Wenger": {
+  "ctx": "{t: N_(\"Que celebren los jugadores. Yo me quedo en el hotel viendo el partido del {coach} y tomando notas.\"), fx: {rep: 2, board: 2, chem: -3}, ref: N_(\"Inspirada en Wenger\")}",
+  "where": "press-data.js:37 press-data.js:79 press-data.js:85 press-data.js:92"
+ },
+ "Una derrota así, ¿se puede explicar? ¿Pensó en dimitir?": {
+  "ctx": "{id: \"m6\", ctx: [\"bigloss\"], q: N_(\"Una derrota así, ¿se puede explicar? ¿Pensó en dimitir?\"),",
+  "where": "press-data.js:39"
+ },
+ "Esto no es una dictadura. Yo he dado la cara, que otros den la suya. Pero no voy a dimitir.": {
+  "ctx": "{t: N_(\"Esto no es una dictadura. Yo he dado la cara, que otros den la suya. Pero no voy a dimitir.\"), fx: {sqMor: 3, board: -3, rep: 1, fans: -1}, ref: N_(\"Inspirada en Del Bosque\")},",
+  "where": "press-data.js:41"
+ },
+ "Me da igual lo que digáis. Mañana trabajamos, igual que hoy. Siguiente pregunta.": {
+  "ctx": "{t: N_(\"Me da igual lo que digáis. Mañana trabajamos, igual que hoy. Siguiente pregunta.\"), fx: {chem: 3, rep: -2, fans: -2, board: -1}, ref: N_(\"Inspirada en Luis Enrique\")},",
+  "where": "press-data.js:42"
+ },
+ "Lo siento muchísimo. Pido perdón a toda la afición. No se merecían esto, ni mucho menos.": {
+  "ctx": "{t: N_(\"Lo siento muchísimo. Pido perdón a toda la afición. No se merecían esto, ni mucho menos.\"), fx: {fans: 4, board: -2, rep: -2, sqMor: 2}, ref: N_(\"Inspirada en Guardiola, 'I'm sorry'\")},",
+  "where": "press-data.js:43"
+ },
+ "Inspirada en Guardiola, 'I'm sorry'": {
+  "ctx": "{t: N_(\"Lo siento muchísimo. Pido perdón a toda la afición. No se merecían esto, ni mucho menos.\"), fx: {fans: 4, board: -2, rep: -2, sqMor: 2}, ref: N_(\"Inspirada en Guardiola, 'I'm sorry'\")},",
+  "where": "press-data.js:43 press-data.js:114 press-data.js:216"
+ },
+ "Hemos perdido, pero sé que esto me hará más fuerte. Los grandes se miden cuando se caen.": {
+  "ctx": "{t: N_(\"Hemos perdido, pero sé que esto me hará más fuerte. Los grandes se miden cuando se caen.\"), fx: {rep: 2, sqMor: 2, fans: -2, board: -1}, ref: N_(\"Inspirada en Ferguson\")}",
+  "where": "press-data.js:44"
+ },
+ "Era el derbi. ¿Qué significa este resultado para la afición?": {
+  "ctx": "{id: \"m7\", ctx: [\"derby\"], q: N_(\"Era el derbi. ¿Qué significa este resultado para la afición?\"),",
+  "where": "press-data.js:46"
+ },
+ "Un derbi no se juega, se gana. Los puntos son los mismos, pero el orgullo vale el doble.": {
+  "ctx": "{t: N_(\"Un derbi no se juega, se gana. Los puntos son los mismos, pero el orgullo vale el doble.\"), fx: {fans: 4, sqMor: 2, rep: -2}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:48"
+ },
+ "Para mí es un partido más. Tres puntos, ni más ni menos. Pero sé lo que significa para vosotros.": {
+  "ctx": "{t: N_(\"Para mí es un partido más. Tres puntos, ni más ni menos. Pero sé lo que significa para vosotros.\"), fx: {board: 2, chem: 1, fans: -3}, ref: N_(\"Inspirada en el estilo de Simeone\")},",
+  "where": "press-data.js:49"
+ },
+ "Mi equipo ha hablado en el campo. No hace falta añadir nada más: el que quiera entender, que entienda.": {
+  "ctx": "{t: N_(\"Mi equipo ha hablado en el campo. No hace falta añadir nada más: el que quiera entender, que entienda.\"), fx: {fans: 3, rep: 2, board: -2}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:50"
+ },
+ "Inspirada en Mourinho": {
+  "ctx": "{t: N_(\"Mi equipo ha hablado en el campo. No hace falta añadir nada más: el que quiera entender, que entienda.\"), fx: {fans: 3, rep: 2, board: -2}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:50 press-data.js:62 press-data.js:71 press-data.js:93"
+ },
+ "Ojalá la ciudad lo celebre con alegría y sin excesos. El fútbol es un juego, no una guerra.": {
+  "ctx": "{t: N_(\"Ojalá la ciudad lo celebre con alegría y sin excesos. El fútbol es un juego, no una guerra.\"), fx: {rep: 3, board: 2, fans: -3, sqMor: -1}, ref: N_(\"Inspirada en Del Bosque\")}",
+  "where": "press-data.js:51"
+ },
+ "Mañana se juega una final. ¿Cómo están los nervios?": {
+  "ctx": "{id: \"m8\", ctx: [\"final\"], q: N_(\"Mañana se juega una final. ¿Cómo están los nervios?\"),",
+  "where": "press-data.js:53"
+ },
+ "Aquí no hay nervios. Hay ganas de salir y disfrutar. Los nervios, para los que miran desde casa.": {
+  "ctx": "{t: N_(\"Aquí no hay nervios. Hay ganas de salir y disfrutar. Los nervios, para los que miran desde casa.\"), fx: {sqMor: 4, fans: 2, board: -2}, ref: N_(\"Inspirada en Cruyff, 'salid y disfrutad'\")},",
+  "where": "press-data.js:55"
+ },
+ "Inspirada en Cruyff, 'salid y disfrutad'": {
+  "ctx": "{t: N_(\"Aquí no hay nervios. Hay ganas de salir y disfrutar. Los nervios, para los que miran desde casa.\"), fx: {sqMor: 4, fans: 2, board: -2}, ref: N_(\"Inspirada en Cruyff, 'salid y disfrutad'\")},",
+  "where": "press-data.js:55 press-data.js:387"
+ },
+ "Es una final y las finales no se juegan, se ganan. No hay otra opción, y todos lo saben.": {
+  "ctx": "{t: N_(\"Es una final y las finales no se juegan, se ganan. No hay otra opción, y todos lo saben.\"), fx: {board: 3, fans: 2, sqMor: -3}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:56"
+ },
+ "Nervios los tengo yo, pero los jugadores están tranquilos. Es lo mejor que me ha pasado en esta semana.": {
+  "ctx": "{t: N_(\"Nervios los tengo yo, pero los jugadores están tranquilos. Es lo mejor que me ha pasado en esta semana.\"), fx: {chem: 3, fans: 1, rep: -2}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:57"
+ },
+ "Inspirada en Ancelotti": {
+  "ctx": "{t: N_(\"Nervios los tengo yo, pero los jugadores están tranquilos. Es lo mejor que me ha pasado en esta semana.\"), fx: {chem: 3, fans: 1, rep: -2}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:57 press-data.js:90 press-data.js:107 press-data.js:118"
+ },
+ "Hemos preparado la final con mucho detalle. Si perdemos, será por algo que ni yo podía controlar.": {
+  "ctx": "{t: N_(\"Hemos preparado la final con mucho detalle. Si perdemos, será por algo que ni yo podía controlar.\"), fx: {rep: 2, board: 2, sqMor: -2, fans: -1}, ref: N_(\"Inspirada en Bielsa\")}",
+  "where": "press-data.js:58"
+ },
+ "El árbitro anuló un gol a su equipo. ¿Le han robado?": {
+  "ctx": "{id: \"m9\", ctx: [\"controversy\"], q: N_(\"El árbitro anuló un gol a su equipo. ¿Le han robado?\"),",
+  "where": "press-data.js:60"
+ },
+ "Yo no hablo de árbitros. Pero si quieren hablar, ya saben que en el campo hay cosas que ven todos menos él.": {
+  "ctx": "{t: N_(\"Yo no hablo de árbitros. Pero si quieren hablar, ya saben que en el campo hay cosas que ven todos menos él.\"), fx: {fans: 4, sqMor: 2, rep: -3, board: -2}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:62"
+ },
+ "No lo vi. De verdad, no vi la jugada. Estaba mirando hacia otro lado, como siempre.": {
+  "ctx": "{t: N_(\"No lo vi. De verdad, no vi la jugada. Estaba mirando hacia otro lado, como siempre.\"), fx: {rep: 3, board: 1, fans: -2, sqMor: -1}, ref: N_(\"Inspirada en Wenger, 'I did not see it'\")},",
+  "where": "press-data.js:63"
+ },
+ "Inspirada en Wenger, 'I did not see it'": {
+  "ctx": "{t: N_(\"No lo vi. De verdad, no vi la jugada. Estaba mirando hacia otro lado, como siempre.\"), fx: {rep: 3, board: 1, fans: -2, sqMor: -1}, ref: N_(\"Inspirada en Wenger, 'I did not see it'\")},",
+  "where": "press-data.js:63 press-data.js:161 press-data.js:254"
+ },
+ "No voy a criticar al árbitro. Se equivoca como nos equivocamos todos. Hay que seguir adelante.": {
+  "ctx": "{t: N_(\"No voy a criticar al árbitro. Se equivoca como nos equivocamos todos. Hay que seguir adelante.\"), fx: {rep: 3, board: 2, fans: -4, sqMor: -1}, ref: N_(\"Inspirada en Del Bosque\")},",
+  "where": "press-data.js:64"
+ },
+ "Si el VAR existe es para esto. Que alguien me explique para qué sirve entonces. Lo demás, mejor ni decirlo.": {
+  "ctx": "{t: N_(\"Si el VAR existe es para esto. Que alguien me explique para qué sirve entonces. Lo demás, mejor ni decirlo.\"), fx: {fans: 3, sqMor: 3, board: -2, rep: -2}, ref: N_(\"Inspirada en Bielsa\")}",
+  "where": "press-data.js:65"
+ },
+ "El {coach} dice que su equipo no aguantará la presión. ¿Responde?": {
+  "ctx": "{id: \"m10\", ctx: [\"title\"], q: N_(\"El {coach} dice que su equipo no aguantará la presión. ¿Responde?\"),",
+  "where": "press-data.js:67"
+ },
+ "Es un maestro del 'mind games'. Que hable lo que quiera; yo me ocupo de entrenar a mi gente.": {
+  "ctx": "{t: N_(\"Es un maestro del 'mind games'. Que hable lo que quiera; yo me ocupo de entrenar a mi gente.\"), fx: {sqMor: 3, rep: 2, fans: -2}, ref: N_(\"Inspirada en Ferguson, 'mind games'\")},",
+  "where": "press-data.js:69"
+ },
+ "Inspirada en Ferguson, 'mind games'": {
+  "ctx": "{t: N_(\"Es un maestro del 'mind games'. Que hable lo que quiera; yo me ocupo de entrenar a mi gente.\"), fx: {sqMor: 3, rep: 2, fans: -2}, ref: N_(\"Inspirada en Ferguson, 'mind games'\")},",
+  "where": "press-data.js:69"
+ },
+ "Me parece muy bien. Yo estoy muy tranquilo. Pero no creo que mi colega pueda decir lo mismo.": {
+  "ctx": "{t: N_(\"Me parece muy bien. Yo estoy muy tranquilo. Pero no creo que mi colega pueda decir lo mismo.\"), fx: {fans: 4, rep: 2, board: -2, chem: -1}, ref: N_(\"Inspirada en Ferguson y Wenger, 2009\")},",
+  "where": "press-data.js:70"
+ },
+ "Inspirada en Ferguson y Wenger, 2009": {
+  "ctx": "{t: N_(\"Me parece muy bien. Yo estoy muy tranquilo. Pero no creo que mi colega pueda decir lo mismo.\"), fx: {fans: 4, rep: 2, board: -2, chem: -1}, ref: N_(\"Inspirada en Ferguson y Wenger, 2009\")},",
+  "where": "press-data.js:70"
+ },
+ "Con todo el respeto, hablaré con él el sábado por la noche. Si no hay lugar para charlar, será que se acabó.": {
+  "ctx": "{t: N_(\"Con todo el respeto, hablaré con él el sábado por la noche. Si no hay lugar para charlar, será que se acabó.\"), fx: {fans: 3, sqMor: 2, rep: -2, board: -1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:71"
+ },
+ "No digo nada. Cada uno se cuida. A mí lo que me preocupa es si mañana el césped está en condiciones.": {
+  "ctx": "{t: N_(\"No digo nada. Cada uno se cuida. A mí lo que me preocupa es si mañana el césped está en condiciones.\"), fx: {board: 2, rep: 1, fans: -3, sqMor: 1}, ref: N_(\"Inspirada en el estilo de Del Bosque\")}",
+  "where": "press-data.js:72"
+ },
+ "Inspirada en el estilo de Del Bosque": {
+  "ctx": "{t: N_(\"No digo nada. Cada uno se cuida. A mí lo que me preocupa es si mañana el césped está en condiciones.\"), fx: {board: 2, rep: 1, fans: -3, sqMor: 1}, ref: N_(\"Inspirada en el estilo de Del Bosque\")}",
+  "where": "press-data.js:72"
+ },
+ "Están en puestos de descenso. ¿Tiene miedo?": {
+  "ctx": "{id: \"m11\", ctx: [\"relegation\"], q: N_(\"Están en puestos de descenso. ¿Tiene miedo?\"),",
+  "where": "press-data.js:74"
+ },
+ "Miedo tengo a lo que no puedo controlar. Y esto sí lo controlo: trabajo, esfuerzo y uno a uno, los partidos.": {
+  "ctx": "{t: N_(\"Miedo tengo a lo que no puedo controlar. Y esto sí lo controlo: trabajo, esfuerzo y uno a uno, los partidos.\"), fx: {sqMor: 3, chem: 2, fans: -2}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:76"
+ },
+ "Me da igual la clasificación. Si juego a lo mío, los puntos llegarán. Y si no, que me echen.": {
+  "ctx": "{t: N_(\"Me da igual la clasificación. Si juego a lo mío, los puntos llegarán. Y si no, que me echen.\"), fx: {fans: 2, chem: 2, board: -3, rep: 1}, ref: N_(\"Inspirada en Luis Enrique\")},",
+  "where": "press-data.js:77"
+ },
+ "No tengo miedo. He vivido peores momentos. Seguiré dando guerra hasta que nos salvemos o me echen.": {
+  "ctx": "{t: N_(\"No tengo miedo. He vivido peores momentos. Seguiré dando guerra hasta que nos salvemos o me echen.\"), fx: {fans: 3, sqMor: 1, board: -1, rep: -1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:78"
+ },
+ "Hay que ser realistas: estamos mal. Si me preguntan, hacen falta refuerzos. Y los quiero ya.": {
+  "ctx": "{t: N_(\"Hay que ser realistas: estamos mal. Si me preguntan, hacen falta refuerzos. Y los quiero ya.\"), fx: {board: -3, fans: 2, sqMor: 3, rep: 1}, ref: N_(\"Inspirada en Wenger\")}",
+  "where": "press-data.js:79"
+ },
+ "{player} estará varias semanas lesionado. ¿Cómo afecta al equipo?": {
+  "ctx": "{id: \"m12\", ctx: [\"injury\"], q: N_(\"{player} estará varias semanas lesionado. ¿Cómo afecta al equipo?\"),",
+  "where": "press-data.js:81"
+ },
+ "Es una pérdida enorme, pero tenemos un plantel capaz de suplir a cualquiera. Los demás tendrán su oportunidad.": {
+  "ctx": "{t: N_(\"Es una pérdida enorme, pero tenemos un plantel capaz de suplir a cualquiera. Los demás tendrán su oportunidad.\"), fx: {sqMor: 3, chem: 2, fans: -2}, ref: N_(\"Inspirada en Guardiola\")},",
+  "where": "press-data.js:83"
+ },
+ "Inspirada en Guardiola": {
+  "ctx": "{t: N_(\"Es una pérdida enorme, pero tenemos un plantel capaz de suplir a cualquiera. Los demás tendrán su oportunidad.\"), fx: {sqMor: 3, chem: 2, fans: -2}, ref: N_(\"Inspirada en Guardiola\")},",
+  "where": "press-data.js:83 press-data.js:133 press-data.js:226 press-data.js:261"
+ },
+ "Un jugador no hace a un equipo. Y quien crea lo contrario no ha jugado nunca al fútbol.": {
+  "ctx": "{t: N_(\"Un jugador no hace a un equipo. Y quien crea lo contrario no ha jugado nunca al fútbol.\"), fx: {chem: 3, rep: 1, fans: -2, sqMor: -2}, ref: N_(\"Inspirada en Cruyff\")},",
+  "where": "press-data.js:84"
+ },
+ "Es un palo tremendo. Ya estamos pidiendo al club que busque a alguien. Como sea y cuando sea.": {
+  "ctx": "{t: N_(\"Es un palo tremendo. Ya estamos pidiendo al club que busque a alguien. Como sea y cuando sea.\"), fx: {board: -3, fans: 2, sqMor: 2, rep: 1}, ref: N_(\"Inspirada en Wenger\")},",
+  "where": "press-data.js:85"
+ },
+ "No daré más detalles de la lesión. Es información reservada. Que se las arreglen los rivales para averiguarla.": {
+  "ctx": "{t: N_(\"No daré más detalles de la lesión. Es información reservada. Que se las arreglen los rivales para averiguarla.\"), fx: {rep: 2, board: 2, fans: -3, chem: -1}, ref: N_(\"Inspirada en Bielsa\")}",
+  "where": "press-data.js:86"
+ },
+ "Se habla de que otro club le quiere. ¿Se queda en el {club}?": {
+  "ctx": "{id: \"m13\", ctx: [\"rumour\"], q: N_(\"Se habla de que otro club le quiere. ¿Se queda en el {club}?\"),",
+  "where": "press-data.js:88"
+ },
+ "Mi mujer me dice que me quede. Y en casa manda ella. Así que sí, me quedo.": {
+  "ctx": "{t: N_(\"Mi mujer me dice que me quede. Y en casa manda ella. Así que sí, me quedo.\"), fx: {fans: 3, board: 3, rep: -1, sqMor: -1}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:90"
+ },
+ "Hablaré del futuro cuando termine la temporada. Ahora mismo mi única obsesión es el siguiente partido.": {
+  "ctx": "{t: N_(\"Hablaré del futuro cuando termine la temporada. Ahora mismo mi única obsesión es el siguiente partido.\"), fx: {sqMor: 2, board: 1, fans: -3}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:91"
+ },
+ "Soy entrenador. Tengo contrato, pero mañana puedo estar en la calle. Así es esto y no me asusta.": {
+  "ctx": "{t: N_(\"Soy entrenador. Tengo contrato, pero mañana puedo estar en la calle. Así es esto y no me asusta.\"), fx: {rep: 3, chem: 1, board: -2, fans: -1}, ref: N_(\"Inspirada en Wenger\")},",
+  "where": "press-data.js:92"
+ },
+ "Si me ofrecen más dinero y un proyecto ganador, lo escucharé. Los románticos ya no existen.": {
+  "ctx": "{t: N_(\"Si me ofrecen más dinero y un proyecto ganador, lo escucharé. Los románticos ya no existen.\"), fx: {rep: 3, board: -4, fans: -3, sqMor: 1}, ref: N_(\"Inspirada en Mourinho\")}",
+  "where": "press-data.js:93"
+ },
+ "Cinco partidos sin ganar. ¿Siente que peligra su puesto?": {
+  "ctx": "{id: \"m14\", ctx: [\"crisis\"], q: N_(\"Cinco partidos sin ganar. ¿Siente que peligra su puesto?\"),",
+  "where": "press-data.js:95"
+ },
+ "Mi puesto es del club, no mío. Si quieren cambiarlo, ahí está la puerta. Pero antes debemos trabajar.": {
+  "ctx": "{t: N_(\"Mi puesto es del club, no mío. Si quieren cambiarlo, ahí está la puerta. Pero antes debemos trabajar.\"), fx: {board: 2, sqMor: 1, fans: -2, rep: 1}, ref: N_(\"Inspirada en Zidane, 2018\")},",
+  "where": "press-data.js:97"
+ },
+ "Inspirada en Zidane, 2018": {
+  "ctx": "{t: N_(\"Mi puesto es del club, no mío. Si quieren cambiarlo, ahí está la puerta. Pero antes debemos trabajar.\"), fx: {board: 2, sqMor: 1, fans: -2, rep: 1}, ref: N_(\"Inspirada en Zidane, 2018\")},",
+  "where": "press-data.js:97"
+ },
+ "La presión es un privilegio. No te quejes de ella, porque quiere decir que hay algo grande en juego.": {
+  "ctx": "{t: N_(\"La presión es un privilegio. No te quejes de ella, porque quiere decir que hay algo grande en juego.\"), fx: {sqMor: 3, rep: 1, board: -1, fans: -1}, ref: N_(\"Inspirada en Ferguson, 'squeaky bum time'\")},",
+  "where": "press-data.js:98"
+ },
+ "Inspirada en Ferguson, 'squeaky bum time'": {
+  "ctx": "{t: N_(\"La presión es un privilegio. No te quejes de ella, porque quiere decir que hay algo grande en juego.\"), fx: {sqMor: 3, rep: 1, board: -1, fans: -1}, ref: N_(\"Inspirada en Ferguson, 'squeaky bum time'\")},",
+  "where": "press-data.js:98"
+ },
+ "Vamos a cambiar la dinámica. Trabajamos desde esta noche y ya nadie hablará de esto.": {
+  "ctx": "{t: N_(\"Vamos a cambiar la dinámica. Trabajamos desde esta noche y ya nadie hablará de esto.\"), fx: {fans: 3, chem: 1, board: -2, rep: -1}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:99"
+ },
+ "No miro la clasificación. Si pierdo mi puesto, será por hacerlo a mi manera. No tengo otra forma.": {
+  "ctx": "{t: N_(\"No miro la clasificación. Si pierdo mi puesto, será por hacerlo a mi manera. No tengo otra forma.\"), fx: {chem: 3, rep: 2, board: -3, fans: -2}, ref: N_(\"Inspirada en Bielsa\")}",
+  "where": "press-data.js:100"
+ },
+ "¿Cuál es su filosofía de juego?": {
+  "ctx": "{id: \"m15\", ctx: [\"any\"], q: N_(\"¿Cuál es su filosofía de juego?\"),",
+  "where": "press-data.js:102"
+ },
+ "Si tienes la pelota, el rival no puede marcar. El fútbol es así de simple, aunque lo más difícil es jugar simple.": {
+  "ctx": "{t: N_(\"Si tienes la pelota, el rival no puede marcar. El fútbol es así de simple, aunque lo más difícil es jugar simple.\"), fx: {fans: 3, rep: 3, board: -2, sqMor: -1}, ref: N_(\"Inspirada en Cruyff\")},",
+  "where": "press-data.js:104"
+ },
+ "Intensidad, corazón y fútbol de metal. El fútbol bonito me gusta, pero ganar a lo grande me gusta más.": {
+  "ctx": "{t: N_(\"Intensidad, corazón y fútbol de metal. El fútbol bonito me gusta, pero ganar a lo grande me gusta más.\"), fx: {fans: 3, sqMor: 2, rep: -1, chem: -1}, ref: N_(\"Inspirada en Klopp, 'heavy metal football'\")},",
+  "where": "press-data.js:105"
+ },
+ "Inspirada en Klopp, 'heavy metal football'": {
+  "ctx": "{t: N_(\"Intensidad, corazón y fútbol de metal. El fútbol bonito me gusta, pero ganar a lo grande me gusta más.\"), fx: {fans: 3, sqMor: 2, rep: -1, chem: -1}, ref: N_(\"Inspirada en Klopp, 'heavy metal football'\")},",
+  "where": "press-data.js:105"
+ },
+ "Defender bien y salir rápido. Si alguien me dice que es feo, que me enseñe la copa que ha ganado él.": {
+  "ctx": "{t: N_(\"Defender bien y salir rápido. Si alguien me dice que es feo, que me enseñe la copa que ha ganado él.\"), fx: {board: 3, sqMor: 1, fans: -3, rep: -1}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:106"
+ },
+ "Siempre adaptarse al jugador que tienes. No hay una filosofía, hay una plantilla y un rival delante.": {
+  "ctx": "{t: N_(\"Siempre adaptarse al jugador que tienes. No hay una filosofía, hay una plantilla y un rival delante.\"), fx: {rep: 2, chem: 3, fans: -2, board: -1}, ref: N_(\"Inspirada en Ancelotti\")}",
+  "where": "press-data.js:107"
+ },
+ "¿Qué mensaje quiere mandar a la afición del {club}?": {
+  "ctx": "{id: \"m16\", ctx: [\"any\"], q: N_(\"¿Qué mensaje quiere mandar a la afición del {club}?\"),",
+  "where": "press-data.js:109"
+ },
+ "Que crean. Que vengan al campo, que empujen, que sufran con nosotros. Sin ellos no somos nada.": {
+  "ctx": "{t: N_(\"Que crean. Que vengan al campo, que empujen, que sufran con nosotros. Sin ellos no somos nada.\"), fx: {fans: 5, board: 1, rep: -1, sqMor: -1}, ref: N_(\"Inspirada en Simeone, 'Creer'\")},",
+  "where": "press-data.js:111"
+ },
+ "Inspirada en Simeone, 'Creer'": {
+  "ctx": "{t: N_(\"Que crean. Que vengan al campo, que empujen, que sufran con nosotros. Sin ellos no somos nada.\"), fx: {fans: 5, board: 1, rep: -1, sqMor: -1}, ref: N_(\"Inspirada en Simeone, 'Creer'\")},",
+  "where": "press-data.js:111"
+ },
+ "Que tengan paciencia. Esto es un proceso y los procesos llevan tiempo. Si no, que compren un reloj.": {
+  "ctx": "{t: N_(\"Que tengan paciencia. Esto es un proceso y los procesos llevan tiempo. Si no, que compren un reloj.\"), fx: {board: 2, chem: 2, fans: -3, rep: 1}, ref: N_(\"Inspirada en el estilo de Wiegman\")},",
+  "where": "press-data.js:112"
+ },
+ "Inspirada en el estilo de Wiegman": {
+  "ctx": "{t: N_(\"Que tengan paciencia. Esto es un proceso y los procesos llevan tiempo. Si no, que compren un reloj.\"), fx: {board: 2, chem: 2, fans: -3, rep: 1}, ref: N_(\"Inspirada en el estilo de Wiegman\")},",
+  "where": "press-data.js:112"
+ },
+ "Que sepan que lo único que me importa es ganar. Y que si no pierdo yo, perderán otros.": {
+  "ctx": "{t: N_(\"Que sepan que lo único que me importa es ganar. Y que si no pierdo yo, perderán otros.\"), fx: {fans: 3, rep: 2, chem: -2, board: -1}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:113"
+ },
+ "Gracias. Y perdón por adelantado por los próximos errores, que los habrá. Gracias, de verdad.": {
+  "ctx": "{t: N_(\"Gracias. Y perdón por adelantado por los próximos errores, que los habrá. Gracias, de verdad.\"), fx: {fans: 4, sqMor: 1, rep: -2, board: -1}, ref: N_(\"Inspirada en Guardiola, 'I'm sorry'\")}",
+  "where": "press-data.js:114"
+ },
+ "Pierden de nuevo. ¿Se ha plantado en el vestuario?": {
+  "ctx": "{id: \"m17\", ctx: [\"loss\"], q: N_(\"Pierden de nuevo. ¿Se ha plantado en el vestuario?\"),",
+  "where": "press-data.js:116"
+ },
+ "No he gritado ni he roto ninguna taza. Prefiero hablar con ellos uno a uno. Y casi siempre acabo escuchando.": {
+  "ctx": "{t: N_(\"No he gritado ni he roto ninguna taza. Prefiero hablar con ellos uno a uno. Y casi siempre acabo escuchando.\"), fx: {chem: 4, sqMor: 2, fans: -2, board: -1}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:118"
+ },
+ "Hubo secador de pelo. Y un par de platos volando. Pero lo que pasa en el vestuario se queda en el vestuario.": {
+  "ctx": "{t: N_(\"Hubo secador de pelo. Y un par de platos volando. Pero lo que pasa en el vestuario se queda en el vestuario.\"), fx: {sqMor: -3, rep: 2, board: 2, fans: 2}, ref: N_(\"Inspirada en Ferguson, 'hairdryer treatment'\")}",
+  "where": "press-data.js:119"
+ },
+ "Inspirada en Ferguson, 'hairdryer treatment'": {
+  "ctx": "{t: N_(\"Hubo secador de pelo. Y un par de platos volando. Pero lo que pasa en el vestuario se queda en el vestuario.\"), fx: {sqMor: -3, rep: 2, board: 2, fans: 2}, ref: N_(\"Inspirada en Ferguson, 'hairdryer treatment'\")}",
+  "where": "press-data.js:119"
+ },
+ "Les dije que me siguieran o se fueran. Los que se queden estarán conmigo hasta el final, y punto.": {
+  "ctx": "{t: N_(\"Les dije que me siguieran o se fueran. Los que se queden estarán conmigo hasta el final, y punto.\"), fx: {sqMor: 2, chem: -3, fans: 2, board: 1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:120"
+ },
+ "Sin comentarios. Si cada vez que perdemos preguntan por el vestuario, nos quedamos sin vestuario.": {
+  "ctx": "{t: N_(\"Sin comentarios. Si cada vez que perdemos preguntan por el vestuario, nos quedamos sin vestuario.\"), fx: {board: 2, rep: 1, fans: -3, chem: -1}, ref: N_(\"Inspirada en Zidane\")}",
+  "where": "press-data.js:121"
+ },
+ "Inspirada en Zidane": {
+  "ctx": "{t: N_(\"Sin comentarios. Si cada vez que perdemos preguntan por el vestuario, nos quedamos sin vestuario.\"), fx: {board: 2, rep: 1, fans: -3, chem: -1}, ref: N_(\"Inspirada en Zidane\")}",
+  "where": "press-data.js:121 press-data.js:198 press-data.js:237 press-data.js:272"
+ },
+ "Ganan el derbi. ¿A quién dedica la victoria?": {
+  "ctx": "{id: \"m18\", ctx: [\"win\", \"derby\"], q: N_(\"Ganan el derbi. ¿A quién dedica la victoria?\"),",
+  "where": "press-data.js:123"
+ },
+ "A los que han sufrido durante toda la semana. A mi familia, a mi staff y a nadie de la prensa.": {
+  "ctx": "{t: N_(\"A los que han sufrido durante toda la semana. A mi familia, a mi staff y a nadie de la prensa.\"), fx: {chem: 3, sqMor: 3, rep: -2, fans: 1}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:125"
+ },
+ "A los hinchas, a la ciudad y a todos los que dijeron que este equipo no podía. A ellos, de corazón.": {
+  "ctx": "{t: N_(\"A los hinchas, a la ciudad y a todos los que dijeron que este equipo no podía. A ellos, de corazón.\"), fx: {fans: 5, rep: -1, board: -1, sqMor: 1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:126"
+ },
+ "Se la dedico a mí mismo. Hay que ser egoísta para ser feliz en este oficio. Y hoy lo soy mucho.": {
+  "ctx": "{t: N_(\"Se la dedico a mí mismo. Hay que ser egoísta para ser feliz en este oficio. Y hoy lo soy mucho.\"), fx: {rep: 3, fans: 1, chem: -3, board: -1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:127"
+ },
+ "Al fútbol. Hemos jugado bien, hemos ganado y se ha respetado al rival. Es la mejor dedicatoria posible.": {
+  "ctx": "{t: N_(\"Al fútbol. Hemos jugado bien, hemos ganado y se ha respetado al rival. Es la mejor dedicatoria posible.\"), fx: {rep: 3, board: 2, fans: -3, sqMor: -1}, ref: N_(\"Inspirada en Del Bosque\")}",
+  "where": "press-data.js:128"
+ },
+ "¿Qué debe cambiar para evitar otra goleada como esta?": {
+  "ctx": "{id: \"m19\", ctx: [\"bigloss\", \"crisis\"], q: N_(\"¿Qué debe cambiar para evitar otra goleada como esta?\"),",
+  "where": "press-data.js:130"
+ },
+ "Todo. Y lo digo en serio. Desde esta noche vamos a replantearnos hasta la forma de calentar.": {
+  "ctx": "{t: N_(\"Todo. Y lo digo en serio. Desde esta noche vamos a replantearnos hasta la forma de calentar.\"), fx: {chem: -2, fans: 3, sqMor: 1, board: 1}, ref: N_(\"Inspirada en Bielsa\")},",
+  "where": "press-data.js:132"
+ },
+ "Nada. Hay que seguir con lo mismo. Si cambio por una derrota, mañana perderé mi identidad, y ese es mi mayor activo.": {
+  "ctx": "{t: N_(\"Nada. Hay que seguir con lo mismo. Si cambio por una derrota, mañana perderé mi identidad, y ese es mi mayor activo.\"), fx: {sqMor: 3, rep: 2, fans: -3, board: -2}, ref: N_(\"Inspirada en Guardiola\")},",
+  "where": "press-data.js:133"
+ },
+ "Debemos ser más duros atrás y más listos delante. Y más listos en conferencia, ya que estamos.": {
+  "ctx": "{t: N_(\"Debemos ser más duros atrás y más listos delante. Y más listos en conferencia, ya que estamos.\"), fx: {board: 2, fans: 1, rep: -2, chem: 1}, ref: N_(\"Inspirada en Wenger\")},",
+  "where": "press-data.js:134"
+ },
+ "Pregunten a los jugadores. Yo ya les he dicho lo que tengo que decirles, y no ha sido agradable.": {
+  "ctx": "{t: N_(\"Pregunten a los jugadores. Yo ya les he dicho lo que tengo que decirles, y no ha sido agradable.\"), fx: {board: 1, rep: 1, chem: -4, sqMor: -2, fans: 1}, ref: N_(\"Inspirada en Ferguson\")}",
+  "where": "press-data.js:135"
+ },
+ "Empate y el liderato se escapa. ¿Pesa la presión?": {
+  "ctx": "{id: \"m20\", ctx: [\"draw\", \"title\"], q: N_(\"Empate y el liderato se escapa. ¿Pesa la presión?\"),",
+  "where": "press-data.js:137"
+ },
+ "Presión es lo que sienten los que no tienen trabajo. Nosotros tenemos un partido, y es el siguiente.": {
+  "ctx": "{t: N_(\"Presión es lo que sienten los que no tienen trabajo. Nosotros tenemos un partido, y es el siguiente.\"), fx: {sqMor: 3, chem: 1, fans: -2}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:139"
+ },
+ "Claro que pesa. Pero me gusta que pese; es señal de que estamos donde queremos estar.": {
+  "ctx": "{t: N_(\"Claro que pesa. Pero me gusta que pese; es señal de que estamos donde queremos estar.\"), fx: {fans: 2, rep: 2, board: -1, sqMor: -2}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:140"
+ },
+ "No miro lo que hacen los demás. Miro a mis jugadores y a su cara, y su cara me dice que vamos bien.": {
+  "ctx": "{t: N_(\"No miro lo que hacen los demás. Miro a mis jugadores y a su cara, y su cara me dice que vamos bien.\"), fx: {chem: 3, sqMor: 2, fans: -2, board: -1}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:141"
+ },
+ "Nadie nos regala nada. Nos han empatado porque no hemos sido letales. Y los letales ganan títulos.": {
+  "ctx": "{t: N_(\"Nadie nos regala nada. Nos han empatado porque no hemos sido letales. Y los letales ganan títulos.\"), fx: {board: 2, fans: 1, sqMor: -3, rep: 1}, ref: N_(\"Inspirada en el estilo de Wenger\")}",
+  "where": "press-data.js:142"
+ },
+ "Inspirada en el estilo de Wenger": {
+  "ctx": "{t: N_(\"Nadie nos regala nada. Nos han empatado porque no hemos sido letales. Y los letales ganan títulos.\"), fx: {board: 2, fans: 1, sqMor: -3, rep: 1}, ref: N_(\"Inspirada en el estilo de Wenger\")}",
+  "where": "press-data.js:142"
+ },
+ "¡Campeones! ¿Qué siente en este momento?": {
+  "ctx": "{id: \"m21\", ctx: [\"final\", \"win\"], q: N_(\"¡Campeones! ¿Qué siente en este momento?\"),",
+  "where": "press-data.js:144"
+ },
+ "Ahora sí. Pero no preguntéis por la próxima, que mi lugar favorito es el banquillo de al lado, con los suplentes.": {
+  "ctx": "{t: N_(\"Ahora sí. Pero no preguntéis por la próxima, que mi lugar favorito es el banquillo de al lado, con los suplentes.\"), fx: {fans: 4, chem: 3, rep: -1, board: -1}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:146"
+ },
+ "Hoy no habrá comentarios, solo cervezas. Y las pagan los que dudaron de nosotros desde agosto.": {
+  "ctx": "{t: N_(\"Hoy no habrá comentarios, solo cervezas. Y las pagan los que dudaron de nosotros desde agosto.\"), fx: {fans: 4, sqMor: 2, rep: -2, board: -1}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:147"
+ },
+ "Un título es un título. Mañana nos lo habremos olvidado y empezamos a trabajar, que de eso se trata.": {
+  "ctx": "{t: N_(\"Un título es un título. Mañana nos lo habremos olvidado y empezamos a trabajar, que de eso se trata.\"), fx: {board: 3, rep: 2, fans: -3, sqMor: -1}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:148"
+ },
+ "Esto es para quienes no creyeron y para los que sí. Y para un servidor, que lo merecía como nadie.": {
+  "ctx": "{t: N_(\"Esto es para quienes no creyeron y para los que sí. Y para un servidor, que lo merecía como nadie.\"), fx: {rep: 4, fans: 2, chem: -3, board: -1}, ref: N_(\"Inspirada en Mourinho, 'Special One'\")}",
+  "where": "press-data.js:149"
+ },
+ "Inspirada en Mourinho, 'Special One'": {
+  "ctx": "{t: N_(\"Esto es para quienes no creyeron y para los que sí. Y para un servidor, que lo merecía como nadie.\"), fx: {rep: 4, fans: 2, chem: -3, board: -1}, ref: N_(\"Inspirada en Mourinho, 'Special One'\")}",
+  "where": "press-data.js:149"
+ },
+ "Perdieron la final. ¿Qué le dice a los aficionados?": {
+  "ctx": "{id: \"m22\", ctx: [\"final\", \"loss\"], q: N_(\"Perdieron la final. ¿Qué le dice a los aficionados?\"),",
+  "where": "press-data.js:151"
+ },
+ "Que gracias por todo. Hemos perdido, pero hemos competido con orgullo. Las finales se pierden cuando se juegan.": {
+  "ctx": "{t: N_(\"Que gracias por todo. Hemos perdido, pero hemos competido con orgullo. Las finales se pierden cuando se juegan.\"), fx: {fans: 4, sqMor: 2, rep: -2, board: -2}, ref: N_(\"Inspirada en Del Bosque\")},",
+  "where": "press-data.js:153"
+ },
+ "Que no se hundan. Nosotros tampoco. Mañana volvemos a levantarnos, aunque sea con la cabeza como un bombo.": {
+  "ctx": "{t: N_(\"Que no se hundan. Nosotros tampoco. Mañana volvemos a levantarnos, aunque sea con la cabeza como un bombo.\"), fx: {sqMor: 3, chem: 2, fans: -1, board: -1}, ref: N_(\"Inspirada en Klopp\")},",
+  "where": "press-data.js:154"
+ },
+ "Inspirada en Klopp": {
+  "ctx": "{t: N_(\"Que no se hundan. Nosotros tampoco. Mañana volvemos a levantarnos, aunque sea con la cabeza como un bombo.\"), fx: {sqMor: 3, chem: 2, fans: -1, board: -1}, ref: N_(\"Inspirada en Klopp\")},",
+  "where": "press-data.js:154 press-data.js:163 press-data.js:169 press-data.js:195"
+ },
+ "Que no me pidan explicaciones de una final perdida. Hace falta un poco de suerte, y hoy no la teníamos.": {
+  "ctx": "{t: N_(\"Que no me pidan explicaciones de una final perdida. Hace falta un poco de suerte, y hoy no la teníamos.\"), fx: {board: 2, rep: 1, fans: -3, sqMor: -1}, ref: N_(\"Inspirada en Wenger\")},",
+  "where": "press-data.js:155"
+ },
+ "Es culpa mía, y solo mía. Una semana a oscuras para reflexionar. Que nadie más cargue con esto.": {
+  "ctx": "{t: N_(\"Es culpa mía, y solo mía. Una semana a oscuras para reflexionar. Que nadie más cargue con esto.\"), fx: {chem: 4, sqMor: 3, board: -3, rep: -2}, ref: N_(\"Inspirada en el estilo de Guardiola\")}",
+  "where": "press-data.js:156"
+ },
+ "{player} se enzarzó en una pelea en pleno campo. ¿Lo sancionará?": {
+  "ctx": "{id: \"m23\", ctx: [\"controversy\"], q: N_(\"{player} se enzarzó en una pelea en pleno campo. ¿Lo sancionará?\"),",
+  "where": "press-data.js:158"
+ },
+ "Lo que pasa en el campo se queda en el campo. Pero a él le voy a poner una multa que le dolerá.": {
+  "ctx": "{t: N_(\"Lo que pasa en el campo se queda en el campo. Pero a él le voy a poner una multa que le dolerá.\"), fx: {chem: 2, board: 2, sqMor: -3, fans: -1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:160"
+ },
+ "No lo vi. Y si lo vi, no era tan grave. El otro empezó, seguro. Pregunten al otro.": {
+  "ctx": "{t: N_(\"No lo vi. Y si lo vi, no era tan grave. El otro empezó, seguro. Pregunten al otro.\"), fx: {sqMor: 3, fans: 2, rep: -3, board: -2}, ref: N_(\"Inspirada en Wenger, 'I did not see it'\")},",
+  "where": "press-data.js:161"
+ },
+ "Lo defiendo hasta las últimas consecuencias. Es mi jugador y se juega la vida por este escudo.": {
+  "ctx": "{t: N_(\"Lo defiendo hasta las últimas consecuencias. Es mi jugador y se juega la vida por este escudo.\"), fx: {sqMor: 4, chem: 3, rep: -3, board: -3}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:162"
+ },
+ "Hablaré con él en privado. Aquí en público solo digo que no representa los valores de este club.": {
+  "ctx": "{t: N_(\"Hablaré con él en privado. Aquí en público solo digo que no representa los valores de este club.\"), fx: {rep: 3, board: 3, sqMor: -4, chem: -2}, ref: N_(\"Inspirada en Klopp\")}",
+  "where": "press-data.js:163"
+ },
+ "Le han multado por sus declaraciones sobre el arbitraje. ¿Se arrepiente?": {
+  "ctx": "{id: \"m24\", ctx: [\"controversy\"], q: N_(\"Le han multado por sus declaraciones sobre el arbitraje. ¿Se arrepiente?\"),",
+  "where": "press-data.js:165"
+ },
+ "Me arrepiento de pagar. Lo dicho, dicho está. Y si hace falta, lo repito, que me sale barato.": {
+  "ctx": "{t: N_(\"Me arrepiento de pagar. Lo dicho, dicho está. Y si hace falta, lo repito, que me sale barato.\"), fx: {fans: 4, sqMor: 2, board: -3, rep: -2}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:167"
+ },
+ "Yo no he dicho nada ofensivo. He dicho lo que todos piensan. Y a mí me caen las multas por pensar en voz alta.": {
+  "ctx": "{t: N_(\"Yo no he dicho nada ofensivo. He dicho lo que todos piensan. Y a mí me caen las multas por pensar en voz alta.\"), fx: {fans: 3, rep: -2, board: -1, chem: 1}, ref: N_(\"Inspirada en Luis Enrique\")},",
+  "where": "press-data.js:168"
+ },
+ "Pido disculpas. Me dejé llevar por la emoción. No volverá a pasar, aunque soy de los que repiten.": {
+  "ctx": "{t: N_(\"Pido disculpas. Me dejé llevar por la emoción. No volverá a pasar, aunque soy de los que repiten.\"), fx: {rep: 3, board: 3, fans: -3, sqMor: -2}, ref: N_(\"Inspirada en Klopp\")},",
+  "where": "press-data.js:169"
+ },
+ "Esta es mi gente y es mi equipo. Si por defenderlos me multan, que me multen cien veces.": {
+  "ctx": "{t: N_(\"Esta es mi gente y es mi equipo. Si por defenderlos me multan, que me multen cien veces.\"), fx: {fans: 3, sqMor: 3, board: -2, rep: -2}, ref: N_(\"Inspirada en Simeone\")}",
+  "where": "press-data.js:170"
+ },
+ "{player} quiere salir del club. ¿Lo venderá?": {
+  "ctx": "{id: \"m25\", ctx: [\"rumour\"], q: N_(\"{player} quiere salir del club. ¿Lo venderá?\"),",
+  "where": "press-data.js:172"
+ },
+ "Aquí nadie es imprescindible. Si quiere irse, que se vaya, pero con la maleta y por la puerta de atrás.": {
+  "ctx": "{t: N_(\"Aquí nadie es imprescindible. Si quiere irse, que se vaya, pero con la maleta y por la puerta de atrás.\"), fx: {board: 2, chem: -4, sqMor: -2, fans: 1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:174"
+ },
+ "Solo se va quien yo quiero que se vaya. Y {player} es un jugador que siempre querré tener en mi equipo.": {
+  "ctx": "{t: N_(\"Solo se va quien yo quiero que se vaya. Y {player} es un jugador que siempre querré tener en mi equipo.\"), fx: {sqMor: 3, chem: 3, board: -2, rep: -1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:175"
+ },
+ "Hablaré con él cara a cara. Si de verdad no es feliz, buscaremos una solución que nos convenga a ambos.": {
+  "ctx": "{t: N_(\"Hablaré con él cara a cara. Si de verdad no es feliz, buscaremos una solución que nos convenga a ambos.\"), fx: {rep: 2, chem: 2, board: -1, fans: -3}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:176"
+ },
+ "Nadie me ha dicho nada. Me enteré por la prensa, como vosotros. Aquí hay mucho humo y poco fuego.": {
+  "ctx": "{t: N_(\"Nadie me ha dicho nada. Me enteré por la prensa, como vosotros. Aquí hay mucho humo y poco fuego.\"), fx: {fans: 2, board: 1, rep: -2, sqMor: -2}, ref: N_(\"Inspirada en Wenger\")}",
+  "where": "press-data.js:177"
+ },
+ "{player} sufre una lesión grave tras una entrada del {opp}. ¿Culpa al rival?": {
+  "ctx": "{id: \"m26\", ctx: [\"injury\", \"controversy\"], q: N_(\"{player} sufre una lesión grave tras una entrada del {opp}. ¿Culpa al rival?\"),",
+  "where": "press-data.js:179"
+ },
+ "No señalo a nadie. Pero si hubiera más justicia, la entrada merecería algo más que una tarjeta amarilla.": {
+  "ctx": "{t: N_(\"No señalo a nadie. Pero si hubiera más justicia, la entrada merecería algo más que una tarjeta amarilla.\"), fx: {fans: 3, sqMor: 3, rep: -2, board: -1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:181"
+ },
+ "El fútbol es duro, ya lo sabemos. No hay mala intención. Le deseo un pronto regreso a mi jugador.": {
+  "ctx": "{t: N_(\"El fútbol es duro, ya lo sabemos. No hay mala intención. Le deseo un pronto regreso a mi jugador.\"), fx: {rep: 4, board: 2, fans: -3, sqMor: -2}, ref: N_(\"Inspirada en Del Bosque\")},",
+  "where": "press-data.js:182"
+ },
+ "El fútbol que me gusta es el del balón, no el de los tobillos. Pero hoy no tengo ganas de hablar de eso.": {
+  "ctx": "{t: N_(\"El fútbol que me gusta es el del balón, no el de los tobillos. Pero hoy no tengo ganas de hablar de eso.\"), fx: {chem: 2, rep: 2, fans: -2, board: -1}, ref: N_(\"Inspirada en Cruyff\")},",
+  "where": "press-data.js:183"
+ },
+ "Voy a pedir explicaciones oficiales a la liga. El que arriesga la salud de un compañero tiene que pagar.": {
+  "ctx": "{t: N_(\"Voy a pedir explicaciones oficiales a la liga. El que arriesga la salud de un compañero tiene que pagar.\"), fx: {fans: 3, board: 3, rep: -3, chem: 1}, ref: N_(\"Inspirada en Bielsa\")}",
+  "where": "press-data.js:184"
+ },
+ "Victoria vital en la lucha por la permanencia. ¿Están salvados?": {
+  "ctx": "{id: \"m27\", ctx: [\"relegation\", \"win\"], q: N_(\"Victoria vital en la lucha por la permanencia. ¿Están salvados?\"),",
+  "where": "press-data.js:186"
+ },
+ "Hasta que las matemáticas no lo digan, no. Nos quedan partidos, y los voy a jugar con el cuchillo entre los dientes.": {
+  "ctx": "{t: N_(\"Hasta que las matemáticas no lo digan, no. Nos quedan partidos, y los voy a jugar con el cuchillo entre los dientes.\"), fx: {sqMor: 2, chem: 2, fans: -2, board: 1}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:188"
+ },
+ "Hoy, un poquito más cerca. Lo que no ganamos es el aplauso: eso lo reservo para el final de temporada.": {
+  "ctx": "{t: N_(\"Hoy, un poquito más cerca. Lo que no ganamos es el aplauso: eso lo reservo para el final de temporada.\"), fx: {fans: 3, sqMor: 2, rep: -1, board: -1}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:189"
+ },
+ "No miro la clasificación. Miro a mis jugadores, que tienen el corazón de un campeón.": {
+  "ctx": "{t: N_(\"No miro la clasificación. Miro a mis jugadores, que tienen el corazón de un campeón.\"), fx: {sqMor: 3, chem: 2, board: -1, fans: -1}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:190"
+ },
+ "Queda mucho. Pero que quede claro que este es el mejor trabajo de mi vida, y lo digo con orgullo.": {
+  "ctx": "{t: N_(\"Queda mucho. Pero que quede claro que este es el mejor trabajo de mi vida, y lo digo con orgullo.\"), fx: {rep: 3, board: 2, chem: -3, fans: 1}, ref: N_(\"Inspirada en Ferguson\")}",
+  "where": "press-data.js:191"
+ },
+ "Cada vez más cerca del descenso. ¿Qué le dice al vestuario?": {
+  "ctx": "{id: \"m28\", ctx: [\"relegation\", \"loss\", \"crisis\"], q: N_(\"Cada vez más cerca del descenso. ¿Qué le dice al vestuario?\"),",
+  "where": "press-data.js:193"
+ },
+ "Les digo que nadie nos regalará nada. Y que esta situación nos pertenece a todos, empezando por mí.": {
+  "ctx": "{t: N_(\"Les digo que nadie nos regalará nada. Y que esta situación nos pertenece a todos, empezando por mí.\"), fx: {chem: 3, sqMor: 3, fans: -2, board: -2}, ref: N_(\"Inspirada en Klopp\")},",
+  "where": "press-data.js:195"
+ },
+ "Les digo que mañana, entrenamiento a las 7. El que no esté, que busque equipo.": {
+  "ctx": "{t: N_(\"Les digo que mañana, entrenamiento a las 7. El que no esté, que busque equipo.\"), fx: {board: 3, sqMor: -3, chem: -2, fans: 2}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:196"
+ },
+ "Les digo que sonrían. Un equipo que sufre sin disfrutar ya ha perdido. Por lo menos disfrutemos.": {
+  "ctx": "{t: N_(\"Les digo que sonrían. Un equipo que sufre sin disfrutar ya ha perdido. Por lo menos disfrutemos.\"), fx: {chem: 3, fans: 1, board: -2, sqMor: 1, rep: -1}, ref: N_(\"Inspirada en Cruyff\")},",
+  "where": "press-data.js:197"
+ },
+ "Nada. Prefiero el silencio. A veces las palabras sobran y hay que dejar que hable el trabajo.": {
+  "ctx": "{t: N_(\"Nada. Prefiero el silencio. A veces las palabras sobran y hay que dejar que hable el trabajo.\"), fx: {rep: 2, board: 1, fans: -3, sqMor: -2}, ref: N_(\"Inspirada en Zidane\")}",
+  "where": "press-data.js:198"
+ },
+ "Pierden y el título se complica. ¿Sigue vivo el sueño?": {
+  "ctx": "{id: \"m29\", ctx: [\"title\", \"loss\"], q: N_(\"Pierden y el título se complica. ¿Sigue vivo el sueño?\"),",
+  "where": "press-data.js:200"
+ },
+ "Vivo, vivísimo. Aún quedan jornadas, y yo he visto cosas mucho más raras en mis años de oficio.": {
+  "ctx": "{t: N_(\"Vivo, vivísimo. Aún quedan jornadas, y yo he visto cosas mucho más raras en mis años de oficio.\"), fx: {fans: 3, sqMor: 2, rep: -1, board: -2}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:202"
+ },
+ "Un título no se pierde en una tarde. Se pierde en una semana de mala cabeza. Y de eso hoy tenemos poco.": {
+  "ctx": "{t: N_(\"Un título no se pierde en una tarde. Se pierde en una semana de mala cabeza. Y de eso hoy tenemos poco.\"), fx: {board: 2, rep: 2, fans: -2, sqMor: -2}, ref: N_(\"Inspirada en Wenger\")},",
+  "where": "press-data.js:203"
+ },
+ "Yo he ganado campeonatos perdiendo partidos peores. La liga es de resistencia, no de velocidad.": {
+  "ctx": "{t: N_(\"Yo he ganado campeonatos perdiendo partidos peores. La liga es de resistencia, no de velocidad.\"), fx: {sqMor: 3, chem: 1, fans: -2, board: -1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:204"
+ },
+ "Si alguien quiere abandonar el barco, que lo haga ahora. A los que se queden les prometo tormenta y gloria.": {
+  "ctx": "{t: N_(\"Si alguien quiere abandonar el barco, que lo haga ahora. A los que se queden les prometo tormenta y gloria.\"), fx: {chem: -3, sqMor: 2, fans: 4, rep: 1}, ref: N_(\"Inspirada en Klopp\")}",
+  "where": "press-data.js:205"
+ },
+ "La prensa dice que el vestuario está dividido. ¿Es cierto?": {
+  "ctx": "{id: \"m30\", ctx: [\"crisis\", \"any\"], q: N_(\"La prensa dice que el vestuario está dividido. ¿Es cierto?\"),",
+  "where": "press-data.js:207"
+ },
+ "Hay un vestuario unido, y un periodista dividido. Desde luego no es el mío el que tiene problemas.": {
+  "ctx": "{t: N_(\"Hay un vestuario unido, y un periodista dividido. Desde luego no es el mío el que tiene problemas.\"), fx: {sqMor: 3, chem: 2, rep: -3, fans: 1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:209"
+ },
+ "Hay problemas, como en todas las casas. Pero los resolvemos en familia, no aquí delante de las cámaras.": {
+  "ctx": "{t: N_(\"Hay problemas, como en todas las casas. Pero los resolvemos en familia, no aquí delante de las cámaras.\"), fx: {chem: 3, board: 2, fans: -3, rep: 1}, ref: N_(\"Inspirada en Del Bosque\")},",
+  "where": "press-data.js:210"
+ },
+ "En el vestuario se discute y se grita. Y eso es bueno. Mala señal sería que nadie se atreviera a alzar la voz.": {
+  "ctx": "{t: N_(\"En el vestuario se discute y se grita. Y eso es bueno. Mala señal sería que nadie se atreviera a alzar la voz.\"), fx: {chem: -2, sqMor: 2, fans: 2, rep: 1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:211"
+ },
+ "¿Dividido? Si lo estuviera, lo sabría. Solo sé que tengo 25 jugadores y todos quieren jugar. Ese es el problema.": {
+  "ctx": "{t: N_(\"¿Dividido? Si lo estuviera, lo sabría. Solo sé que tengo 25 jugadores y todos quieren jugar. Ese es el problema.\"), fx: {rep: 2, fans: 1, sqMor: -3, chem: 1}, ref: N_(\"Inspirada en Ancelotti\")}",
+  "where": "press-data.js:212"
+ },
+ "Pierden el derbi en casa. ¿Qué le dice a la afición?": {
+  "ctx": "{id: \"m31\", ctx: [\"derby\", \"loss\"], q: N_(\"Pierden el derbi en casa. ¿Qué le dice a la afición?\"),",
+  "where": "press-data.js:214"
+ },
+ "Perdón. Perdón por no estar a la altura de este escudo y de su gente. No volverá a ocurrir.": {
+  "ctx": "{t: N_(\"Perdón. Perdón por no estar a la altura de este escudo y de su gente. No volverá a ocurrir.\"), fx: {fans: 4, sqMor: 1, board: -2, rep: -2}, ref: N_(\"Inspirada en Guardiola, 'I'm sorry'\")},",
+  "where": "press-data.js:216"
+ },
+ "Que no pierdan la fe. Un derbi se pierde, pero la temporada es larga. Ya les devolveremos la sonrisa.": {
+  "ctx": "{t: N_(\"Que no pierdan la fe. Un derbi se pierde, pero la temporada es larga. Ya les devolveremos la sonrisa.\"), fx: {fans: 3, sqMor: 2, rep: -1, board: -1}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:217"
+ },
+ "Que miren el marcador: está claro. Pero también que miren el juego: nos merecimos más. El fútbol a veces es injusto.": {
+  "ctx": "{t: N_(\"Que miren el marcador: está claro. Pero también que miren el juego: nos merecimos más. El fútbol a veces es injusto.\"), fx: {chem: 2, rep: 1, fans: -2, board: -1}, ref: N_(\"Inspirada en Cruyff\")},",
+  "where": "press-data.js:218"
+ },
+ "No hay excusas. Ellos fueron mejores, y punto. Ahora toca levantarse y demostrar de qué estamos hechos.": {
+  "ctx": "{t: N_(\"No hay excusas. Ellos fueron mejores, y punto. Ahora toca levantarse y demostrar de qué estamos hechos.\"), fx: {rep: 2, board: 2, sqMor: -2, fans: -1}, ref: N_(\"Inspirada en Klopp\")}",
+  "where": "press-data.js:219"
+ },
+ "Goleada y liderato. ¿Hay un rival capaz de pararlos?": {
+  "ctx": "{id: \"m32\", ctx: [\"bigwin\", \"title\"], q: N_(\"Goleada y liderato. ¿Hay un rival capaz de pararlos?\"),",
+  "where": "press-data.js:221"
+ },
+ "Sí, nosotros mismos. El mayor peligro de un equipo grande es creerse invencible. Y yo no se lo permitiré.": {
+  "ctx": "{t: N_(\"Sí, nosotros mismos. El mayor peligro de un equipo grande es creerse invencible. Y yo no se lo permitiré.\"), fx: {board: 3, sqMor: 1, fans: -2, rep: 1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:223"
+ },
+ "Eso nos encantaría saberlo. Ven a vernos jugar, y si encuentras algo, me avisas.": {
+  "ctx": "{t: N_(\"Eso nos encantaría saberlo. Ven a vernos jugar, y si encuentras algo, me avisas.\"), fx: {fans: 4, rep: 2, chem: -2, board: -1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:224"
+ },
+ "Invencibles no hay. Pero con este fútbol, perder será más difícil que ganar. Ya lo hicimos una vez.": {
+  "ctx": "{t: N_(\"Invencibles no hay. Pero con este fútbol, perder será más difícil que ganar. Ya lo hicimos una vez.\"), fx: {fans: 3, rep: 3, sqMor: -2, board: -1}, ref: N_(\"Inspirada en Wenger, 'los Invencibles'\")},",
+  "where": "press-data.js:225"
+ },
+ "Inspirada en Wenger, 'los Invencibles'": {
+  "ctx": "{t: N_(\"Invencibles no hay. Pero con este fútbol, perder será más difícil que ganar. Ya lo hicimos una vez.\"), fx: {fans: 3, rep: 3, sqMor: -2, board: -1}, ref: N_(\"Inspirada en Wenger, 'los Invencibles'\")},",
+  "where": "press-data.js:225"
+ },
+ "Hay cien equipos capaces. Y mañana, en la radio, algún ex jugador dirá que somos aburridos.": {
+  "ctx": "{t: N_(\"Hay cien equipos capaces. Y mañana, en la radio, algún ex jugador dirá que somos aburridos.\"), fx: {rep: 2, chem: 2, fans: -2, board: -1}, ref: N_(\"Inspirada en Guardiola\")}",
+  "where": "press-data.js:226"
+ },
+ "¿Qué ha cambiado respecto al partido anterior?": {
+  "ctx": "{id: \"m33\", ctx: [\"win\", \"any\"], q: N_(\"¿Qué ha cambiado respecto al partido anterior?\"),",
+  "where": "press-data.js:228"
+ },
+ "Nada. Seguimos igual, con el mismo trabajo. A veces el fútbol te da lo que antes te quitó.": {
+  "ctx": "{t: N_(\"Nada. Seguimos igual, con el mismo trabajo. A veces el fútbol te da lo que antes te quitó.\"), fx: {sqMor: 2, chem: 2, rep: -1, fans: -1}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:230"
+ },
+ "Hablé con ellos, les puse un vídeo de hace tres años y todo el mundo lloró. Ya veis, así de fácil.": {
+  "ctx": "{t: N_(\"Hablé con ellos, les puse un vídeo de hace tres años y todo el mundo lloró. Ya veis, así de fácil.\"), fx: {chem: 3, sqMor: 2, rep: -2, board: -1}, ref: N_(\"Inspirada en Klopp\")},",
+  "where": "press-data.js:231"
+ },
+ "Hemos cambiado el sistema. Me encanta cuando la prensa se da cuenta de que no soy un dogmático.": {
+  "ctx": "{t: N_(\"Hemos cambiado el sistema. Me encanta cuando la prensa se da cuenta de que no soy un dogmático.\"), fx: {rep: 3, fans: 1, chem: -2, board: 1}, ref: N_(\"Inspirada en Bielsa\")},",
+  "where": "press-data.js:232"
+ },
+ "Hemos tenido suerte. Hay que decirlo: a veces ganas y no sabes por qué. Disfrutemos antes de que cambie.": {
+  "ctx": "{t: N_(\"Hemos tenido suerte. Hay que decirlo: a veces ganas y no sabes por qué. Disfrutemos antes de que cambie.\"), fx: {fans: 3, rep: 1, sqMor: -2, board: -1}, ref: N_(\"Inspirada en Luis Aragonés\")}",
+  "where": "press-data.js:233"
+ },
+ "¿Cómo definiría su relación con la directiva del {club}?": {
+  "ctx": "{id: \"m34\", ctx: [\"any\"], q: N_(\"¿Cómo definiría su relación con la directiva del {club}?\"),",
+  "where": "press-data.js:235"
+ },
+ "Excelente. Hablamos todos los días, nos entendemos con una mirada. Y no, no estoy amenazado.": {
+  "ctx": "{t: N_(\"Excelente. Hablamos todos los días, nos entendemos con una mirada. Y no, no estoy amenazado.\"), fx: {board: 4, fans: -2, rep: -1, sqMor: 1}, ref: N_(\"Inspirada en Zidane\")},",
+  "where": "press-data.js:237"
+ },
+ "Hay respeto mutuo, pero cada uno mira por su cartera. Yo la mía y ellos la suya.": {
+  "ctx": "{t: N_(\"Hay respeto mutuo, pero cada uno mira por su cartera. Yo la mía y ellos la suya.\"), fx: {rep: 2, board: -2, fans: 2, chem: 1}, ref: N_(\"Inspirada en Wenger\")},",
+  "where": "press-data.js:238"
+ },
+ "Complicada. Dicen que no tienen dinero, pero luego compran un hotel. Dejémoslo ahí.": {
+  "ctx": "{t: N_(\"Complicada. Dicen que no tienen dinero, pero luego compran un hotel. Dejémoslo ahí.\"), fx: {fans: 4, sqMor: 2, board: -5, rep: 1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:239"
+ },
+ "Soy un trabajador del club. Hago lo que me piden y ellos hacen lo suyo. Así de sencillo.": {
+  "ctx": "{t: N_(\"Soy un trabajador del club. Hago lo que me piden y ellos hacen lo suyo. Así de sencillo.\"), fx: {board: 2, rep: 1, fans: -3, sqMor: -1}, ref: N_(\"Inspirada en Del Bosque\")}",
+  "where": "press-data.js:240"
+ },
+ "Un periódico dice que usted ha pedido fichajes y le han dicho que no.": {
+  "ctx": "{id: \"m35\", ctx: [\"rumour\", \"any\"], q: N_(\"Un periódico dice que usted ha pedido fichajes y le han dicho que no.\"),",
+  "where": "press-data.js:242"
+ },
+ "Con lo que tengo, voy a pelear. Y si ganamos, que nadie me pregunte por fichajes. Y si perdemos, tampoco.": {
+  "ctx": "{t: N_(\"Con lo que tengo, voy a pelear. Y si ganamos, que nadie me pregunte por fichajes. Y si perdemos, tampoco.\"), fx: {sqMor: 3, board: 2, fans: -2, rep: -1}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:244"
+ },
+ "Quiero un equipo competitivo. Y no estoy dispuesto a mentir: lo que tenemos no basta para pelear por todo.": {
+  "ctx": "{t: N_(\"Quiero un equipo competitivo. Y no estoy dispuesto a mentir: lo que tenemos no basta para pelear por todo.\"), fx: {fans: 3, sqMor: 1, board: -4, rep: 1}, ref: N_(\"Inspirada en Wenger\")},",
+  "where": "press-data.js:245"
+ },
+ "Si quiero a un jugador, se lo digo al club y ya está. Lo que sea, pero no lo cuento en la rueda de prensa.": {
+  "ctx": "{t: N_(\"Si quiero a un jugador, se lo digo al club y ya está. Lo que sea, pero no lo cuento en la rueda de prensa.\"), fx: {board: 3, rep: 2, fans: -3, chem: 1}, ref: N_(\"Inspirada en Ancelotti\")},",
+  "where": "press-data.js:246"
+ },
+ "Es mentira. Lo que he pedido es que el hotel tenga mejor café. Eso sí lo he pedido, y con insistencia.": {
+  "ctx": "{t: N_(\"Es mentira. Lo que he pedido es que el hotel tenga mejor café. Eso sí lo he pedido, y con insistencia.\"), fx: {fans: 2, rep: 2, board: -1, chem: -1}, ref: N_(\"Inspirada en Klopp\")}",
+  "where": "press-data.js:247"
+ },
+ "Un penalti dudoso en el último minuto les cuesta la victoria. ¿Qué opina?": {
+  "ctx": "{id: \"m36\", ctx: [\"draw\", \"controversy\"], q: N_(\"Un penalti dudoso en el último minuto les cuesta la victoria. ¿Qué opina?\"),",
+  "where": "press-data.js:249"
+ },
+ "Es el fútbol moderno. Con 30 cámaras no hay manera de decidir si es penalti. Con cero cámaras era más fácil.": {
+  "ctx": "{t: N_(\"Es el fútbol moderno. Con 30 cámaras no hay manera de decidir si es penalti. Con cero cámaras era más fácil.\"), fx: {rep: 2, fans: 2, board: 1, sqMor: -1}, ref: N_(\"Inspirada en Wenger\")},",
+  "where": "press-data.js:251"
+ },
+ "No hablo de árbitros, pero me preguntaría quién designa a quién y con qué criterios. Eso que lo piensen otros.": {
+  "ctx": "{t: N_(\"No hablo de árbitros, pero me preguntaría quién designa a quién y con qué criterios. Eso que lo piensen otros.\"), fx: {fans: 4, sqMor: 2, rep: -3, board: -2}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:252"
+ },
+ "Hay que aceptar las decisiones. Hemos tenido ocasiones para cerrar el partido antes y no lo hicimos.": {
+  "ctx": "{t: N_(\"Hay que aceptar las decisiones. Hemos tenido ocasiones para cerrar el partido antes y no lo hicimos.\"), fx: {rep: 3, board: 2, fans: -3, sqMor: -2}, ref: N_(\"Inspirada en Del Bosque\")},",
+  "where": "press-data.js:253"
+ },
+ "Yo ni lo vi. Ni el penalti ni el árbitro. Estaba concentrado en el partido, como corresponde.": {
+  "ctx": "{t: N_(\"Yo ni lo vi. Ni el penalti ni el árbitro. Estaba concentrado en el partido, como corresponde.\"), fx: {chem: 2, fans: 1, rep: -1, board: -1}, ref: N_(\"Inspirada en Wenger, 'I did not see it'\")}",
+  "where": "press-data.js:254"
+ },
+ "Con tantas bajas, ¿es excusa para los malos resultados?": {
+  "ctx": "{id: \"m37\", ctx: [\"injury\", \"crisis\"], q: N_(\"Con tantas bajas, ¿es excusa para los malos resultados?\"),",
+  "where": "press-data.js:256"
+ },
+ "Excusa, no. Pero verdad, sí. Con diez lesionados y los mismos veintidós convocados no se hacen milagros.": {
+  "ctx": "{t: N_(\"Excusa, no. Pero verdad, sí. Con diez lesionados y los mismos veintidós convocados no se hacen milagros.\"), fx: {fans: 3, sqMor: 2, board: -2, rep: -1}, ref: N_(\"Inspirada en Klopp\")},",
+  "where": "press-data.js:258"
+ },
+ "No hablo de bajas. Quien juega, juega, y el que no está, no existe. Esto es fútbol, no una enfermería.": {
+  "ctx": "{t: N_(\"No hablo de bajas. Quien juega, juega, y el que no está, no existe. Esto es fútbol, no una enfermería.\"), fx: {board: 3, chem: 1, sqMor: -2, fans: -1}, ref: N_(\"Inspirada en Simeone\")},",
+  "where": "press-data.js:259"
+ },
+ "Es un problema, claro. Pero también es una oportunidad para los jóvenes. Los vais a ver, y os van a gustar.": {
+  "ctx": "{t: N_(\"Es un problema, claro. Pero también es una oportunidad para los jóvenes. Los vais a ver, y os van a gustar.\"), fx: {chem: 3, fans: 2, board: 1, rep: -2}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:260"
+ },
+ "No me gusta hablar de lesionados. Pero sí diré que el calendario es un crimen y que alguien debería hacer algo.": {
+  "ctx": "{t: N_(\"No me gusta hablar de lesionados. Pero sí diré que el calendario es un crimen y que alguien debería hacer algo.\"), fx: {rep: 2, fans: 2, board: -2, chem: 1}, ref: N_(\"Inspirada en Guardiola\")}",
+  "where": "press-data.js:261"
+ },
+ "La final es contra su eterno rival. ¿Más presión o más motivación?": {
+  "ctx": "{id: \"m38\", ctx: [\"final\", \"derby\"], q: N_(\"La final es contra su eterno rival. ¿Más presión o más motivación?\"),",
+  "where": "press-data.js:263"
+ },
+ "Motivación total. Es la final que cualquier niño soñó jugar, y me importa muy poco lo demás.": {
+  "ctx": "{t: N_(\"Motivación total. Es la final que cualquier niño soñó jugar, y me importa muy poco lo demás.\"), fx: {fans: 4, sqMor: 3, rep: -1, board: -1}, ref: N_(\"Inspirada en Ferguson\")},",
+  "where": "press-data.js:265"
+ },
+ "Las dos. Pero si los jugadores se creen que es un partido más, se equivocan. Esto no es un partido más.": {
+  "ctx": "{t: N_(\"Las dos. Pero si los jugadores se creen que es un partido más, se equivocan. Esto no es un partido más.\"), fx: {board: 2, chem: 1, sqMor: -2, fans: 2}, ref: N_(\"Inspirada en Luis Aragonés\")},",
+  "where": "press-data.js:266"
+ },
+ "Lo único que importa es el balón. Si lo tenemos nosotros, nada de lo anterior tiene la mayor importancia.": {
+  "ctx": "{t: N_(\"Lo único que importa es el balón. Si lo tenemos nosotros, nada de lo anterior tiene la mayor importancia.\"), fx: {rep: 3, chem: 2, fans: -2, board: -1}, ref: N_(\"Inspirada en Cruyff\")},",
+  "where": "press-data.js:267"
+ },
+ "Presión solo la que se ponga la prensa. En la final yo estaré tranquilo, bebiendo té con los jugadores.": {
+  "ctx": "{t: N_(\"Presión solo la que se ponga la prensa. En la final yo estaré tranquilo, bebiendo té con los jugadores.\"), fx: {sqMor: 3, chem: 2, fans: -3, board: -1}, ref: N_(\"Inspirada en Ancelotti\")}",
+  "where": "press-data.js:268"
+ },
+ "¿Ha hablado con la directiva sobre su continuidad?": {
+  "ctx": "{id: \"m39\", ctx: [\"rumour\", \"crisis\"], q: N_(\"¿Ha hablado con la directiva sobre su continuidad?\"),",
+  "where": "press-data.js:270"
+ },
+ "Mi continuidad es lo de menos. Hablaré cuando tenga algo que contar, no antes ni después.": {
+  "ctx": "{t: N_(\"Mi continuidad es lo de menos. Hablaré cuando tenga algo que contar, no antes ni después.\"), fx: {board: 2, rep: 1, fans: -3, sqMor: -1}, ref: N_(\"Inspirada en Zidane\")},",
+  "where": "press-data.js:272"
+ },
+ "Me han dicho que tengo su apoyo total. Eso significa que me quedan dos semanas, según mi experiencia.": {
+  "ctx": "{t: N_(\"Me han dicho que tengo su apoyo total. Eso significa que me quedan dos semanas, según mi experiencia.\"), fx: {fans: 3, rep: 2, board: -3, sqMor: -1}, ref: N_(\"Inspirada en Mourinho\")},",
+  "where": "press-data.js:273"
+ },
+ "No tengo nada que hablar. Solo trabajo. Cuando quieran echarme, no necesitan que se lo pida yo.": {
+  "ctx": "{t: N_(\"No tengo nada que hablar. Solo trabajo. Cuando quieran echarme, no necesitan que se lo pida yo.\"), fx: {sqMor: 2, chem: 2, board: -2, fans: -1}, ref: N_(\"Inspirada en Luis Enrique\")},",
+  "where": "press-data.js:274"
+ },
+ "Mi contrato dura hasta que dure. Después, buscaré otro club, otra ciudad. Pero ahora estoy aquí, a muerte.": {
+  "ctx": "{t: N_(\"Mi contrato dura hasta que dure. Después, buscaré otro club, otra ciudad. Pero ahora estoy aquí, a muerte.\"), fx: {fans: 3, board: 2, rep: -2, sqMor: 1, chem: -1}, ref: N_(\"Inspirada en Wenger\")}",
+  "where": "press-data.js:275"
+ }
+}

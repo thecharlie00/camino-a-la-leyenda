@@ -1,0 +1,1398 @@
+{
+ "Línea defensiva": {
+  "w": [
+   "engine-extra.js:660"
+  ],
+  "ctx": "line: {n: N_(\"Línea defensiva\"), o: [N_(\"Baja\"), N_(\"Media\"), N_(\"Alta\")]},"
+ },
+ "Baja": {
+  "w": [
+   "engine-extra.js:660",
+   "press-ctx.js:26"
+  ],
+  "ctx": "line: {n: N_(\"Línea defensiva\"), o: [N_(\"Baja\"), N_(\"Media\"), N_(\"Alta\")]},"
+ },
+ "Alta": {
+  "w": [
+   "engine-extra.js:660",
+   "press-ctx.js:26"
+  ],
+  "ctx": "line: {n: N_(\"Línea defensiva\"), o: [N_(\"Baja\"), N_(\"Media\"), N_(\"Alta\")]},"
+ },
+ "Amplitud": {
+  "w": [
+   "engine-extra.js:661"
+  ],
+  "ctx": "width: {n: N_(\"Amplitud\"), o: [N_(\"Por dentro\"), N_(\"Equilibrada\"), N_(\"Por bandas\")]},"
+ },
+ "Por dentro": {
+  "w": [
+   "engine-extra.js:661"
+  ],
+  "ctx": "width: {n: N_(\"Amplitud\"), o: [N_(\"Por dentro\"), N_(\"Equilibrada\"), N_(\"Por bandas\")]},"
+ },
+ "Por bandas": {
+  "w": [
+   "engine-extra.js:661"
+  ],
+  "ctx": "width: {n: N_(\"Amplitud\"), o: [N_(\"Por dentro\"), N_(\"Equilibrada\"), N_(\"Por bandas\")]},"
+ },
+ "Estilo de pase": {
+  "w": [
+   "engine-extra.js:662"
+  ],
+  "ctx": "pass: {n: N_(\"Estilo de pase\"), o: [N_(\"Combinativo\"), N_(\"Mixto\"), N_(\"Directo\")]},"
+ },
+ "Combinativo": {
+  "w": [
+   "engine-extra.js:662"
+  ],
+  "ctx": "pass: {n: N_(\"Estilo de pase\"), o: [N_(\"Combinativo\"), N_(\"Mixto\"), N_(\"Directo\")]},"
+ },
+ "Mixto": {
+  "w": [
+   "engine-extra.js:662"
+  ],
+  "ctx": "pass: {n: N_(\"Estilo de pase\"), o: [N_(\"Combinativo\"), N_(\"Mixto\"), N_(\"Directo\")]},"
+ },
+ "Directo": {
+  "w": [
+   "engine-extra.js:662"
+  ],
+  "ctx": "pass: {n: N_(\"Estilo de pase\"), o: [N_(\"Combinativo\"), N_(\"Mixto\"), N_(\"Directo\")]},"
+ },
+ "Lento": {
+  "w": [
+   "engine-extra.js:663"
+  ],
+  "ctx": "tempo: {n: N_(\"Ritmo\"), o: [N_(\"Lento\"), N_(\"Normal\"), N_(\"Alto\")]}"
+ },
+ "Alto": {
+  "w": [
+   "engine-extra.js:663"
+  ],
+  "ctx": "tempo: {n: N_(\"Ritmo\"), o: [N_(\"Lento\"), N_(\"Normal\"), N_(\"Alto\")]}"
+ },
+ "{a} busca en largo a {b}.": {
+  "w": [
+   "engine-extra.js:714"
+  ],
+  "ctx": "long: N_(\"{a} busca en largo a {b}.\"), tri: N_(\"Triangulación de {a} y {b} por dentro.\"), wide: N_(\"{a} abre a la banda y {b} pega la raya.\"),"
+ },
+ "Triangulación de {a} y {b} por dentro.": {
+  "w": [
+   "engine-extra.js:714"
+  ],
+  "ctx": "long: N_(\"{a} busca en largo a {b}.\"), tri: N_(\"Triangulación de {a} y {b} por dentro.\"), wide: N_(\"{a} abre a la banda y {b} pega la raya.\"),"
+ },
+ "{a} abre a la banda y {b} pega la raya.": {
+  "w": [
+   "engine-extra.js:714"
+  ],
+  "ctx": "long: N_(\"{a} busca en largo a {b}.\"), tri: N_(\"Triangulación de {a} y {b} por dentro.\"), wide: N_(\"{a} abre a la banda y {b} pega la raya.\"),"
+ },
+ "{a} toca y toca: el {club} duerme el partido.": {
+  "w": [
+   "engine-extra.js:715"
+  ],
+  "ctx": "slow: N_(\"{a} toca y toca: el {club} duerme el partido.\"), fast: N_(\"¡Ritmo alto! Juego a un toque entre {a} y {b}.\"),"
+ },
+ "¡Ritmo alto! Juego a un toque entre {a} y {b}.": {
+  "w": [
+   "engine-extra.js:715"
+  ],
+  "ctx": "slow: N_(\"{a} toca y toca: el {club} duerme el partido.\"), fast: N_(\"¡Ritmo alto! Juego a un toque entre {a} y {b}.\"),"
+ },
+ "Presión tras pérdida: {a} recupera arriba.": {
+  "w": [
+   "engine-extra.js:716"
+  ],
+  "ctx": "press: N_(\"Presión tras pérdida: {a} recupera arriba.\"), block: N_(\"El {club} se repliega en bloque bajo y cierra espacios.\"),"
+ },
+ "El {club} se repliega en bloque bajo y cierra espacios.": {
+  "w": [
+   "engine-extra.js:716"
+  ],
+  "ctx": "press: N_(\"Presión tras pérdida: {a} recupera arriba.\"), block: N_(\"El {club} se repliega en bloque bajo y cierra espacios.\"),"
+ },
+ "¡Fuera de juego de {x}! Vuestra defensa sube a la vez.": {
+  "w": [
+   "engine-extra.js:717"
+  ],
+  "ctx": "offThem: N_(\"¡Fuera de juego de {x}! Vuestra defensa sube a la vez.\"), offUs: N_(\"Fuera de juego de {a}: arrancó antes de tiempo.\")"
+ },
+ "Fuera de juego de {a}: arrancó antes de tiempo.": {
+  "w": [
+   "engine-extra.js:717"
+  ],
+  "ctx": "offThem: N_(\"¡Fuera de juego de {x}! Vuestra defensa sube a la vez.\"), offUs: N_(\"Fuera de juego de {a}: arrancó antes de tiempo.\")"
+ },
+ "Cambias «{k}»: {o}.": {
+  "w": [
+   "engine-extra.js:748"
+  ],
+  "ctx": "L.ev.unshift({t: \"tac\", min: L.min, txt: tr(\"Cambias «{k}»: {o}.\", {k: tr(LIVE_TAC[k].n), o: tr(LIVE_TAC[k].o[v])})});"
+ },
+ "Máxima": {
+  "w": [
+   "press-ctx.js:26"
+  ],
+  "ctx": "var MP_LV = [N_(\"Baja\"), N_(\"Media\"), N_(\"Alta\"), N_(\"Máxima\")];"
+ },
+ "Presión mediática": {
+  "w": [
+   "press-ctx.js:28",
+   "press-ctx.js:28"
+  ],
+  "ctx": "onLang(function () { if (typeof FX_LABEL !== \"undefined\" && FX_LABEL) FX_LABEL.press = tr(\"Presión mediática\"); if (typeof MFX_LABEL !== \"undefined\" && MFX_LABEL) MFX_LABEL.press = tr(\"Presión mediática\"); });"
+ },
+ "{n} punto": {
+  "w": [
+   "press-ctx.js:31"
+  ],
+  "ctx": "var PX_U = {pt: [N_(\"{n} punto\"), N_(\"{n} puntos\")], g: [N_(\"{n} gol\"), N_(\"{n} goles\")], m: [N_(\"{n} partido\"), N_(\"{n} partidos\")],"
+ },
+ "{n} puntos": {
+  "w": [
+   "press-ctx.js:31"
+  ],
+  "ctx": "var PX_U = {pt: [N_(\"{n} punto\"), N_(\"{n} puntos\")], g: [N_(\"{n} gol\"), N_(\"{n} goles\")], m: [N_(\"{n} partido\"), N_(\"{n} partidos\")],"
+ },
+ "{n} jornada": {
+  "w": [
+   "press-ctx.js:32"
+  ],
+  "ctx": "j: [N_(\"{n} jornada\"), N_(\"{n} jornadas\")], pen: [N_(\"{n} penalti\"), N_(\"{n} penaltis\")]};"
+ },
+ "{n} jornadas": {
+  "w": [
+   "press-ctx.js:32"
+  ],
+  "ctx": "j: [N_(\"{n} jornada\"), N_(\"{n} jornadas\")], pen: [N_(\"{n} penalti\"), N_(\"{n} penaltis\")]};"
+ },
+ "{n} penalti": {
+  "w": [
+   "press-ctx.js:32"
+  ],
+  "ctx": "j: [N_(\"{n} jornada\"), N_(\"{n} jornadas\")], pen: [N_(\"{n} penalti\"), N_(\"{n} penaltis\")]};"
+ },
+ "{n} penaltis": {
+  "w": [
+   "press-ctx.js:32"
+  ],
+  "ctx": "j: [N_(\"{n} jornada\"), N_(\"{n} jornadas\")], pen: [N_(\"{n} penalti\"), N_(\"{n} penaltis\")]};"
+ },
+ "Clasificación": {
+  "w": [
+   "press-ctx.js:203",
+   "mgr-plus.js:651"
+  ],
+  "ctx": "var PX_TOP = {tabla: N_(\"Clasificación\"), racha: N_(\"Racha\"), yo: N_(\"Tu momento\"), gk: N_(\"Portería\"), rival: N_(\"El rival\"), mote: N_(\"Tu mote\"), vest: N_(\"Vestuario\")};"
+ },
+ "Racha": {
+  "w": [
+   "press-ctx.js:203"
+  ],
+  "ctx": "var PX_TOP = {tabla: N_(\"Clasificación\"), racha: N_(\"Racha\"), yo: N_(\"Tu momento\"), gk: N_(\"Portería\"), rival: N_(\"El rival\"), mote: N_(\"Tu mote\"), vest: N_(\"Vestuario\")};"
+ },
+ "Tu momento": {
+  "w": [
+   "press-ctx.js:203"
+  ],
+  "ctx": "var PX_TOP = {tabla: N_(\"Clasificación\"), racha: N_(\"Racha\"), yo: N_(\"Tu momento\"), gk: N_(\"Portería\"), rival: N_(\"El rival\"), mote: N_(\"Tu mote\"), vest: N_(\"Vestuario\")};"
+ },
+ "El rival": {
+  "w": [
+   "press-ctx.js:203"
+  ],
+  "ctx": "var PX_TOP = {tabla: N_(\"Clasificación\"), racha: N_(\"Racha\"), yo: N_(\"Tu momento\"), gk: N_(\"Portería\"), rival: N_(\"El rival\"), mote: N_(\"Tu mote\"), vest: N_(\"Vestuario\")};"
+ },
+ "Tu mote": {
+  "w": [
+   "press-ctx.js:203"
+  ],
+  "ctx": "var PX_TOP = {tabla: N_(\"Clasificación\"), racha: N_(\"Racha\"), yo: N_(\"Tu momento\"), gk: N_(\"Portería\"), rival: N_(\"El rival\"), mote: N_(\"Tu mote\"), vest: N_(\"Vestuario\")};"
+ },
+ "Líderes con {gap} de ventaja sobre el {rival} y {left} por delante. ¿Está la liga sentenciada?": {
+  "w": [
+   "press-ctx.js:211"
+  ],
+  "ctx": "var q = lead ? (gap ? N_(\"Líderes con {gap} de ventaja sobre el {rival} y {left} por delante. ¿Está la liga sentenciada?\") : N_(\"Líderes, pero empatados a puntos con el {rival} y con {left} por delante. ¿Quién se lleva l"
+ },
+ "Líderes, pero empatados a puntos con el {rival} y con {left} por delante. ¿Quién se lleva la liga?": {
+  "w": [
+   "press-ctx.js:211"
+  ],
+  "ctx": "var q = lead ? (gap ? N_(\"Líderes con {gap} de ventaja sobre el {rival} y {left} por delante. ¿Está la liga sentenciada?\") : N_(\"Líderes, pero empatados a puntos con el {rival} y con {left} por delante. ¿Quién se lleva l"
+ },
+ "Sois segundos, a {gap} del {rival}, con {left} por jugar. ¿Os veis campeones?": {
+  "w": [
+   "press-ctx.js:212"
+  ],
+  "ctx": ": (gap ? N_(\"Sois segundos, a {gap} del {rival}, con {left} por jugar. ¿Os veis campeones?\") : N_(\"Empatados a puntos con el {rival} en lo más alto y con {left} por jugar. ¿Os veis campeones?\"));"
+ },
+ "Empatados a puntos con el {rival} en lo más alto y con {left} por jugar. ¿Os veis campeones?": {
+  "w": [
+   "press-ctx.js:212"
+  ],
+  "ctx": ": (gap ? N_(\"Sois segundos, a {gap} del {rival}, con {left} por jugar. ¿Os veis campeones?\") : N_(\"Empatados a puntos con el {rival} en lo más alto y con {left} por jugar. ¿Os veis campeones?\"));"
+ },
+ "Sentenciada no hay nada. El {rival} no va a regalar un punto y nosotros tampoco.": {
+  "w": [
+   "press-ctx.js:214"
+  ],
+  "ctx": "A(N_(\"Sentenciada no hay nada. El {rival} no va a regalar un punto y nosotros tampoco.\"), {team: 3, boss: 2, press: -3}, \"dip\"),"
+ },
+ "Si seguimos así, el título es nuestro. Que lo vaya asumiendo todo el mundo.": {
+  "w": [
+   "press-ctx.js:215"
+  ],
+  "ctx": "A(N_(\"Si seguimos así, el título es nuestro. Que lo vaya asumiendo todo el mundo.\"), {fans: 5, team: 2, boss: -2, press: 10}, \"agr\"),"
+ },
+ "Yo solo miro el próximo partido. La calculadora os la dejo a vosotros.": {
+  "w": [
+   "press-ctx.js:216"
+  ],
+  "ctx": "A(N_(\"Yo solo miro el próximo partido. La calculadora os la dejo a vosotros.\"), {boss: 2, fans: -1, press: -5}, \"eva\"),"
+ },
+ "Que se preocupe el {rival}. Nosotros vamos a dormir tranquilos esta noche.": {
+  "w": [
+   "press-ctx.js:217"
+  ],
+  "ctx": "A(N_(\"Que se preocupe el {rival}. Nosotros vamos a dormir tranquilos esta noche.\"), {fans: 3, img: 2, team: -1, press: 7}, \"hum\")"
+ },
+ "Claro que sí. Vamos a por ellos y no vamos a levantar el pie.": {
+  "w": [
+   "press-ctx.js:219"
+  ],
+  "ctx": "A(N_(\"Claro que sí. Vamos a por ellos y no vamos a levantar el pie.\"), {fans: 4, team: 3, boss: -1, press: 8}, \"agr\"),"
+ },
+ "Primero hay que ganar nuestros partidos. Si ellos fallan, estaremos ahí.": {
+  "w": [
+   "press-ctx.js:220"
+  ],
+  "ctx": "A(N_(\"Primero hay que ganar nuestros partidos. Si ellos fallan, estaremos ahí.\"), {boss: 3, team: 1, press: -3}, \"dip\"),"
+ },
+ "La presión la tiene el {rival}. Nosotros no tenemos nada que perder.": {
+  "w": [
+   "press-ctx.js:221"
+  ],
+  "ctx": "A(N_(\"La presión la tiene el {rival}. Nosotros no tenemos nada que perder.\"), {team: 2, fans: 2, press: 4}, \"hum\"),"
+ },
+ "Sinceramente, ellos tienen más plantilla. Pero soñar es gratis.": {
+  "w": [
+   "press-ctx.js:222"
+  ],
+  "ctx": "A(N_(\"Sinceramente, ellos tienen más plantilla. Pero soñar es gratis.\"), {boss: -2, fans: -2, team: -2, img: 1, press: -4}, \"eva\")"
+ },
+ "Estáis {pos}º, en descenso y a {gap} de la salvación. ¿Temes por la categoría?": {
+  "w": [
+   "press-ctx.js:233"
+  ],
+  "ctx": "var q = inZone ? (gap > 0 ? N_(\"Estáis {pos}º, en descenso y a {gap} de la salvación. ¿Temes por la categoría?\") : N_(\"Estáis {pos}º, en descenso, aunque empatados con quien marca la salvación. ¿Temes por la categoría?\")"
+ },
+ "Estáis {pos}º, en descenso, aunque empatados con quien marca la salvación. ¿Temes por la categoría?": {
+  "w": [
+   "press-ctx.js:233"
+  ],
+  "ctx": "var q = inZone ? (gap > 0 ? N_(\"Estáis {pos}º, en descenso y a {gap} de la salvación. ¿Temes por la categoría?\") : N_(\"Estáis {pos}º, en descenso, aunque empatados con quien marca la salvación. ¿Temes por la categoría?\")"
+ },
+ "Solo {gap} os separan del descenso. ¿Os preocupa mirar hacia abajo?": {
+  "w": [
+   "press-ctx.js:234"
+  ],
+  "ctx": ": (gap > 0 ? N_(\"Solo {gap} os separan del descenso. ¿Os preocupa mirar hacia abajo?\") : N_(\"Estáis justo por encima del descenso, empatados a puntos. ¿Os preocupa mirar hacia abajo?\"));"
+ },
+ "Estáis justo por encima del descenso, empatados a puntos. ¿Os preocupa mirar hacia abajo?": {
+  "w": [
+   "press-ctx.js:234"
+  ],
+  "ctx": ": (gap > 0 ? N_(\"Solo {gap} os separan del descenso. ¿Os preocupa mirar hacia abajo?\") : N_(\"Estáis justo por encima del descenso, empatados a puntos. ¿Os preocupa mirar hacia abajo?\"));"
+ },
+ "Miedo ninguno. Este equipo se va a salvar y lo vamos a hacer con margen.": {
+  "w": [
+   "press-ctx.js:236"
+  ],
+  "ctx": "A(N_(\"Miedo ninguno. Este equipo se va a salvar y lo vamos a hacer con margen.\"), {fans: 3, team: 3, boss: -1, press: 6}, \"agr\"),"
+ },
+ "La situación es delicada y no la voy a maquillar. Toca trabajar el doble.": {
+  "w": [
+   "press-ctx.js:237"
+  ],
+  "ctx": "A(N_(\"La situación es delicada y no la voy a maquillar. Toca trabajar el doble.\"), {boss: 3, team: -1, fans: 1, press: -3}, \"dip\"),"
+ },
+ "Quedan {left} y mucho fútbol. Quien nos dé por muertos se equivoca.": {
+  "w": [
+   "press-ctx.js:238"
+  ],
+  "ctx": "A(N_(\"Quedan {left} y mucho fútbol. Quien nos dé por muertos se equivoca.\"), {team: 2, fans: 2, press: 3}, \"hum\"),"
+ },
+ "Hay cosas que se están haciendo mal desde arriba, no solo en el campo.": {
+  "w": [
+   "press-ctx.js:239"
+  ],
+  "ctx": "A(N_(\"Hay cosas que se están haciendo mal desde arriba, no solo en el campo.\"), {fans: 2, boss: -5, team: 1, press: 12}, \"agr\")"
+ },
+ "Estáis {pos}º, en puestos de ascenso, con {gap} de margen sobre el {rival}. ¿Firmáis subir ya?": {
+  "w": [
+   "press-ctx.js:247"
+  ],
+  "ctx": "var q = F.up ? (inside ? N_(\"Estáis {pos}º, en puestos de ascenso, con {gap} de margen sobre el {rival}. ¿Firmáis subir ya?\") : N_(\"Sois {pos}º, a {gap} del ascenso que ahora tiene el {rival}. ¿Llegaréis?\"))"
+ },
+ "Sois {pos}º, a {gap} del ascenso que ahora tiene el {rival}. ¿Llegaréis?": {
+  "w": [
+   "press-ctx.js:247"
+  ],
+  "ctx": "var q = F.up ? (inside ? N_(\"Estáis {pos}º, en puestos de ascenso, con {gap} de margen sobre el {rival}. ¿Firmáis subir ya?\") : N_(\"Sois {pos}º, a {gap} del ascenso que ahora tiene el {rival}. ¿Llegaréis?\"))"
+ },
+ "Estáis {pos}º, en puestos europeos, con {gap} de margen sobre el {rival}. ¿Es Europa el objetivo?": {
+  "w": [
+   "press-ctx.js:248"
+  ],
+  "ctx": ": (inside ? N_(\"Estáis {pos}º, en puestos europeos, con {gap} de margen sobre el {rival}. ¿Es Europa el objetivo?\") : N_(\"Sois {pos}º, a {gap} de los puestos europeos que marca el {rival}. ¿Llegaréis?\"));"
+ },
+ "Sois {pos}º, a {gap} de los puestos europeos que marca el {rival}. ¿Llegaréis?": {
+  "w": [
+   "press-ctx.js:248"
+  ],
+  "ctx": ": (inside ? N_(\"Estáis {pos}º, en puestos europeos, con {gap} de margen sobre el {rival}. ¿Es Europa el objetivo?\") : N_(\"Sois {pos}º, a {gap} de los puestos europeos que marca el {rival}. ¿Llegaréis?\"));"
+ },
+ "Es el sueño de este vestuario y vamos a pelearlo hasta el final.": {
+  "w": [
+   "press-ctx.js:250"
+  ],
+  "ctx": "A(N_(\"Es el sueño de este vestuario y vamos a pelearlo hasta el final.\"), {fans: 4, team: 2, boss: 1, press: 6}, \"agr\"),"
+ },
+ "No nos ponemos techo, pero tampoco objetivos que no tocan.": {
+  "w": [
+   "press-ctx.js:251"
+  ],
+  "ctx": "A(N_(\"No nos ponemos techo, pero tampoco objetivos que no tocan.\"), {boss: 2, fans: -1, press: -4}, \"dip\"),"
+ },
+ "Ojalá. Esta afición se merece una alegría así.": {
+  "w": [
+   "press-ctx.js:252"
+  ],
+  "ctx": "A(N_(\"Ojalá. Esta afición se merece una alegría así.\"), {fans: 5, img: 1, press: 3}, \"hum\"),"
+ },
+ "Lo que diga la clasificación en mayo es lo único que cuenta.": {
+  "w": [
+   "press-ctx.js:253"
+  ],
+  "ctx": "A(N_(\"Lo que diga la clasificación en mayo es lo único que cuenta.\"), {boss: 1, press: -2}, \"eva\")"
+ },
+ "El objetivo marcado era el puesto {t} y ahora mismo sois {pos}º. ¿Qué está fallando?": {
+  "w": [
+   "press-ctx.js:261"
+  ],
+  "ctx": "if (F.pos >= F.objT + 4) return {q: N_(\"El objetivo marcado era el puesto {t} y ahora mismo sois {pos}º. ¿Qué está fallando?\"), tp: tp, a: ["
+ },
+ "Asumo mi parte. El objetivo sigue ahí y vamos a recortar.": {
+  "w": [
+   "press-ctx.js:262"
+  ],
+  "ctx": "A(N_(\"Asumo mi parte. El objetivo sigue ahí y vamos a recortar.\"), {boss: 2, team: 2, press: -2}, \"dip\"),"
+ },
+ "Ese objetivo era irreal desde el principio. Estamos donde nos toca.": {
+  "w": [
+   "press-ctx.js:263"
+  ],
+  "ctx": "A(N_(\"Ese objetivo era irreal desde el principio. Estamos donde nos toca.\"), {boss: -5, fans: -2, img: 1, press: 9}, \"agr\"),"
+ },
+ "Queda temporada de sobra. Hablamos en mayo.": {
+  "w": [
+   "press-ctx.js:264"
+  ],
+  "ctx": "A(N_(\"Queda temporada de sobra. Hablamos en mayo.\"), {boss: -1, press: -3}, \"eva\"),"
+ },
+ "Que miren a quien hizo la plantilla, no a quien sale al campo.": {
+  "w": [
+   "press-ctx.js:265"
+  ],
+  "ctx": "F.mgr ? A(N_(\"Que miren a quien hizo la plantilla, no a quien sale al campo.\"), {boss: -6, team: 3, press: 12}, \"agr\")"
+ },
+ "Yo hago mi trabajo. Las preguntas tácticas, al banquillo.": {
+  "w": [
+   "press-ctx.js:266"
+  ],
+  "ctx": ": A(N_(\"Yo hago mi trabajo. Las preguntas tácticas, al banquillo.\"), {boss: -6, team: 1, fans: 1, press: 10}, \"agr\")"
+ },
+ "Vais {pos}º cuando el objetivo era el puesto {t}. ¿Toca subir el listón?": {
+  "w": [
+   "press-ctx.js:268"
+  ],
+  "ctx": "return {q: N_(\"Vais {pos}º cuando el objetivo era el puesto {t}. ¿Toca subir el listón?\"), tp: tp, a: ["
+ },
+ "Sí. Quien se conforma, retrocede. Vamos a por más.": {
+  "w": [
+   "press-ctx.js:269"
+  ],
+  "ctx": "A(N_(\"Sí. Quien se conforma, retrocede. Vamos a por más.\"), {fans: 4, team: 2, boss: -1, press: 7}, \"agr\"),"
+ },
+ "El objetivo no cambia. Cuando lo asegure, ya soñaremos.": {
+  "w": [
+   "press-ctx.js:270"
+  ],
+  "ctx": "A(N_(\"El objetivo no cambia. Cuando lo asegure, ya soñaremos.\"), {boss: 3, press: -4}, \"dip\"),"
+ },
+ "Disfrutemos el momento sin volvernos locos.": {
+  "w": [
+   "press-ctx.js:271"
+  ],
+  "ctx": "A(N_(\"Disfrutemos el momento sin volvernos locos.\"), {team: 2, fans: 2, press: -1}, \"hum\"),"
+ },
+ "Ni lo sé ni me importa. Yo solo pienso en el domingo.": {
+  "w": [
+   "press-ctx.js:272"
+  ],
+  "ctx": "A(N_(\"Ni lo sé ni me importa. Yo solo pienso en el domingo.\"), {fans: -1, press: -3}, \"eva\")"
+ },
+ "{n} victorias seguidas. ¿Cuál es el secreto de esta racha?": {
+  "w": [
+   "press-ctx.js:276"
+  ],
+  "ctx": "return {q: N_(\"{n} victorias seguidas. ¿Cuál es el secreto de esta racha?\"), tp: {n: F.run.win}, a: ["
+ },
+ "Trabajo y humildad. No hay más secreto.": {
+  "w": [
+   "press-ctx.js:277"
+  ],
+  "ctx": "A(N_(\"Trabajo y humildad. No hay más secreto.\"), {team: 2, boss: 2, press: -3}, \"dip\"),"
+ },
+ "Que ahora mismo somos mejores que nadie. Así de simple.": {
+  "w": [
+   "press-ctx.js:278"
+  ],
+  "ctx": "A(N_(\"Que ahora mismo somos mejores que nadie. Así de simple.\"), {fans: 4, img: 2, team: -1, press: 9}, \"agr\"),"
+ },
+ "No lo digáis muy alto, que en este vestuario somos muy supersticiosos.": {
+  "w": [
+   "press-ctx.js:279"
+  ],
+  "ctx": "A(N_(\"No lo digáis muy alto, que en este vestuario somos muy supersticiosos.\"), {fans: 2, team: 2, press: -1}, \"hum\"),"
+ },
+ "Las rachas se acaban. Lo importante es mantener la cabeza fría.": {
+  "w": [
+   "press-ctx.js:280"
+  ],
+  "ctx": "A(N_(\"Las rachas se acaban. Lo importante es mantener la cabeza fría.\"), {boss: 2, press: -2}, \"eva\")"
+ },
+ "{n} derrotas seguidas. ¿Qué está fallando?": {
+  "w": [
+   "press-ctx.js:284"
+  ],
+  "ctx": "return {q: N_(\"{n} derrotas seguidas. ¿Qué está fallando?\"), tp: {n: F.run.loss}, a: ["
+ },
+ "Fallamos todos, empezando por mí. Toca dar la cara.": {
+  "w": [
+   "press-ctx.js:285"
+  ],
+  "ctx": "A(N_(\"Fallamos todos, empezando por mí. Toca dar la cara.\"), {team: 3, boss: 1, img: -1, press: -2}, \"dip\"),"
+ },
+ "Hay jugadores que no están dando lo que se espera. Lo hablaremos dentro.": {
+  "w": [
+   "press-ctx.js:286"
+  ],
+  "ctx": "F.mgr ? A(N_(\"Hay jugadores que no están dando lo que se espera. Lo hablaremos dentro.\"), {team: -5, boss: 2, press: 10}, \"agr\")"
+ },
+ "Hay compañeros que tienen que dar un paso adelante. Yo el primero, pero no el único.": {
+  "w": [
+   "press-ctx.js:287"
+  ],
+  "ctx": ": A(N_(\"Hay compañeros que tienen que dar un paso adelante. Yo el primero, pero no el único.\"), {team: -4, fans: 1, boss: -1, press: 10}, \"agr\"),"
+ },
+ "Es fútbol: hoy perdemos, mañana ganamos. No hay que hacer un drama.": {
+  "w": [
+   "press-ctx.js:288"
+  ],
+  "ctx": "A(N_(\"Es fútbol: hoy perdemos, mañana ganamos. No hay que hacer un drama.\"), {fans: -3, press: 4}, \"eva\"),"
+ },
+ "Los árbitros tampoco nos están ayudando, que conste en acta.": {
+  "w": [
+   "press-ctx.js:289"
+  ],
+  "ctx": "A(N_(\"Los árbitros tampoco nos están ayudando, que conste en acta.\"), {fans: 2, team: 1, img: -2, press: 8}, \"agr\")"
+ },
+ "{n} partidos sin ganar. ¿Está el equipo en crisis?": {
+  "w": [
+   "press-ctx.js:293"
+  ],
+  "ctx": "return {q: N_(\"{n} partidos sin ganar. ¿Está el equipo en crisis?\"), tp: {n: F.run.wl}, a: ["
+ },
+ "Crisis es una palabra muy grande. Estamos a una victoria de cambiarlo todo.": {
+  "w": [
+   "press-ctx.js:294"
+  ],
+  "ctx": "A(N_(\"Crisis es una palabra muy grande. Estamos a una victoria de cambiarlo todo.\"), {team: 2, boss: 1, press: -2}, \"dip\"),"
+ },
+ "Si esto es una crisis, la vamos a sacar entre todos. Nadie se esconde.": {
+  "w": [
+   "press-ctx.js:295"
+  ],
+  "ctx": "A(N_(\"Si esto es una crisis, la vamos a sacar entre todos. Nadie se esconde.\"), {team: 3, fans: 2, press: 2}, \"dip\"),"
+ },
+ "La crisis la vendéis vosotros. Dentro estamos más unidos que nunca.": {
+  "w": [
+   "press-ctx.js:296"
+  ],
+  "ctx": "A(N_(\"La crisis la vendéis vosotros. Dentro estamos más unidos que nunca.\"), {team: 2, fans: 1, img: -1, press: 9}, \"agr\"),"
+ },
+ "Pues habrá que ganar el domingo. Fácil de decir, ¿eh?": {
+  "w": [
+   "press-ctx.js:297"
+  ],
+  "ctx": "A(N_(\"Pues habrá que ganar el domingo. Fácil de decir, ¿eh?\"), {fans: 1, press: 1}, \"hum\")"
+ },
+ "{n} partidos sin perder. ¿Os sentís invencibles?": {
+  "w": [
+   "press-ctx.js:301"
+  ],
+  "ctx": "return {q: N_(\"{n} partidos sin perder. ¿Os sentís invencibles?\"), tp: {n: F.run.unb}, a: ["
+ },
+ "Invencible no hay nadie. Somos un equipo difícil de batir y eso nos basta.": {
+  "w": [
+   "press-ctx.js:302"
+  ],
+  "ctx": "A(N_(\"Invencible no hay nadie. Somos un equipo difícil de batir y eso nos basta.\"), {boss: 2, team: 1, press: -3}, \"dip\"),"
+ },
+ "Quien quiera ganarnos, que venga preparado. Hoy no somos un rival cómodo.": {
+  "w": [
+   "press-ctx.js:303"
+  ],
+  "ctx": "A(N_(\"Quien quiera ganarnos, que venga preparado. Hoy no somos un rival cómodo.\"), {fans: 3, team: 2, press: 6}, \"agr\"),"
+ },
+ "Me falta convertir algunos empates en victorias. Ahí está la diferencia.": {
+  "w": [
+   "press-ctx.js:304"
+  ],
+  "ctx": "A(N_(\"Me falta convertir algunos empates en victorias. Ahí está la diferencia.\"), {boss: 3, team: -1, press: -1}, \"dip\"),"
+ },
+ "Invencibles no, pero cabezotas un rato.": {
+  "w": [
+   "press-ctx.js:305"
+  ],
+  "ctx": "A(N_(\"Invencibles no, pero cabezotas un rato.\"), {fans: 2, team: 2, press: 1}, \"hum\")"
+ },
+ "{n} partidos seguidos sin encajar un gol. ¿Es la defensa la base de todo?": {
+  "w": [
+   "press-ctx.js:309"
+  ],
+  "ctx": "return {q: N_(\"{n} partidos seguidos sin encajar un gol. ¿Es la defensa la base de todo?\"), tp: {n: F.run.tcs}, a: ["
+ },
+ "Defender bien es el primer paso para ganar. El orden no se negocia.": {
+  "w": [
+   "press-ctx.js:310"
+  ],
+  "ctx": "A(N_(\"Defender bien es el primer paso para ganar. El orden no se negocia.\"), {boss: 3, chem: 2, press: -2}, \"dip\"),"
+ },
+ "Mérito del portero y de los de atrás, pero también de los de arriba, que presionan como nadie.": {
+  "w": [
+   "press-ctx.js:311"
+  ],
+  "ctx": "A(N_(\"Mérito del portero y de los de atrás, pero también de los de arriba, que presionan como nadie.\"), {team: 4, chem: 2, press: -1}, \"dip\"),"
+ },
+ "Que digan que somos aburridos. Nosotros sumamos y ellos opinan.": {
+  "w": [
+   "press-ctx.js:312"
+  ],
+  "ctx": "A(N_(\"Que digan que somos aburridos. Nosotros sumamos y ellos opinan.\"), {boss: 2, fans: -2, press: 6}, \"agr\"),"
+ },
+ "No me fío. El cero se rompe cuando menos te lo esperas.": {
+  "w": [
+   "press-ctx.js:313"
+  ],
+  "ctx": "A(N_(\"No me fío. El cero se rompe cuando menos te lo esperas.\"), {team: 1, press: -3}, \"eva\")"
+ },
+ "{n} partidos sin marcar. ¿Os preocupa la falta de gol?": {
+  "w": [
+   "press-ctx.js:317"
+  ],
+  "ctx": "return {q: N_(\"{n} partidos sin marcar. ¿Os preocupa la falta de gol?\"), tp: {n: F.run.blank}, a: ["
+ },
+ "Generamos ocasiones. El gol llegará, estoy convencido.": {
+  "w": [
+   "press-ctx.js:318"
+  ],
+  "ctx": "A(N_(\"Generamos ocasiones. El gol llegará, estoy convencido.\"), {team: 2, press: -2}, \"dip\"),"
+ },
+ "Necesitamos un delantero y así se lo he dicho al club.": {
+  "w": [
+   "press-ctx.js:319"
+  ],
+  "ctx": "F.mgr ? A(N_(\"Necesitamos un delantero y así se lo he dicho al club.\"), {boss: -4, fans: 2, press: 9}, \"agr\")"
+ },
+ "Si me llegan balones, yo los meto. Hasta ahora llegan pocos.": {
+  "w": [
+   "press-ctx.js:320"
+  ],
+  "ctx": ": A(N_(\"Si me llegan balones, yo los meto. Hasta ahora llegan pocos.\"), {team: -4, fans: 1, press: 9}, \"agr\"),"
+ },
+ "Esta semana, todos a rematar hasta que se haga de noche.": {
+  "w": [
+   "press-ctx.js:321"
+  ],
+  "ctx": "A(N_(\"Esta semana, todos a rematar hasta que se haga de noche.\"), {boss: 2, team: 1, press: -3}, \"dip\"),"
+ },
+ "La portería sigue en el mismo sitio, eso os lo garantizo.": {
+  "w": [
+   "press-ctx.js:322"
+  ],
+  "ctx": "A(N_(\"La portería sigue en el mismo sitio, eso os lo garantizo.\"), {fans: 1, press: 2}, \"hum\")"
+ },
+ "Llevas {n} partidos seguidos con la portería a cero. ¿Cuál es tu secreto?": {
+  "w": [
+   "press-ctx.js:327"
+  ],
+  "ctx": "return {q: N_(\"Llevas {n} partidos seguidos con la portería a cero. ¿Cuál es tu secreto?\"), tp: {n: F.csRun}, a: ["
+ },
+ "Hablo sin parar con mis centrales. Si la defensa está bien colocada, yo apenas trabajo.": {
+  "w": [
+   "press-ctx.js:328"
+  ],
+  "ctx": "A(N_(\"Hablo sin parar con mis centrales. Si la defensa está bien colocada, yo apenas trabajo.\"), {team: 4, boss: 2, press: -2}, \"dip\"),"
+ },
+ "Estudio a cada delantero: cómo golpea, hacia dónde mira. Nada es casualidad.": {
+  "w": [
+   "press-ctx.js:329"
+  ],
+  "ctx": "A(N_(\"Estudio a cada delantero: cómo golpea, hacia dónde mira. Nada es casualidad.\"), {img: 2, boss: 2, form: 2, press: 2}, \"dip\"),"
+ },
+ "Que me tiren lo que quieran. Hoy por hoy, ahí atrás no entra nada.": {
+  "w": [
+   "press-ctx.js:330"
+  ],
+  "ctx": "A(N_(\"Que me tiren lo que quieran. Hoy por hoy, ahí atrás no entra nada.\"), {fans: 4, img: 2, team: -2, press: 9}, \"agr\"),"
+ },
+ "Llevo los mismos calcetines desde el primer cero. No pienso lavarlos.": {
+  "w": [
+   "press-ctx.js:331"
+  ],
+  "ctx": "A(N_(\"Llevo los mismos calcetines desde el primer cero. No pienso lavarlos.\"), {fans: 3, team: 1, press: 3}, \"hum\")"
+ },
+ "Has encajado {gc} en tus últimos {n} partidos. Se habla de inseguridad bajo palos. ¿Qué pasa?": {
+  "w": [
+   "press-ctx.js:335"
+  ],
+  "ctx": "return {q: N_(\"Has encajado {gc} en tus últimos {n} partidos. Se habla de inseguridad bajo palos. ¿Qué pasa?\"), tp: {gc: pxU(F.gc5, \"g\"), n: F.apps5}, a: ["
+ },
+ "Soy el primero en asumirlo. Tengo que sacar paradas que ahora no saco.": {
+  "w": [
+   "press-ctx.js:336"
+  ],
+  "ctx": "A(N_(\"Soy el primero en asumirlo. Tengo que sacar paradas que ahora no saco.\"), {boss: 2, team: 2, img: -1, press: -3}, \"dip\"),"
+ },
+ "Los goles se encajan entre todos. Yo no juego solo ahí atrás.": {
+  "w": [
+   "press-ctx.js:337"
+  ],
+  "ctx": "A(N_(\"Los goles se encajan entre todos. Yo no juego solo ahí atrás.\"), {team: -4, img: 1, press: 8}, \"agr\"),"
+ },
+ "Estoy trabajando las salidas y los balones aéreos con el preparador. Se va a notar.": {
+  "w": [
+   "press-ctx.js:338"
+  ],
+  "ctx": "A(N_(\"Estoy trabajando las salidas y los balones aéreos con el preparador. Se va a notar.\"), {boss: 3, form: 2, press: -2}, \"dip\"),"
+ },
+ "Un portero sin goles encajados sería un portero sin trabajo.": {
+  "w": [
+   "press-ctx.js:339"
+  ],
+  "ctx": "A(N_(\"Un portero sin goles encajados sería un portero sin trabajo.\"), {fans: -1, team: 1, press: 3}, \"hum\")"
+ },
+ "Tu nota media en los últimos {n} partidos es de {rt}. Se habla de paradones de selección. ¿Estás en tu mejor momento?": {
+  "w": [
+   "press-ctx.js:343"
+  ],
+  "ctx": "return {q: N_(\"Tu nota media en los últimos {n} partidos es de {rt}. Se habla de paradones de selección. ¿Estás en tu mejor momento?\"), tp: {n: F.apps5, rt: {rt: F.rt5}}, a: ["
+ },
+ "Las paradas importantes son las que no se ven: estar bien colocado antes del disparo.": {
+  "w": [
+   "press-ctx.js:344"
+  ],
+  "ctx": "A(N_(\"Las paradas importantes son las que no se ven: estar bien colocado antes del disparo.\"), {boss: 2, img: 2, press: -1}, \"dip\"),"
+ },
+ "Si el seleccionador no me llama ahora, no sé qué más tengo que hacer.": {
+  "w": [
+   "press-ctx.js:345"
+  ],
+  "ctx": "A(N_(\"Si el seleccionador no me llama ahora, no sé qué más tengo que hacer.\"), {img: 3, fans: 3, boss: -1, press: 10}, \"agr\"),"
+ },
+ "Mérito de los guantes nuevos. Que les suban el sueldo a ellos.": {
+  "w": [
+   "press-ctx.js:346"
+  ],
+  "ctx": "A(N_(\"Mérito de los guantes nuevos. Que les suban el sueldo a ellos.\"), {fans: 3, press: 2}, \"hum\"),"
+ },
+ "Mi trabajo es que el equipo gane, no salir en los resúmenes.": {
+  "w": [
+   "press-ctx.js:347"
+  ],
+  "ctx": "A(N_(\"Mi trabajo es que el equipo gane, no salir en los resúmenes.\"), {team: 3, boss: 1, press: -3}, \"dip\")"
+ },
+ "Ya llevas {n} parados esta temporada. ¿Cuál es el truco con los penaltis?": {
+  "w": [
+   "press-ctx.js:351"
+  ],
+  "ctx": "return {q: N_(\"Ya llevas {n} parados esta temporada. ¿Cuál es el truco con los penaltis?\"), tp: {n: pxU(F.psv, \"pen\")}, a: ["
+ },
+ "Miro la cadera del lanzador hasta el último segundo. Y aguanto, aguanto…": {
+  "w": [
+   "press-ctx.js:352"
+  ],
+  "ctx": "A(N_(\"Miro la cadera del lanzador hasta el último segundo. Y aguanto, aguanto…\"), {img: 2, form: 1, press: 1}, \"dip\"),"
+ },
+ "Tenemos un dosier de cada lanzador. El mérito también es del preparador de porteros.": {
+  "w": [
+   "press-ctx.js:353"
+  ],
+  "ctx": "A(N_(\"Tenemos un dosier de cada lanzador. El mérito también es del preparador de porteros.\"), {team: 2, boss: 3, press: -2}, \"dip\"),"
+ },
+ "Ellos tienen toda la presión. Yo solo tengo que tirarme al lado bueno.": {
+  "w": [
+   "press-ctx.js:354"
+  ],
+  "ctx": "A(N_(\"Ellos tienen toda la presión. Yo solo tengo que tirarme al lado bueno.\"), {fans: 3, img: 1, press: 4}, \"agr\"),"
+ },
+ "Si lo cuento, deja de funcionar.": {
+  "w": [
+   "press-ctx.js:355"
+  ],
+  "ctx": "A(N_(\"Si lo cuento, deja de funcionar.\"), {fans: 2, press: -1}, \"hum\")"
+ },
+ "Se critica que sales poco a por los balones aéreos. ¿Vas a cambiar?": {
+  "w": [
+   "press-ctx.js:359"
+  ],
+  "ctx": "if (prxState().n % 2) return {q: N_(\"Se critica que sales poco a por los balones aéreos. ¿Vas a cambiar?\"), tp: {}, a: ["
+ },
+ "Si salgo, es para llegar. Prefiero no arriesgar a lo loco.": {
+  "w": [
+   "press-ctx.js:360"
+  ],
+  "ctx": "A(N_(\"Si salgo, es para llegar. Prefiero no arriesgar a lo loco.\"), {boss: 1, fans: -1, press: -2}, \"dip\"),"
+ },
+ "Voy a ser más agresivo. El área pequeña es mía y se va a notar.": {
+  "w": [
+   "press-ctx.js:361"
+  ],
+  "ctx": "A(N_(\"Voy a ser más agresivo. El área pequeña es mía y se va a notar.\"), {fans: 3, form: 1, boss: -1, press: 5}, \"agr\"),"
+ },
+ "Lo trabajo cada día con el entrenador de porteros. Ya veréis la diferencia.": {
+  "w": [
+   "press-ctx.js:362"
+  ],
+  "ctx": "A(N_(\"Lo trabajo cada día con el entrenador de porteros. Ya veréis la diferencia.\"), {boss: 3, press: -2}, \"dip\"),"
+ },
+ "Mis centrales cabecean mejor que yo. ¿Para qué voy a molestarlos?": {
+  "w": [
+   "press-ctx.js:363"
+  ],
+  "ctx": "A(N_(\"Mis centrales cabecean mejor que yo. ¿Para qué voy a molestarlos?\"), {team: 2, fans: 1, press: 3}, \"hum\")"
+ },
+ "Desde la grada se te oye dar órdenes todo el partido. ¿Cuánto pesa la comunicación en tu juego?": {
+  "w": [
+   "press-ctx.js:365"
+  ],
+  "ctx": "return {q: N_(\"Desde la grada se te oye dar órdenes todo el partido. ¿Cuánto pesa la comunicación en tu juego?\"), tp: {}, a: ["
+ },
+ "Es la mitad de mi trabajo. Un grito a tiempo vale más que una parada.": {
+  "w": [
+   "press-ctx.js:366"
+  ],
+  "ctx": "A(N_(\"Es la mitad de mi trabajo. Un grito a tiempo vale más que una parada.\"), {team: 3, boss: 2, press: -1}, \"dip\"),"
+ },
+ "Si no hablo, me duermo. Y si me duermo, nos meten gol.": {
+  "w": [
+   "press-ctx.js:367"
+  ],
+  "ctx": "A(N_(\"Si no hablo, me duermo. Y si me duermo, nos meten gol.\"), {fans: 2, press: 1}, \"hum\"),"
+ },
+ "Ahí atrás mando yo. El que no escuche, que se siente en el banquillo.": {
+  "w": [
+   "press-ctx.js:368"
+  ],
+  "ctx": "A(N_(\"Ahí atrás mando yo. El que no escuche, que se siente en el banquillo.\"), {team: -3, img: 2, press: 8}, \"agr\"),"
+ },
+ "Prefiero que hablen mis paradas.": {
+  "w": [
+   "press-ctx.js:369"
+  ],
+  "ctx": "A(N_(\"Prefiero que hablen mis paradas.\"), {img: 1, press: -3}, \"eva\")"
+ },
+ "Llevas {n} partidos sin marcar. ¿Te pesa la sequía?": {
+  "w": [
+   "press-ctx.js:377"
+  ],
+  "ctx": "return {q: N_(\"Llevas {n} partidos sin marcar. ¿Te pesa la sequía?\"), tp: {n: F.drought}, a: ["
+ },
+ "Un delantero vive del gol y ahora no lo tengo. Toca trabajar más.": {
+  "w": [
+   "press-ctx.js:378"
+  ],
+  "ctx": "A(N_(\"Un delantero vive del gol y ahora no lo tengo. Toca trabajar más.\"), {boss: 2, team: 1, press: -2}, \"dip\"),"
+ },
+ "El gol volverá. Y cuando vuelva, no habrá quien me pare.": {
+  "w": [
+   "press-ctx.js:379"
+  ],
+  "ctx": "A(N_(\"El gol volverá. Y cuando vuelva, no habrá quien me pare.\"), {fans: 3, img: 1, press: 6}, \"agr\"),"
+ },
+ "Si me llegaran más balones, otro gallo cantaría.": {
+  "w": [
+   "press-ctx.js:380"
+  ],
+  "ctx": "A(N_(\"Si me llegaran más balones, otro gallo cantaría.\"), {team: -4, fans: 1, press: 10}, \"agr\"),"
+ },
+ "Me he cortado el pelo para cambiar la suerte. Ya me diréis.": {
+  "w": [
+   "press-ctx.js:381"
+  ],
+  "ctx": "A(N_(\"Me he cortado el pelo para cambiar la suerte. Ya me diréis.\"), {fans: 2, press: 2}, \"hum\")"
+ },
+ "{g} en tus últimos {n} partidos. ¿Es el mejor momento de tu carrera?": {
+  "w": [
+   "press-ctx.js:385"
+  ],
+  "ctx": "return {q: N_(\"{g} en tus últimos {n} partidos. ¿Es el mejor momento de tu carrera?\"), tp: {g: pxU(F.g5, \"g\"), n: F.apps5}, a: ["
+ },
+ "Los goles son del equipo. Yo solo empujo lo que me ponen.": {
+  "w": [
+   "press-ctx.js:386"
+  ],
+  "ctx": "A(N_(\"Los goles son del equipo. Yo solo empujo lo que me ponen.\"), {team: 4, press: -2}, \"dip\"),"
+ },
+ "Estoy en racha y quiero más. Que se preparen los porteros.": {
+  "w": [
+   "press-ctx.js:387"
+  ],
+  "ctx": "A(N_(\"Estoy en racha y quiero más. Que se preparen los porteros.\"), {fans: 4, img: 2, team: -1, press: 8}, \"agr\"),"
+ },
+ "Mi madre dice que todavía no he marcado el bueno. Le haré caso.": {
+  "w": [
+   "press-ctx.js:388"
+  ],
+  "ctx": "A(N_(\"Mi madre dice que todavía no he marcado el bueno. Le haré caso.\"), {fans: 3, press: 1}, \"hum\"),"
+ },
+ "Lo mejor está por llegar. No me pongo límites.": {
+  "w": [
+   "press-ctx.js:389"
+  ],
+  "ctx": "A(N_(\"Lo mejor está por llegar. No me pongo límites.\"), {img: 2, form: 1, press: 3}, \"agr\")"
+ },
+ "Tu nota media en los últimos {n} partidos es de {rt}. ¿Qué te está pasando?": {
+  "w": [
+   "press-ctx.js:398"
+  ],
+  "ctx": "if (F.rt5 <= 6.1) return {q: N_(\"Tu nota media en los últimos {n} partidos es de {rt}. ¿Qué te está pasando?\"), tp: tp, a: ["
+ },
+ "No estoy a mi nivel y lo sé. Voy a darle la vuelta con trabajo.": {
+  "w": [
+   "press-ctx.js:399"
+  ],
+  "ctx": "A(N_(\"No estoy a mi nivel y lo sé. Voy a darle la vuelta con trabajo.\"), {boss: 3, team: 1, press: -3}, \"dip\"),"
+ },
+ "Las notas las ponéis vosotros. Yo sé lo que doy al equipo.": {
+  "w": [
+   "press-ctx.js:400"
+  ],
+  "ctx": "A(N_(\"Las notas las ponéis vosotros. Yo sé lo que doy al equipo.\"), {img: -1, fans: -2, press: 8}, \"agr\"),"
+ },
+ "Arrastro unas molestias, pero no busco excusas.": {
+  "w": [
+   "press-ctx.js:401"
+  ],
+  "ctx": "A(N_(\"Arrastro unas molestias, pero no busco excusas.\"), {boss: 1, fans: 1, press: -1}, \"eva\"),"
+ },
+ "Estoy guardando lo mejor para cuando más se necesite.": {
+  "w": [
+   "press-ctx.js:402"
+  ],
+  "ctx": "A(N_(\"Estoy guardando lo mejor para cuando más se necesite.\"), {fans: 1, press: 3}, \"hum\")"
+ },
+ "Tu nota media en los últimos {n} partidos es de {rt}. ¿Estás en tu mejor momento?": {
+  "w": [
+   "press-ctx.js:404"
+  ],
+  "ctx": "return {q: N_(\"Tu nota media en los últimos {n} partidos es de {rt}. ¿Estás en tu mejor momento?\"), tp: tp, a: ["
+ },
+ "Me siento bien, pero esto va de constancia. Quiero mantenerlo.": {
+  "w": [
+   "press-ctx.js:405"
+  ],
+  "ctx": "A(N_(\"Me siento bien, pero esto va de constancia. Quiero mantenerlo.\"), {boss: 2, form: 2, press: -2}, \"dip\"),"
+ },
+ "Sí, y no pienso bajar el ritmo. Quiero más minutos y más responsabilidad.": {
+  "w": [
+   "press-ctx.js:406"
+  ],
+  "ctx": "A(N_(\"Sí, y no pienso bajar el ritmo. Quiero más minutos y más responsabilidad.\"), {img: 2, fans: 2, boss: -2, press: 7}, \"agr\"),"
+ },
+ "Duermo nueve horas y como como un niño. Es el secreto.": {
+  "w": [
+   "press-ctx.js:407"
+  ],
+  "ctx": "A(N_(\"Duermo nueve horas y como como un niño. Es el secreto.\"), {fans: 3, press: 1}, \"hum\"),"
+ },
+ "Todo es mérito del cuerpo técnico, que me ha dado confianza.": {
+  "w": [
+   "press-ctx.js:408"
+  ],
+  "ctx": "A(N_(\"Todo es mérito del cuerpo técnico, que me ha dado confianza.\"), {boss: 4, team: 1, press: -2}, \"dip\")"
+ },
+ "Te expulsaron ante el {opp}. ¿Fue justa la roja?": {
+  "w": [
+   "press-ctx.js:412"
+  ],
+  "ctx": "return {q: N_(\"Te expulsaron ante el {opp}. ¿Fue justa la roja?\"), tp: {opp: clubName(F.red.o)}, a: ["
+ },
+ "Fue roja. Pido perdón a mis compañeros: los dejé con diez.": {
+  "w": [
+   "press-ctx.js:413"
+  ],
+  "ctx": "A(N_(\"Fue roja. Pido perdón a mis compañeros: los dejé con diez.\"), {team: 3, boss: 2, fans: -1, press: -3}, \"dip\"),"
+ },
+ "Ni de broma. El árbitro tenía la tarjeta en la mano antes de la jugada.": {
+  "w": [
+   "press-ctx.js:414"
+  ],
+  "ctx": "A(N_(\"Ni de broma. El árbitro tenía la tarjeta en la mano antes de la jugada.\"), {fans: 3, img: -2, press: 10}, \"agr\"),"
+ },
+ "La he visto diez veces y sigo sin saber qué pitó.": {
+  "w": [
+   "press-ctx.js:415"
+  ],
+  "ctx": "A(N_(\"La he visto diez veces y sigo sin saber qué pitó.\"), {fans: 1, press: 4}, \"hum\"),"
+ },
+ "No voy a hablar del árbitro. No quiero otra sanción.": {
+  "w": [
+   "press-ctx.js:416"
+  ],
+  "ctx": "A(N_(\"No voy a hablar del árbitro. No quiero otra sanción.\"), {boss: 1, press: -2}, \"eva\")"
+ },
+ "Llevas {n} amarillas esta temporada y estás a una de la sanción. ¿Vas a levantar el pie?": {
+  "w": [
+   "press-ctx.js:420"
+  ],
+  "ctx": "return {q: N_(\"Llevas {n} amarillas esta temporada y estás a una de la sanción. ¿Vas a levantar el pie?\"), tp: {n: F.yc}, a: ["
+ },
+ "Jugaré igual. Si tengo que cortar una contra, la corto.": {
+  "w": [
+   "press-ctx.js:421"
+  ],
+  "ctx": "A(N_(\"Jugaré igual. Si tengo que cortar una contra, la corto.\"), {fans: 2, team: 1, boss: -1, press: 5}, \"agr\"),"
+ },
+ "Tendré cuidado. El equipo me necesita en el campo, no en la grada.": {
+  "w": [
+   "press-ctx.js:422"
+  ],
+  "ctx": "A(N_(\"Tendré cuidado. El equipo me necesita en el campo, no en la grada.\"), {boss: 3, press: -2}, \"dip\"),"
+ },
+ "Mi madre me ha quitado el móvil hasta que deje de ver tarjetas.": {
+  "w": [
+   "press-ctx.js:423"
+  ],
+  "ctx": "A(N_(\"Mi madre me ha quitado el móvil hasta que deje de ver tarjetas.\"), {fans: 2, press: 1}, \"hum\"),"
+ },
+ "Eso se lo tendréis que preguntar a los árbitros.": {
+  "w": [
+   "press-ctx.js:424"
+  ],
+  "ctx": "A(N_(\"Eso se lo tendréis que preguntar a los árbitros.\"), {img: -1, press: 4}, \"eva\")"
+ },
+ "Debutas con {age} años en el {club}. ¿Cómo lo has vivido?": {
+  "w": [
+   "press-ctx.js:428"
+  ],
+  "ctx": "return {q: N_(\"Debutas con {age} años en el {club}. ¿Cómo lo has vivido?\"), tp: {age: F.age, club: F.clubN}, a: ["
+ },
+ "Es el sueño de toda mi vida. Se lo dedico a mi familia.": {
+  "w": [
+   "press-ctx.js:429"
+  ],
+  "ctx": "A(N_(\"Es el sueño de toda mi vida. Se lo dedico a mi familia.\"), {fans: 4, img: 2, press: 2}, \"dip\"),"
+ },
+ "Ahora empieza lo difícil: quedarme. No me conformo con un día.": {
+  "w": [
+   "press-ctx.js:430"
+  ],
+  "ctx": "A(N_(\"Ahora empieza lo difícil: quedarme. No me conformo con un día.\"), {boss: 3, form: 2, press: 2}, \"dip\"),"
+ },
+ "Me temblaban las piernas en el túnel, pero luego ya solo veía el balón.": {
+  "w": [
+   "press-ctx.js:431"
+  ],
+  "ctx": "A(N_(\"Me temblaban las piernas en el túnel, pero luego ya solo veía el balón.\"), {fans: 3, team: 2, press: 1}, \"hum\"),"
+ },
+ "Vengo a quedarme y a ser importante aquí, cuanto antes.": {
+  "w": [
+   "press-ctx.js:432"
+  ],
+  "ctx": "A(N_(\"Vengo a quedarme y a ser importante aquí, cuanto antes.\"), {img: 2, fans: 2, team: -2, press: 8}, \"agr\")"
+ },
+ "No has jugado en {n} de los últimos {m} partidos. ¿Hay algún problema con el míster?": {
+  "w": [
+   "press-ctx.js:436"
+  ],
+  "ctx": "return {q: N_(\"No has jugado en {n} de los últimos {m} partidos. ¿Hay algún problema con el míster?\"), tp: {n: F.benchN, m: F.benchM}, a: ["
+ },
+ "Ninguno. El míster decide y yo entreno para que lo tenga difícil.": {
+  "w": [
+   "press-ctx.js:437"
+  ],
+  "ctx": "A(N_(\"Ninguno. El míster decide y yo entreno para que lo tenga difícil.\"), {boss: 4, team: 1, press: -3}, \"dip\"),"
+ },
+ "No lo entiendo, y él lo sabe. Hablaremos en privado.": {
+  "w": [
+   "press-ctx.js:438"
+  ],
+  "ctx": "A(N_(\"No lo entiendo, y él lo sabe. Hablaremos en privado.\"), {boss: -4, fans: 2, press: 9}, \"agr\"),"
+ },
+ "Problema ninguno. Ya me he leído todos los libros del banquillo.": {
+  "w": [
+   "press-ctx.js:439"
+  ],
+  "ctx": "A(N_(\"Problema ninguno. Ya me he leído todos los libros del banquillo.\"), {fans: 2, boss: -1, press: 3}, \"hum\"),"
+ },
+ "Eso es cosa del entrenador. Yo no voy a decir nada.": {
+  "w": [
+   "press-ctx.js:440"
+  ],
+  "ctx": "A(N_(\"Eso es cosa del entrenador. Yo no voy a decir nada.\"), {press: -2}, \"eva\")"
+ },
+ "Te acaban de dar el premio «{award}». ¿A quién se lo dedicas?": {
+  "w": [
+   "press-ctx.js:444"
+  ],
+  "ctx": "return {q: N_(\"Te acaban de dar el premio «{award}». ¿A quién se lo dedicas?\"), tp: {award: awardName(F.newAw)}, a: ["
+ },
+ "A mis compañeros. Sin ellos, este premio no existe.": {
+  "w": [
+   "press-ctx.js:445"
+  ],
+  "ctx": "A(N_(\"A mis compañeros. Sin ellos, este premio no existe.\"), {team: 4, press: -2}, \"dip\"),"
+ },
+ "A mí mismo, que también me lo he currado.": {
+  "w": [
+   "press-ctx.js:446"
+  ],
+  "ctx": "A(N_(\"A mí mismo, que también me lo he currado.\"), {img: 2, team: -3, fans: 1, press: 8}, \"agr\"),"
+ },
+ "A la afición, que no ha dejado de empujar en ningún momento.": {
+  "w": [
+   "press-ctx.js:447"
+  ],
+  "ctx": "A(N_(\"A la afición, que no ha dejado de empujar en ningún momento.\"), {fans: 5, press: 1}, \"dip\"),"
+ },
+ "A mi madre, que sigue diciéndome que estudie por si acaso.": {
+  "w": [
+   "press-ctx.js:448"
+  ],
+  "ctx": "A(N_(\"A mi madre, que sigue diciéndome que estudie por si acaso.\"), {fans: 3, team: 1, press: 2}, \"hum\")"
+ },
+ "{player} está lejos de su nivel: {rt} de nota media. ¿Le vas a sentar?": {
+  "w": [
+   "press-ctx.js:453"
+  ],
+  "ctx": "if (F.star && F.starRt <= 6.3) return {q: N_(\"{player} está lejos de su nivel: {rt} de nota media. ¿Le vas a sentar?\"), tp: {player: plShort(F.star), rt: {rt: F.starRt}}, a: ["
+ },
+ "Es nuestro mejor jugador y lo va a demostrar. Tiene toda mi confianza.": {
+  "w": [
+   "press-ctx.js:454"
+  ],
+  "ctx": "A(N_(\"Es nuestro mejor jugador y lo va a demostrar. Tiene toda mi confianza.\"), {team: 2, boss: -1, press: 3}, \"dip\"),"
+ },
+ "Aquí juega el que mejor está. Nadie tiene el puesto asegurado.": {
+  "w": [
+   "press-ctx.js:455"
+  ],
+  "ctx": "A(N_(\"Aquí juega el que mejor está. Nadie tiene el puesto asegurado.\"), {team: -2, boss: 2, press: 7}, \"agr\"),"
+ },
+ "Le he pedido más en privado. En público, lo defiendo siempre.": {
+  "w": [
+   "press-ctx.js:456"
+  ],
+  "ctx": "A(N_(\"Le he pedido más en privado. En público, lo defiendo siempre.\"), {team: 3, chem: 1, press: -2}, \"dip\"),"
+ },
+ "Ya hablará él en el campo. Yo no voy a añadir nada.": {
+  "w": [
+   "press-ctx.js:457"
+  ],
+  "ctx": "A(N_(\"Ya hablará él en el campo. Yo no voy a añadir nada.\"), {press: -2}, \"eva\")"
+ },
+ "{player} ya lleva {g} esta temporada. ¿Es el mejor delantero de la liga?": {
+  "w": [
+   "press-ctx.js:459"
+  ],
+  "ctx": "return {q: N_(\"{player} ya lleva {g} esta temporada. ¿Es el mejor delantero de la liga?\"), tp: {player: plShort(F.top), g: pxU(F.top.st.g, \"g\")}, a: ["
+ },
+ "Para mí, sin duda. Y lo mejor es que todavía puede crecer.": {
+  "w": [
+   "press-ctx.js:460"
+  ],
+  "ctx": "A(N_(\"Para mí, sin duda. Y lo mejor es que todavía puede crecer.\"), {team: 3, fans: 3, press: 5}, \"agr\"),"
+ },
+ "Sus goles son mérito de todo el equipo. Él lo sabe mejor que nadie.": {
+  "w": [
+   "press-ctx.js:461"
+  ],
+  "ctx": "A(N_(\"Sus goles son mérito de todo el equipo. Él lo sabe mejor que nadie.\"), {chem: 3, team: 1, press: -2}, \"dip\"),"
+ },
+ "No está en venta, por si alguien pregunta.": {
+  "w": [
+   "press-ctx.js:462"
+  ],
+  "ctx": "A(N_(\"No está en venta, por si alguien pregunta.\"), {fans: 4, boss: -1, press: 6}, \"hum\"),"
+ },
+ "Que siga así y que no lea los periódicos.": {
+  "w": [
+   "press-ctx.js:463"
+  ],
+  "ctx": "A(N_(\"Que siga así y que no lea los periódicos.\"), {press: -3}, \"eva\")"
+ },
+ "Tu equipo suma {n} expulsiones esta temporada. ¿Hay un problema de disciplina?": {
+  "w": [
+   "press-ctx.js:467"
+  ],
+  "ctx": "return {q: N_(\"Tu equipo suma {n} expulsiones esta temporada. ¿Hay un problema de disciplina?\"), tp: {n: F.reds}, a: ["
+ },
+ "Lo hemos hablado. A partir de ahora, quien proteste de más, paga multa.": {
+  "w": [
+   "press-ctx.js:468"
+  ],
+  "ctx": "A(N_(\"Lo hemos hablado. A partir de ahora, quien proteste de más, paga multa.\"), {boss: 3, team: -2, chem: 1, press: -2}, \"dip\"),"
+ },
+ "Somos un equipo intenso. Prefiero pasarme que quedarme corto.": {
+  "w": [
+   "press-ctx.js:469"
+  ],
+  "ctx": "A(N_(\"Somos un equipo intenso. Prefiero pasarme que quedarme corto.\"), {fans: 2, boss: -2, press: 6}, \"agr\"),"
+ },
+ "Algunas rojas no se las cree ni el árbitro que las sacó.": {
+  "w": [
+   "press-ctx.js:470"
+  ],
+  "ctx": "A(N_(\"Algunas rojas no se las cree ni el árbitro que las sacó.\"), {fans: 2, img: -2, press: 9}, \"agr\"),"
+ },
+ "Vamos a trabajar la cabeza tanto como las piernas.": {
+  "w": [
+   "press-ctx.js:471"
+  ],
+  "ctx": "A(N_(\"Vamos a trabajar la cabeza tanto como las piernas.\"), {chem: 2, press: -3}, \"dip\")"
+ },
+ "Has rotado mucho y el equipo lleva {n} partidos sin ganar. ¿Te arrepientes?": {
+  "w": [
+   "press-ctx.js:475"
+  ],
+  "ctx": "if (F.rot === 2) return {q: N_(\"Has rotado mucho y el equipo lleva {n} partidos sin ganar. ¿Te arrepientes?\"), tp: {n: F.run.wl}, a: ["
+ },
+ "No. La temporada es larga y necesito a todos frescos.": {
+  "w": [
+   "press-ctx.js:476"
+  ],
+  "ctx": "A(N_(\"No. La temporada es larga y necesito a todos frescos.\"), {boss: -1, team: 2, press: 3}, \"agr\"),"
+ },
+ "Quizá me he pasado. Daré más continuidad al once.": {
+  "w": [
+   "press-ctx.js:477"
+  ],
+  "ctx": "A(N_(\"Quizá me he pasado. Daré más continuidad al once.\"), {boss: 2, team: -1, press: -2}, \"dip\"),"
+ },
+ "Si no roto, en marzo me pedís explicaciones por las lesiones.": {
+  "w": [
+   "press-ctx.js:478"
+  ],
+  "ctx": "A(N_(\"Si no roto, en marzo me pedís explicaciones por las lesiones.\"), {fans: 1, press: 4}, \"hum\"),"
+ },
+ "Las rotaciones no fallan los goles. Los fallamos todos.": {
+  "w": [
+   "press-ctx.js:479"
+  ],
+  "ctx": "A(N_(\"Las rotaciones no fallan los goles. Los fallamos todos.\"), {team: 1, press: -1}, \"eva\")"
+ },
+ "Siempre juegan los mismos y el físico de la plantilla está al {fit}. ¿No temes un bajón?": {
+  "w": [
+   "press-ctx.js:481"
+  ],
+  "ctx": "return {q: N_(\"Siempre juegan los mismos y el físico de la plantilla está al {fit}. ¿No temes un bajón?\"), tp: {fit: {pc: F.fit}}, a: ["
+ },
+ "El once que gana no se toca. Ya descansarán en verano.": {
+  "w": [
+   "press-ctx.js:482"
+  ],
+  "ctx": "A(N_(\"El once que gana no se toca. Ya descansarán en verano.\"), {fans: 2, team: -2, press: 5}, \"agr\"),"
+ },
+ "Tienes razón: daremos minutos a los que menos juegan.": {
+  "w": [
+   "press-ctx.js:483"
+  ],
+  "ctx": "A(N_(\"Tienes razón: daremos minutos a los que menos juegan.\"), {team: 3, boss: 1, press: -2}, \"dip\"),"
+ },
+ "Aquí nadie se cansa. Es la ventaja de tener un preparador físico que da miedo.": {
+  "w": [
+   "press-ctx.js:484"
+  ],
+  "ctx": "A(N_(\"Aquí nadie se cansa. Es la ventaja de tener un preparador físico que da miedo.\"), {fans: 1, press: 2}, \"hum\"),"
+ },
+ "Lo controlamos con datos. No es una decisión a ciegas.": {
+  "w": [
+   "press-ctx.js:485"
+  ],
+  "ctx": "A(N_(\"Lo controlamos con datos. No es una decisión a ciegas.\"), {boss: 2, press: -3}, \"eva\")"
+ },
+ "La confianza de la directiva está bajo mínimos y ya suenan nombres para tu banquillo. ¿Te sientes cuestionado?": {
+  "w": [
+   "press-ctx.js:489"
+  ],
+  "ctx": "return {q: N_(\"La confianza de la directiva está bajo mínimos y ya suenan nombres para tu banquillo. ¿Te sientes cuestionado?\"), tp: {}, a: ["
+ },
+ "Me siento con fuerzas. Los resultados van a cambiar y el tiempo me dará la razón.": {
+  "w": [
+   "press-ctx.js:490"
+  ],
+  "ctx": "A(N_(\"Me siento con fuerzas. Los resultados van a cambiar y el tiempo me dará la razón.\"), {team: 2, boss: 2, press: -2}, \"dip\"),"
+ },
+ "Que hablen. Si me quieren echar, que lo hagan a la cara.": {
+  "w": [
+   "press-ctx.js:491"
+  ],
+  "ctx": "A(N_(\"Que hablen. Si me quieren echar, que lo hagan a la cara.\"), {fans: 3, boss: -5, press: 12}, \"agr\"),"
+ },
+ "Llevo la maleta hecha desde el primer día. Es lo que tiene este oficio.": {
+  "w": [
+   "press-ctx.js:492"
+  ],
+  "ctx": "A(N_(\"Llevo la maleta hecha desde el primer día. Es lo que tiene este oficio.\"), {fans: 2, press: 4}, \"hum\"),"
+ },
+ "Yo solo pienso en el próximo entrenamiento.": {
+  "w": [
+   "press-ctx.js:493"
+  ],
+  "ctx": "A(N_(\"Yo solo pienso en el próximo entrenamiento.\"), {boss: 1, press: -3}, \"eva\")"
+ },
+ "Se acerca el derbi contra el {opp}. ¿Qué mensaje le mandas a su afición?": {
+  "w": [
+   "press-ctx.js:502"
+  ],
+  "ctx": "if (F.nextOpp >= 0 && W.derby[F.club + \"-\" + F.nextOpp]) return {pre: 1, q: N_(\"Se acerca el derbi contra el {opp}. ¿Qué mensaje le mandas a su afición?\"), tp: {opp: clubName(F.nextOpp)}, a: ["
+ },
+ "Respeto máximo. Es un gran rival y se lo vamos a demostrar en el campo.": {
+  "w": [
+   "press-ctx.js:503"
+  ],
+  "ctx": "A(N_(\"Respeto máximo. Es un gran rival y se lo vamos a demostrar en el campo.\"), {boss: 2, img: 1, press: -3}, \"dip\"),"
+ },
+ "Que vayan preparando los pañuelos. Este derbi es nuestro.": {
+  "w": [
+   "press-ctx.js:504"
+  ],
+  "ctx": "A(N_(\"Que vayan preparando los pañuelos. Este derbi es nuestro.\"), {fans: 6, team: 2, boss: -2, press: 12}, \"agr\"),"
+ },
+ "A los nuestros les pido que llenen el estadio. Los necesitamos.": {
+  "w": [
+   "press-ctx.js:505"
+  ],
+  "ctx": "A(N_(\"A los nuestros les pido que llenen el estadio. Los necesitamos.\"), {fans: 4, team: 1, press: 2}, \"dip\"),"
+ },
+ "¿Derbi? Para mí son tres puntos como otros cualquiera.": {
+  "w": [
+   "press-ctx.js:506"
+  ],
+  "ctx": "A(N_(\"¿Derbi? Para mí son tres puntos como otros cualquiera.\"), {fans: -3, boss: 1, press: 2}, \"eva\")"
+ },
+ "Habéis ganado el derbi ante el {opp} ({gu}-{gt}). ¿Cómo se celebra algo así?": {
+  "w": [
+   "press-ctx.js:509"
+  ],
+  "ctx": "if (d.r === \"W\") return {q: N_(\"Habéis ganado el derbi ante el {opp} ({gu}-{gt}). ¿Cómo se celebra algo así?\"), tp: tp, a: ["
+ },
+ "Con humildad. Mañana ya pensamos en el siguiente.": {
+  "w": [
+   "press-ctx.js:510"
+  ],
+  "ctx": "A(N_(\"Con humildad. Mañana ya pensamos en el siguiente.\"), {boss: 2, press: -3}, \"dip\"),"
+ },
+ "Por todo lo alto. La ciudad vuelve a ser nuestra.": {
+  "w": [
+   "press-ctx.js:511"
+  ],
+  "ctx": "A(N_(\"Por todo lo alto. La ciudad vuelve a ser nuestra.\"), {fans: 6, img: 1, boss: -1, press: 9}, \"agr\"),"
+ },
+ "Esta noche nadie de mi familia me pide nada. Hoy mando yo en casa.": {
+  "w": [
+   "press-ctx.js:512"
+  ],
+  "ctx": "A(N_(\"Esta noche nadie de mi familia me pide nada. Hoy mando yo en casa.\"), {fans: 3, press: 2}, \"hum\"),"
+ },
+ "Se lo dedico a la afición. Ellos lo viven más que nadie.": {
+  "w": [
+   "press-ctx.js:513"
+  ],
+  "ctx": "A(N_(\"Se lo dedico a la afición. Ellos lo viven más que nadie.\"), {fans: 5, team: 1, press: 1}, \"dip\")"
+ },
+ "{gu}-{gt} en el derbi ante el {opp}. ¿Cómo se le explica eso a la afición?": {
+  "w": [
+   "press-ctx.js:515"
+  ],
+  "ctx": "return {q: N_(\"{gu}-{gt} en el derbi ante el {opp}. ¿Cómo se le explica eso a la afición?\"), tp: tp, a: ["
+ },
+ "No hay explicación que valga. Solo pedir perdón y darlo todo en el próximo.": {
+  "w": [
+   "press-ctx.js:516"
+  ],
+  "ctx": "A(N_(\"No hay explicación que valga. Solo pedir perdón y darlo todo en el próximo.\"), {fans: 3, team: 1, press: -2}, \"dip\"),"
+ },
+ "Ellos no fueron mejores. Nos pitaron todo en contra.": {
+  "w": [
+   "press-ctx.js:517"
+  ],
+  "ctx": "A(N_(\"Ellos no fueron mejores. Nos pitaron todo en contra.\"), {fans: 2, img: -2, press: 10}, \"agr\"),"
+ },
+ "Duele, y tiene que doler. Al que no le duela, que se lo haga mirar.": {
+  "w": [
+   "press-ctx.js:518"
+  ],
+  "ctx": "A(N_(\"Duele, y tiene que doler. Al que no le duela, que se lo haga mirar.\"), {fans: 4, team: -2, press: 6}, \"agr\"),"
+ },
+ "Ya lo hablaremos dentro.": {
+  "w": [
+   "press-ctx.js:519"
+  ],
+  "ctx": "A(N_(\"Ya lo hablaremos dentro.\"), {press: -1, fans: -2}, \"eva\")"
+ },
+ "Te mides al {opp}, uno de tus antiguos clubes. ¿Es un partido especial?": {
+  "w": [
+   "press-ctx.js:527"
+  ],
+  "ctx": "if (nx) return {pre: 1, q: F.mgr ? N_(\"Te mides al {opp}, uno de tus antiguos clubes. ¿Es un partido especial?\") : N_(\"El próximo rival es el {opp}, tu antiguo club. ¿Celebrarías un gol contra ellos?\"), tp: tp, a: ["
+ },
+ "El próximo rival es el {opp}, tu antiguo club. ¿Celebrarías un gol contra ellos?": {
+  "w": [
+   "press-ctx.js:527"
+  ],
+  "ctx": "if (nx) return {pre: 1, q: F.mgr ? N_(\"Te mides al {opp}, uno de tus antiguos clubes. ¿Es un partido especial?\") : N_(\"El próximo rival es el {opp}, tu antiguo club. ¿Celebrarías un gol contra ellos?\"), tp: tp, a: ["
+ },
+ "Especial, sí. Les tengo cariño, pero el domingo quiero ganar.": {
+  "w": [
+   "press-ctx.js:528"
+  ],
+  "ctx": "F.mgr ? A(N_(\"Especial, sí. Les tengo cariño, pero el domingo quiero ganar.\"), {fans: 1, img: 3, press: -2}, \"dip\") : A(N_(\"No lo celebraría. Respeto mucho a esa afición.\"), {fans: -1, img: 3, press: -3}, \"dip\"),"
+ },
+ "No lo celebraría. Respeto mucho a esa afición.": {
+  "w": [
+   "press-ctx.js:528"
+  ],
+  "ctx": "F.mgr ? A(N_(\"Especial, sí. Les tengo cariño, pero el domingo quiero ganar.\"), {fans: 1, img: 3, press: -2}, \"dip\") : A(N_(\"No lo celebraría. Respeto mucho a esa afición.\"), {fans: -1, img: 3, press: -3}, \"dip\"),"
+ },
+ "Ni especial ni nada. Ahora me debo a esta camiseta.": {
+  "w": [
+   "press-ctx.js:529"
+  ],
+  "ctx": "A(N_(\"Ni especial ni nada. Ahora me debo a esta camiseta.\"), {fans: 4, img: -1, press: 6}, \"agr\"),"
+ },
+ "Allí me trataron muy bien… y aquí me tratan todavía mejor.": {
+  "w": [
+   "press-ctx.js:530"
+  ],
+  "ctx": "A(N_(\"Allí me trataron muy bien… y aquí me tratan todavía mejor.\"), {fans: 3, press: 1}, \"hum\"),"
+ }
+}

@@ -1,0 +1,67 @@
+{
+ "id": "mls2",
+ "league": "MLS",
+ "country": "US",
+ "clubs": [
+  {
+   "club": "Atlanta United",
+   "gameRating": 69.9
+  },
+  {
+   "club": "Austin FC",
+   "gameRating": 69.6
+  },
+  {
+   "club": "Portland Timbers",
+   "gameRating": 69.3
+  },
+  {
+   "club": "Real Salt Lake",
+   "gameRating": 69
+  },
+  {
+   "club": "Houston Dynamo",
+   "gameRating": 68.7
+  },
+  {
+   "club": "FC Dallas",
+   "gameRating": 68.4
+  },
+  {
+   "club": "Colorado Rapids",
+   "gameRating": 68.2
+  },
+  {
+   "club": "St. Louis City",
+   "gameRating": 67.9
+  },
+  {
+   "club": "New England Revolution",
+   "gameRating": 67.6
+  },
+  {
+   "club": "Chicago Fire",
+   "gameRating": 67.3
+  },
+  {
+   "club": "Toronto FC",
+   "gameRating": 67.1
+  },
+  {
+   "club": "CF Montréal",
+   "gameRating": 66.8
+  },
+  {
+   "club": "Sporting Kansas City",
+   "gameRating": 66.5
+  },
+  {
+   "club": "D.C. United",
+   "gameRating": 66.3
+  },
+  {
+   "club": "San Jose Earthquakes",
+   "gameRating": 66
+  }
+ ]
+}

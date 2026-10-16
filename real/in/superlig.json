@@ -1,0 +1,79 @@
+{
+ "id": "superlig",
+ "league": "Süper Lig",
+ "country": "TR",
+ "clubs": [
+  {
+   "club": "Galatasaray",
+   "gameRating": 80
+  },
+  {
+   "club": "Fenerbahçe",
+   "gameRating": 78.8
+  },
+  {
+   "club": "Beşiktaş",
+   "gameRating": 77.9
+  },
+  {
+   "club": "Trabzonspor",
+   "gameRating": 77
+  },
+  {
+   "club": "Başakşehir",
+   "gameRating": 76.2
+  },
+  {
+   "club": "Samsunspor",
+   "gameRating": 75.4
+  },
+  {
+   "club": "Göztepe",
+   "gameRating": 74.6
+  },
+  {
+   "club": "Kasımpaşa",
+   "gameRating": 73.9
+  },
+  {
+   "club": "Alanyaspor",
+   "gameRating": 73.2
+  },
+  {
+   "club": "Çaykur Rizespor",
+   "gameRating": 72.4
+  },
+  {
+   "club": "Konyaspor",
+   "gameRating": 71.7
+  },
+  {
+   "club": "Gaziantep FK",
+   "gameRating": 71
+  },
+  {
+   "club": "Eyüpspor",
+   "gameRating": 70.3
+  },
+  {
+   "club": "Kocaelispor",
+   "gameRating": 69.7
+  },
+  {
+   "club": "Gençlerbirliği",
+   "gameRating": 69
+  },
+  {
+   "club": "Erzurumspor",
+   "gameRating": 68.3
+  },
+  {
+   "club": "Amedspor",
+   "gameRating": 67.7
+  },
+  {
+   "club": "Çorum FK",
+   "gameRating": 67
+  }
+ ]
+}

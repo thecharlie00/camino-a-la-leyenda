@@ -1,0 +1,79 @@
+{
+ "id": "bundesliga",
+ "league": "Bundesliga",
+ "country": "DE",
+ "clubs": [
+  {
+   "club": "Bayern Múnich",
+   "gameRating": 86
+  },
+  {
+   "club": "Bayer Leverkusen",
+   "gameRating": 84.7
+  },
+  {
+   "club": "Borussia Dortmund",
+   "gameRating": 83.7
+  },
+  {
+   "club": "RB Leipzig",
+   "gameRating": 82.8
+  },
+  {
+   "club": "Eintracht Frankfurt",
+   "gameRating": 81.9
+  },
+  {
+   "club": "VfB Stuttgart",
+   "gameRating": 81.1
+  },
+  {
+   "club": "SC Freiburg",
+   "gameRating": 80.2
+  },
+  {
+   "club": "TSG Hoffenheim",
+   "gameRating": 79.4
+  },
+  {
+   "club": "Werder Bremen",
+   "gameRating": 78.6
+  },
+  {
+   "club": "Borussia Mönchengladbach",
+   "gameRating": 77.8
+  },
+  {
+   "club": "Mainz 05",
+   "gameRating": 77.1
+  },
+  {
+   "club": "FC Augsburg",
+   "gameRating": 76.3
+  },
+  {
+   "club": "Union Berlin",
+   "gameRating": 75.6
+  },
+  {
+   "club": "1. FC Köln",
+   "gameRating": 74.9
+  },
+  {
+   "club": "Hamburger SV",
+   "gameRating": 74.1
+  },
+  {
+   "club": "Schalke 04",
+   "gameRating": 73.4
+  },
+  {
+   "club": "SC Paderborn",
+   "gameRating": 72.7
+  },
+  {
+   "club": "SV Elversberg",
+   "gameRating": 72
+  }
+ ]
+}

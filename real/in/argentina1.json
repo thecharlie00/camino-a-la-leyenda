@@ -1,0 +1,67 @@
+{
+ "id": "argentina1",
+ "league": "Liga Profesional",
+ "country": "AR",
+ "clubs": [
+  {
+   "club": "River Plate",
+   "gameRating": 77
+  },
+  {
+   "club": "Boca Juniors",
+   "gameRating": 76.4
+  },
+  {
+   "club": "Racing Club",
+   "gameRating": 76
+  },
+  {
+   "club": "Estudiantes de La Plata",
+   "gameRating": 75.5
+  },
+  {
+   "club": "Vélez Sarsfield",
+   "gameRating": 75.1
+  },
+  {
+   "club": "Talleres",
+   "gameRating": 74.8
+  },
+  {
+   "club": "Independiente",
+   "gameRating": 74.4
+  },
+  {
+   "club": "Rosario Central",
+   "gameRating": 74
+  },
+  {
+   "club": "Argentinos Juniors",
+   "gameRating": 73.7
+  },
+  {
+   "club": "Huracán",
+   "gameRating": 73.3
+  },
+  {
+   "club": "Lanús",
+   "gameRating": 73
+  },
+  {
+   "club": "San Lorenzo",
+   "gameRating": 72.6
+  },
+  {
+   "club": "Belgrano",
+   "gameRating": 72.3
+  },
+  {
+   "club": "Defensa y Justicia",
+   "gameRating": 71.9
+  },
+  {
+   "club": "Newell's Old Boys",
+   "gameRating": 71.6
+  }
+ ]
+}

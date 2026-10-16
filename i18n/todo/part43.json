@@ -1,0 +1,1410 @@
+{
+ "Selección de {nat}": {
+  "w": [
+   "mgr-plus.js:455"
+  ],
+  "ctx": "function mpNatLabel(ni) { return S.g === \"f\" ? tr(\"Selección femenina de {nat}\", {nat: natName(ni)}) : tr(\"Selección de {nat}\", {nat: natName(ni)}); }"
+ },
+ "Dejas el {club}": {
+  "w": [
+   "mgr-plus.js:550"
+  ],
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Banquillo\"), title: tr(\"Dejas el {club}\", {club: clubName(m.club)}), choice: mpNatLabel(ni), txt: tr(\"Te dedicas en exclusiva a la selección.\"), chips: [], y: S.yr});"
+ },
+ "Te dedicas en exclusiva a la selección.": {
+  "w": [
+   "mgr-plus.js:550"
+  ],
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Banquillo\"), title: tr(\"Dejas el {club}\", {club: clubName(m.club)}), choice: mpNatLabel(ni), txt: tr(\"Te dedicas en exclusiva a la selección.\"), chips: [], y: S.yr});"
+ },
+ "Eres el nuevo seleccionador: {nat}.": {
+  "w": [
+   "mgr-plus.js:553"
+  ],
+  "ctx": "notify(\"🏳️ \" + tr(\"Eres el nuevo seleccionador: {nat}.\", {nat: mpNatLabel(ni)}), \"good\");"
+ },
+ "Fin de tu etapa en la selección": {
+  "w": [
+   "mgr-plus.js:559"
+  ],
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Selección\"), title: tr(\"Fin de tu etapa en la selección\"), choice: mpNatLabel(nt.ni), txt: txt, chips: [], y: S.yr});"
+ },
+ "La federación te destituye tras una temporada con {w} victorias en {n} partidos.": {
+  "w": [
+   "mgr-plus.js:570"
+  ],
+  "ctx": "if (n >= 5 && s.w / n < 0.25) { mpNatEnd(tr(\"La federación te destituye tras una temporada con {w} victorias en {n} partidos.\", {w: s.w, n: n})); return; }"
+ },
+ "La federación te renueva hasta {y}.": {
+  "w": [
+   "mgr-plus.js:572"
+  ],
+  "ctx": "if (!tot || nt.w / tot >= 0.4 || nt.tro) { nt.end += 2; notify(\"🏳️ \" + tr(\"La federación te renueva hasta {y}.\", {y: nt.end + 1}), \"good\"); }"
+ },
+ "La federación no te renueva: {w} victorias en {n} partidos.": {
+  "w": [
+   "mgr-plus.js:573"
+  ],
+  "ctx": "else mpNatEnd(tr(\"La federación no te renueva: {w} victorias en {n} partidos.\", {w: nt.w, n: tot}));"
+ },
+ "¡Rueda el balón! {us} contra {them}.": {
+  "w": [
+   "mgr-plus.js:589"
+  ],
+  "ctx": "ko: [N_(\"¡Rueda el balón! {us} contra {them}.\")],"
+ },
+ "¡GOOOL de {us}! {a} la empuja tras un pase de {b}. {g1}-{g2}.": {
+  "w": [
+   "mgr-plus.js:590"
+  ],
+  "ctx": "gu: [N_(\"¡GOOOL de {us}! {a} la empuja tras un pase de {b}. {g1}-{g2}.\"), N_(\"¡GOLAZO de {a}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.\"), N_(\"¡Gol! {a} cabecea un centro de {b}. {g1}-{g2}.\")]"
+ },
+ "¡GOLAZO de {a}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.": {
+  "w": [
+   "mgr-plus.js:590"
+  ],
+  "ctx": "gu: [N_(\"¡GOOOL de {us}! {a} la empuja tras un pase de {b}. {g1}-{g2}.\"), N_(\"¡GOLAZO de {a}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.\"), N_(\"¡Gol! {a} cabecea un centro de {b}. {g1}-{g2}.\")]"
+ },
+ "¡Gol! {a} cabecea un centro de {b}. {g1}-{g2}.": {
+  "w": [
+   "mgr-plus.js:590"
+  ],
+  "ctx": "gu: [N_(\"¡GOOOL de {us}! {a} la empuja tras un pase de {b}. {g1}-{g2}.\"), N_(\"¡GOLAZO de {a}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.\"), N_(\"¡Gol! {a} cabecea un centro de {b}. {g1}-{g2}.\")]"
+ },
+ "Gol de {them}. {a} no perdona. {g1}-{g2}.": {
+  "w": [
+   "mgr-plus.js:591"
+  ],
+  "ctx": "gt: [N_(\"Gol de {them}. {a} no perdona. {g1}-{g2}.\"), N_(\"{a} bate a {b} por bajo. {g1}-{g2}.\"), N_(\"Jarro de agua fría: cabezazo de {a}. {g1}-{g2}.\")],"
+ },
+ "{a} bate a {b} por bajo. {g1}-{g2}.": {
+  "w": [
+   "mgr-plus.js:591"
+  ],
+  "ctx": "gt: [N_(\"Gol de {them}. {a} no perdona. {g1}-{g2}.\"), N_(\"{a} bate a {b} por bajo. {g1}-{g2}.\"), N_(\"Jarro de agua fría: cabezazo de {a}. {g1}-{g2}.\")],"
+ },
+ "Jarro de agua fría: cabezazo de {a}. {g1}-{g2}.": {
+  "w": [
+   "mgr-plus.js:591"
+  ],
+  "ctx": "gt: [N_(\"Gol de {them}. {a} no perdona. {g1}-{g2}.\"), N_(\"{a} bate a {b} por bajo. {g1}-{g2}.\"), N_(\"Jarro de agua fría: cabezazo de {a}. {g1}-{g2}.\")],"
+ },
+ "¡Uy! {a} la manda rozando el palo.": {
+  "w": [
+   "mgr-plus.js:592"
+  ],
+  "ctx": "cu: [N_(\"¡Uy! {a} la manda rozando el palo.\"), N_(\"Paradón del portero rival a tiro de {a}.\"), N_(\"{a} se queda solo… ¡y la tira fuera!\")],"
+ },
+ "Paradón del portero rival a tiro de {a}.": {
+  "w": [
+   "mgr-plus.js:592"
+  ],
+  "ctx": "cu: [N_(\"¡Uy! {a} la manda rozando el palo.\"), N_(\"Paradón del portero rival a tiro de {a}.\"), N_(\"{a} se queda solo… ¡y la tira fuera!\")],"
+ },
+ "{a} se queda solo… ¡y la tira fuera!": {
+  "w": [
+   "mgr-plus.js:592"
+  ],
+  "ctx": "cu: [N_(\"¡Uy! {a} la manda rozando el palo.\"), N_(\"Paradón del portero rival a tiro de {a}.\"), N_(\"{a} se queda solo… ¡y la tira fuera!\")],"
+ },
+ "{a} avisa: remate desviado.": {
+  "w": [
+   "mgr-plus.js:593"
+  ],
+  "ctx": "ct: [N_(\"{a} avisa: remate desviado.\"), N_(\"¡Paradón de {b}! Evita el gol de {a}.\"), N_(\"¡Al palo! {a} casi marca.\")],"
+ },
+ "¡Paradón de {b}! Evita el gol de {a}.": {
+  "w": [
+   "mgr-plus.js:593"
+  ],
+  "ctx": "ct: [N_(\"{a} avisa: remate desviado.\"), N_(\"¡Paradón de {b}! Evita el gol de {a}.\"), N_(\"¡Al palo! {a} casi marca.\")],"
+ },
+ "¡Al palo! {a} casi marca.": {
+  "w": [
+   "mgr-plus.js:593"
+  ],
+  "ctx": "ct: [N_(\"{a} avisa: remate desviado.\"), N_(\"¡Paradón de {b}! Evita el gol de {a}.\"), N_(\"¡Al palo! {a} casi marca.\")],"
+ },
+ "Amarilla para {a} por una entrada a destiempo.": {
+  "w": [
+   "mgr-plus.js:594"
+  ],
+  "ctx": "yc: [N_(\"Amarilla para {a} por una entrada a destiempo.\")],"
+ },
+ "Descanso: {g1}-{g2}.": {
+  "w": [
+   "mgr-plus.js:595"
+  ],
+  "ctx": "ht: [N_(\"Descanso: {g1}-{g2}.\")],"
+ },
+ "Final: {us} {g1}-{g2} {them}.": {
+  "w": [
+   "mgr-plus.js:596"
+  ],
+  "ctx": "ft: [N_(\"Final: {us} {g1}-{g2} {them}.\")],"
+ },
+ "Prórroga: {g1}-{g2} tras los 120 minutos.": {
+  "w": [
+   "mgr-plus.js:597"
+  ],
+  "ctx": "et: [N_(\"Prórroga: {g1}-{g2} tras los 120 minutos.\")],"
+ },
+ "Penaltis: {g1}-{g2}.": {
+  "w": [
+   "mgr-plus.js:598"
+  ],
+  "ctx": "pen: [N_(\"Penaltis: {g1}-{g2}.\")]"
+ },
+ "Dos federaciones te quieren como seleccionador: {a} (nivel {ra}) y {b} (nivel {rb}).": {
+  "w": [
+   "mgr-plus.js:663"
+  ],
+  "ctx": "var txt = x.list.length > 1 ? tr(\"Dos federaciones te quieren como seleccionador: {a} (nivel {ra}) y {b} (nivel {rb}).\", {a: natName(x.list[0]), ra: Math.round(S.nr[x.list[0]]), b: natName(x.list[1]), rb: Math.round(S.nr"
+ },
+ "La federación de {nat} (nivel {r}) te quiere como seleccionador.": {
+  "w": [
+   "mgr-plus.js:664"
+  ],
+  "ctx": ": tr(\"La federación de {nat} (nivel {r}) te quiere como seleccionador.\", {nat: natName(ni), r: Math.round(S.nr[ni])});"
+ },
+ "Dirigirías a la selección femenina hasta {y}.": {
+  "w": [
+   "mgr-plus.js:665"
+  ],
+  "ctx": "txt += \" \" + (S.g === \"f\" ? tr(\"Dirigirías a la selección femenina hasta {y}.\", {y: S.yr + 3}) : tr(\"Dirigirías a la selección hasta {y}.\", {y: S.yr + 3}));"
+ },
+ "Dirigirías a la selección hasta {y}.": {
+  "w": [
+   "mgr-plus.js:665"
+  ],
+  "ctx": "txt += \" \" + (S.g === \"f\" ? tr(\"Dirigirías a la selección femenina hasta {y}.\", {y: S.yr + 3}) : tr(\"Dirigirías a la selección hasta {y}.\", {y: S.yr + 3}));"
+ },
+ "Puedes compaginarlo con el {club} o dejar el club y dedicarte en exclusiva.": {
+  "w": [
+   "mgr-plus.js:666"
+  ],
+  "ctx": "txt += \" \" + (m.club >= 0 ? tr(\"Puedes compaginarlo con el {club} o dejar el club y dedicarte en exclusiva.\", {club: clubName(m.club)}) : tr(\"Ahora mismo no tienes club: sería tu único trabajo.\"));"
+ },
+ "Ahora mismo no tienes club: sería tu único trabajo.": {
+  "w": [
+   "mgr-plus.js:666"
+  ],
+  "ctx": "txt += \" \" + (m.club >= 0 ? tr(\"Puedes compaginarlo con el {club} o dejar el club y dedicarte en exclusiva.\", {club: clubName(m.club)}) : tr(\"Ahora mismo no tienes club: sería tu único trabajo.\"));"
+ },
+ "Federación": {
+  "w": [
+   "mgr-plus.js:667"
+  ],
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Selección\"), cls: \"\", cat: tr(\"Federación\"), title: tr(\"Llamada de la federación\"), text: txt}; },"
+ },
+ "Llamada de la federación": {
+  "w": [
+   "mgr-plus.js:667"
+  ],
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Selección\"), cls: \"\", cat: tr(\"Federación\"), title: tr(\"Llamada de la federación\"), text: txt}; },"
+ },
+ "Aceptar {nat} y compaginarlo con el club": {
+  "w": [
+   "mgr-plus.js:671"
+  ],
+  "ctx": "if (m.club >= 0) out.push({t: tr(\"Aceptar {nat} y compaginarlo con el club\", {nat: natName(ni)}), d: tr(\"{sal}/año extra · la directiva prefiere que no te distraigas\", {sal: fmtMoney(mpNatSal(ni, false))}),"
+ },
+ "{sal}/año extra · la directiva prefiere que no te distraigas": {
+  "w": [
+   "mgr-plus.js:671"
+  ],
+  "ctx": "if (m.club >= 0) out.push({t: tr(\"Aceptar {nat} y compaginarlo con el club\", {nat: natName(ni)}), d: tr(\"{sal}/año extra · la directiva prefiere que no te distraigas\", {sal: fmtMoney(mpNatSal(ni, false))}),"
+ },
+ "Serás club y selección a la vez.": {
+  "w": [
+   "mgr-plus.js:672"
+  ],
+  "ctx": "ok: {txt: tr(\"Serás club y selección a la vez.\"), fx: {board: -3, rep: 2}, then: function () { mpNatTake(ni, false); }}});"
+ },
+ "Aceptar {nat} en exclusiva (dejas el club)": {
+  "w": [
+   "mgr-plus.js:673"
+  ],
+  "ctx": "out.push({t: m.club >= 0 ? tr(\"Aceptar {nat} en exclusiva (dejas el club)\", {nat: natName(ni)}) : tr(\"Aceptar {nat}\", {nat: natName(ni)}), d: tr(\"{sal}/año\", {sal: fmtMoney(mpNatSal(ni, true))}),"
+ },
+ "Aceptar {nat}": {
+  "w": [
+   "mgr-plus.js:673"
+  ],
+  "ctx": "out.push({t: m.club >= 0 ? tr(\"Aceptar {nat} en exclusiva (dejas el club)\", {nat: natName(ni)}) : tr(\"Aceptar {nat}\", {nat: natName(ni)}), d: tr(\"{sal}/año\", {sal: fmtMoney(mpNatSal(ni, true))}),"
+ },
+ "Te dedicas en cuerpo y alma a la selección.": {
+  "w": [
+   "mgr-plus.js:674"
+  ],
+  "ctx": "ok: {txt: tr(\"Te dedicas en cuerpo y alma a la selección.\"), fx: {rep: 3}, then: function () { mpNatTake(ni, true); }}});"
+ },
+ "Agradeces la llamada, pero no es el momento.": {
+  "w": [
+   "mgr-plus.js:676"
+  ],
+  "ctx": "out.push({t: tr(\"Rechazar la oferta\"), ok: {txt: tr(\"Agradeces la llamada, pero no es el momento.\"), fx: m.club >= 0 ? {board: 2} : {}}});"
+ },
+ "Partido de clasificación": {
+  "w": [
+   "mgr-plus.js:683"
+  ],
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"Selección\"), cls: \"hotc\", hot: true, cat: x.cmp === \"q\" ? tr(\"Partido de clasificación\") : tr(\"Amistoso internacional\"),"
+ },
+ "{us} contra {them}": {
+  "w": [
+   "mgr-plus.js:684"
+  ],
+  "ctx": "title: tr(\"{us} contra {them}\", {us: natName(nt.ni), them: natName(x.opp)}),"
+ },
+ "en casa": {
+  "w": [
+   "mgr-plus.js:685"
+  ],
+  "ctx": "text: tr(\"Ventana internacional. Tu selección llega con un nivel de {a} frente a {b}, {where}. ¿Lo ves en directo o lo simulas?\", {a: Math.round(mpNatRating()), b: Math.round(S.nr[x.opp]), where: x.h === 1 ? tr(\"en casa\""
+ },
+ "a domicilio": {
+  "w": [
+   "mgr-plus.js:685"
+  ],
+  "ctx": "text: tr(\"Ventana internacional. Tu selección llega con un nivel de {a} frente a {b}, {where}. ¿Lo ves en directo o lo simulas?\", {a: Math.round(mpNatRating()), b: Math.round(S.nr[x.opp]), where: x.h === 1 ? tr(\"en casa\""
+ },
+ "Ventana internacional. Tu selección llega con un nivel de {a} frente a {b}, {where}. ¿Lo ves en directo o lo simulas?": {
+  "w": [
+   "mgr-plus.js:685"
+  ],
+  "ctx": "text: tr(\"Ventana internacional. Tu selección llega con un nivel de {a} frente a {b}, {where}. ¿Lo ves en directo o lo simulas?\", {a: Math.round(mpNatRating()), b: Math.round(S.nr[x.opp]), where: x.h === 1 ? tr(\"en casa\""
+ },
+ "Ver el partido en directo": {
+  "w": [
+   "mgr-plus.js:687"
+  ],
+  "ctx": "{t: tr(\"Ver el partido en directo\"), d: tr(\"Narración minuto a minuto.\"), live: 1, ok: {txt: \"\"}},"
+ },
+ "Narración minuto a minuto.": {
+  "w": [
+   "mgr-plus.js:687"
+  ],
+  "ctx": "{t: tr(\"Ver el partido en directo\"), d: tr(\"Narración minuto a minuto.\"), live: 1, ok: {txt: \"\"}},"
+ },
+ "Victoria {a}-{b} ante {opp}.": {
+  "w": [
+   "mgr-plus.js:698"
+  ],
+  "ctx": "txt: rec.r > 0 ? tr(\"Victoria {a}-{b} ante {opp}.\", {a: rec.gu, b: rec.gt, opp: natName(x.opp)}) : rec.r < 0 ? tr(\"Derrota {a}-{b} ante {opp}.\", {a: rec.gu, b: rec.gt, opp: natName(x.opp)}) : tr(\"Empate {a}-{b} ante {opp"
+ },
+ "Derrota {a}-{b} ante {opp}.": {
+  "w": [
+   "mgr-plus.js:698"
+  ],
+  "ctx": "txt: rec.r > 0 ? tr(\"Victoria {a}-{b} ante {opp}.\", {a: rec.gu, b: rec.gt, opp: natName(x.opp)}) : rec.r < 0 ? tr(\"Derrota {a}-{b} ante {opp}.\", {a: rec.gu, b: rec.gt, opp: natName(x.opp)}) : tr(\"Empate {a}-{b} ante {opp"
+ },
+ "Empate {a}-{b} ante {opp}.": {
+  "w": [
+   "mgr-plus.js:698"
+  ],
+  "ctx": "txt: rec.r > 0 ? tr(\"Victoria {a}-{b} ante {opp}.\", {a: rec.gu, b: rec.gt, opp: natName(x.opp)}) : rec.r < 0 ? tr(\"Derrota {a}-{b} ante {opp}.\", {a: rec.gu, b: rec.gt, opp: natName(x.opp)}) : tr(\"Empate {a}-{b} ante {opp"
+ },
+ "¡CAMPEONES! {nat} gana el {comp}.": {
+  "w": [
+   "mgr-plus.js:736"
+  ],
+  "ctx": "if (c.win === nt.ni) { nt.tro++; mgrAddTrophy(k, c.n); S.bnews.push({t: \"trophy\", x: tr(\"¡CAMPEONES! {nat} gana el {comp}.\", {nat: natName(nt.ni), comp: trComp(c.n)})}); }"
+ },
+ "{nat} en el {comp}: {stage}.": {
+  "w": [
+   "mgr-plus.js:737"
+  ],
+  "ctx": "else S.bnews.push({t: \"ok\", x: tr(\"{nat} en el {comp}: {stage}.\", {nat: natName(nt.ni), comp: trComp(c.n), stage: lcT(tr(stageReached(c, nt.ni)))})});"
+ },
+ "{block} sin club": {
+  "w": [
+   "mgr-plus.js:752"
+  ],
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Selección\"), title: tr(\"{block} sin club\", {block: tr(b[2])}), choice: mpNatLabel(mpNT().ni), txt: tr(\"Sigues el fútbol de clubes desde la grada y preparas las próximas convocat"
+ },
+ "Sigues el fútbol de clubes desde la grada y preparas las próximas convocatorias.": {
+  "w": [
+   "mgr-plus.js:752"
+  ],
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Selección\"), title: tr(\"{block} sin club\", {block: tr(b[2])}), choice: mpNatLabel(mpNT().ni), txt: tr(\"Sigues el fútbol de clubes desde la grada y preparas las próximas convocat"
+ },
+ "Una temporada más como seleccionador en exclusiva.": {
+  "w": [
+   "mgr-plus.js:768"
+  ],
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Selección\"), title: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), choice: mpNatLabel(mpNT().ni), txt: tr(\"Una temporada más como seleccionador en exclusiva.\"), chips: ["
+ },
+ "Prometerle minutos": {
+  "w": [
+   "mgr-plus.js:796"
+  ],
+  "ctx": "{k: \"prom\", t: tr(\"Prometerle minutos\"), fx: {pmor: 12}, n: tr(\"Si no juega, se sentirá engañado\")},"
+ },
+ "Ajustarle el rol con sinceridad": {
+  "w": [
+   "mgr-plus.js:798"
+  ],
+  "ctx": "{k: \"role\", t: tr(\"Ajustarle el rol con sinceridad\"), fx: {pmor: low === p.role ? 2 : -2}, n: low === p.role ? null : tr(\"{name} pasa a {role}\", {name: plShort(p), role: lcT(tr(ROLES[low].n))})}"
+ },
+ "Prometerle la renovación": {
+  "w": [
+   "mgr-plus.js:801"
+  ],
+  "ctx": "{k: \"renew\", t: tr(\"Prometerle la renovación\"), fx: {pmor: 6}, n: tr(\"Abres ahora la negociación\")},"
+ },
+ "Abres ahora la negociación": {
+  "w": [
+   "mgr-plus.js:801"
+  ],
+  "ctx": "{k: \"renew\", t: tr(\"Prometerle la renovación\"), fx: {pmor: 6}, n: tr(\"Abres ahora la negociación\")},"
+ },
+ "Que espere a final de temporada": {
+  "w": [
+   "mgr-plus.js:802"
+  ],
+  "ctx": "{k: \"wait\", t: tr(\"Que espere a final de temporada\"), fx: {pmor: -3}},"
+ },
+ "Decirle que no seguirá": {
+  "w": [
+   "mgr-plus.js:803"
+  ],
+  "ctx": "{k: \"bye\", t: tr(\"Decirle que no seguirá\"), fx: {pmor: -8}, n: tr(\"Se irá libre al acabar su contrato\")}"
+ },
+ "Convencerle para que se quede": {
+  "w": [
+   "mgr-plus.js:806"
+  ],
+  "ctx": "{k: \"stay\", t: tr(\"Convencerle para que se quede\"), fx: {pmor: 10}, n: tr(\"Deja de pedir salir\")},"
+ },
+ "Deja de pedir salir": {
+  "w": [
+   "mgr-plus.js:806"
+  ],
+  "ctx": "{k: \"stay\", t: tr(\"Convencerle para que se quede\"), fx: {pmor: 10}, n: tr(\"Deja de pedir salir\")},"
+ },
+ "Ponerle en la lista de venta": {
+  "w": [
+   "mgr-plus.js:807"
+  ],
+  "ctx": "{k: \"list\", t: tr(\"Ponerle en la lista de venta\"), fx: {pmor: 5}, n: tr(\"{name} pasa a estar en venta\", {name: plShort(p)})},"
+ },
+ "Mano dura: aquí manda el club": {
+  "w": [
+   "mgr-plus.js:808"
+  ],
+  "ctx": "{k: \"hard\", t: tr(\"Mano dura: aquí manda el club\"), fx: {pmor: -6, chem: 1}}"
+ },
+ "Charla rápida con {name}": {
+  "w": [
+   "mgr-plus.js:827"
+  ],
+  "ctx": "var card = {t: \"decision\", tipo: \"mgr\", cat: tr(\"Vestuario\"), title: tr(\"Charla rápida con {name}\", {name: plName(p)}), choice: o.t, txt: tr(\"Dos minutos en el vestuario.\"), chips: ch, y: S.yr};"
+ },
+ "Dos minutos en el vestuario.": {
+  "w": [
+   "mgr-plus.js:827"
+  ],
+  "ctx": "var card = {t: \"decision\", tipo: \"mgr\", cat: tr(\"Vestuario\"), title: tr(\"Charla rápida con {name}\", {name: plName(p)}), choice: o.t, txt: tr(\"Dos minutos en el vestuario.\"), chips: ch, y: S.yr};"
+ },
+ "Presión máxima": {
+  "w": [
+   "minigame.js:343"
+  ],
+  "ctx": "ui.kickEl.setAttribute(\"data-p\", PRESS >= 0.85 ? t(\"Presión máxima\") : PRESS >= 0.5 ? t(\"Penalti decisivo\") : t(\"Presión\")); }"
+ },
+ "Penalti decisivo": {
+  "w": [
+   "minigame.js:343"
+  ],
+  "ctx": "ui.kickEl.setAttribute(\"data-p\", PRESS >= 0.85 ? t(\"Presión máxima\") : PRESS >= 0.5 ? t(\"Penalti decisivo\") : t(\"Presión\")); }"
+ },
+ "Silenciar el ambiente del estadio": {
+  "w": [
+   "pitch.js:218"
+  ],
+  "ctx": "P.btn.setAttribute(\"aria-label\", on ? tr(\"Silenciar el ambiente del estadio\") : tr(\"Activar el ambiente del estadio\"));"
+ },
+ "Activar el ambiente del estadio": {
+  "w": [
+   "pitch.js:218"
+  ],
+  "ctx": "P.btn.setAttribute(\"aria-label\", on ? tr(\"Silenciar el ambiente del estadio\") : tr(\"Activar el ambiente del estadio\"));"
+ },
+ "FUERA DE JUEGO": {
+  "w": [
+   "pitch.js:668"
+  ],
+  "ctx": "Snd.whistle([0.28]); P.stopUntil = P.ck + 1; P.msg = {t: P.lab.off || tr(\"FUERA DE JUEGO\"), s: -1, at: P.ck, small: true};"
+ },
+ "Presupuesto {v}": {
+  "w": [
+   "ui.js:301"
+  ],
+  "ctx": "if (fx.bud) chips.push('<span class=\"chip up\">' + tr(\"Presupuesto {v}\", {v: \"+\" + fmtMoney(fx.bud) + (fx.budPct ? \" (+\" + fx.budPct + \" %)\" : \"\")}) + \"</span>\");"
+ },
+ "Prestigio +{n}": {
+  "w": [
+   "ui.js:302"
+  ],
+  "ctx": "if (fx.rep) chips.push('<span class=\"chip up\">' + tr(\"Prestigio +{n}\", {n: fx.rep}) + \"</span>\");"
+ },
+ "Directiva +{n}": {
+  "w": [
+   "ui.js:303"
+  ],
+  "ctx": "if (fx.board) chips.push('<span class=\"chip up\">' + tr(\"Directiva +{n}\", {n: fx.board}) + \"</span>\");"
+ },
+ "Afición +{n}": {
+  "w": [
+   "ui.js:304",
+   "ui.js:308"
+  ],
+  "ctx": "if (fx.fans) chips.push('<span class=\"chip up\">' + tr(\"Afición +{n}\", {n: fx.fans}) + \"</span>\");"
+ },
+ "Moral de la plantilla +6": {
+  "w": [
+   "ui.js:305"
+  ],
+  "ctx": "chips.push('<span class=\"chip up\">' + tr(\"Moral de la plantilla +6\") + \"</span>\");"
+ },
+ "Fama +{n}": {
+  "w": [
+   "ui.js:307"
+  ],
+  "ctx": "if (fx.fame) chips.push('<span class=\"chip up\">' + tr(\"Fama +{n}\", {n: fx.fame}) + \"</span>\");"
+ },
+ "Moral +{n}": {
+  "w": [
+   "ui.js:309"
+  ],
+  "ctx": "if (fx.mor) chips.push('<span class=\"chip up\">' + tr(\"Moral +{n}\", {n: fx.mor}) + \"</span>\");"
+ },
+ "¡A celebrarlo!": {
+  "w": [
+   "ui.js:314"
+  ],
+  "ctx": "\"<h2>\" + h(trComp(t.n)) + '</h2><div class=\"troseason\">' + h(t.s || \"\") + \" · \" + h(who) + '</div><div class=\"chips\">' + chips.join(\"\") + '</div><button class=\"go\" data-a=\"troclose\">' + h(tr(\"¡A celebrarlo!\")) + \"</butto"
+ },
+ "Nueva carrera": {
+  "w": [
+   "ui.js:416"
+  ],
+  "ctx": "if (!isMgr()) return '<div class=\"dock two\"><button class=\"go ghost\" data-a=\"newcareer\">' + tr(\"Nueva carrera\") + '</button><button class=\"go\" data-a=\"startmgr\">' + tr(\"Empezar como entrenador\") + \" \" + ICON.play + \"</bu"
+ },
+ "Bombo {n}": {
+  "w": [
+   "ui-draw.js:11"
+  ],
+  "ctx": "function potLabel(x, i) { var l = x.pl[i]; return typeof l === \"number\" ? tr(\"Bombo {n}\", {n: l}) : tr(l); }"
+ },
+ "Grupo {group}": {
+  "w": [
+   "ui-draw.js:12"
+  ],
+  "ctx": "function grpL(i) { return tr(\"Grupo {group}\", {group: String.fromCharCode(65 + i)}); }"
+ },
+ "{team} está en el bombo. Las bolas ya giran: ¿quién te tocará?": {
+  "w": [
+   "ui-draw.js:22"
+  ],
+  "ctx": "tr(\"{team} está en el bombo. Las bolas ya giran: ¿quién te tocará?\", {team: h(nm(x, x.me))}) + \"</p></div></div>\" +"
+ },
+ "Ver solo el resultado": {
+  "w": [
+   "ui-draw.js:23"
+  ],
+  "ctx": "'<div class=\"opts\"><button class=\"go\" data-a=\"drawopen\">' + tr(\"Ver el sorteo\") + '</button><button class=\"btn wide\" data-a=\"drawopen\" data-v=\"skip\">' + tr(\"Ver solo el resultado\") + \"</button></div></section>\";"
+ },
+ "Las bolas giran en los bombos…": {
+  "w": [
+   "ui-draw.js:48"
+  ],
+  "ctx": "tr(\"Las bolas giran en los bombos…\") + \"</p></div></div>\" + '<div class=\"drw-board\">' + boardH(x) + \"</div></div>\";"
+ },
+ "Velocidad del sorteo": {
+  "w": [
+   "ui-draw.js:57"
+  ],
+  "ctx": "\"<h2>\" + h(drawTitle(x)) + '</h2></div><div class=\"seg drw-spd\" role=\"group\" aria-label=\"' + h(tr(\"Velocidad del sorteo\")) + '\">' +"
+ },
+ "Rápida": {
+  "w": [
+   "ui-draw.js:58"
+  ],
+  "ctx": "'<button data-a=\"drawspeed\" data-v=\"n\" aria-pressed=\"true\">' + tr(\"Normal\") + '</button><button data-a=\"drawspeed\" data-v=\"f\" aria-pressed=\"false\">' + tr(\"Rápida\") + '</button><button data-a=\"drawspeed\" data-v=\"skip\" ari"
+ },
+ "Saltar": {
+  "w": [
+   "ui-draw.js:58"
+  ],
+  "ctx": "'<button data-a=\"drawspeed\" data-v=\"n\" aria-pressed=\"true\">' + tr(\"Normal\") + '</button><button data-a=\"drawspeed\" data-v=\"f\" aria-pressed=\"false\">' + tr(\"Rápida\") + '</button><button data-a=\"drawspeed\" data-v=\"skip\" ari"
+ },
+ "Casa": {
+  "w": [
+   "ui-draw.js:78",
+   "ui-draw.js:197"
+  ],
+  "ctx": "'<div class=\"drw-lp\">' + x.res.map(function (r, i) { return '<div class=\"drw-slot\" data-s=\"' + i + '\"><i>' + (r[1] ? tr(\"Casa\") : tr(\"Fuera\")) + \"</i></div>\"; }).join(\"\") + \"</div>\";"
+ },
+ "Fuera": {
+  "w": [
+   "ui-draw.js:78",
+   "ui-draw.js:197"
+  ],
+  "ctx": "'<div class=\"drw-lp\">' + x.res.map(function (r, i) { return '<div class=\"drw-slot\" data-s=\"' + i + '\"><i>' + (r[1] ? tr(\"Casa\") : tr(\"Fuera\")) + \"</i></div>\"; }).join(\"\") + \"</div>\";"
+ },
+ "vs": {
+  "w": [
+   "ui-draw.js:81",
+   "ui-draw.js:195"
+  ],
+  "ctx": "return '<div class=\"drw-tie\"><div class=\"drw-slot\" data-s=\"' + i * 2 + '\"></div><em>' + tr(\"vs\") + '</em><div class=\"drw-slot r\" data-s=\"' + (i * 2 + 1) + '\"></div></div>';"
+ },
+ "Rival {n} de {total}": {
+  "w": [
+   "ui-draw.js:121"
+  ],
+  "ctx": "var where = x.typ === \"grp\" ? grpL(st[2]) : x.typ === \"lp\" ? tr(\"Rival {n} de {total}\", {n: st[2] + 1, total: x.seq.length}) : tr(\"Cruce {n}\", {n: Math.floor(st[2] / 2) + 1});"
+ },
+ "Cruce {n}": {
+  "w": [
+   "ui-draw.js:121"
+  ],
+  "ctx": "var where = x.typ === \"grp\" ? grpL(st[2]) : x.typ === \"lp\" ? tr(\"Rival {n} de {total}\", {n: st[2] + 1, total: x.seq.length}) : tr(\"Cruce {n}\", {n: Math.floor(st[2] / 2) + 1});"
+ },
+ "Así queda tu sorteo": {
+  "w": [
+   "ui-draw.js:204"
+  ],
+  "ctx": "p.innerHTML = '<div class=\"drw-endin\"><span class=\"eyebrow\">' + tr(\"Así queda tu sorteo\") + \"</span>\" + mineH(x) +"
+ },
+ "En las redes": {
+  "w": [
+   "ui-draw.js:207"
+  ],
+  "ctx": "'<div class=\"drw-soc\"><span class=\"eyebrow\">' + tr(\"En las redes\") + '</span><div class=\"sfeed\">' + rx.posts.map(postH).join(\"\") + \"</div></div>\" +"
+ },
+ "Ordena a tus lanzadores. Toca a dos jugadores para intercambiarlos o usa las flechas.": {
+  "w": [
+   "ui-shootout.js:156"
+  ],
+  "ctx": "var s = head(h(tr(\"Ordena a tus lanzadores. Toca a dos jugadores para intercambiarlos o usa las flechas.\")));"
+ },
+ "Fatiga": {
+  "w": [
+   "ui-shootout.js:157"
+  ],
+  "ctx": "s += '<div class=\"so-legend\"><span>' + h(tr(\"Técnica\")) + \"</span><span>\" + h(tr(\"Sangre fría\")) + \"</span><span>\" + h(tr(\"Fatiga\")) + \"</span></div>\";"
+ },
+ "Muerte súbita": {
+  "w": [
+   "ui-shootout.js:161",
+   "ui-shootout.js:192"
+  ],
+  "ctx": "if (k === 5) s += '<li class=\"so-sep\">' + h(tr(\"Muerte súbita\")) + \"</li>\";"
+ },
+ "El % es su acierto estimado; en el quinto y en la muerte súbita pesa mucho más la sangre fría.": {
+  "w": [
+   "ui-shootout.js:170"
+  ],
+  "ctx": "s += '<p class=\"so-note muted\">' + h(tr(\"El % es su acierto estimado; en el quinto y en la muerte súbita pesa mucho más la sangre fría.\")) + \"</p>\";"
+ },
+ "Orden sugerido": {
+  "w": [
+   "ui-shootout.js:171"
+  ],
+  "ctx": "s += '<div class=\"so-btns\"><button class=\"btn\" data-so=\"auto\">' + h(tr(\"Orden sugerido\")) + '</button><button class=\"btn pri\" data-so=\"start\">' + h(tr(\"¡A la tanda!\")) + \"</button></div>\";"
+ },
+ "¡A la tanda!": {
+  "w": [
+   "ui-shootout.js:171"
+  ],
+  "ctx": "s += '<div class=\"so-btns\"><button class=\"btn\" data-so=\"auto\">' + h(tr(\"Orden sugerido\")) + '</button><button class=\"btn pri\" data-so=\"start\">' + h(tr(\"¡A la tanda!\")) + \"</button></div>\";"
+ },
+ "Sorteo: empieza a lanzar el {team}.": {
+  "w": [
+   "ui-shootout.js:185"
+  ],
+  "ctx": "var s = head(st.k[0].length + st.k[1].length === 0 ? h(tr(\"Sorteo: empieza a lanzar el {team}.\", {team: tm[V.coin].n})) : \"\");"
+ },
+ "¡Pasáis!": {
+  "w": [
+   "ui-shootout.js:189"
+  ],
+  "ctx": "s += '<div class=\"so-end ' + (win ? \"win\" : \"lose\") + '\"><b>' + h(win ? tr(\"¡Pasáis!\") : tr(\"Eliminados\")) + '</b><span class=\"num\">' + sc[0] + \" - \" + sc[1] + \"</span></div>\";"
+ },
+ "Penalti para ganar": {
+  "w": [
+   "ui-shootout.js:192"
+  ],
+  "ctx": "var kindTxt = {win: tr(\"Penalti para ganar\"), save: tr(\"Obligado a marcar\"), sd: tr(\"Muerte súbita\")}[nk.kind] || tr(\"Penalti {n} de 5\", {n: nk.i + 1});"
+ },
+ "Obligado a marcar": {
+  "w": [
+   "ui-shootout.js:192"
+  ],
+  "ctx": "var kindTxt = {win: tr(\"Penalti para ganar\"), save: tr(\"Obligado a marcar\"), sd: tr(\"Muerte súbita\")}[nk.kind] || tr(\"Penalti {n} de 5\", {n: nk.i + 1});"
+ },
+ "Penalti {n} de 5": {
+  "w": [
+   "ui-shootout.js:192"
+  ],
+  "ctx": "var kindTxt = {win: tr(\"Penalti para ganar\"), save: tr(\"Obligado a marcar\"), sd: tr(\"Muerte súbita\")}[nk.kind] || tr(\"Penalti {n} de 5\", {n: nk.i + 1});"
+ },
+ "Tensión": {
+  "w": [
+   "ui-shootout.js:194"
+  ],
+  "ctx": "s += '<div class=\"so-tension' + (lvl >= 70 ? \" hot\" : \"\") + '\"><span>' + h(tr(\"Tensión\")) + '</span><span class=\"so-tb\"><i style=\"width:' + Math.max(8, lvl) + '%\"></i></span><b>' + h(kindTxt) + \"</b></div>\";"
+ },
+ "Te toca. Coges el balón, lo besas y lo colocas en el punto.": {
+  "w": [
+   "ui-shootout.js:203"
+  ],
+  "ctx": "if (mineTurn) s += '<span class=\"so-msg\">' + h(nk.side === 0 ? tr(\"Te toca. Coges el balón, lo besas y lo colocas en el punto.\") : tr(\"Te toca bajo palos. Mira al lanzador a los ojos.\")) + \"</span>\";"
+ },
+ "Te toca bajo palos. Mira al lanzador a los ojos.": {
+  "w": [
+   "ui-shootout.js:203"
+  ],
+  "ctx": "if (mineTurn) s += '<span class=\"so-msg\">' + h(nk.side === 0 ? tr(\"Te toca. Coges el balón, lo besas y lo colocas en el punto.\") : tr(\"Te toca bajo palos. Mira al lanzador a los ojos.\")) + \"</span>\";"
+ },
+ "Coloca el balón en el punto…": {
+  "w": [
+   "ui-shootout.js:204"
+  ],
+  "ctx": "else s += '<span class=\"so-msg\">' + h(V.phase === \"up\" ? pick([tr(\"Coloca el balón en el punto…\"), tr(\"Toma carrerilla…\"), tr(\"Silencio en el estadio…\")]) : tr(\"Al punto de penalti\")) + '</span><span class=\"so-p\">' + h(t"
+ },
+ "Toma carrerilla…": {
+  "w": [
+   "ui-shootout.js:204"
+  ],
+  "ctx": "else s += '<span class=\"so-msg\">' + h(V.phase === \"up\" ? pick([tr(\"Coloca el balón en el punto…\"), tr(\"Toma carrerilla…\"), tr(\"Silencio en el estadio…\")]) : tr(\"Al punto de penalti\")) + '</span><span class=\"so-p\">' + h(t"
+ },
+ "Silencio en el estadio…": {
+  "w": [
+   "ui-shootout.js:204"
+  ],
+  "ctx": "else s += '<span class=\"so-msg\">' + h(V.phase === \"up\" ? pick([tr(\"Coloca el balón en el punto…\"), tr(\"Toma carrerilla…\"), tr(\"Silencio en el estadio…\")]) : tr(\"Al punto de penalti\")) + '</span><span class=\"so-p\">' + h(t"
+ },
+ "Al punto de penalti": {
+  "w": [
+   "ui-shootout.js:204"
+  ],
+  "ctx": "else s += '<span class=\"so-msg\">' + h(V.phase === \"up\" ? pick([tr(\"Coloca el balón en el punto…\"), tr(\"Toma carrerilla…\"), tr(\"Silencio en el estadio…\")]) : tr(\"Al punto de penalti\")) + '</span><span class=\"so-p\">' + h(t"
+ },
+ "Acierto estimado: {p} %": {
+  "w": [
+   "ui-shootout.js:204"
+  ],
+  "ctx": "else s += '<span class=\"so-msg\">' + h(V.phase === \"up\" ? pick([tr(\"Coloca el balón en el punto…\"), tr(\"Toma carrerilla…\"), tr(\"Silencio en el estadio…\")]) : tr(\"Al punto de penalti\")) + '</span><span class=\"so-p\">' + h(t"
+ },
+ "Tirar mi penalti": {
+  "w": [
+   "ui-shootout.js:208"
+  ],
+  "ctx": "if (mineTurn) s += '<button class=\"btn pri wide so-go\" data-so=\"mine\">' + h(nk.side === 0 ? tr(\"Tirar mi penalti\") : tr(\"Ponerte bajo palos\")) + \"</button>\";"
+ },
+ "Ponerte bajo palos": {
+  "w": [
+   "ui-shootout.js:208"
+  ],
+  "ctx": "if (mineTurn) s += '<button class=\"btn pri wide so-go\" data-so=\"mine\">' + h(nk.side === 0 ? tr(\"Tirar mi penalti\") : tr(\"Ponerte bajo palos\")) + \"</button>\";"
+ },
+ "Seguir": {
+  "w": [
+   "ui-shootout.js:209"
+  ],
+  "ctx": "else s += '<button class=\"btn\" data-so=\"pause\">' + h(V.run ? tr(\"Pausa\") : tr(\"Seguir\")) + '</button><button class=\"btn\" data-so=\"next\">' + h(tr(\"Siguiente\")) + \"</button>\";"
+ },
+ "Simular el resto": {
+  "w": [
+   "ui-shootout.js:210"
+  ],
+  "ctx": "s += '<button class=\"btn\" data-so=\"sim\">' + h(tr(\"Simular el resto\")) + \"</button></div>\";"
+ },
+ "¡Marcas!": {
+  "w": [
+   "ui-shootout.js:215"
+  ],
+  "ctx": "var l = st.log[i], txt = l.ok ? (l.me ? tr(\"¡Marcas!\") : tr(\"marca\")) : l.h === \"parada\" ? (l.s === 1 && V.st.gkMe ? tr(\"¡se lo paras!\") : tr(\"se lo paran\")) : l.h === \"palo\" ? tr(\"al palo\") : tr(\"la manda fuera\");"
+ },
+ "marca": {
+  "w": [
+   "ui-shootout.js:215"
+  ],
+  "ctx": "var l = st.log[i], txt = l.ok ? (l.me ? tr(\"¡Marcas!\") : tr(\"marca\")) : l.h === \"parada\" ? (l.s === 1 && V.st.gkMe ? tr(\"¡se lo paras!\") : tr(\"se lo paran\")) : l.h === \"palo\" ? tr(\"al palo\") : tr(\"la manda fuera\");"
+ },
+ "¡se lo paras!": {
+  "w": [
+   "ui-shootout.js:215"
+  ],
+  "ctx": "var l = st.log[i], txt = l.ok ? (l.me ? tr(\"¡Marcas!\") : tr(\"marca\")) : l.h === \"parada\" ? (l.s === 1 && V.st.gkMe ? tr(\"¡se lo paras!\") : tr(\"se lo paran\")) : l.h === \"palo\" ? tr(\"al palo\") : tr(\"la manda fuera\");"
+ },
+ "se lo paran": {
+  "w": [
+   "ui-shootout.js:215"
+  ],
+  "ctx": "var l = st.log[i], txt = l.ok ? (l.me ? tr(\"¡Marcas!\") : tr(\"marca\")) : l.h === \"parada\" ? (l.s === 1 && V.st.gkMe ? tr(\"¡se lo paras!\") : tr(\"se lo paran\")) : l.h === \"palo\" ? tr(\"al palo\") : tr(\"la manda fuera\");"
+ },
+ "al palo": {
+  "w": [
+   "ui-shootout.js:215"
+  ],
+  "ctx": "var l = st.log[i], txt = l.ok ? (l.me ? tr(\"¡Marcas!\") : tr(\"marca\")) : l.h === \"parada\" ? (l.s === 1 && V.st.gkMe ? tr(\"¡se lo paras!\") : tr(\"se lo paran\")) : l.h === \"palo\" ? tr(\"al palo\") : tr(\"la manda fuera\");"
+ },
+ "la manda fuera": {
+  "w": [
+   "ui-shootout.js:215"
+  ],
+  "ctx": "var l = st.log[i], txt = l.ok ? (l.me ? tr(\"¡Marcas!\") : tr(\"marca\")) : l.h === \"parada\" ? (l.s === 1 && V.st.gkMe ? tr(\"¡se lo paras!\") : tr(\"se lo paran\")) : l.h === \"palo\" ? tr(\"al palo\") : tr(\"la manda fuera\");"
+ },
+ "Tu avatar": {
+  "w": [
+   "ui-life.js:38"
+  ],
+  "ctx": "var s = '<svg class=\"' + (cls || \"lfsvg\") + '\" viewBox=\"0 0 120 170\" role=\"img\" aria-label=\"' + h(tr(\"Tu avatar\")) + '\">';"
+ },
+ "Dorsal preferido": {
+  "w": [
+   "ui-life.js:80"
+  ],
+  "ctx": "var s = '<div class=\"lfcreate\"><div class=\"lfcnum\" aria-hidden=\"true\">' + cur + '</div><div class=\"grow\"><label class=\"lbl\" for=\"lnum\">' + tr(\"Dorsal preferido\") + \"</label>\";"
+ },
+ "Elige cualquier número del 1 al 99": {
+  "w": [
+   "ui-life.js:82"
+  ],
+  "ctx": "s += '<select id=\"lnum\" data-f=\"lnum\" aria-label=\"' + h(tr(\"Elige cualquier número del 1 al 99\")) + '\">' + range(99).map(function (i) { return '<option value=\"' + (i + 1) + '\"' + (cur === i + 1 ? \" selected\" : \"\") + \">\" "
+ },
+ "Si en tu club ya lo lleva alguien, te darán el más cercano y podrás pedirlo la temporada siguiente.": {
+  "w": [
+   "ui-life.js:83"
+  ],
+  "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Si en tu club ya lo lleva alguien, te darán el más cercano y podrás pedirlo la temporada siguiente.\") + \"</p></div></div>\";"
+ },
+ "Fuera del campo": {
+  "w": [
+   "ui-life.js:105"
+  ],
+  "ctx": "s += '<div class=\"eyebrow\">' + tr(\"Fuera del campo\") + \"</div>\";"
+ },
+ "Prefieres el {n}": {
+  "w": [
+   "ui-life.js:106"
+  ],
+  "ctx": "s += '<button class=\"lfnumbtn\" data-a=\"lfopen\" data-v=\"lnum\"><b class=\"num\">' + L.num + \"</b><span>\" + tr(\"Dorsal\") + (L.num !== L.pref ? \"<small>\" + tr(\"Prefieres el {n}\", {n: L.pref}) + \"</small>\" : \"<small>\" + tr(\"Cam"
+ },
+ "Cambiar": {
+  "w": [
+   "ui-life.js:106"
+  ],
+  "ctx": "s += '<button class=\"lfnumbtn\" data-a=\"lfopen\" data-v=\"lnum\"><b class=\"num\">' + L.num + \"</b><span>\" + tr(\"Dorsal\") + (L.num !== L.pref ? \"<small>\" + tr(\"Prefieres el {n}\", {n: L.pref}) + \"</small>\" : \"<small>\" + tr(\"Cam"
+ },
+ "Celebración": {
+  "w": [
+   "ui-life.js:107",
+   "ui-life.js:218",
+   "ui-life.js:219"
+  ],
+  "ctx": "s += '<div class=\"lfcel\"><span class=\"eyebrow\">' + tr(\"Celebración\") + \"</span><b>\" + h(tr(lifeCel().n)) + \"</b></div>\";"
+ },
+ "Vida y dinero": {
+  "w": [
+   "ui-life.js:110",
+   "ui-life.js:159"
+  ],
+  "ctx": "s += '<div class=\"lfbtns\"><button class=\"btn\" data-a=\"lfopen\" data-v=\"lvida\">' + tr(\"Vida y dinero\") + (act.length || L.inv.length ? ' <span class=\"lfbad\">' + (act.length + L.inv.length) + \"</span>\" : \"\") + '</button><bu"
+ },
+ "Look y celebración": {
+  "w": [
+   "ui-life.js:110",
+   "ui-life.js:218"
+  ],
+  "ctx": "s += '<div class=\"lfbtns\"><button class=\"btn\" data-a=\"lfopen\" data-v=\"lvida\">' + tr(\"Vida y dinero\") + (act.length || L.inv.length ? ' <span class=\"lfbad\">' + (act.length + L.inv.length) + \"</span>\" : \"\") + '</button><bu"
+ },
+ "Tu rival": {
+  "w": [
+   "ui-life.js:112"
+  ],
+  "ctx": "s += '<button class=\"lfrvbtn\" data-a=\"lfopen\" data-v=\"lrival\"><span class=\"eyebrow\">' + tr(\"Tu rival\") + \"</span><span class=\\\"lfrvrow\\\">\" + U.crest(rv.club) + \"<b>\" + h(rv.n) + \"</b>\" + U.flag(rv.ni) + '<span class=\"lfh"
+ },
+ "Duelos: ganados, empates, perdidos": {
+  "w": [
+   "ui-life.js:112"
+  ],
+  "ctx": "s += '<button class=\"lfrvbtn\" data-a=\"lfopen\" data-v=\"lrival\"><span class=\"eyebrow\">' + tr(\"Tu rival\") + \"</span><span class=\\\"lfrvrow\\\">\" + U.crest(rv.club) + \"<b>\" + h(rv.n) + \"</b>\" + U.flag(rv.ni) + '<span class=\"lfh"
+ },
+ "Tu dorsal": {
+  "w": [
+   "ui-life.js:131"
+  ],
+  "ctx": "var s = \"<h2>\" + tr(\"Tu dorsal\") + '</h2><div class=\"stack\"><div class=\"lfnumhead\"><div class=\"lfcnum\">' + L.num + '</div><p class=\"muted\" style=\"margin:0\">' +"
+ },
+ "Llevas tu número preferido en el {club}.": {
+  "w": [
+   "ui-life.js:132"
+  ],
+  "ctx": "(L.num === L.pref ? tr(\"Llevas tu número preferido en el {club}.\", {club: h(clubName(S.p.club))}) : tr(\"Prefieres el {n}, pero en el {club} lo lleva {name}. Podrás pedirlo al empezar la temporada.\", {n: L.pref, club: h(c"
+ },
+ "Prefieres el {n}, pero en el {club} lo lleva {name}. Podrás pedirlo al empezar la temporada.": {
+  "w": [
+   "ui-life.js:132"
+  ],
+  "ctx": "(L.num === L.pref ? tr(\"Llevas tu número preferido en el {club}.\", {club: h(clubName(S.p.club))}) : tr(\"Prefieres el {n}, pero en el {club} lo lleva {name}. Podrás pedirlo al empezar la temporada.\", {n: L.pref, club: h(c"
+ },
+ "Elige dorsal": {
+  "w": [
+   "ui-life.js:133"
+  ],
+  "ctx": "s += '<div class=\"lfgrid\" role=\"group\" aria-label=\"' + h(tr(\"Elige dorsal\")) + '\">' + range(99).map(function (i) {"
+ },
+ "{n}, lo lleva {name}": {
+  "w": [
+   "ui-life.js:135"
+  ],
+  "ctx": "return '<button class=\"lfg' + (t ? \" tk\" : \"\") + (n === L.pref ? \" pf\" : \"\") + '\" data-a=\"lfsetnum\" data-v=\"' + n + '\" aria-pressed=\"' + me + '\"' + (t ? ' title=\"' + h(t) + '\" aria-label=\"' + h(tr(\"{n}, lo lleva {name}\","
+ },
+ "Tachados: números ocupados en tu club. Si eliges uno ocupado, lo pedirás la próxima temporada.": {
+  "w": [
+   "ui-life.js:137"
+  ],
+  "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Tachados: números ocupados en tu club. Si eliges uno ocupado, lo pedirás la próxima temporada.\") + \"</p>\";"
+ },
+ "Ahora llevas el {n}.": {
+  "w": [
+   "ui-life.js:143"
+  ],
+  "ctx": "U.toast(r.now ? tr(\"Ahora llevas el {n}.\", {n: +v}) : tr(\"El {n} lo lleva {name}: lo pedirás la próxima temporada.\", {n: +v, name: r.by}));"
+ },
+ "El {n} lo lleva {name}: lo pedirás la próxima temporada.": {
+  "w": [
+   "ui-life.js:143"
+  ],
+  "ctx": "U.toast(r.now ? tr(\"Ahora llevas el {n}.\", {n: +v}) : tr(\"El {n} lo lleva {name}: lo pedirás la próxima temporada.\", {n: +v, name: r.by}));"
+ },
+ "+6 % seguidores por tramo": {
+  "w": [
+   "ui-life.js:151"
+  ],
+  "ctx": "if (d.k === \"press\") out.push('<span class=\"chip up\">' + tr(\"+6 % seguidores por tramo\") + \"</span>\");"
+ },
+ "Riesgo de lesión −30 %": {
+  "w": [
+   "ui-life.js:152"
+  ],
+  "ctx": "if (d.k === \"physio\") out.push('<span class=\"chip up\">' + tr(\"Riesgo de lesión −30 %\") + \"</span>\");"
+ },
+ "Forma más estable": {
+  "w": [
+   "ui-life.js:153"
+  ],
+  "ctx": "if (d.k === \"mental\") out.push('<span class=\"chip up\">' + tr(\"Forma más estable\") + \"</span>\");"
+ },
+ "Más progresión": {
+  "w": [
+   "ui-life.js:154"
+  ],
+  "ctx": "if (d.k === \"trainer\") out.push('<span class=\"chip up\">' + tr(\"Más progresión\") + \"</span>\");"
+ },
+ "Tu dinero": {
+  "w": [
+   "ui-life.js:159"
+  ],
+  "ctx": "var s = \"<h2>\" + tr(\"Vida y dinero\") + '</h2><div class=\"stack\"><div class=\"lfmoney\"><span class=\"eyebrow\">' + tr(\"Tu dinero\") + '</span><b class=\"num\">' + money(p.money) + \"</b></div>\";"
+ },
+ "Tu equipo personal": {
+  "w": [
+   "ui-life.js:160"
+  ],
+  "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Tu equipo personal\") + '</h3><p class=\"muted lfhint\">' + tr(\"Se paga cada tramo de temporada. Un contrato dura una temporada (5 tramos).\") + \"</p>\";"
+ },
+ "Se paga cada tramo de temporada. Un contrato dura una temporada (5 tramos).": {
+  "w": [
+   "ui-life.js:160"
+  ],
+  "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Tu equipo personal\") + '</h3><p class=\"muted lfhint\">' + tr(\"Se paga cada tramo de temporada. Un contrato dura una temporada (5 tramos).\") + \"</p>\";"
+ },
+ "{cost} por tramo": {
+  "w": [
+   "ui-life.js:165"
+  ],
+  "ctx": "s += '<div class=\"lfrowf\"><span class=\"muted\">' + tr(\"{cost} por tramo\", {cost: money(cost)}) + \"</span>\";"
+ },
+ "Queda {n} tramo": {
+  "w": [
+   "ui-life.js:166"
+  ],
+  "ctx": "if (active) s += '<span class=\"lfleft\">' + trn(sv.left, \"Queda {n} tramo\", \"Quedan {n} tramos\") + '</span><button class=\"btn sm\" data-a=\"lffire\" data-v=\"' + d.k + '\">' + tr(\"Cancelar\") + \"</button>\";",
+  "note": "plural:singular"
+ },
+ "Quedan {n} tramos": {
+  "w": [
+   "ui-life.js:166"
+  ],
+  "ctx": "if (active) s += '<span class=\"lfleft\">' + trn(sv.left, \"Queda {n} tramo\", \"Quedan {n} tramos\") + '</span><button class=\"btn sm\" data-a=\"lffire\" data-v=\"' + d.k + '\">' + tr(\"Cancelar\") + \"</button>\";",
+  "note": "plural:plural"
+ },
+ "Contratar": {
+  "w": [
+   "ui-life.js:167",
+   "ui-mgrplus.js:33"
+  ],
+  "ctx": "else s += '<button class=\"btn sm pri\" data-a=\"lfhire\" data-v=\"' + d.k + '\"' + (p.money < cost ? \" disabled\" : \"\") + \">\" + tr(\"Contratar\") + \"</button>\";"
+ },
+ "Inversiones": {
+  "w": [
+   "ui-life.js:170"
+  ],
+  "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Inversiones\") + '</h3><p class=\"muted lfhint\">' + tr(\"Se revalorizan (o no) al final de cada temporada. Puedes vender cuando quieras.\") + \"</p>\";"
+ },
+ "Se revalorizan (o no) al final de cada temporada. Puedes vender cuando quieras.": {
+  "w": [
+   "ui-life.js:170"
+  ],
+  "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Inversiones\") + '</h3><p class=\"muted lfhint\">' + tr(\"Se revalorizan (o no) al final de cada temporada. Puedes vender cuando quieras.\") + \"</p>\";"
+ },
+ "Compra: {p} ({year}) · Vale: {v}": {
+  "w": [
+   "ui-life.js:173"
+  ],
+  "ctx": "return '<div class=\"lfrow on\"><span class=\"lfico\" aria-hidden=\"true\">' + d.ico + '</span><div class=\"grow\"><b>' + h(tr(d.n)) + \"</b><small>\" + tr(\"Compra: {p} ({year}) · Vale: {v}\", {p: money(x.p), year: x.y, v: money(x."
+ },
+ "Vender": {
+  "w": [
+   "ui-life.js:174"
+  ],
+  "ctx": "'<div class=\"lfrowf\"><span class=\"' + (dif >= 0 ? \"pos\" : \"neg\") + '\">' + (dif >= 0 ? \"+\" : \"−\") + money(Math.abs(dif)) + '</span><button class=\"btn sm\" data-a=\"lfsell\" data-v=\"' + i + '\">' + tr(\"Vender\") + \"</button></d"
+ },
+ "Riesgo alto": {
+  "w": [
+   "ui-life.js:177"
+  ],
+  "ctx": "var risk = d.risk >= 2 ? tr(\"Riesgo alto\") : d.risk >= 1 ? tr(\"Riesgo medio\") : d.risk > 0 ? tr(\"Riesgo medio-bajo\") : tr(\"Riesgo bajo\");"
+ },
+ "Riesgo medio": {
+  "w": [
+   "ui-life.js:177"
+  ],
+  "ctx": "var risk = d.risk >= 2 ? tr(\"Riesgo alto\") : d.risk >= 1 ? tr(\"Riesgo medio\") : d.risk > 0 ? tr(\"Riesgo medio-bajo\") : tr(\"Riesgo bajo\");"
+ },
+ "Riesgo medio-bajo": {
+  "w": [
+   "ui-life.js:177"
+  ],
+  "ctx": "var risk = d.risk >= 2 ? tr(\"Riesgo alto\") : d.risk >= 1 ? tr(\"Riesgo medio\") : d.risk > 0 ? tr(\"Riesgo medio-bajo\") : tr(\"Riesgo bajo\");"
+ },
+ "Riesgo bajo": {
+  "w": [
+   "ui-life.js:177"
+  ],
+  "ctx": "var risk = d.risk >= 2 ? tr(\"Riesgo alto\") : d.risk >= 1 ? tr(\"Riesgo medio\") : d.risk > 0 ? tr(\"Riesgo medio-bajo\") : tr(\"Riesgo bajo\");"
+ },
+ "Contratado: {svc} ({cost}).": {
+  "w": [
+   "ui-life.js:185"
+  ],
+  "ctx": "if (r.ok) U.toast(tr(\"Contratado: {svc} ({cost}).\", {svc: tr(d.n), cost: money(r.cost)}));"
+ },
+ "No te llega el dinero.": {
+  "w": [
+   "ui-life.js:186",
+   "ui-life.js:194"
+  ],
+  "ctx": "else if (r.poor) U.toast(tr(\"No te llega el dinero.\"));"
+ },
+ "Contrato cancelado.": {
+  "w": [
+   "ui-life.js:189"
+  ],
+  "ctx": "U.actions.lffire = function (b, v) { lifeFire(v); U.toast(tr(\"Contrato cancelado.\")); rer(); };"
+ },
+ "Inversión hecha: {inv}.": {
+  "w": [
+   "ui-life.js:192"
+  ],
+  "ctx": "if (r.ok) U.toast(tr(\"Inversión hecha: {inv}.\", {inv: tr(lifeInvDef(v).n)}));"
+ },
+ "Ya tienes demasiadas inversiones.": {
+  "w": [
+   "ui-life.js:193"
+  ],
+  "ctx": "else if (r.full) U.toast(tr(\"Ya tienes demasiadas inversiones.\"));"
+ },
+ "Vendido por {v}.": {
+  "w": [
+   "ui-life.js:197"
+  ],
+  "ctx": "U.actions.lfsell = function (b, v) { var m = lifeSell(+v); U.toast(tr(\"Vendido por {v}.\", {v: money(m)})); rer(); };"
+ },
+ "Fama {n}": {
+  "w": [
+   "ui-life.js:202"
+  ],
+  "ctx": "if (lk.k === \"fame\") return \"🔒 \" + tr(\"Fama {n}\", {n: lk.v});"
+ },
+ "Ser capitán": {
+  "w": [
+   "ui-life.js:204"
+  ],
+  "ctx": "if (lk.k === \"cap\") return \"🔒 \" + tr(\"Ser capitán\");"
+ },
+ "Tono {n}": {
+  "w": [
+   "ui-life.js:213"
+  ],
+  "ctx": "return '<button class=\"lfo' + (lk ? \" lk\" : \"\") + '\" data-a=\"lfcos\" data-k=\"' + cat + '\" data-v=\"' + it.id + '\" aria-pressed=\"' + sel + '\"' + (swatch && !it.n ? ' aria-label=\"' + h(tr(\"Tono {n}\", {n: it.id.slice(1)})) + "
+ },
+ "Algunas piezas se desbloquean con fama, títulos o dinero.": {
+  "w": [
+   "ui-life.js:218"
+  ],
+  "ctx": "var s = \"<h2>\" + tr(\"Look y celebración\") + '</h2><div class=\"stack\"><div class=\"lflookprev\">' + myAvatar(\"lfsvg big\") + '<div><span class=\"eyebrow\">' + tr(\"Celebración\") + \"</span><b>\" + h(tr(lifeCel().n)) + '</b><p cla"
+ },
+ "Guantes": {
+  "w": [
+   "ui-life.js:220"
+  ],
+  "ctx": "if (gk) s += cosRow(\"gloves\", tr(\"Guantes\"), true);"
+ },
+ "Botas": {
+  "w": [
+   "ui-life.js:221"
+  ],
+  "ctx": "s += cosRow(\"boots\", tr(\"Botas\"), true);"
+ },
+ "Mangas y mallas": {
+  "w": [
+   "ui-life.js:222"
+  ],
+  "ctx": "s += cosRow(\"sleeve\", tr(\"Mangas y mallas\"));"
+ },
+ "Cinta": {
+  "w": [
+   "ui-life.js:223"
+  ],
+  "ctx": "s += cosRow(\"band\", tr(\"Cinta\"));"
+ },
+ "Piel": {
+  "w": [
+   "ui-life.js:224"
+  ],
+  "ctx": "s += cosRow(\"skin\", tr(\"Piel\"), true);"
+ },
+ "Pelo": {
+  "w": [
+   "ui-life.js:225"
+  ],
+  "ctx": "s += cosRow(\"hair\", tr(\"Pelo\"));"
+ },
+ "Color de pelo": {
+  "w": [
+   "ui-life.js:226"
+  ],
+  "ctx": "s += cosRow(\"hcol\", tr(\"Color de pelo\"), true);"
+ },
+ "No te llega el dinero ({v}).": {
+  "w": [
+   "ui-life.js:231"
+  ],
+  "ctx": "if (!r.ok && r.lock) U.toast(r.poor ? tr(\"No te llega el dinero ({v}).\", {v: money(r.lock.v)}) : tr(\"Bloqueado: {req}.\", {req: lockTxt(r.lock).replace(\"🔒 \", \"\")}));"
+ },
+ "Bloqueado: {req}.": {
+  "w": [
+   "ui-life.js:231"
+  ],
+  "ctx": "if (!r.ok && r.lock) U.toast(r.poor ? tr(\"No te llega el dinero ({v}).\", {v: money(r.lock.v)}) : tr(\"Bloqueado: {req}.\", {req: lockTxt(r.lock).replace(\"🔒 \", \"\")}));"
+ },
+ "Comprado por {v}.": {
+  "w": [
+   "ui-life.js:232"
+  ],
+  "ctx": "else if (r.paid) U.toast(tr(\"Comprado por {v}.\", {v: money(r.paid)}));"
+ },
+ "Rivalidad": {
+  "w": [
+   "ui-life.js:247",
+   "ui-life.js:249"
+  ],
+  "ctx": "if (!rv) return \"<h2>\" + tr(\"Rivalidad\") + '</h2><p class=\"muted\">' + tr(\"Aún no tienes rival.\") + '</p><button class=\"btn wide\" data-a=\"close\">' + tr(\"Cerrar\") + \"</button>\";"
+ },
+ "Aún no tienes rival.": {
+  "w": [
+   "ui-life.js:247"
+  ],
+  "ctx": "if (!rv) return \"<h2>\" + tr(\"Rivalidad\") + '</h2><p class=\"muted\">' + tr(\"Aún no tienes rival.\") + '</p><button class=\"btn wide\" data-a=\"close\">' + tr(\"Cerrar\") + \"</button>\";"
+ },
+ "Duelos": {
+  "w": [
+   "ui-life.js:251"
+  ],
+  "ctx": "s += '<div class=\"lfmid\"><span class=\"eyebrow\">' + tr(\"Duelos\") + '</span><div class=\"lfscore num\"><b>' + rv.h2h[0] + \"</b><i>\" + rv.h2h[1] + \"</i><b>\" + rv.h2h[2] + '</b></div><small class=\"muted\">' + tr(\"G · E · P\") + "
+ },
+ "G · E · P": {
+  "w": [
+   "ui-life.js:251"
+  ],
+  "ctx": "s += '<div class=\"lfmid\"><span class=\"eyebrow\">' + tr(\"Duelos\") + '</span><div class=\"lfscore num\"><b>' + rv.h2h[0] + \"</b><i>\" + rv.h2h[1] + \"</i><b>\" + rv.h2h[2] + '</b></div><small class=\"muted\">' + tr(\"G · E · P\") + "
+ },
+ "Desde {year}": {
+  "w": [
+   "ui-life.js:253"
+  ],
+  "ctx": "s += '<div class=\"seg\"><button data-a=\"lfrvm\" data-v=\"s\" aria-pressed=\"' + (mode === \"s\") + '\">' + tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}) + '</button><button data-a=\"lfrvm\" data-v=\"c\" aria-pressed=\"' + (mo"
+ },
+ "% de paradas": {
+  "w": [
+   "ui-life.js:261"
+  ],
+  "ctx": "s += statRow(tr(\"% de paradas\"), sp(me), sp(him), {fmt: function (x) { return fmtDec(x, 1) + \" %\"; }});"
+ },
+ "Nota media": {
+  "w": [
+   "ui-life.js:268"
+  ],
+  "ctx": "s += statRow(tr(\"Nota media\"), me.rn ? avg(me) : null, him.rn ? avg(him) : null, {fmt: function (x) { return fmtDec(x, 2); }});"
+ },
+ "Carreras": {
+  "w": [
+   "ui-life.js:272"
+  ],
+  "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Carreras\") + '</h3><div class=\"kvlist\">' + races.map(function (r) {"
+ },
+ "{n}º": {
+  "w": [
+   "ui-life.js:274"
+  ],
+  "ctx": "var f = function (x) { return x == null ? \"—\" : r.rank ? (x ? tr(\"{n}º\", {n: x}) : \"—\") : r.dec ? fmtDec(x, r.dec) : x; };"
+ },
+ "Titulares": {
+  "w": [
+   "ui-life.js:279"
+  ],
+  "ctx": "if (rv.hl.length) s += '<h3 class=\"lfsec\">' + tr(\"Titulares\") + '</h3><ul class=\"news lfnews\">' + rv.hl.map(function (x) { return '<li class=\"' + h(x.t || \"ok\") + '\"><small>' + seasonLabel(x.y) + \"</small> \" + h(tr(x.tk,"
+ },
+ "Últimos duelos": {
+  "w": [
+   "ui-life.js:280"
+  ],
+  "ctx": "if (rv.duels.length) s += '<h3 class=\"lfsec\">' + tr(\"Últimos duelos\") + '</h3><div class=\"kvlist\">' + rv.duels.map(function (d) {"
+ },
+ "Rivales anteriores": {
+  "w": [
+   "ui-life.js:283"
+  ],
+  "ctx": "if (L.rvh.length) s += '<h3 class=\"lfsec\">' + tr(\"Rivales anteriores\") + '</h3><div class=\"kvlist\">' + L.rvh.map(function (x) { return \"<div><span>\" + U.flag(x.ni) + \" \" + h(x.n) + \" · \" + x.a + \"–\" + x.b + '</span><span"
+ },
+ "Dorsales": {
+  "w": [
+   "ui-life.js:295"
+  ],
+  "ctx": "return '<section class=\"card\"><h3>' + tr(\"Dorsales\") + '</h3><div class=\"lfnumhist\">' + rows.slice().reverse().map(function (r) {"
+ },
+ "{n} estrellas": {
+  "w": [
+   "ui-mgrplus.js:13"
+  ],
+  "ctx": "function stars(n) { var s = \"\"; for (var i = 0; i < 5; i++) s += i < n ? \"★\" : \"☆\"; return '<span class=\"mpst\" aria-label=\"' + h(tr(\"{n} estrellas\", {n: n})) + '\">' + s + \"</span>\"; }"
+ },
+ "Ojeadores": {
+  "w": [
+   "ui-mgrplus.js:19"
+  ],
+  "ctx": "var m = S.m, sc = mpSc(), regs = mpRegions(), o = '<section class=\"card mpcard\"><div class=\"head\"><span class=\"tag real\"><span class=\"dot\"></span>' + tr(\"Ojeadores\") + '</span><span class=\"eyebrow\">' + tr(\"{n}/{max} en p"
+ },
+ "{n}/{max} en plantilla": {
+  "w": [
+   "ui-mgrplus.js:19"
+  ],
+  "ctx": "var m = S.m, sc = mpSc(), regs = mpRegions(), o = '<section class=\"card mpcard\"><div class=\"head\"><span class=\"tag real\"><span class=\"dot\"></span>' + tr(\"Ojeadores\") + '</span><span class=\"eyebrow\">' + tr(\"{n}/{max} en p"
+ },
+ "Cada ojeador te trae informes al empezar cada tramo. Con más estrellas, el potencial que ves es más fiable; con más viajes, encuentra más jugadores.": {
+  "w": [
+   "ui-mgrplus.js:20"
+  ],
+  "ctx": "o += '<p class=\"muted mpnote\">' + tr(\"Cada ojeador te trae informes al empezar cada tramo. Con más estrellas, el potencial que ves es más fiable; con más viajes, encuentra más jugadores.\") + \"</p>\";"
+ },
+ "{sal}/año · {n} informes": {
+  "w": [
+   "ui-mgrplus.js:23"
+  ],
+  "ctx": "return '<div class=\"mprow\"><div class=\"grow\"><b>' + h(s.fn + \" \" + s.ln) + \"</b> \" + stars(s.st) + '<small class=\"muted\">' + tr(\"{sal}/año · {n} informes\", {sal: fmtMoney(s.sal), n: s.n || 0}) + \"</small>\" +"
+ },
+ "Región": {
+  "w": [
+   "ui-mgrplus.js:24"
+  ],
+  "ctx": "'<div class=\"mpctl\"><select data-mp=\"reg\" data-id=\"' + s.id + '\" aria-label=\"' + h(tr(\"Región\")) + '\">' + regs.map(function (r) { return '<option value=\"' + h(r.k) + '\"' + (r.k === s.reg ? \" selected\" : \"\") + \">\" + h(r.n"
+ },
+ "Viajes: {c} por tramo": {
+  "w": [
+   "ui-mgrplus.js:25"
+  ],
+  "ctx": "'<div class=\"seg sm\">' + [0, 1, 2].map(function (lv) { return '<button data-a=\"mpsclv\" data-id=\"' + s.id + '\" data-v=\"' + lv + '\" aria-pressed=\"' + (s.lv === lv) + '\" title=\"' + h(lv ? tr(\"Viajes: {c} por tramo\", {c: fmt"
+ },
+ "Sin viajes": {
+  "w": [
+   "ui-mgrplus.js:25"
+  ],
+  "ctx": "'<div class=\"seg sm\">' + [0, 1, 2].map(function (lv) { return '<button data-a=\"mpsclv\" data-id=\"' + s.id + '\" data-v=\"' + lv + '\" aria-pressed=\"' + (s.lv === lv) + '\" title=\"' + h(lv ? tr(\"Viajes: {c} por tramo\", {c: fmt"
+ },
+ "Local": {
+  "w": [
+   "ui-mgrplus.js:25"
+  ],
+  "ctx": "'<div class=\"seg sm\">' + [0, 1, 2].map(function (lv) { return '<button data-a=\"mpsclv\" data-id=\"' + s.id + '\" data-v=\"' + lv + '\" aria-pressed=\"' + (s.lv === lv) + '\" title=\"' + h(lv ? tr(\"Viajes: {c} por tramo\", {c: fmt"
+ },
+ "Despedir": {
+  "w": [
+   "ui-mgrplus.js:26"
+  ],
+  "ctx": "'<button class=\"btn sm\" data-a=\"mpscfire\" data-id=\"' + s.id + '\">' + tr(\"Despedir\") + \"</button></div>\";"
+ },
+ "Candidatos": {
+  "w": [
+   "ui-mgrplus.js:30"
+  ],
+  "ctx": "o += '<div class=\"lbl\" style=\"margin-top:10px\">' + tr(\"Candidatos\") + '</div><div class=\"mplist\">' + mpScCands().map(function (c, i) {"
+ },
+ "Sin presupuesto": {
+  "w": [
+   "ui-mgrplus.js:33"
+  ],
+  "ctx": "'<button class=\"btn sm pri\" data-a=\"mpschire\" data-v=\"' + i + '\"' + (can ? \"\" : \" disabled\") + \">\" + (can ? tr(\"Contratar\") : tr(\"Sin presupuesto\")) + \"</button></div>\";"
+ },
+ "Pedir cedido": {
+  "w": [
+   "ui-mgrplus.js:39"
+  ],
+  "ctx": "o += '<div class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Pedir cedido\") + '</div><div class=\"mplist\">' + loans.map(function (t) {"
+ },
+ "Cesión de un año, con opción u obligación de compra al final.": {
+  "w": [
+   "ui-mgrplus.js:42"
+  ],
+  "ctx": "}).join(\"\") + '</div><p class=\"muted mpnote\">' + tr(\"Cesión de un año, con opción u obligación de compra al final.\") + \"</p>\";"
+ },
+ "No puedes contratar a más ojeadores ahora.": {
+  "w": [
+   "ui-mgrplus.js:46"
+  ],
+  "ctx": "U.actions.mpschire = function (b, v) { if (!mpScHire(+v)) U.toast(tr(\"No puedes contratar a más ojeadores ahora.\")); rer(); };"
+ },
+ "Dedicación exclusiva": {
+  "w": [
+   "ui-mgrplus.js:61"
+  ],
+  "ctx": "o += '<section class=\"card mpcard\"><div class=\"head\"><span class=\"tag real\"><span class=\"dot\"></span>' + tr(\"Selección\") + '</span><span class=\"eyebrow\">' + (nt.ex ? tr(\"Dedicación exclusiva\") + \" · \" : \"\") + tr(\"Contrat"
+ },
+ "Contrato hasta {y}": {
+  "w": [
+   "ui-mgrplus.js:61"
+  ],
+  "ctx": "o += '<section class=\"card mpcard\"><div class=\"head\"><span class=\"tag real\"><span class=\"dot\"></span>' + tr(\"Selección\") + '</span><span class=\"eyebrow\">' + (nt.ex ? tr(\"Dedicación exclusiva\") + \" · \" : \"\") + tr(\"Contrat"
+ },
+ "Nivel": {
+  "w": [
+   "ui-mgrplus.js:62"
+  ],
+  "ctx": "o += \"<h3>\" + U.flag(nt.ni) + \" \" + h(mpNatLabel(nt.ni)) + '</h3><div class=\"statline\"><div class=\"stat\"><b>' + r + \"</b><span>\" + tr(\"Nivel\") + '</span></div><div class=\"stat\"><b>' + sq.length + \"</b><span>\" + tr(\"Convo"
+ },
+ "Convocados": {
+  "w": [
+   "ui-mgrplus.js:62"
+  ],
+  "ctx": "o += \"<h3>\" + U.flag(nt.ni) + \" \" + h(mpNatLabel(nt.ni)) + '</h3><div class=\"statline\"><div class=\"stat\"><b>' + r + \"</b><span>\" + tr(\"Nivel\") + '</span></div><div class=\"stat\"><b>' + sq.length + \"</b><span>\" + tr(\"Convo"
+ },
+ "Balance": {
+  "w": [
+   "ui-mgrplus.js:62"
+  ],
+  "ctx": "o += \"<h3>\" + U.flag(nt.ni) + \" \" + h(mpNatLabel(nt.ni)) + '</h3><div class=\"statline\"><div class=\"stat\"><b>' + r + \"</b><span>\" + tr(\"Nivel\") + '</span></div><div class=\"stat\"><b>' + sq.length + \"</b><span>\" + tr(\"Convo"
+ },
+ "Convocatoria automática": {
+  "w": [
+   "ui-mgrplus.js:63"
+  ],
+  "ctx": "o += '<div class=\"row2\" style=\"margin-top:10px\"><button class=\"btn wide\" data-a=\"mpnatsq\">' + tr(\"Convocatoria\") + '</button><button class=\"btn wide\" data-a=\"mpnatauto\">' + tr(\"Convocatoria automática\") + \"</button></div"
+ },
+ "Objetivos para subir al primer equipo": {
+  "w": [
+   "ui-mgrplus.js:68"
+  ],
+  "ctx": "o += '<section class=\"card mpcard\"><div class=\"head\"><span class=\"tag real\"><span class=\"dot\"></span>' + tr(\"Filial\") + '</span><span class=\"eyebrow\">' + h(clubName(fil.par)) + \"</span></div><h3>\" + tr(\"Objetivos para su"
+ },
+ "Cumple dos de los tres y, al acabar la temporada, el primer equipo te llamará.": {
+  "w": [
+   "ui-mgrplus.js:70"
+  ],
+  "ctx": "'</div><p class=\"muted mpnote\">' + tr(\"Cumple dos de los tres y, al acabar la temporada, el primer equipo te llamará.\") + \"</p></section>\";"
+ },
+ "Convocatoria hecha por tu cuerpo técnico": {
+  "w": [
+   "ui-mgrplus.js:74"
+  ],
+  "ctx": "U.actions.mpnatauto = function () { mpNatAutoSet(); U.toast(tr(\"Convocatoria hecha por tu cuerpo técnico\")); rer(); };"
+ },
+ "Máximo 26 convocados": {
+  "w": [
+   "ui-mgrplus.js:76"
+  ],
+  "ctx": "U.actions.mpnattg = function (b, v) { if (!mpNatToggle(v)) U.toast(tr(\"Máximo 26 convocados\")); U.persist(); U.renderSheet(); };"
+ },
+ "{n}/26 convocados · nivel {r}": {
+  "w": [
+   "ui-mgrplus.js:81"
+  ],
+  "ctx": "var o = \"<h2>\" + tr(\"Convocatoria\") + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px\">' + h(mpNatLabel(nt.ni)) + \" · \" + tr(\"{n}/26 convocados · nivel {r}\", {n: sq.length, r: mpNatRating()}) + \"</p>\";"
+ },
+ "Quiere más minutos": {
+  "w": [
+   "ui-mgrplus.js:97"
+  ],
+  "ctx": "var lab = {min: tr(\"Quiere más minutos\"), con: tr(\"Le preocupa su contrato\"), req: tr(\"Quiere irse\")};"
+ },
+ "Le preocupa su contrato": {
+  "w": [
+   "ui-mgrplus.js:97"
+  ],
+  "ctx": "var lab = {min: tr(\"Quiere más minutos\"), con: tr(\"Le preocupa su contrato\"), req: tr(\"Quiere irse\")};"
+ },
+ "Charlas rápidas": {
+  "w": [
+   "ui-mgrplus.js:98"
+  ],
+  "ctx": "return '<section class=\"card mpcard\"><div class=\"head\"><span class=\"tag hot\"><span class=\"dot\"></span>' + tr(\"Charlas rápidas\") + '</span><span class=\"eyebrow\">' + trn(l.length, \"{n} jugador quiere hablar\", \"{n} jugadore"
+ },
+ "{n} jugador quiere hablar": {
+  "w": [
+   "ui-mgrplus.js:98"
+  ],
+  "ctx": "return '<section class=\"card mpcard\"><div class=\"head\"><span class=\"tag hot\"><span class=\"dot\"></span>' + tr(\"Charlas rápidas\") + '</span><span class=\"eyebrow\">' + trn(l.length, \"{n} jugador quiere hablar\", \"{n} jugadore",
+  "note": "plural:singular"
+ },
+ "{n} jugadores quieren hablar": {
+  "w": [
+   "ui-mgrplus.js:98"
+  ],
+  "ctx": "return '<section class=\"card mpcard\"><div class=\"head\"><span class=\"tag hot\"><span class=\"dot\"></span>' + tr(\"Charlas rápidas\") + '</span><span class=\"eyebrow\">' + trn(l.length, \"{n} jugador quiere hablar\", \"{n} jugadore",
+  "note": "plural:plural"
+ },
+ "Moral {n}": {
+  "w": [
+   "ui-mgrplus.js:101"
+  ],
+  "ctx": "return '<div class=\"mpqt\"><div class=\"mpqth\"><b>' + h(plName(p)) + '</b><span class=\"chip\">' + h(lab[k] || \"\") + '</span><small class=\"muted\">' + tr(\"Moral {n}\", {n: Math.round(p.mor)}) + \"</small></div><div class=\\\"mpqt"
+ },
+ "Ver siempre los partidos en directo": {
+  "w": [
+   "ui-mgrplus.js:116"
+  ],
+  "ctx": "return '<button class=\"pickrow\" data-a=\"mplive\" aria-pressed=\"' + a + '\"><div class=\"grow\"><b>' + tr(\"Ver siempre los partidos en directo\") + \"</b><small>\" + tr(\"Te preguntará en cada partido si lo ves o lo simulas, en c"
+ },
+ "Te preguntará en cada partido si lo ves o lo simulas, en cualquier ritmo de decisiones.": {
+  "w": [
+   "ui-mgrplus.js:116"
+  ],
+  "ctx": "return '<button class=\"pickrow\" data-a=\"mplive\" aria-pressed=\"' + a + '\"><div class=\"grow\"><b>' + tr(\"Ver siempre los partidos en directo\") + \"</b><small>\" + tr(\"Te preguntará en cada partido si lo ves o lo simulas, en c"
+ }
+}

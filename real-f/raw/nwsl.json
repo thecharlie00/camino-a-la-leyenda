@@ -1,0 +1,3417 @@
+{
+ "id": "nwsl",
+ "slot": "MLS",
+ "league": "NWSL (National Women's Soccer League)",
+ "season": "2026/27",
+ "asOf": "2026-10",
+ "clubs": [
+  {
+   "club": "Gotham FC",
+   "teamOvr": 83,
+   "coach": "Juan Carlos Amorós",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Sam",
+     "ln": "Kerr",
+     "pos": "DC",
+     "age": 33,
+     "nat": "AU",
+     "ovr": 87
+    },
+    {
+     "fn": "Rose",
+     "ln": "Lavelle",
+     "pos": "MC",
+     "age": 31,
+     "nat": "US",
+     "ovr": 86
+    },
+    {
+     "fn": "Guro",
+     "ln": "Reiten",
+     "pos": "EI",
+     "age": 31,
+     "nat": "NO",
+     "ovr": 86
+    },
+    {
+     "fn": "Ann-Katrin",
+     "ln": "Berger",
+     "pos": "POR",
+     "age": 36,
+     "nat": "DE",
+     "ovr": 84
+    },
+    {
+     "fn": "Jess",
+     "ln": "Carter",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "ENG",
+     "ovr": 84
+    },
+    {
+     "fn": "Denise",
+     "ln": "O'Sullivan",
+     "pos": "MC",
+     "age": 32,
+     "nat": "IE",
+     "ovr": 84
+    },
+    {
+     "fn": "Tierna",
+     "ln": "Davidson",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 82
+    },
+    {
+     "fn": "",
+     "ln": "Bruninha",
+     "pos": "LD",
+     "age": 31,
+     "nat": "BR",
+     "ovr": 80
+    },
+    {
+     "fn": "Jaedyn",
+     "ln": "Shaw",
+     "pos": "MCO",
+     "age": 21,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Midge",
+     "ln": "Purce",
+     "pos": "ED",
+     "age": 31,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Emily",
+     "ln": "Sonnett",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Savannah",
+     "ln": "McCaskill",
+     "pos": "MCO",
+     "age": 30,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Jaelin",
+     "ln": "Howell",
+     "pos": "MCD",
+     "age": 27,
+     "nat": "US",
+     "ovr": 75
+    },
+    {
+     "fn": "Taryn",
+     "ln": "Torres",
+     "pos": "MC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Mandy",
+     "ln": "Freeman",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Shelby",
+     "ln": "Hogan",
+     "pos": "POR",
+     "age": 27,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Kitahata",
+     "pos": "ED",
+     "age": 23,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Jordynn",
+     "ln": "Dudley",
+     "pos": "EI",
+     "age": 22,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Talia",
+     "ln": "Sommer",
+     "pos": "MC",
+     "age": 24,
+     "nat": "IL",
+     "ovr": 65
+    },
+    {
+     "fn": "Sofia",
+     "ln": "Cook",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 65
+    },
+    {
+     "fn": "Teagan",
+     "ln": "Wy",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Meredith",
+     "ln": "Speck",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "San Diego Wave",
+   "teamOvr": 78,
+   "coach": "Jonas Eidevall",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Catarina",
+     "ln": "Macario",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "US",
+     "ovr": 84
+    },
+    {
+     "fn": "Kenza",
+     "ln": "Dali",
+     "pos": "MC",
+     "age": 34,
+     "nat": "FR",
+     "ovr": 83
+    },
+    {
+     "fn": "",
+     "ln": "Ludmila",
+     "pos": "ED",
+     "age": 31,
+     "nat": "BR",
+     "ovr": 82
+    },
+    {
+     "fn": "Perle",
+     "ln": "Morroni",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 80
+    },
+    {
+     "fn": "Gabi",
+     "ln": "Portilho",
+     "pos": "ED",
+     "age": 31,
+     "nat": "BR",
+     "ovr": 80
+    },
+    {
+     "fn": "Adriana",
+     "ln": "Leon",
+     "pos": "ED",
+     "age": 33,
+     "nat": "CA",
+     "ovr": 78
+    },
+    {
+     "fn": "Sandra",
+     "ln": "Paños",
+     "pos": "POR",
+     "age": 33,
+     "nat": "ES",
+     "ovr": 76
+    },
+    {
+     "fn": "Kristen",
+     "ln": "McNabb",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "",
+     "ln": "Dudinha",
+     "pos": "DC",
+     "age": 23,
+     "nat": "BR",
+     "ovr": 76
+    },
+    {
+     "fn": "Trinity",
+     "ln": "Armstrong",
+     "pos": "LI",
+     "age": 24,
+     "nat": "US",
+     "ovr": 75
+    },
+    {
+     "fn": "Kennedy",
+     "ln": "Wesley",
+     "pos": "LD",
+     "age": 24,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Kimmi",
+     "ln": "Ascanio",
+     "pos": "MC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Luisa",
+     "ln": "Agudelo",
+     "pos": "POR",
+     "age": 24,
+     "nat": "CO",
+     "ovr": 70
+    },
+    {
+     "fn": "Mimi",
+     "ln": "Van Zanten",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "JM",
+     "ovr": 70
+    },
+    {
+     "fn": "Laurina",
+     "ln": "Fazer",
+     "pos": "MC",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Melanie",
+     "ln": "Barcenas",
+     "pos": "EI",
+     "age": 23,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "DiDi",
+     "ln": "Haračić",
+     "pos": "POR",
+     "age": 27,
+     "nat": "BA",
+     "ovr": 68
+    },
+    {
+     "fn": "Brooklyn",
+     "ln": "Courtnall",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "CA",
+     "ovr": 68
+    },
+    {
+     "fn": "Nya",
+     "ln": "Harrison",
+     "pos": "LI",
+     "age": 24,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Laila",
+     "ln": "Harbert",
+     "pos": "MC",
+     "age": 24,
+     "nat": "ENG",
+     "ovr": 68
+    },
+    {
+     "fn": "Gia",
+     "ln": "Corley",
+     "pos": "MC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Tatum",
+     "ln": "Wynalda",
+     "pos": "MC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Lia",
+     "ln": "Godfrey",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Trinity",
+     "ln": "Byars",
+     "pos": "DC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Fusco",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Kiki",
+     "ln": "Pickett",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Washington Spirit",
+   "teamOvr": 79,
+   "coach": "Adrián González",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Trinity",
+     "ln": "Rodman",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 90
+    },
+    {
+     "fn": "Andi",
+     "ln": "Sullivan",
+     "pos": "MCD",
+     "age": 30,
+     "nat": "US",
+     "ovr": 82
+    },
+    {
+     "fn": "Aubrey",
+     "ln": "Kingsbury",
+     "pos": "POR",
+     "age": 34,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Leicy",
+     "ln": "Santos",
+     "pos": "MCO",
+     "age": 30,
+     "nat": "CO",
+     "ovr": 80
+    },
+    {
+     "fn": "Sofia",
+     "ln": "Cantore",
+     "pos": "ED",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 80
+    },
+    {
+     "fn": "Sandy",
+     "ln": "MacIver",
+     "pos": "POR",
+     "age": 27,
+     "nat": "SCO",
+     "ovr": 78
+    },
+    {
+     "fn": "Gabrielle",
+     "ln": "Carle",
+     "pos": "LI",
+     "age": 28,
+     "nat": "CA",
+     "ovr": 78
+    },
+    {
+     "fn": "Esme",
+     "ln": "Morgan",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "ENG",
+     "ovr": 78
+    },
+    {
+     "fn": "Ashley",
+     "ln": "Hatch",
+     "pos": "DC",
+     "age": 31,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Rebeca",
+     "ln": "Bernal",
+     "pos": "MC",
+     "age": 27,
+     "nat": "MX",
+     "ovr": 76
+    },
+    {
+     "fn": "Casey",
+     "ln": "Krueger",
+     "pos": "LD",
+     "age": 36,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Élisabeth",
+     "ln": "Tsé",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "CA",
+     "ovr": 74
+    },
+    {
+     "fn": "Rosemonde",
+     "ln": "Kouassi",
+     "pos": "ED",
+     "age": 25,
+     "nat": "CI",
+     "ovr": 74
+    },
+    {
+     "fn": "Gift",
+     "ln": "Monday",
+     "pos": "DC",
+     "age": 24,
+     "nat": "NG",
+     "ovr": 74
+    },
+    {
+     "fn": "Kate",
+     "ln": "Wiesner",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Deborah",
+     "ln": "Abiodun",
+     "pos": "MC",
+     "age": 33,
+     "nat": "NG",
+     "ovr": 72
+    },
+    {
+     "fn": "Claudia",
+     "ln": "Martínez",
+     "pos": "DC",
+     "age": 26,
+     "nat": "PY",
+     "ovr": 72
+    },
+    {
+     "fn": "Tamara",
+     "ln": "Bolt",
+     "pos": "ED",
+     "age": 26,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Lucia",
+     "ln": "Di Guglielmo",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Hal",
+     "ln": "Hershfelt",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Mélissa",
+     "ln": "Bethi",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DZ",
+     "ovr": 68
+    },
+    {
+     "fn": "Monique",
+     "ln": "Ngock",
+     "pos": "MC",
+     "age": 23,
+     "nat": "CM",
+     "ovr": 68
+    },
+    {
+     "fn": "Tara",
+     "ln": "Rudd",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Paige",
+     "ln": "Metayer",
+     "pos": "LD",
+     "age": 25,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Emma",
+     "ln": "Gaines-Ramos",
+     "pos": "DC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Sara",
+     "ln": "Wojdelko",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Portland Thorns",
+   "teamOvr": 79,
+   "coach": "Robert Vilahamn",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Sophia",
+     "ln": "Wilson",
+     "pos": "DC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 90
+    },
+    {
+     "fn": "Mackenzie",
+     "ln": "Arnold",
+     "pos": "POR",
+     "age": 32,
+     "nat": "AU",
+     "ovr": 82
+    },
+    {
+     "fn": "Olivia",
+     "ln": "Moultrie",
+     "pos": "MCO",
+     "age": 21,
+     "nat": "US",
+     "ovr": 82
+    },
+    {
+     "fn": "Jessie",
+     "ln": "Fleming",
+     "pos": "MC",
+     "age": 28,
+     "nat": "CA",
+     "ovr": 82
+    },
+    {
+     "fn": "Morgan",
+     "ln": "Weaver",
+     "pos": "ED",
+     "age": 29,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Sam",
+     "ln": "Hiatt",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Marie",
+     "ln": "Müller",
+     "pos": "LI",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 76
+    },
+    {
+     "fn": "Bella",
+     "ln": "Bixby",
+     "pos": "POR",
+     "age": 26,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "M.A.",
+     "ln": "Vignola",
+     "pos": "LD",
+     "age": 25,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Cassandra",
+     "ln": "Bogere",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "SE",
+     "ovr": 74
+    },
+    {
+     "fn": "Caiya",
+     "ln": "Hanks",
+     "pos": "ED",
+     "age": 25,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Julie",
+     "ln": "Dufour",
+     "pos": "DC",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 74
+    },
+    {
+     "fn": "Reyna",
+     "ln": "Reyes",
+     "pos": "LD",
+     "age": 24,
+     "nat": "MX",
+     "ovr": 72
+    },
+    {
+     "fn": "Reilyn",
+     "ln": "Turner",
+     "pos": "EI",
+     "age": 22,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Isabella",
+     "ln": "Obaze",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DK",
+     "ovr": 70
+    },
+    {
+     "fn": "Nina",
+     "ln": "Nijstad",
+     "pos": "MC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Mackenzie",
+     "ln": "Wood",
+     "pos": "POR",
+     "age": 23,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Jayden",
+     "ln": "Perry",
+     "pos": "LD",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Mallie",
+     "ln": "McKenzie",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Shae",
+     "ln": "Harvey",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Valerin",
+     "ln": "Loboa",
+     "pos": "DC",
+     "age": 20,
+     "nat": "CO",
+     "ovr": 66
+    },
+    {
+     "fn": "Carolyn",
+     "ln": "Calzada",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Pietra",
+     "ln": "Tordin",
+     "pos": "DC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Morgan",
+     "ln": "Messner",
+     "pos": "POR",
+     "age": 27,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Maddie",
+     "ln": "Padelski",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Renee",
+     "ln": "Lyles",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Kansas City Current",
+   "teamOvr": 80,
+   "coach": "Chris Armas",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Temwa",
+     "ln": "Chawinga",
+     "pos": "DC",
+     "age": 28,
+     "nat": "MW",
+     "ovr": 92
+    },
+    {
+     "fn": "",
+     "ln": "Debinha",
+     "pos": "MCO",
+     "age": 35,
+     "nat": "BR",
+     "ovr": 86
+    },
+    {
+     "fn": "",
+     "ln": "Lorena",
+     "pos": "POR",
+     "age": 29,
+     "nat": "BR",
+     "ovr": 82
+    },
+    {
+     "fn": "Croix",
+     "ln": "Bethune",
+     "pos": "MCO",
+     "age": 24,
+     "nat": "US",
+     "ovr": 82
+    },
+    {
+     "fn": "Alana",
+     "ln": "Cook",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Michelle",
+     "ln": "Cooper",
+     "pos": "EI",
+     "age": 22,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Lo'eau",
+     "ln": "LaBonta",
+     "pos": "MC",
+     "age": 32,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Rocky",
+     "ln": "Rodríguez",
+     "pos": "MC",
+     "age": 32,
+     "nat": "CR",
+     "ovr": 78
+    },
+    {
+     "fn": "Elizabeth",
+     "ln": "Ball",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Bayley",
+     "ln": "Feist",
+     "pos": "MC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Kayla",
+     "ln": "Sharples",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Vanessa",
+     "ln": "DiBernardo",
+     "pos": "MC",
+     "age": 34,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Haley",
+     "ln": "Hopkins",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Gabrielle",
+     "ln": "Robinson",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Clare",
+     "ln": "Gagne",
+     "pos": "POR",
+     "age": 28,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Izzy",
+     "ln": "Rodriguez",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Gianna",
+     "ln": "Paul",
+     "pos": "DC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Laney",
+     "ln": "Rouse",
+     "pos": "LD",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Meila",
+     "ln": "Brewer",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Katie",
+     "ln": "Scott",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Mary",
+     "ln": "Long",
+     "pos": "EI",
+     "age": 25,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Marisa",
+     "ln": "Jordan",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Ellie",
+     "ln": "Bravo-Young",
+     "pos": "LD",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Kolo",
+     "ln": "Suliafu",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Amelia",
+     "ln": "White",
+     "pos": "DC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Penelope",
+     "ln": "Hocking",
+     "pos": "DC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Angel City",
+   "teamOvr": 77,
+   "coach": "Leif Gunnar Smerud",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Sveindís Jane",
+     "ln": "Jónsdóttir",
+     "pos": "ED",
+     "age": 25,
+     "nat": "IS",
+     "ovr": 82
+    },
+    {
+     "fn": "Ary",
+     "ln": "Borges",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "BR",
+     "ovr": 80
+    },
+    {
+     "fn": "Gisele",
+     "ln": "Thompson",
+     "pos": "LD",
+     "age": 20,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Hina",
+     "ln": "Sugita",
+     "pos": "MC",
+     "age": 29,
+     "nat": "JP",
+     "ovr": 78
+    },
+    {
+     "fn": "Ally",
+     "ln": "Sentnor",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Claire",
+     "ln": "Emslie",
+     "pos": "ED",
+     "age": 32,
+     "nat": "SCO",
+     "ovr": 78
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Gorden",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Jun",
+     "ln": "Endo",
+     "pos": "EI",
+     "age": 26,
+     "nat": "JP",
+     "ovr": 76
+    },
+    {
+     "fn": "Maiara",
+     "ln": "Niehues",
+     "pos": "MC",
+     "age": 27,
+     "nat": "BR",
+     "ovr": 74
+    },
+    {
+     "fn": "Prisca",
+     "ln": "Chilufya",
+     "pos": "ED",
+     "age": 25,
+     "nat": "ZM",
+     "ovr": 74
+    },
+    {
+     "fn": "Riley",
+     "ln": "Tiernan",
+     "pos": "DC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Hannah",
+     "ln": "Seabert",
+     "pos": "POR",
+     "age": 26,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Emily",
+     "ln": "Sams",
+     "pos": "LD",
+     "age": 26,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Evelyn",
+     "ln": "Shores",
+     "pos": "LI",
+     "age": 26,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Nealy",
+     "ln": "Martin",
+     "pos": "MC",
+     "age": 31,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Sydney",
+     "ln": "Leroux",
+     "pos": "DC",
+     "age": 36,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Savy",
+     "ln": "King",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Angelina",
+     "ln": "Anderson",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Karsyn",
+     "ln": "Cherry",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Sophia",
+     "ln": "Mattice",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Carina",
+     "ln": "Lageyre",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Taylor",
+     "ln": "Suarez",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Faith",
+     "ln": "Nguyen",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Utah Royals",
+   "teamOvr": 75,
+   "coach": "Jimmy Coenraets",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Mina",
+     "ln": "Tanaka",
+     "pos": "DC",
+     "age": 31,
+     "nat": "JP",
+     "ovr": 80
+    },
+    {
+     "fn": "Mandy",
+     "ln": "McGlynn",
+     "pos": "POR",
+     "age": 26,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Lara",
+     "ln": "Prašnikar",
+     "pos": "ED",
+     "age": 28,
+     "nat": "SI",
+     "ovr": 78
+    },
+    {
+     "fn": "Kaleigh",
+     "ln": "Riehl",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Narumi",
+     "ln": "Miura",
+     "pos": "MCO",
+     "age": 33,
+     "nat": "JP",
+     "ovr": 76
+    },
+    {
+     "fn": "Cloé",
+     "ln": "Lacasse",
+     "pos": "DC",
+     "age": 33,
+     "nat": "CA",
+     "ovr": 76
+    },
+    {
+     "fn": "Janni",
+     "ln": "Thomsen",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "DK",
+     "ovr": 74
+    },
+    {
+     "fn": "Nuria",
+     "ln": "Rábano",
+     "pos": "LI",
+     "age": 30,
+     "nat": "ES",
+     "ovr": 74
+    },
+    {
+     "fn": "Kiana",
+     "ln": "Palacios",
+     "pos": "ED",
+     "age": 30,
+     "nat": "MX",
+     "ovr": 74
+    },
+    {
+     "fn": "Kate",
+     "ln": "Del Fava",
+     "pos": "LD",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Alex",
+     "ln": "Loera",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Kameron",
+     "ln": "Simmonds",
+     "pos": "DC",
+     "age": 25,
+     "nat": "JM",
+     "ovr": 72
+    },
+    {
+     "fn": "Miyabi",
+     "ln": "Moriya",
+     "pos": "LI",
+     "age": 27,
+     "nat": "JP",
+     "ovr": 70
+    },
+    {
+     "fn": "Ana",
+     "ln": "Tejada",
+     "pos": "MC",
+     "age": 26,
+     "nat": "ES",
+     "ovr": 70
+    },
+    {
+     "fn": "Brecken",
+     "ln": "Mozingo",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Dayana",
+     "ln": "Pierre-Louis",
+     "pos": "MC",
+     "age": 24,
+     "nat": "HT",
+     "ovr": 68
+    },
+    {
+     "fn": "Tatumn",
+     "ln": "Milazzo",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Paige",
+     "ln": "Cronin",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Mia",
+     "ln": "Justus",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Courtney",
+     "ln": "Brown",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Aria",
+     "ln": "Nagai",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Madison",
+     "ln": "Hammond",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Cece",
+     "ln": "Delzer",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "KK",
+     "ln": "Ream",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Kalea",
+     "ln": "Eichenberger",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "DeAira",
+     "ln": "Jackson",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Seattle Reign",
+   "teamOvr": 76,
+   "coach": "Laura Harvey",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Jess",
+     "ln": "Fishlock",
+     "pos": "MC",
+     "age": 39,
+     "nat": "WAL",
+     "ovr": 80
+    },
+    {
+     "fn": "Claudia",
+     "ln": "Dickey",
+     "pos": "POR",
+     "age": 27,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Sofia",
+     "ln": "Huerta",
+     "pos": "LD",
+     "age": 33,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Angharad",
+     "ln": "James-Turner",
+     "pos": "MC",
+     "age": 32,
+     "nat": "WAL",
+     "ovr": 78
+    },
+    {
+     "fn": "Mia",
+     "ln": "Fishel",
+     "pos": "DC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Lynn",
+     "ln": "Biyendolo",
+     "pos": "DC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Phoebe",
+     "ln": "McClernon",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Nérilia",
+     "ln": "Mondésir",
+     "pos": "EI",
+     "age": 27,
+     "nat": "HT",
+     "ovr": 74
+    },
+    {
+     "fn": "Emily",
+     "ln": "Mason",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Sam",
+     "ln": "Meza",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Maddie",
+     "ln": "Mercado",
+     "pos": "ED",
+     "age": 25,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Maddie",
+     "ln": "Dahlien",
+     "pos": "ED",
+     "age": 25,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Ryanne",
+     "ln": "Brown",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Emeri",
+     "ln": "Adames",
+     "pos": "ED",
+     "age": 23,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Madison",
+     "ln": "Curry",
+     "pos": "LD",
+     "age": 28,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Shae",
+     "ln": "Holmes",
+     "pos": "LI",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Ainsley",
+     "ln": "McCammon",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Brittany",
+     "ln": "Ratcliffe",
+     "pos": "DC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Holly",
+     "ln": "Ward",
+     "pos": "EI",
+     "age": 24,
+     "nat": "CA",
+     "ovr": 64
+    },
+    {
+     "fn": "Evan",
+     "ln": "O'Steen",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Neeku",
+     "ln": "Purcell",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Jordyn",
+     "ln": "Bugg",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Sally",
+     "ln": "Menti",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Sofia",
+     "ln": "Cedeño",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Ruby",
+     "ln": "Hladek",
+     "pos": "DC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Orlando Pride",
+   "teamOvr": 78,
+   "coach": "Yolanda Thomas",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Barbra",
+     "ln": "Banda",
+     "pos": "DC",
+     "age": 26,
+     "nat": "ZM",
+     "ovr": 90
+    },
+    {
+     "fn": "Rafaelle",
+     "ln": "Souza",
+     "pos": "DFC",
+     "age": 35,
+     "nat": "BR",
+     "ovr": 82
+    },
+    {
+     "fn": "",
+     "ln": "Marta",
+     "pos": "MCO",
+     "age": 40,
+     "nat": "BR",
+     "ovr": 82
+    },
+    {
+     "fn": "",
+     "ln": "Angelina",
+     "pos": "MCO",
+     "age": 26,
+     "nat": "BR",
+     "ovr": 80
+    },
+    {
+     "fn": "",
+     "ln": "Luana",
+     "pos": "MC",
+     "age": 28,
+     "nat": "BR",
+     "ovr": 78
+    },
+    {
+     "fn": "Jacqueline",
+     "ln": "Ovalle",
+     "pos": "ED",
+     "age": 24,
+     "nat": "MX",
+     "ovr": 76
+    },
+    {
+     "fn": "Oihane",
+     "ln": "Hernández",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "ES",
+     "ovr": 74
+    },
+    {
+     "fn": "Nicole",
+     "ln": "Payne",
+     "pos": "LD",
+     "age": 29,
+     "nat": "NG",
+     "ovr": 74
+    },
+    {
+     "fn": "Kerry",
+     "ln": "Abello",
+     "pos": "LD",
+     "age": 25,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Gabi",
+     "ln": "Nunes",
+     "pos": "DC",
+     "age": 28,
+     "nat": "BR",
+     "ovr": 74
+    },
+    {
+     "fn": "Cara",
+     "ln": "Martin",
+     "pos": "POR",
+     "age": 29,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Hailie",
+     "ln": "Mace",
+     "pos": "LI",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Haley",
+     "ln": "McCutcheon",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Simone",
+     "ln": "Jackson",
+     "pos": "DC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Solai",
+     "ln": "Washington",
+     "pos": "ED",
+     "age": 24,
+     "nat": "JM",
+     "ovr": 68
+    },
+    {
+     "fn": "Cori",
+     "ln": "Dyke",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Zara",
+     "ln": "Chavoshi",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "CA",
+     "ovr": 66
+    },
+    {
+     "fn": "Seven",
+     "ln": "Castain",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Summer",
+     "ln": "Yates",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Cosette",
+     "ln": "Morché",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Kylie",
+     "ln": "Nadaner",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Zoe",
+     "ln": "Matthews",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Ally",
+     "ln": "Lemos",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Viviana",
+     "ln": "Villacorta",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Julie",
+     "ln": "Doyle",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Sanne",
+     "ln": "Lekven",
+     "pos": "DC",
+     "age": 25,
+     "nat": "NO",
+     "ovr": 62
+    },
+    {
+     "fn": "McKinley",
+     "ln": "Crone",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Hannah",
+     "ln": "Anderson",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "North Carolina Courage",
+   "teamOvr": 76,
+   "coach": "Mak Lind",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Kailen",
+     "ln": "Sheridan",
+     "pos": "POR",
+     "age": 31,
+     "nat": "CA",
+     "ovr": 82
+    },
+    {
+     "fn": "Felicitas",
+     "ln": "Rauch",
+     "pos": "LI",
+     "age": 30,
+     "nat": "DE",
+     "ovr": 80
+    },
+    {
+     "fn": "Ashley",
+     "ln": "Sanchez",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Vilde Bøe",
+     "ln": "Risa",
+     "pos": "MCD",
+     "age": 31,
+     "nat": "NO",
+     "ovr": 80
+    },
+    {
+     "fn": "Chioma",
+     "ln": "Okafor",
+     "pos": "DC",
+     "age": 25,
+     "nat": "NG",
+     "ovr": 78
+    },
+    {
+     "fn": "Shinomi",
+     "ln": "Koyama",
+     "pos": "MC",
+     "age": 28,
+     "nat": "JP",
+     "ovr": 76
+    },
+    {
+     "fn": "Dani",
+     "ln": "Weatherholt",
+     "pos": "MC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Lauryn",
+     "ln": "Thompson",
+     "pos": "ED",
+     "age": 25,
+     "nat": "ENG",
+     "ovr": 72
+    },
+    {
+     "fn": "Ally",
+     "ln": "Schlegel",
+     "pos": "DC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Uno",
+     "ln": "Shiragaki",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "JP",
+     "ovr": 70
+    },
+    {
+     "fn": "Sydney",
+     "ln": "Schmidt",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Evelyn",
+     "ln": "Ijeh",
+     "pos": "DC",
+     "age": 24,
+     "nat": "SE",
+     "ovr": 70
+    },
+    {
+     "fn": "Natalie",
+     "ln": "Jacobs",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Carly",
+     "ln": "Wickenheiser",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CA",
+     "ovr": 66
+    },
+    {
+     "fn": "Riley",
+     "ln": "Jackson",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Olivia",
+     "ln": "Wingate",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Hannah",
+     "ln": "Betfort",
+     "pos": "DC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Madison",
+     "ln": "White",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Cameron",
+     "ln": "Brooks",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Ivy",
+     "ln": "Younce",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "PR",
+     "ovr": 62
+    },
+    {
+     "fn": "Talia",
+     "ln": "Staude",
+     "pos": "LD",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Williams",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Maycee",
+     "ln": "Bell",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Erica Meg",
+     "ln": "Parkinson",
+     "pos": "MC",
+     "age": 24,
+     "nat": "ENG",
+     "ovr": 62
+    },
+    {
+     "fn": "Oli",
+     "ln": "Peña",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Payton",
+     "ln": "Crawford",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Molly",
+     "ln": "Pritchard",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Denver Summit",
+   "teamOvr": 75,
+   "coach": "Nick Cushing",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Lindsey",
+     "ln": "Heaps",
+     "pos": "MC",
+     "age": 32,
+     "nat": "US",
+     "ovr": 87
+    },
+    {
+     "fn": "Pauline",
+     "ln": "Peyraud-Magnin",
+     "pos": "POR",
+     "age": 34,
+     "nat": "FR",
+     "ovr": 80
+    },
+    {
+     "fn": "Nahikari",
+     "ln": "García",
+     "pos": "DC",
+     "age": 29,
+     "nat": "ES",
+     "ovr": 80
+    },
+    {
+     "fn": "Carson",
+     "ln": "Pickett",
+     "pos": "LI",
+     "age": 33,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Jasmine",
+     "ln": "Aikey",
+     "pos": "EI",
+     "age": 22,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Melissa",
+     "ln": "Kössler",
+     "pos": "DC",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 74
+    },
+    {
+     "fn": "Abby",
+     "ln": "Smith",
+     "pos": "POR",
+     "age": 31,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Kaleigh",
+     "ln": "Kurtz",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Janine",
+     "ln": "Sonis",
+     "pos": "LD",
+     "age": 28,
+     "nat": "CA",
+     "ovr": 72
+    },
+    {
+     "fn": "Emma",
+     "ln": "Regan",
+     "pos": "MC",
+     "age": 26,
+     "nat": "CA",
+     "ovr": 70
+    },
+    {
+     "fn": "Yuna",
+     "ln": "McCormack",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Eva",
+     "ln": "Gaetino",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Megan",
+     "ln": "Reid",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "CA",
+     "ovr": 66
+    },
+    {
+     "fn": "Lourdes",
+     "ln": "Bosch",
+     "pos": "MC",
+     "age": 26,
+     "nat": "MX",
+     "ovr": 66
+    },
+    {
+     "fn": "Natasha",
+     "ln": "Flint",
+     "pos": "DC",
+     "age": 28,
+     "nat": "ENG",
+     "ovr": 66
+    },
+    {
+     "fn": "Ayo",
+     "ln": "Oke",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Nytes",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Natalie",
+     "ln": "Means",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Camryn",
+     "ln": "Biegalski",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Devin",
+     "ln": "Lynch",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Baggett",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Ally",
+     "ln": "Brazier",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Olivia",
+     "ln": "Thomas",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Houston Dash",
+   "teamOvr": 74,
+   "coach": "Fabrice Gautrat",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Jane",
+     "ln": "Campbell",
+     "pos": "POR",
+     "age": 31,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Lisa",
+     "ln": "Boattin",
+     "pos": "LI",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 76
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Puntigam",
+     "pos": "MC",
+     "age": 33,
+     "nat": "AT",
+     "ovr": 76
+    },
+    {
+     "fn": "Evelina",
+     "ln": "Duljan",
+     "pos": "MC",
+     "age": 28,
+     "nat": "SE",
+     "ovr": 74
+    },
+    {
+     "fn": "Sophie",
+     "ln": "Schmidt",
+     "pos": "MCD",
+     "age": 38,
+     "nat": "CA",
+     "ovr": 74
+    },
+    {
+     "fn": "Clarissa",
+     "ln": "Larisey",
+     "pos": "DC",
+     "age": 27,
+     "nat": "CA",
+     "ovr": 74
+    },
+    {
+     "fn": "Avery",
+     "ln": "Patterson",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Danielle",
+     "ln": "Colaprico",
+     "pos": "MC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Messiah",
+     "ln": "Bright",
+     "pos": "DC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Miljana",
+     "ln": "Ivanović",
+     "pos": "DC",
+     "age": 26,
+     "nat": "RS",
+     "ovr": 72
+    },
+    {
+     "fn": "Allysha",
+     "ln": "Chapman",
+     "pos": "LI",
+     "age": 37,
+     "nat": "CA",
+     "ovr": 70
+    },
+    {
+     "fn": "Malia",
+     "ln": "Berkely",
+     "pos": "LD",
+     "age": 26,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Makenzy",
+     "ln": "Robbe",
+     "pos": "ED",
+     "age": 25,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Paige",
+     "ln": "Nielsen",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Kiki",
+     "ln": "Van Zanten",
+     "pos": "MC",
+     "age": 25,
+     "nat": "JM",
+     "ovr": 68
+    },
+    {
+     "fn": "Leah",
+     "ln": "Klenke",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Hillary",
+     "ln": "Beall",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Cate",
+     "ln": "Hardin",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Maggie",
+     "ln": "Graham",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Linda",
+     "ln": "Ullmark",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Khyah",
+     "ln": "Harper",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Kat",
+     "ln": "Rader",
+     "pos": "ED",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Kate",
+     "ln": "Faasse",
+     "pos": "ED",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Caroline",
+     "ln": "DeLisle",
+     "pos": "POR",
+     "age": 22,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Bay FC",
+   "teamOvr": 75,
+   "coach": "Emma Coates",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Racheal",
+     "ln": "Kundananji",
+     "pos": "DC",
+     "age": 26,
+     "nat": "ZM",
+     "ovr": 82
+    },
+    {
+     "fn": "Cristiana",
+     "ln": "Girelli",
+     "pos": "DC",
+     "age": 36,
+     "nat": "IT",
+     "ovr": 82
+    },
+    {
+     "fn": "Abby",
+     "ln": "Dahlkemper",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Aldana",
+     "ln": "Cometti",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "AR",
+     "ovr": 76
+    },
+    {
+     "fn": "Claire",
+     "ln": "Hutton",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Alyssa",
+     "ln": "Malonson",
+     "pos": "LD",
+     "age": 28,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Caprice",
+     "ln": "Dydasco",
+     "pos": "LI",
+     "age": 32,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Emily",
+     "ln": "Menges",
+     "pos": "DFC",
+     "age": 37,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Jenna",
+     "ln": "Nighswonger",
+     "pos": "LI",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Camryn",
+     "ln": "Miller",
+     "pos": "POR",
+     "age": 29,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Sydney",
+     "ln": "Collins",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "CA",
+     "ovr": 70
+    },
+    {
+     "fn": "Anouk",
+     "ln": "Denton",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "ENG",
+     "ovr": 70
+    },
+    {
+     "fn": "Taylor",
+     "ln": "Huff",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Dorian",
+     "ln": "Bailey",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Onyeka",
+     "ln": "Gamero",
+     "pos": "ED",
+     "age": 25,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Alex",
+     "ln": "Pfeiffer",
+     "pos": "ED",
+     "age": 26,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Heather",
+     "ln": "Gilchrist",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Kelli",
+     "ln": "Hubly",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Maddie",
+     "ln": "Moreau",
+     "pos": "LD",
+     "age": 25,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Joelle",
+     "ln": "Anderson",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Kennedy",
+     "ln": "Fuller",
+     "pos": "MC",
+     "age": 20,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Karlie",
+     "ln": "Lema",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Caroline",
+     "ln": "Conti",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Hannah",
+     "ln": "Bebar",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Tess",
+     "ln": "Boade",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Agostina",
+     "ln": "Holzheier",
+     "pos": "DC",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 62
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Silkowitz",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Emmie",
+     "ln": "Allen",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Boston Legacy",
+   "teamOvr": 74,
+   "coach": "Filipa Patão",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Casey",
+     "ln": "Murphy",
+     "pos": "POR",
+     "age": 30,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Amanda",
+     "ln": "Gutierres",
+     "pos": "DC",
+     "age": 31,
+     "nat": "BR",
+     "ovr": 80
+    },
+    {
+     "fn": "Jorelyn",
+     "ln": "Carabalí",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "CO",
+     "ovr": 78
+    },
+    {
+     "fn": "Josefine",
+     "ln": "Hasbo",
+     "pos": "MC",
+     "age": 27,
+     "nat": "DK",
+     "ovr": 74
+    },
+    {
+     "fn": "Ella",
+     "ln": "Stevens",
+     "pos": "DC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Nichelle",
+     "ln": "Prince",
+     "pos": "EI",
+     "age": 31,
+     "nat": "CA",
+     "ovr": 74
+    },
+    {
+     "fn": "Laís",
+     "ln": "Araújo",
+     "pos": "LI",
+     "age": 28,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Bianca",
+     "ln": "St-Georges",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "CA",
+     "ovr": 72
+    },
+    {
+     "fn": "Bárbara",
+     "ln": "Olivieri",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "VE",
+     "ovr": 72
+    },
+    {
+     "fn": "Sammy",
+     "ln": "Smith",
+     "pos": "DC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Lilly",
+     "ln": "Reale",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "",
+     "ln": "Kaká",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "BR",
+     "ovr": 70
+    },
+    {
+     "fn": "Chloe",
+     "ln": "Ricketts",
+     "pos": "ED",
+     "age": 19,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Aleigh",
+     "ln": "Gambone",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Alba",
+     "ln": "Caño",
+     "pos": "MC",
+     "age": 24,
+     "nat": "ES",
+     "ovr": 70
+    },
+    {
+     "fn": "Nicki",
+     "ln": "Hernández",
+     "pos": "LD",
+     "age": 25,
+     "nat": "MX",
+     "ovr": 66
+    },
+    {
+     "fn": "Annie",
+     "ln": "Karich",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Aissata",
+     "ln": "Traoré",
+     "pos": "ED",
+     "age": 22,
+     "nat": "ML",
+     "ovr": 66
+    },
+    {
+     "fn": "Amanda",
+     "ln": "Allen",
+     "pos": "EI",
+     "age": 24,
+     "nat": "CA",
+     "ovr": 64
+    },
+    {
+     "fn": "Laurel",
+     "ln": "Ivory",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Emerson",
+     "ln": "Elgin",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Deja",
+     "ln": "Davis",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Laurel",
+     "ln": "Ansbrow",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Fauzia",
+     "ln": "Najjemba",
+     "pos": "DC",
+     "age": 23,
+     "nat": "UG",
+     "ovr": 62
+    },
+    {
+     "fn": "Hannah",
+     "ln": "Stambaugh",
+     "pos": "POR",
+     "age": 24,
+     "nat": "JP",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Racing Louisville",
+   "teamOvr": 70,
+   "coach": "Bev Yanez",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Savannah",
+     "ln": "DeMelo",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Emma",
+     "ln": "Sears",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Maddie",
+     "ln": "Prohaska",
+     "pos": "POR",
+     "age": 27,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Rachel",
+     "ln": "Hill",
+     "pos": "DC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Arin",
+     "ln": "Wright",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Kayla",
+     "ln": "Fischer",
+     "pos": "DC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Courtney",
+     "ln": "Petersen",
+     "pos": "LD",
+     "age": 26,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Quincy",
+     "ln": "McMahon",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Makenna",
+     "ln": "Morris",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Marisa",
+     "ln": "DiGrande",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Ella",
+     "ln": "Hase",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Taylor",
+     "ln": "White",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Jordyn",
+     "ln": "Bloomer",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Cristina",
+     "ln": "Roque",
+     "pos": "POR",
+     "age": 24,
+     "nat": "PR",
+     "ovr": 62
+    },
+    {
+     "fn": "Lauren",
+     "ln": "Milliet",
+     "pos": "LD",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Ellie",
+     "ln": "Jean",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Mirann",
+     "ln": "Gacioch",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Avery",
+     "ln": "Ciorbu",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Macy",
+     "ln": "Philippus",
+     "pos": "LI",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Macey",
+     "ln": "Hodge",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Maddie",
+     "ln": "Pokorny",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Katie",
+     "ln": "O'Kane",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Natalie",
+     "ln": "Mitchell",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Taylor",
+     "ln": "Flint",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Maja",
+     "ln": "Lardner",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Weber",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Audrey",
+     "ln": "McKeen",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Chicago Stars",
+   "teamOvr": 77,
+   "coach": "Karina Báez",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Mallory",
+     "ln": "Swanson",
+     "pos": "ED",
+     "age": 28,
+     "nat": "US",
+     "ovr": 84
+    },
+    {
+     "fn": "Alyssa",
+     "ln": "Naeher",
+     "pos": "POR",
+     "age": 38,
+     "nat": "US",
+     "ovr": 80
+    },
+    {
+     "fn": "Leila",
+     "ln": "Ouahabi",
+     "pos": "LI",
+     "age": 33,
+     "nat": "ES",
+     "ovr": 80
+    },
+    {
+     "fn": "Julia",
+     "ln": "Grosso",
+     "pos": "MC",
+     "age": 25,
+     "nat": "CA",
+     "ovr": 78
+    },
+    {
+     "fn": "Natalia",
+     "ln": "Kuikka",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "FI",
+     "ovr": 76
+    },
+    {
+     "fn": "Maitane",
+     "ln": "López",
+     "pos": "MC",
+     "age": 31,
+     "nat": "ES",
+     "ovr": 76
+    },
+    {
+     "fn": "Jordyn",
+     "ln": "Huitema",
+     "pos": "DC",
+     "age": 25,
+     "nat": "CA",
+     "ovr": 76
+    },
+    {
+     "fn": "Michelle",
+     "ln": "Alozie",
+     "pos": "LD",
+     "age": 29,
+     "nat": "NG",
+     "ovr": 74
+    },
+    {
+     "fn": "Brianna",
+     "ln": "Pinto",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Nádia",
+     "ln": "Gomes",
+     "pos": "ED",
+     "age": 26,
+     "nat": "PT",
+     "ovr": 74
+    },
+    {
+     "fn": "Sam",
+     "ln": "Staab",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Manaka",
+     "ln": "Hayashi",
+     "pos": "MC",
+     "age": 26,
+     "nat": "JP",
+     "ovr": 72
+    },
+    {
+     "fn": "Aaliyah",
+     "ln": "Farmer",
+     "pos": "LD",
+     "age": 24,
+     "nat": "MX",
+     "ovr": 66
+    },
+    {
+     "fn": "Jameese",
+     "ln": "Joseph",
+     "pos": "ED",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Ivonne",
+     "ln": "Chacón",
+     "pos": "DC",
+     "age": 24,
+     "nat": "CO",
+     "ovr": 66
+    },
+    {
+     "fn": "Micayla",
+     "ln": "Johnson",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Anna",
+     "ln": "Gasper",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Halle",
+     "ln": "Mackiewicz",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Katie",
+     "ln": "Atkinson",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Taylor",
+     "ln": "Wood",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Elise",
+     "ln": "Evans",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Bea",
+     "ln": "Franklin",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Emma",
+     "ln": "Egizii",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Tessa",
+     "ln": "Dellarose",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Jenna",
+     "ln": "Bike",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Connaughton",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  }
+ ]
+}

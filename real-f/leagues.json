@@ -1,0 +1,471 @@
+{
+ "ENG2": {
+  "league": "Women's Super League 2",
+  "top": 68,
+  "bot": 56,
+  "clubs": [
+   "Leicester City",
+   "Bristol City",
+   "Southampton",
+   "Newcastle United",
+   "Nottingham Forest",
+   "Sunderland",
+   "Ipswich Town",
+   "Durham",
+   "Sheffield United",
+   "Watford",
+   "Burnley",
+   "Wolverhampton Wanderers"
+  ]
+ },
+ "ESP2": {
+  "league": "Primera Federación femenina",
+  "top": 66,
+  "bot": 54,
+  "clubs": [
+   "FC Barcelona B",
+   "Levante UD",
+   "Real Madrid B",
+   "Alhama",
+   "Villarreal CF",
+   "Atlético de Madrid B",
+   "CD Tenerife B",
+   "CA Osasuna",
+   "Athletic Club B",
+   "Real Sociedad B",
+   "Albacete BP",
+   "CP Cacereño",
+   "Real Unión Tenerife",
+   "Sport Extremadura"
+  ]
+ },
+ "GER2": {
+  "league": "2. Frauen-Bundesliga",
+  "top": 67,
+  "bot": 55,
+  "clubs": [
+   "SGS Essen",
+   "Carl Zeiss Jena",
+   "SC Sand",
+   "SV Meppen",
+   "Viktoria Berlin",
+   "TSG Hoffenheim II",
+   "SG Andernach",
+   "FC Ingolstadt",
+   "Eintracht Frankfurt II",
+   "VfL Bochum",
+   "Borussia Mönchengladbach",
+   "Turbine Potsdam",
+   "1. FC Köln II",
+   "Hertha BSC"
+  ]
+ },
+ "FRA2": {
+  "league": "Seconde Ligue",
+  "top": 66,
+  "bot": 54,
+  "clubs": [
+   "AS Saint-Étienne",
+   "Le Mans FC",
+   "AJ Auxerre",
+   "Grenoble Foot",
+   "LOSC Lille",
+   "Thonon Évian",
+   "OGC Niza",
+   "FC Metz",
+   "Bourges",
+   "Cannes",
+   "Roubaix Wervicq"
+  ]
+ },
+ "ITA2": {
+  "league": "Serie B femminile",
+  "top": 66,
+  "bot": 53,
+  "clubs": [
+   "Genoa",
+   "Lumezzane",
+   "Cesena",
+   "Roma Res",
+   "Bologna",
+   "Freedom",
+   "Frosinone",
+   "Vicenza",
+   "Brescia",
+   "San Marino Academy",
+   "Arezzo",
+   "Hellas Verona"
+  ]
+ },
+ "POR1": {
+  "league": "Liga BPI",
+  "top": 78,
+  "bot": 56,
+  "clubs": [
+   "SL Benfica",
+   "Sporting CP",
+   "Torreense",
+   "SC Braga",
+   "Racing Power",
+   "Vitória SC",
+   "Valadares Gaia",
+   "CS Marítimo",
+   "Damaiense",
+   "Rio Ave"
+  ]
+ },
+ "NED1": {
+  "league": "Eredivisie Vrouwen",
+  "top": 80,
+  "bot": 60,
+  "clubs": [
+   "FC Twente",
+   "Ajax",
+   "PSV",
+   "Feyenoord",
+   "AZ Alkmaar",
+   "FC Utrecht",
+   "SC Heerenveen",
+   "ADO Den Haag"
+  ]
+ },
+ "BEL1": {
+  "league": "Belgian Women's Super League",
+  "top": 72,
+  "bot": 56,
+  "clubs": [
+   "OH Leuven",
+   "RSC Anderlecht",
+   "Club Brujas",
+   "Standard de Lieja",
+   "Zulte Waregem",
+   "KRC Genk",
+   "KAA Gante",
+   "KVC Westerlo"
+  ]
+ },
+ "SCO1": {
+  "league": "Scottish Women's Premier League",
+  "top": 66,
+  "bot": 54,
+  "clubs": [
+   "Heart of Midlothian",
+   "Rangers",
+   "Glasgow City",
+   "Hibernian",
+   "Celtic",
+   "Partick Thistle",
+   "Motherwell",
+   "Montrose",
+   "Spartans",
+   "Aberdeen"
+  ]
+ },
+ "SWE1": {
+  "league": "Damallsvenskan",
+  "top": 78,
+  "bot": 58,
+  "clubs": [
+   "BK Häcken",
+   "Hammarby IF",
+   "Malmö FF",
+   "AIK",
+   "Kristianstads DFF",
+   "Vittsjö GIK",
+   "IF Brommapojkarna",
+   "Eskilstuna United",
+   "Piteå IF",
+   "Djurgårdens IF",
+   "FC Rosengård",
+   "Växjö DFF",
+   "IFK Norrköping",
+   "IK Uppsala"
+  ]
+ },
+ "NOR1": {
+  "league": "Toppserien",
+  "top": 72,
+  "bot": 56,
+  "clubs": [
+   "SK Brann",
+   "Vålerenga",
+   "Rosenborg",
+   "Lyn",
+   "Stabæk",
+   "Haugesund",
+   "Røa",
+   "Aalesunds FK",
+   "Lillestrøm",
+   "Molde FK",
+   "Hønefoss",
+   "Bodø/Glimt"
+  ]
+ },
+ "DEN1": {
+  "league": "Kvindeligaen",
+  "top": 68,
+  "bot": 55,
+  "clubs": [
+   "Brøndby IF",
+   "HB Køge",
+   "Fortuna Hjørring",
+   "FC Nordsjælland",
+   "AGF Aarhus",
+   "FC Copenhague",
+   "Thisted FC",
+   "Kolding Q",
+   "OB Odense",
+   "Vejle BK"
+  ]
+ },
+ "AUT1": {
+  "league": "ÖFB Frauen-Bundesliga",
+  "top": 68,
+  "bot": 54,
+  "clubs": [
+   "SKN St. Pölten",
+   "Sturm Graz",
+   "Austria Viena",
+   "SCR Altach",
+   "LASK",
+   "FC Bergheim",
+   "TSV Hartberg",
+   "Rapid Viena",
+   "Neulengbach",
+   "Wacker Innsbruck"
+  ]
+ },
+ "SUI1": {
+  "league": "AXA Women's Super League",
+  "top": 68,
+  "bot": 54,
+  "clubs": [
+   "Servette FC",
+   "FC Zúrich",
+   "Grasshoppers",
+   "Young Boys",
+   "FC Basilea",
+   "FC St. Gallen",
+   "FC Luzern",
+   "FC Aarau",
+   "FC Thun",
+   "FC Lugano"
+  ]
+ },
+ "CZE1": {
+  "league": "Czech Women's First League",
+  "top": 66,
+  "bot": 52,
+  "clubs": [
+   "Slavia Praga",
+   "Sparta Praga",
+   "Slovan Liberec",
+   "Baník Ostrava",
+   "Viktoria Plzeň",
+   "1. FC Slovácko",
+   "Dukla Praga",
+   "Sigma Olomouc",
+   "Mladá Boleslav",
+   "Hradec Králové"
+  ]
+ },
+ "MEX1": {
+  "league": "Liga MX Femenil",
+  "top": 74,
+  "bot": 56,
+  "clubs": [
+   "Tigres UANL",
+   "CF Monterrey",
+   "Club América",
+   "Guadalajara",
+   "Pachuca",
+   "Cruz Azul",
+   "Toluca",
+   "Club León",
+   "Pumas UNAM",
+   "Atlas",
+   "Club Tijuana",
+   "Santos Laguna",
+   "FC Juárez",
+   "Necaxa",
+   "Querétaro",
+   "Club Puebla",
+   "Atlético San Luis",
+   "Atlante"
+  ]
+ },
+ "BRA1": {
+  "league": "Brasileirão Feminino A1",
+  "top": 72,
+  "bot": 54,
+  "clubs": [
+   "Corinthians",
+   "Palmeiras",
+   "Cruzeiro",
+   "São Paulo",
+   "Flamengo",
+   "Internacional",
+   "Ferroviária",
+   "Grêmio",
+   "Santos",
+   "Fluminense",
+   "Botafogo",
+   "Bahia",
+   "RB Bragantino",
+   "Athletico Paranaense",
+   "Vitória",
+   "Real Brasília"
+  ]
+ },
+ "ARG1": {
+  "league": "Campeonato Femenino",
+  "top": 66,
+  "bot": 52,
+  "clubs": [
+   "Boca Juniors",
+   "River Plate",
+   "UAI Urquiza",
+   "San Lorenzo",
+   "Racing Club",
+   "Independiente",
+   "Lanús",
+   "Banfield",
+   "Rosario Central",
+   "Ferro Carril Oeste",
+   "Estudiantes de La Plata",
+   "Vélez Sarsfield",
+   "Huracán",
+   "Belgrano",
+   "Argentinos Juniors",
+   "Platense"
+  ]
+ },
+ "COL1": {
+  "league": "Liga Femenina",
+  "top": 68,
+  "bot": 52,
+  "clubs": [
+   "América de Cali",
+   "Atlético Nacional",
+   "Deportivo Cali",
+   "Millonarios",
+   "Independiente Santa Fe",
+   "Independiente Medellín",
+   "Junior",
+   "Atlético Bucaramanga",
+   "Deportes Tolima",
+   "Once Caldas",
+   "Deportivo Pereira",
+   "Envigado",
+   "Llaneros",
+   "Fortaleza CEIF",
+   "Cúcuta Deportivo",
+   "Real Santander"
+  ]
+ },
+ "AUS1": {
+  "league": "A-League Women",
+  "top": 68,
+  "bot": 54,
+  "clubs": [
+   "Melbourne City",
+   "Melbourne Victory",
+   "Sydney FC",
+   "Western Sydney Wanderers",
+   "Brisbane Roar",
+   "Central Coast Mariners",
+   "Adelaide United",
+   "Canberra United",
+   "Auckland FC",
+   "Newcastle Jets",
+   "Wellington Phoenix",
+   "Perth Glory"
+  ]
+ },
+ "JPN1": {
+  "league": "WE League",
+  "top": 74,
+  "bot": 58,
+  "clubs": [
+   "Urawa Red Diamonds",
+   "Tokyo Verdy",
+   "INAC Kobe Leonessa",
+   "Sanfrecce Hiroshima",
+   "Cerezo Osaka",
+   "Albirex Niigata",
+   "Mynavi Sendai",
+   "Omiya Ardija Ventus",
+   "JEF United Chiba",
+   "Nojima Stella Kanagawa",
+   "Chifure AS Elfen",
+   "Nagano Parceiro"
+  ]
+ },
+ "KOR1": {
+  "league": "WK League",
+  "top": 66,
+  "bot": 54,
+  "clubs": [
+   "Hyundai Steel Red Angels",
+   "Gyeongju KHNP",
+   "Suwon FMC",
+   "Seoul City",
+   "Sejong Sportstoto",
+   "Boeun Sangmu",
+   "Hwacheon KSPO",
+   "Changnyeong WFC"
+  ]
+ },
+ "CHN1": {
+  "league": "Chinese Women's Super League",
+  "top": 68,
+  "bot": 52,
+  "clubs": [
+   "Wuhan Jiangda",
+   "Shanghai Shengli",
+   "Changchun Dazhong Zhuoyue",
+   "Jiangsu",
+   "Beijing",
+   "Dalian",
+   "Sichuan",
+   "Henan",
+   "Guangdong Hongyuan",
+   "Shandong",
+   "Meizhou Hakka"
+  ]
+ },
+ "KSA1": {
+  "league": "Saudi Women's Premier League",
+  "top": 62,
+  "bot": 50,
+  "clubs": [
+   "Al-Nassr",
+   "Al-Ahli",
+   "Al-Hilal",
+   "Al-Ittihad",
+   "Al-Qadsiah",
+   "Eastern Flames",
+   "Al-Shabab",
+   "Al-Riyadh",
+   "Al-Taawoun",
+   "Al-Ettifaq"
+  ]
+ },
+ "RSA1": {
+  "league": "SAFA Women's League (Hollywoodbets Super League)",
+  "top": 66,
+  "bot": 48,
+  "clubs": [
+   "Mamelodi Sundowns",
+   "JVW",
+   "University of Johannesburg",
+   "TS Galaxy",
+   "Durban Ladies",
+   "Bloemfontein Celtic",
+   "Cape Town Roses",
+   "Richmond United",
+   "Sunnyside",
+   "Tembisa"
+  ]
+ }
+}

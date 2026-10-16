@@ -1,0 +1,2253 @@
+{
+ "id": "d1f",
+ "slot": "FRA1",
+ "league": "Première Ligue (ex D1 Arkema)",
+ "season": "2026/27",
+ "asOf": "2026-10",
+ "clubs": [
+  {
+   "club": "Olympique de Lyon",
+   "teamOvr": 85,
+   "coach": "Jonatan Giráldez",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Christiane",
+     "ln": "Endler",
+     "pos": "POR",
+     "age": 35,
+     "nat": "CL",
+     "ovr": 86
+    },
+    {
+     "fn": "Teagan",
+     "ln": "Micah",
+     "pos": "POR",
+     "age": 28,
+     "nat": "AU",
+     "ovr": 76
+    },
+    {
+     "fn": "Mala",
+     "ln": "Grohs",
+     "pos": "POR",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 74
+    },
+    {
+     "fn": "Wendie",
+     "ln": "Renard",
+     "pos": "DFC",
+     "age": 36,
+     "nat": "FR",
+     "ovr": 85
+    },
+    {
+     "fn": "Ingrid",
+     "ln": "Engen",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "NO",
+     "ovr": 82
+    },
+    {
+     "fn": "",
+     "ln": "Tarciane",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "BR",
+     "ovr": 80
+    },
+    {
+     "fn": "Wassa",
+     "ln": "Sangaré",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Ashley",
+     "ln": "Lawrence",
+     "pos": "LD",
+     "age": 31,
+     "nat": "CA",
+     "ovr": 83
+    },
+    {
+     "fn": "Selma",
+     "ln": "Bacha",
+     "pos": "LI",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 85
+    },
+    {
+     "fn": "Elma",
+     "ln": "Nelhage",
+     "pos": "LI",
+     "age": 23,
+     "nat": "SE",
+     "ovr": 76
+    },
+    {
+     "fn": "Romane",
+     "ln": "Rafalski",
+     "pos": "LI",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Damaris",
+     "ln": "Egurrola",
+     "pos": "MC",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 84
+    },
+    {
+     "fn": "Caroline",
+     "ln": "Weir",
+     "pos": "MC",
+     "age": 31,
+     "nat": "SCO",
+     "ovr": 83
+    },
+    {
+     "fn": "Korbin",
+     "ln": "Albert",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 82
+    },
+    {
+     "fn": "Lily",
+     "ln": "Yohannes",
+     "pos": "MC",
+     "age": 19,
+     "nat": "US",
+     "ovr": 78
+    },
+    {
+     "fn": "Inès",
+     "ln": "Benyahia",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Ambre",
+     "ln": "Ouazar",
+     "pos": "MC",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Melchie",
+     "ln": "Dumornay",
+     "pos": "MCO",
+     "age": 23,
+     "nat": "HT",
+     "ovr": 90
+    },
+    {
+     "fn": "Jule",
+     "ln": "Brand",
+     "pos": "ED",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 85
+    },
+    {
+     "fn": "Salma",
+     "ln": "Paralluelo",
+     "pos": "EI",
+     "age": 22,
+     "nat": "ES",
+     "ovr": 85
+    },
+    {
+     "fn": "Johanna",
+     "ln": "Rytting Kaneryd",
+     "pos": "ED",
+     "age": 29,
+     "nat": "SE",
+     "ovr": 82
+    },
+    {
+     "fn": "Ada",
+     "ln": "Hegerberg",
+     "pos": "DC",
+     "age": 31,
+     "nat": "NO",
+     "ovr": 88
+    },
+    {
+     "fn": "Tabitha",
+     "ln": "Chawinga",
+     "pos": "DC",
+     "age": 30,
+     "nat": "MW",
+     "ovr": 87
+    },
+    {
+     "fn": "Marie-Antoinette",
+     "ln": "Katoto",
+     "pos": "DC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 85
+    },
+    {
+     "fn": "Vicki",
+     "ln": "Becho",
+     "pos": "DC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 78
+    },
+    {
+     "fn": "Sofia",
+     "ln": "Bekhaled",
+     "pos": "DC",
+     "age": 19,
+     "nat": "DZ",
+     "ovr": 65
+    }
+   ]
+  },
+  {
+   "club": "Paris FC",
+   "teamOvr": 77,
+   "coach": "Sandrine Soubeyrand",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Mylène",
+     "ln": "Chavas",
+     "pos": "POR",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Kinga",
+     "ln": "Seweryn",
+     "pos": "POR",
+     "age": 21,
+     "nat": "PL",
+     "ovr": 66
+    },
+    {
+     "fn": "Rafaela",
+     "ln": "Mendonça",
+     "pos": "POR",
+     "age": 19,
+     "nat": "PT",
+     "ovr": 60
+    },
+    {
+     "fn": "Célina",
+     "ln": "Ould Hocine",
+     "pos": "LD",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Manoly",
+     "ln": "Baquerizo",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "EC",
+     "ovr": 74
+    },
+    {
+     "fn": "Théa",
+     "ln": "Greboval",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Hillary",
+     "ln": "Diaz",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Saki",
+     "ln": "Ishizaka",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "JP",
+     "ovr": 70
+    },
+    {
+     "fn": "Melween",
+     "ln": "N'Dongala",
+     "pos": "LI",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Hajar",
+     "ln": "Saïd",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "MA",
+     "ovr": 64
+    },
+    {
+     "fn": "Fiona",
+     "ln": "Liaigre",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Daphné",
+     "ln": "Corboz",
+     "pos": "MC",
+     "age": 33,
+     "nat": "FR",
+     "ovr": 78
+    },
+    {
+     "fn": "Kaja",
+     "ln": "Korošec",
+     "pos": "MC",
+     "age": 24,
+     "nat": "SI",
+     "ovr": 76
+    },
+    {
+     "fn": "Océane",
+     "ln": "Picard",
+     "pos": "MC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Anaële",
+     "ln": "Le Moguédec",
+     "pos": "MC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Karla",
+     "ln": "Torres",
+     "pos": "MC",
+     "age": 19,
+     "nat": "CO",
+     "ovr": 66
+    },
+    {
+     "fn": "Sheika",
+     "ln": "Scott",
+     "pos": "EI",
+     "age": 19,
+     "nat": "CR",
+     "ovr": 68
+    },
+    {
+     "fn": "Maeline",
+     "ln": "Mendy",
+     "pos": "MC",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Clara",
+     "ln": "Matéo",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 80
+    },
+    {
+     "fn": "Évelyne",
+     "ln": "Viens",
+     "pos": "DC",
+     "age": 29,
+     "nat": "CA",
+     "ovr": 78
+    },
+    {
+     "fn": "Mariam",
+     "ln": "Toloba",
+     "pos": "DC",
+     "age": 27,
+     "nat": "BE",
+     "ovr": 78
+    },
+    {
+     "fn": "Klaudia",
+     "ln": "Jedlińska",
+     "pos": "DC",
+     "age": 26,
+     "nat": "PL",
+     "ovr": 74
+    },
+    {
+     "fn": "Hawa",
+     "ln": "Sangaré",
+     "pos": "ED",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 74
+    },
+    {
+     "fn": "Kadidia",
+     "ln": "Traoré",
+     "pos": "DC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Paris Saint-Germain",
+   "teamOvr": 79,
+   "coach": "Paulo César",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Katarzyna",
+     "ln": "Kiedrzynek",
+     "pos": "POR",
+     "age": 35,
+     "nat": "PL",
+     "ovr": 74
+    },
+    {
+     "fn": "Oliwia",
+     "ln": "Peda Szperkowska",
+     "pos": "POR",
+     "age": 25,
+     "nat": "PL",
+     "ovr": 70
+    },
+    {
+     "fn": "Océane",
+     "ln": "Toussaint",
+     "pos": "POR",
+     "age": 22,
+     "nat": "HT",
+     "ovr": 66
+    },
+    {
+     "fn": "Olga",
+     "ln": "Carmona",
+     "pos": "LI",
+     "age": 26,
+     "nat": "ES",
+     "ovr": 86
+    },
+    {
+     "fn": "Sakina",
+     "ln": "Karchaoui",
+     "pos": "LI",
+     "age": 30,
+     "nat": "FR",
+     "ovr": 82
+    },
+    {
+     "fn": "Griedge",
+     "ln": "Mbock",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 84
+    },
+    {
+     "fn": "Elisa",
+     "ln": "De Almeida",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 77
+    },
+    {
+     "fn": "Paulina",
+     "ln": "Dudek",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "PL",
+     "ovr": 76
+    },
+    {
+     "fn": "Isabela",
+     "ln": "Chagas",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "BR",
+     "ovr": 74
+    },
+    {
+     "fn": "Jade",
+     "ln": "Le Guilly",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 74
+    },
+    {
+     "fn": "Thiniba",
+     "ln": "Samoura",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Tara",
+     "ln": "Elimbi Gilbert",
+     "pos": "LD",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Jackie",
+     "ln": "Groenen",
+     "pos": "MC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 82
+    },
+    {
+     "fn": "Vitória",
+     "ln": "Yaya",
+     "pos": "MC",
+     "age": 24,
+     "nat": "BR",
+     "ovr": 78
+    },
+    {
+     "fn": "Emilie",
+     "ln": "Østerås",
+     "pos": "MC",
+     "age": 24,
+     "nat": "NO",
+     "ovr": 78
+    },
+    {
+     "fn": "Florianne",
+     "ln": "Jourde",
+     "pos": "MC",
+     "age": 21,
+     "nat": "CA",
+     "ovr": 70
+    },
+    {
+     "fn": "Tanté",
+     "ln": "Diakité",
+     "pos": "MC",
+     "age": 18,
+     "nat": "GN",
+     "ovr": 62
+    },
+    {
+     "fn": "Rasheedat",
+     "ln": "Ajibade",
+     "pos": "ED",
+     "age": 26,
+     "nat": "NG",
+     "ovr": 83
+    },
+    {
+     "fn": "Jennifer",
+     "ln": "Echegini",
+     "pos": "ED",
+     "age": 25,
+     "nat": "NG",
+     "ovr": 78
+    },
+    {
+     "fn": "Romée",
+     "ln": "Leuchter",
+     "pos": "DC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 80
+    },
+    {
+     "fn": "Merveille",
+     "ln": "Kanjinga",
+     "pos": "ED",
+     "age": 23,
+     "nat": "CD",
+     "ovr": 76
+    },
+    {
+     "fn": "Naomie",
+     "ln": "Feller",
+     "pos": "DC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 74
+    }
+   ]
+  },
+  {
+   "club": "FC Nantes",
+   "teamOvr": 70,
+   "coach": "Pierre-Alain Picard",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Sofie",
+     "ln": "Grøn",
+     "pos": "POR",
+     "age": 23,
+     "nat": "DK",
+     "ovr": 66
+    },
+    {
+     "fn": "Natalia",
+     "ln": "Radkiewicz",
+     "pos": "POR",
+     "age": 23,
+     "nat": "PL",
+     "ovr": 62
+    },
+    {
+     "fn": "Julie",
+     "ln": "Pasquereau",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Victoria",
+     "ln": "Krug",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Constance",
+     "ln": "Brackman",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 68
+    },
+    {
+     "fn": "Clara",
+     "ln": "Jepsen",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "DK",
+     "ovr": 66
+    },
+    {
+     "fn": "Margaux",
+     "ln": "Vairon",
+     "pos": "LD",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Moira",
+     "ln": "Kelley",
+     "pos": "LI",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Juliane",
+     "ln": "Denizot",
+     "pos": "DFC",
+     "age": 18,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Liucija",
+     "ln": "Vaitukaitytė",
+     "pos": "MC",
+     "age": 26,
+     "nat": "LT",
+     "ovr": 70
+    },
+    {
+     "fn": "Zoï",
+     "ln": "van de Ven",
+     "pos": "MC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Gabriela",
+     "ln": "Grzybowska",
+     "pos": "MC",
+     "age": 23,
+     "nat": "PL",
+     "ovr": 66
+    },
+    {
+     "fn": "Juliette",
+     "ln": "Mossard",
+     "pos": "MC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Imane",
+     "ln": "Saoud",
+     "pos": "ED",
+     "age": 24,
+     "nat": "MA",
+     "ovr": 66
+    },
+    {
+     "fn": "Madeline",
+     "ln": "Roth",
+     "pos": "DC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Adèle",
+     "ln": "Connesson",
+     "pos": "EI",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Camille",
+     "ln": "Robillard",
+     "pos": "DC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Noémie",
+     "ln": "Potier",
+     "pos": "ED",
+     "age": 20,
+     "nat": "CH",
+     "ovr": 66
+    },
+    {
+     "fn": "Esther",
+     "ln": "Buabadi",
+     "pos": "DC",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 66
+    }
+   ]
+  },
+  {
+   "club": "FC Fleury 91",
+   "teamOvr": 72,
+   "coach": "Antoine Ponroy",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Katriina",
+     "ln": "Talaslahti",
+     "pos": "POR",
+     "age": 26,
+     "nat": "FI",
+     "ovr": 68
+    },
+    {
+     "fn": "Chloé",
+     "ln": "N'Gazi",
+     "pos": "POR",
+     "age": 30,
+     "nat": "DZ",
+     "ovr": 66
+    },
+    {
+     "fn": "Amira",
+     "ln": "Benaïssa",
+     "pos": "POR",
+     "age": 19,
+     "nat": "DZ",
+     "ovr": 55
+    },
+    {
+     "fn": "Léna",
+     "ln": "Goetsch",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Kethna",
+     "ln": "Louis",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "HT",
+     "ovr": 70
+    },
+    {
+     "fn": "Annaïg",
+     "ln": "Butel",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Falonne",
+     "ln": "Meffometou",
+     "pos": "DFC",
+     "age": 36,
+     "nat": "CM",
+     "ovr": 64
+    },
+    {
+     "fn": "Charlotte",
+     "ln": "Fernandes",
+     "pos": "LD",
+     "age": 33,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Aude",
+     "ln": "Bizet",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Aleksandra",
+     "ln": "Gajić",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "RS",
+     "ovr": 60
+    },
+    {
+     "fn": "Cyrielle",
+     "ln": "Blanc",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Erin",
+     "ln": "Cesarini",
+     "pos": "MC",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 72
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Sundahl",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DK",
+     "ovr": 68
+    },
+    {
+     "fn": "Laurie",
+     "ln": "Cance",
+     "pos": "MC",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Clara",
+     "ln": "Hoarau",
+     "pos": "MC",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Salima",
+     "ln": "Sidi Moussa",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DZ",
+     "ovr": 60
+    },
+    {
+     "fn": "Lucie",
+     "ln": "Calba",
+     "pos": "DC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 74
+    },
+    {
+     "fn": "Emelyne",
+     "ln": "Laurent",
+     "pos": "DC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Cindy",
+     "ln": "Caputo",
+     "pos": "DC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Batcheba",
+     "ln": "Louis",
+     "pos": "ED",
+     "age": 29,
+     "nat": "HT",
+     "ovr": 68
+    },
+    {
+     "fn": "Sanaâ",
+     "ln": "Mssoudy",
+     "pos": "ED",
+     "age": 26,
+     "nat": "MA",
+     "ovr": 66
+    },
+    {
+     "fn": "Louna",
+     "ln": "Ribadeira",
+     "pos": "ED",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Shana",
+     "ln": "Chossenotte",
+     "pos": "ED",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Lourdjina",
+     "ln": "Étienne",
+     "pos": "ED",
+     "age": 19,
+     "nat": "HT",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Olympique de Marsella",
+   "teamOvr": 72,
+   "coach": "Nicolas Chabot",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Emily",
+     "ln": "Burns",
+     "pos": "POR",
+     "age": 29,
+     "nat": "CA",
+     "ovr": 74
+    },
+    {
+     "fn": "Marie-Morgane",
+     "ln": "Sieber",
+     "pos": "POR",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Maureen",
+     "ln": "Cosson",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Carina",
+     "ln": "Baltrip-Reyes",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "PA",
+     "ovr": 70
+    },
+    {
+     "fn": "Julie",
+     "ln": "Thibaud",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Nelly",
+     "ln": "Da Cruz Rodrigues",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "PT",
+     "ovr": 68
+    },
+    {
+     "fn": "Amandine",
+     "ln": "Béché",
+     "pos": "LD",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Mary",
+     "ln": "Álvarez",
+     "pos": "LI",
+     "age": 21,
+     "nat": "CO",
+     "ovr": 66
+    },
+    {
+     "fn": "Jagoda",
+     "ln": "Cyraniak",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "PL",
+     "ovr": 62
+    },
+    {
+     "fn": "Claire",
+     "ln": "Lavogez",
+     "pos": "MC",
+     "age": 32,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Lexi",
+     "ln": "Missimo",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Naomie",
+     "ln": "Bamenga",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Sonia",
+     "ln": "Ouchene",
+     "pos": "MC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Jenny",
+     "ln": "Perret",
+     "pos": "MC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Salomé",
+     "ln": "Elisor",
+     "pos": "MC",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Maudeline",
+     "ln": "Moryl",
+     "pos": "MC",
+     "age": 23,
+     "nat": "HT",
+     "ovr": 62
+    },
+    {
+     "fn": "Louise",
+     "ln": "Fleury",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Mathilde",
+     "ln": "Bourdieu",
+     "pos": "DC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 74
+    },
+    {
+     "fn": "Jody",
+     "ln": "Brown",
+     "pos": "EI",
+     "age": 24,
+     "nat": "JM",
+     "ovr": 72
+    },
+    {
+     "fn": "Beatriz",
+     "ln": "Fonseca",
+     "pos": "ED",
+     "age": 27,
+     "nat": "PT",
+     "ovr": 70
+    },
+    {
+     "fn": "Maëlle",
+     "ln": "Garbino",
+     "pos": "ED",
+     "age": 30,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Habibou",
+     "ln": "Ouedraogo",
+     "pos": "ED",
+     "age": 24,
+     "nat": "CI",
+     "ovr": 66
+    },
+    {
+     "fn": "Sintia",
+     "ln": "Cabezas",
+     "pos": "ED",
+     "age": 20,
+     "nat": "CO",
+     "ovr": 62
+    },
+    {
+     "fn": "Violette",
+     "ln": "Gobert",
+     "pos": "DC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "RC Estrasburgo",
+   "teamOvr": 68,
+   "coach": "Vincent Nogueira",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Manon",
+     "ln": "Wahl",
+     "pos": "POR",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Laëtitia",
+     "ln": "Philippe",
+     "pos": "POR",
+     "age": 35,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Manon",
+     "ln": "Lourenco",
+     "pos": "POR",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Kristin",
+     "ln": "Kögel",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Élise",
+     "ln": "Bonet",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Grace",
+     "ln": "Kazadi",
+     "pos": "LI",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Morgane",
+     "ln": "Martins",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "PT",
+     "ovr": 66
+    },
+    {
+     "fn": "Emmi",
+     "ln": "Siren",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "FI",
+     "ovr": 66
+    },
+    {
+     "fn": "Bruna",
+     "ln": "Lourenço",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "PT",
+     "ovr": 64
+    },
+    {
+     "fn": "Emilie",
+     "ln": "Byrnak",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DK",
+     "ovr": 64
+    },
+    {
+     "fn": "Marion",
+     "ln": "Haelewyn",
+     "pos": "LD",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Luisa",
+     "ln": "Guttenberger",
+     "pos": "MC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Natalia",
+     "ln": "Wróbel",
+     "pos": "MC",
+     "age": 23,
+     "nat": "PL",
+     "ovr": 68
+    },
+    {
+     "fn": "Laurine",
+     "ln": "Hannequin",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Mégane",
+     "ln": "Hoeltzel",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Célia",
+     "ln": "Bensalem",
+     "pos": "MC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Amber",
+     "ln": "Barrett",
+     "pos": "DC",
+     "age": 31,
+     "nat": "IE",
+     "ovr": 72
+    },
+    {
+     "fn": "Ana-Maria",
+     "ln": "Crnogorčević",
+     "pos": "DC",
+     "age": 36,
+     "nat": "CH",
+     "ovr": 72
+    },
+    {
+     "fn": "Viktoria",
+     "ln": "Pinther",
+     "pos": "DC",
+     "age": 27,
+     "nat": "AT",
+     "ovr": 68
+    },
+    {
+     "fn": "Léa",
+     "ln": "Declercq",
+     "pos": "DC",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Manssita",
+     "ln": "Traoré",
+     "pos": "ED",
+     "age": 23,
+     "nat": "ML",
+     "ovr": 64
+    }
+   ]
+  },
+  {
+   "club": "Le Havre AC",
+   "teamOvr": 66,
+   "coach": "Maxime Di Liberto",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Taylor",
+     "ln": "Beitz",
+     "pos": "POR",
+     "age": 27,
+     "nat": "CA",
+     "ovr": 66
+    },
+    {
+     "fn": "Marie",
+     "ln": "Petiteau",
+     "pos": "POR",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Ángela",
+     "ln": "Barón",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "CO",
+     "ovr": 66
+    },
+    {
+     "fn": "Kedie",
+     "ln": "Johnson",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "TT",
+     "ovr": 64
+    },
+    {
+     "fn": "Shadia",
+     "ln": "Nankya",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "UG",
+     "ovr": 64
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Kassi",
+     "pos": "LD",
+     "age": 23,
+     "nat": "MA",
+     "ovr": 62
+    },
+    {
+     "fn": "Célestine",
+     "ln": "Boisard",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Eden",
+     "ln": "Le Guilly",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Maël",
+     "ln": "Doré",
+     "pos": "DFC",
+     "age": 18,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Solène",
+     "ln": "Champagnac",
+     "pos": "MC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Judith",
+     "ln": "Coquet",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Maïté",
+     "ln": "Boucly",
+     "pos": "MC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Mélinda",
+     "ln": "Mendy",
+     "pos": "MC",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Ikram",
+     "ln": "Adjabi",
+     "pos": "ED",
+     "age": 28,
+     "nat": "DZ",
+     "ovr": 68
+    },
+    {
+     "fn": "Zoé",
+     "ln": "Stievenart",
+     "pos": "DC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Esther",
+     "ln": "Mbakem Niaro",
+     "pos": "DC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Jade",
+     "ln": "Nassi",
+     "pos": "ED",
+     "age": 23,
+     "nat": "MA",
+     "ovr": 64
+    },
+    {
+     "fn": "Naolia",
+     "ln": "Traoré",
+     "pos": "DC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Thaïs",
+     "ln": "Gallais",
+     "pos": "DC",
+     "age": 18,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Luna",
+     "ln": "Laboucarié",
+     "pos": "DC",
+     "age": 18,
+     "nat": "FR",
+     "ovr": 56
+    }
+   ]
+  },
+  {
+   "club": "RC Lens",
+   "teamOvr": 66,
+   "coach": "Loïc Fiévet",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Élisa",
+     "ln": "Launay",
+     "pos": "POR",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Ambre",
+     "ln": "Bouchard",
+     "pos": "POR",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Lou",
+     "ln": "Marchal",
+     "pos": "POR",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 52
+    },
+    {
+     "fn": "Jennyfer",
+     "ln": "Limage",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "HT",
+     "ovr": 64
+    },
+    {
+     "fn": "Yakaré",
+     "ln": "Niakaté",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "ML",
+     "ovr": 64
+    },
+    {
+     "fn": "Emma",
+     "ln": "Smaali",
+     "pos": "LI",
+     "age": 26,
+     "nat": "DZ",
+     "ovr": 62
+    },
+    {
+     "fn": "Morgane",
+     "ln": "Duporge",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Léa",
+     "ln": "Notel",
+     "pos": "LD",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Noa",
+     "ln": "Lambrecht",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Laureen",
+     "ln": "Oillic",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Noémie",
+     "ln": "Gelders",
+     "pos": "MC",
+     "age": 29,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Carla",
+     "ln": "Polito",
+     "pos": "MC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Caroline",
+     "ln": "Devant",
+     "pos": "MC",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Clara",
+     "ln": "Bertrand",
+     "pos": "MC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Sasha",
+     "ln": "Pinot",
+     "pos": "MC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Landryna",
+     "ln": "Lushimba Bilombi",
+     "pos": "MC",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Roseline",
+     "ln": "Éloissaint",
+     "pos": "DC",
+     "age": 27,
+     "nat": "HT",
+     "ovr": 64
+    },
+    {
+     "fn": "Ananée",
+     "ln": "Yeboah",
+     "pos": "DC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Fanny",
+     "ln": "Rossi",
+     "pos": "ED",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Louann",
+     "ln": "Archier",
+     "pos": "ED",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Célia",
+     "ln": "Aggoune",
+     "pos": "ED",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Sofia",
+     "ln": "Djoubri",
+     "pos": "ED",
+     "age": 18,
+     "nat": "FR",
+     "ovr": 52
+    }
+   ]
+  },
+  {
+   "club": "Montpellier HSC",
+   "teamOvr": 66,
+   "coach": "Patrice Lair",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Justine",
+     "ln": "Lerond",
+     "pos": "POR",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Solène",
+     "ln": "Durand",
+     "pos": "POR",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Ceylin",
+     "ln": "Yilmaz",
+     "pos": "POR",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Marion",
+     "ln": "Torrent",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Ana",
+     "ln": "Jelenčić",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "HR",
+     "ovr": 66
+    },
+    {
+     "fn": "Ella",
+     "ln": "Palis",
+     "pos": "LI",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Anaëlle",
+     "ln": "Tchakounté",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Grace",
+     "ln": "Gillard",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "ENG",
+     "ovr": 64
+    },
+    {
+     "fn": "Manon",
+     "ln": "Revelli",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Suya",
+     "ln": "Haering",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "NZ",
+     "ovr": 62
+    },
+    {
+     "fn": "Chiara",
+     "ln": "Baylet",
+     "pos": "DFC",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Laura",
+     "ln": "Bourgouin",
+     "pos": "MC",
+     "age": 34,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Adja",
+     "ln": "Binate",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Rosalie",
+     "ln": "Chaine",
+     "pos": "MC",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Ashley",
+     "ln": "Clark",
+     "pos": "DC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Nina",
+     "ln": "Ngueleu",
+     "pos": "ED",
+     "age": 21,
+     "nat": "CM",
+     "ovr": 66
+    },
+    {
+     "fn": "Lola",
+     "ln": "Gstalter",
+     "pos": "ED",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Rose",
+     "ln": "Kadzere",
+     "pos": "ED",
+     "age": 20,
+     "nat": "MW",
+     "ovr": 64
+    },
+    {
+     "fn": "Natalia",
+     "ln": "Oleszkiewicz",
+     "pos": "DC",
+     "age": 24,
+     "nat": "PL",
+     "ovr": 64
+    },
+    {
+     "fn": "Aïrine",
+     "ln": "Fontaine",
+     "pos": "ED",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Élisa",
+     "ln": "Rambaud",
+     "pos": "ED",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Justine",
+     "ln": "Rouquet",
+     "pos": "DC",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Célia",
+     "ln": "Chabod",
+     "pos": "DC",
+     "age": 19,
+     "nat": "FR",
+     "ovr": 58
+    }
+   ]
+  },
+  {
+   "club": "Toulouse FC",
+   "teamOvr": 62,
+   "coach": "Antoine Gérard",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Göknur",
+     "ln": "Güleryüz",
+     "pos": "POR",
+     "age": 23,
+     "nat": "TR",
+     "ovr": 58
+    },
+    {
+     "fn": "Anaïs",
+     "ln": "Priaulet-Demissy",
+     "pos": "POR",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 54
+    },
+    {
+     "fn": "Alyssa",
+     "ln": "Fernandes",
+     "pos": "POR",
+     "age": 20,
+     "nat": "FR",
+     "ovr": 52
+    },
+    {
+     "fn": "Fiona",
+     "ln": "Bogi",
+     "pos": "LD",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Lou",
+     "ln": "Jumere Seignou",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Chloé",
+     "ln": "Tapia",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Julie",
+     "ln": "Machart-Rabanne",
+     "pos": "DFC",
+     "age": 37,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Pauline",
+     "ln": "Pardon",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 56
+    },
+    {
+     "fn": "Tatiana",
+     "ln": "Solanet",
+     "pos": "MCD",
+     "age": 34,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Alexandra",
+     "ln": "Atamaniuk",
+     "pos": "MC",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Christy",
+     "ln": "Gavory",
+     "pos": "MC",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Anna",
+     "ln": "Conesa",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Azzurra",
+     "ln": "Gallo",
+     "pos": "MC",
+     "age": 20,
+     "nat": "IT",
+     "ovr": 58
+    },
+    {
+     "fn": "Roma",
+     "ln": "Grinfan",
+     "pos": "MC",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Lina",
+     "ln": "Gay",
+     "pos": "MC",
+     "age": 18,
+     "nat": "FR",
+     "ovr": 54
+    },
+    {
+     "fn": "Selen",
+     "ln": "Altunkulak",
+     "pos": "DC",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 64
+    },
+    {
+     "fn": "Chloé",
+     "ln": "Marty",
+     "pos": "DC",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Annalise",
+     "ln": "Rasmussen",
+     "pos": "ED",
+     "age": 21,
+     "nat": "AU",
+     "ovr": 60
+    },
+    {
+     "fn": "Luisa",
+     "ln": "Oliveira Brás",
+     "pos": "ED",
+     "age": 20,
+     "nat": "PT",
+     "ovr": 56
+    }
+   ]
+  },
+  {
+   "club": "US Saint-Malo",
+   "teamOvr": 62,
+   "coach": "Roland Jamelot",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Inès",
+     "ln": "Arouaissa",
+     "pos": "POR",
+     "age": 25,
+     "nat": "MA",
+     "ovr": 62
+    },
+    {
+     "fn": "Louise",
+     "ln": "Thiery",
+     "pos": "POR",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Inès",
+     "ln": "Marques",
+     "pos": "POR",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Maureen",
+     "ln": "Umeugochukwu",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "NG",
+     "ovr": 62
+    },
+    {
+     "fn": "Éva",
+     "ln": "Kouache",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Morgane",
+     "ln": "Belkhiter",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "DZ",
+     "ovr": 60
+    },
+    {
+     "fn": "Megan",
+     "ln": "Rucker",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Pamela",
+     "ln": "Babinga",
+     "pos": "DFC",
+     "age": 36,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Marie-Anne",
+     "ln": "Fixot",
+     "pos": "LD",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Élodie",
+     "ln": "Dinglor",
+     "pos": "LI",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Élisa",
+     "ln": "Aubert",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Thelma",
+     "ln": "Eninger",
+     "pos": "MC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Florie",
+     "ln": "Saint-Cricq",
+     "pos": "MC",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 62
+    },
+    {
+     "fn": "Claire",
+     "ln": "Lelarge",
+     "pos": "MCD",
+     "age": 33,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Julie",
+     "ln": "Pian",
+     "pos": "MC",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Emeline",
+     "ln": "Minot",
+     "pos": "MC",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Jeanne",
+     "ln": "Dumets",
+     "pos": "MC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Mama",
+     "ln": "Diop",
+     "pos": "DC",
+     "age": 32,
+     "nat": "SN",
+     "ovr": 64
+    },
+    {
+     "fn": "Morgane",
+     "ln": "Ikene",
+     "pos": "ED",
+     "age": 27,
+     "nat": "DZ",
+     "ovr": 62
+    },
+    {
+     "fn": "Charlotte",
+     "ln": "Boisneau",
+     "pos": "DC",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Kelly",
+     "ln": "Koné",
+     "pos": "ED",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Romane",
+     "ln": "Leveau",
+     "pos": "ED",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 58
+    },
+    {
+     "fn": "Abigail",
+     "ln": "Charpentier",
+     "pos": "ED",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 54
+    }
+   ]
+  }
+ ]
+}

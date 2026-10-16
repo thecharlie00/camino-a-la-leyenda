@@ -1,0 +1,918 @@
+{
+ "Mal rato. Gracias por tanto cariño. Ahora a recuperarme y volver más fuerte 💪🩹": {
+  "ctx": "{by: \"self\", mood: -1, t: N_(\"Mal rato. Gracias por tanto cariño. Ahora a recuperarme y volver más fuerte 💪🩹\")}",
+  "where": "social-data.js:265"
+ },
+ "¡¡REMONTADA!! ¿Alguien ha visto eso? ¡¡NO ME LO CREO!! 🤯": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡REMONTADA!! ¿Alguien ha visto eso? ¡¡NO ME LO CREO!! 🤯\")},",
+  "where": "social-data.js:268"
+ },
+ "Perdíamos y ahora ganamos. Este equipo tiene un corazón que no cabe en el pecho ❤️🔥": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Perdíamos y ahora ganamos. Este equipo tiene un corazón que no cabe en el pecho ❤️🔥\")},",
+  "where": "social-data.js:269"
+ },
+ "Los que se fueron en el descanso, qué pena. Se perdieron la remontada del año.": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Los que se fueron en el descanso, qué pena. Se perdieron la remontada del año.\")},",
+  "where": "social-data.js:270"
+ },
+ "No hay dos sin tres: gol, gol y GOL. {name} y compañía no se rinden nunca 💪": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"No hay dos sin tres: gol, gol y GOL. {name} y compañía no se rinden nunca 💪\")},",
+  "where": "social-data.js:271"
+ },
+ "Hoy el estadio ha sido un volcán. ¡Remontadón ante el {opp}! 🌋": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hoy el estadio ha sido un volcán. ¡Remontadón ante el {opp}! 🌋\")},",
+  "where": "social-data.js:272"
+ },
+ "No se confíen: si se remonta, es porque el rival se relaja. No hay mérito.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"No se confíen: si se remonta, es porque el rival se relaja. No hay mérito.\")},",
+  "where": "social-data.js:273"
+ },
+ "REMONTADA | El {club} da la vuelta al partido ante el {opp} ({score}).": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"REMONTADA | El {club} da la vuelta al partido ante el {opp} ({score}).\")},",
+  "where": "social-data.js:274"
+ },
+ "Épica del {club}: de ir por debajo a ganar en un final de infarto.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"Épica del {club}: de ir por debajo a ganar en un final de infarto.\")},",
+  "where": "social-data.js:275"
+ },
+ "💥 ¡¡REMONTADA!! {club} {score} {opp}. ¡Nunca dejamos de creer! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"💥 ¡¡REMONTADA!! {club} {score} {opp}. ¡Nunca dejamos de creer! 💙\")},",
+  "where": "social-data.js:276"
+ },
+ "📊 El {club} ha conseguido su primera remontada de la temporada. Mérito enorme.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 El {club} ha conseguido su primera remontada de la temporada. Mérito enorme.\")},",
+  "where": "social-data.js:277"
+ },
+ "Yo en el minuto 80: 'Esto no se gana' / Yo en el 95: 'SIEMPRE LO DIJE' 🤡": {
+  "ctx": "{by: \"memefut\", t: N_(\"Yo en el minuto 80: 'Esto no se gana' / Yo en el 95: 'SIEMPRE LO DIJE' 🤡\")},",
+  "where": "social-data.js:278"
+ },
+ "Este equipo no se rinde. ¡Gracias, afición, por empujar hasta el final! 🫶": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"Este equipo no se rinde. ¡Gracias, afición, por empujar hasta el final! 🫶\")},",
+  "where": "social-data.js:279"
+ },
+ "Qué dolor… estaba ganado. Estas cosas nos pasan solo a nosotros 😩": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Qué dolor… estaba ganado. Estas cosas nos pasan solo a nosotros 😩\")},",
+  "where": "social-data.js:280"
+ },
+ "REMONTADA ÉPICA. Qué final, qué locura. Chicos, ¿quién necesita series con esto?": {
+  "ctx": "{by: \"ibai\", mood: 1, t: N_(\"REMONTADA ÉPICA. Qué final, qué locura. Chicos, ¿quién necesita series con esto?\")}",
+  "where": "social-data.js:281"
+ },
+ "🚨 {name} está en la agenda del {to}. Conversaciones preliminares abiertas. Nada decidido todavía. 🔜": {
+  "ctx": "{by: \"romano\", t: N_(\"🚨 {name} está en la agenda del {to}. Conversaciones preliminares abiertas. Nada decidido todavía. 🔜\")},",
+  "where": "social-data.js:284"
+ },
+ "🚨 Primeros contactos entre el {to} y el entorno de {name}. Se espera avance en los próximos días. #transferwindow": {
+  "ctx": "{by: \"romano\", t: N_(\"🚨 Primeros contactos entre el {to} y el entorno de {name}. Se espera avance en los próximos días. #transferwindow\")},",
+  "where": "social-data.js:285"
+ },
+ "EXCLUSIVE | El {to} sigue de cerca a {name} y podría presentar oferta en breve.": {
+  "ctx": "{by: \"ornstain\", t: N_(\"EXCLUSIVE | El {to} sigue de cerca a {name} y podría presentar oferta en breve.\")},",
+  "where": "social-data.js:286"
+ },
+ "NEWS | {name} se está planteando su futuro. El {to} está en pole position.": {
+  "ctx": "{by: \"ornstain\", t: N_(\"NEWS | {name} se está planteando su futuro. El {to} está en pole position.\")},",
+  "where": "social-data.js:287"
+ },
+ "{name} puede salir del {club} si llega una oferta cercana a {fee}. Escuchan propuestas. 👀": {
+  "ctx": "{by: \"romerro\", t: N_(\"{name} puede salir del {club} si llega una oferta cercana a {fee}. Escuchan propuestas. 👀\")},",
+  "where": "social-data.js:288"
+ },
+ "Información que me llega: el {to} va a por {name}. Aún no hay oferta formal. Pendiente de confirmar.": {
+  "ctx": "{by: \"pedreroll\", t: N_(\"Información que me llega: el {to} va a por {name}. Aún no hay oferta formal. Pendiente de confirmar.\")},",
+  "where": "social-data.js:289"
+ },
+ "Les cuento una cosa que no voy a decir en voz alta, pero {name} podría acabar en el {to}… si todo sale bien 🤫": {
+  "ctx": "{by: \"ronzero\", t: N_(\"Les cuento una cosa que no voy a decir en voz alta, pero {name} podría acabar en el {to}… si todo sale bien 🤫\")},",
+  "where": "social-data.js:290"
+ },
+ "EXCLUSIVA | El {to} quiere a {name}. El {club}, atento a la situación.": {
+  "ctx": "{by: \"marka\", t: N_(\"EXCLUSIVA | El {to} quiere a {name}. El {club}, atento a la situación.\")},",
+  "where": "social-data.js:291"
+ },
+ "{name}, en el radar del {to}. La operación podría moverse en las próximas semanas.": {
+  "ctx": "{by: \"deportibo\", t: N_(\"{name}, en el radar del {to}. La operación podría moverse en las próximas semanas.\")},",
+  "where": "social-data.js:292"
+ },
+ "Calciomercato: il {to} accelera per {name}. Possibile offerta da {fee}.": {
+  "ctx": "{by: \"gazzetta\", t: N_(\"Calciomercato: il {to} accelera per {name}. Possibile offerta da {fee}.\")},",
+  "where": "social-data.js:293"
+ },
+ "Sky Sportz understands {to} are preparing a bid for {name}. Talks expected this week.": {
+  "ctx": "{by: \"skysportz\", t: N_(\"Sky Sportz understands {to} are preparing a bid for {name}. Talks expected this week.\")},",
+  "where": "social-data.js:294"
+ },
+ "Que ni se les ocurra tocar a {name}. Si se va, me quito de socio 😤": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Que ni se les ocurra tocar a {name}. Si se va, me quito de socio 😤\")},",
+  "where": "social-data.js:295"
+ },
+ "Vente al {to}, {name}, que aquí te queremos 😂": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Vente al {to}, {name}, que aquí te queremos 😂\")},",
+  "where": "social-data.js:296"
+ },
+ "A ver si es verdad o es otro bulo de verano. Ya me han quemado otras veces.": {
+  "ctx": "{by: \"fan\", t: N_(\"A ver si es verdad o es otro bulo de verano. Ya me han quemado otras veces.\")},",
+  "where": "social-data.js:297"
+ },
+ "Otro rumor y a perder el tiempo. ¡Que se quede {name} y ya está! 🙏": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Otro rumor y a perder el tiempo. ¡Que se quede {name} y ya está! 🙏\")},",
+  "where": "social-data.js:298"
+ },
+ "Si {name} sale, que sea por mucho dinero. Y que nos traigan algo mejor.": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Si {name} sale, que sea por mucho dinero. Y que nos traigan algo mejor.\")},",
+  "where": "social-data.js:299"
+ },
+ "Rumores del {to}: 'Han visto a {name} jugar y piensan que es tan malo como creemos' 😂": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Rumores del {to}: 'Han visto a {name} jugar y piensan que es tan malo como creemos' 😂\")},",
+  "where": "social-data.js:300"
+ },
+ "Valor de mercado de {name} actualizado: {fee}. Interés confirmado de {to}.": {
+  "ctx": "{by: \"transfermarket\", t: N_(\"Valor de mercado de {name} actualizado: {fee}. Interés confirmado de {to}.\")},",
+  "where": "social-data.js:301"
+ },
+ "Mercado de fichajes: 'ningún rumor es cierto' / Al día siguiente: 'OFICIAL' 😂": {
+  "ctx": "{by: \"memefut\", t: N_(\"Mercado de fichajes: 'ningún rumor es cierto' / Al día siguiente: 'OFICIAL' 😂\")},",
+  "where": "social-data.js:302"
+ },
+ "Si {name} se va al {to}, aquí tenéis un nuevo hater. Por si acaso 😏": {
+  "ctx": "{by: \"rival\", t: N_(\"Si {name} se va al {to}, aquí tenéis un nuevo hater. Por si acaso 😏\")}",
+  "where": "social-data.js:303"
+ },
+ "🚨 {name} al {club}, HERE WE GO! ✅ Contrato hasta {year}. Todo cerrado.": {
+  "ctx": "{by: \"romano\", mood: 1, t: N_(\"🚨 {name} al {club}, HERE WE GO! ✅ Contrato hasta {year}. Todo cerrado.\")},",
+  "where": "social-data.js:306"
+ },
+ "🚨 OFICIAL: {name} firma por el {club} hasta {year}. Traspaso cerrado en {fee}. #HereWeGo ✅": {
+  "ctx": "{by: \"romano\", mood: 1, t: N_(\"🚨 OFICIAL: {name} firma por el {club} hasta {year}. Traspaso cerrado en {fee}. #HereWeGo ✅\")},",
+  "where": "social-data.js:307"
+ },
+ "BREAKING | {name} ya es nuevo jugador del {club}. Acuerdo cerrado desde {from}. 🔥": {
+  "ctx": "{by: \"ornstain\", mood: 1, t: N_(\"BREAKING | {name} ya es nuevo jugador del {club}. Acuerdo cerrado desde {from}. 🔥\")},",
+  "where": "social-data.js:308"
+ },
+ "Operación completada: {name} llega al {club} procedente de {from}. Firma hasta {year}.": {
+  "ctx": "{by: \"romerro\", mood: 1, t: N_(\"Operación completada: {name} llega al {club} procedente de {from}. Firma hasta {year}.\")},",
+  "where": "social-data.js:309"
+ },
+ "Confirmado lo que les venía contando: {name} es del {club}. Contrato hasta {year}. 🔥": {
+  "ctx": "{by: \"pedreroll\", mood: 1, t: N_(\"Confirmado lo que les venía contando: {name} es del {club}. Contrato hasta {year}. 🔥\")},",
+  "where": "social-data.js:310"
+ },
+ "OFICIAL | {name} ya es jugador del {club}. La operación asciende a {fee}.": {
+  "ctx": "{by: \"marka\", mood: 1, t: N_(\"OFICIAL | {name} ya es jugador del {club}. La operación asciende a {fee}.\")},",
+  "where": "social-data.js:311"
+ },
+ "FICHAJE | El {club} cierra a {name} desde {from}. Vinculación hasta {year}.": {
+  "ctx": "{by: \"az\", mood: 1, t: N_(\"FICHAJE | El {club} cierra a {name} desde {from}. Vinculación hasta {year}.\")},",
+  "where": "social-data.js:312"
+ },
+ "El {club} oficializa a {name}. Un fichaje que levanta la ilusión del entorno.": {
+  "ctx": "{by: \"deportibo\", mood: 1, t: N_(\"El {club} oficializa a {name}. Un fichaje que levanta la ilusión del entorno.\")},",
+  "where": "social-data.js:313"
+ },
+ "✅ Fichaje confirmado: {name} ({from} → {club}) por {fee}. Contrato hasta {year}.": {
+  "ctx": "{by: \"transfermarket\", t: N_(\"✅ Fichaje confirmado: {name} ({from} → {club}) por {fee}. Contrato hasta {year}.\")},",
+  "where": "social-data.js:314"
+ },
+ "DONE DEAL: {name} joins {club} from {from}. Contract until {year}.": {
+  "ctx": "{by: \"skysportz\", mood: 1, t: N_(\"DONE DEAL: {name} joins {club} from {from}. Contract until {year}.\")},",
+  "where": "social-data.js:315"
+ },
+ "✍️ ¡Bienvenido, {name}! Ya es oficial: nueva etapa en {club}. ¡A por todas! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"✍️ ¡Bienvenido, {name}! Ya es oficial: nueva etapa en {club}. ¡A por todas! 💙\")},",
+  "where": "social-data.js:316"
+ },
+ "¡¡FICHAJE!! {name} al {club}. Ya me veo con la camiseta puesta 😍": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡FICHAJE!! {name} al {club}. Ya me veo con la camiseta puesta 😍\")},",
+  "where": "social-data.js:317"
+ },
+ "Ojo al dato: {name}, de {from} a nuestro {club}. Esto es ambición 🚀": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Ojo al dato: {name}, de {from} a nuestro {club}. Esto es ambición 🚀\")},",
+  "where": "social-data.js:318"
+ },
+ "¿Hemos pagado {fee} por {name}? Dios mío, dime que es broma… 😅": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"¿Hemos pagado {fee} por {name}? Dios mío, dime que es broma… 😅\")},",
+  "where": "social-data.js:319"
+ },
+ "Ficha {name}, se acabó el drama. A por el título y a disfrutar 🔥": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Ficha {name}, se acabó el drama. A por el título y a disfrutar 🔥\")},",
+  "where": "social-data.js:320"
+ },
+ "Llega {name} al {club}. Veamos qué da. Que nos quede bien claro que no es un fichaje estrella.": {
+  "ctx": "{by: \"fan\", t: N_(\"Llega {name} al {club}. Veamos qué da. Que nos quede bien claro que no es un fichaje estrella.\")},",
+  "where": "social-data.js:321"
+ },
+ "{fee} por {name}. La directiva nos toma el pelo. Cada mercado igual.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"{fee} por {name}. La directiva nos toma el pelo. Cada mercado igual.\")},",
+  "where": "social-data.js:322"
+ },
+ "Presentación de {name} en el {club}: 'Estoy muy ilusionado con este reto' (en todos los clubes) 🎤": {
+  "ctx": "{by: \"memefut\", t: N_(\"Presentación de {name} en el {club}: 'Estoy muy ilusionado con este reto' (en todos los clubes) 🎤\")},",
+  "where": "social-data.js:323"
+ },
+ "Buen fichaje del {club}. Vamos a ver cómo les sale la jugada, eh 😬": {
+  "ctx": "{by: \"rival\", t: N_(\"Buen fichaje del {club}. Vamos a ver cómo les sale la jugada, eh 😬\")},",
+  "where": "social-data.js:324"
+ },
+ "Ilusionado de empezar esta etapa en el {club}. ¡Gracias por la confianza! ✍️💪": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"Ilusionado de empezar esta etapa en el {club}. ¡Gracias por la confianza! ✍️💪\")}",
+  "where": "social-data.js:325"
+ },
+ "🚨 {name} renueva con el {club}: contrato hasta {year}. ¡Acuerdo cerrado! ✅": {
+  "ctx": "{by: \"romano\", mood: 1, t: N_(\"🚨 {name} renueva con el {club}: contrato hasta {year}. ¡Acuerdo cerrado! ✅\")},",
+  "where": "social-data.js:328"
+ },
+ "NEWS | {name} firma su ampliación con el {club}. Vinculación hasta {year}.": {
+  "ctx": "{by: \"ornstain\", mood: 1, t: N_(\"NEWS | {name} firma su ampliación con el {club}. Vinculación hasta {year}.\")},",
+  "where": "social-data.js:329"
+ },
+ "OFICIAL | {name} amplía su contrato con el {club} hasta {year}.": {
+  "ctx": "{by: \"marka\", mood: 1, t: N_(\"OFICIAL | {name} amplía su contrato con el {club} hasta {year}.\")},",
+  "where": "social-data.js:330"
+ },
+ "✍️ ¡{name} seguirá con nosotros hasta {year}! 💙 #LoQueSeNecesita": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"✍️ ¡{name} seguirá con nosotros hasta {year}! 💙 #LoQueSeNecesita\")},",
+  "where": "social-data.js:331"
+ },
+ "¡¡RENUEVA {name}!! Por fin una buena noticia. ¡Gracias, gracias, gracias! 🙌": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡RENUEVA {name}!! Por fin una buena noticia. ¡Gracias, gracias, gracias! 🙌\")},",
+  "where": "social-data.js:332"
+ },
+ "Si esto no es compromiso, que baje Dios y lo vea. {name}, ¡eres de los nuestros! ❤️": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Si esto no es compromiso, que baje Dios y lo vea. {name}, ¡eres de los nuestros! ❤️\")},",
+  "where": "social-data.js:333"
+ },
+ "Renueva {name}. Bien. Ahora veamos si el club sabe rodearlo de un buen equipo.": {
+  "ctx": "{by: \"fan\", t: N_(\"Renueva {name}. Bien. Ahora veamos si el club sabe rodearlo de un buen equipo.\")},",
+  "where": "social-data.js:334"
+ },
+ "Renovar a {name}… ¿en serio? Hay otras prioridades, pero bueno.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Renovar a {name}… ¿en serio? Hay otras prioridades, pero bueno.\")},",
+  "where": "social-data.js:335"
+ },
+ "Renovaciones para seguir cobrando sin dar nada. Bonito negocio 😒": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Renovaciones para seguir cobrando sin dar nada. Bonito negocio 😒\")},",
+  "where": "social-data.js:336"
+ },
+ "{name} renueva con el {club} hasta {year}: seguridad y proyecto a largo plazo.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"{name} renueva con el {club} hasta {year}: seguridad y proyecto a largo plazo.\")},",
+  "where": "social-data.js:337"
+ },
+ "¡Qué alegría que sigas, {name}! Esto es una familia 🫶": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"¡Qué alegría que sigas, {name}! Esto es una familia 🫶\")},",
+  "where": "social-data.js:338"
+ },
+ "📊 {name} suma {n} partidos con el {club}. Su renovación hasta {year} asegura la continuidad.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} suma {n} partidos con el {club}. Su renovación hasta {year} asegura la continuidad.\")},",
+  "where": "social-data.js:339"
+ },
+ "Cuando el club te renueva y tu agente ya está pidiendo más dinero 🤑": {
+  "ctx": "{by: \"memefut\", t: N_(\"Cuando el club te renueva y tu agente ya está pidiendo más dinero 🤑\")},",
+  "where": "social-data.js:340"
+ },
+ "Pensábamos que se iba… qué pena, nos quedamos sin el favorito de los aficionados rivales 😂": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Pensábamos que se iba… qué pena, nos quedamos sin el favorito de los aficionados rivales 😂\")},",
+  "where": "social-data.js:341"
+ },
+ "Orgulloso de seguir vistiendo esta camiseta hasta {year}. ¡Gracias por la confianza! 💙": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"Orgulloso de seguir vistiendo esta camiseta hasta {year}. ¡Gracias por la confianza! 💙\")}",
+  "where": "social-data.js:342"
+ },
+ "🚨 {name} sale cedido al {to} hasta final de temporada. Acuerdo cerrado. ✅": {
+  "ctx": "{by: \"romano\", t: N_(\"🚨 {name} sale cedido al {to} hasta final de temporada. Acuerdo cerrado. ✅\")},",
+  "where": "social-data.js:345"
+ },
+ "NEWS | {name} se marcha a préstamo al {to}. El {club} busca que gane minutos.": {
+  "ctx": "{by: \"ornstain\", t: N_(\"NEWS | {name} se marcha a préstamo al {to}. El {club} busca que gane minutos.\")},",
+  "where": "social-data.js:346"
+ },
+ "OFICIAL | {name} es cedido al {to}. Una oportunidad para jugar más.": {
+  "ctx": "{by: \"marka\", t: N_(\"OFICIAL | {name} es cedido al {to}. Una oportunidad para jugar más.\")},",
+  "where": "social-data.js:347"
+ },
+ "🔄 {name} jugará cedido en el {to} esta temporada. ¡Mucho éxito! 💙": {
+  "ctx": "{by: \"club\", t: N_(\"🔄 {name} jugará cedido en el {to} esta temporada. ¡Mucho éxito! 💙\")},",
+  "where": "social-data.js:348"
+ },
+ "Cesión de {name}. Necesita minutos y esta es una buena opción. ¡Suerte!": {
+  "ctx": "{by: \"fan\", t: N_(\"Cesión de {name}. Necesita minutos y esta es una buena opción. ¡Suerte!\")},",
+  "where": "social-data.js:349"
+ },
+ "¿Otra cesión? Yo creo que {name} merecía una oportunidad aquí.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"¿Otra cesión? Yo creo que {name} merecía una oportunidad aquí.\")},",
+  "where": "social-data.js:350"
+ },
+ "Vuelve más fuerte, {name}. Te estaremos esperando 🫶": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Vuelve más fuerte, {name}. Te estaremos esperando 🫶\")},",
+  "where": "social-data.js:351"
+ },
+ "Cederlo a {to}… ¿y para qué lo tenemos entonces? 😒": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Cederlo a {to}… ¿y para qué lo tenemos entonces? 😒\")},",
+  "where": "social-data.js:352"
+ },
+ "Cedido. Eufemismo de 'no sirve, que lo jueguen otros'. ¡Qué sorpresa!": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Cedido. Eufemismo de 'no sirve, que lo jueguen otros'. ¡Qué sorpresa!\")},",
+  "where": "social-data.js:353"
+ },
+ "{name} abandona el {club} en calidad de cedido y busca protagonismo en el {to}.": {
+  "ctx": "{by: \"press\", t: N_(\"{name} abandona el {club} en calidad de cedido y busca protagonismo en el {to}.\")},",
+  "where": "social-data.js:354"
+ },
+ "Cesión: {name} ({club} → {to}). Fin de contrato en {year}.": {
+  "ctx": "{by: \"transfermarket\", t: N_(\"Cesión: {name} ({club} → {to}). Fin de contrato en {year}.\")},",
+  "where": "social-data.js:355"
+ },
+ "Mucha suerte, {name}. Allí vas a brillar seguro 💪": {
+  "ctx": "{by: \"teammate\", t: N_(\"Mucha suerte, {name}. Allí vas a brillar seguro 💪\")},",
+  "where": "social-data.js:356"
+ },
+ "Cedido, que es como decir 've y busca un sitio mejor' pero con buena educación 😂": {
+  "ctx": "{by: \"memefut\", t: N_(\"Cedido, que es como decir 've y busca un sitio mejor' pero con buena educación 😂\")},",
+  "where": "social-data.js:357"
+ },
+ "Nueva etapa, nuevas oportunidades. Gracias al {club} por todo. Voy a darlo todo 💪": {
+  "ctx": "{by: \"self\", t: N_(\"Nueva etapa, nuevas oportunidades. Gracias al {club} por todo. Voy a darlo todo 💪\")}",
+  "where": "social-data.js:358"
+ },
+ "🚨 {name} deja el {club} rumbo al {to}. Traspaso de {fee}. HERE WE GO ✅": {
+  "ctx": "{by: \"romano\", t: N_(\"🚨 {name} deja el {club} rumbo al {to}. Traspaso de {fee}. HERE WE GO ✅\")},",
+  "where": "social-data.js:361"
+ },
+ "BREAKING | {name} traspasado al {to} por {fee}. Acuerdo cerrado.": {
+  "ctx": "{by: \"ornstain\", t: N_(\"BREAKING | {name} traspasado al {to} por {fee}. Acuerdo cerrado.\")},",
+  "where": "social-data.js:362"
+ },
+ "{name} se va del {club} al {to}. Operación cerrada tras largas negociaciones.": {
+  "ctx": "{by: \"romerro\", t: N_(\"{name} se va del {club} al {to}. Operación cerrada tras largas negociaciones.\")},",
+  "where": "social-data.js:363"
+ },
+ "OFICIAL | {name} deja el {club}. Pone rumbo al {to} por {fee}.": {
+  "ctx": "{by: \"marka\", t: N_(\"OFICIAL | {name} deja el {club}. Pone rumbo al {to} por {fee}.\")},",
+  "where": "social-data.js:364"
+ },
+ "👋 Gracias por todo, {name}. Te deseamos lo mejor en el {to}. Siempre serás de los nuestros. 💙": {
+  "ctx": "{by: \"club\", t: N_(\"👋 Gracias por todo, {name}. Te deseamos lo mejor en el {to}. Siempre serás de los nuestros. 💙\")},",
+  "where": "social-data.js:365"
+ },
+ "Se va {name}. Se nos va un trozo del corazón 💔 Gracias por todo.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Se va {name}. Se nos va un trozo del corazón 💔 Gracias por todo.\")},",
+  "where": "social-data.js:366"
+ },
+ "¿Vender a {name}? ¿¿¿Están locos??? La directiva no tiene perdón.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"¿Vender a {name}? ¿¿¿Están locos??? La directiva no tiene perdón.\")},",
+  "where": "social-data.js:367"
+ },
+ "Lo bueno es que entra dinero. Ahora a ver si lo invierten bien. Gracias, {name}.": {
+  "ctx": "{by: \"fan\", t: N_(\"Lo bueno es que entra dinero. Ahora a ver si lo invierten bien. Gracias, {name}.\")},",
+  "where": "social-data.js:368"
+ },
+ "Buen negocio, {fee} es mucho. Gracias, {name}, y suerte en el {to}.": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Buen negocio, {fee} es mucho. Gracias, {name}, y suerte en el {to}.\")},",
+  "where": "social-data.js:369"
+ },
+ "Vendieron al mejor y se quedaron con los mediocres. Sí, esta directiva es una joya.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Vendieron al mejor y se quedaron con los mediocres. Sí, esta directiva es una joya.\")},",
+  "where": "social-data.js:370"
+ },
+ "{name} abandona el {club} y se marcha al {to} por {fee}. El club cierra una venta importante.": {
+  "ctx": "{by: \"press\", t: N_(\"{name} abandona el {club} y se marcha al {to} por {fee}. El club cierra una venta importante.\")},",
+  "where": "social-data.js:371"
+ },
+ "Traspaso: {name} ({club} → {to}) por {fee}.": {
+  "ctx": "{by: \"transfermarket\", t: N_(\"Traspaso: {name} ({club} → {to}) por {fee}.\")},",
+  "where": "social-data.js:372"
+ },
+ "Se va un grande, {name}. Un abrazo fuerte, hermano. Nos vemos 🫂": {
+  "ctx": "{by: \"teammate\", t: N_(\"Se va un grande, {name}. Un abrazo fuerte, hermano. Nos vemos 🫂\")},",
+  "where": "social-data.js:373"
+ },
+ "El club vendiendo al mejor jugador: 'Es para reforzar el proyecto' 💸": {
+  "ctx": "{by: \"memefut\", t: N_(\"El club vendiendo al mejor jugador: 'Es para reforzar el proyecto' 💸\")},",
+  "where": "social-data.js:374"
+ },
+ "Nos alegramos mucho: {name} se va y respiramos tranquilos 😅": {
+  "ctx": "{by: \"rival\", t: N_(\"Nos alegramos mucho: {name} se va y respiramos tranquilos 😅\")},",
+  "where": "social-data.js:375"
+ },
+ "Gracias, {club}, por todo lo vivido. Me llevo amigos y recuerdos para siempre. 💙": {
+  "ctx": "{by: \"self\", t: N_(\"Gracias, {club}, por todo lo vivido. Me llevo amigos y recuerdos para siempre. 💙\")}",
+  "where": "social-data.js:376"
+ },
+ "¡¡CAMPEONES!! ¡¡{trophy}!! No me lo creo, estoy llorando 😭🏆": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡CAMPEONES!! ¡¡{trophy}!! No me lo creo, estoy llorando 😭🏆\")},",
+  "where": "social-data.js:379"
+ },
+ "Hoy no se trabaja. Hoy se celebra. ¡{trophy} para el {club}! 🎊": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hoy no se trabaja. Hoy se celebra. ¡{trophy} para el {club}! 🎊\")},",
+  "where": "social-data.js:380"
+ },
+ "Gracias, {name}, por esto. Por todo. Eres historia de este club 🥇": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Gracias, {name}, por esto. Por todo. Eres historia de este club 🥇\")},",
+  "where": "social-data.js:381"
+ },
+ "LA COPA ES NUESTRA. Que alguien me pellizque, por favor 🏆": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"LA COPA ES NUESTRA. Que alguien me pellizque, por favor 🏆\")},",
+  "where": "social-data.js:382"
+ },
+ "¿Alguien tiene resaca? Yo sí. ¡Y qué bien sienta! 🍻🏆": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¿Alguien tiene resaca? Yo sí. ¡Y qué bien sienta! 🍻🏆\")},",
+  "where": "social-data.js:383"
+ },
+ "Un título no hace un gran equipo. Que no se confíen.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Un título no hace un gran equipo. Que no se confíen.\")},",
+  "where": "social-data.js:384"
+ },
+ "CAMPEÓN | El {club} se proclama campeón de {trophy} tras una temporada para el recuerdo.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"CAMPEÓN | El {club} se proclama campeón de {trophy} tras una temporada para el recuerdo.\")},",
+  "where": "social-data.js:385"
+ },
+ "El {club} levanta {trophy}: celebración histórica con {name} como figura.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"El {club} levanta {trophy}: celebración histórica con {name} como figura.\")},",
+  "where": "social-data.js:386"
+ },
+ "🏆 ¡¡CAMPEONES!! ¡{club} gana {trophy}! ¡GRACIAS a todos los que lo han hecho posible! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🏆 ¡¡CAMPEONES!! ¡{club} gana {trophy}! ¡GRACIAS a todos los que lo han hecho posible! 💙\")},",
+  "where": "social-data.js:387"
+ },
+ "📊 {trophy} ya luce en la vitrina del {club}. Es el título número {n} de su historia.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {trophy} ya luce en la vitrina del {club}. Es el título número {n} de su historia.\")},",
+  "where": "social-data.js:388"
+ },
+ "¡LO HEMOS LOGRADO! ¡CAMPEONES! Esto es para nuestra gente 🏆🫶": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"¡LO HEMOS LOGRADO! ¡CAMPEONES! Esto es para nuestra gente 🏆🫶\")},",
+  "where": "social-data.js:389"
+ },
+ "Aficionado del {club}, resaca épica y camiseta empapada de champán: 🥂🍾": {
+  "ctx": "{by: \"memefut\", t: N_(\"Aficionado del {club}, resaca épica y camiseta empapada de champán: 🥂🍾\")},",
+  "where": "social-data.js:390"
+ },
+ "Enhorabuena al {club}. Qué envidia, qué rabia, qué ganas de ganar el siguiente 😤👏": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Enhorabuena al {club}. Qué envidia, qué rabia, qué ganas de ganar el siguiente 😤👏\")},",
+  "where": "social-data.js:391"
+ },
+ "CAMPEONES. {trophy}. ¡Qué locura, qué alegría! Gracias, {club}, por darnos esto.": {
+  "ctx": "{by: \"ibai\", mood: 1, t: N_(\"CAMPEONES. {trophy}. ¡Qué locura, qué alegría! Gracias, {club}, por darnos esto.\")},",
+  "where": "social-data.js:392"
+ },
+ "Congratulations, {club}! A deserved {trophy}.": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Congratulations, {club}! A deserved {trophy}.\")},",
+  "where": "social-data.js:393"
+ },
+ "🏆 El {club} es campeón de {trophy}. ¡Enhorabuena a toda su afición!": {
+  "ctx": "{by: \"laligue\", mood: 1, t: N_(\"🏆 El {club} es campeón de {trophy}. ¡Enhorabuena a toda su afición!\")}",
+  "where": "social-data.js:394"
+ },
+ "Se nos escapó. Lo teníamos y se nos escapó. Qué dolor 😭": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Se nos escapó. Lo teníamos y se nos escapó. Qué dolor 😭\")},",
+  "where": "social-data.js:397"
+ },
+ "El {trophy} se va para otro lado. Gracias por nada, directiva.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"El {trophy} se va para otro lado. Gracias por nada, directiva.\")},",
+  "where": "social-data.js:398"
+ },
+ "No ha podido ser. Pero este equipo ha dado todo. Orgullo de camiseta 💙": {
+  "ctx": "{by: \"fan\", t: N_(\"No ha podido ser. Pero este equipo ha dado todo. Orgullo de camiseta 💙\")},",
+  "where": "social-data.js:399"
+ },
+ "Otro año más mirando cómo celebran otros. Ya cansa de verdad.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Otro año más mirando cómo celebran otros. Ya cansa de verdad.\")},",
+  "where": "social-data.js:400"
+ },
+ "Hemos peleado hasta el último segundo. Ánimo, el año que viene va a ser el nuestro.": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hemos peleado hasta el último segundo. Ánimo, el año que viene va a ser el nuestro.\")},",
+  "where": "social-data.js:401"
+ },
+ "Y yo que pensaba que esta vez sí. Pues no. Vuelta a la misma historia de siempre.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Y yo que pensaba que esta vez sí. Pues no. Vuelta a la misma historia de siempre.\")},",
+  "where": "social-data.js:402"
+ },
+ "El {club} se queda sin {trophy}: final amargo para un proyecto con mucha ambición.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"El {club} se queda sin {trophy}: final amargo para un proyecto con mucha ambición.\")},",
+  "where": "social-data.js:403"
+ },
+ "Se escapa el título para el {club}. Toca replantear, reconstruir y volver a intentarlo.": {
+  "ctx": "{by: \"press\", t: N_(\"Se escapa el título para el {club}. Toca replantear, reconstruir y volver a intentarlo.\")},",
+  "where": "social-data.js:404"
+ },
+ "No ha podido ser. Gracias por creer hasta el final. Volveremos más fuertes. 💙": {
+  "ctx": "{by: \"club\", t: N_(\"No ha podido ser. Gracias por creer hasta el final. Volveremos más fuertes. 💙\")},",
+  "where": "social-data.js:405"
+ },
+ "📊 El {club} termina sin {trophy} tras quedarse a un paso. Los números lo reflejan: pierde terreno en el tramo final.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 El {club} termina sin {trophy} tras quedarse a un paso. Los números lo reflejan: pierde terreno en el tramo final.\")},",
+  "where": "social-data.js:406"
+ },
+ "El {club} en la última jornada: 'este año sí' / el {club} al final: 'bueno, el año que viene' 😅": {
+  "ctx": "{by: \"memefut\", t: N_(\"El {club} en la última jornada: 'este año sí' / el {club} al final: 'bueno, el año que viene' 😅\")},",
+  "where": "social-data.js:407"
+ },
+ "¡Lo siento por vosotros! (Mentira, no lo siento nada) 😂🏆": {
+  "ctx": "{by: \"rival\", mood: 1, t: N_(\"¡Lo siento por vosotros! (Mentira, no lo siento nada) 😂🏆\")},",
+  "where": "social-data.js:408"
+ },
+ "Duele muchísimo. Lo dimos todo, pero no fue suficiente. Gracias por el apoyo.": {
+  "ctx": "{by: \"teammate\", mood: -1, t: N_(\"Duele muchísimo. Lo dimos todo, pero no fue suficiente. Gracias por el apoyo.\")},",
+  "where": "social-data.js:409"
+ },
+ "Se nos escapó {trophy}. Pido perdón a la afición. Volveremos más fuertes.": {
+  "ctx": "{by: \"self\", mood: -1, t: N_(\"Se nos escapó {trophy}. Pido perdón a la afición. Volveremos más fuertes.\")}",
+  "where": "social-data.js:410"
+ },
+ "¡¡PREMIO PARA {name}!! Más que merecido. ¡Orgullo de jugador y de persona! 🏅": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡PREMIO PARA {name}!! Más que merecido. ¡Orgullo de jugador y de persona! 🏅\")},",
+  "where": "social-data.js:413"
+ },
+ "{name} reconocido. Esto es justicia, no puede haber nadie mejor 👏": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{name} reconocido. Esto es justicia, no puede haber nadie mejor 👏\")},",
+  "where": "social-data.js:414"
+ },
+ "Un premio más a la vitrina de {name}. Que no pare nunca 🌟": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Un premio más a la vitrina de {name}. Que no pare nunca 🌟\")},",
+  "where": "social-data.js:415"
+ },
+ "Premio para {name}. Bien. Ahora, a pensar en lo siguiente.": {
+  "ctx": "{by: \"fan\", t: N_(\"Premio para {name}. Bien. Ahora, a pensar en lo siguiente.\")},",
+  "where": "social-data.js:416"
+ },
+ "Premio por el voto de la prensa, no por el campo. Siempre igual.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Premio por el voto de la prensa, no por el campo. Siempre igual.\")},",
+  "where": "social-data.js:417"
+ },
+ "{name} recibe el premio y corona una temporada de ensueño.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"{name} recibe el premio y corona una temporada de ensueño.\")},",
+  "where": "social-data.js:418"
+ },
+ "Reconocimiento para {name}: elegido mejor de la temporada.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"Reconocimiento para {name}: elegido mejor de la temporada.\")},",
+  "where": "social-data.js:419"
+ },
+ "🏅 ¡{name} gana el premio! Orgullo del {club}. ¡Enhorabuena, crack! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🏅 ¡{name} gana el premio! Orgullo del {club}. ¡Enhorabuena, crack! 💙\")},",
+  "where": "social-data.js:420"
+ },
+ "Premio más que merecido, {name}. Lo has ganado con trabajo. ¡Enhorabuena! 🥇": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"Premio más que merecido, {name}. Lo has ganado con trabajo. ¡Enhorabuena! 🥇\")},",
+  "where": "social-data.js:421"
+ },
+ "📊 {name} suma {goals} goles y {n} asistencias esta temporada. Premio avalado por los números.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} suma {goals} goles y {n} asistencias esta temporada. Premio avalado por los números.\")},",
+  "where": "social-data.js:422"
+ },
+ "{name} recogiendo el premio: 'quiero agradecer a mi madre, mi agente y a todos los que dudaron' 🎤😂": {
+  "ctx": "{by: \"memefut\", t: N_(\"{name} recogiendo el premio: 'quiero agradecer a mi madre, mi agente y a todos los que dudaron' 🎤😂\")},",
+  "where": "social-data.js:423"
+ },
+ "Well done, {name}. A deserved award, no doubt.": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Well done, {name}. A deserved award, no doubt.\")},",
+  "where": "social-data.js:424"
+ },
+ "🏆 {name}, premiado. ¡Enhorabuena a un talento del {club}!": {
+  "ctx": "{by: \"laligue\", mood: 1, t: N_(\"🏆 {name}, premiado. ¡Enhorabuena a un talento del {club}!\")},",
+  "where": "social-data.js:425"
+ },
+ "Gracias por este premio. Es de todo el equipo y de la afición 💙🏅": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"Gracias por este premio. Es de todo el equipo y de la afición 💙🏅\")}",
+  "where": "social-data.js:426"
+ },
+ "{name} CANDIDATo AL BALÓN DE ORO. Lo digo desde hace meses. ¡POR FIN! 🏆": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{name} CANDIDATo AL BALÓN DE ORO. Lo digo desde hace meses. ¡POR FIN! 🏆\")},",
+  "where": "social-data.js:429"
+ },
+ "Que hablen los que quieran, pero {name} es el mejor del mundo. Punto.": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Que hablen los que quieran, pero {name} es el mejor del mundo. Punto.\")},",
+  "where": "social-data.js:430"
+ },
+ "Nominación y a por todas. {name}, hoy toda la afición está contigo 🙏✨": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Nominación y a por todas. {name}, hoy toda la afición está contigo 🙏✨\")},",
+  "where": "social-data.js:431"
+ },
+ "Que le den ya el Balón de Oro a quien lo merezca y no a quien más camisetas vende.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Que le den ya el Balón de Oro a quien lo merezca y no a quien más camisetas vende.\")},",
+  "where": "social-data.js:432"
+ },
+ "Estar entre los nominados ya es histórico. Disfrutemos del momento.": {
+  "ctx": "{by: \"fan\", t: N_(\"Estar entre los nominados ya es histórico. Disfrutemos del momento.\")},",
+  "where": "social-data.js:433"
+ },
+ "{name} en la lista del Balón de Oro. Estamos llegando a niveles de broma.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"{name} en la lista del Balón de Oro. Estamos llegando a niveles de broma.\")},",
+  "where": "social-data.js:434"
+ },
+ "{name} entra en la lista de candidatos/as al Balón de Oro tras una temporada brillante.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"{name} entra en la lista de candidatos/as al Balón de Oro tras una temporada brillante.\")},",
+  "where": "social-data.js:435"
+ },
+ "Balón de Oro: {name} aparece entre los favoritos/as de la crítica.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"Balón de Oro: {name} aparece entre los favoritos/as de la crítica.\")},",
+  "where": "social-data.js:436"
+ },
+ "🌟 ¡{name} nominado al Balón de Oro! Orgullo del {club}. ¡Vamos! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🌟 ¡{name} nominado al Balón de Oro! Orgullo del {club}. ¡Vamos! 💙\")},",
+  "where": "social-data.js:437"
+ },
+ "📊 {name}, con {goals} goles y {n} asistencias, tiene opciones reales de llevarse el Balón de Oro.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name}, con {goals} goles y {n} asistencias, tiene opciones reales de llevarse el Balón de Oro.\")},",
+  "where": "social-data.js:438"
+ },
+ "{name} mirando a todos los que dudaron: 'Aquí estoy' 🏆😎": {
+  "ctx": "{by: \"memefut\", t: N_(\"{name} mirando a todos los que dudaron: 'Aquí estoy' 🏆😎\")},",
+  "where": "social-data.js:439"
+ },
+ "{name} para el Balón de Oro. Ya lo he dicho. Quien no lo vea, que se revise la vista 👀": {
+  "ctx": "{by: \"pikee\", t: N_(\"{name} para el Balón de Oro. Ya lo he dicho. Quien no lo vea, que se revise la vista 👀\")},",
+  "where": "social-data.js:440"
+ },
+ "{name} entre los candidatos/as al Balón de Oro. Qué locura. Qué orgullo.": {
+  "ctx": "{by: \"ibai\", mood: 1, t: N_(\"{name} entre los candidatos/as al Balón de Oro. Qué locura. Qué orgullo.\")},",
+  "where": "social-data.js:441"
+ },
+ "{name} on the Ballon d'Or list. About time, to be honest.": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"{name} on the Ballon d'Or list. About time, to be honest.\")}",
+  "where": "social-data.js:442"
+ },
+ "Hasta aquí hemos llegado. Si no cambian cosas ya, me llevo mi abono a otro lado 😤": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Hasta aquí hemos llegado. Si no cambian cosas ya, me llevo mi abono a otro lado 😤\")},",
+  "where": "social-data.js:445"
+ },
+ "Ya no os voy a defender más, {name}. Esto es insostenible.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Ya no os voy a defender más, {name}. Esto es insostenible.\")},",
+  "where": "social-data.js:446"
+ },
+ "¡Menudo desastre! ¿Quién ha permitido esta situación? Directiva fuera 🗣️": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"¡Menudo desastre! ¿Quién ha permitido esta situación? Directiva fuera 🗣️\")},",
+  "where": "social-data.js:447"
+ },
+ "Cada partido peor que el anterior. ¿Qué estamos haciendo?": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Cada partido peor que el anterior. ¿Qué estamos haciendo?\")},",
+  "where": "social-data.js:448"
+ },
+ "{name}, lo digo con cariño: así no. Que alguien haga algo ya 🙏": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"{name}, lo digo con cariño: así no. Que alguien haga algo ya 🙏\")},",
+  "where": "social-data.js:449"
+ },
+ "Me aburro viendo esto. Prefiero ver un documental de caracoles 🐌": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Me aburro viendo esto. Prefiero ver un documental de caracoles 🐌\")},",
+  "where": "social-data.js:450"
+ },
+ "No me gusta nada lo que veo. El proyecto se cae a pedazos 🏚️": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"No me gusta nada lo que veo. El proyecto se cae a pedazos 🏚️\")},",
+  "where": "social-data.js:451"
+ },
+ "Ya ni me enfado, me da pena. Pena ajena de {club}.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Ya ni me enfado, me da pena. Pena ajena de {club}.\")},",
+  "where": "social-data.js:452"
+ },
+ "¿Esto es un equipo de fútbol o una excursión del colegio? Perdonad, pero vaya nivel.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"¿Esto es un equipo de fútbol o una excursión del colegio? Perdonad, pero vaya nivel.\")},",
+  "where": "social-data.js:453"
+ },
+ "Primera vez en mi vida que me da vergüenza llevar la camiseta del {club}.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Primera vez en mi vida que me da vergüenza llevar la camiseta del {club}.\")},",
+  "where": "social-data.js:454"
+ },
+ "Tanto hablar de ambición y mira dónde estamos. Para llorar.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"Tanto hablar de ambición y mira dónde estamos. Para llorar.\")},",
+  "where": "social-data.js:455"
+ },
+ "{name}, a ver si espabilas. La paciencia se agota y el estadio está vacío 🪑": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"{name}, a ver si espabilas. La paciencia se agota y el estadio está vacío 🪑\")},",
+  "where": "social-data.js:456"
+ },
+ "Os lo avisé: {club} está para enmarcar. Pero en un cuadro triste 😂": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Os lo avisé: {club} está para enmarcar. Pero en un cuadro triste 😂\")},",
+  "where": "social-data.js:457"
+ },
+ "{name} es el principal problema. Que se vaya ya, por favor.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"{name} es el principal problema. Que se vaya ya, por favor.\")},",
+  "where": "social-data.js:458"
+ },
+ "Menudo circo. Solo falta que traigan payasos de verdad (aunque ya los tienen) 🤡": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Menudo circo. Solo falta que traigan payasos de verdad (aunque ya los tienen) 🤡\")},",
+  "where": "social-data.js:459"
+ },
+ "La directiva y {name}: dos nombres, un mismo desastre.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"La directiva y {name}: dos nombres, un mismo desastre.\")},",
+  "where": "social-data.js:460"
+ },
+ "La afición del {club} se muestra cada vez más crítica con {name}.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"La afición del {club} se muestra cada vez más crítica con {name}.\")},",
+  "where": "social-data.js:461"
+ },
+ "Ambiente tenso en el {club}: la grada pierde la paciencia.": {
+  "ctx": "{by: \"press\", mood: -1, t: N_(\"Ambiente tenso en el {club}: la grada pierde la paciencia.\")},",
+  "where": "social-data.js:462"
+ },
+ "Qué pena me dan los del {club}. Bueno, no tanto 😜": {
+  "ctx": "{by: \"rival\", mood: 1, t: N_(\"Qué pena me dan los del {club}. Bueno, no tanto 😜\")},",
+  "where": "social-data.js:463"
+ },
+ "La afición del {club} en redes: 'Pásame el micro, que quiero opinar yo también' 🎤😤": {
+  "ctx": "{by: \"memefut\", t: N_(\"La afición del {club} en redes: 'Pásame el micro, que quiero opinar yo también' 🎤😤\")},",
+  "where": "social-data.js:464"
+ },
+ "Un aficionado del {club} escribiendo su vigésimo tuit enfadado de la semana 📝": {
+  "ctx": "{by: \"sincontexto\", t: N_(\"Un aficionado del {club} escribiendo su vigésimo tuit enfadado de la semana 📝\")}",
+  "where": "social-data.js:465"
+ },
+ "¡Qué orgullo de equipo! {name} y compañía nos devuelven la ilusión ❤️": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡Qué orgullo de equipo! {name} y compañía nos devuelven la ilusión ❤️\")},",
+  "where": "social-data.js:468"
+ },
+ "Hoy la grada vibra. Esto sí es sentir el escudo. ¡Vamos {club}! 🎶": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hoy la grada vibra. Esto sí es sentir el escudo. ¡Vamos {club}! 🎶\")},",
+  "where": "social-data.js:469"
+ },
+ "{name}, eres de lo mejor que le ha pasado a este club. Gracias, de verdad 🙏": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{name}, eres de lo mejor que le ha pasado a este club. Gracias, de verdad 🙏\")},",
+  "where": "social-data.js:470"
+ },
+ "Yo siempre dije que este proyecto iba a funcionar. Y míranos ahora 😎": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Yo siempre dije que este proyecto iba a funcionar. Y míranos ahora 😎\")},",
+  "where": "social-data.js:471"
+ },
+ "Ni tan mal, ¿eh? Cada día mejor. ¡A por todas, {club}! 🔥": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Ni tan mal, ¿eh? Cada día mejor. ¡A por todas, {club}! 🔥\")},",
+  "where": "social-data.js:472"
+ },
+ "No me lo pierdo por nada. Mi alegría de la semana: ver jugar al {club} ⚽": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"No me lo pierdo por nada. Mi alegría de la semana: ver jugar al {club} ⚽\")},",
+  "where": "social-data.js:473"
+ },
+ "Están dejándolo todo en el campo. Esto es lo que quiero ver siempre 👏": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Están dejándolo todo en el campo. Esto es lo que quiero ver siempre 👏\")},",
+  "where": "social-data.js:474"
+ },
+ "El estadio lleno, el equipo en racha… ¡Qué momento para ser del {club}! 🏟️": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"El estadio lleno, el equipo en racha… ¡Qué momento para ser del {club}! 🏟️\")},",
+  "where": "social-data.js:475"
+ },
+ "{name} nos ha hecho creer otra vez. ¡Gracias por devolvernos la ilusión!": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{name} nos ha hecho creer otra vez. ¡Gracias por devolvernos la ilusión!\")},",
+  "where": "social-data.js:476"
+ },
+ "Aquí no se rinde nadie. ¡Venga, que se viene algo grande! 🚀": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Aquí no se rinde nadie. ¡Venga, que se viene algo grande! 🚀\")},",
+  "where": "social-data.js:477"
+ },
+ "Hoy vendería mi casa para ver otro partido como este. ¡Qué nivel! 🏠➡️🏟️": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hoy vendería mi casa para ver otro partido como este. ¡Qué nivel! 🏠➡️🏟️\")},",
+  "where": "social-data.js:478"
+ },
+ "¡¡{club} hasta la muerte!! Cada vez más orgulloso de ser de aquí 💙": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡¡{club} hasta la muerte!! Cada vez más orgulloso de ser de aquí 💙\")},",
+  "where": "social-data.js:479"
+ },
+ "Cuando {name} toca el balón, siento que todo va a salir bien ✨": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Cuando {name} toca el balón, siento que todo va a salir bien ✨\")},",
+  "where": "social-data.js:480"
+ },
+ "Los de ahora son los mejores en años. Que no pare nunca la fiesta 🎉": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Los de ahora son los mejores en años. Que no pare nunca la fiesta 🎉\")},",
+  "where": "social-data.js:481"
+ },
+ "Gracias, {name}, por hacer felices a miles de personas cada fin de semana 🫶": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Gracias, {name}, por hacer felices a miles de personas cada fin de semana 🫶\")},",
+  "where": "social-data.js:482"
+ },
+ "Ambiente de ensueño en el {club}: afición volcada con {name} y el equipo.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"Ambiente de ensueño en el {club}: afición volcada con {name} y el equipo.\")},",
+  "where": "social-data.js:483"
+ },
+ "El {club} vive un momento dulce: la afición está en plena comunión con el equipo.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"El {club} vive un momento dulce: la afición está en plena comunión con el equipo.\")},",
+  "where": "social-data.js:484"
+ },
+ "💙 Gracias, afición. Sois el mejor jugador del equipo. ¡Seguimos juntos!": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"💙 Gracias, afición. Sois el mejor jugador del equipo. ¡Seguimos juntos!\")},",
+  "where": "social-data.js:485"
+ },
+ "Qué envidia ver cómo anima el {club}. Nosotros con la peor grada en años 😔": {
+  "ctx": "{by: \"rival\", mood: -1, t: N_(\"Qué envidia ver cómo anima el {club}. Nosotros con la peor grada en años 😔\")},",
+  "where": "social-data.js:486"
+ },
+ "Afición del {club} en este momento: 🥹🏟️💙": {
+  "ctx": "{by: \"memefut\", t: N_(\"Afición del {club} en este momento: 🥹🏟️💙\")},",
+  "where": "social-data.js:487"
+ },
+ "Un aficionado del {club} abrazando a un desconocido tras el gol: 🫂": {
+  "ctx": "{by: \"sincontexto\", t: N_(\"Un aficionado del {club} abrazando a un desconocido tras el gol: 🫂\")}",
+  "where": "social-data.js:488"
+ },
+ "¡DEBUTA {name}! Qué momento, qué ilusión, qué nervios. ¡A comerse el mundo! 🌟": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡DEBUTA {name}! Qué momento, qué ilusión, qué nervios. ¡A comerse el mundo! 🌟\")},",
+  "where": "social-data.js:491"
+ },
+ "Primer partido de {name} con el {club}. Ya se nota que viene para quedarse 👀": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Primer partido de {name} con el {club}. Ya se nota que viene para quedarse 👀\")},",
+  "where": "social-data.js:492"
+ },
+ "Hoy nace una leyenda. Recordad este día: debut de {name} ⚽": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Hoy nace una leyenda. Recordad este día: debut de {name} ⚽\")},",
+  "where": "social-data.js:493"
+ },
+ "Debuta {name}. Veremos qué da. De momento, ilusión y mucha calma.": {
+  "ctx": "{by: \"fan\", t: N_(\"Debuta {name}. Veremos qué da. De momento, ilusión y mucha calma.\")},",
+  "where": "social-data.js:494"
+ },
+ "¿Debut de {name}? Espero que no sea un error. Tengo mis dudas, sinceramente.": {
+  "ctx": "{by: \"fan\", mood: -1, t: N_(\"¿Debut de {name}? Espero que no sea un error. Tengo mis dudas, sinceramente.\")},",
+  "where": "social-data.js:495"
+ },
+ "Otra promesa que se queda en nada. {name} no pasa de aquí.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"Otra promesa que se queda en nada. {name} no pasa de aquí.\")},",
+  "where": "social-data.js:496"
+ },
+ "DEBUT | {name} estrena su carrera con el {club} y deja buenas sensaciones.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"DEBUT | {name} estrena su carrera con el {club} y deja buenas sensaciones.\")},",
+  "where": "social-data.js:497"
+ },
+ "Estreno de {name} con el {club}: primeros minutos con personalidad.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"Estreno de {name} con el {club}: primeros minutos con personalidad.\")},",
+  "where": "social-data.js:498"
+ },
+ "🌟 ¡Debut de {name} con el {club}! ¡Enhorabuena, y mucha suerte! 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🌟 ¡Debut de {name} con el {club}! ¡Enhorabuena, y mucha suerte! 💙\")},",
+  "where": "social-data.js:499"
+ },
+ "Gran debut, {name}. Así se hace. ¡Bienvenido al grupo! 🤝": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"Gran debut, {name}. Así se hace. ¡Bienvenido al grupo! 🤝\")},",
+  "where": "social-data.js:500"
+ },
+ "📊 {name} debuta con el {club} con {n} años. Uno de los más jóvenes de la plantilla.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} debuta con el {club} con {n} años. Uno de los más jóvenes de la plantilla.\")},",
+  "where": "social-data.js:501"
+ },
+ "{name} en su debut: 'Tengo los nervios de punta' / Los rivales: 'no te preocupes, nosotros tampoco' 😅": {
+  "ctx": "{by: \"memefut\", t: N_(\"{name} en su debut: 'Tengo los nervios de punta' / Los rivales: 'no te preocupes, nosotros tampoco' 😅\")},",
+  "where": "social-data.js:502"
+ },
+ "Sueño cumplido. Gracias a mi familia, a mis compañeros y a todos los que han creído en mí 🥹⚽": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"Sueño cumplido. Gracias a mi familia, a mis compañeros y a todos los que han creído en mí 🥹⚽\")}",
+  "where": "social-data.js:503"
+ },
+ "¡DEBUTA {name} CON LA SELECCIÓN! Orgullo del {club}. ¡Es historia! 🇪🇸🌟": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡DEBUTA {name} CON LA SELECCIÓN! Orgullo del {club}. ¡Es historia! 🇪🇸🌟\")},",
+  "where": "social-data.js:506"
+ },
+ "Convocado y con minutos. {name} lo ha conseguido. ¡Qué grande! 🏅": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Convocado y con minutos. {name} lo ha conseguido. ¡Qué grande! 🏅\")},",
+  "where": "social-data.js:507"
+ },
+ "{name} con la camiseta de la selección. Se me ha puesto la piel de gallina 😭": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{name} con la camiseta de la selección. Se me ha puesto la piel de gallina 😭\")},",
+  "where": "social-data.js:508"
+ },
+ "{name} debuta con su selección. Esperemos que sea el primero de muchos.": {
+  "ctx": "{by: \"fan\", t: N_(\"{name} debuta con su selección. Esperemos que sea el primero de muchos.\")},",
+  "where": "social-data.js:509"
+ },
+ "A este nivel, cualquiera juega en la selección. Ya no hay filtro.": {
+  "ctx": "{by: \"hater\", mood: -1, t: N_(\"A este nivel, cualquiera juega en la selección. Ya no hay filtro.\")},",
+  "where": "social-data.js:510"
+ },
+ "DEBUT INTERNACIONAL | {name} estrena su cuenta con la selección.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"DEBUT INTERNACIONAL | {name} estrena su cuenta con la selección.\")},",
+  "where": "social-data.js:511"
+ },
+ "{name} se estrena con la selección y escribe una página inolvidable.": {
+  "ctx": "{by: \"press\", mood: 1, t: N_(\"{name} se estrena con la selección y escribe una página inolvidable.\")},",
+  "where": "social-data.js:512"
+ },
+ "🇪🇸 ¡{name}, internacional! Orgullo del {club} con su estreno con la selección. 💙": {
+  "ctx": "{by: \"club\", mood: 1, t: N_(\"🇪🇸 ¡{name}, internacional! Orgullo del {club} con su estreno con la selección. 💙\")},",
+  "where": "social-data.js:513"
+ },
+ "¡Enhorabuena, {name}! Un orgullo ver a un compañero con la camiseta de la selección 🫶": {
+  "ctx": "{by: \"teammate\", mood: 1, t: N_(\"¡Enhorabuena, {name}! Un orgullo ver a un compañero con la camiseta de la selección 🫶\")},",
+  "where": "social-data.js:514"
+ },
+ "📊 {name} se convierte en internacional por primera vez. Tercer jugador del {club} en la selección esta temporada.": {
+  "ctx": "{by: \"stats\", t: N_(\"📊 {name} se convierte en internacional por primera vez. Tercer jugador del {club} en la selección esta temporada.\")},",
+  "where": "social-data.js:515"
+ },
+ "{name} cantando el himno por primera vez: 🥹🎶": {
+  "ctx": "{by: \"memefut\", t: N_(\"{name} cantando el himno por primera vez: 🥹🎶\")},",
+  "where": "social-data.js:516"
+ },
+ "A debut for {name} on the international stage. A moment to savour.": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"A debut for {name} on the international stage. A moment to savour.\")},",
+  "where": "social-data.js:517"
+ },
+ "Hoy ha sido uno de los días más especiales de mi vida. Gracias a todos por el cariño 🇪🇸🥹": {
+  "ctx": "{by: \"self\", mood: 1, t: N_(\"Hoy ha sido uno de los días más especiales de mi vida. Gracias a todos por el cariño 🇪🇸🥹\")}",
+  "where": "social-data.js:518"
+ },
+ "¡Hito histórico! {name} llega a {n} partidos con el {club}. ¡Leyenda viva! 🏟️": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"¡Hito histórico! {name} llega a {n} partidos con el {club}. ¡Leyenda viva! 🏟️\")},",
+  "where": "social-data.js:521"
+ },
+ "Otra marca para {name}. Cada día más grande en la historia del {club} 🙌": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"Otra marca para {name}. Cada día más grande en la historia del {club} 🙌\")},",
+  "where": "social-data.js:522"
+ },
+ "{goals} goles. {goals}. ¿Cuántos más quieres, {name}? 😅 Gracias por todo.": {
+  "ctx": "{by: \"fan\", mood: 1, t: N_(\"{goals} goles. {goals}. ¿Cuántos más quieres, {name}? 😅 Gracias por todo.\")},",
+  "where": "social-data.js:523"
+ }
+}

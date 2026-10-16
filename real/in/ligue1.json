@@ -1,0 +1,79 @@
+{
+ "id": "ligue1",
+ "league": "Ligue 1",
+ "country": "FR",
+ "clubs": [
+  {
+   "club": "Paris Saint-Germain",
+   "gameRating": 85
+  },
+  {
+   "club": "Olympique de Marsella",
+   "gameRating": 83.7
+  },
+  {
+   "club": "AS Mónaco",
+   "gameRating": 82.7
+  },
+  {
+   "club": "LOSC Lille",
+   "gameRating": 81.8
+  },
+  {
+   "club": "Olympique de Lyon",
+   "gameRating": 80.9
+  },
+  {
+   "club": "RC Lens",
+   "gameRating": 80.1
+  },
+  {
+   "club": "OGC Niza",
+   "gameRating": 79.2
+  },
+  {
+   "club": "Stade Rennais",
+   "gameRating": 78.4
+  },
+  {
+   "club": "RC Estrasburgo",
+   "gameRating": 77.6
+  },
+  {
+   "club": "Stade Brestois",
+   "gameRating": 76.8
+  },
+  {
+   "club": "Toulouse FC",
+   "gameRating": 76.1
+  },
+  {
+   "club": "Paris FC",
+   "gameRating": 75.3
+  },
+  {
+   "club": "AJ Auxerre",
+   "gameRating": 74.6
+  },
+  {
+   "club": "Angers SCO",
+   "gameRating": 73.9
+  },
+  {
+   "club": "Le Havre AC",
+   "gameRating": 73.1
+  },
+  {
+   "club": "FC Lorient",
+   "gameRating": 72.4
+  },
+  {
+   "club": "ESTAC Troyes",
+   "gameRating": 71.7
+  },
+  {
+   "club": "Le Mans FC",
+   "gameRating": 71
+  }
+ ]
+}

@@ -1,0 +1,2254 @@
+{
+ "id": "eredivisie",
+ "league": "Eredivisie",
+ "season": "2026/27",
+ "asOf": "2026-10",
+ "clubs": [
+  {
+   "club": "PSV",
+   "coach": "Peter Bosz",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Matěj",
+     "ln": "Kovář",
+     "pos": "POR",
+     "age": 26,
+     "nat": "CZ",
+     "ovr": 78
+    },
+    {
+     "fn": "Walter",
+     "ln": "Benítez",
+     "pos": "POR",
+     "age": 33,
+     "nat": "AR",
+     "ovr": 76
+    },
+    {
+     "fn": "Jeroen",
+     "ln": "Zoet",
+     "pos": "POR",
+     "age": 35,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Sergiño",
+     "ln": "Dest",
+     "pos": "LD",
+     "age": 26,
+     "nat": "US",
+     "ovr": 79
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Teze",
+     "pos": "LD",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 77
+    },
+    {
+     "fn": "Olivier",
+     "ln": "Boscagli",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 79
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Flamingo",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 75
+    },
+    {
+     "fn": "Mauro",
+     "ln": "Júnior",
+     "pos": "LI",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Jerdy",
+     "ln": "Schouten",
+     "pos": "MCD",
+     "age": 29,
+     "nat": "NL",
+     "ovr": 78
+    },
+    {
+     "fn": "Joey",
+     "ln": "Veerman",
+     "pos": "MC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 81
+    },
+    {
+     "fn": "Sven",
+     "ln": "Mijnans",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 77
+    },
+    {
+     "fn": "Paul",
+     "ln": "Wanner",
+     "pos": "MCO",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 75
+    },
+    {
+     "fn": "Guus",
+     "ln": "Til",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Dante",
+     "ln": "Rigo",
+     "pos": "MC",
+     "age": 20,
+     "nat": "BE",
+     "ovr": 70
+    },
+    {
+     "fn": "Dennis",
+     "ln": "Man",
+     "pos": "ED",
+     "age": 28,
+     "nat": "RO",
+     "ovr": 76
+    },
+    {
+     "fn": "Noah",
+     "ln": "Lang",
+     "pos": "EI",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 77
+    },
+    {
+     "fn": "Couhaib",
+     "ln": "Driouech",
+     "pos": "ED",
+     "age": 23,
+     "nat": "MA",
+     "ovr": 76
+    },
+    {
+     "fn": "Esmir",
+     "ln": "Bajraktarević",
+     "pos": "ED",
+     "age": 21,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Ricardo",
+     "ln": "Pepi",
+     "pos": "DC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 77
+    },
+    {
+     "fn": "Luuk",
+     "ln": "de Jong",
+     "pos": "DC",
+     "age": 36,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Yorbe",
+     "ln": "Vertessen",
+     "pos": "DC",
+     "age": 25,
+     "nat": "BE",
+     "ovr": 72
+    }
+   ]
+  },
+  {
+   "club": "Feyenoord",
+   "coach": "Giovanni van Bronckhorst",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Justin",
+     "ln": "Bijlow",
+     "pos": "POR",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Tjark",
+     "ln": "Ernst",
+     "pos": "POR",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Gijs",
+     "ln": "Smal",
+     "pos": "LD",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Givairo",
+     "ln": "Read",
+     "pos": "LD",
+     "age": 20,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Gernot",
+     "ln": "Trauner",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "AT",
+     "ovr": 76
+    },
+    {
+     "fn": "Facundo",
+     "ln": "González",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "UY",
+     "ovr": 73
+    },
+    {
+     "fn": "Mika",
+     "ln": "Mármol",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "ES",
+     "ovr": 72
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Bos",
+     "pos": "LI",
+     "age": 23,
+     "nat": "AU",
+     "ovr": 74
+    },
+    {
+     "fn": "Hugo",
+     "ln": "Bueno",
+     "pos": "LI",
+     "age": 24,
+     "nat": "ENG",
+     "ovr": 74
+    },
+    {
+     "fn": "Quinten",
+     "ln": "Timber",
+     "pos": "MC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 80
+    },
+    {
+     "fn": "Antoni",
+     "ln": "Milambo",
+     "pos": "MC",
+     "age": 21,
+     "nat": "NL",
+     "ovr": 75
+    },
+    {
+     "fn": "Jakub",
+     "ln": "Moder",
+     "pos": "MC",
+     "age": 27,
+     "nat": "PL",
+     "ovr": 74
+    },
+    {
+     "fn": "Luciano",
+     "ln": "Valente",
+     "pos": "MC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Charles",
+     "ln": "Vanhoutte",
+     "pos": "MC",
+     "age": 22,
+     "nat": "BE",
+     "ovr": 72
+    },
+    {
+     "fn": "Thomas",
+     "ln": "van den Belt",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Calvin",
+     "ln": "Stengs",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Anis",
+     "ln": "Hadj Moussa",
+     "pos": "ED",
+     "age": 24,
+     "nat": "DZ",
+     "ovr": 77
+    },
+    {
+     "fn": "Ayase",
+     "ln": "Ueda",
+     "pos": "DC",
+     "age": 28,
+     "nat": "JP",
+     "ovr": 77
+    },
+    {
+     "fn": "Julián",
+     "ln": "Carranza",
+     "pos": "DC",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 74
+    },
+    {
+     "fn": "Casper",
+     "ln": "Tengstedt",
+     "pos": "DC",
+     "age": 26,
+     "nat": "DK",
+     "ovr": 73
+    },
+    {
+     "fn": "Nacho",
+     "ln": "Ferri",
+     "pos": "DC",
+     "age": 21,
+     "nat": "ES",
+     "ovr": 70
+    },
+    {
+     "fn": "Chris-Kévin",
+     "ln": "Nadje",
+     "pos": "DC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "Ajax",
+   "coach": "Míchel",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Marc-André",
+     "ln": "ter Stegen",
+     "pos": "POR",
+     "age": 34,
+     "nat": "DE",
+     "ovr": 82
+    },
+    {
+     "fn": "Vítězslav",
+     "ln": "Jaroš",
+     "pos": "POR",
+     "age": 25,
+     "nat": "CZ",
+     "ovr": 74
+    },
+    {
+     "fn": "Jay",
+     "ln": "Gorter",
+     "pos": "POR",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Anton",
+     "ln": "Gaaei",
+     "pos": "LD",
+     "age": 23,
+     "nat": "DK",
+     "ovr": 74
+    },
+    {
+     "fn": "Lucas",
+     "ln": "Rosa",
+     "pos": "LD",
+     "age": 24,
+     "nat": "BR",
+     "ovr": 73
+    },
+    {
+     "fn": "Josip",
+     "ln": "Šutalo",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "HR",
+     "ovr": 77
+    },
+    {
+     "fn": "Jakov",
+     "ln": "Medić",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "HR",
+     "ovr": 74
+    },
+    {
+     "fn": "Youri",
+     "ln": "Baas",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Jorthy",
+     "ln": "Mokio",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "BE",
+     "ovr": 73
+    },
+    {
+     "fn": "Owen",
+     "ln": "Wijndal",
+     "pos": "LI",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Kenneth",
+     "ln": "Taylor",
+     "pos": "MC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 77
+    },
+    {
+     "fn": "Davy",
+     "ln": "Klaassen",
+     "pos": "MC",
+     "age": 33,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Branco",
+     "ln": "van den Boomen",
+     "pos": "MC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Youri",
+     "ln": "Regeer",
+     "pos": "MC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Julian",
+     "ln": "Brandt",
+     "pos": "MCO",
+     "age": 30,
+     "nat": "DE",
+     "ovr": 80
+    },
+    {
+     "fn": "Oscar",
+     "ln": "Gloukh",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "IL",
+     "ovr": 76
+    },
+    {
+     "fn": "Steven",
+     "ln": "Berghuis",
+     "pos": "ED",
+     "age": 34,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Bertrand",
+     "ln": "Traoré",
+     "pos": "ED",
+     "age": 31,
+     "nat": "BF",
+     "ovr": 74
+    },
+    {
+     "fn": "Simon",
+     "ln": "Adingra",
+     "pos": "EI",
+     "age": 24,
+     "nat": "CI",
+     "ovr": 77
+    },
+    {
+     "fn": "Carlos",
+     "ln": "Forbs",
+     "pos": "EI",
+     "age": 22,
+     "nat": "PT",
+     "ovr": 75
+    },
+    {
+     "fn": "Brian",
+     "ln": "Brobbey",
+     "pos": "DC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 79
+    },
+    {
+     "fn": "Marcos",
+     "ln": "Leonardo",
+     "pos": "DC",
+     "age": 23,
+     "nat": "BR",
+     "ovr": 77
+    },
+    {
+     "fn": "Christian",
+     "ln": "Rasmussen",
+     "pos": "DC",
+     "age": 23,
+     "nat": "DK",
+     "ovr": 73
+    },
+    {
+     "fn": "Julian",
+     "ln": "Rijkhoff",
+     "pos": "DC",
+     "age": 20,
+     "nat": "NL",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "AZ Alkmaar",
+   "coach": "Leeroy Echteld",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Hobie",
+     "ln": "Verhulst",
+     "pos": "POR",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Peter",
+     "ln": "Leeuwenburgh",
+     "pos": "POR",
+     "age": 33,
+     "nat": "NL",
+     "ovr": 69
+    },
+    {
+     "fn": "Alexandre",
+     "ln": "Penetra",
+     "pos": "LD",
+     "age": 23,
+     "nat": "PT",
+     "ovr": 74
+    },
+    {
+     "fn": "Elijah",
+     "ln": "Dijkstra",
+     "pos": "LD",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Wouter",
+     "ln": "Goes",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Pantelis",
+     "ln": "Hatzidiakos",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "GR",
+     "ovr": 74
+    },
+    {
+     "fn": "Maxim",
+     "ln": "Dekker",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Mateo",
+     "ln": "Chávez",
+     "pos": "LI",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 75
+    },
+    {
+     "fn": "Jordy",
+     "ln": "Clasie",
+     "pos": "MCD",
+     "age": 35,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Lewis",
+     "ln": "Schouten",
+     "pos": "MCD",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Kees",
+     "ln": "Smit",
+     "pos": "MC",
+     "age": 20,
+     "nat": "NL",
+     "ovr": 77
+    },
+    {
+     "fn": "Isak",
+     "ln": "Jensen",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DK",
+     "ovr": 72
+    },
+    {
+     "fn": "Zico",
+     "ln": "Buurmeester",
+     "pos": "MC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Mees",
+     "ln": "de Wit",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Ruben",
+     "ln": "van Bommel",
+     "pos": "ED",
+     "age": 21,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Ibrahim",
+     "ln": "Sadiq",
+     "pos": "ED",
+     "age": 26,
+     "nat": "GH",
+     "ovr": 74
+    },
+    {
+     "fn": "Mexx",
+     "ln": "Meerdink",
+     "pos": "EI",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Troy",
+     "ln": "Parrott",
+     "pos": "DC",
+     "age": 24,
+     "nat": "IE",
+     "ovr": 78
+    },
+    {
+     "fn": "Jens",
+     "ln": "Odgaard",
+     "pos": "DC",
+     "age": 27,
+     "nat": "DK",
+     "ovr": 73
+    },
+    {
+     "fn": "Ro-Zangelo",
+     "ln": "Daal",
+     "pos": "DC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "FC Twente",
+   "coach": "John van den Brom",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Joël",
+     "ln": "Drommel",
+     "pos": "POR",
+     "age": 33,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Lars",
+     "ln": "Unnerstall",
+     "pos": "POR",
+     "age": 35,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Robin",
+     "ln": "Pröpper",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Mees",
+     "ln": "Hilgers",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Max",
+     "ln": "Bruns",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Mathias",
+     "ln": "Kjølø",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "DK",
+     "ovr": 73
+    },
+    {
+     "fn": "Alec",
+     "ln": "van Hoorenbeeck",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 71
+    },
+    {
+     "fn": "Bart",
+     "ln": "van Rooij",
+     "pos": "LD",
+     "age": 33,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Ramiz",
+     "ln": "Zerrouki",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "DZ",
+     "ovr": 74
+    },
+    {
+     "fn": "Michal",
+     "ln": "Sadílek",
+     "pos": "MC",
+     "age": 27,
+     "nat": "CZ",
+     "ovr": 74
+    },
+    {
+     "fn": "Kristian",
+     "ln": "Hlynsson",
+     "pos": "MC",
+     "age": 22,
+     "nat": "IS",
+     "ovr": 73
+    },
+    {
+     "fn": "Taylor",
+     "ln": "Booth",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Michel",
+     "ln": "Vlap",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Sem",
+     "ln": "Steijn",
+     "pos": "MCO",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 75
+    },
+    {
+     "fn": "Daan",
+     "ln": "Rots",
+     "pos": "ED",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Mitchell",
+     "ln": "van Bergen",
+     "pos": "EI",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Sam",
+     "ln": "Lammers",
+     "pos": "DC",
+     "age": 29,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Gustaf",
+     "ln": "Nilsson",
+     "pos": "DC",
+     "age": 24,
+     "nat": "SE",
+     "ovr": 72
+    },
+    {
+     "fn": "Ruud",
+     "ln": "Nijstad",
+     "pos": "DC",
+     "age": 21,
+     "nat": "NL",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "FC Utrecht",
+   "coach": "Anthony Correia",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Vasilis",
+     "ln": "Barkas",
+     "pos": "POR",
+     "age": 32,
+     "nat": "GR",
+     "ovr": 75
+    },
+    {
+     "fn": "Michael",
+     "ln": "Brouwer",
+     "pos": "POR",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Mike",
+     "ln": "van der Hoorn",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Hjalmar",
+     "ln": "Ekdal",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "SE",
+     "ovr": 73
+    },
+    {
+     "fn": "Siebe",
+     "ln": "Horemans",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "BE",
+     "ovr": 72
+    },
+    {
+     "fn": "Nick",
+     "ln": "Viergever",
+     "pos": "DFC",
+     "age": 37,
+     "nat": "NL",
+     "ovr": 69
+    },
+    {
+     "fn": "Souffian",
+     "ln": "El Karouani",
+     "pos": "LI",
+     "age": 25,
+     "nat": "MA",
+     "ovr": 73
+    },
+    {
+     "fn": "Alonzo",
+     "ln": "Engwanda",
+     "pos": "LI",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Victor",
+     "ln": "Jensen",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DK",
+     "ovr": 73
+    },
+    {
+     "fn": "Can",
+     "ln": "Bozdoğan",
+     "pos": "MC",
+     "age": 24,
+     "nat": "TR",
+     "ovr": 73
+    },
+    {
+     "fn": "Ivar",
+     "ln": "Jenner",
+     "pos": "MC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Miguel",
+     "ln": "Rodríguez",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "ES",
+     "ovr": 72
+    },
+    {
+     "fn": "Jesper",
+     "ln": "Karlsson",
+     "pos": "ED",
+     "age": 28,
+     "nat": "SE",
+     "ovr": 76
+    },
+    {
+     "fn": "Adrian",
+     "ln": "Blake",
+     "pos": "ED",
+     "age": 21,
+     "nat": "JM",
+     "ovr": 71
+    },
+    {
+     "fn": "Noah",
+     "ln": "Ohio",
+     "pos": "DC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Sébastien",
+     "ln": "Haller",
+     "pos": "DC",
+     "age": 32,
+     "nat": "CI",
+     "ovr": 73
+    },
+    {
+     "fn": "Gjivai",
+     "ln": "Zechiël",
+     "pos": "MC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "NEC Nijmegen",
+   "coach": "Dick Schreuder",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Jasper",
+     "ln": "Cillessen",
+     "pos": "POR",
+     "age": 37,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Calvin",
+     "ln": "Verdonk",
+     "pos": "LI",
+     "age": 29,
+     "nat": "NL",
+     "ovr": 77
+    },
+    {
+     "fn": "Thomas",
+     "ln": "Ouwejan",
+     "pos": "LI",
+     "age": 30,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Philippe",
+     "ln": "Sandler",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Sami",
+     "ln": "Ouaissa",
+     "pos": "LD",
+     "age": 27,
+     "nat": "MA",
+     "ovr": 70
+    },
+    {
+     "fn": "Dirk",
+     "ln": "Proper",
+     "pos": "MCD",
+     "age": 32,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Rodrigo",
+     "ln": "Guth",
+     "pos": "MC",
+     "age": 27,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Mees",
+     "ln": "Hoedemakers",
+     "pos": "MC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Tjaronn",
+     "ln": "Chery",
+     "pos": "MCO",
+     "age": 35,
+     "nat": "SR",
+     "ovr": 71
+    },
+    {
+     "fn": "Sontje",
+     "ln": "Hansen",
+     "pos": "EI",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Elayis",
+     "ln": "Tavşan",
+     "pos": "ED",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 74
+    },
+    {
+     "fn": "Koki",
+     "ln": "Ogawa",
+     "pos": "DC",
+     "age": 29,
+     "nat": "JP",
+     "ovr": 76
+    },
+    {
+     "fn": "Bryan",
+     "ln": "Linssen",
+     "pos": "DC",
+     "age": 36,
+     "nat": "NL",
+     "ovr": 71
+    }
+   ]
+  },
+  {
+   "club": "Go Ahead Eagles",
+   "coach": "Joseph Oosting",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Jari",
+     "ln": "De Busser",
+     "pos": "POR",
+     "age": 31,
+     "nat": "BE",
+     "ovr": 72
+    },
+    {
+     "fn": "Luuk",
+     "ln": "Brouwers",
+     "pos": "POR",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 67
+    },
+    {
+     "fn": "Dean",
+     "ln": "James",
+     "pos": "LD",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Mats",
+     "ln": "Deijl",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Mathis",
+     "ln": "Suray",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "BE",
+     "ovr": 71
+    },
+    {
+     "fn": "Jakob",
+     "ln": "Breum",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "DK",
+     "ovr": 70
+    },
+    {
+     "fn": "Jeff",
+     "ln": "Hardeveld",
+     "pos": "LI",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Enric",
+     "ln": "Llansana",
+     "pos": "MC",
+     "age": 24,
+     "nat": "ES",
+     "ovr": 72
+    },
+    {
+     "fn": "Willum Þór",
+     "ln": "Willumsson",
+     "pos": "MC",
+     "age": 27,
+     "nat": "IS",
+     "ovr": 73
+    },
+    {
+     "fn": "Soufyan",
+     "ln": "Ahannach",
+     "pos": "ED",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Oliver",
+     "ln": "Antman",
+     "pos": "EI",
+     "age": 25,
+     "nat": "FI",
+     "ovr": 73
+    },
+    {
+     "fn": "Finn",
+     "ln": "Stokkers",
+     "pos": "DC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Victor",
+     "ln": "Edvardsen",
+     "pos": "DC",
+     "age": 28,
+     "nat": "NO",
+     "ovr": 73
+    },
+    {
+     "fn": "Milan",
+     "ln": "Smit",
+     "pos": "DC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "SC Heerenveen",
+   "coach": "Robin Veldman",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Andries",
+     "ln": "Noppert",
+     "pos": "POR",
+     "age": 32,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Xavier",
+     "ln": "Mous",
+     "pos": "POR",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 67
+    },
+    {
+     "fn": "Sam",
+     "ln": "Kersten",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Luka",
+     "ln": "Mijatović",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Pawel",
+     "ln": "Bochniewicz",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "PL",
+     "ovr": 71
+    },
+    {
+     "fn": "Sven",
+     "ln": "van Beek",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Syb",
+     "ln": "van Ottele",
+     "pos": "LD",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 69
+    },
+    {
+     "fn": "Mats",
+     "ln": "Köhlert",
+     "pos": "LI",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Thom",
+     "ln": "Haye",
+     "pos": "MC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Rami",
+     "ln": "Kaib",
+     "pos": "MC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Nils",
+     "ln": "Rossen",
+     "pos": "MC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Jacob",
+     "ln": "Trenskow",
+     "pos": "ED",
+     "age": 25,
+     "nat": "DK",
+     "ovr": 72
+    },
+    {
+     "fn": "Osame",
+     "ln": "Sahraoui",
+     "pos": "EI",
+     "age": 25,
+     "nat": "NO",
+     "ovr": 74
+    },
+    {
+     "fn": "Ringo",
+     "ln": "Meerveld",
+     "pos": "ED",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Dylan",
+     "ln": "Vente",
+     "pos": "DC",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 72
+    }
+   ]
+  },
+  {
+   "club": "FC Groningen",
+   "coach": "Dick Lukkien",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Etienne",
+     "ln": "Vaessen",
+     "pos": "POR",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Hidde",
+     "ln": "Jurjus",
+     "pos": "POR",
+     "age": 30,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Stefan",
+     "ln": "Frederiksen",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "DK",
+     "ovr": 70
+    },
+    {
+     "fn": "Marco",
+     "ln": "Rente",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Marco",
+     "ln": "Pellegrino",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 71
+    },
+    {
+     "fn": "Thijmen",
+     "ln": "Blokzijl",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Mike",
+     "ln": "te Wierik",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Jorg",
+     "ln": "Schreuders",
+     "pos": "LD",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Jorrit",
+     "ln": "Hendrix",
+     "pos": "MC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 73
+    },
+    {
+     "fn": "Laros",
+     "ln": "Duarte",
+     "pos": "MC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Romano",
+     "ln": "Postema",
+     "pos": "MC",
+     "age": 29,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Johan",
+     "ln": "Hove",
+     "pos": "MC",
+     "age": 24,
+     "nat": "NO",
+     "ovr": 71
+    },
+    {
+     "fn": "Thom",
+     "ln": "van Bergen",
+     "pos": "MCO",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Luciano",
+     "ln": "Slagveer",
+     "pos": "ED",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Younes",
+     "ln": "Taha",
+     "pos": "EI",
+     "age": 26,
+     "nat": "IQ",
+     "ovr": 72
+    },
+    {
+     "fn": "Oussama",
+     "ln": "Alou",
+     "pos": "ED",
+     "age": 21,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Tika",
+     "ln": "de Jonge",
+     "pos": "DC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 71
+    }
+   ]
+  },
+  {
+   "club": "Sparta Rotterdam",
+   "coach": "Rogier Meijer",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Nick",
+     "ln": "Olij",
+     "pos": "POR",
+     "age": 30,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Maduka",
+     "ln": "Okoye",
+     "pos": "POR",
+     "age": 27,
+     "nat": "NG",
+     "ovr": 71
+    },
+    {
+     "fn": "Bart",
+     "ln": "Vriends",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Mike",
+     "ln": "Eerdhuijzen",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Teun",
+     "ln": "Gijselhart",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Tom",
+     "ln": "Beugelsdijk",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 69
+    },
+    {
+     "fn": "Patrick",
+     "ln": "van Aanholt",
+     "pos": "LI",
+     "age": 34,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Joshua",
+     "ln": "Kitolano",
+     "pos": "MC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Arno",
+     "ln": "Verschueren",
+     "pos": "MC",
+     "age": 25,
+     "nat": "BE",
+     "ovr": 72
+    },
+    {
+     "fn": "Metinho",
+     "ln": "Jakobsen",
+     "pos": "MC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Shunsuke",
+     "ln": "Mito",
+     "pos": "ED",
+     "age": 26,
+     "nat": "JP",
+     "ovr": 73
+    },
+    {
+     "fn": "Tobias",
+     "ln": "Lauritsen",
+     "pos": "DC",
+     "age": 29,
+     "nat": "NO",
+     "ovr": 73
+    }
+   ]
+  },
+  {
+   "club": "PEC Zwolle",
+   "coach": "Henry van der Vegt",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Mickey",
+     "ln": "van der Hart",
+     "pos": "POR",
+     "age": 32,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Jesper",
+     "ln": "Schlee",
+     "pos": "POR",
+     "age": 25,
+     "nat": "DK",
+     "ovr": 66
+    },
+    {
+     "fn": "Anselmo",
+     "ln": "García MacNulty",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Olivier",
+     "ln": "Aertssen",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 69
+    },
+    {
+     "fn": "Dylan",
+     "ln": "Mertens",
+     "pos": "LD",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Kiril",
+     "ln": "Dzhilianov",
+     "pos": "MC",
+     "age": 28,
+     "nat": "BG",
+     "ovr": 70
+    },
+    {
+     "fn": "Thijs",
+     "ln": "Oosting",
+     "pos": "MC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Younes",
+     "ln": "Namli",
+     "pos": "MCO",
+     "age": 30,
+     "nat": "DK",
+     "ovr": 72
+    },
+    {
+     "fn": "Jaden",
+     "ln": "Slory",
+     "pos": "ED",
+     "age": 27,
+     "nat": "SR",
+     "ovr": 72
+    },
+    {
+     "fn": "Bryan",
+     "ln": "Smeets",
+     "pos": "DC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Jay-Roy",
+     "ln": "Grot",
+     "pos": "DC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Fortuna Sittard",
+   "coach": "Danny Buijs",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Mattijs",
+     "ln": "Branderhorst",
+     "pos": "POR",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Ruben",
+     "ln": "Roosken",
+     "pos": "POR",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 65
+    },
+    {
+     "fn": "Ivo",
+     "ln": "Pinto",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "PT",
+     "ovr": 70
+    },
+    {
+     "fn": "Loïc",
+     "ln": "Mbe Soh",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "CM",
+     "ovr": 69
+    },
+    {
+     "fn": "Mitchel",
+     "ln": "Paulissen",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Paul",
+     "ln": "Gladon",
+     "pos": "MC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Tom",
+     "ln": "Pettersson",
+     "pos": "MC",
+     "age": 28,
+     "nat": "SE",
+     "ovr": 70
+    },
+    {
+     "fn": "Mohamed",
+     "ln": "Ihattaren",
+     "pos": "MCO",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Ensar",
+     "ln": "Brunčević",
+     "pos": "ED",
+     "age": 26,
+     "nat": "BA",
+     "ovr": 71
+    },
+    {
+     "fn": "Lance",
+     "ln": "Duijvestijn",
+     "pos": "ED",
+     "age": 34,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Kaj",
+     "ln": "Sierhuis",
+     "pos": "DC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Iñigo",
+     "ln": "Córdoba",
+     "pos": "DC",
+     "age": 26,
+     "nat": "ES",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Excelsior",
+   "coach": "Ruben den Uil",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Stijn",
+     "ln": "van Gassel",
+     "pos": "POR",
+     "age": 33,
+     "nat": "NL",
+     "ovr": 71
+    },
+    {
+     "fn": "Redouan",
+     "ln": "El Yaakoubi",
+     "pos": "POR",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Casper",
+     "ln": "Widell",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "SE",
+     "ovr": 70
+    },
+    {
+     "fn": "Noah",
+     "ln": "Naujoks",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Ilias",
+     "ln": "Bronkhorst",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Arthur",
+     "ln": "Zagré",
+     "pos": "LI",
+     "age": 22,
+     "nat": "BF",
+     "ovr": 69
+    },
+    {
+     "fn": "Sven",
+     "ln": "Nagelhout",
+     "pos": "LD",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Julian",
+     "ln": "Baas",
+     "pos": "MC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Elias",
+     "ln": "Mar",
+     "pos": "MC",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Ruben",
+     "ln": "Hoogenboom",
+     "pos": "MC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Marouan",
+     "ln": "Azarkan",
+     "pos": "ED",
+     "age": 31,
+     "nat": "MA",
+     "ovr": 70
+    },
+    {
+     "fn": "Yassin",
+     "ln": "Ben Balla",
+     "pos": "ED",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Lennart",
+     "ln": "Thy",
+     "pos": "DC",
+     "age": 34,
+     "nat": "NL",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "Telstar",
+   "coach": "Henk Brugge",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Rick",
+     "ln": "Hakkens",
+     "pos": "POR",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Mitchell",
+     "ln": "Dijks",
+     "pos": "LI",
+     "age": 33,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Niels",
+     "ln": "Kokx",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Danny",
+     "ln": "Verbeek",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 67
+    },
+    {
+     "fn": "Zion",
+     "ln": "Kuipers",
+     "pos": "MC",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Marijn",
+     "ln": "Dijkstra",
+     "pos": "MC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Wilco",
+     "ln": "Kranendonk",
+     "pos": "MC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Gyrano",
+     "ln": "Kerk",
+     "pos": "ED",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Jayden",
+     "ln": "Addai",
+     "pos": "DC",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "ADO Den Haag",
+   "coach": "Robin Peter",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Luuk",
+     "ln": "Koopmans",
+     "pos": "POR",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Rick",
+     "ln": "Meissen",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Wouter",
+     "ln": "Prins",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 65
+    },
+    {
+     "fn": "Daryl",
+     "ln": "van Mieghem",
+     "pos": "MC",
+     "age": 28,
+     "nat": "BE",
+     "ovr": 67
+    },
+    {
+     "fn": "Jelle",
+     "ln": "Duin",
+     "pos": "ED",
+     "age": 29,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Thijs",
+     "ln": "Dallinga",
+     "pos": "DC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Kristoffer",
+     "ln": "Peterson",
+     "pos": "DC",
+     "age": 31,
+     "nat": "SE",
+     "ovr": 68
+    },
+    {
+     "fn": "Jeremy",
+     "ln": "Bokila",
+     "pos": "DC",
+     "age": 31,
+     "nat": "CD",
+     "ovr": 67
+    }
+   ]
+  },
+  {
+   "club": "Willem II",
+   "coach": "John Stegeman",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Mikki",
+     "ln": "van Sas",
+     "pos": "POR",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 67
+    },
+    {
+     "fn": "Rob",
+     "ln": "Cornelisse",
+     "pos": "POR",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 64
+    },
+    {
+     "fn": "Derrick",
+     "ln": "Köhn",
+     "pos": "LI",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Kevin",
+     "ln": "Felida",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "CW",
+     "ovr": 66
+    },
+    {
+     "fn": "Freek",
+     "ln": "Heerkens",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Mats",
+     "ln": "Seuntjens",
+     "pos": "MC",
+     "age": 35,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Jeremy",
+     "ln": "Cijntje",
+     "pos": "MC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Daniel",
+     "ln": "Crowley",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "ENG",
+     "ovr": 68
+    },
+    {
+     "fn": "Mounir",
+     "ln": "Chouiar",
+     "pos": "DC",
+     "age": 31,
+     "nat": "MA",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "SC Cambuur",
+   "coach": "Johan Plat",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Mandla",
+     "ln": "Mhlongo",
+     "pos": "POR",
+     "age": 24,
+     "nat": "ZA",
+     "ovr": 64
+    },
+    {
+     "fn": "Robin",
+     "ln": "van der Meulen",
+     "pos": "POR",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 63
+    },
+    {
+     "fn": "Ivo",
+     "ln": "Eijkelkamp",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 65
+    },
+    {
+     "fn": "Sven",
+     "ln": "Blummel",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 63
+    },
+    {
+     "fn": "Dennis",
+     "ln": "Johnsen",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "NO",
+     "ovr": 64
+    },
+    {
+     "fn": "Jacky",
+     "ln": "Donkor",
+     "pos": "MCD",
+     "age": 22,
+     "nat": "GH",
+     "ovr": 64
+    },
+    {
+     "fn": "Emil",
+     "ln": "Hansson",
+     "pos": "MC",
+     "age": 28,
+     "nat": "SE",
+     "ovr": 66
+    },
+    {
+     "fn": "Michael",
+     "ln": "Jordan",
+     "pos": "MC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 64
+    },
+    {
+     "fn": "Roberts",
+     "ln": "Uldriķis",
+     "pos": "DC",
+     "age": 31,
+     "nat": "LV",
+     "ovr": 67
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,87 @@
+{
+ "id": "seriea",
+ "league": "Serie A",
+ "country": "IT",
+ "clubs": [
+  {
+   "club": "Inter",
+   "gameRating": 85
+  },
+  {
+   "club": "Napoli",
+   "gameRating": 83.9
+  },
+  {
+   "club": "Juventus",
+   "gameRating": 83.1
+  },
+  {
+   "club": "AC Milan",
+   "gameRating": 82.3
+  },
+  {
+   "club": "Atalanta",
+   "gameRating": 81.5
+  },
+  {
+   "club": "AS Roma",
+   "gameRating": 80.8
+  },
+  {
+   "club": "Como 1907",
+   "gameRating": 80.1
+  },
+  {
+   "club": "Lazio",
+   "gameRating": 79.4
+  },
+  {
+   "club": "Bologna",
+   "gameRating": 78.8
+  },
+  {
+   "club": "Fiorentina",
+   "gameRating": 78.1
+  },
+  {
+   "club": "Torino",
+   "gameRating": 77.5
+  },
+  {
+   "club": "Udinese",
+   "gameRating": 76.8
+  },
+  {
+   "club": "Genoa",
+   "gameRating": 76.2
+  },
+  {
+   "club": "Parma",
+   "gameRating": 75.6
+  },
+  {
+   "club": "Cagliari",
+   "gameRating": 75
+  },
+  {
+   "club": "Sassuolo",
+   "gameRating": 74.4
+  },
+  {
+   "club": "Lecce",
+   "gameRating": 73.8
+  },
+  {
+   "club": "Venezia",
+   "gameRating": 73.2
+  },
+  {
+   "club": "Monza",
+   "gameRating": 72.6
+  },
+  {
+   "club": "Frosinone",
+   "gameRating": 72
+  }
+ ]
+}

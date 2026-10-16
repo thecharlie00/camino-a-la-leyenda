@@ -1,0 +1,908 @@
+{
+ "{name} se duele y pide el cambio.": {
+  "ctx": "if (hurt) { L.hurt = hurt.id; out.push({t: \"inj\", us: 1, txt: tr(\"{name} se duele y pide el cambio.\", {name: plShort(hurt)})}); }",
+  "where": "engine-extra.js:470"
+ },
+ "Descanso: {a}-{b}.": {
+  "ctx": "if (L.min === 45 && !L.half) { L.half = true; out.push({t: \"half\", txt: tr(\"Descanso: {a}-{b}.\", {a: L.gu, b: L.gt})}); }",
+  "where": "engine-extra.js:472"
+ },
+ "¡Final del partido! {a}-{b}.": {
+  "ctx": "if (L.min >= 90 + L.add) { L.done = true; out.push({t: \"end\", txt: tr(\"¡Final del partido! {a}-{b}.\", {a: L.gu, b: L.gt})}); }",
+  "where": "engine-extra.js:473"
+ },
+ "Cambio: entra {a}, sale {b}.": {
+  "ctx": "L.ev.unshift({t: \"sub\", min: L.min, txt: tr(\"Cambio: entra {a}, sale {b}.\", {a: plShort(mPl(inId)), b: plShort(mPl(outId))})});",
+  "where": "engine-extra.js:486"
+ },
+ "Cambias la mentalidad: {m}.": {
+  "ctx": "if (k === \"ment\") { L.ment = v; L.ev.unshift({t: \"tac\", min: L.min, txt: tr(\"Cambias la mentalidad: {m}.\", {m: liveMentName(v)})}); }",
+  "where": "engine-extra.js:491"
+ },
+ "Cambias al {f}.": {
+  "ctx": "if (k === \"form\" && FORMATIONS[v]) { L.form = v; L.ev.unshift({t: \"tac\", min: L.min, txt: tr(\"Cambias al {f}.\", {f: v})}); }",
+  "where": "engine-extra.js:492"
+ },
+ "Encerrarse": {
+  "ctx": "function liveMentName(v) { return {bus: tr(\"Encerrarse\"), 0: tr(\"Defensiva\"), 1: tr(\"Equilibrada\"), 2: tr(\"Ofensiva\"), press: tr(\"Presión alta\")}[v] || \"\"; }",
+  "where": "engine-extra.js:494"
+ },
+ "En directo": {
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"En directo\"), cls: \"hotc\", hot: true, cat: compShort(f) + (roundLabel(f) ? \" · \" + roundLabel(f) : \"\"), ctxTxt: mgrMomLabel(f), title: tr(\"¿Ves el partido o lo simulas?\"),",
+  "where": "engine-extra.js:515 engine-extra.js:528"
+ },
+ "¿Ves el partido o lo simulas?": {
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"En directo\"), cls: \"hotc\", hot: true, cat: compShort(f) + (roundLabel(f) ? \" · \" + roundLabel(f) : \"\"), ctxTxt: mgrMomLabel(f), title: tr(\"¿Ves el partido o lo simulas?\"),",
+  "where": "engine-extra.js:515"
+ },
+ "{us} contra {opp}. Si lo ves, podrás cambiar la mentalidad, el sistema y hacer hasta cinco cambios durante el partido.": {
+  "ctx": "text: tr(\"{us} contra {opp}. Si lo ves, podrás cambiar la mentalidad, el sistema y hacer hasta cinco cambios durante el partido.\", {us: clubName(S.m.club), opp: clubName(f.opp)})}; },",
+  "where": "engine-extra.js:516"
+ },
+ "Ver el partido": {
+  "ctx": "{t: tr(\"Ver el partido\"), d: tr(\"Minuto a minuto, con cambios tácticos.\"), ok: {txt: tr(\"Bajas al banquillo. Empieza el partido.\"), then: function () { var f = S.cur.pm[x.fi]; f.live = true; liveStart(x.fi); S.liveReq = ",
+  "where": "engine-extra.js:518"
+ },
+ "Minuto a minuto, con cambios tácticos.": {
+  "ctx": "{t: tr(\"Ver el partido\"), d: tr(\"Minuto a minuto, con cambios tácticos.\"), ok: {txt: tr(\"Bajas al banquillo. Empieza el partido.\"), then: function () { var f = S.cur.pm[x.fi]; f.live = true; liveStart(x.fi); S.liveReq = ",
+  "where": "engine-extra.js:518"
+ },
+ "Bajas al banquillo. Empieza el partido.": {
+  "ctx": "{t: tr(\"Ver el partido\"), d: tr(\"Minuto a minuto, con cambios tácticos.\"), ok: {txt: tr(\"Bajas al banquillo. Empieza el partido.\"), then: function () { var f = S.cur.pm[x.fi]; f.live = true; liveStart(x.fi); S.liveReq = ",
+  "where": "engine-extra.js:518"
+ },
+ "Simular el partido": {
+  "ctx": "{t: tr(\"Simular el partido\"), ok: {txt: tr(\"Lo sigues desde la grada.\")}},",
+  "where": "engine-extra.js:519"
+ },
+ "Lo sigues desde la grada.": {
+  "ctx": "{t: tr(\"Simular el partido\"), ok: {txt: tr(\"Lo sigues desde la grada.\")}},",
+  "where": "engine-extra.js:519"
+ },
+ "Simular el resto del tramo": {
+  "ctx": "{t: tr(\"Simular el resto del tramo\"), d: tr(\"No te volveremos a preguntar hasta el próximo tramo.\"), ok: {txt: tr(\"Dejas que el equipo juegue.\"), then: function () { S.cur.noLive = true; }}}",
+  "where": "engine-extra.js:520"
+ },
+ "No te volveremos a preguntar hasta el próximo tramo.": {
+  "ctx": "{t: tr(\"Simular el resto del tramo\"), d: tr(\"No te volveremos a preguntar hasta el próximo tramo.\"), ok: {txt: tr(\"Dejas que el equipo juegue.\"), then: function () { S.cur.noLive = true; }}}",
+  "where": "engine-extra.js:520"
+ },
+ "Dejas que el equipo juegue.": {
+  "ctx": "{t: tr(\"Simular el resto del tramo\"), d: tr(\"No te volveremos a preguntar hasta el próximo tramo.\"), ok: {txt: tr(\"Dejas que el equipo juegue.\"), then: function () { S.cur.noLive = true; }}}",
+  "where": "engine-extra.js:520"
+ },
+ "Partido en curso": {
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"En directo\"), cls: \"hotc\", hot: true, cat: compShort(f), ctxTxt: mgrMomLabel(f), title: tr(\"Partido en curso\"),",
+  "where": "engine-extra.js:528"
+ },
+ "Minuto {min}: {a}-{b} contra el {opp}.": {
+  "ctx": "text: L ? tr(\"Minuto {min}: {a}-{b} contra el {opp}.\", {min: L.min, a: L.gu, b: L.gt, opp: clubName(f.opp)}) : \"\"}; },",
+  "where": "engine-extra.js:529"
+ },
+ "Volver al partido": {
+  "ctx": "{t: tr(\"Volver al partido\"), ok: {txt: \"\", then: function () { S.liveReq = x.fi; S.pend.unshift(mp(\"mlivew\", {fi: x.fi, ui: true})); }}},",
+  "where": "engine-extra.js:531"
+ },
+ "Simular lo que queda": {
+  "ctx": "{t: tr(\"Simular lo que queda\"), ok: {txt: tr(\"Simulas el resto del partido.\"), then: function () { if (!S.live) liveStart(x.fi); liveFinish(); }}}",
+  "where": "engine-extra.js:532 ui.js:1734"
+ },
+ "Simulas el resto del partido.": {
+  "ctx": "{t: tr(\"Simular lo que queda\"), ok: {txt: tr(\"Simulas el resto del partido.\"), then: function () { if (!S.live) liveStart(x.fi); liveFinish(); }}}",
+  "where": "engine-extra.js:532"
+ },
+ "Objetivos": {
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),",
+  "where": "engine-extra.js:553 ui.js:1595"
+ },
+ "Elige tus objetivos de la temporada": {
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),",
+  "where": "engine-extra.js:553 ui.js:1596"
+ },
+ "Cuanto más difícil, mayor recompensa si lo cumples.": {
+  "ctx": "text: tr(\"Cuanto más difícil, mayor recompensa si lo cumples.\"), opts: [descOpt({t: tr(\"Confirmar objetivos\"), ok: {txt: \"\"}}, function () { return []; })]};",
+  "where": "engine-extra.js:554"
+ },
+ "Confirmar objetivos": {
+  "ctx": "text: tr(\"Cuanto más difícil, mayor recompensa si lo cumples.\"), opts: [descOpt({t: tr(\"Confirmar objetivos\"), ok: {txt: \"\"}}, function () { return []; })]};",
+  "where": "engine-extra.js:554 engine-extra.js:560 ui.js:1604"
+ },
+ "Escudo clásico": {
+  "ctx": "[\"shield\", N_(\"Escudo clásico\")], [\"pointed\", N_(\"Escudo en punta\")], [\"french\", N_(\"Escudo francés\")],",
+  "where": "crest.js:8"
+ },
+ "Escudo en punta": {
+  "ctx": "[\"shield\", N_(\"Escudo clásico\")], [\"pointed\", N_(\"Escudo en punta\")], [\"french\", N_(\"Escudo francés\")],",
+  "where": "crest.js:8"
+ },
+ "Escudo francés": {
+  "ctx": "[\"shield\", N_(\"Escudo clásico\")], [\"pointed\", N_(\"Escudo en punta\")], [\"french\", N_(\"Escudo francés\")],",
+  "where": "crest.js:8"
+ },
+ "Escudo redondeado": {
+  "ctx": "[\"rounded\", N_(\"Escudo redondeado\")], [\"round\", N_(\"Insignia redonda\")], [\"ring\", N_(\"Redondo con anillo\")],",
+  "where": "crest.js:9"
+ },
+ "Insignia redonda": {
+  "ctx": "[\"rounded\", N_(\"Escudo redondeado\")], [\"round\", N_(\"Insignia redonda\")], [\"ring\", N_(\"Redondo con anillo\")],",
+  "where": "crest.js:9"
+ },
+ "Redondo con anillo": {
+  "ctx": "[\"rounded\", N_(\"Escudo redondeado\")], [\"round\", N_(\"Insignia redonda\")], [\"ring\", N_(\"Redondo con anillo\")],",
+  "where": "crest.js:9"
+ },
+ "Óvalo": {
+  "ctx": "[\"oval\", N_(\"Óvalo\")], [\"diamond\", N_(\"Rombo\")], [\"hexagon\", N_(\"Hexágono\")], [\"octagon\", N_(\"Octógono\")],",
+  "where": "crest.js:10"
+ },
+ "Rombo": {
+  "ctx": "[\"oval\", N_(\"Óvalo\")], [\"diamond\", N_(\"Rombo\")], [\"hexagon\", N_(\"Hexágono\")], [\"octagon\", N_(\"Octógono\")],",
+  "where": "crest.js:10"
+ },
+ "Hexágono": {
+  "ctx": "[\"oval\", N_(\"Óvalo\")], [\"diamond\", N_(\"Rombo\")], [\"hexagon\", N_(\"Hexágono\")], [\"octagon\", N_(\"Octógono\")],",
+  "where": "crest.js:10"
+ },
+ "Octógono": {
+  "ctx": "[\"oval\", N_(\"Óvalo\")], [\"diamond\", N_(\"Rombo\")], [\"hexagon\", N_(\"Hexágono\")], [\"octagon\", N_(\"Octógono\")],",
+  "where": "crest.js:10"
+ },
+ "Banderín": {
+  "ctx": "[\"pennant\", N_(\"Banderín\")], [\"square\", N_(\"Cuadrado redondeado\")], [\"crown\", N_(\"Escudo con corona\")],",
+  "where": "crest.js:11"
+ },
+ "Cuadrado redondeado": {
+  "ctx": "[\"pennant\", N_(\"Banderín\")], [\"square\", N_(\"Cuadrado redondeado\")], [\"crown\", N_(\"Escudo con corona\")],",
+  "where": "crest.js:11"
+ },
+ "Escudo con corona": {
+  "ctx": "[\"pennant\", N_(\"Banderín\")], [\"square\", N_(\"Cuadrado redondeado\")], [\"crown\", N_(\"Escudo con corona\")],",
+  "where": "crest.js:11"
+ },
+ "Escudo cuartelado": {
+  "ctx": "[\"quartered\", N_(\"Escudo cuartelado\")], [\"ball\", N_(\"Balón\")], [\"star\", N_(\"Escudo con estrella\")],",
+  "where": "crest.js:12"
+ },
+ "Balón": {
+  "ctx": "[\"quartered\", N_(\"Escudo cuartelado\")], [\"ball\", N_(\"Balón\")], [\"star\", N_(\"Escudo con estrella\")],",
+  "where": "crest.js:12"
+ },
+ "Escudo con estrella": {
+  "ctx": "[\"quartered\", N_(\"Escudo cuartelado\")], [\"ball\", N_(\"Balón\")], [\"star\", N_(\"Escudo con estrella\")],",
+  "where": "crest.js:12"
+ },
+ "Escudo de puntas": {
+  "ctx": "[\"tab\", N_(\"Escudo de puntas\")]",
+  "where": "crest.js:13"
+ },
+ "Liso": {
+  "ctx": "[\"plain\", N_(\"Liso\")], [\"stripes\", N_(\"Rayas\")], [\"band\", N_(\"Franja\")], [\"halves\", N_(\"Mitades\")],",
+  "where": "crest.js:16"
+ },
+ "Rayas": {
+  "ctx": "[\"plain\", N_(\"Liso\")], [\"stripes\", N_(\"Rayas\")], [\"band\", N_(\"Franja\")], [\"halves\", N_(\"Mitades\")],",
+  "where": "crest.js:16 crest.js:21"
+ },
+ "Franja": {
+  "ctx": "[\"plain\", N_(\"Liso\")], [\"stripes\", N_(\"Rayas\")], [\"band\", N_(\"Franja\")], [\"halves\", N_(\"Mitades\")],",
+  "where": "crest.js:16"
+ },
+ "Mitades": {
+  "ctx": "[\"plain\", N_(\"Liso\")], [\"stripes\", N_(\"Rayas\")], [\"band\", N_(\"Franja\")], [\"halves\", N_(\"Mitades\")],",
+  "where": "crest.js:16 crest.js:22"
+ },
+ "Cuarteles": {
+  "ctx": "[\"quarters\", N_(\"Cuarteles\")], [\"sash\", N_(\"Banda diagonal\")], [\"chevron\", N_(\"Chevrón\")], [\"hoops\", N_(\"Aros\")],",
+  "where": "crest.js:17 crest.js:23"
+ },
+ "Banda diagonal": {
+  "ctx": "[\"quarters\", N_(\"Cuarteles\")], [\"sash\", N_(\"Banda diagonal\")], [\"chevron\", N_(\"Chevrón\")], [\"hoops\", N_(\"Aros\")],",
+  "where": "crest.js:17 crest.js:22"
+ },
+ "Chevrón": {
+  "ctx": "[\"quarters\", N_(\"Cuarteles\")], [\"sash\", N_(\"Banda diagonal\")], [\"chevron\", N_(\"Chevrón\")], [\"hoops\", N_(\"Aros\")],",
+  "where": "crest.js:17"
+ },
+ "Aros": {
+  "ctx": "[\"quarters\", N_(\"Cuarteles\")], [\"sash\", N_(\"Banda diagonal\")], [\"chevron\", N_(\"Chevrón\")], [\"hoops\", N_(\"Aros\")],",
+  "where": "crest.js:17 crest.js:21"
+ },
+ "Cruz": {
+  "ctx": "[\"cross\", N_(\"Cruz\")], [\"border\", N_(\"Bordura\")], [\"chief\", N_(\"Jefe\")]",
+  "where": "crest.js:18"
+ },
+ "Bordura": {
+  "ctx": "[\"cross\", N_(\"Cruz\")], [\"border\", N_(\"Bordura\")], [\"chief\", N_(\"Jefe\")]",
+  "where": "crest.js:18"
+ },
+ "Jefe": {
+  "ctx": "[\"cross\", N_(\"Cruz\")], [\"border\", N_(\"Bordura\")], [\"chief\", N_(\"Jefe\")]",
+  "where": "crest.js:18"
+ },
+ "Lisa": {
+  "ctx": "[\"plain\", N_(\"Lisa\")], [\"stripes\", N_(\"Rayas\")], [\"pinstripes\", N_(\"Rayas finas\")], [\"hoops\", N_(\"Aros\")],",
+  "where": "crest.js:21"
+ },
+ "Rayas finas": {
+  "ctx": "[\"plain\", N_(\"Lisa\")], [\"stripes\", N_(\"Rayas\")], [\"pinstripes\", N_(\"Rayas finas\")], [\"hoops\", N_(\"Aros\")],",
+  "where": "crest.js:21"
+ },
+ "Mitades en diagonal": {
+  "ctx": "[\"halves\", N_(\"Mitades\")], [\"sash\", N_(\"Banda diagonal\")], [\"diagonal\", N_(\"Mitades en diagonal\")],",
+  "where": "crest.js:22"
+ },
+ "Franja en el pecho": {
+  "ctx": "[\"band\", N_(\"Franja en el pecho\")], [\"quarters\", N_(\"Cuarteles\")], [\"sleeves\", N_(\"Mangas a contraste\")],",
+  "where": "crest.js:23"
+ },
+ "Mangas a contraste": {
+  "ctx": "[\"band\", N_(\"Franja en el pecho\")], [\"quarters\", N_(\"Cuarteles\")], [\"sleeves\", N_(\"Mangas a contraste\")],",
+  "where": "crest.js:23"
+ },
+ "Degradado": {
+  "ctx": "[\"gradient\", N_(\"Degradado\")]",
+  "where": "crest.js:24"
+ },
+ "Floja": {
+  "ctx": "function powerWord(v) { return v < IDEAL0 ? t(\"Floja\") : v > IDEAL1 ? t(\"Demasiado fuerte\") : t(\"Ideal\"); }",
+  "where": "minigame.js:55 minigame.js:298"
+ },
+ "Demasiado fuerte": {
+  "ctx": "function powerWord(v) { return v < IDEAL0 ? t(\"Floja\") : v > IDEAL1 ? t(\"Demasiado fuerte\") : t(\"Ideal\"); }",
+  "where": "minigame.js:55"
+ },
+ "Ideal": {
+  "ctx": "function powerWord(v) { return v < IDEAL0 ? t(\"Floja\") : v > IDEAL1 ? t(\"Demasiado fuerte\") : t(\"Ideal\"); }",
+  "where": "minigame.js:55 minigame.js:298"
+ },
+ "Potencia": {
+  "ctx": "hv(\"span\", \"\", pl, t(\"Potencia\"));",
+  "where": "minigame.js:291"
+ },
+ "Fuerte": {
+  "ctx": "hv(\"span\", \"\", lab, t(\"Floja\")); hv(\"span\", \"\", lab, t(\"Ideal\")); hv(\"span\", \"\", lab, t(\"Fuerte\"));",
+  "where": "minigame.js:298"
+ },
+ "Elegir potencia": {
+  "ctx": "ui.pri = hv(\"button\", \"mg-btn pri\", btns, t(\"Elegir potencia\"));",
+  "where": "minigame.js:301"
+ },
+ "Paso {n} de 2": {
+  "ctx": "ui.stepN.textContent = t(\"Paso {n} de 2\", {n: n});",
+  "where": "minigame.js:321"
+ },
+ "¡Lanzar!": {
+  "ctx": "ui.pri.textContent = t(\"¡Lanzar!\");",
+  "where": "minigame.js:338"
+ },
+ "¡GOL!": {
+  "ctx": "var txt = {gol: t(\"¡GOL!\"), parada: t(\"¡PARADA!\"), fuera: t(\"¡FUERA!\"), barrera: t(\"¡A LA BARRERA!\")}[how];",
+  "where": "minigame.js:367"
+ },
+ "¡PARADA!": {
+  "ctx": "var txt = {gol: t(\"¡GOL!\"), parada: t(\"¡PARADA!\"), fuera: t(\"¡FUERA!\"), barrera: t(\"¡A LA BARRERA!\")}[how];",
+  "where": "minigame.js:367"
+ },
+ "¡FUERA!": {
+  "ctx": "var txt = {gol: t(\"¡GOL!\"), parada: t(\"¡PARADA!\"), fuera: t(\"¡FUERA!\"), barrera: t(\"¡A LA BARRERA!\")}[how];",
+  "where": "minigame.js:367"
+ },
+ "¡A LA BARRERA!": {
+  "ctx": "var txt = {gol: t(\"¡GOL!\"), parada: t(\"¡PARADA!\"), fuera: t(\"¡FUERA!\"), barrera: t(\"¡A LA BARRERA!\")}[how];",
+  "where": "minigame.js:367"
+ },
+ "Desde los once metros": {
+  "ctx": "var ui = shell({cls: \"mg-pen\", kicker: t(\"Desde los once metros\"), title: t(\"Penalti\"), chips: [[t(\"Tiro\"), skill], [t(\"Portero\"), gk]]});",
+  "where": "minigame.js:403"
+ },
+ "Penalti": {
+  "ctx": "var ui = shell({cls: \"mg-pen\", kicker: t(\"Desde los once metros\"), title: t(\"Penalti\"), chips: [[t(\"Tiro\"), skill], [t(\"Portero\"), gk]]});",
+  "where": "minigame.js:403"
+ },
+ "Portería": {
+  "ctx": "var svg = sv(\"svg\", {viewBox: \"0 0 360 300\", role: \"img\", \"aria-label\": t(\"Portería\")});",
+  "where": "minigame.js:405"
+ },
+ "Probabilidad de gol: {p} %": {
+  "ctx": "rect = sv(\"rect\", {\"class\": \"mg-cell\", x: info.x + 0.5, y: info.y + 0.5, width: cw - 1, height: ch - 1, fill: chanceColor(info.p), \"fill-opacity\": \".3\", stroke: \"rgba(237,241,232,.14)\", \"stroke-width\": 1, tabindex: 0, ro",
+  "where": "minigame.js:431"
+ },
+ "Toca la zona de la portería donde quieres chutar": {
+  "ctx": "setStep(ui, 1, t(\"Toca la zona de la portería donde quieres chutar\"));",
+  "where": "minigame.js:468"
+ },
+ "Para la barra en la zona verde: toca la pantalla o pulsa Lanzar": {
+  "ctx": "setStep(ui, 2, t(\"Para la barra en la zona verde: toca la pantalla o pulsa Lanzar\"));",
+  "where": "minigame.js:473 minigame.js:756"
+ },
+ "¡Allá va!": {
+  "ctx": "setStep(ui, 2, t(\"¡Allá va!\"));",
+  "where": "minigame.js:486 minigame.js:779"
+ },
+ "Balón parado": {
+  "ctx": "var ui = shell({cls: \"mg-fk\", kicker: t(\"Balón parado\"), title: t(\"Falta directa\"), sec: t(\"Volver a dibujar\"),",
+  "where": "minigame.js:578"
+ },
+ "Falta directa": {
+  "ctx": "var ui = shell({cls: \"mg-fk\", kicker: t(\"Balón parado\"), title: t(\"Falta directa\"), sec: t(\"Volver a dibujar\"),",
+  "where": "minigame.js:578"
+ },
+ "Volver a dibujar": {
+  "ctx": "var ui = shell({cls: \"mg-fk\", kicker: t(\"Balón parado\"), title: t(\"Falta directa\"), sec: t(\"Volver a dibujar\"),",
+  "where": "minigame.js:578"
+ },
+ "Distancia": {
+  "ctx": "chips: [[t(\"Tiro\"), skill], [t(\"Portero\"), gk], [t(\"Distancia\"), t(\"{n} m\", {n: Math.round(dist)})]]});",
+  "where": "minigame.js:579"
+ },
+ "{n} m": {
+  "ctx": "chips: [[t(\"Tiro\"), skill], [t(\"Portero\"), gk], [t(\"Distancia\"), t(\"{n} m\", {n: Math.round(dist)})]]});",
+  "where": "minigame.js:579"
+ },
+ "Campo": {
+  "ctx": "var svg = sv(\"svg\", {viewBox: \"0 0 \" + FK_W + \" \" + FK_H, role: \"img\", \"aria-label\": t(\"Campo\"),",
+  "where": "minigame.js:586"
+ },
+ "Dibuja la trayectoria desde el balón con el dedo": {
+  "ctx": "setStep(ui, 1, t(\"Dibuja la trayectoria desde el balón con el dedo\"));",
+  "where": "minigame.js:713"
+ },
+ "Dibuja una trayectoria más larga, del balón hacia la portería": {
+  "ctx": "setStep(ui, 1, t(\"Dibuja una trayectoria más larga, del balón hacia la portería\"));",
+  "where": "minigame.js:741"
+ },
+ "¡Da en la barrera! Pasa por encima o por un lado": {
+  "ctx": "setStep(ui, 1, ev.blocked ? t(\"¡Da en la barrera! Pasa por encima o por un lado\") : !ev.inside ? t(\"Va fuera: termina la trayectoria dentro de la portería\") : t(\"Puedes volver a dibujar o elegir la potencia\"));",
+  "where": "minigame.js:748"
+ },
+ "Va fuera: termina la trayectoria dentro de la portería": {
+  "ctx": "setStep(ui, 1, ev.blocked ? t(\"¡Da en la barrera! Pasa por encima o por un lado\") : !ev.inside ? t(\"Va fuera: termina la trayectoria dentro de la portería\") : t(\"Puedes volver a dibujar o elegir la potencia\"));",
+  "where": "minigame.js:748"
+ },
+ "Puedes volver a dibujar o elegir la potencia": {
+  "ctx": "setStep(ui, 1, ev.blocked ? t(\"¡Da en la barrera! Pasa por encima o por un lado\") : !ev.inside ? t(\"Va fuera: termina la trayectoria dentro de la portería\") : t(\"Puedes volver a dibujar o elegir la potencia\"));",
+  "where": "minigame.js:748"
+ },
+ "Red": {
+  "ctx": "var t = isMgr() ? [[\"club\", tr(\"Club\"), ICON.board], [\"plantilla\", tr(\"Plantilla\"), ICON.shirt], [\"mercado\", tr(\"Mercado\"), ICON.swap], [\"comp\", tr(\"Competición\"), ICON.table], [\"red\", tr(\"Red\"), ICON.at], [\"hist\", tr(\"H",
+  "where": "ui.js:387 ui.js:388"
+ },
+ "Tú decides": {
+  "ctx": "if (o.mini) badge = '<span class=\"pct mid\">🎯 ' + h(tr(\"Tú decides\")) + \"</span>\";",
+  "where": "ui.js:477"
+ },
+ "Si entra": {
+  "ctx": "lines += '<span class=\"out ' + cls + '\"><span class=\"op\">' + (o.mini ? h(u.good ? tr(\"Si entra\") : tr(\"Si no entra\")) : h(u.lab || (u.good ? tr(\"Bien\") : tr(\"Mal\"))) + \" \" + pc[k] + \" %\") + \"</span>\" + (chips || (u.lab ?",
+  "where": "ui.js:486"
+ },
+ "Si no entra": {
+  "ctx": "lines += '<span class=\"out ' + cls + '\"><span class=\"op\">' + (o.mini ? h(u.good ? tr(\"Si entra\") : tr(\"Si no entra\")) : h(u.lab || (u.good ? tr(\"Bien\") : tr(\"Mal\"))) + \" \" + pc[k] + \" %\") + \"</span>\" + (chips || (u.lab ?",
+  "where": "ui.js:486"
+ },
+ "Sala de prensa": {
+  "ctx": "s += '<svg class=\"pressroom\" viewBox=\"0 0 360 168\" role=\"img\" aria-label=\"' + h(tr(\"Sala de prensa\")) + '\"><defs>';",
+  "where": "ui.js:498"
+ },
+ "¿En qué vas a trabajar esta temporada? Esto es lo que te subirá al terminarla.": {
+  "ctx": "o += '<section class=\"card decision\"><div class=\"head\"><span class=\"tag real\"><span class=\"dot\"></span>' + tr(\"Decisión de carrera\") + '</span><span class=\"eyebrow\">' + tr(\"Entrenamiento\") + '</span></div><h3>' + tr(\"Pla",
+  "where": "ui.js:559"
+ },
+ "Media: +3 % de progresión": {
+  "ctx": "var gain = al.length ? al.map(function (a) { return '<span class=\"chip up\">' + h(tr(ATT_NAMES[a])) + \" +2</span>\"; }).join(\"\") : '<span class=\"chip up\">' + h(tr(\"Media: +3 % de progresión\")) + \"</span>\";",
+  "where": "ui.js:563"
+ },
+ "Port. a cero": {
+  "ctx": "? '<div class=\"stat\"><b>' + r.cs + '</b><span>' + tr(\"Port. a cero\") + '</span></div><div class=\"stat\"><b>' + r.gc + '</b><span>' + tr(\"Encajados\") + '</span></div>'",
+  "where": "ui.js:740"
+ },
+ "Encajados": {
+  "ctx": "? '<div class=\"stat\"><b>' + r.cs + '</b><span>' + tr(\"Port. a cero\") + '</span></div><div class=\"stat\"><b>' + r.gc + '</b><span>' + tr(\"Encajados\") + '</span></div>'",
+  "where": "ui.js:740"
+ },
+ "{cs} porterías a cero y {gc} goles encajados ({avg} por partido).": {
+  "ctx": "if (gkRow && r.apps) o += '<p class=\"muted\" style=\"font-size:13px;margin:8px 0 0\">' + tr(\"{cs} porterías a cero y {gc} goles encajados ({avg} por partido).\", {cs: r.cs, gc: r.gc, avg: fmtDec(r.gc / Math.max(1, r.apps), 2",
+  "where": "ui.js:742"
+ },
+ "PC": {
+  "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +",
+  "where": "ui.js:981"
+ },
+ "Goles encajados": {
+  "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +",
+  "where": "ui.js:981"
+ },
+ "GE": {
+  "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +",
+  "where": "ui.js:981"
+ },
+ "Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.": {
+  "ctx": "var desc = {promesa: tr(\"Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.\"), joya: tr(\"Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.\"), elegido: t",
+  "where": "ui.js:1216"
+ },
+ "Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.": {
+  "ctx": "var desc = {promesa: tr(\"Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.\"), joya: tr(\"Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.\"), elegido: t",
+  "where": "ui.js:1216"
+ },
+ "Empiezas con 65. Todos esperan mucho de ti, y eso también pesa.": {
+  "ctx": "var desc = {promesa: tr(\"Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.\"), joya: tr(\"Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.\"), elegido: t",
+  "where": "ui.js:1216"
+ },
+ "Tu media inicial es una sorpresa. Nadie sabe qué futbolista puedes llegar a ser.": {
+  "ctx": "var desc = {promesa: tr(\"Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti.\"), joya: tr(\"Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba.\"), elegido: t",
+  "where": "ui.js:1216"
+ },
+ "Intenso: más decisiones y momentos clave. Además, antes de cada partido eliges si verlo en directo, con cambios tácticos y sustituciones, o simularlo.": {
+  "ctx": "if (ev === 2) return mgr ? tr(\"Intenso: más decisiones y momentos clave. Además, antes de cada partido eliges si verlo en directo, con cambios tácticos y sustituciones, o simularlo.\") : tr(\"Intenso: más decisiones, impre",
+  "where": "ui.js:1269"
+ },
+ "Intenso: más decisiones, imprevistos y momentos clave en los partidos.": {
+  "ctx": "if (ev === 2) return mgr ? tr(\"Intenso: más decisiones y momentos clave. Además, antes de cada partido eliges si verlo en directo, con cambios tácticos y sustituciones, o simularlo.\") : tr(\"Intenso: más decisiones, impre",
+  "where": "ui.js:1269"
+ },
+ "Tranquilo: pocas decisiones; la carrera avanza rápido.": {
+  "ctx": "if (ev === 0) return tr(\"Tranquilo: pocas decisiones; la carrera avanza rápido.\");",
+  "where": "ui.js:1270"
+ },
+ "Normal: un equilibrio entre decisiones y partidos.": {
+  "ctx": "return tr(\"Normal: un equilibrio entre decisiones y partidos.\");",
+  "where": "ui.js:1271"
+ },
+ "La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiva.": {
+  "ctx": "o += \"<h3>\" + tr(\"Elige tus objetivos de la temporada\") + '</h3><p class=\"lead\">' + (isMgr() ? tr(\"La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiv",
+  "where": "ui.js:1596"
+ },
+ "La dificultad depende de tu media y de tu contrato con el club. Cuanto más difícil, mayor recompensa si lo cumples.": {
+  "ctx": "o += \"<h3>\" + tr(\"Elige tus objetivos de la temporada\") + '</h3><p class=\"lead\">' + (isMgr() ? tr(\"La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiv",
+  "where": "ui.js:1596"
+ },
+ "La afición te llama «{nick}»": {
+  "ctx": "function nickLine(o) { var n = nickName(o); return n ? '<p class=\"nick\">' + tr(\"La afición te llama «{nick}»\", {nick: h(n)}) + \"</p>\" : \"\"; }",
+  "where": "ui.js:1607"
+ },
+ "Forma del escudo": {
+  "ctx": "var s = '<div><label class=\"lbl\">' + tr(\"Forma del escudo\") + '</label><div class=\"shapes\">' + CREST_SHAPES.map(function (x) {",
+  "where": "ui.js:1611"
+ },
+ "Diseño del escudo": {
+  "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Diseño del escudo\") + '</label><div class=\"chips\">' + CREST_PATS.map(function (x) {",
+  "where": "ui.js:1614"
+ },
+ "Equipación": {
+  "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Equipación\") + '</label><div class=\"shapes\">' + KIT_PATS.map(function (x) {",
+  "where": "ui.js:1617"
+ },
+ "Color de los detalles": {
+  "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Color de los detalles\") + '</label><div class=\"swatches\">' + CLUB_COLS.map(function (col) { return '<button class=\"sw\" data-a=\"ccol\" data-k=\"2\" data-v=\"' + col + '\" style=\"background",
+  "where": "ui.js:1620"
+ },
+ "Verificado": {
+  "ctx": "return '<article class=\"spost' + (p.m < 0 ? \" neg\" : p.m > 0 ? \" posm\" : \"\") + '\">' + avHTML + '<div class=\"sbody\"><div class=\"shead\"><b>' + h(nm) + \"</b>\" + (ver ? '<span class=\"sver\" aria-label=\"' + h(tr(\"Verificado\"))",
+  "where": "ui.js:1640"
+ },
+ "Editar perfil": {
+  "ctx": "var s = '<div class=\"stack\"><section class=\"card sprof\"><div class=\"sban\" style=\"background:' + h(prof.col) + '\"></div><div class=\"sinfo\"><div class=\"srow\"><span class=\"sav big\" style=\"background:' + h(prof.col) + '\">' +",
+  "where": "ui.js:1647 ui.js:1664"
+ },
+ "Para la afición: «{nick}»": {
+  "ctx": "if (n) s += '<p class=\"muted\" style=\"margin:6px 0 0;font-size:13px\">' + tr(\"Para la afición: «{nick}»\", {nick: h(n)}) + \"</p>\";",
+  "where": "ui.js:1651"
+ },
+ "seguidores": {
+  "ctx": "s += '<div class=\"sfol\"><span><b>' + h(fmtFol(fol)) + \"</b> \" + tr(\"seguidores\") + \"</span><span><b>\" + (180 + (hashStr(prof.handle) % 400)) + \"</b> \" + tr(\"siguiendo\") + \"</span></div></div></section>\";",
+  "where": "ui.js:1652"
+ },
+ "siguiendo": {
+  "ctx": "s += '<div class=\"sfol\"><span><b>' + h(fmtFol(fol)) + \"</b> \" + tr(\"seguidores\") + \"</span><span><b>\" + (180 + (hashStr(prof.handle) % 400)) + \"</b> \" + tr(\"siguiendo\") + \"</span></div></div></section>\";",
+  "where": "ui.js:1652"
+ },
+ "Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.": {
+  "ctx": "if (!soc.posts.length) s += '<p class=\"empty\">' + tr(\"Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.\") + \"</p>\";",
+  "where": "ui.js:1653"
+ },
+ "Usuario": {
+  "ctx": "'<div><label class=\"lbl\" for=\"shandle\">' + tr(\"Usuario\") + '</label><input type=\"text\" id=\"shandle\" value=\"' + h(p.handle) + '\" maxlength=\"15\" autocomplete=\"off\"></div>' +",
+  "where": "ui.js:1665"
+ },
+ "Biografía": {
+  "ctx": "'<div><label class=\"lbl\" for=\"sbio\">' + tr(\"Biografía\") + '</label><textarea id=\"sbio\" maxlength=\"140\" style=\"min-height:70px\">' + h(p.bio) + \"</textarea></div>\" +",
+  "where": "ui.js:1666"
+ },
+ "Avatar": {
+  "ctx": "'<div><label class=\"lbl\">' + tr(\"Avatar\") + '</label><div class=\"chips\">' + SOC_AV.map(function (a) { return '<button class=\"chipb av\" data-a=\"socav\" data-v=\"' + h(a) + '\" aria-pressed=\"' + (p.av === a) + '\">' + h(a) + \"",
+  "where": "ui.js:1667"
+ },
+ "Color del perfil": {
+  "ctx": "'<div><label class=\"lbl\">' + tr(\"Color del perfil\") + '</label><div class=\"swatches\">' + SOC_COL.map(function (c) { return '<button class=\"sw\" data-a=\"soccol\" data-v=\"' + c + '\" style=\"background:' + c + '\" aria-pressed=",
+  "where": "ui.js:1668"
+ },
+ "Posesión": {
+  "ctx": "s += '<div class=\"lstats\"><div><span>' + tr(\"Posesión\") + '</span><b class=\"num\">' + pu + \" % – \" + (100 - pu) + ' %</b></div><div><span>' + tr(\"Tiros (a puerta)\") + '</span><b class=\"num\">' + L.shots[0] + \" (\" + L.on[0]",
+  "where": "ui.js:1719"
+ },
+ "Tiros (a puerta)": {
+  "ctx": "s += '<div class=\"lstats\"><div><span>' + tr(\"Posesión\") + '</span><b class=\"num\">' + pu + \" % – \" + (100 - pu) + ' %</b></div><div><span>' + tr(\"Tiros (a puerta)\") + '</span><b class=\"num\">' + L.shots[0] + \" (\" + L.on[0]",
+  "where": "ui.js:1719"
+ },
+ "Velocidad {n}": {
+  "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L",
+  "where": "ui.js:1722"
+ },
+ "Pausa": {
+  "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L",
+  "where": "ui.js:1722"
+ },
+ "Sistema": {
+  "ctx": "s += '<div class=\"lrow\"><label class=\"lbl\" for=\"lform\">' + tr(\"Sistema\") + '</label><select id=\"lform\" data-live=\"form\">' + Object.keys(FORMATIONS).map(function (k) { return '<option value=\"' + k + '\"' + (k === L.form ? ",
+  "where": "ui.js:1724"
+ },
+ "Te queda {n} cambio": {
+  "ctx": "'<span class=\"muted\" style=\"font-size:13px\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
+  "where": "ui.js:1725",
+  "note": "plural:singular"
+ },
+ "Te quedan {n} cambios": {
+  "ctx": "'<span class=\"muted\" style=\"font-size:13px\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
+  "where": "ui.js:1725",
+  "note": "plural:plural"
+ },
+ "En el campo": {
+  "ctx": "s += '<div class=\"lsubs\"><div><div class=\"lbl\">' + tr(\"En el campo\") + \"</div>\" + L.xi.map(function (id, i) { var p = mPl(id); if (!p) return \"\"; return '<button class=\"lpl' + (LV.sel === id ? \" on\" : \"\") + (id === L.red",
+  "where": "ui.js:1728"
+ },
+ "Sin suplentes": {
+  "ctx": "s += \"<div><div class=\\\"lbl\\\">\" + tr(\"Banquillo\") + \"</div>\" + (L.bench.length ? L.bench.map(function (id) { var p = mPl(id); if (!p) return \"\"; return '<button class=\"lpl\" data-a=\"lin\" data-id=\"' + id + '\"' + (LV.sel ==",
+  "where": "ui.js:1729"
+ },
+ "Ahora elige quién entra.": {
+  "ctx": "if (LV.sel != null) s += '<p class=\"muted\" style=\"font-size:13px;margin:4px 0 0\">' + tr(\"Ahora elige quién entra.\") + \"</p>\";",
+  "where": "ui.js:1730"
+ },
+ "Volver al vestuario": {
+  "ctx": "s += L.done ? '<button class=\"go\" data-a=\"lend\">' + tr(\"Volver al vestuario\") + \" \" + ICON.play + \"</button>\" : '<button class=\"btn wide\" data-a=\"lsim\">' + tr(\"Simular lo que queda\") + \"</button>\";",
+  "where": "ui.js:1734"
+ },
+ "Objetivos fijados. ¡A por ellos!": {
+  "ctx": "case \"objok\": if (confirmObjChoice()) { persist(); toast(tr(\"Objetivos fijados. ¡A por ellos!\")); render(true); } break;",
+  "where": "ui.js:1955"
+ },
+ "Perfil actualizado": {
+  "ctx": "UI.sheet = null; persist(); render(false); toast(tr(\"Perfil actualizado\"));",
+  "where": "ui.js:1969"
+ },
+ "Un escrito para exigir igualdad": {
+  "ctx": "Título de la decisión «x_demanda_igualdad»",
+  "where": "evento:x_demanda_igualdad"
+ },
+ "Igualdad": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:x_demanda_igualdad"
+ },
+ "En marzo de 2019, 28 jugadoras de la selección femenina de EE. UU. demandaron a su federación por discriminación salarial. En 2022 lograron un acuerdo de 24 millones de dólares y la promesa de igualar las primas con las de la selección masculina.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_demanda_igualdad"
+ },
+ "Tu gesto, hecho marca": {
+  "ctx": "Título de la decisión «x_gesto_marca»",
+  "where": "evento:x_gesto_marca"
+ },
+ "Marca personal": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:x_gesto_marca"
+ },
+ "En el Mundial de 2019, Megan Rapinoe celebró sus goles con los brazos abiertos de par en par. La pose dio la vuelta al mundo y se convirtió en una de las imágenes del torneo.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_gesto_marca"
+ },
+ "Una vuelta con prisa": {
+  "ctx": "Título de la decisión «x_cruzado_vuelta»",
+  "where": "evento:x_cruzado_vuelta"
+ },
+ "En julio de 2022, Alexia Putellas, la mejor jugadora del mundo, se rompió el ligamento cruzado a las puertas de la Eurocopa. Volvió a jugar en 2023 y ese año fue campeona del mundo con España.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_cruzado_vuelta"
+ },
+ "¿Plantarte con tu selección?": {
+  "ctx": "Título de la decisión «x_plante_seleccion»",
+  "where": "evento:x_plante_seleccion"
+ },
+ "Ada Hegerberg, primera ganadora del Balón de Oro femenino (2018), dejó la selección de Noruega en 2017 en protesta por el trato a las jugadoras y se perdió el Mundial de 2019.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_plante_seleccion"
+ },
+ "Una voltereta para celebrar": {
+  "ctx": "Título de la decisión «x_voltereta»",
+  "where": "evento:x_voltereta"
+ },
+ "Sam Kerr, máxima goleadora de la historia de Australia, celebraba sus goles con una voltereta hacia atrás que se convirtió en su sello.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_voltereta"
+ },
+ "El gol de la prórroga": {
+  "ctx": "Título de la decisión «x_camiseta_fuera»",
+  "where": "evento:x_camiseta_fuera"
+ },
+ "En la final de la Eurocopa 2022, Chloe Kelly marcó el gol del título de Inglaterra en la prórroga y celebró quitándose la camiseta y dando vueltas con ella en la mano.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_camiseta_fuera"
+ },
+ "Una carta por el fútbol en los colegios": {
+  "ctx": "Título de la decisión «x_carta_colegios»",
+  "where": "evento:x_carta_colegios"
+ },
+ "Tras ganar la Eurocopa de 2022, las jugadoras de Inglaterra escribieron una carta abierta a los aspirantes a primer ministro para pedir que todas las niñas pudieran jugar al fútbol en el colegio en las mismas condiciones que los niños.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_carta_colegios"
+ },
+ "Tu camiseta no se vende": {
+  "ctx": "Título de la decisión «x_camiseta_agotada»",
+  "where": "evento:x_camiseta_agotada"
+ },
+ "En 2023, Nike no vendía la camiseta de portera de Mary Earps, la mejor guardameta del mundo según la FIFA. Tras la presión de las aficionadas y de la propia jugadora, la marca acabó lanzándola.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_camiseta_agotada"
+ },
+ "Huelga antes del torneo": {
+  "ctx": "Título de la decisión «x_bajo_protesta»",
+  "where": "evento:x_bajo_protesta"
+ },
+ "En 2023, las jugadoras de la selección de Canadá amenazaron con una huelga por los recortes de su federación y acabaron jugando «bajo protesta» para no perderse un torneo.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_bajo_protesta"
+ },
+ "Un mensaje para quien viene detrás": {
+  "ctx": "Título de la decisión «x_mensaje_jovenes»",
+  "where": "evento:x_mensaje_jovenes"
+ },
+ "Tras la eliminación de Brasil en el Mundial de 2019, Marta lanzó un mensaje a las jóvenes: «llorar al principio para sonreír al final», y pidió que no dejaran morir el fútbol femenino.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_mensaje_jovenes"
+ },
+ "El quinto penalti": {
+  "ctx": "Título de la decisión «x_quinto_penalti»",
+  "where": "evento:x_quinto_penalti"
+ },
+ "En la final del Mundial de 1999, Brandi Chastain marcó el penalti que dio el título a EE. UU. ante China y lo celebró quitándose la camiseta, una de las imágenes más famosas de la historia del deporte.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_quinto_penalti"
+ },
+ "Una baja familiar": {
+  "ctx": "Título de la decisión «x_baja_familiar»",
+  "where": "evento:x_baja_familiar"
+ },
+ "La islandesa Sara Björk Gunnarsdóttir denunció que el Olympique de Lyon no le pagó el salario completo durante su embarazo, y la FIFA le dio la razón. Desde 2021, el reglamento de la FIFA garantiza al menos catorce semanas de baja de maternidad pagada.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_baja_familiar"
+ },
+ "Un penalti, tú y la lanzadora": {
+  "ctx": "Título de la decisión «x_portera_penaltis»",
+  "where": "evento:x_portera_penaltis"
+ },
+ "En la final del Mundial de 2007, Nadine Angerer paró un penalti a Marta y Alemania ganó sin recibir un solo gol en todo el torneo. En 2013 fue la primera portera elegida mejor jugadora del año por la FIFA.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_portera_penaltis"
+ },
+ "Del once al banquillo": {
+  "ctx": "Título de la decisión «x_banquillo_leyenda»",
+  "where": "evento:x_banquillo_leyenda"
+ },
+ "En el Mundial de 2011, Birgit Prinz, tres veces mejor jugadora del mundo para la FIFA, perdió la titularidad con Alemania y poco después dejó la selección.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_banquillo_leyenda"
+ },
+ "A un gol del récord": {
+  "ctx": "Título de la decisión «x_record_goles»",
+  "where": "evento:x_record_goles"
+ },
+ "Christine Sinclair, capitana de Canadá, batió en 2020 el récord de goles con una selección de toda la historia, masculino o femenino, y lo dejó en 190.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_record_goles"
+ },
+ "Un estadio de récord": {
+  "ctx": "Título de la decisión «x_estadio_lleno»",
+  "where": "evento:x_estadio_lleno"
+ },
+ "La final de la Eurocopa femenina de 2022 reunió a 87.192 personas en Wembley, récord de asistencia en una Eurocopa de cualquier categoría.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_estadio_lleno"
+ },
+ "El fichaje más caro de la liga": {
+  "ctx": "Título de la decisión «x_fichaje_record»",
+  "where": "evento:x_fichaje_record"
+ },
+ "En 2020, la delantera danesa Pernille Harder fichó por el Chelsea en el traspaso más caro hasta entonces del fútbol femenino.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_fichaje_record"
+ },
+ "La portera, muy adelantada": {
+  "ctx": "Título de la decisión «x_gol_medio_campo»",
+  "where": "evento:x_gol_medio_campo"
+ },
+ "En la final del Mundial de 2015, Carli Lloyd marcó tres goles a Japón en dieciséis minutos; el tercero, desde el círculo central, al ver a la portera muy adelantada.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_gol_medio_campo"
+ },
+ "Un bulo corre por las redes": {
+  "ctx": "Título de la decisión «x_bulo_redes»",
+  "where": "evento:x_bulo_redes"
+ },
+ "Los datos no cuadran": {
+  "ctx": "Título de la decisión «x_datos_gps»",
+  "where": "evento:x_datos_gps"
+ },
+ "Datos": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:x_datos_gps evento:mx_datos"
+ },
+ "Plan de prevención de lesiones": {
+  "ctx": "Título de la decisión «x_prevencion»",
+  "where": "evento:x_prevencion"
+ },
+ "La camiseta nueva no gusta": {
+  "ctx": "Título de la decisión «x_nueva_camiseta»",
+  "where": "evento:x_nueva_camiseta"
+ },
+ "El VAR te anula un gol": {
+  "ctx": "Título de la decisión «x_var_anulado»",
+  "where": "evento:x_var_anulado"
+ },
+ "El Mundial femenino de 2019 fue el primero de la historia de los Mundiales femeninos en usar el VAR.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:x_var_anulado"
+ },
+ "La grada da la espalda": {
+  "ctx": "Título de la decisión «x_boicot_grada»",
+  "where": "evento:x_boicot_grada"
+ },
+ "Mudanza de estadio": {
+  "ctx": "Título de la decisión «x_nuevo_estadio»",
+  "where": "evento:x_nuevo_estadio"
+ },
+ "Patrocinador contra patrocinador": {
+  "ctx": "Título de la decisión «x_conflicto_patrocinio»",
+  "where": "evento:x_conflicto_patrocinio"
+ },
+ "Una convocatoria incómoda": {
+  "ctx": "Título de la decisión «x_llamada_seleccion»",
+  "where": "evento:x_llamada_seleccion"
+ },
+ "Haces de traductor": {
+  "ctx": "Título de la decisión «x_traductor»",
+  "where": "evento:x_traductor"
+ },
+ "Tu mejor jugador va sin gasolina": {
+  "ctx": "Título de la decisión «mx_rotar_estrella»",
+  "where": "evento:mx_rotar_estrella"
+ },
+ "Aitana Bonmatí ganó tres Balones de Oro femeninos seguidos (2023, 2024 y 2025), con un calendario casi sin pausas entre club y selección.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_rotar_estrella"
+ },
+ "Los jugadores te dan un ultimátum": {
+  "ctx": "Título de la decisión «mx_las_quince»",
+  "where": "evento:mx_las_quince"
+ },
+ "En septiembre de 2022, quince jugadoras de la selección española comunicaron a su federación que no jugarían con ella mientras no cambiara la situación. Un año después, España ganó el Mundial de 2023.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_las_quince"
+ },
+ "La selección te llama": {
+  "ctx": "Título de la decisión «mx_hayes_seleccion»",
+  "where": "evento:mx_hayes_seleccion"
+ },
+ "En 2024, Emma Hayes dejó el Chelsea, con el que había ganado siete ligas inglesas, para dirigir a la selección de EE. UU., con la que ganó el oro olímpico ese mismo verano.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_hayes_seleccion"
+ },
+ "¿Mudamos el partido al estadio grande?": {
+  "ctx": "Título de la decisión «mx_estadio_grande»",
+  "where": "evento:mx_estadio_grande"
+ },
+ "En marzo de 2022, 91.553 personas llenaron el Camp Nou para ver al Barcelona ante el Real Madrid, récord mundial de asistencia a un partido de fútbol femenino en aquel momento.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_estadio_grande"
+ },
+ "¿Una dinastía?": {
+  "ctx": "Título de la decisión «mx_dinastia»",
+  "where": "evento:mx_dinastia"
+ },
+ "El Olympique de Lyon ha ganado ocho Champions League femeninas, cinco seguidas entre 2016 y 2020, con una plantilla llena de estrellas.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_dinastia"
+ },
+ "La fiebre de la selección": {
+  "ctx": "Título de la decisión «mx_fiebre_seleccion»",
+  "where": "evento:mx_fiebre_seleccion"
+ },
+ "En el Mundial de 2023, la semifinal de Australia ante Inglaterra fue vista por más de once millones de personas en el país, una de las mayores audiencias televisivas de su historia.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_fiebre_seleccion"
+ },
+ "Una oferta de récord": {
+  "ctx": "Título de la decisión «mx_oferta_millon»",
+  "where": "evento:mx_oferta_millon"
+ },
+ "En 2025, el Arsenal pagó un millón de libras por la delantera canadiense Olivia Smith, el primer traspaso de ese importe en el fútbol femenino.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_oferta_millon"
+ },
+ "Primas para todos por igual": {
+  "ctx": "Título de la decisión «mx_primas_iguales»",
+  "where": "evento:mx_primas_iguales"
+ },
+ "En 2022, las selecciones femenina y masculina de EE. UU. firmaron convenios que igualaban sus primas, incluidos los premios de los Mundiales, que se reparten a partes iguales.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_primas_iguales"
+ },
+ "Un veterano quiere seguir": {
+  "ctx": "Título de la decisión «mx_veterana_40»",
+  "where": "evento:mx_veterana_40"
+ },
+ "La brasileña Formiga jugó siete Mundiales femeninos, de 1995 a 2019, el último con 41 años.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_veterana_40"
+ },
+ "Una guitarra antes del partido": {
+  "ctx": "Título de la decisión «mx_guitarra»",
+  "where": "evento:mx_guitarra"
+ },
+ "Pia Sundhage, seleccionadora de EE. UU., tocaba la guitarra y cantaba para sus jugadoras; ganó el oro olímpico en 2008 y 2012.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_guitarra"
+ },
+ "Un amistoso benéfico": {
+  "ctx": "Título de la decisión «mx_benefico»",
+  "where": "evento:mx_benefico"
+ },
+ "El 26 de diciembre de 1920, 53 000 personas vieron en Goodison Park un partido benéfico del Dick, Kerr Ladies, y otras 10 000 se quedaron fuera.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_benefico"
+ },
+ "Un banquillo con hambre": {
+  "ctx": "Título de la decisión «mx_revulsivos»",
+  "where": "evento:mx_revulsivos"
+ },
+ "En la Eurocopa de 2022, Inglaterra de Sarina Wiegman ganó el título con goles decisivos de jugadoras que salieron desde el banquillo: Toone, Russo y Kelly, autora del gol de la final.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mx_revulsivos"
+ },
+ "Los números no mienten": {
+  "ctx": "Título de la decisión «mx_datos»",
+  "where": "evento:mx_datos"
+ },
+ "Parada técnica por lesiones": {
+  "ctx": "Título de la decisión «mx_prevencion»",
+  "where": "evento:mx_prevencion"
+ },
+ "Cámaras en el vestuario": {
+  "ctx": "Título de la decisión «mx_camaras»",
+  "where": "evento:mx_camaras"
+ },
+ "El VAR os deja sin puntos": {
+  "ctx": "Título de la decisión «mx_var»",
+  "where": "evento:mx_var"
+ },
+ "La grada se calla": {
+  "ctx": "Título de la decisión «mx_boicot»",
+  "where": "evento:mx_boicot"
+ },
+ "El club se muda de estadio": {
+  "ctx": "Título de la decisión «mx_nuevo_campo»",
+  "where": "evento:mx_nuevo_campo"
+ },
+ "Un patrocinador incómodo": {
+  "ctx": "Título de la decisión «mx_patrocinio»",
+  "where": "evento:mx_patrocinio"
+ },
+ "Un amistoso inoportuno": {
+  "ctx": "Título de la decisión «mx_convocatorias»",
+  "where": "evento:mx_convocatorias"
+ },
+ "Reformar la academia": {
+  "ctx": "Título de la decisión «mx_academia»",
+  "where": "evento:mx_academia"
+ },
+ "Un fichaje que no entiende nada": {
+  "ctx": "Título de la decisión «mx_fichaje_idioma»",
+  "where": "evento:mx_fichaje_idioma"
+ }
+}

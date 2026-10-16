@@ -1,0 +1,3156 @@
+{
+ "Conference League": {
+  "ctx": "Nombre de competición: Conference League",
+  "where": "data:competición"
+ },
+ "Copa Sudamericana": {
+  "ctx": "Nombre de competición: Copa Sudamericana",
+  "where": "data:competición"
+ },
+ "AFC Champions League Elite": {
+  "ctx": "Nombre de competición: AFC Champions League Elite",
+  "where": "data:competición"
+ },
+ "CAF Champions League": {
+  "ctx": "Nombre de competición: CAF Champions League",
+  "where": "data:competición"
+ },
+ "Concacaf Champions Cup": {
+  "ctx": "Nombre de competición: Concacaf Champions Cup",
+  "where": "data:competición"
+ },
+ "UEFA Nations League": {
+  "ctx": "Nombre de competición: UEFA Nations League",
+  "where": "data:competición"
+ },
+ "Supercopa de Europa": {
+  "ctx": "Nombre de competición: Supercopa de Europa",
+  "where": "data:competición"
+ },
+ "Recopa Sudamericana": {
+  "ctx": "Nombre de competición: Recopa Sudamericana",
+  "where": "data:competición"
+ },
+ "Copa Intercontinental": {
+  "ctx": "Nombre de competición: Copa Intercontinental",
+  "where": "data:competición"
+ },
+ "Copa": {
+  "ctx": "Nombre corto de competición (para marcadores): Copa",
+  "where": "data:competición-corta"
+ },
+ "Conference": {
+  "ctx": "Nombre corto de competición (para marcadores): Conference",
+  "where": "data:competición-corta"
+ },
+ "AFC Champions": {
+  "ctx": "Nombre corto de competición (para marcadores): AFC Champions",
+  "where": "data:competición-corta"
+ },
+ "CAF Champions": {
+  "ctx": "Nombre corto de competición (para marcadores): CAF Champions",
+  "where": "data:competición-corta"
+ },
+ "Concachampions": {
+  "ctx": "Nombre corto de competición (para marcadores): Concachampions",
+  "where": "data:competición-corta"
+ },
+ "Supercopa": {
+  "ctx": "Nombre corto de competición (para marcadores): Supercopa",
+  "where": "data:competición-corta"
+ },
+ "Supercopa UEFA": {
+  "ctx": "Nombre corto de competición (para marcadores): Supercopa UEFA",
+  "where": "data:competición-corta"
+ },
+ "Recopa": {
+  "ctx": "Nombre corto de competición (para marcadores): Recopa",
+  "where": "data:competición-corta"
+ },
+ "Intercontinental": {
+  "ctx": "Nombre corto de competición (para marcadores): Intercontinental",
+  "where": "data:competición-corta"
+ },
+ "FA Cup": {
+  "ctx": "Copa nacional de ENG. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa del Rey": {
+  "ctx": "Copa nacional de ES. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Coppa Italia": {
+  "ctx": "Copa nacional de IT. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "DFB-Pokal": {
+  "ctx": "Copa nacional de DE. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Coupe de France": {
+  "ctx": "Copa nacional de FR. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Taça de Portugal": {
+  "ctx": "Copa nacional de PT. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "KNVB Beker": {
+  "ctx": "Copa nacional de NL. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Bélgica": {
+  "ctx": "Copa nacional de BE. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Turquía": {
+  "ctx": "Copa nacional de TR. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Scottish Cup": {
+  "ctx": "Copa nacional de SCO. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "ÖFB-Cup": {
+  "ctx": "Copa nacional de AT. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Suiza": {
+  "ctx": "Copa nacional de CH. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Dinamarca": {
+  "ctx": "Copa nacional de DK. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Noruega": {
+  "ctx": "Copa nacional de NO. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Suecia": {
+  "ctx": "Copa nacional de SE. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Chequia": {
+  "ctx": "Copa nacional de CZ. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Grecia": {
+  "ctx": "Copa nacional de GR. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Polonia": {
+  "ctx": "Copa nacional de PL. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Croacia": {
+  "ctx": "Copa nacional de HR. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Serbia": {
+  "ctx": "Copa nacional de RS. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Ucrania": {
+  "ctx": "Copa nacional de UA. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Rusia": {
+  "ctx": "Copa nacional de RU. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Rumanía": {
+  "ctx": "Copa nacional de RO. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Hungría": {
+  "ctx": "Copa nacional de HU. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Chipre": {
+  "ctx": "Copa nacional de CY. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Israel": {
+  "ctx": "Copa nacional de IL. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Bulgaria": {
+  "ctx": "Copa nacional de BG. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Eslovaquia": {
+  "ctx": "Copa nacional de SK. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "FAI Cup": {
+  "ctx": "Copa nacional de IE. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa Argentina": {
+  "ctx": "Copa nacional de AR. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa do Brasil": {
+  "ctx": "Copa nacional de BR. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa Colombia": {
+  "ctx": "Copa nacional de CO. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa Chile": {
+  "ctx": "Copa nacional de CL. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "US Open Cup": {
+  "ctx": "Copa nacional de US. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Campeón de Campeones": {
+  "ctx": "Copa nacional de MX. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa del Rey saudí": {
+  "ctx": "Copa nacional de SA. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa del Emperador": {
+  "ctx": "Copa nacional de JP. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Corea": {
+  "ctx": "Copa nacional de KR. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa del Emir": {
+  "ctx": "Copa nacional de QA. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa del Presidente": {
+  "ctx": "Copa nacional de AE. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de China": {
+  "ctx": "Copa nacional de CN. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Australia Cup": {
+  "ctx": "Copa nacional de AU. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa Hazfi": {
+  "ctx": "Copa nacional de IR. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Super Cup": {
+  "ctx": "Copa nacional de IN. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Egipto": {
+  "ctx": "Copa nacional de EG. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa del Trono": {
+  "ctx": "Copa nacional de MA. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Nedbank Cup": {
+  "ctx": "Copa nacional de ZA. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Túnez": {
+  "ctx": "Copa nacional de TN. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Copa de Argelia": {
+  "ctx": "Copa nacional de DZ. Usa el nombre habitual en el idioma (p. ej. Copa del Rey → Copa del Rey / King's Cup).",
+  "where": "data:copa"
+ },
+ "Premier League": {
+  "ctx": "Nombre de liga (ENG). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "EFL Championship": {
+  "ctx": "Nombre de liga (ENG). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "EFL League One": {
+  "ctx": "Nombre de liga (ENG). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "LaLiga EA Sports": {
+  "ctx": "Nombre de liga (ES). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "LaLiga Hypermotion": {
+  "ctx": "Nombre de liga (ES). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Serie A": {
+  "ctx": "Nombre de liga (IT). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Serie B": {
+  "ctx": "Nombre de liga (IT). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Bundesliga": {
+  "ctx": "Nombre de liga (DE). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "2. Bundesliga": {
+  "ctx": "Nombre de liga (DE). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Ligue 1": {
+  "ctx": "Nombre de liga (FR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Ligue 2": {
+  "ctx": "Nombre de liga (FR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Liga Portugal": {
+  "ctx": "Nombre de liga (PT). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Eredivisie": {
+  "ctx": "Nombre de liga (NL). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Jupiler Pro League": {
+  "ctx": "Nombre de liga (BE). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Süper Lig": {
+  "ctx": "Nombre de liga (TR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Scottish Premiership": {
+  "ctx": "Nombre de liga (SCO). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Bundesliga austriaca": {
+  "ctx": "Nombre de liga (AT). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Super League suiza": {
+  "ctx": "Nombre de liga (CH). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Superliga danesa": {
+  "ctx": "Nombre de liga (DK). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Eliteserien": {
+  "ctx": "Nombre de liga (NO). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Allsvenskan": {
+  "ctx": "Nombre de liga (SE). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Chance Liga": {
+  "ctx": "Nombre de liga (CZ). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Super League Grecia": {
+  "ctx": "Nombre de liga (GR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Ekstraklasa": {
+  "ctx": "Nombre de liga (PL). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "SuperSport HNL": {
+  "ctx": "Nombre de liga (HR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "SuperLiga serbia": {
+  "ctx": "Nombre de liga (RS). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Premier League ucraniana": {
+  "ctx": "Nombre de liga (UA). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Premier League rusa": {
+  "ctx": "Nombre de liga (RU). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "SuperLiga rumana": {
+  "ctx": "Nombre de liga (RO). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "NB I": {
+  "ctx": "Nombre de liga (HU). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Liga chipriota": {
+  "ctx": "Nombre de liga (CY). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Ligat ha'Al": {
+  "ctx": "Nombre de liga (IL). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Efbet Liga": {
+  "ctx": "Nombre de liga (BG). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Niké Liga": {
+  "ctx": "Nombre de liga (SK). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "League of Ireland": {
+  "ctx": "Nombre de liga (IE). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Liga Profesional": {
+  "ctx": "Nombre de liga (AR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Brasileirão Série A": {
+  "ctx": "Nombre de liga (BR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Primera División uruguaya": {
+  "ctx": "Nombre de liga (UY). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Liga BetPlay": {
+  "ctx": "Nombre de liga (CO). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Liga de Primera": {
+  "ctx": "Nombre de liga (CL). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "LigaPro": {
+  "ctx": "Nombre de liga (EC). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Primera División paraguaya": {
+  "ctx": "Nombre de liga (PY). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Liga 1": {
+  "ctx": "Nombre de liga (PE). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "División Profesional": {
+  "ctx": "Nombre de liga (BO). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Liga FUTVE": {
+  "ctx": "Nombre de liga (VE). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "MLS": {
+  "ctx": "Nombre de liga (US). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Liga MX": {
+  "ctx": "Nombre de liga (MX). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Primera División de Costa Rica": {
+  "ctx": "Nombre de liga (CR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Saudi Pro League": {
+  "ctx": "Nombre de liga (SA). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "J1 League": {
+  "ctx": "Nombre de liga (JP). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "K League 1": {
+  "ctx": "Nombre de liga (KR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Stars League": {
+  "ctx": "Nombre de liga (QA). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "UAE Pro League": {
+  "ctx": "Nombre de liga (AE). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Chinese Super League": {
+  "ctx": "Nombre de liga (CN). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "A-League": {
+  "ctx": "Nombre de liga (AU). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Persian Gulf Pro League": {
+  "ctx": "Nombre de liga (IR). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Indian Super League": {
+  "ctx": "Nombre de liga (IN). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Egyptian Premier League": {
+  "ctx": "Nombre de liga (EG). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Botola Pro": {
+  "ctx": "Nombre de liga (MA). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Betway Premiership": {
+  "ctx": "Nombre de liga (ZA). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Ligue Professionnelle 1": {
+  "ctx": "Nombre de liga (TN). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "Ligue 1 argelina": {
+  "ctx": "Nombre de liga (DZ). Si es un nombre propio comercial, déjalo igual.",
+  "where": "data:liga"
+ },
+ "España": {
+  "ctx": "País (nombre de la selección): España [ES]",
+  "where": "data:país"
+ },
+ "Francia": {
+  "ctx": "País (nombre de la selección): Francia [FR]",
+  "where": "data:país"
+ },
+ "Inglaterra": {
+  "ctx": "País (nombre de la selección): Inglaterra [ENG]",
+  "where": "data:país"
+ },
+ "Portugal": {
+  "ctx": "País (nombre de la selección): Portugal [PT]",
+  "where": "data:país"
+ },
+ "Alemania": {
+  "ctx": "País (nombre de la selección): Alemania [DE]",
+  "where": "data:país"
+ },
+ "Países Bajos": {
+  "ctx": "País (nombre de la selección): Países Bajos [NL]",
+  "where": "data:país"
+ },
+ "Italia": {
+  "ctx": "País (nombre de la selección): Italia [IT]",
+  "where": "data:país"
+ },
+ "Bélgica": {
+  "ctx": "País (nombre de la selección): Bélgica [BE]",
+  "where": "data:país"
+ },
+ "Croacia": {
+  "ctx": "País (nombre de la selección): Croacia [HR]",
+  "where": "data:país"
+ },
+ "Suiza": {
+  "ctx": "País (nombre de la selección): Suiza [CH]",
+  "where": "data:país"
+ },
+ "Dinamarca": {
+  "ctx": "País (nombre de la selección): Dinamarca [DK]",
+  "where": "data:país"
+ },
+ "Austria": {
+  "ctx": "País (nombre de la selección): Austria [AT]",
+  "where": "data:país"
+ },
+ "Turquía": {
+  "ctx": "País (nombre de la selección): Turquía [TR]",
+  "where": "data:país"
+ },
+ "Noruega": {
+  "ctx": "País (nombre de la selección): Noruega [NO]",
+  "where": "data:país"
+ },
+ "Suecia": {
+  "ctx": "País (nombre de la selección): Suecia [SE]",
+  "where": "data:país"
+ },
+ "Ucrania": {
+  "ctx": "País (nombre de la selección): Ucrania [UA]",
+  "where": "data:país"
+ },
+ "Polonia": {
+  "ctx": "País (nombre de la selección): Polonia [PL]",
+  "where": "data:país"
+ },
+ "Serbia": {
+  "ctx": "País (nombre de la selección): Serbia [RS]",
+  "where": "data:país"
+ },
+ "Rusia": {
+  "ctx": "País (nombre de la selección): Rusia [RU]",
+  "where": "data:país"
+ },
+ "Chequia": {
+  "ctx": "País (nombre de la selección): Chequia [CZ]",
+  "where": "data:país"
+ },
+ "Hungría": {
+  "ctx": "País (nombre de la selección): Hungría [HU]",
+  "where": "data:país"
+ },
+ "Escocia": {
+  "ctx": "País (nombre de la selección): Escocia [SCO]",
+  "where": "data:país"
+ },
+ "Grecia": {
+  "ctx": "País (nombre de la selección): Grecia [GR]",
+  "where": "data:país"
+ },
+ "Gales": {
+  "ctx": "País (nombre de la selección): Gales [WAL]",
+  "where": "data:país"
+ },
+ "Eslovaquia": {
+  "ctx": "País (nombre de la selección): Eslovaquia [SK]",
+  "where": "data:país"
+ },
+ "Rumanía": {
+  "ctx": "País (nombre de la selección): Rumanía [RO]",
+  "where": "data:país"
+ },
+ "Georgia": {
+  "ctx": "País (nombre de la selección): Georgia [GE]",
+  "where": "data:país"
+ },
+ "Eslovenia": {
+  "ctx": "País (nombre de la selección): Eslovenia [SI]",
+  "where": "data:país"
+ },
+ "Irlanda": {
+  "ctx": "País (nombre de la selección): Irlanda [IE]",
+  "where": "data:país"
+ },
+ "Albania": {
+  "ctx": "País (nombre de la selección): Albania [AL]",
+  "where": "data:país"
+ },
+ "Bosnia y Herzegovina": {
+  "ctx": "País (nombre de la selección): Bosnia y Herzegovina [BA]",
+  "where": "data:país"
+ },
+ "Irlanda del Norte": {
+  "ctx": "País (nombre de la selección): Irlanda del Norte [NIR]",
+  "where": "data:país"
+ },
+ "Islandia": {
+  "ctx": "País (nombre de la selección): Islandia [IS]",
+  "where": "data:país"
+ },
+ "Finlandia": {
+  "ctx": "País (nombre de la selección): Finlandia [FI]",
+  "where": "data:país"
+ },
+ "Israel": {
+  "ctx": "País (nombre de la selección): Israel [IL]",
+  "where": "data:país"
+ },
+ "Macedonia del Norte": {
+  "ctx": "País (nombre de la selección): Macedonia del Norte [MK]",
+  "where": "data:país"
+ },
+ "Montenegro": {
+  "ctx": "País (nombre de la selección): Montenegro [ME]",
+  "where": "data:país"
+ },
+ "Bulgaria": {
+  "ctx": "País (nombre de la selección): Bulgaria [BG]",
+  "where": "data:país"
+ },
+ "Kosovo": {
+  "ctx": "País (nombre de la selección): Kosovo [XK]",
+  "where": "data:país"
+ },
+ "Kazajistán": {
+  "ctx": "País (nombre de la selección): Kazajistán [KZ]",
+  "where": "data:país"
+ },
+ "Armenia": {
+  "ctx": "País (nombre de la selección): Armenia [AM]",
+  "where": "data:país"
+ },
+ "Bielorrusia": {
+  "ctx": "País (nombre de la selección): Bielorrusia [BY]",
+  "where": "data:país"
+ },
+ "Luxemburgo": {
+  "ctx": "País (nombre de la selección): Luxemburgo [LU]",
+  "where": "data:país"
+ },
+ "Chipre": {
+  "ctx": "País (nombre de la selección): Chipre [CY]",
+  "where": "data:país"
+ },
+ "Azerbaiyán": {
+  "ctx": "País (nombre de la selección): Azerbaiyán [AZ]",
+  "where": "data:país"
+ },
+ "Lituania": {
+  "ctx": "País (nombre de la selección): Lituania [LT]",
+  "where": "data:país"
+ },
+ "Estonia": {
+  "ctx": "País (nombre de la selección): Estonia [EE]",
+  "where": "data:país"
+ },
+ "Letonia": {
+  "ctx": "País (nombre de la selección): Letonia [LV]",
+  "where": "data:país"
+ },
+ "Islas Feroe": {
+  "ctx": "País (nombre de la selección): Islas Feroe [FO]",
+  "where": "data:país"
+ },
+ "Moldavia": {
+  "ctx": "País (nombre de la selección): Moldavia [MD]",
+  "where": "data:país"
+ },
+ "Malta": {
+  "ctx": "País (nombre de la selección): Malta [MT]",
+  "where": "data:país"
+ },
+ "Andorra": {
+  "ctx": "País (nombre de la selección): Andorra [AD]",
+  "where": "data:país"
+ },
+ "Liechtenstein": {
+  "ctx": "País (nombre de la selección): Liechtenstein [LI]",
+  "where": "data:país"
+ },
+ "Gibraltar": {
+  "ctx": "País (nombre de la selección): Gibraltar [GI]",
+  "where": "data:país"
+ },
+ "San Marino": {
+  "ctx": "País (nombre de la selección): San Marino [SM]",
+  "where": "data:país"
+ },
+ "Argentina": {
+  "ctx": "País (nombre de la selección): Argentina [AR]",
+  "where": "data:país"
+ },
+ "Brasil": {
+  "ctx": "País (nombre de la selección): Brasil [BR]",
+  "where": "data:país"
+ },
+ "Uruguay": {
+  "ctx": "País (nombre de la selección): Uruguay [UY]",
+  "where": "data:país"
+ },
+ "Colombia": {
+  "ctx": "País (nombre de la selección): Colombia [CO]",
+  "where": "data:país"
+ },
+ "Ecuador": {
+  "ctx": "País (nombre de la selección): Ecuador [EC]",
+  "where": "data:país"
+ },
+ "Paraguay": {
+  "ctx": "País (nombre de la selección): Paraguay [PY]",
+  "where": "data:país"
+ },
+ "Chile": {
+  "ctx": "País (nombre de la selección): Chile [CL]",
+  "where": "data:país"
+ },
+ "Perú": {
+  "ctx": "País (nombre de la selección): Perú [PE]",
+  "where": "data:país"
+ },
+ "Venezuela": {
+  "ctx": "País (nombre de la selección): Venezuela [VE]",
+  "where": "data:país"
+ },
+ "Bolivia": {
+  "ctx": "País (nombre de la selección): Bolivia [BO]",
+  "where": "data:país"
+ },
+ "México": {
+  "ctx": "País (nombre de la selección): México [MX]",
+  "where": "data:país"
+ },
+ "Estados Unidos": {
+  "ctx": "País (nombre de la selección): Estados Unidos [US]",
+  "where": "data:país"
+ },
+ "Canadá": {
+  "ctx": "País (nombre de la selección): Canadá [CA]",
+  "where": "data:país"
+ },
+ "Panamá": {
+  "ctx": "País (nombre de la selección): Panamá [PA]",
+  "where": "data:país"
+ },
+ "Costa Rica": {
+  "ctx": "País (nombre de la selección): Costa Rica [CR]",
+  "where": "data:país"
+ },
+ "Jamaica": {
+  "ctx": "País (nombre de la selección): Jamaica [JM]",
+  "where": "data:país"
+ },
+ "Honduras": {
+  "ctx": "País (nombre de la selección): Honduras [HN]",
+  "where": "data:país"
+ },
+ "Curazao": {
+  "ctx": "País (nombre de la selección): Curazao [CW]",
+  "where": "data:país"
+ },
+ "El Salvador": {
+  "ctx": "País (nombre de la selección): El Salvador [SV]",
+  "where": "data:país"
+ },
+ "Haití": {
+  "ctx": "País (nombre de la selección): Haití [HT]",
+  "where": "data:país"
+ },
+ "Guatemala": {
+  "ctx": "País (nombre de la selección): Guatemala [GT]",
+  "where": "data:país"
+ },
+ "Trinidad y Tobago": {
+  "ctx": "País (nombre de la selección): Trinidad y Tobago [TT]",
+  "where": "data:país"
+ },
+ "Surinam": {
+  "ctx": "País (nombre de la selección): Surinam [SR]",
+  "where": "data:país"
+ },
+ "Nicaragua": {
+  "ctx": "País (nombre de la selección): Nicaragua [NI]",
+  "where": "data:país"
+ },
+ "República Dominicana": {
+  "ctx": "País (nombre de la selección): República Dominicana [DO]",
+  "where": "data:país"
+ },
+ "Cuba": {
+  "ctx": "País (nombre de la selección): Cuba [CU]",
+  "where": "data:país"
+ },
+ "Guyana": {
+  "ctx": "País (nombre de la selección): Guyana [GY]",
+  "where": "data:país"
+ },
+ "Puerto Rico": {
+  "ctx": "País (nombre de la selección): Puerto Rico [PR]",
+  "where": "data:país"
+ },
+ "Belice": {
+  "ctx": "País (nombre de la selección): Belice [BZ]",
+  "where": "data:país"
+ },
+ "Bermudas": {
+  "ctx": "País (nombre de la selección): Bermudas [BM]",
+  "where": "data:país"
+ },
+ "Granada": {
+  "ctx": "País (nombre de la selección): Granada [GD]",
+  "where": "data:país"
+ },
+ "San Cristóbal y Nieves": {
+  "ctx": "País (nombre de la selección): San Cristóbal y Nieves [KN]",
+  "where": "data:país"
+ },
+ "Santa Lucía": {
+  "ctx": "País (nombre de la selección): Santa Lucía [LC]",
+  "where": "data:país"
+ },
+ "San Vicente y las Granadinas": {
+  "ctx": "País (nombre de la selección): San Vicente y las Granadinas [VC]",
+  "where": "data:país"
+ },
+ "Antigua y Barbuda": {
+  "ctx": "País (nombre de la selección): Antigua y Barbuda [AG]",
+  "where": "data:país"
+ },
+ "Dominica": {
+  "ctx": "País (nombre de la selección): Dominica [DM]",
+  "where": "data:país"
+ },
+ "Barbados": {
+  "ctx": "País (nombre de la selección): Barbados [BB]",
+  "where": "data:país"
+ },
+ "Aruba": {
+  "ctx": "País (nombre de la selección): Aruba [AW]",
+  "where": "data:país"
+ },
+ "Islas Caimán": {
+  "ctx": "País (nombre de la selección): Islas Caimán [KY]",
+  "where": "data:país"
+ },
+ "Bahamas": {
+  "ctx": "País (nombre de la selección): Bahamas [BS]",
+  "where": "data:país"
+ },
+ "Montserrat": {
+  "ctx": "País (nombre de la selección): Montserrat [MS]",
+  "where": "data:país"
+ },
+ "Islas Vírgenes Británicas": {
+  "ctx": "País (nombre de la selección): Islas Vírgenes Británicas [VG]",
+  "where": "data:país"
+ },
+ "Islas Turcas y Caicos": {
+  "ctx": "País (nombre de la selección): Islas Turcas y Caicos [TC]",
+  "where": "data:país"
+ },
+ "Islas Vírgenes de EE. UU.": {
+  "ctx": "País (nombre de la selección): Islas Vírgenes de EE. UU. [VI]",
+  "where": "data:país"
+ },
+ "Anguila": {
+  "ctx": "País (nombre de la selección): Anguila [AI]",
+  "where": "data:país"
+ },
+ "Marruecos": {
+  "ctx": "País (nombre de la selección): Marruecos [MA]",
+  "where": "data:país"
+ },
+ "Senegal": {
+  "ctx": "País (nombre de la selección): Senegal [SN]",
+  "where": "data:país"
+ },
+ "Costa de Marfil": {
+  "ctx": "País (nombre de la selección): Costa de Marfil [CI]",
+  "where": "data:país"
+ },
+ "Nigeria": {
+  "ctx": "País (nombre de la selección): Nigeria [NG]",
+  "where": "data:país"
+ },
+ "Egipto": {
+  "ctx": "País (nombre de la selección): Egipto [EG]",
+  "where": "data:país"
+ },
+ "Argelia": {
+  "ctx": "País (nombre de la selección): Argelia [DZ]",
+  "where": "data:país"
+ },
+ "Camerún": {
+  "ctx": "País (nombre de la selección): Camerún [CM]",
+  "where": "data:país"
+ },
+ "Malí": {
+  "ctx": "País (nombre de la selección): Malí [ML]",
+  "where": "data:país"
+ },
+ "Ghana": {
+  "ctx": "País (nombre de la selección): Ghana [GH]",
+  "where": "data:país"
+ },
+ "Túnez": {
+  "ctx": "País (nombre de la selección): Túnez [TN]",
+  "where": "data:país"
+ },
+ "RD Congo": {
+  "ctx": "País (nombre de la selección): RD Congo [CD]",
+  "where": "data:país"
+ },
+ "Sudáfrica": {
+  "ctx": "País (nombre de la selección): Sudáfrica [ZA]",
+  "where": "data:país"
+ },
+ "Burkina Faso": {
+  "ctx": "País (nombre de la selección): Burkina Faso [BF]",
+  "where": "data:país"
+ },
+ "Cabo Verde": {
+  "ctx": "País (nombre de la selección): Cabo Verde [CV]",
+  "where": "data:país"
+ },
+ "Guinea": {
+  "ctx": "País (nombre de la selección): Guinea [GN]",
+  "where": "data:país"
+ },
+ "Gabón": {
+  "ctx": "País (nombre de la selección): Gabón [GA]",
+  "where": "data:país"
+ },
+ "Angola": {
+  "ctx": "País (nombre de la selección): Angola [AO]",
+  "where": "data:país"
+ },
+ "Guinea Ecuatorial": {
+  "ctx": "País (nombre de la selección): Guinea Ecuatorial [GQ]",
+  "where": "data:país"
+ },
+ "Zambia": {
+  "ctx": "País (nombre de la selección): Zambia [ZM]",
+  "where": "data:país"
+ },
+ "Uganda": {
+  "ctx": "País (nombre de la selección): Uganda [UG]",
+  "where": "data:país"
+ },
+ "Benín": {
+  "ctx": "País (nombre de la selección): Benín [BJ]",
+  "where": "data:país"
+ },
+ "Mauritania": {
+  "ctx": "País (nombre de la selección): Mauritania [MR]",
+  "where": "data:país"
+ },
+ "Libia": {
+  "ctx": "País (nombre de la selección): Libia [LY]",
+  "where": "data:país"
+ },
+ "Congo": {
+  "ctx": "País (nombre de la selección): Congo [CG]",
+  "where": "data:país"
+ },
+ "Kenia": {
+  "ctx": "País (nombre de la selección): Kenia [KE]",
+  "where": "data:país"
+ },
+ "Tanzania": {
+  "ctx": "País (nombre de la selección): Tanzania [TZ]",
+  "where": "data:país"
+ },
+ "Mozambique": {
+  "ctx": "País (nombre de la selección): Mozambique [MZ]",
+  "where": "data:país"
+ },
+ "Madagascar": {
+  "ctx": "País (nombre de la selección): Madagascar [MG]",
+  "where": "data:país"
+ },
+ "Gambia": {
+  "ctx": "País (nombre de la selección): Gambia [GM]",
+  "where": "data:país"
+ },
+ "Namibia": {
+  "ctx": "País (nombre de la selección): Namibia [NA]",
+  "where": "data:país"
+ },
+ "Sudán": {
+  "ctx": "País (nombre de la selección): Sudán [SD]",
+  "where": "data:país"
+ },
+ "Zimbabue": {
+  "ctx": "País (nombre de la selección): Zimbabue [ZW]",
+  "where": "data:país"
+ },
+ "Sierra Leona": {
+  "ctx": "País (nombre de la selección): Sierra Leona [SL]",
+  "where": "data:país"
+ },
+ "Togo": {
+  "ctx": "País (nombre de la selección): Togo [TG]",
+  "where": "data:país"
+ },
+ "Malaui": {
+  "ctx": "País (nombre de la selección): Malaui [MW]",
+  "where": "data:país"
+ },
+ "Guinea-Bisáu": {
+  "ctx": "País (nombre de la selección): Guinea-Bisáu [GW]",
+  "where": "data:país"
+ },
+ "Comoras": {
+  "ctx": "País (nombre de la selección): Comoras [KM]",
+  "where": "data:país"
+ },
+ "Ruanda": {
+  "ctx": "País (nombre de la selección): Ruanda [RW]",
+  "where": "data:país"
+ },
+ "Níger": {
+  "ctx": "País (nombre de la selección): Níger [NE]",
+  "where": "data:país"
+ },
+ "Liberia": {
+  "ctx": "País (nombre de la selección): Liberia [LR]",
+  "where": "data:país"
+ },
+ "Etiopía": {
+  "ctx": "País (nombre de la selección): Etiopía [ET]",
+  "where": "data:país"
+ },
+ "Botsuana": {
+  "ctx": "País (nombre de la selección): Botsuana [BW]",
+  "where": "data:país"
+ },
+ "Burundi": {
+  "ctx": "País (nombre de la selección): Burundi [BI]",
+  "where": "data:país"
+ },
+ "República Centroafricana": {
+  "ctx": "País (nombre de la selección): República Centroafricana [CF]",
+  "where": "data:país"
+ },
+ "Lesoto": {
+  "ctx": "País (nombre de la selección): Lesoto [LS]",
+  "where": "data:país"
+ },
+ "Esuatini": {
+  "ctx": "País (nombre de la selección): Esuatini [SZ]",
+  "where": "data:país"
+ },
+ "Sudán del Sur": {
+  "ctx": "País (nombre de la selección): Sudán del Sur [SS]",
+  "where": "data:país"
+ },
+ "Chad": {
+  "ctx": "País (nombre de la selección): Chad [TD]",
+  "where": "data:país"
+ },
+ "Mauricio": {
+  "ctx": "País (nombre de la selección): Mauricio [MU]",
+  "where": "data:país"
+ },
+ "Santo Tomé y Príncipe": {
+  "ctx": "País (nombre de la selección): Santo Tomé y Príncipe [ST]",
+  "where": "data:país"
+ },
+ "Yibuti": {
+  "ctx": "País (nombre de la selección): Yibuti [DJ]",
+  "where": "data:país"
+ },
+ "Seychelles": {
+  "ctx": "País (nombre de la selección): Seychelles [SC]",
+  "where": "data:país"
+ },
+ "Eritrea": {
+  "ctx": "País (nombre de la selección): Eritrea [ER]",
+  "where": "data:país"
+ },
+ "Somalia": {
+  "ctx": "País (nombre de la selección): Somalia [SO]",
+  "where": "data:país"
+ },
+ "Japón": {
+  "ctx": "País (nombre de la selección): Japón [JP]",
+  "where": "data:país"
+ },
+ "Irán": {
+  "ctx": "País (nombre de la selección): Irán [IR]",
+  "where": "data:país"
+ },
+ "Corea del Sur": {
+  "ctx": "País (nombre de la selección): Corea del Sur [KR]",
+  "where": "data:país"
+ },
+ "Australia": {
+  "ctx": "País (nombre de la selección): Australia [AU]",
+  "where": "data:país"
+ },
+ "Arabia Saudí": {
+  "ctx": "País (nombre de la selección): Arabia Saudí [SA]",
+  "where": "data:país"
+ },
+ "Uzbekistán": {
+  "ctx": "País (nombre de la selección): Uzbekistán [UZ]",
+  "where": "data:país"
+ },
+ "Catar": {
+  "ctx": "País (nombre de la selección): Catar [QA]",
+  "where": "data:país"
+ },
+ "Irak": {
+  "ctx": "País (nombre de la selección): Irak [IQ]",
+  "where": "data:país"
+ },
+ "Emiratos Árabes Unidos": {
+  "ctx": "País (nombre de la selección): Emiratos Árabes Unidos [AE]",
+  "where": "data:país"
+ },
+ "Jordania": {
+  "ctx": "País (nombre de la selección): Jordania [JO]",
+  "where": "data:país"
+ },
+ "Omán": {
+  "ctx": "País (nombre de la selección): Omán [OM]",
+  "where": "data:país"
+ },
+ "China": {
+  "ctx": "País (nombre de la selección): China [CN]",
+  "where": "data:país"
+ },
+ "Baréin": {
+  "ctx": "País (nombre de la selección): Baréin [BH]",
+  "where": "data:país"
+ },
+ "Siria": {
+  "ctx": "País (nombre de la selección): Siria [SY]",
+  "where": "data:país"
+ },
+ "Palestina": {
+  "ctx": "País (nombre de la selección): Palestina [PS]",
+  "where": "data:país"
+ },
+ "Indonesia": {
+  "ctx": "País (nombre de la selección): Indonesia [ID]",
+  "where": "data:país"
+ },
+ "Vietnam": {
+  "ctx": "País (nombre de la selección): Vietnam [VN]",
+  "where": "data:país"
+ },
+ "Tailandia": {
+  "ctx": "País (nombre de la selección): Tailandia [TH]",
+  "where": "data:país"
+ },
+ "Kuwait": {
+  "ctx": "País (nombre de la selección): Kuwait [KW]",
+  "where": "data:país"
+ },
+ "Líbano": {
+  "ctx": "País (nombre de la selección): Líbano [LB]",
+  "where": "data:país"
+ },
+ "Corea del Norte": {
+  "ctx": "País (nombre de la selección): Corea del Norte [KP]",
+  "where": "data:país"
+ },
+ "Kirguistán": {
+  "ctx": "País (nombre de la selección): Kirguistán [KG]",
+  "where": "data:país"
+ },
+ "Tayikistán": {
+  "ctx": "País (nombre de la selección): Tayikistán [TJ]",
+  "where": "data:país"
+ },
+ "Malasia": {
+  "ctx": "País (nombre de la selección): Malasia [MY]",
+  "where": "data:país"
+ },
+ "Turkmenistán": {
+  "ctx": "País (nombre de la selección): Turkmenistán [TM]",
+  "where": "data:país"
+ },
+ "India": {
+  "ctx": "País (nombre de la selección): India [IN]",
+  "where": "data:país"
+ },
+ "Filipinas": {
+  "ctx": "País (nombre de la selección): Filipinas [PH]",
+  "where": "data:país"
+ },
+ "Yemen": {
+  "ctx": "País (nombre de la selección): Yemen [YE]",
+  "where": "data:país"
+ },
+ "Hong Kong": {
+  "ctx": "País (nombre de la selección): Hong Kong [HK]",
+  "where": "data:país"
+ },
+ "Singapur": {
+  "ctx": "País (nombre de la selección): Singapur [SG]",
+  "where": "data:país"
+ },
+ "Afganistán": {
+  "ctx": "País (nombre de la selección): Afganistán [AF]",
+  "where": "data:país"
+ },
+ "Myanmar": {
+  "ctx": "País (nombre de la selección): Myanmar [MM]",
+  "where": "data:país"
+ },
+ "Maldivas": {
+  "ctx": "País (nombre de la selección): Maldivas [MV]",
+  "where": "data:país"
+ },
+ "Nepal": {
+  "ctx": "País (nombre de la selección): Nepal [NP]",
+  "where": "data:país"
+ },
+ "Bangladés": {
+  "ctx": "País (nombre de la selección): Bangladés [BD]",
+  "where": "data:país"
+ },
+ "Taiwán": {
+  "ctx": "País (nombre de la selección): Taiwán [TW]",
+  "where": "data:país"
+ },
+ "Camboya": {
+  "ctx": "País (nombre de la selección): Camboya [KH]",
+  "where": "data:país"
+ },
+ "Laos": {
+  "ctx": "País (nombre de la selección): Laos [LA]",
+  "where": "data:país"
+ },
+ "Mongolia": {
+  "ctx": "País (nombre de la selección): Mongolia [MN]",
+  "where": "data:país"
+ },
+ "Pakistán": {
+  "ctx": "País (nombre de la selección): Pakistán [PK]",
+  "where": "data:país"
+ },
+ "Sri Lanka": {
+  "ctx": "País (nombre de la selección): Sri Lanka [LK]",
+  "where": "data:país"
+ },
+ "Bután": {
+  "ctx": "País (nombre de la selección): Bután [BT]",
+  "where": "data:país"
+ },
+ "Guam": {
+  "ctx": "País (nombre de la selección): Guam [GU]",
+  "where": "data:país"
+ },
+ "Brunéi": {
+  "ctx": "País (nombre de la selección): Brunéi [BN]",
+  "where": "data:país"
+ },
+ "Timor Oriental": {
+  "ctx": "País (nombre de la selección): Timor Oriental [TL]",
+  "where": "data:país"
+ },
+ "Macao": {
+  "ctx": "País (nombre de la selección): Macao [MO]",
+  "where": "data:país"
+ },
+ "Nueva Zelanda": {
+  "ctx": "País (nombre de la selección): Nueva Zelanda [NZ]",
+  "where": "data:país"
+ },
+ "Nueva Caledonia": {
+  "ctx": "País (nombre de la selección): Nueva Caledonia [NC]",
+  "where": "data:país"
+ },
+ "Fiyi": {
+  "ctx": "País (nombre de la selección): Fiyi [FJ]",
+  "where": "data:país"
+ },
+ "Islas Salomón": {
+  "ctx": "País (nombre de la selección): Islas Salomón [SB]",
+  "where": "data:país"
+ },
+ "Tahití": {
+  "ctx": "País (nombre de la selección): Tahití [PF]",
+  "where": "data:país"
+ },
+ "Papúa Nueva Guinea": {
+  "ctx": "País (nombre de la selección): Papúa Nueva Guinea [PG]",
+  "where": "data:país"
+ },
+ "Vanuatu": {
+  "ctx": "País (nombre de la selección): Vanuatu [VU]",
+  "where": "data:país"
+ },
+ "Samoa": {
+  "ctx": "País (nombre de la selección): Samoa [WS]",
+  "where": "data:país"
+ },
+ "Tonga": {
+  "ctx": "País (nombre de la selección): Tonga [TO]",
+  "where": "data:país"
+ },
+ "Islas Cook": {
+  "ctx": "País (nombre de la selección): Islas Cook [CK]",
+  "where": "data:país"
+ },
+ "Samoa Americana": {
+  "ctx": "País (nombre de la selección): Samoa Americana [AS]",
+  "where": "data:país"
+ },
+ "Portero": {
+  "ctx": "Nombre completo de la posición POR",
+  "where": "data:posición"
+ },
+ "Lateral derecho": {
+  "ctx": "Nombre completo de la posición LD",
+  "where": "data:posición"
+ },
+ "Defensa central": {
+  "ctx": "Nombre completo de la posición DFC",
+  "where": "data:posición"
+ },
+ "Lateral izquierdo": {
+  "ctx": "Nombre completo de la posición LI",
+  "where": "data:posición"
+ },
+ "Mediocentro defensivo": {
+  "ctx": "Nombre completo de la posición MCD",
+  "where": "data:posición"
+ },
+ "Mediocentro": {
+  "ctx": "Nombre completo de la posición MC",
+  "where": "data:posición"
+ },
+ "Interior derecho": {
+  "ctx": "Nombre completo de la posición MD",
+  "where": "data:posición"
+ },
+ "Interior izquierdo": {
+  "ctx": "Nombre completo de la posición MI",
+  "where": "data:posición"
+ },
+ "Mediapunta": {
+  "ctx": "Nombre completo de la posición MCO",
+  "where": "data:posición"
+ },
+ "Extremo derecho": {
+  "ctx": "Nombre completo de la posición ED",
+  "where": "data:posición"
+ },
+ "Extremo izquierdo": {
+  "ctx": "Nombre completo de la posición EI",
+  "where": "data:posición"
+ },
+ "Delantero centro": {
+  "ctx": "Nombre completo de la posición DC",
+  "where": "data:posición"
+ },
+ "Community Shield": {
+  "ctx": "Supercopa nacional de ENG",
+  "where": "data:supercopa"
+ },
+ "Supercopa de España": {
+  "ctx": "Supercopa nacional de ES",
+  "where": "data:supercopa"
+ },
+ "Supercoppa Italiana": {
+  "ctx": "Supercopa nacional de IT",
+  "where": "data:supercopa"
+ },
+ "Supercopa de Alemania": {
+  "ctx": "Supercopa nacional de DE",
+  "where": "data:supercopa"
+ },
+ "Trophée des Champions": {
+  "ctx": "Supercopa nacional de FR",
+  "where": "data:supercopa"
+ },
+ "Supertaça": {
+  "ctx": "Supercopa nacional de PT",
+  "where": "data:supercopa"
+ },
+ "Johan Cruijff Schaal": {
+  "ctx": "Supercopa nacional de NL",
+  "where": "data:supercopa"
+ },
+ "Supercopa de Turquía": {
+  "ctx": "Supercopa nacional de TR",
+  "where": "data:supercopa"
+ },
+ "Trofeo de Campeones": {
+  "ctx": "Supercopa nacional de AR",
+  "where": "data:supercopa"
+ },
+ "Supercopa do Brasil": {
+  "ctx": "Supercopa nacional de BR",
+  "where": "data:supercopa"
+ },
+ "Supercopa saudí": {
+  "ctx": "Supercopa nacional de SA",
+  "where": "data:supercopa"
+ },
+ "Supercopa de Egipto": {
+  "ctx": "Supercopa nacional de EG",
+  "where": "data:supercopa"
+ },
+ "Copa Asiática": {
+  "ctx": "Torneo de selecciones",
+  "where": "data:torneo"
+ },
+ "Copa Oro": {
+  "ctx": "Torneo de selecciones",
+  "where": "data:torneo"
+ },
+ "Copa de Naciones OFC": {
+  "ctx": "Torneo de selecciones",
+  "where": "data:torneo"
+ },
+ "Nations League": {
+  "ctx": "Torneo de selecciones",
+  "where": "data:torneo"
+ },
+ "Juegos Olímpicos": {
+  "ctx": "Torneo de selecciones",
+  "where": "data:torneo"
+ },
+ "Ago–Sep": {
+  "ctx": "onLang(function () { BLOCKS = [[1, 8, tr(\"Ago–Sep\")], [9, 16, tr(\"Oct–Nov\")], [17, 24, tr(\"Dic–Ene\")], [25, 32, tr(\"Feb–Mar\")], [33, 40, tr(\"Abr–May\")]]; });",
+  "where": "engine-core.js:7"
+ },
+ "Oct–Nov": {
+  "ctx": "onLang(function () { BLOCKS = [[1, 8, tr(\"Ago–Sep\")], [9, 16, tr(\"Oct–Nov\")], [17, 24, tr(\"Dic–Ene\")], [25, 32, tr(\"Feb–Mar\")], [33, 40, tr(\"Abr–May\")]]; });",
+  "where": "engine-core.js:7"
+ },
+ "Dic–Ene": {
+  "ctx": "onLang(function () { BLOCKS = [[1, 8, tr(\"Ago–Sep\")], [9, 16, tr(\"Oct–Nov\")], [17, 24, tr(\"Dic–Ene\")], [25, 32, tr(\"Feb–Mar\")], [33, 40, tr(\"Abr–May\")]]; });",
+  "where": "engine-core.js:7"
+ },
+ "Feb–Mar": {
+  "ctx": "onLang(function () { BLOCKS = [[1, 8, tr(\"Ago–Sep\")], [9, 16, tr(\"Oct–Nov\")], [17, 24, tr(\"Dic–Ene\")], [25, 32, tr(\"Feb–Mar\")], [33, 40, tr(\"Abr–May\")]]; });",
+  "where": "engine-core.js:7"
+ },
+ "Abr–May": {
+  "ctx": "onLang(function () { BLOCKS = [[1, 8, tr(\"Ago–Sep\")], [9, 16, tr(\"Oct–Nov\")], [17, 24, tr(\"Dic–Ene\")], [25, 32, tr(\"Feb–Mar\")], [33, 40, tr(\"Abr–May\")]]; });",
+  "where": "engine-core.js:7"
+ },
+ "Final": {
+  "ctx": "var names = {2: N_(\"Final\"), 4: N_(\"Semifinales\"), 8: N_(\"Cuartos\"), 16: N_(\"Octavos\"), 32: N_(\"Dieciseisavos\"), 64: N_(\"Treintaidosavos\"), 128: N_(\"Ronda previa\"), 256: N_(\"Ronda previa\")};",
+  "where": "engine-core.js:173"
+ },
+ "Semifinales": {
+  "ctx": "var names = {2: N_(\"Final\"), 4: N_(\"Semifinales\"), 8: N_(\"Cuartos\"), 16: N_(\"Octavos\"), 32: N_(\"Dieciseisavos\"), 64: N_(\"Treintaidosavos\"), 128: N_(\"Ronda previa\"), 256: N_(\"Ronda previa\")};",
+  "where": "engine-core.js:173"
+ },
+ "Cuartos": {
+  "ctx": "var names = {2: N_(\"Final\"), 4: N_(\"Semifinales\"), 8: N_(\"Cuartos\"), 16: N_(\"Octavos\"), 32: N_(\"Dieciseisavos\"), 64: N_(\"Treintaidosavos\"), 128: N_(\"Ronda previa\"), 256: N_(\"Ronda previa\")};",
+  "where": "engine-core.js:173"
+ },
+ "Octavos": {
+  "ctx": "var names = {2: N_(\"Final\"), 4: N_(\"Semifinales\"), 8: N_(\"Cuartos\"), 16: N_(\"Octavos\"), 32: N_(\"Dieciseisavos\"), 64: N_(\"Treintaidosavos\"), 128: N_(\"Ronda previa\"), 256: N_(\"Ronda previa\")};",
+  "where": "engine-core.js:173"
+ },
+ "Dieciseisavos": {
+  "ctx": "var names = {2: N_(\"Final\"), 4: N_(\"Semifinales\"), 8: N_(\"Cuartos\"), 16: N_(\"Octavos\"), 32: N_(\"Dieciseisavos\"), 64: N_(\"Treintaidosavos\"), 128: N_(\"Ronda previa\"), 256: N_(\"Ronda previa\")};",
+  "where": "engine-core.js:173"
+ },
+ "Treintaidosavos": {
+  "ctx": "var names = {2: N_(\"Final\"), 4: N_(\"Semifinales\"), 8: N_(\"Cuartos\"), 16: N_(\"Octavos\"), 32: N_(\"Dieciseisavos\"), 64: N_(\"Treintaidosavos\"), 128: N_(\"Ronda previa\"), 256: N_(\"Ronda previa\")};",
+  "where": "engine-core.js:173"
+ },
+ "Ronda previa": {
+  "ctx": "var names = {2: N_(\"Final\"), 4: N_(\"Semifinales\"), 8: N_(\"Cuartos\"), 16: N_(\"Octavos\"), 32: N_(\"Dieciseisavos\"), 64: N_(\"Treintaidosavos\"), 128: N_(\"Ronda previa\"), 256: N_(\"Ronda previa\")};",
+  "where": "engine-core.js:173"
+ },
+ "Ronda": {
+  "ctx": "return names[nTeams] || N_(\"Ronda\");",
+  "where": "engine-core.js:174"
+ },
+ "Playoff": {
+  "ctx": "rounds = [{n: N_(\"Playoff\"), W: cfg.W[0]}, {n: N_(\"Octavos\"), W: cfg.W[1]}, {n: N_(\"Cuartos\"), W: cfg.W[2]}, {n: N_(\"Semifinales\"), W: cfg.W[3]}, {n: N_(\"Final\"), W: cfg.W[4], fin: true}];",
+  "where": "engine-core.js:279"
+ },
+ "Primera ronda": {
+  "ctx": "{n: N_(\"Primera ronda\"), W: [14]}, {n: N_(\"Challenger Cup\"), W: [16]}, {n: N_(\"Final\"), W: [17], fin: true, enter: [L.UCL]}",
+  "where": "engine-core.js:538"
+ },
+ "Challenger Cup": {
+  "ctx": "{n: N_(\"Primera ronda\"), W: [14]}, {n: N_(\"Challenger Cup\"), W: [16]}, {n: N_(\"Final\"), W: [17], fin: true, enter: [L.UCL]}",
+  "where": "engine-core.js:538"
+ },
+ "Liga A": {
+  "ctx": "c.sub = N_(\"Liga A\");",
+  "where": "engine-core.js:572"
+ },
+ "Liga B": {
+  "ctx": "var idx = u.indexOf(pn), lvl = idx < 32 ? N_(\"Liga B\") : idx < 48 ? N_(\"Liga C\") : N_(\"Liga D\");",
+  "where": "engine-core.js:576"
+ },
+ "Liga C": {
+  "ctx": "var idx = u.indexOf(pn), lvl = idx < 32 ? N_(\"Liga B\") : idx < 48 ? N_(\"Liga C\") : N_(\"Liga D\");",
+  "where": "engine-core.js:576"
+ },
+ "Liga D": {
+  "ctx": "var idx = u.indexOf(pn), lvl = idx < 32 ? N_(\"Liga B\") : idx < 48 ? N_(\"Liga C\") : N_(\"Liga D\");",
+  "where": "engine-core.js:576"
+ },
+ "Mundial de Clubes": {
+  "ctx": "return mkGroups(\"CWC\", \"Mundial de Clubes \" + year, N_(\"Mundial de Clubes\"), teams, {ng: 8, double: false, mdW: [41, 42, 43], perGroup: 2, thirds: 0, koW: koWeeksFrom(44, 4), lvl: 7});",
+  "where": "engine-core.js:652"
+ },
+ "Clave": {
+  "ctx": "ROLES = {C: {n: tr(\"Clave\"), s: 0.75}, I: {n: tr(\"Importante\"), s: 0.55}, R: {n: tr(\"Rotación\"), s: 0.35}, S: {n: tr(\"Suplente\"), s: 0.15}, P: {n: tr(\"Promesa\"), s: 0.08}};",
+  "where": "engine-manager.js:27"
+ },
+ "Importante": {
+  "ctx": "ROLES = {C: {n: tr(\"Clave\"), s: 0.75}, I: {n: tr(\"Importante\"), s: 0.55}, R: {n: tr(\"Rotación\"), s: 0.35}, S: {n: tr(\"Suplente\"), s: 0.15}, P: {n: tr(\"Promesa\"), s: 0.08}};",
+  "where": "engine-manager.js:27"
+ },
+ "Defensiva": {
+  "ctx": "MENT_NAMES = [tr(\"Defensiva\"), tr(\"Equilibrada\"), tr(\"Ofensiva\")];",
+  "where": "engine-manager.js:28"
+ },
+ "Equilibrada": {
+  "ctx": "MENT_NAMES = [tr(\"Defensiva\"), tr(\"Equilibrada\"), tr(\"Ofensiva\")];",
+  "where": "engine-manager.js:28"
+ },
+ "Ofensiva": {
+  "ctx": "MENT_NAMES = [tr(\"Defensiva\"), tr(\"Equilibrada\"), tr(\"Ofensiva\")];",
+  "where": "engine-manager.js:28"
+ },
+ "Poca": {
+  "ctx": "ROT_NAMES = [tr(\"Poca\"), tr(\"Normal\"), tr(\"Mucha\")];",
+  "where": "engine-manager.js:29"
+ },
+ "Normal": {
+  "ctx": "ROT_NAMES = [tr(\"Poca\"), tr(\"Normal\"), tr(\"Mucha\")];",
+  "where": "engine-manager.js:29"
+ },
+ "Mucha": {
+  "ctx": "ROT_NAMES = [tr(\"Poca\"), tr(\"Normal\"), tr(\"Mucha\")];",
+  "where": "engine-manager.js:29"
+ },
+ "Líder": {
+  "ctx": "TRAITS = {lider: tr(\"Líder\"), conflictivo: tr(\"Conflictivo\"), profesional: tr(\"Profesional\"), fiestero: tr(\"Fiestero\"), ambicioso: tr(\"Ambicioso\")};",
+  "where": "engine-manager.js:30"
+ },
+ "Conflictivo": {
+  "ctx": "TRAITS = {lider: tr(\"Líder\"), conflictivo: tr(\"Conflictivo\"), profesional: tr(\"Profesional\"), fiestero: tr(\"Fiestero\"), ambicioso: tr(\"Ambicioso\")};",
+  "where": "engine-manager.js:30"
+ },
+ "Profesional": {
+  "ctx": "TRAITS = {lider: tr(\"Líder\"), conflictivo: tr(\"Conflictivo\"), profesional: tr(\"Profesional\"), fiestero: tr(\"Fiestero\"), ambicioso: tr(\"Ambicioso\")};",
+  "where": "engine-manager.js:30"
+ },
+ "Fiestero": {
+  "ctx": "TRAITS = {lider: tr(\"Líder\"), conflictivo: tr(\"Conflictivo\"), profesional: tr(\"Profesional\"), fiestero: tr(\"Fiestero\"), ambicioso: tr(\"Ambicioso\")};",
+  "where": "engine-manager.js:30"
+ },
+ "Ambicioso": {
+  "ctx": "TRAITS = {lider: tr(\"Líder\"), conflictivo: tr(\"Conflictivo\"), profesional: tr(\"Profesional\"), fiestero: tr(\"Fiestero\"), ambicioso: tr(\"Ambicioso\")};",
+  "where": "engine-manager.js:30"
+ },
+ "Recuperan antes entre partidos y se lesionan menos.": {
+  "ctx": "fisico: {n: tr(\"Físico\"), d: tr(\"Recuperan antes entre partidos y se lesionan menos.\"), fx: {sfit: 6}},",
+  "where": "engine-manager.js:32"
+ },
+ "Más química y un plus de nivel en los dos primeros tramos.": {
+  "ctx": "tactica: {n: tr(\"Táctica\"), d: tr(\"Más química y un plus de nivel en los dos primeros tramos.\"), fx: {chem: 8, buff: {v: 0.6, b: 2, n: tr(\"Automatismos\")}}},",
+  "where": "engine-manager.js:33"
+ },
+ "Automatismos": {
+  "ctx": "tactica: {n: tr(\"Táctica\"), d: tr(\"Más química y un plus de nivel en los dos primeros tramos.\"), fx: {chem: 8, buff: {v: 0.6, b: 2, n: tr(\"Automatismos\")}}},",
+  "where": "engine-manager.js:33"
+ },
+ "Los jugadores de 25 años o menos progresan un 15 % más.": {
+  "ctx": "tecnica: {n: tr(\"Técnica\"), d: tr(\"Los jugadores de 25 años o menos progresan un 15 % más.\"), fx: {}},",
+  "where": "engine-manager.js:34"
+ },
+ "Cantera": {
+  "ctx": "cantera: {n: tr(\"Cantera\"), d: tr(\"Los de 21 o menos progresan un 35 % más.\"), fx: {}},",
+  "where": "engine-manager.js:35"
+ },
+ "Los de 21 o menos progresan un 35 % más.": {
+  "ctx": "cantera: {n: tr(\"Cantera\"), d: tr(\"Los de 21 o menos progresan un 35 % más.\"), fx: {}},",
+  "where": "engine-manager.js:35"
+ },
+ "Descanso activo": {
+  "ctx": "descanso: {n: tr(\"Descanso activo\"), d: tr(\"Vestuario contento y fresco, aunque arrancáis algo oxidados.\"), fx: {sqMor: 6, sfit: 8, buff: {v: -0.5, b: 1, n: tr(\"Oxidados\")}}}",
+  "where": "engine-manager.js:36"
+ },
+ "Vestuario contento y fresco, aunque arrancáis algo oxidados.": {
+  "ctx": "descanso: {n: tr(\"Descanso activo\"), d: tr(\"Vestuario contento y fresco, aunque arrancáis algo oxidados.\"), fx: {sqMor: 6, sfit: 8, buff: {v: -0.5, b: 1, n: tr(\"Oxidados\")}}}",
+  "where": "engine-manager.js:36"
+ },
+ "Oxidados": {
+  "ctx": "descanso: {n: tr(\"Descanso activo\"), d: tr(\"Vestuario contento y fresco, aunque arrancáis algo oxidados.\"), fx: {sqMor: 6, sfit: 8, buff: {v: -0.5, b: 1, n: tr(\"Oxidados\")}}}",
+  "where": "engine-manager.js:36"
+ },
+ "Seguía en el club cuando te fuiste": {
+  "ctx": "m.sq.forEach(function (p) { if (p.tot.apps + p.st.apps >= 40) mgrAlumni(p, tr(\"Seguía en el club cuando te fuiste\")); });",
+  "where": "engine-manager.js:254"
+ },
+ "El club incorpora a {name} ({pos}) para completar la plantilla.": {
+  "ctx": "feedNote(tr(\"El club incorpora a {name} ({pos}) para completar la plantilla.\", {name: plName(p), pos: posAb(p.pos)}));",
+  "where": "engine-manager.js:314"
+ },
+ "Ascender (top {n})": {
+  "ctx": "if (lg.upI >= 0 && exp <= 5) { t = W.lg[lg.upI].rel || 3; txt = tr(\"Ascender (top {n})\", {n: t}); }",
+  "where": "engine-manager.js:324"
+ },
+ "Terminar en la mitad alta": {
+  "ctx": "else if (exp <= n / 2) { t = Math.round(n / 2); txt = tr(\"Terminar en la mitad alta\"); }",
+  "where": "engine-manager.js:327"
+ },
+ "Llegar a la final de {comp}": {
+  "ctx": "objs.push({k: \"cup\", ck: cup.k, v: d, n: [\"\", tr(\"Llegar a la final de {comp}\", {comp: trComp(cup.n)}), tr(\"Llegar a semifinales de {comp}\", {comp: trComp(cup.n)}), tr(\"Llegar a cuartos de {comp}\", {comp: trComp(cup.n)})",
+  "where": "engine-manager.js:334"
+ },
+ "Llegar a semifinales de {comp}": {
+  "ctx": "objs.push({k: \"cup\", ck: cup.k, v: d, n: [\"\", tr(\"Llegar a la final de {comp}\", {comp: trComp(cup.n)}), tr(\"Llegar a semifinales de {comp}\", {comp: trComp(cup.n)}), tr(\"Llegar a cuartos de {comp}\", {comp: trComp(cup.n)})",
+  "where": "engine-manager.js:334"
+ },
+ "Llegar a cuartos de {comp}": {
+  "ctx": "objs.push({k: \"cup\", ck: cup.k, v: d, n: [\"\", tr(\"Llegar a la final de {comp}\", {comp: trComp(cup.n)}), tr(\"Llegar a semifinales de {comp}\", {comp: trComp(cup.n)}), tr(\"Llegar a cuartos de {comp}\", {comp: trComp(cup.n)})",
+  "where": "engine-manager.js:334"
+ },
+ "Superar la fase de liga de {comp}": {
+  "ctx": "if (c.typ === \"swiss\" || c.typ === \"grp\") objs.push({k: \"cont\", ck: k, v: rank <= 6 ? 3 : 9, n: rank <= 6 ? tr(\"Llegar a cuartos de {comp}\", {comp: trComp(c.n)}) : tr(\"Superar la fase de liga de {comp}\", {comp: trComp(c.",
+  "where": "engine-manager.js:340"
+ },
+ "con su selección": {
+  "ctx": "if (chance(0.018)) mInjure(p, ri(1, 4), tr(\"con su selección\"));",
+  "where": "engine-manager.js:412"
+ },
+ "{n} jugador tuyo convocado con sus selecciones.": {
+  "ctx": "if (n) S.bnews.push({t: \"ok\", x: trn(n, \"{n} jugador tuyo convocado con sus selecciones.\", \"{n} jugadores tuyos convocados con sus selecciones.\")});",
+  "where": "engine-manager.js:414",
+  "note": "plural:singular"
+ },
+ "{n} jugadores tuyos convocados con sus selecciones.": {
+  "ctx": "if (n) S.bnews.push({t: \"ok\", x: trn(n, \"{n} jugador tuyo convocado con sus selecciones.\", \"{n} jugadores tuyos convocados con sus selecciones.\")});",
+  "where": "engine-manager.js:414",
+  "note": "plural:plural"
+ },
+ "{name} recibe el alta médica.": {
+  "ctx": "if (p.inj > 0 && p.inj <= S.tw) { if (p.role === \"C\" || p.role === \"I\") S.bnews.push({t: \"ok\", x: tr(\"{name} recibe el alta médica.\", {name: plName(p)})}); p.inj = 0; p.injN = \"\"; }",
+  "where": "engine-manager.js:422"
+ },
+ "Contusión": {
+  "ctx": "else if (x < 0.62) { w = ri(1, 3); n = pick([tr(\"Sobrecarga muscular\"), tr(\"Esguince de tobillo\"), tr(\"Contusión\")]); }",
+  "where": "engine-manager.js:429"
+ },
+ "{name}: {inj} {where} ({n} semana).": {
+  "ctx": "if (p.role === \"C\" || p.role === \"I\" || w >= 6) mNews(\"bad\", where ? trn(w, \"{name}: {inj} {where} ({n} semana).\", \"{name}: {inj} {where} ({n} semanas).\", {name: plName(p), inj: injL, where: where}) : trn(w, \"{name}: {in",
+  "where": "engine-manager.js:436",
+  "note": "plural:singular"
+ },
+ "{name}: {inj} {where} ({n} semanas).": {
+  "ctx": "if (p.role === \"C\" || p.role === \"I\" || w >= 6) mNews(\"bad\", where ? trn(w, \"{name}: {inj} {where} ({n} semana).\", \"{name}: {inj} {where} ({n} semanas).\", {name: plName(p), inj: injL, where: where}) : trn(w, \"{name}: {in",
+  "where": "engine-manager.js:436",
+  "note": "plural:plural"
+ },
+ "{name}: {inj} ({n} semana).": {
+  "ctx": "if (p.role === \"C\" || p.role === \"I\" || w >= 6) mNews(\"bad\", where ? trn(w, \"{name}: {inj} {where} ({n} semana).\", \"{name}: {inj} {where} ({n} semanas).\", {name: plName(p), inj: injL, where: where}) : trn(w, \"{name}: {in",
+  "where": "engine-manager.js:436",
+  "note": "plural:singular"
+ },
+ "{name}: {inj} ({n} semanas).": {
+  "ctx": "if (p.role === \"C\" || p.role === \"I\" || w >= 6) mNews(\"bad\", where ? trn(w, \"{name}: {inj} {where} ({n} semana).\", \"{name}: {inj} {where} ({n} semanas).\", {name: plName(p), inj: injL, where: where}) : trn(w, \"{name}: {in",
+  "where": "engine-manager.js:436",
+  "note": "plural:plural"
+ },
+ "{name} cumplirá un partido por acumulación de amarillas.": {
+  "ctx": "if (chance(({DFC: 0.17, MCD: 0.17, LD: 0.12, LI: 0.12, MC: 0.12}[p.pos] || 0.07) * frac)) { st.yc++; p.ycA = (p.ycA || 0) + 1; if (p.ycA >= 5) { p.ycA = 0; p.sus += 1; S.bnews.push({t: \"bad\", x: tr(\"{name} cumplirá un pa",
+  "where": "engine-manager.js:608"
+ },
+ "Roja para {name} ante el {club}.": {
+  "ctx": "if (p.id === f.redId || (f.redId == null && chance(0.008 * frac))) { if (p.id !== f.redId) f.redId = p.id; st.rc++; p.sus += 1; S.bnews.push({t: \"bad\", x: tr(\"Roja para {name} ante el {club}.\", {name: plName(p), club: cl",
+  "where": "engine-manager.js:609"
+ },
+ "Entrenador del mes ({lg})": {
+  "ctx": "m.awards.push(awd(\"mgr_month\", \"Entrenador del mes ({lg})\", {lg: W.lg[li].n}, S.yr));",
+  "where": "engine-manager.js:674"
+ },
+ "Entrenador del mes en {lg}.": {
+  "ctx": "S.bnews.push({t: \"star\", x: tr(\"Entrenador del mes en {lg}.\", trParams({lg: W.lg[li].n}))}); m.rep = clamp(m.rep + 1, 0, 100);",
+  "where": "engine-manager.js:675"
+ },
+ "La masa salarial supera el tope que marca la directiva.": {
+  "ctx": "if (mWageBill() > m.wcap * 1.04) { m.board = clamp(m.board - 2, 0, 100); mNews(\"bad\", tr(\"La masa salarial supera el tope que marca la directiva.\")); }",
+  "where": "engine-manager.js:691"
+ },
+ "{name} se siente engañado: le prometiste ser jugador Clave.": {
+  "ctx": "if (p.prom && avail && share < 0.45) { d -= 10; S.bnews.push({t: \"bad\", x: tr(\"{name} se siente engañado: le prometiste ser jugador Clave.\", {name: plName(p)})}); p.prom = null; }",
+  "where": "engine-manager.js:720"
+ },
+ "{name} pide salir del club.": {
+  "ctx": "p.req = true; S.bnews.push({t: \"bad\", x: tr(\"{name} pide salir del club.\", {name: plName(p)})});",
+  "where": "engine-manager.js:724"
+ },
+ "Mejor entrenador de {lg}": {
+  "ctx": "m.awards.push(awd(\"mgr_lg\", \"Mejor entrenador de {lg}\", {lg: L.n}, S.yr + 1)); news.push({t: \"star\", x: tr(\"Mejor entrenador de {lg}.\", trParams({lg: L.n}))}); m.rep = clamp(m.rep + 3, 0, 100);",
+  "where": "engine-manager.js:760"
+ },
+ "Mejor entrenador de {lg}.": {
+  "ctx": "m.awards.push(awd(\"mgr_lg\", \"Mejor entrenador de {lg}\", {lg: L.n}, S.yr + 1)); news.push({t: \"star\", x: tr(\"Mejor entrenador de {lg}.\", trParams({lg: L.n}))}); m.rep = clamp(m.rep + 3, 0, 100);",
+  "where": "engine-manager.js:760"
+ },
+ "{name} vuelve de su cesión con {ovr} de media.": {
+  "ctx": "if (p.loanOut) { p.loanOut = null; p.ovr = round1(Math.min(p.pot, p.ovr + rf(0, 1.5))); news.push({t: \"ok\", x: tr(\"{name} vuelve de su cesión con {ovr} de media.\", {name: plName(p), ovr: Math.round(p.ovr)})}); }",
+  "where": "engine-manager.js:783"
+ },
+ "Traspasado al {club}": {
+  "ctx": "if (p.leaveTo) { gone.push([p, tr(\"Traspasado al {club}\", {club: clubName(p.leaveTo.club)}), p.leaveTo.club, p.leaveTo.fee]); return; }",
+  "where": "engine-manager.js:786"
+ },
+ "Se retira": {
+  "ctx": "if (retire) { gone.push([p, tr(\"Se retira\"), -1, 0, true]); return; }",
+  "where": "engine-manager.js:788"
+ },
+ "Se va libre al acabar su contrato": {
+  "ctx": "if (p.yrs <= 0) gone.push([p, tr(\"Se va libre al acabar su contrato\"), -1, 0]);",
+  "where": "engine-manager.js:789"
+ },
+ "{name}: {why} ({fee}).": {
+  "ctx": "news.push({t: g[4] ? \"ok\" : \"bad\", x: g[3] ? tr(\"{name}: {why} ({fee}).\", {name: plName(p), why: g[1].toLowerCase(), fee: fmtMoney(g[3])}) : tr(\"{name}: {why}.\", {name: plName(p), why: g[1].toLowerCase()})});",
+  "where": "engine-manager.js:793"
+ },
+ "{name}: {why}.": {
+  "ctx": "news.push({t: g[4] ? \"ok\" : \"bad\", x: g[3] ? tr(\"{name}: {why} ({fee}).\", {name: plName(p), why: g[1].toLowerCase(), fee: fmtMoney(g[3])}) : tr(\"{name}: {why}.\", {name: plName(p), why: g[1].toLowerCase()})});",
+  "where": "engine-manager.js:793"
+ },
+ "{names} gana el {comp} con {nat}.": {
+  "ctx": "if (champs.length) S.bnews.push({t: \"star\", x: trn(champs.length, \"{names} gana el {comp} con {nat}.\", \"{names} ganan el {comp} con {nat}.\", {names: champs.map(plShort).join(\", \"), comp: trComp(c.n), nat: natName(c.win)}",
+  "where": "engine-manager.js:840",
+  "note": "plural:singular"
+ },
+ "{names} ganan el {comp} con {nat}.": {
+  "ctx": "if (champs.length) S.bnews.push({t: \"star\", x: trn(champs.length, \"{names} gana el {comp} con {nat}.\", \"{names} ganan el {comp} con {nat}.\", {names: champs.map(plShort).join(\", \"), comp: trComp(c.n), nat: natName(c.win)}",
+  "where": "engine-manager.js:840",
+  "note": "plural:plural"
+ },
+ "{name} gana el Balón de Oro {year}": {
+  "ctx": "if (ranking[0] && ranking[0].mine) { out.push({k: \"bdo\", n: tr(\"{name} gana el Balón de Oro {year}\", {name: ranking[0].n, year: yEnd})}); m.fans = clamp(m.fans + 6, 0, 100); m.rep = clamp(m.rep + 2, 0, 100); var bp = mPl",
+  "where": "engine-manager.js:862"
+ },
+ "{name} acaba en el podio del Balón de Oro": {
+  "ctx": "else if (mineTop.length) out.push({k: \"bdo_pod\", n: tr(\"{name} acaba en el podio del Balón de Oro\", {name: mineTop[0].n}), minor: true});",
+  "where": "engine-manager.js:863"
+ },
+ "Mejor entrenador del año {y}": {
+  "ctx": "if (chance(0.55)) { out.push(awd(\"mgr_year\", \"Mejor entrenador del año {y}\", {y: yEnd}, yEnd)); m.awards.push(awd(\"mgr_year\", \"Mejor entrenador del año {y}\", {y: yEnd}, yEnd)); m.rep = clamp(m.rep + 5, 0, 100); }",
+  "where": "engine-manager.js:865"
+ },
+ "{why} por {fee}": {
+  "ctx": "if (p.tot.apps + p.st.apps >= 20 || fee >= 5e6) mgrAlumni(p, fee ? tr(\"{why} por {fee}\", {why: why, fee: fmtMoney(fee)}) : why);",
+  "where": "engine-manager.js:945"
+ },
+ "El brazalete pasa a otro jugador tras la salida de {name}.": {
+  "ctx": "if (m.cap === p.id) { m.cap = null; feedNote(tr(\"El brazalete pasa a otro jugador tras la salida de {name}.\", {name: plName(p)})); }",
+  "where": "engine-manager.js:948"
+ },
+ "El director deportivo renueva a {names}.": {
+  "ctx": "if (auto.length) feedNote(tr(\"El director deportivo renueva a {names}.\", {names: auto.join(\", \")}));",
+  "where": "engine-manager.js:1023"
+ },
+ "Leyenda de los banquillos": {
+  "ctx": "var title = sc >= 900 ? tr(\"Leyenda de los banquillos\") : sc >= 600 ? tr(\"Entrenador de época\") : sc >= 380 ? tr(\"Técnico de élite\") : sc >= 220 ? tr(\"Entrenador respetado\") : sc >= 110 ? tr(\"Míster de garantías\") : tr(\"",
+  "where": "engine-manager.js:1047"
+ },
+ "Entrenador de época": {
+  "ctx": "var title = sc >= 900 ? tr(\"Leyenda de los banquillos\") : sc >= 600 ? tr(\"Entrenador de época\") : sc >= 380 ? tr(\"Técnico de élite\") : sc >= 220 ? tr(\"Entrenador respetado\") : sc >= 110 ? tr(\"Míster de garantías\") : tr(\"",
+  "where": "engine-manager.js:1047"
+ },
+ "Técnico de élite": {
+  "ctx": "var title = sc >= 900 ? tr(\"Leyenda de los banquillos\") : sc >= 600 ? tr(\"Entrenador de época\") : sc >= 380 ? tr(\"Técnico de élite\") : sc >= 220 ? tr(\"Entrenador respetado\") : sc >= 110 ? tr(\"Míster de garantías\") : tr(\"",
+  "where": "engine-manager.js:1047"
+ },
+ "Entrenador respetado": {
+  "ctx": "var title = sc >= 900 ? tr(\"Leyenda de los banquillos\") : sc >= 600 ? tr(\"Entrenador de época\") : sc >= 380 ? tr(\"Técnico de élite\") : sc >= 220 ? tr(\"Entrenador respetado\") : sc >= 110 ? tr(\"Míster de garantías\") : tr(\"",
+  "where": "engine-manager.js:1047"
+ },
+ "Míster de garantías": {
+  "ctx": "var title = sc >= 900 ? tr(\"Leyenda de los banquillos\") : sc >= 600 ? tr(\"Entrenador de época\") : sc >= 380 ? tr(\"Técnico de élite\") : sc >= 220 ? tr(\"Entrenador respetado\") : sc >= 110 ? tr(\"Míster de garantías\") : tr(\"",
+  "where": "engine-manager.js:1047"
+ },
+ "Trotamundos de los banquillos": {
+  "ctx": "var title = sc >= 900 ? tr(\"Leyenda de los banquillos\") : sc >= 600 ? tr(\"Entrenador de época\") : sc >= 380 ? tr(\"Técnico de élite\") : sc >= 220 ? tr(\"Entrenador respetado\") : sc >= 110 ? tr(\"Míster de garantías\") : tr(\"",
+  "where": "engine-manager.js:1047"
+ },
+ "Verano {year}": {
+  "ctx": "case \"post\": var pl = summerPlan(); return pl.list.length || pl.cwc ? tr(\"Verano {year}: torneos\", {year: pl.y}) : tr(\"Verano {year}\", {year: pl.y});",
+  "where": "engine-manager.js:1069"
+ },
+ "Banquillo": {
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Banquillo\"), title: tr(\"Ofertas de otros clubes\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.m.club)}), txt: trn(x.list.length, \"Rechazas {n} oferta.\", \"Rechazas {n",
+  "where": "engine-manager.js:1117"
+ },
+ "Ofertas de otros clubes": {
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Banquillo\"), title: tr(\"Ofertas de otros clubes\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.m.club)}), txt: trn(x.list.length, \"Rechazas {n} oferta.\", \"Rechazas {n",
+  "where": "engine-manager.js:1117"
+ },
+ "Rechazas {n} oferta.": {
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Banquillo\"), title: tr(\"Ofertas de otros clubes\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.m.club)}), txt: trn(x.list.length, \"Rechazas {n} oferta.\", \"Rechazas {n",
+  "where": "engine-manager.js:1117",
+  "note": "plural:singular"
+ },
+ "Rechazas {n} ofertas.": {
+  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Banquillo\"), title: tr(\"Ofertas de otros clubes\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.m.club)}), txt: trn(x.list.length, \"Rechazas {n} oferta.\", \"Rechazas {n",
+  "where": "engine-manager.js:1117",
+  "note": "plural:plural"
+ },
+ "Directiva": {
+  "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; ",
+  "where": "engine-manager.js:1158"
+ },
+ "Prestigio": {
+  "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; ",
+  "where": "engine-manager.js:1158"
+ },
+ "Química": {
+  "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; ",
+  "where": "engine-manager.js:1158"
+ },
+ "Moral del vestuario": {
+  "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; ",
+  "where": "engine-manager.js:1158"
+ },
+ "Físico de la plantilla": {
+  "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; ",
+  "where": "engine-manager.js:1158"
+ },
+ "Puntos en liga": {
+  "ctx": "onLang(function () { MFX_LABEL = {board: tr(\"Directiva\"), fans: tr(\"Afición\"), rep: tr(\"Prestigio\"), chem: tr(\"Química\"), sqMor: tr(\"Moral del vestuario\"), sfit: tr(\"Físico de la plantilla\"), pts: tr(\"Puntos en liga\")}; ",
+  "where": "engine-manager.js:1158"
+ },
+ "{name} pasa a {role}": {
+  "ctx": "case \"prole\": if (pl) { pl.role = v; ch.push([\"prole\", 0, tr(\"{name} pasa a {role}\", {name: plShort(pl), role: tr(ROLES[v].n).toLowerCase()})]); } break;",
+  "where": "engine-manager.js:1172"
+ },
+ "{name} está en venta": {
+  "ctx": "case \"plist\": if (pl) { pl.list = !!v; if (v) ch.push([\"note\", 0, tr(\"{name} está en venta\", {name: plShort(pl)})]); } break;",
+  "where": "engine-manager.js:1174"
+ },
+ "{name} pasa a estar en venta": {
+  "ctx": "case \"plist\": if (v) ch.push([\"note\", 0, tr(\"{name} pasa a estar en venta\", {name: nm})]); break;",
+  "where": "engine-manager.js:1195"
+ },
+ "Cerráis el marcador": {
+  "ctx": "if (u.lock) ch.push([\"note\", 0, tr(\"Cerráis el marcador\")]);",
+  "where": "engine-manager.js:1205"
+ },
+ "Gol a favor": {
+  "ctx": "if (u.goal) ch.push([\"goal\", u.goal, tr(\"Gol a favor\")]);",
+  "where": "engine-manager.js:1206"
+ },
+ "uno de los tuyos": {
+  "ctx": "if (u.red2) ch.push([\"red\", 1, tr(\"uno de los tuyos\")]);",
+  "where": "engine-manager.js:1210"
+ },
+ "Sale del campo": {
+  "ctx": "if (u.off) ch.push([\"note\", 0, tr(\"Sale del campo\")]);",
+  "where": "engine-manager.js:1211"
+ },
+ "Fácil": {
+  "ctx": "var DIFFS = [N_(\"Fácil\"), N_(\"Normal\"), N_(\"Difícil\"), N_(\"Leyenda\")];",
+  "where": "engine-modes.js:6"
+ },
+ "Difícil": {
+  "ctx": "var DIFFS = [N_(\"Fácil\"), N_(\"Normal\"), N_(\"Difícil\"), N_(\"Leyenda\")];",
+  "where": "engine-modes.js:6"
+ },
+ "Leyenda": {
+  "ctx": "var DIFFS = [N_(\"Fácil\"), N_(\"Normal\"), N_(\"Difícil\"), N_(\"Leyenda\")];",
+  "where": "engine-modes.js:6"
+ },
+ "Promesa": {
+  "ctx": "promesa: {n: tr(\"Promesa\"), ovr: 58, pot: [74, 84]},",
+  "where": "engine-player.js:5"
+ },
+ "Joya": {
+  "ctx": "joya: {n: tr(\"Joya\"), ovr: 62, pot: [82, 89]},",
+  "where": "engine-player.js:6"
+ },
+ "Elegido": {
+  "ctx": "elegido: {n: tr(\"Elegido\"), ovr: 65, pot: [88, 94]},",
+  "where": "engine-player.js:7"
+ },
+ "Misterio": {
+  "ctx": "misterio: {n: tr(\"Misterio\"), ovr: 0, pot: [64, 95]}",
+  "where": "engine-player.js:8"
+ },
+ "Ritmo": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Tiro": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Pase": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Regate": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Defensa": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Físico": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Estirada": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Paradas": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Saque": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Reflejos": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Velocidad": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Colocación": {
+  "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida",
+  "where": "engine-player.js:16"
+ },
+ "Físico y velocidad": {
+  "ctx": "fisico: {n: tr(\"Físico y velocidad\"), d: tr(\"Aguantas más y te lesionas menos.\"), att: [\"RIT\", \"FIS\"], gk: [\"VEL\", \"EST\"]},",
+  "where": "engine-player.js:28"
+ },
+ "Aguantas más y te lesionas menos.": {
+  "ctx": "fisico: {n: tr(\"Físico y velocidad\"), d: tr(\"Aguantas más y te lesionas menos.\"), att: [\"RIT\", \"FIS\"], gk: [\"VEL\", \"EST\"]},",
+  "where": "engine-player.js:28"
+ },
+ "Técnica": {
+  "ctx": "tecnica: {n: tr(\"Técnica\"), d: tr(\"Más desborde y asistencias.\"), att: [\"REG\", \"PAS\"], gk: [\"SAQ\", \"COL\"]},",
+  "where": "engine-player.js:29"
+ },
+ "Más desborde y asistencias.": {
+  "ctx": "tecnica: {n: tr(\"Técnica\"), d: tr(\"Más desborde y asistencias.\"), att: [\"REG\", \"PAS\"], gk: [\"SAQ\", \"COL\"]},",
+  "where": "engine-player.js:29"
+ },
+ "Definición": {
+  "ctx": "remate: {n: tr(\"Definición\"), d: tr(\"Más goles por partido.\"), att: [\"TIR\"], gk: [\"REF\", \"PAR\"]},",
+  "where": "engine-player.js:30"
+ },
+ "Más goles por partido.": {
+  "ctx": "remate: {n: tr(\"Definición\"), d: tr(\"Más goles por partido.\"), att: [\"TIR\"], gk: [\"REF\", \"PAR\"]},",
+  "where": "engine-player.js:30"
+ },
+ "Mejor marcaje y anticipación.": {
+  "ctx": "defensa: {n: tr(\"Defensa\"), d: tr(\"Mejor marcaje y anticipación.\"), att: [\"DEF\", \"FIS\"], gk: [\"PAR\", \"COL\"]},",
+  "where": "engine-player.js:31"
+ },
+ "Táctica": {
+  "ctx": "tactica: {n: tr(\"Táctica\"), d: tr(\"Entiendes al míster: más minutos.\"), att: [], gk: []},",
+  "where": "engine-player.js:32"
+ },
+ "Entiendes al míster: más minutos.": {
+  "ctx": "tactica: {n: tr(\"Táctica\"), d: tr(\"Entiendes al míster: más minutos.\"), att: [], gk: []},",
+  "where": "engine-player.js:32"
+ },
+ "Mentalidad": {
+  "ctx": "mental: {n: tr(\"Mentalidad\"), d: tr(\"Más regularidad y moral bajo presión.\"), att: [], gk: []}",
+  "where": "engine-player.js:33"
+ },
+ "Más regularidad y moral bajo presión.": {
+  "ctx": "mental: {n: tr(\"Mentalidad\"), d: tr(\"Más regularidad y moral bajo presión.\"), att: [], gk: []}",
+  "where": "engine-player.js:33"
+ },
+ "Estrella": {
+  "ctx": "if (rel >= 4) return N_(\"Estrella\");",
+  "where": "engine-player.js:59"
+ },
+ "Titular": {
+  "ctx": "if (rel >= 0) return N_(\"Titular\");",
+  "where": "engine-player.js:60"
+ },
+ "Rotación": {
+  "ctx": "if (rel >= -4) return N_(\"Rotación\");",
+  "where": "engine-player.js:61"
+ },
+ "Suplente": {
+  "ctx": "if (rel >= -9) return N_(\"Suplente\");",
+  "where": "engine-player.js:62"
+ },
+ "Reserva": {
+  "ctx": "return age <= 21 ? N_(\"Promesa\") : N_(\"Reserva\");",
+  "where": "engine-player.js:63"
+ },
+ "verano": {
+  "ctx": "if (offers.length) S.pend.push({k: \"offers\", list: offers, kind: N_(\"verano\"), forced: p.con.yrs <= 0 && !p.loan});",
+  "where": "engine-player.js:187"
+ },
+ "Jugar {n} partidos": {
+  "ctx": "objs.push({k: \"apps\", v: appsT, n: tr(\"Jugar {n} partidos\", {n: appsT})});",
+  "where": "engine-player.js:198"
+ },
+ "Marcar {n} goles": {
+  "ctx": "if (g === \"DEL\") { var gv = [22, 14, 8, 4, 2][tier]; objs.push({k: \"g\", v: gv, n: tr(\"Marcar {n} goles\", {n: gv})}); }",
+  "where": "engine-player.js:200"
+ },
+ "Sumar {n} goles + asistencias": {
+  "ctx": "else if (g === \"MED\") { var mv = [18, 12, 7, 3, 2][tier]; objs.push({k: \"ga\", v: mv, n: tr(\"Sumar {n} goles + asistencias\", {n: mv})}); }",
+  "where": "engine-player.js:201"
+ },
+ "Nota media de {rating} o más": {
+  "ctx": "else if (g === \"DEF\") { objs.push({k: \"rt\", v: 6.9, n: tr(\"Nota media de {rating} o más\", {rating: fmtDec(6.9, 1)})}); }",
+  "where": "engine-player.js:202"
+ },
+ "{n} portería a cero": {
+  "ctx": "else { var cv = [16, 12, 8, 3, 1][tier]; objs.push({k: \"cs\", v: cv, n: trn(cv, \"{n} portería a cero\", \"{n} porterías a cero\")}); }",
+  "where": "engine-player.js:203",
+  "note": "plural:singular"
+ },
+ "{n} porterías a cero": {
+  "ctx": "else { var cv = [16, 12, 8, 3, 1][tier]; objs.push({k: \"cs\", v: cv, n: trn(cv, \"{n} portería a cero\", \"{n} porterías a cero\")}); }",
+  "where": "engine-player.js:203",
+  "note": "plural:plural"
+ },
+ "Ganar la liga": {
+  "ctx": "if (exp <= 1) { t = 1; txt = tr(\"Ganar la liga\"); }",
+  "where": "engine-player.js:206"
+ },
+ "Terminar entre los {n} primeros": {
+  "ctx": "else if (exp <= 4) { t = Math.min(4, exp + 1); txt = tr(\"Terminar entre los {n} primeros\", {n: t}); }",
+  "where": "engine-player.js:207"
+ },
+ "Evitar el descenso": {
+  "ctx": "else if (W.lg[li].downI >= 0 || W.lg[li].rel) { t = n - (W.lg[li].rel || 3); txt = tr(\"Evitar el descenso\"); }",
+  "where": "engine-player.js:209"
+ },
+ "No acabar en los dos últimos puestos": {
+  "ctx": "else { t = n - 2; txt = tr(\"No acabar en los dos últimos puestos\"); }",
+  "where": "engine-player.js:210"
+ },
+ "Ascender (top 3)": {
+  "ctx": "if (W.lg[li].upI >= 0 && exp <= 4) { t = 3; txt = tr(\"Ascender (top 3)\"); }",
+  "where": "engine-player.js:211"
+ },
+ "Recibes el alta médica tras {inj}.": {
+  "ctx": "if (p.inj && p.injT <= S.tw) { S.bnews.push({t: \"ok\", x: tr(\"Recibes el alta médica tras {inj}.\", {inj: lcName(p.inj.n)})}); p.inj = null; }",
+  "where": "engine-player.js:289"
+ },
+ "Clasificación Mundial {year}": {
+  "ctx": "var label = qual ? (nt.T.k === \"WC\" ? tr(\"Clasificación Mundial {year}\", {year: nt.y}) : tr(\"Clasificación {comp} {year}\", {comp: trComp(nt.T.n), year: nt.y})) : tr(\"Amistoso internacional\");",
+  "where": "engine-player.js:300"
+ },
+ "Clasificación {comp} {year}": {
+  "ctx": "var label = qual ? (nt.T.k === \"WC\" ? tr(\"Clasificación Mundial {year}\", {year: nt.y}) : tr(\"Clasificación {comp} {year}\", {comp: trComp(nt.T.n), year: nt.y})) : tr(\"Amistoso internacional\");",
+  "where": "engine-player.js:300"
+ },
+ "Amistoso internacional": {
+  "ctx": "var label = qual ? (nt.T.k === \"WC\" ? tr(\"Clasificación Mundial {year}\", {year: nt.y}) : tr(\"Clasificación {comp} {year}\", {comp: trComp(nt.T.n), year: nt.y})) : tr(\"Amistoso internacional\");",
+  "where": "engine-player.js:300"
+ },
+ "Partidos de selección": {
+  "ctx": "if (!S.C.NQ) S.C.NQ = {k: \"NQ\", typ: \"nq\", nat: true, n: N_(\"Partidos de selección\"), s: N_(\"Selección\"), lvl: 1, done: false, win: -1};",
+  "where": "engine-player.js:304"
+ },
+ "Selección": {
+  "ctx": "if (!S.C.NQ) S.C.NQ = {k: \"NQ\", typ: \"nq\", nat: true, n: N_(\"Partidos de selección\"), s: N_(\"Selección\"), lvl: 1, done: false, win: -1};",
+  "where": "engine-player.js:304"
+ },
+ "Liga": {
+  "ctx": "if (f.kind === \"lg\") return tr(\"Liga\");",
+  "where": "engine-player.js:344"
+ },
+ "Clasif.": {
+  "ctx": "if (f.kind === \"nq\") return f.qk ? tr(\"Clasif.\") : tr(\"Amistoso\");",
+  "where": "engine-player.js:345"
+ },
+ "Amistoso": {
+  "ctx": "if (f.kind === \"nq\") return f.qk ? tr(\"Clasif.\") : tr(\"Amistoso\");",
+  "where": "engine-player.js:345"
+ },
+ "J{n}": {
+  "ctx": "if (f.kind === \"lg\") return tr(\"J{n}\", {n: f.md + 1});",
+  "where": "engine-player.js:350"
+ },
+ "Grupo {g}": {
+  "ctx": "if (f.kind === \"tb\") return c.typ === \"grp\" ? (c.sub ? tr(c.sub) : tr(\"Grupo {g}\", {g: String.fromCharCode(65 + f.gi)})) : tr(\"J{n}\", {n: f.md + 1});",
+  "where": "engine-player.js:353"
+ },
+ "{round} (ida)": {
+  "ctx": "if (f.legs > 1) return f.leg === 0 ? tr(\"{round} (ida)\", {round: tr(f.rn)}) : tr(\"{round} (vuelta)\", {round: tr(f.rn)});",
+  "where": "engine-player.js:354"
+ },
+ "{round} (vuelta)": {
+  "ctx": "if (f.legs > 1) return f.leg === 0 ? tr(\"{round} (ida)\", {round: tr(f.rn)}) : tr(\"{round} (vuelta)\", {round: tr(f.rn)});",
+  "where": "engine-player.js:354"
+ },
+ "Primer gol como profesional": {
+  "ctx": "if (ss.g === pg && pg > 0 && !p.flags.firstGoal) { p.flags.firstGoal = true; milestone(tr(\"Primer gol como profesional\")); S.bnews.push({t: \"star\", x: tr(\"¡Primer gol como profesional ante el {club}!\", {club: clubName(f.",
+  "where": "engine-player.js:516"
+ },
+ "¡Primer gol como profesional ante el {club}!": {
+  "ctx": "if (ss.g === pg && pg > 0 && !p.flags.firstGoal) { p.flags.firstGoal = true; milestone(tr(\"Primer gol como profesional\")); S.bnews.push({t: \"star\", x: tr(\"¡Primer gol como profesional ante el {club}!\", {club: clubName(f.",
+  "where": "engine-player.js:516"
+ },
+ "Debut con {nat}": {
+  "ctx": "if (!p.intl.debut) { p.intl.debut = S.yr; milestone(tr(\"Debut con {nat}\", {nat: natName(p.inat)})); S.bnews.push({t: \"star\", x: tr(\"Debut con la selección de {nat} ante {opp}.\", {nat: natName(p.inat), opp: natName(f.opp)",
+  "where": "engine-player.js:519"
+ },
+ "Debut con la selección de {nat} ante {opp}.": {
+  "ctx": "if (!p.intl.debut) { p.intl.debut = S.yr; milestone(tr(\"Debut con {nat}\", {nat: natName(p.inat)})); S.bnews.push({t: \"star\", x: tr(\"Debut con la selección de {nat} ante {opp}.\", {nat: natName(p.inat), opp: natName(f.opp)",
+  "where": "engine-player.js:519"
+ },
+ "Primer gol con la selección": {
+  "ctx": "if (pg > 0 && !p.flags.firstIntlGoal) { p.flags.firstIntlGoal = true; milestone(tr(\"Primer gol con la selección\")); }",
+  "where": "engine-player.js:521"
+ },
+ "Debut con el {club}": {
+  "ctx": "if (!p.flags.debut && !f.isNat) { p.flags.debut = true; milestone(tr(\"Debut con el {club}\", {club: clubName(p.club)})); }",
+  "where": "engine-player.js:523"
+ },
+ "Lesión de rodilla": {
+  "ctx": "if (forced) { w = forced; n = forced >= 10 ? N_(\"Lesión de rodilla\") : N_(\"Golpe fuerte\"); }",
+  "where": "engine-player.js:546"
+ },
+ "Golpe fuerte": {
+  "ctx": "if (forced) { w = forced; n = forced >= 10 ? N_(\"Lesión de rodilla\") : N_(\"Golpe fuerte\"); }",
+  "where": "engine-player.js:546"
+ },
+ "Sobrecarga muscular": {
+  "ctx": "else if (x < 0.62) { w = ri(1, 3); n = pick([N_(\"Sobrecarga muscular\"), N_(\"Esguince de tobillo\"), N_(\"Contusión en el muslo\"), N_(\"Molestias en el aductor\")]); }",
+  "where": "engine-player.js:547"
+ },
+ "Esguince de tobillo": {
+  "ctx": "else if (x < 0.62) { w = ri(1, 3); n = pick([N_(\"Sobrecarga muscular\"), N_(\"Esguince de tobillo\"), N_(\"Contusión en el muslo\"), N_(\"Molestias en el aductor\")]); }",
+  "where": "engine-player.js:547"
+ },
+ "Contusión en el muslo": {
+  "ctx": "else if (x < 0.62) { w = ri(1, 3); n = pick([N_(\"Sobrecarga muscular\"), N_(\"Esguince de tobillo\"), N_(\"Contusión en el muslo\"), N_(\"Molestias en el aductor\")]); }",
+  "where": "engine-player.js:547"
+ },
+ "Molestias en el aductor": {
+  "ctx": "else if (x < 0.62) { w = ri(1, 3); n = pick([N_(\"Sobrecarga muscular\"), N_(\"Esguince de tobillo\"), N_(\"Contusión en el muslo\"), N_(\"Molestias en el aductor\")]); }",
+  "where": "engine-player.js:547"
+ },
+ "Rotura fibrilar": {
+  "ctx": "else if (x < 0.9) { w = ri(4, 8); n = pick([N_(\"Rotura fibrilar\"), N_(\"Lesión en el isquiotibial\"), N_(\"Esguince de rodilla\")]); }",
+  "where": "engine-player.js:548"
+ },
+ "Lesión en el isquiotibial": {
+  "ctx": "else if (x < 0.9) { w = ri(4, 8); n = pick([N_(\"Rotura fibrilar\"), N_(\"Lesión en el isquiotibial\"), N_(\"Esguince de rodilla\")]); }",
+  "where": "engine-player.js:548"
+ },
+ "Esguince de rodilla": {
+  "ctx": "else if (x < 0.9) { w = ri(4, 8); n = pick([N_(\"Rotura fibrilar\"), N_(\"Lesión en el isquiotibial\"), N_(\"Esguince de rodilla\")]); }",
+  "where": "engine-player.js:548"
+ },
+ "Fractura de peroné": {
+  "ctx": "else if (x < 0.985) { w = ri(10, 18); n = pick([N_(\"Fractura de peroné\"), N_(\"Lesión de menisco\"), N_(\"Rotura muscular grave\")]); }",
+  "where": "engine-player.js:549"
+ },
+ "Lesión de menisco": {
+  "ctx": "else if (x < 0.985) { w = ri(10, 18); n = pick([N_(\"Fractura de peroné\"), N_(\"Lesión de menisco\"), N_(\"Rotura muscular grave\")]); }",
+  "where": "engine-player.js:549"
+ },
+ "Rotura muscular grave": {
+  "ctx": "else if (x < 0.985) { w = ri(10, 18); n = pick([N_(\"Fractura de peroné\"), N_(\"Lesión de menisco\"), N_(\"Rotura muscular grave\")]); }",
+  "where": "engine-player.js:549"
+ },
+ "Rotura del ligamento cruzado": {
+  "ctx": "else { w = ri(28, 36); n = N_(\"Rotura del ligamento cruzado\"); }",
+  "where": "engine-player.js:550"
+ },
+ "Lesión: {inj} ({n} semana de baja).": {
+  "ctx": "S.bnews.push({t: \"bad\", x: trn(w, \"Lesión: {inj} ({n} semana de baja).\", \"Lesión: {inj} ({n} semanas de baja).\", {inj: lcName(n)})});",
+  "where": "engine-player.js:553",
+  "note": "plural:singular"
+ },
+ "Lesión: {inj} ({n} semanas de baja).": {
+  "ctx": "S.bnews.push({t: \"bad\", x: trn(w, \"Lesión: {inj} ({n} semana de baja).\", \"Lesión: {inj} ({n} semanas de baja).\", {inj: lcName(n)})});",
+  "where": "engine-player.js:553",
+  "note": "plural:plural"
+ },
+ "¡CAMPEONES! {comp} en los penaltis.": {
+  "ctx": "S.bnews.push({t: \"trophy\", x: f.pens ? tr(\"¡CAMPEONES! {comp} en los penaltis.\", {comp: comp}) : tr(\"¡CAMPEONES! {comp}.\", {comp: comp})});",
+  "where": "engine-player.js:565"
+ },
+ "¡CAMPEONES! {comp}.": {
+  "ctx": "S.bnews.push({t: \"trophy\", x: f.pens ? tr(\"¡CAMPEONES! {comp} en los penaltis.\", {comp: comp}) : tr(\"¡CAMPEONES! {comp}.\", {comp: comp})});",
+  "where": "engine-player.js:565"
+ },
+ "Final perdida: {comp}.": {
+  "ctx": "} else S.bnews.push({t: \"bad\", x: tr(\"Final perdida: {comp}.\", {comp: comp})});",
+  "where": "engine-player.js:566"
+ },
+ "{comp}: pasáis a {round}.": {
+  "ctx": "if (nx) S.bnews.push({t: \"ok\", x: tr(\"{comp}: pasáis a {round}.\", {comp: comp, round: lcName(nx.n)})});",
+  "where": "engine-player.js:569"
+ },
+ "{comp}: eliminados en {round}.": {
+  "ctx": "} else S.bnews.push({t: \"bad\", x: tr(\"{comp}: eliminados en {round}.\", {comp: comp, round: lcName(f.rn)})});",
+  "where": "engine-player.js:570"
+ },
+ "Jugador del mes ({lg})": {
+  "ctx": "p.awards.push(awd(\"pom\", \"Jugador del mes ({lg})\", {lg: W.lg[S.cl[p.club]].n}, S.yr));",
+  "where": "engine-player.js:592"
+ },
+ "Jugador del mes en {lg}.": {
+  "ctx": "S.bnews.push({t: \"star\", x: tr(\"Jugador del mes en {lg}.\", trParams({lg: W.lg[S.cl[p.club]].n}))});",
+  "where": "engine-player.js:593"
+ },
+ "invierno": {
+  "ctx": "if (offers.length) S.pend.push({k: \"offers\", list: offers, kind: N_(\"invierno\"), forced: false});",
+  "where": "engine-player.js:627"
+ },
+ "¡Campeones de {lg}!": {
+  "ctx": "news.push({t: \"trophy\", x: tr(\"¡Campeones de {lg}!\", {lg: lgName(li)})});",
+  "where": "engine-player.js:662"
+ },
+ "¡Ascenso a {lg}!": {
+  "ctx": "if (L.upI >= 0 && pos <= W.lg[L.upI].rel) news.push({t: \"star\", x: tr(\"¡Ascenso a {lg}!\", {lg: lgName(L.upI)})});",
+  "where": "engine-player.js:664"
+ },
+ "Descenso a {lg}.": {
+  "ctx": "if (L.downI >= 0 && pos > S.L[li].tm.length - L.rel) news.push({t: \"bad\", x: tr(\"Descenso a {lg}.\", {lg: lgName(L.downI)})});",
+  "where": "engine-player.js:665"
+ },
+ "Termina tu cesión: vuelves al {club}.": {
+  "ctx": "after.push({t: \"ok\", x: tr(\"Termina tu cesión: vuelves al {club}.\", {club: clubName(parent)})});",
+  "where": "engine-player.js:682"
+ },
+ "Máximo goleador de {lg} ({n} goles)": {
+  "ctx": "if (ss.lg.g >= topG) out.push(awd(\"pichichi\", \"Máximo goleador de {lg} ({n} goles)\", {lg: lgN, n: ss.lg.g}, y1));",
+  "where": "engine-player.js:711"
+ },
+ "Máximo asistente de {lg} ({n})": {
+  "ctx": "if (ss.lg.a >= topA) out.push(awd(\"asist\", \"Máximo asistente de {lg} ({n})\", {lg: lgN, n: ss.lg.a}, y1));",
+  "where": "engine-player.js:713"
+ },
+ "Mejor jugador de {lg}": {
+  "ctx": "if (ss.lg.apps >= 24 && lgAvg >= 7.45 && pos <= 4 && chance(0.35 + (lgAvg - 7.45) * 1.5)) out.push(awd(\"mvp\", \"Mejor jugador de {lg}\", {lg: lgN}, y1));",
+  "where": "engine-player.js:715"
+ },
+ "Equipo de la temporada de {lg}": {
+  "ctx": "if (ss.lg.apps >= 20 && lgAvg >= 7.15) out.push(awd(\"tots\", \"Equipo de la temporada de {lg}\", {lg: lgN}, y1));",
+  "where": "engine-player.js:716"
+ },
+ "Mejor jugador joven de {lg}": {
+  "ctx": "if (p.age <= 21 && ss.lg.apps >= 16 && lgAvg >= 6.95 && chance(0.6)) out.push(awd(\"young\", \"Mejor jugador joven de {lg}\", {lg: lgN}, y1));",
+  "where": "engine-player.js:717"
+ },
+ "Portero menos goleado de {lg}": {
+  "ctx": "if (g === \"POR\" && ss.lg.apps >= 28) { var tb = L.tb[L.tm.indexOf(p.club)]; if (tb && tb[5] / Math.max(1, tb[0]) <= 0.82) out.push(awd(\"zamora\", \"Portero menos goleado de {lg}\", {lg: lgN}, y1)); }",
+  "where": "engine-player.js:718"
+ },
+ "No entras en la lista de {nat} para el {comp}.": {
+  "ctx": "if (!u23) S.summerNews = (S.summerNews || []).concat([{t: \"bad\", x: tr(\"No entras en la lista de {nat} para el {comp}.\", {nat: natName(pn), comp: trComp(c.n)})}]);",
+  "where": "engine-player.js:757"
+ },
+ "Bota de Oro del {tour}": {
+  "ctx": "if (tour.g >= bootThr) { p.awards.push(awd(\"tboot\", \"Bota de Oro del {tour}\", {tour: tour.n}, S.yr + 1)); S.bnews.push({t: \"star\", x: tr(\"Bota de Oro del {tour} ({n} goles).\", {tour: trComp(tour.n), n: tour.g})}); }",
+  "where": "engine-player.js:796"
+ },
+ "Bota de Oro del {tour} ({n} goles).": {
+  "ctx": "if (tour.g >= bootThr) { p.awards.push(awd(\"tboot\", \"Bota de Oro del {tour}\", {tour: tour.n}, S.yr + 1)); S.bnews.push({t: \"star\", x: tr(\"Bota de Oro del {tour} ({n} goles).\", {tour: trComp(tour.n), n: tour.g})}); }",
+  "where": "engine-player.js:796"
+ },
+ "Balón de Oro del {tour}": {
+  "ctx": "if (avg >= 7.5 && (won || stageReached(c, p.inat) === \"Final\") && chance(won ? 0.65 : 0.4)) { p.awards.push(awd(\"tball\", \"Balón de Oro del {tour}\", {tour: tour.n}, S.yr + 1)); S.bnews.push({t: \"star\", x: tr(\"Mejor jugado",
+  "where": "engine-player.js:797"
+ },
+ "Mejor jugador del {tour}.": {
+  "ctx": "if (avg >= 7.5 && (won || stageReached(c, p.inat) === \"Final\") && chance(won ? 0.65 : 0.4)) { p.awards.push(awd(\"tball\", \"Balón de Oro del {tour}\", {tour: tour.n}, S.yr + 1)); S.bnews.push({t: \"star\", x: tr(\"Mejor jugado",
+  "where": "engine-player.js:797"
+ },
+ "Campeón": {
+  "ctx": "if (c.win === t) return N_(\"Campeón\");",
+  "where": "engine-player.js:806"
+ },
+ "Fase de grupos": {
+  "ctx": "return c.typ === \"grp\" ? N_(\"Fase de grupos\") : N_(\"Fase de liga\");",
+  "where": "engine-player.js:812"
+ },
+ "Fase de liga": {
+  "ctx": "return c.typ === \"grp\" ? N_(\"Fase de grupos\") : N_(\"Fase de liga\");",
+  "where": "engine-player.js:812"
+ },
+ "Balón de Oro {year}": {
+  "ctx": "if (myPos === 1) { out.push(awd(\"bdo\", \"Balón de Oro {year}\", {year: yEnd})); p.fame = clamp(p.fame + 15, 0, 100); }",
+  "where": "engine-player.js:865"
+ },
+ "{pos}º en el Balón de Oro {year}": {
+  "ctx": "out.push(awd(\"bdo_pod\", \"{pos}º en el Balón de Oro {year}\", {pos: myPos, year: yEnd}));",
+  "where": "engine-player.js:867"
+ },
+ "Nominado al Balón de Oro {year} ({pos}º)": {
+  "ctx": "else if (myPos <= 30 && me.ovr >= 76) { var nom = awd(\"bdo_nom\", \"Nominado al Balón de Oro {year} ({pos}º)\", {year: yEnd, pos: myPos}); nom.minor = true; out.push(nom); }",
+  "where": "engine-player.js:870"
+ },
+ "Premio The Best FIFA {year}": {
+  "ctx": "if (myPos <= 3 && bestScore >= ranking[myPos === 1 ? 1 : 0].sc + gauss() * 3) out.push(awd(\"best\", \"Premio The Best FIFA {year}\", {year: yEnd}));",
+  "where": "engine-player.js:874"
+ },
+ "Once Mundial FIFPRO {year}": {
+  "ctx": "if (myPos <= 12 || (me.ovr >= 86 && me.avgR >= 7.2)) { var xi = awd(\"xi\", \"Once Mundial FIFPRO {year}\", {year: yEnd}); xi.minor = myPos > 5; out.push(xi); }",
+  "where": "engine-player.js:875"
+ },
+ "Golden Boy {year}": {
+  "ctx": "if (yPos === 1) { out.push(awd(\"goldenboy\", \"Golden Boy {year}\", {year: yEnd})); p.fame = clamp(p.fame + 6, 0, 100); }",
+  "where": "engine-player.js:880"
+ },
+ "Trofeo Kopa {year}": {
+  "ctx": "if (yPos <= 2 && chance(yPos === 1 ? 0.7 : 0.35)) out.push(awd(\"kopa\", \"Trofeo Kopa {year}\", {year: yEnd}));",
+  "where": "engine-player.js:881"
+ },
+ "Trofeo Yashin {year}": {
+  "ctx": "if (gks.findIndex(function (x) { return x.me; }) === 0) out.push(awd(\"yashin\", \"Trofeo Yashin {year}\", {year: yEnd}));",
+  "where": "engine-player.js:885"
+ },
+ "Bota de Oro europea {year} ({n} goles)": {
+  "ctx": "if (pts >= thr) out.push(awd(\"boot\", \"Bota de Oro europea {year} ({n} goles)\", {year: yEnd, n: me.lgG}));",
+  "where": "engine-player.js:891"
+ },
+ "Cedido al {club}": {
+  "ctx": "milestone(tr(\"Cedido al {club}\", {club: clubName(o.club)}));",
+  "where": "engine-player.js:973"
+ },
+ "Fichaje por el {club} ({fee})": {
+  "ctx": "milestone(o.fee ? tr(\"Fichaje por el {club} ({fee})\", {club: clubName(o.club), fee: fmtMoney(o.fee)}) : tr(\"Fichaje por el {club} (libre)\", {club: clubName(o.club)}));",
+  "where": "engine-player.js:982"
+ },
+ "Fichaje por el {club} (libre)": {
+  "ctx": "milestone(o.fee ? tr(\"Fichaje por el {club} ({fee})\", {club: clubName(o.club), fee: fmtMoney(o.fee)}) : tr(\"Fichaje por el {club} (libre)\", {club: clubName(o.club)}));",
+  "where": "engine-player.js:982"
+ },
+ "Leyenda eterna": {
+  "ctx": "var title = sc >= 1100 ? tr(\"Leyenda eterna\") : sc >= 750 ? tr(\"Leyenda mundial\") : sc >= 480 ? tr(\"Estrella internacional\") : sc >= 300 ? tr(\"Ídolo de la afición\") : sc >= 160 ? tr(\"Profesional respetado\") : sc >= 80 ? ",
+  "where": "engine-player.js:1001"
+ },
+ "Leyenda mundial": {
+  "ctx": "var title = sc >= 1100 ? tr(\"Leyenda eterna\") : sc >= 750 ? tr(\"Leyenda mundial\") : sc >= 480 ? tr(\"Estrella internacional\") : sc >= 300 ? tr(\"Ídolo de la afición\") : sc >= 160 ? tr(\"Profesional respetado\") : sc >= 80 ? ",
+  "where": "engine-player.js:1001"
+ },
+ "Estrella internacional": {
+  "ctx": "var title = sc >= 1100 ? tr(\"Leyenda eterna\") : sc >= 750 ? tr(\"Leyenda mundial\") : sc >= 480 ? tr(\"Estrella internacional\") : sc >= 300 ? tr(\"Ídolo de la afición\") : sc >= 160 ? tr(\"Profesional respetado\") : sc >= 80 ? ",
+  "where": "engine-player.js:1001"
+ },
+ "Ídolo de la afición": {
+  "ctx": "var title = sc >= 1100 ? tr(\"Leyenda eterna\") : sc >= 750 ? tr(\"Leyenda mundial\") : sc >= 480 ? tr(\"Estrella internacional\") : sc >= 300 ? tr(\"Ídolo de la afición\") : sc >= 160 ? tr(\"Profesional respetado\") : sc >= 80 ? ",
+  "where": "engine-player.js:1001"
+ },
+ "Profesional respetado": {
+  "ctx": "var title = sc >= 1100 ? tr(\"Leyenda eterna\") : sc >= 750 ? tr(\"Leyenda mundial\") : sc >= 480 ? tr(\"Estrella internacional\") : sc >= 300 ? tr(\"Ídolo de la afición\") : sc >= 160 ? tr(\"Profesional respetado\") : sc >= 80 ? ",
+  "where": "engine-player.js:1001"
+ },
+ "Carrera sólida": {
+  "ctx": "var title = sc >= 1100 ? tr(\"Leyenda eterna\") : sc >= 750 ? tr(\"Leyenda mundial\") : sc >= 480 ? tr(\"Estrella internacional\") : sc >= 300 ? tr(\"Ídolo de la afición\") : sc >= 160 ? tr(\"Profesional respetado\") : sc >= 80 ? ",
+  "where": "engine-player.js:1001"
+ },
+ "Trotamundos del fútbol": {
+  "ctx": "var title = sc >= 1100 ? tr(\"Leyenda eterna\") : sc >= 750 ? tr(\"Leyenda mundial\") : sc >= 480 ? tr(\"Estrella internacional\") : sc >= 300 ? tr(\"Ídolo de la afición\") : sc >= 160 ? tr(\"Profesional respetado\") : sc >= 80 ? ",
+  "where": "engine-player.js:1001"
+ },
+ "Jugar {block}": {
+  "ctx": "case \"pre\": return tr(\"Jugar {block}\", {block: BLOCKS[0][2]});",
+  "where": "engine-player.js:1045"
+ },
+ "Continuar": {
+  "ctx": "case \"blk\": case \"sblk\": return tr(\"Continuar\");",
+  "where": "engine-player.js:1047"
+ },
+ "Verano {year}: torneos": {
+  "ctx": "return nat.length || pl.cwc ? tr(\"Verano {year}: torneos\", {year: pl.y}) : tr(\"Vacaciones de verano\");",
+  "where": "engine-player.js:1049"
+ },
+ "Vacaciones de verano": {
+  "ctx": "return nat.length || pl.cwc ? tr(\"Verano {year}: torneos\", {year: pl.y}) : tr(\"Vacaciones de verano\");",
+  "where": "engine-player.js:1049"
+ },
+ "Gala de premios {year}": {
+  "ctx": "case \"awards\": return tr(\"Gala de premios {year}\", {year: S.yr + 1});",
+  "where": "engine-player.js:1050"
+ },
+ "Empezar temporada {season}": {
+  "ctx": "case \"off\": return tr(\"Empezar temporada {season}\", {season: seasonLabel(S.yr + 1)});",
+  "where": "engine-player.js:1051"
+ },
+ "Decisión de carrera": {
+  "ctx": "return {tag: real ? \"real\" : \"rand\", tagTxt: real ? tr(\"Decisión de carrera\") : tr(\"Imprevisto\"), cls: real ? \"\" : \"randc\", cat: ev.cat,",
+  "where": "engine-player.js:1077"
+ },
+ "Imprevisto": {
+  "ctx": "return {tag: real ? \"real\" : \"rand\", tagTxt: real ? tr(\"Decisión de carrera\") : tr(\"Imprevisto\"), cls: real ? \"\" : \"randc\", cat: ev.cat,",
+  "where": "engine-player.js:1077"
+ },
+ "Empate tras la prórroga. Todo se decide en los penaltis y te toca adivinar el lado del último lanzador del {opp}.": {
+  "ctx": "var text = so ? (gk ? tr(\"Empate tras la prórroga. Todo se decide en los penaltis y te toca adivinar el lado del último lanzador del {opp}.\", {opp: c.opp}) :",
+  "where": "engine-player.js:1087"
+ },
+ "Empate tras la prórroga. Coges el balón para tirar el primer penalti de la tanda; el resto lo deciden tus compañeros.": {
+  "ctx": "tr(\"Empate tras la prórroga. Coges el balón para tirar el primer penalti de la tanda; el resto lo deciden tus compañeros.\")) : m.text(c);",
+  "where": "engine-player.js:1088"
+ },
+ "Momento clave": {
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"Momento clave\"), cls: \"hotc\", cat: trComp(c.comp) + (c.rn ? \" · \" + tr(c.rn) : \"\"), title: so ? tr(\"Tanda de penaltis\") : m.title, text: text,",
+  "where": "engine-player.js:1090"
+ },
+ "Tanda de penaltis": {
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"Momento clave\"), cls: \"hotc\", cat: trComp(c.comp) + (c.rn ? \" · \" + tr(c.rn) : \"\"), title: so ? tr(\"Tanda de penaltis\") : m.title, text: text,",
+  "where": "engine-player.js:1090"
+ },
+ "Entrenamiento": {
+  "ctx": "card = {t: \"decision\", tipo: \"real\", cat: tr(\"Entrenamiento\"), title: tr(\"Plan de pretemporada\"), choice: FOCUS[k].n, txt: FOCUS[k].d, chips: [], y: S.yr};",
+  "where": "engine-player.js:1124"
+ },
+ "Plan de pretemporada": {
+  "ctx": "card = {t: \"decision\", tipo: \"real\", cat: tr(\"Entrenamiento\"), title: tr(\"Plan de pretemporada\"), choice: FOCUS[k].n, txt: FOCUS[k].d, chips: [], y: S.yr};",
+  "where": "engine-player.js:1124"
+ },
+ "Mercado de invierno": {
+  "ctx": "card = {t: \"decision\", tipo: \"real\", cat: \"Mercado\", title: x.kind === \"invierno\" ? tr(\"Mercado de invierno\") : tr(\"Mercado de verano\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.p.club)}), txt: trn(x.list.l",
+  "where": "engine-player.js:1130"
+ },
+ "Mercado de verano": {
+  "ctx": "card = {t: \"decision\", tipo: \"real\", cat: \"Mercado\", title: x.kind === \"invierno\" ? tr(\"Mercado de invierno\") : tr(\"Mercado de verano\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.p.club)}), txt: trn(x.list.l",
+  "where": "engine-player.js:1130"
+ },
+ "Te quedas en el {club}": {
+  "ctx": "card = {t: \"decision\", tipo: \"real\", cat: \"Mercado\", title: x.kind === \"invierno\" ? tr(\"Mercado de invierno\") : tr(\"Mercado de verano\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.p.club)}), txt: trn(x.list.l",
+  "where": "engine-player.js:1130"
+ },
+ "{n} oferta rechazada.": {
+  "ctx": "card = {t: \"decision\", tipo: \"real\", cat: \"Mercado\", title: x.kind === \"invierno\" ? tr(\"Mercado de invierno\") : tr(\"Mercado de verano\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.p.club)}), txt: trn(x.list.l",
+  "where": "engine-player.js:1130",
+  "note": "plural:singular"
+ },
+ "{n} ofertas rechazadas.": {
+  "ctx": "card = {t: \"decision\", tipo: \"real\", cat: \"Mercado\", title: x.kind === \"invierno\" ? tr(\"Mercado de invierno\") : tr(\"Mercado de verano\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.p.club)}), txt: trn(x.list.l",
+  "where": "engine-player.js:1130",
+  "note": "plural:plural"
+ },
+ "{comp} · vs {opp}": {
+  "ctx": "function momLabel(f) { return tr(\"{comp} · vs {opp}\", {comp: trComp(f.kind === \"nq\" ? f.lab : compShort(f)) + (roundLabel(f) ? \" · \" + tr(roundLabel(f)) : \"\"), opp: f.isNat ? natName(f.opp) : clubName(f.opp)}); }",
+  "where": "engine-player.js:1153"
+ },
+ "La tanda termina {a}-{b}: ¡clasificados!": {
+  "ctx": "var txt = res.txt + \" \" + (good ? (gk ? tr(\"La tanda termina {a}-{b}: ¡clasificados!\", sp) : tr(\"La tanda termina {a}-{b}: ¡pasáis vosotros!\", sp)) : (gk ? tr(\"La tanda termina {a}-{b}: eliminados.\", sp) : tr(\"La tanda t",
+  "where": "engine-player.js:1170"
+ },
+ "La tanda termina {a}-{b}: ¡pasáis vosotros!": {
+  "ctx": "var txt = res.txt + \" \" + (good ? (gk ? tr(\"La tanda termina {a}-{b}: ¡clasificados!\", sp) : tr(\"La tanda termina {a}-{b}: ¡pasáis vosotros!\", sp)) : (gk ? tr(\"La tanda termina {a}-{b}: eliminados.\", sp) : tr(\"La tanda t",
+  "where": "engine-player.js:1170"
+ },
+ "La tanda termina {a}-{b}: eliminados.": {
+  "ctx": "var txt = res.txt + \" \" + (good ? (gk ? tr(\"La tanda termina {a}-{b}: ¡clasificados!\", sp) : tr(\"La tanda termina {a}-{b}: ¡pasáis vosotros!\", sp)) : (gk ? tr(\"La tanda termina {a}-{b}: eliminados.\", sp) : tr(\"La tanda t",
+  "where": "engine-player.js:1170"
+ },
+ "La tanda termina {a}-{b}: quedáis fuera.": {
+  "ctx": "var txt = res.txt + \" \" + (good ? (gk ? tr(\"La tanda termina {a}-{b}: ¡clasificados!\", sp) : tr(\"La tanda termina {a}-{b}: ¡pasáis vosotros!\", sp)) : (gk ? tr(\"La tanda termina {a}-{b}: eliminados.\", sp) : tr(\"La tanda t",
+  "where": "engine-player.js:1170"
+ },
+ "Paras el último penalti": {
+  "ctx": "var chips = [[\"note\", 0, gk ? (ok ? tr(\"Paras el último penalti\") : tr(\"No lo paras\")) : (ok ? tr(\"Tu penalti: dentro\") : tr(\"Tu penalti: fallado\"))]].concat(applyFx(res.fx || {}));",
+  "where": "engine-player.js:1172"
+ },
+ "No lo paras": {
+  "ctx": "var chips = [[\"note\", 0, gk ? (ok ? tr(\"Paras el último penalti\") : tr(\"No lo paras\")) : (ok ? tr(\"Tu penalti: dentro\") : tr(\"Tu penalti: fallado\"))]].concat(applyFx(res.fx || {}));",
+  "where": "engine-player.js:1172"
+ },
+ "Tu penalti: dentro": {
+  "ctx": "var chips = [[\"note\", 0, gk ? (ok ? tr(\"Paras el último penalti\") : tr(\"No lo paras\")) : (ok ? tr(\"Tu penalti: dentro\") : tr(\"Tu penalti: fallado\"))]].concat(applyFx(res.fx || {}));",
+  "where": "engine-player.js:1172"
+ },
+ "Tu penalti: fallado": {
+  "ctx": "var chips = [[\"note\", 0, gk ? (ok ? tr(\"Paras el último penalti\") : tr(\"No lo paras\")) : (ok ? tr(\"Tu penalti: dentro\") : tr(\"Tu penalti: fallado\"))]].concat(applyFx(res.fx || {}));",
+  "where": "engine-player.js:1172"
+ },
+ "Media": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Potencial": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Forma": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Moral": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Profesionalidad": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Fama": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Míster": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Afición": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Dinero": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Seguidores": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Lesión": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "Sanción": {
+  "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo",
+  "where": "engine-player.js:1178"
+ },
+ "{name}, {n} tramo": {
+  "ctx": "case \"buff\": p.buffs.push({k: \"ovr\", v: v.v, b: v.b, n: v.n}); ch.push([\"buff\", v.v, trn(v.b, \"{name}, {n} tramo\", \"{name}, {n} tramos\", {name: v.n})]); break;",
+  "where": "engine-player.js:1192",
+  "note": "plural:singular"
+ },
+ "{name}, {n} tramos": {
+  "ctx": "case \"buff\": p.buffs.push({k: \"ovr\", v: v.v, b: v.b, n: v.n}); ch.push([\"buff\", v.v, trn(v.b, \"{name}, {n} tramo\", \"{name}, {n} tramos\", {name: v.n})]); break;",
+  "where": "engine-player.js:1192",
+  "note": "plural:plural"
+ },
+ "Elige a tu agente": {
+  "ctx": "Título de la decisión «agente»",
+  "where": "evento:agente"
+ },
+ "Representación": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:agente"
+ },
+ "Una propuesta sucia": {
+  "ctx": "Título de la decisión «amano»",
+  "where": "evento:amano"
+ },
+ "Ética": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:amano"
+ },
+ "Un amigo te pide dinero": {
+  "ctx": "Título de la decisión «amigo_dinero»",
+  "where": "evento:amigo_dinero"
+ },
+ "Llamada de Arabia Saudí": {
+  "ctx": "Título de la decisión «arabia»",
+  "where": "evento:arabia"
+ },
+ "Diciembre de 2022: Cristiano Ronaldo fichó por el Al-Nassr saudí con un sueldo de récord.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:arabia"
+ },
+ "Corro en el césped": {
+  "ctx": "Título de la decisión «arenga»",
+  "where": "evento:arenga"
+ },
+ "Abril de 2014: Gerrard reunió al Liverpool tras ganar al City: «¡Esto no se nos escapa ahora!». Dos semanas después resbaló ante el Chelsea y la Premier se escapó.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:arenga"
+ },
+ "Un niño bajo la lluvia": {
+  "ctx": "Título de la decisión «autografo»",
+  "where": "evento:autografo"
+ },
+ "La boda de tu mejor amigo": {
+  "ctx": "Título de la decisión «boda»",
+  "where": "evento:boda"
+ },
+ "Quieres salir": {
+  "ctx": "Título de la decisión «burofax»",
+  "where": "evento:burofax"
+ },
+ "Agosto de 2020: Messi comunicó al Barcelona por burofax que quería marcharse. El club se aferró a su cláusula de 700 millones y Messi se quedó un año más.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:burofax"
+ },
+ "Un mensaje bajo la camiseta": {
+  "ctx": "Título de la decisión «camiseta_derbi»",
+  "where": "evento:camiseta_derbi"
+ },
+ "Abril de 1999: Francesco Totti marcó en el derbi de Roma y enseñó una camiseta que decía «Vi ho purgato ancora» («Os he vuelto a purgar»).": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:camiseta_derbi"
+ },
+ "Un canterano te pide consejo": {
+  "ctx": "Título de la decisión «canterano»",
+  "where": "evento:canterano"
+ },
+ "Insultos camino del túnel": {
+  "ctx": "Título de la decisión «cantona»",
+  "where": "evento:cantona"
+ },
+ "Disciplina": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:cantona"
+ },
+ "Enero de 1995: Éric Cantona, recién expulsado, respondió con una patada de kung-fu a un aficionado del Crystal Palace que le insultaba. Le cayeron ocho meses de sanción.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:cantona"
+ },
+ "El brazalete": {
+  "ctx": "Título de la decisión «capitania»",
+  "where": "evento:capitania"
+ },
+ "Buscar casa": {
+  "ctx": "Título de la decisión «casa»",
+  "where": "evento:casa"
+ },
+ "Contra tu antiguo club": {
+  "ctx": "Título de la decisión «celebrar_ex»",
+  "where": "evento:celebrar_ex"
+ },
+ "Septiembre de 2009: Emmanuel Adebayor marcó al Arsenal, su exequipo, y recorrió el campo entero para celebrarlo ante la grada rival. Acabó multado por la federación inglesa.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:celebrar_ex"
+ },
+ "Centro peligroso": {
+  "ctx": "Título de la decisión «centro_gk»",
+  "where": "evento:centro_gk"
+ },
+ "Balón en el aire": {
+  "ctx": "Título de la decisión «chilena»",
+  "where": "evento:chilena"
+ },
+ "Pagan tu cláusula": {
+  "ctx": "Título de la decisión «clausula»",
+  "where": "evento:clausula"
+ },
+ "Agosto de 2017: el PSG pagó los 222 millones de euros de la cláusula de Neymar al Barcelona, el traspaso más caro de la historia.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:clausula"
+ },
+ "Fichan a un rival en tu posición": {
+  "ctx": "Título de la decisión «competencia»",
+  "where": "evento:competencia"
+ },
+ "Gol con la mano": {
+  "ctx": "Título de la decisión «confesar_mano»",
+  "where": "evento:confesar_mano"
+ },
+ "Septiembre de 2012: Miroslav Klose marcó con la mano ante el Nápoles y se lo confesó al árbitro, que anuló el gol.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:confesar_mano"
+ },
+ "Contragolpe": {
+  "ctx": "Título de la decisión «contra»",
+  "where": "evento:contra"
+ },
+ "Córner a favor": {
+  "ctx": "Título de la decisión «corner»",
+  "where": "evento:corner"
+ },
+ "Defensa despistada": {
+  "ctx": "Título de la decisión «corner_rapido»",
+  "where": "evento:corner_rapido"
+ },
+ "7 de mayo de 2019: Alexander-Arnold sacó un córner rápido aprovechando un despiste del Barcelona y Origi marcó el 4-0 de la remontada de Anfield.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:corner_rapido"
+ },
+ "Inversión milagrosa": {
+  "ctx": "Título de la decisión «cripto»",
+  "where": "evento:cripto"
+ },
+ "El coche de tus sueños": {
+  "ctx": "Título de la decisión «deportivo»",
+  "where": "evento:deportivo"
+ },
+ "Balón suelto en tu área": {
+  "ctx": "Título de la decisión «despeje»",
+  "where": "evento:despeje"
+ },
+ "Volver en forma": {
+  "ctx": "Título de la decisión «dieta_verano»",
+  "where": "evento:dieta_verano"
+ },
+ "Dos federaciones te quieren": {
+  "ctx": "Título de la decisión «doble_nacionalidad»",
+  "where": "evento:doble_nacionalidad"
+ },
+ "Un documental sobre ti": {
+  "ctx": "Título de la decisión «documental»",
+  "where": "evento:documental"
+ },
+ "Horas extra": {
+  "ctx": "Título de la decisión «entreno_extra»",
+  "where": "evento:entreno_extra"
+ },
+ "Volver a estudiar": {
+  "ctx": "Título de la decisión «estudios»",
+  "where": "evento:estudios"
+ },
+ "Noche mágica a domicilio": {
+  "ctx": "Título de la decisión «exhibicion»",
+  "where": "evento:exhibicion"
+ },
+ "Noviembre de 2005: el Santiago Bernabéu se puso en pie para aplaudir a Ronaldinho tras sus dos golazos en el 0-3 del Barcelona.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:exhibicion"
+ },
+ "Falta en la frontal": {
+  "ctx": "Título de la decisión «falta_directa»",
+  "where": "evento:falta_directa"
+ },
+ "Último día de mercado": {
+  "ctx": "Título de la decisión «fax»",
+  "where": "evento:fax"
+ },
+ "31 de agosto de 2015: el fichaje de David de Gea por el Real Madrid se cayó porque la documentación llegó a LaLiga minutos después del cierre del mercado.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:fax"
+ },
+ "Fiesta en la víspera": {
+  "ctx": "Título de la decisión «fiesta»",
+  "where": "evento:fiesta"
+ },
+ "La sociedad en el paraíso fiscal": {
+  "ctx": "Título de la decisión «fiscal»",
+  "where": "evento:fiscal"
+ },
+ "En la década de 2010 varias estrellas de LaLiga fueron condenadas por defraudar a Hacienda con sus derechos de imagen.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:fiscal"
+ },
+ "Fisioterapeuta en casa": {
+  "ctx": "Título de la decisión «fisio_personal»",
+  "where": "evento:fisio_personal"
+ },
+ "Limpiar tarjetas": {
+  "ctx": "Título de la decisión «forzar_amarilla»",
+  "where": "evento:forzar_amarilla"
+ },
+ "Febrero de 2019: Sergio Ramos admitió haber forzado una amarilla ante el Ajax para limpiar tarjetas. La UEFA le sancionó con dos partidos y el Real Madrid cayó en la vuelta.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:forzar_amarilla"
+ },
+ "El míster te cambia de sitio": {
+  "ctx": "Título de la decisión «fuera_posicion»",
+  "where": "evento:fuera_posicion"
+ },
+ "El soplo antes de la gala": {
+  "ctx": "Título de la decisión «gala_bdo»",
+  "where": "evento:gala_bdo"
+ },
+ "Octubre de 2024: el Real Madrid no viajó a la gala del Balón de Oro al saber que Vinícius no lo ganaría.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:gala_bdo"
+ },
+ "Gira de pretemporada": {
+  "ctx": "Título de la decisión «gira»",
+  "where": "evento:gira"
+ },
+ "La bandera de la fiesta": {
+  "ctx": "Título de la decisión «golf»",
+  "where": "evento:golf"
+ },
+ "Noviembre de 2019: tras clasificar a Gales para la Eurocopa, Gareth Bale posó con una bandera que decía «Gales. Golf. Madrid. En ese orden». En el Bernabéu no gustó nada.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:golf"
+ },
+ "Gripe en plena racha": {
+  "ctx": "Título de la decisión «gripe»",
+  "where": "evento:gripe"
+ },
+ "Un homenaje bajo la camiseta": {
+  "ctx": "Título de la decisión «homenaje»",
+  "where": "evento:homenaje"
+ },
+ "Julio de 2010: Andrés Iniesta marcó el gol que dio el Mundial a España y enseñó una camiseta en recuerdo de Dani Jarque. Le costó una amarilla.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:homenaje"
+ },
+ "Visita al hospital infantil": {
+  "ctx": "Título de la decisión «hospital»",
+  "where": "evento:hospital"
+ },
+ "Clases de idioma": {
+  "ctx": "Título de la decisión «idioma»",
+  "where": "evento:idioma"
+ },
+ "Adaptación": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:idioma"
+ },
+ "Algo te sentó mal": {
+  "ctx": "Título de la decisión «intoxicacion»",
+  "where": "evento:intoxicacion"
+ },
+ "Jugar tocado": {
+  "ctx": "Título de la decisión «jugar_tocado»",
+  "where": "evento:jugar_tocado"
+ },
+ "¿Quién tira los penaltis?": {
+  "ctx": "Título de la decisión «lanzador»",
+  "where": "evento:lanzador"
+ },
+ "Líderes contra todo pronóstico": {
+  "ctx": "Título de la decisión «leicester»",
+  "where": "evento:leicester"
+ },
+ "Temporada 2015/16: el Leicester, que pagaba 5000 a 1 en las casas de apuestas, ganó la Premier League.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:leicester"
+ },
+ "Se lesiona la estrella": {
+  "ctx": "Título de la decisión «lesion_estrella»",
+  "where": "evento:lesion_estrella"
+ },
+ "Lesión grave: ¿cómo la tratas?": {
+  "ctx": "Título de la decisión «lesion_grave»",
+  "where": "evento:lesion_grave"
+ },
+ "Salud": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:lesion_grave"
+ },
+ "Bronca con tu estrella": {
+  "ctx": "Título de la decisión «m_bota»",
+  "where": "evento:m_bota"
+ },
+ "Febrero de 2003: tras caer en la FA Cup, una bota que pateó Ferguson golpeó a Beckham en la ceja. Ese verano Beckham se marchó al Real Madrid.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_bota"
+ },
+ "Una llamada que no debería existir": {
+  "ctx": "Título de la decisión «m_calciopoli»",
+  "where": "evento:m_calciopoli"
+ },
+ "2006: el escándalo Calciopoli destapó presiones a los árbitros en Italia. La Juventus perdió dos títulos de liga y bajó a la Serie B.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_calciopoli"
+ },
+ "Tu carrera por la banda": {
+  "ctx": "Título de la decisión «m_carrera»",
+  "where": "evento:m_carrera"
+ },
+ "Marzo de 2004: Mourinho recorrió la banda de Old Trafford a la carrera tras el gol del Oporto que eliminó al Manchester United.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_carrera"
+ },
+ "¿Irte en lo más alto?": {
+  "ctx": "Título de la decisión «m_cima»",
+  "where": "evento:m_cima"
+ },
+ "Mayo de 2018: cinco días después de ganar su tercera Champions seguida, Zidane dimitió como entrenador del Real Madrid.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_cima"
+ },
+ "Tu primer discurso": {
+  "ctx": "Título de la decisión «m_clough»",
+  "where": "evento:m_clough"
+ },
+ "1974: Brian Clough llegó al Leeds, vigente campeón, criticando el juego de sus propios jugadores. Le destituyeron a los 44 días.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_clough"
+ },
+ "Fichar con datos": {
+  "ctx": "Título de la decisión «m_datos»",
+  "where": "evento:m_datos"
+ },
+ "El Brentford, con un modelo de fichajes basado en datos, subió en 2021 a la Premier League 74 años después.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_datos"
+ },
+ "Una joya pide paso": {
+  "ctx": "Título de la decisión «m_debut»",
+  "where": "evento:m_debut"
+ },
+ "La directiva duda": {
+  "ctx": "Título de la decisión «m_dudas»",
+  "where": "evento:m_dudas"
+ },
+ "Noviembre de 2012: el Chelsea despidió a Roberto Di Matteo seis meses después de que ganara la Champions.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_dudas"
+ },
+ "Un espía en el entrenamiento rival": {
+  "ctx": "Título de la decisión «m_espionaje»",
+  "where": "evento:m_espionaje"
+ },
+ "Enero de 2019: Marcelo Bielsa admitió haber espiado los entrenamientos de sus rivales con el Leeds. La liga inglesa multó al club con 200 000 libras.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_espionaje"
+ },
+ "Fiesta a destiempo": {
+  "ctx": "Título de la decisión «m_fiesta»",
+  "where": "evento:m_fiesta"
+ },
+ "Tu estrella ya ha firmado con el rival": {
+  "ctx": "Título de la decisión «m_fuga»",
+  "where": "evento:m_fuga"
+ },
+ "Abril de 2013: un día antes de la semifinal de Champions contra el Real Madrid se supo que Götze dejaría el Dortmund por el Bayern.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_fuga"
+ },
+ "El presidente quiere una estrella": {
+  "ctx": "Título de la decisión «m_galacticos»",
+  "where": "evento:m_galacticos"
+ },
+ "Entre 2000 y 2003 el Real Madrid fichó cada verano a una gran estrella (Figo, Zidane, Ronaldo, Beckham): la era de los «galácticos».": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_galacticos"
+ },
+ "Enero de 2009: Rafa Benítez leyó en rueda de prensa una lista de «hechos» contra Alex Ferguson. El Manchester United acabó ganando aquella Premier.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_hechos"
+ },
+ "Acelerar una recuperación": {
+  "ctx": "Título de la decisión «m_lesion»",
+  "where": "evento:m_lesion"
+ },
+ "Médico": {
+  "ctx": "Categoría (etiqueta corta) de decisiones",
+  "where": "evento:m_lesion"
+ },
+ "Un agente libre se ofrece": {
+  "ctx": "Título de la decisión «m_libre»",
+  "where": "evento:m_libre"
+ },
+ "Veteranos que cobran una fortuna": {
+  "ctx": "Título de la decisión «m_limpieza»",
+  "where": "evento:m_limpieza"
+ },
+ "Verano de 2008: Guardiola llegó al banquillo del Barcelona, dio salida a Ronaldinho y Deco y subió a canteranos como Busquets y Pedro.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_limpieza"
+ },
+ "Un once de la casa": {
+  "ctx": "Título de la decisión «m_masia»",
+  "where": "evento:m_masia"
+ },
+ "Noviembre de 2012: en el campo del Levante, el Barcelona llegó a jugar con once futbolistas formados en La Masia.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_masia"
+ },
+ "Motín en el vestuario": {
+  "ctx": "Título de la decisión «m_motin»",
+  "where": "evento:m_motin"
+ },
+ "Mundial 2010: los jugadores de Francia se negaron a entrenar en Knysna tras la expulsión de Anelka de la concentración.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_motin"
+ },
+ "¿Candidatos al título?": {
+  "ctx": "Título de la decisión «m_partido»",
+  "where": "evento:m_partido"
+ },
+ "Diego Simeone convirtió el «partido a partido» en el lema del Atlético que ganó la Liga 2013/14.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_partido"
+ },
+ "Quiere irse": {
+  "ctx": "Título de la decisión «m_peticion»",
+  "where": "evento:m_peticion"
+ },
+ "Una apuesta con la defensa": {
+  "ctx": "Título de la decisión «m_pizza»",
+  "where": "evento:m_pizza"
+ },
+ "2015: Claudio Ranieri prometió invitar a pizza a su Leicester si dejaba la portería a cero. Lo cumplieron ante el Crystal Palace y aquella temporada el Leicester ganó la Premier.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_pizza"
+ },
+ "La prensa señala a un jugador": {
+  "ctx": "Título de la decisión «m_prensa»",
+  "where": "evento:m_prensa"
+ },
+ "¿Una temporada más?": {
+  "ctx": "Título de la decisión «m_retiro»",
+  "where": "evento:m_retiro"
+ },
+ "Alex Ferguson anunció que se retiraría en 2002, cambió de idea en febrero de ese año y siguió en el banquillo once temporadas más.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_retiro"
+ },
+ "El equipo no reacciona": {
+  "ctx": "Título de la decisión «m_secador»",
+  "where": "evento:m_secador"
+ },
+ "Alex Ferguson era famoso por el «secador de pelo»: broncas a gritos a centímetros de la cara del jugador.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:m_secador"
+ },
+ "Tu club entra en una Superliga": {
+  "ctx": "Título de la decisión «m_superliga»",
+  "where": "evento:m_superliga"
+ },
+ "La masa salarial se dispara": {
+  "ctx": "Título de la decisión «m_tope»",
+  "where": "evento:m_tope"
+ },
+ "Mano a mano": {
+  "ctx": "Título de la decisión «mano_a_mano»",
+  "where": "evento:mano_a_mano"
+ },
+ "El balón cae entre tú y el portero": {
+  "ctx": "Título de la decisión «mano_dios»",
+  "where": "evento:mano_dios"
+ },
+ "Maradona marcó con la mano a Inglaterra en el Mundial 86 y Henry se ayudó de ella para dar el gol que llevó a Francia al Mundial 2010. Hoy el VAR lo pone casi imposible.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mano_dios"
+ },
+ "Sobre la línea de gol": {
+  "ctx": "Título de la decisión «mano_linea»",
+  "where": "evento:mano_linea"
+ },
+ "Mundial 2010: Luis Suárez sacó con la mano un gol cantado de Ghana en el último minuto de la prórroga. Gyan falló el penalti y Uruguay pasó en la tanda.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mano_linea"
+ },
+ "Te has convertido en meme": {
+  "ctx": "Título de la decisión «meme»",
+  "where": "evento:meme"
+ },
+ "Un veterano te adopta": {
+  "ctx": "Título de la decisión «mentor»",
+  "where": "evento:mentor"
+ },
+ "Descuento con la liga en juego": {
+  "ctx": "Título de la decisión «minuto_93»",
+  "where": "evento:minuto_93"
+ },
+ "13 de mayo de 2012: Agüero marcó en el minuto 93:20 ante el QPR y dio la Premier League al Manchester City.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:minuto_93"
+ },
+ "Descanso: vais perdiendo": {
+  "ctx": "Título de la decisión «mm_descanso»",
+  "where": "evento:mm_descanso"
+ },
+ "Os quedáis con diez": {
+  "ctx": "Título de la decisión «mm_diez»",
+  "where": "evento:mm_diez"
+ },
+ "A la desesperada": {
+  "ctx": "Título de la decisión «mm_empate»",
+  "where": "evento:mm_empate"
+ },
+ "Gol con un rival en el suelo": {
+  "ctx": "Título de la decisión «mm_fairplay»",
+  "where": "evento:mm_fairplay"
+ },
+ "Abril de 2019: Bielsa ordenó al Leeds dejarse empatar tras marcar con un rival lesionado en el suelo. Recibió el premio Fair Play de la FIFA.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:mm_fairplay"
+ },
+ "Tu estrella se resiente": {
+  "ctx": "Título de la decisión «mm_lesion»",
+  "where": "evento:mm_lesion"
+ },
+ "Ganáis por la mínima": {
+  "ctx": "Título de la decisión «mm_ventaja»",
+  "where": "evento:mm_ventaja"
+ },
+ "Cambio para los penaltis": {
+  "ctx": "Título de la decisión «negarse_cambio»",
+  "where": "evento:negarse_cambio"
+ },
+ "Febrero de 2019: Kepa se negó a ser sustituido antes de la tanda en la final de la Copa de la Liga. El Chelsea perdió y el club le multó con una semana de sueldo.": {
+  "ctx": "Recuadro «Pasó de verdad»: hecho real del fútbol",
+  "where": "evento:negarse_cambio"
+ },
+ "Cambio de entrenador": {
+  "ctx": "Título de la decisión «nuevo_entrenador»",
+  "where": "evento:nuevo_entrenador"
+ },
+ "Nutricionista personal": {
+  "ctx": "Título de la decisión «nutricionista»",
+  "where": "evento:nutricionista"
+ },
+ "Hueco entre líneas": {
+  "ctx": "Título de la decisión «pase_filtrado»",
+  "where": "evento:pase_filtrado"
+ },
+ "Oferta de patrocinio": {
+  "ctx": "Título de la decisión «patrocinio»",
+  "where": "evento:patrocinio"
+ },
+ "Pocos minutos": {
+  "ctx": "Título de la decisión «pedir_minutos»",
+  "where": "evento:pedir_minutos"
+ }
+}

@@ -1,0 +1,2879 @@
+{
+ "id": "fbl",
+ "slot": "GER1",
+ "league": "Frauen-Bundesliga",
+ "season": "2026/27",
+ "asOf": "2026-10",
+ "clubs": [
+  {
+   "club": "Bayern Múnich",
+   "teamOvr": 85,
+   "coach": "José Barcala",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Ena",
+     "ln": "Mahmutovic",
+     "pos": "POR",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Giulia",
+     "ln": "Gwinn",
+     "pos": "LD",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 87
+    },
+    {
+     "fn": "Vanessa",
+     "ln": "Gilles",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "FR",
+     "ovr": 84
+    },
+    {
+     "fn": "Glódís",
+     "ln": "Viggósdóttir",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "IS",
+     "ovr": 82
+    },
+    {
+     "fn": "Franziska",
+     "ln": "Kett",
+     "pos": "LD",
+     "age": 27,
+     "nat": "AT",
+     "ovr": 75
+    },
+    {
+     "fn": "Lena",
+     "ln": "Oberdorf",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 86
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Zadrazil",
+     "pos": "MCD",
+     "age": 33,
+     "nat": "AT",
+     "ovr": 82
+    },
+    {
+     "fn": "Barbara",
+     "ln": "Dunst",
+     "pos": "MC",
+     "age": 29,
+     "nat": "AT",
+     "ovr": 82
+    },
+    {
+     "fn": "Linda",
+     "ln": "Dallmann",
+     "pos": "MCO",
+     "age": 32,
+     "nat": "DE",
+     "ovr": 82
+    },
+    {
+     "fn": "Pernille",
+     "ln": "Harder",
+     "pos": "MCO",
+     "age": 34,
+     "nat": "DK",
+     "ovr": 87
+    },
+    {
+     "fn": "Klara",
+     "ln": "Bühl",
+     "pos": "EI",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 87
+    },
+    {
+     "fn": "Jovana",
+     "ln": "Damnjanović",
+     "pos": "ED",
+     "age": 25,
+     "nat": "RS",
+     "ovr": 80
+    },
+    {
+     "fn": "Regina",
+     "ln": "van Eijk",
+     "pos": "POR",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Anna",
+     "ln": "Klink",
+     "pos": "POR",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Magdalena",
+     "ln": "Eriksson",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "SE",
+     "ovr": 84
+    },
+    {
+     "fn": "Stine",
+     "ln": "Ballisager",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DK",
+     "ovr": 74
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Mattner-Trembleau",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Katharina",
+     "ln": "Naschenweng",
+     "pos": "LI",
+     "age": 24,
+     "nat": "AT",
+     "ovr": 72
+    },
+    {
+     "fn": "Kassandra",
+     "ln": "Potsi",
+     "pos": "DC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Alara",
+     "ln": "Şehitler",
+     "pos": "MC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Bernadette",
+     "ln": "Amani",
+     "pos": "MC",
+     "age": 25,
+     "nat": "CI",
+     "ovr": 75
+    },
+    {
+     "fn": "Momoko",
+     "ln": "Tanikawa",
+     "pos": "MCO",
+     "age": 21,
+     "nat": "JP",
+     "ovr": 74
+    },
+    {
+     "fn": "Sophie",
+     "ln": "Proost",
+     "pos": "MC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Edna",
+     "ln": "Imade",
+     "pos": "DC",
+     "age": 26,
+     "nat": "ES",
+     "ovr": 78
+    }
+   ]
+  },
+  {
+   "club": "VfL Wolfsburg",
+   "teamOvr": 79,
+   "coach": "Stephan Lerch",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Stina",
+     "ln": "Johannes",
+     "pos": "POR",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 83
+    },
+    {
+     "fn": "Sophia",
+     "ln": "Kleinherne",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 80
+    },
+    {
+     "fn": "Dominique",
+     "ln": "Janssen",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 81
+    },
+    {
+     "fn": "Guro",
+     "ln": "Bergsvand",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "NO",
+     "ovr": 76
+    },
+    {
+     "fn": "Thea",
+     "ln": "Bjelde",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "NO",
+     "ovr": 76
+    },
+    {
+     "fn": "Joelle",
+     "ln": "Wedemeyer",
+     "pos": "LD",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 79
+    },
+    {
+     "fn": "Camilla",
+     "ln": "Küver",
+     "pos": "LD",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 76
+    },
+    {
+     "fn": "Janina",
+     "ln": "Minge",
+     "pos": "LI",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 78
+    },
+    {
+     "fn": "Lena",
+     "ln": "Lattwein",
+     "pos": "MCD",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 82
+    },
+    {
+     "fn": "Janou",
+     "ln": "Levels",
+     "pos": "MC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Smilla",
+     "ln": "Vallotto",
+     "pos": "MC",
+     "age": 26,
+     "nat": "SE",
+     "ovr": 74
+    },
+    {
+     "fn": "Svenja",
+     "ln": "Huth",
+     "pos": "MD",
+     "age": 35,
+     "nat": "DE",
+     "ovr": 78
+    },
+    {
+     "fn": "Lara",
+     "ln": "Prasnikar",
+     "pos": "ED",
+     "age": 24,
+     "nat": "SI",
+     "ovr": 79
+    },
+    {
+     "fn": "Kessya",
+     "ln": "Bussy",
+     "pos": "ED",
+     "age": 28,
+     "nat": "BE",
+     "ovr": 75
+    },
+    {
+     "fn": "Sharn",
+     "ln": "Freier",
+     "pos": "EI",
+     "age": 24,
+     "nat": "AU",
+     "ovr": 73
+    },
+    {
+     "fn": "Mara",
+     "ln": "Alber",
+     "pos": "DC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 77
+    },
+    {
+     "fn": "Ella",
+     "ln": "Peddemors",
+     "pos": "MC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Justine",
+     "ln": "Kielland",
+     "pos": "MC",
+     "age": 26,
+     "nat": "NO",
+     "ovr": 72
+    },
+    {
+     "fn": "Cecilie",
+     "ln": "Fløe",
+     "pos": "ED",
+     "age": 23,
+     "nat": "DK",
+     "ovr": 72
+    },
+    {
+     "fn": "Luca",
+     "ln": "Papp",
+     "pos": "MC",
+     "age": 21,
+     "nat": "HU",
+     "ovr": 66
+    },
+    {
+     "fn": "Martina",
+     "ln": "Tufekovic",
+     "pos": "POR",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Christina",
+     "ln": "Schönwetter",
+     "pos": "POR",
+     "age": 24,
+     "nat": "AT",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Eintracht Frankfurt",
+   "teamOvr": 77,
+   "coach": "Niko Arnautis",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Amanda",
+     "ln": "Ilestedt",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "SE",
+     "ovr": 84
+    },
+    {
+     "fn": "Pia-Sophie",
+     "ln": "Wolter",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 75
+    },
+    {
+     "fn": "Noemi",
+     "ln": "Ivelj",
+     "pos": "MC",
+     "age": 22,
+     "nat": "CH",
+     "ovr": 70
+    },
+    {
+     "fn": "Hayley",
+     "ln": "Raso",
+     "pos": "ED",
+     "age": 32,
+     "nat": "AU",
+     "ovr": 80
+    },
+    {
+     "fn": "Rebecka",
+     "ln": "Blomqvist",
+     "pos": "EI",
+     "age": 29,
+     "nat": "SE",
+     "ovr": 80
+    },
+    {
+     "fn": "Jarne",
+     "ln": "Teulings",
+     "pos": "ED",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 74
+    },
+    {
+     "fn": "Laura",
+     "ln": "Freigang",
+     "pos": "DC",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 82
+    },
+    {
+     "fn": "Marthine",
+     "ln": "Ostenstad",
+     "pos": "DC",
+     "age": 27,
+     "nat": "NO",
+     "ovr": 78
+    },
+    {
+     "fn": "Sophia",
+     "ln": "Winkler",
+     "pos": "POR",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Lina",
+     "ln": "Altenburg",
+     "pos": "POR",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 63
+    },
+    {
+     "fn": "Janne",
+     "ln": "Krumme",
+     "pos": "POR",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Sofie",
+     "ln": "Lundgaard",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DK",
+     "ovr": 76
+    },
+    {
+     "fn": "Erëleta",
+     "ln": "Memeti",
+     "pos": "MC",
+     "age": 23,
+     "nat": "XK",
+     "ovr": 70
+    },
+    {
+     "fn": "Hanna",
+     "ln": "Bennison",
+     "pos": "MC",
+     "age": 23,
+     "nat": "SE",
+     "ovr": 79
+    },
+    {
+     "fn": "Nina",
+     "ln": "Lührßen",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Jamilla",
+     "ln": "Rankin",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "AU",
+     "ovr": 76
+    },
+    {
+     "fn": "Sara",
+     "ln": "Doorsoun",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "DE",
+     "ovr": 76
+    },
+    {
+     "fn": "Elâ",
+     "ln": "Demirbaş",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Danique",
+     "ln": "Tolhoek",
+     "pos": "DC",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 72
+    },
+    {
+     "fn": "Vivienne",
+     "ln": "Lia",
+     "pos": "DC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Ainhoa",
+     "ln": "Alguacil",
+     "pos": "MC",
+     "age": 22,
+     "nat": "ES",
+     "ovr": 68
+    },
+    {
+     "fn": "Paulina",
+     "ln": "Krumbiegel",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Dilara",
+     "ln": "Açıkgöz",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Tessa",
+     "ln": "Zimmermann",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Larissa",
+     "ln": "Mühlhaus",
+     "pos": "EI",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "TSG Hoffenheim",
+   "teamOvr": 73,
+   "coach": "Eva-Maria Virsinger",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Wielle",
+     "ln": "Douma",
+     "pos": "MC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Naomi",
+     "ln": "Luyet",
+     "pos": "MC",
+     "age": 21,
+     "nat": "CH",
+     "ovr": 73
+    },
+    {
+     "fn": "Valesca",
+     "ln": "Ampoorter",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "BE",
+     "ovr": 72
+    },
+    {
+     "fn": "Linda",
+     "ln": "Natter",
+     "pos": "ED",
+     "age": 25,
+     "nat": "AT",
+     "ovr": 71
+    },
+    {
+     "fn": "Nadine",
+     "ln": "Bitzer",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 65
+    },
+    {
+     "fn": "Janna",
+     "ln": "Grimm",
+     "pos": "MC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 63
+    },
+    {
+     "fn": "Laura",
+     "ln": "Dick",
+     "pos": "POR",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Lisa",
+     "ln": "Lichtfus",
+     "pos": "POR",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Romy",
+     "ln": "Bräutigam",
+     "pos": "POR",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Lisann",
+     "ln": "Kaut",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Vanessa",
+     "ln": "Diehm",
+     "pos": "MCD",
+     "age": 29,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Marie",
+     "ln": "Steiner",
+     "pos": "DC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Lisa",
+     "ln": "Doorn",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Martine",
+     "ln": "Fenger",
+     "pos": "ED",
+     "age": 25,
+     "nat": "NO",
+     "ovr": 68
+    },
+    {
+     "fn": "Milena",
+     "ln": "Röder",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Franziska",
+     "ln": "Harsch",
+     "pos": "MC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Ilse",
+     "ln": "Kemper",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 65
+    },
+    {
+     "fn": "Svenja",
+     "ln": "Fölmli",
+     "pos": "DC",
+     "age": 24,
+     "nat": "CH",
+     "ovr": 77
+    },
+    {
+     "fn": "Laura",
+     "ln": "Gloning",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 65
+    },
+    {
+     "fn": "Laia",
+     "ln": "Martret",
+     "pos": "DC",
+     "age": 23,
+     "nat": "ES",
+     "ovr": 68
+    },
+    {
+     "fn": "Sara",
+     "ln": "Ritter",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Chiara",
+     "ln": "Hahn",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Féli",
+     "ln": "Delacauw",
+     "pos": "MC",
+     "age": 22,
+     "nat": "BE",
+     "ovr": 68
+    },
+    {
+     "fn": "Jonna",
+     "ln": "van de Velde",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "NL",
+     "ovr": 64
+    },
+    {
+     "fn": "Denise",
+     "ln": "Lueger",
+     "pos": "DC",
+     "age": 20,
+     "nat": "AT",
+     "ovr": 63
+    },
+    {
+     "fn": "Svenja",
+     "ln": "Voehringer",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Vivien",
+     "ln": "Thomann",
+     "pos": "MC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Bayer Leverkusen",
+   "teamOvr": 73,
+   "coach": "Roberto Pätzold",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Carlotta",
+     "ln": "Wamser",
+     "pos": "LD",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 79
+    },
+    {
+     "fn": "Vanessa",
+     "ln": "Fudalla",
+     "pos": "DC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 73
+    },
+    {
+     "fn": "Valentina",
+     "ln": "Mädl",
+     "pos": "ED",
+     "age": 25,
+     "nat": "AT",
+     "ovr": 70
+    },
+    {
+     "fn": "Claudia",
+     "ln": "Wenger",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "AT",
+     "ovr": 72
+    },
+    {
+     "fn": "Amy",
+     "ln": "Wrigge",
+     "pos": "MC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Paula",
+     "ln": "Schwartze",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 63
+    },
+    {
+     "fn": "Louisa",
+     "ln": "Remien",
+     "pos": "POR",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 63
+    },
+    {
+     "fn": "Charlotte",
+     "ln": "Voll",
+     "pos": "POR",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Rafaela",
+     "ln": "Borggräfe",
+     "pos": "POR",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Selina",
+     "ln": "Ostermeier",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Melissa",
+     "ln": "Friedrich",
+     "pos": "LD",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Justine",
+     "ln": "Brandau",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Emily",
+     "ln": "Wallrabenstein",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Lilla",
+     "ln": "Turányi",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "HU",
+     "ovr": 66
+    },
+    {
+     "fn": "Carolin",
+     "ln": "Simon",
+     "pos": "LI",
+     "age": 34,
+     "nat": "DE",
+     "ovr": 79
+    },
+    {
+     "fn": "Sana",
+     "ln": "Coşkun",
+     "pos": "DFC",
+     "age": 19,
+     "nat": "TR",
+     "ovr": 62
+    },
+    {
+     "fn": "Paulina",
+     "ln": "Platner",
+     "pos": "MC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Natasha",
+     "ln": "Kowalski",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Sofie",
+     "ln": "Zdebel",
+     "pos": "MC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Loreen",
+     "ln": "Bender",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Ruby",
+     "ln": "Grant",
+     "pos": "MC",
+     "age": 22,
+     "nat": "ENG",
+     "ovr": 68
+    },
+    {
+     "fn": "Lumbardha",
+     "ln": "Misini",
+     "pos": "MC",
+     "age": 21,
+     "nat": "XK",
+     "ovr": 64
+    },
+    {
+     "fn": "Cornelia",
+     "ln": "Kramer",
+     "pos": "ED",
+     "age": 24,
+     "nat": "DK",
+     "ovr": 70
+    },
+    {
+     "fn": "Estrella",
+     "ln": "Merino Gonzalez",
+     "pos": "DC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Lobke",
+     "ln": "Loonen",
+     "pos": "EI",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Maja",
+     "ln": "Sternad",
+     "pos": "DC",
+     "age": 24,
+     "nat": "SI",
+     "ovr": 70
+    },
+    {
+     "fn": "Paulina",
+     "ln": "Tomasiak",
+     "pos": "EI",
+     "age": 21,
+     "nat": "PL",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "Werder Bremen",
+   "teamOvr": 71,
+   "coach": "Friederike Kromp",
+   "coachG": "f",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Lena",
+     "ln": "Petermann",
+     "pos": "DC",
+     "age": 32,
+     "nat": "DE",
+     "ovr": 76
+    },
+    {
+     "fn": "Michelle",
+     "ln": "Weiß",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "DE",
+     "ovr": 73
+    },
+    {
+     "fn": "Chiara",
+     "ln": "D'Angelo",
+     "pos": "LD",
+     "age": 25,
+     "nat": "AT",
+     "ovr": 71
+    },
+    {
+     "fn": "Mariella",
+     "ln": "El Sherif",
+     "pos": "MC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Medina",
+     "ln": "Desic",
+     "pos": "MC",
+     "age": 25,
+     "nat": "ME",
+     "ovr": 69
+    },
+    {
+     "fn": "Vanessa",
+     "ln": "Fischer",
+     "pos": "POR",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Thea",
+     "ln": "Farwick",
+     "pos": "POR",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Sinem",
+     "ln": "Özdemir",
+     "pos": "POR",
+     "age": 21,
+     "nat": "TR",
+     "ovr": 62
+    },
+    {
+     "fn": "Wiktoria",
+     "ln": "Zieniewicz",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "PL",
+     "ovr": 64
+    },
+    {
+     "fn": "Julia",
+     "ln": "Magerl",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "AT",
+     "ovr": 68
+    },
+    {
+     "fn": "Michelle",
+     "ln": "Ulbrich",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Marie",
+     "ln": "Gmeineder",
+     "pos": "MC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Lilli",
+     "ln": "Purtscheller",
+     "pos": "ED",
+     "age": 20,
+     "nat": "AT",
+     "ovr": 66
+    },
+    {
+     "fn": "Mei",
+     "ln": "Shimada",
+     "pos": "EI",
+     "age": 22,
+     "nat": "JP",
+     "ovr": 66
+    },
+    {
+     "fn": "Tuana",
+     "ln": "Mahmoud",
+     "pos": "EI",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Isabella",
+     "ln": "Jaron",
+     "pos": "ED",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Luna",
+     "ln": "Vanzeir",
+     "pos": "DC",
+     "age": 21,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Elena",
+     "ln": "Mühlemann",
+     "pos": "ED",
+     "age": 21,
+     "nat": "CH",
+     "ovr": 66
+    },
+    {
+     "fn": "Felicia",
+     "ln": "Sträßer",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Caroline",
+     "ln": "Siems",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Jenny",
+     "ln": "Hipp",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Ernst",
+     "pos": "DC",
+     "age": 19,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Juliane",
+     "ln": "Wirtz",
+     "pos": "MC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Elena",
+     "ln": "Dhont",
+     "pos": "ED",
+     "age": 22,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Gutmann",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "AT",
+     "ovr": 62
+    },
+    {
+     "fn": "Maria",
+     "ln": "Penner",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "1. FC Köln",
+   "teamOvr": 71,
+   "coach": "Britta Carlson",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Lisa",
+     "ln": "Schmitz",
+     "pos": "POR",
+     "age": 30,
+     "nat": "DE",
+     "ovr": 76
+    },
+    {
+     "fn": "Marina",
+     "ln": "Hegering",
+     "pos": "DFC",
+     "age": 36,
+     "nat": "DE",
+     "ovr": 79
+    },
+    {
+     "fn": "Kathrin",
+     "ln": "Hendrich",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "DE",
+     "ovr": 80
+    },
+    {
+     "fn": "Pauline",
+     "ln": "Bremer",
+     "pos": "DC",
+     "age": 30,
+     "nat": "DE",
+     "ovr": 76
+    },
+    {
+     "fn": "Sandra María",
+     "ln": "Jessen",
+     "pos": "DC",
+     "age": 31,
+     "nat": "IS",
+     "ovr": 75
+    },
+    {
+     "fn": "Lydia",
+     "ln": "Andrade",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CH",
+     "ovr": 70
+    },
+    {
+     "fn": "Weronika",
+     "ln": "Zawistowska",
+     "pos": "ED",
+     "age": 23,
+     "nat": "PL",
+     "ovr": 72
+    },
+    {
+     "fn": "Irina",
+     "ln": "Fuchs",
+     "pos": "POR",
+     "age": 24,
+     "nat": "CH",
+     "ovr": 68
+    },
+    {
+     "fn": "Zoe",
+     "ln": "Hasenauer",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AT",
+     "ovr": 68
+    },
+    {
+     "fn": "Ella",
+     "ln": "Touon",
+     "pos": "ED",
+     "age": 22,
+     "nat": "AT",
+     "ovr": 68
+    },
+    {
+     "fn": "Merle",
+     "ln": "Hokamp",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Paula",
+     "ln": "Hoppe",
+     "pos": "POR",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Lina",
+     "ln": "Száraz",
+     "pos": "LD",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Sædís Rún",
+     "ln": "Heiðarsdóttir",
+     "pos": "LD",
+     "age": 23,
+     "nat": "IS",
+     "ovr": 72
+    },
+    {
+     "fn": "Celina",
+     "ln": "Degen",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AT",
+     "ovr": 66
+    },
+    {
+     "fn": "Jil",
+     "ln": "Schäfer",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Anna-Lena",
+     "ln": "Stolze",
+     "pos": "ED",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Laura",
+     "ln": "Vogt",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Carlotta",
+     "ln": "Imping",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Taylor",
+     "ln": "Ziemer",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Dóra",
+     "ln": "Zeller",
+     "pos": "ED",
+     "age": 24,
+     "nat": "HU",
+     "ovr": 68
+    },
+    {
+     "fn": "Elise",
+     "ln": "Stenevik",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "NO",
+     "ovr": 68
+    },
+    {
+     "fn": "Laura",
+     "ln": "Feiersinger",
+     "pos": "MC",
+     "age": 33,
+     "nat": "AT",
+     "ovr": 74
+    },
+    {
+     "fn": "Alina",
+     "ln": "Kerschbaumer",
+     "pos": "MC",
+     "age": 25,
+     "nat": "AT",
+     "ovr": 68
+    },
+    {
+     "fn": "Sophie",
+     "ln": "Nachtigall",
+     "pos": "MI",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 73
+    },
+    {
+     "fn": "Laureta",
+     "ln": "Elmazi",
+     "pos": "DC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "SC Freiburg",
+   "teamOvr": 69,
+   "coach": "Marco Konrad",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Laura",
+     "ln": "Benkarth",
+     "pos": "POR",
+     "age": 34,
+     "nat": "DE",
+     "ovr": 79
+    },
+    {
+     "fn": "Ingibjörg",
+     "ln": "Sigurðardóttir",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "IS",
+     "ovr": 74
+    },
+    {
+     "fn": "Alena",
+     "ln": "Bienz",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CH",
+     "ovr": 70
+    },
+    {
+     "fn": "Luca",
+     "ln": "Birkholz",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 67
+    },
+    {
+     "fn": "Aurélie",
+     "ln": "Csillag",
+     "pos": "MC",
+     "age": 25,
+     "nat": "CH",
+     "ovr": 69
+    },
+    {
+     "fn": "Sarah-Lisa",
+     "ln": "Dübel",
+     "pos": "MC",
+     "age": 25,
+     "nat": "AT",
+     "ovr": 67
+    },
+    {
+     "fn": "Lorena",
+     "ln": "Barth",
+     "pos": "POR",
+     "age": 24,
+     "nat": "CH",
+     "ovr": 66
+    },
+    {
+     "fn": "Julia",
+     "ln": "Stierli",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "CH",
+     "ovr": 70
+    },
+    {
+     "fn": "Lisa",
+     "ln": "Karl",
+     "pos": "LD",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Alina",
+     "ln": "Axtmann",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Nia",
+     "ln": "Szenk",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Meret",
+     "ln": "Felde",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Nicole",
+     "ln": "Ojukwu",
+     "pos": "MC",
+     "age": 22,
+     "nat": "AT",
+     "ovr": 66
+    },
+    {
+     "fn": "Tessa",
+     "ln": "Blumenberg",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Selina",
+     "ln": "Vobian",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Maj",
+     "ln": "Schneider",
+     "pos": "MC",
+     "age": 18,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Lisa",
+     "ln": "Kolb",
+     "pos": "DC",
+     "age": 20,
+     "nat": "AT",
+     "ovr": 66
+    },
+    {
+     "fn": "Nora",
+     "ln": "Scherer",
+     "pos": "EI",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Ilayda",
+     "ln": "Acikgöz",
+     "pos": "ED",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Jana",
+     "ln": "Vojteková",
+     "pos": "MC",
+     "age": 24,
+     "nat": "SK",
+     "ovr": 66
+    },
+    {
+     "fn": "Mia-Lena",
+     "ln": "Maas",
+     "pos": "DFC",
+     "age": 18,
+     "nat": "DE",
+     "ovr": 58
+    }
+   ]
+  },
+  {
+   "club": "RB Leipzig",
+   "teamOvr": 68,
+   "coach": "Jonas Stephan",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Diána",
+     "ln": "Németh",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "HU",
+     "ovr": 73
+    },
+    {
+     "fn": "Delice",
+     "ln": "Boboy",
+     "pos": "DC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Nikoline",
+     "ln": "Dudek",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DK",
+     "ovr": 68
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Norheim",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "NO",
+     "ovr": 68
+    },
+    {
+     "fn": "Persis",
+     "ln": "Oteng",
+     "pos": "ED",
+     "age": 21,
+     "nat": "GH",
+     "ovr": 64
+    },
+    {
+     "fn": "Rucy",
+     "ln": "Grunenberg",
+     "pos": "MC",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Elvira",
+     "ln": "Herzog",
+     "pos": "POR",
+     "age": 20,
+     "nat": "CH",
+     "ovr": 68
+    },
+    {
+     "fn": "Aude",
+     "ln": "Waldbillig",
+     "pos": "POR",
+     "age": 22,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Mirja",
+     "ln": "Kropp",
+     "pos": "POR",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Lou-Ann",
+     "ln": "Joly",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Victoria",
+     "ln": "Krug",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Julia",
+     "ln": "Landenberger",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Lara",
+     "ln": "Marti",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "CH",
+     "ovr": 62
+    },
+    {
+     "fn": "Zenia",
+     "ln": "Mertens",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "BE",
+     "ovr": 70
+    },
+    {
+     "fn": "Alieke",
+     "ln": "Tuin",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "NL",
+     "ovr": 66
+    },
+    {
+     "fn": "Giovanna",
+     "ln": "Hoffmann",
+     "pos": "MC",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 74
+    },
+    {
+     "fn": "Annabel",
+     "ln": "Schasching",
+     "pos": "MC",
+     "age": 24,
+     "nat": "AT",
+     "ovr": 66
+    },
+    {
+     "fn": "Jasmien",
+     "ln": "Mathys",
+     "pos": "MC",
+     "age": 25,
+     "nat": "BE",
+     "ovr": 68
+    },
+    {
+     "fn": "Therese",
+     "ln": "Simonsson",
+     "pos": "MC",
+     "age": 27,
+     "nat": "SE",
+     "ovr": 68
+    },
+    {
+     "fn": "Sara",
+     "ln": "Pusztai",
+     "pos": "ED",
+     "age": 24,
+     "nat": "HU",
+     "ovr": 68
+    },
+    {
+     "fn": "Charlotte",
+     "ln": "Hulst",
+     "pos": "ED",
+     "age": 23,
+     "nat": "NL",
+     "ovr": 70
+    },
+    {
+     "fn": "Emilía",
+     "ln": "Ásgeirsdóttir",
+     "pos": "DC",
+     "age": 21,
+     "nat": "IS",
+     "ovr": 66
+    },
+    {
+     "fn": "Marleen",
+     "ln": "Schimmer",
+     "pos": "DC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Sandra",
+     "ln": "Starke",
+     "pos": "DC",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Kyra",
+     "ln": "Spitzner",
+     "pos": "DC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "1. FC Union Berlin",
+   "teamOvr": 67,
+   "coach": "Marie-Louise Eta",
+   "coachG": "f",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Anna",
+     "ln": "Aehling",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 71
+    },
+    {
+     "fn": "Tanja",
+     "ln": "Pawollek",
+     "pos": "MC",
+     "age": 27,
+     "nat": "PL",
+     "ovr": 72
+    },
+    {
+     "fn": "Hannah",
+     "ln": "Eurlings",
+     "pos": "ED",
+     "age": 27,
+     "nat": "BE",
+     "ovr": 70
+    },
+    {
+     "fn": "Nadine",
+     "ln": "Böhi",
+     "pos": "POR",
+     "age": 26,
+     "nat": "CH",
+     "ovr": 66
+    },
+    {
+     "fn": "Eileen",
+     "ln": "Campbell",
+     "pos": "ED",
+     "age": 26,
+     "nat": "AT",
+     "ovr": 67
+    },
+    {
+     "fn": "Samantha",
+     "ln": "Steuerwald",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 67
+    },
+    {
+     "fn": "Sophie",
+     "ln": "Weidauer",
+     "pos": "DC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 67
+    },
+    {
+     "fn": "Cara",
+     "ln": "Bösl",
+     "pos": "POR",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Nelly",
+     "ln": "Smolarczyk",
+     "pos": "POR",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Tomke",
+     "ln": "Schneider",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Judit",
+     "ln": "Pujols",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "ES",
+     "ovr": 72
+    },
+    {
+     "fn": "Lisanne",
+     "ln": "Gräwe",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Lisa",
+     "ln": "Heiseler",
+     "pos": "MC",
+     "age": 30,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Korina",
+     "ln": "Janež",
+     "pos": "MC",
+     "age": 24,
+     "nat": "SI",
+     "ovr": 68
+    },
+    {
+     "fn": "Dina",
+     "ln": "Orschmann",
+     "pos": "ED",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Judith",
+     "ln": "Steinert",
+     "pos": "LD",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Leona",
+     "ln": "Seifert",
+     "pos": "MC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Anna",
+     "ln": "Weiß",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Mariann",
+     "ln": "Noack",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Ida",
+     "ln": "Heikkinen",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "FI",
+     "ovr": 66
+    },
+    {
+     "fn": "Amber",
+     "ln": "Tysiak",
+     "pos": "LD",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Leela",
+     "ln": "Egli",
+     "pos": "DC",
+     "age": 21,
+     "nat": "CH",
+     "ovr": 66
+    },
+    {
+     "fn": "Jella",
+     "ln": "Veit",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Lia",
+     "ln": "Kamber",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CH",
+     "ovr": 70
+    },
+    {
+     "fn": "Jill",
+     "ln": "Janssens",
+     "pos": "DC",
+     "age": 20,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Nele",
+     "ln": "Bauereisen",
+     "pos": "DC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Hamburger SV",
+   "teamOvr": 66,
+   "coach": "Rodolfo Cardoso",
+   "coachG": "m",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Melanie",
+     "ln": "Brunnthaler",
+     "pos": "MC",
+     "age": 27,
+     "nat": "AT",
+     "ovr": 68
+    },
+    {
+     "fn": "Sophie",
+     "ln": "Hillebrand",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "AT",
+     "ovr": 66
+    },
+    {
+     "fn": "Maria",
+     "ln": "Mikolajova",
+     "pos": "DC",
+     "age": 27,
+     "nat": "SK",
+     "ovr": 67
+    },
+    {
+     "fn": "Laura",
+     "ln": "Sieger",
+     "pos": "POR",
+     "age": 26,
+     "nat": "AT",
+     "ovr": 65
+    },
+    {
+     "fn": "Michela",
+     "ln": "Croatto",
+     "pos": "MC",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 65
+    },
+    {
+     "fn": "Nina",
+     "ln": "Räcke",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Larissa",
+     "ln": "Haidner",
+     "pos": "POR",
+     "age": 25,
+     "nat": "AT",
+     "ovr": 62
+    },
+    {
+     "fn": "Viktoria",
+     "ln": "Schwalm",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Annalena",
+     "ln": "Wucher",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "AT",
+     "ovr": 64
+    },
+    {
+     "fn": "Kinga",
+     "ln": "Szemik",
+     "pos": "POR",
+     "age": 28,
+     "nat": "PL",
+     "ovr": 66
+    },
+    {
+     "fn": "Magou",
+     "ln": "Doucouré",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Annaleen",
+     "ln": "Böhler",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Camilla",
+     "ln": "Linberg",
+     "pos": "DC",
+     "age": 24,
+     "nat": "NO",
+     "ovr": 66
+    },
+    {
+     "fn": "Pauline",
+     "ln": "Machtens",
+     "pos": "MC",
+     "age": 28,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Leila",
+     "ln": "Peneau",
+     "pos": "MC",
+     "age": 24,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Svibkova",
+     "pos": "ED",
+     "age": 24,
+     "nat": "CZ",
+     "ovr": 64
+    },
+    {
+     "fn": "Nikola",
+     "ln": "Karczewska",
+     "pos": "DC",
+     "age": 24,
+     "nat": "PL",
+     "ovr": 64
+    },
+    {
+     "fn": "Sylwia",
+     "ln": "Matysik",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "PL",
+     "ovr": 62
+    },
+    {
+     "fn": "Svea",
+     "ln": "Stoldt",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Carla",
+     "ln": "Morich",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Lena",
+     "ln": "Martens",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Jaqueline",
+     "ln": "Dönges",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Gloria",
+     "ln": "Slišković",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "BA",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "VfB Stuttgart",
+   "teamOvr": 66,
+   "coach": "Nico Schneck",
+   "coachG": "m",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Nicole",
+     "ln": "Billa",
+     "pos": "DC",
+     "age": 30,
+     "nat": "AT",
+     "ovr": 76
+    },
+    {
+     "fn": "Janina",
+     "ln": "Hechler",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Fabienne",
+     "ln": "Dongus",
+     "pos": "MC",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 69
+    },
+    {
+     "fn": "Eve",
+     "ln": "Boettcher",
+     "pos": "POR",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Chantal",
+     "ln": "Hagel",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Julia",
+     "ln": "Mickenhagen",
+     "pos": "MC",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Kiara",
+     "ln": "Beck",
+     "pos": "POR",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "Pia",
+     "ln": "Hein",
+     "pos": "POR",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Maximiliane",
+     "ln": "Rall",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Tamar",
+     "ln": "Dongus",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Lenelotte",
+     "ln": "Müller",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Linette",
+     "ln": "Hofmann",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Katharina",
+     "ln": "Schäfer",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Laureta",
+     "ln": "Temaj",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "XK",
+     "ovr": 62
+    },
+    {
+     "fn": "Anja",
+     "ln": "Selensky",
+     "pos": "MC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Dafina",
+     "ln": "Redzepi",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Celine",
+     "ln": "Philipp",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Yuka",
+     "ln": "Hirano",
+     "pos": "MC",
+     "age": 24,
+     "nat": "JP",
+     "ovr": 62
+    },
+    {
+     "fn": "Jana",
+     "ln": "Beuschlein",
+     "pos": "DC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Julia",
+     "ln": "Glaser",
+     "pos": "DC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Rosa",
+     "ln": "Rückert",
+     "pos": "DC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Haruka",
+     "ln": "Osawa",
+     "pos": "DC",
+     "age": 22,
+     "nat": "JP",
+     "ovr": 62
+    },
+    {
+     "fn": "Jana",
+     "ln": "Spengler",
+     "pos": "DC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "1. FC Nürnberg",
+   "teamOvr": 65,
+   "coach": "Omar Adlani",
+   "coachG": "m",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Sanja",
+     "ln": "Homann",
+     "pos": "MC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 65
+    },
+    {
+     "fn": "Selma",
+     "ln": "Ličina",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "ME",
+     "ovr": 64
+    },
+    {
+     "fn": "Lourdes",
+     "ln": "Romero",
+     "pos": "POR",
+     "age": 24,
+     "nat": "CH",
+     "ovr": 68
+    },
+    {
+     "fn": "Maelle",
+     "ln": "Seguin",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 64
+    },
+    {
+     "fn": "Sina",
+     "ln": "Tölzel",
+     "pos": "POR",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Leia",
+     "ln": "Varley",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "AU",
+     "ovr": 68
+    },
+    {
+     "fn": "Fany",
+     "ln": "Proniez",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Alexsandra",
+     "ln": "Lobanova",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "RU",
+     "ovr": 66
+    },
+    {
+     "fn": "Clara",
+     "ln": "Fröhlich",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Charline",
+     "ln": "Coutel",
+     "pos": "MC",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Meret",
+     "ln": "Günster",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Laura",
+     "ln": "Miller",
+     "pos": "MC",
+     "age": 28,
+     "nat": "LU",
+     "ovr": 66
+    },
+    {
+     "fn": "Jonna",
+     "ln": "Brengel",
+     "pos": "MC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Lara",
+     "ln": "Meroni",
+     "pos": "MC",
+     "age": 25,
+     "nat": "CH",
+     "ovr": 66
+    },
+    {
+     "fn": "Amélie",
+     "ln": "Thöle",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Marlene",
+     "ln": "Lindner",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Emőke",
+     "ln": "Pápai",
+     "pos": "DC",
+     "age": 24,
+     "nat": "HU",
+     "ovr": 64
+    },
+    {
+     "fn": "Zuzanna",
+     "ln": "Grzywińska",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "PL",
+     "ovr": 62
+    },
+    {
+     "fn": "Franziska",
+     "ln": "Mai",
+     "pos": "MC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Bori",
+     "ln": "Turi",
+     "pos": "DC",
+     "age": 21,
+     "nat": "HU",
+     "ovr": 64
+    },
+    {
+     "fn": "Nastassja",
+     "ln": "Lein",
+     "pos": "DC",
+     "age": 31,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Louna",
+     "ln": "Lapassouse",
+     "pos": "DC",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Rebecca",
+     "ln": "Adamczyk",
+     "pos": "POR",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Mainz 05",
+   "teamOvr": 63,
+   "coach": "Takashi Yamashita",
+   "coachG": "m",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Mamiko",
+     "ln": "Matsumoto",
+     "pos": "POR",
+     "age": 31,
+     "nat": "JP",
+     "ovr": 64
+    },
+    {
+     "fn": "Anna",
+     "ln": "Friedrichowitz",
+     "pos": "POR",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Jolina",
+     "ln": "Petri",
+     "pos": "POR",
+     "age": 20,
+     "nat": "DE",
+     "ovr": 58
+    },
+    {
+     "fn": "Kara",
+     "ln": "Bathmann",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Jana",
+     "ln": "Löber",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Jule",
+     "ln": "Stendebach",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Chiara",
+     "ln": "Peiter",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Jana",
+     "ln": "Meierfrankenfeld",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Miriam",
+     "ln": "Sterrer",
+     "pos": "MC",
+     "age": 24,
+     "nat": "AT",
+     "ovr": 62
+    },
+    {
+     "fn": "Heiðrún",
+     "ln": "Sigurðardóttir",
+     "pos": "MC",
+     "age": 24,
+     "nat": "IS",
+     "ovr": 62
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Clarke",
+     "pos": "MC",
+     "age": 24,
+     "nat": "ENG",
+     "ovr": 64
+    },
+    {
+     "fn": "Hiyori",
+     "ln": "Aoki",
+     "pos": "MC",
+     "age": 24,
+     "nat": "JP",
+     "ovr": 64
+    },
+    {
+     "fn": "Yuuka",
+     "ln": "Fukuhara",
+     "pos": "MC",
+     "age": 24,
+     "nat": "JP",
+     "ovr": 64
+    },
+    {
+     "fn": "Ebru",
+     "ln": "Uzungüney",
+     "pos": "MC",
+     "age": 29,
+     "nat": "TR",
+     "ovr": 64
+    },
+    {
+     "fn": "Lisa",
+     "ln": "Gürtler",
+     "pos": "MC",
+     "age": 23,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Laura",
+     "ln": "Schmahl",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Salma",
+     "ln": "Al Najem",
+     "pos": "MC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 60
+    },
+    {
+     "fn": "Chiara",
+     "ln": "Bouziane",
+     "pos": "DC",
+     "age": 29,
+     "nat": "DE",
+     "ovr": 68
+    },
+    {
+     "fn": "Vital",
+     "ln": "Kats",
+     "pos": "DC",
+     "age": 22,
+     "nat": "IL",
+     "ovr": 68
+    },
+    {
+     "fn": "Sarah",
+     "ln": "Khalifa",
+     "pos": "DC",
+     "age": 29,
+     "nat": "DE",
+     "ovr": 64
+    },
+    {
+     "fn": "April",
+     "ln": "Fritz",
+     "pos": "DC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Finja",
+     "ln": "Weiß",
+     "pos": "DC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Tamar",
+     "ln": "Goren",
+     "pos": "DC",
+     "age": 23,
+     "nat": "IL",
+     "ovr": 62
+    },
+    {
+     "fn": "Nadine",
+     "ln": "Anstatt",
+     "pos": "DC",
+     "age": 24,
+     "nat": "DE",
+     "ovr": 62
+    },
+    {
+     "fn": "Melina",
+     "ln": "Mehler",
+     "pos": "ED",
+     "age": 21,
+     "nat": "DE",
+     "ovr": 60
+    }
+   ]
+  }
+ ]
+}

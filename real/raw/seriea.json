@@ -1,0 +1,3740 @@
+{
+ "id": "seriea",
+ "league": "Serie A",
+ "season": "2026/27",
+ "asOf": "2026-10",
+ "clubs": [
+  {
+   "club": "Inter",
+   "coach": "Cristian Chivu",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Yann",
+     "ln": "Sommer",
+     "pos": "POR",
+     "age": 37,
+     "nat": "CH",
+     "ovr": 84
+    },
+    {
+     "fn": "Josep",
+     "ln": "Martínez",
+     "pos": "POR",
+     "age": 28,
+     "nat": "ES",
+     "ovr": 76
+    },
+    {
+     "fn": "Raffaele",
+     "ln": "Di Gennaro",
+     "pos": "POR",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 62
+    },
+    {
+     "fn": "Alessandro",
+     "ln": "Bastoni",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 87
+    },
+    {
+     "fn": "Francesco",
+     "ln": "Acerbi",
+     "pos": "DFC",
+     "age": 38,
+     "nat": "IT",
+     "ovr": 81
+    },
+    {
+     "fn": "Stefan",
+     "ln": "de Vrij",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "NL",
+     "ovr": 80
+    },
+    {
+     "fn": "Yann",
+     "ln": "Bisseck",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 80
+    },
+    {
+     "fn": "Manuel",
+     "ln": "Akanji",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "CH",
+     "ovr": 83
+    },
+    {
+     "fn": "Federico",
+     "ln": "Dimarco",
+     "pos": "LI",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 85
+    },
+    {
+     "fn": "Carlos",
+     "ln": "Augusto",
+     "pos": "LI",
+     "age": 27,
+     "nat": "BR",
+     "ovr": 79
+    },
+    {
+     "fn": "Djed",
+     "ln": "Spence",
+     "pos": "LD",
+     "age": 26,
+     "nat": "ENG",
+     "ovr": 78
+    },
+    {
+     "fn": "Matteo",
+     "ln": "Darmian",
+     "pos": "LD",
+     "age": 37,
+     "nat": "IT",
+     "ovr": 77
+    },
+    {
+     "fn": "Luis",
+     "ln": "Henrique",
+     "pos": "ED",
+     "age": 25,
+     "nat": "BR",
+     "ovr": 78
+    },
+    {
+     "fn": "Nicolò",
+     "ln": "Barella",
+     "pos": "MC",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 86
+    },
+    {
+     "fn": "Hakan",
+     "ln": "Çalhanoğlu",
+     "pos": "MCD",
+     "age": 32,
+     "nat": "TR",
+     "ovr": 85
+    },
+    {
+     "fn": "Henrikh",
+     "ln": "Mkhitaryan",
+     "pos": "MC",
+     "age": 37,
+     "nat": "AM",
+     "ovr": 79
+    },
+    {
+     "fn": "Piotr",
+     "ln": "Zieliński",
+     "pos": "MC",
+     "age": 32,
+     "nat": "PL",
+     "ovr": 82
+    },
+    {
+     "fn": "Petar",
+     "ln": "Sučić",
+     "pos": "MC",
+     "age": 23,
+     "nat": "HR",
+     "ovr": 79
+    },
+    {
+     "fn": "Kristjan",
+     "ln": "Asllani",
+     "pos": "MC",
+     "age": 24,
+     "nat": "AL",
+     "ovr": 76
+    },
+    {
+     "fn": "Davide",
+     "ln": "Frattesi",
+     "pos": "MC",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "Curtis",
+     "ln": "Jones",
+     "pos": "MC",
+     "age": 25,
+     "nat": "ENG",
+     "ovr": 79
+    },
+    {
+     "fn": "Aleksandar",
+     "ln": "Stanković",
+     "pos": "MC",
+     "age": 21,
+     "nat": "RS",
+     "ovr": 75
+    },
+    {
+     "fn": "Lautaro",
+     "ln": "Martínez",
+     "pos": "DC",
+     "age": 29,
+     "nat": "AR",
+     "ovr": 89
+    },
+    {
+     "fn": "Marcus",
+     "ln": "Thuram",
+     "pos": "DC",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 85
+    },
+    {
+     "fn": "Ange-Yoan",
+     "ln": "Bonny",
+     "pos": "DC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 76
+    },
+    {
+     "fn": "Francesco Pio",
+     "ln": "Esposito",
+     "pos": "DC",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 77
+    }
+   ]
+  },
+  {
+   "club": "Napoli",
+   "coach": "Massimiliano Allegri",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Vanja",
+     "ln": "Milinković-Savić",
+     "pos": "POR",
+     "age": 29,
+     "nat": "RS",
+     "ovr": 79
+    },
+    {
+     "fn": "Alex",
+     "ln": "Meret",
+     "pos": "POR",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 78
+    },
+    {
+     "fn": "Nikita",
+     "ln": "Contini",
+     "pos": "POR",
+     "age": 30,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Giovanni",
+     "ln": "Di Lorenzo",
+     "pos": "LD",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 82
+    },
+    {
+     "fn": "Pasquale",
+     "ln": "Mazzocchi",
+     "pos": "LD",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Alessandro",
+     "ln": "Buongiorno",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 84
+    },
+    {
+     "fn": "Amir",
+     "ln": "Rrahmani",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "XK",
+     "ovr": 82
+    },
+    {
+     "fn": "Sam",
+     "ln": "Beukema",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 81
+    },
+    {
+     "fn": "Juan",
+     "ln": "Jesus",
+     "pos": "DFC",
+     "age": 35,
+     "nat": "BR",
+     "ovr": 75
+    },
+    {
+     "fn": "Mathías",
+     "ln": "Olivera",
+     "pos": "LI",
+     "age": 29,
+     "nat": "UY",
+     "ovr": 78
+    },
+    {
+     "fn": "Leonardo",
+     "ln": "Spinazzola",
+     "pos": "LI",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 77
+    },
+    {
+     "fn": "Scott",
+     "ln": "McTominay",
+     "pos": "MC",
+     "age": 29,
+     "nat": "SCO",
+     "ovr": 86
+    },
+    {
+     "fn": "Stanislav",
+     "ln": "Lobotka",
+     "pos": "MCD",
+     "age": 31,
+     "nat": "SK",
+     "ovr": 83
+    },
+    {
+     "fn": "Frank",
+     "ln": "Anguissa",
+     "pos": "MC",
+     "age": 30,
+     "nat": "CM",
+     "ovr": 82
+    },
+    {
+     "fn": "Billy",
+     "ln": "Gilmour",
+     "pos": "MC",
+     "age": 25,
+     "nat": "SCO",
+     "ovr": 79
+    },
+    {
+     "fn": "Kevin",
+     "ln": "De Bruyne",
+     "pos": "MCO",
+     "age": 35,
+     "nat": "BE",
+     "ovr": 85
+    },
+    {
+     "fn": "Eljif",
+     "ln": "Elmas",
+     "pos": "MC",
+     "age": 27,
+     "nat": "MK",
+     "ovr": 76
+    },
+    {
+     "fn": "Antonio",
+     "ln": "Vergara",
+     "pos": "MC",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Matteo",
+     "ln": "Politano",
+     "pos": "ED",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "David",
+     "ln": "Neres",
+     "pos": "ED",
+     "age": 29,
+     "nat": "BR",
+     "ovr": 80
+    },
+    {
+     "fn": "Noa",
+     "ln": "Lang",
+     "pos": "EI",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 80
+    },
+    {
+     "fn": "Alisson",
+     "ln": "Santos",
+     "pos": "EI",
+     "age": 22,
+     "nat": "BR",
+     "ovr": 77
+    },
+    {
+     "fn": "Rasmus",
+     "ln": "Højlund",
+     "pos": "DC",
+     "age": 23,
+     "nat": "DK",
+     "ovr": 80
+    },
+    {
+     "fn": "Romelu",
+     "ln": "Lukaku",
+     "pos": "DC",
+     "age": 33,
+     "nat": "BE",
+     "ovr": 80
+    },
+    {
+     "fn": "Lorenzo",
+     "ln": "Lucca",
+     "pos": "DC",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 77
+    }
+   ]
+  },
+  {
+   "club": "Juventus",
+   "coach": "Luciano Spalletti",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Michele",
+     "ln": "Di Gregorio",
+     "pos": "POR",
+     "age": 28,
+     "nat": "IT",
+     "ovr": 80
+    },
+    {
+     "fn": "Mattia",
+     "ln": "Perin",
+     "pos": "POR",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Carlo",
+     "ln": "Pinsoglio",
+     "pos": "POR",
+     "age": 36,
+     "nat": "IT",
+     "ovr": 65
+    },
+    {
+     "fn": "Pierre",
+     "ln": "Kalulu",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 80
+    },
+    {
+     "fn": "Gleison",
+     "ln": "Bremer",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "BR",
+     "ovr": 84
+    },
+    {
+     "fn": "Federico",
+     "ln": "Gatti",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "Lloyd",
+     "ln": "Kelly",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "ENG",
+     "ovr": 78
+    },
+    {
+     "fn": "Jhon",
+     "ln": "Lucumí",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "CO",
+     "ovr": 79
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Cambiaso",
+     "pos": "LD",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 82
+    },
+    {
+     "fn": "Juan",
+     "ln": "Cabal",
+     "pos": "LI",
+     "age": 25,
+     "nat": "CO",
+     "ovr": 77
+    },
+    {
+     "fn": "Manuel",
+     "ln": "Locatelli",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "IT",
+     "ovr": 81
+    },
+    {
+     "fn": "Khéphren",
+     "ln": "Thuram",
+     "pos": "MC",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 82
+    },
+    {
+     "fn": "Teun",
+     "ln": "Koopmeiners",
+     "pos": "MC",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 80
+    },
+    {
+     "fn": "Weston",
+     "ln": "McKennie",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 79
+    },
+    {
+     "fn": "Fabio",
+     "ln": "Miretti",
+     "pos": "MC",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Edon",
+     "ln": "Zhegrova",
+     "pos": "ED",
+     "age": 27,
+     "nat": "XK",
+     "ovr": 80
+    },
+    {
+     "fn": "Francisco",
+     "ln": "Conceição",
+     "pos": "ED",
+     "age": 23,
+     "nat": "PT",
+     "ovr": 79
+    },
+    {
+     "fn": "Kenan",
+     "ln": "Yıldız",
+     "pos": "EI",
+     "age": 21,
+     "nat": "TR",
+     "ovr": 86
+    },
+    {
+     "fn": "Kerim",
+     "ln": "Alajbegović",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "BA",
+     "ovr": 75
+    },
+    {
+     "fn": "Jonathan",
+     "ln": "David",
+     "pos": "DC",
+     "age": 26,
+     "nat": "CA",
+     "ovr": 81
+    },
+    {
+     "fn": "Dušan",
+     "ln": "Vlahović",
+     "pos": "DC",
+     "age": 26,
+     "nat": "RS",
+     "ovr": 82
+    },
+    {
+     "fn": "Lois",
+     "ln": "Openda",
+     "pos": "DC",
+     "age": 26,
+     "nat": "BE",
+     "ovr": 80
+    },
+    {
+     "fn": "Randal",
+     "ln": "Kolo Muani",
+     "pos": "DC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 80
+    }
+   ]
+  },
+  {
+   "club": "AC Milan",
+   "coach": "Ruben Amorim",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Mike",
+     "ln": "Maignan",
+     "pos": "POR",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 86
+    },
+    {
+     "fn": "Pietro",
+     "ln": "Terracciano",
+     "pos": "POR",
+     "age": 36,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Lorenzo",
+     "ln": "Torriani",
+     "pos": "POR",
+     "age": 20,
+     "nat": "IT",
+     "ovr": 62
+    },
+    {
+     "fn": "Strahinja",
+     "ln": "Pavlović",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "RS",
+     "ovr": 80
+    },
+    {
+     "fn": "Mario",
+     "ln": "Gila",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "ES",
+     "ovr": 80
+    },
+    {
+     "fn": "Fikayo",
+     "ln": "Tomori",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "ENG",
+     "ovr": 82
+    },
+    {
+     "fn": "Matteo",
+     "ln": "Gabbia",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 78
+    },
+    {
+     "fn": "Koni",
+     "ln": "De Winter",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 75
+    },
+    {
+     "fn": "Zachary",
+     "ln": "Athekame",
+     "pos": "LD",
+     "age": 22,
+     "nat": "CH",
+     "ovr": 74
+    },
+    {
+     "fn": "Alexis",
+     "ln": "Saelemaekers",
+     "pos": "MD",
+     "age": 27,
+     "nat": "BE",
+     "ovr": 78
+    },
+    {
+     "fn": "Pervis",
+     "ln": "Estupiñán",
+     "pos": "LI",
+     "age": 28,
+     "nat": "EC",
+     "ovr": 77
+    },
+    {
+     "fn": "Davide",
+     "ln": "Bartesaghi",
+     "pos": "LI",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Adrien",
+     "ln": "Rabiot",
+     "pos": "MC",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 84
+    },
+    {
+     "fn": "Youssouf",
+     "ln": "Fofana",
+     "pos": "MC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 80
+    },
+    {
+     "fn": "Ardon",
+     "ln": "Jashari",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CH",
+     "ovr": 77
+    },
+    {
+     "fn": "Samuele",
+     "ln": "Ricci",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "Ruben",
+     "ln": "Loftus-Cheek",
+     "pos": "MC",
+     "age": 30,
+     "nat": "ENG",
+     "ovr": 77
+    },
+    {
+     "fn": "Yunus",
+     "ln": "Musah",
+     "pos": "MC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 75
+    },
+    {
+     "fn": "Christian",
+     "ln": "Pulisic",
+     "pos": "EI",
+     "age": 28,
+     "nat": "US",
+     "ovr": 83
+    },
+    {
+     "fn": "Christopher",
+     "ln": "Nkunku",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 79
+    },
+    {
+     "fn": "Diego",
+     "ln": "Moreira",
+     "pos": "ED",
+     "age": 22,
+     "nat": "PT",
+     "ovr": 76
+    },
+    {
+     "fn": "Gonçalo",
+     "ln": "Ramos",
+     "pos": "DC",
+     "age": 25,
+     "nat": "PT",
+     "ovr": 82
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Giménez",
+     "pos": "DC",
+     "age": 25,
+     "nat": "MX",
+     "ovr": 80
+    },
+    {
+     "fn": "Niclas",
+     "ln": "Füllkrug",
+     "pos": "DC",
+     "age": 33,
+     "nat": "DE",
+     "ovr": 76
+    }
+   ]
+  },
+  {
+   "club": "Atalanta",
+   "coach": "Maurizio Sarri",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Marco",
+     "ln": "Carnesecchi",
+     "pos": "POR",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 82
+    },
+    {
+     "fn": "Francesco",
+     "ln": "Rossi",
+     "pos": "POR",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Marco",
+     "ln": "Sportiello",
+     "pos": "POR",
+     "age": 34,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Berat",
+     "ln": "Djimsiti",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "AL",
+     "ovr": 79
+    },
+    {
+     "fn": "Isak",
+     "ln": "Hien",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "SE",
+     "ovr": 80
+    },
+    {
+     "fn": "Sead",
+     "ln": "Kolašinac",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "BA",
+     "ovr": 77
+    },
+    {
+     "fn": "Odilon",
+     "ln": "Kossounou",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "CI",
+     "ovr": 77
+    },
+    {
+     "fn": "Giorgio",
+     "ln": "Scalvini",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "IT",
+     "ovr": 80
+    },
+    {
+     "fn": "Honest",
+     "ln": "Ahanor",
+     "pos": "DFC",
+     "age": 18,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Davide",
+     "ln": "Zappacosta",
+     "pos": "LD",
+     "age": 34,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Raoul",
+     "ln": "Bellanova",
+     "pos": "LD",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "Nicola",
+     "ln": "Zalewski",
+     "pos": "LI",
+     "age": 24,
+     "nat": "PL",
+     "ovr": 76
+    },
+    {
+     "fn": "Marten",
+     "ln": "de Roon",
+     "pos": "MCD",
+     "age": 35,
+     "nat": "NL",
+     "ovr": 78
+    },
+    {
+     "fn": "",
+     "ln": "Éderson",
+     "pos": "MC",
+     "age": 27,
+     "nat": "BR",
+     "ovr": 81
+    },
+    {
+     "fn": "Mario",
+     "ln": "Pašalić",
+     "pos": "MCO",
+     "age": 31,
+     "nat": "HR",
+     "ovr": 79
+    },
+    {
+     "fn": "Lazar",
+     "ln": "Samardžić",
+     "pos": "MC",
+     "age": 24,
+     "nat": "RS",
+     "ovr": 78
+    },
+    {
+     "fn": "Charles",
+     "ln": "De Ketelaere",
+     "pos": "MCO",
+     "age": 25,
+     "nat": "BE",
+     "ovr": 82
+    },
+    {
+     "fn": "Daniel",
+     "ln": "Maldini",
+     "pos": "MCO",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Ademola",
+     "ln": "Lookman",
+     "pos": "EI",
+     "age": 29,
+     "nat": "NG",
+     "ovr": 84
+    },
+    {
+     "fn": "Kamaldeen",
+     "ln": "Sulemana",
+     "pos": "EI",
+     "age": 24,
+     "nat": "GH",
+     "ovr": 73
+    },
+    {
+     "fn": "Gianluca",
+     "ln": "Scamacca",
+     "pos": "DC",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 81
+    },
+    {
+     "fn": "Nikola",
+     "ln": "Krstović",
+     "pos": "DC",
+     "age": 26,
+     "nat": "ME",
+     "ovr": 78
+    }
+   ]
+  },
+  {
+   "club": "AS Roma",
+   "coach": "Gian Piero Gasperini",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Mile",
+     "ln": "Svilar",
+     "pos": "POR",
+     "age": 27,
+     "nat": "RS",
+     "ovr": 84
+    },
+    {
+     "fn": "Pierluigi",
+     "ln": "Gollini",
+     "pos": "POR",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Devis",
+     "ln": "Vásquez",
+     "pos": "POR",
+     "age": 28,
+     "nat": "CO",
+     "ovr": 70
+    },
+    {
+     "fn": "Gianluca",
+     "ln": "Mancini",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "IT",
+     "ovr": 80
+    },
+    {
+     "fn": "Evan",
+     "ln": "Ndicka",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "CI",
+     "ovr": 82
+    },
+    {
+     "fn": "Konstantinos",
+     "ln": "Koulierakis",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "GR",
+     "ovr": 76
+    },
+    {
+     "fn": "Mario",
+     "ln": "Hermoso",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "ES",
+     "ovr": 78
+    },
+    {
+     "fn": "Daniele",
+     "ln": "Ghilardi",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Zeki",
+     "ln": "Çelik",
+     "pos": "LD",
+     "age": 29,
+     "nat": "TR",
+     "ovr": 77
+    },
+    {
+     "fn": "",
+     "ln": "Wesley",
+     "pos": "LD",
+     "age": 22,
+     "nat": "BR",
+     "ovr": 76
+    },
+    {
+     "fn": "",
+     "ln": "Angeliño",
+     "pos": "LI",
+     "age": 29,
+     "nat": "ES",
+     "ovr": 79
+    },
+    {
+     "fn": "Manu",
+     "ln": "Koné",
+     "pos": "MC",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 83
+    },
+    {
+     "fn": "Bryan",
+     "ln": "Cristante",
+     "pos": "MC",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 78
+    },
+    {
+     "fn": "Niccolò",
+     "ln": "Pisilli",
+     "pos": "MC",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Neil",
+     "ln": "El Aynaoui",
+     "pos": "MC",
+     "age": 25,
+     "nat": "MA",
+     "ovr": 78
+    },
+    {
+     "fn": "Leandro",
+     "ln": "Paredes",
+     "pos": "MCD",
+     "age": 32,
+     "nat": "AR",
+     "ovr": 75
+    },
+    {
+     "fn": "Lorenzo",
+     "ln": "Pellegrini",
+     "pos": "MCO",
+     "age": 30,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "Paulo",
+     "ln": "Dybala",
+     "pos": "MCO",
+     "age": 33,
+     "nat": "AR",
+     "ovr": 82
+    },
+    {
+     "fn": "Tommaso",
+     "ln": "Baldanzi",
+     "pos": "MCO",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Matías",
+     "ln": "Soulé",
+     "pos": "ED",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 80
+    },
+    {
+     "fn": "Donyell",
+     "ln": "Malen",
+     "pos": "ED",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 80
+    },
+    {
+     "fn": "Rodrigo",
+     "ln": "Mora",
+     "pos": "MCO",
+     "age": 19,
+     "nat": "PT",
+     "ovr": 77
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Castro",
+     "pos": "DC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 76
+    },
+    {
+     "fn": "Artem",
+     "ln": "Dovbyk",
+     "pos": "DC",
+     "age": 29,
+     "nat": "UA",
+     "ovr": 78
+    },
+    {
+     "fn": "Evan",
+     "ln": "Ferguson",
+     "pos": "DC",
+     "age": 22,
+     "nat": "IE",
+     "ovr": 75
+    }
+   ]
+  },
+  {
+   "club": "Como 1907",
+   "coach": "Cesc Fàbregas",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Jean",
+     "ln": "Butez",
+     "pos": "POR",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 76
+    },
+    {
+     "fn": "Mauro",
+     "ln": "Vigorito",
+     "pos": "POR",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 66
+    },
+    {
+     "fn": "Marc-Oliver",
+     "ln": "Kempf",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "DE",
+     "ovr": 76
+    },
+    {
+     "fn": "Trevoh",
+     "ln": "Chalobah",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "ENG",
+     "ovr": 79
+    },
+    {
+     "fn": "Jacobo",
+     "ln": "Ramón",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "ES",
+     "ovr": 74
+    },
+    {
+     "fn": "Edoardo",
+     "ln": "Goldaniga",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Ignace",
+     "ln": "Van der Brempt",
+     "pos": "LD",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 73
+    },
+    {
+     "fn": "Alberto",
+     "ln": "Moreno",
+     "pos": "LI",
+     "age": 34,
+     "nat": "ES",
+     "ovr": 73
+    },
+    {
+     "fn": "Alex",
+     "ln": "Valle",
+     "pos": "LI",
+     "age": 22,
+     "nat": "ES",
+     "ovr": 75
+    },
+    {
+     "fn": "Maxence",
+     "ln": "Caqueret",
+     "pos": "MC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 77
+    },
+    {
+     "fn": "Lucas",
+     "ln": "da Cunha",
+     "pos": "MC",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 77
+    },
+    {
+     "fn": "Máximo",
+     "ln": "Perrone",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 76
+    },
+    {
+     "fn": "Sergi",
+     "ln": "Roberto",
+     "pos": "MC",
+     "age": 34,
+     "nat": "ES",
+     "ovr": 73
+    },
+    {
+     "fn": "Nico",
+     "ln": "Paz",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 82
+    },
+    {
+     "fn": "Martin",
+     "ln": "Baturina",
+     "pos": "MCO",
+     "age": 23,
+     "nat": "HR",
+     "ovr": 78
+    },
+    {
+     "fn": "Gabriel",
+     "ln": "Strefezza",
+     "pos": "EI",
+     "age": 29,
+     "nat": "BR",
+     "ovr": 75
+    },
+    {
+     "fn": "Assane",
+     "ln": "Diao",
+     "pos": "ED",
+     "age": 21,
+     "nat": "ES",
+     "ovr": 77
+    },
+    {
+     "fn": "Jesús",
+     "ln": "Rodríguez",
+     "pos": "EI",
+     "age": 21,
+     "nat": "ES",
+     "ovr": 75
+    },
+    {
+     "fn": "Jayden",
+     "ln": "Addai",
+     "pos": "ED",
+     "age": 20,
+     "nat": "NL",
+     "ovr": 68
+    },
+    {
+     "fn": "Anastasios",
+     "ln": "Douvikas",
+     "pos": "DC",
+     "age": 27,
+     "nat": "GR",
+     "ovr": 77
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Belotti",
+     "pos": "DC",
+     "age": 32,
+     "nat": "IT",
+     "ovr": 72
+    }
+   ]
+  },
+  {
+   "club": "Lazio",
+   "coach": "Gennaro Gattuso",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Ivan",
+     "ln": "Provedel",
+     "pos": "POR",
+     "age": 32,
+     "nat": "IT",
+     "ovr": 78
+    },
+    {
+     "fn": "Christos",
+     "ln": "Mandas",
+     "pos": "POR",
+     "age": 25,
+     "nat": "GR",
+     "ovr": 72
+    },
+    {
+     "fn": "Edoardo",
+     "ln": "Motta",
+     "pos": "POR",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 65
+    },
+    {
+     "fn": "Alessio",
+     "ln": "Romagnoli",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "Samuel",
+     "ln": "Gigot",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "FR",
+     "ovr": 75
+    },
+    {
+     "fn": "",
+     "ln": "Patric",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "ES",
+     "ovr": 73
+    },
+    {
+     "fn": "Oliver",
+     "ln": "Provstgaard",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "DK",
+     "ovr": 70
+    },
+    {
+     "fn": "Nuno",
+     "ln": "Tavares",
+     "pos": "LI",
+     "age": 26,
+     "nat": "PT",
+     "ovr": 77
+    },
+    {
+     "fn": "Luca",
+     "ln": "Pellegrini",
+     "pos": "LI",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Adam",
+     "ln": "Marušić",
+     "pos": "LD",
+     "age": 34,
+     "nat": "ME",
+     "ovr": 74
+    },
+    {
+     "fn": "Manuel",
+     "ln": "Lazzari",
+     "pos": "LD",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Elseid",
+     "ln": "Hysaj",
+     "pos": "LD",
+     "age": 32,
+     "nat": "AL",
+     "ovr": 72
+    },
+    {
+     "fn": "Matteo",
+     "ln": "Guendouzi",
+     "pos": "MC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 81
+    },
+    {
+     "fn": "Nicolò",
+     "ln": "Rovella",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "Danilo",
+     "ln": "Cataldi",
+     "pos": "MC",
+     "age": 32,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Toma",
+     "ln": "Bašić",
+     "pos": "MC",
+     "age": 27,
+     "nat": "HR",
+     "ovr": 75
+    },
+    {
+     "fn": "Fisayo",
+     "ln": "Dele-Bashiru",
+     "pos": "MC",
+     "age": 25,
+     "nat": "NG",
+     "ovr": 74
+    },
+    {
+     "fn": "Reda",
+     "ln": "Belahyane",
+     "pos": "MC",
+     "age": 22,
+     "nat": "MA",
+     "ovr": 73
+    },
+    {
+     "fn": "Gustav",
+     "ln": "Isaksen",
+     "pos": "ED",
+     "age": 25,
+     "nat": "DK",
+     "ovr": 79
+    },
+    {
+     "fn": "Mattia",
+     "ln": "Zaccagni",
+     "pos": "EI",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 80
+    },
+    {
+     "fn": "Tijjani",
+     "ln": "Noslin",
+     "pos": "ED",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Boulaye",
+     "ln": "Dia",
+     "pos": "DC",
+     "age": 29,
+     "nat": "SN",
+     "ovr": 77
+    },
+    {
+     "fn": "Taty",
+     "ln": "Castellanos",
+     "pos": "DC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 79
+    }
+   ]
+  },
+  {
+   "club": "Bologna",
+   "coach": "Domenico Tedesco",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Łukasz",
+     "ln": "Skorupski",
+     "pos": "POR",
+     "age": 35,
+     "nat": "PL",
+     "ovr": 77
+    },
+    {
+     "fn": "Federico",
+     "ln": "Ravaglia",
+     "pos": "POR",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Torbjørn",
+     "ln": "Heggem",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "NO",
+     "ovr": 76
+    },
+    {
+     "fn": "Martin",
+     "ln": "Vitík",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "CZ",
+     "ovr": 74
+    },
+    {
+     "fn": "Nicolò",
+     "ln": "Casale",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Eivind",
+     "ln": "Helland",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "NO",
+     "ovr": 70
+    },
+    {
+     "fn": "Stefan",
+     "ln": "Posch",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "AT",
+     "ovr": 75
+    },
+    {
+     "fn": "Emil",
+     "ln": "Holm",
+     "pos": "LD",
+     "age": 26,
+     "nat": "SE",
+     "ovr": 76
+    },
+    {
+     "fn": "Nadir",
+     "ln": "Zortea",
+     "pos": "LD",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Juan",
+     "ln": "Miranda",
+     "pos": "LI",
+     "age": 26,
+     "nat": "ES",
+     "ovr": 74
+    },
+    {
+     "fn": "Lewis",
+     "ln": "Ferguson",
+     "pos": "MC",
+     "age": 27,
+     "nat": "SCO",
+     "ovr": 81
+    },
+    {
+     "fn": "Remo",
+     "ln": "Freuler",
+     "pos": "MC",
+     "age": 34,
+     "nat": "CH",
+     "ovr": 76
+    },
+    {
+     "fn": "Nikola",
+     "ln": "Moro",
+     "pos": "MC",
+     "age": 28,
+     "nat": "HR",
+     "ovr": 74
+    },
+    {
+     "fn": "Tommaso",
+     "ln": "Pobega",
+     "pos": "MC",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 76
+    },
+    {
+     "fn": "Michel",
+     "ln": "Aebischer",
+     "pos": "MC",
+     "age": 29,
+     "nat": "CH",
+     "ovr": 75
+    },
+    {
+     "fn": "Giovanni",
+     "ln": "Fabbian",
+     "pos": "MC",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Jonathan",
+     "ln": "Rowe",
+     "pos": "ED",
+     "age": 23,
+     "nat": "ENG",
+     "ovr": 77
+    },
+    {
+     "fn": "Riccardo",
+     "ln": "Orsolini",
+     "pos": "ED",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 79
+    },
+    {
+     "fn": "Nicolò",
+     "ln": "Cambiaghi",
+     "pos": "EI",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Federico",
+     "ln": "Bernardeschi",
+     "pos": "MCO",
+     "age": 32,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Jens",
+     "ln": "Odgaard",
+     "pos": "DC",
+     "age": 27,
+     "nat": "DK",
+     "ovr": 76
+    },
+    {
+     "fn": "Thijs",
+     "ln": "Dallinga",
+     "pos": "DC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Ciro",
+     "ln": "Immobile",
+     "pos": "DC",
+     "age": 36,
+     "nat": "IT",
+     "ovr": 72
+    }
+   ]
+  },
+  {
+   "club": "Fiorentina",
+   "coach": "Fabio Grosso",
+   "src": "web",
+   "players": [
+    {
+     "fn": "David",
+     "ln": "de Gea",
+     "pos": "POR",
+     "age": 36,
+     "nat": "ES",
+     "ovr": 79
+    },
+    {
+     "fn": "Oliver",
+     "ln": "Christensen",
+     "pos": "POR",
+     "age": 27,
+     "nat": "DK",
+     "ovr": 70
+    },
+    {
+     "fn": "Tommaso",
+     "ln": "Martinelli",
+     "pos": "POR",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 64
+    },
+    {
+     "fn": "Pietro",
+     "ln": "Comuzzo",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 76
+    },
+    {
+     "fn": "Luca",
+     "ln": "Ranieri",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 76
+    },
+    {
+     "fn": "Marin",
+     "ln": "Pongračić",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "HR",
+     "ovr": 77
+    },
+    {
+     "fn": "Pablo",
+     "ln": "Marí",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "ES",
+     "ovr": 72
+    },
+    {
+     "fn": "",
+     "ln": "Dodô",
+     "pos": "LD",
+     "age": 27,
+     "nat": "BR",
+     "ovr": 79
+    },
+    {
+     "fn": "Robin",
+     "ln": "Gosens",
+     "pos": "LI",
+     "age": 32,
+     "nat": "DE",
+     "ovr": 78
+    },
+    {
+     "fn": "Fabiano",
+     "ln": "Parisi",
+     "pos": "LI",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Rolando",
+     "ln": "Mandragora",
+     "pos": "MC",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 78
+    },
+    {
+     "fn": "Nicolò",
+     "ln": "Fagioli",
+     "pos": "MC",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 76
+    },
+    {
+     "fn": "Edoardo",
+     "ln": "Bove",
+     "pos": "MC",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 77
+    },
+    {
+     "fn": "Christ",
+     "ln": "Oulai",
+     "pos": "MC",
+     "age": 21,
+     "nat": "CI",
+     "ovr": 74
+    },
+    {
+     "fn": "Arthur",
+     "ln": "Atta",
+     "pos": "MC",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 75
+    },
+    {
+     "fn": "Hans",
+     "ln": "Nicolussi Caviglia",
+     "pos": "MC",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Albert",
+     "ln": "Guðmundsson",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "IS",
+     "ovr": 78
+    },
+    {
+     "fn": "Manor",
+     "ln": "Solomon",
+     "pos": "EI",
+     "age": 27,
+     "nat": "IL",
+     "ovr": 76
+    },
+    {
+     "fn": "Jack",
+     "ln": "Harrison",
+     "pos": "EI",
+     "age": 30,
+     "nat": "ENG",
+     "ovr": 74
+    },
+    {
+     "fn": "Moise",
+     "ln": "Kean",
+     "pos": "DC",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 82
+    },
+    {
+     "fn": "Mateo",
+     "ln": "Pellegrino",
+     "pos": "DC",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 76
+    },
+    {
+     "fn": "",
+     "ln": "Beto",
+     "pos": "DC",
+     "age": 28,
+     "nat": "PT",
+     "ovr": 75
+    },
+    {
+     "fn": "Roberto",
+     "ln": "Piccoli",
+     "pos": "DC",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 72
+    }
+   ]
+  },
+  {
+   "club": "Torino",
+   "coach": "Ignazio Abate",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Alberto",
+     "ln": "Paleari",
+     "pos": "POR",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Franco",
+     "ln": "Israel",
+     "pos": "POR",
+     "age": 26,
+     "nat": "UY",
+     "ovr": 74
+    },
+    {
+     "fn": "Saúl",
+     "ln": "Coco",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "GQ",
+     "ovr": 74
+    },
+    {
+     "fn": "Guillermo",
+     "ln": "Maripán",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "CL",
+     "ovr": 75
+    },
+    {
+     "fn": "Perr",
+     "ln": "Schuurs",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "NL",
+     "ovr": 75
+    },
+    {
+     "fn": "Koray",
+     "ln": "Günter",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Ardian",
+     "ln": "Ismajli",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "AL",
+     "ovr": 72
+    },
+    {
+     "fn": "Valentino",
+     "ln": "Lazaro",
+     "pos": "LD",
+     "age": 30,
+     "nat": "AT",
+     "ovr": 74
+    },
+    {
+     "fn": "Marcus",
+     "ln": "Pedersen",
+     "pos": "LD",
+     "age": 26,
+     "nat": "NO",
+     "ovr": 75
+    },
+    {
+     "fn": "Niels",
+     "ln": "Nkounkou",
+     "pos": "LI",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 73
+    },
+    {
+     "fn": "Ivan",
+     "ln": "Ilić",
+     "pos": "MC",
+     "age": 25,
+     "nat": "RS",
+     "ovr": 76
+    },
+    {
+     "fn": "Gvidas",
+     "ln": "Gineitis",
+     "pos": "MC",
+     "age": 22,
+     "nat": "LT",
+     "ovr": 74
+    },
+    {
+     "fn": "Emirhan",
+     "ln": "İlkhan",
+     "pos": "MC",
+     "age": 22,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Cesare",
+     "ln": "Casadei",
+     "pos": "MC",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 72
+    },
+    {
+     "fn": "Nikola",
+     "ln": "Vlašić",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "HR",
+     "ovr": 77
+    },
+    {
+     "fn": "Zakaria",
+     "ln": "Aboukhlal",
+     "pos": "ED",
+     "age": 26,
+     "nat": "MA",
+     "ovr": 74
+    },
+    {
+     "fn": "Giovanni",
+     "ln": "Simeone",
+     "pos": "DC",
+     "age": 31,
+     "nat": "AR",
+     "ovr": 77
+    },
+    {
+     "fn": "Duván",
+     "ln": "Zapata",
+     "pos": "DC",
+     "age": 35,
+     "nat": "CO",
+     "ovr": 72
+    },
+    {
+     "fn": "Che",
+     "ln": "Adams",
+     "pos": "DC",
+     "age": 30,
+     "nat": "SCO",
+     "ovr": 75
+    },
+    {
+     "fn": "Antonio",
+     "ln": "Sanabria",
+     "pos": "DC",
+     "age": 30,
+     "nat": "PY",
+     "ovr": 72
+    }
+   ]
+  },
+  {
+   "club": "Udinese",
+   "coach": "Kosta Runjaić",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Maduka",
+     "ln": "Okoye",
+     "pos": "POR",
+     "age": 27,
+     "nat": "NG",
+     "ovr": 75
+    },
+    {
+     "fn": "Răzvan",
+     "ln": "Sava",
+     "pos": "POR",
+     "age": 24,
+     "nat": "RO",
+     "ovr": 68
+    },
+    {
+     "fn": "Thomas",
+     "ln": "Kristensen",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "DK",
+     "ovr": 75
+    },
+    {
+     "fn": "Nehuén",
+     "ln": "Pérez",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 76
+    },
+    {
+     "fn": "Oumar",
+     "ln": "Solet",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 75
+    },
+    {
+     "fn": "Christian",
+     "ln": "Kabasele",
+     "pos": "DFC",
+     "age": 35,
+     "nat": "BE",
+     "ovr": 70
+    },
+    {
+     "fn": "Kingsley",
+     "ln": "Ehizibue",
+     "pos": "LD",
+     "age": 31,
+     "nat": "NG",
+     "ovr": 72
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Zemura",
+     "pos": "LI",
+     "age": 27,
+     "nat": "ZW",
+     "ovr": 73
+    },
+    {
+     "fn": "Hassane",
+     "ln": "Kamara",
+     "pos": "LI",
+     "age": 31,
+     "nat": "CI",
+     "ovr": 72
+    },
+    {
+     "fn": "Sandi",
+     "ln": "Lovrić",
+     "pos": "MC",
+     "age": 28,
+     "nat": "SI",
+     "ovr": 76
+    },
+    {
+     "fn": "Jesper",
+     "ln": "Karlström",
+     "pos": "MC",
+     "age": 31,
+     "nat": "SE",
+     "ovr": 73
+    },
+    {
+     "fn": "Lennon",
+     "ln": "Miller",
+     "pos": "MC",
+     "age": 20,
+     "nat": "SCO",
+     "ovr": 72
+    },
+    {
+     "fn": "Jakub",
+     "ln": "Piotrowski",
+     "pos": "MC",
+     "age": 29,
+     "nat": "PL",
+     "ovr": 74
+    },
+    {
+     "fn": "Nicolò",
+     "ln": "Zaniolo",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 77
+    },
+    {
+     "fn": "Florian",
+     "ln": "Thauvin",
+     "pos": "MCO",
+     "age": 33,
+     "nat": "FR",
+     "ovr": 76
+    },
+    {
+     "fn": "Iker",
+     "ln": "Bravo",
+     "pos": "ED",
+     "age": 21,
+     "nat": "ES",
+     "ovr": 73
+    },
+    {
+     "fn": "Alexis",
+     "ln": "Sánchez",
+     "pos": "EI",
+     "age": 37,
+     "nat": "CL",
+     "ovr": 73
+    },
+    {
+     "fn": "Keinan",
+     "ln": "Davis",
+     "pos": "DC",
+     "age": 28,
+     "nat": "ENG",
+     "ovr": 73
+    },
+    {
+     "fn": "Vakoun Issouf",
+     "ln": "Bayo",
+     "pos": "DC",
+     "age": 28,
+     "nat": "CI",
+     "ovr": 72
+    },
+    {
+     "fn": "Adam",
+     "ln": "Buksa",
+     "pos": "DC",
+     "age": 30,
+     "nat": "PL",
+     "ovr": 72
+    }
+   ]
+  },
+  {
+   "club": "Genoa",
+   "coach": "Daniele De Rossi",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Justin",
+     "ln": "Bijlow",
+     "pos": "POR",
+     "age": 28,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Nicola",
+     "ln": "Leali",
+     "pos": "POR",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Johan",
+     "ln": "Vásquez",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "MX",
+     "ovr": 77
+    },
+    {
+     "fn": "Alessandro",
+     "ln": "Marcandalli",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 72
+    },
+    {
+     "fn": "Leo",
+     "ln": "Østigård",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "NO",
+     "ovr": 73
+    },
+    {
+     "fn": "Mattia",
+     "ln": "Bani",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Brooke",
+     "ln": "Norton-Cuffy",
+     "pos": "LD",
+     "age": 22,
+     "nat": "ENG",
+     "ovr": 74
+    },
+    {
+     "fn": "Stefano",
+     "ln": "Sabelli",
+     "pos": "LD",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Aarón",
+     "ln": "Martín",
+     "pos": "LI",
+     "age": 29,
+     "nat": "ES",
+     "ovr": 75
+    },
+    {
+     "fn": "Morten",
+     "ln": "Frendrup",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "DK",
+     "ovr": 78
+    },
+    {
+     "fn": "Ruslan",
+     "ln": "Malinovskyi",
+     "pos": "MC",
+     "age": 33,
+     "nat": "UA",
+     "ovr": 75
+    },
+    {
+     "fn": "Mikael",
+     "ln": "Ellertsson",
+     "pos": "ED",
+     "age": 28,
+     "nat": "IS",
+     "ovr": 74
+    },
+    {
+     "fn": "Junior",
+     "ln": "Messias",
+     "pos": "ED",
+     "age": 35,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Maxwel",
+     "ln": "Cornet",
+     "pos": "EI",
+     "age": 29,
+     "nat": "CI",
+     "ovr": 74
+    },
+    {
+     "fn": "Patrizio",
+     "ln": "Masini",
+     "pos": "MC",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 66
+    },
+    {
+     "fn": "",
+     "ln": "Vitinha",
+     "pos": "DC",
+     "age": 26,
+     "nat": "PT",
+     "ovr": 77
+    },
+    {
+     "fn": "Lorenzo",
+     "ln": "Colombo",
+     "pos": "DC",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Caleb",
+     "ln": "Ekuban",
+     "pos": "DC",
+     "age": 32,
+     "nat": "GH",
+     "ovr": 70
+    },
+    {
+     "fn": "Seydou",
+     "ln": "Fini",
+     "pos": "DC",
+     "age": 20,
+     "nat": "IT",
+     "ovr": 62
+    },
+    {
+     "fn": "Gabriele",
+     "ln": "Calvani",
+     "pos": "LI",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 63
+    }
+   ]
+  },
+  {
+   "club": "Parma",
+   "coach": "Carlos Cuesta",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Edoardo",
+     "ln": "Corvi",
+     "pos": "POR",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Gabriel",
+     "ln": "Vasconcelos",
+     "pos": "POR",
+     "age": 23,
+     "nat": "BR",
+     "ovr": 66
+    },
+    {
+     "fn": "Enrico",
+     "ln": "Delprato",
+     "pos": "LD",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Lautaro",
+     "ln": "Valenti",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 72
+    },
+    {
+     "fn": "Botond",
+     "ln": "Balogh",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "HU",
+     "ovr": 72
+    },
+    {
+     "fn": "Sascha",
+     "ln": "Britschgi",
+     "pos": "LI",
+     "age": 26,
+     "nat": "CH",
+     "ovr": 72
+    },
+    {
+     "fn": "Emanuele",
+     "ln": "Valeri",
+     "pos": "LI",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Matteo",
+     "ln": "Cancellieri",
+     "pos": "ED",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Mandela",
+     "ln": "Keita",
+     "pos": "MC",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 74
+    },
+    {
+     "fn": "",
+     "ln": "Hernani",
+     "pos": "MC",
+     "age": 32,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Adrián",
+     "ln": "Bernabé",
+     "pos": "MC",
+     "age": 25,
+     "nat": "ES",
+     "ovr": 75
+    },
+    {
+     "fn": "Oliver",
+     "ln": "Sørensen",
+     "pos": "MC",
+     "age": 21,
+     "nat": "DK",
+     "ovr": 71
+    },
+    {
+     "fn": "Christian",
+     "ln": "Ordóñez",
+     "pos": "MC",
+     "age": 23,
+     "nat": "EC",
+     "ovr": 70
+    },
+    {
+     "fn": "Dennis",
+     "ln": "Man",
+     "pos": "ED",
+     "age": 28,
+     "nat": "RO",
+     "ovr": 74
+    },
+    {
+     "fn": "Pontus",
+     "ln": "Almqvist",
+     "pos": "EI",
+     "age": 27,
+     "nat": "SE",
+     "ovr": 73
+    },
+    {
+     "fn": "Jacob",
+     "ln": "Ondrejka",
+     "pos": "MD",
+     "age": 22,
+     "nat": "CZ",
+     "ovr": 68
+    },
+    {
+     "fn": "Milan",
+     "ln": "Đurić",
+     "pos": "DC",
+     "age": 36,
+     "nat": "BA",
+     "ovr": 70
+    },
+    {
+     "fn": "Franco",
+     "ln": "Carboni",
+     "pos": "DC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Efe",
+     "ln": "Ugur",
+     "pos": "MC",
+     "age": 22,
+     "nat": "TR",
+     "ovr": 62
+    },
+    {
+     "fn": "Zion",
+     "ln": "Nelson",
+     "pos": "MC",
+     "age": 20,
+     "nat": "NO",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Cagliari",
+   "coach": "Fabio Pisacane",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Elia",
+     "ln": "Caprile",
+     "pos": "POR",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Boris",
+     "ln": "Radunović",
+     "pos": "POR",
+     "age": 30,
+     "nat": "RS",
+     "ovr": 68
+    },
+    {
+     "fn": "Yerry",
+     "ln": "Mina",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "CO",
+     "ovr": 74
+    },
+    {
+     "fn": "Sebastiano",
+     "ln": "Luperto",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Alberto",
+     "ln": "Dossena",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Gabriele",
+     "ln": "Zappa",
+     "pos": "LD",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 72
+    },
+    {
+     "fn": "Paulo",
+     "ln": "Azzi",
+     "pos": "LD",
+     "age": 25,
+     "nat": "BR",
+     "ovr": 68
+    },
+    {
+     "fn": "Tommaso",
+     "ln": "Augello",
+     "pos": "LI",
+     "age": 32,
+     "nat": "IT",
+     "ovr": 72
+    },
+    {
+     "fn": "Michel",
+     "ln": "Adopo",
+     "pos": "MC",
+     "age": 25,
+     "nat": "CI",
+     "ovr": 72
+    },
+    {
+     "fn": "Luca",
+     "ln": "Mazzitelli",
+     "pos": "MC",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Michael",
+     "ln": "Folorunsho",
+     "pos": "MC",
+     "age": 28,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Alessandro",
+     "ln": "Deiola",
+     "pos": "MC",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 69
+    },
+    {
+     "fn": "Gianluca",
+     "ln": "Gaetano",
+     "pos": "MCO",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 76
+    },
+    {
+     "fn": "Mattia",
+     "ln": "Felici",
+     "pos": "EI",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Zito",
+     "ln": "Luvumbo",
+     "pos": "EI",
+     "age": 24,
+     "nat": "AO",
+     "ovr": 72
+    },
+    {
+     "fn": "Semih",
+     "ln": "Kılıçsoy",
+     "pos": "DC",
+     "age": 21,
+     "nat": "TR",
+     "ovr": 71
+    },
+    {
+     "fn": "Sebastiano",
+     "ln": "Esposito",
+     "pos": "DC",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Belotti",
+     "pos": "DC",
+     "age": 33,
+     "nat": "IT",
+     "ovr": 72
+    },
+    {
+     "fn": "Leonardo",
+     "ln": "Pavoletti",
+     "pos": "DC",
+     "age": 38,
+     "nat": "IT",
+     "ovr": 66
+    },
+    {
+     "fn": "Nicola",
+     "ln": "Prati",
+     "pos": "DC",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 66
+    }
+   ]
+  },
+  {
+   "club": "Sassuolo",
+   "coach": "Alberto Aquilani",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Arijanet",
+     "ln": "Muric",
+     "pos": "POR",
+     "age": 27,
+     "nat": "XK",
+     "ovr": 75
+    },
+    {
+     "fn": "Stefano",
+     "ln": "Turati",
+     "pos": "POR",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Jay",
+     "ln": "Idzes",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "ID",
+     "ovr": 77
+    },
+    {
+     "fn": "Filippo",
+     "ln": "Romagna",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Fali",
+     "ln": "Candé",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "GW",
+     "ovr": 71
+    },
+    {
+     "fn": "Jeremy",
+     "ln": "Toljan",
+     "pos": "LD",
+     "age": 31,
+     "nat": "DE",
+     "ovr": 71
+    },
+    {
+     "fn": "Woyo",
+     "ln": "Coulibaly",
+     "pos": "LD",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Josh",
+     "ln": "Doig",
+     "pos": "LI",
+     "age": 24,
+     "nat": "SCO",
+     "ovr": 71
+    },
+    {
+     "fn": "Edoardo",
+     "ln": "Pieragnolo",
+     "pos": "LI",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 66
+    },
+    {
+     "fn": "Kristian",
+     "ln": "Thorstvedt",
+     "pos": "MC",
+     "age": 27,
+     "nat": "NO",
+     "ovr": 75
+    },
+    {
+     "fn": "Nemanja",
+     "ln": "Matić",
+     "pos": "MCD",
+     "age": 27,
+     "nat": "RS",
+     "ovr": 73
+    },
+    {
+     "fn": "Ismaël",
+     "ln": "Koné",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CA",
+     "ovr": 74
+    },
+    {
+     "fn": "Aster",
+     "ln": "Vranckx",
+     "pos": "MC",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 73
+    },
+    {
+     "fn": "Daniel",
+     "ln": "Boloca",
+     "pos": "MC",
+     "age": 27,
+     "nat": "RO",
+     "ovr": 72
+    },
+    {
+     "fn": "Cristian",
+     "ln": "Volpato",
+     "pos": "MCO",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 72
+    },
+    {
+     "fn": "Armand",
+     "ln": "Laurienté",
+     "pos": "EI",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 76
+    },
+    {
+     "fn": "Domenico",
+     "ln": "Berardi",
+     "pos": "ED",
+     "age": 32,
+     "nat": "IT",
+     "ovr": 78
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Pinamonti",
+     "pos": "DC",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 75
+    },
+    {
+     "fn": "Luca",
+     "ln": "Moro",
+     "pos": "DC",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 69
+    },
+    {
+     "fn": "Luca",
+     "ln": "Lipani",
+     "pos": "MC",
+     "age": 22,
+     "nat": "IT",
+     "ovr": 66
+    }
+   ]
+  },
+  {
+   "club": "Lecce",
+   "coach": "Eusebio Di Francesco",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Wladimiro",
+     "ln": "Falcone",
+     "pos": "POR",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Christian",
+     "ln": "Früchtl",
+     "pos": "POR",
+     "age": 26,
+     "nat": "DE",
+     "ovr": 66
+    },
+    {
+     "fn": "Federico",
+     "ln": "Baschirotto",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Tiago",
+     "ln": "Gabriel",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "PT",
+     "ovr": 72
+    },
+    {
+     "fn": "Kialonda",
+     "ln": "Gaspar",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "AO",
+     "ovr": 71
+    },
+    {
+     "fn": "Danilo",
+     "ln": "Veiga",
+     "pos": "LD",
+     "age": 24,
+     "nat": "PT",
+     "ovr": 72
+    },
+    {
+     "fn": "Gaby",
+     "ln": "Jean",
+     "pos": "LD",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Antonino",
+     "ln": "Gallo",
+     "pos": "LI",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 73
+    },
+    {
+     "fn": "Ylber",
+     "ln": "Ramadani",
+     "pos": "MCD",
+     "age": 30,
+     "nat": "AL",
+     "ovr": 73
+    },
+    {
+     "fn": "Lassana",
+     "ln": "Coulibaly",
+     "pos": "MC",
+     "age": 25,
+     "nat": "ML",
+     "ovr": 72
+    },
+    {
+     "fn": "Hamza",
+     "ln": "Rafia",
+     "pos": "MC",
+     "age": 27,
+     "nat": "TN",
+     "ovr": 71
+    },
+    {
+     "fn": "Medon",
+     "ln": "Berisha",
+     "pos": "MC",
+     "age": 23,
+     "nat": "XK",
+     "ovr": 68
+    },
+    {
+     "fn": "Thorir",
+     "ln": "Helgason",
+     "pos": "MC",
+     "age": 26,
+     "nat": "IS",
+     "ovr": 70
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Pierotti",
+     "pos": "ED",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 72
+    },
+    {
+     "fn": "Lameck",
+     "ln": "Banda",
+     "pos": "ED",
+     "age": 25,
+     "nat": "ZM",
+     "ovr": 72
+    },
+    {
+     "fn": "Konan",
+     "ln": "N'Dri",
+     "pos": "EI",
+     "age": 25,
+     "nat": "CI",
+     "ovr": 69
+    },
+    {
+     "fn": "Rémi",
+     "ln": "Oudin",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Walid",
+     "ln": "Cheddira",
+     "pos": "DC",
+     "age": 28,
+     "nat": "MA",
+     "ovr": 72
+    },
+    {
+     "fn": "Tete",
+     "ln": "Morente",
+     "pos": "EI",
+     "age": 30,
+     "nat": "ES",
+     "ovr": 69
+    },
+    {
+     "fn": "Riccardo",
+     "ln": "Sottil",
+     "pos": "EI",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "Venezia",
+   "coach": "Giovanni Stroppa",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Filip",
+     "ln": "Stanković",
+     "pos": "POR",
+     "age": 24,
+     "nat": "RS",
+     "ovr": 71
+    },
+    {
+     "fn": "Matteo",
+     "ln": "Grandi",
+     "pos": "POR",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 62
+    },
+    {
+     "fn": "Lorenzo",
+     "ln": "Montipò",
+     "pos": "POR",
+     "age": 30,
+     "nat": "IT",
+     "ovr": 66
+    },
+    {
+     "fn": "Matías",
+     "ln": "Moreno",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Armel",
+     "ln": "Bella-Kotchap",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "DE",
+     "ovr": 72
+    },
+    {
+     "fn": "Juan",
+     "ln": "Jesus",
+     "pos": "DFC",
+     "age": 35,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Marin",
+     "ln": "Šverko",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "HR",
+     "ovr": 70
+    },
+    {
+     "fn": "Joël",
+     "ln": "Schingtienne",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Antoine",
+     "ln": "Hainaut",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Thierry",
+     "ln": "Correia",
+     "pos": "LD",
+     "age": 27,
+     "nat": "PT",
+     "ovr": 72
+    },
+    {
+     "fn": "Pasquale",
+     "ln": "Mazzocchi",
+     "pos": "LD",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Richie",
+     "ln": "Sagrado",
+     "pos": "LD",
+     "age": 24,
+     "nat": "BE",
+     "ovr": 66
+    },
+    {
+     "fn": "Ridgeciano",
+     "ln": "Haps",
+     "pos": "LI",
+     "age": 33,
+     "nat": "SR",
+     "ovr": 68
+    },
+    {
+     "fn": "Gianluca",
+     "ln": "Busio",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Toma",
+     "ln": "Bašić",
+     "pos": "MC",
+     "age": 27,
+     "nat": "HR",
+     "ovr": 74
+    },
+    {
+     "fn": "Alfred",
+     "ln": "Duncan",
+     "pos": "MC",
+     "age": 33,
+     "nat": "GH",
+     "ovr": 68
+    },
+    {
+     "fn": "Simon",
+     "ln": "Sohm",
+     "pos": "MC",
+     "age": 25,
+     "nat": "CH",
+     "ovr": 72
+    },
+    {
+     "fn": "Þórir Jóhann",
+     "ln": "Helgason",
+     "pos": "MC",
+     "age": 26,
+     "nat": "IS",
+     "ovr": 70
+    },
+    {
+     "fn": "Lamine",
+     "ln": "Fanne",
+     "pos": "MC",
+     "age": 21,
+     "nat": "ES",
+     "ovr": 64
+    },
+    {
+     "fn": "John",
+     "ln": "Yeboah",
+     "pos": "ED",
+     "age": 25,
+     "nat": "EC",
+     "ovr": 72
+    },
+    {
+     "fn": "Albion",
+     "ln": "Rrahmani",
+     "pos": "DC",
+     "age": 26,
+     "nat": "XK",
+     "ovr": 73
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Adorante",
+     "pos": "DC",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 72
+    },
+    {
+     "fn": "Akor",
+     "ln": "Adams",
+     "pos": "DC",
+     "age": 26,
+     "nat": "NG",
+     "ovr": 73
+    },
+    {
+     "fn": "Kike",
+     "ln": "Pérez",
+     "pos": "MC",
+     "age": 27,
+     "nat": "ES",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Monza",
+   "coach": "Ivan Jurić",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Semuel",
+     "ln": "Pizzignacco",
+     "pos": "POR",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Aljaž",
+     "ln": "Strajnar",
+     "pos": "POR",
+     "age": 24,
+     "nat": "SI",
+     "ovr": 64
+    },
+    {
+     "fn": "Demba",
+     "ln": "Thiam",
+     "pos": "POR",
+     "age": 22,
+     "nat": "SN",
+     "ovr": 62
+    },
+    {
+     "fn": "Valentin",
+     "ln": "Antov",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "BG",
+     "ovr": 70
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Carboni",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Luca",
+     "ln": "Ravanelli",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 66
+    },
+    {
+     "fn": "Arvid",
+     "ln": "Brorsson",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "SE",
+     "ovr": 66
+    },
+    {
+     "fn": "Lorenzo",
+     "ln": "Lucchesi",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 67
+    },
+    {
+     "fn": "Filippo",
+     "ln": "Delli Carri",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "IT",
+     "ovr": 64
+    },
+    {
+     "fn": "Samuele",
+     "ln": "Birindelli",
+     "pos": "LD",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Adam",
+     "ln": "Bakoune",
+     "pos": "LD",
+     "age": 26,
+     "nat": "IT",
+     "ovr": 66
+    },
+    {
+     "fn": "Samuele",
+     "ln": "Capolupo",
+     "pos": "LI",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 63
+    },
+    {
+     "fn": "Paulo",
+     "ln": "Azzi",
+     "pos": "LD",
+     "age": 25,
+     "nat": "BR",
+     "ovr": 69
+    },
+    {
+     "fn": "Matteo",
+     "ln": "Pessina",
+     "pos": "MC",
+     "age": 29,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "",
+     "ln": "Hernani",
+     "pos": "MC",
+     "age": 32,
+     "nat": "BR",
+     "ovr": 71
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Colpani",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "Leonardo",
+     "ln": "Colombo",
+     "pos": "MC",
+     "age": 22,
+     "nat": "IT",
+     "ovr": 64
+    },
+    {
+     "fn": "Nicolas",
+     "ln": "Galazzi",
+     "pos": "MC",
+     "age": 22,
+     "nat": "IT",
+     "ovr": 62
+    },
+    {
+     "fn": "Manga",
+     "ln": "Foe-Ondoa",
+     "pos": "MC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 60
+    },
+    {
+     "fn": "Dany",
+     "ln": "Mota",
+     "pos": "ED",
+     "age": 27,
+     "nat": "PT",
+     "ovr": 73
+    },
+    {
+     "fn": "Patrick",
+     "ln": "Ciurria",
+     "pos": "ED",
+     "age": 30,
+     "nat": "IT",
+     "ovr": 70
+    },
+    {
+     "fn": "Omari",
+     "ln": "Forson",
+     "pos": "MCO",
+     "age": 21,
+     "nat": "ENG",
+     "ovr": 66
+    },
+    {
+     "fn": "Keita",
+     "ln": "Baldé",
+     "pos": "DC",
+     "age": 31,
+     "nat": "SN",
+     "ovr": 71
+    },
+    {
+     "fn": "Andrea",
+     "ln": "Petagna",
+     "pos": "DC",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 71
+    },
+    {
+     "fn": "Patrick",
+     "ln": "Cutrone",
+     "pos": "DC",
+     "age": 28,
+     "nat": "IT",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Frosinone",
+   "coach": "Massimiliano Alvini",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Matteo",
+     "ln": "Pisseri",
+     "pos": "POR",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Lorenzo",
+     "ln": "Palmisani",
+     "pos": "POR",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 62
+    },
+    {
+     "fn": "Sebastiano",
+     "ln": "Desplanches",
+     "pos": "POR",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 65
+    },
+    {
+     "fn": "Giorgio",
+     "ln": "Cittadini",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 66
+    },
+    {
+     "fn": "Gabriele",
+     "ln": "Calvani",
+     "pos": "LI",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 63
+    },
+    {
+     "fn": "Wisdom",
+     "ln": "Amey",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "IT",
+     "ovr": 65
+    },
+    {
+     "fn": "Kevin",
+     "ln": "Akpoguma",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NG",
+     "ovr": 68
+    },
+    {
+     "fn": "Ilario",
+     "ln": "Monterisi",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "IT",
+     "ovr": 69
+    },
+    {
+     "fn": "Aleksa",
+     "ln": "Terzić",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "RS",
+     "ovr": 66
+    },
+    {
+     "fn": "Anthony",
+     "ln": "Oyono",
+     "pos": "LD",
+     "age": 24,
+     "nat": "GA",
+     "ovr": 66
+    },
+    {
+     "fn": "Gabriele",
+     "ln": "Bracaglia",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "IT",
+     "ovr": 60
+    },
+    {
+     "fn": "Enzo",
+     "ln": "Tchato",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "CM",
+     "ovr": 60
+    },
+    {
+     "fn": "Ben Lhassine",
+     "ln": "Kone",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CI",
+     "ovr": 67
+    },
+    {
+     "fn": "Romano",
+     "ln": "Schmid",
+     "pos": "MCO",
+     "age": 26,
+     "nat": "AT",
+     "ovr": 74
+    },
+    {
+     "fn": "Giacomo",
+     "ln": "Calò",
+     "pos": "MC",
+     "age": 31,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Matteo",
+     "ln": "Cichella",
+     "pos": "MC",
+     "age": 22,
+     "nat": "IT",
+     "ovr": 62
+    },
+    {
+     "fn": "Florian",
+     "ln": "Grillitsch",
+     "pos": "MCD",
+     "age": 31,
+     "nat": "AT",
+     "ovr": 71
+    },
+    {
+     "fn": "Anouar",
+     "ln": "El Azzouzi",
+     "pos": "MC",
+     "age": 25,
+     "nat": "MA",
+     "ovr": 68
+    },
+    {
+     "fn": "Francesco",
+     "ln": "Gelli",
+     "pos": "MC",
+     "age": 22,
+     "nat": "IT",
+     "ovr": 60
+    },
+    {
+     "fn": "Farès",
+     "ln": "Ghedjemis",
+     "pos": "ED",
+     "age": 23,
+     "nat": "DZ",
+     "ovr": 72
+    },
+    {
+     "fn": "Giorgi",
+     "ln": "Kvernadze",
+     "pos": "EI",
+     "age": 26,
+     "nat": "GE",
+     "ovr": 68
+    },
+    {
+     "fn": "Alessio",
+     "ln": "Zerbin",
+     "pos": "ED",
+     "age": 27,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Antonio",
+     "ln": "Raimondo",
+     "pos": "DC",
+     "age": 24,
+     "nat": "IT",
+     "ovr": 68
+    },
+    {
+     "fn": "Daniel",
+     "ln": "Bîrligea",
+     "pos": "DC",
+     "age": 26,
+     "nat": "RO",
+     "ovr": 71
+    },
+    {
+     "fn": "Tomáš",
+     "ln": "Bobček",
+     "pos": "DC",
+     "age": 23,
+     "nat": "SK",
+     "ovr": 64
+    }
+   ]
+  }
+ ]
+}

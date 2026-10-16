@@ -1,0 +1,87 @@
+{
+ "id": "brasileirao",
+ "league": "Brasileirão Série A",
+ "country": "BR",
+ "clubs": [
+  {
+   "club": "Flamengo",
+   "gameRating": 79
+  },
+  {
+   "club": "Palmeiras",
+   "gameRating": 78.2
+  },
+  {
+   "club": "Botafogo",
+   "gameRating": 77.5
+  },
+  {
+   "club": "Fluminense",
+   "gameRating": 76.9
+  },
+  {
+   "club": "São Paulo",
+   "gameRating": 76.3
+  },
+  {
+   "club": "Corinthians",
+   "gameRating": 75.8
+  },
+  {
+   "club": "Atlético Mineiro",
+   "gameRating": 75.2
+  },
+  {
+   "club": "Cruzeiro",
+   "gameRating": 74.7
+  },
+  {
+   "club": "Internacional",
+   "gameRating": 74.2
+  },
+  {
+   "club": "Grêmio",
+   "gameRating": 73.7
+  },
+  {
+   "club": "Bahia",
+   "gameRating": 73.2
+  },
+  {
+   "club": "Vasco da Gama",
+   "gameRating": 72.7
+  },
+  {
+   "club": "RB Bragantino",
+   "gameRating": 72.2
+  },
+  {
+   "club": "Athletico Paranaense",
+   "gameRating": 71.8
+  },
+  {
+   "club": "Santos",
+   "gameRating": 71.3
+  },
+  {
+   "club": "Mirassol",
+   "gameRating": 70.8
+  },
+  {
+   "club": "Vitória",
+   "gameRating": 70.4
+  },
+  {
+   "club": "Coritiba",
+   "gameRating": 69.9
+  },
+  {
+   "club": "Chapecoense",
+   "gameRating": 69.4
+  },
+  {
+   "club": "Remo",
+   "gameRating": 69
+  }
+ ]
+}

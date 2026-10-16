@@ -1,0 +1,1393 @@
+{
+ "id": "argentina2",
+ "league": "Liga Profesional",
+ "season": "2026/27",
+ "asOf": "2026-10",
+ "clubs": [
+  {
+   "club": "Tigre",
+   "coach": "Diego Dabove",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Felipe",
+     "ln": "Zenobio",
+     "pos": "POR",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Tomás",
+     "ln": "Sultani",
+     "pos": "POR",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 60
+    },
+    {
+     "fn": "Joaquín",
+     "ln": "Laso",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 71
+    },
+    {
+     "fn": "Nahuel",
+     "ln": "Banegas",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Valentín",
+     "ln": "Moreno",
+     "pos": "LD",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Germán",
+     "ln": "Guiffrey",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Martín",
+     "ln": "Garay",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Ángelo",
+     "ln": "Marchese",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Guillermo",
+     "ln": "Soto",
+     "pos": "LI",
+     "age": 24,
+     "nat": "CL",
+     "ovr": 68
+    },
+    {
+     "fn": "Alan",
+     "ln": "Barrionuevo",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Federico",
+     "ln": "Álvarez",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 62
+    },
+    {
+     "fn": "Juan",
+     "ln": "Villalba",
+     "pos": "LI",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 60
+    },
+    {
+     "fn": "Tomás",
+     "ln": "Fernández",
+     "pos": "LD",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 60
+    },
+    {
+     "fn": "Ramón",
+     "ln": "Arias",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "UY",
+     "ovr": 64
+    },
+    {
+     "fn": "Bruno",
+     "ln": "Leyes",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Simón",
+     "ln": "Rivero",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 67
+    },
+    {
+     "fn": "Jabes",
+     "ln": "Saralegui",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Tiago",
+     "ln": "Serrago",
+     "pos": "MC",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Sebastián",
+     "ln": "Medina",
+     "pos": "MC",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Gonzalo",
+     "ln": "Piñeiro",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Santiago",
+     "ln": "González",
+     "pos": "MC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Gonzalo",
+     "ln": "Martínez",
+     "pos": "MC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Jalil",
+     "ln": "Elías",
+     "pos": "MCD",
+     "age": 30,
+     "nat": "SY",
+     "ovr": 69
+    },
+    {
+     "fn": "Elías",
+     "ln": "Cabrera",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Joaquín",
+     "ln": "Mosqueira",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "David",
+     "ln": "Romero",
+     "pos": "DC",
+     "age": 30,
+     "nat": "AR",
+     "ovr": 71
+    },
+    {
+     "fn": "Manuel",
+     "ln": "Fernández",
+     "pos": "EI",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Alfio",
+     "ln": "Oviedo",
+     "pos": "DC",
+     "age": 31,
+     "nat": "PY",
+     "ovr": 68
+    },
+    {
+     "fn": "Santiago",
+     "ln": "López",
+     "pos": "DC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Ignacio",
+     "ln": "Russo",
+     "pos": "DC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 63
+    }
+   ]
+  },
+  {
+   "club": "Platense",
+   "coach": "Martín Palermo",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Brian",
+     "ln": "Bustos",
+     "pos": "POR",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Joaquín",
+     "ln": "Giudice",
+     "pos": "POR",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 58
+    },
+    {
+     "fn": "Tomás",
+     "ln": "Silva",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Agustín",
+     "ln": "Lagos",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Eugenio",
+     "ln": "Raggio",
+     "pos": "LD",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Jonathan",
+     "ln": "Bay",
+     "pos": "LI",
+     "age": 30,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Ignacio",
+     "ln": "Vázquez",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Juan Ignacio",
+     "ln": "Saborido",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Víctor",
+     "ln": "Cuesta",
+     "pos": "DFC",
+     "age": 37,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Quirós",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Mateo",
+     "ln": "Mendía",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Iván",
+     "ln": "Gómez",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Marcos",
+     "ln": "Portillo",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Franco",
+     "ln": "Zapiola",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Maximiliano",
+     "ln": "Amarfil",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Mauro",
+     "ln": "Luna Diale",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Felipe",
+     "ln": "Bussio",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Leonardo",
+     "ln": "Heredia",
+     "pos": "MC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Martín",
+     "ln": "Barrios",
+     "pos": "MC",
+     "age": 21,
+     "nat": "UY",
+     "ovr": 66
+    },
+    {
+     "fn": "Pablo",
+     "ln": "Ferreira",
+     "pos": "MC",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Dalmasso",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Guido",
+     "ln": "Mainero",
+     "pos": "ED",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Tomás",
+     "ln": "Nasif",
+     "pos": "DC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Agustín",
+     "ln": "Ocampo",
+     "pos": "DC",
+     "age": 26,
+     "nat": "UY",
+     "ovr": 69
+    },
+    {
+     "fn": "Bautista",
+     "ln": "Merlini",
+     "pos": "DC",
+     "age": 29,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Héctor",
+     "ln": "Bobadilla",
+     "pos": "DC",
+     "age": 23,
+     "nat": "PY",
+     "ovr": 66
+    },
+    {
+     "fn": "Augusto",
+     "ln": "Lotti",
+     "pos": "DC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Juan Carlos",
+     "ln": "Gauto",
+     "pos": "DC",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 65
+    }
+   ]
+  },
+  {
+   "club": "Unión de Santa Fe",
+   "coach": "Leonardo Madelón",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Matías",
+     "ln": "Mansilla",
+     "pos": "POR",
+     "age": 35,
+     "nat": "AR",
+     "ovr": 71
+    },
+    {
+     "fn": "Federico",
+     "ln": "Vera",
+     "pos": "LD",
+     "age": 31,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Franco",
+     "ln": "Calderón",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Claudio",
+     "ln": "Corvalán",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Jerónimo",
+     "ln": "Domina",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Mateo",
+     "ln": "Del Blanco",
+     "pos": "LI",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Mauro",
+     "ln": "Pittón",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Marcelo",
+     "ln": "Estigarribia",
+     "pos": "MC",
+     "age": 30,
+     "nat": "AR",
+     "ovr": 67
+    },
+    {
+     "fn": "Franco",
+     "ln": "Fragapane",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Imanol",
+     "ln": "Machuca",
+     "pos": "ED",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Juan",
+     "ln": "Ramírez",
+     "pos": "DC",
+     "age": 30,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Lucas",
+     "ln": "Gamba",
+     "pos": "DC",
+     "age": 34,
+     "nat": "AR",
+     "ovr": 67
+    }
+   ]
+  },
+  {
+   "club": "Gimnasia y Esgrima LP",
+   "coach": "Ariel Pereyra",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Tomás",
+     "ln": "Durso",
+     "pos": "POR",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Marcelo",
+     "ln": "Weigandt",
+     "pos": "LD",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Leonardo",
+     "ln": "Morales",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Nicolás",
+     "ln": "Garayalde",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Matías",
+     "ln": "Miranda",
+     "pos": "MC",
+     "age": 34,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Nicolás",
+     "ln": "Contín",
+     "pos": "DC",
+     "age": 30,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Benjamín",
+     "ln": "Domínguez",
+     "pos": "ED",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Marcelo",
+     "ln": "Torres",
+     "pos": "DC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "Instituto",
+   "coach": "Diego Flores",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Marcos",
+     "ln": "Ledesma",
+     "pos": "POR",
+     "age": 31,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Emanuel",
+     "ln": "Sittaro",
+     "pos": "POR",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 60
+    },
+    {
+     "fn": "Hernán",
+     "ln": "de la Fuente",
+     "pos": "LD",
+     "age": 34,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Diego",
+     "ln": "Sosa",
+     "pos": "LI",
+     "age": 30,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Fernando",
+     "ln": "Alarcón",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Agustín",
+     "ln": "Massaccesi",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Andrés",
+     "ln": "Meli",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Leonel",
+     "ln": "Mosevich",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Jonatan",
+     "ln": "Galván",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Agustín",
+     "ln": "Bravo",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Giuliano",
+     "ln": "Cerato",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 61
+    },
+    {
+     "fn": "Franco",
+     "ln": "Moyano",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Gustavo",
+     "ln": "Abregú",
+     "pos": "MCD",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Juan Ignacio",
+     "ln": "Méndez",
+     "pos": "MC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Wilder",
+     "ln": "Viera",
+     "pos": "MC",
+     "age": 27,
+     "nat": "PY",
+     "ovr": 67
+    },
+    {
+     "fn": "Matías",
+     "ln": "Gallardo",
+     "pos": "MC",
+     "age": 29,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Jeremías",
+     "ln": "Lázaro",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Alex",
+     "ln": "Luna",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Joaquín",
+     "ln": "Medina",
+     "pos": "MC",
+     "age": 19,
+     "nat": "AR",
+     "ovr": 60
+    },
+    {
+     "fn": "Nicolás",
+     "ln": "Guerra",
+     "pos": "EI",
+     "age": 28,
+     "nat": "CL",
+     "ovr": 68
+    },
+    {
+     "fn": "Jonás",
+     "ln": "Acevedo",
+     "pos": "DC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Facundo",
+     "ln": "Suárez",
+     "pos": "DC",
+     "age": 29,
+     "nat": "AR",
+     "ovr": 67
+    },
+    {
+     "fn": "Matías",
+     "ln": "Fonseca",
+     "pos": "ED",
+     "age": 29,
+     "nat": "UY",
+     "ovr": 67
+    },
+    {
+     "fn": "Matías",
+     "ln": "Tissera",
+     "pos": "DC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Lucas",
+     "ln": "Sanseviero",
+     "pos": "DC",
+     "age": 22,
+     "nat": "UY",
+     "ovr": 65
+    },
+    {
+     "fn": "Jhon",
+     "ln": "Córdoba",
+     "pos": "DC",
+     "age": 33,
+     "nat": "CO",
+     "ovr": 70
+    },
+    {
+     "fn": "Lorenzo",
+     "ln": "Albarracín",
+     "pos": "DC",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 62
+    },
+    {
+     "fn": "Luca",
+     "ln": "Rafaelli",
+     "pos": "DC",
+     "age": 19,
+     "nat": "AR",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Independiente Rivadavia",
+   "coach": "Alfredo Berti",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Facundo",
+     "ln": "Sanguinetti",
+     "pos": "POR",
+     "age": 31,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Gino",
+     "ln": "Santilli",
+     "pos": "POR",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 58
+    },
+    {
+     "fn": "Danilo",
+     "ln": "Arboleda",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "CO",
+     "ovr": 69
+    },
+    {
+     "fn": "Juan Luis",
+     "ln": "Alfaro",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Nicolás",
+     "ln": "Meriano",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Marcos",
+     "ln": "López",
+     "pos": "LI",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Brandon",
+     "ln": "Oviedo",
+     "pos": "LD",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Sergio",
+     "ln": "Vittor",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Nicolás",
+     "ln": "Colazo",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Mateo",
+     "ln": "Mendizabal",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 61
+    },
+    {
+     "fn": "Ignacio",
+     "ln": "Abraham",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "SY",
+     "ovr": 62
+    },
+    {
+     "fn": "Juan",
+     "ln": "Iribarren",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 61
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Daniele",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 62
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Esquivel",
+     "pos": "MC",
+     "age": 29,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Lautaro",
+     "ln": "Ríos",
+     "pos": "MC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Lautaro",
+     "ln": "Gómez",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Favio",
+     "ln": "Álvarez",
+     "pos": "MCO",
+     "age": 34,
+     "nat": "AR",
+     "ovr": 69
+    },
+    {
+     "fn": "Federico",
+     "ln": "Medina",
+     "pos": "MC",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Tomás",
+     "ln": "Adoryán",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AM",
+     "ovr": 64
+    },
+    {
+     "fn": "Lautaro",
+     "ln": "Villegas",
+     "pos": "MC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Lucas",
+     "ln": "Palavecino",
+     "pos": "MC",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Neyder",
+     "ln": "Moreno",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CO",
+     "ovr": 65
+    },
+    {
+     "fn": "David",
+     "ln": "Zalazar",
+     "pos": "MC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Thomas",
+     "ln": "Rodríguez",
+     "pos": "MC",
+     "age": 22,
+     "nat": "CL",
+     "ovr": 64
+    },
+    {
+     "fn": "Lisandro",
+     "ln": "Piñero",
+     "pos": "ED",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Bruno",
+     "ln": "Sepúlveda",
+     "pos": "DC",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Mauro",
+     "ln": "Méndez",
+     "pos": "DC",
+     "age": 24,
+     "nat": "UY",
+     "ovr": 66
+    },
+    {
+     "fn": "Tiziano",
+     "ln": "Perrotta",
+     "pos": "DC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Federico",
+     "ln": "Anselmo",
+     "pos": "DC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Banfield",
+   "coach": "Pedro Troglio",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Ramiro",
+     "ln": "Macagno",
+     "pos": "POR",
+     "age": 34,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Emmanuel",
+     "ln": "Gómez Riga",
+     "pos": "POR",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 60
+    },
+    {
+     "fn": "Leonard",
+     "ln": "Costa",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "UY",
+     "ovr": 67
+    },
+    {
+     "fn": "Juan",
+     "ln": "Elordi",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Cena",
+     "pos": "LI",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Alejo",
+     "ln": "Osella",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Luciano",
+     "ln": "Gómez",
+     "pos": "LD",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Alex",
+     "ln": "Vigo",
+     "pos": "LD",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Ezequiel",
+     "ln": "Bonifacio",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 62
+    },
+    {
+     "fn": "Iván",
+     "ln": "Villalba",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "PY",
+     "ovr": 63
+    },
+    {
+     "fn": "Tomás",
+     "ln": "Bottari",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Leonel",
+     "ln": "Bucca",
+     "pos": "MC",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Gonzalo",
+     "ln": "Ríos",
+     "pos": "MC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 67
+    },
+    {
+     "fn": "José",
+     "ln": "Florentín",
+     "pos": "MC",
+     "age": 25,
+     "nat": "PY",
+     "ovr": 66
+    },
+    {
+     "fn": "Diego",
+     "ln": "Crego",
+     "pos": "MC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Kevin",
+     "ln": "Vázquez",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Stefano",
+     "ln": "Moreyra",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 63
+    },
+    {
+     "fn": "Matías",
+     "ln": "Fernández",
+     "pos": "MCO",
+     "age": 34,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Luis",
+     "ln": "Sequeira",
+     "pos": "MC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Luis",
+     "ln": "Díaz",
+     "pos": "MC",
+     "age": 26,
+     "nat": "CO",
+     "ovr": 65
+    },
+    {
+     "fn": "Victorio",
+     "ln": "Ramis",
+     "pos": "ED",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Álex",
+     "ln": "Arce",
+     "pos": "DC",
+     "age": 33,
+     "nat": "PY",
+     "ovr": 69
+    },
+    {
+     "fn": "Maximiliano",
+     "ln": "Salas",
+     "pos": "DC",
+     "age": 29,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Rodrigo",
+     "ln": "Atencio",
+     "pos": "DC",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 65
+    },
+    {
+     "fn": "Alessandro",
+     "ln": "Riep",
+     "pos": "DC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 64
+    },
+    {
+     "fn": "Fabrizio",
+     "ln": "Sartori",
+     "pos": "DC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Atlético Tucumán",
+   "coach": "Julio César Falcioni",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Central Córdoba",
+   "coach": "Sebastián Domínguez",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Sarmiento",
+   "coach": "Facundo Sava",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Deportivo Riestra",
+   "coach": "Guillermo Duró",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Aldosivi",
+   "coach": "Javier Sanguinetti",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Gimnasia de Mendoza",
+   "coach": "Darío Franco",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Estudiantes de Río Cuarto",
+   "coach": "Rubén Forestello",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Barracas Central",
+   "coach": "Damián Ayude",
+   "src": "memory",
+   "players": []
+  }
+ ]
+}

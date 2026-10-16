@@ -1,0 +1,24 @@
+# --- Secretos: NUNCA al repositorio ---
+*.keystore
+*.jks
+android/signing.env
+android-studio/signing.properties
+
+# --- Salidas de compilación (se generan con build.py y los scripts de Android) ---
+dist/
+android/build/
+android/build-aab/
+android/assets/index.html
+android-studio/.gradle/
+android-studio/build/
+android-studio/app/build/
+android-studio/local.properties
+android-studio/app/src/*/assets/index.html
+
+# --- Herramientas descargables y temporales ---
+tools/node_modules/
+tools/bt/
+__pycache__/
+*.pyc
+work/
+.DS_Store

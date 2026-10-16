@@ -1,0 +1,604 @@
+{
+ "Falta de {name}, que ya tenía amarilla: segunda amarilla y roja. Os quedáis con diez.": {
+  "w": [
+   "engine-extra.js:546"
+  ],
+  "ctx": "if (L.yc[pid]) { L.red = pid; out.push({t: \"red\", us: 1, pid: pid, k: \"foul\", txt: tr(\"Falta de {name}, que ya tenía amarilla: segunda amarilla y roja. Os quedáis con diez.\", {name: plShort(p)})}); }"
+ },
+ "¡Entrada durísima de {name}! Roja directa: os quedáis con diez.": {
+  "w": [
+   "engine-extra.js:547"
+  ],
+  "ctx": "else if (chance(0.04)) { L.red = pid; out.push({t: \"red\", us: 1, pid: pid, k: \"foul\", txt: tr(\"¡Entrada durísima de {name}! Roja directa: os quedáis con diez.\", {name: plShort(p)})}); }"
+ },
+ "Falta de {name} cortando la jugada: amarilla.": {
+  "w": [
+   "engine-extra.js:548"
+  ],
+  "ctx": "else { L.yc[pid] = 1; out.push({t: \"yellow\", us: 1, pid: pid, k: \"foul\", txt: tr(\"Falta de {name} cortando la jugada: amarilla.\", {name: plShort(p)})}); }"
+ },
+ "Falta de {x}, que ya tenía amarilla: roja y el rival se queda con diez.": {
+  "w": [
+   "engine-extra.js:557"
+  ],
+  "ctx": "if (L.oyc[oi]) { L.ored = (L.ored || 0) + 1; L.oxi[oi].off = true; out.push({t: \"red\", us: 0, ox: oi, k: \"foul\", txt: tr(\"Falta de {x}, que ya tenía amarilla: roja y el rival se queda con diez.\", {x: on})}); }"
+ },
+ "Falta de {x} para frenar el contragolpe: amarilla.": {
+  "w": [
+   "engine-extra.js:558"
+  ],
+  "ctx": "else { L.oyc[oi] = 1; out.push({t: \"yellow\", us: 0, ox: oi, k: \"foul\", txt: tr(\"Falta de {x} para frenar el contragolpe: amarilla.\", {x: on})}); }"
+ },
+ "Perro": {
+  "w": [
+   "pets.js:6"
+  ],
+  "ctx": "{k: \"dog\", ex: false, ico: [\"🐶\", \"🐶\", \"🐕\", \"🦮\"], n: N_(\"Perro\"), price: 1500, year: 2000, life: [11, 15], att: {FIS: 2, RIT: 1}, gk: {VEL: 1, EST: 1}, mor: 1.5,"
+ },
+ "Te saca a correr cada día: más físico y mejor ánimo.": {
+  "w": [
+   "pets.js:7"
+  ],
+  "ctx": "d: N_(\"Te saca a correr cada día: más físico y mejor ánimo.\")},"
+ },
+ "Gato": {
+  "w": [
+   "pets.js:8"
+  ],
+  "ctx": "{k: \"cat\", ex: false, ico: [\"🐱\", \"🐱\", \"🐈\", \"🐈\"], n: N_(\"Gato\"), price: 300, year: 1200, life: [13, 18], att: {PAS: 1}, gk: {REF: 1}, mor: 1.2, calm: 0.8,"
+ },
+ "Te relaja en casa: la forma aguanta mejor las malas rachas.": {
+  "w": [
+   "pets.js:9"
+  ],
+  "ctx": "d: N_(\"Te relaja en casa: la forma aguanta mejor las malas rachas.\")},"
+ },
+ "Conejo": {
+  "w": [
+   "pets.js:10"
+  ],
+  "ctx": "{k: \"rabbit\", ex: false, ico: [\"🐰\", \"🐰\", \"🐇\", \"🐇\"], n: N_(\"Conejo\"), price: 150, year: 600, life: [7, 10], att: {}, gk: {}, mor: 2,"
+ },
+ "Cariñoso y tranquilo: sube tu moral.": {
+  "w": [
+   "pets.js:11"
+  ],
+  "ctx": "d: N_(\"Cariñoso y tranquilo: sube tu moral.\")},"
+ },
+ "Peces de acuario": {
+  "w": [
+   "pets.js:12"
+  ],
+  "ctx": "{k: \"fish\", ex: false, ico: [\"🐟\", \"🐠\", \"🐠\", \"🐡\"], n: N_(\"Peces de acuario\"), price: 80, year: 300, life: [3, 6], att: {}, gk: {}, mor: 0.8, calm: 0.9,"
+ },
+ "Un acuario relajante: poco efecto y poco gasto.": {
+  "w": [
+   "pets.js:13"
+  ],
+  "ctx": "d: N_(\"Un acuario relajante: poco efecto y poco gasto.\")},"
+ },
+ "Tortuga": {
+  "w": [
+   "pets.js:14"
+  ],
+  "ctx": "{k: \"turtle\", ex: false, ico: [\"🐢\", \"🐢\", \"🐢\", \"🐢\"], n: N_(\"Tortuga\"), price: 200, year: 400, life: [35, 60], att: {DEF: 1}, gk: {COL: 1}, mor: 0.8,"
+ },
+ "Vivirá más que tu carrera: paciencia y temple.": {
+  "w": [
+   "pets.js:15"
+  ],
+  "ctx": "d: N_(\"Vivirá más que tu carrera: paciencia y temple.\")},"
+ },
+ "Hámster": {
+  "w": [
+   "pets.js:16"
+  ],
+  "ctx": "{k: \"hamster\", ex: false, ico: [\"🐹\", \"🐹\", \"🐹\", \"🐹\"], n: N_(\"Hámster\"), price: 40, year: 150, life: [2, 3], att: {}, gk: {}, mor: 1.2,"
+ },
+ "Pequeño y divertido, pero vive muy poco.": {
+  "w": [
+   "pets.js:17"
+  ],
+  "ctx": "d: N_(\"Pequeño y divertido, pero vive muy poco.\")},"
+ },
+ "Guacamayo": {
+  "w": [
+   "pets.js:19"
+  ],
+  "ctx": "{k: \"macaw\", ex: true, ico: [\"🦜\", \"🦜\", \"🦜\", \"🦜\"], n: N_(\"Guacamayo\"), price: 4000, year: 3000, life: [40, 60], att: {}, gk: {}, mor: 1, fame: 1.5, risk: 0.04,"
+ },
+ "Repite tu nombre en los vídeos: más seguidores.": {
+  "w": [
+   "pets.js:20"
+  ],
+  "ctx": "d: N_(\"Repite tu nombre en los vídeos: más seguidores.\")},"
+ },
+ "Iguana": {
+  "w": [
+   "pets.js:21"
+  ],
+  "ctx": "{k: \"iguana\", ex: true, ico: [\"🦎\", \"🦎\", \"🦎\", \"🦎\"], n: N_(\"Iguana\"), price: 1200, year: 1500, life: [15, 20], att: {REG: 1}, gk: {REF: 1}, mor: 0.7, fame: 1, risk: 0.05,"
+ },
+ "Tranquila y llamativa: un toque de fama y de calma.": {
+  "w": [
+   "pets.js:22"
+  ],
+  "ctx": "d: N_(\"Tranquila y llamativa: un toque de fama y de calma.\")},"
+ },
+ "Pitón": {
+  "w": [
+   "pets.js:23"
+  ],
+  "ctx": "{k: \"python\", ex: true, ico: [\"🐍\", \"🐍\", \"🐍\", \"🐍\"], n: N_(\"Pitón\"), price: 2500, year: 2000, life: [20, 30], att: {TIR: 1}, gk: {PAR: 1}, mor: 0.5, fame: 2, risk: 0.08,"
+ },
+ "Impone respeto en redes… y da algún susto.": {
+  "w": [
+   "pets.js:24"
+  ],
+  "ctx": "d: N_(\"Impone respeto en redes… y da algún susto.\")},"
+ },
+ "Erizo": {
+  "w": [
+   "pets.js:25"
+  ],
+  "ctx": "{k: \"hedgehog\", ex: true, ico: [\"🦔\", \"🦔\", \"🦔\", \"🦔\"], n: N_(\"Erizo\"), price: 600, year: 800, life: [4, 7], att: {}, gk: {}, mor: 1.8, fame: 0.6, risk: 0.04,"
+ },
+ "Adorable y frágil: mucha moral, vida corta.": {
+  "w": [
+   "pets.js:26"
+  ],
+  "ctx": "d: N_(\"Adorable y frágil: mucha moral, vida corta.\")},"
+ },
+ "Zorro del desierto": {
+  "w": [
+   "pets.js:27"
+  ],
+  "ctx": "{k: \"fennec\", ex: true, ico: [\"🦊\", \"🦊\", \"🦊\", \"🦊\"], n: N_(\"Zorro del desierto\"), price: 6000, year: 4000, life: [10, 14], att: {RIT: 2}, gk: {VEL: 1}, mor: 1.2, fame: 1.5, risk: 0.06,"
+ },
+ "Inquieto y veloz: te contagia la chispa, pero exige mucho.": {
+  "w": [
+   "pets.js:28"
+  ],
+  "ctx": "d: N_(\"Inquieto y veloz: te contagia la chispa, pero exige mucho.\")},"
+ },
+ "Capibara": {
+  "w": [
+   "pets.js:29"
+  ],
+  "ctx": "{k: \"capybara\", ex: true, ico: [\"🦫\", \"🦫\", \"🦫\", \"🦫\"], n: N_(\"Capibara\"), price: 9000, year: 6000, life: [8, 12], att: {}, gk: {}, mor: 3, calm: 0.7, fame: 1.5, risk: 0.04,"
+ },
+ "El animal más tranquilo del mundo: calma total y mucha moral.": {
+  "w": [
+   "pets.js:30"
+  ],
+  "ctx": "d: N_(\"El animal más tranquilo del mundo: calma total y mucha moral.\")},"
+ },
+ "Tarántula": {
+  "w": [
+   "pets.js:31"
+  ],
+  "ctx": "{k: \"tarantula\", ex: true, ico: [\"🕷️\", \"🕷️\", \"🕷️\", \"🕷️\"], n: N_(\"Tarántula\"), price: 300, year: 300, life: [15, 25], att: {TIR: 1}, gk: {COL: 1}, mor: 0.3, fame: 1, risk: 0.05,"
+ },
+ "Sangre fría: tu definición no tiembla.": {
+  "w": [
+   "pets.js:32"
+  ],
+  "ctx": "d: N_(\"Sangre fría: tu definición no tiembla.\")}"
+ },
+ "Cría": {
+  "w": [
+   "pets.js:34"
+  ],
+  "ctx": "var PET_STAGE = [N_(\"Cría\"), N_(\"Joven\"), N_(\"Adulto\"), N_(\"Senior\")];"
+ },
+ "Joven": {
+  "w": [
+   "pets.js:34"
+  ],
+  "ctx": "var PET_STAGE = [N_(\"Cría\"), N_(\"Joven\"), N_(\"Adulto\"), N_(\"Senior\")];"
+ },
+ "Adulto": {
+  "w": [
+   "pets.js:34"
+  ],
+  "ctx": "var PET_STAGE = [N_(\"Cría\"), N_(\"Joven\"), N_(\"Adulto\"), N_(\"Senior\")];"
+ },
+ "Senior": {
+  "w": [
+   "pets.js:34"
+  ],
+  "ctx": "var PET_STAGE = [N_(\"Cría\"), N_(\"Joven\"), N_(\"Adulto\"), N_(\"Senior\")];"
+ },
+ "{name} sorprende con su nueva mascota exótica: {pet}. Las redes no hablan de otra cosa.": {
+  "w": [
+   "pets.js:59"
+  ],
+  "ctx": "if (typeof socPostRaw === \"function\") socPostRaw({by: chance(0.5) ? \"fan\" : \"press\", tk: d.ex ? N_(\"{name} sorprende con su nueva mascota exótica: {pet}. Las redes no hablan de otra cosa.\") : N_(\"{name} presenta a su nue"
+ },
+ "{name} presenta a su nueva mascota: {pet}. ¡Ternura máxima! 🐾": {
+  "w": [
+   "pets.js:59"
+  ],
+  "ctx": "if (typeof socPostRaw === \"function\") socPostRaw({by: chance(0.5) ? \"fan\" : \"press\", tk: d.ex ? N_(\"{name} sorprende con su nueva mascota exótica: {pet}. Las redes no hablan de otra cosa.\") : N_(\"{name} presenta a su nue"
+ },
+ "{pet} te echa de menos: pasa más tiempo con tu mascota.": {
+  "w": [
+   "pets.js:78"
+  ],
+  "ctx": "if (pt.bond < 20 && chance(0.3)) notify(tr(\"{pet} te echa de menos: pasa más tiempo con tu mascota.\", {pet: pt.nm}), \"amber\");"
+ },
+ "Foto del día: {name} con {pet} en casa 🐾": {
+  "w": [
+   "pets.js:79"
+  ],
+  "ctx": "if (chance(0.12) && typeof socPostRaw === \"function\") socPostRaw({by: \"fan\", tk: N_(\"Foto del día: {name} con {pet} en casa 🐾\"), tp: {name: socSelfName(), pet: pt.nm}, mood: 1});"
+ },
+ "No puedes mantener a {pet}: se queda con tu familia. Te duele despedirte.": {
+  "w": [
+   "pets.js:88"
+  ],
+  "ctx": "notify(tr(\"No puedes mantener a {pet}: se queda con tu familia. Te duele despedirte.\", {pet: pt.nm}), \"red\");"
+ },
+ "🐾 {pet} se va a vivir con tu familia: no podías pagar sus cuidados.": {
+  "w": [
+   "pets.js:89"
+  ],
+  "ctx": "out.push({t: \"bad\", x: tr(\"🐾 {pet} se va a vivir con tu familia: no podías pagar sus cuidados.\", {pet: pt.nm})});"
+ },
+ "Susto con {pet}: visita urgente al veterinario ({v}).": {
+  "w": [
+   "pets.js:96"
+  ],
+  "ctx": "notify(tr(\"Susto con {pet}: visita urgente al veterinario ({v}).\", {pet: pt.nm, v: fmtMoney(bill)}), \"amber\");"
+ },
+ "🌈 {pet} ha muerto con {n} años. Te afecta mucho: −{m} de moral.": {
+  "w": [
+   "pets.js:104"
+  ],
+  "ctx": "notify(tr(\"🌈 {pet} ha muerto con {n} años. Te afecta mucho: −{m} de moral.\", {pet: pt.nm, n: pt.age, m: hit}), \"red\");"
+ },
+ "🌈 Hasta siempre, {pet} ({n} años). Te acompañó desde {y}.": {
+  "w": [
+   "pets.js:105"
+  ],
+  "ctx": "out.push({t: \"bad\", x: tr(\"🌈 Hasta siempre, {pet} ({n} años). Te acompañó desde {y}.\", {pet: pt.nm, n: pt.age, y: seasonLabel(pt.y0)})});"
+ },
+ "Mucho ánimo, {name}. Descansa, {pet} 🌈": {
+  "w": [
+   "pets.js:106"
+  ],
+  "ctx": "if (typeof socPostRaw === \"function\") socPostRaw({by: \"fan\", tk: N_(\"Mucho ánimo, {name}. Descansa, {pet} 🌈\"), tp: {name: socSelfName(), pet: pt.nm}, mood: -1});"
+ },
+ "🐾 {pet} cumple {n} años y ya es senior: rinde algo menos, pero sigue a tu lado.": {
+  "w": [
+   "pets.js:108"
+  ],
+  "ctx": "out.push({t: \"ok\", x: tr(\"🐾 {pet} cumple {n} años y ya es senior: rinde algo menos, pero sigue a tu lado.\", {pet: pt.nm, n: pt.age})});"
+ },
+ "🐾 {pet} cumple {n} años.": {
+  "w": [
+   "pets.js:109"
+  ],
+  "ctx": "} else out.push({t: \"ok\", x: tr(\"🐾 {pet} cumple {n} años.\", {pet: pt.nm, n: pt.age})});"
+ },
+ "Inicio": {
+  "w": [
+   "ui.js:443",
+   "ui.js:444"
+  ],
+  "ctx": "var t = isMgr() ? [[\"club\", tr(\"Inicio\"), ICON.home], [\"plantilla\", tr(\"Equipo\"), ICON.shirt], [\"mercado\", tr(\"Mercado\"), ICON.swap], [\"mas\", tr(\"Más\"), ICON.grid]]"
+ },
+ "Más": {
+  "w": [
+   "ui.js:443",
+   "ui.js:444",
+   "ui.js:459",
+   "ui.js:467"
+  ],
+  "ctx": "var t = isMgr() ? [[\"club\", tr(\"Inicio\"), ICON.home], [\"plantilla\", tr(\"Equipo\"), ICON.shirt], [\"mercado\", tr(\"Mercado\"), ICON.swap], [\"mas\", tr(\"Más\"), ICON.grid]]"
+ },
+ "Yo": {
+  "w": [
+   "ui.js:444"
+  ],
+  "ctx": ": [[\"carrera\", tr(\"Inicio\"), ICON.home], [\"jugador\", tr(\"Yo\"), ICON.shirt], [\"comp\", tr(\"Liga\"), ICON.table], [\"mas\", tr(\"Más\"), ICON.grid]];"
+ },
+ "Vais {pos} en {lg}": {
+  "w": [
+   "ui.js:453"
+  ],
+  "ctx": "if (mgr) { var pos = S.m.club >= 0 ? posInLeague(S.m.club) : 0; rows.push([\"tab\", \"comp\", ICON.table, tr(\"Competición\"), pos > 0 ? tr(\"Vais {pos} en {lg}\", {pos: ord(pos), lg: lgName(S.cl[S.m.club])}) : tr(\"Clasificacion"
+ },
+ "Clasificaciones y calendario": {
+  "w": [
+   "ui.js:453"
+  ],
+  "ctx": "if (mgr) { var pos = S.m.club >= 0 ? posInLeague(S.m.club) : 0; rows.push([\"tab\", \"comp\", ICON.table, tr(\"Competición\"), pos > 0 ? tr(\"Vais {pos} en {lg}\", {pos: ord(pos), lg: lgName(S.cl[S.m.club])}) : tr(\"Clasificacion"
+ },
+ "Red social": {
+  "w": [
+   "ui.js:454",
+   "ui.js:466"
+  ],
+  "ctx": "rows.push([\"tab\", \"red\", ICON.at, tr(\"Red social\"), unread ? trn(unread, \"{n} publicación nueva\", \"{n} publicaciones nuevas\") : tr(\"Lo que dicen de ti\")]);"
+ },
+ "{n} publicación nueva": {
+  "w": [
+   "ui.js:454"
+  ],
+  "ctx": "rows.push([\"tab\", \"red\", ICON.at, tr(\"Red social\"), unread ? trn(unread, \"{n} publicación nueva\", \"{n} publicaciones nuevas\") : tr(\"Lo que dicen de ti\")]);",
+  "note": "plural:singular"
+ },
+ "{n} publicaciones nuevas": {
+  "w": [
+   "ui.js:454"
+  ],
+  "ctx": "rows.push([\"tab\", \"red\", ICON.at, tr(\"Red social\"), unread ? trn(unread, \"{n} publicación nueva\", \"{n} publicaciones nuevas\") : tr(\"Lo que dicen de ti\")]);",
+  "note": "plural:plural"
+ },
+ "Lo que dicen de ti": {
+  "w": [
+   "ui.js:454"
+  ],
+  "ctx": "rows.push([\"tab\", \"red\", ICON.at, tr(\"Red social\"), unread ? trn(unread, \"{n} publicación nueva\", \"{n} publicaciones nuevas\") : tr(\"Lo que dicen de ti\")]);"
+ },
+ "Temporadas, títulos y premios": {
+  "w": [
+   "ui.js:455"
+  ],
+  "ctx": "rows.push([\"tab\", \"hist\", ICON.trophy, tr(\"Historial\"), tr(\"Temporadas, títulos y premios\")]);"
+ },
+ "Otras ligas, selecciones y rivales": {
+  "w": [
+   "ui.js:456"
+  ],
+  "ctx": "if (!mgr) rows.push([\"tab\", \"mundo\", ICON.globe, tr(\"Mundo\"), tr(\"Otras ligas, selecciones y rivales\")]);"
+ },
+ "Cómo funciona cada parte": {
+  "w": [
+   "ui.js:457"
+  ],
+  "ctx": "rows.push([\"guide\", \"\", ICON.book, tr(\"Guía del juego\"), tr(\"Cómo funciona cada parte\")]);"
+ },
+ "Ajustes y partidas": {
+  "w": [
+   "ui.js:458"
+  ],
+  "ctx": "rows.push([\"menu\", \"\", ICON.gear, tr(\"Ajustes y partidas\"), tr(\"Idioma, ritmo, guardar y cargar\")]);"
+ },
+ "Idioma, ritmo, guardar y cargar": {
+  "w": [
+   "ui.js:458"
+  ],
+  "ctx": "rows.push([\"menu\", \"\", ICON.gear, tr(\"Ajustes y partidas\"), tr(\"Idioma, ritmo, guardar y cargar\")]);"
+ },
+ "muy bien": {
+  "w": [
+   "ui.js:516"
+  ],
+  "ctx": "function lvlWord(v) { return v >= 75 ? [tr(\"muy bien\"), \"hi\"] : v >= 55 ? [tr(\"bien\"), \"ok\"] : v >= 35 ? [tr(\"regular\"), \"mid\"] : [tr(\"mal\"), \"lo\"]; }"
+ },
+ "bien": {
+  "w": [
+   "ui.js:516"
+  ],
+  "ctx": "function lvlWord(v) { return v >= 75 ? [tr(\"muy bien\"), \"hi\"] : v >= 55 ? [tr(\"bien\"), \"ok\"] : v >= 35 ? [tr(\"regular\"), \"mid\"] : [tr(\"mal\"), \"lo\"]; }"
+ },
+ "regular": {
+  "w": [
+   "ui.js:516"
+  ],
+  "ctx": "function lvlWord(v) { return v >= 75 ? [tr(\"muy bien\"), \"hi\"] : v >= 55 ? [tr(\"bien\"), \"ok\"] : v >= 35 ? [tr(\"regular\"), \"mid\"] : [tr(\"mal\"), \"lo\"]; }"
+ },
+ "mal": {
+  "w": [
+   "ui.js:516"
+  ],
+  "ctx": "function lvlWord(v) { return v >= 75 ? [tr(\"muy bien\"), \"hi\"] : v >= 55 ? [tr(\"bien\"), \"ok\"] : v >= 35 ? [tr(\"regular\"), \"mid\"] : [tr(\"mal\"), \"lo\"]; }"
+ },
+ "Ver tu estado en detalle": {
+  "w": [
+   "ui.js:518"
+  ],
+  "ctx": "return '<button class=\"strow\" data-a=\"statinfo\" aria-label=\"' + h(tr(\"Ver tu estado en detalle\")) + '\">' + items.map(function (x) { var w = lvlWord(x[1]); return '<span class=\"stc ' + w[1] + '\"><i></i>' + h(x[0]) + \" <b>"
+ },
+ "Novedades": {
+  "w": [
+   "ui.js:821"
+  ],
+  "ctx": "return '<h3 class=\"sech\">' + tr(\"Novedades\") + '</h3><p class=\"sechint\">' + tr(\"Toca para abrir · desliza a la derecha para quitar\") + \"</p>\" + l.map(function (c, i) { return i === 0 || c.id === UI.flash ? feedCardSw(c) "
+ },
+ "Toca para abrir · desliza a la derecha para quitar": {
+  "w": [
+   "ui.js:821"
+  ],
+  "ctx": "return '<h3 class=\"sech\">' + tr(\"Novedades\") + '</h3><p class=\"sechint\">' + tr(\"Toca para abrir · desliza a la derecha para quitar\") + \"</p>\" + l.map(function (c, i) { return i === 0 || c.id === UI.flash ? feedCardSw(c) "
+ },
+ "Estado del club": {
+  "w": [
+   "ui.js:1600"
+  ],
+  "ctx": "return \"<h2>\" + (isMgr() ? tr(\"Estado del club\") : tr(\"Tu estado\")) + '</h2><div class=\"stack\"><div class=\"stlist\">' + it.map(function (x) { var w = lvlWord(x[1]), v = Math.round(x[1]); return '<div class=\"stli\"><div cla"
+ },
+ "Tu estado": {
+  "w": [
+   "ui.js:1600"
+  ],
+  "ctx": "return \"<h2>\" + (isMgr() ? tr(\"Estado del club\") : tr(\"Tu estado\")) + '</h2><div class=\"stack\"><div class=\"stlist\">' + it.map(function (x) { var w = lvlWord(x[1]), v = Math.round(x[1]); return '<div class=\"stli\"><div cla"
+ },
+ "Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.": {
+  "w": [
+   "ui.js:1601"
+  ],
+  "ctx": "'<p class=\"muted\" style=\"font-size:13px;margin:0\">' + (isMgr() ? tr(\"Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.\") : tr(\"Forma, moral y físico deciden cómo rindes; el míster y"
+ },
+ "Forma, moral y físico deciden cómo rindes; el míster y la afición, tus minutos y tu fama.": {
+  "w": [
+   "ui.js:1601"
+  ],
+  "ctx": "'<p class=\"muted\" style=\"font-size:13px;margin:0\">' + (isMgr() ? tr(\"Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.\") : tr(\"Forma, moral y físico deciden cómo rindes; el míster y"
+ },
+ "Fama y seguidores": {
+  "w": [
+   "ui-pets.js:11"
+  ],
+  "ctx": "if (d.fame) out.push('<span class=\"chip up\">' + tr(\"Fama y seguidores\") + \"</span>\");"
+ },
+ "Sustos y veterinario": {
+  "w": [
+   "ui-pets.js:12"
+  ],
+  "ctx": "if (d.risk) out.push('<span class=\"chip down\">' + tr(\"Sustos y veterinario\") + \"</span>\");"
+ },
+ "Adopta una mascota": {
+  "w": [
+   "ui-pets.js:21"
+  ],
+  "ctx": "if (!pt) return '<button class=\"card petcta\" data-a=\"petopen\"><span class=\"petcta-ic\" aria-hidden=\"true\">🐾</span><span><b>' + tr(\"Adopta una mascota\") + \"</b><small>\" + tr(\"Te acompaña, crece contigo y mejora tu ánimo.\""
+ },
+ "Te acompaña, crece contigo y mejora tu ánimo.": {
+  "w": [
+   "ui-pets.js:21"
+  ],
+  "ctx": "if (!pt) return '<button class=\"card petcta\" data-a=\"petopen\"><span class=\"petcta-ic\" aria-hidden=\"true\">🐾</span><span><b>' + tr(\"Adopta una mascota\") + \"</b><small>\" + tr(\"Te acompaña, crece contigo y mejora tu ánimo.\""
+ },
+ "Tu mascota": {
+  "w": [
+   "ui-pets.js:24",
+   "ui-pets.js:44"
+  ],
+  "ctx": "'<span class=\"petinfo\"><span class=\"eyebrow\">' + tr(\"Tu mascota\") + \"</span><b>\" + h(pt.nm) + \"</b><small>\" + h(tr(d.n)) + \" · \" + trn(pt.age, \"{n} año\", \"{n} años\") + \" · \" + h(tr(PET_STAGE[petStage(pt)])) + \"</small>\" "
+ },
+ "Vínculo {n} %": {
+  "w": [
+   "ui-pets.js:25"
+  ],
+  "ctx": "'<span class=\"petbond\" aria-label=\"' + h(tr(\"Vínculo {n} %\", {n: Math.round(pt.bond)})) + '\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></span></span>' +"
+ },
+ "Quiere jugar contigo": {
+  "w": [
+   "ui-pets.js:26"
+  ],
+  "ctx": "(pt.cared ? \"\" : '<span class=\"petdot\" title=\"' + h(tr(\"Quiere jugar contigo\")) + '\">!</span>') + '<span class=\"chev\" aria-hidden=\"true\">›</span></button>';"
+ },
+ "Ponle un nombre a tu mascota.": {
+  "w": [
+   "ui-pets.js:33"
+  ],
+  "ctx": "if (r.noName) { U.toast(tr(\"Ponle un nombre a tu mascota.\")); return; }"
+ },
+ "No tienes dinero suficiente.": {
+  "w": [
+   "ui-pets.js:34"
+  ],
+  "ctx": "if (r.poor) { U.toast(tr(\"No tienes dinero suficiente.\")); return; }"
+ },
+ "¡Bienvenida a casa, {pet}!": {
+  "w": [
+   "ui-pets.js:35"
+  ],
+  "ctx": "if (r.ok) { U.edgeFlash(true); U.toast(tr(\"¡Bienvenida a casa, {pet}!\", {pet: petOf().nm})); U.ui().petPick = null; rer(); }"
+ },
+ "Pasas la tarde con {pet}: el vínculo crece.": {
+  "w": [
+   "ui-pets.js:37"
+  ],
+  "ctx": "U.actions.petcare = function () { if (petCare()) { U.toast(tr(\"Pasas la tarde con {pet}: el vínculo crece.\", {pet: petOf().nm})); rer(); } };"
+ },
+ "Ahora se llama {pet}.": {
+  "w": [
+   "ui-pets.js:38"
+  ],
+  "ctx": "U.actions.petname = function () { var i = document.getElementById(\"petrn\"); if (i && petRename(i.value)) { U.toast(tr(\"Ahora se llama {pet}.\", {pet: petOf().nm})); rer(); } };"
+ },
+ "Vínculo": {
+  "w": [
+   "ui-pets.js:46"
+  ],
+  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Vínculo\") + ' · ' + Math.round(pt.bond) + ' %</div><div class=\"petbond big\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></div><p class=\"muted lfhint\">' + tr(\"Cuanto más fuerte el"
+ },
+ "Cuanto más fuerte el vínculo, más te ayuda. Si no le dedicas tiempo, se debilita.": {
+  "w": [
+   "ui-pets.js:46"
+  ],
+  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Vínculo\") + ' · ' + Math.round(pt.bond) + ' %</div><div class=\"petbond big\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></div><p class=\"muted lfhint\">' + tr(\"Cuanto más fuerte el"
+ },
+ "Ya habéis pasado tiempo juntos este tramo": {
+  "w": [
+   "ui-pets.js:48"
+  ],
+  "ctx": "s += '<button class=\"go\" data-a=\"petcare\"' + (pt.cared ? \" disabled\" : \"\") + \">\" + (pt.cared ? tr(\"Ya habéis pasado tiempo juntos este tramo\") : tr(\"Pasar tiempo con {pet}\", {pet: h(pt.nm)})) + \"</button>\";"
+ },
+ "Pasar tiempo con {pet}": {
+  "w": [
+   "ui-pets.js:48"
+  ],
+  "ctx": "s += '<button class=\"go\" data-a=\"petcare\"' + (pt.cared ? \" disabled\" : \"\") + \">\" + (pt.cared ? tr(\"Ya habéis pasado tiempo juntos este tramo\") : tr(\"Pasar tiempo con {pet}\", {pet: h(pt.nm)})) + \"</button>\";"
+ },
+ "Gasto anual: {v}. Esperanza de vida: {a}–{b} años.": {
+  "w": [
+   "ui-pets.js:49"
+  ],
+  "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Gasto anual: {v}. Esperanza de vida: {a}–{b} años.\", {v: fmtMoney(d.year), a: d.life[0], b: d.life[1]}) + \"</p>\";"
+ },
+ "Adoptar una mascota": {
+  "w": [
+   "ui-pets.js:53"
+  ],
+  "ctx": "s = '<h2>' + tr(\"Adoptar una mascota\") + '</h2><div class=\"stack\"><p class=\"muted\" style=\"margin:0\">' + tr(\"Llega como cría y crece contigo temporada a temporada. Tienes {m}.\", {m: fmtMoney(S.p.money)}) + \"</p>\";"
+ },
+ "Llega como cría y crece contigo temporada a temporada. Tienes {m}.": {
+  "w": [
+   "ui-pets.js:53"
+  ],
+  "ctx": "s = '<h2>' + tr(\"Adoptar una mascota\") + '</h2><div class=\"stack\"><p class=\"muted\" style=\"margin:0\">' + tr(\"Llega como cría y crece contigo temporada a temporada. Tienes {m}.\", {m: fmtMoney(S.p.money)}) + \"</p>\";"
+ },
+ "Normales": {
+  "w": [
+   "ui-pets.js:54"
+  ],
+  "ctx": "s += '<div class=\"seg\"><button data-a=\"pettab\" data-v=\"n\" aria-pressed=\"' + (tab === \"n\") + '\">' + tr(\"Normales\") + '</button><button data-a=\"pettab\" data-v=\"x\" aria-pressed=\"' + (tab === \"x\") + '\">' + tr(\"Exóticas\") + \""
+ },
+ "Exóticas": {
+  "w": [
+   "ui-pets.js:54"
+  ],
+  "ctx": "s += '<div class=\"seg\"><button data-a=\"pettab\" data-v=\"n\" aria-pressed=\"' + (tab === \"n\") + '\">' + tr(\"Normales\") + '</button><button data-a=\"pettab\" data-v=\"x\" aria-pressed=\"' + (tab === \"x\") + '\">' + tr(\"Exóticas\") + \""
+ },
+ "Las exóticas dan más fama, pero cuestan más y pueden dar sustos.": {
+  "w": [
+   "ui-pets.js:55"
+  ],
+  "ctx": "if (tab === \"x\") s += '<p class=\"muted lfhint\">' + tr(\"Las exóticas dan más fama, pero cuestan más y pueden dar sustos.\") + \"</p>\";"
+ },
+ "{p} · {y}/año · vive {a}–{b} años": {
+  "w": [
+   "ui-pets.js:59"
+  ],
+  "ctx": "tr(\"{p} · {y}/año · vive {a}–{b} años\", {p: fmtMoney(d.price), y: fmtMoney(d.year), a: d.life[0], b: d.life[1]}) + '</small><span class=\"chips\">' + chips(d) + \"</span></span></button>\" +"
+ },
+ "¿Cómo se va a llamar?": {
+  "w": [
+   "ui-pets.js:60"
+  ],
+  "ctx": "(on ? '<div class=\"petadopt\"><input id=\"petnm\" maxlength=\"16\" placeholder=\"' + h(tr(\"¿Cómo se va a llamar?\")) + '\" aria-label=\"' + h(tr(\"Nombre de la mascota\")) + '\"><button class=\"go\" data-a=\"petadopt\">' + tr(\"Adoptar\")"
+ },
+ "Nombre de la mascota": {
+  "w": [
+   "ui-pets.js:60"
+  ],
+  "ctx": "(on ? '<div class=\"petadopt\"><input id=\"petnm\" maxlength=\"16\" placeholder=\"' + h(tr(\"¿Cómo se va a llamar?\")) + '\" aria-label=\"' + h(tr(\"Nombre de la mascota\")) + '\"><button class=\"go\" data-a=\"petadopt\">' + tr(\"Adoptar\")"
+ },
+ "Adoptar": {
+  "w": [
+   "ui-pets.js:60"
+  ],
+  "ctx": "(on ? '<div class=\"petadopt\"><input id=\"petnm\" maxlength=\"16\" placeholder=\"' + h(tr(\"¿Cómo se va a llamar?\")) + '\" aria-label=\"' + h(tr(\"Nombre de la mascota\")) + '\"><button class=\"go\" data-a=\"petadopt\">' + tr(\"Adoptar\")"
+ },
+ "En el recuerdo": {
+  "w": [
+   "ui-pets.js:63"
+  ],
+  "ctx": "if (L.petMem && L.petMem.length) s += '<div><div class=\"lbl\">' + tr(\"En el recuerdo\") + '</div><ul class=\"petmem\">' + L.petMem.slice(-6).reverse().map(function (m) { var d = petDef(m.k); return \"<li>🌈 <b>\" + h(m.nm) + \""
+ }
+}

@@ -1,0 +1,517 @@
+{
+ "Alineaste a {names} sin estar disponible. Entra {subs} de urgencia, el equipo lo acusa y el vestuario pierde moral.": {
+  "w": [
+   "engine-manager.js:508"
+  ],
+  "ctx": "if (typeof notify === \"function\") notify(trn(bad.length, \"Alineaste a {names} sin estar disponible. Entra {subs} de urgencia, el equipo lo acusa y el vestuario pierde moral.\", \"Alineaste a {names} sin estar disponibles. ",
+  "note": "plural:singular"
+ },
+ "Alineaste a {names} sin estar disponibles. Entran {subs} de urgencia, el equipo lo acusa y el vestuario pierde moral.": {
+  "w": [
+   "engine-manager.js:508"
+  ],
+  "ctx": "if (typeof notify === \"function\") notify(trn(bad.length, \"Alineaste a {names} sin estar disponible. Entra {subs} de urgencia, el equipo lo acusa y el vestuario pierde moral.\", \"Alineaste a {names} sin estar disponibles. ",
+  "note": "plural:plural"
+ },
+ "Alineación con bajas: rendimiento penalizado y vestuario molesto.": {
+  "w": [
+   "engine-manager.js:509"
+  ],
+  "ctx": "mNews(\"bad\", tr(\"Alineación con bajas: rendimiento penalizado y vestuario molesto.\"));"
+ },
+ "Guía del juego": {
+  "w": [
+   "ui.js:405",
+   "ui.js:411",
+   "ui.js:1287",
+   "ui-guide.js:81"
+  ],
+  "ctx": "'<button class=\"iconbtn help\" data-a=\"guide\" aria-label=\"' + h(tr(\"Guía del juego\")) + '\">?</button><button class=\"iconbtn\" data-a=\"menu\" aria-label=\"' + h(tr(\"Menú\")) + '\">' + ICON.dots + \"</button></header>\";"
+ },
+ "lesionado": {
+  "w": [
+   "ui.js:432"
+  ],
+  "ctx": "var why = u.map(function (x) { var p = x.p; return \"<b>\" + h(plShort(p)) + \"</b> \" + (p.inj > S.tw ? tr(\"lesionado\") : tr(\"sancionado\")); }).join(\" · \");"
+ },
+ "sancionado": {
+  "w": [
+   "ui.js:432"
+  ],
+  "ctx": "var why = u.map(function (x) { var p = x.p; return \"<b>\" + h(plShort(p)) + \"</b> \" + (p.inj > S.tw ? tr(\"lesionado\") : tr(\"sancionado\")); }).join(\" · \");"
+ },
+ "{n} baja en tu once": {
+  "w": [
+   "ui.js:433",
+   "ui.js:434"
+  ],
+  "ctx": "if (dockMode) return '<div class=\"xiwarn dk\" role=\"alert\"><div class=\"xwt\"><span class=\"xwi\">!</span>' + trn(u.length, \"{n} baja en tu once\", \"{n} bajas en tu once\") + '</div><div class=\"xwb\"><button class=\"btn\" data-a=\"",
+  "note": "plural:singular"
+ },
+ "{n} bajas en tu once": {
+  "w": [
+   "ui.js:433",
+   "ui.js:434"
+  ],
+  "ctx": "if (dockMode) return '<div class=\"xiwarn dk\" role=\"alert\"><div class=\"xwt\"><span class=\"xwi\">!</span>' + trn(u.length, \"{n} baja en tu once\", \"{n} bajas en tu once\") + '</div><div class=\"xwb\"><button class=\"btn\" data-a=\"",
+  "note": "plural:plural"
+ },
+ "Corregir": {
+  "w": [
+   "ui.js:433"
+  ],
+  "ctx": "if (dockMode) return '<div class=\"xiwarn dk\" role=\"alert\"><div class=\"xwt\"><span class=\"xwi\">!</span>' + trn(u.length, \"{n} baja en tu once\", \"{n} bajas en tu once\") + '</div><div class=\"xwb\"><button class=\"btn\" data-a=\""
+ },
+ "Ver el once": {
+  "w": [
+   "ui.js:433",
+   "ui.js:434"
+  ],
+  "ctx": "if (dockMode) return '<div class=\"xiwarn dk\" role=\"alert\"><div class=\"xwt\"><span class=\"xwi\">!</span>' + trn(u.length, \"{n} baja en tu once\", \"{n} bajas en tu once\") + '</div><div class=\"xwb\"><button class=\"btn\" data-a=\""
+ },
+ "Si juegas así, entrará un suplente de urgencia, el equipo rendirá peor y el vestuario perderá moral.": {
+  "w": [
+   "ui.js:434"
+  ],
+  "ctx": "return '<div class=\"xiwarn\" role=\"alert\"><div class=\"xwt\"><span class=\"xwi\">!</span>' + trn(u.length, \"{n} baja en tu once\", \"{n} bajas en tu once\") + '</div><p>' + why + '</p><p class=\"xws\">' + tr(\"Si juegas así, entrar"
+ },
+ "Corregir automáticamente": {
+  "w": [
+   "ui.js:434"
+  ],
+  "ctx": "return '<div class=\"xiwarn\" role=\"alert\"><div class=\"xwt\"><span class=\"xwi\">!</span>' + trn(u.length, \"{n} baja en tu once\", \"{n} bajas en tu once\") + '</div><p>' + why + '</p><p class=\"xws\">' + tr(\"Si juegas así, entrar"
+ },
+ "Simular la jugada": {
+  "w": [
+   "ui.js:606"
+  ],
+  "ctx": "if (S && S.pend[0] && S.pend[0].k === \"moment\" && d.opts.length > 1) o += '<button class=\"btn wide msim\" data-a=\"msim\">⏩ ' + tr(\"Simular la jugada\") + '</button><p class=\"muted\" style=\"font-size:12px;margin:6px 0 0\">' + "
+ },
+ "El juego decide por ti y te dice cómo acaba el partido.": {
+  "w": [
+   "ui.js:606"
+  ],
+  "ctx": "if (S && S.pend[0] && S.pend[0].k === \"moment\" && d.opts.length > 1) o += '<button class=\"btn wide msim\" data-a=\"msim\">⏩ ' + tr(\"Simular la jugada\") + '</button><p class=\"muted\" style=\"font-size:12px;margin:6px 0 0\">' + "
+ },
+ "Mejora a tu titular (+{n})": {
+  "w": [
+   "ui.js:1183"
+  ],
+  "ctx": "if (r >= 0.5) return '<em class=\"mkfit up\">' + tr(\"Mejora a tu titular (+{n})\", {n: Math.round(r)}) + \"</em>\";"
+ },
+ "Nivel de tu titular": {
+  "w": [
+   "ui.js:1184"
+  ],
+  "ctx": "if (r > -0.5) return '<em class=\"mkfit eq\">' + tr(\"Nivel de tu titular\") + \"</em>\";"
+ },
+ "Recambio con proyección": {
+  "w": [
+   "ui.js:1185"
+  ],
+  "ctx": "return '<em class=\"mkfit pro\">' + tr(\"Recambio con proyección\") + \"</em>\";"
+ },
+ "{n} jugador no aparece porque no puede jugar ahí.": {
+  "w": [
+   "ui.js:1641"
+  ],
+  "ctx": "var s = \"<h2>\" + h(posName(sp)) + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px;font-size:13px\">' + tr(\"Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.\") + (hid ? \" \" + trn(hid, \"{n",
+  "note": "plural:singular"
+ },
+ "{n} jugadores no aparecen porque no pueden jugar ahí.": {
+  "w": [
+   "ui.js:1641"
+  ],
+  "ctx": "var s = \"<h2>\" + h(posName(sp)) + '</h2><p class=\"muted\" style=\"margin:-6px 0 10px;font-size:13px\">' + tr(\"Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.\") + (hid ? \" \" + trn(hid, \"{n",
+  "note": "plural:plural"
+ },
+ "Cambios": {
+  "w": [
+   "ui.js:1866"
+  ],
+  "ctx": "var s = '<div class=\"lsubhd\"><span class=\"lbl\">' + tr(\"Cambios\") + '</span><ol class=\"lsteps\">' +"
+ },
+ "Quién sale": {
+  "w": [
+   "ui.js:1867"
+  ],
+  "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
+ },
+ "Quién entra": {
+  "w": [
+   "ui.js:1867"
+  ],
+  "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
+ },
+ "Confirmar": {
+  "w": [
+   "ui.js:1867"
+  ],
+  "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
+ },
+ "Sale": {
+  "w": [
+   "ui.js:1874"
+  ],
+  "ctx": "'<div class=\"lswap\"><div class=\"out\"><span class=\"ar\">↓</span><div><small>' + tr(\"Sale\") + \"</small><b>\" + h(plName(po)) + \"</b></div></div>\" +"
+ },
+ "Entra de {pos}": {
+  "w": [
+   "ui.js:1875"
+  ],
+  "ctx": "'<div class=\"in\"><span class=\"ar\">↑</span><div><small>' + tr(\"Entra de {pos}\", {pos: posAb(sp)}) + \"</small><b>\" + h(plName(pi)) + \"</b>\" +"
+ },
+ "Posición afín ({p})": {
+  "w": [
+   "ui.js:1876"
+  ],
+  "ctx": "(pi && pi.pos !== sp ? '<em class=\"aff\">' + tr(\"Posición afín ({p})\", {p: posAb(pi.pos)}) + \"</em>\" : \"\") + \"</div></div></div>\" +"
+ },
+ "Confirmar cambio": {
+  "w": [
+   "ui.js:1877"
+  ],
+  "ctx": "'<div class=\"lprevb\"><button class=\"btn\" data-a=\"lsubx\">' + tr(\"Cancelar\") + '</button><button class=\"go\" data-a=\"lsubok\">' + tr(\"Confirmar cambio\") + \"</button></div></div>\";"
+ },
+ "afín": {
+  "w": [
+   "ui.js:1892"
+  ],
+  "ctx": "return '<button class=\"lpl cand\" data-a=\"lin\" data-id=\"' + id + '\"><span class=\"pp\">' + h(posAb(p.pos)) + '</span><span class=\"ar\">↑</span>' + h(plShort(p)) + '<span class=\"fit\">' + Math.round(p.ovr) + \"</span>\" + (p.pos"
+ },
+ "Nadie en el banquillo puede jugar de {pos}.": {
+  "w": [
+   "ui.js:1894"
+  ],
+  "ctx": "if (!ok.length) s += '<p class=\"muted\" style=\"font-size:12.5px\">' + tr(\"Nadie en el banquillo puede jugar de {pos}.\", {pos: posAb(sp)}) + \"</p>\";"
+ },
+ "{n} suplente oculto: no puede jugar de {pos}.": {
+  "w": [
+   "ui.js:1896"
+  ],
+  "ctx": "if (hid && ok.length) s += '<p class=\"muted\" style=\"font-size:12px;margin:2px 0 0\">' + trn(hid, \"{n} suplente oculto: no puede jugar de {pos}.\", \"{n} suplentes ocultos: no pueden jugar de {pos}.\").replace(\"{pos}\", h(posA",
+  "note": "plural:singular"
+ },
+ "{n} suplentes ocultos: no pueden jugar de {pos}.": {
+  "w": [
+   "ui.js:1896"
+  ],
+  "ctx": "if (hid && ok.length) s += '<p class=\"muted\" style=\"font-size:12px;margin:2px 0 0\">' + trn(hid, \"{n} suplente oculto: no puede jugar de {pos}.\", \"{n} suplentes ocultos: no pueden jugar de {pos}.\").replace(\"{pos}\", h(posA",
+  "note": "plural:plural"
+ },
+ "Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.": {
+  "w": [
+   "ui.js:1899"
+  ],
+  "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
+ },
+ "Elige quién entra. Solo ves a quien puede jugar en su puesto.": {
+  "w": [
+   "ui.js:1899"
+  ],
+  "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
+ },
+ "Velocidad de simulación": {
+  "w": [
+   "ui.js:1963"
+  ],
+  "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr(\"Velocidad de simulación\"),"
+ },
+ "¡GOL DE {n}!": {
+  "w": [
+   "ui.js:1964"
+  ],
+  "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
+ },
+ "FIN DEL PRIMER TIEMPO": {
+  "w": [
+   "ui.js:1964"
+  ],
+  "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
+ },
+ "FALTA": {
+  "w": [
+   "ui.js:1964"
+  ],
+  "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
+ },
+ "SAQUE DE BANDA": {
+  "w": [
+   "ui.js:1964"
+  ],
+  "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
+ },
+ "CÓRNER": {
+  "w": [
+   "ui.js:1964"
+  ],
+  "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
+ },
+ "SAQUE DE PUERTA": {
+  "w": [
+   "ui.js:1964"
+  ],
+  "ctx": "lab: {goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\"), cor: tr(\"CÓRNER\"), gk: "
+ },
+ "Ese jugador no puede jugar en esa posición.": {
+  "w": [
+   "ui.js:2104",
+   "ui.js:2233"
+  ],
+  "ctx": "else if (res === \"pos\") toast(tr(\"Ese jugador no puede jugar en esa posición.\"));"
+ },
+ "Hecho: {n} cambio en el once.": {
+  "w": [
+   "ui.js:2230"
+  ],
+  "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
+  "note": "plural:singular"
+ },
+ "Hecho: {n} cambios en el once.": {
+  "w": [
+   "ui.js:2230"
+  ],
+  "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
+  "note": "plural:plural"
+ },
+ "No hay suplentes disponibles para esas posiciones.": {
+  "w": [
+   "ui.js:2230"
+  ],
+  "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;"
+ },
+ "Lo básico": {
+  "w": [
+   "ui-guide.js:10"
+  ],
+  "ctx": "{k: \"basics\", ic: \"▶\", n: tr(\"Lo básico\"), cards: ["
+ },
+ "Cómo avanza el juego": {
+  "w": [
+   "ui-guide.js:11"
+  ],
+  "ctx": "{t: tr(\"Cómo avanza el juego\"), b: [tr(\"Pulsa el botón grande de abajo para avanzar al siguiente tramo de la temporada.\"), tr(\"Cuando aparece una tarjeta de decisión, elige una opción: los números de colores te dicen qué"
+ },
+ "Pulsa el botón grande de abajo para avanzar al siguiente tramo de la temporada.": {
+  "w": [
+   "ui-guide.js:11"
+  ],
+  "ctx": "{t: tr(\"Cómo avanza el juego\"), b: [tr(\"Pulsa el botón grande de abajo para avanzar al siguiente tramo de la temporada.\"), tr(\"Cuando aparece una tarjeta de decisión, elige una opción: los números de colores te dicen qué"
+ },
+ "Cuando aparece una tarjeta de decisión, elige una opción: los números de colores te dicen qué ganas y qué pierdes antes de elegir.": {
+  "w": [
+   "ui-guide.js:11"
+  ],
+  "ctx": "{t: tr(\"Cómo avanza el juego\"), b: [tr(\"Pulsa el botón grande de abajo para avanzar al siguiente tramo de la temporada.\"), tr(\"Cuando aparece una tarjeta de decisión, elige una opción: los números de colores te dicen qué"
+ },
+ "Arriba siempre ves tu nivel, tu club y la fase de la temporada.": {
+  "w": [
+   "ui-guide.js:11"
+  ],
+  "ctx": "{t: tr(\"Cómo avanza el juego\"), b: [tr(\"Pulsa el botón grande de abajo para avanzar al siguiente tramo de la temporada.\"), tr(\"Cuando aparece una tarjeta de decisión, elige una opción: los números de colores te dicen qué"
+ },
+ "Modos de juego": {
+  "w": [
+   "ui-guide.js:12"
+  ],
+  "ctx": "{t: tr(\"Modos de juego\"), b: [tr(\"Jugador/a: creas tu futbolista y vives su carrera, de la cantera al Balón de Oro.\"), tr(\"Míster: diriges un club real; alineas, fichas y hablas con la prensa.\"), tr(\"Crea tu club: fundas"
+ },
+ "Jugador/a: creas tu futbolista y vives su carrera, de la cantera al Balón de Oro.": {
+  "w": [
+   "ui-guide.js:12"
+  ],
+  "ctx": "{t: tr(\"Modos de juego\"), b: [tr(\"Jugador/a: creas tu futbolista y vives su carrera, de la cantera al Balón de Oro.\"), tr(\"Míster: diriges un club real; alineas, fichas y hablas con la prensa.\"), tr(\"Crea tu club: fundas"
+ },
+ "Míster: diriges un club real; alineas, fichas y hablas con la prensa.": {
+  "w": [
+   "ui-guide.js:12"
+  ],
+  "ctx": "{t: tr(\"Modos de juego\"), b: [tr(\"Jugador/a: creas tu futbolista y vives su carrera, de la cantera al Balón de Oro.\"), tr(\"Míster: diriges un club real; alineas, fichas y hablas con la prensa.\"), tr(\"Crea tu club: fundas"
+ },
+ "Crea tu club: fundas un equipo propio con escudo y equipación.": {
+  "w": [
+   "ui-guide.js:12"
+  ],
+  "ctx": "{t: tr(\"Modos de juego\"), b: [tr(\"Jugador/a: creas tu futbolista y vives su carrera, de la cantera al Balón de Oro.\"), tr(\"Míster: diriges un club real; alineas, fichas y hablas con la prensa.\"), tr(\"Crea tu club: fundas"
+ },
+ "Tranquilo, Normal o Intenso cambian cuántas decisiones y partidos en directo te salen.": {
+  "w": [
+   "ui-guide.js:13"
+  ],
+  "ctx": "{t: tr(\"Ritmo de decisiones\"), b: [tr(\"Tranquilo, Normal o Intenso cambian cuántas decisiones y partidos en directo te salen.\"), tr(\"En los tres puedes ver un partido entero o simular el resto en cualquier momento.\"), tr"
+ },
+ "En los tres puedes ver un partido entero o simular el resto en cualquier momento.": {
+  "w": [
+   "ui-guide.js:13"
+  ],
+  "ctx": "{t: tr(\"Ritmo de decisiones\"), b: [tr(\"Tranquilo, Normal o Intenso cambian cuántas decisiones y partidos en directo te salen.\"), tr(\"En los tres puedes ver un partido entero o simular el resto en cualquier momento.\"), tr"
+ },
+ "Se cambia en el menú, cuando quieras.": {
+  "w": [
+   "ui-guide.js:13"
+  ],
+  "ctx": "{t: tr(\"Ritmo de decisiones\"), b: [tr(\"Tranquilo, Normal o Intenso cambian cuántas decisiones y partidos en directo te salen.\"), tr(\"En los tres puedes ver un partido entero o simular el resto en cualquier momento.\"), tr"
+ },
+ "Avisos": {
+  "w": [
+   "ui-guide.js:14"
+  ],
+  "ctx": "{t: tr(\"Avisos\"), b: [tr(\"Rojo: lesiones, expulsiones o bajas en tu once. Ámbar: mercado y avisos. Verde: buenas noticias.\"), tr(\"Las tarjetas del inicio se descartan deslizándolas hacia la derecha.\")]}"
+ },
+ "Rojo: lesiones, expulsiones o bajas en tu once. Ámbar: mercado y avisos. Verde: buenas noticias.": {
+  "w": [
+   "ui-guide.js:14"
+  ],
+  "ctx": "{t: tr(\"Avisos\"), b: [tr(\"Rojo: lesiones, expulsiones o bajas en tu once. Ámbar: mercado y avisos. Verde: buenas noticias.\"), tr(\"Las tarjetas del inicio se descartan deslizándolas hacia la derecha.\")]}"
+ },
+ "Las tarjetas del inicio se descartan deslizándolas hacia la derecha.": {
+  "w": [
+   "ui-guide.js:14"
+  ],
+  "ctx": "{t: tr(\"Avisos\"), b: [tr(\"Rojo: lesiones, expulsiones o bajas en tu once. Ámbar: mercado y avisos. Verde: buenas noticias.\"), tr(\"Las tarjetas del inicio se descartan deslizándolas hacia la derecha.\")]}"
+ },
+ "Táctica y partido 2D": {
+  "w": [
+   "ui-guide.js:16"
+  ],
+  "ctx": "{k: \"tac\", ic: \"📋\", n: tr(\"Táctica y partido 2D\"), cards: ["
+ },
+ "Encerrarse y Defensiva: encajas menos, pero creas poco.": {
+  "w": [
+   "ui-guide.js:17"
+  ],
+  "ctx": "{t: tr(\"Mentalidad\"), b: [tr(\"Encerrarse y Defensiva: encajas menos, pero creas poco.\"), tr(\"Ofensiva y Presión alta: más ocasiones a favor y en contra; la presión cansa antes.\"), tr(\"Equilibrada es la opción segura si n"
+ },
+ "Ofensiva y Presión alta: más ocasiones a favor y en contra; la presión cansa antes.": {
+  "w": [
+   "ui-guide.js:17"
+  ],
+  "ctx": "{t: tr(\"Mentalidad\"), b: [tr(\"Encerrarse y Defensiva: encajas menos, pero creas poco.\"), tr(\"Ofensiva y Presión alta: más ocasiones a favor y en contra; la presión cansa antes.\"), tr(\"Equilibrada es la opción segura si n"
+ },
+ "Equilibrada es la opción segura si no sabes qué hacer.": {
+  "w": [
+   "ui-guide.js:17"
+  ],
+  "ctx": "{t: tr(\"Mentalidad\"), b: [tr(\"Encerrarse y Defensiva: encajas menos, pero creas poco.\"), tr(\"Ofensiva y Presión alta: más ocasiones a favor y en contra; la presión cansa antes.\"), tr(\"Equilibrada es la opción segura si n"
+ },
+ "Línea defensiva (bloque)": {
+  "w": [
+   "ui-guide.js:18"
+  ],
+  "ctx": "{t: tr(\"Línea defensiva (bloque)\"), b: [tr(\"Baja: proteges tu área y sufres menos al contraataque.\"), tr(\"Alta: robas más arriba, pero dejas espacio a la espalda.\"), tr(\"En el campo 2D verás la línea de tus defensas subi"
+ },
+ "Baja: proteges tu área y sufres menos al contraataque.": {
+  "w": [
+   "ui-guide.js:18"
+  ],
+  "ctx": "{t: tr(\"Línea defensiva (bloque)\"), b: [tr(\"Baja: proteges tu área y sufres menos al contraataque.\"), tr(\"Alta: robas más arriba, pero dejas espacio a la espalda.\"), tr(\"En el campo 2D verás la línea de tus defensas subi"
+ },
+ "Alta: robas más arriba, pero dejas espacio a la espalda.": {
+  "w": [
+   "ui-guide.js:18"
+  ],
+  "ctx": "{t: tr(\"Línea defensiva (bloque)\"), b: [tr(\"Baja: proteges tu área y sufres menos al contraataque.\"), tr(\"Alta: robas más arriba, pero dejas espacio a la espalda.\"), tr(\"En el campo 2D verás la línea de tus defensas subi"
+ },
+ "En el campo 2D verás la línea de tus defensas subir o bajar.": {
+  "w": [
+   "ui-guide.js:18"
+  ],
+  "ctx": "{t: tr(\"Línea defensiva (bloque)\"), b: [tr(\"Baja: proteges tu área y sufres menos al contraataque.\"), tr(\"Alta: robas más arriba, pero dejas espacio a la espalda.\"), tr(\"En el campo 2D verás la línea de tus defensas subi"
+ },
+ "Amplitud, pase y ritmo": {
+  "w": [
+   "ui-guide.js:19"
+  ],
+  "ctx": "{t: tr(\"Amplitud, pase y ritmo\"), b: [tr(\"Amplitud: abierto estira al rival por las bandas; estrecho junta a tus jugadores por dentro.\"), tr(\"Pase corto: más posesión; pase largo: llegas antes, pero pierdes más balones.\""
+ },
+ "Amplitud: abierto estira al rival por las bandas; estrecho junta a tus jugadores por dentro.": {
+  "w": [
+   "ui-guide.js:19"
+  ],
+  "ctx": "{t: tr(\"Amplitud, pase y ritmo\"), b: [tr(\"Amplitud: abierto estira al rival por las bandas; estrecho junta a tus jugadores por dentro.\"), tr(\"Pase corto: más posesión; pase largo: llegas antes, pero pierdes más balones.\""
+ },
+ "Pase corto: más posesión; pase largo: llegas antes, pero pierdes más balones.": {
+  "w": [
+   "ui-guide.js:19"
+  ],
+  "ctx": "{t: tr(\"Amplitud, pase y ritmo\"), b: [tr(\"Amplitud: abierto estira al rival por las bandas; estrecho junta a tus jugadores por dentro.\"), tr(\"Pase corto: más posesión; pase largo: llegas antes, pero pierdes más balones.\""
+ },
+ "Ritmo alto: más ocasiones y más cansancio; ritmo lento: controlas el partido.": {
+  "w": [
+   "ui-guide.js:19"
+  ],
+  "ctx": "{t: tr(\"Amplitud, pase y ritmo\"), b: [tr(\"Amplitud: abierto estira al rival por las bandas; estrecho junta a tus jugadores por dentro.\"), tr(\"Pase corto: más posesión; pase largo: llegas antes, pero pierdes más balones.\""
+ },
+ "Posiciones afines": {
+  "w": [
+   "ui-guide.js:20"
+  ],
+  "ctx": "{t: tr(\"Posiciones afines\"), b: [tr(\"Cada jugador rinde al 100 % en su posición.\"), tr(\"En una posición afín (misma línea o puesto vecino) pierde un poco de nivel.\"), tr(\"Fuera de su línea no se puede colocar: nunca verá"
+ },
+ "Cada jugador rinde al 100 % en su posición.": {
+  "w": [
+   "ui-guide.js:20"
+  ],
+  "ctx": "{t: tr(\"Posiciones afines\"), b: [tr(\"Cada jugador rinde al 100 % en su posición.\"), tr(\"En una posición afín (misma línea o puesto vecino) pierde un poco de nivel.\"), tr(\"Fuera de su línea no se puede colocar: nunca verá"
+ },
+ "En una posición afín (misma línea o puesto vecino) pierde un poco de nivel.": {
+  "w": [
+   "ui-guide.js:20"
+  ],
+  "ctx": "{t: tr(\"Posiciones afines\"), b: [tr(\"Cada jugador rinde al 100 % en su posición.\"), tr(\"En una posición afín (misma línea o puesto vecino) pierde un poco de nivel.\"), tr(\"Fuera de su línea no se puede colocar: nunca verá"
+ },
+ "Fuera de su línea no se puede colocar: nunca verás a un mediapunta en la portería.": {
+  "w": [
+   "ui-guide.js:20"
+  ],
+  "ctx": "{t: tr(\"Posiciones afines\"), b: [tr(\"Cada jugador rinde al 100 % en su posición.\"), tr(\"En una posición afín (misma línea o puesto vecino) pierde un poco de nivel.\"), tr(\"Fuera de su línea no se puede colocar: nunca verá"
+ },
+ "Cambios en directo": {
+  "w": [
+   "ui-guide.js:21"
+  ],
+  "ctx": "{t: tr(\"Cambios en directo\"), b: [tr(\"1. Toca quién sale (flecha roja ↓). El partido se pausa.\"), tr(\"2. Elige quién entra (flecha verde ↑): solo aparecen los suplentes que pueden jugar en ese puesto.\"), tr(\"3. Revisa el"
+ },
+ "1. Toca quién sale (flecha roja ↓). El partido se pausa.": {
+  "w": [
+   "ui-guide.js:21"
+  ],
+  "ctx": "{t: tr(\"Cambios en directo\"), b: [tr(\"1. Toca quién sale (flecha roja ↓). El partido se pausa.\"), tr(\"2. Elige quién entra (flecha verde ↑): solo aparecen los suplentes que pueden jugar en ese puesto.\"), tr(\"3. Revisa el"
+ },
+ "2. Elige quién entra (flecha verde ↑): solo aparecen los suplentes que pueden jugar en ese puesto.": {
+  "w": [
+   "ui-guide.js:21"
+  ],
+  "ctx": "{t: tr(\"Cambios en directo\"), b: [tr(\"1. Toca quién sale (flecha roja ↓). El partido se pausa.\"), tr(\"2. Elige quién entra (flecha verde ↑): solo aparecen los suplentes que pueden jugar en ese puesto.\"), tr(\"3. Revisa el"
+ },
+ "3. Revisa el dibujo final y confirma.": {
+  "w": [
+   "ui-guide.js:21"
+  ],
+  "ctx": "{t: tr(\"Cambios en directo\"), b: [tr(\"1. Toca quién sale (flecha roja ↓). El partido se pausa.\"), tr(\"2. Elige quién entra (flecha verde ↑): solo aparecen los suplentes que pueden jugar en ese puesto.\"), tr(\"3. Revisa el"
+ },
+ "Bajas en el once": {
+  "w": [
+   "ui-guide.js:22"
+  ],
+  "ctx": "{t: tr(\"Bajas en el once\"), b: [tr(\"Si un lesionado o sancionado sigue en tu once, verás un aviso rojo.\"), tr(\"Pulsa «Corregir automáticamente» o cámbialo tú.\"), tr(\"Si juegas sin corregirlo, entra un suplente de urgenci"
+ },
+ "Si un lesionado o sancionado sigue en tu once, verás un aviso rojo.": {
+  "w": [
+   "ui-guide.js:22"
+  ],
+  "ctx": "{t: tr(\"Bajas en el once\"), b: [tr(\"Si un lesionado o sancionado sigue en tu once, verás un aviso rojo.\"), tr(\"Pulsa «Corregir automáticamente» o cámbialo tú.\"), tr(\"Si juegas sin corregirlo, entra un suplente de urgenci"
+ },
+ "Pulsa «Corregir automáticamente» o cámbialo tú.": {
+  "w": [
+   "ui-guide.js:22"
+  ],
+  "ctx": "{t: tr(\"Bajas en el once\"), b: [tr(\"Si un lesionado o sancionado sigue en tu once, verás un aviso rojo.\"), tr(\"Pulsa «Corregir automáticamente» o cámbialo tú.\"), tr(\"Si juegas sin corregirlo, entra un suplente de urgenci"
+ },
+ "Si juegas sin corregirlo, entra un suplente de urgencia, el equipo rinde peor y baja la moral.": {
+  "w": [
+   "ui-guide.js:22"
+  ],
+  "ctx": "{t: tr(\"Bajas en el once\"), b: [tr(\"Si un lesionado o sancionado sigue en tu once, verás un aviso rojo.\"), tr(\"Pulsa «Corregir automáticamente» o cámbialo tú.\"), tr(\"Si juegas sin corregirlo, entra un suplente de urgenci"
+ }
+}

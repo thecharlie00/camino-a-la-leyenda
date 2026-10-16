@@ -1,0 +1,1424 @@
+{
+ "Grupo {group} equilibrado: todo por decidir": {
+  "w": [
+   "draw.js:162"
+  ],
+  "ctx": "else hl.push({tk: N_(\"Grupo {group} equilibrado: todo por decidir\"), tp: tp, t: 0});"
+ },
+ "Fase de liga de alto voltaje: {opp} y {opp2} en el camino de {team}": {
+  "w": [
+   "draw.js:170"
+  ],
+  "ctx": "if (ao > all + 1.5) { tone = -1; hl.push({tk: N_(\"Fase de liga de alto voltaje: {opp} y {opp2} en el camino de {team}\"), tp: tp, t: -1}); }"
+ },
+ "Calendario amable para {team} en la fase de liga": {
+  "w": [
+   "draw.js:171"
+  ],
+  "ctx": "else if (ao < all - 1.5) { tone = 1; hl.push({tk: N_(\"Calendario amable para {team} en la fase de liga\"), tp: tp, t: 1}); }"
+ },
+ "Ni sustos ni regalos: el plato fuerte para {team} será {opp}": {
+  "w": [
+   "draw.js:172"
+  ],
+  "ctx": "else hl.push({tk: N_(\"Ni sustos ni regalos: el plato fuerte para {team} será {opp}\"), tp: tp, t: 0});"
+ },
+ "Hueso en {round}: {team} se cruza con {opp}": {
+  "w": [
+   "draw.js:176"
+  ],
+  "ctx": "if (d >= 3.5) { tone = -1; hl.push({tk: N_(\"Hueso en {round}: {team} se cruza con {opp}\"), tp: tp, t: -1}); }"
+ },
+ "Cruce asequible para {round}: {team} – {opp}": {
+  "w": [
+   "draw.js:177"
+  ],
+  "ctx": "else if (d <= -3.5) { tone = 1; hl.push({tk: N_(\"Cruce asequible para {round}: {team} – {opp}\"), tp: tp, t: 1}); }"
+ },
+ "Cruce igualado en {round}: {team} – {opp}": {
+  "w": [
+   "draw.js:178"
+  ],
+  "ctx": "else hl.push({tk: N_(\"Cruce igualado en {round}: {team} – {opp}\"), tp: tp, t: 0});"
+ },
+ "¡Derbi en el sorteo! {team} y {rival}, cara a cara": {
+  "w": [
+   "draw.js:190"
+  ],
+  "ctx": "if (derby >= 0) hl.unshift({tk: N_(\"¡Derbi en el sorteo! {team} y {rival}, cara a cara\"), tp: Object.assign({}, tp, {rival: drawTeamName(c, derby)}), t: 0});"
+ },
+ "Reencuentro con tu ex: {rival} en el camino": {
+  "w": [
+   "draw.js:191"
+  ],
+  "ctx": "if (ex >= 0) hl.push({tk: N_(\"Reencuentro con tu ex: {rival} en el camino\"), tp: Object.assign({}, tp, {rival: drawTeamName(c, ex)}), t: 0});"
+ },
+ "Duelo fratricida: {team} y {rival} chocan en {comp}": {
+  "w": [
+   "draw.js:192"
+  ],
+  "ctx": "if (frat >= 0 && derby !== frat) hl.push({tk: N_(\"Duelo fratricida: {team} y {rival} chocan en {comp}\"), tp: Object.assign({}, tp, {rival: drawTeamName(c, frat)}), t: 0});"
+ },
+ "La directiva sale sonriendo del sorteo: «Hay que aprovecharlo».": {
+  "w": [
+   "draw.js:199"
+  ],
+  "ctx": "txt = tone > 0 ? N_(\"La directiva sale sonriendo del sorteo: «Hay que aprovecharlo».\") : tone < 0 ? N_(\"Caras largas en el palco: «No nos ha sonreído la suerte».\") : N_(\"La directiva, prudente: «A estas alturas no hay ri"
+ },
+ "Caras largas en el palco: «No nos ha sonreído la suerte».": {
+  "w": [
+   "draw.js:199"
+  ],
+  "ctx": "txt = tone > 0 ? N_(\"La directiva sale sonriendo del sorteo: «Hay que aprovecharlo».\") : tone < 0 ? N_(\"Caras largas en el palco: «No nos ha sonreído la suerte».\") : N_(\"La directiva, prudente: «A estas alturas no hay ri"
+ },
+ "La directiva, prudente: «A estas alturas no hay rivales fáciles».": {
+  "w": [
+   "draw.js:199"
+  ],
+  "ctx": "txt = tone > 0 ? N_(\"La directiva sale sonriendo del sorteo: «Hay que aprovecharlo».\") : tone < 0 ? N_(\"Caras largas en el palco: «No nos ha sonreído la suerte».\") : N_(\"La directiva, prudente: «A estas alturas no hay ri"
+ },
+ "En el vestuario hay buen ambiente: «Es un sorteo para soñar».": {
+  "w": [
+   "draw.js:200"
+  ],
+  "ctx": "} else txt = tone > 0 ? N_(\"En el vestuario hay buen ambiente: «Es un sorteo para soñar».\") : tone < 0 ? N_(\"Tu entrenador lo tiene claro: «Toca competir al máximo».\") : N_(\"Tus compañeros, concentrados: «Iremos partido "
+ },
+ "Tu entrenador lo tiene claro: «Toca competir al máximo».": {
+  "w": [
+   "draw.js:200"
+  ],
+  "ctx": "} else txt = tone > 0 ? N_(\"En el vestuario hay buen ambiente: «Es un sorteo para soñar».\") : tone < 0 ? N_(\"Tu entrenador lo tiene claro: «Toca competir al máximo».\") : N_(\"Tus compañeros, concentrados: «Iremos partido "
+ },
+ "Tus compañeros, concentrados: «Iremos partido a partido».": {
+  "w": [
+   "draw.js:200"
+  ],
+  "ctx": "} else txt = tone > 0 ? N_(\"En el vestuario hay buen ambiente: «Es un sorteo para soñar».\") : tone < 0 ? N_(\"Tu entrenador lo tiene claro: «Toca competir al máximo».\") : N_(\"Tus compañeros, concentrados: «Iremos partido "
+ },
+ "🗞️ SORTEO {comp} | {team} cae en el grupo {group} y su rival más fuerte será {opp}.": {
+  "w": [
+   "draw.js:204"
+  ],
+  "ctx": "var pressT = x.typ === \"grp\" ? N_(\"🗞️ SORTEO {comp} | {team} cae en el grupo {group} y su rival más fuerte será {opp}.\") :"
+ },
+ "🗞️ SORTEO {comp} | {team} se medirá a {opp}, {opp2} y seis rivales más en la fase de liga.": {
+  "w": [
+   "draw.js:205"
+  ],
+  "ctx": "x.typ === \"lp\" ? N_(\"🗞️ SORTEO {comp} | {team} se medirá a {opp}, {opp2} y seis rivales más en la fase de liga.\") :"
+ },
+ "🗞️ SORTEO {comp} | {round}: {team} – {opp}. Ya hay cruce.": {
+  "w": [
+   "draw.js:206"
+  ],
+  "ctx": "N_(\"🗞️ SORTEO {comp} | {round}: {team} – {opp}. Ya hay cruce.\");"
+ },
+ "Semana de derbi en {comp}. Que alguien prepare las palomitas 🍿🔥": {
+  "w": [
+   "draw.js:208"
+  ],
+  "ctx": "var memeT = derby >= 0 ? N_(\"Semana de derbi en {comp}. Que alguien prepare las palomitas 🍿🔥\") :"
+ },
+ "La afición de {team} al ver el sorteo: 💀💀💀": {
+  "w": [
+   "draw.js:209"
+  ],
+  "ctx": "tone < 0 ? N_(\"La afición de {team} al ver el sorteo: 💀💀💀\") : tone > 0 ? N_(\"La afición de {team} viendo el sorteo: 🥳🍿\") : N_(\"Sorteo de {comp}: {team} y {opp}. Esto va a estar muy reñido 👀\");"
+ },
+ "La afición de {team} viendo el sorteo: 🥳🍿": {
+  "w": [
+   "draw.js:209"
+  ],
+  "ctx": "tone < 0 ? N_(\"La afición de {team} al ver el sorteo: 💀💀💀\") : tone > 0 ? N_(\"La afición de {team} viendo el sorteo: 🥳🍿\") : N_(\"Sorteo de {comp}: {team} y {opp}. Esto va a estar muy reñido 👀\");"
+ },
+ "Sorteo de {comp}: {team} y {opp}. Esto va a estar muy reñido 👀": {
+  "w": [
+   "draw.js:209"
+  ],
+  "ctx": "tone < 0 ? N_(\"La afición de {team} al ver el sorteo: 💀💀💀\") : tone > 0 ? N_(\"La afición de {team} viendo el sorteo: 🥳🍿\") : N_(\"Sorteo de {comp}: {team} y {opp}. Esto va a estar muy reñido 👀\");"
+ },
+ "{rival} otra vez en tu camino, {self}. El fútbol siempre vuelve a casa 👀": {
+  "w": [
+   "draw.js:211"
+  ],
+  "ctx": "if (ex >= 0) posts.push({au: au(\"fan\"), tk: N_(\"{rival} otra vez en tu camino, {self}. El fútbol siempre vuelve a casa 👀\"), tp: Object.assign({}, ptp, {self: typeof socSelfName === \"function\" ? socSelfName() : \"\"}), m: "
+ },
+ "📊 Probabilidad de que {team} pase de la fase de grupos: {pct} %.": {
+  "w": [
+   "draw.js:213"
+  ],
+  "ctx": "var statT = x.typ === \"grp\" ? N_(\"📊 Probabilidad de que {team} pase de la fase de grupos: {pct} %.\") : x.typ === \"lp\" ? N_(\"📊 Nivel medio de los rivales de {team} en la fase de liga: {n}.\") : N_(\"📊 Probabilidad de que"
+ },
+ "📊 Nivel medio de los rivales de {team} en la fase de liga: {n}.": {
+  "w": [
+   "draw.js:213"
+  ],
+  "ctx": "var statT = x.typ === \"grp\" ? N_(\"📊 Probabilidad de que {team} pase de la fase de grupos: {pct} %.\") : x.typ === \"lp\" ? N_(\"📊 Nivel medio de los rivales de {team} en la fase de liga: {n}.\") : N_(\"📊 Probabilidad de que"
+ },
+ "📊 Probabilidad de que {team} supere el cruce ante {opp}: {pct} %.": {
+  "w": [
+   "draw.js:213"
+  ],
+  "ctx": "var statT = x.typ === \"grp\" ? N_(\"📊 Probabilidad de que {team} pase de la fase de grupos: {pct} %.\") : x.typ === \"lp\" ? N_(\"📊 Nivel medio de los rivales de {team} en la fase de liga: {n}.\") : N_(\"📊 Probabilidad de que"
+ },
+ "Grupo {group}: {teams}": {
+  "w": [
+   "draw.js:223"
+  ],
+  "ctx": "if (x.typ === \"grp\") return tr(\"Grupo {group}: {teams}\", {group: String.fromCharCode(65 + (x.gi || 0)), teams: riv.map(function (t) { return drawTeamName(c, t); }).join(\", \")});"
+ },
+ "Rivales: {teams}": {
+  "w": [
+   "draw.js:224"
+  ],
+  "ctx": "if (x.typ === \"lp\") return tr(\"Rivales: {teams}\", {teams: riv.map(function (t) { return drawTeamName(c, t); }).join(\", \")});"
+ },
+ "Rival: {team}": {
+  "w": [
+   "draw.js:225"
+  ],
+  "ctx": "return riv.length ? tr(\"Rival: {team}\", {team: drawTeamName(c, riv[0])}) : \"\";"
+ },
+ "Sorteo de la fase de grupos": {
+  "w": [
+   "draw.js:228"
+  ],
+  "ctx": "if (x.typ === \"grp\") return tr(\"Sorteo de la fase de grupos\");"
+ },
+ "Sorteo de la fase de liga": {
+  "w": [
+   "draw.js:229"
+  ],
+  "ctx": "if (x.typ === \"lp\") return tr(\"Sorteo de la fase de liga\");"
+ },
+ "Cuadro de {round}": {
+  "w": [
+   "draw.js:230"
+  ],
+  "ctx": "return x.fix ? tr(\"Cuadro de {round}\", {round: drawLow(tr(x.rn))}) : tr(\"Sorteo de {round}\", {round: drawLow(tr(x.rn))});"
+ },
+ "Sorteo de {round}": {
+  "w": [
+   "draw.js:230"
+  ],
+  "ctx": "return x.fix ? tr(\"Cuadro de {round}\", {round: drawLow(tr(x.rn))}) : tr(\"Sorteo de {round}\", {round: drawLow(tr(x.rn))});"
+ },
+ "Sorteo en directo": {
+  "w": [
+   "draw.js:247",
+   "ui-draw.js:20",
+   "ui-draw.js:56"
+  ],
+  "ctx": "return {tag: \"hot\", tagTxt: tr(\"Sorteo en directo\"), cls: \"hotc\", cat: trComp(x.cn), title: drawTitle(x),"
+ },
+ "Las bolas ya están en los bombos y tu equipo espera rival.": {
+  "w": [
+   "draw.js:248"
+  ],
+  "ctx": "text: tr(\"Las bolas ya están en los bombos y tu equipo espera rival.\"), opts: [descOpt({t: tr(\"Ver el sorteo\"), ok: {txt: \"\"}}, function () { return []; })]};"
+ },
+ "Ver el sorteo": {
+  "w": [
+   "draw.js:248",
+   "draw.js:257",
+   "ui-draw.js:23"
+  ],
+  "ctx": "text: tr(\"Las bolas ya están en los bombos y tu equipo espera rival.\"), opts: [descOpt({t: tr(\"Ver el sorteo\"), ok: {txt: \"\"}}, function () { return []; })]};"
+ },
+ "Vivir la tanda bajo palos": {
+  "w": [
+   "shootout.js:155"
+  ],
+  "ctx": "list.unshift({t: gk ? tr(\"Vivir la tanda bajo palos\") : tr(\"Vivir la tanda entera\"), so: gk ? \"gk\" : \"out\","
+ },
+ "Vivir la tanda entera": {
+  "w": [
+   "shootout.js:155"
+  ],
+  "ctx": "list.unshift({t: gk ? tr(\"Vivir la tanda bajo palos\") : tr(\"Vivir la tanda entera\"), so: gk ? \"gk\" : \"out\","
+ },
+ "Te enfrentas a cada lanzador rival y sigues los penaltis de tus compañeros.": {
+  "w": [
+   "shootout.js:156"
+  ],
+  "ctx": "d: gk ? tr(\"Te enfrentas a cada lanzador rival y sigues los penaltis de tus compañeros.\") : tr(\"Penalti a penalti: cuando te toque en el orden, tiras tú.\"),"
+ },
+ "Penalti a penalti: cuando te toque en el orden, tiras tú.": {
+  "w": [
+   "shootout.js:156"
+  ],
+  "ctx": "d: gk ? tr(\"Te enfrentas a cada lanzador rival y sigues los penaltis de tus compañeros.\") : tr(\"Penalti a penalti: cuando te toque en el orden, tiras tú.\"),"
+ },
+ "Pasáis": {
+  "w": [
+   "shootout.js:157",
+   "shootout.js:157",
+   "shootout.js:198",
+   "shootout.js:199"
+  ],
+  "ctx": "p: wp, badge: tr(\"Pasáis\"), ok: {lab: tr(\"Pasáis\"), txt: \"\", fx: {}}, ko: {lab: tr(\"Eliminados\"), txt: \"\", fx: {}}});"
+ },
+ "Eliminados": {
+  "w": [
+   "shootout.js:157",
+   "shootout.js:199",
+   "ui-shootout.js:189"
+  ],
+  "ctx": "p: wp, badge: tr(\"Pasáis\"), ok: {lab: tr(\"Pasáis\"), txt: \"\", fx: {}}, ko: {lab: tr(\"Eliminados\"), txt: \"\", fx: {}}});"
+ },
+ "Paras {n} penalti": {
+  "w": [
+   "shootout.js:170"
+  ],
+  "ctx": "chips.push([\"note\", 0, trn(saves, \"Paras {n} penalti\", \"Paras {n} penaltis\")]);",
+  "note": "plural:singular"
+ },
+ "Paras {n} penaltis": {
+  "w": [
+   "shootout.js:170"
+  ],
+  "ctx": "chips.push([\"note\", 0, trn(saves, \"Paras {n} penalti\", \"Paras {n} penaltis\")]);",
+  "note": "plural:plural"
+ },
+ "Detienes {n} lanzamiento en la tanda.": {
+  "w": [
+   "shootout.js:171"
+  ],
+  "ctx": "txt = saves ? trn(saves, \"Detienes {n} lanzamiento en la tanda.\", \"Detienes {n} lanzamientos en la tanda.\") : tr(\"No consigues detener ningún lanzamiento.\");",
+  "note": "plural:singular"
+ },
+ "Detienes {n} lanzamientos en la tanda.": {
+  "w": [
+   "shootout.js:171"
+  ],
+  "ctx": "txt = saves ? trn(saves, \"Detienes {n} lanzamiento en la tanda.\", \"Detienes {n} lanzamientos en la tanda.\") : tr(\"No consigues detener ningún lanzamiento.\");",
+  "note": "plural:plural"
+ },
+ "No consigues detener ningún lanzamiento.": {
+  "w": [
+   "shootout.js:171"
+  ],
+  "ctx": "txt = saves ? trn(saves, \"Detienes {n} lanzamiento en la tanda.\", \"Detienes {n} lanzamientos en la tanda.\") : tr(\"No consigues detener ningún lanzamiento.\");"
+ },
+ "Fallas tu penalti. El silencio se hace eterno.": {
+  "w": [
+   "shootout.js:176"
+  ],
+  "ctx": "txt = miss ? tr(\"Fallas tu penalti. El silencio se hace eterno.\") : tr(\"Marcas tu penalti con sangre fría.\");"
+ },
+ "Marcas tu penalti con sangre fría.": {
+  "w": [
+   "shootout.js:176"
+  ],
+  "ctx": "txt = miss ? tr(\"Fallas tu penalti. El silencio se hace eterno.\") : tr(\"Marcas tu penalti con sangre fría.\");"
+ },
+ "La tanda se decide antes de que te toque tirar.": {
+  "w": [
+   "shootout.js:178"
+  ],
+  "ctx": "} else { txt = tr(\"La tanda se decide antes de que te toque tirar.\"); chips.push([\"note\", 0, tr(\"No llegas a tirar\")]); }"
+ },
+ "No llegas a tirar": {
+  "w": [
+   "shootout.js:178"
+  ],
+  "ctx": "} else { txt = tr(\"La tanda se decide antes de que te toque tirar.\"); chips.push([\"note\", 0, tr(\"No llegas a tirar\")]); }"
+ },
+ "Empate tras la prórroga. Ordena a tus lanzadores en la pizarra y vive la tanda penalti a penalti, o decide solo quién tira el quinto.": {
+  "w": [
+   "shootout.js:192"
+  ],
+  "ctx": "d.text = tr(\"Empate tras la prórroga. Ordena a tus lanzadores en la pizarra y vive la tanda penalti a penalti, o decide solo quién tira el quinto.\");"
+ },
+ "Ordenar lanzadores y vivir la tanda": {
+  "w": [
+   "shootout.js:198"
+  ],
+  "ctx": "return [{t: tr(\"Ordenar lanzadores y vivir la tanda\"), d: tr(\"Pizarra táctica: técnica, sangre fría y fatiga de cada uno. Luego, penalti a penalti.\"), so: \"mgr\", p: wp, badge: tr(\"Pasáis\"),"
+ },
+ "Pizarra táctica: técnica, sangre fría y fatiga de cada uno. Luego, penalti a penalti.": {
+  "w": [
+   "shootout.js:198"
+  ],
+  "ctx": "return [{t: tr(\"Ordenar lanzadores y vivir la tanda\"), d: tr(\"Pizarra táctica: técnica, sangre fría y fatiga de cada uno. Luego, penalti a penalti.\"), so: \"mgr\", p: wp, badge: tr(\"Pasáis\"),"
+ },
+ "{name}, decisivo": {
+  "w": [
+   "shootout.js:214"
+  ],
+  "ctx": "if (hero) chips.push([\"note\", 0, tr(\"{name}, decisivo\", {name: plShort(hero)})]);"
+ },
+ "{name} falla": {
+  "w": [
+   "shootout.js:215"
+  ],
+  "ctx": "if (goat) chips.push([\"note\", 0, tr(\"{name} falla\", {name: plShort(goat)})]);"
+ },
+ "Tanda en directo con tu orden de lanzadores": {
+  "w": [
+   "shootout.js:222"
+  ],
+  "ctx": "return {t: \"moment\", tipo: \"mgr\", title: tr(\"Tanda de penaltis\"), ctx: head.ctxTxt, choice: tr(\"Tanda en directo con tu orden de lanzadores\"),"
+ },
+ "{n} lanzamientos: {dots}.": {
+  "w": [
+   "shootout.js:223"
+  ],
+  "ctx": "txt: tr(\"{n} lanzamientos: {dots}.\", {n: r.n, dots: r.dots}) + \" \" + (good ? tr(\"Termina {a}-{b}: ¡pasáis!\", {a: r.a, b: r.b}) : tr(\"Termina {a}-{b}: eliminados.\", {a: r.a, b: r.b})), chips: chips, good: good, y: S.yr};"
+ },
+ "Entrenador personal": {
+  "w": [
+   "life.js:13"
+  ],
+  "ctx": "{k: \"trainer\", n: N_(\"Entrenador personal\"), d: N_(\"Sesiones extra a tu medida: +2 en tus atributos físicos y algo más de progresión.\"), base: 3000, sal: 0.02, dur: 5,"
+ },
+ "Sesiones extra a tu medida: +2 en tus atributos físicos y algo más de progresión.": {
+  "w": [
+   "life.js:13"
+  ],
+  "ctx": "{k: \"trainer\", n: N_(\"Entrenador personal\"), d: N_(\"Sesiones extra a tu medida: +2 en tus atributos físicos y algo más de progresión.\"), base: 3000, sal: 0.02, dur: 5,"
+ },
+ "Entrenador específico de porteros": {
+  "w": [
+   "life.js:15"
+  ],
+  "ctx": "{k: \"gkcoach\", n: N_(\"Entrenador específico de porteros\"), d: N_(\"Trabajo de reflejos cada mañana: +3 en Reflejos y +2 en Paradas.\"), base: 3500, sal: 0.025, dur: 5,"
+ },
+ "Trabajo de reflejos cada mañana: +3 en Reflejos y +2 en Paradas.": {
+  "w": [
+   "life.js:15"
+  ],
+  "ctx": "{k: \"gkcoach\", n: N_(\"Entrenador específico de porteros\"), d: N_(\"Trabajo de reflejos cada mañana: +3 en Reflejos y +2 en Paradas.\"), base: 3500, sal: 0.025, dur: 5,"
+ },
+ "Psicólogo deportivo": {
+  "w": [
+   "life.js:17"
+  ],
+  "ctx": "{k: \"mental\", n: N_(\"Psicólogo deportivo\"), d: N_(\"«Sangre fría»: +2 en Tiro (Colocación si eres portero) y la forma cae más despacio tras un mal partido.\"), base: 2500, sal: 0.015, dur: 5,"
+ },
+ "«Sangre fría»: +2 en Tiro (Colocación si eres portero) y la forma cae más despacio tras un mal partido.": {
+  "w": [
+   "life.js:17"
+  ],
+  "ctx": "{k: \"mental\", n: N_(\"Psicólogo deportivo\"), d: N_(\"«Sangre fría»: +2 en Tiro (Colocación si eres portero) y la forma cae más despacio tras un mal partido.\"), base: 2500, sal: 0.015, dur: 5,"
+ },
+ "Agente de prensa": {
+  "w": [
+   "life.js:19"
+  ],
+  "ctx": "{k: \"press\", n: N_(\"Agente de prensa\"), d: N_(\"Entrevistas, marcas y redes: más seguidores y más fama cada tramo.\"), base: 2000, sal: 0.02, dur: 5, ico: \"🎙️\"},"
+ },
+ "Entrevistas, marcas y redes: más seguidores y más fama cada tramo.": {
+  "w": [
+   "life.js:19"
+  ],
+  "ctx": "{k: \"press\", n: N_(\"Agente de prensa\"), d: N_(\"Entrevistas, marcas y redes: más seguidores y más fama cada tramo.\"), base: 2000, sal: 0.02, dur: 5, ico: \"🎙️\"},"
+ },
+ "Nutricionista y fisio": {
+  "w": [
+   "life.js:20"
+  ],
+  "ctx": "{k: \"physio\", n: N_(\"Nutricionista y fisio\"), d: N_(\"Dieta y recuperación personal: un 30 % menos de riesgo de lesión y recuperas mejor el físico.\"), base: 4000, sal: 0.02, dur: 5, ico: \"🥗\"}"
+ },
+ "Dieta y recuperación personal: un 30 % menos de riesgo de lesión y recuperas mejor el físico.": {
+  "w": [
+   "life.js:20"
+  ],
+  "ctx": "{k: \"physio\", n: N_(\"Nutricionista y fisio\"), d: N_(\"Dieta y recuperación personal: un 30 % menos de riesgo de lesión y recuperas mejor el físico.\"), base: 4000, sal: 0.02, dur: 5, ico: \"🥗\"}"
+ },
+ "Piso para alquilar": {
+  "w": [
+   "life.js:24"
+  ],
+  "ctx": "{k: \"piso\", n: N_(\"Piso para alquilar\"), d: N_(\"Riesgo bajo: se revaloriza poco a poco y te deja un alquiler cada temporada.\"), price: 120000, risk: 0, ico: \"🏠\"},"
+ },
+ "Riesgo bajo: se revaloriza poco a poco y te deja un alquiler cada temporada.": {
+  "w": [
+   "life.js:24"
+  ],
+  "ctx": "{k: \"piso\", n: N_(\"Piso para alquilar\"), d: N_(\"Riesgo bajo: se revaloriza poco a poco y te deja un alquiler cada temporada.\"), price: 120000, risk: 0, ico: \"🏠\"},"
+ },
+ "Restaurante con amigos": {
+  "w": [
+   "life.js:25"
+  ],
+  "ctx": "{k: \"rest\", n: N_(\"Restaurante con amigos\"), d: N_(\"Riesgo medio: puede ir muy bien… o comerse parte de lo invertido.\"), price: 250000, risk: 1, ico: \"🍽️\"},"
+ },
+ "Riesgo medio: puede ir muy bien… o comerse parte de lo invertido.": {
+  "w": [
+   "life.js:25"
+  ],
+  "ctx": "{k: \"rest\", n: N_(\"Restaurante con amigos\"), d: N_(\"Riesgo medio: puede ir muy bien… o comerse parte de lo invertido.\"), price: 250000, risk: 1, ico: \"🍽️\"},"
+ },
+ "Startup tecnológica": {
+  "w": [
+   "life.js:26"
+  ],
+  "ctx": "{k: \"startup\", n: N_(\"Startup tecnológica\"), d: N_(\"Riesgo alto: puede multiplicar tu dinero o desaparecer en un año.\"), price: 60000, risk: 2, ico: \"🚀\"},"
+ },
+ "Riesgo alto: puede multiplicar tu dinero o desaparecer en un año.": {
+  "w": [
+   "life.js:26"
+  ],
+  "ctx": "{k: \"startup\", n: N_(\"Startup tecnológica\"), d: N_(\"Riesgo alto: puede multiplicar tu dinero o desaparecer en un año.\"), price: 60000, risk: 2, ico: \"🚀\"},"
+ },
+ "Hotel en la costa": {
+  "w": [
+   "life.js:27"
+  ],
+  "ctx": "{k: \"hotel\", n: N_(\"Hotel en la costa\"), d: N_(\"Riesgo medio-bajo, inversión grande: rentas altas cuando ya eres una estrella.\"), price: 2500000, risk: 0.5, ico: \"🏨\"}"
+ },
+ "Riesgo medio-bajo, inversión grande: rentas altas cuando ya eres una estrella.": {
+  "w": [
+   "life.js:27"
+  ],
+  "ctx": "{k: \"hotel\", n: N_(\"Hotel en la costa\"), d: N_(\"Riesgo medio-bajo, inversión grande: rentas altas cuando ya eres una estrella.\"), price: 2500000, risk: 0.5, ico: \"🏨\"}"
+ },
+ "Corto": {
+  "w": [
+   "life.js:32"
+  ],
+  "ctx": "hair: [{id: \"short\", n: N_(\"Corto\")}, {id: \"buzz\", n: N_(\"Rapado\")}, {id: \"curly\", n: N_(\"Rizado\")}, {id: \"long\", n: N_(\"Largo con coleta\")}, {id: \"bald\", n: N_(\"Sin pelo\")}],"
+ },
+ "Rapado": {
+  "w": [
+   "life.js:32"
+  ],
+  "ctx": "hair: [{id: \"short\", n: N_(\"Corto\")}, {id: \"buzz\", n: N_(\"Rapado\")}, {id: \"curly\", n: N_(\"Rizado\")}, {id: \"long\", n: N_(\"Largo con coleta\")}, {id: \"bald\", n: N_(\"Sin pelo\")}],"
+ },
+ "Rizado": {
+  "w": [
+   "life.js:32"
+  ],
+  "ctx": "hair: [{id: \"short\", n: N_(\"Corto\")}, {id: \"buzz\", n: N_(\"Rapado\")}, {id: \"curly\", n: N_(\"Rizado\")}, {id: \"long\", n: N_(\"Largo con coleta\")}, {id: \"bald\", n: N_(\"Sin pelo\")}],"
+ },
+ "Largo con coleta": {
+  "w": [
+   "life.js:32"
+  ],
+  "ctx": "hair: [{id: \"short\", n: N_(\"Corto\")}, {id: \"buzz\", n: N_(\"Rapado\")}, {id: \"curly\", n: N_(\"Rizado\")}, {id: \"long\", n: N_(\"Largo con coleta\")}, {id: \"bald\", n: N_(\"Sin pelo\")}],"
+ },
+ "Sin pelo": {
+  "w": [
+   "life.js:32"
+  ],
+  "ctx": "hair: [{id: \"short\", n: N_(\"Corto\")}, {id: \"buzz\", n: N_(\"Rapado\")}, {id: \"curly\", n: N_(\"Rizado\")}, {id: \"long\", n: N_(\"Largo con coleta\")}, {id: \"bald\", n: N_(\"Sin pelo\")}],"
+ },
+ "Negras": {
+  "w": [
+   "life.js:34"
+  ],
+  "ctx": "boots: [{id: \"blk\", n: N_(\"Negras\"), c: \"#16191b\"}, {id: \"wht\", n: N_(\"Blancas\"), c: \"#f1f1ee\"}, {id: \"red\", n: N_(\"Rojo fuego\"), c: \"#e3262f\", req: {money: 20000}},"
+ },
+ "Blancas": {
+  "w": [
+   "life.js:34"
+  ],
+  "ctx": "boots: [{id: \"blk\", n: N_(\"Negras\"), c: \"#16191b\"}, {id: \"wht\", n: N_(\"Blancas\"), c: \"#f1f1ee\"}, {id: \"red\", n: N_(\"Rojo fuego\"), c: \"#e3262f\", req: {money: 20000}},"
+ },
+ "Rojo fuego": {
+  "w": [
+   "life.js:34"
+  ],
+  "ctx": "boots: [{id: \"blk\", n: N_(\"Negras\"), c: \"#16191b\"}, {id: \"wht\", n: N_(\"Blancas\"), c: \"#f1f1ee\"}, {id: \"red\", n: N_(\"Rojo fuego\"), c: \"#e3262f\", req: {money: 20000}},"
+ },
+ "Azul eléctrico": {
+  "w": [
+   "life.js:35"
+  ],
+  "ctx": "{id: \"blu\", n: N_(\"Azul eléctrico\"), c: \"#1f7cff\", req: {money: 20000}}, {id: \"pnk\", n: N_(\"Rosa flúor\"), c: \"#ff4fb1\", req: {fame: 40}}, {id: \"gld\", n: N_(\"Doradas\"), c: \"#e8c35a\", req: {tro: 5}}],"
+ },
+ "Rosa flúor": {
+  "w": [
+   "life.js:35"
+  ],
+  "ctx": "{id: \"blu\", n: N_(\"Azul eléctrico\"), c: \"#1f7cff\", req: {money: 20000}}, {id: \"pnk\", n: N_(\"Rosa flúor\"), c: \"#ff4fb1\", req: {fame: 40}}, {id: \"gld\", n: N_(\"Doradas\"), c: \"#e8c35a\", req: {tro: 5}}],"
+ },
+ "Doradas": {
+  "w": [
+   "life.js:35"
+  ],
+  "ctx": "{id: \"blu\", n: N_(\"Azul eléctrico\"), c: \"#1f7cff\", req: {money: 20000}}, {id: \"pnk\", n: N_(\"Rosa flúor\"), c: \"#ff4fb1\", req: {fame: 40}}, {id: \"gld\", n: N_(\"Doradas\"), c: \"#e8c35a\", req: {tro: 5}}],"
+ },
+ "Manga corta": {
+  "w": [
+   "life.js:36"
+  ],
+  "ctx": "sleeve: [{id: \"short\", n: N_(\"Manga corta\")}, {id: \"long\", n: N_(\"Manga larga\")}, {id: \"under\", n: N_(\"Manguito térmico negro\"), req: {fame: 15}}, {id: \"tights\", n: N_(\"Mallas térmicas\"), req: {fame: 10}}],"
+ },
+ "Manga larga": {
+  "w": [
+   "life.js:36"
+  ],
+  "ctx": "sleeve: [{id: \"short\", n: N_(\"Manga corta\")}, {id: \"long\", n: N_(\"Manga larga\")}, {id: \"under\", n: N_(\"Manguito térmico negro\"), req: {fame: 15}}, {id: \"tights\", n: N_(\"Mallas térmicas\"), req: {fame: 10}}],"
+ },
+ "Manguito térmico negro": {
+  "w": [
+   "life.js:36"
+  ],
+  "ctx": "sleeve: [{id: \"short\", n: N_(\"Manga corta\")}, {id: \"long\", n: N_(\"Manga larga\")}, {id: \"under\", n: N_(\"Manguito térmico negro\"), req: {fame: 15}}, {id: \"tights\", n: N_(\"Mallas térmicas\"), req: {fame: 10}}],"
+ },
+ "Mallas térmicas": {
+  "w": [
+   "life.js:36"
+  ],
+  "ctx": "sleeve: [{id: \"short\", n: N_(\"Manga corta\")}, {id: \"long\", n: N_(\"Manga larga\")}, {id: \"under\", n: N_(\"Manguito térmico negro\"), req: {fame: 15}}, {id: \"tights\", n: N_(\"Mallas térmicas\"), req: {fame: 10}}],"
+ },
+ "Sin cinta": {
+  "w": [
+   "life.js:37"
+  ],
+  "ctx": "band: [{id: \"none\", n: N_(\"Sin cinta\")}, {id: \"wht\", n: N_(\"Cinta blanca\"), c: \"#f4f4f0\"}, {id: \"blk\", n: N_(\"Cinta negra\"), c: \"#16191b\"},"
+ },
+ "Cinta blanca": {
+  "w": [
+   "life.js:37"
+  ],
+  "ctx": "band: [{id: \"none\", n: N_(\"Sin cinta\")}, {id: \"wht\", n: N_(\"Cinta blanca\"), c: \"#f4f4f0\"}, {id: \"blk\", n: N_(\"Cinta negra\"), c: \"#16191b\"},"
+ },
+ "Cinta negra": {
+  "w": [
+   "life.js:37"
+  ],
+  "ctx": "band: [{id: \"none\", n: N_(\"Sin cinta\")}, {id: \"wht\", n: N_(\"Cinta blanca\"), c: \"#f4f4f0\"}, {id: \"blk\", n: N_(\"Cinta negra\"), c: \"#16191b\"},"
+ },
+ "Cinta con los colores del club": {
+  "w": [
+   "life.js:38"
+  ],
+  "ctx": "{id: \"club\", n: N_(\"Cinta con los colores del club\"), req: {fame: 30}}, {id: \"cap\", n: N_(\"Brazalete de capitán\"), req: {cap: 1}}],"
+ },
+ "Brazalete de capitán": {
+  "w": [
+   "life.js:38"
+  ],
+  "ctx": "{id: \"club\", n: N_(\"Cinta con los colores del club\"), req: {fame: 30}}, {id: \"cap\", n: N_(\"Brazalete de capitán\"), req: {cap: 1}}],"
+ },
+ "Clásicos": {
+  "w": [
+   "life.js:39"
+  ],
+  "ctx": "gloves: [{id: \"cls\", n: N_(\"Clásicos\"), c: \"#f4f4f0\", c2: \"#d33\"}, {id: \"flu\", n: N_(\"Flúor\"), c: \"#c6f432\", c2: \"#16191b\"}, {id: \"blk\", n: N_(\"Negros\"), c: \"#1b1d1f\", c2: \"#ffb21e\", req: {fame: 20}},"
+ },
+ "Flúor": {
+  "w": [
+   "life.js:39"
+  ],
+  "ctx": "gloves: [{id: \"cls\", n: N_(\"Clásicos\"), c: \"#f4f4f0\", c2: \"#d33\"}, {id: \"flu\", n: N_(\"Flúor\"), c: \"#c6f432\", c2: \"#16191b\"}, {id: \"blk\", n: N_(\"Negros\"), c: \"#1b1d1f\", c2: \"#ffb21e\", req: {fame: 20}},"
+ },
+ "Negros": {
+  "w": [
+   "life.js:39"
+  ],
+  "ctx": "gloves: [{id: \"cls\", n: N_(\"Clásicos\"), c: \"#f4f4f0\", c2: \"#d33\"}, {id: \"flu\", n: N_(\"Flúor\"), c: \"#c6f432\", c2: \"#16191b\"}, {id: \"blk\", n: N_(\"Negros\"), c: \"#1b1d1f\", c2: \"#ffb21e\", req: {fame: 20}},"
+ },
+ "Dorados": {
+  "w": [
+   "life.js:40"
+  ],
+  "ctx": "{id: \"gld\", n: N_(\"Dorados\"), c: \"#e8c35a\", c2: \"#7a5a12\", req: {tro: 3}}, {id: \"leg\", n: N_(\"Edición leyenda\"), c: \"#6c2bd9\", c2: \"#e8c35a\", req: {money: 250000}}],"
+ },
+ "Edición leyenda": {
+  "w": [
+   "life.js:40"
+  ],
+  "ctx": "{id: \"gld\", n: N_(\"Dorados\"), c: \"#e8c35a\", c2: \"#7a5a12\", req: {tro: 3}}, {id: \"leg\", n: N_(\"Edición leyenda\"), c: \"#6c2bd9\", c2: \"#e8c35a\", req: {money: 250000}}],"
+ },
+ "Puño al aire": {
+  "w": [
+   "life.js:41"
+  ],
+  "ctx": "cel: [{id: \"fist\", n: N_(\"Puño al aire\")}, {id: \"plane\", n: N_(\"El avión\")}, {id: \"lips\", n: N_(\"Dedo en los labios\")}, {id: \"heart\", n: N_(\"Corazón con las manos\")},"
+ },
+ "El avión": {
+  "w": [
+   "life.js:41"
+  ],
+  "ctx": "cel: [{id: \"fist\", n: N_(\"Puño al aire\")}, {id: \"plane\", n: N_(\"El avión\")}, {id: \"lips\", n: N_(\"Dedo en los labios\")}, {id: \"heart\", n: N_(\"Corazón con las manos\")},"
+ },
+ "Dedo en los labios": {
+  "w": [
+   "life.js:41"
+  ],
+  "ctx": "cel: [{id: \"fist\", n: N_(\"Puño al aire\")}, {id: \"plane\", n: N_(\"El avión\")}, {id: \"lips\", n: N_(\"Dedo en los labios\")}, {id: \"heart\", n: N_(\"Corazón con las manos\")},"
+ },
+ "Corazón con las manos": {
+  "w": [
+   "life.js:41"
+  ],
+  "ctx": "cel: [{id: \"fist\", n: N_(\"Puño al aire\")}, {id: \"plane\", n: N_(\"El avión\")}, {id: \"lips\", n: N_(\"Dedo en los labios\")}, {id: \"heart\", n: N_(\"Corazón con las manos\")},"
+ },
+ "Rodillazo deslizando": {
+  "w": [
+   "life.js:42"
+  ],
+  "ctx": "{id: \"knee\", n: N_(\"Rodillazo deslizando\"), req: {fame: 15}}, {id: \"phone\", n: N_(\"La llamada de teléfono\"), req: {fame: 25}}, {id: \"flip\", n: N_(\"Voltereta\"), req: {fame: 35}},"
+ },
+ "La llamada de teléfono": {
+  "w": [
+   "life.js:42"
+  ],
+  "ctx": "{id: \"knee\", n: N_(\"Rodillazo deslizando\"), req: {fame: 15}}, {id: \"phone\", n: N_(\"La llamada de teléfono\"), req: {fame: 25}}, {id: \"flip\", n: N_(\"Voltereta\"), req: {fame: 35}},"
+ },
+ "Voltereta": {
+  "w": [
+   "life.js:42"
+  ],
+  "ctx": "{id: \"knee\", n: N_(\"Rodillazo deslizando\"), req: {fame: 15}}, {id: \"phone\", n: N_(\"La llamada de teléfono\"), req: {fame: 25}}, {id: \"flip\", n: N_(\"Voltereta\"), req: {fame: 35}},"
+ },
+ "Salto con giro": {
+  "w": [
+   "life.js:43"
+  ],
+  "ctx": "{id: \"spin\", n: N_(\"Salto con giro\"), req: {tro: 2}}, {id: \"statue\", n: N_(\"La estatua\"), req: {tro: 6}}, {id: \"dance\", n: N_(\"Baile en el córner\"), req: {money: 50000}},"
+ },
+ "La estatua": {
+  "w": [
+   "life.js:43"
+  ],
+  "ctx": "{id: \"spin\", n: N_(\"Salto con giro\"), req: {tro: 2}}, {id: \"statue\", n: N_(\"La estatua\"), req: {tro: 6}}, {id: \"dance\", n: N_(\"Baile en el córner\"), req: {money: 50000}},"
+ },
+ "Baile en el córner": {
+  "w": [
+   "life.js:43"
+  ],
+  "ctx": "{id: \"spin\", n: N_(\"Salto con giro\"), req: {tro: 2}}, {id: \"statue\", n: N_(\"La estatua\"), req: {tro: 6}}, {id: \"dance\", n: N_(\"Baile en el córner\"), req: {money: 50000}},"
+ },
+ "Rugido a la grada": {
+  "w": [
+   "life.js:44"
+  ],
+  "ctx": "{id: \"roar\", n: N_(\"Rugido a la grada\")}, {id: \"chest\", n: N_(\"Golpes en el pecho\")}]"
+ },
+ "Golpes en el pecho": {
+  "w": [
+   "life.js:44"
+  ],
+  "ctx": "{id: \"roar\", n: N_(\"Rugido a la grada\")}, {id: \"chest\", n: N_(\"Golpes en el pecho\")}]"
+ },
+ "El {n} es de {name} en el {club}: llevarás el {m}. La próxima temporada podrás pedirlo.": {
+  "w": [
+   "life.js:141"
+  ],
+  "ctx": "if (n !== L.pref && S.feed) notify(tr(\"El {n} es de {name} en el {club}: llevarás el {m}. La próxima temporada podrás pedirlo.\", {n: L.pref, name: taken[L.pref], club: clubName(p.club), m: n}), \"amber\");"
+ },
+ "Dorsal": {
+  "w": [
+   "life.js:173",
+   "life.js:191",
+   "ui-life.js:106"
+  ],
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Decisión de carrera\"), cls: \"\", cat: tr(\"Dorsal\"), title: tr(\"¿Pides el {n}?\", {n: x.n}),"
+ },
+ "¿Pides el {n}?": {
+  "w": [
+   "life.js:173",
+   "life.js:191"
+  ],
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Decisión de carrera\"), cls: \"\", cat: tr(\"Dorsal\"), title: tr(\"¿Pides el {n}?\", {n: x.n}),"
+ },
+ "El {n} ha quedado libre en el {club}. Llevas el {cur}, pero tu número de siempre está ahí, esperándote.": {
+  "w": [
+   "life.js:174"
+  ],
+  "ctx": "text: x.free ? tr(\"El {n} ha quedado libre en el {club}. Llevas el {cur}, pero tu número de siempre está ahí, esperándote.\", {n: x.n, club: clubName(S.p.club), cur: x.cur})"
+ },
+ "El {n} sigue siendo de {name}. Puedes pedirle al club que te lo dé: depende de tu peso en el vestuario.": {
+  "w": [
+   "life.js:175"
+  ],
+  "ctx": ": tr(\"El {n} sigue siendo de {name}. Puedes pedirle al club que te lo dé: depende de tu peso en el vestuario.\", {n: x.n, name: x.mate}),"
+ },
+ "Pedir el {n}": {
+  "w": [
+   "life.js:177",
+   "life.js:191"
+  ],
+  "ctx": "opts: [descOpt({t: tr(\"Pedir el {n}\", {n: x.n}), p: pc, ok: {fx: {mor: 3}}, ko: {fx: {mor: -3, coach: -1}}}, function (u) { return fxPreview(u.fx, u.good ? tr(\"Dorsal {n}\", {n: x.n}) : tr(\"Sigues con el {n}\", {n: x.cur})"
+ },
+ "Dorsal {n}": {
+  "w": [
+   "life.js:177",
+   "life.js:178",
+   "life.js:186",
+   "life.js:190"
+  ],
+  "ctx": "opts: [descOpt({t: tr(\"Pedir el {n}\", {n: x.n}), p: pc, ok: {fx: {mor: 3}}, ko: {fx: {mor: -3, coach: -1}}}, function (u) { return fxPreview(u.fx, u.good ? tr(\"Dorsal {n}\", {n: x.n}) : tr(\"Sigues con el {n}\", {n: x.cur})"
+ },
+ "Sigues con el {n}": {
+  "w": [
+   "life.js:177"
+  ],
+  "ctx": "opts: [descOpt({t: tr(\"Pedir el {n}\", {n: x.n}), p: pc, ok: {fx: {mor: 3}}, ko: {fx: {mor: -3, coach: -1}}}, function (u) { return fxPreview(u.fx, u.good ? tr(\"Dorsal {n}\", {n: x.n}) : tr(\"Sigues con el {n}\", {n: x.cur})"
+ },
+ "Quedarte con el {n}": {
+  "w": [
+   "life.js:178",
+   "life.js:191"
+  ],
+  "ctx": "descOpt({t: tr(\"Quedarte con el {n}\", {n: x.cur}), ok: {}}, function () { return [[\"note\", 0, tr(\"Dorsal {n}\", {n: x.cur})]]; })]};"
+ },
+ "El utillero te prepara la camiseta con el {n}. Vuelves a ser tú.": {
+  "w": [
+   "life.js:187"
+  ],
+  "ctx": "txt = x.free ? tr(\"El utillero te prepara la camiseta con el {n}. Vuelves a ser tú.\", {n: x.n}) : tr(\"{name} te cede el {n} con un abrazo delante de todos.\", {name: x.mate, n: x.n}); }"
+ },
+ "{name} te cede el {n} con un abrazo delante de todos.": {
+  "w": [
+   "life.js:187"
+  ],
+  "ctx": "txt = x.free ? tr(\"El utillero te prepara la camiseta con el {n}. Vuelves a ser tú.\", {n: x.n}) : tr(\"{name} te cede el {n} con un abrazo delante de todos.\", {name: x.mate, n: x.n}); }"
+ },
+ "El club dice que no: el {n} no se toca. Seguirás con el {cur}.": {
+  "w": [
+   "life.js:189"
+  ],
+  "ctx": "txt = tr(\"El club dice que no: el {n} no se toca. Seguirás con el {cur}.\", {n: x.n, cur: x.cur}); }"
+ },
+ "El {n} ya es tuyo. Quién sabe, quizá acabe siendo tu número.": {
+  "w": [
+   "life.js:190"
+  ],
+  "ctx": "} else { L.keep = true; txt = tr(\"El {n} ya es tuyo. Quién sabe, quizá acabe siendo tu número.\", {n: x.cur}); chips = [[\"note\", 0, tr(\"Dorsal {n}\", {n: x.cur})]]; }"
+ },
+ "No llegas a pagar a tu {svc}: se acaba el contrato.": {
+  "w": [
+   "life.js:232"
+  ],
+  "ctx": "if (p.money < c) { delete L.svc[k]; notify(tr(\"No llegas a pagar a tu {svc}: se acaba el contrato.\", {svc: lcName(d.n)}), \"amber\"); return; }"
+ },
+ "Termina el contrato: {list}. Puedes renovarlo en la pestaña Jugador.": {
+  "w": [
+   "life.js:235"
+  ],
+  "ctx": "if (gone.length) notify(tr(\"Termina el contrato: {list}. Puedes renovarlo en la pestaña Jugador.\", {list: gone.join(\", \")}), \"info\");"
+ },
+ "{inv}: el negocio quiebra y pierdes lo invertido.": {
+  "w": [
+   "life.js:267"
+  ],
+  "ctx": "if (x.v <= 0) { msg.push({t: \"bad\", x: tr(\"{inv}: el negocio quiebra y pierdes lo invertido.\", {inv: tr(d.n)})}); return false; }"
+ },
+ "{inv}: ¡pelotazo! Ahora vale {v}.": {
+  "w": [
+   "life.js:268"
+  ],
+  "ctx": "if (r >= 1) msg.push({t: \"star\", x: tr(\"{inv}: ¡pelotazo! Ahora vale {v}.\", {inv: tr(d.n), v: fmtMoney(x.v)})});"
+ },
+ "{inv}: te deja {v} de beneficio.": {
+  "w": [
+   "life.js:269"
+  ],
+  "ctx": "else if (inc) msg.push({t: \"ok\", x: tr(\"{inv}: te deja {v} de beneficio.\", {inv: tr(d.n), v: fmtMoney(inc)})});"
+ },
+ "Nace una rivalidad: {me} y {him}, dos {pos} llamados a pelear por lo mismo.": {
+  "w": [
+   "life.js:316"
+  ],
+  "ctx": "lifeHeadline({t: \"ok\", tk: N_(\"Nace una rivalidad: {me} y {him}, dos {pos} llamados a pelear por lo mismo.\"), tp: {pos: lcName(lifeGroupName(r.g))}});"
+ },
+ "porteros": {
+  "w": [
+   "life.js:319"
+  ],
+  "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
+ },
+ "defensas": {
+  "w": [
+   "life.js:319"
+  ],
+  "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
+ },
+ "centrocampistas": {
+  "w": [
+   "life.js:319"
+  ],
+  "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
+ },
+ "delanteros": {
+  "w": [
+   "life.js:319"
+  ],
+  "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
+ },
+ "jugadores": {
+  "w": [
+   "life.js:319"
+  ],
+  "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
+ },
+ "Primer asalto para {me}: gana el duelo directo a {him}.": {
+  "w": [
+   "life.js:408"
+  ],
+  "ctx": "tk = w + l === 1 ? N_(\"Primer asalto para {me}: gana el duelo directo a {him}.\") : w > l ? N_(\"{me} manda en el pulso con {him}: {w}-{l} en duelos directos.\") : w === l ? N_(\"{me} iguala la rivalidad con {him}: {w}-{l} e"
+ },
+ "{me} manda en el pulso con {him}: {w}-{l} en duelos directos.": {
+  "w": [
+   "life.js:408"
+  ],
+  "ctx": "tk = w + l === 1 ? N_(\"Primer asalto para {me}: gana el duelo directo a {him}.\") : w > l ? N_(\"{me} manda en el pulso con {him}: {w}-{l} en duelos directos.\") : w === l ? N_(\"{me} iguala la rivalidad con {him}: {w}-{l} e"
+ },
+ "{me} iguala la rivalidad con {him}: {w}-{l} en duelos.": {
+  "w": [
+   "life.js:408"
+  ],
+  "ctx": "tk = w + l === 1 ? N_(\"Primer asalto para {me}: gana el duelo directo a {him}.\") : w > l ? N_(\"{me} manda en el pulso con {him}: {w}-{l} en duelos directos.\") : w === l ? N_(\"{me} iguala la rivalidad con {him}: {w}-{l} e"
+ },
+ "{me} recorta distancias con {him} ({w}-{l}), pero aún va por detrás.": {
+  "w": [
+   "life.js:408"
+  ],
+  "ctx": "tk = w + l === 1 ? N_(\"Primer asalto para {me}: gana el duelo directo a {him}.\") : w > l ? N_(\"{me} manda en el pulso con {him}: {w}-{l} en duelos directos.\") : w === l ? N_(\"{me} iguala la rivalidad con {him}: {w}-{l} e"
+ },
+ "{him} se lleva el primer cara a cara con {me}.": {
+  "w": [
+   "life.js:412"
+  ],
+  "ctx": "tk = w + l === 1 ? N_(\"{him} se lleva el primer cara a cara con {me}.\") : l > w ? N_(\"{him} vuelve a ganarle el duelo a {me}: {l}-{w} y subiendo.\") : N_(\"{him} se impone esta vez, pero {me} sigue mandando ({w}-{l}).\");"
+ },
+ "{him} vuelve a ganarle el duelo a {me}: {l}-{w} y subiendo.": {
+  "w": [
+   "life.js:412"
+  ],
+  "ctx": "tk = w + l === 1 ? N_(\"{him} se lleva el primer cara a cara con {me}.\") : l > w ? N_(\"{him} vuelve a ganarle el duelo a {me}: {l}-{w} y subiendo.\") : N_(\"{him} se impone esta vez, pero {me} sigue mandando ({w}-{l}).\");"
+ },
+ "{him} se impone esta vez, pero {me} sigue mandando ({w}-{l}).": {
+  "w": [
+   "life.js:412"
+  ],
+  "ctx": "tk = w + l === 1 ? N_(\"{him} se lleva el primer cara a cara con {me}.\") : l > w ? N_(\"{him} vuelve a ganarle el duelo a {me}: {l}-{w} y subiendo.\") : N_(\"{him} se impone esta vez, pero {me} sigue mandando ({w}-{l}).\");"
+ },
+ "Tablas en el duelo entre {me} y {him}: ninguno logra imponerse.": {
+  "w": [
+   "life.js:414"
+  ],
+  "ctx": "} else { kind = \"ok\"; tk = N_(\"Tablas en el duelo entre {me} y {him}: ninguno logra imponerse.\"); }"
+ },
+ "Hoy {me} se ha comido a {him}. Que no se hable más. 🔥": {
+  "w": [
+   "life.js:419"
+  ],
+  "ctx": "if (out > 0 && chance(0.6)) socPostRaw({by: \"fan\", tk: N_(\"Hoy {me} se ha comido a {him}. Que no se hable más. 🔥\"), tp: {me: lifeMeName(), him: rv.n}, mood: 1});"
+ },
+ "{him} cuelga las botas. Se acaba vuestra rivalidad ({w}-{d}-{l} en duelos).": {
+  "w": [
+   "life.js:441"
+  ],
+  "ctx": "var msg = why === \"ret\" ? tr(\"{him} cuelga las botas. Se acaba vuestra rivalidad ({w}-{d}-{l} en duelos).\", {him: rv.n, w: rv.h2h[0], d: rv.h2h[1], l: rv.h2h[2]})"
+ },
+ "{him} y tú ahora compartís vestuario: la rivalidad pasa a ser amistosa.": {
+  "w": [
+   "life.js:442"
+  ],
+  "ctx": ": why === \"mate\" ? tr(\"{him} y tú ahora compartís vestuario: la rivalidad pasa a ser amistosa.\", {him: rv.n})"
+ },
+ "{him} juega ya en otra liga: deja de ser tu referencia directa.": {
+  "w": [
+   "life.js:443"
+  ],
+  "ctx": ": rv.ovr > p.ovr ? tr(\"{him} juega ya en otra liga: deja de ser tu referencia directa.\", {him: rv.n}) : tr(\"Has dejado atrás a {him}: la prensa te busca un rival nuevo.\", {him: rv.n});"
+ },
+ "Has dejado atrás a {him}: la prensa te busca un rival nuevo.": {
+  "w": [
+   "life.js:443"
+  ],
+  "ctx": ": rv.ovr > p.ovr ? tr(\"{him} juega ya en otra liga: deja de ser tu referencia directa.\", {him: rv.n}) : tr(\"Has dejado atrás a {him}: la prensa te busca un rival nuevo.\", {him: rv.n});"
+ },
+ "Nuevo rival: {him} ({club}). La prensa ya os compara.": {
+  "w": [
+   "life.js:448"
+  ],
+  "ctx": "if (!L.rv) { lifeNewRv(); notify(tr(\"Nuevo rival: {him} ({club}). La prensa ya os compara.\", {him: L.rv.n, club: clubName(L.rv.club)}), \"amber\"); }"
+ },
+ "Trofeo Zamora (goles encajados por partido)": {
+  "w": [
+   "life.js:456"
+  ],
+  "ctx": "out.push({k: \"zamora\", n: N_(\"Trofeo Zamora (goles encajados por partido)\"), me: a, him: b, low: true, dec: 2});"
+ },
+ "Guante de Oro (porterías a cero)": {
+  "w": [
+   "life.js:457"
+  ],
+  "ctx": "out.push({k: \"glove\", n: N_(\"Guante de Oro (porterías a cero)\"), me: me.cs, him: him.cs});"
+ },
+ "Bota de Oro (goles)": {
+  "w": [
+   "life.js:459"
+  ],
+  "ctx": "out.push({k: \"boot\", n: N_(\"Bota de Oro (goles)\"), me: me.g, him: him.g});"
+ },
+ "Asistencias": {
+  "w": [
+   "life.js:460",
+   "ui-life.js:264"
+  ],
+  "ctx": "if (rv.g !== \"DEL\") out.push({k: \"ast\", n: N_(\"Asistencias\"), me: me.a, him: him.a});"
+ },
+ "Convocatorias con {nat}": {
+  "w": [
+   "life.js:463"
+  ],
+  "ctx": "if (rv.ni === pnat()) out.push({k: \"nat\", n: N_(\"Convocatorias con {nat}\"), me: me.caps, him: him.caps, nat: rv.ni});"
+ },
+ "{name} marca y lo celebra con su firma: «{quote}».": {
+  "w": [
+   "life.js:512"
+  ],
+  "ctx": "if (last.g > 0 && chance(0.45)) socPostRaw({by: chance(0.5) ? \"fan\" : \"press\", tk: N_(\"{name} marca y lo celebra con su firma: «{quote}».\"), tp: {name: socSelfName(), quote: cel.n}, mood: 1});"
+ },
+ "Portería a cero para {name}, que se despide de la grada con su celebración: «{quote}».": {
+  "w": [
+   "life.js:513"
+  ],
+  "ctx": "else if (isGK() && gt === 0 && f.min >= 60 && chance(0.3)) socPostRaw({by: \"fan\", tk: N_(\"Portería a cero para {name}, que se despide de la grada con su celebración: «{quote}».\"), tp: {name: socSelfName(), quote: cel.n},"
+ },
+ "Balance del año: {me} gana la pelea de porterías a cero a {him} ({a}-{b}).": {
+  "w": [
+   "life.js:537"
+  ],
+  "ctx": "if (gk) tk = (me.cs || 0) >= s.cs ? N_(\"Balance del año: {me} gana la pelea de porterías a cero a {him} ({a}-{b}).\") : N_(\"Balance del año: {him} deja más porterías a cero que {me} ({b}-{a}).\");"
+ },
+ "Balance del año: {him} deja más porterías a cero que {me} ({b}-{a}).": {
+  "w": [
+   "life.js:537"
+  ],
+  "ctx": "if (gk) tk = (me.cs || 0) >= s.cs ? N_(\"Balance del año: {me} gana la pelea de porterías a cero a {him} ({a}-{b}).\") : N_(\"Balance del año: {him} deja más porterías a cero que {me} ({b}-{a}).\");"
+ },
+ "Balance del año: {me} supera a {him} en goles ({a}-{b}).": {
+  "w": [
+   "life.js:538"
+  ],
+  "ctx": "else tk = (me.g || 0) >= s.g ? N_(\"Balance del año: {me} supera a {him} en goles ({a}-{b}).\") : N_(\"Balance del año: {him} marca más que {me} ({b}-{a}).\");"
+ },
+ "Balance del año: {him} marca más que {me} ({b}-{a}).": {
+  "w": [
+   "life.js:538"
+  ],
+  "ctx": "else tk = (me.g || 0) >= s.g ? N_(\"Balance del año: {me} supera a {him} en goles ({a}-{b}).\") : N_(\"Balance del año: {him} marca más que {me} ({b}-{a}).\");"
+ },
+ "Balón de Oro {year}: {me} queda por delante de {him}.": {
+  "w": [
+   "life.js:575"
+  ],
+  "ctx": "lifeHeadline({t: meAhead ? \"star\" : \"bad\", tk: meAhead ? N_(\"Balón de Oro {year}: {me} queda por delante de {him}.\") : N_(\"Balón de Oro {year}: {him} queda por delante de {me}.\"), tp: {year: S.yr + 1}});"
+ },
+ "Balón de Oro {year}: {him} queda por delante de {me}.": {
+  "w": [
+   "life.js:575"
+  ],
+  "ctx": "lifeHeadline({t: meAhead ? \"star\" : \"bad\", tk: meAhead ? N_(\"Balón de Oro {year}: {me} queda por delante de {him}.\") : N_(\"Balón de Oro {year}: {him} queda por delante de {me}.\"), tp: {year: S.yr + 1}});"
+ },
+ "Europa": {
+  "w": [
+   "mgr-plus.js:31"
+  ],
+  "ctx": "var MP_CONF_N = {UEFA: N_(\"Europa\"), CONMEBOL: N_(\"Sudamérica\"), CONCACAF: N_(\"Norteamérica y Caribe\"), AFC: N_(\"Asia\"), CAF: N_(\"África\"), OFC: N_(\"Oceanía\")};"
+ },
+ "Sudamérica": {
+  "w": [
+   "mgr-plus.js:31"
+  ],
+  "ctx": "var MP_CONF_N = {UEFA: N_(\"Europa\"), CONMEBOL: N_(\"Sudamérica\"), CONCACAF: N_(\"Norteamérica y Caribe\"), AFC: N_(\"Asia\"), CAF: N_(\"África\"), OFC: N_(\"Oceanía\")};"
+ },
+ "Norteamérica y Caribe": {
+  "w": [
+   "mgr-plus.js:31"
+  ],
+  "ctx": "var MP_CONF_N = {UEFA: N_(\"Europa\"), CONMEBOL: N_(\"Sudamérica\"), CONCACAF: N_(\"Norteamérica y Caribe\"), AFC: N_(\"Asia\"), CAF: N_(\"África\"), OFC: N_(\"Oceanía\")};"
+ },
+ "Asia": {
+  "w": [
+   "mgr-plus.js:31"
+  ],
+  "ctx": "var MP_CONF_N = {UEFA: N_(\"Europa\"), CONMEBOL: N_(\"Sudamérica\"), CONCACAF: N_(\"Norteamérica y Caribe\"), AFC: N_(\"Asia\"), CAF: N_(\"África\"), OFC: N_(\"Oceanía\")};"
+ },
+ "África": {
+  "w": [
+   "mgr-plus.js:31"
+  ],
+  "ctx": "var MP_CONF_N = {UEFA: N_(\"Europa\"), CONMEBOL: N_(\"Sudamérica\"), CONCACAF: N_(\"Norteamérica y Caribe\"), AFC: N_(\"Asia\"), CAF: N_(\"África\"), OFC: N_(\"Oceanía\")};"
+ },
+ "Oceanía": {
+  "w": [
+   "mgr-plus.js:31"
+  ],
+  "ctx": "var MP_CONF_N = {UEFA: N_(\"Europa\"), CONMEBOL: N_(\"Sudamérica\"), CONCACAF: N_(\"Norteamérica y Caribe\"), AFC: N_(\"Asia\"), CAF: N_(\"África\"), OFC: N_(\"Oceanía\")};"
+ },
+ "{name} se une a tu red de ojeadores.": {
+  "w": [
+   "mgr-plus.js:56"
+  ],
+  "ctx": "notify(\"🔭 \" + tr(\"{name} se une a tu red de ojeadores.\", {name: c.fn + \" \" + c.ln}), \"good\");"
+ },
+ "{name} vuelve a viajar sin presupuesto: no te queda dinero para sus viajes.": {
+  "w": [
+   "mgr-plus.js:135"
+  ],
+  "ctx": "if (cost > m.bud) { s.lv = 0; n = 1; news.push(tr(\"{name} vuelve a viajar sin presupuesto: no te queda dinero para sus viajes.\", {name: s.ln})); }"
+ },
+ "🔭 {name} ({reg}) te manda {n} informe.": {
+  "w": [
+   "mgr-plus.js:141"
+  ],
+  "ctx": "if (got.length) news.push(trn(got.length, \"🔭 {name} ({reg}) te manda {n} informe.\", \"🔭 {name} ({reg}) te manda {n} informes.\", {name: s.ln, reg: mpRegName(s.reg)}));",
+  "note": "plural:singular"
+ },
+ "🔭 {name} ({reg}) te manda {n} informes.": {
+  "w": [
+   "mgr-plus.js:141"
+  ],
+  "ctx": "if (got.length) news.push(trn(got.length, \"🔭 {name} ({reg}) te manda {n} informe.\", \"🔭 {name} ({reg}) te manda {n} informes.\", {name: s.ln, reg: mpRegName(s.reg)}));",
+  "note": "plural:plural"
+ },
+ "No hay presupuesto para el sueldo de {name}: deja tu red de ojeadores.": {
+  "w": [
+   "mgr-plus.js:152"
+  ],
+  "ctx": "else feedNote(tr(\"No hay presupuesto para el sueldo de {name}: deja tu red de ojeadores.\", {name: s.fn + \" \" + s.ln}));"
+ },
+ "Renovar y blindarle con una cláusula de {cl}": {
+  "w": [
+   "mgr-plus.js:210"
+  ],
+  "ctx": "{t: tr(\"Renovar y blindarle con una cláusula de {cl}\", {cl: fmtMoney(hi)}), d: tr(\"{sal}/año hasta {end} · más difícil que te lo quiten\", {sal: fmtMoney(wHi), end: end}), p: clamp(tm.p - 0.1, 0.03, 0.9),"
+ },
+ "{sal}/año hasta {end} · más difícil que te lo quiten": {
+  "w": [
+   "mgr-plus.js:210"
+  ],
+  "ctx": "{t: tr(\"Renovar y blindarle con una cláusula de {cl}\", {cl: fmtMoney(hi)}), d: tr(\"{sal}/año hasta {end} · más difícil que te lo quiten\", {sal: fmtMoney(wHi), end: end}), p: clamp(tm.p - 0.1, 0.03, 0.9),"
+ },
+ "{name} renueva hasta {end} con la cláusula blindada.": {
+  "w": [
+   "mgr-plus.js:211"
+  ],
+  "ctx": "ok: {txt: tr(\"{name} renueva hasta {end} con la cláusula blindada.\", {name: plShort(p), end: end}), fx: {pmor: 3}, n: tr(\"Cláusula: {cl}\", {cl: fmtMoney(hi)}), then: sign(wHi, hi)}, ko: fail(-5)},"
+ },
+ "Cláusula: {cl}": {
+  "w": [
+   "mgr-plus.js:211",
+   "mgr-plus.js:213"
+  ],
+  "ctx": "ok: {txt: tr(\"{name} renueva hasta {end} con la cláusula blindada.\", {name: plShort(p), end: end}), fx: {pmor: 3}, n: tr(\"Cláusula: {cl}\", {cl: fmtMoney(hi)}), then: sign(wHi, hi)}, ko: fail(-5)},"
+ },
+ "Renovar con una cláusula baja de {cl}": {
+  "w": [
+   "mgr-plus.js:212"
+  ],
+  "ctx": "{t: tr(\"Renovar con una cláusula baja de {cl}\", {cl: fmtMoney(lo)}), d: tr(\"{sal}/año · le abres la puerta a un grande\", {sal: fmtMoney(wLo)}), p: clamp(tm.p + 0.15, 0.05, 0.97),"
+ },
+ "{sal}/año · le abres la puerta a un grande": {
+  "w": [
+   "mgr-plus.js:212"
+  ],
+  "ctx": "{t: tr(\"Renovar con una cláusula baja de {cl}\", {cl: fmtMoney(lo)}), d: tr(\"{sal}/año · le abres la puerta a un grande\", {sal: fmtMoney(wLo)}), p: clamp(tm.p + 0.15, 0.05, 0.97),"
+ },
+ "{name} renueva hasta {end}. Valora que no le cierres puertas.": {
+  "w": [
+   "mgr-plus.js:213"
+  ],
+  "ctx": "ok: {txt: tr(\"{name} renueva hasta {end}. Valora que no le cierres puertas.\", {name: plShort(p), end: end}), fx: {pmor: 7}, n: tr(\"Cláusula: {cl}\", {cl: fmtMoney(lo)}), then: sign(wLo, lo)}, ko: fail(-3)}"
+ },
+ "El {club} quería a {name}, pero su cláusula blindada les frena.": {
+  "w": [
+   "mgr-plus.js:232"
+  ],
+  "ctx": "if (!p.loanIn) notify(\"🛡️ \" + tr(\"El {club} quería a {name}, pero su cláusula blindada les frena.\", {club: clubName(x.club), name: plShort(p)}), \"good\");"
+ },
+ "Jugará la temporada en otro club. Puedes pactar una opción de compra (decide el otro club en verano) o una obligación de compra (venta cerrada al acabar la cesión). Cláusula actual: {cl}.": {
+  "w": [
+   "mgr-plus.js:246"
+  ],
+  "ctx": "text: plDesc(p) + \" \" + tr(\"Jugará la temporada en otro club. Puedes pactar una opción de compra (decide el otro club en verano) o una obligación de compra (venta cerrada al acabar la cesión). Cláusula actual: {cl}.\", {c"
+ },
+ "Con más de 23 años solo se cede con compra": {
+  "w": [
+   "mgr-plus.js:252"
+  ],
+  "ctx": "out.push({t: tr(\"Ceder al {club}\", {club: clubName(c)}), d: tr(\"{lg} · nivel {n}\", {lg: lab, n: Math.round(S.cr[c])}), dis: x.ob ? tr(\"Con más de 23 años solo se cede con compra\") : null, club: c, lk: \"\","
+ },
+ "Ceder al {club} con opción de compra": {
+  "w": [
+   "mgr-plus.js:254"
+  ],
+  "ctx": "out.push({t: tr(\"Ceder al {club} con opción de compra\", {club: clubName(c)}), d: tr(\"Opción de {fee}: la decide el {club} en verano\", {fee: fmtMoney(fo), club: clubName(c)}), club: c, lk: \"opt\", fee: fo,"
+ },
+ "Opción de {fee}: la decide el {club} en verano": {
+  "w": [
+   "mgr-plus.js:254"
+  ],
+  "ctx": "out.push({t: tr(\"Ceder al {club} con opción de compra\", {club: clubName(c)}), d: tr(\"Opción de {fee}: la decide el {club} en verano\", {fee: fmtMoney(fo), club: clubName(c)}), club: c, lk: \"opt\", fee: fo,"
+ },
+ "{name} se va cedido al {club} con opción de compra de {fee}.": {
+  "w": [
+   "mgr-plus.js:255"
+  ],
+  "ctx": "ok: {txt: tr(\"{name} se va cedido al {club} con opción de compra de {fee}.\", {name: plName(p), club: clubName(c), fee: fmtMoney(fo)}), fx: {}, n: tr(\"Opción de compra: {fee}\", {fee: fmtMoney(fo)}), then: go(\"opt\", fo)}})"
+ },
+ "Opción de compra: {fee}": {
+  "w": [
+   "mgr-plus.js:255",
+   "mgr-plus.js:319"
+  ],
+  "ctx": "ok: {txt: tr(\"{name} se va cedido al {club} con opción de compra de {fee}.\", {name: plName(p), club: clubName(c), fee: fmtMoney(fo)}), fx: {}, n: tr(\"Opción de compra: {fee}\", {fee: fmtMoney(fo)}), then: go(\"opt\", fo)}})"
+ },
+ "Ceder al {club} con obligación de compra": {
+  "w": [
+   "mgr-plus.js:256"
+  ],
+  "ctx": "out.push({t: tr(\"Ceder al {club} con obligación de compra\", {club: clubName(c)}), d: tr(\"Venta cerrada por {fee} al acabar la cesión\", {fee: fmtMoney(fb)}), club: c, lk: \"obl\", fee: fb,"
+ },
+ "Venta cerrada por {fee} al acabar la cesión": {
+  "w": [
+   "mgr-plus.js:256"
+  ],
+  "ctx": "out.push({t: tr(\"Ceder al {club} con obligación de compra\", {club: clubName(c)}), d: tr(\"Venta cerrada por {fee} al acabar la cesión\", {fee: fmtMoney(fb)}), club: c, lk: \"obl\", fee: fb,"
+ },
+ "{name} se va cedido al {club}; en verano será suyo por {fee}.": {
+  "w": [
+   "mgr-plus.js:257"
+  ],
+  "ctx": "ok: {txt: tr(\"{name} se va cedido al {club}; en verano será suyo por {fee}.\", {name: plName(p), club: clubName(c), fee: fmtMoney(fb)}), fx: {}, n: tr(\"Obligación de compra: {fee}\", {fee: fmtMoney(fb)}), then: go(\"obl\", f"
+ },
+ "Obligación de compra: {fee}": {
+  "w": [
+   "mgr-plus.js:257",
+   "mgr-plus.js:321"
+  ],
+  "ctx": "ok: {txt: tr(\"{name} se va cedido al {club}; en verano será suyo por {fee}.\", {name: plName(p), club: clubName(c), fee: fmtMoney(fb)}), fx: {}, n: tr(\"Obligación de compra: {fee}\", {fee: fmtMoney(fb)}), then: go(\"obl\", f"
+ },
+ "Pedir cedido a {name}": {
+  "w": [
+   "mgr-plus.js:304"
+  ],
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Cesión\"), cls: \"\", cat: S.m.mk.open === \"invierno\" ? tr(\"Mercado de invierno\") : tr(\"Mercado de verano\"), title: tr(\"Pedir cedido a {name}\", {name: t.fn + \" \" + t.ln}),"
+ },
+ "El {club} lo tasa en {fee}. Una cesión cuesta {cuota} de cuota y pagas su sueldo ({sal}/año). Tienes {bud} de presupuesto.": {
+  "w": [
+   "mgr-plus.js:305"
+  ],
+  "ctx": "text: tDesc(t) + \" \" + tr(\"El {club} lo tasa en {fee}. Una cesión cuesta {cuota} de cuota y pagas su sueldo ({sal}/año). Tienes {bud} de presupuesto.\", {club: clubName(t.club), fee: fmtMoney(t.ask), cuota: fmtMoney(k.cuo"
+ },
+ "El {club} no quiere cederlo en esas condiciones.": {
+  "w": [
+   "mgr-plus.js:315"
+  ],
+  "ctx": "var no = {txt: tr(\"El {club} no quiere cederlo en esas condiciones.\", {club: clubName(t.club)}), n: tr(\"No habrá cesión\"), then: function () { t.loanNo = true; }};"
+ },
+ "No habrá cesión": {
+  "w": [
+   "mgr-plus.js:315"
+  ],
+  "ctx": "var no = {txt: tr(\"El {club} no quiere cederlo en esas condiciones.\", {club: clubName(t.club)}), n: tr(\"No habrá cesión\"), then: function () { t.loanNo = true; }};"
+ },
+ "Cesión sin compra": {
+  "w": [
+   "mgr-plus.js:316"
+  ],
+  "ctx": "out.push({t: tr(\"Cesión sin compra\"), d: tr(\"Cuota de {c} · vuelve a su club en verano\", {c: fmtMoney(k.cuota)}), p: k.p, dis: dis, lk: \"\","
+ },
+ "Cuota de {c} · vuelve a su club en verano": {
+  "w": [
+   "mgr-plus.js:316"
+  ],
+  "ctx": "out.push({t: tr(\"Cesión sin compra\"), d: tr(\"Cuota de {c} · vuelve a su club en verano\", {c: fmtMoney(k.cuota)}), p: k.p, dis: dis, lk: \"\","
+ },
+ "¡Cedido! {name} jugará en tu equipo esta temporada.": {
+  "w": [
+   "mgr-plus.js:317"
+  ],
+  "ctx": "ok: {txt: tr(\"¡Cedido! {name} jugará en tu equipo esta temporada.\", {name: t.fn + \" \" + t.ln}), fx: {bud: -k.cuota}, then: sign(\"\", 0)}, ko: no});"
+ },
+ "Cesión con opción de compra ({fee})": {
+  "w": [
+   "mgr-plus.js:318"
+  ],
+  "ctx": "out.push({t: tr(\"Cesión con opción de compra ({fee})\", {fee: fmtMoney(k.opt)}), d: tr(\"Cuota de {c} · en verano decides si te lo quedas\", {c: fmtMoney(k.cuota)}), p: clamp(k.p + 0.12, 0.05, 0.92), dis: dis, lk: \"opt\", fe"
+ },
+ "Cuota de {c} · en verano decides si te lo quedas": {
+  "w": [
+   "mgr-plus.js:318"
+  ],
+  "ctx": "out.push({t: tr(\"Cesión con opción de compra ({fee})\", {fee: fmtMoney(k.opt)}), d: tr(\"Cuota de {c} · en verano decides si te lo quedas\", {c: fmtMoney(k.cuota)}), p: clamp(k.p + 0.12, 0.05, 0.92), dis: dis, lk: \"opt\", fe"
+ },
+ "¡Cedido con opción de compra! Al final de la temporada decidirás.": {
+  "w": [
+   "mgr-plus.js:319"
+  ],
+  "ctx": "ok: {txt: tr(\"¡Cedido con opción de compra! Al final de la temporada decidirás.\"), fx: {bud: -k.cuota}, n: tr(\"Opción de compra: {fee}\", {fee: fmtMoney(k.opt)}), then: sign(\"opt\", k.opt)}, ko: no});"
+ },
+ "Cesión con obligación de compra ({fee})": {
+  "w": [
+   "mgr-plus.js:320"
+  ],
+  "ctx": "out.push({t: tr(\"Cesión con obligación de compra ({fee})\", {fee: fmtMoney(k.obl)}), d: tr(\"Cuota de {c} · en verano pagas el traspaso sí o sí\", {c: fmtMoney(k.cuota)}), p: clamp(k.p + 0.25, 0.05, 0.95), dis: dis, lk: \"ob"
+ },
+ "Cuota de {c} · en verano pagas el traspaso sí o sí": {
+  "w": [
+   "mgr-plus.js:320"
+  ],
+  "ctx": "out.push({t: tr(\"Cesión con obligación de compra ({fee})\", {fee: fmtMoney(k.obl)}), d: tr(\"Cuota de {c} · en verano pagas el traspaso sí o sí\", {c: fmtMoney(k.cuota)}), p: clamp(k.p + 0.25, 0.05, 0.95), dis: dis, lk: \"ob"
+ },
+ "¡Cedido con obligación de compra! En verano será tuyo.": {
+  "w": [
+   "mgr-plus.js:321"
+  ],
+  "ctx": "ok: {txt: tr(\"¡Cedido con obligación de compra! En verano será tuyo.\"), fx: {bud: -k.cuota}, n: tr(\"Obligación de compra: {fee}\", {fee: fmtMoney(k.obl)}), then: sign(\"obl\", k.obl)}, ko: no});"
+ },
+ "Opción de compra": {
+  "w": [
+   "mgr-plus.js:329"
+  ],
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Opción de compra\"), cls: \"\", cat: tr(\"Mercado\"), title: tr(\"¿Te quedas a {name}?\", {name: plName(p)}),"
+ },
+ "¿Te quedas a {name}?": {
+  "w": [
+   "mgr-plus.js:329"
+  ],
+  "ctx": "return {tag: \"real\", tagTxt: tr(\"Opción de compra\"), cls: \"\", cat: tr(\"Mercado\"), title: tr(\"¿Te quedas a {name}?\", {name: plName(p)}),"
+ },
+ "Termina su cesión. Puedes quedártelo pagando {fee} al {club}. Esta temporada: {apps} partidos y media {ovr}. Tienes {bud} de presupuesto.": {
+  "w": [
+   "mgr-plus.js:330"
+  ],
+  "ctx": "text: tr(\"Termina su cesión. Puedes quedártelo pagando {fee} al {club}. Esta temporada: {apps} partidos y media {ovr}. Tienes {bud} de presupuesto.\", {fee: fmtMoney(li.fee), club: clubName(li.club), apps: p.tot.apps, ovr"
+ },
+ "Ejercer la opción: {fee}": {
+  "w": [
+   "mgr-plus.js:332"
+  ],
+  "ctx": "{t: tr(\"Ejercer la opción: {fee}\", {fee: fmtMoney(li.fee)}), dis: li.fee > m.bud ? tr(\"No te llega el presupuesto\") : null,"
+ },
+ "{name} firma en propiedad hasta {end}.": {
+  "w": [
+   "mgr-plus.js:333"
+  ],
+  "ctx": "ok: {txt: tr(\"{name} firma en propiedad hasta {end}.\", {name: plShort(p), end: S.yr + 1 + (li.yrs || 3)}), fx: {bud: -li.fee, pmor: 6}, then: function () { mpLoanKeep(p); }}},"
+ },
+ "Devolverlo al {club}": {
+  "w": [
+   "mgr-plus.js:334"
+  ],
+  "ctx": "{t: tr(\"Devolverlo al {club}\", {club: clubName(li.club)}), ok: {txt: tr(\"{name} vuelve a su club.\", {name: plShort(p)}), fx: {}, then: function () { mgrRemovePlayer(p, tr(\"Vuelve a su club tras la cesión\"), li.club, 0, t"
+ },
+ "{name} vuelve a su club.": {
+  "w": [
+   "mgr-plus.js:334"
+  ],
+  "ctx": "{t: tr(\"Devolverlo al {club}\", {club: clubName(li.club)}), ok: {txt: tr(\"{name} vuelve a su club.\", {name: plShort(p)}), fx: {}, then: function () { mgrRemovePlayer(p, tr(\"Vuelve a su club tras la cesión\"), li.club, 0, t"
+ },
+ "Vuelve a su club tras la cesión": {
+  "w": [
+   "mgr-plus.js:334",
+   "mgr-plus.js:374",
+   "mgr-plus.js:384"
+  ],
+  "ctx": "{t: tr(\"Devolverlo al {club}\", {club: clubName(li.club)}), ok: {txt: tr(\"{name} vuelve a su club.\", {name: plShort(p)}), fx: {}, then: function () { mgrRemovePlayer(p, tr(\"Vuelve a su club tras la cesión\"), li.club, 0, t"
+ },
+ "El {club} no ejerce la opción de compra de {name}: vuelve a casa.": {
+  "w": [
+   "mgr-plus.js:352"
+  ],
+  "ctx": "if (!buy) { news.push({t: \"ok\", x: tr(\"El {club} no ejerce la opción de compra de {name}: vuelve a casa.\", {club: clubName(lo.club), name: plName(p)})}); delete lo.k; return; }"
+ },
+ "{name}: el {club} cumple la obligación de compra y paga {fee}.": {
+  "w": [
+   "mgr-plus.js:355"
+  ],
+  "ctx": "news.push({t: \"ok\", x: lo.k === \"obl\" ? tr(\"{name}: el {club} cumple la obligación de compra y paga {fee}.\", {name: plName(p), club: clubName(lo.club), fee: fmtMoney(lo.fee)}) : tr(\"{name}: el {club} ejerce la opción de "
+ },
+ "{name}: el {club} ejerce la opción de compra y paga {fee}.": {
+  "w": [
+   "mgr-plus.js:355"
+  ],
+  "ctx": "news.push({t: \"ok\", x: lo.k === \"obl\" ? tr(\"{name}: el {club} cumple la obligación de compra y paga {fee}.\", {name: plName(p), club: clubName(lo.club), fee: fmtMoney(lo.fee)}) : tr(\"{name}: el {club} ejerce la opción de "
+ },
+ "Comprado por el {club} tras su cesión": {
+  "w": [
+   "mgr-plus.js:358"
+  ],
+  "ctx": "mgrRemovePlayer(p, tr(\"Comprado por el {club} tras su cesión\", {club: clubName(lo.club)}), lo.club, lo.fee, true);"
+ },
+ "{name} se queda: pagas {fee} al {club} por la obligación de compra.": {
+  "w": [
+   "mgr-plus.js:367"
+  ],
+  "ctx": "news.push({t: \"ok\", x: tr(\"{name} se queda: pagas {fee} al {club} por la obligación de compra.\", {name: plName(p), fee: fmtMoney(li.fee), club: clubName(li.club)})});"
+ },
+ "{name} vuelve al {club} al acabar su cesión.": {
+  "w": [
+   "mgr-plus.js:373"
+  ],
+  "ctx": "news.push({t: \"ok\", x: tr(\"{name} vuelve al {club} al acabar su cesión.\", {name: plName(p), club: clubName(li.club)})});"
+ },
+ "Cumplir el objetivo de liga": {
+  "w": [
+   "mgr-plus.js:434"
+  ],
+  "ctx": "var MP_FIL_OBJ = [N_(\"Cumplir el objetivo de liga\"), N_(\"Dar 10 partidos o más a tres jugadores de 21 años o menos\"), N_(\"Que dos jugadores mejoren su media 2 puntos\")];"
+ },
+ "Dar 10 partidos o más a tres jugadores de 21 años o menos": {
+  "w": [
+   "mgr-plus.js:434"
+  ],
+  "ctx": "var MP_FIL_OBJ = [N_(\"Cumplir el objetivo de liga\"), N_(\"Dar 10 partidos o más a tres jugadores de 21 años o menos\"), N_(\"Que dos jugadores mejoren su media 2 puntos\")];"
+ },
+ "Que dos jugadores mejoren su media 2 puntos": {
+  "w": [
+   "mgr-plus.js:434"
+  ],
+  "ctx": "var MP_FIL_OBJ = [N_(\"Cumplir el objetivo de liga\"), N_(\"Dar 10 partidos o más a tres jugadores de 21 años o menos\"), N_(\"Que dos jugadores mejoren su media 2 puntos\")];"
+ },
+ "Filial": {
+  "w": [
+   "mgr-plus.js:444",
+   "ui-mgrplus.js:68"
+  ],
+  "ctx": "head: function (x) { return {tag: \"real\", tagTxt: tr(\"Filial\"), cls: \"\", cat: tr(\"Banquillo\"), title: tr(\"El {club} te quiere en el primer equipo\", {club: clubName(x.par)}),"
+ },
+ "El {club} te quiere en el primer equipo": {
+  "w": [
+   "mgr-plus.js:444"
+  ],
+  "ctx": "head: function (x) { return {tag: \"real\", tagTxt: tr(\"Filial\"), cls: \"\", cat: tr(\"Banquillo\"), title: tr(\"El {club} te quiere en el primer equipo\", {club: clubName(x.par)}),"
+ },
+ "Has cumplido {n} de 3 objetivos con el filial. La directiva del {club} te ofrece el banquillo del primer equipo ({sal}/año).": {
+  "w": [
+   "mgr-plus.js:445"
+  ],
+  "ctx": "text: tr(\"Has cumplido {n} de 3 objetivos con el filial. La directiva del {club} te ofrece el banquillo del primer equipo ({sal}/año).\", {n: x.met, club: clubName(x.par), sal: fmtMoney(mgrSalary(x.par))})}; },"
+ },
+ "Subir al primer equipo": {
+  "w": [
+   "mgr-plus.js:447"
+  ],
+  "ctx": "{t: tr(\"Subir al primer equipo\"), ok: {txt: tr(\"Das el salto: diriges al {club}.\", {club: clubName(x.par)}), fx: {rep: 3}, then: function () { mpX().filDone = S.yr; mgrJoinClub(x.par, {sal: mgrSalary(x.par)}); }}},"
+ },
+ "Das el salto: diriges al {club}.": {
+  "w": [
+   "mgr-plus.js:447"
+  ],
+  "ctx": "{t: tr(\"Subir al primer equipo\"), ok: {txt: tr(\"Das el salto: diriges al {club}.\", {club: clubName(x.par)}), fx: {rep: 3}, then: function () { mpX().filDone = S.yr; mgrJoinClub(x.par, {sal: mgrSalary(x.par)}); }}},"
+ },
+ "Seguir formando en el filial": {
+  "w": [
+   "mgr-plus.js:448"
+  ],
+  "ctx": "{t: tr(\"Seguir formando en el filial\"), ok: {txt: tr(\"Prefieres un año más con los chavales.\"), fx: {board: 6, rep: 1}}}"
+ },
+ "Prefieres un año más con los chavales.": {
+  "w": [
+   "mgr-plus.js:448"
+  ],
+  "ctx": "{t: tr(\"Seguir formando en el filial\"), ok: {txt: tr(\"Prefieres un año más con los chavales.\"), fx: {board: 6, rep: 1}}}"
+ },
+ "Selección femenina de {nat}": {
+  "w": [
+   "mgr-plus.js:455"
+  ],
+  "ctx": "function mpNatLabel(ni) { return S.g === \"f\" ? tr(\"Selección femenina de {nat}\", {nat: natName(ni)}) : tr(\"Selección de {nat}\", {nat: natName(ni)}); }"
+ }
+}

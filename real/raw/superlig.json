@@ -1,0 +1,1874 @@
+{
+ "id": "superlig",
+ "league": "Süper Lig",
+ "season": "2026/27",
+ "asOf": "2026-10",
+ "clubs": [
+  {
+   "club": "Galatasaray",
+   "coach": "Okan Buruk",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Uğurcan",
+     "ln": "Çakır",
+     "pos": "POR",
+     "age": 31,
+     "nat": "TR",
+     "ovr": 80
+    },
+    {
+     "fn": "Günay",
+     "ln": "Güvenç",
+     "pos": "POR",
+     "age": 36,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Jankat",
+     "ln": "Yılmaz",
+     "pos": "POR",
+     "age": 22,
+     "nat": "TR",
+     "ovr": 60
+    },
+    {
+     "fn": "Enes",
+     "ln": "Büyük",
+     "pos": "POR",
+     "age": 21,
+     "nat": "TR",
+     "ovr": 55
+    },
+    {
+     "fn": "Davinson",
+     "ln": "Sánchez",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "CO",
+     "ovr": 78
+    },
+    {
+     "fn": "Abdülkerim",
+     "ln": "Bardakcı",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "TR",
+     "ovr": 78
+    },
+    {
+     "fn": "Kaan",
+     "ln": "Ayhan",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "TR",
+     "ovr": 75
+    },
+    {
+     "fn": "El Chadaille",
+     "ln": "Bitshiabu",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 73
+    },
+    {
+     "fn": "Arda",
+     "ln": "Ünyay",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "TR",
+     "ovr": 62
+    },
+    {
+     "fn": "Wilfried",
+     "ln": "Singo",
+     "pos": "LD",
+     "age": 26,
+     "nat": "CI",
+     "ovr": 80
+    },
+    {
+     "fn": "Ismail",
+     "ln": "Jakobs",
+     "pos": "LI",
+     "age": 27,
+     "nat": "SN",
+     "ovr": 77
+    },
+    {
+     "fn": "Eren",
+     "ln": "Elmalı",
+     "pos": "LI",
+     "age": 26,
+     "nat": "TR",
+     "ovr": 77
+    },
+    {
+     "fn": "Kazımcan",
+     "ln": "Karataş",
+     "pos": "LI",
+     "age": 24,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Lucas",
+     "ln": "Torreira",
+     "pos": "MCD",
+     "age": 31,
+     "nat": "UY",
+     "ovr": 78
+    },
+    {
+     "fn": "Mario",
+     "ln": "Lemina",
+     "pos": "MCD",
+     "age": 32,
+     "nat": "GA",
+     "ovr": 76
+    },
+    {
+     "fn": "Lesley",
+     "ln": "Ugochukwu",
+     "pos": "MCD",
+     "age": 23,
+     "nat": "FR",
+     "ovr": 75
+    },
+    {
+     "fn": "Eyüp",
+     "ln": "Aydın",
+     "pos": "MCD",
+     "age": 22,
+     "nat": "TR",
+     "ovr": 65
+    },
+    {
+     "fn": "İlkay",
+     "ln": "Gündoğan",
+     "pos": "MC",
+     "age": 36,
+     "nat": "DE",
+     "ovr": 79
+    },
+    {
+     "fn": "Renato",
+     "ln": "Nhaga",
+     "pos": "MC",
+     "age": 20,
+     "nat": "GW",
+     "ovr": 65
+    },
+    {
+     "fn": "Gabriel",
+     "ln": "Sara",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "BR",
+     "ovr": 80
+    },
+    {
+     "fn": "Aleksey",
+     "ln": "Batrakov",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "RU",
+     "ovr": 75
+    },
+    {
+     "fn": "Leroy",
+     "ln": "Sané",
+     "pos": "ED",
+     "age": 31,
+     "nat": "DE",
+     "ovr": 84
+    },
+    {
+     "fn": "Yunus",
+     "ln": "Akgün",
+     "pos": "ED",
+     "age": 26,
+     "nat": "TR",
+     "ovr": 76
+    },
+    {
+     "fn": "Roland",
+     "ln": "Sallai",
+     "pos": "ED",
+     "age": 30,
+     "nat": "HU",
+     "ovr": 74
+    },
+    {
+     "fn": "Armando",
+     "ln": "Güner",
+     "pos": "ED",
+     "age": 19,
+     "nat": "AR",
+     "ovr": 60
+    },
+    {
+     "fn": "Rafael",
+     "ln": "Leão",
+     "pos": "EI",
+     "age": 28,
+     "nat": "PT",
+     "ovr": 86
+    },
+    {
+     "fn": "Barış Alper",
+     "ln": "Yılmaz",
+     "pos": "EI",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 78
+    },
+    {
+     "fn": "Berat",
+     "ln": "Luş",
+     "pos": "EI",
+     "age": 20,
+     "nat": "TR",
+     "ovr": 65
+    },
+    {
+     "fn": "Victor",
+     "ln": "Osimhen",
+     "pos": "DC",
+     "age": 28,
+     "nat": "NG",
+     "ovr": 88
+    },
+    {
+     "fn": "Deniz",
+     "ln": "Gül",
+     "pos": "DC",
+     "age": 22,
+     "nat": "TR",
+     "ovr": 69
+    },
+    {
+     "fn": "Ada",
+     "ln": "Yüzgeç",
+     "pos": "DC",
+     "age": 18,
+     "nat": "TR",
+     "ovr": 58
+    }
+   ]
+  },
+  {
+   "club": "Fenerbahçe",
+   "coach": "İsmail Kartal",
+   "src": "web",
+   "players": [
+    {
+     "fn": "",
+     "ln": "Ederson",
+     "pos": "POR",
+     "age": 33,
+     "nat": "BR",
+     "ovr": 84
+    },
+    {
+     "fn": "Mert",
+     "ln": "Günok",
+     "pos": "POR",
+     "age": 37,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Tarık",
+     "ln": "Çetin",
+     "pos": "POR",
+     "age": 29,
+     "nat": "TR",
+     "ovr": 64
+    },
+    {
+     "fn": "Milan",
+     "ln": "Škriniar",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "SK",
+     "ovr": 83
+    },
+    {
+     "fn": "Nathan",
+     "ln": "Aké",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NL",
+     "ovr": 81
+    },
+    {
+     "fn": "Çağlar",
+     "ln": "Söyüncü",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "TR",
+     "ovr": 76
+    },
+    {
+     "fn": "Rodrigo",
+     "ln": "Becão",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "BR",
+     "ovr": 77
+    },
+    {
+     "fn": "Diego",
+     "ln": "Carlos",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "BR",
+     "ovr": 75
+    },
+    {
+     "fn": "Yiğit Efe",
+     "ln": "Demir",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "TR",
+     "ovr": 66
+    },
+    {
+     "fn": "Nélson",
+     "ln": "Semedo",
+     "pos": "LD",
+     "age": 32,
+     "nat": "PT",
+     "ovr": 77
+    },
+    {
+     "fn": "Mert",
+     "ln": "Müldür",
+     "pos": "LD",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 74
+    },
+    {
+     "fn": "Jayden",
+     "ln": "Oosterwolde",
+     "pos": "LI",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 76
+    },
+    {
+     "fn": "Archie",
+     "ln": "Brown",
+     "pos": "LI",
+     "age": 24,
+     "nat": "ENG",
+     "ovr": 73
+    },
+    {
+     "fn": "Levent",
+     "ln": "Mercan",
+     "pos": "LI",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "N'Golo",
+     "ln": "Kanté",
+     "pos": "MCD",
+     "age": 35,
+     "nat": "FR",
+     "ovr": 78
+    },
+    {
+     "fn": "Sofyan",
+     "ln": "Amrabat",
+     "pos": "MCD",
+     "age": 30,
+     "nat": "MA",
+     "ovr": 77
+    },
+    {
+     "fn": "İsmail",
+     "ln": "Yüksek",
+     "pos": "MCD",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 76
+    },
+    {
+     "fn": "Mattéo",
+     "ln": "Guendouzi",
+     "pos": "MC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 81
+    },
+    {
+     "fn": "Bartuğ",
+     "ln": "Elmaz",
+     "pos": "MC",
+     "age": 23,
+     "nat": "TR",
+     "ovr": 69
+    },
+    {
+     "fn": "Marco",
+     "ln": "Asensio",
+     "pos": "MCO",
+     "age": 30,
+     "nat": "ES",
+     "ovr": 80
+    },
+    {
+     "fn": "İrfan Can",
+     "ln": "Kahveci",
+     "pos": "MCO",
+     "age": 31,
+     "nat": "TR",
+     "ovr": 75
+    },
+    {
+     "fn": "",
+     "ln": "Talisca",
+     "pos": "MCO",
+     "age": 32,
+     "nat": "BR",
+     "ovr": 78
+    },
+    {
+     "fn": "Mason",
+     "ln": "Greenwood",
+     "pos": "ED",
+     "age": 24,
+     "nat": "ENG",
+     "ovr": 82
+    },
+    {
+     "fn": "Cengiz",
+     "ln": "Ünder",
+     "pos": "ED",
+     "age": 29,
+     "nat": "TR",
+     "ovr": 73
+    },
+    {
+     "fn": "Dorgeles",
+     "ln": "Nene",
+     "pos": "ED",
+     "age": 23,
+     "nat": "ML",
+     "ovr": 75
+    },
+    {
+     "fn": "Kerem",
+     "ln": "Aktürkoğlu",
+     "pos": "EI",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 78
+    },
+    {
+     "fn": "Oğuz",
+     "ln": "Aydın",
+     "pos": "EI",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Romelu",
+     "ln": "Lukaku",
+     "pos": "DC",
+     "age": 33,
+     "nat": "BE",
+     "ovr": 81
+    },
+    {
+     "fn": "Vedat",
+     "ln": "Muriqi",
+     "pos": "DC",
+     "age": 32,
+     "nat": "XK",
+     "ovr": 79
+    },
+    {
+     "fn": "Amara",
+     "ln": "Diouf",
+     "pos": "DC",
+     "age": 21,
+     "nat": "SN",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "Beşiktaş",
+   "coach": "Vincenzo Italiano",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Alexander",
+     "ln": "Nübel",
+     "pos": "POR",
+     "age": 30,
+     "nat": "DE",
+     "ovr": 80
+    },
+    {
+     "fn": "Ersin",
+     "ln": "Destanoğlu",
+     "pos": "POR",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Doğan",
+     "ln": "Alemdar",
+     "pos": "POR",
+     "age": 23,
+     "nat": "TR",
+     "ovr": 66
+    },
+    {
+     "fn": "Emmanuel",
+     "ln": "Agbadou",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "CI",
+     "ovr": 77
+    },
+    {
+     "fn": "Tiago",
+     "ln": "Djaló",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "PT",
+     "ovr": 75
+    },
+    {
+     "fn": "Felix",
+     "ln": "Uduokhai",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "DE",
+     "ovr": 73
+    },
+    {
+     "fn": "Emirhan",
+     "ln": "Topçu",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Yasin",
+     "ln": "Özcan",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Kassoum",
+     "ln": "Ouattara",
+     "pos": "LD",
+     "age": 25,
+     "nat": "BF",
+     "ovr": 75
+    },
+    {
+     "fn": "Amir",
+     "ln": "Murillo",
+     "pos": "LD",
+     "age": 30,
+     "nat": "PA",
+     "ovr": 72
+    },
+    {
+     "fn": "Rıdvan",
+     "ln": "Yılmaz",
+     "pos": "LI",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 76
+    },
+    {
+     "fn": "Salih",
+     "ln": "Özcan",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 76
+    },
+    {
+     "fn": "Wilfred",
+     "ln": "Ndidi",
+     "pos": "MCD",
+     "age": 29,
+     "nat": "NG",
+     "ovr": 77
+    },
+    {
+     "fn": "Gedson",
+     "ln": "Fernandes",
+     "pos": "MC",
+     "age": 27,
+     "nat": "PT",
+     "ovr": 75
+    },
+    {
+     "fn": "Orkun",
+     "ln": "Kökçü",
+     "pos": "MC",
+     "age": 26,
+     "nat": "TR",
+     "ovr": 82
+    },
+    {
+     "fn": "Cher",
+     "ln": "Ndour",
+     "pos": "MC",
+     "age": 22,
+     "nat": "PT",
+     "ovr": 73
+    },
+    {
+     "fn": "Fabio",
+     "ln": "Miretti",
+     "pos": "MC",
+     "age": 23,
+     "nat": "IT",
+     "ovr": 74
+    },
+    {
+     "fn": "İlhan",
+     "ln": "Fakılı",
+     "pos": "MC",
+     "age": 20,
+     "nat": "TR",
+     "ovr": 60
+    },
+    {
+     "fn": "Rafa",
+     "ln": "Silva",
+     "pos": "MCO",
+     "age": 33,
+     "nat": "PT",
+     "ovr": 78
+    },
+    {
+     "fn": "Leandro",
+     "ln": "Trossard",
+     "pos": "EI",
+     "age": 31,
+     "nat": "BE",
+     "ovr": 81
+    },
+    {
+     "fn": "Ernest",
+     "ln": "Poku",
+     "pos": "ED",
+     "age": 22,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Kartal Kayra",
+     "ln": "Yılmaz",
+     "pos": "ED",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Milot",
+     "ln": "Rashica",
+     "pos": "ED",
+     "age": 30,
+     "nat": "XK",
+     "ovr": 73
+    },
+    {
+     "fn": "Dušan",
+     "ln": "Vlahović",
+     "pos": "DC",
+     "age": 26,
+     "nat": "RS",
+     "ovr": 82
+    },
+    {
+     "fn": "Semih",
+     "ln": "Kılıçsoy",
+     "pos": "DC",
+     "age": 21,
+     "nat": "TR",
+     "ovr": 73
+    },
+    {
+     "fn": "El Bilal",
+     "ln": "Touré",
+     "pos": "DC",
+     "age": 24,
+     "nat": "ML",
+     "ovr": 73
+    }
+   ]
+  },
+  {
+   "club": "Trabzonspor",
+   "coach": "Thomas Reis",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Ahmet Doğan",
+     "ln": "Yıldırım",
+     "pos": "POR",
+     "age": 23,
+     "nat": "TR",
+     "ovr": 66
+    },
+    {
+     "fn": "André",
+     "ln": "Onana",
+     "pos": "POR",
+     "age": 30,
+     "nat": "CM",
+     "ovr": 80
+    },
+    {
+     "fn": "Onuralp",
+     "ln": "Çevikkan",
+     "pos": "POR",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 64
+    },
+    {
+     "fn": "Erol Can",
+     "ln": "Çolak",
+     "pos": "POR",
+     "age": 20,
+     "nat": "TR",
+     "ovr": 58
+    },
+    {
+     "fn": "Stefan",
+     "ln": "Savić",
+     "pos": "DFC",
+     "age": 35,
+     "nat": "ME",
+     "ovr": 76
+    },
+    {
+     "fn": "Samet",
+     "ln": "Akaydin",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Cenk",
+     "ln": "Özkacar",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Chibuike",
+     "ln": "Nwaiwu",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "NG",
+     "ovr": 71
+    },
+    {
+     "fn": "Sidny Lopes",
+     "ln": "Cabral",
+     "pos": "LD",
+     "age": 24,
+     "nat": "CV",
+     "ovr": 74
+    },
+    {
+     "fn": "Mustafa",
+     "ln": "Eskihellaç",
+     "pos": "LD",
+     "age": 21,
+     "nat": "TR",
+     "ovr": 64
+    },
+    {
+     "fn": "Wagner",
+     "ln": "Pina",
+     "pos": "LI",
+     "age": 25,
+     "nat": "CV",
+     "ovr": 72
+    },
+    {
+     "fn": "Arseniy",
+     "ln": "Batahov",
+     "pos": "LI",
+     "age": 24,
+     "nat": "UA",
+     "ovr": 72
+    },
+    {
+     "fn": "",
+     "ln": "Fabinho",
+     "pos": "MCD",
+     "age": 32,
+     "nat": "BR",
+     "ovr": 78
+    },
+    {
+     "fn": "Batista",
+     "ln": "Mendy",
+     "pos": "MCD",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 74
+    },
+    {
+     "fn": "Okay",
+     "ln": "Yokuşlu",
+     "pos": "MCD",
+     "age": 32,
+     "nat": "TR",
+     "ovr": 73
+    },
+    {
+     "fn": "Benjamin",
+     "ln": "Bouchouari",
+     "pos": "MC",
+     "age": 24,
+     "nat": "MA",
+     "ovr": 74
+    },
+    {
+     "fn": "Ruslan",
+     "ln": "Malinovskyi",
+     "pos": "MC",
+     "age": 33,
+     "nat": "UA",
+     "ovr": 76
+    },
+    {
+     "fn": "Ozan",
+     "ln": "Tufan",
+     "pos": "MC",
+     "age": 31,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Tim",
+     "ln": "Jabol-Folcarelli",
+     "pos": "MC",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Melih",
+     "ln": "Kabasakal",
+     "pos": "MC",
+     "age": 20,
+     "nat": "TR",
+     "ovr": 62
+    },
+    {
+     "fn": "Metehan",
+     "ln": "Mimaroğlu",
+     "pos": "MC",
+     "age": 21,
+     "nat": "TR",
+     "ovr": 62
+    },
+    {
+     "fn": "Ali",
+     "ln": "Habeşoğlu",
+     "pos": "MC",
+     "age": 20,
+     "nat": "TR",
+     "ovr": 60
+    },
+    {
+     "fn": "Cihan",
+     "ln": "Çanak",
+     "pos": "MC",
+     "age": 19,
+     "nat": "TR",
+     "ovr": 58
+    },
+    {
+     "fn": "Mohamed",
+     "ln": "Salah",
+     "pos": "ED",
+     "age": 34,
+     "nat": "EG",
+     "ovr": 87
+    },
+    {
+     "fn": "Ernest",
+     "ln": "Muçi",
+     "pos": "ED",
+     "age": 25,
+     "nat": "AL",
+     "ovr": 73
+    },
+    {
+     "fn": "Aral",
+     "ln": "Şimşir",
+     "pos": "EI",
+     "age": 24,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Noah",
+     "ln": "Saviolo",
+     "pos": "EI",
+     "age": 21,
+     "nat": "PT",
+     "ovr": 67
+    },
+    {
+     "fn": "Paul",
+     "ln": "Onuachu",
+     "pos": "DC",
+     "age": 32,
+     "nat": "NG",
+     "ovr": 76
+    },
+    {
+     "fn": "",
+     "ln": "Franculino",
+     "pos": "DC",
+     "age": 27,
+     "nat": "GW",
+     "ovr": 74
+    },
+    {
+     "fn": "Umut",
+     "ln": "Nayir",
+     "pos": "DC",
+     "age": 33,
+     "nat": "TR",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Başakşehir",
+   "coach": "Nuri Şahin",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Muhammed",
+     "ln": "Şengezer",
+     "pos": "POR",
+     "age": 30,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Volkan",
+     "ln": "Babacan",
+     "pos": "POR",
+     "age": 38,
+     "nat": "TR",
+     "ovr": 66
+    },
+    {
+     "fn": "Leo",
+     "ln": "Duarte",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "BR",
+     "ovr": 75
+    },
+    {
+     "fn": "Ousseynou",
+     "ln": "Ba",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "SN",
+     "ovr": 74
+    },
+    {
+     "fn": "Jerome",
+     "ln": "Opoku",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "GH",
+     "ovr": 74
+    },
+    {
+     "fn": "Onur",
+     "ln": "Bulut",
+     "pos": "LD",
+     "age": 31,
+     "nat": "TR",
+     "ovr": 71
+    },
+    {
+     "fn": "Festy",
+     "ln": "Ebosele",
+     "pos": "LD",
+     "age": 24,
+     "nat": "IE",
+     "ovr": 72
+    },
+    {
+     "fn": "Christopher",
+     "ln": "Operi",
+     "pos": "LI",
+     "age": 29,
+     "nat": "CI",
+     "ovr": 70
+    },
+    {
+     "fn": "Olivier",
+     "ln": "Kemen",
+     "pos": "MCD",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 74
+    },
+    {
+     "fn": "Miguel",
+     "ln": "Crespo",
+     "pos": "MC",
+     "age": 29,
+     "nat": "PT",
+     "ovr": 76
+    },
+    {
+     "fn": "Berkay",
+     "ln": "Özcan",
+     "pos": "MC",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 73
+    },
+    {
+     "fn": "Ömer Ali",
+     "ln": "Şahiner",
+     "pos": "MC",
+     "age": 32,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Amine",
+     "ln": "Harit",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "MA",
+     "ovr": 77
+    },
+    {
+     "fn": "Yusuf",
+     "ln": "Sarı",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Philippe",
+     "ln": "Keny",
+     "pos": "ED",
+     "age": 22,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Ahmed",
+     "ln": "Ildız",
+     "pos": "EI",
+     "age": 30,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Eldor",
+     "ln": "Shomurodov",
+     "pos": "DC",
+     "age": 31,
+     "nat": "UZ",
+     "ovr": 76
+    },
+    {
+     "fn": "Davie",
+     "ln": "Selke",
+     "pos": "DC",
+     "age": 31,
+     "nat": "DE",
+     "ovr": 75
+    },
+    {
+     "fn": "Nuno",
+     "ln": "da Costa",
+     "pos": "DC",
+     "age": 35,
+     "nat": "CV",
+     "ovr": 70
+    },
+    {
+     "fn": "Mounir",
+     "ln": "Chouiar",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "MA",
+     "ovr": 73
+    },
+    {
+     "fn": "Deniz",
+     "ln": "Türüç",
+     "pos": "MCO",
+     "age": 34,
+     "nat": "TR",
+     "ovr": 71
+    },
+    {
+     "fn": "Cenk",
+     "ln": "Tosun",
+     "pos": "DC",
+     "age": 35,
+     "nat": "TR",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Samsunspor",
+   "coach": "Thorsten Fink",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Okan",
+     "ln": "Kocuk",
+     "pos": "POR",
+     "age": 31,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Mehmet",
+     "ln": "Gürkan",
+     "pos": "POR",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 64
+    },
+    {
+     "fn": "Rick",
+     "ln": "van Drongelen",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Yunus Emre",
+     "ln": "Çift",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Celil",
+     "ln": "Yüksel",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Zeki",
+     "ln": "Yavru",
+     "pos": "LD",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 69
+    },
+    {
+     "fn": "Logi",
+     "ln": "Tómasson",
+     "pos": "LI",
+     "age": 25,
+     "nat": "IS",
+     "ovr": 72
+    },
+    {
+     "fn": "Antoine",
+     "ln": "Makoumbou",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "CG",
+     "ovr": 74
+    },
+    {
+     "fn": "Olivier",
+     "ln": "Ntcham",
+     "pos": "MC",
+     "age": 30,
+     "nat": "FR",
+     "ovr": 73
+    },
+    {
+     "fn": "Soner",
+     "ln": "Aydoğdu",
+     "pos": "MC",
+     "age": 34,
+     "nat": "TR",
+     "ovr": 69
+    },
+    {
+     "fn": "Afonso",
+     "ln": "Sousa",
+     "pos": "MC",
+     "age": 25,
+     "nat": "PT",
+     "ovr": 74
+    },
+    {
+     "fn": "Carlo",
+     "ln": "Holse",
+     "pos": "ED",
+     "age": 27,
+     "nat": "DK",
+     "ovr": 75
+    },
+    {
+     "fn": "Anthony",
+     "ln": "Musaba",
+     "pos": "ED",
+     "age": 25,
+     "nat": "NL",
+     "ovr": 74
+    },
+    {
+     "fn": "Tobias",
+     "ln": "Heintz",
+     "pos": "EI",
+     "age": 29,
+     "nat": "DK",
+     "ovr": 70
+    },
+    {
+     "fn": "Marius",
+     "ln": "Mouandilmadji",
+     "pos": "DC",
+     "age": 30,
+     "nat": "TD",
+     "ovr": 70
+    },
+    {
+     "fn": "Cherif",
+     "ln": "Ndiaye",
+     "pos": "DC",
+     "age": 29,
+     "nat": "SN",
+     "ovr": 74
+    },
+    {
+     "fn": "Emre",
+     "ln": "Kılınç",
+     "pos": "DC",
+     "age": 26,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Bedirhan",
+     "ln": "Çetin",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "TR",
+     "ovr": 67
+    }
+   ]
+  },
+  {
+   "club": "Göztepe",
+   "coach": "Stanimir Stoilov",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Mateusz",
+     "ln": "Lis",
+     "pos": "POR",
+     "age": 29,
+     "nat": "PL",
+     "ovr": 74
+    },
+    {
+     "fn": "",
+     "ln": "Heliton",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "BR",
+     "ovr": 73
+    },
+    {
+     "fn": "Malcom",
+     "ln": "Bokele",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Amin",
+     "ln": "Cherni",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "TN",
+     "ovr": 70
+    },
+    {
+     "fn": "Furkan",
+     "ln": "Bayır",
+     "pos": "LD",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Ismail",
+     "ln": "Köybaşı",
+     "pos": "LI",
+     "age": 37,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "",
+     "ln": "Rômulo",
+     "pos": "MC",
+     "age": 31,
+     "nat": "BR",
+     "ovr": 74
+    },
+    {
+     "fn": "Arda Okan",
+     "ln": "Kurtulan",
+     "pos": "MC",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Ali",
+     "ln": "Kızılkaya",
+     "pos": "MC",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 66
+    },
+    {
+     "fn": "",
+     "ln": "Janderson",
+     "pos": "ED",
+     "age": 27,
+     "nat": "BR",
+     "ovr": 75
+    },
+    {
+     "fn": "Alexis",
+     "ln": "Antunes",
+     "pos": "LI",
+     "age": 28,
+     "nat": "PT",
+     "ovr": 70
+    },
+    {
+     "fn": "Ogün",
+     "ln": "Bayrak",
+     "pos": "DC",
+     "age": 24,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Efkan",
+     "ln": "Bekiroğlu",
+     "pos": "MC",
+     "age": 34,
+     "nat": "TR",
+     "ovr": 66
+    },
+    {
+     "fn": "Anthony",
+     "ln": "Dennis",
+     "pos": "EI",
+     "age": 26,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Tubay",
+     "ln": "Uzun",
+     "pos": "DC",
+     "age": 23,
+     "nat": "TR",
+     "ovr": 64
+    }
+   ]
+  },
+  {
+   "club": "Kasımpaşa",
+   "coach": "Emre Belözoğlu",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Andreas",
+     "ln": "Gianniotis",
+     "pos": "POR",
+     "age": 34,
+     "nat": "GR",
+     "ovr": 72
+    },
+    {
+     "fn": "Haris",
+     "ln": "Hajradinović",
+     "pos": "MC",
+     "age": 33,
+     "nat": "BA",
+     "ovr": 74
+    },
+    {
+     "fn": "Tayfur",
+     "ln": "Bingöl",
+     "pos": "MCO",
+     "age": 31,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Kenneth",
+     "ln": "Zohore",
+     "pos": "DC",
+     "age": 32,
+     "nat": "DK",
+     "ovr": 72
+    },
+    {
+     "fn": "Aytaç",
+     "ln": "Kara",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Yusuf Ebrar",
+     "ln": "Yıldırım",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "TR",
+     "ovr": 64
+    },
+    {
+     "fn": "Ben",
+     "ln": "Aaronson",
+     "pos": "MC",
+     "age": 25,
+     "nat": "ENG",
+     "ovr": 66
+    },
+    {
+     "fn": "Cláudio",
+     "ln": "Winck",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "BR",
+     "ovr": 71
+    },
+    {
+     "fn": "Mamadou",
+     "ln": "Fall",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "SN",
+     "ovr": 68
+    },
+    {
+     "fn": "Pierre",
+     "ln": "Gabriel",
+     "pos": "MC",
+     "age": 27,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Yasin",
+     "ln": "Öztekin",
+     "pos": "ED",
+     "age": 38,
+     "nat": "TR",
+     "ovr": 66
+    }
+   ]
+  },
+  {
+   "club": "Alanyaspor",
+   "coach": "João Pereira",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Ertuğrul",
+     "ln": "Taşkıran",
+     "pos": "POR",
+     "age": 30,
+     "nat": "TR",
+     "ovr": 71
+    },
+    {
+     "fn": "Fidan",
+     "ln": "Aliti",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "XK",
+     "ovr": 74
+    },
+    {
+     "fn": "Florent",
+     "ln": "Hadergjonaj",
+     "pos": "LD",
+     "age": 31,
+     "nat": "XK",
+     "ovr": 73
+    },
+    {
+     "fn": "Steve",
+     "ln": "Mounié",
+     "pos": "DC",
+     "age": 31,
+     "nat": "BJ",
+     "ovr": 73
+    },
+    {
+     "fn": "Hwang",
+     "ln": "Ui-jo",
+     "pos": "DC",
+     "age": 34,
+     "nat": "KR",
+     "ovr": 74
+    },
+    {
+     "fn": "Emre",
+     "ln": "Demir",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Júnior",
+     "ln": "Fernandes",
+     "pos": "ED",
+     "age": 30,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Efecan",
+     "ln": "Karaca",
+     "pos": "ED",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Güven",
+     "ln": "Yalçın",
+     "pos": "MC",
+     "age": 24,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Ruan",
+     "ln": "Carneiro",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "BR",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Çaykur Rizespor",
+   "coach": "Recep Uçar",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Umut",
+     "ln": "Erdem",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Sebastian",
+     "ln": "Holmén",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "SE",
+     "ovr": 68
+    },
+    {
+     "fn": "Taylan",
+     "ln": "Antalyalı",
+     "pos": "MCD",
+     "age": 31,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Mithat",
+     "ln": "Pala",
+     "pos": "LD",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Ümit",
+     "ln": "Akdağ",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 66
+    },
+    {
+     "fn": "Bruno",
+     "ln": "Mezenga",
+     "pos": "DC",
+     "age": 28,
+     "nat": "BR",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "Konyaspor",
+   "coach": "İlhan Palut",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Deniz",
+     "ln": "Ertaş",
+     "pos": "POR",
+     "age": 30,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Josip",
+     "ln": "Ćalušić",
+     "pos": "MCO",
+     "age": 31,
+     "nat": "HR",
+     "ovr": 72
+    },
+    {
+     "fn": "Blaž",
+     "ln": "Kramer",
+     "pos": "DC",
+     "age": 31,
+     "nat": "SI",
+     "ovr": 70
+    },
+    {
+     "fn": "Adil",
+     "ln": "Demirbağ",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "TR",
+     "ovr": 67
+    },
+    {
+     "fn": "Marko",
+     "ln": "Jevtović",
+     "pos": "MC",
+     "age": 33,
+     "nat": "RS",
+     "ovr": 72
+    },
+    {
+     "fn": "",
+     "ln": "Pedrinho",
+     "pos": "MC",
+     "age": 25,
+     "nat": "BR",
+     "ovr": 70
+    },
+    {
+     "fn": "Ahmet",
+     "ln": "Yıldırım",
+     "pos": "LI",
+     "age": 26,
+     "nat": "TR",
+     "ovr": 66
+    }
+   ]
+  },
+  {
+   "club": "Gaziantep FK",
+   "coach": "Mirel Rădoi",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Zafer",
+     "ln": "Görgen",
+     "pos": "POR",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 68
+    },
+    {
+     "fn": "Kacper",
+     "ln": "Kozłowski",
+     "pos": "MCO",
+     "age": 22,
+     "nat": "PL",
+     "ovr": 72
+    },
+    {
+     "fn": "Mohamed",
+     "ln": "Bayo",
+     "pos": "DC",
+     "age": 28,
+     "nat": "GN",
+     "ovr": 72
+    },
+    {
+     "fn": "",
+     "ln": "Maestro",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "BR",
+     "ovr": 68
+    },
+    {
+     "fn": "Alassane",
+     "ln": "Ndao",
+     "pos": "ED",
+     "age": 30,
+     "nat": "SN",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Eyüpspor",
+   "coach": "Özhan Pulat",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Marcelo",
+     "ln": "Saracchi",
+     "pos": "LI",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 72
+    },
+    {
+     "fn": "Mehmet",
+     "ln": "Kabasakal",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "TR",
+     "ovr": 66
+    },
+    {
+     "fn": "Umut",
+     "ln": "Bozok",
+     "pos": "DC",
+     "age": 30,
+     "nat": "TR",
+     "ovr": 72
+    },
+    {
+     "fn": "Emre",
+     "ln": "Akbaba",
+     "pos": "MCO",
+     "age": 34,
+     "nat": "TR",
+     "ovr": 70
+    },
+    {
+     "fn": "Robin",
+     "ln": "Sirbu",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "RO",
+     "ovr": 66
+    },
+    {
+     "fn": "Jakub",
+     "ln": "Slowik",
+     "pos": "POR",
+     "age": 28,
+     "nat": "PL",
+     "ovr": 68
+    }
+   ]
+  },
+  {
+   "club": "Kocaelispor",
+   "coach": "Selçuk İnan",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Gençlerbirliği",
+   "coach": "Metin Diyadin",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "İrfan Can",
+     "ln": "Eğribayat",
+     "pos": "POR",
+     "age": 27,
+     "nat": "TR",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Erzurumspor",
+   "coach": "Serkan Özbalta",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Amedspor",
+   "coach": "Besnik Hasi",
+   "src": "memory",
+   "players": []
+  },
+  {
+   "club": "Çorum FK",
+   "coach": "Uğur Uçar",
+   "src": "memory",
+   "players": []
+  }
+ ]
+}

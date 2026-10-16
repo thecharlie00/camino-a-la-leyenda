@@ -1,0 +1,87 @@
+{
+ "id": "premier",
+ "league": "Premier League",
+ "country": "ENG",
+ "clubs": [
+  {
+   "club": "Arsenal",
+   "gameRating": 86
+  },
+  {
+   "club": "Manchester City",
+   "gameRating": 85
+  },
+  {
+   "club": "Liverpool",
+   "gameRating": 84.2
+  },
+  {
+   "club": "Chelsea",
+   "gameRating": 83.5
+  },
+  {
+   "club": "Newcastle United",
+   "gameRating": 82.8
+  },
+  {
+   "club": "Manchester United",
+   "gameRating": 82.1
+  },
+  {
+   "club": "Tottenham Hotspur",
+   "gameRating": 81.5
+  },
+  {
+   "club": "Aston Villa",
+   "gameRating": 80.9
+  },
+  {
+   "club": "Nottingham Forest",
+   "gameRating": 80.2
+  },
+  {
+   "club": "Brighton & Hove Albion",
+   "gameRating": 79.6
+  },
+  {
+   "club": "Crystal Palace",
+   "gameRating": 79
+  },
+  {
+   "club": "Bournemouth",
+   "gameRating": 78.5
+  },
+  {
+   "club": "Brentford",
+   "gameRating": 77.9
+  },
+  {
+   "club": "Fulham",
+   "gameRating": 77.3
+  },
+  {
+   "club": "Everton",
+   "gameRating": 76.7
+  },
+  {
+   "club": "Sunderland",
+   "gameRating": 76.2
+  },
+  {
+   "club": "Leeds United",
+   "gameRating": 75.6
+  },
+  {
+   "club": "Ipswich Town",
+   "gameRating": 75.1
+  },
+  {
+   "club": "Coventry City",
+   "gameRating": 74.5
+  },
+  {
+   "club": "Hull City",
+   "gameRating": 74
+  }
+ ]
+}

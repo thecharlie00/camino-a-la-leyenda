@@ -1,0 +1,95 @@
+{
+ "id": "hypermotion",
+ "league": "LaLiga Hypermotion",
+ "country": "ES",
+ "clubs": [
+  {
+   "club": "Girona FC",
+   "gameRating": 72
+  },
+  {
+   "club": "RCD Mallorca",
+   "gameRating": 71.5
+  },
+  {
+   "club": "Real Oviedo",
+   "gameRating": 71.1
+  },
+  {
+   "club": "UD Las Palmas",
+   "gameRating": 70.7
+  },
+  {
+   "club": "Real Valladolid",
+   "gameRating": 70.3
+  },
+  {
+   "club": "CD Leganés",
+   "gameRating": 69.9
+  },
+  {
+   "club": "UD Almería",
+   "gameRating": 69.6
+  },
+  {
+   "club": "Granada CF",
+   "gameRating": 69.2
+  },
+  {
+   "club": "Real Sporting",
+   "gameRating": 68.9
+  },
+  {
+   "club": "Cádiz CF",
+   "gameRating": 68.6
+  },
+  {
+   "club": "SD Eibar",
+   "gameRating": 68.3
+  },
+  {
+   "club": "FC Andorra",
+   "gameRating": 68
+  },
+  {
+   "club": "Córdoba CF",
+   "gameRating": 67.6
+  },
+  {
+   "club": "CD Castellón",
+   "gameRating": 67.3
+  },
+  {
+   "club": "Burgos CF",
+   "gameRating": 67
+  },
+  {
+   "club": "Albacete BP",
+   "gameRating": 66.7
+  },
+  {
+   "club": "CD Tenerife",
+   "gameRating": 66.4
+  },
+  {
+   "club": "AD Ceuta",
+   "gameRating": 66.2
+  },
+  {
+   "club": "CD Eldense",
+   "gameRating": 65.9
+  },
+  {
+   "club": "CE Sabadell",
+   "gameRating": 65.6
+  },
+  {
+   "club": "Real Sociedad B",
+   "gameRating": 65.3
+  },
+  {
+   "club": "Celta Fortuna",
+   "gameRating": 65
+  }
+ ]
+}

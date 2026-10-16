@@ -1,0 +1,67 @@
+{
+ "id": "argentina2",
+ "league": "Liga Profesional",
+ "country": "AR",
+ "clubs": [
+  {
+   "club": "Tigre",
+   "gameRating": 71.3
+  },
+  {
+   "club": "Platense",
+   "gameRating": 71
+  },
+  {
+   "club": "Unión de Santa Fe",
+   "gameRating": 70.6
+  },
+  {
+   "club": "Gimnasia y Esgrima LP",
+   "gameRating": 70.3
+  },
+  {
+   "club": "Instituto",
+   "gameRating": 70
+  },
+  {
+   "club": "Independiente Rivadavia",
+   "gameRating": 69.7
+  },
+  {
+   "club": "Barracas Central",
+   "gameRating": 69.4
+  },
+  {
+   "club": "Banfield",
+   "gameRating": 69.1
+  },
+  {
+   "club": "Atlético Tucumán",
+   "gameRating": 68.8
+  },
+  {
+   "club": "Central Córdoba",
+   "gameRating": 68.5
+  },
+  {
+   "club": "Sarmiento",
+   "gameRating": 68.2
+  },
+  {
+   "club": "Deportivo Riestra",
+   "gameRating": 67.9
+  },
+  {
+   "club": "Aldosivi",
+   "gameRating": 67.6
+  },
+  {
+   "club": "Gimnasia de Mendoza",
+   "gameRating": 67.3
+  },
+  {
+   "club": "Estudiantes de Río Cuarto",
+   "gameRating": 67
+  }
+ ]
+}

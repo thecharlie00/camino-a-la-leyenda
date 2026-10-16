@@ -1,0 +1,87 @@
+{
+ "id": "laliga",
+ "league": "LaLiga EA Sports",
+ "country": "ES",
+ "clubs": [
+  {
+   "club": "Real Madrid",
+   "gameRating": 86
+  },
+  {
+   "club": "FC Barcelona",
+   "gameRating": 84.9
+  },
+  {
+   "club": "Atlético de Madrid",
+   "gameRating": 84.1
+  },
+  {
+   "club": "Athletic Club",
+   "gameRating": 83.3
+  },
+  {
+   "club": "Villarreal CF",
+   "gameRating": 82.5
+  },
+  {
+   "club": "Real Betis",
+   "gameRating": 81.8
+  },
+  {
+   "club": "Real Sociedad",
+   "gameRating": 81.1
+  },
+  {
+   "club": "Celta de Vigo",
+   "gameRating": 80.4
+  },
+  {
+   "club": "Sevilla FC",
+   "gameRating": 79.8
+  },
+  {
+   "club": "Valencia CF",
+   "gameRating": 79.1
+  },
+  {
+   "club": "CA Osasuna",
+   "gameRating": 78.5
+  },
+  {
+   "club": "Rayo Vallecano",
+   "gameRating": 77.8
+  },
+  {
+   "club": "Getafe CF",
+   "gameRating": 77.2
+  },
+  {
+   "club": "RCD Espanyol",
+   "gameRating": 76.6
+  },
+  {
+   "club": "Deportivo Alavés",
+   "gameRating": 76
+  },
+  {
+   "club": "Elche CF",
+   "gameRating": 75.4
+  },
+  {
+   "club": "Levante UD",
+   "gameRating": 74.8
+  },
+  {
+   "club": "Real Racing Club",
+   "gameRating": 74.2
+  },
+  {
+   "club": "RC Deportivo",
+   "gameRating": 73.6
+  },
+  {
+   "club": "Málaga CF",
+   "gameRating": 73
+  }
+ ]
+}

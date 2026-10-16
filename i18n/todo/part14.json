@@ -1,0 +1,204 @@
+{
+ "vuestro portero": {
+  "ctx": "function liveMyGK(L) { for (var i = 0; i < L.xi.length; i++) { var p = mPl(L.xi[i]); if (p && p.pos === \"POR\") return plShort(p); } return tr(\"vuestro portero\"); }",
+  "where": "engine-extra.js:442"
+ },
+ "{a} conduce por la banda y busca el desmarque.": {
+  "ctx": "buildUs: [N_(\"{a} conduce por la banda y busca el desmarque.\"), N_(\"Combinación rápida entre {a} y {b} en tres cuartos.\"), N_(\"{a} filtra un pase entre líneas…\"), N_(\"Llegáis por la derecha: {a} pone el balón al área.\"),",
+  "where": "engine-extra.js:449"
+ },
+ "Combinación rápida entre {a} y {b} en tres cuartos.": {
+  "ctx": "buildUs: [N_(\"{a} conduce por la banda y busca el desmarque.\"), N_(\"Combinación rápida entre {a} y {b} en tres cuartos.\"), N_(\"{a} filtra un pase entre líneas…\"), N_(\"Llegáis por la derecha: {a} pone el balón al área.\"),",
+  "where": "engine-extra.js:449"
+ },
+ "{a} filtra un pase entre líneas…": {
+  "ctx": "buildUs: [N_(\"{a} conduce por la banda y busca el desmarque.\"), N_(\"Combinación rápida entre {a} y {b} en tres cuartos.\"), N_(\"{a} filtra un pase entre líneas…\"), N_(\"Llegáis por la derecha: {a} pone el balón al área.\"),",
+  "where": "engine-extra.js:449"
+ },
+ "Llegáis por la derecha: {a} pone el balón al área.": {
+  "ctx": "buildUs: [N_(\"{a} conduce por la banda y busca el desmarque.\"), N_(\"Combinación rápida entre {a} y {b} en tres cuartos.\"), N_(\"{a} filtra un pase entre líneas…\"), N_(\"Llegáis por la derecha: {a} pone el balón al área.\"),",
+  "where": "engine-extra.js:449"
+ },
+ "Presión alta del {club}: {a} roba en campo rival.": {
+  "ctx": "buildUs: [N_(\"{a} conduce por la banda y busca el desmarque.\"), N_(\"Combinación rápida entre {a} y {b} en tres cuartos.\"), N_(\"{a} filtra un pase entre líneas…\"), N_(\"Llegáis por la derecha: {a} pone el balón al área.\"),",
+  "where": "engine-extra.js:449"
+ },
+ "El {opp} mueve el balón con paciencia.": {
+  "ctx": "buildThem: [N_(\"El {opp} mueve el balón con paciencia.\"), N_(\"{x} se escapa por su banda…\"), N_(\"Presión del {opp}: os cuesta salir jugando.\"), N_(\"{x} recibe de espaldas y gira. Peligro.\"), N_(\"Contra del {opp} conducid",
+  "where": "engine-extra.js:450"
+ },
+ "{x} se escapa por su banda…": {
+  "ctx": "buildThem: [N_(\"El {opp} mueve el balón con paciencia.\"), N_(\"{x} se escapa por su banda…\"), N_(\"Presión del {opp}: os cuesta salir jugando.\"), N_(\"{x} recibe de espaldas y gira. Peligro.\"), N_(\"Contra del {opp} conducid",
+  "where": "engine-extra.js:450"
+ },
+ "Presión del {opp}: os cuesta salir jugando.": {
+  "ctx": "buildThem: [N_(\"El {opp} mueve el balón con paciencia.\"), N_(\"{x} se escapa por su banda…\"), N_(\"Presión del {opp}: os cuesta salir jugando.\"), N_(\"{x} recibe de espaldas y gira. Peligro.\"), N_(\"Contra del {opp} conducid",
+  "where": "engine-extra.js:450"
+ },
+ "{x} recibe de espaldas y gira. Peligro.": {
+  "ctx": "buildThem: [N_(\"El {opp} mueve el balón con paciencia.\"), N_(\"{x} se escapa por su banda…\"), N_(\"Presión del {opp}: os cuesta salir jugando.\"), N_(\"{x} recibe de espaldas y gira. Peligro.\"), N_(\"Contra del {opp} conducid",
+  "where": "engine-extra.js:450"
+ },
+ "Contra del {opp} conducida por {x}.": {
+  "ctx": "buildThem: [N_(\"El {opp} mueve el balón con paciencia.\"), N_(\"{x} se escapa por su banda…\"), N_(\"Presión del {opp}: os cuesta salir jugando.\"), N_(\"{x} recibe de espaldas y gira. Peligro.\"), N_(\"Contra del {opp} conducid",
+  "where": "engine-extra.js:450"
+ },
+ "Fase de tanteo en el centro del campo.": {
+  "ctx": "idle: [N_(\"Fase de tanteo en el centro del campo.\"), N_(\"{a} pide calma y baja el balón al césped.\"), N_(\"La grada aprieta: ¡vamos, {club}!\"), N_(\"Balón dividido en el medio; falta de {x}.\"), N_(\"Saque de esquina para el",
+  "where": "engine-extra.js:451"
+ },
+ "{a} pide calma y baja el balón al césped.": {
+  "ctx": "idle: [N_(\"Fase de tanteo en el centro del campo.\"), N_(\"{a} pide calma y baja el balón al césped.\"), N_(\"La grada aprieta: ¡vamos, {club}!\"), N_(\"Balón dividido en el medio; falta de {x}.\"), N_(\"Saque de esquina para el",
+  "where": "engine-extra.js:451"
+ },
+ "La grada aprieta: ¡vamos, {club}!": {
+  "ctx": "idle: [N_(\"Fase de tanteo en el centro del campo.\"), N_(\"{a} pide calma y baja el balón al césped.\"), N_(\"La grada aprieta: ¡vamos, {club}!\"), N_(\"Balón dividido en el medio; falta de {x}.\"), N_(\"Saque de esquina para el",
+  "where": "engine-extra.js:451"
+ },
+ "Balón dividido en el medio; falta de {x}.": {
+  "ctx": "idle: [N_(\"Fase de tanteo en el centro del campo.\"), N_(\"{a} pide calma y baja el balón al césped.\"), N_(\"La grada aprieta: ¡vamos, {club}!\"), N_(\"Balón dividido en el medio; falta de {x}.\"), N_(\"Saque de esquina para el",
+  "where": "engine-extra.js:451"
+ },
+ "Saque de esquina para el {club}… despeja la defensa.": {
+  "ctx": "idle: [N_(\"Fase de tanteo en el centro del campo.\"), N_(\"{a} pide calma y baja el balón al césped.\"), N_(\"La grada aprieta: ¡vamos, {club}!\"), N_(\"Balón dividido en el medio; falta de {x}.\"), N_(\"Saque de esquina para el",
+  "where": "engine-extra.js:451"
+ },
+ "El {opp} junta líneas y espera.": {
+  "ctx": "idle: [N_(\"Fase de tanteo en el centro del campo.\"), N_(\"{a} pide calma y baja el balón al césped.\"), N_(\"La grada aprieta: ¡vamos, {club}!\"), N_(\"Balón dividido en el medio; falta de {x}.\"), N_(\"Saque de esquina para el",
+  "where": "engine-extra.js:451"
+ },
+ "{a} protesta una falta que no ve el árbitro.": {
+  "ctx": "idle: [N_(\"Fase de tanteo en el centro del campo.\"), N_(\"{a} pide calma y baja el balón al césped.\"), N_(\"La grada aprieta: ¡vamos, {club}!\"), N_(\"Balón dividido en el medio; falta de {x}.\"), N_(\"Saque de esquina para el",
+  "where": "engine-extra.js:451"
+ },
+ "Partido trabado, con muchas interrupciones.": {
+  "ctx": "idle: [N_(\"Fase de tanteo en el centro del campo.\"), N_(\"{a} pide calma y baja el balón al césped.\"), N_(\"La grada aprieta: ¡vamos, {club}!\"), N_(\"Balón dividido en el medio; falta de {x}.\"), N_(\"Saque de esquina para el",
+  "where": "engine-extra.js:451"
+ },
+ "¡GOOOL! {s} la mete tras un pase de {a}. ¡{g1}-{g2}!": {
+  "ctx": "goalUs: [N_(\"¡GOOOL! {s} la mete tras un pase de {a}. ¡{g1}-{g2}!\"), N_(\"¡GOLAZO de {s}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.\"), N_(\"¡Gol! {s} remata de cabeza un centro de {a}. {g1}-{g2}",
+  "where": "engine-extra.js:452"
+ },
+ "¡GOLAZO de {s}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.": {
+  "ctx": "goalUs: [N_(\"¡GOOOL! {s} la mete tras un pase de {a}. ¡{g1}-{g2}!\"), N_(\"¡GOLAZO de {s}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.\"), N_(\"¡Gol! {s} remata de cabeza un centro de {a}. {g1}-{g2}",
+  "where": "engine-extra.js:452"
+ },
+ "¡Gol! {s} remata de cabeza un centro de {a}. {g1}-{g2}.": {
+  "ctx": "goalUs: [N_(\"¡GOOOL! {s} la mete tras un pase de {a}. ¡{g1}-{g2}!\"), N_(\"¡GOLAZO de {s}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.\"), N_(\"¡Gol! {s} remata de cabeza un centro de {a}. {g1}-{g2}",
+  "where": "engine-extra.js:452"
+ },
+ "¡GOL del {club}! {s} define con frialdad ante el portero. {g1}-{g2}.": {
+  "ctx": "goalUs: [N_(\"¡GOOOL! {s} la mete tras un pase de {a}. ¡{g1}-{g2}!\"), N_(\"¡GOLAZO de {s}! Disparo desde fuera del área que se cuela por la escuadra. {g1}-{g2}.\"), N_(\"¡Gol! {s} remata de cabeza un centro de {a}. {g1}-{g2}",
+  "where": "engine-extra.js:452"
+ },
+ "¡GOOOL! {s} se va de dos y la cruza. ¡{g1}-{g2}!": {
+  "ctx": "goalUsSolo: [N_(\"¡GOOOL! {s} se va de dos y la cruza. ¡{g1}-{g2}!\"), N_(\"¡Gol de {s}! Aprovecha un rechace dentro del área. {g1}-{g2}.\")],",
+  "where": "engine-extra.js:453"
+ },
+ "¡Gol de {s}! Aprovecha un rechace dentro del área. {g1}-{g2}.": {
+  "ctx": "goalUsSolo: [N_(\"¡GOOOL! {s} se va de dos y la cruza. ¡{g1}-{g2}!\"), N_(\"¡Gol de {s}! Aprovecha un rechace dentro del área. {g1}-{g2}.\")],",
+  "where": "engine-extra.js:453"
+ },
+ "Gol del {opp}. {x} no perdona. {g1}-{g2}.": {
+  "ctx": "goalThem: [N_(\"Gol del {opp}. {x} no perdona. {g1}-{g2}.\"), N_(\"{x} bate a {k} por bajo. {g1}-{g2}.\"), N_(\"Jarro de agua fría: cabezazo de {x} y gol del {opp}. {g1}-{g2}.\")],",
+  "where": "engine-extra.js:454"
+ },
+ "{x} bate a {k} por bajo. {g1}-{g2}.": {
+  "ctx": "goalThem: [N_(\"Gol del {opp}. {x} no perdona. {g1}-{g2}.\"), N_(\"{x} bate a {k} por bajo. {g1}-{g2}.\"), N_(\"Jarro de agua fría: cabezazo de {x} y gol del {opp}. {g1}-{g2}.\")],",
+  "where": "engine-extra.js:454"
+ },
+ "Jarro de agua fría: cabezazo de {x} y gol del {opp}. {g1}-{g2}.": {
+  "ctx": "goalThem: [N_(\"Gol del {opp}. {x} no perdona. {g1}-{g2}.\"), N_(\"{x} bate a {k} por bajo. {g1}-{g2}.\"), N_(\"Jarro de agua fría: cabezazo de {x} y gol del {opp}. {g1}-{g2}.\")],",
+  "where": "engine-extra.js:454"
+ },
+ "¡Paradón del portero del {opp} a tiro de {s}!": {
+  "ctx": "saveUs: [N_(\"¡Paradón del portero del {opp} a tiro de {s}!\"), N_(\"{s} prueba desde lejos: atrapa el portero.\"), N_(\"Remate de {s} al centro, sin problemas para el portero.\")],",
+  "where": "engine-extra.js:455"
+ },
+ "{s} prueba desde lejos: atrapa el portero.": {
+  "ctx": "saveUs: [N_(\"¡Paradón del portero del {opp} a tiro de {s}!\"), N_(\"{s} prueba desde lejos: atrapa el portero.\"), N_(\"Remate de {s} al centro, sin problemas para el portero.\")],",
+  "where": "engine-extra.js:455"
+ },
+ "Remate de {s} al centro, sin problemas para el portero.": {
+  "ctx": "saveUs: [N_(\"¡Paradón del portero del {opp} a tiro de {s}!\"), N_(\"{s} prueba desde lejos: atrapa el portero.\"), N_(\"Remate de {s} al centro, sin problemas para el portero.\")],",
+  "where": "engine-extra.js:455"
+ },
+ "¡Paradón de {k}! Evita el gol de {x}.": {
+  "ctx": "saveThem: [N_(\"¡Paradón de {k}! Evita el gol de {x}.\"), N_(\"{x} chuta, pero {k} está atento.\"), N_(\"{k} se estira y saca el disparo de {x} a córner.\")],",
+  "where": "engine-extra.js:456"
+ },
+ "{x} chuta, pero {k} está atento.": {
+  "ctx": "saveThem: [N_(\"¡Paradón de {k}! Evita el gol de {x}.\"), N_(\"{x} chuta, pero {k} está atento.\"), N_(\"{k} se estira y saca el disparo de {x} a córner.\")],",
+  "where": "engine-extra.js:456"
+ },
+ "{k} se estira y saca el disparo de {x} a córner.": {
+  "ctx": "saveThem: [N_(\"¡Paradón de {k}! Evita el gol de {x}.\"), N_(\"{x} chuta, pero {k} está atento.\"), N_(\"{k} se estira y saca el disparo de {x} a córner.\")],",
+  "where": "engine-extra.js:456"
+ },
+ "¡Uy! {s} la manda rozando el palo.": {
+  "ctx": "missUs: [N_(\"¡Uy! {s} la manda rozando el palo.\"), N_(\"{s} se queda solo… ¡y la tira fuera!\"), N_(\"Volea de {s} que se marcha por encima del larguero.\")],",
+  "where": "engine-extra.js:457"
+ },
+ "{s} se queda solo… ¡y la tira fuera!": {
+  "ctx": "missUs: [N_(\"¡Uy! {s} la manda rozando el palo.\"), N_(\"{s} se queda solo… ¡y la tira fuera!\"), N_(\"Volea de {s} que se marcha por encima del larguero.\")],",
+  "where": "engine-extra.js:457"
+ },
+ "Volea de {s} que se marcha por encima del larguero.": {
+  "ctx": "missUs: [N_(\"¡Uy! {s} la manda rozando el palo.\"), N_(\"{s} se queda solo… ¡y la tira fuera!\"), N_(\"Volea de {s} que se marcha por encima del larguero.\")],",
+  "where": "engine-extra.js:457"
+ },
+ "{x} perdona: tiro desviado.": {
+  "ctx": "missThem: [N_(\"{x} perdona: tiro desviado.\"), N_(\"El {opp} avisa: remate de {x} por encima.\"), N_(\"Disparo lejano de {x}, muy desviado.\")],",
+  "where": "engine-extra.js:458"
+ },
+ "El {opp} avisa: remate de {x} por encima.": {
+  "ctx": "missThem: [N_(\"{x} perdona: tiro desviado.\"), N_(\"El {opp} avisa: remate de {x} por encima.\"), N_(\"Disparo lejano de {x}, muy desviado.\")],",
+  "where": "engine-extra.js:458"
+ },
+ "Disparo lejano de {x}, muy desviado.": {
+  "ctx": "missThem: [N_(\"{x} perdona: tiro desviado.\"), N_(\"El {opp} avisa: remate de {x} por encima.\"), N_(\"Disparo lejano de {x}, muy desviado.\")],",
+  "where": "engine-extra.js:458"
+ },
+ "¡AL PALO! {s} estuvo a centímetros del gol.": {
+  "ctx": "postUs: [N_(\"¡AL PALO! {s} estuvo a centímetros del gol.\")],",
+  "where": "engine-extra.js:459"
+ },
+ "¡Palo del {opp}! {x} casi marca.": {
+  "ctx": "postThem: [N_(\"¡Palo del {opp}! {x} casi marca.\")]",
+  "where": "engine-extra.js:460"
+ },
+ "¡Ocasión clarísima!": {
+  "ctx": "out.push({t: \"goal\", us: 1, txt: (big ? tr(\"¡Ocasión clarísima!\") + \" \" : \"\") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});",
+  "where": "engine-extra.js:509 engine-extra.js:511"
+ },
+ "¡Arranca el partido! {us} contra {opp}.": {
+  "ctx": "if (L.min === 1) out.push({t: \"com\", txt: tr(\"¡Arranca el partido! {us} contra {opp}.\", {us: club, opp: opp})});",
+  "where": "engine-extra.js:547"
+ },
+ "El cuarto árbitro indica {n} minuto de descuento.": {
+  "ctx": "else if (L.min === 90) out.push({t: \"com\", txt: trn(L.add, \"El cuarto árbitro indica {n} minuto de descuento.\", \"El cuarto árbitro indica {n} minutos de descuento.\")});",
+  "where": "engine-extra.js:550",
+  "note": "plural:singular"
+ },
+ "El cuarto árbitro indica {n} minutos de descuento.": {
+  "ctx": "else if (L.min === 90) out.push({t: \"com\", txt: trn(L.add, \"El cuarto árbitro indica {n} minuto de descuento.\", \"El cuarto árbitro indica {n} minutos de descuento.\")});",
+  "where": "engine-extra.js:550",
+  "note": "plural:plural"
+ },
+ "Tiros": {
+  "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";",
+  "where": "ui.js:1801"
+ },
+ "A puerta": {
+  "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";",
+  "where": "ui.js:1801"
+ },
+ "Ocasiones claras": {
+  "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";",
+  "where": "ui.js:1801"
+ },
+ "Comentarios": {
+  "ctx": "s += '<div class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Comentarios\") + '</div><div class=\"lfeed\">' + L.ev.slice(0, 18).map(function (e) { return '<div class=\"lev ' + e.t + (e.us === 1 ? \" us\" : e.us === 0 ? \" them\" : \"\")",
+  "where": "ui.js:1803"
+ }
+}

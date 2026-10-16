@@ -1,0 +1,2929 @@
+{
+ "id": "mls1",
+ "league": "MLS",
+ "season": "2026/27",
+ "asOf": "2026-10",
+ "clubs": [
+  {
+   "club": "Inter Miami",
+   "coach": "Guillermo Hoyos",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Lionel",
+     "ln": "Messi",
+     "pos": "ED",
+     "age": 39,
+     "nat": "AR",
+     "ovr": 86
+    },
+    {
+     "fn": "Luis",
+     "ln": "Suárez",
+     "pos": "DC",
+     "age": 39,
+     "nat": "UY",
+     "ovr": 78
+    },
+    {
+     "fn": "Rodrigo",
+     "ln": "De Paul",
+     "pos": "MC",
+     "age": 32,
+     "nat": "AR",
+     "ovr": 80
+    },
+    {
+     "fn": "",
+     "ln": "Casemiro",
+     "pos": "MCD",
+     "age": 34,
+     "nat": "BR",
+     "ovr": 79
+    },
+    {
+     "fn": "Sergio",
+     "ln": "Reguilón",
+     "pos": "LI",
+     "age": 29,
+     "nat": "ES",
+     "ovr": 77
+    },
+    {
+     "fn": "Facundo",
+     "ln": "Mura",
+     "pos": "LD",
+     "age": 26,
+     "nat": "AR",
+     "ovr": 75
+    },
+    {
+     "fn": "Telasco",
+     "ln": "Segovia",
+     "pos": "MCO",
+     "age": 24,
+     "nat": "VE",
+     "ovr": 76
+    },
+    {
+     "fn": "Dayne",
+     "ln": "St. Clair",
+     "pos": "POR",
+     "age": 29,
+     "nat": "CA",
+     "ovr": 76
+    },
+    {
+     "fn": "Germán",
+     "ln": "Berterame",
+     "pos": "DC",
+     "age": 28,
+     "nat": "MX",
+     "ovr": 77
+    },
+    {
+     "fn": "Tadeo",
+     "ln": "Allende",
+     "pos": "ED",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 74
+    },
+    {
+     "fn": "Maximiliano",
+     "ln": "Falcón",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "UY",
+     "ovr": 74
+    },
+    {
+     "fn": "Gonzalo",
+     "ln": "Luján",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "AR",
+     "ovr": 72
+    },
+    {
+     "fn": "David",
+     "ln": "Ayala",
+     "pos": "MC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 72
+    },
+    {
+     "fn": "",
+     "ln": "Micael",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "BR",
+     "ovr": 71
+    },
+    {
+     "fn": "Mateo",
+     "ln": "Silvetti",
+     "pos": "DC",
+     "age": 24,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Ian",
+     "ln": "Fray",
+     "pos": "LI",
+     "age": 24,
+     "nat": "JM",
+     "ovr": 70
+    },
+    {
+     "fn": "Luis",
+     "ln": "Barraza",
+     "pos": "POR",
+     "age": 27,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Rocco",
+     "ln": "Ríos Novo",
+     "pos": "POR",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 62
+    },
+    {
+     "fn": "Tyler",
+     "ln": "Hall",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 63
+    },
+    {
+     "fn": "Fricio",
+     "ln": "Caicedo",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "EC",
+     "ovr": 66
+    },
+    {
+     "fn": "Yannick",
+     "ln": "Bright",
+     "pos": "MC",
+     "age": 22,
+     "nat": "IT",
+     "ovr": 64
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Morales",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 65
+    },
+    {
+     "fn": "Matías",
+     "ln": "Galarza",
+     "pos": "MC",
+     "age": 34,
+     "nat": "PY",
+     "ovr": 74
+    },
+    {
+     "fn": "Lovend's",
+     "ln": "Delinois",
+     "pos": "DC",
+     "age": 19,
+     "nat": "HT",
+     "ovr": 62
+    },
+    {
+     "fn": "Daniel",
+     "ln": "Sumalla",
+     "pos": "DFC",
+     "age": 19,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Riquelme",
+     "ln": "Fillipi",
+     "pos": "DC",
+     "age": 20,
+     "nat": "BR",
+     "ovr": 67
+    },
+    {
+     "fn": "Alexander",
+     "ln": "Shaw",
+     "pos": "MC",
+     "age": 20,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "Los Angeles FC",
+   "coach": "Marc Dos Santos",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Hugo",
+     "ln": "Lloris",
+     "pos": "POR",
+     "age": 39,
+     "nat": "FR",
+     "ovr": 79
+    },
+    {
+     "fn": "Thomas",
+     "ln": "Hasal",
+     "pos": "POR",
+     "age": 27,
+     "nat": "CA",
+     "ovr": 64
+    },
+    {
+     "fn": "Cabral",
+     "ln": "Carter",
+     "pos": "POR",
+     "age": 23,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Eddie",
+     "ln": "Segura",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "CO",
+     "ovr": 73
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Porteous",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "SCO",
+     "ovr": 74
+    },
+    {
+     "fn": "Sergi",
+     "ln": "Palencia",
+     "pos": "LD",
+     "age": 30,
+     "nat": "ES",
+     "ovr": 74
+    },
+    {
+     "fn": "Yevhen",
+     "ln": "Cheberko",
+     "pos": "LI",
+     "age": 27,
+     "nat": "UA",
+     "ovr": 72
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Hollingshead",
+     "pos": "LD",
+     "age": 35,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Aaron",
+     "ln": "Long",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Kenny",
+     "ln": "Nielsen",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Nkosi",
+     "ln": "Tafari",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Mark",
+     "ln": "Delgado",
+     "pos": "MCD",
+     "age": 31,
+     "nat": "US",
+     "ovr": 73
+    },
+    {
+     "fn": "Timothy",
+     "ln": "Tillman",
+     "pos": "MCO",
+     "age": 27,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Raposo",
+     "pos": "MC",
+     "age": 27,
+     "nat": "CA",
+     "ovr": 69
+    },
+    {
+     "fn": "Jude",
+     "ln": "Terry",
+     "pos": "MC",
+     "age": 19,
+     "nat": "US",
+     "ovr": 63
+    },
+    {
+     "fn": "Mathieu",
+     "ln": "Choinière",
+     "pos": "MC",
+     "age": 27,
+     "nat": "CA",
+     "ovr": 72
+    },
+    {
+     "fn": "Sergio",
+     "ln": "Vásquez",
+     "pos": "MC",
+     "age": 22,
+     "nat": "EC",
+     "ovr": 66
+    },
+    {
+     "fn": "Heung-min",
+     "ln": "Son",
+     "pos": "EI",
+     "age": 34,
+     "nat": "KR",
+     "ovr": 83
+    },
+    {
+     "fn": "Denis",
+     "ln": "Bouanga",
+     "pos": "EI",
+     "age": 31,
+     "nat": "GA",
+     "ovr": 81
+    },
+    {
+     "fn": "Jeremy",
+     "ln": "Ebobisse",
+     "pos": "DC",
+     "age": 29,
+     "nat": "US",
+     "ovr": 69
+    },
+    {
+     "fn": "Jacob",
+     "ln": "Shaffelburg",
+     "pos": "ED",
+     "age": 27,
+     "nat": "CA",
+     "ovr": 72
+    },
+    {
+     "fn": "Tyler",
+     "ln": "Boyd",
+     "pos": "ED",
+     "age": 31,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "David",
+     "ln": "Martínez",
+     "pos": "ED",
+     "age": 24,
+     "nat": "VE",
+     "ovr": 72
+    },
+    {
+     "fn": "Tommy",
+     "ln": "Mihalić",
+     "pos": "DC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Armindo",
+     "ln": "Sieb",
+     "pos": "DC",
+     "age": 22,
+     "nat": "DE",
+     "ovr": 70
+    }
+   ]
+  },
+  {
+   "club": "Columbus Crew",
+   "coach": "Laurent Courtois",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Patrick",
+     "ln": "Schulte",
+     "pos": "POR",
+     "age": 25,
+     "nat": "US",
+     "ovr": 76
+    },
+    {
+     "fn": "Nicholas",
+     "ln": "Hagen",
+     "pos": "POR",
+     "age": 30,
+     "nat": "GT",
+     "ovr": 66
+    },
+    {
+     "fn": "Evan",
+     "ln": "Bush",
+     "pos": "POR",
+     "age": 32,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Andrés",
+     "ln": "Herrera",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 72
+    },
+    {
+     "fn": "Eric",
+     "ln": "Bailly",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "CI",
+     "ovr": 75
+    },
+    {
+     "fn": "Rudy",
+     "ln": "Camacho",
+     "pos": "DFC",
+     "age": 35,
+     "nat": "FR",
+     "ovr": 70
+    },
+    {
+     "fn": "Brooks",
+     "ln": "Lennon",
+     "pos": "LD",
+     "age": 29,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Sean",
+     "ln": "Zawadzki",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Steven",
+     "ln": "Moreira",
+     "pos": "LD",
+     "age": 31,
+     "nat": "CV",
+     "ovr": 70
+    },
+    {
+     "fn": "Malte",
+     "ln": "Amundsen",
+     "pos": "LI",
+     "age": 27,
+     "nat": "DK",
+     "ovr": 70
+    },
+    {
+     "fn": "Mohamed",
+     "ln": "Farsi",
+     "pos": "LI",
+     "age": 26,
+     "nat": "DZ",
+     "ovr": 72
+    },
+    {
+     "fn": "Cesar",
+     "ln": "Ruvalcaba",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Dylan",
+     "ln": "Chambost",
+     "pos": "MC",
+     "age": 26,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Brais",
+     "ln": "Méndez",
+     "pos": "MCO",
+     "age": 29,
+     "nat": "ES",
+     "ovr": 79
+    },
+    {
+     "fn": "Amar",
+     "ln": "Sejdić",
+     "pos": "MCD",
+     "age": 30,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Sekou",
+     "ln": "Bangoura",
+     "pos": "MC",
+     "age": 22,
+     "nat": "GN",
+     "ovr": 67
+    },
+    {
+     "fn": "André",
+     "ln": "Gomes",
+     "pos": "MC",
+     "age": 33,
+     "nat": "PT",
+     "ovr": 75
+    },
+    {
+     "fn": "Tristan",
+     "ln": "Brown",
+     "pos": "MC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 63
+    },
+    {
+     "fn": "Cole",
+     "ln": "Mrowka",
+     "pos": "MC",
+     "age": 22,
+     "nat": "PH",
+     "ovr": 62
+    },
+    {
+     "fn": "Santiago",
+     "ln": "Rodríguez",
+     "pos": "MCO",
+     "age": 25,
+     "nat": "UY",
+     "ovr": 77
+    },
+    {
+     "fn": "Wessam",
+     "ln": "Abou Ali",
+     "pos": "DC",
+     "age": 26,
+     "nat": "PS",
+     "ovr": 79
+    },
+    {
+     "fn": "Jamal",
+     "ln": "Thiaré",
+     "pos": "DC",
+     "age": 27,
+     "nat": "SN",
+     "ovr": 70
+    },
+    {
+     "fn": "Josef",
+     "ln": "Martínez",
+     "pos": "DC",
+     "age": 33,
+     "nat": "VE",
+     "ovr": 74
+    },
+    {
+     "fn": "Taha",
+     "ln": "Habroune",
+     "pos": "EI",
+     "age": 20,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Lautaro",
+     "ln": "Giaccone",
+     "pos": "ED",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Gonzalo",
+     "ln": "Tapia",
+     "pos": "ED",
+     "age": 22,
+     "nat": "CL",
+     "ovr": 68
+    },
+    {
+     "fn": "Anass",
+     "ln": "Zaroury",
+     "pos": "ED",
+     "age": 26,
+     "nat": "MA",
+     "ovr": 72
+    },
+    {
+     "fn": "Chase",
+     "ln": "Adams",
+     "pos": "EI",
+     "age": 20,
+     "nat": "US",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "FC Cincinnati",
+   "coach": "Pat Noonan",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Roman",
+     "ln": "Celentano",
+     "pos": "POR",
+     "age": 26,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Evan",
+     "ln": "Louro",
+     "pos": "POR",
+     "age": 31,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Alvas",
+     "ln": "Powell",
+     "pos": "LD",
+     "age": 32,
+     "nat": "JM",
+     "ovr": 68
+    },
+    {
+     "fn": "Gilberto",
+     "ln": "Flores",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "PY",
+     "ovr": 68
+    },
+    {
+     "fn": "Nick",
+     "ln": "Hagglund",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Miles",
+     "ln": "Robinson",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "US",
+     "ovr": 75
+    },
+    {
+     "fn": "Teenage",
+     "ln": "Hadebe",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "ZW",
+     "ovr": 73
+    },
+    {
+     "fn": "Matt",
+     "ln": "Miazga",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Kyle",
+     "ln": "Smith",
+     "pos": "LI",
+     "age": 28,
+     "nat": "US",
+     "ovr": 65
+    },
+    {
+     "fn": "Obinna",
+     "ln": "Nwobodo",
+     "pos": "MCD",
+     "age": 30,
+     "nat": "NG",
+     "ovr": 72
+    },
+    {
+     "fn": "Samuel",
+     "ln": "Gidi",
+     "pos": "MC",
+     "age": 26,
+     "nat": "GH",
+     "ovr": 68
+    },
+    {
+     "fn": "Pavel",
+     "ln": "Bucha",
+     "pos": "MC",
+     "age": 28,
+     "nat": "CZ",
+     "ovr": 73
+    },
+    {
+     "fn": "Gerardo",
+     "ln": "Valenzuela",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Brian",
+     "ln": "Anunga",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "CM",
+     "ovr": 67
+    },
+    {
+     "fn": "Ademar",
+     "ln": "Chávez",
+     "pos": "MC",
+     "age": 19,
+     "nat": "MX",
+     "ovr": 60
+    },
+    {
+     "fn": "Kévin",
+     "ln": "Denkey",
+     "pos": "DC",
+     "age": 26,
+     "nat": "TG",
+     "ovr": 79
+    },
+    {
+     "fn": "",
+     "ln": "Evander",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "BR",
+     "ovr": 81
+    },
+    {
+     "fn": "Kristian",
+     "ln": "Fletcher",
+     "pos": "DC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Tom",
+     "ln": "Barlow",
+     "pos": "DC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Kenji",
+     "ln": "Mboma Dem",
+     "pos": "DC",
+     "age": 21,
+     "nat": "FR",
+     "ovr": 66
+    },
+    {
+     "fn": "Ștefan",
+     "ln": "Chirilă",
+     "pos": "DC",
+     "age": 25,
+     "nat": "RO",
+     "ovr": 65
+    },
+    {
+     "fn": "Bryan",
+     "ln": "Ramírez",
+     "pos": "EI",
+     "age": 23,
+     "nat": "EC",
+     "ovr": 70
+    },
+    {
+     "fn": "Ender",
+     "ln": "Echenique",
+     "pos": "ED",
+     "age": 25,
+     "nat": "VE",
+     "ovr": 69
+    },
+    {
+     "fn": "Ayoub",
+     "ln": "Jabbari",
+     "pos": "EI",
+     "age": 26,
+     "nat": "MA",
+     "ovr": 72
+    }
+   ]
+  },
+  {
+   "club": "Philadelphia Union",
+   "coach": "Bradley Carnell",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Andre",
+     "ln": "Blake",
+     "pos": "POR",
+     "age": 36,
+     "nat": "JM",
+     "ovr": 76
+    },
+    {
+     "fn": "Andrew",
+     "ln": "Rick",
+     "pos": "POR",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Olivier",
+     "ln": "Mbaizo",
+     "pos": "LD",
+     "age": 29,
+     "nat": "CM",
+     "ovr": 72
+    },
+    {
+     "fn": "Jack",
+     "ln": "Elliott",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "ENG",
+     "ovr": 73
+    },
+    {
+     "fn": "Nathan",
+     "ln": "Harriel",
+     "pos": "LD",
+     "age": 25,
+     "nat": "US",
+     "ovr": 67
+    },
+    {
+     "fn": "Brandan",
+     "ln": "Craig",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Kai",
+     "ln": "Wagner",
+     "pos": "LI",
+     "age": 29,
+     "nat": "DE",
+     "ovr": 74
+    },
+    {
+     "fn": "Danley",
+     "ln": "Jean Jacques",
+     "pos": "MCD",
+     "age": 31,
+     "nat": "HT",
+     "ovr": 72
+    },
+    {
+     "fn": "Jesús",
+     "ln": "Bueno",
+     "pos": "MC",
+     "age": 27,
+     "nat": "VE",
+     "ovr": 69
+    },
+    {
+     "fn": "Quinn",
+     "ln": "Sullivan",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Cavan",
+     "ln": "Sullivan",
+     "pos": "MCO",
+     "age": 17,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Jeremy",
+     "ln": "Rafanello",
+     "pos": "MC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Milan",
+     "ln": "Iloski",
+     "pos": "ED",
+     "age": 27,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Chris",
+     "ln": "Donovan",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Indiana",
+     "ln": "Vassilev",
+     "pos": "ED",
+     "age": 25,
+     "nat": "US",
+     "ovr": 65
+    },
+    {
+     "fn": "Frankie",
+     "ln": "Westfield",
+     "pos": "LI",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Alejandro",
+     "ln": "Bedoya",
+     "pos": "MC",
+     "age": 39,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Markus",
+     "ln": "Anderson",
+     "pos": "MC",
+     "age": 19,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Neil",
+     "ln": "Pierre",
+     "pos": "DC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Sal",
+     "ln": "Olivas",
+     "pos": "LD",
+     "age": 24,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Joaquín",
+     "ln": "Torres",
+     "pos": "DC",
+     "age": 23,
+     "nat": "AR",
+     "ovr": 68
+    },
+    {
+     "fn": "Nelson",
+     "ln": "Quiñónes",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "SV",
+     "ovr": 64
+    }
+   ]
+  },
+  {
+   "club": "Seattle Sounders",
+   "coach": "Brian Schmetzer",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Stefan",
+     "ln": "Frei",
+     "pos": "POR",
+     "age": 40,
+     "nat": "CH",
+     "ovr": 74
+    },
+    {
+     "fn": "Andrew",
+     "ln": "Thomas",
+     "pos": "POR",
+     "age": 24,
+     "nat": "RU",
+     "ovr": 60
+    },
+    {
+     "fn": "Max",
+     "ln": "Anchor",
+     "pos": "POR",
+     "age": 21,
+     "nat": "CA",
+     "ovr": 55
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Sailor",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Nouhou",
+     "ln": "Tolo",
+     "pos": "LI",
+     "age": 29,
+     "nat": "CM",
+     "ovr": 72
+    },
+    {
+     "fn": "Alex",
+     "ln": "Roldán",
+     "pos": "LD",
+     "age": 30,
+     "nat": "SV",
+     "ovr": 72
+    },
+    {
+     "fn": "Kim",
+     "ln": "Kee-hee",
+     "pos": "DFC",
+     "age": 37,
+     "nat": "KR",
+     "ovr": 66
+    },
+    {
+     "fn": "Jackson",
+     "ln": "Ragen",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Yeimar",
+     "ln": "Gómez Andrade",
+     "pos": "DFC",
+     "age": 34,
+     "nat": "CO",
+     "ovr": 70
+    },
+    {
+     "fn": "Antino",
+     "ln": "Lopez",
+     "pos": "LD",
+     "age": 22,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Stuart",
+     "ln": "Hawkins",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Cristian",
+     "ln": "Roldan",
+     "pos": "MC",
+     "age": 31,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Pedro",
+     "ln": "de la Vega",
+     "pos": "EI",
+     "age": 25,
+     "nat": "AR",
+     "ovr": 77
+    },
+    {
+     "fn": "Albert",
+     "ln": "Rusnák",
+     "pos": "MCO",
+     "age": 32,
+     "nat": "SK",
+     "ovr": 77
+    },
+    {
+     "fn": "Paul",
+     "ln": "Rothrock",
+     "pos": "ED",
+     "age": 25,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Paul",
+     "ln": "Arriola",
+     "pos": "MD",
+     "age": 31,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Hassani",
+     "ln": "Dotson",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Xavi",
+     "ln": "Gnaulati",
+     "pos": "MC",
+     "age": 20,
+     "nat": "US",
+     "ovr": 65
+    },
+    {
+     "fn": "Snyder",
+     "ln": "Brunell",
+     "pos": "MC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Nikola",
+     "ln": "Petković",
+     "pos": "MC",
+     "age": 22,
+     "nat": "RS",
+     "ovr": 62
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Morris",
+     "pos": "DC",
+     "age": 32,
+     "nat": "US",
+     "ovr": 75
+    },
+    {
+     "fn": "Dejan",
+     "ln": "Joveljić",
+     "pos": "DC",
+     "age": 27,
+     "nat": "RS",
+     "ovr": 74
+    },
+    {
+     "fn": "Jesús",
+     "ln": "Ferreira",
+     "pos": "DC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Danny",
+     "ln": "Musovski",
+     "pos": "DC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Edson",
+     "ln": "Carli",
+     "pos": "DC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Sebastian",
+     "ln": "Gomez",
+     "pos": "MC",
+     "age": 19,
+     "nat": "US",
+     "ovr": 56
+    }
+   ]
+  },
+  {
+   "club": "Vancouver Whitecaps",
+   "coach": "Jesper Sørensen",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Yohei",
+     "ln": "Takaoka",
+     "pos": "POR",
+     "age": 29,
+     "nat": "JP",
+     "ovr": 72
+    },
+    {
+     "fn": "Isaac",
+     "ln": "Boehmer",
+     "pos": "POR",
+     "age": 26,
+     "nat": "CA",
+     "ovr": 62
+    },
+    {
+     "fn": "Ranko",
+     "ln": "Veselinović",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "RS",
+     "ovr": 72
+    },
+    {
+     "fn": "Tristan",
+     "ln": "Blackmon",
+     "pos": "DFC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 71
+    },
+    {
+     "fn": "Sam",
+     "ln": "Adekugbe",
+     "pos": "LI",
+     "age": 31,
+     "nat": "CA",
+     "ovr": 72
+    },
+    {
+     "fn": "Mathías",
+     "ln": "Laborda",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "UY",
+     "ovr": 70
+    },
+    {
+     "fn": "Belal",
+     "ln": "Halbouni",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "SY",
+     "ovr": 68
+    },
+    {
+     "fn": "Jeevan",
+     "ln": "Badwal",
+     "pos": "LD",
+     "age": 22,
+     "nat": "CA",
+     "ovr": 62
+    },
+    {
+     "fn": "Andrés",
+     "ln": "Cubas",
+     "pos": "MCD",
+     "age": 30,
+     "nat": "PY",
+     "ovr": 74
+    },
+    {
+     "fn": "Sebastian",
+     "ln": "Berhalter",
+     "pos": "MC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Ralph",
+     "ln": "Priso",
+     "pos": "MC",
+     "age": 24,
+     "nat": "CA",
+     "ovr": 68
+    },
+    {
+     "fn": "Pedro",
+     "ln": "Vite",
+     "pos": "MC",
+     "age": 24,
+     "nat": "EC",
+     "ovr": 69
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Gauld",
+     "pos": "MCO",
+     "age": 30,
+     "nat": "SCO",
+     "ovr": 74
+    },
+    {
+     "fn": "Thomas",
+     "ln": "Müller",
+     "pos": "MCO",
+     "age": 37,
+     "nat": "DE",
+     "ovr": 79
+    },
+    {
+     "fn": "Ali",
+     "ln": "Ahmed",
+     "pos": "ED",
+     "age": 26,
+     "nat": "CA",
+     "ovr": 70
+    },
+    {
+     "fn": "Edier",
+     "ln": "Ocampo",
+     "pos": "EI",
+     "age": 25,
+     "nat": "CO",
+     "ovr": 68
+    },
+    {
+     "fn": "Brian",
+     "ln": "White",
+     "pos": "DC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Emmanuel",
+     "ln": "Sabbi",
+     "pos": "ED",
+     "age": 28,
+     "nat": "US",
+     "ovr": 67
+    },
+    {
+     "fn": "Rayan",
+     "ln": "Elloumi",
+     "pos": "DC",
+     "age": 21,
+     "nat": "CA",
+     "ovr": 66
+    },
+    {
+     "fn": "Kenji",
+     "ln": "Cabrera",
+     "pos": "EI",
+     "age": 24,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Fafà",
+     "ln": "Picault",
+     "pos": "EI",
+     "age": 35,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Simon",
+     "ln": "Becher",
+     "pos": "DC",
+     "age": 23,
+     "nat": "AT",
+     "ovr": 72
+    },
+    {
+     "fn": "Nathan",
+     "ln": "Saliba",
+     "pos": "EI",
+     "age": 22,
+     "nat": "CA",
+     "ovr": 64
+    }
+   ]
+  },
+  {
+   "club": "LA Galaxy",
+   "coach": "Greg Vanney",
+   "src": "web",
+   "players": [
+    {
+     "fn": "Novak",
+     "ln": "Mićović",
+     "pos": "POR",
+     "age": 25,
+     "nat": "RS",
+     "ovr": 70
+    },
+    {
+     "fn": "JT",
+     "ln": "Marcinkowski",
+     "pos": "POR",
+     "age": 31,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Brady",
+     "ln": "Scott",
+     "pos": "POR",
+     "age": 26,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Lucas",
+     "ln": "Calegari",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "BR",
+     "ovr": 68
+    },
+    {
+     "fn": "Julián",
+     "ln": "Aude",
+     "pos": "LD",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 71
+    },
+    {
+     "fn": "Maya",
+     "ln": "Yoshida",
+     "pos": "DFC",
+     "age": 38,
+     "nat": "JP",
+     "ovr": 68
+    },
+    {
+     "fn": "Jakob",
+     "ln": "Glesnes",
+     "pos": "DFC",
+     "age": 32,
+     "nat": "NO",
+     "ovr": 72
+    },
+    {
+     "fn": "Sergi",
+     "ln": "Roberto",
+     "pos": "MC",
+     "age": 34,
+     "nat": "ES",
+     "ovr": 74
+    },
+    {
+     "fn": "Kyōgo",
+     "ln": "Furuhashi",
+     "pos": "DC",
+     "age": 31,
+     "nat": "JP",
+     "ovr": 76
+    },
+    {
+     "fn": "Lucas",
+     "ln": "Sanabria",
+     "pos": "MC",
+     "age": 23,
+     "nat": "UY",
+     "ovr": 68
+    },
+    {
+     "fn": "Riqui",
+     "ln": "Puig",
+     "pos": "MC",
+     "age": 27,
+     "nat": "ES",
+     "ovr": 79
+    },
+    {
+     "fn": "Hirving",
+     "ln": "Lozano",
+     "pos": "ED",
+     "age": 31,
+     "nat": "MX",
+     "ovr": 77
+    },
+    {
+     "fn": "Justin",
+     "ln": "Haak",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Isaiah",
+     "ln": "Parente",
+     "pos": "MC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Pablo",
+     "ln": "Ruiz",
+     "pos": "MC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 71
+    },
+    {
+     "fn": "Marco",
+     "ln": "Reus",
+     "pos": "MCO",
+     "age": 37,
+     "nat": "DE",
+     "ovr": 78
+    },
+    {
+     "fn": "Chris",
+     "ln": "Rindov",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Robert",
+     "ln": "Taylor",
+     "pos": "EI",
+     "age": 31,
+     "nat": "FI",
+     "ovr": 72
+    },
+    {
+     "fn": "Elijah",
+     "ln": "Wynder",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Carlos",
+     "ln": "Garcés",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "CO",
+     "ovr": 64
+    },
+    {
+     "fn": "Harbor",
+     "ln": "Miller",
+     "pos": "LD",
+     "age": 21,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Erik",
+     "ln": "Thommy",
+     "pos": "MCO",
+     "age": 32,
+     "nat": "DE",
+     "ovr": 70
+    },
+    {
+     "fn": "Joseph",
+     "ln": "Paintsil",
+     "pos": "ED",
+     "age": 28,
+     "nat": "GH",
+     "ovr": 74
+    },
+    {
+     "fn": "John",
+     "ln": "Nelson",
+     "pos": "LI",
+     "age": 27,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Riley",
+     "ln": "Dalgado",
+     "pos": "DFC",
+     "age": 20,
+     "nat": "US",
+     "ovr": 56
+    },
+    {
+     "fn": "Troy",
+     "ln": "Elgersma",
+     "pos": "DC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "João",
+     "ln": "Klauss",
+     "pos": "DC",
+     "age": 29,
+     "nat": "BR",
+     "ovr": 74
+    }
+   ]
+  },
+  {
+   "club": "Charlotte FC",
+   "coach": "Dean Smith",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Kristijan",
+     "ln": "Kahlina",
+     "pos": "POR",
+     "age": 33,
+     "nat": "HR",
+     "ovr": 72
+    },
+    {
+     "fn": "George",
+     "ln": "Marks",
+     "pos": "POR",
+     "age": 25,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Tim",
+     "ln": "Ream",
+     "pos": "DFC",
+     "age": 39,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Nathan",
+     "ln": "Byrne",
+     "pos": "LD",
+     "age": 33,
+     "nat": "ENG",
+     "ovr": 68
+    },
+    {
+     "fn": "Adilson",
+     "ln": "Malanda",
+     "pos": "DFC",
+     "age": 25,
+     "nat": "FR",
+     "ovr": 72
+    },
+    {
+     "fn": "Andrew",
+     "ln": "Privett",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Souleyman",
+     "ln": "Doumbia",
+     "pos": "LI",
+     "age": 29,
+     "nat": "CI",
+     "ovr": 68
+    },
+    {
+     "fn": "Jere",
+     "ln": "Uronen",
+     "pos": "LI",
+     "age": 32,
+     "nat": "FI",
+     "ovr": 68
+    },
+    {
+     "fn": "Bill",
+     "ln": "Tuiloma",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NZ",
+     "ovr": 65
+    },
+    {
+     "fn": "Ashley",
+     "ln": "Westwood",
+     "pos": "MCD",
+     "age": 36,
+     "nat": "ENG",
+     "ovr": 70
+    },
+    {
+     "fn": "Djibril",
+     "ln": "Diani",
+     "pos": "MC",
+     "age": 28,
+     "nat": "FR",
+     "ovr": 68
+    },
+    {
+     "fn": "Brandt",
+     "ln": "Bronico",
+     "pos": "MC",
+     "age": 30,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Ben",
+     "ln": "Bender",
+     "pos": "MC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Pep",
+     "ln": "Biel",
+     "pos": "MCO",
+     "age": 30,
+     "nat": "ES",
+     "ovr": 76
+    },
+    {
+     "fn": "Liel",
+     "ln": "Abada",
+     "pos": "ED",
+     "age": 25,
+     "nat": "IL",
+     "ovr": 74
+    },
+    {
+     "fn": "Allan",
+     "ln": "Saint-Maximin",
+     "pos": "EI",
+     "age": 29,
+     "nat": "FR",
+     "ovr": 78
+    },
+    {
+     "fn": "Patrick",
+     "ln": "Agyemang",
+     "pos": "DC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Kerwin",
+     "ln": "Vargas",
+     "pos": "EI",
+     "age": 22,
+     "nat": "CO",
+     "ovr": 68
+    },
+    {
+     "fn": "Iuri",
+     "ln": "Tavares",
+     "pos": "ED",
+     "age": 28,
+     "nat": "CV",
+     "ovr": 66
+    },
+    {
+     "fn": "Idan",
+     "ln": "Toklomati",
+     "pos": "DC",
+     "age": 29,
+     "nat": "IL",
+     "ovr": 66
+    },
+    {
+     "fn": "Tyger",
+     "ln": "Smalls",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "US",
+     "ovr": 56
+    },
+    {
+     "fn": "Nimfasha",
+     "ln": "Berchimas",
+     "pos": "EI",
+     "age": 23,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Nashville SC",
+   "coach": "B.J. Callaghan",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Joe",
+     "ln": "Willis",
+     "pos": "POR",
+     "age": 38,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Brian",
+     "ln": "Schwake",
+     "pos": "POR",
+     "age": 26,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Walker",
+     "ln": "Zimmerman",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Josh",
+     "ln": "Bauer",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Andy",
+     "ln": "Najar",
+     "pos": "LD",
+     "age": 33,
+     "nat": "HN",
+     "ovr": 67
+    },
+    {
+     "fn": "Jeisson",
+     "ln": "Palacios",
+     "pos": "LI",
+     "age": 24,
+     "nat": "CO",
+     "ovr": 66
+    },
+    {
+     "fn": "Edem",
+     "ln": "Rjaibi",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Sean",
+     "ln": "Davis",
+     "pos": "MCD",
+     "age": 29,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Matthew",
+     "ln": "Corcoran",
+     "pos": "MC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Patrick",
+     "ln": "Yazbek",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Hany",
+     "ln": "Mukhtar",
+     "pos": "MCO",
+     "age": 31,
+     "nat": "DE",
+     "ovr": 80
+    },
+    {
+     "fn": "Aziel",
+     "ln": "Jackson",
+     "pos": "EI",
+     "age": 25,
+     "nat": "ENG",
+     "ovr": 70
+    },
+    {
+     "fn": "Ahmed",
+     "ln": "Qasem",
+     "pos": "ED",
+     "age": 22,
+     "nat": "SE",
+     "ovr": 66
+    },
+    {
+     "fn": "Sam",
+     "ln": "Surridge",
+     "pos": "DC",
+     "age": 27,
+     "nat": "ENG",
+     "ovr": 76
+    },
+    {
+     "fn": "Ethan",
+     "ln": "Zubak",
+     "pos": "DC",
+     "age": 27,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Jacob",
+     "ln": "Shaffelburg",
+     "pos": "ED",
+     "age": 27,
+     "nat": "CA",
+     "ovr": 70
+    },
+    {
+     "fn": "Wyatt",
+     "ln": "Meyer",
+     "pos": "MC",
+     "age": 24,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Dru",
+     "ln": "Yearwood",
+     "pos": "MC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Maximiliano",
+     "ln": "Reyes",
+     "pos": "DC",
+     "age": 22,
+     "nat": "AR",
+     "ovr": 60
+    },
+    {
+     "fn": "Lukas",
+     "ln": "MacNaughton",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "CA",
+     "ovr": 64
+    },
+    {
+     "fn": "Taylor",
+     "ln": "Washington",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Jordan",
+     "ln": "Knight",
+     "pos": "ED",
+     "age": 23,
+     "nat": "US",
+     "ovr": 58
+    }
+   ]
+  },
+  {
+   "club": "Orlando City",
+   "coach": "Óscar Pareja",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Pedro",
+     "ln": "Gallese",
+     "pos": "POR",
+     "age": 36,
+     "nat": "PE",
+     "ovr": 75
+    },
+    {
+     "fn": "Javier",
+     "ln": "Otero",
+     "pos": "POR",
+     "age": 24,
+     "nat": "UY",
+     "ovr": 60
+    },
+    {
+     "fn": "Robin",
+     "ln": "Jansson",
+     "pos": "DFC",
+     "age": 35,
+     "nat": "SE",
+     "ovr": 74
+    },
+    {
+     "fn": "Rafael",
+     "ln": "Santos",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "BR",
+     "ovr": 70
+    },
+    {
+     "fn": "David",
+     "ln": "Brekalo",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "HR",
+     "ovr": 72
+    },
+    {
+     "fn": "Dagur",
+     "ln": "Dagbjartsson",
+     "pos": "DFC",
+     "age": 26,
+     "nat": "IS",
+     "ovr": 68
+    },
+    {
+     "fn": "Griffin",
+     "ln": "Dorsey",
+     "pos": "LD",
+     "age": 26,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Michael",
+     "ln": "Halliday",
+     "pos": "LI",
+     "age": 25,
+     "nat": "SCO",
+     "ovr": 64
+    },
+    {
+     "fn": "César",
+     "ln": "Araújo",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "UY",
+     "ovr": 74
+    },
+    {
+     "fn": "Wilder",
+     "ln": "Cartagena",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "PE",
+     "ovr": 74
+    },
+    {
+     "fn": "Eduard",
+     "ln": "Atuesta",
+     "pos": "MC",
+     "age": 29,
+     "nat": "CO",
+     "ovr": 72
+    },
+    {
+     "fn": "Marco",
+     "ln": "Pašalić",
+     "pos": "MCO",
+     "age": 26,
+     "nat": "HR",
+     "ovr": 78
+    },
+    {
+     "fn": "Martín",
+     "ln": "Ojeda",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 77
+    },
+    {
+     "fn": "Antoine",
+     "ln": "Griezmann",
+     "pos": "MCO",
+     "age": 35,
+     "nat": "FR",
+     "ovr": 83
+    },
+    {
+     "fn": "Iván",
+     "ln": "Angulo",
+     "pos": "EI",
+     "age": 28,
+     "nat": "CO",
+     "ovr": 69
+    },
+    {
+     "fn": "Shakur",
+     "ln": "Mohammed",
+     "pos": "ED",
+     "age": 22,
+     "nat": "GH",
+     "ovr": 64
+    },
+    {
+     "fn": "Luis",
+     "ln": "Muriel",
+     "pos": "DC",
+     "age": 35,
+     "nat": "CO",
+     "ovr": 74
+    },
+    {
+     "fn": "Ramiro",
+     "ln": "Enrique",
+     "pos": "DC",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 72
+    },
+    {
+     "fn": "Daryl",
+     "ln": "Dike",
+     "pos": "DC",
+     "age": 26,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Justin",
+     "ln": "Ellis",
+     "pos": "DFC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 56
+    },
+    {
+     "fn": "Colin",
+     "ln": "Guske",
+     "pos": "MC",
+     "age": 25,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Zakaria",
+     "ln": "Taifi",
+     "pos": "MC",
+     "age": 26,
+     "nat": "MA",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "New York City FC",
+   "coach": "Pascal Jansen",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Matt",
+     "ln": "Freese",
+     "pos": "POR",
+     "age": 27,
+     "nat": "US",
+     "ovr": 74
+    },
+    {
+     "fn": "Luca",
+     "ln": "Barrios",
+     "pos": "POR",
+     "age": 23,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Maxime",
+     "ln": "Chanot",
+     "pos": "DFC",
+     "age": 36,
+     "nat": "LU",
+     "ovr": 68
+    },
+    {
+     "fn": "Thiago",
+     "ln": "Martins",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Birk",
+     "ln": "Risa",
+     "pos": "DFC",
+     "age": 27,
+     "nat": "NO",
+     "ovr": 72
+    },
+    {
+     "fn": "Tayvon",
+     "ln": "Gray",
+     "pos": "LD",
+     "age": 24,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Mitja",
+     "ln": "Ilenič",
+     "pos": "LD",
+     "age": 27,
+     "nat": "SI",
+     "ovr": 70
+    },
+    {
+     "fn": "Kevin",
+     "ln": "O'Toole",
+     "pos": "LI",
+     "age": 22,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Aiden",
+     "ln": "O'Neill",
+     "pos": "MCD",
+     "age": 28,
+     "nat": "AU",
+     "ovr": 70
+    },
+    {
+     "fn": "Keaton",
+     "ln": "Parks",
+     "pos": "MC",
+     "age": 29,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Andres",
+     "ln": "Perea",
+     "pos": "MC",
+     "age": 25,
+     "nat": "CO",
+     "ovr": 70
+    },
+    {
+     "fn": "Hannes",
+     "ln": "Wolf",
+     "pos": "EI",
+     "age": 27,
+     "nat": "AT",
+     "ovr": 74
+    },
+    {
+     "fn": "Máximo",
+     "ln": "Carrizo",
+     "pos": "ED",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Benie",
+     "ln": "Traoré",
+     "pos": "ED",
+     "age": 24,
+     "nat": "CI",
+     "ovr": 72
+    },
+    {
+     "fn": "Alonso",
+     "ln": "Martínez",
+     "pos": "DC",
+     "age": 27,
+     "nat": "CR",
+     "ovr": 74
+    },
+    {
+     "fn": "Mounsef",
+     "ln": "Bakrar",
+     "pos": "DC",
+     "age": 24,
+     "nat": "DZ",
+     "ovr": 66
+    },
+    {
+     "fn": "Agustín",
+     "ln": "Ojeda",
+     "pos": "EI",
+     "age": 20,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Julián",
+     "ln": "Fernández",
+     "pos": "LD",
+     "age": 31,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Seymour",
+     "ln": "Reid",
+     "pos": "MC",
+     "age": 20,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Jovan",
+     "ln": "Mijatović",
+     "pos": "EI",
+     "age": 21,
+     "nat": "RS",
+     "ovr": 60
+    },
+    {
+     "fn": "Nick",
+     "ln": "Pariano",
+     "pos": "MC",
+     "age": 22,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Malachi",
+     "ln": "Jones",
+     "pos": "LI",
+     "age": 22,
+     "nat": "US",
+     "ovr": 58
+    }
+   ]
+  },
+  {
+   "club": "New York Red Bulls",
+   "coach": "Michael Bradley",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Carlos",
+     "ln": "Coronel",
+     "pos": "POR",
+     "age": 29,
+     "nat": "BR",
+     "ovr": 72
+    },
+    {
+     "fn": "Ryan",
+     "ln": "Meara",
+     "pos": "POR",
+     "age": 35,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Sean",
+     "ln": "Nealis",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "US",
+     "ovr": 70
+    },
+    {
+     "fn": "Noah",
+     "ln": "Eile",
+     "pos": "DFC",
+     "age": 24,
+     "nat": "AT",
+     "ovr": 72
+    },
+    {
+     "fn": "Kyle",
+     "ln": "Duncan",
+     "pos": "LD",
+     "age": 29,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "John",
+     "ln": "Tolkin",
+     "pos": "LI",
+     "age": 24,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Dylan",
+     "ln": "Nealis",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Peter",
+     "ln": "Stroud",
+     "pos": "MCD",
+     "age": 25,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Daniel",
+     "ln": "Edelman",
+     "pos": "MCD",
+     "age": 23,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Ronald",
+     "ln": "Donkor",
+     "pos": "MC",
+     "age": 24,
+     "nat": "GH",
+     "ovr": 68
+    },
+    {
+     "fn": "Raheem",
+     "ln": "Edwards",
+     "pos": "MC",
+     "age": 31,
+     "nat": "CA",
+     "ovr": 66
+    },
+    {
+     "fn": "David",
+     "ln": "Ruiz",
+     "pos": "MC",
+     "age": 22,
+     "nat": "HN",
+     "ovr": 64
+    },
+    {
+     "fn": "Emil",
+     "ln": "Forsberg",
+     "pos": "MCO",
+     "age": 34,
+     "nat": "SE",
+     "ovr": 75
+    },
+    {
+     "fn": "Lewis",
+     "ln": "Morgan",
+     "pos": "ED",
+     "age": 30,
+     "nat": "SCO",
+     "ovr": 72
+    },
+    {
+     "fn": "Dennis",
+     "ln": "Gjengaar",
+     "pos": "ED",
+     "age": 23,
+     "nat": "NO",
+     "ovr": 72
+    },
+    {
+     "fn": "Omir",
+     "ln": "Fernandez",
+     "pos": "MD",
+     "age": 27,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Cameron",
+     "ln": "Harper",
+     "pos": "LI",
+     "age": 24,
+     "nat": "SCO",
+     "ovr": 64
+    },
+    {
+     "fn": "Julian",
+     "ln": "Hall",
+     "pos": "DC",
+     "age": 18,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Wikelman",
+     "ln": "Carmona",
+     "pos": "EI",
+     "age": 22,
+     "nat": "VE",
+     "ovr": 66
+    },
+    {
+     "fn": "Serge",
+     "ln": "Ngoma",
+     "pos": "MC",
+     "age": 22,
+     "nat": "CD",
+     "ovr": 60
+    },
+    {
+     "fn": "Roald",
+     "ln": "Mitchell",
+     "pos": "DC",
+     "age": 24,
+     "nat": "CA",
+     "ovr": 64
+    },
+    {
+     "fn": "Jorge",
+     "ln": "Ruvalcaba",
+     "pos": "ED",
+     "age": 25,
+     "nat": "US",
+     "ovr": 62
+    }
+   ]
+  },
+  {
+   "club": "Minnesota United",
+   "coach": "Eric Ramsay",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Clint",
+     "ln": "Irwin",
+     "pos": "POR",
+     "age": 37,
+     "nat": "US",
+     "ovr": 65
+    },
+    {
+     "fn": "Fred",
+     "ln": "Emmings",
+     "pos": "POR",
+     "age": 26,
+     "nat": "US",
+     "ovr": 58
+    },
+    {
+     "fn": "Michael",
+     "ln": "Boxall",
+     "pos": "DFC",
+     "age": 38,
+     "nat": "NZ",
+     "ovr": 66
+    },
+    {
+     "fn": "Nicolás",
+     "ln": "Romero",
+     "pos": "DFC",
+     "age": 21,
+     "nat": "AR",
+     "ovr": 66
+    },
+    {
+     "fn": "Devin",
+     "ln": "Padelford",
+     "pos": "LD",
+     "age": 26,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Morris",
+     "ln": "Duggan",
+     "pos": "LD",
+     "age": 27,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Alexandros",
+     "ln": "Katranis",
+     "pos": "LI",
+     "age": 28,
+     "nat": "GR",
+     "ovr": 66
+    },
+    {
+     "fn": "Joaquín",
+     "ln": "Pereyra",
+     "pos": "MC",
+     "age": 28,
+     "nat": "AR",
+     "ovr": 70
+    },
+    {
+     "fn": "Wil",
+     "ln": "Trapp",
+     "pos": "MCD",
+     "age": 33,
+     "nat": "US",
+     "ovr": 68
+    },
+    {
+     "fn": "Kervin",
+     "ln": "Arriaga",
+     "pos": "MCD",
+     "age": 20,
+     "nat": "HN",
+     "ovr": 62
+    },
+    {
+     "fn": "Carlos",
+     "ln": "Harvey",
+     "pos": "MC",
+     "age": 25,
+     "nat": "PA",
+     "ovr": 68
+    },
+    {
+     "fn": "Joseph",
+     "ln": "Rosales",
+     "pos": "LI",
+     "age": 27,
+     "nat": "HN",
+     "ovr": 66
+    },
+    {
+     "fn": "James",
+     "ln": "Rodríguez",
+     "pos": "MCO",
+     "age": 35,
+     "nat": "CO",
+     "ovr": 76
+    },
+    {
+     "fn": "Sang-bin",
+     "ln": "Jeong",
+     "pos": "EI",
+     "age": 24,
+     "nat": "KR",
+     "ovr": 68
+    },
+    {
+     "fn": "Anthony",
+     "ln": "Markanich",
+     "pos": "MD",
+     "age": 24,
+     "nat": "US",
+     "ovr": 62
+    },
+    {
+     "fn": "Bongokuhle",
+     "ln": "Hlongwane",
+     "pos": "ED",
+     "age": 26,
+     "nat": "ZA",
+     "ovr": 70
+    },
+    {
+     "fn": "Teemu",
+     "ln": "Pukki",
+     "pos": "DC",
+     "age": 36,
+     "nat": "FI",
+     "ovr": 72
+    },
+    {
+     "fn": "Tani",
+     "ln": "Oluwaseyi",
+     "pos": "DC",
+     "age": 26,
+     "nat": "CA",
+     "ovr": 72
+    },
+    {
+     "fn": "Kelvin",
+     "ln": "Yeboah",
+     "pos": "DC",
+     "age": 25,
+     "nat": "GH",
+     "ovr": 70
+    },
+    {
+     "fn": "Jefferson",
+     "ln": "Díaz",
+     "pos": "DFC",
+     "age": 23,
+     "nat": "CO",
+     "ovr": 60
+    }
+   ]
+  },
+  {
+   "club": "San Diego FC",
+   "coach": "Mikey Varas",
+   "src": "memory",
+   "players": [
+    {
+     "fn": "Pablo",
+     "ln": "Sisniega",
+     "pos": "POR",
+     "age": 29,
+     "nat": "MX",
+     "ovr": 72
+    },
+    {
+     "fn": "Duran",
+     "ln": "Ferree",
+     "pos": "POR",
+     "age": 26,
+     "nat": "US",
+     "ovr": 60
+    },
+    {
+     "fn": "Jeppe",
+     "ln": "Tverskov",
+     "pos": "DFC",
+     "age": 33,
+     "nat": "DK",
+     "ovr": 72
+    },
+    {
+     "fn": "Emiro",
+     "ln": "Garcés",
+     "pos": "DFC",
+     "age": 29,
+     "nat": "CO",
+     "ovr": 70
+    },
+    {
+     "fn": "Andrés",
+     "ln": "Reyes",
+     "pos": "DFC",
+     "age": 28,
+     "nat": "CO",
+     "ovr": 70
+    },
+    {
+     "fn": "Paddy",
+     "ln": "McNair",
+     "pos": "DFC",
+     "age": 31,
+     "nat": "NIR",
+     "ovr": 70
+    },
+    {
+     "fn": "Kieran",
+     "ln": "Sargeant",
+     "pos": "LD",
+     "age": 28,
+     "nat": "US",
+     "ovr": 66
+    },
+    {
+     "fn": "Manu",
+     "ln": "Duah",
+     "pos": "MCD",
+     "age": 24,
+     "nat": "GH",
+     "ovr": 68
+    },
+    {
+     "fn": "Anibal",
+     "ln": "Godoy",
+     "pos": "MCD",
+     "age": 36,
+     "nat": "PA",
+     "ovr": 68
+    },
+    {
+     "fn": "Luca",
+     "ln": "de la Torre",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 72
+    },
+    {
+     "fn": "Willy",
+     "ln": "Kumado",
+     "pos": "MC",
+     "age": 22,
+     "nat": "GH",
+     "ovr": 68
+    },
+    {
+     "fn": "Wilson",
+     "ln": "Eisner",
+     "pos": "MC",
+     "age": 28,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Anders",
+     "ln": "Dreyer",
+     "pos": "MCO",
+     "age": 28,
+     "nat": "DK",
+     "ovr": 80
+    },
+    {
+     "fn": "Elias",
+     "ln": "Achouri",
+     "pos": "EI",
+     "age": 27,
+     "nat": "TN",
+     "ovr": 74
+    },
+    {
+     "fn": "Alex",
+     "ln": "Mighten",
+     "pos": "EI",
+     "age": 24,
+     "nat": "ENG",
+     "ovr": 66
+    },
+    {
+     "fn": "Corey",
+     "ln": "Baird",
+     "pos": "ED",
+     "age": 30,
+     "nat": "US",
+     "ovr": 64
+    },
+    {
+     "fn": "Tomás",
+     "ln": "Ángel",
+     "pos": "EI",
+     "age": 22,
+     "nat": "CO",
+     "ovr": 68
+    },
+    {
+     "fn": "Marcus",
+     "ln": "Ingvartsen",
+     "pos": "DC",
+     "age": 30,
+     "nat": "DK",
+     "ovr": 74
+    },
+    {
+     "fn": "Amahl",
+     "ln": "Pellegrino",
+     "pos": "DC",
+     "age": 36,
+     "nat": "NO",
+     "ovr": 66
+    },
+    {
+     "fn": "Jacob",
+     "ln": "Jackson",
+     "pos": "POR",
+     "age": 22,
+     "nat": "US",
+     "ovr": 55
+    }
+   ]
+  }
+ ]
+}

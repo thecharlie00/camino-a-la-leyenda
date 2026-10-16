@@ -1,0 +1,1358 @@
+{
+ "Traer a tu familia una temporada (20 k€)": {
+  "ctx": "{t: tr(\"Traer a tu familia una temporada (20 k€)\"), ok: {txt: tr(\"Con los tuyos cerca, la casa vuelve a ser casa.\"), fx: {money: -20000, mor: 8, form: 2}}},",
+  "where": "events-more.js:501"
+ },
+ "Con los tuyos cerca, la casa vuelve a ser casa.": {
+  "ctx": "{t: tr(\"Traer a tu familia una temporada (20 k€)\"), ok: {txt: tr(\"Con los tuyos cerca, la casa vuelve a ser casa.\"), fx: {money: -20000, mor: 8, form: 2}}},",
+  "where": "events-more.js:501"
+ },
+ "Hacer amigos en el vestuario": {
+  "ctx": "{t: tr(\"Hacer amigos en el vestuario\"), p: 0.6,",
+  "where": "events-more.js:502"
+ },
+ "Un par de compañeros te adoptan. Cenas, series y risas.": {
+  "ctx": "ok: {txt: tr(\"Un par de compañeros te adoptan. Cenas, series y risas.\"), fx: {mor: 6, coach: 2}},",
+  "where": "events-more.js:503"
+ },
+ "No acabas de encajar. La soledad sigue ahí.": {
+  "ctx": "ko: {txt: tr(\"No acabas de encajar. La soledad sigue ahí.\"), fx: {mor: -3}}},",
+  "where": "events-more.js:504"
+ },
+ "Volar a casa en los días libres": {
+  "ctx": "{t: tr(\"Volar a casa en los días libres\"), ok: {txt: tr(\"Recargas pilas, pero tanto viaje cansa.\"), fx: {mor: 5, fit: -5}}}",
+  "where": "events-more.js:505"
+ },
+ "Recargas pilas, pero tanto viaje cansa.": {
+  "ctx": "{t: tr(\"Volar a casa en los días libres\"), ok: {txt: tr(\"Recargas pilas, pero tanto viaje cansa.\"), fx: {mor: 5, fit: -5}}}",
+  "where": "events-more.js:505"
+ },
+ "El míster quiere presionar arriba durante los noventa minutos. Necesita que corras mucho más que antes, aunque te quite energía para atacar.": {
+  "ctx": "text: function () { return tr(\"El míster quiere presionar arriba durante los noventa minutos. Necesita que corras mucho más que antes, aunque te quite energía para atacar.\"); },",
+  "where": "events-more.js:510"
+ },
+ "Entregarte al plan": {
+  "ctx": "{t: tr(\"Entregarte al plan\"), ok: {txt: tr(\"Corres como nunca. El míster te pone de ejemplo.\"), fx: {coach: 6, fit: -6, att: {FIS: 1}}}},",
+  "where": "events-more.js:512"
+ },
+ "Corres como nunca. El míster te pone de ejemplo.": {
+  "ctx": "{t: tr(\"Entregarte al plan\"), ok: {txt: tr(\"Corres como nunca. El míster te pone de ejemplo.\"), fx: {coach: 6, fit: -6, att: {FIS: 1}}}},",
+  "where": "events-more.js:512"
+ },
+ "Pedir un papel adaptado": {
+  "ctx": "{t: tr(\"Pedir un papel adaptado\"), p: 0.5,",
+  "where": "events-more.js:513"
+ },
+ "El míster te libera de parte del trabajo sin balón.": {
+  "ctx": "ok: {txt: tr(\"El míster te libera de parte del trabajo sin balón.\"), fx: {coach: 1, form: 3}},",
+  "where": "events-more.js:514"
+ },
+ "«Aquí presiona todo el mundo». Te ganas una mirada fría.": {
+  "ctx": "ko: {txt: tr(\"«Aquí presiona todo el mundo». Te ganas una mirada fría.\"), fx: {coach: -5}}},",
+  "where": "events-more.js:515"
+ },
+ "Trabajar el físico por tu cuenta": {
+  "ctx": "{t: tr(\"Trabajar el físico por tu cuenta\"), ok: {txt: tr(\"Sesiones extra de resistencia. Llegas mejor que nadie.\"), fx: {fit: -3, prof: 3, coach: 3, att: {FIS: 1}}}}",
+  "where": "events-more.js:516"
+ },
+ "Sesiones extra de resistencia. Llegas mejor que nadie.": {
+  "ctx": "{t: tr(\"Trabajar el físico por tu cuenta\"), ok: {txt: tr(\"Sesiones extra de resistencia. Llegas mejor que nadie.\"), fx: {fit: -3, prof: 3, coach: 3, att: {FIS: 1}}}}",
+  "where": "events-more.js:516"
+ },
+ "El analista te deja un informe de cuarenta páginas sobre el jugador que tendrás enfrente en el partido contra el {opp}. Es tarde y mañana hay sesión temprano.": {
+  "ctx": "text: function (x) { return tr(\"El analista te deja un informe de cuarenta páginas sobre el jugador que tendrás enfrente en el partido contra el {opp}. Es tarde y mañana hay sesión temprano.\", {opp: x.opp()}); },",
+  "where": "events-more.js:521"
+ },
+ "Estudiarlo hasta la madrugada": {
+  "ctx": "{t: tr(\"Estudiarlo hasta la madrugada\"), p: 0.6,",
+  "where": "events-more.js:523"
+ },
+ "Te sabes cada movimiento suyo y lo anulas por completo.": {
+  "ctx": "ok: {txt: tr(\"Te sabes cada movimiento suyo y lo anulas por completo.\"), fx: {coach: 4, buff: {v: 1, b: 1, n: tr(\"Deberes hechos\")}, fit: -3}},",
+  "where": "events-more.js:524"
+ },
+ "Deberes hechos": {
+  "ctx": "ok: {txt: tr(\"Te sabes cada movimiento suyo y lo anulas por completo.\"), fx: {coach: 4, buff: {v: 1, b: 1, n: tr(\"Deberes hechos\")}, fit: -3}},",
+  "where": "events-more.js:524"
+ },
+ "Duermes poco y en el campo te faltan piernas.": {
+  "ctx": "ko: {txt: tr(\"Duermes poco y en el campo te faltan piernas.\"), fx: {fit: -6, form: -3}}},",
+  "where": "events-more.js:525"
+ },
+ "Leer el resumen y dormir": {
+  "ctx": "{t: tr(\"Leer el resumen y dormir\"), ok: {txt: tr(\"Lo esencial y a la cama. Equilibrio.\"), fx: {prof: 2}}},",
+  "where": "events-more.js:526"
+ },
+ "Lo esencial y a la cama. Equilibrio.": {
+  "ctx": "{t: tr(\"Leer el resumen y dormir\"), ok: {txt: tr(\"Lo esencial y a la cama. Equilibrio.\"), fx: {prof: 2}}},",
+  "where": "events-more.js:526"
+ },
+ "Fiarte de tu instinto": {
+  "ctx": "{t: tr(\"Fiarte de tu instinto\"), ok: {txt: tr(\"El analista se queda con cara de pocos amigos.\"), fx: {coach: -2, fit: 2}}}",
+  "where": "events-more.js:527"
+ },
+ "El analista se queda con cara de pocos amigos.": {
+  "ctx": "{t: tr(\"Fiarte de tu instinto\"), ok: {txt: tr(\"El analista se queda con cara de pocos amigos.\"), fx: {coach: -2, fit: 2}}}",
+  "where": "events-more.js:527"
+ },
+ "Te encargas de la caja de multas internas del vestuario. La estrella del equipo llega tarde una y otra vez y se niega a pagar.": {
+  "ctx": "text: function () { return tr(\"Te encargas de la caja de multas internas del vestuario. La estrella del equipo llega tarde una y otra vez y se niega a pagar.\"); },",
+  "where": "events-more.js:532"
+ },
+ "Exigirle que pague delante de todos": {
+  "ctx": "{t: tr(\"Exigirle que pague delante de todos\"), p: 0.55,",
+  "where": "events-more.js:534"
+ },
+ "Paga entre risas. El vestuario ve que las normas son para todos.": {
+  "ctx": "ok: {txt: tr(\"Paga entre risas. El vestuario ve que las normas son para todos.\"), fx: {coach: 4, mor: 3, prof: 2}},",
+  "where": "events-more.js:535"
+ },
+ "Se lo toma fatal y se forma un frente en el vestuario.": {
+  "ctx": "ko: {txt: tr(\"Se lo toma fatal y se forma un frente en el vestuario.\"), fx: {mor: -5, coach: -2}}},",
+  "where": "events-more.js:536"
+ },
+ "Hablarlo con él en privado": {
+  "ctx": "{t: tr(\"Hablarlo con él en privado\"), ok: {txt: tr(\"Acabáis pactando que invite a cenar a toda la plantilla.\"), fx: {mor: 4}}},",
+  "where": "events-more.js:537"
+ },
+ "Acabáis pactando que invite a cenar a toda la plantilla.": {
+  "ctx": "{t: tr(\"Hablarlo con él en privado\"), ok: {txt: tr(\"Acabáis pactando que invite a cenar a toda la plantilla.\"), fx: {mor: 4}}},",
+  "where": "events-more.js:537"
+ },
+ "Contárselo al míster": {
+  "ctx": "{t: tr(\"Contárselo al míster\"), ok: {txt: tr(\"El míster lo resuelve, pero algunos te ven como un chivato.\"), fx: {coach: 4, mor: -3}}}",
+  "where": "events-more.js:538"
+ },
+ "El míster lo resuelve, pero algunos te ven como un chivato.": {
+  "ctx": "{t: tr(\"Contárselo al míster\"), ok: {txt: tr(\"El míster lo resuelve, pero algunos te ven como un chivato.\"), fx: {coach: 4, mor: -3}}}",
+  "where": "events-more.js:538"
+ },
+ "Es tu primera cena con la plantilla y la tradición manda: los nuevos tienen que subirse a una silla y cantar una canción.": {
+  "ctx": "text: function () { return tr(\"Es tu primera cena con la plantilla y la tradición manda: los nuevos tienen que subirse a una silla y cantar una canción.\"); },",
+  "where": "events-more.js:543"
+ },
+ "Darlo todo con un clásico": {
+  "ctx": "{t: tr(\"Darlo todo con un clásico\"), p: 0.6,",
+  "where": "events-more.js:545"
+ },
+ "Afinas lo justo, pero la energía conquista a todos. Estás dentro.": {
+  "ctx": "ok: {txt: tr(\"Afinas lo justo, pero la energía conquista a todos. Estás dentro.\"), fx: {mor: 6, coach: 3}},",
+  "where": "events-more.js:546"
+ },
+ "Se te olvida la letra a la mitad. Risas… a tu costa.": {
+  "ctx": "ko: {txt: tr(\"Se te olvida la letra a la mitad. Risas… a tu costa.\"), fx: {mor: 1, fol: 20}}},",
+  "where": "events-more.js:547"
+ },
+ "Cantar algo de tu tierra": {
+  "ctx": "{t: tr(\"Cantar algo de tu tierra\"), ok: {txt: tr(\"Nadie la conoce, pero acaban todos coreando el estribillo.\"), fx: {mor: 5, coach: 2}}},",
+  "where": "events-more.js:548"
+ },
+ "Nadie la conoce, pero acaban todos coreando el estribillo.": {
+  "ctx": "{t: tr(\"Cantar algo de tu tierra\"), ok: {txt: tr(\"Nadie la conoce, pero acaban todos coreando el estribillo.\"), fx: {mor: 5, coach: 2}}},",
+  "where": "events-more.js:548"
+ },
+ "No haces el ridículo, pero te ganas fama de soso.": {
+  "ctx": "{t: tr(\"Negarte\"), ok: {txt: tr(\"No haces el ridículo, pero te ganas fama de soso.\"), fx: {mor: -4}}}",
+  "where": "events-more.js:549"
+ },
+ "Un audio tuyo en el grupo del vestuario criticando al míster ha llegado a la prensa. Alguien te ha traicionado.": {
+  "ctx": "text: function () { return tr(\"Un audio tuyo en el grupo del vestuario criticando al míster ha llegado a la prensa. Alguien te ha traicionado.\"); },",
+  "where": "events-more.js:554"
+ },
+ "Pedir perdón al míster": {
+  "ctx": "{t: tr(\"Pedir perdón al míster\"), p: 0.6,",
+  "where": "events-more.js:556"
+ },
+ "Lo acepta, aunque te lo recordará durante un tiempo.": {
+  "ctx": "ok: {txt: tr(\"Lo acepta, aunque te lo recordará durante un tiempo.\"), fx: {coach: 4, mor: -2}},",
+  "where": "events-more.js:557"
+ },
+ "No hay perdón: te pasas varias semanas en el banquillo.": {
+  "ctx": "ko: {txt: tr(\"No hay perdón: te pasas varias semanas en el banquillo.\"), fx: {coach: -6, form: -3}}},",
+  "where": "events-more.js:558"
+ },
+ "Buscar al topo": {
+  "ctx": "{t: tr(\"Buscar al topo\"), p: 0.4,",
+  "where": "events-more.js:559"
+ },
+ "Lo descubres y el vestuario le da la espalda a él.": {
+  "ctx": "ok: {txt: tr(\"Lo descubres y el vestuario le da la espalda a él.\"), fx: {mor: 4}},",
+  "where": "events-more.js:560"
+ },
+ "Sospechas de todos y el ambiente se envenena.": {
+  "ctx": "ko: {txt: tr(\"Sospechas de todos y el ambiente se envenena.\"), fx: {mor: -5, coach: -3}}},",
+  "where": "events-more.js:561"
+ },
+ "Mantener lo que dijiste": {
+  "ctx": "{t: tr(\"Mantener lo que dijiste\"), ok: {txt: tr(\"Algunos compañeros te apoyan en voz baja. El míster, no.\"), fx: {coach: -10, fans: 3, mor: 2}}}",
+  "where": "events-more.js:562"
+ },
+ "Algunos compañeros te apoyan en voz baja. El míster, no.": {
+  "ctx": "{t: tr(\"Mantener lo que dijiste\"), ok: {txt: tr(\"Algunos compañeros te apoyan en voz baja. El míster, no.\"), fx: {coach: -10, fans: 3, mor: 2}}}",
+  "where": "events-more.js:562"
+ },
+ "El grupo ultra más ruidoso del estadio te pide una foto con una pancarta suya. Algunos de sus mensajes han provocado sanciones al club.": {
+  "ctx": "text: function () { return tr(\"El grupo ultra más ruidoso del estadio te pide una foto con una pancarta suya. Algunos de sus mensajes han provocado sanciones al club.\"); },",
+  "where": "events-more.js:567"
+ },
+ "La grada de animación te jalea cada vez que tocas el balón.": {
+  "ctx": "ok: {txt: tr(\"La grada de animación te jalea cada vez que tocas el balón.\"), fx: {fans: 6}},",
+  "where": "events-more.js:570"
+ },
+ "La pancarta tiene un mensaje polémico. El club abre expediente.": {
+  "ctx": "ko: {txt: tr(\"La pancarta tiene un mensaje polémico. El club abre expediente.\"), fx: {fans: 2, coach: -6, money: -yK(10000), fame: -1}}},",
+  "where": "events-more.js:571"
+ },
+ "Hacerte la foto, sin pancarta": {
+  "ctx": "{t: tr(\"Hacerte la foto, sin pancarta\"), ok: {txt: tr(\"Un saludo con ellos y nada más. Te vale.\"), fx: {fans: 3}}},",
+  "where": "events-more.js:572"
+ },
+ "Un saludo con ellos y nada más. Te vale.": {
+  "ctx": "{t: tr(\"Hacerte la foto, sin pancarta\"), ok: {txt: tr(\"Un saludo con ellos y nada más. Te vale.\"), fx: {fans: 3}}},",
+  "where": "events-more.js:572"
+ },
+ "Negarte con educación": {
+  "ctx": "{t: tr(\"Negarte con educación\"), ok: {txt: tr(\"Algún pitido aislado, pero el club lo agradece.\"), fx: {coach: 2, fans: -3}}}",
+  "where": "events-more.js:573"
+ },
+ "Algún pitido aislado, pero el club lo agradece.": {
+  "ctx": "{t: tr(\"Negarte con educación\"), ok: {txt: tr(\"Algún pitido aislado, pero el club lo agradece.\"), fx: {coach: 2, fans: -3}}}",
+  "where": "events-more.js:573"
+ },
+ "Una marca de embutidos te ofrece un anuncio para la tele. El guion te obliga a bailar disfrazado de chorizo.": {
+  "ctx": "text: function () { return tr(\"Una marca de embutidos te ofrece un anuncio para la tele. El guion te obliga a bailar disfrazado de chorizo.\"); },",
+  "where": "events-more.js:578"
+ },
+ "Rodarlo con todo": {
+  "ctx": "{t: tr(\"Rodarlo con todo\"), p: 0.55,",
+  "where": "events-more.js:580"
+ },
+ "El anuncio es tan absurdo que se vuelve un fenómeno. Te adoran.": {
+  "ctx": "ok: {txt: tr(\"El anuncio es tan absurdo que se vuelve un fenómeno. Te adoran.\"), fx: {money: m, fol: 100, fans: 5, fame: 2}},",
+  "where": "events-more.js:581"
+ },
+ "Los rivales te lo cantan en cada estadio.": {
+  "ctx": "ko: {txt: tr(\"Los rivales te lo cantan en cada estadio.\"), fx: {money: m, fol: 40, mor: -4}}},",
+  "where": "events-more.js:582"
+ },
+ "Pedir cambiar el guion": {
+  "ctx": "{t: tr(\"Pedir cambiar el guion\"), p: 0.5,",
+  "where": "events-more.js:583"
+ },
+ "Aceptan un anuncio más serio, y cobras algo menos.": {
+  "ctx": "ok: {txt: tr(\"Aceptan un anuncio más serio, y cobras algo menos.\"), fx: {money: yK(m * 0.6)}},",
+  "where": "events-more.js:584"
+ },
+ "La marca se busca a otro futbolista.": {
+  "ctx": "ko: {txt: tr(\"La marca se busca a otro futbolista.\"), fx: {}}},",
+  "where": "events-more.js:585"
+ },
+ "Tu dignidad no tiene precio.": {
+  "ctx": "{t: tr(\"Rechazarlo\"), ok: {txt: tr(\"Tu dignidad no tiene precio.\"), fx: {prof: 1}}}",
+  "where": "events-more.js:586"
+ },
+ "Un periodista con el que tienes buena relación te pide que le confirmes, en secreto, que un compañero va a dejar el club.": {
+  "ctx": "text: function () { return tr(\"Un periodista con el que tienes buena relación te pide que le confirmes, en secreto, que un compañero va a dejar el club.\"); },",
+  "where": "events-more.js:591"
+ },
+ "Confirmárselo": {
+  "ctx": "{t: tr(\"Confirmárselo\"), p: 0.5,",
+  "where": "events-more.js:593"
+ },
+ "La exclusiva sale sin que nadie sepa de dónde. El periodista te debe una.": {
+  "ctx": "ok: {txt: tr(\"La exclusiva sale sin que nadie sepa de dónde. El periodista te debe una.\"), fx: {fame: 1}},",
+  "where": "events-more.js:594"
+ },
+ "Tu compañero se entera de que fuiste tú. El vestuario te mira mal.": {
+  "ctx": "ko: {txt: tr(\"Tu compañero se entera de que fuiste tú. El vestuario te mira mal.\"), fx: {mor: -6, coach: -5}}},",
+  "where": "events-more.js:595"
+ },
+ "Negarte a hablar del tema": {
+  "ctx": "{t: tr(\"Negarte a hablar del tema\"), ok: {txt: tr(\"El periodista lo entiende… más o menos.\"), fx: {prof: 2}}},",
+  "where": "events-more.js:596"
+ },
+ "El periodista lo entiende… más o menos.": {
+  "ctx": "{t: tr(\"Negarte a hablar del tema\"), ok: {txt: tr(\"El periodista lo entiende… más o menos.\"), fx: {prof: 2}}},",
+  "where": "events-more.js:596"
+ },
+ "Avisar a tu compañero": {
+  "ctx": "{t: tr(\"Avisar a tu compañero\"), ok: {txt: tr(\"Te agradece la lealtad y la relación se refuerza.\"), fx: {mor: 4, coach: 1}}}",
+  "where": "events-more.js:597"
+ },
+ "Te agradece la lealtad y la relación se refuerza.": {
+  "ctx": "{t: tr(\"Avisar a tu compañero\"), ok: {txt: tr(\"Te agradece la lealtad y la relación se refuerza.\"), fx: {mor: 4, coach: 1}}}",
+  "where": "events-more.js:597"
+ },
+ "Llevas días con dolor en una muela del juicio y tus músculos no recuperan bien. El dentista del club recomienda sacarla ya.": {
+  "ctx": "text: function () { return tr(\"Llevas días con dolor en una muela del juicio y tus músculos no recuperan bien. El dentista del club recomienda sacarla ya.\"); },",
+  "where": "events-more.js:602"
+ },
+ "Sacarla ahora": {
+  "ctx": "{t: tr(\"Sacarla ahora\"), ok: {txt: tr(\"Un par de días con la cara hinchada y sopa. Luego, como nuevo.\"), fx: {form: -2, fit: 4, injMul: 0.97}}},",
+  "where": "events-more.js:604"
+ },
+ "Un par de días con la cara hinchada y sopa. Luego, como nuevo.": {
+  "ctx": "{t: tr(\"Sacarla ahora\"), ok: {txt: tr(\"Un par de días con la cara hinchada y sopa. Luego, como nuevo.\"), fx: {form: -2, fit: 4, injMul: 0.97}}},",
+  "where": "events-more.js:604"
+ },
+ "Aguantar con antiinflamatorios": {
+  "ctx": "{t: tr(\"Aguantar con antiinflamatorios\"), p: 0.55,",
+  "where": "events-more.js:605"
+ },
+ "El dolor remite y llegas al parón sin problemas.": {
+  "ctx": "ok: {txt: tr(\"El dolor remite y llegas al parón sin problemas.\"), fx: {}},",
+  "where": "events-more.js:606"
+ },
+ "Se infecta y te pierdes un partido con fiebre.": {
+  "ctx": "ko: {txt: tr(\"Se infecta y te pierdes un partido con fiebre.\"), fx: {inj: 1, form: -4}}},",
+  "where": "events-more.js:607"
+ },
+ "Esperar al parón": {
+  "ctx": "{t: tr(\"Esperar al parón\"), p: 0.7,",
+  "where": "events-more.js:608"
+ },
+ "Aguantas unas semanas y te operas sin perder partidos.": {
+  "ctx": "ok: {txt: tr(\"Aguantas unas semanas y te operas sin perder partidos.\"), fx: {fit: -2}},",
+  "where": "events-more.js:609"
+ },
+ "Tu cuerpo lo paga con una sobrecarga muscular.": {
+  "ctx": "ko: {txt: tr(\"Tu cuerpo lo paga con una sobrecarga muscular.\"), fx: {inj: [1, 2], fit: -4}}}",
+  "where": "events-more.js:610"
+ },
+ "Llega un preparador de porteros con ideas modernas: quiere que juegues más adelantado y con los pies, aunque eso cambie tu forma de parar.": {
+  "ctx": "text: function () { return tr(\"Llega un preparador de porteros con ideas modernas: quiere que juegues más adelantado y con los pies, aunque eso cambie tu forma de parar.\"); },",
+  "where": "events-more.js:615"
+ },
+ "Abrazar el cambio": {
+  "ctx": "{t: tr(\"Abrazar el cambio\"), p: 0.65,",
+  "where": "events-more.js:617"
+ },
+ "Te conviertes en un portero moderno. El juego del equipo lo agradece.": {
+  "ctx": "ok: {txt: tr(\"Te conviertes en un portero moderno. El juego del equipo lo agradece.\"), fx: {coach: 5, ovr: 1, att: {SAQ: 1}}},",
+  "where": "events-more.js:618"
+ },
+ "En plena adaptación, un error con los pies acaba en gol.": {
+  "ctx": "ko: {txt: tr(\"En plena adaptación, un error con los pies acaba en gol.\"), fx: {coach: -3, form: -4, att: {SAQ: 1}}}},",
+  "where": "events-more.js:619"
+ },
+ "Pedir mantener tu estilo": {
+  "ctx": "{t: tr(\"Pedir mantener tu estilo\"), ok: {txt: tr(\"Seguirás siendo un portero de reflejos. El preparador no está convencido.\"), fx: {coach: -3, att: {REF: 1}}}},",
+  "where": "events-more.js:620"
+ },
+ "Seguirás siendo un portero de reflejos. El preparador no está convencido.": {
+  "ctx": "{t: tr(\"Pedir mantener tu estilo\"), ok: {txt: tr(\"Seguirás siendo un portero de reflejos. El preparador no está convencido.\"), fx: {coach: -3, att: {REF: 1}}}},",
+  "where": "events-more.js:620"
+ },
+ "Cambiar poco a poco": {
+  "ctx": "{t: tr(\"Cambiar poco a poco\"), ok: {txt: tr(\"Un poco cada semana. Sin brillo, pero sin errores.\"), fx: {prof: 3, coach: 2}}}",
+  "where": "events-more.js:621"
+ },
+ "Un poco cada semana. Sin brillo, pero sin errores.": {
+  "ctx": "{t: tr(\"Cambiar poco a poco\"), ok: {txt: tr(\"Un poco cada semana. Sin brillo, pero sin errores.\"), fx: {prof: 3, coach: 2}}}",
+  "where": "events-more.js:621"
+ },
+ "El míster quiere que persigas a la estrella del {opp} por todo el campo, olvidándote de tu posición.": {
+  "ctx": "text: function (x) { return tr(\"El míster quiere que persigas a la estrella del {opp} por todo el campo, olvidándote de tu posición.\", {opp: x.opp()}); },",
+  "where": "events-more.js:626"
+ },
+ "Pegarte a él como una sombra": {
+  "ctx": "{t: tr(\"Pegarte a él como una sombra\"), p: p,",
+  "where": "events-more.js:628"
+ },
+ "No toca un balón en todo el partido. Las cámaras te buscan a ti.": {
+  "ctx": "ok: {txt: tr(\"No toca un balón en todo el partido. Las cámaras te buscan a ti.\"), fx: {coach: 6, fame: 2, fans: 4}},",
+  "where": "events-more.js:629"
+ },
+ "Te gana la espalda un par de veces y marca. Duro día.": {
+  "ctx": "ko: {txt: tr(\"Te gana la espalda un par de veces y marca. Duro día.\"), fx: {coach: -3, form: -4}}},",
+  "where": "events-more.js:630"
+ },
+ "Jugar duro desde el principio": {
+  "ctx": "{t: tr(\"Jugar duro desde el principio\"), p: 0.55,",
+  "where": "events-more.js:631"
+ },
+ "Un par de entradas y le quitas las ganas de encarar.": {
+  "ctx": "ok: {txt: tr(\"Un par de entradas y le quitas las ganas de encarar.\"), fx: {coach: 3, fans: 2}},",
+  "where": "events-more.js:632"
+ },
+ "Amarilla temprana y tienes que bajar el pistón. Sufres.": {
+  "ctx": "ko: {txt: tr(\"Amarilla temprana y tienes que bajar el pistón. Sufres.\"), fx: {coach: -4, susp: 1}}},",
+  "where": "events-more.js:633"
+ },
+ "Proponer una defensa en zona": {
+  "ctx": "{t: tr(\"Proponer una defensa en zona\"), p: 0.4,",
+  "where": "events-more.js:634"
+ },
+ "El míster acepta y salís bien parados.": {
+  "ctx": "ok: {txt: tr(\"El míster acepta y salís bien parados.\"), fx: {coach: 2, prof: 2}},",
+  "where": "events-more.js:635"
+ },
+ "«Aquí decido yo». Hoy chupas banquillo.": {
+  "ctx": "ko: {txt: tr(\"«Aquí decido yo». Hoy chupas banquillo.\"), fx: {coach: -5}}}",
+  "where": "events-more.js:636"
+ },
+ "Tu pierna mala es tu gran debilidad y los rivales lo saben. Un entrenador personal te propone dedicar medio verano a corregirla.": {
+  "ctx": "text: function () { return tr(\"Tu pierna mala es tu gran debilidad y los rivales lo saben. Un entrenador personal te propone dedicar medio verano a corregirla.\"); },",
+  "where": "events-more.js:641"
+ },
+ "Trabajar todo el verano (15 k€)": {
+  "ctx": "{t: tr(\"Trabajar todo el verano (15 k€)\"), ok: {txt: tr(\"Horas y horas golpeando con la otra pierna. Ya no eres previsible.\"), fx: {money: -15000, ovr: 1, prof: 3, fit: -4}}},",
+  "where": "events-more.js:643"
+ },
+ "Horas y horas golpeando con la otra pierna. Ya no eres previsible.": {
+  "ctx": "{t: tr(\"Trabajar todo el verano (15 k€)\"), ok: {txt: tr(\"Horas y horas golpeando con la otra pierna. Ya no eres previsible.\"), fx: {money: -15000, ovr: 1, prof: 3, fit: -4}}},",
+  "where": "events-more.js:643"
+ },
+ "Unas semanas y vacaciones": {
+  "ctx": "{t: tr(\"Unas semanas y vacaciones\"), p: 0.6,",
+  "where": "events-more.js:644"
+ },
+ "Lo justo para notar mejora sin quemarte.": {
+  "ctx": "ok: {txt: tr(\"Lo justo para notar mejora sin quemarte.\"), fx: {money: -8000, prof: 2, att: {TIR: 1}}},",
+  "where": "events-more.js:645"
+ },
+ "No da tiempo a mejorar casi nada.": {
+  "ctx": "ko: {txt: tr(\"No da tiempo a mejorar casi nada.\"), fx: {money: -8000}}},",
+  "where": "events-more.js:646"
+ },
+ "Descansar de verdad": {
+  "ctx": "{t: tr(\"Descansar de verdad\"), ok: {txt: tr(\"Playa, familia y desconexión. Vuelves fresco.\"), fx: {mor: 5, fit: 4}}}",
+  "where": "events-more.js:647"
+ },
+ "Playa, familia y desconexión. Vuelves fresco.": {
+  "ctx": "{t: tr(\"Descansar de verdad\"), ok: {txt: tr(\"Playa, familia y desconexión. Vuelves fresco.\"), fx: {mor: 5, fit: 4}}}",
+  "where": "events-more.js:647"
+ },
+ "En tu último partido con la selección no cantaste el himno y un programa de televisión lo ha convertido en debate nacional.": {
+  "ctx": "text: function () { return tr(\"En tu último partido con la selección no cantaste el himno y un programa de televisión lo ha convertido en debate nacional.\"); },",
+  "where": "events-more.js:652"
+ },
+ "Explicar que te concentras así": {
+  "ctx": "{t: tr(\"Explicar que te concentras así\"), p: 0.6,",
+  "where": "events-more.js:654"
+ },
+ "La mayoría lo entiende y el tema se apaga.": {
+  "ctx": "ok: {txt: tr(\"La mayoría lo entiende y el tema se apaga.\"), fx: {prof: 2}},",
+  "where": "events-more.js:655"
+ },
+ "Te acusan de poco patriota. Te pitan en un estadio.": {
+  "ctx": "ko: {txt: tr(\"Te acusan de poco patriota. Te pitan en un estadio.\"), fx: {fans: -4, mor: -3}}},",
+  "where": "events-more.js:656"
+ },
+ "Cantarlo a pleno pulmón la próxima vez": {
+  "ctx": "{t: tr(\"Cantarlo a pleno pulmón la próxima vez\"), ok: {txt: tr(\"Las cámaras te enfocan y te ven cantar con ganas. Fin del debate.\"), fx: {fans: 3, fame: 1}}},",
+  "where": "events-more.js:657"
+ },
+ "Las cámaras te enfocan y te ven cantar con ganas. Fin del debate.": {
+  "ctx": "{t: tr(\"Cantarlo a pleno pulmón la próxima vez\"), ok: {txt: tr(\"Las cámaras te enfocan y te ven cantar con ganas. Fin del debate.\"), fx: {fans: 3, fame: 1}}},",
+  "where": "events-more.js:657"
+ },
+ "Criticar el debate": {
+  "ctx": "{t: tr(\"Criticar el debate\"), p: 0.5,",
+  "where": "events-more.js:658"
+ },
+ "Tu respuesta conecta con mucha gente.": {
+  "ctx": "ok: {txt: tr(\"Tu respuesta conecta con mucha gente.\"), fx: {fame: 3, fol: 40}},",
+  "where": "events-more.js:659"
+ },
+ "Echas leña al fuego. El seleccionador te pide calma.": {
+  "ctx": "ko: {txt: tr(\"Echas leña al fuego. El seleccionador te pide calma.\"), fx: {fame: 2, mor: -3}}}",
+  "where": "events-more.js:660"
+ },
+ "Te proponen organizar un campus de fútbol con tu nombre para niños de tu ciudad durante dos semanas de vacaciones.": {
+  "ctx": "text: function () { return tr(\"Te proponen organizar un campus de fútbol con tu nombre para niños de tu ciudad durante dos semanas de vacaciones.\"); },",
+  "where": "events-more.js:665"
+ },
+ "Estar todos los días": {
+  "ctx": "{t: tr(\"Estar todos los días\"), ok: {txt: tr(\"Niños felices, padres agradecidos y tú agotado.\"), fx: {fans: 8, fame: 3, money: yK(20000), fit: -4}}},",
+  "where": "events-more.js:667"
+ },
+ "Niños felices, padres agradecidos y tú agotado.": {
+  "ctx": "{t: tr(\"Estar todos los días\"), ok: {txt: tr(\"Niños felices, padres agradecidos y tú agotado.\"), fx: {fans: 8, fame: 3, money: yK(20000), fit: -4}}},",
+  "where": "events-more.js:667"
+ },
+ "Poner el nombre y aparecer un día": {
+  "ctx": "{t: tr(\"Poner el nombre y aparecer un día\"), p: 0.6,",
+  "where": "events-more.js:668"
+ },
+ "Todo sale bien y cobras sin cansarte.": {
+  "ctx": "ok: {txt: tr(\"Todo sale bien y cobras sin cansarte.\"), fx: {money: yK(30000), fans: 2}},",
+  "where": "events-more.js:669"
+ },
+ "Algunos padres se quejan de que pagaron por verte y no estabas.": {
+  "ctx": "ko: {txt: tr(\"Algunos padres se quejan de que pagaron por verte y no estabas.\"), fx: {money: yK(30000), fans: -5}}},",
+  "where": "events-more.js:670"
+ },
+ "Hacerlo gratis para familias sin recursos": {
+  "ctx": "{t: tr(\"Hacerlo gratis para familias sin recursos\"), ok: {txt: tr(\"Una idea que llena de orgullo a tu ciudad.\"), fx: {fans: 10, fame: 4, mor: 5, money: -yK(10000)}}}",
+  "where": "events-more.js:671"
+ },
+ "Una idea que llena de orgullo a tu ciudad.": {
+  "ctx": "{t: tr(\"Hacerlo gratis para familias sin recursos\"), ok: {txt: tr(\"Una idea que llena de orgullo a tu ciudad.\"), fx: {fans: 10, fame: 4, mor: 5, money: -yK(10000)}}}",
+  "where": "events-more.js:671"
+ },
+ "Un compañero te confiesa que lo está pasando muy mal y que no duerme. Te pide que no se lo cuentes a nadie.": {
+  "ctx": "text: function () { return tr(\"Un compañero te confiesa que lo está pasando muy mal y que no duerme. Te pide que no se lo cuentes a nadie.\"); },",
+  "where": "events-more.js:676"
+ },
+ "Convencerle de pedir ayuda profesional": {
+  "ctx": "{t: tr(\"Convencerle de pedir ayuda profesional\"), p: 0.75,",
+  "where": "events-more.js:678"
+ },
+ "Acepta ver al psicólogo del club. Semanas después te da las gracias.": {
+  "ctx": "ok: {txt: tr(\"Acepta ver al psicólogo del club. Semanas después te da las gracias.\"), fx: {mor: 5, coach: 3, prof: 2}},",
+  "where": "events-more.js:679"
+ },
+ "Aún no está preparado, pero sabe que puede contar contigo.": {
+  "ctx": "ko: {txt: tr(\"Aún no está preparado, pero sabe que puede contar contigo.\"), fx: {mor: 1}}},",
+  "where": "events-more.js:680"
+ },
+ "Estar a su lado": {
+  "ctx": "{t: tr(\"Estar a su lado\"), ok: {txt: tr(\"Cenas, paseos y charlas. A veces lo que hace falta es compañía.\"), fx: {mor: 4, fit: -2}}},",
+  "where": "events-more.js:681"
+ },
+ "Cenas, paseos y charlas. A veces lo que hace falta es compañía.": {
+  "ctx": "{t: tr(\"Estar a su lado\"), ok: {txt: tr(\"Cenas, paseos y charlas. A veces lo que hace falta es compañía.\"), fx: {mor: 4, fit: -2}}},",
+  "where": "events-more.js:681"
+ },
+ "Avisar al cuerpo técnico": {
+  "ctx": "{t: tr(\"Avisar al cuerpo técnico\"), p: 0.5,",
+  "where": "events-more.js:682"
+ },
+ "El club actúa a tiempo. Él lo acaba entendiendo.": {
+  "ctx": "ok: {txt: tr(\"El club actúa a tiempo. Él lo acaba entendiendo.\"), fx: {coach: 4, mor: 2}},",
+  "where": "events-more.js:683"
+ },
+ "Se siente traicionado y deja de hablarte.": {
+  "ctx": "ko: {txt: tr(\"Se siente traicionado y deja de hablarte.\"), fx: {mor: -4}}}",
+  "where": "events-more.js:684"
+ },
+ "El presidente te invita a cenar y, entre plato y plato, te pregunta qué piensas del míster. Parece que se plantea cambiarlo.": {
+  "ctx": "text: function () { return tr(\"El presidente te invita a cenar y, entre plato y plato, te pregunta qué piensas del míster. Parece que se plantea cambiarlo.\"); },",
+  "where": "events-more.js:689"
+ },
+ "Defender al míster": {
+  "ctx": "{t: tr(\"Defender al míster\"), ok: {txt: tr(\"El presidente toma nota. Si se entera, el míster te lo agradecerá.\"), fx: {coach: 5, prof: 2}}},",
+  "where": "events-more.js:691"
+ },
+ "El presidente toma nota. Si se entera, el míster te lo agradecerá.": {
+  "ctx": "{t: tr(\"Defender al míster\"), ok: {txt: tr(\"El presidente toma nota. Si se entera, el míster te lo agradecerá.\"), fx: {coach: 5, prof: 2}}},",
+  "where": "events-more.js:691"
+ },
+ "Decir lo que piensas de verdad": {
+  "ctx": "{t: tr(\"Decir lo que piensas de verdad\"), p: 0.5,",
+  "where": "events-more.js:692"
+ },
+ "El presidente valora tu sinceridad y te consulta más a menudo.": {
+  "ctx": "ok: {txt: tr(\"El presidente valora tu sinceridad y te consulta más a menudo.\"), fx: {fame: 1, mor: 3}},",
+  "where": "events-more.js:693"
+ },
+ "La conversación se filtra y el míster se entera.": {
+  "ctx": "ko: {txt: tr(\"La conversación se filtra y el míster se entera.\"), fx: {coach: -12, mor: -3}}},",
+  "where": "events-more.js:694"
+ },
+ "Hablar solo de la renovación": {
+  "ctx": "{t: tr(\"Hablar solo de la renovación\"), p: 0.5,",
+  "where": "events-more.js:695"
+ },
+ "Aprovechas el momento y te promete mejorar tu contrato.": {
+  "ctx": "ok: {txt: tr(\"Aprovechas el momento y te promete mejorar tu contrato.\"), fx: {sal: 1.08}},",
+  "where": "events-more.js:696"
+ },
+ "Al presidente le sienta mal que solo hables de dinero.": {
+  "ctx": "ko: {txt: tr(\"Al presidente le sienta mal que solo hables de dinero.\"), fx: {mor: -2}}}",
+  "where": "events-more.js:697"
+ },
+ "Estás entre los finalistas al premio al mejor jugador joven del año. Parte del jurado se decide con votos de los aficionados.": {
+  "ctx": "text: function () { return tr(\"Estás entre los finalistas al premio al mejor jugador joven del año. Parte del jurado se decide con votos de los aficionados.\"); },",
+  "where": "events-more.js:702"
+ },
+ "Hacer campaña en redes": {
+  "ctx": "{t: tr(\"Hacer campaña en redes\"), p: p,",
+  "where": "events-more.js:704"
+ },
+ "Tu comunidad se vuelca y te llevas el premio.": {
+  "ctx": "ok: {txt: tr(\"Tu comunidad se vuelca y te llevas el premio.\"), fx: {fame: 5, fol: 100, mor: 6}},",
+  "where": "events-more.js:705"
+ },
+ "Quedas segundo. Algunos critican tanta campaña.": {
+  "ctx": "ko: {txt: tr(\"Quedas segundo. Algunos critican tanta campaña.\"), fx: {fol: 40, mor: -2}}},",
+  "where": "events-more.js:706"
+ },
+ "Dejar que hable el campo": {
+  "ctx": "{t: tr(\"Dejar que hable el campo\"), p: p * 0.6,",
+  "where": "events-more.js:707"
+ },
+ "Ganas sin pedir un solo voto. Más mérito todavía.": {
+  "ctx": "ok: {txt: tr(\"Ganas sin pedir un solo voto. Más mérito todavía.\"), fx: {fame: 5, prof: 3, mor: 6}},",
+  "where": "events-more.js:708"
+ },
+ "No ganas, pero te quedas con la experiencia.": {
+  "ctx": "ko: {txt: tr(\"No ganas, pero te quedas con la experiencia.\"), fx: {prof: 2}}},",
+  "where": "events-more.js:709"
+ },
+ "Pedir el voto para un compañero": {
+  "ctx": "{t: tr(\"Pedir el voto para un compañero\"), ok: {txt: tr(\"Un gesto que el vestuario nunca olvidará.\"), fx: {coach: 4, mor: 3, fans: 3}}}",
+  "where": "events-more.js:710"
+ },
+ "Un gesto que el vestuario nunca olvidará.": {
+  "ctx": "{t: tr(\"Pedir el voto para un compañero\"), ok: {txt: tr(\"Un gesto que el vestuario nunca olvidará.\"), fx: {coach: 4, mor: 3, fans: 3}}}",
+  "where": "events-more.js:710"
+ },
+ "Tras un error tuyo, cientos de mensajes en redes insultan a tu familia. Tu madre está muy afectada.": {
+  "ctx": "text: function () { return tr(\"Tras un error tuyo, cientos de mensajes en redes insultan a tu familia. Tu madre está muy afectada.\"); },",
+  "where": "events-more.js:715"
+ },
+ "Denunciar las cuentas": {
+  "ctx": "{t: tr(\"Denunciar las cuentas\"), ok: {txt: tr(\"La plataforma cierra varias cuentas y la policía investiga.\"), fx: {mor: 3, fans: 3, money: -yK(5000)}}},",
+  "where": "events-more.js:717"
+ },
+ "La plataforma cierra varias cuentas y la policía investiga.": {
+  "ctx": "{t: tr(\"Denunciar las cuentas\"), ok: {txt: tr(\"La plataforma cierra varias cuentas y la policía investiga.\"), fx: {mor: 3, fans: 3, money: -yK(5000)}}},",
+  "where": "events-more.js:717"
+ },
+ "Responder en caliente": {
+  "ctx": "{t: tr(\"Responder en caliente\"), p: 0.3,",
+  "where": "events-more.js:718"
+ },
+ "Tu mensaje recibe una ola de apoyo.": {
+  "ctx": "ok: {txt: tr(\"Tu mensaje recibe una ola de apoyo.\"), fx: {fans: 4, fol: 30}},",
+  "where": "events-more.js:719"
+ },
+ "Te enzarzas con los provocadores y el club te pide que lo dejes.": {
+  "ctx": "ko: {txt: tr(\"Te enzarzas con los provocadores y el club te pide que lo dejes.\"), fx: {coach: -4, mor: -4}}},",
+  "where": "events-more.js:720"
+ },
+ "Desconectar unas semanas": {
+  "ctx": "{t: tr(\"Desconectar unas semanas\"), ok: {txt: tr(\"Dejas las redes en manos de tu equipo. Tu cabeza lo agradece.\"), fx: {mor: 5, fol: -10}}}",
+  "where": "events-more.js:721"
+ },
+ "Dejas las redes en manos de tu equipo. Tu cabeza lo agradece.": {
+  "ctx": "{t: tr(\"Desconectar unas semanas\"), ok: {txt: tr(\"Dejas las redes en manos de tu equipo. Tu cabeza lo agradece.\"), fx: {mor: 5, fol: -10}}}",
+  "where": "events-more.js:721"
+ },
+ "Un club humilde de otra ciudad quiere tu cesión para darte minutos. Tu club prefiere que te quedes y pelees por un sitio.": {
+  "ctx": "text: function () { return tr(\"Un club humilde de otra ciudad quiere tu cesión para darte minutos. Tu club prefiere que te quedes y pelees por un sitio.\"); },",
+  "where": "events-more.js:726"
+ },
+ "Quedarte y pelear": {
+  "ctx": "{t: tr(\"Quedarte y pelear\"), p: 0.45,",
+  "where": "events-more.js:728"
+ },
+ "Trabajas como nadie y el míster empieza a contar contigo.": {
+  "ctx": "ok: {txt: tr(\"Trabajas como nadie y el míster empieza a contar contigo.\"), fx: {coach: 8, prof: 3}},",
+  "where": "events-more.js:729"
+ },
+ "Sigues sin jugar y la paciencia se agota.": {
+  "ctx": "ko: {txt: tr(\"Sigues sin jugar y la paciencia se agota.\"), fx: {mor: -5, form: -2}}},",
+  "where": "events-more.js:730"
+ },
+ "Pedir que te dejen salir": {
+  "ctx": "{t: tr(\"Pedir que te dejen salir\"), p: 0.4,",
+  "where": "events-more.js:731"
+ },
+ "El club se lo piensa y te promete minutos en la Copa para retenerte.": {
+  "ctx": "ok: {txt: tr(\"El club se lo piensa y te promete minutos en la Copa para retenerte.\"), fx: {coach: 2, mor: 4}},",
+  "where": "events-more.js:732"
+ },
+ "El club se niega en redondo y no le gusta tu insistencia.": {
+  "ctx": "ko: {txt: tr(\"El club se niega en redondo y no le gusta tu insistencia.\"), fx: {coach: -5, mor: -3}}},",
+  "where": "events-more.js:733"
+ },
+ "Entrenar con el filial para coger ritmo": {
+  "ctx": "{t: tr(\"Entrenar con el filial para coger ritmo\"), ok: {txt: tr(\"Partidos de verdad, aunque sea en una categoría menor.\"), fx: {form: 4, prof: 2, coach: 2}}}",
+  "where": "events-more.js:734"
+ },
+ "Partidos de verdad, aunque sea en una categoría menor.": {
+  "ctx": "{t: tr(\"Entrenar con el filial para coger ritmo\"), ok: {txt: tr(\"Partidos de verdad, aunque sea en una categoría menor.\"), fx: {form: 4, prof: 2, coach: 2}}}",
+  "where": "events-more.js:734"
+ },
+ "Baja por maternidad": {
+  "ctx": "function myLeave(pl, a, b) { return function () { pl.inj = Math.max(pl.inj, S.tw) + ri(a, b); pl.injN = tr(\"Baja por maternidad\"); }; }",
+  "where": "events-manager-more.js:7"
+ },
+ "Os han goleado sin piedad y la prensa ya da la eliminatoria por perdida. En la rueda de prensa te preguntan si queda alguna esperanza.": {
+  "ctx": "text: function () { return tr(\"Os han goleado sin piedad y la prensa ya da la eliminatoria por perdida. En la rueda de prensa te preguntan si queda alguna esperanza.\"); },",
+  "where": "events-manager-more.js:13"
+ },
+ "«Si nos hicieron cuatro, podemos hacer seis»": {
+  "ctx": "{t: tr(\"«Si nos hicieron cuatro, podemos hacer seis»\"), p: 0.4,",
+  "where": "events-manager-more.js:15"
+ },
+ "La frase prende en el vestuario y en la grada. El equipo sale a por todas.": {
+  "ctx": "ok: {txt: tr(\"La frase prende en el vestuario y en la grada. El equipo sale a por todas.\"), fx: {fans: 6, sqMor: 5, buff: {v: 1.3, b: 1, n: tr(\"Fe ciega\")}}},",
+  "where": "events-manager-more.js:16"
+ },
+ "Fe ciega": {
+  "ctx": "ok: {txt: tr(\"La frase prende en el vestuario y en la grada. El equipo sale a por todas.\"), fx: {fans: 6, sqMor: 5, buff: {v: 1.3, b: 1, n: tr(\"Fe ciega\")}}},",
+  "where": "events-manager-more.js:16"
+ },
+ "No hay milagro y tu frase se convierte en munición para los críticos.": {
+  "ctx": "ko: {txt: tr(\"No hay milagro y tu frase se convierte en munición para los críticos.\"), fx: {rep: -3, fans: -3, sqMor: -2}}},",
+  "where": "events-manager-more.js:17"
+ },
+ "Reconocer la superioridad del rival": {
+  "ctx": "{t: tr(\"Reconocer la superioridad del rival\"), ok: {txt: tr(\"Discurso honesto. Nadie se ilusiona, pero tampoco nadie se decepciona.\"), fx: {rep: 1, chem: 1}}},",
+  "where": "events-manager-more.js:18"
+ },
+ "Discurso honesto. Nadie se ilusiona, pero tampoco nadie se decepciona.": {
+  "ctx": "{t: tr(\"Reconocer la superioridad del rival\"), ok: {txt: tr(\"Discurso honesto. Nadie se ilusiona, pero tampoco nadie se decepciona.\"), fx: {rep: 1, chem: 1}}},",
+  "where": "events-manager-more.js:18"
+ },
+ "Cerrar el vestuario y no dar titulares": {
+  "ctx": "{t: tr(\"Cerrar el vestuario y no dar titulares\"), ok: {txt: tr(\"Semana de silencio y trabajo. El grupo se refugia en sí mismo.\"), fx: {chem: 3, fans: -1}}}",
+  "where": "events-manager-more.js:19"
+ },
+ "Semana de silencio y trabajo. El grupo se refugia en sí mismo.": {
+  "ctx": "{t: tr(\"Cerrar el vestuario y no dar titulares\"), ok: {txt: tr(\"Semana de silencio y trabajo. El grupo se refugia en sí mismo.\"), fx: {chem: 3, fans: -1}}}",
+  "where": "events-manager-more.js:19"
+ },
+ "Quieres implantar una idea nueva: línea defensiva adelantada, presión alta y todos defendiendo en zona. Algunos veteranos se miran con escepticismo: «¿Y este quién se cree?».": {
+  "ctx": "text: function () { return tr(\"Quieres implantar una idea nueva: línea defensiva adelantada, presión alta y todos defendiendo en zona. Algunos veteranos se miran con escepticismo: «¿Y este quién se cree?».\"); },",
+  "where": "events-manager-more.js:25"
+ },
+ "Imponer la revolución desde ya": {
+  "ctx": "{t: tr(\"Imponer la revolución desde ya\"), p: 0.5,",
+  "where": "events-manager-more.js:27"
+ },
+ "Tras semanas de repeticiones, el equipo empieza a moverse como un bloque. Los rivales se ahogan.": {
+  "ctx": "ok: {txt: tr(\"Tras semanas de repeticiones, el equipo empieza a moverse como un bloque. Los rivales se ahogan.\"), fx: {chem: -2, buff: {v: 1.4, b: 2, n: tr(\"Presión en bloque\")}}},",
+  "where": "events-manager-more.js:28"
+ },
+ "Presión en bloque": {
+  "ctx": "ok: {txt: tr(\"Tras semanas de repeticiones, el equipo empieza a moverse como un bloque. Los rivales se ahogan.\"), fx: {chem: -2, buff: {v: 1.4, b: 2, n: tr(\"Presión en bloque\")}}},",
+  "where": "events-manager-more.js:28"
+ },
+ "Los automatismos no llegan y os pillan a la espalda una y otra vez.": {
+  "ctx": "ko: {txt: tr(\"Los automatismos no llegan y os pillan a la espalda una y otra vez.\"), fx: {chem: -6, sqMor: -4, board: -3}}},",
+  "where": "events-manager-more.js:29"
+ },
+ "Introducirla poco a poco": {
+  "ctx": "{t: tr(\"Introducirla poco a poco\"), ok: {txt: tr(\"Pequeños cambios cada semana. El vestuario se va convenciendo.\"), fx: {chem: 2, buff: {v: 0.5, b: 2, n: tr(\"Nueva idea\")}}}},",
+  "where": "events-manager-more.js:30"
+ },
+ "Pequeños cambios cada semana. El vestuario se va convenciendo.": {
+  "ctx": "{t: tr(\"Introducirla poco a poco\"), ok: {txt: tr(\"Pequeños cambios cada semana. El vestuario se va convenciendo.\"), fx: {chem: 2, buff: {v: 0.5, b: 2, n: tr(\"Nueva idea\")}}}},",
+  "where": "events-manager-more.js:30"
+ },
+ "Nueva idea": {
+  "ctx": "{t: tr(\"Introducirla poco a poco\"), ok: {txt: tr(\"Pequeños cambios cada semana. El vestuario se va convenciendo.\"), fx: {chem: 2, buff: {v: 0.5, b: 2, n: tr(\"Nueva idea\")}}}},",
+  "where": "events-manager-more.js:30"
+ },
+ "Adaptarte a lo que ya saben hacer": {
+  "ctx": "{t: tr(\"Adaptarte a lo que ya saben hacer\"), ok: {txt: tr(\"Los jugadores agradecen no tener que reinventarse. Tú te guardas tu idea.\"), fx: {chem: 4, sqMor: 2, rep: -1}}}",
+  "where": "events-manager-more.js:31"
+ },
+ "Los jugadores agradecen no tener que reinventarse. Tú te guardas tu idea.": {
+  "ctx": "{t: tr(\"Adaptarte a lo que ya saben hacer\"), ok: {txt: tr(\"Los jugadores agradecen no tener que reinventarse. Tú te guardas tu idea.\"), fx: {chem: 4, sqMor: 2, rep: -1}}}",
+  "where": "events-manager-more.js:31"
+ },
+ "Se acerca el partido más importante del año y notas a los jugadores agarrotados. Tienes cinco minutos antes de salir al campo.": {
+  "ctx": "text: function () { return tr(\"Se acerca el partido más importante del año y notas a los jugadores agarrotados. Tienes cinco minutos antes de salir al campo.\"); },",
+  "where": "events-manager-more.js:37"
+ },
+ "«Salid y disfrutad»": {
+  "ctx": "{t: tr(\"«Salid y disfrutad»\"), p: 0.6,",
+  "where": "events-manager-more.js:39"
+ },
+ "Los hombros bajan, aparecen las sonrisas y el equipo juega suelto.": {
+  "ctx": "ok: {txt: tr(\"Los hombros bajan, aparecen las sonrisas y el equipo juega suelto.\"), fx: {sqMor: 5, buff: {v: 1.2, b: 1, n: tr(\"Disfrutar\")}}},",
+  "where": "events-manager-more.js:40"
+ },
+ "Disfrutar": {
+  "ctx": "ok: {txt: tr(\"Los hombros bajan, aparecen las sonrisas y el equipo juega suelto.\"), fx: {sqMor: 5, buff: {v: 1.2, b: 1, n: tr(\"Disfrutar\")}}},",
+  "where": "events-manager-more.js:40"
+ },
+ "Algunos se lo toman demasiado a la ligera y salen dormidos.": {
+  "ctx": "ko: {txt: tr(\"Algunos se lo toman demasiado a la ligera y salen dormidos.\"), fx: {buff: {v: -0.6, b: 1, n: tr(\"Exceso de calma\")}}}},",
+  "where": "events-manager-more.js:41"
+ },
+ "Exceso de calma": {
+  "ctx": "ko: {txt: tr(\"Algunos se lo toman demasiado a la ligera y salen dormidos.\"), fx: {buff: {v: -0.6, b: 1, n: tr(\"Exceso de calma\")}}}},",
+  "where": "events-manager-more.js:41"
+ },
+ "Recordarles todo lo que hay en juego": {
+  "ctx": "{t: tr(\"Recordarles todo lo que hay en juego\"), p: 0.5,",
+  "where": "events-manager-more.js:42"
+ },
+ "El vestuario sale con los dientes apretados y se come al rival.": {
+  "ctx": "ok: {txt: tr(\"El vestuario sale con los dientes apretados y se come al rival.\"), fx: {buff: {v: 1, b: 1, n: tr(\"Tensión competitiva\")}}},",
+  "where": "events-manager-more.js:43"
+ },
+ "Tensión competitiva": {
+  "ctx": "ok: {txt: tr(\"El vestuario sale con los dientes apretados y se come al rival.\"), fx: {buff: {v: 1, b: 1, n: tr(\"Tensión competitiva\")}}},",
+  "where": "events-manager-more.js:43"
+ },
+ "La presión pesa y los nervios se notan en cada pase.": {
+  "ctx": "ko: {txt: tr(\"La presión pesa y los nervios se notan en cada pase.\"), fx: {sqMor: -3, buff: {v: -0.8, b: 1, n: tr(\"Nervios\")}}}},",
+  "where": "events-manager-more.js:44"
+ },
+ "Nervios": {
+  "ctx": "ko: {txt: tr(\"La presión pesa y los nervios se notan en cada pase.\"), fx: {sqMor: -3, buff: {v: -0.8, b: 1, n: tr(\"Nervios\")}}}},",
+  "where": "events-manager-more.js:44"
+ },
+ "Repasar el plan una última vez": {
+  "ctx": "{t: tr(\"Repasar el plan una última vez\"), ok: {txt: tr(\"Cada uno sabe lo que tiene que hacer. Ni euforia ni miedo.\"), fx: {chem: 2, buff: {v: 0.5, b: 1, n: tr(\"Plan claro\")}}}}",
+  "where": "events-manager-more.js:45"
+ },
+ "Cada uno sabe lo que tiene que hacer. Ni euforia ni miedo.": {
+  "ctx": "{t: tr(\"Repasar el plan una última vez\"), ok: {txt: tr(\"Cada uno sabe lo que tiene que hacer. Ni euforia ni miedo.\"), fx: {chem: 2, buff: {v: 0.5, b: 1, n: tr(\"Plan claro\")}}}}",
+  "where": "events-manager-more.js:45"
+ },
+ "Plan claro": {
+  "ctx": "{t: tr(\"Repasar el plan una última vez\"), ok: {txt: tr(\"Cada uno sabe lo que tiene que hacer. Ni euforia ni miedo.\"), fx: {chem: 2, buff: {v: 0.5, b: 1, n: tr(\"Plan claro\")}}}}",
+  "where": "events-manager-more.js:45"
+ },
+ "Has llegado a un club deprimido: la grada está harta y desconfía de cualquier promesa. Te toca dar tu primer gran mensaje a la afición.": {
+  "ctx": "text: function () { return tr(\"Has llegado a un club deprimido: la grada está harta y desconfía de cualquier promesa. Te toca dar tu primer gran mensaje a la afición.\"); },",
+  "where": "events-manager-more.js:51"
+ },
+ "Pedirles que pasen de escépticos a creyentes": {
+  "ctx": "{t: tr(\"Pedirles que pasen de escépticos a creyentes\"), p: 0.6,",
+  "where": "events-manager-more.js:53"
+ },
+ "El mensaje cala. La grada vuelve a empujar como hacía años que no lo hacía.": {
+  "ctx": "ok: {txt: tr(\"El mensaje cala. La grada vuelve a empujar como hacía años que no lo hacía.\"), fx: {fans: 8, sqMor: 3, buff: {v: 0.6, b: 2, n: tr(\"Creer\")}}},",
+  "where": "events-manager-more.js:54"
+ },
+ "Bonitas palabras, dicen. La grada esperará a ver resultados.": {
+  "ctx": "ko: {txt: tr(\"Bonitas palabras, dicen. La grada esperará a ver resultados.\"), fx: {fans: -2}}},",
+  "where": "events-manager-more.js:55"
+ },
+ "Prometer títulos en tres años": {
+  "ctx": "{t: tr(\"Prometer títulos en tres años\"), p: 0.4,",
+  "where": "events-manager-more.js:56"
+ },
+ "La ambición ilusiona a todos, directiva incluida.": {
+  "ctx": "ok: {txt: tr(\"La ambición ilusiona a todos, directiva incluida.\"), fx: {fans: 6, board: 4}},",
+  "where": "events-manager-more.js:57"
+ },
+ "Te toman por un vendehúmos y el titular te perseguirá.": {
+  "ctx": "ko: {txt: tr(\"Te toman por un vendehúmos y el titular te perseguirá.\"), fx: {rep: -3, fans: -3}}},",
+  "where": "events-manager-more.js:58"
+ },
+ "Hablar solo de trabajo": {
+  "ctx": "{t: tr(\"Hablar solo de trabajo\"), ok: {txt: tr(\"Mensaje sobrio. Nadie se emociona, pero nadie te reprocha nada.\"), fx: {board: 2, chem: 1}}}",
+  "where": "events-manager-more.js:59"
+ },
+ "Mensaje sobrio. Nadie se emociona, pero nadie te reprocha nada.": {
+  "ctx": "{t: tr(\"Hablar solo de trabajo\"), ok: {txt: tr(\"Mensaje sobrio. Nadie se emociona, pero nadie te reprocha nada.\"), fx: {board: 2, chem: 1}}}",
+  "where": "events-manager-more.js:59"
+ },
+ "Los resultados no acompañan y en el palco empiezan los murmullos. Crees en tu proyecto, pero necesitas tiempo para que dé frutos.": {
+  "ctx": "text: function () { return tr(\"Los resultados no acompañan y en el palco empiezan los murmullos. Crees en tu proyecto, pero necesitas tiempo para que dé frutos.\"); },",
+  "where": "events-manager-more.js:65"
+ },
+ "Presentar un plan a largo plazo": {
+  "ctx": "{t: tr(\"Presentar un plan a largo plazo\"), p: clamp(0.35 + y.m.rep / 200, 0.35, 0.7),",
+  "where": "events-manager-more.js:67"
+ },
+ "La directiva compra tu plan y te da margen. El vestuario lo nota.": {
+  "ctx": "ok: {txt: tr(\"La directiva compra tu plan y te da margen. El vestuario lo nota.\"), fx: {board: 8, chem: 2}},",
+  "where": "events-manager-more.js:68"
+ },
+ "«Aquí se vive del domingo». Te escuchan, pero no te creen.": {
+  "ctx": "ko: {txt: tr(\"«Aquí se vive del domingo». Te escuchan, pero no te creen.\"), fx: {board: -3}}},",
+  "where": "events-manager-more.js:69"
+ },
+ "Pedir refuerzos para salvar la temporada": {
+  "ctx": "{t: tr(\"Pedir refuerzos para salvar la temporada\"), p: 0.45,",
+  "where": "events-manager-more.js:70"
+ },
+ "La directiva abre la cartera, aunque te deja claro que quiere resultados ya.": {
+  "ctx": "ok: {txt: tr(\"La directiva abre la cartera, aunque te deja claro que quiere resultados ya.\"), fx: {bud: myBud(y, 0.05), board: -2}},",
+  "where": "events-manager-more.js:71"
+ },
+ "No hay un euro más y la petición sienta mal.": {
+  "ctx": "ko: {txt: tr(\"No hay un euro más y la petición sienta mal.\"), fx: {board: -5}}},",
+  "where": "events-manager-more.js:72"
+ },
+ "Agachar la cabeza y trabajar": {
+  "ctx": "{t: tr(\"Agachar la cabeza y trabajar\"), ok: {txt: tr(\"Ni excusas ni promesas. Solo trabajo.\"), fx: {chem: 3, sqMor: 2}}}",
+  "where": "events-manager-more.js:73"
+ },
+ "Ni excusas ni promesas. Solo trabajo.": {
+  "ctx": "{t: tr(\"Agachar la cabeza y trabajar\"), ok: {txt: tr(\"Ni excusas ni promesas. Solo trabajo.\"), fx: {chem: 3, sqMor: 2}}}",
+  "where": "events-manager-more.js:73"
+ },
+ "En la primera comida de pretemporada ves refrescos, bollería y planes para salir de copas tras los partidos. Tu preparador físico te propone cambiarlo todo de golpe.": {
+  "ctx": "text: function () { return tr(\"En la primera comida de pretemporada ves refrescos, bollería y planes para salir de copas tras los partidos. Tu preparador físico te propone cambiarlo todo de golpe.\"); },",
+  "where": "events-manager-more.js:79"
+ },
+ "Nutricionista y normas estrictas ({cost})": {
+  "ctx": "{t: tr(\"Nutricionista y normas estrictas ({cost})\", {cost: fmtMoney(g)}), p: 0.65,",
+  "where": "events-manager-more.js:81"
+ },
+ "Al principio refunfuñan, pero a las pocas semanas vuelan en los entrenamientos.": {
+  "ctx": "ok: {txt: tr(\"Al principio refunfuñan, pero a las pocas semanas vuelan en los entrenamientos.\"), fx: {bud: -g, sfit: 8, buff: {v: 0.8, b: 2, n: tr(\"Hábitos de élite\")}, chem: -2}},",
+  "where": "events-manager-more.js:82"
+ },
+ "Hábitos de élite": {
+  "ctx": "ok: {txt: tr(\"Al principio refunfuñan, pero a las pocas semanas vuelan en los entrenamientos.\"), fx: {bud: -g, sfit: 8, buff: {v: 0.8, b: 2, n: tr(\"Hábitos de élite\")}, chem: -2}},",
+  "where": "events-manager-more.js:82"
+ },
+ "Los veteranos se rebelan y se esconden chocolatinas en las taquillas.": {
+  "ctx": "ko: {txt: tr(\"Los veteranos se rebelan y se esconden chocolatinas en las taquillas.\"), fx: {bud: -g, chem: -5, sqMor: -3}}},",
+  "where": "events-manager-more.js:83"
+ },
+ "Cambios graduales y pactados": {
+  "ctx": "{t: tr(\"Cambios graduales y pactados\"), ok: {txt: tr(\"Pactáis unas normas mínimas. Mejoran poco a poco.\"), fx: {sfit: 4, chem: 2}}},",
+  "where": "events-manager-more.js:84"
+ },
+ "Pactáis unas normas mínimas. Mejoran poco a poco.": {
+  "ctx": "{t: tr(\"Cambios graduales y pactados\"), ok: {txt: tr(\"Pactáis unas normas mínimas. Mejoran poco a poco.\"), fx: {sfit: 4, chem: 2}}},",
+  "where": "events-manager-more.js:84"
+ },
+ "Respetar sus costumbres": {
+  "ctx": "{t: tr(\"Respetar sus costumbres\"), ok: {txt: tr(\"El vestuario te recibe con los brazos abiertos. Las piernas, no tanto.\"), fx: {chem: 4, sfit: -4}}}",
+  "where": "events-manager-more.js:85"
+ },
+ "El vestuario te recibe con los brazos abiertos. Las piernas, no tanto.": {
+  "ctx": "{t: tr(\"Respetar sus costumbres\"), ok: {txt: tr(\"El vestuario te recibe con los brazos abiertos. Las piernas, no tanto.\"), fx: {chem: 4, sfit: -4}}}",
+  "where": "events-manager-more.js:85"
+ },
+ "Lleváis semanas sin apenas perder y la prensa ya habla de una temporada histórica. Los titulares van justos de fuerzas y hay copa entre semana.": {
+  "ctx": "text: function () { return tr(\"Lleváis semanas sin apenas perder y la prensa ya habla de una temporada histórica. Los titulares van justos de fuerzas y hay copa entre semana.\"); },",
+  "where": "events-manager-more.js:91"
+ },
+ "Ir a por el récord con los de siempre": {
+  "ctx": "{t: tr(\"Ir a por el récord con los de siempre\"), p: 0.55,",
+  "where": "events-manager-more.js:93"
+ },
+ "El once aguanta y la racha sigue. Ya sois historia viva del club.": {
+  "ctx": "ok: {txt: tr(\"El once aguanta y la racha sigue. Ya sois historia viva del club.\"), fx: {fans: 6, rep: 3, sfit: -6, buff: {v: 0.8, b: 1, n: tr(\"Invictos\")}}},",
+  "where": "events-manager-more.js:94"
+ },
+ "Invictos": {
+  "ctx": "ok: {txt: tr(\"El once aguanta y la racha sigue. Ya sois historia viva del club.\"), fx: {fans: 6, rep: 3, sfit: -6, buff: {v: 0.8, b: 1, n: tr(\"Invictos\")}}},",
+  "where": "events-manager-more.js:94"
+ },
+ "Las piernas dicen basta y llega la derrota, con lesión incluida en el parte.": {
+  "ctx": "ko: {txt: tr(\"Las piernas dicen basta y llega la derrota, con lesión incluida en el parte.\"), fx: {sfit: -8, sqMor: -3}}},",
+  "where": "events-manager-more.js:95"
+ },
+ "Rotar aunque se rompa la racha": {
+  "ctx": "{t: tr(\"Rotar aunque se rompa la racha\"), ok: {txt: tr(\"Prioridad a la temporada, no a la estadística. Los suplentes lo agradecen.\"), fx: {sfit: 6, sqMor: 2, fans: -2}}},",
+  "where": "events-manager-more.js:96"
+ },
+ "Prioridad a la temporada, no a la estadística. Los suplentes lo agradecen.": {
+  "ctx": "{t: tr(\"Rotar aunque se rompa la racha\"), ok: {txt: tr(\"Prioridad a la temporada, no a la estadística. Los suplentes lo agradecen.\"), fx: {sfit: 6, sqMor: 2, fans: -2}}},",
+  "where": "events-manager-more.js:96"
+ },
+ "Prohibir hablar de la racha": {
+  "ctx": "{t: tr(\"Prohibir hablar de la racha\"), ok: {txt: tr(\"Nadie la menciona en el vestuario. El grupo sigue a lo suyo.\"), fx: {chem: 3, buff: {v: 0.4, b: 1, n: tr(\"Cabeza fría\")}}}}",
+  "where": "events-manager-more.js:97"
+ },
+ "Nadie la menciona en el vestuario. El grupo sigue a lo suyo.": {
+  "ctx": "{t: tr(\"Prohibir hablar de la racha\"), ok: {txt: tr(\"Nadie la menciona en el vestuario. El grupo sigue a lo suyo.\"), fx: {chem: 3, buff: {v: 0.4, b: 1, n: tr(\"Cabeza fría\")}}}}",
+  "where": "events-manager-more.js:97"
+ },
+ "Cabeza fría": {
+  "ctx": "{t: tr(\"Prohibir hablar de la racha\"), ok: {txt: tr(\"Nadie la menciona en el vestuario. El grupo sigue a lo suyo.\"), fx: {chem: 3, buff: {v: 0.4, b: 1, n: tr(\"Cabeza fría\")}}}}",
+  "where": "events-manager-more.js:97"
+ },
+ "Te toca el {club}, muy superior sobre el papel. Tu cuerpo técnico está dividido: encerrarse atrás o jugarle de tú a tú.": {
+  "ctx": "text: function (y) { return tr(\"Te toca el {club}, muy superior sobre el papel. Tu cuerpo técnico está dividido: encerrarse atrás o jugarle de tú a tú.\", {club: clubName(y.giant())}); },",
+  "where": "events-manager-more.js:103"
+ },
+ "Bloque bajo y balón parado": {
+  "ctx": "{t: tr(\"Bloque bajo y balón parado\"), p: 0.5,",
+  "where": "events-manager-more.js:105"
+ },
+ "Defensa numantina y un gol a balón parado. Gran golpe.": {
+  "ctx": "ok: {txt: tr(\"Defensa numantina y un gol a balón parado. Gran golpe.\"), fx: {fans: 4, rep: 2, buff: {v: 1, b: 1, n: tr(\"Muralla\")}}},",
+  "where": "events-manager-more.js:106"
+ },
+ "Muralla": {
+  "ctx": "ok: {txt: tr(\"Defensa numantina y un gol a balón parado. Gran golpe.\"), fx: {fans: 4, rep: 2, buff: {v: 1, b: 1, n: tr(\"Muralla\")}}},",
+  "where": "events-manager-more.js:106"
+ },
+ "Aguantáis hasta que cae el primero y luego no sabéis atacar.": {
+  "ctx": "ko: {txt: tr(\"Aguantáis hasta que cae el primero y luego no sabéis atacar.\"), fx: {fans: -3}}},",
+  "where": "events-manager-more.js:107"
+ },
+ "Jugarles de tú a tú": {
+  "ctx": "{t: tr(\"Jugarles de tú a tú\"), p: 0.3,",
+  "where": "events-manager-more.js:108"
+ },
+ "Valentía premiada: les pasáis por encima ante el asombro general.": {
+  "ctx": "ok: {txt: tr(\"Valentía premiada: les pasáis por encima ante el asombro general.\"), fx: {fans: 8, rep: 4, sqMor: 4}},",
+  "where": "events-manager-more.js:109"
+ },
+ "Os castigan cada espacio. Una goleada que escuece.": {
+  "ctx": "ko: {txt: tr(\"Os castigan cada espacio. Una goleada que escuece.\"), fx: {sqMor: -4, board: -3}}},",
+  "where": "events-manager-more.js:110"
+ },
+ "Reservar a titulares para la liga": {
+  "ctx": "{t: tr(\"Reservar a titulares para la liga\"), ok: {txt: tr(\"Partido perdido de antemano, piernas frescas para lo que importa.\"), fx: {sfit: 5, fans: -3}}}",
+  "where": "events-manager-more.js:111"
+ },
+ "Partido perdido de antemano, piernas frescas para lo que importa.": {
+  "ctx": "{t: tr(\"Reservar a titulares para la liga\"), ok: {txt: tr(\"Partido perdido de antemano, piernas frescas para lo que importa.\"), fx: {sfit: 5, fans: -3}}}",
+  "where": "events-manager-more.js:111"
+ },
+ "Tras una victoria, los ultras proponen un ritual: que la plantilla se acerque a la grada después de cada partido para celebrar juntos, se gane o se pierda.": {
+  "ctx": "text: function () { return tr(\"Tras una victoria, los ultras proponen un ritual: que la plantilla se acerque a la grada después de cada partido para celebrar juntos, se gane o se pierda.\"); },",
+  "where": "events-manager-more.js:117"
+ },
+ "Adoptar el ritual": {
+  "ctx": "{t: tr(\"Adoptar el ritual\"), p: 0.7,",
+  "where": "events-manager-more.js:119"
+ },
+ "La comunión entre equipo y grada es total. El campo se convierte en una caldera.": {
+  "ctx": "ok: {txt: tr(\"La comunión entre equipo y grada es total. El campo se convierte en una caldera.\"), fx: {fans: 8, chem: 3}},",
+  "where": "events-manager-more.js:120"
+ },
+ "Tras una derrota, la celebración acaba en pitada y tensión.": {
+  "ctx": "ko: {txt: tr(\"Tras una derrota, la celebración acaba en pitada y tensión.\"), fx: {fans: -2, sqMor: -3}}},",
+  "where": "events-manager-more.js:121"
+ },
+ "Solo cuando se gane": {
+  "ctx": "{t: tr(\"Solo cuando se gane\"), ok: {txt: tr(\"Un gesto bonito, sin forzar. La grada lo acepta.\"), fx: {fans: 3}}},",
+  "where": "events-manager-more.js:122"
+ },
+ "Un gesto bonito, sin forzar. La grada lo acepta.": {
+  "ctx": "{t: tr(\"Solo cuando se gane\"), ok: {txt: tr(\"Un gesto bonito, sin forzar. La grada lo acepta.\"), fx: {fans: 3}}},",
+  "where": "events-manager-more.js:122"
+ },
+ "Mantener distancia": {
+  "ctx": "{t: tr(\"Mantener distancia\"), ok: {txt: tr(\"El equipo se centra en lo suyo. Los ultras se sienten despreciados.\"), fx: {fans: -4, chem: 1}}}",
+  "where": "events-manager-more.js:123"
+ },
+ "El equipo se centra en lo suyo. Los ultras se sienten despreciados.": {
+  "ctx": "{t: tr(\"Mantener distancia\"), ok: {txt: tr(\"El equipo se centra en lo suyo. Los ultras se sienten despreciados.\"), fx: {fans: -4, chem: 1}}}",
+  "where": "events-manager-more.js:123"
+ },
+ "La directiva quiere sacar a tu equipo del estadio principal para que el césped llegue impecable a los partidos de la sección masculina. Os mandarían a la ciudad deportiva.": {
+  "ctx": "text: function () { return S.g === \"f\" ? tr(\"La directiva quiere sacar a tu equipo del estadio principal para que el césped llegue impecable a los partidos de la sección masculina. Os mandarían a la ciudad deportiva.\") :",
+  "where": "events-manager-more.js:129"
+ },
+ "La directiva quiere sacar a la sección femenina del estadio principal para que el césped llegue impecable a tus partidos. Las jugadoras te piden que des la cara por ellas.": {
+  "ctx": "text: function () { return S.g === \"f\" ? tr(\"La directiva quiere sacar a tu equipo del estadio principal para que el césped llegue impecable a los partidos de la sección masculina. Os mandarían a la ciudad deportiva.\") :",
+  "where": "events-manager-more.js:129"
+ },
+ "Plantarte: este también es vuestro estadio": {
+  "ctx": "{t: f ? tr(\"Plantarte: este también es vuestro estadio\") : tr(\"Defender que sigan en el estadio\"), p: 0.55,",
+  "where": "events-manager-more.js:131"
+ },
+ "Defender que sigan en el estadio": {
+  "ctx": "{t: f ? tr(\"Plantarte: este también es vuestro estadio\") : tr(\"Defender que sigan en el estadio\"), p: 0.55,",
+  "where": "events-manager-more.js:131"
+ },
+ "La directiva rectifica. Tu postura se aplaude dentro y fuera del club.": {
+  "ctx": "ok: {txt: tr(\"La directiva rectifica. Tu postura se aplaude dentro y fuera del club.\"), fx: {fans: 6, rep: 3, board: -2, chem: 2}},",
+  "where": "events-manager-more.js:132"
+ },
+ "La directiva no da su brazo a torcer y toma nota de tu desafío.": {
+  "ctx": "ko: {txt: tr(\"La directiva no da su brazo a torcer y toma nota de tu desafío.\"), fx: {board: -5, fans: 3}}},",
+  "where": "events-manager-more.js:133"
+ },
+ "Proponer un calendario compartido": {
+  "ctx": "{t: tr(\"Proponer un calendario compartido\"), ok: {txt: tr(\"Algunos partidos en el estadio, otros en la ciudad deportiva. Un parche razonable.\"), fx: {board: 2, fans: 2}}},",
+  "where": "events-manager-more.js:134"
+ },
+ "Algunos partidos en el estadio, otros en la ciudad deportiva. Un parche razonable.": {
+  "ctx": "{t: tr(\"Proponer un calendario compartido\"), ok: {txt: tr(\"Algunos partidos en el estadio, otros en la ciudad deportiva. Un parche razonable.\"), fx: {board: 2, fans: 2}}},",
+  "where": "events-manager-more.js:134"
+ },
+ "Aceptar la decisión del club": {
+  "ctx": "{t: tr(\"Aceptar la decisión del club\"), ok: f ? {txt: tr(\"Os mudáis a un campo pequeño. La plantilla se siente de segunda.\"), fx: {board: 4, sqMor: -5, fans: -4}} : {txt: tr(\"El césped está perfecto, pero la imagen del c",
+  "where": "events-manager-more.js:135"
+ },
+ "Os mudáis a un campo pequeño. La plantilla se siente de segunda.": {
+  "ctx": "{t: tr(\"Aceptar la decisión del club\"), ok: f ? {txt: tr(\"Os mudáis a un campo pequeño. La plantilla se siente de segunda.\"), fx: {board: 4, sqMor: -5, fans: -4}} : {txt: tr(\"El césped está perfecto, pero la imagen del c",
+  "where": "events-manager-more.js:135"
+ },
+ "El césped está perfecto, pero la imagen del club se resiente.": {
+  "ctx": "{t: tr(\"Aceptar la decisión del club\"), ok: f ? {txt: tr(\"Os mudáis a un campo pequeño. La plantilla se siente de segunda.\"), fx: {board: 4, sqMor: -5, fans: -4}} : {txt: tr(\"El césped está perfecto, pero la imagen del c",
+  "where": "events-manager-more.js:135"
+ },
+ "{name} te cuenta que está embarazada. Le queda un año de contrato y quiere saber qué piensa hacer el club con ella.": {
+  "ctx": "text: function (y) { return tr(\"{name} te cuenta que está embarazada. Le queda un año de contrato y quiere saber qué piensa hacer el club con ella.\", {name: plName(y.pl)}); },",
+  "where": "events-manager-more.js:142"
+ },
+ "Estará de baja varios meses": {
+  "ctx": "opts: function (y) { var pl = y.pl, g = myBud(y, 0.02, 5e4), out = tr(\"Estará de baja varios meses\"); return [",
+  "where": "events-manager-more.js:143"
+ },
+ "Renovarle y garantizar su vuelta": {
+  "ctx": "{t: tr(\"Renovarle y garantizar su vuelta\"), ok: {txt: tr(\"El club se compromete con ella. El vestuario lo celebra como un título.\"), fx: {chem: 8, sqMor: 4, rep: 2, bud: -g, pmor: 15}, n: out, then: function () { pl.yrs ",
+  "where": "events-manager-more.js:144"
+ },
+ "El club se compromete con ella. El vestuario lo celebra como un título.": {
+  "ctx": "{t: tr(\"Renovarle y garantizar su vuelta\"), ok: {txt: tr(\"El club se compromete con ella. El vestuario lo celebra como un título.\"), fx: {chem: 8, sqMor: 4, rep: 2, bud: -g, pmor: 15}, n: out, then: function () { pl.yrs ",
+  "where": "events-manager-more.js:144"
+ },
+ "Cumplir lo mínimo que exige la norma": {
+  "ctx": "{t: tr(\"Cumplir lo mínimo que exige la norma\"), ok: {txt: tr(\"Todo en regla, nada más. Ella lo nota.\"), fx: {pmor: -4, chem: -1}, n: out, then: myLeave(pl, 12, 18)}},",
+  "where": "events-manager-more.js:145"
+ },
+ "Todo en regla, nada más. Ella lo nota.": {
+  "ctx": "{t: tr(\"Cumplir lo mínimo que exige la norma\"), ok: {txt: tr(\"Todo en regla, nada más. Ella lo nota.\"), fx: {pmor: -4, chem: -1}, n: out, then: myLeave(pl, 12, 18)}},",
+  "where": "events-manager-more.js:145"
+ },
+ "Plan de vuelta con el cuerpo técnico": {
+  "ctx": "{t: tr(\"Plan de vuelta con el cuerpo técnico\"), p: 0.7,",
+  "where": "events-manager-more.js:146"
+ },
+ "Un plan a medida para que vuelva fuerte. Un ejemplo para todo el club.": {
+  "ctx": "ok: {txt: tr(\"Un plan a medida para que vuelva fuerte. Un ejemplo para todo el club.\"), fx: {pmor: 10, chem: 4, fans: 3}, n: out, then: myLeave(pl, 10, 15)},",
+  "where": "events-manager-more.js:147"
+ },
+ "El plan es demasiado ambicioso y su vuelta se complica.": {
+  "ctx": "ko: {txt: tr(\"El plan es demasiado ambicioso y su vuelta se complica.\"), fx: {pmor: 3}, n: out, then: myLeave(pl, 16, 22)}}",
+  "where": "events-manager-more.js:148"
+ },
+ "Nadie os daba un duro y vais en la zona alta de la tabla. Se acerca el mercado de invierno y la directiva te pregunta si hace falta reforzarse para soñar.": {
+  "ctx": "text: function () { return tr(\"Nadie os daba un duro y vais en la zona alta de la tabla. Se acerca el mercado de invierno y la directiva te pregunta si hace falta reforzarse para soñar.\"); },",
+  "where": "events-manager-more.js:154"
+ },
+ "Pedir dos fichajes con experiencia ({cost})": {
+  "ctx": "{t: tr(\"Pedir dos fichajes con experiencia ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Llegan dos veteranos que saben lo que es ganar. El vestuario se crece.\"), fx: {bud: -g, board: 3, chem: -1, buff: {v: 1, b: 2, n: ",
+  "where": "events-manager-more.js:156"
+ },
+ "Llegan dos veteranos que saben lo que es ganar. El vestuario se crece.": {
+  "ctx": "{t: tr(\"Pedir dos fichajes con experiencia ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Llegan dos veteranos que saben lo que es ganar. El vestuario se crece.\"), fx: {bud: -g, board: 3, chem: -1, buff: {v: 1, b: 2, n: ",
+  "where": "events-manager-more.js:156"
+ },
+ "Veteranía": {
+  "ctx": "{t: tr(\"Pedir dos fichajes con experiencia ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Llegan dos veteranos que saben lo que es ganar. El vestuario se crece.\"), fx: {bud: -g, board: 3, chem: -1, buff: {v: 1, b: 2, n: ",
+  "where": "events-manager-more.js:156"
+ },
+ "Confiar en los que os han traído hasta aquí": {
+  "ctx": "{t: tr(\"Confiar en los que os han traído hasta aquí\"), p: 0.5,",
+  "where": "events-manager-more.js:157"
+ },
+ "El grupo se siente valorado y responde. Sigue el sueño.": {
+  "ctx": "ok: {txt: tr(\"El grupo se siente valorado y responde. Sigue el sueño.\"), fx: {chem: 5, sqMor: 4}},",
+  "where": "events-manager-more.js:158"
+ },
+ "Las piernas y la falta de fondo de armario os pasan factura.": {
+  "ctx": "ko: {txt: tr(\"Las piernas y la falta de fondo de armario os pasan factura.\"), fx: {sfit: -6, sqMor: -2}}},",
+  "where": "events-manager-more.js:159"
+ },
+ "Ahorrar y bajar las expectativas": {
+  "ctx": "{t: tr(\"Ahorrar y bajar las expectativas\"), ok: {txt: tr(\"«Nuestro objetivo es otro». La directiva respira, la grada no tanto.\"), fx: {board: 3, fans: -4}}}",
+  "where": "events-manager-more.js:160"
+ },
+ "«Nuestro objetivo es otro». La directiva respira, la grada no tanto.": {
+  "ctx": "{t: tr(\"Ahorrar y bajar las expectativas\"), ok: {txt: tr(\"«Nuestro objetivo es otro». La directiva respira, la grada no tanto.\"), fx: {board: 3, fans: -4}}}",
+  "where": "events-manager-more.js:160"
+ },
+ "Ibais lanzados en la zona alta, pero tu perseguidor no falla y la ventaja se ha reducido a casi nada. Tras el partido, una cadena te pide una entrevista en directo.": {
+  "ctx": "text: function () { return tr(\"Ibais lanzados en la zona alta, pero tu perseguidor no falla y la ventaja se ha reducido a casi nada. Tras el partido, una cadena te pide una entrevista en directo.\"); },",
+  "where": "events-manager-more.js:166"
+ },
+ "Soltar lo que llevas dentro en directo": {
+  "ctx": "{t: tr(\"Soltar lo que llevas dentro en directo\"), p: 0.3,",
+  "where": "events-manager-more.js:168"
+ },
+ "Tu arrebato se convierte en grito de guerra para la grada.": {
+  "ctx": "ok: {txt: tr(\"Tu arrebato se convierte en grito de guerra para la grada.\"), fx: {fans: 6, sqMor: 3}},",
+  "where": "events-manager-more.js:169"
+ },
+ "La imagen del míster desencajado transmite pánico al vestuario.": {
+  "ctx": "ko: {txt: tr(\"La imagen del míster desencajado transmite pánico al vestuario.\"), fx: {sqMor: -5, rep: -3, buff: {v: -1, b: 1, n: tr(\"Pánico\")}}}},",
+  "where": "events-manager-more.js:170"
+ },
+ "Pánico": {
+  "ctx": "ko: {txt: tr(\"La imagen del míster desencajado transmite pánico al vestuario.\"), fx: {sqMor: -5, rep: -3, buff: {v: -1, b: 1, n: tr(\"Pánico\")}}}},",
+  "where": "events-manager-more.js:170"
+ },
+ "Sonreír y quitar presión": {
+  "ctx": "{t: tr(\"Sonreír y quitar presión\"), ok: {txt: tr(\"«Ellos tienen más que perder». La calma se contagia.\"), fx: {chem: 2, buff: {v: 0.5, b: 1, n: tr(\"Calma\")}}}},",
+  "where": "events-manager-more.js:171"
+ },
+ "«Ellos tienen más que perder». La calma se contagia.": {
+  "ctx": "{t: tr(\"Sonreír y quitar presión\"), ok: {txt: tr(\"«Ellos tienen más que perder». La calma se contagia.\"), fx: {chem: 2, buff: {v: 0.5, b: 1, n: tr(\"Calma\")}}}},",
+  "where": "events-manager-more.js:171"
+ },
+ "Volverse más conservador": {
+  "ctx": "{t: tr(\"Volverse más conservador\"), p: 0.55,",
+  "where": "events-manager-more.js:172"
+ },
+ "Menos riesgos, partidos cerrados y puntos que valen oro.": {
+  "ctx": "ok: {txt: tr(\"Menos riesgos, partidos cerrados y puntos que valen oro.\"), fx: {buff: {v: 0.8, b: 1, n: tr(\"Pragmatismo\")}, fans: -2}},",
+  "where": "events-manager-more.js:173"
+ },
+ "Pragmatismo": {
+  "ctx": "ok: {txt: tr(\"Menos riesgos, partidos cerrados y puntos que valen oro.\"), fx: {buff: {v: 0.8, b: 1, n: tr(\"Pragmatismo\")}, fans: -2}},",
+  "where": "events-manager-more.js:173"
+ },
+ "El equipo pierde su identidad y se atasca.": {
+  "ctx": "ko: {txt: tr(\"El equipo pierde su identidad y se atasca.\"), fx: {chem: -3, fans: -3}}}",
+  "where": "events-manager-more.js:174"
+ },
+ "El presidente te propone pedir un préstamo enorme para fichar ya. «Con la Champions lo pagaremos de sobra», asegura. El director financiero no lo ve nada claro.": {
+  "ctx": "text: function () { return tr(\"El presidente te propone pedir un préstamo enorme para fichar ya. «Con la Champions lo pagaremos de sobra», asegura. El director financiero no lo ve nada claro.\"); },",
+  "where": "events-manager-more.js:180"
+ },
+ "Aceptar el préstamo ({cost})": {
+  "ctx": "{t: tr(\"Aceptar el préstamo ({cost})\", {cost: fmtMoney(g)}), d: tr(\"Más dinero hoy, menos margen salarial mañana.\"), ok: {txt: tr(\"Hay dinero para fichar como un grande. Ahora habrá que ganar.\"), fx: {bud: g, board: 4, w",
+  "where": "events-manager-more.js:182"
+ },
+ "Más dinero hoy, menos margen salarial mañana.": {
+  "ctx": "{t: tr(\"Aceptar el préstamo ({cost})\", {cost: fmtMoney(g)}), d: tr(\"Más dinero hoy, menos margen salarial mañana.\"), ok: {txt: tr(\"Hay dinero para fichar como un grande. Ahora habrá que ganar.\"), fx: {bud: g, board: 4, w",
+  "where": "events-manager-more.js:182"
+ },
+ "Hay dinero para fichar como un grande. Ahora habrá que ganar.": {
+  "ctx": "{t: tr(\"Aceptar el préstamo ({cost})\", {cost: fmtMoney(g)}), d: tr(\"Más dinero hoy, menos margen salarial mañana.\"), ok: {txt: tr(\"Hay dinero para fichar como un grande. Ahora habrá que ganar.\"), fx: {bud: g, board: 4, w",
+  "where": "events-manager-more.js:182"
+ },
+ "Un préstamo más pequeño": {
+  "ctx": "{t: tr(\"Un préstamo más pequeño\"), ok: {txt: tr(\"Algo de margen sin hipotecar el club.\"), fx: {bud: myR5(g / 3), board: 1, wcap: 0.97}}},",
+  "where": "events-manager-more.js:183"
+ },
+ "Algo de margen sin hipotecar el club.": {
+  "ctx": "{t: tr(\"Un préstamo más pequeño\"), ok: {txt: tr(\"Algo de margen sin hipotecar el club.\"), fx: {bud: myR5(g / 3), board: 1, wcap: 0.97}}},",
+  "where": "events-manager-more.js:183"
+ },
+ "Rechazarlo: con lo que hay": {
+  "ctx": "{t: tr(\"Rechazarlo: con lo que hay\"), ok: {txt: tr(\"Cuentas sanas. El presidente se queda con las ganas.\"), fx: {board: -3, rep: 1}}}",
+  "where": "events-manager-more.js:184"
+ },
+ "Cuentas sanas. El presidente se queda con las ganas.": {
+  "ctx": "{t: tr(\"Rechazarlo: con lo que hay\"), ok: {txt: tr(\"Cuentas sanas. El presidente se queda con las ganas.\"), fx: {board: -3, rep: 1}}}",
+  "where": "events-manager-more.js:184"
+ },
+ "La liga aprueba una norma nueva sobre el juego y casi todos los equipos van a seguir igual. Tú ves una oportunidad para adelantarte con un sistema distinto.": {
+  "ctx": "text: function () { return tr(\"La liga aprueba una norma nueva sobre el juego y casi todos los equipos van a seguir igual. Tú ves una oportunidad para adelantarte con un sistema distinto.\"); },",
+  "where": "events-manager-more.js:190"
+ },
+ "Inventar un sistema para la nueva norma": {
+  "ctx": "{t: tr(\"Inventar un sistema para la nueva norma\"), p: 0.55,",
+  "where": "events-manager-more.js:192"
+ },
+ "Mientras los rivales dudan, tu equipo ya juega como si la norma existiera desde siempre.": {
+  "ctx": "ok: {txt: tr(\"Mientras los rivales dudan, tu equipo ya juega como si la norma existiera desde siempre.\"), fx: {rep: 4, buff: {v: 1.2, b: 2, n: tr(\"Adelantados\")}, chem: -2}},",
+  "where": "events-manager-more.js:193"
+ },
+ "Adelantados": {
+  "ctx": "ok: {txt: tr(\"Mientras los rivales dudan, tu equipo ya juega como si la norma existiera desde siempre.\"), fx: {rep: 4, buff: {v: 1.2, b: 2, n: tr(\"Adelantados\")}, chem: -2}},",
+  "where": "events-manager-more.js:193"
+ },
+ "Demasiado pronto. Los jugadores no entienden el nuevo dibujo.": {
+  "ctx": "ko: {txt: tr(\"Demasiado pronto. Los jugadores no entienden el nuevo dibujo.\"), fx: {chem: -5, buff: {v: -0.5, b: 1, n: tr(\"Desajustes\")}}}},",
+  "where": "events-manager-more.js:194"
+ },
+ "Desajustes": {
+  "ctx": "ko: {txt: tr(\"Demasiado pronto. Los jugadores no entienden el nuevo dibujo.\"), fx: {chem: -5, buff: {v: -0.5, b: 1, n: tr(\"Desajustes\")}}}},",
+  "where": "events-manager-more.js:194"
+ },
+ "Esperar a ver qué hacen los demás": {
+  "ctx": "{t: tr(\"Esperar a ver qué hacen los demás\"), ok: {txt: tr(\"Prudencia. Ni ganas ni pierdes ventaja.\"), fx: {chem: 1}}},",
+  "where": "events-manager-more.js:195"
+ },
+ "Prudencia. Ni ganas ni pierdes ventaja.": {
+  "ctx": "{t: tr(\"Esperar a ver qué hacen los demás\"), ok: {txt: tr(\"Prudencia. Ni ganas ni pierdes ventaja.\"), fx: {chem: 1}}},",
+  "where": "events-manager-more.js:195"
+ },
+ "Encargar un estudio a los analistas": {
+  "ctx": "{t: tr(\"Encargar un estudio a los analistas\"), ok: {txt: tr(\"Unas semanas de vídeo y datos para ajustar lo justo.\"), fx: {buff: {v: 0.5, b: 2, n: tr(\"Ajuste fino\")}}}}",
+  "where": "events-manager-more.js:196"
+ },
+ "Unas semanas de vídeo y datos para ajustar lo justo.": {
+  "ctx": "{t: tr(\"Encargar un estudio a los analistas\"), ok: {txt: tr(\"Unas semanas de vídeo y datos para ajustar lo justo.\"), fx: {buff: {v: 0.5, b: 2, n: tr(\"Ajuste fino\")}}}}",
+  "where": "events-manager-more.js:196"
+ },
+ "Ajuste fino": {
+  "ctx": "{t: tr(\"Encargar un estudio a los analistas\"), ok: {txt: tr(\"Unas semanas de vídeo y datos para ajustar lo justo.\"), fx: {buff: {v: 0.5, b: 2, n: tr(\"Ajuste fino\")}}}}",
+  "where": "events-manager-more.js:196"
+ },
+ "Preparando un partido grande, se te ocurre algo arriesgado: sacar a {name} de su posición y ponerle de delantero centro sin referencias, para descolocar a los centrales rivales.": {
+  "ctx": "text: function (y) { return tr(\"Preparando un partido grande, se te ocurre algo arriesgado: sacar a {name} de su posición y ponerle de delantero centro sin referencias, para descolocar a los centrales rivales.\", {name: p",
+  "where": "events-manager-more.js:203"
+ },
+ "Probarlo en el partido grande": {
+  "ctx": "{t: tr(\"Probarlo en el partido grande\"), p: 0.45,",
+  "where": "events-manager-more.js:205"
+ },
+ "Los centrales no saben a quién marcar. Exhibición para el recuerdo.": {
+  "ctx": "ok: {txt: tr(\"Los centrales no saben a quién marcar. Exhibición para el recuerdo.\"), fx: {pmor: 8, fans: 6, rep: 3, buff: {v: 1.3, b: 1, n: tr(\"Falso nueve\")}}},",
+  "where": "events-manager-more.js:206"
+ },
+ "Falso nueve": {
+  "ctx": "ok: {txt: tr(\"Los centrales no saben a quién marcar. Exhibición para el recuerdo.\"), fx: {pmor: 8, fans: 6, rep: 3, buff: {v: 1.3, b: 1, n: tr(\"Falso nueve\")}}},",
+  "where": "events-manager-more.js:206"
+ },
+ "Se pierde entre los centrales y el equipo queda sin profundidad.": {
+  "ctx": "ko: {txt: tr(\"Se pierde entre los centrales y el equipo queda sin profundidad.\"), fx: {pmor: -5, buff: {v: -0.6, b: 1, n: tr(\"Sin referencia\")}}}},",
+  "where": "events-manager-more.js:207"
+ },
+ "Sin referencia": {
+  "ctx": "ko: {txt: tr(\"Se pierde entre los centrales y el equipo queda sin profundidad.\"), fx: {pmor: -5, buff: {v: -0.6, b: 1, n: tr(\"Sin referencia\")}}}},",
+  "where": "events-manager-more.js:207"
+ },
+ "Ensayarlo antes en un partido menor": {
+  "ctx": "{t: tr(\"Ensayarlo antes en un partido menor\"), ok: {txt: tr(\"Un primer ensayo con buenas sensaciones. Ya tienes un arma más.\"), fx: {pmor: 3, buff: {v: 0.5, b: 2, n: tr(\"Variante táctica\")}}}},",
+  "where": "events-manager-more.js:208"
+ },
+ "Un primer ensayo con buenas sensaciones. Ya tienes un arma más.": {
+  "ctx": "{t: tr(\"Ensayarlo antes en un partido menor\"), ok: {txt: tr(\"Un primer ensayo con buenas sensaciones. Ya tienes un arma más.\"), fx: {pmor: 3, buff: {v: 0.5, b: 2, n: tr(\"Variante táctica\")}}}},",
+  "where": "events-manager-more.js:208"
+ },
+ "Variante táctica": {
+  "ctx": "{t: tr(\"Ensayarlo antes en un partido menor\"), ok: {txt: tr(\"Un primer ensayo con buenas sensaciones. Ya tienes un arma más.\"), fx: {pmor: 3, buff: {v: 0.5, b: 2, n: tr(\"Variante táctica\")}}}},",
+  "where": "events-manager-more.js:208"
+ },
+ "Cada uno en su sitio": {
+  "ctx": "{t: tr(\"Cada uno en su sitio\"), ok: {txt: tr(\"Lo de siempre funciona. Él lo agradece.\"), fx: {pmor: 2, chem: 1}}}",
+  "where": "events-manager-more.js:209"
+ },
+ "Lo de siempre funciona. Él lo agradece.": {
+  "ctx": "{t: tr(\"Cada uno en su sitio\"), ok: {txt: tr(\"Lo de siempre funciona. Él lo agradece.\"), fx: {pmor: 2, chem: 1}}}",
+  "where": "events-manager-more.js:209"
+ },
+ "Tras una derrota, un comentarista muy influyente sentencia en televisión que con tantos jóvenes en el once no vas a ganar nada. La directiva te pregunta si no convendría fichar experiencia.": {
+  "ctx": "text: function () { return tr(\"Tras una derrota, un comentarista muy influyente sentencia en televisión que con tantos jóvenes en el once no vas a ganar nada. La directiva te pregunta si no convendría fichar experiencia.",
+  "where": "events-manager-more.js:215"
+ },
+ "Mantener a los jóvenes y responder en el campo": {
+  "ctx": "{t: tr(\"Mantener a los jóvenes y responder en el campo\"), p: 0.55,",
+  "where": "events-manager-more.js:217"
+ },
+ "Los chavales se pican y encadenan victorias. El comentarista tendrá que tragarse sus palabras.": {
+  "ctx": "ok: {txt: tr(\"Los chavales se pican y encadenan victorias. El comentarista tendrá que tragarse sus palabras.\"), fx: {sqMor: 5, fans: 5, rep: 3}},",
+  "where": "events-manager-more.js:218"
+ },
+ "Les pesa la presión y llegan más tropiezos.": {
+  "ctx": "ko: {txt: tr(\"Les pesa la presión y llegan más tropiezos.\"), fx: {board: -4, fans: -3}}},",
+  "where": "events-manager-more.js:219"
+ },
+ "Fichar un veterano para guiarles ({cost})": {
+  "ctx": "{t: tr(\"Fichar un veterano para guiarles ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Llega un veterano que les hace de hermano mayor.\"), fx: {bud: -g, chem: 3, board: 2}}},",
+  "where": "events-manager-more.js:220"
+ },
+ "Llega un veterano que les hace de hermano mayor.": {
+  "ctx": "{t: tr(\"Fichar un veterano para guiarles ({cost})\", {cost: fmtMoney(g)}), ok: {txt: tr(\"Llega un veterano que les hace de hermano mayor.\"), fx: {bud: -g, chem: 3, board: 2}}},",
+  "where": "events-manager-more.js:220"
+ },
+ "Sacar a algunos del once": {
+  "ctx": "{t: tr(\"Sacar a algunos del once\"), ok: {txt: tr(\"Más experiencia sobre el campo, pero los jóvenes se sienten traicionados.\"), fx: {sqMor: -3, board: 2, buff: {v: 0.4, b: 1, n: tr(\"Experiencia\")}}}}",
+  "where": "events-manager-more.js:221"
+ },
+ "Más experiencia sobre el campo, pero los jóvenes se sienten traicionados.": {
+  "ctx": "{t: tr(\"Sacar a algunos del once\"), ok: {txt: tr(\"Más experiencia sobre el campo, pero los jóvenes se sienten traicionados.\"), fx: {sqMor: -3, board: 2, buff: {v: 0.4, b: 1, n: tr(\"Experiencia\")}}}}",
+  "where": "events-manager-more.js:221"
+ },
+ "Experiencia": {
+  "ctx": "{t: tr(\"Sacar a algunos del once\"), ok: {txt: tr(\"Más experiencia sobre el campo, pero los jóvenes se sienten traicionados.\"), fx: {sqMor: -3, board: 2, buff: {v: 0.4, b: 1, n: tr(\"Experiencia\")}}}}",
+  "where": "events-manager-more.js:221"
+ },
+ "Los veteranos han montado un ritual de bienvenida a base de bromas pesadas: ropa cortada, coches llenos de espuma… A los fichajes nuevos no les hace ninguna gracia.": {
+  "ctx": "text: function () { return tr(\"Los veteranos han montado un ritual de bienvenida a base de bromas pesadas: ropa cortada, coches llenos de espuma… A los fichajes nuevos no les hace ninguna gracia.\"); },",
+  "where": "events-manager-more.js:227"
+ },
+ "Dejarles hacer: une al grupo": {
+  "ctx": "{t: tr(\"Dejarles hacer: une al grupo\"), p: 0.55,",
+  "where": "events-manager-more.js:229"
+ },
+ "Entre risas, el vestuario se convierte en una piña indestructible.": {
+  "ctx": "ok: {txt: tr(\"Entre risas, el vestuario se convierte en una piña indestructible.\"), fx: {chem: 7, sqMor: 3}},",
+  "where": "events-manager-more.js:230"
+ },
+ "Una broma se pasa de la raya y un fichaje se siente humillado.": {
+  "ctx": "ko: {txt: tr(\"Una broma se pasa de la raya y un fichaje se siente humillado.\"), fx: {chem: -4, sqMor: -3, board: -2}}},",
+  "where": "events-manager-more.js:231"
+ }
+}

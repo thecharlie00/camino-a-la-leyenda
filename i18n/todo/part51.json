@@ -1,0 +1,500 @@
+{
+ "Leer el campo 2D": {
+  "w": [
+   "ui-guide.js:23"
+  ],
+  "ctx": "{t: tr(\"Leer el campo 2D\"), b: [tr(\"Cada punto es un jugador con su dorsal y los colores de su equipo.\"), tr(\"Las estelas muestran pases y tiros; el texto de abajo narra la jugada.\"), tr(\"Faltas, fueras de juego y tarjet"
+ },
+ "Cada punto es un jugador con su dorsal y los colores de su equipo.": {
+  "w": [
+   "ui-guide.js:23"
+  ],
+  "ctx": "{t: tr(\"Leer el campo 2D\"), b: [tr(\"Cada punto es un jugador con su dorsal y los colores de su equipo.\"), tr(\"Las estelas muestran pases y tiros; el texto de abajo narra la jugada.\"), tr(\"Faltas, fueras de juego y tarjet"
+ },
+ "Las estelas muestran pases y tiros; el texto de abajo narra la jugada.": {
+  "w": [
+   "ui-guide.js:23"
+  ],
+  "ctx": "{t: tr(\"Leer el campo 2D\"), b: [tr(\"Cada punto es un jugador con su dorsal y los colores de su equipo.\"), tr(\"Las estelas muestran pases y tiros; el texto de abajo narra la jugada.\"), tr(\"Faltas, fueras de juego y tarjet"
+ },
+ "Faltas, fueras de juego y tarjetas se marcan sobre el césped: destello, línea del fuera de juego y tarjeta sobre el jugador.": {
+  "w": [
+   "ui-guide.js:23"
+  ],
+  "ctx": "{t: tr(\"Leer el campo 2D\"), b: [tr(\"Cada punto es un jugador con su dorsal y los colores de su equipo.\"), tr(\"Las estelas muestran pases y tiros; el texto de abajo narra la jugada.\"), tr(\"Faltas, fueras de juego y tarjet"
+ },
+ "Prensa y moral": {
+  "w": [
+   "ui-guide.js:25"
+  ],
+  "ctx": "{k: \"press\", ic: \"🎙️\", n: tr(\"Prensa y moral\"), cards: ["
+ },
+ "Ruedas de prensa": {
+  "w": [
+   "ui-guide.js:26"
+  ],
+  "ctx": "{t: tr(\"Ruedas de prensa\"), b: [tr(\"Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…\"), tr(\"Debajo de cada respuesta ves su efecto antes de elegir.\"), tr(\"Las respuestas valientes suben "
+ },
+ "Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…": {
+  "w": [
+   "ui-guide.js:26"
+  ],
+  "ctx": "{t: tr(\"Ruedas de prensa\"), b: [tr(\"Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…\"), tr(\"Debajo de cada respuesta ves su efecto antes de elegir.\"), tr(\"Las respuestas valientes suben "
+ },
+ "Debajo de cada respuesta ves su efecto antes de elegir.": {
+  "w": [
+   "ui-guide.js:26"
+  ],
+  "ctx": "{t: tr(\"Ruedas de prensa\"), b: [tr(\"Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…\"), tr(\"Debajo de cada respuesta ves su efecto antes de elegir.\"), tr(\"Las respuestas valientes suben "
+ },
+ "Las respuestas valientes suben la ilusión, pero pueden enfadar a la directiva o al rival.": {
+  "w": [
+   "ui-guide.js:26"
+  ],
+  "ctx": "{t: tr(\"Ruedas de prensa\"), b: [tr(\"Las preguntas salen de tu situación real: clasificación, rachas, derbis, tu forma…\"), tr(\"Debajo de cada respuesta ves su efecto antes de elegir.\"), tr(\"Las respuestas valientes suben "
+ },
+ "Con la moral alta, tus jugadores rinden más.": {
+  "w": [
+   "ui-guide.js:27"
+  ],
+  "ctx": "{t: tr(\"Moral del vestuario\"), b: [tr(\"Con la moral alta, tus jugadores rinden más.\"), tr(\"Baja con derrotas, promesas incumplidas, poco protagonismo o alinear bajas.\"), tr(\"Sube con victorias, charlas acertadas y minuto"
+ },
+ "Baja con derrotas, promesas incumplidas, poco protagonismo o alinear bajas.": {
+  "w": [
+   "ui-guide.js:27"
+  ],
+  "ctx": "{t: tr(\"Moral del vestuario\"), b: [tr(\"Con la moral alta, tus jugadores rinden más.\"), tr(\"Baja con derrotas, promesas incumplidas, poco protagonismo o alinear bajas.\"), tr(\"Sube con victorias, charlas acertadas y minuto"
+ },
+ "Sube con victorias, charlas acertadas y minutos para quien los pide.": {
+  "w": [
+   "ui-guide.js:27"
+  ],
+  "ctx": "{t: tr(\"Moral del vestuario\"), b: [tr(\"Con la moral alta, tus jugadores rinden más.\"), tr(\"Baja con derrotas, promesas incumplidas, poco protagonismo o alinear bajas.\"), tr(\"Sube con victorias, charlas acertadas y minuto"
+ },
+ "Directiva, afición y prensa": {
+  "w": [
+   "ui-guide.js:28"
+  ],
+  "ctx": "{t: tr(\"Directiva, afición y prensa\"), b: [tr(\"Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.\"), tr(\"Afición: aplaude los resultados y los gestos con el club.\"), tr(\"Prensa: te trata mejor si"
+ },
+ "Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.": {
+  "w": [
+   "ui-guide.js:28"
+  ],
+  "ctx": "{t: tr(\"Directiva, afición y prensa\"), b: [tr(\"Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.\"), tr(\"Afición: aplaude los resultados y los gestos con el club.\"), tr(\"Prensa: te trata mejor si"
+ },
+ "Afición: aplaude los resultados y los gestos con el club.": {
+  "w": [
+   "ui-guide.js:28"
+  ],
+  "ctx": "{t: tr(\"Directiva, afición y prensa\"), b: [tr(\"Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.\"), tr(\"Afición: aplaude los resultados y los gestos con el club.\"), tr(\"Prensa: te trata mejor si"
+ },
+ "Prensa: te trata mejor si eres claro y no la ignoras.": {
+  "w": [
+   "ui-guide.js:28"
+  ],
+  "ctx": "{t: tr(\"Directiva, afición y prensa\"), b: [tr(\"Directiva: tu puesto depende de ella; cumple los objetivos de la temporada.\"), tr(\"Afición: aplaude los resultados y los gestos con el club.\"), tr(\"Prensa: te trata mejor si"
+ },
+ "Motes": {
+  "w": [
+   "ui-guide.js:29"
+  ],
+  "ctx": "{t: tr(\"Motes\"), b: [tr(\"Si destacas (o metes la pata), la grada y las redes te pondrán un mote.\"), tr(\"Los periodistas lo usarán en sus preguntas.\")]}"
+ },
+ "Si destacas (o metes la pata), la grada y las redes te pondrán un mote.": {
+  "w": [
+   "ui-guide.js:29"
+  ],
+  "ctx": "{t: tr(\"Motes\"), b: [tr(\"Si destacas (o metes la pata), la grada y las redes te pondrán un mote.\"), tr(\"Los periodistas lo usarán en sus preguntas.\")]}"
+ },
+ "Los periodistas lo usarán en sus preguntas.": {
+  "w": [
+   "ui-guide.js:29"
+  ],
+  "ctx": "{t: tr(\"Motes\"), b: [tr(\"Si destacas (o metes la pata), la grada y las redes te pondrán un mote.\"), tr(\"Los periodistas lo usarán en sus preguntas.\")]}"
+ },
+ "Mercado y ojeo": {
+  "w": [
+   "ui-guide.js:31"
+  ],
+  "ctx": "{k: \"mkt\", ic: \"💼\", n: tr(\"Mercado y ojeo\"), cards: ["
+ },
+ "Lista de traspasos": {
+  "w": [
+   "ui-guide.js:32"
+  ],
+  "ctx": "{t: tr(\"Lista de traspasos\"), b: [tr(\"Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.\"), tr(\"La etiqueta de cada uno te dice qué aporta.\"), tr(\"Cuanto más mejore al "
+ },
+ "Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.": {
+  "w": [
+   "ui-guide.js:32"
+  ],
+  "ctx": "{t: tr(\"Lista de traspasos\"), b: [tr(\"Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.\"), tr(\"La etiqueta de cada uno te dice qué aporta.\"), tr(\"Cuanto más mejore al "
+ },
+ "La etiqueta de cada uno te dice qué aporta.": {
+  "w": [
+   "ui-guide.js:32"
+  ],
+  "ctx": "{t: tr(\"Lista de traspasos\"), b: [tr(\"Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.\"), tr(\"La etiqueta de cada uno te dice qué aporta.\"), tr(\"Cuanto más mejore al "
+ },
+ "Cuanto más mejore al equipo, más caro será el traspaso y más alto el sueldo, siempre según tu presupuesto.": {
+  "w": [
+   "ui-guide.js:32"
+  ],
+  "ctx": "{t: tr(\"Lista de traspasos\"), b: [tr(\"Te proponemos jugadores útiles: mejoran a tu titular, están a su nivel o son recambios con proyección.\"), tr(\"La etiqueta de cada uno te dice qué aporta.\"), tr(\"Cuanto más mejore al "
+ },
+ "Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.": {
+  "w": [
+   "ui-guide.js:33"
+  ],
+  "ctx": "{t: tr(\"Negociar\"), b: [tr(\"Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.\"), tr(\"Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.\"), tr(\""
+ },
+ "Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.": {
+  "w": [
+   "ui-guide.js:33"
+  ],
+  "ctx": "{t: tr(\"Negociar\"), b: [tr(\"Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.\"), tr(\"Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.\"), tr(\""
+ },
+ "Ofertas muy bajas llenan el medidor de frustración; si llega al 100 %, se rompe la negociación.": {
+  "w": [
+   "ui-guide.js:33"
+  ],
+  "ctx": "{t: tr(\"Negociar\"), b: [tr(\"Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.\"), tr(\"Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.\"), tr(\""
+ },
+ "El porcentaje solo marca 100 % cuando igualas lo que piden.": {
+  "w": [
+   "ui-guide.js:33"
+  ],
+  "ctx": "{t: tr(\"Negociar\"), b: [tr(\"Paso 1: el traspaso con su club. Paso 2: el sueldo con el jugador.\"), tr(\"Mueve la barra o usa − y +: el importe se muestra con dos decimales (1,82 M€) y es exactamente lo que ofreces.\"), tr(\""
+ },
+ "Contrata ojeadores con más estrellas para informes más precisos sobre el potencial.": {
+  "w": [
+   "ui-guide.js:34"
+  ],
+  "ctx": "{t: tr(\"Ojeadores\"), b: [tr(\"Contrata ojeadores con más estrellas para informes más precisos sobre el potencial.\"), tr(\"Envíalos a una región: traerán jugadores de esa zona que encajan en tus necesidades.\"), tr(\"Sus info"
+ },
+ "Envíalos a una región: traerán jugadores de esa zona que encajan en tus necesidades.": {
+  "w": [
+   "ui-guide.js:34"
+  ],
+  "ctx": "{t: tr(\"Ojeadores\"), b: [tr(\"Contrata ojeadores con más estrellas para informes más precisos sobre el potencial.\"), tr(\"Envíalos a una región: traerán jugadores de esa zona que encajan en tus necesidades.\"), tr(\"Sus info"
+ },
+ "Sus informes llegan aunque el mercado esté cerrado.": {
+  "w": [
+   "ui-guide.js:34"
+  ],
+  "ctx": "{t: tr(\"Ojeadores\"), b: [tr(\"Contrata ojeadores con más estrellas para informes más precisos sobre el potencial.\"), tr(\"Envíalos a una región: traerán jugadores de esa zona que encajan en tus necesidades.\"), tr(\"Sus info"
+ },
+ "Cláusulas y cesiones": {
+  "w": [
+   "ui-guide.js:35"
+  ],
+  "ctx": "{t: tr(\"Cláusulas y cesiones\"), b: [tr(\"Si alguien paga la cláusula de un jugador, se va sin que puedas impedirlo.\"), tr(\"Cesiones: con opción de compra decides tú al final; con obligación, la compra es automática.\")]}"
+ },
+ "Si alguien paga la cláusula de un jugador, se va sin que puedas impedirlo.": {
+  "w": [
+   "ui-guide.js:35"
+  ],
+  "ctx": "{t: tr(\"Cláusulas y cesiones\"), b: [tr(\"Si alguien paga la cláusula de un jugador, se va sin que puedas impedirlo.\"), tr(\"Cesiones: con opción de compra decides tú al final; con obligación, la compra es automática.\")]}"
+ },
+ "Cesiones: con opción de compra decides tú al final; con obligación, la compra es automática.": {
+  "w": [
+   "ui-guide.js:35"
+  ],
+  "ctx": "{t: tr(\"Cláusulas y cesiones\"), b: [tr(\"Si alguien paga la cláusula de un jugador, se va sin que puedas impedirlo.\"), tr(\"Cesiones: con opción de compra decides tú al final; con obligación, la compra es automática.\")]}"
+ },
+ "Modo jugador/a y portero/a": {
+  "w": [
+   "ui-guide.js:37"
+  ],
+  "ctx": "{k: \"ply\", ic: \"⚽\", n: tr(\"Modo jugador/a y portero/a\"), cards: ["
+ },
+ "Momentos del partido": {
+  "w": [
+   "ui-guide.js:38"
+  ],
+  "ctx": "{t: tr(\"Momentos del partido\"), b: [tr(\"En las jugadas clave decides qué hacer; tus atributos cambian la probabilidad de éxito.\"), tr(\"Al terminar ves el resultado del partido.\")]},"
+ },
+ "En las jugadas clave decides qué hacer; tus atributos cambian la probabilidad de éxito.": {
+  "w": [
+   "ui-guide.js:38"
+  ],
+  "ctx": "{t: tr(\"Momentos del partido\"), b: [tr(\"En las jugadas clave decides qué hacer; tus atributos cambian la probabilidad de éxito.\"), tr(\"Al terminar ves el resultado del partido.\")]},"
+ },
+ "Al terminar ves el resultado del partido.": {
+  "w": [
+   "ui-guide.js:38"
+  ],
+  "ctx": "{t: tr(\"Momentos del partido\"), b: [tr(\"En las jugadas clave decides qué hacer; tus atributos cambian la probabilidad de éxito.\"), tr(\"Al terminar ves el resultado del partido.\")]},"
+ },
+ "Penaltis y la barra de tensión": {
+  "w": [
+   "ui-guide.js:39"
+  ],
+  "ctx": "{t: tr(\"Penaltis y la barra de tensión\"), b: [tr(\"Elige la zona y para la barra de potencia dentro de la franja ideal.\"), tr(\"Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.\""
+ },
+ "Elige la zona y para la barra de potencia dentro de la franja ideal.": {
+  "w": [
+   "ui-guide.js:39"
+  ],
+  "ctx": "{t: tr(\"Penaltis y la barra de tensión\"), b: [tr(\"Elige la zona y para la barra de potencia dentro de la franja ideal.\"), tr(\"Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.\""
+ },
+ "Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.": {
+  "w": [
+   "ui-guide.js:39"
+  ],
+  "ctx": "{t: tr(\"Penaltis y la barra de tensión\"), b: [tr(\"Elige la zona y para la barra de potencia dentro de la franja ideal.\"), tr(\"Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.\""
+ },
+ "Como portero/a, eliges hacia dónde tirarte y cuándo.": {
+  "w": [
+   "ui-guide.js:39"
+  ],
+  "ctx": "{t: tr(\"Penaltis y la barra de tensión\"), b: [tr(\"Elige la zona y para la barra de potencia dentro de la franja ideal.\"), tr(\"Con más presión (final, tanda, último lanzamiento), la franja se estrecha y la barra tiembla.\""
+ },
+ "Faltas directas": {
+  "w": [
+   "ui-guide.js:40"
+  ],
+  "ctx": "{t: tr(\"Faltas directas\"), b: [tr(\"Como lanzador eliges dónde apuntar y la potencia; como portero/a, colocas la barrera y cuántos jugadores la forman.\")]},"
+ },
+ "Como lanzador eliges dónde apuntar y la potencia; como portero/a, colocas la barrera y cuántos jugadores la forman.": {
+  "w": [
+   "ui-guide.js:40"
+  ],
+  "ctx": "{t: tr(\"Faltas directas\"), b: [tr(\"Como lanzador eliges dónde apuntar y la potencia; como portero/a, colocas la barrera y cuántos jugadores la forman.\")]},"
+ },
+ "Puedes pedir el dorsal que quieras. Si lo lleva un compañero, quizá tengas que esperar a la próxima temporada.": {
+  "w": [
+   "ui-guide.js:41"
+  ],
+  "ctx": "{t: tr(\"Dorsal\"), b: [tr(\"Puedes pedir el dorsal que quieras. Si lo lleva un compañero, quizá tengas que esperar a la próxima temporada.\")]},"
+ },
+ "Vida fuera del campo": {
+  "w": [
+   "ui-guide.js:42"
+  ],
+  "ctx": "{t: tr(\"Vida fuera del campo\"), b: [tr(\"Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.\"), tr(\"Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un ti"
+ },
+ "Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.": {
+  "w": [
+   "ui-guide.js:42"
+  ],
+  "ctx": "{t: tr(\"Vida fuera del campo\"), b: [tr(\"Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.\"), tr(\"Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un ti"
+ },
+ "Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un tiempo.": {
+  "w": [
+   "ui-guide.js:42"
+  ],
+  "ctx": "{t: tr(\"Vida fuera del campo\"), b: [tr(\"Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.\"), tr(\"Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un ti"
+ },
+ "Tienes un rival asignado: compara tu carrera con la suya en el panel.": {
+  "w": [
+   "ui-guide.js:42"
+  ],
+  "ctx": "{t: tr(\"Vida fuera del campo\"), b: [tr(\"Invierte tus ahorros: algunos negocios dan beneficios y otros pueden salir mal.\"), tr(\"Contrata servicios (entrenador personal, nutricionista…) para mejorar atributos durante un ti"
+ },
+ "Glosario": {
+  "w": [
+   "ui-guide.js:44"
+  ],
+  "ctx": "{k: \"gloss\", ic: \"📖\", n: tr(\"Glosario\"), gloss: true}"
+ },
+ "Aceleración y velocidad punta: ganar carreras al espacio y llegar al contraataque.": {
+  "w": [
+   "ui-guide.js:49"
+  ],
+  "ctx": "[tr(\"Ritmo\"), tr(\"Aceleración y velocidad punta: ganar carreras al espacio y llegar al contraataque.\")],"
+ },
+ "Precisión y potencia al rematar; pesa mucho en goles y penaltis.": {
+  "w": [
+   "ui-guide.js:50"
+  ],
+  "ctx": "[tr(\"Tiro\"), tr(\"Precisión y potencia al rematar; pesa mucho en goles y penaltis.\")],"
+ },
+ "Visión y precisión: asistencias y jugadas que acaban en ocasión.": {
+  "w": [
+   "ui-guide.js:51"
+  ],
+  "ctx": "[tr(\"Pase\"), tr(\"Visión y precisión: asistencias y jugadas que acaban en ocasión.\")],"
+ },
+ "Control y desborde en el uno contra uno.": {
+  "w": [
+   "ui-guide.js:52"
+  ],
+  "ctx": "[tr(\"Regate\"), tr(\"Control y desborde en el uno contra uno.\")],"
+ },
+ "Anticipación, entradas y marcaje; evita ocasiones del rival.": {
+  "w": [
+   "ui-guide.js:53"
+  ],
+  "ctx": "[tr(\"Defensa\"), tr(\"Anticipación, entradas y marcaje; evita ocasiones del rival.\")],"
+ },
+ "Fuerza y resistencia: aguantar choques, lesionarse menos y no cansarse.": {
+  "w": [
+   "ui-guide.js:54"
+  ],
+  "ctx": "[tr(\"Físico\"), tr(\"Fuerza y resistencia: aguantar choques, lesionarse menos y no cansarse.\")],"
+ },
+ "Alcance del portero/a en los disparos a las esquinas.": {
+  "w": [
+   "ui-guide.js:55"
+  ],
+  "ctx": "[tr(\"Estirada\"), tr(\"Alcance del portero/a en los disparos a las esquinas.\")],"
+ },
+ "Seguridad para atrapar o despejar los tiros.": {
+  "w": [
+   "ui-guide.js:56"
+  ],
+  "ctx": "[tr(\"Paradas\"), tr(\"Seguridad para atrapar o despejar los tiros.\")],"
+ },
+ "Juego con los pies y saques largos para iniciar jugadas.": {
+  "w": [
+   "ui-guide.js:57"
+  ],
+  "ctx": "[tr(\"Saque\"), tr(\"Juego con los pies y saques largos para iniciar jugadas.\")],"
+ },
+ "Reacción a tiros cercanos y penaltis.": {
+  "w": [
+   "ui-guide.js:58"
+  ],
+  "ctx": "[tr(\"Reflejos\"), tr(\"Reacción a tiros cercanos y penaltis.\")],"
+ },
+ "Salidas del portero/a y rapidez para cerrar el ángulo.": {
+  "w": [
+   "ui-guide.js:59"
+  ],
+  "ctx": "[tr(\"Velocidad\"), tr(\"Salidas del portero/a y rapidez para cerrar el ángulo.\")],"
+ },
+ "Posicionamiento bajo palos: estar en el sitio antes de que llegue el tiro.": {
+  "w": [
+   "ui-guide.js:60"
+  ],
+  "ctx": "[tr(\"Colocación\"), tr(\"Posicionamiento bajo palos: estar en el sitio antes de que llegue el tiro.\")],"
+ },
+ "Nivel general del jugador o jugadora, de 1 a 99.": {
+  "w": [
+   "ui-guide.js:61"
+  ],
+  "ctx": "[tr(\"Media\"), tr(\"Nivel general del jugador o jugadora, de 1 a 99.\")],"
+ },
+ "Hasta dónde puede llegar su media; los ojeadores te dan una horquilla.": {
+  "w": [
+   "ui-guide.js:62"
+  ],
+  "ctx": "[tr(\"Potencial\"), tr(\"Hasta dónde puede llegar su media; los ojeadores te dan una horquilla.\")],"
+ },
+ "Cómo llega a los partidos según sus últimas actuaciones.": {
+  "w": [
+   "ui-guide.js:63"
+  ],
+  "ctx": "[tr(\"Forma\"), tr(\"Cómo llega a los partidos según sus últimas actuaciones.\")],"
+ },
+ "Cansancio acumulado; por debajo de la mitad rinde peor y se lesiona más.": {
+  "w": [
+   "ui-guide.js:64"
+  ],
+  "ctx": "[tr(\"Estado físico\"), tr(\"Cansancio acumulado; por debajo de la mitad rinde peor y se lesiona más.\")],"
+ },
+ "Ánimo del jugador o jugadora; con moral alta rinde más.": {
+  "w": [
+   "ui-guide.js:65"
+  ],
+  "ctx": "[tr(\"Moral\"), tr(\"Ánimo del jugador o jugadora; con moral alta rinde más.\")],"
+ },
+ "Lo bien que se entiende el equipo; sube con estabilidad y victorias.": {
+  "w": [
+   "ui-guide.js:66"
+  ],
+  "ctx": "[tr(\"Química\"), tr(\"Lo bien que se entiende el equipo; sube con estabilidad y victorias.\")],"
+ },
+ "Clave, Importante, Rotación, Suplente o Promesa: lo que espera jugar. Si no se cumple, baja su moral.": {
+  "w": [
+   "ui-guide.js:67"
+  ],
+  "ctx": "[tr(\"Rol\"), tr(\"Clave, Importante, Rotación, Suplente o Promesa: lo que espera jugar. Si no se cumple, baja su moral.\")],"
+ },
+ "Tu reputación como míster: abre las puertas de clubes más grandes.": {
+  "w": [
+   "ui-guide.js:68"
+  ],
+  "ctx": "[tr(\"Prestigio\"), tr(\"Tu reputación como míster: abre las puertas de clubes más grandes.\")],"
+ },
+ "Lo conocido que eres como futbolista; atrae ofertas, patrocinios y prensa.": {
+  "w": [
+   "ui-guide.js:69"
+  ],
+  "ctx": "[tr(\"Fama\"), tr(\"Lo conocido que eres como futbolista; atrae ofertas, patrocinios y prensa.\")],"
+ },
+ "Tensión del momento: estrecha la franja ideal en penaltis y minijuegos.": {
+  "w": [
+   "ui-guide.js:70"
+  ],
+  "ctx": "[tr(\"Presión\"), tr(\"Tensión del momento: estrecha la franja ideal en penaltis y minijuegos.\")],"
+ },
+ "Frustración": {
+  "w": [
+   "ui-guide.js:71"
+  ],
+  "ctx": "[tr(\"Frustración\"), tr(\"En una negociación, el enfado del club o del jugador con tus ofertas.\")],"
+ },
+ "En una negociación, el enfado del club o del jugador con tus ofertas.": {
+  "w": [
+   "ui-guide.js:71"
+  ],
+  "ctx": "[tr(\"Frustración\"), tr(\"En una negociación, el enfado del club o del jugador con tus ofertas.\")],"
+ },
+ "Cláusula": {
+  "w": [
+   "ui-guide.js:72"
+  ],
+  "ctx": "[tr(\"Cláusula\"), tr(\"Precio que libera a un jugador sin negociar.\")],"
+ },
+ "Precio que libera a un jugador sin negociar.": {
+  "w": [
+   "ui-guide.js:72"
+  ],
+  "ctx": "[tr(\"Cláusula\"), tr(\"Precio que libera a un jugador sin negociar.\")],"
+ },
+ "Bloque defensivo": {
+  "w": [
+   "ui-guide.js:73"
+  ],
+  "ctx": "[tr(\"Bloque defensivo\"), tr(\"Altura de tu línea de defensas: baja, media o alta.\")],"
+ },
+ "Altura de tu línea de defensas: baja, media o alta.": {
+  "w": [
+   "ui-guide.js:73"
+  ],
+  "ctx": "[tr(\"Bloque defensivo\"), tr(\"Altura de tu línea de defensas: baja, media o alta.\")],"
+ },
+ "Posición afín": {
+  "w": [
+   "ui-guide.js:74"
+  ],
+  "ctx": "[tr(\"Posición afín\"), tr(\"Una posición de la misma línea o vecina a la suya; rinde algo menos.\")]"
+ },
+ "Una posición de la misma línea o vecina a la suya; rinde algo menos.": {
+  "w": [
+   "ui-guide.js:74"
+  ],
+  "ctx": "[tr(\"Posición afín\"), tr(\"Una posición de la misma línea o vecina a la suya; rinde algo menos.\")]"
+ },
+ "Tutorial": {
+  "w": [
+   "ui-guide.js:98"
+  ],
+  "ctx": "G.el.innerHTML = '<div class=\"gde-in\"><header class=\"gde-top\"><div><span class=\"eyebrow\">' + tr(\"Tutorial\") + '</span><h2>' + tr(\"Guía del juego\") + '</h2></div><button class=\"gde-x\" data-g=\"close\" aria-label=\"' + h(tr(\""
+ },
+ "Buscar un atributo o término…": {
+  "w": [
+   "ui-guide.js:109"
+  ],
+  "ctx": "body.innerHTML = '<input id=\"gdeq\" class=\"gde-q\" type=\"search\" placeholder=\"' + h(tr(\"Buscar un atributo o término…\")) + '\" autocomplete=\"off\"><dl class=\"gde-gl\"></dl>';"
+ },
+ "Nada coincide con tu búsqueda.": {
+  "w": [
+   "ui-guide.js:111"
+  ],
+  "ctx": "body.querySelector(\".gde-gl\").innerHTML = l.length ? l.map(function (g) { return \"<div><dt>\" + h(g[0]) + \"</dt><dd>\" + h(g[1]) + \"</dd></div>\"; }).join(\"\") : '<p class=\"muted\">' + tr(\"Nada coincide con tu búsqueda.\") + \""
+ }
+}
