@@ -1156,7 +1156,7 @@ function mgrPendValid(x) {
     case "objs": return m.club >= 0 && !!(x.cats && x.cats.length);
     case "mlive": case "mlivew": return !!(S.cur && S.cur.pm && S.cur.pm[x.fi] && !S.cur.pm[x.fi].liveDone);
     case "mpress": return m.club >= 0;
-    case "draw": return m.club >= 0 && x.me === m.club;
+    case "draw": return x.nat ? !!(typeof mpNT === "function" && mpNT() && mpNT().ni === x.me) : (m.club >= 0 && x.me === m.club);
     case "mpq": return m.club >= 0 && typeof PRESS !== "undefined" && !!pressQ(true, x.q);
     case "mploanin": case "mploanopt": case "mpnatoff": case "mpnatm": case "mpfilup": return typeof mpPendValid === "function" && mpPendValid(x);
     case "mev":

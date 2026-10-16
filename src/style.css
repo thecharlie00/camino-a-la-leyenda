@@ -1205,3 +1205,4 @@ details.a11y > summary { font-weight: 700; }
 .presfans { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 13px; color: var(--mist); }
 .presfans .bar { flex: 1; margin: 0; }
 .presfans b { color: var(--chalk); }
+.pspd .prp { border-left: 1px solid rgba(255,255,255,.18); border-radius: 0 7px 7px 0; margin-left: 2px; font-size: 14px; }

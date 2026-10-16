@@ -197,6 +197,9 @@ var Pitch = (function () {
     var tk = document.createElement("div"); tk.className = "ptick"; tk.setAttribute("aria-live", "polite"); el.appendChild(tk);
     var sp = document.createElement("div"); sp.className = "pspd"; sp.setAttribute("role", "group");
     sp.innerHTML = [1, 2, 3].map(function (n) { return '<button type="button" data-ps="' + n + '">' + n + "x</button>"; }).join("");
+    var rb = document.createElement("button"); rb.type = "button"; rb.className = "prp"; rb.textContent = "↺"; rb.setAttribute("aria-label", o.rpLabel || "Repetición");
+    rb.addEventListener("click", function (ev) { ev.stopPropagation(); replay(); });
+    sp.appendChild(rb);
     el.appendChild(sp);
     RM = reduced();
     P = {el: el, cv: cv, ctx: cv.getContext("2d"), btn: btn, cols: o.cols || ["#ffb21e", "#66b9ff"], lab: o.lab || {goal: "GOL", post: "¡PALO!", half: "DESCANSO", end: "FINAL"},
@@ -616,6 +619,7 @@ var Pitch = (function () {
       setTimeout2(T + 0.02, function () {
         var bb = P.ball; bb.vx = dir * Math.max(10, Math.abs(bb.vx) * 0.6); bb.spin = 0;
         P.msg = {t: goalLabel(s, who), s: s, at: P.ck, long: true}; P.net = {gx: gx, y: bb.y, t0: P.ck};
+        if (!RM && P.speed < 3 && P.autoRp !== false) P.rpAt = {at: P.ck + 2.4, from: P.ck - T - 3.6, to: P.ck + 0.7};
         if (!RM) P.shake = P.ck;
         Snd.cheer(s === 0); P.excT = 0.2;
       });
@@ -946,6 +950,9 @@ var Pitch = (function () {
   /* jugadas que cuentan los comentarios */
   function event(e) {
     if (!P) return;
+    if (P.rp) { P.rp.ev.push(e); return; }
+    /* arranca la segunda parte: fuera el cartel del descanso */
+    if (e.t !== "half" && e.t !== "end") clearHalf();
     var t0 = P.ck, cue = e.cue;
     if (e.t === "goal" || e.t === "save" || e.t === "miss" || e.t === "post") t0 = shotEvent(e);
     else if (e.t === "half" || e.t === "end") {
@@ -967,7 +974,13 @@ var Pitch = (function () {
     cueAt(at0, function () { if (cue) cue(); ticker(txt); });
   }
   function effRate() { return P.speed >= 3 && P.ck < P.hiUntil ? SPEEDK : P.rate; }
-  function busy() { return P ? Math.max(0, P.hardUntil - P.ck) / effRate() * 1000 : 0; }
+  function busy() {
+    if (!P) return 0;
+    var b = Math.max(0, P.hardUntil - P.ck) / effRate() * 1000;
+    if (P.rp) b += (P.rp.fr[P.rp.fr.length - 1].ck - P.rp.ck) / 0.42 * 1000;
+    if (P.rpAt) b += Math.max(0, P.rpAt.at - P.ck) / effRate() * 1000 + (P.rpAt.to - P.rpAt.from) / 0.42 * 1000;
+    return b;
+  }
   function reset() {
     if (!P) return;
     flushCues();
@@ -1360,15 +1373,69 @@ var Pitch = (function () {
       }
     }
   }
+  /* ---------- repeticiones (versión 3.1): se graban los últimos segundos y se reproducen a cámara lenta ---------- */
+  function rpRec() {
+    var f = P.rpF = P.rpF || [], ck = P.ck;
+    if (f.length && ck - f[f.length - 1].ck < 0.05) return;
+    var b = P.ball, t = [[], []];
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) { var o = P.T[s][i]; t[s].push(o ? [o.x, o.y, o.fa] : null); }
+    f.push({ck: ck, b: [b.x, b.y, b.z], t: t, fl: P.flip});
+    while (f.length && ck - f[0].ck > 9) f.shift();
+  }
+  function rpStart(from, to) {
+    var fr = (P.rpF || []).filter(function (x) { return x.ck >= from && x.ck <= to; });
+    if (fr.length < 8) return false;
+    var save = {b: [P.ball.x, P.ball.y, P.ball.z], t: [[], []], cam: {x: P.cam.x, y: P.cam.y, z: P.cam.z}, msg: P.msg, flip: P.flip};
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) { var o = P.T[s][i]; save.t[s].push(o ? [o.x, o.y, o.fa] : null); }
+    P.rp = {fr: fr, k: 0, ck: fr[0].ck, save: save, ev: []}; P.msg = null;
+    return true;
+  }
+  function rpApply(a, b, k) {
+    var bl = P.ball; bl.x = lerp(a.b[0], b.b[0], k); bl.y = lerp(a.b[1], b.b[1], k); bl.z = lerp(a.b[2], b.b[2], k); P.flip = a.fl;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) { var o = P.T[s][i], pa = a.t[s][i], pb = b.t[s][i]; if (o && pa && pb) { o.x = lerp(pa[0], pb[0], k); o.y = lerp(pa[1], pb[1], k); o.fa = pa[2]; } }
+  }
+  function rpStep(dt) {
+    var R = P.rp, fr = R.fr;
+    R.ck += dt * 0.42;
+    while (R.k < fr.length - 2 && fr[R.k + 1].ck <= R.ck) R.k++;
+    var a = fr[R.k], b = fr[Math.min(R.k + 1, fr.length - 1)], k = b.ck > a.ck ? clamp((R.ck - a.ck) / (b.ck - a.ck), 0, 1) : 1;
+    rpApply(a, b, k);
+    /* otro ángulo: cámara cerrada sobre el balón */
+    var cam = P.cam, bl = P.ball, kz = Math.min(1, dt * 2.2);
+    cam.z += (1.75 - cam.z) * kz; cam.x += (bl.x - cam.x) * kz; cam.y += (bl.y - cam.y) * kz;
+    if (R.ck >= fr[fr.length - 1].ck) rpEnd();
+  }
+  function rpEnd() {
+    var R = P.rp, sv = R.save; if (!R) return;
+    P.ball.x = sv.b[0]; P.ball.y = sv.b[1]; P.ball.z = sv.b[2]; P.flip = sv.flip;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) { var o = P.T[s][i], q = sv.t[s][i]; if (o && q) { o.x = q[0]; o.y = q[1]; o.fa = q[2]; } }
+    P.cam.x = sv.cam.x; P.cam.y = sv.cam.y; P.cam.z = sv.cam.z;
+    P.rp = null; P.last = now();
+    R.ev.forEach(function (e) { try { event(e); } catch (er) {} });
+  }
+  function rpBadge() {
+    var c = P.ctx, dp = P.dpr, t = "↺ " + (P.lab.replay || "REPETICIÓN");
+    c.setTransform(dp, 0, 0, dp, 0, 0);
+    c.font = "800 12px 'Archivo', sans-serif"; c.textAlign = "left"; c.textBaseline = "middle";
+    var w = c.measureText(t).width + 26, x0 = P.w - w - 8;
+    c.fillStyle = "rgba(11,20,23,.78)"; c.fillRect(x0, 8, w, 22);
+    c.fillStyle = "#ffb21e"; c.fillText(t, x0 + 8, 19);
+    if (Math.floor(now() / 500) % 2) { c.fillStyle = "#ff5b66"; c.beginPath(); c.arc(x0 + w - 9, 19, 3.5, 0, 6.3); c.fill(); }
+  }
+  function replay() { if (!P || P.rp || P.frozen) return false; return rpStart(P.ck - 6, P.ck); }
   function loop() {
     if (!P || !P.run) return;
     var t = now(), dt = Math.min(0.05, (t - P.last) / 1000);
     P.last = t;
-    if (!document.hidden) { if (!P.frozen) tick(dt); draw(); }
+    if (!document.hidden) {
+      if (P.rp) { rpStep(dt); draw(); rpBadge(); }
+      else { if (!P.frozen) { tick(dt); rpRec(); if (P.rpAt && P.ck >= P.rpAt.at) { var ra = P.rpAt; P.rpAt = null; rpStart(ra.from, ra.to); } } draw(); }
+    }
     requestAnimationFrame(loop);
   }
   function clearMsg() { if (P) P.msg = null; }
-  function freeze(v) { if (P) { if (v && !P.frozen) flushCues(); P.frozen = !!v; if (!v) { P.last = now(); } } }
-  return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy, reset: reset, clearMsg: clearMsg, freeze: freeze,
+  function clearHalf() { if (P && P.msg && P.msg.keep && P.msg.t === P.lab.half) P.msg = null; }
+  function freeze(v) { if (P) { if (v && !P.frozen) flushCues(); P.frozen = !!v; if (!v) { P.last = now(); if (P.half2) clearHalf(); } } }
+  return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy, reset: reset, clearMsg: clearMsg, freeze: freeze, replay: replay,
     active: function () { return !!P; }, sound: function () { return Snd.isOn(); }, debug: function () { return P; }};
 })();
