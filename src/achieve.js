@@ -2,12 +2,12 @@
    Cada logro se comprueba con el estado de la partida; los desbloqueados se guardan en S.ach {clave: año}.
    Las partidas antiguas reciben en silencio los logros que ya habían cumplido. */
 function achPlayerTot() {
-  var p = S.p, t = careerTotals(), ss = p.ss || {};
+  var p = S.p, t = careerTotals(), last = p.seasons[p.seasons.length - 1], ss = last && last.y === S.yr ? {} : (p.ss || {});
   return {apps: t.apps + (ss.apps || 0), g: t.g + (ss.g || 0), a: t.a + (ss.a || 0), cs: t.cs + (ss.cs || 0), seasons: t.seasons};
 }
 function achClubs(rows) { var o = {}; rows.forEach(function (r) { (r.clubs || [r.club]).forEach(function (c) { if (c != null && c >= 0) o[c] = 1; }); }); return Object.keys(o).length; }
 function achMgrTot() {
-  var m = S.m, ss = m.ss || {}, t = {w: ss.w || 0, seasons: m.seasons.length};
+  var m = S.m, last = m.seasons[m.seasons.length - 1], ss = last && last.y === S.yr ? {} : (m.ss || {}), t = {w: ss.w || 0, seasons: m.seasons.length};
   m.seasons.forEach(function (r) { t.w += r.w || 0; });
   return t;
 }

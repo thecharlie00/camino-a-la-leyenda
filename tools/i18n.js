@@ -8,7 +8,7 @@ const fs = require("fs"), path = require("path"), vm = require("vm");
 const acorn = require("acorn"), walk = require("acorn-walk");
 const ROOT = path.join(__dirname, ".."), SRC = path.join(ROOT, "src"), I18N = path.join(ROOT, "i18n"), WORK = path.join(ROOT, "work");
 const LANGS = ["en", "de", "it", "fr"];
-const CODE_FILES = ["i18n.js", "data.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "week29.js", "crest.js", "minigame.js", "pitch.js", "ui.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-cups.js", "ui-week.js"];
+const CODE_FILES = ["i18n.js", "data.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "week29.js", "club30.js", "crest.js", "minigame.js", "pitch.js", "ui.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-cups.js", "ui-week.js", "ui-club30.js"];
 const MARKERS = {tr: [0], N_: [0], trn: [1, 2], awd: [1], t: [0]};
 const STATIC_EV = {EV: 1, MO: 1, MEV: 1, MMO: 1};
 
@@ -38,7 +38,7 @@ function add(out, key, where, ctx, note) {
 }
 /* claves que solo existen al ejecutar: datos (países, ligas, copas…) y campos fijos de las decisiones */
 function runtimeKeys(out) {
-  const files = ["i18n.js", "data.js", "data-es.js", "data-f.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "week29.js", "crest.js", "minigame.js"].filter(f => fs.existsSync(path.join(SRC, f)));
+  const files = ["i18n.js", "data.js", "data-es.js", "data-f.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "week29.js", "club30.js", "crest.js", "minigame.js"].filter(f => fs.existsSync(path.join(SRC, f)));
   const ctx = {console, Math, Date, JSON};
   vm.createContext(ctx);
   vm.runInContext(files.map(f => fs.readFileSync(path.join(SRC, f), "utf8")).join("\n"), ctx);

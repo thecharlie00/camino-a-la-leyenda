@@ -15,7 +15,7 @@
       (rp.rec ? '<small class="wkrec">' + tr("Tu segundo recomienda: {p}.", {p: "<b>" + h(tr(WK_PREP[rp.rec].n)) + "</b>"}) + (w.prep === rp.rec ? " ✓" : "") + "</small>" : "") + "</div></div>";
   }
   U.add("club", function () {
-    if (!wkOn() || S.ph === "ret") return "";
+    if (!wkOn() || S.ph === "ret" || (typeof presOn === "function" && presOn())) return "";
     var w = wkOf(), P = WK_PREP[w.prep] || WK_PREP.gen;
     var sum = tr("Carga {l} · {p}", {l: tr(WK_LOAD[w.load].n).toLowerCase(), p: tr(P.n)});
     var o = '<details class="card mpcard fold wkcard" data-fold="week"' + (foldOpen("week", false) ? " open" : "") + '><summary class="head"><span class="tag real"><span class="dot"></span>' + tr("La semana de trabajo") + '</span><span class="eyebrow">' + h(sum) + "</span></summary>" + '<div class="stack wkbody">';

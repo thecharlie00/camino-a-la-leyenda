@@ -851,7 +851,7 @@ function mgrGenYouth(n) {
   var m = S.m, r = S.cr[m.club], out = [];
   for (var i = 0; i < n; i++) {
     var age = ri(16, 17), ovr = clamp(r - rf(12, 20), 38, 75);
-    var pot = round1(clamp(r + rf(-5, 7) + (m.focus === "cantera" ? 2 : 0) + (m.flags.youthBoost ? 3 : 0), ovr + 6, 92));
+    var pot = round1(clamp(r + rf(-5, 7) + (m.focus === "cantera" ? 2 : 0) + (m.flags.youthBoost ? 3 : 0) + (typeof facYouthB === "function" ? facYouthB() : 0), ovr + 6, 92));
     var nm = mName(chance(0.85) ? W.clubs[m.club].ci : mNat(W.clubs[m.club].ci));
     out.push({fn: nm.fn, ln: nm.ln, pos: pick(POS_ORDER), age: age, ovr: round1(ovr), pot: pot, nat: W.clubs[m.club].ci});
   }

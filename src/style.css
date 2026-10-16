@@ -1195,3 +1195,13 @@ details.a11y > summary { font-weight: 700; }
 .wkstaff small { display: block; color: var(--mist); font-size: 12.5px; }
 .wkst { color: var(--led); letter-spacing: 1px; font-size: 13px; }
 .wkmax { font-size: 12.5px; }
+/* ===== 3.0 · El club por dentro ===== */
+.finffp { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 10px; border-radius: 12px; background: var(--tunnel); }
+.finffp > span { font-weight: 600; } .finffp small { flex-basis: 100%; font-size: 12.5px; }
+.prescard.need { border-color: var(--red); }
+.presrow { display: flex; gap: 12px; align-items: center; }
+.presrow b { font-size: 16px; } .presrow small, .pickrow small { display: block; color: var(--mist); font-size: 13px; }
+.presic { font-size: 26px; flex: none; }
+.presfans { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 13px; color: var(--mist); }
+.presfans .bar { flex: 1; margin: 0; }
+.presfans b { color: var(--chalk); }

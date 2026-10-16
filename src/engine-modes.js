@@ -299,6 +299,7 @@ function newClubCareer(o) {
   setupRivals();
   S.m = newMgrState(o);
   S.m.owner = true; S.m.budM = CLUB_BUD[d];
+  if (o.role === "pres") S.m.pres = {coach: null};
   mgrJoinClub(id, {sal: mgrSalary(id)});
   S.m.board = 70; S.m.fans = 62;
   S.feed = [];

@@ -1543,7 +1543,9 @@
       cl.forEach(function (ci) { s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + (c.club === ci ? tr("Tu club ocupa su plaza") : tr("Sustituir a este club")) + '</small></div><span class="lvl">' + Math.round(W.clubs[ci].r0) + "</span></button>"; });
       s += "</div>";
     } else if (st === 2) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_C); }
-    else { s += stepHead(st, n, tr("Tú, el míster")) + whoFields(c, [30, 35, 40, 45, 50, 55]); }
+    else {
+      s += stepHead(st, n, c.role === "pres" ? tr("Tú, el presidente") : tr("Tú, el míster")) + '<div><label class="lbl">' + tr("Tu papel") + '</label><div class="seg"><button data-a="cset" data-k="role" data-v="pm" aria-pressed="' + (c.role !== "pres") + '">' + tr("Presidente y míster") + '</button><button data-a="cset" data-k="role" data-v="pres" aria-pressed="' + (c.role === "pres") + '">' + tr("Solo presidente") + '</button></div><p class="muted" style="font-size:13px;margin:6px 0 0">' + (c.role === "pres" ? tr("Fichas a un entrenador que dirige los partidos. Tú llevas las cuentas, el estadio y los fichajes, y respondes ante la afición.") : tr("Lo haces todo: alineación, táctica, fichajes y las cuentas del club.")) + "</p></div>" + whoFields(c, [30, 35, 40, 45, 50, 55]);
+    }
     var canNext = st === 0 ? c.cn.trim().length >= 2 : st === 1 ? c.club >= 0 : st === 3 ? !!(c.fn.trim() && c.ln.trim()) : true;
     s += navRow(st, n, canNext, tr("Crear el club"));
     if (st === 0 && !canNext) s += '<p class="muted" style="font-size:13px;margin:0">' + tr("Ponle un nombre a tu club para seguir.") + "</p>";
@@ -1581,7 +1583,7 @@
     switchGame(function () {
       try {
         if (c.kind === "mgr") newManagerCareer({fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, club: c.club, g: c.g});
-        else if (c.kind === "club") newClubCareer({fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, cn: c.cn.trim(), ab: (c.ab || clubAbbr(c.cn)).toUpperCase().slice(0, 4), col: c.col, repl: c.club, g: c.g, crest: c.crest, kit: c.kit});
+        else if (c.kind === "club") newClubCareer({role: c.role, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, cn: c.cn.trim(), ab: (c.ab || clubAbbr(c.cn)).toUpperCase().slice(0, 4), col: c.col, repl: c.club, g: c.g, crest: c.crest, kit: c.kit});
         else newCareer({fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, nat2: c.nat2 || null, pos: c.pos, foot: c.foot, age: c.age, talent: c.talent, club: c.club, ev: c.ev, g: c.g});
       } catch (e) { console.error(e); toast(tr("No se pudo crear la partida.")); return; }
       UI.cr = null; UI.exp = {}; UI.wl = null; UI.flash = null; UI.sheet = null;

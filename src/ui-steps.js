@@ -76,6 +76,7 @@
   function steps() {
     var mgr = S.mode === "mgr";
     if (mgr) return [
+      typeof presOn === "function" && presOn() ? {ok: !!S.m.pres.coach, t: tr("Elige a tu entrenador"), b: tr("Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto."), act: "presopen", gl: tr("Elegir entrenador")} :
       {ok: seen("plantilla"), t: tr("Conoce a tu equipo"), b: tr("Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está."), go: "plantilla", gl: tr("Ir a Equipo")},
       {ok: played(), t: tr("Juega tus primeros partidos"), b: tr("Pulsa el botón grande de abajo. El juego avanza unas semanas y se para cuando hay algo que decidir.")},
       {ok: seen("mercado"), t: tr("Echa un vistazo al mercado"), b: tr("En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan."), go: "mercado", gl: tr("Ir a Mercado")},
