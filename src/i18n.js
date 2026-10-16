@@ -53,7 +53,7 @@ function setLang(l) {
   if (l !== "es" && !I18N[l]) l = "es";
   LANG = l;
   try { localStorage.setItem("camino.lang", l); } catch (e) {}
-  if (typeof document !== "undefined" && document.documentElement) { document.documentElement.lang = l; document.title = tr("Camino a la Leyenda"); }
+  if (typeof document !== "undefined" && document.documentElement) { document.documentElement.lang = l; document.title = tr("Fútbol: Camino a la Leyenda"); }
   LANG_HOOKS.forEach(function (f) { f(); });
 }
 /* textos fijos de decisiones y momentos (title, cat, ref): se guardan en castellano y se leen traducidos */

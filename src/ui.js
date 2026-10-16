@@ -6,6 +6,7 @@
   var ICON = {
     home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>',
     grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>',
+    medal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3l2.5 6M16 3l-2.5 6"/><circle cx="12" cy="15" r="6"/><path d="M12 12.5l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 14.6l2-.3z"/></svg>',
     book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg>',
     gear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>',
     at: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>',
@@ -454,6 +455,7 @@
     rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
     rows.push(["tab", "hist", ICON.trophy, tr("Historial"), tr("Temporadas, títulos y premios")]);
     if (!mgr) rows.push(["tab", "mundo", ICON.globe, tr("Mundo"), tr("Otras ligas, selecciones y rivales")]);
+    if (typeof achCount === "function") { achCheck(); var ac = achCount(); rows.push(["ach", "", ICON.medal, tr("Logros"), tr("{n} de {m} conseguidos", {n: ac[0], m: ac[1]})]); }
     rows.push(["guide", "", ICON.book, tr("Guía del juego"), tr("Cómo funciona cada parte")]);
     rows.push(["menu", "", ICON.gear, tr("Ajustes y partidas"), tr("Idioma, ritmo, guardar y cargar")]);
     return '<div class="stack"><h2 class="scrt">' + tr("Más") + '</h2><div class="mlist">' + rows.map(function (r) {
@@ -1354,7 +1356,7 @@
       "<p>" + tr("{n} ligas de los cinco continentes, todas las selecciones del mundo, copas, Champions, Libertadores, Mundiales y el Balón de Oro.", {n: W.lg.length}) + "</p>" +
       '<div class="scoreline"><span>' + tr("{n} LIGAS", {n: W.lg.length}) + "</span><span>" + tr("{n} CLUBES", {n: W.clubs.length - 2}) + "</span><span>" + tr("{n} SELECCIONES", {n: W.ctry.length}) + "</span></div></section>";
     s += '<div class="opts"><button class="go" data-a="goload"' + (n ? "" : " disabled") + ">" + tr("Cargar partida") + (n ? " · " + n : "") + " " + ICON.play + '</button><button class="go ghost" data-a="newgame">' + tr("Nueva partida") + '</button><button class="btn wide gde-open" data-a="guide">📖 ' + tr("Guía del juego") + "</button></div>";
-    s += '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ": " + h(langName()) + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + "</div></div></main>";
+    s += '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ": " + h(langName()) + '</button><button class="btn wide" data-a="a11y">' + tr("Accesibilidad") + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + "</div></div></main>";
     return s;
   }
   function fmtWhen(ts) {

@@ -64,19 +64,22 @@ const OLD = process.env.OLD_SAVE || "";
   await click('[data-a="tab"][data-t="plantilla"]');
   await shot("07-plantilla"); await overflow("plantilla");
   /* 4. arrastrar con ratón: titular (hueco 9) encima del primer suplente */
-  const before = await p.evaluate(() => ({ xi9: S.m.xi[9], b0: S.m.bench[0] }));
+  /* suplente compatible con el puesto (desde la 2.6 no se puede poner a nadie fuera de su línea) */
+  const before = await p.evaluate(() => { const sp = (FORMATIONS[S.m.form] || [])[9], b = S.m.bench.filter(id => posOk(mPl(id).pos, sp))[0]; return { xi9: S.m.xi[9], b0: b }; });
   const box = async (sel) => { const e = await p.$(sel); if (!e) return null; await e.scrollIntoViewIfNeeded(); return e.boundingBox(); };
-  let a = await box('.slot[data-i="9"]'), c = await box(".bchip");
+  await p.evaluate(() => { const w = document.getElementById("ntfs"); if (w) w.remove(); });
+  let a = await box('.slot[data-i="9"]'), c = await box('.bchip[data-id="' + before.b0 + '"]');
   if (a && c) {
-    a = await box('.slot[data-i="9"]'); c = await box(".bchip");
+    a = await box('.slot[data-i="9"]'); c = await box('.bchip[data-id="' + before.b0 + '"]');
     await p.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await p.mouse.down();
     await p.mouse.move(a.x + a.width / 2 + 10, a.y + a.height / 2 + 10, { steps: 3 });
-    await p.mouse.move(c.x + c.width / 2, c.y + c.height / 2, { steps: 12 });
+    for (let k = 0; k < 4; k++) { await p.waitForTimeout(120); c = await (await p.$('.bchip[data-id="' + before.b0 + '"]')).boundingBox(); await p.mouse.move(c.x + c.width / 2, c.y + c.height / 2, { steps: 4 }); }
     await p.waitForTimeout(80);
+    notes.push("bajo el cursor: " + await p.evaluate(([x, y]) => { const e = document.elementFromPoint(x, y), d = e && e.closest("[data-drop]"); return d ? d.getAttribute("data-drop") : (e ? e.className : "nada"); }, [c.x + c.width / 2, c.y + c.height / 2]) + " · origen " + await p.evaluate(() => { const d = document.querySelector(".dsrc"); return d ? d.getAttribute("data-drag") : "?"; }));
     await p.mouse.up(); await p.waitForTimeout(200);
-    const after = await p.evaluate(() => ({ xi9: S.m.xi[9], b0: S.m.bench[0], sheet: !!document.querySelector(".sheet") }));
+    const after = await p.evaluate((o) => ({ xi9: S.m.xi[9], oldOnBench: S.m.bench.indexOf(o) >= 0, sheet: !!document.querySelector(".sheet"), us: UIX.ui().sheet && UIX.ui().sheet.k, toast: (document.querySelector(".toast") || {}).textContent }), before.xi9);
     notes.push("ratón: antes " + JSON.stringify(before) + " después " + JSON.stringify(after));
-    if (!(after.xi9 === before.b0 && after.b0 === before.xi9)) errs.push("el arrastre con ratón no intercambió titular y suplente");
+    if (!(after.xi9 === before.b0 && after.oldOnBench)) errs.push("el arrastre con ratón no intercambió titular y suplente");
     if (after.sheet) errs.push("tras arrastrar se abrió una hoja (clic no suprimido)");
   } else errs.push("no encuentro hueco o suplente para arrastrar");
   /* 5. arrastrar con el dedo: un no convocado al banquillo (pulsación larga) */

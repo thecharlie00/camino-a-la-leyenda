@@ -33,12 +33,12 @@ for fam, pkg, w, subsets in faces:
 
 css = "\n".join(css_fonts) + "\n" + (SRC / "style.css").read_text()
 LANG_FILES = ["lang-en.js", "lang-de.js", "lang-it.js", "lang-fr.js", "lang-fem.js"]
-ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "crest.js", "minigame.js", "pitch.js", "ui.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-boot.js"]
+ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "crest.js", "minigame.js", "pitch.js", "ui.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-boot.js"]
 js = "\n".join((SRC / n).read_text() for n in ORDER if (SRC / n).exists())
 js = js.replace("</script", "<\\/script")
 
 ICON = base64.b64encode((SRC / "icon96.png").read_bytes()).decode() if (SRC / "icon96.png").exists() else ""
-body = f"""<title>Camino a la Leyenda</title>
+body = f"""<title>Fútbol: Camino a la Leyenda</title>
 <link rel="icon" href="data:image/png;base64,{ICON}">
 <link rel="apple-touch-icon" href="data:image/png;base64,{ICON}">
 <meta name="theme-color" content="#0b1417">
