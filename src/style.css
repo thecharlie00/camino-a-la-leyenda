@@ -1232,3 +1232,18 @@ html.th-day.cb { --grass: #1f6fd1; --red: #c25a00; --grass-rgb: 31, 111, 209; --
 /* tema «retro» */
 html.th-retro { --night: #1b1812; --stand: #26211a; --tunnel: #312a20; --line: #4a3f2e; --chalk: #f2e3bd; --mist: #b5a684; --dim: #857a60; --led: #e9b23a; --led-ink: #1b1812; --f-body: "Courier New", ui-monospace, monospace; }
 html.th-retro .card { border-radius: 4px; } html.th-retro .go, html.th-retro .btn { border-radius: 4px; }
+/* ===== 4.0 · Juega tus momentos ===== */
+.pm-ov { position: fixed; inset: 0; z-index: 90; background: rgba(6,12,14,.94); display: flex; align-items: center; justify-content: center; padding: 12px; }
+.pm-box { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+.pm-top { display: flex; align-items: center; gap: 12px; color: var(--chalk); font: 800 18px/1 var(--f-disp); text-transform: uppercase; letter-spacing: .02em; }
+.pm-time { flex: 1; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.pm-time i { display: block; height: 100%; width: 100%; background: var(--led); }
+.pm-cv { width: 100%; aspect-ratio: 40 / 35.4; border-radius: 12px; touch-action: none; display: block; }
+.pm-hint { margin: 0; font-size: 13px; color: var(--mist); }
+.pm-btns { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 8px; }
+.pm-btns button { border: 1px solid var(--line); background: var(--tunnel); color: var(--chalk); font: 800 15px/1.1 var(--f-body); border-radius: 12px; padding: 14px 8px; }
+.pm-btns .pm-shot { background: var(--led); color: var(--led-ink); border-color: var(--led); }
+.pm-btns small { display: block; font-size: 12px; font-weight: 700; opacity: .85; }
+.pm-msg { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); font: 900 34px/1 var(--f-disp); color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.7); text-transform: uppercase; pointer-events: none; text-align: center; }
+.pm-msg.good { color: var(--grass); } .pm-msg.bad { color: var(--red); }
+.pmgo { width: 100%; margin-top: 10px; }

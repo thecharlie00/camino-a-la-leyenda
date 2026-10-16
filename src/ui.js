@@ -648,6 +648,7 @@
     o += '<p class="lead">' + h(d.text) + "</p>";
     if (d.ref) o += '<div class="ref"><b>' + tr("Pasó de verdad") + '</b>' + h(d.ref) + "</div>";
     o += '<div class="opts">' + d.opts.map(optHTML).join("") + "</div>";
+    if (UIX.playable && UIX.playable(d)) o += '<button class="go pmgo" data-a="mplay">🎮 ' + tr("Jugarla tú") + '</button><p class="muted" style="font-size:12px;margin:6px 0 10px">' + tr("Controla la jugada en el campo: regatea, haz una pared o dispara.") + "</p>";
     if (S && S.pend[0] && S.pend[0].k === "moment" && d.opts.length > 1) o += '<button class="btn wide msim" data-a="msim">⏩ ' + tr("Simular la jugada") + '</button><p class="muted" style="font-size:12px;margin:6px 0 0">' + tr("El juego decide por ti y te dice cómo acaba el partido.") + "</p>";
     return o + "</section>";
   }

@@ -1088,7 +1088,7 @@ function advancePlayer() {
 }
 /* opción → descripción para la interfaz (desenlaces, porcentajes y chips) */
 function descOpt(o, prev) {
-  return {t: o.t, d: o.d || null, ref: o.ref || null, badge: o.badge || null, dis: o.dis || null, blind: !!o.blind, mini: o.mini || null,
+  return {t: o.t, d: o.d || null, ref: o.ref || null, badge: o.badge || null, dis: o.dis || null, blind: !!o.blind, mini: o.mini || null, shot: !!(o.ok && o.ok.goal === "me"),
     outs: outcomesOf(o).map(function (u) { return {p: u.p, good: !!u.good, neu: !!u.neu, sure: !!u.sure, lab: u.lab || null, chips: prev(u)}; })};
 }
 function playerDesc(x) {
