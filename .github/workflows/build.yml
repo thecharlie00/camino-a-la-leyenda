@@ -1,0 +1,106 @@
+# Compila el juego y el Android App Bundle (.aab) firmado en GitHub.
+# - En cada push a main: compila, pasa las pruebas rápidas y deja el .aab como artefacto descargable.
+# - Al subir una etiqueta vX.Y (p. ej. v2.8): además crea una release privada de borrador con el .aab.
+# - También se puede lanzar a mano desde la pestaña Actions («Run workflow»).
+#
+# Secretos necesarios (Settings → Secrets and variables → Actions):
+#   CAMINO_KEYSTORE_B64  el archivo camino.keystore en base64
+#   CAMINO_KS_PASS       la contraseña del keystore
+name: Compilar
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  aab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      BUILD_TOOLS: "35.0.0"
+      PLATFORM: "android-35"
+      BUNDLETOOL_VERSION: "1.17.2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Herramientas de Android
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "build-tools;$BUILD_TOOLS" "platforms;$PLATFORM" > /dev/null
+          echo "ANDROID_JAR=$ANDROID_HOME/platforms/$PLATFORM/android.jar" >> "$GITHUB_ENV"
+          echo "AAPT2=$ANDROID_HOME/build-tools/$BUILD_TOOLS/aapt2" >> "$GITHUB_ENV"
+          echo "D8=$ANDROID_HOME/build-tools/$BUILD_TOOLS/d8" >> "$GITHUB_ENV"
+          mkdir -p tools/bt
+          curl -sSL -o tools/bt/bundletool.jar "https://github.com/google/bundletool/releases/download/$BUNDLETOOL_VERSION/bundletool-all-$BUNDLETOOL_VERSION.jar"
+          echo "BUNDLETOOL_JAR=$GITHUB_WORKSPACE/tools/bt/bundletool.jar" >> "$GITHUB_ENV"
+
+      - name: Compilar el juego
+        run: |
+          (cd tools && npm ci --silent)
+          node tools/i18n.js build
+          python3 build.py
+
+      - name: Pruebas rápidas
+        run: |
+          node test/sim.js 3
+          node test/modes.js
+
+      - name: Versión
+        id: ver
+        run: |
+          code=$(sed -n 's/.*android:versionCode="\([0-9]*\)".*/\1/p' android/AndroidManifest.xml)
+          name=$(sed -n 's/.*android:versionName="\([^"]*\)".*/\1/p' android/AndroidManifest.xml)
+          echo "code=$code" >> "$GITHUB_OUTPUT"; echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "Versión $name (código $code)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Firmar y compilar el .aab
+        env:
+          CAMINO_KEYSTORE_B64: ${{ secrets.CAMINO_KEYSTORE_B64 }}
+          CAMINO_KS_PASS: ${{ secrets.CAMINO_KS_PASS }}
+        run: |
+          if [ -z "$CAMINO_KEYSTORE_B64" ] || [ -z "$CAMINO_KS_PASS" ]; then
+            echo "::error::Faltan los secretos CAMINO_KEYSTORE_B64 y CAMINO_KS_PASS (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          echo "$CAMINO_KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/camino.keystore"
+          CAMINO_KEYSTORE="$RUNNER_TEMP/camino.keystore" bash android/build_aab.sh
+          rm -f "$RUNNER_TEMP/camino.keystore"
+          mv dist/CaminoALaLeyenda.aab "dist/CaminoALaLeyenda-${{ steps.ver.outputs.name }}.aab"
+
+      - name: Guardar el .aab
+        uses: actions/upload-artifact@v4
+        with:
+          name: CaminoALaLeyenda-${{ steps.ver.outputs.name }}-codigo-${{ steps.ver.outputs.code }}
+          path: |
+            dist/CaminoALaLeyenda-${{ steps.ver.outputs.name }}.aab
+            dist/camino.html
+          retention-days: 30
+
+      - name: Release en borrador (solo con etiqueta)
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" "dist/CaminoALaLeyenda-${{ steps.ver.outputs.name }}.aab" \
+            --draft --title "Versión ${{ steps.ver.outputs.name }}" --notes "Código de versión ${{ steps.ver.outputs.code }}."
