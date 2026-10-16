@@ -456,6 +456,7 @@
     rows.push(["tab", "hist", ICON.trophy, tr("Historial"), tr("Temporadas, títulos y premios")]);
     if (!mgr) rows.push(["tab", "mundo", ICON.globe, tr("Mundo"), tr("Otras ligas, selecciones y rivales")]);
     if (typeof achCount === "function") { achCheck(); var ac = achCount(); rows.push(["ach", "", ICON.medal, tr("Logros"), tr("{n} de {m} conseguidos", {n: ac[0], m: ac[1]})]); }
+    if (typeof diaryAdd === "function") rows.push(["diary", "", ICON.route, tr("Diario de tu carrera"), tr("Tus partidos, fichajes y momentos clave")]);
     rows.push(["guide", "", ICON.book, tr("Guía del juego"), tr("Cómo funciona cada parte")]);
     rows.push(["menu", "", ICON.gear, tr("Ajustes y partidas"), tr("Idioma, ritmo, guardar y cargar")]);
     return '<div class="stack"><h2 class="scrt">' + tr("Más") + '</h2><div class="mlist">' + rows.map(function (r) {
@@ -1501,7 +1502,8 @@
     else if (st === 1) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_M); }
     else {
       s += stepHead(st, n, tr("Tu banquillo"));
-      s += '<div class="seg"><button data-a="cset" data-k="mmode" data-v="off" aria-pressed="' + (c.mmode === "off") + '">' + tr("Empezar desde abajo") + '</button><button data-a="cset" data-k="mmode" data-v="pick" aria-pressed="' + (c.mmode === "pick") + '">' + tr("Elegir club") + "</button></div>";
+      s += '<div class="seg"><button data-a="cset" data-k="mmode" data-v="off" aria-pressed="' + (c.mmode === "off") + '">' + tr("Empezar desde abajo") + '</button><button data-a="cset" data-k="mmode" data-v="pick" aria-pressed="' + (c.mmode === "pick") + '">' + tr("Elegir club") + '</button>' + (typeof CHAL !== "undefined" ? '<button data-a="cset" data-k="mmode" data-v="chal" aria-pressed="' + (c.mmode === "chal") + '">' + tr("Desafío") + "</button>" : "") + "</div>";
+      if (c.mmode === "chal" && UIX.chalCreate) s += UIX.chalCreate(c);
       if (c.mmode === "off") {
         if (!c.offers) { c.offers = startOffersMgr(); if (c.offers.indexOf(c.club) < 0) c.club = -1; }
         s += '<p class="lead">' + tr("Tres clubes de ligas menos potentes te ofrecen su banquillo. Gana allí y llamarán los grandes.") + '</p><div class="list">' + offerRows(c, null) + "</div>";
@@ -1582,7 +1584,7 @@
     var c = UI.cr;
     switchGame(function () {
       try {
-        if (c.kind === "mgr") newManagerCareer({fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, club: c.club, g: c.g});
+        if (c.kind === "mgr") newManagerCareer({fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, club: c.club, g: c.g, chal: c.mmode === "chal" ? c.chal : null});
         else if (c.kind === "club") newClubCareer({role: c.role, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, cn: c.cn.trim(), ab: (c.ab || clubAbbr(c.cn)).toUpperCase().slice(0, 4), col: c.col, repl: c.club, g: c.g, crest: c.crest, kit: c.kit});
         else newCareer({fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, nat2: c.nat2 || null, pos: c.pos, foot: c.foot, age: c.age, talent: c.talent, club: c.club, ev: c.ev, g: c.g});
       } catch (e) { console.error(e); toast(tr("No se pudo crear la partida.")); return; }
@@ -2483,7 +2485,7 @@
   })();
 
   /* helpers para los módulos ui-*.js */
-  Object.assign(UIX, {h: h, render: render, persist: persist, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
+  Object.assign(UIX, {h: h, render: render, persist: persist, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, leagueField: function (c) { return leagueField(c); }, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
     chip: chip, edgeFlash: edgeFlash, confetti: confetti, openLive: function () { openLive(); }, isMgr: isMgr, ui: function () { return UI; }, icon: ICON,
     open: function (k, d) { UI.sheet = Object.assign({k: k}, d || {}); renderSheet(); }, slot: slot, choose: function (i) { doChoose(i); }});
 

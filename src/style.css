@@ -1206,3 +1206,10 @@ details.a11y > summary { font-weight: 700; }
 .presfans .bar { flex: 1; margin: 0; }
 .presfans b { color: var(--chalk); }
 .pspd .prp { border-left: 1px solid rgba(255,255,255,.18); border-radius: 0 7px 7px 0; margin-left: 2px; font-size: 14px; }
+/* ===== 3.2 · Desafíos, crisis y diario ===== */
+.chmd { font-size: 26px; flex: none; }
+.chcard .chres { margin: 8px 0 0; font-weight: 600; }
+.crcard { border-color: var(--led); } .crcard.lv3 { border-color: var(--red); }
+.dlist { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.dlist li { display: flex; gap: 10px; align-items: baseline; font-size: 14px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.dlist li > span:first-child { flex: none; width: 22px; text-align: center; }
