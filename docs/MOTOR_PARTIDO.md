@@ -111,3 +111,33 @@ Al terminar, el partido guarda `f.xg = [nuestro, rival]`.
 ## Sin pausas de decisión
 
 El partido no se detiene para que el jugador elija tirar, pasar o regatear. Así se decidió en la versión 4.0, y solo se mantienen los minijuegos de penaltis y faltas.
+
+## Campo 2D («las bolitas»)
+
+El código está en `src/pitch.js`. Se simula en metros (105 × 68).
+
+- **Bucle:**
+  - **Física:** avanza a paso fijo de 30 por segundo. A velocidad 2x o 3x se parte en subpasos para no perder colisiones.
+  - **Dibujo:** se pinta con `requestAnimationFrame` interpolando entre los dos últimos estados, así el movimiento es igual de suave a 60 o a 120 Hz y no depende de los FPS.
+- **Destino de cada jugador** (`shape`):
+  - posición base de la formación;
+  - altura de la línea y anchura según la táctica;
+  - desplazamiento hacia el balón;
+  - marca al rival más cercano sin romper la línea;
+  - límite del fuera de juego;
+  - presión de uno a tres jugadores según el bloque.
+- **Movimiento** (`move`):
+  - **«arrive»:** frena con `v = √(2·a·d)`.
+  - **Giro:** la aceleración se limita a lo largo y de lado, con un radio de giro que crece con la velocidad y la masa.
+  - **Separación de Reynolds:** cada jugador guarda unos 2,3 m de espacio personal, con peso 1 frente a los compañeros y 0,45 frente a los rivales. El que lleva el balón, el que presiona y las jugadas guionizadas pueden llegar al contacto.
+- **Atributos de cada jugador:**
+  - **Ritmo:** viene de «fuerza y ritmo» en tus jugadores; en los rivales se estima con la media y la edad.
+  - **Agilidad:** depende de la posición, la media y la edad. Afecta a la aceleración, al giro y al alcance para cortar pases.
+  - **Resistencia en directo:** baja la velocidad máxima y la aceleración.
+  - **Calidad de pase:** los buenos pasadores mandan el balón más rápido.
+- **Balón:**
+  - curva de Bézier con efecto y tres perfiles: raso, bombeado y disparo;
+  - gravedad y rebotes con pérdida de energía;
+  - rozamiento al rodar de 3,4 m/s²;
+  - frenado en el aire y la red de la portería.
+- **Intercepción:** en un pase raso de juego abierto, el rival que queda al alcance (0,95 m + 0,6 m × agilidad) puede tocarlo y desviarlo. La posesión la sigue marcando el motor del partido, así que el balón suelto lo recupera quien manda en ese minuto.

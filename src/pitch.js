@@ -5,7 +5,9 @@
    Pitch.event({t, k, side: 0|1, who, cue}) → cue() se llama cuando en el campo empieza la acción que describe el texto
    Pitch.busy() → ms de jugada pendiente · Pitch.reset() · Pitch.freeze(v) · Pitch.destroy()
    Todo se simula en metros (105 × 68): balón con altura, efecto y rebotes; jugadores con aceleración, giro e inercia;
-   cámara con zoom suave; ambiente de grada con Web Audio (sin ficheros). */
+   cámara con zoom suave; ambiente de grada con Web Audio (sin ficheros).
+   4.1: atributos de ritmo y agilidad por jugador, separación (espacio personal), intercepciones en los pases rasos
+   y paso fijo a 30 Hz con interpolación al pintar. */
 var Pitch = (function () {
   "use strict";
   var LEN = 105, WID = 68, MIDY = 34, PH = 3.66, BAR = 2.44, GRAV = 9.8, PI2 = Math.PI * 2;
@@ -273,8 +275,14 @@ var Pitch = (function () {
         o.st = p.st == null ? 1 : clamp(+p.st, 0.05, 1);
         var ovr = p.ovr == null ? 70 : +p.ovr, age = p.age == null ? 26 : +p.age;
         o.mass = MASS[p.pos] || 1;
-        o.pace = clamp(0.92 + (ovr - 70) * 0.009 - Math.max(0, age - 29) * 0.013 + (WIDE[p.pos] ? 0.04 : 0) - (o.gk ? 0.08 : 0), 0.76, 1.14);
-        o.acc = 5.6 * o.pace * (1.1 - (o.mass - 1) * 0.7) * (0.92 + clamp((ovr - 60) / 200, 0, 0.18));
+        /* ritmo: si llega el atributo de fuerza y ritmo (0-100) manda él; si no, se estima con la media y la edad */
+        var fz = p.fza == null ? null : +p.fza;
+        o.pace = fz != null ? clamp(0.8 + (fz - 50) * 0.0075 + (WIDE[p.pos] ? 0.03 : 0) - (o.gk ? 0.08 : 0), 0.74, 1.16)
+          : clamp(0.92 + (ovr - 70) * 0.009 - Math.max(0, age - 29) * 0.013 + (WIDE[p.pos] ? 0.04 : 0) - (o.gk ? 0.08 : 0), 0.76, 1.14);
+        /* agilidad: giros y cambios de ritmo (extremos y mediapuntas más ágiles; centrales y veteranos menos) */
+        o.agi = clamp((p.agi != null ? 0.8 + (+p.agi - 50) * 0.006 : 0.96 + (ovr - 70) * 0.006) + ({ED: 0.07, EI: 0.07, MCO: 0.06, MD: 0.04, MI: 0.04, DFC: -0.06, POR: -0.04}[p.pos] || 0) - Math.max(0, age - 30) * 0.012, 0.72, 1.18);
+        o.q = clamp((ovr - 60) / 30, 0, 1.2);
+        o.acc = 5.6 * o.pace * (1.1 - (o.mass - 1) * 0.7) * (0.92 + clamp((ovr - 60) / 200, 0, 0.18)) * (0.9 + 0.1 * o.agi);
         if (!prev && old[i]) { o.x = old[i].x; o.y = old[i].y; o.vx = 0; o.vy = 0; o.fa = old[i].fa; o.flash = P.ck; }
         return o;
       });
@@ -995,6 +1003,8 @@ var Pitch = (function () {
     while (P.q.length && P.q[0].at <= ck) { var st = P.q.shift(); try { st.go(); } catch (e) { if (window.console) console.error(e); } }
     for (i = P.cues.length - 1; i >= 0; i--) if (P.cues[i].at <= ck + 0.01) { var c = P.cues[i]; P.cues.splice(i, 1); try { c.fn(); } catch (e2) {} }
     ballTick(sdt);
+    P.lastSdt = sdt;
+    interceptCheck();
     var b = P.ball, scr = scripted();
     /* balón fuera: se para y se reanuda con banda, córner o saque de puerta */
     if (!scr && !P.cele && b.m === 2 && ck > P.stopUntil && outOfPlay(b)) { restartOut(); scr = scripted(); }
@@ -1126,13 +1136,14 @@ var Pitch = (function () {
       p.dive = null; p.tx = p.x; p.ty = p.y;
     }
     var fat = 0.7 + 0.3 * p.st, vmax = (2.2 + 6.2 * p.sp) * p.pace * fat, acc = p.acc * (0.75 + 0.25 * p.st);
-    var dx = clamp(p.tx, p.gone ? -8 : -1, p.gone ? LEN + 8 : LEN + 1) - p.x, dy = clamp(p.ty, p.off ? -4 : 0.8, p.off ? WID + 4 : WID - 0.8) - p.y, dist = Math.sqrt(dx * dx + dy * dy);
+    var sep = separation(p, s), tx0 = p.tx + sep.x, ty0 = p.ty + sep.y;
+    var dx = clamp(tx0, p.gone ? -8 : -1, p.gone ? LEN + 8 : LEN + 1) - p.x, dy = clamp(ty0, p.off ? -4 : 0.8, p.off ? WID + 4 : WID - 0.8) - p.y, dist = Math.sqrt(dx * dx + dy * dy);
     var want = dist > 0.12 ? Math.min(vmax, Math.sqrt(2 * acc * 0.75 * dist)) : 0;
     var wx = dist > 0.12 ? dx / dist * want : 0, wy = dist > 0.12 ? dy / dist * want : 0;
     var ax = wx - p.vx, ay = wy - p.vy, spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
     if (spd > 0.6) {
       var ux = p.vx / spd, uy = p.vy / spd, al = ax * ux + ay * uy, ap = -ax * uy + ay * ux;
-      var lat = acc * 1.15 / (1 + spd * 0.2 * p.mass);
+      var lat = acc * 1.15 * (p.agi || 1) / (1 + spd * 0.2 * p.mass);
       al = clamp(al, -acc * 1.5 * sdt, acc * sdt); ap = clamp(ap, -lat * sdt, lat * sdt);
       ax = al * ux - ap * uy; ay = al * uy + ap * ux;
     } else {
@@ -1147,6 +1158,51 @@ var Pitch = (function () {
     else ta = Math.atan2(p.vy, p.vx);
     var da = wrapA(ta - p.fa), wmax = (p.gk ? 9 : 6.5) * (0.7 + 0.3 * p.st) * sdt;
     p.fa = wrapA(p.fa + clamp(da, -wmax, wmax));
+  }
+  /* separación de Reynolds adaptada: cada uno guarda unos 2 m de espacio personal (más con los compañeros);
+     el que lleva el balón, el que presiona y las jugadas guionizadas pueden llegar al contacto */
+  var SEP_R = 2.3;
+  function separation(p, s) {
+    var out = {x: 0, y: 0}, b = P.ball;
+    if (p.dive || p.gone || p.off || p.ov || P.cele) return out;
+    var holder = b.m === 0 && b.hs === s && P.T[s][b.hi] === p, presser = !holder && b.m !== 1 && Math.abs(p.tx - b.x) < 2.5 && Math.abs(p.ty - b.y) < 2.5;
+    for (var t = 0; t < 2; t++) {
+      if (t !== s && (holder || presser)) continue;
+      var w = t === s ? 1 : 0.45;
+      for (var j = 0; j < P.T[t].length; j++) {
+        var q = P.T[t][j]; if (!q || q === p || q.gone || q.off) continue;
+        var dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
+        if (d2 >= SEP_R * SEP_R) continue;
+        var d = Math.sqrt(d2) || 0.01, f = (SEP_R - d) / SEP_R * w;
+        out.x += dx / d * f; out.y += dy / d * f;
+      }
+    }
+    var m = Math.sqrt(out.x * out.x + out.y * out.y), lim = p.gk ? 0.6 : 1.6;
+    if (m > 0) { var k = Math.min(lim, m * 1.8) / m; out.x *= k; out.y *= k; }
+    return out;
+  }
+  /* intercepción: un pase raso que pasa al alcance de un rival puede tocarlo y desviarse (la posesión la sigue
+     marcando el motor del partido, así que el balón suelto lo recupera quien manda en ese minuto) */
+  function interceptCheck() {
+    var b = P.ball, f = b.fl;
+    if (b.m !== 1 || !f || f.prof !== 0 || b.z > 0.9 || scripted() || P.cele || P.lt < 0) return;
+    if (!f.cnt) { f.cnt = 1; P.npass = (P.npass || 0) + 1; }
+    var d = 1 - P.lt; f.tried = f.tried || {};
+    var k = f.t / f.d; if (k < 0.18 || k > 0.92) return;
+    for (var j = 0; j < P.T[d].length; j++) {
+      var q = pl(d, j); if (!q || q.gk || f.tried[j]) continue;
+      var dx = q.x - b.x, dy = q.y - b.y, reach = 0.95 + 0.6 * (q.agi || 1);
+      if (dx * dx + dy * dy > reach * reach) continue;
+      f.tried[j] = 1; P.icpt = P.icpt || {n: 0, ok: 0}; P.icpt.n++;
+      if (Math.random() < 0.3 * (q.agi || 1) * (0.6 + 0.4 * q.st)) {
+        P.icpt.ok++;
+        var vx = (b.x - b.px) / Math.max(0.001, P.lastSdt || 0.033), vy = (b.y - b.py) / Math.max(0.001, P.lastSdt || 0.033), a = Math.random() * PI2;
+        b.m = 2; b.fl = null; b.hs = -1; b.hi = -1; P.recv = null;
+        b.vx = vx * 0.3 + Math.cos(a) * 3; b.vy = vy * 0.3 + Math.sin(a) * 3; b.vz = 1.2; b.z = 0.1; b.spin = 0;
+        q.lag = P.ck + 0.3; P.chase = P.own; icon(d, j, "🦶");
+        return;
+      }
+    }
   }
   function openPass() {
     var b = P.ball, s = b.hs, me = b.hi, hp = pl(s, me); if (!hp) return;
@@ -1170,7 +1226,7 @@ var Pitch = (function () {
     var r = P.T[s][best], lead = bfwd > 5 && !BACK[r.pos] && !r.gk ? 3.5 : 0.6, tx = r.x + dir * lead + r.vx * 0.3, ty = r.y + r.vy * 0.3;
     var lob = bdist > 30 || (tac.pass === 2 && bfwd > 22);
     P.recv = {s: s, i: best, x: tx, y: ty};
-    var dur = (lob ? 0.55 + bdist / 22 : 0.2 + bdist / ([13, 16, 20][tac.tempo])), tok = best;
+    var dur = (lob ? 0.55 + bdist / 22 : 0.2 + bdist / ([13, 16, 20][tac.tempo])) * (1.06 - 0.12 * (hp.q || 0.5)), tok = best;
     kick(tx, ty, {prof: lob ? 1 : 0, h: lob ? Math.min(10, 1.8 + bdist * 0.1) : 0, d: dur, curve: lob ? rnd(-1.5, 1.5) : 0, then: function () { receive(s, tok); }});
     P.passAt = P.ck + 99;
   }
@@ -1423,13 +1479,44 @@ var Pitch = (function () {
     if (Math.floor(now() / 500) % 2) { c.fillStyle = "#ff5b66"; c.beginPath(); c.arc(x0 + w - 9, 19, 3.5, 0, 6.3); c.fill(); }
   }
   function replay() { if (!P || P.rp || P.frozen) return false; return rpStart(P.ck - 6, P.ck); }
+  /* bucle: la física avanza a paso fijo (30 por segundo, con subpasos a velocidad alta) y el dibujo interpola
+     entre los dos últimos estados, así se ve igual de suave en cualquier pantalla y la simulación no depende de los FPS */
+  var STEP = 1 / 30;
+  function snap() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) { var p = P.T[s][i]; if (p) { p.ix = p.x; p.iy = p.y; } }
+    var b = P.ball; b.ix = b.x; b.iy = b.y; b.iz = b.z;
+  }
+  function drawLerp(a) {
+    var L = [], b = P.ball, s, i, p;
+    for (s = 0; s < 2; s++) for (i = 0; i < P.T[s].length; i++) { p = P.T[s][i]; if (p && p.ix != null) { L.push(p, p.x, p.y); p.x = lerp(p.ix, p.x, a); p.y = lerp(p.iy, p.y, a); } }
+    var bx = b.x, by = b.y, bz = b.z;
+    if (b.ix != null) { b.x = lerp(b.ix, b.x, a); b.y = lerp(b.iy, b.y, a); b.z = lerp(b.iz, b.z, a); }
+    try { draw(); } finally {
+      for (i = 0; i < L.length; i += 3) { L[i].x = L[i + 1]; L[i].y = L[i + 2]; }
+      b.x = bx; b.y = by; b.z = bz;
+    }
+  }
   function loop() {
     if (!P || !P.run) return;
-    var t = now(), dt = Math.min(0.05, (t - P.last) / 1000);
+    var t = now(), dt = Math.min(0.1, (t - P.last) / 1000);
     P.last = t;
     if (!document.hidden) {
       if (P.rp) { rpStep(dt); draw(); rpBadge(); }
-      else { if (!P.frozen) { tick(dt); rpRec(); if (P.rpAt && P.ck >= P.rpAt.at) { var ra = P.rpAt; P.rpAt = null; rpStart(ra.from, ra.to); } } draw(); }
+      else if (P.frozen) draw();
+      else {
+        P.acc = (P.acc || 0) + dt;
+        var n = 0;
+        while (P.acc >= STEP && n < 6) {
+          P.acc -= STEP; n++;
+          snap();
+          var sub = Math.max(1, Math.ceil(effRate() / 1.25));
+          for (var k = 0; k < sub; k++) tick(STEP / sub);
+          rpRec();
+          if (P.rpAt && P.ck >= P.rpAt.at) { var ra = P.rpAt; P.rpAt = null; rpStart(ra.from, ra.to); break; }
+        }
+        if (n >= 6) P.acc = 0;
+        if (P.rp) draw(); else drawLerp(clamp(P.acc / STEP, 0, 1));
+      }
     }
     requestAnimationFrame(loop);
   }
