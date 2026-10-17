@@ -1,6 +1,6 @@
 {
   "_ayuda": "Rellena adsense_client con tu ID de editor (ca-pub-…) y cada hueco con el ID de bloque de anuncio que crees en AdSense. Si un hueco está vacío, no se muestra. domain: tu dominio propio (opcional, crea el archivo CNAME).",
-  "adsense_client": "",
+  "adsense_client": "ca-pub-3919867907492197",
   "slots": {
     "inicio": "",
     "inicio_final": "",
