@@ -1288,8 +1288,8 @@
   "w": [
    "engine-player.js:1202",
    "ui.js:1008",
-   "ui-guide.js:78",
-   "evento:documental"
+   "ui-pets.js:125",
+   "ui-guide.js:78"
   ],
   "ctx": "onLang(function () { FX_LABEL = {ovr: tr(\"Media\"), pot: tr(\"Potencial\"), form: tr(\"Forma\"), mor: tr(\"Moral\"), fit: tr(\"Físico\"), prof: tr(\"Profesionalidad\"), fame: tr(\"Fama\"), coach: tr(\"Míster\"), fans: tr(\"Afición\"), mo"
  },
@@ -32211,73 +32211,501 @@
  },
  "{name} sorprende con su nueva mascota exótica: {pet}. Las redes no hablan de otra cosa.": {
   "w": [
-   "pets.js:59"
+   "pets.js:60"
   ],
   "ctx": "if (typeof socPostRaw === \"function\") socPostRaw({by: chance(0.5) ? \"fan\" : \"press\", tk: d.ex ? N_(\"{name} sorprende con su nueva mascota exótica: {pet}. Las redes no hablan de otra cosa.\") : N_(\"{name} presenta a su nue"
  },
  "{name} presenta a su nueva mascota: {pet}. ¡Ternura máxima! 🐾": {
   "w": [
-   "pets.js:59"
+   "pets.js:60"
   ],
   "ctx": "if (typeof socPostRaw === \"function\") socPostRaw({by: chance(0.5) ? \"fan\" : \"press\", tk: d.ex ? N_(\"{name} sorprende con su nueva mascota exótica: {pet}. Las redes no hablan de otra cosa.\") : N_(\"{name} presenta a su nue"
  },
- "{pet} te echa de menos: pasa más tiempo con tu mascota.": {
+ "Mimos": {
   "w": [
-   "pets.js:78"
+   "pets.js:68"
   ],
-  "ctx": "if (pt.bond < 20 && chance(0.3)) notify(tr(\"{pet} te echa de menos: pasa más tiempo con tu mascota.\", {pet: pt.nm}), \"amber\");"
+  "ctx": "{k: \"pat\", ico: \"🤲\", n: N_(\"Mimos\"), d: N_(\"Caricias y rascarle justo donde le gusta.\"), bond: 8, mor: 1, no: [\"fish\", \"tarantula\"]},"
+ },
+ "Caricias y rascarle justo donde le gusta.": {
+  "w": [
+   "pets.js:68"
+  ],
+  "ctx": "{k: \"pat\", ico: \"🤲\", n: N_(\"Mimos\"), d: N_(\"Caricias y rascarle justo donde le gusta.\"), bond: 8, mor: 1, no: [\"fish\", \"tarantula\"]},"
+ },
+ "Salir a pasear": {
+  "w": [
+   "pets.js:69"
+  ],
+  "ctx": "{k: \"walk\", ico: \"🦮\", n: N_(\"Salir a pasear\"), d: N_(\"Un buen paseo: también te pone en forma.\"), bond: 12, form: 1, sp: [\"dog\", \"fennec\", \"capybara\"]},"
+ },
+ "Un buen paseo: también te pone en forma.": {
+  "w": [
+   "pets.js:69"
+  ],
+  "ctx": "{k: \"walk\", ico: \"🦮\", n: N_(\"Salir a pasear\"), d: N_(\"Un buen paseo: también te pone en forma.\"), bond: 12, form: 1, sp: [\"dog\", \"fennec\", \"capybara\"]},"
+ },
+ "Jugar juntos": {
+  "w": [
+   "pets.js:70"
+  ],
+  "ctx": "{k: \"play\", ico: \"🎾\", n: N_(\"Jugar juntos\"), d: N_(\"Su juguete favorito y un rato de risas.\"), bond: 10, mor: 2, sp: [\"dog\", \"cat\", \"rabbit\", \"hamster\", \"hedgehog\", \"fennec\", \"macaw\"]},"
+ },
+ "Su juguete favorito y un rato de risas.": {
+  "w": [
+   "pets.js:70"
+  ],
+  "ctx": "{k: \"play\", ico: \"🎾\", n: N_(\"Jugar juntos\"), d: N_(\"Su juguete favorito y un rato de risas.\"), bond: 10, mor: 2, sp: [\"dog\", \"cat\", \"rabbit\", \"hamster\", \"hedgehog\", \"fennec\", \"macaw\"]},"
+ },
+ "Enseñarle un truco": {
+  "w": [
+   "pets.js:71"
+  ],
+  "ctx": "{k: \"trick\", ico: \"🎓\", n: N_(\"Enseñarle un truco\"), d: N_(\"Cuesta, pero cuando lo aprende es un vídeo viral.\"), bond: 7, sp: [\"dog\", \"cat\", \"rabbit\", \"macaw\", \"fennec\"]},"
+ },
+ "Cuesta, pero cuando lo aprende es un vídeo viral.": {
+  "w": [
+   "pets.js:71"
+  ],
+  "ctx": "{k: \"trick\", ico: \"🎓\", n: N_(\"Enseñarle un truco\"), d: N_(\"Cuesta, pero cuando lo aprende es un vídeo viral.\"), bond: 7, sp: [\"dog\", \"cat\", \"rabbit\", \"macaw\", \"fennec\"]},"
+ },
+ "Limpiar su hogar": {
+  "w": [
+   "pets.js:72"
+  ],
+  "ctx": "{k: \"home\", ico: \"🫧\", n: N_(\"Limpiar su hogar\"), d: N_(\"Acuario o terrario impecable: vive más feliz.\"), bond: 10, sp: [\"fish\", \"turtle\", \"iguana\", \"python\", \"tarantula\", \"hamster\"]},"
+ },
+ "Acuario o terrario impecable: vive más feliz.": {
+  "w": [
+   "pets.js:72"
+  ],
+  "ctx": "{k: \"home\", ico: \"🫧\", n: N_(\"Limpiar su hogar\"), d: N_(\"Acuario o terrario impecable: vive más feliz.\"), bond: 10, sp: [\"fish\", \"turtle\", \"iguana\", \"python\", \"tarantula\", \"hamster\"]},"
+ },
+ "Contemplarla un rato": {
+  "w": [
+   "pets.js:73"
+  ],
+  "ctx": "{k: \"watch\", ico: \"🧘\", n: N_(\"Contemplarla un rato\"), d: N_(\"Mirarla sin prisas te baja las pulsaciones.\"), bond: 6, mor: 2, calm: 1, sp: [\"fish\", \"turtle\", \"iguana\", \"python\", \"tarantula\", \"capybara\"]},"
+ },
+ "Mirarla sin prisas te baja las pulsaciones.": {
+  "w": [
+   "pets.js:73"
+  ],
+  "ctx": "{k: \"watch\", ico: \"🧘\", n: N_(\"Contemplarla un rato\"), d: N_(\"Mirarla sin prisas te baja las pulsaciones.\"), bond: 6, mor: 2, calm: 1, sp: [\"fish\", \"turtle\", \"iguana\", \"python\", \"tarantula\", \"capybara\"]},"
+ },
+ "Darle un premio": {
+  "w": [
+   "pets.js:74"
+  ],
+  "ctx": "{k: \"treat\", ico: \"🍖\", n: N_(\"Darle un premio\"), d: N_(\"Su comida favorita: vínculo rápido.\"), bond: 7, cost: 0.02},"
+ },
+ "Su comida favorita: vínculo rápido.": {
+  "w": [
+   "pets.js:74"
+  ],
+  "ctx": "{k: \"treat\", ico: \"🍖\", n: N_(\"Darle un premio\"), d: N_(\"Su comida favorita: vínculo rápido.\"), bond: 7, cost: 0.02},"
+ },
+ "Baño y peluquería": {
+  "w": [
+   "pets.js:75"
+  ],
+  "ctx": "{k: \"spa\", ico: \"🛁\", n: N_(\"Baño y peluquería\"), d: N_(\"Reluciente para las fotos: un toque de fama.\"), bond: 10, fame: 0.4, cost: 0.06, sp: PET_FUR},"
+ },
+ "Reluciente para las fotos: un toque de fama.": {
+  "w": [
+   "pets.js:75"
+  ],
+  "ctx": "{k: \"spa\", ico: \"🛁\", n: N_(\"Baño y peluquería\"), d: N_(\"Reluciente para las fotos: un toque de fama.\"), bond: 10, fame: 0.4, cost: 0.06, sp: PET_FUR},"
+ },
+ "Sesión de fotos": {
+  "w": [
+   "pets.js:76"
+  ],
+  "ctx": "{k: \"photo\", ico: \"📸\", n: N_(\"Sesión de fotos\"), d: N_(\"Para tus redes: cada accesorio que lleve suma seguidores.\"), bond: 4, photo: 1}"
+ },
+ "Para tus redes: cada accesorio que lleve suma seguidores.": {
+  "w": [
+   "pets.js:76"
+  ],
+  "ctx": "{k: \"photo\", ico: \"📸\", n: N_(\"Sesión de fotos\"), d: N_(\"Para tus redes: cada accesorio que lleve suma seguidores.\"), bond: 4, photo: 1}"
+ },
+ "¡{pet} ya sabe {n} trucos! El vídeo de {name} arrasa 🐾": {
+  "w": [
+   "pets.js:103"
+  ],
+  "ctx": "if ((pt.tricks === 1 || pt.tricks % 3 === 0) && typeof socPostRaw === \"function\") socPostRaw({by: \"fan\", tk: N_(\"¡{pet} ya sabe {n} trucos! El vídeo de {name} arrasa 🐾\"), tp: {pet: pt.nm, n: pt.tricks, name: socSelfName"
+ },
+ "{pet} posa con su look nuevo en el perfil de {name}. ¡Icono de estilo! 📸": {
+  "w": [
+   "pets.js:110"
+  ],
+  "ctx": "if (typeof socPostRaw === \"function\") socPostRaw({by: \"fan\", tk: eq.length ? N_(\"{pet} posa con su look nuevo en el perfil de {name}. ¡Icono de estilo! 📸\") : N_(\"Foto del día: {name} con {pet} en casa 🐾\"), tp: {name: s"
  },
  "Foto del día: {name} con {pet} en casa 🐾": {
   "w": [
-   "pets.js:79"
+   "pets.js:110",
+   "pets.js:222"
   ],
-  "ctx": "if (chance(0.12) && typeof socPostRaw === \"function\") socPostRaw({by: \"fan\", tk: N_(\"Foto del día: {name} con {pet} en casa 🐾\"), tp: {name: socSelfName(), pet: pt.nm}, mood: 1});"
+  "ctx": "if (typeof socPostRaw === \"function\") socPostRaw({by: \"fan\", tk: eq.length ? N_(\"{pet} posa con su look nuevo en el perfil de {name}. ¡Icono de estilo! 📸\") : N_(\"Foto del día: {name} con {pet} en casa 🐾\"), tp: {name: s"
+ },
+ "Natural": {
+  "w": [
+   "pets.js:121"
+  ],
+  "ctx": "[\"nat\", N_(\"Natural\"), \"\"],"
+ },
+ "Nieve": {
+  "w": [
+   "pets.js:122"
+  ],
+  "ctx": "[\"snow\", N_(\"Nieve\"), \"grayscale(1) brightness(1.35)\"],"
+ },
+ "Carbón": {
+  "w": [
+   "pets.js:123"
+  ],
+  "ctx": "[\"coal\", N_(\"Carbón\"), \"grayscale(1) brightness(.55) contrast(1.2)\"],"
+ },
+ "Chocolate": {
+  "w": [
+   "pets.js:124"
+  ],
+  "ctx": "[\"choc\", N_(\"Chocolate\"), \"sepia(.9) saturate(1.5) brightness(.72)\"],"
+ },
+ "Rosa": {
+  "w": [
+   "pets.js:125",
+   "pets.js:132"
+  ],
+  "ctx": "[\"pink\", N_(\"Rosa\"), \"hue-rotate(300deg) saturate(1.4)\"],"
+ },
+ "Azul": {
+  "w": [
+   "pets.js:126"
+  ],
+  "ctx": "[\"blue\", N_(\"Azul\"), \"hue-rotate(185deg) saturate(1.3)\"],"
+ },
+ "Verde": {
+  "w": [
+   "pets.js:127"
+  ],
+  "ctx": "[\"green\", N_(\"Verde\"), \"hue-rotate(80deg) saturate(1.2)\"],"
+ },
+ "Morado": {
+  "w": [
+   "pets.js:128"
+  ],
+  "ctx": "[\"purple\", N_(\"Morado\"), \"hue-rotate(245deg) saturate(1.3)\"],"
+ },
+ "Oro": {
+  "w": [
+   "pets.js:129",
+   "chal32.js:12"
+  ],
+  "ctx": "[\"gold\", N_(\"Oro\"), \"sepia(1) saturate(3) hue-rotate(-8deg) brightness(1.08)\", \"bdo\"],"
+ },
+ "Arcoíris": {
+  "w": [
+   "pets.js:130"
+  ],
+  "ctx": "[\"rainbow\", N_(\"Arcoíris\"), \"anim\", \"nat\"]"
+ },
+ "Sin fondo": {
+  "w": [
+   "pets.js:132"
+  ],
+  "ctx": "var PET_BG = [[\"none\", N_(\"Sin fondo\"), \"\"], [\"grass\", N_(\"Césped\"), \"#1f7a3a\"], [\"sky\", N_(\"Cielo\"), \"#2c6fb7\"], [\"rose\", N_(\"Rosa\"), \"#c4527d\"], [\"sun\", N_(\"Atardecer\"), \"#d9822b\"], [\"night\", N_(\"Noche\"), \"#2a2350\"], ["
+ },
+ "Césped": {
+  "w": [
+   "pets.js:132"
+  ],
+  "ctx": "var PET_BG = [[\"none\", N_(\"Sin fondo\"), \"\"], [\"grass\", N_(\"Césped\"), \"#1f7a3a\"], [\"sky\", N_(\"Cielo\"), \"#2c6fb7\"], [\"rose\", N_(\"Rosa\"), \"#c4527d\"], [\"sun\", N_(\"Atardecer\"), \"#d9822b\"], [\"night\", N_(\"Noche\"), \"#2a2350\"], ["
+ },
+ "Cielo": {
+  "w": [
+   "pets.js:132"
+  ],
+  "ctx": "var PET_BG = [[\"none\", N_(\"Sin fondo\"), \"\"], [\"grass\", N_(\"Césped\"), \"#1f7a3a\"], [\"sky\", N_(\"Cielo\"), \"#2c6fb7\"], [\"rose\", N_(\"Rosa\"), \"#c4527d\"], [\"sun\", N_(\"Atardecer\"), \"#d9822b\"], [\"night\", N_(\"Noche\"), \"#2a2350\"], ["
+ },
+ "Atardecer": {
+  "w": [
+   "pets.js:132"
+  ],
+  "ctx": "var PET_BG = [[\"none\", N_(\"Sin fondo\"), \"\"], [\"grass\", N_(\"Césped\"), \"#1f7a3a\"], [\"sky\", N_(\"Cielo\"), \"#2c6fb7\"], [\"rose\", N_(\"Rosa\"), \"#c4527d\"], [\"sun\", N_(\"Atardecer\"), \"#d9822b\"], [\"night\", N_(\"Noche\"), \"#2a2350\"], ["
+ },
+ "Noche": {
+  "w": [
+   "pets.js:132",
+   "ui-35.js:11"
+  ],
+  "ctx": "var PET_BG = [[\"none\", N_(\"Sin fondo\"), \"\"], [\"grass\", N_(\"Césped\"), \"#1f7a3a\"], [\"sky\", N_(\"Cielo\"), \"#2c6fb7\"], [\"rose\", N_(\"Rosa\"), \"#c4527d\"], [\"sun\", N_(\"Atardecer\"), \"#d9822b\"], [\"night\", N_(\"Noche\"), \"#2a2350\"], ["
+ },
+ "Colores de tu club": {
+  "w": [
+   "pets.js:132"
+  ],
+  "ctx": "var PET_BG = [[\"none\", N_(\"Sin fondo\"), \"\"], [\"grass\", N_(\"Césped\"), \"#1f7a3a\"], [\"sky\", N_(\"Cielo\"), \"#2c6fb7\"], [\"rose\", N_(\"Rosa\"), \"#c4527d\"], [\"sun\", N_(\"Atardecer\"), \"#d9822b\"], [\"night\", N_(\"Noche\"), \"#2a2350\"], ["
+ },
+ "Gorra": {
+  "w": [
+   "pets.js:135"
+  ],
+  "ctx": "{k: \"cap\", s: \"h\", ico: \"🧢\", n: N_(\"Gorra\"), price: 120},"
+ },
+ "Lazo": {
+  "w": [
+   "pets.js:136"
+  ],
+  "ctx": "{k: \"bow\", s: \"h\", ico: \"🎀\", n: N_(\"Lazo\"), price: 80},"
+ },
+ "Pamela": {
+  "w": [
+   "pets.js:137"
+  ],
+  "ctx": "{k: \"straw\", s: \"h\", ico: \"👒\", n: N_(\"Pamela\"), price: 250},"
+ },
+ "Birrete": {
+  "w": [
+   "pets.js:138"
+  ],
+  "ctx": "{k: \"grad\", s: \"h\", ico: \"🎓\", n: N_(\"Birrete\"), price: 400},"
+ },
+ "Sombrero de copa": {
+  "w": [
+   "pets.js:139"
+  ],
+  "ctx": "{k: \"tophat\", s: \"h\", ico: \"🎩\", n: N_(\"Sombrero de copa\"), price: 600},"
+ },
+ "Corona de campeón": {
+  "w": [
+   "pets.js:140"
+  ],
+  "ctx": "{k: \"crown\", s: \"h\", ico: \"👑\", n: N_(\"Corona de campeón\"), un: \"cont\", ud: N_(\"Gana una competición continental (Champions, Libertadores…).\")},"
+ },
+ "Gana una competición continental (Champions, Libertadores…).": {
+  "w": [
+   "pets.js:140"
+  ],
+  "ctx": "{k: \"crown\", s: \"h\", ico: \"👑\", n: N_(\"Corona de campeón\"), un: \"cont\", ud: N_(\"Gana una competición continental (Champions, Libertadores…).\")},"
+ },
+ "Aura de estrella": {
+  "w": [
+   "pets.js:141"
+  ],
+  "ctx": "{k: \"star\", s: \"h\", ico: \"🌟\", n: N_(\"Aura de estrella\"), un: \"bdo\", ud: N_(\"Gana el Balón de Oro.\")},"
+ },
+ "Gana el Balón de Oro.": {
+  "w": [
+   "pets.js:141",
+   "pets.js:181",
+   "achieve.js:39"
+  ],
+  "ctx": "{k: \"star\", s: \"h\", ico: \"🌟\", n: N_(\"Aura de estrella\"), un: \"bdo\", ud: N_(\"Gana el Balón de Oro.\")},"
+ },
+ "Gafas de pasta": {
+  "w": [
+   "pets.js:142"
+  ],
+  "ctx": "{k: \"glasses\", s: \"f\", ico: \"👓\", n: N_(\"Gafas de pasta\"), price: 150},"
+ },
+ "Gafas de sol": {
+  "w": [
+   "pets.js:143"
+  ],
+  "ctx": "{k: \"sun\", s: \"f\", ico: \"🕶️\", n: N_(\"Gafas de sol\"), price: 200},"
+ },
+ "Bigote de incógnito": {
+  "w": [
+   "pets.js:144"
+  ],
+  "ctx": "{k: \"disguise\", s: \"f\", ico: \"🥸\", n: N_(\"Bigote de incógnito\"), price: 300},"
+ },
+ "Collar con cascabel": {
+  "w": [
+   "pets.js:145"
+  ],
+  "ctx": "{k: \"bell\", s: \"n\", ico: \"🔔\", n: N_(\"Collar con cascabel\"), price: 60},"
+ },
+ "Bufanda del club": {
+  "w": [
+   "pets.js:146"
+  ],
+  "ctx": "{k: \"scarf\", s: \"n\", ico: \"🧣\", n: N_(\"Bufanda del club\"), price: 150},"
+ },
+ "Collar de perlas": {
+  "w": [
+   "pets.js:147"
+  ],
+  "ctx": "{k: \"pearls\", s: \"n\", ico: \"📿\", n: N_(\"Collar de perlas\"), price: 900},"
+ },
+ "Medalla de campeón": {
+  "w": [
+   "pets.js:148"
+  ],
+  "ctx": "{k: \"medal\", s: \"n\", ico: \"🏅\", n: N_(\"Medalla de campeón\"), un: \"cup\", ud: N_(\"Gana una copa nacional.\")},"
+ },
+ "Gana una copa nacional.": {
+  "w": [
+   "pets.js:148"
+  ],
+  "ctx": "{k: \"medal\", s: \"n\", ico: \"🏅\", n: N_(\"Medalla de campeón\"), un: \"cup\", ud: N_(\"Gana una copa nacional.\")},"
+ },
+ "Oro con la selección": {
+  "w": [
+   "pets.js:149"
+  ],
+  "ctx": "{k: \"gold\", s: \"n\", ico: \"🥇\", n: N_(\"Oro con la selección\"), un: \"nat\", ud: N_(\"Gana un Mundial, una Eurocopa u otro gran torneo de selecciones.\")},"
+ },
+ "Gana un Mundial, una Eurocopa u otro gran torneo de selecciones.": {
+  "w": [
+   "pets.js:149",
+   "pets.js:181"
+  ],
+  "ctx": "{k: \"gold\", s: \"n\", ico: \"🥇\", n: N_(\"Oro con la selección\"), un: \"nat\", ud: N_(\"Gana un Mundial, una Eurocopa u otro gran torneo de selecciones.\")},"
+ },
+ "Hueso": {
+  "w": [
+   "pets.js:150"
+  ],
+  "ctx": "{k: \"bone\", s: \"t\", ico: \"🦴\", n: N_(\"Hueso\"), price: 40},"
+ },
+ "Pelota": {
+  "w": [
+   "pets.js:151"
+  ],
+  "ctx": "{k: \"ball\", s: \"t\", ico: \"⚽\", n: N_(\"Pelota\"), price: 50},"
+ },
+ "Peluche": {
+  "w": [
+   "pets.js:152"
+  ],
+  "ctx": "{k: \"teddy\", s: \"t\", ico: \"🧸\", n: N_(\"Peluche\"), price: 120},"
+ },
+ "Copa en miniatura": {
+  "w": [
+   "pets.js:153"
+  ],
+  "ctx": "{k: \"cup\", s: \"t\", ico: \"🏆\", n: N_(\"Copa en miniatura\"), un: \"league\", ud: N_(\"Gana una liga.\")},"
+ },
+ "Gana una liga.": {
+  "w": [
+   "pets.js:153",
+   "achieve.js:45"
+  ],
+  "ctx": "{k: \"cup\", s: \"t\", ico: \"🏆\", n: N_(\"Copa en miniatura\"), un: \"league\", ud: N_(\"Gana una liga.\")},"
+ },
+ "Bota dorada": {
+  "w": [
+   "pets.js:154"
+  ],
+  "ctx": "{k: \"boot\", s: \"t\", ico: \"👟\", n: N_(\"Bota dorada\"), un: \"scorer\", ud: N_(\"Gana un trofeo de máximo goleador.\")},"
+ },
+ "Gana un trofeo de máximo goleador.": {
+  "w": [
+   "pets.js:154"
+  ],
+  "ctx": "{k: \"boot\", s: \"t\", ico: \"👟\", n: N_(\"Bota dorada\"), un: \"scorer\", ud: N_(\"Gana un trofeo de máximo goleador.\")},"
+ },
+ "Guante de oro": {
+  "w": [
+   "pets.js:155"
+  ],
+  "ctx": "{k: \"glove\", s: \"t\", ico: \"🧤\", n: N_(\"Guante de oro\"), un: \"gk\", ud: N_(\"Gana un premio al mejor portero.\")}"
+ },
+ "Gana un premio al mejor portero.": {
+  "w": [
+   "pets.js:155"
+  ],
+  "ctx": "{k: \"glove\", s: \"t\", ico: \"🧤\", n: N_(\"Guante de oro\"), un: \"gk\", ud: N_(\"Gana un premio al mejor portero.\")}"
+ },
+ "Cabeza": {
+  "w": [
+   "pets.js:157"
+  ],
+  "ctx": "var PET_SLOT = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Juguete\")]];"
+ },
+ "Cara": {
+  "w": [
+   "pets.js:157"
+  ],
+  "ctx": "var PET_SLOT = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Juguete\")]];"
+ },
+ "Cuello": {
+  "w": [
+   "pets.js:157"
+  ],
+  "ctx": "var PET_SLOT = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Juguete\")]];"
+ },
+ "Juguete": {
+  "w": [
+   "pets.js:157"
+  ],
+  "ctx": "var PET_SLOT = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Juguete\")]];"
+ },
+ "🎁 Nuevo para {pet}: {acc}. Lo has ganado con tus títulos.": {
+  "w": [
+   "pets.js:189"
+  ],
+  "ctx": "if (!quiet && got.length && L.pet) got.forEach(function (a) { notify(tr(\"🎁 Nuevo para {pet}: {acc}. Lo has ganado con tus títulos.\", {pet: L.pet.nm, acc: a.ico + \" \" + tr(a.n)}), \"green\"); });"
+ },
+ "{pet} te echa de menos: pasa más tiempo con tu mascota.": {
+  "w": [
+   "pets.js:216"
+  ],
+  "ctx": "if (pt.bond < 20) notify(tr(\"{pet} te echa de menos: pasa más tiempo con tu mascota.\", {pet: pt.nm}), \"red\");"
+ },
+ "🐾 {pet} necesita atención: este tramo no le has hecho caso. Entra en Yo › Tu mascota.": {
+  "w": [
+   "pets.js:217"
+  ],
+  "ctx": "else notify(tr(\"🐾 {pet} necesita atención: este tramo no le has hecho caso. Entra en Yo › Tu mascota.\", {pet: pt.nm}), \"amber\");"
  },
  "No puedes mantener a {pet}: se queda con tu familia. Te duele despedirte.": {
   "w": [
-   "pets.js:88"
+   "pets.js:232"
   ],
   "ctx": "notify(tr(\"No puedes mantener a {pet}: se queda con tu familia. Te duele despedirte.\", {pet: pt.nm}), \"red\");"
  },
  "🐾 {pet} se va a vivir con tu familia: no podías pagar sus cuidados.": {
   "w": [
-   "pets.js:89"
+   "pets.js:233"
   ],
   "ctx": "out.push({t: \"bad\", x: tr(\"🐾 {pet} se va a vivir con tu familia: no podías pagar sus cuidados.\", {pet: pt.nm})});"
  },
  "Susto con {pet}: visita urgente al veterinario ({v}).": {
   "w": [
-   "pets.js:96"
+   "pets.js:240"
   ],
   "ctx": "notify(tr(\"Susto con {pet}: visita urgente al veterinario ({v}).\", {pet: pt.nm, v: fmtMoney(bill)}), \"amber\");"
  },
  "🌈 {pet} ha muerto con {n} años. Te afecta mucho: −{m} de moral.": {
   "w": [
-   "pets.js:104"
+   "pets.js:248"
   ],
   "ctx": "notify(tr(\"🌈 {pet} ha muerto con {n} años. Te afecta mucho: −{m} de moral.\", {pet: pt.nm, n: pt.age, m: hit}), \"red\");"
  },
  "🌈 Hasta siempre, {pet} ({n} años). Te acompañó desde {y}.": {
   "w": [
-   "pets.js:105"
+   "pets.js:249"
   ],
   "ctx": "out.push({t: \"bad\", x: tr(\"🌈 Hasta siempre, {pet} ({n} años). Te acompañó desde {y}.\", {pet: pt.nm, n: pt.age, y: seasonLabel(pt.y0)})});"
  },
  "Mucho ánimo, {name}. Descansa, {pet} 🌈": {
   "w": [
-   "pets.js:106"
+   "pets.js:250"
   ],
   "ctx": "if (typeof socPostRaw === \"function\") socPostRaw({by: \"fan\", tk: N_(\"Mucho ánimo, {name}. Descansa, {pet} 🌈\"), tp: {name: socSelfName(), pet: pt.nm}, mood: -1});"
  },
  "🐾 {pet} cumple {n} años y ya es senior: rinde algo menos, pero sigue a tu lado.": {
   "w": [
-   "pets.js:108"
+   "pets.js:252"
   ],
   "ctx": "out.push({t: \"ok\", x: tr(\"🐾 {pet} cumple {n} años y ya es senior: rinde algo menos, pero sigue a tu lado.\", {pet: pt.nm, n: pt.age})});"
  },
  "🐾 {pet} cumple {n} años.": {
   "w": [
-   "pets.js:109"
+   "pets.js:253"
   ],
   "ctx": "} else out.push({t: \"ok\", x: tr(\"🐾 {pet} cumple {n} años.\", {pet: pt.nm, n: pt.age})});"
  },
@@ -32566,12 +32994,6 @@
   ],
   "ctx": "[\"p_bdo\", \"🥇\", N_(\"Balón de Oro\"), N_(\"Gana el Balón de Oro.\"), function (c) { return S.p.awards.some(function (a) { return a.k === \"bdo\"; }); }]"
  },
- "Gana el Balón de Oro.": {
-  "w": [
-   "achieve.js:39"
-  ],
-  "ctx": "[\"p_bdo\", \"🥇\", N_(\"Balón de Oro\"), N_(\"Gana el Balón de Oro.\"), function (c) { return S.p.awards.some(function (a) { return a.k === \"bdo\"; }); }]"
- },
  "Primera victoria": {
   "w": [
    "achieve.js:42"
@@ -32591,12 +33013,6 @@
   "ctx": "[\"m_season1\", \"📅\", N_(\"Primera temporada\"), N_(\"Completa tu primera temporada en el banquillo.\"), function (c) { return c.t.seasons >= 1; }],"
  },
  "Campeón de liga": {
-  "w": [
-   "achieve.js:45"
-  ],
-  "ctx": "[\"m_lg\", \"🛡️\", N_(\"Campeón de liga\"), N_(\"Gana una liga.\"), function (c) { return S.m.trophies.some(function (t) { return String(t.k).indexOf(\"L:\") === 0; }); }],"
- },
- "Gana una liga.": {
   "w": [
    "achieve.js:45"
   ],
@@ -33174,7 +33590,7 @@
  "Normales": {
   "w": [
    "club30.js:6",
-   "ui-pets.js:54"
+   "ui-pets.js:246"
   ],
   "ctx": "var FIN_PRICE = [{n: N_(\"Populares\"), k: 0.75, fill: 0.15, fans: 0.6}, {n: N_(\"Normales\"), k: 1, fill: 0, fans: 0}, {n: N_(\"Caras\"), k: 1.3, fill: -0.15, fans: -0.8}];"
  },
@@ -33735,12 +34151,6 @@
    "chal32.js:9"
   ],
   "ctx": "crisis: {ic: \"🔥\", n: N_(\"Remontar una crisis\"), d: N_(\"Un grande hundido: vestuario roto, afición enfadada y sin dinero.\"), goal: N_(\"Bronce: que no te echen · Plata: mitad alta · Oro: entre los tres primeros.\")}"
- },
- "Oro": {
-  "w": [
-   "chal32.js:12"
-  ],
-  "ctx": "var MEDAL_N = {gold: N_(\"Oro\"), silver: N_(\"Plata\"), bronze: N_(\"Bronce\")};"
  },
  "Plata": {
   "w": [
@@ -35071,7 +35481,8 @@
  "Moral +{n}": {
   "w": [
    "ui.js:327",
-   "ui-pets.js:9"
+   "ui-pets.js:10",
+   "ui-pets.js:123"
   ],
   "ctx": "if (fx.mor) chips.push('<span class=\"chip up\">' + tr(\"Moral +{n}\", {n: fx.mor}) + \"</span>\");"
  },
@@ -35269,6 +35680,12 @@
   ],
   "ctx": "return '<nav class=\"tabs four\" aria-label=\"' + h(tr(\"Secciones\")) + '\">' + t.map(function (x) {"
  },
+ "Tu mascota necesita atención": {
+  "w": [
+   "ui.js:461"
+  ],
+  "ctx": "return '<button data-a=\"tab\" data-t=\"' + x[0] + '\"' + (cur === x[0] ? ' aria-current=\"page\"' : \"\") + \">\" + x[2] + \"<span>\" + x[1] + \"</span>\" + (x[0] === \"mas\" && unread && UI.tab !== \"red\" ? '<span class=\"nbadge\">' + (u"
+ },
  "Competición": {
   "w": [
    "ui.js:467",
@@ -35373,7 +35790,7 @@
  "Editor de la partida": {
   "w": [
    "ui.js:473",
-   "ui-35.js:107"
+   "ui-35.js:108"
   ],
   "ctx": "if (typeof edOf === \"function\") rows.push([\"editor\", \"\", ICON.gear, tr(\"Editor de la partida\"), tr(\"Nombres, escudos y competiciones\")]);"
  },
@@ -35692,7 +36109,8 @@
  "Bajar": {
   "w": [
    "ui.js:686",
-   "ui-shootout.js:167"
+   "ui-shootout.js:167",
+   "ui-pets.js:180"
   ],
   "ctx": "'<div class=\"nrow\"><button class=\"btn sm\" data-a=\"negostep\" data-v=\"-1\" aria-label=\"' + h(tr(\"Bajar\")) + '\">−</button><input type=\"range\" id=\"negov\" min=\"' + x.lo + '\" max=\"' + mx + '\" step=\"' + negoStep(x) + '\" value=\"'"
  },
@@ -35705,7 +36123,8 @@
  "Subir": {
   "w": [
    "ui.js:686",
-   "ui-shootout.js:167"
+   "ui-shootout.js:167",
+   "ui-pets.js:180"
   ],
   "ctx": "'<div class=\"nrow\"><button class=\"btn sm\" data-a=\"negostep\" data-v=\"-1\" aria-label=\"' + h(tr(\"Bajar\")) + '\">−</button><input type=\"range\" id=\"negov\" min=\"' + x.lo + '\" max=\"' + mx + '\" step=\"' + negoStep(x) + '\" value=\"'"
  },
@@ -38332,21 +38751,21 @@
  "Abreviatura": {
   "w": [
    "ui.js:1550",
-   "ui-35.js:113"
+   "ui-35.js:114"
   ],
   "ctx": "s += '<div><label class=\"lbl\" for=\"ab\">' + tr(\"Abreviatura\") + '</label><input type=\"text\" id=\"ab\" data-f=\"ab\" value=\"' + h(c.ab) + '\" maxlength=\"4\" autocomplete=\"off\" placeholder=\"' + h(ab) + '\" style=\"text-transform:up"
  },
  "Color secundario": {
   "w": [
    "ui.js:1552",
-   "ui-35.js:114"
+   "ui-35.js:115"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + (k ? tr(\"Color secundario\") : tr(\"Color principal\")) + '</label><div class=\"swatches\">' + CLUB_COLS.map(function (col) { return '<button class=\"sw\" data-a=\"ccol\" data-k=\"' + k + '\" data-"
  },
  "Color principal": {
   "w": [
    "ui.js:1552",
-   "ui-35.js:114"
+   "ui-35.js:115"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + (k ? tr(\"Color secundario\") : tr(\"Color principal\")) + '</label><div class=\"swatches\">' + CLUB_COLS.map(function (col) { return '<button class=\"sw\" data-a=\"ccol\" data-k=\"' + k + '\" data-"
  },
@@ -38717,7 +39136,7 @@
   "w": [
    "ui.js:1668",
    "ui.js:1716",
-   "ui-pets.js:50"
+   "ui-pets.js:131"
   ],
   "ctx": "return \"<h2>\" + tr(\"Cambiar nombre\") + '</h2><div class=\"stack\"><div class=\"row2\"><div><label class=\"lbl\" for=\"rfn\">' + tr(\"Nombre\") + '</label><input type=\"text\" id=\"rfn\" value=\"' + h(rp.fn) + '\" maxlength=\"20\" autocomp"
  },
@@ -38731,7 +39150,7 @@
   "w": [
    "ui.js:1669",
    "ui.js:1919",
-   "ui-35.js:122"
+   "ui-35.js:123"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:0;font-size:13px\">' + tr(\"Puedes dejar el nombre en blanco si se le conoce por un solo nombre.\") + '</p><div class=\"row2\"><button class=\"btn wide\" data-a=\"pl\" data-id=\"' + rp.id + '\">' + t"
  },
@@ -40076,7 +40495,7 @@
  "Forma más estable": {
   "w": [
    "ui-life.js:153",
-   "ui-pets.js:10"
+   "ui-pets.js:11"
   ],
   "ctx": "if (d.k === \"mental\") out.push('<span class=\"chip up\">' + tr(\"Forma más estable\") + \"</span>\");"
  },
@@ -40381,158 +40800,444 @@
  },
  "Fama y seguidores": {
   "w": [
-   "ui-pets.js:11"
+   "ui-pets.js:12"
   ],
   "ctx": "if (d.fame) out.push('<span class=\"chip up\">' + tr(\"Fama y seguidores\") + \"</span>\");"
  },
  "Sustos y veterinario": {
   "w": [
-   "ui-pets.js:12"
+   "ui-pets.js:13"
   ],
   "ctx": "if (d.risk) out.push('<span class=\"chip down\">' + tr(\"Sustos y veterinario\") + \"</span>\");"
  },
  "Adopta una mascota": {
   "w": [
-   "ui-pets.js:21"
+   "ui-pets.js:67"
   ],
   "ctx": "if (!pt) return '<button class=\"card petcta\" data-a=\"petopen\"><span class=\"petcta-ic\" aria-hidden=\"true\">🐾</span><span><b>' + tr(\"Adopta una mascota\") + \"</b><small>\" + tr(\"Te acompaña, crece contigo y mejora tu ánimo.\""
  },
  "Te acompaña, crece contigo y mejora tu ánimo.": {
   "w": [
-   "ui-pets.js:21"
+   "ui-pets.js:67"
   ],
   "ctx": "if (!pt) return '<button class=\"card petcta\" data-a=\"petopen\"><span class=\"petcta-ic\" aria-hidden=\"true\">🐾</span><span><b>' + tr(\"Adopta una mascota\") + \"</b><small>\" + tr(\"Te acompaña, crece contigo y mejora tu ánimo.\""
  },
  "Tu mascota": {
   "w": [
-   "ui-pets.js:24",
-   "ui-pets.js:44"
+   "ui-pets.js:70",
+   "ui-pets.js:236"
   ],
-  "ctx": "'<span class=\"petinfo\"><span class=\"eyebrow\">' + tr(\"Tu mascota\") + \"</span><b>\" + h(pt.nm) + \"</b><small>\" + h(tr(d.n)) + \" · \" + trn(pt.age, \"{n} año\", \"{n} años\") + \" · \" + h(tr(PET_STAGE[petStage(pt)])) + \"</small>\" "
+  "ctx": "'<span class=\"petinfo\"><span class=\"eyebrow\">' + tr(\"Tu mascota\") + \"</span><b>\" + h(pt.nm) + \"</b><small>\" + (need ? '<span class=\"petneed\">' + tr(\"Necesita atención\") + \"</span>\" : h(tr(d.n)) + \" · \" + trn(pt.age, \"{n}"
+ },
+ "Necesita atención": {
+  "w": [
+   "ui-pets.js:70",
+   "ui-pets.js:236"
+  ],
+  "ctx": "'<span class=\"petinfo\"><span class=\"eyebrow\">' + tr(\"Tu mascota\") + \"</span><b>\" + h(pt.nm) + \"</b><small>\" + (need ? '<span class=\"petneed\">' + tr(\"Necesita atención\") + \"</span>\" : h(tr(d.n)) + \" · \" + trn(pt.age, \"{n}"
  },
  "Vínculo {n} %": {
   "w": [
-   "ui-pets.js:25"
+   "ui-pets.js:71"
   ],
   "ctx": "'<span class=\"petbond\" aria-label=\"' + h(tr(\"Vínculo {n} %\", {n: Math.round(pt.bond)})) + '\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></span></span>' +"
  },
  "Quiere jugar contigo": {
   "w": [
-   "ui-pets.js:26"
+   "ui-pets.js:72"
   ],
   "ctx": "(pt.cared ? \"\" : '<span class=\"petdot\" title=\"' + h(tr(\"Quiere jugar contigo\")) + '\">!</span>') + '<span class=\"chev\" aria-hidden=\"true\">›</span></button>';"
  },
+ "{pet} necesita atención": {
+  "w": [
+   "ui-pets.js:78",
+   "ui-35.js:28"
+  ],
+  "ctx": "return '<button class=\"card petalert\" data-a=\"petopen\">' + art(pt, 30) + '<span class=\"grow\"><b>' + tr(\"{pet} necesita atención\", {pet: h(pt.nm)}) + \"</b><small>\" + tr(\"Dedícale un rato antes de que se debilite el víncul"
+ },
+ "Dedícale un rato antes de que se debilite el vínculo.": {
+  "w": [
+   "ui-pets.js:78"
+  ],
+  "ctx": "return '<button class=\"card petalert\" data-a=\"petopen\">' + art(pt, 30) + '<span class=\"grow\"><b>' + tr(\"{pet} necesita atención\", {pet: h(pt.nm)}) + \"</b><small>\" + tr(\"Dedícale un rato antes de que se debilite el víncul"
+ },
  "Ponle un nombre a tu mascota.": {
   "w": [
-   "ui-pets.js:33"
+   "ui-pets.js:87"
   ],
   "ctx": "if (r.noName) { U.toast(tr(\"Ponle un nombre a tu mascota.\")); return; }"
  },
  "No tienes dinero suficiente.": {
   "w": [
-   "ui-pets.js:34"
+   "ui-pets.js:88",
+   "ui-pets.js:98",
+   "ui-pets.js:112"
   ],
   "ctx": "if (r.poor) { U.toast(tr(\"No tienes dinero suficiente.\")); return; }"
  },
  "¡{pet} ya está en casa!": {
   "w": [
-   "ui-pets.js:35"
+   "ui-pets.js:89"
   ],
-  "ctx": "if (r.ok) { U.edgeFlash(true); U.toast(tr(\"¡{pet} ya está en casa!\", {pet: petOf().nm})); U.ui().petPick = null; rer(); }"
+  "ctx": "if (r.ok) { U.edgeFlash(true); U.toast(tr(\"¡{pet} ya está en casa!\", {pet: petOf().nm})); U.ui().petPick = null; U.ui().petView = \"care\"; rer(); }"
+ },
+ "{pet} se acurruca a tu lado: el vínculo crece.": {
+  "w": [
+   "ui-pets.js:92"
+  ],
+  "ctx": "pat: N_(\"{pet} se acurruca a tu lado: el vínculo crece.\"), walk: N_(\"Paseo largo con {pet}: los dos volvéis con energía.\"), play: N_(\"Tarde de juegos con {pet}: no paráis de reír.\"),"
+ },
+ "Paseo largo con {pet}: los dos volvéis con energía.": {
+  "w": [
+   "ui-pets.js:92"
+  ],
+  "ctx": "pat: N_(\"{pet} se acurruca a tu lado: el vínculo crece.\"), walk: N_(\"Paseo largo con {pet}: los dos volvéis con energía.\"), play: N_(\"Tarde de juegos con {pet}: no paráis de reír.\"),"
+ },
+ "Tarde de juegos con {pet}: no paráis de reír.": {
+  "w": [
+   "ui-pets.js:92"
+  ],
+  "ctx": "pat: N_(\"{pet} se acurruca a tu lado: el vínculo crece.\"), walk: N_(\"Paseo largo con {pet}: los dos volvéis con energía.\"), play: N_(\"Tarde de juegos con {pet}: no paráis de reír.\"),"
+ },
+ "El hogar de {pet} queda impecable.": {
+  "w": [
+   "ui-pets.js:93"
+  ],
+  "ctx": "home: N_(\"El hogar de {pet} queda impecable.\"), watch: N_(\"Un rato mirando a {pet}: te quedas en calma.\"), treat: N_(\"A {pet} le encanta su premio.\"),"
+ },
+ "Un rato mirando a {pet}: te quedas en calma.": {
+  "w": [
+   "ui-pets.js:93"
+  ],
+  "ctx": "home: N_(\"El hogar de {pet} queda impecable.\"), watch: N_(\"Un rato mirando a {pet}: te quedas en calma.\"), treat: N_(\"A {pet} le encanta su premio.\"),"
+ },
+ "A {pet} le encanta su premio.": {
+  "w": [
+   "ui-pets.js:93"
+  ],
+  "ctx": "home: N_(\"El hogar de {pet} queda impecable.\"), watch: N_(\"Un rato mirando a {pet}: te quedas en calma.\"), treat: N_(\"A {pet} le encanta su premio.\"),"
+ },
+ "{pet} sale reluciente de la peluquería.": {
+  "w": [
+   "ui-pets.js:94"
+  ],
+  "ctx": "spa: N_(\"{pet} sale reluciente de la peluquería.\"), photo: N_(\"Sesión de fotos con {pet}: tus redes lo adoran.\")"
+ },
+ "Sesión de fotos con {pet}: tus redes lo adoran.": {
+  "w": [
+   "ui-pets.js:94"
+  ],
+  "ctx": "spa: N_(\"{pet} sale reluciente de la peluquería.\"), photo: N_(\"Sesión de fotos con {pet}: tus redes lo adoran.\")"
+ },
+ "{pet} ya ha tenido mucha atención este tramo.": {
+  "w": [
+   "ui-pets.js:99"
+  ],
+  "ctx": "if (r.tired) { U.toast(tr(\"{pet} ya ha tenido mucha atención este tramo.\", {pet: pt.nm})); return; }"
+ },
+ "¡{pet} ha aprendido un truco nuevo! Ya sabe {n}.": {
+  "w": [
+   "ui-pets.js:101"
+  ],
+  "ctx": "if (v === \"trick\") U.toast(r.learned ? tr(\"¡{pet} ha aprendido un truco nuevo! Ya sabe {n}.\", {pet: pt.nm, n: pt.tricks}) : tr(\"{pet} todavía no lo pilla, pero os lo habéis pasado bien.\", {pet: pt.nm}));"
+ },
+ "{pet} todavía no lo pilla, pero os lo habéis pasado bien.": {
+  "w": [
+   "ui-pets.js:101"
+  ],
+  "ctx": "if (v === \"trick\") U.toast(r.learned ? tr(\"¡{pet} ha aprendido un truco nuevo! Ya sabe {n}.\", {pet: pt.nm, n: pt.tricks}) : tr(\"{pet} todavía no lo pilla, pero os lo habéis pasado bien.\", {pet: pt.nm}));"
  },
  "Pasas la tarde con {pet}: el vínculo crece.": {
   "w": [
-   "ui-pets.js:37"
+   "ui-pets.js:105"
   ],
   "ctx": "U.actions.petcare = function () { if (petCare()) { U.toast(tr(\"Pasas la tarde con {pet}: el vínculo crece.\", {pet: petOf().nm})); rer(); } };"
  },
  "Ahora se llama {pet}.": {
   "w": [
-   "ui-pets.js:38"
+   "ui-pets.js:106"
   ],
   "ctx": "U.actions.petname = function () { var i = document.getElementById(\"petrn\"); if (i && petRename(i.value)) { U.toast(tr(\"Ahora se llama {pet}.\", {pet: petOf().nm})); rer(); } };"
  },
+ "¡Compra hecha! {pet} ya lleva {acc}.": {
+  "w": [
+   "ui-pets.js:113"
+  ],
+  "ctx": "if (r.ok) { U.toast(tr(\"¡Compra hecha! {pet} ya lleva {acc}.\", {pet: petOf() ? petOf().nm : \"\", acc: a.ico + \" \" + tr(a.n)})); rer(); }"
+ },
  "Vínculo": {
   "w": [
-   "ui-pets.js:46"
+   "ui-pets.js:118"
   ],
-  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Vínculo\") + ' · ' + Math.round(pt.bond) + ' %</div><div class=\"petbond big\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></div><p class=\"muted lfhint\">' + tr(\"Cuanto más fuerte el"
+  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Vínculo\") + \" · \" + Math.round(pt.bond) + ' %</div><div class=\"petbond big\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></div><p class=\"muted lfhint\">' + tr(\"Cuanto más fuerte el"
  },
  "Cuanto más fuerte el vínculo, más te ayuda. Si no le dedicas tiempo, se debilita.": {
   "w": [
-   "ui-pets.js:46"
+   "ui-pets.js:118"
   ],
-  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Vínculo\") + ' · ' + Math.round(pt.bond) + ' %</div><div class=\"petbond big\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></div><p class=\"muted lfhint\">' + tr(\"Cuanto más fuerte el"
+  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Vínculo\") + \" · \" + Math.round(pt.bond) + ' %</div><div class=\"petbond big\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></div><p class=\"muted lfhint\">' + tr(\"Cuanto más fuerte el"
  },
- "Ya habéis pasado tiempo juntos este tramo": {
+ "Darle cariño": {
   "w": [
-   "ui-pets.js:48"
+   "ui-pets.js:119"
   ],
-  "ctx": "s += '<button class=\"go\" data-a=\"petcare\"' + (pt.cared ? \" disabled\" : \"\") + \">\" + (pt.cared ? tr(\"Ya habéis pasado tiempo juntos este tramo\") : tr(\"Pasar tiempo con {pet}\", {pet: h(pt.nm)})) + \"</button>\";"
+  "ctx": "s += '<div class=\"lbl\">' + tr(\"Darle cariño\") + ' · <span class=\"muted\">' + (left > 0 ? trn(left, \"te queda {n} rato este tramo\", \"te quedan {n} ratos este tramo\") : tr(\"ya le has dedicado tiempo este tramo\")) + \"</span>"
  },
- "Pasar tiempo con {pet}": {
+ "te queda {n} rato este tramo": {
   "w": [
-   "ui-pets.js:48"
+   "ui-pets.js:119"
   ],
-  "ctx": "s += '<button class=\"go\" data-a=\"petcare\"' + (pt.cared ? \" disabled\" : \"\") + \">\" + (pt.cared ? tr(\"Ya habéis pasado tiempo juntos este tramo\") : tr(\"Pasar tiempo con {pet}\", {pet: h(pt.nm)})) + \"</button>\";"
+  "ctx": "s += '<div class=\"lbl\">' + tr(\"Darle cariño\") + ' · <span class=\"muted\">' + (left > 0 ? trn(left, \"te queda {n} rato este tramo\", \"te quedan {n} ratos este tramo\") : tr(\"ya le has dedicado tiempo este tramo\")) + \"</span>",
+  "note": "plural:singular"
+ },
+ "te quedan {n} ratos este tramo": {
+  "w": [
+   "ui-pets.js:119"
+  ],
+  "ctx": "s += '<div class=\"lbl\">' + tr(\"Darle cariño\") + ' · <span class=\"muted\">' + (left > 0 ? trn(left, \"te queda {n} rato este tramo\", \"te quedan {n} ratos este tramo\") : tr(\"ya le has dedicado tiempo este tramo\")) + \"</span>",
+  "note": "plural:plural"
+ },
+ "ya le has dedicado tiempo este tramo": {
+  "w": [
+   "ui-pets.js:119"
+  ],
+  "ctx": "s += '<div class=\"lbl\">' + tr(\"Darle cariño\") + ' · <span class=\"muted\">' + (left > 0 ? trn(left, \"te queda {n} rato este tramo\", \"te quedan {n} ratos este tramo\") : tr(\"ya le has dedicado tiempo este tramo\")) + \"</span>"
+ },
+ "Vínculo +{n}": {
+  "w": [
+   "ui-pets.js:122"
+  ],
+  "ctx": "var eff = [tr(\"Vínculo +{n}\", {n: c.bond})];"
+ },
+ "Sabe {n} truco": {
+  "w": [
+   "ui-pets.js:128"
+  ],
+  "ctx": "if (pt.tricks) s += '<p class=\"muted lfhint\">🎓 ' + trn(pt.tricks, \"Sabe {n} truco\", \"Sabe {n} trucos\") + \"</p>\";",
+  "note": "plural:singular"
+ },
+ "Sabe {n} trucos": {
+  "w": [
+   "ui-pets.js:128"
+  ],
+  "ctx": "if (pt.tricks) s += '<p class=\"muted lfhint\">🎓 ' + trn(pt.tricks, \"Sabe {n} truco\", \"Sabe {n} trucos\") + \"</p>\";",
+  "note": "plural:plural"
  },
  "Gasto anual: {v}. Esperanza de vida: {a}–{b} años.": {
   "w": [
-   "ui-pets.js:49"
+   "ui-pets.js:130"
   ],
   "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Gasto anual: {v}. Esperanza de vida: {a}–{b} años.\", {v: fmtMoney(d.year), a: d.life[0], b: d.life[1]}) + \"</p>\";"
  },
+ "Color": {
+  "w": [
+   "ui-pets.js:136"
+  ],
+  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Color\") + '</div><div class=\"petsw\">' + PET_COL.map(function (c) {"
+ },
+ "Fondo": {
+  "w": [
+   "ui-pets.js:140"
+  ],
+  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Fondo\") + '</div><div class=\"petsw bg\">' + PET_BG.map(function (b) {"
+ },
+ "Colocar los accesorios a tu gusto": {
+  "w": [
+   "ui-pets.js:144"
+  ],
+  "ctx": "if (petEqList(pt).length) s += '<button class=\"btn wide\" data-a=\"petview\" data-v=\"edit\">✏️ ' + tr(\"Colocar los accesorios a tu gusto\") + \"</button>\";"
+ },
+ "Los accesorios son tuyos para siempre: si llega otra mascota, también podrá ponérselos. Toca uno que ya tengas para ponérselo o quitárselo.": {
+  "w": [
+   "ui-pets.js:145"
+  ],
+  "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Los accesorios son tuyos para siempre: si llega otra mascota, también podrá ponérselos. Toca uno que ya tengas para ponérselo o quitárselo.\") + \"</p>\";"
+ },
+ "Puesto": {
+  "w": [
+   "ui-pets.js:149"
+  ],
+  "ctx": "if (own) return '<button class=\"pac own\" data-a=\"petwear\" data-v=\"' + a.k + '\" aria-pressed=\"' + on + '\"><span class=\"pai\">' + a.ico + \"</span><b>\" + h(tr(a.n)) + \"</b><small>\" + (on ? tr(\"Puesto\") : tr(\"Ponérselo\")) + ("
+ },
+ "Ponérselo": {
+  "w": [
+   "ui-pets.js:149"
+  ],
+  "ctx": "if (own) return '<button class=\"pac own\" data-a=\"petwear\" data-v=\"' + a.k + '\" aria-pressed=\"' + on + '\"><span class=\"pai\">' + a.ico + \"</span><b>\" + h(tr(a.n)) + \"</b><small>\" + (on ? tr(\"Puesto\") : tr(\"Ponérselo\")) + ("
+ },
+ "Comprar · {p}": {
+  "w": [
+   "ui-pets.js:151"
+  ],
+  "ctx": "return '<button class=\"pac\" data-a=\"petbuy\" data-v=\"' + a.k + '\"' + (S.p.money < a.price ? \" disabled\" : \"\") + '><span class=\"pai\">' + a.ico + \"</span><b>\" + h(tr(a.n)) + \"</b><small>\" + tr(\"Comprar · {p}\", {p: fmtMoney("
+ },
+ "Arrastra cada accesorio con el dedo para colocarlo. Usa los botones para cambiar el tamaño, girarlo o moverlo con precisión.": {
+  "w": [
+   "ui-pets.js:171"
+  ],
+  "ctx": "var s = '<p class=\"muted lfhint\">' + tr(\"Arrastra cada accesorio con el dedo para colocarlo. Usa los botones para cambiar el tamaño, girarlo o moverlo con precisión.\") + \"</p>\";"
+ },
+ "Volver": {
+  "w": [
+   "ui-pets.js:173"
+  ],
+  "ctx": "if (!sel) return s + '<button class=\"btn wide\" data-a=\"petview\" data-v=\"style\">' + tr(\"Volver\") + \"</button>\";"
+ },
+ "A la izquierda": {
+  "w": [
+   "ui-pets.js:180"
+  ],
+  "ctx": "'<div class=\"petpad\">' + bt(\"u\", \"▲\", tr(\"Subir\")) + \"<span>\" + bt(\"l\", \"◀\", tr(\"A la izquierda\")) + bt(\"r\", \"▶\", tr(\"A la derecha\")) + \"</span>\" + bt(\"d\", \"▼\", tr(\"Bajar\")) + \"</div>\" +"
+ },
+ "A la derecha": {
+  "w": [
+   "ui-pets.js:180"
+  ],
+  "ctx": "'<div class=\"petpad\">' + bt(\"u\", \"▲\", tr(\"Subir\")) + \"<span>\" + bt(\"l\", \"◀\", tr(\"A la izquierda\")) + bt(\"r\", \"▶\", tr(\"A la derecha\")) + \"</span>\" + bt(\"d\", \"▼\", tr(\"Bajar\")) + \"</div>\" +"
+ },
+ "Tamaño": {
+  "w": [
+   "ui-pets.js:181"
+  ],
+  "ctx": "'<div class=\"petadjcol\"><div class=\"lbl\">' + tr(\"Tamaño\") + \" · \" + Math.round((j.s || 1) * 100) + ' %</div><div class=\"petadjrow\">' + bt(\"s-\", \"−\", tr(\"Más pequeño\")) + bt(\"s+\", \"+\", tr(\"Más grande\")) + \"</div>\" +"
+ },
+ "Más pequeño": {
+  "w": [
+   "ui-pets.js:181"
+  ],
+  "ctx": "'<div class=\"petadjcol\"><div class=\"lbl\">' + tr(\"Tamaño\") + \" · \" + Math.round((j.s || 1) * 100) + ' %</div><div class=\"petadjrow\">' + bt(\"s-\", \"−\", tr(\"Más pequeño\")) + bt(\"s+\", \"+\", tr(\"Más grande\")) + \"</div>\" +"
+ },
+ "Más grande": {
+  "w": [
+   "ui-pets.js:181"
+  ],
+  "ctx": "'<div class=\"petadjcol\"><div class=\"lbl\">' + tr(\"Tamaño\") + \" · \" + Math.round((j.s || 1) * 100) + ' %</div><div class=\"petadjrow\">' + bt(\"s-\", \"−\", tr(\"Más pequeño\")) + bt(\"s+\", \"+\", tr(\"Más grande\")) + \"</div>\" +"
+ },
+ "Giro": {
+  "w": [
+   "ui-pets.js:182"
+  ],
+  "ctx": "'<div class=\"lbl\">' + tr(\"Giro\") + \" · \" + (j.r || 0) + '°</div><div class=\"petadjrow\">' + bt(\"r-\", \"↺\", tr(\"Girar a la izquierda\")) + bt(\"r+\", \"↻\", tr(\"Girar a la derecha\")) + \"</div></div></div>\";"
+ },
+ "Girar a la izquierda": {
+  "w": [
+   "ui-pets.js:182"
+  ],
+  "ctx": "'<div class=\"lbl\">' + tr(\"Giro\") + \" · \" + (j.r || 0) + '°</div><div class=\"petadjrow\">' + bt(\"r-\", \"↺\", tr(\"Girar a la izquierda\")) + bt(\"r+\", \"↻\", tr(\"Girar a la derecha\")) + \"</div></div></div>\";"
+ },
+ "Girar a la derecha": {
+  "w": [
+   "ui-pets.js:182"
+  ],
+  "ctx": "'<div class=\"lbl\">' + tr(\"Giro\") + \" · \" + (j.r || 0) + '°</div><div class=\"petadjrow\">' + bt(\"r-\", \"↺\", tr(\"Girar a la izquierda\")) + bt(\"r+\", \"↻\", tr(\"Girar a la derecha\")) + \"</div></div></div>\";"
+ },
+ "Recolocar este": {
+  "w": [
+   "ui-pets.js:183"
+  ],
+  "ctx": "s += '<div class=\"petadjrow\">' + '<button class=\"btn\" data-a=\"petadj\" data-v=\"reset\">' + tr(\"Recolocar este\") + '</button><button class=\"btn\" data-a=\"petadj\" data-v=\"resetall\">' + tr(\"Recolocar todos\") + \"</button></div>"
+ },
+ "Recolocar todos": {
+  "w": [
+   "ui-pets.js:183"
+  ],
+  "ctx": "s += '<div class=\"petadjrow\">' + '<button class=\"btn\" data-a=\"petadj\" data-v=\"reset\">' + tr(\"Recolocar este\") + '</button><button class=\"btn\" data-a=\"petadj\" data-v=\"resetall\">' + tr(\"Recolocar todos\") + \"</button></div>"
+ },
+ "Cada etapa de tu mascota tiene su propio dibujo: cuando crezca, quizá tengas que volver a colocarlos.": {
+  "w": [
+   "ui-pets.js:184"
+  ],
+  "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Cada etapa de tu mascota tiene su propio dibujo: cuando crezca, quizá tengas que volver a colocarlos.\") + \"</p>\";"
+ },
+ "Listo": {
+  "w": [
+   "ui-pets.js:185"
+  ],
+  "ctx": "return s + '<button class=\"go\" data-a=\"petview\" data-v=\"style\">' + tr(\"Listo\") + \"</button>\";"
+ },
+ "Colocar accesorios": {
+  "w": [
+   "ui-pets.js:238"
+  ],
+  "ctx": "if (v === \"edit\") { s = '<h2>' + tr(\"Colocar accesorios\") + '</h2><div class=\"stack\">' + editView(pt); }"
+ },
+ "Cuidar": {
+  "w": [
+   "ui-pets.js:240"
+  ],
+  "ctx": "s += '<div class=\"seg\"><button data-a=\"petview\" data-v=\"care\" aria-pressed=\"' + (v === \"care\") + '\">' + tr(\"Cuidar\") + '</button><button data-a=\"petview\" data-v=\"style\" aria-pressed=\"' + (v === \"style\") + '\">' + tr(\"Esti"
+ },
+ "Estilo": {
+  "w": [
+   "ui-pets.js:240"
+  ],
+  "ctx": "s += '<div class=\"seg\"><button data-a=\"petview\" data-v=\"care\" aria-pressed=\"' + (v === \"care\") + '\">' + tr(\"Cuidar\") + '</button><button data-a=\"petview\" data-v=\"style\" aria-pressed=\"' + (v === \"style\") + '\">' + tr(\"Esti"
+ },
  "Adoptar una mascota": {
   "w": [
-   "ui-pets.js:53"
+   "ui-pets.js:245"
   ],
   "ctx": "s = '<h2>' + tr(\"Adoptar una mascota\") + '</h2><div class=\"stack\"><p class=\"muted\" style=\"margin:0\">' + tr(\"Llega como cría y crece contigo temporada a temporada. Tienes {m}.\", {m: fmtMoney(S.p.money)}) + \"</p>\";"
  },
  "Llega como cría y crece contigo temporada a temporada. Tienes {m}.": {
   "w": [
-   "ui-pets.js:53"
+   "ui-pets.js:245"
   ],
   "ctx": "s = '<h2>' + tr(\"Adoptar una mascota\") + '</h2><div class=\"stack\"><p class=\"muted\" style=\"margin:0\">' + tr(\"Llega como cría y crece contigo temporada a temporada. Tienes {m}.\", {m: fmtMoney(S.p.money)}) + \"</p>\";"
  },
  "Exóticas": {
   "w": [
-   "ui-pets.js:54"
+   "ui-pets.js:246"
   ],
   "ctx": "s += '<div class=\"seg\"><button data-a=\"pettab\" data-v=\"n\" aria-pressed=\"' + (tab === \"n\") + '\">' + tr(\"Normales\") + '</button><button data-a=\"pettab\" data-v=\"x\" aria-pressed=\"' + (tab === \"x\") + '\">' + tr(\"Exóticas\") + \""
  },
  "Las exóticas dan más fama, pero cuestan más y pueden dar sustos.": {
   "w": [
-   "ui-pets.js:55"
+   "ui-pets.js:247"
   ],
   "ctx": "if (tab === \"x\") s += '<p class=\"muted lfhint\">' + tr(\"Las exóticas dan más fama, pero cuestan más y pueden dar sustos.\") + \"</p>\";"
  },
  "{p} · {y}/año · vive {a}–{b} años": {
   "w": [
-   "ui-pets.js:59"
+   "ui-pets.js:251"
   ],
   "ctx": "tr(\"{p} · {y}/año · vive {a}–{b} años\", {p: fmtMoney(d.price), y: fmtMoney(d.year), a: d.life[0], b: d.life[1]}) + '</small><span class=\"chips\">' + chips(d) + \"</span></span></button>\" +"
  },
  "¿Cómo se va a llamar?": {
   "w": [
-   "ui-pets.js:60"
+   "ui-pets.js:252"
   ],
   "ctx": "(on ? '<div class=\"petadopt\"><input id=\"petnm\" maxlength=\"16\" placeholder=\"' + h(tr(\"¿Cómo se va a llamar?\")) + '\" aria-label=\"' + h(tr(\"Nombre de la mascota\")) + '\"><button class=\"go\" data-a=\"petadopt\">' + tr(\"Adoptar\")"
  },
  "Nombre de la mascota": {
   "w": [
-   "ui-pets.js:60"
+   "ui-pets.js:252"
   ],
   "ctx": "(on ? '<div class=\"petadopt\"><input id=\"petnm\" maxlength=\"16\" placeholder=\"' + h(tr(\"¿Cómo se va a llamar?\")) + '\" aria-label=\"' + h(tr(\"Nombre de la mascota\")) + '\"><button class=\"go\" data-a=\"petadopt\">' + tr(\"Adoptar\")"
  },
  "Adoptar": {
   "w": [
-   "ui-pets.js:60"
+   "ui-pets.js:252"
   ],
   "ctx": "(on ? '<div class=\"petadopt\"><input id=\"petnm\" maxlength=\"16\" placeholder=\"' + h(tr(\"¿Cómo se va a llamar?\")) + '\" aria-label=\"' + h(tr(\"Nombre de la mascota\")) + '\"><button class=\"go\" data-a=\"petadopt\">' + tr(\"Adoptar\")"
  },
+ "Guardas {n} accesorio para tu próxima mascota.": {
+  "w": [
+   "ui-pets.js:254"
+  ],
+  "ctx": "if (L.petAcc && L.petAcc.length) s += '<p class=\"muted lfhint\">' + trn(L.petAcc.length, \"Guardas {n} accesorio para tu próxima mascota.\", \"Guardas {n} accesorios para tu próxima mascota.\") + \"</p>\";",
+  "note": "plural:singular"
+ },
+ "Guardas {n} accesorios para tu próxima mascota.": {
+  "w": [
+   "ui-pets.js:254"
+  ],
+  "ctx": "if (L.petAcc && L.petAcc.length) s += '<p class=\"muted lfhint\">' + trn(L.petAcc.length, \"Guardas {n} accesorio para tu próxima mascota.\", \"Guardas {n} accesorios para tu próxima mascota.\") + \"</p>\";",
+  "note": "plural:plural"
+ },
  "En el recuerdo": {
   "w": [
-   "ui-pets.js:63"
+   "ui-pets.js:256"
   ],
   "ctx": "if (L.petMem && L.petMem.length) s += '<div><div class=\"lbl\">' + tr(\"En el recuerdo\") + '</div><ul class=\"petmem\">' + L.petMem.slice(-6).reverse().map(function (m) { var d = petDef(m.k); return \"<li>🌈 <b>\" + h(m.nm) + \""
  },
@@ -42029,7 +42734,7 @@
  "Clubes": {
   "w": [
    "ui-cups.js:62",
-   "ui-35.js:108"
+   "ui-35.js:109"
   ],
   "ctx": "var sel = '<label class=\"lbl\" for=\"cupsel\">' + tr(\"Todas las competiciones\") + '</label><select id=\"cupsel\">' + opt(tr(\"Tus competiciones\"), g.mine) + opt(tr(\"Clubes\"), g.club) + opt(tr(\"Selecciones\"), g.nat) + opt(tr(\"C"
  },
@@ -42774,12 +43479,6 @@
   ],
   "ctx": "else o += '<p class=\"muted\" style=\"margin:0 0 8px\">' + tr(\"Te dan el micrófono en el centro del campo. ¿Qué dices?\") + '</p><div class=\"opts\">' + FAREWELL.map(function (x) { return '<button class=\"btn wide\" data-a=\"farew"
  },
- "Noche": {
-  "w": [
-   "ui-35.js:11"
-  ],
-  "ctx": "var THEMES = [[\"night\", N_(\"Noche\")], [\"day\", N_(\"Día de partido\")], [\"retro\", N_(\"Retro\")]];"
- },
  "Día de partido": {
   "w": [
    "ui-35.js:11"
@@ -42822,113 +43521,119 @@
   ],
   "ctx": "if (S.mode === \"mgr\" && S.m && S.m.mk && S.m.mk.open && S.m.club >= 0) return [tr(\"El mercado sigue abierto\"), tr(\"Aún puedes reforzar al {club} antes de que cierre el mercado.\", {club: clubName(S.m.club)})];"
  },
- "Tienes decisiones pendientes": {
+ "Hace tiempo que no le dedicas un rato a {pet}. Te está esperando en casa 🐾": {
   "w": [
    "ui-35.js:28"
+  ],
+  "ctx": "if (U.petNeed && U.petNeed()) { var pt = petOf(); return [tr(\"{pet} necesita atención\", {pet: pt.nm}), tr(\"Hace tiempo que no le dedicas un rato a {pet}. Te está esperando en casa 🐾\", {pet: pt.nm})]; }"
+ },
+ "Tienes decisiones pendientes": {
+  "w": [
+   "ui-35.js:29"
   ],
   "ctx": "if (S.pend && S.pend.length) return [tr(\"Tienes decisiones pendientes\"), tr(\"Tu vestuario espera una respuesta. Entra a decidir.\")];"
  },
  "Tu vestuario espera una respuesta. Entra a decidir.": {
   "w": [
-   "ui-35.js:28"
+   "ui-35.js:29"
   ],
   "ctx": "if (S.pend && S.pend.length) return [tr(\"Tienes decisiones pendientes\"), tr(\"Tu vestuario espera una respuesta. Entra a decidir.\")];"
  },
  "La temporada sigue": {
   "w": [
-   "ui-35.js:29"
+   "ui-35.js:30"
   ],
   "ctx": "return [tr(\"La temporada sigue\"), tr(\"Tu próximo partido te espera. ¿Seguimos?\")];"
  },
  "Tu próximo partido te espera. ¿Seguimos?": {
   "w": [
-   "ui-35.js:29"
+   "ui-35.js:30"
   ],
   "ctx": "return [tr(\"La temporada sigue\"), tr(\"Tu próximo partido te espera. ¿Seguimos?\")];"
  },
  "Volverás a la copia de {s}. Lo que hayas jugado después se perderá. ¿Seguir?": {
   "w": [
-   "ui-35.js:67"
+   "ui-35.js:68"
   ],
   "ctx": "if (!window.confirm(tr(\"Volverás a la copia de {s}. Lo que hayas jugado después se perderá. ¿Seguir?\", {s: seasonLabel(x.y)}))) return;"
  },
  "Tema, avisos y copias": {
   "w": [
-   "ui-35.js:73"
+   "ui-35.js:74"
   ],
   "ctx": "var o = '<details class=\"fold a11y35\"><summary>' + tr(\"Tema, avisos y copias\") + '</summary><div class=\"stack\">' + themeBlock();"
  },
  "Avisos en el móvil": {
   "w": [
-   "ui-35.js:74"
+   "ui-35.js:75"
   ],
   "ctx": "if (bridge()) o += '<div><label class=\"lbl\">' + tr(\"Avisos en el móvil\") + '</label><div class=\"seg\"><button data-a=\"notif\" data-v=\"1\" aria-pressed=\"' + notifOn() + '\">' + tr(\"Activados\") + '</button><button data-a=\"noti"
  },
  "Activados": {
   "w": [
-   "ui-35.js:74"
+   "ui-35.js:75"
   ],
   "ctx": "if (bridge()) o += '<div><label class=\"lbl\">' + tr(\"Avisos en el móvil\") + '</label><div class=\"seg\"><button data-a=\"notif\" data-v=\"1\" aria-pressed=\"' + notifOn() + '\">' + tr(\"Activados\") + '</button><button data-a=\"noti"
  },
  "Desactivados": {
   "w": [
-   "ui-35.js:74"
+   "ui-35.js:75"
   ],
   "ctx": "if (bridge()) o += '<div><label class=\"lbl\">' + tr(\"Avisos en el móvil\") + '</label><div class=\"seg\"><button data-a=\"notif\" data-v=\"1\" aria-pressed=\"' + notifOn() + '\">' + tr(\"Activados\") + '</button><button data-a=\"noti"
  },
  "Si no juegas en un día, te recordamos el cierre del mercado o tus decisiones pendientes.": {
   "w": [
-   "ui-35.js:74"
+   "ui-35.js:75"
   ],
   "ctx": "if (bridge()) o += '<div><label class=\"lbl\">' + tr(\"Avisos en el móvil\") + '</label><div class=\"seg\"><button data-a=\"notif\" data-v=\"1\" aria-pressed=\"' + notifOn() + '\">' + tr(\"Activados\") + '</button><button data-a=\"noti"
  },
  "Copias de seguridad": {
   "w": [
-   "ui-35.js:77"
+   "ui-35.js:78"
   ],
   "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Copias de seguridad\") + \"</label>\" + (l.length ? '<ul class=\"dlist\">' + l.slice().reverse().map(function (x, i) {"
  },
  "Restaurar": {
   "w": [
-   "ui-35.js:79"
+   "ui-35.js:80"
   ],
   "ctx": "return '<li><span aria-hidden=\"true\">💾</span><span class=\"grow\">' + h(seasonLabel(x.y)) + ' · <small class=\"muted\">' + h(new Date(x.ts).toLocaleDateString(LANG)) + '</small></span><button class=\"btn sm\" data-a=\"bkrestor"
  },
  "Se guarda una copia sola al empezar cada temporada.": {
   "w": [
-   "ui-35.js:80"
+   "ui-35.js:81"
   ],
   "ctx": "}).join(\"\") + \"</ul>\" : '<p class=\"muted\" style=\"font-size:13px;margin:0\">' + tr(\"Se guarda una copia sola al empezar cada temporada.\") + \"</p>\") + \"</div>\";"
  },
  "Carrera rápida: queda {n} temporada": {
   "w": [
-   "ui-35.js:86"
+   "ui-35.js:87"
   ],
   "ctx": "function quickChip() { var n = quickLeft(); return n >= 0 ? '<div class=\"qchip\">⏱️ ' + trn(n, \"Carrera rápida: queda {n} temporada\", \"Carrera rápida: quedan {n} temporadas\") + \"</div>\" : \"\"; }",
   "note": "plural:singular"
  },
  "Carrera rápida: quedan {n} temporadas": {
   "w": [
-   "ui-35.js:86"
+   "ui-35.js:87"
   ],
   "ctx": "function quickChip() { var n = quickLeft(); return n >= 0 ? '<div class=\"qchip\">⏱️ ' + trn(n, \"Carrera rápida: queda {n} temporada\", \"Carrera rápida: quedan {n} temporadas\") + \"</div>\" : \"\"; }",
   "note": "plural:plural"
  },
  "Los cambios solo afectan a esta partida. Deja un campo vacío para volver al original.": {
   "w": [
-   "ui-35.js:107"
+   "ui-35.js:108"
   ],
   "ctx": "var ui = U.ui(), tab = ui.edTab || \"cl\", li = +ui.edLg || 0, s = \"<h2>\" + tr(\"Editor de la partida\") + '</h2><div class=\"stack\"><p class=\"muted\" style=\"margin:0;font-size:13px\">' + tr(\"Los cambios solo afectan a esta par"
  },
  "Ligas y copas": {
   "w": [
-   "ui-35.js:108"
+   "ui-35.js:109"
   ],
   "ctx": "s += '<div class=\"seg\"><button data-a=\"edtab\" data-v=\"cl\" aria-pressed=\"' + (tab === \"cl\") + '\">' + tr(\"Clubes\") + '</button><button data-a=\"edtab\" data-v=\"cp\" aria-pressed=\"' + (tab === \"cp\") + '\">' + tr(\"Ligas y copas\""
  },
  "Cambios guardados.": {
   "w": [
-   "ui-35.js:131"
+   "ui-35.js:132"
   ],
   "ctx": "U.ui().sheet = null; U.persist(); U.render(false); U.toast(tr(\"Cambios guardados.\"));"
  },

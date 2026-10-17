@@ -25,6 +25,7 @@
   function remindText() {
     if (!S) return [tr("Tu carrera te espera"), tr("Vuelve a «Fútbol: Camino a la Leyenda» y sigue escribiendo tu historia.")];
     if (S.mode === "mgr" && S.m && S.m.mk && S.m.mk.open && S.m.club >= 0) return [tr("El mercado sigue abierto"), tr("Aún puedes reforzar al {club} antes de que cierre el mercado.", {club: clubName(S.m.club)})];
+    if (U.petNeed && U.petNeed()) { var pt = petOf(); return [tr("{pet} necesita atención", {pet: pt.nm}), tr("Hace tiempo que no le dedicas un rato a {pet}. Te está esperando en casa 🐾", {pet: pt.nm})]; }
     if (S.pend && S.pend.length) return [tr("Tienes decisiones pendientes"), tr("Tu vestuario espera una respuesta. Entra a decidir.")];
     return [tr("La temporada sigue"), tr("Tu próximo partido te espera. ¿Seguimos?")];
   }

@@ -1233,3 +1233,52 @@ html.th-day.cb { --grass: #1f6fd1; --red: #c25a00; --grass-rgb: 31, 111, 209; --
 html.th-retro { --night: #1b1812; --stand: #26211a; --tunnel: #312a20; --line: #4a3f2e; --chalk: #f2e3bd; --mist: #b5a684; --dim: #857a60; --led: #e9b23a; --led-ink: #1b1812; --f-body: "Courier New", ui-monospace, monospace; }
 html.th-retro .card { border-radius: 4px; } html.th-retro .go, html.th-retro .btn { border-radius: 4px; }
 .achsv { color: var(--led) !important; margin-top: 2px; }
+
+/* mascota 3.7: dibujo con color, fondo y accesorios; cariño y estilo */
+.petart { position: relative; display: inline-grid; place-items: center; width: 1.55em; height: 1.55em; line-height: 1; flex: none; border-radius: 50%; }
+.petart .petbody { display: block; line-height: 1; }
+.petart .pacc { position: absolute; left: 50%; transform: translateX(-50%); line-height: 1; pointer-events: none; }
+.petart .ph { top: -.32em; font-size: .46em; }
+.petart .pf { top: 1.5em; font-size: .36em; }
+.petart .pn { bottom: .15em; font-size: .34em; }
+.petart .pt { left: auto; right: -.3em; bottom: -.05em; transform: none; font-size: .42em; }
+.petbody.rainbow { animation: petrb 4s linear infinite; }
+@keyframes petrb { from { filter: hue-rotate(0deg) saturate(1.4); } to { filter: hue-rotate(360deg) saturate(1.4); } }
+@media (prefers-reduced-motion: reduce) { .petbody.rainbow { animation: none; filter: hue-rotate(200deg) saturate(1.4); } }
+.petcard.need { border-color: var(--gold); }
+.petneed { color: var(--gold); font-weight: 800; }
+.petalert { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; color: var(--chalk); border-color: var(--gold); cursor: pointer; }
+.petalert b { display: block; font-size: 15px; }
+.petalert small { display: block; color: var(--mist); font-size: 12.5px; }
+.petalert .chev { color: var(--dim); font-size: 22px; }
+nav.tabs .nbadge.pet { background: var(--gold); color: #1a1200; font-size: 9px; }
+.petcare, .petacc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.petact, .pac { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 10px 11px; border-radius: 12px; border: 1px solid var(--line); background: var(--stand); color: var(--chalk); font: inherit; cursor: pointer; min-width: 0; }
+.petact b, .pac b { font-size: 14px; line-height: 1.2; }
+.petact small, .pac small { font-size: 11.5px; color: var(--mist); line-height: 1.3; }
+.petact .paf { color: var(--led); font-weight: 700; }
+.petact .pai, .pac .pai { font-size: 24px; line-height: 1; margin-bottom: 2px; }
+.petact.done { border-color: var(--led); }
+.petact.done .pai { color: var(--led); font-weight: 900; }
+.petact:disabled, .pac:disabled { opacity: .5; cursor: default; }
+.petact.done:disabled { opacity: .75; }
+.pac[aria-pressed="true"] { border-color: var(--led); box-shadow: inset 0 0 0 1px var(--led); }
+.pac.lock { opacity: .6; border-style: dashed; cursor: default; }
+.petsw { display: flex; flex-wrap: wrap; gap: 6px; }
+.psw { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 62px; padding: 6px 4px; border-radius: 10px; border: 1px solid var(--line); background: var(--tunnel); color: var(--chalk); font: inherit; cursor: pointer; }
+.psw small { font-size: 10.5px; color: var(--mist); }
+.psw[aria-pressed="true"] { border-color: var(--led); box-shadow: inset 0 0 0 1px var(--led); }
+.psw:disabled { opacity: .5; cursor: default; }
+.pbgdot { display: block; width: 30px; height: 30px; border-radius: 50%; border: 1px dashed var(--line); }
+.petedit { display: grid; place-items: center; padding: 34px 10px 18px; border-radius: 16px; background: var(--tunnel); border: 1px dashed var(--line); touch-action: none; user-select: none; -webkit-user-select: none; }
+.petedit .pacc { pointer-events: auto; cursor: grab; touch-action: none; border-radius: 8px; outline: 1px dashed transparent; outline-offset: 2px; }
+.petedit .pacc:active { cursor: grabbing; }
+.petedit .pacc.sel, .petedit .pacc:focus-visible { outline-color: var(--led); background: rgba(255, 255, 255, .06); }
+.petselseg button { font-size: 13px; }
+.petadj { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; }
+.petpad { display: grid; justify-items: center; gap: 4px; }
+.petpad span { display: flex; gap: 40px; }
+.petadjb { min-width: 44px; min-height: 44px; padding: 6px 10px; font-size: 18px; }
+.petadjcol .lbl { margin: 4px 0; }
+.petadjrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.petadjrow .btn { flex: 1; }

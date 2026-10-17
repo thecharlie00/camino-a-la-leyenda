@@ -458,7 +458,7 @@
       : [["carrera", tr("Inicio"), ICON.home], ["jugador", tr("Yo"), ICON.shirt], ["comp", tr("Liga"), ICON.table], ["mas", tr("Más"), ICON.grid]];
     var unread = socUnread(), cur = subTabs().indexOf(UI.tab) >= 0 ? "mas" : UI.tab;
     return '<nav class="tabs four" aria-label="' + h(tr("Secciones")) + '">' + t.map(function (x) {
-      return '<button data-a="tab" data-t="' + x[0] + '"' + (cur === x[0] ? ' aria-current="page"' : "") + ">" + x[2] + "<span>" + x[1] + "</span>" + (x[0] === "mas" && unread && UI.tab !== "red" ? '<span class="nbadge">' + (unread > 9 ? "9+" : unread) + "</span>" : "") + "</button>";
+      return '<button data-a="tab" data-t="' + x[0] + '"' + (cur === x[0] ? ' aria-current="page"' : "") + ">" + x[2] + "<span>" + x[1] + "</span>" + (x[0] === "mas" && unread && UI.tab !== "red" ? '<span class="nbadge">' + (unread > 9 ? "9+" : unread) + "</span>" : "") + (x[0] === "jugador" && UIX.petNeed && UIX.petNeed() ? '<span class="nbadge pet" aria-label="' + h(tr("Tu mascota necesita atención")) + '">🐾</span>' : "") + "</button>";
     }).join("") + "</nav>";
   }
   /* «Más»: el resto del juego en una lista clara */
