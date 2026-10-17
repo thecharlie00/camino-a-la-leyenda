@@ -173,8 +173,8 @@ function mSetFormation(f) {
   /* conservar a los que encajan en el nuevo dibujo */
   slots.forEach(function (s, j) {
     var best = null, bv = -1e9;
-    old.forEach(function (p) { if (used[p.id]) return; var v = -posFit(p.pos, s) * 3 + p.ovr / 10; if (v > bv) { bv = v; best = p; } });
-    if (best && posFit(best.pos, s) <= 3) { xi[j] = best.id; used[best.id] = 1; }
+    old.forEach(function (p) { if (used[p.id]) return; var v = -posFit(p.pos, s, p) * 3 + p.ovr / 10; if (v > bv) { bv = v; best = p; } });
+    if (best && posFit(best.pos, s, best) <= 3) { xi[j] = best.id; used[best.id] = 1; }
   });
   m.form = f; m.xi = xi; mFixXI();
 }

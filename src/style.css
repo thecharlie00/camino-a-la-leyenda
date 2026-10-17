@@ -1283,3 +1283,56 @@ nav.tabs .nbadge.pet { background: var(--gold); color: #1a1200; font-size: 9px; 
 .petadjrow { display: flex; gap: 8px; flex-wrap: wrap; }
 .petadjrow .btn { flex: 1; }
 .pethero .petneed { display: block; margin-top: 3px; }
+
+/* ---------- 3.7: caras, posiciones, media física y versión ---------- */
+.fav { position: relative; display: inline-block; flex: none; border-radius: 50%; background: var(--tunnel); overflow: visible; }
+.fav svg.face { display: block; border-radius: 50%; }
+.fav .fbat { position: absolute; right: -3px; bottom: -2px; width: 14px; height: 14px; border-radius: 50%; display: grid; place-items: center; font-size: 8px; font-style: normal; line-height: 1; border: 1.5px solid var(--stand); }
+.fav .fbat.l1 { background: var(--led); }
+.fav .fbat.l2 { background: var(--red); }
+.prow { grid-template-columns: 38px 32px minmax(0, 1fr) 46px 32px; }
+.pp .pp2 { display: block; margin-top: 2px; font-size: 8px; letter-spacing: 0; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pp { padding: 5px 1px; }
+.bchip { grid-template-columns: auto auto minmax(0, 1fr); }
+.bchip .fav { grid-row: 1 / 3; }
+.lvtag { display: inline-block; font: 800 10.5px/1 var(--f-body); padding: 3px 6px; border-radius: 6px; vertical-align: 1px; letter-spacing: .02em; }
+.lvtag.nat { background: rgba(var(--grass-rgb), .16); color: var(--grass); }
+.lvtag.sec { background: rgba(255, 178, 30, .16); color: var(--led); }
+.lvtag.emg, .lvtag.inc { background: rgba(var(--red-rgb), .16); color: var(--red); }
+.pitch .slot.lv0 { border-color: rgba(var(--grass-rgb), .85); }
+.pitch .slot.lv1 { border-color: var(--led); }
+.pitch .slot.lv2, .pitch .slot.lv3 { border-color: var(--red); box-shadow: 0 0 0 1px var(--red) inset; }
+.pitch .slot.lv3::after { content: "⚠"; position: absolute; top: -8px; right: -6px; font-size: 13px; }
+.pitch .slot { position: absolute; }
+.pstop { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.favbig { position: relative; flex: none; width: 128px; height: 128px; border-radius: 50%; background: radial-gradient(circle at 50% 35%, var(--tunnel), var(--stand)); box-shadow: 0 0 0 3px var(--line); }
+.favbig svg { display: block; border-radius: 50%; }
+.favbig.star { box-shadow: 0 0 0 3px var(--gold), 0 0 18px rgba(232, 195, 90, .35); }
+.favbig.yth { box-shadow: 0 0 0 3px var(--grass); }
+.favbig em { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); font: 800 10.5px/1 var(--f-body); font-style: normal; text-transform: uppercase; letter-spacing: .06em; padding: 4px 8px; border-radius: 99px; background: var(--line); color: var(--chalk); white-space: nowrap; }
+.favbig.star em { background: var(--gold); color: #1b1200; }
+.favbig.yth em { background: var(--grass); color: #06210f; }
+.psposl { min-width: 0; }
+.pschips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.psphy { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: var(--tunnel); border: 1px solid var(--line); }
+.psphyh { display: flex; align-items: baseline; gap: 8px; }
+.psphyh b { font: 900 26px/1 var(--f-disp); }
+.psphy.l0 .psphyh b, .psphy.l0 .psphyt { color: var(--grass); }
+.psphy.l1 .psphyh b, .psphy.l1 .psphyt { color: var(--led); }
+.psphy.l2 .psphyh b, .psphy.l2 .psphyt { color: var(--red); }
+.psphyt { margin-left: auto; font-weight: 800; font-size: 13px; }
+.phybar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; margin: 7px 0; }
+.phybar i { display: block; height: 100%; border-radius: 99px; background: var(--grass); }
+.psphy.l1 .phybar i { background: var(--led); }
+.psphy.l2 .phybar i { background: var(--red); }
+.phyparts { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12.5px; color: var(--mist); }
+.phyparts b { color: var(--chalk); }
+.phyhint { font-size: 12.5px; margin: 6px 0 0; }
+.assist { border-color: var(--led); }
+.assisth { display: flex; gap: 12px; align-items: flex-start; }
+.assisth p { margin: 4px 0 0; font-size: 14px; line-height: 1.4; }
+.assistb { display: flex; gap: 8px; margin-top: 10px; }
+.assistb .btn { flex: 1; }
+.vtag { display: block; margin: 18px auto 0; padding: 6px 10px; border: 0; background: none; color: var(--dim); opacity: .55; font: 600 10.5px/1 ui-monospace, "Roboto Mono", monospace; letter-spacing: .04em; cursor: pointer; }
+.vtag.inmenu { margin: 10px auto 0; }
+.vnotes { margin: 6px 0 0; padding-left: 18px; font-size: 14px; line-height: 1.5; color: var(--chalk); }

@@ -1328,5 +1328,9 @@
  "Un juvenil de tu cantera llega a una media de 90.": "Eine Nachwuchsspielerin aus deiner Akademie erreicht eine Gesamtstärke von 90.",
  "Vende a un veterano de 31 años o más por el triple de su valor.": "Verkaufe eine Routinierin ab 31 Jahren für das Dreifache ihres Werts.",
  "Termina un partido con cinco o más jugadores amonestados.": "Beende ein Spiel mit fünf oder mehr verwarnten Spielerinnen.",
- "Jugador total": "Totale Spielerin"
+ "Jugador total": "Totale Spielerin",
+ "{n} hat eine Physis von {v}: Ich empfehle, ihn im nächsten Spiel zu schonen.": "{n} hat eine Physis von {v}: Ich empfehle, sie im nächsten Spiel zu schonen.",
+ "Noch {n} Stammspieler ist im roten Bereich.": "Noch {n} Stammspielerin ist im roten Bereich.",
+ "Noch {n} Stammspieler sind im roten Bereich.": "Noch {n} Stammspielerinnen sind im roten Bereich.",
+ "Gesichter für alle Spieler deines Kaders": "Gesichter für alle Spielerinnen deines Kaders"
 }

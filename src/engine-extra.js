@@ -580,7 +580,7 @@ function liveSub(outId, inId) {
   var i = L.xi.indexOf(outId), j = L.bench.indexOf(inId);
   if (i < 0 || j < 0 || outId === L.red) return false;
   var sl = (FORMATIONS[L.form] || [])[i], pin = mPl(inId);
-  if (sl && pin && !posOk(pin.pos, sl)) return false;
+  if (sl && pin && !posOk(pin.pos, sl, pin)) return false;
   L.xi[i] = inId; L.bench.splice(j, 1); L.left--;
   L.subs.push({out: outId, "in": inId, min: Math.max(1, L.min)});
   if (L.hurt === outId) L.hurt = null;

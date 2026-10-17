@@ -1391,5 +1391,10 @@
  "Un juvenil de tu cantera llega a una media de 90.": "Una giovane del tuo vivaio arriva a una valutazione di 90.",
  "Vende a un veterano de 31 años o más por el triple de su valor.": "Vendi una veterana di 31 anni o più al triplo del suo valore.",
  "Termina un partido con cinco o más jugadores amonestados.": "Chiudi una partita con cinque o più giocatrici ammonite.",
- "Jugador total": "Giocatrice totale"
+ "Jugador total": "Giocatrice totale",
+ "Canterano": "Canterana",
+ "{n} ha una condizione fisica di {v}: ti consiglio di farlo riposare nella prossima partita.": "{n} ha una condizione fisica di {v}: ti consiglio di farla riposare nella prossima partita.",
+ "Un po' stanco: rende un po' meno e il rischio di infortunio sale.": "Un po' stanca: rende un po' meno e il rischio di infortunio sale.",
+ "Alto rischio di infortunio e calo nel secondo tempo. Meglio farlo riposare.": "Alto rischio di infortunio e calo nel secondo tempo. Meglio farla riposare.",
+ "Volti per tutti i giocatori della rosa": "Volti per tutte le giocatrici della rosa"
 }

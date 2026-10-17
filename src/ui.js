@@ -36,7 +36,7 @@
      UIX.actions[accion] = function (boton, valor, id) · UIX.sheets[k] = function (sheet) → html
      UIX.pend[k] = function (x) → html de la decisión · UIX.slots[sitio] = [function () → html]
      sitios: home, menu, carrera, jugador, club, plantilla, mercado, hist, histM, create, after (tras cada render) */
-  var UIX = window.UIX = {actions: {}, sheets: {}, pend: {}, slots: {}};
+  var UIX = window.UIX = {actions: {}, sheets: {}, pend: {}, slots: {}, hk: {}};
   function slot(name, arg) {
     var l = UIX.slots[name] || [], o = "";
     for (var i = 0; i < l.length; i++) { try { o += l[i](arg) || ""; } catch (e) { console.error(e); } }
@@ -1256,12 +1256,12 @@
   }
   function squadRow(p, zone) {
     var m = S.m, inXI = m.xi.indexOf(p.id) >= 0, dz = zone === "bench" ? "bp" : zone === "nc" ? "np" : "";
-    return '<button class="prow' + (inXI ? " inxi" : "") + '" data-a="pl" data-id="' + p.id + '"' + (zone ? ' data-drag="' + zone + ":" + p.id + '" data-drop="' + dz + ":" + p.id + '"' : "") + '><span class="pp">' + h(posAb(p.pos)) + '</span><span class="pn"><b>' + flag(p.nat) + " " + h(plShort(p)) + plTags(p) + "</b><small>" + tr("{n} años", {n: p.age}) + " · " + h(tr(ROLES[p.role].n)) + " · " + trn(p.yrs, "{n} año", "{n} años") + " · " + fmtMoney(p.sal) + "</small></span>" +
-      '<span class="pbars" aria-label="' + h(tr("Físico {f}, moral {m}", {f: Math.round(p.fit), m: Math.round(p.mor)})) + '"><i style="--w:' + Math.round(p.fit) + '%;--c:var(--sky)"></i><i style="--w:' + Math.round(p.mor) + "%;--c:" + (p.mor < 35 ? "var(--red)" : p.mor < 55 ? "var(--led)" : "var(--grass)") + '"></i></span><span class="po">' + Math.round(p.ovr) + "</span></button>";
+    return '<button class="prow' + (inXI ? " inxi" : "") + '" data-a="pl" data-id="' + p.id + '"' + (zone ? ' data-drag="' + zone + ":" + p.id + '" data-drop="' + dz + ":" + p.id + '"' : "") + '><span class="pp">' + (UIX.hk && UIX.hk.posB ? UIX.hk.posB(p) : h(posAb(p.pos))) + '</span>' + (UIX.hk && UIX.hk.av ? UIX.hk.av(p, 32) : "") + '<span class="pn"><b>' + flag(p.nat) + " " + h(plShort(p)) + plTags(p) + "</b><small>" + tr("{n} años", {n: p.age}) + " · " + h(tr(ROLES[p.role].n)) + " · " + trn(p.yrs, "{n} año", "{n} años") + " · " + fmtMoney(p.sal) + "</small></span>" +
+      '<span class="pbars" aria-label="' + h(UIX.hk && UIX.hk.phy ? tr("Media física {f}, moral {m}", {f: plPhy(p), m: Math.round(p.mor)}) : tr("Físico {f}, moral {m}", {f: Math.round(p.fit), m: Math.round(p.mor)})) + '">' + (UIX.hk && UIX.hk.phy ? UIX.hk.phy(p) : '<i style="--w:' + Math.round(p.fit) + '%;--c:var(--sky)"></i>') + '<i style="--w:' + Math.round(p.mor) + "%;--c:" + (p.mor < 35 ? "var(--red)" : p.mor < 55 ? "var(--led)" : "var(--grass)") + '"></i></span><span class="po">' + Math.round(p.ovr) + "</span></button>";
   }
   function benchChip(p) {
     var out = !mAvail(p);
-    return '<button class="bchip' + (out ? " out" : "") + '" data-a="pl" data-id="' + p.id + '" data-drag="bench:' + p.id + '" data-drop="bp:' + p.id + '"><b>' + Math.round(p.ovr) + "</b><span>" + h(p.ln) + "</span><small>" + h(posAb(p.pos)) + (p.inj > S.tw ? " · " + tr("LES") : p.sus > 0 ? " · " + tr("SANC") : "") + "</small></button>";
+    return '<button class="bchip' + (out ? " out" : "") + '" data-a="pl" data-id="' + p.id + '" data-drag="bench:' + p.id + '" data-drop="bp:' + p.id + '">' + (UIX.hk && UIX.hk.av ? UIX.hk.av(p, 26) : "") + "<b>" + Math.round(p.ovr) + "</b><span>" + h(p.ln) + "</span><small>" + h(posAb(p.pos)) + (p.inj > S.tw ? " · " + tr("LES") : p.sus > 0 ? " · " + tr("SANC") : "") + "</small></button>";
   }
   var SQ_GROUPS = [[N_("Porteros"), ["POR"]], [N_("Defensas"), ["LD", "DFC", "LI"]], [N_("Centrocampistas"), ["MCD", "MC", "MD", "MI", "MCO"]], [N_("Delanteros"), ["ED", "EI", "DC"]]];
   /* qué aporta respecto a tu titular */
@@ -1279,8 +1279,8 @@
     var slots = FORMATIONS[m.form], xy = FORM_XY[m.form];
     var s = '<div class="stack">' + xiWarn(false) + '<section class="card"><div class="head"><h3>' + tr("Once titular") + '</h3><span class="eyebrow">' + tr("Nivel {n}", {n: dec(mTeamRating(m.xi))}) + "</span></div>";
     s += '<div class="pitch mpitch" role="group" aria-label="' + h(tr("Once titular")) + '"><div class="box t"></div><div class="box b"></div>' + slots.map(function (sp, i) {
-      var p = m.xi[i] != null ? mPl(m.xi[i]) : null, out = p && !mAvail(p), eff = p ? Math.round(p.ovr - posFit(p.pos, sp)) : "—";
-      return '<button class="slot' + (out ? " out" : "") + (p && posFit(p.pos, sp) > 3 ? " off" : "") + (p ? "" : " empty") + '" data-a="slot" data-i="' + i + '"' + (p ? ' data-drag="xi:' + i + '"' : "") + ' data-drop="xi:' + i + '" style="left:' + xy[i][0] + "%;top:" + xy[i][1] + '%" aria-label="' + h(posAb(sp) + ": " + (p ? plName(p) : tr("vacío"))) + '"><b>' + eff + "</b><span>" + h(p ? p.ln : tr("Vacío")) + "</span><small>" + h(posAb(sp)) + "</small></button>";
+      var p = m.xi[i] != null ? mPl(m.xi[i]) : null, out = p && !mAvail(p), eff = p ? Math.round(p.ovr - posFit(p.pos, sp, p)) : "—", plv = p && typeof posLv === "function" ? posLv(p, sp) : 0;
+      return '<button class="slot' + (out ? " out" : "") + (p && posFit(p.pos, sp, p) > 3 ? " off" : "") + (p ? " lv" + plv : "") + (p ? "" : " empty") + '" data-a="slot" data-i="' + i + '"' + (p ? ' data-drag="xi:' + i + '"' : "") + ' data-drop="xi:' + i + '" style="left:' + xy[i][0] + "%;top:" + xy[i][1] + '%" aria-label="' + h(posAb(sp) + ": " + (p ? plName(p) : tr("vacío"))) + '"><b>' + eff + "</b><span>" + h(p ? p.ln : tr("Vacío")) + "</span><small>" + h(posAb(sp)) + "</small></button>";
     }).join("") + "</div>";
     var bench = m.bench.map(mPl).filter(Boolean);
     s += '<div class="bhead"><span class="sgroup">' + tr("Banquillo") + '</span><span class="eyebrow">' + bench.length + "/" + BENCH_N + "</span></div>";
@@ -1300,7 +1300,7 @@
       if (l.length) s += '<div class="sgroup">' + h(tr(g[0])) + "</div>" + l.map(function (p) { return squadRow(p, "nc"); }).join("");
     });
     if (!nc.length) s += '<p class="empty">' + tr("Todos tus jugadores están en el once o en el banquillo.") + "</p>";
-    s += '<p class="muted" style="font-size:12px;margin:8px 0 0">' + tr("Barras: físico (azul) y moral.") + " " + tr("Masa salarial: {m} al año.", {m: fmtMoney(mWageBill())}) + "</p></section>";
+    s += '<p class="muted" style="font-size:12px;margin:8px 0 0">' + (UIX.hk && UIX.hk.phy ? tr("Barras: media física (verde, ámbar o rojo) y moral.") : tr("Barras: físico (azul) y moral.")) + " " + tr("Masa salarial: {m} al año.", {m: fmtMoney(mWageBill())}) + "</p></section>";
     var loans = m.sq.filter(function (p) { return p.loanOut; });
     if (loans.length) s += '<section class="card"><h3>' + tr("Cedidos") + '</h3><div class="kvlist" style="margin-top:6px">' + loans.map(function (p) { return "<div><span>" + h(plName(p)) + " (" + h(posAb(p.pos)) + ", " + Math.round(p.ovr) + ")</span><span>" + h(clubName(p.loanOut.club)) + "</span></div>"; }).join("") + "</div></section>";
     return s + "</div>";
@@ -1695,8 +1695,8 @@
   function playerSheet(p) {
     if (!p) return "";
     var m = S.m, open = !!m.mk.open, st = p.st, now = S.yr * 10 + S.bi;
-    var s = '<div class="pshead"><div class="ovr tier-' + tier(Math.round(p.ovr)) + '"><b>' + Math.round(p.ovr) + "</b><small>" + h(posAb(p.pos)) + '</small></div><div style="min-width:0"><h2 style="margin:0">' + h(plName(p)) + '</h2><div class="muted" style="font-size:13px">' + flag(p.nat) + " " + h(natName(p.nat)) + " · " + h(posName(p.pos)) + " · " + tr("{n} años", {n: p.age}) + "</div></div></div>";
-    s += '<div class="meters" style="grid-template-columns:repeat(3,1fr);margin-top:12px">' + meter(tr("Forma"), p.form) + meter(tr("Moral"), p.mor) + meter(tr("Físico"), p.fit) + "</div>";
+    var s = (UIX.hk && UIX.hk.psTop ? UIX.hk.psTop(p) : "") + '<div class="pshead"><div class="ovr tier-' + tier(Math.round(p.ovr)) + '"><b>' + Math.round(p.ovr) + "</b><small>" + h(posAb(p.pos)) + '</small></div><div style="min-width:0"><h2 style="margin:0">' + h(plName(p)) + '</h2><div class="muted" style="font-size:13px">' + flag(p.nat) + " " + h(natName(p.nat)) + " · " + h(posName(p.pos)) + " · " + tr("{n} años", {n: p.age}) + "</div></div></div>";
+    s += '<div class="meters" style="grid-template-columns:repeat(3,1fr);margin-top:12px">' + meter(tr("Forma"), p.form) + meter(tr("Moral"), p.mor) + meter(tr("Físico"), p.fit) + "</div>" + (UIX.hk && UIX.hk.psPhy ? UIX.hk.psPhy(p) : "");
     s += '<div class="kvlist" style="margin-top:10px">' +
       "<div><span>" + tr("Potencial") + "</span><span>" + Math.round(Math.max(p.ovr, p.pot - (m.flags.data ? 1 : 3))) + "–" + Math.round(Math.min(95, p.pot + (m.flags.data ? 1 : 3))) + "</span></div>" +
       "<div><span>" + tr("Contrato") + "</span><span>" + tr("{m}/año", {m: fmtMoney(p.sal)}) + " · " + trn(p.yrs, "{n} temporada", "{n} temporadas") + (p.noRenew ? " · " + tr("no renovará") : "") + "</span></div>" +
@@ -1734,13 +1734,13 @@
   function slotSheet(i) {
     var m = S.m, sp = FORMATIONS[m.form][i], cur = m.xi[i];
     var all = m.sq.filter(function (p) { return !p.loanOut; });
-    var l = all.filter(function (p) { return posOk(p.pos, sp) && (xiSwapOk(p.id, i)); }).sort(function (a, b) { return (mAvail(b) - mAvail(a)) || (mSlotEff(b, sp) - mSlotEff(a, sp)); });
+    var l = all.filter(function (p) { return posOk(p.pos, sp, p) && (xiSwapOk(p.id, i)); }).sort(function (a, b) { return (mAvail(b) - mAvail(a)) || (mSlotEff(b, sp) - mSlotEff(a, sp)); });
     var hid = all.length - l.length;
     var s = "<h2>" + h(posName(sp)) + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:13px">' + tr("Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.") + (hid ? " " + trn(hid, "{n} jugador no aparece porque no puede jugar ahí.", "{n} jugadores no aparecen porque no pueden jugar ahí.") : "") + '</p><div class="list" style="max-height:62vh">';
     s += l.map(function (p) {
-      var eff = Math.round(p.ovr - posFit(p.pos, sp)), xi = m.xi.indexOf(p.id);
+      var eff = Math.round(p.ovr - posFit(p.pos, sp, p)), xi = m.xi.indexOf(p.id);
       var zn = xi >= 0 ? (xi !== i ? tr("Titular de {p}", {p: posAb(FORMATIONS[m.form][xi])}) + " · " : "") : (m.bench || []).indexOf(p.id) >= 0 ? tr("Banquillo") + " · " : tr("No convocado") + " · ";
-      return '<button class="pickrow" data-a="setslot" data-i="' + i + '" data-id="' + p.id + '" aria-pressed="' + (p.id === cur) + '"' + (mAvail(p) ? "" : ' style="opacity:.55"') + '><span class="pp">' + h(posAb(p.pos)) + '</span><div class="grow"><b>' + h(plName(p)) + plTags(p) + "</b><small>" + zn + tr("físico {f} · moral {m}", {f: Math.round(p.fit), m: Math.round(p.mor)}) + '</small></div><span class="lvl">' + eff + "</span></button>";
+      return '<button class="pickrow" data-a="setslot" data-i="' + i + '" data-id="' + p.id + '" aria-pressed="' + (p.id === cur) + '"' + (mAvail(p) ? "" : ' style="opacity:.55"') + '><span class="pp">' + (UIX.hk && UIX.hk.posB ? UIX.hk.posB(p) : h(posAb(p.pos))) + '</span>' + (UIX.hk && UIX.hk.av ? UIX.hk.av(p, 32) : "") + '<div class="grow"><b>' + h(plName(p)) + plTags(p) + (UIX.hk && UIX.hk.lvTag ? UIX.hk.lvTag(p, sp) : "") + "</b><small>" + zn + tr("físico {f} · moral {m}", {f: Math.round(p.fit), m: Math.round(p.mor)}) + '</small></div><span class="lvl">' + eff + "</span></button>";
     }).join("");
     s += "</div>";
     if (cur != null && mPl(cur)) s += '<button class="btn wide" style="margin-top:12px" data-a="pl" data-id="' + cur + '">' + tr("Ver la ficha de {n}", {n: h(plShort(mPl(cur)))}) + "</button>";
