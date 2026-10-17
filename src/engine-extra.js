@@ -519,11 +519,11 @@ function liveStep() {
       L.gu++; L.gmu.push(L.min); L.on[0]++; if (sh) L.sc.push(sh.id);
       var as = chance(0.75) ? liveAssist(L, sh && sh.id) : "";
       L.gl.push({us: 1, n: sn, min: L.min});
-      out.push({t: "goal", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});
+      out.push({t: "goal", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});
       L.ch.push({us: 1, min: L.min, k: "goal"});
-    } else if (mk ? mk === "save" : x < 0.55) { L.on[0]++; out.push({t: "save", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(LIVE_COM.saveUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
-    else if (mk ? mk === "post" : x < 0.62) { out.push({t: "post", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: liveSay(LIVE_COM.postUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: "big"}); }
-    else { out.push({t: "miss", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: liveSay(LIVE_COM.missUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
+    } else if (mk ? mk === "save" : x < 0.55) { L.on[0]++; out.push({t: "save", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(LIVE_COM.saveUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
+    else if (mk ? mk === "post" : x < 0.62) { out.push({t: "post", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: liveSay(LIVE_COM.postUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: "big"}); }
+    else { out.push({t: "miss", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: liveSay(LIVE_COM.missUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
   }
   /* ocasiones del rival */
   if (chance(pt * 5)) {
@@ -535,11 +535,11 @@ function liveStep() {
     if (y < xs2.xg) {
       L.gt++; L.gmt.push(L.min); L.on[1]++;
       L.gl.push({us: 0, n: xn, min: L.min});
-      out.push({t: "goal", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, txt: liveSay(LIVE_COM.goalThem, tp({x: xn}))});
+      out.push({t: "goal", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, d: xs2.d, ly: xs2.y, txt: liveSay(LIVE_COM.goalThem, tp({x: xn}))});
       L.ch.push({us: 0, min: L.min, k: "goal"});
-    } else if (mk2 ? mk2 === "save" : y < 0.55) { L.on[1]++; out.push({t: "save", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, txt: liveSay(LIVE_COM.saveThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
-    else if (mk2 ? mk2 === "post" : y < 0.62) { out.push({t: "post", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, txt: liveSay(LIVE_COM.postThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: "big"}); }
-    else { out.push({t: "miss", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, txt: liveSay(LIVE_COM.missThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
+    } else if (mk2 ? mk2 === "save" : y < 0.55) { L.on[1]++; out.push({t: "save", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, d: xs2.d, ly: xs2.y, txt: liveSay(LIVE_COM.saveThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
+    else if (mk2 ? mk2 === "post" : y < 0.62) { out.push({t: "post", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, d: xs2.d, ly: xs2.y, txt: liveSay(LIVE_COM.postThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: "big"}); }
+    else { out.push({t: "miss", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, d: xs2.d, ly: xs2.y, txt: liveSay(LIVE_COM.missThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
   }
   if (chance(0.025)) {
     var cand = L.xi.filter(function (id) { return id != null && id !== L.red; }), pid = pick(cand), p = mPl(pid);
@@ -724,7 +724,10 @@ var LIVE_SAYLOG = [];
 (function () {
   var _say = liveSay;
   liveSay = function (list, tp) {
-    var i = Math.floor(R() * list.length), txt = tr(list[i], tp);
+    /* si hay un tiro en curso, solo valen los textos que encajan con su distancia (lejano, mano a mano, cabezazo…) */
+    var idx = list.map(function (x, j) { return j; });
+    if (typeof MX_CUR !== "undefined" && MX_CUR && typeof mxTextOk === "function") { var ok = idx.filter(function (j) { return mxTextOk(LIVE_KIND[list[j]], MX_CUR); }); if (ok.length) idx = ok; }
+    var i = idx[Math.floor(R() * idx.length)], txt = tr(list[i], tp);
     LIVE_SAYLOG.push({k: LIVE_KIND[list[i]] || null, txt: txt});
     return txt;
   };

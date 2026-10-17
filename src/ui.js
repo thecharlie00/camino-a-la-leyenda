@@ -2106,7 +2106,7 @@
       var side = e.us === 1 ? me : e.us === 0 ? 1 - me : 0, who = null;
       if (e.us === 1 && e.pid != null) { who = L.xi.indexOf(e.pid); if (who < 0) who = null; }
       if (e.us === 0 && e.ox != null && e.ox >= 0) who = e.ox;
-      Pitch.event({t: e.t, side: side, who: who, k: e.k, txt: e.txt});
+      Pitch.event({t: e.t, side: side, who: who, k: e.k, txt: e.txt, d: e.d, ly: e.ly});
     });
     Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1});
   }

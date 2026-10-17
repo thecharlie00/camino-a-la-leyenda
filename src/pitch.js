@@ -495,11 +495,18 @@ var Pitch = (function () {
     var lane = rnd(-1, 1), st = [], gk = keeper(d);
     var su = k === "long" ? rnd(24, 28) : k === "oneone" ? rnd(10, 13) : k === "cross" ? rnd(7, 10) : k === "volley" ? rnd(14, 17) : k === "dribble" ? rnd(12, 15) : rnd(11, 16);
     var sy = MIDY + (k === "cross" ? lane * 4 : lane * (k === "long" ? 9 : 8));
+    /* 4.1: si el motor dice desde dónde fue el tiro (distancia y desvío lateral del cálculo de xG), se chuta exactamente desde ahí */
+    if (e.d != null && !isNaN(+e.d)) {
+      var ed = +e.d, el = e.ly != null && !isNaN(+e.ly) ? +e.ly : 0;
+      su = k === "cross" ? clamp(ed, 5.5, 11) : k === "oneone" || k === "rebound" ? clamp(ed, 6, 13) : clamp(ed, 6, 32);
+      lane = clamp(el / 8, -1, 1);
+      sy = MIDY + (k === "cross" ? clamp(el, -5, 5) : clamp(el, -13, 13)) * (s === 0 ? 1 : -1);
+    }
     var SX = U(s, LEN - su), SY = sy, shotZ = k === "cross" ? 2.1 : k === "volley" ? 0.8 : 0.15;
     var wy = lane > 0 ? WID - 5 : 5, W = -1;
     if (k === "cross") { var wl = byPos(s, lane > 0 ? (s === 0 ? /^(ED|MD|LD)$/ : /^(EI|MI|LI)$/) : (s === 0 ? /^(EI|MI|LI)$/ : /^(ED|MD|LD)$/), who); W = wl.length ? wl[0] : A; }
     /* 0) recuperar/asegurar el balón; la grada se levanta */
-    st.push([0.2, function () { P.own = s; P.pendOwn = null; P.steal = -1; ensureBall(s, null); P.excT = 0.4; }]);
+    st.push([0.2, function () { P.own = s; P.pendOwn = null; P.steal = -1; ensureBall(s, null); P.excT = 0.4; P.shooter = {s: s, i: who, until: P.ck + 9}; }]);
     if (k === "cross") {
       st.push([0.8, function () {
         var w = pl(s, W); setOv(w, U(s, LEN - 26), wy, 1); setOv(pl(s, who), U(s, LEN - 22), MIDY - lane * 3, 0.8);
@@ -576,6 +583,13 @@ var Pitch = (function () {
     }
     /* el disparo */
     var shotT = res === "goal" ? 0.55 : 0.5, shotIdx = st.length;
+    /* si el rematador está lejos de su punto de remate, la jugada espera a que llegue corriendo (máx. 4 s) */
+    var sp0 = pl(s, who);
+    if (sp0) {
+      var need = Math.sqrt((SX - sp0.x) * (SX - sp0.x) + (SY - sp0.y) * (SY - sp0.y)) / (7.4 * sp0.pace), pre = shotT * 0.4;
+      for (var si = 0; si < st.length; si++) pre += st[si][0];
+      if (need > pre) st.splice(1, 0, [Math.min(4, need - pre), function () { var q = pl(s, who); if (q) setOv(q, SX - dir * 2.5, SY, 1); }]);
+    }
     st.push([shotT, function () { shoot(s, who, res, k, SX, SY, shotZ, shotT, tip); }]);
     /* desenlace */
     if (res === "goal") {
@@ -614,6 +628,18 @@ var Pitch = (function () {
   }
   function shoot(s, who, res, k, SX, SY, z0, T, tip) {
     var d = 1 - s, dir = s === 0 ? 1 : -1, gx = s === 0 ? LEN : 0, b = P.ball, g = pl(d, keeper(d)), p = pl(s, who);
+    P.shooter = null;
+    /* el tiro sale desde donde dice el motor (y el comentario): si el rematador no ha llegado, se coloca */
+    if (p) {
+      var ddx = SX - p.x, ddy = SY - p.y, dd = Math.sqrt(ddx * ddx + ddy * ddy);
+      /* muy lejos (no le dio tiempo): remata el compañero que está en esa zona */
+      if (dd > 10) { var alt = nearestTo(s, SX, SY, true); if (alt >= 0 && pl(s, alt)) { who = alt; p = pl(s, alt); ddx = SX - p.x; ddy = SY - p.y; dd = Math.sqrt(ddx * ddx + ddy * ddy); } }
+      P.snaps = (P.snaps || []).concat([Math.round(dd)]).slice(-30);
+      /* si desde donde está el tiro sigue encajando con el comentario (lejano / dentro del área), no se le mueve */
+      var dg = Math.sqrt((gx - p.x) * (gx - p.x) + (MIDY - p.y) * (MIDY - p.y));
+      var fits = k === "long" ? dg >= 17 : (k === "oneone" || k === "rebound" || k === "cross") ? dg <= 14 : dg <= 23;
+      if (dd > 3.5 && !(fits && dd <= 8)) { var kk = (dd - 1.5) / dd; p.x += ddx * kk; p.y += ddy * kk; p.vx = ddx / dd * 3; p.vy = ddy / dd * 3; }
+    }
     if (p) { b.m = 0; b.hs = s; b.hi = who; }
     b.x = p ? p.x + dir * 0.6 : SX; b.y = p ? p.y : SY; b.z = z0; b.fl = null;
     var curl = k === "long" ? (SY > MIDY ? -1 : 1) * rnd(2.5, 4) : k === "cross" || k === "volley" ? 0 : rnd(-1, 1);
@@ -1136,6 +1162,10 @@ var Pitch = (function () {
       p.dive = null; p.tx = p.x; p.ty = p.y;
     }
     var fat = 0.7 + 0.3 * p.st, vmax = (2.2 + 6.2 * p.sp) * p.pace * fat, acc = p.acc * (0.75 + 0.25 * p.st);
+    /* el rematador de una jugada narrada esprinta para llegar a tiempo a su punto de remate */
+    if (P.shooter && P.shooter.s === s && P.T[s][P.shooter.i] === p && ck < P.shooter.until) {
+      vmax *= 1.35; acc *= 1.4;
+    }
     var sep = separation(p, s), tx0 = p.tx + sep.x, ty0 = p.ty + sep.y;
     var dx = clamp(tx0, p.gone ? -8 : -1, p.gone ? LEN + 8 : LEN + 1) - p.x, dy = clamp(ty0, p.off ? -4 : 0.8, p.off ? WID + 4 : WID - 0.8) - p.y, dist = Math.sqrt(dx * dx + dy * dy);
     var want = dist > 0.12 ? Math.min(vmax, Math.sqrt(2 * acc * 0.75 * dist)) : 0;

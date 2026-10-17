@@ -59,7 +59,7 @@ function mxShot(L, us, sh, big) {
   var xg = clamp(mxSig(z), 0.01, 0.85);
   /* zona del tiro en la rejilla (columna 5 o 0 según quién ataca; carril por la posición lateral) */
   var lane = y < -4 ? 0 : y > 4 ? 2 : 1, col = us ? (d < 17 ? 5 : 4) : (d < 17 ? 0 : 1);
-  return {xg: Math.round(xg * 100) / 100, d: Math.round(d), ang: ang, press: press, fin: fin, zn: lane * 6 + col};
+  return {xg: Math.round(xg * 100) / 100, d: Math.round(d), y: Math.round(y * 10) / 10, big: !!big, ang: ang, press: press, fin: fin, zn: lane * 6 + col};
 }
 /* cansancio por minuto: trabajo de la posición × intensidad táctica × clima × resistencia */
 function mxDecay(L, p, slot) {
@@ -106,6 +106,7 @@ function mxInit(L) {
   liveStart = function () { var L = _start.apply(this, arguments); if (L) mxInit(L); return L; };
   var _step = liveStep;
   liveStep = function () {
+    MX_CUR = null;
     var L = S.live; if (!L || L.done) return _step.apply(this, arguments);
     mxInit(L);
     var out = _step.apply(this, arguments) || [];
@@ -132,7 +133,11 @@ function mxInit(L) {
     if (st === "OPEN_PLAY" && L.st === "HALF_TIME") st = "KICKOFF";
     L.mom = clamp(L.mom + (L.own === 0 ? 0.8 : -0.8), -100, 100);
     L.st = st;
-    out.forEach(function (e) { e.st = st; });
+    out.forEach(function (e) {
+      e.st = st;
+      /* si no había ningún texto que encajara, se ajusta la distancia del dibujo al texto elegido */
+      if (e.d != null && e.k && !mxTextOk(e.k, e)) e.d = e.k === "long" ? Math.max(e.d, 19) : Math.min(e.d, 12);
+    });
     return out;
   };
   var _fin = liveFinish;
@@ -149,7 +154,15 @@ function mxInit(L) {
 function mxShotXG(L, us, sh, big) {
   var s = typeof mxShot === "function" ? mxShot(L, us, sh, big) : {xg: big ? 0.36 : 0.12};
   if (L.xg) L.xg[us ? 0 : 1] += s.xg;
+  MX_CUR = s; /* el comentario de este tiro se elige según su distancia */
   return s;
 }
 /* reparto del resto de un tiro que no es gol (mismas proporciones que el motor original) */
+/* tiro en curso: liveSay solo elige textos que encajen con su distancia (y el campo 2D chuta desde ahí) */
+var MX_CUR = null;
+var MX_KIND_OK = {
+  long: function (c) { return c.d >= 18; }, oneone: function (c) { return c.d <= 13; }, rebound: function (c) { return c.d <= 12; },
+  head: function (c) { return c.d <= 12; }, volley: function (c) { return c.d >= 9 && c.d <= 20; }, dribble: function (c) { return c.d <= 18; }
+};
+function mxTextOk(kind, c) { var f = kind && MX_KIND_OK[kind]; return !f || f(c); }
 function mxMissKind(x, xg) { var r = (x - xg) / Math.max(0.01, 1 - xg); return r < 0.49 ? "save" : r < 0.57 ? "post" : "miss"; }
