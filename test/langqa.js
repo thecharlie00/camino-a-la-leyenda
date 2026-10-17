@@ -27,12 +27,13 @@ const ES_WORDS = /\b(años|temporada|partidos?|jugador(es)?|entrenador|plantilla
   await p.click('[data-a="newgame"]'); await p.click('[data-a="pickmode"][data-v="p"]');
   await p.fill("#fn", "Ana"); await p.fill("#ln", "Prueba"); for (let i = 0; i < 3; i++) await p.click('[data-a="cnext"]');
   await p.click('[data-a="cclub"]'); await p.click('[data-a="cnext"]'); await clickIf('[data-a="objok"]');
-  for (let k = 0; k < 40; k++) { if (await clickIf('[data-a="choose"]')) continue; if (!(await clickIf('[data-a="advance"]'))) break; }
+  for (let k = 0; k < 40; k++) { if (await clickIf('[data-a="drawspeed"][data-v="skip"]')) { await clickIf('[data-a="drawclose"]'); continue; } if (await clickIf('[data-a="choose"]')) continue; if (!(await clickIf('[data-a="advance"]'))) break; }
   const langs = ["en", "de", "it", "fr"];
   for (const l of langs) {
+    await clickIf('[data-a="drawclose"]');
     await p.click('[data-a="menu"]'); await p.click('[data-a="setlang"][data-v="' + l + '"]'); await p.click('.sheet [data-a="close"]');
     for (const t of ["carrera", "jugador", "comp", "hist", "mundo"]) { await clickIf('nav [data-a="tab"][data-t="' + t + '"]'); await scan(l, "jugador/" + t); if (t === "carrera" || t === "jugador") await shot(l + "-jugador-" + t); }
-    for (let k = 0; k < 8; k++) { if (await clickIf('[data-a="choose"]')) continue; if (!(await clickIf('[data-a="advance"]'))) break; }
+    for (let k = 0; k < 8; k++) { if (await clickIf('[data-a="drawspeed"][data-v="skip"]')) { await clickIf('[data-a="drawclose"]'); continue; } if (await clickIf('[data-a="choose"]')) continue; if (!(await clickIf('[data-a="advance"]'))) break; }
     await clickIf('nav [data-a="tab"][data-t="carrera"]'); await scan(l, "jugador/carrera2"); await shot(l + "-carrera2");
     await p.click('[data-a="menu"]'); await scan(l, "menú"); await p.click('[data-a="home"]'); await scan(l, "portada"); await shot(l + "-portada");
     await p.click('[data-a="newgame"]'); await scan(l, "modos"); await shot(l + "-modos");
