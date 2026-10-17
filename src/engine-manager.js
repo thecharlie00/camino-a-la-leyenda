@@ -768,7 +768,10 @@ function mgrMoraleRoles() {
     if (p.prom && avail && share < 0.45) { d -= 10; S.bnews.push({t: "bad", x: tr("{name} se siente engañado: le prometiste ser jugador Clave.", {name: plName(p)})}); p.prom = null; }
     p.mor = clamp(p.mor + d, 0, 100);
     p.bmin = 0;
-    if (p.mor < 30 && !p.req && (p.role === "C" || p.role === "I" || p.ovr >= avg - 1) && chance(0.55)) {
+    /* como mucho una petición de salida por tramo y dos por temporada: que no tape al resto de historias */
+    var rq = m.reqY && m.reqY.y === S.yr ? m.reqY : (m.reqY = {y: S.yr, n: 0, bi: -1});
+    if (p.mor < 30 && !p.req && rq.n < 2 && rq.bi !== S.bi && (p.role === "C" || p.role === "I" || p.ovr >= avg - 1) && chance(0.55)) {
+      rq.n++; rq.bi = S.bi;
       p.req = true; S.bnews.push({t: "bad", x: tr("{name} pide salir del club.", {name: plName(p)})});
       S.pend.push(mp("mev", {id: "m_peticion", pid: p.id}));
     }

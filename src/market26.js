@@ -106,3 +106,20 @@ if (typeof mpScReport === "function") {
   var mpScReport0 = mpScReport;
   mpScReport = function (s, n) { mpMakeTarget._reg = s.reg; try { return mpScReport0(s, n); } finally { mpMakeTarget._reg = null; } };
 }
+/* QA: en la lista del mercado no puede haber dos jugadores con el mismo nombre visible (inicial + apellido) */
+(function () {
+  if (typeof mgrScoutList !== "function") return;
+  var _sl = mgrScoutList;
+  mgrScoutList = function () {
+    var l = _sl.apply(this, arguments);
+    try {
+      var key = function (x) { return (x.fn || "").charAt(0) + "." + x.ln; }, taken = {};
+      (S.m.sq || []).forEach(function (x) { taken[key(x)] = 1; });
+      (l || []).forEach(function (t) {
+        for (var i = 0; i < 6 && taken[key(t)]; i++) { var nm = mName(t.nat); t.fn = nm.fn; t.ln = nm.ln; }
+        taken[key(t)] = 1;
+      });
+    } catch (e) {}
+    return l;
+  };
+})();

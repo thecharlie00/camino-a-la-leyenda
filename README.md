@@ -54,6 +54,24 @@ Para Android Studio, consulta `android-studio/LEEME.md`.
 
 **El keystore y las contraseñas no están en el repositorio a propósito.** Guárdalos aparte: sin ellos no se pueden publicar actualizaciones en Google Play.
 
+## Arquitectura de los módulos
+
+El juego se concatena en el orden de `ORDER` (en `build.py`). Desde la 2.5, las versiones añaden módulos que **envuelven** funciones del motor en vez de editarlas (`mgrFinish = function () { … _orig.apply(this, arguments) … }`). El último módulo cargado es el más externo. Las funciones más envueltas y sus módulos, por orden de carga:
+
+| Función | Módulos que la envuelven |
+|---|---|
+| `mgrPrepFixture` | engine-extra, week29 (preparación), club30 (presidente), story33 (relaciones) |
+| `mgrFinish` | club30 (taquilla y premios), chal32 (rivalidades, récords, diario) |
+| `mgrBlockDone` / `mgrSeasonEnd` / `mgrStartSeason` | club30 (finanzas), chal32 (crisis, desafíos), edit35 (carrera rápida) |
+| `blockDone` / `seasonEnd` (jugador) | life, pets, chal32 (diario), story33 (amistades) |
+| `mgrScoutList` | market26, chal32 (solo cantera) |
+
+Reglas: cada envoltorio llama siempre al original, no cambia su firma y protege su parte con `try` cuando no es esencial. Los datos nuevos viven en campos propios (`S.m.wk`, `S.m.fin`, `S.m.facs`, `S.ch`, `S.diary`, `S.ed`, `S.quick`…) y se crean al vuelo, así las partidas antiguas siguen cargando.
+
+## Pruebas
+
+`node test/audit.js [carreras de jugador] [carreras de míster]` simula carreras largas y avisa de valores fuera de rango, decisiones atascadas, duplicados en la plantilla, excepciones, eventos repetidos y nombres duplicados. `node test/langqa.js` busca restos de castellano en los otros idiomas.
+
 ## Hoja de ruta
 
 Una versión nueva cada día; el plan y el estado de cada versión están en la hoja de ruta del proyecto.

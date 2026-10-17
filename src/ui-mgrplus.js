@@ -83,7 +83,7 @@
     ["POR", "DEF", "MED", "DEL"].forEach(function (g) {
       var l = pool.filter(function (x) { return W.pos[x.pos].g === g; }).slice(0, 18);
       if (!l.length) return;
-      o += '<div class="sgroup">' + h(g) + "</div>" + l.map(function (x) {
+      o += '<div class="sgroup">' + h(tr(g)) + "</div>" + l.map(function (x) {
         return '<button class="pickrow mpnat" data-a="mpnattg" data-v="' + h(x.k) + '" aria-pressed="' + !!on2[x.k] + '"><span class="pp">' + h(posAb(x.pos)) + '</span><div class="grow"><b>' + h((x.fn ? x.fn.charAt(0) + ". " : "") + x.ln) + (x.mine ? " ⭐" : "") + '</b><small class="muted">' + h(x.club != null && x.club >= 0 ? clubName(x.club) : "") + '</small></div><span class="lvl">' + Math.round(x.ovr) + "</span></button>";
       }).join("");
     });

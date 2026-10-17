@@ -693,18 +693,7 @@ function liveTacMul(L) {
 }
 function liveTacShare(L) { return liveTacMul(L)[2]; }
 /* táctica (solo visual) del rival: estable por club */
-function liveOppTac(L) {
-  var f = S.cur && S.cur.pm ? S.cur.pm[L.fi] : null, c = f ? Math.abs(+f.opp || 0) : 0;
-  return {line: (c * 7) % 3, width: (c * 5 + 1) % 3, pass: (c * 11 + 2) % 3, tempo: 1};
-}
 /* energía (0..1) de un jugador tuyo en el campo y del rival, para el anillo de cansancio */
-function liveStam(L, id) {
-  var p = mPl(id), t = liveTac(L), on = 0;
-  (L.subs || []).forEach(function (s) { if (s["in"] === id) on = s.min; });
-  var k = 0.0042 * (t.tempo === 2 ? 1.25 : t.tempo === 0 ? 0.85 : 1) * (t.line === 2 ? 1.12 : 1);
-  return clamp((p ? p.fit : 90) / 100 - Math.max(0, L.min - on) * k, 0.05, 1);
-}
-function liveStamOpp(L) { return clamp(0.97 - (L.min || 0) * 0.0042, 0.1, 1); }
 /* tipo de jugada de cada plantilla de comentario (para el campo 2D) */
 var LIVE_KIND = {
   "{a} conduce por la banda y busca el desmarque.": "wing", "Combinación rápida entre {a} y {b} en tres cuartos.": "combo", "{a} filtra un pase entre líneas…": "through",

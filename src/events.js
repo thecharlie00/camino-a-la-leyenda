@@ -146,7 +146,6 @@ function nearPos(pos) {
   return {DC: ["ED", "EI", "MCO"], ED: ["DC", "MD", "EI"], EI: ["DC", "MI", "ED"], MD: ["ED", "LD", "MC"], MI: ["EI", "LI", "MC"], MCO: ["MC", "DC", "ED"],
     MC: ["MCD", "MCO", "MD"], MCD: ["DFC", "MC"], DFC: ["MCD", "LD", "LI"], LD: ["DFC", "MD", "LI"], LI: ["DFC", "MI", "LD"], POR: []}[pos] || [];
 }
-function rnd5(x) { return Math.round(x * 20) / 20; }
 
 /* ============ DECISIONES DE CARRERA (manuales) ============ */
 EV({id: "agente", tipo: "real", cat: "Representación", manual: true, title: "Elige a tu agente",

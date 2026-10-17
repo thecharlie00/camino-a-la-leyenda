@@ -86,6 +86,8 @@
   function quickChip() { var n = quickLeft(); return n >= 0 ? '<div class="qchip">⏱️ ' + trn(n, "Carrera rápida: queda {n} temporada", "Carrera rápida: quedan {n} temporadas") + "</div>" : ""; }
   U.add("carreraTop", function () { return S && S.mode !== "mgr" && S.ph !== "ret" ? quickChip() : ""; });
   U.add("clubTop", function () { return S && S.mode === "mgr" && S.ph !== "ret" ? quickChip() : ""; });
+  /* semana de trabajo y cuentas del club: arriba del todo, plegadas, para que se encuentren */
+  U.add("clubTop", function () { return (U.weekCard ? U.weekCard() : "") + (U.finCard ? U.finCard() : ""); });
 
   /* ---------- editor de la partida ---------- */
   U.actions.editor = function () { var ui = U.ui(); ui.edTab = ui.edTab || "cl"; if (ui.edLg == null) { var me = U.myClub(); ui.edLg = me >= 0 ? S.cl[me] : 0; } U.open("editor"); };

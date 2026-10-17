@@ -49,21 +49,13 @@
   };
   U.actions.ach = function () { U.open("ach"); };
   /* aviso al desbloquear: se comprueba después de cada pintado */
-  var achBusy = false;
   U.add("after", function () {
-    if (!S || UIX.ui().view !== "game" || achBusy) return;
+    if (!S || UIX.ui().view !== "game") return;
     var nw = achCheck();
     if (S.achN0 != null) { var n0 = S.achN0; delete S.achN0; if (n0) setTimeout(function () { U.toast(trn(n0, "Ya tienes {n} logro: míralo en «Más».", "Ya tienes {n} logros: míralos en «Más».")); }, 400); U.persist(); return; }
     if (!nw.length) return;
     U.persist();
-    achBusy = true;
-    nw.forEach(function (a, i) {
-      setTimeout(function () {
-        U.toast(a[1] + " " + tr("Logro: {n}", {n: tr(a[2])}));
-        if (i === 0) U.edgeFlash(true);
-        if (i === nw.length - 1) achBusy = false;
-      }, 300 + i * 2600);
-    });
+    nw.forEach(function (a, i) { U.toast(a[1] + " " + tr("Logro: {n}", {n: tr(a[2])})); if (i === 0) U.edgeFlash(true); });
   });
 
   /* ---------- primera temporada guiada ---------- */

@@ -14,7 +14,7 @@
       tr("Equipo {st}.", {st: h(tr(st.n))}) + (rp.weak ? " " + tr("Punto débil: {w}.", {w: h(tr(rp.weak))}) : " " + tr("Con un segundo de 3 estrellas sabrás su punto débil.")) + "</small>" +
       (rp.rec ? '<small class="wkrec">' + tr("Tu segundo recomienda: {p}.", {p: "<b>" + h(tr(WK_PREP[rp.rec].n)) + "</b>"}) + (w.prep === rp.rec ? " ✓" : "") + "</small>" : "") + "</div></div>";
   }
-  U.add("club", function () {
+  U.weekCard = (function () { return function () {
     if (!wkOn() || S.ph === "ret" || (typeof presOn === "function" && presOn())) return "";
     var w = wkOf(), P = WK_PREP[w.prep] || WK_PREP.gen;
     var sum = tr("Carga {l} · {p}", {l: tr(WK_LOAD[w.load].n).toLowerCase(), p: tr(P.n)});
@@ -31,7 +31,7 @@
         (max ? '<span class="muted wkmax">' + tr("Al máximo") + "</span>" : '<button class="btn sm" data-a="wkhire" data-v="' + k + '">' + tr("Mejorar · {c}", {c: fmtMoney(wkStaffCost(k))}) + "</button>") + "</li>";
     }).join("") + '</ul><p class="muted wkd">' + tr("Se paga del presupuesto de fichajes ({b} disponibles). Tu cuerpo técnico te sigue si cambias de club.", {b: fmtMoney(S.m.bud)}) + "</p></div>";
     return o + "</div></details>";
-  });
+  }; })();
   function save() { U.persist(); U.render(false); }
   U.actions.wkload = function (b, v) { wkOf().load = +v; save(); };
   U.actions.wkprep = function (b, v) { if (WK_PREP[v]) { wkOf().prep = v; save(); } };

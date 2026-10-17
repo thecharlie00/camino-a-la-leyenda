@@ -414,22 +414,6 @@ function mpParentOf(c) {
 }
 function mpTopLg(c) { var li = S && S.cl ? S.cl[c] : null; if (li == null || li < 0) li = W.clubs[c].lg0; return li != null && li >= 0 && W.lg[li] && W.lg[li].t === 1; }
 /* filial de un club grande: el real si existe; si no, un club modesto del país hace de filial convenido */
-function mpReserveOf(par) {
-  W.mpRes = W.mpRes || {};
-  if (W.mpRes[par] != null) return W.mpRes[par];
-  var r = -1;
-  for (var i = 0; i < W.clubs.length; i++) if (i !== par && W.clubs[i].lg0 != null && W.clubs[i].lg0 >= 0 && mpParentOf(i) === par) { r = i; break; }
-  return (W.mpRes[par] = r);
-}
-function mpAffiliateOf(par) {
-  var ci = W.clubs[par].ci, r0 = W.clubs[par].r0, best = -1, bv = 1e9;
-  W.clubs.forEach(function (cl, i) {
-    if (i === par || cl.ci !== ci || cl.lg0 == null || cl.lg0 < 0 || !W.lg[cl.lg0] || W.lg[cl.lg0].t < 2) return;
-    var v = Math.abs(cl.r0 - (r0 - 16)) + (W.lg[cl.lg0].t === 2 ? 4 : 0);
-    if (v < bv) { bv = v; best = i; }
-  });
-  return best;
-}
 function mpFil() { return mpOn() && S.m.xp && S.m.xp.fil && S.m.xp.fil.club === S.m.club ? S.m.xp.fil : null; }
 function mpFilSnap() { var f = mpFil(); if (!f) return; f.o0 = {}; mActive().forEach(function (p) { f.o0[p.id] = p.ovr; }); f.y = S.yr; }
 var MP_FIL_OBJ = [N_("Cumplir el objetivo de liga"), N_("Dar 10 partidos o más a tres jugadores de 21 años o menos"), N_("Que dos jugadores mejoren su media 2 puntos")];
@@ -654,10 +638,6 @@ function mpNatCmpName(rec) {
   return trComp(String(rec.cmp).replace(/ \d{4}$/, ""));
 }
 /* texto de un acontecimiento de la narración */
-function mpNatEvText(rec, e) {
-  var nt = mpNT(), us = natName(nt ? nt.ni : S.m.nat), list = MP_NCOM[e[1]] || [""], t = list[e[2] % list.length] || list[0];
-  return tr(t, {us: us, them: natName(rec.opp), a: e[3] || "", b: e[4] || "", g1: e[5], g2: e[6]});
-}
 MPH.mpnatoff = {
   fixed: true,
   head: function (x) { var ni = x.list[0], m = S.m;

@@ -137,7 +137,6 @@ var ATT_AB = {
   it: {RIT: "VEL", TIR: "TIR", PAS: "PAS", REG: "DRI", DEF: "DIF", FIS: "FIS", EST: "TUF", PAR: "PRE", SAQ: "RIN", REF: "RIF", VEL: "VEL", COL: "PIA"},
   fr: {RIT: "VIT", TIR: "TIR", PAS: "PAS", REG: "DRI", DEF: "DEF", FIS: "PHY", EST: "PLO", PAR: "JMA", SAQ: "JPI", REF: "REF", VEL: "VIT", COL: "PLA"}
 };
-function attAb(k) { var m = ATT_AB[LANG]; return (m && m[k]) || k; }
 /* nombre de premio: los nuevos guardan plantilla y parámetros; los antiguos solo el texto */
 function awd(k, tk, tp, y) { return {k: k, n: fillT(tk, tp), tk: tk, tp: tp || null, y: y}; }
 function awardName(a) { return a && a.tk ? tr(a.tk, trParams(a.tp)) : trComp(a ? a.n : ""); }

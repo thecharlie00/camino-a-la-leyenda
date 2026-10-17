@@ -13,7 +13,7 @@
     if (net < -R0 * 0.08) return ['<b class="led">' + tr("Vigilado") + "</b>", tr("Si las pérdidas siguen creciendo, llegará una multa al final de la temporada.")];
     return ['<b class="pos">' + tr("En regla") + "</b>", tr("Cumples el juego limpio financiero.")];
   }
-  U.add("club", function () {
+  U.finCard = (function () { return function () {
     if (!finOn() || S.ph === "ret") return "";
     var m = S.m, F = finOf(), fac = facOf(), net = finIn(F) - finOut(F), st = ffp(), own = !!m.owner;
     var o = '<details class="card mpcard fold fincard" data-fold="fin"' + (foldOpen("fin", false) ? " open" : "") + '><summary class="head"><span class="tag real"><span class="dot"></span>' + tr("El club por dentro") + '</span><span class="eyebrow">' + tr("Balance {v}", {v: money(net, true)}) + "</span></summary>" + '<div class="stack wkbody">';
@@ -33,7 +33,7 @@
     }).join("") + '</ul><p class="muted wkd">' + tr("Las obras y mejoras se pagan del presupuesto de fichajes ({b} disponibles).", {b: fmtMoney(m.bud)}) + "</p></div>";
     if (m.finH && m.finH.length) o += '<div><label class="lbl">' + tr("Temporadas anteriores") + '</label><div class="kvlist">' + m.finH.slice(-4).reverse().map(function (r) { return row(seasonLabel(r.y) + " · " + clubName(r.club), money(r.net, true), r.net >= 0 ? "pos" : "neg"); }).join("") + "</div></div>";
     return o + "</div></details>";
-  });
+  }; })();
   function save() { U.persist(); U.render(false); }
   U.actions.finprice = function (b, v) { facOf().price = +v; save(); };
   U.actions.facbuild = function (b, v) {

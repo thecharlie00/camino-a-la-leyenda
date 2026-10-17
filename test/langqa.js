@@ -13,7 +13,7 @@ const ES_WORDS = /\b(años|temporada|partidos?|jugador(es)?|entrenador|plantilla
   p.on("pageerror", e => errs.push("pageerror: " + e.message));
   await p.goto("file://" + path.join(__dirname, "../dist/index.html"));
   await p.waitForTimeout(250);
-  const clickIf = async (sel) => { const e = await p.$(sel); if (e) { await e.click(); await p.waitForTimeout(70); return true; } return false; };
+  const clickIf = async (sel) => { await p.evaluate(() => { if (window.S) { S.noLiveAuto = true; if (S.m) { S.m.xp = S.m.xp || {}; S.m.xp.live = 0; } } const lv = document.getElementById("live"); if (lv) { const b = lv.querySelector('[data-a="lsim"]') || lv.querySelector('[data-a="lvclose"]'); if (b) b.click(); } }); const e = await p.$(sel); if (e) { await e.click(); await p.waitForTimeout(70); return true; } return false; };
   const found = {};
   const scan = async (lang, label) => {
     const txt = await p.evaluate(() => document.body.innerText);
@@ -25,7 +25,8 @@ const ES_WORDS = /\b(años|temporada|partidos?|jugador(es)?|entrenador|plantilla
   await p.click('[data-a="setlang"][data-v="es"]');
   /* crear una partida de cada modo en castellano */
   await p.click('[data-a="newgame"]'); await p.click('[data-a="pickmode"][data-v="p"]');
-  await p.fill("#fn", "Ana"); await p.fill("#ln", "Prueba"); for (let i = 0; i < 4; i++) await p.click('[data-a="cnext"]');
+  await p.fill("#fn", "Ana"); await p.fill("#ln", "Prueba"); for (let i = 0; i < 3; i++) await p.click('[data-a="cnext"]');
+  await p.click('[data-a="cclub"]'); await p.click('[data-a="cnext"]'); await clickIf('[data-a="objok"]');
   for (let k = 0; k < 40; k++) { if (await clickIf('[data-a="choose"]')) continue; if (!(await clickIf('[data-a="advance"]'))) break; }
   const langs = ["en", "de", "it", "fr"];
   for (const l of langs) {

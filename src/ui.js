@@ -64,9 +64,20 @@
   function isMgr() { return !!S && S.mode === "mgr"; }
   function myClub() { return isMgr() ? S.m.club : S.p.club; }
   function myNat() { return isMgr() ? -1 : S.p.inat; }
+  /* avisos breves en cola: nunca se pisan dos a la vez; los repetidos seguidos se descartan */
+  var TQ = [], TBUSY = false;
   function toast(t) {
+    if (!t) return;
+    if (TQ.length && TQ[TQ.length - 1] === t) return;
+    if (TQ.length >= 4) TQ.shift();
+    TQ.push(t); if (!TBUSY) toastNext();
+  }
+  function toastNext() {
+    var t = TQ.shift(); if (t == null) { TBUSY = false; return; }
+    TBUSY = true;
     var el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status"); el.textContent = t;
-    document.body.appendChild(el); setTimeout(function () { el.remove(); }, 2600);
+    document.body.appendChild(el);
+    setTimeout(function () { el.remove(); setTimeout(toastNext, 120); }, TQ.length ? 2000 : 2600);
   }
   function pctList(outs) {
     var raw = outs.map(function (u) { return u.p * 100; }), r = raw.map(Math.round), d = 100 - r.reduce(function (a, b) { return a + b; }, 0);
@@ -830,7 +841,8 @@
   function newsList() {
     var l = S.feed.filter(function (c) { return !c.hid; });
     if (!l.length) return "";
-    return '<h3 class="sech">' + tr("Novedades") + '</h3><p class="sechint">' + tr("Toca para abrir · desliza a la derecha para quitar") + "</p>" + l.map(function (c, i) { return i === 0 || c.id === UI.flash ? feedCardSw(c) : feedRow(c); }).join("");
+    return '<h3 class="sech">' + tr("Novedades") + '</h3><p class="sechint">' + tr("Toca para abrir · desliza a la derecha para quitar") + "</p>" + l.slice(0, UI.feedAll ? l.length : 6).map(function (c, i) { return i === 0 || c.id === UI.flash ? feedCardSw(c) : feedRow(c); }).join("") +
+      (!UI.feedAll && l.length > 6 ? '<button class="btn wide feedmore" data-a="feedall">' + trn(l.length - 6, "Ver {n} novedad más", "Ver {n} novedades más") + "</button>" : "");
   }
   /* tarjetas del muro: se pueden descartar deslizando a la derecha */
   function feedCardSw(c) {
@@ -2243,7 +2255,7 @@
     var a = b.getAttribute("data-a"), id = +b.getAttribute("data-id"), v = b.getAttribute("data-v");
     if (UIX.actions[a]) { try { UIX.actions[a](b, v, b.getAttribute("data-id")); } catch (err) { console.error(err); } return; }
     switch (a) {
-      case "advance": doAdvance(); break;
+      case "advance": UI.feedAll = false; doAdvance(); break;
       case "choose": doChoose(+b.getAttribute("data-i")); break;
       case "tab": UI.tab = b.getAttribute("data-t"); render(true); break;
       case "more": UI.exp[id] = !UI.exp[id]; render(false); break;
@@ -2308,6 +2320,7 @@
       /* plantilla */
       case "pl": UI.sheet = {k: "pl", id: id}; renderSheet(); break;
       case "slot": UI.sheet = {k: "slot", i: +b.getAttribute("data-i")}; renderSheet(); break;
+      case "feedall": UI.feedAll = true; render(false); break;
       case "msim":
         if (S.pend[0] && S.pend[0].k === "moment") { var nOpt = document.querySelectorAll('.decision [data-a="choose"]').length || 2, ri0 = Math.floor(Math.random() * nOpt); var cb0 = document.querySelector('.decision [data-a="choose"][data-i="' + ri0 + '"]'); if (cb0) cb0.click(); }
         break;

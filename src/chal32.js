@@ -74,7 +74,6 @@ function chalEnd(medal, why) {
 /* ---------- rivalidades y crisis (míster) ---------- */
 function rvOf() { var m = S.m; m.rv = m.rv || {}; return m.rv; }
 function rvTop(n) { var rv = rvOf(); return Object.keys(rv).map(Number).filter(function (c) { return rv[c] >= 2 && W.clubs[c]; }).sort(function (a, b) { return rv[b] - rv[a]; }).slice(0, n || 3); }
-function crisisOf() { return S.m.crisis || 0; }
 (function () {
   if (typeof mgrFinish !== "function") return;
   var _fin = mgrFinish;

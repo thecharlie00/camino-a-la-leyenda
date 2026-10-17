@@ -150,8 +150,6 @@ function namePool(ni) {
 }
 function natLive(i) { return !!W.ctry[i] && W.ctry[i].conf !== "NONE"; }
 function natName(n) { return W.ctry[n] ? tr(W.ctry[n].n) : "—"; }
-function teamName(nat, t) { return nat ? natName(t) : clubName(t); }
-function leagueOf(c) { return S.cl[c]; }
 
 /* ---------- estado dinámico del mundo ---------- */
 function initWorld() {
@@ -184,7 +182,6 @@ function tblAdd(row, gf, ga) {
   row[0]++; row[4] += gf; row[5] += ga;
   if (gf > ga) { row[1]++; row[6] += 3; } else if (gf === ga) { row[2]++; row[6] += 1; } else row[3]++;
 }
-function teamR(c, t) { return c && c.nat ? S.nr[t] : S.cr[t]; }
 function sortTable(tm, tb, nat) {
   var rt = nat ? S.nr : S.cr;
   var idx = tm.map(function (_, i) { return i; });
@@ -424,7 +421,6 @@ function compFixtures(c, w) {
   return out;
 }
 function compOfFixture(f) { return f.ck.charAt(0) === "L" && f.ck.charAt(1) === ":" ? null : S.C[f.ck]; }
-function fixtureIsNat(f) { var c = compOfFixture(f); return !!(c && c.nat); }
 /* agregado previo de una eliminatoria desde la perspectiva de f.h / f.a */
 function aggBefore(f) {
   var c = S.C[f.ck], t = c.ko.r[f.ri].ties[f.ti], A = 0, B = 0;
