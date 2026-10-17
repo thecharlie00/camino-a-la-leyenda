@@ -73,6 +73,19 @@ function plPhy(p) {
 /* 0 fresco (80-99), 1 fatiga moderada (60-79), 2 agotado (<60) */
 function phyLv(v) { return v >= 80 ? 0 : v >= 60 ? 1 : 2; }
 
+/* ---------- atributos del campo 2D (4.2): pase, entrada y colocación (1-99, deterministas, suben con la media) ---------- */
+var PL_PAS_POS = {MC: 8, MCO: 9, MCD: 5, LD: 1, LI: 1, MD: 3, MI: 3, ED: 1, EI: 1, DFC: -5, DC: -4, POR: -12};
+var PL_ENT_POS = {DFC: 12, MCD: 10, LD: 7, LI: 7, MC: 2, MD: -3, MI: -3, MCO: -8, ED: -9, EI: -9, DC: -11, POR: -18};
+var PL_COL_POS = {DFC: 9, MCD: 7, POR: 6, LD: 4, LI: 4, MC: 3, MCO: 0, MD: 0, MI: 0, ED: -2, EI: -2, DC: 2};
+function plAttr(p, salt, bias, ageK) {
+  if (!p) return 50;
+  var h = sq37Hash(p, salt), base = 50 + (h % 22) + (bias[p.pos] || 0) + ((p.ovr || 60) - 65) * 0.55 + ageK;
+  return Math.round(clamp(base, 20, 97));
+}
+function plPas(p) { return plAttr(p, "pas", PL_PAS_POS, 0); }
+function plEnt(p) { return plAttr(p, "ent", PL_ENT_POS, p ? -Math.max(0, (p.age || 25) - 31) * 1.5 : 0); }
+function plCol(p) { return plAttr(p, "col", PL_COL_POS, p ? clamp(((p.age || 25) - 24) * 0.6, -3, 5) : 0); }
+
 (function () {
   if (typeof mgrFinish !== "function") return;
   var _f = mgrFinish;

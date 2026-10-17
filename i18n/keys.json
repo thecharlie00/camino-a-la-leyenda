@@ -211,7 +211,8 @@
  "Pase": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:60"
+   "ui-guide.js:60",
+   "ui-37.js:58"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
@@ -278,7 +279,8 @@
  "Colocación": {
   "w": [
    "engine-player.js:16",
-   "ui-guide.js:69"
+   "ui-guide.js:69",
+   "ui-37.js:58"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
  },
@@ -26740,7 +26742,7 @@
    "engine-extra.js:522",
    "engine-extra.js:524"
   ],
-  "ctx": "out.push({t: \"goal\", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: (big ? tr(\"¡Ocasión clarísima!\") + \" \" : \"\") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});"
+  "ctx": "out.push({t: \"goal\", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: (big ? tr(\"¡Ocasión clarísima!\") + \" \" : \"\") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});"
  },
  "Falta de {name}, que ya tenía amarilla: segunda amarilla y roja. Os quedáis con diez.": {
   "w": [
@@ -27100,7 +27102,7 @@
  },
  "Cambias «{k}»: {o}.": {
   "w": [
-   "engine-extra.js:752"
+   "engine-extra.js:755"
   ],
   "ctx": "L.ev.unshift({t: \"tac\", min: L.min, txt: tr(\"Cambias «{k}»: {o}.\", {k: tr(LIVE_TAC[k].n), o: tr(LIVE_TAC[k].o[v])})});"
  },
@@ -35496,19 +35498,19 @@
  },
  "Silenciar el ambiente del estadio": {
   "w": [
-   "pitch.js:235"
+   "pitch.js:241"
   ],
   "ctx": "P.btn.setAttribute(\"aria-label\", on ? tr(\"Silenciar el ambiente del estadio\") : tr(\"Activar el ambiente del estadio\"));"
  },
  "Activar el ambiente del estadio": {
   "w": [
-   "pitch.js:235"
+   "pitch.js:241"
   ],
   "ctx": "P.btn.setAttribute(\"aria-label\", on ? tr(\"Silenciar el ambiente del estadio\") : tr(\"Activar el ambiente del estadio\"));"
  },
  "FUERA DE JUEGO": {
   "w": [
-   "pitch.js:816",
+   "pitch.js:848",
    "ui.js:2063"
   ],
   "ctx": "Snd.whistle([0.28]); P.stopUntil = P.ck + 2.2; P.msg = {t: P.lab.off || tr(\"FUERA DE JUEGO\"), s: -1, at: P.ck, small: true};"
@@ -36167,14 +36169,14 @@
  "año": {
   "w": [
    "ui.js:685",
-   "ui.js:2428"
+   "ui.js:2431"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
  "{pct} % de lo que piden": {
   "w": [
    "ui.js:685",
-   "ui.js:2429"
+   "ui.js:2432"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
@@ -36681,7 +36683,7 @@
  "Novedades": {
   "w": [
    "ui.js:844",
-   "ui-37.js:118"
+   "ui-37.js:119"
   ],
   "ctx": "return '<h3 class=\"sech\">' + tr(\"Novedades\") + '</h3><p class=\"sechint\">' + tr(\"Toca para abrir · desliza a la derecha para quitar\") + \"</p>\" + l.slice(0, UI.feedAll ? l.length : 6).map(function (c, i) { return i === 0 |"
  },
@@ -38823,7 +38825,7 @@
   "w": [
    "ui.js:1548",
    "ui.js:1549",
-   "ui.js:2440"
+   "ui.js:2443"
   ],
   "ctx": "s += '<div class=\"clubprev\">' + crestRaw(c.col, ab, true, c.crest) + (typeof kitSVG === \"function\" ? kitSVG({pat: c.kit.pat, col: [c.col[0], c.col[1], c.kit.col3], big: true}) : \"\") + '<div class=\"grow\"><b>' + h(c.cn || "
  },
@@ -40009,165 +40011,165 @@
  },
  "El banquillo está completo: suéltalo encima de un suplente para cambiarlos.": {
   "w": [
-   "ui.js:2202",
-   "ui.js:2338"
+   "ui.js:2205",
+   "ui.js:2341"
   ],
   "ctx": "if (res === \"full\") toast(tr(\"El banquillo está completo: suéltalo encima de un suplente para cambiarlos.\"));"
  },
  "Ese jugador no puede jugar en esa posición.": {
   "w": [
-   "ui.js:2203",
-   "ui.js:2334"
+   "ui.js:2206",
+   "ui.js:2337"
   ],
   "ctx": "else if (res === \"pos\") toast(tr(\"Ese jugador no puede jugar en esa posición.\"));"
  },
  "Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.": {
   "w": [
-   "ui.js:2276",
-   "ui.js:2286"
+   "ui.js:2279",
+   "ui.js:2289"
   ],
   "ctx": "if (slotsNow().length >= MAX_SLOTS) { toast(tr(\"Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.\", {n: MAX_SLOTS})); UI.view = \"load\"; render(true); break; }"
  },
  "Partida borrada": {
   "w": [
-   "ui.js:2299"
+   "ui.js:2302"
   ],
   "ctx": "UI.sheet = null; render(false); toast(tr(\"Partida borrada\"));"
  },
  "Código copiado": {
   "w": [
-   "ui.js:2305",
-   "ui.js:2307"
+   "ui.js:2308",
+   "ui.js:2310"
   ],
   "ctx": "if (window.AndroidBridge && window.AndroidBridge.copy) { try { window.AndroidBridge.copy(code); toast(tr(\"Código copiado\")); break; } catch (err) {} }"
  },
  "Selecciona y copia el texto": {
   "w": [
-   "ui.js:2307",
-   "ui.js:2308"
+   "ui.js:2310",
+   "ui.js:2311"
   ],
   "ctx": "navigator.clipboard.writeText(code).then(function () { toast(tr(\"Código copiado\")); }, function () { ta.select(); toast(tr(\"Selecciona y copia el texto\")); });"
  },
  "No se pudo empezar la carrera de entrenador.": {
   "w": [
-   "ui.js:2317"
+   "ui.js:2320"
   ],
   "ctx": "try { startManager(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la carrera de entrenador.\")); break; }"
  },
  "No puedes fichar por ese club ahora.": {
   "w": [
-   "ui.js:2321"
+   "ui.js:2324"
   ],
   "ctx": "if (mgrTakeJob(+v)) { UI.sheet = null; UI.tab = \"club\"; persist(); render(true); } else toast(tr(\"No puedes fichar por ese club ahora.\"));"
  },
  "Hecho: {n} cambio en el once.": {
   "w": [
-   "ui.js:2331"
+   "ui.js:2334"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:singular"
  },
  "Hecho: {n} cambios en el once.": {
   "w": [
-   "ui.js:2331"
+   "ui.js:2334"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:plural"
  },
  "No hay suplentes disponibles para esas posiciones.": {
   "w": [
-   "ui.js:2331"
+   "ui.js:2334"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;"
  },
  "Once ideal y banquillo colocados": {
   "w": [
-   "ui.js:2341"
+   "ui.js:2344"
   ],
   "ctx": "case \"bestxi\": S.m.xi = mBestXI(S.m.form); S.m.bench = mBestBench(S.m.xi); persist(); render(false); toast(tr(\"Once ideal y banquillo colocados\")); break;"
  },
  "En la lista de venta: llegarán más ofertas": {
   "w": [
-   "ui.js:2345"
+   "ui.js:2348"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya no está en venta": {
   "w": [
-   "ui.js:2345"
+   "ui.js:2348"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya negociasteis en este tramo.": {
   "w": [
-   "ui.js:2346"
+   "ui.js:2349"
   ],
   "ctx": "case \"mrenew\": openPend(mgrStartRenew(id), tr(\"Ya negociasteis en este tramo.\")); break;"
  },
  "Ya hablasteis en este tramo.": {
   "w": [
-   "ui.js:2347"
+   "ui.js:2350"
   ],
   "ctx": "case \"mtalk\": openPend(mgrStartTalk(id), tr(\"Ya hablasteis en este tramo.\")); break;"
  },
  "Nadie ha preguntado por él ahora mismo.": {
   "w": [
-   "ui.js:2348"
+   "ui.js:2351"
   ],
   "ctx": "case \"msell\": openPend(mgrStartSell(id), tr(\"Nadie ha preguntado por él ahora mismo.\")); break;"
  },
  "Ningún club puede acogerle ahora.": {
   "w": [
-   "ui.js:2349"
+   "ui.js:2352"
   ],
   "ctx": "case \"mloan\": openPend(mgrStartLoan(id), tr(\"Ningún club puede acogerle ahora.\")); break;"
  },
  "Nombre cambiado": {
   "w": [
-   "ui.js:2354"
+   "ui.js:2357"
   ],
   "ctx": "if (mgrRename(id, nf ? nf.value : \"\", nl ? nl.value : \"\")) { persist(); UI.sheet = {k: \"pl\", id: id}; renderSheet(); render(false); toast(tr(\"Nombre cambiado\")); }"
  },
  "Escribe al menos un nombre.": {
   "w": [
-   "ui.js:2355"
+   "ui.js:2358"
   ],
   "ctx": "else toast(tr(\"Escribe al menos un nombre.\"));"
  },
  "Ahora no se puede negociar.": {
   "w": [
-   "ui.js:2359",
+   "ui.js:2362",
    "ui-mgrplus.js:50"
   ],
   "ctx": "case \"mbid\": openPend(mgrStartBid(b.getAttribute(\"data-id\")), tr(\"Ahora no se puede negociar.\")); break;"
  },
  "Nuevo informe de ojeadores": {
   "w": [
-   "ui.js:2360"
+   "ui.js:2363"
   ],
   "ctx": "case \"mscout\": var mk = S.m.mk; if (mk.open && !mk.ref) { mk.ref = true; mk.list = mk.list.filter(function (t) { return t.done; }).concat(mgrScoutList(12)); persist(); render(false); toast(tr(\"Nuevo informe de ojeadores\""
  },
  "Objetivos fijados. ¡A por ellos!": {
   "w": [
-   "ui.js:2370"
+   "ui.js:2373"
   ],
   "ctx": "case \"objok\": if (confirmObjChoice()) { persist(); toast(tr(\"Objetivos fijados. ¡A por ellos!\")); render(true); } break;"
  },
  "Perfil actualizado": {
   "w": [
-   "ui.js:2395"
+   "ui.js:2398"
   ],
   "ctx": "UI.sheet = null; persist(); render(false); toast(tr(\"Perfil actualizado\"));"
  },
  "Plantilla nueva generada": {
   "w": [
-   "ui.js:2414"
+   "ui.js:2417"
   ],
   "ctx": "case \"redraft\": clubRedraft(); persist(); render(false); toast(tr(\"Plantilla nueva generada\")); break;"
  },
  "No se pudo empezar la temporada.": {
   "w": [
-   "ui.js:2416"
+   "ui.js:2419"
   ],
   "ctx": "try { clubStart(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la temporada.\")); break; }"
  },
@@ -43776,140 +43778,152 @@
   ],
   "ctx": "'<div class=\"phyparts\"><span>' + tr(\"Resistencia\") + \" <b>\" + plRes(p) + \"</b></span><span>\" + tr(\"Condición\") + \" <b>\" + Math.round(p.fit) + \"</b></span><span>\" + tr(\"Fuerza y ritmo\") + \" <b>\" + plFza(p) + \"</b></span><"
  },
- "Riesgo alto de lesión y bajón en la segunda parte. Mejor que descanse.": {
+ "En el campo 2D": {
   "w": [
    "ui-37.js:58"
+  ],
+  "ctx": "'<div class=\"lbl phy2d\">' + tr(\"En el campo 2D\") + '</div><div class=\"phyparts\"><span>' + tr(\"Pase\") + \" <b>\" + plPas(p) + \"</b></span><span>\" + tr(\"Entrada\") + \" <b>\" + plEnt(p) + \"</b></span><span>\" + tr(\"Colocación\") "
+ },
+ "Entrada": {
+  "w": [
+   "ui-37.js:58"
+  ],
+  "ctx": "'<div class=\"lbl phy2d\">' + tr(\"En el campo 2D\") + '</div><div class=\"phyparts\"><span>' + tr(\"Pase\") + \" <b>\" + plPas(p) + \"</b></span><span>\" + tr(\"Entrada\") + \" <b>\" + plEnt(p) + \"</b></span><span>\" + tr(\"Colocación\") "
+ },
+ "Riesgo alto de lesión y bajón en la segunda parte. Mejor que descanse.": {
+  "w": [
+   "ui-37.js:59"
   ],
   "ctx": "'<p class=\"muted phyhint\">' + (lv === 2 ? (p.fit < 60 ? tr(\"Riesgo alto de lesión y bajón en la segunda parte. Mejor que descanse.\") : tr(\"Físico muy limitado: necesita rotaciones.\")) : lv === 1 ? (p.fit < 75 ? tr(\"Algo "
  },
  "Físico muy limitado: necesita rotaciones.": {
   "w": [
-   "ui-37.js:58"
+   "ui-37.js:59"
   ],
   "ctx": "'<p class=\"muted phyhint\">' + (lv === 2 ? (p.fit < 60 ? tr(\"Riesgo alto de lesión y bajón en la segunda parte. Mejor que descanse.\") : tr(\"Físico muy limitado: necesita rotaciones.\")) : lv === 1 ? (p.fit < 75 ? tr(\"Algo "
  },
  "Algo cansado: rinde un poco menos y el riesgo de lesión sube.": {
   "w": [
-   "ui-37.js:58"
+   "ui-37.js:59"
   ],
   "ctx": "'<p class=\"muted phyhint\">' + (lv === 2 ? (p.fit < 60 ? tr(\"Riesgo alto de lesión y bajón en la segunda parte. Mejor que descanse.\") : tr(\"Físico muy limitado: necesita rotaciones.\")) : lv === 1 ? (p.fit < 75 ? tr(\"Algo "
  },
  "Físico justo: aguanta peor los partidos seguidos.": {
   "w": [
-   "ui-37.js:58"
+   "ui-37.js:59"
   ],
   "ctx": "'<p class=\"muted phyhint\">' + (lv === 2 ? (p.fit < 60 ? tr(\"Riesgo alto de lesión y bajón en la segunda parte. Mejor que descanse.\") : tr(\"Físico muy limitado: necesita rotaciones.\")) : lv === 1 ? (p.fit < 75 ? tr(\"Algo "
  },
  "En plena forma para jugar.": {
   "w": [
-   "ui-37.js:58"
+   "ui-37.js:59"
   ],
   "ctx": "'<p class=\"muted phyhint\">' + (lv === 2 ? (p.fit < 60 ? tr(\"Riesgo alto de lesión y bajón en la segunda parte. Mejor que descanse.\") : tr(\"Físico muy limitado: necesita rotaciones.\")) : lv === 1 ? (p.fit < 75 ? tr(\"Algo "
  },
  "Hay {n} titular más en rojo.": {
   "w": [
-   "ui-37.js:78"
+   "ui-37.js:79"
   ],
   "ctx": "var more = t.length > 1 ? \" \" + trn(t.length - 1, \"Hay {n} titular más en rojo.\", \"Hay {n} titulares más en rojo.\") : \"\";",
   "note": "plural:singular"
  },
  "Hay {n} titulares más en rojo.": {
   "w": [
-   "ui-37.js:78"
+   "ui-37.js:79"
   ],
   "ctx": "var more = t.length > 1 ? \" \" + trn(t.length - 1, \"Hay {n} titular más en rojo.\", \"Hay {n} titulares más en rojo.\") : \"\";",
   "note": "plural:plural"
  },
  "Tu segundo entrenador": {
   "w": [
-   "ui-37.js:79"
+   "ui-37.js:80"
   ],
   "ctx": "return '<section class=\"card assist\"><div class=\"assisth\">' + U.hk.av(x.p, 40) + '<div class=\"grow\"><span class=\"eyebrow\">' + tr(\"Tu segundo entrenador\") + \"</span><p>«\" + h(tr(\"{n} muestra una media física de {v}: te re"
  },
  "{n} muestra una media física de {v}: te recomiendo que descanse el próximo partido.": {
   "w": [
-   "ui-37.js:79"
+   "ui-37.js:80"
   ],
   "ctx": "return '<section class=\"card assist\"><div class=\"assisth\">' + U.hk.av(x.p, 40) + '<div class=\"grow\"><span class=\"eyebrow\">' + tr(\"Tu segundo entrenador\") + \"</span><p>«\" + h(tr(\"{n} muestra una media física de {v}: te re"
  },
  "Que entre {n}": {
   "w": [
-   "ui-37.js:80"
+   "ui-37.js:81"
   ],
   "ctx": "'<div class=\"assistb\">' + (sub ? '<button class=\"btn pri\" data-a=\"phyrest\" data-v=\"' + x.i + '\">' + h(tr(\"Que entre {n}\", {n: plShort(sub)})) + \"</button>\" : \"\") + '<button class=\"btn\" data-a=\"physkip\">' + tr(\"Ahora no\")"
  },
  "Ahora no": {
   "w": [
-   "ui-37.js:80"
+   "ui-37.js:81"
   ],
   "ctx": "'<div class=\"assistb\">' + (sub ? '<button class=\"btn pri\" data-a=\"phyrest\" data-v=\"' + x.i + '\">' + h(tr(\"Que entre {n}\", {n: plShort(sub)})) + \"</button>\" : \"\") + '<button class=\"btn\" data-a=\"physkip\">' + tr(\"Ahora no\")"
  },
  "{a} descansa y entra {b}.": {
   "w": [
-   "ui-37.js:89"
+   "ui-37.js:90"
   ],
   "ctx": "U.toast(tr(\"{a} descansa y entra {b}.\", {a: plShort(out), b: plShort(sub)}));"
  },
  "Caras para todos los jugadores de tu plantilla": {
   "w": [
-   "ui-37.js:98"
+   "ui-37.js:99"
   ],
   "ctx": "var NOTES = [N_(\"Caras para todos los jugadores de tu plantilla\"), N_(\"Posiciones secundarias y media física visible\"), N_(\"Mascota: avisos, estilo y accesorios\")];"
  },
  "Posiciones secundarias y media física visible": {
   "w": [
-   "ui-37.js:98"
+   "ui-37.js:99"
   ],
   "ctx": "var NOTES = [N_(\"Caras para todos los jugadores de tu plantilla\"), N_(\"Posiciones secundarias y media física visible\"), N_(\"Mascota: avisos, estilo y accesorios\")];"
  },
  "Mascota: avisos, estilo y accesorios": {
   "w": [
-   "ui-37.js:98"
+   "ui-37.js:99"
   ],
   "ctx": "var NOTES = [N_(\"Caras para todos los jugadores de tu plantilla\"), N_(\"Posiciones secundarias y media física visible\"), N_(\"Mascota: avisos, estilo y accesorios\")];"
  },
  "Versión": {
   "w": [
-   "ui-37.js:116",
-   "ui-37.js:116"
+   "ui-37.js:117",
+   "ui-37.js:117"
   ],
   "ctx": "return \"<h2>\" + tr(\"Versión\") + '</h2><div class=\"stack\"><div class=\"kvlist\"><div><span>' + tr(\"Versión\") + \"</span><span>\" + h(B.v) + \" · \" + tr(\"compilación {n}\", {n: B.code}) + \"</span></div><div><span>\" + tr(\"Canal\")"
  },
  "compilación {n}": {
   "w": [
-   "ui-37.js:116"
+   "ui-37.js:117"
   ],
   "ctx": "return \"<h2>\" + tr(\"Versión\") + '</h2><div class=\"stack\"><div class=\"kvlist\"><div><span>' + tr(\"Versión\") + \"</span><span>\" + h(B.v) + \" · \" + tr(\"compilación {n}\", {n: B.code}) + \"</span></div><div><span>\" + tr(\"Canal\")"
  },
  "Canal": {
   "w": [
-   "ui-37.js:116"
+   "ui-37.js:117"
   ],
   "ctx": "return \"<h2>\" + tr(\"Versión\") + '</h2><div class=\"stack\"><div class=\"kvlist\"><div><span>' + tr(\"Versión\") + \"</span><span>\" + h(B.v) + \" · \" + tr(\"compilación {n}\", {n: B.code}) + \"</span></div><div><span>\" + tr(\"Canal\")"
  },
  "Compilado": {
   "w": [
-   "ui-37.js:117"
+   "ui-37.js:118"
   ],
   "ctx": "\"<div><span>\" + tr(\"Compilado\") + \"</span><span>\" + (d && !isNaN(d) ? h(d.toLocaleString(LANG, {dateStyle: \"medium\", timeStyle: \"short\"})) : \"—\") + \"</span></div></div>\" +"
  },
  "Copiar información del sistema": {
   "w": [
-   "ui-37.js:119",
-   "ui-37.js:125",
-   "ui-37.js:126"
+   "ui-37.js:120",
+   "ui-37.js:126",
+   "ui-37.js:127"
   ],
   "ctx": "'<button class=\"btn wide\" data-a=\"vcopy\">' + tr(\"Copiar información del sistema\") + '</button><p class=\"muted\" style=\"font-size:12.5px;margin:0\">' + tr(\"Pégala cuando informes de un error: así sabremos qué versión y qué "
  },
  "Pégala cuando informes de un error: así sabremos qué versión y qué dispositivo usas.": {
   "w": [
-   "ui-37.js:119"
+   "ui-37.js:120"
   ],
   "ctx": "'<button class=\"btn wide\" data-a=\"vcopy\">' + tr(\"Copiar información del sistema\") + '</button><p class=\"muted\" style=\"font-size:12.5px;margin:0\">' + tr(\"Pégala cuando informes de un error: así sabremos qué versión y qué "
  },
  "Información copiada": {
   "w": [
-   "ui-37.js:123"
+   "ui-37.js:124"
   ],
   "ctx": "var t = sysInfo(), ok = function () { U.toast(tr(\"Información copiada\")); };"
  },

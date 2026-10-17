@@ -1327,6 +1327,7 @@ nav.tabs .nbadge.pet { background: var(--gold); color: #1a1200; font-size: 9px; 
 .psphy.l2 .phybar i { background: var(--red); }
 .phyparts { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12.5px; color: var(--mist); }
 .phyparts b { color: var(--chalk); }
+.psphy .phy2d { display: block; margin: 9px 0 3px; }
 .phyhint { font-size: 12.5px; margin: 6px 0 0; }
 .assist { border-color: var(--led); }
 .assisth { display: flex; gap: 12px; align-items: flex-start; }

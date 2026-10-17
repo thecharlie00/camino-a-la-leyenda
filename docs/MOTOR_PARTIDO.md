@@ -141,3 +141,98 @@ El código está en `src/pitch.js`. Se simula en metros (105 × 68).
   - rozamiento al rodar de 3,4 m/s²;
   - frenado en el aire y la red de la portería.
 - **Intercepción:** en un pase raso de juego abierto, el rival que queda al alcance (0,95 m + 0,6 m × agilidad) puede tocarlo y desviarlo. La posesión la sigue marcando el motor del partido, así que el balón suelto lo recupera quien manda en ese minuto.
+
+## Balance y auditoría del campo 2D (versión 4.2)
+
+Las fórmulas están en `src/bolas.js`, un módulo sin DOM que usa `pitch.js` y que se prueba en Node (`test/bolas42.js`). La prueba en un partido real es `test/pitch42.js`.
+
+### Matriz de impacto visual, riesgo y recompensa
+
+| Atributo o táctica | Qué se ve en el campo | Contrapartida táctica | Riesgo de QA y cómo se evita |
+|---|---|---|---|
+| Fuerza y ritmo | El rápido se escapa: en 30 m, un 90 saca unos 8 m a un 40 | Los rápidos se cansan igual; con poca resistencia pierden la punta | Teletransporte: tope de 10,2 m/s para todos, también en el esprint de remate |
+| Agilidad | Giros más cerrados y cambios de ritmo | Centrales y veteranos giran peor | Giros bruscos: la aceleración lateral está limitada según velocidad y masa |
+| Pase | Cono de error estrecho: con 25 m, 0,7 m de desvío para un 95 y 3 m para un 40; el rival corta menos | Nadie es perfecto: un 99 sigue fallando algo | Pase imposible de cortar: el error nunca es cero y el corte mínimo es del 2 % |
+| Entrada | Más alcance para cortar (1,1 m → 1,9 m) y para robar en el uno contra uno | Los delanteros apenas roban | Robo a distancia: alcance máximo 2,1 m |
+| Colocación | El defensor reacciona antes (0,29 s → 0,15 s) | El cansancio alarga la reacción | Inmovilidad: la reacción nunca baja de 0,1 s |
+| Línea defensiva | Del bloque bajo al alto, la línea sube unos 20 m | Deja espacio a la espalda para los balones largos | Líneas cruzadas: se comprueba que portero, defensa, medio y delantero no se cruzan nunca |
+| Presión | Radio de presión de 10 m (encerrarse) a 38 m (presión alta): el rival se queda a 2–3 m del balón en lugar de 13 | Más desgaste por minuto (un 50 % más que encerrarse) | Todos a por el balón: presionan como mucho tres, y la separación abre los montones |
+| Cansancio | Bajan la velocidad punta, la aceleración, el pase y la reacción | Hay que hacer cambios | Valores negativos o NaN: el castigo está acotado entre 0 y 1 |
+
+### Fórmulas
+
+**Curva de atributo con rendimientos decrecientes** (r de 1 a 99):
+
+```
+c(r) = (σ((r − 62) / 14) − σ(−61/14)) / (σ(37/14) − σ(−61/14))
+```
+
+- Pasa de 0 en r = 1 a 1 en r = 99.
+- Subir de 60 a 80 da el doble que subir de 80 a 99.
+
+**Cansancio** (st de 0 a 1):
+
+```
+fatiga(st) = 1                                si st ≥ 0,9
+           = 1 − 0,32 · ((0,9 − st) / 0,9)^1,3  en otro caso
+```
+
+**Impacto del atributo:**
+
+```
+calculateAttributeImpact(base, r, st) = base · (0,80 + 0,36 · c(r)) · fatiga(st)
+```
+
+**Movimiento:**
+
+- vmáx = (2,2 + 6,2 · intensidad) · ritmo · fatiga, con un tope de 10,2 m/s.
+- aceleración = acc · (0,6 + 0,4 · fatiga).
+- Llegada con v = √(1,5 · a · d).
+- Zona de reposo con histéresis: se queda quieto por debajo de 0,3 m y vuelve a moverse por encima de 0,65 m.
+
+**Cono de pase** (ángulo en radianes y peso como fracción de la distancia, ambos acotados a ±2,2σ):
+
+```
+σ_ángulo = (0,012 + 0,07 · (1 − c)^1,2 + 0,12 · (1 − fatiga) + 0,025 · presión) · (0,8 + d / 60)
+σ_peso   = 0,02 + 0,10 · (1 − c) + 0,15 · (1 − fatiga)
+```
+
+**Entrada y colocación:**
+
+- Alcance de corte = 1,0 + 0,9 · c(entrada) + 0,4 · (agilidad − 0,95).
+- Robo = (0,95 + 0,7 · c(entrada)) · (0,85 + 0,15 · st).
+- Reacción = 0,30 − 0,16 · c(colocación) + 0,1 · (1 − fatiga).
+- Probabilidad de corte = 0,3 · (0,75 + 0,5 · c(entrada)) · agilidad · forma · (1,25 − 0,5 · c(pase del rival)).
+
+**Separación:**
+
+- Empuje = (R − d) / R, más un núcleo duro de 1,6 · (1,2 − d) por debajo de 1,2 m.
+- El tope crece un 22 % por compañero cercano, hasta el doble.
+- Si dos bolitas caen en el mismo punto exacto, cada pareja recibe una dirección fija y opuesta (antes no se separaban nunca).
+
+**Balón rodando:**
+
+- Rozamiento de Coulomb de 3,4 m/s², integrado dentro del paso.
+- Se para exactamente en v²/(2·3,4) metros, sin restos de coma flotante y sin depender de los FPS.
+
+### Pruebas automáticas
+
+**`test/bolas42.js` (Node):**
+
+- `test_pitch_boundary_containment`: 66.000 pasos con objetivos absurdos, NaN, infinitos y pasos de tiempo raros.
+- `test_separation_force_no_clumping`: 6 bolitas en el mismo punto se separan en 0,6 s; 11 bolitas en 0,8 m, en 1 s.
+- `test_ball_friction_and_stop`: frenada con un error inferior al 2 % con pasos de 1/30, 1/60 y 1/120 s.
+- Llegada sin temblor, incluso con un objetivo que oscila ±0,2 m.
+- Ritmo, tácticas, pase, entrada y colocación.
+
+**`test/pitch42.js` (navegador):**
+
+- En un partido real: ningún NaN y nadie fuera de los límites.
+- El error de pase está en rango.
+- La presión alta adelanta la línea, acerca al defensor y cansa más.
+
+**Fallos que encontraron estas pruebas y quedaron corregidos:**
+
+- Un jugador colocado fuera del campo seguía fuera si el paso de tiempo era cero.
+- Dos bolitas en el mismo punto exacto no se separaban.
+- En un montón de 11, el empuje no bastaba para abrirlo.

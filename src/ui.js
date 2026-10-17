@@ -2092,7 +2092,8 @@
     if (typeof Pitch === "undefined" || !S.live) return;
     var L = S.live, f = S.cur.pm[L.fi], slots = FORMATIONS[L.form] || FORMATIONS["4-3-3"], nums = myNums();
     var mine = L.xi.map(function (id, i) { var p = id == null ? null : mPl(id); return id == null ? null : {id: id, pos: slots[i], gone: id === L.red, nm: p ? p.ln : "",
-      ovr: p ? p.ovr : 70, age: p ? p.age : 26, st: p ? ((L.fit && L.fit[id] != null ? L.fit[id] : p.fit) / 100) : 1, fza: p && typeof plFza === "function" ? plFza(p) : null}; });
+      ovr: p ? p.ovr : 70, age: p ? p.age : 26, st: p ? ((L.fit && L.fit[id] != null ? L.fit[id] : p.fit) / 100) : 1, fza: p && typeof plFza === "function" ? plFza(p) : null,
+      pas: p && typeof plPas === "function" ? plPas(p) : null, ent: p && typeof plEnt === "function" ? plEnt(p) : null, col: p && typeof plCol === "function" ? plCol(p) : null}; });
     var orr = S.cr && S.cr[f.opp] != null ? S.cr[f.opp] : 70;
     var os = FORMATIONS["4-3-3"], theirs = (L.oxi || []).map(function (o, i) { var hh = typeof hashStr === "function" ? hashStr((o.n || "") + i) : i * 7; return {id: "o" + i, pos: os[i] || "MC", nm: o.n || "", ovr: orr + (hh % 9) - 4, age: 20 + hh % 14, st: L.min > 60 ? Math.max(0.6, 1 - (L.min - 60) / 120) : 1}; });
     var fixed = {}; mine.forEach(function (p) { if (p) fixed[p.id] = nums[p.id]; });

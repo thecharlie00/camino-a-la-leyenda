@@ -55,6 +55,7 @@
     return '<div class="psphy l' + lv + '"><div class="psphyh"><span class="lbl">' + tr("Media física") + '</span><b>' + v + '</b><span class="psphyt">' + h(tr(PHY_TXT[lv])) + "</span></div>" +
       '<div class="phybar"><i style="width:' + v + '%"></i></div>' +
       '<div class="phyparts"><span>' + tr("Resistencia") + " <b>" + plRes(p) + "</b></span><span>" + tr("Condición") + " <b>" + Math.round(p.fit) + "</b></span><span>" + tr("Fuerza y ritmo") + " <b>" + plFza(p) + "</b></span></div>" +
+      '<div class="lbl phy2d">' + tr("En el campo 2D") + '</div><div class="phyparts"><span>' + tr("Pase") + " <b>" + plPas(p) + "</b></span><span>" + tr("Entrada") + " <b>" + plEnt(p) + "</b></span><span>" + tr("Colocación") + " <b>" + plCol(p) + "</b></span></div>" +
       '<p class="muted phyhint">' + (lv === 2 ? (p.fit < 60 ? tr("Riesgo alto de lesión y bajón en la segunda parte. Mejor que descanse.") : tr("Físico muy limitado: necesita rotaciones.")) : lv === 1 ? (p.fit < 75 ? tr("Algo cansado: rinde un poco menos y el riesgo de lesión sube.") : tr("Físico justo: aguanta peor los partidos seguidos.")) : tr("En plena forma para jugar.")) + "</p></div>";
   };
 

@@ -21,6 +21,10 @@ var Pitch = (function () {
   var BACK = {LD: 1, LI: 1, DFC: 1};
   var MASS = {DFC: 1.14, DC: 1.1, MCD: 1.06, POR: 1.08};
   var BLK = {bus: -2, 0: -1, 1: 0, 2: 1, press: 2};
+  /* sesgo por posición para estimar pase, entrada y colocación de los rivales */
+  var EST_PAS = {MC: 8, MCO: 9, MCD: 5, LD: 1, LI: 1, MD: 3, MI: 3, ED: 1, EI: 1, DFC: -5, DC: -4, POR: -12};
+  var EST_ENT = {DFC: 12, MCD: 10, LD: 7, LI: 7, MC: 2, MD: -3, MI: -3, MCO: -8, ED: -9, EI: -9, DC: -11, POR: -18};
+  var EST_COL = {DFC: 9, MCD: 7, POR: 6, LD: 4, LI: 4, MC: 3, MCO: 0, MD: 0, MI: 0, ED: -2, EI: -2, DC: 2};
 
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, k) { return a + (b - a) * k; }
@@ -205,7 +209,7 @@ var Pitch = (function () {
     el.appendChild(sp);
     RM = reduced();
     P = {el: el, cv: cv, ctx: cv.getContext("2d"), btn: btn, cols: o.cols || ["#ffb21e", "#66b9ff"], lab: o.lab || {goal: "GOL", post: "¡PALO!", half: "DESCANSO", end: "FINAL"},
-      frozen: false, T: [[], []], own: 0, bxw: LEN / 2, speed: 1, rate: SPEEDK, ck: 0, last: now(), run: true,
+      frozen: false, qa: {nan: 0, oob: 0, pass: 0, perr: 0}, T: [[], []], own: 0, bxw: LEN / 2, speed: 1, rate: SPEEDK, ck: 0, last: now(), run: true,
       ball: {x: LEN / 2, y: MIDY, z: 0, vx: 0, vy: 0, vz: 0, spin: 0, m: 2, hs: -1, hi: -1, fl: null, px: LEN / 2, py: MIDY, pz: 0},
       q: [], cues: [], hardUntil: 0, softUntil: 0, sid: 0, soft: 0, passAt: 0, cards: [], cele: null, msg: null,
       tac: [defTac(), defTac()], line: [22, 22], steal: -1, stealUntil: 0, chase: -1, cp: [0, 0], ret: [0, 0], trap: [0, 0], stopUntil: 0, pendOwn: null, recv: null,
@@ -276,9 +280,17 @@ var Pitch = (function () {
         var ovr = p.ovr == null ? 70 : +p.ovr, age = p.age == null ? 26 : +p.age;
         o.mass = MASS[p.pos] || 1;
         /* ritmo: si llega el atributo de fuerza y ritmo (0-100) manda él; si no, se estima con la media y la edad */
-        var fz = p.fza == null ? null : +p.fza;
-        o.pace = fz != null ? clamp(0.8 + (fz - 50) * 0.0075 + (WIDE[p.pos] ? 0.03 : 0) - (o.gk ? 0.08 : 0), 0.74, 1.16)
-          : clamp(0.92 + (ovr - 70) * 0.009 - Math.max(0, age - 29) * 0.013 + (WIDE[p.pos] ? 0.04 : 0) - (o.gk ? 0.08 : 0), 0.76, 1.14);
+        /* atributos (1-99): si no llegan (rival), se estiman con la media, la edad y la posición */
+        var est = function (v, bias, ageK) { return v == null || isNaN(+v) ? clamp(62 + (ovr - 70) * 1.1 + (bias || 0) + ageK, 20, 97) : +v; };
+        o.fz = est(p.fza, WIDE[p.pos] ? 4 : 0, -Math.max(0, age - 29) * 2.2);
+        o.pas = est(p.pas, EST_PAS[p.pos], 0);
+        o.ent = est(p.ent, EST_ENT[p.pos], 0);
+        o.col = est(p.col, EST_COL[p.pos], clamp((age - 24) * 0.6, -3, 5));
+        /* ritmo con rendimientos decrecientes: curva sigmoide del atributo (0,80-1,16) */
+        o.pace = clamp(Bolas.calculateAttributeImpact(1, o.fz, 1) + (WIDE[p.pos] ? 0.03 : 0) - (o.gk ? 0.08 : 0), 0.72, 1.19);
+        o.fat = Bolas.fatigue(o.st);
+        o.rt = Bolas.reaction(o.col, o.st);
+        o._k = s * 16 + i;
         /* agilidad: giros y cambios de ritmo (extremos y mediapuntas más ágiles; centrales y veteranos menos) */
         o.agi = clamp((p.agi != null ? 0.8 + (+p.agi - 50) * 0.006 : 0.96 + (ovr - 70) * 0.006) + ({ED: 0.07, EI: 0.07, MCO: 0.06, MD: 0.04, MI: 0.04, DFC: -0.06, POR: -0.04}[p.pos] || 0) - Math.max(0, age - 30) * 0.012, 0.72, 1.18);
         o.q = clamp((ovr - 60) / 30, 0, 1.2);
@@ -356,27 +368,13 @@ var Pitch = (function () {
         if (f.then) f.then();
       }
     } else if (b.m === 2) {
-      if (b.z > 0 || b.vz > 0) {
-        b.vz -= GRAV * sdt; b.z += b.vz * sdt;
-        var dr = 1 - 0.1 * sdt; b.vx *= dr; b.vy *= dr;
-        if (b.spin) { var svx = b.vx; b.vx -= b.vy * b.spin * sdt; b.vy += svx * b.spin * sdt; b.spin *= 1 - 0.9 * sdt; }
-        if (b.z <= 0) {
-          b.z = 0;
-          if (b.vz < -1.4) { b.vz = -b.vz * 0.48; b.vx *= 0.82; b.vy *= 0.82; } else b.vz = 0;
-        }
-      } else {
-        var sp = Math.sqrt(b.vx * b.vx + b.vy * b.vy);
-        if (sp > 0) { var ns = Math.max(0, sp - 3.4 * sdt) / sp; b.vx *= ns; b.vy *= ns; }
-      }
-      b.x += b.vx * sdt; b.y += b.vy * sdt;
+      Bolas.ballFree(b, sdt);
       /* red de la portería: frena el balón dentro */
       if ((b.x > LEN || b.x < 0) && Math.abs(b.y - MIDY) < PH && b.z < BAR) {
         var gl = b.x > LEN ? LEN : 0, depth = Math.abs(b.x - gl);
         if (!P.net || P.ck - P.net.t0 > 1.5) P.net = {gx: gl, y: b.y, t0: P.ck};
         if (depth > 1.7) { b.x = gl + (gl ? 1.7 : -1.7); b.vx *= -0.12; b.vy *= 0.3; b.vz = 0; b.z = Math.min(b.z, 0.4); }
       }
-      if (b.x < -6 || b.x > LEN + 6) { b.vx = 0; b.vy = 0; }
-      if (b.y < -4 || b.y > WID + 4) { b.vx = 0; b.vy = 0; }
     } else {
       var hp = pl(b.hs, b.hi);
       if (!hp) { b.m = 2; b.vx = 0; b.vy = 0; }
@@ -1047,7 +1045,7 @@ var Pitch = (function () {
     /* entradas y balón suelto */
     if (b.m === 0 && P.steal >= 0 && !scr && b.hs !== P.steal) {
       var ns = nearestTo(P.steal, b.x, b.y, true);
-      if (ns >= 0) { var sp0 = P.T[P.steal][ns], dx0 = sp0.x - b.x, dy0 = sp0.y - b.y; if (dx0 * dx0 + dy0 * dy0 < 1.8) { var lostP = pl(b.hs, b.hi); if (lostP) lostP.lag = ck + 0.5; giveTo(P.steal, ns); if (Math.random() < 0.35) icon(P.steal, ns, "👟"); P.steal = -1; } }
+      if (ns >= 0) { var sp0 = P.T[P.steal][ns], dx0 = sp0.x - b.x, dy0 = sp0.y - b.y; var sr = Bolas.stealReach(sp0.ent, sp0.st); if (dx0 * dx0 + dy0 * dy0 < sr * sr) { var lostP = pl(b.hs, b.hi); if (lostP) lostP.lag = ck + 0.5; giveTo(P.steal, ns); if (Math.random() < 0.35) icon(P.steal, ns, "👟"); P.steal = -1; } }
     }
     if (b.m === 2 && P.chase !== -2) {
       var cs = P.chase >= 0 ? P.chase : scr ? -1 : P.own;
@@ -1073,19 +1071,18 @@ var Pitch = (function () {
     var team = P.T[s], d = 1 - s, dir = s === 0 ? 1 : -1, b = P.ball, tac = P.tac[s];
     var att = (b.m === 0 ? b.hs : P.own) === s, bu = s === 0 ? b.x : LEN - b.x, Ld, span, wk, k;
     var blk = tac.blk, stop = ck < P.stopUntil;
-    if (att) { Ld = clamp(bu - 36, 13, 50) + blk * 2.5; span = 0.95; wk = [0.8, 1, 1.12][tac.width]; }
-    else {
-      Ld = clamp(bu - (25 - blk * 2.5), [8, 12, 17, 23, 31][blk + 2], [19, 27, 36, 44, 52][blk + 2]);
-      span = [0.42, 0.5, 0.56, 0.6, 0.64][blk + 2]; wk = blk <= -2 ? 0.6 : 0.72;
-      if (ck < P.ret[s] || (tac.ret && bu < 45)) { Ld = Math.min(Ld, 15); span = Math.min(span, 0.46); }
-    }
-    if (ck < P.trap[s]) Ld += 6.5;
+    var off = Bolas.tacOffsets(tac, att, bu, ck < P.ret[s]);
+    if (ck < P.trap[s]) off.Ld += 6.5;
+    Ld = off.Ld; span = off.span; wk = off.wk;
     P.line[s] = Ld;
     var offU = Math.max(LEN - P.line[d], bu) + 1;
     var press1 = -1, press2 = -1, press3 = -1;
     if (!att && !scr && !P.cele && !stop) {
       press1 = nearestTo(s, b.x, b.y, true);
-      if (blk >= 1 || tac.press || ck < P.cp[s] || P.steal === s) press2 = nearestTo(s, b.x, b.y, true, press1);
+      /* radio de presión: con bloque bajo solo sale a por el balón quien lo tiene cerca */
+      var p1 = pl(s, press1), pR = Bolas.pressRadius(tac);
+      if (p1 && P.steal !== s && !(ck < P.cp[s]) && (p1.x - b.x) * (p1.x - b.x) + (p1.y - b.y) * (p1.y - b.y) > pR * pR) press1 = -1;
+      if (press1 >= 0 && (blk >= 1 || tac.press || ck < P.cp[s] || P.steal === s)) press2 = nearestTo(s, b.x, b.y, true, press1);
       if (ck < P.cp[s] && press2 >= 0) press3 = nearestTo(s, b.x, b.y, true, press1, press2);
     }
     var chaseI = -1;
@@ -1110,22 +1107,11 @@ var Pitch = (function () {
         tx = b.x - dir * 0.6; ty = b.y; sp = i === press1 || i === chaseI ? 0.95 : 0.85;
         if (!att && (i === press2 || i === press3)) { ty += i === press2 ? 2 : -2; tx -= dir * 1.5; }
       } else if (p.gk) {
-        var gu = att ? clamp(10 + (bu - 50) * 0.18, 4, 22) : clamp(3 + Math.max(0, bu - 30) * 0.11 + (blk >= 1 ? 2.5 : 0), 1.2, 15);
-        tx = U(s, gu); ty = MIDY + clamp((b.y - MIDY) * 0.3, -5, 5); sp = 0.6;
+        var gt = Bolas.gkTarget(att, bu, b.y, blk);
+        tx = U(s, gt.u); ty = gt.y; sp = 0.6;
       } else {
-        var u = Ld + (p.hu - 21) * span, oy = p.hy - MIDY;
-        if (att) {
-          if (WIDE[p.pos] && tac.width === 2 && p.hu > 40) oy = (oy > 0 ? 1 : -1) * 31;
-          else if (WIDE[p.pos] && tac.width === 0) oy *= 0.62;
-          else oy *= wk;
-          if (tac.width === 0 || tac.pass === 0) oy += (b.y - MIDY) * 0.22;
-          if (tac.pass === 2 && p.hu > 60) u += 4;
-          if (!BACK[p.pos]) u = Math.min(u, offU);
-        } else {
-          oy = oy * wk + (b.y - MIDY) * 0.36;
-        }
-        u = clamp(u, 3, LEN - 3);
-        tx = U(s, u); ty = MIDY + oy;
+        var slt = Bolas.slotTarget(p.hu, p.hy, p.pos, off, tac, att, b.y, offU);
+        tx = U(s, slt.u); ty = slt.y;
         /* marca: los de atrás se ajustan al rival más cercano sin romper la línea */
         if (!att && !scr) {
           if (ck > p.mkT) { p.mkT = ck + 0.4 + Math.random() * 0.2; p.mk = nearestTo(d, tx, ty, true); }
@@ -1147,7 +1133,8 @@ var Pitch = (function () {
       /* percepción con retardo: los que defienden reaccionan algo tarde; el que se come el amago, mucho más */
       if (p.lag > ck) { /* sigue con el objetivo viejo */ }
       else {
-        k = Math.min(1, sdt / (p.ov ? 0.05 : att ? 0.1 : 0.2));
+        /* reacción: la colocación del defensor decide cuánto tarda en reajustarse */
+        k = Math.min(1, sdt / (p.ov ? 0.05 : att ? 0.1 : (p.rt || 0.2)));
         p.tx += (tx - p.tx) * k; p.ty += (ty - p.ty) * k;
       }
       p.sp = sp;
@@ -1161,55 +1148,33 @@ var Pitch = (function () {
       if (ck - dv.t0 - dv.d < dv.lie) { p.vx = 0; p.vy = 0; return; }
       p.dive = null; p.tx = p.x; p.ty = p.y;
     }
-    var fat = 0.7 + 0.3 * p.st, vmax = (2.2 + 6.2 * p.sp) * p.pace * fat, acc = p.acc * (0.75 + 0.25 * p.st);
+    var fat = p.fat == null ? 1 : p.fat, vmax = (2.2 + 6.2 * p.sp) * p.pace * fat, acc = p.acc * (0.6 + 0.4 * fat);
     /* el rematador de una jugada narrada esprinta para llegar a tiempo a su punto de remate */
     if (P.shooter && P.shooter.s === s && P.T[s][P.shooter.i] === p && ck < P.shooter.until) {
       vmax *= 1.35; acc *= 1.4;
     }
-    var sep = separation(p, s), tx0 = p.tx + sep.x, ty0 = p.ty + sep.y;
-    var dx = clamp(tx0, p.gone ? -8 : -1, p.gone ? LEN + 8 : LEN + 1) - p.x, dy = clamp(ty0, p.off ? -4 : 0.8, p.off ? WID + 4 : WID - 0.8) - p.y, dist = Math.sqrt(dx * dx + dy * dy);
-    var want = dist > 0.12 ? Math.min(vmax, Math.sqrt(2 * acc * 0.75 * dist)) : 0;
-    var wx = dist > 0.12 ? dx / dist * want : 0, wy = dist > 0.12 ? dy / dist * want : 0;
-    var ax = wx - p.vx, ay = wy - p.vy, spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-    if (spd > 0.6) {
-      var ux = p.vx / spd, uy = p.vy / spd, al = ax * ux + ay * uy, ap = -ax * uy + ay * ux;
-      var lat = acc * 1.15 * (p.agi || 1) / (1 + spd * 0.2 * p.mass);
-      al = clamp(al, -acc * 1.5 * sdt, acc * sdt); ap = clamp(ap, -lat * sdt, lat * sdt);
-      ax = al * ux - ap * uy; ay = al * uy + ap * ux;
-    } else {
-      var am = Math.sqrt(ax * ax + ay * ay), lim = acc * sdt;
-      if (am > lim) { ax *= lim / am; ay *= lim / am; }
-    }
-    p.vx += ax; p.vy += ay; p.x += p.vx * sdt; p.y += p.vy * sdt;
+    var sep = separation(p, s);
+    var bd = p.gone || p.off ? BND_OUT : BND_IN;
+    if (!Bolas.steer(p, p.tx + sep.x, p.ty + sep.y, sdt, {vmax: vmax, acc: acc, agi: p.agi, mass: p.mass, b: bd})) P.qa.nan++;
+    if (p.x < bd.x0 || p.x > bd.x1 || p.y < bd.y0 || p.y > bd.y1) P.qa.oob++;
     /* orientación del cuerpo: hacia donde corre, o hacia el balón si está quieto (el portero, siempre al balón) */
     var b = P.ball, ta;
-    spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-    if (p.gk || spd < 1.1) ta = Math.atan2(b.y - p.y, b.x - p.x);
+    var spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+    /* histéresis para que no baile entre mirar al balón y mirar adonde corre */
+    if (spd < 0.9) p.lookB = true; else if (spd > 1.4) p.lookB = false;
+    if (p.gk || p.lookB) ta = Math.atan2(b.y - p.y, b.x - p.x);
     else ta = Math.atan2(p.vy, p.vx);
     var da = wrapA(ta - p.fa), wmax = (p.gk ? 9 : 6.5) * (0.7 + 0.3 * p.st) * sdt;
     p.fa = wrapA(p.fa + clamp(da, -wmax, wmax));
   }
   /* separación de Reynolds adaptada: cada uno guarda unos 2 m de espacio personal (más con los compañeros);
      el que lleva el balón, el que presiona y las jugadas guionizadas pueden llegar al contacto */
-  var SEP_R = 2.3;
+  var SEP_R = 2.3, BND_IN = Bolas.B_PL, BND_OUT = {x0: -8, x1: LEN + 8, y0: -4, y1: WID + 4};
   function separation(p, s) {
-    var out = {x: 0, y: 0}, b = P.ball;
-    if (p.dive || p.gone || p.off || p.ov || P.cele) return out;
+    var b = P.ball;
+    if (p.dive || p.gone || p.off || p.ov || P.cele) return {x: 0, y: 0};
     var holder = b.m === 0 && b.hs === s && P.T[s][b.hi] === p, presser = !holder && b.m !== 1 && Math.abs(p.tx - b.x) < 2.5 && Math.abs(p.ty - b.y) < 2.5;
-    for (var t = 0; t < 2; t++) {
-      if (t !== s && (holder || presser)) continue;
-      var w = t === s ? 1 : 0.45;
-      for (var j = 0; j < P.T[t].length; j++) {
-        var q = P.T[t][j]; if (!q || q === p || q.gone || q.off) continue;
-        var dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy;
-        if (d2 >= SEP_R * SEP_R) continue;
-        var d = Math.sqrt(d2) || 0.01, f = (SEP_R - d) / SEP_R * w;
-        out.x += dx / d * f; out.y += dy / d * f;
-      }
-    }
-    var m = Math.sqrt(out.x * out.x + out.y * out.y), lim = p.gk ? 0.6 : 1.6;
-    if (m > 0) { var k = Math.min(lim, m * 1.8) / m; out.x *= k; out.y *= k; }
-    return out;
+    return Bolas.sepForce(p, P.T, s, {R: SEP_R, wOpp: 0.45, lim: p.gk ? 0.6 : 1.6, skipOpp: holder || presser});
   }
   /* intercepción: un pase raso que pasa al alcance de un rival puede tocarlo y desviarse (la posesión la sigue
      marcando el motor del partido, así que el balón suelto lo recupera quien manda en ese minuto) */
@@ -1221,10 +1186,10 @@ var Pitch = (function () {
     var k = f.t / f.d; if (k < 0.18 || k > 0.92) return;
     for (var j = 0; j < P.T[d].length; j++) {
       var q = pl(d, j); if (!q || q.gk || f.tried[j]) continue;
-      var dx = q.x - b.x, dy = q.y - b.y, reach = 0.95 + 0.6 * (q.agi || 1);
+      var dx = q.x - b.x, dy = q.y - b.y, reach = Bolas.tackleReach(q.ent, q.agi);
       if (dx * dx + dy * dy > reach * reach) continue;
       f.tried[j] = 1; P.icpt = P.icpt || {n: 0, ok: 0}; P.icpt.n++;
-      if (Math.random() < 0.3 * (q.agi || 1) * (0.6 + 0.4 * q.st)) {
+      if (Math.random() < Bolas.icptChance(q.ent, q.agi, q.st, f.pas == null ? 60 : f.pas)) {
         P.icpt.ok++;
         var vx = (b.x - b.px) / Math.max(0.001, P.lastSdt || 0.033), vy = (b.y - b.py) / Math.max(0.001, P.lastSdt || 0.033), a = Math.random() * PI2;
         b.m = 2; b.fl = null; b.hs = -1; b.hi = -1; P.recv = null;
@@ -1255,9 +1220,15 @@ var Pitch = (function () {
     if (best < 0) { P.passAt = P.ck + 0.6; return; }
     var r = P.T[s][best], lead = bfwd > 5 && !BACK[r.pos] && !r.gk ? 3.5 : 0.6, tx = r.x + dir * lead + r.vx * 0.3, ty = r.y + r.vy * 0.3;
     var lob = bdist > 30 || (tac.pass === 2 && bfwd > 22);
+    /* cono de error: el buen pasador la deja donde quiere; el malo o cansado, desviada, corta o larga */
+    var pr = 99; for (var j2 = 0; j2 < P.T[d].length; j2++) { var o2 = pl(d, j2); if (o2) { var e2 = (o2.x - hp.x) * (o2.x - hp.x) + (o2.y - hp.y) * (o2.y - hp.y); if (e2 < pr) pr = e2; } }
+    var er = Bolas.passError(hp.pas, hp.st, bdist, clamp(1 - Math.sqrt(pr) / 6, 0, 1)), ex = tx - hp.x, ey = ty - hp.y, ca = Math.cos(er.a), sa = Math.sin(er.a), kl = 1 + er.l;
+    tx = clamp(hp.x + (ex * ca - ey * sa) * kl, 0.5, LEN - 0.5); ty = clamp(hp.y + (ex * sa + ey * ca) * kl, 0.5, WID - 0.5);
+    P.qa.pass++; P.qa.perr += Math.sqrt((tx - hp.x - ex) * (tx - hp.x - ex) + (ty - hp.y - ey) * (ty - hp.y - ey));
     P.recv = {s: s, i: best, x: tx, y: ty};
     var dur = (lob ? 0.55 + bdist / 22 : 0.2 + bdist / ([13, 16, 20][tac.tempo])) * (1.06 - 0.12 * (hp.q || 0.5)), tok = best;
-    kick(tx, ty, {prof: lob ? 1 : 0, h: lob ? Math.min(10, 1.8 + bdist * 0.1) : 0, d: dur, curve: lob ? rnd(-1.5, 1.5) : 0, then: function () { receive(s, tok); }});
+    kick(tx, ty, {prof: lob ? 1 : 0, h: lob ? Math.min(10, 1.8 + bdist * 0.1) : 0, d: dur * (1 + er.l * 0.5), curve: lob ? rnd(-1.5, 1.5) : 0, then: function () { receive(s, tok); }});
+    if (P.ball.fl) P.ball.fl.pas = hp.pas;
     P.passAt = P.ck + 99;
   }
   function camera(dt) {
