@@ -589,6 +589,7 @@ function liveSub(outId, inId) {
 }
 function liveSet(k, v) {
   var L = S.live; if (!L || L.done) return;
+  L.tchg = (L.tchg || 0) + 1;
   if (k === "ment") { L.ment = v; L.ev.unshift({t: "tac", min: L.min, txt: tr("Cambias la mentalidad: {m}.", {m: liveMentName(v)})}); }
   if (k === "form" && FORMATIONS[v]) { L.form = v; L.ev.unshift({t: "tac", min: L.min, txt: tr("Cambias al {f}.", {f: v})}); }
 }

@@ -1232,3 +1232,4 @@ html.th-day.cb { --grass: #1f6fd1; --red: #c25a00; --grass-rgb: 31, 111, 209; --
 /* tema «retro» */
 html.th-retro { --night: #1b1812; --stand: #26211a; --tunnel: #312a20; --line: #4a3f2e; --chalk: #f2e3bd; --mist: #b5a684; --dim: #857a60; --led: #e9b23a; --led-ink: #1b1812; --f-body: "Courier New", ui-monospace, monospace; }
 html.th-retro .card { border-radius: 4px; } html.th-retro .go, html.th-retro .btn { border-radius: 4px; }
+.achsv { color: var(--led) !important; margin-top: 2px; }

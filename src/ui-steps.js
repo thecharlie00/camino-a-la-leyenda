@@ -35,24 +35,52 @@
   function keepA11yOpen() { var d = document.querySelector("details.a11y"); if (d) d.open = true; }
 
   /* ---------- logros ---------- */
-  function achRow(a) {
-    var y = S.ach && S.ach[a[0]], on = y != null, sec = a[5] && !on;
-    return '<li class="achi' + (on ? " on" : "") + '"><span class="achic" aria-hidden="true">' + (on ? a[1] : sec ? "❔" : "🔒") + '</span><span class="grow"><b>' + h(sec ? tr("Logro secreto") : tr(a[2])) + "</b><small>" + h(sec ? tr("Ya lo descubrirás… o no.") : tr(a[3])) + "</small></span>" +
-      (on ? '<span class="achy">' + h(seasonLabel(y)) + "</span>" : "") + "</li>";
+  /* logros generales del usuario: se guardan en el dispositivo con la partida en la que se consiguieron */
+  var GKEY = "camino.achG";
+  function gGet() { try { return JSON.parse(localStorage.getItem(GKEY) || "{}") || {}; } catch (e) { return {}; } }
+  function gSet(o) { try { localStorage.setItem(GKEY, JSON.stringify(o)); } catch (e) {} }
+  function saveName() {
+    if (!S) return "";
+    var mgr = S.mode === "mgr", o = mgr ? S.m : S.p;
+    return o ? ((o.fn ? o.fn + " " : "") + (o.ln || "")).trim() : "";
+  }
+  function saveMode() { if (!S) return ""; if (S.mode === "mgr") return S.kind === "club" ? "club" : "mgr"; return S.g === "f" ? "pf" : "p"; }
+  function modeTxt(k) { return k === "club" ? tr("Crea tu club") : k === "mgr" ? tr("Carrera de míster") : k === "pf" ? tr("Carrera de jugadora") : tr("Carrera de jugador"); }
+  function gSync() {
+    if (!S || !S.ach) return 0;
+    var g = gGet(), n = 0, nm = saveName(), md = saveMode();
+    Object.keys(S.ach).forEach(function (id) { if (!g[id]) { g[id] = {ts: Date.now(), n: nm, m: md, y: S.ach[id]}; n++; } });
+    if (n) gSet(g);
+    return n;
+  }
+  function allAch() {
+    var x = typeof ACH_X !== "undefined" ? ACH_X.map(function (a) { return [a[0], a[1], a[3], a[4], a[5], a[6]]; }) : [];
+    return [[tr("Carrera de jugador"), ACH_P], [tr("Carrera de míster"), ACH_M], [tr("Cultura pop"), x]];
+  }
+  function gCount() { var g = gGet(), n = 0, t = 0; allAch().forEach(function (gr) { gr[1].forEach(function (a) { t++; if (g[a[0]]) n++; }); }); return [n, t]; }
+  U.achG = gCount;
+  function achRow(a, g) {
+    var x = g[a[0]], on = !!x, sec = a[5] && !on;
+    return '<li class="achi' + (on ? " on" : "") + '"><span class="achic" aria-hidden="true">' + (on ? a[1] : sec ? "❔" : "🔒") + '</span><span class="grow"><b>' + h(sec ? tr("Logro secreto") : tr(a[2])) + "</b><small>" + h(sec ? tr("Ya lo descubrirás… o no.") : tr(a[3])) + "</small>" +
+      (on ? '<small class="achsv">' + tr("Conseguido con «{n}» · {m}", {n: h(x.n || "—"), m: h(modeTxt(x.m))}) + (x.y ? " · " + h(seasonLabel(x.y)) : "") + "</small>" : "") + "</span></li>";
   }
   U.sheets.ach = function () {
-    achCheck();
-    var c = achCount(), l = achList(), done = l.filter(function (a) { return S.ach[a[0]] != null; }), todo = l.filter(function (a) { return S.ach[a[0]] == null; });
-    return "<h2>" + tr("Logros") + '</h2><div class="stack"><div><div class="lbl">' + tr("{n} de {m} conseguidos", {n: c[0], m: c[1]}) + '</div><div class="bar"><i class="hi" style="width:' + Math.round(c[0] / c[1] * 100) + '%"></i></div></div>' +
-      '<ul class="achl">' + done.concat(todo).map(achRow).join("") + "</ul>" +
-      '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
+    if (S && typeof achCheck === "function") { achCheck(); gSync(); }
+    var g = gGet(), c = gCount();
+    var s = "<h2>" + tr("Logros") + '</h2><div class="stack"><p class="muted" style="margin:0;font-size:13px">' + tr("Son tuyos para siempre: se guardan en este dispositivo y cuentan los de todas tus partidas.") + '</p><div><div class="lbl">' + tr("{n} de {m} conseguidos", {n: c[0], m: c[1]}) + '</div><div class="bar"><i class="hi" style="width:' + Math.round(c[0] / c[1] * 100) + '%"></i></div></div>';
+    allAch().forEach(function (gr) {
+      var l = gr[1], done = l.filter(function (a) { return g[a[0]]; }), todo = l.filter(function (a) { return !g[a[0]]; });
+      s += '<div><div class="lbl">' + h(gr[0]) + " · " + done.length + "/" + l.length + '</div><ul class="achl">' + done.concat(todo).map(function (a) { return achRow(a, g); }).join("") + "</ul></div>";
+    });
+    return s + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
   };
   U.actions.ach = function () { U.open("ach"); };
   /* aviso al desbloquear: se comprueba después de cada pintado */
   U.add("after", function () {
     if (!S || UIX.ui().view !== "game") return;
     var nw = achCheck();
-    if (S.achN0 != null) { var n0 = S.achN0; delete S.achN0; if (n0) setTimeout(function () { U.toast(trn(n0, "Ya tienes {n} logro: míralo en «Más».", "Ya tienes {n} logros: míralos en «Más».")); }, 400); U.persist(); return; }
+    if (S.achN0 != null) { var n0 = S.achN0; delete S.achN0; gSync(); if (n0) setTimeout(function () { U.toast(trn(n0, "Ya tienes {n} logro: míralo en «Más».", "Ya tienes {n} logros: míralos en «Más».")); }, 400); U.persist(); return; }
+    if (gSync() && !nw.length) return;
     if (!nw.length) return;
     U.persist();
     nw.forEach(function (a, i) { U.toast(a[1] + " " + tr("Logro: {n}", {n: tr(a[2])})); if (i === 0) U.edgeFlash(true); });

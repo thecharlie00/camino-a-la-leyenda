@@ -468,7 +468,7 @@
     rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
     rows.push(["tab", "hist", ICON.trophy, tr("Historial"), tr("Temporadas, títulos y premios")]);
     if (!mgr) rows.push(["tab", "mundo", ICON.globe, tr("Mundo"), tr("Otras ligas, selecciones y rivales")]);
-    if (typeof achCount === "function") { achCheck(); var ac = achCount(); rows.push(["ach", "", ICON.medal, tr("Logros"), tr("{n} de {m} conseguidos", {n: ac[0], m: ac[1]})]); }
+    if (UIX.achG) { achCheck(); var ac = UIX.achG(); rows.push(["ach", "", ICON.medal, tr("Logros"), tr("{n} de {m} conseguidos", {n: ac[0], m: ac[1]})]); }
     if (typeof diaryAdd === "function") rows.push(["diary", "", ICON.route, tr("Diario de tu carrera"), tr("Tus partidos, fichajes y momentos clave")]);
     if (typeof edOf === "function") rows.push(["editor", "", ICON.gear, tr("Editor de la partida"), tr("Nombres, escudos y competiciones")]);
     rows.push(["guide", "", ICON.book, tr("Guía del juego"), tr("Cómo funciona cada parte")]);
@@ -1373,7 +1373,7 @@
       "<p>" + tr("{n} ligas de los cinco continentes, todas las selecciones del mundo, copas, Champions, Libertadores, Mundiales y el Balón de Oro.", {n: W.lg.length}) + "</p>" +
       '<div class="scoreline"><span>' + tr("{n} LIGAS", {n: W.lg.length}) + "</span><span>" + tr("{n} CLUBES", {n: W.clubs.length - 2}) + "</span><span>" + tr("{n} SELECCIONES", {n: W.ctry.length}) + "</span></div></section>";
     s += '<div class="opts"><button class="go" data-a="goload"' + (n ? "" : " disabled") + ">" + tr("Cargar partida") + (n ? " · " + n : "") + " " + ICON.play + '</button><button class="go ghost" data-a="newgame">' + tr("Nueva partida") + '</button><button class="btn wide gde-open" data-a="guide">📖 ' + tr("Guía del juego") + "</button></div>";
-    s += '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ": " + h(langName()) + '</button><button class="btn wide" data-a="a11y">' + tr("Accesibilidad") + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + "</div></div></main>";
+    s += '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ": " + h(langName()) + '</button><button class="btn wide" data-a="ach">🏅 ' + tr("Logros") + (UIX.achG ? " · " + UIX.achG()[0] + "/" + UIX.achG()[1] : "") + '</button><button class="btn wide" data-a="a11y">' + tr("Accesibilidad") + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + "</div></div></main>";
     return s;
   }
   function fmtWhen(ts) {

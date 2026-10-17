@@ -54,7 +54,7 @@ var ACH_M = [
   ["m_t15", "🏛️", N_("Vitrina llena"), N_("Gana 15 títulos."), function (c) { return S.m.trophies.length >= 15; }],
   ["m_best", "🥇", N_("Mejor entrenador"), N_("Gana el premio al mejor entrenador del año."), function (c) { return S.m.awards.some(function (a) { return a.k === "mgr_year"; }); }]
 ];
-function achList() { return S && S.mode === "mgr" ? ACH_M : ACH_P; }
+function achList() { var mgr = S && S.mode === "mgr"; return (mgr ? ACH_M : ACH_P).concat(typeof achX === "function" ? achX(mgr ? "m" : "p") : []); }
 function achCtx() { return {t: S.mode === "mgr" ? achMgrTot() : achPlayerTot()}; }
 /* comprueba y devuelve los logros nuevos; la primera vez en una partida antigua no avisa */
 function achCheck() {

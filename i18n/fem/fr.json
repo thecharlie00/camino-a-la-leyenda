@@ -1555,5 +1555,9 @@
  "Firmas como entrenador del {club}.": "Tu signes comme entraîneuse de {club}.",
  "Te vas cedido al {club}.": "Tu es prêtée à {club}.",
  "Tu mejor amigo en el equipo: {name}. Te sube el ánimo.": "Ta meilleure amie dans l'équipe : {name}. Elle te remonte le moral.",
- "Un amigo en el vestuario": "Une amie dans le vestiaire"
+ "Un amigo en el vestuario": "Une amie dans le vestiaire",
+ "Un juvenil de tu cantera llega a una media de 90.": "Une jeune de ton centre de formation atteint une note globale de 90.",
+ "Vende a un veterano de 31 años o más por el triple de su valor.": "Vends une vétérane de 31 ans ou plus au triple de sa valeur.",
+ "Termina un partido con cinco o más jugadores amonestados.": "Termine un match avec cinq joueuses averties ou plus.",
+ "Jugador total": "Joueuse totale"
 }
