@@ -32,7 +32,6 @@ if not game.exists():
 if OUT.exists():
     shutil.rmtree(OUT)
 (OUT / "jugar").mkdir(parents=True)
-(OUT / "privacidad").mkdir()
 (OUT / "fonts").mkdir()
 
 # --- juego: sin el SDK de Android y con la política de privacidad de la web con AdSense ---
@@ -58,69 +57,117 @@ for fam, pkg, w in faces:
 shutil.copy(WEB / "site.js", OUT / "site.js")
 shutil.copytree(WEB / "img", OUT / "img")
 
-# --- plantillas ---
-def ad(name, slot_key=None):
-    sid = slots.get(slot_key or name, "")
+# --- plantillas, una por idioma: castellano en la raíz y /en/, /de/, /it/, /fr/ ---
+TR = json.loads((WEB / "i18n.json").read_text())
+LANGS = ["es", "en", "de", "it", "fr"]
+LOCALE = {"es": "es_ES", "en": "en_GB", "de": "de_DE", "it": "it_IT", "fr": "fr_FR"}
+PAGES = [("index.html", ""), ("jugar.html", "jugar/"), ("privacidad.html", "privacidad/")]
+today = datetime.date.today()
+
+def t(l, k, **kw):
+    v = TR[k][l]
+    for a, b in kw.items():
+        v = v.replace("{" + a + "}", str(b))
+    return v
+
+def ad(l, name):
+    sid = slots.get(name, "")
     if not client or not sid:
         return ""
+    lab = t(l, "ad_label")
     if name == "juego_movil":
-        return ('<div class="pmob"><p class="adlab">Publicidad</p><ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px" '
+        return (f'<div class="pmob"><p class="adlab">{lab}</p><ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px" '
                 f'data-ad-client="{client}" data-ad-slot="{sid}"></ins></div>')
-    if name.startswith("juego_lateral"):
-        return ('<aside class="rail" aria-label="Publicidad"><p class="adlab">Publicidad</p><ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" '
+    if name == "juego_lateral":
+        return (f'<aside class="rail" aria-label="{lab}"><p class="adlab">{lab}</p><ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" '
                 f'data-ad-client="{client}" data-ad-slot="{sid}"></ins></aside>')
-    return ('<aside class="adbox" aria-label="Publicidad"><div class="wrap"><p class="adlab">Publicidad</p><ins class="adsbygoogle" style="display:block" '
+    return (f'<aside class="adbox" aria-label="{lab}"><div class="wrap"><p class="adlab">{lab}</p><ins class="adsbygoogle" style="display:block" '
             f'data-ad-client="{client}" data-ad-slot="{sid}" data-ad-format="auto" data-full-width-responsive="true"></ins></div></aside>')
 
-def head(pre):
+def head(R):
     s = ('<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
          '<meta name="theme-color" content="#0b1417">\n'
-         f'<link rel="icon" type="image/png" href="{pre}img/favicon.png">\n<link rel="apple-touch-icon" href="{pre}img/apple-touch-icon.png">\n'
-         f'<link rel="manifest" href="{pre}manifest.webmanifest">\n'
-         f'<link rel="preload" href="{pre}fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>\n'
-         f'<link rel="stylesheet" href="{pre}site.css">')
+         f'<link rel="icon" type="image/png" href="{R}img/favicon.png">\n<link rel="apple-touch-icon" href="{R}img/apple-touch-icon.png">\n'
+         f'<link rel="manifest" href="{R}manifest.webmanifest">\n'
+         f'<link rel="preload" href="{R}fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>\n'
+         f'<link rel="stylesheet" href="{R}site.css">')
     if client:
         s += (f'\n<meta name="google-adsense-account" content="{client}">'
               f'\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>')
     return s
 
-def foot(pre):
-    consent = '<button type="button" class="linkbtn" data-consent>Privacidad y cookies</button>' if client else ""
-    ver = re.search(r'var BUILD = \{v: "([^"]+)"', html)
+ver = re.search(r'var BUILD = \{v: "([^"]+)"', html)
+def foot(l, L, R, page):
+    consent = f'<button type="button" class="linkbtn" data-consent>{t(l, "consent")}</button>' if client else ""
+    langs = "".join(f'<a href="{R}{"" if o == "es" else o + "/"}{page}" hreflang="{o}" lang="{o}" data-weblang="{o}"{" aria-current=\"page\"" if o == l else ""}>{TR["lang_name"][o]}</a>' for o in LANGS)
     return ('<footer class="foot"><div class="wrap">'
-            f'<a href="{pre}jugar/">Jugar</a><a href="{pre}privacidad/">Política de privacidad</a>{consent}'
-            f'<a href="{play_url}" rel="noopener">App de Android</a>'
-            f'<span>Versión {ver.group(1) if ver else ""}</span>'
-            '<p class="legal">Camino a la Leyenda es un juego independiente. Los nombres de futbolistas, entrenadores y clubes son inventados; '
-            'no está afiliado a ningún club, liga ni jugador.</p></div></footer>')
+            f'<a href="{L}jugar/">{t(l, "play")}</a><a href="{L}privacidad/">{t(l, "privacy_policy")}</a>{consent}'
+            f'<a href="{play_url}" rel="noopener">{t(l, "android_app")}</a>'
+            f'<span>{t(l, "version", v=ver.group(1) if ver else "")}</span>'
+            f'<nav class="flangs" aria-label="{t(l, "language")}">{langs}</nav>'
+            f'<p class="legal">{t(l, "legal")}</p></div></footer>')
 
-today = datetime.date.today().strftime("%d/%m/%Y")
-def render(name, pre):
-    t = (WEB / name).read_text()
-    t = t.replace("{{HEAD}}", head(pre)).replace("{{FOOT}}", foot(pre)).replace("{{BASE}}", base).replace("{{PLAY_URL}}", play_url).replace("{{DATE}}", today)
-    t = t.replace("{{CONSENT_LINK}}", '<button type="button" class="linkbtn" data-consent>Cookies</button>' if client else "")
-    t = t.replace("{{CONSENT_TEXT}}", " con el enlace «Privacidad y cookies» del pie de cualquier página" if client else " borrando los datos de este sitio en tu navegador")
-    t = re.sub(r"\{\{AD:(\w+)\}\}", lambda m: ad(m.group(1), "juego_lateral" if m.group(1) == "juego_lateral2" else None), t)
-    assert "{{" not in t, name + ": queda una marca sin sustituir"
-    return t
+def langmenu(l, R, page):
+    items = "".join(f'<a href="{R}{"" if o == "es" else o + "/"}{page}" hreflang="{o}" lang="{o}" data-weblang="{o}"{" aria-current=\"page\"" if o == l else ""}>{TR["lang_name"][o]}</a>' for o in LANGS)
+    return (f'<details class="lang"><summary aria-label="{t(l, "language")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
+            f'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>{l.upper()}</summary>'
+            f'<div class="langm">{items}</div></details>')
 
-(OUT / "index.html").write_text(render("index.html", ""))
-(OUT / "jugar" / "index.html").write_text(render("jugar.html", "../"))
-(OUT / "privacidad" / "index.html").write_text(render("privacidad.html", "../"))
-(OUT / "404.html").write_text(render("index.html", "").replace('<link rel="canonical"', '<meta name="robots" content="noindex"><link rel="canonical"'))
+def link(href, text): return f'<a href="{href}" rel="noopener">{text}</a>'
+
+def render(name, l, page):
+    depth = (0 if l == "es" else 1) + (0 if page == "" else 1)
+    R = "../" * depth
+    L = "" if page == "" else "../"
+    url = base + ("" if l == "es" else l + "/") + page
+    alt = "\n".join(f'<link rel="alternate" hreflang="{o}" href="{base}{"" if o == "es" else o + "/"}{page}">' for o in LANGS) + f'\n<link rel="alternate" hreflang="x-default" href="{base}{page}">'
+    def shot(m):
+        k = m.group(1); f2 = f"shot-{l}-{k}.webp"
+        return f2 if l != "es" and (WEB / "img" / f2).exists() else f"shot-{k}.webp"
+    og = f"og-{l}.png" if l != "es" and (WEB / "img" / f"og-{l}.png").exists() else "og.png"
+    jst = {k[3:]: TR[k][l] for k in TR if k.startswith("js_")}
+    jst.update({"a": TR["team_a"][l], "b": TR["team_b"][l]})
+    datefmt = today.strftime("%d/%m/%Y") if l != "en" else today.strftime("%d %B %Y")
+    rep = {
+        "{{HEAD}}": head(R), "{{FOOT}}": foot(l, L, R, page), "{{LANG}}": l, "{{LOCALE}}": LOCALE[l], "{{URL}}": url, "{{ALT}}": alt,
+        "{{BASE}}": base, "{{R}}": R, "{{OG}}": og, "{{PLAY_URL}}": play_url, "{{LANGMENU}}": langmenu(l, R, page),
+        "{{CONSENT_LINK}}": f'<button type="button" class="linkbtn" data-consent>{t(l, "cookies")}</button>' if client else "",
+        "{{JS_T}}": "<script>window.T = " + json.dumps(jst, ensure_ascii=False) + ";</script>",
+        "{{UPDATED}}": t(l, "updated", d=datefmt),
+        "{{ADS_L3}}": t(l, "p_ads_l3", a=link("https://myadcenter.google.com/", "myadcenter.google.com"), b=link("https://www.aboutads.info/choices/", "aboutads.info")),
+        "{{CONS}}": t(l, "p_cons", how=t(l, "cons_how_ads" if client else "cons_how_noads")),
+        "{{HOST}}": t(l, "p_host", a=link("https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement", t(l, "p_host_a"))),
+        "{{CHG}}": t(l, "p_chg", a=link(play_url, t(l, "p_chg_a"))),
+    }
+    s2 = (WEB / name).read_text()
+    for a, b in rep.items():
+        s2 = s2.replace(a, b)
+    s2 = re.sub(r"\{\{SHOT:(\w+)\}\}", shot, s2)
+    s2 = re.sub(r"\{\{t:(\w+)\}\}", lambda m: t(l, m.group(1)), s2)
+    s2 = re.sub(r"\{\{AD:(\w+)\}\}", lambda m: ad(l, m.group(1)), s2)
+    assert "{{" not in s2, f"{l}/{name}: queda una marca sin sustituir: " + s2[s2.index("{{"):s2.index("{{") + 40]
+    return s2
+
+for l in LANGS:
+    for name, page in PAGES:
+        d = OUT / ("" if l == "es" else l) / page
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "index.html").write_text(render(name, l, page))
+(OUT / "404.html").write_text(render("index.html", "es", "").replace('<link rel="canonical"', '<meta name="robots" content="noindex"><link rel="canonical"'))
 # en una ruta desconocida las rutas relativas no valen: el 404 usa la base absoluta
 if base.startswith("http"):
-    t = (OUT / "404.html").read_text()
-    t = re.sub(r'(href|src)="(?!https?:|#|data:)([^"]*)"', lambda m: f'{m.group(1)}="{base}{m.group(2).lstrip("./")}"' if not m.group(2).startswith("/") else m.group(0), t)
-    (OUT / "404.html").write_text(t)
+    t404 = (OUT / "404.html").read_text()
+    t404 = re.sub(r'(href|src)="(?!https?:|#|data:)([^"]*)"', lambda m: f'{m.group(1)}="{base}{m.group(2).lstrip("./")}"' if not m.group(2).startswith("/") else m.group(0), t404)
+    (OUT / "404.html").write_text(t404)
 
 (OUT / "manifest.webmanifest").write_text(json.dumps({
     "name": "Camino a la Leyenda", "short_name": "Camino", "start_url": "./jugar/", "display": "standalone",
     "background_color": "#0b1417", "theme_color": "#0b1417", "lang": "es",
     "icons": [{"src": "img/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png"}]}, ensure_ascii=False))
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {base}sitemap.xml\n")
-(OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    "".join(f"<url><loc>{base}{p}</loc></url>\n" for p in ("", "jugar/", "privacidad/")) + "</urlset>\n")
+(OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
+    "".join(f"<url><loc>{base}{'' if l == 'es' else l + '/'}{p}</loc>" + "".join(f'<xhtml:link rel="alternate" hreflang="{o}" href="{base}{"" if o == "es" else o + "/"}{p}"/>' for o in LANGS) + "</url>\n"
+            for l in LANGS for _, p in PAGES) + "</urlset>\n")
 if client:
     (OUT / "ads.txt").write_text(f"google.com, {client.replace('ca-', '')}, DIRECT, f08c47fec0942fa0\n")
 if domain:

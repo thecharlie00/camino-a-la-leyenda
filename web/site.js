@@ -27,6 +27,21 @@
     else { window.googlefc = fc || {}; window.googlefc.callbackQueue = window.googlefc.callbackQueue || []; window.googlefc.callbackQueue.push({CONSENT_API_READY: function () { window.googlefc.showRevocationMessage(); }}); }
   });
 
+  /* ---------- idioma de la web ---------- */
+  var ll = document.querySelectorAll("[data-weblang]");
+  for (var li = 0; li < ll.length; li++) ll[li].addEventListener("click", function () { try { localStorage.setItem("camino.webpick", this.getAttribute("data-weblang")); } catch (e) {} });
+  /* menú de idioma: se cierra al pulsar fuera */
+  document.addEventListener("click", function (ev) { var d = document.querySelectorAll("details.lang[open]"); for (var i = 0; i < d.length; i++) if (!d[i].contains(ev.target)) d[i].open = false; });
+  /* primera visita a la portada en castellano: si el navegador está en otro idioma del juego, se abre esa versión */
+  try {
+    var root = document.documentElement.lang === "es" && document.querySelector("link[rel=alternate][hreflang=en]") && /\/(index\.html)?$/.test(location.pathname) && document.getElementById("pitch");
+    if (root && !localStorage.getItem("camino.webpick")) {
+      var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "", pl = nav.slice(0, 2).toLowerCase();
+      if (/^(en|de|it|fr)$/.test(pl)) { localStorage.setItem("camino.webpick", pl); location.replace(pl + "/"); return; }
+      localStorage.setItem("camino.webpick", "es");
+    }
+  } catch (e) {}
+
   /* ---------- pantalla completa del juego (ordenador) ---------- */
   var fs = document.getElementById("fs"), pf = document.getElementById("pframe");
   if (fs && pf) {
@@ -60,6 +75,9 @@
   var NAMES = [["Ribas", "Lozano", "Teo", "Barro", "Quique", "Moya", "Iker", "Saúl", "Pino", "Nando", "Cuesta"], ["Ferro", "Abel", "Garrido", "Nuño", "Ruiz", "Calvo", "Duarte", "Mateo", "Rivas", "Ortega", "Vidal"]];
   var T = [[], []], ball = {x: 52.5, y: 34, fx: 0, fy: 0, tx: 0, ty: 0, t: 1, d: 1, h: 0, z: 0}, own = 0, holder = 9, nextAt = 0, clock = 0, minute = 1, goals = [0, 0], shot = null, pause = 0;
   var sc = document.getElementById("sc"), say = document.getElementById("say");
+  /* textos del comentario en el idioma de la página (window.T lo pone cada página) */
+  var TT = window.T || {kick: "Empieza el partido.", again: "Empieza otro partido.", shot: "Tiro de {n}…", try: "Lo intenta {n}…", goal: "¡Gol de {n}! {t} celebra.", out: "Fuera. Saca de puerta el portero.", rec: "Recupera {n}.", a: "Ribera", b: "Montaña"};
+  function tt(k, p) { var v = TT[k] || ""; for (var x in p || {}) v = v.split("{" + x + "}").join(p[x]); return v; }
   for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
     var x = s ? W - F[i][0] : F[i][0], y = s ? H - F[i][1] : F[i][1];
     T[s].push({x: x, y: y, vx: 0, vy: 0, hx: F[i][0], hy: F[i][1], sp: 6 + Math.random() * 2.2, n: i + 1, ph: Math.random() * 6});
@@ -76,7 +94,7 @@
       if (!goal && Math.random() < 0.5) gy = 34 + (Math.random() < 0.5 ? -1 : 1) * (4.2 + Math.random() * 3);
       shot = {s: own, goal: goal, who: NAMES[own][holder]};
       kick(U(own, W + 0.8), gy, 0.55, 0.6);
-      line(goal ? "Tiro de " + shot.who + "…" : "Lo intenta " + shot.who + "…");
+      line(tt(goal ? "shot" : "try", {n: shot.who}));
       return;
     }
     var best = -1, bw = -1;
@@ -99,19 +117,19 @@
       var s0 = shot.s, who = shot.who; shot = null;
       if (Math.abs(ball.ty - 34) < 3.6 && Math.random() < 0.85) {
         goals[s0]++; if (sc) sc.textContent = goals[0] + "-" + goals[1];
-        line("¡Gol de " + who + "! " + (s0 ? "Montaña" : "Ribera") + " celebra.");
-      } else line("Fuera. Saca de puerta el portero.");
+        line(tt("goal", {n: who, t: s0 ? TT.b : TT.a}));
+      } else line(tt("out"));
       pause = 1.6; own = 1 - s0; holder = 0; ball.x = U(own, 5); ball.y = 34; nextAt = clock + 1.8;
       return;
     }
     var to = ball.to || {s: own, i: 9};
-    if (to.s !== own) line("Recupera " + NAMES[to.s][to.i] + ".");
+    if (to.s !== own) line(tt("rec", {n: NAMES[to.s][to.i]}));
     own = to.s; holder = to.i; nextAt = clock + 0.5 + Math.random() * 0.7;
   }
   function step(dt) {
     clock += dt;
     if (clock > minute * 1.25 && minute < 90) minute++;
-    if (minute >= 90 && clock > minute * 1.25 + 4) { minute = 1; clock = 0; goals = [0, 0]; if (sc) sc.textContent = "0-0"; line("Empieza otro partido."); }
+    if (minute >= 90 && clock > minute * 1.25 + 4) { minute = 1; clock = 0; goals = [0, 0]; if (sc) sc.textContent = "0-0"; line(tt("again")); }
     if (pause > 0) pause -= dt;
     if (holder < 0) {
       ball.t += dt; var k = Math.min(1, ball.t / ball.d), e = k * (2 - k);

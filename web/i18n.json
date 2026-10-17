@@ -1,0 +1,716 @@
+{
+ "lang_name": {
+  "es": "Español",
+  "en": "English",
+  "de": "Deutsch",
+  "it": "Italiano",
+  "fr": "Français"
+ },
+ "language": {
+  "es": "Idioma",
+  "en": "Language",
+  "de": "Sprache",
+  "it": "Lingua",
+  "fr": "Langue"
+ },
+ "meta_title_home": {
+  "es": "Camino a la Leyenda · Juego de fútbol gratis en el navegador",
+  "en": "Camino a la Leyenda · Free football game in your browser",
+  "de": "Camino a la Leyenda · Kostenloses Fußballspiel im Browser",
+  "it": "Camino a la Leyenda · Gioco di calcio gratis nel browser",
+  "fr": "Camino a la Leyenda · Jeu de football gratuit dans le navigateur"
+ },
+ "meta_desc_home": {
+  "es": "Crea a tu futbolista, entrena a un club o funda el tuyo. Partidos en directo en un campo 2D, decisiones dentro y fuera del campo. Gratis y sin crear cuenta.",
+  "en": "Create your footballer, manage a club or found your own. Live matches on a 2D pitch, decisions on and off the field. Free, no account needed.",
+  "de": "Erschaffe deinen Fußballer, trainiere einen Verein oder gründe deinen eigenen. Live-Spiele auf einem 2D-Spielfeld, Entscheidungen auf und neben dem Platz. Kostenlos und ohne Konto.",
+  "it": "Crea il tuo calciatore, allena un club o fondane uno tuo. Partite in diretta su un campo 2D, decisioni dentro e fuori dal campo. Gratis e senza account.",
+  "fr": "Crée ton footballeur, entraîne un club ou fonde le tien. Matchs en direct sur un terrain 2D, décisions sur et en dehors du terrain. Gratuit et sans compte."
+ },
+ "og_desc": {
+  "es": "Crea a tu futbolista y llévalo hasta la leyenda. Gratis en el navegador.",
+  "en": "Create your footballer and take him all the way to legend. Free in your browser.",
+  "de": "Erschaffe deinen Fußballer und mach ihn zur Legende. Kostenlos im Browser.",
+  "it": "Crea il tuo calciatore e portalo fino alla leggenda. Gratis nel browser.",
+  "fr": "Crée ton footballeur et emmène-le jusqu'à la légende. Gratuit dans le navigateur."
+ },
+ "skip": {
+  "es": "Saltar al contenido",
+  "en": "Skip to content",
+  "de": "Zum Inhalt springen",
+  "it": "Vai al contenuto",
+  "fr": "Aller au contenu"
+ },
+ "nav_label": {
+  "es": "Principal",
+  "en": "Main",
+  "de": "Hauptmenü",
+  "it": "Principale",
+  "fr": "Principal"
+ },
+ "nav_modes": {
+  "es": "Modos",
+  "en": "Modes",
+  "de": "Modi",
+  "it": "Modalità",
+  "fr": "Modes"
+ },
+ "nav_feats": {
+  "es": "Qué trae",
+  "en": "What's inside",
+  "de": "Was drin ist",
+  "it": "Cosa c'è",
+  "fr": "Contenu"
+ },
+ "play": {
+  "es": "Jugar",
+  "en": "Play",
+  "de": "Spielen",
+  "it": "Gioca",
+  "fr": "Jouer"
+ },
+ "h1": {
+  "es": "Crea a tu futbolista y llévalo hasta la leyenda.",
+  "en": "Create your footballer and take him all the way to legend.",
+  "de": "Erschaffe deinen Fußballer und mach ihn zur Legende.",
+  "it": "Crea il tuo calciatore e portalo fino alla leggenda.",
+  "fr": "Crée ton footballeur et emmène-le jusqu'à la légende."
+ },
+ "lead": {
+  "es": "Ficha por un club, juega los partidos en directo y decide cada paso de tu carrera: contratos, prensa, vestuario y selección. O siéntate en el banquillo y dirige tú al equipo.",
+  "en": "Sign for a club, play matches live and decide every step of your career: contracts, press, dressing room and national team. Or take the dugout and manage the team yourself.",
+  "de": "Unterschreib bei einem Verein, spiel die Partien live und entscheide jeden Schritt deiner Karriere: Verträge, Presse, Kabine und Nationalmannschaft. Oder setz dich auf die Bank und führe selbst das Team.",
+  "it": "Firma per un club, gioca le partite in diretta e decidi ogni passo della tua carriera: contratti, stampa, spogliatoio e nazionale. Oppure siediti in panchina e guida tu la squadra.",
+  "fr": "Signe dans un club, joue les matchs en direct et décide de chaque étape de ta carrière : contrats, presse, vestiaire et sélection. Ou prends place sur le banc et dirige toi-même l'équipe."
+ },
+ "play_now": {
+  "es": "Jugar ahora",
+  "en": "Play now",
+  "de": "Jetzt spielen",
+  "it": "Gioca ora",
+  "fr": "Jouer maintenant"
+ },
+ "android": {
+  "es": "Descargar para Android",
+  "en": "Get it for Android",
+  "de": "Für Android herunterladen",
+  "it": "Scarica per Android",
+  "fr": "Télécharger pour Android"
+ },
+ "fine": {
+  "es": "Gratis y sin crear cuenta. Tus partidas se guardan en este navegador.",
+  "en": "Free and no account needed. Your saves stay in this browser.",
+  "de": "Kostenlos und ohne Konto. Deine Spielstände werden in diesem Browser gespeichert.",
+  "it": "Gratis e senza account. I tuoi salvataggi restano in questo browser.",
+  "fr": "Gratuit et sans compte. Tes parties sont enregistrées dans ce navigateur."
+ },
+ "match_label": {
+  "es": "Simulación de un partido en el campo 2D",
+  "en": "Simulated match on the 2D pitch",
+  "de": "Simuliertes Spiel auf dem 2D-Spielfeld",
+  "it": "Partita simulata sul campo 2D",
+  "fr": "Match simulé sur le terrain 2D"
+ },
+ "team_a": {
+  "es": "Ribera",
+  "en": "Riverside",
+  "de": "Ufertal",
+  "it": "Riviera",
+  "fr": "Rivière"
+ },
+ "team_b": {
+  "es": "Montaña",
+  "en": "Mountain",
+  "de": "Bergland",
+  "it": "Montagna",
+  "fr": "Montagne"
+ },
+ "modes_h": {
+  "es": "Elige cómo jugar",
+  "en": "Choose how to play",
+  "de": "Wähle, wie du spielst",
+  "it": "Scegli come giocare",
+  "fr": "Choisis comment jouer"
+ },
+ "modes_intro": {
+  "es": "Tres formas de empezar. Puedes tener varias partidas a la vez y cambiar de una a otra cuando quieras.",
+  "en": "Three ways to start. You can keep several saves at once and switch between them whenever you like.",
+  "de": "Drei Arten zu starten. Du kannst mehrere Spielstände gleichzeitig haben und jederzeit wechseln.",
+  "it": "Tre modi per iniziare. Puoi avere più partite insieme e passare dall'una all'altra quando vuoi.",
+  "fr": "Trois façons de commencer. Tu peux avoir plusieurs parties à la fois et passer de l'une à l'autre quand tu veux."
+ },
+ "m1_h": {
+  "es": "Carrera de jugador",
+  "en": "Player career",
+  "de": "Spielerkarriere",
+  "it": "Carriera da giocatore",
+  "fr": "Carrière de joueur"
+ },
+ "m1_p": {
+  "es": "Crea a tu futbolista y vive su carrera entera, de la cantera a la retirada. Cuando cuelgues las botas, puedes seguir como entrenador.",
+  "en": "Create your footballer and live his whole career, from the academy to retirement. When you hang up your boots, you can carry on as a manager.",
+  "de": "Erschaffe deinen Fußballer und erlebe seine ganze Karriere, von der Jugend bis zum Karriereende. Danach kannst du als Trainer weitermachen.",
+  "it": "Crea il tuo calciatore e vivi tutta la sua carriera, dal vivaio al ritiro. Quando appendi gli scarpini al chiodo, puoi continuare da allenatore.",
+  "fr": "Crée ton footballeur et vis toute sa carrière, du centre de formation à la retraite. Une fois les crampons raccrochés, tu peux continuer comme entraîneur."
+ },
+ "m2_h": {
+  "es": "Carrera de míster",
+  "en": "Manager career",
+  "de": "Trainerkarriere",
+  "it": "Carriera da mister",
+  "fr": "Carrière d'entraîneur"
+ },
+ "m2_p": {
+  "es": "Empieza en el banquillo del club que elijas: fichajes, alineación, renovaciones y moral del vestuario. Y cambios tácticos en pleno partido.",
+  "en": "Start in the dugout of the club you choose: signings, line-ups, renewals and dressing-room morale. Plus tactical changes mid-match.",
+  "de": "Starte auf der Trainerbank des Vereins deiner Wahl: Transfers, Aufstellung, Vertragsverlängerungen und Stimmung in der Kabine. Dazu taktische Wechsel mitten im Spiel.",
+  "it": "Parti dalla panchina del club che scegli: acquisti, formazione, rinnovi e morale dello spogliatoio. E cambi tattici a partita in corso.",
+  "fr": "Commence sur le banc du club de ton choix : recrutements, composition, prolongations et moral du vestiaire. Et changements tactiques en plein match."
+ },
+ "m3_h": {
+  "es": "Crea tu club",
+  "en": "Create your club",
+  "de": "Gründe deinen Verein",
+  "it": "Crea il tuo club",
+  "fr": "Crée ton club"
+ },
+ "m3_p": {
+  "es": "Inventa un club con su nombre, colores y escudo, ponlo en la liga que quieras y súbelo desde abajo con una plantilla nueva.",
+  "en": "Invent a club with its own name, colours and crest, put it in any league you like and build it up from the bottom with a new squad.",
+  "de": "Erfinde einen Verein mit Namen, Farben und Wappen, steck ihn in die Liga deiner Wahl und bring ihn mit einem neuen Kader nach oben.",
+  "it": "Inventa un club con nome, colori e stemma, mettilo nel campionato che vuoi e portalo in alto con una rosa nuova.",
+  "fr": "Invente un club avec son nom, ses couleurs et son blason, place-le dans le championnat de ton choix et fais-le grimper avec un effectif neuf."
+ },
+ "both": {
+  "es": "Todos los modos se pueden jugar en fútbol masculino o femenino.",
+  "en": "Every mode can be played in men's or women's football.",
+  "de": "Alle Modi gibt es im Männer- und im Frauenfußball.",
+  "it": "Tutte le modalità si possono giocare nel calcio maschile o femminile.",
+  "fr": "Tous les modes se jouent en football masculin ou féminin."
+ },
+ "shots_h": {
+  "es": "Así se juega",
+  "en": "How it plays",
+  "de": "So wird gespielt",
+  "it": "Come si gioca",
+  "fr": "Comment on joue"
+ },
+ "shots_intro": {
+  "es": "Una semana de juego cabe en un toque. Lo importante, el partido y las decisiones, se ve con calma.",
+  "en": "A week of play takes a single tap. What matters, the match and the decisions, you see in your own time.",
+  "de": "Eine Spielwoche braucht nur einen Tipp. Das Wichtige, das Spiel und die Entscheidungen, siehst du in Ruhe.",
+  "it": "Una settimana di gioco richiede un solo tocco. Le cose importanti, la partita e le decisioni, le vedi con calma.",
+  "fr": "Une semaine de jeu tient en une touche. L'essentiel, le match et les décisions, se voit à ton rythme."
+ },
+ "s1_alt": {
+  "es": "Partido en directo con el campo 2D, el marcador y los goles esperados",
+  "en": "Live match with the 2D pitch, the scoreboard and expected goals",
+  "de": "Live-Spiel mit 2D-Spielfeld, Anzeigetafel und erwarteten Toren",
+  "it": "Partita in diretta con il campo 2D, il tabellone e i gol attesi",
+  "fr": "Match en direct avec le terrain 2D, le tableau d'affichage et les buts attendus"
+ },
+ "s1_cap": {
+  "es": "Partidos en directo en un campo 2D, con xG, momento del partido y cambios.",
+  "en": "Live matches on a 2D pitch, with xG, match momentum and substitutions.",
+  "de": "Live-Spiele auf einem 2D-Spielfeld mit xG, Spielmomentum und Wechseln.",
+  "it": "Partite in diretta su un campo 2D, con xG, inerzia della partita e cambi.",
+  "fr": "Matchs en direct sur un terrain 2D, avec xG, dynamique du match et remplacements."
+ },
+ "s2_alt": {
+  "es": "Pantalla de carrera con la temporada en curso",
+  "en": "Career screen with the current season",
+  "de": "Karrierebildschirm mit der laufenden Saison",
+  "it": "Schermata della carriera con la stagione in corso",
+  "fr": "Écran de carrière avec la saison en cours"
+ },
+ "s2_cap": {
+  "es": "Tu temporada semana a semana: forma, minutos, contrato y objetivos.",
+  "en": "Your season week by week: form, minutes, contract and goals.",
+  "de": "Deine Saison Woche für Woche: Form, Einsatzminuten, Vertrag und Ziele.",
+  "it": "La tua stagione settimana per settimana: forma, minuti, contratto e obiettivi.",
+  "fr": "Ta saison semaine après semaine : forme, temps de jeu, contrat et objectifs."
+ },
+ "s3_alt": {
+  "es": "Plantilla del club con las caras de los jugadores y su estado físico",
+  "en": "Club squad with player faces and fitness",
+  "de": "Vereinskader mit Gesichtern und Fitness der Spieler",
+  "it": "Rosa del club con i volti dei giocatori e la loro forma fisica",
+  "fr": "Effectif du club avec les visages des joueurs et leur condition physique"
+ },
+ "s3_cap": {
+  "es": "Plantilla con caras, posiciones y estado físico de cada jugador.",
+  "en": "A squad with every player's face, positions and fitness.",
+  "de": "Kader mit Gesicht, Positionen und Fitness jedes Spielers.",
+  "it": "Rosa con volto, ruoli e forma fisica di ogni giocatore.",
+  "fr": "Un effectif avec le visage, les postes et la condition de chaque joueur."
+ },
+ "s4_alt": {
+  "es": "La mascota del futbolista con accesorios",
+  "en": "The footballer's pet with accessories",
+  "de": "Das Haustier des Fußballers mit Accessoires",
+  "it": "L'animale del calciatore con accessori",
+  "fr": "L'animal du footballeur avec ses accessoires"
+ },
+ "s4_cap": {
+  "es": "Una mascota que cuidar, con colores y accesorios que ganas con títulos.",
+  "en": "A pet to look after, with colours and accessories you earn by winning titles.",
+  "de": "Ein Haustier zum Kümmern, mit Farben und Accessoires, die du mit Titeln gewinnst.",
+  "it": "Un animale da accudire, con colori e accessori che guadagni vincendo titoli.",
+  "fr": "Un animal dont prendre soin, avec des couleurs et des accessoires gagnés grâce aux titres."
+ },
+ "feats_h": {
+  "es": "Lo que trae una temporada",
+  "en": "What a season brings",
+  "de": "Was eine Saison bringt",
+  "it": "Cosa porta una stagione",
+  "fr": "Ce qu'apporte une saison"
+ },
+ "feats_intro": {
+  "es": "Ligas, copas y selecciones de medio mundo, con nombres inventados inspirados en el fútbol real.",
+  "en": "Leagues, cups and national teams from around the world, with made-up names inspired by real football.",
+  "de": "Ligen, Pokale und Nationalteams aus aller Welt, mit erfundenen Namen nach Vorbild des echten Fußballs.",
+  "it": "Campionati, coppe e nazionali di mezzo mondo, con nomi inventati ispirati al calcio reale.",
+  "fr": "Championnats, coupes et sélections du monde entier, avec des noms inventés inspirés du vrai football."
+ },
+ "f1_t": {
+  "es": "Partidos que se ven",
+  "en": "Matches you can watch",
+  "de": "Spiele zum Zuschauen",
+  "it": "Partite da vedere",
+  "fr": "Des matchs qui se regardent"
+ },
+ "f1_d": {
+  "es": "Las bolitas se mueven según el ritmo, el pase y la colocación de cada jugador. Penaltis y faltas los tiras tú.",
+  "en": "The dots move according to each player's pace, passing and positioning. You take the penalties and free kicks yourself.",
+  "de": "Die Punkte bewegen sich nach Tempo, Passspiel und Stellungsspiel jedes Spielers. Elfmeter und Freistöße schießt du selbst.",
+  "it": "I pallini si muovono secondo il ritmo, il passaggio e il posizionamento di ogni giocatore. Rigori e punizioni li calci tu.",
+  "fr": "Les pastilles bougent selon la vitesse, la passe et le placement de chaque joueur. Penaltys et coups francs, c'est toi qui les tires."
+ },
+ "f2_t": {
+  "es": "Decisiones fuera del campo",
+  "en": "Decisions off the pitch",
+  "de": "Entscheidungen neben dem Platz",
+  "it": "Decisioni fuori dal campo",
+  "fr": "Décisions en dehors du terrain"
+ },
+ "f2_d": {
+  "es": "Ruedas de prensa, ofertas, polémicas en el vestuario y momentos que cambian una carrera.",
+  "en": "Press conferences, offers, dressing-room rows and moments that change a career.",
+  "de": "Pressekonferenzen, Angebote, Ärger in der Kabine und Momente, die eine Karriere verändern.",
+  "it": "Conferenze stampa, offerte, polemiche nello spogliatoio e momenti che cambiano una carriera.",
+  "fr": "Conférences de presse, offres, polémiques dans le vestiaire et moments qui changent une carrière."
+ },
+ "f3_t": {
+  "es": "Tu mercado",
+  "en": "Your transfers",
+  "de": "Dein Transfermarkt",
+  "it": "Il tuo mercato",
+  "fr": "Ton mercato"
+ },
+ "f3_d": {
+  "es": "Negocia contratos, pide el traspaso o, como míster, ficha y vende para cuadrar las cuentas.",
+  "en": "Negotiate contracts, ask for a transfer or, as manager, buy and sell to balance the books.",
+  "de": "Verhandle Verträge, bitte um einen Wechsel oder kaufe und verkaufe als Trainer, damit die Kasse stimmt.",
+  "it": "Negozia i contratti, chiedi la cessione o, da mister, compra e vendi per far quadrare i conti.",
+  "fr": "Négocie tes contrats, demande un transfert ou, comme entraîneur, achète et vends pour équilibrer les comptes."
+ },
+ "f4_t": {
+  "es": "Logros y Salón de la fama",
+  "en": "Achievements and Hall of Fame",
+  "de": "Erfolge und Hall of Fame",
+  "it": "Obiettivi e Hall of Fame",
+  "fr": "Succès et Panthéon"
+ },
+ "f4_d": {
+  "es": "Decenas de logros, trofeos y récords que se quedan aunque empieces otra partida.",
+  "en": "Dozens of achievements, trophies and records that stay with you even when you start a new save.",
+  "de": "Dutzende Erfolge, Trophäen und Rekorde, die bleiben, auch wenn du ein neues Spiel beginnst.",
+  "it": "Decine di obiettivi, trofei e record che restano anche se inizi un'altra partita.",
+  "fr": "Des dizaines de succès, trophées et records qui restent même si tu commences une autre partie."
+ },
+ "f5_t": {
+  "es": "En cinco idiomas",
+  "en": "In five languages",
+  "de": "In fünf Sprachen",
+  "it": "In cinque lingue",
+  "fr": "En cinq langues"
+ },
+ "f5_d": {
+  "es": "Castellano, inglés, alemán, italiano y francés. Cámbialo cuando quieras desde el menú.",
+  "en": "Spanish, English, German, Italian and French. Switch any time from the menu.",
+  "de": "Spanisch, Englisch, Deutsch, Italienisch und Französisch. Jederzeit im Menü umstellbar.",
+  "it": "Spagnolo, inglese, tedesco, italiano e francese. Cambiala quando vuoi dal menu.",
+  "fr": "Espagnol, anglais, allemand, italien et français. Change quand tu veux depuis le menu."
+ },
+ "f6_t": {
+  "es": "Tu partida, contigo",
+  "en": "Your save, with you",
+  "de": "Dein Spielstand, immer dabei",
+  "it": "La tua partita, con te",
+  "fr": "Ta partie, avec toi"
+ },
+ "f6_d": {
+  "es": "Copia tu partida con un código y sigue jugando en otro navegador o en la app de Android.",
+  "en": "Copy your save as a code and keep playing in another browser or in the Android app.",
+  "de": "Kopiere deinen Spielstand als Code und spiel in einem anderen Browser oder in der Android-App weiter.",
+  "it": "Copia la tua partita con un codice e continua a giocare in un altro browser o nell'app Android.",
+  "fr": "Copie ta partie avec un code et continue à jouer dans un autre navigateur ou dans l'application Android."
+ },
+ "last_h": {
+  "es": "El primer partido empieza ya",
+  "en": "Your first match starts now",
+  "de": "Dein erstes Spiel beginnt jetzt",
+  "it": "La prima partita inizia ora",
+  "fr": "Ton premier match commence maintenant"
+ },
+ "last_p": {
+  "es": "No hay que instalar nada ni registrarse. Si cierras la pestaña, la partida te espera donde la dejaste.",
+  "en": "Nothing to install and no sign-up. If you close the tab, your game waits right where you left it.",
+  "de": "Nichts installieren, keine Anmeldung. Wenn du den Tab schließt, wartet dein Spiel genau dort, wo du aufgehört hast.",
+  "it": "Niente da installare e nessuna registrazione. Se chiudi la scheda, la partita ti aspetta dove l'hai lasciata.",
+  "fr": "Rien à installer, aucune inscription. Si tu fermes l'onglet, ta partie t'attend là où tu l'as laissée."
+ },
+ "ad_label": {
+  "es": "Publicidad",
+  "en": "Advertisement",
+  "de": "Anzeige",
+  "it": "Pubblicità",
+  "fr": "Publicité"
+ },
+ "privacy_policy": {
+  "es": "Política de privacidad",
+  "en": "Privacy policy",
+  "de": "Datenschutzerklärung",
+  "it": "Informativa sulla privacy",
+  "fr": "Politique de confidentialité"
+ },
+ "consent": {
+  "es": "Privacidad y cookies",
+  "en": "Privacy and cookies",
+  "de": "Datenschutz und Cookies",
+  "it": "Privacy e cookie",
+  "fr": "Confidentialité et cookies"
+ },
+ "android_app": {
+  "es": "App de Android",
+  "en": "Android app",
+  "de": "Android-App",
+  "it": "App Android",
+  "fr": "Application Android"
+ },
+ "version": {
+  "es": "Versión {v}",
+  "en": "Version {v}",
+  "de": "Version {v}",
+  "it": "Versione {v}",
+  "fr": "Version {v}"
+ },
+ "legal": {
+  "es": "Camino a la Leyenda es un juego independiente. Los nombres de futbolistas, entrenadores y clubes son inventados; no está afiliado a ningún club, liga ni jugador.",
+  "en": "Camino a la Leyenda is an independent game. The names of footballers, managers and clubs are made up; it is not affiliated with any club, league or player.",
+  "de": "Camino a la Leyenda ist ein unabhängiges Spiel. Die Namen von Spielern, Trainern und Vereinen sind erfunden; es besteht keine Verbindung zu Vereinen, Ligen oder Spielern.",
+  "it": "Camino a la Leyenda è un gioco indipendente. I nomi di calciatori, allenatori e club sono inventati; non è affiliato ad alcun club, campionato o giocatore.",
+  "fr": "Camino a la Leyenda est un jeu indépendant. Les noms des footballeurs, entraîneurs et clubs sont inventés ; il n'est affilié à aucun club, championnat ni joueur."
+ },
+ "play_title": {
+  "es": "Jugar · Camino a la Leyenda",
+  "en": "Play · Camino a la Leyenda",
+  "de": "Spielen · Camino a la Leyenda",
+  "it": "Gioca · Camino a la Leyenda",
+  "fr": "Jouer · Camino a la Leyenda"
+ },
+ "play_desc": {
+  "es": "Juega a Camino a la Leyenda en el navegador: carrera de jugador, de míster o crea tu club. Gratis y sin cuenta.",
+  "en": "Play Camino a la Leyenda in your browser: player career, manager career or create your club. Free, no account needed.",
+  "de": "Spiel Camino a la Leyenda im Browser: Spielerkarriere, Trainerkarriere oder gründe deinen Verein. Kostenlos und ohne Konto.",
+  "it": "Gioca a Camino a la Leyenda nel browser: carriera da giocatore, da mister o crea il tuo club. Gratis e senza account.",
+  "fr": "Joue à Camino a la Leyenda dans ton navigateur : carrière de joueur, d'entraîneur ou crée ton club. Gratuit et sans compte."
+ },
+ "fullscreen": {
+  "es": "Pantalla completa",
+  "en": "Full screen",
+  "de": "Vollbild",
+  "it": "Schermo intero",
+  "fr": "Plein écran"
+ },
+ "privacy_short": {
+  "es": "Privacidad",
+  "en": "Privacy",
+  "de": "Datenschutz",
+  "it": "Privacy",
+  "fr": "Confidentialité"
+ },
+ "cookies": {
+  "es": "Cookies",
+  "en": "Cookies",
+  "de": "Cookies",
+  "it": "Cookie",
+  "fr": "Cookies"
+ },
+ "home": {
+  "es": "Inicio",
+  "en": "Home",
+  "de": "Startseite",
+  "it": "Home",
+  "fr": "Accueil"
+ },
+ "rot_p": {
+  "es": "El juego está pensado para el móvil en vertical. Gíralo para verlo mejor.",
+  "en": "The game is designed for a phone held upright. Turn it for a better view.",
+  "de": "Das Spiel ist für das Handy im Hochformat gedacht. Dreh es für eine bessere Ansicht.",
+  "it": "Il gioco è pensato per il telefono in verticale. Ruotalo per vederlo meglio.",
+  "fr": "Le jeu est pensé pour le téléphone à la verticale. Tourne-le pour mieux voir."
+ },
+ "rot_ok": {
+  "es": "Seguir en horizontal",
+  "en": "Keep it sideways",
+  "de": "Im Querformat bleiben",
+  "it": "Resta in orizzontale",
+  "fr": "Rester à l'horizontale"
+ },
+ "priv_title": {
+  "es": "Privacidad y cookies · Camino a la Leyenda",
+  "en": "Privacy and cookies · Camino a la Leyenda",
+  "de": "Datenschutz und Cookies · Camino a la Leyenda",
+  "it": "Privacy e cookie · Camino a la Leyenda",
+  "fr": "Confidentialité et cookies · Camino a la Leyenda"
+ },
+ "priv_desc": {
+  "es": "Qué datos usa la web de Camino a la Leyenda, cómo funcionan los anuncios de Google y cómo cambiar tu consentimiento.",
+  "en": "What data the Camino a la Leyenda website uses, how Google ads work and how to change your consent.",
+  "de": "Welche Daten die Website von Camino a la Leyenda nutzt, wie Google-Anzeigen funktionieren und wie du deine Einwilligung änderst.",
+  "it": "Quali dati usa il sito di Camino a la Leyenda, come funzionano gli annunci di Google e come cambiare il tuo consenso.",
+  "fr": "Quelles données utilise le site de Camino a la Leyenda, comment fonctionnent les annonces Google et comment modifier ton consentement."
+ },
+ "updated": {
+  "es": "Última actualización: {d}",
+  "en": "Last updated: {d}",
+  "de": "Zuletzt aktualisiert: {d}",
+  "it": "Ultimo aggiornamento: {d}",
+  "fr": "Dernière mise à jour : {d}"
+ },
+ "p_sum_h": {
+  "es": "Resumen",
+  "en": "Summary",
+  "de": "Zusammenfassung",
+  "it": "Riepilogo",
+  "fr": "Résumé"
+ },
+ "p_sum": {
+  "es": "La web de Camino a la Leyenda es gratis gracias a los anuncios de Google AdSense, que se muestran en la página alrededor del juego y nunca dentro de la partida. No vendemos tus datos y no necesitas crear una cuenta para jugar.",
+  "en": "The Camino a la Leyenda website is free thanks to Google AdSense ads, which appear on the page around the game and never inside a match. We don't sell your data and you don't need an account to play.",
+  "de": "Die Website von Camino a la Leyenda ist dank Google-AdSense-Anzeigen kostenlos. Sie erscheinen auf der Seite rund um das Spiel und nie während eines Spiels. Wir verkaufen deine Daten nicht und du brauchst kein Konto zum Spielen.",
+  "it": "Il sito di Camino a la Leyenda è gratuito grazie agli annunci di Google AdSense, che compaiono nella pagina intorno al gioco e mai durante una partita. Non vendiamo i tuoi dati e non serve un account per giocare.",
+  "fr": "Le site de Camino a la Leyenda est gratuit grâce aux annonces Google AdSense, affichées sur la page autour du jeu et jamais pendant un match. Nous ne vendons pas tes données et tu n'as pas besoin de compte pour jouer."
+ },
+ "p_data_h": {
+  "es": "Qué guarda el juego",
+  "en": "What the game stores",
+  "de": "Was das Spiel speichert",
+  "it": "Cosa salva il gioco",
+  "fr": "Ce que le jeu enregistre"
+ },
+ "p_data": {
+  "es": "Solo lo que tú creas al jugar: los nombres que escribes, tus partidas, el idioma elegido y el Salón de la fama. Todo se guarda en el almacenamiento local de tu navegador y nunca se envía a ningún servidor.",
+  "en": "Only what you create while playing: the names you type, your saves, the language you chose and the Hall of Fame. Everything is kept in your browser's local storage and is never sent to any server.",
+  "de": "Nur das, was du beim Spielen erstellst: die Namen, die du eingibst, deine Spielstände, die gewählte Sprache und die Hall of Fame. Alles bleibt im lokalen Speicher deines Browsers und wird nie an einen Server gesendet.",
+  "it": "Solo ciò che crei giocando: i nomi che scrivi, le tue partite, la lingua scelta e la Hall of Fame. Tutto resta nella memoria locale del browser e non viene mai inviato a nessun server.",
+  "fr": "Uniquement ce que tu crées en jouant : les noms que tu écris, tes parties, la langue choisie et le Panthéon. Tout reste dans le stockage local de ton navigateur et n'est jamais envoyé à aucun serveur."
+ },
+ "p_ads_h": {
+  "es": "Anuncios y cookies de terceros",
+  "en": "Ads and third-party cookies",
+  "de": "Anzeigen und Cookies von Drittanbietern",
+  "it": "Annunci e cookie di terze parti",
+  "fr": "Annonces et cookies tiers"
+ },
+ "p_ads": {
+  "es": "Esta web usa Google AdSense para mostrar anuncios. Google y sus socios publicitarios usan cookies para mostrar anuncios según tus visitas anteriores a esta y a otras webs, y para medir su rendimiento. Para hacerlo pueden recoger la dirección IP, la ubicación aproximada, datos técnicos del navegador e información sobre cómo interactúas con los anuncios.",
+  "en": "This website uses Google AdSense to show ads. Google and its advertising partners use cookies to show ads based on your previous visits to this and other websites, and to measure how they perform. To do so they may collect your IP address, approximate location, technical browser data and information about how you interact with ads.",
+  "de": "Diese Website nutzt Google AdSense, um Anzeigen zu zeigen. Google und seine Werbepartner verwenden Cookies, um Anzeigen auf Grundlage deiner früheren Besuche auf dieser und anderen Websites zu zeigen und ihre Leistung zu messen. Dazu können sie deine IP-Adresse, deinen ungefähren Standort, technische Browserdaten und Informationen darüber erfassen, wie du mit Anzeigen interagierst.",
+  "it": "Questo sito usa Google AdSense per mostrare annunci. Google e i suoi partner pubblicitari usano cookie per mostrare annunci in base alle tue visite precedenti a questo e ad altri siti, e per misurarne il rendimento. Per farlo possono raccogliere l'indirizzo IP, la posizione approssimativa, dati tecnici del browser e informazioni su come interagisci con gli annunci.",
+  "fr": "Ce site utilise Google AdSense pour afficher des annonces. Google et ses partenaires publicitaires utilisent des cookies pour afficher des annonces selon tes visites précédentes sur ce site et sur d'autres, et pour mesurer leurs performances. Pour cela, ils peuvent collecter ton adresse IP, ta position approximative, des données techniques du navigateur et des informations sur tes interactions avec les annonces."
+ },
+ "p_ads_l1": {
+  "es": "Cómo usa Google los datos de las webs de sus socios:",
+  "en": "How Google uses data from its partners' websites:",
+  "de": "Wie Google Daten von Partner-Websites verwendet:",
+  "it": "Come Google usa i dati dei siti dei suoi partner:",
+  "fr": "Comment Google utilise les données des sites de ses partenaires :"
+ },
+ "p_ads_l2": {
+  "es": "Política de privacidad de Google:",
+  "en": "Google's privacy policy:",
+  "de": "Datenschutzerklärung von Google:",
+  "it": "Informativa sulla privacy di Google:",
+  "fr": "Politique de confidentialité de Google :"
+ },
+ "p_ads_l3": {
+  "es": "Puedes desactivar los anuncios personalizados en {a} y los de otros proveedores en {b}.",
+  "en": "You can turn off personalised ads at {a}, and those from other providers at {b}.",
+  "de": "Personalisierte Anzeigen kannst du unter {a} deaktivieren, die anderer Anbieter unter {b}.",
+  "it": "Puoi disattivare gli annunci personalizzati su {a} e quelli di altri fornitori su {b}.",
+  "fr": "Tu peux désactiver les annonces personnalisées sur {a}, et celles d'autres fournisseurs sur {b}."
+ },
+ "p_cons_h": {
+  "es": "Tu consentimiento",
+  "en": "Your consent",
+  "de": "Deine Einwilligung",
+  "it": "Il tuo consenso",
+  "fr": "Ton consentement"
+ },
+ "p_cons": {
+  "es": "Si estás en el Espacio Económico Europeo, el Reino Unido o Suiza, la web te pregunta al entrar si aceptas cookies y anuncios personalizados. Si no aceptas, los anuncios que veas no estarán personalizados. Puedes cambiar tu elección cuando quieras {how}.",
+  "en": "If you are in the European Economic Area, the United Kingdom or Switzerland, the site asks when you arrive whether you accept cookies and personalised ads. If you don't, the ads you see won't be personalised. You can change your choice at any time {how}.",
+  "de": "Wenn du dich im Europäischen Wirtschaftsraum, im Vereinigten Königreich oder in der Schweiz befindest, fragt dich die Website beim Aufruf, ob du Cookies und personalisierte Anzeigen akzeptierst. Wenn nicht, sind die Anzeigen nicht personalisiert. Du kannst deine Wahl jederzeit ändern, {how}.",
+  "it": "Se ti trovi nello Spazio economico europeo, nel Regno Unito o in Svizzera, il sito ti chiede all'ingresso se accetti cookie e annunci personalizzati. Se non accetti, gli annunci che vedrai non saranno personalizzati. Puoi cambiare la tua scelta quando vuoi {how}.",
+  "fr": "Si tu te trouves dans l'Espace économique européen, au Royaume-Uni ou en Suisse, le site te demande à l'arrivée si tu acceptes les cookies et les annonces personnalisées. Si tu refuses, les annonces ne seront pas personnalisées. Tu peux modifier ton choix à tout moment {how}."
+ },
+ "cons_how_ads": {
+  "es": "con el enlace «Privacidad y cookies» del pie de cualquier página",
+  "en": "with the “Privacy and cookies” link at the bottom of any page",
+  "de": "über den Link „Datenschutz und Cookies“ unten auf jeder Seite",
+  "it": "con il link «Privacy e cookie» in fondo a qualsiasi pagina",
+  "fr": "avec le lien « Confidentialité et cookies » en bas de chaque page"
+ },
+ "cons_how_noads": {
+  "es": "borrando los datos de este sitio en tu navegador",
+  "en": "by clearing this site's data in your browser",
+  "de": "indem du die Daten dieser Website in deinem Browser löschst",
+  "it": "cancellando i dati di questo sito nel browser",
+  "fr": "en effaçant les données de ce site dans ton navigateur"
+ },
+ "p_del_h": {
+  "es": "Borrar tus datos",
+  "en": "Deleting your data",
+  "de": "Deine Daten löschen",
+  "it": "Eliminare i tuoi dati",
+  "fr": "Supprimer tes données"
+ },
+ "p_del": {
+  "es": "Puedes borrar cualquier partida desde «Cargar partida». Si borras los datos de este sitio en tu navegador, se elimina todo lo guardado. Para borrar los datos publicitarios que tiene Google, entra en myadcenter.google.com.",
+  "en": "You can delete any save from “Load game”. Clearing this site's data in your browser removes everything saved. To delete the advertising data Google holds, go to myadcenter.google.com.",
+  "de": "Du kannst jeden Spielstand unter „Spiel laden“ löschen. Wenn du die Daten dieser Website in deinem Browser löschst, wird alles Gespeicherte entfernt. Um die Werbedaten zu löschen, die Google hat, gehe zu myadcenter.google.com.",
+  "it": "Puoi eliminare qualsiasi salvataggio da «Carica partita». Se cancelli i dati di questo sito nel browser, viene eliminato tutto ciò che è salvato. Per eliminare i dati pubblicitari in possesso di Google, vai su myadcenter.google.com.",
+  "fr": "Tu peux supprimer n'importe quelle sauvegarde depuis « Charger une partie ». Effacer les données de ce site dans ton navigateur supprime tout ce qui est enregistré. Pour supprimer les données publicitaires détenues par Google, va sur myadcenter.google.com."
+ },
+ "p_host_h": {
+  "es": "Alojamiento",
+  "en": "Hosting",
+  "de": "Hosting",
+  "it": "Hosting",
+  "fr": "Hébergement"
+ },
+ "p_host": {
+  "es": "La web está alojada en GitHub Pages, que puede registrar la dirección IP de las visitas por motivos de seguridad. Más información en la {a}.",
+  "en": "The website is hosted on GitHub Pages, which may log visitors' IP addresses for security reasons. More information in the {a}.",
+  "de": "Die Website wird auf GitHub Pages gehostet, das die IP-Adressen der Besucher aus Sicherheitsgründen protokollieren kann. Mehr dazu in der {a}.",
+  "it": "Il sito è ospitato su GitHub Pages, che può registrare l'indirizzo IP dei visitatori per motivi di sicurezza. Maggiori informazioni nella {a}.",
+  "fr": "Le site est hébergé sur GitHub Pages, qui peut enregistrer l'adresse IP des visiteurs pour des raisons de sécurité. Plus d'informations dans la {a}."
+ },
+ "p_host_a": {
+  "es": "declaración de privacidad de GitHub",
+  "en": "GitHub privacy statement",
+  "de": "Datenschutzerklärung von GitHub",
+  "it": "dichiarazione sulla privacy di GitHub",
+  "fr": "déclaration de confidentialité de GitHub"
+ },
+ "p_min_h": {
+  "es": "Menores",
+  "en": "Children",
+  "de": "Kinder",
+  "it": "Minori",
+  "fr": "Mineurs"
+ },
+ "p_min": {
+  "es": "El juego no está dirigido a menores de 13 años y no recoge a sabiendas datos personales de menores.",
+  "en": "The game is not aimed at children under 13 and does not knowingly collect personal data from children.",
+  "de": "Das Spiel richtet sich nicht an Kinder unter 13 Jahren und erhebt wissentlich keine personenbezogenen Daten von Kindern.",
+  "it": "Il gioco non è rivolto ai minori di 13 anni e non raccoglie consapevolmente dati personali di minori.",
+  "fr": "Le jeu ne s'adresse pas aux moins de 13 ans et ne collecte pas sciemment de données personnelles de mineurs."
+ },
+ "p_names_h": {
+  "es": "Nombres de jugadores",
+  "en": "Player names",
+  "de": "Spielernamen",
+  "it": "Nomi dei giocatori",
+  "fr": "Noms des joueurs"
+ },
+ "p_names": {
+  "es": "Los nombres de futbolistas y entrenadores son versiones inventadas inspiradas en el fútbol real; el juego no está afiliado a ningún club, liga ni jugador.",
+  "en": "Footballer and manager names are made-up versions inspired by real football; the game is not affiliated with any club, league or player.",
+  "de": "Die Namen von Spielern und Trainern sind erfundene Versionen nach Vorbild des echten Fußballs; das Spiel steht in keiner Verbindung zu Vereinen, Ligen oder Spielern.",
+  "it": "I nomi di calciatori e allenatori sono versioni inventate ispirate al calcio reale; il gioco non è affiliato ad alcun club, campionato o giocatore.",
+  "fr": "Les noms des footballeurs et entraîneurs sont des versions inventées inspirées du vrai football ; le jeu n'est affilié à aucun club, championnat ni joueur."
+ },
+ "p_chg_h": {
+  "es": "Cambios y contacto",
+  "en": "Changes and contact",
+  "de": "Änderungen und Kontakt",
+  "it": "Modifiche e contatti",
+  "fr": "Modifications et contact"
+ },
+ "p_chg": {
+  "es": "Si esta política cambia, lo verás aquí con la fecha de actualización. Para cualquier duda, escribe al correo de contacto del desarrollador que aparece en la {a}.",
+  "en": "If this policy changes, you'll see it here with the update date. For any questions, write to the developer contact email shown on the {a}.",
+  "de": "Wenn sich diese Erklärung ändert, siehst du es hier mit dem Aktualisierungsdatum. Bei Fragen schreib an die Kontakt-E-Mail des Entwicklers auf der {a}.",
+  "it": "Se questa informativa cambia, lo vedrai qui con la data di aggiornamento. Per qualsiasi dubbio, scrivi all'email di contatto dello sviluppatore indicata nella {a}.",
+  "fr": "Si cette politique change, tu le verras ici avec la date de mise à jour. Pour toute question, écris à l'adresse de contact du développeur indiquée sur la {a}."
+ },
+ "p_chg_a": {
+  "es": "ficha de Google Play",
+  "en": "Google Play listing",
+  "de": "Google-Play-Seite",
+  "it": "scheda di Google Play",
+  "fr": "fiche Google Play"
+ },
+ "js_kick": {
+  "es": "Empieza el partido.",
+  "en": "Kick-off.",
+  "de": "Anpfiff.",
+  "it": "Calcio d'inizio.",
+  "fr": "Coup d'envoi."
+ },
+ "js_again": {
+  "es": "Empieza otro partido.",
+  "en": "Another match kicks off.",
+  "de": "Das nächste Spiel beginnt.",
+  "it": "Inizia un'altra partita.",
+  "fr": "Un autre match commence."
+ },
+ "js_shot": {
+  "es": "Tiro de {n}…",
+  "en": "{n} shoots…",
+  "de": "{n} schießt…",
+  "it": "Tiro di {n}…",
+  "fr": "Frappe de {n}…"
+ },
+ "js_try": {
+  "es": "Lo intenta {n}…",
+  "en": "{n} has a go…",
+  "de": "{n} versucht es…",
+  "it": "Ci prova {n}…",
+  "fr": "{n} tente sa chance…"
+ },
+ "js_goal": {
+  "es": "¡Gol de {n}! {t} celebra.",
+  "en": "Goal for {n}! {t} celebrate.",
+  "de": "Tor durch {n}! {t} jubelt.",
+  "it": "Gol di {n}! Il {t} esulta.",
+  "fr": "But de {n} ! {t} exulte."
+ },
+ "js_out": {
+  "es": "Fuera. Saca de puerta el portero.",
+  "en": "Wide. Goal kick.",
+  "de": "Vorbei. Abstoß.",
+  "it": "Fuori. Rimessa dal fondo.",
+  "fr": "À côté. Six mètres."
+ },
+ "js_rec": {
+  "es": "Recupera {n}.",
+  "en": "{n} wins it back.",
+  "de": "{n} erobert den Ball.",
+  "it": "Recupera {n}.",
+  "fr": "{n} récupère le ballon."
+ }
+}

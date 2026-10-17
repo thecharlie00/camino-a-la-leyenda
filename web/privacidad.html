@@ -1,54 +1,46 @@
 <!doctype html>
-<html lang="es">
+<html lang="{{LANG}}">
 <head>
 {{HEAD}}
-<title>Privacidad y cookies · Camino a la Leyenda</title>
-<meta name="description" content="Qué datos usa la web de Camino a la Leyenda, cómo funcionan los anuncios de Google y cómo cambiar tu consentimiento.">
-<link rel="canonical" href="{{BASE}}privacidad/">
+<title>{{t:priv_title}}</title>
+<meta name="description" content="{{t:priv_desc}}">
+<link rel="canonical" href="{{URL}}">
+{{ALT}}
 </head>
 <body>
-<a class="skip" href="#main">Saltar al contenido</a>
+<a class="skip" href="#main">{{t:skip}}</a>
 <header class="top"><div class="wrap">
-  <a class="brand" href="../"><img src="../img/icon-72.png" width="36" height="36" alt="">Camino a la Leyenda</a>
-  <nav aria-label="Principal"><a class="btn pri sm" href="../jugar/">Jugar</a></nav>
+  <a class="brand" href="../"><img src="{{R}}img/icon-72.png" width="36" height="36" alt="">Camino a la Leyenda</a>
+  <nav aria-label="{{t:nav_label}}">{{LANGMENU}}<a class="btn pri sm" href="../jugar/">{{t:play}}</a></nav>
 </div></header>
 <main id="main" class="wrap doc">
-  <h1>Privacidad y cookies</h1>
-  <p class="muted">Última actualización: {{DATE}}</p>
-
-  <h2>Resumen</h2>
-  <p>La web de Camino a la Leyenda es gratis gracias a los anuncios de Google AdSense, que se muestran en la página alrededor del juego y nunca dentro de la partida. No vendemos tus datos y no necesitas crear una cuenta para jugar.</p>
-
-  <h2>Qué guarda el juego</h2>
-  <p>Solo lo que tú creas al jugar: los nombres que escribes, tus partidas, el idioma elegido y el Salón de la fama. Todo se guarda en el almacenamiento local de tu navegador y nunca se envía a ningún servidor.</p>
-
-  <h2>Anuncios y cookies de terceros</h2>
-  <p>Esta web usa Google AdSense para mostrar anuncios. Google y sus socios publicitarios usan cookies para mostrar anuncios según tus visitas anteriores a esta y a otras webs, y para medir su rendimiento. Para hacerlo pueden recoger la dirección IP, la ubicación aproximada, datos técnicos del navegador e información sobre cómo interactúas con los anuncios.</p>
+  <h1>{{t:consent}}</h1>
+  <p class="muted">{{UPDATED}}</p>
+  <h2>{{t:p_sum_h}}</h2>
+  <p>{{t:p_sum}}</p>
+  <h2>{{t:p_data_h}}</h2>
+  <p>{{t:p_data}}</p>
+  <h2>{{t:p_ads_h}}</h2>
+  <p>{{t:p_ads}}</p>
   <ul>
-    <li>Cómo usa Google los datos de las webs de sus socios: <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">policies.google.com/technologies/partner-sites</a>.</li>
-    <li>Política de privacidad de Google: <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a>.</li>
-    <li>Puedes desactivar los anuncios personalizados en <a href="https://myadcenter.google.com/" rel="noopener">myadcenter.google.com</a>, y los de otros proveedores en <a href="https://www.aboutads.info/choices/" rel="noopener">aboutads.info</a>.</li>
+    <li>{{t:p_ads_l1}} <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">policies.google.com/technologies/partner-sites</a></li>
+    <li>{{t:p_ads_l2}} <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a></li>
+    <li>{{ADS_L3}}</li>
   </ul>
-
-  <h2>Tu consentimiento</h2>
-  <p>Si estás en el Espacio Económico Europeo, el Reino Unido o Suiza, la web te pregunta al entrar si aceptas cookies y anuncios personalizados. Si no aceptas, los anuncios que veas no estarán personalizados. Puedes cambiar tu elección cuando quieras{{CONSENT_TEXT}}.</p>
-
-  <h2>Borrar tus datos</h2>
-  <p>Puedes borrar cualquier partida desde «Cargar partida». Si borras los datos de este sitio en tu navegador, se elimina todo lo guardado. Para borrar los datos publicitarios que tiene Google, entra en myadcenter.google.com.</p>
-
-  <h2>Alojamiento</h2>
-  <p>La web está alojada en GitHub Pages, que puede registrar la dirección IP de las visitas por motivos de seguridad. Más información en la <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">declaración de privacidad de GitHub</a>.</p>
-
-  <h2>Menores</h2>
-  <p>El juego no está dirigido a menores de 13 años y no recoge a sabiendas datos personales de menores.</p>
-
-  <h2>Nombres de jugadores</h2>
-  <p>Los nombres de futbolistas y entrenadores son versiones inventadas inspiradas en el fútbol real; el juego no está afiliado a ningún club, liga ni jugador.</p>
-
-  <h2>Cambios y contacto</h2>
-  <p>Si esta política cambia, lo verás aquí con la fecha de actualización. Para cualquier duda, escribe al correo de contacto del desarrollador que aparece en la <a href="{{PLAY_URL}}" rel="noopener">ficha de Google Play</a>.</p>
+  <h2>{{t:p_cons_h}}</h2>
+  <p>{{CONS}}</p>
+  <h2>{{t:p_del_h}}</h2>
+  <p>{{t:p_del}}</p>
+  <h2>{{t:p_host_h}}</h2>
+  <p>{{HOST}}</p>
+  <h2>{{t:p_min_h}}</h2>
+  <p>{{t:p_min}}</p>
+  <h2>{{t:p_names_h}}</h2>
+  <p>{{t:p_names}}</p>
+  <h2>{{t:p_chg_h}}</h2>
+  <p>{{CHG}}</p>
 </main>
 {{FOOT}}
-<script src="../site.js" defer></script>
+<script src="{{R}}site.js" defer></script>
 </body>
 </html>

@@ -8,6 +8,10 @@ o con un commit en `main` que lleve `[web]` en el mensaje.
 - `site.css` y `site.js`: estilos, anuncios y el partido animado de la portada.
 - `img/`: iconos, capturas e imagen para redes (las capturas se regeneran con `node tools/web_shots.js`).
 - `config.json`: AdSense, dominio y enlaces.
+- `i18n.json`: los textos de la web en los cinco idiomas del juego. El castellano va en la raíz y el resto en `/en/`, `/de/`,
+  `/it/` y `/fr/`, con enlaces `hreflang`. En la primera visita a la portada se abre el idioma del navegador; el selector
+  recuerda la elección y el juego arranca en el idioma de la página. Las capturas y la imagen para redes se generan por idioma
+  con `LG=en node tools/web_shots.js`.
 
 ## Activar los anuncios de AdSense
 

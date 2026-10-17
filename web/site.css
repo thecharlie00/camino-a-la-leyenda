@@ -35,6 +35,19 @@ img { max-width: 100%; display: block; }
 .top nav a:not(.btn) { text-decoration: none; color: var(--mist); }
 .top nav a:not(.btn):hover { color: var(--chalk); }
 
+/* selector de idioma */
+.lang { position: relative; }
+.lang summary { list-style: none; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 10px; border-radius: 10px; border: 1px solid var(--line); color: var(--mist); font: 700 14px/1 var(--f-body); cursor: pointer; }
+.lang summary::-webkit-details-marker { display: none; }
+.lang summary:hover, .lang[open] summary { color: var(--chalk); border-color: var(--mist); }
+.lang summary svg { width: 17px; height: 17px; }
+.langm { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; min-width: 170px; display: grid; padding: 6px; border-radius: 12px; background: var(--tunnel); border: 1px solid var(--line); box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+.langm a { padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--chalk); font-size: 15px; }
+.langm a:hover { background: var(--stand); }
+.langm a[aria-current="page"] { color: var(--led); font-weight: 700; }
+.flangs { display: flex; flex-wrap: wrap; gap: 6px 16px; flex-basis: 100%; }
+.flangs a[aria-current="page"] { color: var(--chalk); text-decoration: none; font-weight: 700; }
+
 /* botones */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 22px; border-radius: 12px; border: 2px solid var(--line);
   font: 700 16px/1 var(--f-body); text-decoration: none; color: var(--chalk); background: var(--stand); cursor: pointer; }
@@ -45,13 +58,13 @@ img { max-width: 100%; display: block; }
 .btn svg { width: 20px; height: 20px; flex: none; }
 
 /* portada */
-.hero .wrap { display: grid; grid-template-columns: 1fr; gap: 34px; padding-top: 44px; padding-bottom: 56px; }
-.hero h1 { font: 900 clamp(46px, 9vw, 92px)/.92 var(--f-disp); letter-spacing: .005em; margin: 0 0 20px; text-wrap: balance; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; padding-top: 44px; padding-bottom: 56px; }
+.hero h1 { font: 900 clamp(40px, 9vw, 92px)/.92 var(--f-disp); letter-spacing: .005em; margin: 0 0 20px; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
 .hero .lead { font-size: 19px; color: var(--mist); max-width: 34em; margin: 0 0 28px; }
 .hero .cta { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero .fine { margin: 18px 0 0; font-size: 14.5px; color: var(--mist); }
 @media (min-width: 940px) {
-  .hero .wrap { grid-template-columns: 1fr 1.08fr; align-items: center; gap: 56px; padding-top: 70px; padding-bottom: 84px; }
+  .hero .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); align-items: center; gap: 56px; padding-top: 70px; padding-bottom: 84px; }
 }
 
 /* el campo de la portada, con su marcador */
@@ -59,7 +72,9 @@ img { max-width: 100%; display: block; }
 .board { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 8px 14px; font: 900 22px/1 var(--f-led); color: var(--led); letter-spacing: .04em; }
 .board .tm { display: flex; align-items: center; gap: 10px; font: 800 19px/1 var(--f-disp); color: var(--chalk); letter-spacing: .02em; }
 .board .tm i { width: 12px; height: 12px; border-radius: 50%; display: block; }
-.board .sc { font-size: 34px; color: var(--led); min-width: 3.4em; text-align: center; }
+.board .sc { font-size: clamp(24px, 7vw, 34px); color: var(--led); flex: none; text-align: center; }
+.board .tm { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.board .tm i { flex: none; }
 .board .min { font-size: 18px; color: var(--mist); }
 .match canvas { display: block; width: 100%; height: auto; aspect-ratio: 105 / 68; border-radius: 10px; background: var(--turf-a); }
 .match .say { margin: 12px 6px 2px; min-height: 1.5em; font-size: 15px; color: var(--mist); }
@@ -123,7 +138,7 @@ img { max-width: 100%; display: block; }
 .doc { max-width: 720px; padding-top: 44px; padding-bottom: 64px; }
 .doc h1 { font: 900 clamp(40px, 7vw, 64px)/1 var(--f-disp); margin: 0 0 8px; }
 .doc h2 { font: 800 27px/1.1 var(--f-disp); margin: 34px 0 8px; }
-.doc p, .doc li { color: #c9d4d1; }
+.doc p, .doc li { color: #c9d4d1; overflow-wrap: anywhere; }
 .doc .muted { color: var(--mist); font-size: 15px; }
 
 /* página de juego

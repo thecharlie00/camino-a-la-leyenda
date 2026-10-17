@@ -1,29 +1,42 @@
 <!doctype html>
-<html lang="es">
+<html lang="{{LANG}}">
 <head>
 {{HEAD}}
-<title>Jugar · Camino a la Leyenda</title>
-<meta name="description" content="Juega a Camino a la Leyenda en el navegador: carrera de jugador, de míster o crea tu club. Gratis y sin cuenta.">
-<link rel="canonical" href="{{BASE}}jugar/">
+<title>{{t:play_title}}</title>
+<meta name="description" content="{{t:play_desc}}">
+<link rel="canonical" href="{{URL}}">
+{{ALT}}
 </head>
-<body class="play">
+<body class="play" data-lang="{{LANG}}">
 <header class="pbar">
-  <a class="brand" href="../"><img src="../img/icon-72.png" width="28" height="28" alt="">Camino a la Leyenda</a>
-  <span class="sp"><a href="{{PLAY_URL}}" rel="noopener">App de Android</a><a href="../privacidad/">Privacidad</a>{{CONSENT_LINK}}
-    <button type="button" class="btn sm" id="fs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Pantalla completa</button></span>
+  <a class="brand" href="../"><img src="{{R}}img/icon-72.png" width="28" height="28" alt="">Camino a la Leyenda</a>
+  <span class="sp"><a href="{{PLAY_URL}}" rel="noopener">{{t:android_app}}</a><a href="../privacidad/">{{t:privacy_short}}</a>{{CONSENT_LINK}}{{LANGMENU}}
+    <button type="button" class="btn sm" id="fs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>{{t:fullscreen}}</button></span>
 </header>
 {{AD:juego_movil}}
 <div class="pmain">
   <div class="pframe" id="pframe">
-    <iframe src="juego.html" title="Camino a la Leyenda" allow="clipboard-write; fullscreen" allowfullscreen></iframe>
+    <iframe id="game" data-src="{{R}}jugar/juego.html" title="Camino a la Leyenda" allow="clipboard-write; fullscreen" allowfullscreen></iframe>
   </div>
   {{AD:juego_lateral}}
 </div>
 <div class="rot" id="rot" hidden>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
-  <p>El juego está pensado para el móvil en vertical. Gíralo para verlo mejor.</p>
-  <button type="button" class="btn" id="rotok">Seguir en horizontal</button>
+  <p>{{t:rot_p}}</p>
+  <button type="button" class="btn" id="rotok">{{t:rot_ok}}</button>
 </div>
-<script src="../site.js" defer></script>
+<script>
+/* el juego arranca en el idioma de la página la primera vez y cada vez que se cambia el idioma de la web */
+(function () {
+  var l = document.body.getAttribute("data-lang"), f = document.getElementById("game");
+  try {
+    var prev = localStorage.getItem("camino.weblang");
+    if (prev !== l || !localStorage.getItem("camino.lang")) localStorage.setItem("camino.lang", l);
+    localStorage.setItem("camino.weblang", l);
+  } catch (e) {}
+  f.src = f.getAttribute("data-src");
+})();
+</script>
+<script src="{{R}}site.js" defer></script>
 </body>
 </html>

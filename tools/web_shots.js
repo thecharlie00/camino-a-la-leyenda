@@ -1,9 +1,10 @@
 /* Capturas del juego para la web (web/img/shot-*.webp) y la imagen para redes (web/img/og.png).
-   Uso: python3 build.py && NODE_PATH=/opt/node-tools/node_modules node tools/web_shots.js */
+   Uso: python3 build.py && python3 build_web.py && [LG=en|de|it|fr] NODE_PATH=/opt/node-tools/node_modules node tools/web_shots.js */
 const path = require("path"), fs = require("fs"), { execFileSync } = require("child_process");
 const { chromium } = require("playwright");
 const ROOT = path.join(__dirname, ".."), IMG = path.join(ROOT, "web/img"), TMP = path.join(ROOT, "work/webshots");
 fs.mkdirSync(TMP, { recursive: true });
+const LG = process.env.LG || "es", SFX = LG === "es" ? "" : LG + "-";
 const EXE = process.env.CHROME || "/opt/pw-browsers/chromium-1194/chrome-linux/chrome";
 (async () => {
   const b = await chromium.launch({ executablePath: EXE });
@@ -13,7 +14,7 @@ const EXE = process.env.CHROME || "/opt/pw-browsers/chromium-1194/chrome-linux/c
     await p.goto("file://" + path.join(ROOT, "dist/index.html")); await p.waitForTimeout(300);
     p.c = async s => { const e = await p.$(s); if (!e) return false; await e.evaluate(x => x.click()); await p.waitForTimeout(90); return true; };
     p.clean = () => p.evaluate(() => { S.ntf = []; const n = document.getElementById("ntfs"); if (n) n.innerHTML = ""; });
-    await p.c('[data-a="setlang"][data-v="es"]');
+    await p.c('[data-a="setlang"][data-v="' + LG + '"]');
     return p;
   };
   const shot = async (p, name) => { await p.clean(); await p.waitForTimeout(350); await p.screenshot({ path: path.join(TMP, name + ".png") }); };
@@ -62,23 +63,24 @@ const EXE = process.env.CHROME || "/opt/pw-browsers/chromium-1194/chrome-linux/c
   await shot(j, "mascota");
 
   /* imagen para redes, 1200 × 630 */
-  const og = await (await b.newContext({ viewport: { width: 1200, height: 630 } })).newPage();
-  await og.goto("file://" + path.join(ROOT, "dist/site/index.html")); await og.waitForTimeout(600);
-  await og.goto("file://" + path.join(ROOT, "dist/site/index.html")); await og.waitForTimeout(1600);
+  const og = await (await b.newContext({ viewport: { width: 1200, height: 630 }, locale: "es-ES" })).newPage();
+  const ogPage = "file://" + path.join(ROOT, "dist/site", LG === "es" ? "" : LG, "index.html");
+  await og.goto(ogPage); await og.waitForTimeout(1600);
+  const txt = await og.evaluate(() => [document.querySelector("h1").textContent, document.querySelector(".hero .btn.pri").textContent.trim()]);
   const fig = await og.$(".match");
   await fig.screenshot({ path: path.join(TMP, "match.png") });
-  await og.evaluate(src => {
+  await og.evaluate(([src, h1, cta]) => {
     document.body.innerHTML = '<div style="width:1200px;height:630px;display:grid;grid-template-columns:1fr 590px;gap:44px;align-items:center;padding:0 56px;box-sizing:border-box;background:#0b1417">' +
-      '<div><div style="display:flex;align-items:center;gap:14px;font:800 30px/1 var(--f-disp);color:#edf1e8;margin-bottom:28px"><img src="img/icon-192.png" style="width:56px;height:56px;border-radius:14px">Camino a la Leyenda</div>' +
-      '<div style="font:900 70px/.92 var(--f-disp);color:#edf1e8">Crea a tu futbolista y llévalo hasta la leyenda.</div>' +
-      '<div style="margin-top:26px;font:700 22px/1 var(--f-body);color:#ffb21e">Gratis en el navegador</div></div>' +
+      '<div><div style="display:flex;align-items:center;gap:14px;font:800 30px/1 var(--f-disp);color:#edf1e8;margin-bottom:28px"><img src="' + document.querySelector('.brand img').src.replace('icon-72', 'icon-192') + '" style="width:56px;height:56px;border-radius:14px">Camino a la Leyenda</div>' +
+      '<div style="font:900 70px/.92 var(--f-disp);color:#edf1e8">' + h1 + '</div>' +
+      '<div style="margin-top:26px;font:700 22px/1 var(--f-body);color:#ffb21e">' + cta + '</div></div>' +
       '<img src="' + src + '" style="width:590px;border-radius:20px"></div>';
-  }, "file://" + path.join(TMP, "match.png"));
+  }, ["file://" + path.join(TMP, "match.png"), txt[0], txt[1]]);
   await og.waitForTimeout(500);
-  await og.screenshot({ path: path.join(IMG, "og.png") });
+  await og.screenshot({ path: path.join(IMG, LG === "es" ? "og.png" : "og-" + LG + ".png") });
   await b.close();
   /* a webp, 620 px de ancho */
-  const py = "from PIL import Image\nimport sys\nfor n in sys.argv[2:]:\n  im=Image.open(sys.argv[1]+'/'+n+'.png').convert('RGB'); w=620; im=im.resize((w,round(im.height*w/im.width)),Image.LANCZOS); im.save('" + IMG + "/shot-'+n+'.webp',quality=80,method=6)\nim=Image.open('" + IMG + "/og.png').convert('RGB'); im.quantize(200).save('" + IMG + "/og.png',optimize=True)";
+  const py = "from PIL import Image\nimport sys\nfor n in sys.argv[2:]:\n  im=Image.open(sys.argv[1]+'/'+n+'.png').convert('RGB'); w=620; im=im.resize((w,round(im.height*w/im.width)),Image.LANCZOS); im.save('" + IMG + "/shot-" + SFX + "'+n+'.webp',quality=80,method=6)\nog='" + IMG + "/" + (LG === "es" ? "og.png" : "og-" + LG + ".png") + "'\nim=Image.open(og).convert('RGB'); im.quantize(200).save(og,optimize=True)";
   execFileSync("python3", ["-c", py, TMP, "directo", "carrera", "plantilla", "mascota"].filter(n => n !== "directo" || fs.existsSync(path.join(TMP, "directo.png"))), { stdio: "inherit" });
   console.log("listo");
 })();
