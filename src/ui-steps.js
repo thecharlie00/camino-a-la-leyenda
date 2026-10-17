@@ -59,19 +59,21 @@
   }
   function gCount() { var g = gGet(), n = 0, t = 0; allAch().forEach(function (gr) { gr[1].forEach(function (a) { t++; if (g[a[0]]) n++; }); }); return [n, t]; }
   U.achG = gCount;
-  function achRow(a, g) {
+  function achRow(a, g, mode) {
     var x = g[a[0]], on = !!x, sec = a[5] && !on;
-    return '<li class="achi' + (on ? " on" : "") + '"><span class="achic" aria-hidden="true">' + (on ? a[1] : sec ? "❔" : "🔒") + '</span><span class="grow"><b>' + h(sec ? tr("Logro secreto") : tr(a[2])) + "</b><small>" + h(sec ? tr("Ya lo descubrirás… o no.") : tr(a[3])) + "</small>" +
+    return '<li class="achi' + (on ? " on" : "") + '"><span class="achic" aria-hidden="true">' + (on ? a[1] : sec ? "❔" : "🔒") + '</span><span class="grow"><b>' + h(sec ? tr("Logro secreto") : tr(a[2])) + "</b><small>" + h(sec ? tr("Ya lo descubrirás… o no.") : tr(a[3]) + (mode ? " (" + mode.toLowerCase() + ")" : "")) + "</small>" +
       (on ? '<small class="achsv">' + tr("Conseguido con «{n}» · {m}", {n: h(x.n || "—"), m: h(modeTxt(x.m))}) + (x.y ? " · " + h(seasonLabel(x.y)) : "") + "</small>" : "") + "</span></li>";
   }
   U.sheets.ach = function () {
     if (S && typeof achCheck === "function") { achCheck(); gSync(); }
     var g = gGet(), c = gCount();
     var s = "<h2>" + tr("Logros") + '</h2><div class="stack"><p class="muted" style="margin:0;font-size:13px">' + tr("Son tuyos para siempre: se guardan en este dispositivo y cuentan los de todas tus partidas.") + '</p><div><div class="lbl">' + tr("{n} de {m} conseguidos", {n: c[0], m: c[1]}) + '</div><div class="bar"><i class="hi" style="width:' + Math.round(c[0] / c[1] * 100) + '%"></i></div></div>';
-    allAch().forEach(function (gr) {
-      var l = gr[1], done = l.filter(function (a) { return g[a[0]]; }), todo = l.filter(function (a) { return !g[a[0]]; });
-      s += '<div><div class="lbl">' + h(gr[0]) + " · " + done.length + "/" + l.length + '</div><ul class="achl">' + done.concat(todo).map(function (a) { return achRow(a, g); }).join("") + "</ul></div>";
-    });
+    /* una sola lista: primero los conseguidos (los más recientes arriba) y luego los pendientes */
+    var all = [], cnt = {};
+    allAch().forEach(function (gr) { gr[1].forEach(function (a) { all.push({a: a, m: gr[0]}); cnt[a[2]] = (cnt[a[2]] || 0) + 1; }); });
+    var done = all.filter(function (x) { return g[x.a[0]]; }).sort(function (x, y) { return (g[y.a[0]].ts || 0) - (g[x.a[0]].ts || 0); });
+    var todo = all.filter(function (x) { return !g[x.a[0]]; });
+    s += '<ul class="achl">' + done.concat(todo).map(function (x) { return achRow(x.a, g, cnt[x.a[2]] > 1 ? x.m : ""); }).join("") + "</ul>";
     return s + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
   };
   U.actions.ach = function () { U.open("ach"); };

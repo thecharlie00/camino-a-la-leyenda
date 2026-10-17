@@ -40167,7 +40167,7 @@
  "Saltar": {
   "w": [
    "ui-draw.js:58",
-   "ui-steps.js:127"
+   "ui-steps.js:129"
   ],
   "ctx": "'<button data-a=\"drawspeed\" data-v=\"n\" aria-pressed=\"true\">' + tr(\"Normal\") + '</button><button data-a=\"drawspeed\" data-v=\"f\" aria-pressed=\"false\">' + tr(\"Rápida\") + '</button><button data-a=\"drawspeed\" data-v=\"skip\" ari"
  },
@@ -42505,208 +42505,208 @@
  },
  "Ya tienes {n} logro: míralo en «Más».": {
   "w": [
-   "ui-steps.js:82"
+   "ui-steps.js:84"
   ],
   "ctx": "if (S.achN0 != null) { var n0 = S.achN0; delete S.achN0; gSync(); if (n0) setTimeout(function () { U.toast(trn(n0, \"Ya tienes {n} logro: míralo en «Más».\", \"Ya tienes {n} logros: míralos en «Más».\")); }, 400); U.persist(",
   "note": "plural:singular"
  },
  "Ya tienes {n} logros: míralos en «Más».": {
   "w": [
-   "ui-steps.js:82"
+   "ui-steps.js:84"
   ],
   "ctx": "if (S.achN0 != null) { var n0 = S.achN0; delete S.achN0; gSync(); if (n0) setTimeout(function () { U.toast(trn(n0, \"Ya tienes {n} logro: míralo en «Más».\", \"Ya tienes {n} logros: míralos en «Más».\")); }, 400); U.persist(",
   "note": "plural:plural"
  },
  "Logro: {n}": {
   "w": [
-   "ui-steps.js:86",
+   "ui-steps.js:88",
    "ui-chal32.js:79"
   ],
   "ctx": "nw.forEach(function (a, i) { U.toast(a[1] + \" \" + tr(\"Logro: {n}\", {n: tr(a[2])})); if (i === 0) U.edgeFlash(true); });"
  },
  "Elige a tu entrenador": {
   "w": [
-   "ui-steps.js:99"
+   "ui-steps.js:101"
   ],
   "ctx": "typeof presOn === \"function\" && presOn() ? {ok: !!S.m.pres.coach, t: tr(\"Elige a tu entrenador\"), b: tr(\"Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto.\"), act: \"presopen\","
  },
  "Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto.": {
   "w": [
-   "ui-steps.js:99"
+   "ui-steps.js:101"
   ],
   "ctx": "typeof presOn === \"function\" && presOn() ? {ok: !!S.m.pres.coach, t: tr(\"Elige a tu entrenador\"), b: tr(\"Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto.\"), act: \"presopen\","
  },
  "Elegir entrenador": {
   "w": [
-   "ui-steps.js:99",
+   "ui-steps.js:101",
    "ui-club30.js:50"
   ],
   "ctx": "typeof presOn === \"function\" && presOn() ? {ok: !!S.m.pres.coach, t: tr(\"Elige a tu entrenador\"), b: tr(\"Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto.\"), act: \"presopen\","
  },
  "Conoce a tu equipo": {
   "w": [
-   "ui-steps.js:100"
+   "ui-steps.js:102"
   ],
   "ctx": "{ok: seen(\"plantilla\"), t: tr(\"Conoce a tu equipo\"), b: tr(\"Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está.\"), go: \"plantilla\", gl: tr(\"Ir a Equipo\")},"
  },
  "Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está.": {
   "w": [
-   "ui-steps.js:100"
+   "ui-steps.js:102"
   ],
   "ctx": "{ok: seen(\"plantilla\"), t: tr(\"Conoce a tu equipo\"), b: tr(\"Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está.\"), go: \"plantilla\", gl: tr(\"Ir a Equipo\")},"
  },
  "Ir a Equipo": {
   "w": [
-   "ui-steps.js:100"
+   "ui-steps.js:102"
   ],
   "ctx": "{ok: seen(\"plantilla\"), t: tr(\"Conoce a tu equipo\"), b: tr(\"Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está.\"), go: \"plantilla\", gl: tr(\"Ir a Equipo\")},"
  },
  "Juega tus primeros partidos": {
   "w": [
-   "ui-steps.js:101"
+   "ui-steps.js:103"
   ],
   "ctx": "{ok: played(), t: tr(\"Juega tus primeros partidos\"), b: tr(\"Pulsa el botón grande de abajo. El juego avanza unas semanas y se para cuando hay algo que decidir.\")},"
  },
  "Pulsa el botón grande de abajo. El juego avanza unas semanas y se para cuando hay algo que decidir.": {
   "w": [
-   "ui-steps.js:101"
+   "ui-steps.js:103"
   ],
   "ctx": "{ok: played(), t: tr(\"Juega tus primeros partidos\"), b: tr(\"Pulsa el botón grande de abajo. El juego avanza unas semanas y se para cuando hay algo que decidir.\")},"
  },
  "Echa un vistazo al mercado": {
   "w": [
-   "ui-steps.js:102"
+   "ui-steps.js:104"
   ],
   "ctx": "{ok: seen(\"mercado\"), t: tr(\"Echa un vistazo al mercado\"), b: tr(\"En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan.\"), go: \"mercado\", gl: tr(\"Ir a Mercado\")},"
  },
  "En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan.": {
   "w": [
-   "ui-steps.js:102"
+   "ui-steps.js:104"
   ],
   "ctx": "{ok: seen(\"mercado\"), t: tr(\"Echa un vistazo al mercado\"), b: tr(\"En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan.\"), go: \"mercado\", gl: tr(\"Ir a Mercado\")},"
  },
  "Ir a Mercado": {
   "w": [
-   "ui-steps.js:102"
+   "ui-steps.js:104"
   ],
   "ctx": "{ok: seen(\"mercado\"), t: tr(\"Echa un vistazo al mercado\"), b: tr(\"En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan.\"), go: \"mercado\", gl: tr(\"Ir a Mercado\")},"
  },
  "Mira la clasificación": {
   "w": [
-   "ui-steps.js:103",
-   "ui-steps.js:110"
+   "ui-steps.js:105",
+   "ui-steps.js:112"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Más» → «Competición» ves cómo vas y quién viene después.\"), go: \"comp\", gl: tr(\"Ver clasificación\")},"
  },
  "En «Más» → «Competición» ves cómo vas y quién viene después.": {
   "w": [
-   "ui-steps.js:103"
+   "ui-steps.js:105"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Más» → «Competición» ves cómo vas y quién viene después.\"), go: \"comp\", gl: tr(\"Ver clasificación\")},"
  },
  "Ver clasificación": {
   "w": [
-   "ui-steps.js:103"
+   "ui-steps.js:105"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Más» → «Competición» ves cómo vas y quién viene después.\"), go: \"comp\", gl: tr(\"Ver clasificación\")},"
  },
  "Ten la guía a mano": {
   "w": [
-   "ui-steps.js:104",
-   "ui-steps.js:111"
+   "ui-steps.js:106",
+   "ui-steps.js:113"
   ],
   "ctx": "{ok: seen(\"guide\"), t: tr(\"Ten la guía a mano\"), b: tr(\"Si algo no se entiende, la «Guía del juego» lo explica en pocas líneas.\"), act: \"guide\", gl: tr(\"Abrir la guía\")},"
  },
  "Si algo no se entiende, la «Guía del juego» lo explica en pocas líneas.": {
   "w": [
-   "ui-steps.js:104",
-   "ui-steps.js:111"
+   "ui-steps.js:106",
+   "ui-steps.js:113"
   ],
   "ctx": "{ok: seen(\"guide\"), t: tr(\"Ten la guía a mano\"), b: tr(\"Si algo no se entiende, la «Guía del juego» lo explica en pocas líneas.\"), act: \"guide\", gl: tr(\"Abrir la guía\")},"
  },
  "Abrir la guía": {
   "w": [
-   "ui-steps.js:104",
-   "ui-steps.js:111"
+   "ui-steps.js:106",
+   "ui-steps.js:113"
   ],
   "ctx": "{ok: seen(\"guide\"), t: tr(\"Ten la guía a mano\"), b: tr(\"Si algo no se entiende, la «Guía del juego» lo explica en pocas líneas.\"), act: \"guide\", gl: tr(\"Abrir la guía\")},"
  },
  "Llega al final de la temporada": {
   "w": [
-   "ui-steps.js:105",
-   "ui-steps.js:112"
+   "ui-steps.js:107",
+   "ui-steps.js:114"
   ],
   "ctx": "{ok: S.bi >= 4 || S.m.seasons.length > 0, t: tr(\"Llega al final de la temporada\"), b: tr(\"Sigue avanzando. La directiva te juzgará por los objetivos que ves en «Inicio».\"), prog: true}"
  },
  "Sigue avanzando. La directiva te juzgará por los objetivos que ves en «Inicio».": {
   "w": [
-   "ui-steps.js:105"
+   "ui-steps.js:107"
   ],
   "ctx": "{ok: S.bi >= 4 || S.m.seasons.length > 0, t: tr(\"Llega al final de la temporada\"), b: tr(\"Sigue avanzando. La directiva te juzgará por los objetivos que ves en «Inicio».\"), prog: true}"
  },
  "Conoce a tu futbolista": {
   "w": [
-   "ui-steps.js:108"
+   "ui-steps.js:110"
   ],
   "ctx": "{ok: seen(\"jugador\"), t: tr(\"Conoce a tu futbolista\"), b: tr(\"Abre «Yo»: ahí ves tu nivel, tus atributos, tu forma y tu moral.\"), go: \"jugador\", gl: tr(\"Ir a Yo\")},"
  },
  "Abre «Yo»: ahí ves tu nivel, tus atributos, tu forma y tu moral.": {
   "w": [
-   "ui-steps.js:108"
+   "ui-steps.js:110"
   ],
   "ctx": "{ok: seen(\"jugador\"), t: tr(\"Conoce a tu futbolista\"), b: tr(\"Abre «Yo»: ahí ves tu nivel, tus atributos, tu forma y tu moral.\"), go: \"jugador\", gl: tr(\"Ir a Yo\")},"
  },
  "Ir a Yo": {
   "w": [
-   "ui-steps.js:108"
+   "ui-steps.js:110"
   ],
   "ctx": "{ok: seen(\"jugador\"), t: tr(\"Conoce a tu futbolista\"), b: tr(\"Abre «Yo»: ahí ves tu nivel, tus atributos, tu forma y tu moral.\"), go: \"jugador\", gl: tr(\"Ir a Yo\")},"
  },
  "Juega tu primer tramo": {
   "w": [
-   "ui-steps.js:109"
+   "ui-steps.js:111"
   ],
   "ctx": "{ok: played(), t: tr(\"Juega tu primer tramo\"), b: tr(\"Pulsa el botón grande de abajo. La temporada avanza unas semanas y se para cuando hay algo que decidir.\")},"
  },
  "Pulsa el botón grande de abajo. La temporada avanza unas semanas y se para cuando hay algo que decidir.": {
   "w": [
-   "ui-steps.js:109"
+   "ui-steps.js:111"
   ],
   "ctx": "{ok: played(), t: tr(\"Juega tu primer tramo\"), b: tr(\"Pulsa el botón grande de abajo. La temporada avanza unas semanas y se para cuando hay algo que decidir.\")},"
  },
  "En «Liga» ves cómo va tu equipo y tus números de la temporada.": {
   "w": [
-   "ui-steps.js:110"
+   "ui-steps.js:112"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Liga» ves cómo va tu equipo y tus números de la temporada.\"), go: \"comp\", gl: tr(\"Ir a Liga\")},"
  },
  "Ir a Liga": {
   "w": [
-   "ui-steps.js:110"
+   "ui-steps.js:112"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Liga» ves cómo va tu equipo y tus números de la temporada.\"), go: \"comp\", gl: tr(\"Ir a Liga\")},"
  },
  "Sigue avanzando. Cumple los objetivos del míster para ganar minutos y subir tu moral.": {
   "w": [
-   "ui-steps.js:112"
+   "ui-steps.js:114"
   ],
   "ctx": "{ok: S.bi >= 4 || S.p.seasons.length > 0, t: tr(\"Llega al final de la temporada\"), b: tr(\"Sigue avanzando. Cumple los objetivos del míster para ganar minutos y subir tu moral.\"), prog: true}"
  },
  "Primeros pasos · {i} de {n}": {
   "w": [
-   "ui-steps.js:127"
+   "ui-steps.js:129"
   ],
   "ctx": "return '<section class=\"card tut\" aria-live=\"polite\"><div class=\"tuthd\"><span class=\"eyebrow\">' + tr(\"Primeros pasos · {i} de {n}\", {i: i + 1, n: st.length}) + '</span><button class=\"tutx\" data-a=\"tutoff\" aria-label=\"' +"
  },
  "Saltar la guía": {
   "w": [
-   "ui-steps.js:127"
+   "ui-steps.js:129"
   ],
   "ctx": "return '<section class=\"card tut\" aria-live=\"polite\"><div class=\"tuthd\"><span class=\"eyebrow\">' + tr(\"Primeros pasos · {i} de {n}\", {i: i + 1, n: st.length}) + '</span><button class=\"tutx\" data-a=\"tutoff\" aria-label=\"' +"
  },
  "Guía cerrada. La tienes siempre en «Más» → «Guía del juego».": {
   "w": [
-   "ui-steps.js:139"
+   "ui-steps.js:141"
   ],
   "ctx": "U.actions.tutoff = function () { S.tut = S.tut || {seen: {}}; S.tut.off = 1; U.persist(); U.render(false); U.toast(tr(\"Guía cerrada. La tienes siempre en «Más» → «Guía del juego».\")); };"
  },
