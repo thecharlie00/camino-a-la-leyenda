@@ -1336,3 +1336,21 @@ nav.tabs .nbadge.pet { background: var(--gold); color: #1a1200; font-size: 9px; 
 .vtag { display: block; margin: 18px auto 0; padding: 6px 10px; border: 0; background: none; color: var(--dim); opacity: .55; font: 600 10.5px/1 ui-monospace, "Roboto Mono", monospace; letter-spacing: .04em; cursor: pointer; }
 .vtag.inmenu { margin: 10px auto 0; }
 .vnotes { margin: 6px 0 0; padding-left: 18px; font-size: 14px; line-height: 1.5; color: var(--chalk); }
+
+/* ---------- 4.1: motor en directo (xG, momentum, territorio, resistencia) ---------- */
+.lx { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.lxrow { display: flex; gap: 8px; align-items: stretch; }
+.lxg { flex: 1; display: flex; flex-direction: column; gap: 3px; padding: 8px 10px; border-radius: 10px; background: var(--tunnel); border: 1px solid var(--line); }
+.lxg span { font-size: 12px; color: var(--mist); }
+.lxg b { font: 900 20px/1 var(--f-disp); }
+.lxmeta { display: flex; flex-direction: column; justify-content: center; gap: 4px; font-size: 12.5px; color: var(--mist); text-align: right; }
+.lmomh { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; font-weight: 700; margin-bottom: 5px; }
+.lmomt { position: relative; height: 10px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.lmomt .mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--mist); opacity: .6; }
+.lmomt .bar { position: absolute; top: 0; bottom: 0; border-radius: 99px; transition: width .4s ease, left .4s, right .4s; }
+.lzn { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 14px); gap: 2px; padding: 4px; border-radius: 8px; background: #1f5f39; }
+.lzn i { display: block; border-radius: 3px; background: #fff; }
+.fit.f-ok { color: var(--grass); }
+.fit.f-mid { color: var(--led); }
+.fit.f-low { color: var(--red); }
+@media (prefers-reduced-motion: reduce) { .lmomt .bar { transition: none; } }

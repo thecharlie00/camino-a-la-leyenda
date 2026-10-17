@@ -194,7 +194,7 @@
  "Ritmo": {
   "w": [
    "engine-player.js:16",
-   "engine-extra.js:676",
+   "engine-extra.js:678",
    "ui-guide.js:58"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
@@ -345,7 +345,7 @@
   "w": [
    "engine-player.js:33",
    "ui.js:1290",
-   "ui.js:2045",
+   "ui.js:2046",
    "ui-guide.js:17"
   ],
   "ctx": "mental: {n: tr(\"Mentalidad\"), d: tr(\"Más regularidad y moral bajo presión.\"), att: [], gk: []}"
@@ -1246,7 +1246,7 @@
  "Media": {
   "w": [
    "engine-player.js:1202",
-   "engine-extra.js:673",
+   "engine-extra.js:675",
    "press-ctx.js:26",
    "ui.js:927"
   ],
@@ -10725,22 +10725,22 @@
  "Defensiva": {
   "w": [
    "engine-manager.js:28",
-   "engine-extra.js:596"
+   "engine-extra.js:598"
   ],
   "ctx": "MENT_NAMES = [tr(\"Defensiva\"), tr(\"Equilibrada\"), tr(\"Ofensiva\")];"
  },
  "Equilibrada": {
   "w": [
    "engine-manager.js:28",
-   "engine-extra.js:596",
-   "engine-extra.js:674"
+   "engine-extra.js:598",
+   "engine-extra.js:676"
   ],
   "ctx": "MENT_NAMES = [tr(\"Defensiva\"), tr(\"Equilibrada\"), tr(\"Ofensiva\")];"
  },
  "Ofensiva": {
   "w": [
    "engine-manager.js:28",
-   "engine-extra.js:596"
+   "engine-extra.js:598"
   ],
   "ctx": "MENT_NAMES = [tr(\"Defensiva\"), tr(\"Equilibrada\"), tr(\"Ofensiva\")];"
  },
@@ -10755,7 +10755,7 @@
    "engine-manager.js:29",
    "engine-modes.js:6",
    "engine-extra.js:8",
-   "engine-extra.js:676"
+   "engine-extra.js:678"
   ],
   "ctx": "ROT_NAMES = [tr(\"Poca\"), tr(\"Normal\"), tr(\"Mucha\")];"
  },
@@ -13156,7 +13156,7 @@
  "Presión alta": {
   "w": [
    "events-manager.js:491",
-   "engine-extra.js:596"
+   "engine-extra.js:598"
   ],
   "ctx": "mk(\"press\", tr(\"Presión alta\"), tr(\"A por ellos desde el primer minuto: más ocasiones para los dos.\"), tr(\"Mayo de 2019: el Liverpool de Klopp remontó un 3-0 al Barcelona con una presión asfixiante en Anfield.\"))"
  },
@@ -16412,6 +16412,7 @@
   "w": [
    "events-manager-more.js:269",
    "week29.js:16",
+   "match41.js:18",
    "minigame.js:680"
   ],
   "ctx": "ok: {txt: tr(\"Jugadas ensayadas que parecen coreografías. Los goles llegan.\"), fx: {bud: -g, buff: {v: 1, b: 2, n: tr(\"Balón parado\")}}},"
@@ -26442,7 +26443,7 @@
  "«{answer}»": {
   "w": [
    "engine-extra.js:234",
-   "engine-extra.js:647",
+   "engine-extra.js:649",
    "press-ctx.js:736"
   ],
   "ctx": "opts: q.a.map(function (a) { var o = {t: tr(a.t, tp), ref: a.ref ? tr(a.ref) : null, blind: true, ok: {txt: tr(\"«{answer}»\", {answer: tr(a.t, tp)}), fx: a.fx}}; var d = descOpt(o, function () { return []; }); d.blind = t"
@@ -26736,212 +26737,212 @@
  },
  "¡Ocasión clarísima!": {
   "w": [
-   "engine-extra.js:521",
-   "engine-extra.js:523"
+   "engine-extra.js:522",
+   "engine-extra.js:524"
   ],
-  "ctx": "out.push({t: \"goal\", us: 1, pid: sh && sh.id, txt: (big ? tr(\"¡Ocasión clarísima!\") + \" \" : \"\") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});"
+  "ctx": "out.push({t: \"goal\", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: (big ? tr(\"¡Ocasión clarísima!\") + \" \" : \"\") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});"
  },
  "Falta de {name}, que ya tenía amarilla: segunda amarilla y roja. Os quedáis con diez.": {
   "w": [
-   "engine-extra.js:546"
+   "engine-extra.js:548"
   ],
   "ctx": "if (L.yc[pid]) { L.red = pid; out.push({t: \"red\", us: 1, pid: pid, k: \"foul\", txt: tr(\"Falta de {name}, que ya tenía amarilla: segunda amarilla y roja. Os quedáis con diez.\", {name: plShort(p)})}); }"
  },
  "¡Entrada durísima de {name}! Roja directa: os quedáis con diez.": {
   "w": [
-   "engine-extra.js:547"
+   "engine-extra.js:549"
   ],
   "ctx": "else if (chance(0.04)) { L.red = pid; out.push({t: \"red\", us: 1, pid: pid, k: \"foul\", txt: tr(\"¡Entrada durísima de {name}! Roja directa: os quedáis con diez.\", {name: plShort(p)})}); }"
  },
  "Falta de {name} cortando la jugada: amarilla.": {
   "w": [
-   "engine-extra.js:548"
+   "engine-extra.js:550"
   ],
   "ctx": "else { L.yc[pid] = 1; out.push({t: \"yellow\", us: 1, pid: pid, k: \"foul\", txt: tr(\"Falta de {name} cortando la jugada: amarilla.\", {name: plShort(p)})}); }"
  },
  "Falta de {x}, que ya tenía amarilla: roja y el rival se queda con diez.": {
   "w": [
-   "engine-extra.js:557"
+   "engine-extra.js:559"
   ],
   "ctx": "if (L.oyc[oi]) { L.ored = (L.ored || 0) + 1; L.oxi[oi].off = true; out.push({t: \"red\", us: 0, ox: oi, k: \"foul\", txt: tr(\"Falta de {x}, que ya tenía amarilla: roja y el rival se queda con diez.\", {x: on})}); }"
  },
  "Falta de {x} para frenar el contragolpe: amarilla.": {
   "w": [
-   "engine-extra.js:558"
+   "engine-extra.js:560"
   ],
   "ctx": "else { L.oyc[oi] = 1; out.push({t: \"yellow\", us: 0, ox: oi, k: \"foul\", txt: tr(\"Falta de {x} para frenar el contragolpe: amarilla.\", {x: on})}); }"
  },
  "{name} se duele y pide el cambio.": {
   "w": [
-   "engine-extra.js:562"
+   "engine-extra.js:564"
   ],
   "ctx": "if (hurt) { any = true; L.hurt = hurt.id; out.push({t: \"inj\", us: 1, txt: tr(\"{name} se duele y pide el cambio.\", {name: plShort(hurt)})}); }"
  },
  "¡Arranca el partido! {us} contra {opp}.": {
   "w": [
-   "engine-extra.js:569"
+   "engine-extra.js:571"
   ],
   "ctx": "if (L.min === 1) out.push({t: \"com\", txt: tr(\"¡Arranca el partido! {us} contra {opp}.\", {us: club, opp: opp})});"
  },
  "Descanso: {a}-{b}.": {
   "w": [
-   "engine-extra.js:570"
+   "engine-extra.js:572"
   ],
   "ctx": "if (L.min === 45 && !L.half) { L.half = true; out.push({t: \"half\", txt: tr(\"Descanso: {a}-{b}.\", {a: hs()[0], b: hs()[1]})}); }"
  },
  "¡Final del partido! {a}-{b}.": {
   "w": [
-   "engine-extra.js:571"
+   "engine-extra.js:573"
   ],
   "ctx": "if (L.min >= 90 + L.add) { L.done = true; out.push({t: \"end\", txt: tr(\"¡Final del partido! {a}-{b}.\", {a: hs()[0], b: hs()[1]})}); }"
  },
  "El cuarto árbitro indica {n} minuto de descuento.": {
   "w": [
-   "engine-extra.js:572"
+   "engine-extra.js:574"
   ],
   "ctx": "else if (L.min === 90) out.push({t: \"com\", txt: trn(L.add, \"El cuarto árbitro indica {n} minuto de descuento.\", \"El cuarto árbitro indica {n} minutos de descuento.\")});",
   "note": "plural:singular"
  },
  "El cuarto árbitro indica {n} minutos de descuento.": {
   "w": [
-   "engine-extra.js:572"
+   "engine-extra.js:574"
   ],
   "ctx": "else if (L.min === 90) out.push({t: \"com\", txt: trn(L.add, \"El cuarto árbitro indica {n} minuto de descuento.\", \"El cuarto árbitro indica {n} minutos de descuento.\")});",
   "note": "plural:plural"
  },
  "Cambio: entra {a}, sale {b}.": {
   "w": [
-   "engine-extra.js:587"
+   "engine-extra.js:589"
   ],
   "ctx": "L.ev.unshift({t: \"sub\", min: L.min, txt: tr(\"Cambio: entra {a}, sale {b}.\", {a: plShort(mPl(inId)), b: plShort(mPl(outId))})});"
  },
  "Cambias la mentalidad: {m}.": {
   "w": [
-   "engine-extra.js:593"
+   "engine-extra.js:595"
   ],
   "ctx": "if (k === \"ment\") { L.ment = v; L.ev.unshift({t: \"tac\", min: L.min, txt: tr(\"Cambias la mentalidad: {m}.\", {m: liveMentName(v)})}); }"
  },
  "Cambias al {f}.": {
   "w": [
-   "engine-extra.js:594"
+   "engine-extra.js:596"
   ],
   "ctx": "if (k === \"form\" && FORMATIONS[v]) { L.form = v; L.ev.unshift({t: \"tac\", min: L.min, txt: tr(\"Cambias al {f}.\", {f: v})}); }"
  },
  "Encerrarse": {
   "w": [
-   "engine-extra.js:596"
+   "engine-extra.js:598"
   ],
   "ctx": "function liveMentName(v) { return {bus: tr(\"Encerrarse\"), 0: tr(\"Defensiva\"), 1: tr(\"Equilibrada\"), 2: tr(\"Ofensiva\"), press: tr(\"Presión alta\")}[v] || \"\"; }"
  },
  "En directo": {
   "w": [
-   "engine-extra.js:617",
-   "engine-extra.js:630"
+   "engine-extra.js:619",
+   "engine-extra.js:632"
   ],
   "ctx": "return {tag: \"hot\", tagTxt: tr(\"En directo\"), cls: \"hotc\", hot: true, cat: compShort(f) + (roundLabel(f) ? \" · \" + roundLabel(f) : \"\"), ctxTxt: mgrMomLabel(f), title: tr(\"¿Ves el partido o lo simulas?\"),"
  },
  "¿Ves el partido o lo simulas?": {
   "w": [
-   "engine-extra.js:617"
+   "engine-extra.js:619"
   ],
   "ctx": "return {tag: \"hot\", tagTxt: tr(\"En directo\"), cls: \"hotc\", hot: true, cat: compShort(f) + (roundLabel(f) ? \" · \" + roundLabel(f) : \"\"), ctxTxt: mgrMomLabel(f), title: tr(\"¿Ves el partido o lo simulas?\"),"
  },
  "{us} contra {opp}. Si lo ves, podrás cambiar la mentalidad, el sistema y hacer hasta cinco cambios durante el partido.": {
   "w": [
-   "engine-extra.js:618"
+   "engine-extra.js:620"
   ],
   "ctx": "text: tr(\"{us} contra {opp}. Si lo ves, podrás cambiar la mentalidad, el sistema y hacer hasta cinco cambios durante el partido.\", {us: clubName(S.m.club), opp: clubName(f.opp)})}; },"
  },
  "Ver el partido": {
   "w": [
-   "engine-extra.js:620"
+   "engine-extra.js:622"
   ],
   "ctx": "{t: tr(\"Ver el partido\"), d: tr(\"Minuto a minuto, con cambios tácticos.\"), ok: {txt: tr(\"Bajas al banquillo. Empieza el partido.\"), then: function () { var f = S.cur.pm[x.fi]; f.live = true; liveStart(x.fi); S.liveReq = "
  },
  "Minuto a minuto, con cambios tácticos.": {
   "w": [
-   "engine-extra.js:620"
+   "engine-extra.js:622"
   ],
   "ctx": "{t: tr(\"Ver el partido\"), d: tr(\"Minuto a minuto, con cambios tácticos.\"), ok: {txt: tr(\"Bajas al banquillo. Empieza el partido.\"), then: function () { var f = S.cur.pm[x.fi]; f.live = true; liveStart(x.fi); S.liveReq = "
  },
  "Bajas al banquillo. Empieza el partido.": {
   "w": [
-   "engine-extra.js:620"
+   "engine-extra.js:622"
   ],
   "ctx": "{t: tr(\"Ver el partido\"), d: tr(\"Minuto a minuto, con cambios tácticos.\"), ok: {txt: tr(\"Bajas al banquillo. Empieza el partido.\"), then: function () { var f = S.cur.pm[x.fi]; f.live = true; liveStart(x.fi); S.liveReq = "
  },
  "Simular el partido": {
   "w": [
-   "engine-extra.js:621",
+   "engine-extra.js:623",
    "mgr-plus.js:669"
   ],
   "ctx": "{t: tr(\"Simular el partido\"), ok: {txt: tr(\"Lo sigues desde la grada.\")}},"
  },
  "Lo sigues desde la grada.": {
   "w": [
-   "engine-extra.js:621"
+   "engine-extra.js:623"
   ],
   "ctx": "{t: tr(\"Simular el partido\"), ok: {txt: tr(\"Lo sigues desde la grada.\")}},"
  },
  "Simular el resto del tramo": {
   "w": [
-   "engine-extra.js:622"
+   "engine-extra.js:624"
   ],
   "ctx": "{t: tr(\"Simular el resto del tramo\"), d: tr(\"No te volveremos a preguntar hasta el próximo tramo.\"), ok: {txt: tr(\"Dejas que el equipo juegue.\"), then: function () { S.cur.noLive = true; }}}"
  },
  "No te volveremos a preguntar hasta el próximo tramo.": {
   "w": [
-   "engine-extra.js:622"
+   "engine-extra.js:624"
   ],
   "ctx": "{t: tr(\"Simular el resto del tramo\"), d: tr(\"No te volveremos a preguntar hasta el próximo tramo.\"), ok: {txt: tr(\"Dejas que el equipo juegue.\"), then: function () { S.cur.noLive = true; }}}"
  },
  "Dejas que el equipo juegue.": {
   "w": [
-   "engine-extra.js:622"
+   "engine-extra.js:624"
   ],
   "ctx": "{t: tr(\"Simular el resto del tramo\"), d: tr(\"No te volveremos a preguntar hasta el próximo tramo.\"), ok: {txt: tr(\"Dejas que el equipo juegue.\"), then: function () { S.cur.noLive = true; }}}"
  },
  "Partido en curso": {
   "w": [
-   "engine-extra.js:630"
+   "engine-extra.js:632"
   ],
   "ctx": "return {tag: \"hot\", tagTxt: tr(\"En directo\"), cls: \"hotc\", hot: true, cat: compShort(f), ctxTxt: mgrMomLabel(f), title: tr(\"Partido en curso\"),"
  },
  "Minuto {min}: {a}-{b} contra el {opp}.": {
   "w": [
-   "engine-extra.js:631"
+   "engine-extra.js:633"
   ],
   "ctx": "text: L ? tr(\"Minuto {min}: {a}-{b} contra el {opp}.\", {min: L.min, a: L.gu, b: L.gt, opp: clubName(f.opp)}) : \"\"}; },"
  },
  "Volver al partido": {
   "w": [
-   "engine-extra.js:633"
+   "engine-extra.js:635"
   ],
   "ctx": "{t: tr(\"Volver al partido\"), ok: {txt: \"\", then: function () { S.liveReq = x.fi; S.pend.unshift(mp(\"mlivew\", {fi: x.fi, ui: true})); }}},"
  },
  "Simular lo que queda": {
   "w": [
-   "engine-extra.js:634",
-   "ui.js:2057"
+   "engine-extra.js:636",
+   "ui.js:2058"
   ],
   "ctx": "{t: tr(\"Simular lo que queda\"), ok: {txt: tr(\"Simulas el resto del partido.\"), then: function () { if (!S.live) liveStart(x.fi); liveFinish(); }}}"
  },
  "Simulas el resto del partido.": {
   "w": [
-   "engine-extra.js:634"
+   "engine-extra.js:636"
   ],
   "ctx": "{t: tr(\"Simular lo que queda\"), ok: {txt: tr(\"Simulas el resto del partido.\"), then: function () { if (!S.live) liveStart(x.fi); liveFinish(); }}}"
  },
  "Objetivos": {
   "w": [
-   "engine-extra.js:655",
+   "engine-extra.js:657",
    "ui.js:1847"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),"
  },
  "Temporada {season}": {
   "w": [
-   "engine-extra.js:655",
+   "engine-extra.js:657",
    "mgr-plus.js:749",
    "ui.js:528",
    "ui.js:1847"
@@ -26950,156 +26951,156 @@
  },
  "Elige tus objetivos de la temporada": {
   "w": [
-   "engine-extra.js:655",
+   "engine-extra.js:657",
    "ui.js:1848"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),"
  },
  "Cuanto más difícil, mayor recompensa si lo cumples.": {
   "w": [
-   "engine-extra.js:656"
+   "engine-extra.js:658"
   ],
   "ctx": "text: tr(\"Cuanto más difícil, mayor recompensa si lo cumples.\"), opts: [descOpt({t: tr(\"Confirmar objetivos\"), ok: {txt: \"\"}}, function () { return []; })]};"
  },
  "Confirmar objetivos": {
   "w": [
-   "engine-extra.js:656",
-   "engine-extra.js:662",
+   "engine-extra.js:658",
+   "engine-extra.js:664",
    "ui.js:1856"
   ],
   "ctx": "text: tr(\"Cuanto más difícil, mayor recompensa si lo cumples.\"), opts: [descOpt({t: tr(\"Confirmar objetivos\"), ok: {txt: \"\"}}, function () { return []; })]};"
  },
  "Línea defensiva": {
   "w": [
-   "engine-extra.js:673"
+   "engine-extra.js:675"
   ],
   "ctx": "line: {n: N_(\"Línea defensiva\"), o: [N_(\"Baja\"), N_(\"Media\"), N_(\"Alta\")]},"
  },
  "Baja": {
   "w": [
-   "engine-extra.js:673",
+   "engine-extra.js:675",
    "press-ctx.js:26"
   ],
   "ctx": "line: {n: N_(\"Línea defensiva\"), o: [N_(\"Baja\"), N_(\"Media\"), N_(\"Alta\")]},"
  },
  "Alta": {
   "w": [
-   "engine-extra.js:673",
+   "engine-extra.js:675",
    "press-ctx.js:26"
   ],
   "ctx": "line: {n: N_(\"Línea defensiva\"), o: [N_(\"Baja\"), N_(\"Media\"), N_(\"Alta\")]},"
  },
  "Amplitud": {
   "w": [
-   "engine-extra.js:674"
+   "engine-extra.js:676"
   ],
   "ctx": "width: {n: N_(\"Amplitud\"), o: [N_(\"Por dentro\"), N_(\"Equilibrada\"), N_(\"Por bandas\")]},"
  },
  "Por dentro": {
   "w": [
-   "engine-extra.js:674"
+   "engine-extra.js:676"
   ],
   "ctx": "width: {n: N_(\"Amplitud\"), o: [N_(\"Por dentro\"), N_(\"Equilibrada\"), N_(\"Por bandas\")]},"
  },
  "Por bandas": {
   "w": [
-   "engine-extra.js:674"
+   "engine-extra.js:676"
   ],
   "ctx": "width: {n: N_(\"Amplitud\"), o: [N_(\"Por dentro\"), N_(\"Equilibrada\"), N_(\"Por bandas\")]},"
  },
  "Estilo de pase": {
   "w": [
-   "engine-extra.js:675"
+   "engine-extra.js:677"
   ],
   "ctx": "pass: {n: N_(\"Estilo de pase\"), o: [N_(\"Combinativo\"), N_(\"Mixto\"), N_(\"Directo\")]},"
  },
  "Combinativo": {
   "w": [
-   "engine-extra.js:675"
+   "engine-extra.js:677"
   ],
   "ctx": "pass: {n: N_(\"Estilo de pase\"), o: [N_(\"Combinativo\"), N_(\"Mixto\"), N_(\"Directo\")]},"
  },
  "Mixto": {
   "w": [
-   "engine-extra.js:675"
+   "engine-extra.js:677"
   ],
   "ctx": "pass: {n: N_(\"Estilo de pase\"), o: [N_(\"Combinativo\"), N_(\"Mixto\"), N_(\"Directo\")]},"
  },
  "Directo": {
   "w": [
-   "engine-extra.js:675"
+   "engine-extra.js:677"
   ],
   "ctx": "pass: {n: N_(\"Estilo de pase\"), o: [N_(\"Combinativo\"), N_(\"Mixto\"), N_(\"Directo\")]},"
  },
  "Lento": {
   "w": [
-   "engine-extra.js:676"
+   "engine-extra.js:678"
   ],
   "ctx": "tempo: {n: N_(\"Ritmo\"), o: [N_(\"Lento\"), N_(\"Normal\"), N_(\"Alto\")]}"
  },
  "Alto": {
   "w": [
-   "engine-extra.js:676"
+   "engine-extra.js:678"
   ],
   "ctx": "tempo: {n: N_(\"Ritmo\"), o: [N_(\"Lento\"), N_(\"Normal\"), N_(\"Alto\")]}"
  },
  "{a} busca en largo a {b}.": {
   "w": [
-   "engine-extra.js:716"
+   "engine-extra.js:718"
   ],
   "ctx": "long: N_(\"{a} busca en largo a {b}.\"), tri: N_(\"Triangulación de {a} y {b} por dentro.\"), wide: N_(\"{a} abre a la banda y {b} pega la raya.\"),"
  },
  "Triangulación de {a} y {b} por dentro.": {
   "w": [
-   "engine-extra.js:716"
+   "engine-extra.js:718"
   ],
   "ctx": "long: N_(\"{a} busca en largo a {b}.\"), tri: N_(\"Triangulación de {a} y {b} por dentro.\"), wide: N_(\"{a} abre a la banda y {b} pega la raya.\"),"
  },
  "{a} abre a la banda y {b} pega la raya.": {
   "w": [
-   "engine-extra.js:716"
+   "engine-extra.js:718"
   ],
   "ctx": "long: N_(\"{a} busca en largo a {b}.\"), tri: N_(\"Triangulación de {a} y {b} por dentro.\"), wide: N_(\"{a} abre a la banda y {b} pega la raya.\"),"
  },
  "{a} toca y toca: el {club} duerme el partido.": {
   "w": [
-   "engine-extra.js:717"
+   "engine-extra.js:719"
   ],
   "ctx": "slow: N_(\"{a} toca y toca: el {club} duerme el partido.\"), fast: N_(\"¡Ritmo alto! Juego a un toque entre {a} y {b}.\"),"
  },
  "¡Ritmo alto! Juego a un toque entre {a} y {b}.": {
   "w": [
-   "engine-extra.js:717"
+   "engine-extra.js:719"
   ],
   "ctx": "slow: N_(\"{a} toca y toca: el {club} duerme el partido.\"), fast: N_(\"¡Ritmo alto! Juego a un toque entre {a} y {b}.\"),"
  },
  "Presión tras pérdida: {a} recupera arriba.": {
   "w": [
-   "engine-extra.js:718"
+   "engine-extra.js:720"
   ],
   "ctx": "press: N_(\"Presión tras pérdida: {a} recupera arriba.\"), block: N_(\"El {club} se repliega en bloque bajo y cierra espacios.\"),"
  },
  "El {club} se repliega en bloque bajo y cierra espacios.": {
   "w": [
-   "engine-extra.js:718"
+   "engine-extra.js:720"
   ],
   "ctx": "press: N_(\"Presión tras pérdida: {a} recupera arriba.\"), block: N_(\"El {club} se repliega en bloque bajo y cierra espacios.\"),"
  },
  "¡Fuera de juego de {x}! Vuestra defensa sube a la vez.": {
   "w": [
-   "engine-extra.js:719"
+   "engine-extra.js:721"
   ],
   "ctx": "offThem: N_(\"¡Fuera de juego de {x}! Vuestra defensa sube a la vez.\"), offUs: N_(\"Fuera de juego de {a}: arrancó antes de tiempo.\")"
  },
  "Fuera de juego de {a}: arrancó antes de tiempo.": {
   "w": [
-   "engine-extra.js:719"
+   "engine-extra.js:721"
   ],
   "ctx": "offThem: N_(\"¡Fuera de juego de {x}! Vuestra defensa sube a la vez.\"), offUs: N_(\"Fuera de juego de {a}: arrancó antes de tiempo.\")"
  },
  "Cambias «{k}»: {o}.": {
   "w": [
-   "engine-extra.js:750"
+   "engine-extra.js:752"
   ],
   "ctx": "L.ev.unshift({t: \"tac\", min: L.min, txt: tr(\"Cambias «{k}»: {o}.\", {k: tr(LIVE_TAC[k].n), o: tr(LIVE_TAC[k].o[v])})});"
  },
@@ -34792,6 +34793,54 @@
   ],
   "ctx": "var POS_LV_NAMES = [N_(\"Natural\"), N_(\"Secundaria\"), N_(\"Emergencia\"), N_(\"Incompatible\")];"
  },
+ "Saque de centro": {
+  "w": [
+   "match41.js:18"
+  ],
+  "ctx": "var MX_ST = {KICKOFF: N_(\"Saque de centro\"), OPEN_PLAY: N_(\"Juego abierto\"), SET_PIECE: N_(\"Balón parado\"), HALF_TIME: N_(\"Descanso\"), FULL_TIME: N_(\"Final\")};"
+ },
+ "Juego abierto": {
+  "w": [
+   "match41.js:18"
+  ],
+  "ctx": "var MX_ST = {KICKOFF: N_(\"Saque de centro\"), OPEN_PLAY: N_(\"Juego abierto\"), SET_PIECE: N_(\"Balón parado\"), HALF_TIME: N_(\"Descanso\"), FULL_TIME: N_(\"Final\")};"
+ },
+ "Descanso": {
+  "w": [
+   "match41.js:18"
+  ],
+  "ctx": "var MX_ST = {KICKOFF: N_(\"Saque de centro\"), OPEN_PLAY: N_(\"Juego abierto\"), SET_PIECE: N_(\"Balón parado\"), HALF_TIME: N_(\"Descanso\"), FULL_TIME: N_(\"Final\")};"
+ },
+ "Despejado": {
+  "w": [
+   "match41.js:19"
+  ],
+  "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
+ },
+ "Nublado": {
+  "w": [
+   "match41.js:19"
+  ],
+  "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
+ },
+ "Lluvia": {
+  "w": [
+   "match41.js:19"
+  ],
+  "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
+ },
+ "Calor": {
+  "w": [
+   "match41.js:19"
+  ],
+  "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
+ },
+ "Frío": {
+  "w": [
+   "match41.js:19"
+  ],
+  "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
+ },
  "Escudo clásico": {
   "w": [
    "crest.js:8"
@@ -35460,7 +35509,7 @@
  "FUERA DE JUEGO": {
   "w": [
    "pitch.js:816",
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "Snd.whistle([0.28]); P.stopUntil = P.ck + 2.2; P.msg = {t: P.lab.off || tr(\"FUERA DE JUEGO\"), s: -1, at: P.ck, small: true};"
  },
@@ -36118,14 +36167,14 @@
  "año": {
   "w": [
    "ui.js:685",
-   "ui.js:2427"
+   "ui.js:2428"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
  "{pct} % de lo que piden": {
   "w": [
    "ui.js:685",
-   "ui.js:2428"
+   "ui.js:2429"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
@@ -38774,7 +38823,7 @@
   "w": [
    "ui.js:1548",
    "ui.js:1549",
-   "ui.js:2439"
+   "ui.js:2440"
   ],
   "ctx": "s += '<div class=\"clubprev\">' + crestRaw(c.col, ab, true, c.crest) + (typeof kitSVG === \"function\" ? kitSVG({pat: c.kit.pat, col: [c.col[0], c.col[1], c.kit.col3], big: true}) : \"\") + '<div class=\"grow\"><b>' + h(c.cn || "
  },
@@ -39843,282 +39892,282 @@
  },
  "Comentarios": {
   "w": [
-   "ui.js:2041"
+   "ui.js:2042"
   ],
   "ctx": "s += '<div class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Comentarios\") + '</div><div class=\"lfeed\">' + L.ev.slice(0, 18).map(function (e) { return '<div class=\"lev ' + e.t + (e.us === 1 ? \" us\" : e.us === 0 ? \" them\" : \"\")"
  },
  "Velocidad {n}": {
   "w": [
-   "ui.js:2044"
+   "ui.js:2045"
   ],
   "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L"
  },
  "Pausa": {
   "w": [
-   "ui.js:2044",
+   "ui.js:2045",
    "ui-shootout.js:209"
   ],
   "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L"
  },
  "Sistema": {
   "w": [
-   "ui.js:2050"
+   "ui.js:2051"
   ],
   "ctx": "s += '<div class=\"lrow\"><label class=\"lbl\" for=\"lform\">' + tr(\"Sistema\") + '</label><select id=\"lform\" data-live=\"form\">' + Object.keys(FORMATIONS).map(function (k) { return '<option value=\"' + k + '\"' + (k === L.form ? "
  },
  "Te queda {n} cambio": {
   "w": [
-   "ui.js:2051"
+   "ui.js:2052"
   ],
   "ctx": "'<span class=\"muted\" style=\"font-size:13px\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
   "note": "plural:singular"
  },
  "Te quedan {n} cambios": {
   "w": [
-   "ui.js:2051"
+   "ui.js:2052"
   ],
   "ctx": "'<span class=\"muted\" style=\"font-size:13px\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
   "note": "plural:plural"
  },
  "Volver al vestuario": {
   "w": [
-   "ui.js:2057"
+   "ui.js:2058"
   ],
   "ctx": "s += L.done ? '<button class=\"go\" data-a=\"lend\">' + tr(\"Volver al vestuario\") + \" \" + ICON.play + \"</button>\" : '<button class=\"btn wide\" data-a=\"lsim\">' + tr(\"Simular lo que queda\") + \"</button>\";"
  },
  "Velocidad de simulación": {
   "w": [
-   "ui.js:2061"
+   "ui.js:2062"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr(\"Velocidad de simulación\"), rpLabel: tr(\"Ver la repetición\"),"
  },
  "Ver la repetición": {
   "w": [
-   "ui.js:2061"
+   "ui.js:2062"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr(\"Velocidad de simulación\"), rpLabel: tr(\"Ver la repetición\"),"
  },
  "REPETICIÓN": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "GOL": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "¡GOL DE {n}!": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "¡PALO!": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FIN DEL PRIMER TIEMPO": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FINAL": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FALTA": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "SAQUE DE BANDA": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "CÓRNER": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "SAQUE DE PUERTA": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "El banquillo está completo: suéltalo encima de un suplente para cambiarlos.": {
   "w": [
-   "ui.js:2201",
-   "ui.js:2337"
+   "ui.js:2202",
+   "ui.js:2338"
   ],
   "ctx": "if (res === \"full\") toast(tr(\"El banquillo está completo: suéltalo encima de un suplente para cambiarlos.\"));"
  },
  "Ese jugador no puede jugar en esa posición.": {
   "w": [
-   "ui.js:2202",
-   "ui.js:2333"
+   "ui.js:2203",
+   "ui.js:2334"
   ],
   "ctx": "else if (res === \"pos\") toast(tr(\"Ese jugador no puede jugar en esa posición.\"));"
  },
  "Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.": {
   "w": [
-   "ui.js:2275",
-   "ui.js:2285"
+   "ui.js:2276",
+   "ui.js:2286"
   ],
   "ctx": "if (slotsNow().length >= MAX_SLOTS) { toast(tr(\"Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.\", {n: MAX_SLOTS})); UI.view = \"load\"; render(true); break; }"
  },
  "Partida borrada": {
   "w": [
-   "ui.js:2298"
+   "ui.js:2299"
   ],
   "ctx": "UI.sheet = null; render(false); toast(tr(\"Partida borrada\"));"
  },
  "Código copiado": {
   "w": [
-   "ui.js:2304",
-   "ui.js:2306"
+   "ui.js:2305",
+   "ui.js:2307"
   ],
   "ctx": "if (window.AndroidBridge && window.AndroidBridge.copy) { try { window.AndroidBridge.copy(code); toast(tr(\"Código copiado\")); break; } catch (err) {} }"
  },
  "Selecciona y copia el texto": {
   "w": [
-   "ui.js:2306",
-   "ui.js:2307"
+   "ui.js:2307",
+   "ui.js:2308"
   ],
   "ctx": "navigator.clipboard.writeText(code).then(function () { toast(tr(\"Código copiado\")); }, function () { ta.select(); toast(tr(\"Selecciona y copia el texto\")); });"
  },
  "No se pudo empezar la carrera de entrenador.": {
   "w": [
-   "ui.js:2316"
+   "ui.js:2317"
   ],
   "ctx": "try { startManager(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la carrera de entrenador.\")); break; }"
  },
  "No puedes fichar por ese club ahora.": {
   "w": [
-   "ui.js:2320"
+   "ui.js:2321"
   ],
   "ctx": "if (mgrTakeJob(+v)) { UI.sheet = null; UI.tab = \"club\"; persist(); render(true); } else toast(tr(\"No puedes fichar por ese club ahora.\"));"
  },
  "Hecho: {n} cambio en el once.": {
   "w": [
-   "ui.js:2330"
+   "ui.js:2331"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:singular"
  },
  "Hecho: {n} cambios en el once.": {
   "w": [
-   "ui.js:2330"
+   "ui.js:2331"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:plural"
  },
  "No hay suplentes disponibles para esas posiciones.": {
   "w": [
-   "ui.js:2330"
+   "ui.js:2331"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;"
  },
  "Once ideal y banquillo colocados": {
   "w": [
-   "ui.js:2340"
+   "ui.js:2341"
   ],
   "ctx": "case \"bestxi\": S.m.xi = mBestXI(S.m.form); S.m.bench = mBestBench(S.m.xi); persist(); render(false); toast(tr(\"Once ideal y banquillo colocados\")); break;"
  },
  "En la lista de venta: llegarán más ofertas": {
   "w": [
-   "ui.js:2344"
+   "ui.js:2345"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya no está en venta": {
   "w": [
-   "ui.js:2344"
+   "ui.js:2345"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya negociasteis en este tramo.": {
   "w": [
-   "ui.js:2345"
+   "ui.js:2346"
   ],
   "ctx": "case \"mrenew\": openPend(mgrStartRenew(id), tr(\"Ya negociasteis en este tramo.\")); break;"
  },
  "Ya hablasteis en este tramo.": {
   "w": [
-   "ui.js:2346"
+   "ui.js:2347"
   ],
   "ctx": "case \"mtalk\": openPend(mgrStartTalk(id), tr(\"Ya hablasteis en este tramo.\")); break;"
  },
  "Nadie ha preguntado por él ahora mismo.": {
   "w": [
-   "ui.js:2347"
+   "ui.js:2348"
   ],
   "ctx": "case \"msell\": openPend(mgrStartSell(id), tr(\"Nadie ha preguntado por él ahora mismo.\")); break;"
  },
  "Ningún club puede acogerle ahora.": {
   "w": [
-   "ui.js:2348"
+   "ui.js:2349"
   ],
   "ctx": "case \"mloan\": openPend(mgrStartLoan(id), tr(\"Ningún club puede acogerle ahora.\")); break;"
  },
  "Nombre cambiado": {
   "w": [
-   "ui.js:2353"
+   "ui.js:2354"
   ],
   "ctx": "if (mgrRename(id, nf ? nf.value : \"\", nl ? nl.value : \"\")) { persist(); UI.sheet = {k: \"pl\", id: id}; renderSheet(); render(false); toast(tr(\"Nombre cambiado\")); }"
  },
  "Escribe al menos un nombre.": {
   "w": [
-   "ui.js:2354"
+   "ui.js:2355"
   ],
   "ctx": "else toast(tr(\"Escribe al menos un nombre.\"));"
  },
  "Ahora no se puede negociar.": {
   "w": [
-   "ui.js:2358",
+   "ui.js:2359",
    "ui-mgrplus.js:50"
   ],
   "ctx": "case \"mbid\": openPend(mgrStartBid(b.getAttribute(\"data-id\")), tr(\"Ahora no se puede negociar.\")); break;"
  },
  "Nuevo informe de ojeadores": {
   "w": [
-   "ui.js:2359"
+   "ui.js:2360"
   ],
   "ctx": "case \"mscout\": var mk = S.m.mk; if (mk.open && !mk.ref) { mk.ref = true; mk.list = mk.list.filter(function (t) { return t.done; }).concat(mgrScoutList(12)); persist(); render(false); toast(tr(\"Nuevo informe de ojeadores\""
  },
  "Objetivos fijados. ¡A por ellos!": {
   "w": [
-   "ui.js:2369"
+   "ui.js:2370"
   ],
   "ctx": "case \"objok\": if (confirmObjChoice()) { persist(); toast(tr(\"Objetivos fijados. ¡A por ellos!\")); render(true); } break;"
  },
  "Perfil actualizado": {
   "w": [
-   "ui.js:2394"
+   "ui.js:2395"
   ],
   "ctx": "UI.sheet = null; persist(); render(false); toast(tr(\"Perfil actualizado\"));"
  },
  "Plantilla nueva generada": {
   "w": [
-   "ui.js:2413"
+   "ui.js:2414"
   ],
   "ctx": "case \"redraft\": clubRedraft(); persist(); render(false); toast(tr(\"Plantilla nueva generada\")); break;"
  },
  "No se pudo empezar la temporada.": {
   "w": [
-   "ui.js:2415"
+   "ui.js:2416"
   ],
   "ctx": "try { clubStart(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la temporada.\")); break; }"
  },
@@ -43863,6 +43912,54 @@
    "ui-37.js:123"
   ],
   "ctx": "var t = sysInfo(), ok = function () { U.toast(tr(\"Información copiada\")); };"
+ },
+ "Goles esperados (xG)": {
+  "w": [
+   "ui-41.js:13"
+  ],
+  "ctx": "s += '<div class=\"lxrow\"><div class=\"lxg\"><span>' + tr(\"Goles esperados (xG)\") + '</span><b class=\"num\">' + dec2(a) + \" – \" + dec2(b) + \"</b></div>\" +"
+ },
+ "Momento del partido": {
+  "w": [
+   "ui-41.js:17"
+  ],
+  "ctx": "s += '<div class=\"lmom\"><div class=\"lmomh\"><span>' + tr(\"Momento del partido\") + '</span><span class=\"muted\">' + (Math.abs(mom) < 12 ? tr(\"Igualado\") : mom > 0 ? tr(\"Aprieta tu equipo\") : tr(\"Aprieta el rival\")) + '</spa"
+ },
+ "Igualado": {
+  "w": [
+   "ui-41.js:17"
+  ],
+  "ctx": "s += '<div class=\"lmom\"><div class=\"lmomh\"><span>' + tr(\"Momento del partido\") + '</span><span class=\"muted\">' + (Math.abs(mom) < 12 ? tr(\"Igualado\") : mom > 0 ? tr(\"Aprieta tu equipo\") : tr(\"Aprieta el rival\")) + '</spa"
+ },
+ "Aprieta tu equipo": {
+  "w": [
+   "ui-41.js:17"
+  ],
+  "ctx": "s += '<div class=\"lmom\"><div class=\"lmomh\"><span>' + tr(\"Momento del partido\") + '</span><span class=\"muted\">' + (Math.abs(mom) < 12 ? tr(\"Igualado\") : mom > 0 ? tr(\"Aprieta tu equipo\") : tr(\"Aprieta el rival\")) + '</spa"
+ },
+ "Aprieta el rival": {
+  "w": [
+   "ui-41.js:17"
+  ],
+  "ctx": "s += '<div class=\"lmom\"><div class=\"lmomh\"><span>' + tr(\"Momento del partido\") + '</span><span class=\"muted\">' + (Math.abs(mom) < 12 ? tr(\"Igualado\") : mom > 0 ? tr(\"Aprieta tu equipo\") : tr(\"Aprieta el rival\")) + '</spa"
+ },
+ "Territorio": {
+  "w": [
+   "ui-41.js:25"
+  ],
+  "ctx": "s += '<div class=\"lterr\"><div class=\"lmomh\"><span>' + tr(\"Territorio\") + '</span><span class=\"muted\">' + tr(\"{n} % del juego en el último tercio rival\", {n: att}) + '</span></div><div class=\"lzn\">' + cells + \"</div></div"
+ },
+ "{n} % del juego en el último tercio rival": {
+  "w": [
+   "ui-41.js:25"
+  ],
+  "ctx": "s += '<div class=\"lterr\"><div class=\"lmomh\"><span>' + tr(\"Territorio\") + '</span><span class=\"muted\">' + tr(\"{n} % del juego en el último tercio rival\", {n: att}) + '</span></div><div class=\"lzn\">' + cells + \"</div></div"
+ },
+ "Resistencia {n}": {
+  "w": [
+   "ui-41.js:30"
+  ],
+  "ctx": "return '<span class=\"fit f-' + c + '\" title=\"' + h(tr(\"Resistencia {n}\", {n: v})) + '\">' + v + \"</span>\";"
  },
  "España": {
   "w": [

@@ -1978,7 +1978,7 @@
     s += '<div class="lsubs"><div><div class="lbl">' + tr("En el campo") + "</div>" + L.xi.map(function (id, i) {
       var p = mPl(id); if (!p) return "";
       var on = LV.sel === id;
-      return '<button class="lpl' + (on ? " on out" : "") + (id === L.red ? " red" : "") + (id === L.hurt ? " hurt" : "") + (L.yc && L.yc[id] && id !== L.red ? " yc" : "") + '" data-a="lout" data-id="' + id + '"' + (id === L.red ? " disabled" : "") + ' aria-pressed="' + on + '"><span class="pp">' + h(posAb(slots[i])) + "</span>" + (on ? '<span class="ar">↓</span>' : "") + h(plShort(p)) + '<span class="fit">' + Math.round(p.fit) + "</span></button>";
+      return '<button class="lpl' + (on ? " on out" : "") + (id === L.red ? " red" : "") + (id === L.hurt ? " hurt" : "") + (L.yc && L.yc[id] && id !== L.red ? " yc" : "") + '" data-a="lout" data-id="' + id + '"' + (id === L.red ? " disabled" : "") + ' aria-pressed="' + on + '"><span class="pp">' + h(posAb(slots[i])) + "</span>" + (on ? '<span class="ar">↓</span>' : "") + h(plShort(p)) + (UIX.hk && UIX.hk.lfit ? UIX.hk.lfit(L, p) : '<span class="fit">' + Math.round(p.fit) + "</span>") + "</button>";
     }).join("") + "</div>";
     s += '<div><div class="lbl">' + tr("Banquillo") + "</div>";
     if (!L.bench.length) s += '<p class="muted" style="font-size:13px">' + tr("Sin suplentes") + "</p>";
@@ -2037,6 +2037,7 @@
       (L.ch || []).map(function (c) { var up = (c.us === 1) === !!f.home; return '<b class="' + c.k + (up ? " up" : " dn") + '" style="left:' + (c.min / mx * 100) + "%;background:" + (c.us === 1 ? cu[0] : cu[1]) + '" title="' + c.min + "'\"></b>"; }).join("") + "</div></div>";
     var st = function (lab, a, b) { return '<div><span>' + lab + '</span><b class="num">' + (f.home ? a + " – " + b : b + " – " + a) + "</b></div>"; };
     s += '<div class="lstats three">' + st(tr("Tiros"), L.shots[0], L.shots[1]) + st(tr("A puerta"), L.on[0], L.on[1]) + st(tr("Ocasiones claras"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + "</div>";
+    if (UIX.hk && UIX.hk.liveX) s += UIX.hk.liveX(L, f, cu);
     var ICO = {goal: "⚽", save: "🧤", miss: "💨", post: "🥅", com: "🎙️", yellow: "🟨", red: "🟥", inj: "🚑", sub: "🔁", tac: "📋", half: "⏱️", end: "🏁"};
     s += '<div class="lbl" style="margin-top:12px">' + tr("Comentarios") + '</div><div class="lfeed">' + L.ev.slice(0, 18).map(function (e) { return '<div class="lev ' + e.t + (e.us === 1 ? " us" : e.us === 0 ? " them" : "") + '"' + (e.us === 1 ? ' style="--tc:' + cu[0] + '"' : e.us === 0 ? ' style="--tc:' + cu[1] + '"' : "") + '><span class="num">' + e.min + "'</span><span class=\"li\">" + (ICO[e.t] || "•") + "</span><span class=\"lt\">" + h(e.txt) + "</span></div>"; }).join("") + "</div>";
     var dyn = s; s = "";

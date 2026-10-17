@@ -511,33 +511,35 @@ function liveStep() {
   /* ocasiones vuestras */
   if (chance(pu * 5)) {
     any = true; L.shots[0]++; L.bx = 92;
-    var sh = liveScorer(L), big = chance(0.35), sn = sh ? plShort(sh) : club, x = R();
+    var sh = liveScorer(L), big = typeof mxBig === "function" ? mxBig(L, 1, sh) : chance(0.35), sn = sh ? plShort(sh) : club, x = R();
+    var xs = typeof mxShotXG === "function" ? mxShotXG(L, 1, sh, big) : {xg: big ? 0.36 : 0.12}, mk = typeof mxMissKind === "function" ? mxMissKind(x, xs.xg) : null;
     if (big) L.big[0]++;
     if (chance(0.5)) out.push({t: "com", us: 1, txt: liveSay(LIVE_COM.buildUs, tp({a: liveAssist(L, sh && sh.id) || sn, b: sn}))});
-    if (x < (big ? 0.36 : 0.12)) {
+    if (x < xs.xg) {
       L.gu++; L.gmu.push(L.min); L.on[0]++; if (sh) L.sc.push(sh.id);
       var as = chance(0.75) ? liveAssist(L, sh && sh.id) : "";
       L.gl.push({us: 1, n: sn, min: L.min});
-      out.push({t: "goal", us: 1, pid: sh && sh.id, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});
+      out.push({t: "goal", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});
       L.ch.push({us: 1, min: L.min, k: "goal"});
-    } else if (x < 0.55) { L.on[0]++; out.push({t: "save", us: 1, pid: sh && sh.id, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(LIVE_COM.saveUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
-    else if (x < 0.62) { out.push({t: "post", us: 1, pid: sh && sh.id, txt: liveSay(LIVE_COM.postUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: "big"}); }
-    else { out.push({t: "miss", us: 1, pid: sh && sh.id, txt: liveSay(LIVE_COM.missUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
+    } else if (mk ? mk === "save" : x < 0.55) { L.on[0]++; out.push({t: "save", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(LIVE_COM.saveUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
+    else if (mk ? mk === "post" : x < 0.62) { out.push({t: "post", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: liveSay(LIVE_COM.postUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: "big"}); }
+    else { out.push({t: "miss", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, txt: liveSay(LIVE_COM.missUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
   }
   /* ocasiones del rival */
   if (chance(pt * 5)) {
     any = true; L.shots[1]++; L.bx = 8;
-    var xn = liveOppPick(L, true), ox = L._ox, big2 = chance(0.35), y = R();
+    var xn = liveOppPick(L, true), ox = L._ox, big2 = typeof mxBig === "function" ? mxBig(L, 0, null) : chance(0.35), y = R();
+    var xs2 = typeof mxShotXG === "function" ? mxShotXG(L, 0, null, big2) : {xg: big2 ? 0.36 : 0.12}, mk2 = typeof mxMissKind === "function" ? mxMissKind(y, xs2.xg) : null;
     if (big2) L.big[1]++;
     if (chance(0.5)) out.push({t: "com", us: 0, txt: liveSay(LIVE_COM.buildThem, tp({x: liveOppPick(L, false)}))});
-    if (y < (big2 ? 0.36 : 0.12)) {
+    if (y < xs2.xg) {
       L.gt++; L.gmt.push(L.min); L.on[1]++;
       L.gl.push({us: 0, n: xn, min: L.min});
-      out.push({t: "goal", us: 0, ox: ox, txt: liveSay(LIVE_COM.goalThem, tp({x: xn}))});
+      out.push({t: "goal", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, txt: liveSay(LIVE_COM.goalThem, tp({x: xn}))});
       L.ch.push({us: 0, min: L.min, k: "goal"});
-    } else if (y < 0.55) { L.on[1]++; out.push({t: "save", us: 0, ox: ox, txt: liveSay(LIVE_COM.saveThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
-    else if (y < 0.62) { out.push({t: "post", us: 0, ox: ox, txt: liveSay(LIVE_COM.postThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: "big"}); }
-    else { out.push({t: "miss", us: 0, ox: ox, txt: liveSay(LIVE_COM.missThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
+    } else if (mk2 ? mk2 === "save" : y < 0.55) { L.on[1]++; out.push({t: "save", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, txt: liveSay(LIVE_COM.saveThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
+    else if (mk2 ? mk2 === "post" : y < 0.62) { out.push({t: "post", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, txt: liveSay(LIVE_COM.postThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: "big"}); }
+    else { out.push({t: "miss", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, txt: liveSay(LIVE_COM.missThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
   }
   if (chance(0.025)) {
     var cand = L.xi.filter(function (id) { return id != null && id !== L.red; }), pid = pick(cand), p = mPl(pid);

@@ -1,0 +1,18 @@
+{
+ "Saque de centro": "Kick-off",
+ "Juego abierto": "Open play",
+ "Descanso": "Half-time",
+ "Despejado": "Clear skies",
+ "Nublado": "Cloudy",
+ "Lluvia": "Rain",
+ "Calor": "Heat",
+ "Frío": "Cold",
+ "Goles esperados (xG)": "Expected goals (xG)",
+ "Momento del partido": "Match momentum",
+ "Igualado": "Even",
+ "Aprieta tu equipo": "Your team is pushing",
+ "Aprieta el rival": "The opponent is pushing",
+ "Territorio": "Territory",
+ "{n} % del juego en el último tercio rival": "{n}% of play in the opponent's final third",
+ "Resistencia {n}": "Stamina {n}"
+}

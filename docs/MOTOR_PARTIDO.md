@@ -1,0 +1,113 @@
+# Motor de partido en directo (versión 4.1)
+
+Este documento describe cómo funciona la simulación de los partidos en directo del modo míster y «Crea tu club». El código está en `src/engine-extra.js` (el bucle original), `src/match41.js` (modelo de tiros, duelos, cansancio, momentum, zonas, clima y estados) y `src/ui-41.js` (lo que se ve en pantalla).
+
+## Bucle
+
+- **Tick:** un minuto de partido equivale a una llamada a `liveStep()`.
+- **Ritmo:** la interfaz llama al tick con un temporizador según la velocidad (⏸ ▶ ▶▶ ▶▶▶).
+- **Simular lo que queda:** `liveSimRest()` encadena ticks hasta el final.
+- **Envoltorio de `match41.js`:**
+  - **Antes de cada tick:** ajusta las tasas de ocasión con el momentum y el cansancio (`liveLambdas`, `liveRating`).
+  - **Después de cada tick:** actualiza la resistencia, las zonas, el momentum y el estado.
+- **Ritmo de ocasiones:** sigue siendo el del modelo de Poisson del juego (`mLambdas`). Las fórmulas nuevas están centradas para no cambiar la media de goles, solo quién y cómo genera el peligro.
+
+## Estados (FSM)
+
+Los estados posibles son `KICKOFF`, `OPEN_PLAY`, `SET_PIECE`, `HALF_TIME` y `FULL_TIME`.
+
+| Estado | Cuándo se activa |
+|---|---|
+| `KICKOFF` | Después de un gol y al volver del descanso |
+| `SET_PIECE` | En faltas con tarjeta |
+| `HALF_TIME` | Al llegar al minuto 45 |
+| `FULL_TIME` | En el pitido final |
+| `OPEN_PLAY` | En el resto de minutos |
+
+## Rejilla espacial
+
+- **Forma:** 6 columnas (de tu portería a la rival) × 3 carriles = 18 zonas.
+- **Cada minuto:** se suma 1 a la zona donde está el balón. La columna sale de `L.bx` y el carril depende de la amplitud táctica.
+- **Cada tiro:** suma también en su zona.
+
+## Duelo atacante contra defensor
+
+```
+resolveAction(att, def, ctx) = sigmoide((att − def) / 7 + ctx + N(0; 0,35))
+```
+
+- **`att` y `def`:** niveles relativos a la media del equipo (0 = media), así que la fuerza global del equipo no se cuenta dos veces.
+- **`ctx`:** mentalidad (Encerrarse −0,25 … Presión alta +0,15) más momentum / 250.
+- **Uso:** decide si un tiro es ocasión clarísima, con probabilidad `0,66 × p`, que da una media ≈ 35 % como antes.
+
+## Goles esperados (xG)
+
+```
+z = a + 1,6 · ángulo − 0,11 · distancia − 1,1 · (presión − 0,5) + 0,045 · definición
+xG = sigmoide(z)
+```
+
+| Variable | Valor |
+|---|---|
+| `a` en ocasión clarísima | −0,70 |
+| `a` en el resto de tiros | −0,57 |
+| Distancia en ocasión clarísima | 6 a 13 m |
+| Distancia en el resto de tiros | 12 a 30 m |
+| Ángulo | Ángulo visible de la portería (7,32 m) |
+| Presión (0-1) | Sale de vuestra defensa (calidad relativa menos cansancio) y de la táctica |
+| Definición | Media del rematador respecto a su equipo, más una bonificación por posición, menos su cansancio |
+
+- **Calibración:** con estos valores las medias son 0,36 y 0,12, las mismas tasas de gol que el motor anterior. En las pruebas (`test/match41.js`) los goles por tiro salen en torno a 0,21 y los xG acumulados por gol en torno a 1,0.
+- **Resultado del tiro:** si un número aleatorio queda por debajo del xG, es gol. El resto se reparte como antes: 49 % parada, 8 % palo y 43 % fuera.
+
+## Cansancio por minuto
+
+```
+desgaste = 0,24 × trabajo(posición) × intensidad × clima × (1,2 − resistencia / 250) × ruido(0,85-1,15)
+```
+
+| Factor | Valores |
+|---|---|
+| Trabajo | Laterales y medios 1,1-1,15 · centrales 0,85 · portero 0,3 |
+| Intensidad | Encerrarse 0,86 … Presión alta 1,3, más el ritmo y la línea defensiva |
+| Clima | Calor 1,16 · lluvia 1,06 · frío 0,95 · resto 1 |
+
+- **Clima:** cada partido tiene un clima fijo que depende de la jornada y de la época del año.
+- **Penalización de nivel:** media de `max(0, desgaste acumulado − 8) × 0,07` sobre los que están en el campo.
+- **Cambios:** el que entra llega fresco.
+
+## Momentum (−100 a 100)
+
+- **Por minuto:** se multiplica por 0,9.
+- **Ocasiones:** suman a favor de quien las tiene: gol +26, parada o palo +6 (u +11 si el xG pasaba de 0,3), tiro fuera +4.
+- **Tarjetas:** restan 3.
+- **Efecto:** las tasas de ocasión se multiplican por `1 ± momentum / 600`, con un máximo de ±16 %.
+
+## Esquemas de datos
+
+`S.live` (L):
+
+```json
+{
+  "fi": 3, "min": 57, "gu": 1, "gt": 0, "ment": 2, "form": "4-3-3",
+  "xg": [1.34, 0.62], "mom": 18.4, "st": "OPEN_PLAY", "wx": "rain",
+  "fit": {"12": 71.5, "15": 80.2}, "fit0": {"12": 92, "15": 95},
+  "zn": [3, 5, 8, 9, 6, 2, 4, 7, 10, 8, 5, 3, 2, 4, 6, 7, 3, 1],
+  "shots": [7, 4], "on": [3, 2], "big": [2, 1], "poss": [31, 26]
+}
+```
+
+Evento del comentario (`L.ev[i]`):
+
+```json
+{"t": "save", "min": 57, "us": 1, "pid": 15, "xg": 0.41, "zn": 11, "st": "OPEN_PLAY", "txt": "¡Paradón del portero…!"}
+```
+
+- **`t`:** `goal`, `save`, `post`, `miss`, `com`, `yellow`, `red`, `inj`, `sub`, `tac`, `half` o `end`.
+- **Autor:** `pid` (jugador tuyo) u `ox` (índice del rival).
+
+Al terminar, el partido guarda `f.xg = [nuestro, rival]`.
+
+## Sin pausas de decisión
+
+El partido no se detiene para que el jugador elija tirar, pasar o regatear. Así se decidió en la versión 4.0, y solo se mantienen los minijuegos de penaltis y faltas.
