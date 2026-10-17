@@ -126,24 +126,55 @@ img { max-width: 100%; display: block; }
 .doc p, .doc li { color: #c9d4d1; }
 .doc .muted { color: var(--mist); font-size: 15px; }
 
-/* página de juego */
+/* página de juego
+   móvil: el juego ocupa toda la pantalla (solo el anuncio, si lo hay, va encima)
+   ordenador: el juego en un marco con forma de móvil, centrado, con ayuda a la izquierda y anuncio a la derecha */
 .play { height: 100vh; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
-.pbar { flex: none; height: 40px; display: flex; align-items: center; gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--line); font-size: 13.5px; background: var(--night); }
-.pbar a { color: var(--mist); text-decoration: none; }
-.pbar a:hover { color: var(--chalk); }
-.pbar .brand { font-size: 18px; color: var(--chalk); }
-.pbar .brand img { width: 24px; height: 24px; border-radius: 6px; }
-.pbar .sp { margin-left: auto; display: flex; gap: 16px; align-items: center; }
-.pbar .linkbtn { font-size: 13.5px; text-decoration: none; }
-.pmob { flex: none; display: flex; flex-direction: column; align-items: center; padding: 4px 0 10px; border-bottom: 1px solid var(--line); }
+/* móvil con muesca: el juego no se mete debajo de la barra de estado */
+@media (max-width: 899px), (max-height: 559px) {
+  .play { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+  .play .pmob { padding-top: 4px; }
+}
+/* aviso de girar el móvil (solo táctil, en horizontal y con poca altura) */
+.rot { position: fixed; inset: 0; z-index: 20; background: rgba(11, 20, 23, .96); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center; }
+.rot[hidden] { display: none; }
+.rot svg { width: 46px; height: 46px; color: var(--led); transform: rotate(90deg); }
+.rot p { margin: 0; max-width: 26em; color: var(--chalk); }
+.pbar { display: none; }
+.pmob { flex: none; display: flex; flex-direction: column; align-items: center; padding: max(4px, env(safe-area-inset-top)) 0 8px; border-bottom: 1px solid var(--line); }
 .pmob .adlab { margin: 0 0 3px; font-size: 11px; }
 .pmob ins { width: 320px; height: 50px; }
-.pmain { flex: 1; min-height: 0; display: flex; justify-content: center; gap: 28px; }
-.pmain iframe { flex: 1; min-width: 0; max-width: 760px; height: 100%; border: 0; display: block; background: var(--night); }
-.rail { display: none; width: 300px; flex: none; padding-top: 24px; }
-.rail .adlab { text-align: left; }
-.rail ins { width: 300px; height: 600px; }
-@media (min-width: 1400px) { .rail { display: block; } .pmob { display: none; } }
-@media (max-width: 520px) { .hide-s { display: none; } }
+.pmain { flex: 1; min-height: 0; display: flex; justify-content: center; }
+.pframe { flex: 1; min-width: 0; display: flex; }
+.pframe iframe { flex: 1; width: 100%; height: 100%; border: 0; display: block; background: var(--night); }
+.pinfo, .rail { display: none; }
+@media (min-width: 900px) and (min-height: 560px) {
+  .play { background: radial-gradient(ellipse at 50% 0%, #13262b 0%, var(--night) 70%); }
+  .pbar { flex: none; height: 60px; display: flex; align-items: center; gap: 16px; padding: 0 24px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+  .pbar a:not(.brand) { color: var(--mist); text-decoration: none; }
+  .pbar a:not(.brand):hover { color: var(--chalk); }
+  .pbar .brand { font-size: 21px; color: var(--chalk); }
+  .pbar .brand img { width: 28px; height: 28px; border-radius: 7px; }
+  .pbar .sp { margin-left: auto; display: flex; gap: 22px; align-items: center; }
+  .pbar .linkbtn { font-size: 14.5px; text-decoration: none; }
+  .pmob { display: none; }
+  /* tres columnas: ayuda | juego | anuncio; el juego siempre queda en el centro */
+  .pmain { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 40px; padding: 20px 24px 22px; }
+  /* el marco mantiene la proporción de un móvil grande y nunca pasa del alto disponible */
+  .pframe { flex: none; width: min(540px, calc((100dvh - 102px) * 0.6)); min-width: 400px; border: 1px solid var(--line); border-radius: 26px; overflow: hidden;
+    background: var(--night); box-shadow: 0 0 0 7px #0f1c20, 0 24px 60px rgba(0, 0, 0, .5); }
+  .pinfo { display: block; grid-column: 1; justify-self: end; width: 280px; align-self: center; color: var(--mist); font-size: 15px; }
+  .pinfo h2 { font: 800 26px/1.05 var(--f-disp); color: var(--chalk); margin: 0 0 12px; }
+  .pinfo ul { margin: 0 0 22px; padding: 0 0 0 18px; display: grid; gap: 10px; }
+  .pinfo li::marker { color: var(--led); }
+  .rail { display: block; grid-column: 3; justify-self: start; width: 300px; align-self: center; }
+  .pframe { grid-column: 2; }
+}
+@media (min-width: 900px) and (max-width: 1239px) { .pinfo { display: none; } }
+@media (min-width: 900px) and (max-width: 1399px) { .rail { display: none; } }
+/* pantalla completa: el marco ocupa toda la pantalla */
+.pframe:fullscreen { width: 100vw; height: 100vh; border: 0; border-radius: 0; box-shadow: none; }
+.pframe:-webkit-full-screen { width: 100vw; height: 100vh; border: 0; border-radius: 0; box-shadow: none; }
 
+@media (max-width: 520px) { .hide-s { display: none; } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }

@@ -27,6 +27,30 @@
     else { window.googlefc = fc || {}; window.googlefc.callbackQueue = window.googlefc.callbackQueue || []; window.googlefc.callbackQueue.push({CONSENT_API_READY: function () { window.googlefc.showRevocationMessage(); }}); }
   });
 
+  /* ---------- pantalla completa del juego (ordenador) ---------- */
+  var fs = document.getElementById("fs"), pf = document.getElementById("pframe");
+  if (fs && pf) {
+    var req = pf.requestFullscreen || pf.webkitRequestFullscreen;
+    if (!req) fs.hidden = true;
+    else fs.addEventListener("click", function () {
+      try { var r = req.call(pf); if (r && r.catch) r.catch(function () {}); } catch (e) {}
+      var ifr = pf.querySelector("iframe"); if (ifr) setTimeout(function () { try { ifr.focus(); } catch (e) {} }, 300);
+    });
+  }
+  /* móvil en horizontal: sugiere girarlo (una vez por visita) */
+  var rot = document.getElementById("rot");
+  if (rot) {
+    var mq = null, said = false;
+    try { mq = window.matchMedia("(orientation: landscape) and (max-height: 500px) and (pointer: coarse)"); said = sessionStorage.getItem("rotok") === "1"; } catch (e) {}
+    var upd = function () { rot.hidden = !(mq && mq.matches) || said; };
+    if (mq) { upd(); if (mq.addEventListener) mq.addEventListener("change", upd); else if (mq.addListener) mq.addListener(upd); }
+    var ok = document.getElementById("rotok");
+    if (ok) ok.addEventListener("click", function () { said = true; try { sessionStorage.setItem("rotok", "1"); } catch (e) {} upd(); });
+  }
+  /* al entrar, el foco va al juego para poder usar el teclado y la rueda sin hacer clic antes */
+  var gameFrame = document.querySelector(".pframe iframe");
+  if (gameFrame) gameFrame.addEventListener("load", function () { try { gameFrame.focus(); } catch (e) {} });
+
   /* ---------- el partido de la portada: 22 bolitas, pases, tiros y un marcador ---------- */
   var cv = document.getElementById("pitch");
   if (!cv || !cv.getContext) return;

@@ -8,14 +8,31 @@
 </head>
 <body class="play">
 <header class="pbar">
-  <a class="brand" href="../"><img src="../img/icon-72.png" width="24" height="24" alt="">Camino a la Leyenda</a>
-  <span class="sp"><a class="hide-s" href="{{PLAY_URL}}" rel="noopener">App de Android</a><a href="../privacidad/">Privacidad</a>{{CONSENT_LINK}}</span>
+  <a class="brand" href="../"><img src="../img/icon-72.png" width="28" height="28" alt="">Camino a la Leyenda</a>
+  <span class="sp"><a href="{{PLAY_URL}}" rel="noopener">App de Android</a><a href="../privacidad/">Privacidad</a>{{CONSENT_LINK}}
+    <button type="button" class="btn sm" id="fs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Pantalla completa</button></span>
 </header>
 {{AD:juego_movil}}
 <div class="pmain">
+  <aside class="pinfo">
+    <h2>Cómo se juega</h2>
+    <ul>
+      <li>Avanza la temporada con el botón grande de abajo. Cuando hay partido, puedes verlo en directo o simularlo.</li>
+      <li>Las decisiones importantes salen como tarjetas: elige una opción y sigue.</li>
+      <li>Usa la rueda del ratón o arrastra para desplazarte por cada pantalla.</li>
+      <li>Tu partida se guarda sola en este navegador. Para llevarla al móvil, usa «Copiar código de partida» en el menú.</li>
+    </ul>
+    <a class="btn" href="{{PLAY_URL}}" rel="noopener">Descargar para Android</a>
+  </aside>
+  <div class="pframe" id="pframe">
+    <iframe src="juego.html" title="Camino a la Leyenda" allow="clipboard-write; fullscreen" allowfullscreen></iframe>
+  </div>
   {{AD:juego_lateral}}
-  <iframe src="juego.html" title="Camino a la Leyenda" allow="clipboard-write; fullscreen"></iframe>
-  {{AD:juego_lateral2}}
+</div>
+<div class="rot" id="rot" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+  <p>El juego está pensado para el móvil en vertical. Gíralo para verlo mejor.</p>
+  <button type="button" class="btn" id="rotok">Seguir en horizontal</button>
 </div>
 <script src="../site.js" defer></script>
 </body>
