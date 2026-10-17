@@ -1654,6 +1654,14 @@
         [N_("Conexión a internet"), N_("La app solo se conecta a internet para comprobar en Google Play si hay una versión nueva: el juego funciona sin conexión y no envía tus datos ni tus partidas a ningún servidor.")],
         P[5], [N_("Borrar tus datos"), N_("Puedes borrar cualquier partida desde «Cargar partida». Desinstalar la app elimina todo lo guardado en el dispositivo.")],
         P[7], P[8], P[9]];
+      if (WEB_ADS) P = [[N_("Resumen"), N_("La versión web de Camino a la Leyenda es gratis gracias a los anuncios de Google AdSense, que se muestran en la página alrededor del juego y nunca dentro de la partida. No vendemos tus datos y no necesitas crear una cuenta para jugar.")],
+        P[1],
+        [N_("Anuncios"), N_("Para mostrar y medir los anuncios, Google puede usar cookies y recoger la dirección IP, la ubicación aproximada, datos técnicos del navegador e información sobre cómo interactúas con los anuncios. Google trata estos datos según su política de privacidad: policies.google.com/privacy.")],
+        [N_("Tu consentimiento"), N_("Si estás en el Espacio Económico Europeo, el Reino Unido o Suiza, la web te pregunta al entrar si aceptas anuncios personalizados. Puedes cambiar tu elección cuando quieras con el enlace «Privacidad y cookies» de la página.")],
+        [N_("Conexión a internet"), N_("El juego funciona dentro de tu navegador y nunca envía tus partidas a ningún servidor. La página usa internet para cargar el juego y los anuncios.")],
+        P[5],
+        [N_("Borrar tus datos"), N_("Puedes borrar cualquier partida desde «Cargar partida». Si borras los datos de este sitio en tu navegador, se elimina todo lo guardado. Para borrar los datos publicitarios que tiene Google, entra en myadcenter.google.com.")],
+        P[7], P[8], P[9]];
       return "<h2>" + tr("Política de privacidad") + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:13px">' + tr("Última actualización: {d}", {d: "10/10/2026"}) + '</p><div class="policy">' + P.map(function (x) { return "<h3>" + h(tr(x[0])) + "</h3><p>" + h(tr(x[1])) + "</p>"; }).join("") + '</div><button class="btn wide" style="margin-top:12px" data-a="close">' + tr("Cerrar") + "</button>";
     }
     if (t.k === "update") {
@@ -1803,6 +1811,7 @@
      Mínimo 60 s entre anuncios para no encadenarlos (p. ej. menú → cargar). */
   var AD_GAP = 60000, lastAd = 0;
   var NO_ADS = false; /* build.py lo pone a true en la versión sin anuncios */
+  var WEB_ADS = false; /* build_web.py lo pone a true en la web pública, que lleva anuncios de AdSense fuera del juego */
   function showAd(where) {
     var B = window.AndroidBridge;
     if (NO_ADS || !B || !B.showAd || Date.now() - lastAd < AD_GAP) return;

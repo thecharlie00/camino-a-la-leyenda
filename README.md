@@ -75,3 +75,7 @@ Reglas: cada envoltorio llama siempre al original, no cambia su firma y protege 
 ## Hoja de ruta
 
 Una versión nueva cada día; el plan y el estado de cada versión están en la hoja de ruta del proyecto.
+
+## Web
+
+Versión para jugar en el navegador con GitHub Pages: ver [web/LEEME.md](web/LEEME.md).
