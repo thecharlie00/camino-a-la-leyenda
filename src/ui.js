@@ -1610,7 +1610,7 @@
   }
   /* ---------- paneles ---------- */
   function renderSheet() {
-    var old = document.querySelector(".sheet"); if (old) old.remove();
+    var old = document.querySelector(".sheet"), oldTop = old && old.firstChild ? old.firstChild.scrollTop : 0; if (old) old.remove();
     if (!UI.sheet) { UI.sheetK = null; return; }
     var html = sheetHTML();
     if (!html) { UI.sheet = null; return; }
@@ -1619,6 +1619,8 @@
     var el = document.createElement("div"); el.className = "sheet" + (fresh && !calm() ? " pop" : ""); el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
     el.innerHTML = '<div class="panel">' + html + "</div>";
     document.body.appendChild(el);
+    /* la misma hoja al refrescarse conserva el desplazamiento (no salta arriba al tocar una opción) */
+    if (!fresh && oldTop) el.firstChild.scrollTop = oldTop;
   }
   function sheetHTML() {
     var t = UI.sheet;

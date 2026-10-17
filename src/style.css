@@ -1282,3 +1282,4 @@ nav.tabs .nbadge.pet { background: var(--gold); color: #1a1200; font-size: 9px; 
 .petadjcol .lbl { margin: 4px 0; }
 .petadjrow { display: flex; gap: 8px; flex-wrap: wrap; }
 .petadjrow .btn { flex: 1; }
+.pethero .petneed { display: block; margin-top: 3px; }

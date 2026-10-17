@@ -80,7 +80,7 @@
 
   U.actions.petopen = function () { var ui = U.ui(); ui.petTab = ui.petTab || "n"; ui.petPick = null; ui.petView = "care"; U.open("lpet"); };
   U.actions.pettab = function (b, v) { U.ui().petTab = v; U.ui().petPick = null; U.renderSheet(); };
-  U.actions.petview = function (b, v) { U.ui().petView = v; U.renderSheet(); };
+  U.actions.petview = function (b, v) { U.ui().petView = v; U.renderSheet(); var pn = document.querySelector(".sheet .panel"); if (pn) pn.scrollTop = 0; };
   U.actions.petpick = function (b, v) { U.ui().petPick = v; U.renderSheet(); var i = document.getElementById("petnm"); if (i) i.focus(); };
   U.actions.petadopt = function () {
     var i = document.getElementById("petnm"), r = petAdopt(U.ui().petPick, i ? i.value : "");
