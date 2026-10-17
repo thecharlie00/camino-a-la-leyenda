@@ -1355,3 +1355,44 @@ nav.tabs .nbadge.pet { background: var(--gold); color: #1a1200; font-size: 9px; 
 .fit.f-mid { color: var(--led); }
 .fit.f-low { color: var(--red); }
 @media (prefers-reduced-motion: reduce) { .lmomt .bar { transition: none; } }
+
+/* ---------- 4.2 · modo horizontal (web en ordenador, html.wide) ---------- */
+html.wide #app:has(> nav.tabs) { max-width: none; display: grid; grid-template-columns: 232px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; }
+html.wide #app:has(> nav.tabs) > .top { grid-column: 2; grid-row: 1; padding: 14px 32px; border-bottom: 1px solid var(--line); }
+html.wide #app:has(> nav.tabs) > main { grid-column: 2; grid-row: 2; padding: 20px 32px 32px; }
+html.wide #app:has(> nav.tabs) > .dock { grid-column: 2; grid-row: 3; display: flex; justify-content: flex-end; gap: 10px; padding: 12px 32px 16px; background: var(--night); border-top: 1px solid var(--line); }
+html.wide #app:has(> nav.tabs) > .dock > * { width: auto; }
+html.wide #app:has(> nav.tabs) > .dock .go { width: 380px; max-width: 100%; }
+html.wide #app:has(> nav.tabs) > .dock.two .go { width: 300px; }
+html.wide #app:has(> nav.tabs) > .dock > :not(.go) { flex: 1; align-self: center; }
+html.wide #app:has(> nav.tabs) > *:not(.top):not(main):not(.dock):not(nav) { grid-column: 2; }
+/* menú lateral */
+html.wide #app > nav.tabs { grid-column: 1; grid-row: 1 / 4; display: flex; flex-direction: column; gap: 4px; padding: 20px 14px; border-top: 0; border-right: 1px solid var(--line); background: var(--stand); }
+html.wide #app > nav.tabs button { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 13px 16px; border-radius: 12px; font: 700 15.5px/1 var(--f-body); letter-spacing: 0; color: var(--mist); position: relative; }
+html.wide #app > nav.tabs button svg { width: 22px; height: 22px; flex: none; }
+html.wide #app > nav.tabs button:hover { background: var(--tunnel); color: var(--chalk); }
+html.wide #app > nav.tabs button[aria-current="page"] { background: rgba(255, 178, 30, .12); color: var(--led); }
+html.wide #app > nav.tabs .nbadge { position: static; margin-left: auto; }
+html.wide #app > nav.tabs button > span:not(.nbadge) { background: none !important; }
+/* contenido en columnas: cada tarjeta entera en una columna; selectores y cabeceras ocupan todo el ancho */
+html.wide #main > .stack { display: block; columns: 2 400px; column-gap: 20px; }
+html.wide[data-cols="3"] #main > .stack { columns: 3 400px; }
+html.wide #main > .stack > * { break-inside: avoid; margin: 0 0 14px; }
+html.wide #main > .stack > .seg, html.wide #main > .stack > .sstrip, html.wide #main > .stack > .strow, html.wide #main > .stack > .compseg { column-span: all; }
+html.wide #main > .stack > h3, html.wide #main > .stack > .sechint { break-after: avoid; }
+html.wide #main > :not(.stack) { margin-bottom: 14px; }
+html.wide #main > .tut { max-width: 900px; }
+/* ventanas emergentes: centradas en lugar de subir desde abajo */
+html.wide .sheet { align-items: center; padding: 24px; }
+html.wide .sheet .panel { max-width: 680px; max-height: 88%; border-radius: 18px; padding: 22px 24px; }
+/* pantallas de inicio, creación y menús sin pestañas: columna central algo más ancha */
+html.wide #app:not(:has(> nav.tabs)) { max-width: 820px; }
+html.wide #app > nav.tabs button[aria-current="page"] svg { background: none; padding: 0; width: 22px; height: 22px; margin: 0; border-radius: 0; }
+/* partido en directo: campo grande a la izquierda (se queda fijo al desplazar) y datos y controles a la derecha */
+html.wide .lpanel { max-width: 1480px; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(380px, 1fr); column-gap: 28px; row-gap: 12px; align-content: start; padding-left: 28px; padding-right: 28px; }
+html.wide .lpanel > #lvtop { grid-column: 1; grid-row: 1; }
+html.wide .lpanel > #lvpitch { grid-column: 1; grid-row: 2 / 4; align-self: start; position: sticky; top: 12px; }
+html.wide .lpanel > #lvbody { grid-column: 2; grid-row: 1 / 3; }
+html.wide .lpanel > #lvctl { grid-column: 2; grid-row: 3; }
+html.wide .lpanel > :not(#lvtop):not(#lvpitch):not(#lvbody):not(#lvctl) { grid-column: 1 / -1; }
+html.wide .lpanel > #lvpitch { width: 100%; max-width: calc((100vh - 150px) / 0.6); justify-self: center; }

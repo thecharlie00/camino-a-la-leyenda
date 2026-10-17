@@ -37,7 +37,7 @@ if OUT.exists():
 
 # --- juego: sin el SDK de Android y con la política de privacidad de la web con AdSense ---
 html = game.read_text()
-for a, b in (("var NO_ADS = false;", "var NO_ADS = true;"), ("var WEB_ADS = false;", "var WEB_ADS = true;" if client else "var WEB_ADS = false;")):
+for a, b in (("var WEB_BUILD = false;", "var WEB_BUILD = true;"), ("var NO_ADS = false;", "var NO_ADS = true;"), ("var WEB_ADS = false;", "var WEB_ADS = true;" if client else "var WEB_ADS = false;")):
     assert html.count(a) == 1, "falta la marca " + a
     html = html.replace(a, b)
 (OUT / "jugar" / "juego.html").write_text(html)
