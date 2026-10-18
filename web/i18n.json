@@ -651,18 +651,18 @@
   "fr": "Modifications et contact"
  },
  "p_chg": {
-  "es": "Si esta política cambia, lo verás aquí con la fecha de actualización. Para cualquier duda, escribe al correo de contacto del desarrollador que aparece en la {a}.",
-  "en": "If this policy changes, you'll see it here with the update date. For any questions, write to the developer contact email shown on the {a}.",
-  "de": "Wenn sich diese Erklärung ändert, siehst du es hier mit dem Aktualisierungsdatum. Bei Fragen schreib an die Kontakt-E-Mail des Entwicklers auf der {a}.",
-  "it": "Se questa informativa cambia, lo vedrai qui con la data di aggiornamento. Per qualsiasi dubbio, scrivi all'email di contatto dello sviluppatore indicata nella {a}.",
-  "fr": "Si cette politique change, tu le verras ici avec la date de mise à jour. Pour toute question, écris à l'adresse de contact du développeur indiquée sur la {a}."
+  "es": "Si esta política cambia, lo verás aquí con la fecha de actualización. Para cualquier duda sobre el juego, visita la {a}.",
+  "en": "If this policy changes, you'll see it here with the update date. For questions about the game, visit the {a}.",
+  "de": "Wenn sich diese Erklärung ändert, siehst du es hier mit dem Aktualisierungsdatum. Bei Fragen zum Spiel besuche die {a}.",
+  "it": "Se questa informativa cambia, lo vedrai qui con la data di aggiornamento. Per qualsiasi domanda sul gioco, visita la {a}.",
+  "fr": "Si cette politique change, tu le verras ici avec la date de mise à jour. Pour toute question sur le jeu, consulte la {a}."
  },
  "p_chg_a": {
-  "es": "ficha de Google Play",
-  "en": "Google Play listing",
-  "de": "Google-Play-Seite",
-  "it": "scheda di Google Play",
-  "fr": "fiche Google Play"
+  "es": "página del proyecto",
+  "en": "project page",
+  "de": "Projektseite",
+  "it": "pagina del progetto",
+  "fr": "page du projet"
  },
  "js_kick": {
   "es": "Empieza el partido.",

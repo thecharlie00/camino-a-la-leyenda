@@ -29,7 +29,10 @@
     <p class="lead">{{t:lead}}</p>
     <div class="cta">
       <a class="btn pri" href="jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>{{t:play_now}}</a>
-      <a class="btn" href="{{PLAY_URL}}" rel="noopener">{{t:android}}</a>
+      <span class="store-disabled">
+        <span class="police-ribbon">Coming soon</span>
+        <button type="button" class="btn" disabled>{{t:android}}</button>
+      </span>
     </div>
     <p class="fine">{{t:fine}}</p>
   </div>
