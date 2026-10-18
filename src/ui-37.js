@@ -96,7 +96,7 @@
   var B = typeof BUILD !== "undefined" ? BUILD : {v: "?", code: 0, t: ""};
   function chan() { return window.AndroidBridge ? "LIVE" : "WEB"; }
   function tagTxt() { return "v" + B.v + " (" + B.code + ") · " + chan(); }
-  var NOTES = [N_("Modo entrenador: pareja, hijos y una relación que cuidar"), N_("Ficha a tu hijo o a tu hija y sigue su carrera"), N_("El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia")];
+  var NOTES = [N_("Pareja, hijos y una relación que cuidar, como jugador y como entrenador"), N_("Ficha a tu hijo o a tu hija y sigue su carrera"), N_("El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia")];
   function sysInfo() {
     var n = 0; try { n = (U.ui().slots || []).length; } catch (e) {}
     return ["Camino a la Leyenda " + tagTxt(), "Build: " + (B.t || "?"), "Idioma: " + LANG, "Modo: " + (S ? (S.mode || "p") + (S.g === "f" ? " (f)" : "") : "-"), "Temporada: " + (S ? S.yr : "-"),

@@ -227,7 +227,7 @@
   "w": [
    "engine-player.js:16",
    "engine-player.js:31",
-   "fam48.js:159",
+   "fam48.js:202",
    "ui-guide.js:62"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
@@ -27615,7 +27615,7 @@
  "Portería": {
   "w": [
    "press-ctx.js:203",
-   "fam48.js:159",
+   "fam48.js:202",
    "minigame.js:484",
    "minigame.js:1024"
   ],
@@ -35324,21 +35324,21 @@
  "Empieza la generación {n} de la familia {ln}": {
   "w": [
    "dyn46.js:84",
-   "fam48.js:408"
+   "fam48.js:455"
   ],
   "ctx": "milestone(tr(\"Empieza la generación {n} de la familia {ln}\", {n: d.g, ln: par.ln}));"
  },
  "Dinastía": {
   "w": [
    "dyn46.js:85",
-   "fam48.js:409"
+   "fam48.js:456"
   ],
   "ctx": "feed({t: \"decision\", tipo: \"real\", cat: tr(\"Dinastía\"), title: tr(\"Generación {n}: {name}\", {n: d.g, name: o.fn + \" \" + par.ln}),"
  },
  "Generación {n}: {name}": {
   "w": [
    "dyn46.js:85",
-   "fam48.js:409"
+   "fam48.js:456"
   ],
   "ctx": "feed({t: \"decision\", tipo: \"real\", cat: tr(\"Dinastía\"), title: tr(\"Generación {n}: {name}\", {n: d.g, name: o.fn + \" \" + par.ln}),"
  },
@@ -35357,7 +35357,7 @@
  "Hereda el apellido de {parent} ({title}): la afición y la prensa ya saben quién es.": {
   "w": [
    "dyn46.js:87",
-   "fam48.js:411"
+   "fam48.js:458"
   ],
   "ctx": "txt: tr(\"Hereda el apellido de {parent} ({title}): la afición y la prensa ya saben quién es.\", {parent: par.fn + \" \" + par.ln, title: par.title || par.mtitle || \"\"}),"
  },
@@ -35554,598 +35554,668 @@
  },
  "Vida personal": {
   "w": [
-   "fam48.js:52",
-   "fam48.js:137",
-   "fam48.js:155",
-   "fam48.js:240"
+   "fam48.js:67",
+   "fam48.js:180",
+   "fam48.js:198",
+   "fam48.js:284"
   ],
-  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Vida personal\"), title: tr(\"Ruptura\"), choice: tr(\"{name} y tú lo dejáis\", {name: pt.fn}),"
+  "ctx": "feed({t: \"decision\", tipo: famMgr() ? \"mgr\" : \"real\", cat: tr(\"Vida personal\"), title: tr(\"Ruptura\"), choice: tr(\"{name} y tú lo dejáis\", {name: pt.fn}),"
  },
  "Ruptura": {
   "w": [
-   "fam48.js:52"
+   "fam48.js:67"
   ],
-  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Vida personal\"), title: tr(\"Ruptura\"), choice: tr(\"{name} y tú lo dejáis\", {name: pt.fn}),"
+  "ctx": "feed({t: \"decision\", tipo: famMgr() ? \"mgr\" : \"real\", cat: tr(\"Vida personal\"), title: tr(\"Ruptura\"), choice: tr(\"{name} y tú lo dejáis\", {name: pt.fn}),"
  },
  "{name} y tú lo dejáis": {
   "w": [
-   "fam48.js:52"
+   "fam48.js:67"
   ],
-  "ctx": "feed({t: \"decision\", tipo: \"mgr\", cat: tr(\"Vida personal\"), title: tr(\"Ruptura\"), choice: tr(\"{name} y tú lo dejáis\", {name: pt.fn}),"
+  "ctx": "feed({t: \"decision\", tipo: famMgr() ? \"mgr\" : \"real\", cat: tr(\"Vida personal\"), title: tr(\"Ruptura\"), choice: tr(\"{name} y tú lo dejáis\", {name: pt.fn}),"
  },
  "Demasiadas noches en el despacho y demasiados viajes. La relación no aguanta más.": {
   "w": [
-   "fam48.js:53"
+   "fam48.js:68"
   ],
-  "ctx": "txt: why || tr(\"Demasiadas noches en el despacho y demasiados viajes. La relación no aguanta más.\"), chips: [[\"chem\", -4]], good: false, y: S.yr});"
+  "ctx": "txt: why || (famMgr() ? tr(\"Demasiadas noches en el despacho y demasiados viajes. La relación no aguanta más.\") : tr(\"Demasiadas concentraciones, viajes y noches fuera. La relación no aguanta más.\")), chips: ch, good: fa"
+ },
+ "Demasiadas concentraciones, viajes y noches fuera. La relación no aguanta más.": {
+  "w": [
+   "fam48.js:68"
+  ],
+  "ctx": "txt: why || (famMgr() ? tr(\"Demasiadas noches en el despacho y demasiados viajes. La relación no aguanta más.\") : tr(\"Demasiadas concentraciones, viajes y noches fuera. La relación no aguanta más.\")), chips: ch, good: fa"
  },
  "Las cosas no van bien en casa y se nota en tu humor en los entrenamientos.": {
   "w": [
-   "fam48.js:65"
+   "fam48.js:80"
   ],
   "ctx": "else if (r < 30) { S.m.chem = clamp(S.m.chem - 1, 0, 100); if (S.bnews && chance(0.5)) S.bnews.push({t: \"bad\", x: tr(\"Las cosas no van bien en casa y se nota en tu humor en los entrenamientos.\")}); }"
  },
+ "Las cosas no van bien en casa y se nota en tu cabeza en los partidos.": {
+  "w": [
+   "fam48.js:96"
+  ],
+  "ctx": "else if (r < 30) { p.mor = clamp(p.mor - 2, 0, 100); p.form = clamp(p.form - 1, 0, 100); if (S.bnews && chance(0.5)) S.bnews.push({t: \"bad\", x: tr(\"Las cosas no van bien en casa y se nota en tu cabeza en los partidos.\")}"
+ },
  "Aniversario el día del partido": {
   "w": [
-   "fam48.js:75"
+   "fam48.js:106"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Aniversario el día del partido\"), text: trn(Math.max(1, S.yr - f.pt.y0 + 1), \"Hoy hace {n} año que estás con {name}, y justo hay partido. Te pregunta si vas a estar en la cena.\", \""
  },
  "Hoy hace {n} año que estás con {name}, y justo hay partido. Te pregunta si vas a estar en la cena.": {
   "w": [
-   "fam48.js:75"
+   "fam48.js:106"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Aniversario el día del partido\"), text: trn(Math.max(1, S.yr - f.pt.y0 + 1), \"Hoy hace {n} año que estás con {name}, y justo hay partido. Te pregunta si vas a estar en la cena.\", \"",
   "note": "plural:singular"
  },
  "Hoy hace {n} años que estás con {name}, y justo hay partido. Te pregunta si vas a estar en la cena.": {
   "w": [
-   "fam48.js:75"
+   "fam48.js:106"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Aniversario el día del partido\"), text: trn(Math.max(1, S.yr - f.pt.y0 + 1), \"Hoy hace {n} año que estás con {name}, y justo hay partido. Te pregunta si vas a estar en la cena.\", \"",
   "note": "plural:plural"
  },
  "Dejar el partido en manos de tu segundo": {
   "w": [
-   "fam48.js:77"
+   "fam48.js:108"
   ],
   "ctx": "{t: tr(\"Dejar el partido en manos de tu segundo\"), d: tr(\"Te pierdes el partido, pero no la cena.\"), fx: {rel: 14, chem: -2, board: -2}},"
  },
  "Te pierdes el partido, pero no la cena.": {
   "w": [
-   "fam48.js:77"
+   "fam48.js:108",
+   "fam48.js:112"
   ],
   "ctx": "{t: tr(\"Dejar el partido en manos de tu segundo\"), d: tr(\"Te pierdes el partido, pero no la cena.\"), fx: {rel: 14, chem: -2, board: -2}},"
  },
  "Cenar tarde, después del partido": {
   "w": [
-   "fam48.js:78"
+   "fam48.js:109",
+   "fam48.js:113"
   ],
   "ctx": "{t: tr(\"Cenar tarde, después del partido\"), d: tr(\"Llegas a los postres, pero llegas.\"), fx: {rel: 5}},"
  },
  "Llegas a los postres, pero llegas.": {
   "w": [
-   "fam48.js:78"
+   "fam48.js:109",
+   "fam48.js:113"
   ],
   "ctx": "{t: tr(\"Cenar tarde, después del partido\"), d: tr(\"Llegas a los postres, pero llegas.\"), fx: {rel: 5}},"
  },
  "Olvidarte: el fútbol es lo primero": {
   "w": [
-   "fam48.js:79"
+   "fam48.js:110",
+   "fam48.js:114"
   ],
-  "ctx": "{t: tr(\"Olvidarte: el fútbol es lo primero\"), d: tr(\"Ni flores ni cena.\"), fx: {rel: -12, board: 1}}]; }},"
+  "ctx": "{t: tr(\"Olvidarte: el fútbol es lo primero\"), d: tr(\"Ni flores ni cena.\"), fx: {rel: -12, board: 1}}]; },"
  },
  "Ni flores ni cena.": {
   "w": [
-   "fam48.js:79"
+   "fam48.js:110",
+   "fam48.js:114"
   ],
-  "ctx": "{t: tr(\"Olvidarte: el fútbol es lo primero\"), d: tr(\"Ni flores ni cena.\"), fx: {rel: -12, board: 1}}]; }},"
+  "ctx": "{t: tr(\"Olvidarte: el fútbol es lo primero\"), d: tr(\"Ni flores ni cena.\"), fx: {rel: -12, board: 1}}]; },"
+ },
+ "Pedir al míster que no te convoque": {
+  "w": [
+   "fam48.js:112"
+  ],
+  "ctx": "{t: tr(\"Pedir al míster que no te convoque\"), d: tr(\"Te pierdes el partido, pero no la cena.\"), fx: {rel: 14, coach: -4}},"
  },
  "Un fin de semana para los dos": {
   "w": [
-   "fam48.js:81"
+   "fam48.js:116"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Un fin de semana para los dos\"), text: tr(\"{name} ha encontrado una casa rural para el fin de semana sin partido. Nada de móvil, nada de vídeos del rival.\", {name: f.pt.fn})}; },"
  },
  "{name} ha encontrado una casa rural para el fin de semana sin partido. Nada de móvil, nada de vídeos del rival.": {
   "w": [
-   "fam48.js:81"
+   "fam48.js:116"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Un fin de semana para los dos\"), text: tr(\"{name} ha encontrado una casa rural para el fin de semana sin partido. Nada de móvil, nada de vídeos del rival.\", {name: f.pt.fn})}; },"
  },
  "Desconectar de verdad": {
   "w": [
-   "fam48.js:83"
+   "fam48.js:118",
+   "fam48.js:122"
   ],
   "ctx": "{t: tr(\"Desconectar de verdad\"), d: tr(\"El lunes vuelves como nuevo.\"), fx: {rel: 12, chem: 1}, famT: true},"
  },
  "El lunes vuelves como nuevo.": {
   "w": [
-   "fam48.js:83"
+   "fam48.js:118",
+   "fam48.js:122"
   ],
   "ctx": "{t: tr(\"Desconectar de verdad\"), d: tr(\"El lunes vuelves como nuevo.\"), fx: {rel: 12, chem: 1}, famT: true},"
  },
  "Ir, pero con el portátil": {
   "w": [
-   "fam48.js:84"
+   "fam48.js:119"
   ],
   "ctx": "{t: tr(\"Ir, pero con el portátil\"), d: tr(\"Medio fin de semana viendo vídeos.\"), fx: {rel: 3, chem: 1}},"
  },
  "Medio fin de semana viendo vídeos.": {
   "w": [
-   "fam48.js:84"
+   "fam48.js:119"
   ],
   "ctx": "{t: tr(\"Ir, pero con el portátil\"), d: tr(\"Medio fin de semana viendo vídeos.\"), fx: {rel: 3, chem: 1}},"
  },
  "Cancelarlo: hay mucho trabajo": {
   "w": [
-   "fam48.js:85"
+   "fam48.js:120"
   ],
-  "ctx": "{t: tr(\"Cancelarlo: hay mucho trabajo\"), d: tr(\"La directiva valora tu dedicación.\"), fx: {rel: -10, board: 2}}]; }},"
+  "ctx": "{t: tr(\"Cancelarlo: hay mucho trabajo\"), d: tr(\"La directiva valora tu dedicación.\"), fx: {rel: -10, board: 2}}]; },"
  },
  "La directiva valora tu dedicación.": {
   "w": [
-   "fam48.js:85"
+   "fam48.js:120"
   ],
-  "ctx": "{t: tr(\"Cancelarlo: hay mucho trabajo\"), d: tr(\"La directiva valora tu dedicación.\"), fx: {rel: -10, board: 2}}]; }},"
+  "ctx": "{t: tr(\"Cancelarlo: hay mucho trabajo\"), d: tr(\"La directiva valora tu dedicación.\"), fx: {rel: -10, board: 2}}]; },"
+ },
+ "Ir, pero pendiente del móvil": {
+  "w": [
+   "fam48.js:123"
+  ],
+  "ctx": "{t: tr(\"Ir, pero pendiente del móvil\"), d: tr(\"Medio fin de semana contestando mensajes.\"), fx: {rel: 3}},"
+ },
+ "Medio fin de semana contestando mensajes.": {
+  "w": [
+   "fam48.js:123"
+  ],
+  "ctx": "{t: tr(\"Ir, pero pendiente del móvil\"), d: tr(\"Medio fin de semana contestando mensajes.\"), fx: {rel: 3}},"
+ },
+ "Cancelarlo: toca entrenar extra": {
+  "w": [
+   "fam48.js:124"
+  ],
+  "ctx": "{t: tr(\"Cancelarlo: toca entrenar extra\"), d: tr(\"El míster valora tu dedicación.\"), fx: {rel: -10, coach: 2, form: 1}}]; }},"
+ },
+ "El míster valora tu dedicación.": {
+  "w": [
+   "fam48.js:124"
+  ],
+  "ctx": "{t: tr(\"Cancelarlo: toca entrenar extra\"), d: tr(\"El míster valora tu dedicación.\"), fx: {rel: -10, coach: 2, form: 1}}]; }},"
  },
  "Una oferta de trabajo para {name}": {
   "w": [
-   "fam48.js:87"
+   "fam48.js:126"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Una oferta de trabajo para {name}\", {name: f.pt.fn}), text: tr(\"A {name} le ofrecen el trabajo de sus sueños, pero tendría que viajar mucho y te tocaría más casa a ti.\", {name: f.p"
  },
  "A {name} le ofrecen el trabajo de sus sueños, pero tendría que viajar mucho y te tocaría más casa a ti.": {
   "w": [
-   "fam48.js:87"
+   "fam48.js:126"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Una oferta de trabajo para {name}\", {name: f.pt.fn}), text: tr(\"A {name} le ofrecen el trabajo de sus sueños, pero tendría que viajar mucho y te tocaría más casa a ti.\", {name: f.p"
  },
  "Animar a que lo acepte": {
   "w": [
-   "fam48.js:89"
+   "fam48.js:128"
   ],
   "ctx": "{t: tr(\"Animar a que lo acepte\"), d: tr(\"Te toca organizarte: menos horas en el club.\"), fx: {rel: 12, sqMor: -2}},"
  },
  "Te toca organizarte: menos horas en el club.": {
   "w": [
-   "fam48.js:89"
+   "fam48.js:128"
   ],
   "ctx": "{t: tr(\"Animar a que lo acepte\"), d: tr(\"Te toca organizarte: menos horas en el club.\"), fx: {rel: 12, sqMor: -2}},"
  },
  "Pedirle que se lo piense": {
   "w": [
-   "fam48.js:90"
+   "fam48.js:129"
   ],
   "ctx": "{t: tr(\"Pedirle que se lo piense\"), d: tr(\"Lo entiende… más o menos.\"), fx: {rel: -6}}]; }},"
  },
  "Lo entiende… más o menos.": {
   "w": [
-   "fam48.js:90"
+   "fam48.js:129"
   ],
   "ctx": "{t: tr(\"Pedirle que se lo piense\"), d: tr(\"Lo entiende… más o menos.\"), fx: {rel: -6}}]; }},"
  },
  "El cumpleaños de tu hija": {
   "w": [
-   "fam48.js:93"
+   "fam48.js:132"
   ],
   "ctx": "return {title: k.g === \"f\" ? tr(\"El cumpleaños de tu hija\") : tr(\"El cumpleaños de tu hijo\"), text: tr(\"{name} cumple {n} años y la fiesta coincide con la sesión de vídeo del próximo rival.\", {name: k.fn, n: famAge(k)})}"
  },
  "El cumpleaños de tu hijo": {
   "w": [
-   "fam48.js:93"
+   "fam48.js:132"
   ],
   "ctx": "return {title: k.g === \"f\" ? tr(\"El cumpleaños de tu hija\") : tr(\"El cumpleaños de tu hijo\"), text: tr(\"{name} cumple {n} años y la fiesta coincide con la sesión de vídeo del próximo rival.\", {name: k.fn, n: famAge(k)})}"
  },
  "{name} cumple {n} años y la fiesta coincide con la sesión de vídeo del próximo rival.": {
   "w": [
-   "fam48.js:93"
+   "fam48.js:132"
   ],
   "ctx": "return {title: k.g === \"f\" ? tr(\"El cumpleaños de tu hija\") : tr(\"El cumpleaños de tu hijo\"), text: tr(\"{name} cumple {n} años y la fiesta coincide con la sesión de vídeo del próximo rival.\", {name: k.fn, n: famAge(k)})}"
  },
  "Ir a la fiesta": {
   "w": [
-   "fam48.js:95"
+   "fam48.js:134",
+   "fam48.js:138"
   ],
   "ctx": "{t: tr(\"Ir a la fiesta\"), d: tr(\"Tu ayudante prepara el vídeo.\"), fx: {rel: 8, chem: -1}},"
  },
  "Tu ayudante prepara el vídeo.": {
   "w": [
-   "fam48.js:95"
+   "fam48.js:134"
   ],
   "ctx": "{t: tr(\"Ir a la fiesta\"), d: tr(\"Tu ayudante prepara el vídeo.\"), fx: {rel: 8, chem: -1}},"
  },
  "Pasarte un rato y volver al club": {
   "w": [
-   "fam48.js:96"
+   "fam48.js:135",
+   "fam48.js:139"
   ],
   "ctx": "{t: tr(\"Pasarte un rato y volver al club\"), d: tr(\"Soplas las velas y te vas.\"), fx: {rel: 2}},"
  },
  "Soplas las velas y te vas.": {
   "w": [
-   "fam48.js:96"
+   "fam48.js:135",
+   "fam48.js:139"
   ],
   "ctx": "{t: tr(\"Pasarte un rato y volver al club\"), d: tr(\"Soplas las velas y te vas.\"), fx: {rel: 2}},"
  },
  "Quedarte en el club": {
   "w": [
-   "fam48.js:97"
+   "fam48.js:136",
+   "fam48.js:140"
   ],
-  "ctx": "{t: tr(\"Quedarte en el club\"), d: tr(\"Le llamas por videollamada.\"), fx: {rel: -8, chem: 1}}]; }},"
+  "ctx": "{t: tr(\"Quedarte en el club\"), d: tr(\"Le llamas por videollamada.\"), fx: {rel: -8, chem: 1}}]; },"
  },
  "Le llamas por videollamada.": {
   "w": [
-   "fam48.js:97"
+   "fam48.js:136",
+   "fam48.js:140"
   ],
-  "ctx": "{t: tr(\"Quedarte en el club\"), d: tr(\"Le llamas por videollamada.\"), fx: {rel: -8, chem: 1}}]; }},"
+  "ctx": "{t: tr(\"Quedarte en el club\"), d: tr(\"Le llamas por videollamada.\"), fx: {rel: -8, chem: 1}}]; },"
+ },
+ "Te saltas la sesión de vídeo.": {
+  "w": [
+   "fam48.js:138"
+  ],
+  "ctx": "{t: tr(\"Ir a la fiesta\"), d: tr(\"Te saltas la sesión de vídeo.\"), fx: {rel: 8, coach: -2}},"
  },
  "Tu relación está en crisis": {
   "w": [
-   "fam48.js:99"
+   "fam48.js:142"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Tu relación está en crisis\"), text: tr(\"{name} te dice que ya no os veis, que el fútbol se lo ha comido todo. Esta noche toca hablar en serio.\", {name: f.pt.fn})}; },"
  },
  "{name} te dice que ya no os veis, que el fútbol se lo ha comido todo. Esta noche toca hablar en serio.": {
   "w": [
-   "fam48.js:99"
+   "fam48.js:142"
   ],
   "ctx": "head: function (f) { return {title: tr(\"Tu relación está en crisis\"), text: tr(\"{name} te dice que ya no os veis, que el fútbol se lo ha comido todo. Esta noche toca hablar en serio.\", {name: f.pt.fn})}; },"
  },
  "Prometer más tiempo en casa": {
   "w": [
-   "fam48.js:101"
+   "fam48.js:144"
   ],
   "ctx": "{t: tr(\"Prometer más tiempo en casa\"), d: tr(\"Durante una temporada, menos horas en el club.\"), fx: {rel: 16, chem: -2}, famT: 5},"
  },
  "Durante una temporada, menos horas en el club.": {
   "w": [
-   "fam48.js:101"
+   "fam48.js:144"
   ],
   "ctx": "{t: tr(\"Prometer más tiempo en casa\"), d: tr(\"Durante una temporada, menos horas en el club.\"), fx: {rel: 16, chem: -2}, famT: 5},"
  },
  "Ir a terapia de pareja": {
   "w": [
-   "fam48.js:102"
+   "fam48.js:145"
   ],
   "ctx": "{t: tr(\"Ir a terapia de pareja\"), d: tr(\"Una hora a la semana, sin falta.\"), fx: {rel: 12, rep: -1}},"
  },
  "Una hora a la semana, sin falta.": {
   "w": [
-   "fam48.js:102"
+   "fam48.js:145"
   ],
   "ctx": "{t: tr(\"Ir a terapia de pareja\"), d: tr(\"Una hora a la semana, sin falta.\"), fx: {rel: 12, rep: -1}},"
  },
  "Dejarlo": {
   "w": [
-   "fam48.js:103"
+   "fam48.js:146"
   ],
   "ctx": "{t: tr(\"Dejarlo\"), d: tr(\"Cada uno por su lado.\"), fx: {}, brk: true}]; }},"
  },
  "Cada uno por su lado.": {
   "w": [
-   "fam48.js:103",
-   "fam48.js:145"
+   "fam48.js:146",
+   "fam48.js:188",
+   "fam48.js:510"
   ],
   "ctx": "{t: tr(\"Dejarlo\"), d: tr(\"Cada uno por su lado.\"), fx: {}, brk: true}]; }},"
  },
  "Conoces a alguien": {
   "w": [
-   "fam48.js:105"
+   "fam48.js:148"
   ],
   "ctx": "head: function () { return {title: tr(\"Conoces a alguien\"), text: tr(\"En una cena benéfica del club coincides con alguien con quien la conversación fluye sola. Te deja su número.\")}; },"
  },
  "En una cena benéfica del club coincides con alguien con quien la conversación fluye sola. Te deja su número.": {
   "w": [
-   "fam48.js:105"
+   "fam48.js:148"
   ],
   "ctx": "head: function () { return {title: tr(\"Conoces a alguien\"), text: tr(\"En una cena benéfica del club coincides con alguien con quien la conversación fluye sola. Te deja su número.\")}; },"
  },
  "Llamarle: es un hombre": {
   "w": [
-   "fam48.js:107"
+   "fam48.js:150"
   ],
   "ctx": "{t: tr(\"Llamarle: es un hombre\"), d: tr(\"Empezáis a veros.\"), fx: {}, meet: \"m\"},"
  },
  "Empezáis a veros.": {
   "w": [
-   "fam48.js:107",
-   "fam48.js:108"
+   "fam48.js:150",
+   "fam48.js:151"
   ],
   "ctx": "{t: tr(\"Llamarle: es un hombre\"), d: tr(\"Empezáis a veros.\"), fx: {}, meet: \"m\"},"
  },
  "Llamarla: es una mujer": {
   "w": [
-   "fam48.js:108"
+   "fam48.js:151"
   ],
   "ctx": "{t: tr(\"Llamarla: es una mujer\"), d: tr(\"Empezáis a veros.\"), fx: {}, meet: \"f\"},"
  },
  "Ahora no: el banquillo no deja tiempo": {
   "w": [
-   "fam48.js:109"
+   "fam48.js:152"
   ],
   "ctx": "{t: tr(\"Ahora no: el banquillo no deja tiempo\"), d: tr(\"Guardas el número en un cajón.\"), fx: {chem: 1}}]; }},"
  },
  "Guardas el número en un cajón.": {
   "w": [
-   "fam48.js:109"
+   "fam48.js:152"
   ],
   "ctx": "{t: tr(\"Ahora no: el banquillo no deja tiempo\"), d: tr(\"Guardas el número en un cajón.\"), fx: {chem: 1}}]; }},"
  },
  "Ampliar la familia": {
   "w": [
-   "fam48.js:111",
-   "fam48.js:112"
+   "fam48.js:154",
+   "fam48.js:155"
   ],
   "ctx": "head: function (f) { return famSameSex() ? {title: tr(\"Ampliar la familia\"), text: tr(\"{name} y tú lleváis tiempo hablándolo: queréis adoptar. La agencia os llama: hay un niño y una niña esperando una familia.\", {name: f"
  },
  "{name} y tú lleváis tiempo hablándolo: queréis adoptar. La agencia os llama: hay un niño y una niña esperando una familia.": {
   "w": [
-   "fam48.js:111"
+   "fam48.js:154"
   ],
   "ctx": "head: function (f) { return famSameSex() ? {title: tr(\"Ampliar la familia\"), text: tr(\"{name} y tú lleváis tiempo hablándolo: queréis adoptar. La agencia os llama: hay un niño y una niña esperando una familia.\", {name: f"
  },
  "{name} y tú lleváis tiempo hablándolo: ¿ha llegado el momento de tener un bebé?": {
   "w": [
-   "fam48.js:112"
+   "fam48.js:155"
   ],
   "ctx": ": {title: tr(\"Ampliar la familia\"), text: tr(\"{name} y tú lleváis tiempo hablándolo: ¿ha llegado el momento de tener un bebé?\", {name: f.pt.fn})}; },"
  },
  "Adoptar a un niño": {
   "w": [
-   "fam48.js:114"
+   "fam48.js:157"
   ],
   "ctx": "{t: ad ? tr(\"Adoptar a un niño\") : tr(\"Tener un hijo\"), d: tr(\"La familia crece.\"), fx: {rel: 10}, kid: \"m\"},"
  },
  "Tener un hijo": {
   "w": [
-   "fam48.js:114"
+   "fam48.js:157"
   ],
   "ctx": "{t: ad ? tr(\"Adoptar a un niño\") : tr(\"Tener un hijo\"), d: tr(\"La familia crece.\"), fx: {rel: 10}, kid: \"m\"},"
  },
  "La familia crece.": {
   "w": [
-   "fam48.js:114",
-   "fam48.js:115"
+   "fam48.js:157",
+   "fam48.js:158"
   ],
   "ctx": "{t: ad ? tr(\"Adoptar a un niño\") : tr(\"Tener un hijo\"), d: tr(\"La familia crece.\"), fx: {rel: 10}, kid: \"m\"},"
  },
  "Adoptar a una niña": {
   "w": [
-   "fam48.js:115"
+   "fam48.js:158"
   ],
   "ctx": "{t: ad ? tr(\"Adoptar a una niña\") : tr(\"Tener una hija\"), d: tr(\"La familia crece.\"), fx: {rel: 10}, kid: \"f\"},"
  },
  "Tener una hija": {
   "w": [
-   "fam48.js:115"
+   "fam48.js:158"
   ],
   "ctx": "{t: ad ? tr(\"Adoptar a una niña\") : tr(\"Tener una hija\"), d: tr(\"La familia crece.\"), fx: {rel: 10}, kid: \"f\"},"
  },
  "Esperar un poco más": {
   "w": [
-   "fam48.js:116"
+   "fam48.js:159"
   ],
   "ctx": "{t: tr(\"Esperar un poco más\"), d: tr(\"No es el momento.\"), fx: {rel: -3}}]; }}"
  },
  "No es el momento.": {
   "w": [
-   "fam48.js:116"
+   "fam48.js:159"
   ],
   "ctx": "{t: tr(\"Esperar un poco más\"), d: tr(\"No es el momento.\"), fx: {rel: -3}}]; }}"
  },
  "Con {name}": {
   "w": [
-   "fam48.js:137"
+   "fam48.js:180",
+   "fam48.js:498",
+   "ui-46.js:87"
   ],
   "ctx": "head: function (x) { var f = famOf(), e = FAM_EV[x.id], h = e.head(f); return {tag: \"real\", tagTxt: tr(\"Vida personal\"), cls: \"\", cat: f.pt ? tr(\"Con {name}\", {name: f.pt.fn}) : tr(\"Fuera del fútbol\"), title: h.title, te"
  },
  "Fuera del fútbol": {
   "w": [
-   "fam48.js:137"
+   "fam48.js:180",
+   "fam48.js:498"
   ],
   "ctx": "head: function (x) { var f = famOf(), e = FAM_EV[x.id], h = e.head(f); return {tag: \"real\", tagTxt: tr(\"Vida personal\"), cls: \"\", cat: f.pt ? tr(\"Con {name}\", {name: f.pt.fn}) : tr(\"Fuera del fútbol\"), title: h.title, te"
  },
  "Decidís separaros. Duele, pero es lo mejor para los dos.": {
   "w": [
-   "fam48.js:145"
+   "fam48.js:188",
+   "fam48.js:510"
   ],
   "ctx": "if (r.brk) { famBreakup(tr(\"Decidís separaros. Duele, pero es lo mejor para los dos.\")); res.txt = tr(\"Cada uno por su lado.\"); }"
  },
  "Se llama {name}. Empezáis a veros.": {
   "w": [
-   "fam48.js:146"
+   "fam48.js:189",
+   "fam48.js:511"
   ],
-  "ctx": "if (r.meet) { f.pt = {fn: famFirst(S.m.nat, r.meet), g: r.meet, rel: 62, y0: S.yr}; res.txt = tr(\"Se llama {name}. Empezáis a veros.\", {name: f.pt.fn}); }"
+  "ctx": "if (r.meet) { f.pt = {fn: famFirst(famNat(), r.meet), g: r.meet, rel: 62, y0: S.yr}; res.txt = tr(\"Se llama {name}. Empezáis a veros.\", {name: f.pt.fn}); }"
  },
  "Llega a casa {name}, de {n} años. Ya es tu hija.": {
   "w": [
-   "fam48.js:149"
+   "fam48.js:192",
+   "fam48.js:514"
   ],
   "ctx": "res.txt = k.ad ? (k.g === \"f\" ? tr(\"Llega a casa {name}, de {n} años. Ya es tu hija.\", {name: k.fn, n: famAge(k)}) : tr(\"Llega a casa {name}, de {n} años. Ya es tu hijo.\", {name: k.fn, n: famAge(k)}))"
  },
  "Llega a casa {name}, de {n} años. Ya es tu hijo.": {
   "w": [
-   "fam48.js:149"
+   "fam48.js:192",
+   "fam48.js:514"
   ],
   "ctx": "res.txt = k.ad ? (k.g === \"f\" ? tr(\"Llega a casa {name}, de {n} años. Ya es tu hija.\", {name: k.fn, n: famAge(k)}) : tr(\"Llega a casa {name}, de {n} años. Ya es tu hijo.\", {name: k.fn, n: famAge(k)}))"
  },
  "Nace {name}. Eres padre de una niña preciosa.": {
   "w": [
-   "fam48.js:150"
+   "fam48.js:193",
+   "fam48.js:515"
   ],
   "ctx": ": (k.g === \"f\" ? tr(\"Nace {name}. Eres padre de una niña preciosa.\", {name: k.fn}) : tr(\"Nace {name}. Eres padre de un niño precioso.\", {name: k.fn}));"
  },
  "Nace {name}. Eres padre de un niño precioso.": {
   "w": [
-   "fam48.js:150"
+   "fam48.js:193",
+   "fam48.js:515"
   ],
   "ctx": ": (k.g === \"f\" ? tr(\"Nace {name}. Eres padre de una niña preciosa.\", {name: k.fn}) : tr(\"Nace {name}. Eres padre de un niño precioso.\", {name: k.fn}));"
  },
  "Tu hija: {name}": {
   "w": [
-   "fam48.js:151"
+   "fam48.js:194"
   ],
   "ctx": "chips.push([\"note\", 0, k.g === \"f\" ? tr(\"Tu hija: {name}\", {name: famKidName(k)}) : tr(\"Tu hijo: {name}\", {name: famKidName(k)})]);"
  },
  "Tu hijo: {name}": {
   "w": [
-   "fam48.js:151"
+   "fam48.js:194"
   ],
   "ctx": "chips.push([\"note\", 0, k.g === \"f\" ? tr(\"Tu hija: {name}\", {name: famKidName(k)}) : tr(\"Tu hijo: {name}\", {name: famKidName(k)})]);"
  },
  "Centro del campo": {
   "w": [
-   "fam48.js:159"
+   "fam48.js:202"
   ],
   "ctx": "var FAM_POS = [[\"POR\", N_(\"Portería\")], [\"DFC\", N_(\"Defensa\")], [\"MC\", N_(\"Centro del campo\")], [\"DC\", N_(\"Delantera\")]];"
  },
  "Delantera": {
   "w": [
-   "fam48.js:159"
+   "fam48.js:202"
   ],
   "ctx": "var FAM_POS = [[\"POR\", N_(\"Portería\")], [\"DFC\", N_(\"Defensa\")], [\"MC\", N_(\"Centro del campo\")], [\"DC\", N_(\"Delantera\")]];"
  },
  "Familia": {
   "w": [
-   "fam48.js:240",
-   "fam48.js:251",
-   "fam48.js:256",
-   "fam48.js:268"
+   "fam48.js:284",
+   "fam48.js:295",
+   "fam48.js:300",
+   "fam48.js:312"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Vida personal\"), cls: \"\", cat: tr(\"Familia\"), title: d ? tr(\"Tu hija quiere ser futbolista\") : tr(\"Tu hijo quiere ser futbolista\"),"
  },
  "Tu hija quiere ser futbolista": {
   "w": [
-   "fam48.js:240"
+   "fam48.js:284"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Vida personal\"), cls: \"\", cat: tr(\"Familia\"), title: d ? tr(\"Tu hija quiere ser futbolista\") : tr(\"Tu hijo quiere ser futbolista\"),"
  },
  "Tu hijo quiere ser futbolista": {
   "w": [
-   "fam48.js:240"
+   "fam48.js:284"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Vida personal\"), cls: \"\", cat: tr(\"Familia\"), title: d ? tr(\"Tu hija quiere ser futbolista\") : tr(\"Tu hijo quiere ser futbolista\"),"
  },
  "{name} tiene {n} años y lo tiene claro: quiere jugar al fútbol. Una cantera le ha hecho una prueba y la quieren. ¿Dónde juega?": {
   "w": [
-   "fam48.js:241"
+   "fam48.js:285"
   ],
   "ctx": "text: d ? tr(\"{name} tiene {n} años y lo tiene claro: quiere jugar al fútbol. Una cantera le ha hecho una prueba y la quieren. ¿Dónde juega?\", {name: k.fn, n: famAge(k)})"
  },
  "{name} tiene {n} años y lo tiene claro: quiere jugar al fútbol. Una cantera le ha hecho una prueba y lo quieren. ¿Dónde juega?": {
   "w": [
-   "fam48.js:242"
+   "fam48.js:286"
   ],
   "ctx": ": tr(\"{name} tiene {n} años y lo tiene claro: quiere jugar al fútbol. Una cantera le ha hecho una prueba y lo quieren. ¿Dónde juega?\", {name: k.fn, n: famAge(k)})}; },"
  },
  "Mejor que estudie": {
   "w": [
-   "fam48.js:243"
+   "fam48.js:287"
   ],
   "ctx": "opts: function () { return FAM_POS.map(function (p, i) { return {t: tr(p[1]), ok: {txt: \"\", fx: {}}, i: i, pk: p[0]}; }).concat([{t: tr(\"Mejor que estudie\"), ok: {txt: tr(\"Seguirá con el fútbol los fines de semana, con l"
  },
  "Seguirá con el fútbol los fines de semana, con los amigos.": {
   "w": [
-   "fam48.js:243"
+   "fam48.js:287"
   ],
   "ctx": "opts: function () { return FAM_POS.map(function (p, i) { return {t: tr(p[1]), ok: {txt: \"\", fx: {}}, i: i, pk: p[0]}; }).concat([{t: tr(\"Mejor que estudie\"), ok: {txt: tr(\"Seguirá con el fútbol los fines de semana, con l"
  },
  "Empieza en la cantera del {club}: {pos}, {ovr} de media.": {
   "w": [
-   "fam48.js:248"
+   "fam48.js:292"
   ],
   "ctx": "res.txt = tr(\"Empieza en la cantera del {club}: {pos}, {ovr} de media.\", {club: famFbClubName(fb), pos: posName(fb.pos), ovr: Math.round(fb.ovr)});"
  },
  "Podrás ficharle cuando abra el mercado": {
   "w": [
-   "fam48.js:249"
+   "fam48.js:293"
   ],
   "ctx": "return [[\"note\", 0, famSame(k) ? tr(\"Podrás ficharle cuando abra el mercado\") : (k.g === \"f\" ? tr(\"Jugará en el fútbol femenino\") : tr(\"Jugará en el fútbol masculino\"))]];"
  },
  "Jugará en el fútbol femenino": {
   "w": [
-   "fam48.js:249"
+   "fam48.js:293"
   ],
   "ctx": "return [[\"note\", 0, famSame(k) ? tr(\"Podrás ficharle cuando abra el mercado\") : (k.g === \"f\" ? tr(\"Jugará en el fútbol femenino\") : tr(\"Jugará en el fútbol masculino\"))]];"
  },
  "Jugará en el fútbol masculino": {
   "w": [
-   "fam48.js:249"
+   "fam48.js:293"
   ],
   "ctx": "return [[\"note\", 0, famSame(k) ? tr(\"Podrás ficharle cuando abra el mercado\") : (k.g === \"f\" ? tr(\"Jugará en el fútbol femenino\") : tr(\"Jugará en el fútbol masculino\"))]];"
  },
  "¿Fichas a tu hija?": {
   "w": [
-   "fam48.js:256"
+   "fam48.js:300"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Fichaje\"), cls: \"\", cat: tr(\"Familia\"), title: d ? tr(\"¿Fichas a tu hija?\") : tr(\"¿Fichas a tu hijo?\"),"
  },
  "¿Fichas a tu hijo?": {
   "w": [
-   "fam48.js:256"
+   "fam48.js:300"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Fichaje\"), cls: \"\", cat: tr(\"Familia\"), title: d ? tr(\"¿Fichas a tu hija?\") : tr(\"¿Fichas a tu hijo?\"),"
  },
  "{name} ({pos}, {age} años, {ovr} de media) juega en el {club}. Tienes {bud} de presupuesto.": {
   "w": [
-   "fam48.js:257"
+   "fam48.js:301"
   ],
   "ctx": "text: tr(\"{name} ({pos}, {age} años, {ovr} de media) juega en el {club}. Tienes {bud} de presupuesto.\", {name: famKidName(k), pos: posName(fb.pos), age: famAge(k), ovr: Math.round(fb.ovr), club: famFbClubName(fb), bud: f"
  },
  "Ficharle por {fee}": {
   "w": [
-   "fam48.js:259",
-   "ui-48.js:96"
+   "fam48.js:303",
+   "ui-48.js:102"
   ],
   "ctx": "return [{t: fee ? tr(\"Ficharle por {fee}\", {fee: fmtMoney(fee)}) : tr(\"Ficharle (sin coste)\"), d: tr(\"Jugará a tus órdenes. El vestuario estará atento a si le das minutos de más.\"), ok: {txt: \"\", fx: {}}, i: 0, dis: fee "
  },
  "Ficharle (sin coste)": {
   "w": [
-   "fam48.js:259",
-   "ui-48.js:96"
+   "fam48.js:303",
+   "ui-48.js:102"
   ],
   "ctx": "return [{t: fee ? tr(\"Ficharle por {fee}\", {fee: fmtMoney(fee)}) : tr(\"Ficharle (sin coste)\"), d: tr(\"Jugará a tus órdenes. El vestuario estará atento a si le das minutos de más.\"), ok: {txt: \"\", fx: {}}, i: 0, dis: fee "
  },
  "Jugará a tus órdenes. El vestuario estará atento a si le das minutos de más.": {
   "w": [
-   "fam48.js:259"
+   "fam48.js:303"
   ],
   "ctx": "return [{t: fee ? tr(\"Ficharle por {fee}\", {fee: fmtMoney(fee)}) : tr(\"Ficharle (sin coste)\"), d: tr(\"Jugará a tus órdenes. El vestuario estará atento a si le das minutos de más.\"), ok: {txt: \"\", fx: {}}, i: 0, dis: fee "
  },
  "Que siga creciendo en el {club}": {
   "w": [
-   "fam48.js:260"
+   "fam48.js:304"
   ],
   "ctx": "{t: tr(\"Que siga creciendo en el {club}\", {club: famFbClubName(k.fb)}), ok: {txt: tr(\"Mejor que se gane el sitio lejos de casa.\"), fx: {}}, i: 1}]; },"
  },
  "Mejor que se gane el sitio lejos de casa.": {
   "w": [
-   "fam48.js:260"
+   "fam48.js:304"
   ],
   "ctx": "{t: tr(\"Que siga creciendo en el {club}\", {club: famFbClubName(k.fb)}), ok: {txt: tr(\"Mejor que se gane el sitio lejos de casa.\"), fx: {}}, i: 1}]; },"
  },
  "La operación no sale.": {
   "w": [
-   "fam48.js:264",
-   "ui-48.js:77"
+   "fam48.js:308",
+   "ui-48.js:82"
   ],
   "ctx": "if (!p) { res.txt = tr(\"La operación no sale.\"); return []; }"
  },
  "{name} firma por tu club. Padre y entrenador, en el mismo vestuario.": {
   "w": [
-   "fam48.js:265"
+   "fam48.js:309"
   ],
   "ctx": "res.txt = tr(\"{name} firma por tu club. Padre y entrenador, en el mismo vestuario.\", {name: famKidName(k)});"
  },
  "Al fútbol femenino: cantera del {club}": {
   "w": [
-   "fam48.js:410"
+   "fam48.js:457"
   ],
   "ctx": "choice: o.g === \"f\" ? tr(\"Al fútbol femenino: cantera del {club}\", {club: clubName(p.club)}) : tr(\"Al fútbol masculino: cantera del {club}\", {club: clubName(p.club)}),"
  },
  "Al fútbol masculino: cantera del {club}": {
   "w": [
-   "fam48.js:410"
+   "fam48.js:457"
   ],
   "ctx": "choice: o.g === \"f\" ? tr(\"Al fútbol femenino: cantera del {club}\", {club: clubName(p.club)}) : tr(\"Al fútbol masculino: cantera del {club}\", {club: clubName(p.club)}),"
  },
@@ -38419,14 +38489,14 @@
    "ui.js:996",
    "ui.js:1183",
    "ui.js:1357",
-   "ui-46.js:92"
+   "ui-46.js:93"
   ],
   "ctx": "'<div class=\"statline\"><div class=\"stat\"><b>' + r.tot.apps + \"</b><span>\" + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' + r.tot.g + \"</b><span>\" + tr(\"Goles\") + '</span></div><div class=\"stat\"><b>' + r.tot.a + "
  },
  "B. de Oro": {
   "w": [
    "ui.js:996",
-   "ui-46.js:92"
+   "ui-46.js:93"
   ],
   "ctx": "'<div class=\"statline\"><div class=\"stat\"><b>' + r.tot.apps + \"</b><span>\" + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' + r.tot.g + \"</b><span>\" + tr(\"Goles\") + '</span></div><div class=\"stat\"><b>' + r.tot.a + "
  },
@@ -38584,7 +38654,7 @@
   "w": [
    "ui.js:1023",
    "ui.js:1484",
-   "ui-48.js:63"
+   "ui-48.js:68"
   ],
   "ctx": "\"<div><span>\" + tr(\"Edad\") + \"</span><span>\" + tr(\"{n} años\", {n: p.age}) + \"</span></div>\" +"
  },
@@ -38666,7 +38736,7 @@
    "ui.js:1047",
    "ui.js:1100",
    "ui.js:1194",
-   "ui-48.js:93"
+   "ui-48.js:99"
   ],
   "ctx": "var o = '<div class=\"tablewrap\"><table><thead><tr><th>#</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th><th>' + tr(\"DG\") + '</th><th>' + tr(\"Pts\") + '</th></tr></thead><tbody>';"
  },
@@ -40596,7 +40666,7 @@
    "ui.js:1681",
    "ui.js:1933",
    "ui-35.js:123",
-   "ui-48.js:68"
+   "ui-48.js:63"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:0;font-size:13px\">' + tr(\"Puedes dejar el nombre en blanco si se le conoce por un solo nombre.\") + '</p><div class=\"row2\"><button class=\"btn wide\" data-a=\"pl\" data-id=\"' + rp.id + '\">' + t"
  },
@@ -40748,7 +40818,7 @@
  "Temporada": {
   "w": [
    "ui.js:1714",
-   "ui-48.js:93"
+   "ui-48.js:99"
   ],
   "ctx": "\"<div><span>\" + tr(\"Temporada\") + \"</span><span>\" + tr(\"{apps} PJ · {goals} G · {assists} A\", {apps: st.apps, goals: st.g, assists: st.a}) + (st.rn ? \" · \" + tr(\"nota {rating}\", {rating: dec(st.rs / st.rn)}) : \"\") + \"</s"
  },
@@ -44825,7 +44895,7 @@
  "Mejor temporada": {
   "w": [
    "ui-chal32.js:90",
-   "ui-46.js:97"
+   "ui-46.js:98"
   ],
   "ctx": "if (best) o.push([tr(\"Mejor temporada\"), tr(\"{p} puntos\", {p: best[0]}) + \" · \" + h(cn(best[1].club)) + \" (\" + h(seasonLabel(best[1].y)) + \")\"]);"
  },
@@ -45235,23 +45305,23 @@
   ],
   "ctx": "U.toast(tr(\"{a} descansa y entra {b}.\", {a: plShort(out), b: plShort(sub)}));"
  },
- "Modo entrenador: pareja, hijos y una relación que cuidar": {
+ "Pareja, hijos y una relación que cuidar, como jugador y como entrenador": {
   "w": [
    "ui-37.js:99"
   ],
-  "ctx": "var NOTES = [N_(\"Modo entrenador: pareja, hijos y una relación que cuidar\"), N_(\"Ficha a tu hijo o a tu hija y sigue su carrera\"), N_(\"El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia\")];"
+  "ctx": "var NOTES = [N_(\"Pareja, hijos y una relación que cuidar, como jugador y como entrenador\"), N_(\"Ficha a tu hijo o a tu hija y sigue su carrera\"), N_(\"El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia"
  },
  "Ficha a tu hijo o a tu hija y sigue su carrera": {
   "w": [
    "ui-37.js:99"
   ],
-  "ctx": "var NOTES = [N_(\"Modo entrenador: pareja, hijos y una relación que cuidar\"), N_(\"Ficha a tu hijo o a tu hija y sigue su carrera\"), N_(\"El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia\")];"
+  "ctx": "var NOTES = [N_(\"Pareja, hijos y una relación que cuidar, como jugador y como entrenador\"), N_(\"Ficha a tu hijo o a tu hija y sigue su carrera\"), N_(\"El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia"
  },
  "El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia": {
   "w": [
    "ui-37.js:99"
   ],
-  "ctx": "var NOTES = [N_(\"Modo entrenador: pareja, hijos y una relación que cuidar\"), N_(\"Ficha a tu hijo o a tu hija y sigue su carrera\"), N_(\"El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia\")];"
+  "ctx": "var NOTES = [N_(\"Pareja, hijos y una relación que cuidar, como jugador y como entrenador\"), N_(\"Ficha a tu hijo o a tu hija y sigue su carrera\"), N_(\"El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia"
  },
  "Versión": {
   "w": [
@@ -45577,7 +45647,7 @@
  "Escribe su nombre": {
   "w": [
    "ui-46.js:49",
-   "ui-48.js:45"
+   "ui-48.js:48"
   ],
   "ctx": "if (!fn) { U.toast(tr(\"Escribe su nombre\")); if (i) i.focus(); return; }"
  },
@@ -45621,7 +45691,7 @@
   "w": [
    "ui-46.js:59",
    "ui-48.js:9",
-   "ui-48.js:62"
+   "ui-48.js:67"
   ],
   "ctx": "o += '<div class=\"stack\"><div><label class=\"lbl\">' + tr(\"Hijo o hija\") + '</label><div class=\"seg\">' + [[\"m\", tr(\"Hijo\")], [\"f\", tr(\"Hija\")]].map(function (x) { return '<button data-a=\"heirg\" data-v=\"' + x[0] + '\" aria-p"
  },
@@ -45629,7 +45699,7 @@
   "w": [
    "ui-46.js:59",
    "ui-48.js:9",
-   "ui-48.js:62"
+   "ui-48.js:67"
   ],
   "ctx": "o += '<div class=\"stack\"><div><label class=\"lbl\">' + tr(\"Hijo o hija\") + '</label><div class=\"seg\">' + [[\"m\", tr(\"Hijo\")], [\"f\", tr(\"Hija\")]].map(function (x) { return '<button data-a=\"heirg\" data-v=\"' + x[0] + '\" aria-p"
  },
@@ -45697,97 +45767,97 @@
  },
  "Dinastía {ln}": {
   "w": [
-   "ui-46.js:91"
+   "ui-46.js:92"
   ],
   "ctx": "var o = \"<h2>\" + tr(\"Dinastía {ln}\", {ln: h(ln)}) + '</h2><p class=\"muted\" style=\"margin:-6px 0 12px\">' + trn(R.all.length, \"{n} generación\", \"{n} generaciones\") + \"</p>\";"
  },
  "{n} generación": {
   "w": [
-   "ui-46.js:91",
-   "ui-46.js:120"
+   "ui-46.js:92",
+   "ui-46.js:121"
   ],
   "ctx": "var o = \"<h2>\" + tr(\"Dinastía {ln}\", {ln: h(ln)}) + '</h2><p class=\"muted\" style=\"margin:-6px 0 12px\">' + trn(R.all.length, \"{n} generación\", \"{n} generaciones\") + \"</p>\";",
   "note": "plural:singular"
  },
  "{n} generaciones": {
   "w": [
-   "ui-46.js:91",
-   "ui-46.js:120"
+   "ui-46.js:92",
+   "ui-46.js:121"
   ],
   "ctx": "var o = \"<h2>\" + tr(\"Dinastía {ln}\", {ln: h(ln)}) + '</h2><p class=\"muted\" style=\"margin:-6px 0 12px\">' + trn(R.all.length, \"{n} generación\", \"{n} generaciones\") + \"</p>\";",
   "note": "plural:plural"
  },
  "Temp. de míster": {
   "w": [
-   "ui-46.js:92"
+   "ui-46.js:93"
   ],
   "ctx": "o += '<div class=\"dynrec\">' + [[t.apps, tr(\"Partidos\")], [t.g, tr(\"Goles\")], [t.tro + t.mtro, tr(\"Títulos\")], [t.caps, tr(\"Internac.\")], [t.bdo, tr(\"B. de Oro\")], [t.seasons, tr(\"Temp. de míster\")]].map(function (x) {"
  },
  "Máximo goleador": {
   "w": [
-   "ui-46.js:96"
+   "ui-46.js:97"
   ],
   "ctx": "if (b.g) rec.push([tr(\"Máximo goleador\"), nm(b.g) + \" · \" + trn(b.g.g, \"{n} gol\", \"{n} goles\")]);"
  },
  "Más títulos": {
   "w": [
-   "ui-46.js:98"
+   "ui-46.js:99"
   ],
   "ctx": "if (b.tro) rec.push([tr(\"Más títulos\"), nm(b.tro) + \" · \" + ((b.tro.tro || 0) + (b.tro.mtro || 0))]);"
  },
  "Mayor leyenda": {
   "w": [
-   "ui-46.js:99"
+   "ui-46.js:100"
   ],
   "ctx": "if (b.sc) rec.push([tr(\"Mayor leyenda\"), nm(b.sc) + \" · \" + h(tr(b.sc.title || b.sc.mtitle || \"\"))]);"
  },
  "Récords de la familia": {
   "w": [
-   "ui-46.js:100"
+   "ui-46.js:101"
   ],
   "ctx": "if (rec.length) o += '<h3 class=\"dynh3\">' + tr(\"Récords de la familia\") + '</h3><div class=\"kvlist\">' + rec.map(function (r) { return \"<div><span>\" + h(r[0]) + \"</span><span>\" + r[1] + \"</span></div>\"; }).join(\"\") + \"</d"
  },
  "Árbol de leyendas": {
   "w": [
-   "ui-46.js:101"
+   "ui-46.js:102"
   ],
   "ctx": "o += '<h3 class=\"dynh3\">' + tr(\"Árbol de leyendas\") + '</h3><ol class=\"dyntree\">' + R.all.map(memCard).join(\"\") + \"</ol>\";"
  },
  "Clubes de la familia": {
   "w": [
-   "ui-46.js:105"
+   "ui-46.js:106"
   ],
   "ctx": "o += '<h3 class=\"dynh3\">' + tr(\"Clubes de la familia\") + '</h3><div class=\"dynclubs\">' + clubs.map(function (c) {"
  },
  "{n} temporada de míster": {
   "w": [
-   "ui-46.js:108"
+   "ui-46.js:109"
   ],
   "ctx": "if (x.m) bits.push(trn(x.m, \"{n} temporada de míster\", \"{n} temporadas de míster\"));",
   "note": "plural:singular"
  },
  "{n} temporadas de míster": {
   "w": [
-   "ui-46.js:108"
+   "ui-46.js:109"
   ],
   "ctx": "if (x.m) bits.push(trn(x.m, \"{n} temporada de míster\", \"{n} temporadas de míster\"));",
   "note": "plural:plural"
  },
  "Tu dinastía": {
   "w": [
-   "ui-46.js:120"
+   "ui-46.js:121"
   ],
   "ctx": "return '<section class=\"card dynhist\"><div class=\"head\"><h3>' + tr(\"Tu dinastía\") + '</h3><span class=\"eyebrow\">' + trn(R.all.length, \"{n} generación\", \"{n} generaciones\") + \"</span></div>\" +"
  },
  "{g} goles y {t} títulos entre toda la familia.": {
   "w": [
-   "ui-46.js:121"
+   "ui-46.js:122"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:4px 0 10px\">' + tr(\"{g} goles y {t} títulos entre toda la familia.\", {g: R.t.g, t: R.t.tro + R.t.mtro}) + '</p><button class=\"btn wide\" data-a=\"dyn\">' + tr(\"Ver el árbol de leyendas\") + \"<"
  },
  "Ver el árbol de leyendas": {
   "w": [
-   "ui-46.js:121"
+   "ui-46.js:122"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:4px 0 10px\">' + tr(\"{g} goles y {t} títulos entre toda la familia.\", {g: R.t.g, t: R.t.tro + R.t.mtro}) + '</p><button class=\"btn wide\" data-a=\"dyn\">' + tr(\"Ver el árbol de leyendas\") + \"<"
  },
@@ -45863,17 +45933,29 @@
   ],
   "ctx": "function relWord(r) { return r >= 75 ? tr(\"Muy bien\") : r >= 55 ? tr(\"Bien\") : r >= 35 ? tr(\"Regular\") : r >= 20 ? tr(\"Mal\") : tr(\"Al límite\"); }"
  },
+ "Hermana": {
+  "w": [
+   "ui-48.js:9"
+  ],
+  "ctx": "var I = famKidInfo(k), who = k.sib ? (k.g === \"f\" ? tr(\"Hermana\") : tr(\"Hermano\")) : k.g === \"f\" ? tr(\"Hija\") : tr(\"Hijo\");"
+ },
+ "Hermano": {
+  "w": [
+   "ui-48.js:9"
+  ],
+  "ctx": "var I = famKidInfo(k), who = k.sib ? (k.g === \"f\" ? tr(\"Hermana\") : tr(\"Hermano\")) : k.g === \"f\" ? tr(\"Hija\") : tr(\"Hijo\");"
+ },
  "adoptada": {
   "w": [
    "ui-48.js:10"
   ],
-  "ctx": "var s = \"<b>\" + h(k.fn) + \"</b> · \" + h(who) + (k.ad ? \" \" + h(k.g === \"f\" ? tr(\"adoptada\") : tr(\"adoptado\")) : \"\") + \" · \" + h(trn(I.age, \"{n} año\", \"{n} años\"));"
+  "ctx": "var s = \"<b>\" + h(k.fn) + \"</b> · \" + h(who) + (k.ad && !k.sib ? \" \" + h(k.g === \"f\" ? tr(\"adoptada\") : tr(\"adoptado\")) : \"\") + \" · \" + h(trn(I.age, \"{n} año\", \"{n} años\"));"
  },
  "adoptado": {
   "w": [
    "ui-48.js:10"
   ],
-  "ctx": "var s = \"<b>\" + h(k.fn) + \"</b> · \" + h(who) + (k.ad ? \" \" + h(k.g === \"f\" ? tr(\"adoptada\") : tr(\"adoptado\")) : \"\") + \" · \" + h(trn(I.age, \"{n} año\", \"{n} años\"));"
+  "ctx": "var s = \"<b>\" + h(k.fn) + \"</b> · \" + h(who) + (k.ad && !k.sib ? \" \" + h(k.g === \"f\" ? tr(\"adoptada\") : tr(\"adoptado\")) : \"\") + \" · \" + h(trn(I.age, \"{n} año\", \"{n} años\"));"
  },
  "retirado del fútbol": {
   "w": [
@@ -45890,7 +45972,7 @@
  "Tu vida personal": {
   "w": [
    "ui-48.js:19",
-   "ui-48.js:53"
+   "ui-48.js:56"
   ],
   "ctx": "if (famCanSetup()) return '<section class=\"card famcard\"><div class=\"presrow\"><span class=\"presic\" aria-hidden=\"true\">👪</span><div class=\"grow\"><b>' + tr(\"Tu vida personal\") + \"</b><small>\" +"
  },
@@ -45898,24 +45980,30 @@
   "w": [
    "ui-48.js:20"
   ],
-  "ctx": "tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.\") + '</small></div></div><div class=\"row2\" style=\"margin-top:10px\"><button class=\"btn pri\" data-a=\"fa"
+  "ctx": "(S.mode === \"mgr\" ? tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.\") : tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y te acompañarán "
+ },
+ "¿Tienes pareja o hijos? Tendrás que cuidar la relación, y te acompañarán si después eres entrenador o si tu hijo o tu hija toma el relevo.": {
+  "w": [
+   "ui-48.js:20"
+  ],
+  "ctx": "(S.mode === \"mgr\" ? tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.\") : tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y te acompañarán "
  },
  "Configurar": {
   "w": [
    "ui-48.js:20"
   ],
-  "ctx": "tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.\") + '</small></div></div><div class=\"row2\" style=\"margin-top:10px\"><button class=\"btn pri\" data-a=\"fa"
+  "ctx": "(S.mode === \"mgr\" ? tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.\") : tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y te acompañarán "
  },
  "Sin familia por ahora": {
   "w": [
    "ui-48.js:20"
   ],
-  "ctx": "tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.\") + '</small></div></div><div class=\"row2\" style=\"margin-top:10px\"><button class=\"btn pri\" data-a=\"fa"
+  "ctx": "(S.mode === \"mgr\" ? tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.\") : tr(\"¿Tienes pareja o hijos? Tendrás que cuidar la relación, y te acompañarán "
  },
  "Tu familia": {
   "w": [
    "ui-48.js:22",
-   "ui-48.js:82"
+   "ui-48.js:87"
   ],
   "ctx": "var o = '<section class=\"card famcard\" data-a=\"famsheet\" role=\"button\" tabindex=\"0\"><div class=\"presrow\"><span class=\"presic\" aria-hidden=\"true\">👪</span><div class=\"grow\"><b>' + tr(\"Tu familia\") + \"</b>\";"
  },
@@ -45925,143 +46013,167 @@
   ],
   "ctx": "if (f.pt) o += \"<small>\" + h(tr(\"Con {name} · relación: {w}\", {name: f.pt.fn, w: relWord(f.pt.rel)})) + \"</small>\" + relBar(f.pt.rel);"
  },
+ "Tus padres: {a} y {b}": {
+  "w": [
+   "ui-48.js:24"
+  ],
+  "ctx": "else if (f.par) o += \"<small>\" + h(f.par.pt ? tr(\"Tus padres: {a} y {b}\", {a: f.par.fn, b: f.par.pt}) : tr(\"Hijo o hija de {a}\", {a: f.par.fn})) + \"</small>\";"
+ },
+ "Hijo o hija de {a}": {
+  "w": [
+   "ui-48.js:24"
+  ],
+  "ctx": "else if (f.par) o += \"<small>\" + h(f.par.pt ? tr(\"Tus padres: {a} y {b}\", {a: f.par.fn, b: f.par.pt}) : tr(\"Hijo o hija de {a}\", {a: f.par.fn})) + \"</small>\";"
+ },
  "Familia guardada": {
   "w": [
-   "ui-48.js:49"
+   "ui-48.js:52"
   ],
   "ctx": "U.toast(tr(\"Familia guardada\"));"
  },
  "Solo se configura una vez. Después, la familia crece (o no) según tus decisiones.": {
   "w": [
-   "ui-48.js:53"
+   "ui-48.js:56"
   ],
   "ctx": "var o = \"<h2>\" + tr(\"Tu vida personal\") + '</h2><p class=\"lead\">' + tr(\"Solo se configura una vez. Después, la familia crece (o no) según tus decisiones.\") + '</p><div class=\"stack\">';"
  },
  "Pareja": {
   "w": [
-   "ui-48.js:54"
+   "ui-48.js:57"
   ],
   "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Pareja\") + '</label><div class=\"seg\">' + [[\"none\", tr(\"Sin pareja\")], [\"m\", tr(\"Un hombre\")], [\"f\", tr(\"Una mujer\")]].map(function (x) {"
  },
  "Sin pareja": {
   "w": [
-   "ui-48.js:54"
+   "ui-48.js:57"
   ],
   "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Pareja\") + '</label><div class=\"seg\">' + [[\"none\", tr(\"Sin pareja\")], [\"m\", tr(\"Un hombre\")], [\"f\", tr(\"Una mujer\")]].map(function (x) {"
  },
  "Un hombre": {
   "w": [
-   "ui-48.js:54"
+   "ui-48.js:57"
   ],
   "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Pareja\") + '</label><div class=\"seg\">' + [[\"none\", tr(\"Sin pareja\")], [\"m\", tr(\"Un hombre\")], [\"f\", tr(\"Una mujer\")]].map(function (x) {"
  },
  "Una mujer": {
   "w": [
-   "ui-48.js:54"
+   "ui-48.js:57"
   ],
   "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Pareja\") + '</label><div class=\"seg\">' + [[\"none\", tr(\"Sin pareja\")], [\"m\", tr(\"Un hombre\")], [\"f\", tr(\"Una mujer\")]].map(function (x) {"
  },
  "Nombre de tu pareja": {
   "w": [
-   "ui-48.js:56"
+   "ui-48.js:59"
   ],
   "ctx": "if (FS.pt !== \"none\") o += '<label class=\"lbl\" for=\"fsptn\" style=\"margin-top:8px\">' + tr(\"Nombre de tu pareja\") + '</label><input type=\"text\" id=\"fsptn\" maxlength=\"20\" autocomplete=\"off\" value=\"' + h(FS.ptn) + '\">' +"
  },
  "Si queréis ampliar la familia, adoptaréis a un niño o a una niña.": {
   "w": [
-   "ui-48.js:57"
+   "ui-48.js:60"
   ],
   "ctx": "(FS.pt === famMe() ? '<p class=\"muted\" style=\"font-size:13px;margin:4px 0 0\">' + tr(\"Si queréis ampliar la familia, adoptaréis a un niño o a una niña.\") + \"</p>\" : \"\");"
  },
+ "Con tu edad, los hijos llegarán más adelante.": {
+  "w": [
+   "ui-48.js:63"
+  ],
+  "ctx": "if (maxAge < 0) return o + '<p class=\"muted\" style=\"font-size:13px;margin:0\">' + tr(\"Con tu edad, los hijos llegarán más adelante.\") + '</p><button class=\"btn pri wide\" data-a=\"fsgo\">' + tr(\"Guardar\") + '</button><button"
+ },
  "Hijos": {
   "w": [
-   "ui-48.js:59"
+   "ui-48.js:64"
   ],
   "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Hijos\") + \"</label>\";"
  },
  "Quitar": {
   "w": [
-   "ui-48.js:64"
+   "ui-48.js:69"
   ],
   "ctx": "'<button class=\"btn\" data-a=\"fskdel\" data-v=\"' + i + '\" aria-label=\"' + h(tr(\"Quitar\")) + '\">✕</button></div>';"
  },
  "Añadir hijo o hija": {
   "w": [
-   "ui-48.js:66"
+   "ui-48.js:71"
   ],
   "ctx": "if (FS.kids.length < 3) o += '<button class=\"btn wide\" data-a=\"fskadd\">+ ' + tr(\"Añadir hijo o hija\") + \"</button>\";"
  },
  "A los 16 años podrán querer ser futbolistas. Si juegan en tu mismo fútbol, podrás ficharlos.": {
   "w": [
-   "ui-48.js:67"
+   "ui-48.js:72"
   ],
   "ctx": "o += '<p class=\"muted\" style=\"font-size:13px;margin:6px 0 0\">' + tr(\"A los 16 años podrán querer ser futbolistas. Si juegan en tu mismo fútbol, podrás ficharlos.\") + \"</p></div>\";"
  },
  "{name} firma por tu club": {
   "w": [
-   "ui-48.js:79",
-   "ui-48.js:79"
+   "ui-48.js:84",
+   "ui-48.js:84"
   ],
   "ctx": "U.toast(k.g === \"f\" ? tr(\"{name} firma por tu club\", {name: famKidName(k)}) : tr(\"{name} firma por tu club\", {name: famKidName(k)}));"
  },
+ "Tus padres": {
+  "w": [
+   "ui-48.js:88"
+  ],
+  "ctx": "if (f.par) o += '<section class=\"famblk\"><div class=\"famhd\"><b>' + h(tr(\"Tus padres\")) + \"</b></div><p class=\\\"muted\\\" style=\\\"font-size:13px;margin:4px 0 0\\\">\" + h(f.par.pt ? f.par.fn + \" · \" + f.par.pt : f.par.fn) + \"<"
+ },
  "La relación se resiente con el trabajo: un club grande, una crisis o niños pequeños en casa. Las decisiones que la cuidan la mejoran. Bien cuidada te da química; descuidada, te la quita.": {
   "w": [
-   "ui-48.js:85"
+   "ui-48.js:91"
   ],
   "ctx": "'<p class=\"muted\" style=\"font-size:13px;margin:6px 0 0\">' + tr(\"La relación se resiente con el trabajo: un club grande, una crisis o niños pequeños en casa. Las decisiones que la cuidan la mejoran. Bien cuidada te da quí"
  },
  "Ahora mismo no tienes pareja.": {
   "w": [
-   "ui-48.js:86"
+   "ui-48.js:92"
   ],
   "ctx": "} else o += '<p class=\"muted\">' + (f.ex ? tr(\"Ahora mismo no tienes pareja.\") : tr(\"No tienes pareja. Puede que conozcas a alguien.\")) + \"</p>\";"
  },
  "No tienes pareja. Puede que conozcas a alguien.": {
   "w": [
-   "ui-48.js:86"
+   "ui-48.js:92"
   ],
   "ctx": "} else o += '<p class=\"muted\">' + (f.ex ? tr(\"Ahora mismo no tienes pareja.\") : tr(\"No tienes pareja. Puede que conozcas a alguien.\")) + \"</p>\";"
  },
  "Todavía no tienes hijos.": {
   "w": [
-   "ui-48.js:87"
+   "ui-48.js:93"
   ],
-  "ctx": "if (!f.kids.length) o += '<p class=\"muted\">' + tr(\"Todavía no tienes hijos.\") + \"</p>\";"
+  "ctx": "if (!famKids(f).length) o += '<p class=\"muted\">' + tr(\"Todavía no tienes hijos.\") + \"</p>\";"
  },
  "{pos} · {apps} partidos y {g} goles en su carrera": {
   "w": [
-   "ui-48.js:92"
+   "ui-48.js:98"
   ],
   "ctx": "o += '<p class=\"muted\" style=\"font-size:13px;margin:4px 0 6px\">' + h(tr(\"{pos} · {apps} partidos y {g} goles en su carrera\", {pos: posName(I.fb.pos), apps: I.tot.apps, g: I.tot.g})) + \"</p>\";"
  },
  "Esta temporada contigo: {apps} partidos, {g} goles.": {
   "w": [
-   "ui-48.js:95"
+   "ui-48.js:101"
   ],
   "ctx": "if (I.mine && I.p) o += '<p class=\"muted\" style=\"font-size:13px;margin:6px 0 0\">' + h(tr(\"Esta temporada contigo: {apps} partidos, {g} goles.\", {apps: I.p.st.apps, g: I.p.st.g})) + \"</p>\";"
  },
  "Juega en el fútbol femenino: no puedes ficharla, pero sigues su carrera.": {
   "w": [
-   "ui-48.js:97"
+   "ui-48.js:103"
   ],
   "ctx": "else if (!famSame(k) && !I.fb.ret) o += '<p class=\"muted\" style=\"font-size:13px;margin:6px 0 0\">' + h(k.g === \"f\" ? tr(\"Juega en el fútbol femenino: no puedes ficharla, pero sigues su carrera.\") : tr(\"Juega en el fútbol "
  },
  "Juega en el fútbol masculino: no puedes ficharlo, pero sigues su carrera.": {
   "w": [
-   "ui-48.js:97"
+   "ui-48.js:103"
   ],
   "ctx": "else if (!famSame(k) && !I.fb.ret) o += '<p class=\"muted\" style=\"font-size:13px;margin:6px 0 0\">' + h(k.g === \"f\" ? tr(\"Juega en el fútbol femenino: no puedes ficharla, pero sigues su carrera.\") : tr(\"Juega en el fútbol "
  },
  "En {n} año podrá decidir si quiere ser futbolista.": {
   "w": [
-   "ui-48.js:98"
+   "ui-48.js:104"
   ],
   "ctx": "} else if (I.age < 16 && !k.no) o += '<p class=\"muted\" style=\"font-size:13px;margin:4px 0 0\">' + h(trn(16 - I.age, \"En {n} año podrá decidir si quiere ser futbolista.\", \"En {n} años podrá decidir si quiere ser futbolista",
   "note": "plural:singular"
  },
  "En {n} años podrá decidir si quiere ser futbolista.": {
   "w": [
-   "ui-48.js:98"
+   "ui-48.js:104"
   ],
   "ctx": "} else if (I.age < 16 && !k.no) o += '<p class=\"muted\" style=\"font-size:13px;margin:4px 0 0\">' + h(trn(16 - I.age, \"En {n} año podrá decidir si quiere ser futbolista.\", \"En {n} años podrá decidir si quiere ser futbolista",
   "note": "plural:plural"

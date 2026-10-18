@@ -6,26 +6,29 @@
   function relWord(r) { return r >= 75 ? tr("Muy bien") : r >= 55 ? tr("Bien") : r >= 35 ? tr("Regular") : r >= 20 ? tr("Mal") : tr("Al límite"); }
   function relBar(r) { return '<div class="bar famrel"><i class="' + (r >= 55 ? "hi" : r >= 30 ? "mid" : "lo") + '" style="width:' + Math.max(3, Math.min(100, r)) + '%"></i></div>'; }
   function kidLine(k) {
-    var I = famKidInfo(k), who = k.g === "f" ? tr("Hija") : tr("Hijo");
-    var s = "<b>" + h(k.fn) + "</b> · " + h(who) + (k.ad ? " " + h(k.g === "f" ? tr("adoptada") : tr("adoptado")) : "") + " · " + h(trn(I.age, "{n} año", "{n} años"));
+    var I = famKidInfo(k), who = k.sib ? (k.g === "f" ? tr("Hermana") : tr("Hermano")) : k.g === "f" ? tr("Hija") : tr("Hijo");
+    var s = "<b>" + h(k.fn) + "</b> · " + h(who) + (k.ad && !k.sib ? " " + h(k.g === "f" ? tr("adoptada") : tr("adoptado")) : "") + " · " + h(trn(I.age, "{n} año", "{n} años"));
     if (I.fb) s += I.fb.ret ? " · " + h(tr("retirado del fútbol")) : " · ⚽ " + h(I.club) + " · " + I.ovr + (I.mine ? ' <span class="chip up">' + h(tr("En tu plantilla")) + "</span>" : "");
     return s;
   }
 
   /* ---------- tarjeta en el club ---------- */
-  U.add("clubTop", function () {
-    if (!S || S.mode !== "mgr" || !S.m || S.ph === "ret" || typeof famOf !== "function") return "";
-    var f = famOf();
+  function famCard() {
+    if (!S || S.ph === "ret" || typeof famOf !== "function" || !(S.m || S.p)) return "";
+    var f = famOf(); if (!f) return "";
     if (famCanSetup()) return '<section class="card famcard"><div class="presrow"><span class="presic" aria-hidden="true">👪</span><div class="grow"><b>' + tr("Tu vida personal") + "</b><small>" +
-      tr("¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.") + '</small></div></div><div class="row2" style="margin-top:10px"><button class="btn pri" data-a="famset">' + tr("Configurar") + '</button><button class="btn" data-a="famnone">' + tr("Sin familia por ahora") + "</button></div></section>";
-    if (!f.pt && !f.kids.length) return "";
+      (S.mode === "mgr" ? tr("¿Tienes pareja o hijos? Tendrás que cuidar la relación, y tus hijos podrán ser futbolistas… y jugar a tus órdenes.") : tr("¿Tienes pareja o hijos? Tendrás que cuidar la relación, y te acompañarán si después eres entrenador o si tu hijo o tu hija toma el relevo.")) + '</small></div></div><div class="row2" style="margin-top:10px"><button class="btn pri" data-a="famset">' + tr("Configurar") + '</button><button class="btn" data-a="famnone">' + tr("Sin familia por ahora") + "</button></div></section>";
+    if (!f.pt && !f.kids.length && !f.par) return "";
     var o = '<section class="card famcard" data-a="famsheet" role="button" tabindex="0"><div class="presrow"><span class="presic" aria-hidden="true">👪</span><div class="grow"><b>' + tr("Tu familia") + "</b>";
     if (f.pt) o += "<small>" + h(tr("Con {name} · relación: {w}", {name: f.pt.fn, w: relWord(f.pt.rel)})) + "</small>" + relBar(f.pt.rel);
+    else if (f.par) o += "<small>" + h(f.par.pt ? tr("Tus padres: {a} y {b}", {a: f.par.fn, b: f.par.pt}) : tr("Hijo o hija de {a}", {a: f.par.fn})) + "</small>";
     var fbk = f.kids.filter(function (k) { return k.fb && !k.fb.ret; });
     if (fbk.length) o += "<small>" + fbk.map(function (k) { var I = famKidInfo(k); return "⚽ " + h(k.fn) + " · " + h(I.club) + " · " + I.ovr; }).join("<br>") + "</small>";
     else if (f.kids.length) o += "<small>" + h(f.kids.map(function (k) { return k.fn + " (" + famAge(k) + ")"; }).join(" · ")) + "</small>";
     return o + "</div></div></section>";
-  });
+  }
+  U.add("clubTop", function () { return S && S.mode === "mgr" && S.m ? famCard() : ""; });
+  U.add("carreraTop", function () { return S && S.mode !== "mgr" && S.p ? famCard() : ""; });
 
   /* ---------- preparar la familia ---------- */
   var FS = null;
@@ -36,15 +39,15 @@
   }
   U.actions.famset = function () { FS = {pt: "none", ptn: "", kids: []}; U.open("famset"); };
   U.actions.famnone = function () { famSetup({}); U.persist(); U.render(false); };
-  U.actions.fspt = function (b, v) { fsRead(); FS.pt = v; if (v !== "none" && !FS.ptn) FS.ptn = famFirst(S.m.nat, v); U.renderSheet(); };
-  U.actions.fskadd = function () { fsRead(); if (FS.kids.length < 3) FS.kids.push({fn: famFirst(S.m.nat, "m"), g: "m", age: 6}); U.renderSheet(); };
+  U.actions.fspt = function (b, v) { fsRead(); FS.pt = v; if (v !== "none" && !FS.ptn) FS.ptn = famFirst(famNat(), v); U.renderSheet(); };
+  U.actions.fskadd = function () { fsRead(); if (FS.kids.length < 3) FS.kids.push({fn: famFirst(famNat(), "m"), g: "m", age: Math.max(0, Math.min(6, famHero().age - 18))}); U.renderSheet(); };
   U.actions.fskdel = function (b, v) { fsRead(); FS.kids.splice(+v, 1); U.renderSheet(); };
-  U.actions.fskg = function (b, v) { fsRead(); var i = +b.getAttribute("data-i"), k = FS.kids[i]; if (k && k.g !== v) { k.g = v; k.fn = famFirst(S.m.nat, v); } U.renderSheet(); };
+  U.actions.fskg = function (b, v) { fsRead(); var i = +b.getAttribute("data-i"), k = FS.kids[i]; if (k && k.g !== v) { k.g = v; k.fn = famFirst(famNat(), v); } U.renderSheet(); };
   U.actions.fsgo = function () {
     fsRead();
     if (FS.pt !== "none" && !FS.ptn.trim()) { U.toast(tr("Escribe su nombre")); return; }
     var sameSex = FS.pt === famMe();
-    famSetup({pt: FS.pt === "none" ? null : {fn: FS.ptn.trim(), g: FS.pt}, kids: FS.kids.map(function (k) { return {fn: (k.fn || "").trim() || famFirst(S.m.nat, k.g), g: k.g, age: k.age, ad: sameSex}; })});
+    famSetup({pt: FS.pt === "none" ? null : {fn: FS.ptn.trim(), g: FS.pt}, kids: FS.kids.map(function (k) { return {fn: (k.fn || "").trim() || famFirst(famNat(), k.g), g: k.g, age: k.age, ad: sameSex}; })});
     FS = null; U.closeSheet(); U.persist(); U.render(false);
     U.toast(tr("Familia guardada"));
   };
@@ -56,11 +59,13 @@
     if (FS.pt !== "none") o += '<label class="lbl" for="fsptn" style="margin-top:8px">' + tr("Nombre de tu pareja") + '</label><input type="text" id="fsptn" maxlength="20" autocomplete="off" value="' + h(FS.ptn) + '">' +
       (FS.pt === famMe() ? '<p class="muted" style="font-size:13px;margin:4px 0 0">' + tr("Si queréis ampliar la familia, adoptaréis a un niño o a una niña.") + "</p>" : "");
     o += "</div>";
+    var maxAge = Math.min(15, famHero().age - 18);
+    if (maxAge < 0) return o + '<p class="muted" style="font-size:13px;margin:0">' + tr("Con tu edad, los hijos llegarán más adelante.") + '</p><button class="btn pri wide" data-a="fsgo">' + tr("Guardar") + '</button><button class="btn wide" data-a="close">' + tr("Cancelar") + "</button></div>";
     o += '<div><label class="lbl">' + tr("Hijos") + "</label>";
     FS.kids.forEach(function (k, i) {
       o += '<div class="famkrow"><input type="text" id="fsk' + i + '" maxlength="20" autocomplete="off" value="' + h(k.fn) + '" aria-label="' + h(tr("Nombre")) + '">' +
         '<div class="seg">' + [["m", tr("Hijo")], ["f", tr("Hija")]].map(function (x) { return '<button data-a="fskg" data-i="' + i + '" data-v="' + x[0] + '" aria-pressed="' + (k.g === x[0]) + '">' + h(x[1]) + "</button>"; }).join("") + "</div>" +
-        '<select id="fska' + i + '" aria-label="' + h(tr("Edad")) + '">' + Array.apply(null, Array(16)).map(function (_, a) { return '<option value="' + a + '"' + (a === k.age ? " selected" : "") + ">" + h(trn(a, "{n} año", "{n} años")) + "</option>"; }).join("") + "</select>" +
+        '<select id="fska' + i + '" aria-label="' + h(tr("Edad")) + '">' + Array.apply(null, Array(maxAge + 1)).map(function (_, a) { return '<option value="' + a + '"' + (a === k.age ? " selected" : "") + ">" + h(trn(a, "{n} año", "{n} años")) + "</option>"; }).join("") + "</select>" +
         '<button class="btn" data-a="fskdel" data-v="' + i + '" aria-label="' + h(tr("Quitar")) + '">✕</button></div>';
     });
     if (FS.kids.length < 3) o += '<button class="btn wide" data-a="fskadd">+ ' + tr("Añadir hijo o hija") + "</button>";
@@ -80,11 +85,12 @@
   };
   U.sheets.fam = function () {
     var f = famOf(), o = "<h2>" + tr("Tu familia") + "</h2>";
+    if (f.par) o += '<section class="famblk"><div class="famhd"><b>' + h(tr("Tus padres")) + "</b></div><p class=\"muted\" style=\"font-size:13px;margin:4px 0 0\">" + h(f.par.pt ? f.par.fn + " · " + f.par.pt : f.par.fn) + "</p></section>";
     if (f.pt) {
       o += '<section class="famblk"><div class="famhd"><b>' + h(f.pt.fn) + "</b><span>" + h(relWord(f.pt.rel)) + " · " + Math.round(f.pt.rel) + "</span></div>" + relBar(f.pt.rel) +
         '<p class="muted" style="font-size:13px;margin:6px 0 0">' + tr("La relación se resiente con el trabajo: un club grande, una crisis o niños pequeños en casa. Las decisiones que la cuidan la mejoran. Bien cuidada te da química; descuidada, te la quita.") + "</p></section>";
     } else o += '<p class="muted">' + (f.ex ? tr("Ahora mismo no tienes pareja.") : tr("No tienes pareja. Puede que conozcas a alguien.")) + "</p>";
-    if (!f.kids.length) o += '<p class="muted">' + tr("Todavía no tienes hijos.") + "</p>";
+    if (!famKids(f).length) o += '<p class="muted">' + tr("Todavía no tienes hijos.") + "</p>";
     f.kids.forEach(function (k) {
       var I = famKidInfo(k);
       o += '<section class="famblk"><div class="famhd">' + kidLine(k) + "</div>";

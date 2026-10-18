@@ -1,5 +1,5 @@
-/* fam48.js — «Familia» (versión 4.8), motor del modo entrenador.
-   S.m.fam = {set, pt: {fn, g, rel, y0} | null, ex, kids: [{id, fn, g, by, ad, no, fb}], nid}
+/* fam48.js — «Familia» (versión 4.8), motor (modo jugador y modo entrenador).
+   S.fam = {set, par (tus padres, si eres el relevo), pt: {fn, g, rel, y0} | null, ex, kids: [{id, fn, g, by, ad, no, fb}], nid}
    · Pareja: un hombre o una mujer, a elección. La relación baja con el trabajo (club grande, crisis, niños pequeños)
      y sube con las decisiones que la cuidan. Bien cuidada da química; descuidada la quita, y por debajo de 8 se rompe.
    · Hijos: con tu pareja podéis tener un hijo o una hija; si sois del mismo sexo, adoptáis (niño o niña, a elección).
@@ -9,7 +9,18 @@
    El protagonista del modo entrenador es del sexo de su fútbol (entrenador en el masculino, entrenadora en el femenino). */
 
 function famMe() { return S && S.g === "f" ? "f" : "m"; }
-function famOf() { var m = S && S.m; if (!m) return null; return m.fam || (m.fam = {set: false, pt: null, ex: 0, kids: [], nid: 1}); }
+/* la familia vive en S.fam y acompaña al protagonista: de jugador a entrenador, y al relevo (como padres y hermanos) */
+function famOf() {
+  if (!S || !(S.m || S.p)) return null;
+  if (!S.fam && S.m && S.m.fam) { S.fam = S.m.fam; delete S.m.fam; }
+  return S.fam || (S.fam = {set: false, pt: null, ex: 0, kids: [], nid: 1});
+}
+function famMgr() { return S.mode === "mgr" && !!S.m; }
+function famHero() { return famMgr() ? S.m : S.p; }
+function famLn() { var h = famHero(); return h ? h.ln : ""; }
+function famNat() { if (famMgr()) return S.m.nat; var p = S.p; return p ? (p.inat >= 0 ? p.inat : p.nat) : 0; }
+function famClub() { return famMgr() ? S.m.club : S.p ? S.p.club : -1; }
+function famKids(f) { return (f || famOf()).kids.filter(function (k) { return !k.sib; }); }
 function famAge(k) { return S.yr - k.by; }
 function famSame(k) { return k.g === famMe(); }           /* juega en tu mismo fútbol: se le puede fichar */
 function famSameSex() { var f = famOf(); return !!(f && f.pt && f.pt.g === famMe()); }
@@ -19,8 +30,8 @@ function famFirst(ni, g) {
   var l = src.f.split(","); return l[Math.floor(R() * Math.min(l.length, 70))];
 }
 function famKid(id) { var f = famOf(); return f ? f.kids.filter(function (k) { return k.id === id; })[0] || null : null; }
-function famKidName(k) { return k.fn + " " + S.m.ln; }
-function famCanSetup() { var f = famOf(); return !!f && !f.set && S.mode === "mgr" && S.ph !== "ret"; }
+function famKidName(k) { return k.fn + " " + famLn(); }
+function famCanSetup() { var f = famOf(); return !!f && !f.set && S.ph !== "ret" && !f.par; }
 
 /* ---------- puesta en marcha (una vez por partida, desde la tarjeta «Tu familia») ---------- */
 /* o: {pt: {fn, g} | null, kids: [{fn, g, age}]} */
@@ -30,8 +41,9 @@ function famSetup(o) {
   f.set = true;
   if (o.pt && o.pt.fn) f.pt = {fn: String(o.pt.fn).slice(0, 20), g: o.pt.g === "f" ? "f" : "m", rel: 70, y0: S.yr};
   (o.kids || []).slice(0, 3).forEach(function (k) {
-    var age = clamp(+k.age || 0, 0, 15);
-    f.kids.push({id: f.nid++, fn: String(k.fn || famFirst(S.m.nat, k.g)).slice(0, 20), g: k.g === "f" ? "f" : "m", by: S.yr - age, ad: !!k.ad, no: false, fb: null});
+    var age = clamp(+k.age || 0, 0, Math.max(0, Math.min(15, famHero().age - 18)));
+    if (famHero().age < 18) return;
+    f.kids.push({id: f.nid++, fn: String(k.fn || famFirst(famNat(), k.g)).slice(0, 20), g: k.g === "f" ? "f" : "m", by: S.yr - age, ad: !!k.ad, no: false, fb: null});
   });
   return true;
 }
@@ -39,18 +51,21 @@ function famSetup(o) {
 /* ---------- la relación ---------- */
 function famRel(v) { var f = famOf(); if (!f || !f.pt) return 0; var a = f.pt.rel; f.pt.rel = clamp(f.pt.rel + v, 0, 100); return f.pt.rel - a; }
 function famDecay() {
-  var f = famOf(), m = S.m; if (!f || !f.pt) return 0;
-  var small = f.kids.filter(function (k) { return famAge(k) <= 5; }).length;
-  var d = 1.6 + (m.club >= 0 && S.cr[m.club] >= 78 ? 1 : 0) + (m.board < 40 ? 1.5 : 0) + small * 0.6;
-  if (m.flags.famT && m.flags.famT >= S.yr * 10 + S.bi) d *= 0.4;
+  var f = famOf(), h = famHero(); if (!f || !f.pt || !h) return 0;
+  var small = famKids(f).filter(function (k) { return famAge(k) <= 5; }).length, c = famClub(), d;
+  if (famMgr()) d = 1.6 + (c >= 0 && S.cr[c] >= 78 ? 1 : 0) + (h.board < 40 ? 1.5 : 0) + small * 0.6;
+  else d = 1.4 + (h.fame >= 60 ? 1 : 0) + (c >= 0 && S.cr[c] >= 80 ? 0.5 : 0) + (h.inj ? 0.8 : 0) + small * 0.6;
+  if (h.flags && h.flags.famT && h.flags.famT >= S.yr * 10 + S.bi) d *= 0.4;
   return d;
 }
 function famBreakup(why) {
-  var f = famOf(), m = S.m; if (!f || !f.pt) return;
+  var f = famOf(); if (!f || !f.pt) return;
   var pt = f.pt; f.pt = null; f.ex++; f.exName = pt.fn;
-  m.chem = clamp(m.chem - 4, 0, 100);
-  feed({t: "decision", tipo: "mgr", cat: tr("Vida personal"), title: tr("Ruptura"), choice: tr("{name} y tú lo dejáis", {name: pt.fn}),
-    txt: why || tr("Demasiadas noches en el despacho y demasiados viajes. La relación no aguanta más."), chips: [["chem", -4]], good: false, y: S.yr});
+  var ch;
+  if (famMgr()) { S.m.chem = clamp(S.m.chem - 4, 0, 100); ch = [["chem", -4]]; }
+  else { S.p.mor = clamp(S.p.mor - 10, 0, 100); S.p.form = clamp(S.p.form - 4, 0, 100); ch = [["mor", -10], ["form", -4]]; }
+  feed({t: "decision", tipo: famMgr() ? "mgr" : "real", cat: tr("Vida personal"), title: tr("Ruptura"), choice: tr("{name} y tú lo dejáis", {name: pt.fn}),
+    txt: why || (famMgr() ? tr("Demasiadas noches en el despacho y demasiados viajes. La relación no aguanta más.") : tr("Demasiadas concentraciones, viajes y noches fuera. La relación no aguanta más.")), chips: ch, good: false, y: S.yr});
 }
 /* al final de cada tramo */
 (function () {
@@ -69,6 +84,22 @@ function famBreakup(why) {
   };
 })();
 
+(function () {
+  if (typeof blockDone !== "function") return;
+  var _bd = blockDone;
+  blockDone = function () {
+    var f = S.p && S.mode !== "mgr" ? famOf() : null;
+    if (f && f.pt && S.p.club >= 0) {
+      famRel(-famDecay());
+      var r = f.pt.rel, p = S.p;
+      if (r >= 70) p.mor = clamp(p.mor + 1.5, 0, 100);
+      else if (r < 30) { p.mor = clamp(p.mor - 2, 0, 100); p.form = clamp(p.form - 1, 0, 100); if (S.bnews && chance(0.5)) S.bnews.push({t: "bad", x: tr("Las cosas no van bien en casa y se nota en tu cabeza en los partidos.")}); }
+      if (r <= 8) famBreakup();
+    }
+    return _bd.apply(this, arguments);
+  };
+})();
+
 /* ---------- decisiones de la vida personal (entre tramos) ---------- */
 var FAM_EV = {
   cena: {when: function (f) { return !!f.pt; },
@@ -76,25 +107,37 @@ var FAM_EV = {
     opts: function () { return [
       {t: tr("Dejar el partido en manos de tu segundo"), d: tr("Te pierdes el partido, pero no la cena."), fx: {rel: 14, chem: -2, board: -2}},
       {t: tr("Cenar tarde, después del partido"), d: tr("Llegas a los postres, pero llegas."), fx: {rel: 5}},
-      {t: tr("Olvidarte: el fútbol es lo primero"), d: tr("Ni flores ni cena."), fx: {rel: -12, board: 1}}]; }},
+      {t: tr("Olvidarte: el fútbol es lo primero"), d: tr("Ni flores ni cena."), fx: {rel: -12, board: 1}}]; },
+    optsP: function () { return [
+      {t: tr("Pedir al míster que no te convoque"), d: tr("Te pierdes el partido, pero no la cena."), fx: {rel: 14, coach: -4}},
+      {t: tr("Cenar tarde, después del partido"), d: tr("Llegas a los postres, pero llegas."), fx: {rel: 5}},
+      {t: tr("Olvidarte: el fútbol es lo primero"), d: tr("Ni flores ni cena."), fx: {rel: -12, coach: 1}}]; }},
   escapada: {when: function (f) { return !!f.pt; },
     head: function (f) { return {title: tr("Un fin de semana para los dos"), text: tr("{name} ha encontrado una casa rural para el fin de semana sin partido. Nada de móvil, nada de vídeos del rival.", {name: f.pt.fn})}; },
     opts: function () { return [
       {t: tr("Desconectar de verdad"), d: tr("El lunes vuelves como nuevo."), fx: {rel: 12, chem: 1}, famT: true},
       {t: tr("Ir, pero con el portátil"), d: tr("Medio fin de semana viendo vídeos."), fx: {rel: 3, chem: 1}},
-      {t: tr("Cancelarlo: hay mucho trabajo"), d: tr("La directiva valora tu dedicación."), fx: {rel: -10, board: 2}}]; }},
+      {t: tr("Cancelarlo: hay mucho trabajo"), d: tr("La directiva valora tu dedicación."), fx: {rel: -10, board: 2}}]; },
+    optsP: function () { return [
+      {t: tr("Desconectar de verdad"), d: tr("El lunes vuelves como nuevo."), fx: {rel: 12, form: 2}, famT: true},
+      {t: tr("Ir, pero pendiente del móvil"), d: tr("Medio fin de semana contestando mensajes."), fx: {rel: 3}},
+      {t: tr("Cancelarlo: toca entrenar extra"), d: tr("El míster valora tu dedicación."), fx: {rel: -10, coach: 2, form: 1}}]; }},
   trabajo: {when: function (f) { return !!f.pt; },
     head: function (f) { return {title: tr("Una oferta de trabajo para {name}", {name: f.pt.fn}), text: tr("A {name} le ofrecen el trabajo de sus sueños, pero tendría que viajar mucho y te tocaría más casa a ti.", {name: f.pt.fn})}; },
     opts: function () { return [
       {t: tr("Animar a que lo acepte"), d: tr("Te toca organizarte: menos horas en el club."), fx: {rel: 12, sqMor: -2}},
       {t: tr("Pedirle que se lo piense"), d: tr("Lo entiende… más o menos."), fx: {rel: -6}}]; }},
-  cumple: {when: function (f) { return f.kids.some(function (k) { var a = famAge(k); return a >= 2 && a <= 15; }); },
-    head: function (f) { var k = f.kids.filter(function (k) { var a = famAge(k); return a >= 2 && a <= 15; })[0];
+  cumple: {when: function (f) { return famKids(f).some(function (k) { var a = famAge(k); return a >= 2 && a <= 15; }); },
+    head: function (f) { var k = famKids(f).filter(function (k) { var a = famAge(k); return a >= 2 && a <= 15; })[0];
       return {title: k.g === "f" ? tr("El cumpleaños de tu hija") : tr("El cumpleaños de tu hijo"), text: tr("{name} cumple {n} años y la fiesta coincide con la sesión de vídeo del próximo rival.", {name: k.fn, n: famAge(k)})}; },
     opts: function (f) { return [
       {t: tr("Ir a la fiesta"), d: tr("Tu ayudante prepara el vídeo."), fx: {rel: 8, chem: -1}},
       {t: tr("Pasarte un rato y volver al club"), d: tr("Soplas las velas y te vas."), fx: {rel: 2}},
-      {t: tr("Quedarte en el club"), d: tr("Le llamas por videollamada."), fx: {rel: -8, chem: 1}}]; }},
+      {t: tr("Quedarte en el club"), d: tr("Le llamas por videollamada."), fx: {rel: -8, chem: 1}}]; },
+    optsP: function () { return [
+      {t: tr("Ir a la fiesta"), d: tr("Te saltas la sesión de vídeo."), fx: {rel: 8, coach: -2}},
+      {t: tr("Pasarte un rato y volver al club"), d: tr("Soplas las velas y te vas."), fx: {rel: 2}},
+      {t: tr("Quedarte en el club"), d: tr("Le llamas por videollamada."), fx: {rel: -8, coach: 1}}]; }},
   crisis: {when: function (f) { return !!f.pt && f.pt.rel < 28; }, prio: true,
     head: function (f) { return {title: tr("Tu relación está en crisis"), text: tr("{name} te dice que ya no os veis, que el fútbol se lo ha comido todo. Esta noche toca hablar en serio.", {name: f.pt.fn})}; },
     opts: function () { return [
@@ -107,7 +150,7 @@ var FAM_EV = {
       {t: tr("Llamarle: es un hombre"), d: tr("Empezáis a veros."), fx: {}, meet: "m"},
       {t: tr("Llamarla: es una mujer"), d: tr("Empezáis a veros."), fx: {}, meet: "f"},
       {t: tr("Ahora no: el banquillo no deja tiempo"), d: tr("Guardas el número en un cajón."), fx: {chem: 1}}]; }},
-  kid: {when: function (f) { return !!f.pt && f.pt.rel >= 55 && f.kids.length < 3 && S.yr - f.pt.y0 >= 1 && !f.kids.some(function (k) { return famAge(k) < 3; }) && S.m.age <= 58; }, chanceW: 0.3,
+  kid: {when: function (f) { var ks = famKids(f), h = famHero(); return !!f.pt && f.pt.rel >= 55 && ks.length < 3 && S.yr - f.pt.y0 >= 1 && !ks.some(function (k) { return famAge(k) < 3; }) && h && h.age <= 58 && h.age >= 21; }, chanceW: 0.3,
     head: function (f) { return famSameSex() ? {title: tr("Ampliar la familia"), text: tr("{name} y tú lleváis tiempo hablándolo: queréis adoptar. La agencia os llama: hay un niño y una niña esperando una familia.", {name: f.pt.fn})}
       : {title: tr("Ampliar la familia"), text: tr("{name} y tú lleváis tiempo hablándolo: ¿ha llegado el momento de tener un bebé?", {name: f.pt.fn})}; },
     opts: function () { var ad = famSameSex(); return [
@@ -117,7 +160,7 @@ var FAM_EV = {
 };
 var FAM_POOL = ["cena", "escapada", "trabajo", "cumple"];
 function famPickEv() {
-  var f = famOf(); if (!f || S.m.club < 0) return null;
+  var f = famOf(); if (!f || famClub() < 0) return null;
   if (FAM_EV.crisis.when(f)) return "crisis";
   if (FAM_EV.kid.when(f) && chance(FAM_EV.kid.chanceW)) return "kid";
   if (FAM_EV.meet.when(f)) return chance(FAM_EV.meet.chanceW) ? "meet" : null;
@@ -128,7 +171,7 @@ function famPickEv() {
 }
 function famNewKid(g, ad) {
   var f = famOf(), age = ad ? ri(0, 7) : 0;
-  var k = {id: f.nid++, fn: famFirst(S.m.nat, g), g: g, by: S.yr - age, ad: !!ad, no: false, fb: null};
+  var k = {id: f.nid++, fn: famFirst(famNat(), g), g: g, by: S.yr - age, ad: !!ad, no: false, fb: null};
   f.kids.push(k);
   return k;
 }
@@ -140,10 +183,10 @@ if (typeof MPH !== "undefined") MPH.fam = {
     var f = famOf(), r = o.raw, fx = Object.assign({}, r.fx), rv = fx.rel || 0; delete fx.rel;
     var chips = mgrFx(fx);
     if (rv && f.pt) { var dv = famRel(rv); chips.push(["rel", Math.round(dv)]); }
-    if (r.famT) S.m.flags.famT = S.yr * 10 + S.bi + (r.famT === true ? 1 : r.famT);
+    if (r.famT) famHero().flags.famT = S.yr * 10 + S.bi + (r.famT === true ? 1 : r.famT);
     f.last = x.id;
     if (r.brk) { famBreakup(tr("Decidís separaros. Duele, pero es lo mejor para los dos.")); res.txt = tr("Cada uno por su lado."); }
-    if (r.meet) { f.pt = {fn: famFirst(S.m.nat, r.meet), g: r.meet, rel: 62, y0: S.yr}; res.txt = tr("Se llama {name}. Empezáis a veros.", {name: f.pt.fn}); }
+    if (r.meet) { f.pt = {fn: famFirst(famNat(), r.meet), g: r.meet, rel: 62, y0: S.yr}; res.txt = tr("Se llama {name}. Empezáis a veros.", {name: f.pt.fn}); }
     if (r.kid) {
       var k = famNewKid(r.kid, famSameSex());
       res.txt = k.ad ? (k.g === "f" ? tr("Llega a casa {name}, de {n} años. Ya es tu hija.", {name: k.fn, n: famAge(k)}) : tr("Llega a casa {name}, de {n} años. Ya es tu hijo.", {name: k.fn, n: famAge(k)}))
@@ -170,14 +213,14 @@ function famPickOther(g, code, lvl) {
   return {cn: names[i], lvl: round1(clamp(lvl, best.bot - 2, best.top + 1)), lg: best.n};
 }
 function famStartFb(k, posK) {
-  var m = S.m, famSc = Math.min(4, (m.peakRep || m.rep || 30) / 25);
+  var m = famHero(), famSc = Math.min(4, (famMgr() ? (m.peakRep || m.rep || 30) : (m.fame || 10)) / 25), myC = famClub(), myN = famNat();
   var ovr = round1(rf(52, 58) + famSc * 0.5), pot = round1(Math.min(93, rf(68, 85) + famSc));
   var fb = {pos: famPosFrom(posK), ovr: ovr, pot: Math.max(pot, ovr + 8), club: -1, cn: null, lvl: 0, pid: null, seasons: [], y0: S.yr, ret: null};
-  var code = W.ctry[m.nat] ? W.ctry[m.nat].code : "ES";
+  var code = W.ctry[myN] ? W.ctry[myN].code : "ES";
   if (famSame(k)) {
-    var pool = clubsWhere(function (c) { return S.cl[c] >= 0 && W.clubs[c].ci === m.nat && c !== m.club && S.cr[c] >= ovr + 2 && S.cr[c] <= ovr + 12; });
-    if (!pool.length) pool = clubsWhere(function (c) { return S.cl[c] >= 0 && c !== m.club && Math.abs(S.cr[c] - ovr - 6) < 6; });
-    fb.club = pool.length ? pick(pool) : (m.club >= 0 ? m.club : 0);
+    var pool = clubsWhere(function (c) { return S.cl[c] >= 0 && W.clubs[c].ci === myN && c !== myC && S.cr[c] >= ovr + 2 && S.cr[c] <= ovr + 12; });
+    if (!pool.length) pool = clubsWhere(function (c) { return S.cl[c] >= 0 && c !== myC && Math.abs(S.cr[c] - ovr - 6) < 6; });
+    fb.club = pool.length ? pick(pool) : (myC >= 0 ? myC : 0);
   } else { var o = famPickOther(k.g, code, ovr + 6); fb.cn = o.cn; fb.lvl = o.lvl; fb.lg = o.lg; }
   k.fb = fb;
   return fb;
@@ -206,17 +249,18 @@ function famGrow(fb, age, share) {
   fb.ovr = round1(clamp(fb.ovr + gr, 40, 95));
 }
 function famMove(k, lvl) {
-  var fb = k.fb, m = S.m;
+  var fb = k.fb, myC = famMgr() ? S.m.club : -1;
   if (fb.club >= 0) {
-    var cands = clubsWhere(function (c) { return S.cl[c] >= 0 && c !== fb.club && c !== m.club && Math.abs(S.cr[c] - lvl) <= 3; });
+    var cands = clubsWhere(function (c) { return S.cl[c] >= 0 && c !== fb.club && c !== myC && Math.abs(S.cr[c] - lvl) <= 3; });
     var home = cands.filter(function (c) { return W.clubs[c].ci === W.clubs[fb.club].ci; });
     var c = (home.length && chance(0.6) ? pick(home) : cands.length ? pick(cands) : null);
     if (c != null) fb.club = c;
-  } else { var o = famPickOther(k.g, (W.ctry[m.nat] || {}).code, lvl); fb.cn = o.cn; fb.lvl = o.lvl; fb.lg = o.lg; }
+  } else { var o = famPickOther(k.g, (W.ctry[famNat()] || {}).code, lvl); fb.cn = o.cn; fb.lvl = o.lvl; fb.lg = o.lg; }
 }
-function famFee(fb, age) { return fb.club === S.m.club ? 0 : Math.max(0, Math.round(3e5 * Math.exp((fb.ovr - 62) / 5.5) * (age <= 21 ? 1.3 : 1) / 1e5) * 1e5); }
+function famFee(fb, age) { return famMgr() && fb.club === S.m.club ? 0 : Math.max(0, Math.round(3e5 * Math.exp((fb.ovr - 62) / 5.5) * (age <= 21 ? 1.3 : 1) / 1e5) * 1e5); }
 /* ¿se le puede fichar ahora? */
 function famSignable(k) {
+  if (!famMgr() || k.sib) return false;
   var m = S.m; if (!k.fb || k.fb.ret || k.fb.pid != null || !famSame(k) || m.club < 0 || !m.mk || !m.mk.open) return false;
   return k.fb.club !== m.club && famAge(k) >= 16;
 }
@@ -232,7 +276,7 @@ function famSign(k) {
   fb.pid = p.id; fb.from = fb.club; fb.club = m.club; fb.signed = (fb.signed || 0) + 1;
   return p;
 }
-function famKidPl(k) { return k.fb && k.fb.pid != null ? mPl(k.fb.pid) : null; }
+function famKidPl(k) { return famMgr() && k.fb && k.fb.pid != null ? mPl(k.fb.pid) : null; }
 if (typeof MPH !== "undefined") {
   MPH.kidfb = {
     fixed: true,
@@ -275,7 +319,7 @@ if (typeof MPH !== "undefined") {
     var _pv = mgrPendValid;
     mgrPendValid = function (x) {
       if (x.k === "fam") { var f = famOf(); return !!f && S.m.club >= 0 && !!FAM_EV[x.id] && FAM_EV[x.id].when(f); }
-      if (x.k === "kidfb") { var k = famKid(x.kid); return !!k && !k.fb && !k.no; }
+      if (x.k === "kidfb") { var k = famKid(x.kid); return !!k && !k.fb && !k.no && !k.sib; }
       if (x.k === "kidsign") { var k2 = famKid(x.kid); return !!k2 && famSignable(k2); }
       return _pv.apply(this, arguments);
     };
@@ -341,7 +385,7 @@ if (typeof MPH !== "undefined") {
 })();
 /* mercado abierto: proponer el fichaje; nueva temporada: quien cumple 16 */
 function famWindow(f, summer) {
-  if (summer) f.kids.forEach(function (k) {
+  if (summer) famKids(f).forEach(function (k) {
     if (!k.fb && !k.no && famAge(k) >= 16 && famAge(k) <= 19) S.pend.push(mp("kidfb", {kid: k.id}));
   });
   f.kids.forEach(function (k) { if (famSignable(k) && (k.fb.ask || 0) < S.yr * 10 + (summer ? 0 : 3)) { k.fb.ask = S.yr * 10 + (summer ? 0 : 3); S.pend.push(mp("kidsign", {kid: k.id})); } });
@@ -363,13 +407,16 @@ function famKidInfo(k) {
   var _dh = dynHeirStart;
   dynHeirStart = function (o) {
     o = Object.assign({}, o || {});
-    var wg = S.g === "f" ? "f" : "m", k = o.kid != null && S.m && S.m.fam ? famKid(o.kid) : null;
+    var wg = S.g === "f" ? "f" : "m", k = o.kid != null ? famKid(o.kid) : null;
     if (k) {
       o.fn = k.fn; o.g = k.g;
       if (k.fb && !k.fb.ret) { o.pos = k.fb.pos; o.ovr = k.fb.ovr; o.pot = k.fb.pot; o.age = famAge(k) + 1; if (k.fb.club >= 0 && famSame(k)) o.club = k.fb.club; }
     }
-    if ((o.g || wg) === wg) return _dh.call(this, o);
-    return dynHeirCross(o, k);
+    var nf = famHeirFam(o, k), ok;
+    if ((o.g || wg) === wg) ok = _dh.call(this, o);
+    else ok = dynHeirCross(o, k);
+    if (ok && nf) S.fam = nf;
+    return ok;
   };
 })();
 function dynHeirCross(o, k) {
@@ -414,6 +461,113 @@ function dynHeirCross(o, k) {
 }
 /* hijos futbolistas que pueden tomar el relevo al retirarte como entrenador */
 function famHeirKids() {
-  var f = S && S.m && S.m.fam; if (!f) return [];
-  return f.kids.filter(function (k) { return k.fb && !k.fb.ret && famAge(k) <= 30; });
+  var f = S && (S.m || S.p) ? famOf() : null; if (!f) return [];
+  return famKids(f).filter(function (k) { return k.fb && !k.fb.ret && famAge(k) <= 30; });
 }
+/* la familia que hereda quien toma el relevo: tus padres (tú y tu pareja) y tus hermanos */
+function famHeirFam(o, k) {
+  var f = S.fam || (S.m && S.m.fam); if (!f) return null;
+  var h = famHero(); if (!h) return null;
+  var heir = k || famKids(f).filter(function (x) { return !x.fb && x.fn === o.fn && x.g === (o.g || (S.g === "f" ? "f" : "m")); })[0] || null;
+  return {set: true, pt: null, ex: 0, nid: f.nid || 1, par: {fn: h.fn + " " + h.ln, pt: f.pt ? f.pt.fn : null, ptg: f.pt ? f.pt.g : null, g: famMe()},
+    kids: famKids(f).filter(function (x) { return x !== heir; }).map(function (x) { var c = Object.assign({}, x); c.sib = true; if (c.fb) { c.fb = Object.assign({}, c.fb); c.fb.pid = null; } return c; })};
+}
+/* al retirarte, la dinastía recuerda con quién compartiste la vida */
+(function () {
+  if (typeof retire === "function") { var _r = retire; retire = function () { var out = _r.apply(this, arguments); famMarkDyn(); return out; }; }
+  if (typeof mgrRetire === "function") { var _mr = mgrRetire; mgrRetire = function () { var out = _mr.apply(this, arguments); famMarkDyn(); return out; }; }
+})();
+function famMarkDyn() {
+  try { var f = famOf(), x = typeof dynCur === "function" ? dynCur() : null; if (f && f.pt && x) { x.pt = f.pt.fn; x.ptg = f.pt.g; } } catch (e) {}
+}
+
+/* ---------- modo jugador: decisiones de pareja, hijos que crecen y futbolistas ---------- */
+function famOptsP(id) {
+  var e = FAM_EV[id], f = famOf();
+  var list = e.optsP ? e.optsP(f) : e.opts(f).map(function (o) {
+    var fx = {}; Object.keys(o.fx || {}).forEach(function (k) {
+      var v = o.fx[k], m = {chem: "mor", sqMor: "mor", board: "coach", rep: "fame"}[k] || k; fx[m] = (fx[m] || 0) + v; });
+    return Object.assign({}, o, {fx: fx});
+  });
+  return list;
+}
+if (typeof EX_PEND !== "undefined") {
+  EX_PEND.pfam = {
+    desc: function (x) {
+      var f = famOf(), h = FAM_EV[x.id].head(f);
+      return {tag: "real", tagTxt: tr("Vida personal"), cls: "", cat: f.pt ? tr("Con {name}", {name: f.pt.fn}) : tr("Fuera del fútbol"), title: h.title, text: h.text,
+        opts: famOptsP(x.id).map(function (o) { return descOpt({t: o.t, d: o.d, ok: {fx: o.fx}}, function (u) { return fxPreview(u.fx); }); })};
+    },
+    resolve: function (x, choice) {
+      var f = famOf(), o = famOptsP(x.id)[choice]; if (!o) return null;
+      var head = FAM_EV[x.id].head(f);
+      S.pend.shift();
+      var fx = Object.assign({}, o.fx), rv = fx.rel || 0; delete fx.rel;
+      var chips = applyFx(fx), txt = o.d;
+      if (rv && f.pt) chips.push(["rel", Math.round(famRel(rv))]);
+      if (o.famT) S.p.flags.famT = S.yr * 10 + S.bi + (o.famT === true ? 1 : o.famT);
+      f.last = x.id;
+      if (o.brk) { famBreakup(tr("Decidís separaros. Duele, pero es lo mejor para los dos.")); txt = tr("Cada uno por su lado."); }
+      if (o.meet) { f.pt = {fn: famFirst(famNat(), o.meet), g: o.meet, rel: 62, y0: S.yr}; txt = tr("Se llama {name}. Empezáis a veros.", {name: f.pt.fn}); }
+      if (o.kid) {
+        var k = famNewKid(o.kid, famSameSex());
+        txt = k.ad ? (k.g === "f" ? tr("Llega a casa {name}, de {n} años. Ya es tu hija.", {name: k.fn, n: famAge(k)}) : tr("Llega a casa {name}, de {n} años. Ya es tu hijo.", {name: k.fn, n: famAge(k)}))
+          : (k.g === "f" ? tr("Nace {name}. Eres padre de una niña preciosa.", {name: k.fn}) : tr("Nace {name}. Eres padre de un niño precioso.", {name: k.fn}));
+      }
+      return {t: "decision", tipo: "real", cat: tr("Vida personal"), title: head.title, choice: o.t, txt: txt, chips: chips, y: S.yr};
+    }
+  };
+  EX_PEND.pkidfb = {
+    desc: function (x) {
+      var d = MPH.kidfb.head(x);
+      d.opts = MPH.kidfb.opts(x).map(function (o) { return descOpt({t: o.t, ok: {fx: {}}}, function () { return []; }); });
+      return d;
+    },
+    resolve: function (x, choice) {
+      var o = MPH.kidfb.opts(x)[choice]; if (!o) return null;
+      var head = MPH.kidfb.head(x), res = {txt: o.ok.txt};
+      S.pend.shift();
+      var chips = MPH.kidfb.apply(x, o, res);
+      return {t: "decision", tipo: "real", cat: tr("Familia"), title: head.title, choice: o.t, txt: res.txt, chips: chips, y: S.yr};
+    }
+  };
+}
+function famPValid(x) {
+  var f = famOf(); if (!f) return false;
+  if (x.k === "pfam") return !!FAM_EV[x.id] && FAM_EV[x.id].when(f) && S.p && S.p.club >= 0;
+  if (x.k === "pkidfb") { var k = famKid(x.kid); return !!k && !k.fb && !k.no && !k.sib; }
+  return true;
+}
+(function () {
+  if (typeof cleanPendPlayer === "function") {
+    var _cp = cleanPendPlayer;
+    cleanPendPlayer = function () {
+      _cp.apply(this, arguments);
+      while (S.pend.length && (S.pend[0].k === "pfam" || S.pend[0].k === "pkidfb") && !famPValid(S.pend[0])) { S.pend.shift(); _cp.apply(this, arguments); }
+    };
+  }
+  if (typeof queueBetween === "function") {
+    var _qb = queueBetween;
+    queueBetween = function () {
+      var out = _qb.apply(this, arguments);
+      if (S.mode !== "mgr" && S.p && S.fam) { var id = famPickEv(); if (id) S.pend.push({k: "pfam", id: id}); }
+      return out;
+    };
+  }
+  if (typeof startSeason === "function") {
+    var _st = startSeason;
+    startSeason = function (first) {
+      var out = _st.apply(this, arguments);
+      if (!first && S.mode !== "mgr" && S.fam) famKids(S.fam).forEach(function (k) { if (!k.fb && !k.no && famAge(k) >= 16 && famAge(k) <= 19) S.pend.push({k: "pkidfb", kid: k.id}); });
+      return out;
+    };
+  }
+  if (typeof seasonEnd === "function") {
+    var _se = seasonEnd;
+    seasonEnd = function () {
+      if (S.mode !== "mgr" && S.fam) S.fam.kids.forEach(function (k) { if (k.fb && k.fb.pid == null) famSimSeason(k); });
+      return _se.apply(this, arguments);
+    };
+  }
+  /* en el modo entrenador también siguen su carrera los hermanos (de una generación anterior) */
+})();

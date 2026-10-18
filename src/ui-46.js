@@ -82,8 +82,9 @@
     var legacy = x.title || x.mtitle;
     return '<li class="dyngen' + (x.live ? " live" : "") + '"><span class="dynbadge">G' + x.gen + '</span><div class="dyncard"><div class="dynname"><b>' + h((x.fn ? x.fn + " " : "") + x.ln) + "</b><span>" + yrs(x.y0, x.live ? null : x.y1 || x.my1) + "</span></div>" +
       '<div class="chips">' + roles.join("") + "</div>" +
-      (club != null && club >= 0 ? '<div class="dynclub">' + U.crest(club) + "<span>" + h(clubName(club)) + "</span></div>" : "") +
+      (club != null && club >= 0 ? '<div class="dynclub">' + U.crest(club) + "<span>" + h(clubName(club)) + "</span></div>" : (x.clubN || x.mclubN ? '<div class="dynclub"><span>' + h(x.clubN || x.mclubN) + "</span></div>" : "")) +
       stats.map(function (s) { return '<p class="dynstat">' + h(s) + "</p>"; }).join("") +
+      (x.pt ? '<p class="dynstat">💞 ' + h(tr("Con {name}", {name: x.pt})) + "</p>" : "") +
       (legacy ? '<p class="dynleg">' + h(tr(legacy)) + (x.sc || x.msc ? " · " + Math.max(x.sc || 0, x.msc || 0) : "") + "</p>" : "") + "</div></li>";
   }
   U.sheets.dyn = function () {

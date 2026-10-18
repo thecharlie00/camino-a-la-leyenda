@@ -30,7 +30,7 @@ G.newManagerCareer({fn: "Pep", ln: "Familia", nat: "ES", age: 44, diff: 0, ev: 1
 G.S.noLiveAuto = true;
 if (!G.famCanSetup()) fail.push("no se puede preparar la familia al empezar");
 G.famSetup({pt: {fn: "Álex", g: "m"}, kids: [{fn: "Leo", g: "m", age: 15}, {fn: "Ana", g: "f", age: 14}]});
-const F = G.S.m.fam;
+const F = G.S.fam;
 if (!F.pt || F.kids.length !== 2 || G.famCanSetup()) fail.push("la familia no se guarda o se puede preparar dos veces");
 if (!G.famSameSex()) fail.push("pareja del mismo sexo no detectada");
 const counts = {}, rels = [];
@@ -38,10 +38,10 @@ const pref = {kidfb: x => (G.famKid(x.kid).fn === "Leo" ? 3 : 2), kidsign: 0, fa
 const res0 = G.resolvePending;
 G.resolvePending = function (ch) { const x = G.S.pend[0]; if (x) counts[x.k + (x.id ? ":" + x.id : "")] = (counts[x.k + (x.id ? ":" + x.id : "")] || 0) + 1; return res0.apply(this, arguments); };
 const y0 = G.S.yr;
-for (let y = 1; y <= 4; y++) { untilYr(y0 + y, pref); if (G.S.m.fam.pt) rels.push(Math.round(G.S.m.fam.pt.rel)); }
-const leo = G.S.m.fam.kids.find(k => k.fn === "Leo"), ana = G.S.m.fam.kids.find(k => k.fn === "Ana");
+for (let y = 1; y <= 4; y++) { untilYr(y0 + y, pref); if (G.S.fam.pt) rels.push(Math.round(G.S.fam.pt.rel)); }
+const leo = G.S.fam.kids.find(k => k.fn === "Leo"), ana = G.S.fam.kids.find(k => k.fn === "Ana");
 notes.push("decisiones: " + JSON.stringify(counts));
-notes.push("relación por temporada: " + rels.join(" → ") + (G.S.m.fam.pt ? "" : " (ruptura)") + " · hijos: " + G.S.m.fam.kids.map(k => k.fn + (k.ad ? " (adoptado/a, " : " (") + G.famAge(k) + ")").join(", "));
+notes.push("relación por temporada: " + rels.join(" → ") + (G.S.fam.pt ? "" : " (ruptura)") + " · hijos: " + G.S.fam.kids.map(k => k.fn + (k.ad ? " (adoptado/a, " : " (") + G.famAge(k) + ")").join(", "));
 if (!leo.fb) fail.push("Leo no empieza como futbolista a los 16");
 else {
   const I = G.famKidInfo(leo);
@@ -57,16 +57,16 @@ else {
   if (ana.fb.club !== -1 || !ana.fb.cn) fail.push("tu hija no juega en el fútbol femenino");
   if (G.famSignable(ana)) fail.push("se puede fichar a tu hija para el equipo masculino");
 }
-if (G.S.m.fam.kids.some(k => k.ad === false && G.famAge(k) < 3)) fail.push("una pareja del mismo sexo tiene un bebé en vez de adoptar");
+if (G.S.fam.kids.some(k => k.ad === false && G.famAge(k) < 3)) fail.push("una pareja del mismo sexo tiene un bebé en vez de adoptar");
 /* ruptura si la relación cae del todo */
 const sv = G.serialize();
-G.S.m.fam.pt.rel = 9;
+G.S.fam.pt.rel = 9;
 G.S.m.flags.famT = 0;
-let g2 = 0; const bi = G.S.bi, yy = G.S.yr; while (G.S.m.fam.pt && g2++ < 4000 && G.S.yr <= yy + 1) step({fam: x => (x.id === "crisis" ? 2 : 2)});
-if (G.S.m.fam.pt) fail.push("con la relación por los suelos no hay ruptura");
-else notes.push("ruptura: " + G.S.m.fam.ex + " · " + (G.S.m.fam.exName || ""));
+let g2 = 0; const bi = G.S.bi, yy = G.S.yr; while (G.S.fam.pt && g2++ < 4000 && G.S.yr <= yy + 1) step({fam: x => (x.id === "crisis" ? 2 : 2)});
+if (G.S.fam.pt) fail.push("con la relación por los suelos no hay ruptura");
+else notes.push("ruptura: " + G.S.fam.ex + " · " + (G.S.fam.exName || ""));
 G.restore(sv);
-if (!G.S.m.fam || G.S.m.fam.kids.length < 2) fail.push("la familia no se guarda");
+if (!G.S.fam || G.S.fam.kids.length < 2) fail.push("la familia no se guarda");
 
 /* ---------- relevo con Leo (mismo fútbol) ---------- */
 let sv2 = G.serialize();
@@ -83,7 +83,7 @@ if (!G.S.p.seasons.length) fail.push("la carrera del hijo no avanza");
 
 /* ---------- relevo con Ana (cambia al fútbol femenino) ---------- */
 G = mk(); G.restore(sv2); G.mgrRetire();
-const anaK = G.S.m.fam.kids.find(k => k.fn === "Ana");
+const anaK = G.S.fam.kids.find(k => k.fn === "Ana");
 const famClubs0 = Object.keys(G.S.dyn.clubs).length;
 G.dynHeirStart({kid: anaK.id});
 const S2 = G.S;
@@ -105,6 +105,36 @@ G.retire();
 G.dynHeirStart({fn: "Nita", pos: "MC", foot: "Zurdo", g: "f"});
 notes.push("jugador tailandés (" + thClub + ", " + thLg + ") → hija: " + G.S.p.fn + " " + G.S.p.ln + " · " + G.clubName(G.S.p.club) + " (" + G.W.lg[G.S.cl[G.S.p.club]].n + ") · mundo " + G.S.g);
 if (G.S.g !== "f" || G.S.p.ln !== "Relevo") fail.push("elegir hija no cambia al fútbol femenino");
+untilYr(G.S.yr + 1);
+
+/* ---------- modo jugador: pareja, decisiones, y la familia sigue al pasar a entrenador y al relevo ---------- */
+G = mk();
+G.newCareer({fn: "Raúl", ln: "Pareja", nat: "ES", pos: "MC", foot: "Diestro", age: 24, talent: "joya", club: -1, ev: 1, seed: 77});
+if (!G.famCanSetup()) fail.push("en modo jugador no se puede preparar la familia");
+G.famSetup({pt: {fn: "Laura", g: "f"}, kids: [{fn: "Bruno", g: "m", age: 3}]});
+const pc = {};
+const rp0 = G.resolvePending;
+G.resolvePending = function (ch) { const x = G.S.pend[0]; if (x) pc[x.k + (x.id ? ":" + x.id : "")] = (pc[x.k + (x.id ? ":" + x.id : "")] || 0) + 1; return rp0.apply(this, arguments); };
+const yp = G.S.yr; untilYr(yp + 4, {pfam: 0});
+const PF = G.S.fam;
+notes.push("jugador · decisiones de pareja: " + JSON.stringify(Object.fromEntries(Object.entries(pc).filter(([k]) => /fam/.test(k)))) + " · relación " + (PF.pt ? Math.round(PF.pt.rel) : "ruptura") + " · hijos " + PF.kids.map(k => k.fn + "(" + G.famAge(k) + ")").join(", "));
+if (!Object.keys(pc).some(k => /^pfam/.test(k))) fail.push("en modo jugador no salen decisiones de pareja");
+let gr = 0; while (G.S.ph !== "off" && gr++ < 30000) step();
+G.retire(); G.startManager();
+let gj = 0; while (G.S.ph === "mjob" && gj++ < 200) step();
+const MF = G.famOf();
+notes.push("de jugador a entrenador: pareja " + (MF.pt ? MF.pt.fn : "—") + " · hijos " + MF.kids.map(k => k.fn).join(", ") + " · modo " + G.S.mode);
+if (MF !== G.S.fam || (PF.pt && (!MF.pt || MF.pt.fn !== PF.pt.fn)) || MF.kids.length !== PF.kids.length) fail.push("la familia no sigue al pasar a entrenador");
+untilYr(G.S.yr + 1);
+const pt0 = MF.pt ? MF.pt.fn : null;
+G.mgrRetire();
+const dm = G.dynCur();
+G.dynHeirStart({fn: "Bruno", pos: "DC", foot: "Diestro", g: "m"});
+const HF = G.S.fam;
+notes.push("relevo de Bruno: padres " + JSON.stringify(HF.par) + " · hermanos " + HF.kids.map(k => k.fn + (k.sib ? "*" : "")).join(", ") + " · pareja propia " + (HF.pt ? HF.pt.fn : "no") + " · árbol: " + (dm && dm.pt ? "con " + dm.pt : "sin pareja"));
+if (!HF.par || HF.par.fn.indexOf("Raúl") < 0 || (pt0 && HF.par.pt !== pt0)) fail.push("el relevo no conserva a sus padres");
+if (HF.kids.some(k => k.fn === "Bruno")) fail.push("quien toma el relevo sigue en la lista de hijos");
+if (pt0 && (!dm || dm.pt !== pt0)) fail.push("la dinastía no recuerda a la pareja");
 untilYr(G.S.yr + 1);
 
 /* ---------- ligas de Tailandia ---------- */
