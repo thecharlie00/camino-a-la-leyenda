@@ -28,6 +28,8 @@ fs.mkdirSync(OUT, { recursive: true });
     if (!/\+8/.test(st.chip)) fail.push(g + ": no se ve la confianza del minijuego");
     if (!/Pedir explicaciones/.test(st.dec)) fail.push(g + ": no se ve la decisión de minutos");
     if (g === "f" && /míster/.test(st.card + st.dec)) fail.push("en femenino sigue diciendo «míster»");
+    /* la protección de mala suerte no se anuncia */
+    if (await p.$(".blpluck")) fail.push(g + ": se anuncia la protección de mala suerte");
     await p.evaluate(() => { const d = document.querySelector(".card.decision"); if (d) d.scrollIntoView({block: "center"}); });
     await p.screenshot({ path: path.join(OUT, "01-banquillo-" + g + ".png") });
     await p.evaluate(() => document.querySelector('.card.decision [data-a="choose"]').click());

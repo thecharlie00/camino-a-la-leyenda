@@ -35522,7 +35522,8 @@
  "Conjura": {
   "w": [
    "blp47.js:154",
-   "blp47.js:179"
+   "blp47.js:180",
+   "blp47.js:195"
   ],
   "ctx": "var fx = o.bud ? {bud: extra, board: -1} : o.conj ? {sqMor: 4, buff: {v: 1, b: 1, n: tr(\"Conjura\")}} : o.fx;"
  },
@@ -35541,7 +35542,7 @@
  },
  "{n} partidos sin ganar: el vestuario se conjura y aprieta en los entrenamientos (+{v} de nivel el resto del tramo).": {
   "w": [
-   "blp47.js:181"
+   "blp47.js:183"
   ],
   "ctx": "if (S.bnews) S.bnews.push({t: \"ok\", x: tr(\"{n} partidos sin ganar: el vestuario se conjura y aprieta en los entrenamientos (+{v} de nivel el resto del tramo).\", {n: b.mwl, v: fmtNeed(BLP.wlBuff)})});"
  },

@@ -60,6 +60,26 @@ G.blpMgResult(false); if (G.blpMgBonus() !== 12) fail.push("la confianza no sube
 G.blpMgResult(false); if (G.blpMgBonus() !== 12) fail.push("la confianza no tiene tope");
 G.blpMgResult(true); if (G.blpMgBonus() !== 0) fail.push("la confianza no se reinicia al acertar");
 
+/* mala suerte en las decisiones */
+G.S.pend = [{k: "ev", id: "x"}]; G.S.blp.bad = 0;
+const opt = p0 => ({p: p0, ok: {txt: "bien"}, ko: {txt: "mal"}});
+const goodP = (p0) => G.outcomesOf(opt(p0)).filter(u => u.good).reduce((t, u) => t + u.p, 0);
+const lk = [];
+[0, 1, 2, 3].forEach(n => { G.S.blp.bad = n; lk.push([n, Math.round(goodP(0.5) * 100), Math.round(goodP(0.3) * 100)]); });
+notes.push("mala suerte (seguidas → % con 50 / con 30): " + lk.map(x => x[0] + "→" + x[1] + "/" + x[2]).join(" · "));
+if (lk[0][1] !== 50 || lk[1][1] !== 62 || lk[2][1] !== 74 || lk[3][1] !== 86 || lk[3][2] !== 66) fail.push("la protección de mala suerte no sigue su fórmula");
+G.S.blp.bad = 3; G.S.pend = [{k: "moment", id: "x"}]; G.S.blp.mbad = 0;
+G.S.blp.mbad = 5; if (Math.round(goodP(0.8) * 100) !== 90) fail.push("la ayuda supera el 90 %"); G.S.blp.mbad = 0;
+if (Math.round(goodP(0.5) * 100) !== 50) fail.push("las jugadas de partido comparten la cuenta con las decisiones");
+G.S.pend = [];
+G.S.blp.bad = 2; const m0 = G.S.p.mor;
+G.feed({t: "decision", good: false, pct: 40, chips: [], title: "x"});
+if (G.S.blp.bad !== 3 || G.S.p.mor < m0 + 3 - 0.01) fail.push("a la tercera mala no hay consuelo");
+G.feed({t: "decision", good: true, pct: 100, chips: [], title: "x"});
+if (G.S.blp.bad !== 0) fail.push("la racha no se reinicia al salir bien");
+G.S.blp.mbad = 1; G.feed({t: "moment", good: false, pct: 30, chips: [], title: "x"});
+if (G.S.blp.mbad !== 2 || G.S.blp.bad !== 0) fail.push("las jugadas no llevan su propia cuenta");
+
 /* ---------- míster ---------- */
 G = mk(); G.buildWorld("m");
 const club = G.W.clubs.findIndex(c => c.lg0 === 0);

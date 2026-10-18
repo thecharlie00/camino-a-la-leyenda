@@ -41,5 +41,14 @@
  "Confianza +{n} en tu próximo penalti o falta": "Fiducia +{n} sul tuo prossimo rigore o punizione",
  "Antes de despedirte, la directiva te da un ultimátum": "Prima di esonerarti, la dirigenza ti dà un ultimatum",
  "Tras varios partidos sin jugar, más opciones de ser titular y decisiones para cambiarlo": "Dopo diverse partite senza giocare, più possibilità di essere titolare e decisioni per cambiare le cose",
- "Más confianza tras fallar penaltis y vuelta con hambre tras una lesión": "Più fiducia dopo i rigori sbagliati e ritorno affamato dopo un infortunio"
+ "Más confianza tras fallar penaltis y vuelta con hambre tras una lesión": "Più fiducia dopo i rigori sbagliati e ritorno affamato dopo un infortunio",
+ "Racha de mala suerte: +{n} % de éxito": "Serie sfortunata: +{n} % di probabilità di successo",
+ "Las malas rachas curten": "Le serie negative temprano",
+ "Si varias decisiones salen mal seguidas, la suerte se pone de tu lado": "Se più decisioni vanno male di fila, la fortuna si mette dalla tua parte",
+ "Llevas {n} jugadas seguidas que salieron mal: esta vez, las opciones con un 40 % o más salen bien seguro, y el resto tiene +{p} % de éxito.": "{n} giocate di fila sono andate male: stavolta le opzioni dal 40 % in su riescono di sicuro, e le altre hanno +{p} % di probabilità di successo.",
+ "Llevas {n} decisiones seguidas que salieron mal: esta vez, las opciones con un 40 % o más salen bien seguro, y el resto tiene +{p} % de éxito.": "{n} decisioni di fila sono andate male: stavolta le opzioni dal 40 % in su riescono di sicuro, e le altre hanno +{p} % di probabilità di successo.",
+ "Después de {n} jugada que salió mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Dopo {n} giocata andata male, la fortuna si mette dalla tua parte: +{p} % di probabilità di successo (già incluso nelle percentuali).",
+ "Después de {n} jugadas seguidas que salieron mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Dopo {n} giocate di fila andate male, la fortuna si mette dalla tua parte: +{p} % di probabilità di successo (già incluso nelle percentuali).",
+ "Después de {n} decisión que salió mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Dopo {n} decisione andata male, la fortuna si mette dalla tua parte: +{p} % di probabilità di successo (già incluso nelle percentuali).",
+ "Después de {n} decisiones seguidas que salieron mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Dopo {n} decisioni di fila andate male, la fortuna si mette dalla tua parte: +{p} % di probabilità di successo (già incluso nelle percentuali)."
 }

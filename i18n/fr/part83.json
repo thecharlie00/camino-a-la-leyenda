@@ -41,5 +41,14 @@
  "Confianza +{n} en tu próximo penalti o falta": "Confiance +{n} sur ton prochain penalty ou coup franc",
  "Antes de despedirte, la directiva te da un ultimátum": "Avant de te limoger, la direction te pose un ultimatum",
  "Tras varios partidos sin jugar, más opciones de ser titular y decisiones para cambiarlo": "Après plusieurs matchs sans jouer, plus de chances d'être titulaire et des choix pour changer la donne",
- "Más confianza tras fallar penaltis y vuelta con hambre tras una lesión": "Plus de confiance après des penaltys ratés, et un retour affamé après une blessure"
+ "Más confianza tras fallar penaltis y vuelta con hambre tras una lesión": "Plus de confiance après des penaltys ratés, et un retour affamé après une blessure",
+ "Racha de mala suerte: +{n} % de éxito": "Série de malchance : +{n} % de chances de réussite",
+ "Las malas rachas curten": "Les mauvaises séries forgent le caractère",
+ "Si varias decisiones salen mal seguidas, la suerte se pone de tu lado": "Si plusieurs décisions tournent mal d'affilée, la chance passe de ton côté",
+ "Llevas {n} jugadas seguidas que salieron mal: esta vez, las opciones con un 40 % o más salen bien seguro, y el resto tiene +{p} % de éxito.": "{n} actions d'affilée ont mal tourné : cette fois, les options à 40 % ou plus réussissent à coup sûr, et les autres ont +{p} % de chances de réussite.",
+ "Llevas {n} decisiones seguidas que salieron mal: esta vez, las opciones con un 40 % o más salen bien seguro, y el resto tiene +{p} % de éxito.": "{n} décisions d'affilée ont mal tourné : cette fois, les options à 40 % ou plus réussissent à coup sûr, et les autres ont +{p} % de chances de réussite.",
+ "Después de {n} jugada que salió mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Après {n} action qui a mal tourné, la chance passe de ton côté : +{p} % de chances de réussite (déjà inclus dans les pourcentages).",
+ "Después de {n} jugadas seguidas que salieron mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Après {n} actions d'affilée qui ont mal tourné, la chance passe de ton côté : +{p} % de chances de réussite (déjà inclus dans les pourcentages).",
+ "Después de {n} decisión que salió mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Après {n} décision qui a mal tourné, la chance passe de ton côté : +{p} % de chances de réussite (déjà inclus dans les pourcentages).",
+ "Después de {n} decisiones seguidas que salieron mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Après {n} décisions d'affilée qui ont mal tourné, la chance passe de ton côté : +{p} % de chances de réussite (déjà inclus dans les pourcentages)."
 }

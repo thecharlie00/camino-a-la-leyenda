@@ -203,3 +203,49 @@ if (typeof MPH !== "undefined") MPH.ult = {
   var _h = dynHeirStart;
   dynHeirStart = function () { var r = _h.apply(this, arguments); if (r && S) S.blp = null; return r; };
 })();
+
+/* ---------- mala suerte en las decisiones (jugador y míster) ----------
+   Cada decisión o jugada con porcentaje que sale mal seguida suma +12 puntos de probabilidad de éxito
+   a la siguiente (máx. +36, y nunca por encima del 90 %: ninguna opción pasa a ser segura).
+   Las jugadas de partido y el resto de decisiones llevan la cuenta por separado.
+   Los porcentajes que ves en las opciones ya lo incluyen; se reinicia cuando una sale bien.
+   A la tercera seguida, en silencio: +3 de moral y +2 de profesionalidad (jugador) o +3 de química (míster).
+   No se anuncia en ningún sitio: el jugador tiene que sentir que sus decisiones pesan, no que le ayudan. */
+BLP.luckStep = 0.12; BLP.luckMax = 0.36; BLP.luckCap = 0.9;
+/* dos contadores: jugadas de partido (momentos) y el resto de decisiones */
+function blpLuckKey() { var x = S && S.pend && S.pend[0]; return x && (x.k === "moment" || x.k === "mmom") ? "mbad" : "bad"; }
+function blpBad(k) { return S && S.blp ? S.blp[k || blpLuckKey()] || 0 : 0; }
+function blpLuck(k) { return Math.min(BLP.luckMax, blpBad(k) * BLP.luckStep); }
+(function () {
+  if (typeof outcomesOf !== "function") return;
+  var _oo = outcomesOf;
+  outcomesOf = function (o) {
+    var list = _oo.apply(this, arguments), b = blpLuck();
+    if (!b || list.length < 2) return list;
+    var G = 0, B = 0;
+    list.forEach(function (x) { if (x.neu) return; if (x.good) G += x.p; else B += x.p; });
+    var d = Math.min(b, B, Math.max(0, BLP.luckCap - G));
+    if (G <= 0 || d <= 0) return list;
+    list.forEach(function (x) { if (x.neu) return; x.p = x.good ? x.p * (G + d) / G : x.p * (B - d) / B; x.luck = true; });
+    return list;
+  };
+})();
+(function () {
+  if (typeof feed !== "function") return;
+  var _fd = feed;
+  feed = function (card) {
+    if (S && card && (card.t === "decision" || card.t === "moment") && typeof card.good === "boolean" && card.pct != null) {
+      /* sin avisos: el jugador solo ve los porcentajes, que ya incluyen la ayuda */
+      var b = blpOf(), key = card.t === "moment" ? "mbad" : "bad";
+      if (card.good) b[key] = 0;
+      else {
+        b[key] = (b[key] || 0) + 1;
+        if (b[key] === 3) {
+          if (S.mode === "mgr" && S.m) S.m.chem = clamp(S.m.chem + 3, 0, 100);
+          else if (S.p) { S.p.mor = clamp(S.p.mor + 3, 0, 100); S.p.prof = clamp(S.p.prof + 2, 0, 100); }
+        }
+      }
+    }
+    return _fd.apply(this, arguments);
+  };
+})();

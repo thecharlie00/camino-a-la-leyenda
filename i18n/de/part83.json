@@ -41,5 +41,14 @@
  "Confianza +{n} en tu próximo penalti o falta": "Selbstvertrauen +{n} beim nächsten Elfmeter oder Freistoß",
  "Antes de despedirte, la directiva te da un ultimátum": "Bevor er dich entlässt, stellt dir der Vorstand ein Ultimatum",
  "Tras varios partidos sin jugar, más opciones de ser titular y decisiones para cambiarlo": "Nach mehreren Spielen ohne Einsatz: bessere Chancen auf die Startelf und Entscheidungen, um es zu ändern",
- "Más confianza tras fallar penaltis y vuelta con hambre tras una lesión": "Mehr Selbstvertrauen nach verschossenen Elfmetern und hungrig zurück nach einer Verletzung"
+ "Más confianza tras fallar penaltis y vuelta con hambre tras una lesión": "Mehr Selbstvertrauen nach verschossenen Elfmetern und hungrig zurück nach einer Verletzung",
+ "Racha de mala suerte: +{n} % de éxito": "Pechsträhne: +{n} % Erfolgschance",
+ "Las malas rachas curten": "Pechsträhnen härten ab",
+ "Si varias decisiones salen mal seguidas, la suerte se pone de tu lado": "Gehen mehrere Entscheidungen hintereinander schief, steht das Glück auf deiner Seite",
+ "Llevas {n} jugadas seguidas que salieron mal: esta vez, las opciones con un 40 % o más salen bien seguro, y el resto tiene +{p} % de éxito.": "{n} Aktionen in Folge sind schiefgegangen: Diesmal klappen Optionen ab 40 % sicher, und die übrigen haben +{p} % Erfolgschance.",
+ "Llevas {n} decisiones seguidas que salieron mal: esta vez, las opciones con un 40 % o más salen bien seguro, y el resto tiene +{p} % de éxito.": "{n} Entscheidungen in Folge sind schiefgegangen: Diesmal klappen Optionen ab 40 % sicher, und die übrigen haben +{p} % Erfolgschance.",
+ "Después de {n} jugada que salió mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Nach {n} misslungenen Aktion steht das Glück auf deiner Seite: +{p} % Erfolgschance (in den Prozenten schon enthalten).",
+ "Después de {n} jugadas seguidas que salieron mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Nach {n} misslungenen Aktionen in Folge steht das Glück auf deiner Seite: +{p} % Erfolgschance (in den Prozenten schon enthalten).",
+ "Después de {n} decisión que salió mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Nach {n} misslungenen Entscheidung steht das Glück auf deiner Seite: +{p} % Erfolgschance (in den Prozenten schon enthalten).",
+ "Después de {n} decisiones seguidas que salieron mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "Nach {n} misslungenen Entscheidungen in Folge steht das Glück auf deiner Seite: +{p} % Erfolgschance (in den Prozenten schon enthalten)."
 }

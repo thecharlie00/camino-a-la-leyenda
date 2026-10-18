@@ -41,5 +41,14 @@
  "Confianza +{n} en tu próximo penalti o falta": "Confidence +{n} on your next penalty or free kick",
  "Antes de despedirte, la directiva te da un ultimátum": "Before sacking you, the board gives you an ultimatum",
  "Tras varios partidos sin jugar, más opciones de ser titular y decisiones para cambiarlo": "After several games without playing, a better chance of starting and choices to change it",
- "Más confianza tras fallar penaltis y vuelta con hambre tras una lesión": "More confidence after missed penalties, and back hungry after an injury"
+ "Más confianza tras fallar penaltis y vuelta con hambre tras una lesión": "More confidence after missed penalties, and back hungry after an injury",
+ "Racha de mala suerte: +{n} % de éxito": "Bad luck streak: +{n} % chance of success",
+ "Las malas rachas curten": "Bad runs toughen you up",
+ "Si varias decisiones salen mal seguidas, la suerte se pone de tu lado": "If several decisions go wrong in a row, luck comes over to your side",
+ "Llevas {n} jugadas seguidas que salieron mal: esta vez, las opciones con un 40 % o más salen bien seguro, y el resto tiene +{p} % de éxito.": "{n} plays in a row have gone wrong: this time, options at 40 % or more are guaranteed to work, and the rest get +{p} % chance of success.",
+ "Llevas {n} decisiones seguidas que salieron mal: esta vez, las opciones con un 40 % o más salen bien seguro, y el resto tiene +{p} % de éxito.": "{n} decisions in a row have gone wrong: this time, options at 40 % or more are guaranteed to work, and the rest get +{p} % chance of success.",
+ "Después de {n} jugada que salió mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "After {n} play that went wrong, luck comes over to your side: +{p} % chance of success (already included in the percentages).",
+ "Después de {n} jugadas seguidas que salieron mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "After {n} plays in a row that went wrong, luck comes over to your side: +{p} % chance of success (already included in the percentages).",
+ "Después de {n} decisión que salió mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "After {n} decision that went wrong, luck comes over to your side: +{p} % chance of success (already included in the percentages).",
+ "Después de {n} decisiones seguidas que salieron mal, la suerte se pone de tu lado: +{p} % de éxito (ya incluido en los porcentajes).": "After {n} decisions in a row that went wrong, luck comes over to your side: +{p} % chance of success (already included in the percentages)."
 }
