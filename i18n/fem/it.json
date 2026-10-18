@@ -1426,5 +1426,8 @@
  "Llevas {n} partidos sin apenas pisar el césped. Cada partido que pasa, el míster se plantea más darte una oportunidad, pero puedes mover ficha.": "Sono {n} partite che metti appena piede in campo. A ogni partita l'allenatrice pensa sempre di più a darti un'occasione, ma puoi fare la tua mossa.",
  "El míster te ha prometido la titularidad en el próximo partido.": "L'allenatrice ti ha promesso una maglia da titolare nella prossima partita.",
  "El míster se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.": "L'allenatrice ci sta pensando: +{p} % di probabilità di essere titolare nella prossima partita.",
- "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Se continui a non giocare, l'allenatrice comincerà a pensare di darti un'occasione."
+ "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Se continui a non giocare, l'allenatrice comincerà a pensare di darti un'occasione.",
+ "{name} firma por tu club. Padre y entrenador, en el mismo vestuario.": "{name} firma per il tuo club. Madre e allenatrice, nello stesso spogliatoio.",
+ "Nace {name}. Eres padre de una niña preciosa.": "Nasce {name}. Sei madre di una bambina bellissima.",
+ "Nace {name}. Eres padre de un niño precioso.": "Nasce {name}. Sei madre di un bambino bellissimo."
 }

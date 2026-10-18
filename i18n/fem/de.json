@@ -1357,5 +1357,8 @@
  "te quieren de titular": "sie wollen dich als Stammspielerin",
  "El míster te ha prometido la titularidad en el próximo partido.": "Die Trainerin hat dir für das nächste Spiel einen Platz in der Startelf versprochen.",
  "El míster se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.": "Die Trainerin denkt darüber nach: +{p} % Chance auf die Startelf im nächsten Spiel.",
- "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Wenn du weiter nicht spielst, wird die Trainerin überlegen, dir eine Chance zu geben."
+ "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Wenn du weiter nicht spielst, wird die Trainerin überlegen, dir eine Chance zu geben.",
+ "{name} firma por tu club. Padre y entrenador, en el mismo vestuario.": "{name} unterschreibt bei deinem Verein. Mutter und Trainerin in derselben Kabine.",
+ "Nace {name}. Eres padre de una niña preciosa.": "{name} wird geboren. Du bist Mutter eines wunderschönen Mädchens.",
+ "Nace {name}. Eres padre de un niño precioso.": "{name} wird geboren. Du bist Mutter eines wunderschönen Jungen."
 }

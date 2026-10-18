@@ -1368,5 +1368,8 @@
  "Llevas {n} partidos sin apenas pisar el césped. Cada partido que pasa, el míster se plantea más darte una oportunidad, pero puedes mover ficha.": "Llevas {n} partidos sin apenas pisar el césped. Cada partido que pasa, la entrenadora se plantea más darte una oportunidad, pero puedes mover ficha.",
  "El míster te ha prometido la titularidad en el próximo partido.": "La entrenadora te ha prometido la titularidad en el próximo partido.",
  "El míster se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.": "La entrenadora se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.",
- "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Si sigues sin jugar, la entrenadora empezará a plantearse darte una oportunidad."
+ "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Si sigues sin jugar, la entrenadora empezará a plantearse darte una oportunidad.",
+ "{name} firma por tu club. Padre y entrenador, en el mismo vestuario.": "{name} firma por tu club. Madre y entrenadora, en el mismo vestuario.",
+ "Nace {name}. Eres padre de una niña preciosa.": "Nace {name}. Eres madre de una niña preciosa.",
+ "Nace {name}. Eres padre de un niño precioso.": "Nace {name}. Eres madre de un niño precioso."
 }
