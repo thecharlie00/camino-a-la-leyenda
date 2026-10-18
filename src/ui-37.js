@@ -96,7 +96,7 @@
   var B = typeof BUILD !== "undefined" ? BUILD : {v: "?", code: 0, t: ""};
   function chan() { return window.AndroidBridge ? "LIVE" : "WEB"; }
   function tagTxt() { return "v" + B.v + " (" + B.code + ") · " + chan(); }
-  var NOTES = [N_("Caras para todos los jugadores de tu plantilla"), N_("Posiciones secundarias y media física visible"), N_("Mascota: avisos, estilo y accesorios")];
+  var NOTES = [N_("14 divisiones nuevas con play-off de ascenso"), N_("Torneo de verano, juvenil y Copa juvenil"), N_("Día de cierre del mercado en directo")];
   function sysInfo() {
     var n = 0; try { n = (U.ui().slots || []).length; } catch (e) {}
     return ["Camino a la Leyenda " + tagTxt(), "Build: " + (B.t || "?"), "Idioma: " + LANG, "Modo: " + (S ? (S.mode || "p") + (S.g === "f" ? " (f)" : "") : "-"), "Temporada: " + (S ? S.yr : "-"),

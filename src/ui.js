@@ -389,7 +389,7 @@
     var gnow = v === "modes" ? UI.gsel : v === "create" && UI.cr ? UI.cr.g : (v === "game" || v === "draft") && S ? S.g : null;
     setFem(gnow === "f");
     /* mundo (ligas y clubes) del fútbol masculino o femenino según la partida o la creación en curso */
-    var wkNow = v === "create" && UI.cr ? (UI.cr.g === "f" ? "f" : "m") : (v === "game" || v === "draft") && S ? worldKey(S) : null;
+    var wkNow = v === "create" && UI.cr ? (UI.cr.g === "f" ? "f2" : "m") : (v === "game" || v === "draft") && S ? worldKey(S) : null;
     if (wkNow && W.wk !== wkNow) { buildWorld(wkNow); if (S && worldKey(S) === wkNow && S.custom) applyCustom(); }
     if (v === "lang") $app.innerHTML = langView();
     else if (v === "load") $app.innerHTML = loadView();
@@ -1042,15 +1042,17 @@
     var st = standings(li), L = W.lg[li], n = st.length, euro = L.eu ? L.eu[0] + L.eu[1] + L.eu[2] : L.sa ? L.sa[0] + L.sa[1] : L.cc || L.afc || L.caf || 0;
     var ucl = L.eu ? L.eu[0] : L.sa ? L.sa[0] : euro;
     var up = L.upI >= 0 ? lgUpN(li) : 0, down = L.downI >= 0 ? L.rel : 0;
+    /* 4.5: con play-off, sube directo uno menos y el tramo del play-off va en ámbar */
+    var po = up && L.po ? L.po : null, upD = po ? up - 1 : up;
     var o = '<div class="tablewrap"><table><thead><tr><th>#</th><th>' + tr("Club") + '</th><th>' + tr("PJ") + '</th><th>' + tr("DG") + '</th><th>' + tr("Pts") + '</th></tr></thead><tbody>';
     st.forEach(function (x, i) {
-      var z = i < up ? "z2" : i < ucl && !up ? "z1" : i < euro && !up ? "z2" : i >= n - down ? "z3" : "";
+      var z = i < upD ? "z2" : po && i >= po[0] - 1 && i < po[1] ? "z4" : i < ucl && !up ? "z1" : i < euro && !up ? "z2" : i >= n - down ? "z3" : "";
       var r = x.r;
       o += "<tr" + (x.c === highlight ? ' class="me"' : "") + '><td class="' + z + '">' + (i + 1) + '</td><td class="club"><div class="cl">' + crest(x.c) + "<span>" + h(clubName(x.c)) + "</span></div></td><td>" + r[0] + "</td><td>" + (r[4] - r[5] > 0 ? "+" : "") + (r[4] - r[5]) + "</td><td><b>" + r[6] + "</b></td></tr>";
     });
     o += "</tbody></table></div>";
     var leg = [];
-    if (up) leg.push('<span><i style="background:var(--grass)"></i>' + tr("Ascenso") + "</span>");
+    if (up) { leg.push('<span><i style="background:var(--grass)"></i>' + tr("Ascenso") + "</span>"); if (po) leg.push('<span><i style="background:var(--led)"></i>' + tr("Play-off de ascenso") + "</span>"); }
     else if (ucl) { leg.push('<span><i style="background:var(--sky)"></i>' + (L.eu ? tr("Champions") : L.sa ? tr("Libertadores") : tr("Torneo continental")) + "</span>"); if (euro > ucl) leg.push('<span><i style="background:var(--grass)"></i>' + (L.eu ? tr("Europa / Conference") : L.sa ? tr("Sudamericana") : "") + "</span>"); }
     if (down) leg.push('<span><i style="background:var(--red)"></i>' + tr("Descenso") + "</span>");
     return o + (leg.length ? '<div class="legend">' + leg.join("") + "</div>" : "");

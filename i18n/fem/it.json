@@ -1396,5 +1396,14 @@
  "{n} ha una condizione fisica di {v}: ti consiglio di farlo riposare nella prossima partita.": "{n} ha una condizione fisica di {v}: ti consiglio di farla riposare nella prossima partita.",
  "Un po' stanco: rende un po' meno e il rischio di infortunio sale.": "Un po' stanca: rende un po' meno e il rischio di infortunio sale.",
  "Alto rischio di infortunio e calo nel secondo tempo. Meglio farlo riposare.": "Alto rischio di infortunio e calo nel secondo tempo. Meglio farla riposare.",
- "Volti per tutti i giocatori della rosa": "Volti per tutte le giocatrici della rosa"
+ "Volti per tutti i giocatori della rosa": "Volti per tutte le giocatrici della rosa",
+ "Eliminados en {round}": "Eliminate in {round}",
+ "¡Campeones de la Liga juvenil!": "Campionesse del campionato Primavera!",
+ "¡Campeones de la Youth League!": "Campionesse della Youth League!",
+ "Campeones": "Campionesse",
+ "Subcampeones": "Seconde",
+ "Llegas fresco, aunque al míster le gusta ver ambición": "Arrivi fresca, anche se all'allenatrice piace vedere ambizione",
+ "Rotar y probar a los jóvenes": "Fare turnover e provare le giovani",
+ "¡Vendido! {name} se va al {club} por {fee}.": "Venduta! {name} va al {club} per {fee}.",
+ "¡Fichado al límite! {name} llega del {club} por {fee}.": "Presa all'ultimo! {name} arriva dal {club} per {fee}."
 }

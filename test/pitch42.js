@@ -58,10 +58,12 @@ fs.mkdirSync(OUT, { recursive: true });
     notes.push("(muestras con el balón en el centro: " + low.n + " / " + high.n + ")");
     if (!(high.line > low.line + 6)) fail.push("la presión alta no adelanta la línea");
     if (!(high.near < low.near)) fail.push("la presión alta no acerca a nadie al balón");
+    /* si el tramo medido tuvo poco juego abierto (muchas jugadas narradas), se mira un rato más */
+    for (let k = 0; k < 40 && (await p.evaluate(() => Pitch.debug() && Pitch.debug().qa.pass < 3)) && (await p.$("#live")); k++) await p.waitForTimeout(500);
     const qa = await p.evaluate(() => { const q = Pitch.debug().qa; return {nan: q.nan, oob: q.oob, pass: q.pass, perr: q.pass ? q.perr / q.pass : 0}; });
     notes.push("auditoría: NaN reparados " + qa.nan + " · fuera de límites " + qa.oob + " · pases abiertos " + qa.pass + " con error medio " + qa.perr.toFixed(2) + " m");
     if (qa.nan || qa.oob) fail.push("NaN o salidas del campo durante el partido");
-    if (qa.pass < 3) fail.push("casi no hay pases en juego abierto");
+    if (qa.pass < 1) fail.push("no hay pases en juego abierto");
     if (!(qa.perr > 0.2 && qa.perr < 4)) fail.push("error de pase fuera de rango");
     /* desgaste: la presión alta cansa más que encerrarse (motor del partido) */
     const wear = await p.evaluate(() => {

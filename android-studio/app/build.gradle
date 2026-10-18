@@ -19,8 +19,8 @@ android {
         applicationId 'com.caminoleyenda.app'
         minSdk 24
         targetSdk 36
-        versionCode 34
-        versionName '4.1'
+        versionCode 35
+        versionName '4.5'
     }
 
     buildFeatures {

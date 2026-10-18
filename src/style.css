@@ -194,7 +194,7 @@ td.club .cl { display: flex; align-items: center; gap: 7px; min-width: 0; }
 td.club span { overflow: hidden; text-overflow: ellipsis; }
 tr.me td { background: rgba(255,178,30,.10); font-weight: 700; }
 tr.me td:first-child { box-shadow: inset 3px 0 0 var(--led); }
-td.z1 { box-shadow: inset 3px 0 0 var(--sky); } td.z2 { box-shadow: inset 3px 0 0 var(--grass); } td.z3 { box-shadow: inset 3px 0 0 var(--red); }
+td.z1 { box-shadow: inset 3px 0 0 var(--sky); } td.z2 { box-shadow: inset 3px 0 0 var(--grass); } td.z3 { box-shadow: inset 3px 0 0 var(--red); } td.z4 { box-shadow: inset 3px 0 0 var(--led); }
 .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--mist); margin-top: 8px; }
 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
 
@@ -1396,3 +1396,39 @@ html.wide .lpanel > #lvbody { grid-column: 2; grid-row: 1 / 3; }
 html.wide .lpanel > #lvctl { grid-column: 2; grid-row: 3; }
 html.wide .lpanel > :not(#lvtop):not(#lvpitch):not(#lvbody):not(#lvctl) { grid-column: 1 / -1; }
 html.wide .lpanel > #lvpitch { width: 100%; max-width: calc((100vh - 150px) / 0.6); justify-self: center; }
+
+/* ---------- 4.5 · día de cierre del mercado en directo ---------- */
+.dl45 .dlhead { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.dl45 .dlhead h2 { margin: 2px 0 0; }
+.dlclock { font: 900 44px/1 var(--f-led); color: var(--led); letter-spacing: .04em; padding: 6px 12px; border-radius: 12px; background: #120d02; border: 1px solid rgba(255, 178, 30, .35); }
+.dlclock.hot { color: #ff6b4a; border-color: rgba(255, 107, 74, .5); animation: dlpulse 1s ease-in-out infinite alternate; }
+@keyframes dlpulse { from { box-shadow: 0 0 0 rgba(255, 107, 74, 0); } to { box-shadow: 0 0 18px rgba(255, 107, 74, .35); } }
+.dlbar { height: 6px; border-radius: 4px; background: var(--tunnel); overflow: hidden; }
+.dlbar i { display: block; height: 100%; background: linear-gradient(90deg, var(--led), #ff6b4a); transition: width .4s ease; }
+.dlmeta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 10px 0 12px; font-size: 13.5px; color: var(--mist); }
+.dlmeta b { color: var(--chalk); }
+.dlacts { display: grid; gap: 10px; margin-bottom: 6px; }
+.dlev { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--tunnel); }
+.dlev.off { border-color: rgba(102, 185, 255, .45); }
+.dlev.bar { border-color: rgba(63, 207, 124, .45); }
+.dlevh { display: flex; align-items: center; gap: 10px; }
+.dlevh b { display: block; font-size: 15px; }
+.dlevh small { display: block; color: var(--mist); font-size: 12.5px; margin-top: 2px; }
+.dlnums { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 8px 0 10px; font-size: 13px; color: var(--mist); }
+.dlnums b { color: var(--chalk); } .dlnums s { color: var(--dim); }
+.dlev .btn[aria-disabled="true"] { opacity: .45; }
+.dlwait { margin: 6px 0 10px; font-size: 14px; }
+.dlclosed { display: grid; gap: 4px; padding: 12px 14px; border-radius: 14px; background: rgba(255, 178, 30, .12); border: 1px solid rgba(255, 178, 30, .4); margin-bottom: 8px; }
+.dlclosed b { font: 800 20px/1.1 var(--f-disp); text-transform: uppercase; color: var(--led); }
+.dlh3 { font-size: 18px; margin: 14px 0 6px; }
+.dllog { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 6px; max-height: 36vh; overflow-y: auto; }
+.dllog li { display: grid; grid-template-columns: 50px 1fr; gap: 8px; font-size: 13.5px; line-height: 1.35; color: var(--chalk); }
+.dllog li .num { font: 900 13px/1.4 var(--f-led); color: var(--dim); }
+.dllog li.hot .num { color: var(--led); } .dllog li.good { color: var(--grass); }
+.dlctl { position: sticky; bottom: 0; padding-top: 8px; background: var(--stand); }
+/* play-off en la pestaña de competición */
+.pomatch { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.pomatch span:last-child { text-align: right; }
+.pomatch .w { font-weight: 700; } .pomatch .me { color: var(--led); }
+.pomatch b { font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { .dlclock.hot { animation: none; } .dlbar i { transition: none; } }

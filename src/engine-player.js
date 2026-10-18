@@ -83,9 +83,9 @@ function pnat() { return S.p.inat >= 0 ? S.p.inat : S.p.nat; }
 
 /* ---------- nueva carrera ---------- */
 function newCareer(o) {
-  buildWorld(o.g === "f" ? "f" : "m"); resetCustom();
+  buildWorld(o.g === "f" ? "f2" : "m"); resetCustom();
   S = {v: 1, rng: (o.seed != null ? o.seed : (Date.now() ^ Math.floor(Math.random() * 1e9))) | 0, set: {ev: o.ev != null ? o.ev : 1},
-    yr: START_YEAR, tw: 0, w: 0, ph: "pre", bi: 0, pend: [], feed: [], q: {}, cur: null, blog: [], bnews: [], uid: Date.now().toString(36), g: o.g === "f" ? "f" : "m", wk: o.g === "f" ? "f" : "m"};
+    yr: START_YEAR, tw: 0, w: 0, ph: "pre", bi: 0, pend: [], feed: [], q: {}, cur: null, blog: [], bnews: [], uid: Date.now().toString(36), g: o.g === "f" ? "f" : "m", wk: o.g === "f" ? "f2" : "m"};
   setFem(S.g === "f");
   initWorld();
   var T = TALENT[o.talent] || TALENT.promesa;
@@ -669,7 +669,7 @@ function seasonEnd() {
     S.troQ = (S.troQ || []).concat([p.trophies.length - 1]).slice(-5);
     news.push({t: "trophy", x: tr("¡Campeones de {lg}!", {lg: lgName(li)})});
   }
-  if (L.upI >= 0 && pos <= lgUpN(li)) news.push({t: "star", x: tr("¡Ascenso a {lg}!", {lg: trComp(lgDivRaw(L.upI))})});
+  if (L.upI >= 0 && (typeof lgPromoted === "function" ? lgPromoted(li, p.club) : pos <= lgUpN(li))) news.push({t: "star", x: tr("¡Ascenso a {lg}!", {lg: trComp(lgDivRaw(L.upI))})});
   if (L.downI >= 0 && pos > S.L[li].tm.length - L.rel) news.push({t: "bad", x: tr("Descenso a {lg}.", {lg: trComp(lgDivRaw(L.downI))})});
   var aw = leagueAwards(li, pos, avg);
   aw.forEach(function (a) { p.awards.push(awd(a.k, a.tk, a.tp, S.yr + 1)); news.push({t: "star", x: awardName(a) + "."}); p.fame = clamp(p.fame + 3, 0, 100); });

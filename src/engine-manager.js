@@ -803,7 +803,7 @@ function mgrSeasonEnd() {
   var exp = S.L[li].exp.indexOf(m.club) + 1;
   var objs = m.objs.map(function (o) { var pr = mgrObjProgress(o); return {n: o.n, tk: o.tk, tp: o.tp, met: pr.met, main: o.main, lv: o.lv}; });
   if (pos === 1) { mgrAddTrophy("L:" + L.id, L.n); news.push({t: "trophy", x: tr("¡Campeones de {lg}!", trParams({lg: L.n}))}); }
-  if (L.upI >= 0 && pos <= lgUpN(li)) { news.push({t: "star", x: tr("¡Ascenso a {lg}!", trParams({lg: lgDivRaw(L.upI)}))}); m.board = clamp(m.board + 10, 0, 100); m.rep = clamp(m.rep + 3, 0, 100); }
+  if (L.upI >= 0 && (typeof lgPromoted === "function" ? lgPromoted(li, m.club) : pos <= lgUpN(li))) { news.push({t: "star", x: tr("¡Ascenso a {lg}!", trParams({lg: lgDivRaw(L.upI)}))}); m.board = clamp(m.board + 10, 0, 100); m.rep = clamp(m.rep + 3, 0, 100); }
   if (L.downI >= 0 && pos > S.L[li].tm.length - L.rel) { news.push({t: "bad", x: tr("Descenso a {lg}.", trParams({lg: lgDivRaw(L.downI)}))}); m.board = clamp(m.board - 20, 0, 100); m.rep = clamp(m.rep - 4, 0, 100); }
   objs.forEach(function (o) { var k = objMultOf(o, o.met); m.board = clamp(m.board + (o.met ? (o.main ? 10 : 5) : (o.main ? -10 : -4)) * k, 0, 100); if (o.met && o.lv >= 2) m.rep = clamp(m.rep + o.lv - 1, 0, 100); });
   m.rep = clamp(m.rep + clamp((exp - pos) * 0.35, -4, 3.5) + objs.filter(function (o) { return o.met; }).length * 0.5 + (50 - m.rep) * 0.03, 0, 100);

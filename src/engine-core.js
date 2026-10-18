@@ -57,15 +57,15 @@ function clubColors(nm) {
   return [c1, c2];
 }
 
-/* wk: "m" fútbol masculino · "f" femenino (clubes femeninos reales) · "f1" femenino de la versión 1.8 (clubes del masculino) */
-function worldKey(s) { return s && s.g === "f" ? (s.wk === "f" ? "f" : "f1") : "m"; }
+/* wk: "m" fútbol masculino · "f2" femenino desde la 4.5 (más ligas con clubes reales) · "f" femenino (clubes femeninos reales) · "f1" femenino de la versión 1.8 (clubes del masculino) */
+function worldKey(s) { return s && s.g === "f" ? (s.wk === "f2" ? "f2" : s.wk === "f" ? "f" : "f1") : "m"; }
 function natTours() { return FEM && DATA.natTournamentsF ? DATA.natTournamentsF : DATA.natTournaments; }
 function buildWorld(wk) {
   wk = wk || "m";
   if (W.ready && W.wk === wk) return;
   Object.keys(W).forEach(function (k) { delete W[k]; });
   W.wk = wk;
-  var LEAGUES = wk === "f" && DATA.leaguesF ? DATA.leaguesF : DATA.leagues;
+  var LEAGUES = wk === "f2" && DATA.leaguesF2 ? DATA.leaguesF2 : (wk === "f" || wk === "f2") && DATA.leaguesF ? DATA.leaguesF : DATA.leagues;
   W.ctry = []; W.cIdx = {};
   Object.keys(DATA.countries).forEach(function (conf) {
     DATA.countries[conf].split(",").forEach(function (e) {
@@ -80,7 +80,7 @@ function buildWorld(wk) {
     var ci = W.cIdx[L.c], ct = W.ctry[ci];
     var lg = {id: L.id, c: L.c, ci: ci, n: L.n, t: L.t, top: L.top, bot: L.bot, cup: L.cup || null, sc: L.sc || null,
       eu: L.eu || null, sa: L.sa || null, cc: L.cc || 0, afc: L.afc || 0, caf: L.caf || 0, down: L.down || null, rel: L.rel || 0,
-      w: L.w || 0.5, gs: L.gs || 1, conf: ct.conf, cl0: [], dv: L.dv || null, dvn: L.dvn || null, gno: L.gno || 0, reg: L.reg || "", upN: L.upN || 0};
+      w: L.w || 0.5, gs: L.gs || 1, conf: ct.conf, cl0: [], dv: L.dv || null, dvn: L.dvn || null, gno: L.gno || 0, reg: L.reg || "", upN: L.upN || 0, po: L.po || null};
     var names = L.clubs.split("|"), n = names.length;
     /* las divisiones añadidas después (xl) crean sus clubes al final para no mover los índices de partidas guardadas */
     if (L.xl) { lg.late = names; W.lgIdx[L.id] = li; W.lg.push(lg); (W.byCountry[ci] = W.byCountry[ci] || []).push(li); if (L.dv) (W.dv[L.dv] = W.dv[L.dv] || []).push(li); return; }
@@ -697,6 +697,14 @@ function mkClubWorldCup(year) {
 }
 
 /* ---------- fin de temporada (mundo) ---------- */
+/* clubes que suben de una liga: los k primeros, o los k-1 primeros y el ganador del play-off */
+function promoList(li, k) {
+  var fin = S.last.final[li] || [], po = S.last.po && S.last.po[li];
+  if (!po || po.w == null || po.w < 0 || k < 1) return fin.slice(0, k);
+  var out = fin.slice(0, k - 1).filter(function (c) { return c !== po.w; });
+  out.push(po.w);
+  return out;
+}
 function seasonEndWorld() {
   var yr = S.yr;
   W.lg.forEach(function (l, li) {
@@ -704,6 +712,8 @@ function seasonEndWorld() {
     S.last.final[li] = st.map(function (x) { return x.c; });
     if (st.length) histPush("L:" + l.id, yr, st[0].c);
   });
+  /* play-off de ascenso (4.5): decide quién ocupa la última plaza de ascenso */
+  if (typeof poEnsure === "function") poEnsure();
   Object.keys(S.C).forEach(function (k) {
     var c = S.C[k];
     if (c.typ === "grp" && !c.finals) return;
@@ -729,7 +739,7 @@ function seasonEndWorld() {
       var upper = l.dv ? W.dv[l.dv] : [li], key = l.dv || ("L" + li);
       if (doneDv[key]) return; doneDv[key] = 1;
       var lower = W.dv[l.downDv], ups = [], downs = [];
-      lower.forEach(function (g) { S.last.final[g].slice(0, W.lg[g].upN || 1).forEach(function (c) { ups.push(c); }); });
+      lower.forEach(function (g) { promoList(g, W.lg[g].upN || 1).forEach(function (c) { ups.push(c); }); });
       for (var d = 1; downs.length < ups.length && d < 30; d++) {
         var row = upper.map(function (g) { var f = S.last.final[g]; return f[f.length - d]; }).filter(function (c) { return c != null && downs.indexOf(c) < 0; });
         shuffle(row).forEach(function (c) { if (downs.length < ups.length) downs.push(c); });
@@ -747,7 +757,7 @@ function seasonEndWorld() {
     if (l.downI < 0 || !l.rel) return;
     var top = S.last.final[li], low = S.last.final[l.downI], k = l.rel;
     top.slice(-k).forEach(function (c) { S.cl[c] = l.downI; S.cr[c] -= 1.4; });
-    low.slice(0, k).forEach(function (c) { S.cl[c] = li; S.cr[c] += 1.1; });
+    promoList(l.downI, k).forEach(function (c) { S.cl[c] = li; S.cr[c] += 1.1; });
   });
   W.clubs.forEach(function (cl, i) {
     var li = S.cl[i]; if (li < 0) return;

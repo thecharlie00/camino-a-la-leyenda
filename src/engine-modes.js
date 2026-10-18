@@ -111,7 +111,7 @@ function coachLeaves(c) { if (c >= 0) (S.coach = S.coach || {})[c] = fakeCoach(c
    REAL = {y: año de los datos, c: {"Club": {co: "Entrenador", p: [[nombre, apellido, pos, edad, media, país, pot?], …]}}} */
 /* plantillas reales: masculinas (REAL) o femeninas (REALF); las partidas femeninas de la 1.8 no tienen */
 function realDB() {
-  if (S && S.g === "f") return S.wk === "f" && typeof REALF !== "undefined" ? REALF : null;
+  if (S && S.g === "f") return (S.wk === "f" || S.wk === "f2") && typeof REALF !== "undefined" ? REALF : null;
   return typeof REAL !== "undefined" ? REAL : null;
 }
 function realClub(c) {
@@ -258,10 +258,10 @@ function clubAbbr(n) { var a = abbr(n || ""); return a || String(n || "").slice(
 
 /* ---------- carreras nuevas: míster y club propio ---------- */
 function baseMgrState(o) {
-  buildWorld(o.g === "f" ? "f" : "m"); resetCustom();
+  buildWorld(o.g === "f" ? "f2" : "m"); resetCustom();
   S = {v: 1, rng: (o.seed != null ? o.seed : (Date.now() ^ Math.floor(Math.random() * 1e9))) | 0, set: {ev: o.ev != null ? o.ev : 1},
     yr: START_YEAR - 1, tw: 0, w: 0, ph: "mjob", bi: 0, pend: [], feed: [], q: {}, cur: null, blog: [], bnews: [], uid: Date.now().toString(36) + Math.floor(Math.random() * 90 + 10),
-    mode: "mgr", p: null, kind: o.kind, g: o.g === "f" ? "f" : "m", wk: o.g === "f" ? "f" : "m"};
+    mode: "mgr", p: null, kind: o.kind, g: o.g === "f" ? "f" : "m", wk: o.g === "f" ? "f2" : "m"};
   setFem(S.g === "f");
   initWorld();
 }
