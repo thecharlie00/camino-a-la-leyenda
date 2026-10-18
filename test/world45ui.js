@@ -22,6 +22,7 @@ fs.mkdirSync(OUT, { recursive: true });
     UIX.ui().view = "game"; UIX.ui().tab = "club"; UIX.render(true);
   });
   /* decisiones de pretemporada hasta el día de cierre */
+  await p.evaluate(() => { window.TAP_GAP = 0; });
   let dl = false, tour = false;
   for (let k = 0; k < 40 && !dl; k++) {
     if (await p.$(".dlcard")) { dl = true; break; }

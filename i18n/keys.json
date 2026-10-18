@@ -347,7 +347,7 @@
   "w": [
    "engine-player.js:33",
    "ui.js:1292",
-   "ui.js:2057",
+   "ui.js:2058",
    "ui-guide.js:17"
   ],
   "ctx": "mental: {n: tr(\"Mentalidad\"), d: tr(\"Más regularidad y moral bajo presión.\"), att: [], gk: []}"
@@ -26930,7 +26930,7 @@
  "Simular lo que queda": {
   "w": [
    "engine-extra.js:636",
-   "ui.js:2069"
+   "ui.js:2070"
   ],
   "ctx": "{t: tr(\"Simular lo que queda\"), ok: {txt: tr(\"Simulas el resto del partido.\"), then: function () { if (!S.live) liveStart(x.fi); liveFinish(); }}}"
  },
@@ -26943,7 +26943,7 @@
  "Objetivos": {
   "w": [
    "engine-extra.js:657",
-   "ui.js:1858"
+   "ui.js:1859"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),"
  },
@@ -26952,14 +26952,14 @@
    "engine-extra.js:657",
    "mgr-plus.js:749",
    "ui.js:528",
-   "ui.js:1858"
+   "ui.js:1859"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),"
  },
  "Elige tus objetivos de la temporada": {
   "w": [
    "engine-extra.js:657",
-   "ui.js:1859"
+   "ui.js:1860"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Objetivos\"), cls: \"\", cat: tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}), title: tr(\"Elige tus objetivos de la temporada\"),"
  },
@@ -26973,7 +26973,7 @@
   "w": [
    "engine-extra.js:658",
    "engine-extra.js:664",
-   "ui.js:1867"
+   "ui.js:1868"
   ],
   "ctx": "text: tr(\"Cuanto más difícil, mayor recompensa si lo cumples.\"), opts: [descOpt({t: tr(\"Confirmar objetivos\"), ok: {txt: \"\"}}, function () { return []; })]};"
  },
@@ -36026,7 +36026,7 @@
  "FUERA DE JUEGO": {
   "w": [
    "pitch.js:848",
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "Snd.whistle([0.28]); P.stopUntil = P.ck + 2.2; P.msg = {t: P.lab.off || tr(\"FUERA DE JUEGO\"), s: -1, at: P.ck, small: true};"
  },
@@ -36676,14 +36676,14 @@
  "año": {
   "w": [
    "ui.js:685",
-   "ui.js:2442"
+   "ui.js:2448"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
  "{pct} % de lo que piden": {
   "w": [
    "ui.js:685",
-   "ui.js:2443"
+   "ui.js:2449"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
@@ -38981,7 +38981,7 @@
    "ui.js:1424",
    "ui.js:1482",
    "ui.js:1680",
-   "ui.js:1927"
+   "ui.js:1928"
   ],
   "ctx": "s += '<div class=\"row2\"><div><label class=\"lbl\" for=\"fn\">' + tr(\"Nombre\") + '</label><input type=\"text\" id=\"fn\" data-f=\"fn\" value=\"' + h(c.fn) + '\" maxlength=\"18\" autocomplete=\"off\"></div><div><label class=\"lbl\" for=\"ln\""
  },
@@ -39341,7 +39341,7 @@
   "w": [
    "ui.js:1550",
    "ui.js:1551",
-   "ui.js:2454"
+   "ui.js:2460"
   ],
   "ctx": "s += '<div class=\"clubprev\">' + crestRaw(c.col, ab, true, c.crest) + (typeof kitSVG === \"function\" ? kitSVG({pat: c.kit.pat, col: [c.col[0], c.col[1], c.kit.col3], big: true}) : \"\") + '<div class=\"grow\"><b>' + h(c.cn || "
  },
@@ -39754,7 +39754,7 @@
  "Actualizar": {
   "w": [
    "ui.js:1671",
-   "ui.js:1837"
+   "ui.js:1838"
   ],
   "ctx": "'<div class=\"row2\" style=\"margin-top:14px\"><button class=\"btn wide\" data-a=\"close\">' + tr(\"Más tarde\") + '</button><button class=\"btn pri wide\" data-a=\"doupdate\">' + tr(\"Actualizar\") + \"</button></div>\";"
  },
@@ -39787,7 +39787,7 @@
  "Guardar": {
   "w": [
    "ui.js:1681",
-   "ui.js:1932",
+   "ui.js:1933",
    "ui-35.js:123"
   ],
   "ctx": "'<p class=\"muted\" style=\"margin:0;font-size:13px\">' + tr(\"Puedes dejar el nombre en blanco si se le conoce por un solo nombre.\") + '</p><div class=\"row2\"><button class=\"btn wide\" data-a=\"pl\" data-id=\"' + rp.id + '\">' + t"
@@ -40182,547 +40182,548 @@
   ],
   "ctx": "if (!m) { UI.sheet.err = tr(\"Ese código no parece de esta app. Debe empezar por CAMINO1:\"); renderSheet(); return; }"
  },
+ "Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.": {
+  "w": [
+   "ui.js:1782",
+   "ui.js:2296",
+   "ui.js:2306"
+  ],
+  "ctx": "if (slotsNow().length >= MAX_SLOTS && !slotsNow().some(function (x) { return x.id === s0.uid; })) { UI.sheet.err = tr(\"Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.\", {n: MAX_SLOTS}); renderSh"
+ },
  "No se pudo leer el código. Comprueba que lo has pegado entero.": {
   "w": [
-   "ui.js:1783",
-   "ui.js:1786"
+   "ui.js:1784",
+   "ui.js:1787"
   ],
   "ctx": "try { restore(json); } catch (e) { toast(tr(\"No se pudo leer el código. Comprueba que lo has pegado entero.\")); return; }"
  },
  "Partida cargada": {
   "w": [
-   "ui.js:1784"
+   "ui.js:1785"
   ],
   "ctx": "enterGame(); persist(); refreshSlots(); render(true); toast(tr(\"Partida cargada\"));"
  },
  "Versión {v} disponible": {
   "w": [
-   "ui.js:1837"
+   "ui.js:1838"
   ],
   "ctx": "return '<section class=\"updbar' + (inMenu ? \" inmenu\" : \"\") + '\"><div class=\"ui\">' + ICON.play + '</div><div class=\"grow\"><b>' + (UI.upd.name ? tr(\"Versión {v} disponible\", {v: h(UI.upd.name)}) : tr(\"Nueva versión dispon"
  },
  "Nueva versión disponible": {
   "w": [
-   "ui.js:1837"
+   "ui.js:1838"
   ],
   "ctx": "return '<section class=\"updbar' + (inMenu ? \" inmenu\" : \"\") + '\"><div class=\"ui\">' + ICON.play + '</div><div class=\"grow\"><b>' + (UI.upd.name ? tr(\"Versión {v} disponible\", {v: h(UI.upd.name)}) : tr(\"Nueva versión dispon"
  },
  "Actualiza desde Google Play. Tus partidas se conservan.": {
   "w": [
-   "ui.js:1837"
+   "ui.js:1838"
   ],
   "ctx": "return '<section class=\"updbar' + (inMenu ? \" inmenu\" : \"\") + '\"><div class=\"ui\">' + ICON.play + '</div><div class=\"grow\"><b>' + (UI.upd.name ? tr(\"Versión {v} disponible\", {v: h(UI.upd.name)}) : tr(\"Nueva versión dispon"
  },
  "No se pudo cargar esa partida.": {
   "w": [
-   "ui.js:1845"
+   "ui.js:1846"
   ],
   "ctx": "}).catch(function (e) { console.error(e); toast(tr(\"No se pudo cargar esa partida.\")); refreshSlots(); });"
  },
  "La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiva.": {
   "w": [
-   "ui.js:1859"
+   "ui.js:1860"
   ],
   "ctx": "o += \"<h3>\" + tr(\"Elige tus objetivos de la temporada\") + '</h3><p class=\"lead\">' + (isMgr() ? tr(\"La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiv"
  },
  "La dificultad depende de tu media y de tu contrato con el club. Cuanto más difícil, mayor recompensa si lo cumples.": {
   "w": [
-   "ui.js:1859"
+   "ui.js:1860"
   ],
   "ctx": "o += \"<h3>\" + tr(\"Elige tus objetivos de la temporada\") + '</h3><p class=\"lead\">' + (isMgr() ? tr(\"La dificultad depende de la media de tu plantilla y de tu prestigio. Cuanto más difícil, más te lo agradecerá la directiv"
  },
  "La afición te llama «{nick}»": {
   "w": [
-   "ui.js:1870"
+   "ui.js:1871"
   ],
   "ctx": "function nickLine(o) { var n = nickName(o); return n ? '<p class=\"nick\">' + tr(\"La afición te llama «{nick}»\", {nick: h(n)}) + \"</p>\" : \"\"; }"
  },
  "Forma del escudo": {
   "w": [
-   "ui.js:1874"
+   "ui.js:1875"
   ],
   "ctx": "var s = '<div><label class=\"lbl\">' + tr(\"Forma del escudo\") + '</label><div class=\"shapes\">' + CREST_SHAPES.map(function (x) {"
  },
  "Diseño del escudo": {
   "w": [
-   "ui.js:1877"
+   "ui.js:1878"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Diseño del escudo\") + '</label><div class=\"chips\">' + CREST_PATS.map(function (x) {"
  },
  "Equipación": {
   "w": [
-   "ui.js:1880"
+   "ui.js:1881"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Equipación\") + '</label><div class=\"shapes\">' + KIT_PATS.map(function (x) {"
  },
  "Color de los detalles": {
   "w": [
-   "ui.js:1883"
+   "ui.js:1884"
   ],
   "ctx": "s += '<div><label class=\"lbl\">' + tr(\"Color de los detalles\") + '</label><div class=\"swatches\">' + CLUB_COLS.map(function (col) { return '<button class=\"sw\" data-a=\"ccol\" data-k=\"2\" data-v=\"' + col + '\" style=\"background"
  },
  "Verificado": {
   "w": [
-   "ui.js:1903"
+   "ui.js:1904"
   ],
   "ctx": "return '<article class=\"spost' + (p.m < 0 ? \" neg\" : p.m > 0 ? \" posm\" : \"\") + '\">' + avHTML + '<div class=\"sbody\"><div class=\"shead\"><b>' + h(nm) + \"</b>\" + (ver ? '<span class=\"sver\" aria-label=\"' + h(tr(\"Verificado\"))"
  },
  "Editar perfil": {
   "w": [
-   "ui.js:1910",
-   "ui.js:1927"
+   "ui.js:1911",
+   "ui.js:1928"
   ],
   "ctx": "var s = '<div class=\"stack\"><section class=\"card sprof\"><div class=\"sban\" style=\"background:' + h(prof.col) + '\"></div><div class=\"sinfo\"><div class=\"srow\"><span class=\"sav big\" style=\"background:' + h(prof.col) + '\">' +"
  },
  "Para la afición: «{nick}»": {
   "w": [
-   "ui.js:1914"
+   "ui.js:1915"
   ],
   "ctx": "if (n) s += '<p class=\"muted\" style=\"margin:6px 0 0;font-size:13px\">' + tr(\"Para la afición: «{nick}»\", {nick: h(n)}) + \"</p>\";"
  },
  "seguidores": {
   "w": [
-   "ui.js:1915"
+   "ui.js:1916"
   ],
   "ctx": "s += '<div class=\"sfol\"><span><b>' + h(fmtFol(fol)) + \"</b> \" + tr(\"seguidores\") + \"</span><span><b>\" + (180 + (hashStr(prof.handle) % 400)) + \"</b> \" + tr(\"siguiendo\") + \"</span></div></div></section>\";"
  },
  "siguiendo": {
   "w": [
-   "ui.js:1915"
+   "ui.js:1916"
   ],
   "ctx": "s += '<div class=\"sfol\"><span><b>' + h(fmtFol(fol)) + \"</b> \" + tr(\"seguidores\") + \"</span><span><b>\" + (180 + (hashStr(prof.handle) % 400)) + \"</b> \" + tr(\"siguiendo\") + \"</span></div></div></section>\";"
  },
  "Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.": {
   "w": [
-   "ui.js:1916"
+   "ui.js:1917"
   ],
   "ctx": "if (!soc.posts.length) s += '<p class=\"empty\">' + tr(\"Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.\") + \"</p>\";"
  },
  "Usuario": {
   "w": [
-   "ui.js:1928"
+   "ui.js:1929"
   ],
   "ctx": "'<div><label class=\"lbl\" for=\"shandle\">' + tr(\"Usuario\") + '</label><input type=\"text\" id=\"shandle\" value=\"' + h(p.handle) + '\" maxlength=\"15\" autocomplete=\"off\"></div>' +"
  },
  "Biografía": {
   "w": [
-   "ui.js:1929"
+   "ui.js:1930"
   ],
   "ctx": "'<div><label class=\"lbl\" for=\"sbio\">' + tr(\"Biografía\") + '</label><textarea id=\"sbio\" maxlength=\"140\" style=\"min-height:70px\">' + h(p.bio) + \"</textarea></div>\" +"
  },
  "Avatar": {
   "w": [
-   "ui.js:1930"
+   "ui.js:1931"
   ],
   "ctx": "'<div><label class=\"lbl\">' + tr(\"Avatar\") + '</label><div class=\"chips\">' + SOC_AV.map(function (a) { return '<button class=\"chipb av\" data-a=\"socav\" data-v=\"' + h(a) + '\" aria-pressed=\"' + (p.av === a) + '\">' + h(a) + \""
  },
  "Color del perfil": {
   "w": [
-   "ui.js:1931"
+   "ui.js:1932"
   ],
   "ctx": "'<div><label class=\"lbl\">' + tr(\"Color del perfil\") + '</label><div class=\"swatches\">' + SOC_COL.map(function (c) { return '<button class=\"sw\" data-a=\"soccol\" data-v=\"' + c + '\" style=\"background:' + c + '\" aria-pressed="
  },
  "Cambios": {
   "w": [
-   "ui.js:1975"
+   "ui.js:1976"
   ],
   "ctx": "var s = '<div class=\"lsubhd\"><span class=\"lbl\">' + tr(\"Cambios\") + '</span><ol class=\"lsteps\">' +"
  },
  "Quién sale": {
   "w": [
-   "ui.js:1976"
+   "ui.js:1977"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Quién entra": {
   "w": [
-   "ui.js:1976"
+   "ui.js:1977"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Confirmar": {
   "w": [
-   "ui.js:1976"
+   "ui.js:1977"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Sale": {
   "w": [
-   "ui.js:1983"
+   "ui.js:1984"
   ],
   "ctx": "'<div class=\"lswap\"><div class=\"out\"><span class=\"ar\">↓</span><div><small>' + tr(\"Sale\") + \"</small><b>\" + h(plName(po)) + \"</b></div></div>\" +"
  },
  "Entra de {pos}": {
   "w": [
-   "ui.js:1984"
+   "ui.js:1985"
   ],
   "ctx": "'<div class=\"in\"><span class=\"ar\">↑</span><div><small>' + tr(\"Entra de {pos}\", {pos: posAb(sp)}) + \"</small><b>\" + h(plName(pi)) + \"</b>\" +"
  },
  "Posición afín ({p})": {
   "w": [
-   "ui.js:1985"
+   "ui.js:1986"
   ],
   "ctx": "(pi && pi.pos !== sp ? '<em class=\"aff\">' + tr(\"Posición afín ({p})\", {p: posAb(pi.pos)}) + \"</em>\" : \"\") + \"</div></div></div>\" +"
  },
  "Confirmar cambio": {
   "w": [
-   "ui.js:1986"
+   "ui.js:1987"
   ],
   "ctx": "'<div class=\"lprevb\"><button class=\"btn\" data-a=\"lsubx\">' + tr(\"Cancelar\") + '</button><button class=\"go\" data-a=\"lsubok\">' + tr(\"Confirmar cambio\") + \"</button></div></div>\";"
  },
  "En el campo": {
   "w": [
-   "ui.js:1989"
+   "ui.js:1990"
   ],
   "ctx": "s += '<div class=\"lsubs\"><div><div class=\"lbl\">' + tr(\"En el campo\") + \"</div>\" + L.xi.map(function (id, i) {"
  },
  "Sin suplentes": {
   "w": [
-   "ui.js:1995"
+   "ui.js:1996"
   ],
   "ctx": "if (!L.bench.length) s += '<p class=\"muted\" style=\"font-size:13px\">' + tr(\"Sin suplentes\") + \"</p>\";"
  },
  "afín": {
   "w": [
-   "ui.js:2001"
+   "ui.js:2002"
   ],
   "ctx": "return '<button class=\"lpl cand\" data-a=\"lin\" data-id=\"' + id + '\"><span class=\"pp\">' + h(posAb(p.pos)) + '</span><span class=\"ar\">↑</span>' + h(plShort(p)) + '<span class=\"fit\">' + Math.round(p.ovr) + \"</span>\" + (p.pos"
  },
  "Nadie en el banquillo puede jugar de {pos}.": {
   "w": [
-   "ui.js:2003"
+   "ui.js:2004"
   ],
   "ctx": "if (!ok.length) s += '<p class=\"muted\" style=\"font-size:12.5px\">' + tr(\"Nadie en el banquillo puede jugar de {pos}.\", {pos: posAb(sp)}) + \"</p>\";"
  },
  "{n} suplente oculto: no puede jugar de {pos}.": {
   "w": [
-   "ui.js:2005"
+   "ui.js:2006"
   ],
   "ctx": "if (hid && ok.length) s += '<p class=\"muted\" style=\"font-size:12px;margin:2px 0 0\">' + trn(hid, \"{n} suplente oculto: no puede jugar de {pos}.\", \"{n} suplentes ocultos: no pueden jugar de {pos}.\").replace(\"{pos}\", h(posA",
   "note": "plural:singular"
  },
  "{n} suplentes ocultos: no pueden jugar de {pos}.": {
   "w": [
-   "ui.js:2005"
+   "ui.js:2006"
   ],
   "ctx": "if (hid && ok.length) s += '<p class=\"muted\" style=\"font-size:12px;margin:2px 0 0\">' + trn(hid, \"{n} suplente oculto: no puede jugar de {pos}.\", \"{n} suplentes ocultos: no pueden jugar de {pos}.\").replace(\"{pos}\", h(posA",
   "note": "plural:plural"
  },
  "Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.": {
   "w": [
-   "ui.js:2008"
+   "ui.js:2009"
   ],
   "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
  },
  "Elige quién entra. Solo ves a quien puede jugar en su puesto.": {
   "w": [
-   "ui.js:2008"
+   "ui.js:2009"
   ],
   "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
  },
  "Posesión": {
   "w": [
-   "ui.js:2042",
-   "ui.js:2043"
+   "ui.js:2043",
+   "ui.js:2044"
   ],
   "ctx": "s += '<div class=\"lmo\" role=\"img\" aria-label=\"' + h(tr(\"Posesión\")) + '\"><div class=\"lmot\"><i class=\"a\" style=\"width:' + (LV.mo == null ? left : LV.mo) + '%;background:' + cl + '\"></i><i class=\"b\" style=\"background:' + c"
  },
  "Tiros": {
   "w": [
-   "ui.js:2050"
+   "ui.js:2051"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "A puerta": {
   "w": [
-   "ui.js:2050"
+   "ui.js:2051"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "Ocasiones claras": {
   "w": [
-   "ui.js:2050"
+   "ui.js:2051"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "Comentarios": {
   "w": [
-   "ui.js:2053"
+   "ui.js:2054"
   ],
   "ctx": "s += '<div class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Comentarios\") + '</div><div class=\"lfeed\">' + L.ev.slice(0, 18).map(function (e) { return '<div class=\"lev ' + e.t + (e.us === 1 ? \" us\" : e.us === 0 ? \" them\" : \"\")"
  },
  "Velocidad {n}": {
   "w": [
-   "ui.js:2056"
+   "ui.js:2057"
   ],
   "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L"
  },
  "Pausa": {
   "w": [
-   "ui.js:2056",
+   "ui.js:2057",
    "ui-shootout.js:209"
   ],
   "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L"
  },
  "Sistema": {
   "w": [
-   "ui.js:2062"
+   "ui.js:2063"
   ],
   "ctx": "s += '<div class=\"lrow\"><label class=\"lbl\" for=\"lform\">' + tr(\"Sistema\") + '</label><select id=\"lform\" data-live=\"form\">' + Object.keys(FORMATIONS).map(function (k) { return '<option value=\"' + k + '\"' + (k === L.form ? "
  },
  "Te queda {n} cambio": {
   "w": [
-   "ui.js:2063"
+   "ui.js:2064"
   ],
   "ctx": "'<span class=\"muted\" style=\"font-size:13px\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
   "note": "plural:singular"
  },
  "Te quedan {n} cambios": {
   "w": [
-   "ui.js:2063"
+   "ui.js:2064"
   ],
   "ctx": "'<span class=\"muted\" style=\"font-size:13px\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
   "note": "plural:plural"
  },
  "Volver al vestuario": {
   "w": [
-   "ui.js:2069"
+   "ui.js:2070"
   ],
   "ctx": "s += L.done ? '<button class=\"go\" data-a=\"lend\">' + tr(\"Volver al vestuario\") + \" \" + ICON.play + \"</button>\" : '<button class=\"btn wide\" data-a=\"lsim\">' + tr(\"Simular lo que queda\") + \"</button>\";"
  },
  "Velocidad de simulación": {
   "w": [
-   "ui.js:2073"
+   "ui.js:2074"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr(\"Velocidad de simulación\"), rpLabel: tr(\"Ver la repetición\"),"
  },
  "Ver la repetición": {
   "w": [
-   "ui.js:2073"
+   "ui.js:2074"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr(\"Velocidad de simulación\"), rpLabel: tr(\"Ver la repetición\"),"
  },
  "REPETICIÓN": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "GOL": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "¡GOL DE {n}!": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "¡PALO!": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FIN DEL PRIMER TIEMPO": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FINAL": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FALTA": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "SAQUE DE BANDA": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "CÓRNER": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "SAQUE DE PUERTA": {
   "w": [
-   "ui.js:2074"
+   "ui.js:2075"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "El banquillo está completo: suéltalo encima de un suplente para cambiarlos.": {
   "w": [
-   "ui.js:2216",
-   "ui.js:2352"
+   "ui.js:2217",
+   "ui.js:2358"
   ],
   "ctx": "if (res === \"full\") toast(tr(\"El banquillo está completo: suéltalo encima de un suplente para cambiarlos.\"));"
  },
  "Ese jugador no puede jugar en esa posición.": {
   "w": [
-   "ui.js:2217",
-   "ui.js:2348"
+   "ui.js:2218",
+   "ui.js:2354"
   ],
   "ctx": "else if (res === \"pos\") toast(tr(\"Ese jugador no puede jugar en esa posición.\"));"
  },
- "Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.": {
-  "w": [
-   "ui.js:2290",
-   "ui.js:2300"
-  ],
-  "ctx": "if (slotsNow().length >= MAX_SLOTS) { toast(tr(\"Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.\", {n: MAX_SLOTS})); UI.view = \"load\"; render(true); break; }"
- },
  "Partida borrada": {
   "w": [
-   "ui.js:2313"
+   "ui.js:2319"
   ],
   "ctx": "UI.sheet = null; render(false); toast(tr(\"Partida borrada\"));"
  },
  "Código copiado": {
   "w": [
-   "ui.js:2319",
-   "ui.js:2321"
+   "ui.js:2325",
+   "ui.js:2327"
   ],
   "ctx": "if (window.AndroidBridge && window.AndroidBridge.copy) { try { window.AndroidBridge.copy(code); toast(tr(\"Código copiado\")); break; } catch (err) {} }"
  },
  "Selecciona y copia el texto": {
   "w": [
-   "ui.js:2321",
-   "ui.js:2322"
+   "ui.js:2327",
+   "ui.js:2328"
   ],
   "ctx": "navigator.clipboard.writeText(code).then(function () { toast(tr(\"Código copiado\")); }, function () { ta.select(); toast(tr(\"Selecciona y copia el texto\")); });"
  },
  "No se pudo empezar la carrera de entrenador.": {
   "w": [
-   "ui.js:2331"
+   "ui.js:2337"
   ],
   "ctx": "try { startManager(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la carrera de entrenador.\")); break; }"
  },
  "No puedes fichar por ese club ahora.": {
   "w": [
-   "ui.js:2335"
+   "ui.js:2341"
   ],
   "ctx": "if (mgrTakeJob(+v)) { UI.sheet = null; UI.tab = \"club\"; persist(); render(true); } else toast(tr(\"No puedes fichar por ese club ahora.\"));"
  },
  "Hecho: {n} cambio en el once.": {
   "w": [
-   "ui.js:2345"
+   "ui.js:2351"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:singular"
  },
  "Hecho: {n} cambios en el once.": {
   "w": [
-   "ui.js:2345"
+   "ui.js:2351"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:plural"
  },
  "No hay suplentes disponibles para esas posiciones.": {
   "w": [
-   "ui.js:2345"
+   "ui.js:2351"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;"
  },
  "Once ideal y banquillo colocados": {
   "w": [
-   "ui.js:2355"
+   "ui.js:2361"
   ],
   "ctx": "case \"bestxi\": S.m.xi = mBestXI(S.m.form); S.m.bench = mBestBench(S.m.xi); persist(); render(false); toast(tr(\"Once ideal y banquillo colocados\")); break;"
  },
  "En la lista de venta: llegarán más ofertas": {
   "w": [
-   "ui.js:2359"
+   "ui.js:2365"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya no está en venta": {
   "w": [
-   "ui.js:2359"
+   "ui.js:2365"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya negociasteis en este tramo.": {
   "w": [
-   "ui.js:2360"
+   "ui.js:2366"
   ],
   "ctx": "case \"mrenew\": openPend(mgrStartRenew(id), tr(\"Ya negociasteis en este tramo.\")); break;"
  },
  "Ya hablasteis en este tramo.": {
   "w": [
-   "ui.js:2361"
+   "ui.js:2367"
   ],
   "ctx": "case \"mtalk\": openPend(mgrStartTalk(id), tr(\"Ya hablasteis en este tramo.\")); break;"
  },
  "Nadie ha preguntado por él ahora mismo.": {
   "w": [
-   "ui.js:2362"
+   "ui.js:2368"
   ],
   "ctx": "case \"msell\": openPend(mgrStartSell(id), tr(\"Nadie ha preguntado por él ahora mismo.\")); break;"
  },
  "Ningún club puede acogerle ahora.": {
   "w": [
-   "ui.js:2363"
+   "ui.js:2369"
   ],
   "ctx": "case \"mloan\": openPend(mgrStartLoan(id), tr(\"Ningún club puede acogerle ahora.\")); break;"
  },
  "Nombre cambiado": {
   "w": [
-   "ui.js:2368"
+   "ui.js:2374"
   ],
   "ctx": "if (mgrRename(id, nf ? nf.value : \"\", nl ? nl.value : \"\")) { persist(); UI.sheet = {k: \"pl\", id: id}; renderSheet(); render(false); toast(tr(\"Nombre cambiado\")); }"
  },
  "Escribe al menos un nombre.": {
   "w": [
-   "ui.js:2369"
+   "ui.js:2375"
   ],
   "ctx": "else toast(tr(\"Escribe al menos un nombre.\"));"
  },
  "Ahora no se puede negociar.": {
   "w": [
-   "ui.js:2373",
+   "ui.js:2379",
    "ui-mgrplus.js:50"
   ],
   "ctx": "case \"mbid\": openPend(mgrStartBid(b.getAttribute(\"data-id\")), tr(\"Ahora no se puede negociar.\")); break;"
  },
  "Nuevo informe de ojeadores": {
   "w": [
-   "ui.js:2374"
+   "ui.js:2380"
   ],
   "ctx": "case \"mscout\": var mk = S.m.mk; if (mk.open && !mk.ref) { mk.ref = true; mk.list = mk.list.filter(function (t) { return t.done; }).concat(mgrScoutList(12)); persist(); render(false); toast(tr(\"Nuevo informe de ojeadores\""
  },
  "Objetivos fijados. ¡A por ellos!": {
   "w": [
-   "ui.js:2384"
+   "ui.js:2390"
   ],
   "ctx": "case \"objok\": if (confirmObjChoice()) { persist(); toast(tr(\"Objetivos fijados. ¡A por ellos!\")); render(true); } break;"
  },
  "Perfil actualizado": {
   "w": [
-   "ui.js:2409"
+   "ui.js:2415"
   ],
   "ctx": "UI.sheet = null; persist(); render(false); toast(tr(\"Perfil actualizado\"));"
  },
  "Plantilla nueva generada": {
   "w": [
-   "ui.js:2428"
+   "ui.js:2434"
   ],
   "ctx": "case \"redraft\": clubRedraft(); persist(); render(false); toast(tr(\"Plantilla nueva generada\")); break;"
  },
  "No se pudo empezar la temporada.": {
   "w": [
-   "ui.js:2430"
+   "ui.js:2436"
   ],
   "ctx": "try { clubStart(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la temporada.\")); break; }"
  },

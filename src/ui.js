@@ -1779,6 +1779,7 @@
     p.then(function (json) {
       var s0 = JSON.parse(json);
       if (!s0 || !s0.cr || !(s0.p || s0.m)) throw new Error("no válida");
+      if (slotsNow().length >= MAX_SLOTS && !slotsNow().some(function (x) { return x.id === s0.uid; })) { UI.sheet.err = tr("Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.", {n: MAX_SLOTS}); renderSheet(); return; }
       switchGame(function () {
         try { restore(json); } catch (e) { toast(tr("No se pudo leer el código. Comprueba que lo has pegado entero.")); return; }
         enterGame(); persist(); refreshSlots(); render(true); toast(tr("Partida cargada"));
@@ -2266,10 +2267,18 @@
   /* ---------- eventos ---------- */
   document.addEventListener("click", function (e) {
     if (UI.noClick && Date.now() - UI.noClick < 450) { e.preventDefault(); e.stopPropagation(); return; }
+    /* tocar fuera del panel cierra la hoja (salvo decisiones y formularios, que no se pierden por accidente) */
+    if (e.target.classList && e.target.classList.contains("sheet") && UI.sheet && ["pend", "askdel", "editor", "heir", "import", "socedit", "ren", "update"].indexOf(UI.sheet.k) < 0) { closeSheet(); render(false); return; }
     var b = e.target.closest("[data-a]");
     if (!b || b.disabled) return;
     if (b.tagName === "SELECT" || b.tagName === "INPUT") return;
     var a = b.getAttribute("data-a"), id = +b.getAttribute("data-id"), v = b.getAttribute("data-v");
+    /* doble toque: una acción que avanza o decide no se repite en 380 ms (evita resolver dos decisiones seguidas) */
+    if (a === "advance" || a === "choose") {
+      var gap = typeof window.TAP_GAP === "number" ? window.TAP_GAP : 380;
+      if (UI.actT && Date.now() - UI.actT < gap) { e.preventDefault(); return; }
+      UI.actT = Date.now();
+    }
     if (UIX.actions[a]) { try { UIX.actions[a](b, v, b.getAttribute("data-id")); } catch (err) { console.error(err); } return; }
     switch (a) {
       case "advance": UI.feedAll = false; doAdvance(); break;
