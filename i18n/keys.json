@@ -35310,6 +35310,54 @@
   ],
   "ctx": "return {t: \"decision\", tipo: \"real\", cat: tr(\"Mercado\"), title: tr(\"Fichaje de última hora\"), choice: tr(\"Te quedas en el {club}\", {club: clubName(S.p.club)}), txt: tr(\"Cuelgas el teléfono. Se cierra el mercado.\"), chips"
  },
+ "Empieza la generación {n} de la familia {ln}": {
+  "w": [
+   "dyn46.js:81"
+  ],
+  "ctx": "milestone(tr(\"Empieza la generación {n} de la familia {ln}\", {n: d.g, ln: par.ln}));"
+ },
+ "Dinastía": {
+  "w": [
+   "dyn46.js:82"
+  ],
+  "ctx": "feed({t: \"decision\", tipo: \"real\", cat: tr(\"Dinastía\"), title: tr(\"Generación {n}: {name}\", {n: d.g, name: o.fn + \" \" + par.ln}),"
+ },
+ "Generación {n}: {name}": {
+  "w": [
+   "dyn46.js:82"
+  ],
+  "ctx": "feed({t: \"decision\", tipo: \"real\", cat: tr(\"Dinastía\"), title: tr(\"Generación {n}: {name}\", {n: d.g, name: o.fn + \" \" + par.ln}),"
+ },
+ "A la cantera del {club}, el club de la familia": {
+  "w": [
+   "dyn46.js:83"
+  ],
+  "ctx": "choice: fam ? tr(\"A la cantera del {club}, el club de la familia\", {club: clubName(club)}) : tr(\"A la cantera del {club}\", {club: clubName(club)}),"
+ },
+ "A la cantera del {club}": {
+  "w": [
+   "dyn46.js:83"
+  ],
+  "ctx": "choice: fam ? tr(\"A la cantera del {club}, el club de la familia\", {club: clubName(club)}) : tr(\"A la cantera del {club}\", {club: clubName(club)}),"
+ },
+ "Hereda el apellido de {parent} ({title}): la afición y la prensa ya saben quién es.": {
+  "w": [
+   "dyn46.js:84"
+  ],
+  "ctx": "txt: tr(\"Hereda el apellido de {parent} ({title}): la afición y la prensa ya saben quién es.\", {parent: par.fn + \" \" + par.ln, title: par.title || par.mtitle || \"\"}),"
+ },
+ "La afición del {club} recibe a lo grande a la nueva generación de los {ln}.": {
+  "w": [
+   "dyn46.js:142"
+  ],
+  "ctx": "if (par) (S.bnews || []).push({t: \"star\", x: tr(\"La afición del {club} recibe a lo grande a la nueva generación de los {ln}.\", {club: clubName(c), ln: par.ln})});"
+ },
+ "Vuelve un apellido de la casa: la afición del {club} recibe con cariño al nuevo míster.": {
+  "w": [
+   "dyn46.js:154"
+  ],
+  "ctx": "feedNote(tr(\"Vuelve un apellido de la casa: la afición del {club} recibe con cariño al nuevo míster.\", {club: clubName(c)}));"
+ },
  "Escudo clásico": {
   "w": [
    "crest.js:8"
@@ -37565,13 +37613,15 @@
   "w": [
    "ui.js:996",
    "ui.js:1183",
-   "ui.js:1357"
+   "ui.js:1357",
+   "ui-46.js:68"
   ],
   "ctx": "'<div class=\"statline\"><div class=\"stat\"><b>' + r.tot.apps + \"</b><span>\" + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' + r.tot.g + \"</b><span>\" + tr(\"Goles\") + '</span></div><div class=\"stat\"><b>' + r.tot.a + "
  },
  "B. de Oro": {
   "w": [
-   "ui.js:996"
+   "ui.js:996",
+   "ui-46.js:68"
   ],
   "ctx": "'<div class=\"statline\"><div class=\"stat\"><b>' + r.tot.apps + \"</b><span>\" + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' + r.tot.g + \"</b><span>\" + tr(\"Goles\") + '</span></div><div class=\"stat\"><b>' + r.tot.a + "
  },
@@ -37591,20 +37641,20 @@
   "w": [
    "ui.js:998"
   ],
-  "ctx": "'<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"startmgr\">' + tr(\"Empezar carrera de entrenador\") + '</button><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Ver el Salón de la fama\") + '</button><button class=\"btn"
+  "ctx": "(UIX.hk.retDyn ? UIX.hk.retDyn() : \"\") + '<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"startmgr\">' + tr(\"Empezar carrera de entrenador\") + '</button><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Ver el Salón de"
  },
  "Ver el Salón de la fama": {
   "w": [
    "ui.js:998",
    "ui.js:1246"
   ],
-  "ctx": "'<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"startmgr\">' + tr(\"Empezar carrera de entrenador\") + '</button><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Ver el Salón de la fama\") + '</button><button class=\"btn"
+  "ctx": "(UIX.hk.retDyn ? UIX.hk.retDyn() : \"\") + '<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"startmgr\">' + tr(\"Empezar carrera de entrenador\") + '</button><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Ver el Salón de"
  },
  "Empezar una carrera nueva": {
   "w": [
    "ui.js:998"
   ],
-  "ctx": "'<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"startmgr\">' + tr(\"Empezar carrera de entrenador\") + '</button><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Ver el Salón de la fama\") + '</button><button class=\"btn"
+  "ctx": "(UIX.hk.retDyn ? UIX.hk.retDyn() : \"\") + '<div class=\"opts\"><button class=\"btn pri wide\" data-a=\"startmgr\">' + tr(\"Empezar carrera de entrenador\") + '</button><button class=\"btn wide\" data-a=\"hof\">' + tr(\"Ver el Salón de"
  },
  "Estado": {
   "w": [
@@ -37676,7 +37726,8 @@
  "Entrenador": {
   "w": [
    "ui.js:1016",
-   "ui.js:1690"
+   "ui.js:1690",
+   "ui-46.js:52"
   ],
   "ctx": "\"<div><span>\" + tr(\"Entrenador\") + \"</span><span>\" + h(coachName(p.club)) + \"</span></div>\" +"
  },
@@ -38969,7 +39020,8 @@
  },
  "Pierna buena": {
   "w": [
-   "ui.js:1433"
+   "ui.js:1433",
+   "ui-46.js:40"
   ],
   "ctx": "s += '<div class=\"row2\"><div><label class=\"lbl\">' + tr(\"Pierna buena\") + '</label><div class=\"seg\">' + [N_(\"Diestro\"), N_(\"Zurdo\")].map(function (f) { return '<button data-a=\"cset\" data-k=\"foot\" data-v=\"' + f + '\" aria-p"
  },
@@ -43956,7 +44008,8 @@
  },
  "Mejor temporada": {
   "w": [
-   "ui-chal32.js:90"
+   "ui-chal32.js:90",
+   "ui-46.js:73"
   ],
   "ctx": "if (best) o.push([tr(\"Mejor temporada\"), tr(\"{p} puntos\", {p: best[0]}) + \" · \" + h(cn(best[1].club)) + \" (\" + h(seasonLabel(best[1].y)) + \")\"]);"
  },
@@ -44366,23 +44419,23 @@
   ],
   "ctx": "U.toast(tr(\"{a} descansa y entra {b}.\", {a: plShort(out), b: plShort(sub)}));"
  },
- "14 divisiones nuevas con play-off de ascenso": {
+ "Al retirarte, tu hijo puede seguir tus pasos": {
   "w": [
    "ui-37.js:99"
   ],
-  "ctx": "var NOTES = [N_(\"14 divisiones nuevas con play-off de ascenso\"), N_(\"Torneo de verano, juvenil y Copa juvenil\"), N_(\"Día de cierre del mercado en directo\")];"
+  "ctx": "var NOTES = [N_(\"Al retirarte, tu hijo puede seguir tus pasos\"), N_(\"Árbol de leyendas y récords de la familia\"), N_(\"Los clubes de la familia te reciben con cariño\")];"
  },
- "Torneo de verano, juvenil y Copa juvenil": {
+ "Árbol de leyendas y récords de la familia": {
   "w": [
    "ui-37.js:99"
   ],
-  "ctx": "var NOTES = [N_(\"14 divisiones nuevas con play-off de ascenso\"), N_(\"Torneo de verano, juvenil y Copa juvenil\"), N_(\"Día de cierre del mercado en directo\")];"
+  "ctx": "var NOTES = [N_(\"Al retirarte, tu hijo puede seguir tus pasos\"), N_(\"Árbol de leyendas y récords de la familia\"), N_(\"Los clubes de la familia te reciben con cariño\")];"
  },
- "Día de cierre del mercado en directo": {
+ "Los clubes de la familia te reciben con cariño": {
   "w": [
    "ui-37.js:99"
   ],
-  "ctx": "var NOTES = [N_(\"14 divisiones nuevas con play-off de ascenso\"), N_(\"Torneo de verano, juvenil y Copa juvenil\"), N_(\"Día de cierre del mercado en directo\")];"
+  "ctx": "var NOTES = [N_(\"Al retirarte, tu hijo puede seguir tus pasos\"), N_(\"Árbol de leyendas y récords de la familia\"), N_(\"Los clubes de la familia te reciben con cariño\")];"
  },
  "Versión": {
   "w": [
@@ -44637,6 +44690,218 @@
    "ui-45.js:109"
   ],
   "ctx": "return o + '<p class=\"muted\" style=\"font-size:13px;margin:8px 0 0\">' + tr(\"Sube a {lg}: {club}.\", {lg: h(trComp(lgDivRaw(L.upI))), club: h(clubName(po.w))}) + \"</p></section>\";"
+ },
+ "Tu hijo puede seguir tus pasos": {
+  "w": [
+   "ui-46.js:10"
+  ],
+  "ctx": "return '<div class=\"dynret\"><div class=\"dynreth\"><span class=\"dynbadge\">G' + (d.g + 1) + \"</span><div><b>\" + tr(\"Tu hijo puede seguir tus pasos\") + \"</b><small>\" +"
+ },
+ "Empezaría con 17 años en tu club de siempre y heredaría parte de tu fama.": {
+  "w": [
+   "ui-46.js:11"
+  ],
+  "ctx": "tr(\"Empezaría con 17 años en tu club de siempre y heredaría parte de tu fama.\") + \"</small></div></div>\" +"
+ },
+ "Seguir con tu hijo": {
+  "w": [
+   "ui-46.js:12"
+  ],
+  "ctx": "'<div class=\"row2\"><button class=\"btn pri\" data-a=\"heir\">' + tr(\"Seguir con tu hijo\") + '</button><button class=\"btn\" data-a=\"dyn\">' + (n > 1 ? tr(\"Ver tu dinastía\") : tr(\"Ver el árbol familiar\")) + \"</button></div></div"
+ },
+ "Ver tu dinastía": {
+  "w": [
+   "ui-46.js:12"
+  ],
+  "ctx": "'<div class=\"row2\"><button class=\"btn pri\" data-a=\"heir\">' + tr(\"Seguir con tu hijo\") + '</button><button class=\"btn\" data-a=\"dyn\">' + (n > 1 ? tr(\"Ver tu dinastía\") : tr(\"Ver el árbol familiar\")) + \"</button></div></div"
+ },
+ "Ver el árbol familiar": {
+  "w": [
+   "ui-46.js:12"
+  ],
+  "ctx": "'<div class=\"row2\"><button class=\"btn pri\" data-a=\"heir\">' + tr(\"Seguir con tu hijo\") + '</button><button class=\"btn\" data-a=\"dyn\">' + (n > 1 ? tr(\"Ver tu dinastía\") : tr(\"Ver el árbol familiar\")) + \"</button></div></div"
+ },
+ "Escribe su nombre": {
+  "w": [
+   "ui-46.js:27"
+  ],
+  "ctx": "if (!fn) { U.toast(tr(\"Escribe su nombre\")); if (i) i.focus(); return; }"
+ },
+ "No se pudo empezar la nueva generación.": {
+  "w": [
+   "ui-46.js:28"
+  ],
+  "ctx": "if (!dynHeirStart({fn: fn, pos: heir.pos || \"MC\", foot: heir.foot || \"Diestro\"})) { U.toast(tr(\"No se pudo empezar la nueva generación.\")); return; }"
+ },
+ "Tu hijo toma el relevo": {
+  "w": [
+   "ui-46.js:35"
+  ],
+  "ctx": "var o = \"<h2>\" + tr(\"Tu hijo toma el relevo\") + '</h2><p class=\"lead\">' + tr(\"Generación {n} de la familia {ln}. Empieza con 17 años en la cantera del {club}.\", {n: d.g + 1, ln: h(par.ln), club: h(clubName(home))}) + \"</"
+ },
+ "Generación {n} de la familia {ln}. Empieza con 17 años en la cantera del {club}.": {
+  "w": [
+   "ui-46.js:35"
+  ],
+  "ctx": "var o = \"<h2>\" + tr(\"Tu hijo toma el relevo\") + '</h2><p class=\"lead\">' + tr(\"Generación {n} de la familia {ln}. Empieza con 17 años en la cantera del {club}.\", {n: d.g + 1, ln: h(par.ln), club: h(clubName(home))}) + \"</"
+ },
+ "Apellido: {ln}": {
+  "w": [
+   "ui-46.js:36"
+  ],
+  "ctx": "o += '<div class=\"stack\"><div><label class=\"lbl\" for=\"heirfn\">' + tr(\"Nombre\") + '</label><input type=\"text\" id=\"heirfn\" maxlength=\"20\" autocomplete=\"off\" value=\"' + h(heir.fn || \"\") + '\"><p class=\"muted\" style=\"font-siz"
+ },
+ "Posición": {
+  "w": [
+   "ui-46.js:37"
+  ],
+  "ctx": "o += '<div><label class=\"lbl\">' + tr(\"Posición\") + '</label><div class=\"heirpos\">' + groups.map(function (g) {"
+ },
+ "Lo que hereda": {
+  "w": [
+   "ui-46.js:41"
+  ],
+  "ctx": "o += '<div class=\"ref\"><b>' + tr(\"Lo que hereda\") + \"</b>\" + tr(\"Parte de tu fama y de tus seguidores, un pequeño colchón económico y algo más de potencial. Y la presión de un apellido conocido.\") + \"</div>\";"
+ },
+ "Parte de tu fama y de tus seguidores, un pequeño colchón económico y algo más de potencial. Y la presión de un apellido conocido.": {
+  "w": [
+   "ui-46.js:41"
+  ],
+  "ctx": "o += '<div class=\"ref\"><b>' + tr(\"Lo que hereda\") + \"</b>\" + tr(\"Parte de tu fama y de tus seguidores, un pequeño colchón económico y algo más de potencial. Y la presión de un apellido conocido.\") + \"</div>\";"
+ },
+ "Empezar su carrera": {
+  "w": [
+   "ui-46.js:42"
+  ],
+  "ctx": "o += '<button class=\"btn pri wide\" data-a=\"heirgo\">' + tr(\"Empezar su carrera\") + '</button><button class=\"btn wide\" data-a=\"close\">' + tr(\"Cancelar\") + \"</button></div>\";"
+ },
+ "Futbolista": {
+  "w": [
+   "ui-46.js:51"
+  ],
+  "ctx": "if (x.pk) roles.push('<span class=\"chip\">' + tr(\"Futbolista\") + \"</span>\");"
+ },
+ "En activo": {
+  "w": [
+   "ui-46.js:53"
+  ],
+  "ctx": "if (x.live) roles.push('<span class=\"chip up\">' + tr(\"En activo\") + \"</span>\");"
+ },
+ "{n} internacionalidad": {
+  "w": [
+   "ui-46.js:55"
+  ],
+  "ctx": "if (x.pk) stats.push(trn(x.apps || 0, \"{n} partido\", \"{n} partidos\") + \" · \" + trn(x.g || 0, \"{n} gol\", \"{n} goles\") + (x.tro ? \" · \" + trn(x.tro, \"{n} título\", \"{n} títulos\") : \"\") + (x.caps ? \" · \" + trn(x.caps, \"{n} i",
+  "note": "plural:singular"
+ },
+ "{n} internacionalidades": {
+  "w": [
+   "ui-46.js:55"
+  ],
+  "ctx": "if (x.pk) stats.push(trn(x.apps || 0, \"{n} partido\", \"{n} partidos\") + \" · \" + trn(x.g || 0, \"{n} gol\", \"{n} goles\") + (x.tro ? \" · \" + trn(x.tro, \"{n} título\", \"{n} títulos\") : \"\") + (x.caps ? \" · \" + trn(x.caps, \"{n} i",
+  "note": "plural:plural"
+ },
+ "En el banquillo: {s} temporadas, {w} victorias, {t} títulos": {
+  "w": [
+   "ui-46.js:56"
+  ],
+  "ctx": "if (x.mk || (x.live && S.mode === \"mgr\")) stats.push(tr(\"En el banquillo: {s} temporadas, {w} victorias, {t} títulos\", {s: x.seasons || 0, w: x.mw || 0, t: x.mtro || 0}));"
+ },
+ "Dinastía {ln}": {
+  "w": [
+   "ui-46.js:67"
+  ],
+  "ctx": "var o = \"<h2>\" + tr(\"Dinastía {ln}\", {ln: h(ln)}) + '</h2><p class=\"muted\" style=\"margin:-6px 0 12px\">' + trn(R.all.length, \"{n} generación\", \"{n} generaciones\") + \"</p>\";"
+ },
+ "{n} generación": {
+  "w": [
+   "ui-46.js:67",
+   "ui-46.js:96"
+  ],
+  "ctx": "var o = \"<h2>\" + tr(\"Dinastía {ln}\", {ln: h(ln)}) + '</h2><p class=\"muted\" style=\"margin:-6px 0 12px\">' + trn(R.all.length, \"{n} generación\", \"{n} generaciones\") + \"</p>\";",
+  "note": "plural:singular"
+ },
+ "{n} generaciones": {
+  "w": [
+   "ui-46.js:67",
+   "ui-46.js:96"
+  ],
+  "ctx": "var o = \"<h2>\" + tr(\"Dinastía {ln}\", {ln: h(ln)}) + '</h2><p class=\"muted\" style=\"margin:-6px 0 12px\">' + trn(R.all.length, \"{n} generación\", \"{n} generaciones\") + \"</p>\";",
+  "note": "plural:plural"
+ },
+ "Temp. de míster": {
+  "w": [
+   "ui-46.js:68"
+  ],
+  "ctx": "o += '<div class=\"dynrec\">' + [[t.apps, tr(\"Partidos\")], [t.g, tr(\"Goles\")], [t.tro + t.mtro, tr(\"Títulos\")], [t.caps, tr(\"Internac.\")], [t.bdo, tr(\"B. de Oro\")], [t.seasons, tr(\"Temp. de míster\")]].map(function (x) {"
+ },
+ "Máximo goleador": {
+  "w": [
+   "ui-46.js:72"
+  ],
+  "ctx": "if (b.g) rec.push([tr(\"Máximo goleador\"), nm(b.g) + \" · \" + trn(b.g.g, \"{n} gol\", \"{n} goles\")]);"
+ },
+ "Más títulos": {
+  "w": [
+   "ui-46.js:74"
+  ],
+  "ctx": "if (b.tro) rec.push([tr(\"Más títulos\"), nm(b.tro) + \" · \" + ((b.tro.tro || 0) + (b.tro.mtro || 0))]);"
+ },
+ "Mayor leyenda": {
+  "w": [
+   "ui-46.js:75"
+  ],
+  "ctx": "if (b.sc) rec.push([tr(\"Mayor leyenda\"), nm(b.sc) + \" · \" + h(tr(b.sc.title || b.sc.mtitle || \"\"))]);"
+ },
+ "Récords de la familia": {
+  "w": [
+   "ui-46.js:76"
+  ],
+  "ctx": "if (rec.length) o += '<h3 class=\"dynh3\">' + tr(\"Récords de la familia\") + '</h3><div class=\"kvlist\">' + rec.map(function (r) { return \"<div><span>\" + h(r[0]) + \"</span><span>\" + r[1] + \"</span></div>\"; }).join(\"\") + \"</d"
+ },
+ "Árbol de leyendas": {
+  "w": [
+   "ui-46.js:77"
+  ],
+  "ctx": "o += '<h3 class=\"dynh3\">' + tr(\"Árbol de leyendas\") + '</h3><ol class=\"dyntree\">' + R.all.map(memCard).join(\"\") + \"</ol>\";"
+ },
+ "Clubes de la familia": {
+  "w": [
+   "ui-46.js:81"
+  ],
+  "ctx": "o += '<h3 class=\"dynh3\">' + tr(\"Clubes de la familia\") + '</h3><div class=\"dynclubs\">' + clubs.map(function (c) {"
+ },
+ "{n} temporada de míster": {
+  "w": [
+   "ui-46.js:84"
+  ],
+  "ctx": "if (x.m) bits.push(trn(x.m, \"{n} temporada de míster\", \"{n} temporadas de míster\"));",
+  "note": "plural:singular"
+ },
+ "{n} temporadas de míster": {
+  "w": [
+   "ui-46.js:84"
+  ],
+  "ctx": "if (x.m) bits.push(trn(x.m, \"{n} temporada de míster\", \"{n} temporadas de míster\"));",
+  "note": "plural:plural"
+ },
+ "Tu dinastía": {
+  "w": [
+   "ui-46.js:96"
+  ],
+  "ctx": "return '<section class=\"card dynhist\"><div class=\"head\"><h3>' + tr(\"Tu dinastía\") + '</h3><span class=\"eyebrow\">' + trn(R.all.length, \"{n} generación\", \"{n} generaciones\") + \"</span></div>\" +"
+ },
+ "{g} goles y {t} títulos entre toda la familia.": {
+  "w": [
+   "ui-46.js:97"
+  ],
+  "ctx": "'<p class=\"muted\" style=\"margin:4px 0 10px\">' + tr(\"{g} goles y {t} títulos entre toda la familia.\", {g: R.t.g, t: R.t.tro + R.t.mtro}) + '</p><button class=\"btn wide\" data-a=\"dyn\">' + tr(\"Ver el árbol de leyendas\") + \"<"
+ },
+ "Ver el árbol de leyendas": {
+  "w": [
+   "ui-46.js:97"
+  ],
+  "ctx": "'<p class=\"muted\" style=\"margin:4px 0 10px\">' + tr(\"{g} goles y {t} títulos entre toda la familia.\", {g: R.t.g, t: R.t.tro + R.t.mtro}) + '</p><button class=\"btn wide\" data-a=\"dyn\">' + tr(\"Ver el árbol de leyendas\") + \"<"
  },
  "España": {
   "w": [

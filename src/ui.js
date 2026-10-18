@@ -370,15 +370,15 @@
   function onRetire() {
     if (isMgr()) {
       var m = S.m, r = S.mretired; if (!r) return;
-      Store.addHof({id: S.uid + "m", n: m.fn + " " + m.ln, nat: W.ctry[m.nat].code, pos: "DT", g: "DT", peak: Math.round(m.peakRep), club: clubName(r.main), y0: m.y0, y1: r.y,
+      Store.addHof({id: S.uid + "m" + (S.dyn && S.dyn.g > 1 ? "g" + S.dyn.g : ""), n: m.fn + " " + m.ln, nat: W.ctry[m.nat].code, pos: "DT", g: "DT", peak: Math.round(m.peakRep), club: clubName(r.main), y0: m.y0, y1: r.y,
         apps: r.tot.n, gl: r.tot.w, as: 0, tro: m.trophies.length, bdo: 0, sc: r.lg.sc, title: r.lg.title, ts: Date.now(), mgr: true});
       return;
     }
     var p = S.p, rr = S.retired;
     if (!rr) return;
     var tot = rr.tot;
-    Store.addHof({id: S.uid, n: p.fn + " " + p.ln, nat: W.ctry[p.inat >= 0 ? p.inat : p.nat].code, pos: p.pos, g: W.pos[p.pos].g, peak: Math.round(p.peak),
-      club: clubName(rr.main), y0: START_YEAR, y1: rr.y, apps: tot.apps, gl: tot.g, as: tot.a, tro: p.trophies.length,
+    Store.addHof({id: S.uid + (S.dyn && S.dyn.g > 1 ? "g" + S.dyn.g : ""), n: p.fn + " " + p.ln, nat: W.ctry[p.inat >= 0 ? p.inat : p.nat].code, pos: p.pos, g: W.pos[p.pos].g, peak: Math.round(p.peak),
+      club: clubName(rr.main), y0: p.seasons.length ? p.seasons[0].y : START_YEAR, y1: rr.y, apps: tot.apps, gl: tot.g, as: tot.a, tro: p.trophies.length,
       bdo: p.awards.filter(function (a) { return a.k === "bdo"; }).length, sc: rr.lg.sc, title: rr.lg.title, ts: Date.now()});
   }
 
@@ -995,7 +995,7 @@
     return '<section class="card decision"><div class="legacy"><div class="eyebrow">' + tr("Tu legado") + '</div><div class="big num">' + r.lg.sc + "</div><h2>" + h(tr(r.lg.title)) + '</h2><p class="lead" style="margin:8px auto 0">' + tr("{name} se retira a los {age} años. Su club de referencia: {club}.", {name: h(p.fn + " " + p.ln), age: r.age, club: h(clubName(r.main))}) + "</p></div>" +
       '<div class="statline"><div class="stat"><b>' + r.tot.apps + "</b><span>" + tr("Partidos") + '</span></div><div class="stat"><b>' + r.tot.g + "</b><span>" + tr("Goles") + '</span></div><div class="stat"><b>' + r.tot.a + "</b><span>" + tr("Asist.") + '</span></div><div class="stat"><b>' + p.trophies.length + "</b><span>" + tr("Títulos") + '</span></div><div class="stat"><b>' + p.intl.caps + "</b><span>" + tr("Internac.") + '</span></div><div class="stat"><b>' + bdo + "</b><span>" + tr("B. de Oro") + "</span></div></div>" +
       '<div class="ref"><b>' + tr("Tu siguiente paso") + "</b>" + tr("Puedes seguir en el fútbol desde el banquillo: eliges club, fichas, renuevas contratos, decides el once y cuidas la moral del vestuario.") + "</div>" +
-      '<div class="opts"><button class="btn pri wide" data-a="startmgr">' + tr("Empezar carrera de entrenador") + '</button><button class="btn wide" data-a="hof">' + tr("Ver el Salón de la fama") + '</button><button class="btn wide" data-a="newcareer">' + tr("Empezar una carrera nueva") + "</button></div></section>";
+      (UIX.hk.retDyn ? UIX.hk.retDyn() : "") + '<div class="opts"><button class="btn pri wide" data-a="startmgr">' + tr("Empezar carrera de entrenador") + '</button><button class="btn wide" data-a="hof">' + tr("Ver el Salón de la fama") + '</button><button class="btn wide" data-a="newcareer">' + tr("Empezar una carrera nueva") + "</button></div></section>";
   }
 
   /* ---------- pestaña Jugador ---------- */
@@ -1243,7 +1243,7 @@
     var r = S.mretired, m = S.m; if (!r) return "";
     return '<section class="card decision"><div class="legacy"><div class="eyebrow">' + tr("Tu legado en los banquillos") + '</div><div class="big num">' + r.lg.sc + "</div><h2>" + h(tr(r.lg.title)) + '</h2><p class="lead" style="margin:8px auto 0">' + tr("{name} se retira a los {age} años. Su club de referencia: {club}.", {name: h(m.fn + " " + m.ln), age: r.age, club: h(clubName(r.main))}) + "</p></div>" +
       '<div class="statline"><div class="stat"><b>' + m.seasons.length + '</b><span>' + tr("Temporadas") + '</span></div><div class="stat"><b>' + r.tot.n + '</b><span>' + tr("Partidos") + '</span></div><div class="stat"><b>' + r.tot.w + '</b><span>' + tr("Victorias") + '</span></div><div class="stat"><b>' + m.trophies.length + '</b><span>' + tr("Títulos") + '</span></div><div class="stat"><b>' + Math.round(m.peakRep) + "</b><span>" + tr("Prestigio máx.") + "</span></div></div>" +
-      '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Ver el Salón de la fama") + "</button></div></section>";
+      (UIX.hk.retDyn ? UIX.hk.retDyn() : "") + '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Ver el Salón de la fama") + "</button></div></section>";
   }
   function plTags(p) {
     var t = "";

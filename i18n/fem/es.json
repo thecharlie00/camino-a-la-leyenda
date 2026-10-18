@@ -1350,5 +1350,15 @@
  "Llegas fresco, aunque al míster le gusta ver ambición": "Llegas fresca, aunque a la entrenadora le gusta ver ambición",
  "Rotar y probar a los jóvenes": "Rotar y probar a las jóvenes",
  "¡Vendido! {name} se va al {club} por {fee}.": "¡Vendida! {name} se va al {club} por {fee}.",
- "¡Fichado al límite! {name} llega del {club} por {fee}.": "¡Fichada al límite! {name} llega del {club} por {fee}."
+ "¡Fichado al límite! {name} llega del {club} por {fee}.": "¡Fichada al límite! {name} llega del {club} por {fee}.",
+ "Tu hijo puede seguir tus pasos": "Tu hija puede seguir tus pasos",
+ "Seguir con tu hijo": "Seguir con tu hija",
+ "Tu hijo toma el relevo": "Tu hija toma el relevo",
+ "Máximo goleador": "Máxima goleadora",
+ "Empezaría con 17 años en tu club de siempre y heredaría parte de tu fama.": "Empezaría con 17 años en tu club de siempre y heredaría parte de tu fama.",
+ "Vuelve un apellido de la casa: la afición del {club} recibe con cariño al nuevo míster.": "Vuelve un apellido de la casa: la afición del {club} recibe con cariño a la nueva entrenadora.",
+ "Temp. de míster": "Temp. de entrenadora",
+ "{n} temporada de míster": "{n} temporada de entrenadora",
+ "{n} temporadas de míster": "{n} temporadas de entrenadora",
+ "Al retirarte, tu hijo puede seguir tus pasos": "Al retirarte, tu hija puede seguir tus pasos"
 }

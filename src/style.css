@@ -1432,3 +1432,34 @@ html.wide .lpanel > #lvpitch { width: 100%; max-width: calc((100vh - 150px) / 0.
 .pomatch .w { font-weight: 700; } .pomatch .me { color: var(--led); }
 .pomatch b { font-size: 14px; }
 @media (prefers-reduced-motion: reduce) { .dlclock.hot { animation: none; } .dlbar i { transition: none; } }
+
+/* ---------- 4.6 · dinastías ---------- */
+.dynret { margin: 12px 0 4px; padding: 12px; border-radius: 14px; border: 1px solid rgba(255, 178, 30, .4); background: rgba(255, 178, 30, .08); text-align: left; }
+.dynreth { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.dynreth b { display: block; font-size: 15.5px; } .dynreth small { display: block; color: var(--mist); font-size: 13px; margin-top: 2px; }
+.dynbadge { flex: none; display: inline-grid; place-items: center; min-width: 38px; height: 38px; padding: 0 6px; border-radius: 10px; background: var(--led); color: var(--led-ink); font: 900 17px/1 var(--f-disp); }
+.heirpos { display: grid; gap: 6px; }
+.heirg { display: flex; flex-wrap: wrap; gap: 6px; }
+.chipbtn { min-width: 52px; min-height: 40px; padding: 0 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--stand); color: var(--chalk); font: 700 14px/1 var(--f-body); }
+.chipbtn[aria-pressed="true"] { background: var(--led); border-color: var(--led); color: var(--led-ink); }
+.dynrec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 6px; }
+.dynrec .stat { background: var(--tunnel); border-radius: 12px; padding: 10px 6px; text-align: center; }
+.dynrec .stat b { display: block; font: 900 24px/1 var(--f-disp); color: var(--led); }
+.dynrec .stat span { font-size: 12px; color: var(--mist); }
+.dynh3 { font-size: 18px; margin: 16px 0 8px; }
+.dyntree { list-style: none; margin: 0; padding: 0 0 0 4px; position: relative; display: grid; gap: 12px; }
+.dyntree::before { content: ""; position: absolute; left: 22px; top: 18px; bottom: 18px; width: 2px; background: linear-gradient(var(--led), var(--line)); }
+.dyngen { position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; }
+.dyngen .dynbadge { position: relative; z-index: 1; }
+.dyngen.live .dynbadge { background: var(--grass); color: #06210f; }
+.dyncard { background: var(--tunnel); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; }
+.dynname { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.dynname b { font-size: 16px; } .dynname span { font-size: 12.5px; color: var(--mist); white-space: nowrap; }
+.dyncard .chips { margin: 6px 0 4px; }
+.dynclub { display: flex; align-items: center; gap: 8px; font-size: 13.5px; margin: 4px 0; }
+.dynstat { margin: 3px 0 0; font-size: 13px; color: var(--mist); }
+.dynleg { margin: 6px 0 0; font: 800 15px/1.1 var(--f-disp); color: var(--led); text-transform: uppercase; letter-spacing: .02em; }
+.dynclubs { display: grid; gap: 8px; }
+.dynclubrow { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: var(--tunnel); }
+.dynclubrow b { display: block; font-size: 14.5px; } .dynclubrow small { display: block; color: var(--mist); font-size: 12.5px; }
+.dyngens { font: 800 13px/1 var(--f-disp); color: var(--led); white-space: nowrap; }
