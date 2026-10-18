@@ -6,34 +6,58 @@
   /* ---------- en la tarjeta de retirada ---------- */
   U.hk.retDyn = function () {
     if (!dynCanHeir()) return "";
-    var d = dynOf(), n = d.mem.length;
-    return '<div class="dynret"><div class="dynreth"><span class="dynbadge">G' + (d.g + 1) + "</span><div><b>" + tr("Tu hijo puede seguir tus pasos") + "</b><small>" +
-      tr("Empezaría con 17 años en tu club de siempre y heredaría parte de tu fama.") + "</small></div></div>" +
-      '<div class="row2"><button class="btn pri" data-a="heir">' + tr("Seguir con tu hijo") + '</button><button class="btn" data-a="dyn">' + (n > 1 ? tr("Ver tu dinastía") : tr("Ver el árbol familiar")) + "</button></div></div>";
+    var d = dynOf(), n = d.mem.length, kids = typeof famHeirKids === "function" ? famHeirKids() : [];
+    var kb = kids.map(function (k) { var I = famKidInfo(k);
+      return '<button class="btn pri wide" data-a="heirkid" data-v="' + k.id + '">' + h(k.g === "f" ? tr("Seguir con tu hija {name}", {name: k.fn}) : tr("Seguir con tu hijo {name}", {name: k.fn})) + '<small style="display:block;font-weight:500;opacity:.8">' + h(tr("{age} años · {pos} · {ovr} de media · {club}", {age: I.age, pos: posName(k.fb.pos), ovr: I.ovr, club: I.club})) + "</small></button>"; }).join("");
+    return '<div class="dynret"><div class="dynreth"><span class="dynbadge">G' + (d.g + 1) + "</span><div><b>" + tr("Tu hijo o tu hija puede seguir tus pasos") + "</b><small>" +
+      (kids.length ? tr("Puedes seguir con quien ya juega al fútbol o empezar con otro hijo o hija desde la cantera.") : tr("Empezaría con 17 años en tu club de siempre y heredaría parte de tu fama.")) + "</small></div></div>" +
+      (kb ? '<div class="stack" style="gap:8px;margin-bottom:8px">' + kb + "</div>" : "") +
+      '<div class="row2"><button class="btn' + (kb ? "" : " pri") + '" data-a="heir">' + (kb ? tr("Otro hijo o hija") : tr("Elegir hijo o hija")) + '</button><button class="btn" data-a="dyn">' + (n > 1 ? tr("Ver tu dinastía") : tr("Ver el árbol familiar")) + "</button></div></div>";
+  };
+  U.actions.heirkid = function (b, v) {
+    if (!dynHeirStart({kid: +v})) { U.toast(tr("No se pudo empezar la nueva generación.")); return; }
+    var ui = U.ui(); ui.tab = "carrera"; ui.exp = {}; ui.wl = null;
+    U.closeSheet(); U.persist(); U.render(true);
   };
 
   /* ---------- formulario del relevo ---------- */
-  var heir = {pos: null, foot: "Diestro"};
+  var heir = {pos: null, foot: "Diestro", g: "m"};
+  /* si ya tienes un hijo o una hija de esa edad (modo entrenador), el nombre sale de la familia */
+  function famDefault(g) {
+    var f = S.m && S.m.fam; if (!f) return null;
+    var k = f.kids.filter(function (k) { return k.g === g && !k.fb && famAge(k) >= 12 && famAge(k) <= 24; })[0];
+    return k ? k.fn : null;
+  }
+  function heirNat() { var par = S.mode === "mgr" ? S.m : S.p; return par.inat >= 0 ? par.inat : par.nat; }
   U.actions.heir = function () {
-    var d = dynOf(), par = S.mode === "mgr" ? S.m : S.p;
     heir.pos = heir.pos || (S.p ? S.p.pos : "MC"); heir.foot = (S.p && S.p.foot) || "Diestro";
-    heir.fn = genName(par.inat >= 0 ? par.inat : par.nat).fn;
+    heir.g = S.g === "f" ? "f" : "m";
+    heir.fn = famDefault(heir.g) || (typeof famFirst === "function" ? famFirst(heirNat(), heir.g) : genName(heirNat()).fn); heir.auto = heir.fn;
     U.open("heir");
+  };
+  U.actions.heirg = function (b, v) {
+    var i = document.getElementById("heirfn"); if (i) heir.fn = i.value;
+    if (heir.g === v) return;
+    heir.g = v === "f" ? "f" : "m";
+    if (!heir.fn || heir.fn === heir.auto) { heir.fn = famDefault(heir.g) || (typeof famFirst === "function" ? famFirst(heirNat(), heir.g) : heir.fn); heir.auto = heir.fn; }
+    U.renderSheet();
   };
   U.actions.heirpos = function (b, v) { heir.pos = v; var i = document.getElementById("heirfn"); if (i) heir.fn = i.value; U.renderSheet(); };
   U.actions.heirfoot = function (b, v) { heir.foot = v; var i = document.getElementById("heirfn"); if (i) heir.fn = i.value; U.renderSheet(); };
   U.actions.heirgo = function () {
     var i = document.getElementById("heirfn"), fn = (i ? i.value : heir.fn || "").trim().replace(/\s+/g, " ").slice(0, 20);
     if (!fn) { U.toast(tr("Escribe su nombre")); if (i) i.focus(); return; }
-    if (!dynHeirStart({fn: fn, pos: heir.pos || "MC", foot: heir.foot || "Diestro"})) { U.toast(tr("No se pudo empezar la nueva generación.")); return; }
+    if (!dynHeirStart({fn: fn, pos: heir.pos || "MC", foot: heir.foot || "Diestro", g: heir.g})) { U.toast(tr("No se pudo empezar la nueva generación.")); return; }
     var ui = U.ui(); ui.tab = "carrera"; ui.exp = {}; ui.wl = null;
     U.closeSheet(); U.persist(); U.render(true);
   };
   U.sheets.heir = function () {
     var d = dynOf(), par = S.mode === "mgr" ? S.m : S.p, home = S.mode === "mgr" ? (S.mretired ? S.mretired.main : S.m.club) : (S.retired ? S.retired.main : S.p.club);
     var groups = [["POR", ["POR"]], ["DEF", ["DFC", "LD", "LI"]], ["MED", ["MCD", "MC", "MCO", "MD", "MI"]], ["DEL", ["ED", "EI", "DC"]]];
-    var o = "<h2>" + tr("Tu hijo toma el relevo") + '</h2><p class="lead">' + tr("Generación {n} de la familia {ln}. Empieza con 17 años en la cantera del {club}.", {n: d.g + 1, ln: h(par.ln), club: h(clubName(home))}) + "</p>";
-    o += '<div class="stack"><div><label class="lbl" for="heirfn">' + tr("Nombre") + '</label><input type="text" id="heirfn" maxlength="20" autocomplete="off" value="' + h(heir.fn || "") + '"><p class="muted" style="font-size:13px;margin:4px 0 0">' + tr("Apellido: {ln}", {ln: h(par.ln)}) + "</p></div>";
+    var other = heir.g !== (S.g === "f" ? "f" : "m");
+    var o = "<h2>" + (heir.g === "f" ? tr("Tu hija toma el relevo") : tr("Tu hijo toma el relevo")) + '</h2><p class="lead">' + (other ? (heir.g === "f" ? tr("Generación {n} de la familia {ln}. Empieza con 17 años en el fútbol femenino; la dinastía y sus récords vienen con ella.", {n: d.g + 1, ln: h(par.ln)}) : tr("Generación {n} de la familia {ln}. Empieza con 17 años en el fútbol masculino; la dinastía y sus récords vienen con él.", {n: d.g + 1, ln: h(par.ln)})) : tr("Generación {n} de la familia {ln}. Empieza con 17 años en la cantera del {club}.", {n: d.g + 1, ln: h(par.ln), club: h(clubName(home))})) + "</p>";
+    o += '<div class="stack"><div><label class="lbl">' + tr("Hijo o hija") + '</label><div class="seg">' + [["m", tr("Hijo")], ["f", tr("Hija")]].map(function (x) { return '<button data-a="heirg" data-v="' + x[0] + '" aria-pressed="' + (heir.g === x[0]) + '">' + h(x[1]) + "</button>"; }).join("") + "</div></div>";
+    o += '<div><label class="lbl" for="heirfn">' + tr("Nombre") + '</label><input type="text" id="heirfn" maxlength="20" autocomplete="off" value="' + h(heir.fn || "") + '"><p class="muted" style="font-size:13px;margin:4px 0 0">' + tr("Apellido: {ln}", {ln: h(par.ln)}) + "</p></div>";
     o += '<div><label class="lbl">' + tr("Posición") + '</label><div class="heirpos">' + groups.map(function (g) {
       return '<div class="heirg">' + g[1].map(function (c) { return '<button type="button" class="chipbtn" data-a="heirpos" data-v="' + c + '" aria-pressed="' + (heir.pos === c) + '" title="' + h(posName(c)) + '">' + h(posAb(c)) + "</button>"; }).join("") + "</div>";
     }).join("") + '</div><p class="muted" style="font-size:13px;margin:4px 0 0">' + h(posName(heir.pos || "MC")) + "</p></div>";

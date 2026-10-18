@@ -1467,3 +1467,16 @@ html.wide .lpanel > #lvpitch { width: 100%; max-width: calc((100vh - 150px) / 0.
 .blpcard.lv1 { border-color: var(--line); }
 .blpbar { margin-top: 8px; height: 6px; }
 .blpbar > i.ok { background: var(--grass); } .blpbar > i.bad { background: var(--red); }
+/* 4.8 «Familia» */
+.famcard[role="button"] { cursor: pointer; }
+.famrel { margin-top: 6px; height: 6px; }
+.famblk { padding: 12px 0; border-top: 1px solid var(--line); }
+.famhd { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.famkrow { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 6px; margin-bottom: 8px; align-items: center; }
+.famkrow input { grid-column: 1 / -1; }
+.famkrow select { min-height: 40px; }
+.famkrow .seg { grid-column: 1 / 2; }
+.famtbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.famtbl th, .famtbl td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.famtbl th:nth-child(n+3), .famtbl td:nth-child(n+3) { text-align: right; }
+.famtbl tr.mine td { color: var(--led); }

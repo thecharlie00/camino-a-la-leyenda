@@ -52,7 +52,7 @@ function dynHeirStart(o) {
   var old = S.p, m = S.m;
   var famSc = Math.max(par.sc || 0, par.msc || 0);
   var nat = par.nat != null ? par.nat : (old ? (old.inat >= 0 ? old.inat : old.nat) : m.nat);
-  var home = mgr ? (par.mclub != null ? par.mclub : par.club) : par.club;
+  var home = o.club != null && o.club >= 0 ? o.club : mgr ? (par.mclub != null ? par.mclub : par.club) : par.club;
   d.g = par.gen + 1;
   /* el nuevo futbolista */
   var T = TALENT.promesa, ovr = T.ovr - 1.5, pot = rf(T.pot[0], T.pot[1]) + clamp(famSc / 300, 0, 3.5);
@@ -65,6 +65,9 @@ function dynHeirStart(o) {
     money: 15000 + Math.round(Math.min(parMoney * 0.1, 2e6) / 1000) * 1000, fol: round1(1.5 + parFol * 0.2), club: -1, loan: null, con: null, agent: 0, injT: 0, inj: null, susp: 0, buffs: [], flags: {}, focus: null,
     seasons: [], intl: {caps: 0, g: 0, a: 0, debut: null, tours: []}, trophies: [], awards: [], ms: [], peak: ovr, evCd: {}, objs: [], tx: [],
     ss: null, ns: null, potSeen: null, motm: 0, pom: 0, heirOf: par.gen};
+  /* 4.8: si quien toma el relevo ya era futbolista (tu hijo o tu hija en el modo entrenador), sigue con su nivel y su edad */
+  if (o.ovr) { S.p.ovr = o.ovr; S.p.pot = Math.max(o.pot || 0, o.ovr + 1); S.p.peak = o.ovr; }
+  if (o.age) S.p.age = Math.max(16, o.age - 1);
   /* la mascota de la familia sigue en casa */
   if (old && old.life && old.life.pet && old.life.pet.age < old.life.pet.life) S.p.life0pet = old.life.pet;
   S.p.potSeen = potEstimate();
