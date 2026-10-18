@@ -1582,5 +1582,15 @@
  "Futbolista": "Footballeuse",
  "Máximo goleador": "Meilleure buteuse",
  "Vuelve un apellido de la casa: la afición del {club} recibe con cariño al nuevo míster.": "Un nom de la maison revient : les supporters de {club} accueillent chaleureusement la nouvelle entraîneuse.",
- "Al retirarte, tu hijo puede seguir tus pasos": "À ta retraite, ta fille peut suivre tes traces"
+ "Al retirarte, tu hijo puede seguir tus pasos": "À ta retraite, ta fille peut suivre tes traces",
+ "Vuelves con hambre: +{n} de moral y de forma, y la recuperación te ha hecho más profesional.": "De retour et affamée : +{n} de moral et de forme, et la rééducation t'a rendue plus professionnelle.",
+ "El míster cumple su palabra: eres titular.": "L'entraîneuse tient parole : tu es titulaire.",
+ "El míster te da una oportunidad tras {n} partido sin jugar.": "L'entraîneuse te donne ta chance après {n} match sans jouer.",
+ "El míster te da una oportunidad tras {n} partidos sin jugar.": "L'entraîneuse te donne ta chance après {n} matchs sans jouer.",
+ "Te promete minutos en el próximo partido, aunque no le hace gracia.": "Elle te promet du temps de jeu au prochain match, sans enthousiasme.",
+ "Más confianza del míster y más forma, a costa de cansancio.": "Plus de confiance de l'entraîneuse et une meilleure forme, au prix de la fatigue.",
+ "Llevas {n} partidos sin apenas pisar el césped. Cada partido que pasa, el míster se plantea más darte una oportunidad, pero puedes mover ficha.": "Cela fait {n} matchs que tu foules à peine la pelouse. À chaque match, l'entraîneuse pense un peu plus à te donner ta chance, mais tu peux agir.",
+ "El míster te ha prometido la titularidad en el próximo partido.": "L'entraîneuse t'a promis une place de titulaire au prochain match.",
+ "El míster se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.": "L'entraîneuse y réfléchit : +{p} % de chances d'être titulaire au prochain match.",
+ "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Si tu continues à ne pas jouer, l'entraîneuse commencera à envisager de te donner ta chance."
 }

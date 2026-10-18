@@ -287,7 +287,13 @@ function endWeek() {
   var p = S.p;
   var rec = 9 + (p.flags.physio ? 3 : 0) + (p.prof > 75 ? 1 : 0) + (p.age <= 23 ? 1 : 0) - (p.age >= 32 ? 1 : 0);
   p.fit = clamp(p.fit + rec, 0, 100);
-  if (p.inj && p.injT <= S.tw) { S.bnews.push({t: "ok", x: tr("Recibes el alta médica tras {inj}.", {inj: lcName(p.inj.n)})}); p.inj = null; }
+  if (p.inj && p.injT <= S.tw) {
+    S.bnews.push({t: "ok", x: tr("Recibes el alta médica tras {inj}.", {inj: lcName(p.inj.n)})});
+    /* 4.7: tras una baja larga vuelves con hambre (la lesión también deja algo) */
+    if (p.inj.w >= 4) { var hb = Math.min(10, 2 + p.inj.w / 2); p.mor = clamp(p.mor + hb, 0, 100); p.form = clamp(p.form + hb, 0, 100); p.prof = clamp(p.prof + 2, 0, 100);
+      S.bnews.push({t: "star", x: tr("Vuelves con hambre: +{n} de moral y de forma, y la recuperación te ha hecho más profesional.", {n: Math.round(hb)})}); }
+    p.inj = null;
+  }
   p.mor = p.mor + (60 - p.mor) * 0.035;
 }
 

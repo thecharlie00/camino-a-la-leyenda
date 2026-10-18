@@ -728,9 +728,11 @@ function mgrBlockDone() {
   feed({t: "mblock", y: S.yr, bi: S.bi, lab: b[2], log: S.blog, news: S.bnews, st: {w: bst.w, d: bst.d, l: bst.l, gf: bst.gf, ga: bst.ga}, pos: posInLeague(m.club), lg: li, club: m.club,
     board: Math.round(m.board), fans: Math.round(m.fans)});
   S.cur = null;
+  /* 4.7: el ultimátum de la directiva se decide al acabar su tramo */
+  if (typeof blpUltBlock === "function" && blpUltBlock(bst) < 0) m.board = 0;
   if (S.bi < 4) {
     S.bi++; S.ph = "gap";
-    if (!m.owner && m.board < mSackT(0)) { mgrSacked(); return; }
+    if (!m.owner && m.board < mSackT(0) && !(typeof blpUltimatum === "function" && blpUltimatum(0))) { mgrSacked(); return; }
     mgrQueueBetween(S.bi);
   } else mgrSeasonEnd();
 }
@@ -820,7 +822,7 @@ function mgrSeasonEnd() {
   maybeNickMgr();
   feed({t: "mseasonEnd", y: S.yr, club: m.club, lg: li, pos: pos, row: m.seasons[m.seasons.length - 1], objs: objs, news: news.concat(after), board: Math.round(m.board)});
   S.ph = "post";
-  if (!m.owner && m.board < mSackT(1)) { mgrSacked(); return; }
+  if (!m.owner && (m.board < mSackT(1) || (typeof blpMustGo === "function" && blpMustGo())) && !(typeof blpUltimatum === "function" && blpUltimatum(1))) { mgrSacked(); return; }
   var big = tro.some(function (t) { return t.w >= 10; });
   if (m.owner) { /* el dueño no recibe ofertas de otros banquillos */ }
   else if (big && S.yr - m.since >= 1 && chance(0.5)) S.pend.push(mp("mev", {id: "m_zidane", tn: tro.sort(function (a, b) { return b.w - a.w; })[0].n}));

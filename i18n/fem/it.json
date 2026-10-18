@@ -1415,5 +1415,16 @@
  "Vuelve un apellido de la casa: la afición del {club} recibe con cariño al nuevo míster.": "Torna un cognome di casa: i tifosi del {club} accolgono con affetto la nuova allenatrice.",
  "Al retirarte, tu hijo puede seguir tus pasos": "Quando ti ritiri, tua figlia può seguire le tue orme",
  "{n} temporada de míster": "{n} stagione da allenatrice",
- "{n} temporadas de míster": "{n} stagioni da allenatrice"
+ "{n} temporadas de míster": "{n} stagioni da allenatrice",
+ "Vuelves con hambre: +{n} de moral y de forma, y la recuperación te ha hecho más profesional.": "Torni affamata: +{n} di morale e forma, e il recupero ti ha resa più professionale.",
+ "El míster cumple su palabra: eres titular.": "L'allenatrice mantiene la parola: sei titolare.",
+ "El míster te da una oportunidad tras {n} partido sin jugar.": "L'allenatrice ti dà un'occasione dopo {n} partita senza giocare.",
+ "El míster te da una oportunidad tras {n} partidos sin jugar.": "L'allenatrice ti dà un'occasione dopo {n} partite senza giocare.",
+ "Te promete minutos en el próximo partido, aunque no le hace gracia.": "Ti promette minuti nella prossima partita, anche se non le fa piacere.",
+ "Callar y entrenar el doble": "Stare zitta e allenarti il doppio",
+ "Más confianza del míster y más forma, a costa de cansancio.": "Più fiducia dell'allenatrice e più forma, a costo della stanchezza.",
+ "Llevas {n} partidos sin apenas pisar el césped. Cada partido que pasa, el míster se plantea más darte una oportunidad, pero puedes mover ficha.": "Sono {n} partite che metti appena piede in campo. A ogni partita l'allenatrice pensa sempre di più a darti un'occasione, ma puoi fare la tua mossa.",
+ "El míster te ha prometido la titularidad en el próximo partido.": "L'allenatrice ti ha promesso una maglia da titolare nella prossima partita.",
+ "El míster se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.": "L'allenatrice ci sta pensando: +{p} % di probabilità di essere titolare nella prossima partita.",
+ "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Se continui a non giocare, l'allenatrice comincerà a pensare di darti un'occasione."
 }

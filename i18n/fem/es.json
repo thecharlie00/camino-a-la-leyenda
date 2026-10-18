@@ -1360,5 +1360,13 @@
  "Temp. de míster": "Temp. de entrenadora",
  "{n} temporada de míster": "{n} temporada de entrenadora",
  "{n} temporadas de míster": "{n} temporadas de entrenadora",
- "Al retirarte, tu hijo puede seguir tus pasos": "Al retirarte, tu hija puede seguir tus pasos"
+ "Al retirarte, tu hijo puede seguir tus pasos": "Al retirarte, tu hija puede seguir tus pasos",
+ "El míster cumple su palabra: eres titular.": "La entrenadora cumple su palabra: eres titular.",
+ "El míster te da una oportunidad tras {n} partido sin jugar.": "La entrenadora te da una oportunidad tras {n} partido sin jugar.",
+ "El míster te da una oportunidad tras {n} partidos sin jugar.": "La entrenadora te da una oportunidad tras {n} partidos sin jugar.",
+ "Más confianza del míster y más forma, a costa de cansancio.": "Más confianza de la entrenadora y más forma, a costa de cansancio.",
+ "Llevas {n} partidos sin apenas pisar el césped. Cada partido que pasa, el míster se plantea más darte una oportunidad, pero puedes mover ficha.": "Llevas {n} partidos sin apenas pisar el césped. Cada partido que pasa, la entrenadora se plantea más darte una oportunidad, pero puedes mover ficha.",
+ "El míster te ha prometido la titularidad en el próximo partido.": "La entrenadora te ha prometido la titularidad en el próximo partido.",
+ "El míster se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.": "La entrenadora se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.",
+ "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Si sigues sin jugar, la entrenadora empezará a plantearse darte una oportunidad."
 }

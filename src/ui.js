@@ -759,7 +759,7 @@
       o += "<h3>" + (x.forced ? tr("Eres agente libre: elige tu nuevo club") : tr("Tienes ofertas sobre la mesa")) + '</h3><p class="lead">' + tr("Tu valor de mercado: {value}. Ahora cobras {sal} al año en el {club}.", {value: fmtMoney(marketValue()), sal: fmtMoney(S.p.con.sal), club: h(clubName(S.p.club))}) + '</p><div class="opts">';
       x.list.forEach(function (of, i) {
         var li = S.cl[of.club];
-        o += '<div class="offer">' + crest(of.club, true) + '<div style="min-width:0"><div class="nm">' + h(clubName(of.club)) + '</div><div class="muted" style="font-size:13px">' + flag(W.clubs[of.club].ci) + " " + h(lgName(li)) + " · " + tr("nivel {n}", {n: Math.round(S.cr[of.club])}) + (of.promised ? " · " + tr("te lo prometieron") : "") + "</div></div>" +
+        o += '<div class="offer">' + crest(of.club, true) + '<div style="min-width:0"><div class="nm">' + h(clubName(of.club)) + '</div><div class="muted" style="font-size:13px">' + flag(W.clubs[of.club].ci) + " " + h(lgName(li)) + " · " + tr("nivel {n}", {n: Math.round(S.cr[of.club])}) + (of.promised ? " · " + tr("te lo prometieron") : "") + (of.blp ? " · " + tr("te quieren de titular") : "") + "</div></div>" +
           '<div class="kv"><div><span>' + tr("Rol") + '</span><b>' + h(tr(of.role)) + "</b></div><div><span>" + (of.loan ? tr("Tipo") : tr("Traspaso")) + "</span><b>" + (of.loan ? tr("Cesión 1 año") : of.fee ? fmtMoney(of.fee) : tr("Libre")) + "</b></div>" +
           "<div><span>" + tr("Sueldo/año") + "</span><b>" + fmtMoney(of.sal) + "</b></div><div><span>" + tr("Contrato") + "</span><b>" + (of.loan ? "—" : trn(of.yrs, "{n} año", "{n} años")) + "</b></div></div>" +
           '<button class="btn pri sign" data-a="choose" data-i="' + i + '">' + (of.loan ? tr("Aceptar cesión") : tr("Fichar por el {club}", {club: h(clubName(of.club))})) + "</button></div>";
@@ -1938,15 +1938,18 @@
     var p = S.p, at = attrs(), f = S.cur && S.cur.pm && S.cur.pm[x.fi];
     var gk = f ? Math.round(f.or || 70) : 70, imp = f ? f.imp || 1 : 1;
     var skill = Math.round(kind === "fk" ? ((at.TIR || p.ovr) * 0.6 + (at.PAS || p.ovr) * 0.4) : (at.TIR || p.ovr));
-    var opts = {skill: clamp(skill, 40, 95), gk: clamp(gk, 40, 95), pressure: clamp(imp / 3, 0.1, 1), dist: 22, rand: R};
+    /* 4.7: tras fallos seguidos en el minijuego, la confianza suma (y se avisa) */
+    var cf = typeof blpMgBonus === "function" ? blpMgBonus() : 0;
+    if (cf) toast(tr("Confianza: después de los últimos fallos lo ves más claro (+{n}).", {n: cf}));
+    var opts = {skill: clamp(skill + cf, 40, 95), gk: clamp(gk, 40, 95), pressure: clamp(imp / 3, 0.1, 1), dist: 22, rand: R};
     if (kind === "gkpen" || kind === "gkfk") {
       var me = Math.round(((at.REF || p.ovr) + (at.EST || at.COL || p.ovr)) / 2);
-      var gopts = {gk: clamp(me, 40, 95), skill: clamp(gk, 40, 95), pressure: opts.pressure, dist: 18 + Math.floor(R() * 10), rand: R};
-      var save = function (res) { FORCE_OUT = !res.scored; doChoose(i); };
+      var gopts = {gk: clamp(me + cf, 40, 95), skill: clamp(gk, 40, 95), pressure: opts.pressure, dist: 18 + Math.floor(R() * 10), rand: R};
+      var save = function (res) { if (typeof blpMgResult === "function") blpMgResult(!res.scored); FORCE_OUT = !res.scored; doChoose(i); };
       if (kind === "gkfk") Minigame.gkFreekick(gopts, save); else Minigame.gkPenalty(gopts, save);
       return;
     }
-    var go = function (res) { FORCE_OUT = !!res.scored; doChoose(i); };
+    var go = function (res) { if (typeof blpMgResult === "function") blpMgResult(!!res.scored); FORCE_OUT = !!res.scored; doChoose(i); };
     if (kind === "fk") Minigame.freekick(opts, go); else Minigame.penalty(opts, go);
   }
   /* ---------- partido en directo ---------- */

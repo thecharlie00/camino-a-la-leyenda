@@ -1348,5 +1348,14 @@
  "Vuelve un apellido de la casa: la afición del {club} recibe con cariño al nuevo míster.": "Ein bekannter Name kehrt zurück: Die Fans von {club} empfangen die neue Trainerin herzlich.",
  "Al retirarte, tu hijo puede seguir tus pasos": "Nach dem Karriereende kann deine Tochter in deine Fußstapfen treten",
  "{n} temporada de míster": "{n} Saison als Trainerin",
- "{n} temporadas de míster": "{n} Saisons als Trainerin"
+ "{n} temporadas de míster": "{n} Saisons als Trainerin",
+ "El míster cumple su palabra: eres titular.": "Die Trainerin hält Wort: Du stehst in der Startelf.",
+ "El míster te da una oportunidad tras {n} partido sin jugar.": "Die Trainerin gibt dir nach {n} Spiel ohne Einsatz eine Chance.",
+ "El míster te da una oportunidad tras {n} partidos sin jugar.": "Die Trainerin gibt dir nach {n} Spielen ohne Einsatz eine Chance.",
+ "Más confianza del míster y más forma, a costa de cansancio.": "Mehr Vertrauen der Trainerin und bessere Form, auf Kosten der Fitness.",
+ "Llevas {n} partidos sin apenas pisar el césped. Cada partido que pasa, el míster se plantea más darte una oportunidad, pero puedes mover ficha.": "Seit {n} Spielen stehst du kaum auf dem Platz. Mit jedem Spiel denkt die Trainerin mehr darüber nach, dir eine Chance zu geben, aber du kannst selbst etwas tun.",
+ "te quieren de titular": "sie wollen dich als Stammspielerin",
+ "El míster te ha prometido la titularidad en el próximo partido.": "Die Trainerin hat dir für das nächste Spiel einen Platz in der Startelf versprochen.",
+ "El míster se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.": "Die Trainerin denkt darüber nach: +{p} % Chance auf die Startelf im nächsten Spiel.",
+ "Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.": "Wenn du weiter nicht spielst, wird die Trainerin überlegen, dir eine Chance zu geben."
 }
