@@ -23,7 +23,7 @@ if client and not re.fullmatch(r"ca-pub-\d{10,20}", client):
 slots = {k: (v or "").strip() for k, v in (cfg.get("slots") or {}).items()}
 domain = (cfg.get("domain") or "").strip().lower()
 base = ("https://" + domain + "/") if domain else (cfg.get("base_url") or "./")
-play_url = cfg.get("play_url") or "#"
+repo_url = cfg.get("repo_url") or "#"
 
 game = DIST / "index.html"
 if not game.exists():
@@ -102,7 +102,6 @@ def foot(l, L, R, page):
     langs = "".join(f'<a href="{R}{"" if o == "es" else o + "/"}{page}" hreflang="{o}" lang="{o}" data-weblang="{o}"{" aria-current=\"page\"" if o == l else ""}>{TR["lang_name"][o]}</a>' for o in LANGS)
     return ('<footer class="foot"><div class="wrap">'
             f'<a href="{L}jugar/">{t(l, "play")}</a><a href="{L}privacidad/">{t(l, "privacy_policy")}</a>{consent}'
-            f'<a href="{play_url}" rel="noopener">{t(l, "android_app")}</a>'
             f'<span>{t(l, "version", v=ver.group(1) if ver else "")}</span>'
             f'<nav class="flangs" aria-label="{t(l, "language")}">{langs}</nav>'
             f'<p class="legal">{t(l, "legal")}</p></div></footer>')
@@ -130,14 +129,14 @@ def render(name, l, page):
     datefmt = today.strftime("%d/%m/%Y") if l != "en" else today.strftime("%d %B %Y")
     rep = {
         "{{HEAD}}": head(R), "{{FOOT}}": foot(l, L, R, page), "{{LANG}}": l, "{{LOCALE}}": LOCALE[l], "{{URL}}": url, "{{ALT}}": alt,
-        "{{BASE}}": base, "{{R}}": R, "{{OG}}": og, "{{PLAY_URL}}": play_url, "{{LANGMENU}}": langmenu(l, R, page),
+        "{{BASE}}": base, "{{R}}": R, "{{OG}}": og, "{{LANGMENU}}": langmenu(l, R, page),
         "{{CONSENT_LINK}}": f'<button type="button" class="linkbtn" data-consent>{t(l, "cookies")}</button>' if client else "",
         "{{JS_T}}": "<script>window.T = " + json.dumps(jst, ensure_ascii=False) + ";</script>",
         "{{UPDATED}}": t(l, "updated", d=datefmt),
         "{{ADS_L3}}": t(l, "p_ads_l3", a=link("https://myadcenter.google.com/", "myadcenter.google.com"), b=link("https://www.aboutads.info/choices/", "aboutads.info")),
         "{{CONS}}": t(l, "p_cons", how=t(l, "cons_how_ads" if client else "cons_how_noads")),
         "{{HOST}}": t(l, "p_host", a=link("https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement", t(l, "p_host_a"))),
-        "{{CHG}}": t(l, "p_chg", a=link(play_url, t(l, "p_chg_a"))),
+        "{{CHG}}": t(l, "p_chg", a=link(repo_url, t(l, "p_chg_a"))),
     }
     s2 = (WEB / name).read_text()
     for a, b in rep.items():
