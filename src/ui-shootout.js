@@ -122,7 +122,11 @@
     if (!b || b.disabled || !V) return;
     var a = b.getAttribute("data-so"), k = +b.getAttribute("data-k");
     switch (a) {
-      case "close": close(); break;
+      /* la × no deshace la tanda: antes de empezar solo cierra; empezada, se simula lo que falta; acabada, cuenta este resultado */
+      case "close":
+        if (V.st && V.stage !== "order") { if (!SO.done(V.st)) simRest(); finish(); }
+        else close();
+        break;
       case "pick":
         if (V.sel < 0) V.sel = k;
         else if (V.sel === k) V.sel = -1;
