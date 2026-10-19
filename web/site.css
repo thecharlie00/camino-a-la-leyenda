@@ -857,6 +857,7 @@ body.play { min-height: 100vh; display: flex; flex-direction: column; }
 .goat-career-history summary { padding: 12px 0 4px; color: var(--led); font-weight: 800; cursor: pointer; }
 .goat-season-row { display: grid; gap: 4px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
 .goat-season-row strong { color: var(--chalk); }
+.goat-season-honors { color: var(--chalk); }
 .goat-unverified { margin-top: 13px; color: var(--dim); font-size: 11px; }
 .goat-retry { margin-top: 10px; cursor: pointer; }
 .goat-footnote { max-width: 920px; margin-top: 20px; color: var(--dim); font-size: 12px; }
