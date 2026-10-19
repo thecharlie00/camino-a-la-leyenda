@@ -35,8 +35,11 @@
   /* ---------- extensiones: módulos de interfaz en ficheros aparte (ui-*.js) se enganchan aquí ----------
      UIX.actions[accion] = function (boton, valor, id) · UIX.sheets[k] = function (sheet) → html
      UIX.pend[k] = function (x) → html de la decisión · UIX.slots[sitio] = [function () → html]
-     sitios: home, menu, carrera, jugador, club, plantilla, mercado, hist, histM, create, after (tras cada render) */
+     sitios: home, mainhome, menu, carrera, jugador, club, plantilla, mercado, hist, histM, create, after (tras cada render) */
   var UIX = window.UIX = {actions: {}, sheets: {}, pend: {}, slots: {}, hk: {}};
+  UIX.getSheet = function () { return UI.sheet; };
+  UIX.setSheet = function (sheet) { UI.sheet = sheet; renderSheet(); };
+  UIX.renderSheet = function () { renderSheet(); };
   function slot(name, arg) {
     var l = UIX.slots[name] || [], o = "";
     for (var i = 0; i < l.length; i++) { try { o += l[i](arg) || ""; } catch (e) { console.error(e); } }
@@ -1374,7 +1377,8 @@
     var s = '<main id="main"><div class="stack">' + updBanner(false) + '<section class="hero"><div class="eyebrow">' + tr("Jugador, míster o tu propio club") + "</div>" + titleHTML() +
       "<p>" + tr("{n} ligas de los cinco continentes, todas las selecciones del mundo, copas, Champions, Libertadores, Mundiales y el Balón de Oro.", {n: W.lg.length}) + "</p>" +
       '<div class="scoreline"><span>' + tr("{n} LIGAS", {n: W.lg.length}) + "</span><span>" + tr("{n} CLUBES", {n: W.clubs.length - 2}) + "</span><span>" + tr("{n} SELECCIONES", {n: W.ctry.length}) + "</span></div></section>";
-    s += '<div class="opts"><button class="go" data-a="goload"' + (n ? "" : " disabled") + ">" + tr("Cargar partida") + (n ? " · " + n : "") + " " + ICON.play + '</button><button class="go ghost" data-a="newgame">' + tr("Nueva partida") + '</button><button class="btn wide gde-open" data-a="guide">📖 ' + tr("Guía del juego") + "</button></div>";
+    s += '<div class="opts"><button class="go" data-a="goload"' + (n ? "" : " disabled") + ">" + tr("Cargar partida") + (n ? " · " + n : "") + " " + ICON.play + '</button><button class="go ghost" data-a="newgame">' + tr("Nueva partida") + '</button><button class="btn wide gde-open" data-a="guide">📖 ' + tr("Guía del juego") + "</button></div>" +
+      '<div class="opts">' + slot("mainhome") + "</div>";
     s += '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ": " + h(langName()) + '</button><button class="btn wide" data-a="ach">🏅 ' + tr("Logros") + (UIX.achG ? " · " + UIX.achG()[0] + "/" + UIX.achG()[1] : "") + '</button><button class="btn wide" data-a="a11y">' + tr("Accesibilidad") + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + "</div></div></main>";
     return s;
   }
@@ -1642,28 +1646,29 @@
     }
     if (t.k === "privacy") {
       var P = [[N_("Resumen"), N_("Camino a la Leyenda es gratis gracias a los anuncios: la app muestra anuncios de Google AdMob entre partidas. No vendemos tus datos y no necesitas crear una cuenta para jugar.")],
-        [N_("Qué datos guarda"), N_("Solo lo que tú creas al jugar: los nombres que escribes, tus partidas, el idioma elegido y el Salón de la fama. Todo se guarda en el almacenamiento local de tu dispositivo.")],
+        [N_("Qué datos guarda"), N_("Tus partidas, los nombres que escribes, el idioma elegido y el Salón de la fama se guardan en el almacenamiento local de tu dispositivo. Solo si publicas una gesta en GOAT LADDER se envían el alias y las estadísticas seleccionadas para mostrarlos en el ranking público.")],
         [N_("Anuncios"), N_("Para mostrar y medir los anuncios, Google AdMob puede recoger el identificador de publicidad del dispositivo, la dirección IP, la ubicación aproximada, datos técnicos del dispositivo e información sobre cómo interactúas con los anuncios. Google trata estos datos según su política de privacidad: policies.google.com/privacy.")],
         [N_("Tu consentimiento"), N_("Si estás en el Espacio Económico Europeo, el Reino Unido o Suiza, la app te pregunta al abrirla si aceptas anuncios personalizados. Puedes cambiar tu elección cuando quieras en «Opciones de privacidad de anuncios», en el menú. También puedes restablecer o eliminar el ID de publicidad en los ajustes de Android.")],
-        [N_("Conexión a internet"), N_("La app usa internet solo para cargar los anuncios y para comprobar en Google Play si hay una versión nueva: el juego funciona sin conexión y tus partidas nunca se envían a ningún servidor.")],
+        [N_("Conexión a internet"), N_("La app usa internet para cargar anuncios, comprobar actualizaciones y, solo si lo decides, publicar una gesta en GOAT LADDER. Al publicarla, se envían el alias y las estadísticas que elijas, y la entrada queda visible en el ranking público.")],
         [N_("Código de partida"), N_("El código para copiar tu partida solo se genera cuando lo pides y lo compartes tú. Contiene tus partidas, nada más.")],
         [N_("Borrar tus datos"), N_("Puedes borrar cualquier partida desde «Cargar partida». Desinstalar la app elimina todo lo guardado en el dispositivo. Para borrar los datos publicitarios que tiene Google, restablece tu ID de publicidad o entra en myadcenter.google.com.")],
         [N_("Menores"), N_("El juego no está dirigido a menores de 13 años y no recoge a sabiendas datos personales de menores.")],
         [N_("Nombres de jugadores"), N_("Los nombres de futbolistas y entrenadores son versiones inventadas inspiradas en el fútbol real; el juego no está afiliado a ningún club, liga ni jugador.")],
         [N_("Cambios y contacto"), N_("Si esta política cambia, lo verás aquí con la fecha de actualización. Para cualquier duda, escribe al correo de contacto del desarrollador que aparece en la ficha de Google Play.")]];
-      if (NO_ADS) P = [[N_("Resumen"), N_("Camino a la Leyenda no tiene anuncios, no usa analíticas ni rastreadores y no vende ni comparte datos con nadie. No necesitas crear una cuenta para jugar.")],
+      if (NO_ADS) P = [[N_("Resumen"), N_("Camino a la Leyenda no tiene anuncios, no usa analíticas ni rastreadores y no vende tus datos. Solo se envían un alias y estadísticas si publicas una gesta en GOAT LADDER. No necesitas crear una cuenta para jugar.")],
         P[1],
-        [N_("Conexión a internet"), N_("La app solo se conecta a internet para comprobar en Google Play si hay una versión nueva: el juego funciona sin conexión y no envía tus datos ni tus partidas a ningún servidor.")],
+        [N_("Conexión a internet"), N_("La app se conecta a internet solo para comprobar actualizaciones y, si lo decides, publicar una gesta en GOAT LADDER. Al publicarla, se envían el alias y las estadísticas que elijas, y la entrada queda visible en el ranking público.")],
         P[5], [N_("Borrar tus datos"), N_("Puedes borrar cualquier partida desde «Cargar partida». Desinstalar la app elimina todo lo guardado en el dispositivo.")],
         P[7], P[8], P[9]];
       if (WEB_ADS) P = [[N_("Resumen"), N_("La versión web de Camino a la Leyenda es gratis gracias a los anuncios de Google AdSense, que se muestran en la página alrededor del juego y nunca dentro de la partida. No vendemos tus datos y no necesitas crear una cuenta para jugar.")],
         P[1],
         [N_("Anuncios"), N_("Para mostrar y medir los anuncios, Google puede usar cookies y recoger la dirección IP, la ubicación aproximada, datos técnicos del navegador e información sobre cómo interactúas con los anuncios. Google trata estos datos según su política de privacidad: policies.google.com/privacy.")],
         [N_("Tu consentimiento"), N_("Si estás en el Espacio Económico Europeo, el Reino Unido o Suiza, la web te pregunta al entrar si aceptas anuncios personalizados. Puedes cambiar tu elección cuando quieras con el enlace «Privacidad y cookies» de la página.")],
-        [N_("Conexión a internet"), N_("El juego funciona dentro de tu navegador y nunca envía tus partidas a ningún servidor. La página usa internet para cargar el juego y los anuncios.")],
+        [N_("Conexión a internet"), N_("El juego funciona dentro de tu navegador. Si lo decides, puedes publicar una gesta en GOAT LADDER; se envían el alias y las estadísticas que elijas, y la entrada queda visible en el ranking público.")],
         P[5],
         [N_("Borrar tus datos"), N_("Puedes borrar cualquier partida desde «Cargar partida». Si borras los datos de este sitio en tu navegador, se elimina todo lo guardado. Para borrar los datos publicitarios que tiene Google, entra en myadcenter.google.com.")],
         P[7], P[8], P[9]];
+      if (window.GoatLadder) P.push([N_("GOAT LADDER"), window.GoatLadder.t("privacy")]);
       return "<h2>" + tr("Política de privacidad") + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:13px">' + tr("Última actualización: {d}", {d: "10/10/2026"}) + '</p><div class="policy">' + P.map(function (x) { return "<h3>" + h(tr(x[0])) + "</h3><p>" + h(tr(x[1])) + "</p>"; }).join("") + '</div><button class="btn wide" style="margin-top:12px" data-a="close">' + tr("Cerrar") + "</button>";
     }
     if (t.k === "update") {

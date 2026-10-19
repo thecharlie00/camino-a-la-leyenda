@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Empaqueta el juego en un único HTML (artifact) y en un documento completo para la APK."""
-import base64, pathlib
+import base64, json, pathlib, re
 
 ROOT = pathlib.Path(__file__).parent
 import os
+from urllib.parse import urlparse
 SRC = pathlib.Path(os.environ["CAMINO_SRC"]) if os.environ.get("CAMINO_SRC") else ROOT / "src"
 FONTS = ROOT / "fonts" / "node_modules" / "@fontsource"
 DIST = pathlib.Path(os.environ["CAMINO_DIST"]) if os.environ.get("CAMINO_DIST") else ROOT / "dist"
@@ -33,7 +34,16 @@ for fam, pkg, w, subsets in faces:
 
 css = "\n".join(css_fonts) + "\n" + (SRC / "style.css").read_text()
 LANG_FILES = ["lang-en.js", "lang-de.js", "lang-it.js", "lang-fr.js", "lang-fem.js"]
-ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "crest.js", "faces.js", "minigame.js", "bolas.js", "pitch.js", "ui.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "wide42.js", "ui-boot.js"]
+ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "goat.js", "crest.js", "faces.js", "minigame.js", "bolas.js", "pitch.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "wide42.js", "ui-boot.js"]
+web_config_path = ROOT / "web" / "config.json"
+web_config = json.loads(web_config_path.read_text()) if web_config_path.exists() else {}
+goat_api_url = os.environ.get("CAMINO_GOAT_API_URL", web_config.get("goat_api_url", "")).strip().rstrip("/")
+if goat_api_url:
+    parsed_goat_api_url = urlparse(goat_api_url)
+    if (parsed_goat_api_url.scheme != "https" or
+            not re.fullmatch(r"[A-Za-z0-9.-]+(?::[0-9]{1,5})?", parsed_goat_api_url.netloc) or
+            parsed_goat_api_url.path or parsed_goat_api_url.query or parsed_goat_api_url.fragment):
+        raise ValueError("CAMINO_GOAT_API_URL must be an HTTPS origin without a path")
 js = "\n".join((SRC / n).read_text() for n in ORDER if (SRC / n).exists())
 # etiqueta de versión: nombre y código de la app Android y la fecha de compilación
 import re as _re, datetime as _dt
@@ -41,7 +51,9 @@ _man = (ROOT / "android" / "AndroidManifest.xml").read_text() if (ROOT / "androi
 _vn = (_re.search(r'versionName="([^"]+)"', _man) or [None, "?"])[1]
 _vc = (_re.search(r'versionCode="(\d+)"', _man) or [None, "0"])[1]
 js = 'var BUILD = {v: "%s", code: %s, t: "%s"};\n' % (_vn, _vc, _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")) + js
+js = "var GOAT_API_URL = " + json.dumps(goat_api_url) + ";\n" + js
 js = js.replace("</script", "<\\/script")
+connect_src = goat_api_url if goat_api_url else "'none'"
 
 ICON = base64.b64encode((SRC / "icon96.png").read_bytes()).decode() if (SRC / "icon96.png").exists() else ""
 body = f"""<title>Fútbol: Camino a la Leyenda</title>
@@ -64,7 +76,7 @@ full = f"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src {connect_src}; form-action 'none'; base-uri 'none'">
 {body.split('<div id="app">')[0]}</head>
 <body>
 <div id="app"></div>
