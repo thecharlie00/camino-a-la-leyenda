@@ -998,7 +998,8 @@
     return '<section class="card decision"><div class="legacy"><div class="eyebrow">' + tr("Tu legado") + '</div><div class="big num">' + r.lg.sc + "</div><h2>" + h(tr(r.lg.title)) + '</h2><p class="lead" style="margin:8px auto 0">' + tr("{name} se retira a los {age} años. Su club de referencia: {club}.", {name: h(p.fn + " " + p.ln), age: r.age, club: h(clubName(r.main))}) + "</p></div>" +
       '<div class="statline"><div class="stat"><b>' + r.tot.apps + "</b><span>" + tr("Partidos") + '</span></div><div class="stat"><b>' + r.tot.g + "</b><span>" + tr("Goles") + '</span></div><div class="stat"><b>' + r.tot.a + "</b><span>" + tr("Asist.") + '</span></div><div class="stat"><b>' + p.trophies.length + "</b><span>" + tr("Títulos") + '</span></div><div class="stat"><b>' + p.intl.caps + "</b><span>" + tr("Internac.") + '</span></div><div class="stat"><b>' + bdo + "</b><span>" + tr("B. de Oro") + "</span></div></div>" +
       '<div class="ref"><b>' + tr("Tu siguiente paso") + "</b>" + tr("Puedes seguir en el fútbol desde el banquillo: eliges club, fichas, renuevas contratos, decides el once y cuidas la moral del vestuario.") + "</div>" +
-      (UIX.hk.retDyn ? UIX.hk.retDyn() : "") + '<div class="opts"><button class="btn pri wide" data-a="startmgr">' + tr("Empezar carrera de entrenador") + '</button><button class="btn wide" data-a="hof">' + tr("Ver el Salón de la fama") + '</button><button class="btn wide" data-a="newcareer">' + tr("Empezar una carrera nueva") + "</button></div></section>";
+      (UIX.hk.retDyn ? UIX.hk.retDyn() : "") + (UIX.hk.retGoat ? UIX.hk.retGoat() : "") +
+      '<div class="opts"><button class="btn pri wide" data-a="startmgr">' + tr("Empezar carrera de entrenador") + '</button><button class="btn wide" data-a="hof">' + tr("Ver el Salón de la fama") + '</button><button class="btn wide" data-a="newcareer">' + tr("Empezar una carrera nueva") + "</button></div></section>";
   }
 
   /* ---------- pestaña Jugador ---------- */
@@ -1246,7 +1247,8 @@
     var r = S.mretired, m = S.m; if (!r) return "";
     return '<section class="card decision"><div class="legacy"><div class="eyebrow">' + tr("Tu legado en los banquillos") + '</div><div class="big num">' + r.lg.sc + "</div><h2>" + h(tr(r.lg.title)) + '</h2><p class="lead" style="margin:8px auto 0">' + tr("{name} se retira a los {age} años. Su club de referencia: {club}.", {name: h(m.fn + " " + m.ln), age: r.age, club: h(clubName(r.main))}) + "</p></div>" +
       '<div class="statline"><div class="stat"><b>' + m.seasons.length + '</b><span>' + tr("Temporadas") + '</span></div><div class="stat"><b>' + r.tot.n + '</b><span>' + tr("Partidos") + '</span></div><div class="stat"><b>' + r.tot.w + '</b><span>' + tr("Victorias") + '</span></div><div class="stat"><b>' + m.trophies.length + '</b><span>' + tr("Títulos") + '</span></div><div class="stat"><b>' + Math.round(m.peakRep) + "</b><span>" + tr("Prestigio máx.") + "</span></div></div>" +
-      (UIX.hk.retDyn ? UIX.hk.retDyn() : "") + '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Ver el Salón de la fama") + "</button></div></section>";
+      (UIX.hk.retDyn ? UIX.hk.retDyn() : "") + (UIX.hk.retGoat ? UIX.hk.retGoat() : "") +
+      '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Ver el Salón de la fama") + "</button></div></section>";
   }
   function plTags(p) {
     var t = "";

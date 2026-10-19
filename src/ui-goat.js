@@ -223,31 +223,6 @@
         (item[0] === "win_percentage" ? metrics[item[0]] + "%" : metrics[item[0]]));
     }).join("") + "</div>";
   }
-  function CareerCard(entry, index) {
-    var history = (entry.history || []).slice().reverse();
-    var seasons = history.map(function (row) {
-      var summary = entry.game_mode === "player"
-        ? tr("careerAppearances") + ": " + row.appearances + " · " + tr("careerGoals") + ": " + row.goals +
-          " · " + tr("careerAssists") + ": " + row.assists
-        : tr("careerWins") + ": " + row.wins + "-" + row.draws + "-" + row.losses;
-      var awards = (row.trophies || []).concat(row.awards || []);
-      return "<p><b>" + esc(row.season) + " · " + esc((row.clubs || [row.club]).join(", ")) + " · " + esc(row.competition) +
-        "</b><br>" + esc(summary + (awards.length ? " · " + awards.join(", ") : "") +
-          (row.promoted ? " · " + tr("careerPromotions") : "")) + "</p>";
-    }).join("");
-    return '<article class="card goat-card"><div class="head"><span class="tag real">#' + (index + 1) +
-      " · " + esc(tr("boardCareers")) + '</span><strong class="goat-score">' +
-      esc(entry.metrics && entry.metrics[window.__goatSheet.metric] != null
-        ? entry.metrics[window.__goatSheet.metric] : "") +
-      '</strong></div><h3>' + esc(entry.title) + '</h3><p class="goat-meta">' + esc(entry.display_name) + " · " +
-      esc(entry.current_club) + " · " + esc(entry.started_season + "–" + entry.latest_season) +
-      "</p>" + CareerStatsSummary(entry.metrics || {}, entry.game_mode) +
-      '<details class="goat-career-history"><summary>' + esc(tr("careerSeasons")) + " · " +
-      history.length + "</summary>" + seasons + "</details><p class=\"goat-unverified\">" +
-      esc(tr("verified")) + "</p>" + (service.canDelete(entry.id)
-        ? '<button class="btn wide" data-a="goatdeletecareer" data-v="' + esc(entry.id) + '">' +
-          esc(tr("delete")) + "</button>" : "") + "</article>";
-  }
   function GoatLadderCard(entry, index) {
     var opponent = entry.opponent_name ? " · " + tr("opponent") + ": " + entry.opponent_name : "";
     return '<article class="card goat-card"><div class="head"><span class="tag real">#' + (index + 1) +
@@ -260,21 +235,9 @@
           esc(tr("delete")) + "</button>" : "") + "</article>";
   }
   function GoatFilterTabs(mode, timeframe) {
-    var metricChoices = METRICS[mode].map(function (item) {
-      return '<option value="' + item[0] + '"' + (item[0] === window.__goatSheet.metric ? " selected" : "") +
-        ">" + esc(tr(item[1])) + "</option>";
-    }).join("");
-    return '<div class="seg goat-board"><button data-a="goatboard" data-v="careers" aria-pressed="' +
-      (window.__goatSheet.board === "careers") + '">' + esc(tr("boardCareers")) +
-      '</button><button data-a="goatboard" data-v="achievements" aria-pressed="' +
-      (window.__goatSheet.board === "achievements") + '">' + esc(tr("boardAchievements")) + "</button></div>" +
-      '<div class="seg goat-mode"><button data-a="goatmode" data-v="player" aria-pressed="' +
+    return '<div class="seg goat-mode"><button data-a="goatmode" data-v="player" aria-pressed="' +
       (mode === "player") + '">' + esc(tr("player")) + '</button><button data-a="goatmode" data-v="manager" aria-pressed="' +
-      (mode === "manager") + '">' + esc(tr("manager")) + '</button></div>' +
-      (window.__goatSheet.board === "careers"
-        ? '<label class="lbl goat-metric-label">' + esc(tr("careerMetric")) + '<select class="goat-input" data-goat-metric>' +
-          metricChoices + "</select></label>" : "") +
-      '<div class="seg goat-period">' +
+      (mode === "manager") + '">' + esc(tr("manager")) + '</button></div><div class="seg goat-period">' +
       [["all-time", "all"], ["30d", "month"], ["7d", "week"]].map(function (period) {
         return '<button data-a="goatperiod" data-v="' + period[0] + '" aria-pressed="' +
           (timeframe === period[0]) + '">' + esc(tr(period[1])) + "</button>";
@@ -287,10 +250,7 @@
     sheet.loading = true;
     sheet.error = "";
     window.UIX.renderSheet();
-    var loading = sheet.board === "careers"
-      ? service.listCareers(sheet.mode, sheet.timeframe, sheet.metric)
-      : service.list(sheet.mode, sheet.timeframe);
-    loading.then(function (entries) {
+    service.list(sheet.mode, sheet.timeframe).then(function (entries) {
       if (window.UIX && window.UIX.sheets && window.UIX.sheets.goat &&
           window.__goatSheet === sheet && sheet.requestId === requestId) {
         sheet.entries = entries;
@@ -307,8 +267,7 @@
     });
   }
   function open() {
-    var sheet = {k: "goat", board: "careers", metric: "appearances", mode: "player",
-      timeframe: "all-time", entries: [], loading: false, error: ""};
+    var sheet = {k: "goat", mode: "player", timeframe: "all-time", entries: [], loading: false, error: ""};
     window.__goatSheet = sheet;
     window.UIX.setSheet(sheet);
     load(sheet);
@@ -326,38 +285,6 @@
     if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
       sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
     }
-    function submitCareer(button) {
-      var sheet = window.UIX.getSheet(), career = service.career();
-      if (!sheet || !career) return;
-      var panel = button.closest(".sheet"), aliasInput = panel.querySelector("[data-career-alias]");
-      var titleInput = panel.querySelector("[data-career-title]"), consent = panel.querySelector("[data-career-consent]");
-      var alias = aliasInput ? aliasInput.value.trim() : "";
-      var title = titleInput ? titleInput.value.trim() : "";
-      sheet.careerAlias = alias;
-      sheet.careerTitle = title;
-      if (!consent || !consent.checked) { sheet.submitError = tr("submitConsent"); window.UIX.renderSheet(); return; }
-      if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
-        sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
-      }
-      sheet.submitting = true;
-      sheet.submitError = "";
-      window.UIX.renderSheet();
-      service.submitCareer(career, alias, title).then(function (result) {
-        sheet.submitting = false;
-        sheet.submitSuccess = tr("careerPublished");
-        sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
-        load(sheet);
-      }).catch(function (error) {
-        console.error("GOAT LADDER career submission failed", error);
-        sheet.submitting = false;
-        sheet.submitError = error.message || tr("error");
-        window.UIX.renderSheet();
-      });
-    }
-    function careerInputLabel(key, attribute, value) {
-      return '<label class="lbl">' + esc(tr(key)) + '<input class="goat-input" maxlength="' +
-        (key === "alias" ? 32 : 64) + '" data-career-' + attribute + ' value="' + esc(value) + '"></label>';
-    }
     sheet.submitting = true;
     sheet.submitError = "";
     window.UIX.renderSheet();
@@ -373,6 +300,67 @@
       window.UIX.renderSheet();
     });
   }
+  function submitCareer(button) {
+    var sheet = window.UIX.getSheet(), career = service.career();
+    if (!sheet || sheet.k !== "goatCareerPublish" || !career) return;
+    var panel = button.closest(".sheet"), aliasInput = panel.querySelector("[data-career-alias]");
+    var titleInput = panel.querySelector("[data-career-title]"), consent = panel.querySelector("[data-career-consent]");
+    var alias = aliasInput ? aliasInput.value.trim() : "";
+    var title = titleInput ? titleInput.value.trim() : "";
+    sheet.careerAlias = alias;
+    sheet.careerTitle = title;
+    if (!consent || !consent.checked) { sheet.submitError = tr("submitConsent"); window.UIX.renderSheet(); return; }
+    if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
+      sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
+    }
+    sheet.submitting = true;
+    sheet.submitError = "";
+    window.UIX.renderSheet();
+    service.submitCareer(career, alias, title).then(function (result) {
+      sheet.submitting = false;
+      sheet.submitSuccess = tr("careerPublished");
+      sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
+      window.UIX.renderSheet();
+    }).catch(function (error) {
+      console.error("GOAT LADDER career submission failed", error);
+      sheet.submitting = false;
+      sheet.submitError = error.message || tr("error");
+      window.UIX.renderSheet();
+    });
+  }
+  function careerInputLabel(key, attribute, value) {
+    return '<label class="lbl">' + esc(tr(key)) + '<input class="goat-input" maxlength="' +
+      (key === "alias" ? 32 : 64) + '" data-career-' + attribute + ' value="' + esc(value) + '"></label>';
+  }
+  function openCareerPublish() {
+    var career = service.career();
+    if (!career) return;
+    window.UIX.setSheet({k: "goatCareerPublish", career: career});
+  }
+  function careerPublishSheet(sheet) {
+    var career = service.career();
+    if (!career) return '<h2>' + esc(tr("careerNoData")) + "</h2>";
+    if (!service.available()) {
+      return '<h2>' + esc(tr("publishCareer")) + '</h2><p class="goat-error">' +
+        esc(tr("unavailable")) + "</p><button class=\"btn wide\" data-a=\"close\">" +
+        esc(tr("close")) + "</button>";
+    }
+    return '<h2>' + esc(tr("publishCareer")) + '</h2><p class="goat-meta">' +
+      esc(career.current_club) + " · " + esc(career.started_season + "–" + career.latest_season) +
+      "</p>" + CareerStatsSummary(career.metrics, career.game_mode) +
+      careerInputLabel("alias", "alias", sheet.careerAlias || "") +
+      careerInputLabel("title", "title", sheet.careerTitle || career.title) +
+      '<label class="goat-consent"><input type="checkbox" data-career-consent> ' +
+      esc(tr("careerConsent")) + '</label><p class="goat-privacy">' +
+      esc(tr("careerPrivacy")) + "</p>" +
+      (sheet.submitError ? '<p class="goat-error" role="alert">' + esc(sheet.submitError) + "</p>" : "") +
+      (sheet.submitSuccess ? '<p class="pos">' + esc(sheet.submitSuccess) + "</p>" : "") +
+      (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
+      '<button class="btn pri wide" data-a="goatcareerpublish"' +
+      (sheet.submitting ? " disabled" : "") + ">" +
+      esc(sheet.submitting ? tr("loading") : tr("publishCareer")) +
+      '</button><button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
+  }
   function inputLabel(key, attribute, value) {
     return '<label class="lbl">' + esc(tr(key)) + '<input class="goat-input" maxlength="' +
       (key === "alias" ? 32 : 64) + '" data-goat-' + attribute + ' value="' + esc(value) + '"></label>';
@@ -381,30 +369,24 @@
   if (!window.GOAT_WEB_BUILD) window.UIX.add("mainhome", function () {
     return '<button class="btn wide goat-entry" data-a="goat">🏆 ' + esc(tr("home")) + "</button>";
   });
-  window.UIX.add("menu", function () {
+  if (!window.GOAT_WEB_BUILD) window.UIX.add("menu", function () {
     return '<button class="btn wide" data-a="goat">🏆 ' + esc(tr("home")) + "</button>";
   });
-  window.UIX.actions.goat = open;
-  window.UIX.actions.goatboard = function (button, board) {
-    var sheet = window.UIX.getSheet();
-    if (!sheet || sheet.k !== "goat") return;
-    sheet.board = board === "achievements" ? "achievements" : "careers";
-    load(sheet);
+  window.UIX.hk.retGoat = function () {
+    var career = service.career();
+    return career ? '<button class="btn wide" data-a="goatcareeropen">' +
+      esc(tr("publishCareer")) + "</button>" : "";
   };
+  window.UIX.actions.goat = open;
+  window.UIX.actions.goatcareerpublish = function (button) { submitCareer(button); };
+  window.UIX.actions.goatcareeropen = function () { openCareerPublish(); };
+  window.UIX.sheets.goatCareerPublish = careerPublishSheet;
   window.UIX.actions.goatmode = function (button, mode) {
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat") return;
     sheet.mode = mode === "manager" ? "manager" : "player";
-    sheet.metric = sheet.mode === "manager" ? "wins" : "appearances";
     load(sheet);
   };
-  document.addEventListener("change", function (event) {
-    if (!event.target || !event.target.matches("[data-goat-metric]")) return;
-    var sheet = window.UIX.getSheet();
-    if (!sheet || sheet.k !== "goat") return;
-    sheet.metric = event.target.value;
-    load(sheet);
-  });
   window.UIX.actions.goatperiod = function (button, timeframe) {
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat") return;
@@ -413,7 +395,6 @@
   };
   window.UIX.actions.goatrefresh = function () { var sheet = window.UIX.getSheet(); if (sheet && sheet.k === "goat") load(sheet); };
   window.UIX.actions.goatsubmit = function (button) { submit(button); };
-  window.UIX.actions.goatcareerpublish = function (button) { submitCareer(button); };
   window.UIX.actions.goatdelete = function (button, id) {
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat" || !window.confirm(tr("deleteConfirm"))) return;
@@ -430,29 +411,13 @@
       window.UIX.renderSheet();
     });
   };
-  window.UIX.actions.goatdeletecareer = function (button, id) {
-    var sheet = window.UIX.getSheet();
-    if (!sheet || sheet.k !== "goat" || !window.confirm(tr("deleteConfirm"))) return;
-    sheet.submitting = true;
-    window.UIX.renderSheet();
-    service.deleteCareer(id).then(function () {
-      sheet.submitting = false;
-      sheet.deleteNotice = "";
-      load(sheet);
-    }).catch(function (error) {
-      console.error("GOAT LADDER career deletion failed", error);
-      sheet.submitting = false;
-      sheet.error = error.message || tr("error");
-      window.UIX.renderSheet();
-    });
-  };
   window.UIX.sheets.goat = function (sheet) {
-    var latest = service.latest(), career = service.career(), title = latest ? latest.title : "";
+    var latest = service.latest(), title = latest ? latest.title : "";
     var list = !service.available() ? "" :
       sheet.loading ? '<p class="muted">' + esc(tr("loading")) + "</p>" :
       sheet.error ? '<p class="goat-error" role="alert">' + esc(sheet.error) +
         '</p><button class="btn wide" data-a="goatrefresh">' + esc(tr("retry")) + "</button>" :
-      sheet.entries.length ? sheet.entries.map(sheet.board === "careers" ? CareerCard : GoatLadderCard).join("") :
+      sheet.entries.length ? sheet.entries.map(GoatLadderCard).join("") :
       '<p class="muted">' + esc(tr("empty")) + "</p>";
     var publish = !service.available()
       ? '<div class="card goat-notice"><b>' + esc(tr("unavailable")) + '</b><p class="muted">' +
@@ -474,27 +439,8 @@
           '<button class="btn pri wide" data-a="goatsubmit"' + (sheet.submitting ? " disabled" : "") + ">" +
           esc(sheet.submitting ? tr("loading") : tr("publish")) + "</button></section>"
         : '<div class="card goat-notice"><p class="muted">' + esc(tr("noLatest")) + "</p></div>";
-    var careerPublish = !service.available()
-      ? ""
-      : career
-        ? '<section class="card goat-publish"><div class="head"><span class="tag hot">' +
-          esc(tr("publishCareer")) + '</span><span>' +
-          esc(career.game_mode === "manager" ? tr("manager") : tr("player")) +
-          "</span></div><h3>" + esc(career.title) + '</h3><p class="goat-meta">' +
-          esc(career.current_club) + " · " + esc(career.started_season + "–" + career.latest_season) +
-          "</p>" + CareerStatsSummary(career.metrics, career.game_mode) +
-          careerInputLabel("alias", "alias", sheet.careerAlias || "") +
-          careerInputLabel("title", "title", sheet.careerTitle || career.title) +
-          '<label class="goat-consent"><input type="checkbox" data-career-consent> ' + esc(tr("careerConsent")) +
-          '</label><p class="goat-privacy">' + esc(tr("careerPrivacy")) + "</p>" +
-          (sheet.submitError ? '<p class="goat-error" role="alert">' + esc(sheet.submitError) + "</p>" : "") +
-          (sheet.submitSuccess != null ? '<p class="pos">' + esc(tr("careerPublished")) + "</p>" : "") +
-          (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
-          '<button class="btn pri wide" data-a="goatcareerpublish"' + (sheet.submitting ? " disabled" : "") + ">" +
-          esc(sheet.submitting ? tr("loading") : tr("publishCareer")) + "</button></section>"
-        : '<div class="card goat-notice"><p class="muted">' + esc(tr("careerNoData")) + "</p></div>";
     return '<h2>🏆 ' + esc(tr("home")) + '</h2><p class="muted">' + esc(tr("login")) + "</p>" +
-      GoatFilterTabs(sheet.mode, sheet.timeframe) + publish + careerPublish +
+      GoatFilterTabs(sheet.mode, sheet.timeframe) + publish +
       '<div class="stack goat-list">' + list + "</div>" +
         '<button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
   };
