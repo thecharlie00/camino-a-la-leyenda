@@ -66,9 +66,13 @@
           t.goals_for + ": " + season.goals_for, t.goals_against + ": " + season.goals_against];
       if (season.position != null) values.push(t.position + ": " + season.position);
       if (season.promoted) values.push(t.promoted);
-      var names = (season.trophies || []).concat(season.awards || []);
-      if (names.length) values.push(names.join(", "));
       row.appendChild(node("span", "", values.join(" · ")));
+      if (season.trophies && season.trophies.length) {
+        row.appendChild(node("span", "goat-season-honors", t.trophies + ": " + season.trophies.join(", ")));
+      }
+      if (season.awards && season.awards.length) {
+        row.appendChild(node("span", "goat-season-honors", t.awards + ": " + season.awards.join(", ")));
+      }
       details.appendChild(row);
     });
     return details;
