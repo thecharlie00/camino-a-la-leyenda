@@ -1,4 +1,4 @@
-﻿{
+{
     "_ayuda":  "Rellena adsense_client con tu ID de editor (ca-pub-â€¦) y cada hueco con el ID de bloque de anuncio que crees en AdSense. Si un hueco estÃ¡ vacÃ­o, no se muestra. domain: tu dominio propio (opcional, crea el archivo CNAME).",
     "adsense_client":  "ca-pub-3919867907492197",
     "slots":  {
@@ -11,5 +11,5 @@
     "base_url":  "https://thecharlie00.github.io/camino-a-la-leyenda/",
     "play_url":  "https://play.google.com/store/apps/details?id=com.caminoleyenda.app",
     "repo_url":  "https://github.com/thecharlie00/camino-a-la-leyenda",
-    "goat_api_url":  "https://camino-goat-ladder.workers.dev"
+    "goat_api_url":  "https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev"
 }
