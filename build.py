@@ -44,7 +44,7 @@ if goat_api_url:
             not re.fullmatch(r"[A-Za-z0-9.-]+(?::[0-9]{1,5})?", parsed_goat_api_url.netloc) or
             parsed_goat_api_url.path or parsed_goat_api_url.query or parsed_goat_api_url.fragment):
         raise ValueError("CAMINO_GOAT_API_URL must be an HTTPS origin without a path")
-js = "\n".join((SRC / n).read_text() for n in ORDER if (SRC / n).exists())
+js = "var GOAT_WEB_BUILD = false;\n" + "\n".join((SRC / n).read_text() for n in ORDER if (SRC / n).exists())
 # etiqueta de versión: nombre y código de la app Android y la fecha de compilación
 import re as _re, datetime as _dt
 _man = (ROOT / "android" / "AndroidManifest.xml").read_text() if (ROOT / "android" / "AndroidManifest.xml").exists() else ""

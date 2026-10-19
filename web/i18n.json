@@ -62,6 +62,244 @@
   "it": "Cosa c'è",
   "fr": "Contenu"
  },
+ "goat_nav": {
+  "es": "GOAT LADDER",
+  "en": "GOAT LADDER",
+  "de": "GOAT LADDER",
+  "it": "GOAT LADDER",
+  "fr": "GOAT LADDER"
+ },
+ "goat_meta_title": {
+  "es": "GOAT LADDER · Camino a la Leyenda",
+  "en": "GOAT LADDER · Camino a la Leyenda",
+  "de": "GOAT LADDER · Camino a la Leyenda",
+  "it": "GOAT LADDER · Camino a la Leyenda",
+  "fr": "GOAT LADDER · Camino a la Leyenda"
+ },
+ "goat_meta_desc": {
+  "es": "Compara carreras completas y métricas de los jugadores y mánagers de Camino a la Leyenda.",
+  "en": "Compare complete careers and metrics from players and managers in Camino a la Leyenda.",
+  "de": "Vergleiche vollständige Karrieren und Kennzahlen von Spielern und Managern in Camino a la Leyenda.",
+  "it": "Confronta carriere complete e metriche di giocatori e mister in Camino a la Leyenda.",
+  "fr": "Compare les carrières complètes et les statistiques des joueurs et managers de Camino a la Leyenda."
+ },
+ "goat_intro": {
+  "es": "Compara carreras completas de Jugador y Míster, temporada a temporada, ordenadas por métricas distintas.",
+  "en": "Compare complete Player and Manager careers, season by season, ranked by different metrics.",
+  "de": "Vergleiche vollständige Spieler- und Managerkarrieren, Saison für Saison und nach verschiedenen Kennzahlen sortiert.",
+  "it": "Confronta carriere complete da Giocatore e Mister, stagione per stagione e ordinate per metriche diverse.",
+  "fr": "Compare les carrières complètes de joueur et de manager, saison par saison et classées selon différentes statistiques."
+ },
+ "goat_careers": {
+  "es": "Carreras",
+  "en": "Careers",
+  "de": "Karrieren",
+  "it": "Carriere",
+  "fr": "Carrières"
+ },
+ "goat_achievements": {
+  "es": "Gestas",
+  "en": "Achievements",
+  "de": "Erfolge",
+  "it": "Imprese",
+  "fr": "Exploits"
+ },
+ "goat_metric": {
+  "es": "Ordenar por métrica",
+  "en": "Rank by metric",
+  "de": "Nach Kennzahl sortieren",
+  "it": "Ordina per metrica",
+  "fr": "Classer par statistique"
+ },
+ "goat_career_history": {
+  "es": "Historial de temporadas",
+  "en": "Season history",
+  "de": "Saisonverlauf",
+  "it": "Storico stagioni",
+  "fr": "Historique des saisons"
+ },
+ "goat_career_seasons": {
+  "es": "Temporadas",
+  "en": "Seasons",
+  "de": "Saisons",
+  "it": "Stagioni",
+  "fr": "Saisons"
+ },
+ "goat_career_years": {
+  "es": "Años",
+  "en": "Years",
+  "de": "Jahre",
+  "it": "Anni",
+  "fr": "Années"
+ },
+ "goat_player": {
+  "es": "Jugador",
+  "en": "Player",
+  "de": "Spieler",
+  "it": "Giocatore",
+  "fr": "Joueur"
+ },
+ "goat_manager": {
+  "es": "Míster",
+  "en": "Manager",
+  "de": "Manager",
+  "it": "Mister",
+  "fr": "Manager"
+ },
+ "goat_all_time": {
+  "es": "Todos",
+  "en": "All time",
+  "de": "Alle",
+  "it": "Sempre",
+  "fr": "Tout"
+ },
+ "goat_30d": {
+  "es": "30 días",
+  "en": "30 days",
+  "de": "30 Tage",
+  "it": "30 giorni",
+  "fr": "30 jours"
+ },
+ "goat_7d": {
+  "es": "7 días",
+  "en": "7 days",
+  "de": "7 Tage",
+  "it": "7 giorni",
+  "fr": "7 jours"
+ },
+ "goat_loading": {
+  "es": "Cargando ranking…",
+  "en": "Loading ranking…",
+  "de": "Rangliste wird geladen…",
+  "it": "Caricamento classifica…",
+  "fr": "Chargement du classement…"
+ },
+ "goat_error": {
+  "es": "No se pudo cargar el ranking.",
+  "en": "The ranking could not be loaded.",
+  "de": "Die Rangliste konnte nicht geladen werden.",
+  "it": "Impossibile caricare la classifica.",
+  "fr": "Impossible de charger le classement."
+ },
+ "goat_retry": {
+  "es": "Reintentar",
+  "en": "Try again",
+  "de": "Erneut versuchen",
+  "it": "Riprova",
+  "fr": "Réessayer"
+ },
+ "goat_empty": {
+  "es": "Aún no hay gestas en este ranking.",
+  "en": "There are no records in this ranking yet.",
+  "de": "Noch keine Einträge in dieser Rangliste.",
+  "it": "Non ci sono ancora record in questa classifica.",
+  "fr": "Aucun record dans ce classement pour le moment."
+ },
+ "goat_unverified": {
+  "es": "Sin verificar · enviado por la comunidad",
+  "en": "Unverified · community-reported",
+  "de": "Nicht verifiziert · von der Community gemeldet",
+  "it": "Non verificato · segnalato dalla community",
+  "fr": "Non vérifié · déclaré par la communauté"
+ },
+ "goat_score": {
+  "es": "GOAT SCORE",
+  "en": "GOAT SCORE",
+  "de": "GOAT SCORE",
+  "it": "GOAT SCORE",
+  "fr": "GOAT SCORE"
+ },
+ "goat_match": {
+  "es": "Partido",
+  "en": "Match",
+  "de": "Spiel",
+  "it": "Partita",
+  "fr": "Match"
+ },
+ "goat_season": {
+  "es": "Temporada",
+  "en": "Season",
+  "de": "Saison",
+  "it": "Stagione",
+  "fr": "Saison"
+ },
+ "goat_alias": {
+  "es": "Alias",
+  "en": "Alias",
+  "de": "Alias",
+  "it": "Alias",
+  "fr": "Alias"
+ },
+ "goat_club": {
+  "es": "Club",
+  "en": "Club",
+  "de": "Verein",
+  "it": "Club",
+  "fr": "Club"
+ },
+ "goat_competition": {
+  "es": "Competición",
+  "en": "Competition",
+  "de": "Wettbewerb",
+  "it": "Competizione",
+  "fr": "Compétition"
+ },
+ "goat_opponent": {
+  "es": "Rival",
+  "en": "Opponent",
+  "de": "Gegner",
+  "it": "Avversario",
+  "fr": "Adversaire"
+ },
+ "goat_goals": {
+  "es": "Goles",
+  "en": "Goals",
+  "de": "Tore",
+  "it": "Gol",
+  "fr": "Buts"
+ },
+ "goat_assists": {
+  "es": "Asistencias",
+  "en": "Assists",
+  "de": "Vorlagen",
+  "it": "Assist",
+  "fr": "Passes décisives"
+ },
+ "goat_rating": {
+  "es": "Valoración",
+  "en": "Rating",
+  "de": "Bewertung",
+  "it": "Voto",
+  "fr": "Note"
+ },
+ "goat_minutes": {
+  "es": "Minutos",
+  "en": "Minutes",
+  "de": "Minuten",
+  "it": "Minuti",
+  "fr": "Minutes"
+ },
+ "goat_result": {
+  "es": "Resultado",
+  "en": "Result",
+  "de": "Ergebnis",
+  "it": "Risultato",
+  "fr": "Résultat"
+ },
+ "goat_record": {
+  "es": "Balance",
+  "en": "Record",
+  "de": "Bilanz",
+  "it": "Bilancio",
+  "fr": "Bilan"
+ },
+ "goat_position": {
+  "es": "Posición",
+  "en": "Position",
+  "de": "Platz",
+  "it": "Posizione",
+  "fr": "Position"
+ },
  "play": {
   "es": "Jugar",
   "en": "Play",
@@ -525,11 +763,11 @@
   "fr": "GOAT LADDER"
  },
  "p_goat": {
-  "es": "GOAT LADDER es opcional. Al abrir el ranking, Cloudflare procesa la solicitud y puede recibir tu dirección IP. Solo al pulsar Publicar y aceptar se envían tu alias, título, modo, club, competición, rival, temporada y las métricas mostradas; la entrada y GOAT Score quedan visibles públicamente. No se envía tu nombre de perfil ni la partida completa. El score se calcula en el servidor, pero los resultados proceden del cliente y no se verifican contra un servidor del juego; no incluyas datos personales. Puedes borrar una entrada desde el mismo dispositivo mientras conserves sus datos locales; hazlo antes de limpiar esos datos.",
-  "en": "GOAT LADDER is optional. When you open the ranking, Cloudflare processes the request and may receive your IP address. Only after you press Publish and accept are your alias, title, mode, club, competition, opponent, season and displayed stats sent; the entry and GOAT Score become public. Your profile name and full save are not sent. The score is calculated on the server, but match results are client-reported and are not verified against a game server; do not include personal information. You can delete an entry from the same device while its local data is retained; do so before clearing that data.",
-  "de": "GOAT LADDER ist optional. Beim Öffnen der Rangliste verarbeitet Cloudflare die Anfrage und kann deine IP-Adresse erhalten. Erst wenn du auf Veröffentlichen tippst und zustimmst, werden Alias, Titel, Modus, Verein, Wettbewerb, Gegner, Saison und angezeigte Statistiken gesendet; Eintrag und GOAT Score werden öffentlich. Dein Profilname und der vollständige Spielstand werden nicht gesendet. Der Score wird auf dem Server berechnet, die Spielergebnisse stammen jedoch vom Client und werden nicht mit einem Spielserver verifiziert; gib keine persönlichen Daten an. Du kannst einen Eintrag auf demselben Gerät löschen, solange die lokalen Daten erhalten bleiben; tue dies vor dem Löschen dieser Daten.",
-  "it": "GOAT LADDER è facoltativa. Quando apri la classifica, Cloudflare elabora la richiesta e può ricevere il tuo indirizzo IP. Solo dopo aver premuto Pubblica e aver accettato vengono inviati alias, titolo, modalità, club, competizione, avversario, stagione e statistiche mostrate; il record e il GOAT Score diventano pubblici. Il nome del profilo e il salvataggio completo non vengono inviati. Il punteggio è calcolato sul server, ma i risultati sono dichiarati dal client e non verificati da un server di gioco; non inserire dati personali. Puoi eliminare un record dallo stesso dispositivo finché i dati locali sono conservati; fallo prima di cancellarli.",
-  "fr": "GOAT LADDER est facultatif. Lorsque tu ouvres le classement, Cloudflare traite la requête et peut recevoir ton adresse IP. Ce n'est qu'après avoir appuyé sur Publier et accepté que ton alias, titre, mode, club, compétition, adversaire, saison et statistiques affichées sont envoyés ; l'entrée et le GOAT Score deviennent publics. Ton nom de profil et ta sauvegarde complète ne sont pas envoyés. Le score est calculé sur le serveur, mais les résultats sont déclarés par le client et ne sont pas vérifiés par un serveur de jeu ; n'inclus aucune donnée personnelle. Tu peux supprimer une entrée depuis le même appareil tant que les données locales sont conservées ; fais-le avant de les effacer."
+  "es": "GOAT LADDER es opcional. Al abrir el ranking, Cloudflare procesa la solicitud y puede recibir tu dirección IP. Solo al pulsar Publicar carrera y aceptar se envían el alias, título, modo, club actual, temporadas, métricas acumuladas e historial temporada a temporada (clubes, competiciones, estadísticas, títulos y premios); esta información queda pública. También puedes publicar gestas individuales. No se envía el nombre del perfil ni la partida guardada completa. Los datos los declara el cliente y no se verifican con un servidor del juego. No incluyas datos personales en el alias o título. Puedes borrar una publicación desde el mismo dispositivo mientras conserves sus datos locales; hazlo antes de limpiarlos.",
+  "en": "GOAT LADDER is optional. When you open the ranking, Cloudflare processes the request and may receive your IP address. Only after you press Publish career and accept are your alias, title, mode, current club, seasons, aggregate metrics and season-by-season history (clubs, competitions, stats, trophies and awards) sent; this information becomes public. Individual achievements can also be published. Your profile name and full save are not sent. The data is client-reported and is not verified by a game server. Do not include personal information in your alias or title. You can delete a publication from the same device while its local data is retained; do so before clearing it.",
+  "de": "GOAT LADDER ist optional. Beim Öffnen der Rangliste verarbeitet Cloudflare die Anfrage und kann deine IP-Adresse erhalten. Erst wenn du Karriere veröffentlichen auswählst und zustimmst, werden Alias, Titel, Modus, aktueller Verein, Saisons, Kennzahlen und Saisonverlauf (Vereine, Wettbewerbe, Statistiken, Titel und Auszeichnungen) gesendet und öffentlich. Auch einzelne Erfolge können veröffentlicht werden. Profilname und vollständiger Spielstand werden nicht gesendet. Die Daten stammen vom Client und werden nicht durch einen Spielserver verifiziert. Gib keine persönlichen Daten als Alias oder Titel an. Du kannst eine Veröffentlichung auf demselben Gerät löschen, solange die lokalen Daten vorhanden sind; tue dies vor dem Löschen.",
+  "it": "GOAT LADDER è facoltativa. Quando apri la classifica, Cloudflare elabora la richiesta e può ricevere il tuo indirizzo IP. Solo dopo aver premuto Pubblica carriera e aver accettato vengono inviati alias, titolo, modalità, club attuale, stagioni, metriche aggregate e storico stagione per stagione (club, competizioni, statistiche, titoli e premi), che diventano pubblici. È possibile pubblicare anche singole imprese. Il nome del profilo e il salvataggio completo non vengono inviati. I dati sono dichiarati dal client e non verificati da un server di gioco. Non inserire dati personali nell'alias o nel titolo. Puoi eliminare una pubblicazione dallo stesso dispositivo finché i dati locali sono conservati; fallo prima di cancellarli.",
+  "fr": "GOAT LADDER est facultatif. Lorsque tu ouvres le classement, Cloudflare traite la requête et peut recevoir ton adresse IP. Ce n'est qu'après avoir choisi Publier la carrière et accepté que ton alias, titre, mode, club actuel, saisons, statistiques agrégées et historique saison par saison (clubs, compétitions, statistiques, titres et récompenses) sont envoyés et rendus publics. Les exploits individuels peuvent aussi être publiés. Ton nom de profil et ta sauvegarde complète ne sont pas envoyés. Les données sont déclarées par le client et ne sont pas vérifiées par un serveur de jeu. N'inclus aucune donnée personnelle dans l'alias ou le titre. Tu peux supprimer une publication depuis le même appareil tant que les données locales sont conservées ; fais-le avant de les effacer."
  },
  "p_ads_h": {
   "es": "Anuncios y cookies de terceros",

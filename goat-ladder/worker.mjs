@@ -1,5 +1,6 @@
 const API_PATH = "/api/goat-ladder";
-const MAX_BODY_BYTES = 12000;
+const CAREER_PATH = "/api/goat-ladder/careers";
+const MAX_BODY_BYTES = 700000;
 const MAX_NAME_LENGTH = 32;
 const MAX_TITLE_LENGTH = 64;
 
@@ -33,6 +34,130 @@ function text(value, field, maxLength, required) {
 function boolean(value, field) {
   if (typeof value !== "boolean") throw new Error("Invalid " + field);
   return value;
+}
+
+const CAREER_METRICS = {
+  player: {
+    seasons: "seasons", appearances: "appearances", goals: "goals", assists: "assists",
+    clean_sheets: "clean_sheets", trophies: "trophies", awards: "awards",
+    international_caps: "international_caps", international_goals: "international_goals", clubs: "clubs"
+  },
+  manager: {
+    seasons: "seasons", wins: "wins", draws: "draws", losses: "losses", trophies: "trophies",
+    unbeaten_seasons: "unbeaten_seasons", promotions: "promotions", clubs: "clubs",
+    win_percentage: "win_percentage"
+  }
+};
+
+function validateCareer(input) {
+  if (!input || typeof input !== "object" || Array.isArray(input)) throw new Error("Invalid request body");
+  if (input.game_mode !== "player" && input.game_mode !== "manager") throw new Error("Invalid game_mode");
+  if (!input.metrics || typeof input.metrics !== "object" || Array.isArray(input.metrics)) {
+    throw new Error("Invalid career metrics");
+  }
+  if (!Array.isArray(input.history) || input.history.length > 100) throw new Error("Invalid career history");
+  const metrics = {};
+  const fields = CAREER_METRICS[input.game_mode];
+  Object.keys(fields).forEach(function (field) {
+    metrics[field] = boundedInteger(input.metrics[field], 0, field === "win_percentage" ? 100 : 100000, 0);
+  });
+  if (!metrics.seasons || input.history.length !== metrics.seasons) {
+    throw new Error("Career history must contain every season");
+  }
+  const history = input.history.map(function (row) {
+    if (!row || typeof row !== "object" || Array.isArray(row)) throw new Error("Invalid career season");
+    const item = {
+      season: boundedInteger(row.season, 1900, 2200, null),
+      club: text(row.club, "club", 64, true),
+      competition: text(row.competition, "competition", 64, true),
+      clubs: Array.isArray(row.clubs) ? boundedStringList(row.clubs, "clubs") : null,
+      trophies: boundedStringList(row.trophies, "trophies"),
+      awards: boundedStringList(row.awards, "awards")
+    };
+    if (!item.clubs || !item.clubs.length) item.clubs = [item.club];
+    if (item.season == null) throw new Error("Career season year is required");
+    if (input.game_mode === "player") {
+      item.appearances = boundedInteger(row.appearances, 0, 1000, 0);
+      item.goals = boundedInteger(row.goals, 0, 1000, 0);
+      item.assists = boundedInteger(row.assists, 0, 1000, 0);
+      item.clean_sheets = boundedInteger(row.clean_sheets, 0, 1000, 0);
+      item.rating = boundedNumber(row.rating, 0, 10, null);
+      item.overall = boundedInteger(row.overall, 0, 99, null);
+      item.international_caps = boundedInteger(row.international_caps, 0, 1000, 0);
+      item.international_goals = boundedInteger(row.international_goals, 0, 1000, 0);
+    } else {
+      item.wins = boundedInteger(row.wins, 0, 1000, 0);
+      item.draws = boundedInteger(row.draws, 0, 1000, 0);
+      item.losses = boundedInteger(row.losses, 0, 1000, 0);
+      item.goals_for = boundedInteger(row.goals_for, 0, 10000, 0);
+      item.goals_against = boundedInteger(row.goals_against, 0, 10000, 0);
+      item.position = boundedInteger(row.position, 1, 100, null);
+      item.promoted = boolean(row.promoted, "promoted");
+    }
+    return item;
+  });
+  const career = {
+    event_key: text(input.event_key, "event_key", 128, true),
+    game_mode: input.game_mode,
+    display_name: text(input.display_name, "display_name", MAX_NAME_LENGTH, true),
+    title: text(input.title, "title", MAX_TITLE_LENGTH, true),
+    current_club: text(input.current_club, "current_club", 64, true),
+    started_season: boundedInteger(input.started_season, 1900, 2200, null),
+    latest_season: boundedInteger(input.latest_season, 1900, 2200, null),
+    metrics: metrics,
+    history: history
+  };
+  if (career.event_key.length < 8 || career.display_name.length < 2) throw new Error("Alias and career key are too short");
+  if (career.started_season !== history[0].season || career.latest_season !== history[history.length - 1].season) {
+    throw new Error("Career season range does not match history");
+  }
+  const clubNames = new Set();
+  const totals = {};
+  const sumFields = career.game_mode === "player"
+    ? ["appearances", "goals", "assists", "clean_sheets", "trophies", "awards", "international_caps", "international_goals"]
+    : ["wins", "draws", "losses", "trophies", "promotions"];
+  sumFields.forEach(field => { totals[field] = 0; });
+  let unbeatenSeasons = 0;
+  let previousSeason = null;
+  history.forEach(function (row) {
+    if (previousSeason != null && row.season <= previousSeason) throw new Error("Career seasons must be chronological");
+    previousSeason = row.season;
+    row.clubs.forEach(club => clubNames.add(club));
+    if (career.game_mode === "player") {
+      totals.appearances += row.appearances;
+      totals.goals += row.goals;
+      totals.assists += row.assists;
+      totals.clean_sheets += row.clean_sheets;
+      totals.trophies += row.trophies.length;
+      totals.awards += row.awards.length;
+      totals.international_caps += row.international_caps;
+      totals.international_goals += row.international_goals;
+    } else {
+      totals.wins += row.wins;
+      totals.draws += row.draws;
+      totals.losses += row.losses;
+      totals.trophies += row.trophies.length;
+      totals.promotions += row.promoted ? 1 : 0;
+      if (row.wins + row.draws + row.losses > 0 && row.losses === 0) unbeatenSeasons++;
+    }
+  });
+  if (metrics.clubs !== clubNames.size) throw new Error("Career club total does not match history");
+  for (const field of sumFields) {
+    if (metrics[field] !== totals[field]) throw new Error("Career " + field + " total does not match history");
+  }
+  if (career.game_mode === "manager") {
+    const played = totals.wins + totals.draws + totals.losses;
+    const winPercentage = played ? Math.round(totals.wins / played * 100) : 0;
+    if (metrics.unbeaten_seasons !== unbeatenSeasons || metrics.win_percentage !== winPercentage) {
+      throw new Error("Career results do not match history");
+    }
+  }
+  return career;
+}
+
+function boundedStringList(value, field) {
+  if (!Array.isArray(value) || value.length > 30) throw new Error("Invalid " + field);
+  return value.map(function (item) { return text(item, field, 64, true); });
 }
 
 export function validateEntry(input) {
@@ -83,6 +208,7 @@ export function validateEntry(input) {
     if (entry.game_mode === "player" && (entry.minutes_played == null || entry.match_rating == null)) {
       throw new Error("Player minutes and rating are required");
     }
+
   } else if (entry.game_mode !== "manager" || entry.wins == null || entry.draws == null || entry.losses == null) {
     throw new Error("Season records require manager results");
   } else if (entry.wins + entry.draws + entry.losses < 1) {
@@ -105,6 +231,10 @@ export function validateEntry(input) {
     division_depth: entry.division_depth, trophies_count: entry.trophies_count
   };
   return entry;
+}
+
+export function validateCareerEntry(input) {
+  return validateCareer(input);
 }
 
 function clamp(value, min, max) {
@@ -177,7 +307,7 @@ async function readEntry(request) {
   const declaredLength = Number(request.headers.get("Content-Length") || 0);
   if (declaredLength > MAX_BODY_BYTES) throw new Error("Request body too large");
   const body = await request.text();
-  if (body.length > MAX_BODY_BYTES) throw new Error("Request body too large");
+  if (new TextEncoder().encode(body).length > MAX_BODY_BYTES) throw new Error("Request body too large");
   try {
     return JSON.parse(body);
   } catch (error) {
@@ -201,7 +331,8 @@ function timeframeClause(timeframe) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname !== API_PATH) return new Response("Not found", { status: 404 });
+    const isCareerPath = url.pathname === CAREER_PATH;
+    if (url.pathname !== API_PATH && !isCareerPath) return new Response("Not found", { status: 404 });
     if (request.method === "OPTIONS") {
       const headers = corsHeaders(request, env);
       if (!headers) return response(request, env, { error: "Origin not allowed" }, 403);
@@ -214,8 +345,9 @@ export default {
       if (!/^[0-9a-f-]{36}$/i.test(id) || !/^[0-9a-f]{64}$/i.test(token)) {
         return response(request, env, { error: "Invalid deletion credentials" }, 400);
       }
+      const table = isCareerPath ? "goat_ladder_careers" : "goat_ladder_entries";
       const result = await env.GOAT_DB.prepare(
-        "DELETE FROM goat_ladder_entries WHERE id = ? AND delete_token_hash = ?"
+        "DELETE FROM " + table + " WHERE id = ? AND delete_token_hash = ?"
       ).bind(id, await tokenHash(token)).run();
       if (!result.meta || !result.meta.changes) return response(request, env, { error: "Entry not found or deletion token invalid" }, 404);
       return response(request, env, { deleted: true }, 200);
@@ -235,6 +367,23 @@ export default {
       } catch (error) {
         return response(request, env, { error: error.message }, 400);
       }
+      if (isCareerPath) {
+        const allowedMetrics = CAREER_METRICS[mode];
+        const metric = url.searchParams.get("metric") || Object.keys(allowedMetrics)[0];
+        const orderColumn = allowedMetrics[metric];
+        if (!orderColumn) return response(request, env, { error: "Invalid career metric" }, 400);
+        const result = await env.GOAT_DB.prepare(
+          "SELECT id, game_mode, display_name, title, current_club, started_season, latest_season, created_at, " +
+          "metrics_json, history_json FROM goat_ladder_careers WHERE game_mode = ?" + period +
+          " ORDER BY COALESCE(" + orderColumn + ", -1) DESC, created_at ASC LIMIT 50"
+        ).bind(mode).all();
+        return response(request, env, { metric: metric, entries: (result.results || []).map(row => ({
+          id: row.id, game_mode: row.game_mode, display_name: row.display_name, title: row.title,
+          current_club: row.current_club, started_season: row.started_season, latest_season: row.latest_season,
+          created_at: row.created_at, metrics: JSON.parse(row.metrics_json),
+          history: JSON.parse(row.history_json), verification: "community-reported"
+        })) }, 200);
+      }
       const result = await env.GOAT_DB.prepare(
         "SELECT id, game_mode, event_type, display_name, title, club_name, competition_name, opponent_name, season, " +
         "created_at, goat_score, score_breakdown_json, metrics_json FROM goat_ladder_entries " +
@@ -253,6 +402,47 @@ export default {
     if (env.GOAT_SUBMIT_LIMITER) {
       const limit = await env.GOAT_SUBMIT_LIMITER.limit({ key: request.headers.get("CF-Connecting-IP") || "unknown" });
       if (!limit.success) return response(request, env, { error: "Too many submission attempts" }, 429);
+    }
+    if (isCareerPath) {
+      let career;
+      try {
+        career = validateCareer(await readEntry(request));
+      } catch (error) {
+        return response(request, env, { error: error.message }, 400);
+      }
+      const id = crypto.randomUUID();
+      const deleteToken = Array.from(crypto.getRandomValues(new Uint8Array(32)))
+        .map(byte => byte.toString(16).padStart(2, "0")).join("");
+      const createdAt = new Date().toISOString();
+      const metricColumns = [
+        "seasons", "appearances", "goals", "assists", "clean_sheets", "trophies", "awards",
+        "international_caps", "international_goals", "wins", "draws", "losses",
+        "unbeaten_seasons", "promotions", "clubs", "win_percentage"
+      ];
+      const metricValues = metricColumns.map(field => career.metrics[field] == null ? null : career.metrics[field]);
+      const careerColumns = [
+        "id", "career_key_hash", "game_mode", "display_name", "title", "current_club",
+        "started_season", "latest_season", "created_at", "metrics_json", "history_json", "delete_token_hash"
+      ].concat(metricColumns);
+      const updateColumns = [
+        "id", "game_mode", "display_name", "title", "current_club", "started_season", "latest_season",
+        "created_at", "metrics_json", "history_json", "delete_token_hash"
+      ].concat(metricColumns);
+      const placeholders = careerColumns.map(() => "?").join(", ");
+      const updates = updateColumns.map(column => column + " = excluded." + column).join(", ");
+      const values = [
+        id, await tokenHash(career.event_key), career.game_mode, career.display_name, career.title,
+        career.current_club, career.started_season, career.latest_season, createdAt,
+        JSON.stringify(career.metrics), JSON.stringify(career.history), await tokenHash(deleteToken)
+      ].concat(metricValues);
+      const result = await env.GOAT_DB.prepare(
+        "INSERT INTO goat_ladder_careers (" + careerColumns.join(", ") + ") VALUES (" + placeholders + ") " +
+        "ON CONFLICT(career_key_hash) DO UPDATE SET " + updates
+      ).bind(...values).run();
+      if (!result.meta || !result.meta.changes) return response(request, env, { error: "Career could not be saved" }, 500);
+      return response(request, env, {
+        id, metrics: career.metrics, verification: "community-reported", delete_token: deleteToken
+      }, 201);
     }
     let entry;
     try {
