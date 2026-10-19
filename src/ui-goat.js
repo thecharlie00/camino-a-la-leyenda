@@ -3,6 +3,22 @@
   "use strict";
   var TEXT = {
     es: {
+      boardCareers: "Carreras", boardAchievements: "Gestas", careerTitlePlayer: "Carrera de Jugador",
+      careerTitleManager: "Carrera de Míster", publishCareer: "Publicar carrera completa",
+      careerConsent: "Acepto publicar este alias, el título, las métricas agregadas y el historial completo de temporadas de esta carrera. No se enviará la partida guardada.",
+      careerPrivacy: "Se publicarán el alias, el título, las métricas y el historial de temporadas con clubes, competiciones, estadísticas, títulos y premios. No se envía la partida completa. Los datos son públicos y no están verificados.",
+      careerNoData: "Avanza al menos una temporada para publicar tu carrera.", careerPublished: "Carrera publicada",
+      careerSeasons: "Temporadas", careerAppearances: "Partidos", careerWins: "Victorias",
+      careerDraws: "Empates", careerLosses: "Derrotas",
+      careerGoals: "Goles", careerAssists: "Asistencias", careerTrophies: "Títulos",
+      careerAwards: "Premios", careerCleanSheets: "Porterías a cero", careerCaps: "Partidos internacionales",
+      careerIntlGoals: "Goles internacionales", careerUnbeaten: "Temporadas invictas",
+      careerPromotions: "Ascensos", careerClubs: "Clubes", careerWinRate: "% victorias",
+      careerMetric: "Ordenar por", metricSeasons: "Temporadas", metricAppearances: "Partidos",
+      metricGoals: "Goles", metricAssists: "Asistencias", metricCleanSheets: "Porterías a cero",
+      metricTrophies: "Títulos", metricAwards: "Premios", metricCaps: "Partidos internacionales",
+      metricIntlGoals: "Goles internacionales", metricWins: "Victorias", metricUnbeaten: "Temporadas invictas",
+      metricDraws: "Empates", metricLosses: "Derrotas", metricPromotions: "Ascensos", metricClubs: "Clubes", metricWinRate: "% victorias",
       home: "GOAT LADDER", player: "Jugador", manager: "Míster", all: "Todos", week: "7 días",
       month: "30 días", loading: "Cargando ranking…", unavailable: "El ranking global aún no está configurado.",
       setup: "Cuando se configure el servicio, podrás consultar y publicar gestas desde la web y la app.",
@@ -21,6 +37,22 @@
       deleteSaved: "Puedes eliminar esta entrada desde este dispositivo.", deleteNotSaved: "No se pudo guardar la clave de eliminación en este dispositivo."
     },
     en: {
+      boardCareers: "Careers", boardAchievements: "Achievements", careerTitlePlayer: "Player career",
+      careerTitleManager: "Manager career", publishCareer: "Publish complete career",
+      careerConsent: "I agree to publish this alias, title, aggregate metrics and the full season history for this career. The save file will not be sent.",
+      careerPrivacy: "The alias, title, metrics and season history (clubs, competitions, stats, trophies and awards) will be public. The full save is not sent. Entries are community-reported and unverified.",
+      careerNoData: "Complete at least one season to publish your career.", careerPublished: "Career published",
+      careerSeasons: "Seasons", careerAppearances: "Appearances", careerWins: "Wins",
+      careerDraws: "Draws", careerLosses: "Losses",
+      careerGoals: "Goals", careerAssists: "Assists", careerTrophies: "Trophies",
+      careerAwards: "Awards", careerCleanSheets: "Clean sheets", careerCaps: "International appearances",
+      careerIntlGoals: "International goals", careerUnbeaten: "Unbeaten seasons",
+      careerPromotions: "Promotions", careerClubs: "Clubs", careerWinRate: "Win %",
+      careerMetric: "Rank by", metricSeasons: "Seasons", metricAppearances: "Appearances",
+      metricGoals: "Goals", metricAssists: "Assists", metricCleanSheets: "Clean sheets",
+      metricTrophies: "Trophies", metricAwards: "Awards", metricCaps: "International appearances",
+      metricIntlGoals: "International goals", metricWins: "Wins", metricUnbeaten: "Unbeaten seasons",
+      metricDraws: "Draws", metricLosses: "Losses", metricPromotions: "Promotions", metricClubs: "Clubs", metricWinRate: "Win %",
       home: "GOAT LADDER", player: "Player", manager: "Manager", all: "All time", week: "7 days",
       month: "30 days", loading: "Loading ranking…", unavailable: "The global ranking is not configured yet.",
       setup: "Once the service is configured, you can browse and publish records from web and app.",
@@ -39,6 +71,22 @@
       deleteSaved: "You can delete this entry from this device.", deleteNotSaved: "The deletion key could not be saved on this device."
     },
     de: {
+      boardCareers: "Karrieren", boardAchievements: "Erfolge", careerTitlePlayer: "Spielerkarriere",
+      careerTitleManager: "Managerkarriere", publishCareer: "Komplette Karriere veröffentlichen",
+      careerConsent: "Ich stimme zu, diesen Alias, Titel, zusammengefasste Kennzahlen und den vollständigen Saisonverlauf dieser Karriere zu veröffentlichen. Der Spielstand wird nicht gesendet.",
+      careerPrivacy: "Alias, Titel, Kennzahlen und Saisonverlauf mit Vereinen, Wettbewerben, Statistiken, Titeln und Auszeichnungen werden öffentlich. Der Spielstand wird nicht gesendet. Die Angaben sind nicht verifiziert.",
+      careerNoData: "Schließe mindestens eine Saison ab, um deine Karriere zu veröffentlichen.", careerPublished: "Karriere veröffentlicht",
+      careerSeasons: "Saisons", careerAppearances: "Einsätze", careerWins: "Siege",
+      careerDraws: "Unentschieden", careerLosses: "Niederlagen",
+      careerGoals: "Tore", careerAssists: "Vorlagen", careerTrophies: "Titel",
+      careerAwards: "Auszeichnungen", careerCleanSheets: "Zu-Null-Spiele", careerCaps: "Länderspiele",
+      careerIntlGoals: "Länderspieltore", careerUnbeaten: "Ungeschlagene Saisons",
+      careerPromotions: "Aufstiege", careerClubs: "Vereine", careerWinRate: "Siegquote",
+      careerMetric: "Sortieren nach", metricSeasons: "Saisons", metricAppearances: "Einsätze",
+      metricGoals: "Tore", metricAssists: "Vorlagen", metricCleanSheets: "Zu-Null-Spiele",
+      metricTrophies: "Titel", metricAwards: "Auszeichnungen", metricCaps: "Länderspiele",
+      metricIntlGoals: "Länderspieltore", metricWins: "Siege", metricUnbeaten: "Ungeschlagene Saisons",
+      metricDraws: "Unentschieden", metricLosses: "Niederlagen", metricPromotions: "Aufstiege", metricClubs: "Vereine", metricWinRate: "Siegquote",
       home: "GOAT LADDER", player: "Spieler", manager: "Manager", all: "Alle", week: "7 Tage",
       month: "30 Tage", loading: "Rangliste wird geladen…", unavailable: "Die globale Rangliste ist noch nicht eingerichtet.",
       setup: "Nach der Einrichtung kannst du Erfolge in Web und App ansehen und veröffentlichen.",
@@ -57,6 +105,22 @@
       deleteSaved: "Du kannst diesen Eintrag auf diesem Gerät löschen.", deleteNotSaved: "Der Löschschlüssel konnte auf diesem Gerät nicht gespeichert werden."
     },
     it: {
+      boardCareers: "Carriere", boardAchievements: "Imprese", careerTitlePlayer: "Carriera da giocatore",
+      careerTitleManager: "Carriera da mister", publishCareer: "Pubblica la carriera completa",
+      careerConsent: "Accetto di pubblicare questo alias, il titolo, le metriche aggregate e lo storico completo delle stagioni. Il salvataggio non verrà inviato.",
+      careerPrivacy: "Saranno pubblici alias, titolo, metriche e storico delle stagioni con club, competizioni, statistiche, titoli e premi. Il salvataggio completo non viene inviato. I dati non sono verificati.",
+      careerNoData: "Completa almeno una stagione per pubblicare la carriera.", careerPublished: "Carriera pubblicata",
+      careerSeasons: "Stagioni", careerAppearances: "Presenze", careerWins: "Vittorie",
+      careerDraws: "Pareggi", careerLosses: "Sconfitte",
+      careerGoals: "Gol", careerAssists: "Assist", careerTrophies: "Titoli",
+      careerAwards: "Premi", careerCleanSheets: "Partite senza subire gol", careerCaps: "Presenze internazionali",
+      careerIntlGoals: "Gol internazionali", careerUnbeaten: "Stagioni imbattute",
+      careerPromotions: "Promozioni", careerClubs: "Club", careerWinRate: "Percentuale vittorie",
+      careerMetric: "Ordina per", metricSeasons: "Stagioni", metricAppearances: "Presenze",
+      metricGoals: "Gol", metricAssists: "Assist", metricCleanSheets: "Partite senza subire gol",
+      metricTrophies: "Titoli", metricAwards: "Premi", metricCaps: "Presenze internazionali",
+      metricIntlGoals: "Gol internazionali", metricWins: "Vittorie", metricUnbeaten: "Stagioni imbattute",
+      metricDraws: "Pareggi", metricLosses: "Sconfitte", metricPromotions: "Promozioni", metricClubs: "Club", metricWinRate: "Percentuale vittorie",
       home: "GOAT LADDER", player: "Giocatore", manager: "Mister", all: "Sempre", week: "7 giorni",
       month: "30 giorni", loading: "Caricamento classifica…", unavailable: "La classifica globale non è ancora configurata.",
       setup: "Dopo la configurazione potrai consultare e pubblicare imprese da web e app.",
@@ -75,6 +139,22 @@
       deleteSaved: "Puoi eliminare questa voce da questo dispositivo.", deleteNotSaved: "Impossibile salvare la chiave di eliminazione su questo dispositivo."
     },
     fr: {
+      boardCareers: "Carrières", boardAchievements: "Exploits", careerTitlePlayer: "Carrière de joueur",
+      careerTitleManager: "Carrière de manager", publishCareer: "Publier la carrière complète",
+      careerConsent: "J'accepte de publier cet alias, le titre, les statistiques agrégées et l'historique complet des saisons. La sauvegarde ne sera pas envoyée.",
+      careerPrivacy: "L'alias, le titre, les statistiques et l'historique des saisons avec clubs, compétitions, résultats, titres et récompenses seront publics. La sauvegarde complète n'est pas envoyée. Les données ne sont pas vérifiées.",
+      careerNoData: "Termine au moins une saison pour publier ta carrière.", careerPublished: "Carrière publiée",
+      careerSeasons: "Saisons", careerAppearances: "Apparitions", careerWins: "Victoires",
+      careerDraws: "Matchs nuls", careerLosses: "Défaites",
+      careerGoals: "Buts", careerAssists: "Passes décisives", careerTrophies: "Titres",
+      careerAwards: "Récompenses", careerCleanSheets: "Matchs sans encaisser", careerCaps: "Sélections",
+      careerIntlGoals: "Buts internationaux", careerUnbeaten: "Saisons sans défaite",
+      careerPromotions: "Promotions", careerClubs: "Clubs", careerWinRate: "Taux de victoire",
+      careerMetric: "Classer par", metricSeasons: "Saisons", metricAppearances: "Apparitions",
+      metricGoals: "Buts", metricAssists: "Passes décisives", metricCleanSheets: "Matchs sans encaisser",
+      metricTrophies: "Titres", metricAwards: "Récompenses", metricCaps: "Sélections",
+      metricIntlGoals: "Buts internationaux", metricWins: "Victoires", metricUnbeaten: "Saisons sans défaite",
+      metricDraws: "Matchs nuls", metricLosses: "Défaites", metricPromotions: "Promotions", metricClubs: "Clubs", metricWinRate: "Taux de victoire",
       home: "GOAT LADDER", player: "Joueur", manager: "Manager", all: "Tout", week: "7 jours",
       month: "30 jours", loading: "Chargement du classement…", unavailable: "Le classement mondial n'est pas encore configuré.",
       setup: "Une fois le service configuré, tu pourras consulter et publier des exploits sur le web et l'app.",
@@ -123,6 +203,51 @@
     }
     return '<div class="goat-stats">' + stats.join("") + "</div>";
   }
+  var METRICS = {
+    player: [
+      ["appearances", "careerAppearances"], ["goals", "careerGoals"], ["assists", "careerAssists"],
+      ["clean_sheets", "careerCleanSheets"], ["trophies", "careerTrophies"], ["awards", "careerAwards"],
+      ["international_caps", "careerCaps"], ["international_goals", "careerIntlGoals"],
+      ["clubs", "careerClubs"], ["seasons", "careerSeasons"]
+    ],
+    manager: [
+      ["wins", "careerWins"], ["draws", "careerDraws"], ["losses", "careerLosses"],
+      ["trophies", "careerTrophies"], ["unbeaten_seasons", "careerUnbeaten"],
+      ["promotions", "careerPromotions"], ["win_percentage", "careerWinRate"], ["clubs", "careerClubs"],
+      ["seasons", "careerSeasons"]
+    ]
+  };
+  function CareerStatsSummary(metrics, mode) {
+    return '<div class="goat-stats">' + METRICS[mode].map(function (item) {
+      return stat(tr(item[1]), metrics[item[0]] == null ? "" :
+        (item[0] === "win_percentage" ? metrics[item[0]] + "%" : metrics[item[0]]));
+    }).join("") + "</div>";
+  }
+  function CareerCard(entry, index) {
+    var history = (entry.history || []).slice().reverse();
+    var seasons = history.map(function (row) {
+      var summary = entry.game_mode === "player"
+        ? tr("careerAppearances") + ": " + row.appearances + " · " + tr("careerGoals") + ": " + row.goals +
+          " · " + tr("careerAssists") + ": " + row.assists
+        : tr("careerWins") + ": " + row.wins + "-" + row.draws + "-" + row.losses;
+      var awards = (row.trophies || []).concat(row.awards || []);
+      return "<p><b>" + esc(row.season) + " · " + esc((row.clubs || [row.club]).join(", ")) + " · " + esc(row.competition) +
+        "</b><br>" + esc(summary + (awards.length ? " · " + awards.join(", ") : "") +
+          (row.promoted ? " · " + tr("careerPromotions") : "")) + "</p>";
+    }).join("");
+    return '<article class="card goat-card"><div class="head"><span class="tag real">#' + (index + 1) +
+      " · " + esc(tr("boardCareers")) + '</span><strong class="goat-score">' +
+      esc(entry.metrics && entry.metrics[window.__goatSheet.metric] != null
+        ? entry.metrics[window.__goatSheet.metric] : "") +
+      '</strong></div><h3>' + esc(entry.title) + '</h3><p class="goat-meta">' + esc(entry.display_name) + " · " +
+      esc(entry.current_club) + " · " + esc(entry.started_season + "–" + entry.latest_season) +
+      "</p>" + CareerStatsSummary(entry.metrics || {}, entry.game_mode) +
+      '<details class="goat-career-history"><summary>' + esc(tr("careerSeasons")) + " · " +
+      history.length + "</summary>" + seasons + "</details><p class=\"goat-unverified\">" +
+      esc(tr("verified")) + "</p>" + (service.canDelete(entry.id)
+        ? '<button class="btn wide" data-a="goatdeletecareer" data-v="' + esc(entry.id) + '">' +
+          esc(tr("delete")) + "</button>" : "") + "</article>";
+  }
   function GoatLadderCard(entry, index) {
     var opponent = entry.opponent_name ? " · " + tr("opponent") + ": " + entry.opponent_name : "";
     return '<article class="card goat-card"><div class="head"><span class="tag real">#' + (index + 1) +
@@ -135,9 +260,21 @@
           esc(tr("delete")) + "</button>" : "") + "</article>";
   }
   function GoatFilterTabs(mode, timeframe) {
-    return '<div class="seg goat-mode"><button data-a="goatmode" data-v="player" aria-pressed="' +
+    var metricChoices = METRICS[mode].map(function (item) {
+      return '<option value="' + item[0] + '"' + (item[0] === window.__goatSheet.metric ? " selected" : "") +
+        ">" + esc(tr(item[1])) + "</option>";
+    }).join("");
+    return '<div class="seg goat-board"><button data-a="goatboard" data-v="careers" aria-pressed="' +
+      (window.__goatSheet.board === "careers") + '">' + esc(tr("boardCareers")) +
+      '</button><button data-a="goatboard" data-v="achievements" aria-pressed="' +
+      (window.__goatSheet.board === "achievements") + '">' + esc(tr("boardAchievements")) + "</button></div>" +
+      '<div class="seg goat-mode"><button data-a="goatmode" data-v="player" aria-pressed="' +
       (mode === "player") + '">' + esc(tr("player")) + '</button><button data-a="goatmode" data-v="manager" aria-pressed="' +
-      (mode === "manager") + '">' + esc(tr("manager")) + '</button></div><div class="seg goat-period">' +
+      (mode === "manager") + '">' + esc(tr("manager")) + '</button></div>' +
+      (window.__goatSheet.board === "careers"
+        ? '<label class="lbl goat-metric-label">' + esc(tr("careerMetric")) + '<select class="goat-input" data-goat-metric>' +
+          metricChoices + "</select></label>" : "") +
+      '<div class="seg goat-period">' +
       [["all-time", "all"], ["30d", "month"], ["7d", "week"]].map(function (period) {
         return '<button data-a="goatperiod" data-v="' + period[0] + '" aria-pressed="' +
           (timeframe === period[0]) + '">' + esc(tr(period[1])) + "</button>";
@@ -145,18 +282,24 @@
   }
   function load(sheet) {
     if (!service.available()) { sheet.loading = false; sheet.entries = []; return; }
+    sheet.requestId = (sheet.requestId || 0) + 1;
+    var requestId = sheet.requestId;
     sheet.loading = true;
     sheet.error = "";
     window.UIX.renderSheet();
-    service.list(sheet.mode, sheet.timeframe).then(function (entries) {
-      if (window.UIX && window.UIX.sheets && window.UIX.sheets.goat && window.__goatSheet === sheet) {
+    var loading = sheet.board === "careers"
+      ? service.listCareers(sheet.mode, sheet.timeframe, sheet.metric)
+      : service.list(sheet.mode, sheet.timeframe);
+    loading.then(function (entries) {
+      if (window.UIX && window.UIX.sheets && window.UIX.sheets.goat &&
+          window.__goatSheet === sheet && sheet.requestId === requestId) {
         sheet.entries = entries;
         sheet.loading = false;
         window.UIX.renderSheet();
       }
     }).catch(function (error) {
       console.error("GOAT LADDER ranking request failed", error);
-      if (window.__goatSheet === sheet) {
+      if (window.__goatSheet === sheet && sheet.requestId === requestId) {
         sheet.error = error.message || tr("error");
         sheet.loading = false;
         window.UIX.renderSheet();
@@ -164,7 +307,8 @@
     });
   }
   function open() {
-    var sheet = {k: "goat", mode: "player", timeframe: "all-time", entries: [], loading: false, error: ""};
+    var sheet = {k: "goat", board: "careers", metric: "appearances", mode: "player",
+      timeframe: "all-time", entries: [], loading: false, error: ""};
     window.__goatSheet = sheet;
     window.UIX.setSheet(sheet);
     load(sheet);
@@ -181,6 +325,38 @@
     if (!consent || !consent.checked) { sheet.submitError = tr("submitConsent"); window.UIX.renderSheet(); return; }
     if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
       sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
+    }
+    function submitCareer(button) {
+      var sheet = window.UIX.getSheet(), career = service.career();
+      if (!sheet || !career) return;
+      var panel = button.closest(".sheet"), aliasInput = panel.querySelector("[data-career-alias]");
+      var titleInput = panel.querySelector("[data-career-title]"), consent = panel.querySelector("[data-career-consent]");
+      var alias = aliasInput ? aliasInput.value.trim() : "";
+      var title = titleInput ? titleInput.value.trim() : "";
+      sheet.careerAlias = alias;
+      sheet.careerTitle = title;
+      if (!consent || !consent.checked) { sheet.submitError = tr("submitConsent"); window.UIX.renderSheet(); return; }
+      if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
+        sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
+      }
+      sheet.submitting = true;
+      sheet.submitError = "";
+      window.UIX.renderSheet();
+      service.submitCareer(career, alias, title).then(function (result) {
+        sheet.submitting = false;
+        sheet.submitSuccess = tr("careerPublished");
+        sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
+        load(sheet);
+      }).catch(function (error) {
+        console.error("GOAT LADDER career submission failed", error);
+        sheet.submitting = false;
+        sheet.submitError = error.message || tr("error");
+        window.UIX.renderSheet();
+      });
+    }
+    function careerInputLabel(key, attribute, value) {
+      return '<label class="lbl">' + esc(tr(key)) + '<input class="goat-input" maxlength="' +
+        (key === "alias" ? 32 : 64) + '" data-career-' + attribute + ' value="' + esc(value) + '"></label>';
     }
     sheet.submitting = true;
     sheet.submitError = "";
@@ -202,19 +378,33 @@
       (key === "alias" ? 32 : 64) + '" data-goat-' + attribute + ' value="' + esc(value) + '"></label>';
   }
 
-  window.UIX.add("mainhome", function () {
+  if (!window.GOAT_WEB_BUILD) window.UIX.add("mainhome", function () {
     return '<button class="btn wide goat-entry" data-a="goat">🏆 ' + esc(tr("home")) + "</button>";
   });
   window.UIX.add("menu", function () {
     return '<button class="btn wide" data-a="goat">🏆 ' + esc(tr("home")) + "</button>";
   });
   window.UIX.actions.goat = open;
+  window.UIX.actions.goatboard = function (button, board) {
+    var sheet = window.UIX.getSheet();
+    if (!sheet || sheet.k !== "goat") return;
+    sheet.board = board === "achievements" ? "achievements" : "careers";
+    load(sheet);
+  };
   window.UIX.actions.goatmode = function (button, mode) {
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat") return;
     sheet.mode = mode === "manager" ? "manager" : "player";
+    sheet.metric = sheet.mode === "manager" ? "wins" : "appearances";
     load(sheet);
   };
+  document.addEventListener("change", function (event) {
+    if (!event.target || !event.target.matches("[data-goat-metric]")) return;
+    var sheet = window.UIX.getSheet();
+    if (!sheet || sheet.k !== "goat") return;
+    sheet.metric = event.target.value;
+    load(sheet);
+  });
   window.UIX.actions.goatperiod = function (button, timeframe) {
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat") return;
@@ -223,6 +413,7 @@
   };
   window.UIX.actions.goatrefresh = function () { var sheet = window.UIX.getSheet(); if (sheet && sheet.k === "goat") load(sheet); };
   window.UIX.actions.goatsubmit = function (button) { submit(button); };
+  window.UIX.actions.goatcareerpublish = function (button) { submitCareer(button); };
   window.UIX.actions.goatdelete = function (button, id) {
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat" || !window.confirm(tr("deleteConfirm"))) return;
@@ -239,13 +430,29 @@
       window.UIX.renderSheet();
     });
   };
+  window.UIX.actions.goatdeletecareer = function (button, id) {
+    var sheet = window.UIX.getSheet();
+    if (!sheet || sheet.k !== "goat" || !window.confirm(tr("deleteConfirm"))) return;
+    sheet.submitting = true;
+    window.UIX.renderSheet();
+    service.deleteCareer(id).then(function () {
+      sheet.submitting = false;
+      sheet.deleteNotice = "";
+      load(sheet);
+    }).catch(function (error) {
+      console.error("GOAT LADDER career deletion failed", error);
+      sheet.submitting = false;
+      sheet.error = error.message || tr("error");
+      window.UIX.renderSheet();
+    });
+  };
   window.UIX.sheets.goat = function (sheet) {
-    var latest = service.latest(), title = latest ? latest.title : "";
+    var latest = service.latest(), career = service.career(), title = latest ? latest.title : "";
     var list = !service.available() ? "" :
       sheet.loading ? '<p class="muted">' + esc(tr("loading")) + "</p>" :
       sheet.error ? '<p class="goat-error" role="alert">' + esc(sheet.error) +
         '</p><button class="btn wide" data-a="goatrefresh">' + esc(tr("retry")) + "</button>" :
-      sheet.entries.length ? sheet.entries.map(GoatLadderCard).join("") :
+      sheet.entries.length ? sheet.entries.map(sheet.board === "careers" ? CareerCard : GoatLadderCard).join("") :
       '<p class="muted">' + esc(tr("empty")) + "</p>";
     var publish = !service.available()
       ? '<div class="card goat-notice"><b>' + esc(tr("unavailable")) + '</b><p class="muted">' +
@@ -267,8 +474,27 @@
           '<button class="btn pri wide" data-a="goatsubmit"' + (sheet.submitting ? " disabled" : "") + ">" +
           esc(sheet.submitting ? tr("loading") : tr("publish")) + "</button></section>"
         : '<div class="card goat-notice"><p class="muted">' + esc(tr("noLatest")) + "</p></div>";
+    var careerPublish = !service.available()
+      ? ""
+      : career
+        ? '<section class="card goat-publish"><div class="head"><span class="tag hot">' +
+          esc(tr("publishCareer")) + '</span><span>' +
+          esc(career.game_mode === "manager" ? tr("manager") : tr("player")) +
+          "</span></div><h3>" + esc(career.title) + '</h3><p class="goat-meta">' +
+          esc(career.current_club) + " · " + esc(career.started_season + "–" + career.latest_season) +
+          "</p>" + CareerStatsSummary(career.metrics, career.game_mode) +
+          careerInputLabel("alias", "alias", sheet.careerAlias || "") +
+          careerInputLabel("title", "title", sheet.careerTitle || career.title) +
+          '<label class="goat-consent"><input type="checkbox" data-career-consent> ' + esc(tr("careerConsent")) +
+          '</label><p class="goat-privacy">' + esc(tr("careerPrivacy")) + "</p>" +
+          (sheet.submitError ? '<p class="goat-error" role="alert">' + esc(sheet.submitError) + "</p>" : "") +
+          (sheet.submitSuccess != null ? '<p class="pos">' + esc(tr("careerPublished")) + "</p>" : "") +
+          (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
+          '<button class="btn pri wide" data-a="goatcareerpublish"' + (sheet.submitting ? " disabled" : "") + ">" +
+          esc(sheet.submitting ? tr("loading") : tr("publishCareer")) + "</button></section>"
+        : '<div class="card goat-notice"><p class="muted">' + esc(tr("careerNoData")) + "</p></div>";
     return '<h2>🏆 ' + esc(tr("home")) + '</h2><p class="muted">' + esc(tr("login")) + "</p>" +
-      GoatFilterTabs(sheet.mode, sheet.timeframe) + publish +
+      GoatFilterTabs(sheet.mode, sheet.timeframe) + publish + careerPublish +
       '<div class="stack goat-list">' + list + "</div>" +
         '<button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
   };

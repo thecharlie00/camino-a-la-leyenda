@@ -1,6 +1,6 @@
 # GOAT LADDER
 
-GOAT LADDER is an optional shared ranking for the browser game and Android WebView. The game records only the latest completed player/manager match or manager season locally. A user must enter a public alias, review the entry, accept the disclosure and press **Publish** before any entry is sent.
+GOAT LADDER is an optional shared ranking for the browser game and Android WebView. It supports complete player/manager career runs as well as individual achievements. A career snapshot contains aggregate metrics and a sanitized season-by-season history, never the raw save file. Nothing is uploaded until the user enters a public alias, reviews the disclosure, accepts it and presses **Publish complete career**.
 
 ## Deploy the API
 
@@ -12,10 +12,18 @@ The API is a Cloudflare Worker backed by D1. It is not deployed by the GitHub Pa
    npx wrangler d1 create camino-goat-ladder
    ```
 
-2. Copy the returned database ID into `goat-ladder/wrangler.toml`, then apply the schema and deploy:
+2. Copy the returned database ID into `goat-ladder/wrangler.toml`, then apply both schemas and deploy:
 
    ```powershell
    npx wrangler d1 execute camino-goat-ladder --file=goat-ladder/migrations/0001_create_entries.sql
+   npx wrangler d1 execute camino-goat-ladder --file=goat-ladder/migrations/0002_create_careers.sql
+   npx wrangler deploy --config goat-ladder/wrangler.toml
+   ```
+
+   For an existing deployment that already has the achievements table, apply only the new migration before deploying the updated Worker:
+
+   ```powershell
+   npx wrangler d1 execute camino-goat-ladder --file=goat-ladder/migrations/0002_create_careers.sql
    npx wrangler deploy --config goat-ladder/wrangler.toml
    ```
 
@@ -31,7 +39,11 @@ Until an API origin is configured, the GOAT LADDER screen clearly reports that t
 - `POST /api/goat-ladder` validates a record, computes the score server-side and returns its ID plus a one-time deletion token.
 - `DELETE /api/goat-ladder?id=<entry-id>` accepts that token as a Bearer credential and removes the record. The client stores the token locally on the publishing device; clearing app/site data before deleting an entry loses the token.
 
-The Worker validates lengths, types, ranges and event requirements, uses prepared D1 statements, scopes cross-origin access, rate-limits reads/submissions and deduplicates submissions per hashed career/event key. Monitor the Worker and D1 usage after deployment. The client has no account or authoritative match server: players can alter their local save or forge a submission. Scores are server-calculated from client-reported stats, and records are visibly marked **community-reported / unverified**; this implementation is not an anti-cheat system.
+`GET /api/goat-ladder/careers?mode=player|manager&metric=<metric>&timeframe=all-time|30d|7d` returns up to 50 career snapshots ranked by a mode-specific allowlisted metric. `POST /api/goat-ladder/careers` creates or updates a snapshot for that save; republishing replaces the prior snapshot and its deletion token. `DELETE /api/goat-ladder/careers?id=<career-id>` removes one with its one-time deletion token.
+
+Player career rankings can be ordered by appearances, goals, assists, clean sheets, trophies, awards, international caps/goals, clubs or seasons. Manager rankings can be ordered by wins, draws, losses, trophies, unbeaten seasons, promotions, win percentage, clubs or seasons. The public history includes season, club(s), competition, season statistics and trophies/awards; the alias is the only user-provided identity field.
+
+The Worker validates lengths, types, ranges and event requirements, uses prepared D1 statements, scopes cross-origin access, rate-limits reads/submissions and deduplicates submissions per hashed career/event key. Monitor the Worker and D1 usage after deployment. The client has no account or authoritative match server: players can alter their local save or forge a submission. Scores and career metrics are client-reported; records are visibly marked **community-reported / unverified**. This implementation is not an anti-cheat system.
 
 ## Scoring
 

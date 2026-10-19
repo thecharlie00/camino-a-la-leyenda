@@ -17,6 +17,7 @@ OUT = DIST / "site"
 FONTS = ROOT / "fonts" / "node_modules" / "@fontsource"
 
 cfg = json.loads(pathlib.Path(os.environ.get("CAMINO_WEB_CONFIG") or (WEB / "config.json")).read_text(encoding="utf-8-sig"))
+goat_api_url = os.environ.get("CAMINO_GOAT_API_URL", cfg.get("goat_api_url", "")).strip().rstrip("/")
 client = (cfg.get("adsense_client") or "").strip()
 if client and not re.fullmatch(r"ca-pub-\d{10,20}", client):
     raise SystemExit("adsense_client debe tener la forma ca-pub-1234567890123456")
@@ -36,7 +37,10 @@ if OUT.exists():
 
 # --- juego: sin el SDK de Android y con la política de privacidad de la web con AdSense ---
 html = game.read_text()
-for a, b in (("var WEB_BUILD = false;", "var WEB_BUILD = true;"), ("var NO_ADS = false;", "var NO_ADS = true;"), ("var WEB_ADS = false;", "var WEB_ADS = true;" if client else "var WEB_ADS = false;")):
+for a, b in (("var GOAT_WEB_BUILD = false;", "var GOAT_WEB_BUILD = true;"),
+              ("var WEB_BUILD = false;", "var WEB_BUILD = true;"),
+              ("var NO_ADS = false;", "var NO_ADS = true;"),
+              ("var WEB_ADS = false;", "var WEB_ADS = true;" if client else "var WEB_ADS = false;")):
     assert html.count(a) == 1, "falta la marca " + a
     html = html.replace(a, b)
 (OUT / "jugar" / "juego.html").write_text(html)
@@ -55,13 +59,14 @@ for fam, pkg, w in faces:
         css.append(f'@font-face{{font-family:"{fam}";font-weight:{w};font-style:normal;font-display:swap;src:url(fonts/{src.name}) format("woff2");unicode-range:{rng}}}')
 (OUT / "site.css").write_text("\n".join(css) + "\n" + (WEB / "site.css").read_text())
 shutil.copy(WEB / "site.js", OUT / "site.js")
+shutil.copy(WEB / "goat-ladder.js", OUT / "goat-ladder.js")
 shutil.copytree(WEB / "img", OUT / "img")
 
 # --- plantillas, una por idioma: castellano en la raíz y /en/, /de/, /it/, /fr/ ---
 TR = json.loads((WEB / "i18n.json").read_text())
 LANGS = ["es", "en", "de", "it", "fr"]
 LOCALE = {"es": "es_ES", "en": "en_GB", "de": "de_DE", "it": "it_IT", "fr": "fr_FR"}
-PAGES = [("index.html", ""), ("jugar.html", "jugar/"), ("privacidad.html", "privacidad/")]
+PAGES = [("index.html", ""), ("jugar.html", "jugar/"), ("goat-ladder.html", "goat-ladder/"), ("privacidad.html", "privacidad/")]
 today = datetime.date.today()
 
 def t(l, k, **kw):
@@ -133,6 +138,8 @@ def render(name, l, page):
         "{{CONSENT_LINK}}": f'<button type="button" class="linkbtn" data-consent>{t(l, "cookies")}</button>' if client else "",
         "{{JS_T}}": "<script>window.T = " + json.dumps(jst, ensure_ascii=False) + ";</script>",
         "{{UPDATED}}": t(l, "updated", d=datefmt),
+        "{{GOAT_API_URL}}": json.dumps(goat_api_url),
+        "{{GOAT_URL}}": base + ("" if l == "es" else l + "/") + "goat-ladder/",
         "{{ADS_L3}}": t(l, "p_ads_l3", a=link("https://myadcenter.google.com/", "myadcenter.google.com"), b=link("https://www.aboutads.info/choices/", "aboutads.info")),
         "{{CONS}}": t(l, "p_cons", how=t(l, "cons_how_ads" if client else "cons_how_noads")),
         "{{HOST}}": t(l, "p_host", a=link("https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement", t(l, "p_host_a"))),
