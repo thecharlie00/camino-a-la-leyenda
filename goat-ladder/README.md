@@ -1,6 +1,6 @@
 # GOAT LADDER
 
-GOAT LADDER is an optional shared ranking for the browser game and Android WebView. It supports complete player/manager career runs as well as individual achievements. A career snapshot contains aggregate metrics and a sanitized season-by-season history, never the raw save file. Nothing is uploaded until the user enters a public alias, reviews the disclosure, accepts it and presses **Publish complete career**.
+GOAT LADDER is an optional shared ranking for the browser game and Android WebView. Both clients read the same public rankings for complete player/manager career runs and individual achievements; the app opens on careers and lets players switch between career and achievement boards. A career snapshot contains aggregate metrics and a sanitized season-by-season history, never the raw save file. Nothing is uploaded until the user enters a public alias, reviews the disclosure, accepts it and presses **Publish complete career**.
 
 ## Deploy the API
 

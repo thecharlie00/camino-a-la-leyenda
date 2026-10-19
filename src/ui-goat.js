@@ -14,6 +14,9 @@
       careerAwards: "Premios", careerCleanSheets: "Porterías a cero", careerCaps: "Partidos internacionales",
       careerIntlGoals: "Goles internacionales", careerUnbeaten: "Temporadas invictas",
       careerPromotions: "Ascensos", careerClubs: "Clubes", careerWinRate: "% victorias",
+      emptyCareers: "Aún no hay carreras compartidas en este ranking.", careerHistory: "Historial de temporadas",
+      careerPosition: "Posición", careerPromoted: "Ascenso", careerDeleteConfirm: "¿Quieres eliminar esta carrera del ranking?",
+      deleteCareer: "Eliminar mi carrera",
       careerMetric: "Ordenar por", metricSeasons: "Temporadas", metricAppearances: "Partidos",
       metricGoals: "Goles", metricAssists: "Asistencias", metricCleanSheets: "Porterías a cero",
       metricTrophies: "Títulos", metricAwards: "Premios", metricCaps: "Partidos internacionales",
@@ -48,6 +51,9 @@
       careerAwards: "Awards", careerCleanSheets: "Clean sheets", careerCaps: "International appearances",
       careerIntlGoals: "International goals", careerUnbeaten: "Unbeaten seasons",
       careerPromotions: "Promotions", careerClubs: "Clubs", careerWinRate: "Win %",
+      emptyCareers: "No shared careers in this ranking yet.", careerHistory: "Season history",
+      careerPosition: "Position", careerPromoted: "Promoted", careerDeleteConfirm: "Delete this career from the ranking?",
+      deleteCareer: "Delete my career",
       careerMetric: "Rank by", metricSeasons: "Seasons", metricAppearances: "Appearances",
       metricGoals: "Goals", metricAssists: "Assists", metricCleanSheets: "Clean sheets",
       metricTrophies: "Trophies", metricAwards: "Awards", metricCaps: "International appearances",
@@ -82,6 +88,9 @@
       careerAwards: "Auszeichnungen", careerCleanSheets: "Zu-Null-Spiele", careerCaps: "Länderspiele",
       careerIntlGoals: "Länderspieltore", careerUnbeaten: "Ungeschlagene Saisons",
       careerPromotions: "Aufstiege", careerClubs: "Vereine", careerWinRate: "Siegquote",
+      emptyCareers: "Noch keine geteilten Karrieren in dieser Rangliste.", careerHistory: "Saisonverlauf",
+      careerPosition: "Platz", careerPromoted: "Aufgestiegen", careerDeleteConfirm: "Diese Karriere aus der Rangliste löschen?",
+      deleteCareer: "Meine Karriere löschen",
       careerMetric: "Sortieren nach", metricSeasons: "Saisons", metricAppearances: "Einsätze",
       metricGoals: "Tore", metricAssists: "Vorlagen", metricCleanSheets: "Zu-Null-Spiele",
       metricTrophies: "Titel", metricAwards: "Auszeichnungen", metricCaps: "Länderspiele",
@@ -116,6 +125,9 @@
       careerAwards: "Premi", careerCleanSheets: "Partite senza subire gol", careerCaps: "Presenze internazionali",
       careerIntlGoals: "Gol internazionali", careerUnbeaten: "Stagioni imbattute",
       careerPromotions: "Promozioni", careerClubs: "Club", careerWinRate: "Percentuale vittorie",
+      emptyCareers: "Non ci sono ancora carriere condivise in questa classifica.", careerHistory: "Storico stagioni",
+      careerPosition: "Posizione", careerPromoted: "Promosso", careerDeleteConfirm: "Eliminare questa carriera dalla classifica?",
+      deleteCareer: "Elimina la mia carriera",
       careerMetric: "Ordina per", metricSeasons: "Stagioni", metricAppearances: "Presenze",
       metricGoals: "Gol", metricAssists: "Assist", metricCleanSheets: "Partite senza subire gol",
       metricTrophies: "Titoli", metricAwards: "Premi", metricCaps: "Presenze internazionali",
@@ -150,6 +162,9 @@
       careerAwards: "Récompenses", careerCleanSheets: "Matchs sans encaisser", careerCaps: "Sélections",
       careerIntlGoals: "Buts internationaux", careerUnbeaten: "Saisons sans défaite",
       careerPromotions: "Promotions", careerClubs: "Clubs", careerWinRate: "Taux de victoire",
+      emptyCareers: "Aucune carrière partagée dans ce classement pour le moment.", careerHistory: "Historique des saisons",
+      careerPosition: "Position", careerPromoted: "Promu", careerDeleteConfirm: "Supprimer cette carrière du classement ?",
+      deleteCareer: "Supprimer ma carrière",
       careerMetric: "Classer par", metricSeasons: "Saisons", metricAppearances: "Apparitions",
       metricGoals: "Buts", metricAssists: "Passes décisives", metricCleanSheets: "Matchs sans encaisser",
       metricTrophies: "Titres", metricAwards: "Récompenses", metricCaps: "Sélections",
@@ -223,6 +238,45 @@
         (item[0] === "win_percentage" ? metrics[item[0]] + "%" : metrics[item[0]]));
     }).join("") + "</div>";
   }
+  function careerMetricValue(metrics, key) {
+    var value = metrics[key];
+    return value == null ? "" : (key === "win_percentage" ? value + "%" : value);
+  }
+  function CareerSeasonHistory(entry) {
+    var rows = (entry.history || []).slice().reverse().map(function (season) {
+      var heading = [season.season, season.club, season.competition].filter(Boolean).join(" · ");
+      var summary = entry.game_mode === "player"
+        ? [tr("careerAppearances") + ": " + season.appearances, tr("careerGoals") + ": " + season.goals,
+          tr("careerAssists") + ": " + season.assists, tr("careerTrophies") + ": " + (season.trophies || []).length]
+        : [tr("careerWins") + ": " + season.wins + "-" + season.draws + "-" + season.losses,
+          tr("goals") + ": " + season.goals_for + "–" + season.goals_against];
+      if (season.position != null) summary.push(tr("careerPosition") + ": " + season.position);
+      if (season.promoted) summary.push(tr("careerPromoted"));
+      return '<p class="goat-season"><b>' + esc(heading) + '</b><span>' +
+        esc(summary.join(" · ")) + "</span>" +
+        (season.trophies && season.trophies.length ? '<span>' +
+          esc(tr("careerTrophies") + ": " + season.trophies.join(", ")) + "</span>" : "") +
+        (season.awards && season.awards.length ? '<span>' +
+          esc(tr("careerAwards") + ": " + season.awards.join(", ")) + "</span>" : "") + "</p>";
+    }).join("");
+    return '<details class="goat-history"><summary>' + esc(tr("careerHistory")) +
+      "</summary>" + rows + "</details>";
+  }
+  function CareerLadderCard(entry, index, metric) {
+    var metrics = entry.metrics || {};
+    var metricName = METRICS[entry.game_mode].filter(function (item) { return item[0] === metric; })[0];
+    var metricLabel = metricName ? tr(metricName[1]) : tr("careerSeasons");
+    return '<article class="card goat-card"><div class="head"><span class="tag real">#' + (index + 1) +
+      " · " + esc(tr("boardCareers")) + '</span><strong class="goat-score">' +
+      esc(careerMetricValue(metrics, metric)) + " " + esc(metricLabel) + "</strong></div><h3>" +
+      esc(entry.title) + '</h3><p class="goat-meta">' + esc(entry.display_name) + " · " +
+      esc(entry.current_club) + " · " + esc(entry.started_season + "–" + entry.latest_season) +
+      "</p>" + CareerStatsSummary(metrics, entry.game_mode) + CareerSeasonHistory(entry) +
+      '<p class="goat-unverified">' + esc(tr("verified")) + "</p>" +
+      (service.canDelete(entry.id) ? '<button class="btn wide" data-a="goatcareerdelete" data-v="' +
+        esc(entry.id) + '"' + (entry.id === window.__goatSheet.deletingCareer ? " disabled" : "") +
+        ">" + esc(tr("deleteCareer")) + "</button>" : "") + "</article>";
+  }
   function GoatLadderCard(entry, index) {
     var opponent = entry.opponent_name ? " · " + tr("opponent") + ": " + entry.opponent_name : "";
     return '<article class="card goat-card"><div class="head"><span class="tag real">#' + (index + 1) +
@@ -234,14 +288,23 @@
         ? '<button class="btn wide" data-a="goatdelete" data-v="' + esc(entry.id) + '">' +
           esc(tr("delete")) + "</button>" : "") + "</article>";
   }
-  function GoatFilterTabs(mode, timeframe) {
-    return '<div class="seg goat-mode"><button data-a="goatmode" data-v="player" aria-pressed="' +
+  function GoatFilterTabs(board, mode, timeframe, metric) {
+    var metrics = METRICS[mode];
+    return '<div class="seg goat-board"><button data-a="goatboard" data-v="careers" aria-pressed="' +
+      (board === "careers") + '">' + esc(tr("boardCareers")) + '</button><button data-a="goatboard" data-v="achievements" aria-pressed="' +
+      (board === "achievements") + '">' + esc(tr("boardAchievements")) + '</button></div>' +
+      '<div class="seg goat-mode"><button data-a="goatmode" data-v="player" aria-pressed="' +
       (mode === "player") + '">' + esc(tr("player")) + '</button><button data-a="goatmode" data-v="manager" aria-pressed="' +
       (mode === "manager") + '">' + esc(tr("manager")) + '</button></div><div class="seg goat-period">' +
       [["all-time", "all"], ["30d", "month"], ["7d", "week"]].map(function (period) {
         return '<button data-a="goatperiod" data-v="' + period[0] + '" aria-pressed="' +
           (timeframe === period[0]) + '">' + esc(tr(period[1])) + "</button>";
-      }).join("") + "</div>";
+      }).join("") + '</div><label class="lbl goat-metric">' + esc(tr("careerMetric")) +
+      '<select data-goat-metric' + (board === "careers" ? "" : " disabled") + ">" +
+      metrics.map(function (item) {
+        return '<option value="' + item[0] + '"' + (metric === item[0] ? " selected" : "") +
+          ">" + esc(tr(item[1])) + "</option>";
+      }).join("") + "</select></label>";
   }
   function load(sheet) {
     if (!service.available()) { sheet.loading = false; sheet.entries = []; return; }
@@ -250,7 +313,10 @@
     sheet.loading = true;
     sheet.error = "";
     window.UIX.renderSheet();
-    service.list(sheet.mode, sheet.timeframe).then(function (entries) {
+    var request = sheet.board === "careers"
+      ? service.listCareers(sheet.mode, sheet.timeframe, sheet.metric)
+      : service.list(sheet.mode, sheet.timeframe);
+    request.then(function (entries) {
       if (window.UIX && window.UIX.sheets && window.UIX.sheets.goat &&
           window.__goatSheet === sheet && sheet.requestId === requestId) {
         sheet.entries = entries;
@@ -267,7 +333,8 @@
     });
   }
   function open() {
-    var sheet = {k: "goat", mode: "player", timeframe: "all-time", entries: [], loading: false, error: ""};
+    var sheet = {k: "goat", board: "careers", mode: "player", timeframe: "all-time",
+      metric: "appearances", entries: [], loading: false, error: ""};
     window.__goatSheet = sheet;
     window.UIX.setSheet(sheet);
     load(sheet);
@@ -385,6 +452,13 @@
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat") return;
     sheet.mode = mode === "manager" ? "manager" : "player";
+    if (sheet.board === "careers") sheet.metric = METRICS[sheet.mode][0][0];
+    load(sheet);
+  };
+  window.UIX.actions.goatboard = function (button, board) {
+    var sheet = window.UIX.getSheet();
+    if (!sheet || sheet.k !== "goat") return;
+    sheet.board = board === "achievements" ? "achievements" : "careers";
     load(sheet);
   };
   window.UIX.actions.goatperiod = function (button, timeframe) {
@@ -411,14 +485,41 @@
       window.UIX.renderSheet();
     });
   };
+  window.UIX.actions.goatcareerdelete = function (button, id) {
+    var sheet = window.UIX.getSheet();
+    if (!sheet || sheet.k !== "goat" || !window.confirm(tr("careerDeleteConfirm"))) return;
+    sheet.deletingCareer = id;
+    window.UIX.renderSheet();
+    service.deleteCareer(id).then(function () {
+      sheet.deletingCareer = null;
+      load(sheet);
+    }).catch(function (error) {
+      console.error("GOAT LADDER career deletion failed", error);
+      sheet.deletingCareer = null;
+      sheet.error = error.message || tr("error");
+      window.UIX.renderSheet();
+    });
+  };
+  document.addEventListener("change", function (event) {
+    var select = event.target;
+    if (!select || !select.matches || !select.matches("[data-goat-metric]")) return;
+    var sheet = window.UIX.getSheet();
+    if (!sheet || sheet.k !== "goat" || sheet.board !== "careers") return;
+    var allowed = METRICS[sheet.mode].map(function (item) { return item[0]; });
+    sheet.metric = allowed.indexOf(select.value) >= 0 ? select.value : METRICS[sheet.mode][0][0];
+    load(sheet);
+  });
   window.UIX.sheets.goat = function (sheet) {
     var latest = service.latest(), title = latest ? latest.title : "";
     var list = !service.available() ? "" :
       sheet.loading ? '<p class="muted">' + esc(tr("loading")) + "</p>" :
       sheet.error ? '<p class="goat-error" role="alert">' + esc(sheet.error) +
         '</p><button class="btn wide" data-a="goatrefresh">' + esc(tr("retry")) + "</button>" :
-      sheet.entries.length ? sheet.entries.map(GoatLadderCard).join("") :
-      '<p class="muted">' + esc(tr("empty")) + "</p>";
+      sheet.entries.length ? sheet.entries.map(function (entry, index) {
+        return sheet.board === "careers"
+          ? CareerLadderCard(entry, index, sheet.metric) : GoatLadderCard(entry, index);
+      }).join("") :
+      '<p class="muted">' + esc(tr(sheet.board === "careers" ? "emptyCareers" : "empty")) + "</p>";
     var publish = !service.available()
       ? '<div class="card goat-notice"><b>' + esc(tr("unavailable")) + '</b><p class="muted">' +
         esc(tr("setup")) + "</p></div>"
@@ -440,7 +541,8 @@
           esc(sheet.submitting ? tr("loading") : tr("publish")) + "</button></section>"
         : '<div class="card goat-notice"><p class="muted">' + esc(tr("noLatest")) + "</p></div>";
     return '<h2>🏆 ' + esc(tr("home")) + '</h2><p class="muted">' + esc(tr("login")) + "</p>" +
-      GoatFilterTabs(sheet.mode, sheet.timeframe) + publish +
+      GoatFilterTabs(sheet.board, sheet.mode, sheet.timeframe, sheet.metric) +
+      (sheet.board === "achievements" ? publish : "") +
       '<div class="stack goat-list">' + list + "</div>" +
         '<button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
   };
