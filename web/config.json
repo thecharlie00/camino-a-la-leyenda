@@ -8,7 +8,7 @@
     "juego_lateral": ""
   },
   "domain": "futbolroadtolegend.com",
-  "goat_api_url": "",
+  "goat_api_url": "https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev",
   "base_url": "https://thecharlie00.github.io/camino-a-la-leyenda/",
   "play_url": "https://play.google.com/store/apps/details?id=com.caminoleyenda.app",
   "repo_url": "https://github.com/thecharlie00/camino-a-la-leyenda"

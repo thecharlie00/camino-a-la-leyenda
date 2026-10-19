@@ -94,6 +94,9 @@ main { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling
 @keyframes blink { to { visibility: hidden; } }
 .goat-mode { margin-top: 14px; }
 .goat-period { margin-top: 8px; }
+.goat-board { margin-top: 14px; }
+.goat-metric { display: block; margin-top: 10px; }
+.goat-metric select { display: block; width: 100%; margin-top: 5px; border: 1px solid var(--line); border-radius: 8px; background: var(--tunnel); color: var(--chalk); padding: 10px; font: inherit; }
 .goat-card, .goat-publish { margin-top: 10px; }
 .goat-card h3, .goat-publish h3 { font-size: 22px; }
 .goat-score { color: var(--led); font: 900 24px/1 var(--f-led); white-space: nowrap; }
@@ -113,6 +116,10 @@ main { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling
 .goat-privacy { color: var(--mist); font-size: 11px; margin: 0; }
 .goat-error { color: var(--red); font-size: 13px; }
 .goat-list { gap: 0; margin-bottom: 14px; }
+.goat-history { margin-top: 10px; color: var(--mist); font-size: 12px; }
+.goat-history summary { cursor: pointer; color: var(--sky); font-weight: 700; }
+.goat-season { display: flex; flex-direction: column; gap: 3px; border-top: 1px solid var(--line); padding: 8px 0 0; }
+.goat-season b { color: var(--chalk); }
 .lead { font-size: 15.5px; color: var(--chalk); margin: 8px 0 0; max-width: 62ch; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .chip { font: 700 12px/1 var(--f-body); padding: 6px 8px; border-radius: 6px; background: var(--tunnel); }
