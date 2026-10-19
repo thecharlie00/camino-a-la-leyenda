@@ -26,6 +26,13 @@ import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.UpdateAvailability;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /* Contenedor de la app: una WebView a pantalla completa con el juego.
    - Anuncios: clase Ads (en la versión «noads» no hace nada).
    - Actualizaciones: al abrir, pregunta a Google Play si hay una versión nueva y se lo dice al juego,
@@ -34,7 +41,9 @@ public class MainActivity extends Activity {
     private WebView web;
     private Ads ads;
     private volatile int updateCode = 0;   // versionCode nuevo disponible en Play (0 = ninguno)
+    private volatile String updateName = "";
     private volatile boolean pageReady = false;
+    private volatile boolean publicListingChecked = false;
 
     /* Puente con el juego (JavaScript). */
     public class Bridge {
@@ -75,6 +84,9 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public int updateAvailable() { return updateCode; }
+
+        @JavascriptInterface
+        public String updateName() { return updateName; }
 
         /* abre la ficha de la app en Google Play para actualizar */
         @JavascriptInterface
@@ -141,16 +153,78 @@ public class MainActivity extends Activity {
         try {
             AppUpdateManagerFactory.create(this).getAppUpdateInfo().addOnSuccessListener((AppUpdateInfo info) -> {
                 if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && info.availableVersionCode() > BuildConfig.VERSION_CODE) {
-                    updateCode = info.availableVersionCode();
-                    runOnUiThread(this::tellUpdate);
+                    updateAvailable(info.availableVersionCode(), "");
+                } else checkPublicListing();
+            }).addOnFailureListener(error -> checkPublicListing());
+        } catch (Exception e) { checkPublicListing(); }
+    }
+
+    private void updateAvailable(int code, String name) {
+        if (updateCode > 0 || code <= BuildConfig.VERSION_CODE) return;
+        updateCode = code;
+        updateName = name == null ? "" : name;
+        runOnUiThread(this::tellUpdate);
+    }
+
+    /* Play Core no informa de APK instaladas manualmente; consulta la ficha pública en ese caso. */
+    private void checkPublicListing() {
+        if (publicListingChecked) return;
+        publicListingChecked = true;
+        new Thread(() -> {
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL("https://play.google.com/store/apps/details?id=" + getPackageName() + "&hl=en");
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setConnectTimeout(8000);
+                connection.setReadTimeout(8000);
+                connection.setUseCaches(false);
+                connection.setRequestProperty("User-Agent",
+                    "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36");
+                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) return;
+                try (InputStream input = connection.getInputStream();
+                     ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+                    byte[] buffer = new byte[16384];
+                    int count, total = 0;
+                    while ((count = input.read(buffer)) > 0 && total < 3000000) {
+                        output.write(buffer, 0, count);
+                        total += count;
+                    }
+                    String html = output.toString("UTF-8");
+                    Matcher matcher = Pattern.compile("\\[\\[\\[\"(\\d+(?:\\.\\d+)+)\"\\]\\]").matcher(html);
+                    if (matcher.find()) {
+                        String publishedVersion = matcher.group(1);
+                        if (isNewerVersion(publishedVersion, BuildConfig.VERSION_NAME)) {
+                            MainActivity.this.updateAvailable(BuildConfig.VERSION_CODE + 1, publishedVersion);
+                        }
+                    }
                 }
-            });
-        } catch (Exception e) { /* sin Google Play (p. ej. instalada a mano): no se avisa */ }
+            } catch (Exception error) {
+                android.util.Log.w("CaminoUpdates", "Could not check the public Play listing", error);
+            } finally {
+                if (connection != null) connection.disconnect();
+            }
+        }, "play-version-check").start();
+    }
+
+    private static boolean isNewerVersion(String candidate, String installed) {
+        try {
+            String[] newer = candidate.split("\\.");
+            String[] current = (installed == null ? "" : installed).split("\\.");
+            for (int i = 0; i < Math.max(newer.length, current.length); i++) {
+                int next = i < newer.length ? Integer.parseInt(newer[i]) : 0;
+                int old = i < current.length ? Integer.parseInt(current[i].replaceAll("\\D.*", "")) : 0;
+                if (next != old) return next > old;
+            }
+        } catch (NumberFormatException error) {
+            return false;
+        }
+        return false;
     }
 
     private void tellUpdate() {
         if (!pageReady || updateCode <= 0 || web == null) return;
-        web.evaluateJavascript("window.caminoUpdate&&window.caminoUpdate(" + updateCode + ")", null);
+        String name = updateName.replaceAll("[^0-9.]", "");
+        web.evaluateJavascript("window.caminoUpdate&&window.caminoUpdate(" + updateCode + ",'" + name + "')", null);
     }
 
     private void openStorePage() {

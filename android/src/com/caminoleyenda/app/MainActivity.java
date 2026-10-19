@@ -194,9 +194,12 @@ public class MainActivity extends Activity {
         if (updateDone) return;
         unbindUpd();
         if (b == null || b.getInt("error.code", 0) != 0) { checkWeb(); return; }
-        updateDone = true;
         int avail = b.getInt("update.availability", 0), vc = b.getInt("version.code", 0);
-        if (avail == 2 && vc > myCode()) { updateCode = vc; tellUpdate(); }
+        if (avail == 2 && vc > myCode()) {
+            updateDone = true;
+            updateCode = vc;
+            tellUpdate();
+        } else checkWeb();
     }
 
     /* plan B: la ficha pública de Google Play */

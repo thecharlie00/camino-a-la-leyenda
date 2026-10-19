@@ -25,7 +25,7 @@ Desde terminal: `./gradlew bundleNoadsRelease` → `app/build/outputs/bundle/noa
 ## 3. Cada versión nueva
 - Sube `versionCode` (y `versionName`) en `app/build.gradle` antes de generar el .aab.
 - Súbelo a Play Console. Cuando Google lo apruebe, a quien tenga la versión anterior le saldrá el aviso al abrir el juego.
-- El aviso solo funciona con la app instalada **desde Google Play** (no con una APK instalada a mano).
+- La comprobación principal usa Google Play. Si Play Core no detecta una actualización (por ejemplo, en una APK instalada a mano), la app intenta comprobar la versión pública de la ficha de Play Store; esa alternativa solo funciona si la ficha y su versión son públicas.
 - Para probarlo antes de publicar: Play Console → *Compartir apps internamente*, instala una versión y luego sube otra con un `versionCode` mayor.
 
 ## 4. Cuando quieras anuncios
