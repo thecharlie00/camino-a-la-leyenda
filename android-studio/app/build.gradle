@@ -1,12 +1,12 @@
+plugins {
+    id 'com.android.application'
+}
+
 /* Las contraseñas de firma viven en ../signing.properties (no se sube a git) */
 def signingProps = new Properties()
 def signingFile = rootProject.file("signing.properties")
 if (signingFile.exists()) signingFile.withInputStream { signingProps.load(it) }
-def signingProp(String k) { return signingProps.getProperty(k, (project.findProperty(k) ?: "").toString()) }
-
-plugins {
-    id 'com.android.application'
-}
+def signingProp = { String k -> signingProps.getProperty(k, (project.findProperty(k) ?: "").toString()) }
 
 def TEST_APP_ID = 'ca-app-pub-3940256099942544~3347511713'
 def TEST_INTERSTITIAL = 'ca-app-pub-3940256099942544/1033173712'
@@ -19,8 +19,8 @@ android {
         applicationId 'com.caminoleyenda.app'
         minSdk 24
         targetSdk 36
-        versionCode 39
-        versionName '4.9'
+        versionCode 40
+        versionName '5.0'
     }
 
     buildFeatures {
