@@ -16,7 +16,7 @@ DIST = pathlib.Path(os.environ["CAMINO_DIST"]) if os.environ.get("CAMINO_DIST") 
 OUT = DIST / "site"
 FONTS = ROOT / "fonts" / "node_modules" / "@fontsource"
 
-cfg = json.loads(pathlib.Path(os.environ.get("CAMINO_WEB_CONFIG") or (WEB / "config.json")).read_text())
+cfg = json.loads(pathlib.Path(os.environ.get("CAMINO_WEB_CONFIG") or (WEB / "config.json")).read_text(encoding="utf-8-sig"))
 client = (cfg.get("adsense_client") or "").strip()
 if client and not re.fullmatch(r"ca-pub-\d{10,20}", client):
     raise SystemExit("adsense_client debe tener la forma ca-pub-1234567890123456")
