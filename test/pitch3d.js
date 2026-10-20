@@ -144,6 +144,60 @@ function roster(prefix) {
   await p.waitForTimeout(200);
   await check("parada", () => { const d = Pitch3D.debug(); return { ok: d.action && d.action.res === "save", why: "sin acción save" }; });
   for (let i = 0; i < 40 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+
+  /* Saque de puerta: preparación, scan, protección, carrera, impacto y
+     recuperación. El balón no puede salir antes del impacto. */
+  await p.evaluate(() => {
+    Pitch3D.state({ speed: 3 });
+    Pitch3D.event({ t: "miss", side: 0, who: 10, k: "shot", d: 16, ly: 2 });
+  });
+  for (let i = 0; i < 80; i++) {
+    const g = await p.evaluate(() => Pitch3D.debug().goalkick);
+    if (g && g.active) break;
+    await p.waitForTimeout(50);
+  }
+  await check("saque de puerta en preparación", () => {
+    const d = Pitch3D.debug(), g = d.goalkick;
+    return { ok: !!g && g.active && !g.launched && d.ball.mode === "dead" &&
+      g.phases.indexOf("prepare") >= 0 && g.pressure,
+      why: "sin secuencia/balón muerto/presión", info: g ? g.phase + " · " + g.phases.join(">") : "sin acción" };
+  });
+  await p.evaluate(() => {
+    const d = Pitch3D.debug();
+    window.__gkBall = { x: d.ball.x, z: d.ball.z };
+  });
+  await p.waitForTimeout(260);
+  await check("balón inmóvil antes del impacto", () => {
+    const d = Pitch3D.debug(), g = d.goalkick, b = d.ball, spot = window.__gkBall;
+    return { ok: !!g && !g.launched && b.mode === "dead" &&
+      Math.abs(b.x - spot.x) < 0.01 && Math.abs(b.z - spot.z) < 0.01,
+      why: "el balón se movió antes del golpeo", info: b.mode };
+  });
+  let gkLaunch = null;
+  for (let i = 0; i < 80; i++) {
+    const g = await p.evaluate(() => Pitch3D.debug().goalkick);
+    if (g && g.launched) {
+      gkLaunch = g;
+      await p.evaluate((x) => { window.__gkLaunch = x; }, g);
+      break;
+    }
+    await p.waitForTimeout(50);
+  }
+  await check("impacto sincroniza el lanzamiento", () => {
+    const d = Pitch3D.debug(), g = window.__gkLaunch;
+    return { ok: !!g && g.launchPhase === "impact" &&
+      Math.abs(g.launchT - g.impactAt) <= 0.08 && d.ball.mode !== "dead",
+      why: "fase/marca/balón", info: g ? g.launchPhase + " t=" + g.launchT + "/" + g.impactAt : "sin impacto" };
+  });
+  for (let i = 0; i < 80 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  await check("secuencia de saque completa", () => {
+    const g = Pitch3D.debug().goalkick;
+    const order = ["prepare", "scan", "shield", "windup", "plant", "impact", "follow", "recover"];
+    const okOrder = !!g && order.every((n, i) => g.phases[i] === n);
+    return { ok: okOrder && g.launched && g.receiver >= 0 && g.minPressureDist >= 1.6, why: "fases/receptor/espaciado", info: g ? g.phases.join(">") + " · presión " + g.minPressureDist + " m" : "sin registro" };
+  });
+  await p.evaluate(() => Pitch3D.state({ speed: 1 }));
+
   await p.evaluate(() => Pitch3D.event({ t: "half" }));
   await p.waitForTimeout(150);
   await check("descanso y cambio de lado", () => {

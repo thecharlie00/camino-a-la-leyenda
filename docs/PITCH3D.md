@@ -18,7 +18,7 @@ El partido 3D es una representación visual del directo. **`match41.js` sigue si
 1. **Estado y simulación visual**: posesión, balón, jugadores, saques, descanso, final y cola de acciones.
 2. **IA y movimiento**: posiciones base por formación, pressing, ayudas, separación, porteros y velocidades.
 3. **Animación y skinning**: lectura de clips GLB, evaluación de la jerarquía de 22 huesos y deformación en CPU con hasta cuatro influencias por vértice.
-4. **Balón y jugadas**: estados `dead`, `held`, `flight` y `loose`; pases, tiros, paradas, postes y saques.
+4. **Balón y jugadas**: estados `dead`, `held`, `flight` y `loose`; pases, tiros, paradas, postes y saques. El saque de puerta usa una secuencia de presentación con impacto sincronizado.
 5. **Cámara**: seguimiento suave del balón, acercamiento en jugadas y encuadre de celebración.
 6. **WebGL 1**: shaders propios, un VBO estático para el campo y un VBO dinámico reutilizado para jugadores y balón.
 7. **Adaptador `Pitch`**: conserva la API del campo 2D y permite alternar 2D/3D sin reiniciar el directo.
@@ -63,12 +63,33 @@ match41.js ──> ui.js (livePitchFeed) ──> Pitch.state / Pitch.event
 
 - `state.bx` siempre se interpreta desde la perspectiva del equipo local. El 3D aplica el lado de ataque (`sim.attack`) y lo espeja al descanso.
 - `bx` es una posición física continua: al perder la posesión el balón se queda donde estaba y solo cambia el equipo que ataca. Los saques de centro, de puerta, de banda y los córners son las únicas reanudaciones que lo colocan en una posición fija.
+- La salida por la línea de fondo se resuelve por el último toque: saque de puerta para el equipo que defiende esa portería si el balón lo sacó el atacante, y córner para el atacante si lo desvió el defensor.
 - El adaptador no lanza pases de reconciliación de un campo a otro: si el portador está lejos del objetivo, corre hacia él. Un cambio de posesión suelta el balón en su sitio y el nuevo equipo lo persigue.
 - Los jugadores se identifican por `id` estable, no por identidad de objeto: `ui.js` recrea la lista cada minuto y el 3D reutiliza sus actores.
 - Si llega un evento mientras hay una acción en curso, se encola. La UI puede esperar con `Pitch.busy()`.
 - Al descanso se intercambian lados, se reinicia el saque y se conserva el roster.
 - Al final se congela la simulación visual, pero la cámara y el render siguen activos.
 - `Pitch.reset()` conserva el roster y recoloca el partido para el reinicio de la simulación.
+
+### Saque de puerta
+
+El saque de puerta ya no es un pase instantáneo tras una espera fija. `pitch3d.js` representa una secuencia de presentación de **5,76 s de partido** (comprimida por la velocidad del directo), sin tocar el resultado ni el estado de `match41`:
+
+```text
+prepare → scan → shield → windup → plant → impact → follow → recover
+ 1,35     0,80    1,00      0,90     0,16     0,10     0,75     0,70
+```
+
+- **prepare**: el portero sale de su área, llega al balón y lo coloca. El balón permanece `dead` en el punto de saque.
+- **scan**: otea ambas bandas; la orientación del cuerpo barre a izquierda y derecha.
+- **shield**: el rival más cercano presiona y el portero protege el balón con el cuerpo. El atacante se detiene fuera del radio de choque; no hay solapamientos.
+- **windup**: retrocede mirando al balón y arranca la carrera de golpeo.
+- **plant / impact**: la pose de golpeo llega al contacto y **solo entonces** se llama a `launchBall`; no hay un temporizador paralelo. La marca de impacto y el lanzamiento quedan registrados en `sim.lastGoalKick`.
+- **follow / recover**: acompañamiento, vuelta a la posición y fin de la acción. `busy()` cubre la secuencia completa y, si el envío es largo, también la recepción.
+
+La secuencia elige dos opciones reales (apoyo corto y salida larga), mueve a los receptores a sus zonas y conserva la continuidad física del balón. Si no hay GLB, la pose procedural dispone de brazos de portero y pierna de golpeo; los actores con GLB reutilizan `idle`, `run` y `kick`. La IA se pausa durante la coreografía y se reanuda al terminar, salvo que el evento autoritativo haya cambiado la posesión.
+
+Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro de fases, `impactAt`, `launchT`, si se lanzó y el receptor. Tras finalizar, se conserva el resumen en `sim.lastGoalKick`.
 
 ## Renderizado y rendimiento
 
@@ -86,7 +107,7 @@ match41.js ──> ui.js (livePitchFeed) ──> Pitch.state / Pitch.event
 
 ### Prueba aislada del 3D
 
-`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, saque inicial, posesión, tiro, parada, descanso, tarjeta roja, replay, reset, final y destroy. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D.
+`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, saque inicial, posesión, tiro, parada, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso, tarjeta roja, replay, reset, final y destroy. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D.
 
 Requiere Node y Playwright (o `playwright-core`) con Chrome/Chromium. Si no está instalado:
 

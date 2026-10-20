@@ -14,6 +14,20 @@ var Pitch3D = (function () {
 
   var LEN = 105, WID = 68, MIDZ = WID / 2, POST = 3.66, BAR = 2.44, GRAV = 9.8;
   var PI = Math.PI, TAU = PI * 2, STEP = 1 / 60, AI_STEP = 1 / 30;
+  /* Secuencia de saque de puerta. Los tiempos están en segundos de partido y
+   * se comprimen con la velocidad del directo. El impacto no lanza el balón
+   * hasta que la fase "impact" cruza su marca; nunca se usa un temporizador
+   * independiente de la pose. */
+  var GK_PHASES = [
+    {name: "prepare", dur: 1.35},
+    {name: "scan", dur: 0.80},
+    {name: "shield", dur: 1.00},
+    {name: "windup", dur: 0.90},
+    {name: "plant", dur: 0.16},
+    {name: "impact", dur: 0.10},
+    {name: "follow", dur: 0.75},
+    {name: "recover", dur: 0.70}
+  ];
   /* El balón GLB mide 0,11 m de radio; el partido lo dibuja algo mayor para
    * que siga siendo legible en pantallas pequeñas y a la distancia de cámara. */
   var BALL_R = 0.11, BALL_SCALE = 2;
@@ -52,7 +66,7 @@ var Pitch3D = (function () {
       time: 0, rate: 1, own: 0, bx: 50, half: 1, kickoffSide: 0, koSet: false, ended: false, started: false, fem: false,
       attack: [1, -1], players: [[], []], red: [{}, {}], tactics: [defTac(), defTac()],
       ball: newBall(), action: null, queue: [], restart: null, pendingOwn: null,
-      history: [], replay: null, netT: 0, shake: 0, banner: ""
+      history: [], replay: null, netT: 0, shake: 0, banner: "", lastGoalKick: null
     };
   }
 
@@ -320,7 +334,7 @@ var Pitch3D = (function () {
       vx: 0, vz: 0, facing: sim.attack[side] > 0 ? PI / 2 : -PI / 2, runPhase: Math.random() * TAU,
       phase: (h % 997) / 997, variant: sim.fem ? "female" : "male",
       skin: SKINS[h % SKINS.length], hair: HAIRS[(h >> 3) % HAIRS.length], scale: 0.94 + (h % 9) * 0.015,
-      pace: 1, st: 1, ovr: 70, maxSp: 6.4, gk: false, gone: false, sentOff: false, anim: null};
+      pace: 1, st: 1, ovr: 70, maxSp: 6.4, gk: false, gone: false, sentOff: false, anim: null, faceLock: false};
     return a;
   }
 
@@ -492,7 +506,7 @@ var Pitch3D = (function () {
         a.x = clamp(a.x + a.vx * dt, 1, LEN - 1);
         a.z = clamp(a.z + a.vz * dt, 1.5, WID - 1.5);
         var sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
-        if (sp > 0.35) a.facing = angleTo(a.facing, Math.atan2(a.vx, a.vz), Math.min(1, dt * 8));
+        if (sp > 0.35 && !a.faceLock) a.facing = angleTo(a.facing, Math.atan2(a.vx, a.vz), Math.min(1, dt * 8));
         a.runPhase += sp * dt * 2.3;
       }
     }
@@ -585,6 +599,7 @@ var Pitch3D = (function () {
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = actorAt(s, i); if (!a) continue;
       a.x = a.tx = a.baseX; a.z = a.tz = a.baseZ; a.vx = a.vz = 0; a.anim = null;
+      a.faceLock = false;
       a.facing = sim.attack[s] > 0 ? PI / 2 : -PI / 2;
     }
   }
@@ -602,15 +617,160 @@ var Pitch3D = (function () {
   }
 
   function setupGoalKick(side) {
-    sim.action = null; placeAtBase();
-    var gk = null, list = listOf(side);
-    for (var i = 0; i < list.length; i++) if (list[i].gk) { gk = list[i]; break; }
-    var b = sim.ball, own = ownX(side);
-    b.x = own + sim.attack[side] * 5.5; b.z = MIDZ; b.y = 0.22; b.vx = b.vy = b.vz = 0; b.mode = "dead"; b.fl = null; b.next = null;
+    sim.action = null; sim.restart = null; placeAtBase();
+    var dir = sim.attack[side], own = ownX(side), b = sim.ball;
+    var ballX = own + dir * 5.5, ballZ = MIDZ;
+    b.x = ballX; b.z = ballZ; b.y = 0.22; b.vx = b.vy = b.vz = 0;
+    b.mode = "dead"; b.fl = null; b.next = null; b.side = side; b.idx = -1;
     sim.own = side;
-    if (gk) { gk.x = b.x - sim.attack[side] * 1.2; gk.z = MIDZ; giveTo(side, gk.slot); }
-    sim.restart = {type: "goalkick", side: side, idx: gk ? gk.slot : -1, t: 0.65};
+
+    var gk = pickKeeper(side);
+    if (gk) {
+      gk.x = own + dir * 2.3; gk.z = ballZ; gk.tx = ballX - dir * 0.58; gk.tz = ballZ;
+      gk.vx = gk.vz = 0; gk.faceLock = false; gk.maxSp = 5.4;
+      gk.facing = dir > 0 ? PI / 2 : -PI / 2;
+    }
+
+    /* Dos opciones reales para el saque: un apoyo corto y una salida larga.
+     * Los receptores se mueven a su zona durante la preparación; el balón no
+     * se lanza hasta el impacto. */
+    var shortOff = (Math.random() < 0.5 ? -1 : 1) * 10;
+    var shortSpot = {x: clamp(own + dir * 17, 2, LEN - 2), z: clamp(ballZ + shortOff, 4, WID - 4)};
+    var longSpot = {x: clamp(own + dir * 42, 2, LEN - 2), z: clamp(ballZ - shortOff * 0.75, 4, WID - 4)};
+    var shortA = nearestActor(side, shortSpot.x, shortSpot.z, true);
+    var longA = nearestActor(side, longSpot.x, longSpot.z, true, shortA);
+    if (!shortA) shortA = nearestActor(side, ballX, ballZ, true);
+    if (!longA || longA === shortA) longA = nearestActor(side, longSpot.x, longSpot.z, true, shortA) || shortA;
+    if (shortA) {
+      shortA.tx = shortSpot.x; shortA.tz = shortSpot.z; shortA.maxSp = 4.8 * shortA.pace;
+      shortA.faceLock = false;
+    }
+    if (longA && longA !== shortA) {
+      longA.tx = longSpot.x; longA.tz = longSpot.z; longA.maxSp = 4.6 * longA.pace;
+      longA.faceLock = false;
+    }
+
+    var presser = nearestActor(1 - side, ballX + dir * 9, ballZ, true);
+    if (presser) {
+      presser.tx = clamp(ballX + dir * 2.35, 1, LEN - 1);
+      presser.tz = clamp(ballZ + (presser.z < ballZ ? -0.75 : 0.75), 1.5, WID - 1.5);
+      presser.maxSp = 7.0 * presser.pace;
+      presser.faceLock = false;
+    }
+
+    var phases = [], at = 0, impactAt = 0, i;
+    for (i = 0; i < GK_PHASES.length; i++) {
+      var pd = GK_PHASES[i];
+      phases.push({name: pd.name, dur: pd.dur, start: at, end: at + pd.dur});
+      if (pd.name === "impact") impactAt = at;
+      at += pd.dur;
+    }
+    var a = {type: "goalkick", t: 0, dur: at, side: side, dir: dir, gk: gk, presser: presser,
+      ballX: ballX, ballZ: ballZ, shortA: shortA, longA: longA, shortK: Math.random() < 0.55,
+      shortSpot: shortSpot, longSpot: longSpot, phases: phases, phaseIndex: 0, phase: "prepare",
+      phaseLog: [], impactAt: impactAt, launched: false, launchT: 0, launchPhase: "",
+      flightDur: 0, receiver: null, minPressureDist: 99};
+    sim.action = a;
+    enterGoalKickPhase(a, 0);
   }
+
+  function enterGoalKickPhase(a, idx) {
+    if (!a || !a.phases[idx]) return;
+    var ph = a.phases[idx], gk = a.gk, dirFace = a.dir > 0 ? PI / 2 : -PI / 2;
+    a.phaseIndex = idx; a.phase = ph.name;
+    a.phaseLog.push(ph.name);
+    if (!gk) return;
+    if (ph.name === "prepare") {
+      gk.anim = null; gk.faceLock = false;
+      gk.tx = a.ballX - a.dir * 0.58; gk.tz = a.ballZ;
+    } else if (ph.name === "scan") {
+      /* Llega al balón, lo coloca y otea las dos bandas antes de decidir. */
+      gk.x = a.ballX - a.dir * 0.58; gk.z = a.ballZ; gk.vx = gk.vz = 0;
+      gk.tx = gk.x; gk.tz = gk.z; gk.facing = dirFace; gk.faceLock = true;
+      gk.anim = {type: "gkready", t: 0, dur: ph.dur};
+    } else if (ph.name === "shield") {
+      /* Protección opcional: el portero interpone el cuerpo entre el balón y
+       * el rival más cercano. El atacante se detiene fuera del radio de choque. */
+      gk.x = a.ballX - a.dir * 0.5; gk.z = a.ballZ; gk.vx = gk.vz = 0;
+      gk.tx = gk.x; gk.tz = gk.z; gk.faceLock = true;
+      gk.anim = {type: "gkshield", t: 0, dur: ph.dur};
+      if (a.presser) {
+        a.presser.tx = clamp(a.ballX + a.dir * 2.35, 1, LEN - 1);
+        a.presser.tz = clamp(a.ballZ + (a.presser.z < a.ballZ ? -0.75 : 0.75), 1.5, WID - 1.5);
+        a.presser.maxSp = 6.8 * a.presser.pace;
+      }
+    } else if (ph.name === "windup") {
+      /* Retrocede mirando al balón y arranca la carrera de tres pasos. */
+      gk.anim = null; gk.faceLock = true; gk.facing = dirFace;
+      gk.tx = a.ballX - a.dir * 2.8; gk.tz = a.ballZ;
+      gk.maxSp = 5.6;
+    } else if (ph.name === "plant") {
+      gk.x = a.ballX - a.dir * 0.72; gk.z = a.ballZ; gk.vx = gk.vz = 0;
+      gk.tx = gk.x; gk.tz = gk.z; gk.facing = dirFace; gk.faceLock = true;
+      gk.anim = {type: "gkstrike", t: 0, dur: 1.04};
+    } else if (ph.name === "impact") {
+      if (!a.launched) launchGoalKickBall(a);
+      gk.x = a.ballX - a.dir * 0.52; gk.z = a.ballZ; gk.vx = gk.vz = 0;
+      gk.tx = gk.x; gk.tz = gk.z; gk.facing = dirFace; gk.faceLock = true;
+      if (!gk.anim) gk.anim = {type: "gkstrike", t: 0, dur: 1.04};
+    } else if (ph.name === "follow") {
+      gk.faceLock = true; gk.facing = dirFace;
+      gk.tx = clamp(a.ballX + a.dir * 0.65, 1, LEN - 1); gk.tz = a.ballZ;
+    } else if (ph.name === "recover") {
+      gk.faceLock = false; gk.anim = null;
+      gk.tx = ownX(a.side) + a.dir * 2.3; gk.tz = a.ballZ;
+      gk.maxSp = 5.4;
+    }
+  }
+
+  function launchGoalKickBall(a) {
+    if (!a || a.launched) return;
+    a.launched = true; a.launchT = a.t; a.launchPhase = a.phase;
+    var b = sim.ball, r = a.shortK ? (a.shortA || a.longA) : (a.longA || a.shortA);
+    if (!r) { releaseBall(a.dir * 7, 0, 1.8); b.lastTouch = a.side; return; }
+    var tx = clamp(r.x + r.vx * 0.08, 2, LEN - 2);
+    var tz = clamp(r.z + r.vz * 0.08, 2.5, WID - 2.5);
+    var d = dist(b.x, b.z, tx, tz);
+    var dur = clamp(d / 18, 0.32, 2.45);
+    var arc = a.shortK ? clamp(d * 0.025 + 0.25, 0.3, 0.9) : clamp(d * 0.055 + 0.8, 1.2, 3.0);
+    launchBall(tx, tz, 0.23, dur, arc, {type: "held", side: a.side, idx: r.slot});
+    b.lastTouch = a.side; sim.own = a.side;
+    a.flightDur = dur; a.receiver = r;
+    /* busy() debe cubrir también la recepción cuando el envío es largo. */
+    a.dur = Math.max(a.dur, a.t + dur + 0.45);
+  }
+
+  function updateGoalKickAction(a) {
+    var gk = a.gk, ph = a.phases[a.phaseIndex];
+    if (gk && a.presser && !a.presser.gone) {
+      var pd = dist(gk.x, gk.z, a.presser.x, a.presser.z);
+      if (pd < a.minPressureDist) a.minPressureDist = pd;
+    }
+    if (gk && ph) {
+      if (a.phase === "scan") {
+        var su = clamp((a.t - ph.start) / Math.max(0.01, ph.dur), 0, 1);
+        gk.facing = (a.dir > 0 ? PI / 2 : -PI / 2) + Math.sin(su * TAU * 1.15) * 0.55;
+      } else if (a.phase === "shield") {
+        if (a.presser && !a.presser.gone) {
+          var want = Math.atan2(a.presser.x - gk.x, a.presser.z - gk.z);
+          gk.facing = angleTo(gk.facing, want, 0.14);
+        }
+      } else if (a.phase === "windup") {
+        var wu = clamp((a.t - ph.start) / Math.max(0.01, ph.dur), 0, 1);
+        if (wu < 0.48) {
+          gk.faceLock = true; gk.facing = a.dir > 0 ? PI / 2 : -PI / 2;
+          gk.tx = a.ballX - a.dir * 2.8; gk.tz = a.ballZ;
+        } else {
+          gk.faceLock = false;
+          gk.tx = a.ballX - a.dir * 0.62; gk.tz = a.ballZ;
+        }
+      }
+    }
+    while (a.phaseIndex < a.phases.length - 1 && a.t >= a.phases[a.phaseIndex].end) {
+      enterGoalKickPhase(a, a.phaseIndex + 1);
+    }
+  }
+
 
   function setupThrowIn(side, x, z) {
     sim.action = null;
@@ -640,9 +800,11 @@ var Pitch3D = (function () {
     var b = sim.ball, side = b.lastTouch === 1 ? 1 : 0, def = 1 - side;
     if (b.z < 0 || b.z > WID) { setupThrowIn(def, clamp(b.x, 3, LEN - 3), b.z); return; }
     if (b.x < 0 || b.x > LEN) {
-      var end = b.x < 0 ? 0 : 1, defending = 0;
-      for (var s = 0; s < 2; s++) if (goalX(s) === (end ? LEN : 0)) defending = s;
-      var attacking = 1 - defending;
+      var end = b.x < 0 ? 0 : 1, attacking = 0;
+      for (var s = 0; s < 2; s++) if (goalX(s) === (end ? LEN : 0)) attacking = s;
+      var defending = 1 - attacking;
+      /* Si el último toque es del atacante, el balón salió por la portería
+       * rival: saque de puerta para el defensor. Si es del defensor, córner. */
       if (side === attacking) setupGoalKick(defending);
       else setupCorner(attacking, end);
       return;
@@ -749,6 +911,14 @@ var Pitch3D = (function () {
 
   function finishAction() {
     var a = sim.action; sim.action = null;
+    if (a && a.type === "goalkick") {
+      if (a.gk) a.gk.faceLock = false;
+      if (a.presser) a.presser.faceLock = false;
+      sim.lastGoalKick = {side: a.side, phases: a.phaseLog.slice(), launched: a.launched,
+        launchPhase: a.launchPhase, launchT: +a.launchT.toFixed(3), impactAt: +a.impactAt.toFixed(3),
+        flightDur: +a.flightDur.toFixed(3), shortK: a.shortK, pressure: !!a.presser,
+        receiver: a.receiver ? a.receiver.slot : -1, minPressureDist: +a.minPressureDist.toFixed(3)};
+    }
     if (a && a.type === "shot") {
       if (a.res === "goal") { setupKickoff(1 - a.side); sim.pendingOwn = null; }
       else if (a.res === "miss") { setupGoalKick(1 - a.side); sim.pendingOwn = null; }
@@ -768,6 +938,11 @@ var Pitch3D = (function () {
     var a = sim.action;
     if (!a) return;
     a.t += dt;
+    if (a.type === "goalkick") {
+      updateGoalKickAction(a);
+      if (a.t >= a.dur) finishAction();
+      return;
+    }
     if (a.type !== "shot") { if (a.t >= a.dur) finishAction(); return; }
     if (a.stage === "build" && a.t >= a.buildup) {
       if (a.shooter) { giveTo(a.side, a.shooter.slot); a.shooter.anim = {type: "kick", t: 0, dur: 0.24}; }
@@ -891,6 +1066,11 @@ var Pitch3D = (function () {
     var danger = clamp(1 - goalDist / 35, 0, 1);
     back -= danger * 9; height -= danger * 6;
     if (sim.action && sim.action.type === "shot") { back = 31; height = 19; tx = b.x; tz = b.z; }
+    if (sim.action && sim.action.type === "goalkick") {
+      tx = b.x; tz = b.z; back = 18; height = 10;
+      if (sim.action.phase === "windup" || sim.action.phase === "plant" ||
+        sim.action.phase === "impact" || sim.action.phase === "follow") { back = 14; height = 8.5; }
+    }
     if (sim.action && sim.action.shooter && sim.action.stage === "outcome" && sim.action.res === "goal") {
       tx = sim.action.shooter.x; tz = sim.action.shooter.z; back = 24; height = 14;
     }
@@ -1050,6 +1230,8 @@ var Pitch3D = (function () {
       var k = clamp(anim.t / Math.max(0.01, anim.dur), 0, 1);
       if (anim.type === "dive") return {name: "dive", t: k * 1.25, loop: false};
       if (anim.type === "kick") return {name: "kick", t: k * 0.85, loop: false};
+      if (anim.type === "gkstrike") return {name: "kick", t: k * 0.98, loop: false};
+      if (anim.type === "gkready" || anim.type === "gkshield") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
       if (anim.type === "celebrate") return {name: "celebrate", t: k * 1.7, loop: false};
       if (anim.type === "card") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
     }
@@ -1118,10 +1300,13 @@ var Pitch3D = (function () {
     var skin = a.skin || SKIN, hair = a.hair || HAIR;
     var sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz), run = clamp(sp / 6, 0, 1);
     var gait = Math.sin(a.runPhase) * 0.32 * run, gait2 = Math.sin(a.runPhase + PI) * 0.32 * run;
-    var jump = 0, kick = 0, celebrate = 0, card = 0, dive = false;
+    var jump = 0, kick = 0, celebrate = 0, card = 0, dive = false, gkready = false, gkshield = false;
     if (a.anim) {
       var k = clamp(a.anim.t / a.anim.dur, 0, 1);
       if (a.anim.type === "kick") kick = Math.sin(k * PI);
+      else if (a.anim.type === "gkstrike") kick = Math.sin(clamp(k * 0.92, 0, 1) * PI);
+      else if (a.anim.type === "gkready") gkready = true;
+      else if (a.anim.type === "gkshield") gkshield = true;
       else if (a.anim.type === "celebrate") { celebrate = 1; jump = Math.sin(k * PI) * 0.35; }
       else if (a.anim.type === "card") card = Math.sin(k * PI);
       else if (a.anim.type === "dive") dive = true;
@@ -1151,17 +1336,34 @@ var Pitch3D = (function () {
       m.ellipsoid(0, 1.64, -0.015, 0.195, 0.09, 0.18, hair, q ? 8 : 6, 3);
       m.limb([-0.14, 0.52, 0], [-0.17, 0.27, gait * 0.35], 0.095, shorts);
       m.limb([-0.17, 0.27, gait * 0.35], [-0.18, 0.07, gait * 0.55], 0.075, skin);
-      m.limb([0.14, 0.52, 0], [0.17, 0.27, gait2 * 0.35], 0.095, shorts);
-      m.limb([0.17, 0.27, gait2 * 0.35], [0.18, 0.07, gait2 * 0.55], 0.075, skin);
+      /* La pierna derecha acompaña el golpeo: rodilla arriba, pie adelante y
+       * el apoyo queda plantado. Sin animación de golpeo el resultado es la
+       * zancada de siempre. */
+      var rKneeY = 0.27 + kick * 0.08, rKneeZ = gait2 * 0.35 + kick * 0.30;
+      var rFootY = 0.07 + kick * 0.18, rFootZ = gait2 * 0.55 + kick * 0.72;
+      m.limb([0.14, 0.52, 0], [0.17, rKneeY, rKneeZ], 0.095, shorts);
+      m.limb([0.17, rKneeY, rKneeZ], [0.18, rFootY, rFootZ], 0.075, skin);
       m.box(-0.18, 0.015, gait * 0.55 + 0.05, 0.2, 0.08, 0.3, BOOT);
-      m.box(0.18, 0.015, gait2 * 0.55 + 0.05, 0.2, 0.08, 0.3, BOOT);
+      m.box(0.18, Math.max(0.015, rFootY - 0.055), rFootZ + 0.05, 0.2, 0.08, 0.3, BOOT);
       var arm = Math.sin(a.runPhase + PI) * 0.28 * run;
       var handY = celebrate ? 1.6 : card ? 1.35 : 0.78;
-      var handZ = celebrate ? 0.05 : card ? 0.0 : -arm;
-      m.limb([-0.3, 1.2, 0], [-0.43, celebrate ? 1.45 : 0.98, handZ * 0.5], 0.085, shirt);
-      m.limb([-0.43, celebrate ? 1.45 : 0.98, handZ * 0.5], [-0.46, handY, handZ], 0.07, skin);
-      m.limb([0.3, 1.2, 0], [0.43, celebrate ? 1.45 : 0.98, arm * 0.5], 0.085, shirt);
-      m.limb([0.43, celebrate ? 1.45 : 0.98, arm * 0.5], [0.46, handY, celebrate ? 0.05 : arm], 0.07, skin);
+      var elbowY = celebrate ? 1.45 : 0.98;
+      var handX = 0.46, elbowX = 0.43;
+      var leftHandZ = celebrate ? 0.05 : card ? 0 : -arm;
+      var rightHandZ = celebrate ? 0.05 : card ? 0 : arm;
+      if (gkready || gkshield) {
+        handY = 1.02; elbowY = 1.15;
+        handX = gkshield ? 0.62 : 0.54;
+        elbowX = gkshield ? 0.50 : 0.46;
+        leftHandZ = rightHandZ = gkshield ? 0.30 : 0.17;
+      } else if (kick > 0.01) {
+        handY = 1.12; elbowY = 1.05;
+        leftHandZ = 0.30 * kick; rightHandZ = -0.22 * kick;
+      }
+      m.limb([-0.3, 1.2, 0], [-elbowX, elbowY, leftHandZ * 0.4], 0.085, shirt);
+      m.limb([-elbowX, elbowY, leftHandZ * 0.4], [-handX, handY, leftHandZ], 0.07, skin);
+      m.limb([0.3, 1.2, 0], [elbowX, elbowY, rightHandZ * 0.4], 0.085, shirt);
+      m.limb([elbowX, elbowY, rightHandZ * 0.4], [handX, handY, rightHandZ], 0.07, skin);
       if (!far) m.box(0, 0.98, 0.24, 0.2, 0.14, 0.035, a.side ? [0.14, 0.24, 0.42] : [0.96, 0.82, 0.24]);
     }
     var ca = Math.cos(a.facing), sa = Math.sin(a.facing);
@@ -1335,7 +1537,13 @@ var Pitch3D = (function () {
     updateAction(sdt);
     updateRestart(sdt);
     aiAcc += sdt;
-    if (aiAcc >= AI_STEP) { aiTick(); aiAcc = 0; }
+    /* El saque de puerta tiene su propia coreografía: congelar la IA evita
+     * que el portero o el receptor abandonen la puesta en escena. Al terminar
+     * la acción, aiTick recupera el control en el siguiente paso. */
+    if (aiAcc >= AI_STEP) {
+      if (!(sim.action && sim.action.type === "goalkick")) aiTick();
+      aiAcc = 0;
+    }
     moveActors(sdt);
     updateAnimations(sdt);
     updateBall(sdt);
@@ -1554,7 +1762,16 @@ var Pitch3D = (function () {
     if (assetModels && assetModels.players) for (var v in assetModels.players) if (assetModels.players.hasOwnProperty(v)) {
       for (var l in assetModels.players[v]) if (assetModels.players[v].hasOwnProperty(l) && assetModels.players[v][l]) assetLods++;
     }
-    return {sim: sim, ball: sim.ball, action: sim.action, quality: quality, fps: fps, frames: frameCount,
+    var gk = null;
+    if (sim.action && sim.action.type === "goalkick") {
+      var ga = sim.action;
+      gk = {active: true, phase: ga.phase, phaseIndex: ga.phaseIndex, phases: ga.phaseLog.slice(),
+        t: +ga.t.toFixed(3), dur: +ga.dur.toFixed(3), impactAt: +ga.impactAt.toFixed(3),
+        launched: ga.launched, launchPhase: ga.launchPhase, launchT: +ga.launchT.toFixed(3),
+        shortK: ga.shortK, pressure: !!ga.presser, receiver: ga.receiver ? ga.receiver.slot : -1,
+        minPressureDist: +ga.minPressureDist.toFixed(3)};
+    } else if (sim.lastGoalKick) gk = sim.lastGoalKick;
+    return {sim: sim, ball: sim.ball, action: sim.action, goalkick: gk, quality: quality, fps: fps, frames: frameCount,
       gl: !!gl, glError: err, players: sim.players, history: sim.history.length, camera: cam, mesh: meshStats(),
       assets: {state: assetState, lods: assetLods, statics: assetModels ? Object.keys(assetModels.static).length : 0,
         errors: assetModels && assetModels.errors ? assetModels.errors.length : 0,
