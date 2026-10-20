@@ -217,7 +217,7 @@ var Pitch3D = (function () {
   var enabled=false;
   try{enabled=/(?:^|[?&])pitch3d=1(?:&|$)/.test(window.location.search)||window.localStorage.getItem("camino.pitch3d")==="1";}catch(e){}
   if(typeof Pitch==="undefined"||typeof Pitch3D==="undefined")return;
-  var original=Pitch, originalApi={}, mounted=false, host=null, mountOpts=null, toggle=null, switching=false;
+  var original=Pitch, originalApi={}, mounted=false, host=null, mountOpts=null, toggle=null, switching=false, lastTeams=null, lastState=null, lastFrozen=false;
   ["mount","teams","state","event","busy","reset","freeze","destroy"].forEach(function(k){originalApi[k]=original[k];});
   function setMode(want3d){
     if(!host||switching)return;switching=true;
@@ -228,6 +228,10 @@ var Pitch3D = (function () {
         mounted=Pitch3D.mount(host,mountOpts||{});
         if(!mounted)originalApi.mount(host,mountOpts||{});
       }else originalApi.mount(host,mountOpts||{});
+      var active=mounted?Pitch3D:originalApi;
+      if(lastTeams)active.teams.apply(active,lastTeams);
+      if(lastState)active.state(lastState);
+      active.freeze(lastFrozen);
       try{window.localStorage.setItem("camino.pitch3d",mounted?"1":"0");}catch(e){}
       if(toggle){toggle.textContent=mounted?"3D · volver a 2D":"Probar vista 3D";toggle.setAttribute("aria-pressed",mounted?"true":"false");}
     }catch(e){console.warn("Pitch3D: cambio de vista fallido",e);try{Pitch3D.destroy();originalApi.mount(host,mountOpts||{});}catch(ignore){}mounted=false;}
@@ -243,9 +247,12 @@ var Pitch3D = (function () {
     if(toggle.parentNode!==host)host.appendChild(toggle);
     setMode(enabled);
   };
-  ["teams","state","event","busy","reset","freeze"].forEach(function(k){
-    Pitch[k]=function(){var engine=mounted?Pitch3D:originalApi;return engine[k].apply(engine,arguments);};
-  });
+  Pitch.teams=function(a,b,fixedNums){lastTeams=Array.prototype.slice.call(arguments);var engine=mounted?Pitch3D:originalApi;return engine.teams.apply(engine,arguments);};
+  Pitch.state=function(s){if(s)lastState=Object.assign(lastState||{},s);var engine=mounted?Pitch3D:originalApi;return engine.state.apply(engine,arguments);};
+  Pitch.event=function(e){var engine=mounted?Pitch3D:originalApi;return engine.event.apply(engine,arguments);};
+  Pitch.busy=function(){var engine=mounted?Pitch3D:originalApi;return engine.busy.apply(engine,arguments);};
+  Pitch.reset=function(){var engine=mounted?Pitch3D:originalApi;return engine.reset.apply(engine,arguments);};
+  Pitch.freeze=function(v){lastFrozen=!!v;var engine=mounted?Pitch3D:originalApi;return engine.freeze.apply(engine,arguments);};
   Pitch.destroy=function(){
     if(mounted)Pitch3D.destroy();else originalApi.destroy();
     if(toggle&&toggle.parentNode)toggle.parentNode.removeChild(toggle);
