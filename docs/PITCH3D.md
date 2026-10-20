@@ -8,8 +8,8 @@ El parche conserva el campo 2D como opción predeterminada. En el partido en dir
 
 - Campo 3D con líneas, áreas, círculo central, porterías geométricas, vallas laterales y franjas de césped.
 - Sombras de contacto aproximadas bajo los jugadores, sin iluminación dinámica para reducir el coste en móviles.
-- Representación geométrica provisional de los 22 jugadores y el balón.
-- Extremidades articuladas por segmentos para balanceo de brazos/piernas, carrera, tiro y celebración, sin rigging ni assets externos.
+- Representación de los 22 jugadores con mallas humanoides procedurales de baja poligonización: torso ovalado, pelvis, cabeza, pelo, manos y botas.
+- Brazos y piernas articulados por segmentos para balanceo al correr, tiro y celebración; la geometría se genera en tiempo de ejecución, sin descargar modelos ni incorporar dependencias externas.
 - Orientación procedural de los futbolistas hacia su desplazamiento y detalles frontales del uniforme que giran con el cuerpo.
 - Cámara de retransmisión que sigue suavemente al balón.
 - Arcos básicos del balón y trayectorias aproximadas de pases/tiros activadas por eventos del partido, sin teletransportar el balón al área de gol.
@@ -21,7 +21,7 @@ El parche conserva el campo 2D como opción predeterminada. En el partido en dir
 
 ## Límites conocidos
 
-Esto es una **prueba de integración**, no la versión final con modelos humanos. Los jugadores son figuras geométricas con animación procedural, no modelos humanos con esqueleto. Aún faltan modelos glTF, animaciones capturadas/retargeted, sombras y repetición 3D sincronizada. Las acciones de tiro y gol son representaciones aproximadas basadas en los eventos, no una reproducción física exacta de cada jugada. El objetivo es verificar que WebGL funciona en la WebView y medir rendimiento antes de importar modelos y animaciones.
+Esto sigue siendo una **prueba de integración**: las figuras ya tienen silueta humanoide de baja poligonización, pero no son modelos artísticos importados ni usan un esqueleto esquelético glTF. Aún faltan modelos glTF, animaciones capturadas/retargeted, sombras y repetición 3D sincronizada. Las acciones de tiro y gol son representaciones aproximadas basadas en los eventos, no una reproducción física exacta de cada jugada. El objetivo es verificar que WebGL funciona en la WebView y medir rendimiento antes de importar modelos y animaciones.
 
 ## Compilación
 
