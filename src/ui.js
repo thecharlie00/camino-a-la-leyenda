@@ -2081,7 +2081,7 @@
     if (!LV.el.querySelector("#lvbody")) {
       LV.el.innerHTML = '<div class="lpanel"><div id="lvtop"></div><div class="lpitchw" id="lvpitch"></div><div id="lvbody"></div><div id="lvctl"></div></div>';
       LV.ctlKey = null;
-      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
+      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === "f", spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
         lab: {replay: tr("REPETICIÓN"), goal: tr("GOL"), goalOf: tr("¡GOL DE {n}!"), post: tr("¡PALO!"), half: tr("FIN DEL PRIMER TIEMPO"), end: tr("FINAL"), off: tr("FUERA DE JUEGO"), foul: tr("FALTA"), thr: tr("SAQUE DE BANDA"), cor: tr("CÓRNER"), gk: tr("SAQUE DE PUERTA")},
         onSpeed: function (n) { if (!LV) return; LV.speed = n; LV.run = true; LV.resume = false; liveTick(); liveRender(); }});
     }
@@ -2133,7 +2133,7 @@
     });
     var mt = typeof liveTac === "function" ? liveTac(L) : null, tacs = [null, null];
     if (mt) tacs[me] = {line: mt.line, width: mt.width, pass: mt.pass, tempo: mt.tempo, ment: L.ment};
-    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1, tac: tacs, ment: L.ment});
+    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1, tac: tacs, ment: L.ment, fem: S.g === "f"});
   }
   /* colores de los dos clubes, que se distingan entre sí */
   function liveCol(a, b) {

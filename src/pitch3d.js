@@ -14,6 +14,9 @@ var Pitch3D = (function () {
 
   var LEN = 105, WID = 68, MIDZ = WID / 2, POST = 3.66, BAR = 2.44, GRAV = 9.8;
   var PI = Math.PI, TAU = PI * 2, STEP = 1 / 60, AI_STEP = 1 / 30;
+  /* El balón GLB mide 0,11 m de radio; el partido lo dibuja algo mayor para
+   * que siga siendo legible en pantallas pequeñas y a la distancia de cámara. */
+  var BALL_R = 0.11, BALL_SCALE = 2;
   var LIGHT = norm3([0.42, 0.86, 0.28]);
   var BASE = {POR: [0.045, 0.5], LD: [0.24, 0.84], LI: [0.24, 0.16], DFC: [0.2, 0.5], MCD: [0.36, 0.5], MC: [0.46, 0.5], MCO: [0.58, 0.5],
     MD: [0.52, 0.86], MI: [0.52, 0.14], ED: [0.7, 0.84], EI: [0.7, 0.16], DC: [0.76, 0.5]};
@@ -28,6 +31,7 @@ var Pitch3D = (function () {
   var raf = 0, lastTs = 0, acc = 0, aiAcc = 0, histAcc = 0, frameCount = 0, fps = 0, fpsFrames = 0, fpsStart = 0;
   var quality = 1, staticMesh = null, staticCount = 0, dyn = null, dynCapacity = 0;
   var program = null, locations = null, staticBuf = null, dynBuf = null;
+  var assetModels = null, assetState = "none", assetFrameTris = 0, assetFramePlayers = 0, assetFrameBall = 0;
   var viewW = 1, viewH = 1, dpr = 1;
   var opts = {}, colors = SHIRT.slice(), reduced = false;
   var cam = {x: LEN / 2, z: MIDZ, back: 34, height: 22, lookX: LEN / 2, lookZ: MIDZ, shake: 0};
@@ -40,12 +44,12 @@ var Pitch3D = (function () {
 
   function newBall() {
     return {x: LEN / 2, z: MIDZ, y: 0.22, vx: 0, vy: 0, vz: 0, mode: "dead", side: 0, idx: -1,
-      kind: "", timer: 0, fl: null, next: null, lastTouch: 0, claim: null};
+      spinX: 0, spinZ: 0, kind: "", timer: 0, fl: null, next: null, lastTouch: 0, claim: null};
   }
 
   function newSim() {
     return {
-      time: 0, rate: 1, own: 0, bx: 50, half: 1, kickoffSide: 0, ended: false, started: false,
+      time: 0, rate: 1, own: 0, bx: 50, half: 1, kickoffSide: 0, ended: false, started: false, fem: false,
       attack: [1, -1], players: [[], []], red: [{}, {}], tactics: [defTac(), defTac()],
       ball: newBall(), action: null, queue: [], restart: null, pendingOwn: null,
       history: [], replay: null, netT: 0, shake: 0, banner: ""
@@ -119,6 +123,22 @@ var Pitch3D = (function () {
     var lit = 0.58 + 0.42 * Math.abs((nx * LIGHT[0] + ny * LIGHT[1] + nz * LIGHT[2]) / l);
     var q = [clamp(c[0] * lit, 0, 1), clamp(c[1] * lit, 0, 1), clamp(c[2] * lit, 0, 1)];
     this.v(A[0], A[1], A[2], q); this.v(B[0], B[1], B[2], q); this.v(C[0], C[1], C[2], q);
+  };
+  /* Variante sin allocations para el skinning: recibe las tres posiciones
+   * ya transformadas y calcula la luz plana con el mismo criterio que tri(). */
+  Mesh.prototype.tri9 = function (ax, ay, az, bx, by, bz, cx, cy, cz, r, g, b) {
+    this.reserve(3);
+    var ux = bx - ax, uy = by - ay, uz = bz - az;
+    var vx = cx - ax, vy = cy - ay, vz = cz - az;
+    var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+    var l = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
+    var lit = 0.58 + 0.42 * Math.abs((nx * LIGHT[0] + ny * LIGHT[1] + nz * LIGHT[2]) / l);
+    var a = this.a, n = this.n;
+    r = clamp(r * lit, 0, 1); g = clamp(g * lit, 0, 1); b = clamp(b * lit, 0, 1);
+    a[n] = ax; a[n + 1] = ay; a[n + 2] = az; a[n + 3] = r; a[n + 4] = g; a[n + 5] = b;
+    a[n + 6] = bx; a[n + 7] = by; a[n + 8] = bz; a[n + 9] = r; a[n + 10] = g; a[n + 11] = b;
+    a[n + 12] = cx; a[n + 13] = cy; a[n + 14] = cz; a[n + 15] = r; a[n + 16] = g; a[n + 17] = b;
+    this.n = n + 18;
   };
   Mesh.prototype.quad = function (A, B, C, D, c) { this.tri(A, B, C, c); this.tri(A, C, D, c); };
   Mesh.prototype.box = function (x, y, z, w, h, d, c) {
@@ -280,12 +300,25 @@ var Pitch3D = (function () {
 
   function worldBaseX(side, nx) { return sim.attack[side] > 0 ? nx * LEN : LEN - nx * LEN; }
 
+  function actorVariant(a) {
+    return a && a.gk ? "goalkeeper" : (sim.fem ? "female" : "male");
+  }
+
+  function setActorVariant(a) {
+    if (a) a.variant = actorVariant(a);
+  }
+
+  function refreshActorVariants() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) setActorVariant(sim.players[s] && sim.players[s][i]);
+  }
+
   function makeActor(side, slot, key, nx, nz) {
     var h = hashKey(key);
     var a = {side: side, slot: slot, key: key, pos: "MC", id: key, number: 0,
       nx: nx, nz: nz, baseX: worldBaseX(side, nx), baseZ: nz * WID,
       x: worldBaseX(side, nx), z: nz * WID, tx: worldBaseX(side, nx), tz: nz * WID,
       vx: 0, vz: 0, facing: sim.attack[side] > 0 ? PI / 2 : -PI / 2, runPhase: Math.random() * TAU,
+      phase: (h % 997) / 997, variant: sim.fem ? "female" : "male",
       skin: SKINS[h % SKINS.length], hair: HAIRS[(h >> 3) % HAIRS.length], scale: 0.94 + (h % 9) * 0.015,
       pace: 1, st: 1, ovr: 70, maxSp: 6.4, gk: false, gone: false, sentOff: false, anim: null};
     return a;
@@ -312,7 +345,7 @@ var Pitch3D = (function () {
       if (!a) a = makeActor(side, i, key, nx, nz);
       a.slot = i; a.pos = p.pos || "MC"; a.nm = p.nm || ""; a.nx = nx; a.nz = nz;
       a.baseX = worldBaseX(side, nx); a.baseZ = nz * WID;
-      a.gk = a.pos === "POR"; a.ovr = p.ovr == null ? 70 : +p.ovr;
+      a.gk = a.pos === "POR"; setActorVariant(a); a.ovr = p.ovr == null ? 70 : +p.ovr;
       a.st = p.st == null ? 1 : clamp(+p.st, 0.05, 1);
       var fza = p.fza == null ? a.ovr : +p.fza;
       a.pace = clamp(0.76 + (fza - 50) * 0.004 + (a.st - 0.7) * 0.12, 0.72, 1.16);
@@ -503,6 +536,12 @@ var Pitch3D = (function () {
     return true;
   }
 
+  function spinBall(b, dt) {
+    var r = BALL_R * BALL_SCALE;
+    b.spinX = (b.spinX + b.vz / r * dt) % TAU;
+    b.spinZ = (b.spinZ - b.vx / r * dt) % TAU;
+  }
+
   function updateBall(dt) {
     var b = sim.ball, a = null;
     if (b.mode === "held") {
@@ -513,6 +552,7 @@ var Pitch3D = (function () {
       b.z = lerp(b.z, a.z + fz * 0.44, Math.min(1, dt * 18));
       b.y = 0.22 + Math.abs(Math.sin(a.runPhase * 2)) * 0.025;
       b.vx = a.vx; b.vz = a.vz;
+      spinBall(b, dt);
       return;
     }
     if (b.mode === "flight" && b.fl) {
@@ -521,6 +561,7 @@ var Pitch3D = (function () {
       var k = clamp(f.t / f.dur, 0, 1);
       b.x = lerp(f.x0, f.x1, k); b.z = lerp(f.z0, f.z1, k);
       b.y = lerp(f.y0, f.y1, k) + f.arc * 4 * k * (1 - k);
+      spinBall(b, dt);
       if (k >= 1) {
         b.mode = "loose"; b.fl = null; b.timer = 0;
         b.vx = (f.x1 - f.x0) / f.dur; b.vz = (f.z1 - f.z0) / f.dur;
@@ -530,6 +571,7 @@ var Pitch3D = (function () {
       return;
     }
     if (b.mode === "loose") {
+      spinBall(b, dt);
       b.x += b.vx * dt; b.z += b.vz * dt; b.y += b.vy * dt; b.vy -= GRAV * dt;
       if (b.y < 0.22) { b.y = 0.22; if (b.vy < 0) b.vy = -b.vy * 0.32; if (Math.abs(b.vy) < 0.6) b.vy = 0; }
       b.vx *= Math.pow(0.55, dt); b.vz *= Math.pow(0.55, dt);
@@ -860,6 +902,206 @@ var Pitch3D = (function () {
     if (sim.shake > 0) sim.shake = Math.max(0, sim.shake - dt * 1.6);
   }
 
+  /* ------------------------------------------------------------------ assets GLB / skinning */
+
+  function loadAssets() {
+    if (assetState !== "none") return;
+    assetState = "unavailable";
+    try {
+      if (typeof P3D_ASSET_PACK === "undefined" || !P3D_ASSET_PACK ||
+        typeof Pitch3DAssets === "undefined" || !Pitch3DAssets.load) return;
+      assetModels = Pitch3DAssets.load(P3D_ASSET_PACK);
+      var male = assetModels && assetModels.players && assetModels.players.male;
+      if (male && (male[1] || male[2])) assetState = "ready";
+      else assetState = "failed";
+      if (assetModels && assetModels.errors && assetModels.errors.length && window.console) {
+        console.warn("Pitch3D: algunos GLB no se pudieron cargar", assetModels.errors);
+      }
+    } catch (err) {
+      assetModels = null; assetState = "failed";
+      if (window.console) console.warn("Pitch3D: fallback procedural, assets no disponibles", err);
+    }
+  }
+
+  function mat4TRS(out, o, tr, ti, rot, ri, sc, si) {
+    var x = tr[ti], y = tr[ti + 1], z = tr[ti + 2];
+    var qx = rot[ri], qy = rot[ri + 1], qz = rot[ri + 2], qw = rot[ri + 3];
+    var ql = Math.sqrt(qx * qx + qy * qy + qz * qz + qw * qw) || 1;
+    qx /= ql; qy /= ql; qz /= ql; qw /= ql;
+    var sx = sc[si], sy = sc[si + 1], sz = sc[si + 2];
+    out[o] = (1 - 2 * (qy * qy + qz * qz)) * sx;
+    out[o + 1] = (2 * (qx * qy + qz * qw)) * sx;
+    out[o + 2] = (2 * (qx * qz - qy * qw)) * sx;
+    out[o + 3] = 0;
+    out[o + 4] = (2 * (qx * qy - qz * qw)) * sy;
+    out[o + 5] = (1 - 2 * (qx * qx + qz * qz)) * sy;
+    out[o + 6] = (2 * (qy * qz + qx * qw)) * sy;
+    out[o + 7] = 0;
+    out[o + 8] = (2 * (qx * qz + qy * qw)) * sz;
+    out[o + 9] = (2 * (qy * qz - qx * qw)) * sz;
+    out[o + 10] = (1 - 2 * (qx * qx + qy * qy)) * sz;
+    out[o + 11] = 0;
+    out[o + 12] = x; out[o + 13] = y; out[o + 14] = z; out[o + 15] = 1;
+  }
+
+  function mat4MulAt(out, oo, a, ao, b, bo) {
+    for (var c = 0; c < 4; c++) for (var r = 0; r < 4; r++)
+      out[oo + c * 4 + r] = a[ao + r] * b[bo + c * 4] + a[ao + 4 + r] * b[bo + c * 4 + 1] +
+        a[ao + 8 + r] * b[bo + c * 4 + 2] + a[ao + 12 + r] * b[bo + c * 4 + 3];
+  }
+
+  function trackAt(track, t, comps, out, off) {
+    var times = track.times, vals = track.values, n = times.length;
+    if (!n) return;
+    var i = 0;
+    if (t <= times[0]) { for (var z = 0; z < comps; z++) out[off + z] = vals[z]; return; }
+    if (t >= times[n - 1]) { for (var e = 0; e < comps; e++) out[off + e] = vals[(n - 1) * comps + e]; return; }
+    var lo = 0, hi = n - 1;
+    while (lo + 1 < hi) { i = (lo + hi) >> 1; if (times[i] <= t) lo = i; else hi = i; }
+    i = lo;
+    var span = times[i + 1] - times[i] || 1, u = (t - times[i]) / span;
+    for (var k = 0; k < comps; k++) out[off + k] = lerp(vals[i * comps + k], vals[(i + 1) * comps + k], u);
+  }
+
+  function quatAt(track, t, out, off) {
+    var times = track.times, vals = track.values, n = times.length;
+    if (!n) return;
+    var i = 0;
+    if (t <= times[0]) { out[off] = vals[0]; out[off + 1] = vals[1]; out[off + 2] = vals[2]; out[off + 3] = vals[3]; return; }
+    if (t >= times[n - 1]) { i = (n - 1) * 4; out[off] = vals[i]; out[off + 1] = vals[i + 1]; out[off + 2] = vals[i + 2]; out[off + 3] = vals[i + 3]; return; }
+    var lo = 0, hi = n - 1, mid;
+    while (lo + 1 < hi) { mid = (lo + hi) >> 1; if (times[mid] <= t) lo = mid; else hi = mid; }
+    var j = lo * 4, k = (lo + 1) * 4;
+    var span = times[lo + 1] - times[lo] || 1, u = (t - times[lo]) / span;
+    var ax = vals[j], ay = vals[j + 1], az = vals[j + 2], aw = vals[j + 3];
+    var bx = vals[k], by = vals[k + 1], bz = vals[k + 2], bw = vals[k + 3];
+    var dot = ax * bx + ay * by + az * bz + aw * bw;
+    if (dot < 0) { bx = -bx; by = -by; bz = -bz; bw = -bw; dot = -dot; }
+    if (dot > 0.9995) {
+      var ix = lerp(ax, bx, u), iy = lerp(ay, by, u), iz = lerp(az, bz, u), iw = lerp(aw, bw, u);
+      var il = Math.sqrt(ix * ix + iy * iy + iz * iz + iw * iw) || 1;
+      out[off] = ix / il; out[off + 1] = iy / il; out[off + 2] = iz / il; out[off + 3] = iw / il;
+    } else {
+      var th = Math.acos(clamp(dot, -1, 1)), s = Math.sin(th) || 1;
+      var wa = Math.sin((1 - u) * th) / s, wb = Math.sin(u * th) / s;
+      out[off] = ax * wa + bx * wb; out[off + 1] = ay * wa + by * wb;
+      out[off + 2] = az * wa + bz * wb; out[off + 3] = aw * wa + bw * wb;
+    }
+  }
+
+  function assetScratch(model) {
+    if (model._p3dScratch) return model._p3dScratch;
+    var n = model.parents.length, verts = model.positions.length / 3;
+    model._p3dScratch = {
+      local: new Float32Array(n * 16), world: new Float32Array(n * 16), skin: new Float32Array(n * 16),
+      t: new Float32Array(n * 3), r: new Float32Array(n * 4), s: new Float32Array(n * 3),
+      pos: new Float32Array(verts * 3)
+    };
+    return model._p3dScratch;
+  }
+
+  /* La pose se evalúa y se deforma en CPU, jugador a jugador. Los vértices
+   * vienen sin indexar (3 por triángulo), así que el resultado se puede
+   * escribir directamente en el VBO dinámico común del partido. */
+  function evalModel(model, clip, time, sc) {
+    var n = model.parents.length, i, k;
+    sc.t.set(model.bindT); sc.r.set(model.bindR); sc.s.set(model.bindS);
+    for (i = 0; i < clip.tracks.length; i++) {
+      var tr = clip.tracks[i], u = time;
+      if (tr.path === "rotation") quatAt(tr, u, sc.r, tr.node * 4);
+      else if (tr.path === "translation") {
+        trackAt(tr, u, 3, sc.t, tr.node * 3);
+        /* El desplazamiento lateral del clip dive duplicaría el movimiento
+         * del actor; se conserva solo la altura del hueso raíz. */
+        if (tr.node === 0) { sc.t[0] = model.bindT[0]; sc.t[2] = model.bindT[2]; }
+      } else if (tr.path === "scale") trackAt(tr, u, 3, sc.s, tr.node * 3);
+    }
+    for (i = 0; i < n; i++) mat4TRS(sc.local, i * 16, sc.t, i * 3, sc.r, i * 4, sc.s, i * 3);
+    for (i = 0; i < n; i++) {
+      var o = i * 16, p = model.parents[i];
+      if (p >= 0) mat4MulAt(sc.world, o, sc.world, p * 16, sc.local, o);
+      else for (k = 0; k < 16; k++) sc.world[o + k] = sc.local[o + k];
+    }
+    for (i = 0; i < n; i++) mat4MulAt(sc.skin, i * 16, sc.world, i * 16, model.ibm, i * 16);
+    var pos = model.positions, jnt = model.joints, wgt = model.weights, out = sc.pos;
+    for (i = 0, k = 0; i < pos.length; i += 3, k += 4) {
+      var px = pos[i], py = pos[i + 1], pz = pos[i + 2], x = 0, y = 0, z = 0;
+      for (var wi = 0; wi < 4; wi++) {
+        var w = wgt[k + wi];
+        if (!w) continue;
+        var b = jnt[k + wi] * 16;
+        x += w * (sc.skin[b] * px + sc.skin[b + 4] * py + sc.skin[b + 8] * pz + sc.skin[b + 12]);
+        y += w * (sc.skin[b + 1] * px + sc.skin[b + 5] * py + sc.skin[b + 9] * pz + sc.skin[b + 13]);
+        z += w * (sc.skin[b + 2] * px + sc.skin[b + 6] * py + sc.skin[b + 10] * pz + sc.skin[b + 14]);
+      }
+      out[i] = x; out[i + 1] = y; out[i + 2] = z;
+    }
+  }
+
+  function actorClip(a) {
+    var anim = a.anim, sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
+    if (anim) {
+      var k = clamp(anim.t / Math.max(0.01, anim.dur), 0, 1);
+      if (anim.type === "dive") return {name: "dive", t: k * 1.25, loop: false};
+      if (anim.type === "kick") return {name: "kick", t: k * 0.85, loop: false};
+      if (anim.type === "celebrate") return {name: "celebrate", t: k * 1.7, loop: false};
+      if (anim.type === "card") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
+    }
+    if (sp > 0.65) return {name: "run", t: (a.runPhase / TAU) * 0.8, loop: true};
+    return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
+  }
+
+  function assetPalette(a) {
+    var shirt = a.gk ? (a.side ? [0.55, 0.26, 0.76] : [0.96, 0.55, 0.12]) : (colors[a.side] || rgb(SHIRT[a.side]));
+    var shorts = a.gk ? [0.08, 0.10, 0.12] : (SHORTS[a.side] || SHORTS[0]);
+    return {kit_shirt: shirt, kit_shorts: shorts, kit_socks: shirt, kit_trim: [0.96, 0.86, 0.55],
+      skin: a.skin || SKIN, hair: a.hair || HAIR, boots: BOOT, gloves: [0.98, 0.48, 0.16]};
+  }
+
+  function buildAssetPlayer(m, a) {
+    if (!assetModels || assetState !== "ready") return false;
+    var variant = a.variant || actorVariant(a), set = assetModels.players[variant];
+    if (!set) return false;
+    var d2 = dist2(a.x, a.z, cam.lookX, cam.lookZ);
+    var model = (quality > 0.72 && d2 < 24 * 24) ? set[1] : set[2];
+    if (!model) model = set[1] || set[2];
+    if (!model || !model.clips) return false;
+    var info = actorClip(a), clip = model.clips[info.name] || model.clips.idle;
+    if (!clip) return false;
+    var sc = assetScratch(model);
+    var t = info.loop ? info.t % clip.dur : clamp(info.t, 0, clip.dur);
+    if (t < 0) t += clip.dur;
+    evalModel(model, clip, t, sc);
+
+    var far = d2 > 1600, q = quality < 0.7 || far ? 0 : 1;
+    m.circle(a.x, a.z, far ? 0.4 : 0.56, [0.02, 0.08, 0.045], q ? 10 : 7, 0.026);
+    if (sim.ball.mode === "held" && sim.ball.side === a.side && sim.ball.idx === a.slot) {
+      m.ring(a.x, a.z, 0.58, 0.07, [0.98, 0.82, 0.28], 12, 0.032);
+    }
+
+    var pal = assetPalette(a), ca = Math.cos(a.facing), sa = Math.sin(a.facing), scale = a.scale || 1;
+    var pos = sc.pos, p = model.positions, materials = model.materials, matNames = model.matNames, matColors = model.matColors;
+    var vr, vg, vb, i;
+    /* Escalar aquí evita repetir la multiplicación por vértice al transformar. */
+    for (i = 0; i < pos.length; i += 3) { pos[i] *= scale; pos[i + 1] *= scale; pos[i + 2] *= scale; }
+    for (var ti = 0; ti < model.triangles; ti++) {
+      var i0 = ti * 3, x0 = pos[i0 * 3], y0 = pos[i0 * 3 + 1], z0 = pos[i0 * 3 + 2];
+      var x1 = pos[i0 * 3 + 3], y1 = pos[i0 * 3 + 4], z1 = pos[i0 * 3 + 5];
+      var x2 = pos[i0 * 3 + 6], y2 = pos[i0 * 3 + 7], z2 = pos[i0 * 3 + 8];
+      var mi = materials[i0], nm = matNames[mi] || "", base = pal[nm] || matColors[mi] || [0.8, 0.8, 0.8];
+      vr = (model.colors[i0 * 3] + model.colors[i0 * 3 + 3] + model.colors[i0 * 3 + 6]) / 3;
+      vg = (model.colors[i0 * 3 + 1] + model.colors[i0 * 3 + 4] + model.colors[i0 * 3 + 7]) / 3;
+      vb = (model.colors[i0 * 3 + 2] + model.colors[i0 * 3 + 5] + model.colors[i0 * 3 + 8]) / 3;
+      m.tri9(a.x + x0 * ca + z0 * sa, y0, a.z - x0 * sa + z0 * ca,
+        a.x + x1 * ca + z1 * sa, y1, a.z - x1 * sa + z1 * ca,
+        a.x + x2 * ca + z2 * sa, y2, a.z - x2 * sa + z2 * ca,
+        base[0] * vr, base[1] * vg, base[2] * vb);
+    }
+    assetFrameTris += model.triangles;
+    assetFramePlayers++;
+    return true;
+  }
+
   /* ------------------------------------------------------------------ dibujo jugadores */
 
   function buildPlayer(m, a) {
@@ -925,8 +1167,38 @@ var Pitch3D = (function () {
     }
   }
 
+  function buildAssetBall(m) {
+    var model = assetModels && assetModels.static && assetModels.static.ball_lod1;
+    if (!model || !model.triangles || !model.positions.length) return false;
+    var b = sim.ball, x = b.x, z = b.z, y = Math.max(BALL_R * BALL_SCALE, b.y);
+    m.circle(x, z, 0.3, [0.01, 0.05, 0.03], 8, 0.024);
+    var pos = model.positions, col = model.colors;
+    var cx = Math.cos(b.spinX), sx = Math.sin(b.spinX);
+    var cz = Math.cos(b.spinZ), sz = Math.sin(b.spinZ);
+    for (var i = 0; i < pos.length; i += 9) {
+      /* dos giros alrededor de X y Z: rueda en la dirección de la velocidad */
+      var ax = pos[i] * BALL_SCALE, ay = pos[i + 1] * BALL_SCALE, az = pos[i + 2] * BALL_SCALE;
+      var a1 = ay * cx - az * sx, a2 = ay * sx + az * cx;
+      var bx = pos[i + 3] * BALL_SCALE, by = pos[i + 4] * BALL_SCALE, bz = pos[i + 5] * BALL_SCALE;
+      var b1 = by * cx - bz * sx, b2 = by * sx + bz * cx;
+      var gx = pos[i + 6] * BALL_SCALE, gy = pos[i + 7] * BALL_SCALE, gz = pos[i + 8] * BALL_SCALE;
+      var g1 = gy * cx - gz * sx, g2 = gy * sx + gz * cx;
+      m.tri9(
+        x + ax * cz - a1 * sz, y + ax * sz + a1 * cz, z + a2,
+        x + bx * cz - b1 * sz, y + bx * sz + b1 * cz, z + b2,
+        x + gx * cz - g1 * sz, y + gx * sz + g1 * cz, z + g2,
+        (col[i] + col[i + 3] + col[i + 6]) / 3,
+        (col[i + 1] + col[i + 4] + col[i + 7]) / 3,
+        (col[i + 2] + col[i + 5] + col[i + 8]) / 3
+      );
+    }
+    assetFrameTris += model.triangles;
+    assetFrameBall++;
+    return true;
+  }
+
   function buildBall(m) {
-    var b = sim.ball, r = 0.23, y = Math.max(0.2, b.y), x = b.x, z = b.z;
+    var b = sim.ball, r = BALL_R * BALL_SCALE, y = Math.max(r, b.y), x = b.x, z = b.z;
     m.circle(x, z, 0.3, [0.01, 0.05, 0.03], 8, 0.024);
     var top = [x, y + r, z], bot = [x, y - r, z], a = [x + r, y, z], c = [x - r, y, z], d = [x, y, z + r], e = [x, y, z - r];
     var w = [0.95, 0.95, 0.9], k = [0.12, 0.14, 0.15];
@@ -976,14 +1248,15 @@ var Pitch3D = (function () {
   function draw() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     dyn.reset();
+    assetFrameTris = 0; assetFramePlayers = 0; assetFrameBall = 0;
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = sim.players[s] && sim.players[s][i];
       if (!a) continue;
       var card = sim.action && sim.action.type === "card" && sim.action.player === a;
       if ((a.gone || a.sentOff) && !card) continue;
-      buildPlayer(dyn, a);
+      if (!buildAssetPlayer(dyn, a)) buildPlayer(dyn, a);
     }
-    buildBall(dyn);
+    if (!buildAssetBall(dyn)) buildBall(dyn);
     if (dyn.n > dynCapacity) {
       var cap = dynCapacity; while (cap < dyn.n) cap *= 2;
       gl.bindBuffer(gl.ARRAY_BUFFER, dynBuf); gl.bufferData(gl.ARRAY_BUFFER, cap * 4, gl.DYNAMIC_DRAW);
@@ -1079,6 +1352,7 @@ var Pitch3D = (function () {
     var srcCols = opts.cols && opts.cols.length ? opts.cols : SHIRT;
     colors = [kitColor(srcCols[0], rgb(SHIRT[0])), kitColor(srcCols[1], rgb(SHIRT[1]))];
     disposed = false; frozen = false; reduced = false;
+    loadAssets();
     try { reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (ignore) {}
     canvas = document.createElement("canvas");
     canvas.className = "lpitch lpitch3d";
@@ -1102,6 +1376,7 @@ var Pitch3D = (function () {
     host.appendChild(replayBtn);
     host.addEventListener("webglcontextlost", onLost, false);
     sim = newSim();
+    sim.fem = !!opts.fem;
     resize();
     lastTs = 0; acc = 0; aiAcc = 0; histAcc = 0; fps = 0; fpsFrames = 0; fpsStart = 0;
     raf = requestAnimationFrame(loop);
@@ -1148,6 +1423,7 @@ var Pitch3D = (function () {
 
   function state(o) {
     if (!o || sim.replay) return;
+    if (o.fem != null && sim.fem !== !!o.fem) { sim.fem = !!o.fem; refreshActorVariants(); }
     if (o.speed != null) sim.rate = clamp(+o.speed || 1, 1, 3);
     if (sim.ended) return;
     if (o.tac) {
@@ -1218,6 +1494,8 @@ var Pitch3D = (function () {
     sim.players = old.players;
     sim.tactics = old.tactics;
     sim.started = !!old.started;
+    sim.fem = !!old.fem;
+    refreshActorVariants();
     sim.attack = [1, -1];
     sim.own = 0;
     for (var s = 0; s < 2; s++) {
@@ -1239,11 +1517,37 @@ var Pitch3D = (function () {
 
   function replay() { return startReplay(); }
 
+  /* Diagnóstico barato para el smoke test: detecta NaN y triángulos
+   * desgarrados sin exponer el VBO completo. */
+  function meshStats() {
+    if (!dyn || !dyn.n) return {verts: 0, tris: 0, maxEdge: 0, nan: 0, bad: 0};
+    var a = dyn.a, n = dyn.n, maxEdge = 0, nan = 0, bad = 0;
+    for (var i = 0; i + 17 < n; i += 18) {
+      var ax = a[i], ay = a[i + 1], az = a[i + 2];
+      var bx = a[i + 6], by = a[i + 7], bz = a[i + 8];
+      var cx = a[i + 12], cy = a[i + 13], cz = a[i + 14];
+      if (!isFinite(ax + ay + az + bx + by + bz + cx + cy + cz)) nan++;
+      var e = Math.max(Math.sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by) + (az - bz) * (az - bz)),
+        Math.sqrt((bx - cx) * (bx - cx) + (by - cy) * (by - cy) + (bz - cz) * (bz - cz)),
+        Math.sqrt((cx - ax) * (cx - ax) + (cy - ay) * (cy - ay) + (cz - az) * (cz - az)));
+      if (e > maxEdge) maxEdge = e;
+      if (!isFinite(e) || e > 1.5) bad++;
+    }
+    return {verts: n / 6, tris: n / 18, maxEdge: +maxEdge.toFixed(3), nan: nan, bad: bad};
+  }
+
   function debug() {
     var err = 0;
     try { if (gl) err = gl.getError(); } catch (ignore) {}
+    var assetLods = 0;
+    if (assetModels && assetModels.players) for (var v in assetModels.players) if (assetModels.players.hasOwnProperty(v)) {
+      for (var l in assetModels.players[v]) if (assetModels.players[v].hasOwnProperty(l) && assetModels.players[v][l]) assetLods++;
+    }
     return {sim: sim, ball: sim.ball, action: sim.action, quality: quality, fps: fps, frames: frameCount,
-      gl: !!gl, glError: err, players: sim.players, history: sim.history.length, camera: cam};
+      gl: !!gl, glError: err, players: sim.players, history: sim.history.length, camera: cam, mesh: meshStats(),
+      assets: {state: assetState, lods: assetLods, statics: assetModels ? Object.keys(assetModels.static).length : 0,
+        errors: assetModels && assetModels.errors ? assetModels.errors.length : 0,
+        frameTris: assetFrameTris, framePlayers: assetFramePlayers, frameBall: assetFrameBall}};
   }
 
   return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy,
