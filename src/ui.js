@@ -2131,7 +2131,9 @@
       if (e.us === 0 && e.ox != null && e.ox >= 0) who = e.ox;
       Pitch.event({t: e.t, side: side, who: who, k: e.k, txt: e.txt, d: e.d, ly: e.ly});
     });
-    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1});
+    var mt = typeof liveTac === "function" ? liveTac(L) : null, tacs = [null, null];
+    if (mt) tacs[me] = {line: mt.line, width: mt.width, pass: mt.pass, tempo: mt.tempo, ment: L.ment};
+    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1, tac: tacs, ment: L.ment});
   }
   /* colores de los dos clubes, que se distingan entre sí */
   function liveCol(a, b) {
