@@ -10,6 +10,7 @@ El parche conserva el campo 2D como opción predeterminada. En el partido en dir
 - Sombras de contacto aproximadas bajo los jugadores, sin iluminación dinámica para reducir el coste en móviles.
 - Representación geométrica provisional de los 22 jugadores y el balón.
 - Extremidades articuladas por segmentos para balanceo de brazos/piernas, carrera, tiro y celebración, sin rigging ni assets externos.
+- Orientación procedural de los futbolistas hacia su desplazamiento y detalles frontales del uniforme que giran con el cuerpo.
 - Cámara de retransmisión que sigue suavemente al balón.
 - Arcos básicos del balón y trayectorias aproximadas de pases/tiros activadas por eventos del partido, sin teletransportar el balón al área de gol.
 - Conservación de equipos/estado al alternar entre 2D y 3D, y retorno a 2D si se pierde el contexto WebGL.
