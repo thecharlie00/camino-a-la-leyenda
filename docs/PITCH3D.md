@@ -6,7 +6,8 @@ El parche conserva el campo 2D como opción predeterminada. En el partido en dir
 
 ## Qué incluye
 
-- Campo 3D con líneas, áreas, círculo central, porterías estilizadas y franjas de césped.
+- Campo 3D con líneas, áreas, círculo central, porterías geométricas, vallas laterales y franjas de césped.
+- Sombras de contacto aproximadas bajo los jugadores, sin iluminación dinámica para reducir el coste en móviles.
 - Representación geométrica provisional de los 22 jugadores y el balón.
 - Cámara de retransmisión que sigue suavemente al balón.
 - Arcos básicos del balón y reacciones procedurales de carrera, tiro y celebración activadas por eventos del partido.
