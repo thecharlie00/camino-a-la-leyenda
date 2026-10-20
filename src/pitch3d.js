@@ -69,6 +69,19 @@ var Pitch3D = (function () {
     quad(out,[x1,y0,z0],[x1,y0,z1],[x1,y1,z1],[x1,y1,z0],col);
     quad(out,[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1],col);
   }
+  /* Malla UV de baja resolución para dar volumen humano sin assets externos. */
+  function ellipsoid(out,cx,cy,cz,rx,ry,rz,col,segments,rings){
+    segments=segments||8;rings=rings||5;
+    for(var j=0;j<rings;j++){
+      var p0=-Math.PI/2+j*Math.PI/rings,p1=-Math.PI/2+(j+1)*Math.PI/rings;
+      for(var i=0;i<segments;i++){
+        var a0=i*Math.PI*2/segments,a1=(i+1)*Math.PI*2/segments;
+        function v(p,a){return [cx+rx*Math.cos(p)*Math.cos(a),cy+ry*Math.sin(p),cz+rz*Math.cos(p)*Math.sin(a)];}
+        var a=v(p0,a0),b=v(p0,a1),d=v(p1,a0),e=v(p1,a1);
+        tri(out,a,d,b,col);tri(out,b,d,e,col);
+      }
+    }
+  }
   /* Segmento articulado procedural: permite balancear brazos y piernas sin huesos externos. */
   function limb(out,x1,y1,x2,y2,z,r,depth,col) {
     var dx=x2-x1,dy=y2-y1,n=Math.sqrt(dx*dx+dy*dy)||1,px=-dy/n*r,py=dx/n*r,h=depth/2;
@@ -159,15 +172,21 @@ var Pitch3D = (function () {
         var ph=p._p3?p._p3.phase:0,run=p._p3?p._p3.run:0,gait=Math.sin(ph)*0.23*run,skin=[0.72,0.52,0.37],shorts=side===0?[0.08,0.12,0.2]:[0.88,0.88,0.82];
         var isActor=action.who===i&&action.side===side&&performance.now()<action.until, kick=isActor&&/shot|goal|save|miss|pen|cross|volley|shoot|tiro|gol|cabeza|head/i.test(action.kind), celebrate=isActor&&/goal|gol|celebr/i.test(action.kind);
         var arm=Math.sin(ph+Math.PI)*0.3*run, swing=kick?Math.sin((performance.now()-(action.until-620))/620*Math.PI)*0.65:0;
-        box(out,x,0.45,z,0.78,1.0,0.52,c);
-        box(out,x,0.28,z,0.58,0.28,0.48,shorts);
-        limb(out,x-0.22,0.35,x-0.22+gait+swing*0.55,0.06,z,0.105,0.16,shorts);
-        limb(out,x+0.22,0.35,x+0.22-gait-swing*0.2,0.06,z,0.105,0.16,shorts);
-        box(out,x-0.22+gait+swing*0.55,0.025,z,0.23,0.09,0.28,[0.08,0.09,0.1]);
-        box(out,x+0.22-gait-swing*0.2,0.025,z,0.23,0.09,0.28,[0.08,0.09,0.1]);
-        circle3D(out,x,1.62+(celebrate?0.12*Math.abs(Math.sin(performance.now()/120)):0),z,0.22,skin);
-        limb(out,x-0.38,1.25,x-0.52-arm,0.76,z,0.09,0.16,skin);
-        limb(out,x+0.38,1.25,x+0.52+arm,0.76+(celebrate?0.25:0),z,0.09,0.16,skin);
+        /* Silueta humana de volumen: tronco, pelvis, cabeza y pelo con mallas suaves de baja poligonización. */
+        ellipsoid(out,x,0.91,z,0.34,0.48,0.235,c,10,6);
+        ellipsoid(out,x,0.34,z,0.27,0.18,0.21,shorts,8,4);
+        limb(out,x-0.15,0.35,x-0.19+gait+swing*0.55,0.13,z,0.09,0.14,shorts);
+        limb(out,x+0.15,0.35,x+0.19-gait-swing*0.2,0.13,z,0.09,0.14,shorts);
+        ellipsoid(out,x-0.19+gait+swing*0.55,0.1,z,0.075,0.12,0.08,[0.82,0.84,0.82],7,4);
+        ellipsoid(out,x+0.19-gait-swing*0.2,0.1,z,0.075,0.12,0.08,[0.82,0.84,0.82],7,4);
+        box(out,x-0.19+gait+swing*0.55,0.025,z+0.04,0.2,0.075,0.29,[0.08,0.09,0.1]);
+        box(out,x+0.19-gait-swing*0.2,0.025,z+0.04,0.2,0.075,0.29,[0.08,0.09,0.1]);
+        ellipsoid(out,x,1.53,z,0.205,0.245,0.19,skin,10,6);
+        ellipsoid(out,x,1.68,z-0.015,0.207,0.105,0.19,[0.12,0.075,0.045],10,4);
+        limb(out,x-0.29,1.2,x-0.43-arm,0.78,z,0.085,0.14,c);
+        limb(out,x+0.29,1.2,x+0.43+arm,0.78+(celebrate?0.25:0),z,0.085,0.14,c);
+        ellipsoid(out,x-0.43-arm,0.76,z,0.075,0.09,0.075,skin,7,4);
+        ellipsoid(out,x+0.43+arm,0.76+(celebrate?0.25:0),z,0.075,0.09,0.075,skin,7,4);
         /* Pequeño emblema frontal visible desde la cámara, también gira con el jugador. */
         box(out,x,0.94,z+0.268,0.2,0.13,0.035,side===0?[0.96,0.82,0.24]:[0.14,0.24,0.42]);
         var angle=p._p3?p._p3.facing||0:0,ca=Math.cos(angle),sa=Math.sin(angle);
