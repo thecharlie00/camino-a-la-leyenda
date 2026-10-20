@@ -102,10 +102,24 @@ var Pitch3D = (function () {
   var base = {POR:[5,.5],LD:[25,.83],LI:[25,.17],DFC:[22,.39],MCD:[38,.5],MC:[48,.32],MCO:[60,.5],MD:[48,.84],MI:[48,.16],ED:[73,.82],EI:[73,.18],DC:[78,.5]};
   function posFor(p,i,side) {
     var b=base[p&&p.pos]||[25+(i%4)*14,.25+((i*7)%7)*.08];
-    var x=b[0],z=b[1]*WID;
-    if(side===1)x=LEN-x;
+    var x=side===1?LEN-b[0]:b[0],z=b[1]*WID;
     if(p&&p._p3){x=p._p3.x;z=p._p3.z;}
     return [x,z];
+  }
+  function updatePlayers(dt) {
+    var k=Math.min(1,dt*1.8), lateral=clamp((ball.z-WID/2)*0.13,-4,4), longitudinal=clamp((ball.x-LEN/2)*0.14,-7,7);
+    teams.forEach(function(team,side){
+      var nearest=-1,bd=1e9;
+      team.forEach(function(p,i){if(!p||p.gone)return;var q=posFor(p,i,side),dx=q[0]-ball.x,dz=q[1]-ball.z,d=dx*dx+dz*dz;if(d<bd){bd=d;nearest=i;}});
+      team.forEach(function(p,i){if(!p||p.gone)return;
+        var b=base[p.pos]||[25+(i%4)*14,.25+((i*7)%7)*.08];
+        var tx=(side===1?LEN-b[0]:b[0])+(side===0?longitudinal:-longitudinal),tz=clamp(b[1]*WID+lateral,3,WID-3);
+        if(i===nearest){tx=ball.x+(side===0?-1.2:1.2);tz=ball.z+(i%2?1.2:-1.2);}
+        if(!p._p3)p._p3={x:tx,z:tz,phase:i*1.7};
+        var dx=tx-p._p3.x,dz=tz-p._p3.z;p._p3.x+=dx*k;p._p3.z+=dz*k;
+        p._p3.phase=(p._p3.phase||0)+dt*(3+Math.min(8,Math.sqrt(dx*dx+dz*dz)*1.2));p._p3.run=Math.min(1,Math.sqrt(dx*dx+dz*dz)/3);
+      });
+    });
   }
   function build() {
     var out=[]; field(out);
@@ -114,10 +128,13 @@ var Pitch3D = (function () {
         if(!p||p.gone)return;
         var q=posFor(p,i,side), x=q[0],z=q[1], c=color(colors[side]);
         /* cuerpo prismático, cabeza y dos piernas: geometría deliberadamente ligera para móvil */
+        var ph=p._p3?p._p3.phase:0,run=p._p3?p._p3.run:0,gait=Math.sin(ph)*0.23*run,skin=[0.72,0.52,0.37],shorts=side===0?[0.08,0.12,0.2]:[0.88,0.88,0.82];
         box(out,x,0.45,z,0.78,1.0,0.52,c);
-        circle3D(out,x,1.62,z,0.22,[0.83,0.66,0.49]);
-        box(out,x-0.2,0.05,z,0.19,0.42,0.2,[0.08,0.09,0.1]);
-        box(out,x+0.2,0.05,z,0.19,0.42,0.2,[0.08,0.09,0.1]);
+        box(out,x-0.48,0.77,z+gait*0.45,0.19,0.68,0.2,c);
+        box(out,x+0.48,0.77,z-gait*0.45,0.19,0.68,0.2,c);
+        circle3D(out,x,1.62,z,0.22,skin);
+        box(out,x-0.2+gait,0.05,z,0.19,0.42,0.2,shorts);
+        box(out,x+0.2-gait,0.05,z,0.19,0.42,0.2,shorts);
       });
     });
     /* balón: octaedro pequeño con ligera elevación en la animación */
@@ -135,8 +152,10 @@ var Pitch3D = (function () {
     raf=requestAnimationFrame(render);
     var w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight),dpr=Math.min(1.5,window.devicePixelRatio||1);
     if(canvas.width!==Math.floor(w*dpr)||canvas.height!==Math.floor(h*dpr)){canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);gl.viewport(0,0,canvas.width,canvas.height);}
-    if(!frozen&&last){var dt=Math.min(0.05,(ts-last)/1000),target=clamp(state.bx,0,100)*LEN/100;
-      ball.x+=(target-ball.x)*Math.min(1,dt*1.6*state.speed);ball.z+=(WID/2-ball.z)*Math.min(1,dt*0.8*state.speed);}
+    var dt=last?Math.min(0.05,Math.max(0,(ts-last)/1000)):0;
+    if(!frozen&&last){var target=clamp(state.bx,0,100)*LEN/100;
+      ball.x+=(target-ball.x)*Math.min(1,dt*1.6*state.speed);ball.z+=(WID/2-ball.z)*Math.min(1,dt*0.8*state.speed);
+      updatePlayers(dt*clamp(+state.speed||1,0.5,3));}
     last=ts||0;
     gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
     var data=build();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,data,gl.DYNAMIC_DRAW);
