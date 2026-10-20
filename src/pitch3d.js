@@ -164,13 +164,39 @@ var Pitch3D = (function () {
 (function(){
   var enabled=false;
   try{enabled=/(?:^|[?&])pitch3d=1(?:&|$)/.test(window.location.search)||window.localStorage.getItem("camino.pitch3d")==="1";}catch(e){}
-  if(enabled&&typeof Pitch!=="undefined"){
-    var original=Pitch;
-    var mounted=false;
-    var fallback={};
-    ["teams","state","event","busy","reset","freeze","destroy"].forEach(function(k){fallback[k]=original[k];});
-    Pitch.mount=function(el,o){mounted=Pitch3D.mount(el,o);if(!mounted){original.mount(el,o);return;}};
-    ["teams","state","event","busy","reset","freeze","destroy"].forEach(function(k){Pitch[k]=function(){if(mounted)return Pitch3D[k].apply(Pitch3D,arguments);return original[k].apply(original,arguments);};});
-    /* El selector de modo es reversible desde consola: localStorage.setItem('camino.pitch3d','0') */
+  if(typeof Pitch==="undefined"||typeof Pitch3D==="undefined")return;
+  var original=Pitch, mounted=false, host=null, mountOpts=null, toggle=null, switching=false;
+  function setMode(want3d){
+    if(!host||switching)return;switching=true;
+    try{
+      if(mounted)Pitch3D.destroy();else original.destroy();
+      mounted=false;
+      if(want3d){
+        mounted=Pitch3D.mount(host,mountOpts||{});
+        if(!mounted)original.mount(host,mountOpts||{});
+      }else original.mount(host,mountOpts||{});
+      try{window.localStorage.setItem("camino.pitch3d",mounted?"1":"0");}catch(e){}
+      if(toggle){toggle.textContent=mounted?"3D · volver a 2D":"Probar vista 3D";toggle.setAttribute("aria-pressed",mounted?"true":"false");}
+    }catch(e){console.warn("Pitch3D: cambio de vista fallido",e);try{Pitch3D.destroy();original.mount(host,mountOpts||{});}catch(ignore){}mounted=false;}
+    switching=false;
   }
+  Pitch.mount=function(el,o){
+    host=el;mountOpts=o||{};
+    if(!toggle){
+      toggle=document.createElement("button");toggle.type="button";toggle.className="p3dtoggle";
+      toggle.style.cssText="position:absolute;z-index:20;top:6px;right:6px;padding:6px 9px;border:1px solid rgba(255,255,255,.4);border-radius:6px;background:rgba(8,20,18,.88);color:#fff;font:600 11px system-ui;cursor:pointer";
+      toggle.addEventListener("click",function(ev){ev.preventDefault();ev.stopPropagation();setMode(!mounted);});
+    }
+    if(toggle.parentNode!==host)host.appendChild(toggle);
+    setMode(enabled);
+  };
+  ["teams","state","event","busy","reset","freeze"].forEach(function(k){
+    Pitch[k]=function(){var engine=mounted?Pitch3D:original;return engine[k].apply(engine,arguments);};
+  });
+  Pitch.destroy=function(){
+    if(mounted)Pitch3D.destroy();else original.destroy();
+    if(toggle&&toggle.parentNode)toggle.parentNode.removeChild(toggle);
+    mounted=false;host=null;mountOpts=null;toggle=null;
+  };
+  /* Selector visible en el partido; 2D sigue siendo la opción predeterminada. */
 })();
