@@ -5,7 +5,7 @@
  */
 var Pitch3D = (function () {
   "use strict";
-  var LEN = 105, WID = 68, ctx = null, raf = 0, gl = null, canvas = null;
+  var LEN = 105, WID = 68, ctx = null, raf = 0, gl = null, canvas = null, hud = null, fpsFrames = 0, fpsStart = 0;
   var program = null, buffer = null, locations = null, teams = [[], []], state = {own: 0, bx: 50, speed: 1};
   var opts = {}, host = null, frozen = false, last = 0, disposed = false, ball = {x: 52.5, z: 34, y: 0.28, vx: 0, vz: 0, vy: 0}, action = {until: 0, side: 0, who: -1, kind: "", phase: 0}, camera = {x: 52.5, z: 34};
   var colors = ["#f5b326", "#5db8ff"], meshes = [];
@@ -191,6 +191,15 @@ var Pitch3D = (function () {
     var w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight),dpr=Math.min(1.5,window.devicePixelRatio||1);
     if(canvas.width!==Math.floor(w*dpr)||canvas.height!==Math.floor(h*dpr)){canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);gl.viewport(0,0,canvas.width,canvas.height);}
     var dt=last?Math.min(0.05,Math.max(0,(ts-last)/1000)):0;
+    fpsFrames++;
+    if(!fpsStart)fpsStart=ts;
+    if(hud&&ts-fpsStart>=750){
+      var fps=Math.round(fpsFrames*1000/(ts-fpsStart)),count=0;
+      teams.forEach(function(team){team.forEach(function(p){if(p&&!p.gone)count++;});});
+      hud.textContent="WEBGL  ·  "+fps+" FPS  ·  "+count+"/22 jugadores";
+      hud.style.color=fps<25?"#ffd0a8":fps<45?"#fff0b0":"#b9ffd6";
+      fpsFrames=0;fpsStart=ts;
+    }
     if(!frozen&&last){var target=clamp(state.bx,0,100)*LEN/100;
       if(ts<action.until&&(Math.abs(ball.vx)+Math.abs(ball.vz)>0.01)){
         ball.x+=ball.vx*dt;ball.z+=ball.vz*dt;ball.vx*=Math.pow(0.985,dt*60);ball.vz*=Math.pow(0.985,dt*60);
@@ -217,6 +226,9 @@ var Pitch3D = (function () {
     canvas.style.display="block";canvas.style.width="100%";canvas.style.height="100%";canvas.style.minHeight="220px";
     host.appendChild(canvas);
     try{initGL();}catch(e){console.warn("Pitch3D: se activa el campo 2D de reserva",e);destroy();return false;}
+    hud=document.createElement("div");hud.className="lpitch3d-hud";
+    hud.style.cssText="position:absolute;z-index:19;left:6px;bottom:6px;padding:5px 7px;border-radius:5px;background:rgba(5,15,12,.78);color:#b9ffd6;font:600 10px ui-monospace,monospace;pointer-events:none";
+    hud.textContent="WEBGL  ·  midiendo rendimiento…";host.appendChild(hud);fpsFrames=0;fpsStart=0;
     canvas.addEventListener("webglcontextlost",function(ev){
       ev.preventDefault();
       if(host){try{host.dispatchEvent(new Event("pitch3d:contextlost"));}catch(ignore){}}
@@ -225,7 +237,9 @@ var Pitch3D = (function () {
     raf=requestAnimationFrame(render);return true;
   }
   function destroy(){disposed=true;if(raf)cancelAnimationFrame(raf);raf=0;if(gl){try{if(buffer)gl.deleteBuffer(buffer);if(program)gl.deleteProgram(program);}catch(e){}}gl=null;buffer=null;program=null;locations=null;
-    if(canvas&&canvas.parentNode)canvas.parentNode.removeChild(canvas);canvas=null;host=null;teams=[[],[]];}
+    if(canvas&&canvas.parentNode)canvas.parentNode.removeChild(canvas);canvas=null;
+    if(hud&&hud.parentNode)hud.parentNode.removeChild(hud);hud=null;fpsFrames=0;fpsStart=0;
+    host=null;teams=[[],[]];}
   function api(){return {mount:mount,teams:function(a,b){teams=[a||[],b||[]];},state:function(s){if(s)state=Object.assign(state,s);},
     event:function(e){if(!e)return;if(e.side!=null)state.own=e.side;var kind=(String(e.t||"")+" "+String(e.k||"")+" "+String(e.txt||"")).toLowerCase(),who=e.who!=null&&Number.isFinite(+e.who)?+e.who:-1,side=e.side===1?1:0,isGoal=/goal|gol/i.test(String(e.t||"")+" "+String(e.k||"")),isShot=/shot|shoot|tiro|penalty|penal|save|miss|post|head|volley|oneone|chut/i.test(kind),isPass=/pass|cross|through|pase|centro|corner/i.test(kind);action={until:performance.now()+(isGoal?2300:1100),side:side,who:who,kind:kind,phase:performance.now()};if(isShot||isGoal){var dir=side===0?1:-1;ball.vx=dir*(isGoal?26:22);ball.vz=clamp((WID/2-ball.z)*0.6,-7,7);ball.vy=isGoal?4.5:3.2;state.bx=side===0?98:2;}else if(isPass){ball.vx=(side===0?1:-1)*10;ball.vz=clamp((WID/2-ball.z)*0.22,-3,3);ball.vy=1.2;action.until=performance.now()+650;}if(typeof e.cue==="function")setTimeout(e.cue,120);},
     busy:function(){return 0;},reset:function(){ball={x:LEN/2,z:WID/2,y:0.28,vx:0,vz:0,vy:0};action={until:0,side:0,who:-1,kind:"",phase:0};camera={x:LEN/2,z:WID/2};},freeze:function(v){frozen=!!v;},destroy:destroy};}
