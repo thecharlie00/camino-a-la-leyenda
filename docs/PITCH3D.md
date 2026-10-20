@@ -9,8 +9,10 @@ El parche conserva el campo 2D como opción predeterminada. En el partido en dir
 - Campo 3D con líneas, áreas, círculo central, porterías geométricas, vallas laterales y franjas de césped.
 - Sombras de contacto aproximadas bajo los jugadores, sin iluminación dinámica para reducir el coste en móviles.
 - Representación geométrica provisional de los 22 jugadores y el balón.
+- Extremidades articuladas por segmentos para balanceo de brazos/piernas, carrera, tiro y celebración, sin rigging ni assets externos.
 - Cámara de retransmisión que sigue suavemente al balón.
-- Arcos básicos del balón y reacciones procedurales de carrera, tiro y celebración activadas por eventos del partido.
+- Arcos básicos del balón y trayectorias aproximadas de pases/tiros activadas por eventos del partido, sin teletransportar el balón al área de gol.
+- Conservación de equipos/estado al alternar entre 2D y 3D, y retorno a 2D si se pierde el contexto WebGL.
 - Pausa del renderizado cuando la pestaña/app queda en segundo plano.
 - Adaptador de la API `Pitch`; no modifica `match41.js` ni los cálculos del resultado del partido.
 - Alternancia 2D/3D dentro del partido y fallback a 2D si WebGL no está disponible.
