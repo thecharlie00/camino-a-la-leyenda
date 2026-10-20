@@ -8,13 +8,15 @@ El parche conserva el campo 2D como opción predeterminada. En el partido en dir
 
 - Campo 3D con líneas, áreas, círculo central, porterías estilizadas y franjas de césped.
 - Representación geométrica provisional de los 22 jugadores y el balón.
-- Cámara de retransmisión fija y movimiento del balón hacia la posición de posesión comunicada por el motor actual.
+- Cámara de retransmisión que sigue suavemente al balón.
+- Arcos básicos del balón y reacciones procedurales de carrera, tiro y celebración activadas por eventos del partido.
+- Pausa del renderizado cuando la pestaña/app queda en segundo plano.
 - Adaptador de la API `Pitch`; no modifica `match41.js` ni los cálculos del resultado del partido.
 - Alternancia 2D/3D dentro del partido y fallback a 2D si WebGL no está disponible.
 
 ## Límites conocidos
 
-Esto es una **prueba de integración**, no la versión final con modelos humanos. Los jugadores son figuras geométricas, no hay todavía esqueleto, clips glTF, animación real de pases/tiros, sombras ni repetición 3D sincronizada. El objetivo es verificar que WebGL funciona en la WebView y medir rendimiento antes de importar modelos y animaciones.
+Esto es una **prueba de integración**, no la versión final con modelos humanos. Los jugadores son figuras geométricas con animación procedural, no modelos humanos con esqueleto. Aún faltan modelos glTF, animaciones capturadas/retargeted, sombras y repetición 3D sincronizada. Las acciones de tiro y gol son representaciones aproximadas basadas en los eventos, no una reproducción física exacta de cada jugada. El objetivo es verificar que WebGL funciona en la WebView y medir rendimiento antes de importar modelos y animaciones.
 
 ## Compilación
 
