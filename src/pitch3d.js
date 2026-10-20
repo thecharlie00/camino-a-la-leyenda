@@ -154,6 +154,7 @@ var Pitch3D = (function () {
   function render(ts) {
     if(disposed||!gl)return;
     raf=requestAnimationFrame(render);
+    if(document.hidden){last=ts||0;return;}
     var w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight),dpr=Math.min(1.5,window.devicePixelRatio||1);
     if(canvas.width!==Math.floor(w*dpr)||canvas.height!==Math.floor(h*dpr)){canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);gl.viewport(0,0,canvas.width,canvas.height);}
     var dt=last?Math.min(0.05,Math.max(0,(ts-last)/1000)):0;
@@ -183,7 +184,7 @@ var Pitch3D = (function () {
   function destroy(){disposed=true;if(raf)cancelAnimationFrame(raf);raf=0;if(gl){try{if(buffer)gl.deleteBuffer(buffer);if(program)gl.deleteProgram(program);}catch(e){}}gl=null;buffer=null;program=null;locations=null;
     if(canvas&&canvas.parentNode)canvas.parentNode.removeChild(canvas);canvas=null;host=null;teams=[[],[]];}
   function api(){return {mount:mount,teams:function(a,b){teams=[a||[],b||[]];},state:function(s){if(s)state=Object.assign(state,s);},
-    event:function(e){if(!e)return;if(e.side!=null)state.own=e.side;var kind=String(e.k||e.txt||"").toLowerCase(),who=Number.isFinite(+e.who)?+e.who:-1,side=e.side===1?1:0;action={until:performance.now()+((/goal|gol|celebr/i.test(kind))?2100:950),side:side,who:who,kind:kind,phase:performance.now()};if(/goal|gol|shot|shoot|tiro|penalty|penal/i.test(kind)){ball.x=side===0?LEN-2:2;ball.z=WID/2+(Math.random()-.5)*10;ball.y=0.5;ball.vy=4.8;state.bx=side===0?98:2;}else if(/pass|cross|through|pase|centro/i.test(kind)){ball.vy=1.2;}if(typeof e.cue==="function")setTimeout(e.cue,120);},
+    event:function(e){if(!e)return;if(e.side!=null)state.own=e.side;var kind=(String(e.t||"")+" "+String(e.k||"")+" "+String(e.txt||"")).toLowerCase(),who=Number.isFinite(+e.who)?+e.who:-1,side=e.side===1?1:0,isGoal=/goal|gol/i.test(String(e.t||"")+" "+String(e.k||""));action={until:performance.now()+(isGoal?2300:1100),side:side,who:who,kind:kind,phase:performance.now()};if(/goal|gol|shot|shoot|tiro|penalty|penal|save|miss|post|head|volley|oneone/i.test(kind)){ball.x=side===0?LEN-2:2;ball.z=clamp(WID/2+(Math.random()-.5)*10,5,WID-5);ball.y=0.5;ball.vy=/goal|gol|miss|post/i.test(kind)?5.4:3.8;state.bx=side===0?98:2;}else if(/pass|cross|through|pase|centro|corner|cross/i.test(kind)){ball.vy=1.2;}if(typeof e.cue==="function")setTimeout(e.cue,120);},
     busy:function(){return 0;},reset:function(){ball={x:LEN/2,z:WID/2};},freeze:function(v){frozen=!!v;},destroy:destroy};}
   return api();
 })();
