@@ -106,7 +106,9 @@ Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro 
 - Jugadores, sombras de contacto, aro del portador y balón se reconstruyen en un buffer dinámico que se reutiliza; no se crean buffers por frame.
 - Los jugadores usan los GLB LOD1/LOD2, con el jugador cercano a LOD1 y el resto a LOD2. Si un modelo no está disponible, se usa la malla procedural de reserva.
 - El balón GLB se dibuja con rotación de rodadura derivada de su velocidad; si falta, se usa el balón procedural. La sombra de contacto y el aro del portador siguen siendo geometría propia.
-- Calidad adaptativa: si los FPS bajan, se reducen detalles y sombras; si se recuperan, vuelven gradualmente.
+- La luz es plana por triángulo: clave cálida desde arriba, relleno frío y ambiental hemisférica. Los materiales claros y poco saturados (balón, medias, guantes) reciben un especular barato calculado en CPU; las equipaciones y la piel quedan mate.
+- Cada jugador proyecta dos elipses de contacto alargadas en sentido contrario a la luz. A distancia se sustituyen por un disco de pocos segmentos para no gastar triángulos.
+- Calidad adaptativa: si los FPS bajan, se reducen detalles, sombras y el especular dinámico; si se recuperan, vuelven gradualmente.
 - `devicePixelRatio` se limita a 1.5 para no disparar el coste en móviles de alta densidad.
 - El render se pausa cuando la pestaña queda oculta y respeta `prefers-reduced-motion` para la sacudida de cámara.
 - Las matrices de cámara, los uniformes y los buffers se reutilizan para evitar asignaciones por frame.
@@ -146,6 +148,7 @@ En CI se instala Playwright y Chromium y se ejecuta el mismo archivo. El test fa
 
 - Las animaciones son clips cortos generados para el proyecto; no hay captura de movimiento ni retargeting externo. La tarjeta reutiliza la pose de `idle`.
 - Las acciones de tiro, parada y gol son representaciones aproximadas basadas en eventos; no reproducen la física exacta de cada jugada.
+- La iluminación es plana por triángulo y el especular se deduce del color; no hay texturas PBR, mapas de rugosidad, sombras proyectadas ni oclusión ambiental.
 - La repetición es visual (historial de posiciones del render), no una repetición sincronizada de los eventos de `match41`.
 - No hay nombres, dorsales, celebraciones personalizadas ni multitud animada.
 - Los props de estadio del pack todavía no sustituyen al campo procedural; hacerlo requiere quitar primero las porterías/vallas actuales para no duplicar geometría.

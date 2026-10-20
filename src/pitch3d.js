@@ -32,6 +32,7 @@ var Pitch3D = (function () {
    * que siga siendo legible en pantallas pequeñas y a la distancia de cámara. */
   var BALL_R = 0.11, BALL_SCALE = 2;
   var LIGHT = norm3([0.42, 0.86, 0.28]);
+  var SHADOW_DIR = (function () { var l = Math.sqrt(LIGHT[0] * LIGHT[0] + LIGHT[2] * LIGHT[2]) || 1; return [-LIGHT[0] / l, -LIGHT[2] / l]; })();
   var BASE = {POR: [0.045, 0.5], LD: [0.24, 0.84], LI: [0.24, 0.16], DFC: [0.2, 0.5], MCD: [0.36, 0.5], MC: [0.46, 0.5], MCO: [0.58, 0.5],
     MD: [0.52, 0.86], MI: [0.52, 0.14], ED: [0.7, 0.84], EI: [0.7, 0.16], DC: [0.76, 0.5]};
   var SPREAD = {DFC: [0.36, 0.64, 0.5], MCD: [0.42, 0.58, 0.5], MC: [0.33, 0.67, 0.5], DC: [0.4, 0.6, 0.5], MCO: [0.38, 0.62, 0.5]};
@@ -114,6 +115,9 @@ var Pitch3D = (function () {
   function Mesh(cap) {
     this.a = new Float32Array(cap || 16384);
     this.n = 0;
+    /* El campo es estático y no recibe brillos especulares; la malla dinámica
+     * de jugadores y balón sí. */
+    this.spec = false;
   }
   Mesh.prototype.reset = function () { this.n = 0; };
   Mesh.prototype.reserve = function (verts) {
@@ -123,32 +127,50 @@ var Pitch3D = (function () {
     while (cap < need) cap *= 2;
     var b = new Float32Array(cap); b.set(this.a); this.a = b;
   };
-  Mesh.prototype.v = function (x, y, z, c) {
-    var a = this.a, n = this.n;
-    a[n] = x; a[n + 1] = y; a[n + 2] = z; a[n + 3] = c[0]; a[n + 4] = c[1]; a[n + 5] = c[2];
-    this.n = n + 6;
-  };
   Mesh.prototype.tri = function (A, B, C, c) {
-    this.reserve(3);
-    var ux = B[0] - A[0], uy = B[1] - A[1], uz = B[2] - A[2];
-    var vx = C[0] - A[0], vy = C[1] - A[1], vz = C[2] - A[2];
-    var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
-    var l = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
-    var lit = 0.58 + 0.42 * Math.abs((nx * LIGHT[0] + ny * LIGHT[1] + nz * LIGHT[2]) / l);
-    var q = [clamp(c[0] * lit, 0, 1), clamp(c[1] * lit, 0, 1), clamp(c[2] * lit, 0, 1)];
-    this.v(A[0], A[1], A[2], q); this.v(B[0], B[1], B[2], q); this.v(C[0], C[1], C[2], q);
+    this.tri9(A[0], A[1], A[2], B[0], B[1], B[2], C[0], C[1], C[2], c[0], c[1], c[2]);
   };
   /* Variante sin allocations para el skinning: recibe las tres posiciones
-   * ya transformadas y calcula la luz plana con el mismo criterio que tri(). */
+   * ya transformadas y calcula la luz plana y el brillo especular. */
   Mesh.prototype.tri9 = function (ax, ay, az, bx, by, bz, cx, cy, cz, r, g, b) {
     this.reserve(3);
     var ux = bx - ax, uy = by - ay, uz = bz - az;
     var vx = cx - ax, vy = cy - ay, vz = cz - az;
     var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
     var l = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
-    var lit = 0.58 + 0.42 * Math.abs((nx * LIGHT[0] + ny * LIGHT[1] + nz * LIGHT[2]) / l);
+    var il = 1 / l;
+    var ndl = (nx * LIGHT[0] + ny * LIGHT[1] + nz * LIGHT[2]) * il;
+    var key = ndl > 0 ? ndl : 0, back = ndl < 0 ? -ndl : 0, up = ny > 0 ? ny * il : 0;
+    /* Clave cálida desde arriba, relleno frío y hemisférica: da volumen a las
+     * caras sin convertir el campo en una superficie plana. */
+    var lit = 0.60 + 0.30 * key + 0.10 * back + 0.10 * up;
+    var warm = 0.035 * key;
+    var br = r, bg = g, bb = b;
+    r = clamp(br * lit * (1 + warm), 0, 1);
+    g = clamp(bg * lit, 0, 1);
+    b = clamp(bb * lit * (1 - warm * 0.7), 0, 1);
+    if (this.spec) {
+      /* Solo los materiales claros y poco saturados (balón, medias, guantes)
+       * reciben un especular barato; las equipaciones y la piel no. */
+      var mx = br > bg ? (br > bb ? br : bb) : (bg > bb ? bg : bb);
+      var mn = br < bg ? (br < bb ? br : bb) : (bg < bb ? bg : bb);
+      var gloss = clamp((mx - 0.55) / 0.4, 0, 1) *
+        (1 - clamp(((mx - mn) - 0.06) / 0.24, 0, 1));
+      if (gloss > 0.01) {
+        var pxc = (ax + bx + cx) / 3, pyc = (ay + by + cy) / 3, pzc = (az + bz + cz) / 3;
+        var ex = cam.x - pxc, ey = cam.height - pyc, ez = cam.z + cam.back - pzc;
+        var el = Math.sqrt(ex * ex + ey * ey + ez * ez) || 1;
+        var hx = LIGHT[0] + ex / el, hy = LIGHT[1] + ey / el, hz = LIGHT[2] + ez / el;
+        var hl = Math.sqrt(hx * hx + hy * hy + hz * hz) || 1;
+        var ndh = (nx * hx + ny * hy + nz * hz) * il / hl;
+        if (ndh > 0) {
+          var s = ndh * ndh; s *= s; s *= s; s *= s; s *= s;
+          var sp = s * 0.32 * gloss;
+          r = clamp(r + sp, 0, 1); g = clamp(g + sp * 0.97, 0, 1); b = clamp(b + sp * 0.88, 0, 1);
+        }
+      }
+    }
     var a = this.a, n = this.n;
-    r = clamp(r * lit, 0, 1); g = clamp(g * lit, 0, 1); b = clamp(b * lit, 0, 1);
     a[n] = ax; a[n + 1] = ay; a[n + 2] = az; a[n + 3] = r; a[n + 4] = g; a[n + 5] = b;
     a[n + 6] = bx; a[n + 7] = by; a[n + 8] = bz; a[n + 9] = r; a[n + 10] = g; a[n + 11] = b;
     a[n + 12] = cx; a[n + 13] = cy; a[n + 14] = cz; a[n + 15] = r; a[n + 16] = g; a[n + 17] = b;
@@ -200,6 +222,18 @@ var Pitch3D = (function () {
     for (var i = 0; i < seg; i++) {
       var a = i * TAU / seg, b = (i + 1) * TAU / seg;
       this.tri([cx, y, cz], [cx + Math.cos(a) * r, y, cz + Math.sin(a) * r], [cx + Math.cos(b) * r, y, cz + Math.sin(b) * r], c);
+    }
+  };
+  Mesh.prototype.ellipse = function (cx, cz, rx, rz, rot, c, seg, y) {
+    seg = seg || 12; y = y == null ? 0.045 : y;
+    var ca = Math.cos(rot), sa = Math.sin(rot);
+    for (var i = 0; i < seg; i++) {
+      var a = i * TAU / seg, b = (i + 1) * TAU / seg;
+      var ax = Math.cos(a) * rx, az = Math.sin(a) * rz;
+      var bx = Math.cos(b) * rx, bz = Math.sin(b) * rz;
+      this.tri([cx, y, cz],
+        [cx + ax * ca - az * sa, y, cz + ax * sa + az * ca],
+        [cx + bx * ca - bz * sa, y, cz + bx * sa + bz * ca], c);
     }
   };
   Mesh.prototype.ring = function (cx, cz, r, width, c, seg, y) {
@@ -304,7 +338,7 @@ var Pitch3D = (function () {
     gl.bindBuffer(gl.ARRAY_BUFFER, staticBuf);
     gl.bufferData(gl.ARRAY_BUFFER, staticMesh.a.subarray(0, staticMesh.n), gl.STATIC_DRAW);
     staticCount = staticMesh.n / 6;
-    dyn = new Mesh(131072); dynCapacity = dyn.a.length;
+    dyn = new Mesh(131072); dyn.spec = true; dynCapacity = dyn.a.length;
     gl.bindBuffer(gl.ARRAY_BUFFER, dynBuf);
     gl.bufferData(gl.ARRAY_BUFFER, dynCapacity * 4, gl.DYNAMIC_DRAW);
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
@@ -1264,6 +1298,16 @@ var Pitch3D = (function () {
       skin: a.skin || SKIN, hair: a.hair || HAIR, boots: BOOT, gloves: [0.98, 0.48, 0.16]};
   }
 
+  function drawContactShadow(m, a, q, far) {
+    if (far) { m.circle(a.x, a.z, 0.4, [0.02, 0.08, 0.045], q ? 10 : 7, 0.026); return; }
+    /* Dos elipses concéntricas alargadas en la dirección opuesta a la luz:
+     * el borde exterior simula una sombra suave sin necesitar blending. */
+    var dx = SHADOW_DIR[0] * 0.18, dz = SHADOW_DIR[1] * 0.18;
+    var rot = Math.atan2(SHADOW_DIR[0], SHADOW_DIR[1]), seg = q ? 14 : 9;
+    m.ellipse(a.x + dx, a.z + dz, 0.42, 0.72, rot, [0.042, 0.17, 0.085], seg, 0.024);
+    m.ellipse(a.x + dx * 1.1, a.z + dz * 1.1, 0.29, 0.50, rot, [0.025, 0.10, 0.052], seg, 0.027);
+  }
+
   function buildAssetPlayer(m, a) {
     if (!assetModels || assetState !== "ready") return false;
     var variant = a.variant || actorVariant(a), set = assetModels.players[variant];
@@ -1280,7 +1324,7 @@ var Pitch3D = (function () {
     evalModel(model, clip, t, sc);
 
     var far = d2 > 1600, q = quality < 0.7 || far ? 0 : 1;
-    m.circle(a.x, a.z, far ? 0.4 : 0.56, [0.02, 0.08, 0.045], q ? 10 : 7, 0.026);
+    drawContactShadow(m, a, q, far);
     if (sim.ball.mode === "held" && sim.ball.side === a.side && sim.ball.idx === a.slot) {
       m.ring(a.x, a.z, 0.58, 0.07, [0.98, 0.82, 0.28], 12, 0.032);
     }
@@ -1335,7 +1379,7 @@ var Pitch3D = (function () {
       else if (a.anim.type === "card") card = Math.sin(k * PI);
       else if (a.anim.type === "dive") dive = true;
     }
-    m.circle(a.x, a.z, far ? 0.4 : 0.56, [0.02, 0.08, 0.045], q ? 10 : 7, 0.026);
+    drawContactShadow(m, a, q, far);
     if (sim.ball.mode === "held" && sim.ball.side === a.side && sim.ball.idx === a.slot) {
       m.ring(a.x, a.z, 0.58, 0.07, [0.98, 0.82, 0.28], 12, 0.032);
     }
@@ -1482,6 +1526,7 @@ var Pitch3D = (function () {
   function draw() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     dyn.reset();
+    dyn.spec = quality > 0.55;
     assetFrameTris = 0; assetFramePlayers = 0; assetFrameBall = 0;
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = sim.players[s] && sim.players[s][i];
