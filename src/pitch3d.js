@@ -141,7 +141,9 @@ var Pitch3D = (function () {
         if(i===nearest){tx=ball.x+(side===0?-1.2:1.2);tz=ball.z+(i%2?1.2:-1.2);}
         if(!p._p3)p._p3={x:tx,z:tz,phase:i*1.7};
         var dx=tx-p._p3.x,dz=tz-p._p3.z;p._p3.x+=dx*k;p._p3.z+=dz*k;
-        p._p3.phase=(p._p3.phase||0)+dt*(3+Math.min(8,Math.sqrt(dx*dx+dz*dz)*1.2));p._p3.run=Math.min(1,Math.sqrt(dx*dx+dz*dz)/3);
+        var move=Math.sqrt(dx*dx+dz*dz);
+        if(move>0.025){var facing=Math.atan2(dx,dz),delta=((facing-(p._p3.facing||0)+Math.PI*3)%(Math.PI*2))-Math.PI;p._p3.facing=(p._p3.facing||0)+delta*Math.min(1,dt*5);}
+        p._p3.phase=(p._p3.phase||0)+dt*(3+Math.min(8,move*1.2));p._p3.run=Math.min(1,move/3);
       });
     });
   }
@@ -150,7 +152,7 @@ var Pitch3D = (function () {
     teams.forEach(function(team,side){
       team.forEach(function(p,i){
         if(!p||p.gone)return;
-        var q=posFor(p,i,side), x=q[0],z=q[1], c=color(colors[side]);
+        var q=posFor(p,i,side), x=q[0],z=q[1], c=color(colors[side]),vertexStart=out.length;
         /* sombra falsa en el suelo: coste mínimo frente a sombras dinámicas */
         circle(out,x,z,0.62,[0.025,0.11,0.055]);
         /* cuerpo prismático, cabeza y dos piernas: geometría deliberadamente ligera para móvil */
@@ -166,6 +168,10 @@ var Pitch3D = (function () {
         circle3D(out,x,1.62+(celebrate?0.12*Math.abs(Math.sin(performance.now()/120)):0),z,0.22,skin);
         limb(out,x-0.38,1.25,x-0.52-arm,0.76,z,0.09,0.16,skin);
         limb(out,x+0.38,1.25,x+0.52+arm,0.76+(celebrate?0.25:0),z,0.09,0.16,skin);
+        /* Pequeño emblema frontal visible desde la cámara, también gira con el jugador. */
+        box(out,x,0.94,z+0.268,0.2,0.13,0.035,side===0?[0.96,0.82,0.24]:[0.14,0.24,0.42]);
+        var angle=p._p3?p._p3.facing||0:0,ca=Math.cos(angle),sa=Math.sin(angle);
+        for(var vi=vertexStart;vi<out.length;vi+=6){var lx=out[vi]-x,lz=out[vi+2]-z;out[vi]=x+lx*ca+lz*sa;out[vi+2]=z-lx*sa+lz*ca;}
       });
     });
     /* balón: octaedro pequeño con ligera elevación en la animación */
