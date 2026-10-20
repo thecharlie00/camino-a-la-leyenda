@@ -426,7 +426,9 @@ function liveStart(fi) {
   var f = S.cur.pm[fi];
   S.live = {fi: fi, min: 0, add: ri(1, 5), gu: 0, gt: 0, gmu: [], gmt: [], sc: [], ev: [], subs: [], left: 5, ment: f.ment, form: S.m.form,
     xi: f.xi.slice(), bench: (f.bench || []).slice(), shots: [0, 0], on: [0, 0], poss: [0, 0], half: false, done: false, red: null, yc: {},
-    mo: 50, bx: 50, own: 0, big: [0, 0], gl: [], ch: [], oxi: liveOppXI(f.opp)};
+    mo: 50, bx: 50, own: 0, big: [0, 0], gl: [], ch: [], oxi: liveOppXI(f.opp),
+    /* estado continuo de la jugada: la pelota no salta de un área a otra entre minutos */
+    phase: "build", ko0: 0, rest: null, lastX: 50, lastOwn: 0, seq: 0};
   return S.live;
 }
 /* once rival con nombres (reales si el club los tiene) */
@@ -492,56 +494,144 @@ function liveScorer(L) {
   var p = wpick(on, function (q) { return ((GOAL_SHARE[q.pos] || 0.01) + 0.004) * Math.max(0.3, 1 + (q.ovr - 70) * 0.04); });
   return p || on[0];
 }
+/* --- posesión continua -------------------------------------------------------
+   L.bx es la posición física del balón desde nuestra portería (0) a la rival (100).
+   L.own dice quién tiene la posesión (0 = nosotros, 1 = rival). Al perderla NO se
+   mueve el balón: solo cambia el equipo que ataca, y el nuevo equipo construye
+   desde donde robó. Los saques de centro y de puerta son las únicas reanudaciones
+   que colocan el balón en una posición fija. */
+function liveProg(L) { return L.own === 0 ? L.bx : 100 - L.bx; }
+function liveAtkDist(L) { return (100 - liveProg(L)) * 105 / 100; }
+function liveAdvance(L, adv) { L.bx = clamp(L.bx + (L.own === 0 ? adv : -adv), 4, 96); }
+function liveShotX(us, d) { return us === 1 ? 100 - d * 100 / 105 : d * 100 / 105; }
+function liveShotKind(d) { return d <= 13 ? "oneone" : d >= 18 ? "long" : "volley"; }
+function liveRestart(L, own, bx) { L.own = own; L.bx = clamp(bx, 4, 96); L.phase = "build"; L.seq++; }
+/* un tiro: el origen ya lo ha fijado liveStep con la distancia real del balón */
+function liveShot(L, out, us, big, d, sh, tp, hs) {
+  var idx = us === 1 ? 0 : 1;
+  L.shots[idx]++;
+  if (big) L.big[idx]++;
+  var xn = us === 0 ? liveOppPick(L, true) : null, ox = L._ox;
+  var sn = us === 1 ? (sh ? plShort(sh) : clubName(S.m.club)) : xn;
+  var xs = typeof mxShotXG === "function" ? mxShotXG(L, us, sh, big, d) : {xg: big ? 0.36 : 0.12, d: d, y: 0, zn: 0};
+  if (xs.d == null) xs.d = d;
+  var x = R(), mk = typeof mxMissKind === "function" ? mxMissKind(x, xs.xg) : null;
+  var res = x < xs.xg ? "goal" : mk || (x < 0.55 ? "save" : x < 0.62 ? "post" : "miss");
+  var e = {t: res, us: us, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, k: liveShotKind(d), big: !!big};
+  if (us === 0) e.ox = ox;
+  /* los tiros lejanos siempre llevan asistencia para que el texto no diga que se asiste a sí mismo */
+  var as = us === 1 && (d >= 18 || !chance(0.25)) ? liveAssist(L, sh && sh.id) : "";
+  /* construcción previa: ayuda a que el campo 2D/3D no empiece el tiro de la nada */
+  if (chance(us === 1 ? 0.5 : 0.45)) {
+    out.push({t: "com", us: us, txt: liveSay(us === 1 ? LIVE_COM.buildUs : LIVE_COM.buildThem,
+      us === 1 ? tp({a: as || sn, b: sn}) : tp({x: liveOppPick(L, false)}))});
+  }
+  var pref = big ? tr("¡Ocasión clarísima!") + " " : "";
+  if (res === "goal") {
+    if (us === 1) { L.gu++; L.gmu.push(L.min); L.on[0]++; if (sh) L.sc.push(sh.id); }
+    else { L.gt++; L.gmt.push(L.min); L.on[1]++; }
+    L.gl.push({us: us, n: sn, min: L.min});
+    var gl = us === 1 ? (as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo) : LIVE_COM.goalThem;
+    e.txt = pref + liveSay(gl, us === 1 ? tp({s: sn, a: as || sn}) : tp({x: sn}));
+    L.ch.push({us: us, min: L.min, k: "goal"});
+    /* tras el gol saca de centro el equipo que lo encajó */
+    L.bx = 50; L.own = us === 1 ? 1 : 0; L.phase = "kickoff";
+    L.mo = clamp(L.mo + (us === 1 ? 10 : -10), 18, 82);
+  } else {
+    if (res === "save") { L.on[idx]++; e.txt = pref + liveSay(us === 1 ? LIVE_COM.saveUs : LIVE_COM.saveThem, us === 1 ? tp({s: sn}) : tp({x: sn})); }
+    else if (res === "post") { e.txt = liveSay(us === 1 ? LIVE_COM.postUs : LIVE_COM.postThem, us === 1 ? tp({s: sn}) : tp({x: sn})); }
+    else { e.txt = liveSay(us === 1 ? LIVE_COM.missUs : LIVE_COM.missThem, us === 1 ? tp({s: sn}) : tp({x: sn})); }
+    L.ch.push({us: us, min: L.min, k: res === "save" ? (big ? "big" : "shot") : (res === "post" ? "big" : (big ? "big" : "shot"))});
+    /* la pelota sigue cerca de la portería: saque de puerta, rechace o córner */
+    if (res === "save") liveRestart(L, us === 1 ? 1 : 0, us === 1 ? 91 : 9);
+    else if (res === "post") liveRestart(L, us === 1 ? 1 : 0, us === 1 ? 89 : 11);
+    else liveRestart(L, us === 1 ? 1 : 0, us === 1 ? 94 : 6);
+    L.mo = clamp(L.mo + (us === 1 ? 3 : -3), 18, 82);
+  }
+  out.push(e);
+  L.seq++;
+  return e;
+}
 /* un minuto: devuelve los acontecimientos para el comentario */
 function liveStep() {
   var L = S.live, f = S.cur.pm[L.fi];
   if (!L || L.done) return [];
   L.min++;
   if (L.mo == null) { L.mo = 50; L.bx = 50; L.big = [0, 0]; L.gl = []; L.ch = []; L.oxi = liveOppXI(f.opp); }
-  var out = [], lam = liveLambdas(L), pu = lam[0] / 90, pt = lam[1] / 90, opp = clubName(f.opp), club = clubName(S.m.club);
-  /* posesión: barra que se mueve hacia quien tiene el balón */
-  var share = lam[0] / ((lam[0] + lam[1]) || 1) + ({bus: -0.12, 0: -0.05, 1: 0, 2: 0.04, press: 0.07}[L.ment] || 0) + (L.red ? -0.08 : 0) + (L.ored ? 0.07 * L.ored : 0) + (typeof liveTacShare === "function" ? liveTacShare(L) : 0);
-  L.mo = clamp(L.mo * 0.65 + (share * 100 + gauss() * 14) * 0.35, 18, 82);
-  L.own = chance(L.mo / 100) ? 0 : 1;
-  L.poss[L.own]++;
-  L.bx = clamp(L.bx * 0.5 + (L.own === 0 ? 62 + R() * 26 : 38 - R() * 26) * 0.5, 4, 96);
-  var any = false;
+  if (L.phase == null) L.phase = "build";
+  if (L.ko0 == null) L.ko0 = 0;
+  var out = [], lam = liveLambdas(L), opp = clubName(f.opp), club = clubName(S.m.club);
+  var any = false, shot = false, ko = false;
   var hs = function () { return f.home ? [L.gu, L.gt] : [L.gt, L.gu]; };
   var tp = function (o) { var x = Object.assign({club: club, opp: opp, k: liveMyGK(L)}, o || {}); var q = hs(); x.g1 = q[0]; x.g2 = q[1]; return x; };
-  /* ocasiones vuestras */
-  if (chance(pu * 5)) {
-    any = true; L.shots[0]++; L.bx = 92;
-    var sh = liveScorer(L), big = typeof mxBig === "function" ? mxBig(L, 1, sh) : chance(0.35), sn = sh ? plShort(sh) : club, x = R();
-    var xs = typeof mxShotXG === "function" ? mxShotXG(L, 1, sh, big) : {xg: big ? 0.36 : 0.12}, mk = typeof mxMissKind === "function" ? mxMissKind(x, xs.xg) : null;
-    if (big) L.big[0]++;
-    if (chance(0.5)) out.push({t: "com", us: 1, txt: liveSay(LIVE_COM.buildUs, tp({a: liveAssist(L, sh && sh.id) || sn, b: sn}))});
-    if (x < xs.xg) {
-      L.gu++; L.gmu.push(L.min); L.on[0]++; if (sh) L.sc.push(sh.id);
-      var as = chance(0.75) ? liveAssist(L, sh && sh.id) : "";
-      L.gl.push({us: 1, n: sn, min: L.min});
-      out.push({t: "goal", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(as ? LIVE_COM.goalUs : LIVE_COM.goalUsSolo, tp({s: sn, a: as}))});
-      L.ch.push({us: 1, min: L.min, k: "goal"});
-    } else if (mk ? mk === "save" : x < 0.55) { L.on[0]++; out.push({t: "save", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: (big ? tr("¡Ocasión clarísima!") + " " : "") + liveSay(LIVE_COM.saveUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
-    else if (mk ? mk === "post" : x < 0.62) { out.push({t: "post", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: liveSay(LIVE_COM.postUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: "big"}); }
-    else { out.push({t: "miss", us: 1, pid: sh && sh.id, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, txt: liveSay(LIVE_COM.missUs, tp({s: sn}))}); L.ch.push({us: 1, min: L.min, k: big ? "big" : "shot"}); }
+  /* la barra de posesión se mueve despacio, no decide la posesión de cada minuto */
+  var share = lam[0] / ((lam[0] + lam[1]) || 1) + ({bus: -0.12, 0: -0.05, 1: 0, 2: 0.04, press: 0.07}[L.ment] || 0) + (L.red ? -0.08 : 0) + (L.ored ? 0.07 * L.ored : 0) + (typeof liveTacShare === "function" ? liveTacShare(L) : 0);
+  L.mo = clamp(L.mo * 0.7 + (share * 100 + gauss() * 10) * 0.3, 18, 82);
+  /* saques de centro: solo aquí (y en los goles) se coloca el balón en el centro */
+  if (L.min === 1) {
+    L.bx = 50; L.own = L.ko0 ? 1 : 0; L.phase = "kickoff"; ko = true;
+    out.push({t: "com", txt: tr("¡Arranca el partido! {us} contra {opp}.", {us: club, opp: opp})});
+  } else if (L.min === 46 && L.half) {
+    L.bx = 50; L.own = L.ko0 ? 0 : 1; L.phase = "kickoff"; ko = true;
+    out.push({t: "com", txt: tr("Comienza la segunda parte.")});
   }
-  /* ocasiones del rival */
-  if (chance(pt * 5)) {
-    any = true; L.shots[1]++; L.bx = 8;
-    var xn = liveOppPick(L, true), ox = L._ox, big2 = typeof mxBig === "function" ? mxBig(L, 0, null) : chance(0.35), y = R();
-    var xs2 = typeof mxShotXG === "function" ? mxShotXG(L, 0, null, big2) : {xg: big2 ? 0.36 : 0.12}, mk2 = typeof mxMissKind === "function" ? mxMissKind(y, xs2.xg) : null;
-    if (big2) L.big[1]++;
-    if (chance(0.5)) out.push({t: "com", us: 0, txt: liveSay(LIVE_COM.buildThem, tp({x: liveOppPick(L, false)}))});
-    if (y < xs2.xg) {
-      L.gt++; L.gmt.push(L.min); L.on[1]++;
-      L.gl.push({us: 0, n: xn, min: L.min});
-      out.push({t: "goal", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, d: xs2.d, ly: xs2.y, txt: liveSay(LIVE_COM.goalThem, tp({x: xn}))});
-      L.ch.push({us: 0, min: L.min, k: "goal"});
-    } else if (mk2 ? mk2 === "save" : y < 0.55) { L.on[1]++; out.push({t: "save", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, d: xs2.d, ly: xs2.y, txt: liveSay(LIVE_COM.saveThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
-    else if (mk2 ? mk2 === "post" : y < 0.62) { out.push({t: "post", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, d: xs2.d, ly: xs2.y, txt: liveSay(LIVE_COM.postThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: "big"}); }
-    else { out.push({t: "miss", us: 0, ox: ox, xg: xs2.xg, zn: xs2.zn, d: xs2.d, ly: xs2.y, txt: liveSay(LIVE_COM.missThem, tp({x: xn}))}); L.ch.push({us: 0, min: L.min, k: big2 ? "big" : "shot"}); }
+  L.poss[L.own]++;
+  var own = L.own;
+  var prog = liveProg(L);
+  /* pérdida: el balón se queda donde está; el que roba ataca hacia la otra portería */
+  var att = own === 0 ? liveRating(L) : (f.or || 70);
+  var def = own === 0 ? (f.or || 70) : liveRating(L);
+  var edge = (att - def) / 10;
+  var pTurn = clamp(0.13 + prog / 100 * 0.11 - edge * 0.045
+    + (own === 1 && L.ored ? 0.035 : 0)
+    + (own === 0 && L.red ? 0.035 : 0)
+    + (own === 0 ? (L.mom || 0) / 100 * 0.025 : -(L.mom || 0) / 100 * 0.025), 0.05, 0.30);
+  if (own === 0 && L.tac) {
+    if (L.tac.tempo === 2) pTurn += 0.02;
+    if (L.tac.pass === 2) pTurn -= 0.012;
+    if (L.tac.pass === 0) pTurn += 0.012;
   }
-  if (chance(0.025)) {
+  if (own === 1) {
+    if (L.ment === "press") pTurn += 0.025;
+    if (L.ment === "bus") pTurn -= 0.02;
+  }
+  if (chance(pTurn)) {
+    L.own = 1 - own; L.phase = "counter";
+    liveAdvance(L, 5 + R() * 9);
+    if (chance(0.35)) {
+      any = true;
+      out.push({t: "com", us: L.own === 0 ? 1 : 0, txt: liveSay(L.own === 0 ? LIVE_COM.buildUs : LIVE_COM.buildThem,
+        L.own === 0 ? tp({a: liveAssist(L), b: club}) : tp({x: liveOppPick(L, false)}))});
+    }
+  } else {
+    /* construcción continua: pocos metros por minuto, sin cruzar el campo de golpe */
+    var adv = 7 + R() * 8;
+    if (prog < 25) adv += 1.5;
+    if (own === 0 && L.tac && L.tac.tempo === 2) adv += 1.2;
+    if (own === 1 && L.ment === "press") adv += 0.8;
+    liveAdvance(L, adv);
+    L.phase = "build";
+    prog = liveProg(L);
+    var near = clamp((prog - 62) / 38, 0, 1);
+    var pShot = clamp(((own === 0 ? lam[0] : lam[1]) / 90) * (8 + 20 * near), 0.035, 0.62);
+    if (own === 0 && L.tac) { if (L.tac.tempo === 2) pShot += 0.02; else if (L.tac.tempo === 0) pShot -= 0.015; }
+    if (own === 1 && L.ment === "press") pShot += 0.015;
+    if (prog >= 90) pShot = Math.max(pShot, 0.78);
+    if (!ko && L.min > 1 && prog >= 64 && chance(pShot)) {
+      any = true; shot = true;
+      var us = own === 0 ? 1 : 0;
+      var sh = us === 1 ? liveScorer(L) : null;
+      var big = typeof mxBig === "function" ? mxBig(L, us, sh) : chance(0.35);
+      if (big && prog < 70) big = false;
+      var dist = liveAtkDist(L);
+      var d = big ? 6 + R() * 7 : clamp(dist + (R() - 0.5) * 2, 6, 30);
+      d = Math.round(d * 10) / 10;
+      /* el origen del tiro sale de la posición física actual: nunca desde nuestro campo */
+      L.bx = liveShotX(us, d);
+      liveShot(L, out, us, big, d, sh, tp, hs);
+    }
+  }
+  if (!shot && chance(0.025)) {
     var cand = L.xi.filter(function (id) { return id != null && id !== L.red; }), pid = pick(cand), p = mPl(pid);
     if (p) {
       any = true;
@@ -552,14 +642,14 @@ function liveStep() {
   }
   /* tarjetas del rival: siempre tras una falta */
   var oc = (L.oxi || []).map(function (x, i) { return i; }).filter(function (i) { return L.oxi[i].g !== "POR" && !L.oxi[i].off; });
-  if (chance(0.022) && oc.length && (L.ored || 0) < 2) {
+  if (!shot && chance(0.022) && oc.length && (L.ored || 0) < 2) {
     L.oyc = L.oyc || {};
     var oi = pick(oc), on = L.oxi[oi].n;
     any = true;
     if (L.oyc[oi]) { L.ored = (L.ored || 0) + 1; L.oxi[oi].off = true; out.push({t: "red", us: 0, ox: oi, k: "foul", txt: tr("Falta de {x}, que ya tenía amarilla: roja y el rival se queda con diez.", {x: on})}); }
     else { L.oyc[oi] = 1; out.push({t: "yellow", us: 0, ox: oi, k: "foul", txt: tr("Falta de {x} para frenar el contragolpe: amarilla.", {x: on})}); }
   }
-  if (chance(0.0025)) {
+  if (!shot && chance(0.0025)) {
     var hurt = mPl(pick(L.xi.filter(function (id) { return id != null && id !== L.red; })));
     if (hurt) { any = true; L.hurt = hurt.id; out.push({t: "inj", us: 1, txt: tr("{name} se duele y pide el cambio.", {name: plShort(hurt)})}); }
   }
@@ -568,12 +658,16 @@ function liveStep() {
     var me = L.xi.map(mPl).filter(function (q) { return q && q.id !== L.red; }), a1 = me.length ? plShort(pick(me)) : club;
     out.push({t: "com", us: L.own === 0 ? 1 : 0, txt: liveSay(L.own === 0 && chance(0.6) ? LIVE_COM.buildUs : LIVE_COM.idle, tp({a: a1, b: me.length ? plShort(pick(me)) : club, x: liveOppPick(L, false)}))});
   }
-  if (L.min === 1) out.push({t: "com", txt: tr("¡Arranca el partido! {us} contra {opp}.", {us: club, opp: opp})});
-  if (L.min === 45 && !L.half) { L.half = true; out.push({t: "half", txt: tr("Descanso: {a}-{b}.", {a: hs()[0], b: hs()[1]})}); }
-  if (L.min >= 90 + L.add) { L.done = true; out.push({t: "end", txt: tr("¡Final del partido! {a}-{b}.", {a: hs()[0], b: hs()[1]})}); }
+  if (L.min === 45 && !L.half) {
+    L.half = true; L.bx = 50; L.own = L.ko0 ? 0 : 1; L.phase = "kickoff";
+    out.push({t: "half", txt: tr("Descanso: {a}-{b}.", {a: hs()[0], b: hs()[1]})});
+  }
+  if (L.min >= 90 + L.add) { L.done = true; L.phase = "full"; out.push({t: "end", txt: tr("¡Final del partido! {a}-{b}.", {a: hs()[0], b: hs()[1]})}); }
   else if (L.min === 90) out.push({t: "com", txt: trn(L.add, "El cuarto árbitro indica {n} minuto de descuento.", "El cuarto árbitro indica {n} minutos de descuento.")});
+  L.lastX = L.bx; L.lastOwn = L.own;
   out.forEach(function (e) { e.min = L.min; });
-  L.ev = out.reverse().concat(L.ev).slice(0, 80);
+  /* el feed visual recibe los hechos en orden; el historial se guarda del más nuevo al más viejo */
+  L.ev = out.slice().reverse().concat(L.ev).slice(0, 80);
   return out;
 }
 function liveSub(outId, inId) {

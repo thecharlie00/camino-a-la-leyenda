@@ -62,6 +62,8 @@ match41.js ──> ui.js (livePitchFeed) ──> Pitch.state / Pitch.event
 ### Autoridad y sincronización
 
 - `state.bx` siempre se interpreta desde la perspectiva del equipo local. El 3D aplica el lado de ataque (`sim.attack`) y lo espeja al descanso.
+- `bx` es una posición física continua: al perder la posesión el balón se queda donde estaba y solo cambia el equipo que ataca. Los saques de centro, de puerta, de banda y los córners son las únicas reanudaciones que lo colocan en una posición fija.
+- El adaptador no lanza pases de reconciliación de un campo a otro: si el portador está lejos del objetivo, corre hacia él. Un cambio de posesión suelta el balón en su sitio y el nuevo equipo lo persigue.
 - Los jugadores se identifican por `id` estable, no por identidad de objeto: `ui.js` recrea la lista cada minuto y el 3D reutiliza sus actores.
 - Si llega un evento mientras hay una acción en curso, se encola. La UI puede esperar con `Pitch.busy()`.
 - Al descanso se intercambian lados, se reinicia el saque y se conserva el roster.

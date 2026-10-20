@@ -119,11 +119,12 @@ function roster(prefix) {
   const afterAdvance = await p.evaluate(() => { const d = Pitch3D.debug(); return { x: d.ball.x, mode: d.ball.mode }; });
   if (afterAdvance.x > beforeX + 2 || afterAdvance.mode === "flight") notes.push("posesión y avance · " + beforeX.toFixed(1) + "→" + afterAdvance.x.toFixed(1) + " " + afterAdvance.mode);
   else fail.push("posesión y avance: el balón no avanzó");
+  await p.evaluate(() => { const d = Pitch3D.debug(); window.__beforePoss = { x: d.ball.x, z: d.ball.z }; });
   await p.evaluate(() => Pitch3D.state({ own: 1, bx: 22, speed: 1 }));
   await p.waitForTimeout(500);
-  await check("cambio de posesión", () => {
-    const d = Pitch3D.debug();
-    return { ok: d.sim.own === 1, why: "own=" + d.sim.own };
+  await check("cambio de posesión sin teleport", () => {
+    const d = Pitch3D.debug(), bp = window.__beforePoss, move = Math.sqrt((d.ball.x - bp.x) ** 2 + (d.ball.z - bp.z) ** 2);
+    return { ok: d.sim.own === 1 && d.ball.mode !== "flight" && move < 8, why: "own=" + d.sim.own + " mode=" + d.ball.mode + " move=" + move.toFixed(1) };
   });
 
   // Tiro a gol: debe ocupar busy y terminar solo.

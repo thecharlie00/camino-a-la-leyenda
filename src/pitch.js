@@ -214,7 +214,7 @@ var Pitch = (function () {
       q: [], cues: [], hardUntil: 0, softUntil: 0, sid: 0, soft: 0, passAt: 0, cards: [], cele: null, msg: null,
       tac: [defTac(), defTac()], line: [22, 22], steal: -1, stealUntil: 0, chase: -1, cp: [0, 0], ret: [0, 0], trap: [0, 0], stopUntil: 0, pendOwn: null, recv: null,
       cam: {x: LEN / 2, y: MIDY, z: 1}, focus: null, shake: 0, exc: 0, excT: 0, excAt: 0, sndAt: 0, net: null, flag: null, font: "", fontR: 0,
-      trails: [], icons: [], fx: [], offLine: null, lt: -1, flip: false, ko0: 0, half2: false, camN: 0, hiUntil: 0, onSpeed: o.onSpeed || null, tickTxt: ""};
+      trails: [], icons: [], fx: [], offLine: null, lt: -1, flip: false, ko0: 0, koSet: false, half2: false, camN: 0, hiUntil: 0, onSpeed: o.onSpeed || null, tickTxt: ""};
     btn.addEventListener("click", function (ev) { ev.stopPropagation(); Snd.toggle(); sndBtn(); });
     P.tk = tk; P.sp = sp;
     sp.setAttribute("aria-label", o.spdLabel || "Velocidad");
@@ -407,18 +407,28 @@ var Pitch = (function () {
     if (o.speed) { P.speed = o.speed; P.rate = SPEEDK / ([1, 1, 0.62, 0.42][o.speed] || 1); spdBtns(); }
     P.bxw = clamp((o.bx == null ? 50 : o.bx) / 100, 0.05, 0.95) * LEN;
     if (o.tac) { P.tac[0] = mapTac(o.tac[0]); P.tac[1] = mapTac(o.tac[1]); }
+    /* el primer estado dice qué lado saca de centro; el segundo tiempo lo hace el otro */
+    if (o.own != null && !P.koSet) { P.ko0 = o.own === 1 ? 1 : 0; P.koSet = true; }
     if (o.own != null && o.own !== P.own) {
       if (scripted() || P.cele) P.pendOwn = o.own;
       else turnover(o.own);
     }
   }
   function turnover(s) {
-    var lost = 1 - s;
+    var lost = 1 - s, b = P.ball;
     P.own = s; P.pendOwn = null;
     P.steal = s; P.stealUntil = P.ck + 1.7;
     if (P.tac[lost].press) P.cp[lost] = P.ck + 2.6;
     if (P.tac[lost].ret) P.ret[lost] = P.ck + 3.5;
-    if (P.ball.m === 2) P.chase = s;
+    /* al cambiar de dueño el balón NO se teletransporta: sale suelto desde donde estaba.
+       El equipo que roba lo persigue; si un jugador está encima, lo controla. */
+    if (b.m === 0) {
+      b.m = 2; b.hs = -1; b.hi = -1; b.fl = null; b.z = 0.05; b.vz = 0;
+      b.vx = rnd(-1.4, 1.4); b.vy = rnd(-1.4, 1.4);
+      P.chase = s;
+      var j = nearestTo(s, b.x, b.y, true), p = j >= 0 ? pl(s, j) : null;
+      if (p && Math.sqrt((p.x - b.x) * (p.x - b.x) + (p.y - b.y) * (p.y - b.y)) < 2.2) giveTo(s, j);
+    } else P.chase = s;
   }
 
   /* ---------- guion de jugadas ---------- */
@@ -465,8 +475,12 @@ var Pitch = (function () {
   function ensureBall(s, i) {
     var b = P.ball;
     if (b.m === 0 && b.hs === s) return;
-    var j = i != null && pl(s, i) ? i : nearestTo(s, b.x, b.y, true);
-    if (j >= 0) { giveTo(s, j); var p = pl(s, j); if (p && b.m === 0) { b.x = lerp(b.x, p.x, 0.5); b.y = lerp(b.y, p.y, 0.5); } }
+    var j = i != null && pl(s, i) ? i : nearestTo(s, b.x, b.y, true), p = j >= 0 ? pl(s, j) : null;
+    if (!p) return;
+    var dd = Math.sqrt((p.x - b.x) * (p.x - b.x) + (p.y - b.y) * (p.y - b.y));
+    /* solo se entrega si está al alcance; si no, el balón sigue su camino y el jugador corre */
+    if ((b.m === 2 && dd < 4.5) || (b.m === 0 && b.hs !== s && dd < 2.8)) { giveTo(s, j); return; }
+    P.own = s; P.chase = s;
   }
   /* pase a un punto: bombeado si es largo */
   function passTo(x, y, d, then, o) {
@@ -983,6 +997,12 @@ var Pitch = (function () {
   function event(e) {
     if (!P) return;
     if (P.rp) { P.rp.ev.push(e); return; }
+    /* el descanso/final espera a que termine la jugada en curso (un gol en el 45') */
+    if ((e.t === "half" || e.t === "end") && P.ck + 0.01 < P.hardUntil) {
+      var delayed = Object.assign({}, e);
+      setTimeout2(P.hardUntil - P.ck + 0.1, function () { event(delayed); });
+      return;
+    }
     /* arranca la segunda parte: fuera el cartel del descanso */
     if (e.t !== "half" && e.t !== "end") clearHalf();
     var t0 = P.ck, cue = e.cue;

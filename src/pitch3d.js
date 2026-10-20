@@ -49,7 +49,7 @@ var Pitch3D = (function () {
 
   function newSim() {
     return {
-      time: 0, rate: 1, own: 0, bx: 50, half: 1, kickoffSide: 0, ended: false, started: false, fem: false,
+      time: 0, rate: 1, own: 0, bx: 50, half: 1, kickoffSide: 0, koSet: false, ended: false, started: false, fem: false,
       attack: [1, -1], players: [[], []], red: [{}, {}], tactics: [defTac(), defTac()],
       ball: newBall(), action: null, queue: [], restart: null, pendingOwn: null,
       history: [], replay: null, netT: 0, shake: 0, banner: ""
@@ -704,7 +704,11 @@ var Pitch3D = (function () {
     var lane = e.ly != null && isFinite(+e.ly) ? clamp(+e.ly, -13, 13) : (shooter ? clamp(shooter.z - MIDZ, -13, 13) : 0);
     var ox = clamp(gx - dir * d, 3, LEN - 3), oz = clamp(MIDZ + lane, 4, WID - 4);
     var b = sim.ball, travel = dist(b.x, b.z, ox, oz);
-    var buildup = travel > 7 ? clamp(travel / 26, 0.18, 0.55) : 0.12;
+    /* el rematador debe estar cerca del origen; si el elegido anda lejos, se usa
+       al compañero mejor colocado para que el balón no tenga que perseguirle */
+    var near = nearestActor(side, ox, oz, true);
+    if (near && (!shooter || dist(shooter.x, shooter.z, ox, oz) > 9)) shooter = near;
+    var buildup = travel > 7 ? clamp(travel / 16, 0.25, 1.0) : 0.12;
     if (shooter) {
       shooter.x = ox; shooter.z = oz; shooter.tx = ox; shooter.tz = oz; shooter.vx = shooter.vz = 0;
       shooter.facing = dir > 0 ? PI / 2 : -PI / 2;
@@ -817,6 +821,8 @@ var Pitch3D = (function () {
     if (sim.replay) { sim.queue.push(e); return; }
     var t = String(e.t || "").toLowerCase();
     if (sim.ended && t !== "end") { fireCue(e); return; }
+    /* no cortar un gol o una tarjeta que se está representando en el 45' */
+    if ((t === "half" || t === "end") && sim.action) { sim.queue.push(e); return; }
     if (t === "half") { doHalf(); fireCue(e); return; }
     if (t === "end") { doEnd(); fireCue(e); return; }
     if (t === "goal" || t === "save" || t === "post" || t === "miss") { e.t = t; startShot(e); return; }
@@ -1438,20 +1444,21 @@ var Pitch3D = (function () {
     }
     if (o.own != null) {
       var own = o.own === 1 ? 1 : 0;
+      /* el primer estado fija quién saca de centro; al descanso saca el otro */
+      if (!sim.koSet) {
+        sim.koSet = true; sim.kickoffSide = own;
+        if (sim.restart && sim.restart.type === "kickoff" && sim.restart.side !== own) setupKickoff(own);
+      }
       if (sim.action) sim.pendingOwn = own;
       else if (own !== sim.own) changePossession(own);
     }
     if (o.bx != null) sim.bx = clamp(+o.bx, 0, 100);
+    /* La posición del motor ya es continua. Si el portador está lejos del objetivo,
+       corre hacia él; antes se lanzaba un pase de 50 m solo para "reconciliar" el estado. */
     if (!sim.action && !sim.restart && sim.ball.mode === "held") {
       var targetX = sim.attack[0] > 0 ? sim.bx / 100 * LEN : (1 - sim.bx / 100) * LEN;
       var carrier = actorAt(sim.ball.side, sim.ball.idx);
-      if (carrier) {
-        var d = dist(carrier.x, carrier.z, targetX, MIDZ);
-        if (d > 26) {
-          var recv = nearestActor(sim.ball.side, targetX, MIDZ, true, carrier);
-          if (recv) launchBall(recv.x, recv.z, 0.23, clamp(d / 20, 0.35, 0.85), 0.4, {type: "held", side: sim.ball.side, idx: recv.slot});
-        } else carrier.tx = clamp(targetX, 3, LEN - 3);
-      }
+      if (carrier) carrier.tx = clamp(targetX, 3, LEN - 3);
     }
   }
 
@@ -1459,11 +1466,15 @@ var Pitch3D = (function () {
     var b = sim.ball;
     sim.restart = null;
     var a = nearestActor(side, b.x, b.z, false);
-    if (!a) { sim.own = side; return; }
+    /* un cambio de dueño no puede convertir el balón en un pase campo a campo */
     if (b.mode === "held") {
-      launchBall(a.x, a.z, 0.23, clamp(dist(b.x, b.z, a.x, a.z) / 18, 0.2, 0.5), 0.15, {type: "held", side: side, idx: a.slot});
-    } else {
-      giveTo(side, a.slot);
+      if (a && dist(a.x, a.z, b.x, b.z) < 3) giveTo(side, a.slot);
+      else {
+        releaseBall(rnd(-1.2, 1.2), rnd(-1.2, 1.2), 0.8);
+        b.lastTouch = side;
+      }
+    } else if (b.mode === "dead") {
+      if (a) giveTo(side, a.slot);
     }
     sim.own = side;
   }
