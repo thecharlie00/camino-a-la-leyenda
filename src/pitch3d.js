@@ -97,7 +97,24 @@ var Pitch3D = (function () {
       line(out,x,WID/2-3.66,x+dir*2.0,WID/2-3.66,white,0.08);
       line(out,x+dir*2.0,WID/2-3.66,x+dir*2.0,WID/2+3.66,white,0.08);
       line(out,x+dir*2.0,WID/2+3.66,x,WID/2+3.66,white,0.08);
+      /* Porterías tridimensionales sencillas: postes, larguero y fondo de red */
+      var post=[0.94,0.96,0.91], face=end===0?0:LEN, gx=end===0?-1.9:LEN+1.9, back=end===0?-3.4:LEN+3.4;
+      box(out,face,0,WID/2-3.66,0.22,2.44,0.22,post);
+      box(out,face,0,WID/2+3.66,0.22,2.44,0.22,post);
+      box(out,face,2.38,WID/2,0.22,0.18,7.54,post);
+      box(out,gx,0,WID/2-3.66,0.12,2.35,0.12,post);
+      box(out,gx,0,WID/2+3.66,0.12,2.35,0.12,post);
+      box(out,gx,2.3,WID/2,0.12,0.12,7.4,post);
+      line(out,face,WID/2-3.66,gx,WID/2-3.66,[0.72,0.82,0.75],0.045);
+      line(out,face,WID/2+3.66,gx,WID/2+3.66,[0.72,0.82,0.75],0.045);
+      line(out,gx,WID/2-3.66,gx,WID/2+3.66,[0.72,0.82,0.75],0.045);
     });
+    /* Vallas bajas para dar escala al campo sin añadir texturas pesadas */
+    var board=[0.13,0.25,0.28];
+    for(var bx=5;bx<LEN;bx+=10){
+      box(out,bx,0.48,-1.35,8.5,0.9,0.22,board);
+      box(out,bx,0.48,WID+1.35,8.5,0.9,0.22,board);
+    }
   }
   var base = {POR:[5,.5],LD:[25,.83],LI:[25,.17],DFC:[22,.39],MCD:[38,.5],MC:[48,.32],MCO:[60,.5],MD:[48,.84],MI:[48,.16],ED:[73,.82],EI:[73,.18],DC:[78,.5]};
   function posFor(p,i,side) {
@@ -127,6 +144,8 @@ var Pitch3D = (function () {
       team.forEach(function(p,i){
         if(!p||p.gone)return;
         var q=posFor(p,i,side), x=q[0],z=q[1], c=color(colors[side]);
+        /* sombra falsa en el suelo: coste mínimo frente a sombras dinámicas */
+        circle(out,x,z,0.62,[0.025,0.11,0.055]);
         /* cuerpo prismático, cabeza y dos piernas: geometría deliberadamente ligera para móvil */
         var ph=p._p3?p._p3.phase:0,run=p._p3?p._p3.run:0,gait=Math.sin(ph)*0.23*run,skin=[0.72,0.52,0.37],shorts=side===0?[0.08,0.12,0.2]:[0.88,0.88,0.82];
         var isActor=action.who===i&&action.side===side&&performance.now()<action.until, kick=isActor&&/shot|goal|save|miss|pen|cross|volley|shoot|tiro|gol|cabeza|head/i.test(action.kind), celebrate=isActor&&/goal|gol|celebr/i.test(action.kind);
