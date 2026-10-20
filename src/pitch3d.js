@@ -36,7 +36,7 @@ var Pitch3D = (function () {
     locations = {pos: gl.getAttribLocation(program, "aPos"), col: gl.getAttribLocation(program, "aCol"),
       mvp: gl.getUniformLocation(program, "uMvp")};
     gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL); gl.clearColor(0.035, 0.16, 0.09, 1);
-    gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
+    /* Mantener ambas caras: las marcas del césped son polígonos planos. */
   }
   function matMul(a, b) {
     var o = new Float32Array(16);
