@@ -203,6 +203,10 @@ var Pitch3D = (function () {
     canvas.style.display="block";canvas.style.width="100%";canvas.style.height="100%";canvas.style.minHeight="220px";
     host.appendChild(canvas);
     try{initGL();}catch(e){console.warn("Pitch3D: se activa el campo 2D de reserva",e);destroy();return false;}
+    canvas.addEventListener("webglcontextlost",function(ev){
+      ev.preventDefault();
+      if(host){try{host.dispatchEvent(new Event("pitch3d:contextlost"));}catch(ignore){}}
+    },false);
     teams=[[],[]];state={own:0,bx:50,speed:1};ball={x:52.5,z:34,y:0.28,vx:0,vz:0,vy:0};action={until:0,side:0,who:-1,kind:"",phase:0};camera={x:52.5,z:34};last=0;
     raf=requestAnimationFrame(render);return true;
   }
@@ -219,6 +223,7 @@ var Pitch3D = (function () {
   if(typeof Pitch==="undefined"||typeof Pitch3D==="undefined")return;
   var original=Pitch, originalApi={}, mounted=false, host=null, mountOpts=null, toggle=null, switching=false, lastTeams=null, lastState=null, lastFrozen=false;
   ["mount","teams","state","event","busy","reset","freeze","destroy"].forEach(function(k){originalApi[k]=original[k];});
+  function onContextLost(){if(mounted)setMode(false);}
   function setMode(want3d){
     if(!host||switching)return;switching=true;
     try{
@@ -245,6 +250,8 @@ var Pitch3D = (function () {
       toggle.addEventListener("click",function(ev){ev.preventDefault();ev.stopPropagation();setMode(!mounted);});
     }
     if(toggle.parentNode!==host)host.appendChild(toggle);
+    host.removeEventListener("pitch3d:contextlost",onContextLost);
+    host.addEventListener("pitch3d:contextlost",onContextLost);
     setMode(enabled);
   };
   Pitch.teams=function(a,b,fixedNums){lastTeams=Array.prototype.slice.call(arguments);var engine=mounted?Pitch3D:originalApi;return engine.teams.apply(engine,arguments);};
@@ -254,9 +261,10 @@ var Pitch3D = (function () {
   Pitch.reset=function(){var engine=mounted?Pitch3D:originalApi;return engine.reset.apply(engine,arguments);};
   Pitch.freeze=function(v){lastFrozen=!!v;var engine=mounted?Pitch3D:originalApi;return engine.freeze.apply(engine,arguments);};
   Pitch.destroy=function(){
+    if(host)host.removeEventListener("pitch3d:contextlost",onContextLost);
     if(mounted)Pitch3D.destroy();else originalApi.destroy();
     if(toggle&&toggle.parentNode)toggle.parentNode.removeChild(toggle);
-    mounted=false;host=null;mountOpts=null;toggle=null;
+    mounted=false;host=null;mountOpts=null;toggle=null;lastTeams=null;lastState=null;lastFrozen=false;
   };
   /* Selector visible en el partido; 2D sigue siendo la opción predeterminada. */
 })();
