@@ -98,7 +98,7 @@ var Pitch3D = (function () {
       line(out,x+dir*2.0,WID/2-3.66,x+dir*2.0,WID/2+3.66,white,0.08);
       line(out,x+dir*2.0,WID/2+3.66,x,WID/2+3.66,white,0.08);
       /* Porterías tridimensionales sencillas: postes, larguero y fondo de red */
-      var post=[0.94,0.96,0.91], face=end===0?0:LEN, gx=end===0?-1.9:LEN+1.9, back=end===0?-3.4:LEN+3.4;
+      var post=[0.94,0.96,0.91], face=end===0?0:LEN, gx=end===0?-1.9:LEN+1.9;
       box(out,face,0,WID/2-3.66,0.22,2.44,0.22,post);
       box(out,face,0,WID/2+3.66,0.22,2.44,0.22,post);
       box(out,face,2.38,WID/2,0.22,0.18,7.54,post);
