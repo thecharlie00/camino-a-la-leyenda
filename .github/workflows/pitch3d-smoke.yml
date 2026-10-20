@@ -1,0 +1,51 @@
+name: Smoke test del prototipo 3D
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/pitch3d.js"
+      - "src/pitch.js"
+      - "src/match41.js"
+      - "src/ui.js"
+      - "build.py"
+      - "test/**"
+      - ".github/workflows/pitch3d-smoke.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pitch3d-smoke-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  web-smoke:
+    name: Build web + syntax + simulation tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install build dependencies
+        run: cd tools && npm ci --silent
+      - name: Check JavaScript syntax
+        run: |
+          node --check src/pitch3d.js
+          node --check src/pitch.js
+          node --check src/match41.js
+      - name: Build bundled game
+        run: |
+          node tools/i18n.js build
+          python3 build.py
+          test -s dist/index-noads.html
+          grep -q "Probar vista 3D" dist/index-noads.html
+      - name: Existing simulation regression tests
+        run: |
+          node test/sim.js 3
+          node test/modes.js
