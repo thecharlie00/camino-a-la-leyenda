@@ -91,6 +91,14 @@ La secuencia elige dos opciones reales (apoyo corto y salida larga), mueve a los
 
 Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro de fases, `impactAt`, `launchT`, si se lanzó y el receptor. Tras finalizar, se conserva el resumen en `sim.lastGoalKick`.
 
+### Locomoción
+
+- La velocidad se aproxima al objetivo con una aceleración máxima de 16 m/s² y la fase de zancada avanza según la velocidad real, no según el reloj. Al detenerse, la zancada se congela.
+- La inclinación frontal acompaña la aceleración y el banco lateral acompaña el giro. Son deformaciones cosméticas suavizadas y acotadas (`lean` ±0,065, `bank` ±0,05): no cambian la posición, el balón ni el marcador.
+- Los actores GLB aplican la inclinación sobre la malla ya deformada; la pose procedural aplica la misma inclinación y añade elevación de pie y rodilla durante la zancada. Los clips GLB conservan su propio ciclo de carrera.
+- Al quedarse sin carrera, el jugador gira la mirada y el cuerpo hacia el balón; la pose procedural incorpora una oscilación de espera. Durante el saque de puerta manda `faceLock` y la coreografía no se altera.
+- La inclinación se anula al caer en una parada, al terminar el partido, al volver a la posición base y durante la repetición visual.
+
 ## Renderizado y rendimiento
 
 - WebGL 1, sin frameworks ni dependencias de runtime.
@@ -107,7 +115,7 @@ Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro 
 
 ### Prueba aislada del 3D
 
-`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, saque inicial, posesión, tiro, parada, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso, tarjeta roja, replay, reset, final y destroy. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D.
+`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, saque inicial, posesión, inclinación de carrera acotada y finita, tiro, parada, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso, tarjeta roja, replay, reset, final y destroy. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D.
 
 Requiere Node y Playwright (o `playwright-core`) con Chrome/Chromium. Si no está instalado:
 

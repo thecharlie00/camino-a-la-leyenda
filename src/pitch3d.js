@@ -334,7 +334,8 @@ var Pitch3D = (function () {
       vx: 0, vz: 0, facing: sim.attack[side] > 0 ? PI / 2 : -PI / 2, runPhase: Math.random() * TAU,
       phase: (h % 997) / 997, variant: sim.fem ? "female" : "male",
       skin: SKINS[h % SKINS.length], hair: HAIRS[(h >> 3) % HAIRS.length], scale: 0.94 + (h % 9) * 0.015,
-      pace: 1, st: 1, ovr: 70, maxSp: 6.4, gk: false, gone: false, sentOff: false, anim: null, faceLock: false};
+      pace: 1, st: 1, ovr: 70, maxSp: 6.4, gk: false, gone: false, sentOff: false, anim: null,
+      faceLock: false, lean: 0, bank: 0};
     return a;
   }
 
@@ -494,8 +495,9 @@ var Pitch3D = (function () {
         if (a.anim && a.anim.type === "dive") {
           var k = clamp(a.anim.t / a.anim.dur, 0, 1), e = ease(k);
           a.x = clamp(lerp(a.anim.x0, a.anim.x1, e), 0, LEN); a.z = clamp(lerp(a.anim.z0, a.anim.z1, e), 0, WID);
-          a.vx = 0; a.vz = 0; continue;
+          a.vx = 0; a.vz = 0; a.lean = 0; a.bank = 0; continue;
         }
+        var pvx = a.vx, pvz = a.vz, pf = a.facing;
         var dx = a.tx - a.x, dz = a.tz - a.z, d = Math.sqrt(dx * dx + dz * dz);
         var want = Math.min(a.maxSp || 6, d * 3.4);
         var dvx = 0, dvz = 0;
@@ -507,7 +509,23 @@ var Pitch3D = (function () {
         a.z = clamp(a.z + a.vz * dt, 1.5, WID - 1.5);
         var sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
         if (sp > 0.35 && !a.faceLock) a.facing = angleTo(a.facing, Math.atan2(a.vx, a.vz), Math.min(1, dt * 8));
+        else if (sp <= 0.35 && !a.faceLock && !a.anim) {
+          /* Cuando se detiene, mira al balón en vez de quedarse clavado en la
+           * última dirección de carrera. */
+          var bx = sim.ball.x - a.x, bz = sim.ball.z - a.z;
+          if (bx * bx + bz * bz > 0.09) a.facing = angleTo(a.facing, Math.atan2(bx, bz), Math.min(1, dt * 2.4));
+        }
         a.runPhase += sp * dt * 2.3;
+        /* Inclinación de carrera: el cuerpo acompaña la aceleración y el giro.
+         * Es una deformación cosmética; no altera posición, balón ni marcador. */
+        var safeDt = Math.max(0.0001, dt), turn = wrapA(a.facing - pf) / safeDt;
+        var accF = ((a.vx - pvx) * Math.sin(a.facing) + (a.vz - pvz) * Math.cos(a.facing)) / safeDt;
+        var wantLean = clamp(accF * 0.0045, -0.065, 0.065);
+        var wantBank = clamp(turn * sp * 0.0032, -0.05, 0.05);
+        if (a.faceLock || a.anim || sp < 0.4) { wantLean = 0; wantBank = 0; }
+        var lk = Math.min(1, dt * 6);
+        a.lean = lerp(a.lean || 0, wantLean, lk);
+        a.bank = lerp(a.bank || 0, wantBank, lk);
       }
     }
   }
@@ -599,7 +617,7 @@ var Pitch3D = (function () {
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = actorAt(s, i); if (!a) continue;
       a.x = a.tx = a.baseX; a.z = a.tz = a.baseZ; a.vx = a.vz = 0; a.anim = null;
-      a.faceLock = false;
+      a.faceLock = false; a.lean = 0; a.bank = 0;
       a.facing = sim.attack[s] > 0 ? PI / 2 : -PI / 2;
     }
   }
@@ -987,7 +1005,7 @@ var Pitch3D = (function () {
     sim.action = null; sim.queue = []; sim.restart = null; sim.ended = true;
     var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.vx = b.vy = b.vz = 0;
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
-      var a = actorAt(s, i); if (a) { a.anim = {type: "idle", t: 0, dur: 1e9}; a.vx = a.vz = 0; }
+      var a = actorAt(s, i); if (a) { a.anim = {type: "idle", t: 0, dur: 1e9}; a.vx = a.vz = 0; a.lean = 0; a.bank = 0; }
     }
   }
 
@@ -1053,7 +1071,7 @@ var Pitch3D = (function () {
     sim.ball.x = lerp(A.ball[0], B.ball[0], u); sim.ball.y = lerp(A.ball[1], B.ball[1], u); sim.ball.z = lerp(A.ball[2], B.ball[2], u);
     for (var s = 0; s < 2; s++) for (var j = 0; j < 11; j++) {
       var a = sim.players[s][j], pa = A.p[s][j], pb = B.p[s][j];
-      if (a && pa && pb) { a.x = lerp(pa[0], pb[0], u); a.z = lerp(pa[1], pb[1], u); a.facing = pa[2]; a.runPhase = pa[3]; }
+      if (a && pa && pb) { a.x = lerp(pa[0], pb[0], u); a.z = lerp(pa[1], pb[1], u); a.facing = pa[2]; a.runPhase = pa[3]; a.lean = 0; a.bank = 0; }
     }
     if (k >= 1) endReplay();
   }
@@ -1268,6 +1286,7 @@ var Pitch3D = (function () {
     }
 
     var pal = assetPalette(a), ca = Math.cos(a.facing), sa = Math.sin(a.facing), scale = a.scale || 1;
+    var lean = a.lean || 0, bank = a.bank || 0;
     var pos = sc.pos, p = model.positions, materials = model.materials, matNames = model.matNames, matColors = model.matColors;
     var vr, vg, vb, i;
     /* Escalar aquí evita repetir la multiplicación por vértice al transformar. */
@@ -1276,13 +1295,16 @@ var Pitch3D = (function () {
       var i0 = ti * 3, x0 = pos[i0 * 3], y0 = pos[i0 * 3 + 1], z0 = pos[i0 * 3 + 2];
       var x1 = pos[i0 * 3 + 3], y1 = pos[i0 * 3 + 4], z1 = pos[i0 * 3 + 5];
       var x2 = pos[i0 * 3 + 6], y2 = pos[i0 * 3 + 7], z2 = pos[i0 * 3 + 8];
+      var lx0 = x0 + bank * y0, lz0 = z0 + lean * y0;
+      var lx1 = x1 + bank * y1, lz1 = z1 + lean * y1;
+      var lx2 = x2 + bank * y2, lz2 = z2 + lean * y2;
       var mi = materials[i0], nm = matNames[mi] || "", base = pal[nm] || matColors[mi] || [0.8, 0.8, 0.8];
       vr = (model.colors[i0 * 3] + model.colors[i0 * 3 + 3] + model.colors[i0 * 3 + 6]) / 3;
       vg = (model.colors[i0 * 3 + 1] + model.colors[i0 * 3 + 4] + model.colors[i0 * 3 + 7]) / 3;
       vb = (model.colors[i0 * 3 + 2] + model.colors[i0 * 3 + 5] + model.colors[i0 * 3 + 8]) / 3;
-      m.tri9(a.x + x0 * ca + z0 * sa, y0, a.z - x0 * sa + z0 * ca,
-        a.x + x1 * ca + z1 * sa, y1, a.z - x1 * sa + z1 * ca,
-        a.x + x2 * ca + z2 * sa, y2, a.z - x2 * sa + z2 * ca,
+      m.tri9(a.x + lx0 * ca + lz0 * sa, y0, a.z - lx0 * sa + lz0 * ca,
+        a.x + lx1 * ca + lz1 * sa, y1, a.z - lx1 * sa + lz1 * ca,
+        a.x + lx2 * ca + lz2 * sa, y2, a.z - lx2 * sa + lz2 * ca,
         base[0] * vr, base[1] * vg, base[2] * vb);
     }
     assetFrameTris += model.triangles;
@@ -1300,6 +1322,8 @@ var Pitch3D = (function () {
     var skin = a.skin || SKIN, hair = a.hair || HAIR;
     var sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz), run = clamp(sp / 6, 0, 1);
     var gait = Math.sin(a.runPhase) * 0.32 * run, gait2 = Math.sin(a.runPhase + PI) * 0.32 * run;
+    var liftL = Math.max(0, Math.cos(a.runPhase)) * 0.12 * run;
+    var liftR = Math.max(0, Math.cos(a.runPhase + PI)) * 0.12 * run;
     var jump = 0, kick = 0, celebrate = 0, card = 0, dive = false, gkready = false, gkshield = false;
     if (a.anim) {
       var k = clamp(a.anim.t / a.anim.dur, 0, 1);
@@ -1334,16 +1358,16 @@ var Pitch3D = (function () {
       m.ellipsoid(0, 0.52, 0, 0.26, 0.16, 0.2, shorts, q ? 8 : 6, 4);
       m.ellipsoid(0, 1.5, 0, 0.19, 0.23, 0.18, skin, seg, rings);
       m.ellipsoid(0, 1.64, -0.015, 0.195, 0.09, 0.18, hair, q ? 8 : 6, 3);
-      m.limb([-0.14, 0.52, 0], [-0.17, 0.27, gait * 0.35], 0.095, shorts);
-      m.limb([-0.17, 0.27, gait * 0.35], [-0.18, 0.07, gait * 0.55], 0.075, skin);
+      m.limb([-0.14, 0.52, 0], [-0.17, 0.27 + liftL * 0.35, gait * 0.35], 0.095, shorts);
+      m.limb([-0.17, 0.27 + liftL * 0.35, gait * 0.35], [-0.18, 0.07 + liftL, gait * 0.55], 0.075, skin);
       /* La pierna derecha acompaña el golpeo: rodilla arriba, pie adelante y
        * el apoyo queda plantado. Sin animación de golpeo el resultado es la
        * zancada de siempre. */
-      var rKneeY = 0.27 + kick * 0.08, rKneeZ = gait2 * 0.35 + kick * 0.30;
-      var rFootY = 0.07 + kick * 0.18, rFootZ = gait2 * 0.55 + kick * 0.72;
+      var rKneeY = 0.27 + liftR * 0.35 + kick * 0.08, rKneeZ = gait2 * 0.35 + kick * 0.30;
+      var rFootY = 0.07 + liftR + kick * 0.18, rFootZ = gait2 * 0.55 + kick * 0.72;
       m.limb([0.14, 0.52, 0], [0.17, rKneeY, rKneeZ], 0.095, shorts);
       m.limb([0.17, rKneeY, rKneeZ], [0.18, rFootY, rFootZ], 0.075, skin);
-      m.box(-0.18, 0.015, gait * 0.55 + 0.05, 0.2, 0.08, 0.3, BOOT);
+      m.box(-0.18, 0.015 + liftL, gait * 0.55 + 0.05, 0.2, 0.08, 0.3, BOOT);
       m.box(0.18, Math.max(0.015, rFootY - 0.055), rFootZ + 0.05, 0.2, 0.08, 0.3, BOOT);
       var arm = Math.sin(a.runPhase + PI) * 0.28 * run;
       var handY = celebrate ? 1.6 : card ? 1.35 : 0.78;
@@ -1367,8 +1391,10 @@ var Pitch3D = (function () {
       if (!far) m.box(0, 0.98, 0.24, 0.2, 0.14, 0.035, a.side ? [0.14, 0.24, 0.42] : [0.96, 0.82, 0.24]);
     }
     var ca = Math.cos(a.facing), sa = Math.sin(a.facing);
+    var lean = a.lean || 0, bank = a.bank || 0;
+    var sway = dive ? 0 : Math.sin(sim.time * 1.4 + (a.phase || 0) * TAU) * 0.012 * (1 - run);
     for (var vi = start; vi < m.n; vi += 6) {
-      var lx = m.a[vi], ly = m.a[vi + 1], lz = m.a[vi + 2];
+      var lx = m.a[vi] + bank * m.a[vi + 1] + sway, ly = m.a[vi + 1], lz = m.a[vi + 2] + lean * m.a[vi + 1];
       m.a[vi] = a.x + lx * ca + lz * sa;
       m.a[vi + 1] = ly * (a.scale || 1) + jump;
       m.a[vi + 2] = a.z - lx * sa + lz * ca;

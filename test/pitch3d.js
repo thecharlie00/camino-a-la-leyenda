@@ -119,6 +119,14 @@ function roster(prefix) {
   const afterAdvance = await p.evaluate(() => { const d = Pitch3D.debug(); return { x: d.ball.x, mode: d.ball.mode }; });
   if (afterAdvance.x > beforeX + 2 || afterAdvance.mode === "flight") notes.push("posesión y avance · " + beforeX.toFixed(1) + "→" + afterAdvance.x.toFixed(1) + " " + afterAdvance.mode);
   else fail.push("posesión y avance: el balón no avanzó");
+  await p.waitForTimeout(150);
+  await check("locomoción con inclinación estable", () => {
+    const d = Pitch3D.debug(), all = [].concat(d.players[0], d.players[1]).filter(Boolean);
+    const bad = all.filter(a => !isFinite(a.lean) || !isFinite(a.bank) ||
+      Math.abs(a.lean) > 0.08 || Math.abs(a.bank) > 0.06);
+    const leaning = all.filter(a => Math.abs(a.lean) > 0.001 || Math.abs(a.bank) > 0.001).length;
+    return { ok: !bad.length && leaning > 0, why: bad.length + " poses inválidas", info: leaning + " inclinados" };
+  });
   await p.evaluate(() => { const d = Pitch3D.debug(); window.__beforePoss = { x: d.ball.x, z: d.ball.z }; });
   await p.evaluate(() => Pitch3D.state({ own: 1, bx: 22, speed: 1 }));
   await p.waitForTimeout(500);
