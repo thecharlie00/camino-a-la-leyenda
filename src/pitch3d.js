@@ -69,6 +69,13 @@ var Pitch3D = (function () {
     quad(out,[x1,y0,z0],[x1,y0,z1],[x1,y1,z1],[x1,y1,z0],col);
     quad(out,[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1],col);
   }
+  /* Segmento articulado procedural: permite balancear brazos y piernas sin huesos externos. */
+  function limb(out,x1,y1,x2,y2,z,r,depth,col) {
+    var dx=x2-x1,dy=y2-y1,n=Math.sqrt(dx*dx+dy*dy)||1,px=-dy/n*r,py=dx/n*r,h=depth/2;
+    var a=[x1+px,y1+py,z-h],b=[x1-px,y1-py,z-h],c=[x2-px,y2-py,z-h],d=[x2+px,y2+py,z-h];
+    var e=[x1+px,y1+py,z+h],f=[x1-px,y1-py,z+h],g=[x2-px,y2-py,z+h],j=[x2+px,y2+py,z+h];
+    quad(out,a,b,c,d,col);quad(out,e,j,g,f,col);quad(out,a,e,f,b,col);quad(out,b,f,g,c,col);quad(out,c,g,j,d,col);quad(out,d,j,e,a,col);
+  }
   function line(out,x1,z1,x2,z2,col,width) {
     var dx=x2-x1,dz=z2-z1,n=Math.sqrt(dx*dx+dz*dz)||1,ox=-dz/n*(width||0.12),oz=dx/n*(width||0.12);
     quad(out,[x1+ox,0.035,z1+oz],[x2+ox,0.035,z2+oz],[x2-ox,0.035,z2-oz],[x1-ox,0.035,z1-oz],col);
@@ -149,15 +156,16 @@ var Pitch3D = (function () {
         /* cuerpo prismático, cabeza y dos piernas: geometría deliberadamente ligera para móvil */
         var ph=p._p3?p._p3.phase:0,run=p._p3?p._p3.run:0,gait=Math.sin(ph)*0.23*run,skin=[0.72,0.52,0.37],shorts=side===0?[0.08,0.12,0.2]:[0.88,0.88,0.82];
         var isActor=action.who===i&&action.side===side&&performance.now()<action.until, kick=isActor&&/shot|goal|save|miss|pen|cross|volley|shoot|tiro|gol|cabeza|head/i.test(action.kind), celebrate=isActor&&/goal|gol|celebr/i.test(action.kind);
-        var arm=Math.sin(ph+Math.PI)*0.18*run, swing=kick?Math.sin((performance.now()-(action.until-620))/620*Math.PI)*0.65:0;
+        var arm=Math.sin(ph+Math.PI)*0.3*run, swing=kick?Math.sin((performance.now()-(action.until-620))/620*Math.PI)*0.65:0;
         box(out,x,0.45,z,0.78,1.0,0.52,c);
-        box(out,x-0.48,0.77,z+gait*0.45,0.19,0.68,0.2,c);
-        box(out,x+0.48,0.77,z-gait*0.45,0.19,0.68,0.2,c);
+        box(out,x,0.28,z,0.58,0.28,0.48,shorts);
+        limb(out,x-0.22,0.35,x-0.22+gait+swing*0.55,0.06,z,0.105,0.16,shorts);
+        limb(out,x+0.22,0.35,x+0.22-gait-swing*0.2,0.06,z,0.105,0.16,shorts);
+        box(out,x-0.22+gait+swing*0.55,0.025,z,0.23,0.09,0.28,[0.08,0.09,0.1]);
+        box(out,x+0.22-gait-swing*0.2,0.025,z,0.23,0.09,0.28,[0.08,0.09,0.1]);
         circle3D(out,x,1.62+(celebrate?0.12*Math.abs(Math.sin(performance.now()/120)):0),z,0.22,skin);
-        box(out,x-0.2+gait+swing*0.5,0.05,z,0.19,0.42,0.2,shorts);
-        box(out,x+0.2-gait-swing*0.5,0.05,z,0.19,0.42,0.2,shorts);
-        box(out,x-0.52,0.83,z+arm,0.17,0.55,0.19,skin);
-        box(out,x+0.52,0.83,z-arm+(celebrate?0.24:0),0.17,0.55,0.19,skin);
+        limb(out,x-0.38,1.25,x-0.52-arm,0.76,z,0.09,0.16,skin);
+        limb(out,x+0.38,1.25,x+0.52+arm,0.76+(celebrate?0.25:0),z,0.09,0.16,skin);
       });
     });
     /* balón: octaedro pequeño con ligera elevación en la animación */
