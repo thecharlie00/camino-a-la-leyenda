@@ -437,6 +437,7 @@ var Pitch3D = (function () {
       x: worldBaseX(side, nx), z: nz * WID, tx: worldBaseX(side, nx), tz: nz * WID,
       vx: 0, vz: 0, facing: sim.attack[side] > 0 ? PI / 2 : -PI / 2, runPhase: Math.random() * TAU,
       phase: (h % 997) / 997, variant: sim.fem ? "female" : "male",
+       visualAnim: null,
       skin: SKINS[h % SKINS.length], hair: HAIRS[(h >> 3) % HAIRS.length], scale: 0.94 + (h % 9) * 0.015,
       pace: 1, st: 1, ovr: 70, maxSp: 6.4, gk: false, gone: false, sentOff: false, anim: null,
       faceLock: false, lean: 0, bank: 0};
@@ -941,6 +942,7 @@ var Pitch3D = (function () {
     var r = sim.restart; sim.restart = null;
     var a = actorAt(r.side, r.idx);
     if (!a) return;
+    a.visualAnim = {type: "pass", t: 0, dur: 0.6};
     var mate = nearestActor(r.side, a.x, a.z, true, a);
     if (!mate) return;
     launchBall(mate.x, mate.z, 0.23, clamp(dist(a.x, a.z, mate.x, mate.z) / 18, 0.18, 0.5), 0.2, {type: "held", side: r.side, idx: mate.slot});
@@ -1348,8 +1350,18 @@ var Pitch3D = (function () {
 
   function actorClip(a) {
     var anim = a.anim, sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
+    /* Animaciones procedurales de transición (Opción A): reutilizan los clips
+     * existentes para no depender de nuevos GLB. */
+    if (a.visualAnim) {
+      var vk = clamp(a.visualAnim.t / Math.max(0.01, a.visualAnim.dur), 0, 1);
+      if (a.visualAnim.type === "pass") return {name: "kick", t: vk * 0.85, loop: false};
+      if (a.visualAnim.type === "tackle" || a.visualAnim.type === "save") return {name: "dive", t: vk * 0.9, loop: false};
+    }
     if (anim) {
       var k = clamp(anim.t / Math.max(0.01, anim.dur), 0, 1);
+      /* Clips explícitos: permite añadir nuevas animaciones al GLB sin tocar
+       * esta función ni la state machine. */
+      if (anim.clip) return {name: anim.clip, t: k * (anim.clipDur || anim.dur || 1), loop: !!anim.loop};
       if (anim.type === "dive") return {name: "dive", t: k * 1.25, loop: false};
       if (anim.type === "kick") return {name: "kick", t: k * 0.85, loop: false};
       if (anim.type === "gkstrike") return {name: "kick", t: k * 0.98, loop: false};
@@ -1450,6 +1462,11 @@ var Pitch3D = (function () {
       else if (a.anim.type === "celebrate") { celebrate = 1; jump = Math.sin(k * PI) * 0.35; }
       else if (a.anim.type === "card") card = Math.sin(k * PI);
       else if (a.anim.type === "dive") dive = true;
+    }
+    if (a.visualAnim) {
+      var vk = clamp(a.visualAnim.t / Math.max(0.01, a.visualAnim.dur), 0, 1);
+      if (a.visualAnim.type === "pass") kick = Math.sin(vk * PI) * 0.7;
+      else if (a.visualAnim.type === "tackle" || a.visualAnim.type === "save") dive = true;
     }
     drawContactShadow(m, a, q, far);
     if (sim.ball.mode === "held" && sim.ball.side === a.side && sim.ball.idx === a.slot) {
@@ -1690,6 +1707,10 @@ var Pitch3D = (function () {
       aiAcc = 0;
     }
     moveActors(sdt);
+    for (var vs = 0; vs < 2; vs++) for (var vi = 0; vi < 11; vi++) {
+      var va = actorAt(vs, vi);
+      if (va && va.visualAnim) { va.visualAnim.t += sdt; if (va.visualAnim.t >= va.visualAnim.dur) va.visualAnim = null; }
+    }
     updateAnimations(sdt);
     updateBall(sdt);
     if (sim.netT > 0) sim.netT = Math.max(0, sim.netT - sdt * 1.5);
@@ -1818,6 +1839,8 @@ var Pitch3D = (function () {
   function changePossession(side) {
     var b = sim.ball;
     sim.restart = null;
+    var loser = nearestActor(1 - side, b.x, b.z, false);
+    if (loser && (!loser.visualAnim || loser.visualAnim.t >= loser.visualAnim.dur)) loser.visualAnim = {type: "tackle", t: 0, dur: 0.75};
     var a = nearestActor(side, b.x, b.z, false);
     /* un cambio de dueño no puede convertir el balón en un pase campo a campo */
     if (b.mode === "held") {
