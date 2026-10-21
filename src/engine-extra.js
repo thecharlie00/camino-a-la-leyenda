@@ -664,26 +664,46 @@ function liveStep() {
   }
   if (L.min >= 90 + L.add) { L.done = true; L.phase = "full"; out.push({t: "end", txt: tr("¡Final del partido! {a}-{b}.", {a: hs()[0], b: hs()[1]})}); }
   else if (L.min === 90) out.push({t: "com", txt: trn(L.add, "El cuarto árbitro indica {n} minuto de descuento.", "El cuarto árbitro indica {n} minutos de descuento.")});
-  /* Eventos visuales para animaciones 3D: no alteran el resultado ni la calibración. */
-  if (L.lastOwn != null && L.lastOwn !== L.own) {
-    var oc2 = (L.oxi || []).map(function (x, i) { return i; }).filter(function (i) { return !(L.oxi[i].off); });
-    if (oc2.length) {
-      var oi2 = oc2[Math.floor(Math.random() * oc2.length)];
-      out.push({t: "tackle", us: L.own === 0 ? 0 : 1, ox: oi2, k: "tackle", txt: ""});
+  /* Eventos visuales para animaciones 3D: no alteran el resultado ni la
+     calibración. Se elige el jugador que realmente puede animarse en cada
+     bando: pid para el equipo local y ox para el rival. */
+  if (L.lastOwn != null && L.lastOwn !== L.own && !shot) {
+    if (L.own === 0) {
+      var lc2 = L.xi.filter(function (id) { var p = id == null ? null : mPl(id); return id != null && id !== L.red && p && p.pos !== "POR"; });
+      if (lc2.length) {
+        var lp2 = lc2[Math.floor(Math.random() * lc2.length)];
+        out.push({t: "tackle", us: 1, pid: lp2, k: "tackle", txt: ""});
+      }
+    } else {
+      var oc2 = (L.oxi || []).map(function (x, i) { return i; }).filter(function (i) { return L.oxi[i] && L.oxi[i].g !== "POR" && !L.oxi[i].off; });
+      if (oc2.length) {
+        var oi2 = oc2[Math.floor(Math.random() * oc2.length)];
+        out.push({t: "tackle", us: 0, ox: oi2, k: "tackle", txt: ""});
+      }
     }
   }
-  if (!shot && chance(0.35)) {
-    var cand2 = L.xi.filter(function (id) { return id != null && id !== L.red; });
-    if (cand2.length) {
-      var pid2 = cand2[Math.floor(Math.random() * cand2.length)];
-      var who2 = L.xi.indexOf(pid2);
-      if (who2 >= 0) out.push({t: "pass", us: L.own === 0 ? 1 : 0, pid: pid2, k: "pass", txt: ""});
+  if (!shot && chance(0.72)) {
+    if (L.own === 0) {
+      var lpass = L.xi.filter(function (id) { var p = id == null ? null : mPl(id); return id != null && id !== L.red && p && p.pos !== "POR"; });
+      if (lpass.length) {
+        var lpid = lpass[Math.floor(Math.random() * lpass.length)];
+        out.push({t: "pass", us: 1, pid: lpid, k: "pass", txt: ""});
+      }
+    } else {
+      var opass = (L.oxi || []).map(function (x, i) { return i; }).filter(function (i) { return L.oxi[i] && L.oxi[i].g !== "POR" && !L.oxi[i].off; });
+      if (opass.length) {
+        var oidx = opass[Math.floor(Math.random() * opass.length)];
+        out.push({t: "pass", us: 0, ox: oidx, k: "pass", txt: ""});
+      }
     }
   }
   L.lastX = L.bx; L.lastOwn = L.own;
   out.forEach(function (e) { e.min = L.min; });
-  /* el feed visual recibe los hechos en orden; el historial se guarda del más nuevo al más viejo */
-  L.ev = out.slice().reverse().concat(L.ev).slice(0, 80);
+  /* El feed visual recibe los hechos en orden; el historial se guarda del más
+     nuevo al más viejo. Los eventos pass/tackle son solo para animar el 3D:
+     no deben crear filas vacías en el comentario. */
+  L.ev = out.filter(function (e) { return e.t !== "pass" && e.t !== "tackle"; })
+    .slice().reverse().concat(L.ev).slice(0, 80);
   return out;
 }
 function liveSub(outId, inId) {

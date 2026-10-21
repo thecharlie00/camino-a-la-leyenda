@@ -42,7 +42,7 @@ var Pitch3D = (function () {
   var HAIRS = [[0.08, 0.05, 0.03], [0.25, 0.14, 0.07], [0.55, 0.35, 0.12], [0.82, 0.68, 0.34], [0.14, 0.12, 0.10]];
   var BOOT = [0.07, 0.08, 0.09], NET = [0.78, 0.86, 0.80], WHITE = [0.9, 0.94, 0.88];
 
-  var gl = null, canvas = null, host = null, hud = null, replayBtn = null, disposed = true, frozen = false;
+  var gl = null, canvas = null, host = null, hud = null, scoreHud = null, replayBtn = null, disposed = true, frozen = false;
   var raf = 0, lastTs = 0, acc = 0, aiAcc = 0, histAcc = 0, frameCount = 0, fps = 0, fpsFrames = 0, fpsStart = 0;
   var quality = 1, staticMesh = null, staticCount = 0, dyn = null, dynCapacity = 0;
   var program = null, locations = null, staticBuf = null, dynBuf = null;
@@ -67,7 +67,8 @@ var Pitch3D = (function () {
       time: 0, rate: 1, own: 0, bx: 50, half: 1, kickoffSide: 0, koSet: false, ended: false, started: false, fem: false,
       attack: [1, -1], players: [[], []], red: [{}, {}], tactics: [defTac(), defTac()],
       ball: newBall(), action: null, queue: [], restart: null, pendingOwn: null,
-      history: [], replay: null, netT: 0, shake: 0, banner: "", lastGoalKick: null
+      history: [], replay: null, netT: 0, shake: 0, banner: "", lastGoalKick: null,
+      pendingPass: null, officials: [], wx: "sun", score: [0, 0], min: 0, scoreOn: false
     };
   }
 
@@ -286,6 +287,91 @@ var Pitch3D = (function () {
     return true;
   }
 
+  var CROWD_COLS = [[0.86, 0.25, 0.19], [0.18, 0.34, 0.72], [0.92, 0.84, 0.20], [0.92, 0.92, 0.90],
+    [0.12, 0.55, 0.30], [0.45, 0.18, 0.60], [0.10, 0.12, 0.15], [0.72, 0.36, 0.14]];
+
+  function crowdColor(i) {
+    var r = (i * 1103515245 + 12345) >>> 0;
+    if (r % 13 === 0) return colors[0] || CROWD_COLS[0];
+    if (r % 17 === 0) return colors[1] || CROWD_COLS[1];
+    return CROWD_COLS[(r >>> 4) % CROWD_COLS.length];
+  }
+
+  function crowdQuad(m, x, y, z, w, h, c, face) {
+    var x0 = x - w / 2, x1 = x + w / 2;
+    if (face > 0) m.quad([x0, y, z], [x1, y, z], [x1, y + h, z], [x0, y + h, z], c);
+    else m.quad([x1, y, z], [x0, y, z], [x0, y + h, z], [x1, y + h, z], c);
+  }
+
+  /* Gradas llenas: quads verticales baratos (2 triángulos por cuerpo) que
+     aportan escala humana y color de afición sin texturas ni instancing. */
+  function buildCrowd(m) {
+    var i, x, z, r, y, face, c;
+    for (var side = 0; side < 2; side++) {
+      face = side === 0 ? 1 : -1;
+      for (var t = 0; t < 3; t++) {
+        y = 1.65 + t * 1.15 + 0.02;
+        for (var row = 0; row < 2; row++) {
+          z = side === 0 ? (-5.4 - t * 3.4 - 0.35 - row * 0.9) : (WID + 5.4 + t * 3.4 + 0.35 + row * 0.9);
+          for (x = -8.5; x < LEN + 8.5; x += 0.62) {
+            i = Math.round((x + 20) * 7 + t * 31 + row * 53 + side * 101);
+            r = (i * 1597 + 51749) >>> 0;
+            if (r % 23 === 0) continue;
+            c = crowdColor(i);
+            var hh = 0.47 + (r % 9) * 0.012;
+            crowdQuad(m, x + ((r % 5) - 2) * 0.025, y + (r % 3) * 0.015, z, 0.34, hh, c, face);
+            if (t < 2 || row === 0) {
+              crowdQuad(m, x + ((r % 5) - 2) * 0.025, y + hh + 0.035, z, 0.17, 0.17,
+                SKINS[(r >>> 7) % SKINS.length], face);
+            }
+          }
+        }
+      }
+    }
+    for (var end = 0; end < 2; end++) {
+      face = end === 0 ? 1 : -1;
+      for (var t2 = 0; t2 < 3; t2++) {
+        y = 1.65 + t2 * 1.15 + 0.02;
+        for (var row2 = 0; row2 < 2; row2++) {
+          x = end === 0 ? (-6.4 - t2 * 3.4 - 0.35 - row2 * 0.9) : (LEN + 6.4 + t2 * 3.4 + 0.35 + row2 * 0.9);
+          for (z = 5; z < WID - 5; z += 0.64) {
+            i = Math.round(z * 11 + t2 * 37 + row2 * 71 + end * 131);
+            r = (i * 1597 + 51749) >>> 0;
+            if (r % 23 === 0) continue;
+            c = crowdColor(i + 7);
+            var hh2 = 0.47 + (r % 9) * 0.012;
+            crowdQuad(m, x, y + (r % 3) * 0.015, z + ((r % 5) - 2) * 0.025, 0.34, hh2, c, face);
+            if (t2 < 2 || row2 === 0) {
+              crowdQuad(m, x, y + hh2 + 0.035, z + ((r % 5) - 2) * 0.025, 0.17, 0.17,
+                SKINS[(r >>> 7) % SKINS.length], face);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function buildRoof(m) {
+    var roof = [0.045, 0.055, 0.075], beam = [0.11, 0.13, 0.16], light = [0.82, 0.86, 0.74];
+    for (var side = 0; side < 2; side++) {
+      var s = side ? 1 : -1, z0 = side ? WID + 6 : -6, z1 = side ? WID + 17 : -17;
+      m.quad([-11, side ? 7.7 : 8.3, z0], [LEN + 11, side ? 7.7 : 8.3, z0],
+        [LEN + 11, side ? 8.3 : 7.7, z1], [-11, side ? 8.3 : 7.7, z1], roof);
+      m.box(LEN / 2, side ? 7.5 : 7.45, z0, LEN + 22, 0.18, 0.28, beam);
+      for (var x = -8; x <= LEN + 8; x += 12) {
+        m.box(x, 3.9, z1, 0.22, 3.7, 0.22, beam);
+        m.box(x, 7.35, (z0 + z1) / 2, 0.16, 0.16, Math.abs(z1 - z0), beam);
+      }
+      /* Paneles de focos bajo la cubierta: manchas claras que dan profundidad. */
+      for (var lx = 8; lx < LEN; lx += 23) {
+        m.box(lx, side ? 7.1 : 6.95, z0 + s * 0.4, 3.4, 0.10, 0.36, light);
+      }
+    }
+    /* Boca de túnel en la grada larga, al nivel del césped. */
+    m.box(LEN / 2, 0, -5.25, 6.4, 2.15, 0.18, [0.018, 0.022, 0.028]);
+    m.box(LEN / 2, 2.15, -5.55, 7.2, 0.22, 0.9, beam);
+  }
+
   function buildField(m) {
     var green = [0.055, 0.30, 0.13], stripe = [0.065, 0.35, 0.15], dark = [0.028, 0.075, 0.05];
     var board = [0.12, 0.24, 0.27], stand = [0.055, 0.075, 0.10], tier = [0.085, 0.105, 0.14];
@@ -368,6 +454,9 @@ var Pitch3D = (function () {
       var fx = e2 ? LEN + 8 : -8, fs = e2 ? 1 : -1;
       for (var k = 0; k < 3; k++) m.box(fx + fs * k * 3.4, 0.5 + k * 1.15, MIDZ, 3.2, 1.15, WID + 12, k ? tier : stand);
     }
+    /* afición y cubierta: convierten las cajas de las gradas en un estadio */
+    buildCrowd(m);
+    buildRoof(m);
     /* torres de luz en las esquinas */
     [[-5, -5], [LEN + 5, -5], [-5, WID + 5], [LEN + 5, WID + 5]].forEach(function (p) {
       m.box(p[0], 0, p[1], 0.28, 13, 0.28, [0.16, 0.18, 0.2]);
@@ -428,6 +517,7 @@ var Pitch3D = (function () {
 
   function refreshActorVariants() {
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) setActorVariant(sim.players[s] && sim.players[s][i]);
+    for (var oi = 0; oi < sim.officials.length; oi++) setActorVariant(sim.officials[oi]);
   }
 
   function makeActor(side, slot, key, nx, nz) {
@@ -440,8 +530,72 @@ var Pitch3D = (function () {
        visualAnim: null,
       skin: SKINS[h % SKINS.length], hair: HAIRS[(h >> 3) % HAIRS.length], scale: 0.94 + (h % 9) * 0.015,
       pace: 1, st: 1, ovr: 70, maxSp: 6.4, gk: false, gone: false, sentOff: false, anim: null,
-      faceLock: false, lean: 0, bank: 0};
+      passTarget: null, faceLock: false, lean: 0, bank: 0};
     return a;
+  }
+
+  /* Árbitro y asistentes: actores puramente visuales, fuera de sim.players
+     para no alterar el contrato de 22 jugadores ni la física del partido. */
+  function makeOfficial(kind, x, z) {
+    return {official: kind, side: 0, slot: -1, key: "official:" + kind, id: "official:" + kind,
+      pos: "MC", nm: "", number: 0, nx: 0.5, nz: z / WID, baseX: x, baseZ: z,
+      x: x, z: z, tx: x, tz: z, vx: 0, vz: 0, facing: PI / 2,
+      runPhase: Math.random() * TAU, phase: Math.random(), variant: sim.fem ? "female" : "male",
+      visualAnim: null, passTarget: null, skin: SKINS[kind === "ref" ? 1 : 2], hair: HAIRS[0],
+      scale: kind === "ref" ? 1.0 : 0.97, pace: 1, st: 1, ovr: 70, maxSp: 7,
+      gk: false, gone: false, sentOff: false, anim: null, faceLock: false, lean: 0, bank: 0};
+  }
+
+  function initOfficials() {
+    sim.officials = [
+      makeOfficial("ref", LEN / 2, MIDZ),
+      makeOfficial("ar1", LEN / 2, -1.1),
+      makeOfficial("ar2", LEN / 2, WID + 1.1)
+    ];
+  }
+
+  function mirrorOfficials() {
+    for (var i = 0; i < sim.officials.length; i++) {
+      var o = sim.officials[i];
+      o.x = LEN - o.x; o.tx = LEN - o.tx; o.baseX = LEN - o.baseX; o.vx = -o.vx;
+      o.z = WID - o.z; o.tz = WID - o.tz; o.baseZ = WID - o.baseZ; o.vz = -o.vz;
+      o.facing = PI - o.facing;
+    }
+  }
+
+  function updateOfficials(dt) {
+    if (!sim.officials.length) initOfficials();
+    var b = sim.ball;
+    for (var i = 0; i < sim.officials.length; i++) {
+      var o = sim.officials[i], tx, tz, maxSp;
+      if (o.official === "ref") {
+        /* El árbitro acompaña la jugada por el lado contrario al balón. */
+        tx = clamp(b.x - sim.attack[0] * 1.2, 6, LEN - 6);
+        tz = clamp(b.z + (b.z < MIDZ ? 6.5 : -6.5), 8, WID - 8);
+        maxSp = 7.4;
+      } else {
+        /* Los asistentes recorren su banda siguiendo la línea de juego. */
+        tx = clamp(b.x, 4, LEN - 4);
+        tz = o.official === "ar1" ? -1.1 : WID + 1.1;
+        maxSp = 8.1;
+      }
+      var dx = tx - o.x, dz = tz - o.z, d = Math.sqrt(dx * dx + dz * dz);
+      var want = Math.min(maxSp, d * 3.0), dvx = 0, dvz = 0;
+      if (d > 0.01) { dvx = dx / d * want - o.vx; dvz = dz / d * want - o.vz; }
+      var lim = 18 * dt, l = Math.sqrt(dvx * dvx + dvz * dvz);
+      if (l > lim) { dvx = dvx / l * lim; dvz = dvz / l * lim; }
+      o.vx += dvx; o.vz += dvz;
+      o.x += o.vx * dt; o.z += o.vz * dt;
+      var sp = Math.sqrt(o.vx * o.vx + o.vz * o.vz);
+      if (sp > 0.35) o.facing = angleTo(o.facing, Math.atan2(o.vx, o.vz), Math.min(1, dt * 8));
+      else {
+        var bx = b.x - o.x, bz = b.z - o.z;
+        if (bx * bx + bz * bz > 0.09) o.facing = angleTo(o.facing, Math.atan2(bx, bz), Math.min(1, dt * 2.4));
+      }
+      o.runPhase += sp * dt * 2.3;
+      o.lean = clamp((sp - 4.5) * 0.006, 0, 0.03);
+      o.bank = 0;
+    }
   }
 
   function syncTeam(side, list, fixed) {
@@ -531,6 +685,17 @@ var Pitch3D = (function () {
       for (var i = 0; i < list.length; i++) {
         var a = list[i];
         if (a.gone) continue;
+        /* Recepción de un pase visual: el receptor ataca el punto de caída
+           durante la maniobra y luego vuelve a la disciplina táctica. */
+        if (a.passTarget) {
+          if (sim.time < a.passTarget.until) {
+            a.tx = clamp(a.passTarget.x, 1, LEN - 1);
+            a.tz = clamp(a.passTarget.z, 1.5, WID - 1.5);
+            a.maxSp = 7.8 * a.pace;
+            continue;
+          }
+          a.passTarget = null;
+        }
         var tx, tz, maxSp = 6.4 * a.pace;
         if (a.gk) {
           var own = ownX(side), gx = own + dir * 2.0;
@@ -651,9 +816,10 @@ var Pitch3D = (function () {
 
   /* ------------------------------------------------------------------ balón */
 
-  function launchBall(tx, tz, ty, dur, arc, next) {
+  function launchBall(tx, tz, ty, dur, arc, next, curve) {
     var b = sim.ball;
-    b.fl = {x0: b.x, y0: b.y, z0: b.z, x1: tx, y1: ty, z1: tz, t: 0, dur: Math.max(0.08, dur), arc: arc || 0};
+    b.fl = {x0: b.x, y0: b.y, z0: b.z, x1: tx, y1: ty, z1: tz, t: 0, dur: Math.max(0.08, dur),
+      arc: arc || 0, curve: curve || 0};
     b.mode = "flight"; b.next = next || null; b.timer = dur; b.vy = 0;
     b.vx = (tx - b.x) / Math.max(0.08, dur); b.vz = (tz - b.z) / Math.max(0.08, dur);
     b.lastTouch = sim.own === 1 ? 1 : 0;
@@ -696,7 +862,12 @@ var Pitch3D = (function () {
       var f = b.fl;
       f.t += dt;
       var k = clamp(f.t / f.dur, 0, 1);
-      b.x = lerp(f.x0, f.x1, k); b.z = lerp(f.z0, f.z1, k);
+      var dx = f.x1 - f.x0, dz = f.z1 - f.z0, dl = Math.sqrt(dx * dx + dz * dz) || 1;
+      /* El enrosque se aplica en el eje perpendicular al recorrido y vuelve a
+         cero en el destino: el balón nunca deja de ser continuo. */
+      var bend = (f.curve || 0) * Math.sin(PI * k);
+      b.x = lerp(f.x0, f.x1, k) - dz / dl * bend;
+      b.z = lerp(f.z0, f.z1, k) + dx / dl * bend;
       b.y = lerp(f.y0, f.y1, k) + f.arc * 4 * k * (1 - k);
       spinBall(b, dt);
       if (k >= 1) {
@@ -719,10 +890,11 @@ var Pitch3D = (function () {
   /* ------------------------------------------------------------------ saques */
 
   function placeAtBase() {
+    sim.pendingPass = null;
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = actorAt(s, i); if (!a) continue;
       a.x = a.tx = a.baseX; a.z = a.tz = a.baseZ; a.vx = a.vz = 0; a.anim = null;
-      a.faceLock = false; a.lean = 0; a.bank = 0;
+      a.passTarget = null; a.faceLock = false; a.lean = 0; a.bank = 0;
       a.facing = sim.attack[s] > 0 ? PI / 2 : -PI / 2;
     }
   }
@@ -896,7 +1068,7 @@ var Pitch3D = (function () {
 
 
   function setupThrowIn(side, x, z) {
-    sim.action = null;
+    sim.action = null; sim.pendingPass = null;
     var b = sim.ball;
     b.x = clamp(x, 2, LEN - 2); b.z = z < MIDZ ? 0.9 : WID - 0.9; b.y = 0.22; b.mode = "dead"; b.fl = null; b.next = null;
     var taker = nearestActor(side, b.x, b.z, true);
@@ -906,7 +1078,7 @@ var Pitch3D = (function () {
   }
 
   function setupCorner(side, end) {
-    sim.action = null;
+    sim.action = null; sim.pendingPass = null;
     var b = sim.ball;
     b.x = end ? LEN - 0.7 : 0.7; b.z = b.z < MIDZ ? 0.7 : WID - 0.7; b.y = 0.22;
     b.vx = b.vy = b.vz = 0; b.mode = "dead"; b.fl = null; b.next = null;
@@ -939,7 +1111,7 @@ var Pitch3D = (function () {
     if (!sim.restart) return;
     sim.restart.t -= dt;
     if (sim.restart.t > 0) return;
-    var r = sim.restart; sim.restart = null;
+    var r = sim.restart; sim.restart = null; sim.pendingPass = null;
     var a = actorAt(r.side, r.idx);
     if (!a) return;
     a.visualAnim = {type: "pass", t: 0, dur: 0.6};
@@ -980,9 +1152,82 @@ var Pitch3D = (function () {
     return {x: gx + dir * 0.55, z: z, y: y, arc: arc};
   }
 
+  /* Pase visual en juego abierto: el motor de partido ya decidió que hay un
+     pase; el 3D elige un receptor coherente y mantiene el balón continuo. */
+  function pickPassReceiver(side, carrier, want) {
+    var dir = sim.attack[side], list = listOf(side), best = null, bestScore = -1e9;
+    var targetX = sim.attack[side] > 0 ? sim.bx / 100 * LEN : (1 - sim.bx / 100) * LEN;
+    for (var i = 0; i < list.length; i++) {
+      var q = list[i];
+      if (!q || q === carrier || q.gk) continue;
+      var d = dist(carrier.x, carrier.z, q.x, q.z);
+      if (d < 3.2 || d > 44) continue;
+      var forward = (q.x - carrier.x) * dir;
+      var score = -Math.abs(d - 18) * 0.34 + forward * 0.55 - Math.abs(q.x - targetX) * 0.12;
+      /* El evento solo sugiere un nombre: si está muy lejos, vale más un
+         compañero cercano que un pase imposible de 40 m. */
+      if (q === want) score += d < 27 ? 7 : -4;
+      if (score > bestScore) { bestScore = score; best = q; }
+    }
+    return best;
+  }
+
+  function startVisualPass(e, side, want) {
+    if (!sim.started || sim.ended || sim.action || sim.restart) return false;
+    var b = sim.ball;
+    if (b.mode !== "held" || b.side !== side) return false;
+    var carrier = actorAt(side, b.idx);
+    if (!carrier || carrier.gk) return false;
+    var rec = pickPassReceiver(side, carrier, want);
+    if (!rec) return false;
+    var dir = sim.attack[side];
+    /* El punto de recepción no debe exigir una carrera imposible: se limita
+       la ventaja a ~2 m y el receptor ataca ese espacio durante el vuelo. */
+    var tx = clamp(rec.x + clamp(rec.vx * 0.28, -2.2, 2.2), 2, LEN - 2);
+    var tz = clamp(rec.z + clamp(rec.vz * 0.28, -2.2, 2.2), 2.5, WID - 2.5);
+    var d = dist(carrier.x, carrier.z, tx, tz);
+    var cross = Math.abs(rec.z - carrier.z) > 14 && (rec.x - carrier.x) * dir > 8;
+    var longBall = d > 27;
+    var arc = cross ? clamp(d * 0.045, 0.9, 2.4) : longBall ? clamp(d * 0.03, 0.6, 1.8) : clamp(d * 0.008, 0.05, 0.35);
+    var dur = clamp(d / (cross ? 19 : longBall ? 23 : 26), 0.22, 1.55);
+    var curve = (Math.random() < 0.5 ? -1 : 1) * (cross ? 1.2 : longBall ? 0.7 : 0.18) * (0.6 + Math.random() * 0.8);
+    carrier.visualAnim = {type: "pass", t: 0, dur: 0.56};
+    /* El receptor corre al punto de recepción en vez de esperar el balón. */
+    rec.passTarget = {x: tx, z: tz, until: sim.time + dur + 0.35};
+    rec.maxSp = 7.8 * rec.pace;
+    launchBall(tx, tz, 0.23, dur, arc, {type: "held", side: side, idx: rec.slot}, curve);
+    b.lastTouch = side;
+    sim.own = side;
+    return true;
+  }
+
+  /* Un pase puede llegar antes que el estado de posesión. Se guarda y se
+     ejecuta en cuanto el balón está en los pies del bando correcto; si en
+     4 s no hay receptor, se descarta para no arrastrar acciones viejas. */
+  function tryPendingPass() {
+    var pp = sim.pendingPass;
+    if (!pp) return false;
+    if (sim.time > pp.until || sim.ended || !sim.started || sim.action || sim.restart) {
+      if (sim.time > pp.until || sim.ended) sim.pendingPass = null;
+      return false;
+    }
+    var b = sim.ball;
+    if (b.mode !== "held" || b.side !== pp.side) {
+      if (b.mode !== "dead" && b.mode !== "loose") return false;
+      var a = nearestActor(pp.side, b.x, b.z, false);
+      if (!a || dist(a.x, a.z, b.x, b.z) > 3.2) return false;
+      if (!giveTo(pp.side, a.slot)) return false;
+    }
+    if (startVisualPass(pp.e, pp.side, pp.who)) { sim.pendingPass = null; return true; }
+    return false;
+  }
+
   function startShot(e) {
     if (sim.action) { sim.queue.push(e); return; }
-    sim.restart = null;
+    sim.restart = null; sim.pendingPass = null;
+    for (var ps2 = 0; ps2 < 2; ps2++) for (var pi2 = 0; pi2 < 11; pi2++) {
+      var pa2 = actorAt(ps2, pi2); if (pa2) pa2.passTarget = null;
+    }
     var side = +e.side === 1 ? 1 : 0, res = e.t, kind = e.k || "pass";
     var dir = sim.attack[side], gx = goalX(side);
     var shooter = pickShooter(side, e.who);
@@ -1076,7 +1321,11 @@ var Pitch3D = (function () {
     } else if (a.stage === "windup" && a.t >= 0.18) {
       a.stage = "flight"; a.t = 0;
       var t = shotTarget(a);
-      launchBall(t.x, t.z, t.y, a.flight, t.arc, null);
+      /* Los tiros llevan un enrosque leve; los disparos lejanos y las roscas
+         se abren algo más sin cambiar el punto de impacto. */
+      var bend = (a.kind === "long" ? 0.9 : a.kind === "oneone" ? 0.22 : 0.48) *
+        (a.res === "goal" || a.res === "save" ? 1 : 0.6) * (Math.random() < 0.5 ? -1 : 1);
+      launchBall(t.x, t.z, t.y, a.flight, t.arc, null, bend);
       if (a.gk) {
         var dz = clamp(a.gk.z + (Math.random() < 0.5 ? -1 : 1) * rnd(0.5, 1.6), MIDZ - POST, MIDZ + POST);
         a.gk.anim = {type: "dive", t: 0, dur: 0.55, dir: dz >= a.gk.z ? 1 : -1, x0: a.gk.x, z0: a.gk.z,
@@ -1102,7 +1351,7 @@ var Pitch3D = (function () {
   function doHalf() {
     if (sim.half === 2) return;
     sim.action = null; sim.queue = []; sim.ended = false; sim.restart = null;
-    sim.half = 2; mirrorTeam(0); mirrorTeam(1);
+    sim.half = 2; mirrorTeam(0); mirrorTeam(1); mirrorOfficials();
     sim.attack[0] = -sim.attack[0]; sim.attack[1] = -sim.attack[1];
     var b = sim.ball; b.x = LEN - b.x; b.vx = -b.vx; b.fl = null; b.next = null; b.mode = "dead";
     cam.x = LEN - cam.x;
@@ -1110,10 +1359,10 @@ var Pitch3D = (function () {
   }
 
   function doEnd() {
-    sim.action = null; sim.queue = []; sim.restart = null; sim.ended = true;
+    sim.action = null; sim.queue = []; sim.restart = null; sim.ended = true; sim.pendingPass = null;
     var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.vx = b.vy = b.vz = 0;
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
-      var a = actorAt(s, i); if (a) { a.anim = {type: "idle", t: 0, dur: 1e9}; a.vx = a.vz = 0; a.lean = 0; a.bank = 0; }
+      var a = actorAt(s, i); if (a) { a.anim = {type: "idle", t: 0, dur: 1e9}; a.passTarget = null; a.vx = a.vz = 0; a.lean = 0; a.bank = 0; }
     }
   }
 
@@ -1130,7 +1379,7 @@ var Pitch3D = (function () {
     if (t === "yellow" || t === "red") { e.t = t; startCard(e); return; }
     if (t === "pass") {
       var ps = +e.side === 1 ? 1 : 0, pa = e.who != null ? actorAt(ps, +e.who) : null;
-      if (pa) pa.visualAnim = {type: "pass", t: 0, dur: 0.6};
+      if (!startVisualPass(e, ps, pa)) sim.pendingPass = {e: e, side: ps, who: pa, until: sim.time + 4};
       fireCue(e); return;
     }
     if (t === "tackle") {
@@ -1328,7 +1577,7 @@ var Pitch3D = (function () {
     model._p3dScratch = {
       local: new Float32Array(n * 16), world: new Float32Array(n * 16), skin: new Float32Array(n * 16),
       t: new Float32Array(n * 3), r: new Float32Array(n * 4), s: new Float32Array(n * 3),
-      pos: new Float32Array(verts * 3)
+      pos: new Float32Array(verts * 3), pos2: new Float32Array(verts * 3)
     };
     return model._p3dScratch;
   }
@@ -1336,7 +1585,7 @@ var Pitch3D = (function () {
   /* La pose se evalúa y se deforma en CPU, jugador a jugador. Los vértices
    * vienen sin indexar (3 por triángulo), así que el resultado se puede
    * escribir directamente en el VBO dinámico común del partido. */
-  function evalModel(model, clip, time, sc) {
+  function evalModel(model, clip, time, sc, dst) {
     var n = model.parents.length, i, k;
     sc.t.set(model.bindT); sc.r.set(model.bindR); sc.s.set(model.bindS);
     for (i = 0; i < clip.tracks.length; i++) {
@@ -1356,7 +1605,7 @@ var Pitch3D = (function () {
       else for (k = 0; k < 16; k++) sc.world[o + k] = sc.local[o + k];
     }
     for (i = 0; i < n; i++) mat4MulAt(sc.skin, i * 16, sc.world, i * 16, model.ibm, i * 16);
-    var pos = model.positions, jnt = model.joints, wgt = model.weights, out = sc.pos;
+    var pos = model.positions, jnt = model.joints, wgt = model.weights, out = dst || sc.pos;
     for (i = 0, k = 0; i < pos.length; i += 3, k += 4) {
       var px = pos[i], py = pos[i + 1], pz = pos[i + 2], x = 0, y = 0, z = 0;
       for (var wi = 0; wi < 4; wi++) {
@@ -1397,6 +1646,12 @@ var Pitch3D = (function () {
   }
 
   function assetPalette(a) {
+    if (a.official) {
+      var dark = a.official === "ref" ? [0.055, 0.06, 0.07] : [0.085, 0.095, 0.105];
+      return {kit_shirt: dark, kit_shorts: [0.04, 0.045, 0.055], kit_socks: [0.92, 0.78, 0.16],
+        kit_trim: [0.98, 0.84, 0.20], skin: a.skin || SKIN, hair: a.hair || HAIR, boots: BOOT,
+        gloves: [0.98, 0.48, 0.16]};
+    }
     var shirt = a.gk ? (a.side ? [0.55, 0.26, 0.76] : [0.96, 0.55, 0.12]) : (colors[a.side] || rgb(SHIRT[a.side]));
     var shorts = a.gk ? [0.08, 0.10, 0.12] : (SHORTS[a.side] || SHORTS[0]);
     return {kit_shirt: shirt, kit_shorts: shorts, kit_socks: shirt, kit_trim: [0.96, 0.86, 0.55],
@@ -1426,7 +1681,39 @@ var Pitch3D = (function () {
     var sc = assetScratch(model);
     var t = info.loop ? info.t % clip.dur : clamp(info.t, 0, clip.dur);
     if (t < 0) t += clip.dur;
+
+    /* Cross-fade de 0.18 s entre clips: evita el salto seco idle→run→kick
+       y da transiciones de animación propias de un juego actual. */
+    var now = sim.time, dt = a.assetLastTime == null ? 0 : Math.max(0, now - a.assetLastTime);
+    a.assetLastTime = now;
+    if (a.assetPrev) {
+      a.assetPrev.t += dt;
+      var pdur = a.assetPrev.dur || 1;
+      if (a.assetPrev.loop && pdur > 0) a.assetPrev.t %= pdur;
+    }
+    if (a.assetClipName !== info.name) {
+      a.assetPrev = a.assetClip ? {name: a.assetClip.name, t: a.assetClip.t, loop: a.assetClip.loop, dur: a.assetClip.dur} : null;
+      a.assetClip = {name: info.name, t: t, loop: info.loop, dur: clip.dur};
+      a.assetClipName = info.name;
+      a.assetBlend = a.assetPrev ? 0.18 : 0;
+    } else if (a.assetClip) {
+      a.assetClip.t = t; a.assetClip.loop = info.loop; a.assetClip.dur = clip.dur;
+    }
+    if (a.assetBlend > 0) {
+      a.assetBlend = Math.max(0, a.assetBlend - dt);
+      if (a.assetBlend <= 0) a.assetPrev = null;
+    }
     evalModel(model, clip, t, sc);
+    if (a.assetPrev && a.assetBlend > 0) {
+      var prevClip = model.clips[a.assetPrev.name];
+      if (prevClip) {
+        var pu = clamp(1 - a.assetBlend / 0.18, 0, 1);
+        pu = pu * pu * (3 - 2 * pu);
+        evalModel(model, prevClip, a.assetPrev.t, sc, sc.pos2);
+        var posCur = sc.pos, posPrev = sc.pos2;
+        for (var bi = 0; bi < posCur.length; bi++) posCur[bi] = posPrev[bi] + (posCur[bi] - posPrev[bi]) * pu;
+      }
+    }
 
     var far = d2 > 1600, q = quality < 0.7 || far ? 0 : 1;
     drawContactShadow(m, a, q, far);
@@ -1468,8 +1755,9 @@ var Pitch3D = (function () {
   function buildPlayer(m, a) {
     var dxc = a.x - cam.x, dzc = a.z - cam.z, far = dxc * dxc + dzc * dzc > 1600;
     var q = quality < 0.7 || far ? 0 : 1, seg = q ? 8 : 6, rings = q ? 5 : 4;
-    var shirt = a.gk ? (a.side ? [0.55, 0.26, 0.76] : [0.96, 0.55, 0.12]) : (colors[a.side] || rgb(SHIRT[a.side]));
-    var shorts = a.gk ? [0.08, 0.10, 0.12] : (SHORTS[a.side] || SHORTS[0]);
+    var shirt = a.official ? (a.official === "ref" ? [0.055, 0.06, 0.07] : [0.085, 0.095, 0.105]) :
+      a.gk ? (a.side ? [0.55, 0.26, 0.76] : [0.96, 0.55, 0.12]) : (colors[a.side] || rgb(SHIRT[a.side]));
+    var shorts = a.official ? [0.04, 0.045, 0.055] : a.gk ? [0.08, 0.10, 0.12] : (SHORTS[a.side] || SHORTS[0]);
     var skin = a.skin || SKIN, hair = a.hair || HAIR;
     var sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz), run = clamp(sp / 6, 0, 1);
     var gait = Math.sin(a.runPhase) * 0.32 * run, gait2 = Math.sin(a.runPhase + PI) * 0.32 * run;
@@ -1497,8 +1785,10 @@ var Pitch3D = (function () {
     }
     var start = m.n;
     if (dive) {
-      /* El cuerpo cae de lado: el eje local X es el eje lateral del portero. */
-      var dirW = a.anim.dir || 1;
+      /* El cuerpo cae de lado: el eje local X es el eje lateral del portero.
+         visualAnim (tackle/parada) puede no traer dirección de anim. */
+      var diveAnim = a.anim || a.visualAnim;
+      var dirW = (diveAnim && diveAnim.dir) || 1;
       var dirL = -dirW * (Math.sin(a.facing) >= 0 ? 1 : -1);
       m.ellipsoid(0, 0.5, 0, 0.5, 0.2, 0.28, shirt, seg, rings);
       m.ellipsoid(dirL * 0.72, 0.58, 0, 0.17, 0.2, 0.18, skin, seg, rings - 1);
@@ -1544,7 +1834,7 @@ var Pitch3D = (function () {
       m.limb([-elbowX, elbowY, leftHandZ * 0.4], [-handX, handY, leftHandZ], 0.07, skin);
       m.limb([0.3, 1.2, 0], [elbowX, elbowY, rightHandZ * 0.4], 0.085, shirt);
       m.limb([elbowX, elbowY, rightHandZ * 0.4], [handX, handY, rightHandZ], 0.07, skin);
-      if (!far) m.box(0, 0.98, 0.24, 0.2, 0.14, 0.035, a.side ? [0.14, 0.24, 0.42] : [0.96, 0.82, 0.24]);
+      if (!far) m.box(0, 0.98, 0.24, 0.2, 0.14, 0.035, a.official ? [0.98, 0.84, 0.20] : a.side ? [0.14, 0.24, 0.42] : [0.96, 0.82, 0.24]);
     }
     var ca = Math.cos(a.facing), sa = Math.sin(a.facing);
     var lean = a.lean || 0, bank = a.bank || 0;
@@ -1587,6 +1877,34 @@ var Pitch3D = (function () {
     assetFrameTris += model.triangles;
     assetFrameBall++;
     return true;
+  }
+
+  /* Lluvia y nieve procedurales: quads baratos alrededor del balón que
+     desaparecen en calidad baja o con movimiento reducido. */
+  function drawWeather(m) {
+    if (reduced) return;
+    var rain = sim.wx === "rain", snow = sim.wx === "cold";
+    if (!rain && !snow) return;
+    var count = quality > 0.7 ? (rain ? 210 : 110) : (rain ? 100 : 55);
+    var b = sim.ball, t = sim.time;
+    m.metallic = 0; m.roughness = 0.92;
+    for (var i = 0; i < count; i++) {
+      var seed = (i * 2654435761 + 1013904223) >>> 0;
+      var x = b.x + ((seed % 800) / 10 - 40) + Math.sin(t * 0.6 + i) * 0.25;
+      /* La lluvia también cae entre la cámara y el campo: si solo se dibuja
+         alrededor del balón, las gotas cercanas nunca entran en el encuadre. */
+      var z = b.z + (((seed >>> 9) % 800) / 10 - 15);
+      var fall = rain ? 17 : 3.2;
+      var span = rain ? 15 : 11;
+      var y = 0.4 + (((t * fall + ((seed >>> 18) % 200)) % span));
+      if (rain) {
+        var c = [0.46 + (seed % 10) * 0.012, 0.55 + (seed % 8) * 0.012, 0.68];
+        m.quad([x, y, z], [x + 0.055, y - 0.9, z], [x + 0.055, y - 0.9, z + 0.022], [x, y, z + 0.022], c);
+      } else {
+        var sc = 0.12 + (seed % 5) * 0.012;
+        m.quad([x, y, z], [x + sc, y, z], [x + sc, y + sc, z], [x, y + sc, z], [0.90, 0.94, 1.0]);
+      }
+    }
   }
 
   function buildBall(m) {
@@ -1638,6 +1956,11 @@ var Pitch3D = (function () {
   }
 
   function draw() {
+    /* El clima del motor tiñe cielo y niebla; el 3D solo lo representa. */
+    var sky = sim.wx === "rain" ? [0.012, 0.024, 0.040] : sim.wx === "cold" ? [0.020, 0.031, 0.052] :
+      sim.wx === "heat" ? [0.052, 0.037, 0.028] : [0.018, 0.035, 0.055];
+    gl.clearColor(sky[0], sky[1], sky[2], 1);
+    fogArr[0] = sky[0] * 0.92; fogArr[1] = sky[1] * 0.96; fogArr[2] = sky[2] * 1.02;
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     dyn.reset();
     dyn.spec = quality > 0.55;
@@ -1649,7 +1972,12 @@ var Pitch3D = (function () {
       if ((a.gone || a.sentOff) && !card) continue;
       if (!buildAssetPlayer(dyn, a)) buildPlayer(dyn, a);
     }
+    for (var oi = 0; oi < sim.officials.length; oi++) {
+      var oa = sim.officials[oi];
+      if (oa && !buildAssetPlayer(dyn, oa)) buildPlayer(dyn, oa);
+    }
     if (!buildAssetBall(dyn)) buildBall(dyn);
+    drawWeather(dyn);
     if (dyn.n > dynCapacity) {
       var cap = dynCapacity; while (cap < dyn.n) cap *= 2;
       gl.bindBuffer(gl.ARRAY_BUFFER, dynBuf); gl.bufferData(gl.ARRAY_BUFFER, cap * 4, gl.DYNAMIC_DRAW);
@@ -1667,8 +1995,8 @@ var Pitch3D = (function () {
     gl.uniformMatrix4fv(locations.mvp, false, mvp);
     if (locations.fog) gl.uniform3fv(locations.fog, fogArr);
     if (locations.eye) gl.uniform3fv(locations.eye, eyeArr);
-    if (locations.near) gl.uniform1f(locations.near, 85);
-    if (locations.far) gl.uniform1f(locations.far, 210);
+    if (locations.near) gl.uniform1f(locations.near, sim.wx === "rain" ? 62 : sim.wx === "cold" ? 72 : 85);
+    if (locations.far) gl.uniform1f(locations.far, sim.wx === "rain" ? 185 : sim.wx === "cold" ? 195 : 210);
     gl.enableVertexAttribArray(locations.pos); gl.enableVertexAttribArray(locations.col);
     gl.bindBuffer(gl.ARRAY_BUFFER, staticBuf);
     gl.vertexAttribPointer(locations.pos, 3, gl.FLOAT, false, 24, 0);
@@ -1730,12 +2058,14 @@ var Pitch3D = (function () {
       aiAcc = 0;
     }
     moveActors(sdt);
+    updateOfficials(sdt);
     for (var vs = 0; vs < 2; vs++) for (var vi = 0; vi < 11; vi++) {
       var va = actorAt(vs, vi);
       if (va && va.visualAnim) { va.visualAnim.t += sdt; if (va.visualAnim.t >= va.visualAnim.dur) va.visualAnim = null; }
     }
     updateAnimations(sdt);
     updateBall(sdt);
+    tryPendingPass();
     if (sim.netT > 0) sim.netT = Math.max(0, sim.netT - sdt * 1.5);
     histAcc += sdt;
     if (histAcc >= 0.1) { histAcc = 0; record(); }
@@ -1772,6 +2102,11 @@ var Pitch3D = (function () {
     hud.style.cssText = "position:absolute;z-index:19;left:6px;bottom:6px;padding:5px 7px;border-radius:5px;background:rgba(5,15,12,.78);color:#b9ffd6;font:600 10px ui-monospace,monospace;pointer-events:none";
     hud.textContent = "3D · midiendo rendimiento…";
     host.appendChild(hud);
+    scoreHud = document.createElement("div");
+    scoreHud.className = "lpitch3d-score";
+    scoreHud.setAttribute("aria-live", "polite");
+    scoreHud.style.cssText = "position:absolute;z-index:19;left:6px;top:6px;display:none;align-items:center;gap:5px;padding:4px 7px;border-radius:5px;background:rgba(5,15,12,.80);color:#fff;font:700 10px/1 ui-monospace,monospace;pointer-events:none";
+    host.appendChild(scoreHud);
     replayBtn = document.createElement("button"); replayBtn.type = "button";
     replayBtn.textContent = "↺"; replayBtn.setAttribute("aria-label", label("Ver la repetición"));
     replayBtn.style.cssText = "position:absolute;z-index:20;right:6px;bottom:6px;width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,.35);background:rgba(8,20,18,.82);color:#fff;font:700 15px system-ui;cursor:pointer";
@@ -1811,6 +2146,7 @@ var Pitch3D = (function () {
     gl = null; staticBuf = dynBuf = null; program = null; locations = null; staticMesh = null; dyn = null; staticCount = 0;
     if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas); canvas = null;
     if (hud && hud.parentNode) hud.parentNode.removeChild(hud); hud = null;
+    if (scoreHud && scoreHud.parentNode) scoreHud.parentNode.removeChild(scoreHud); scoreHud = null;
     if (replayBtn && replayBtn.parentNode) replayBtn.parentNode.removeChild(replayBtn); replayBtn = null;
     host = null; sim = newSim(); lastTs = 0; fps = 0;
   }
@@ -1818,14 +2154,38 @@ var Pitch3D = (function () {
   function teams(home, away, fixedNums) {
     syncTeam(0, home, fixedNums && fixedNums[0]);
     syncTeam(1, away, fixedNums && fixedNums[1]);
+    if (!sim.officials.length) initOfficials();
+    for (var oi = 0; oi < sim.officials.length; oi++) setActorVariant(sim.officials[oi]);
     if (!sim.started && listOf(0).length && listOf(1).length) {
       sim.started = true;
       setupKickoff(sim.own);
     }
   }
 
+  function scoreChip(c) {
+    var r = Math.round(clamp(c[0], 0, 1) * 255), g = Math.round(clamp(c[1], 0, 1) * 255), b = Math.round(clamp(c[2], 0, 1) * 255);
+    return '<i style="display:inline-block;width:6px;height:6px;border-radius:1px;background:rgb(' + r + ',' + g + ',' + b + ')"></i>';
+  }
+
+  function updateScoreHud() {
+    if (!scoreHud) return;
+    scoreHud.style.display = sim.scoreOn ? "flex" : "none";
+    if (!sim.scoreOn) return;
+    scoreHud.innerHTML = '<em style="font-style:normal;opacity:.68;margin-right:2px">' + sim.min + "'</em>" +
+      scoreChip(colors[0]) + "<b>" + sim.score[0] + "</b>" +
+      '<span style="opacity:.55">–</span><b>' + sim.score[1] + "</b>" + scoreChip(colors[1]);
+  }
+
   function state(o) {
     if (!o || sim.replay) return;
+    if (o.wx && o.wx !== sim.wx) sim.wx = String(o.wx);
+    var scoreChanged = false;
+    if (o.score && o.score.length >= 2) {
+      sim.score = [clamp(Math.round(+o.score[0] || 0), 0, 99), clamp(Math.round(+o.score[1] || 0), 0, 99)];
+      sim.scoreOn = true; scoreChanged = true;
+    }
+    if (o.min != null && isFinite(+o.min)) { sim.min = clamp(Math.round(+o.min), 0, 130); scoreChanged = true; }
+    if (scoreChanged) updateScoreHud();
     if (o.fem != null && sim.fem !== !!o.fem) { sim.fem = !!o.fem; refreshActorVariants(); }
     if (o.speed != null) sim.rate = clamp(+o.speed || 1, 1, 3);
     if (sim.ended) return;
@@ -1862,6 +2222,11 @@ var Pitch3D = (function () {
   function changePossession(side) {
     var b = sim.ball;
     sim.restart = null;
+    /* Un cambio de dueño invalida cualquier pase en vuelo: el balón no puede
+       seguir viajando hacia un receptor del equipo que acaba de perderlo. */
+    if (b.mode === "flight" && !sim.action) {
+      b.fl = null; b.next = null; b.mode = "dead"; b.vx = b.vy = b.vz = 0;
+    }
     var loser = nearestActor(1 - side, b.x, b.z, false);
     if (loser && (!loser.visualAnim || loser.visualAnim.t >= loser.visualAnim.dur)) loser.visualAnim = {type: "tackle", t: 0, dur: 0.75};
     var a = nearestActor(side, b.x, b.z, false);
@@ -1876,6 +2241,7 @@ var Pitch3D = (function () {
       if (a) giveTo(side, a.slot);
     }
     sim.own = side;
+    tryPendingPass();
   }
 
   function event(e) { handleEvent(e); }
@@ -1906,6 +2272,7 @@ var Pitch3D = (function () {
     sim.started = !!old.started;
     sim.fem = !!old.fem;
     refreshActorVariants();
+    initOfficials();
     sim.attack = [1, -1];
     sim.own = 0;
     for (var s = 0; s < 2; s++) {
@@ -1916,6 +2283,7 @@ var Pitch3D = (function () {
       }
     }
     sim.kickoffSide = 0;
+    if (scoreHud) scoreHud.style.display = "none";
     setupKickoff(0);
     cam.x = LEN / 2; cam.z = MIDZ; cam.lookX = LEN / 2; cam.lookZ = MIDZ;
   }
@@ -2036,7 +2404,12 @@ var Pitch3D = (function () {
     if (s) { lastState = lastState || {}; for (var k in s) if (Object.prototype.hasOwnProperty.call(s, k)) lastState[k] = s[k]; }
     var e = mounted ? Pitch3D : originalApi; return e.state.apply(e, arguments);
   };
-  Pitch.event = function () { var e = mounted ? Pitch3D : originalApi; return e.event.apply(e, arguments); };
+  Pitch.event = function (ev) {
+    /* pass/tackle son animaciones del 3D; el campo 2D no debe crear un
+       ticker vacío ni una jugada fantasma al recibirlos. */
+    if (!mounted && ev && (ev.t === "pass" || ev.t === "tackle")) return false;
+    var e = mounted ? Pitch3D : originalApi; return e.event.apply(e, arguments);
+  };
   Pitch.busy = function () { var e = mounted ? Pitch3D : originalApi; return e.busy.apply(e, arguments); };
   Pitch.reset = function () { var e = mounted ? Pitch3D : originalApi; return e.reset.apply(e, arguments); };
   Pitch.freeze = function (v) { lastFrozen = !!v; var e = mounted ? Pitch3D : originalApi; return e.freeze.apply(e, arguments); };

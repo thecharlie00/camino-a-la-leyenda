@@ -34,6 +34,7 @@ function roster(prefix) {
     'clearMsg:function(){},replay:function(){return false;},active:function(){return false;},' +
     'sound:function(){return false;},debug:function(){return null;}};</script>';
   const noGlStub = pitchStub.replace("mount:function(){}", "mount:function(){window.__2dMounted=true;}")
+    .replace("event:function(){}", "event:function(e){window.__2dEvents=(window.__2dEvents||[]);window.__2dEvents.push(e&&e.t);}")
     .replace("debug:function(){return null;}", "debug:function(){return {twoD:true};}");
   const packLine = "<script>var P3D_ASSET_PACK=" + JSON.stringify(pack) + ";</script>";
   const pageHtml = '<!doctype html><html><body style="margin:0;background:#07100e">' +
@@ -80,6 +81,12 @@ function roster(prefix) {
       why: "state/lods/statics/errors/frame/balón", info: d.assets.lods + " LODs, " + d.assets.statics +
         " static, " + d.assets.framePlayers + " jugadores, " + d.assets.frameTris + " tri, balón GLB" };
   });
+  await check("árbitro y asistentes", () => {
+    const d = Pitch3D.debug(), o = d.sim.officials;
+    return { ok: !!o && o.length === 3 && o.every(a => isFinite(a.x) && isFinite(a.z)) &&
+      o[1].z < 0 && o[2].z > 68 && d.assets.framePlayers >= 25,
+      why: "oficiales/fuera de banda", info: o ? o.length + " oficiales, " + d.assets.framePlayers + " actores" : "sin oficiales" };
+  });
   await check("malla skinned sin NaN ni desgarros", () => {
     const m = Pitch3D.debug().mesh;
     return { ok: m.verts > 0 && m.nan === 0 && m.bad === 0, why: "vértices/NaN/aristas",
@@ -119,6 +126,36 @@ function roster(prefix) {
   const afterAdvance = await p.evaluate(() => { const d = Pitch3D.debug(); return { x: d.ball.x, mode: d.ball.mode }; });
   if (afterAdvance.x > beforeX + 2 || afterAdvance.mode === "flight") notes.push("posesión y avance · " + beforeX.toFixed(1) + "→" + afterAdvance.x.toFixed(1) + " " + afterAdvance.mode);
   else fail.push("posesión y avance: el balón no avanzó");
+
+  /* Pase visual: debe salir del portador, volar con enrosque y terminar en
+     un receptor del mismo bando sin tocar el marcador. */
+  for (let i = 0; i < 30; i++) {
+    const mode = await p.evaluate(() => Pitch3D.debug().ball.mode);
+    if (mode === "held") break;
+    await p.waitForTimeout(100);
+  }
+  const passBefore = await p.evaluate(() => { const d = Pitch3D.debug(); return { idx: d.ball.idx, side: d.ball.side }; });
+  await p.evaluate((idx) => { window.__passIdx = idx; }, passBefore.idx);
+  await p.evaluate(() => Pitch3D.event({ t: "pass", side: 0, who: 8 }));
+  await p.waitForTimeout(120);
+  await check("pase visual en juego abierto", () => {
+    const d = Pitch3D.debug(), a = d.players[0][window.__passIdx];
+    return { ok: d.ball.mode === "flight" && !!d.ball.next && d.ball.next.type === "held" && d.ball.next.side === 0 &&
+      !!d.ball.fl && isFinite(d.ball.fl.curve) && !!a && !!a.visualAnim && a.visualAnim.type === "pass",
+      why: "sin vuelo/receptor/animación", info: d.ball.mode + " → " + (d.ball.next ? "held " + d.ball.next.idx : "sin next") };
+  });
+  await p.waitForTimeout(1900);
+  await check("recepción de pase", () => {
+    const d = Pitch3D.debug();
+    return { ok: d.ball.mode === "held" && d.ball.side === 0 && isFinite(d.ball.x) && isFinite(d.ball.z), why: "el pase no terminó", info: d.ball.mode + " · jugador " + d.ball.idx };
+  });
+  await p.evaluate(() => Pitch3D.event({ t: "tackle", side: 0, who: 7 }));
+  await p.waitForTimeout(90);
+  await check("tackle visual", () => {
+    const d = Pitch3D.debug(), a = d.players[0][7];
+    return { ok: !!a && !!a.visualAnim && a.visualAnim.type === "tackle", why: "sin animación de robo" };
+  });
+
   await p.waitForTimeout(150);
   await check("locomoción con inclinación estable", () => {
     const d = Pitch3D.debug(), all = [].concat(d.players[0], d.players[1]).filter(Boolean);
@@ -209,8 +246,9 @@ function roster(prefix) {
   await p.evaluate(() => Pitch3D.event({ t: "half" }));
   await p.waitForTimeout(150);
   await check("descanso y cambio de lado", () => {
-    const d = Pitch3D.debug();
-    return { ok: d.sim.half === 2 && d.sim.attack[0] === -1 && d.sim.attack[1] === 1, why: "half/attack", info: JSON.stringify(d.sim.attack) };
+    const d = Pitch3D.debug(), o = d.sim.officials;
+    return { ok: d.sim.half === 2 && d.sim.attack[0] === -1 && d.sim.attack[1] === 1 &&
+      !!o && o[1].z > 60 && o[2].z < 8, why: "half/attack/asistentes", info: JSON.stringify(d.sim.attack) + " · bandas " + (o ? o[1].z.toFixed(1) + "/" + o[2].z.toFixed(1) : "?") };
   });
   await p.evaluate(() => Pitch3D.event({ t: "red", side: 1, who: 4 }));
   await p.waitForTimeout(200);
@@ -235,6 +273,20 @@ function roster(prefix) {
   await p.evaluate(() => Pitch3D.reset());
   await p.waitForTimeout(300);
   await check("reset", () => { const d = Pitch3D.debug(); return { ok: d.sim.half === 1 && d.sim.started && isFinite(d.ball.x) && isFinite(d.ball.z), why: "reset incompleto", info: d.ball.mode }; });
+  await p.evaluate(() => Pitch3D.state({ score: [2, 1], min: 67 }));
+  await p.waitForTimeout(80);
+  await check("marcador de retransmisión", () => {
+    const e = document.querySelector(".lpitch3d-score");
+    return { ok: !!e && e.style.display !== "none" && /67/.test(e.textContent) && /2/.test(e.textContent) &&
+      /1/.test(e.textContent), why: "marcador oculto o incompleto", info: e ? e.textContent : "sin marcador" };
+  });
+  await p.evaluate(() => Pitch3D.state({ wx: "rain" }));
+  await p.waitForTimeout(160);
+  await check("clima conectado al 3D", () => {
+    const d = Pitch3D.debug();
+    return { ok: d.sim.wx === "rain" && d.glError === 0 && d.mesh.nan === 0, why: "wx/gl/malla", info: d.sim.wx + " · " + d.mesh.verts + " vértices" };
+  });
+  await p.evaluate(() => Pitch3D.state({ wx: "sun" }));
   await p.evaluate(() => Pitch3D.event({ t: "end" }));
   await p.waitForTimeout(250);
   await p.evaluate(() => Pitch3D.state({ own: 1, bx: 20 }));
@@ -286,14 +338,22 @@ function roster(prefix) {
     Pitch.state({ own: 0, bx: 50, speed: 1 });
   }, { home: roster("h"), away: roster("a") });
   await png.waitForTimeout(300);
+  await png.evaluate(() => {
+    Pitch.event({ t: "pass", side: 0, who: 1 });
+    Pitch.event({ t: "tackle", side: 0, who: 2 });
+    Pitch.event({ t: "goal", side: 0 });
+  });
   const ng = await png.evaluate(() => ({
     twoD: !!window.__2dMounted,
     canvas3d: !!document.querySelector("canvas.lpitch3d"),
     toggle: !!document.querySelector(".p3dtoggle"),
+    events: window.__2dEvents || [],
     debug: Pitch.debug()
   }));
-  if (ng.twoD && !ng.canvas3d && ng.toggle && ng.debug && ng.debug.twoD) notes.push("fallback sin WebGL · campo 2D");
-  else fail.push("fallback sin WebGL: " + JSON.stringify(ng));
+  if (ng.twoD && !ng.canvas3d && ng.toggle && ng.debug && ng.debug.twoD &&
+    ng.events.indexOf("pass") < 0 && ng.events.indexOf("tackle") < 0 && ng.events.indexOf("goal") >= 0) {
+    notes.push("fallback sin WebGL · campo 2D sin eventos fantasma");
+  } else fail.push("fallback sin WebGL: " + JSON.stringify(ng));
   await png.close();
 
   console.log(notes.join("\n"));

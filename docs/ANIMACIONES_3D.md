@@ -3,6 +3,8 @@
 Documento de diseño técnico para las cuatro áreas críticas de animación del motor visual 3D.  
 El partido sigue siendo autoritativo en `match41.js`; este sistema es solo representación visual.
 
+> **Implementación actual (prototipo):** los clips GLB existentes (`idle`, `run`, `kick`, `dive`, `celebrate`) cubren la base y las acciones principales. Pases, robos, tiros y paradas se resuelven con animaciones procedurales que reutilizan esos clips, sin depender de nuevos GLB. El cross-fade implementado es de **0,18 s**. Las tablas siguientes describen el catálogo objetivo para una fase posterior con captura de movimiento y clips dedicados.
+
 ## 1. Arquitectura común
 
 ### Capas
@@ -171,6 +173,9 @@ El partido sigue siendo autoritativo en `match41.js`; este sistema es solo repre
 - Los eventos de partido (`goal`, `save`, `miss`, etc.) generan representación visual.
 - La sincronización se hace con `OnBallContact`, alineado con `launchBall` y `launchGoalKickBall`.
 - El IK se aplica sobre la malla ya deformada, sin alterar el estado de `match41.js`.
+- **Implementado:** `pass` y `tackle` llegan desde `engine-extra.js` como eventos visuales; el adaptador los bloquea en 2D. `startVisualPass` elige receptor, calcula tipo/arco/duración/enrosque y usa `pendingPass` si la posesión aún no coincide. `changePossession` cancela vuelos y ejecuta el pase pendiente.
+- **Implementado:** cross-fade de 0,18 s entre clips en `evalModel`; el clip anterior se evalúa en un segundo buffer y se interpola con smoothstep.
+- **Implementado:** paradas con `dive` y robos reutilizando `dive`; pases y tiros con `kick`. La pose procedural de reserva mantiene las mismas acciones sin GLB.
 
 ---
 
@@ -180,6 +185,6 @@ El partido sigue siendo autoritativo en `match41.js`; este sistema es solo repre
 2. Usar LOD de animación: lejos solo Base + Action simplificada; cerca todas las capas.
 3. Reutilizar eventos y objetos de animación.
 4. Compartir clips entre variantes.
-5. Limitar transiciones a `0.12 s` como máximo.
+5. Limitar transiciones a `0.18 s` como máximo (valor actual del prototipo).
 6. Precomputar root motion en los clips.
 7. No evaluar huesos no usados en la acción actual.

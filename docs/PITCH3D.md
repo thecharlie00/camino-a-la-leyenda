@@ -17,11 +17,12 @@ El partido 3D es una representación visual del directo. **`match41.js` sigue si
 
 1. **Estado y simulación visual**: posesión, balón, jugadores, saques, descanso, final y cola de acciones.
 2. **IA y movimiento**: posiciones base por formación, pressing, ayudas, separación, porteros y velocidades.
-3. **Animación y skinning**: lectura de clips GLB, evaluación de la jerarquía de 22 huesos y deformación en CPU con hasta cuatro influencias por vértice.
-4. **Balón y jugadas**: estados `dead`, `held`, `flight` y `loose`; pases, tiros, paradas, postes y saques. El saque de puerta usa una secuencia de presentación con impacto sincronizado.
-5. **Cámara**: seguimiento suave del balón, acercamiento en jugadas y encuadre de celebración.
-6. **WebGL 1**: shaders propios, un VBO estático para el campo y un VBO dinámico reutilizado para jugadores y balón.
-7. **Adaptador `Pitch`**: conserva la API del campo 2D y permite alternar 2D/3D sin reiniciar el directo.
+3. **Animación y skinning**: lectura de clips GLB, evaluación de la jerarquía de 22 huesos, deformación en CPU con hasta cuatro influencias por vértice y cross-fade de 0,18 s entre clips.
+4. **Balón y jugadas**: estados `dead`, `held`, `flight` y `loose`; pases visuales en juego abierto, tiros con enrosque, paradas, postes y saques. El saque de puerta usa una secuencia de presentación con impacto sincronizado.
+5. **Ambientación**: graderío procedural, cubierta, túnel, focos, árbitro, asistentes, clima y marcador de retransmisión.
+6. **Cámara**: seguimiento suave del balón, acercamiento en jugadas, cortes de tiro/gol y encuadre de celebración.
+7. **WebGL 1**: shaders propios, un VBO estático para el campo y un VBO dinámico reutilizado para jugadores y balón.
+8. **Adaptador `Pitch`**: conserva la API del campo 2D y permite alternar 2D/3D sin reiniciar el directo. Los eventos visuales `pass`/`tackle` nunca llegan al campo 2D.
 
 ### Assets 3D
 
@@ -57,7 +58,7 @@ match41.js ──> ui.js (livePitchFeed) ──> Pitch.state / Pitch.event
                               └──────── canvas del directo ─┘
 ```
 
-`ui.js` envía al 3D la posesión, la posición narrativa del balón (`bx`), la velocidad, la mentalidad y las tácticas del equipo local. Los eventos (`goal`, `save`, `post`, `miss`, `half`, `end`, tarjetas, etc.) solo generan la representación visual; el marcador y las estadísticas los actualiza el motor del partido.
+`ui.js` envía al 3D la posesión, la posición narrativa del balón (`bx`), la velocidad, la mentalidad, las tácticas del equipo local, el clima (`wx`), el marcador (`score`) y el minuto (`min`). Los eventos (`goal`, `save`, `post`, `miss`, `half`, `end`, tarjetas, `pass`, `tackle`, etc.) solo generan la representación visual; el marcador y las estadísticas los actualiza el motor del partido. `pass`/`tackle` se descartan en el adaptador cuando no hay 3D montado.
 
 ### Autoridad y sincronización
 
@@ -99,6 +100,22 @@ Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro 
 - Al quedarse sin carrera, el jugador gira la mirada y el cuerpo hacia el balón; la pose procedural incorpora una oscilación de espera. Durante el saque de puerta manda `faceLock` y la coreografía no se altera.
 - La inclinación se anula al caer en una parada, al terminar el partido, al volver a la posición base y durante la repetición visual.
 
+### Pases y robos visuales
+
+- `engine-extra.js` emite `pass` y `tackle` como eventos **solo visuales** después de calcular el resultado del minuto. No modifican `conv`, `bigR`, `xgPerGoal`, el marcador ni las estadísticas.
+- El evento `pass` elige un receptor coherente entre los compañeros (prefiere al jugador sugerido por el motor si está cerca), limita la ventaja a unos 2 m y hace que el receptor ataque el punto de recepción durante el vuelo.
+- El 3D distingue pase raso, largo, bombeado y centro; calcula arco, duración y enrosque, y mantiene el balón continuo hasta el receptor. Si la posesión cambia antes de la llegada, el vuelo se cancela y el pase pendiente se ejecuta cuando el nuevo bando controla el balón.
+- El evento `tackle` anima al jugador del bando que recupera el balón. En el campo 2D se descarta: no crea filas vacías en el comentario ni jugadas fantasma.
+- Los clips GLB existentes (`kick` y `dive`) se reutilizan con animaciones procedurales para pase, robo, tiro y parada; el cross-fade de 0,18 s suaviza idle→carrera→acción.
+
+### Ambientación y retransmisión
+
+- **Grada**: quads verticales baratos para cuerpo y cabeza, con colores de afición y detalles del club local; cubierta, vigas, focos y boca de túnel completan el estadio sin texturas ni instancing.
+- **Oficiales**: árbitro y dos asistentes son actores visuales fuera de `sim.players`, por lo que el contrato de 22 jugadores no cambia. El árbitro acompaña la jugada y los asistentes recorren su banda; al descanso se espejan con el resto del campo.
+- **Clima**: `ui.js` transmite `wx` desde el motor. El 3D tiñe cielo y niebla, ajusta la distancia de niebla y dibuja lluvia o nieve procedimental. Con `prefers-reduced-motion` o calidad baja se reduce o se omite.
+- **Marcador**: `ui.js` transmite `score` y `min`; el 3D muestra un marcador compacto sobre el canvas con los colores de cada equipo. Sigue siendo un reflejo del motor, nunca una fuente de verdad.
+- **Cámara**: los cortes de tiro, gol y repetición son visuales; el estado del partido no se congela ni cambia por ellos.
+
 ## Renderizado y rendimiento
 
 - WebGL 1, sin frameworks ni dependencias de runtime.
@@ -117,7 +134,7 @@ Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro 
 
 ### Prueba aislada del 3D
 
-`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, saque inicial, posesión, inclinación de carrera acotada y finita, tiro, parada, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso, tarjeta roja, replay, reset, final y destroy. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D.
+`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción, tackle visual, árbitro y asistentes, tiro, parada, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso con espejado de asistentes, tarjeta roja, replay, reset, marcador, clima, final y destroy. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son 34 comprobaciones.
 
 Requiere Node y Playwright (o `playwright-core`) con Chrome/Chromium. Si no está instalado:
 
@@ -150,7 +167,7 @@ En CI se instala Playwright y Chromium y se ejecuta el mismo archivo. El test fa
 - Las acciones de tiro, parada y gol son representaciones aproximadas basadas en eventos; no reproducen la física exacta de cada jugada.
 - La iluminación sigue siendo plana por triángulo, pero el especular ya usa rugosidad y metalicidad de los materiales GLB (modelo GGX/Fresnel simplificado). No hay texturas PBR, mapas de oclusión ambiental ni sombras proyectadas.
 - La repetición es visual (historial de posiciones del render), no una repetición sincronizada de los eventos de `match41`.
-- No hay nombres, dorsales, celebraciones personalizadas ni multitud animada.
+- La grada es estática (quads de cuerpo y cabeza); no hay multitud animada, nombres, dorsales ni celebraciones personalizadas.
 - Los props de estadio (portería, banderín, valla, banquillo y barrera) se integran en el campo estático cuando sus GLB están disponibles; si faltan, se conserva la geometría procedural anterior.
 - El balón GLB se dibuja a escala 2 respecto a su tamaño real para mantener la legibilidad del balón anterior; la física del partido no cambia.
 - El rendimiento en Android WebView, dispositivos de gama baja y navegadores sin WebGL sigue pendiente de validación real; el HUD de FPS existe para medirlo.

@@ -2133,7 +2133,7 @@
     });
     var mt = typeof liveTac === "function" ? liveTac(L) : null, tacs = [null, null];
     if (mt) tacs[me] = {line: mt.line, width: mt.width, pass: mt.pass, tempo: mt.tempo, ment: L.ment};
-    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1, tac: tacs, ment: L.ment, fem: S.g === "f"});
+    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1, tac: tacs, ment: L.ment, fem: S.g === "f", wx: L.wx, score: [L.gu, L.gt], min: L.min});
   }
   /* colores de los dos clubes, que se distingan entre sí */
   function liveCol(a, b) {

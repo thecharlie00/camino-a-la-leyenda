@@ -75,12 +75,17 @@ fs.mkdirSync(OUT, { recursive: true });
       S.live = null;
       for (let i = 0; i < 300; i++) {
         S.cur.pm[fi] = JSON.parse(keep); liveStart(fi); liveSimRest(); const L = S.live;
-        L.ev.forEach(e => { if (e.d == null) return; o.sh2 = (o.sh2 || 0) + 1; if ((e.k === "long" && e.d < 18) || ((e.k === "oneone" || e.k === "rebound" || e.k === "head") && e.d > 13)) o.bad = (o.bad || 0) + 1; });
+        L.ev.forEach(e => {
+          if (e.t === "pass" || e.t === "tackle") o.vis = (o.vis || 0) + 1;
+          if (e.d == null) return;
+          o.sh2 = (o.sh2 || 0) + 1;
+          if ((e.k === "long" && e.d < 18) || ((e.k === "oneone" || e.k === "rebound" || e.k === "head") && e.d > 13)) o.bad = (o.bad || 0) + 1;
+        });
         o.g += L.gu + L.gt; o.sh += L.shots[0] + L.shots[1]; o.xg += L.xg[0] + L.xg[1]; o.big += L.big[0] + L.big[1]; o.n++;
         if (!o.st) o.st = L.st; S.live = null;
       }
       S.cur.pm[fi] = JSON.parse(keep);
-      return { conv: o.g / o.sh, bigR: o.big / o.sh, xgPerGoal: o.xg / o.g, st: o.st, textBad: (o.bad || 0) + "/" + (o.sh2 || 0) };
+      return { conv: o.g / o.sh, bigR: o.big / o.sh, xgPerGoal: o.xg / o.g, st: o.st, textBad: (o.bad || 0) + "/" + (o.sh2 || 0), vis: o.vis || 0 };
     });
     notes.push("calibración: " + JSON.stringify(cal));
     if (cal.conv < 0.16 || cal.conv > 0.26) fail.push("conversión fuera de rango: " + cal.conv);
@@ -88,6 +93,7 @@ fs.mkdirSync(OUT, { recursive: true });
     if (cal.xgPerGoal < 0.85 || cal.xgPerGoal > 1.15) fail.push("xG descalibrado: " + cal.xgPerGoal);
     if (cal.st !== "FULL_TIME") fail.push("no termina en FULL_TIME");
     if (!/^0\//.test(cal.textBad)) fail.push("textos de tiro incoherentes: " + cal.textBad);
+    if (cal.vis) fail.push("eventos visuales en el feed: " + cal.vis);
   }
   console.log(notes.join("\n"));
   console.log(errs.length || fail.length ? "ERRORES: " + errs.concat(fail).join(" | ") : "SIN ERRORES");
