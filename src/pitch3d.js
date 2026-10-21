@@ -17,7 +17,10 @@ var Pitch3D = (function () {
   /* Secuencias de vestuario: tiempos en segundos de partido, comprimidos por
    * la velocidad del directo. El túnel está en la grada larga (z negativa). */
   var TUNNEL_X = LEN / 2, TUNNEL_Z = -5.1;
-  var INTRO_WALK = 2.8, INTRO_GREET = 1.7, INTRO_LINEUP = 1.5;
+  /* La entrada real se hace en fila: el capitán abre la comitiva y el resto
+   * espera detrás dentro del túnel. La fila avanza hasta el borde del área
+   * central y solo se abre a las posiciones después del sorteo. */
+  var INTRO_WALK = 4.2, INTRO_GREET = 2.6, INTRO_LINEUP = 1.5;
   var COIN_FLIP = 1.15, COIN_RESULT = 1.25, COIN_WAIT = 9, RIVAL_WAIT = 1.25;
   var HALF_OFF = 2.7, HALF_SWITCH = 0.85, HALF_ENTER = 2.7, HALF_GREET = 1.35;
   var END_WHISTLE = 1.15, END_LINE = 3.4, END_GREET = 1.2, END_WALKOFF = 2.8;
@@ -77,7 +80,7 @@ var Pitch3D = (function () {
       ball: newBall(), action: null, queue: [], restart: null, pendingOwn: null,
       history: [], replay: null, netT: 0, shake: 0, banner: "", lastGoalKick: null,
       pendingPass: null, officials: [], wx: "sun", score: [0, 0], min: 0, scoreOn: false,
-      cinema: null, ballHidden: false
+      lastPass: null, cinema: null, ballHidden: false
     };
   }
 
@@ -588,10 +591,32 @@ var Pitch3D = (function () {
     return actorAt(side, 9) || actorAt(side, 5) || listOf(side)[0] || null;
   }
 
+  /* Orden de la comitiva: el capitán (slot 9) sale primero y el resto espera
+   * detrás en una única fila. Dos filas, una por equipo, caben en la boca del
+   * túnel sin solaparse. */
+  function tunnelRank(side, slot) {
+    var cap = captainOf(side), cs = cap ? cap.slot : 9;
+    if (slot === cs) return 0;
+    return 1 + (slot < cs ? slot : slot - 1);
+  }
+
   function tunnelSpot(side, slot) {
-    var row = Math.floor(slot / 2), col = slot % 2;
-    var lane = (side ? 1 : -1) * (0.72 + col * 0.72);
-    return {x: TUNNEL_X + lane, z: TUNNEL_Z + row * 0.42};
+    var rank = tunnelRank(side, slot);
+    return {x: TUNNEL_X + (side ? 1.05 : -1.05), z: TUNNEL_Z + 0.35 - rank * 0.58};
+  }
+
+  /* Fila de salida: cada equipo avanza en columna por su carril y se detiene
+   * escalonado, conservando la distancia de la comitiva. */
+  function walkoutTargets() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+      var a = actorAt(s, i); if (!a) continue;
+      var rank = tunnelRank(s, i);
+      /* El capitán (rank 0) queda delante, en el extremo de la fila más
+       * cercano al círculo central; la velocidad es común para no romper la
+       * formación. */
+      setTarget(a, TUNNEL_X + (s ? 1.05 : -1.05), 20 - rank * 0.72,
+        7.1, false, 0);
+    }
   }
 
   function faceTo(a, x, z) {
@@ -611,8 +636,10 @@ var Pitch3D = (function () {
     if (!a) return;
     var p = tunnelSpot(side, slot);
     a.x = a.tx = p.x; a.z = a.tz = p.z;
-    a.vx = a.vz = 0; a.faceLock = false; a.anim = null; a.visualAnim = null;
-    a.hidden = !!hide;
+    a.vx = a.vz = 0; a.maxSp = 0; a.faceLock = false; a.anim = null; a.visualAnim = null;
+    a.passTarget = null;
+    /* La cola queda dentro del túnel y se va destapando al cruzar la boca. */
+    a.hidden = !!hide || p.z < -4.9;
     a.runPhase = Math.random() * TAU;
   }
 
@@ -638,7 +665,7 @@ var Pitch3D = (function () {
       var o = sim.officials[i];
       o.x = o.tx = LEN / 2;
       o.z = o.tz = o.official === "ref" ? MIDZ : (o.bandZ == null ? (o.official === "ar1" ? -1.1 : WID + 1.1) : o.bandZ);
-      o.vx = o.vz = 0; o.hidden = !!hide; o.anim = null; o.faceLock = false;
+      o.vx = o.vz = 0; o.maxSp = 0; o.hidden = !!hide; o.anim = null; o.faceLock = false;
       o.facing = o.official === "ar1" ? -PI / 2 : o.official === "ar2" ? PI / 2 : PI;
     }
   }
@@ -648,7 +675,14 @@ var Pitch3D = (function () {
       var o = sim.officials[i];
       o.x = o.tx = TUNNEL_X + (i - 1) * 0.8;
       o.z = o.tz = TUNNEL_Z + 0.15 * i;
-      o.vx = o.vz = 0; o.hidden = !!hide; o.anim = null; o.faceLock = false;
+      o.vx = o.vz = 0; o.maxSp = 0; o.hidden = !!hide; o.anim = null; o.faceLock = false;
+    }
+  }
+
+  function clearOfficialGestures() {
+    for (var i = 0; i < sim.officials.length; i++) {
+      var o = sim.officials[i];
+      o.anim = null; o.visualAnim = null; o.faceLock = false;
     }
   }
 
@@ -665,12 +699,14 @@ var Pitch3D = (function () {
     c.stage = name; c.stageT = 0; c.greet = false; c.lineGreeted = false;
     if (c.type === "intro") {
       if (name === "walkout") {
-        baseTargets(7.1, true); officialTargets(6.6);
+        walkoutTargets(); officialTargets(6.6);
       } else if (name === "greet") {
         baseTargets(5.6, false); officialTargets(5.6);
         var c0 = captainOf(0), c1 = captainOf(1);
-        if (c0) { setTarget(c0, LEN / 2 - 1.1, MIDZ, 4.2, true, PI / 2); c0.anim = {type: "greet", t: 0, dur: 1.45, hand: true}; }
-        if (c1) { setTarget(c1, LEN / 2 + 1.1, MIDZ, 4.2, true, -PI / 2); c1.anim = {type: "greet", t: 0, dur: 1.45, hand: true}; }
+        /* Los capitanes salen al frente de la fila y aprovechan el saludo para
+         * llegar al círculo central antes del sorteo. */
+        if (c0) { setTarget(c0, LEN / 2 - 1.1, MIDZ, 7.2, true, PI / 2); c0.anim = {type: "greet", t: 0, dur: 1.45, hand: true}; }
+        if (c1) { setTarget(c1, LEN / 2 + 1.1, MIDZ, 7.2, true, -PI / 2); c1.anim = {type: "greet", t: 0, dur: 1.45, hand: true}; }
         for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
           var a = actorAt(s, i);
           if (!a || a === c0 || a === c1) continue;
@@ -681,9 +717,9 @@ var Pitch3D = (function () {
       } else if (name === "coinCall") {
         c.coin.show = true; c.coin.waitT = 0; c.coin.angle = 0;
         var ca = captainOf(0), cb = captainOf(1), rf = sim.officials[0];
-        if (ca) setTarget(ca, LEN / 2 - 1.0, MIDZ, 0, true, PI / 2);
-        if (cb) setTarget(cb, LEN / 2 + 1.0, MIDZ, 0, true, -PI / 2);
-        if (rf) setTarget(rf, LEN / 2, MIDZ + 1.3, 0, true, PI);
+        if (ca) setTarget(ca, LEN / 2 - 1.0, MIDZ, 3.2, true, PI / 2);
+        if (cb) setTarget(cb, LEN / 2 + 1.0, MIDZ, 3.2, true, -PI / 2);
+        if (rf) setTarget(rf, LEN / 2, MIDZ + 1.3, 3.0, true, PI);
         c.coin.face = null; c.coin.call = null; c.coin.winner = null; c.coin.choice = null;
       } else if (name === "coinFlip" || name === "coinResult" || name === "choose" || name === "rivalChoice" || name === "choiceResult") {
         c.coin.show = true;
@@ -706,7 +742,11 @@ var Pitch3D = (function () {
       } else if (name === "switch") {
         /* Los jugadores quedan dentro del túnel mientras se cambia de lado. */
         for (var ss = 0; ss < 2; ss++) for (var si = 0; si < 11; si++) {
-          var sa = actorAt(ss, si); if (sa) { sa.hidden = true; sa.anim = null; sa.visualAnim = null; }
+          var sa = actorAt(ss, si);
+          if (sa) {
+            sa.hidden = true; sa.anim = null; sa.visualAnim = null;
+            sa.tx = sa.x; sa.tz = sa.z; sa.maxSp = 0; sa.vx = sa.vz = 0;
+          }
         }
         placeOfficialsAtBands(true);
       } else if (name === "enter") {
@@ -771,7 +811,7 @@ var Pitch3D = (function () {
     beginCinema("half");
     sim.half = 2; sim.ended = false; sim.ballHidden = true;
     sim.action = null; sim.queue = []; sim.restart = null; sim.pendingPass = null; sim.pendingOwn = null;
-    var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.vx = b.vy = b.vz = 0;
+    var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null; b.vx = b.vy = b.vz = 0;
     cam.cutT = 0; cam.cutMode = "";
     setCinemaStage("off");
   }
@@ -780,7 +820,7 @@ var Pitch3D = (function () {
     beginCinema("end");
     sim.ended = true; sim.ballHidden = true;
     sim.action = null; sim.queue = []; sim.restart = null; sim.pendingPass = null; sim.pendingOwn = null;
-    var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.vx = b.vy = b.vz = 0;
+    var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null; b.vx = b.vy = b.vz = 0;
     cam.cutT = 0; cam.cutMode = "";
     setCinemaStage("whistle");
   }
@@ -796,7 +836,7 @@ var Pitch3D = (function () {
       placeAtTunnel(a, s, i, true);
     }
     placeOfficialsAtBands(true);
-    var b = sim.ball; b.x = LEN / 2; b.z = MIDZ; b.y = 0.22; b.mode = "dead"; b.fl = null; b.next = null;
+    var b = sim.ball; b.x = LEN / 2; b.z = MIDZ; b.y = 0.22; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null;
     b.vx = b.vy = b.vz = 0; b.side = 0; b.idx = -1; b.lastTouch = 0;
     cam.x = LEN / 2; cam.z = MIDZ;
   }
@@ -821,6 +861,7 @@ var Pitch3D = (function () {
       applyCoinChoice();
       var side = sim.kickoffSide === 1 ? 1 : 0;
       sim.cinema = null; hideCoinOverlay(); sim.ballHidden = false;
+      clearOfficialGestures();
       for (var oi = 0; oi < sim.officials.length; oi++) sim.officials[oi].hidden = false;
       officialTargets(6.8);
       setupKickoff(side);
@@ -829,6 +870,7 @@ var Pitch3D = (function () {
       var next = 1 - sim.kickoffSide;
       sim.cinema = null; hideCoinOverlay(); sim.ballHidden = false;
       sim.koSet = true;
+      clearOfficialGestures();
       for (var oj = 0; oj < sim.officials.length; oj++) sim.officials[oj].hidden = false;
       officialTargets(6.8);
       setupKickoff(next);
@@ -837,6 +879,7 @@ var Pitch3D = (function () {
       for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
         var a = actorAt(s, i); if (a) { a.hidden = true; a.anim = null; a.visualAnim = null; }
       }
+      clearOfficialGestures();
       for (var oi = 0; oi < sim.officials.length; oi++) sim.officials[oi].hidden = true;
     }
     frozen = fw;
@@ -940,8 +983,10 @@ var Pitch3D = (function () {
         a.vx += dvx; a.vz += dvz;
         a.x += a.vx * dt; a.z += a.vz * dt;
         if (a.x < -2) a.x = -2; else if (a.x > LEN + 2) a.x = LEN + 2;
-        if (a.z < -6.6) a.z = -6.6; else if (a.z > WID + 2) a.z = WID + 2;
+        /* La fila puede tener varios metros de cola dentro del túnel. */
+        if (a.z < -12.5) a.z = -12.5; else if (a.z > WID + 2) a.z = WID + 2;
         if (a.z < -4.9) a.hidden = true;
+        else if (a.maxSp > 0.01) a.hidden = false;
         var sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
         if (sp > 0.35 && !a.faceLock) a.facing = angleTo(a.facing, Math.atan2(a.vx, a.vz), Math.min(1, dt * 8));
         a.runPhase += sp * dt * 2.3;
@@ -1228,18 +1273,25 @@ var Pitch3D = (function () {
     }
   }
 
+  function stepActorAnimation(a, dt, card) {
+    if (!a || !a.anim) return;
+    if ((a.gone || a.sentOff) && !card) return;
+    a.anim.t += dt;
+    if (a.anim.t >= a.anim.dur) {
+      if (a.anim.type === "celebrate" && a.anim.tx != null) { a.x = a.anim.tx; a.z = a.anim.tz; }
+      a.anim = null;
+    }
+  }
+
   function updateAnimations(dt) {
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = sim.players[s] && sim.players[s][i];
-      if (!a || !a.anim) continue;
       var card = sim.action && sim.action.type === "card" && sim.action.player === a;
-      if ((a.gone || a.sentOff) && !card) continue;
-      a.anim.t += dt;
-      if (a.anim.t >= a.anim.dur) {
-        if (a.anim.type === "celebrate" && a.anim.tx != null) { a.x = a.anim.tx; a.z = a.anim.tz; }
-        a.anim = null;
-      }
+      stepActorAnimation(a, dt, card);
     }
+    /* Los oficiales también tienen gestos (saludo, pito). Sin este recorrido
+     * el clip se quedaba congelado al terminar la secuencia. */
+    for (var oi = 0; oi < sim.officials.length; oi++) stepActorAnimation(sim.officials[oi], dt, false);
   }
 
   /* ------------------------------------------------------------------ balón */
@@ -1248,21 +1300,23 @@ var Pitch3D = (function () {
     var b = sim.ball;
     b.fl = {x0: b.x, y0: b.y, z0: b.z, x1: tx, y1: ty, z1: tz, t: 0, dur: Math.max(0.08, dur),
       arc: arc || 0, curve: curve || 0};
-    b.mode = "flight"; b.next = next || null; b.timer = dur; b.vy = 0;
+    b.mode = "flight"; b.next = next || null; b.timer = dur; b.vy = 0; b.claim = null;
     b.vx = (tx - b.x) / Math.max(0.08, dur); b.vz = (tz - b.z) / Math.max(0.08, dur);
     b.lastTouch = sim.own === 1 ? 1 : 0;
   }
 
   function releaseBall(vx, vz, vy) {
     var b = sim.ball;
-    b.mode = "loose"; b.fl = null; b.next = null; b.vx = vx || 0; b.vz = vz || 0; b.vy = vy || 0;
+    b.mode = "loose"; b.fl = null; b.next = null; b.claim = null;
+    b.vx = vx || 0; b.vz = vz || 0; b.vy = vy || 0;
   }
 
   function giveTo(side, idx) {
     var a = actorAt(side, idx);
     if (!a) return false;
     var b = sim.ball;
-    b.mode = "held"; b.side = side; b.idx = idx; b.fl = null; b.next = null; b.vx = 0; b.vy = 0; b.vz = 0;
+    b.mode = "held"; b.side = side; b.idx = idx; b.fl = null; b.next = null; b.claim = null;
+    b.vx = 0; b.vy = 0; b.vz = 0;
     b.lastTouch = side; sim.own = side;
     return true;
   }
@@ -1302,7 +1356,25 @@ var Pitch3D = (function () {
         b.mode = "loose"; b.fl = null; b.timer = 0;
         b.vx = (f.x1 - f.x0) / f.dur; b.vz = (f.z1 - f.z0) / f.dur;
         var nx = b.next; b.next = null;
-        if (nx && nx.type === "held") giveTo(nx.side, nx.idx);
+        if (nx && nx.type === "held") {
+          var r = actorAt(nx.side, nx.idx);
+          /* Solo se entrega en el pie si el receptor está realmente ahí. Si se
+           * ha quedado atrás, el balón sigue suelto y él lo persigue: nunca se
+           * teletransporta al jugador. */
+          if (r && sim.lastPass && sim.lastPass.pending && sim.lastPass.to === nx.idx) {
+            sim.lastPass.atEnd = +dist(b.x, b.z, r.x, r.z).toFixed(2);
+            sim.lastPass.pending = false;
+          }
+          if (r && dist(b.x, b.z, r.x, r.z) <= 1.75) giveTo(nx.side, nx.idx);
+          else if (r) {
+            b.claim = {side: nx.side, idx: nx.idx, until: sim.time + 1.1};
+            var cdx = r.x - b.x, cdz = r.z - b.z, cd = Math.sqrt(cdx * cdx + cdz * cdz) || 1;
+            b.vx = cdx / cd * 4.2; b.vz = cdz / cd * 4.2;
+            r.passTarget = {x: b.x, z: b.z, until: b.claim.until};
+            r.maxSp = 7.8 * r.pace;
+            b.lastTouch = nx.side;
+          }
+        }
       }
       return;
     }
@@ -1311,6 +1383,11 @@ var Pitch3D = (function () {
       b.x += b.vx * dt; b.z += b.vz * dt; b.y += b.vy * dt; b.vy -= GRAV * dt;
       if (b.y < 0.22) { b.y = 0.22; if (b.vy < 0) b.vy = -b.vy * 0.32; if (Math.abs(b.vy) < 0.6) b.vy = 0; }
       b.vx *= Math.pow(0.55, dt); b.vz *= Math.pow(0.55, dt);
+      if (b.claim) {
+        var ca = actorAt(b.claim.side, b.claim.idx);
+        if (ca && dist(b.x, b.z, ca.x, ca.z) <= 1.25) { giveTo(b.claim.side, b.claim.idx); return; }
+        if (!ca || sim.time > b.claim.until) b.claim = null;
+      }
       if (b.x < -1 || b.x > LEN + 1 || b.z < -1 || b.z > WID + 1) outOfPlay();
     }
   }
@@ -1321,7 +1398,7 @@ var Pitch3D = (function () {
     sim.pendingPass = null;
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = actorAt(s, i); if (!a) continue;
-      a.x = a.tx = a.baseX; a.z = a.tz = a.baseZ; a.vx = a.vz = 0; a.anim = null;
+      a.x = a.tx = a.baseX; a.z = a.tz = a.baseZ; a.vx = a.vz = 0; a.anim = null; a.visualAnim = null;
       a.hidden = false; a.passTarget = null; a.faceLock = false; a.lean = 0; a.bank = 0;
       a.facing = sim.attack[s] > 0 ? PI / 2 : -PI / 2;
     }
@@ -1331,7 +1408,7 @@ var Pitch3D = (function () {
     sim.action = null; sim.queue = []; sim.ended = false; sim.kickoffSide = side;
     placeAtBase();
     var b = sim.ball;
-    b.x = LEN / 2; b.z = MIDZ; b.y = 0.22; b.vx = b.vy = b.vz = 0; b.fl = null; b.next = null; b.mode = "dead";
+    b.x = LEN / 2; b.z = MIDZ; b.y = 0.22; b.vx = b.vy = b.vz = 0; b.fl = null; b.next = null; b.claim = null; b.mode = "dead";
     var c = nearestActor(side, LEN / 2, MIDZ, true);
     if (c) { c.x = LEN / 2 + (sim.attack[side] > 0 ? -0.9 : 0.9); c.z = MIDZ; c.facing = sim.attack[side] > 0 ? PI / 2 : -PI / 2; }
     sim.own = side;
@@ -1344,7 +1421,7 @@ var Pitch3D = (function () {
     var dir = sim.attack[side], own = ownX(side), b = sim.ball;
     var ballX = own + dir * 5.5, ballZ = MIDZ;
     b.x = ballX; b.z = ballZ; b.y = 0.22; b.vx = b.vy = b.vz = 0;
-    b.mode = "dead"; b.fl = null; b.next = null; b.side = side; b.idx = -1;
+    b.mode = "dead"; b.fl = null; b.next = null; b.claim = null; b.side = side; b.idx = -1;
     sim.own = side;
 
     var gk = pickKeeper(side);
@@ -1498,7 +1575,7 @@ var Pitch3D = (function () {
   function setupThrowIn(side, x, z) {
     sim.action = null; sim.pendingPass = null;
     var b = sim.ball;
-    b.x = clamp(x, 2, LEN - 2); b.z = z < MIDZ ? 0.9 : WID - 0.9; b.y = 0.22; b.mode = "dead"; b.fl = null; b.next = null;
+    b.x = clamp(x, 2, LEN - 2); b.z = z < MIDZ ? 0.9 : WID - 0.9; b.y = 0.22; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null;
     var taker = nearestActor(side, b.x, b.z, true);
     sim.own = side;
     if (taker) { taker.x = b.x; taker.z = b.z + (b.z < MIDZ ? 1 : -1); taker.facing = b.z < MIDZ ? PI : 0; }
@@ -1509,7 +1586,7 @@ var Pitch3D = (function () {
     sim.action = null; sim.pendingPass = null;
     var b = sim.ball;
     b.x = end ? LEN - 0.7 : 0.7; b.z = b.z < MIDZ ? 0.7 : WID - 0.7; b.y = 0.22;
-    b.vx = b.vy = b.vz = 0; b.mode = "dead"; b.fl = null; b.next = null;
+    b.vx = b.vy = b.vz = 0; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null;
     var taker = nearestActor(side, b.x, b.z, true);
     sim.own = side;
     if (taker) {
@@ -1545,7 +1622,14 @@ var Pitch3D = (function () {
     a.visualAnim = {type: "pass", t: 0, dur: 0.6};
     var mate = nearestActor(r.side, a.x, a.z, true, a);
     if (!mate) return;
-    launchBall(mate.x, mate.z, 0.23, clamp(dist(a.x, a.z, mate.x, mate.z) / 18, 0.18, 0.5), 0.2, {type: "held", side: r.side, idx: mate.slot});
+    /* También en saques y reinicios el receptor ataca el punto de caída. Antes
+     * seguía con su tarea táctica y el balón terminaba encima de él de golpe. */
+    var tx = clamp(mate.x + clamp(mate.vx * 0.16, -0.9, 0.9), 2, LEN - 2);
+    var tz = clamp(mate.z + clamp(mate.vz * 0.16, -0.9, 0.9), 2.5, WID - 2.5);
+    var dur = clamp(dist(a.x, a.z, tx, tz) / 18, 0.28, 1.2);
+    mate.passTarget = {x: tx, z: tz, until: sim.time + dur + 0.6};
+    mate.maxSp = 7.8 * mate.pace;
+    launchBall(tx, tz, 0.23, dur, 0.2, {type: "held", side: r.side, idx: mate.slot});
   }
 
   /* ------------------------------------------------------------------ acciones */
@@ -1600,6 +1684,26 @@ var Pitch3D = (function () {
     return best;
   }
 
+  /* El enrosque se aplica perpendicular al recorrido. Si el punto de destino
+   * está cerca de una banda, se recorta para que el balón no dibuje una curva
+   * que salga del campo y vuelva a entrar. */
+  function fitPassCurve(x0, z0, x1, z1, curve) {
+    if (!curve) return 0;
+    var dx = x1 - x0, dz = z1 - z0, dl = Math.sqrt(dx * dx + dz * dz) || 1;
+    var px = -dz / dl, pz = dx / dl;
+    var minX = Math.min(x0, x1), maxX = Math.max(x0, x1);
+    var minZ = Math.min(z0, z1), maxZ = Math.max(z0, z1);
+    var cap = Math.abs(curve), lo = 1.0, hiX = LEN - 1.0, hiZ = WID - 1.0;
+    if (Math.abs(px) > 1e-6) {
+      cap = Math.min(cap, (hiX - maxX) / Math.abs(px), (minX - lo) / Math.abs(px));
+    }
+    if (Math.abs(pz) > 1e-6) {
+      cap = Math.min(cap, (hiZ - maxZ) / Math.abs(pz), (minZ - lo) / Math.abs(pz));
+    }
+    if (!isFinite(cap) || cap < 0) cap = 0;
+    return (curve < 0 ? -1 : 1) * cap;
+  }
+
   function startVisualPass(e, side, want) {
     if (!sim.started || sim.ended || sim.action || sim.restart) return false;
     var b = sim.ball;
@@ -1610,18 +1714,24 @@ var Pitch3D = (function () {
     if (!rec) return false;
     var dir = sim.attack[side];
     /* El punto de recepción no debe exigir una carrera imposible: se limita
-       la ventaja a ~2 m y el receptor ataca ese espacio durante el vuelo. */
-    var tx = clamp(rec.x + clamp(rec.vx * 0.28, -2.2, 2.2), 2, LEN - 2);
-    var tz = clamp(rec.z + clamp(rec.vz * 0.28, -2.2, 2.2), 2.5, WID - 2.5);
+       la ventaja a ~1,2 m y el receptor ataca ese espacio durante el vuelo. */
+    var tx = clamp(rec.x + clamp(rec.vx * 0.20, -1.2, 1.2), 2, LEN - 2);
+    var tz = clamp(rec.z + clamp(rec.vz * 0.20, -1.2, 1.2), 2.5, WID - 2.5);
     var d = dist(carrier.x, carrier.z, tx, tz);
     var cross = Math.abs(rec.z - carrier.z) > 14 && (rec.x - carrier.x) * dir > 8;
     var longBall = d > 27;
     var arc = cross ? clamp(d * 0.045, 0.9, 2.4) : longBall ? clamp(d * 0.03, 0.6, 1.8) : clamp(d * 0.008, 0.05, 0.35);
-    var dur = clamp(d / (cross ? 19 : longBall ? 23 : 26), 0.22, 1.55);
-    var curve = (Math.random() < 0.5 ? -1 : 1) * (cross ? 1.2 : longBall ? 0.7 : 0.18) * (0.6 + Math.random() * 0.8);
+    var dur = clamp(d / (cross ? 19 : longBall ? 23 : 26), 0.26, 1.65);
+    /* Menos enrosque en los pases rasos y siempre dentro de los límites. */
+    var curve = (Math.random() < 0.5 ? -1 : 1) * (cross ? 1.0 : longBall ? 0.52 : 0.10) *
+      (0.55 + Math.random() * 0.65);
+    curve = fitPassCurve(carrier.x, carrier.z, tx, tz, curve);
     carrier.visualAnim = {type: "pass", t: 0, dur: 0.56};
-    /* El receptor corre al punto de recepción en vez de esperar el balón. */
-    rec.passTarget = {x: tx, z: tz, until: sim.time + dur + 0.35};
+    sim.lastPass = {from: carrier.slot, to: rec.slot, dur: +dur.toFixed(2),
+      curve: +curve.toFixed(2), atEnd: null, pending: true};
+    /* El receptor corre al punto de recepción y se queda allí hasta que el
+     * balón llega; así la recepción no le obliga a teletransportarse. */
+    rec.passTarget = {x: tx, z: tz, until: sim.time + dur + 0.6};
     rec.maxSp = 7.8 * rec.pace;
     launchBall(tx, tz, 0.23, dur, arc, {type: "held", side: side, idx: rec.slot}, curve);
     b.lastTouch = side;
@@ -1796,7 +1906,12 @@ var Pitch3D = (function () {
     if ((t === "half" || t === "end") && sim.action) { sim.queue.push(e); return; }
     if (t === "half") { doHalf(); fireCue(e); return; }
     if (t === "end") { doEnd(); fireCue(e); return; }
-    if (t === "goal" || t === "save" || t === "post" || t === "miss") { e.t = t; startShot(e); return; }
+    if (t === "goal" || t === "save" || t === "post" || t === "miss") {
+      /* Un tiro no puede nacer en mitad de un pase: el balón terminaría
+       * cambiando de dirección en el aire. Se encola hasta la recepción. */
+      if (sim.ball.mode === "flight" && sim.ball.next) { sim.queue.push(e); return; }
+      e.t = t; startShot(e); return;
+    }
     if (t === "yellow" || t === "red") { e.t = t; startCard(e); return; }
     if (t === "pass") {
       var ps = +e.side === 1 ? 1 : 0, pa = e.who != null ? actorAt(ps, +e.who) : null;
@@ -1805,7 +1920,7 @@ var Pitch3D = (function () {
     }
     if (t === "tackle") {
       var ts = +e.side === 1 ? 1 : 0, ta = e.who != null ? actorAt(ts, +e.who) : null;
-      if (ta) ta.visualAnim = {type: "tackle", t: 0, dur: 0.75};
+      if (ta) ta.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: sim.ball.z >= ta.z ? 1 : -1};
       fireCue(e); return;
     }
     if (t === "sub" || t === "inj" || t === "tac" || t === "com" || t === "") { fireCue(e); return; }
@@ -2042,14 +2157,28 @@ var Pitch3D = (function () {
     }
   }
 
+  function runClip(a) {
+    return {name: "run", t: (a.runPhase / TAU) * 0.8, loop: true};
+  }
+
   function actorClip(a) {
     var anim = a.anim, sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
+    /* Saludar no puede convertir al árbitro en un jugador que celebra. Si el
+     * actor aún camina hacia su sitio, la locomoción manda sobre el gesto. */
+    if (anim && anim.type === "greet" && sp > 0.9) return runClip(a);
     /* Animaciones procedurales de transición (Opción A): reutilizan los clips
      * existentes para no depender de nuevos GLB. */
     if (a.visualAnim) {
       var vk = clamp(a.visualAnim.t / Math.max(0.01, a.visualAnim.dur), 0, 1);
       if (a.visualAnim.type === "pass") return {name: "kick", t: vk * 0.85, loop: false};
-      if (a.visualAnim.type === "tackle" || a.visualAnim.type === "save") return {name: "dive", t: vk * 0.9, loop: false};
+      /* El tackle de un jugador de campo no es una estirada de portero. Se
+       * resuelve con el golpeo y una inclinación procedural; solo el portero
+       * puede usar `dive`. */
+      if (a.visualAnim.type === "tackle") {
+        if (a.gk) return {name: "dive", t: vk * 0.9, loop: false};
+        return {name: "kick", t: vk * 0.62, loop: false};
+      }
+      if (a.visualAnim.type === "save" && a.gk) return {name: "dive", t: vk * 0.9, loop: false};
     }
     if (anim) {
       var k = clamp(anim.t / Math.max(0.01, anim.dur), 0, 1);
@@ -2061,10 +2190,10 @@ var Pitch3D = (function () {
       if (anim.type === "gkstrike") return {name: "kick", t: k * 0.98, loop: false};
       if (anim.type === "gkready" || anim.type === "gkshield") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
       if (anim.type === "celebrate") return {name: "celebrate", t: k * 1.7, loop: false};
-      if (anim.type === "greet") return {name: anim.hand ? "idle" : "celebrate", t: anim.hand ? a.phase * 2 + sim.time * 0.2 : Math.min(1.1, k * 1.35), loop: false};
+      if (anim.type === "greet") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
       if (anim.type === "card") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
     }
-    if (sp > 0.65) return {name: "run", t: (a.runPhase / TAU) * 0.8, loop: true};
+    if (sp > 0.65) return runClip(a);
     return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
   }
 
@@ -2145,7 +2274,14 @@ var Pitch3D = (function () {
     }
 
     var pal = assetPalette(a), ca = Math.cos(a.facing), sa = Math.sin(a.facing), scale = a.scale || 1;
-    var lean = a.lean || 0, bank = a.bank || 0;
+    /* La barrida de campo inclina algo el cuerpo sobre el clip de golpeo; el
+     * portero conserva su estirada horizontal. */
+    var tackleK = 0;
+    if (a.visualAnim && a.visualAnim.type === "tackle" && !a.gk) {
+      tackleK = Math.sin(clamp(a.visualAnim.t / Math.max(0.01, a.visualAnim.dur), 0, 1) * PI);
+    }
+    var lean = (a.lean || 0) + tackleK * 0.06;
+    var bank = (a.bank || 0) + tackleK * 0.24 * (a.visualAnim && a.visualAnim.dir ? a.visualAnim.dir : 1);
     var pos = sc.pos, p = model.positions, materials = model.materials, matNames = model.matNames, matColors = model.matColors;
     var vr, vg, vb, i;
     /* Escalar aquí evita repetir la multiplicación por vértice al transformar. */
@@ -2186,7 +2322,8 @@ var Pitch3D = (function () {
     var gait = Math.sin(a.runPhase) * 0.32 * run, gait2 = Math.sin(a.runPhase + PI) * 0.32 * run;
     var liftL = Math.max(0, Math.cos(a.runPhase)) * 0.12 * run;
     var liftR = Math.max(0, Math.cos(a.runPhase + PI)) * 0.12 * run;
-    var jump = 0, kick = 0, celebrate = 0, card = 0, dive = false, gkready = false, gkshield = false, handshake = 0;
+    var jump = 0, kick = 0, celebrate = 0, card = 0, dive = false, tackle = 0, tackleDir = 1,
+      gkready = false, gkshield = false, handshake = 0;
     if (a.anim) {
       var k = clamp(a.anim.t / a.anim.dur, 0, 1);
       if (a.anim.type === "kick") kick = Math.sin(k * PI);
@@ -2195,9 +2332,9 @@ var Pitch3D = (function () {
       else if (a.anim.type === "gkshield") gkshield = true;
       else if (a.anim.type === "celebrate") { celebrate = 1; jump = Math.sin(k * PI) * 0.35; }
       else if (a.anim.type === "greet") {
-        var gr = Math.sin(clamp(k, 0, 1) * PI);
-        if (a.anim.hand) handshake = gr;
-        else celebrate = Math.max(celebrate, gr);
+        /* Solo el apretón de manos modifica la pose. Un saludo sin mano no es
+         * una celebración: el árbitro nunca debe quedarse con los brazos arriba. */
+        if (a.anim.hand) handshake = Math.sin(clamp(k, 0, 1) * PI);
       }
       else if (a.anim.type === "card") card = Math.sin(k * PI);
       else if (a.anim.type === "dive") dive = true;
@@ -2205,7 +2342,10 @@ var Pitch3D = (function () {
     if (a.visualAnim) {
       var vk = clamp(a.visualAnim.t / Math.max(0.01, a.visualAnim.dur), 0, 1);
       if (a.visualAnim.type === "pass") kick = Math.sin(vk * PI) * 0.7;
-      else if (a.visualAnim.type === "tackle" || a.visualAnim.type === "save") dive = true;
+      else if (a.visualAnim.type === "tackle") {
+        if (a.gk) dive = true;
+        else { tackle = Math.sin(vk * PI); tackleDir = a.visualAnim.dir || 1; }
+      } else if (a.visualAnim.type === "save" && a.gk) dive = true;
     }
     drawContactShadow(m, a, q, far);
     if (sim.ball.mode === "held" && sim.ball.side === a.side && sim.ball.idx === a.slot) {
@@ -2227,6 +2367,25 @@ var Pitch3D = (function () {
       m.limb([-dirL * 0.1, 0.42, 0.14], [-dirL * 0.84, 0.16, 0.24], 0.09, shorts);
       m.box(-dirL * 0.9, 0.1, -0.24, 0.28, 0.08, 0.18, BOOT);
       m.box(-dirL * 0.9, 0.1, 0.24, 0.28, 0.08, 0.18, BOOT);
+    } else if (tackle > 0.01) {
+      /* Barrida de campo: el cuerpo baja, una pierna se estira hacia el balón
+       * y la otra queda recogida. Es una pose distinta de la estirada del
+       * portero, que solo se usa en `save`/`dive` de porteros. */
+      var tl = -tackleDir * (Math.sin(a.facing) >= 0 ? 1 : -1);
+      m.ellipsoid(tl * 0.16, 0.62, 0.02, 0.32, 0.28, 0.23, shirt, seg, rings);
+      m.ellipsoid(tl * 0.16, 0.38, 0, 0.27, 0.16, 0.20, shorts, q ? 8 : 6, 4);
+      m.ellipsoid(tl * 0.24, 1.02, 0.06, 0.19, 0.22, 0.18, skin, seg, rings - 1);
+      m.ellipsoid(tl * 0.24, 1.15, 0.05, 0.195, 0.08, 0.18, hair, q ? 8 : 6, 3);
+      m.limb([tl * 0.05, 0.74, 0], [tl * 0.48, 0.54, 0.38], 0.08, shirt);
+      m.limb([tl * 0.48, 0.54, 0.38], [tl * 0.62, 0.34, 0.52], 0.07, skin);
+      m.limb([-tl * 0.02, 0.70, 0], [-tl * 0.34, 0.56, -0.32], 0.08, shirt);
+      m.limb([-tl * 0.34, 0.56, -0.32], [-tl * 0.48, 0.34, -0.44], 0.07, skin);
+      m.limb([tl * 0.1, 0.42, 0], [tl * 0.82, 0.23, 0.25], 0.09, shorts);
+      m.limb([tl * 0.82, 0.23, 0.25], [tl * 1.02, 0.10, 0.40], 0.075, skin);
+      m.box(tl * 1.04, 0.07, 0.43, 0.28, 0.08, 0.18, BOOT);
+      m.limb([-tl * 0.06, 0.42, 0], [-tl * 0.30, 0.27, -0.30], 0.09, shorts);
+      m.limb([-tl * 0.30, 0.27, -0.30], [-tl * 0.14, 0.08, -0.12], 0.075, skin);
+      m.box(-tl * 0.12, 0.04, -0.10, 0.28, 0.08, 0.18, BOOT);
     } else {
       m.ellipsoid(0, 0.94, 0, 0.32, 0.46, 0.23, shirt, seg, rings);
       m.ellipsoid(0, 0.52, 0, 0.26, 0.16, 0.2, shorts, q ? 8 : 6, 4);
@@ -2500,6 +2659,16 @@ var Pitch3D = (function () {
     }
   }
 
+  /* Procesa un evento que llegó mientras el balón estaba en vuelo. Se hace
+   * fuera de `finishAction` para cubrir también pases y saques. */
+  function drainQueue() {
+    if (sim.cinema || sim.replay || sim.action || sim.restart || sim.ball.mode === "flight") return;
+    if (sim.queue.length) {
+      var e = sim.queue.shift();
+      handleEvent(e);
+    }
+  }
+
   function simStep(dt) {
     sim.time += dt * (sim.replay ? 1 : sim.rate);
     if (sim.replay) { updateReplay(dt * 1); return; }
@@ -2526,6 +2695,7 @@ var Pitch3D = (function () {
     updateAnimations(sdt);
     updateBall(sdt);
     tryPendingPass();
+    drainQueue();
     if (sim.netT > 0) sim.netT = Math.max(0, sim.netT - sdt * 1.5);
     histAcc += sdt;
     if (histAcc >= 0.1) { histAcc = 0; record(); }
@@ -2762,10 +2932,12 @@ var Pitch3D = (function () {
     /* Un cambio de dueño invalida cualquier pase en vuelo: el balón no puede
        seguir viajando hacia un receptor del equipo que acaba de perderlo. */
     if (b.mode === "flight" && !sim.action) {
-      b.fl = null; b.next = null; b.mode = "dead"; b.vx = b.vy = b.vz = 0;
+      b.fl = null; b.next = null; b.claim = null; b.mode = "dead"; b.vx = b.vy = b.vz = 0;
+      if (sim.lastPass) sim.lastPass.pending = false;
     }
     var loser = nearestActor(1 - side, b.x, b.z, false);
-    if (loser && (!loser.visualAnim || loser.visualAnim.t >= loser.visualAnim.dur)) loser.visualAnim = {type: "tackle", t: 0, dur: 0.75};
+    if (loser && (!loser.visualAnim || loser.visualAnim.t >= loser.visualAnim.dur))
+      loser.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: b.z >= loser.z ? 1 : -1};
     var a = nearestActor(side, b.x, b.z, false);
     /* un cambio de dueño no puede convertir el balón en un pase campo a campo */
     if (b.mode === "held") {

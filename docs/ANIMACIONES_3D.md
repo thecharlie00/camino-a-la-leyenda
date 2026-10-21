@@ -175,7 +175,7 @@ El partido sigue siendo autoritativo en `match41.js`; este sistema es solo repre
 
 | Secuencia | Fases | Duración base |
 |---|---|---:|
-| Entrada | `walkout` 2,8 s → `greet` 1,7 s → `coinCall` (espera máx. 9 s) → `coinFlip` 1,15 s → `coinResult` 1,25 s → elección → `lineup` 1,5 s | variable |
+| Entrada | `walkout` 4,2 s → `greet` 2,6 s → `coinCall` (espera máx. 9 s) → `coinFlip` 1,15 s → `coinResult` 1,25 s → elección → `lineup` 1,5 s | variable |
 | Descanso | `off` 2,7 s → `switch` 0,85 s → `enter` 2,7 s → `greetHalf` 1,35 s | 7,6 s |
 | Final | `whistle` 1,15 s → `line` 3,4 s → `walkoff` 2,8 s | 7,35 s |
 
@@ -183,10 +183,12 @@ Los tiempos se escalan con la velocidad del directo. Las cámaras de túnel, cí
 
 ### Saludos y gestos
 
-- **Capitanes**: se aproximan al centro, se orientan y extienden el brazo con `anim: greet, hand: true`; el árbitro acompaña el gesto.
-- **Equipos**: el resto de actores encadena saludos con un desfase de 0,45 s para evitar que todos levanten el brazo a la vez.
+- **Salida**: cada equipo avanza en una sola fila, con el capitán (`slot 9`) al frente; el resto conserva su orden detrás en el mismo carril. La fila se detiene escalonada y solo se abre a las posiciones después del sorteo.
+- **Capitanes**: se aproximan al centro, se orientan y extienden el brazo con `anim: greet, hand: true`; el árbitro acompaña el gesto. Si aún están caminando, el clip de locomoción (`run`) manda sobre el gesto para no deslizarse.
+- **Equipos**: el resto de actores encadena saludos con un desfase de 0,45 s para evitar que todos levanten el brazo a la vez. Un saludo sin mano no se representa como celebración.
 - **Final**: los equipos forman dos líneas enfrentadas y encadenan los saludos antes de caminar al túnel.
-- **Sin GLB**: la pose procedural mueve hombro, brazo y mano; con GLB se conserva el clip base y se superpone el gesto.
+- **Sin GLB**: la pose procedural mueve hombro, brazo y mano; con GLB se conserva el clip base (`idle`/`run`) y el gesto queda en la pose procedural.
+- **Árbitro**: sus gestos comparten el reloj de `updateAnimations` y caducan; al terminar una secuencia se limpian explícitamente. Nunca queda congelado en `celebrate`.
 - La animación de saludo es cosmética: no crea contacto físico, faltas ni eventos de partido.
 
 ### Cara o cruz
@@ -206,9 +208,10 @@ Los tiempos se escalan con la velocidad del directo. Las cámaras de túnel, cí
 - Los eventos de partido (`goal`, `save`, `miss`, etc.) generan representación visual.
 - La sincronización se hace con `OnBallContact`, alineado con `launchBall` y `launchGoalKickBall`.
 - El IK se aplica sobre la malla ya deformada, sin alterar el estado de `match41.js`.
-- **Implementado:** `pass` y `tackle` llegan desde `engine-extra.js` como eventos visuales; el adaptador los bloquea en 2D. `startVisualPass` elige receptor, calcula tipo/arco/duración/enrosque y usa `pendingPass` si la posesión aún no coincide. `changePossession` cancela vuelos y ejecuta el pase pendiente.
+- **Implementado:** `pass` y `tackle` llegan desde `engine-extra.js` como eventos visuales; el adaptador los bloquea en 2D. `startVisualPass` elige receptor, calcula tipo/arco/duración/enrosque, limita la curva al campo y usa `pendingPass` si la posesión aún no coincide. Los reinicios fijan también el punto de recepción; `changePossession` cancela vuelos y ejecuta el pase pendiente.
+- **Implementado:** la recepción solo entrega el balón si el receptor está a menos de 1,75 m; si no, queda suelto y lo persigue. Los tiros que llegan durante un pase se encolan hasta que el balón aterriza.
 - **Implementado:** cross-fade de 0,18 s entre clips en `evalModel`; el clip anterior se evalúa en un segundo buffer y se interpola con smoothstep.
-- **Implementado:** paradas con `dive` y robos reutilizando `dive`; pases y tiros con `kick`. La pose procedural de reserva mantiene las mismas acciones sin GLB.
+- **Implementado:** paradas con `dive` exclusivamente para porteros; los robos de campo usan `kick` y una pose de barrida propia, nunca `dive`. Pases y tiros usan `kick`. La pose procedural de reserva mantiene las mismas acciones sin GLB.
 - **Implementado:** entrada, descanso y despedida con `sim.cinema`, saludos procedurales, moneda 3D y panel de cara o cruz. `Pitch3D.cinema()` y `Pitch3D.skipCinema()` permiten observar o completar la secuencia sin tocar `match41.js`.
 
 ---

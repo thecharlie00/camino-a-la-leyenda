@@ -83,7 +83,7 @@ Descanso:  off → switch → enter → greetHalf
 Final:     whistle → line → walkoff
 ```
 
-- **Inicio**: los 22 jugadores salen del túnel, se colocan, los capitanes y el árbitro se saludan y se juega el cara o cruz. La secuencia solo se reproduce en el arranque real del directo (`cinematics: !L.min`); al volver a 3D con el partido ya empezado no se repite.
+- **Inicio**: cada equipo sale del túnel en **una sola fila**, con el capitán al frente y el resto detrás en su carril; la fila avanza junta hasta el borde del círculo central y solo entonces se abre a las posiciones. Los capitanes y el árbitro se saludan y se juega el cara o cruz. La secuencia solo se reproduce en el arranque real del directo (`cinematics: !L.min`); al volver a 3D con el partido ya empezado no se repite.
 - **Descanso**: los jugadores abandonan el campo hacia el túnel, se intercambian lados y vuelven a entrar; capitanes y árbitro repiten el saludo antes de reanudar. Si el directo estaba pausado, la secuencia se ve igual y el 3D queda congelado al terminar hasta que el usuario reanude.
 - **Final**: el árbitro pita, los equipos forman una línea, se saludan y caminan hacia el vestuario. `sim.ended` queda activo desde el principio, pero el bucle sigue animando mientras haya cine; después se ocultan jugadores y balón y la simulación visual queda congelada.
 - **Cámara**: el túnel, el círculo central y la línea final tienen encuadres propios. Las transiciones suavizan posición, altura y objetivo; no modifican la cámara normal del partido.
@@ -132,15 +132,16 @@ Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro 
 ### Pases y robos visuales
 
 - `engine-extra.js` emite `pass` y `tackle` como eventos **solo visuales** después de calcular el resultado del minuto. No modifican `conv`, `bigR`, `xgPerGoal`, el marcador ni las estadísticas.
-- El evento `pass` elige un receptor coherente entre los compañeros (prefiere al jugador sugerido por el motor si está cerca), limita la ventaja a unos 2 m y hace que el receptor ataque el punto de recepción durante el vuelo.
-- El 3D distingue pase raso, largo, bombeado y centro; calcula arco, duración y enrosque, y mantiene el balón continuo hasta el receptor. Si la posesión cambia antes de la llegada, el vuelo se cancela y el pase pendiente se ejecuta cuando el nuevo bando controla el balón.
+- El evento `pass` elige un receptor coherente entre los compañeros (prefiere al jugador sugerido por el motor si está cerca), limita la ventaja a unos 1,2 m y hace que el receptor ataque el punto de recepción durante el vuelo. También los saques y reinicios fijan ese punto; antes el receptor seguía su tarea táctica y el balón acababa encima de él.
+- El 3D distingue pase raso, largo, bombeado y centro; calcula arco, duración y enrosque, y recorta la curva para que el balón no salga del campo. Si la posesión cambia antes de la llegada, el vuelo se cancela y el pase pendiente se ejecuta cuando el nuevo bando controla el balón.
+- La recepción solo entrega el balón si el receptor está a menos de 1,75 m del punto de caída. Si se ha quedado atrás, el balón queda suelto, rueda hacia él y el jugador lo persigue; no se teletransporta. Los tiros que llegan durante un pase se encolan y arrancan al terminar el vuelo.
 - El evento `tackle` anima al jugador del bando que recupera el balón. En el campo 2D se descarta: no crea filas vacías en el comentario ni jugadas fantasma.
-- Los clips GLB existentes (`kick` y `dive`) se reutilizan con animaciones procedurales para pase, robo, tiro y parada; el cross-fade de 0,18 s suaviza idle→carrera→acción.
+- Los clips GLB existentes (`kick` y `dive`) se reutilizan con animaciones procedurales para pase, robo, tiro y parada; el cross-fade de 0,18 s suaviza idle→carrera→acción. El tackle de un jugador de campo usa `kick` y una pose de barrida propia; `dive` queda reservado a porteros y paradas.
 
 ### Ambientación y retransmisión
 
 - **Grada**: quads verticales baratos para cuerpo y cabeza, con colores de afición y detalles del club local; cubierta, vigas, focos y boca de túnel completan el estadio sin texturas ni instancing.
-- **Oficiales**: árbitro y dos asistentes son actores visuales fuera de `sim.players`, por lo que el contrato de 22 jugadores no cambia. El árbitro acompaña la jugada y los asistentes recorren su banda; al descanso se espejan con el resto del campo.
+- **Oficiales**: árbitro y dos asistentes son actores visuales fuera de `sim.players`, por lo que el contrato de 22 jugadores no cambia. El árbitro acompaña la jugada y los asistentes recorren su banda; al descanso se espejan con el resto del campo. Sus gestos (saludo, pito) caducan con el mismo reloj que los jugadores y la locomoción manda mientras caminan, así que nunca se quedan congelados en `celebrate`.
 - **Clima**: `ui.js` transmite `wx` desde el motor. El 3D tiñe cielo y niebla, ajusta la distancia de niebla y dibuja lluvia o nieve procedimental. Con `prefers-reduced-motion` o calidad baja se reduce o se omite.
 - **Marcador**: `ui.js` transmite `score` y `min`; el 3D muestra un marcador compacto sobre el canvas con los colores de cada equipo. Sigue siendo un reflejo del motor, nunca una fuente de verdad.
 - **Cámara**: los cortes de tiro, gol y repetición son visuales; el estado del partido no se congela ni cambia por ellos.
@@ -163,7 +164,7 @@ Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro 
 
 ### Prueba aislada del 3D
 
-`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción, tackle visual, árbitro y asistentes, tiro, parada, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja, replay, reset, marcador, clima y destroy. Una página aparte fuerza el resultado del cara o cruz y recorre llamada, elección de campo, cierre del panel y saque. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son 40 comprobaciones.
+`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel en fila con el capitán al frente, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción sin teletransporte, tackle sin `dive`, árbitro y asistentes, tiro, parada con `dive` exclusivo del portero, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja, replay, reset, marcador, clima y destroy. Una página aparte fuerza el resultado del cara o cruz y recorre llamada, elección de campo, cierre del panel y saque, y comprueba que el árbitro termina sin gesto congelado. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural, incluida la barrida de campo, y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son 44 comprobaciones.
 
 Requiere Node y Playwright (o `playwright-core`) con Chrome/Chromium. Si no está instalado:
 
