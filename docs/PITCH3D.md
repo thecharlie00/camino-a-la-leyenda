@@ -148,10 +148,10 @@ En CI se instala Playwright y Chromium y se ejecuta el mismo archivo. El test fa
 
 - Las animaciones son clips cortos generados para el proyecto; no hay captura de movimiento ni retargeting externo. La tarjeta reutiliza la pose de `idle`.
 - Las acciones de tiro, parada y gol son representaciones aproximadas basadas en eventos; no reproducen la física exacta de cada jugada.
-- La iluminación es plana por triángulo y el especular se deduce del color; no hay texturas PBR, mapas de rugosidad, sombras proyectadas ni oclusión ambiental.
+- La iluminación sigue siendo plana por triángulo, pero el especular ya usa rugosidad y metalicidad de los materiales GLB (modelo GGX/Fresnel simplificado). No hay texturas PBR, mapas de oclusión ambiental ni sombras proyectadas.
 - La repetición es visual (historial de posiciones del render), no una repetición sincronizada de los eventos de `match41`.
 - No hay nombres, dorsales, celebraciones personalizadas ni multitud animada.
-- Los props de estadio del pack todavía no sustituyen al campo procedural; hacerlo requiere quitar primero las porterías/vallas actuales para no duplicar geometría.
+- Los props de estadio (portería, banderín, valla, banquillo y barrera) se integran en el campo estático cuando sus GLB están disponibles; si faltan, se conserva la geometría procedural anterior.
 - El balón GLB se dibuja a escala 2 respecto a su tamaño real para mantener la legibilidad del balón anterior; la física del partido no cambia.
 - El rendimiento en Android WebView, dispositivos de gama baja y navegadores sin WebGL sigue pendiente de validación real; el HUD de FPS existe para medirlo.
 - La cámara es de retransmisión y puede recortar parte del campo durante las jugadas; se prioriza la acción y el balón.

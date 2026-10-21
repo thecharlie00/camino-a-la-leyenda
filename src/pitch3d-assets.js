@@ -117,6 +117,14 @@ var Pitch3DAssets = (function () {
     var f = m && m.pbrMetallicRoughness && m.pbrMetallicRoughness.baseColorFactor;
     return f ? [srgb(f[0]), srgb(f[1]), srgb(f[2])] : [1, 1, 1];
   }
+  function materialMetallic(m) {
+    var v = m && m.pbrMetallicRoughness && m.pbrMetallicRoughness.metallicFactor;
+    return v == null ? 0 : v;
+  }
+  function materialRoughness(m) {
+    var v = m && m.pbrMetallicRoughness && m.pbrMetallicRoughness.roughnessFactor;
+    return v == null ? 0.8 : v;
+  }
 
   function parsePlayer(b64, id, variant, lod) {
     var glb = parseGLB(b64), g = glb.json, bin = glb.bin;
@@ -124,6 +132,8 @@ var Pitch3DAssets = (function () {
     var positions = [], colors = [], joints = [], weights = [], materials = [];
     var matNames = mats.map(function (m) { return m.name || ""; });
     var matColors = mats.map(materialColor);
+    var matMetallic = mats.map(materialMetallic);
+    var matRoughness = mats.map(materialRoughness);
 
     for (var pi = 0; pi < prims.length; pi++) {
       var pr = prims[pi];
@@ -201,14 +211,20 @@ var Pitch3DAssets = (function () {
     return {
       id: id, variant: variant, lod: lod, positions: new Float32Array(positions), colors: new Float32Array(colors),
       joints: new Uint8Array(joints), weights: new Float32Array(weights), materials: new Uint8Array(materials),
-      matNames: matNames, matColors: matColors, parents: parent, bindT: bindT, bindR: bindR, bindS: bindS,
-      ibm: ibm, clips: clips, triangles: positions.length / 9
+      matNames: matNames, matColors: matColors, matMetallic: matMetallic, matRoughness: matRoughness,
+      parents: parent, bindT: bindT, bindR: bindR, bindS: bindS, ibm: ibm, clips: clips,
+      triangles: positions.length / 9
     };
   }
 
   function parseStatic(b64, id) {
     var glb = parseGLB(b64), g = glb.json, bin = glb.bin;
-    var positions = [], colors = [];
+    var mats = g.materials || [];
+    var matNames = mats.map(function (m) { return m.name || ""; });
+    var matColors = mats.map(materialColor);
+    var matMetallic = mats.map(materialMetallic);
+    var matRoughness = mats.map(materialRoughness);
+    var positions = [], colors = [], materials = [];
     for (var mi = 0; mi < (g.meshes || []).length; mi++) {
       var prims = g.meshes[mi].primitives || [];
       for (var pi = 0; pi < prims.length; pi++) {
@@ -218,16 +234,20 @@ var Pitch3DAssets = (function () {
         var col = A.COLOR_0 != null ? readAccessor(g, bin, A.COLOR_0, true) : null;
         var idx = readAccessor(g, bin, pr.indices, false);
         var cstride = col ? (NT[g.accessors[A.COLOR_0].type] || 3) : 0;
-        var base = materialColor(g.materials && g.materials[pr.material]);
+        var midx = pr.material == null ? 0 : pr.material;
+        var base = materialColor(mats[midx]);
         for (var t = 0; t < idx.length; t++) {
           var vi = idx[t];
           positions.push(pos[vi * 3], pos[vi * 3 + 1], pos[vi * 3 + 2]);
           var cc = col ? [col[vi * cstride], col[vi * cstride + 1], col[vi * cstride + 2]] : [1, 1, 1];
           colors.push(base[0] * cc[0], base[1] * cc[1], base[2] * cc[2]);
+          materials.push(midx);
         }
       }
     }
-    return {id: id, positions: new Float32Array(positions), colors: new Float32Array(colors), triangles: positions.length / 9};
+    return {id: id, positions: new Float32Array(positions), colors: new Float32Array(colors),
+      materials: new Uint8Array(materials), matNames: matNames, matColors: matColors,
+      matMetallic: matMetallic, matRoughness: matRoughness, triangles: positions.length / 9};
   }
 
   function load(pack) {

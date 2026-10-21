@@ -118,6 +118,8 @@ var Pitch3D = (function () {
     /* El campo es estático y no recibe brillos especulares; la malla dinámica
      * de jugadores y balón sí. */
     this.spec = false;
+    this.metallic = 0;
+    this.roughness = 1;
   }
   Mesh.prototype.reset = function () { this.n = 0; };
   Mesh.prototype.reserve = function (verts) {
@@ -145,18 +147,24 @@ var Pitch3D = (function () {
      * caras sin convertir el campo en una superficie plana. */
     var lit = 0.60 + 0.30 * key + 0.10 * back + 0.10 * up;
     var warm = 0.035 * key;
+    var rough = clamp(this.roughness, 0.04, 1), metal = clamp(this.metallic, 0, 1);
     var br = r, bg = g, bb = b;
-    r = clamp(br * lit * (1 + warm), 0, 1);
-    g = clamp(bg * lit, 0, 1);
-    b = clamp(bb * lit * (1 - warm * 0.7), 0, 1);
-    if (this.spec) {
-      /* Solo los materiales claros y poco saturados (balón, medias, guantes)
-       * reciben un especular barato; las equipaciones y la piel no. */
+    /* Los metales reflejan la luz en lugar de difundirla: se reduce su difuso. */
+    var diff = 1 - metal * 0.88;
+    r = clamp(br * lit * (1 + warm) * diff, 0, 1);
+    g = clamp(bg * lit * diff, 0, 1);
+    b = clamp(bb * lit * (1 - warm * 0.7) * diff, 0, 1);
+    var specEnabled = quality > 0.55 && (this.spec || metal > 0.001 || rough < 0.95);
+    if (specEnabled) {
+      /* Especular barato basado en GGX/Fresnel. El brillo depende de la
+       * rugosidad del material; los colores claros y poco saturados siguen
+       * brillando aunque no tengan datos PBR explícitos. */
       var mx = br > bg ? (br > bb ? br : bb) : (bg > bb ? bg : bb);
       var mn = br < bg ? (br < bb ? br : bb) : (bg < bb ? bg : bb);
-      var gloss = clamp((mx - 0.55) / 0.4, 0, 1) *
-        (1 - clamp(((mx - mn) - 0.06) / 0.24, 0, 1));
-      if (gloss > 0.01) {
+      var colorGloss = this.spec ? (clamp((mx - 0.55) / 0.4, 0, 1) *
+        (1 - clamp(((mx - mn) - 0.06) / 0.24, 0, 1))) : 1;
+      var gloss = metal > 0.01 ? 1 : colorGloss;
+      if (gloss > 0.01 || metal > 0.01) {
         var pxc = (ax + bx + cx) / 3, pyc = (ay + by + cy) / 3, pzc = (az + bz + cz) / 3;
         var ex = cam.x - pxc, ey = cam.height - pyc, ez = cam.z + cam.back - pzc;
         var el = Math.sqrt(ex * ex + ey * ey + ez * ez) || 1;
@@ -164,9 +172,16 @@ var Pitch3D = (function () {
         var hl = Math.sqrt(hx * hx + hy * hy + hz * hz) || 1;
         var ndh = (nx * hx + ny * hy + nz * hz) * il / hl;
         if (ndh > 0) {
-          var s = ndh * ndh; s *= s; s *= s; s *= s; s *= s;
-          var sp = s * 0.32 * gloss;
-          r = clamp(r + sp, 0, 1); g = clamp(g + sp * 0.97, 0, 1); b = clamp(b + sp * 0.88, 0, 1);
+          var exponent = 2 / (rough * rough) - 2;
+          if (!isFinite(exponent) || exponent < 1) exponent = 1;
+          if (exponent > 512) exponent = 512;
+          var spec = Math.pow(ndh, exponent);
+          var fresnel = 0.04 + 0.96 * Math.pow(1 - ndh, 5);
+          var sp = spec * (1 - rough * 0.65) * 0.38 * gloss * fresnel;
+          var sr = (1 - metal) * 1 + metal * br;
+          var sg = (1 - metal) * 1 + metal * bg;
+          var sb = (1 - metal) * 1 + metal * bb;
+          r = clamp(r + sp * sr, 0, 1); g = clamp(g + sp * sg * 0.97, 0, 1); b = clamp(b + sp * sb * 0.88, 0, 1);
         }
       }
     }
@@ -248,6 +263,29 @@ var Pitch3D = (function () {
 
   /* ------------------------------------------------------------------ campo */
 
+  function appendStaticAsset(m, id, cx, cz, yaw) {
+    var model = assetModels && assetModels.static && assetModels.static[id];
+    if (!model || !model.positions || !model.positions.length) return false;
+    var pos = model.positions, col = model.colors, mats = model.materials;
+    var ca = Math.cos(yaw), sa = Math.sin(yaw);
+    for (var i = 0; i < pos.length; i += 9) {
+      var ax = pos[i], ay = pos[i + 1], az = pos[i + 2];
+      var bx = pos[i + 3], by = pos[i + 4], bz = pos[i + 5];
+      var gx = pos[i + 6], gy = pos[i + 7], gz = pos[i + 8];
+      var wax = cx + ax * ca + az * sa, waz = cz - ax * sa + az * ca;
+      var wbx = cx + bx * ca + bz * sa, wbz = cz - bx * sa + bz * ca;
+      var wgx = cx + gx * ca + gz * sa, wgz = cz - gx * sa + gz * ca;
+      var mi = mats && mats.length ? mats[i / 3] : 0;
+      m.metallic = (model.matMetallic && model.matMetallic[mi] != null) ? model.matMetallic[mi] : 0;
+      m.roughness = (model.matRoughness && model.matRoughness[mi] != null) ? model.matRoughness[mi] : 0.8;
+      var cr = (col[i] + col[i + 3] + col[i + 6]) / 3;
+      var cg = (col[i + 1] + col[i + 4] + col[i + 7]) / 3;
+      var cb = (col[i + 2] + col[i + 5] + col[i + 8]) / 3;
+      m.tri9(wax, ay, waz, wbx, by, wbz, wgx, gy, wgz, cr, cg, cb);
+    }
+    return true;
+  }
+
   function buildField(m) {
     var green = [0.055, 0.30, 0.13], stripe = [0.065, 0.35, 0.15], dark = [0.028, 0.075, 0.05];
     var board = [0.12, 0.24, 0.27], stand = [0.055, 0.075, 0.10], tier = [0.085, 0.105, 0.14];
@@ -269,24 +307,56 @@ var Pitch3D = (function () {
       m.line(x + dir * 5.5, MIDZ - 9.16, x + dir * 5.5, MIDZ + 9.16, WHITE, 0.1);
       m.line(x + dir * 5.5, MIDZ + 9.16, x, MIDZ + 9.16, WHITE, 0.1);
       m.circle(x + dir * 11, MIDZ, 0.11, WHITE, 10);
-      /* portería: postes, larguero, red trasera y laterales */
-      var z1 = MIDZ - POST, z2 = MIDZ + POST, back = end === 0 ? -1.9 : LEN + 1.9;
-      m.box(x, 0, z1, 0.14, BAR, 0.14, [0.94, 0.96, 0.91]);
-      m.box(x, 0, z2, 0.14, BAR, 0.14, [0.94, 0.96, 0.91]);
-      m.box(x, BAR - 0.07, MIDZ, 0.14, 0.14, POST * 2, [0.94, 0.96, 0.91]);
-      m.box(back, 0, z1, 0.08, 2.35, 0.08, NET); m.box(back, 0, z2, 0.08, 2.35, 0.08, NET);
-      m.box(back, 2.3, MIDZ, 0.08, 0.08, POST * 2, NET);
-      for (var y = 0.3; y < 2.3; y += 0.42) m.box(back, y, MIDZ, 0.025, 0.025, POST * 2, NET);
-      for (var zz = -POST + 0.6; zz < POST; zz += 0.7) m.box(back, 0.05, MIDZ + zz, 0.025, 2.32, 0.025, NET);
-      for (var yy = 0.45; yy < 2.2; yy += 0.6) {
-        m.box((x + back) / 2, yy, z1, Math.abs(back - x), 0.025, 0.025, NET);
-        m.box((x + back) / 2, yy, z2, Math.abs(back - x), 0.025, 0.025, NET);
+      /* Portería: se sustituye por el GLB del estadio si está disponible. Si no,
+       * se conserva la geometría procedural anterior como fallback. */
+      var yawGoal = end === 0 ? PI / 2 : -PI / 2;
+      if (!appendStaticAsset(m, "goal_lod1", end, MIDZ, yawGoal)) {
+        var z1 = MIDZ - POST, z2 = MIDZ + POST, back = end === 0 ? -1.9 : LEN + 1.9;
+        m.box(x, 0, z1, 0.14, BAR, 0.14, [0.94, 0.96, 0.91]);
+        m.box(x, 0, z2, 0.14, BAR, 0.14, [0.94, 0.96, 0.91]);
+        m.box(x, BAR - 0.07, MIDZ, 0.14, 0.14, POST * 2, [0.94, 0.96, 0.91]);
+        m.box(back, 0, z1, 0.08, 2.35, 0.08, NET); m.box(back, 0, z2, 0.08, 2.35, 0.08, NET);
+        m.box(back, 2.3, MIDZ, 0.08, 0.08, POST * 2, NET);
+        for (var y = 0.3; y < 2.3; y += 0.42) m.box(back, y, MIDZ, 0.025, 0.025, POST * 2, NET);
+        for (var zz = -POST + 0.6; zz < POST; zz += 0.7) m.box(back, 0.05, MIDZ + zz, 0.025, 2.32, 0.025, NET);
+        for (var yy = 0.45; yy < 2.2; yy += 0.6) {
+          m.box((x + back) / 2, yy, z1, Math.abs(back - x), 0.025, 0.025, NET);
+          m.box((x + back) / 2, yy, z2, Math.abs(back - x), 0.025, 0.025, NET);
+        }
       }
     });
-    /* vallas publicitarias */
-    for (var bx = 5; bx < LEN; bx += 10) {
-      var c0 = (bx / 10) % 2 ? [0.10, 0.28, 0.42] : [0.34, 0.14, 0.10];
-      m.box(bx, 0.02, -1.4, 8.6, 0.9, 0.2, c0); m.box(bx, 0.02, WID + 1.4, 8.6, 0.9, 0.2, c0);
+    /* Vallas publicitarias: GLB del estadio si está disponible; si no, las
+     * cajas procedurales anteriores. */
+    if (!(assetModels && assetModels.static && assetModels.static.ad_board_lod0)) {
+      for (var bx = 5; bx < LEN; bx += 10) {
+        var c0 = (bx / 10) % 2 ? [0.10, 0.28, 0.42] : [0.34, 0.14, 0.10];
+        m.box(bx, 0.02, -1.4, 8.6, 0.9, 0.2, c0); m.box(bx, 0.02, WID + 1.4, 8.6, 0.9, 0.2, c0);
+      }
+    } else {
+      for (var abx = 1.5; abx < LEN; abx += 3) {
+        appendStaticAsset(m, "ad_board_lod0", abx, -1.0, 0);
+        appendStaticAsset(m, "ad_board_lod0", abx, WID + 1.0, PI);
+      }
+    }
+    /* Props de estadio: banderines, banquillos y barreras. Solo se añaden si
+     * sus GLB están disponibles; no duplican la geometría procedural. */
+    if (assetModels && assetModels.static && assetModels.static.corner_flag_lod0) {
+      appendStaticAsset(m, "corner_flag_lod0", 0, 0, 0);
+      appendStaticAsset(m, "corner_flag_lod0", LEN, 0, PI);
+      appendStaticAsset(m, "corner_flag_lod0", 0, WID, 0);
+      appendStaticAsset(m, "corner_flag_lod0", LEN, WID, PI);
+    }
+    if (assetModels && assetModels.static && assetModels.static.bench_lod0) {
+      appendStaticAsset(m, "bench_lod0", LEN / 2 - 6, -4, 0);
+      appendStaticAsset(m, "bench_lod0", LEN / 2 + 6, -4, 0);
+      appendStaticAsset(m, "bench_lod0", LEN / 2 - 6, WID + 4, PI);
+      appendStaticAsset(m, "bench_lod0", LEN / 2 + 6, WID + 4, PI);
+    }
+    if (assetModels && assetModels.static && assetModels.static.barrier_lod0) {
+      for (var brx = 0; brx <= LEN; brx += 2) {
+        appendStaticAsset(m, "barrier_lod0", brx, -2.3, 0);
+        appendStaticAsset(m, "barrier_lod0", brx, WID + 2.3, PI);
+      }
     }
     /* gradas laterales por niveles */
     for (var t = 0; t < 3; t++) {
@@ -1343,6 +1413,8 @@ var Pitch3D = (function () {
       var lx1 = x1 + bank * y1, lz1 = z1 + lean * y1;
       var lx2 = x2 + bank * y2, lz2 = z2 + lean * y2;
       var mi = materials[i0], nm = matNames[mi] || "", base = pal[nm] || matColors[mi] || [0.8, 0.8, 0.8];
+       m.metallic = (model.matMetallic && model.matMetallic[mi] != null) ? model.matMetallic[mi] : 0;
+       m.roughness = (model.matRoughness && model.matRoughness[mi] != null) ? model.matRoughness[mi] : 0.8;
       vr = (model.colors[i0 * 3] + model.colors[i0 * 3 + 3] + model.colors[i0 * 3 + 6]) / 3;
       vg = (model.colors[i0 * 3 + 1] + model.colors[i0 * 3 + 4] + model.colors[i0 * 3 + 7]) / 3;
       vb = (model.colors[i0 * 3 + 2] + model.colors[i0 * 3 + 5] + model.colors[i0 * 3 + 8]) / 3;
@@ -1451,6 +1523,8 @@ var Pitch3D = (function () {
     var b = sim.ball, x = b.x, z = b.z, y = Math.max(BALL_R * BALL_SCALE, b.y);
     m.circle(x, z, 0.3, [0.01, 0.05, 0.03], 8, 0.024);
     var pos = model.positions, col = model.colors;
+    m.metallic = 0;
+    m.roughness = (model.matRoughness && model.matRoughness[0] != null) ? model.matRoughness[0] : 0.56;
     var cx = Math.cos(b.spinX), sx = Math.sin(b.spinX);
     var cz = Math.cos(b.spinZ), sz = Math.sin(b.spinZ);
     for (var i = 0; i < pos.length; i += 9) {
