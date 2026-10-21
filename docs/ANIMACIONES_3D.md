@@ -3,7 +3,7 @@
 Documento de diseño técnico para las cuatro áreas críticas de animación del motor visual 3D.  
 El partido sigue siendo autoritativo en `match41.js`; este sistema es solo representación visual.
 
-> **Implementación actual (prototipo):** los clips GLB existentes (`idle`, `run`, `kick`, `dive`, `celebrate`) cubren la base y las acciones principales. Pases, robos, tiros, paradas y las secuencias de vestuario, saludos y cara o cruz se resuelven con animaciones procedurales que reutilizan esos clips, sin depender de nuevos GLB. El cross-fade implementado es de **0,18 s**. Las tablas siguientes describen el catálogo objetivo para una fase posterior con captura de movimiento y clips dedicados.
+> **Implementación actual (prototipo):** los clips GLB existentes (`idle`, `run`, `kick`, `dive`, `celebrate`) cubren la base y las acciones principales. Pases, robos, tiros, paradas, saques de puerta, córners, faltas, penaltis, tarjetas del árbitro y las secuencias de vestuario, saludos y cara o cruz se resuelven con animaciones procedurales que reutilizan esos clips, sin depender de nuevos GLB. El cross-fade implementado es de **0,18 s**. Las tablas siguientes describen el catálogo objetivo para una fase posterior con captura de movimiento y clips dedicados.
 
 ## 1. Arquitectura común
 
@@ -202,7 +202,48 @@ Los tiempos se escalan con la velocidad del directo. Las cámaras de túnel, cí
 
 ---
 
-## 7. Integración con el motor actual
+## 7. Balones parados y tarjetas
+
+### Saque de puerta
+
+La secuencia del guardameta es una puesta en escena de 4,76 s de partido, comprimida por la velocidad del directo:
+
+```text
+prepare 1,35 → scan 0,80 → windup 0,90 → plant 0,16 → impact 0,10 → follow 0,75 → recover 0,70
+```
+
+- **Sin presión rival**: se eliminó la fase `shield` y la IA queda congelada durante la acción. Ningún atacante se coloca junto al portero; `minPressureDist` solo mide la separación para las pruebas y `pressure` es siempre `false`.
+- **Contacto real**: `launchBall` se llama en `impact`, nunca por un temporizador paralelo. La pose procedural usa brazos de portero y pierna de golpeo; los actores GLB reutilizan `idle`, `run` y `kick`.
+- **Receptores**: apoyo corto y salida larga se eligen antes de la coreografía; el receptor ataca el punto de caída y el balón conserva su continuidad física.
+
+### Córners, faltas y penaltis
+
+| Puesta en escena | Colocación | Animación | Salida |
+|---|---|---|---|
+| Córner | Sacador en la esquina; rematador en el segundo palo, apoyo en el palo corto y frontal; rivales a más de 9,15 m | `kick` para el centro; `run`/`idle` para atacar el punto | Centro con arco al punto de remate |
+| Falta cerca del área | Sacador detrás del balón; barrera de tres a 9,15 m; atacantes en el área | `kick` para el golpeo; barrera estática orientada al balón | Envío al punto de remate |
+| Falta lejana | Sacador y receptor adelantado; rivales a 9,15 m sin barrera | `kick` y `run`/`idle` | Pase raso normal |
+| Penalti | Balón a 11 m; sacador detrás; portero en la línea; resto fuera del área | `kick` en la acción de tiro; portero usa `dive` si hay parada | Tiro con resultado `goal`/`save`/`post`/`miss` |
+
+- La IA se pausa mientras dura la colocación y el saque. Un cambio de posesión del motor no cancela el balón parado.
+- No se crean clips nuevos: el portero, la barrera y los rematadores reutilizan los clips existentes. La geometría de la tarjeta y la colocación son procedurales.
+- `Pitch3D.debug().setPiece` expone `type`, `target`, `targetX`, `targetZ`, `wallDist`, `launched`, `receiver` y `flightDur`.
+
+### Tarjeta del árbitro
+
+```text
+approach (hasta 1,45 s o 2,9 m) → show (1,75 s) → limpieza
+```
+
+- **approach**: el balón y el saque pendiente se detienen; el árbitro camina hacia el infractor. Si estaba a más de 8 m, el corte de cámara justifica que aparezca ya a unos 2 m.
+- **show**: el árbitro se detiene, encara al jugador y levanta la tarjeta. El clip `celebrate` aporta el gesto de brazos; sin GLB, la pose procedural eleva la mano. La tarjeta es un quad orientado a cámara con borde claro y color amarillo o rojo.
+- **Limpieza**: al terminar se borran `anim` y `faceLock` del árbitro; una roja oculta al jugador. Si la tarjeta era por falta (`k: "foul"`), se prepara una falta para el equipo contrario.
+- La cámara de tarjeta usa un plano cercano (12,5 m de distancia, 6,8 m de altura) y no altera el estado autoritativo.
+- `Pitch3D.debug().card` y `sim.lastCard` permiten comprobar el color, el jugador y si la tarjeta ya es visible.
+
+---
+
+## 8. Integración con el motor actual
 
 - `Pitch3D` ya soporta `anim` por actor, `runPhase`, `facing`, `lean` y `bank`.
 - Los eventos de partido (`goal`, `save`, `miss`, etc.) generan representación visual.
@@ -213,10 +254,12 @@ Los tiempos se escalan con la velocidad del directo. Las cámaras de túnel, cí
 - **Implementado:** cross-fade de 0,18 s entre clips en `evalModel`; el clip anterior se evalúa en un segundo buffer y se interpola con smoothstep.
 - **Implementado:** paradas con `dive` exclusivamente para porteros; los robos de campo usan `kick` y una pose de barrida propia, nunca `dive`. Pases y tiros usan `kick`. La pose procedural de reserva mantiene las mismas acciones sin GLB.
 - **Implementado:** entrada, descanso y despedida con `sim.cinema`, saludos procedurales, moneda 3D y panel de cara o cruz. `Pitch3D.cinema()` y `Pitch3D.skipCinema()` permiten observar o completar la secuencia sin tocar `match41.js`.
+- **Implementado:** saques de puerta sin presión, córners y faltas con distancia reglamentaria y penaltis con el área despejada. Los eventos manuales `corner`, `free`/`freekick` y `penalty` permiten ensayar las puestas en escena sin modificar el marcador.
+- **Implementado:** tarjeta del árbitro con fases `approach`/`show`, clip `celebrate` o mano procedural, tarjeta amarilla/roja dibujada en 3D y limpieza al terminar. Una tarjeta por falta deja la falta correspondiente al otro equipo.
 
 ---
 
-## 8. Rendimiento
+## 9. Rendimiento
 
 1. Activar IK solo en los 2–4 jugadores más cercanos al balón.
 2. Usar LOD de animación: lejos solo Base + Action simplificada; cerca todas las capas.

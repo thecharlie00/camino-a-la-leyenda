@@ -31,7 +31,6 @@ var Pitch3D = (function () {
   var GK_PHASES = [
     {name: "prepare", dur: 1.35},
     {name: "scan", dur: 0.80},
-    {name: "shield", dur: 1.00},
     {name: "windup", dur: 0.90},
     {name: "plant", dur: 0.16},
     {name: "impact", dur: 0.10},
@@ -80,7 +79,7 @@ var Pitch3D = (function () {
       ball: newBall(), action: null, queue: [], restart: null, pendingOwn: null,
       history: [], replay: null, netT: 0, shake: 0, banner: "", lastGoalKick: null,
       pendingPass: null, officials: [], wx: "sun", score: [0, 0], min: 0, scoreOn: false,
-      lastPass: null, cinema: null, ballHidden: false
+      lastPass: null, lastCard: null, lastSetPiece: null, cinema: null, ballHidden: false
     };
   }
 
@@ -1039,9 +1038,16 @@ var Pitch3D = (function () {
   function updateOfficials(dt) {
     if (!sim.officials.length) initOfficials();
     var b = sim.ball;
+    var cardAct = sim.action && sim.action.type === "card" ? sim.action : null;
     for (var i = 0; i < sim.officials.length; i++) {
       var o = sim.officials[i], tx, tz, maxSp;
-      if (o.official === "ref") {
+      var cardRef = cardAct && cardAct.ref === o;
+      if (o.official === "ref" && cardRef) {
+        /* La tarjeta manda sobre el seguimiento normal del balón. */
+        tx = cardAct.refX == null ? o.x : cardAct.refX;
+        tz = cardAct.refZ == null ? o.z : cardAct.refZ;
+        maxSp = cardAct.stage === "show" ? 4.4 : 8.6;
+      } else if (o.official === "ref") {
         /* El árbitro acompaña la jugada por el lado contrario al balón. */
         tx = clamp(b.x - sim.attack[0] * 1.2, 6, LEN - 6);
         tz = clamp(b.z + (b.z < MIDZ ? 6.5 : -6.5), 8, WID - 8);
@@ -1060,7 +1066,10 @@ var Pitch3D = (function () {
       o.vx += dvx; o.vz += dvz;
       o.x += o.vx * dt; o.z += o.vz * dt;
       var sp = Math.sqrt(o.vx * o.vx + o.vz * o.vz);
-      if (sp > 0.35) o.facing = angleTo(o.facing, Math.atan2(o.vx, o.vz), Math.min(1, dt * 8));
+      if (cardRef && cardAct.stage === "show" && cardAct.player) {
+        o.facing = angleTo(o.facing, Math.atan2(cardAct.player.x - o.x, cardAct.player.z - o.z),
+          Math.min(1, dt * 10));
+      } else if (sp > 0.35) o.facing = angleTo(o.facing, Math.atan2(o.vx, o.vz), Math.min(1, dt * 8));
       else {
         var bx = b.x - o.x, bz = b.z - o.z;
         if (bx * bx + bz * bz > 0.09) o.facing = angleTo(o.facing, Math.atan2(bx, bz), Math.min(1, dt * 2.4));
@@ -1135,6 +1144,19 @@ var Pitch3D = (function () {
       var q = list[i]; if (q.gk) continue;
       var d = dist2(a.x, a.z, q.x, q.z);
       if (d < bd) { bd = d; best = q; }
+    }
+    return best;
+  }
+
+  /* Distancia al rival más cercano. Se usa para comprobar que nadie invade
+   * el saque de puerta; no mueve a nadie ni altera la jugada. */
+  function nearestOpponentDist(side, x, z) {
+    var list = listOf(1 - side), best = 1e9;
+    for (var i = 0; i < list.length; i++) {
+      var q = list[i];
+      if (!q || q.gone || q.sentOff) continue;
+      var d = dist(q.x, q.z, x, z);
+      if (d < best) best = d;
     }
     return best;
   }
@@ -1450,14 +1472,6 @@ var Pitch3D = (function () {
       longA.faceLock = false;
     }
 
-    var presser = nearestActor(1 - side, ballX + dir * 9, ballZ, true);
-    if (presser) {
-      presser.tx = clamp(ballX + dir * 2.35, 1, LEN - 1);
-      presser.tz = clamp(ballZ + (presser.z < ballZ ? -0.75 : 0.75), 1.5, WID - 1.5);
-      presser.maxSp = 7.0 * presser.pace;
-      presser.faceLock = false;
-    }
-
     var phases = [], at = 0, impactAt = 0, i;
     for (i = 0; i < GK_PHASES.length; i++) {
       var pd = GK_PHASES[i];
@@ -1465,11 +1479,12 @@ var Pitch3D = (function () {
       if (pd.name === "impact") impactAt = at;
       at += pd.dur;
     }
-    var a = {type: "goalkick", t: 0, dur: at, side: side, dir: dir, gk: gk, presser: presser,
+    var a = {type: "goalkick", t: 0, dur: at, side: side, dir: dir, gk: gk,
       ballX: ballX, ballZ: ballZ, shortA: shortA, longA: longA, shortK: Math.random() < 0.55,
       shortSpot: shortSpot, longSpot: longSpot, phases: phases, phaseIndex: 0, phase: "prepare",
       phaseLog: [], impactAt: impactAt, launched: false, launchT: 0, launchPhase: "",
-      flightDur: 0, receiver: null, minPressureDist: 99};
+      flightDur: 0, receiver: null,
+      minPressureDist: gk ? nearestOpponentDist(side, gk.x, gk.z) : 99};
     sim.action = a;
     enterGoalKickPhase(a, 0);
   }
@@ -1488,17 +1503,6 @@ var Pitch3D = (function () {
       gk.x = a.ballX - a.dir * 0.58; gk.z = a.ballZ; gk.vx = gk.vz = 0;
       gk.tx = gk.x; gk.tz = gk.z; gk.facing = dirFace; gk.faceLock = true;
       gk.anim = {type: "gkready", t: 0, dur: ph.dur};
-    } else if (ph.name === "shield") {
-      /* Protección opcional: el portero interpone el cuerpo entre el balón y
-       * el rival más cercano. El atacante se detiene fuera del radio de choque. */
-      gk.x = a.ballX - a.dir * 0.5; gk.z = a.ballZ; gk.vx = gk.vz = 0;
-      gk.tx = gk.x; gk.tz = gk.z; gk.faceLock = true;
-      gk.anim = {type: "gkshield", t: 0, dur: ph.dur};
-      if (a.presser) {
-        a.presser.tx = clamp(a.ballX + a.dir * 2.35, 1, LEN - 1);
-        a.presser.tz = clamp(a.ballZ + (a.presser.z < a.ballZ ? -0.75 : 0.75), 1.5, WID - 1.5);
-        a.presser.maxSp = 6.8 * a.presser.pace;
-      }
     } else if (ph.name === "windup") {
       /* Retrocede mirando al balón y arranca la carrera de tres pasos. */
       gk.anim = null; gk.faceLock = true; gk.facing = dirFace;
@@ -1542,19 +1546,16 @@ var Pitch3D = (function () {
 
   function updateGoalKickAction(a) {
     var gk = a.gk, ph = a.phases[a.phaseIndex];
-    if (gk && a.presser && !a.presser.gone) {
-      var pd = dist(gk.x, gk.z, a.presser.x, a.presser.z);
+    /* Ningún rival puede acercarse al portero durante el saque. La IA está
+     * congelada y aquí solo se mide la separación para depurar/pruebas. */
+    if (gk) {
+      var pd = nearestOpponentDist(a.side, gk.x, gk.z);
       if (pd < a.minPressureDist) a.minPressureDist = pd;
     }
     if (gk && ph) {
       if (a.phase === "scan") {
         var su = clamp((a.t - ph.start) / Math.max(0.01, ph.dur), 0, 1);
         gk.facing = (a.dir > 0 ? PI / 2 : -PI / 2) + Math.sin(su * TAU * 1.15) * 0.55;
-      } else if (a.phase === "shield") {
-        if (a.presser && !a.presser.gone) {
-          var want = Math.atan2(a.presser.x - gk.x, a.presser.z - gk.z);
-          gk.facing = angleTo(gk.facing, want, 0.14);
-        }
       } else if (a.phase === "windup") {
         var wu = clamp((a.t - ph.start) / Math.max(0.01, ph.dur), 0, 1);
         if (wu < 0.48) {
@@ -1582,18 +1583,182 @@ var Pitch3D = (function () {
     sim.restart = {type: "throw", side: side, idx: taker ? taker.slot : -1, t: 0.55};
   }
 
-  function setupCorner(side, end) {
-    sim.action = null; sim.pendingPass = null;
-    var b = sim.ball;
-    b.x = end ? LEN - 0.7 : 0.7; b.z = b.z < MIDZ ? 0.7 : WID - 0.7; b.y = 0.22;
-    b.vx = b.vy = b.vz = 0; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null;
-    var taker = nearestActor(side, b.x, b.z, true);
-    sim.own = side;
-    if (taker) {
-      taker.x = b.x; taker.z = b.z + (b.z < MIDZ ? 1.1 : -1.1);
-      taker.facing = end ? -PI / 2 : PI / 2;
+  /* Coloca a un actor en una posición de balón parado sin arrastrar la pose
+   * anterior. La orientación se fija al punto de saque/carrera. */
+  function placeSetPieceActor(a, x, z, faceX, faceZ) {
+    if (!a) return;
+    a.x = a.tx = clamp(x, 1.2, LEN - 1.2);
+    a.z = a.tz = clamp(z, 1.5, WID - 1.5);
+    a.vx = a.vz = 0; a.maxSp = 0;
+    a.anim = null; a.visualAnim = null; a.passTarget = null;
+    a.hidden = false; a.faceLock = false; a.lean = 0; a.bank = 0;
+    if (faceX != null) faceTo(a, faceX, faceZ);
+  }
+
+  /* Los rivales deben respetar la distancia reglamentaria al balón. Se usa en
+   * córners y faltas; no mueve al sacador ni al portero. */
+  function keepOpponentsAway(side, x, z, radius, except) {
+    var list = listOf(1 - side);
+    for (var i = 0; i < list.length; i++) {
+      var q = list[i];
+      if (!q || q === except || q.gk) continue;
+      var dx = q.x - x, dz = q.z - z, d = Math.sqrt(dx * dx + dz * dz);
+      if (d >= radius || d < 0.001) continue;
+      var ux = dx / d, uz = dz / d;
+      placeSetPieceActor(q, x + ux * (radius + 0.35), z + uz * (radius + 0.35), x, z);
     }
-    sim.restart = {type: "corner", side: side, idx: taker ? taker.slot : -1, t: 0.65};
+  }
+
+  function setupCorner(side, end) {
+    sim.action = null; sim.restart = null; sim.pendingPass = null;
+    placeAtBase();
+    end = end == null ? (sim.attack[side] > 0 ? 1 : 0) : (end ? 1 : 0);
+    var b = sim.ball, cornerZ = b.z < MIDZ ? 0.7 : WID - 0.7;
+    b.x = end ? LEN - 0.7 : 0.7; b.z = cornerZ; b.y = 0.22;
+    b.vx = b.vy = b.vz = 0; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null;
+    b.side = side; b.idx = -1;
+    sim.own = side;
+
+    var gx = goalX(side), dir = sim.attack[side];
+    var targetX = clamp(gx - dir * 10.5, 4, LEN - 4);
+    var targetZ = clamp(MIDZ + (cornerZ < MIDZ ? 4.2 : -4.2), 6, WID - 6);
+    var taker = nearestActor(side, b.x, b.z, true);
+    if (taker) placeSetPieceActor(taker, b.x + (end ? -0.55 : 0.55),
+      b.z + (cornerZ < MIDZ ? 0.55 : -0.55), targetX, targetZ);
+
+    var rec = nearestActor(side, targetX, targetZ, true, taker);
+    if (rec) placeSetPieceActor(rec, targetX, targetZ, gx, MIDZ);
+    var attackers = listOf(side).filter(function (q) {
+      return q !== taker && q !== rec && !q.gk;
+    });
+    var nearX = clamp(gx - dir * 7.2, 3, LEN - 3);
+    var nearZ = clamp(MIDZ + (cornerZ < MIDZ ? -3.7 : 3.7), 4, WID - 4);
+    var edgeX = clamp(gx - dir * 16.5, 3, LEN - 3);
+    if (attackers[0]) placeSetPieceActor(attackers[0], nearX, nearZ, b.x, b.z);
+    if (attackers[1]) placeSetPieceActor(attackers[1], edgeX, MIDZ, b.x, b.z);
+    if (attackers[2]) placeSetPieceActor(attackers[2], targetX - dir * 3.0,
+      clamp(MIDZ - (cornerZ < MIDZ ? 2.2 : -2.2), 5, WID - 5), b.x, b.z);
+
+    /* Marcas defensivas: palo corto, rematador y frontal del área. */
+    var defenders = listOf(1 - side).filter(function (q) { return !q.gk; });
+    if (defenders[0]) placeSetPieceActor(defenders[0], clamp(gx - dir * 8.4, 3, LEN - 3),
+      targetZ, b.x, b.z);
+    if (defenders[1]) placeSetPieceActor(defenders[1], clamp(gx - dir * 6.9, 3, LEN - 3),
+      clamp(MIDZ + (cornerZ < MIDZ ? -3.4 : 3.4), 4, WID - 4), b.x, b.z);
+    if (defenders[2]) placeSetPieceActor(defenders[2], clamp(gx - dir * 15.0, 3, LEN - 3),
+      MIDZ, b.x, b.z);
+    var gk = pickKeeper(1 - side);
+    if (gk) placeSetPieceActor(gk, gx - dir * 0.9, MIDZ, b.x, b.z);
+    keepOpponentsAway(side, b.x, b.z, 9.15, null);
+
+    sim.restart = {type: "corner", side: side, idx: taker ? taker.slot : -1, t: 1.15,
+      target: rec ? rec.slot : -1, targetX: targetX, targetZ: targetZ, gx: gx, dir: dir};
+    sim.lastSetPiece = {type: "corner", side: side, target: rec ? rec.slot : -1,
+      targetX: +targetX.toFixed(2), targetZ: +targetZ.toFixed(2),
+      opponentsClear: +nearestOpponentDist(side, b.x, b.z).toFixed(2)};
+  }
+
+  /* Falta: cerca del área se forma barrera a 9,15 m y se busca el remate;
+   * lejos del área se reanuda con un pase normal, como en un partido. */
+  function setupFreeKick(side, x, z) {
+    sim.action = null; sim.restart = null; sim.pendingPass = null;
+    placeAtBase();
+    var b = sim.ball, dir = sim.attack[side], gx = goalX(side);
+    var spotX = clamp(x == null ? LEN / 2 : x, 3, LEN - 3);
+    var spotZ = clamp(z == null ? MIDZ : z, 4, WID - 4);
+    b.x = spotX; b.z = spotZ; b.y = 0.22;
+    b.vx = b.vy = b.vz = 0; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null;
+    b.side = side; b.idx = -1;
+    sim.own = side;
+
+    var taker = nearestActor(side, spotX, spotZ, true);
+    if (taker) placeSetPieceActor(taker, spotX - dir * 0.85, spotZ, gx, MIDZ);
+    /* 34 m es el límite aproximado de una falta directa con barrera. */
+    var nearGoal = dist(spotX, spotZ, gx, MIDZ) <= 34;
+    var targetX, targetZ, rec, wallX = null, wallZ = null;
+    if (nearGoal) {
+      targetX = clamp(gx - dir * 10.5, 4, LEN - 4);
+      targetZ = clamp(MIDZ + (spotZ < MIDZ ? 3.2 : -3.2), 6, WID - 6);
+      rec = nearestActor(side, targetX, targetZ, true, taker);
+      if (rec) placeSetPieceActor(rec, targetX, targetZ, gx, MIDZ);
+
+      var attackers = listOf(side).filter(function (q) {
+        return q !== taker && q !== rec && !q.gk;
+      });
+      for (var ai = 0; ai < attackers.length && ai < 3; ai++) {
+        placeSetPieceActor(attackers[ai], clamp(targetX + dir * (ai - 1) * 4.2, 4, LEN - 4),
+          clamp(targetZ + (ai === 0 ? -4.6 : ai === 1 ? 4.6 : 0), 5, WID - 5), b.x, b.z);
+      }
+
+      var dx = gx - spotX, dz = MIDZ - spotZ, dl = Math.sqrt(dx * dx + dz * dz) || 1;
+      var ux = dx / dl, uz = dz / dl, px = -uz, pz = ux;
+      wallX = spotX + ux * 9.15; wallZ = spotZ + uz * 9.15;
+      var defenders = listOf(1 - side).filter(function (q) { return !q.gk; });
+      for (var wi = 0; wi < defenders.length && wi < 3; wi++) {
+        placeSetPieceActor(defenders[wi], wallX + px * (wi - 1) * 0.95,
+          wallZ + pz * (wi - 1) * 0.95, spotX, spotZ);
+      }
+      /* El resto de la defensa se queda entre la barrera y su portería. */
+      for (var di = 3; di < defenders.length; di++) {
+        placeSetPieceActor(defenders[di], clamp(gx - dir * (12 + (di - 3) * 2.8), 4, LEN - 4),
+          clamp(MIDZ + (di % 2 ? 5.4 : -5.4), 5, WID - 5), b.x, b.z);
+      }
+    } else {
+      /* Falta lejana: receptor delante del sacador y pase raso; no tiene
+       * sentido montar una barrera y llenar el área desde el centro del campo. */
+      targetX = clamp(spotX + dir * 18, 4, LEN - 4);
+      targetZ = clamp(spotZ + (spotZ < MIDZ ? 7 : -7), 6, WID - 6);
+      rec = nearestActor(side, targetX, targetZ, true, taker);
+      if (rec) placeSetPieceActor(rec, targetX, targetZ, spotX, spotZ);
+    }
+    var gk = pickKeeper(1 - side);
+    if (gk) placeSetPieceActor(gk, gx - dir * 0.9, MIDZ, b.x, b.z);
+    keepOpponentsAway(side, spotX, spotZ, 9.15, null);
+
+    sim.restart = {type: "free", side: side, idx: taker ? taker.slot : -1, t: 1.1,
+      target: rec ? rec.slot : -1, targetX: targetX, targetZ: targetZ, gx: gx, dir: dir,
+      cross: nearGoal};
+    sim.lastSetPiece = {type: "free", side: side, target: rec ? rec.slot : -1,
+      targetX: +targetX.toFixed(2), targetZ: +targetZ.toFixed(2),
+      wallX: wallX == null ? null : +wallX.toFixed(2),
+      wallZ: wallZ == null ? null : +wallZ.toFixed(2),
+      wallDist: wallX == null ? null : +dist(spotX, spotZ, wallX, wallZ).toFixed(2),
+      cross: nearGoal};
+  }
+
+  /* Penalti: balón en el punto, portero en la línea y todos los demás fuera
+   * del área. El lanzamiento se resuelve con la acción de tiro existente. */
+  function setupPenalty(side, res, who) {
+    sim.action = null; sim.restart = null; sim.pendingPass = null;
+    placeAtBase();
+    var b = sim.ball, dir = sim.attack[side], gx = goalX(side);
+    var spotX = clamp(gx - dir * 11, 8, LEN - 8), spotZ = MIDZ;
+    b.x = spotX; b.z = spotZ; b.y = 0.22;
+    b.vx = b.vy = b.vz = 0; b.mode = "dead"; b.fl = null; b.next = null; b.claim = null;
+    b.side = side; b.idx = -1;
+    sim.own = side;
+
+    var taker = who != null ? actorAt(side, +who) : null;
+    if (!taker || taker.gk) taker = pickShooter(side, who);
+    if (taker) placeSetPieceActor(taker, spotX - dir * 2.4, spotZ, gx, MIDZ);
+    var gk = pickKeeper(1 - side);
+    if (gk) placeSetPieceActor(gk, gx - dir * 0.35, MIDZ, spotX, spotZ);
+
+    /* Todos los demás esperan detrás de la frontal del área. */
+    var outsideX = spotX - dir * 8.2;
+    var lists = [listOf(side), listOf(1 - side)], n = 0;
+    for (var li = 0; li < 2; li++) for (var ii = 0; ii < lists[li].length; ii++) {
+      var q = lists[li][ii];
+      if (q === taker || q === gk) continue;
+      var zz = 6 + (n % 10) * ((WID - 12) / 9);
+      n++;
+      placeSetPieceActor(q, outsideX + (q.side ? -1 : 1) * 0.65, zz, spotX, spotZ);
+    }
+    sim.restart = {type: "penalty", side: side, idx: taker ? taker.slot : -1,
+      t: 1.0, res: res === "goal" || res === "post" || res === "miss" ? res : "save",
+      spotX: spotX, spotZ: spotZ};
+    sim.lastSetPiece = {type: "penalty", side: side, taker: taker ? taker.slot : -1,
+      res: sim.restart.res, spotX: +spotX.toFixed(2)};
   }
 
   function outOfPlay() {
@@ -1612,11 +1777,43 @@ var Pitch3D = (function () {
     releaseBall(0, 0, 0);
   }
 
+  function takeSetPiece(r) {
+    var a = actorAt(r.side, r.idx);
+    if (!a) return;
+    a.visualAnim = {type: "pass", t: 0, dur: 0.6};
+    var mate = r.target != null && r.target >= 0 ? actorAt(r.side, r.target) : null;
+    if (!mate) mate = nearestActor(r.side, a.x, a.z, true, a);
+    var tx = r.targetX != null ? r.targetX : (mate ? mate.x : a.x + sim.attack[r.side] * 18);
+    var tz = r.targetZ != null ? r.targetZ : (mate ? mate.z : MIDZ);
+    tx = clamp(tx + (mate ? clamp(mate.vx * 0.12, -0.8, 0.8) : 0), 2, LEN - 2);
+    tz = clamp(tz + (mate ? clamp(mate.vz * 0.12, -0.8, 0.8) : 0), 2.5, WID - 2.5);
+    var d = dist(a.x, a.z, tx, tz);
+    var cross = r.type === "corner" || (r.type === "free" && r.cross !== false);
+    var dur = clamp(d / (cross ? 18 : 24), cross ? 0.55 : 0.28, cross ? 1.7 : 1.2);
+    var arc = cross ? clamp(1.1 + d * 0.018, 1.25, 2.7) : 0.2;
+    if (mate) {
+      mate.passTarget = {x: tx, z: tz, until: sim.time + dur + 0.75};
+      mate.maxSp = 7.8 * mate.pace;
+    }
+    sim.own = r.side;
+    launchBall(tx, tz, 0.24, dur, arc, mate ? {type: "held", side: r.side, idx: mate.slot} : null);
+    if (sim.lastSetPiece) {
+      sim.lastSetPiece.launched = true;
+      sim.lastSetPiece.flightDur = +dur.toFixed(2);
+      sim.lastSetPiece.receiver = mate ? mate.slot : -1;
+    }
+  }
+
   function updateRestart(dt) {
     if (!sim.restart) return;
     sim.restart.t -= dt;
     if (sim.restart.t > 0) return;
     var r = sim.restart; sim.restart = null; sim.pendingPass = null;
+    if (r.type === "penalty") {
+      startShot({t: r.res || "save", side: r.side, who: r.idx, k: "penalty", d: 11, ly: 0});
+      return;
+    }
+    if (r.type === "corner" || r.type === "free") { takeSetPiece(r); return; }
     var a = actorAt(r.side, r.idx);
     if (!a) return;
     a.visualAnim = {type: "pass", t: 0, dur: 0.6};
@@ -1822,10 +2019,9 @@ var Pitch3D = (function () {
     var a = sim.action; sim.action = null;
     if (a && a.type === "goalkick") {
       if (a.gk) a.gk.faceLock = false;
-      if (a.presser) a.presser.faceLock = false;
       sim.lastGoalKick = {side: a.side, phases: a.phaseLog.slice(), launched: a.launched,
         launchPhase: a.launchPhase, launchT: +a.launchT.toFixed(3), impactAt: +a.impactAt.toFixed(3),
-        flightDur: +a.flightDur.toFixed(3), shortK: a.shortK, pressure: !!a.presser,
+        flightDur: +a.flightDur.toFixed(3), shortK: a.shortK, pressure: false,
         receiver: a.receiver ? a.receiver.slot : -1, minPressureDist: +a.minPressureDist.toFixed(3)};
     }
     if (a && a.type === "shot") {
@@ -1836,11 +2032,48 @@ var Pitch3D = (function () {
         if (gk) giveTo(1 - a.side, gk.slot);
       }
     }
-    if (a && a.type === "card" && a.res === "red" && a.player) {
-      a.player.sentOff = true; a.player.gone = true; a.player.anim = null;
+    if (a && a.type === "card") {
+      if (a.ref) { a.ref.anim = null; a.ref.faceLock = false; }
+      if (a.player && !a.player.sentOff) a.player.anim = null;
+      if (a.res === "red" && a.player) {
+        a.player.sentOff = true; a.player.gone = true; a.player.anim = null;
+      }
     }
     if (sim.pendingOwn != null) { var p = sim.pendingOwn; sim.pendingOwn = null; sim.own = p; }
+    /* Un foul con tarjeta deja una falta para el equipo contrario. Si el
+     * árbitro muestra la tarjeta, la puesta en escena del balón parado llega
+     * justo después y ya con la formación colocada. */
+    if (a && a.type === "card" && a.freeKick && !sim.ended && !sim.cinema) {
+      setupFreeKick(1 - a.side, sim.ball.x, sim.ball.z);
+    }
     if (sim.queue.length) { var e = sim.queue.shift(); handleEvent(e); }
+  }
+
+  /* Puesta en escena de la tarjeta: primero el árbitro llega, después levanta
+   * la tarjeta. El gesto se limpia al terminar para que no quede congelado. */
+  function updateCardAction(a, dt) {
+    var ref = a.ref, p = a.player;
+    if (a.stage === "approach") {
+      var near = ref && p ? dist(ref.x, ref.z, p.x, p.z) : 99;
+      if (near <= 2.9 || a.t >= 1.45) {
+        a.stage = "show"; a.showT = 0;
+        if (ref) {
+          ref.anim = {type: "card", res: a.res, t: 0, dur: 2.1};
+          ref.faceLock = true;
+          if (p) ref.facing = Math.atan2(p.x - ref.x, p.z - ref.z);
+        }
+        if (p && ref) p.facing = Math.atan2(ref.x - p.x, ref.z - p.z);
+        if (sim.lastCard) sim.lastCard.visible = true;
+        cam.cutT = 1.8; cam.cutMode = "card";
+      }
+    } else if (a.stage === "show") {
+      a.showT += dt;
+      if (ref && p) {
+        ref.facing = angleTo(ref.facing, Math.atan2(p.x - ref.x, p.z - ref.z), Math.min(1, dt * 10));
+        p.facing = angleTo(p.facing, Math.atan2(ref.x - p.x, ref.z - p.z), Math.min(1, dt * 8));
+      }
+      if (a.showT >= 1.75) finishAction();
+    }
   }
 
   function updateAction(dt) {
@@ -1852,6 +2085,7 @@ var Pitch3D = (function () {
       if (a.t >= a.dur) finishAction();
       return;
     }
+    if (a.type === "card") { updateCardAction(a, dt); return; }
     if (a.type !== "shot") { if (a.t >= a.dur) finishAction(); return; }
     if (a.stage === "build" && a.t >= a.buildup) {
       if (a.shooter) { giveTo(a.side, a.shooter.slot); a.shooter.anim = {type: "kick", t: 0, dur: 0.24}; }
@@ -1879,10 +2113,41 @@ var Pitch3D = (function () {
 
   function startCard(e) {
     if (sim.action) { sim.queue.push(e); return; }
+    /* La tarjeta detiene el juego: no puede seguir un pase o un saque mientras
+     * el árbitro se acerca al infractor. */
+    sim.restart = null; sim.pendingPass = null;
+    var b = sim.ball;
+    if (b.mode === "flight" || b.mode === "held") {
+      b.fl = null; b.next = null; b.claim = null;
+      b.vx = b.vy = b.vz = 0; b.y = 0.22; b.mode = "dead";
+    }
     var side = +e.side === 1 ? 1 : 0, a = pickShooter(side, e.who);
-    if (a) a.anim = {type: "card", t: 0, dur: 0.9};
-    sim.action = {type: "card", t: 0, dur: 0.9, side: side, res: e.t, player: a};
+    var ref = sim.officials[0] || null, refX = null, refZ = null;
+    /* El árbitro se acerca al infractor desde su posición actual y se queda a
+     * unos dos metros para que la tarjeta entre en el plano. */
+    if (ref && a) {
+      var dx = ref.x - a.x, dz = ref.z - a.z, dd = Math.sqrt(dx * dx + dz * dz);
+      if (dd < 0.3) { dx = 0; dz = 1; dd = 1; }
+      refX = clamp(a.x + dx / dd * 2.05, 1.4, LEN - 1.4);
+      refZ = clamp(a.z + dz / dd * 2.05, 2.2, WID - 2.2);
+      /* Si la jugada dejó al árbitro muy lejos, el corte de cámara justifica
+       * que aparezca ya en el lugar de la tarjeta. A menos de 8 m camina. */
+      if (dd > 8) { ref.x = refX; ref.z = refZ; ref.vx = ref.vz = 0; }
+      ref.tx = refX; ref.tz = refZ; ref.maxSp = 8.6; ref.faceLock = false;
+    } else if (ref) {
+      refX = ref.x; refZ = ref.z;
+    }
+    if (a) {
+      a.anim = {type: "card", t: 0, dur: 1.3};
+      a.passTarget = null; a.tx = a.x; a.tz = a.z; a.maxSp = 0;
+    }
+    sim.action = {type: "card", stage: "approach", t: 0, dur: 3.4, side: side, res: e.t,
+      player: a, ref: ref, refX: refX, refZ: refZ, showT: 0,
+      freeKick: e.k == null || e.k === "foul"};
     if (e.t === "red" && a) sim.red[side][a.key] = true;
+    sim.lastCard = {side: side, res: e.t, player: a ? a.slot : -1,
+      referee: !!ref, visible: false};
+    cam.cutT = 1.8; cam.cutMode = "card";
     fireCue(e);
   }
 
@@ -1913,6 +2178,24 @@ var Pitch3D = (function () {
       e.t = t; startShot(e); return;
     }
     if (t === "yellow" || t === "red") { e.t = t; startCard(e); return; }
+    /* Balones parados que pueden llegar desde el motor o desde una prueba.
+     * Se tratan como una puesta en escena completa, no como un pase corto. */
+    if (t === "corner") {
+      if (sim.action) { sim.queue.push(e); return; }
+      var cs = +e.side === 1 ? 1 : 0;
+      var ce = e.end != null ? (e.end ? 1 : 0) : (sim.attack[cs] > 0 ? 1 : 0);
+      setupCorner(cs, ce); fireCue(e); return;
+    }
+    if (t === "free" || t === "freekick" || t === "free-kick") {
+      if (sim.action) { sim.queue.push(e); return; }
+      setupFreeKick(+e.side === 1 ? 1 : 0, e.x != null ? +e.x : null, e.z != null ? +e.z : null);
+      fireCue(e); return;
+    }
+    if (t === "penalty") {
+      if (sim.action) { sim.queue.push(e); return; }
+      setupPenalty(+e.side === 1 ? 1 : 0, e.res || e.r, e.who);
+      fireCue(e); return;
+    }
     if (t === "pass") {
       var ps = +e.side === 1 ? 1 : 0, pa = e.who != null ? actorAt(ps, +e.who) : null;
       if (!startVisualPass(e, ps, pa)) sim.pendingPass = {e: e, side: ps, who: pa, until: sim.time + 4};
@@ -1997,6 +2280,16 @@ var Pitch3D = (function () {
     }
     if (sim.action && sim.action.shooter && sim.action.stage === "outcome" && sim.action.res === "goal") {
       tx = sim.action.shooter.x; tz = sim.action.shooter.z; back = 24; height = 14;
+    }
+    if (sim.action && sim.action.type === "card") {
+      var cp = sim.action.player || sim.action.ref;
+      tx = cp ? cp.x : b.x; tz = cp ? cp.z : b.z;
+      back = 12.5; height = 6.8;
+    }
+    if (sim.action && sim.action.kind === "penalty") {
+      tx = sim.action.shooter ? sim.action.shooter.x : b.x;
+      tz = sim.action.shooter ? sim.action.shooter.z : b.z;
+      back = 20; height = 10;
     }
     if (sim.replay) { back = 28; height = 17; }
     /* Cortes de retransmisión: acercan la cámara en tiros, celebraciones y
@@ -2191,7 +2484,12 @@ var Pitch3D = (function () {
       if (anim.type === "gkready" || anim.type === "gkshield") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
       if (anim.type === "celebrate") return {name: "celebrate", t: k * 1.7, loop: false};
       if (anim.type === "greet") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
-      if (anim.type === "card") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
+      if (anim.type === "card") {
+        /* El árbitro reutiliza el gesto de brazos en alto; la tarjeta visible
+         * se dibuja aparte. Nunca se deja el clip bloqueado tras la acción. */
+        if (a.official === "ref") return {name: "celebrate", t: k * 1.15, loop: false};
+        return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
+      }
     }
     if (sp > 0.65) return runClip(a);
     return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
@@ -2208,6 +2506,42 @@ var Pitch3D = (function () {
     var shorts = a.gk ? [0.08, 0.10, 0.12] : (SHORTS[a.side] || SHORTS[0]);
     return {kit_shirt: shirt, kit_shorts: shorts, kit_socks: shirt, kit_trim: [0.96, 0.86, 0.55],
       skin: a.skin || SKIN, hair: a.hair || HAIR, boots: BOOT, gloves: [0.98, 0.48, 0.16]};
+  }
+
+  /* Tarjeta en la mano del árbitro. Es una geometría barata orientada a la
+   * cámara: se levanta al empezar el gesto y se guarda al final. */
+  function drawRefCard(m, a) {
+    var anim = a && a.anim;
+    if (!a || a.official !== "ref" || !anim || anim.type !== "card") return;
+    var k = clamp(anim.t / Math.max(0.01, anim.dur), 0, 1);
+    var up = clamp(k / 0.22, 0, 1); up = up * up * (3 - 2 * up);
+    var down = k > 0.84 ? clamp((k - 0.84) / 0.16, 0, 1) : 0;
+    var y = 1.42 + up * 0.62 - down * 0.72;
+    var ca = Math.cos(a.facing), sa = Math.sin(a.facing);
+    var cx = a.x + 0.43 * ca + 0.18 * sa;
+    var cz = a.z - 0.43 * sa + 0.18 * ca;
+    var dx = cam.x - cx, dz = cam.z - cz, dl = Math.sqrt(dx * dx + dz * dz) || 1;
+    var rx = dz / dl, rz = -dx / dl;
+    var w = 0.145, h = 0.215;
+    var pushX = dx / dl * 0.012, pushZ = dz / dl * 0.012;
+    /* borde claro y interior de color: la tarjeta se lee incluso en móvil */
+    m.tri9(cx + rx * (w + 0.022) + pushX, y - h / 2 - 0.018, cz + rz * (w + 0.022) + pushZ,
+      cx - rx * (w + 0.022) + pushX, y - h / 2 - 0.018, cz - rz * (w + 0.022) + pushZ,
+      cx - rx * (w + 0.022) + pushX, y + h / 2 + 0.018, cz - rz * (w + 0.022) + pushZ,
+      0.96, 0.96, 0.93);
+    m.tri9(cx + rx * (w + 0.022) + pushX, y - h / 2 - 0.018, cz + rz * (w + 0.022) + pushZ,
+      cx - rx * (w + 0.022) + pushX, y + h / 2 + 0.018, cz - rz * (w + 0.022) + pushZ,
+      cx + rx * (w + 0.022) + pushX, y + h / 2 + 0.018, cz + rz * (w + 0.022) + pushZ,
+      0.96, 0.96, 0.93);
+    var col = anim.res === "red" ? [0.90, 0.045, 0.055] : [0.99, 0.82, 0.10];
+    m.tri9(cx + rx * w + pushX, y - h / 2, cz + rz * w + pushZ,
+      cx - rx * w + pushX, y - h / 2, cz - rz * w + pushZ,
+      cx - rx * w + pushX, y + h / 2, cz - rz * w + pushZ,
+      col[0], col[1], col[2]);
+    m.tri9(cx + rx * w + pushX, y - h / 2, cz + rz * w + pushZ,
+      cx - rx * w + pushX, y + h / 2, cz - rz * w + pushZ,
+      cx + rx * w + pushX, y + h / 2, cz + rz * w + pushZ,
+      col[0], col[1], col[2]);
   }
 
   function drawContactShadow(m, a, q, far) {
@@ -2403,8 +2737,8 @@ var Pitch3D = (function () {
       m.box(-0.18, 0.015 + liftL, gait * 0.55 + 0.05, 0.2, 0.08, 0.3, BOOT);
       m.box(0.18, Math.max(0.015, rFootY - 0.055), rFootZ + 0.05, 0.2, 0.08, 0.3, BOOT);
       var arm = Math.sin(a.runPhase + PI) * 0.28 * run;
-      var handY = celebrate ? 1.6 : card ? 1.35 : 0.78;
-      var elbowY = celebrate ? 1.45 : 0.98;
+      var handY = celebrate ? 1.6 : card ? (a.official === "ref" ? 1.88 : 1.35) : 0.78;
+      var elbowY = celebrate ? 1.45 : card && a.official === "ref" ? 1.46 : 0.98;
       var handX = 0.46, elbowX = 0.43;
       var leftHandZ = celebrate ? 0.05 : card ? 0 : -arm;
       var rightHandZ = celebrate ? 0.05 : card ? 0 : arm;
@@ -2589,7 +2923,9 @@ var Pitch3D = (function () {
     }
     for (var oi = 0; oi < sim.officials.length; oi++) {
       var oa = sim.officials[oi];
-      if (oa && !oa.hidden && !buildAssetPlayer(dyn, oa)) buildPlayer(dyn, oa);
+      if (!oa || oa.hidden) continue;
+      if (!buildAssetPlayer(dyn, oa)) buildPlayer(dyn, oa);
+      drawRefCard(dyn, oa);
     }
     buildCoin(dyn);
     if (!sim.ballHidden && !buildAssetBall(dyn)) buildBall(dyn);
@@ -2683,7 +3019,10 @@ var Pitch3D = (function () {
      * que el portero o el receptor abandonen la puesta en escena. Al terminar
      * la acción, aiTick recupera el control en el siguiente paso. */
     if (aiAcc >= AI_STEP) {
-      if (!(sim.action && sim.action.type === "goalkick")) aiTick();
+      var setPiece = sim.restart && (sim.restart.type === "corner" || sim.restart.type === "free" ||
+        sim.restart.type === "penalty");
+      var staging = sim.action && (sim.action.type === "goalkick" || sim.action.type === "card");
+      if (!staging && !setPiece) aiTick();
       aiAcc = 0;
     }
     moveActors(sdt);
@@ -2914,7 +3253,7 @@ var Pitch3D = (function () {
         if (sim.restart && sim.restart.type === "kickoff" && sim.restart.side !== own) setupKickoff(own);
       }
       if (sim.action) sim.pendingOwn = own;
-      else if (own !== sim.own) changePossession(own);
+      else if (own !== sim.own && !sim.restart) changePossession(own);
     }
     if (o.bx != null) sim.bx = clamp(+o.bx, 0, 100);
     /* La posición del motor ya es continua. Si el portador está lejos del objetivo,
@@ -2957,6 +3296,8 @@ var Pitch3D = (function () {
 
   function actionLeft(a) {
     if (!a) return 0;
+    if (a.type === "card") return a.stage === "show" ? Math.max(0, 1.75 - a.showT) :
+      Math.max(0, 1.45 - a.t) + 1.75;
     if (a.type !== "shot") return Math.max(0, a.dur - a.t);
     if (a.stage === "build") return Math.max(0, a.buildup - a.t) + 0.18 + 0.5 + a.outcome;
     if (a.stage === "windup") return Math.max(0, 0.18 - a.t) + 0.5 + a.outcome;
@@ -3055,10 +3396,11 @@ var Pitch3D = (function () {
       gk = {active: true, phase: ga.phase, phaseIndex: ga.phaseIndex, phases: ga.phaseLog.slice(),
         t: +ga.t.toFixed(3), dur: +ga.dur.toFixed(3), impactAt: +ga.impactAt.toFixed(3),
         launched: ga.launched, launchPhase: ga.launchPhase, launchT: +ga.launchT.toFixed(3),
-        shortK: ga.shortK, pressure: !!ga.presser, receiver: ga.receiver ? ga.receiver.slot : -1,
+        shortK: ga.shortK, pressure: false, receiver: ga.receiver ? ga.receiver.slot : -1,
         minPressureDist: +ga.minPressureDist.toFixed(3)};
     } else if (sim.lastGoalKick) gk = sim.lastGoalKick;
-    return {sim: sim, ball: sim.ball, action: sim.action, goalkick: gk, cinema: cinema(), quality: quality, fps: fps, frames: frameCount,
+    return {sim: sim, ball: sim.ball, action: sim.action, goalkick: gk, card: sim.lastCard,
+      setPiece: sim.lastSetPiece, cinema: cinema(), quality: quality, fps: fps, frames: frameCount,
       gl: !!gl, glError: err, players: sim.players, history: sim.history.length, camera: cam, mesh: meshStats(),
       assets: {state: assetState, lods: assetLods, statics: assetModels ? Object.keys(assetModels.static).length : 0,
         errors: assetModels && assetModels.errors ? assetModels.errors.length : 0,

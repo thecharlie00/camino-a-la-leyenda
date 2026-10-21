@@ -18,7 +18,7 @@ El partido 3D es una representación visual del directo. **`match41.js` sigue si
 1. **Estado y simulación visual**: posesión, balón, jugadores, saques, descanso, final y cola de acciones.
 2. **IA y movimiento**: posiciones base por formación, pressing, ayudas, separación, porteros y velocidades.
 3. **Animación y skinning**: lectura de clips GLB, evaluación de la jerarquía de 22 huesos, deformación en CPU con hasta cuatro influencias por vértice y cross-fade de 0,18 s entre clips.
-4. **Balón y jugadas**: estados `dead`, `held`, `flight` y `loose`; pases visuales en juego abierto, tiros con enrosque, paradas, postes y saques. El saque de puerta usa una secuencia de presentación con impacto sincronizado.
+4. **Balón y jugadas**: estados `dead`, `held`, `flight` y `loose`; pases visuales en juego abierto, tiros con enrosque, paradas, postes, saques, córners, faltas y penaltis. El saque de puerta usa una secuencia de presentación con impacto sincronizado y sin presión rival.
 5. **Ambientación**: graderío procedural, cubierta, túnel, focos, árbitro, asistentes, clima y marcador de retransmisión.
 6. **Cámara**: seguimiento suave del balón, acercamiento en jugadas, cortes de tiro/gol y encuadre de celebración.
 7. **WebGL 1**: shaders propios, un VBO estático para el campo y un VBO dinámico reutilizado para jugadores y balón.
@@ -63,7 +63,7 @@ match41.js ──> ui.js (livePitchFeed) ──> Pitch.state / Pitch.event
 ### Autoridad y sincronización
 
 - `state.bx` siempre se interpreta desde la perspectiva del equipo local. El 3D aplica el lado de ataque (`sim.attack`) y lo espeja al descanso.
-- `bx` es una posición física continua: al perder la posesión el balón se queda donde estaba y solo cambia el equipo que ataca. Los saques de centro, de puerta, de banda y los córners son las únicas reanudaciones que lo colocan en una posición fija.
+- `bx` es una posición física continua: al perder la posesión el balón se queda donde estaba y solo cambia el equipo que ataca. Los saques de centro, de puerta, de banda, los córners, las faltas y los penaltis son las reanudaciones que lo colocan en una posición fija.
 - La salida por la línea de fondo se resuelve por el último toque: saque de puerta para el equipo que defiende esa portería si el balón lo sacó el atacante, y córner para el atacante si lo desvió el defensor.
 - El adaptador no lanza pases de reconciliación de un campo a otro: si el portador está lejos del objetivo, corre hacia él. Un cambio de posesión suelta el balón en su sitio y el nuevo equipo lo persigue.
 - Los jugadores se identifican por `id` estable, no por identidad de objeto: `ui.js` recrea la lista cada minuto y el 3D reutiliza sus actores.
@@ -103,23 +103,43 @@ El sorteo se dibuja como un panel DOM sobre el canvas 3D, con botones `data-p3d-
 
 ### Saque de puerta
 
-El saque de puerta ya no es un pase instantáneo tras una espera fija. `pitch3d.js` representa una secuencia de presentación de **5,76 s de partido** (comprimida por la velocidad del directo), sin tocar el resultado ni el estado de `match41`:
+El saque de puerta ya no es un pase instantáneo tras una espera fija. `pitch3d.js` representa una secuencia de presentación de **4,76 s de partido** (comprimida por la velocidad del directo), sin tocar el resultado ni el estado de `match41`:
 
 ```text
-prepare → scan → shield → windup → plant → impact → follow → recover
- 1,35     0,80    1,00      0,90     0,16     0,10     0,75     0,70
+prepare → scan → windup → plant → impact → follow → recover
+ 1,35     0,80    0,90     0,16     0,10     0,75     0,70
 ```
 
-- **prepare**: el portero sale de su área, llega al balón y lo coloca. El balón permanece `dead` en el punto de saque.
+- **prepare**: el portero llega al balón y lo coloca. El balón permanece `dead` en el punto de saque.
 - **scan**: otea ambas bandas; la orientación del cuerpo barre a izquierda y derecha.
-- **shield**: el rival más cercano presiona y el portero protege el balón con el cuerpo. El atacante se detiene fuera del radio de choque; no hay solapamientos.
 - **windup**: retrocede mirando al balón y arranca la carrera de golpeo.
 - **plant / impact**: la pose de golpeo llega al contacto y **solo entonces** se llama a `launchBall`; no hay un temporizador paralelo. La marca de impacto y el lanzamiento quedan registrados en `sim.lastGoalKick`.
 - **follow / recover**: acompañamiento, vuelta a la posición y fin de la acción. `busy()` cubre la secuencia completa y, si el envío es largo, también la recepción.
 
+**Ningún rival puede acercarse al portero durante el saque.** Se eliminó la fase de presión (`shield`) y la IA queda congelada hasta que el balón sale, de modo que no hay un jugador rival esperando al lado del guardameta. `minPressureDist` mide la separación real y `pressure` queda siempre en `false`; las pruebas exigen más de 6 m y en la última ejecución el rival más cercano estuvo a 19,149 m.
+
 La secuencia elige dos opciones reales (apoyo corto y salida larga), mueve a los receptores a sus zonas y conserva la continuidad física del balón. Si no hay GLB, la pose procedural dispone de brazos de portero y pierna de golpeo; los actores con GLB reutilizan `idle`, `run` y `kick`. La IA se pausa durante la coreografía y se reanuda al terminar, salvo que el evento autoritativo haya cambiado la posesión.
 
-Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro de fases, `impactAt`, `launchT`, si se lanzó y el receptor. Tras finalizar, se conserva el resumen en `sim.lastGoalKick`.
+Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro de fases, `impactAt`, `launchT`, si se lanzó, el receptor y `minPressureDist`. Tras finalizar, se conserva el resumen en `sim.lastGoalKick`.
+
+### Córners, faltas y penaltis
+
+Los balones parados se representan como una puesta en escena completa: se colocan los actores, se respeta la distancia reglamentaria y el balón se envía al área o se lanza a portería. No se reutiliza el pase corto al compañero más cercano ni se deja al receptor con su tarea táctica.
+
+- **Córner**: el sacador va a la esquina; un rematador espera en el segundo palo (10,5 m de la línea de gol), otro en el palo corto y otro en la frontal. Los defensores ocupan las marcas, el portero se sitúa bajo la portería y todos los rivales quedan fuera de **9,15 m** del balón. El centro sale con arco hacia el punto de remate y el receptor ataca la caída.
+- **Falta cerca del área** (hasta 34 m de la portería): el sacador se coloca detrás del balón y la barrera de tres defensores se forma a **9,15 m** en dirección a la portería atacada; el resto de la defensa se reparte entre la barrera y su área. Los atacantes esperan en el área y el saque se dirige al punto de remate, no a un compañero cercano.
+- **Falta lejana**: se respeta también la distancia de 9,15 m, pero no se monta barrera ni se llena el área; el sacador reanuda con un pase raso a un compañero adelantado, como en un partido normal.
+- **Penalti**: el balón va al punto de penalti (11 m), el sacador se coloca detrás, el portero en la línea y **todos los demás jugadores fuera del área**, por detrás de la frontal. El lanzamiento reutiliza la acción de tiro con resultado `goal`, `save`, `post` o `miss`; si no se indica, se usa `save`.
+- Durante la colocación y la espera, la IA está pausada y un cambio de posesión del motor no cancela el saque. Al lanzarse, el 3D vuelve al juego normal.
+- `sim.lastSetPiece` conserva el tipo, el receptor, el punto de remate y, en las faltas, la posición y distancia de la barrera. Los eventos manuales `corner`, `free`/`freekick`/`free-kick` y `penalty` permiten reproducir la puesta en escena sin tocar el marcador.
+
+### Tarjetas del árbitro
+
+- La tarjeta detiene el balón y cualquier saque pendiente. El árbitro se acerca al infractor; si estaba a más de 8 m, el corte de cámara lo coloca ya en el lugar para que el gesto no se pierda fuera de plano.
+- En la fase `approach` camina hacia el jugador; en `show` se detiene, lo encara y levanta la tarjeta durante 1,75 s. La cámara baja a un plano cercano de 12,5 m de distancia y 6,8 m de altura.
+- La tarjeta es geometría procedural orientada a cámara, con borde claro y color **amarillo** o **rojo**. El árbitro reutiliza el clip `celebrate` para el gesto de brazos (o la pose procedural de mano en alto sin GLB); la tarjeta se dibuja aparte y se retira al terminar.
+- La roja marca al jugador como expulsado y lo oculta. Si la tarjeta llega con `k: "foul"`, al terminar la acción se prepara una falta para el equipo contrario.
+- `Pitch3D.debug().card` expone `side`, `res`, `player`, si hay árbitro y si la tarjeta ya es visible. `sim.lastCard` conserva el resumen tras la acción.
 
 ### Locomoción
 
@@ -164,7 +184,7 @@ Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro 
 
 ### Prueba aislada del 3D
 
-`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel en fila con el capitán al frente, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción sin teletransporte, tackle sin `dive`, árbitro y asistentes, tiro, parada con `dive` exclusivo del portero, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja, replay, reset, marcador, clima y destroy. Una página aparte fuerza el resultado del cara o cruz y recorre llamada, elección de campo, cierre del panel y saque, y comprueba que el árbitro termina sin gesto congelado. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural, incluida la barrida de campo, y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son 44 comprobaciones.
+`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel en fila con el capitán al frente, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción sin teletransporte, tackle sin `dive`, árbitro y asistentes, tiro, parada con `dive` exclusivo del portero, secuencia de saque de puerta (fases, balón inmóvil antes del impacto, lanzamiento sincronizado y rival más cercano a más de 6 m), córner con formación y centro al área, falta con barrera a 9,15 m, penalti con el área despejada y tiro real, descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja con gesto visible del árbitro y falta lejana posterior a la tarjeta, replay, reset, marcador, clima y destroy. Una página aparte fuerza el resultado del cara o cruz y recorre llamada, elección de campo, cierre del panel y saque, y comprueba que el árbitro termina sin gesto congelado. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural, incluida la barrida de campo, y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son **51 comprobaciones**.
 
 Requiere Node y Playwright (o `playwright-core`) con Chrome/Chromium. Si no está instalado:
 
@@ -193,7 +213,7 @@ En CI se instala Playwright y Chromium y se ejecuta el mismo archivo. El test fa
 
 ## Límites conocidos
 
-- Las animaciones son clips cortos generados para el proyecto; no hay captura de movimiento ni retargeting externo. La tarjeta reutiliza la pose de `idle`.
+- Las animaciones son clips cortos generados para el proyecto; no hay captura de movimiento ni retargeting externo. La tarjeta reutiliza `celebrate` para el gesto de brazos y añade una tarjeta procedural amarilla o roja.
 - Las acciones de tiro, parada y gol son representaciones aproximadas basadas en eventos; no reproducen la física exacta de cada jugada.
 - La iluminación sigue siendo plana por triángulo, pero el especular ya usa rugosidad y metalicidad de los materiales GLB (modelo GGX/Fresnel simplificado). No hay texturas PBR, mapas de oclusión ambiental ni sombras proyectadas.
 - La repetición es visual (historial de posiciones del render), no una repetición sincronizada de los eventos de `match41`.
@@ -209,7 +229,7 @@ El contrato vigente está en `assets/manifest.json`:
 
 - Y arriba, metros, origen del jugador entre los pies a nivel del suelo y frente hacia +Z.
 - Esqueleto humanoide de 22 huesos, compartido por hombre, mujer y portero.
-- Clips `idle`, `run`, `kick`, `dive` y `celebrate`; la tarjeta reutiliza `idle`.
+- Clips `idle`, `run`, `kick`, `dive` y `celebrate`; la tarjeta reutiliza `celebrate`.
 - LOD1/LOD2 para jugadores y LOD1 para el balón. Los LOD0 del manifiesto no se incrustan en el juego para no aumentar el HTML.
 - Materiales con nombres estables (`kit_shirt`, `kit_shorts`, `kit_socks`, `kit_trim`, `skin`, `hair`, `boots`, `gloves`) y colores por vértice; sin texturas de imagen.
 - GLB 2.0 binario, sin dependencias de runtime. El parser debe ser pequeño, testeado y opcional: si no carga, el partido sigue con mallas procedurales.
