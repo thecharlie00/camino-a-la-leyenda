@@ -22,3 +22,6 @@ __pycache__/
 *.pyc
 work/
 .DS_Store
+
+# --- Assets generados (se producen con tools/assets/build_assets.mjs) ---
+assets/generated/
