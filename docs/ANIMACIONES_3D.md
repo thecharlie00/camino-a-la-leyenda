@@ -194,10 +194,12 @@ Los tiempos se escalan con la velocidad del directo. Las cámaras de túnel, cí
 ### Cara o cruz
 
 - La moneda es geometría procedural (dos caras y canto) y gira durante 1,15 s.
-- El panel DOM solo aparece en la vista 3D y ofrece `Cara`/`Cruz` y después `Campo`/`Pelota`.
-- **Campo** invierte el lado de ataque visual; **Pelota** mantiene el saque que ya fijó `match41.js`.
+- El panel DOM solo aparece en la vista 3D y ofrece `Cara`/`Cruz` y después **campo**/**pelota** como tarjetas con pros y contras (`data-p3d-pro`, `data-p3d-con`).
+- El texto de cada tarjeta se calcula con el nivel del rival, su estilo determinista y el clima; bajo las tarjetas, `data-p3d-toss-meta` muestra clima, rival, nivel, estilo y multiplicador de fatiga.
+- **Campo** invierte el lado de ataque visual; **Pelota** conserva la orientación. En ambos casos el saque de centro sigue siendo el que fijó `match41.js`.
+- Si gana el rival, `chooseRivalToss` decide según estilo, diferencia de nivel y clima. El panel enseña el motivo (`data-p3d-rival-why`) antes de aplicar la consecuencia (`data-p3d-choice-result`); un rival claramente superior puede elegir pelota.
 - La posesión autoritativa no se toca: el 3D captura el primer `state.own` y lo usa al cerrar la entrada.
-- Si gana el rival, elige campo automáticamente. Si el jugador no responde, el árbitro llama y elige por él.
+- Si el jugador no responde, el árbitro llama y elige por él.
 - `busy()` añade 620 ms mientras hay cine para que la UI no pida el siguiente minuto. `freeze()` se difiere hasta el final de la secuencia.
 
 ---
@@ -212,7 +214,7 @@ La secuencia del guardameta es una puesta en escena de 4,76 s de partido, compri
 prepare 1,35 → scan 0,80 → windup 0,90 → plant 0,16 → impact 0,10 → follow 0,75 → recover 0,70
 ```
 
-- **Sin presión rival**: se eliminó la fase `shield` y la IA queda congelada durante la acción. Ningún atacante se coloca junto al portero; `minPressureDist` solo mide la separación para las pruebas y `pressure` es siempre `false`.
+- **Sin área rival**: antes de colocar a los receptores, `placeGoalKickOpponents` vacía el área (0,45 m de margen) y garantiza `GK_SAFE_DIST` (13,5 m) respecto al portero, con una segunda pasada radial. La IA queda congelada durante la acción y `pressure` es siempre `false`; `minPressureDist`, `opponentsOutside` y `playersInsideArea` quedan en `debug().goalkick` y en `sim.lastGoalKick`.
 - **Contacto real**: `launchBall` se llama en `impact`, nunca por un temporizador paralelo. La pose procedural usa brazos de portero y pierna de golpeo; los actores GLB reutilizan `idle`, `run` y `kick`.
 - **Receptores**: apoyo corto y salida larga se eligen antes de la coreografía; el receptor ataca el punto de caída y el balón conserva su continuidad física.
 
@@ -253,6 +255,8 @@ approach (hasta 1,45 s o 2,9 m) → show (1,75 s) → limpieza
 - **Implementado:** la recepción solo entrega el balón si el receptor está a menos de 1,75 m; si no, queda suelto y lo persigue. Los tiros que llegan durante un pase se encolan hasta que el balón aterriza.
 - **Implementado:** cross-fade de 0,18 s entre clips en `evalModel`; el clip anterior se evalúa en un segundo buffer y se interpola con smoothstep.
 - **Implementado:** paradas con `dive` exclusivamente para porteros; los robos de campo usan `kick` y una pose de barrida propia, nunca `dive`. Pases y tiros usan `kick`. La pose procedural de reserva mantiene las mismas acciones sin GLB.
+- **Implementado:** marcador diferido. `state.score` fija el objetivo `[local, visitante]`; el evento `goal` marca `scorePending` y el HUD solo sube cuando la pelota cruza la línea en `resolveShot` (`commitGoal`). Un gol sin confirmar se reconcilia a los 25 s de tiempo visual y el HUD nunca retrocede.
+- **Implementado:** clima visual. Lluvia inclinada, nieve, niebla y cambios de rodadura/rebote del balón suelto derivados de `wx`; la fatiga real la sigue aplicando `match41.js` y la UI muestra una franja con nombre, efecto y multiplicador.
 - **Implementado:** entrada, descanso y despedida con `sim.cinema`, saludos procedurales, moneda 3D y panel de cara o cruz. `Pitch3D.cinema()` y `Pitch3D.skipCinema()` permiten observar o completar la secuencia sin tocar `match41.js`.
 - **Implementado:** saques de puerta sin presión, córners y faltas con distancia reglamentaria y penaltis con el área despejada. Los eventos manuales `corner`, `free`/`freekick` y `penalty` permiten ensayar las puestas en escena sin modificar el marcador.
 - **Implementado:** tarjeta del árbitro con fases `approach`/`show`, clip `celebrate` o mano procedural, tarjeta amarilla/roja dibujada en 3D y limpieza al terminar. Una tarjeta por falta deja la falta correspondiente al otro equipo.

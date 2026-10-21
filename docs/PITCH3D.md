@@ -58,7 +58,7 @@ match41.js ──> ui.js (livePitchFeed) ──> Pitch.state / Pitch.event
                               └──────── canvas del directo ─┘
 ```
 
-`ui.js` envía al 3D la posesión, la posición narrativa del balón (`bx`), la velocidad, la mentalidad, las tácticas del equipo local, el clima (`wx`), el marcador (`score`) y el minuto (`min`). Los eventos (`goal`, `save`, `post`, `miss`, `half`, `end`, tarjetas, `pass`, `tackle`, etc.) solo generan la representación visual; el marcador y las estadísticas los actualiza el motor del partido. `pass`/`tackle` se descartan en el adaptador cuando no hay 3D montado.
+`ui.js` envía al 3D la posesión, la posición narrativa del balón (`bx`), la velocidad, la mentalidad, las tácticas del equipo local, el clima (`wx`), el marcador (`score`), el minuto (`min`) y el contexto del sorteo (`toss`: nombres, nivel, estilo rival). El marcador viaja **siempre como `[local, visitante]`**, se juegue en casa o fuera, para que el chip izquierdo y el derecho del HUD 3D no se intercambien. Los eventos (`goal`, `save`, `post`, `miss`, `half`, `end`, tarjetas, `pass`, `tackle`, etc.) solo generan la representación visual; el marcador y las estadísticas los actualiza el motor del partido. `pass`/`tackle` se descartan en el adaptador cuando no hay 3D montado.
 
 ### Autoridad y sincronización
 
@@ -70,6 +70,7 @@ match41.js ──> ui.js (livePitchFeed) ──> Pitch.state / Pitch.event
 - Si llega un evento mientras hay una acción en curso, se encola. La UI puede esperar con `Pitch.busy()`.
 - Al descanso se intercambian lados, se reinicia el saque y se conserva el roster.
 - Al final se congela la simulación visual, pero la cámara y el render siguen activos.
+- **Marcador autoritativo**: `state.score` fija el objetivo canónico, pero el HUD no lo muestra al instante. Un evento `goal` marca `scorePending`; el marcador visible solo sube cuando el balón cruza la línea y `resolveShot` llama a `commitGoal`. Si un gol se queda sin confirmar, `reconcileScore` adopta el objetivo a los 25 s de tiempo visual. El HUD nunca se adelanta al vuelo ni retrocede.
 - `Pitch.reset()` conserva el roster y recoloca el partido para el reinicio de la simulación.
 
 ### Entrada, descanso y despedida
@@ -97,7 +98,9 @@ El sorteo se dibuja como un panel DOM sobre el canvas 3D, con botones `data-p3d-
 
 - **Llamada**: el jugador elige `cara` o `cruz`; si no responde en 9 s de partido, el árbitro llama por él.
 - **Resultado**: la moneda gira 1,15 s, se resuelve y se anuncia el ganador.
-- **Elección**: si gana el jugador, elige **campo** o **pelota**. **Campo** invierte el lado de ataque visual del 3D; **pelota** mantiene el saque que ya indicó `match41.js`. Si gana el rival, elige campo y el 3D invierte el lado.
+- **Elección del jugador**: el panel muestra **campo** y **pelota** como tarjetas con pros y contras explícitos (`data-p3d-pro`, `data-p3d-con`). El texto se calcula al vuelo según el nivel del rival, su estilo (`Posesión`, `Juego directo`, `Presión alta`, `Contragolpe`) y el clima. **Campo** invierte el lado de ataque visual; **pelota** conserva la orientación y el saque. En ambos casos el saque de centro sigue siendo el que fijó `match41.js`.
+- **Decisión rival**: si gana el rival, `chooseRivalToss` simula su elección con el mismo contexto: un rival de presión o posesión tiende a elegir campo, y un rival claramente superior puede dejar el campo como está porque confía en su nivel. El panel muestra primero el motivo (`data-p3d-rival-why`) y después aplica la consecuencia (`data-p3d-choice-result`).
+- **Contexto visible**: bajo las tarjetas, `data-p3d-toss-meta` resume clima (icono, nombre, efecto y multiplicador de fatiga), rival, nivel y estilo. La fatiga que se muestra es la que aplica `match41.js`; el sorteo no la modifica.
 - La decisión no cambia la posesión autoritativa: el saque inicial sigue viniendo del primer `state.own`. El descanso vuelve a invertir los lados.
 - El panel es exclusivo de la vista 3D; el campo 2D y el APK sin WebGL siguen funcionando sin sorteo y sin tocar el resultado.
 
@@ -116,11 +119,11 @@ prepare → scan → windup → plant → impact → follow → recover
 - **plant / impact**: la pose de golpeo llega al contacto y **solo entonces** se llama a `launchBall`; no hay un temporizador paralelo. La marca de impacto y el lanzamiento quedan registrados en `sim.lastGoalKick`.
 - **follow / recover**: acompañamiento, vuelta a la posición y fin de la acción. `busy()` cubre la secuencia completa y, si el envío es largo, también la recepción.
 
-**Ningún rival puede acercarse al portero durante el saque.** Se eliminó la fase de presión (`shield`) y la IA queda congelada hasta que el balón sale, de modo que no hay un jugador rival esperando al lado del guardameta. `minPressureDist` mide la separación real y `pressure` queda siempre en `false`; las pruebas exigen más de 6 m y en la última ejecución el rival más cercano estuvo a 19,149 m.
+**Ningún rival puede pisar el área ni acercarse al portero durante el saque.** Antes de colocar a los receptores, `placeGoalKickOpponents` saca del área a todo rival que esté dentro (con 0,45 m de margen) y garantiza una separación de protección de `GK_SAFE_DIST` (13,5 m); una segunda pasada radial corrige cualquier caso de banda. La IA queda congelada hasta que el balón sale, de modo que no hay un jugador rival esperando al lado del guardameta. `minPressureDist` mide la separación real y `pressure` queda siempre en `false`; las pruebas exigen 0 rivales dentro del área, `playersInsideArea === 0` y al menos 12,5 m del portero. En la última ejecución el rival más cercano estuvo a 22,66 m en preparación y a 19,149 m al completar el saque.
 
 La secuencia elige dos opciones reales (apoyo corto y salida larga), mueve a los receptores a sus zonas y conserva la continuidad física del balón. Si no hay GLB, la pose procedural dispone de brazos de portero y pierna de golpeo; los actores con GLB reutilizan `idle`, `run` y `kick`. La IA se pausa durante la coreografía y se reanuda al terminar, salvo que el evento autoritativo haya cambiado la posesión.
 
-Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro de fases, `impactAt`, `launchT`, si se lanzó, el receptor y `minPressureDist`. Tras finalizar, se conserva el resumen en `sim.lastGoalKick`.
+Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro de fases, `impactAt`, `launchT`, si se lanzó, el receptor, `minPressureDist`, `opponentsOutside`, `playersInsideArea`, `opponentsMoved` y `safeDist`. Tras finalizar, se conserva el resumen en `sim.lastGoalKick`.
 
 ### Córners, faltas y penaltis
 
@@ -162,8 +165,8 @@ Los balones parados se representan como una puesta en escena completa: se coloca
 
 - **Grada**: quads verticales baratos para cuerpo y cabeza, con colores de afición y detalles del club local; cubierta, vigas, focos y boca de túnel completan el estadio sin texturas ni instancing.
 - **Oficiales**: árbitro y dos asistentes son actores visuales fuera de `sim.players`, por lo que el contrato de 22 jugadores no cambia. El árbitro acompaña la jugada y los asistentes recorren su banda; al descanso se espejan con el resto del campo. Sus gestos (saludo, pito) caducan con el mismo reloj que los jugadores y la locomoción manda mientras caminan, así que nunca se quedan congelados en `celebrate`.
-- **Clima**: `ui.js` transmite `wx` desde el motor. El 3D tiñe cielo y niebla, ajusta la distancia de niebla y dibuja lluvia o nieve procedimental. Con `prefers-reduced-motion` o calidad baja se reduce o se omite.
-- **Marcador**: `ui.js` transmite `score` y `min`; el 3D muestra un marcador compacto sobre el canvas con los colores de cada equipo. Sigue siendo un reflejo del motor, nunca una fuente de verdad.
+- **Clima**: `ui.js` transmite `wx` desde el motor y muestra una franja con icono, nombre, efecto y multiplicador de fatiga. El 3D tiñe cielo y niebla, ajusta la distancia de niebla y dibuja lluvia inclinada o nieve procedimental. La rodadura y el rebote del balón suelto cambian de forma **solo visual** para que el clima se note; la fatiga real la sigue aplicando `match41.js` con `MX_WX` y la calibración no se toca. Con `prefers-reduced-motion` o calidad baja se reduce o se omite.
+- **Marcador**: `ui.js` transmite `score` como `[local, visitante]` y `min`; el 3D muestra un marcador compacto con los colores de cada equipo. El HUD 3D difiere el cambio hasta que el balón cruza la línea (`scorePending`/`commitGoal`) y reconcilia a los 25 s si el evento se pierde. Sigue siendo un reflejo del motor, nunca una fuente de verdad.
 - **Cámara**: los cortes de tiro, gol y repetición son visuales; el estado del partido no se congela ni cambia por ellos.
 
 ## Renderizado y rendimiento
@@ -184,7 +187,7 @@ Los balones parados se representan como una puesta en escena completa: se coloca
 
 ### Prueba aislada del 3D
 
-`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel en fila con el capitán al frente, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción sin teletransporte, tackle sin `dive`, árbitro y asistentes, tiro, parada con `dive` exclusivo del portero, secuencia de saque de puerta (fases, balón inmóvil antes del impacto, lanzamiento sincronizado y rival más cercano a más de 6 m), córner con formación y centro al área, falta con barrera a 9,15 m, penalti con el área despejada y tiro real, descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja con gesto visible del árbitro y falta lejana posterior a la tarjeta, replay, reset, marcador, clima y destroy. Una página aparte fuerza el resultado del cara o cruz y recorre llamada, elección de campo, cierre del panel y saque, y comprueba que el árbitro termina sin gesto congelado. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural, incluida la barrida de campo, y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son **51 comprobaciones**.
+`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel en fila con el capitán al frente, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción sin teletransporte, tackle sin `dive`, árbitro y asistentes, tiro, parada con `dive` exclusivo del portero, secuencia de saque de puerta (fases, balón inmóvil antes del impacto, lanzamiento sincronizado, 0 rivales dentro del área y rival más cercano a más de 12,5 m), córner con formación y centro al área, falta con barrera a 9,15 m, penalti con el área despejada y tiro real, descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja con gesto visible del árbitro y falta lejana posterior a la tarjeta, replay, reset y destroy. También verifica el marcador diferido (el HUD no se adelanta al gol pendiente y confirma al cruzar la línea), la etiqueta y la física visual del clima, y las guardas del puente UI→3D (`[local, visitante]`, `toss`, franja de clima). Una página aparte fuerza el resultado del cara o cruz y recorre llamada, pros/contras, contexto de rival/clima/fatiga, elección de campo, cierre del panel y saque; otra deja ganar al rival y comprueba que su decisión (pelota) y su motivo se explican y se aplican sin tocar el saque. El test comprueba que el árbitro termina sin gesto congelado. Además monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural, incluida la barrida de campo, y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son **59 comprobaciones**.
 
 Requiere Node y Playwright (o `playwright-core`) con Chrome/Chromium. Si no está instalado:
 

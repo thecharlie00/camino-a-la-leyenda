@@ -26,6 +26,7 @@ function roster(prefix) {
 
 (async () => {
   const src = fs.readFileSync(path.join(__dirname, "../src/pitch3d.js"), "utf8");
+  const uiSrc = fs.readFileSync(path.join(__dirname, "../src/ui.js"), "utf8");
   const assetsSrc = fs.readFileSync(path.join(__dirname, "../src/pitch3d-assets.js"), "utf8");
   const pack = {};
   for (const [id, rel] of Object.entries(ASSET_FILES)) pack[id] = fs.readFileSync(path.join(__dirname, "..", rel)).toString("base64");
@@ -248,6 +249,22 @@ function roster(prefix) {
       g.phases.indexOf("prepare") >= 0 && !g.pressure && g.minPressureDist > 6,
       why: "sin secuencia/balón muerto/sin presión", info: g ? g.phase + " · " + g.phases.join(">") + " · rival a " + g.minPressureDist + " m" : "sin acción" };
   });
+  await check("rivales fuera del área y lejos del portero", () => {
+    const d = Pitch3D.debug(), g = d.goalkick;
+    if (!g || !g.active) return {ok: false, why: "sin saque de puerta"};
+    const side = g.side, dir = d.sim.attack[side], own = dir > 0 ? 0 : 105;
+    let inside = 0, minD = 99;
+    const gk = (d.players[side] || []).filter(a => a && a.gk)[0];
+    (d.players[1 - side] || []).forEach(a => {
+      if (!a || a.gk || a.gone || a.sentOff) return;
+      const depth = (a.x - own) * dir;
+      if (depth >= -0.5 && depth < 16.5 && Math.abs(a.z - 34) < 20.16) inside++;
+      if (gk) minD = Math.min(minD, Math.hypot(a.x - gk.x, a.z - gk.z));
+    });
+    return {ok: inside === 0 && minD >= 13.0 && g.opponentsOutside === true && g.playersInsideArea === 0,
+      why: "algún rival invade el área o se acerca al portero",
+      info: "dentro=" + inside + " · rival más cerca " + minD.toFixed(2) + " m" + (gk ? "" : " (sin portero)")};
+  });
   await p.evaluate(() => {
     const d = Pitch3D.debug();
     window.__gkBall = { x: d.ball.x, z: d.ball.z };
@@ -280,7 +297,8 @@ function roster(prefix) {
     const g = Pitch3D.debug().goalkick;
     const order = ["prepare", "scan", "windup", "plant", "impact", "follow", "recover"];
     const okOrder = !!g && order.every((n, i) => g.phases[i] === n);
-    return { ok: okOrder && g.launched && g.receiver >= 0 && !g.pressure && g.minPressureDist > 6,
+    return { ok: okOrder && g.launched && g.receiver >= 0 && !g.pressure && g.minPressureDist >= 12.5 &&
+      g.opponentsOutside === true && g.playersInsideArea === 0,
       why: "fases/receptor/sin presión", info: g ? g.phases.join(">") + " · rival más cerca " + g.minPressureDist + " m" : "sin registro" };
   });
   await p.evaluate(() => Pitch3D.state({ speed: 1 }));
@@ -396,11 +414,31 @@ function roster(prefix) {
     return { ok: !!e && e.style.display !== "none" && /67/.test(e.textContent) && /2/.test(e.textContent) &&
       /1/.test(e.textContent), why: "marcador oculto o incompleto", info: e ? e.textContent : "sin marcador" };
   });
+  await p.evaluate(() => {
+    Pitch3D.event({ t: "goal", side: 0, who: 9, k: "shot", d: 12, ly: 2 });
+    Pitch3D.state({ score: [3, 1], min: 68 });
+  });
+  await p.waitForTimeout(120);
+  await check("gol pendiente no adelanta el HUD", () => {
+    const d = Pitch3D.debug(), e = document.querySelector(".lpitch3d-score");
+    const vals = e ? Array.from(e.querySelectorAll("b")).map(b => b.textContent).slice(0, 2) : [];
+    return { ok: d.sim.scorePending > 0 && vals[0] === "2" && vals[1] === "1",
+      why: "el marcador 3D se adelantó al vuelo", info: "HUD " + vals.join("-") + " · pendientes " + d.sim.scorePending };
+  });
+  for (let i = 0; i < 40 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(80);
+  await p.waitForTimeout(120);
+  await check("gol confirmado al cruzar la línea", () => {
+    const d = Pitch3D.debug(), e = document.querySelector(".lpitch3d-score");
+    const vals = e ? Array.from(e.querySelectorAll("b")).map(b => b.textContent).slice(0, 2) : [];
+    return { ok: d.sim.scorePending === 0 && vals[0] === "3" && vals[1] === "1",
+      why: "el HUD no confirmó el gol", info: "HUD " + vals.join("-") + " · canónico " + d.sim.scoreTarget.join("-") };
+  });
   await p.evaluate(() => Pitch3D.state({ wx: "rain" }));
   await p.waitForTimeout(160);
   await check("clima conectado al 3D", () => {
-    const d = Pitch3D.debug();
-    return { ok: d.sim.wx === "rain" && d.glError === 0 && d.mesh.nan === 0, why: "wx/gl/malla", info: d.sim.wx + " · " + d.mesh.verts + " vértices" };
+    const d = Pitch3D.debug(), w = d.weather;
+    return { ok: d.sim.wx === "rain" && !!w && w.key === "rain" && w.fatigue === 1.06 && w.friction > 0.55 &&
+      d.glError === 0 && d.mesh.nan === 0, why: "wx/etiqueta/física/gl/malla", info: d.sim.wx + " · " + d.mesh.verts + " vértices" };
   });
   await p.evaluate(() => Pitch3D.state({ wx: "sun" }));
   await p.evaluate(() => Pitch3D.event({ t: "end" }));
@@ -432,7 +470,8 @@ function roster(prefix) {
   await pcoin.evaluate(({ home, away }) => {
     Pitch3D.mount(document.getElementById("pitch"), { cols: ["#f5b326", "#5db8ff"], fem: true, cinematics: true });
     Pitch3D.teams(home, away, [{}, {}]);
-    Pitch3D.state({ own: 0, bx: 50, speed: 3, fem: true });
+    Pitch3D.state({ own: 0, bx: 50, speed: 3, fem: true, wx: "rain",
+      toss: { myName: "Mi Club", oppName: "Rival FC", myLevel: 78, oppLevel: 83, style: "press" } });
   }, { home: roster("h"), away: roster("a") });
   let coinStage = null;
   for (let i = 0; i < 40; i++) {
@@ -471,7 +510,27 @@ function roster(prefix) {
   if (choiceUi.stage === "choose" && choiceUi.coin && choiceUi.coin.winner === 0 && choiceUi.campo && choiceUi.pelota)
     notes.push("cara o cruz · gana el jugador y elige campo/pelota");
   else fail.push("cara o cruz: no llegó la elección " + JSON.stringify(choiceUi));
+  const tossUi = await pcoin.evaluate(() => {
+    const meta = document.querySelector("[data-p3d-toss-meta='1']");
+    return { campoPro: document.querySelectorAll("[data-p3d-pro='campo']").length,
+      campoCon: document.querySelectorAll("[data-p3d-con='campo']").length,
+      pelotaPro: document.querySelectorAll("[data-p3d-pro='pelota']").length,
+      pelotaCon: document.querySelectorAll("[data-p3d-con='pelota']").length,
+      meta: meta ? meta.textContent : "" };
+  });
+  if (tossUi.campoPro > 0 && tossUi.campoCon > 0 && tossUi.pelotaPro > 0 && tossUi.pelotaCon > 0 &&
+    /Rival FC/.test(tossUi.meta) && /Presi/.test(tossUi.meta) && /Lluvia/.test(tossUi.meta) && /Fatiga|1,06/.test(tossUi.meta))
+    notes.push("sorteo · pros/contras, estilo y clima visibles");
+  else fail.push("sorteo: faltan pros/contras o contexto " + JSON.stringify(tossUi));
   await pcoin.click("[data-p3d-choice='campo']");
+  await pcoin.waitForTimeout(160);
+  const choiceResult = await pcoin.evaluate(() => {
+    const e = document.querySelector("[data-p3d-choice-result]");
+    return { choice: e && e.getAttribute("data-p3d-choice-result"), text: e ? e.textContent : "" };
+  });
+  if (choiceResult.choice === "campo" && /Conservas el saque/.test(choiceResult.text))
+    notes.push("sorteo · consecuencia explícita del campo");
+  else fail.push("sorteo: no explicó la consecuencia " + JSON.stringify(choiceResult));
   let coinDone = null;
   for (let i = 0; i < 40; i++) {
     coinDone = await pcoin.evaluate(() => {
@@ -486,6 +545,54 @@ function roster(prefix) {
   else fail.push("cara o cruz: no terminó la elección de campo " + JSON.stringify(coinDone));
   await pcoin.screenshot({ path: path.join(OUT, "pitch3d-coin.png") });
   await pcoin.close();
+
+  /* Si gana el rival, decide según nivel/estilo/clima y la UI explica el porqué. */
+  const prival = await ctx.newPage();
+  prival.on("pageerror", e => errs.push("rival pageerror: " + e.message));
+  prival.on("console", m => { if (m.type() === "error") errs.push("rival console: " + m.text()); });
+  await prival.setContent(pageHtml);
+  await prival.evaluate(({ home, away }) => {
+    Pitch3D.mount(document.getElementById("pitch"), { cols: ["#f5b326", "#5db8ff"], fem: true, cinematics: true });
+    Pitch3D.teams(home, away, [{}, {}]);
+    Pitch3D.state({ own: 0, bx: 50, speed: 3, fem: true, wx: "sun",
+      toss: { myName: "Mi Club", oppName: "Rival FC", myLevel: 78, oppLevel: 84, style: "balanced" } });
+  }, { home: roster("h"), away: roster("a") });
+  let rStage = null;
+  for (let i = 0; i < 40; i++) {
+    rStage = await prival.evaluate(() => Pitch3D.cinema() && Pitch3D.cinema().stage);
+    if (rStage === "coinCall") break;
+    await prival.waitForTimeout(100);
+  }
+  await prival.evaluate(() => { Math.random = () => 0.9; });
+  await prival.click("[data-p3d-coin='cara']");
+  let rivalPlan = null;
+  for (let i = 0; i < 30; i++) {
+    rivalPlan = await prival.evaluate(() => {
+      const c = Pitch3D.cinema(), e = document.querySelector("[data-p3d-rival-why]");
+      return c ? { stage: c.stage, choice: c.coin && c.coin.choice, why: e ? e.textContent : "" } : null;
+    });
+    if (rivalPlan && rivalPlan.stage === "rivalChoice") break;
+    await prival.waitForTimeout(100);
+  }
+  if (rivalPlan && rivalPlan.choice === "pelota" && rivalPlan.why.length > 8)
+    notes.push("sorteo rival · decide pelota y explica su motivo");
+  else fail.push("sorteo rival: decisión/motivo incompletos " + JSON.stringify(rivalPlan));
+  let rivalDone = null;
+  for (let i = 0; i < 60; i++) {
+    rivalDone = await prival.evaluate(() => {
+      const d = Pitch3D.debug(), c = Pitch3D.cinema(), e = document.querySelector("[data-p3d-choice-result]");
+      return { cinema: !!c, attack: d.sim.attack.slice(), result: e ? e.getAttribute("data-p3d-choice-result") : "",
+        text: e ? e.textContent : "", busy: Pitch3D.busy() };
+    });
+    if (rivalDone.result) break;
+    await prival.waitForTimeout(100);
+  }
+  if (rivalDone && rivalDone.attack[0] === 1 && rivalDone.attack[1] === -1 &&
+    rivalDone.result === "pelota" && /No cambiamos de lado/.test(rivalDone.text))
+    notes.push("sorteo rival · consecuencia de pelota aplicada sin tocar el saque");
+  else fail.push("sorteo rival: no aplicó/explicó pelota " + JSON.stringify(rivalDone));
+  await prival.screenshot({ path: path.join(OUT, "pitch3d-coin-rival.png") });
+  await prival.close();
 
   /* Sin GLB: el render debe seguir funcionando con jugadores y balón procedurales. */
   const pfb = await ctx.newPage();
@@ -553,6 +660,13 @@ function roster(prefix) {
     notes.push("fallback sin WebGL · campo 2D sin eventos fantasma");
   } else fail.push("fallback sin WebGL: " + JSON.stringify(ng));
   await png.close();
+
+  /* Guardas del puente UI→3D: el orden debe ser [local, visitante], y el
+     sorteo/clima deben viajar en el estado que consume el HUD. */
+  const uiBridge = /var hs = f\.home \? \[L\.gu, L\.gt\] : \[L\.gt, L\.gu\]/.test(uiSrc) &&
+    /toss: liveTossInfo\(L, f\)/.test(uiSrc) && /class="lwx"/.test(uiSrc) && /data-wx/.test(uiSrc);
+  if (uiBridge) notes.push("puente UI→3D · marcador local/visitante, sorteo y clima");
+  else fail.push("puente UI→3D incompleto: orden, toss o franja de clima");
 
   console.log(notes.join("\n"));
   console.log(errs.length || fail.length ? "ERRORES: " + errs.concat(fail).join(" | ") : "SIN ERRORES · " + notes.length + " comprobaciones");

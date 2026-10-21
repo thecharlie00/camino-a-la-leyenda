@@ -13,6 +13,7 @@ var Pitch3D = (function () {
   "use strict";
 
   var LEN = 105, WID = 68, MIDZ = WID / 2, POST = 3.66, BAR = 2.44, GRAV = 9.8;
+  var PEN_DEPTH = 16.5, PEN_HALF = 20.16, GK_SAFE_DIST = 13.5;
   var PI = Math.PI, TAU = PI * 2, STEP = 1 / 60, AI_STEP = 1 / 30;
   /* Secuencias de vestuario: tiempos en segundos de partido, comprimidos por
    * la velocidad del directo. El túnel está en la grada larga (z negativa). */
@@ -78,7 +79,8 @@ var Pitch3D = (function () {
       attack: [1, -1], players: [[], []], red: [{}, {}], tactics: [defTac(), defTac()],
       ball: newBall(), action: null, queue: [], restart: null, pendingOwn: null,
       history: [], replay: null, netT: 0, shake: 0, banner: "", lastGoalKick: null,
-      pendingPass: null, officials: [], wx: "sun", score: [0, 0], min: 0, scoreOn: false,
+      pendingPass: null, officials: [], wx: "sun", score: [0, 0], scoreTarget: [0, 0], scorePending: 0,
+      scoreForceAt: 0, min: 0, scoreOn: false, toss: null,
       lastPass: null, lastCard: null, lastSetPiece: null, cinema: null, ballHidden: false
     };
   }
@@ -935,12 +937,15 @@ var Pitch3D = (function () {
       else if (c.stage === "coinFlip" && c.stageT >= COIN_FLIP) resolveCoin();
       else if (c.stage === "coinResult" && c.stageT >= COIN_RESULT) {
         if (c.coin.winner === 0) setCinemaStage("choose");
-        else setCinemaStage("rivalChoice");
+        else {
+          var plan = chooseRivalToss();
+          c.coin.choice = plan.choice; c.coin.rivalWhy = plan.why;
+          setCinemaStage("rivalChoice");
+        }
       } else if (c.stage === "choose") {
         c.coin.waitT = (c.coin.waitT || 0) + dt;
         if (c.coin.choice == null && c.coin.waitT >= COIN_WAIT) coinChoice(Math.random() < 0.5 ? "campo" : "pelota");
       } else if (c.stage === "rivalChoice" && c.stageT >= RIVAL_WAIT) {
-        c.coin.choice = "campo";
         setCinemaStage("choiceResult");
         applyCoinChoice();
       } else if (c.stage === "choiceResult" && c.stageT >= COIN_RESULT) setCinemaStage("lineup");
@@ -1159,6 +1164,69 @@ var Pitch3D = (function () {
       if (d < best) best = d;
     }
     return best;
+  }
+
+  function insidePenaltyArea(side, x, z, pad) {
+    var own = ownX(side), dir = sim.attack[side], depth = (x - own) * dir, p = pad || 0;
+    return depth >= -p && depth < PEN_DEPTH + p && Math.abs(z - MIDZ) < PEN_HALF + p;
+  }
+
+  /* Los rivales esperan fuera del área y a una distancia mínima del portero.
+   * No se teletransportan al jugador con balón: solo se corrige a quien invade
+   * la zona o queda demasiado cerca antes del saque. */
+  function placeGoalKickOpponents(side, gk) {
+    var dir = sim.attack[side], own = ownX(side), lineX = clamp(own + dir * (PEN_DEPTH + 1.7), 3, LEN - 3);
+    var list = listOf(1 - side), moved = 0, n = 0;
+    for (var i = 0; i < list.length; i++) {
+      var q = list[i];
+      if (!q || q.gk) continue;
+      var inside = insidePenaltyArea(side, q.x, q.z, 0.45);
+      var d = gk ? dist(q.x, q.z, gk.x, gk.z) : 99;
+      if (inside || d < GK_SAFE_DIST + 1.2) {
+        var z = clamp(q.z, 5, WID - 5);
+        var tx = clamp(lineX + dir * Math.floor(n / 5) * 1.4, 3, LEN - 3);
+        q.x = q.tx = tx; q.z = q.tz = z; q.vx = q.vz = 0;
+        q.facing = sim.attack[1 - side] > 0 ? PI / 2 : -PI / 2;
+        q.maxSp = 0;
+        moved++;
+      } else {
+        /* Congelado durante la preparación para que su carrera no le meta
+         * en el área mientras el portero aún no ha golpeado. */
+        q.tx = q.x; q.tz = q.z; q.vx = q.vz = 0;
+        q.maxSp = 0;
+      }
+      n++;
+    }
+    /* Segunda pasada: si por una banda la distancia al portero sigue siendo
+     * corta, se separa radialmente y se vuelve a comprobar el área. */
+    if (gk) {
+      for (var j = 0; j < list.length; j++) {
+        var r = list[j];
+        if (!r || r.gk) continue;
+        var dr = dist(r.x, r.z, gk.x, gk.z);
+        if (dr >= GK_SAFE_DIST) continue;
+        var ang = Math.atan2(r.z - gk.z, r.x - gk.x);
+        if (!isFinite(ang)) ang = dir > 0 ? 0 : PI;
+        var sx = gk.x + Math.cos(ang) * GK_SAFE_DIST, sz = gk.z + Math.sin(ang) * GK_SAFE_DIST;
+        if (insidePenaltyArea(side, sx, sz, 0.45)) { sx = lineX; sz = clamp(sz, 5, WID - 5); }
+        r.x = r.tx = clamp(sx, 3, LEN - 3); r.z = r.tz = sz;
+        r.vx = r.vz = 0; r.maxSp = 0;
+      }
+    }
+    return goalKickSpaceStats(side, gk, moved);
+  }
+
+  function goalKickSpaceStats(side, gk, moved) {
+    var owner = gk || pickKeeper(side), list = listOf(1 - side);
+    var inside = 0, minD = 1e9;
+    for (var i = 0; i < list.length; i++) {
+      var q = list[i];
+      if (!q || q.gk) continue;
+      if (insidePenaltyArea(side, q.x, q.z, 0.02)) inside++;
+      if (owner) minD = Math.min(minD, dist(q.x, q.z, owner.x, owner.z));
+    }
+    return {outside: inside === 0, inside: inside, minDist: minD === 1e9 ? 99 : minD,
+      moved: moved || 0, safeDist: GK_SAFE_DIST};
   }
 
   function aiTick() {
@@ -1401,10 +1469,11 @@ var Pitch3D = (function () {
       return;
     }
     if (b.mode === "loose") {
+      var wf = weatherFx(sim.wx);
       spinBall(b, dt);
       b.x += b.vx * dt; b.z += b.vz * dt; b.y += b.vy * dt; b.vy -= GRAV * dt;
-      if (b.y < 0.22) { b.y = 0.22; if (b.vy < 0) b.vy = -b.vy * 0.32; if (Math.abs(b.vy) < 0.6) b.vy = 0; }
-      b.vx *= Math.pow(0.55, dt); b.vz *= Math.pow(0.55, dt);
+      if (b.y < 0.22) { b.y = 0.22; if (b.vy < 0) b.vy = -b.vy * wf.bounce; if (Math.abs(b.vy) < 0.6) b.vy = 0; }
+      b.vx *= Math.pow(wf.friction, dt); b.vz *= Math.pow(wf.friction, dt);
       if (b.claim) {
         var ca = actorAt(b.claim.side, b.claim.idx);
         if (ca && dist(b.x, b.z, ca.x, ca.z) <= 1.25) { giveTo(b.claim.side, b.claim.idx); return; }
@@ -1453,6 +1522,10 @@ var Pitch3D = (function () {
       gk.facing = dir > 0 ? PI / 2 : -PI / 2;
     }
 
+    /* Los rivales esperan fuera del área y lejos del portero. Se coloca antes
+     * de mover a los receptores para que la IA no pueda invadir la zona. */
+    var space = placeGoalKickOpponents(side, gk);
+
     /* Dos opciones reales para el saque: un apoyo corto y una salida larga.
      * Los receptores se mueven a su zona durante la preparación; el balón no
      * se lanza hasta el impacto. */
@@ -1484,7 +1557,8 @@ var Pitch3D = (function () {
       shortSpot: shortSpot, longSpot: longSpot, phases: phases, phaseIndex: 0, phase: "prepare",
       phaseLog: [], impactAt: impactAt, launched: false, launchT: 0, launchPhase: "",
       flightDur: 0, receiver: null,
-      minPressureDist: gk ? nearestOpponentDist(side, gk.x, gk.z) : 99};
+      minPressureDist: space.minDist, opponentsOutside: space.outside, playersInsideArea: space.inside,
+      opponentsMoved: space.moved, safeDist: GK_SAFE_DIST};
     sim.action = a;
     enterGoalKickPhase(a, 0);
   }
@@ -1551,6 +1625,8 @@ var Pitch3D = (function () {
     if (gk) {
       var pd = nearestOpponentDist(a.side, gk.x, gk.z);
       if (pd < a.minPressureDist) a.minPressureDist = pd;
+      var sp = goalKickSpaceStats(a.side, gk);
+      a.opponentsOutside = sp.outside; a.playersInsideArea = sp.inside;
     }
     if (gk && ph) {
       if (a.phase === "scan") {
@@ -1964,6 +2040,13 @@ var Pitch3D = (function () {
       var pa2 = actorAt(ps2, pi2); if (pa2) pa2.passTarget = null;
     }
     var side = +e.side === 1 ? 1 : 0, res = e.t, kind = e.k || "pass";
+    /* El marcador del motor ya incluye el gol, pero este HUD espera al
+     * fotograma en que la pelota cruza la línea. La reconciliación de
+     * emergencia evita que un evento perdido deje el marcador viejo. */
+    if (res === "goal") {
+      sim.scorePending++;
+      sim.scoreForceAt = Math.max(sim.scoreForceAt || 0, sim.time + 25);
+    }
     var dir = sim.attack[side], gx = goalX(side);
     var shooter = pickShooter(side, e.who);
     var d = e.d != null && isFinite(+e.d) ? clamp(+e.d, 5, 34) : 14;
@@ -1994,6 +2077,9 @@ var Pitch3D = (function () {
     var b = sim.ball;
     b.fl = null; b.next = null; b.vx = 0; b.vy = 0; b.vz = 0;
     if (a.res === "goal") {
+      /* La pelota cruza la línea en este fotograma: solo ahora se confirma
+       * el marcador que el motor ya había adelantado. */
+      commitGoal(a.side);
       b.x = a.gx + a.dir * 1.0; b.z = clamp(b.z, MIDZ - POST, MIDZ + POST); b.y = 0.5; b.mode = "dead";
       sim.netT = 1; sim.shake = 0.5;
       cam.cutT = 1.4; cam.cutMode = "goal";
@@ -2022,7 +2108,9 @@ var Pitch3D = (function () {
       sim.lastGoalKick = {side: a.side, phases: a.phaseLog.slice(), launched: a.launched,
         launchPhase: a.launchPhase, launchT: +a.launchT.toFixed(3), impactAt: +a.impactAt.toFixed(3),
         flightDur: +a.flightDur.toFixed(3), shortK: a.shortK, pressure: false,
-        receiver: a.receiver ? a.receiver.slot : -1, minPressureDist: +a.minPressureDist.toFixed(3)};
+        receiver: a.receiver ? a.receiver.slot : -1, minPressureDist: +a.minPressureDist.toFixed(3),
+        opponentsOutside: !!a.opponentsOutside, playersInsideArea: a.playersInsideArea || 0,
+        opponentsMoved: a.opponentsMoved || 0, safeDist: GK_SAFE_DIST};
     }
     if (a && a.type === "shot") {
       if (a.res === "goal") { setupKickoff(1 - a.side); sim.pendingOwn = null; }
@@ -2173,7 +2261,8 @@ var Pitch3D = (function () {
     if (t === "end") { doEnd(); fireCue(e); return; }
     if (t === "goal" || t === "save" || t === "post" || t === "miss") {
       /* Un tiro no puede nacer en mitad de un pase: el balón terminaría
-       * cambiando de dirección en el aire. Se encola hasta la recepción. */
+       * cambiando de dirección en el aire. Se encola hasta la recepción; el
+       * pendiente de marcador se anota cuando el tiro arranca de verdad. */
       if (sim.ball.mode === "flight" && sim.ball.next) { sim.queue.push(e); return; }
       e.t = t; startShot(e); return;
     }
@@ -2825,8 +2914,8 @@ var Pitch3D = (function () {
       var span = rain ? 15 : 11;
       var y = 0.4 + (((t * fall + ((seed >>> 18) % 200)) % span));
       if (rain) {
-        var c = [0.46 + (seed % 10) * 0.012, 0.55 + (seed % 8) * 0.012, 0.68];
-        m.quad([x, y, z], [x + 0.055, y - 0.9, z], [x + 0.055, y - 0.9, z + 0.022], [x, y, z + 0.022], c);
+        var c = [0.46 + (seed % 10) * 0.012, 0.55 + (seed % 8) * 0.012, 0.68], slant = 0.38;
+        m.quad([x, y, z], [x + 0.055 + slant, y - 0.9, z], [x + 0.055 + slant, y - 0.9, z + 0.022], [x, y, z + 0.022], c);
       } else {
         var sc = 0.12 + (seed % 5) * 0.012;
         m.quad([x, y, z], [x + sc, y, z], [x + sc, y + sc, z], [x, y + sc, z], [0.90, 0.94, 1.0]);
@@ -2947,8 +3036,9 @@ var Pitch3D = (function () {
     gl.uniformMatrix4fv(locations.mvp, false, mvp);
     if (locations.fog) gl.uniform3fv(locations.fog, fogArr);
     if (locations.eye) gl.uniform3fv(locations.eye, eyeArr);
-    if (locations.near) gl.uniform1f(locations.near, sim.wx === "rain" ? 62 : sim.wx === "cold" ? 72 : 85);
-    if (locations.far) gl.uniform1f(locations.far, sim.wx === "rain" ? 185 : sim.wx === "cold" ? 195 : 210);
+    var wv = weatherFx(sim.wx);
+    if (locations.near) gl.uniform1f(locations.near, wv.near);
+    if (locations.far) gl.uniform1f(locations.far, wv.far);
     gl.enableVertexAttribArray(locations.pos); gl.enableVertexAttribArray(locations.col);
     gl.bindBuffer(gl.ARRAY_BUFFER, staticBuf);
     gl.vertexAttribPointer(locations.pos, 3, gl.FLOAT, false, 24, 0);
@@ -3035,6 +3125,7 @@ var Pitch3D = (function () {
     updateBall(sdt);
     tryPendingPass();
     drainQueue();
+    if (sim.scorePending && sim.time > sim.scoreForceAt) reconcileScore(true);
     if (sim.netT > 0) sim.netT = Math.max(0, sim.netT - sdt * 1.5);
     histAcc += sdt;
     if (histAcc >= 0.1) { histAcc = 0; record(); }
@@ -3050,6 +3141,73 @@ var Pitch3D = (function () {
 
   function coinButton(txt, attr, val) {
     return '<button type="button" ' + attr + '="' + val + '" style="min-width:68px;padding:6px 10px;margin:2px;border-radius:7px;border:1px solid rgba(255,255,255,.38);background:rgba(244,190,48,.92);color:#172018;font:800 11px system-ui;cursor:pointer">' + txt + "</button>";
+  }
+
+  function tossContext() {
+    var t = sim.toss || {}, my = +t.myLevel, opp = +t.oppLevel;
+    if (!isFinite(my)) my = 75;
+    if (!isFinite(opp)) opp = 75;
+    var style = String(t.style || "balanced");
+    if (["possession", "direct", "press", "counter", "balanced"].indexOf(style) < 0) style = "balanced";
+    return {me: String(t.myName || label("Tu equipo")), opp: String(t.oppName || label("Rival")),
+      myLevel: my, oppLevel: opp, diff: my - opp, style: style,
+      styleLabel: label({possession: "Posesión", direct: "Juego directo", press: "Presión alta",
+        counter: "Contragolpe", balanced: "Equilibrado"}[style]), wx: weatherInfo(sim.wx)};
+  }
+
+  function tossAdvice(choice) {
+    var x = tossContext(), pros = [], cons = [];
+    if (choice === "campo") {
+      pros.push(label("Eliges la orientación y hacia qué portería atacar."));
+      if (x.wx.key === "rain") pros.push(label("Con el césped resbaladizo, proteges el lado de tu salida."));
+      else if (x.wx.key === "heat") pros.push(label("Evitas atacar de cara al sol en el segundo tiempo."));
+      else if (x.wx.key === "cold") pros.push(label("Puedes elegir el lado con menos viento y nieve."));
+      if (x.style === "possession") cons.push(label("Su posesión se adapta a cualquier orientación."));
+      else if (x.style === "press") cons.push(label("Su presión alta puede cerrarte la banda que defiendes."));
+      else if (x.style === "direct") cons.push(label("Su juego directo funciona igual en las dos porterías."));
+      else if (x.style === "counter") cons.push(label("Te cederá el balón y buscará tu espalda desde el inicio."));
+      if (x.diff < -3) cons.push(label("El cambio de lado no compensa su superioridad."));
+    } else {
+      pros.push(label("Conservas el saque de centro y marcas el primer ritmo."));
+      if (x.style === "possession") pros.push(label("Le obligas a correr detrás del balón desde el inicio."));
+      else if (x.style === "direct") pros.push(label("Puedes jugar el primer balón en largo sin presión."));
+      else if (x.style === "press") cons.push(label("Su presión alta puede atrapar tu primer pase."));
+      else if (x.style === "counter") cons.push(label("Te cede la iniciativa y espera tu error para salir en contra."));
+      if (x.wx.key === "rain") cons.push(label("El balón corre más: el primer pase puede escaparse."));
+      else if (x.wx.key === "cold") cons.push(label("El balón pesado exige un primer toque más firme."));
+      else if (x.wx.key === "heat") pros.push(label("Dosificar el ritmo desde el saque ahorra fuerzas."));
+      if (x.diff > 3) pros.push(label("Tu superioridad te permite dominar el primer balón."));
+      if (x.diff < -3) cons.push(label("Si el rival es superior, perderás el balón en zonas peligrosas."));
+    }
+    if (!pros.length) pros.push(label("Mantienes tu plan de saque sin cambios."));
+    if (!cons.length) cons.push(label("No cambias de lado: mantienes la orientación actual."));
+    return {pros: pros.slice(0, 2), cons: cons.slice(0, 2)};
+  }
+
+  function chooseRivalToss() {
+    var x = tossContext();
+    if (x.style === "press") return {choice: "campo", why: label("Quiere presionar hacia su propia grada en el primer tiempo.")};
+    if (x.style === "possession") return {choice: "campo", why: label("Prefiere ordenar el campo y defender con la línea adelantada.")};
+    if (x.style === "direct") return {choice: "campo", why: label("Busca atacar con el sol o el viento a favor en el segundo tiempo.")};
+    if (x.style === "counter") return {choice: "campo", why: label("Quiere que su bloque pueda salir en contra hacia su banquillo.")};
+    if (x.diff <= -4) return {choice: "pelota", why: label("No necesita cambiar nada: confía en su nivel y te deja el primer balón.")};
+    if (x.wx.key === "rain") return {choice: "campo", why: label("Busca que la lluvia complique tu salida desde atrás.")};
+    return {choice: "campo", why: label("Elige el lado que mejor encaja con su plan de partido.")};
+  }
+
+  function tossCard(choice, title) {
+    var a = tossAdvice(choice), html = '<div style="flex:1;min-width:0;padding:3px;border-radius:7px;background:rgba(255,255,255,.055);text-align:left">' +
+      coinButton(title, "data-p3d-choice", choice);
+    for (var i = 0; i < a.pros.length; i++) html += '<span data-p3d-pro="' + choice + '" style="display:block;color:#b9ffd6;font:600 9px/1.18 system-ui;margin:2px 1px 0">✓ ' + a.pros[i] + "</span>";
+    for (var j = 0; j < a.cons.length; j++) html += '<span data-p3d-con="' + choice + '" style="display:block;color:#ffd0a8;font:600 9px/1.18 system-ui;margin:2px 1px 0">✗ ' + a.cons[j] + "</span>";
+    return html + "</div>";
+  }
+
+  function tossMeta() {
+    var x = tossContext();
+    return '<div data-p3d-toss-meta="1" style="display:block;font:600 9px/1.3 system-ui;opacity:.82;margin-top:4px;text-align:left">' +
+      "🌤 " + label("Clima") + ": " + x.wx.icon + " " + x.wx.name + " · " + x.wx.effect + " · " + label("Fatiga") + " ×" + x.wx.fatigue.toFixed(2).replace(".", ",") + "<br>" +
+      label("Rival") + ": " + x.opp + " · " + label("Nivel") + " " + x.oppLevel + " · " + x.styleLabel + "</div>";
   }
 
   function updateCoinOverlay() {
@@ -3071,15 +3229,21 @@ var Pitch3D = (function () {
     } else if (c.stage === "choose") {
       s = '<b style="display:block;font:800 12px/1.2 system-ui">' + label("¡Ganaste el sorteo!") + "</b>" +
         '<span style="display:block;font:500 10px/1.2 system-ui;opacity:.84;margin-top:2px">' + label("¿Campo o pelota?") + "</span>" +
-        '<div style="margin-top:4px">' + coinButton(label("Campo"), "data-p3d-choice", "campo") + coinButton(label("Pelota"), "data-p3d-choice", "pelota") + "</div>" +
-        '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + label("Campo cambia de lado · Pelota mantiene el saque") + "</span>";
+        '<div style="display:flex;gap:4px;margin-top:4px">' + tossCard("campo", label("Campo")) + tossCard("pelota", label("Pelota")) + "</div>" +
+        '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + label("Campo cambia de lado · Pelota mantiene el saque") + "</span>" + tossMeta();
     } else if (c.stage === "rivalChoice") {
+      var rp = c.coin.choice === "campo" ? label("Campo") : label("Pelota");
       s = '<b style="display:block;font:800 12px system-ui">' + label("Gana el rival el sorteo") + "</b>" +
-        '<span style="display:block;font:500 10px/1.25 system-ui;opacity:.82;margin-top:2px">' + label("Elige campo: atacaremos al otro lado.") + "</span>";
+        '<span style="display:block;font:600 10px/1.25 system-ui;margin-top:2px">' + labelv("Elige {v}.", {v: rp}) + "</span>" +
+        '<span data-p3d-rival-why="1" style="display:block;font:500 9px/1.25 system-ui;opacity:.82;margin-top:2px">' +
+        (c.coin.rivalWhy || label("Elige el lado que mejor encaja con su plan de partido.")) + "</span>" + tossMeta();
     } else if (c.stage === "choiceResult") {
-      s = '<b style="display:block;font:800 12px system-ui">' + (c.coin.choice === "campo" ? label("Campo elegido") : label("Saque elegido")) + "</b>" +
-        '<span style="display:block;font:500 10px/1.25 system-ui;opacity:.82;margin-top:2px">' +
-        (c.coin.choice === "campo" ? label("Cambiamos de lado antes del saque.") : label("Se mantiene el saque inicial.")) + "</span>";
+      var cc = c.coin.choice === "campo" ? label("Campo elegido") : label("Saque elegido");
+      var res = c.coin.winner === 1 ? label("El rival decide: ") : "";
+      s = '<b style="display:block;font:800 12px system-ui">' + res + cc + "</b>" +
+        '<span data-p3d-choice-result="' + (c.coin.choice || "") + '" style="display:block;font:500 10px/1.25 system-ui;opacity:.82;margin-top:2px">' +
+        (c.coin.choice === "campo" ? label("Cambiamos de lado antes del saque. Conservas el saque de centro.") : label("No cambiamos de lado. Conservas el saque de centro.")) + "</span>" +
+        tossMeta();
     }
     if (!s) { hideCoinOverlay(); return; }
     coinEl.innerHTML = s;
@@ -3097,7 +3261,7 @@ var Pitch3D = (function () {
     coinEl.className = "lpitch3d-coin";
     coinEl.setAttribute("role", "status");
     coinEl.setAttribute("aria-live", "polite");
-    coinEl.style.cssText = "position:absolute;z-index:24;left:50%;bottom:8px;transform:translateX(-50%);width:min(312px,92%);box-sizing:border-box;padding:6px 9px;border:1px solid rgba(255,255,255,.30);border-radius:9px;background:rgba(5,15,12,.90);color:#fff;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.32);display:none";
+    coinEl.style.cssText = "position:absolute;z-index:24;left:50%;bottom:8px;transform:translateX(-50%);width:min(392px,94%);max-height:56%;overflow:auto;box-sizing:border-box;padding:6px 9px;border:1px solid rgba(255,255,255,.30);border-radius:9px;background:rgba(5,15,12,.90);color:#fff;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.32);display:none";
     coinEl.addEventListener("click", function (ev) {
       ev.preventDefault(); ev.stopPropagation();
       var b = ev.target;
@@ -3213,13 +3377,77 @@ var Pitch3D = (function () {
       '<span style="opacity:.55">–</span><b>' + sim.score[1] + "</b>" + scoreChip(colors[1]);
   }
 
+  function scorePair(v) {
+    return [clamp(Math.round(+v[0] || 0), 0, 99), clamp(Math.round(+v[1] || 0), 0, 99)];
+  }
+
+  /* El estado del motor fija el marcador objetivo. La UI 3D no lo muestra
+   * hasta que la pelota cruza la línea; así el HUD no se adelanta al vuelo. */
+  function commitGoal(side) {
+    sim.score[side] = clamp(sim.score[side] + 1, 0, 99);
+    if (sim.scorePending > 0) sim.scorePending--;
+    if (!sim.scorePending) {
+      sim.scoreForceAt = 0;
+      var st = sim.scoreTarget;
+      /* Si el objetivo ya contiene este gol, se adopta para corregir
+       * cualquier evento perdido. Nunca se retrocede el marcador mostrado. */
+      if (st && st[0] >= sim.score[0] && st[1] >= sim.score[1]) sim.score = st.slice();
+    }
+    updateScoreHud();
+  }
+
+  function reconcileScore(force) {
+    if (!sim.scoreOn) return;
+    if (sim.scorePending && !force && sim.time <= sim.scoreForceAt) return;
+    var st = sim.scoreTarget;
+    if (!st) return;
+    /* El HUD nunca retrocede: si el objetivo viniera por detrás del marcador
+     * ya mostrado, se conserva lo mostrado y solo se limpia el pendiente. */
+    if (st[0] >= sim.score[0] && st[1] >= sim.score[1]) sim.score = st.slice();
+    sim.scorePending = 0; sim.scoreForceAt = 0;
+    updateScoreHud();
+  }
+
+  /* El clima nunca toca las fórmulas del motor: solo cambia la lectura visual
+   * del balón suelto y la niebla de la cámara. La fatiga real ya la aplica
+   * match41 con MX_WX. */
+  function weatherFx(wx) {
+    var k = String(wx || "sun");
+    if (k === "rain") return {key: k, friction: 0.64, bounce: 0.30, near: 62, far: 185, fatigue: 1.06};
+    if (k === "cold") return {key: k, friction: 0.60, bounce: 0.24, near: 72, far: 195, fatigue: 0.95};
+    if (k === "heat") return {key: k, friction: 0.53, bounce: 0.34, near: 78, far: 200, fatigue: 1.16};
+    if (k === "mild") return {key: k, friction: 0.55, bounce: 0.32, near: 80, far: 205, fatigue: 1};
+    return {key: "sun", friction: 0.55, bounce: 0.32, near: 90, far: 220, fatigue: 1};
+  }
+
+  function weatherInfo(wx) {
+    var fx = weatherFx(wx), meta = {
+      sun: ["☀", "Despejado", "Campo rápido"],
+      mild: ["☁", "Nublado", "Sin efecto claro"],
+      rain: ["🌧", "Lluvia", "Balón vivo y césped resbaladizo"],
+      heat: ["🔥", "Calor", "Ritmo lento y fatiga alta"],
+      cold: ["❄", "Frío", "Balón pesado y bote seco"]
+    }[fx.key] || ["☀", "Despejado", "Campo rápido"];
+    return {key: fx.key, icon: meta[0], name: label(meta[1]), effect: label(meta[2]),
+      fatigue: fx.fatigue, friction: fx.friction, bounce: fx.bounce, near: fx.near, far: fx.far};
+  }
+
   function state(o) {
     if (!o || sim.replay) return;
     if (o.wx && o.wx !== sim.wx) sim.wx = String(o.wx);
+    if (o.toss && typeof o.toss === "object") sim.toss = o.toss;
     var scoreChanged = false;
     if (o.score && o.score.length >= 2) {
-      sim.score = [clamp(Math.round(+o.score[0] || 0), 0, 99), clamp(Math.round(+o.score[1] || 0), 0, 99)];
+      sim.scoreTarget = scorePair(o.score);
       sim.scoreOn = true; scoreChanged = true;
+      /* Sin un gol pendiente se adopta de inmediato: así se recupera la
+       * sincronía al abrir el directo, cambiar de cámara o perder un evento.
+       * El HUD nunca retrocede por debajo de lo ya mostrado. */
+      if (!sim.scorePending || sim.time > sim.scoreForceAt) {
+        var tgt = sim.scoreTarget;
+        if (tgt[0] >= sim.score[0] && tgt[1] >= sim.score[1]) sim.score = tgt.slice();
+        sim.scorePending = 0; sim.scoreForceAt = 0;
+      }
     }
     if (o.min != null && isFinite(+o.min)) { sim.min = clamp(Math.round(+o.min), 0, 130); scoreChanged = true; }
     if (scoreChanged) updateScoreHud();
@@ -3393,14 +3621,16 @@ var Pitch3D = (function () {
     var gk = null;
     if (sim.action && sim.action.type === "goalkick") {
       var ga = sim.action;
-      gk = {active: true, phase: ga.phase, phaseIndex: ga.phaseIndex, phases: ga.phaseLog.slice(),
+      gk = {active: true, side: ga.side, phase: ga.phase, phaseIndex: ga.phaseIndex, phases: ga.phaseLog.slice(),
         t: +ga.t.toFixed(3), dur: +ga.dur.toFixed(3), impactAt: +ga.impactAt.toFixed(3),
         launched: ga.launched, launchPhase: ga.launchPhase, launchT: +ga.launchT.toFixed(3),
         shortK: ga.shortK, pressure: false, receiver: ga.receiver ? ga.receiver.slot : -1,
-        minPressureDist: +ga.minPressureDist.toFixed(3)};
+        minPressureDist: +ga.minPressureDist.toFixed(3), opponentsOutside: !!ga.opponentsOutside,
+        playersInsideArea: ga.playersInsideArea || 0, opponentsMoved: ga.opponentsMoved || 0,
+        safeDist: GK_SAFE_DIST};
     } else if (sim.lastGoalKick) gk = sim.lastGoalKick;
     return {sim: sim, ball: sim.ball, action: sim.action, goalkick: gk, card: sim.lastCard,
-      setPiece: sim.lastSetPiece, cinema: cinema(), quality: quality, fps: fps, frames: frameCount,
+      weather: weatherInfo(sim.wx), toss: sim.toss, setPiece: sim.lastSetPiece, cinema: cinema(), quality: quality, fps: fps, frames: frameCount,
       gl: !!gl, glError: err, players: sim.players, history: sim.history.length, camera: cam, mesh: meshStats(),
       assets: {state: assetState, lods: assetLods, statics: assetModels ? Object.keys(assetModels.static).length : 0,
         errors: assetModels && assetModels.errors ? assetModels.errors.length : 0,
