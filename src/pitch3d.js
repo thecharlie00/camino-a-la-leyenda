@@ -1128,6 +1128,16 @@ var Pitch3D = (function () {
     if (t === "end") { doEnd(); fireCue(e); return; }
     if (t === "goal" || t === "save" || t === "post" || t === "miss") { e.t = t; startShot(e); return; }
     if (t === "yellow" || t === "red") { e.t = t; startCard(e); return; }
+    if (t === "pass") {
+      var ps = +e.side === 1 ? 1 : 0, pa = e.who != null ? actorAt(ps, +e.who) : null;
+      if (pa) pa.visualAnim = {type: "pass", t: 0, dur: 0.6};
+      fireCue(e); return;
+    }
+    if (t === "tackle") {
+      var ts = +e.side === 1 ? 1 : 0, ta = e.who != null ? actorAt(ts, +e.who) : null;
+      if (ta) ta.visualAnim = {type: "tackle", t: 0, dur: 0.75};
+      fireCue(e); return;
+    }
     if (t === "sub" || t === "inj" || t === "tac" || t === "com" || t === "") { fireCue(e); return; }
     fireCue(e);
   }
