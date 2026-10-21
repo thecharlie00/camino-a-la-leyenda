@@ -3,7 +3,7 @@
 Documento de diseño técnico para las cuatro áreas críticas de animación del motor visual 3D.  
 El partido sigue siendo autoritativo en `match41.js`; este sistema es solo representación visual.
 
-> **Implementación actual (prototipo):** los clips GLB existentes (`idle`, `run`, `kick`, `dive`, `celebrate`) cubren la base y las acciones principales. Pases, robos, tiros y paradas se resuelven con animaciones procedurales que reutilizan esos clips, sin depender de nuevos GLB. El cross-fade implementado es de **0,18 s**. Las tablas siguientes describen el catálogo objetivo para una fase posterior con captura de movimiento y clips dedicados.
+> **Implementación actual (prototipo):** los clips GLB existentes (`idle`, `run`, `kick`, `dive`, `celebrate`) cubren la base y las acciones principales. Pases, robos, tiros, paradas y las secuencias de vestuario, saludos y cara o cruz se resuelven con animaciones procedurales que reutilizan esos clips, sin depender de nuevos GLB. El cross-fade implementado es de **0,18 s**. Las tablas siguientes describen el catálogo objetivo para una fase posterior con captura de movimiento y clips dedicados.
 
 ## 1. Arquitectura común
 
@@ -167,7 +167,40 @@ El partido sigue siendo autoritativo en `match41.js`; este sistema es solo repre
 
 ---
 
-## 6. Integración con el motor actual
+## 6. Secuencias de vestuario, saludos y cara o cruz
+
+`sim.cinema` es un reloj independiente de la simulación autoritativa. Mientras está activo, `pitch3d.js` no ejecuta la IA de partido: mueve a los actores hacia posiciones de puesta en escena y actualiza sus animaciones.
+
+### Guion procedural
+
+| Secuencia | Fases | Duración base |
+|---|---|---:|
+| Entrada | `walkout` 2,8 s → `greet` 1,7 s → `coinCall` (espera máx. 9 s) → `coinFlip` 1,15 s → `coinResult` 1,25 s → elección → `lineup` 1,5 s | variable |
+| Descanso | `off` 2,7 s → `switch` 0,85 s → `enter` 2,7 s → `greetHalf` 1,35 s | 7,6 s |
+| Final | `whistle` 1,15 s → `line` 3,4 s → `walkoff` 2,8 s | 7,35 s |
+
+Los tiempos se escalan con la velocidad del directo. Las cámaras de túnel, círculo central y línea final usan posiciones propias y no interfieren con la cámara de juego.
+
+### Saludos y gestos
+
+- **Capitanes**: se aproximan al centro, se orientan y extienden el brazo con `anim: greet, hand: true`; el árbitro acompaña el gesto.
+- **Equipos**: el resto de actores encadena saludos con un desfase de 0,45 s para evitar que todos levanten el brazo a la vez.
+- **Final**: los equipos forman dos líneas enfrentadas y encadenan los saludos antes de caminar al túnel.
+- **Sin GLB**: la pose procedural mueve hombro, brazo y mano; con GLB se conserva el clip base y se superpone el gesto.
+- La animación de saludo es cosmética: no crea contacto físico, faltas ni eventos de partido.
+
+### Cara o cruz
+
+- La moneda es geometría procedural (dos caras y canto) y gira durante 1,15 s.
+- El panel DOM solo aparece en la vista 3D y ofrece `Cara`/`Cruz` y después `Campo`/`Pelota`.
+- **Campo** invierte el lado de ataque visual; **Pelota** mantiene el saque que ya fijó `match41.js`.
+- La posesión autoritativa no se toca: el 3D captura el primer `state.own` y lo usa al cerrar la entrada.
+- Si gana el rival, elige campo automáticamente. Si el jugador no responde, el árbitro llama y elige por él.
+- `busy()` añade 620 ms mientras hay cine para que la UI no pida el siguiente minuto. `freeze()` se difiere hasta el final de la secuencia.
+
+---
+
+## 7. Integración con el motor actual
 
 - `Pitch3D` ya soporta `anim` por actor, `runPhase`, `facing`, `lean` y `bank`.
 - Los eventos de partido (`goal`, `save`, `miss`, etc.) generan representación visual.
@@ -176,10 +209,11 @@ El partido sigue siendo autoritativo en `match41.js`; este sistema es solo repre
 - **Implementado:** `pass` y `tackle` llegan desde `engine-extra.js` como eventos visuales; el adaptador los bloquea en 2D. `startVisualPass` elige receptor, calcula tipo/arco/duración/enrosque y usa `pendingPass` si la posesión aún no coincide. `changePossession` cancela vuelos y ejecuta el pase pendiente.
 - **Implementado:** cross-fade de 0,18 s entre clips en `evalModel`; el clip anterior se evalúa en un segundo buffer y se interpola con smoothstep.
 - **Implementado:** paradas con `dive` y robos reutilizando `dive`; pases y tiros con `kick`. La pose procedural de reserva mantiene las mismas acciones sin GLB.
+- **Implementado:** entrada, descanso y despedida con `sim.cinema`, saludos procedurales, moneda 3D y panel de cara o cruz. `Pitch3D.cinema()` y `Pitch3D.skipCinema()` permiten observar o completar la secuencia sin tocar `match41.js`.
 
 ---
 
-## 7. Rendimiento
+## 8. Rendimiento
 
 1. Activar IK solo en los 2–4 jugadores más cercanos al balón.
 2. Usar LOD de animación: lejos solo Base + Action simplificada; cerca todas las capas.

@@ -69,6 +69,14 @@ function roster(prefix) {
     return r;
   };
 
+  await check("entrada desde el túnel", () => {
+    const d = Pitch3D.debug(), c = Pitch3D.cinema();
+    return { ok: d.gl && !!c && c.type === "intro" && c.stage === "walkout" && d.sim.ballHidden && Pitch3D.busy() > 0,
+      why: "sin secuencia inicial/balón visible", info: c ? c.stage + " · busy=" + Math.round(Pitch3D.busy()) + "ms" : "sin cine" };
+  });
+  await p.evaluate(() => Pitch3D.skipCinema());
+  for (let i = 0; i < 30 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  await p.waitForTimeout(300);
   await check("WebGL montado", () => {
     const d = Pitch3D.debug();
     return { ok: d.gl && document.querySelectorAll("canvas.lpitch3d").length === 1 && d.players[0].filter(Boolean).length === 11 && d.players[1].filter(Boolean).length === 11,
@@ -245,6 +253,13 @@ function roster(prefix) {
 
   await p.evaluate(() => Pitch3D.event({ t: "half" }));
   await p.waitForTimeout(150);
+  await check("descanso en secuencia", () => {
+    const c = Pitch3D.cinema(), d = Pitch3D.debug();
+    return { ok: !!c && c.type === "half" && d.sim.half === 2 && d.sim.ballHidden && Pitch3D.busy() > 0,
+      why: "sin salida al túnel", info: c ? c.stage : "sin cine" };
+  });
+  await p.evaluate(() => Pitch3D.skipCinema());
+  for (let i = 0; i < 30 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
   await check("descanso y cambio de lado", () => {
     const d = Pitch3D.debug(), o = d.sim.officials;
     return { ok: d.sim.half === 2 && d.sim.attack[0] === -1 && d.sim.attack[1] === 1 &&
@@ -289,6 +304,13 @@ function roster(prefix) {
   await p.evaluate(() => Pitch3D.state({ wx: "sun" }));
   await p.evaluate(() => Pitch3D.event({ t: "end" }));
   await p.waitForTimeout(250);
+  await check("despedida en secuencia", () => {
+    const d = Pitch3D.debug(), c = Pitch3D.cinema();
+    return { ok: d.sim.ended && !!c && c.type === "end" && d.sim.ballHidden && Pitch3D.busy() > 0,
+      why: "sin salida final", info: c ? c.stage : "sin cine" };
+  });
+  await p.evaluate(() => Pitch3D.skipCinema());
+  await p.waitForTimeout(150);
   await p.evaluate(() => Pitch3D.state({ own: 1, bx: 20 }));
   await check("final congelado", () => {
     const d = Pitch3D.debug();
@@ -297,6 +319,63 @@ function roster(prefix) {
   await p.screenshot({ path: path.join(OUT, "pitch3d-smoke.png") });
   await p.evaluate(() => Pitch3D.destroy());
   await check("destroy", () => ({ ok: !document.querySelector("canvas.lpitch3d"), why: "canvas 3D sigue en el DOM" }));
+
+  /* Cara o cruz: llamada, moneda, elección de campo y saque. Se fuerza el
+     resultado en la página de prueba para poder recorrer la elección. */
+  const pcoin = await ctx.newPage();
+  pcoin.on("pageerror", e => errs.push("sorteo pageerror: " + e.message));
+  pcoin.on("console", m => { if (m.type() === "error") errs.push("sorteo console: " + m.text()); });
+  await pcoin.setContent(pageHtml);
+  await pcoin.evaluate(({ home, away }) => {
+    Pitch3D.mount(document.getElementById("pitch"), { cols: ["#f5b326", "#5db8ff"], fem: true, cinematics: true });
+    Pitch3D.teams(home, away, [{}, {}]);
+    Pitch3D.state({ own: 0, bx: 50, speed: 3, fem: true });
+  }, { home: roster("h"), away: roster("a") });
+  let coinStage = null;
+  for (let i = 0; i < 40; i++) {
+    coinStage = await pcoin.evaluate(() => Pitch3D.cinema() && Pitch3D.cinema().stage);
+    if (coinStage === "coinCall") break;
+    await pcoin.waitForTimeout(100);
+  }
+  const coinUi = await pcoin.evaluate(() => ({
+    stage: Pitch3D.cinema() && Pitch3D.cinema().stage,
+    call: !!document.querySelector("[data-p3d-coin='cara']"),
+    overlay: (() => { const e = document.querySelector(".lpitch3d-coin"); return !!e && e.style.display !== "none"; })()
+  }));
+  if (coinUi.stage === "coinCall" && coinUi.call && coinUi.overlay) notes.push("cara o cruz · llamada disponible");
+  else fail.push("cara o cruz: no apareció la llamada " + JSON.stringify(coinUi));
+  await pcoin.evaluate(() => { Math.random = () => 0.1; });
+  await pcoin.click("[data-p3d-coin='cara']");
+  let choiceStage = null;
+  for (let i = 0; i < 30; i++) {
+    choiceStage = await pcoin.evaluate(() => Pitch3D.cinema() && Pitch3D.cinema().stage);
+    if (choiceStage === "choose") break;
+    await pcoin.waitForTimeout(100);
+  }
+  const choiceUi = await pcoin.evaluate(() => ({
+    stage: Pitch3D.cinema() && Pitch3D.cinema().stage,
+    coin: Pitch3D.cinema() && Pitch3D.cinema().coin,
+    campo: !!document.querySelector("[data-p3d-choice='campo']"),
+    pelota: !!document.querySelector("[data-p3d-choice='pelota']")
+  }));
+  if (choiceUi.stage === "choose" && choiceUi.coin && choiceUi.coin.winner === 0 && choiceUi.campo && choiceUi.pelota)
+    notes.push("cara o cruz · gana el jugador y elige campo/pelota");
+  else fail.push("cara o cruz: no llegó la elección " + JSON.stringify(choiceUi));
+  await pcoin.click("[data-p3d-choice='campo']");
+  let coinDone = null;
+  for (let i = 0; i < 40; i++) {
+    coinDone = await pcoin.evaluate(() => {
+      const d = Pitch3D.debug(), c = Pitch3D.cinema();
+      return { cinema: !!c, attack: d.sim.attack.slice(), hidden: d.sim.ballHidden, busy: Pitch3D.busy(), overlay: (() => { const e = document.querySelector(".lpitch3d-coin"); return !!e && e.style.display !== "none"; })() };
+    });
+    if (!coinDone.cinema && coinDone.busy === 0) break;
+    await pcoin.waitForTimeout(100);
+  }
+  if (!coinDone.cinema && !coinDone.hidden && !coinDone.overlay && coinDone.attack[0] === -1 && coinDone.attack[1] === 1)
+    notes.push("cara o cruz · campo elegido y saque listo");
+  else fail.push("cara o cruz: no terminó la elección de campo " + JSON.stringify(coinDone));
+  await pcoin.screenshot({ path: path.join(OUT, "pitch3d-coin.png") });
+  await pcoin.close();
 
   /* Sin GLB: el render debe seguir funcionando con jugadores y balón procedurales. */
   const pfb = await ctx.newPage();

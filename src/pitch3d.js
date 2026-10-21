@@ -14,6 +14,13 @@ var Pitch3D = (function () {
 
   var LEN = 105, WID = 68, MIDZ = WID / 2, POST = 3.66, BAR = 2.44, GRAV = 9.8;
   var PI = Math.PI, TAU = PI * 2, STEP = 1 / 60, AI_STEP = 1 / 30;
+  /* Secuencias de vestuario: tiempos en segundos de partido, comprimidos por
+   * la velocidad del directo. El túnel está en la grada larga (z negativa). */
+  var TUNNEL_X = LEN / 2, TUNNEL_Z = -5.1;
+  var INTRO_WALK = 2.8, INTRO_GREET = 1.7, INTRO_LINEUP = 1.5;
+  var COIN_FLIP = 1.15, COIN_RESULT = 1.25, COIN_WAIT = 9, RIVAL_WAIT = 1.25;
+  var HALF_OFF = 2.7, HALF_SWITCH = 0.85, HALF_ENTER = 2.7, HALF_GREET = 1.35;
+  var END_WHISTLE = 1.15, END_LINE = 3.4, END_GREET = 1.2, END_WALKOFF = 2.8;
   /* Secuencia de saque de puerta. Los tiempos están en segundos de partido y
    * se comprimen con la velocidad del directo. El impacto no lanza el balón
    * hasta que la fase "impact" cruza su marca; nunca se usa un temporizador
@@ -42,7 +49,8 @@ var Pitch3D = (function () {
   var HAIRS = [[0.08, 0.05, 0.03], [0.25, 0.14, 0.07], [0.55, 0.35, 0.12], [0.82, 0.68, 0.34], [0.14, 0.12, 0.10]];
   var BOOT = [0.07, 0.08, 0.09], NET = [0.78, 0.86, 0.80], WHITE = [0.9, 0.94, 0.88];
 
-  var gl = null, canvas = null, host = null, hud = null, scoreHud = null, replayBtn = null, disposed = true, frozen = false;
+  var gl = null, canvas = null, host = null, hud = null, scoreHud = null, replayBtn = null, coinEl = null, disposed = true, frozen = false;
+  var freezeWanted = false;
   var raf = 0, lastTs = 0, acc = 0, aiAcc = 0, histAcc = 0, frameCount = 0, fps = 0, fpsFrames = 0, fpsStart = 0;
   var quality = 1, staticMesh = null, staticCount = 0, dyn = null, dynCapacity = 0;
   var program = null, locations = null, staticBuf = null, dynBuf = null;
@@ -68,7 +76,8 @@ var Pitch3D = (function () {
       attack: [1, -1], players: [[], []], red: [{}, {}], tactics: [defTac(), defTac()],
       ball: newBall(), action: null, queue: [], restart: null, pendingOwn: null,
       history: [], replay: null, netT: 0, shake: 0, banner: "", lastGoalKick: null,
-      pendingPass: null, officials: [], wx: "sun", score: [0, 0], min: 0, scoreOn: false
+      pendingPass: null, officials: [], wx: "sun", score: [0, 0], min: 0, scoreOn: false,
+      cinema: null, ballHidden: false
     };
   }
 
@@ -103,6 +112,12 @@ var Pitch3D = (function () {
   function shade(c, k) { return [clamp(c[0] * k, 0, 1), clamp(c[1] * k, 0, 1), clamp(c[2] * k, 0, 1)]; }
   function mix(a, b, k) { return [lerp(a[0], b[0], k), lerp(a[1], b[1], k), lerp(a[2], b[2], k)]; }
   function label(k) { return typeof tr === "function" ? tr(k) : k; }
+  function labelv(k, p) {
+    if (typeof tr === "function") return tr(k, p);
+    var s = k;
+    if (p) for (var q in p) if (Object.prototype.hasOwnProperty.call(p, q)) s = s.split("{" + q + "}").join(String(p[q]));
+    return s;
+  }
   function actorAt(side, idx) { var a = sim.players[side] && sim.players[side][idx]; return a && !a.gone && !a.sentOff ? a : null; }
   function listOf(side) { return (sim.players[side] || []).filter(function (a) { return a && !a.gone && !a.sentOff; }); }
   function isDef(p) { return DEF.test(p); }
@@ -539,6 +554,7 @@ var Pitch3D = (function () {
   function makeOfficial(kind, x, z) {
     return {official: kind, side: 0, slot: -1, key: "official:" + kind, id: "official:" + kind,
       pos: "MC", nm: "", number: 0, nx: 0.5, nz: z / WID, baseX: x, baseZ: z,
+      bandZ: kind === "ar1" ? -1.1 : kind === "ar2" ? WID + 1.1 : z,
       x: x, z: z, tx: x, tz: z, vx: 0, vz: 0, facing: PI / 2,
       runPhase: Math.random() * TAU, phase: Math.random(), variant: sim.fem ? "female" : "male",
       visualAnim: null, passTarget: null, skin: SKINS[kind === "ref" ? 1 : 2], hair: HAIRS[0],
@@ -559,8 +575,420 @@ var Pitch3D = (function () {
       var o = sim.officials[i];
       o.x = LEN - o.x; o.tx = LEN - o.tx; o.baseX = LEN - o.baseX; o.vx = -o.vx;
       o.z = WID - o.z; o.tz = WID - o.tz; o.baseZ = WID - o.baseZ; o.vz = -o.vz;
+      if (o.bandZ != null) o.bandZ = WID - o.bandZ;
       o.facing = PI - o.facing;
     }
+  }
+
+  /* ------------------------------------------------------------------ vestuario */
+  /* Entrada, saludos, cara o cruz, descanso y despedida. Todo es puramente
+   * visual: el balón y el marcador siguen llegando de match41. */
+
+  function captainOf(side) {
+    return actorAt(side, 9) || actorAt(side, 5) || listOf(side)[0] || null;
+  }
+
+  function tunnelSpot(side, slot) {
+    var row = Math.floor(slot / 2), col = slot % 2;
+    var lane = (side ? 1 : -1) * (0.72 + col * 0.72);
+    return {x: TUNNEL_X + lane, z: TUNNEL_Z + row * 0.42};
+  }
+
+  function faceTo(a, x, z) {
+    if (!a) return;
+    var dx = x - a.x, dz = z - a.z;
+    if (dx * dx + dz * dz > 0.0001) a.facing = Math.atan2(dx, dz);
+  }
+
+  function setTarget(a, x, z, speed, lock, facing) {
+    if (!a) return;
+    a.tx = x; a.tz = z; a.maxSp = speed == null ? 6.8 * (a.pace || 1) : speed;
+    a.faceLock = !!lock;
+    if (facing != null) a.facing = facing;
+  }
+
+  function placeAtTunnel(a, side, slot, hide) {
+    if (!a) return;
+    var p = tunnelSpot(side, slot);
+    a.x = a.tx = p.x; a.z = a.tz = p.z;
+    a.vx = a.vz = 0; a.faceLock = false; a.anim = null; a.visualAnim = null;
+    a.hidden = !!hide;
+    a.runPhase = Math.random() * TAU;
+  }
+
+  function baseTargets(speed, clearAnim) {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+      var a = actorAt(s, i); if (!a) continue;
+      a.hidden = false;
+      if (clearAnim) { a.anim = null; a.visualAnim = null; }
+      setTarget(a, a.baseX, a.baseZ, (speed || 6.8) * (a.pace || 1), false);
+    }
+  }
+
+  function officialTargets(speed) {
+    var ref = sim.officials[0], ar1 = sim.officials[1], ar2 = sim.officials[2];
+    if (ref) { ref.hidden = false; setTarget(ref, LEN / 2, MIDZ + 2.4, speed || 6.4, false); }
+    if (ar1) { ar1.hidden = false; setTarget(ar1, LEN / 2, ar1.bandZ == null ? -1.1 : ar1.bandZ, speed || 6.2, false); }
+    if (ar2) { ar2.hidden = false; setTarget(ar2, LEN / 2, ar2.bandZ == null ? WID + 1.1 : ar2.bandZ, speed || 6.2, false); }
+  }
+
+  function placeOfficialsAtBands(hide) {
+    if (!sim.officials.length) initOfficials();
+    for (var i = 0; i < sim.officials.length; i++) {
+      var o = sim.officials[i];
+      o.x = o.tx = LEN / 2;
+      o.z = o.tz = o.official === "ref" ? MIDZ : (o.bandZ == null ? (o.official === "ar1" ? -1.1 : WID + 1.1) : o.bandZ);
+      o.vx = o.vz = 0; o.hidden = !!hide; o.anim = null; o.faceLock = false;
+      o.facing = o.official === "ar1" ? -PI / 2 : o.official === "ar2" ? PI / 2 : PI;
+    }
+  }
+
+  function officialsToTunnel(hide) {
+    for (var i = 0; i < sim.officials.length; i++) {
+      var o = sim.officials[i];
+      o.x = o.tx = TUNNEL_X + (i - 1) * 0.8;
+      o.z = o.tz = TUNNEL_Z + 0.15 * i;
+      o.vx = o.vz = 0; o.hidden = !!hide; o.anim = null; o.faceLock = false;
+    }
+  }
+
+  function beginCinema(type) {
+    /* Si el usuario había pausado, la secuencia debe poder verse; el deseo de
+     * congelar se aplica de nuevo al terminar. */
+    frozen = false;
+    sim.cinema = {type: type, stage: "", stageT: 0, t: 0, switched: false, fieldFlipped: false,
+      greet: false, lineGreeted: false, coin: null};
+  }
+
+  function setCinemaStage(name) {
+    var c = sim.cinema; if (!c) return;
+    c.stage = name; c.stageT = 0; c.greet = false; c.lineGreeted = false;
+    if (c.type === "intro") {
+      if (name === "walkout") {
+        baseTargets(7.1, true); officialTargets(6.6);
+      } else if (name === "greet") {
+        baseTargets(5.6, false); officialTargets(5.6);
+        var c0 = captainOf(0), c1 = captainOf(1);
+        if (c0) { setTarget(c0, LEN / 2 - 1.1, MIDZ, 4.2, true, PI / 2); c0.anim = {type: "greet", t: 0, dur: 1.45, hand: true}; }
+        if (c1) { setTarget(c1, LEN / 2 + 1.1, MIDZ, 4.2, true, -PI / 2); c1.anim = {type: "greet", t: 0, dur: 1.45, hand: true}; }
+        for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+          var a = actorAt(s, i);
+          if (!a || a === c0 || a === c1) continue;
+          a.anim = {type: "greet", t: -0.45 * (i % 3), dur: 1.25, hand: false};
+        }
+        var ref = sim.officials[0];
+        if (ref) { setTarget(ref, LEN / 2, MIDZ + 1.4, 4.5, true, PI); ref.anim = {type: "greet", t: 0, dur: 1.2, hand: false}; }
+      } else if (name === "coinCall") {
+        c.coin.show = true; c.coin.waitT = 0; c.coin.angle = 0;
+        var ca = captainOf(0), cb = captainOf(1), rf = sim.officials[0];
+        if (ca) setTarget(ca, LEN / 2 - 1.0, MIDZ, 0, true, PI / 2);
+        if (cb) setTarget(cb, LEN / 2 + 1.0, MIDZ, 0, true, -PI / 2);
+        if (rf) setTarget(rf, LEN / 2, MIDZ + 1.3, 0, true, PI);
+        c.coin.face = null; c.coin.call = null; c.coin.winner = null; c.coin.choice = null;
+      } else if (name === "coinFlip" || name === "coinResult" || name === "choose" || name === "rivalChoice" || name === "choiceResult") {
+        c.coin.show = true;
+        if (name === "choose" || name === "rivalChoice" || name === "choiceResult") c.coin.angle = 0;
+        if (name === "choose" || name === "rivalChoice") c.coin.waitT = 0;
+      } else if (name === "lineup") {
+        c.coin.show = false;
+        baseTargets(7.0, true); officialTargets(6.4);
+      }
+    } else if (c.type === "half") {
+      if (name === "off") {
+        for (var hs = 0; hs < 2; hs++) for (var hi = 0; hi < 11; hi++) {
+          var ha = actorAt(hs, hi);
+          if (!ha) continue;
+          ha.hidden = false; ha.faceLock = false; ha.anim = null; ha.visualAnim = null;
+          var hp = tunnelSpot(hs, hi);
+          setTarget(ha, hp.x, hp.z, 6.6 * (ha.pace || 1), false);
+        }
+        officialsToTunnel(false);
+      } else if (name === "switch") {
+        /* Los jugadores quedan dentro del túnel mientras se cambia de lado. */
+        for (var ss = 0; ss < 2; ss++) for (var si = 0; si < 11; si++) {
+          var sa = actorAt(ss, si); if (sa) { sa.hidden = true; sa.anim = null; sa.visualAnim = null; }
+        }
+        placeOfficialsAtBands(true);
+      } else if (name === "enter") {
+        baseTargets(7.0, true); officialTargets(6.4);
+      } else if (name === "greetHalf") {
+        baseTargets(5.4, false); officialTargets(5.6);
+        var hc0 = captainOf(0), hc1 = captainOf(1);
+        if (hc0) { setTarget(hc0, LEN / 2 - 1.1, MIDZ, 4.0, true, PI / 2); hc0.anim = {type: "greet", t: 0, dur: 1.3, hand: true}; }
+        if (hc1) { setTarget(hc1, LEN / 2 + 1.1, MIDZ, 4.0, true, -PI / 2); hc1.anim = {type: "greet", t: 0, dur: 1.3, hand: true}; }
+        var hr = sim.officials[0];
+        if (hr) { setTarget(hr, LEN / 2, MIDZ + 1.4, 4.5, true, PI); hr.anim = {type: "greet", t: 0, dur: 1.2, hand: false}; }
+      }
+    } else if (c.type === "end") {
+      if (name === "whistle") {
+        for (var es = 0; es < 2; es++) for (var ei = 0; ei < 11; ei++) {
+          var ea = actorAt(es, ei); if (!ea) continue;
+          ea.hidden = false; ea.faceLock = false; ea.visualAnim = null;
+          setTarget(ea, ea.x, ea.z, 0, false);
+          if (sim.score[es] > sim.score[1 - es] && ei < 6) ea.anim = {type: "celebrate", t: 0, dur: 1.15};
+          else if (ei < 3) ea.anim = {type: "greet", t: 0, dur: 1.0, hand: false};
+          else ea.anim = null;
+        }
+        officialsToTunnel(false);
+      } else if (name === "line") {
+        for (var ls = 0; ls < 2; ls++) for (var li = 0; li < 11; li++) {
+          var la = actorAt(ls, li); if (!la) continue;
+          la.hidden = false; la.anim = null; la.visualAnim = null;
+          la.faceLock = false;
+          setTarget(la, LEN / 2 + (ls ? 1.8 : -1.8), 8 + li * 4.5, 6.2 * (la.pace || 1), false);
+          la.facing = ls ? -PI / 2 : PI / 2;
+        }
+        var lr = sim.officials[0];
+        if (lr) { lr.hidden = false; setTarget(lr, LEN / 2, MIDZ + 4, 5.0, false); }
+      } else if (name === "walkoff") {
+        for (var ws = 0; ws < 2; ws++) for (var wi = 0; wi < 11; wi++) {
+          var wa = actorAt(ws, wi); if (!wa) continue;
+          wa.hidden = false; wa.anim = null; wa.visualAnim = null; wa.faceLock = false;
+          var wp = tunnelSpot(ws, wi);
+          setTarget(wa, wp.x, wp.z - 1.0, 6.3 * (wa.pace || 1), false);
+        }
+        officialsToTunnel(false);
+      }
+    }
+    updateCoinOverlay();
+  }
+
+  function startIntro() {
+    sim.started = true; sim.ended = false; sim.action = null; sim.queue = []; sim.restart = null;
+    sim.pendingPass = null; sim.pendingOwn = null; sim.ballHidden = true;
+    beginCinema("intro");
+    sim.cinema.coin = {show: false, call: null, face: null, winner: null, choice: null,
+      angle: 0, waitT: 0};
+    for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+      var a = actorAt(s, i); if (a) placeAtTunnel(a, s, i, false);
+    }
+    placeOfficialsAtBands(false);
+    cam.cutT = 0; cam.cutMode = "";
+    setCinemaStage("walkout");
+  }
+
+  function startHalfCinema() {
+    beginCinema("half");
+    sim.half = 2; sim.ended = false; sim.ballHidden = true;
+    sim.action = null; sim.queue = []; sim.restart = null; sim.pendingPass = null; sim.pendingOwn = null;
+    var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.vx = b.vy = b.vz = 0;
+    cam.cutT = 0; cam.cutMode = "";
+    setCinemaStage("off");
+  }
+
+  function startEndCinema() {
+    beginCinema("end");
+    sim.ended = true; sim.ballHidden = true;
+    sim.action = null; sim.queue = []; sim.restart = null; sim.pendingPass = null; sim.pendingOwn = null;
+    var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.vx = b.vy = b.vz = 0;
+    cam.cutT = 0; cam.cutMode = "";
+    setCinemaStage("whistle");
+  }
+
+  function switchHalfSides() {
+    var c = sim.cinema; if (!c || c.switched) return;
+    c.switched = true;
+    sim.attack[0] = -sim.attack[0]; sim.attack[1] = -sim.attack[1];
+    mirrorTeam(0); mirrorTeam(1); mirrorOfficials();
+    for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+      var a = actorAt(s, i); if (!a) continue;
+      a.baseX = worldBaseX(s, a.nx); a.baseZ = a.nz * WID;
+      placeAtTunnel(a, s, i, true);
+    }
+    placeOfficialsAtBands(true);
+    var b = sim.ball; b.x = LEN / 2; b.z = MIDZ; b.y = 0.22; b.mode = "dead"; b.fl = null; b.next = null;
+    b.vx = b.vy = b.vz = 0; b.side = 0; b.idx = -1; b.lastTouch = 0;
+    cam.x = LEN / 2; cam.z = MIDZ;
+  }
+
+  function applyCoinChoice() {
+    var c = sim.cinema; if (!c || c.type !== "intro" || c.fieldFlipped) return;
+    var choice = c.coin && c.coin.choice;
+    if (choice !== "campo") return;
+    c.fieldFlipped = true;
+    sim.attack[0] = -1; sim.attack[1] = 1;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+      var a = actorAt(s, i); if (!a) continue;
+      a.baseX = worldBaseX(s, a.nx); a.baseZ = a.nz * WID;
+      if (!a.hidden) { a.tx = a.baseX; a.tz = a.baseZ; }
+    }
+  }
+
+  function finishCinema() {
+    var c = sim.cinema; if (!c) return;
+    var fw = freezeWanted;
+    if (c.type === "intro") {
+      applyCoinChoice();
+      var side = sim.kickoffSide === 1 ? 1 : 0;
+      sim.cinema = null; hideCoinOverlay(); sim.ballHidden = false;
+      for (var oi = 0; oi < sim.officials.length; oi++) sim.officials[oi].hidden = false;
+      officialTargets(6.8);
+      setupKickoff(side);
+    } else if (c.type === "half") {
+      if (!c.switched) switchHalfSides();
+      var next = 1 - sim.kickoffSide;
+      sim.cinema = null; hideCoinOverlay(); sim.ballHidden = false;
+      sim.koSet = true;
+      for (var oj = 0; oj < sim.officials.length; oj++) sim.officials[oj].hidden = false;
+      officialTargets(6.8);
+      setupKickoff(next);
+    } else {
+      sim.cinema = null; hideCoinOverlay(); sim.ballHidden = true; sim.ended = true;
+      for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+        var a = actorAt(s, i); if (a) { a.hidden = true; a.anim = null; a.visualAnim = null; }
+      }
+      for (var oi = 0; oi < sim.officials.length; oi++) sim.officials[oi].hidden = true;
+    }
+    frozen = fw;
+    if (!frozen) { lastTs = 0; acc = 0; }
+  }
+
+  function skipCinema() {
+    var c = sim.cinema; if (!c) return false;
+    if (c.type === "intro" && c.coin && c.coin.choice == null) c.coin.choice = "pelota";
+    if (c.type === "half" && !c.switched) switchHalfSides();
+    finishCinema();
+    return true;
+  }
+
+  function coinCall(v) {
+    var c = sim.cinema;
+    if (!c || c.type !== "intro" || c.stage !== "coinCall" || (v !== "cara" && v !== "cruz")) return false;
+    if (c.coin.call != null) return false;
+    c.coin.call = v;
+    c.coin.face = Math.random() < 0.5 ? "cara" : "cruz";
+    c.coin.winner = c.coin.face === c.coin.call ? 0 : 1;
+    setCinemaStage("coinFlip");
+    return true;
+  }
+
+  function coinChoice(v) {
+    var c = sim.cinema;
+    if (!c || c.type !== "intro" || c.stage !== "choose" || (v !== "campo" && v !== "pelota")) return false;
+    if (c.coin.choice != null) return false;
+    c.coin.choice = v;
+    setCinemaStage("choiceResult");
+    if (v === "campo") applyCoinChoice();
+    return true;
+  }
+
+  function resolveCoin() {
+    var c = sim.cinema; if (!c || !c.coin) return;
+    setCinemaStage("coinResult");
+  }
+
+  function updateCinema(dt) {
+    var c = sim.cinema; if (!c) return;
+    c.t += dt; c.stageT += dt;
+    if (c.coin) {
+      c.coin.angle += dt * (c.stage === "coinFlip" ? 17 : 1.1);
+      if (c.stage === "coinCall") {
+        c.coin.waitT += dt;
+        if (c.coin.waitT >= COIN_WAIT) coinCall(Math.random() < 0.5 ? "cara" : "cruz");
+      }
+    }
+    if (c.type === "intro") {
+      if (c.stage === "walkout" && c.stageT >= INTRO_WALK) setCinemaStage("greet");
+      else if (c.stage === "greet" && c.stageT >= INTRO_GREET) setCinemaStage("coinCall");
+      else if (c.stage === "coinFlip" && c.stageT >= COIN_FLIP) resolveCoin();
+      else if (c.stage === "coinResult" && c.stageT >= COIN_RESULT) {
+        if (c.coin.winner === 0) setCinemaStage("choose");
+        else setCinemaStage("rivalChoice");
+      } else if (c.stage === "choose") {
+        c.coin.waitT = (c.coin.waitT || 0) + dt;
+        if (c.coin.choice == null && c.coin.waitT >= COIN_WAIT) coinChoice(Math.random() < 0.5 ? "campo" : "pelota");
+      } else if (c.stage === "rivalChoice" && c.stageT >= RIVAL_WAIT) {
+        c.coin.choice = "campo";
+        setCinemaStage("choiceResult");
+        applyCoinChoice();
+      } else if (c.stage === "choiceResult" && c.stageT >= COIN_RESULT) setCinemaStage("lineup");
+      else if (c.stage === "lineup" && c.stageT >= INTRO_LINEUP) finishCinema();
+    } else if (c.type === "half") {
+      if (c.stage === "off" && c.stageT >= HALF_OFF) { switchHalfSides(); setCinemaStage("switch"); }
+      else if (c.stage === "switch" && c.stageT >= HALF_SWITCH) setCinemaStage("enter");
+      else if (c.stage === "enter" && c.stageT >= HALF_ENTER) setCinemaStage("greetHalf");
+      else if (c.stage === "greetHalf" && c.stageT >= HALF_GREET) finishCinema();
+    } else if (c.type === "end") {
+      if (c.stage === "whistle" && c.stageT >= END_WHISTLE) setCinemaStage("line");
+      else if (c.stage === "line") {
+        if (!c.lineGreeted && c.stageT >= 1.65) {
+          c.lineGreeted = true;
+          for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+            var a = actorAt(s, i);
+            if (a) a.anim = {type: "greet", t: -0.09 * i, dur: 1.1, hand: true};
+          }
+        }
+        if (c.stageT >= END_LINE) setCinemaStage("walkoff");
+      } else if (c.stage === "walkoff" && c.stageT >= END_WALKOFF) finishCinema();
+    }
+    moveCinemaActors(dt);
+    updateAnimations(dt);
+  }
+
+  function moveCinemaActors(dt) {
+    var lists = [sim.players[0] || [], sim.players[1] || [], sim.officials || []];
+    for (var l = 0; l < lists.length; l++) {
+      var list = lists[l];
+      for (var i = 0; i < list.length; i++) {
+        var a = list[i];
+        if (!a || a.gone || a.sentOff) continue;
+        var dx = a.tx - a.x, dz = a.tz - a.z, d = Math.sqrt(dx * dx + dz * dz);
+        var want = Math.min(a.maxSp || 6, d * 3.4), dvx = 0, dvz = 0;
+        if (d > 0.001) { dvx = dx / d * want - a.vx; dvz = dz / d * want - a.vz; }
+        var lim = 17 * dt, ll = Math.sqrt(dvx * dvx + dvz * dvz);
+        if (ll > lim) { dvx = dvx / ll * lim; dvz = dvz / ll * lim; }
+        a.vx += dvx; a.vz += dvz;
+        a.x += a.vx * dt; a.z += a.vz * dt;
+        if (a.x < -2) a.x = -2; else if (a.x > LEN + 2) a.x = LEN + 2;
+        if (a.z < -6.6) a.z = -6.6; else if (a.z > WID + 2) a.z = WID + 2;
+        if (a.z < -4.9) a.hidden = true;
+        var sp = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
+        if (sp > 0.35 && !a.faceLock) a.facing = angleTo(a.facing, Math.atan2(a.vx, a.vz), Math.min(1, dt * 8));
+        a.runPhase += sp * dt * 2.3;
+        a.lean = lerp(a.lean || 0, 0, Math.min(1, dt * 6));
+        a.bank = lerp(a.bank || 0, 0, Math.min(1, dt * 6));
+      }
+    }
+  }
+
+  /* La cámara de las secuencias evita seguir el balón mientras está oculto. */
+  function cinemaShot() {
+    var c = sim.cinema; if (!c) return null;
+    if (c.type === "intro") {
+      if (c.stage === "walkout") return c.stageT < 1.35
+        ? {x: LEN / 2, z: 8, back: 2.5, height: 5.2, lookX: LEN / 2, lookZ: -3.2}
+        : {x: LEN / 2, z: 34, back: 33, height: 20, lookX: LEN / 2, lookZ: MIDZ};
+      if (c.stage === "greet" || c.stage === "coinCall" || c.stage === "coinFlip" ||
+        c.stage === "coinResult" || c.stage === "choose" || c.stage === "rivalChoice" || c.stage === "choiceResult")
+        return {x: LEN / 2, z: 30, back: 10.5, height: 8.2, lookX: LEN / 2, lookZ: MIDZ};
+      if (c.stage === "lineup") return {x: LEN / 2, z: 34, back: 31, height: 19, lookX: LEN / 2, lookZ: MIDZ};
+    } else if (c.type === "half") {
+      if (c.stage === "off") return c.stageT < 1.5
+        ? {x: LEN / 2, z: 34, back: 33, height: 20, lookX: LEN / 2, lookZ: MIDZ}
+        : {x: LEN / 2, z: 8, back: 2.5, height: 5.2, lookX: LEN / 2, lookZ: -3.2};
+      if (c.stage === "switch") return {x: LEN / 2, z: 8, back: 2.5, height: 5.2, lookX: LEN / 2, lookZ: -3.2};
+      if (c.stage === "enter") return c.stageT < 1.3
+        ? {x: LEN / 2, z: 8, back: 2.5, height: 5.2, lookX: LEN / 2, lookZ: -3.2}
+        : {x: LEN / 2, z: 34, back: 32, height: 19, lookX: LEN / 2, lookZ: MIDZ};
+      if (c.stage === "greetHalf") return {x: LEN / 2, z: 30, back: 10.5, height: 8.2, lookX: LEN / 2, lookZ: MIDZ};
+    } else if (c.type === "end") {
+      if (c.stage === "whistle") return {x: LEN / 2, z: 34, back: 33, height: 20, lookX: LEN / 2, lookZ: MIDZ};
+      if (c.stage === "line") return {x: LEN / 2, z: 32, back: 15, height: 10, lookX: LEN / 2, lookZ: MIDZ};
+      if (c.stage === "walkoff") return {x: LEN / 2, z: 12, back: 8, height: 6, lookX: LEN / 2, lookZ: -2};
+    }
+    return {x: LEN / 2, z: 34, back: 33, height: 20, lookX: LEN / 2, lookZ: MIDZ};
+  }
+
+  function updateCinemaCamera(dt) {
+    var sh = cinemaShot(); if (!sh) return;
+    var k = 1 - Math.exp(-dt * 2.4);
+    cam.x += (sh.x - cam.x) * k;
+    cam.z += (sh.z - cam.z) * k;
+    cam.back += (sh.back - cam.back) * k;
+    cam.height += (sh.height - cam.height) * k;
+    cam.lookX += (sh.lookX - cam.lookX) * k;
+    cam.lookZ += (sh.lookZ - cam.lookZ) * k;
+    cam.shake = 0;
   }
 
   function updateOfficials(dt) {
@@ -576,7 +1004,7 @@ var Pitch3D = (function () {
       } else {
         /* Los asistentes recorren su banda siguiendo la línea de juego. */
         tx = clamp(b.x, 4, LEN - 4);
-        tz = o.official === "ar1" ? -1.1 : WID + 1.1;
+        tz = o.bandZ == null ? (o.official === "ar1" ? -1.1 : WID + 1.1) : o.bandZ;
         maxSp = 8.1;
       }
       var dx = tx - o.x, dz = tz - o.z, d = Math.sqrt(dx * dx + dz * dz);
@@ -894,7 +1322,7 @@ var Pitch3D = (function () {
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = actorAt(s, i); if (!a) continue;
       a.x = a.tx = a.baseX; a.z = a.tz = a.baseZ; a.vx = a.vz = 0; a.anim = null;
-      a.passTarget = null; a.faceLock = false; a.lean = 0; a.bank = 0;
+      a.hidden = false; a.passTarget = null; a.faceLock = false; a.lean = 0; a.bank = 0;
       a.facing = sim.attack[s] > 0 ? PI / 2 : -PI / 2;
     }
   }
@@ -1350,20 +1778,11 @@ var Pitch3D = (function () {
 
   function doHalf() {
     if (sim.half === 2) return;
-    sim.action = null; sim.queue = []; sim.ended = false; sim.restart = null;
-    sim.half = 2; mirrorTeam(0); mirrorTeam(1); mirrorOfficials();
-    sim.attack[0] = -sim.attack[0]; sim.attack[1] = -sim.attack[1];
-    var b = sim.ball; b.x = LEN - b.x; b.vx = -b.vx; b.fl = null; b.next = null; b.mode = "dead";
-    cam.x = LEN - cam.x;
-    setupKickoff(1 - sim.kickoffSide);
+    startHalfCinema();
   }
 
   function doEnd() {
-    sim.action = null; sim.queue = []; sim.restart = null; sim.ended = true; sim.pendingPass = null;
-    var b = sim.ball; b.mode = "dead"; b.fl = null; b.next = null; b.vx = b.vy = b.vz = 0;
-    for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
-      var a = actorAt(s, i); if (a) { a.anim = {type: "idle", t: 0, dur: 1e9}; a.passTarget = null; a.vx = a.vz = 0; a.lean = 0; a.bank = 0; }
-    }
+    startEndCinema();
   }
 
   function handleEvent(e) {
@@ -1371,6 +1790,8 @@ var Pitch3D = (function () {
     if (sim.replay) { sim.queue.push(e); return; }
     var t = String(e.t || "").toLowerCase();
     if (sim.ended && t !== "end") { fireCue(e); return; }
+    /* Las secuencias de vestuario no se interrumpen con acciones de juego. */
+    if (sim.cinema && t !== "half" && t !== "end") { fireCue(e); return; }
     /* no cortar un gol o una tarjeta que se está representando en el 45' */
     if ((t === "half" || t === "end") && sim.action) { sim.queue.push(e); return; }
     if (t === "half") { doHalf(); fireCue(e); return; }
@@ -1448,6 +1869,7 @@ var Pitch3D = (function () {
   /* ------------------------------------------------------------------ cámara */
 
   function updateCamera(dt) {
+    if (sim.cinema) { updateCinemaCamera(dt); return; }
     var b = sim.ball, tx = b.x, tz = b.z, back = 34, height = 22;
     var goalDist = Math.min(Math.abs(b.x), Math.abs(LEN - b.x));
     var danger = clamp(1 - goalDist / 35, 0, 1);
@@ -1639,6 +2061,7 @@ var Pitch3D = (function () {
       if (anim.type === "gkstrike") return {name: "kick", t: k * 0.98, loop: false};
       if (anim.type === "gkready" || anim.type === "gkshield") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
       if (anim.type === "celebrate") return {name: "celebrate", t: k * 1.7, loop: false};
+      if (anim.type === "greet") return {name: anim.hand ? "idle" : "celebrate", t: anim.hand ? a.phase * 2 + sim.time * 0.2 : Math.min(1.1, k * 1.35), loop: false};
       if (anim.type === "card") return {name: "idle", t: a.phase * 2 + sim.time * 0.35, loop: true};
     }
     if (sp > 0.65) return {name: "run", t: (a.runPhase / TAU) * 0.8, loop: true};
@@ -1763,7 +2186,7 @@ var Pitch3D = (function () {
     var gait = Math.sin(a.runPhase) * 0.32 * run, gait2 = Math.sin(a.runPhase + PI) * 0.32 * run;
     var liftL = Math.max(0, Math.cos(a.runPhase)) * 0.12 * run;
     var liftR = Math.max(0, Math.cos(a.runPhase + PI)) * 0.12 * run;
-    var jump = 0, kick = 0, celebrate = 0, card = 0, dive = false, gkready = false, gkshield = false;
+    var jump = 0, kick = 0, celebrate = 0, card = 0, dive = false, gkready = false, gkshield = false, handshake = 0;
     if (a.anim) {
       var k = clamp(a.anim.t / a.anim.dur, 0, 1);
       if (a.anim.type === "kick") kick = Math.sin(k * PI);
@@ -1771,6 +2194,11 @@ var Pitch3D = (function () {
       else if (a.anim.type === "gkready") gkready = true;
       else if (a.anim.type === "gkshield") gkshield = true;
       else if (a.anim.type === "celebrate") { celebrate = 1; jump = Math.sin(k * PI) * 0.35; }
+      else if (a.anim.type === "greet") {
+        var gr = Math.sin(clamp(k, 0, 1) * PI);
+        if (a.anim.hand) handshake = gr;
+        else celebrate = Math.max(celebrate, gr);
+      }
       else if (a.anim.type === "card") card = Math.sin(k * PI);
       else if (a.anim.type === "dive") dive = true;
     }
@@ -1829,6 +2257,12 @@ var Pitch3D = (function () {
       } else if (kick > 0.01) {
         handY = 1.12; elbowY = 1.05;
         leftHandZ = 0.30 * kick; rightHandZ = -0.22 * kick;
+      }
+      if (handshake > 0.01) {
+        /* Los capitanes se dan la mano: el brazo derecho va al centro y el
+         * cuerpo queda de frente al rival. */
+        handY = 1.03; elbowY = 1.08; handX = 0.15; elbowX = 0.37;
+        rightHandZ = 0.56 * handshake; leftHandZ = -0.06;
       }
       m.limb([-0.3, 1.2, 0], [-elbowX, elbowY, leftHandZ * 0.4], 0.085, shirt);
       m.limb([-elbowX, elbowY, leftHandZ * 0.4], [-handX, handY, leftHandZ], 0.07, skin);
@@ -1916,6 +2350,28 @@ var Pitch3D = (function () {
     m.tri(bot, d, a, k); m.tri(bot, c, d, w); m.tri(bot, e, c, k); m.tri(bot, a, e, w);
   }
 
+  function coinDisc(m, x, y, z, rx, ry, c, seg) {
+    seg = seg || 18;
+    for (var i = 0; i < seg; i++) {
+      var a = i * TAU / seg, b = (i + 1) * TAU / seg;
+      m.tri([x, y, z], [x + Math.cos(a) * rx, y + Math.sin(a) * ry, z],
+        [x + Math.cos(b) * rx, y + Math.sin(b) * ry, z], c);
+    }
+  }
+
+  /* Moneda del sorteo: un disco vertical barato que gira sobre su eje. */
+  function buildCoin(m) {
+    var c = sim.cinema; if (!c || c.type !== "intro" || !c.coin || !c.coin.show) return;
+    var x = LEN / 2, y = 1.42 + Math.sin(sim.time * 3.2) * 0.035, z = MIDZ;
+    var r = 0.27, sy = Math.max(0.035, Math.abs(Math.cos(c.coin.angle)) * r);
+    var gold = [0.97, 0.76, 0.18], edge = [0.52, 0.34, 0.06], light = [1.0, 0.91, 0.52];
+    m.metallic = 0.45; m.roughness = 0.28;
+    coinDisc(m, x, y, z + 0.012, r * 1.045, sy * 1.045, edge, 18);
+    coinDisc(m, x, y, z + 0.018, r, sy, gold, 18);
+    if (sy > r * 0.62) coinDisc(m, x, y, z + 0.024, r * 0.37, sy * 0.37, light, 14);
+    m.metallic = 0; m.roughness = 1;
+  }
+
   /* ------------------------------------------------------------------ render */
 
   function resize() {
@@ -1967,16 +2423,17 @@ var Pitch3D = (function () {
     assetFrameTris = 0; assetFramePlayers = 0; assetFrameBall = 0;
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
       var a = sim.players[s] && sim.players[s][i];
-      if (!a) continue;
+      if (!a || a.hidden) continue;
       var card = sim.action && sim.action.type === "card" && sim.action.player === a;
       if ((a.gone || a.sentOff) && !card) continue;
       if (!buildAssetPlayer(dyn, a)) buildPlayer(dyn, a);
     }
     for (var oi = 0; oi < sim.officials.length; oi++) {
       var oa = sim.officials[oi];
-      if (oa && !buildAssetPlayer(dyn, oa)) buildPlayer(dyn, oa);
+      if (oa && !oa.hidden && !buildAssetPlayer(dyn, oa)) buildPlayer(dyn, oa);
     }
-    if (!buildAssetBall(dyn)) buildBall(dyn);
+    buildCoin(dyn);
+    if (!sim.ballHidden && !buildAssetBall(dyn)) buildBall(dyn);
     drawWeather(dyn);
     if (dyn.n > dynCapacity) {
       var cap = dynCapacity; while (cap < dyn.n) cap *= 2;
@@ -2018,7 +2475,7 @@ var Pitch3D = (function () {
     var dt = lastTs ? Math.min(0.1, Math.max(0, (ts - lastTs) / 1000)) : 0;
     lastTs = ts;
     resize();
-    if (!frozen && !sim.replay && !sim.ended) {
+    if (!frozen && !sim.replay && (!sim.ended || sim.cinema)) {
       acc += dt;
       var n = 0;
       while (acc >= STEP && n < 4) { simStep(STEP); acc -= STEP; n++; }
@@ -2047,6 +2504,9 @@ var Pitch3D = (function () {
     sim.time += dt * (sim.replay ? 1 : sim.rate);
     if (sim.replay) { updateReplay(dt * 1); return; }
     var sdt = dt * sim.rate;
+    /* Entrada, descanso y despedida tienen su propio reloj y no pasan por la
+     * IA: así los jugadores no abandonan la puesta en escena. */
+    if (sim.cinema) { updateCinema(sdt); return; }
     updateAction(sdt);
     updateRestart(sdt);
     aiAcc += sdt;
@@ -2078,6 +2538,67 @@ var Pitch3D = (function () {
   }
 
   /* ------------------------------------------------------------------ API */
+
+  function coinButton(txt, attr, val) {
+    return '<button type="button" ' + attr + '="' + val + '" style="min-width:68px;padding:6px 10px;margin:2px;border-radius:7px;border:1px solid rgba(255,255,255,.38);background:rgba(244,190,48,.92);color:#172018;font:800 11px system-ui;cursor:pointer">' + txt + "</button>";
+  }
+
+  function updateCoinOverlay() {
+    if (!coinEl) return;
+    var c = sim.cinema;
+    if (!c || c.type !== "intro" || !c.coin || !c.coin.show) { hideCoinOverlay(); return; }
+    var s = "", face = c.coin.face === "cara" ? label("Cara") : label("Cruz");
+    if (c.stage === "coinCall") {
+      s = '<b style="display:block;font:800 12px/1.2 system-ui">' + label("Cara o cruz") + "</b>" +
+        '<span style="display:block;font:500 10px/1.25 system-ui;opacity:.84;margin-top:2px">' + label("Elige tu llamada.") + "</span>" +
+        '<div style="margin-top:4px">' + coinButton(label("Cara"), "data-p3d-coin", "cara") + coinButton(label("Cruz"), "data-p3d-coin", "cruz") + "</div>";
+    } else if (c.stage === "coinFlip") {
+      s = '<b style="display:block;font:800 12px system-ui">' + label("La moneda está en el aire…") + "</b>" +
+        '<span style="display:block;font:500 10px system-ui;opacity:.78;margin-top:2px">' + labelv("Has llamado {v}.", {v: c.coin.call === "cara" ? label("Cara") : label("Cruz")}) + "</span>";
+    } else if (c.stage === "coinResult") {
+      s = '<b style="display:block;font:800 13px system-ui">' + labelv("Salió {v}.", {v: face}) + "</b>" +
+        '<span style="display:block;font:600 10px system-ui;margin-top:2px;color:' + (c.coin.winner === 0 ? "#b9ffd6" : "#ffd0a8") + '">' +
+        (c.coin.winner === 0 ? label("Ganas el sorteo.") : label("Gana el rival.")) + "</span>";
+    } else if (c.stage === "choose") {
+      s = '<b style="display:block;font:800 12px/1.2 system-ui">' + label("¡Ganaste el sorteo!") + "</b>" +
+        '<span style="display:block;font:500 10px/1.2 system-ui;opacity:.84;margin-top:2px">' + label("¿Campo o pelota?") + "</span>" +
+        '<div style="margin-top:4px">' + coinButton(label("Campo"), "data-p3d-choice", "campo") + coinButton(label("Pelota"), "data-p3d-choice", "pelota") + "</div>" +
+        '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + label("Campo cambia de lado · Pelota mantiene el saque") + "</span>";
+    } else if (c.stage === "rivalChoice") {
+      s = '<b style="display:block;font:800 12px system-ui">' + label("Gana el rival el sorteo") + "</b>" +
+        '<span style="display:block;font:500 10px/1.25 system-ui;opacity:.82;margin-top:2px">' + label("Elige campo: atacaremos al otro lado.") + "</span>";
+    } else if (c.stage === "choiceResult") {
+      s = '<b style="display:block;font:800 12px system-ui">' + (c.coin.choice === "campo" ? label("Campo elegido") : label("Saque elegido")) + "</b>" +
+        '<span style="display:block;font:500 10px/1.25 system-ui;opacity:.82;margin-top:2px">' +
+        (c.coin.choice === "campo" ? label("Cambiamos de lado antes del saque.") : label("Se mantiene el saque inicial.")) + "</span>";
+    }
+    if (!s) { hideCoinOverlay(); return; }
+    coinEl.innerHTML = s;
+    coinEl.style.display = "block";
+  }
+
+  function hideCoinOverlay() {
+    if (!coinEl) return;
+    coinEl.style.display = "none";
+    coinEl.innerHTML = "";
+  }
+
+  function makeCoinOverlay() {
+    coinEl = document.createElement("div");
+    coinEl.className = "lpitch3d-coin";
+    coinEl.setAttribute("role", "status");
+    coinEl.setAttribute("aria-live", "polite");
+    coinEl.style.cssText = "position:absolute;z-index:24;left:50%;bottom:8px;transform:translateX(-50%);width:min(312px,92%);box-sizing:border-box;padding:6px 9px;border:1px solid rgba(255,255,255,.30);border-radius:9px;background:rgba(5,15,12,.90);color:#fff;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.32);display:none";
+    coinEl.addEventListener("click", function (ev) {
+      ev.preventDefault(); ev.stopPropagation();
+      var b = ev.target;
+      while (b && b !== coinEl && !b.getAttribute("data-p3d-coin") && !b.getAttribute("data-p3d-choice")) b = b.parentNode;
+      if (!b || b === coinEl) return;
+      if (b.getAttribute("data-p3d-coin")) coinCall(b.getAttribute("data-p3d-coin"));
+      else coinChoice(b.getAttribute("data-p3d-choice"));
+    });
+    host.appendChild(coinEl);
+  }
 
   function mount(el, o) {
     destroy();
@@ -2112,8 +2633,11 @@ var Pitch3D = (function () {
     replayBtn.style.cssText = "position:absolute;z-index:20;right:6px;bottom:6px;width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,.35);background:rgba(8,20,18,.82);color:#fff;font:700 15px system-ui;cursor:pointer";
     replayBtn.addEventListener("click", function (ev) { ev.preventDefault(); ev.stopPropagation(); startReplay(); });
     host.appendChild(replayBtn);
+    try { if (window.getComputedStyle(host).position === "static") host.style.position = "relative"; } catch (ignore) {}
+    makeCoinOverlay();
     host.addEventListener("webglcontextlost", onLost, false);
     sim = newSim();
+    freezeWanted = false;
     sim.fem = !!opts.fem;
     resize();
     lastTs = 0; acc = 0; aiAcc = 0; histAcc = 0; fps = 0; fpsFrames = 0; fpsStart = 0;
@@ -2148,7 +2672,8 @@ var Pitch3D = (function () {
     if (hud && hud.parentNode) hud.parentNode.removeChild(hud); hud = null;
     if (scoreHud && scoreHud.parentNode) scoreHud.parentNode.removeChild(scoreHud); scoreHud = null;
     if (replayBtn && replayBtn.parentNode) replayBtn.parentNode.removeChild(replayBtn); replayBtn = null;
-    host = null; sim = newSim(); lastTs = 0; fps = 0;
+    if (coinEl && coinEl.parentNode) coinEl.parentNode.removeChild(coinEl); coinEl = null;
+    host = null; sim = newSim(); freezeWanted = false; frozen = false; lastTs = 0; fps = 0;
   }
 
   function teams(home, away, fixedNums) {
@@ -2158,7 +2683,10 @@ var Pitch3D = (function () {
     for (var oi = 0; oi < sim.officials.length; oi++) setActorVariant(sim.officials[oi]);
     if (!sim.started && listOf(0).length && listOf(1).length) {
       sim.started = true;
-      setupKickoff(sim.own);
+      /* Al reabrir o cambiar a 3D con el partido ya empezado no se repite la
+       * entrada desde el túnel; solo ocurre en el arranque real. */
+      if (opts.cinematics === false) setupKickoff(sim.own);
+      else startIntro();
     }
   }
 
@@ -2189,6 +2717,15 @@ var Pitch3D = (function () {
     if (o.fem != null && sim.fem !== !!o.fem) { sim.fem = !!o.fem; refreshActorVariants(); }
     if (o.speed != null) sim.rate = clamp(+o.speed || 1, 1, 3);
     if (sim.ended) return;
+    /* Durante la entrada o el descanso el motor sigue siendo la autoridad:
+     * se guarda quién saca, pero no se mueve el balón ni la posesión. */
+    if (sim.cinema) {
+      if (o.own != null && !sim.koSet) {
+        var cineOwn = o.own === 1 ? 1 : 0;
+        sim.koSet = true; sim.kickoffSide = cineOwn; sim.own = cineOwn;
+      }
+      return;
+    }
     if (o.tac) {
       for (var s = 0; s < 2; s++) {
         var t = o.tac[s];
@@ -2261,11 +2798,15 @@ var Pitch3D = (function () {
     for (var i = 0; i < sim.queue.length; i++) ms += 1600 / sim.rate;
     if (sim.restart) ms += Math.max(0, sim.restart.t) / sim.rate * 1000;
     if (sim.replay) ms += Math.max(0, sim.replay.dur - sim.replay.t) * 1000;
+    /* Las secuencias se sondean desde la UI: el minuto no avanza hasta que
+     * termina la puesta en escena. */
+    if (sim.cinema) ms += 620;
     return ms;
   }
 
   function reset() {
     var old = sim;
+    hideCoinOverlay();
     sim = newSim();
     sim.players = old.players;
     sim.tactics = old.tactics;
@@ -2279,21 +2820,36 @@ var Pitch3D = (function () {
       for (var i = 0; i < 11; i++) {
         var a = sim.players[s] && sim.players[s][i];
         if (!a) continue;
-        a.sentOff = false; a.gone = false; a.baseX = worldBaseX(s, a.nx); a.baseZ = a.nz * WID;
+        a.sentOff = false; a.gone = false; a.hidden = false; a.anim = null; a.visualAnim = null;
+        a.baseX = worldBaseX(s, a.nx); a.baseZ = a.nz * WID;
       }
     }
     sim.kickoffSide = 0;
+    freezeWanted = false; frozen = false;
     if (scoreHud) scoreHud.style.display = "none";
     setupKickoff(0);
     cam.x = LEN / 2; cam.z = MIDZ; cam.lookX = LEN / 2; cam.lookZ = MIDZ;
   }
 
   function freeze(v) {
-    frozen = !!v;
+    freezeWanted = !!v;
+    /* Si la UI pausa en mitad de una secuencia, se termina de ver y el
+     * congelado se aplica al volver al juego. */
+    if (freezeWanted && sim.cinema) { frozen = false; return; }
+    frozen = freezeWanted;
     if (!frozen) { lastTs = 0; acc = 0; }
   }
 
   function replay() { return startReplay(); }
+
+  function cinema() {
+    var c = sim.cinema;
+    if (!c) return null;
+    var coin = null;
+    if (c.coin) coin = {show: !!c.coin.show, call: c.coin.call, face: c.coin.face,
+      winner: c.coin.winner, choice: c.coin.choice};
+    return {type: c.type, stage: c.stage, t: +c.t.toFixed(3), stageT: +c.stageT.toFixed(3), coin: coin};
+  }
 
   /* Diagnóstico barato para el smoke test: detecta NaN y triángulos
    * desgarrados sin exponer el VBO completo. */
@@ -2330,7 +2886,7 @@ var Pitch3D = (function () {
         shortK: ga.shortK, pressure: !!ga.presser, receiver: ga.receiver ? ga.receiver.slot : -1,
         minPressureDist: +ga.minPressureDist.toFixed(3)};
     } else if (sim.lastGoalKick) gk = sim.lastGoalKick;
-    return {sim: sim, ball: sim.ball, action: sim.action, goalkick: gk, quality: quality, fps: fps, frames: frameCount,
+    return {sim: sim, ball: sim.ball, action: sim.action, goalkick: gk, cinema: cinema(), quality: quality, fps: fps, frames: frameCount,
       gl: !!gl, glError: err, players: sim.players, history: sim.history.length, camera: cam, mesh: meshStats(),
       assets: {state: assetState, lods: assetLods, statics: assetModels ? Object.keys(assetModels.static).length : 0,
         errors: assetModels && assetModels.errors ? assetModels.errors.length : 0,
@@ -2339,6 +2895,7 @@ var Pitch3D = (function () {
 
   return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy,
     reset: reset, freeze: freeze, replay: replay, debug: debug,
+    cinema: cinema, skipCinema: skipCinema,
     active: function () { return !!gl && !disposed; },
     sound: function () { return false; }};
 })();
@@ -2371,7 +2928,12 @@ var Pitch3D = (function () {
       if (mounted) Pitch3D.destroy(); else if (originalApi.destroy) originalApi.destroy();
       mounted = false;
       if (want3d) {
-        mounted = Pitch3D.mount(host, mountOpts || {});
+        var mo = mountOpts || {};
+        if (lastState && +lastState.min > 0) {
+          mo = {}; for (var mk in mountOpts || {}) if (Object.prototype.hasOwnProperty.call(mountOpts, mk)) mo[mk] = mountOpts[mk];
+          mo.cinematics = false;
+        }
+        mounted = Pitch3D.mount(host, mo);
         if (!mounted && originalApi.mount) originalApi.mount(host, mountOpts || {});
       } else if (originalApi.mount) originalApi.mount(host, mountOpts || {});
       var active = mounted ? Pitch3D : originalApi;
@@ -2411,6 +2973,8 @@ var Pitch3D = (function () {
     var e = mounted ? Pitch3D : originalApi; return e.event.apply(e, arguments);
   };
   Pitch.busy = function () { var e = mounted ? Pitch3D : originalApi; return e.busy.apply(e, arguments); };
+  Pitch.cinema = function () { var e = mounted ? Pitch3D : originalApi; return e.cinema && mounted ? e.cinema() : null; };
+  Pitch.skipCinema = function () { var e = mounted ? Pitch3D : originalApi; return e.skipCinema && mounted ? e.skipCinema() : false; };
   Pitch.reset = function () { var e = mounted ? Pitch3D : originalApi; return e.reset.apply(e, arguments); };
   Pitch.freeze = function (v) { lastFrozen = !!v; var e = mounted ? Pitch3D : originalApi; return e.freeze.apply(e, arguments); };
   Pitch.clearMsg = function () { var e = mounted ? Pitch3D : originalApi; return e.clearMsg ? e.clearMsg.apply(e, arguments) : undefined; };

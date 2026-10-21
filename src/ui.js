@@ -2020,20 +2020,28 @@
     return s;
   }
   function subDone() { if (LV && LV.resume) { LV.resume = false; LV.run = true; liveTick(); } }
+  function pitchCinema() {
+    try { return typeof Pitch !== "undefined" && Pitch.cinema ? !!Pitch.cinema() : false; } catch (e) { return false; }
+  }
   function liveTick() {
     if (!LV) return;
     if (LV.timer) clearTimeout(LV.timer);
     var L = S.live;
     if (!L || L.done || !LV.run) { liveRender(); return; }
+    var wait = Math.max([0, 700, 340, 120][LV.speed] || 700, typeof Pitch !== "undefined" ? Pitch.busy() : 0);
+    /* La entrada, el descanso y la despedida se sondean sin avanzar minutos. */
+    if (pitchCinema()) wait = Math.min(wait || 420, 420);
     LV.timer = setTimeout(function () {
       if (!LV || !S.live) return;
+      var pb = typeof Pitch !== "undefined" ? Pitch.busy() : 0;
+      if (pitchCinema() || pb > 0) { liveRender(); liveTick(); return; }
       var ev = liveStep();
       livePitchFeed(ev);
       if (ev.some(function (e) { return e.t === "half"; })) LV.run = false;
       if (ev.some(function (e) { return e.t === "goal" || e.t === "red" || e.t === "inj"; }) && LV.speed > 1) LV.run = LV.speed < 4;
       liveRender();
       liveTick();
-    }, Math.max([0, 700, 340, 120][LV.speed] || 700, typeof Pitch !== "undefined" ? Pitch.busy() : 0));
+    }, wait);
   }
   function liveRender() {
     if (!LV || !S.live) return;
@@ -2082,6 +2090,7 @@
       LV.el.innerHTML = '<div class="lpanel"><div id="lvtop"></div><div class="lpitchw" id="lvpitch"></div><div id="lvbody"></div><div id="lvctl"></div></div>';
       LV.ctlKey = null;
       if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === "f", spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
+        cinematics: !L.min,
         lab: {replay: tr("REPETICIÓN"), goal: tr("GOL"), goalOf: tr("¡GOL DE {n}!"), post: tr("¡PALO!"), half: tr("FIN DEL PRIMER TIEMPO"), end: tr("FINAL"), off: tr("FUERA DE JUEGO"), foul: tr("FALTA"), thr: tr("SAQUE DE BANDA"), cor: tr("CÓRNER"), gk: tr("SAQUE DE PUERTA")},
         onSpeed: function (n) { if (!LV) return; LV.speed = n; LV.run = true; LV.resume = false; liveTick(); liveRender(); }});
     }
@@ -2091,6 +2100,9 @@
     var ck = [L.done, LV.run, LV.speed, String(L.ment), L.form, L.left, LV.sel, LV.pin, L.red, L.hurt, L.xi.join(","), L.bench.join(","), JSON.stringify(L.tac || {}), Math.floor((L.min || 0) / 5)].join("|");
     if (ck !== LV.ctlKey) { LV.ctlKey = ck; document.getElementById("lvctl").innerHTML = s; }
     livePitchTeams();
+    /* El sorteo necesita saber quién saca antes de que termine la entrada;
+       el primer minuto aún no se ha jugado, así que se siembra el estado. */
+    if (!LV.seeded) { LV.seeded = true; livePitchFeed([]); }
     if (typeof Pitch !== "undefined") Pitch.freeze(!LV.run && !L.done);
     /* animar la barra desde donde estaba */
     var mt = LV.el.querySelector(".lmot .a"), bl = LV.el.querySelector(".lball");
@@ -2430,7 +2442,7 @@
         UI.sheet = null; persist(); render(false); toast(tr("Perfil actualizado"));
         break;
       /* partido en directo */
-      case "lspeed": if (LV) { var sv = +v; LV.run = sv > 0; if (sv > 0) LV.speed = sv; liveTick(); liveRender(); } break;
+      case "lspeed": if (LV) { var sv = +v; LV.run = sv > 0; if (sv > 0) { LV.speed = sv; if (typeof Pitch !== "undefined") livePitchFeed([]); } liveTick(); liveRender(); } break;
       case "lment": liveSet("ment", v === "bus" || v === "press" ? v : +v); liveRender(); break;
       case "lout": if (LV) { if (LV.sel == null && LV.run) { LV.resume = true; LV.run = false; } LV.sel = LV.sel === id ? null : id; LV.pin = null; if (LV.sel == null) subDone(); liveRender(); } break;
       case "lin": if (LV && LV.sel != null) { LV.pin = id; liveRender(); } break;

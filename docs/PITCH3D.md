@@ -72,6 +72,35 @@ match41.js ──> ui.js (livePitchFeed) ──> Pitch.state / Pitch.event
 - Al final se congela la simulación visual, pero la cámara y el render siguen activos.
 - `Pitch.reset()` conserva el roster y recoloca el partido para el reinicio de la simulación.
 
+### Entrada, descanso y despedida
+
+La puesta en escena es una capa puramente visual dentro de `sim.cinema`. No cambia `conv`, `bigR`, `xgPerGoal`, el marcador, el minuto ni la posesión de `match41.js`. `ui.js` deja de pedir minutos mientras hay una secuencia y las sondea con `Pitch.cinema()` y `Pitch.busy()`.
+
+```text
+Inicio:    walkout → greet → coinCall → coinFlip → coinResult
+           → choose / rivalChoice → choiceResult → lineup
+Descanso:  off → switch → enter → greetHalf
+Final:     whistle → line → walkoff
+```
+
+- **Inicio**: los 22 jugadores salen del túnel, se colocan, los capitanes y el árbitro se saludan y se juega el cara o cruz. La secuencia solo se reproduce en el arranque real del directo (`cinematics: !L.min`); al volver a 3D con el partido ya empezado no se repite.
+- **Descanso**: los jugadores abandonan el campo hacia el túnel, se intercambian lados y vuelven a entrar; capitanes y árbitro repiten el saludo antes de reanudar. Si el directo estaba pausado, la secuencia se ve igual y el 3D queda congelado al terminar hasta que el usuario reanude.
+- **Final**: el árbitro pita, los equipos forman una línea, se saludan y caminan hacia el vestuario. `sim.ended` queda activo desde el principio, pero el bucle sigue animando mientras haya cine; después se ocultan jugadores y balón y la simulación visual queda congelada.
+- **Cámara**: el túnel, el círculo central y la línea final tienen encuadres propios. Las transiciones suavizan posición, altura y objetivo; no modifican la cámara normal del partido.
+- **Fallback**: sin GLB se usan las poses procedurales; sin WebGL se conserva el campo 2D y el adaptador no crea secuencias.
+
+Para depuración, `Pitch3D.cinema()` devuelve `{type, stage, t, stageT, coin}` o `null`, y `Pitch3D.skipCinema()` completa la secuencia actual. El adaptador `Pitch` expone ambos métodos.
+
+### Cara o cruz
+
+El sorteo se dibuja como un panel DOM sobre el canvas 3D, con botones `data-p3d-coin` y `data-p3d-choice`. La moneda y el lanzamiento son geometría procedural; no se descarga ningún asset nuevo.
+
+- **Llamada**: el jugador elige `cara` o `cruz`; si no responde en 9 s de partido, el árbitro llama por él.
+- **Resultado**: la moneda gira 1,15 s, se resuelve y se anuncia el ganador.
+- **Elección**: si gana el jugador, elige **campo** o **pelota**. **Campo** invierte el lado de ataque visual del 3D; **pelota** mantiene el saque que ya indicó `match41.js`. Si gana el rival, elige campo y el 3D invierte el lado.
+- La decisión no cambia la posesión autoritativa: el saque inicial sigue viniendo del primer `state.own`. El descanso vuelve a invertir los lados.
+- El panel es exclusivo de la vista 3D; el campo 2D y el APK sin WebGL siguen funcionando sin sorteo y sin tocar el resultado.
+
 ### Saque de puerta
 
 El saque de puerta ya no es un pase instantáneo tras una espera fija. `pitch3d.js` representa una secuencia de presentación de **5,76 s de partido** (comprimida por la velocidad del directo), sin tocar el resultado ni el estado de `match41`:
@@ -134,7 +163,7 @@ Para depuración, `Pitch3D.debug().goalkick` expone la fase activa, el registro 
 
 ### Prueba aislada del 3D
 
-`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción, tackle visual, árbitro y asistentes, tiro, parada, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso con espejado de asistentes, tarjeta roja, replay, reset, marcador, clima, final y destroy. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son 34 comprobaciones.
+`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción, tackle visual, árbitro y asistentes, tiro, parada, secuencia de saque de puerta (fases, balón inmóvil antes del impacto y lanzamiento sincronizado), descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja, replay, reset, marcador, clima y destroy. Una página aparte fuerza el resultado del cara o cruz y recorre llamada, elección de campo, cierre del panel y saque. También monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son 40 comprobaciones.
 
 Requiere Node y Playwright (o `playwright-core`) con Chrome/Chromium. Si no está instalado:
 
