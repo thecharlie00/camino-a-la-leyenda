@@ -49,7 +49,7 @@ var Pitch3D = (function () {
   var assetModels = null, assetState = "none", assetFrameTris = 0, assetFramePlayers = 0, assetFrameBall = 0;
   var viewW = 1, viewH = 1, dpr = 1;
   var opts = {}, colors = SHIRT.slice(), reduced = false;
-  var cam = {x: LEN / 2, z: MIDZ, back: 34, height: 22, lookX: LEN / 2, lookZ: MIDZ, shake: 0};
+  var cam = {x: LEN / 2, z: MIDZ, back: 34, height: 22, lookX: LEN / 2, lookZ: MIDZ, shake: 0, cutT: 0, cutMode: ""};
   var fpsBad = 0, fpsGood = 0;
   var projMat = new Float32Array(16), viewMat = new Float32Array(16), mvpMat = new Float32Array(16);
   var eyeArr = new Float32Array(3), lookArr = new Float32Array(3);
@@ -1006,6 +1006,7 @@ var Pitch3D = (function () {
       originX: ox, originZ: oz, gx: gx, dir: dir, gk: pickKeeper(1 - side), buildup: buildup,
       flight: 0.5, outcome: outcome, dur: buildup + 0.18 + 0.5 + outcome};
     sim.own = side;
+    cam.cutT = 0.9; cam.cutMode = "shot";
     fireCue(e);
   }
 
@@ -1015,6 +1016,7 @@ var Pitch3D = (function () {
     if (a.res === "goal") {
       b.x = a.gx + a.dir * 1.0; b.z = clamp(b.z, MIDZ - POST, MIDZ + POST); b.y = 0.5; b.mode = "dead";
       sim.netT = 1; sim.shake = 0.5;
+      cam.cutT = 1.4; cam.cutMode = "goal";
       if (a.shooter) {
         var cx = clamp(a.gx - a.dir * 8, 4, LEN - 4), cz = b.z < MIDZ ? 5 : WID - 5;
         a.shooter.anim = {type: "celebrate", t: 0, dur: 1.15, tx: cx, tz: cz};
@@ -1144,6 +1146,7 @@ var Pitch3D = (function () {
 
   function startReplay() {
     if (sim.replay || sim.action || sim.history.length < 6 || frozen) return false;
+    cam.cutT = 0; cam.cutMode = "";
     var snap = {ball: {x: sim.ball.x, y: sim.ball.y, z: sim.ball.z, vx: sim.ball.vx, vy: sim.ball.vy, vz: sim.ball.vz,
       mode: sim.ball.mode, side: sim.ball.side, idx: sim.ball.idx, lastTouch: sim.ball.lastTouch, fl: sim.ball.fl, next: sim.ball.next}, p: [[], []]};
     for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
@@ -1151,6 +1154,7 @@ var Pitch3D = (function () {
       snap.p[s].push(a ? {x: a.x, z: a.z, facing: a.facing, vx: a.vx, vz: a.vz, anim: a.anim} : null);
     }
     sim.replay = {frames: sim.history.slice(-40), t: 0, dur: 3.6, save: snap};
+    cam.cutT = sim.replay.dur; cam.cutMode = "replay";
     return true;
   }
 
@@ -1199,6 +1203,15 @@ var Pitch3D = (function () {
       tx = sim.action.shooter.x; tz = sim.action.shooter.z; back = 24; height = 14;
     }
     if (sim.replay) { back = 28; height = 17; }
+    /* Cortes de retransmisión: acercan la cámara en tiros, celebraciones y
+     * repeticiones sin romper el seguimiento suave del balón. */
+    if (cam.cutT > 0) {
+      cam.cutT = Math.max(0, cam.cutT - dt);
+      if (cam.cutMode === "shot") { back = Math.min(back, 26); height = Math.min(height, 16); }
+      else if (cam.cutMode === "goal") { back = Math.min(back, 22); height = Math.min(height, 13); tx = sim.action && sim.action.shooter ? sim.action.shooter.x : tx; tz = sim.action && sim.action.shooter ? sim.action.shooter.z : tz; }
+      else if (cam.cutMode === "replay") { back = 24; height = 15; }
+      if (cam.cutT <= 0) cam.cutMode = "";
+    }
     var aspect = viewW / Math.max(1, viewH);
     if (aspect < 0.9) { back *= 1.28; height *= 1.02; }
     tz = MIDZ + (tz - MIDZ) * 0.45;
