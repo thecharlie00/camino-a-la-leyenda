@@ -13,7 +13,9 @@ var Pitch = (function () {
   var LEN = 105, WID = 68, MIDY = 34, PH = 3.66, BAR = 2.44, GRAV = 9.8, PI2 = Math.PI * 2;
   var P = null, RM = false, SPEEDK = 1.35;
   /* La entrada 2D sigue los mismos tiempos que la puesta en escena 3D. */
-  var INTRO_WALK = 4.2, INTRO_GREET = 2.6, COIN_FLIP = 1.15, COIN_RESULT = 1.25, RIVAL_WAIT = 1.25, INTRO_LINEUP = 1.5, COIN_WAIT = 10;
+  var INTRO_WALK = 4.2, INTRO_GREET = 2.6, COIN_FLIP = 1.15, COIN_RESULT = 1.25, RIVAL_WAIT = 1.25, INTRO_LINEUP = 1.5;
+  /* La llamada cara/cruz tiene 10 s; la decisión campo/pelota, 20 s. */
+  var COIN_WAIT = 10, CHOICE_WAIT = 20;
   /* posición base de cada demarcación para un equipo que ataca hacia la derecha (x: 0 propia portería → 1 rival; y: 0 arriba → 1 abajo) */
   var BASE = {POR: [0.045, 0.5], LD: [0.24, 0.84], LI: [0.24, 0.16], DFC: [0.2, 0.5], MCD: [0.36, 0.5], MC: [0.46, 0.5], MCO: [0.58, 0.5],
     MD: [0.52, 0.86], MI: [0.52, 0.14], ED: [0.7, 0.84], EI: [0.7, 0.16], DC: [0.76, 0.5]};
@@ -48,7 +50,11 @@ var Pitch = (function () {
   /* ---------- sonido de grada (Web Audio, sin ficheros) ---------- */
   var Snd = (function () {
     var KEY = "camino.pitch.snd", VOL = 0.32;
-    var ac = null, master = null, bedG = null, roarG = null, roarF = null, on = true, loaded = false, lastExc = -1, unlock = null;
+    /* El audio no pertenece a un canvas concreto: sobrevive al cambio 2D/3D y
+       solo se apaga cuando la vista activa lo libera. `active` sustituye a la
+       antigua dependencia de P, que dejaba mudo el 3D al destruir el canvas. */
+    var ac = null, master = null, bedG = null, roarG = null, roarF = null, on = true, loaded = false, active = false, lastExc = -1, unlock = null, stopTimer = null, calls = 0, lastCue = "";
+    function cue(name) { calls++; lastCue = name; }
     function load() { if (loaded) return; loaded = true; try { if (window.localStorage && localStorage.getItem(KEY) === "0") on = false; } catch (e) {} }
     function save() { try { if (window.localStorage) localStorage.setItem(KEY, on ? "1" : "0"); } catch (e) {} }
     function noiseSrc(buf, rate, off, dest) {
@@ -84,30 +90,40 @@ var Pitch = (function () {
     function t() { return ac.currentTime; }
     function apply() {
       if (!ac || !master) return;
-      master.gain.cancelScheduledValues(t()); master.gain.setTargetAtTime(on && P && !document.hidden ? VOL : 0, t(), 0.25);
+      master.gain.cancelScheduledValues(t()); master.gain.setTargetAtTime(on && active && !document.hidden ? VOL : 0, t(), 0.25);
     }
     function mount() {
       load();
-      if (!on) return;
+      active = true;
+      if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+      if (!on) { apply(); return; }
       if (!init()) return;
       if (ac.state === "suspended") { try { ac.resume(); } catch (e) {} }
       if (!unlock) {
-        unlock = function () { if (ac && ac.state === "suspended" && on && P) { try { ac.resume(); } catch (e) {} } };
+        unlock = function () { if (ac && ac.state === "suspended" && on && active) { try { ac.resume(); } catch (e) {} } };
         document.addEventListener("pointerdown", unlock, true); document.addEventListener("touchstart", unlock, true);
       }
       lastExc = -1; apply();
     }
     function stop() {
+      active = false;
       if (!ac) return;
       master.gain.cancelScheduledValues(t()); master.gain.setTargetAtTime(0, t(), 0.12);
-      setTimeout(function () { if (ac && !P) { try { ac.suspend(); } catch (e) {} } }, 500);
+      if (stopTimer) clearTimeout(stopTimer);
+      /* La pausa se retrasa: el cambio de vista destruye una vista y monta la
+         otra en la misma tarea, y `mount()` cancela este apagado. */
+      stopTimer = setTimeout(function () {
+        stopTimer = null;
+        if (ac && !active) { try { ac.suspend(); } catch (e) {} }
+      }, 260);
     }
     function vis() {
       if (!ac) return;
       if (document.hidden) { try { ac.suspend(); } catch (e) {} }
-      else if (on && P) { try { ac.resume(); } catch (e2) {} apply(); }
+      else if (on && active) { try { ac.resume(); } catch (e2) {} apply(); }
     }
     function exc(x) {
+      cue("exc");
       if (!ac || !on || Math.abs(x - lastExc) < 0.03) return;
       lastExc = x;
       roarG.gain.setTargetAtTime(x * x * 0.85, t(), 0.45);
@@ -115,6 +131,7 @@ var Pitch = (function () {
     }
     /* gol: explosión de la grada (más grande si marca el local) */
     function cheer(big) {
+      cue("cheer");
       if (!ac || !on) return;
       var g = roarG.gain, f = roarF.frequency, n = t();
       g.cancelScheduledValues(n); g.setValueAtTime(g.value, n); g.linearRampToValueAtTime(big ? 2.1 : 0.9, n + 0.3); g.setTargetAtTime(0.18, n + 1.6, 1.3);
@@ -123,6 +140,7 @@ var Pitch = (function () {
     }
     /* «¡uy!»: subida corta y caída */
     function ooh() {
+      cue("ooh");
       if (!ac || !on) return;
       var g = roarG.gain, f = roarF.frequency, n = t();
       g.cancelScheduledValues(n); g.setValueAtTime(g.value, n); g.linearRampToValueAtTime(1.1, n + 0.18); g.setTargetAtTime(0.15, n + 0.4, 0.5);
@@ -130,6 +148,7 @@ var Pitch = (function () {
       lastExc = -1;
     }
     function kick(pw) {
+      cue("kick");
       if (!ac || !on) return;
       try {
         var o = ac.createOscillator(), g = ac.createGain(), n = t();
@@ -140,6 +159,7 @@ var Pitch = (function () {
     }
     /* silbato de bolita: tono agudo con trino */
     function whistle(pat) {
+      cue("whistle");
       if (!ac || !on) return;
       try {
         var n = t() + 0.02;
@@ -155,8 +175,14 @@ var Pitch = (function () {
     }
     function toggle() { load(); on = !on; save(); if (on) mount(); else apply(); return on; }
     function isOn() { load(); return on; }
-    return {mount: mount, stop: stop, vis: vis, exc: exc, cheer: cheer, ooh: ooh, kick: kick, whistle: whistle, toggle: toggle, isOn: isOn};
+    function state() {
+      load();
+      return {on: on, active: active, ready: !!ac, context: ac ? ac.state : "none", calls: calls, lastCue: lastCue};
+    }
+    return {mount: mount, stop: stop, vis: vis, exc: exc, cheer: cheer, ooh: ooh, kick: kick, whistle: whistle, toggle: toggle, isOn: isOn, state: state};
   })();
+  /* Motor de audio compartido por el campo 2D y la puesta en escena 3D. */
+  if (typeof window !== "undefined") window.PitchAudio = Snd;
 
   /* posiciones base de un once (demarcaciones de su sistema) */
   function layout(list) {
@@ -795,7 +821,7 @@ var Pitch = (function () {
       var p = P.T[s][i]; if (!p) continue;
       var st = tunnelSpot2D(s, i);
       p.x = st.x; p.y = st.y; p.ix = p.x; p.iy = p.y; p.vx = p.vy = 0;
-      p.tx = p.x; p.ty = p.y; p.fa = s ? Math.PI : 0;
+      p.tx = p.x; p.ty = p.y; p.fa = s ? Math.PI : 0; p.greet = 0;
     }
     if (r) resumeIntro2D(r);
     else setIntroStage2D("walkout");
@@ -808,7 +834,7 @@ var Pitch = (function () {
     var stage = stages.indexOf(r.stage) >= 0 ? r.stage : "walkout";
     var max = stage === "walkout" ? INTRO_WALK : stage === "greet" ? INTRO_GREET :
       stage === "coinFlip" ? COIN_FLIP : (stage === "coinResult" || stage === "choiceResult") ? COIN_RESULT :
-      stage === "lineup" ? INTRO_LINEUP : COIN_WAIT;
+      stage === "lineup" ? INTRO_LINEUP : stage === "choose" ? CHOICE_WAIT : stage === "rivalChoice" ? RIVAL_WAIT : COIN_WAIT;
     var st = +r.stageT;
     if (!isFinite(st) || st < 0) st = 0;
     c.stage = stage; c.stageT = Math.min(st, max);
@@ -821,13 +847,16 @@ var Pitch = (function () {
     c.coin.choice = rc.choice === "campo" || rc.choice === "pelota" ? rc.choice : null;
     c.coin.rivalWhy = rc.rivalWhy ? String(rc.rivalWhy) : null;
     c.coin.waitT = isFinite(+rc.waitT) && +rc.waitT > 0 ? +rc.waitT : 0;
+    c.coin.angle = isFinite(+rc.angle) ? +rc.angle : 0;
     c.coin.show = stage !== "walkout" && stage !== "greet" && stage !== "lineup";
     if (stage === "walkout") {
       if (P.tunnelEl) P.tunnelEl.style.display = "block";
       animateWalkout2D(c);
     } else {
       if (P.tunnelEl) P.tunnelEl.style.display = "none";
-      placeFormation2D();
+      if (stage === "greet") { placeRow2D(); beginGreet2D(); animateGreet2D(c); }
+      else if (stage === "lineup") { placeCoinLineup2D(); beginLineup2D(); animateLineup2D(c); }
+      else placeCoinLineup2D();
     }
     /* El 3D ya había aplicado el campo antes de cambiar de vista. */
     if ((stage === "choiceResult" || stage === "lineup") && c.coin.choice === "campo" && !c.fieldFlipped) {
@@ -836,9 +865,26 @@ var Pitch = (function () {
     }
     renderCoin2D(true);
   }
+  /* La fila 2D replica la 3D: una columna por equipo, el capitán (slot 9) al
+     frente y el resto esperando detrás, con la cola dentro del túnel. */
+  function captainIndex2D(s) {
+    var t = P.T[s] || [];
+    if (t[9]) return 9;
+    if (t[5]) return 5;
+    for (var i = 0; i < t.length; i++) if (t[i]) return i;
+    return -1;
+  }
+  function tunnelRank2D(s, i) {
+    var cs = captainIndex2D(s);
+    if (cs < 0) return i;
+    if (i === cs) return 0;
+    return 1 + (i < cs ? i : i - 1);
+  }
   function tunnelSpot2D(s, i) {
-    var rank = i === 9 ? 0 : (i < 9 ? i + 1 : 10);
-    return {x: LEN / 2 + (s ? 1.8 : -1.8), y: -1.6 - rank * 0.22, delay: rank * 0.07, dur: 2.8};
+    var rank = tunnelRank2D(s, i);
+    var lane = LEN / 2 + (s ? 2.35 : -2.35);
+    return {x: lane, y: -2.2 - rank * 0.85, rowX: lane, rowY: 21.8 - rank * 1.9,
+      delay: rank * 0.09, dur: 2.9};
   }
   function animateWalkout2D(c) {
     for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
@@ -846,22 +892,81 @@ var Pitch = (function () {
       var st = tunnelSpot2D(s, i);
       var k = clamp((c.stageT - st.delay) / st.dur, 0, 1);
       var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
-      p.x = lerp(st.x, p.hu, e); p.y = lerp(st.y, p.hy, e);
-      p.vx = p.vy = 0; p.tx = p.hu; p.ty = p.hy;
-      p.fa = Math.atan2(p.hy - st.y, p.hu - st.x);
+      p.x = lerp(st.x, st.rowX, e); p.y = lerp(st.y, st.rowY, e);
+      p.vx = p.vy = 0; p.tx = st.rowX; p.ty = st.rowY;
+      p.fa = Math.PI / 2; p.greet = 0;
+    }
+  }
+  function placeRow2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      var st = tunnelSpot2D(s, i);
+      p.x = p.tx = st.rowX; p.y = p.ty = st.rowY;
+      p.vx = p.vy = 0; p.fa = Math.PI / 2; p.greet = 0;
+    }
+  }
+  function beginGreet2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      p.gsx = p.x; p.gsy = p.y; p.gfa = p.fa; p.greet = 0;
+    }
+  }
+  function animateGreet2D(c) {
+    var k = clamp(c.stageT / 1.75, 0, 1);
+    var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      var cap = i === captainIndex2D(s);
+      var tx = cap ? LEN / 2 + (s ? 3.8 : -3.8) : p.hu;
+      var ty = cap ? MIDY : p.hy;
+      p.x = lerp(p.gsx == null ? p.x : p.gsx, tx, e);
+      p.y = lerp(p.gsy == null ? p.y : p.gsy, ty, e);
+      p.vx = p.vy = 0; p.tx = tx; p.ty = ty;
+      p.fa = s ? Math.PI : 0;
+      var g = clamp((c.stageT - (i % 3) * 0.14) / 0.42, 0, 1);
+      if (c.stageT > INTRO_GREET - 0.35) g *= clamp((INTRO_GREET - c.stageT) / 0.35, 0, 1);
+      p.greet = g;
+    }
+  }
+  function placeCoinLineup2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      var cap = i === captainIndex2D(s);
+      p.x = p.tx = cap ? LEN / 2 + (s ? 3.8 : -3.8) : p.hu;
+      p.y = p.ty = cap ? MIDY : p.hy;
+      p.vx = p.vy = 0; p.fa = s ? Math.PI : 0; p.greet = 0;
     }
   }
   function placeFormation2D() {
     for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
       var p = P.T[s][i]; if (!p) continue;
-      p.x = p.hu; p.y = p.hy; p.vx = p.vy = 0; p.tx = p.hu; p.ty = p.hy; p.fa = s ? Math.PI : 0;
+      p.x = p.hu; p.y = p.hy; p.vx = p.vy = 0; p.tx = p.hu; p.ty = p.hy; p.fa = s ? Math.PI : 0; p.greet = 0;
+    }
+  }
+  function beginLineup2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      p.lsx = p.x; p.lsy = p.y;
+    }
+  }
+  function animateLineup2D(c) {
+    var k = clamp(c.stageT / Math.max(0.35, INTRO_LINEUP - 0.2), 0, 1);
+    var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      p.x = lerp(p.lsx == null ? p.x : p.lsx, p.hu, e);
+      p.y = lerp(p.lsy == null ? p.y : p.lsy, p.hy, e);
+      p.vx = p.vy = 0; p.tx = p.hu; p.ty = p.hy; p.fa = s ? Math.PI : 0; p.greet = 0;
     }
   }
   function setIntroStage2D(name) {
     var c = P.cine; if (!c) return;
     c.stage = name; c.stageT = 0; c.hudKey = "";
     if (name === "walkout") { if (P.tunnelEl) P.tunnelEl.style.display = "block"; }
-    else { if (P.tunnelEl) P.tunnelEl.style.display = "none"; placeFormation2D(); }
+    else { if (P.tunnelEl) P.tunnelEl.style.display = "none"; }
+    if (name === "greet") beginGreet2D();
+    else if (name === "coinCall") placeCoinLineup2D();
+    else if (name === "lineup") beginLineup2D();
     if (c.coin) {
       if (name === "coinCall") {
         c.coin.show = true; c.coin.waitT = 0; c.coin.angle = 0;
@@ -888,6 +993,7 @@ var Pitch = (function () {
       animateWalkout2D(c);
       if (c.stageT >= INTRO_WALK) setIntroStage2D("greet");
     } else if (c.stage === "greet") {
+      animateGreet2D(c);
       if (c.stageT >= INTRO_GREET) setIntroStage2D("coinCall");
     } else if (c.stage === "coinFlip") {
       if (c.stageT >= COIN_FLIP) setIntroStage2D("coinResult");
@@ -902,16 +1008,16 @@ var Pitch = (function () {
       }
     } else if (c.stage === "choose") {
       c.coin.waitT += dt;
-      if (c.coin.choice == null && c.coin.waitT >= COIN_WAIT) coinChoice2D(Math.random() < 0.5 ? "campo" : "pelota");
+      if (c.coin.choice == null && c.coin.waitT >= CHOICE_WAIT) coinChoice2D(Math.random() < 0.5 ? "campo" : "pelota");
     } else if (c.stage === "rivalChoice") {
       if (c.stageT >= RIVAL_WAIT) { setIntroStage2D("choiceResult"); applyCoinChoice2D(); }
     } else if (c.stage === "choiceResult") {
       if (c.stageT >= COIN_RESULT) setIntroStage2D("lineup");
     } else if (c.stage === "lineup") {
+      animateLineup2D(c);
       if (c.stageT >= INTRO_LINEUP) { finishIntro2D(); return; }
     }
     if (!P.cine) return;
-    if (c.stage !== "walkout") placeFormation2D();
     renderCoin2D(false);
   }
   function coinCall2D(v) {
@@ -950,7 +1056,7 @@ var Pitch = (function () {
     P.cam.x = LEN / 2; P.cam.y = MIDY; P.cam.z = 1;
     for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
       var p = P.T[s][i]; if (!p) continue;
-      p.x = p.hu; p.y = p.hy; p.ix = p.x; p.iy = p.y; p.fa = s ? Math.PI : 0;
+      p.x = p.hu; p.y = p.hy; p.ix = p.x; p.iy = p.y; p.fa = s ? Math.PI : 0; p.greet = 0;
     }
     kickoff(P.own);
   }
@@ -958,7 +1064,7 @@ var Pitch = (function () {
     if (!P || !P.cine) return null;
     var c = P.cine, coin = null;
     if (c.coin) coin = {show: !!c.coin.show, call: c.coin.call, face: c.coin.face, winner: c.coin.winner,
-      choice: c.coin.choice, waitT: +(c.coin.waitT || 0).toFixed(3), rivalWhy: c.coin.rivalWhy || null};
+      choice: c.coin.choice, waitT: +(c.coin.waitT || 0).toFixed(3), angle: +(c.coin.angle || 0).toFixed(3), rivalWhy: c.coin.rivalWhy || null};
     return {type: c.type, stage: c.stage, t: +c.t.toFixed(3), stageT: +c.stageT.toFixed(3), coin: coin};
   }
   function skipCinema() {
@@ -1043,15 +1149,17 @@ var Pitch = (function () {
       "🌤 " + tr("Clima") + ": " + esc2D((wx.icon || "☀") + " " + (wx.name || tr("Despejado"))) + " · " + esc2D(wx.effect || tr("Campo rápido")) + " · " + tr("Fatiga") + " ×" + fmtMul2D(mul) + "<br>" +
       tr("Rival") + ": " + esc2D(x.opp) + " · " + tr("Nivel") + " " + x.oppLevel + " · " + esc2D(x.styleLabel) + "</div>";
   }
-  function timer2D(labelTxt) {
-    var c = P.cine, left = Math.max(0, Math.ceil(COIN_WAIT - ((c && c.coin && c.coin.waitT) || 0)));
+  function timer2D(labelTxt, max) {
+    var c = P.cine, total = max || (c && c.stage === "choose" ? CHOICE_WAIT : COIN_WAIT);
+    var left = Math.max(0, Math.ceil(total - ((c && c.coin && c.coin.waitT) || 0)));
     return '<div data-p2d-timer="1" style="display:block;font:700 10px/1.3 system-ui;margin-top:4px;color:#fff0b0">⏱ ' + esc2D(labelTxt) + ': <b>' + left + " s</b></div>";
   }
   function updateTimer2D() {
     if (!P || !P.coinEl) return;
     var el = P.coinEl.querySelector("[data-p2d-timer] b"); if (!el) return;
     var c = P.cine; if (!c || !c.coin) return;
-    el.textContent = Math.max(0, Math.ceil(COIN_WAIT - (c.coin.waitT || 0))) + " s";
+    var total = c.stage === "choose" ? CHOICE_WAIT : COIN_WAIT;
+    el.textContent = Math.max(0, Math.ceil(total - (c.coin.waitT || 0))) + " s";
   }
   function hideCoin2D() {
     if (!P || !P.coinEl) return;
@@ -1079,7 +1187,7 @@ var Pitch = (function () {
       s = '<b style="' + title + '">' + tr("Cara o cruz") + "</b>" +
         '<span style="' + sub + '">' + tr("Elige tu llamada.") + "</span>" +
         '<div style="margin-top:4px">' + coinButton2D(tr("Cara"), "data-p2d-coin", "cara") + coinButton2D(tr("Cruz"), "data-p2d-coin", "cruz") + "</div>" +
-        timer2D(tr("Tiempo para llamar")) + tossMeta2D();
+        timer2D(tr("Tiempo para llamar"), COIN_WAIT) + tossMeta2D();
     } else if (stage === "coinFlip") {
       s = '<b style="' + title + '">' + tr("La moneda está en el aire…") + "</b>" +
         '<span style="' + sub + '">' + tr("Has llamado {v}.", {v: coin.call === "cara" ? tr("Cara") : tr("Cruz")}) + "</span>" + tossMeta2D();
@@ -1092,7 +1200,7 @@ var Pitch = (function () {
         '<span style="' + sub + '">' + tr("¿Campo o pelota?") + "</span>" +
         '<div style="display:flex;gap:4px;margin-top:4px">' + tossCard2D("campo", tr("Campo")) + tossCard2D("pelota", tr("Pelota")) + "</div>" +
         '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + tr("Campo cambia de lado · Pelota mantiene el saque") + "</span>" +
-        timer2D(tr("Tiempo para elegir")) + tossMeta2D();
+        timer2D(tr("Tiempo para elegir"), CHOICE_WAIT) + tossMeta2D();
     } else if (stage === "rivalChoice") {
       var rp = coin.choice === "campo" ? tr("Campo") : tr("Pelota");
       s = '<b style="' + title + '">' + tr("Gana el rival el sorteo") + "</b>" +
@@ -1647,6 +1755,68 @@ var Pitch = (function () {
     if (hh * 2 >= WID + 2 * my) cam.y = MIDY;
   }
 
+  /* Moneda 2D dibujada sobre el círculo central. Usa el mismo ángulo que la
+     moneda 3D: gira sobre su eje y se aplana en los cantos. */
+  function drawCoin2D(c, m, sx, sy, ck) {
+    var cine = P.cine, co = cine && cine.coin;
+    if (!co || !co.show) { P.coinVisual = null; return; }
+    var cx = m + LEN / 2 * sx, cy = m + MIDY * sy;
+    var r = Math.max(11, Math.min(P.w, P.h) * 0.047);
+    var spin = Math.abs(Math.cos(co.angle || 0));
+    var ry = Math.max(2.8, r * spin);
+    var y = cy - 2 + Math.sin(ck * 2.4) * 1.6;
+    var reveal = (co.face === "cara" || co.face === "cruz") && cine.stage !== "coinCall" && cine.stage !== "coinFlip";
+    P.coinVisual = {visible: true, stage: cine.stage, x: +(cx / sx - m / sx).toFixed(3), y: +(cy / sy - m / sy).toFixed(3),
+      angle: +(co.angle || 0).toFixed(3), spin: +spin.toFixed(3), face: co.face || null, radius: +r.toFixed(2)};
+    c.save();
+    /* halo y sombra sobre el césped */
+    var glow = c.createRadialGradient(cx, y, ry * 0.2, cx, y, r * 2.35);
+    glow.addColorStop(0, "rgba(255,229,128,.34)");
+    glow.addColorStop(0.55, "rgba(255,201,63,.12)");
+    glow.addColorStop(1, "rgba(255,201,63,0)");
+    c.fillStyle = glow; c.beginPath(); c.arc(cx, y, r * 2.35, 0, PI2); c.fill();
+    c.fillStyle = "rgba(0,0,0,.30)";
+    c.beginPath(); c.ellipse(cx + 2, cy + r * 0.82, r * 0.72, r * 0.22, 0, 0, PI2); c.fill();
+    /* El espejo del segundo tiempo no debe invertir la cara de la moneda. */
+    c.translate(cx, y);
+    if (P.flip) c.scale(-1, 1);
+    c.fillStyle = "#7d5205";
+    c.beginPath(); c.ellipse(0, 0, r * 1.05, Math.max(3, ry * 1.05), 0, 0, PI2); c.fill();
+    var grad = c.createLinearGradient(-r, -ry, r, ry);
+    grad.addColorStop(0, "#fff0a8"); grad.addColorStop(0.34, "#f5c531");
+    grad.addColorStop(0.68, "#d99a10"); grad.addColorStop(1, "#8c5d04");
+    c.fillStyle = grad;
+    c.beginPath(); c.ellipse(0, 0, r, ry, 0, 0, PI2); c.fill();
+    c.strokeStyle = "rgba(255,248,190,.92)"; c.lineWidth = Math.max(1.2, r * 0.07); c.stroke();
+    if (ry > r * 0.28) {
+      c.strokeStyle = "rgba(112,70,0,.58)"; c.lineWidth = Math.max(1, r * 0.045);
+      c.beginPath(); c.ellipse(0, 0, r * 0.78, ry * 0.78, 0, 0, PI2); c.stroke();
+      c.fillStyle = "rgba(255,249,205,.30)";
+      c.beginPath(); c.ellipse(-r * 0.28, -ry * 0.28, r * 0.38, Math.max(1, ry * 0.25), -0.62, 0, PI2); c.fill();
+    }
+    if (reveal && spin > 0.38) {
+      c.fillStyle = "#382300"; c.textAlign = "center"; c.textBaseline = "middle";
+      c.font = "900 " + Math.round(r * 0.94) + "px system-ui, sans-serif";
+      c.fillText(co.face === "cara" ? "C" : "X", 0, 1);
+    } else if (spin > 0.52) {
+      c.fillStyle = "rgba(65,42,0,.82)"; c.textAlign = "center"; c.textBaseline = "middle";
+      c.font = "900 " + Math.round(r * 0.9) + "px system-ui, sans-serif";
+      c.fillText("?", 0, 1);
+    }
+    c.restore();
+    /* destellos alrededor para que el giro se lea incluso en pantallas pequeñas */
+    var tw = 0.55 + 0.45 * Math.sin(ck * 6.2);
+    c.strokeStyle = "rgba(255,240,164," + (0.38 + 0.42 * tw).toFixed(2) + ")";
+    c.lineWidth = Math.max(1, r * 0.055);
+    for (var i = 0; i < 4; i++) {
+      var a = ck * 0.8 + i * Math.PI / 2, d0 = r * 1.24, d1 = r * (1.38 + 0.1 * tw);
+      c.beginPath();
+      c.moveTo(cx + Math.cos(a) * d0, y + Math.sin(a) * d0 * 0.72);
+      c.lineTo(cx + Math.cos(a) * d1, y + Math.sin(a) * d1 * 0.72);
+      c.stroke();
+    }
+  }
+
   /* ---------- dibujo ---------- */
   function draw() {
     var c = P.ctx, w = P.w, h = P.h, dp = P.dpr, m = P.m, sx = P.sx, sy = P.sy, cam = P.cam, z = cam.z, ck = P.ck, i, s;
@@ -1683,6 +1853,20 @@ var Pitch = (function () {
       for (var nl = 1; nl < 5; nl++) { var ny = y1 + (y2 - y1) * nl / 5; c.beginPath(); c.moveTo(X0, ny); c.lineTo(back - dd * Math.abs(nb) * Math.sin(Math.PI * nl / 5), ny); c.stroke(); }
       c.strokeStyle = "#f4f6f0"; c.lineWidth = 2.2;
       c.beginPath(); c.moveTo(X0, y1); c.lineTo(back, y1); c.quadraticCurveTo(back - dd * Math.abs(nb), m + nyy * sy, back, y2); c.lineTo(X0, y2); c.stroke();
+      c.restore();
+    }
+    /* boca del túnel: la fila 2D sale de una boca visible, no de la nada */
+    if (P.cine && P.cine.stage === "walkout") {
+      var tmx = m + LEN / 2 * sx, tmw = Math.max(18, 8.5 * sx), tmh = Math.max(16, 5.8 * sy);
+      var tg = c.createLinearGradient(0, m - tmh, 0, m + tmh * 0.45);
+      tg.addColorStop(0, "rgba(2,7,6,.98)"); tg.addColorStop(0.62, "rgba(5,15,12,.92)"); tg.addColorStop(1, "rgba(5,15,12,0)");
+      c.save();
+      c.fillStyle = tg;
+      c.beginPath(); c.moveTo(tmx - tmw, m - tmh); c.lineTo(tmx - tmw, m);
+      c.quadraticCurveTo(tmx, m + tmh * 0.52, tmx + tmw, m);
+      c.lineTo(tmx + tmw, m - tmh); c.closePath(); c.fill();
+      c.strokeStyle = "rgba(185,255,214,.32)"; c.lineWidth = 1.2;
+      c.beginPath(); c.moveTo(tmx - tmw * 0.86, m); c.quadraticCurveTo(tmx, m + tmh * 0.36, tmx + tmw * 0.86, m); c.stroke();
       c.restore();
     }
     /* sombras primero (sol desde arriba a la izquierda) */
@@ -1766,6 +1950,18 @@ var Pitch = (function () {
         }
         c.fillStyle = q.off ? "#ffd7da" : q.gk ? gink : tcol;
         txt(String(q.n), x, y + 0.5);
+        /* saludo de la entrada: brazo y mano visibles en ambos equipos */
+        if (q.greet > 0.02 && !q.off && !q.dive) {
+          var asd = s === 0 ? 1 : -1;
+          var hx = x + asd * r * (0.9 + 0.16 * q.greet);
+          var hy = y - r * (0.72 + 0.6 * q.greet) + Math.sin(ck * 8 + q.ph) * r * 0.08;
+          c.strokeStyle = "rgba(255,247,225,.92)"; c.lineWidth = Math.max(1.5, r * 0.2); c.lineCap = "round";
+          c.beginPath(); c.moveTo(x + fx * r * 0.55, y + fy * r * 0.55);
+          c.quadraticCurveTo(x + asd * r * 0.42, y - r * 0.52, hx, hy); c.stroke();
+          c.fillStyle = "#f2d1a7"; c.strokeStyle = "rgba(25,22,15,.45)"; c.lineWidth = 1;
+          c.beginPath(); c.arc(hx, hy, Math.max(1.2, r * 0.27), 0, PI2); c.fill(); c.stroke();
+          c.lineCap = "butt";
+        }
         /* amonestado: contorno amarillo fijo */
         if (q.yc && !q.off) { c.strokeStyle = "#ffd23a"; c.lineWidth = 2.2; c.beginPath(); c.arc(x, y, r + 2.2, 0, PI2); c.stroke(); }
         if (q.off) { c.strokeStyle = "#ff3b48"; c.lineWidth = 2.2; c.beginPath(); c.arc(x, y, r + 2.2, 0, PI2); c.stroke(); }
@@ -1780,6 +1976,8 @@ var Pitch = (function () {
         c.globalAlpha = 1;
       }
     }
+    /* moneda del sorteo: el dibujo sustituye al antiguo panel sin animación */
+    drawCoin2D(c, m, sx, sy, ck);
     /* tarjetas */
     for (i = 0; i < P.cards.length; i++) {
       var kd = P.cards[i], cp = pl(kd.s, kd.i) || (P.T[kd.s] && P.T[kd.s][kd.i]); if (!cp || ck < kd.at) continue;

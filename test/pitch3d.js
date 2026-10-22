@@ -46,6 +46,9 @@ function roster(prefix) {
     "<script>" + assetsSrc + "</script>" +
     "<script>" + src + "</script></body></html>";
   const pageNoAssets = pageHtml.replace(packLine, "<script>var P3D_ASSET_PACK={};</script>");
+  /* Página del sorteo con el motor de audio real para comprobar que el 3D
+     alimenta el mismo PitchAudio que usa el campo 2D. */
+  const pageAudio = pageHtml.replace(pitchStub, pitchStub + "<script>" + bolasSrc + "</script><script>" + pitchSrc + "</script>");
   const browser = await chromium.launch({
     executablePath: process.env.CHROME_PATH || undefined,
     headless: true,
@@ -468,7 +471,7 @@ function roster(prefix) {
   const pcoin = await ctx.newPage();
   pcoin.on("pageerror", e => errs.push("sorteo pageerror: " + e.message));
   pcoin.on("console", m => { if (m.type() === "error") errs.push("sorteo console: " + m.text()); });
-  await pcoin.setContent(pageHtml);
+  await pcoin.setContent(pageAudio);
   await pcoin.evaluate(({ home, away }) => {
     Pitch3D.mount(document.getElementById("pitch"), { cols: ["#f5b326", "#5db8ff"], fem: true, cinematics: true });
     Pitch3D.teams(home, away, [{}, {}]);
@@ -488,6 +491,14 @@ function roster(prefix) {
   }));
   if (coinUi.stage === "coinCall" && coinUi.call && coinUi.overlay) notes.push("cara o cruz · llamada disponible");
   else fail.push("cara o cruz: no apareció la llamada " + JSON.stringify(coinUi));
+  const coinAudio = await pcoin.evaluate(() => {
+    const a = window.PitchAudio;
+    return { api: !!a, sound: Pitch3D.sound(), state: a && a.state ? a.state() : null };
+  });
+  if (coinAudio.api && coinAudio.sound && coinAudio.state && coinAudio.state.active &&
+    coinAudio.state.calls > 0 && /^(exc|kick|whistle|cheer|ooh)$/.test(coinAudio.state.lastCue))
+    notes.push("3D · audio compartido activo y alimentado (" + coinAudio.state.lastCue + ")");
+  else fail.push("3D: el audio compartido no está activo " + JSON.stringify(coinAudio));
   const coinTimer = await pcoin.evaluate(() => {
     const e = document.querySelector("[data-p3d-timer]");
     return { stage: Pitch3D.cinema() && Pitch3D.cinema().stage, text: e ? e.textContent : "" };
@@ -522,8 +533,8 @@ function roster(prefix) {
     const e = document.querySelector("[data-p3d-timer]");
     return { stage: Pitch3D.cinema() && Pitch3D.cinema().stage, text: e ? e.textContent : "" };
   });
-  if (chooseTimer.stage === "choose" && /^(10|9) s$/.test(chooseTimer.text)) notes.push("sorteo · espera de 10 s visible al ganar · " + chooseTimer.text);
-  else fail.push("sorteo: falta la espera visible al ganar " + JSON.stringify(chooseTimer));
+  if (chooseTimer.stage === "choose" && /^(20|19) s$/.test(chooseTimer.text)) notes.push("sorteo · espera de 20 s visible al ganar · " + chooseTimer.text);
+  else fail.push("sorteo: falta la espera de 20 s al ganar " + JSON.stringify(chooseTimer));
   const tossUi = await pcoin.evaluate(() => {
     const meta = document.querySelector("[data-p3d-toss-meta='1']");
     return { campoPro: document.querySelectorAll("[data-p3d-pro='campo']").length,
@@ -708,6 +719,29 @@ function roster(prefix) {
   if (twoStart.cinema && twoStart.stage === "walkout" && twoStart.busy > 0 && twoStart.tunnel && /Rival FC/.test(twoStart.meta))
     notes.push("2D · salida del túnel y datos del sorteo");
   else fail.push("2D: no arrancó la salida/datos " + JSON.stringify(twoStart));
+  /* Muestrea la fila al final de la salida y el saludo en plena entrada. */
+  await p2d.evaluate(() => {
+    window.__p2dWatch = {};
+    function snap() {
+      const c = Pitch.cinema(), d = Pitch.debug();
+      if (!c || !d) return;
+      const take = () => [0, 1].map(s => (d.T[s] || []).map(p => p ? {
+        x: +p.x.toFixed(2), y: +p.y.toFixed(2), greet: +(p.greet || 0).toFixed(2)
+      } : null));
+      if (c.stage === "walkout" && c.stageT > 3.95 && !window.__p2dWatch.row) window.__p2dWatch.row = take();
+      if (c.stage === "greet" && c.stageT > 1.35 && c.stageT < 2.2 && !window.__p2dWatch.greet) window.__p2dWatch.greet = take();
+    }
+    (function watch() {
+      snap();
+      if (!window.__p2dWatch.row || !window.__p2dWatch.greet) requestAnimationFrame(watch);
+    })();
+  });
+  const twoAudio = await p2d.evaluate(() => ({
+    api: !!window.PitchAudio, sound: Pitch.sound(), state: window.PitchAudio ? PitchAudio.state() : null
+  }));
+  if (twoAudio.api && twoAudio.sound && twoAudio.state && twoAudio.state.active)
+    notes.push("2D · audio compartido activo");
+  else fail.push("2D: el audio compartido no está activo " + JSON.stringify(twoAudio));
   let twoStage = null;
   for (let i = 0; i < 60; i++) {
     twoStage = await p2d.evaluate(() => {
@@ -728,6 +762,32 @@ function roster(prefix) {
     /Lluvia/.test(twoCall.meta) && /Fatiga/.test(twoCall.meta) && /Presi/.test(twoCall.meta))
     notes.push("2D · llamada, temporizador y clima visibles");
   else fail.push("2D: llamada/temporizador/datos incompletos " + JSON.stringify(twoCall));
+  const twoMotion = await p2d.evaluate(() => window.__p2dWatch || {});
+  let rowOk = !!(twoMotion.row && twoMotion.row.every(line => line && line.length === 11));
+  let greetOk = !!(twoMotion.greet && twoMotion.greet.every(line => line && line.length === 11));
+  if (rowOk) {
+    for (let s = 0; s < 2; s++) {
+      const line = twoMotion.row[s].filter(Boolean), cap = twoMotion.row[s][9], lane = 105 / 2 + (s ? 2.35 : -2.35);
+      const ys = line.map(p => p.y), maxY = Math.max(...ys), minY = Math.min(...ys);
+      if (!cap || Math.abs(cap.x - lane) > 0.7 || cap.y < maxY - 0.8 || maxY - minY < 10) rowOk = false;
+    }
+  }
+  if (greetOk) {
+    for (let s = 0; s < 2; s++) {
+      const line = twoMotion.greet[s].filter(Boolean), cap = twoMotion.greet[s][9], lane = 105 / 2 + (s ? 2.35 : -2.35);
+      if (!cap || !line.every(p => p.greet > 0.35) || Math.abs(cap.y - 34) > 4 || Math.abs(cap.x - lane) < 1.1) greetOk = false;
+    }
+  }
+  if (rowOk && greetOk) notes.push("2D · fila con capitán al frente y saludo en la entrada");
+  else fail.push("2D: la salida/saludo no replica la puesta en escena " + JSON.stringify(twoMotion));
+  const coin1 = await p2d.evaluate(() => Pitch.debug().coinVisual);
+  await p2d.waitForTimeout(220);
+  const coin2 = await p2d.evaluate(() => Pitch.debug().coinVisual);
+  if (coin1 && coin1.visible && coin1.radius >= 10 && coin2 && coin2.visible && coin2.angle > coin1.angle + 0.05 &&
+    coin2.spin >= 0 && coin2.spin <= 1)
+    notes.push("2D · moneda animada visible sobre el círculo central");
+  else fail.push("2D: la moneda no está visible o no gira " + JSON.stringify({ coin1, coin2 }));
+  await p2d.screenshot({ path: path.join(OUT, "pitch2d-coin-call.png") });
   await p2d.evaluate(() => { Math.random = () => 0; });
   await p2d.click("[data-p2d-coin='cara']");
   await p2d.evaluate(() => { Math.random = () => 0.5; });
@@ -743,8 +803,8 @@ function roster(prefix) {
     await p2d.waitForTimeout(100);
   }
   if (twoChoose.stage === "choose" && twoChoose.winner === 0 && twoChoose.campo && twoChoose.pelota &&
-    /^(10|9) s$/.test(twoChoose.timer) && twoChoose.pros > 0 && twoChoose.cons > 0)
-    notes.push("2D · gana el jugador, espera de 10 s, pros/contras y elección");
+    /^(20|19) s$/.test(twoChoose.timer) && twoChoose.pros > 0 && twoChoose.cons > 0)
+    notes.push("2D · gana el jugador, espera de 20 s, pros/contras y elección");
   else fail.push("2D: elección/temporizador/pros-contras " + JSON.stringify(twoChoose));
   const flipBefore = await p2d.evaluate(() => Pitch.debug().flip);
   await p2d.click("[data-p2d-choice='campo']");
@@ -794,7 +854,8 @@ function roster(prefix) {
   for (let i = 0; i < 40; i++) {
     beforeSwitch = await psw.evaluate(() => {
       const c = typeof Pitch3D !== "undefined" ? Pitch3D.cinema() : null;
-      return { three: !!document.querySelector("canvas.lpitch3d"), cinema: !!c, type: c && c.type, stage: c && c.stage };
+      return { three: !!document.querySelector("canvas.lpitch3d"), cinema: !!c, type: c && c.type, stage: c && c.stage,
+        audio: window.PitchAudio ? PitchAudio.state() : null, sound: Pitch.sound() };
     });
     if (beforeSwitch.three && beforeSwitch.cinema) break;
     if (!beforeSwitch.three && i === 3) await psw.click(".p3dtoggle");
@@ -805,7 +866,8 @@ function roster(prefix) {
   const afterSwitch = await psw.evaluate(() => {
     const c = Pitch.cinema(), t = document.querySelector(".l2d-tunnel");
     return { two: !!document.querySelector("canvas.lpitch"), three: !!document.querySelector("canvas.lpitch3d"),
-      cinema: !!c, stage: c && c.stage, busy: Pitch.busy(), tunnel: !!t && t.style.display !== "none" };
+      cinema: !!c, stage: c && c.stage, busy: Pitch.busy(), tunnel: !!t && t.style.display !== "none",
+      audio: window.PitchAudio ? PitchAudio.state() : null, sound: Pitch.sound() };
   });
   let switchCoin = null;
   for (let i = 0; i < 60; i++) {
@@ -818,9 +880,11 @@ function roster(prefix) {
     await psw.waitForTimeout(100);
   }
   if (beforeSwitch.three && beforeSwitch.cinema && beforeSwitch.type === "intro" &&
+    beforeSwitch.audio && beforeSwitch.audio.active &&
     afterSwitch.two && !afterSwitch.three && afterSwitch.cinema && afterSwitch.busy > 0 &&
+    afterSwitch.audio && afterSwitch.audio.active && afterSwitch.sound &&
     switchCoin.stage === "coinCall" && switchCoin.cara && switchCoin.cruz && /^(10|9) s$/.test(switchCoin.timer))
-    notes.push("cambio 3D→2D en la salida · continúa el túnel y llega el sorteo");
+    notes.push("cambio 3D→2D en la salida · continúa el túnel, el sorteo y el audio");
   else fail.push("cambio 3D→2D en la salida: " + JSON.stringify({ beforeSwitch, afterSwitch, switchCoin }));
   await psw.screenshot({ path: path.join(OUT, "pitch-switch-2d.png") });
   await psw.close();

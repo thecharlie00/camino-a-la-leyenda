@@ -22,7 +22,7 @@ var Pitch3D = (function () {
    * espera detrás dentro del túnel. La fila avanza hasta el borde del área
    * central y solo se abre a las posiciones después del sorteo. */
   var INTRO_WALK = 4.2, INTRO_GREET = 2.6, INTRO_LINEUP = 1.5;
-  var COIN_FLIP = 1.15, COIN_RESULT = 1.25, COIN_WAIT = 10, RIVAL_WAIT = 1.25;
+  var COIN_FLIP = 1.15, COIN_RESULT = 1.25, COIN_WAIT = 10, CHOICE_WAIT = 20, RIVAL_WAIT = 1.25;
   var HALF_OFF = 2.7, HALF_SWITCH = 0.85, HALF_ENTER = 2.7, HALF_GREET = 1.35;
   var END_WHISTLE = 1.15, END_LINE = 3.4, END_GREET = 1.2, END_WALKOFF = 2.8;
   /* Secuencia de saque de puerta. Los tiempos están en segundos de partido y
@@ -121,6 +121,24 @@ var Pitch3D = (function () {
     var s = k;
     if (p) for (var q in p) if (Object.prototype.hasOwnProperty.call(p, q)) s = s.split("{" + q + "}").join(String(p[q]));
     return s;
+  }
+  /* El 3D comparte el motor de audio del campo 2D. Así el ambiente no se
+     apaga al destruir el canvas 2D para montar la vista 3D. */
+  function pitchAudio() {
+    return typeof window !== "undefined" && window.PitchAudio ? window.PitchAudio : null;
+  }
+  function sfx(name, arg) {
+    var a = pitchAudio();
+    if (!a || typeof a[name] !== "function") return;
+    try { a[name](arg); } catch (ignore) {}
+  }
+  function updateCrowdAudio() {
+    var b = sim.ball; if (!b) return;
+    var goalDist = Math.min(Math.abs(b.x), Math.abs(LEN - b.x));
+    var danger = clamp(1 - goalDist / 38, 0, 1);
+    if (sim.cinema) danger = sim.cinema.stage === "coinCall" ? 0.2 : 0.12;
+    if (sim.action && sim.action.type === "shot") danger = Math.max(danger, 0.72);
+    sfx("exc", danger * 0.65);
   }
   function actorAt(side, idx) { var a = sim.players[side] && sim.players[side][idx]; return a && !a.gone && !a.sentOff ? a : null; }
   function listOf(side) { return (sim.players[side] || []).filter(function (a) { return a && !a.gone && !a.sentOff; }); }
@@ -945,7 +963,7 @@ var Pitch3D = (function () {
         }
       } else if (c.stage === "choose") {
         c.coin.waitT = (c.coin.waitT || 0) + dt;
-        if (c.coin.choice == null && c.coin.waitT >= COIN_WAIT) coinChoice(Math.random() < 0.5 ? "campo" : "pelota");
+        if (c.coin.choice == null && c.coin.waitT >= CHOICE_WAIT) coinChoice(Math.random() < 0.5 ? "campo" : "pelota");
       } else if (c.stage === "rivalChoice" && c.stageT >= RIVAL_WAIT) {
         setCinemaStage("choiceResult");
         applyCoinChoice();
@@ -2071,6 +2089,7 @@ var Pitch3D = (function () {
       flight: 0.5, outcome: outcome, dur: buildup + 0.18 + 0.5 + outcome};
     sim.own = side;
     cam.cutT = 0.9; cam.cutMode = "shot";
+    sfx("kick", res === "goal" ? 1 : 0.82);
     fireCue(e);
   }
 
@@ -2100,6 +2119,8 @@ var Pitch3D = (function () {
     } else {
       b.mode = "loose"; b.vx = a.dir * 3; b.vz = rnd(-2, 2); b.vy = 2.2; b.lastTouch = a.side;
     }
+    if (a.res === "goal") sfx("cheer", a.side === 0);
+    else sfx("ooh");
   }
 
   function finishAction() {
@@ -2258,8 +2279,8 @@ var Pitch3D = (function () {
     if (sim.cinema && t !== "half" && t !== "end") { fireCue(e); return; }
     /* no cortar un gol o una tarjeta que se está representando en el 45' */
     if ((t === "half" || t === "end") && sim.action) { sim.queue.push(e); return; }
-    if (t === "half") { doHalf(); fireCue(e); return; }
-    if (t === "end") { doEnd(); fireCue(e); return; }
+    if (t === "half") { sfx("whistle", [0.32, 0.9]); doHalf(); fireCue(e); return; }
+    if (t === "end") { sfx("whistle", [0.3, 0.3, 1.2]); doEnd(); fireCue(e); return; }
     if (t === "goal" || t === "save" || t === "post" || t === "miss") {
       /* Un tiro no puede nacer en mitad de un pase: el balón terminaría
        * cambiando de dirección en el aire. Se encola hasta la recepción; el
@@ -2267,22 +2288,25 @@ var Pitch3D = (function () {
       if (sim.ball.mode === "flight" && sim.ball.next) { sim.queue.push(e); return; }
       e.t = t; startShot(e); return;
     }
-    if (t === "yellow" || t === "red") { e.t = t; startCard(e); return; }
+    if (t === "yellow" || t === "red") { sfx("whistle", [0.24]); e.t = t; startCard(e); return; }
     /* Balones parados que pueden llegar desde el motor o desde una prueba.
      * Se tratan como una puesta en escena completa, no como un pase corto. */
     if (t === "corner") {
       if (sim.action) { sim.queue.push(e); return; }
       var cs = +e.side === 1 ? 1 : 0;
       var ce = e.end != null ? (e.end ? 1 : 0) : (sim.attack[cs] > 0 ? 1 : 0);
+      sfx("whistle", [0.2]);
       setupCorner(cs, ce); fireCue(e); return;
     }
     if (t === "free" || t === "freekick" || t === "free-kick") {
       if (sim.action) { sim.queue.push(e); return; }
+      sfx("whistle", [0.2]);
       setupFreeKick(+e.side === 1 ? 1 : 0, e.x != null ? +e.x : null, e.z != null ? +e.z : null);
       fireCue(e); return;
     }
     if (t === "penalty") {
       if (sim.action) { sim.queue.push(e); return; }
+      sfx("whistle", [0.24]);
       setupPenalty(+e.side === 1 ? 1 : 0, e.res || e.r, e.who);
       fireCue(e); return;
     }
@@ -3069,6 +3093,7 @@ var Pitch3D = (function () {
     } else if (sim.replay) {
       simStep(dt);
     } else acc = 0;
+    updateCrowdAudio();
     updateCamera(dt);
     draw();
     frameCount++;
@@ -3215,8 +3240,9 @@ var Pitch3D = (function () {
     if (!coinEl) return;
     var c = sim.cinema;
     if (!c || !c.coin) return;
+    var total = c.stage === "choose" ? CHOICE_WAIT : COIN_WAIT;
     var el = coinEl.querySelector("[data-p3d-timer]");
-    if (el) el.textContent = Math.max(0, Math.ceil(COIN_WAIT - (c.coin.waitT || 0))) + " s";
+    if (el) el.textContent = Math.max(0, Math.ceil(total - (c.coin.waitT || 0))) + " s";
   }
 
   function updateCoinOverlay() {
@@ -3241,7 +3267,7 @@ var Pitch3D = (function () {
         '<span style="display:block;font:500 10px/1.2 system-ui;opacity:.84;margin-top:2px">' + label("¿Campo o pelota?") + "</span>" +
         '<div style="display:flex;gap:4px;margin-top:4px">' + tossCard("campo", label("Campo")) + tossCard("pelota", label("Pelota")) + "</div>" +
         '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + label("Campo cambia de lado · Pelota mantiene el saque") + "</span>" +
-        '<span style="display:block;font:700 10px/1.3 system-ui;margin-top:4px;color:#fff0b0">⏱ ' + label("Tiempo para elegir") + ': <b data-p3d-timer="1">' + Math.max(0, Math.ceil(COIN_WAIT - (c.coin.waitT || 0))) + " s</b></span>" + tossMeta();
+        '<span style="display:block;font:700 10px/1.3 system-ui;margin-top:4px;color:#fff0b0">⏱ ' + label("Tiempo para elegir") + ': <b data-p3d-timer="1">' + Math.max(0, Math.ceil(CHOICE_WAIT - (c.coin.waitT || 0))) + " s</b></span>" + tossMeta();
     } else if (c.stage === "rivalChoice") {
       var rp = c.coin.choice === "campo" ? label("Campo") : label("Pelota");
       s = '<b style="display:block;font:800 12px system-ui">' + label("Gana el rival el sorteo") + "</b>" +
@@ -3325,6 +3351,7 @@ var Pitch3D = (function () {
     sim.fem = !!opts.fem;
     resize();
     lastTs = 0; acc = 0; aiAcc = 0; histAcc = 0; fps = 0; fpsFrames = 0; fpsStart = 0;
+    if (pitchAudio()) pitchAudio().mount();
     raf = requestAnimationFrame(loop);
     return true;
   }
@@ -3358,6 +3385,7 @@ var Pitch3D = (function () {
     if (replayBtn && replayBtn.parentNode) replayBtn.parentNode.removeChild(replayBtn); replayBtn = null;
     if (coinEl && coinEl.parentNode) coinEl.parentNode.removeChild(coinEl); coinEl = null;
     host = null; sim = newSim(); freezeWanted = false; frozen = false; lastTs = 0; fps = 0;
+    if (pitchAudio()) pitchAudio().stop();
   }
 
   function teams(home, away, fixedNums) {
@@ -3600,7 +3628,7 @@ var Pitch3D = (function () {
     var coin = null;
     if (c.coin) coin = {show: !!c.coin.show, call: c.coin.call, face: c.coin.face,
       winner: c.coin.winner, choice: c.coin.choice, waitT: +(c.coin.waitT || 0).toFixed(3),
-      rivalWhy: c.coin.rivalWhy || null};
+      angle: +(c.coin.angle || 0).toFixed(3), rivalWhy: c.coin.rivalWhy || null};
     return {type: c.type, stage: c.stage, t: +c.t.toFixed(3), stageT: +c.stageT.toFixed(3), coin: coin};
   }
 
@@ -3653,7 +3681,7 @@ var Pitch3D = (function () {
     reset: reset, freeze: freeze, replay: replay, debug: debug,
     cinema: cinema, skipCinema: skipCinema,
     active: function () { return !!gl && !disposed; },
-    sound: function () { return false; }};
+    sound: function () { var a = pitchAudio(); return a && typeof a.isOn === "function" ? a.isOn() : false; }};
 })();
 
 /* Adaptador: conserva la API de Pitch y permite alternar 2D/3D sin romper el directo. */
