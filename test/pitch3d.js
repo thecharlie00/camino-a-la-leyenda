@@ -28,15 +28,17 @@ function roster(prefix) {
   const src = fs.readFileSync(path.join(__dirname, "../src/pitch3d.js"), "utf8");
   const uiSrc = fs.readFileSync(path.join(__dirname, "../src/ui.js"), "utf8");
   const assetsSrc = fs.readFileSync(path.join(__dirname, "../src/pitch3d-assets.js"), "utf8");
+  const bolasSrc = fs.readFileSync(path.join(__dirname, "../src/bolas.js"), "utf8");
+  const pitchSrc = fs.readFileSync(path.join(__dirname, "../src/pitch.js"), "utf8");
   const pack = {};
   for (const [id, rel] of Object.entries(ASSET_FILES)) pack[id] = fs.readFileSync(path.join(__dirname, "..", rel)).toString("base64");
   const pitchStub = '<script>var Pitch={mount:function(){},destroy:function(){},teams:function(){},state:function(){},' +
     'event:function(){},busy:function(){return 0;},reset:function(){},freeze:function(){},' +
     'clearMsg:function(){},replay:function(){return false;},active:function(){return false;},' +
     'sound:function(){return false;},debug:function(){return null;}};</script>';
-  const noGlStub = pitchStub.replace("mount:function(){}", "mount:function(){window.__2dMounted=true;}")
+  const noGlStub = pitchStub.replace("mount:function(){}", "mount:function(el,o){window.__2dMounted=true;window.__2dMounts=(window.__2dMounts||[]);window.__2dMounts.push(o||{});}")
     .replace("event:function(){}", "event:function(e){window.__2dEvents=(window.__2dEvents||[]);window.__2dEvents.push(e&&e.t);}")
-    .replace("debug:function(){return null;}", "debug:function(){return {twoD:true};}");
+    .replace("debug:function(){return null;}", "debug:function(){return {twoD:true};},cinema:function(){return {type:'intro',stage:'walkout'};}");
   const packLine = "<script>var P3D_ASSET_PACK=" + JSON.stringify(pack) + ";</script>";
   const pageHtml = '<!doctype html><html><body style="margin:0;background:#07100e">' +
     '<div id="pitch" style="width:420px;height:260px;position:relative"></div>' +
@@ -486,6 +488,12 @@ function roster(prefix) {
   }));
   if (coinUi.stage === "coinCall" && coinUi.call && coinUi.overlay) notes.push("cara o cruz · llamada disponible");
   else fail.push("cara o cruz: no apareció la llamada " + JSON.stringify(coinUi));
+  const coinTimer = await pcoin.evaluate(() => {
+    const e = document.querySelector("[data-p3d-timer]");
+    return { stage: Pitch3D.cinema() && Pitch3D.cinema().stage, text: e ? e.textContent : "" };
+  });
+  if (coinTimer.stage === "coinCall" && /^(10|9) s$/.test(coinTimer.text)) notes.push("cara o cruz · temporizador visible " + coinTimer.text);
+  else fail.push("cara o cruz: falta el temporizador " + JSON.stringify(coinTimer));
   const refState = await pcoin.evaluate(() => {
     const d = Pitch3D.debug(), r = d.sim.officials && d.sim.officials[0];
     return r ? { anim: r.anim && r.anim.type, clip: r.assetClipName } : null;
@@ -510,6 +518,12 @@ function roster(prefix) {
   if (choiceUi.stage === "choose" && choiceUi.coin && choiceUi.coin.winner === 0 && choiceUi.campo && choiceUi.pelota)
     notes.push("cara o cruz · gana el jugador y elige campo/pelota");
   else fail.push("cara o cruz: no llegó la elección " + JSON.stringify(choiceUi));
+  const chooseTimer = await pcoin.evaluate(() => {
+    const e = document.querySelector("[data-p3d-timer]");
+    return { stage: Pitch3D.cinema() && Pitch3D.cinema().stage, text: e ? e.textContent : "" };
+  });
+  if (chooseTimer.stage === "choose" && /^(10|9) s$/.test(chooseTimer.text)) notes.push("sorteo · espera de 10 s visible al ganar · " + chooseTimer.text);
+  else fail.push("sorteo: falta la espera visible al ganar " + JSON.stringify(chooseTimer));
   const tossUi = await pcoin.evaluate(() => {
     const meta = document.querySelector("[data-p3d-toss-meta='1']");
     return { campoPro: document.querySelectorAll("[data-p3d-pro='campo']").length,
@@ -644,6 +658,11 @@ function roster(prefix) {
   }, { home: roster("h"), away: roster("a") });
   await png.waitForTimeout(300);
   await png.evaluate(() => {
+    Pitch.cinema();
+    document.querySelector(".p3dtoggle").click();
+  });
+  await png.waitForTimeout(250);
+  await png.evaluate(() => {
     Pitch.event({ t: "pass", side: 0, who: 1 });
     Pitch.event({ t: "tackle", side: 0, who: 2 });
     Pitch.event({ t: "goal", side: 0 });
@@ -653,13 +672,105 @@ function roster(prefix) {
     canvas3d: !!document.querySelector("canvas.lpitch3d"),
     toggle: !!document.querySelector(".p3dtoggle"),
     events: window.__2dEvents || [],
+    mounts: window.__2dMounts || [],
     debug: Pitch.debug()
   }));
   if (ng.twoD && !ng.canvas3d && ng.toggle && ng.debug && ng.debug.twoD &&
+    ng.mounts.length > 1 && ng.mounts[1].cinematics === false &&
     ng.events.indexOf("pass") < 0 && ng.events.indexOf("tackle") < 0 && ng.events.indexOf("goal") >= 0) {
-    notes.push("fallback sin WebGL · campo 2D sin eventos fantasma");
+    notes.push("fallback sin WebGL · campo 2D sin eventos fantasma y sin repetir la entrada");
   } else fail.push("fallback sin WebGL: " + JSON.stringify(ng));
   await png.close();
+
+  /* Ceremonia 2D real (sin WebGL): túnel, sorteo, temporizador, elección y saque. */
+  const page2d = '<!doctype html><html><head><style>body{margin:0;background:#07100e}.lpitch{display:block}</style></head><body>' +
+    '<div id="pitch2d" style="width:420px;height:260px;position:relative"></div>' +
+    '<script>function tr(s,p){s=String(s);if(p)for(var k in p)s=s.split("{"+k+"}").join(String(p[k]));return s;}</script>' +
+    "<script>" + bolasSrc + "</script><script>" + pitchSrc + "</script></body></html>";
+  const p2d = await ctx.newPage();
+  p2d.on("pageerror", e => errs.push("2D pageerror: " + e.message));
+  p2d.on("console", m => { if (m.type() === "error") errs.push("2D console: " + m.text()); });
+  await p2d.setContent(page2d);
+  await p2d.evaluate(({ home, away }) => {
+    Pitch.mount(document.getElementById("pitch2d"), { cols: ["#f5b326", "#5db8ff"], fem: true, cinematics: true });
+    Pitch.state({ own: 0, bx: 50, speed: 3, wx: "rain",
+      toss: { myName: "Mi Club", oppName: "Rival FC", myLevel: 78, oppLevel: 73, style: "press",
+        wx: { key: "rain", icon: "🌧", name: "Lluvia", effect: "Balón vivo y césped resbaladizo", mul: 0.94 } } });
+    Pitch.teams(home, away, [{}, {}]);
+  }, { home: roster("h"), away: roster("a") });
+  await p2d.waitForTimeout(250);
+  const twoStart = await p2d.evaluate(() => {
+    const c = Pitch.cinema(), tunnel = document.querySelector(".l2d-tunnel");
+    return { cinema: !!c, stage: c && c.stage, busy: Pitch.busy(), tunnel: !!tunnel && tunnel.style.display !== "none",
+      meta: (document.querySelector("[data-p2d-toss-meta]") || {}).textContent || "" };
+  });
+  if (twoStart.cinema && twoStart.stage === "walkout" && twoStart.busy > 0 && twoStart.tunnel && /Rival FC/.test(twoStart.meta))
+    notes.push("2D · salida del túnel y datos del sorteo");
+  else fail.push("2D: no arrancó la salida/datos " + JSON.stringify(twoStart));
+  let twoStage = null;
+  for (let i = 0; i < 60; i++) {
+    twoStage = await p2d.evaluate(() => {
+      const c = Pitch.cinema(), e = document.querySelector("[data-p2d-timer] b");
+      return { stage: c && c.stage, timer: e ? e.textContent : "" };
+    });
+    if (twoStage.stage === "coinCall") break;
+    await p2d.waitForTimeout(100);
+  }
+  const twoCall = await p2d.evaluate(() => {
+    const t = document.querySelector("[data-p2d-timer] b"), meta = document.querySelector("[data-p2d-toss-meta]");
+    return { stage: Pitch.cinema() && Pitch.cinema().stage,
+      cara: !!document.querySelector("[data-p2d-coin='cara']"),
+      cruz: !!document.querySelector("[data-p2d-coin='cruz']"),
+      timer: t ? t.textContent : "", meta: meta ? meta.textContent : "" };
+  });
+  if (twoCall.stage === "coinCall" && twoCall.cara && twoCall.cruz && /^(10|9) s$/.test(twoCall.timer) &&
+    /Lluvia/.test(twoCall.meta) && /Fatiga/.test(twoCall.meta) && /Presi/.test(twoCall.meta))
+    notes.push("2D · llamada, temporizador y clima visibles");
+  else fail.push("2D: llamada/temporizador/datos incompletos " + JSON.stringify(twoCall));
+  await p2d.evaluate(() => { Math.random = () => 0; });
+  await p2d.click("[data-p2d-coin='cara']");
+  await p2d.evaluate(() => { Math.random = () => 0.5; });
+  let twoChoose = null;
+  for (let i = 0; i < 40; i++) {
+    twoChoose = await p2d.evaluate(() => {
+      const c = Pitch.cinema(), t = document.querySelector("[data-p2d-timer] b");
+      return { stage: c && c.stage, winner: c && c.coin && c.coin.winner, timer: t ? t.textContent : "",
+        campo: !!document.querySelector("[data-p2d-choice='campo']"), pelota: !!document.querySelector("[data-p2d-choice='pelota']"),
+        pros: document.querySelectorAll("[data-p2d-pro]").length, cons: document.querySelectorAll("[data-p2d-con]").length };
+    });
+    if (twoChoose.stage === "choose") break;
+    await p2d.waitForTimeout(100);
+  }
+  if (twoChoose.stage === "choose" && twoChoose.winner === 0 && twoChoose.campo && twoChoose.pelota &&
+    /^(10|9) s$/.test(twoChoose.timer) && twoChoose.pros > 0 && twoChoose.cons > 0)
+    notes.push("2D · gana el jugador, espera de 10 s, pros/contras y elección");
+  else fail.push("2D: elección/temporizador/pros-contras " + JSON.stringify(twoChoose));
+  const flipBefore = await p2d.evaluate(() => Pitch.debug().flip);
+  await p2d.click("[data-p2d-choice='campo']");
+  await p2d.waitForTimeout(120);
+  const twoResult = await p2d.evaluate(() => {
+    const e = document.querySelector("[data-p2d-choice-result]");
+    return { stage: Pitch.cinema() && Pitch.cinema().stage, flip: Pitch.debug().flip,
+      result: e && e.getAttribute("data-p2d-choice-result"), text: e ? e.textContent : "" };
+  });
+  if (twoResult.stage === "choiceResult" && twoResult.flip !== flipBefore && twoResult.result === "campo" && /Cambiamos de lado/.test(twoResult.text))
+    notes.push("2D · campo aplicado y explicado");
+  else fail.push("2D: no aplicó/explicó campo " + JSON.stringify(twoResult));
+  let twoDone = null;
+  for (let i = 0; i < 50; i++) {
+    twoDone = await p2d.evaluate(() => {
+      const c = Pitch.cinema(), d = Pitch.debug(), e = document.querySelector(".l2d-coin");
+      return { cinema: !!c, busy: Pitch.busy(), ball: d.ball.m, tunnel: d.tunnelEl && d.tunnelEl.style.display,
+        overlay: e ? e.style.display : "none" };
+    });
+    if (!twoDone.cinema && twoDone.busy === 0) break;
+    await p2d.waitForTimeout(100);
+  }
+  if (!twoDone.cinema && !twoDone.busy && (twoDone.ball === 0 || twoDone.ball === 1) && twoDone.tunnel === "none" && twoDone.overlay === "none")
+    notes.push("2D · sorteo terminado y saque listo");
+  else fail.push("2D: no terminó el sorteo/saque " + JSON.stringify(twoDone));
+  await p2d.screenshot({ path: path.join(OUT, "pitch2d-coin.png") });
+  await p2d.close();
 
   /* Guardas del puente UI→3D: el orden debe ser [local, visitante], y el
      sorteo/clima deben viajar en el estado que consume el HUD. */

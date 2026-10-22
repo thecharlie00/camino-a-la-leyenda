@@ -29,6 +29,8 @@ fs.mkdirSync(OUT, { recursive: true });
   }
   if (!live) fail.push("no se llegó al directo");
   else {
+    await p.evaluate(() => { if (typeof Pitch !== "undefined" && Pitch.skipCinema) Pitch.skipCinema(); });
+    await p.waitForTimeout(150);
     await c('[data-a="lspeed"][data-v="1"]');
     const at = await p.evaluate(() => { const P = Pitch.debug(), a = []; P.T.forEach(t => t.forEach(q => { if (q) a.push({pos: q.pos, pas: q.pas, ent: q.ent, col: q.col, rt: q.rt, pace: q.pace}); })); return a; });
     const bad = at.filter(q => [q.pas, q.ent, q.col, q.rt, q.pace].some(v => typeof v !== "number" || !isFinite(v)));

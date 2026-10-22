@@ -85,24 +85,33 @@ Final:     whistle → line → walkoff
 ```
 
 - **Inicio**: cada equipo sale del túnel en **una sola fila**, con el capitán al frente y el resto detrás en su carril; la fila avanza junta hasta el borde del círculo central y solo entonces se abre a las posiciones. Los capitanes y el árbitro se saludan y se juega el cara o cruz. La secuencia solo se reproduce en el arranque real del directo (`cinematics: !L.min`); al volver a 3D con el partido ya empezado no se repite.
+- **Paridad 2D**: cuando el directo arranca en el campo de bolitas, `pitch.js` reproduce la misma secuencia con un túnel y un panel DOM, sin WebGL ni assets. La salida, el saludo, la llamada, la moneda, el resultado, la elección y la formación usan el mismo contrato de tiempos y dejan el motor bloqueado hasta terminar.
 - **Descanso**: los jugadores abandonan el campo hacia el túnel, se intercambian lados y vuelven a entrar; capitanes y árbitro repiten el saludo antes de reanudar. Si el directo estaba pausado, la secuencia se ve igual y el 3D queda congelado al terminar hasta que el usuario reanude.
 - **Final**: el árbitro pita, los equipos forman una línea, se saludan y caminan hacia el vestuario. `sim.ended` queda activo desde el principio, pero el bucle sigue animando mientras haya cine; después se ocultan jugadores y balón y la simulación visual queda congelada.
 - **Cámara**: el túnel, el círculo central y la línea final tienen encuadres propios. Las transiciones suavizan posición, altura y objetivo; no modifican la cámara normal del partido.
 - **Fallback**: sin GLB se usan las poses procedurales; sin WebGL se conserva el campo 2D y el adaptador no crea secuencias.
 
-Para depuración, `Pitch3D.cinema()` devuelve `{type, stage, t, stageT, coin}` o `null`, y `Pitch3D.skipCinema()` completa la secuencia actual. El adaptador `Pitch` expone ambos métodos.
+Para depuración, `Pitch3D.cinema()` devuelve `{type, stage, t, stageT, coin}` o `null`, y `Pitch3D.skipCinema()` completa la secuencia actual. El adaptador `Pitch` expone ambos métodos en 3D y en 2D. `busy()` devuelve 620 ms mientras hay ceremonia y `ui.js` limita el sondeo a 420 ms para no pedir minutos hasta que la secuencia termina.
 
 ### Cara o cruz
 
-El sorteo se dibuja como un panel DOM sobre el canvas 3D, con botones `data-p3d-coin` y `data-p3d-choice`. La moneda y el lanzamiento son geometría procedural; no se descarga ningún asset nuevo.
+El sorteo se dibuja como un panel DOM sobre el canvas 3D, con botones `data-p3d-coin` y `data-p3d-choice`. La moneda y el lanzamiento son geometría procedural; no se descarga ningún asset nuevo. El campo 2D replica el mismo panel con atributos `data-p2d-*`.
 
-- **Llamada**: el jugador elige `cara` o `cruz`; si no responde en 9 s de partido, el árbitro llama por él.
+- **Llamada**: el jugador elige `cara` o `cruz`; si no responde en **10 s de partido**, el árbitro llama por él. El tiempo restante se actualiza cada frame en `data-p3d-timer` (3D) y `data-p2d-timer` (2D), y también aparece al elegir campo o pelota tras ganar.
 - **Resultado**: la moneda gira 1,15 s, se resuelve y se anuncia el ganador.
-- **Elección del jugador**: el panel muestra **campo** y **pelota** como tarjetas con pros y contras explícitos (`data-p3d-pro`, `data-p3d-con`). El texto se calcula al vuelo según el nivel del rival, su estilo (`Posesión`, `Juego directo`, `Presión alta`, `Contragolpe`) y el clima. **Campo** invierte el lado de ataque visual; **pelota** conserva la orientación y el saque. En ambos casos el saque de centro sigue siendo el que fijó `match41.js`.
-- **Decisión rival**: si gana el rival, `chooseRivalToss` simula su elección con el mismo contexto: un rival de presión o posesión tiende a elegir campo, y un rival claramente superior puede dejar el campo como está porque confía en su nivel. El panel muestra primero el motivo (`data-p3d-rival-why`) y después aplica la consecuencia (`data-p3d-choice-result`).
-- **Contexto visible**: bajo las tarjetas, `data-p3d-toss-meta` resume clima (icono, nombre, efecto y multiplicador de fatiga), rival, nivel y estilo. La fatiga que se muestra es la que aplica `match41.js`; el sorteo no la modifica.
+- **Elección del jugador**: el panel muestra **campo** y **pelota** como tarjetas con pros y contras explícitos (`data-p3d-pro`, `data-p3d-con`; en 2D, `data-p2d-pro` y `data-p2d-con`). El texto se calcula al vuelo según el nivel del rival, su estilo (`Posesión`, `Juego directo`, `Presión alta`, `Contragolpe`) y el clima. **Campo** invierte el lado de ataque visual; **pelota** conserva la orientación y el saque. En ambos casos el saque de centro sigue siendo el que fijó `match41.js`.
+- **Decisión rival**: si gana el rival, `chooseRivalToss` simula su elección con el mismo contexto: un rival de presión o posesión tiende a elegir campo, y un rival claramente superior puede dejar el campo como está porque confía en su nivel. El panel muestra primero el motivo (`data-p3d-rival-why`, `data-p2d-rival-why`) y después aplica la consecuencia (`data-p3d-choice-result`, `data-p2d-choice-result`).
+- **Contexto visible**: bajo las tarjetas, `data-p3d-toss-meta` y `data-p2d-toss-meta` resumen clima (icono, nombre, efecto y multiplicador de fatiga), rival, nivel y estilo. La fatiga que se muestra es la que aplica `match41.js`; el sorteo no la modifica.
 - La decisión no cambia la posesión autoritativa: el saque inicial sigue viniendo del primer `state.own`. El descanso vuelve a invertir los lados.
-- El panel es exclusivo de la vista 3D; el campo 2D y el APK sin WebGL siguen funcionando sin sorteo y sin tocar el resultado.
+- El panel ya no es exclusivo del 3D: el campo 2D muestra el mismo sorteo y los mismos datos. En 2D **campo** invierte `P.flip` (solo dibujo) y **pelota** lo conserva; el APK sin WebGL sigue funcionando sin assets y sin tocar el resultado.
+
+#### Ceremonia 2D
+
+`pitch.js` monta un túnel y un overlay DOM sobre el canvas de bolitas. La secuencia es `walkout 4,2 s → greet 2,6 s → coinCall (máx. 10 s) → coinFlip 1,15 s → coinResult 1,25 s → choose/rivalChoice → choiceResult 1,25 s → lineup 1,5 s`. Los tiempos se escalan con la velocidad del directo y el motor no avanza minutos mientras `P.cine` exista.
+
+- La salida coloca a los jugadores en fila desde el túnel hasta su posición; al terminar el sorteo, `finishIntro2D()` llama a `kickoff(P.own)` para conservar el saque autoritativo.
+- La lluvia, la nieve y el calor se dibujan con partículas deterministas de canvas, sin assets. El balón y su sombra se ocultan durante la ceremonia.
+- `Pitch.cinema()` y `Pitch.skipCinema()` funcionan también en 2D; las pruebas que no quieren la intro llaman a `Pitch.skipCinema()`.
 
 ### Saque de puerta
 
@@ -185,9 +194,9 @@ Los balones parados se representan como una puesta en escena completa: se coloca
 
 ## Pruebas
 
-### Prueba aislada del 3D
+### Prueba aislada del 3D y de la ceremonia 2D
 
-`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel en fila con el capitán al frente, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción sin teletransporte, tackle sin `dive`, árbitro y asistentes, tiro, parada con `dive` exclusivo del portero, secuencia de saque de puerta (fases, balón inmóvil antes del impacto, lanzamiento sincronizado, 0 rivales dentro del área y rival más cercano a más de 12,5 m), córner con formación y centro al área, falta con barrera a 9,15 m, penalti con el área despejada y tiro real, descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja con gesto visible del árbitro y falta lejana posterior a la tarjeta, replay, reset y destroy. También verifica el marcador diferido (el HUD no se adelanta al gol pendiente y confirma al cruzar la línea), la etiqueta y la física visual del clima, y las guardas del puente UI→3D (`[local, visitante]`, `toss`, franja de clima). Una página aparte fuerza el resultado del cara o cruz y recorre llamada, pros/contras, contexto de rival/clima/fatiga, elección de campo, cierre del panel y saque; otra deja ganar al rival y comprueba que su decisión (pelota) y su motivo se explican y se aplican sin tocar el saque. El test comprueba que el árbitro termina sin gesto congelado. Además monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural, incluida la barrida de campo, y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Son **59 comprobaciones**.
+`test/pitch3d.js` monta `src/pitch3d.js` en una página mínima con un stub de `Pitch`, sin depender de toda la interfaz, y añade una página real con `bolas.js` + `pitch.js` para la ceremonia 2D. Comprueba WebGL, roster, carga y skinning de los GLB, balón GLB, ausencia de NaN o triángulos desgarrados, entrada desde el túnel en fila con el capitán al frente, saque inicial, posesión, inclinación de carrera acotada y finita, pase visual con vuelo/recepción sin teletransporte, tackle sin `dive`, árbitro y asistentes, tiro, parada con `dive` exclusivo del portero, secuencia de saque de puerta (fases, balón inmóvil antes del impacto, lanzamiento sincronizado, 0 rivales dentro del área y rival más cercano a más de 12,5 m), córner con formación y centro al área, falta con barrera a 9,15 m, penalti con el área despejada y tiro real, descanso en secuencia con espejado de asistentes, despedida final, tarjeta roja con gesto visible del árbitro y falta lejana posterior a la tarjeta, replay, reset y destroy. También verifica el marcador diferido (el HUD no se adelanta al gol pendiente y confirma al cruzar la línea), la etiqueta y la física visual del clima, y las guardas del puente UI→3D (`[local, visitante]`, `toss`, franja de clima). Una página aparte fuerza el resultado del cara o cruz y recorre llamada, temporizador visible, pros/contras, contexto de rival/clima/fatiga, elección de campo, cierre del panel y saque; otra deja ganar al rival y comprueba que su decisión (pelota) y su motivo se explican y se aplican sin tocar el saque. El test comprueba que el árbitro termina sin gesto congelado. Además monta una página sin `P3D_ASSET_PACK` para validar el fallback procedural, incluida la barrida de campo, y otra sin WebGL para validar el retorno al campo 2D y que `pass`/`tackle` no generan eventos fantasma. Una página nueva carga `bolas.js` + `pitch.js` de verdad (con un stub de `tr`) y valida la ceremonia 2D: túnel, datos del sorteo, temporizador de 10 s, victoria del jugador, pros/contras, elección de campo, `P.flip`, cierre y saque. Son **66 comprobaciones**.
 
 Requiere Node y Playwright (o `playwright-core`) con Chrome/Chromium. Si no está instalado:
 
@@ -211,7 +220,7 @@ En CI se instala Playwright y Chromium y se ejecuta el mismo archivo. El test fa
 
 1. Compila con `py -3 build.py` (en Windows, `PYTHONUTF8=1`).
 2. Abre `dist/index.html?pitch3d=1` y entra en un partido en directo.
-3. Comprueba el toggle 2D/3D, pausa, velocidad, descanso, final y repetición.
+3. Comprueba la salida del túnel, el sorteo con temporizador, el toggle 2D/3D, pausa, velocidad, descanso, final y repetición.
 4. Repite en un Android real y en un dispositivo sin WebGL para validar el fallback.
 
 ## Límites conocidos

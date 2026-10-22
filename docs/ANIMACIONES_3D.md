@@ -175,7 +175,7 @@ El partido sigue siendo autoritativo en `match41.js`; este sistema es solo repre
 
 | Secuencia | Fases | Duración base |
 |---|---|---:|
-| Entrada | `walkout` 4,2 s → `greet` 2,6 s → `coinCall` (espera máx. 9 s) → `coinFlip` 1,15 s → `coinResult` 1,25 s → elección → `lineup` 1,5 s | variable |
+| Entrada | `walkout` 4,2 s → `greet` 2,6 s → `coinCall` (espera máx. 10 s) → `coinFlip` 1,15 s → `coinResult` 1,25 s → elección → `lineup` 1,5 s | variable |
 | Descanso | `off` 2,7 s → `switch` 0,85 s → `enter` 2,7 s → `greetHalf` 1,35 s | 7,6 s |
 | Final | `whistle` 1,15 s → `line` 3,4 s → `walkoff` 2,8 s | 7,35 s |
 
@@ -194,13 +194,14 @@ Los tiempos se escalan con la velocidad del directo. Las cámaras de túnel, cí
 ### Cara o cruz
 
 - La moneda es geometría procedural (dos caras y canto) y gira durante 1,15 s.
-- El panel DOM solo aparece en la vista 3D y ofrece `Cara`/`Cruz` y después **campo**/**pelota** como tarjetas con pros y contras (`data-p3d-pro`, `data-p3d-con`).
-- El texto de cada tarjeta se calcula con el nivel del rival, su estilo determinista y el clima; bajo las tarjetas, `data-p3d-toss-meta` muestra clima, rival, nivel, estilo y multiplicador de fatiga.
-- **Campo** invierte el lado de ataque visual; **Pelota** conserva la orientación. En ambos casos el saque de centro sigue siendo el que fijó `match41.js`.
-- Si gana el rival, `chooseRivalToss` decide según estilo, diferencia de nivel y clima. El panel enseña el motivo (`data-p3d-rival-why`) antes de aplicar la consecuencia (`data-p3d-choice-result`); un rival claramente superior puede elegir pelota.
-- La posesión autoritativa no se toca: el 3D captura el primer `state.own` y lo usa al cerrar la entrada.
-- Si el jugador no responde, el árbitro llama y elige por él.
-- `busy()` añade 620 ms mientras hay cine para que la UI no pida el siguiente minuto. `freeze()` se difiere hasta el final de la secuencia.
+- El panel DOM aparece en 3D y en 2D. Ofrece `Cara`/`Cruz` y después **campo**/**pelota** como tarjetas con pros y contras; en 3D usa `data-p3d-pro`/`data-p3d-con` y en 2D `data-p2d-pro`/`data-p2d-con`.
+- El tiempo restante se muestra cada frame en `data-p3d-timer` (3D) y `data-p2d-timer` (2D), tanto en la llamada como al elegir después de ganar. La espera es de **10 s**; si el jugador no responde, el árbitro llama y elige por él.
+- El texto de cada tarjeta se calcula con el nivel del rival, su estilo determinista y el clima; bajo las tarjetas, `data-p3d-toss-meta`/`data-p2d-toss-meta` muestran clima, rival, nivel, estilo y multiplicador de fatiga.
+- **Campo** invierte el lado de ataque visual; **Pelota** conserva la orientación. En ambos casos el saque de centro sigue siendo el que fijó `match41.js`. En 2D, campo alterna `P.flip` (solo dibujo).
+- Si gana el rival, `chooseRivalToss` decide según estilo, diferencia de nivel y clima. El panel enseña el motivo (`data-p3d-rival-why`/`data-p2d-rival-why`) antes de aplicar la consecuencia (`data-p3d-choice-result`/`data-p2d-choice-result`); un rival claramente superior puede elegir pelota.
+- La posesión autoritativa no se toca: el 3D y el 2D capturan el primer `state.own` y lo usan al cerrar la entrada. En 2D, `finishIntro2D()` llama a `kickoff(P.own)`.
+- El 2D reproduce la secuencia con un túnel y un overlay DOM, sin WebGL ni assets: salida en fila, saludo, sorteo, elección y formación. La lluvia, la nieve y el calor se dibujan con partículas de canvas.
+- `busy()` añade 620 ms mientras hay cine para que la UI no pida el siguiente minuto. `freeze()` se difiere hasta el final de la secuencia. `Pitch.cinema()` y `Pitch.skipCinema()` funcionan en ambos modos; las pruebas que no quieren la intro llaman a `skipCinema()`.
 
 ---
 

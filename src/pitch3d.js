@@ -22,7 +22,7 @@ var Pitch3D = (function () {
    * espera detrás dentro del túnel. La fila avanza hasta el borde del área
    * central y solo se abre a las posiciones después del sorteo. */
   var INTRO_WALK = 4.2, INTRO_GREET = 2.6, INTRO_LINEUP = 1.5;
-  var COIN_FLIP = 1.15, COIN_RESULT = 1.25, COIN_WAIT = 9, RIVAL_WAIT = 1.25;
+  var COIN_FLIP = 1.15, COIN_RESULT = 1.25, COIN_WAIT = 10, RIVAL_WAIT = 1.25;
   var HALF_OFF = 2.7, HALF_SWITCH = 0.85, HALF_ENTER = 2.7, HALF_GREET = 1.35;
   var END_WHISTLE = 1.15, END_LINE = 3.4, END_GREET = 1.2, END_WALKOFF = 2.8;
   /* Secuencia de saque de puerta. Los tiempos están en segundos de partido y
@@ -930,6 +930,7 @@ var Pitch3D = (function () {
         c.coin.waitT += dt;
         if (c.coin.waitT >= COIN_WAIT) coinCall(Math.random() < 0.5 ? "cara" : "cruz");
       }
+      if (c.stage === "coinCall" || c.stage === "choose") updateCoinTimer();
     }
     if (c.type === "intro") {
       if (c.stage === "walkout" && c.stageT >= INTRO_WALK) setCinemaStage("greet");
@@ -3210,6 +3211,14 @@ var Pitch3D = (function () {
       label("Rival") + ": " + x.opp + " · " + label("Nivel") + " " + x.oppLevel + " · " + x.styleLabel + "</div>";
   }
 
+  function updateCoinTimer() {
+    if (!coinEl) return;
+    var c = sim.cinema;
+    if (!c || !c.coin) return;
+    var el = coinEl.querySelector("[data-p3d-timer]");
+    if (el) el.textContent = Math.max(0, Math.ceil(COIN_WAIT - (c.coin.waitT || 0))) + " s";
+  }
+
   function updateCoinOverlay() {
     if (!coinEl) return;
     var c = sim.cinema;
@@ -3218,7 +3227,8 @@ var Pitch3D = (function () {
     if (c.stage === "coinCall") {
       s = '<b style="display:block;font:800 12px/1.2 system-ui">' + label("Cara o cruz") + "</b>" +
         '<span style="display:block;font:500 10px/1.25 system-ui;opacity:.84;margin-top:2px">' + label("Elige tu llamada.") + "</span>" +
-        '<div style="margin-top:4px">' + coinButton(label("Cara"), "data-p3d-coin", "cara") + coinButton(label("Cruz"), "data-p3d-coin", "cruz") + "</div>";
+        '<div style="margin-top:4px">' + coinButton(label("Cara"), "data-p3d-coin", "cara") + coinButton(label("Cruz"), "data-p3d-coin", "cruz") + "</div>" +
+        '<span style="display:block;font:700 10px/1.3 system-ui;margin-top:4px;color:#fff0b0">⏱ ' + label("Tiempo para llamar") + ': <b data-p3d-timer="1">' + Math.max(0, Math.ceil(COIN_WAIT - (c.coin.waitT || 0))) + " s</b></span>";
     } else if (c.stage === "coinFlip") {
       s = '<b style="display:block;font:800 12px system-ui">' + label("La moneda está en el aire…") + "</b>" +
         '<span style="display:block;font:500 10px system-ui;opacity:.78;margin-top:2px">' + labelv("Has llamado {v}.", {v: c.coin.call === "cara" ? label("Cara") : label("Cruz")}) + "</span>";
@@ -3230,7 +3240,8 @@ var Pitch3D = (function () {
       s = '<b style="display:block;font:800 12px/1.2 system-ui">' + label("¡Ganaste el sorteo!") + "</b>" +
         '<span style="display:block;font:500 10px/1.2 system-ui;opacity:.84;margin-top:2px">' + label("¿Campo o pelota?") + "</span>" +
         '<div style="display:flex;gap:4px;margin-top:4px">' + tossCard("campo", label("Campo")) + tossCard("pelota", label("Pelota")) + "</div>" +
-        '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + label("Campo cambia de lado · Pelota mantiene el saque") + "</span>" + tossMeta();
+        '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + label("Campo cambia de lado · Pelota mantiene el saque") + "</span>" +
+        '<span style="display:block;font:700 10px/1.3 system-ui;margin-top:4px;color:#fff0b0">⏱ ' + label("Tiempo para elegir") + ': <b data-p3d-timer="1">' + Math.max(0, Math.ceil(COIN_WAIT - (c.coin.waitT || 0))) + " s</b></span>" + tossMeta();
     } else if (c.stage === "rivalChoice") {
       var rp = c.coin.choice === "campo" ? label("Campo") : label("Pelota");
       s = '<b style="display:block;font:800 12px system-ui">' + label("Gana el rival el sorteo") + "</b>" +
@@ -3648,8 +3659,8 @@ var Pitch3D = (function () {
 (function () {
   if (typeof window === "undefined" || typeof Pitch === "undefined" || typeof Pitch3D === "undefined") return;
   var original = Pitch, originalApi = {}, host = null, mountOpts = null, toggle = null;
-  var mounted = false, switching = false, lastTeams = null, lastState = null, lastFrozen = false;
-  ["mount", "teams", "state", "event", "busy", "reset", "freeze", "destroy", "clearMsg", "replay", "active", "sound", "debug"].forEach(function (k) {
+  var mounted = false, switching = false, lastTeams = null, lastState = null, lastFrozen = false, introSeen = false;
+  ["mount", "teams", "state", "event", "busy", "reset", "freeze", "destroy", "clearMsg", "replay", "active", "sound", "debug", "cinema", "skipCinema"].forEach(function (k) {
     originalApi[k] = original[k];
   });
   function tr3(k) { return typeof tr === "function" ? tr(k) : k; }
@@ -3671,15 +3682,17 @@ var Pitch3D = (function () {
     try {
       if (mounted) Pitch3D.destroy(); else if (originalApi.destroy) originalApi.destroy();
       mounted = false;
+      /* La entrada solo se ve en el arranque real. Al cambiar de vista (o si
+         el 3D falla y vuelve al 2D) no se repite, ni siquiera en el minuto 0. */
+      var mo = mountOpts || {};
+      if (introSeen || (lastState && +lastState.min > 0)) {
+        mo = {}; for (var mk in mountOpts || {}) if (Object.prototype.hasOwnProperty.call(mountOpts, mk)) mo[mk] = mountOpts[mk];
+        mo.cinematics = false;
+      }
       if (want3d) {
-        var mo = mountOpts || {};
-        if (lastState && +lastState.min > 0) {
-          mo = {}; for (var mk in mountOpts || {}) if (Object.prototype.hasOwnProperty.call(mountOpts, mk)) mo[mk] = mountOpts[mk];
-          mo.cinematics = false;
-        }
         mounted = Pitch3D.mount(host, mo);
-        if (!mounted && originalApi.mount) originalApi.mount(host, mountOpts || {});
-      } else if (originalApi.mount) originalApi.mount(host, mountOpts || {});
+        if (!mounted && originalApi.mount) originalApi.mount(host, mo);
+      } else if (originalApi.mount) originalApi.mount(host, mo);
       var active = mounted ? Pitch3D : originalApi;
       if (lastTeams) active.teams.apply(active, lastTeams);
       if (lastState) active.state(lastState);
@@ -3688,13 +3701,13 @@ var Pitch3D = (function () {
       updateToggle();
     } catch (e) {
       if (window.console) console.warn("Pitch3D: cambio de vista fallido", e);
-      try { Pitch3D.destroy(); if (originalApi.mount) originalApi.mount(host, mountOpts || {}); } catch (ignore) {}
+      try { Pitch3D.destroy(); if (originalApi.mount) originalApi.mount(host, mo || {}); } catch (ignore) {}
       mounted = false;
     }
     switching = false;
   }
   Pitch.mount = function (el, o) {
-    host = el; mountOpts = o || {};
+    host = el; mountOpts = o || {}; introSeen = false;
     if (!toggle) {
       toggle = document.createElement("button"); toggle.type = "button"; toggle.className = "p3dtoggle";
       toggle.style.cssText = "position:absolute;z-index:20;top:6px;right:6px;padding:6px 9px;border:1px solid rgba(255,255,255,.4);border-radius:6px;background:rgba(8,20,18,.88);color:#fff;font:600 11px system-ui;cursor:pointer";
@@ -3717,8 +3730,16 @@ var Pitch3D = (function () {
     var e = mounted ? Pitch3D : originalApi; return e.event.apply(e, arguments);
   };
   Pitch.busy = function () { var e = mounted ? Pitch3D : originalApi; return e.busy.apply(e, arguments); };
-  Pitch.cinema = function () { var e = mounted ? Pitch3D : originalApi; return e.cinema && mounted ? e.cinema() : null; };
-  Pitch.skipCinema = function () { var e = mounted ? Pitch3D : originalApi; return e.skipCinema && mounted ? e.skipCinema() : false; };
+  Pitch.cinema = function () {
+    var e = mounted ? Pitch3D : originalApi, c = e.cinema ? e.cinema() : null;
+    if (c) introSeen = true;
+    return c;
+  };
+  Pitch.skipCinema = function () {
+    var e = mounted ? Pitch3D : originalApi, ok = e.skipCinema ? e.skipCinema() : false;
+    if (ok) introSeen = true;
+    return ok;
+  };
   Pitch.reset = function () { var e = mounted ? Pitch3D : originalApi; return e.reset.apply(e, arguments); };
   Pitch.freeze = function (v) { lastFrozen = !!v; var e = mounted ? Pitch3D : originalApi; return e.freeze.apply(e, arguments); };
   Pitch.clearMsg = function () { var e = mounted ? Pitch3D : originalApi; return e.clearMsg ? e.clearMsg.apply(e, arguments) : undefined; };
@@ -3730,6 +3751,6 @@ var Pitch3D = (function () {
     if (host) host.removeEventListener("pitch3d:contextlost", onLost);
     if (mounted) Pitch3D.destroy(); else if (originalApi.destroy) originalApi.destroy();
     if (toggle && toggle.parentNode) toggle.parentNode.removeChild(toggle);
-    mounted = false; host = null; mountOpts = null; toggle = null; lastTeams = null; lastState = null; lastFrozen = false;
+    mounted = false; host = null; mountOpts = null; toggle = null; lastTeams = null; lastState = null; lastFrozen = false; introSeen = false;
   };
 })();

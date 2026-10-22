@@ -2060,7 +2060,7 @@
     var my = mine.length ? mine.reduce(function (a, b) { return a + b; }, 0) / mine.length : 75;
     var opp = f.or != null ? +f.or : (S.cr && S.cr[f.opp] != null ? +S.cr[f.opp] : 75);
     return {myName: clubName(S.m.club), oppName: clubName(f.opp), myLevel: Math.round(my), oppLevel: Math.round(opp),
-      style: liveOppStyle(f, my, opp)};
+      style: liveOppStyle(f, my, opp), wx: liveWxInfo(L.wx)};
   }
   function liveWxChip(L) {
     var w = liveWxInfo(L.wx), mul = (Math.round(w.mul * 100) / 100).toFixed(2).replace(".", ",");
