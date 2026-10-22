@@ -5,7 +5,7 @@ const { chromium } = require("playwright");
 const OUT = process.argv[2] || "/tmp/shots45";
 fs.mkdirSync(OUT, { recursive: true });
 (async () => {
-  const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+  const b = await chromium.launch({ executablePath: process.env.CHROME_PATH || "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
   const ctx = await b.newContext({ viewport: { width: 412, height: 915 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
   const p = await ctx.newPage();
   const errs = [], notes = [], fail = [];
@@ -42,7 +42,41 @@ fs.mkdirSync(OUT, { recursive: true });
     await p.screenshot({ path: path.join(OUT, "02-tarjeta.png") });
     await c('[data-a="dllive"]'); await p.waitForTimeout(200);
     if (!(await p.$(".dl45"))) fail.push("no se abre el directo");
+    /* una ganga debe verse y comportarse como una oferta: tarjeta completa y botones pulsables */
     let acted = 0;
+    const ganga = await p.evaluate(() => {
+      const D = S.m.dl, e = D.ev.find(x => x.k === "bar");
+      if (!e) return null;
+      dlTick(Math.max(0, e.t - D.t));
+      UIX.renderSheet();
+      const el = document.querySelector(".dlev.ganga"), r = el && el.getBoundingClientRect();
+      return {
+        id: e.id,
+        name: e.tg.fn + " " + e.tg.ln,
+        h: r ? Math.round(r.height) : 0,
+        text: el ? el.innerText : "",
+        canSign: !!(el && el.querySelector('[data-a="dlyes"][data-v="' + e.id + '"]'))
+      };
+    });
+    await p.waitForTimeout(80);
+    if (!ganga) fail.push("no apareció ninguna ganga en el día de cierre");
+    else {
+      notes.push("ganga visible: " + ganga.name + " · " + ganga.h + " px");
+      if (ganga.h < 100) fail.push("la tarjeta de ganga queda recortada (" + ganga.h + " px)");
+      if (ganga.text.indexOf(ganga.name) < 0) fail.push("la ganga no muestra el nombre completo del jugador");
+      if (!ganga.canSign) fail.push("la ganga no permite fichar");
+      await p.screenshot({ path: path.join(OUT, "03-ganga.png") });
+      await p.click('.dlev.ganga [data-a="dlyes"][data-v="' + ganga.id + '"]');
+      await p.waitForTimeout(160);
+      const after = await p.evaluate(id => {
+        const e = S.m.dl.ev.find(x => x.id === id);
+        return {done: e && e.done, button: !!document.querySelector('[data-a="dlyes"][data-v="' + id + '"]')};
+      }, ganga.id);
+      notes.push("ganga fichada: " + (after.done === "yes" ? "sí" : "no"));
+      if (after.done !== "yes") fail.push("el botón Fichar de la ganga no responde");
+      if (after.button) fail.push("la ganga sigue mostrando Fichar después de fichar");
+      if (after.done === "yes") acted = 1;
+    }
     for (let t = 0; t < 12; t++) {
       const yes = await p.$('.dl45 [data-a="dlyes"]:not([aria-disabled])');
       if (yes && acted < 2) { await yes.evaluate(x => x.click()); acted++; await p.waitForTimeout(120); }

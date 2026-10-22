@@ -51,7 +51,7 @@
               '<div class="row2"><button class="btn" data-a="dlno" data-v="' + e.id + '">' + tr("Rechazar") + '</button><button class="btn pri" data-a="dlyes" data-v="' + e.id + '">' + tr("Vender") + "</button></div></div>";
           } else {
             var t = e.tg, can = e.fee <= m.bud && bill + t.sal <= m.wcap * 1.1;
-            o += '<div class="dlev bar"><div class="dlevh">' + U.crest(t.club) + "<div><b>" + tr("Ganga: {name}", {name: h(t.fn + " " + t.ln)}) + "</b><small>" + h(plLine(t)) + " · " + h(clubName(t.club)) + "</small></div></div>" +
+            o += '<div class="dlev ganga"><div class="dlevh">' + U.crest(t.club) + "<div><b>" + tr("Ganga: {name}", {name: h(t.fn + " " + t.ln)}) + "</b><small>" + h(plLine(t)) + " · " + h(clubName(t.club)) + "</small></div></div>" +
               '<div class="dlnums"><span>' + tr("Precio") + " <b>" + fmtMoney(e.fee) + "</b> <s>" + fmtMoney(t.ask) + "</s></span><span>" + tr("Sueldo") + " <b>" + fmtMoney(t.sal) + "</b></span><span>" + tr("Caduca a las {t}", {t: left}) + "</span></div>" +
               '<div class="row2"><button class="btn" data-a="dlno" data-v="' + e.id + '">' + tr("Pasar") + '</button><button class="btn pri" data-a="dlyes" data-v="' + e.id + '"' + (can ? "" : ' aria-disabled="true"') + ">" + tr("Fichar") + "</button></div></div>";
           }

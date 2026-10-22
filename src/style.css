@@ -1438,8 +1438,11 @@ html.wide .lpanel > #lvpitch { width: 100%; max-width: calc((100vh - 150px) / 0.
 .dlacts { display: grid; gap: 10px; margin-bottom: 6px; }
 .dlev { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--tunnel); }
 .dlev.off { border-color: rgba(102, 185, 255, .45); }
-.dlev.bar { border-color: rgba(63, 207, 124, .45); }
+/* .bar está reservado para las barras de progreso; la ganga usa .ganga */
+.dlev.ganga { border-color: rgba(63, 207, 124, .45); }
 .dlevh { display: flex; align-items: center; gap: 10px; }
+.dlevh > div { min-width: 0; }
+.dlevh b, .dlevh small { overflow-wrap: anywhere; }
 .dlevh b { display: block; font-size: 15px; }
 .dlevh small { display: block; color: var(--mist); font-size: 12.5px; margin-top: 2px; }
 .dlnums { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 8px 0 10px; font-size: 13px; color: var(--mist); }
