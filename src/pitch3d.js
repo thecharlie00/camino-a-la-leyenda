@@ -3599,7 +3599,8 @@ var Pitch3D = (function () {
     if (!c) return null;
     var coin = null;
     if (c.coin) coin = {show: !!c.coin.show, call: c.coin.call, face: c.coin.face,
-      winner: c.coin.winner, choice: c.coin.choice};
+      winner: c.coin.winner, choice: c.coin.choice, waitT: +(c.coin.waitT || 0).toFixed(3),
+      rivalWhy: c.coin.rivalWhy || null};
     return {type: c.type, stage: c.stage, t: +c.t.toFixed(3), stageT: +c.stageT.toFixed(3), coin: coin};
   }
 
@@ -3680,14 +3681,20 @@ var Pitch3D = (function () {
     if (!host || switching) return;
     switching = true;
     try {
+      /* Si se cambia de vista en plena entrada, hay que continuar la ceremonia
+         en el otro modo; no se puede tratar como una entrada ya terminada. */
+      var activeCinema = null;
+      try { activeCinema = mounted ? Pitch3D.cinema() : (originalApi.cinema ? originalApi.cinema() : null); } catch (ignoreCinema) {}
+      var resumeIntro = activeCinema && activeCinema.type === "intro" ? activeCinema : null;
       if (mounted) Pitch3D.destroy(); else if (originalApi.destroy) originalApi.destroy();
       mounted = false;
-      /* La entrada solo se ve en el arranque real. Al cambiar de vista (o si
-         el 3D falla y vuelve al 2D) no se repite, ni siquiera en el minuto 0. */
+      /* La entrada no se repite una vez terminada. Si se cambia de vista con
+         la ceremonia activa, resumeIntro la continúa en el otro modo. */
       var mo = mountOpts || {};
-      if (introSeen || (lastState && +lastState.min > 0)) {
+      if (resumeIntro || introSeen || (lastState && +lastState.min > 0)) {
         mo = {}; for (var mk in mountOpts || {}) if (Object.prototype.hasOwnProperty.call(mountOpts, mk)) mo[mk] = mountOpts[mk];
-        mo.cinematics = false;
+        if (resumeIntro) { mo.cinematics = true; mo.intro = resumeIntro; }
+        else mo.cinematics = false;
       }
       if (want3d) {
         mounted = Pitch3D.mount(host, mo);

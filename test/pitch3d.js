@@ -38,7 +38,7 @@ function roster(prefix) {
     'sound:function(){return false;},debug:function(){return null;}};</script>';
   const noGlStub = pitchStub.replace("mount:function(){}", "mount:function(el,o){window.__2dMounted=true;window.__2dMounts=(window.__2dMounts||[]);window.__2dMounts.push(o||{});}")
     .replace("event:function(){}", "event:function(e){window.__2dEvents=(window.__2dEvents||[]);window.__2dEvents.push(e&&e.t);}")
-    .replace("debug:function(){return null;}", "debug:function(){return {twoD:true};},cinema:function(){return {type:'intro',stage:'walkout'};}");
+    .replace("debug:function(){return null;}", "debug:function(){return {twoD:true};},cinema:function(){return window.__introActive===false?null:{type:'intro',stage:'walkout'};}");
   const packLine = "<script>var P3D_ASSET_PACK=" + JSON.stringify(pack) + ";</script>";
   const pageHtml = '<!doctype html><html><body style="margin:0;background:#07100e">' +
     '<div id="pitch" style="width:420px;height:260px;position:relative"></div>' +
@@ -659,6 +659,7 @@ function roster(prefix) {
   await png.waitForTimeout(300);
   await png.evaluate(() => {
     Pitch.cinema();
+    window.__introActive = false;
     document.querySelector(".p3dtoggle").click();
   });
   await png.waitForTimeout(250);
@@ -771,6 +772,58 @@ function roster(prefix) {
   else fail.push("2D: no terminó el sorteo/saque " + JSON.stringify(twoDone));
   await p2d.screenshot({ path: path.join(OUT, "pitch2d-coin.png") });
   await p2d.close();
+
+  /* Cambio 3D→2D durante la salida: el 2D debe retomar la ceremonia, no saltarse el sorteo. */
+  const pageSwitch = '<!doctype html><html><head><style>body{margin:0;background:#07100e}.lpitch{display:block}</style></head><body>' +
+    '<div id="pitchsw" style="width:420px;height:260px;position:relative"></div>' +
+    '<script>function tr(s,p){s=String(s);if(p)for(var k in p)s=s.split("{"+k+"}").join(String(p[k]));return s;}</script>' +
+    '<script>' + bolasSrc + '</script><script>' + pitchSrc + '</script>' +
+    packLine + '<script>' + assetsSrc + '</script><script>' + src + '</script></body></html>';
+  const psw = await ctx.newPage();
+  psw.on("pageerror", e => errs.push("cambio 3D/2D pageerror: " + e.message));
+  psw.on("console", m => { if (m.type() === "error") errs.push("cambio 3D/2D console: " + m.text()); });
+  await psw.setContent(pageSwitch);
+  await psw.evaluate(({ home, away }) => {
+    try { localStorage.setItem("camino.pitch3d", "1"); } catch (ignore) {}
+    Pitch.mount(document.getElementById("pitchsw"), { cols: ["#f5b326", "#5db8ff"], fem: true, cinematics: true });
+    Pitch.teams(home, away, [{}, {}]);
+    Pitch.state({ own: 0, bx: 50, speed: 3, fem: true, wx: "rain",
+      toss: { myName: "Mi Club", oppName: "Rival FC", myLevel: 78, oppLevel: 73, style: "press" } });
+  }, { home: roster("h"), away: roster("a") });
+  let beforeSwitch = null;
+  for (let i = 0; i < 40; i++) {
+    beforeSwitch = await psw.evaluate(() => {
+      const c = typeof Pitch3D !== "undefined" ? Pitch3D.cinema() : null;
+      return { three: !!document.querySelector("canvas.lpitch3d"), cinema: !!c, type: c && c.type, stage: c && c.stage };
+    });
+    if (beforeSwitch.three && beforeSwitch.cinema) break;
+    if (!beforeSwitch.three && i === 3) await psw.click(".p3dtoggle");
+    await psw.waitForTimeout(100);
+  }
+  await psw.click(".p3dtoggle");
+  await psw.waitForTimeout(300);
+  const afterSwitch = await psw.evaluate(() => {
+    const c = Pitch.cinema(), t = document.querySelector(".l2d-tunnel");
+    return { two: !!document.querySelector("canvas.lpitch"), three: !!document.querySelector("canvas.lpitch3d"),
+      cinema: !!c, stage: c && c.stage, busy: Pitch.busy(), tunnel: !!t && t.style.display !== "none" };
+  });
+  let switchCoin = null;
+  for (let i = 0; i < 60; i++) {
+    switchCoin = await psw.evaluate(() => {
+      const c = Pitch.cinema(), t = document.querySelector("[data-p2d-timer] b");
+      return { stage: c && c.stage, timer: t ? t.textContent : "",
+        cara: !!document.querySelector("[data-p2d-coin='cara']"), cruz: !!document.querySelector("[data-p2d-coin='cruz']") };
+    });
+    if (switchCoin.stage === "coinCall") break;
+    await psw.waitForTimeout(100);
+  }
+  if (beforeSwitch.three && beforeSwitch.cinema && beforeSwitch.type === "intro" &&
+    afterSwitch.two && !afterSwitch.three && afterSwitch.cinema && afterSwitch.busy > 0 &&
+    switchCoin.stage === "coinCall" && switchCoin.cara && switchCoin.cruz && /^(10|9) s$/.test(switchCoin.timer))
+    notes.push("cambio 3D→2D en la salida · continúa el túnel y llega el sorteo");
+  else fail.push("cambio 3D→2D en la salida: " + JSON.stringify({ beforeSwitch, afterSwitch, switchCoin }));
+  await psw.screenshot({ path: path.join(OUT, "pitch-switch-2d.png") });
+  await psw.close();
 
   /* Guardas del puente UI→3D: el orden debe ser [local, visitante], y el
      sorteo/clima deben viajar en el estado que consume el HUD. */

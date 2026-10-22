@@ -201,6 +201,7 @@ Los tiempos se escalan con la velocidad del directo. Las cámaras de túnel, cí
 - Si gana el rival, `chooseRivalToss` decide según estilo, diferencia de nivel y clima. El panel enseña el motivo (`data-p3d-rival-why`/`data-p2d-rival-why`) antes de aplicar la consecuencia (`data-p3d-choice-result`/`data-p2d-choice-result`); un rival claramente superior puede elegir pelota.
 - La posesión autoritativa no se toca: el 3D y el 2D capturan el primer `state.own` y lo usan al cerrar la entrada. En 2D, `finishIntro2D()` llama a `kickoff(P.own)`.
 - El 2D reproduce la secuencia con un túnel y un overlay DOM, sin WebGL ni assets: salida en fila, saludo, sorteo, elección y formación. La lluvia, la nieve y el calor se dibujan con partículas de canvas.
+- Si se cambia de 3D a 2D durante la entrada, el 2D retoma la fase y el estado del sorteo en vez de saltarse la moneda; una vez terminada, cambiar de vista no la repite. El 3D reinicia su propia salida desde el túnel.
 - `busy()` añade 620 ms mientras hay cine para que la UI no pida el siguiente minuto. `freeze()` se difiere hasta el final de la secuencia. `Pitch.cinema()` y `Pitch.skipCinema()` funcionan en ambos modos; las pruebas que no quieren la intro llaman a `skipCinema()`.
 
 ---

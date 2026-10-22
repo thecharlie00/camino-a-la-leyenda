@@ -228,8 +228,8 @@ var Pitch = (function () {
       tac: [defTac(), defTac()], line: [22, 22], steal: -1, stealUntil: 0, chase: -1, cp: [0, 0], ret: [0, 0], trap: [0, 0], stopUntil: 0, pendOwn: null, recv: null,
       cam: {x: LEN / 2, y: MIDY, z: 1}, focus: null, shake: 0, exc: 0, excT: 0, excAt: 0, sndAt: 0, net: null, flag: null, font: "", fontR: 0,
       trails: [], icons: [], fx: [], offLine: null, lt: -1, flip: false, ko0: 0, koSet: false, half2: false, camN: 0, hiUntil: 0, onSpeed: o.onSpeed || null, tickTxt: "",
-      cinematics: o.cinematics !== false, introDone: o.cinematics === false, cine: null, toss: null, wx: "sun",
-      tunnelEl: null, coinEl: null, wxParts: []};
+      cinematics: o.cinematics !== false, introDone: o.cinematics === false, pendingIntro: o.intro || null,
+      cine: null, toss: null, wx: "sun", tunnelEl: null, coinEl: null, wxParts: []};
     btn.addEventListener("click", function (ev) { ev.stopPropagation(); Snd.toggle(); sndBtn(); });
     P.tk = tk; P.sp = sp; P.tunnelEl = tu; P.coinEl = ce;
     for (var wp = 0; wp < 34; wp++) P.wxParts.push({x: Math.random(), y: Math.random(), s: 0.55 + Math.random() * 0.9, v: 0.55 + Math.random() * 0.8});
@@ -330,7 +330,7 @@ var Pitch = (function () {
     if (!P.cine && b.m === 2 && !scripted() && P.chase < 0 && Math.abs(b.vx) + Math.abs(b.vy) < 0.1) giveTo(P.own, mid(P.own));
     /* La entrada solo se reproduce en el arranque real del directo; al
        reabrir o cambiar de vista con minutos jugados no se repite. */
-    if (!P.introDone && !P.cine && P.cinematics && P.T[0].length && P.T[1].length) startIntro2D();
+    if (!P.introDone && !P.cine && P.cinematics && P.T[0].length && P.T[1].length) startIntro2D(P.pendingIntro);
   }
   function pl(s, i) { if (s !== 0 && s !== 1 || i == null || i < 0) return null; var p = P.T[s][i]; return p && !p.gone && !p.off ? p : null; }
   function alive(s) { var out = []; for (var i = 0; i < P.T[s].length; i++) if (pl(s, i)) out.push(i); return out; }
@@ -778,8 +778,10 @@ var Pitch = (function () {
      salida desde el túnel, saludo, llamada, moneda, resultado, elección de
      campo/pelota y formación. El motor no avanza ningún minuto mientras
      `P.cine` exista; `Pitch.cinema()` es la señal que ya consulta `liveTick`. */
-  function startIntro2D() {
+  function startIntro2D(resume) {
     if (!P || P.cine) return;
+    var r = resume && typeof resume === "object" ? resume : null;
+    P.pendingIntro = null;
     P.cine = {type: "intro", stage: "", stageT: 0, t: 0, hudKey: "", fieldFlipped: false,
       coin: {show: false, call: null, face: null, winner: null, choice: null, rivalWhy: null, angle: 0, waitT: 0}};
     P.introDone = false;
@@ -795,7 +797,44 @@ var Pitch = (function () {
       p.x = st.x; p.y = st.y; p.ix = p.x; p.iy = p.y; p.vx = p.vy = 0;
       p.tx = p.x; p.ty = p.y; p.fa = s ? Math.PI : 0;
     }
-    setIntroStage2D("walkout");
+    if (r) resumeIntro2D(r);
+    else setIntroStage2D("walkout");
+  }
+  /* Al cambiar de vista en plena entrada, el 2D retoma la misma fase y el
+     mismo estado del sorteo en vez de repetir el túnel o saltarse la moneda. */
+  function resumeIntro2D(r) {
+    var c = P.cine; if (!c) return;
+    var stages = ["walkout", "greet", "coinCall", "coinFlip", "coinResult", "choose", "rivalChoice", "choiceResult", "lineup"];
+    var stage = stages.indexOf(r.stage) >= 0 ? r.stage : "walkout";
+    var max = stage === "walkout" ? INTRO_WALK : stage === "greet" ? INTRO_GREET :
+      stage === "coinFlip" ? COIN_FLIP : (stage === "coinResult" || stage === "choiceResult") ? COIN_RESULT :
+      stage === "lineup" ? INTRO_LINEUP : COIN_WAIT;
+    var st = +r.stageT;
+    if (!isFinite(st) || st < 0) st = 0;
+    c.stage = stage; c.stageT = Math.min(st, max);
+    c.t = isFinite(+r.t) && +r.t > 0 ? +r.t : c.stageT;
+    c.hudKey = "";
+    var rc = r.coin && typeof r.coin === "object" ? r.coin : {};
+    c.coin.call = rc.call === "cara" || rc.call === "cruz" ? rc.call : null;
+    c.coin.face = rc.face === "cara" || rc.face === "cruz" ? rc.face : null;
+    c.coin.winner = rc.winner === 0 || rc.winner === 1 ? rc.winner : null;
+    c.coin.choice = rc.choice === "campo" || rc.choice === "pelota" ? rc.choice : null;
+    c.coin.rivalWhy = rc.rivalWhy ? String(rc.rivalWhy) : null;
+    c.coin.waitT = isFinite(+rc.waitT) && +rc.waitT > 0 ? +rc.waitT : 0;
+    c.coin.show = stage !== "walkout" && stage !== "greet" && stage !== "lineup";
+    if (stage === "walkout") {
+      if (P.tunnelEl) P.tunnelEl.style.display = "block";
+      animateWalkout2D(c);
+    } else {
+      if (P.tunnelEl) P.tunnelEl.style.display = "none";
+      placeFormation2D();
+    }
+    /* El 3D ya había aplicado el campo antes de cambiar de vista. */
+    if ((stage === "choiceResult" || stage === "lineup") && c.coin.choice === "campo" && !c.fieldFlipped) {
+      c.fieldFlipped = true;
+      P.flip = !P.flip;
+    }
+    renderCoin2D(true);
   }
   function tunnelSpot2D(s, i) {
     var rank = i === 9 ? 0 : (i < 9 ? i + 1 : 10);
@@ -918,7 +957,8 @@ var Pitch = (function () {
   function cinema() {
     if (!P || !P.cine) return null;
     var c = P.cine, coin = null;
-    if (c.coin) coin = {show: !!c.coin.show, call: c.coin.call, face: c.coin.face, winner: c.coin.winner, choice: c.coin.choice};
+    if (c.coin) coin = {show: !!c.coin.show, call: c.coin.call, face: c.coin.face, winner: c.coin.winner,
+      choice: c.coin.choice, waitT: +(c.coin.waitT || 0).toFixed(3), rivalWhy: c.coin.rivalWhy || null};
     return {type: c.type, stage: c.stage, t: +c.t.toFixed(3), stageT: +c.stageT.toFixed(3), coin: coin};
   }
   function skipCinema() {
