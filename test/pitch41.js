@@ -28,6 +28,8 @@ fs.mkdirSync(OUT, { recursive: true });
   }
   if (!live) fail.push("no se llegó al directo");
   else {
+    await p.evaluate(() => { if (typeof Pitch !== "undefined" && Pitch.skipCinema) Pitch.skipCinema(); });
+    await p.waitForTimeout(150);
     await p.evaluate(() => { window.__icons = 0; const P = Pitch.debug(); const push = P.icons.push.bind(P.icons); P.icons.push = function (x) { if (x && x.ic === "🦶") window.__icons++; return push(x); }; });
     await c('[data-a="lspeed"][data-v="1"]');
     const at = await p.evaluate(() => { const P = Pitch.debug(), a = []; for (let s = 0; s < 2; s++) P.T[s].forEach(q => { if (q) a.push([q.pace, q.agi]); }); return a; });

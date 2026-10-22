@@ -29,13 +29,26 @@ fs.mkdirSync(OUT, { recursive: true });
   }
   if (!live) fail.push("no se llegó al directo");
   else {
+    await p.evaluate(() => { if (typeof Pitch !== "undefined" && Pitch.skipCinema) Pitch.skipCinema(); });
+    await p.waitForTimeout(150);
     await c('[data-a="lspeed"][data-v="1"]');
     const at = await p.evaluate(() => { const P = Pitch.debug(), a = []; P.T.forEach(t => t.forEach(q => { if (q) a.push({pos: q.pos, pas: q.pas, ent: q.ent, col: q.col, rt: q.rt, pace: q.pace}); })); return a; });
     const bad = at.filter(q => [q.pas, q.ent, q.col, q.rt, q.pace].some(v => typeof v !== "number" || !isFinite(v)));
     if (bad.length) fail.push("atributos sin calcular en " + bad.length + " bolitas");
     const dfc = at.filter(q => q.pos === "DFC"), dc = at.filter(q => q.pos === "DC");
     notes.push("entrada media DFC " + (dfc.reduce((s, q) => s + q.ent, 0) / dfc.length).toFixed(0) + " vs DC " + (dc.reduce((s, q) => s + q.ent, 0) / Math.max(1, dc.length)).toFixed(0));
-    /* tácticas: medir la línea defensiva y quién presiona con bloque bajo y alto */
+    /* tácticas: medir la línea defensiva y quién presiona con bloque bajo y alto.
+       La UI reenvía la táctica real en cada minuto; durante la medición se congela
+       la que inyecta el test para que Pitch.state no la pise a mitad de la muestra. */
+    await p.evaluate(() => {
+      if (window.__tacPatched) return;
+      window.__tacPatched = true;
+      const orig = Pitch.state;
+      Pitch.state = function (o) {
+        if (o && o.tac) { o = Object.assign({}, o); o.tac = null; }
+        return orig.call(Pitch, o);
+      };
+    });
     const tacRun = async (ment, line) => {
       await p.evaluate(([m, l]) => { const P = Pitch.debug(); window.__tm = {line: [0, 0], n: [0, 0], far: 0, farN: 0}; P.tac = [ {blk: m, press: m === 2, ret: m === -2, width: 1, pass: 1, tempo: 1}, {blk: m, press: m === 2, ret: m === -2, width: 1, pass: 1, tempo: 1} ]; void l; }, [ment, line]);
       for (let i = 0; i < 80; i++) {
@@ -58,8 +71,9 @@ fs.mkdirSync(OUT, { recursive: true });
     notes.push("(muestras con el balón en el centro: " + low.n + " / " + high.n + ")");
     if (!(high.line > low.line + 6)) fail.push("la presión alta no adelanta la línea");
     if (!(high.near < low.near)) fail.push("la presión alta no acerca a nadie al balón");
-    /* si el tramo medido tuvo poco juego abierto (muchas jugadas narradas), se mira un rato más */
-    for (let k = 0; k < 40 && (await p.evaluate(() => Pitch.debug() && Pitch.debug().qa.pass < 3)) && (await p.$("#live")); k++) await p.waitForTimeout(500);
+    /* si la medición terminó en el descanso, reanudar; luego acelerar para juntar pases abiertos */
+    await c('[data-a="lspeed"][data-v="3"]');
+    for (let k = 0; k < 60 && (await p.evaluate(() => Pitch.debug() && Pitch.debug().qa.pass < 3)) && (await p.$("#live")); k++) await p.waitForTimeout(500);
     const qa = await p.evaluate(() => { const q = Pitch.debug().qa; return {nan: q.nan, oob: q.oob, pass: q.pass, perr: q.pass ? q.perr / q.pass : 0}; });
     notes.push("auditoría: NaN reparados " + qa.nan + " · fuera de límites " + qa.oob + " · pases abiertos " + qa.pass + " con error medio " + qa.perr.toFixed(2) + " m");
     if (qa.nan || qa.oob) fail.push("NaN o salidas del campo durante el partido");

@@ -2020,20 +2020,53 @@
     return s;
   }
   function subDone() { if (LV && LV.resume) { LV.resume = false; LV.run = true; liveTick(); } }
+  function pitchCinema() {
+    try { return typeof Pitch !== "undefined" && Pitch.cinema ? !!Pitch.cinema() : false; } catch (e) { return false; }
+  }
   function liveTick() {
     if (!LV) return;
     if (LV.timer) clearTimeout(LV.timer);
     var L = S.live;
     if (!L || L.done || !LV.run) { liveRender(); return; }
+    var wait = Math.max([0, 700, 340, 120][LV.speed] || 700, typeof Pitch !== "undefined" ? Pitch.busy() : 0);
+    /* La entrada, el descanso y la despedida se sondean sin avanzar minutos. */
+    if (pitchCinema()) wait = Math.min(wait || 420, 420);
     LV.timer = setTimeout(function () {
       if (!LV || !S.live) return;
+      var pb = typeof Pitch !== "undefined" ? Pitch.busy() : 0;
+      if (pitchCinema() || pb > 0) { liveRender(); liveTick(); return; }
       var ev = liveStep();
       livePitchFeed(ev);
       if (ev.some(function (e) { return e.t === "half"; })) LV.run = false;
       if (ev.some(function (e) { return e.t === "goal" || e.t === "red" || e.t === "inj"; }) && LV.speed > 1) LV.run = LV.speed < 4;
       liveRender();
       liveTick();
-    }, Math.max([0, 700, 340, 120][LV.speed] || 700, typeof Pitch !== "undefined" ? Pitch.busy() : 0));
+    }, wait);
+  }
+  var LIVE_WX_FX = {sun: "Campo rápido", mild: "Sin efecto claro", rain: "Balón vivo y césped resbaladizo",
+    heat: "Ritmo lento y fatiga alta", cold: "Balón pesado y bote seco"};
+  function liveWxInfo(wx) {
+    var row = (typeof MX_WX !== "undefined" ? MX_WX.filter(function (w) { return w[0] === wx; })[0] : null) || ["sun", "☀", "Despejado", 1];
+    return {key: row[0], icon: row[1], name: tr(row[2]), effect: tr(LIVE_WX_FX[row[0]] || LIVE_WX_FX.sun), mul: row[3]};
+  }
+  function liveOppStyle(f, mine, opp) {
+    var h = typeof hashStr === "function" ? hashStr(String(S.yr || "") + "|" + String(S.tw || 0) + "|" + String(f.opp || 0) + "|toss") : 0, r = h % 100;
+    if (opp >= mine + 4) return r < 55 ? "possession" : r < 82 ? "press" : "counter";
+    if (opp <= mine - 4) return r < 48 ? "direct" : r < 76 ? "counter" : "balanced";
+    return r < 28 ? "possession" : r < 53 ? "direct" : r < 78 ? "press" : r < 90 ? "counter" : "balanced";
+  }
+  function liveTossInfo(L, f) {
+    var mine = L.xi.map(function (id) { var p = id == null ? null : mPl(id); return p ? p.ovr : 70; });
+    var my = mine.length ? mine.reduce(function (a, b) { return a + b; }, 0) / mine.length : 75;
+    var opp = f.or != null ? +f.or : (S.cr && S.cr[f.opp] != null ? +S.cr[f.opp] : 75);
+    return {myName: clubName(S.m.club), oppName: clubName(f.opp), myLevel: Math.round(my), oppLevel: Math.round(opp),
+      style: liveOppStyle(f, my, opp), wx: liveWxInfo(L.wx)};
+  }
+  function liveWxChip(L) {
+    var w = liveWxInfo(L.wx), mul = (Math.round(w.mul * 100) / 100).toFixed(2).replace(".", ",");
+    return '<div class="lwx" data-wx="' + h(w.key) + '"><span class="lwx-ic" aria-hidden="true">' + w.icon + "</span>" +
+      '<span class="lwx-name"><b>' + tr("Clima") + "</b> " + h(w.name) + "</span>" +
+      '<span class="lwx-fx">' + h(w.effect) + " · " + tr("Fatiga") + " ×" + mul + "</span></div>";
   }
   function liveRender() {
     if (!LV || !S.live) return;
@@ -2041,7 +2074,7 @@
     var us = '<span class="lteam">' + crest(m.club) + "<b>" + h(clubName(m.club)) + "</b></span>", them = '<span class="lteam r"><b>' + h(clubName(f.opp)) + "</b>" + crest(f.opp) + "</span>";
     var sc = f.home ? us + '<span class="lsc num">' + L.gu + " - " + L.gt + "</span>" + them : them.replace(' r"', '"') + '<span class="lsc num">' + L.gt + " - " + L.gu + "</span>" + us.replace('"lteam"', '"lteam r"');
     var s = '<div class="lhead"><span class="lmin num">' + (L.done ? tr("Final") : L.min + "'") + "</span>" + '<span class="muted">' + h(compShort(f)) + "</span></div>";
-    s += '<div class="lscore">' + sc + "</div>";
+    s += '<div class="lscore">' + sc + "</div>" + (L.wx ? liveWxChip(L) : "");
     var cu = liveCol(m.club, f.opp), poss = (L.poss[0] + L.poss[1]) ? Math.round(L.poss[0] / (L.poss[0] + L.poss[1]) * 100) : 50, mo = L.mo == null ? pu : Math.round(L.mo);
     var gls = function (us) { var l = (L.gl || []).filter(function (g) { return g.us === us; }); return l.length ? l.map(function (g) { return h(g.n) + " " + g.min + "'"; }).join(", ") : ""; };
     var lg = gls(1), rg = gls(0);
@@ -2081,7 +2114,8 @@
     if (!LV.el.querySelector("#lvbody")) {
       LV.el.innerHTML = '<div class="lpanel"><div id="lvtop"></div><div class="lpitchw" id="lvpitch"></div><div id="lvbody"></div><div id="lvctl"></div></div>';
       LV.ctlKey = null;
-      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
+      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === "f", spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
+        cinematics: !L.min,
         lab: {replay: tr("REPETICIÓN"), goal: tr("GOL"), goalOf: tr("¡GOL DE {n}!"), post: tr("¡PALO!"), half: tr("FIN DEL PRIMER TIEMPO"), end: tr("FINAL"), off: tr("FUERA DE JUEGO"), foul: tr("FALTA"), thr: tr("SAQUE DE BANDA"), cor: tr("CÓRNER"), gk: tr("SAQUE DE PUERTA")},
         onSpeed: function (n) { if (!LV) return; LV.speed = n; LV.run = true; LV.resume = false; liveTick(); liveRender(); }});
     }
@@ -2091,6 +2125,9 @@
     var ck = [L.done, LV.run, LV.speed, String(L.ment), L.form, L.left, LV.sel, LV.pin, L.red, L.hurt, L.xi.join(","), L.bench.join(","), JSON.stringify(L.tac || {}), Math.floor((L.min || 0) / 5)].join("|");
     if (ck !== LV.ctlKey) { LV.ctlKey = ck; document.getElementById("lvctl").innerHTML = s; }
     livePitchTeams();
+    /* El sorteo necesita saber quién saca antes de que termine la entrada;
+       el primer minuto aún no se ha jugado, así que se siembra el estado. */
+    if (!LV.seeded) { LV.seeded = true; livePitchFeed([]); }
     if (typeof Pitch !== "undefined") Pitch.freeze(!LV.run && !L.done);
     /* animar la barra desde donde estaba */
     var mt = LV.el.querySelector(".lmot .a"), bl = LV.el.querySelector(".lball");
@@ -2131,7 +2168,14 @@
       if (e.us === 0 && e.ox != null && e.ox >= 0) who = e.ox;
       Pitch.event({t: e.t, side: side, who: who, k: e.k, txt: e.txt, d: e.d, ly: e.ly});
     });
-    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1});
+    var mt = typeof liveTac === "function" ? liveTac(L) : null, tacs = [null, null];
+    if (mt) tacs[me] = {line: mt.line, width: mt.width, pass: mt.pass, tempo: mt.tempo, ment: L.ment};
+    /* El HUD 3D usa siempre [local, visitante], igual que su chip izquierdo y
+       derecho. Antes se enviaba [nuestro, rival] y el orden se invertía al
+       jugar fuera de casa. */
+    var hs = f.home ? [L.gu, L.gt] : [L.gt, L.gu];
+    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1, tac: tacs, ment: L.ment,
+      fem: S.g === "f", wx: L.wx, score: hs, min: L.min, toss: liveTossInfo(L, f)});
   }
   /* colores de los dos clubes, que se distingan entre sí */
   function liveCol(a, b) {
@@ -2428,7 +2472,7 @@
         UI.sheet = null; persist(); render(false); toast(tr("Perfil actualizado"));
         break;
       /* partido en directo */
-      case "lspeed": if (LV) { var sv = +v; LV.run = sv > 0; if (sv > 0) LV.speed = sv; liveTick(); liveRender(); } break;
+      case "lspeed": if (LV) { var sv = +v; LV.run = sv > 0; if (sv > 0) { LV.speed = sv; if (typeof Pitch !== "undefined") livePitchFeed([]); } liveTick(); liveRender(); } break;
       case "lment": liveSet("ment", v === "bus" || v === "press" ? v : +v); liveRender(); break;
       case "lout": if (LV) { if (LV.sel == null && LV.run) { LV.resume = true; LV.run = false; } LV.sel = LV.sel === id ? null : id; LV.pin = null; if (LV.sel == null) subDone(); liveRender(); } break;
       case "lin": if (LV && LV.sel != null) { LV.pin = id; liveRender(); } break;

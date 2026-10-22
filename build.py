@@ -34,7 +34,7 @@ for fam, pkg, w, subsets in faces:
 
 css = "\n".join(css_fonts) + "\n" + (SRC / "style.css").read_text()
 LANG_FILES = ["lang-en.js", "lang-de.js", "lang-it.js", "lang-fr.js", "lang-fem.js"]
-ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "goat.js", "crest.js", "faces.js", "minigame.js", "bolas.js", "pitch.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "wide42.js", "ui-boot.js"]
+ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "goat.js", "crest.js", "faces.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "wide42.js", "ui-boot.js"]
 web_config_path = ROOT / "web" / "config.json"
 web_config = json.loads(web_config_path.read_text(encoding="utf-8-sig")) if web_config_path.exists() else {}
 goat_api_url = os.environ.get("CAMINO_GOAT_API_URL", web_config.get("goat_api_url", "")).strip().rstrip("/")
@@ -44,7 +44,33 @@ if goat_api_url:
             not re.fullmatch(r"[A-Za-z0-9.-]+(?::[0-9]{1,5})?", parsed_goat_api_url.netloc) or
             parsed_goat_api_url.path or parsed_goat_api_url.query or parsed_goat_api_url.fragment):
         raise ValueError("CAMINO_GOAT_API_URL must be an HTTPS origin without a path")
-js = "var GOAT_WEB_BUILD = false;\n" + "\n".join((SRC / n).read_text() for n in ORDER if (SRC / n).exists())
+
+# GLB de runtime. Se incrustan para que dist/index.html siga siendo un único
+# fichero y funcione desde file:// y dentro de la APK, sin fetch ni CORS.
+ASSET_FILES = {
+    "male_lod1": "assets/players/male/male_lod1.glb",
+    "male_lod2": "assets/players/male/male_lod2.glb",
+    "female_lod1": "assets/players/female/female_lod1.glb",
+    "female_lod2": "assets/players/female/female_lod2.glb",
+    "goalkeeper_lod1": "assets/players/goalkeeper/goalkeeper_lod1.glb",
+    "goalkeeper_lod2": "assets/players/goalkeeper/goalkeeper_lod2.glb",
+    "ball_lod1": "assets/ball/ball_lod1.glb",
+    "goal_lod1": "assets/stadium/goal_lod1.glb",
+    "corner_flag_lod0": "assets/stadium/corner_flag_lod0.glb",
+    "ad_board_lod0": "assets/stadium/ad_board_lod0.glb",
+    "bench_lod0": "assets/stadium/bench_lod0.glb",
+    "barrier_lod0": "assets/stadium/barrier_lod0.glb",
+}
+asset_pack = {}
+for asset_id, rel in ASSET_FILES.items():
+    asset_path = ROOT / rel
+    if asset_path.exists():
+        asset_pack[asset_id] = base64.b64encode(asset_path.read_bytes()).decode("ascii")
+asset_js = "var P3D_ASSET_PACK = " + json.dumps(asset_pack, separators=(",", ":")) + ";\n"
+if not asset_pack:
+    print("Pitch3D: sin GLB de runtime; se usará el fallback procedural")
+
+js = asset_js + "var GOAT_WEB_BUILD = false;\n" + "\n".join((SRC / n).read_text() for n in ORDER if (SRC / n).exists())
 # etiqueta de versión: nombre y código de la app Android y la fecha de compilación
 import re as _re, datetime as _dt
 _man = (ROOT / "android" / "AndroidManifest.xml").read_text() if (ROOT / "android" / "AndroidManifest.xml").exists() else ""

@@ -33,7 +33,22 @@ fs.mkdirSync(OUT, { recursive: true });
     const st = await p.evaluate(() => {
       const L = S.live, seen = {}, f0 = {};
       L.xi.forEach(id => { f0[id] = mPl(id).fit; });
-      for (let i = 0; i < 50; i++) liveStep().forEach(e => { seen[e.st] = 1; if (e.d != null && ((e.k === "long" && e.d < 18) || ((e.k === "oneone" || e.k === "rebound" || e.k === "head") && e.d > 13))) seen.badtext = 1; if ((e.t === "goal" || e.t === "save" || e.t === "miss" || e.t === "post") && (e.xg == null || e.xg <= 0 || e.xg >= 1)) seen.badxg = 1; });
+      let prevBx = L.bx;
+      for (let i = 0; i < 50; i++) {
+        const evs = liveStep(), shot = evs.some(e => e.t === "goal" || e.t === "save" || e.t === "miss" || e.t === "post");
+        evs.forEach(e => {
+          seen[e.st] = 1;
+          if (e.d != null && ((e.k === "long" && e.d < 18) || ((e.k === "oneone" || e.k === "rebound" || e.k === "head") && e.d > 13))) seen.badtext = 1;
+          if ((e.t === "goal" || e.t === "save" || e.t === "miss" || e.t === "post") && (e.xg == null || e.xg <= 0 || e.xg >= 1)) seen.badxg = 1;
+          if (e.d != null) {
+            if (+e.d < 5 || +e.d > 31) seen.baddist = 1;
+            const origin = e.us === 1 ? 100 - (+e.d) * 100 / 105 : (+e.d) * 100 / 105;
+            if (e.us === 1 ? origin <= 50 : origin >= 50) seen.badzone = 1;
+          }
+        });
+        if (i && !shot && !evs.some(e => e.t === "half" || e.t === "end") && Math.abs(L.bx - prevBx) > 18) seen.badmove = 1;
+        prevBx = L.bx;
+      }
       const drops = L.xi.filter(id => id !== L.red).map(id => f0[id] - L.fit[id]);
       UIX.openLive();
       return { min: L.min, xg: L.xg, mom: L.mom, zn: L.zn.reduce((a, b) => a + b, 0), wx: L.wx, st: L.st, seen: Object.keys(seen), drop: [Math.min(...drops), Math.max(...drops)] };
@@ -42,6 +57,9 @@ fs.mkdirSync(OUT, { recursive: true });
     if (!(st.zn >= 50)) fail.push("zonas sin datos");
     if (st.seen.indexOf("badxg") >= 0) fail.push("tiro sin xG válido");
     if (st.seen.indexOf("badtext") >= 0) fail.push("comentario que no cuadra con la distancia del tiro");
+    if (st.seen.indexOf("baddist") >= 0) fail.push("tiro con distancia fuera del campo");
+    if (st.seen.indexOf("badzone") >= 0) fail.push("tiro desde campo propio");
+    if (st.seen.indexOf("badmove") >= 0) fail.push("salto de balón entre minutos sin tiro");
     if (!(st.drop[1] > 3)) fail.push("la resistencia no baja");
     if (Math.abs(st.mom) > 100) fail.push("momentum fuera de rango");
     await p.waitForTimeout(300);
@@ -57,12 +75,17 @@ fs.mkdirSync(OUT, { recursive: true });
       S.live = null;
       for (let i = 0; i < 300; i++) {
         S.cur.pm[fi] = JSON.parse(keep); liveStart(fi); liveSimRest(); const L = S.live;
-        L.ev.forEach(e => { if (e.d == null) return; o.sh2 = (o.sh2 || 0) + 1; if ((e.k === "long" && e.d < 18) || ((e.k === "oneone" || e.k === "rebound" || e.k === "head") && e.d > 13)) o.bad = (o.bad || 0) + 1; });
+        L.ev.forEach(e => {
+          if (e.t === "pass" || e.t === "tackle") o.vis = (o.vis || 0) + 1;
+          if (e.d == null) return;
+          o.sh2 = (o.sh2 || 0) + 1;
+          if ((e.k === "long" && e.d < 18) || ((e.k === "oneone" || e.k === "rebound" || e.k === "head") && e.d > 13)) o.bad = (o.bad || 0) + 1;
+        });
         o.g += L.gu + L.gt; o.sh += L.shots[0] + L.shots[1]; o.xg += L.xg[0] + L.xg[1]; o.big += L.big[0] + L.big[1]; o.n++;
         if (!o.st) o.st = L.st; S.live = null;
       }
       S.cur.pm[fi] = JSON.parse(keep);
-      return { conv: o.g / o.sh, bigR: o.big / o.sh, xgPerGoal: o.xg / o.g, st: o.st, textBad: (o.bad || 0) + "/" + (o.sh2 || 0) };
+      return { conv: o.g / o.sh, bigR: o.big / o.sh, xgPerGoal: o.xg / o.g, st: o.st, textBad: (o.bad || 0) + "/" + (o.sh2 || 0), vis: o.vis || 0 };
     });
     notes.push("calibración: " + JSON.stringify(cal));
     if (cal.conv < 0.16 || cal.conv > 0.26) fail.push("conversión fuera de rango: " + cal.conv);
@@ -70,6 +93,7 @@ fs.mkdirSync(OUT, { recursive: true });
     if (cal.xgPerGoal < 0.85 || cal.xgPerGoal > 1.15) fail.push("xG descalibrado: " + cal.xgPerGoal);
     if (cal.st !== "FULL_TIME") fail.push("no termina en FULL_TIME");
     if (!/^0\//.test(cal.textBad)) fail.push("textos de tiro incoherentes: " + cal.textBad);
+    if (cal.vis) fail.push("eventos visuales en el feed: " + cal.vis);
   }
   console.log(notes.join("\n"));
   console.log(errs.length || fail.length ? "ERRORES: " + errs.concat(fail).join(" | ") : "SIN ERRORES");
