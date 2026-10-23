@@ -60,6 +60,8 @@ for fam, pkg, w in faces:
 (OUT / "site.css").write_text("\n".join(css) + "\n" + (WEB / "site.css").read_text())
 shutil.copy(WEB / "site.js", OUT / "site.js")
 shutil.copy(WEB / "goat-ladder.js", OUT / "goat-ladder.js")
+shutil.copy(ROOT / "src" / "pixel.js", OUT / "pixel.js")
+shutil.copy(ROOT / "src" / "trophies.js", OUT / "trophies.js")
 shutil.copytree(WEB / "img", OUT / "img")
 
 # --- plantillas, una por idioma: castellano en la raíz y /en/, /de/, /it/, /fr/ ---

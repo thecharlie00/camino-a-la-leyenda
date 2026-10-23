@@ -292,6 +292,17 @@ var Pitch = (function () {
     P.btn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/>' +
       (on ? '<path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' : '<path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>') + "</svg>";
   }
+  /* Disco pixelado: filas de bloques alineadas a una rejilla (estilo 8 bits). */
+  function pxDisc(c, x, y, r, col) {
+    var u = Math.max(1.5, r / 2.6), n = Math.ceil(r / u), rr = (r / u) * (r / u);
+    var cx = Math.round(x / u) * u, cy = Math.round(y / u) * u;
+    c.fillStyle = col;
+    for (var j = -n; j <= n; j++) {
+      var span = Math.floor(Math.sqrt(Math.max(0, rr - j * j)) + 0.35);
+      if (span <= 0 && j !== 0) continue;
+      c.fillRect(cx - span * u - u / 2, cy + j * u - u / 2, (span * 2 + 1) * u, u);
+    }
+  }
   function resize() {
     if (!P) return;
     var w = P.el.clientWidth || 340, h = Math.round(w * 0.6), d = window.devicePixelRatio || 1;
@@ -1939,14 +1950,12 @@ var Pitch = (function () {
           c.fillStyle = "#e9f4d0"; c.beginPath(); c.arc(len * 0.35 + r + len * 0.42, -r * 0.35, r * 0.28, 0, PI2); c.arc(len * 0.35 + r + len * 0.42, r * 0.35, r * 0.28, 0, PI2); c.fill();
           c.restore();
         } else {
-          c.fillStyle = fill; c.beginPath(); c.arc(x, y, r, 0, PI2); c.fill();
-          c.lineWidth = 1.5; c.strokeStyle = edge; c.stroke();
-          /* muesca de orientación del cuerpo */
-          c.fillStyle = edge; c.beginPath();
-          c.moveTo(x + fx * (r + 3.6), y + fy * (r + 3.6));
-          c.lineTo(x + (fx * 0.88 - fy * 0.48) * r, y + (fy * 0.88 + fx * 0.48) * r);
-          c.lineTo(x + (fx * 0.88 + fy * 0.48) * r, y + (fy * 0.88 - fx * 0.48) * r);
-          c.closePath(); c.fill();
+          /* pixel art: cuerpo en bloques con borde de un bloque */
+          pxDisc(c, x, y, r + 1.4, edge); pxDisc(c, x, y, r, fill);
+          /* orientación: un bloque de píxel en el borde hacia donde mira */
+          var pu = Math.max(1.5, r / 2.6);
+          c.fillStyle = edge;
+          c.fillRect(Math.round((x + fx * (r + pu * 0.6)) / pu) * pu - pu / 2, Math.round((y + fy * (r + pu * 0.6)) / pu) * pu - pu / 2, pu, pu);
         }
         c.fillStyle = q.off ? "#ffd7da" : q.gk ? gink : tcol;
         txt(String(q.n), x, y + 0.5);

@@ -74,6 +74,11 @@ function validateCareer(input) {
       trophies: boundedStringList(row.trophies, "trophies"),
       awards: boundedStringList(row.awards, "awards")
     };
+    /* claves de icono opcionales (palmarés con trofeos); si no encajan se descartan */
+    const trophyKeys = iconKeys(row.trophy_keys, item.trophies.length);
+    const awardKeys = iconKeys(row.award_keys, item.awards.length);
+    if (trophyKeys) item.trophy_keys = trophyKeys;
+    if (awardKeys) item.award_keys = awardKeys;
     if (!item.clubs || !item.clubs.length) item.clubs = [item.club];
     if (item.season == null) throw new Error("Career season year is required");
     if (input.game_mode === "player") {
@@ -153,6 +158,12 @@ function validateCareer(input) {
     }
   }
   return career;
+}
+
+function iconKeys(value, length) {
+  if (!Array.isArray(value) || value.length !== length || !length) return null;
+  if (!value.every(function (key) { return typeof key === "string" && /^[A-Za-z0-9_:.\- ]{0,40}$/.test(key); })) return null;
+  return value.slice();
 }
 
 function boundedStringList(value, field) {

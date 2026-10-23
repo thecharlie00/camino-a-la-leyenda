@@ -46,6 +46,9 @@ const vm = require("vm");
   };
   const window = {GOAT_TEXT: {es: {}}, GoatLadder: service, GOAT_WEB_BUILD: false, UIX};
   const document = {addEventListener: () => {}};
+  const pxCtx = {console};
+  vm.runInNewContext(fs.readFileSync("src/pixel.js", "utf8"), pxCtx);
+  window.PX = pxCtx.PX;
   vm.runInNewContext(fs.readFileSync("src/ui-goat.js", "utf8"), {window, document, console});
 
   UIX.actions.goat();
@@ -55,6 +58,8 @@ const vm = require("vm");
   let html = UIX.sheets.goat(currentSheet);
   assert(html.includes("Striker"));
   assert(html.includes("careerHistory"));
+  assert(html.includes("goat-honours") && html.includes("honoursTeam") && html.includes("honoursInd"), "palmarés con títulos colectivos e individuales");
+  assert(/<svg class="tro px"/.test(html), "icono pixelado del trofeo");
   assert(!html.includes(">empty<"));
 
   UIX.actions.goatmode(null, "manager");

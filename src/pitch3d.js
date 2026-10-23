@@ -1626,9 +1626,19 @@ var Pitch3D = (function () {
       moved: moved || 0, safeDist: GK_SAFE_DIST};
   }
 
+  /* Línea del último defensor de un equipo (x), para el fuera de juego visual. */
+  function lastDefLine(side) {
+    var dir = sim.attack[side], list = listOf(side), best = null;
+    for (var i = 0; i < list.length; i++) {
+      var a = list[i]; if (!a || a.gone || a.gk) continue;
+      if (best == null || a.x * dir < best * dir) best = a.x;
+    }
+    return best == null ? ownX(side) + dir * 16 : best;
+  }
   function aiTick() {
     var b = sim.ball, carrier = b.mode === "held" ? actorAt(b.side, b.idx) : null;
     var owner = b.mode === "held" ? b.side : (b.lastTouch != null ? b.lastTouch : sim.own);
+    var defLines = [lastDefLine(0), lastDefLine(1)];
     for (var side = 0; side < 2; side++) {
       var dir = sim.attack[side], tac = sim.tactics[side] || defTac(), defending = side !== owner;
       var prog = clamp((dir > 0 ? b.x / LEN : 1 - b.x / LEN), 0, 1);
@@ -1658,15 +1668,20 @@ var Pitch3D = (function () {
         }
         var tx, tz, maxSp = 6.4 * a.pace;
         if (a.gk) {
-          var own = ownX(side), gx = own + dir * 2.0;
-          if (Math.abs(b.x - own) > 32) gx = own + dir * 6;
-          a.tx = clamp(gx, 0.8, LEN - 0.8);
-          a.tz = clamp(b.z, MIDZ - POST + 0.4, MIDZ + POST - 0.4);
+          /* Portero: en la bisectriz del ángulo de tiro (línea centro de
+           * portería → balón), más adelantado cuanto más lejos está el balón y
+           * de líbero si su equipo ataca en campo contrario. */
+          var own = ownX(side), bdx = (b.x - own) * dir, bdz = b.z - MIDZ, bd = Math.sqrt(bdx * bdx + bdz * bdz) || 1;
+          var depth = clamp(1.4 + bd * 0.07, 1.2, 5.5);
+          if (bdx > 52 && !defending) depth = clamp(bdx * 0.22, 6, 16);
+          var gxk = own + dir * Math.max(0.8, bdx / bd * depth), gzk = MIDZ + bdz / bd * depth;
+          a.tx = clamp(gxk, 0.8, LEN - 0.8);
+          a.tz = clamp(gzk, MIDZ - POST - (depth > 6 ? 6 : 0.2), MIDZ + POST + (depth > 6 ? 6 : 0.2));
           a.maxSp = 5.4;
           continue;
         }
         tx = a.baseX + dir * ((prog - 0.5) * (defending ? 5 : 8));
-        tz = MIDZ + (a.baseZ - MIDZ) * wScale + shiftZ;
+        tz = MIDZ + (a.baseZ - MIDZ) * (defending ? wScale * 0.86 : wScale) + shiftZ;
         if (defending) {
           tx -= dir * (1 - prog) * (4 + line * 2);
           tx += dir * line * 2.0;
@@ -1695,8 +1710,30 @@ var Pitch3D = (function () {
           var opp = nearestActor(1 - side, b.x + dir * 4, b.z, true);
           if (opp && dist(opp.x, opp.z, b.x, b.z) < 5) tz += (b.z > opp.z ? 1 : -1) * 4;
         }
+        /* Fuera de juego: sin balón, el atacante no se queda por delante del
+         * último defensor rival (salvo en jugada a balón parado). */
+        if (!defending && a !== carrier && !sim.restart && b.mode !== "flight") {
+          var off = defLines[1 - side], ahead = Math.max(off * dir, b.x * dir);
+          if (tx * dir > ahead - 0.4) tx = (ahead - 0.4) * dir;
+        }
         if (sim.action && sim.action.shooter === a && sim.action.stage !== "outcome") { tx = sim.action.originX; tz = sim.action.originZ; maxSp = 7.5; }
         a.tx = clamp(tx, 1, LEN - 1); a.tz = clamp(tz, 1.5, WID - 1.5); a.maxSp = maxSp;
+      }
+      /* Línea defensiva: los defensores que no persiguen el balón ni marcan de
+       * cerca forman una línea común (la más retrasada de sus posiciones) y el
+       * bloque no se estira más de ~34 m entre defensas y delanteros. */
+      if (defending && !sim.restart) {
+        var backs = [], deepest = null, front = null;
+        for (var bi = 0; bi < list.length; bi++) {
+          var d0 = list[bi]; if (d0.gone || d0.gk || d0.passTarget) continue;
+          if (isDef(d0.pos) && d0 !== nearest && d0 !== second) { backs.push(d0); if (deepest == null || d0.tx * dir < deepest * dir) deepest = d0.tx; }
+          if (front == null || d0.tx * dir > front * dir) front = d0.tx;
+        }
+        if (backs.length >= 2) for (bi = 0; bi < backs.length; bi++) backs[bi].tx = lerp(backs[bi].tx, deepest, 0.7);
+        if (deepest != null) for (bi = 0; bi < list.length; bi++) {
+          var f0 = list[bi]; if (f0.gone || f0.gk || f0 === nearest || f0.passTarget) continue;
+          if ((f0.tx - deepest) * dir > 34) f0.tx = deepest + dir * 34;
+        }
       }
     }
     separate();
@@ -1729,11 +1766,25 @@ var Pitch3D = (function () {
         }
         var pvx = a.vx, pvz = a.vz, pf = a.facing;
         var dx = a.tx - a.x, dz = a.tz - a.z, d = Math.sqrt(dx * dx + dz * dz);
-        var want = Math.min(a.maxSp || 6, d * 3.4);
+        /* Llegada natural: frena a tiempo (v = √(2·a·d)) en vez de ir a tope y clavarse. */
+        var want = Math.min(a.maxSp || 6, Math.sqrt(2 * 9 * d), d * 6);
         var dvx = 0, dvz = 0;
         if (d > 0.001) { dvx = dx / d * want - a.vx; dvz = dz / d * want - a.vz; }
-        var lim = 16 * dt, l = Math.sqrt(dvx * dvx + dvz * dvz);
-        if (l > lim) { dvx = dvx / l * lim; dvz = dvz / l * lim; }
+        /* Aceleración realista: arrancar cuesta más cuanto más rápido vas,
+         * frenar es más rápido que acelerar y girar en carrera abre la curva. */
+        var cur = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
+        if (cur > 0.2) {
+          var ux = a.vx / cur, uz = a.vz / cur, par = dvx * ux + dvz * uz, px = dvx - ux * par, pz = dvz - uz * par;
+          var accMax = (par > 0 ? 10.5 * (1 - 0.55 * clamp(cur / ((a.maxSp || 6) + 0.01), 0, 1)) + 2.5 : 15) * dt;
+          var latMax = 15 / (1 + cur * 0.16) * dt;
+          if (Math.abs(par) > accMax) par = par > 0 ? accMax : -accMax;
+          var pl = Math.sqrt(px * px + pz * pz);
+          if (pl > latMax) { px = px / pl * latMax; pz = pz / pl * latMax; }
+          dvx = ux * par + px; dvz = uz * par + pz;
+        } else {
+          var lim = 12 * dt, l = Math.sqrt(dvx * dvx + dvz * dvz);
+          if (l > lim) { dvx = dvx / l * lim; dvz = dvz / l * lim; }
+        }
         a.vx += dvx; a.vz += dvz;
         a.x = clamp(a.x + a.vx * dt, 1, LEN - 1);
         a.z = clamp(a.z + a.vz * dt, 1.5, WID - 1.5);
@@ -1836,13 +1887,17 @@ var Pitch3D = (function () {
       /* El enrosque se aplica en el eje perpendicular al recorrido y vuelve a
          cero en el destino: el balón nunca deja de ser continuo. */
       var bend = (f.curve || 0) * Math.sin(PI * k);
-      b.x = lerp(f.x0, f.x1, k) - dz / dl * bend;
-      b.z = lerp(f.z0, f.z1, k) + dx / dl * bend;
+      /* Resistencia del aire / rozamiento: el balón sale rápido y llega más
+       * lento (mismo punto y mismo instante de llegada que el motor). */
+      var cd = f.drag == null ? (f.drag = clamp(dl / f.dur / 30, 0.25, 1.1)) : f.drag, kh = (1 - Math.exp(-cd * k)) / (1 - Math.exp(-cd));
+      b.x = lerp(f.x0, f.x1, kh) - dz / dl * bend;
+      b.z = lerp(f.z0, f.z1, kh) + dx / dl * bend;
       b.y = lerp(f.y0, f.y1, k) + f.arc * 4 * k * (1 - k);
       spinBall(b, dt);
       if (k >= 1) {
         b.mode = "loose"; b.fl = null; b.timer = 0;
-        b.vx = (f.x1 - f.x0) / f.dur; b.vz = (f.z1 - f.z0) / f.dur;
+        var endK = f.drag ? f.drag * Math.exp(-f.drag) / (1 - Math.exp(-f.drag)) : 1;
+        b.vx = (f.x1 - f.x0) / f.dur * endK; b.vz = (f.z1 - f.z0) / f.dur * endK;
         var nx = b.next; b.next = null;
         if (nx && nx.type === "held") {
           var r = actorAt(nx.side, nx.idx);

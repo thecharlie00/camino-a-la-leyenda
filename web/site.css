@@ -871,3 +871,11 @@ body.play { min-height: 100vh; display: flex; flex-direction: column; }
   .goat-segment { justify-content: center; }
   .goat-segment button { flex: 1; padding-inline: 8px; }
 }
+.goat-honours { margin-top: 12px; }
+.goat-hon-t { font-weight: 800; color: var(--led); letter-spacing: .04em; text-transform: uppercase; font-size: 13px; }
+.goat-hon-h { color: var(--mist); font-size: 12px; margin: 8px 0 5px; }
+.goat-hon { display: flex; flex-wrap: wrap; gap: 6px; }
+.goat-hon-i { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 6px; padding: 3px 9px 3px 3px; max-width: 100%; }
+.goat-hon-i svg { flex: none; image-rendering: pixelated; }
+.goat-hon-i b { font-size: 13px; color: var(--chalk); overflow-wrap: anywhere; }
+.goat-hon-i em { font-style: normal; color: var(--led); font-weight: 800; margin-left: 4px; }

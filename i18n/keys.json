@@ -31072,7 +31072,8 @@
  },
  "jugadores": {
   "w": [
-   "life.js:319"
+   "life.js:319",
+   "pitch3d.js:4066"
   ],
   "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
  },
@@ -32604,7 +32605,8 @@
   "w": [
    "pets.js:151",
    "pitch.js:1201",
-   "pitch.js:1205"
+   "pitch.js:1205",
+   "pitch3d.js:4228"
   ],
   "ctx": "{k: \"ball\", s: \"t\", ico: \"⚽\", n: N_(\"Pelota\"), price: 50},"
  },
@@ -36916,190 +36918,223 @@
  },
  "Tu equipo": {
   "w": [
-   "pitch.js:1091"
+   "pitch.js:1091",
+   "pitch3d.js:4138"
   ],
   "ctx": "return {myName: String(t.myName || tr(\"Tu equipo\")), opp: String(t.oppName || tr(\"Rival\")),"
  },
  "Rival": {
   "w": [
    "pitch.js:1091",
-   "pitch.js:1150"
+   "pitch.js:1150",
+   "pitch3d.js:4138",
+   "pitch3d.js:4196"
   ],
   "ctx": "return {myName: String(t.myName || tr(\"Tu equipo\")), opp: String(t.oppName || tr(\"Rival\")),"
  },
  "Eliges la orientación y hacia qué portería atacar.": {
   "w": [
-   "pitch.js:1099"
+   "pitch.js:1099",
+   "pitch3d.js:4147"
   ],
   "ctx": "pros.push(tr(\"Eliges la orientación y hacia qué portería atacar.\"));"
  },
  "Con el césped resbaladizo, proteges el lado de tu salida.": {
   "w": [
-   "pitch.js:1100"
+   "pitch.js:1100",
+   "pitch3d.js:4148"
   ],
   "ctx": "if (x.wx.key === \"rain\") pros.push(tr(\"Con el césped resbaladizo, proteges el lado de tu salida.\"));"
  },
  "Evitas atacar de cara al sol en el segundo tiempo.": {
   "w": [
-   "pitch.js:1101"
+   "pitch.js:1101",
+   "pitch3d.js:4149"
   ],
   "ctx": "else if (x.wx.key === \"heat\") pros.push(tr(\"Evitas atacar de cara al sol en el segundo tiempo.\"));"
  },
  "Puedes elegir el lado con menos viento y nieve.": {
   "w": [
-   "pitch.js:1102"
+   "pitch.js:1102",
+   "pitch3d.js:4150"
   ],
   "ctx": "else if (x.wx.key === \"cold\") pros.push(tr(\"Puedes elegir el lado con menos viento y nieve.\"));"
  },
  "Su posesión se adapta a cualquier orientación.": {
   "w": [
-   "pitch.js:1103"
+   "pitch.js:1103",
+   "pitch3d.js:4151"
   ],
   "ctx": "if (x.style === \"possession\") cons.push(tr(\"Su posesión se adapta a cualquier orientación.\"));"
  },
  "Su presión alta puede cerrarte la banda que defiendes.": {
   "w": [
-   "pitch.js:1104"
+   "pitch.js:1104",
+   "pitch3d.js:4152"
   ],
   "ctx": "else if (x.style === \"press\") cons.push(tr(\"Su presión alta puede cerrarte la banda que defiendes.\"));"
  },
  "Su juego directo funciona igual en las dos porterías.": {
   "w": [
-   "pitch.js:1105"
+   "pitch.js:1105",
+   "pitch3d.js:4153"
   ],
   "ctx": "else if (x.style === \"direct\") cons.push(tr(\"Su juego directo funciona igual en las dos porterías.\"));"
  },
  "Te cederá el balón y buscará tu espalda desde el inicio.": {
   "w": [
-   "pitch.js:1106"
+   "pitch.js:1106",
+   "pitch3d.js:4154"
   ],
   "ctx": "else if (x.style === \"counter\") cons.push(tr(\"Te cederá el balón y buscará tu espalda desde el inicio.\"));"
  },
  "El cambio de lado no compensa su superioridad.": {
   "w": [
-   "pitch.js:1107"
+   "pitch.js:1107",
+   "pitch3d.js:4155"
   ],
   "ctx": "if (x.diff < -3) cons.push(tr(\"El cambio de lado no compensa su superioridad.\"));"
  },
  "Conservas el saque de centro y marcas el primer ritmo.": {
   "w": [
-   "pitch.js:1109"
+   "pitch.js:1109",
+   "pitch3d.js:4157"
   ],
   "ctx": "pros.push(tr(\"Conservas el saque de centro y marcas el primer ritmo.\"));"
  },
  "Le obligas a correr detrás del balón desde el inicio.": {
   "w": [
-   "pitch.js:1110"
+   "pitch.js:1110",
+   "pitch3d.js:4158"
   ],
   "ctx": "if (x.style === \"possession\") pros.push(tr(\"Le obligas a correr detrás del balón desde el inicio.\"));"
  },
  "Puedes jugar el primer balón en largo sin presión.": {
   "w": [
-   "pitch.js:1111"
+   "pitch.js:1111",
+   "pitch3d.js:4159"
   ],
   "ctx": "else if (x.style === \"direct\") pros.push(tr(\"Puedes jugar el primer balón en largo sin presión.\"));"
  },
  "Su presión alta puede atrapar tu primer pase.": {
   "w": [
-   "pitch.js:1112"
+   "pitch.js:1112",
+   "pitch3d.js:4160"
   ],
   "ctx": "else if (x.style === \"press\") cons.push(tr(\"Su presión alta puede atrapar tu primer pase.\"));"
  },
  "Te cede la iniciativa y espera tu error para salir en contra.": {
   "w": [
-   "pitch.js:1113"
+   "pitch.js:1113",
+   "pitch3d.js:4161"
   ],
   "ctx": "else if (x.style === \"counter\") cons.push(tr(\"Te cede la iniciativa y espera tu error para salir en contra.\"));"
  },
  "El balón corre más: el primer pase puede escaparse.": {
   "w": [
-   "pitch.js:1114"
+   "pitch.js:1114",
+   "pitch3d.js:4162"
   ],
   "ctx": "if (x.wx.key === \"rain\") cons.push(tr(\"El balón corre más: el primer pase puede escaparse.\"));"
  },
  "El balón pesado exige un primer toque más firme.": {
   "w": [
-   "pitch.js:1115"
+   "pitch.js:1115",
+   "pitch3d.js:4163"
   ],
   "ctx": "else if (x.wx.key === \"cold\") cons.push(tr(\"El balón pesado exige un primer toque más firme.\"));"
  },
  "Dosificar el ritmo desde el saque ahorra fuerzas.": {
   "w": [
-   "pitch.js:1116"
+   "pitch.js:1116",
+   "pitch3d.js:4164"
   ],
   "ctx": "else if (x.wx.key === \"heat\") pros.push(tr(\"Dosificar el ritmo desde el saque ahorra fuerzas.\"));"
  },
  "Tu superioridad te permite dominar el primer balón.": {
   "w": [
-   "pitch.js:1117"
+   "pitch.js:1117",
+   "pitch3d.js:4165"
   ],
   "ctx": "if (x.diff > 3) pros.push(tr(\"Tu superioridad te permite dominar el primer balón.\"));"
  },
  "Si el rival es superior, perderás el balón en zonas peligrosas.": {
   "w": [
-   "pitch.js:1118"
+   "pitch.js:1118",
+   "pitch3d.js:4166"
   ],
   "ctx": "if (x.diff < -3) cons.push(tr(\"Si el rival es superior, perderás el balón en zonas peligrosas.\"));"
  },
  "Mantienes tu plan de saque sin cambios.": {
   "w": [
-   "pitch.js:1120"
+   "pitch.js:1120",
+   "pitch3d.js:4168"
   ],
   "ctx": "if (!pros.length) pros.push(tr(\"Mantienes tu plan de saque sin cambios.\"));"
  },
  "No cambias de lado: mantienes la orientación actual.": {
   "w": [
-   "pitch.js:1121"
+   "pitch.js:1121",
+   "pitch3d.js:4169"
   ],
   "ctx": "if (!cons.length) cons.push(tr(\"No cambias de lado: mantienes la orientación actual.\"));"
  },
  "Quiere presionar hacia su propia grada en el primer tiempo.": {
   "w": [
-   "pitch.js:1126"
+   "pitch.js:1126",
+   "pitch3d.js:4175"
   ],
   "ctx": "if (x.style === \"press\") return {choice: \"campo\", why: tr(\"Quiere presionar hacia su propia grada en el primer tiempo.\")};"
  },
  "Prefiere ordenar el campo y defender con la línea adelantada.": {
   "w": [
-   "pitch.js:1127"
+   "pitch.js:1127",
+   "pitch3d.js:4176"
   ],
   "ctx": "if (x.style === \"possession\") return {choice: \"campo\", why: tr(\"Prefiere ordenar el campo y defender con la línea adelantada.\")};"
  },
  "Busca atacar con el sol o el viento a favor en el segundo tiempo.": {
   "w": [
-   "pitch.js:1128"
+   "pitch.js:1128",
+   "pitch3d.js:4177"
   ],
   "ctx": "if (x.style === \"direct\") return {choice: \"campo\", why: tr(\"Busca atacar con el sol o el viento a favor en el segundo tiempo.\")};"
  },
  "Quiere que su bloque pueda salir en contra hacia su banquillo.": {
   "w": [
-   "pitch.js:1129"
+   "pitch.js:1129",
+   "pitch3d.js:4178"
   ],
   "ctx": "if (x.style === \"counter\") return {choice: \"campo\", why: tr(\"Quiere que su bloque pueda salir en contra hacia su banquillo.\")};"
  },
  "No necesita cambiar nada: confía en su nivel y te deja el primer balón.": {
   "w": [
-   "pitch.js:1130"
+   "pitch.js:1130",
+   "pitch3d.js:4179"
   ],
   "ctx": "if (x.diff <= -4) return {choice: \"pelota\", why: tr(\"No necesita cambiar nada: confía en su nivel y te deja el primer balón.\")};"
  },
  "Busca que la lluvia complique tu salida desde atrás.": {
   "w": [
-   "pitch.js:1131"
+   "pitch.js:1131",
+   "pitch3d.js:4180"
   ],
   "ctx": "if (x.wx.key === \"rain\") return {choice: \"campo\", why: tr(\"Busca que la lluvia complique tu salida desde atrás.\")};"
  },
  "Elige el lado que mejor encaja con su plan de partido.": {
   "w": [
    "pitch.js:1132",
-   "pitch.js:1209"
+   "pitch.js:1209",
+   "pitch3d.js:4181",
+   "pitch3d.js:4236"
   ],
   "ctx": "return {choice: \"campo\", why: tr(\"Elige el lado que mejor encaja con su plan de partido.\")};"
  },
  "Clima": {
   "w": [
    "pitch.js:1149",
-   "ui.js:2068"
+   "ui.js:2068",
+   "pitch3d.js:4195"
   ],
   "ctx": "\"🌤 \" + tr(\"Clima\") + \": \" + esc2D((wx.icon || \"☀\") + \" \" + (wx.name || tr(\"Despejado\"))) + \" · \" + esc2D(wx.effect || tr(\"Campo rápido\")) + \" · \" + tr(\"Fatiga\") + \" ×\" + fmtMul2D(mul) + \"<br>\" +"
  },
@@ -37107,14 +37142,16 @@
   "w": [
    "pitch.js:1149",
    "ui.js:2069",
-   "ui-shootout.js:161"
+   "ui-shootout.js:161",
+   "pitch3d.js:4195"
   ],
   "ctx": "\"🌤 \" + tr(\"Clima\") + \": \" + esc2D((wx.icon || \"☀\") + \" \" + (wx.name || tr(\"Despejado\"))) + \" · \" + esc2D(wx.effect || tr(\"Campo rápido\")) + \" · \" + tr(\"Fatiga\") + \" ×\" + fmtMul2D(mul) + \"<br>\" +"
  },
  "Nivel": {
   "w": [
    "pitch.js:1150",
-   "ui-mgrplus.js:63"
+   "ui-mgrplus.js:63",
+   "pitch3d.js:4196"
   ],
   "ctx": "tr(\"Rival\") + \": \" + esc2D(x.opp) + \" · \" + tr(\"Nivel\") + \" \" + x.oppLevel + \" · \" + esc2D(x.styleLabel) + \"</div>\";"
  },
@@ -37144,115 +37181,134 @@
  },
  "Cara o cruz": {
   "w": [
-   "pitch.js:1187"
+   "pitch.js:1187",
+   "pitch3d.js:4214"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Cara o cruz\") + \"</b>\" +"
  },
  "Elige tu llamada.": {
   "w": [
-   "pitch.js:1188"
+   "pitch.js:1188",
+   "pitch3d.js:4215"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"Elige tu llamada.\") + \"</span>\" +"
  },
  "Tiempo para llamar": {
   "w": [
-   "pitch.js:1190"
+   "pitch.js:1190",
+   "pitch3d.js:4217"
   ],
   "ctx": "timer2D(tr(\"Tiempo para llamar\"), COIN_WAIT) + tossMeta2D();"
  },
  "La moneda está en el aire…": {
   "w": [
-   "pitch.js:1192"
+   "pitch.js:1192",
+   "pitch3d.js:4219"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"La moneda está en el aire…\") + \"</b>\" +"
  },
  "Has llamado {v}.": {
   "w": [
-   "pitch.js:1193"
+   "pitch.js:1193",
+   "pitch3d.js:4220"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"Has llamado {v}.\", {v: coin.call === \"cara\" ? tr(\"Cara\") : tr(\"Cruz\")}) + \"</span>\" + tossMeta2D();"
  },
  "Salió {v}.": {
   "w": [
-   "pitch.js:1195"
+   "pitch.js:1195",
+   "pitch3d.js:4222"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Salió {v}.\", {v: face}) + \"</b>\" +"
  },
  "Ganas el sorteo.": {
   "w": [
-   "pitch.js:1197"
+   "pitch.js:1197",
+   "pitch3d.js:4224"
   ],
   "ctx": "(coin.winner === 0 ? tr(\"Ganas el sorteo.\") : tr(\"Gana el rival.\")) + \"</span>\" + tossMeta2D();"
  },
  "Gana el rival.": {
   "w": [
-   "pitch.js:1197"
+   "pitch.js:1197",
+   "pitch3d.js:4224"
   ],
   "ctx": "(coin.winner === 0 ? tr(\"Ganas el sorteo.\") : tr(\"Gana el rival.\")) + \"</span>\" + tossMeta2D();"
  },
  "¡Ganaste el sorteo!": {
   "w": [
-   "pitch.js:1199"
+   "pitch.js:1199",
+   "pitch3d.js:4226"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"¡Ganaste el sorteo!\") + \"</b>\" +"
  },
  "¿Campo o pelota?": {
   "w": [
-   "pitch.js:1200"
+   "pitch.js:1200",
+   "pitch3d.js:4227"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"¿Campo o pelota?\") + \"</span>\" +"
  },
  "Campo cambia de lado · Pelota mantiene el saque": {
   "w": [
-   "pitch.js:1202"
+   "pitch.js:1202",
+   "pitch3d.js:4229"
   ],
   "ctx": "'<span style=\"display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px\">' + tr(\"Campo cambia de lado · Pelota mantiene el saque\") + \"</span>\" +"
  },
  "Tiempo para elegir": {
   "w": [
-   "pitch.js:1203"
+   "pitch.js:1203",
+   "pitch3d.js:4230"
   ],
   "ctx": "timer2D(tr(\"Tiempo para elegir\"), CHOICE_WAIT) + tossMeta2D();"
  },
  "Gana el rival el sorteo": {
   "w": [
-   "pitch.js:1206"
+   "pitch.js:1206",
+   "pitch3d.js:4233"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Gana el rival el sorteo\") + \"</b>\" +"
  },
  "Elige {v}.": {
   "w": [
-   "pitch.js:1207"
+   "pitch.js:1207",
+   "pitch3d.js:4234"
   ],
   "ctx": "'<span style=\"display:block;font:600 10px/1.25 system-ui;margin-top:2px\">' + tr(\"Elige {v}.\", {v: rp}) + \"</span>\" +"
  },
  "Campo elegido": {
   "w": [
-   "pitch.js:1211"
+   "pitch.js:1211",
+   "pitch3d.js:4238"
   ],
   "ctx": "var cc = coin.choice === \"campo\" ? tr(\"Campo elegido\") : tr(\"Saque elegido\");"
  },
  "Saque elegido": {
   "w": [
-   "pitch.js:1211"
+   "pitch.js:1211",
+   "pitch3d.js:4238"
   ],
   "ctx": "var cc = coin.choice === \"campo\" ? tr(\"Campo elegido\") : tr(\"Saque elegido\");"
  },
  "El rival decide: ": {
   "w": [
-   "pitch.js:1212"
+   "pitch.js:1212",
+   "pitch3d.js:4239"
   ],
   "ctx": "var res = coin.winner === 1 ? tr(\"El rival decide: \") : \"\";"
  },
  "Cambiamos de lado antes del saque. Conservas el saque de centro.": {
   "w": [
-   "pitch.js:1215"
+   "pitch.js:1215",
+   "pitch3d.js:4242"
   ],
   "ctx": "(coin.choice === \"campo\" ? tr(\"Cambiamos de lado antes del saque. Conservas el saque de centro.\") : tr(\"No cambiamos de lado. Conservas el saque de centro.\")) + \"</span>\" + tossMeta2D();"
  },
  "No cambiamos de lado. Conservas el saque de centro.": {
   "w": [
-   "pitch.js:1215"
+   "pitch.js:1215",
+   "pitch3d.js:4242"
   ],
   "ctx": "(coin.choice === \"campo\" ? tr(\"Cambiamos de lado antes del saque. Conservas el saque de centro.\") : tr(\"No cambiamos de lado. Conservas el saque de centro.\")) + \"</span>\" + tossMeta2D();"
  },
@@ -41769,7 +41825,8 @@
  },
  "Ver la repetición": {
   "w": [
-   "ui.js:2117"
+   "ui.js:2117",
+   "pitch3d.js:4303"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === \"f\", spdLabel: tr(\"Velocidad de simulación\"), rpLabel: tr(\"Ver la re"
  },
@@ -46543,6 +46600,12 @@
   ],
   "ctx": "} else if (I.age < 16 && !k.no) o += '<p class=\"muted\" style=\"font-size:13px;margin:4px 0 0\">' + h(trn(16 - I.age, \"En {n} año podrá decidir si quiere ser futbolista.\", \"En {n} años podrá decidir si quiere ser futbolista",
   "note": "plural:plural"
+ },
+ "Vista 3D del partido": {
+  "w": [
+   "pitch3d.js:4284"
+  ],
+  "ctx": "canvas.setAttribute(\"aria-label\", label(\"Vista 3D del partido\"));"
  },
  "España": {
   "w": [

@@ -21,6 +21,9 @@
     board: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 4v13M8 21l2-4M16 21l-2-4"/><circle cx="12" cy="10.5" r="2"/></svg>'
   };
 
+  /* pixel art: los iconos de navegación pasan a sprites de píxeles */
+  if (typeof PX !== "undefined" && PX.uiIcons) { var PXUI = PX.uiIcons(); for (var pk in PXUI) if (ICON[pk]) ICON[pk] = PXUI[pk]; }
+
   /* ---------- utilidades ---------- */
   function h(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]; }); }
   function dec(x, n) { return fmtDec(x, n); }

@@ -170,6 +170,14 @@ Los balones parados se representan como una puesta en escena completa: se coloca
 - Al quedarse sin carrera, el jugador gira la mirada y el cuerpo hacia el balón; la pose procedural incorpora una oscilación de espera. Durante el saque de puerta manda `faceLock` y la coreografía no se altera.
 - La inclinación se anula al caer en una parada, al terminar el partido, al volver a la posición base y durante la repetición visual.
 
+### Realismo del movimiento
+
+- **Aceleración**: arrancar cuesta más cuanto más rápido va el jugador, frenar es más rápido que acelerar y girar en carrera abre la curva; la llegada a un punto frena con v = √(2·a·d).
+- **Balón con resistencia**: en vuelo sale rápido y llega más lento (curva exponencial), con el mismo punto e instante de llegada que marca el motor; al soltarse conserva la velocidad final real.
+- **Portero**: se coloca en la bisectriz del ángulo de tiro, más adelantado cuanto más lejos está el balón, y hace de líbero cuando su equipo ataca en campo contrario.
+- **Bloque defensivo**: los defensores que no van al balón forman una línea común y el equipo no se estira más de ~34 m; al defender se cierra por dentro.
+- **Fuera de juego**: sin balón, los atacantes no se quedan por delante del último defensor rival (salvo a balón parado).
+
 ### Pases y robos visuales
 
 - `engine-extra.js` emite `pass` y `tackle` como eventos **solo visuales** después de calcular el resultado del minuto. No modifican `conv`, `bigR`, `xgPerGoal`, el marcador ni las estadísticas.

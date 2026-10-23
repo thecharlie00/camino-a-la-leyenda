@@ -55,16 +55,29 @@
     if (!names.length && fallback != null) names.push(safeName(clubName(fallback)));
     return names;
   }
+  /* Títulos y premios de una temporada con su clave de icono (para el palmarés del ranking). */
+  function seasonHonours(list, year, isAward) {
+    var label = typeof seasonLabel === "function" ? seasonLabel(year) : null;
+    var items = (list || []).filter(function (t) {
+      if (!t) return false;
+      if (isAward) return t.k !== "bdo_nom" && (t.y === year + 1 || (t.y === year && /month|pom/.test(String(t.k))));
+      return t.s === label;
+    }).slice(0, 30);
+    return {names: items.map(function (t) { return safeName(t.n).slice(0, 64); }), keys: items.map(function (t) { return String(t.k || "").slice(0, 40); })};
+  }
   function playerCareerRow(row, active) {
     var player = S.p, clubs = active ? player.ss.clubs : row.clubs;
     var club = active ? player.club : row.club, league = active ? S.cl[player.club] : row.lg;
+    var year = active ? S.yr : row.y, tro = seasonHonours(player.trophies, year, false), aw = seasonHonours(player.awards, year, true);
+    if (!player.trophies && !active) tro = {names: (row.tro || []).map(safeName), keys: []};
+    if (!player.awards && !active) aw = {names: (row.aw || []).map(safeName), keys: []};
     return {
-      season: active ? S.yr : row.y,
+      season: year,
       club: safeName(clubName(club)),
       clubs: namesForClubs(clubs, club),
       competition: safeName(W.lg[league] ? W.lg[league].n : ""),
-      trophies: active ? [] : (row.tro || []).map(safeName),
-      awards: active ? [] : (row.aw || []).map(safeName),
+      trophies: tro.names, trophy_keys: tro.keys,
+      awards: aw.names, award_keys: aw.keys,
       appearances: active ? player.ss.apps || 0 : row.apps || 0,
       goals: active ? player.ss.g || 0 : row.g || 0,
       assists: active ? player.ss.a || 0 : row.a || 0,
@@ -79,14 +92,14 @@
     var club = active ? S.m.club : row.club, league = active ? S.cl[club] : row.lg;
     var promoted = !active && !!next && row.club === next.club && W.lg[row.lg] &&
       W.lg[row.lg].upI === next.lg;
+    var year = active ? S.yr : row.y, tro = seasonHonours(S.m.trophies, year, false), aw = seasonHonours(S.m.awards, year, true);
+    if (!S.m.trophies && !active) tro = {names: (row.tro || []).map(safeName), keys: []};
     return {
-      season: active ? S.yr : row.y,
+      season: year,
       club: safeName(clubName(club)),
       competition: safeName(W.lg[league] ? W.lg[league].n : ""),
-      trophies: active ? [] : (row.tro || []).map(safeName),
-      awards: active ? [] : (S.m.awards || []).filter(function (award) {
-        return award.y === row.y + 1;
-      }).map(function (award) { return safeName(award.n); }),
+      trophies: tro.names, trophy_keys: tro.keys,
+      awards: aw.names, award_keys: aw.keys,
       wins: active ? S.m.ss.w || 0 : row.w || 0,
       draws: active ? S.m.ss.d || 0 : row.d || 0,
       losses: active ? S.m.ss.l || 0 : row.l || 0,

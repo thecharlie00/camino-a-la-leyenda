@@ -1520,3 +1520,19 @@ html.wide .lpanel > #lvpitch { width: 100%; max-width: calc((100vh - 150px) / 0.
 .famtbl th, .famtbl td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); }
 .famtbl th:nth-child(n+3), .famtbl td:nth-child(n+3) { text-align: right; }
 .famtbl tr.mine td { color: var(--led); }
+
+/* ===== pixel art 5.4: iconos y sprites ===== */
+.pxi { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -0.2em; line-height: 0; }
+.pxi svg { width: 100%; height: 100%; display: block; }
+svg.px, svg.pxi-svg { image-rendering: pixelated; shape-rendering: crispEdges; }
+svg.face.px { border-radius: 0; }
+.fav { border-radius: 5px; }
+.fav svg.face.px { border-radius: 5px; }
+.goat-honours { margin-top: 10px; }
+.goat-hon-t { font: 800 13px/1.2 var(--f-body); color: var(--led); letter-spacing: .04em; text-transform: uppercase; }
+.goat-hon-h { color: var(--mist); font-size: 11px; margin: 7px 0 4px; }
+.goat-hon { display: flex; flex-wrap: wrap; gap: 6px; }
+.goat-hon-i { display: inline-flex; align-items: center; gap: 5px; background: var(--tunnel); border-radius: 6px; padding: 3px 8px 3px 3px; max-width: 100%; }
+.goat-hon-i svg { flex: none; }
+.goat-hon-i b { font-size: 12px; font-weight: 700; overflow-wrap: anywhere; }
+.goat-hon-i em { font-style: normal; color: var(--led); font-weight: 800; font-size: 12px; margin-left: 4px; }
