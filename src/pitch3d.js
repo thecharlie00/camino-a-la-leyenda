@@ -41,6 +41,9 @@ var Pitch3D = (function () {
   /* El balón GLB mide 0,11 m de radio; el partido lo dibuja algo mayor para
    * que siga siendo legible en pantallas pequeñas y a la distancia de cámara. */
   var BALL_R = 0.11, BALL_SCALE = 2;
+  /* Dirección artística: estadio y jugadores vóxel con luz por píxel, sombras
+   * proyectadas, cielo, niebla de altura, focos y tonemapping fílmico. */
+  var VOXEL = true;
   var LIGHT = norm3([0.42, 0.86, 0.28]);
   var SHADOW_DIR = (function () { var l = Math.sqrt(LIGHT[0] * LIGHT[0] + LIGHT[2] * LIGHT[2]) || 1; return [-LIGHT[0] / l, -LIGHT[2] / l]; })();
   var BASE = {POR: [0.045, 0.5], LD: [0.24, 0.84], LI: [0.24, 0.16], DFC: [0.2, 0.5], MCD: [0.36, 0.5], MC: [0.46, 0.5], MCO: [0.58, 0.5],
@@ -56,7 +59,8 @@ var Pitch3D = (function () {
   var freezeWanted = false;
   var raf = 0, lastTs = 0, acc = 0, aiAcc = 0, histAcc = 0, frameCount = 0, fps = 0, fpsFrames = 0, fpsStart = 0;
   var quality = 1, staticMesh = null, staticCount = 0, dyn = null, dynCapacity = 0;
-  var program = null, locations = null, staticBuf = null, dynBuf = null;
+  var crowdMeshes = null, crowdBufs = [null, null], crowdCounts = [0, 0];
+  var program = null, locations = null, progFull = null, locFull = null, progLite = null, locLite = null, staticBuf = null, dynBuf = null;
   var assetModels = null, assetState = "none", assetFrameTris = 0, assetFramePlayers = 0, assetFrameBall = 0;
   var viewW = 1, viewH = 1, dpr = 1;
   var opts = {}, colors = SHIRT.slice(), reduced = false;
@@ -149,19 +153,28 @@ var Pitch3D = (function () {
   function ownX(side) { return sim.attack[side] > 0 ? 0 : LEN; }
 
   /* ------------------------------------------------------------------ malla */
+  /* Vértice de 10 floats: posición (3), albedo (3), normal (3) y material (1).
+   * El material empaqueta el código (parte entera) y la oclusión ambiental
+   * (parte decimal): la luz se calcula en la GPU, por píxel. Códigos:
+   *   0 mate · 1 brillante · 2 metal · 3 césped · 4 emisivo · 5 afición (salta)
+   *   6 cielo · 7 sin luz (partículas) · 8 LED animado */
+  var FS = 10;
+  var MAT_MATTE = 0, MAT_GLOSS = 1, MAT_METAL = 2, MAT_GRASS = 3, MAT_EMIT = 4, MAT_CROWD = 5,
+    MAT_SKY = 6, MAT_UNLIT = 7, MAT_LED = 8;
 
   function Mesh(cap) {
     this.a = new Float32Array(cap || 16384);
     this.n = 0;
-    /* El campo es estático y no recibe brillos especulares; la malla dinámica
-     * de jugadores y balón sí. */
+    /* La malla dinámica deja brillar los materiales claros (balón, botas). */
     this.spec = false;
     this.metallic = 0;
     this.roughness = 1;
+    /* Código de material forzado (-1: se deduce de metalicidad y rugosidad). */
+    this.code = -1;
   }
   Mesh.prototype.reset = function () { this.n = 0; };
   Mesh.prototype.reserve = function (verts) {
-    var need = this.n + verts * 6;
+    var need = this.n + verts * FS;
     if (need <= this.a.length) return;
     var cap = this.a.length;
     while (cap < need) cap *= 2;
@@ -170,76 +183,100 @@ var Pitch3D = (function () {
   Mesh.prototype.tri = function (A, B, C, c) {
     this.tri9(A[0], A[1], A[2], B[0], B[1], B[2], C[0], C[1], C[2], c[0], c[1], c[2]);
   };
-  /* Variante sin allocations para el skinning: recibe las tres posiciones
-   * ya transformadas y calcula la luz plana y el brillo especular. */
+  Mesh.prototype.matCode = function (r, g, b) {
+    if (this.code >= 0) return this.code;
+    if (this.metallic > 0.5) return MAT_METAL;
+    if (this.roughness < 0.6) return MAT_GLOSS;
+    if (this.spec) {
+      var mx = r > g ? (r > b ? r : b) : (g > b ? g : b), mn = r < g ? (r < b ? r : b) : (g < b ? g : b);
+      if (mx > 0.78 && mx - mn < 0.12) return MAT_GLOSS;
+    }
+    return MAT_MATTE;
+  };
+  /* Sin allocations (skinning, vóxeles): normal plana del triángulo y
+   * oclusión por vértice. La luz la pone el shader. */
   Mesh.prototype.tri9 = function (ax, ay, az, bx, by, bz, cx, cy, cz, r, g, b) {
+    this.triAO(ax, ay, az, bx, by, bz, cx, cy, cz, r, g, b, 1, 1, 1);
+  };
+  Mesh.prototype.triAO = function (ax, ay, az, bx, by, bz, cx, cy, cz, r, g, b, o0, o1, o2) {
     this.reserve(3);
     var ux = bx - ax, uy = by - ay, uz = bz - az;
     var vx = cx - ax, vy = cy - ay, vz = cz - az;
     var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
-    var l = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
-    var il = 1 / l;
-    var ndl = (nx * LIGHT[0] + ny * LIGHT[1] + nz * LIGHT[2]) * il;
-    var key = ndl > 0 ? ndl : 0, back = ndl < 0 ? -ndl : 0, up = ny > 0 ? ny * il : 0;
-    /* Clave cálida desde arriba, relleno frío y hemisférica: da volumen a las
-     * caras sin convertir el campo en una superficie plana. */
-    var lit = 0.60 + 0.30 * key + 0.10 * back + 0.10 * up;
-    var warm = 0.035 * key;
-    var rough = clamp(this.roughness, 0.04, 1), metal = clamp(this.metallic, 0, 1);
-    var br = r, bg = g, bb = b;
-    /* Los metales reflejan la luz en lugar de difundirla: se reduce su difuso. */
-    var diff = 1 - metal * 0.88;
-    r = clamp(br * lit * (1 + warm) * diff, 0, 1);
-    g = clamp(bg * lit * diff, 0, 1);
-    b = clamp(bb * lit * (1 - warm * 0.7) * diff, 0, 1);
-    var specEnabled = quality > 0.55 && (this.spec || metal > 0.001 || rough < 0.95);
-    if (specEnabled) {
-      /* Especular barato basado en GGX/Fresnel. El brillo depende de la
-       * rugosidad del material; los colores claros y poco saturados siguen
-       * brillando aunque no tengan datos PBR explícitos. */
-      var mx = br > bg ? (br > bb ? br : bb) : (bg > bb ? bg : bb);
-      var mn = br < bg ? (br < bb ? br : bb) : (bg < bb ? bg : bb);
-      var colorGloss = this.spec ? (clamp((mx - 0.55) / 0.4, 0, 1) *
-        (1 - clamp(((mx - mn) - 0.06) / 0.24, 0, 1))) : 1;
-      var gloss = metal > 0.01 ? 1 : colorGloss;
-      if (gloss > 0.01 || metal > 0.01) {
-        var pxc = (ax + bx + cx) / 3, pyc = (ay + by + cy) / 3, pzc = (az + bz + cz) / 3;
-        var ex = cam.x - pxc, ey = cam.height - pyc, ez = cam.z + cam.back - pzc;
-        var el = Math.sqrt(ex * ex + ey * ey + ez * ez) || 1;
-        var hx = LIGHT[0] + ex / el, hy = LIGHT[1] + ey / el, hz = LIGHT[2] + ez / el;
-        var hl = Math.sqrt(hx * hx + hy * hy + hz * hz) || 1;
-        var ndh = (nx * hx + ny * hy + nz * hz) * il / hl;
-        if (ndh > 0) {
-          var exponent = 2 / (rough * rough) - 2;
-          if (!isFinite(exponent) || exponent < 1) exponent = 1;
-          if (exponent > 512) exponent = 512;
-          var spec = Math.pow(ndh, exponent);
-          var fresnel = 0.04 + 0.96 * Math.pow(1 - ndh, 5);
-          var sp = spec * (1 - rough * 0.65) * 0.38 * gloss * fresnel;
-          var sr = (1 - metal) * 1 + metal * br;
-          var sg = (1 - metal) * 1 + metal * bg;
-          var sb = (1 - metal) * 1 + metal * bb;
-          r = clamp(r + sp * sr, 0, 1); g = clamp(g + sp * sg * 0.97, 0, 1); b = clamp(b + sp * sb * 0.88, 0, 1);
-        }
-      }
-    }
+    var il = 1 / (Math.sqrt(nx * nx + ny * ny + nz * nz) || 1);
+    nx *= il; ny *= il; nz *= il;
+    r = clamp(r, 0, 1); g = clamp(g, 0, 1); b = clamp(b, 0, 1);
+    var code = this.matCode(r, g, b);
     var a = this.a, n = this.n;
     a[n] = ax; a[n + 1] = ay; a[n + 2] = az; a[n + 3] = r; a[n + 4] = g; a[n + 5] = b;
-    a[n + 6] = bx; a[n + 7] = by; a[n + 8] = bz; a[n + 9] = r; a[n + 10] = g; a[n + 11] = b;
-    a[n + 12] = cx; a[n + 13] = cy; a[n + 14] = cz; a[n + 15] = r; a[n + 16] = g; a[n + 17] = b;
-    this.n = n + 18;
+    a[n + 6] = nx; a[n + 7] = ny; a[n + 8] = nz; a[n + 9] = code + clamp(o0, 0, 1) * 0.98;
+    a[n + 10] = bx; a[n + 11] = by; a[n + 12] = bz; a[n + 13] = r; a[n + 14] = g; a[n + 15] = b;
+    a[n + 16] = nx; a[n + 17] = ny; a[n + 18] = nz; a[n + 19] = code + clamp(o1, 0, 1) * 0.98;
+    a[n + 20] = cx; a[n + 21] = cy; a[n + 22] = cz; a[n + 23] = r; a[n + 24] = g; a[n + 25] = b;
+    a[n + 26] = nx; a[n + 27] = ny; a[n + 28] = nz; a[n + 29] = code + clamp(o2, 0, 1) * 0.98;
+    this.n = n + 30;
+  };
+  /* Recalcula las normales planas de los triángulos escritos desde `start`
+   * (tras deformar o girar una malla ya escrita). */
+  Mesh.prototype.renormal = function (start) {
+    var a = this.a;
+    for (var i = start; i + 3 * FS <= this.n; i += 3 * FS) {
+      var ux = a[i + FS] - a[i], uy = a[i + FS + 1] - a[i + 1], uz = a[i + FS + 2] - a[i + 2];
+      var vx = a[i + 2 * FS] - a[i], vy = a[i + 2 * FS + 1] - a[i + 1], vz = a[i + 2 * FS + 2] - a[i + 2];
+      var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+      var il = 1 / (Math.sqrt(nx * nx + ny * ny + nz * nz) || 1);
+      for (var k = 0; k < 3; k++) { var o = i + k * FS; a[o + 6] = nx * il; a[o + 7] = ny * il; a[o + 8] = nz * il; }
+    }
   };
   Mesh.prototype.quad = function (A, B, C, D, c) { this.tri(A, B, C, c); this.tri(A, C, D, c); };
-  Mesh.prototype.box = function (x, y, z, w, h, d, c) {
+  /* Cara con oclusión por esquina (A,B abajo; C,D arriba en las cajas). */
+  Mesh.prototype.quadAO = function (A, B, C, D, c, oa, ob, oc, od) {
+    this.triAO(A[0], A[1], A[2], B[0], B[1], B[2], C[0], C[1], C[2], c[0], c[1], c[2], oa, ob, oc);
+    this.triAO(A[0], A[1], A[2], C[0], C[1], C[2], D[0], D[1], D[2], c[0], c[1], c[2], oa, oc, od);
+  };
+  /* Caja alineada a los ejes. `ao` oscurece la base de las caras laterales
+   * (oclusión de contacto típica del vóxel); `faces` omite caras que nunca se
+   * ven (bit 1 abajo, 2 atrás -z, 4 delante +z, 8 izq -x, 16 der +x). */
+  Mesh.prototype.box = function (x, y, z, w, h, d, c, ao, skip) {
     var x0 = x - w / 2, x1 = x + w / 2, y0 = y, y1 = y + h, z0 = z - d / 2, z1 = z + d / 2;
-    this.quad([x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], c);
-    this.quad([x1, y0, z1], [x0, y0, z1], [x0, y1, z1], [x1, y1, z1], c);
-    this.quad([x0, y0, z1], [x0, y0, z0], [x0, y1, z0], [x0, y1, z1], c);
-    this.quad([x1, y0, z0], [x1, y0, z1], [x1, y1, z1], [x1, y1, z0], c);
-    this.quad([x0, y1, z0], [x1, y1, z0], [x1, y1, z1], [x0, y1, z1], c);
-    this.quad([x0, y0, z1], [x1, y0, z1], [x1, y0, z0], [x0, y0, z0], c);
+    var lo = ao == null ? 1 : ao, sk = skip || 0;
+    if (!(sk & 2)) this.quadAO([x1, y0, z0], [x0, y0, z0], [x0, y1, z0], [x1, y1, z0], c, lo, lo, 1, 1);
+    if (!(sk & 4)) this.quadAO([x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1], c, lo, lo, 1, 1);
+    if (!(sk & 8)) this.quadAO([x0, y0, z0], [x0, y0, z1], [x0, y1, z1], [x0, y1, z0], c, lo, lo, 1, 1);
+    if (!(sk & 16)) this.quadAO([x1, y0, z1], [x1, y0, z0], [x1, y1, z0], [x1, y1, z1], c, lo, lo, 1, 1);
+    this.quadAO([x0, y1, z1], [x1, y1, z1], [x1, y1, z0], [x0, y1, z0], c, 1, 1, 1, 1);
+    if (!(sk & 1)) this.quadAO([x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1], c, lo, lo, lo, lo);
+  };
+  /* Caja orientada por una matriz 4x4 (columna mayor) desde un cubo en
+   * espacio local [x0..x1]x[y0..y1]x[z0..z1]; escribe las esquinas ya
+   * transformadas en `out` (24 floats). Base de los jugadores vóxel. */
+  function boxCorners(M, o, x0, y0, z0, x1, y1, z1, out) {
+    var xs = [x0, x1], ys = [y0, y1], zs = [z0, z1], k = 0;
+    for (var iz = 0; iz < 2; iz++) for (var iy = 0; iy < 2; iy++) for (var ix = 0; ix < 2; ix++) {
+      var px = xs[ix], py = ys[iy], pz = zs[iz];
+      out[k++] = M[o] * px + M[o + 4] * py + M[o + 8] * pz + M[o + 12];
+      out[k++] = M[o + 1] * px + M[o + 5] * py + M[o + 9] * pz + M[o + 13];
+      out[k++] = M[o + 2] * px + M[o + 6] * py + M[o + 10] * pz + M[o + 14];
+    }
+    return out;
+  }
+  /* Dibuja la caja de 8 esquinas (orden de boxCorners) con oclusión en la base. */
+  Mesh.prototype.cornerBox = function (q, c, lo) {
+    var self = this;
+    function V(i) { return [q[i * 3], q[i * 3 + 1], q[i * 3 + 2]]; }
+    /* índices: x + 2y + 4z */
+    var c000 = V(0), c100 = V(1), c010 = V(2), c110 = V(3), c001 = V(4), c101 = V(5), c011 = V(6), c111 = V(7);
+    lo = lo == null ? 0.82 : lo;
+    self.quadAO(c100, c000, c010, c110, c, lo, lo, 1, 1);   /* -z */
+    self.quadAO(c001, c101, c111, c011, c, lo, lo, 1, 1);   /* +z */
+    self.quadAO(c000, c001, c011, c010, c, lo, lo, 1, 1);   /* -x */
+    self.quadAO(c101, c100, c110, c111, c, lo, lo, 1, 1);   /* +x */
+    self.quadAO(c011, c111, c110, c010, c, 1, 1, 1, 1);     /* +y */
+    self.quadAO(c000, c100, c101, c001, c, lo, lo, lo, lo); /* -y */
   };
   Mesh.prototype.ellipsoid = function (cx, cy, cz, rx, ry, rz, c, seg, rings) {
+    /* Estilo vóxel: los volúmenes redondeados se convierten en bloques. */
+    if (VOXEL) { this.box(cx, cy - ry * 0.86, cz, rx * 1.72, ry * 1.72, rz * 1.72, c, 0.84); return; }
     seg = seg || 8; rings = rings || 5;
     for (var j = 0; j < rings; j++) {
       var p0 = -PI / 2 + j * PI / rings, p1 = -PI / 2 + (j + 1) * PI / rings;
@@ -327,217 +364,558 @@ var Pitch3D = (function () {
   var CROWD_COLS = [[0.86, 0.25, 0.19], [0.18, 0.34, 0.72], [0.92, 0.84, 0.20], [0.92, 0.92, 0.90],
     [0.12, 0.55, 0.30], [0.45, 0.18, 0.60], [0.10, 0.12, 0.15], [0.72, 0.36, 0.14]];
 
-  function crowdColor(i) {
+  function crowdColor(i, home) {
     var r = (i * 1103515245 + 12345) >>> 0;
+    /* La grada local va de su color; el resto mezcla camisetas. */
+    if (home === 0 && r % 5 < 3) return colors[0] || CROWD_COLS[0];
+    if (home === 1 && r % 5 < 3) return colors[1] || CROWD_COLS[1];
     if (r % 13 === 0) return colors[0] || CROWD_COLS[0];
     if (r % 17 === 0) return colors[1] || CROWD_COLS[1];
     return CROWD_COLS[(r >>> 4) % CROWD_COLS.length];
   }
 
-  function crowdQuad(m, x, y, z, w, h, c, face) {
-    var x0 = x - w / 2, x1 = x + w / 2;
-    if (face > 0) m.quad([x0, y, z], [x1, y, z], [x1, y + h, z], [x0, y + h, z], c);
-    else m.quad([x1, y, z], [x0, y, z], [x0, y + h, z], [x1, y + h, z], c);
+  /* ------------------------------------------------------------------ estadio vóxel */
+  var GRASS = [0.21, 0.37, 0.15];
+  var CONCRETE = [0.50, 0.50, 0.49], CONCRETE_D = [0.36, 0.36, 0.36], STEEL = [0.62, 0.64, 0.67], DARK = [0.10, 0.11, 0.12];
+  /* Un aficionado: cuerpo y cabeza en bloques; solo las caras que mira el
+   * campo (delante y arriba). `dir` es el eje hacia el campo: 0 +z, 1 -z, 2 +x, 3 -x. */
+  function fan(m, x, y, z, dir, shirt, skin, hair, seed) {
+    var bw = 0.42, bh = 0.50, bd = 0.30, hs = 0.28;
+    var skipBody = 1 | 8 | 16 | 2, skipHead = 1 | 2;
+    var along = dir < 2;
+    var w = along ? bw : bd, d = along ? bd : bw;
+    var faceSkip = dir === 0 ? (1 | 2 | 8 | 16) : dir === 1 ? (1 | 4 | 8 | 16) : dir === 2 ? (1 | 2 | 4 | 8) : (1 | 2 | 4 | 16);
+    m.box(x, y, z, w, bh, d, shirt, 0.7, faceSkip);
+    m.box(x, y + bh, z, along ? hs : hs, hs, along ? hs : hs, skin, 1, faceSkip);
+    if (seed % 3) m.box(x, y + bh + hs - 0.06, z + (dir === 0 ? -0.02 : dir === 1 ? 0.02 : 0), hs + 0.02, 0.08, hs + 0.02, hair, 1, faceSkip | (seed % 2 ? 0 : 0));
+    /* brazos en alto en algunos: bufanda o aplauso */
+    if (seed % 7 === 0) {
+      m.box(x - (along ? 0.26 : 0), y + bh - 0.05, z - (along ? 0 : 0.26), 0.1, 0.42, 0.1, shirt, 1, faceSkip);
+      m.box(x + (along ? 0.26 : 0), y + bh - 0.05, z + (along ? 0 : 0.26), 0.1, 0.42, 0.1, shirt, 1, faceSkip);
+    }
   }
-
-  /* Gradas llenas: quads verticales baratos (2 triángulos por cuerpo) que
-     aportan escala humana y color de afición sin texturas ni instancing. */
-  function buildCrowd(m) {
-    var i, x, z, r, y, face, c;
-    for (var side = 0; side < 2; side++) {
-      face = side === 0 ? 1 : -1;
-      for (var t = 0; t < 3; t++) {
-        y = 1.65 + t * 1.15 + 0.02;
-        for (var row = 0; row < 2; row++) {
-          z = side === 0 ? (-5.4 - t * 3.4 - 0.35 - row * 0.9) : (WID + 5.4 + t * 3.4 + 0.35 + row * 0.9);
-          for (x = -8.5; x < LEN + 8.5; x += 0.62) {
-            i = Math.round((x + 20) * 7 + t * 31 + row * 53 + side * 101);
-            r = (i * 1597 + 51749) >>> 0;
-            if (r % 23 === 0) continue;
-            c = crowdColor(i);
-            var hh = 0.47 + (r % 9) * 0.012;
-            crowdQuad(m, x + ((r % 5) - 2) * 0.025, y + (r % 3) * 0.015, z, 0.34, hh, c, face);
-            if (t < 2 || row === 0) {
-              crowdQuad(m, x + ((r % 5) - 2) * 0.025, y + hh + 0.035, z, 0.17, 0.17,
-                SKINS[(r >>> 7) % SKINS.length], face);
-            }
-          }
+  /* Una grada escalonada: filas de hormigón, asientos corridos y afición.
+   * x0..x1 a lo largo; d0 es la primera fila (más cerca del campo) y `out`
+   * el sentido hacia fuera del estadio. */
+  function standRows(m, o) {
+    var rows = o.rows, step = o.step || 0.82, rise = o.rise || 0.46;
+    for (var r = 0; r < rows; r++) {
+      var dd = o.d0 + o.out * (r * step + step / 2), yy = o.y0 + r * rise;
+      var cut = function (x) { return o.gap && r < o.gapRows && x > o.gap[0] && x < o.gap[1]; };
+      var segs = o.gap && r < o.gapRows ? [[o.a0, o.gap[0]], [o.gap[1], o.a1]] : [[o.a0, o.a1]];
+      for (var si = 0; si < segs.length; si++) {
+        var a0 = segs[si][0], a1 = segs[si][1], mid = (a0 + a1) / 2, len = a1 - a0;
+        m.code = MAT_MATTE;
+        var conc = r % 2 ? CONCRETE : shade(CONCRETE, 0.94);
+        if (o.axis === "x") {
+          m.box(mid, 0, dd, len, yy + rise * 0.15, step, conc, 0.75, 1);
+          m.box(mid, yy + rise * 0.15, dd + o.out * step * 0.18, len, 0.24, step * 0.36, o.seat(r), 0.8, 1);
+        } else {
+          m.box(dd, 0, mid, step, yy + rise * 0.15, len, conc, 0.75, 1);
+          m.box(dd + o.out * step * 0.18, yy + rise * 0.15, mid, step * 0.36, 0.24, len, o.seat(r), 0.8, 1);
+        }
+        if (o.noFans || opts.noCrowd) continue;
+        var cm = crowdMeshes || [m, m];
+        cm[0].code = cm[1].code = MAT_CROWD;
+        for (var t = a0 + 0.35; t < a1 - 0.2; t += 0.58) {
+          if (cut(t)) continue;
+          var seed = ((Math.round(t * 17) * 2654435761) ^ (r * 40503 + o.salt * 9176)) >>> 0;
+          if (seed % 100 >= o.fill) continue;
+          var sh = crowdColor(seed, o.home), sk = SKINS[(seed >>> 5) % SKINS.length], hr = HAIRS[(seed >>> 9) % HAIRS.length];
+          var jit = ((seed >>> 13) % 5 - 2) * 0.03;
+          var fm = cm[(seed >>> 3) & 1];
+          if (o.axis === "x") fan(fm, t + jit, yy + rise * 0.15 + 0.02, dd + o.out * step * 0.05, o.out < 0 ? 0 : 1, sh, sk, hr, seed);
+          else fan(fm, dd + o.out * step * 0.05, yy + rise * 0.15 + 0.02, t + jit, o.out < 0 ? 2 : 3, sh, sk, hr, seed);
         }
       }
     }
-    for (var end = 0; end < 2; end++) {
-      face = end === 0 ? 1 : -1;
-      for (var t2 = 0; t2 < 3; t2++) {
-        y = 1.65 + t2 * 1.15 + 0.02;
-        for (var row2 = 0; row2 < 2; row2++) {
-          x = end === 0 ? (-6.4 - t2 * 3.4 - 0.35 - row2 * 0.9) : (LEN + 6.4 + t2 * 3.4 + 0.35 + row2 * 0.9);
-          for (z = 5; z < WID - 5; z += 0.64) {
-            i = Math.round(z * 11 + t2 * 37 + row2 * 71 + end * 131);
-            r = (i * 1597 + 51749) >>> 0;
-            if (r % 23 === 0) continue;
-            c = crowdColor(i + 7);
-            var hh2 = 0.47 + (r % 9) * 0.012;
-            crowdQuad(m, x, y + (r % 3) * 0.015, z + ((r % 5) - 2) * 0.025, 0.34, hh2, c, face);
-            if (t2 < 2 || row2 === 0) {
-              crowdQuad(m, x, y + hh2 + 0.035, z + ((r % 5) - 2) * 0.025, 0.17, 0.17,
-                SKINS[(r >>> 7) % SKINS.length], face);
-            }
-          }
-        }
-      }
+    m.code = -1;
+    if (crowdMeshes) crowdMeshes[0].code = crowdMeshes[1].code = -1;
+    return o.y0 + rows * rise;
+  }
+  function seatFn(base, alt) { return function (r) { return r % 2 ? base : shade(base, 0.88); }; }
+  /* Torre de focos de celosía con la cabeza de lámparas mirando al campo. */
+  function tower(m, x, z) {
+    var H = 34, s = 0.9;
+    m.code = MAT_METAL;
+    for (var cx = -1; cx <= 1; cx += 2) for (var cz = -1; cz <= 1; cz += 2) m.box(x + cx * s, 0, z + cz * s, 0.22, H, 0.22, STEEL, 0.6);
+    for (var y = 2; y < H; y += 3) {
+      m.box(x, y, z - s, 2 * s + 0.2, 0.14, 0.12, STEEL); m.box(x, y, z + s, 2 * s + 0.2, 0.14, 0.12, STEEL);
+      m.box(x - s, y, z, 0.12, 0.14, 2 * s + 0.2, STEEL); m.box(x + s, y, z, 0.12, 0.14, 2 * s + 0.2, STEEL);
     }
+    m.code = MAT_MATTE;
+    var dx = LEN / 2 - x, dz = MIDZ - z, l = Math.sqrt(dx * dx + dz * dz); dx /= l; dz /= l;
+    m.box(x, H, z, 6.4, 3.4, 1.0, DARK, 0.8);
+    m.code = MAT_EMIT;
+    for (var lx = -2; lx <= 2; lx++) for (var ly = 0; ly < 3; ly++) {
+      var px = x + lx * 1.15 * Math.abs(dz) + dx * 0.56, pz = z + lx * 1.15 * Math.abs(dx) * (dz > 0 ? 1 : -1) * 0 + dz * 0.56;
+      var ox = Math.abs(dz) > Math.abs(dx) ? lx * 1.15 : 0, oz = Math.abs(dz) > Math.abs(dx) ? 0 : lx * 1.15;
+      m.box(x + ox + dx * 0.55, H + 0.35 + ly * 1.0, z + oz + dz * 0.55, Math.abs(dz) > Math.abs(dx) ? 0.9 : 0.12, 0.75, Math.abs(dz) > Math.abs(dx) ? 0.12 : 0.9, [1.0, 0.97, 0.86], 1);
+    }
+    m.code = -1;
+    LAMPS.push([x + dx * 1.5, H + 1.7, z + dz * 1.5, 7, 0.9]);
+  }
+  /* Valla LED: marco oscuro y pantalla animada hacia el campo. */
+  function ledBoard(m, x, z, len, axis, toward, cols) {
+    m.code = MAT_MATTE;
+    if (axis === "x") m.box(x, 0, z, len, 0.95, 0.28, DARK, 0.7); else m.box(x, 0, z, 0.28, 0.95, len, DARK, 0.7);
+    m.code = MAT_LED;
+    var n = Math.max(1, Math.round(len / 1.0));
+    for (var i = 0; i < n; i++) {
+      var t0 = -len / 2 + i * len / n, t1 = t0 + len / n, c = cols[Math.floor(i / 3) % cols.length];
+      if ((i * 7) % 5 === 0) c = mix(c, [1, 1, 1], 0.55);
+      var y0 = 0.14, y1 = 0.86, f = toward * 0.15;
+      if (axis === "x") m.quad([x + t0, y0, z + f], [x + t1, y0, z + f], [x + t1, y1, z + f], [x + t0, y1, z + f], c);
+      else m.quad([x + f, y0, z + t0], [x + f, y0, z + t1], [x + f, y1, z + t1], [x + f, y1, z + t0], c);
+    }
+    m.code = -1;
   }
 
-  function buildRoof(m) {
-    var roof = [0.045, 0.055, 0.075], beam = [0.11, 0.13, 0.16], light = [0.82, 0.86, 0.74];
-    for (var side = 0; side < 2; side++) {
-      var s = side ? 1 : -1, z0 = side ? WID + 6 : -6, z1 = side ? WID + 17 : -17;
-      m.quad([-11, side ? 7.7 : 8.3, z0], [LEN + 11, side ? 7.7 : 8.3, z0],
-        [LEN + 11, side ? 8.3 : 7.7, z1], [-11, side ? 8.3 : 7.7, z1], roof);
-      m.box(LEN / 2, side ? 7.5 : 7.45, z0, LEN + 22, 0.18, 0.28, beam);
-      for (var x = -8; x <= LEN + 8; x += 12) {
-        m.box(x, 3.9, z1, 0.22, 3.7, 0.22, beam);
-        m.box(x, 7.35, (z0 + z1) / 2, 0.16, 0.16, Math.abs(z1 - z0), beam);
-      }
-      /* Paneles de focos bajo la cubierta: manchas claras que dan profundidad. */
-      for (var lx = 8; lx < LEN; lx += 23) {
-        m.box(lx, side ? 7.1 : 6.95, z0 + s * 0.4, 3.4, 0.10, 0.36, light);
-      }
+  function buildStadium(m) {
+    var c0 = colors[0] || [0.8, 0.2, 0.2], c1 = colors[1] || [0.2, 0.4, 0.8];
+    var seatHome = shade(c0, 0.8), seatAway = shade(c1, 0.8), seatN = [0.30, 0.33, 0.38];
+    /* Tribuna principal (z<0): dos anfiteatros con cubierta y túnel. */
+    var top1 = standRows(m, {axis: "x", a0: -10, a1: LEN + 10, d0: -6.2, out: -1, y0: 0.5, rows: 11, seat: seatFn(seatHome),
+      fill: 88, home: 0, salt: 1, gap: [TUNNEL_X - 3.8, TUNNEL_X + 3.8], gapRows: 5});
+    m.code = MAT_MATTE;
+    m.box(LEN / 2, top1, -6.2 - 11 * 0.82 - 1.2, LEN + 20, 1.1, 2.4, CONCRETE_D, 0.7);  /* vomitorio / pasillo */
+    var top2 = standRows(m, {axis: "x", a0: -10, a1: LEN + 10, d0: -6.2 - 11 * 0.82 - 2.4, out: -1, y0: top1 + 1.1, rows: 10, seat: seatFn(seatHome),
+      fill: 80, home: 0, salt: 2, rise: 0.56});
+    var backZ = -6.2 - 21 * 0.82 - 2.6;
+    m.box(LEN / 2, 0, backZ - 0.4, LEN + 22, top2 + 1.6, 0.8, CONCRETE_D, 0.6);
+    /* cubierta: cerchas metálicas y chapa, con la línea de focos en el borde */
+    var roofY = Math.max(top2 + 3.2, 15);
+    m.code = MAT_MATTE;
+    m.box(LEN / 2, roofY, (backZ - 4.6) / 2, LEN + 24, 0.35, Math.abs(backZ) - 3.6, [0.22, 0.24, 0.27], 0.9);
+    m.code = MAT_METAL;
+    for (var tx = -10; tx <= LEN + 10; tx += 7.5) {
+      m.box(tx, roofY - 1.2, (backZ - 4.6) / 2, 0.3, 1.2, Math.abs(backZ) - 3.6, STEEL, 0.8);
+      m.box(tx, 0, backZ - 0.2, 0.5, roofY, 0.5, STEEL, 0.7);
     }
-    /* Boca de túnel en la grada larga, al nivel del césped. */
-    m.box(LEN / 2, 0, -5.25, 6.4, 2.15, 0.18, [0.018, 0.022, 0.028]);
-    m.box(LEN / 2, 2.15, -5.55, 7.2, 0.22, 0.9, beam);
+    m.box(LEN / 2, roofY - 0.6, -4.8, LEN + 24, 0.6, 0.5, STEEL);
+    m.code = MAT_EMIT;
+    for (var lx = -6; lx <= LEN + 6; lx += 9) {
+      m.box(lx, roofY - 0.95, -4.75, 2.6, 0.32, 0.3, [1.0, 0.96, 0.84], 1);
+      LAMPS.push([lx, roofY - 0.8, -4.4, 2.4, 0.5]);
+    }
+    m.code = -1;
+    /* túnel con marquesina de los colores locales */
+    m.code = MAT_MATTE;
+    m.box(TUNNEL_X - 3.9, 0, -5.4, 0.4, 2.7, 4.2, CONCRETE_D, 0.6);
+    m.box(TUNNEL_X + 3.9, 0, -5.4, 0.4, 2.7, 4.2, CONCRETE_D, 0.6);
+    m.box(TUNNEL_X, 2.7, -5.6, 8.2, 0.35, 4.6, c0, 0.8);
+    m.box(TUNNEL_X, 0, -7.6, 7.4, 2.7, 0.3, [0.02, 0.02, 0.025], 0.9);
+    /* banquillos vóxel */
+    [-1, 1].forEach(function (sd) {
+      var bx = LEN / 2 + sd * 9;
+      m.box(bx, 0, -4.4, 7.2, 0.5, 1.3, DARK, 0.7);
+      m.box(bx, 0.5, -4.85, 7.2, 0.55, 0.35, sd < 0 ? seatHome : seatAway, 0.8);
+      m.box(bx, 0, -5.1, 7.4, 2.1, 0.12, [0.70, 0.78, 0.82], 0.8);
+      m.box(bx, 2.1, -4.5, 7.6, 0.12, 1.5, [0.70, 0.78, 0.82], 0.9);
+    });
+    /* Tribuna de enfrente (lado de cámara): baja y sin cubierta para no tapar el plano. */
+    var topF = standRows(m, {axis: "x", a0: -10, a1: LEN + 10, d0: WID + 6.2, out: 1, y0: 0.5, rows: 14, seat: seatFn(seatN),
+      fill: 84, home: -1, salt: 3});
+    m.code = MAT_MATTE;
+    m.box(LEN / 2, 0, WID + 6.2 + 14 * 0.82 + 0.4, LEN + 22, topF + 1.2, 0.8, CONCRETE_D, 0.6);
+    m.code = -1;
+    /* Fondos: local a la izquierda, visitante a la derecha, con videomarcador. */
+    [0, 1].forEach(function (e) {
+      var out = e ? 1 : -1, d0 = e ? LEN + 6.2 : -6.2;
+      var top = standRows(m, {axis: "z", a0: -4, a1: WID + 4, d0: d0, out: out, y0: 0.5, rows: 13, seat: seatFn(e ? seatAway : seatHome),
+        fill: e ? 72 : 90, home: e ? 1 : 0, salt: 5 + e});
+      var back = d0 + out * (13 * 0.82 + 0.4);
+      m.code = MAT_MATTE;
+      m.box(back, 0, MIDZ, 0.8, top + 1.4, WID + 10, CONCRETE_D, 0.6);
+      /* videomarcador */
+      m.box(back + out * 0.6, top + 1.4, MIDZ, 0.6, 5.6, 16, DARK, 0.9);
+      m.code = MAT_EMIT;
+      m.quad([back - out * 0.05, top + 1.9, MIDZ - 7.4], [back - out * 0.05, top + 1.9, MIDZ], [back - out * 0.05, top + 6.5, MIDZ], [back - out * 0.05, top + 6.5, MIDZ - 7.4], shade(c0, 0.75));
+      m.quad([back - out * 0.05, top + 1.9, MIDZ], [back - out * 0.05, top + 1.9, MIDZ + 7.4], [back - out * 0.05, top + 6.5, MIDZ + 7.4], [back - out * 0.05, top + 6.5, MIDZ], shade(c1, 0.75));
+      m.code = -1;
+      /* cubierta de fondo */
+      m.code = MAT_MATTE;
+      m.box(d0 + out * 6.5, top + 7.6, MIDZ, 13.5, 0.3, WID + 14, [0.22, 0.24, 0.27], 0.9);
+      m.code = MAT_METAL;
+      for (var tz = -4; tz <= WID + 4; tz += 9) m.box(back, 0, tz, 0.45, top + 7.6, 0.45, STEEL, 0.7);
+      m.code = -1;
+    });
+    /* esquinas: bloques escalonados que cierran el estadio */
+    [[-10, -6.2], [LEN + 10, -6.2], [-10, WID + 6.2], [LEN + 10, WID + 6.2]].forEach(function (c, k) {
+      var sx = k % 2 ? 1 : -1, sz = k < 2 ? -1 : 1;
+      for (var r = 0; r < 8; r++) {
+        m.box(c[0] + sx * (2 + r * 0.82), 0, c[1] + sz * (2 + r * 0.82), 4 + r * 1.64, 0.5 + r * 0.46, 4 + r * 1.64, r % 2 ? CONCRETE : shade(CONCRETE, 0.92), 0.75, 1);
+      }
+    });
+    /* torres de focos */
+    TOWERS.forEach(function (t) { tower(m, t[0], t[2]); });
+    /* Ciudad al fondo: bloques con ventanas que se encienden de noche. */
+    var city = [[0.20, 0.22, 0.26], [0.26, 0.25, 0.24], [0.17, 0.19, 0.23], [0.30, 0.29, 0.28]];
+    for (var i = 0; i < 46; i++) {
+      var ang = i / 46 * TAU + 0.07 * Math.sin(i * 3.7), rad = 150 + (i * 37) % 32;
+      var bx2 = LEN / 2 + Math.cos(ang) * rad, bz2 = MIDZ + Math.sin(ang) * rad * 0.82;
+      var bw = 10 + (i * 13) % 14, bh = 14 + (i * 29) % 46, bd = 10 + (i * 7) % 12;
+      m.code = MAT_MATTE; m.box(bx2, 0, bz2, bw, bh, bd, city[i % city.length], 0.7);
+      m.code = MAT_EMIT;
+      for (var wy = 4; wy < bh - 2; wy += 6) for (var wk = 0; wk < 3; wk++) {
+        if (((i * 31 + wy * 7 + wk * 13) % 5) > 1) continue;
+        var wx = bx2 + (wk - 1) * bw * 0.28, nz = bz2 + (Math.sin(ang) > 0 ? -1 : 1) * (bd / 2 + 0.05);
+        m.quad([wx - 1.1, wy, nz], [wx + 1.1, wy, nz], [wx + 1.1, wy + 1.4, nz], [wx - 1.1, wy + 1.4, nz], [0.55, 0.45, 0.25]);
+      }
+      m.code = -1;
+    }
   }
 
   function buildField(m) {
-    var green = [0.055, 0.30, 0.13], stripe = [0.065, 0.35, 0.15], dark = [0.028, 0.075, 0.05];
-    var board = [0.12, 0.24, 0.27], stand = [0.055, 0.075, 0.10], tier = [0.085, 0.105, 0.14];
-    m.quad([-38, -0.08, -24], [LEN + 38, -0.08, -24], [LEN + 38, -0.08, WID + 24], [-38, -0.08, WID + 24], dark);
-    m.quad([0, 0, 0], [LEN, 0, 0], [LEN, 0, WID], [0, 0, WID], green);
-    for (var i = 0; i < 12; i++) if (i % 2 === 0) m.quad([i * LEN / 12, 0.008, 0], [(i + 1) * LEN / 12, 0.008, 0], [(i + 1) * LEN / 12, 0.008, WID], [i * LEN / 12, 0.008, WID], stripe);
-
-    m.line(0, 0, LEN, 0, WHITE, 0.13); m.line(LEN, 0, LEN, WID, WHITE, 0.13);
-    m.line(LEN, WID, 0, WID, WHITE, 0.13); m.line(0, WID, 0, 0, WHITE, 0.13);
-    m.line(LEN / 2, 0, LEN / 2, WID, WHITE, 0.12);
-    m.ring(LEN / 2, MIDZ, 9.15, 0.13, WHITE, 40);
-    m.circle(LEN / 2, MIDZ, 0.11, WHITE, 10);
+    /* suelo exterior, pista y césped (el shader pinta franjas, losetas y desgaste) */
+    m.code = MAT_MATTE;
+    m.quad([-240, -0.06, -240], [LEN + 240, -0.06, -240], [LEN + 240, -0.06, WID + 240], [-240, -0.06, WID + 240], [0.24, 0.25, 0.24]);
+    m.quad([-6, -0.03, -5.2], [LEN + 6, -0.03, -5.2], [LEN + 6, -0.03, WID + 5.2], [-6, -0.03, WID + 5.2], [0.30, 0.22, 0.17]);
+    m.code = MAT_GRASS;
+    /* rejilla (no un único quad) para que la variante ligera ilumine por vértice */
+    var GX = 28, GZ = 18, gx0 = -4.6, gz0 = -3.6, gdx = (LEN + 9.2) / GX, gdz = (WID + 7.2) / GZ;
+    for (var gi = 0; gi < GX; gi++) for (var gj = 0; gj < GZ; gj++) {
+      var ax = gx0 + gi * gdx, az = gz0 + gj * gdz;
+      m.quad([ax, 0, az], [ax + gdx, 0, az], [ax + gdx, 0, az + gdz], [ax, 0, az + gdz], GRASS);
+    }
+    m.code = MAT_MATTE;
+    var LW = [0.93, 0.95, 0.92];
+    m.line(0, 0, LEN, 0, LW, 0.12, 0.012); m.line(LEN, 0, LEN, WID, LW, 0.12, 0.012);
+    m.line(LEN, WID, 0, WID, LW, 0.12, 0.012); m.line(0, WID, 0, 0, LW, 0.12, 0.012);
+    m.line(LEN / 2, 0, LEN / 2, WID, LW, 0.12, 0.012);
+    m.ring(LEN / 2, MIDZ, 9.15, 0.12, LW, 48, 0.012);
+    m.circle(LEN / 2, MIDZ, 0.13, LW, 10, 0.013);
     [0, LEN].forEach(function (end) {
       var dir = end === 0 ? 1 : -1, x = end;
-      m.line(x, MIDZ - 20.16, x + dir * 16.5, MIDZ - 20.16, WHITE, 0.12);
-      m.line(x + dir * 16.5, MIDZ - 20.16, x + dir * 16.5, MIDZ + 20.16, WHITE, 0.12);
-      m.line(x + dir * 16.5, MIDZ + 20.16, x, MIDZ + 20.16, WHITE, 0.12);
-      m.line(x, MIDZ - 9.16, x + dir * 5.5, MIDZ - 9.16, WHITE, 0.1);
-      m.line(x + dir * 5.5, MIDZ - 9.16, x + dir * 5.5, MIDZ + 9.16, WHITE, 0.1);
-      m.line(x + dir * 5.5, MIDZ + 9.16, x, MIDZ + 9.16, WHITE, 0.1);
-      m.circle(x + dir * 11, MIDZ, 0.11, WHITE, 10);
-      /* Portería: se sustituye por el GLB del estadio si está disponible. Si no,
-       * se conserva la geometría procedural anterior como fallback. */
-      var yawGoal = end === 0 ? PI / 2 : -PI / 2;
-      if (!appendStaticAsset(m, "goal_lod1", end, MIDZ, yawGoal)) {
-        var z1 = MIDZ - POST, z2 = MIDZ + POST, back = end === 0 ? -1.9 : LEN + 1.9;
-        m.box(x, 0, z1, 0.14, BAR, 0.14, [0.94, 0.96, 0.91]);
-        m.box(x, 0, z2, 0.14, BAR, 0.14, [0.94, 0.96, 0.91]);
-        m.box(x, BAR - 0.07, MIDZ, 0.14, 0.14, POST * 2, [0.94, 0.96, 0.91]);
-        m.box(back, 0, z1, 0.08, 2.35, 0.08, NET); m.box(back, 0, z2, 0.08, 2.35, 0.08, NET);
-        m.box(back, 2.3, MIDZ, 0.08, 0.08, POST * 2, NET);
-        for (var y = 0.3; y < 2.3; y += 0.42) m.box(back, y, MIDZ, 0.025, 0.025, POST * 2, NET);
-        for (var zz = -POST + 0.6; zz < POST; zz += 0.7) m.box(back, 0.05, MIDZ + zz, 0.025, 2.32, 0.025, NET);
-        for (var yy = 0.45; yy < 2.2; yy += 0.6) {
-          m.box((x + back) / 2, yy, z1, Math.abs(back - x), 0.025, 0.025, NET);
-          m.box((x + back) / 2, yy, z2, Math.abs(back - x), 0.025, 0.025, NET);
-        }
+      m.line(x, MIDZ - 20.16, x + dir * 16.5, MIDZ - 20.16, LW, 0.12, 0.012);
+      m.line(x + dir * 16.5, MIDZ - 20.16, x + dir * 16.5, MIDZ + 20.16, LW, 0.12, 0.012);
+      m.line(x + dir * 16.5, MIDZ + 20.16, x, MIDZ + 20.16, LW, 0.12, 0.012);
+      m.line(x, MIDZ - 9.16, x + dir * 5.5, MIDZ - 9.16, LW, 0.12, 0.012);
+      m.line(x + dir * 5.5, MIDZ - 9.16, x + dir * 5.5, MIDZ + 9.16, LW, 0.12, 0.012);
+      m.line(x + dir * 5.5, MIDZ + 9.16, x, MIDZ + 9.16, LW, 0.12, 0.012);
+      m.circle(x + dir * 11, MIDZ, 0.13, LW, 10, 0.013);
+      /* arco del área */
+      for (var k = 0; k < 14; k++) {
+        var a0 = -0.93 + k * 1.86 / 14, a1 = -0.93 + (k + 1) * 1.86 / 14;
+        m.line(x + dir * (11 + Math.cos(a0) * 9.15), MIDZ + Math.sin(a0) * 9.15, x + dir * (11 + Math.cos(a1) * 9.15), MIDZ + Math.sin(a1) * 9.15, LW, 0.11, 0.012);
       }
+      /* Portería vóxel: postes blancos brillantes y red de malla fina. */
+      var z1 = MIDZ - POST, z2 = MIDZ + POST, back = end === 0 ? -2.0 : LEN + 2.0, mid = (x + back) / 2, dep = Math.abs(back - x);
+      m.code = MAT_GLOSS;
+      var PW = [0.96, 0.97, 0.95];
+      m.box(x, 0, z1, 0.14, BAR, 0.14, PW, 0.9); m.box(x, 0, z2, 0.14, BAR, 0.14, PW, 0.9);
+      m.box(x, BAR - 0.07, MIDZ, 0.14, 0.14, POST * 2 + 0.14, PW);
+      m.code = MAT_MATTE;
+      var NETC = [0.86, 0.88, 0.86];
+      m.box(back, 0, z1, 0.08, 1.9, 0.08, NETC); m.box(back, 0, z2, 0.08, 1.9, 0.08, NETC);
+      m.box(mid, BAR - 0.05, z1, dep, 0.05, 0.05, NETC); m.box(mid, BAR - 0.05, z2, dep, 0.05, 0.05, NETC);
+      /* laterales fijos; techo y fondo son la red con física (drawNets) */
+      for (var xx = 0.36; xx < dep; xx += 0.36) {
+        var nx = x - dir * xx, ny = BAR - (BAR - 1.9) * (xx / dep);
+        m.box(nx, 0, z1, 0.025, ny, 0.025, NETC); m.box(nx, 0, z2, 0.025, ny, 0.025, NETC);
+      }
+      for (var sy = 0.36; sy < 1.9; sy += 0.36) {
+        m.box(mid, sy, z1, dep, 0.025, 0.025, NETC); m.box(mid, sy, z2, dep, 0.025, 0.025, NETC);
+      }
+      m.code = -1;
     });
-    /* Vallas publicitarias: GLB del estadio si está disponible; si no, las
-     * cajas procedurales anteriores. */
-    if (!(assetModels && assetModels.static && assetModels.static.ad_board_lod0)) {
-      for (var bx = 5; bx < LEN; bx += 10) {
-        var c0 = (bx / 10) % 2 ? [0.10, 0.28, 0.42] : [0.34, 0.14, 0.10];
-        m.box(bx, 0.02, -1.4, 8.6, 0.9, 0.2, c0); m.box(bx, 0.02, WID + 1.4, 8.6, 0.9, 0.2, c0);
-      }
-    } else {
-      for (var abx = 1.5; abx < LEN; abx += 3) {
-        appendStaticAsset(m, "ad_board_lod0", abx, -1.0, 0);
-        appendStaticAsset(m, "ad_board_lod0", abx, WID + 1.0, PI);
-      }
-    }
-    /* Props de estadio: banderines, banquillos y barreras. Solo se añaden si
-     * sus GLB están disponibles; no duplican la geometría procedural. */
-    if (assetModels && assetModels.static && assetModels.static.corner_flag_lod0) {
-      appendStaticAsset(m, "corner_flag_lod0", 0, 0, 0);
-      appendStaticAsset(m, "corner_flag_lod0", LEN, 0, PI);
-      appendStaticAsset(m, "corner_flag_lod0", 0, WID, 0);
-      appendStaticAsset(m, "corner_flag_lod0", LEN, WID, PI);
-    }
-    if (assetModels && assetModels.static && assetModels.static.bench_lod0) {
-      appendStaticAsset(m, "bench_lod0", LEN / 2 - 6, -4, 0);
-      appendStaticAsset(m, "bench_lod0", LEN / 2 + 6, -4, 0);
-      appendStaticAsset(m, "bench_lod0", LEN / 2 - 6, WID + 4, PI);
-      appendStaticAsset(m, "bench_lod0", LEN / 2 + 6, WID + 4, PI);
-    }
-    if (assetModels && assetModels.static && assetModels.static.barrier_lod0) {
-      for (var brx = 0; brx <= LEN; brx += 2) {
-        appendStaticAsset(m, "barrier_lod0", brx, -2.3, 0);
-        appendStaticAsset(m, "barrier_lod0", brx, WID + 2.3, PI);
-      }
-    }
-    /* gradas laterales por niveles */
-    for (var t = 0; t < 3; t++) {
-      m.box(LEN / 2, 0.5 + t * 1.15, -7 - t * 3.4, LEN + 18, 1.15, 3.2, t ? tier : stand);
-      m.box(LEN / 2, 0.5 + t * 1.15, WID + 7 + t * 3.4, LEN + 18, 1.15, 3.2, t ? tier : stand);
-    }
-    /* fondos */
-    for (var e2 = 0; e2 < 2; e2++) {
-      var fx = e2 ? LEN + 8 : -8, fs = e2 ? 1 : -1;
-      for (var k = 0; k < 3; k++) m.box(fx + fs * k * 3.4, 0.5 + k * 1.15, MIDZ, 3.2, 1.15, WID + 12, k ? tier : stand);
-    }
-    /* afición y cubierta: convierten las cajas de las gradas en un estadio */
-    buildCrowd(m);
-    buildRoof(m);
-    /* torres de luz en las esquinas */
-    [[-5, -5], [LEN + 5, -5], [-5, WID + 5], [LEN + 5, WID + 5]].forEach(function (p) {
-      m.box(p[0], 0, p[1], 0.28, 13, 0.28, [0.16, 0.18, 0.2]);
-      m.box(p[0], 13, p[1], 3.0, 0.18, 0.5, [0.85, 0.88, 0.72]);
+    /* banderines */
+    [[0, 0], [LEN, 0], [0, WID], [LEN, WID]].forEach(function (c) {
+      m.code = MAT_GLOSS; m.box(c[0], 0, c[1], 0.05, 1.5, 0.05, [0.95, 0.95, 0.92]);
+      m.code = MAT_MATTE; m.box(c[0] + 0.2, 1.18, c[1], 0.36, 0.3, 0.03, [0.98, 0.78, 0.10]);
+      m.code = -1;
     });
+    /* vallas LED alrededor del campo */
+    var cols = [colors[0] || [0.8, 0.2, 0.2], [0.10, 0.45, 0.95], colors[1] || [0.2, 0.4, 0.8], [0.98, 0.72, 0.12]];
+    for (var bx = 2.5; bx < LEN; bx += 10) {
+      if (Math.abs(bx + 2.5 - TUNNEL_X) < 6) continue;
+      ledBoard(m, bx + 2.5, -3.2, 9.6, "x", 1, cols);
+    }
+    for (var bx2 = 2.5; bx2 < LEN; bx2 += 10) ledBoard(m, bx2 + 2.5, WID + 3.2, 9.6, "x", -1, cols.slice().reverse());
+    [[-4.4, 1], [LEN + 4.4, -1]].forEach(function (e) {
+      ledBoard(m, e[0], 9, 16, "z", e[1], cols); ledBoard(m, e[0], WID - 9, 16, "z", e[1], cols);
+    });
+    buildStadium(m);
+    m.code = -1;
   }
 
   /* ------------------------------------------------------------------ shaders / GL */
+
+  /* Ambientación: hora del partido y clima. Colores en espacio lineal. */
+  var TOWERS = [[-15, 36, -17], [LEN + 15, 36, -17], [-15, 36, WID + 17], [LEN + 15, 36, WID + 17]];
+  var envNow = null, envKey = "", todSel = "night";
+  function lin(c) { return [Math.pow(c[0], 2.2), Math.pow(c[1], 2.2), Math.pow(c[2], 2.2)]; }
+  function envFor(tod, wx) {
+    var e;
+    if (tod === "day") e = {sun: norm3([0.42, 0.78, 0.46]), sunCol: [2.15, 2.02, 1.82], sky: [0.42, 0.52, 0.66], ground: [0.16, 0.18, 0.12],
+      zenith: [0.20, 0.40, 0.78], horizon: [0.70, 0.80, 0.90], fogDen: 0.0024, flood: 0, night: 0, exposure: 0.95, emis: 1.6};
+    else if (tod === "dusk") e = {sun: norm3([0.74, 0.30, 0.60]), sunCol: [2.05, 1.45, 0.98], sky: [0.34, 0.30, 0.42], ground: [0.12, 0.10, 0.09],
+      zenith: [0.16, 0.20, 0.42], horizon: [0.98, 0.56, 0.32], fogDen: 0.0030, flood: 0.55, night: 0.15, exposure: 1.05, emis: 2.2};
+    else e = {sun: norm3([0.30, 0.86, -0.42]), sunCol: [0.95, 0.98, 1.08], sky: [0.09, 0.11, 0.17], ground: [0.04, 0.05, 0.04],
+      zenith: [0.006, 0.012, 0.035], horizon: [0.05, 0.075, 0.13], fogDen: 0.0036, flood: 0.5, night: 1, exposure: 1.05, emis: 3.0};
+    e.tod = tod;
+    if (wx === "rain") {
+      e.sunCol = shade(e.sunCol, 0.42); e.sky = mix(e.sky, [0.32, 0.35, 0.40], 0.5); e.fogDen *= 3.2;
+      e.zenith = mix(e.zenith, [0.20, 0.23, 0.27], tod === "night" ? 0.15 : 0.7); e.horizon = mix(e.horizon, [0.42, 0.46, 0.50], tod === "night" ? 0.15 : 0.7);
+      e.stars = 0;
+    } else if (wx === "cold") {
+      e.sunCol = mix(e.sunCol, [1.6, 1.8, 2.2], 0.35); e.sky = mix(e.sky, [0.45, 0.55, 0.72], 0.3); e.fogDen *= 1.6;
+      e.horizon = mix(e.horizon, [0.78, 0.84, 0.92], tod === "night" ? 0.1 : 0.45);
+    } else if (wx === "heat") {
+      e.sunCol = mix(e.sunCol, [2.8, 2.3, 1.6], 0.5); e.fogDen *= 1.4; e.horizon = mix(e.horizon, [0.95, 0.82, 0.60], tod === "night" ? 0.1 : 0.5);
+    } else if (wx === "mild") {
+      e.sunCol = shade(e.sunCol, 0.72); e.sky = mix(e.sky, [0.40, 0.44, 0.50], 0.35); e.fogDen *= 1.5;
+      e.horizon = mix(e.horizon, [0.62, 0.66, 0.72], tod === "night" ? 0.1 : 0.45);
+    }
+    /* el césped también cambia: mojado y oscuro, escarchado o quemado */
+    e.grassMul = wx === "rain" ? [0.80, 0.92, 0.84] : wx === "heat" ? [1.18, 1.02, 0.66] : wx === "mild" ? [0.95, 0.98, 0.95] : [1, 1, 1];
+    e.grassMix = wx === "cold" ? [0.20, 0.25, 0.25, 0.20] : wx === "heat" ? [0.17, 0.14, 0.05, 0.22] : [0, 0, 0, 0];
+    e.wet = wx === "rain" ? 1 : 0;
+    if (e.stars == null) e.stars = e.night;
+    e.zenith = lin(e.zenith); e.horizon = lin(e.horizon); e.sky = lin(e.sky); e.ground = lin(e.ground);
+    e.fog = mix(e.horizon, e.sky, 0.25);
+    return e;
+  }
+  /* La hora sale de la partida (opts.tod) o, si no llega, de los colores de
+   * los equipos: el mismo cruce siempre se juega a la misma hora. */
+  function pickTod() {
+    if (opts && /^(day|dusk|night)$/.test(opts.tod || "")) return opts.tod;
+    var h = hashKey(String(opts && opts.envSeed != null ? opts.envSeed : (colors[0] + "|" + colors[1])));
+    return ["night", "dusk", "day", "night", "day"][h % 5];
+  }
+  function currentEnv() {
+    var k = todSel + "|" + sim.wx;
+    if (!envNow || envKey !== k) { envNow = envFor(todSel, sim.wx); envKey = k; shadowDirty = true; }
+    return envNow;
+  }
 
   function shader(type, src) {
     var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s) || "shader");
     return s;
   }
+  function makeProgram(vsSrc, fsSrc) {
+    var pr = gl.createProgram();
+    gl.attachShader(pr, shader(gl.VERTEX_SHADER, vsSrc)); gl.attachShader(pr, shader(gl.FRAGMENT_SHADER, fsSrc));
+    gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(pr) || "link");
+    return pr;
+  }
+  var PREC = "#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n";
+  var VS_MAIN =
+    "attribute vec3 aPos;attribute vec3 aCol;attribute vec3 aNrm;attribute float aMat;" +
+    "uniform mat4 uMvp;uniform mat4 uShadowMvp;uniform float uTime;uniform float uCrowd;" +
+    "varying vec3 vCol;varying vec3 vNrm;varying vec3 vWorld;varying float vCode;varying float vAo;varying vec4 vSh;" +
+    "void main(){float code=floor(aMat+0.0005);float ao=(aMat-code)/0.98;vec3 p=aPos;" +
+    "if(code>4.5&&code<5.5){float ph=aPos.x*1.37+aPos.z*0.91;float r=fract(ph*0.137);" +
+    "p.y+=max(0.0,sin(uTime*(3.2+r*2.6)+ph))*uCrowd*(0.25+0.75*fract(ph*7.31));}" +
+    "vWorld=p;vCol=aCol;vNrm=aNrm;vCode=code;vAo=ao;vSh=uShadowMvp*vec4(p,1.0);gl_Position=uMvp*vec4(p,1.0);}";
+  var FS_MAIN = PREC +
+    "varying vec3 vCol;varying vec3 vNrm;varying vec3 vWorld;varying float vCode;varying float vAo;varying vec4 vSh;" +
+    "uniform vec3 uEye;uniform vec3 uSunDir;uniform vec3 uSunCol;uniform vec3 uSkyAmb;uniform vec3 uGroundAmb;uniform vec3 uFogCol;" +
+    "uniform vec3 uZenith;uniform vec3 uHorizon;uniform float uFogDen;uniform float uExposure;uniform float uTime;uniform float uStars;" +
+    "uniform float uShadowOn;uniform float uTexel;uniform float uFlood;uniform float uEmis;uniform vec2 uRes;uniform sampler2D uShadow;" +
+    "uniform vec3 uL0;uniform vec3 uL1;uniform vec3 uL2;uniform vec3 uL3;uniform vec3 uGrassMul;uniform vec4 uGrassMix;uniform float uWet;" +
+    "float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}" +
+    "float unpack(vec4 c){return dot(c,vec4(1.0,1.0/255.0,1.0/65025.0,1.0/16581375.0));}" +
+    "float tap(vec3 s,vec2 o,float b){return step(s.z-b,unpack(texture2D(uShadow,s.xy+o*uTexel)));}" +
+    "\n#ifdef LITE\nfloat shadowAt(float ndl){return 1.0;}\n#else\n" +
+    "float shadowAt(float ndl){if(uShadowOn<0.5)return 1.0;vec3 s=vSh.xyz/vSh.w*0.5+0.5;" +
+    "if(s.x<0.0||s.x>1.0||s.y<0.0||s.y>1.0||s.z>1.0)return 1.0;float b=0.0016+0.004*(1.0-ndl);" +
+    "return (tap(s,vec2(-1.2,-1.2),b)+tap(s,vec2(1.2,-1.2),b)+tap(s,vec2(-1.2,1.2),b)+tap(s,vec2(1.2,1.2),b)+tap(s,vec2(0.0),b)*2.0)/6.0;}\n#endif\n" +
+    "float flood(vec3 lp,vec3 N){vec3 d=lp-vWorld;float l2=dot(d,d);vec3 L=d*inversesqrt(l2);return max(dot(N,L),0.0)*2600.0/(l2+600.0);}" +
+    "vec3 sky(vec3 d){float h=max(d.y,0.0);vec3 c=mix(uHorizon,uZenith,pow(h,0.5));float sd=max(dot(d,uSunDir),0.0);" +
+    "c+=uSunCol*(0.05*pow(sd,6.0)+0.6*pow(sd,700.0))*(1.0-uStars);" +
+    "\n#ifndef LITE\n" + "if(uStars>0.01&&d.y>0.04){vec2 g=floor(d.xz/(d.y+0.35)*240.0);c+=vec3(step(0.9968,hash(g)))*uStars*0.8*smoothstep(0.04,0.3,d.y);}\n#endif\n" +
+    "return c;}" +
+    "vec3 aces(vec3 x){return clamp((x*(2.51*x+0.03))/(x*(2.43*x+0.59)+0.14),0.0,1.0);}" +
+    "void main(){vec3 col;float code=vCode;" +
+    "if(code>5.5&&code<6.5){col=sky(normalize(vWorld-vec3(52.5,0.0,34.0)));}" +
+    "else{vec3 alb=pow(vCol,vec3(2.2));vec3 V=normalize(uEye-vWorld);vec3 N=normalize(vNrm);if(dot(N,V)<0.0)N=-N;" +
+    "if(code>3.5&&code<4.5){col=alb*uEmis;}" +
+    "else if(code>6.5&&code<7.5){col=alb*(uSkyAmb*0.9+uSunCol*0.3);}" +
+    "else if(code>7.5){float band=step(0.5,fract(vWorld.x*0.06+vWorld.z*0.06-uTime*0.25));col=alb*uEmis*(0.7+0.4*band);}" +
+    "else{" +
+    "if(code>2.5&&code<3.5){vec2 p=vWorld.xz;float st=mod(floor(p.x/8.75),2.0);float cr=mod(floor(p.y/8.5),2.0);" +
+    "alb*=mix(0.86,1.08,st)*mix(0.97,1.03,cr);\n#ifndef LITE\nalb*=(0.93+0.09*hash(floor(p*1.5)))*(0.97+0.05*hash(floor(p*5.0)));" +
+    "float w=max(1.0-smoothstep(0.0,7.5,length((p-vec2(5.0,34.0))*vec2(1.0,1.6))),1.0-smoothstep(0.0,7.5,length((p-vec2(100.0,34.0))*vec2(1.0,1.6))));" +
+    "w=max(w,(1.0-smoothstep(0.0,3.5,length(p-vec2(52.5,34.0))))*0.6);if(p.x<0.0||p.x>105.0||p.y<0.0||p.y>68.0)w=0.0;" +
+    "alb=mix(alb,vec3(0.13,0.10,0.05),w*0.30);\n#endif\n" +
+    "alb=mix(alb*uGrassMul,uGrassMix.rgb,uGrassMix.a);}" +
+    "float ndl=max(dot(N,uSunDir),0.0);float sh=shadowAt(ndl);float ao=vAo;" +
+    "vec3 hemi=mix(uGroundAmb,uSkyAmb,N.y*0.5+0.5);vec3 lt=hemi*ao+uSunCol*ndl*sh*(0.45+0.55*ao);" +
+    "if(uFlood>0.01){float f=flood(uL0,N)+flood(uL1,N)+flood(uL2,N)+flood(uL3,N);lt+=vec3(0.92,0.95,1.0)*f*uFlood*(0.5+0.5*ao)*mix(0.6,1.0,sh);}" +
+    "col=alb*lt;" +
+    "if(uWet>0.01&&code>2.5&&code<3.5){vec3 H=normalize(uSunDir+V);col+=uSunCol*pow(max(dot(N,H),0.0),40.0)*0.35*uWet*sh;}" +
+    "\n#ifndef LITE\n" + "if(code>0.5&&code<2.5){vec3 H=normalize(uSunDir+V);float nh=max(dot(N,H),0.0);" +
+    "float sp=code>1.5?pow(nh,60.0)*1.6:pow(nh,28.0)*0.5;float fr=0.04+0.96*pow(1.0-max(dot(N,V),0.0),5.0);" +
+    "col+=uSunCol*sp*sh*(0.35+fr)*(code>1.5?mix(vec3(0.7),alb,0.5):vec3(1.0));}\n#endif\n" +
+    "}" +
+    "float dist=length(vWorld-uEye);float hf=exp(-max(vWorld.y,0.0)*0.03);" +
+    "float fog=1.0-exp(-dist*uFogDen*(0.45+0.55*hf));col=mix(col,uFogCol,clamp(fog,0.0,0.92));}" +
+    "col=aces(col*uExposure);col=pow(col,vec3(1.0/2.2));" +
+    "vec2 uv=gl_FragCoord.xy/uRes-0.5;col*=1.0-0.42*dot(uv,uv);" +
+    "gl_FragColor=vec4(col,1.0);}";
+  var VS_SHADOW = "attribute vec3 aPos;uniform mat4 uMvp;void main(){gl_Position=uMvp*vec4(aPos,1.0);}";
+  var FS_SHADOW = PREC + "void main(){vec4 e=fract(gl_FragCoord.z*vec4(1.0,255.0,65025.0,16581375.0));" +
+    "e-=e.yzww*vec4(1.0/255.0,1.0/255.0,1.0/255.0,0.0);gl_FragColor=e;}";
+
+  /* Variante ligera (móviles modestos): iluminación por vértice y fragmento
+   * mínimo. Misma paleta, luces y niebla; sin sombras ni especulares. */
+  var VS_LITE =
+    "attribute vec3 aPos;attribute vec3 aCol;attribute vec3 aNrm;attribute float aMat;" +
+    "uniform mat4 uMvp;uniform float uTime;uniform float uCrowd;uniform vec3 uEye;uniform vec3 uSunDir;uniform vec3 uSunCol;" +
+    "uniform vec3 uSkyAmb;uniform vec3 uGroundAmb;uniform vec3 uZenith;uniform vec3 uHorizon;uniform float uFogDen;uniform float uFlood;uniform float uStars;" +
+    "uniform vec3 uL0;uniform vec3 uL1;uniform vec3 uL2;uniform vec3 uL3;" +
+    "varying vec3 vCol;varying vec3 vLt;varying vec3 vWorld;varying float vCode;varying float vFog;" +
+    "float flood(vec3 lp,vec3 N,vec3 w){vec3 d=lp-w;float l2=dot(d,d);return max(dot(N,d*inversesqrt(l2)),0.0)*2600.0/(l2+600.0);}" +
+    "void main(){float code=floor(aMat+0.0005);float ao=(aMat-code)/0.98;vec3 p=aPos;" +
+    "if(code>4.5&&code<5.5){float ph=aPos.x*1.37+aPos.z*0.91;float r=fract(ph*0.137);" +
+    "p.y+=max(0.0,sin(uTime*(3.2+r*2.6)+ph))*uCrowd*(0.25+0.75*fract(ph*7.31));}" +
+    "vec3 lt;float fog=0.0;" +
+    "if(code>5.5&&code<6.5){vec3 d=normalize(p-vec3(52.5,0.0,34.0));float h=max(d.y,0.0);float sd=max(dot(d,uSunDir),0.0);" +
+    "lt=mix(uHorizon,uZenith,sqrt(h))+uSunCol*0.05*pow(sd,6.0)*(1.0-uStars);}" +
+    "else{vec3 N=aNrm;if(dot(N,uEye-p)<0.0)N=-N;" +
+    "if(code>6.5&&code<7.5)lt=uSkyAmb*0.9+uSunCol*0.3;" +
+    "else{float ndl=max(dot(N,uSunDir),0.0);lt=mix(uGroundAmb,uSkyAmb,N.y*0.5+0.5)*ao+uSunCol*ndl*(0.45+0.55*ao)*0.88;" +
+    "if(uFlood>0.01){float f=flood(uL0,N,p)+flood(uL1,N,p)+flood(uL2,N,p)+flood(uL3,N,p);lt+=vec3(0.92,0.95,1.0)*f*uFlood*(0.5+0.5*ao)*0.9;}}" +
+    "float dist=length(p-uEye);float hf=exp(-max(p.y,0.0)*0.03);fog=clamp(1.0-exp(-dist*uFogDen*(0.45+0.55*hf)),0.0,0.92);}" +
+    "vLt=lt;vFog=fog;vCol=aCol;vWorld=p;vCode=code;gl_Position=uMvp*vec4(p,1.0);}";
+  var FS_LITE = PREC +
+    "varying vec3 vCol;varying vec3 vLt;varying vec3 vWorld;varying float vCode;varying float vFog;" +
+    "uniform vec3 uFogCol;uniform float uExposure;uniform float uTime;uniform float uEmis;uniform vec2 uRes;uniform vec3 uGrassMul;uniform vec4 uGrassMix;" +
+    "void main(){vec3 col;float code=vCode;" +
+    "if(code>5.5&&code<6.5){col=vLt;}else{vec3 alb=vCol*vCol;" +
+    "if(code>3.5&&code<4.5)col=alb*uEmis;" +
+    "else if(code>7.5){float band=step(0.5,fract(vWorld.x*0.06+vWorld.z*0.06-uTime*0.25));col=alb*uEmis*(0.7+0.4*band);}" +
+    "else{if(code>2.5&&code<3.5){vec2 q=vWorld.xz;alb*=mix(0.86,1.08,mod(floor(q.x/8.75),2.0))*mix(0.97,1.03,mod(floor(q.y/8.5),2.0));alb=mix(alb*uGrassMul,uGrassMix.rgb,uGrassMix.a);}col=alb*vLt;}" +
+    "col=mix(col,uFogCol,vFog);}" +
+    "col*=uExposure;col=clamp((col*(2.51*col+0.03))/(col*(2.43*col+0.59)+0.14),0.0,1.0);col=sqrt(col);" +
+    "vec2 uv=gl_FragCoord.xy/uRes-0.5;col*=1.0-0.42*dot(uv,uv);gl_FragColor=vec4(col,1.0);}";
+
+  var shadowProg = null, shadowLoc = null, shadowFb = null, shadowTex = null, shadowRb = null, shadowSize = 0;
+  var shadowMat = new Float32Array(16), shadowDirty = true, skyBuf = null, skyCount = 0, fxBuf = null, fx = null, fxCap = 0;
+  var LAMPS = [];
+  var U_NAMES = ["uMvp", "uShadowMvp", "uTime", "uCrowd", "uEye", "uSunDir", "uSunCol", "uSkyAmb", "uGroundAmb", "uFogCol",
+    "uZenith", "uHorizon", "uFogDen", "uExposure", "uStars", "uShadowOn", "uTexel", "uFlood", "uEmis", "uRes", "uShadow",
+    "uL0", "uL1", "uL2", "uL3", "uGrassMul", "uGrassMix", "uWet"];
+
+  function initShadows() {
+    shadowSize = 0;
+    try {
+      shadowProg = makeProgram(VS_SHADOW, FS_SHADOW);
+      shadowLoc = {pos: gl.getAttribLocation(shadowProg, "aPos"), mvp: gl.getUniformLocation(shadowProg, "uMvp")};
+      var size = quality < 0.8 ? 1024 : 2048;
+      var maxT = gl.getParameter(gl.MAX_TEXTURE_SIZE) || 1024; if (size > maxT) size = maxT;
+      shadowTex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, shadowTex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, size, size, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      shadowRb = gl.createRenderbuffer(); gl.bindRenderbuffer(gl.RENDERBUFFER, shadowRb);
+      gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, size, size);
+      shadowFb = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, shadowFb);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, shadowTex, 0);
+      gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, shadowRb);
+      var ok = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.bindTexture(gl.TEXTURE_2D, null);
+      if (ok) shadowSize = size;
+    } catch (err) { shadowSize = 0; }
+  }
+  /* Proyección ortográfica desde el sol (o el foco principal) que abarca el
+   * estadio entero: el césped recibe las sombras de jugadores, porterías y
+   * cubierta. */
+  function updateShadowMatrix(env) {
+    var L = env.sun, D = 160, c = [LEN / 2, 0, MIDZ];
+    var eye = [c[0] + L[0] * D, c[1] + L[1] * D, c[2] + L[2] * D];
+    var up = Math.abs(L[1]) > 0.97 ? [0, 0, 1] : [0, 1, 0];
+    var v = lookAt(new Float32Array(16), eye, c, up);
+    var mnx = 1e9, mxx = -1e9, mny = 1e9, mxy = -1e9, mnz = 1e9, mxz = -1e9;
+    var xs = [-7, LEN + 7], ys = [-1, 5], zs = [-6, WID + 6];
+    for (var i = 0; i < 2; i++) for (var j = 0; j < 2; j++) for (var k = 0; k < 2; k++) {
+      var px = xs[i], py = ys[j], pz = zs[k];
+      var X = v[0] * px + v[4] * py + v[8] * pz + v[12], Y = v[1] * px + v[5] * py + v[9] * pz + v[13], Z = v[2] * px + v[6] * py + v[10] * pz + v[14];
+      mnx = Math.min(mnx, X); mxx = Math.max(mxx, X); mny = Math.min(mny, Y); mxy = Math.max(mxy, Y); mnz = Math.min(mnz, Z); mxz = Math.max(mxz, Z);
+    }
+    var o = new Float32Array(16), n = -mxz - 5, f = -mnz + 5;
+    o[0] = 2 / (mxx - mnx); o[5] = 2 / (mxy - mny); o[10] = -2 / (f - n); o[15] = 1;
+    o[12] = -(mxx + mnx) / (mxx - mnx); o[13] = -(mxy + mny) / (mxy - mny); o[14] = -(f + n) / (f - n);
+    matMul(shadowMat, o, v);
+    shadowDirty = false;
+  }
+  function useShadows() { return shadowSize > 0 && quality > 0.6 && !opts.noShadows; }
+
+  function buildSky() {
+    var m = new Mesh(16384), R = 210, cx = LEN / 2, cz = MIDZ, seg = 24, rings = 8;
+    m.code = MAT_SKY;
+    for (var j = 0; j < rings; j++) {
+      var p0 = -0.25 + j * (PI / 2 + 0.25) / rings, p1 = -0.25 + (j + 1) * (PI / 2 + 0.25) / rings;
+      for (var i = 0; i < seg; i++) {
+        var a0 = i * TAU / seg, a1 = (i + 1) * TAU / seg;
+        var A = [cx + R * Math.cos(p0) * Math.cos(a0), R * Math.sin(p0), cz + R * Math.cos(p0) * Math.sin(a0)];
+        var B = [cx + R * Math.cos(p0) * Math.cos(a1), R * Math.sin(p0), cz + R * Math.cos(p0) * Math.sin(a1)];
+        var C = [cx + R * Math.cos(p1) * Math.cos(a1), R * Math.sin(p1), cz + R * Math.cos(p1) * Math.sin(a1)];
+        var D2 = [cx + R * Math.cos(p1) * Math.cos(a0), R * Math.sin(p1), cz + R * Math.cos(p1) * Math.sin(a0)];
+        m.quad(A, B, C, D2, [1, 1, 1]);
+      }
+    }
+    skyBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, skyBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, m.a.subarray(0, m.n), gl.STATIC_DRAW);
+    skyCount = m.n / FS;
+  }
 
   function initGL() {
     gl = canvas.getContext("webgl", {alpha: false, antialias: quality > 0.6, powerPreference: "default"}) ||
       canvas.getContext("experimental-webgl");
     if (!gl) throw new Error("WebGL no disponible");
-    var vs = shader(gl.VERTEX_SHADER,
-      "attribute vec3 aPos;attribute vec3 aCol;uniform mat4 uMvp;varying vec3 vCol;varying vec3 vWorld;" +
-      "void main(){vWorld=aPos;vCol=aCol;gl_Position=uMvp*vec4(aPos,1.0);}");
-    var fs = shader(gl.FRAGMENT_SHADER,
-      "precision mediump float;varying vec3 vCol;varying vec3 vWorld;uniform vec3 uFog;uniform vec3 uEye;" +
-      "uniform float uNear;uniform float uFar;void main(){float d=distance(vWorld,uEye);" +
-      "float f=smoothstep(uNear,uFar,d);gl_FragColor=vec4(mix(vCol,uFog,f),1.0);}");
-    program = gl.createProgram(); gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program) || "link");
+    var mk = function (lite) {
+      var pr = lite ? makeProgram(VS_LITE, FS_LITE) : makeProgram(VS_MAIN, FS_MAIN);
+      var lc = {pos: gl.getAttribLocation(pr, "aPos"), col: gl.getAttribLocation(pr, "aCol"),
+        nrm: gl.getAttribLocation(pr, "aNrm"), mat: gl.getAttribLocation(pr, "aMat")};
+      U_NAMES.forEach(function (u) { lc[u] = gl.getUniformLocation(pr, u); });
+      return [pr, lc];
+    };
+    var pf = mk(false); progFull = pf[0]; locFull = pf[1];
+    /* Variante ligera para móviles modestos: sin sombras, sin ruido del
+     * césped ni especulares; misma paleta y luces. */
+    try { var pl = mk(true); progLite = pl[0]; locLite = pl[1]; } catch (e) { progLite = null; }
+    program = progFull; locations = locFull;
     gl.useProgram(program);
-    locations = {pos: gl.getAttribLocation(program, "aPos"), col: gl.getAttribLocation(program, "aCol"),
-      mvp: gl.getUniformLocation(program, "uMvp"), fog: gl.getUniformLocation(program, "uFog"),
-      eye: gl.getUniformLocation(program, "uEye"), near: gl.getUniformLocation(program, "uNear"),
-      far: gl.getUniformLocation(program, "uFar")};
     gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL); gl.disable(gl.CULL_FACE);
     gl.clearColor(0.018, 0.035, 0.055, 1);
-    staticBuf = gl.createBuffer(); dynBuf = gl.createBuffer();
-    staticMesh = new Mesh(65536); buildField(staticMesh);
+    staticBuf = gl.createBuffer(); dynBuf = gl.createBuffer(); fxBuf = gl.createBuffer();
+    staticMesh = new Mesh(1 << 20); LAMPS = [];
+    crowdMeshes = [new Mesh(1 << 20), new Mesh(1 << 20)];
+    buildField(staticMesh);
+    /* La afición va en dos búferes aparte: no proyecta sombras y la variante
+     * ligera dibuja solo la mitad. */
+    for (var ci = 0; ci < 2; ci++) {
+      crowdBufs[ci] = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, crowdBufs[ci]);
+      gl.bufferData(gl.ARRAY_BUFFER, crowdMeshes[ci].a.subarray(0, Math.max(FS, crowdMeshes[ci].n)), gl.STATIC_DRAW);
+      crowdCounts[ci] = crowdMeshes[ci].n / FS;
+    }
+    crowdMeshes = null;
     gl.bindBuffer(gl.ARRAY_BUFFER, staticBuf);
     gl.bufferData(gl.ARRAY_BUFFER, staticMesh.a.subarray(0, staticMesh.n), gl.STATIC_DRAW);
-    staticCount = staticMesh.n / 6;
-    dyn = new Mesh(131072); dyn.spec = true; dynCapacity = dyn.a.length;
+    staticCount = staticMesh.n / FS;
+    staticMesh = {n: staticMesh.n};
+    dyn = new Mesh(1 << 18); dyn.spec = true; dynCapacity = dyn.a.length;
     gl.bindBuffer(gl.ARRAY_BUFFER, dynBuf);
     gl.bufferData(gl.ARRAY_BUFFER, dynCapacity * 4, gl.DYNAMIC_DRAW);
+    fx = new Mesh(1 << 14); fx.code = MAT_EMIT; fxCap = fx.a.length;
+    gl.bindBuffer(gl.ARRAY_BUFFER, fxBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, fxCap * 4, gl.DYNAMIC_DRAW);
+    buildSky();
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
+    initShadows();
+    shadowDirty = true;
+  }
+
+  function bindMesh(buf, loc) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.vertexAttribPointer(loc.pos, 3, gl.FLOAT, false, FS * 4, 0);
+    if (loc.col != null && loc.col >= 0) gl.vertexAttribPointer(loc.col, 3, gl.FLOAT, false, FS * 4, 12);
+    if (loc.nrm != null && loc.nrm >= 0) gl.vertexAttribPointer(loc.nrm, 3, gl.FLOAT, false, FS * 4, 24);
+    if (loc.mat != null && loc.mat >= 0) gl.vertexAttribPointer(loc.mat, 1, gl.FLOAT, false, FS * 4, 36);
   }
 
   /* ------------------------------------------------------------------ equipos */
@@ -1409,6 +1787,7 @@ var Pitch3D = (function () {
     var b = sim.ball;
     b.fl = {x0: b.x, y0: b.y, z0: b.z, x1: tx, y1: ty, z1: tz, t: 0, dur: Math.max(0.08, dur),
       arc: arc || 0, curve: curve || 0};
+    fxKick(b, tx, tz, dur, arc);
     b.mode = "flight"; b.next = next || null; b.timer = dur; b.vy = 0; b.claim = null;
     b.vx = (tx - b.x) / Math.max(0.08, dur); b.vz = (tz - b.z) / Math.max(0.08, dur);
     b.lastTouch = sim.own === 1 ? 1 : 0;
@@ -1491,7 +1870,7 @@ var Pitch3D = (function () {
       var wf = weatherFx(sim.wx);
       spinBall(b, dt);
       b.x += b.vx * dt; b.z += b.vz * dt; b.y += b.vy * dt; b.vy -= GRAV * dt;
-      if (b.y < 0.22) { b.y = 0.22; if (b.vy < 0) b.vy = -b.vy * wf.bounce; if (Math.abs(b.vy) < 0.6) b.vy = 0; }
+      if (b.y < 0.22) { b.y = 0.22; if (b.vy < -2.5) emitBurst(b.x, 0.02, b.z, 3 + Math.round(-b.vy), clamp(-b.vy / 12, 0, 0.6), b.vx, b.vz, 1.2); if (b.vy < 0) b.vy = -b.vy * wf.bounce; if (Math.abs(b.vy) < 0.6) b.vy = 0; }
       b.vx *= Math.pow(wf.friction, dt); b.vz *= Math.pow(wf.friction, dt);
       if (b.claim) {
         var ca = actorAt(b.claim.side, b.claim.idx);
@@ -2095,11 +2474,13 @@ var Pitch3D = (function () {
 
   function resolveShot(a) {
     var b = sim.ball;
+    var hitV = Math.sqrt((b.vx || 0) * (b.vx || 0) + (b.vz || 0) * (b.vz || 0));
     b.fl = null; b.next = null; b.vx = 0; b.vy = 0; b.vz = 0;
     if (a.res === "goal") {
       /* La pelota cruza la línea en este fotograma: solo ahora se confirma
        * el marcador que el motor ya había adelantado. */
       commitGoal(a.side);
+      netHit(a.gx, clamp(b.z, MIDZ - POST + 0.4, MIDZ + POST - 0.4), clamp(b.y, 0.3, BAR - 0.3), 7 + clamp(hitV / 4, 0, 6));
       b.x = a.gx + a.dir * 1.0; b.z = clamp(b.z, MIDZ - POST, MIDZ + POST); b.y = 0.5; b.mode = "dead";
       sim.netT = 1; sim.shake = 0.5;
       cam.cutT = 1.4; cam.cutMode = "goal";
@@ -2111,11 +2492,11 @@ var Pitch3D = (function () {
       sim.own = 1 - a.side;
     } else if (a.res === "save") {
       b.mode = "loose"; b.vx = -a.dir * rnd(6, 10); b.vz = rnd(-4, 4); b.vy = 2; b.lastTouch = a.side;
-      if (a.gk) a.gk.anim = {type: "dive", t: 0, dur: 0.55, dir: b.z >= a.gk.z ? 1 : -1, x0: a.gk.x, z0: a.gk.z, x1: a.gk.x + a.dir * 0.8, z1: b.z};
+      if (a.gk) { a.gk.anim = {type: "dive", t: 0, dur: 0.55, dir: b.z >= a.gk.z ? 1 : -1, x0: a.gk.x, z0: a.gk.z, x1: a.gk.x + a.dir * 0.8, z1: b.z}; fxDive(a.gk, a.gk.anim.dir); }
       sim.own = 1 - a.side;
     } else if (a.res === "post") {
       b.mode = "loose"; b.vx = -a.dir * rnd(5, 9); b.vz = rnd(-4, 4); b.vy = 2.4; b.lastTouch = a.side;
-      if (a.gk) a.gk.anim = {type: "dive", t: 0, dur: 0.5, dir: b.z >= a.gk.z ? 1 : -1, x0: a.gk.x, z0: a.gk.z, x1: a.gk.x + a.dir * 0.7, z1: b.z};
+      if (a.gk) { a.gk.anim = {type: "dive", t: 0, dur: 0.5, dir: b.z >= a.gk.z ? 1 : -1, x0: a.gk.x, z0: a.gk.z, x1: a.gk.x + a.dir * 0.7, z1: b.z}; fxDive(a.gk, a.gk.anim.dir); }
     } else {
       b.mode = "loose"; b.vx = a.dir * 3; b.vz = rnd(-2, 2); b.vy = 2.2; b.lastTouch = a.side;
     }
@@ -2212,6 +2593,7 @@ var Pitch3D = (function () {
         var dz = clamp(a.gk.z + (Math.random() < 0.5 ? -1 : 1) * rnd(0.5, 1.6), MIDZ - POST, MIDZ + POST);
         a.gk.anim = {type: "dive", t: 0, dur: 0.55, dir: dz >= a.gk.z ? 1 : -1, x0: a.gk.x, z0: a.gk.z,
           x1: a.gk.x + a.dir * 0.8, z1: dz};
+        fxDive(a.gk, a.gk.anim.dir);
       }
 
     } else if (a.stage === "flight" && a.t >= a.flight) {
@@ -2317,7 +2699,7 @@ var Pitch3D = (function () {
     }
     if (t === "tackle") {
       var ts = +e.side === 1 ? 1 : 0, ta = e.who != null ? actorAt(ts, +e.who) : null;
-      if (ta) ta.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: sim.ball.z >= ta.z ? 1 : -1};
+      if (ta) { ta.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: sim.ball.z >= ta.z ? 1 : -1}; fxTackle(ta); }
       fireCue(e); return;
     }
     if (t === "sub" || t === "inj" || t === "tac" || t === "com" || t === "") { fireCue(e); return; }
@@ -2380,7 +2762,10 @@ var Pitch3D = (function () {
 
   /* ------------------------------------------------------------------ cámara */
 
+  /* Cámara fija para revisar el arte (pruebas y capturas). */
+  var camLock = null;
   function updateCamera(dt) {
+    if (camLock) { for (var ck in camLock) if (camLock.hasOwnProperty(ck)) cam[ck] = camLock[ck]; return; }
     if (sim.cinema) { updateCinemaCamera(dt); return; }
     var b = sim.ball, tx = b.x, tz = b.z, back = 34, height = 22;
     var goalDist = Math.min(Math.abs(b.x), Math.abs(LEN - b.x));
@@ -2519,7 +2904,7 @@ var Pitch3D = (function () {
     if (model._p3dScratch) return model._p3dScratch;
     var n = model.parents.length, verts = model.positions.length / 3;
     model._p3dScratch = {
-      local: new Float32Array(n * 16), world: new Float32Array(n * 16), skin: new Float32Array(n * 16),
+      local: new Float32Array(n * 16), world: new Float32Array(n * 16), skin: new Float32Array(n * 16), skin2: new Float32Array(n * 16),
       t: new Float32Array(n * 3), r: new Float32Array(n * 4), s: new Float32Array(n * 3),
       pos: new Float32Array(verts * 3), pos2: new Float32Array(verts * 3)
     };
@@ -2529,6 +2914,28 @@ var Pitch3D = (function () {
   /* La pose se evalúa y se deforma en CPU, jugador a jugador. Los vértices
    * vienen sin indexar (3 por triángulo), así que el resultado se puede
    * escribir directamente en el VBO dinámico común del partido. */
+  /* Solo la pose: matrices de skinning (mundo × inversa de bind) por hueso. */
+  function evalBones(model, clip, time, sc, skinOut) {
+    var n = model.parents.length, i, k;
+    sc.t.set(model.bindT); sc.r.set(model.bindR); sc.s.set(model.bindS);
+    for (i = 0; i < clip.tracks.length; i++) {
+      var tr = clip.tracks[i], u = time;
+      if (tr.path === "rotation") quatAt(tr, u, sc.r, tr.node * 4);
+      else if (tr.path === "translation") {
+        trackAt(tr, u, 3, sc.t, tr.node * 3);
+        if (tr.node === 0) { sc.t[0] = model.bindT[0]; sc.t[2] = model.bindT[2]; }
+      } else if (tr.path === "scale") trackAt(tr, u, 3, sc.s, tr.node * 3);
+    }
+    for (i = 0; i < n; i++) mat4TRS(sc.local, i * 16, sc.t, i * 3, sc.r, i * 4, sc.s, i * 3);
+    for (i = 0; i < n; i++) {
+      var o = i * 16, p = model.parents[i];
+      if (p >= 0) mat4MulAt(sc.world, o, sc.world, p * 16, sc.local, o);
+      else for (k = 0; k < 16; k++) sc.world[o + k] = sc.local[o + k];
+    }
+    var out = skinOut || sc.skin;
+    for (i = 0; i < n; i++) mat4MulAt(out, i * 16, sc.world, i * 16, model.ibm, i * 16);
+  }
+
   function evalModel(model, clip, time, sc, dst) {
     var n = model.parents.length, i, k;
     sc.t.set(model.bindT); sc.r.set(model.bindR); sc.s.set(model.bindS);
@@ -2658,14 +3065,21 @@ var Pitch3D = (function () {
       col[0], col[1], col[2]);
   }
 
+  /* Oclusión de contacto: un disco de césped más oscuro en el centro que se
+   * funde con el campo (el shader pinta el césped). Las sombras reales las
+   * pone el mapa de sombras. */
+  function aoDisc(m, x, z, rx, rz, core, seg) {
+    seg = seg || 12; m.code = MAT_GRASS;
+    var col = GRASS, y = 0.006;
+    for (var i = 0; i < seg; i++) {
+      var a0 = i * TAU / seg, a1 = (i + 1) * TAU / seg;
+      m.triAO(x, y, z, x + Math.cos(a0) * rx, y, z + Math.sin(a0) * rz, x + Math.cos(a1) * rx, y, z + Math.sin(a1) * rz,
+        col[0], col[1], col[2], core, 1, 1);
+    }
+    m.code = -1;
+  }
   function drawContactShadow(m, a, q, far) {
-    if (far) { m.circle(a.x, a.z, 0.4, [0.02, 0.08, 0.045], q ? 10 : 7, 0.026); return; }
-    /* Dos elipses concéntricas alargadas en la dirección opuesta a la luz:
-     * el borde exterior simula una sombra suave sin necesitar blending. */
-    var dx = SHADOW_DIR[0] * 0.18, dz = SHADOW_DIR[1] * 0.18;
-    var rot = Math.atan2(SHADOW_DIR[0], SHADOW_DIR[1]), seg = q ? 14 : 9;
-    m.ellipse(a.x + dx, a.z + dz, 0.42, 0.72, rot, [0.042, 0.17, 0.085], seg, 0.024);
-    m.ellipse(a.x + dx * 1.1, a.z + dz * 1.1, 0.29, 0.50, rot, [0.025, 0.10, 0.052], seg, 0.027);
+    aoDisc(m, a.x, a.z, 0.62, 0.62, far ? 0.55 : 0.42, q ? 14 : 8);
   }
 
   function buildAssetPlayer(m, a) {
@@ -2703,58 +3117,129 @@ var Pitch3D = (function () {
       a.assetBlend = Math.max(0, a.assetBlend - dt);
       if (a.assetBlend <= 0) a.assetPrev = null;
     }
-    evalModel(model, clip, t, sc);
+    evalBones(model, clip, t, sc);
     if (a.assetPrev && a.assetBlend > 0) {
       var prevClip = model.clips[a.assetPrev.name];
       if (prevClip) {
         var pu = clamp(1 - a.assetBlend / 0.18, 0, 1);
         pu = pu * pu * (3 - 2 * pu);
-        evalModel(model, prevClip, a.assetPrev.t, sc, sc.pos2);
-        var posCur = sc.pos, posPrev = sc.pos2;
-        for (var bi = 0; bi < posCur.length; bi++) posCur[bi] = posPrev[bi] + (posCur[bi] - posPrev[bi]) * pu;
+        evalBones(model, prevClip, a.assetPrev.t, sc, sc.skin2);
+        for (var bi = 0; bi < sc.skin.length; bi++) sc.skin[bi] = sc.skin2[bi] + (sc.skin[bi] - sc.skin2[bi]) * pu;
       }
     }
 
     var far = d2 > 1600, q = quality < 0.7 || far ? 0 : 1;
     drawContactShadow(m, a, q, far);
     if (sim.ball.mode === "held" && sim.ball.side === a.side && sim.ball.idx === a.slot) {
-      m.ring(a.x, a.z, 0.58, 0.07, [0.98, 0.82, 0.28], 12, 0.032);
+      m.code = MAT_EMIT; m.ring(a.x, a.z, 0.62, 0.08, [0.98, 0.78, 0.22], 16, 0.03); m.code = -1;
     }
-
-    var pal = assetPalette(a), ca = Math.cos(a.facing), sa = Math.sin(a.facing), scale = a.scale || 1;
-    /* La barrida de campo inclina algo el cuerpo sobre el clip de golpeo; el
-     * portero conserva su estirada horizontal. */
     var tackleK = 0;
     if (a.visualAnim && a.visualAnim.type === "tackle" && !a.gk) {
       tackleK = Math.sin(clamp(a.visualAnim.t / Math.max(0.01, a.visualAnim.dur), 0, 1) * PI);
     }
     var lean = (a.lean || 0) + tackleK * 0.06;
     var bank = (a.bank || 0) + tackleK * 0.24 * (a.visualAnim && a.visualAnim.dir ? a.visualAnim.dir : 1);
-    var pos = sc.pos, p = model.positions, materials = model.materials, matNames = model.matNames, matColors = model.matColors;
-    var vr, vg, vb, i;
-    /* Escalar aquí evita repetir la multiplicación por vértice al transformar. */
-    for (i = 0; i < pos.length; i += 3) { pos[i] *= scale; pos[i + 1] *= scale; pos[i + 2] *= scale; }
-    for (var ti = 0; ti < model.triangles; ti++) {
-      var i0 = ti * 3, x0 = pos[i0 * 3], y0 = pos[i0 * 3 + 1], z0 = pos[i0 * 3 + 2];
-      var x1 = pos[i0 * 3 + 3], y1 = pos[i0 * 3 + 4], z1 = pos[i0 * 3 + 5];
-      var x2 = pos[i0 * 3 + 6], y2 = pos[i0 * 3 + 7], z2 = pos[i0 * 3 + 8];
-      var lx0 = x0 + bank * y0, lz0 = z0 + lean * y0;
-      var lx1 = x1 + bank * y1, lz1 = z1 + lean * y1;
-      var lx2 = x2 + bank * y2, lz2 = z2 + lean * y2;
-      var mi = materials[i0], nm = matNames[mi] || "", base = pal[nm] || matColors[mi] || [0.8, 0.8, 0.8];
-       m.metallic = (model.matMetallic && model.matMetallic[mi] != null) ? model.matMetallic[mi] : 0;
-       m.roughness = (model.matRoughness && model.matRoughness[mi] != null) ? model.matRoughness[mi] : 0.8;
-      vr = (model.colors[i0 * 3] + model.colors[i0 * 3 + 3] + model.colors[i0 * 3 + 6]) / 3;
-      vg = (model.colors[i0 * 3 + 1] + model.colors[i0 * 3 + 4] + model.colors[i0 * 3 + 7]) / 3;
-      vb = (model.colors[i0 * 3 + 2] + model.colors[i0 * 3 + 5] + model.colors[i0 * 3 + 8]) / 3;
-      m.tri9(a.x + lx0 * ca + lz0 * sa, y0, a.z - lx0 * sa + lz0 * ca,
-        a.x + lx1 * ca + lz1 * sa, y1, a.z - lx1 * sa + lz1 * ca,
-        a.x + lx2 * ca + lz2 * sa, y2, a.z - lx2 * sa + lz2 * ca,
-        base[0] * vr, base[1] * vg, base[2] * vb);
-    }
-    assetFrameTris += model.triangles;
+    var tris = buildVoxelBody(m, a, sc.skin, assetPalette(a), far || quality < 0.62, lean, bank);
+    assetFrameTris += tris;
     assetFramePlayers++;
     return true;
+  }
+
+  /* ------------------------------------------------------------------ jugadores vóxel */
+  /* Cuerpo de bloques robusto (cabeza grande, tronco cuadrado, extremidades
+   * gruesas) unido a los 22 huesos del esqueleto GLB: cada pieza se define en
+   * la pose de reposo y se mueve con la matriz de su hueso, así los clips
+   * idle/run/kick/dive/celebrate siguen sirviendo tal cual. Huesos: 1 cadera,
+   * 2 espalda, 3 pecho, 4 cuello, 5 cabeza, 7-9 brazo izq., 11-13 brazo der.,
+   * 14-17 pierna izq., 18-21 pierna der. +x es la izquierda del jugador, +z delante. */
+  var VOX_PARTS = [
+    /* hueso, x0, y0, z0, x1, y1, z1, color, detalle(1)=solo de cerca, espejo */
+    [1, -0.21, 0.76, -0.145, 0.21, 1.02, 0.145, "kit_shorts"],
+    [2, -0.23, 1.00, -0.155, 0.23, 1.23, 0.155, "kit_shirt"],
+    [3, -0.25, 1.21, -0.165, 0.25, 1.49, 0.165, "kit_shirt"],
+    [3, -0.13, 1.47, -0.12, 0.13, 1.51, 0.13, "kit_trim", 1],
+    [2, -0.235, 1.00, -0.16, 0.235, 1.04, 0.16, "kit_trim", 1],
+    [4, -0.08, 1.46, -0.08, 0.08, 1.57, 0.08, "skin"],
+    [5, -0.20, 1.55, -0.18, 0.20, 1.93, 0.20, "skin"],
+    [5, 0.055, 1.71, 0.198, 0.115, 1.78, 0.212, "eye", 1, 1],
+    [5, 0.045, 1.80, 0.198, 0.125, 1.825, 0.212, "hair", 1, 1],
+    [5, -0.04, 1.62, 0.198, 0.04, 1.645, 0.21, "mouth", 1],
+    [7, 0.25, 1.26, -0.09, 0.40, 1.49, 0.09, "kit_shirt", 0, 1],
+    [7, 0.265, 1.12, -0.075, 0.385, 1.27, 0.075, "arm", 0, 1],
+    [8, 0.265, 0.93, -0.072, 0.385, 1.14, 0.072, "arm", 0, 1],
+    [9, 0.27, 0.81, -0.075, 0.38, 0.95, 0.075, "hand", 0, 1],
+    [14, 0.015, 0.66, -0.11, 0.215, 0.88, 0.11, "kit_shorts", 0, 1],
+    [14, 0.03, 0.50, -0.095, 0.20, 0.67, 0.095, "skin", 0, 1],
+    [15, 0.035, 0.12, -0.09, 0.195, 0.52, 0.09, "kit_socks", 0, 1],
+    [15, 0.03, 0.43, -0.095, 0.20, 0.49, 0.095, "kit_trim", 1, 1],
+    [16, 0.03, 0.0, -0.10, 0.20, 0.15, 0.13, "boots", 0, 1],
+    [17, 0.04, 0.0, 0.12, 0.19, 0.10, 0.23, "boots", 0, 1]
+  ];
+  /* peinados: cada uno es una lista de bloques sobre la cabeza */
+  var HAIR_STYLES = [
+    [[-0.21, 1.85, -0.21, 0.21, 1.96, 0.18], [-0.21, 1.64, -0.21, 0.21, 1.86, -0.13], [0.17, 1.74, -0.13, 0.21, 1.87, 0.08], [-0.21, 1.74, -0.13, -0.17, 1.87, 0.08]],
+    [[-0.205, 1.89, -0.19, 0.205, 1.945, 0.17]],
+    [[-0.07, 1.90, -0.20, 0.07, 2.02, 0.16], [-0.205, 1.88, -0.19, 0.205, 1.93, 0.15]],
+    [[-0.22, 1.83, -0.22, 0.22, 1.99, 0.20], [-0.22, 1.60, -0.22, 0.22, 1.86, -0.12], [0.17, 1.66, -0.14, 0.22, 1.88, 0.12], [-0.22, 1.66, -0.14, -0.17, 1.88, 0.12], [-0.22, 1.86, 0.15, 0.22, 1.91, 0.21]],
+    []
+  ];
+  var HAIR_FEM = [[-0.22, 1.84, -0.22, 0.22, 1.98, 0.20], [-0.22, 1.50, -0.23, 0.22, 1.86, -0.12], [0.17, 1.58, -0.14, 0.22, 1.88, 0.10],
+    [-0.22, 1.58, -0.14, -0.17, 1.88, 0.10], [-0.07, 1.36, -0.30, 0.07, 1.62, -0.20]];
+  var DIGITS = ["111101101101111", "010110010010111", "111001111100111", "111001111001111", "101101111001001",
+    "111100111001111", "111100111101111", "111001010010010", "111101111101111", "111101111001111"];
+  var voxQ = new Float32Array(24), voxM = new Float32Array(16);
+
+  function luma(c) { return c[0] * 0.3 + c[1] * 0.59 + c[2] * 0.11; }
+
+  function buildVoxelBody(m, a, skin, pal, low, lean, bank) {
+    var start = m.n, scale = (a.scale || 1) * 0.93, ca = Math.cos(a.facing), sa = Math.sin(a.facing);
+    var shirt = pal.kit_shirt, trim = pal.kit_trim || [0.95, 0.9, 0.7];
+    var cols = {kit_shirt: shirt, kit_shorts: pal.kit_shorts, kit_socks: pal.kit_socks || shirt, kit_trim: trim, skin: pal.skin,
+      hair: pal.hair, boots: pal.boots || BOOT, eye: [0.06, 0.05, 0.05], mouth: shade(pal.skin, 0.62),
+      arm: a.gk ? shirt : pal.skin, hand: a.gk ? (pal.gloves || [0.98, 0.48, 0.16]) : pal.skin};
+    var tris = 0;
+    function part(bone, x0, y0, z0, x1, y1, z1, col, lo) {
+      boxCorners(skin, bone * 16, x0, y0, z0, x1, y1, z1, voxQ);
+      for (var k = 0; k < 24; k += 3) {
+        var px = voxQ[k] * scale, py = voxQ[k + 1] * scale, pz = voxQ[k + 2] * scale;
+        var lx = px + bank * py, lz = pz + lean * py;
+        voxQ[k] = a.x + lx * ca + lz * sa; voxQ[k + 1] = py; voxQ[k + 2] = a.z - lx * sa + lz * ca;
+      }
+      m.cornerBox(voxQ, col, lo == null ? 0.8 : lo);
+      tris += 12;
+    }
+    m.code = MAT_MATTE;
+    for (var i = 0; i < VOX_PARTS.length; i++) {
+      var P = VOX_PARTS[i];
+      if (P[8] && low) continue;
+      var col = cols[P[7]] || shirt, bone = P[0];
+      part(bone, P[1], P[2], P[3], P[4], P[5], P[6], col);
+      if (P[9]) part(bone === 7 ? 11 : bone === 8 ? 12 : bone === 9 ? 13 : bone === 14 ? 18 : bone === 15 ? 19 : bone === 16 ? 20 : bone === 17 ? 21 : bone,
+        -P[4], P[2], P[3], -P[1], P[5], P[6], col);
+    }
+    /* pelo */
+    var hs = a.variant === "female" ? HAIR_FEM : HAIR_STYLES[(a.phase * 997 | 0) % HAIR_STYLES.length];
+    if (a.official) hs = HAIR_STYLES[1];
+    for (var h = 0; h < hs.length; h++) {
+      if (low && h > 1) break;
+      var H = hs[h]; part(5, H[0], H[1], H[2], H[3], H[4], H[5], cols.hair, 0.9);
+    }
+    /* dorsal en la espalda y escudo en el pecho (de cerca) */
+    if (!low && !a.official && a.number > 0) {
+      var num = String(a.number % 100), px = 0.052, nw = num.length * 3 * px + (num.length - 1) * px * 0.8;
+      var numCol = luma(shirt) > 0.55 ? [0.08, 0.09, 0.12] : [0.97, 0.97, 0.95];
+      for (var d = 0; d < num.length; d++) {
+        var g = DIGITS[+num.charAt(d)], ox = nw / 2 - d * (3 * px + px * 0.8);
+        for (var r = 0; r < 5; r++) for (var c = 0; c < 3; c++) {
+          if (g.charAt(r * 3 + c) !== "1") continue;
+          var x0 = ox - (c + 1) * px, y1 = 1.45 - r * px;
+          part(3, x0, y1 - px, -0.178, x0 + px, y1, -0.163, numCol, 1);
+        }
+      }
+      part(3, 0.08, 1.36, 0.163, 0.15, 1.43, 0.178, trim, 1);
+    }
+    m.code = -1;
+    return tris;
   }
 
   /* ------------------------------------------------------------------ dibujo jugadores */
@@ -2880,19 +3365,20 @@ var Pitch3D = (function () {
     var ca = Math.cos(a.facing), sa = Math.sin(a.facing);
     var lean = a.lean || 0, bank = a.bank || 0;
     var sway = dive ? 0 : Math.sin(sim.time * 1.4 + (a.phase || 0) * TAU) * 0.012 * (1 - run);
-    for (var vi = start; vi < m.n; vi += 6) {
+    for (var vi = start; vi < m.n; vi += FS) {
       var lx = m.a[vi] + bank * m.a[vi + 1] + sway, ly = m.a[vi + 1], lz = m.a[vi + 2] + lean * m.a[vi + 1];
       m.a[vi] = a.x + lx * ca + lz * sa;
       m.a[vi + 1] = ly * (a.scale || 1) + jump;
       m.a[vi + 2] = a.z - lx * sa + lz * ca;
     }
+    m.renormal(start);
   }
 
   function buildAssetBall(m) {
     var model = assetModels && assetModels.static && assetModels.static.ball_lod1;
     if (!model || !model.triangles || !model.positions.length) return false;
     var b = sim.ball, x = b.x, z = b.z, y = Math.max(BALL_R * BALL_SCALE, b.y);
-    m.circle(x, z, 0.3, [0.01, 0.05, 0.03], 8, 0.024);
+    aoDisc(m, x, z, 0.32, 0.32, clamp(0.4 + b.y * 0.12, 0.4, 0.95), 10);
     var pos = model.positions, col = model.colors;
     m.metallic = 0;
     m.roughness = (model.matRoughness && model.matRoughness[0] != null) ? model.matRoughness[0] : 0.56;
@@ -2920,6 +3406,395 @@ var Pitch3D = (function () {
     return true;
   }
 
+  /* ------------------------------------------------------------------ red con física */
+  /* Techo y fondo de cada red son una malla de nudos (Verlet) cosida al marco:
+   * el gol la embolsa, rebota y vuelve a su sitio. Solo visual. */
+  var nets = null, NET_SP = 0.36, NET_ROOF = 6, NET_BACK = 6;
+  function initNets() {
+    nets = [0, LEN].map(function (end) {
+      var out = end === 0 ? -1 : 1, x = end, back = end + out * 2.0;
+      var cols = Math.round(POST * 2 / NET_SP) + 1, rows = NET_ROOF + NET_BACK + 1, n = cols * rows;
+      var r = new Float32Array(n * 3), pin = new Uint8Array(n);
+      for (var j = 0; j < rows; j++) for (var i = 0; i < cols; i++) {
+        var k = (j * cols + i) * 3, z = MIDZ - POST + i * (POST * 2) / (cols - 1), px, py;
+        if (j <= NET_ROOF) { var t = j / NET_ROOF; px = lerp(x, back, t); py = lerp(BAR - 0.03, 1.9, t); }
+        else { px = back; py = 1.9 * (1 - (j - NET_ROOF) / NET_BACK); }
+        r[k] = px; r[k + 1] = py; r[k + 2] = z;
+        pin[j * cols + i] = (j === 0 || j === rows - 1 || i === 0 || i === cols - 1) ? 1 : 0;
+      }
+      var e = [];
+      for (j = 0; j < rows; j++) for (i = 0; i < cols; i++) {
+        var a = j * cols + i;
+        if (i < cols - 1) e.push(a, a + 1);
+        if (j < rows - 1) e.push(a, a + cols);
+      }
+      var len = new Float32Array(e.length / 2);
+      for (var q = 0; q < e.length; q += 2) {
+        var A = e[q] * 3, B = e[q + 1] * 3;
+        len[q / 2] = Math.sqrt(Math.pow(r[A] - r[B], 2) + Math.pow(r[A + 1] - r[B + 1], 2) + Math.pow(r[A + 2] - r[B + 2], 2));
+      }
+      return {end: end, out: out, cols: cols, rows: rows, r: r, p: new Float32Array(r), pp: new Float32Array(r), pin: pin,
+        e: e, len: len, live: false, acc: 0, hit: -1};
+    });
+  }
+  /* Golpe del balón: velocidad hacia fuera con caída suave alrededor del punto. */
+  function netHit(gx, z, y, power) {
+    if (!nets) initNets();
+    var N = nets[gx < LEN / 2 ? 0 : 1], best = -1, bd = 1e9;
+    for (var i = 0; i < N.cols * N.rows; i++) {
+      if (N.pin[i]) continue;
+      var k = i * 3, dz = N.r[k + 2] - z, dy = N.r[k + 1] - y, dx = (N.r[k] - N.end) * 0.6;
+      var d = Math.sqrt(dz * dz + dy * dy + dx * dx * 0.2);
+      var w = Math.max(0, 1 - d / 1.9); w *= w;
+      if (d < bd && N.r[k] !== N.end) { bd = d; best = i; }
+      if (!w) continue;
+      var back = N.r[k + 1] < 1.9 + 1e-3 && Math.abs(N.r[k] - N.end) > 1.95;
+      var v = power * 1.35 * w / 60;
+      N.pp[k] = N.p[k] - N.out * v * (back ? 1 : 0.55);
+      N.pp[k + 1] = N.p[k + 1] + (back ? 0 : v * 0.6);
+    }
+    N.live = true; N.hit = best;
+    sim.netBall = {n: N.end === 0 ? 0 : 1, idx: best, until: sim.time + 1.3};
+  }
+  function stepNet(N, h) {
+    var p = N.p, pp = N.pp, r = N.r, cnt = N.cols * N.rows, i, k;
+    for (i = 0; i < cnt; i++) {
+      if (N.pin[i]) continue;
+      k = i * 3;
+      for (var c = 0; c < 3; c++) {
+        var v = (p[k + c] - pp[k + c]) * 0.965;
+        pp[k + c] = p[k + c];
+        p[k + c] += v + (r[k + c] - p[k + c]) * 0.018;
+      }
+      p[k + 1] -= 2.5 * h * h;
+      if (p[k + 1] < 0.02) p[k + 1] = 0.02;
+    }
+    for (var it = 0; it < 3; it++) for (var q = 0; q < N.e.length; q += 2) {
+      var a = N.e[q], b = N.e[q + 1], A = a * 3, B = b * 3;
+      var dx = p[B] - p[A], dy = p[B + 1] - p[A + 1], dz = p[B + 2] - p[A + 2];
+      var d = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1e-6, L = N.len[q / 2];
+      if (d <= L * 1.16) continue;                 /* la red cede pero no se estira */
+      var f = (d - L * 1.16) / d, wa = N.pin[a] ? 0 : N.pin[b] ? 1 : 0.5, wb = N.pin[b] ? 0 : N.pin[a] ? 1 : 0.5;
+      p[A] += dx * f * wa; p[A + 1] += dy * f * wa; p[A + 2] += dz * f * wa;
+      p[B] -= dx * f * wb; p[B + 1] -= dy * f * wb; p[B + 2] -= dz * f * wb;
+    }
+    var en = 0;
+    for (i = 0; i < cnt * 3; i++) en += Math.abs(p[i] - r[i]) + Math.abs(p[i] - pp[i]);
+    if (en < 0.02) { p.set(r); pp.set(r); N.live = false; }
+  }
+  function updateNets(dt) {
+    if (!nets) return;
+    for (var g = 0; g < 2; g++) {
+      var N = nets[g];
+      if (!N.live) continue;
+      N.acc = Math.min(N.acc + dt, 0.1);
+      while (N.acc >= 1 / 60) { stepNet(N, 1 / 60); N.acc -= 1 / 60; }
+    }
+    /* el balón se queda dentro de la bolsa mientras la red lo frena */
+    var nb = sim.netBall, b = sim.ball;
+    if (nb && b.mode === "dead" && sim.time < nb.until && nb.idx >= 0) {
+      var M = nets[nb.n], k = nb.idx * 3;
+      b.x = M.p[k] - M.out * 0.2; b.z = M.p[k + 2]; b.y = Math.max(0.22, M.p[k + 1] - 0.05);
+    } else if (nb) sim.netBall = null;
+  }
+  function strand(m, A, B, w, c) {
+    var dx = Math.abs(B[0] - A[0]), dy = Math.abs(B[1] - A[1]), dz = Math.abs(B[2] - A[2]);
+    var o1 = dy >= dx && dy >= dz ? [w, 0, 0] : [0, w, 0], o2 = dz >= dx && dz >= dy ? [w, 0, 0] : [0, 0, w];
+    m.quad([A[0] - o1[0], A[1] - o1[1], A[2] - o1[2]], [B[0] - o1[0], B[1] - o1[1], B[2] - o1[2]], [B[0] + o1[0], B[1] + o1[1], B[2] + o1[2]], [A[0] + o1[0], A[1] + o1[1], A[2] + o1[2]], c);
+    m.quad([A[0] - o2[0], A[1] - o2[1], A[2] - o2[2]], [B[0] - o2[0], B[1] - o2[1], B[2] - o2[2]], [B[0] + o2[0], B[1] + o2[1], B[2] + o2[2]], [A[0] + o2[0], A[1] + o2[1], A[2] + o2[2]], c);
+  }
+  function drawNets(m) {
+    if (!nets) initNets();
+    var c = [0.86, 0.88, 0.86];
+    m.code = MAT_MATTE;
+    for (var g = 0; g < 2; g++) {
+      var N = nets[g], p = N.p;
+      for (var q = 0; q < N.e.length; q += 2) {
+        var A = N.e[q] * 3, B = N.e[q + 1] * 3;
+        strand(m, [p[A], p[A + 1], p[A + 2]], [p[B], p[B + 1], p[B + 2]], 0.013, c);
+      }
+    }
+    m.code = -1;
+  }
+
+  /* ------------------------------------------------------------------ clima en el césped y partículas */
+  /* Todo es visual: no usa el azar del motor ni cambia una sola jugada. */
+  var fxSeed = 12345;
+  function frnd() { fxSeed = (fxSeed * 1103515245 + 12345) & 0x7fffffff; return fxSeed / 0x7fffffff; }
+  function fxState() { if (!sim.fx) sim.fx = {p: [], div: [], steps: [], si: 0, splashAcc: 0}; return sim.fx; }
+
+  /* Paleta de los restos que levanta el balón según el clima. */
+  function debrisFor(wx) {
+    if (wx === "rain") return {a: [0.70, 0.80, 0.92], b: [0.26, 0.18, 0.11], wetA: true, mudB: 0.35, grav: 9.8, drag: 0.6};
+    if (wx === "cold") return {a: [0.94, 0.97, 1.0], b: [0.82, 0.88, 0.95], wetA: false, mudB: 0.5, grav: 4.2, drag: 1.8};
+    if (wx === "heat") return {a: [0.72, 0.60, 0.40], b: [0.62, 0.58, 0.28], wetA: false, mudB: 0.5, grav: 1.6, drag: 2.6, dust: true};
+    return {a: [0.24, 0.48, 0.16], b: [0.36, 0.26, 0.16], wetA: false, mudB: 0.3, grav: 7.5, drag: 1.0};
+  }
+
+  /* Ráfaga de vóxeles: n trozos que salen con `power` (0..1) hacia (dx, dz). */
+  function emitBurst(x, y, z, n, power, dx, dz, cone) {
+    if (!gl) return;
+    var f = fxState(), d = debrisFor(sim.wx);
+    if (reduced) n = Math.ceil(n / 3);
+    if (quality < 0.62) n = Math.ceil(n * 0.6);
+    var dl = Math.sqrt((dx || 0) * (dx || 0) + (dz || 0) * (dz || 0));
+    var ux = dl > 0.01 ? dx / dl : 0, uz = dl > 0.01 ? dz / dl : 0;
+    cone = cone == null ? 1 : cone;
+    for (var i = 0; i < n && f.p.length < 420; i++) {
+      var mud = frnd() < d.mudB, sp = (1.2 + power * 5.5) * (0.45 + frnd() * 0.75);
+      var ang = (frnd() - 0.5) * 2.4 * cone, ca = Math.cos(ang), sa = Math.sin(ang);
+      var vx = (ux * ca - uz * sa) * sp + (frnd() - 0.5) * 1.6, vz = (uz * ca + ux * sa) * sp + (frnd() - 0.5) * 1.6;
+      if (dl <= 0.01) { var a2 = frnd() * TAU; vx = Math.cos(a2) * sp * 0.6; vz = Math.sin(a2) * sp * 0.6; }
+      var col = mud ? d.b : d.a, j = 0.88 + frnd() * 0.24;
+      var life = d.dust ? 0.9 + frnd() * 0.9 : 0.45 + frnd() * 0.6;
+      f.p.push({x: x + (frnd() - 0.5) * 0.25, y: y + 0.03, z: z + (frnd() - 0.5) * 0.25,
+        vx: vx, vy: (1.4 + power * 4.2) * (0.5 + frnd() * 0.8), vz: vz,
+        life: life, max: life, s: (d.dust ? 0.09 : 0.035) + frnd() * (d.dust ? 0.10 : 0.06) * (0.6 + power),
+        c: [col[0] * j, col[1] * j, col[2] * j], wet: !mud && d.wetA, dust: !!d.dust && !mud,
+        g: d.dust && !mud ? d.grav : d.grav, drag: d.drag});
+    }
+  }
+  /* Marca permanente en el césped (chupinazo raso o entrada). */
+  function addDivot(x, z, dx, dz, len) {
+    if (x < -3 || x > LEN + 3 || z < -2 || z > WID + 2) return;
+    var f = fxState(), a = Math.atan2(dz || 0, dx || 1);
+    f.div.push({x: x, z: z, a: a, len: len || 0.32, w: 0.22 + frnd() * 0.1, wx: sim.wx});
+    if (f.div.length > 90) f.div.shift();
+  }
+  function fxKick(b, tx, tz, dur, arc) {
+    var dx = tx - b.x, dz = tz - b.z, d = Math.sqrt(dx * dx + dz * dz), sp = d / Math.max(0.08, dur);
+    var power = clamp((sp - 6) / 24, 0, 1);
+    if (b.y > 0.7) { emitBurst(b.x, b.y - 0.1, b.z, 2 + Math.round(power * 3), power * 0.4, dx, dz, 1.3); return; }
+    emitBurst(b.x, 0.02, b.z, 5 + Math.round(power * 13), 0.25 + power * 0.75, dx, dz, arc > 1 ? 0.7 : 1);
+    if (power > 0.55 && frnd() < 0.7) addDivot(b.x - dx / (d || 1) * 0.25, b.z - dz / (d || 1) * 0.25, dx, dz, 0.28 + power * 0.25);
+  }
+  function fxTackle(a, dir) {
+    if (!a) return;
+    var dx = Math.sin(a.facing), dz = Math.cos(a.facing);
+    emitBurst(a.x + dx * 0.5, 0.02, a.z + dz * 0.5, 12, 0.55, dx, dz, 1.4);
+    addDivot(a.x + dx * 0.6, a.z + dz * 0.6, dx, dz, sim.wx === "rain" ? 1.9 : sim.wx === "cold" ? 1.6 : 1.1);
+  }
+  function fxDive(gk, dir) {
+    if (!gk) return;
+    emitBurst(gk.x, 0.02, gk.z + (dir || 1) * 1.1, 10, 0.5, 0, dir || 1, 1.6);
+    addDivot(gk.x, gk.z + (dir || 1) * 1.0, 0, dir || 1, 1.3);
+  }
+
+  /* Paso del tiempo de partículas y huellas (tiempo de pantalla, no del motor). */
+  function updateFx(dt) {
+    if (!dt || !sim.fx && sim.wx !== "rain") return;
+    var f = fxState(), p = f.p;
+    for (var i = p.length - 1; i >= 0; i--) {
+      var q = p[i];
+      q.life -= dt;
+      if (q.life <= 0) { p.splice(i, 1); continue; }
+      var dr = Math.pow(0.5, dt * q.drag);
+      q.vx *= dr; q.vz *= dr; q.vy = q.dust ? q.vy * dr + 0.35 * dt : q.vy - q.g * dt;
+      q.x += q.vx * dt; q.y += q.vy * dt; q.z += q.vz * dt;
+      if (q.y < 0.01) { q.y = 0.01; q.vy = q.wet ? 0 : -q.vy * 0.25; q.vx *= 0.5; q.vz *= 0.5; if (q.wet) q.life = Math.min(q.life, 0.12); }
+    }
+    var b = sim.ball;
+    /* balón rodando sobre agua: estela de gotas */
+    if (sim.wx === "rain" && b.mode === "loose" && b.y < 0.3 && b.vx * b.vx + b.vz * b.vz > 25 && frnd() < dt * 22)
+      emitBurst(b.x, 0.02, b.z, 1, 0.15, b.vx, b.vz, 0.6);
+    /* gotas que rebotan en el césped cerca del balón */
+    if (sim.wx === "rain" && !reduced) {
+      f.splashAcc += dt * (quality < 0.62 ? 10 : 22);
+      while (f.splashAcc >= 1 && p.length < 420) {
+        f.splashAcc -= 1;
+        var sx = b.x + (frnd() - 0.5) * 50, sz = b.z + (frnd() - 0.2) * 34;
+        if (sx < -4 || sx > LEN + 4 || sz < -3 || sz > WID + 3) continue;
+        for (var k = 0; k < 2; k++)
+          p.push({x: sx, y: 0.02, z: sz, vx: (frnd() - 0.5) * 1.2, vy: 1.1 + frnd() * 0.9, vz: (frnd() - 0.5) * 1.2,
+            life: 0.22, max: 0.22, s: 0.035, c: [0.78, 0.86, 0.95], wet: true, g: 9.8, drag: 0.4});
+      }
+    } else f.splashAcc = 0;
+    /* pisadas: huellas en nieve y barro, polvo con calor */
+    var marks = sim.wx === "cold" || sim.wx === "rain", puff = sim.wx === "heat" || sim.wx === "cold";
+    if (!marks && !puff) return;
+    for (var s = 0; s < 2; s++) {
+      var list = sim.players[s] || [];
+      for (var j = 0; j < list.length; j++) {
+        var a = list[j];
+        if (!a || a.gone || a.sentOff || a.hidden) continue;
+        var v = Math.sqrt(a.vx * a.vx + a.vz * a.vz);
+        if (v < 2.2) continue;
+        a.fxStride = (a.fxStride || 0) + v * dt;
+        if (a.fxStride < 0.95) continue;
+        a.fxStride = 0; a.fxFoot = !a.fxFoot;
+        var side = a.fxFoot ? 0.11 : -0.11, cx = Math.cos(a.facing), sx2 = Math.sin(a.facing);
+        var fx = a.x + cx * side, fz = a.z - sx2 * side;
+        if (marks && fx > -4 && fx < LEN + 4 && fz > -3 && fz < WID + 3) {
+          f.steps[f.si] = {x: fx, z: fz, a: a.facing}; f.si = (f.si + 1) % 320;
+        }
+        if (puff && v > 4.5 && frnd() < 0.5) emitBurst(fx, 0.02, fz, 1, 0.1, -a.vx, -a.vz, 0.8);
+      }
+    }
+  }
+
+  function flatRect(m, x, z, a, len, w, y, c) {
+    var ca = Math.cos(a), sa = Math.sin(a), hx = len / 2, hz = w / 2;
+    var p = function (u, v) { return [x + ca * u - sa * v, y, z + sa * u + ca * v]; };
+    m.quad(p(-hx, -hz), p(-hx, hz), p(hx, hz), p(hx, -hz), c);
+  }
+  function drawFx(m) {
+    var f = sim.fx;
+    if (!f) return;
+    var wet = sim.wx === "rain";
+    /* marcas: tepes levantados, resbalones y huellas */
+    m.code = wet ? MAT_GLOSS : MAT_MATTE;
+    for (var i = 0; i < f.div.length; i++) {
+      var d = f.div[i];
+      var col = d.wx === "cold" ? [0.20, 0.30, 0.16] : d.wx === "rain" ? [0.20, 0.14, 0.08] : d.wx === "heat" ? [0.50, 0.40, 0.26] : [0.33, 0.24, 0.15];
+      flatRect(m, d.x, d.z, d.a, d.len, d.w, 0.009, col);
+      if (d.len < 0.7) {
+        var ox = Math.cos(d.a) * (d.len * 0.5 + 0.18), oz = Math.sin(d.a) * (d.len * 0.5 + 0.18);
+        m.box(d.x + ox, 0, d.z + oz, 0.16, 0.05, 0.12, d.wx === "cold" ? [0.9, 0.94, 0.98] : [0.22, 0.42, 0.15], 0.8, 1);
+      }
+    }
+    var sc = sim.wx === "cold" ? [0.62, 0.70, 0.80] : [0.22, 0.17, 0.11];
+    for (var k = 0; k < f.steps.length; k++) {
+      var st = f.steps[k];
+      if (st) flatRect(m, st.x, st.z, PI / 2 - st.a, 0.26, 0.11, sim.wx === "cold" ? 0.075 : 0.010, sc);
+    }
+    /* partículas: cubos que encogen al apagarse */
+    for (var j = 0; j < f.p.length; j++) {
+      var q = f.p[j], kf = q.life / q.max, s = q.s * (q.dust ? 0.6 + 0.8 * (1 - kf) : Math.min(1, kf * 2.2));
+      if (q.dust && kf < 0.5) s *= kf * 2;
+      m.code = q.wet ? MAT_GLOSS : MAT_MATTE;
+      m.box(q.x, q.y - s / 2, q.z, s, s, s, q.c, 1, 1);
+    }
+    m.code = -1;
+  }
+
+  /* Desperfectos fijos del césped según el clima: barro y charcos con lluvia,
+   * nieve con calles limpias en las líneas, calvas secas con calor y desgaste
+   * en las áreas siempre. Se reconstruye al cambiar el clima o la hora. */
+  var wxBuf = null, wxCount = 0, wxKey = "";
+  var LINES = [[0, 0, LEN, 0], [0, WID, LEN, WID], [0, 0, 0, WID], [LEN, 0, LEN, WID], [LEN / 2, 0, LEN / 2, WID],
+    [16.5, MIDZ - 20.16, 16.5, MIDZ + 20.16], [0, MIDZ - 20.16, 16.5, MIDZ - 20.16], [0, MIDZ + 20.16, 16.5, MIDZ + 20.16],
+    [LEN - 16.5, MIDZ - 20.16, LEN - 16.5, MIDZ + 20.16], [LEN - 16.5, MIDZ - 20.16, LEN, MIDZ - 20.16], [LEN - 16.5, MIDZ + 20.16, LEN, MIDZ + 20.16],
+    [5.5, MIDZ - 9.16, 5.5, MIDZ + 9.16], [0, MIDZ - 9.16, 5.5, MIDZ - 9.16], [0, MIDZ + 9.16, 5.5, MIDZ + 9.16],
+    [LEN - 5.5, MIDZ - 9.16, LEN - 5.5, MIDZ + 9.16], [LEN - 5.5, MIDZ - 9.16, LEN, MIDZ - 9.16], [LEN - 5.5, MIDZ + 9.16, LEN, MIDZ + 9.16]];
+  function lineDist(x, z) {
+    var best = Math.abs(Math.sqrt((x - LEN / 2) * (x - LEN / 2) + (z - MIDZ) * (z - MIDZ)) - 9.15);
+    for (var i = 0; i < LINES.length; i++) {
+      var L = LINES[i], dx = L[2] - L[0], dz = L[3] - L[1], l2 = dx * dx + dz * dz;
+      var t = clamp(((x - L[0]) * dx + (z - L[1]) * dz) / l2, 0, 1);
+      var ex = L[0] + dx * t - x, ez = L[1] + dz * t - z, dd = Math.sqrt(ex * ex + ez * ez);
+      if (dd < best) best = dd;
+    }
+    return best;
+  }
+  function vnoise(x, z, s) {
+    var ix = Math.floor(x / s), iz = Math.floor(z / s), fx = x / s - ix, fz = z / s - iz;
+    var h = function (a, b) { var n = ((a * 374761393 + b * 668265263) ^ fxNoiseSalt) >>> 0; n = ((n ^ (n >>> 13)) * 1274126177) >>> 0; return (n & 0xffff) / 0xffff; };
+    var u = fx * fx * (3 - 2 * fx), v = fz * fz * (3 - 2 * fz);
+    return lerp(lerp(h(ix, iz), h(ix + 1, iz), u), lerp(h(ix, iz + 1), h(ix + 1, iz + 1), u), v);
+  }
+  var fxNoiseSalt = 0;
+  /* Desgaste del juego: áreas pequeñas, punto de penalti, centro y la banda del linier. */
+  function wearAt(x, z) {
+    var w = 0;
+    [[3.2, MIDZ, 4.5, 3.4], [LEN - 3.2, MIDZ, 4.5, 3.4], [11, MIDZ, 1.8, 1.8], [LEN - 11, MIDZ, 1.8, 1.8], [LEN / 2, MIDZ, 2.6, 2.6]].forEach(function (g) {
+      var dx = (x - g[0]) / g[2], dz = (z - g[1]) / g[3], d = Math.sqrt(dx * dx + dz * dz);
+      w = Math.max(w, 1 - d);
+    });
+    if (z < -0.6 && z > -2.2 && x > LEN / 2 - 2 && x < LEN) w = Math.max(w, 0.45);
+    if (z > WID + 0.6 && z < WID + 2.2 && x > 0 && x < LEN / 2 + 2) w = Math.max(w, 0.45);
+    return w;
+  }
+  function buildPitchWx(m, wx, env) {
+    var night = env.night || 0;
+    fxNoiseSalt = hashKey(colors[0] + "|" + colors[1] + "|" + wx) & 0xffff;
+    var S = 0.6, x, z;
+    /* 1. desgaste en las zonas de más juego */
+    m.code = wx === "rain" ? MAT_GLOSS : MAT_MATTE;
+    var dirt = wx === "rain" ? [0.24, 0.16, 0.09] : wx === "heat" ? [0.56, 0.45, 0.30] : wx === "cold" ? [0.30, 0.26, 0.22] : [0.36, 0.27, 0.17];
+    var wearMul = wx === "rain" ? 1.35 : wx === "heat" ? 1.15 : wx === "sun" || wx === "mild" ? 0.75 : 1;
+    for (x = -2.4; x < LEN + 2.4; x += S) for (z = -2.4; z < WID + 2.4; z += S) {
+      var cx = x + S / 2, cz = z + S / 2, w = wearAt(cx, cz) * wearMul;
+      if (w <= 0) continue;
+      var n = vnoise(cx, cz, 1.3) * 0.6 + vnoise(cx, cz, 0.45) * 0.4;
+      if (n > 1 - w * 0.9) {
+        var c = shade(dirt, 0.86 + vnoise(cx, cz, 0.3) * 0.26);
+        if (wx === "rain" && n > 1 - w * 0.5) c = [0.30, 0.34, 0.40];
+        m.quad([x, 0.007, z], [x + S, 0.007, z], [x + S, 0.007, z + S], [x, 0.007, z + S], c);
+        /* terrones sueltos de barro o tierra */
+        if (n > 1 - w * 0.35 && vnoise(cx * 3.1, cz * 2.7, 0.7) > 0.72) m.box(cx, 0, cz, 0.18, 0.06, 0.15, shade(dirt, 0.8), 0.7, 1);
+      }
+    }
+    if (wx === "rain") {
+      /* 2. charcos: manchas planas que reflejan el cielo */
+      m.code = MAT_METAL;
+      var refl = night > 0.5 ? [0.10, 0.12, 0.17] : [0.46, 0.52, 0.60];
+      for (var pi = 0; pi < 16; pi++) {
+        var px = pi < 6 ? (pi % 2 ? LEN - 4 - (pi >> 1) * 3 : 4 + (pi >> 1) * 3) + vnoise(pi, 3, 1) * 3 : 8 + vnoise(pi, 7, 1) * (LEN - 16);
+        var pz = pi < 6 ? MIDZ + (vnoise(pi, 11, 1) - 0.5) * 12 : 4 + vnoise(pi, 13, 1) * (WID - 8);
+        var pr = 0.9 + vnoise(pi, 17, 1) * 1.9, PS = 0.3;
+        for (x = px - pr; x < px + pr; x += PS) for (z = pz - pr * 0.7; z < pz + pr * 0.7; z += PS) {
+          var dx = (x + PS / 2 - px) / pr, dz = (z + PS / 2 - pz) / (pr * 0.7);
+          if (dx * dx + dz * dz > 0.55 + vnoise(x, z, 0.6) * 0.5) continue;
+          m.quad([x, 0.010, z], [x + PS, 0.010, z], [x + PS, 0.010, z + PS], [x, 0.010, z + PS], shade(refl, 0.9 + vnoise(x, z, 0.5) * 0.2));
+        }
+      }
+    } else if (wx === "cold") {
+      /* 2. nieve en bloques: más en bandas y esquinas, calles limpias en las líneas */
+      m.code = MAT_MATTE;
+      var C = 0.9;
+      for (x = -4.5; x < LEN + 4.5; x += C) for (z = -3.5; z < WID + 3.5; z += C) {
+        var mx = x + C / 2, mz = z + C / 2;
+        if (lineDist(mx, mz) < 0.55) continue;
+        var edge = Math.min(mx, LEN - mx, mz, WID - mz), outside = edge < 0 ? 1 : 0;
+        var dens = 0.50 + clamp(1 - edge / 12, 0, 1) * 0.35 + outside * 0.3 - wearAt(mx, mz) * 1.1;
+        var sn = vnoise(mx, mz, 7) * 0.7 + vnoise(mx, mz, 2.4) * 0.22 + vnoise(mx, mz, 0.9) * 0.08;
+        if (sn > 1 - dens) {
+          var hgt = 0.02 + clamp(sn - (1 - dens), 0, 0.5) * 0.18 + outside * 0.05;
+          var sc2 = [0.90 + vnoise(mx, mz, 0.4) * 0.08, 0.93 + vnoise(mx, mz, 0.4) * 0.05, 0.97];
+          m.box(mx, 0, mz, C, hgt, C, sc2, 0.92, 1);
+        }
+      }
+      /* montones de nieve apartada junto a las bandas */
+      for (x = 1; x < LEN; x += 1.6) {
+        [-3.0, WID + 3.0].forEach(function (zz, side) {
+          var h = 0.25 + vnoise(x, zz, 1.7) * 0.45;
+          m.box(x, 0, zz, 1.5, h, 0.9, [0.92, 0.95, 0.99], 0.8, 1);
+          m.box(x + 0.2, h, zz + (side ? 0.12 : -0.12), 0.9, h * 0.5, 0.55, [0.95, 0.97, 1.0], 0.85, 1);
+        });
+      }
+    } else if (wx === "heat") {
+      /* 2. calvas quemadas por el sol */
+      m.code = MAT_MATTE;
+      var D = 0.75;
+      for (x = -3; x < LEN + 3; x += D) for (z = -2.5; z < WID + 2.5; z += D) {
+        var hx = x + D / 2, hz = z + D / 2, hn = vnoise(hx, hz, 5.5) * 0.7 + vnoise(hx, hz, 1.4) * 0.3;
+        hn += wearAt(hx, hz) * 0.25;
+        if (hn < 0.72 || lineDist(hx, hz) < 0.12) continue;
+        var straw = mix([0.40, 0.45, 0.20], [0.58, 0.52, 0.30], clamp((hn - 0.72) * 4, 0, 1));
+        m.quad([x, 0.006, z], [x + D, 0.006, z], [x + D, 0.006, z + D], [x, 0.006, z + D], shade(straw, 0.92 + vnoise(hx, hz, 0.4) * 0.16));
+      }
+      /* grietas en la tierra de las porterías */
+      m.code = MAT_MATTE;
+      [3, LEN - 3].forEach(function (gx) {
+        for (var ci = 0; ci < 14; ci++) {
+          var a = vnoise(gx, ci, 1) * TAU, l = 0.6 + vnoise(ci, gx, 1) * 1.2;
+          flatRect(m, gx + (vnoise(ci, 5, 1) - 0.5) * 6, MIDZ + (vnoise(ci, 9, 1) - 0.5) * 6, a, l, 0.05, 0.011, [0.24, 0.18, 0.12]);
+        }
+      });
+    }
+    m.code = -1;
+  }
+  function ensurePitchWx(env) {
+    var k = sim.wx + "|" + env.tod + "|" + colors[0] + colors[1];
+    if (k === wxKey && wxBuf) return;
+    var m = new Mesh(1 << 17);
+    buildPitchWx(m, sim.wx, env);
+    if (!wxBuf) wxBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, wxBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, m.a.subarray(0, Math.max(FS, m.n)), gl.STATIC_DRAW);
+    wxCount = m.n / FS; wxKey = k;
+  }
+
   /* Lluvia y nieve procedurales: quads baratos alrededor del balón que
      desaparecen en calidad baja o con movimiento reducido. */
   function drawWeather(m) {
@@ -2928,7 +3803,7 @@ var Pitch3D = (function () {
     if (!rain && !snow) return;
     var count = quality > 0.7 ? (rain ? 210 : 110) : (rain ? 100 : 55);
     var b = sim.ball, t = sim.time;
-    m.metallic = 0; m.roughness = 0.92;
+    m.metallic = 0; m.roughness = 0.92; m.code = MAT_UNLIT;
     for (var i = 0; i < count; i++) {
       var seed = (i * 2654435761 + 1013904223) >>> 0;
       var x = b.x + ((seed % 800) / 10 - 40) + Math.sin(t * 0.6 + i) * 0.25;
@@ -2946,11 +3821,12 @@ var Pitch3D = (function () {
         m.quad([x, y, z], [x + sc, y, z], [x + sc, y + sc, z], [x, y + sc, z], [0.90, 0.94, 1.0]);
       }
     }
+    m.code = -1;
   }
 
   function buildBall(m) {
     var b = sim.ball, r = BALL_R * BALL_SCALE, y = Math.max(r, b.y), x = b.x, z = b.z;
-    m.circle(x, z, 0.3, [0.01, 0.05, 0.03], 8, 0.024);
+    aoDisc(m, x, z, 0.32, 0.32, 0.45, 10);
     var top = [x, y + r, z], bot = [x, y - r, z], a = [x + r, y, z], c = [x - r, y, z], d = [x, y, z + r], e = [x, y, z - r];
     var w = [0.95, 0.95, 0.9], k = [0.12, 0.14, 0.15];
     m.tri(top, a, d, w); m.tri(top, d, c, k); m.tri(top, c, e, w); m.tri(top, e, a, k);
@@ -3018,13 +3894,58 @@ var Pitch3D = (function () {
     return out;
   }
 
+  /* Halos de los focos y conos de luz: aditivos, sin escribir profundidad. */
+  function buildGlow(env) {
+    fx.reset();
+    var k = env.flood; if (k < 0.05 || !LAMPS.length) return;
+    var ex = eyeArr[0], ey = eyeArr[1], ez = eyeArr[2];
+    for (var i = 0; i < LAMPS.length; i++) {
+      var L = LAMPS[i], dx = ex - L[0], dy = ey - L[1], dz = ez - L[2], dl = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+      /* base del billboard perpendicular a la cámara */
+      var rx = dz / dl, rz = -dx / dl, rl = Math.sqrt(rx * rx + rz * rz) || 1; rx /= rl; rz /= rl;
+      var ux = -(dy / dl) * rx * 0, uy = 1, uz = 0;
+      var gk = k * (0.25 + 0.75 * env.night), R = L[3] * (0.55 + 0.45 * env.night) * (0.92 + 0.08 * Math.sin(sim.time * 0.7 + i));
+      var c = [0.90 * gk * L[4], 0.88 * gk * L[4], 0.80 * gk * L[4]];
+      var seg = 14, px = L[0] + dx / dl * 0.5, py = L[1] + dy / dl * 0.5, pz = L[2] + dz / dl * 0.5;
+      for (var s2 = 0; s2 < seg; s2++) {
+        var a0 = s2 * TAU / seg, a1 = (s2 + 1) * TAU / seg;
+        fx.triAO(px, py, pz,
+          px + (Math.cos(a0) * rx) * R, py + Math.sin(a0) * R * uy, pz + (Math.cos(a0) * rz) * R,
+          px + (Math.cos(a1) * rx) * R, py + Math.sin(a1) * R * uy, pz + (Math.cos(a1) * rz) * R, c[0], c[1], c[2], 1, 0, 0);
+      }
+      /* fuente: no se tiñe; los vértices exteriores llevan color 0 */
+      fixGlowRim(fx, seg);
+    }
+  }
+  /* En el halo el color central se conserva y el borde va a negro (aditivo). */
+  function fixGlowRim(m, seg) {
+    var a = m.a, start = m.n - seg * 3 * FS;
+    for (var i = start; i < m.n; i += 3 * FS) {
+      for (var v = 1; v < 3; v++) { var o = i + v * FS; a[o + 3] = 0; a[o + 4] = 0; a[o + 5] = 0; }
+    }
+  }
+
+  function setUniforms(env, mvp) {
+    var U = locations;
+    gl.uniformMatrix4fv(U.uMvp, false, mvp);
+    gl.uniformMatrix4fv(U.uShadowMvp, false, shadowMat);
+    gl.uniform1f(U.uTime, sim.time);
+    gl.uniform1f(U.uCrowd, reduced ? 0 : 0.10 + 0.22 * clamp(sim.shake * 3 + (sim.action && sim.action.type === "shot" ? 0.6 : 0), 0, 1) + (sim.netT > 0 ? 0.25 : 0));
+    gl.uniform3fv(U.uEye, eyeArr);
+    gl.uniform3fv(U.uSunDir, env.sun); gl.uniform3fv(U.uSunCol, env.sunCol);
+    gl.uniform3fv(U.uSkyAmb, env.sky); gl.uniform3fv(U.uGroundAmb, env.ground);
+    gl.uniform3fv(U.uFogCol, env.fog); gl.uniform3fv(U.uZenith, env.zenith); gl.uniform3fv(U.uHorizon, env.horizon);
+    gl.uniform1f(U.uFogDen, env.fogDen); gl.uniform1f(U.uExposure, env.exposure); gl.uniform1f(U.uStars, env.stars);
+    gl.uniform1f(U.uShadowOn, useShadows() ? 1 : 0); gl.uniform1f(U.uTexel, shadowSize ? 1 / shadowSize : 0);
+    gl.uniform1f(U.uFlood, env.flood); gl.uniform1f(U.uEmis, env.emis);
+    gl.uniform2f(U.uRes, canvas.width, canvas.height);
+    gl.uniform3fv(U.uL0, TOWERS[0]); gl.uniform3fv(U.uL1, TOWERS[1]); gl.uniform3fv(U.uL2, TOWERS[2]); gl.uniform3fv(U.uL3, TOWERS[3]);
+    gl.uniform1i(U.uShadow, 0);
+    gl.uniform3fv(U.uGrassMul, env.grassMul); gl.uniform4fv(U.uGrassMix, env.grassMix); gl.uniform1f(U.uWet, env.wet);
+  }
+
   function draw() {
-    /* El clima del motor tiñe cielo y niebla; el 3D solo lo representa. */
-    var sky = sim.wx === "rain" ? [0.012, 0.024, 0.040] : sim.wx === "cold" ? [0.020, 0.031, 0.052] :
-      sim.wx === "heat" ? [0.052, 0.037, 0.028] : [0.018, 0.035, 0.055];
-    gl.clearColor(sky[0], sky[1], sky[2], 1);
-    fogArr[0] = sky[0] * 0.92; fogArr[1] = sky[1] * 0.96; fogArr[2] = sky[2] * 1.02;
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    var env = currentEnv();
     dyn.reset();
     dyn.spec = quality > 0.55;
     assetFrameTris = 0; assetFramePlayers = 0; assetFrameBall = 0;
@@ -3042,7 +3963,10 @@ var Pitch3D = (function () {
       drawRefCard(dyn, oa);
     }
     buildCoin(dyn);
+    drawNets(dyn);
     if (!sim.ballHidden && !buildAssetBall(dyn)) buildBall(dyn);
+    var solidN = dyn.n;
+    drawFx(dyn);
     drawWeather(dyn);
     if (dyn.n > dynCapacity) {
       var cap = dynCapacity; while (cap < dyn.n) cap *= 2;
@@ -3057,24 +3981,54 @@ var Pitch3D = (function () {
     var view = lookAt(viewMat, eyeArr, lookArr, UP);
     var proj = perspective(projMat, PI / 4, viewW / Math.max(1, viewH), 0.3, 260);
     var mvp = matMul(mvpMat, proj, view);
-    gl.useProgram(program);
-    gl.uniformMatrix4fv(locations.mvp, false, mvp);
-    if (locations.fog) gl.uniform3fv(locations.fog, fogArr);
-    if (locations.eye) gl.uniform3fv(locations.eye, eyeArr);
-    var wv = weatherFx(sim.wx);
-    if (locations.near) gl.uniform1f(locations.near, wv.near);
-    if (locations.far) gl.uniform1f(locations.far, wv.far);
-    gl.enableVertexAttribArray(locations.pos); gl.enableVertexAttribArray(locations.col);
-    gl.bindBuffer(gl.ARRAY_BUFFER, staticBuf);
-    gl.vertexAttribPointer(locations.pos, 3, gl.FLOAT, false, 24, 0);
-    gl.vertexAttribPointer(locations.col, 3, gl.FLOAT, false, 24, 12);
-    gl.drawArrays(gl.TRIANGLES, 0, staticCount);
-    if (dyn.n) {
-      gl.bindBuffer(gl.ARRAY_BUFFER, dynBuf);
-      gl.vertexAttribPointer(locations.pos, 3, gl.FLOAT, false, 24, 0);
-      gl.vertexAttribPointer(locations.col, 3, gl.FLOAT, false, 24, 12);
-      gl.drawArrays(gl.TRIANGLES, 0, dyn.n / 6);
+
+    /* 1. sombras */
+    var shadows = useShadows();
+    if (shadows) {
+      if (shadowDirty) updateShadowMatrix(env);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, shadowFb);
+      gl.viewport(0, 0, shadowSize, shadowSize);
+      gl.clearColor(1, 1, 1, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.useProgram(shadowProg);
+      gl.uniformMatrix4fv(shadowLoc.mvp, false, shadowMat);
+      gl.enableVertexAttribArray(shadowLoc.pos);
+      bindMesh(staticBuf, shadowLoc); gl.drawArrays(gl.TRIANGLES, 0, staticCount);
+      if (solidN) { bindMesh(dynBuf, shadowLoc); gl.drawArrays(gl.TRIANGLES, 0, solidN / FS); }
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.viewport(0, 0, canvas.width, canvas.height);
     }
+    /* 2. escena */
+    var lite = progLite && quality < 0.62;
+    program = lite ? progLite : progFull; locations = lite ? locLite : locFull;
+    gl.clearColor(env.fog[0], env.fog[1], env.fog[2], 1);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.useProgram(program);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, shadows ? shadowTex : null);
+    setUniforms(env, mvp);
+    var L = locations;
+    gl.enableVertexAttribArray(L.pos); gl.enableVertexAttribArray(L.col);
+    if (L.nrm >= 0) gl.enableVertexAttribArray(L.nrm);
+    if (L.mat >= 0) gl.enableVertexAttribArray(L.mat);
+    gl.depthMask(false); bindMesh(skyBuf, L); gl.drawArrays(gl.TRIANGLES, 0, skyCount); gl.depthMask(true);
+    bindMesh(staticBuf, L); gl.drawArrays(gl.TRIANGLES, 0, staticCount);
+    ensurePitchWx(env);
+    if (wxCount) {
+      gl.enable(gl.POLYGON_OFFSET_FILL); gl.polygonOffset(-1, -4);
+      bindMesh(wxBuf, L); gl.drawArrays(gl.TRIANGLES, 0, wxCount);
+      gl.disable(gl.POLYGON_OFFSET_FILL);
+    }
+    for (var cb = 0; cb < (lite ? 1 : 2); cb++) if (crowdCounts[cb]) { bindMesh(crowdBufs[cb], L); gl.drawArrays(gl.TRIANGLES, 0, crowdCounts[cb]); }
+    if (dyn.n) { bindMesh(dynBuf, L); gl.drawArrays(gl.TRIANGLES, 0, dyn.n / FS); }
+    /* 3. halos */
+    buildGlow(env);
+    if (fx.n) {
+      if (fx.n > fxCap) { fxCap = fx.a.length; gl.bindBuffer(gl.ARRAY_BUFFER, fxBuf); gl.bufferData(gl.ARRAY_BUFFER, fxCap * 4, gl.DYNAMIC_DRAW); }
+      gl.bindBuffer(gl.ARRAY_BUFFER, fxBuf); gl.bufferSubData(gl.ARRAY_BUFFER, 0, fx.a.subarray(0, fx.n));
+      gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE); gl.depthMask(false);
+      bindMesh(fxBuf, L); gl.drawArrays(gl.TRIANGLES, 0, fx.n / FS);
+      gl.depthMask(true); gl.disable(gl.BLEND);
+    }
+    gl.bindTexture(gl.TEXTURE_2D, null);
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
   }
 
@@ -3082,18 +4036,22 @@ var Pitch3D = (function () {
     if (disposed || !gl) return;
     raf = requestAnimationFrame(loop);
     if (document.hidden) { lastTs = ts; return; }
-    var dt = lastTs ? Math.min(0.1, Math.max(0, (ts - lastTs) / 1000)) : 0;
+    var dt = lastTs ? Math.min(0.25, Math.max(0, (ts - lastTs) / 1000)) : 0;
     lastTs = ts;
     resize();
     if (!frozen && !sim.replay && (!sim.ended || sim.cinema)) {
       acc += dt;
       var n = 0;
-      while (acc >= STEP && n < 4) { simStep(STEP); acc -= STEP; n++; }
-      if (n >= 4) acc = 0;
+      /* Con FPS bajos la simulación recupera hasta 0,25 s por fotograma
+       * para que el partido no se ralentice en móviles modestos. */
+      while (acc >= STEP && n < 15) { simStep(STEP); acc -= STEP; n++; }
+      if (n >= 15) acc = 0;
     } else if (sim.replay) {
-      simStep(dt);
+      simStep(Math.min(dt, 0.25));
     } else acc = 0;
     updateCrowdAudio();
+    updateFx(dt);
+    updateNets(dt);
     updateCamera(dt);
     draw();
     frameCount++;
@@ -3158,8 +4116,10 @@ var Pitch3D = (function () {
   }
 
   function adaptQuality() {
+    if (opts && opts.quality != null) { quality = +opts.quality; return; }
     if (fps < 32) { fpsBad++; fpsGood = 0; } else if (fps > 52) { fpsGood++; fpsBad = 0; } else { fpsBad = fpsGood = 0; }
-    if (fpsBad >= 3 && quality > 0.55) { quality = Math.max(0.55, quality - 0.15); fpsBad = 0; }
+    if (fps < 14 && quality > 0.55) { quality = 0.55; fpsBad = 0; }
+    else if (fpsBad >= 3 && quality > 0.55) { quality = Math.max(0.55, quality - 0.15); fpsBad = 0; }
     else if (fpsGood >= 6 && quality < 1) { quality = Math.min(1, quality + 0.08); fpsGood = 0; }
   }
 
@@ -3317,13 +4277,14 @@ var Pitch3D = (function () {
     colors = [kitColor(srcCols[0], rgb(SHIRT[0])), kitColor(srcCols[1], rgb(SHIRT[1]))];
     disposed = false; frozen = false; reduced = false;
     loadAssets();
+    todSel = pickTod();
     try { reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (ignore) {}
     canvas = document.createElement("canvas");
     canvas.className = "lpitch lpitch3d";
     canvas.setAttribute("aria-label", label("Vista 3D del partido"));
     canvas.style.display = "block"; canvas.style.width = "100%"; canvas.style.minHeight = "210px";
     host.appendChild(canvas);
-    quality = (window.devicePixelRatio || 1) > 2 ? 0.75 : 1;
+    quality = opts.quality != null ? +opts.quality : (window.devicePixelRatio || 1) > 2 ? 0.75 : 1;
     try { initGL(); } catch (err) {
       if (window.console) console.warn("Pitch3D: se activa el campo 2D de reserva", err);
       destroy(); return false;
@@ -3374,11 +4335,21 @@ var Pitch3D = (function () {
     if (gl) {
       try {
         if (staticBuf) gl.deleteBuffer(staticBuf);
+        crowdBufs.forEach(function (b) { if (b) gl.deleteBuffer(b); });
+        if (wxBuf) gl.deleteBuffer(wxBuf);
         if (dynBuf) gl.deleteBuffer(dynBuf);
-        if (program) gl.deleteProgram(program);
+        if (progFull) gl.deleteProgram(progFull);
+        if (progLite) gl.deleteProgram(progLite);
+        if (shadowProg) gl.deleteProgram(shadowProg);
+        if (fxBuf) gl.deleteBuffer(fxBuf);
+        if (skyBuf) gl.deleteBuffer(skyBuf);
+        if (shadowFb) gl.deleteFramebuffer(shadowFb);
+        if (shadowTex) gl.deleteTexture(shadowTex);
+        if (shadowRb) gl.deleteRenderbuffer(shadowRb);
       } catch (ignore) {}
     }
-    gl = null; staticBuf = dynBuf = null; program = null; locations = null; staticMesh = null; dyn = null; staticCount = 0;
+    gl = null; staticBuf = dynBuf = null; program = null; locations = null; progFull = progLite = null; locFull = locLite = null; staticMesh = null; dyn = null; staticCount = 0; crowdBufs = [null, null]; crowdCounts = [0, 0]; wxBuf = null; wxCount = 0; wxKey = "";
+    shadowProg = shadowFb = shadowTex = shadowRb = null; shadowSize = 0; fxBuf = skyBuf = null; fx = null; envNow = null;
     if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas); canvas = null;
     if (hud && hud.parentNode) hud.parentNode.removeChild(hud); hud = null;
     if (scoreHud && scoreHud.parentNode) scoreHud.parentNode.removeChild(scoreHud); scoreHud = null;
@@ -3474,6 +4445,7 @@ var Pitch3D = (function () {
   function state(o) {
     if (!o || sim.replay) return;
     if (o.wx && o.wx !== sim.wx) sim.wx = String(o.wx);
+    if (o.tod && /^(day|dusk|night)$/.test(o.tod)) todSel = o.tod;
     if (o.toss && typeof o.toss === "object") sim.toss = o.toss;
     var scoreChanged = false;
     if (o.score && o.score.length >= 2) {
@@ -3543,7 +4515,7 @@ var Pitch3D = (function () {
     }
     var loser = nearestActor(1 - side, b.x, b.z, false);
     if (loser && (!loser.visualAnim || loser.visualAnim.t >= loser.visualAnim.dur))
-      loser.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: b.z >= loser.z ? 1 : -1};
+      { loser.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: b.z >= loser.z ? 1 : -1}; fxTackle(loser); }
     var a = nearestActor(side, b.x, b.z, false);
     /* un cambio de dueño no puede convertir el balón en un pase campo a campo */
     if (b.mode === "held") {
@@ -3637,10 +4609,10 @@ var Pitch3D = (function () {
   function meshStats() {
     if (!dyn || !dyn.n) return {verts: 0, tris: 0, maxEdge: 0, nan: 0, bad: 0};
     var a = dyn.a, n = dyn.n, maxEdge = 0, nan = 0, bad = 0;
-    for (var i = 0; i + 17 < n; i += 18) {
+    for (var i = 0; i + 3 * FS - 1 < n; i += 3 * FS) {
       var ax = a[i], ay = a[i + 1], az = a[i + 2];
-      var bx = a[i + 6], by = a[i + 7], bz = a[i + 8];
-      var cx = a[i + 12], cy = a[i + 13], cz = a[i + 14];
+      var bx = a[i + FS], by = a[i + FS + 1], bz = a[i + FS + 2];
+      var cx = a[i + 2 * FS], cy = a[i + 2 * FS + 1], cz = a[i + 2 * FS + 2];
       if (!isFinite(ax + ay + az + bx + by + bz + cx + cy + cz)) nan++;
       var e = Math.max(Math.sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by) + (az - bz) * (az - bz)),
         Math.sqrt((bx - cx) * (bx - cx) + (by - cy) * (by - cy) + (bz - cz) * (bz - cz)),
@@ -3648,7 +4620,7 @@ var Pitch3D = (function () {
       if (e > maxEdge) maxEdge = e;
       if (!isFinite(e) || e > 1.5) bad++;
     }
-    return {verts: n / 6, tris: n / 18, maxEdge: +maxEdge.toFixed(3), nan: nan, bad: bad};
+    return {verts: n / FS, tris: n / (3 * FS), maxEdge: +maxEdge.toFixed(3), nan: nan, bad: bad};
   }
 
   function debug() {
@@ -3680,6 +4652,10 @@ var Pitch3D = (function () {
   return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy,
     reset: reset, freeze: freeze, replay: replay, debug: debug,
     cinema: cinema, skipCinema: skipCinema,
+    lookCam: function (o) { camLock = o || null; },
+    netHit: function (end, z, y, power) { netHit(end ? LEN : 0, z == null ? MIDZ : z, y == null ? 1.2 : y, power || 11); },
+    fxBurst: function (x, z, power, dx, dz) { emitBurst(x, 0.02, z, 18, power == null ? 1 : power, dx || 1, dz || 0, 1); addDivot(x, z, dx || 1, dz || 0, 0.5); },
+    env: function () { var e = currentEnv(); return {tod: e.tod, wx: sim.wx, shadows: useShadows(), shadowSize: shadowSize, staticTris: staticCount / 3, crowdTris: (crowdCounts[0] + crowdCounts[1]) / 3, lamps: LAMPS.length}; },
     active: function () { return !!gl && !disposed; },
     sound: function () { var a = pitchAudio(); return a && typeof a.isOn === "function" ? a.isOn() : false; }};
 })();

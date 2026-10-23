@@ -382,7 +382,11 @@ function roster(prefix) {
       !!o && o[1].z > 60 && o[2].z < 8, why: "half/attack/asistentes", info: JSON.stringify(d.sim.attack) + " · bandas " + (o ? o[1].z.toFixed(1) + "/" + o[2].z.toFixed(1) : "?") };
   });
   await p.evaluate(() => Pitch3D.event({ t: "red", side: 1, who: 4 }));
-  await p.waitForTimeout(200);
+  /* con renderizado por software los fotogramas son largos: se espera al gesto */
+  for (let i = 0; i < 20; i++) {
+    await p.waitForTimeout(100);
+    if (await p.evaluate(() => { const d = Pitch3D.debug(), r = d.sim.officials && d.sim.officials[0]; return !!(r && r.anim && r.anim.type === "card"); })) break;
+  }
   await check("tarjeta roja y gesto del árbitro", () => {
     const d = Pitch3D.debug(), r = d.sim.officials && d.sim.officials[0];
     const anim = r && r.anim;

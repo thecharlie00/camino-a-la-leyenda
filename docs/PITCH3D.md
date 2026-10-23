@@ -181,25 +181,27 @@ Los balones parados se representan como una puesta en escena completa: se coloca
 
 ### Ambientación y retransmisión
 
-- **Grada**: quads verticales baratos para cuerpo y cabeza, con colores de afición y detalles del club local; cubierta, vigas, focos y boca de túnel completan el estadio sin texturas ni instancing.
+- **Estilo vóxel**: todo el estadio es de bloques. Grada escalonada con aficionados de cuerpo y cabeza en cubos (algunos con los brazos en alto y botando con la intensidad del partido), cubierta con cerchas y tira de luz, túnel con toldo del club local, banquillos, marcadores de vídeo, vallas LED animadas, cuatro torres de focos y una ciudad alrededor con ventanas encendidas. Los jugadores son figuras vóxel robustas (cabeza grande, extremidades gruesas) montadas sobre el esqueleto de 22 huesos de los GLB, con cara, pelo, dorsal y escudo.
 - **Oficiales**: árbitro y dos asistentes son actores visuales fuera de `sim.players`, por lo que el contrato de 22 jugadores no cambia. El árbitro acompaña la jugada y los asistentes recorren su banda; al descanso se espejan con el resto del campo. Sus gestos (saludo, pito) caducan con el mismo reloj que los jugadores y la locomoción manda mientras caminan, así que nunca se quedan congelados en `celebrate`.
 - **Clima**: `ui.js` transmite `wx` desde el motor y muestra una franja con icono, nombre, efecto y multiplicador de fatiga. El 3D tiñe cielo y niebla, ajusta la distancia de niebla y dibuja lluvia inclinada o nieve procedimental. La rodadura y el rebote del balón suelto cambian de forma **solo visual** para que el clima se note; la fatiga real la sigue aplicando `match41.js` con `MX_WX` y la calibración no se toca. Con `prefers-reduced-motion` o calidad baja se reduce o se omite.
+- **Césped según el clima**: además de tintar el césped (mojado y oscuro con brillo de agua, escarcha con frío, amarillento con calor), un buffer aparte (`ensurePitchWx`) dibuja desperfectos fijos que se reconstruyen al cambiar clima u hora: barro y charcos que reflejan el cielo con lluvia; nieve en bloques con las líneas despejadas y montones apartados en las bandas con frío; calvas quemadas y grietas en las porterías con calor; y siempre desgaste en áreas pequeñas, punto de penalti, centro y la banda del asistente.
+- **Partículas y marcas**: chutes, pases, botes, entradas y estiradas del portero levantan vóxeles de césped y tierra, gotas y barro, nieve o polvo según el clima. Los golpes fuertes y las entradas dejan tepes y resbalones para el resto del partido; con nieve o lluvia los jugadores dejan huellas y con calor levantan polvo al correr. Usan su propio azar (`frnd`) y el reloj de pantalla: nunca tocan la simulación.
+- **Red con física**: techo y fondo de cada red son una malla de nudos con integración Verlet cosida al marco (`initNets`, `netHit`, `stepNet`). El gol la embolsa según la altura y la velocidad del tiro, el balón se queda dentro de la bolsa mientras la red lo frena y luego vuelve a su forma. Los laterales siguen siendo estáticos.
 - **Marcador**: `ui.js` transmite `score` como `[local, visitante]` y `min`; el 3D muestra un marcador compacto con los colores de cada equipo. El HUD 3D difiere el cambio hasta que el balón cruza la línea (`scorePending`/`commitGoal`) y reconcilia a los 25 s si el evento se pierde. Sigue siendo un reflejo del motor, nunca una fuente de verdad.
 - **Cámara**: los cortes de tiro, gol y repetición son visuales; el estado del partido no se congela ni cambia por ellos.
 
 ## Renderizado y rendimiento
 
 - WebGL 1, sin frameworks ni dependencias de runtime.
-- Campo, líneas, porterías, vallas, gradas y torres se construyen una vez en un buffer estático.
-- Jugadores, sombras de contacto, aro del portador y balón se reconstruyen en un buffer dinámico que se reutiliza; no se crean buffers por frame.
-- Los jugadores usan los GLB LOD1/LOD2, con el jugador cercano a LOD1 y el resto a LOD2. Si un modelo no está disponible, se usa la malla procedural de reserva.
-- El balón GLB se dibuja con rotación de rodadura derivada de su velocidad; si falta, se usa el balón procedural. La sombra de contacto y el aro del portador siguen siendo geometría propia.
-- La luz es plana por triángulo: clave cálida desde arriba, relleno frío y ambiental hemisférica. Los materiales claros y poco saturados (balón, medias, guantes) reciben un especular barato calculado en CPU; las equipaciones y la piel quedan mate.
-- Cada jugador proyecta dos elipses de contacto alargadas en sentido contrario a la luz. A distancia se sustituyen por un disco de pocos segmentos para no gastar triángulos.
-- Calidad adaptativa: si los FPS bajan, se reducen detalles, sombras y el especular dinámico; si se recuperan, vuelven gradualmente.
-- `devicePixelRatio` se limita a 1.5 para no disparar el coste en móviles de alta densidad.
-- El render se pausa cuando la pestaña queda oculta y respeta `prefers-reduced-motion` para la sacudida de cámara.
-- Las matrices de cámara, los uniformes y los buffers se reutilizan para evitar asignaciones por frame.
+- Campo, líneas, marcos de portería, gradas y torres se construyen una vez en un buffer estático; la afición va en dos buffers aparte que no proyectan sombra, y los desperfectos del clima en otro.
+- Jugadores, partículas, marcas, redes y balón se reconstruyen en un buffer dinámico que se reutiliza.
+- Vértice de 10 floats: posición, albedo, normal plana y un código de material con la oclusión ambiental empaquetada.
+- Iluminación por píxel: ambiente hemisférico, sol con mapa de sombras (PCF), cuatro focos puntuales en las torres, especular para materiales brillantes y metálicos, cielo con estrellas, niebla exponencial por altura, tonemapping ACES, gamma y viñeta. Tres horas (día, atardecer, noche) más los tintes de clima.
+- **Variante ligera**: con calidad baja se cambia a otro programa con la luz calculada por vértice (el césped es una rejilla para que los focos se noten), sin sombras ni especulares, y solo se dibuja la mitad de la afición.
+- Calidad adaptativa: por debajo de 14 FPS se baja de golpe a la variante ligera; si se recupera, sube poco a poco. `opts.quality` la fija para pruebas y capturas.
+- Si los FPS caen, la simulación recupera hasta 0,25 s por fotograma (15 pasos de 1/60 s) para que el partido no se ralentice en móviles modestos.
+- `devicePixelRatio` se limita a 1.5 (1 en calidad baja).
+- El render se pausa cuando la pestaña queda oculta y respeta `prefers-reduced-motion` (sin sacudida, sin lluvia y menos partículas).
 
 ## Pruebas
 
