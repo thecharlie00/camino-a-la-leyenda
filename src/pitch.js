@@ -293,17 +293,6 @@ var Pitch = (function () {
     P.btn.innerHTML = '<svg viewBox="0 0 12 12" width="18" height="18" shape-rendering="crispEdges" aria-hidden="true" fill="currentColor"><rect x="1" y="4" width="2" height="4"/><rect x="3" y="3" width="1" height="6"/><rect x="4" y="2" width="1" height="8"/><rect x="5" y="1" width="1" height="10"/>' +
       (on ? '<rect x="7" y="4" width="1" height="4"/><rect x="9" y="2" width="1" height="2"/><rect x="10" y="4" width="1" height="4"/><rect x="9" y="8" width="1" height="2"/>' : '<rect x="7" y="4" width="1" height="1"/><rect x="8" y="5" width="1" height="2"/><rect x="9" y="7" width="1" height="1"/><rect x="9" y="4" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/>') + "</svg>";
   }
-  /* Disco pixelado: filas de bloques alineadas a una rejilla (estilo 8 bits). */
-  function pxDisc(c, x, y, r, col) {
-    var u = Math.max(1.5, r / 2.6), n = Math.ceil(r / u), rr = (r / u) * (r / u);
-    var cx = Math.round(x / u) * u, cy = Math.round(y / u) * u;
-    c.fillStyle = col;
-    for (var j = -n; j <= n; j++) {
-      var span = Math.floor(Math.sqrt(Math.max(0, rr - j * j)) + 0.35);
-      if (span <= 0 && j !== 0) continue;
-      c.fillRect(cx - span * u - u / 2, cy + j * u - u / 2, (span * 2 + 1) * u, u);
-    }
-  }
   function resize() {
     if (!P) return;
     var w = P.el.clientWidth || 340, h = Math.round(w * 0.6), d = window.devicePixelRatio || 1;
@@ -1951,12 +1940,14 @@ var Pitch = (function () {
           c.fillStyle = "#e9f4d0"; c.beginPath(); c.arc(len * 0.35 + r + len * 0.42, -r * 0.35, r * 0.28, 0, PI2); c.arc(len * 0.35 + r + len * 0.42, r * 0.35, r * 0.28, 0, PI2); c.fill();
           c.restore();
         } else {
-          /* pixel art: cuerpo en bloques con borde de un bloque */
-          pxDisc(c, x, y, r + 1.4, edge); pxDisc(c, x, y, r, fill);
-          /* orientación: un bloque de píxel en el borde hacia donde mira */
-          var pu = Math.max(1.5, r / 2.6);
-          c.fillStyle = edge;
-          c.fillRect(Math.round((x + fx * (r + pu * 0.6)) / pu) * pu - pu / 2, Math.round((y + fy * (r + pu * 0.6)) / pu) * pu - pu / 2, pu, pu);
+          c.fillStyle = fill; c.beginPath(); c.arc(x, y, r, 0, PI2); c.fill();
+          c.lineWidth = 1.5; c.strokeStyle = edge; c.stroke();
+          /* muesca de orientación del cuerpo */
+          c.fillStyle = edge; c.beginPath();
+          c.moveTo(x + fx * (r + 3.6), y + fy * (r + 3.6));
+          c.lineTo(x + (fx * 0.88 - fy * 0.48) * r, y + (fy * 0.88 + fx * 0.48) * r);
+          c.lineTo(x + (fx * 0.88 + fy * 0.48) * r, y + (fy * 0.88 - fx * 0.48) * r);
+          c.closePath(); c.fill();
         }
         c.fillStyle = q.off ? "#ffd7da" : q.gk ? gink : tcol;
         txt(String(q.n), x, y + 0.5);
