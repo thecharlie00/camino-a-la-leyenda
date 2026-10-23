@@ -1440,7 +1440,7 @@ var Pitch3D = (function () {
   function updateOfficials(dt) {
     if (!sim.officials.length) initOfficials();
     var b = sim.ball;
-    var cardAct = sim.action && sim.action.type === "card" ? sim.action : null;
+    var cardAct = sim.action && sim.action.type === "card" && sim.action.stage !== "foul" ? sim.action : null;
     for (var i = 0; i < sim.officials.length; i++) {
       var o = sim.officials[i], tx, tz, maxSp;
       var cardRef = cardAct && cardAct.ref === o;
@@ -1816,7 +1816,8 @@ var Pitch3D = (function () {
     if ((a.gone || a.sentOff) && !card) return;
     a.anim.t += dt;
     if (a.anim.t >= a.anim.dur) {
-      if (a.anim.type === "celebrate" && a.anim.tx != null) { a.x = a.anim.tx; a.z = a.anim.tz; }
+      /* al terminar la celebración sigue corriendo a su destino (sin saltos) */
+      if (a.anim.type === "celebrate" && a.anim.tx != null) { a.tx = a.anim.tx; a.tz = a.anim.tz; }
       a.anim = null;
     }
   }
@@ -1937,6 +1938,52 @@ var Pitch3D = (function () {
   }
 
   /* ------------------------------------------------------------------ saques */
+
+  /* Reanudaciones sin teletransporte: la preparación calcula dónde debe
+   * estar cada jugador y aquí se convierte en una carrera desde su posición
+   * actual. El saque espera a que lleguen (máx. 4 s). El balón sí se recoloca:
+   * ha salido del campo o viene de un gol y la cámara corta. */
+  function smoothed(fn, kind) {
+    return function () {
+      var live = sim.started && !sim.cinema && !sim.ended && sim.time > 1.5;
+      if (!live) return fn.apply(this, arguments);
+      var before = [];
+      for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) { var a0 = actorAt(s, i); before.push(a0 ? [a0.x, a0.z, a0.facing] : null); }
+      var out = fn.apply(this, arguments), k = 0, maxT = 0;
+      for (s = 0; s < 2; s++) for (i = 0; i < 11; i++, k++) {
+        var a = actorAt(s, i), q = before[k];
+        if (!a || !q || a.gone || a.sentOff) continue;
+        var d = dist(q[0], q[1], a.x, a.z);
+        if (d < 0.6) continue;
+        var fx = a.x, fz = a.z;
+        a.x = q[0]; a.z = q[1]; a.facing = q[2]; a.vx = a.vz = 0;
+        a.tx = fx; a.tz = fz;
+        var spd = 7.2 * (a.pace || 1);
+        a.maxSp = Math.max(a.maxSp || 0, spd);
+        a.regroup = {x: fx, z: fz, until: sim.time + 4.5};
+        maxT = Math.max(maxT, d / spd);
+      }
+      var delay = clamp(maxT * 0.9, 0, 4);
+      if (delay > 0.05) {
+        if (sim.restart) sim.restart.t += delay;
+        if (sim.action && sim.action.type === "goalkick") sim.action.t = -delay;
+        if (kind === "kickoff" && sim.ball.mode === "held") { var bk = sim.ball; bk.mode = "dead"; bk.x = LEN / 2; bk.z = MIDZ; bk.side = -1; bk.idx = -1; }
+      }
+      return out;
+    };
+  }
+  /* Mientras dura el reagrupamiento, el objetivo de cada jugador es su puesto. */
+  function applyRegroup() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
+      var a = actorAt(s, i); if (!a || !a.regroup) continue;
+      if (sim.time > a.regroup.until || dist(a.x, a.z, a.regroup.x, a.regroup.z) < 0.35) {
+        if (dist(a.x, a.z, a.regroup.x, a.regroup.z) < 1.2) { a.x = a.regroup.x; a.z = a.regroup.z; }
+        a.tx = a.regroup.x; a.tz = a.regroup.z; a.regroup = null; a.vx *= 0.3; a.vz *= 0.3;
+        continue;
+      }
+      a.tx = a.regroup.x; a.tz = a.regroup.z; a.maxSp = Math.max(a.maxSp || 0, 7.2 * (a.pace || 1));
+    }
+  }
 
   function placeAtBase() {
     sim.pendingPass = null;
@@ -2075,7 +2122,7 @@ var Pitch3D = (function () {
     var gk = a.gk, ph = a.phases[a.phaseIndex];
     /* Ningún rival puede acercarse al portero durante el saque. La IA está
      * congelada y aquí solo se mide la separación para depurar/pruebas. */
-    if (gk) {
+    if (gk && a.t >= 0) {
       var pd = nearestOpponentDist(a.side, gk.x, gk.z);
       if (pd < a.minPressureDist) a.minPressureDist = pd;
       var sp = goalKickSpaceStats(a.side, gk);
@@ -2289,6 +2336,12 @@ var Pitch3D = (function () {
     sim.lastSetPiece = {type: "penalty", side: side, taker: taker ? taker.slot : -1,
       res: sim.restart.res, spotX: +spotX.toFixed(2)};
   }
+  setupKickoff = smoothed(setupKickoff, "kickoff");
+  setupGoalKick = smoothed(setupGoalKick, "goalkick");
+  setupCorner = smoothed(setupCorner, "corner");
+  setupFreeKick = smoothed(setupFreeKick, "free");
+  setupPenalty = smoothed(setupPenalty, "penalty");
+
 
   function outOfPlay() {
     var b = sim.ball, side = b.lastTouch === 1 ? 1 : 0, def = 1 - side;
@@ -2345,6 +2398,9 @@ var Pitch3D = (function () {
     if (r.type === "corner" || r.type === "free") { takeSetPiece(r); return; }
     var a = actorAt(r.side, r.idx);
     if (!a) return;
+    if (r.type === "kickoff" && !(sim.ball.mode === "held" && sim.ball.side === r.side && sim.ball.idx === a.slot)) {
+      sim.ball.x = LEN / 2; sim.ball.z = MIDZ; giveTo(r.side, a.slot);
+    }
     a.visualAnim = {type: "pass", t: 0, dur: 0.6};
     var mate = nearestActor(r.side, a.x, a.z, true, a);
     if (!mate) return;
@@ -2399,9 +2455,13 @@ var Pitch3D = (function () {
       var q = list[i];
       if (!q || q === carrier || q.gk) continue;
       var d = dist(carrier.x, carrier.z, q.x, q.z);
-      if (d < 3.2 || d > 44) continue;
+      if (d < 4 || d > 38) continue;
       var forward = (q.x - carrier.x) * dir;
-      var score = -Math.abs(d - 18) * 0.34 + forward * 0.55 - Math.abs(q.x - targetX) * 0.12;
+      /* pases de 8-22 m, hacia delante sin pasarse de la línea del motor y
+       * a un compañero sin rival encima */
+      var mk = nearestOpponentDist(side, q.x, q.z);
+      var score = -Math.abs(d - 15) * 0.4 + clamp(forward, -12, 20) * 0.45 - Math.abs(q.x - targetX) * 0.1 + Math.min(mk, 8) * 0.5;
+      if (forward < -6) score -= 3;
       /* El evento solo sugiere un nombre: si está muy lejos, vale más un
          compañero cercano que un pase imposible de 40 m. */
       if (q === want) score += d < 27 ? 7 : -4;
@@ -2486,6 +2546,39 @@ var Pitch3D = (function () {
     return false;
   }
 
+  /* Siguiente pase de la jugada previa al tiro: al rematador si el balón ya
+   * está a tiro de pase; si no, a un compañero intermedio. */
+  function shotLeg(a) {
+    var b = sim.ball, sh = a.shooter; if (!sh) return;
+    var from = b.mode === "held" ? actorAt(b.side, b.idx) : null;
+    var d = dist(b.x, b.z, a.originX, a.originZ);
+    if (d < 2) { giveTo(a.side, sh.slot); return; }
+    var tx = a.originX, tz = a.originZ, rec = sh;
+    if (d > 32 && a.legs < 2) {
+      var mx = (b.x + a.originX) / 2, mz = (b.z + a.originZ) / 2, list = listOf(a.side), best = null, bd = 1e9;
+      for (var i = 0; i < list.length; i++) { var q = list[i]; if (q === sh || q.gk || q === from) continue; var qd = dist(q.x, q.z, mx, mz); if (qd < bd) { bd = qd; best = q; } }
+      if (best && bd < 16) { rec = best; tx = clamp(best.x + best.vx * 0.3, 2, LEN - 2); tz = clamp(best.z + best.vz * 0.3, 2.5, WID - 2.5); }
+    }
+    var dl = dist(b.x, b.z, tx, tz), run = rec === sh ? dist(sh.x, sh.z, tx, tz) / (7.6 * sh.pace) : 0;
+    var cross = Math.abs(tz - b.z) > 14 && Math.abs(tx - b.x) < 30;
+    var dur = clamp(Math.max(dl / (cross ? 19 : 23), run), 0.35, 2.2);
+    var arc = cross ? clamp(dl * 0.05, 1.0, 2.6) : dl > 26 ? clamp(dl * 0.03, 0.6, 1.8) : clamp(dl * 0.01, 0.05, 0.4);
+    if (from) from.visualAnim = {type: "pass", t: 0, dur: 0.56};
+    rec.passTarget = {x: tx, z: tz, until: sim.time + dur + 0.6};
+    rec.maxSp = 8 * rec.pace;
+    launchBall(tx, tz, 0.23, dur, arc, {type: "held", side: a.side, idx: rec.slot}, 0);
+    a.legs++;
+    a.buildMax = Math.max(a.buildMax, a.t + dur + 0.6);
+  }
+  function startWindup(a) {
+    var sh = a.shooter;
+    if (sh) {
+      a.originX = sh.x; a.originZ = sh.z; sh.passTarget = null;
+      sh.tx = sh.x; sh.tz = sh.z; sh.anim = {type: "kick", t: 0, dur: 0.24};
+      sh.facing = Math.atan2(a.gx - sh.x, MIDZ - sh.z);
+    }
+    a.stage = "windup"; a.t = 0;
+  }
   function startShot(e) {
     if (sim.action) { sim.queue.push(e); return; }
     sim.restart = null; sim.pendingPass = null;
@@ -2508,19 +2601,27 @@ var Pitch3D = (function () {
     var b = sim.ball, travel = dist(b.x, b.z, ox, oz);
     /* el rematador debe estar cerca del origen; si el elegido anda lejos, se usa
        al compañero mejor colocado para que el balón no tenga que perseguirle */
+    /* Jugada previa sin teletransportes: el rematador (el nombrado si está a
+     * tiro, si no el compañero mejor colocado) corre al punto de disparo y el
+     * balón llega con uno o dos pases reales, o en conducción si ya lo lleva. */
     var near = nearestActor(side, ox, oz, true);
-    if (near && (!shooter || dist(shooter.x, shooter.z, ox, oz) > 9)) shooter = near;
-    var buildup = travel > 7 ? clamp(travel / 16, 0.25, 1.0) : 0.12;
+    if (near && (!shooter || dist(shooter.x, shooter.z, ox, oz) > 16)) shooter = near;
+    var holder = b.mode === "held" && b.side === side ? actorAt(side, b.idx) : null;
+    var runT = shooter ? dist(shooter.x, shooter.z, ox, oz) / 7.6 : 0;
+    var buildMax = clamp(Math.max(runT, travel / 16) + 1.4, 1.4, 4.2);
     if (shooter) {
-      shooter.x = ox; shooter.z = oz; shooter.tx = ox; shooter.tz = oz; shooter.vx = shooter.vz = 0;
-      shooter.facing = dir > 0 ? PI / 2 : -PI / 2;
+      shooter.passTarget = {x: ox, z: oz, until: sim.time + buildMax + 0.5};
+      shooter.maxSp = 8 * shooter.pace;
     }
-    launchBall(ox, oz, 0.24, buildup, travel > 7 ? 0.7 : 0.08, shooter ? {type: "held", side: side, idx: shooter.slot} : null);
+    var act = {type: "shot", stage: "build", t: 0, side: side, res: res, kind: kind, shooter: shooter,
+      originX: ox, originZ: oz, gx: gx, dir: dir, gk: pickKeeper(1 - side), buildup: buildMax, buildMax: buildMax, legs: 0,
+      flight: 0.5, outcome: 0, dur: 0};
+    act.outcome = res === "goal" ? 1.2 : res === "save" ? 0.8 : res === "post" ? 0.7 : 0.5;
+    act.dur = buildMax + 0.18 + 0.5 + act.outcome;
+    sim.action = act;
+    if (!(holder && holder === shooter)) shotLeg(act);
     b.lastTouch = side;
-    var outcome = res === "goal" ? 1.2 : res === "save" ? 0.8 : res === "post" ? 0.7 : 0.5;
-    sim.action = {type: "shot", stage: "build", t: 0, side: side, res: res, kind: kind, shooter: shooter,
-      originX: ox, originZ: oz, gx: gx, dir: dir, gk: pickKeeper(1 - side), buildup: buildup,
-      flight: 0.5, outcome: outcome, dur: buildup + 0.18 + 0.5 + outcome};
+    var outcome = act.outcome;
     sim.own = side;
     cam.cutT = 0.9; cam.cutMode = "shot";
     sfx("kick", res === "goal" ? 1 : 0.82);
@@ -2590,7 +2691,7 @@ var Pitch3D = (function () {
      * árbitro muestra la tarjeta, la puesta en escena del balón parado llega
      * justo después y ya con la formación colocada. */
     if (a && a.type === "card" && a.freeKick && !sim.ended && !sim.cinema) {
-      setupFreeKick(1 - a.side, sim.ball.x, sim.ball.z);
+      setupFreeKick(1 - a.side, a.foul ? a.foul.x : sim.ball.x, a.foul ? a.foul.z : sim.ball.z);
     }
     if (sim.queue.length) { var e = sim.queue.shift(); handleEvent(e); }
   }
@@ -2599,6 +2700,39 @@ var Pitch3D = (function () {
    * la tarjeta. El gesto se limpia al terminar para que no quede congelado. */
   function updateCardAction(a, dt) {
     var ref = a.ref, p = a.player;
+    if (a.stage === "foul") {
+      var f = a.foul, v = f.victim, b = sim.ball;
+      if (!f.hit) {
+        /* la víctima conduce hacia delante; el infractor llega por detrás o de lado */
+        if (b.mode === "held" && actorAt(b.side, b.idx) === v) v.passTarget = {x: clamp(v.x + f.dir * 3, 2, LEN - 2), z: v.z, until: sim.time + 0.3};
+        v.maxSp = 4.8;
+        p.passTarget = {x: v.x - f.dir * 0.6, z: v.z, until: sim.time + 0.3}; p.maxSp = 8.6 * p.pace;
+        if ((dist(p.x, p.z, v.x, v.z) < 1.4 && b.mode === "held") || a.t > 3.6) {
+          f.hit = true; f.x = v.x; f.z = v.z; a.t = 0;
+          p.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: v.z >= p.z ? 1 : -1}; fxTackle(p);
+          var fall = f.dir, side2 = v.z >= MIDZ ? -1 : 1;
+          v.passTarget = null; p.passTarget = null;
+          v.anim = {type: "dive", t: 0, dur: 0.7, dir: side2, x0: v.x, z0: v.z, x1: clamp(v.x + fall * 1.6, 1, LEN - 1), z1: clamp(v.z + side2 * 0.5, 1.5, WID - 1.5)};
+          if (b.mode === "held") releaseBall(fall * 2.4, rnd(-1, 1), 0.4);
+          sfx("whistle", [0.24]); sim.shake = 0.15;
+        }
+      } else {
+        /* pitido: el balón se para, la víctima se queda en el suelo un momento */
+        if (a.t > 0.5 && b.mode === "loose") { b.vx = b.vy = b.vz = 0; b.mode = "dead"; }
+        p.tx = p.x; p.tz = p.z; p.maxSp = 2;
+        if (a.t > 1.0) {
+          a.stage = "approach"; a.t = 0;
+          p.anim = {type: "card", t: 0, dur: 1.3};
+          b.fl = null; b.next = null; b.claim = null; b.vx = b.vy = b.vz = 0; b.y = 0.22; b.mode = "dead";
+          b.x = clamp(f.x, 1, LEN - 1); b.z = clamp(f.z, 1.5, WID - 1.5);
+          if (ref) { var rdx = ref.x - p.x, rdz = ref.z - p.z, rdd = Math.sqrt(rdx * rdx + rdz * rdz) || 1;
+            a.refX = clamp(p.x + rdx / rdd * 2.05, 1.4, LEN - 1.4); a.refZ = clamp(p.z + rdz / rdd * 2.05, 2.2, WID - 2.2);
+            if (rdd > 14) { ref.x = clamp(p.x + rdx / rdd * 9, 1.4, LEN - 1.4); ref.z = clamp(p.z + rdz / rdd * 9, 2.2, WID - 2.2); }
+            ref.tx = a.refX; ref.tz = a.refZ; ref.maxSp = 8.6; ref.faceLock = false; }
+        }
+      }
+      return;
+    }
     if (a.stage === "approach") {
       var near = ref && p ? dist(ref.x, ref.z, p.x, p.z) : 99;
       if (near <= 2.9 || a.t >= 1.45) {
@@ -2633,9 +2767,24 @@ var Pitch3D = (function () {
     }
     if (a.type === "card") { updateCardAction(a, dt); return; }
     if (a.type !== "shot") { if (a.t >= a.dur) finishAction(); return; }
-    if (a.stage === "build" && a.t >= a.buildup) {
-      if (a.shooter) { giveTo(a.side, a.shooter.slot); a.shooter.anim = {type: "kick", t: 0, dur: 0.24}; }
-      a.stage = "windup"; a.t = 0;
+    if (a.stage === "build") {
+      var bb = sim.ball, hold = bb.mode === "held" && bb.side === a.side ? actorAt(a.side, bb.idx) : null, sh = a.shooter;
+      if (hold && hold === sh) {
+        /* conducción hasta el punto de disparo, o dispara ya si está cerca */
+        var rem = dist(sh.x, sh.z, a.originX, a.originZ);
+        if (rem > 1.6 && a.t < a.buildMax) { sh.passTarget = {x: a.originX, z: a.originZ, until: sim.time + 0.4}; sh.maxSp = 7 * sh.pace; }
+        else startWindup(a);
+      } else if (hold && bb.mode === "held") shotLeg(a);
+      else if (a.t >= a.buildMax + 0.6 && bb.mode !== "flight") {
+        /* red de seguridad: el balón no llegó; el rematador lo recoge donde esté */
+        if (sh && dist(sh.x, sh.z, bb.x, bb.z) < 4) { giveTo(a.side, sh.slot); startWindup(a); }
+        else if (sh && !a.rescue) {
+          /* el balón quedó lejos: pase directo al rematador allí donde esté */
+          a.rescue = true; a.originX = sh.x; a.originZ = sh.z; a.legs = 2;
+          if (bb.mode === "dead") { bb.mode = "loose"; bb.vx = bb.vz = bb.vy = 0; }
+          shotLeg(a);
+        } else startWindup(a);
+      }
     } else if (a.stage === "windup" && a.t >= 0.18) {
       a.stage = "flight"; a.t = 0;
       var t = shotTarget(a);
@@ -2643,14 +2792,20 @@ var Pitch3D = (function () {
          se abren algo más sin cambiar el punto de impacto. */
       var bend = (a.kind === "long" ? 0.9 : a.kind === "oneone" ? 0.22 : 0.48) *
         (a.res === "goal" || a.res === "save" ? 1 : 0.6) * (Math.random() < 0.5 ? -1 : 1);
+      /* velocidad de disparo realista (~27 m/s): el tiempo de vuelo depende
+       * de la distancia, y el portero se lanza al final, no al golpeo */
+      var sb = sim.ball, sd = dist(sb.x, sb.z, t.x, t.z);
+      a.flight = a.kind === "penalty" ? 0.42 : clamp(sd / 27, 0.38, 1.3);
       launchBall(t.x, t.z, t.y, a.flight, t.arc, null, bend);
+      a.diveAt = Math.max(0, a.flight - 0.5); a.dived = false;
+    } else if (a.stage === "flight" && !a.dived && a.t >= (a.diveAt || 0)) {
+      a.dived = true;
       if (a.gk) {
         var dz = clamp(a.gk.z + (Math.random() < 0.5 ? -1 : 1) * rnd(0.5, 1.6), MIDZ - POST, MIDZ + POST);
         a.gk.anim = {type: "dive", t: 0, dur: 0.55, dir: dz >= a.gk.z ? 1 : -1, x0: a.gk.x, z0: a.gk.z,
           x1: a.gk.x + a.dir * 0.8, z1: dz};
         fxDive(a.gk, a.gk.anim.dir);
       }
-
     } else if (a.stage === "flight" && a.t >= a.flight) {
       a.stage = "outcome"; a.t = 0; resolveShot(a);
     } else if (a.stage === "outcome" && a.t >= a.outcome) {
@@ -2662,17 +2817,49 @@ var Pitch3D = (function () {
     if (sim.action) { sim.queue.push(e); return; }
     /* La tarjeta detiene el juego: no puede seguir un pase o un saque mientras
      * el árbitro se acerca al infractor. */
-    sim.restart = null; sim.pendingPass = null;
+    sim.restart = null; sim.pendingPass = null; sim.challenge = null;
     var b = sim.ball;
-    if (b.mode === "flight" || b.mode === "held") {
+    var side = +e.side === 1 ? 1 : 0, a = pickShooter(side, e.who);
+    /* Primero se ve la falta: el infractor persigue al rival con el balón y
+     * le derriba; después pita el árbitro y saca la tarjeta. Si el infractor
+     * estaba lejos de la jugada, el corte de cámara le acerca. */
+    var foul = null, isFoul = e.k == null || e.k === "foul";
+    if (a && isFoul && !sim.ended) {
+      /* la falta ocurre donde está el balón: la víctima es el rival que lo
+       * lleva (o el más cercano a él) */
+      var holder = b.mode === "held" ? actorAt(b.side, b.idx) : null, victim = null;
+      if (holder && b.side === 1 - side && !holder.gk) victim = holder;
+      else victim = nearestActor(1 - side, b.x, b.z, true);
+      /* infractor lejos de la jugada: la jugada va hacia su zona con un
+       * cambio de juego al rival que tiene cerca */
+      if (victim && dist(a.x, a.z, victim.x, victim.z) > 30) {
+        var v2 = nearestActor(1 - side, a.x, a.z, true);
+        if (v2 && dist(b.x, b.z, v2.x, v2.z) < 48) victim = v2;
+      }
+      if (victim) {
+        var vdir = sim.attack[1 - side];
+        if (dist(a.x, a.z, victim.x, victim.z) > 30) {
+          a.x = clamp(victim.x - vdir * 5.5, 2, LEN - 2); a.z = clamp(victim.z + (a.z > victim.z ? 2 : -2), 2.5, WID - 2.5); a.vx = a.vz = 0;
+        }
+        if (!(b.mode === "held" && actorAt(b.side, b.idx) === victim)) {
+          var pd = dist(b.x, b.z, victim.x, victim.z);
+          if (pd < 50 && b.x > -0.5 && b.x < LEN + 0.5 && b.z > -0.5 && b.z < WID + 0.5) {
+            if (b.mode === "dead") { b.mode = "loose"; b.vx = b.vy = b.vz = 0; }
+            if (holder) holder.visualAnim = {type: "pass", t: 0, dur: 0.56};
+            launchBall(victim.x, victim.z, 0.23, clamp(pd / 22, 0.3, 2.0), pd > 24 ? clamp(pd * 0.03, 0.6, 1.8) : 0.1, {type: "held", side: 1 - side, idx: victim.slot}, 0);
+          } else { b.fl = null; b.next = null; b.x = victim.x; b.z = victim.z; giveTo(1 - side, victim.slot); }
+        }
+        foul = {victim: victim, dir: vdir, x: victim.x, z: victim.z, hit: false, downT: 0};
+      }
+    }
+    if (!foul && (b.mode === "flight" || b.mode === "held")) {
       b.fl = null; b.next = null; b.claim = null;
       b.vx = b.vy = b.vz = 0; b.y = 0.22; b.mode = "dead";
     }
-    var side = +e.side === 1 ? 1 : 0, a = pickShooter(side, e.who);
     var ref = sim.officials[0] || null, refX = null, refZ = null;
     /* El árbitro se acerca al infractor desde su posición actual y se queda a
      * unos dos metros para que la tarjeta entre en el plano. */
-    if (ref && a) {
+    if (ref && a && !foul) {
       var dx = ref.x - a.x, dz = ref.z - a.z, dd = Math.sqrt(dx * dx + dz * dz);
       if (dd < 0.3) { dx = 0; dz = 1; dd = 1; }
       refX = clamp(a.x + dx / dd * 2.05, 1.4, LEN - 1.4);
@@ -2684,13 +2871,14 @@ var Pitch3D = (function () {
     } else if (ref) {
       refX = ref.x; refZ = ref.z;
     }
-    if (a) {
+    if (a && !foul) {
       a.anim = {type: "card", t: 0, dur: 1.3};
       a.passTarget = null; a.tx = a.x; a.tz = a.z; a.maxSp = 0;
     }
-    sim.action = {type: "card", stage: "approach", t: 0, dur: 3.4, side: side, res: e.t,
-      player: a, ref: ref, refX: refX, refZ: refZ, showT: 0,
-      freeKick: e.k == null || e.k === "foul"};
+    sim.action = {type: "card", stage: foul ? "foul" : "approach", t: 0, dur: 3.4, side: side, res: e.t,
+      player: a, ref: ref, refX: refX, refZ: refZ, showT: 0, foul: foul,
+      freeKick: isFoul};
+    if (foul) { cam.cutT = 1.2; cam.cutMode = "foul"; }
     if (e.t === "red" && a) sim.red[side][a.key] = true;
     sim.lastCard = {side: side, res: e.t, player: a ? a.slot : -1,
       referee: !!ref, visible: false};
@@ -2725,7 +2913,7 @@ var Pitch3D = (function () {
       if (sim.ball.mode === "flight" && sim.ball.next) { sim.queue.push(e); return; }
       e.t = t; startShot(e); return;
     }
-    if (t === "yellow" || t === "red") { sfx("whistle", [0.24]); e.t = t; startCard(e); return; }
+    if (t === "yellow" || t === "red") { e.t = t; startCard(e); return; }
     /* Balones parados que pueden llegar desde el motor o desde una prueba.
      * Se tratan como una puesta en escena completa, no como un pase corto. */
     if (t === "corner") {
@@ -2753,8 +2941,13 @@ var Pitch3D = (function () {
       fireCue(e); return;
     }
     if (t === "tackle") {
-      var ts = +e.side === 1 ? 1 : 0, ta = e.who != null ? actorAt(ts, +e.who) : null;
-      if (ta) { ta.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: sim.ball.z >= ta.z ? 1 : -1}; fxTackle(ta); }
+      /* El motor nombra a un jugador al azar: la entrada la hace quien está
+       * de verdad junto al balón (o la presión en curso ya la representa). */
+      var ts = +e.side === 1 ? 1 : 0, named = e.who != null ? actorAt(ts, +e.who) : null, ta = nearestActor(ts, sim.ball.x, sim.ball.z, true);
+      if (named && !named.gk && dist(named.x, named.z, sim.ball.x, sim.ball.z) < 9) ta = named;
+      if (!(sim.challenge && sim.challenge.side === ts) && ta && dist(ta.x, ta.z, sim.ball.x, sim.ball.z) < (ta === named ? 9 : 5) && !sim.action) {
+        ta.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: sim.ball.z >= ta.z ? 1 : -1}; fxTackle(ta);
+      }
       fireCue(e); return;
     }
     if (t === "sub" || t === "inj" || t === "tac" || t === "com" || t === "") { fireCue(e); return; }
@@ -2836,9 +3029,15 @@ var Pitch3D = (function () {
       tx = sim.action.shooter.x; tz = sim.action.shooter.z; back = 24; height = 14;
     }
     if (sim.action && sim.action.type === "card") {
-      var cp = sim.action.player || sim.action.ref;
-      tx = cp ? cp.x : b.x; tz = cp ? cp.z : b.z;
-      back = 12.5; height = 6.8;
+      var cp = sim.action.player || sim.action.ref, fv = sim.action.foul;
+      if (sim.action.stage === "foul" && fv && fv.victim) {
+        /* la jugada de la falta: plano medio entre víctima e infractor */
+        tx = cp ? (cp.x + fv.victim.x) / 2 : fv.victim.x; tz = cp ? (cp.z + fv.victim.z) / 2 : fv.victim.z;
+        back = 17; height = 9.5;
+      } else {
+        tx = cp ? cp.x : b.x; tz = cp ? cp.z : b.z;
+        back = 12.5; height = 6.8;
+      }
     }
     if (sim.action && sim.action.kind === "penalty") {
       tx = sim.action.shooter ? sim.action.shooter.x : b.x;
@@ -3547,7 +3746,7 @@ var Pitch3D = (function () {
     }
     /* el balón se queda dentro de la bolsa mientras la red lo frena */
     var nb = sim.netBall, b = sim.ball;
-    if (nb && b.mode === "dead" && sim.time < nb.until && nb.idx >= 0) {
+    if (nb && b.mode === "dead" && sim.time < nb.until && nb.idx >= 0 && sim.action && sim.action.type === "shot") {
       var M = nets[nb.n], k = nb.idx * 3;
       b.x = M.p[k] - M.out * 0.2; b.z = M.p[k + 2]; b.y = Math.max(0.22, M.p[k + 1] - 0.05);
     } else if (nb) sim.netBall = null;
@@ -4150,10 +4349,12 @@ var Pitch3D = (function () {
     if (aiAcc >= AI_STEP) {
       var setPiece = sim.restart && (sim.restart.type === "corner" || sim.restart.type === "free" ||
         sim.restart.type === "penalty");
-      var staging = sim.action && (sim.action.type === "goalkick" || sim.action.type === "card");
+      var staging = sim.action && (sim.action.type === "goalkick" || (sim.action.type === "card" && sim.action.stage !== "foul"));
       if (!staging && !setPiece) aiTick();
       aiAcc = 0;
     }
+    updateChallenge();
+    applyRegroup();
     moveActors(sdt);
     updateOfficials(sdt);
     for (var vs = 0; vs < 2; vs++) for (var vi = 0; vi < 11; vi++) {
@@ -4559,31 +4760,75 @@ var Pitch3D = (function () {
     }
   }
 
+  /* Cambio de posesión creíble: el defensor tiene que llegar al portador y
+   * quitársela (entrada) o cortar un pase; el balón nunca salta a un jugador
+   * lejano. El motor ya decidió el cambio: aquí solo se escenifica. */
+  function winBall(side, ch, carrier) {
+    var b = sim.ball;
+    ch.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: b.z >= ch.z ? 1 : -1};
+    fxTackle(ch);
+    if (carrier && !carrier.anim) carrier.visualAnim = {type: "tackle", t: 0.4, dur: 0.75, dir: 0};
+    if (Math.random() < 0.62 && dist(ch.x, ch.z, b.x, b.z) < 2.2) giveTo(side, ch.slot);
+    else {
+      var dir = sim.attack[side];
+      releaseBall(dir * rnd(1.5, 3.5), rnd(-1.5, 1.5), 0.6);
+      b.claim = {side: side, idx: ch.slot, until: sim.time + 2.5};
+      b.lastTouch = side;
+    }
+    sim.own = side;
+  }
   function changePossession(side) {
     var b = sim.ball;
-    sim.restart = null;
-    /* Un cambio de dueño invalida cualquier pase en vuelo: el balón no puede
-       seguir viajando hacia un receptor del equipo que acaba de perderlo. */
+    sim.restart = null; sim.challenge = null;
+    var ch = nearestActor(side, b.x, b.z, true) || nearestActor(side, b.x, b.z, false);
     if (b.mode === "flight" && !sim.action) {
-      b.fl = null; b.next = null; b.claim = null; b.mode = "dead"; b.vx = b.vy = b.vz = 0;
-      if (sim.lastPass) sim.lastPass.pending = false;
+      /* pase cortado: el rival más cercano al punto de caída se queda con él */
+      var f = b.fl, ix = nearestActor(side, f ? f.x1 : b.x, f ? f.z1 : b.z, true);
+      if (f && ix && dist(ix.x, ix.z, f.x1, f.z1) < 14) {
+        b.next = {type: "held", side: side, idx: ix.slot};
+        ix.passTarget = {x: f.x1, z: f.z1, until: sim.time + (f.dur - f.t) + 0.8};
+        ix.maxSp = 8 * ix.pace;
+        if (sim.lastPass) sim.lastPass.pending = false;
+      } else {
+        b.fl = null; b.next = null; b.mode = "loose"; b.vx *= 0.35; b.vz *= 0.35;
+        if (ch) b.claim = {side: side, idx: ch.slot, until: sim.time + 3};
+      }
+      b.lastTouch = side; sim.own = side; tryPendingPass(); return;
     }
-    var loser = nearestActor(1 - side, b.x, b.z, false);
-    if (loser && (!loser.visualAnim || loser.visualAnim.t >= loser.visualAnim.dur))
-      { loser.visualAnim = {type: "tackle", t: 0, dur: 0.75, dir: b.z >= loser.z ? 1 : -1}; fxTackle(loser); }
-    var a = nearestActor(side, b.x, b.z, false);
-    /* un cambio de dueño no puede convertir el balón en un pase campo a campo */
-    if (b.mode === "held") {
-      if (a && dist(a.x, a.z, b.x, b.z) < 3) giveTo(side, a.slot);
-      else {
-        releaseBall(rnd(-1.2, 1.2), rnd(-1.2, 1.2), 0.8);
+    var carrier = b.mode === "held" ? actorAt(b.side, b.idx) : null;
+    if (carrier && b.side !== side && ch) {
+      var d = dist(ch.x, ch.z, b.x, b.z);
+      if (d <= 2.6) winBall(side, ch, carrier);
+      else if (d <= 20) {
+        /* presión: el defensor corre al portador y le roba al llegar */
+        sim.challenge = {side: side, ch: ch, carrier: carrier, until: sim.time + clamp(d / 7.2 + 0.4, 0.7, 3.2)};
+        ch.maxSp = 8.4 * ch.pace;
+      } else {
+        /* pase interceptado: el portador busca a un compañero y el rival lo corta */
+        var lx = clamp(ch.x + ch.vx * 0.3, 2, LEN - 2), lz = clamp(ch.z + ch.vz * 0.3, 2.5, WID - 2.5), dd = dist(b.x, b.z, lx, lz);
+        var dur = clamp(dd / 22, 0.5, 1.8);
+        carrier.visualAnim = {type: "pass", t: 0, dur: 0.56};
+        ch.passTarget = {x: lx, z: lz, until: sim.time + dur + 0.6};
+        launchBall(lx, lz, 0.23, dur, dd > 25 ? clamp(dd * 0.03, 0.5, 1.6) : 0.15, {type: "held", side: side, idx: ch.slot}, 0);
         b.lastTouch = side;
       }
-    } else if (b.mode === "dead") {
-      if (a) giveTo(side, a.slot);
+      sim.own = side; return;
+    }
+    if (b.mode === "dead" || b.mode === "loose") {
+      if (ch && dist(ch.x, ch.z, b.x, b.z) < 2.6) giveTo(side, ch.slot);
+      else if (ch) { if (b.mode === "dead") { b.mode = "loose"; b.vx = b.vz = b.vy = 0; } b.claim = {side: side, idx: ch.slot, until: sim.time + 4}; }
     }
     sim.own = side;
     tryPendingPass();
+  }
+  function updateChallenge() {
+    var c = sim.challenge; if (!c) return;
+    var b = sim.ball;
+    if (sim.action || sim.restart || b.mode !== "held" || actorAt(b.side, b.idx) !== c.carrier || c.ch.gone) { sim.challenge = null; return; }
+    c.ch.tx = clamp(b.x + b.vx * 0.2, 1, LEN - 1); c.ch.tz = clamp(b.z + b.vz * 0.2, 1.5, WID - 1.5); c.ch.maxSp = 8.4 * c.ch.pace;
+    /* el portador protege el balón y frena un poco */
+    c.carrier.maxSp = Math.min(c.carrier.maxSp || 6, 5.2);
+    if (dist(c.ch.x, c.ch.z, b.x, b.z) < 1.5 || sim.time > c.until) { sim.challenge = null; winBall(c.side, c.ch, c.carrier); }
   }
 
   function event(e) { handleEvent(e); }
@@ -4593,7 +4838,7 @@ var Pitch3D = (function () {
     if (a.type === "card") return a.stage === "show" ? Math.max(0, 1.75 - a.showT) :
       Math.max(0, 1.45 - a.t) + 1.75;
     if (a.type !== "shot") return Math.max(0, a.dur - a.t);
-    if (a.stage === "build") return Math.max(0, a.buildup - a.t) + 0.18 + 0.5 + a.outcome;
+    if (a.stage === "build") return Math.max(0, (a.buildMax || a.buildup) - a.t) + 0.18 + 0.5 + a.outcome;
     if (a.stage === "windup") return Math.max(0, 0.18 - a.t) + 0.5 + a.outcome;
     if (a.stage === "flight") return Math.max(0, 0.5 - a.t) + a.outcome;
     return Math.max(0, a.outcome - a.t);

@@ -97,7 +97,7 @@ function roster(prefix) {
     return { ok, why: "la cola no sale en una fila con el capitán delante", info: info.join(" · ") };
   });
   await p.evaluate(() => Pitch3D.skipCinema());
-  for (let i = 0; i < 30 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  for (let i = 0; i < 100 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
   await p.waitForTimeout(300);
   await check("WebGL montado", () => {
     const d = Pitch3D.debug();
@@ -183,10 +183,13 @@ function roster(prefix) {
       why: "el pase no terminó o el receptor no estaba en el punto", info: d.ball.mode + " · jugador " + d.ball.idx +
         (lp ? " · llegada " + lp.atEnd + " m, curva " + lp.curve : "") };
   });
-  await p.evaluate(() => Pitch3D.event({ t: "tackle", side: 0, who: 7 }));
+  /* la entrada la hace un jugador junto al balón (nunca uno lejano al azar) */
+  const tw = await p.evaluate(() => { const d = Pitch3D.debug(); let best = -1, bd = 1e9; window.__tw = 0;
+    d.players[0].forEach((a, i) => { if (!a || a.gk) return; const q = Math.hypot(a.x - d.ball.x, a.z - d.ball.z); if (q < bd) { bd = q; best = i; } }); window.__tw = best; return best; });
+  await p.evaluate((w) => Pitch3D.event({ t: "tackle", side: 0, who: w }), tw);
   await p.waitForTimeout(90);
   await check("tackle visual sin gesto de portero", () => {
-    const d = Pitch3D.debug(), a = d.players[0][7];
+    const d = Pitch3D.debug(), a = d.players[0][window.__tw];
     return { ok: !!a && !!a.visualAnim && a.visualAnim.type === "tackle" && a.assetClipName !== "dive",
       why: "sin animación de robo o usando dive de portero", info: a ? "clip " + a.assetClipName : "sin jugador" };
   });
@@ -214,7 +217,7 @@ function roster(prefix) {
     const d = Pitch3D.debug(), b = Pitch3D.busy();
     return { ok: d.action && d.action.type === "shot" && b > 0, why: "sin acción/busy", info: "busy=" + Math.round(b) + "ms" };
   });
-  for (let i = 0; i < 40 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  for (let i = 0; i < 120 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
   await p.waitForTimeout(800);
   await check("gol resuelto y saque", () => {
     const d = Pitch3D.debug();
@@ -235,7 +238,7 @@ function roster(prefix) {
   if (keeperDive && keeperDive.anim === "dive" && keeperDive.clip === "dive")
     notes.push("estirada exclusiva del portero · dive");
   else fail.push("parada de portero: no usó dive " + JSON.stringify(keeperDive));
-  for (let i = 0; i < 40 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  for (let i = 0; i < 100 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
 
   /* Saque de puerta: preparación, scan, carrera, impacto y recuperación.
      Ningún rival puede acercarse al portero y el balón no sale antes. */
@@ -319,7 +322,9 @@ function roster(prefix) {
     return { ok: !!r && r.type === "corner" && !!sp && sp.target >= 0 && near >= 9.0,
       why: "sin formación de córner/espaciado", info: r ? r.type + " · objetivo " + sp.target + " · rival a " + near.toFixed(2) + " m" : "sin restart" };
   });
-  await p.waitForTimeout(1400);
+  /* los jugadores trotan a sus puestos antes del saque */
+  for (let i = 0; i < 60 && !(await p.evaluate(() => { const sp = Pitch3D.debug().setPiece; return !!sp && sp.launched; })); i++) await p.waitForTimeout(100);
+  await p.waitForTimeout(300);
   await check("córner lanzado al área", () => {
     const sp = Pitch3D.debug().setPiece;
     return { ok: !!sp && sp.launched && sp.receiver >= 0 && sp.flightDur > 0,
@@ -335,7 +340,8 @@ function roster(prefix) {
       Math.abs(sp.wallDist - 9.15) <= 0.25,
       why: "sin barrera/distancia de falta", info: sp ? "barrera " + sp.wallDist + " m · objetivo " + sp.target : "sin restart" };
   });
-  await p.waitForTimeout(1400);
+  for (let i = 0; i < 60 && !(await p.evaluate(() => { const sp = Pitch3D.debug().setPiece; return !!sp && sp.launched; })); i++) await p.waitForTimeout(100);
+  await p.waitForTimeout(200);
   await check("falta lanzada", () => {
     const sp = Pitch3D.debug().setPiece;
     return { ok: !!sp && sp.launched && sp.receiver >= 0, why: "la falta no se lanzó", info: sp ? sp.type : "sin registro" };
@@ -355,7 +361,7 @@ function roster(prefix) {
       why: "jugadores dentro del área en el penalti", info: r ? "punto " + r.spotX + " · dentro " + inside : "sin restart" };
   });
   let penAction = null;
-  for (let i = 0; i < 35; i++) {
+  for (let i = 0; i < 120; i++) {
     penAction = await p.evaluate(() => {
       const a = Pitch3D.debug().action;
       return a && a.type === "shot" && a.kind === "penalty" ? { kind: a.kind, shooter: a.shooter ? a.shooter.slot : -1 } : null;
@@ -365,7 +371,7 @@ function roster(prefix) {
   }
   if (penAction) notes.push("penalti ejecutado · tiro de jugador " + penAction.shooter);
   else fail.push("penalti: no se ejecutó el tiro");
-  for (let i = 0; i < 40 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  for (let i = 0; i < 100 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
 
   await p.evaluate(() => Pitch3D.event({ t: "half" }));
   await p.waitForTimeout(150);
@@ -375,7 +381,7 @@ function roster(prefix) {
       why: "sin salida al túnel", info: c ? c.stage : "sin cine" };
   });
   await p.evaluate(() => Pitch3D.skipCinema());
-  for (let i = 0; i < 30 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  for (let i = 0; i < 100 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
   await check("descanso y cambio de lado", () => {
     const d = Pitch3D.debug(), o = d.sim.officials;
     return { ok: d.sim.half === 2 && d.sim.attack[0] === -1 && d.sim.attack[1] === 1 &&
@@ -383,7 +389,8 @@ function roster(prefix) {
   });
   await p.evaluate(() => Pitch3D.event({ t: "red", side: 1, who: 4 }));
   /* con renderizado por software los fotogramas son largos: se espera al gesto */
-  for (let i = 0; i < 20; i++) {
+  /* antes de la tarjeta se ve la falta (persecución, entrada y pitido) */
+  for (let i = 0; i < 80; i++) {
     await p.waitForTimeout(100);
     if (await p.evaluate(() => { const d = Pitch3D.debug(), r = d.sim.officials && d.sim.officials[0]; return !!(r && r.anim && r.anim.type === "card"); })) break;
   }
@@ -394,18 +401,19 @@ function roster(prefix) {
       !!anim && anim.type === "card" && anim.res === "red" && d.card && d.card.visible,
       why: "sin tarjeta visible del árbitro", info: anim ? anim.type + "/" + anim.res : "sin anim" };
   });
-  for (let i = 0; i < 30 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  for (let i = 0; i < 100 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
   await check("jugador expulsado fuera del campo", () => {
     const d = Pitch3D.debug(), a = d.players[1] && d.players[1][4];
     return { ok: !!a && a.sentOff && a.gone, why: "el expulsado sigue activo" };
   });
-  await check("falta lejana después de la tarjeta", () => {
+  /* la falta se saca desde donde se cometió (puede ser cerca del área) */
+  await check("falta después de la tarjeta", () => {
     const sp = Pitch3D.debug().setPiece;
-    return { ok: !!sp && sp.type === "free" && sp.cross === false,
+    return { ok: !!sp && sp.type === "free",
       why: "la tarjeta no dejó una reanudación normal", info: sp ? sp.type + "/" + sp.cross : "sin set piece" };
   });
   await p.evaluate(() => Pitch3D.freeze(false));
-  for (let i = 0; i < 30 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
+  for (let i = 0; i < 100 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(100);
   const replay = await p.evaluate(() => Pitch3D.replay());
   await p.waitForTimeout(300);
   const replayState = await p.evaluate(() => { const d = Pitch3D.debug(); return { active: !!d.sim.replay, frames: d.sim.replay ? d.sim.replay.frames.length : 0 }; });
@@ -434,7 +442,7 @@ function roster(prefix) {
     return { ok: d.sim.scorePending > 0 && vals[0] === "2" && vals[1] === "1",
       why: "el marcador 3D se adelantó al vuelo", info: "HUD " + vals.join("-") + " · pendientes " + d.sim.scorePending };
   });
-  for (let i = 0; i < 40 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(80);
+  for (let i = 0; i < 100 && await p.evaluate(() => Pitch3D.busy() > 0); i++) await p.waitForTimeout(80);
   await p.waitForTimeout(120);
   await check("gol confirmado al cruzar la línea", () => {
     const d = Pitch3D.debug(), e = document.querySelector(".lpitch3d-score");
@@ -643,10 +651,13 @@ function roster(prefix) {
     fb.frameTris === 0 && fb.gl && fb.mesh.verts > 0 && fb.mesh.nan === 0 && fb.mesh.bad === 0) {
     notes.push("fallback sin GLB · 22 procedurales, " + fb.mesh.verts + " vértices");
   } else fail.push("fallback sin GLB: " + JSON.stringify(fb));
-  await pfb.evaluate(() => Pitch3D.event({ t: "tackle", side: 0, who: 7 }));
+  /* la barrida la hace el defensor (bando sin balón) más cercano */
+  await pfb.evaluate(() => { const d = Pitch3D.debug(), sd = d.ball.mode === "held" ? 1 - d.ball.side : 1 - d.sim.own; let best = 7, bd = 1e9;
+    d.players[sd].forEach((a, i) => { if (!a || a.gk) return; const q = Math.hypot(a.x - d.ball.x, a.z - d.ball.z); if (q < bd) { bd = q; best = i; } });
+    window.__tw = best; window.__ts = sd; Pitch3D.event({ t: "tackle", side: sd, who: best }); });
   await pfb.waitForTimeout(140);
   const fbt = await pfb.evaluate(() => {
-    const d = Pitch3D.debug(), a = d.players[0][7];
+    const d = Pitch3D.debug(), a = d.players[window.__ts][window.__tw];
     return { anim: a && a.visualAnim && a.visualAnim.type, mesh: d.mesh };
   });
   if (fbt.anim === "tackle" && fbt.mesh.nan === 0 && fbt.mesh.verts > 0)

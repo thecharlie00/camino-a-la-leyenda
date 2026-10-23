@@ -178,6 +178,13 @@ Los balones parados se representan como una puesta en escena completa: se coloca
 - **Bloque defensivo**: los defensores que no van al balón forman una línea común y el equipo no se estira más de ~34 m; al defender se cierra por dentro.
 - **Fuera de juego**: sin balón, los atacantes no se quedan por delante del último defensor rival (salvo a balón parado).
 
+### Jugadas coherentes (sin saltos)
+
+- **Robos**: cuando el motor cambia la posesión, el defensor más cercano corre al portador y le quita el balón al llegar (`sim.challenge`); si está lejos, se ve un pase cortado. El balón nunca salta a un jugador lejano. Las entradas del motor las hace quien está junto al balón.
+- **Tiros**: la jugada previa son pases y carreras reales (`shotLeg`): el rematador corre al punto de disparo y el balón le llega con uno o dos pases, o en conducción; nadie se teletransporta. El tiempo de vuelo depende de la distancia (~27 m/s) y el portero se lanza al final del vuelo.
+- **Tarjetas**: antes de la tarjeta se ve la falta (etapa `foul`): el infractor persigue al rival con el balón, le derriba con una entrada, suena el silbato, el árbitro llega y saca la tarjeta. La falta se saca desde el punto de la infracción.
+- **Reanudaciones**: córners, faltas, penaltis, saques de puerta y de centro calculan el puesto de cada jugador y estos trotan hasta él (`smoothed` + `applyRegroup`); el saque espera a que lleguen (máx. 4 s). Solo el balón se recoloca cuando ha salido del campo o viene de un gol.
+
 ### Pases y robos visuales
 
 - `engine-extra.js` emite `pass` y `tackle` como eventos **solo visuales** después de calcular el resultado del minuto. No modifican `conv`, `bigR`, `xgPerGoal`, el marcador ni las estadísticas.
