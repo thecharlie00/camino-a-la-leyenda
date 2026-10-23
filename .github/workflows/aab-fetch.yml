@@ -1,0 +1,26 @@
+name: AAB a rama
+on:
+  push:
+    branches: [aab-fetch]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: CaminoALaLeyenda-5.5-codigo-45
+          run-id: 39964778163
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: out
+      - name: Subir el AAB a esta rama
+        run: |
+          ls -la out
+          git init -q repo && cd repo
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          cp ../out/* .
+          git add -A && git commit -qm "AAB 5.5 (45)"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:aab-files
