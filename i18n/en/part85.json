@@ -62,5 +62,6 @@
  "Cambiamos de lado antes del saque. Conservas el saque de centro.": "We switch ends before kick-off. You keep the kick-off.",
  "No cambiamos de lado. Conservas el saque de centro.": "We don't switch ends. You keep the kick-off.",
  "GOAT LADDER": "GOAT LADDER",
- "Vista 3D del partido": "3D match view"
+ "Vista 3D del partido": "3D match view",
+ "Probabilidad: {p} %": "Chance: {p}%"
 }

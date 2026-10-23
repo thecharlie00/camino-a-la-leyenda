@@ -30,6 +30,8 @@ var Minigame = (function () {
     if (typeof tr === "function") return tr(s, p);
     return String(s).replace(/\{(\w+)\}/g, function (m, k) { return p && p[k] != null ? p[k] : m; });
   }
+  /* marca de texto traducible que se traduce más tarde con t() */
+  function N_(s) { return s; }
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, k) { return a + (b - a) * k; }
   function num(x, d) { x = +x; return isFinite(x) ? x : d; }
@@ -461,7 +463,7 @@ var Minigame = (function () {
     opt = opt || {};
     var skill = num(opt.skill, 70), gk = num(opt.gk, 70), pressure = clamp(num(opt.pressure, 0.5), 0, 1);
     var rand = typeof opt.rand === "function" ? opt.rand : Math.random;
-    var LBL = "Probabilidad de gol: {p} %";
+    var LBL = N_("Probabilidad de gol: {p} %");
     var ui = shell({cls: "mg-pen", kicker: t("Desde los once metros"), title: t("Penalti"), chips: [[t("Tiro"), skill], [t("Portero"), gk]]});
     var id = "mg" + (++uid);
     var svg = sv("svg", {viewBox: "0 0 360 300", role: "img", "aria-label": t("Portería"), "shape-rendering": "crispEdges"});
@@ -665,7 +667,7 @@ var Minigame = (function () {
     opt = opt || {};
     var skill = num(opt.skill, 70), gk = num(opt.gk, 70), dist = clamp(num(opt.dist, 22), 16, 35), pressure = clamp(num(opt.pressure, 0.4), 0, 1);
     var rand = typeof opt.rand === "function" ? opt.rand : Math.random;
-    var LBL = "Probabilidad: {p} %";
+    var LBL = N_("Probabilidad: {p} %");
     var ui = shell({cls: "mg-fk", kicker: t("Balón parado"), title: t("Falta directa"), sec: t("Volver a dibujar"),
       chips: [[t("Tiro"), skill], [t("Portero"), gk], [t("Distancia"), t("{n} m", {n: Math.round(dist)})]]});
     var id = "mg" + (++uid), k;
@@ -890,7 +892,7 @@ var Minigame = (function () {
   }
 
   /* ================= PORTERO: comunes ================= */
-  var GK_LBL = "Probabilidad de parada: {p} %";
+  var GK_LBL = N_("Probabilidad de parada: {p} %");
   /* rematador rival de espaldas (cámara detrás); origen = pies, altura ≈ 98 */
   function shooterFig(parent) {
     /* lanzador pixelado de espaldas (celda 3): pies en y=0, cabeza arriba (~-99) */

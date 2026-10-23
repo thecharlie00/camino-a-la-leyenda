@@ -62,5 +62,6 @@
  "Cambiamos de lado antes del saque. Conservas el saque de centro.": "On change de côté avant l'engagement. Tu gardes le coup d'envoi.",
  "No cambiamos de lado. Conservas el saque de centro.": "On ne change pas de côté. Tu gardes le coup d'envoi.",
  "GOAT LADDER": "GOAT LADDER",
- "Vista 3D del partido": "Vue 3D du match"
+ "Vista 3D del partido": "Vue 3D du match",
+ "Probabilidad: {p} %": "Probabilité : {p} %"
 }
