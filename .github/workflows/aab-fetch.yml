@@ -1,26 +1,44 @@
-name: AAB a rama
+name: Voz en off de los reels
 on:
   push:
     branches: [aab-fetch]
 permissions:
   contents: write
-  actions: read
 jobs:
-  copy:
+  tts:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          name: CaminoALaLeyenda-5.5-codigo-45
-          run-id: 39964778163
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path: out
-      - name: Subir el AAB a esta rama
+          python-version: "3.11"
+      - name: Piper y voces
         run: |
-          ls -la out
-          git init -q repo && cd repo
-          git config user.name "github-actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          cp ../out/* .
-          git add -A && git commit -qm "AAB 5.5 (45)"
+          pip install -q piper-tts==1.2.0
+          mkdir -p voices out
+          for v in en/en_US/ryan/high/en_US-ryan-high en/en_US/lessac/high/en_US-lessac-high en/en_GB/alan/medium/en_GB-alan-medium; do
+            n=$(basename $v)
+            curl -sSL -o voices/$n.onnx "https://huggingface.co/rhasspy/piper-voices/resolve/main/$v.onnx"
+            curl -sSL -o voices/$n.onnx.json "https://huggingface.co/rhasspy/piper-voices/resolve/main/$v.onnx.json"
+          done
+          ls -la voices
+      - name: Generar frases
+        run: |
+          python3 - <<'PY'
+          import json, subprocess, os
+          s = json.load(open("vo-script.json"))
+          for voice in ["en_US-ryan-high", "en_US-lessac-high", "en_GB-alan-medium"]:
+              os.makedirs("out/" + voice, exist_ok=True)
+              for reel in s.values():
+                  for line in reel:
+                      p = subprocess.run(["piper", "-m", "voices/%s.onnx" % voice, "--length_scale", "0.92", "--sentence_silence", "0.18",
+                                          "-f", "out/%s/%s.wav" % (voice, line["id"])], input=line["vo"].encode(), capture_output=True)
+                      if p.returncode: print(p.stderr.decode()); raise SystemExit(1)
+          PY
+          ls -R out | head -40
+      - name: Subir a la rama aab-files
+        run: |
+          cd out
+          git init -q && git config user.name "github-actions" && git config user.email "github-actions@users.noreply.github.com"
+          git add -A && git commit -qm "Voz en off de los reels"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:aab-files

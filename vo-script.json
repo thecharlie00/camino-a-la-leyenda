@@ -1,0 +1,27 @@
+{
+ "r1": [
+  {"id":"r1_1","vo":"You're seventeen. Nobody knows your name.","sub":"You're 17. Nobody knows your name."},
+  {"id":"r1_2","vo":"Every match, and every choice, writes your story.","sub":"Every match and every choice writes your story."},
+  {"id":"r1_3","vo":"Earn your shirt number. Beat your rival. Sign for the big club.","sub":"Earn your number. Beat your rival. Sign for the big club."},
+  {"id":"r1_4","vo":"Lift trophies. Win the golden ball.","sub":"Lift trophies. Win the golden ball."},
+  {"id":"r1_5","vo":"Road to Legend. Your football career starts now.","sub":"ROAD TO LEGEND. Your football career starts now."},
+  {"id":"r1_6","vo":"Play free on the web. Coming soon to Android.","sub":"Play free on the web · Coming soon to Android"}
+ ],
+ "r2": [
+  {"id":"r2_1","vo":"Now, you're the manager.","sub":"Now you're the manager."},
+  {"id":"r2_2","vo":"Pick your eleven. Set your tactics.","sub":"Pick your eleven. Set your tactics."},
+  {"id":"r2_3","vo":"Then watch every match, live, in 3D.","sub":"Then watch every match live in 3D."},
+  {"id":"r2_4","vo":"Rain, snow, or burning sun. Every pitch tells the story.","sub":"Rain, snow or burning sun: every pitch tells the story."},
+  {"id":"r2_5","vo":"Keep the board happy... or face the ultimatum.","sub":"Keep the board happy… or face the ultimatum."},
+  {"id":"r2_6","vo":"A hundred and three leagues. Over seventeen hundred clubs.","sub":"103 leagues. 1,757 clubs."},
+  {"id":"r2_7","vo":"Road to Legend. Play free on the web.","sub":"ROAD TO LEGEND · Play free on the web"}
+ ],
+ "r3": [
+  {"id":"r3_1","vo":"Last minute. Penalty.","sub":"Last minute. Penalty."},
+  {"id":"r3_2","vo":"Aim. Power. Breathe.","sub":"Aim. Power. Breathe."},
+  {"id":"r3_3","vo":"Free kick on the edge of the box. Draw the curve, and bend it over the wall.","sub":"Free kick on the edge of the box. Draw the curve over the wall."},
+  {"id":"r3_4","vo":"Off the pitch, build a life. A partner. Kids. A legacy.","sub":"Off the pitch, build a life: a partner, kids, a legacy."},
+  {"id":"r3_5","vo":"Then prove you're the GOAT, on the global ladder.","sub":"Then prove you're the GOAT on the global ladder."},
+  {"id":"r3_6","vo":"Road to Legend. Play free today.","sub":"ROAD TO LEGEND · Play free today"}
+ ]
+}
