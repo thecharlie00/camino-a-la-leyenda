@@ -659,7 +659,7 @@ var PX = (function () {
     var k = e + "|" + (size || "");
     if (ICACHE[k] != null) return ICACHE[k];
     var g = iconGrid(e);
-    return (ICACHE[k] = g ? g.svg(size || "100%", size || "100%", "pxi-svg") : "");
+    return (ICACHE[k] = g ? g.svg(size || "1em", size || "1em", "pxi-svg") : "");
   }
   function has(e) { return !!(SPECIAL[e] || ICONS[e] || FACES[e] || FACE_ALIAS[e] || e === "💀"); }
   var KEYS = Object.keys(ICONS).concat(Object.keys(SPECIAL), Object.keys(FACES), Object.keys(FACE_ALIAS), ["💀"]);
