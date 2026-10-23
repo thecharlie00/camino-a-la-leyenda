@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1417">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../site.css">
+<meta name="google-adsense-account" content="ca-pub-3919867907492197">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3919867907492197" crossorigin="anonymous"></script>
+<title>Camino a la Leyenda · Gioco di calcio gratis nel browser</title>
+<meta name="description" content="Crea il tuo calciatore, allena un club o fondane uno tuo. Partite in diretta su un campo 2D, decisioni dentro e fuori dal campo. Gratis e senza account.">
+<link rel="canonical" href="https://futbolroadtolegend.com/it/">
+<link rel="alternate" hreflang="es" href="https://futbolroadtolegend.com/">
+<link rel="alternate" hreflang="en" href="https://futbolroadtolegend.com/en/">
+<link rel="alternate" hreflang="de" href="https://futbolroadtolegend.com/de/">
+<link rel="alternate" hreflang="it" href="https://futbolroadtolegend.com/it/">
+<link rel="alternate" hreflang="fr" href="https://futbolroadtolegend.com/fr/">
+<link rel="alternate" hreflang="x-default" href="https://futbolroadtolegend.com/">
+<meta property="og:title" content="Camino a la Leyenda">
+<meta property="og:description" content="Crea il tuo calciatore e portalo fino alla leggenda. Gratis nel browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://futbolroadtolegend.com/it/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://futbolroadtolegend.com/img/og-it.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Camino a la Leyenda","url":"https://futbolroadtolegend.com/it/","genre":"Sports","gamePlatform":["Web browser","Android"],"applicationCategory":"Game","playMode":"SinglePlayer","inLanguage":["it"]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><img src="../img/icon-72.png" width="36" height="36" alt="">Camino a la Leyenda</a>
+  <nav aria-label="Principale"><a class="hide-s" href="#modos">Modalità</a><a class="hide-s" href="#temporada">Cosa c'è</a><a class="goat-tab" href="https://futbolroadtolegend.com/it/goat-ladder/">GOAT LADDER</a><details class="lang"><summary aria-label="Lingua"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>IT</summary><div class="langm"><a href="../" hreflang="es" lang="es" data-weblang="es">Español</a><a href="../en/" hreflang="en" lang="en" data-weblang="en">English</a><a href="../de/" hreflang="de" lang="de" data-weblang="de">Deutsch</a><a href="../it/" hreflang="it" lang="it" data-weblang="it" aria-current="page">Italiano</a><a href="../fr/" hreflang="fr" lang="fr" data-weblang="fr">Français</a></div></details><a class="btn pri sm" href="jugar/">Gioca ora</a></nav>
+</div></header>
+
+<main id="main">
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Crea il tuo calciatore e portalo fino alla leggenda.</h1>
+    <p class="lead">Firma per un club, gioca le partite in diretta e decidi ogni passo della tua carriera: contratti, stampa, spogliatoio e nazionale. Oppure siediti in panchina e guida tu la squadra.</p>
+    <div class="cta">
+      <a class="btn pri" href="jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>Gioca ora</a>
+      <span class="store-disabled">
+        <span class="police-ribbon">Coming soon</span>
+        <button type="button" class="btn" disabled>Scarica per Android</button>
+      </span>
+    </div>
+    <p class="fine">Gratis e senza account. I tuoi salvataggi restano in questo browser.</p>
+  </div>
+  <figure class="match" aria-label="Partita simulata sul campo 2D">
+    <div class="board" aria-hidden="true">
+      <span class="tm"><i style="background:#ffb21e"></i>Riviera</span>
+      <span class="sc" id="sc">0-0</span>
+      <span class="tm">Montagna<i style="background:#66b9ff"></i></span>
+    </div>
+    <canvas id="pitch" width="1050" height="680"></canvas>
+    <figcaption class="say" id="say" aria-live="off"><span class="min">1'</span> Calcio d'inizio.</figcaption>
+  </figure>
+</div></section>
+
+
+
+<section class="sec" id="modos"><div class="wrap">
+  <h2>Scegli come giocare</h2>
+  <p class="intro">Tre modi per iniziare. Puoi avere più partite insieme e passare dall'una all'altra quando vuoi.</p>
+  <ul class="modes">
+    <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="6" r="2.5"/><path d="M7.5 15.5 16 7"/></svg></span>
+      <h3>Carriera da giocatore</h3><p>Crea il tuo calciatore e vivi tutta la sua carriera, dal vivaio al ritiro. Quando appendi gli scarpini al chiodo, puoi continuare da allenatore.</p></li>
+    <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 8h8M8 12h5"/></svg></span>
+      <h3>Carriera da mister</h3><p>Parti dalla panchina del club che scegli: acquisti, formazione, rinnovi e morale dello spogliatoio. E cambi tattici a partita in corso.</p></li>
+    <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 3 6l2 5 3-1v11h8V10l3 1 2-5-5-3c-.8 1.2-1.5 1.8-2.5 1.8S9 4.2 8 3Z"/></svg></span>
+      <h3>Crea il tuo club</h3><p>Inventa un club con nome, colori e stemma, mettilo nel campionato che vuoi e portalo in alto con una rosa nuova.</p></li>
+  </ul>
+  <p class="both">Tutte le modalità si possono giocare nel calcio maschile o femminile.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2>Come si gioca</h2>
+  <p class="intro">Una settimana di gioco richiede un solo tocco. Le cose importanti, la partita e le decisioni, le vedi con calma.</p>
+  <div class="shots">
+    <figure><img src="../img/shot-it-directo.webp" width="412" height="820" loading="lazy" alt="Partita in diretta con il campo 2D, il tabellone e i gol attesi"><figcaption>Partite in diretta su un campo 2D, con xG, inerzia della partita e cambi.</figcaption></figure>
+    <figure><img src="../img/shot-it-carrera.webp" width="412" height="820" loading="lazy" alt="Schermata della carriera con la stagione in corso"><figcaption>La tua stagione settimana per settimana: forma, minuti, contratto e obiettivi.</figcaption></figure>
+    <figure><img src="../img/shot-it-plantilla.webp" width="412" height="820" loading="lazy" alt="Rosa del club con i volti dei giocatori e la loro forma fisica"><figcaption>Rosa con volto, ruoli e forma fisica di ogni giocatore.</figcaption></figure>
+    <figure><img src="../img/shot-it-mascota.webp" width="412" height="820" loading="lazy" alt="L'animale del calciatore con accessori"><figcaption>Un animale da accudire, con colori e accessori che guadagni vincendo titoli.</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="sec" id="temporada"><div class="wrap">
+  <h2>Cosa porta una stagione</h2>
+  <p class="intro">Campionati, coppe e nazionali di mezzo mondo, con nomi inventati ispirati al calcio reale.</p>
+  <dl class="feats">
+    <div><dt>Partite da vedere</dt><dd>I pallini si muovono secondo il ritmo, il passaggio e il posizionamento di ogni giocatore. Rigori e punizioni li calci tu.</dd></div>
+    <div><dt>Decisioni fuori dal campo</dt><dd>Conferenze stampa, offerte, polemiche nello spogliatoio e momenti che cambiano una carriera.</dd></div>
+    <div><dt>Il tuo mercato</dt><dd>Negozia i contratti, chiedi la cessione o, da mister, compra e vendi per far quadrare i conti.</dd></div>
+    <div><dt>Obiettivi e Hall of Fame</dt><dd>Decine di obiettivi, trofei e record che restano anche se inizi un'altra partita.</dd></div>
+    <div><dt>In cinque lingue</dt><dd>Spagnolo, inglese, tedesco, italiano e francese. Cambiala quando vuoi dal menu.</dd></div>
+    <div><dt>La tua partita, con te</dt><dd>Copia la tua partita con un codice e continua a giocare in un altro browser o nell'app Android.</dd></div>
+  </dl>
+</div></section>
+
+
+
+<section class="sec last"><div class="wrap"><div class="row">
+  <div><h2>La prima partita inizia ora</h2><p>Niente da installare e nessuna registrazione. Se chiudi la scheda, la partita ti aspetta dove l'hai lasciata.</p></div>
+  <a class="btn pri" href="jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>Gioca ora</a>
+</div></div></section>
+</main>
+
+<footer class="foot"><div class="wrap"><a href="jugar/">Gioca</a><a href="privacidad/">Informativa sulla privacy</a><button type="button" class="linkbtn" data-consent>Privacy e cookie</button><span>Versione 5.5</span><nav class="flangs" aria-label="Lingua"><a href="../" hreflang="es" lang="es" data-weblang="es">Español</a><a href="../en/" hreflang="en" lang="en" data-weblang="en">English</a><a href="../de/" hreflang="de" lang="de" data-weblang="de">Deutsch</a><a href="../it/" hreflang="it" lang="it" data-weblang="it" aria-current="page">Italiano</a><a href="../fr/" hreflang="fr" lang="fr" data-weblang="fr">Français</a></nav><p class="legal">Camino a la Leyenda è un gioco indipendente. I nomi di calciatori, allenatori e club sono inventati; non è affiliato ad alcun club, campionato o giocatore.</p></div></footer>
+<script>window.T = {"kick": "Calcio d'inizio.", "again": "Inizia un'altra partita.", "shot": "Tiro di {n}…", "try": "Ci prova {n}…", "goal": "Gol di {n}! Il {t} esulta.", "out": "Fuori. Rimessa dal fondo.", "rec": "Recupera {n}.", "a": "Riviera", "b": "Montagna"};</script>
+<script src="../site.js" defer></script>
+</body>
+</html>
