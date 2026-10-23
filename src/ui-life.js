@@ -35,36 +35,45 @@
     var skin = get("skin").c, hc = get("hcol").c, hair = (look.hair || "short"), boots = get("boots").c, sl = look.sleeve || "short", band = look.band || "none", gl = get("gloves");
     var k = kitOf(club, gk), c1 = k.c1, c2 = k.c2, txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
     var armCol = sl === "long" ? c1 : sl === "under" ? "#16191b" : skin, legCol = sl === "tights" ? "#16191b" : skin;
-    var s = '<svg class="' + (cls || "lfsvg") + '" viewBox="0 0 120 170" role="img" aria-label="' + h(tr("Tu avatar")) + '">';
-    s += '<ellipse cx="60" cy="163" rx="34" ry="5" fill="rgba(0,0,0,.35)"/>';
+    /* figura de cuerpo entero en pixel art (celda 5, sin rasgos faciales) */
+    var R = [], B = function (x0, y0, x1, y1, c) { R.push([x0, y0, x1, y1, c]); };
+    var shade = function (c, k) { return typeof PX !== "undefined" ? PX.shade(c, k) : c; };
+    B(6, 33, 17, 33, "rgba(0,0,0,.35)");
+    if (hair === "long") { B(8, 3, 8, 10, hc); B(15, 3, 15, 10, hc); }
     /* piernas, medias y botas */
-    s += '<rect x="45" y="112" width="11" height="26" rx="4" fill="' + legCol + '"/><rect x="64" y="112" width="11" height="26" rx="4" fill="' + legCol + '"/>';
-    s += '<rect x="44.5" y="132" width="12" height="22" rx="3" fill="' + k.socks + '"/><rect x="63.5" y="132" width="12" height="22" rx="3" fill="' + k.socks + '"/>';
-    s += '<rect x="44.5" y="134" width="12" height="3" fill="' + c2 + '" opacity=".85"/><rect x="63.5" y="134" width="12" height="3" fill="' + c2 + '" opacity=".85"/>';
-    s += '<path d="M43 152h14v5c0 2-1 3-3 3H39c-2 0-3-1-2-3z" fill="' + boots + '"/><path d="M63 152h14l6 5c1 2 0 3-2 3H66c-2 0-3-1-3-3z" fill="' + boots + '"/>';
+    B(8, 24, 10, 26, legCol); B(13, 24, 15, 26, legCol);
+    B(8, 27, 10, 31, k.socks); B(13, 27, 15, 31, k.socks); B(8, 27, 10, 27, c2); B(13, 27, 15, 27, c2);
+    B(7, 32, 10, 32, boots); B(13, 32, 16, 32, boots);
     /* pantalón */
-    s += '<path d="M40 98h40l3 24H63l-3-10-3 10H37z" fill="' + k.sh + '"/>';
-    /* brazos */
-    s += '<path d="M37 52l-11 22 4 32h8l-1-28 6-14z" fill="' + armCol + '"/><path d="M83 52l11 22-4 32h-8l1-28-6-14z" fill="' + armCol + '"/>';
-    if (sl !== "long") s += '<path d="M37 51l-12 21 9 4 9-15z" fill="' + c1 + '"/><path d="M83 51l12 21-9 4-9-15z" fill="' + c1 + '"/><path d="M25 72l9 4" stroke="' + c2 + '" stroke-width="2"/><path d="M95 72l-9 4" stroke="' + c2 + '" stroke-width="2"/>';
-    if (cap || band === "cap") s += '<path d="M27 66l10 4-2 5-10-4z" fill="#ffb21e"/><text x="31" y="73.5" font-size="5" font-weight="900" text-anchor="middle" fill="#1d1404" transform="rotate(21 31 71)">C</text>';
-    /* manos o guantes */
-    if (gk) s += '<rect x="25" y="100" width="14" height="15" rx="5" fill="' + gl.c + '"/><rect x="81" y="100" width="14" height="15" rx="5" fill="' + gl.c + '"/><rect x="25" y="100" width="14" height="4" rx="2" fill="' + gl.c2 + '"/><rect x="81" y="100" width="14" height="4" rx="2" fill="' + gl.c2 + '"/>';
-    else s += '<circle cx="34" cy="107" r="5" fill="' + skin + '"/><circle cx="86" cy="107" r="5" fill="' + skin + '"/>';
-    /* camiseta y dorsal */
-    s += '<path d="M38 48c6-3 14-5 22-5s16 2 22 5l3 8-4 46H39l-4-46z" fill="' + c1 + '"/>';
-    s += '<path d="M52 44l8 8 8-8" fill="none" stroke="' + c2 + '" stroke-width="3" stroke-linejoin="round"/>';
-    if (num) s += '<text x="60" y="88" text-anchor="middle" font-family="Big Shoulders Display, Arial Narrow, sans-serif" font-weight="900" font-size="24" fill="' + txt + '">' + num + "</text>";
-    /* cabeza */
-    s += '<rect x="55" y="36" width="10" height="9" fill="' + skin + '"/><circle cx="60" cy="27" r="14" fill="' + skin + '"/><circle cx="46.5" cy="28" r="3" fill="' + skin + '"/><circle cx="73.5" cy="28" r="3" fill="' + skin + '"/>';
-    s += '<circle cx="55" cy="28" r="1.5" fill="#1d1612"/><circle cx="65" cy="28" r="1.5" fill="#1d1612"/><path d="M56 34q4 3 8 0" fill="none" stroke="#5a2f22" stroke-width="1.4" stroke-linecap="round"/>';
-    if (hair === "short") s += '<path d="M46 25c0-10 7-14 14-14s14 4 14 14c-3-4-8-6-14-6s-11 2-14 6z" fill="' + hc + '"/>';
-    else if (hair === "buzz") s += '<path d="M47 24c1-8 6-11 13-11s12 3 13 11c-4-3-8-4-13-4s-9 1-13 4z" fill="' + hc + '" opacity=".75"/>';
-    else if (hair === "curly") s += '<g fill="' + hc + '"><circle cx="50" cy="19" r="5"/><circle cx="57" cy="15" r="5.5"/><circle cx="64" cy="15" r="5.5"/><circle cx="70" cy="19" r="5"/><circle cx="47" cy="25" r="3.5"/><circle cx="73" cy="25" r="3.5"/></g>';
-    else if (hair === "long") s += '<path d="M46 26c0-11 7-15 14-15s14 4 14 15c-3-5-8-7-14-7s-11 2-14 7z" fill="' + hc + '"/><path d="M72 18c8 2 10 10 7 19-1-6-4-10-8-12z" fill="' + hc + '"/>';
-    if (band !== "none" && band !== "cap") {
-      var bc = band === "club" ? c1 : get("band").c || "#fff";
-      s += '<rect x="46" y="20" width="28" height="4.5" rx="2" fill="' + bc + '"/>' + (band === "club" ? '<rect x="46" y="21.6" width="28" height="1.3" fill="' + c2 + '"/>' : "");
+    B(7, 20, 16, 22, k.sh); B(7, 23, 10, 23, k.sh); B(13, 23, 16, 23, k.sh); B(7, 20, 7, 23, shade(k.sh, 0.8));
+    /* brazos y mangas */
+    B(5, 13, 6, 19, armCol); B(17, 13, 18, 19, armCol);
+    if (sl !== "long") { B(5, 10, 6, 12, c1); B(17, 10, 18, 12, c1); B(5, 12, 6, 12, c2); B(17, 12, 18, 12, c2); }
+    else { B(5, 10, 6, 12, c1); B(17, 10, 18, 12, c1); }
+    if (cap || band === "cap") B(5, 11, 6, 11, "#ffb21e");
+    if (gk) { B(4, 19, 6, 21, gl.c); B(17, 19, 19, 21, gl.c); B(4, 19, 6, 19, gl.c2); B(17, 19, 19, 19, gl.c2); }
+    else { B(5, 20, 6, 20, skin); B(17, 20, 18, 20, skin); }
+    /* camiseta con cuello en pico */
+    B(7, 10, 16, 19, c1); B(7, 10, 8, 19, shade(c1, 0.82)); B(10, 10, 13, 10, c2); B(11, 11, 12, 11, c2);
+    /* cabeza: cuello, cara lisa y orejas */
+    B(11, 9, 12, 9, shade(skin, 0.85)); B(9, 3, 14, 8, skin); B(14, 3, 14, 8, shade(skin, 0.86)); B(8, 5, 8, 6, skin); B(15, 5, 15, 6, shade(skin, 0.86));
+    if (hair === "short") { B(9, 1, 14, 2, hc); B(9, 3, 9, 4, hc); B(14, 3, 14, 3, hc); }
+    else if (hair === "buzz") B(9, 2, 14, 2, shade(hc, 1.15));
+    else if (hair === "curly") { B(8, 1, 15, 2, hc); B(9, 0, 10, 0, hc); B(12, 0, 13, 0, hc); B(8, 3, 8, 4, hc); B(15, 3, 15, 4, hc); }
+    else if (hair === "long") { B(9, 1, 14, 2, hc); B(9, 3, 14, 3, hc); }
+    if (band !== "none" && band !== "cap") { var bc = band === "club" ? c1 : get("band").c || "#fff"; B(9, 3, 14, 3, bc); }
+    /* dorsal en cifras de píxel */
+    var F = {"0": ["###", "#.#", "#.#", "#.#", "###"], "1": [".#.", "##.", ".#.", ".#.", "###"], "2": ["##.", "..#", ".#.", "#..", "###"], "3": ["##.", "..#", ".#.", "..#", "##."],
+      "4": ["#.#", "#.#", "###", "..#", "..#"], "5": ["###", "#..", "##.", "..#", "##."], "6": [".##", "#..", "###", "#.#", "###"], "7": ["###", "..#", ".#.", ".#.", ".#."],
+      "8": ["###", "#.#", "###", "#.#", "###"], "9": ["###", "#.#", "###", "..#", "##."]};
+    var ns = String(num || ""), nw = ns.length * 4 - 1, nx0 = Math.round(12 - nw / 2);
+    var s = '<svg class="' + (cls || "lfsvg") + ' px" viewBox="0 0 120 170" role="img" aria-label="' + h(tr("Tu avatar")) + '" shape-rendering="crispEdges">';
+    R.forEach(function (b) { s += '<rect x="' + b[0] * 5 + '" y="' + b[1] * 5 + '" width="' + (b[2] - b[0] + 1) * 5 + '" height="' + (b[3] - b[1] + 1) * 5 + '" fill="' + b[4] + '"/>'; });
+    /* el dorsal usa media celda para que quepan dos cifras */
+    for (var di = 0; di < ns.length; di++) {
+      var gph = F[ns.charAt(di)]; if (!gph) continue;
+      for (var gy = 0; gy < 5; gy++) for (var gx = 0; gx < 3; gx++) if (gph[gy].charAt(gx) === "#")
+        s += '<rect x="' + (60 - (nw * 2.5) / 2 + (di * 4 + gx) * 2.5).toFixed(1) + '" y="' + (68 + gy * 2.5) + '" width="2.5" height="2.5" fill="' + txt + '"/>';
     }
     return s + "</svg>";
   }

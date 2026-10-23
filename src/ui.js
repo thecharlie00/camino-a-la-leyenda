@@ -611,7 +611,7 @@
     var mgr = S.mode === "mgr", ci = mgr ? S.m.club : S.p.club, c = W.clubs[ci] || {}, id = "pr" + (++PR_ID);
     var col = [0, 1].map(function (i) { return c.col && COL_OK.test(c.col[i]) ? c.col[i] : i ? "#ffb21e" : "#24393f"; });
     var ab = h(c.ab || "FC"), nm = h(socSelfName()), s = "";
-    s += '<svg class="pressroom" viewBox="0 0 360 168" role="img" aria-label="' + h(tr("Sala de prensa")) + '"><defs>';
+    s += '<svg class="pressroom" viewBox="0 0 360 168" shape-rendering="crispEdges" role="img" aria-label="' + h(tr("Sala de prensa")) + '"><defs>';
     s += '<linearGradient id="' + id + 'w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16262b"/><stop offset="1" stop-color="#0c1619"/></linearGradient>';
     s += '<radialGradient id="' + id + 'l" cx=".5" cy=".25" r=".6"><stop offset="0" stop-color="#fff6dc" stop-opacity=".22"/><stop offset="1" stop-color="#fff6dc" stop-opacity="0"/></radialGradient>';
     s += '<pattern id="' + id + 'p" width="60" height="34" patternUnits="userSpaceOnUse">' +
@@ -626,10 +626,12 @@
     /* protagonista sentado */
     var shirt = mgr ? "#1b2328" : col[0], trim = mgr ? "#e9e3d6" : col[1];
     s += '<g transform="translate(0 -5)">';
-    s += '<path d="M152 117 Q152 84 168 80 L192 80 Q208 84 208 112 Z" fill="' + shirt + '"/>';
-    s += mgr ? '<path d="M174 80 L180 94 L186 80 Z" fill="' + trim + '"/><path d="M179 84 L181 84 L182 98 L178 98 Z" fill="' + col[0] + '"/>' : '<path d="M172 80 Q180 87 188 80" fill="none" stroke="' + trim + '" stroke-width="2.4"/>';
-    s += '<rect x="176" y="70" width="8" height="11" rx="3" fill="#c99470"/><ellipse cx="180" cy="62" rx="10" ry="11.5" fill="#d6a27a"/>';
-    s += '<path d="M170 60 Q170 49 180 49 Q191 49 190 61 Q186 54 176 56 Z" fill="#2b1d14"/><ellipse cx="170" cy="63" rx="1.8" ry="3" fill="#c99470"/><ellipse cx="190" cy="63" rx="1.8" ry="3" fill="#c99470"/></g>';
+    /* protagonista en pixel art (celda 4, sin rasgos faciales) */
+    var PB = function (x, y, w, hh, c) { s += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + hh + '" fill="' + c + '"/>'; };
+    PB(156, 84, 48, 33, shirt); PB(152, 92, 56, 25, shirt); PB(160, 80, 40, 4, shirt);
+    if (mgr) { PB(176, 80, 8, 12, trim); PB(178, 84, 4, 12, col[0]); } else { PB(172, 80, 16, 4, trim); PB(176, 84, 8, 4, trim); }
+    PB(176, 72, 8, 8, "#c99470"); PB(168, 52, 24, 20, "#d6a27a"); PB(188, 52, 4, 20, "#c99470"); PB(164, 60, 4, 8, "#c99470"); PB(192, 60, 4, 8, "#c99470");
+    PB(168, 48, 24, 8, "#2b1d14"); PB(168, 56, 4, 4, "#2b1d14"); s += '</g>';
     /* mesa, micrófonos, agua y cartel */
     s += '<rect x="70" y="108" width="220" height="7" rx="2" fill="#2a3a3f"/><rect x="74" y="115" width="212" height="30" fill="url(#' + id + 't)"/>';
     s += '<rect x="148" y="121" width="64" height="12" rx="2" fill="#0b1417" opacity=".75"/><text x="180" y="130" text-anchor="middle" font-size="7.5" font-weight="700" fill="#edf1e8" font-family="var(--f-body,sans-serif)">' + (nm.length > 18 ? nm.slice(0, 17) + "…" : nm) + "</text>";

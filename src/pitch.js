@@ -289,8 +289,9 @@ var Pitch = (function () {
     var on = Snd.isOn();
     P.btn.setAttribute("aria-pressed", on ? "true" : "false");
     P.btn.setAttribute("aria-label", on ? tr("Silenciar el ambiente del estadio") : tr("Activar el ambiente del estadio"));
-    P.btn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/>' +
-      (on ? '<path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' : '<path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>') + "</svg>";
+    /* altavoz en píxeles */
+    P.btn.innerHTML = '<svg viewBox="0 0 12 12" width="18" height="18" shape-rendering="crispEdges" aria-hidden="true" fill="currentColor"><rect x="1" y="4" width="2" height="4"/><rect x="3" y="3" width="1" height="6"/><rect x="4" y="2" width="1" height="8"/><rect x="5" y="1" width="1" height="10"/>' +
+      (on ? '<rect x="7" y="4" width="1" height="4"/><rect x="9" y="2" width="1" height="2"/><rect x="10" y="4" width="1" height="4"/><rect x="9" y="8" width="1" height="2"/>' : '<rect x="7" y="4" width="1" height="1"/><rect x="8" y="5" width="1" height="2"/><rect x="9" y="7" width="1" height="1"/><rect x="9" y="4" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/>') + "</svg>";
   }
   /* Disco pixelado: filas de bloques alineadas a una rejilla (estilo 8 bits). */
   function pxDisc(c, x, y, r, col) {

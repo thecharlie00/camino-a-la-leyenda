@@ -47,7 +47,8 @@ for a, b in (("var GOAT_WEB_BUILD = false;", "var GOAT_WEB_BUILD = true;"),
 
 # --- tipografías del juego, servidas como archivos ---
 faces = [("Big Shoulders Display", "big-shoulders-display", 800), ("Big Shoulders Display", "big-shoulders-display", 900),
-         ("Archivo", "archivo", 400), ("Archivo", "archivo", 700), ("Archivo", "archivo", 800), ("Doto", "doto", 900)]
+         ("Archivo", "archivo", 400), ("Archivo", "archivo", 700), ("Archivo", "archivo", 800), ("Doto", "doto", 900),
+         ("Pixelify Sans", "pixelify-sans", 500), ("Pixelify Sans", "pixelify-sans", 700), ("Silkscreen", "silkscreen", 400)]
 css = []
 for fam, pkg, w in faces:
     for sub in ("latin", "latin-ext"):

@@ -12,6 +12,8 @@
   "dependencies": {
     "@fontsource/archivo": "^5.2.5",
     "@fontsource/big-shoulders-display": "^5.2.5",
-    "@fontsource/doto": "^5.2.5"
+    "@fontsource/doto": "^5.2.5",
+    "@fontsource/pixelify-sans": "^5.2.6",
+    "@fontsource/silkscreen": "^5.2.6"
   }
 }
