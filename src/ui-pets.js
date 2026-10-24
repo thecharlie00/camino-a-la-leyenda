@@ -5,12 +5,10 @@
   var U = UIX, h = U.h;
   function rer() { U.persist(); U.renderSheet(); U.render(false); }
   function chips(d) {
-    var m = (isGK() ? d.gk : d.att) || {}, out = [];
-    Object.keys(m).forEach(function (a) { out.push('<span class="chip up">+' + m[a] + " " + h(tr(ATT_NAMES[a])) + "</span>"); });
-    out.push('<span class="chip up">' + tr("Moral +{n}", {n: d.mor}) + "</span>");
-    if (d.calm) out.push('<span class="chip up">' + tr("Forma más estable") + "</span>");
-    if (d.fame) out.push('<span class="chip up">' + tr("Fama y seguidores") + "</span>");
-    if (d.risk) out.push('<span class="chip down">' + tr("Sustos y veterinario") + "</span>");
+    /* 5.6: sin cifras ni bonificaciones visibles; sólo el carácter de la especie */
+    var out = [];
+    if (d.fame) out.push('<span class="chip">' + tr("Llama la atención en redes") + "</span>");
+    if (d.calm) out.push('<span class="chip">' + tr("Tranquila") + "</span>");
     return out.join("");
   }
   function petSize(pt) { return [34, 46, 58, 58][petStage(pt)]; }
@@ -51,6 +49,8 @@
   }
   /* dibujo de la mascota con su color, fondo y accesorios */
   function art(pt, size, over) {
+    /* 5.6: miniatura en vóxeles (caché) donde haya WebGL */
+    if (!over && typeof PetWorld !== "undefined" && PetWorld && pt.v === 2) { var url = PetWorld.thumb(pt); if (url) return '<span class="petart" style="font-size:' + size + 'px;width:' + Math.round(size * 1.5) + "px;height:" + Math.round(size * 1.5) + 'px" aria-hidden="true"><img class="petthumb" src="' + url + '" alt=""></span>'; }
     var o = over || {}, col = petColDef(o.col || pt.col || "nat"), bg = bgCss(o.bg || pt.bg || "none"), eq = petEq(pt), ico = o.ico || petIco(pt);
     var f = col[2] === "anim" ? "" : col[2];
     var s = '<span class="petart' + (bg ? " hasbg" : "") + '" style="font-size:' + size + "px" + (bg ? ";background:" + bg : "") + '"' + (o.edit ? ' data-ico="' + ico + '"' : ' aria-hidden="true"') + '><span class="petbody' + (col[2] === "anim" ? " rainbow" : "") + '"' + (f ? ' style="filter:' + f + '"' : "") + ">" + ico + "</span>";
@@ -75,7 +75,7 @@
     return '<button class="card petcard' + (need ? " need" : "") + '" data-a="petopen">' + art(pt, petSize(pt)) +
       '<span class="petinfo"><span class="eyebrow">' + tr("Tu mascota") + "</span><b>" + h(pt.nm) + "</b><small>" + (need ? '<span class="petneed">' + tr("Necesita atención") + "</span>" : h(tr(d.n)) + " · " + trn(pt.age, "{n} año", "{n} años") + " · " + h(tr(PET_STAGE[petStage(pt)]))) + "</small>" +
       '<span class="petbond" aria-label="' + h(tr("Vínculo {n} %", {n: Math.round(pt.bond)})) + '"><i style="width:' + Math.round(pt.bond) + '%"></i></span></span>' +
-      (pt.cared ? "" : '<span class="petdot" title="' + h(tr("Quiere jugar contigo")) + '">!</span>') + '<span class="chev" aria-hidden="true">›</span></button>';
+      (!need ? "" : '<span class="petdot" title="' + h(tr("Quiere jugar contigo")) + '">!</span>') + '<span class="chev" aria-hidden="true">›</span></button>';
   });
   /* aviso en la portada de la carrera si te está esperando */
   U.add("carreraTop", function () {
@@ -84,7 +84,7 @@
     return '<button class="card petalert" data-a="petopen">' + art(pt, 30) + '<span class="grow"><b>' + tr("{pet} necesita atención", {pet: h(pt.nm)}) + "</b><small>" + tr("Dedícale un rato antes de que se debilite el vínculo.") + '</small></span><span class="chev" aria-hidden="true">›</span></button>';
   });
 
-  U.actions.petopen = function () { var ui = U.ui(); ui.petTab = ui.petTab || "n"; ui.petPick = null; ui.petView = "care"; U.open("lpet"); };
+  U.actions.petopen = function () { if (petOf() && typeof PetWorld !== "undefined" && PetWorld && PetWorld.open()) return; var ui = U.ui(); ui.petTab = ui.petTab || "n"; ui.petPick = null; ui.petView = "care"; U.open("lpet"); };
   U.actions.pettab = function (b, v) { U.ui().petTab = v; U.ui().petPick = null; U.renderSheet(); };
   U.actions.petview = function (b, v) { U.ui().petView = v; U.renderSheet(); var pn = document.querySelector(".sheet .panel"); if (pn) pn.scrollTop = 0; };
   U.actions.petpick = function (b, v) { U.ui().petPick = v; U.renderSheet(); var i = document.getElementById("petnm"); if (i) i.focus(); };
@@ -266,7 +266,7 @@
       s += '<div class="petlist">' + list.map(function (d) {
         var on = pick === d.k, can = S.p.money >= d.price;
         return '<div class="petrow' + (on ? " on" : "") + '"><button class="petrowb" data-a="petpick" data-v="' + d.k + '" aria-pressed="' + on + '"' + (can ? "" : " disabled") + '><span class="petic" aria-hidden="true">' + d.ico[0] + '</span><span class="grow"><b>' + h(tr(d.n)) + "</b><small>" + h(tr(d.d)) + "</small><small class=\"muted\">" +
-          tr("{p} · {y}/año · vive {a}–{b} años", {p: fmtMoney(d.price), y: fmtMoney(d.year), a: d.life[0], b: d.life[1]}) + '</small><span class="chips">' + chips(d) + "</span></span></button>" +
+          tr("{p} · {y}/año", {p: fmtMoney(d.price), y: fmtMoney(d.year)}) + '</small><span class="chips">' + chips(d) + "</span></span></button>" +
           (on ? '<div class="petadopt"><input id="petnm" maxlength="16" placeholder="' + h(tr("¿Cómo se va a llamar?")) + '" aria-label="' + h(tr("Nombre de la mascota")) + '"><button class="go" data-a="petadopt">' + tr("Adoptar") + "</button></div>" : "") + "</div>";
       }).join("") + "</div>";
       if (L.petAcc && L.petAcc.length) s += '<p class="muted lfhint">' + trn(L.petAcc.length, "Guardas {n} accesorio para tu próxima mascota.", "Guardas {n} accesorios para tu próxima mascota.") + "</p>";

@@ -4216,6 +4216,7 @@ var Pitch3D = (function () {
       if (!buildAssetPlayer(dyn, oa)) buildPlayer(dyn, oa);
       drawRefCard(dyn, oa);
     }
+    drawPet(dyn);
     buildCoin(dyn);
     drawNets(dyn);
     if (!sim.ballHidden && !buildAssetBall(dyn)) buildBall(dyn);
@@ -4528,6 +4529,7 @@ var Pitch3D = (function () {
 
   function mount(el, o) {
     destroy();
+    petA = null;
     host = el; opts = o || {};
     var srcCols = opts.cols && opts.cols.length ? opts.cols : SHIRT;
     colors = [kitColor(srcCols[0], rgb(SHIRT[0])), kitColor(srcCols[1], rgb(SHIRT[1]))];
@@ -4649,7 +4651,36 @@ var Pitch3D = (function () {
 
   /* El estado del motor fija el marcador objetivo. La UI 3D no lo muestra
    * hasta que la pelota cruza la línea; así el HUD no se adelanta al vuelo. */
+  /* 5.6: la mascota del jugador, junto al banquillo local; celebra los goles de su equipo */
+  var petA = null, petT = 0;
+  function drawPet(m) {
+    if (!opts || !opts.pet || typeof PetRig === "undefined" || !PetRig || typeof PetSim === "undefined") return;
+    try {
+      var pt = opts.pet, O = [LEN / 2, 0, MIDZ];
+      if (!petA) {
+        petA = new PetRig.Actor({k: pt.k, stage: PetSim.stage(pt), col: pt.col, ico: typeof petIco === "function" ? petIco(pt) : "", eq: pt.eq || {}, scale: 2});
+        petA.x = LEN / 2 + (opts.mySide === 1 ? 9 : -9) + 4.6 - O[0]; petA.z = -1.8 - O[2]; petA.yaw = 0.2; petA.baseExpr = "happy"; petA.mood = pt.mood || 70; petA.float = true;
+        if (petA.plan === "fish") petA.y = 0.5;
+      }
+      var now = sim.time || 0, dt = Math.min(0.05, Math.max(0, now - petT)); petT = now;
+      if (!petA.clip && Math.random() < dt * 0.15) petA.play(Math.random() < 0.5 ? "sniff" : "happy");
+      petA.lookAt([sim.ball ? sim.ball.x - O[0] : 0, 0.3, sim.ball ? sim.ball.z - O[2] : 0], 0.8);
+      petA.update(dt);
+      petA.matrices();
+      var M = petA.M, W = petA.W, ex = petA.curExpr();
+      var bake = function (verts, Mx) { VoxCore.Engine.prototype.bake.call({dyn: m}, verts, Mx, null, m); };
+      M.order.forEach(function (n) { bake(M.mesh[n], W[n]); });
+      var fm = M.faceMesh(ex); if (fm) bake(fm, W[M.facePart]);
+      petA.acc.forEach(function (q) { bake(q.verts, q.W); });
+    } catch (e) { opts.pet = null; }
+  }
+  function petGoal(side) {
+    if (!petA) return;
+    if (side === (opts.mySide || 0)) { petA.clip = null; petA.play("jump", {done: function () { petA.play("spin"); }}); petA.say("excited", 3); }
+    else { petA.clip = null; petA.play("sad"); petA.say("sad", 2.5); }
+  }
   function commitGoal(side) {
+    petGoal(side);
     sim.score[side] = clamp(sim.score[side] + 1, 0, 99);
     if (sim.scorePending > 0) sim.scorePending--;
     if (!sim.scorePending) {
@@ -4949,7 +4980,14 @@ var Pitch3D = (function () {
         frameTris: assetFrameTris, framePlayers: assetFramePlayers, frameBall: assetFrameBall}};
   }
 
-  return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy,
+  /* Núcleo compartido (5.6): la mascota y las vistas 3D usan exactamente la misma malla vóxel con
+     oclusión por vértice, los mismos shaders de luz y sombra y la misma ambientación que el partido.
+     Solo se exponen piezas sin estado (no tocan el contexto ni la simulación de este módulo). */
+  var CORE = {Mesh: Mesh, STRIDE: FS, boxCorners: boxCorners, envFor: envFor, lin: lin,
+    MAT: {MATTE: MAT_MATTE, GLOSS: MAT_GLOSS, METAL: MAT_METAL, GRASS: MAT_GRASS, EMIT: MAT_EMIT, CROWD: MAT_CROWD, SKY: MAT_SKY, UNLIT: MAT_UNLIT, LED: MAT_LED},
+    VS_MAIN: VS_MAIN, FS_MAIN: FS_MAIN, VS_SHADOW: VS_SHADOW, FS_SHADOW: FS_SHADOW, VS_LITE: VS_LITE, FS_LITE: FS_LITE, U_NAMES: U_NAMES.slice(),
+    DIGITS: DIGITS, ORIGIN: [LEN / 2, 0, MIDZ], VOXEL: 0.04};
+  return {core: CORE, _pet: function () { return petA; }, mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy,
     reset: reset, freeze: freeze, replay: replay, debug: debug,
     cinema: cinema, skipCinema: skipCinema,
     lookCam: function (o) { camLock = o || null; },
