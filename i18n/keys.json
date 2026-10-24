@@ -151,14 +151,14 @@
  },
  "Tu jugador": {
   "w": [
-   "view3d.js:546",
+   "view3d.js:553",
    "ui-life.js:142"
   ],
   "ctx": "title: o.title || tr(\"Tu jugador\"), kicker: o.kicker || tr(\"Vestuario\"), from: o.from, dist: 4.1, target: [0, 1.05, 0], pitch0: 0.16, yaw0: -0.5,"
  },
  "Vestuario": {
   "w": [
-   "view3d.js:546",
+   "view3d.js:553",
    "events-manager.js:631",
    "press-ctx.js:203",
    "mgr-plus.js:808"
@@ -167,44 +167,56 @@
  },
  "Celebración": {
   "w": [
-   "view3d.js:547",
+   "view3d.js:554",
    "ui-life.js:145",
    "ui-life.js:256",
    "ui-life.js:258"
   ],
   "ctx": "buttons: '<button class=\"btn\" data-v3d=\"cel\">' + h(tr(\"Celebración\")) + \"</button>\","
  },
+ "Dar de comer": {
+  "w": [
+   "view3d.js:897"
+  ],
+  "ctx": "var btns = '<div class=\"v3d-tricks\">' + (mdl.bowl ? '<button class=\"btn\" data-v3d=\"food\">' + h(tr(\"Dar de comer\")) + \"</button>\" : '<button class=\"btn\" data-v3d=\"ball\">' + h(tr(\"Lanzar pelota\")) + \"</button>\") +"
+ },
  "Lanzar pelota": {
   "w": [
-   "view3d.js:760"
+   "view3d.js:897"
   ],
-  "ctx": "var btns = '<div class=\"v3d-tricks\"><button class=\"btn\" data-v3d=\"ball\">' + h(tr(\"Lanzar pelota\")) + \"</button>\" +"
+  "ctx": "var btns = '<div class=\"v3d-tricks\">' + (mdl.bowl ? '<button class=\"btn\" data-v3d=\"food\">' + h(tr(\"Dar de comer\")) + \"</button>\" : '<button class=\"btn\" data-v3d=\"ball\">' + h(tr(\"Lanzar pelota\")) + \"</button>\") +"
  },
  "¡Truco nuevo!": {
   "w": [
-   "view3d.js:763"
+   "view3d.js:900"
   ],
   "ctx": "title: o.title || pt.nm, kicker: o.kicker || (trickO ? tr(\"¡Truco nuevo!\") : newAcc ? tr(\"Accesorio nuevo\") : tr(\"Tu mascota\")), from: o.from,"
  },
  "Accesorio nuevo": {
   "w": [
-   "view3d.js:763"
+   "view3d.js:900"
   ],
   "ctx": "title: o.title || pt.nm, kicker: o.kicker || (trickO ? tr(\"¡Truco nuevo!\") : newAcc ? tr(\"Accesorio nuevo\") : tr(\"Tu mascota\")), from: o.from,"
  },
  "Tu mascota": {
   "w": [
-   "view3d.js:763",
+   "view3d.js:900",
    "ui-pets.js:76",
    "ui-pets.js:253"
   ],
   "ctx": "title: o.title || pt.nm, kicker: o.kicker || (trickO ? tr(\"¡Truco nuevo!\") : newAcc ? tr(\"Accesorio nuevo\") : tr(\"Tu mascota\")), from: o.from,"
  },
+ "Arrastra el dedo por la pecera y te seguirá · dale de comer · pellizca para acercar": {
+  "w": [
+   "view3d.js:901"
+  ],
+  "ctx": "hint: mdl.bowl ? tr(\"Arrastra el dedo por la pecera y te seguirá · dale de comer · pellizca para acercar\") : tr(\"Acaríciale arrastrando sobre él · toca el césped para llamarle · pellizca para acercar\"),"
+ },
  "Acaríciale arrastrando sobre él · toca el césped para llamarle · pellizca para acercar": {
   "w": [
-   "view3d.js:764"
+   "view3d.js:901"
   ],
-  "ctx": "hint: tr(\"Acaríciale arrastrando sobre él · toca el césped para llamarle · pellizca para acercar\"),"
+  "ctx": "hint: mdl.bowl ? tr(\"Arrastra el dedo por la pecera y te seguirá · dale de comer · pellizca para acercar\") : tr(\"Acaríciale arrastrando sobre él · toca el césped para llamarle · pellizca para acercar\"),"
  },
  "Fútbol: Camino a la Leyenda": {
   "w": [

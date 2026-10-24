@@ -415,8 +415,15 @@ var View3D = (function () {
     }
     function drawParts(pose, mirror, alpha) {
       useModelProg(mirror, alpha, pose.flash);
-      var list = pose.draw || Object.keys(pose.mats);
-      for (var k = 0; k < list.length; k++) { var n = list[k], m = meshes[n], Mx = pose.mats[n]; if (m && Mx) drawMesh(m, Mx, pose.cm && pose.cm[n]); }
+      var list = pose.draw || Object.keys(pose.mats), al = pose.alpha || {}, k, n, m, Mx;
+      for (k = 0; k < list.length; k++) { n = list[k]; if (al[n] != null) continue; m = meshes[n]; Mx = pose.mats[n]; if (m && Mx) drawMesh(m, Mx, pose.cm && pose.cm[n]); }
+      /* lo translúcido (agua y cristal de la pecera) al final, sin escribir profundidad */
+      var tr2 = list.filter(function (x) { return al[x] != null; });
+      if (tr2.length) {
+        gl.depthMask(false);
+        for (k = 0; k < tr2.length; k++) { n = tr2[k]; m = meshes[n]; Mx = pose.mats[n]; if (!m || !Mx) continue; gl.uniform1f(P.u.uA, alpha * al[n]); drawMesh(m, Mx, pose.cm && pose.cm[n]); }
+        gl.depthMask(true); gl.uniform1f(P.u.uA, alpha);
+      }
     }
     function off() { for (var k = 0; k < 6; k++) gl.disableVertexAttribArray(k); }
     function drawGround(sh, base) {
@@ -650,13 +657,13 @@ var View3D = (function () {
     iguana: {kind: "quad", c1: PALX.N, c2: "#8fd47a", c3: PALX.n, nose: PALX.n, body: [0.3, 0.08, 0.1], leg: [0.07, 0.03], head: 0.09, snout: [0.09, 0.055], ears: "none", tail: "lizard", spikes: "dorsal", gait: "walk", speed: 0.8, splay: true},
     turtle: {kind: "turtle", c1: "#7fbf5a", c2: PALX.n, c3: PALX.N, nose: PALX.n, body: [0.22, 0.12, 0.18], leg: [0.05, 0.045], head: 0.075, snout: [0.04, 0.05], ears: "none", tail: "stub", gait: "walk", speed: 0.25},
     macaw: {kind: "bird", c1: PALX.R, c2: PALX.W, c3: PALX.B, c4: PALX.Y, nose: "#e8e2d0", body: [0.12, 0.16, 0.12], leg: [0.07, 0.02], head: 0.1, snout: [0.08, 0.05], gait: "hop", speed: 0.7},
-    fish: {kind: "fish", c1: PALX.B, c2: PALX.W, c3: PALX.b, nose: PALX.b, body: [0.22, 0.13, 0.08], head: 0, gait: "swim", speed: 0.7},
+    fish: {kind: "fish", c1: PALX.B, c2: "#cfe6ff", c3: PALX.b, nose: PALX.b, body: [0.17, 0.1, 0.062], head: 0, gait: "swim", speed: 0.24},
     python: {kind: "snake", c1: PALX.N, c2: PALX.Y, c3: PALX.n, nose: PALX.n, body: [0.06, 0.06, 0.06], head: 0.085, gait: "slither", speed: 0.5},
     tarantula: {kind: "spider", c1: PALX.t, c2: PALX.T, c3: PALX.R, nose: PALX.K, body: [0.11, 0.09, 0.1], leg: [0.16, 0.018], head: 0.08, gait: "scurry", speed: 1.0}
   };
   function specOf(pt) {
     var sp = Object.assign({}, SPEC[pt.k] || SPEC.dog), ico = nf(petIco(pt));
-    if (pt.k === "fish") { if (ico === "🐠") { sp.c1 = PALX.O; sp.c2 = PALX.W; sp.c3 = PALX.Y; sp.rings = true; } else if (ico === "🐡") { sp.c1 = PALX.Y; sp.c2 = "#ffe98a"; sp.c3 = PALX.y; sp.puffer = true; sp.body = [0.16, 0.16, 0.16]; } }
+    if (pt.k === "fish") { if (ico === "🐠") { sp.c1 = PALX.O; sp.c2 = PALX.W; sp.c3 = "#e8731a"; sp.rings = true; } else if (ico === "🐡") { sp.c1 = PALX.Y; sp.c2 = "#ffe98a"; sp.c3 = PALX.y; sp.puffer = true; sp.body = [0.11, 0.11, 0.11]; } }
     if (pt.k === "dog" && ico === "🦮") { sp.c1 = PALX.Y; sp.c2 = "#fff0c0"; sp.c3 = PALX.y; sp.harness = true; }
     var stg = petStage(pt);
     sp.scale = [0.72, 0.88, 1, 1][stg]; sp.headK = [1.28, 1.12, 1, 1][stg]; sp.senior = stg === 3;
@@ -756,19 +763,47 @@ var View3D = (function () {
       A = part("tail"); cone(A, [0, by - B[1] * 0.5, -B[2] * 0.6], [0, by - B[1] * 1.6, -B[2] * 2.4], B[0] * 0.45, c3, 8, 0, 0.35); piv.tail = [0, by - B[1] * 0.5, -B[2] * 0.6];
       [["legFL", -0.04], ["legFR", 0.04]].forEach(function (L) { A = part(L[0]); capsule(A, [L[1] * s, legL + 0.02, 0.02], [L[1] * s, 0.015, 0.03], 0.014 * s, 0.012 * s, PALX.g, 6); piv[L[0]] = [L[1] * s, legL + 0.02, 0.02]; });
     } else if (sp.kind === "fish") {
+      var L = B[0], H = B[1], W = B[2];
       A = part("body");
       if (sp.puffer) {
-        ellipsoid(A, [0, 0, 0], [B[0], B[1], B[2]], function (u) { return u[1] < -0.3 ? sp.c2 : c1; }, 14, 10);
-        for (i = 0; i < 30; i++) { var t2 = rnd(0.2, 2.9), p2 = rnd(0, 2 * PI), d = [Math.sin(t2) * Math.cos(p2), Math.cos(t2), Math.sin(t2) * Math.sin(p2)]; cone(A, [d[0] * B[0] * 0.92, d[1] * B[1] * 0.92, d[2] * B[2] * 0.92], [d[0] * B[0] * 1.25, d[1] * B[1] * 1.25, d[2] * B[2] * 1.25], 0.02 * s, sp.c3, 4); }
-        eyes(0, B[1] * 0.35, B[2] * 0.85, B[0] * 0.17, B[0] * 0.45);
+        ellipsoid(A, [0, 0, 0], [L, L * 0.95, L], function (u) { return u[1] < -0.35 ? sp.c2 : u[1] > 0.6 ? sp.c3 : c1; });
+        for (i = 0; i < 26; i++) { var t2 = rnd(0.25, 2.8), p2 = rnd(0, 2 * PI), d = [Math.sin(t2) * Math.cos(p2), Math.cos(t2), Math.sin(t2) * Math.sin(p2)]; if (d[2] > 0.7) continue; cone(A, [d[0] * L * 0.9, d[1] * L * 0.88, d[2] * L * 0.9], [d[0] * L * 1.3, d[1] * L * 1.28, d[2] * L * 1.3], 0.012, sp.c3, 4); }
+        ellipsoid(A, [0, -L * 0.25, L * 0.95], [L * 0.18, L * 0.1, L * 0.08], "#c0603a");
+        eyes(0, L * 0.35, L * 0.82, L * 0.2, L * 0.48);
+        [-1, 1].forEach(function (sd) { var n = sd < 0 ? "finL" : "finR", F = part(n); ellipsoid(F, [sd * L * 1.02, -L * 0.05, L * 0.05], [VX.vs * 0.5, L * 0.28, L * 0.22], sp.c3); piv[n] = [sd * L * 0.95, -L * 0.05, L * 0.15]; });
+        A = part("tail"); cone(A, [0, 0, -L * 0.9], [0, 0, -L * 1.45], L * 0.45, sp.c3, 8, 0, 0.25); piv.tail = [0, 0, -L * 0.9];
+        H = L; W = L;
       } else {
-        ellipsoid(A, [0, 0, 0], [B[2], B[1], B[0]], sp.rings ? function (u) { return Math.abs(u[2] - 0.25) < 0.1 || Math.abs(u[2] + 0.3) < 0.1 ? sp.c2 : c1; } : function (u) { return u[1] < -0.3 ? sp.c2 : c1; }, 16, 10);
-        var E2 = part("eyes"); [-1, 1].forEach(function (sd) { ellipsoid(E2, [sd * B[2] * 0.72, B[1] * 0.25, B[0] * 0.55], [B[2] * 0.22, B[2] * 0.26, B[2] * 0.12], PALX.K, 8, 6); ellipsoid(E2, [sd * B[2] * 0.82, B[1] * 0.32, B[0] * 0.6], [B[2] * 0.08, B[2] * 0.08, B[2] * 0.05], "#fff", 6, 4); });
-        piv.eyes = [0, B[1] * 0.25, B[0] * 0.55];
-        cone(A, [0, B[1] * 0.8, 0], [0, B[1] * 1.45, -B[0] * 0.25], B[0] * 0.3, sp.c3, 8, 0, 0.2);
+        /* cuerpo en forma de gota: cabeza redonda que se estrecha hacia la cola; escamas, lomo oscuro y vientre claro */
+        var rings = !!sp.rings;
+        VX.fill(A, -W, -H, -L, W, H, L, function (x, y, z) {
+          var tt = z / L, f = tt >= 0 ? Math.sqrt(Math.max(0, 1 - tt * tt)) : 0.3 + 0.7 * Math.sqrt(Math.max(0, 1 - tt * tt));
+          var ex = x / (W * f + 1e-6), ey = y / (H * f + 1e-6); if (ex * ex + ey * ey > 1 || f < 0.02) return null;
+          var ix = Math.round(x / VX.vs), iy = Math.round(y / VX.vs), iz = Math.round(z / VX.vs);
+          if (rings) {
+            var bd = function (c0, w) { var dd = Math.abs(tt - c0); return dd < w ? "W" : dd < w + 0.07 ? "K" : null; };
+            var r1 = bd(0.42, 0.1) || bd(-0.12, 0.11);
+            if (r1 === "W") return rgb("#ffffff"); if (r1 === "K") return rgb(PALX.K);
+            return (ix + iy + iz) % 3 === 0 ? mix(c1, "#ffb060", 0.25) : rgb(c1);
+          }
+          if (ey > 0.55) return rgb(c3);
+          if (ey < -0.4) return rgb(sp.c2);
+          if (Math.abs(tt - 0.45) < 0.035 && ey > -0.4) return mix(c1, PALX.K, 0.35);
+          return (ix + iz) % 2 === 0 && (iy + iz) % 2 === 0 ? mix(c1, "#ffffff", 0.18) : rgb(c1);
+        });
+        VX.dot(A, [0, -H * 0.15, L * 0.98], "#1b1b24");
+        cone(A, [0, H * 0.75, L * 0.15], [0, H * 1.55, -L * 0.3], L * 0.32, rings ? c1 : c3, 8, 0, 0.18);
+        cone(A, [0, -H * 0.7, -L * 0.2], [0, -H * 1.25, -L * 0.45], L * 0.16, rings ? c1 : c3, 6, 0, 0.18);
+        eyes(0, H * 0.18, L * 0.55, H * 0.26, W * 0.8);
+        [-1, 1].forEach(function (sd) { var n = sd < 0 ? "finL" : "finR", F = part(n); ellipsoid(F, [sd * W * 1.05, -H * 0.2, L * 0.12], [VX.vs * 0.5, H * 0.38, L * 0.22], rings ? c1 : c3); piv[n] = [sd * W * 0.9, -H * 0.15, L * 0.28]; });
+        A = part("tail");
+        cone(A, [0, 0, -L * 0.9], [0, H * 1.2, -L * 1.85], H * 0.55, rings ? c1 : c3, 8, 0, 0.3);
+        cone(A, [0, 0, -L * 0.9], [0, -H * 1.2, -L * 1.85], H * 0.55, rings ? c1 : c3, 8, 0, 0.3);
+        cone(A, [0, 0, -L * 0.9], [0, 0, -L * 1.5], H * 0.6, rings ? c1 : c3, 8, 0, 0.3);
+        if (rings) { VX.dot(A, [0, H * 1.15, -L * 1.82], PALX.K); VX.dot(A, [0, -H * 1.15, -L * 1.82], PALX.K); }
+        piv.tail = [0, 0, -L * 0.9];
       }
-      A = part("tail"); cone(A, [0, 0, -B[0] * 0.85], [0, 0, -B[0] * 1.6], B[1] * 0.85, sp.c3, 10, 0, 0.18); piv.tail = [0, 0, -B[0] * 0.85];
-      piv.body = [0, 0, 0]; piv.head = [0, 0, B[0] * 0.5]; piv.headTop = [0, B[1], B[0] * 0.35]; piv.face = [0, B[1] * 0.25, B[0] * 0.85]; piv.neck = [0, -B[1] * 0.2, B[0] * 0.55]; piv.mouth = [0, 0, B[0] * 1.0]; piv.hr = B[1] * 0.8;
+      piv.body = [0, 0, 0]; piv.head = [0, 0, L * 0.5]; piv.headTop = [0, H, L * 0.35]; piv.face = [0, H * 0.25, L * 0.85]; piv.neck = [0, -H * 0.2, L * 0.55]; piv.mouth = [0, 0, L * 1.0]; piv.hr = H * 0.8;
     } else if (sp.kind === "snake") {
       for (i = 0; i < 12; i++) { A = part("seg" + i); var rr = B[0] * (1 - i / 16); ellipsoid(A, [0, rr, 0], [rr, rr, rr * 1.3], function (u) { return u[1] < -0.3 ? sp.c2 : ((Math.floor((u[0] + 1) * 3) % 2) ? c1 : c3); }, 10, 6); }
       A = part("head"); ellipsoid(A, [0, hr * 0.8, 0], [hr * 0.9, hr * 0.7, hr * 1.2], c1, 12, 8); eyes(0, hr * 1.15, hr * 0.9, hr * 0.15, hr * 0.5);
@@ -803,6 +838,42 @@ var View3D = (function () {
     return {v: new Float32Array(A), oy: oy, s: s};
   }
 
+
+  /* pecera de vóxeles: cristal y agua translúcidos, grava de colores, planta que se mece, piedra y pedestal de madera */
+  function bowlModel() {
+    var V2 = new VoxSet(0.018), P2 = voxPrims(V2), cy = 0.74, R = 0.36, bot = cy - R * 0.86, wy = cy + R * 0.5, top = cy + R * 0.72;
+    function hs(x, y, z) { var s = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453; return s - Math.floor(s); }
+    V2.fill(V2.part("bowl_glass"), -R, bot - V2.vs, -R, R, top, R, function (x, y, z) {
+      var d = Math.sqrt(x * x + (y - cy) * (y - cy) + z * z);
+      if (y < bot) return Math.hypot(x, z) <= Math.sqrt(R * R - (R * 0.86) * (R * 0.86)) ? [0.8, 0.95, 1] : null;
+      if (y > top) return null;
+      return d <= R && d >= R - V2.vs * 1.1 ? (y > top - V2.vs * 2 ? [0.96, 1, 1] : [0.78, 0.93, 1]) : null;
+    });
+    V2.fill(V2.part("bowl_water"), -R, bot, -R, R, wy, R, function (x, y, z) {
+      var d = Math.sqrt(x * x + (y - cy) * (y - cy) + z * z);
+      return d <= R - V2.vs * 1.2 && y <= wy && y >= bot ? (y > wy - V2.vs ? [0.7, 0.9, 1] : [0.25, 0.55, 0.95]) : null;
+    });
+    var gcol = [[0.98, 0.72, 0.8], [1, 0.9, 0.55], [0.6, 0.8, 1], [0.95, 0.95, 0.92], [0.7, 0.92, 0.7]];
+    V2.fill(V2.part("bowl_gravel"), -R, bot, -R, R, bot + 0.05, R, function (x, y, z) {
+      var d = Math.sqrt(x * x + (y - cy) * (y - cy) + z * z);
+      if (d > R - V2.vs * 1.6 || y < bot || y > bot + 0.045 - hs(x, 0, z) * 0.02) return null;
+      return gcol[Math.floor(hs(x, y, z) * gcol.length)];
+    });
+    var PL = V2.part("bowl_plant"), g0 = bot + 0.04;
+    P2.capsule(PL, [-0.1, g0, -0.06], [-0.13, g0 + 0.16, -0.08], 0.014, 0.012, "#3fae4a");
+    P2.capsule(PL, [-0.13, g0 + 0.16, -0.08], [-0.1, g0 + 0.3, -0.05], 0.012, 0.009, "#56c75c");
+    P2.capsule(PL, [-0.08, g0, -0.1], [-0.04, g0 + 0.2, -0.13], 0.012, 0.01, "#2f8f3c");
+    P2.capsule(PL, [-0.12, g0, -0.03], [-0.19, g0 + 0.13, 0.0], 0.011, 0.009, "#48b852");
+    var DE = V2.part("bowl_deco");
+    P2.ellipsoid(DE, [0.12, g0 + 0.02, -0.07], [0.06, 0.045, 0.05], function (u) { return u[1] > 0.3 ? "#b9bfc6" : "#8a929c"; });
+    P2.ellipsoid(DE, [0.05, g0 + 0.01, 0.12], [0.035, 0.02, 0.03], "#f2b8c6");
+    var ST = V2.part("bowl_stand"), tb = bot - V2.vs;
+    P2.box(ST, -0.24, tb - 0.04, -0.24, 0.24, tb, 0.24, "#8a5a34");
+    P2.box(ST, -0.09, 0.04, -0.09, 0.09, tb - 0.04, 0.09, "#6e4628");
+    P2.box(ST, -0.18, 0, -0.18, 0.18, 0.04, 0.18, "#5a3a20");
+    var out = {}; V2.order.forEach(function (k) { out[k] = voxFaces(V2.parts[k], V2.vs); });
+    return {parts: out, cy: cy, R: R, wy: wy, bot: bot, plant: [-0.11, g0, -0.07]};
+  }
   function pet(o) {
     o = o || {};
     if (typeof petOf !== "function" || !Rig) return false;
@@ -821,22 +892,25 @@ var View3D = (function () {
       var D = [[0, 1, 0], [0, -1, 0], [0.89, 0.45, 0], [-0.89, -0.45, 0], [0.28, 0.45, 0.85], [-0.28, -0.45, -0.85], [0.28, 0.45, -0.85], [-0.28, -0.45, 0.85], [-0.72, 0.45, 0.53], [0.72, -0.45, -0.53], [-0.72, 0.45, -0.53], [0.72, -0.45, 0.53]];
       for (var i = 0; i < D.length; i++) if (u[0] * D[i][0] + u[1] * D[i][1] + u[2] * D[i][2] > 0.9) return "#1e2427"; return "#f4f6f0"; }, 14, 10);
     mdl.parts.ball = accs.t ? accs.t.m.v : voxFaces(ballA, BV.vs);
+    if (sp.kind === "fish") { var bw = bowlModel(); Object.keys(bw.parts).forEach(function (k) { mdl.parts[k] = bw.parts[k]; }); mdl.bowl = bw; }
     var col = petColDef(pt.col || "nat"), rainbow = col[2] === "anim", CM = cssFilterMat(rainbow ? "" : col[2]);
     var tricks = Rig.knownTricks(pt), trickO = o.trick != null ? Rig.speciesTricks(pt)[o.trick] : null;
-    var btns = '<div class="v3d-tricks"><button class="btn" data-v3d="ball">' + h(tr("Lanzar pelota")) + "</button>" +
+    var btns = '<div class="v3d-tricks">' + (mdl.bowl ? '<button class="btn" data-v3d="food">' + h(tr("Dar de comer")) + "</button>" : '<button class="btn" data-v3d="ball">' + h(tr("Lanzar pelota")) + "</button>") +
       tricks.map(function (tk, i) { return '<button class="btn' + (trickO && trickO.k === tk.k ? " pri" : "") + '" data-v3d="t' + i + '">' + h(tr(tk.n)) + "</button>"; }).join("") + "</div>";
     return open({
       title: o.title || pt.nm, kicker: o.kicker || (trickO ? tr("¡Truco nuevo!") : newAcc ? tr("Accesorio nuevo") : tr("Tu mascota")), from: o.from,
-      hint: tr("Acaríciale arrastrando sobre él · toca el césped para llamarle · pellizca para acercar"),
-      dist: clamp(1.3 + mdl.size * 3.4, 1.7, 3.2), dmin: 1.1, dmax: 4.5, target: [0, mdl.bodyY * 0.8 + (sp.kind === "fish" ? 0.45 : 0), 0.3], pitch0: 0.38, yaw0: 0, auto: false, buttons: btns,
+      hint: mdl.bowl ? tr("Arrastra el dedo por la pecera y te seguirá · dale de comer · pellizca para acercar") : tr("Acaríciale arrastrando sobre él · toca el césped para llamarle · pellizca para acercar"),
+      dist: mdl.bowl ? 2.05 : clamp(1.3 + mdl.size * 3.4, 1.7, 3.2), dmin: mdl.bowl ? 0.9 : 1.1, dmax: 4.5, target: mdl.bowl ? [0, mdl.bowl.cy * 0.92, 0] : [0, mdl.bodyY * 0.8, 0.3], pitch0: mdl.bowl ? 0.22 : 0.38, yaw0: 0, auto: false, buttons: btns,
       scene: function (ctx) { return petScene(ctx, pt, sp, mdl, accs, accDrop, CM, rainbow, tricks, trickO, red); }
     });
   }
 
   /* comportamiento y animación de la mascota */
   function petScene(ctx, pt, sp, mdl, accs, accDrop, CM, rainbow, tricks, trickO, red) {
-    var piv = mdl.piv, s = sp.scale, fly = sp.kind === "fish" ? 0.55 : 0, rootM = m4();
-    var S2 = {x: 0, z: 0.3, yaw: 0, v: 0, gait: 0, mode: "idle", t: 0, target: null, sit: 0, lie: 0, belly: 0, happy: 0, blink: -1, blinkN: 2,
+    var piv = mdl.piv, s = sp.scale, BW = mdl.bowl, fly = BW ? BW.cy : 0, rootM = m4(), food = [], bubT = 1;
+    /* pez: posición dentro de la pecera (x, z alrededor del centro y fy respecto al centro del agua) */
+    function fishRoom(fy) { var r = BW.R - 0.07; return Math.max(0.02, Math.sqrt(Math.max(0, r * r - fy * fy)) - sp.body[0] * 0.9); }
+    var S2 = {x: 0, z: BW ? 0 : 0.3, fy: 0, fyT: 0, yaw: 0, v: 0, gait: 0, mode: "idle", t: 0, target: null, sit: 0, lie: 0, belly: 0, happy: 0, blink: -1, blinkN: 2,
       headYaw: 0, headPitch: 0, tailAmp: 0.4, wagT: 0, trick: null, trickT: 0, pet: 0, heartT: 0, idleN: rnd(1.5, 3), curl: 0, hide: 0, sniff: 0, earT: 0, earPerk: 0, sitHold: 0, happyHold: 0, idleActT: 0};
     var ball = {on: false, x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, rest: false, held: false, spin: 0};
     function camXZ() { return [ctx.cam.eye[0], ctx.cam.eye[2]]; }
@@ -852,7 +926,7 @@ var View3D = (function () {
       jump: {d: 0.9, f: function (t, Q) { if (t < 0.15) Q.sq = -0.2 * Math.sin(t / 0.15 * PI); else if (t < 0.75) { var k = (t - 0.15) / 0.6; Q.jump += Math.sin(k * PI) * 0.45 * s; Q.pitch -= Math.sin(k * PI) * 0.25; } else Q.sq = -0.18 * Math.sin((t - 0.75) / 0.15 * PI); }},
       paw: {d: 1.8, f: function (t, Q) { Q.sit = Math.min(1, t / 0.3) * (t > 1.5 ? 1 - (t - 1.5) / 0.3 : 1); Q.paw = t > 0.35 && t < 1.45 ? 0.6 + 0.4 * Math.sin((t - 0.35) * 14) : 0; Q.look = "cam"; }},
       roll: {d: 1.3, f: function (t, Q) { var k = clamp((t - 0.2) / 0.9, 0, 1); Q.lie = Math.sin(Math.min(1, t / 0.2) * PI / 2) * (t > 1.1 ? 1 - (t - 1.1) / 0.2 : 1); Q.roll += E.inOutQuad(k) * 2 * PI; }},
-      dead: {d: 2.4, f: function (t, Q) { var k = t < 0.35 ? E.outBounce(t / 0.35) : t > 2.0 ? 1 - (t - 2.0) / 0.4 : 1; Q.roll += k * PI / 2; Q.lie = k; Q.eyesShut = t > 0.3 && t < 2.0; Q.legsStiff = k; if (t > 2.0) Q.jump += Math.sin((t - 2.0) / 0.4 * PI) * 0.15; }},
+      dead: {d: 2.4, f: function (t, Q) { var k = t < 0.35 ? E.outBounce(t / 0.35) : t > 2.0 ? 1 - (t - 2.0) / 0.4 : 1; Q.roll += k * PI / (BW ? 1 : 2); Q.lie = k; Q.eyesShut = t > 0.3 && t < 2.0; Q.legsStiff = k; if (t > 2.0) Q.jump += Math.sin((t - 2.0) / 0.4 * PI) * 0.15; }},
       dance: {d: 2.0, f: function (t, Q) { Q.stand = Math.min(1, t / 0.3) * (t > 1.7 ? 1 - (t - 1.7) / 0.3 : 1); Q.yaw += Math.sin(t * 7) * 0.4; Q.roll += Math.sin(t * 7) * 0.12; Q.paw = 0.5 + 0.5 * Math.sin(t * 14); Q.notes = true; }},
       flip: {d: 1.1, f: function (t, Q) { if (t < 0.18) Q.sq = -0.22 * Math.sin(t / 0.18 * PI); else if (t < 0.9) { var k = (t - 0.18) / 0.72; Q.jump += Math.sin(k * PI) * 0.6 * s; Q.pitch -= E.inOutQuad(k) * 2 * PI; } else Q.sq = -0.2 * Math.sin((t - 0.9) / 0.2 * PI); }},
       stretch: {d: 1.8, f: function (t, Q) { var k = t < 0.4 ? t / 0.4 : t > 1.2 ? Math.max(0, 1 - (t - 1.2) / 0.3) : 1; Q.pitch += 0.35 * k; Q.sq += 0.06 * k; Q.eyesShut = k > 0.5; if (t > 1.4) Q.shake = Math.sin((t - 1.4) * 40) * 0.25; }},
@@ -887,6 +961,7 @@ var View3D = (function () {
     var dropT = {}; Object.keys(accDrop).forEach(function (k) { dropT[k] = 0; });
     if (Object.keys(dropT).length) S2.sitHold = 2.2;
     function hitPet(cx, cy) {
+      if (BW) { var c0 = ctx.project([0, BW.cy, 0]), e0 = ctx.project([0, BW.cy + BW.R, 0]); return Math.hypot(cx - c0.x, cy - c0.y) < Math.abs(e0.y - c0.y) * 1.1; }
       var y0 = mdl.bodyY + fly + 0.04, c = ctx.project([S2.x, y0, S2.z]), e = ctx.project([S2.x, y0 + mdl.size * 0.5, S2.z]);
       return Math.hypot(cx - c.x, cy - c.y) < Math.max(34, Math.abs(e.y - c.y) * 1.7);
     }
@@ -894,15 +969,29 @@ var View3D = (function () {
       parts: mdl.parts,
       hit: hitPet,
       touchStart: function () { S2.pet = 0.01; },
-      touchMove: function (x, y, dx, dy) { S2.pet = Math.min(1, S2.pet + (Math.abs(dx) + Math.abs(dy)) * 0.006); if (S2.mode !== "trick") { S2.mode = "petted"; S2.target = null; } },
+      touchMove: function (x, y, dx, dy) {
+        if (BW) {
+          /* el pez sigue al dedo por el cristal */
+          var c0 = ctx.project([0, BW.cy, 0]), e0 = ctx.project([0, BW.cy + BW.R, 0]), rp = Math.max(20, Math.abs(e0.y - c0.y)), yw = ctx.st.yaw;
+          var lx = clamp((x - c0.x) / rp, -1, 1) * BW.R * 0.8, ly = clamp(-(y - c0.y) / rp, -1, 1) * BW.R * 0.8;
+          if (S2.mode !== "trick") { S2.mode = "walk"; S2.target = [Math.cos(yw) * lx + Math.sin(yw) * 0.1, -Math.sin(yw) * lx + Math.cos(yw) * 0.1]; S2.fyT = clamp(ly, -BW.R * 0.55, BW.wy - BW.cy - 0.06); S2.follow = 0.6; }
+          return;
+        }
+        S2.pet = Math.min(1, S2.pet + (Math.abs(dx) + Math.abs(dy)) * 0.006); if (S2.mode !== "trick") { S2.mode = "petted"; S2.target = null; } },
       touchEnd: function () { if (S2.mode === "petted") { S2.mode = "idle"; S2.idleN = rnd(1, 2); S2.happyHold = 1.2; } S2.pet = 0; },
       tap: function (x, y, onPet) {
-        if (onPet) { var r = Math.random(); startTrick(sp.kind === "quad" && r < 0.3 ? "roll" : r < 0.65 ? "jump" : "spin"); hearts(3); return; }
+        if (onPet) { var r = Math.random(); startTrick(BW ? (r < 0.4 ? "spin" : r < 0.7 ? "bubbles" : "jump") : sp.kind === "quad" && r < 0.3 ? "roll" : r < 0.65 ? "jump" : "spin"); hearts(3); return; }
         var g = ctx.groundAt(x, y); if (!g) return;
+        if (BW) { var gl = Math.hypot(g[0], g[2]) || 1, rr = fishRoom(S2.fy); S2.mode = "walk"; S2.target = [g[0] / gl * rr, g[2] / gl * rr]; S2.trick = null; return; }
         S2.mode = "walk"; S2.target = [clamp(g[0], -4, 4), clamp(g[2], -4, 4)]; S2.trick = null; S2.call = true; S2.idleActT = 0;
         ctx.spawn({x: S2.target[0], y: 0.05, z: S2.target[1], vy: 0.25, t: 1, s: 0.09, max: 0.7, keep: true});
       },
-      onButton: function (v) { if (v === "ball") { throwBall(); return; } if (v.charAt(0) === "t") { var tk = tricks[+v.slice(1)]; if (tk) startTrick(tk.k); } },
+      onButton: function (v) {
+        if (v === "food" && BW) {
+          for (var fi = 0; fi < 6; fi++) { var q = ctx.spawn({x: rnd(-0.12, 0.12), y: BW.wy + 0.01, z: rnd(-0.12, 0.12), vy: -rnd(0.03, 0.06), t: 8, s: 0.02, c: [0.82, 0.52, 0.28, 1], max: 25, keep: true}); if (q) food.push(q); }
+          S2.mode = "food"; S2.trick = null; Anim.haptic("tap"); return;
+        }
+        if (v === "ball") { throwBall(); return; } if (v.charAt(0) === "t") { var tk = tricks[+v.slice(1)]; if (tk) startTrick(tk.k); } },
       pose: function (dt, time) {
         var Q = {yaw: 0, pitch: 0, roll: 0, jump: 0, sq: 0, sit: 0, lie: 0, stand: 0, paw: 0, fwd: 0, look: null, tailAmp: null, eyesShut: false, legsStiff: 0, flap: 0, hide: 0, curl: 0, coil: 0, shake: 0, wiggle: 0, orange: 0, belly: 0, sniff: 0};
         S2.t += dt;
@@ -910,6 +999,7 @@ var View3D = (function () {
         /* --- máquina de estados --- */
         if (S2.mode === "trick" && S2.trick) {
           S2.trickT += dt; TR[S2.trick].f(S2.trickT, Q);
+          if (BW) { Q.fwd *= 0.25; if (S2.trick !== "jump" && S2.trick !== "flip") Q.jump *= 0.3; else Q.jump *= 0.8; }
           if (Q.notes && Math.random() < dt * 3) { var hp = worldOf(piv.headTop); ctx.spawn({x: hp[0], y: hp[1] + 0.05, z: hp[2], vx: rnd(-0.2, 0.2), vy: 0.4, g: -0.05, t: 2, s: 0.07, max: 1}); }
           if (Q.bubbles && Math.random() < dt * 10) { var mp = worldOf(piv.mouth); ctx.spawn({x: mp[0], y: mp[1], z: mp[2], vx: rnd(-0.05, 0.05), vy: rnd(0.3, 0.5), g: -0.1, t: 7, s: rnd(0.04, 0.08), max: 1.4, keep: true}); }
           if (Q.zzz && Math.random() < dt * 1.2) { var zp = worldOf(piv.headTop); ctx.spawn({x: zp[0], y: zp[1] + 0.05, z: zp[2], vx: 0.08, vy: 0.25, t: 3, s: 0.06, max: 1.4, keep: true}); }
@@ -933,14 +1023,27 @@ var View3D = (function () {
           else if (fs === "back") { var e3 = camXZ(), dx3 = e3[0] - S2.x, dz3 = e3[1] - S2.z, l3 = Math.hypot(dx3, dz3) || 1; S2.target = [S2.x + dx3 / l3 * Math.max(0, l3 - 1.3), S2.z + dz3 / l3 * Math.max(0, l3 - 1.3)]; run = true;
             if (l3 < 1.5) { ball.held = false; ball.vx = dx3 / l3 * 0.3; ball.vz = dz3 / l3 * 0.3; ball.vy = 0.3; ball.rest = false; S2.fetchState = "done"; S2.t = 0; hearts(3); Anim.haptic("ok"); } }
           else if (fs === "done") { Q.sit = Math.min(1, S2.t / 0.3); Q.look = "cam"; Q.tailAmp = 1.8; S2.target = null; if (S2.t > 1.8) { S2.mode = "idle"; S2.idleN = rnd(1, 2); } }
+        } else if (S2.mode === "food" && BW) {
+          /* comida: va a por la escama más cercana y se la come */
+          food = food.filter(function (q) { return q.on; });
+          var best = null, bd2 = 1e9, wp0 = [S2.x, BW.cy + S2.fy, S2.z];
+          food.forEach(function (q) { var d0 = Math.hypot(q.x - wp0[0], q.y - wp0[1], q.z - wp0[2]); if (d0 < bd2) { bd2 = d0; best = q; } });
+          if (!best) { S2.mode = "idle"; S2.idleN = rnd(1, 2); S2.happyHold = 1.5; hearts(2); }
+          else {
+            S2.target = [best.x, best.z]; S2.fyT = clamp(best.y - BW.cy, -BW.R * 0.6, BW.wy - BW.cy - 0.04); run = true;
+            var mp0 = worldOf(piv.mouth);
+            if (Math.hypot(best.x - mp0[0], best.y - mp0[1], best.z - mp0[2]) < 0.05) { best.on = false; Anim.haptic("tap"); hearts(1); ctx.spawn({x: mp0[0], y: mp0[1], z: mp0[2], vy: 0.2, t: 7, s: 0.03, max: 1, keep: true}); }
+          }
         } else if (S2.mode === "walk") {
           if (!S2.target) S2.mode = "idle";
         } else {
           S2.idleN -= dt;
           if (S2.sitHold > 0) { S2.sitHold -= dt; Q.sit = 1; Q.look = "cam"; }
           else if (S2.idleN <= 0) {
-            var r2 = Math.random(), ang = rnd(0, 2 * PI), rad = rnd(0.4, 2.2);
-            if (r2 < 0.55) { S2.mode = "walk"; S2.target = [Math.sin(ang) * rad, Math.cos(ang) * rad * 0.8]; }
+            var r2 = Math.random(), ang = rnd(0, 2 * PI), rad = BW ? rnd(0, fishRoom(0)) : rnd(0.4, 2.2);
+            if (BW) S2.fyT = rnd(-BW.R * 0.5, BW.wy - BW.cy - 0.07);
+            if (BW) { /* nada de lado a lado (respecto a la cámara) para que se vea de perfil */ var yw0 = ctx.st.yaw, lat = (Math.random() < 0.5 ? -1 : 1) * fishRoom(S2.fyT) * rnd(0.5, 1), dep = rnd(-0.06, 0.06); S2.mode = "walk"; S2.target = [Math.cos(yw0) * lat + Math.sin(yw0) * dep, -Math.sin(yw0) * lat + Math.cos(yw0) * dep]; }
+            else if (r2 < 0.55) { S2.mode = "walk"; S2.target = [Math.sin(ang) * rad, Math.cos(ang) * rad * 0.8]; }
             else if (r2 < 0.7 && tricks.length && !red) startTrick(tricks[(Math.random() * tricks.length) | 0].k);
             else { S2.idleAct = r2 < 0.8 ? "sniff" : r2 < 0.9 ? "sit" : "lie"; S2.idleActT = rnd(1.5, 3.5); }
             S2.idleN = rnd(2.5, 5);
@@ -961,6 +1064,15 @@ var View3D = (function () {
           } else { S2.v = 0; if (S2.mode === "walk") { S2.mode = "idle"; S2.target = null; S2.idleN = rnd(1, 3); if (S2.call) { S2.call = false; S2.sitHold = 1.5; S2.happyHold = 1; } } }
         } else S2.v = damp(S2.v, 0, 8, dt);
         S2.x = clamp(S2.x, -4.5, 4.5); S2.z = clamp(S2.z, -4.5, 4.5);
+        if (BW) {
+          /* dentro del agua: profundidad suave, contorno de la pecera, comida que cae hasta la grava y burbujas */
+          S2.fy = damp(S2.fy, S2.fyT, 2.2, dt);
+          var room = fishRoom(S2.fy), dd0 = Math.hypot(S2.x, S2.z); if (dd0 > room) { S2.x *= room / dd0; S2.z *= room / dd0; }
+          if (S2.target) { var tl = Math.hypot(S2.target[0], S2.target[1]); if (tl > room) { S2.target[0] *= room / tl; S2.target[1] *= room / tl; } }
+          food.forEach(function (q) { if (q.on && q.y < BW.bot + 0.05) { q.y = BW.bot + 0.05; q.vy = 0; } });
+          bubT -= dt; if (bubT <= 0 && !red) { bubT = rnd(0.6, 1.6); var py = BW.plant; ctx.spawn({x: py[0] + rnd(-0.02, 0.02), y: py[1] + 0.03, z: py[2], vy: 0.16, t: 7, s: rnd(0.015, 0.03), max: (BW.wy - py[1]) / 0.16, keep: true}); }
+          if (S2.follow > 0) S2.follow -= dt;
+        }
         /* --- pelota --- */
         if (ball.on) {
           if (ball.held) { var mpos = worldOf(piv.mouth); ball.x = mpos[0]; ball.y = mpos[1] - 0.05; ball.z = mpos[2]; }
@@ -988,8 +1100,10 @@ var View3D = (function () {
         if (Q.headPitch) hp0 += Q.headPitch;
         S2.headYaw = damp(S2.headYaw, hy0, 6, dt); S2.headPitch = damp(S2.headPitch, hp0, 6, dt);
         /* --- matrices --- */
+        if (BW) { var prevY = fly + (S2.lastJ || 0); fly = BW.cy + S2.fy; if (S2.trick === "dead") { S2.fyT = BW.wy - BW.cy - 0.05; } if (moving) Q.yaw += Math.sin(time * 9) * 0.1 * walkK;
+          var nowY = fly + Q.jump; if ((prevY - BW.wy) * (nowY - BW.wy) < 0 && !red) for (var sp2 = 0; sp2 < 8; sp2++) ctx.spawn({x: S2.x, y: BW.wy, z: S2.z, vx: rnd(-0.4, 0.4), vy: rnd(0.4, 0.9), vz: rnd(-0.4, 0.4), g: 3, t: 8, s: 0.018, c: [0.75, 0.9, 1, 0.9], max: 0.6}); S2.lastJ = Q.jump; }
         var breath = Math.sin(time * (2 + S2.happy * 2)) * 0.02, sq = Q.sq + (sp.kind === "fish" ? 0 : breath * 0.5);
-        var jumpY = Q.jump + hopY + fly + (sp.kind === "fish" ? Math.sin(time * 1.6) * 0.04 : 0);
+        var jumpY = Q.jump + hopY + fly + (sp.kind === "fish" ? Math.sin(time * 1.6) * 0.012 : 0);
         var bY = mdl.bodyY, sitA = S2.sit * 0.55, lieY = -S2.lie * (sp.leg ? sp.leg[0] * s * 0.85 : 0), standA = (Q.stand || 0) * 1.1;
         rootM = M(T(S2.x + Math.sin(S2.yaw) * Q.fwd, jumpY + lieY, S2.z + Math.cos(S2.yaw) * Q.fwd), RY(S2.yaw + Q.yaw));
         var bodyM = M(rootM, about([0, bY, -mdl.size * 0.3], RX(-sitA - standA)), about([0, bY, 0], RX(Q.pitch)),
@@ -1030,6 +1144,7 @@ var View3D = (function () {
           put(n, M(bodyM, about(piv[n], M(RX(a), Sc(Math.max(0.05, 1 - S2.hide * 0.9 - S2.curl * 0.95))))));
         });
         for (var li = 0; li < 8; li++) { var ln2 = "leg" + li; if (!mdl.parts[ln2]) continue; put(ln2, M(bodyM, about(piv[ln2], RY(Math.sin(gp + (li % 2 ? PI : 0) + li) * 0.4 * walkK - (Q.paw && li % 4 === 0 ? Q.paw * 0.8 : 0))))); }
+        if (piv.finL) { var fa = Math.sin(time * (moving ? 14 : 6)) * 0.5; put("finL", M(bodyM, about(piv.finL, RY(-0.3 - fa)))); put("finR", M(bodyM, about(piv.finR, RY(0.3 + fa)))); }
         var flapA = (Q.flap ? Math.sin(time * 26) * 0.9 : moving ? Math.sin(gp) * 0.15 : 0) + breath;
         if (piv.wingL) put("wingL", M(bodyM, about(piv.wingL, RZ(-flapA - (Q.flapOne || 0) * 1.4))));
         if (piv.wingR) put("wingR", M(bodyM, about(piv.wingR, RZ(flapA))));
@@ -1047,10 +1162,18 @@ var View3D = (function () {
         });
         if (Q.orange > 0.3 && mdl.parts.orange && piv.headTop) put("orange", M(headM, T(piv.headTop[0], piv.headTop[1] - 0.01 + (1 - Q.orange) * 0.3, piv.headTop[2] - 0.02)));
         if (ball.on) put("ball", M(T(ball.x, ball.y, ball.z), RX(ball.spin)));
+        var alpha = null;
+        if (BW) {
+          ["bowl_stand", "bowl_gravel", "bowl_deco"].forEach(function (n) { put(n, m4()); });
+          var pb = BW.plant; put("bowl_plant", about(pb, M(RZ(Math.sin(time * 1.3) * 0.08), RX(Math.sin(time * 1.1 + 1) * 0.06))));
+          put("bowl_water", m4()); put("bowl_glass", m4());
+          alpha = {bowl_water: 0.2, bowl_glass: 0.11};
+        }
         /* color de la mascota (pelaje elegido o arcoíris), no en accesorios ni pelota */
         var cm = rainbow ? cssFilterMat("", (time * 60) % 360) : CM, cms = {};
-        draw.forEach(function (n) { if (n.indexOf("acc_") !== 0 && n !== "ball" && n !== "orange") cms[n] = cm; });
+        draw.forEach(function (n) { if (n.indexOf("acc_") !== 0 && n.indexOf("bowl_") !== 0 && n !== "ball" && n !== "orange") cms[n] = cm; });
         var shR = Math.max(0.12, mdl.size * 0.55) * (1 - Math.min(0.6, Math.max(0, jumpY - fly) * 1.5));
+        if (BW) return {mats: mats, draw: draw, cm: cms, alpha: alpha, shadow: [0, 0, 0.32], target: [S2.x * 0.3, BW.cy * 0.92, S2.z * 0.3]};
         return {mats: mats, draw: draw, cm: cms, shadow: [S2.x, S2.z, shR], target: [S2.x, mdl.bodyY * 0.8 + fly * 0.8, S2.z]};
       }
     };
