@@ -100,7 +100,7 @@ var SpPlay = (function () {
     /* viento leve (a veces): lo enseñan los banderines */
     if (!opt.wind && !opt.training && rand() < 0.35) { var wa = rand() * 2 * PI, wm = 0.8 + rand() * 2.2; opt.wind = [Math.cos(wa) * wm, Math.sin(wa) * wm]; }
     var ui = shell({kicker: t("Balón parado"), title: t("Falta directa"), closable: !!opt.training});
-    var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), tod: opt.tod || I.todNow(), wx: opt.wx, wind: opt.wind});
+    var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), boardEl: ui.board, tod: opt.tod || I.todNow(), wx: opt.wx, wind: opt.wind});
     var me = S3.man(Object.assign(I.myKit(), {foot: opt.foot})), gk = S3.man(I.rivalKit(true)), ref = S3.man({shirt: "#111", shorts: "#111", socks: "#111", official: true, hairStyle: 1});
     if (opt.wind) windFlags(S3, opt.wind, ball);
     var mate = S3.man(Object.assign(I.myKit(), {num: 8, hairStyle: 3}));
@@ -210,7 +210,7 @@ var SpPlay = (function () {
     var S3 = ui.S3, pr = SpModes.prefs(), close = /post|touchin|save|catch/.test(res.how);
     var lines = got.map(function (a) { return "🏅 " + esc(t(a.n)) + ' · <b data-count="' + a.money + '">0</b> €'; });
     if (opt.reward && out.scored === !opt.gkMode) { lines.push("💶 " + esc(t("Premio del reto")) + ' · <b data-count="' + opt.reward + '">0</b> €'); try { S.p.money += opt.reward; } catch (e) {} }
-    function show() { resultScreen(ui, bigFor(res, opt.gkMode)[0], bigFor(res, opt.gkMode)[1], lines, function () { ui.close(); if (done) done(out); }); }
+    function show() { if (ui.board && S3.ctx !== "barrio" && !red()) S3.camTo([8, 5.5, 2], [-17, 10.5, 0], 40, 0.8); resultScreen(ui, bigFor(res, opt.gkMode)[0], bigFor(res, opt.gkMode)[1], lines, function () { ui.close(); if (done) done(out); }); }
     if (close && !pr.skip && !red()) setTimeout(function () { if (!ui.alive) return; var tap = function () { S3.stopReplay(); }; ui.stage.addEventListener("pointerdown", tap, {once: true}); S3.replay(I.replayCams(res), 0.45, function () { ui.stage.removeEventListener("pointerdown", tap); show(); }); }, 1300);
     else setTimeout(function () { if (ui.alive) show(); }, 1600);
   }
@@ -222,7 +222,7 @@ var SpPlay = (function () {
     var ang = opt.ang != null ? opt.ang : (rand() - 0.5) * 0.9, ball = {x: Math.max(17.2, Math.cos(ang) * dist), z: Math.sin(ang) * dist};
     var press = cl(opt.press != null ? opt.press : opt.pressure || 0.3, 0, 1);
     var ui = shell({kicker: t("Bajo palos"), title: t("Falta en contra"), gk: true, closable: !!opt.training});
-    var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), tod: opt.tod || I.todNow(), wx: opt.wx});
+    var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), boardEl: ui.board, tod: opt.tod || I.todNow(), wx: opt.wx});
     var kit = I.myKit(), me = S3.man(Object.assign({}, kit, {gk: true, shirt: "#2ad15a", shorts: "#111", gloves: "#f07a24", num: 1}));
     var taker = S3.man(I.rivalKit(false)), ref = S3.man({shirt: "#111", shorts: "#111", socks: "#111", official: true, hairStyle: 1});
     var striker = S3.man(Object.assign(I.rivalKit(false), {num: 9})); S3.place(striker, 13, ball.z * 0.3 + 2, true); S3.faceTo(striker, 0, 0); striker.play("idle");
@@ -379,7 +379,7 @@ var SpPlay = (function () {
     opt = opt || {};
     var rand = typeof opt.rand === "function" ? opt.rand : Math.random, press = cl(opt.press || opt.pressure * 0.6 || 0, 0, 1);
     var ui = shell({kicker: t("Desde los once metros"), title: t("Penalti"), closable: !!opt.training});
-    var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), tod: opt.tod || I.todNow(), wx: opt.wx});
+    var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), boardEl: ui.board, tod: opt.tod || I.todNow(), wx: opt.wx});
     var me = S3.man(Object.assign(I.myKit(), {foot: opt.foot})), gk = S3.man(I.rivalKit(true)), ref = S3.man({shirt: "#111", shorts: "#111", socks: "#111", official: true, hairStyle: 1});
     var prof = opt.keeper || pick(D.keepers, rand), ball = {x: 11, z: 0};
     var tg = opt.targets || null;
@@ -450,7 +450,7 @@ var SpPlay = (function () {
     opt = opt || {};
     var rand = typeof opt.rand === "function" ? opt.rand : Math.random, press = cl(opt.press || opt.pressure * 0.6 || 0, 0, 1);
     var ui = shell({kicker: t("Bajo palos"), title: t("Penalti en contra"), gk: true, closable: !!opt.training});
-    var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), tod: opt.tod || I.todNow(), wx: opt.wx});
+    var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), boardEl: ui.board, tod: opt.tod || I.todNow(), wx: opt.wx});
     var kit = I.myKit(), me = S3.man(Object.assign({}, kit, {gk: true, shirt: "#2ad15a", shorts: "#111", gloves: "#f07a24", num: 1}));
     var taker = S3.man(I.rivalKit(false)), ref = S3.man({shirt: "#111", shorts: "#111", socks: "#111", official: true, hairStyle: 1});
     var prof = opt.taker || pick(D.takers, rand), gz = 0, distract = 0;

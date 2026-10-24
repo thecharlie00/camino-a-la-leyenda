@@ -206,7 +206,7 @@ var SpModes = (function () {
   function stage3d(ui, svg, mode, o) {
     if (!enabled()) return null;
     var host = ui.stage, S3;
-    try { S3 = SP3.create(host, {ctx: ctxFor(ui.press || o.pressure * 0.6 || 0), cols: colsNow(), tod: todNow(), wx: o.wx, pet: petNow()}); } catch (e) { return null; }
+    try { S3 = SP3.create(host, {ctx: ctxFor(ui.press || o.pressure * 0.6 || 0), cols: colsNow(), tod: todNow(), wx: o.wx, pet: petNow(), boardEl: ui.board}); } catch (e) { return null; }
     host.classList.add("sp3-host");
     var isGk = mode === "gkpen", me = myKit(), rv = rivalKit(!isGk);
     var shooter = S3.man(isGk ? rv : Object.assign({}, me, {foot: o.foot}));
@@ -218,12 +218,14 @@ var SpModes = (function () {
     S3.ball.x = 11; S3.ball.y = R; S3.ball.z = 0;
     S3.crowdT = S3.crowdBase * 0.5; AU.crowd(0.25 + (ui.press || 0) * 0.3);
     var press = ui.press || 0;
-    var v3 = {S3: S3, shooter: shooter, keeper: keeper, ref: ref, press: press};
+    var v3 = {S3: S3, shooter: shooter, keeper: keeper, ref: ref, press: press, board: !!ui.board};
     /* cámara: detrás del balón (lanzador) o detrás del portero */
     /* apuntar siempre de frente a la portería (como el clásico); en la parada, la cámara pasa detrás del portero o a sus ojos */
     var cam = {eye: [17.2 - press * 0.8, 1.6, 0], tgt: [0, 1.05, 0], fov: 32 - press * 3};
     v3.gkCam = function () { if (prefs().gkcam === "eyes") { keeper.show = false; S3.camTo([0.1, 1.72, 0], [11, 0.7, 0], 54, 0); } else S3.camTo([-10.5, 4.4, 0.3], [11, 0.6, 0], 32, 0); };
-    S3.camTo(cam.eye, cam.tgt, cam.fov, 0);
+    /* entrada: el videomarcador con el resultado y los escudos, y la cámara baja hasta el punto de penalti */
+    if (ui.board && S3.ctx !== "barrio" && !red()) { host.classList.add("sp3-shot"); S3.camTo([7, 6.5, 0], [-17, 10.5, 0], 40, 0); setTimeout(function () { if (ui.alive) S3.camTo(cam.eye, cam.tgt, cam.fov, 1.1); }, 1300); setTimeout(function () { if (ui.state === "aim" || ui.state === "power") host.classList.remove("sp3-shot"); }, 2500); }
+    else S3.camTo(cam.eye, cam.tgt, cam.fov, 0);
     /* las casillas del SVG se quedan; lo demás del dibujo 2D se oculta */
     Array.prototype.forEach.call(svg.children, function (n) { var c = n.getAttribute("class") || ""; if (!/mg-cells|mg-lab/.test(c) && n.tagName !== "defs") n.style.display = "none"; });
     svg.style.position = "relative"; svg.style.zIndex = 1; svg.style.background = "transparent";
@@ -242,7 +244,7 @@ var SpModes = (function () {
         cells.forEach(function (c, i) { c.el.setAttribute("x", (x0 + c.c * cw + 0.5).toFixed(1)); c.el.setAttribute("y", (y0 + c.r * ch + 0.5).toFixed(1)); c.el.setAttribute("width", (cw - 1).toFixed(1)); c.el.setAttribute("height", (ch - 1).toFixed(1));
           if (labs[i]) { labs[i].setAttribute("x", (x0 + c.c * cw + cw / 2).toFixed(1)); labs[i].setAttribute("y", (y0 + c.r * ch + (labFn ? labFn(c, ch) : ch / 2 + 4.5)).toFixed(1)); } });
       };
-      var tries = 0; (function again() { layoutCells(); if (++tries < 6) setTimeout(again, 120); })();
+      var tries = 0; (function again() { layoutCells(); if (++tries < 40 && (tries < 6 || S3.cam.k < 1 || tries < 28)) setTimeout(again, 120); })();
       window.addEventListener("resize", layoutCells);
     };
     v3.dispose = function () { window.removeEventListener("resize", layoutCells); AU.stop(); S3.dispose(); };
@@ -321,7 +323,8 @@ var SpModes = (function () {
     v3.shooter && react({shooter: v3.shooter, keeper: v3.keeper, S3: S3, mineShoots: !v3.gkMode}, r);
     var close = /post|touchin|save|catch/.test(r.how);
     S3.follow = null;
-    var go = function () { S3.follow = null; S3.camTo([16, 3.2, 6], [5, 1, 0], 40, 0.8); setTimeout(then, red() ? 100 : 500); };
+    /* al final, el videomarcador: el resultado se actualiza en la pantalla del estadio */
+    var go = function () { S3.follow = null; if (v3.board && S3.ctx !== "barrio") S3.camTo([8, 5.5, 2], [-17, 10.5, 0], 40, 0.8); else S3.camTo([16, 3.2, 6], [5, 1, 0], 40, 0.8); setTimeout(then, red() ? 100 : 700); };
     if (pr.skip || red() || !close) { setTimeout(go, close ? 900 : 1100); return; }
     setTimeout(function () {
       var tap = function () { S3.stopReplay(); };
@@ -369,7 +372,29 @@ var SpModes = (function () {
       onResult: function (r) { afterShot(v3, r, how, then); }});
   }
 
-  var api = {enabled: enabled, prefs: prefs, setPref: setPref, stage3d: stage3d, penShoot: penShoot, gkPenDive: gkPenDive, stats: stats, record: record, AU: AU,
+  /* escudo o bandera → píxeles para el videomarcador (14×16) */
+  function rasterIcon(html, cb) {
+    try {
+      var W = 14, H = 16, cv = document.createElement("canvas"); cv.width = W; cv.height = H; var g = cv.getContext("2d");
+      var done = function () { try { var d = g.getImageData(0, 0, W, H).data, out = []; for (var i = 0; i < W * H; i++) out.push(d[i * 4 + 3] > 110 ? [d[i * 4] / 255, d[i * 4 + 1] / 255, d[i * 4 + 2] / 255] : null); cb({w: W, h: H, d: out}); } catch (e) { cb(null); } };
+      var m = /<svg[\s\S]*<\/svg>/.exec(html || "");
+      if (m) {
+        var svg = m[0]; if (!/xmlns=/.test(svg)) svg = svg.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"');
+        svg = svg.replace(/<svg([^>]*?)\swidth="[^"]*"/, "<svg$1").replace(/<svg([^>]*?)\sheight="[^"]*"/, "<svg$1").replace("<svg", '<svg width="' + W + '" height="' + H + '"');
+        var img = new Image(); img.onload = function () { g.drawImage(img, 0, 0, W, H); done(); }; img.onerror = function () { cb(null); };
+        img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+      } else {
+        var tx = String(html || "").replace(/<[^>]+>/g, "").trim(); if (!tx) { cb(null); return; }
+        g.font = "15px sans-serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(tx, W / 2, H / 2 + 1); done();
+      }
+    } catch (e) { cb(null); }
+  }
+  /* rellena b.h.pix y b.a.pix (asíncrono) y avisa */
+  function rasterBoard(b, cb) {
+    if (!b) return; var n = 0, fin = function () { if (++n === 2) { b.v = (b.v || 0) + 1; if (cb) cb(b); } };
+    ["h", "a"].forEach(function (k) { if (!b[k]) { fin(); return; } if (b[k].pix) { fin(); return; } rasterIcon(b[k].icon, function (p) { b[k].pix = p; fin(); }); });
+  }
+  var api = {enabled: enabled, rasterBoard: rasterBoard, prefs: prefs, setPref: setPref, stage3d: stage3d, penShoot: penShoot, gkPenDive: gkPenDive, stats: stats, record: record, AU: AU,
     _int: {runShot: runShot, shotSequence: shotSequence, react: react, afterShot: afterShot, diveRig: diveRig, myKit: myKit, rivalKit: rivalKit, colsNow: colsNow, ctxFor: ctxFor, todNow: todNow, petNow: petNow, celebOf: celebOf, cellPoint: cellPoint, followShot: followShot, replayCams: replayCams, esc: esc, t: t, cl: cl, lerp: lerp, hap: hap, red: red}};
   return api;
 })();

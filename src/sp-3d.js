@@ -142,6 +142,14 @@ var SP3 = (function () {
       S.towers = W.lamps;
     }
     E.addStatic("sky", C.sky(), {abs: true, shadow: false});
+    /* videomarcador: resultado y escudos del partido en las pantallas de los fondos */
+    if (o.boardEl && o.boardEl.__b && ctx !== "barrio" && W && W.screens) {
+      var bEl = o.boardEl, scr = W.screens;
+      var paint = function () { try { E.addStatic("board", C.boardVerts(bEl.__b, scr), {abs: true, shadow: false}); } catch (e) {} };
+      bEl.__onChange = paint;
+      if (typeof SpModes !== "undefined" && SpModes) SpModes.rasterBoard(bEl.__b, paint); else paint();
+      paint();
+    }
     E.crowdAmt = 0.15;
     S.crowdBase = (SP_DATA.ctx.filter(function (c) { return c.k === ctx; })[0] || {crowd: 0.6}).crowd;
 

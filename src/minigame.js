@@ -390,6 +390,7 @@ var Minigame = (function () {
     n.textContent = side === "h" ? b.gh : b.ga;
     n.className = "mgb-n bump"; void n.offsetWidth; n.className = "mgb-n bump on";
     el.classList.add(ours ? "good" : "bad");
+    if (el.__onChange) try { el.__onChange(b); } catch (e) {}
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
   function shell(o) {

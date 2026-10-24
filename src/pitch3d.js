@@ -471,7 +471,9 @@ var Pitch3D = (function () {
     m.code = -1;
   }
 
+  var SCREENS = [];
   function buildStadium(m) {
+    SCREENS = [];
     var c0 = colors[0] || [0.8, 0.2, 0.2], c1 = colors[1] || [0.2, 0.4, 0.8];
     var seatHome = shade(c0, 0.8), seatAway = shade(c1, 0.8), seatN = [0.30, 0.33, 0.38];
     /* Tribuna principal (z<0): dos anfiteatros con cubierta y túnel. */
@@ -529,6 +531,7 @@ var Pitch3D = (function () {
       m.box(back, 0, MIDZ, 0.8, top + 1.4, WID + 10, CONCRETE_D, 0.6);
       /* videomarcador */
       m.box(back + out * 0.6, top + 1.4, MIDZ, 0.6, 5.6, 16, DARK, 0.9);
+      SCREENS.push({x: back - out * 0.06, out: out, y0: top + 1.9, y1: top + 6.5, z0: MIDZ - 7.4, z1: MIDZ + 7.4});
       m.code = MAT_EMIT;
       m.quad([back - out * 0.05, top + 1.9, MIDZ - 7.4], [back - out * 0.05, top + 1.9, MIDZ], [back - out * 0.05, top + 6.5, MIDZ], [back - out * 0.05, top + 6.5, MIDZ - 7.4], shade(c0, 0.75));
       m.quad([back - out * 0.05, top + 1.9, MIDZ], [back - out * 0.05, top + 1.9, MIDZ + 7.4], [back - out * 0.05, top + 6.5, MIDZ + 7.4], [back - out * 0.05, top + 6.5, MIDZ], shade(c1, 0.75));
@@ -4217,6 +4220,7 @@ var Pitch3D = (function () {
       drawRefCard(dyn, oa);
     }
     drawPet(dyn);
+    drawBoard(dyn);
     buildCoin(dyn);
     drawNets(dyn);
     if (!sim.ballHidden && !buildAssetBall(dyn)) buildBall(dyn);
@@ -4529,7 +4533,7 @@ var Pitch3D = (function () {
 
   function mount(el, o) {
     destroy();
-    petA = null;
+    petA = null; boardKey = "";
     host = el; opts = o || {};
     var srcCols = opts.cols && opts.cols.length ? opts.cols : SHIRT;
     colors = [kitColor(srcCols[0], rgb(SHIRT[0])), kitColor(srcCols[1], rgb(SHIRT[1]))];
@@ -4651,6 +4655,15 @@ var Pitch3D = (function () {
 
   /* El estado del motor fija el marcador objetivo. La UI 3D no lo muestra
    * hasta que la pelota cruza la línea; así el HUD no se adelanta al vuelo. */
+  /* 5.6: videomarcador del partido con los escudos (opts.board = {h:{ab,pix}, a:{ab,pix}}) */
+  var boardCache = null, boardKey = "";
+  function drawBoard(m) {
+    var b = opts && opts.board; if (!b) return;
+    var key = sim.score[0] + "-" + sim.score[1] + "-" + sim.min + "-" + (b.v || 0);
+    if (key !== boardKey) { boardKey = key; boardCache = boardVerts({h: b.h, a: b.a, gh: sim.score[0], ga: sim.score[1], min: sim.min}); }
+    if (!boardCache || !boardCache.length) return;
+    m.reserve(boardCache.length / FS); m.a.set(boardCache, m.n); m.n += boardCache.length;
+  }
   /* 5.6: la mascota del jugador, junto al banquillo local; celebra los goles de su equipo */
   var petA = null, petT = 0;
   function drawPet(m) {
@@ -4983,6 +4996,32 @@ var Pitch3D = (function () {
   /* Núcleo compartido (5.6): la mascota y las vistas 3D usan exactamente la misma malla vóxel con
      oclusión por vértice, los mismos shaders de luz y sombra y la misma ambientación que el partido.
      Solo se exponen piezas sin estado (no tocan el contexto ni la simulación de este módulo). */
+  /* 5.6: videomarcador con los escudos y el resultado (en las dos pantallas de los fondos).
+     b = {h:{ab, pix}, a:{ab, pix}, gh, ga, min|tag}; pix = {w, h, d:[r,g,b|null…]} (escudo rasterizado) */
+  var FONT3 = {A: "010101111101101", B: "110101110101110", C: "011100100100011", D: "110101101101110", E: "111100110100111", F: "111100110100100", G: "011100101101011", H: "101101111101101", I: "111010010010111", J: "001001001101010",
+    K: "101101110101101", L: "100100100100111", M: "101111111101101", N: "110101101101101", O: "010101101101010", P: "110101110100100", Q: "010101101111011", R: "110101110101101", S: "011100010001110", T: "111010010010010",
+    U: "101101101101111", V: "101101101101010", W: "101101111111101", X: "101101010101101", Y: "101101010010010", Z: "111001010100111", "-": "000000111000000", "'": "010010000000000", " ": "000000000000000"};
+  function glyph3(ch) { if (/[0-9]/.test(ch)) return DIGITS[+ch]; ch = String(ch).toUpperCase(); if (ch.normalize) ch = ch.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); return FONT3[ch] || null; }
+  function boardVerts(b, screens) {
+    var m = new Mesh(1 << 16), GW = 74, GH = 24;
+    (screens || SCREENS).forEach(function (sc) {
+      var W = sc.z1 - sc.z0, H = sc.y1 - sc.y0, px = Math.min(W / GW, H / GH), u0 = (sc.z0 + sc.z1) / 2, v0 = (sc.y0 + sc.y1) / 2;
+      var right = sc.out > 0 ? 1 : -1, xf = sc.x - sc.out * 0.02;
+      /* fondo oscuro de la pantalla */
+      m.code = MAT_UNLIT; m.box(xf, sc.y0 + 0.05, u0, 0.03, H - 0.1, W - 0.1, [0.03, 0.05, 0.08], 1);
+      function dot(gx, gy, c, k) { var z = u0 + right * (gx - GW / 2 + 0.5) * px, y = v0 + (GH / 2 - gy - 1) * px; m.box(xf - sc.out * 0.03, y, z, 0.03, px * (k || 0.86), px * (k || 0.86), c, 1); }
+      function text(str, cx, gy, sz, c) { var w = str.length * 4 - 1, x0 = Math.round(cx - w * sz / 2); for (var i = 0; i < str.length; i++) { var g = glyph3(str.charAt(i)); if (!g) continue; for (var r = 0; r < 5; r++) for (var q = 0; q < 3; q++) if (g.charAt(r * 3 + q) === "1") for (var a = 0; a < sz; a++) for (var bb = 0; bb < sz; bb++) dot(x0 + (i * 4 + q) * sz + a, gy + r * sz + bb, c); } }
+      function crest(p, cx, gy) { if (!p) return; var x0 = Math.round(cx - p.w / 2); for (var y = 0; y < p.h; y++) for (var x = 0; x < p.w; x++) { var c = p.d[y * p.w + x]; if (c) dot(x0 + x, gy + y, c, 1); } }
+      m.code = MAT_EMIT;
+      crest(b.h && b.h.pix, 10, 1); crest(b.a && b.a.pix, GW - 10, 1);
+      text(String((b.h && b.h.ab) || "").slice(0, 3), 10, 18, 1, [1, 0.86, 0.3]); text(String((b.a && b.a.ab) || "").slice(0, 3), GW - 10, 18, 1, [1, 0.86, 0.3]);
+      text(String(b.gh) + "-" + String(b.ga), GW / 2, 2, 3, [0.98, 0.98, 0.95]);
+      var low = b.tag ? String(b.tag) : b.min != null ? String(b.min) + "'" : "";
+      if (low) text(low.slice(0, 9), GW / 2, 18, 1, [0.6, 0.85, 1]);
+      m.code = -1;
+    });
+    return m.a.slice(0, m.n);
+  }
   /* 5.6: estadio, campo, afición y cielo para los minijuegos de balón parado (mismo aspecto que el partido) */
   function worldFor(cols) {
     var keepC = colors, keepL = LAMPS, keepCM = crowdMeshes;
@@ -4990,7 +5029,7 @@ var Pitch3D = (function () {
       colors = [kitColor(cols && cols[0], rgb(SHIRT[0])), kitColor(cols && cols[1], rgb(SHIRT[1]))];
       LAMPS = []; crowdMeshes = [new Mesh(1 << 19), new Mesh(1 << 19)];
       var sm = new Mesh(1 << 20); buildField(sm);
-      return {stat: sm.a.slice(0, sm.n), crowd: [crowdMeshes[0].a.slice(0, crowdMeshes[0].n), crowdMeshes[1].a.slice(0, crowdMeshes[1].n)], lamps: LAMPS.slice(), towers: TOWERS.map(function (t) { return t.slice(); })};
+      return {stat: sm.a.slice(0, sm.n), crowd: [crowdMeshes[0].a.slice(0, crowdMeshes[0].n), crowdMeshes[1].a.slice(0, crowdMeshes[1].n)], lamps: LAMPS.slice(), towers: TOWERS.map(function (t) { return t.slice(); }), screens: SCREENS.map(function (q) { return Object.assign({}, q); })};
     } finally { colors = keepC; LAMPS = keepL; crowdMeshes = keepCM; }
   }
   function skyVerts() {
@@ -5006,7 +5045,7 @@ var Pitch3D = (function () {
     }
     return m.a.slice(0, m.n);
   }
-  var CORE = {Mesh: Mesh, world: worldFor, sky: skyVerts, VOX_PARTS: VOX_PARTS, HAIR_STYLES: HAIR_STYLES, HAIR_FEM: HAIR_FEM, LEN: LEN, WID: WID, POST: POST, BAR: BAR, STRIDE: FS, boxCorners: boxCorners, envFor: envFor, lin: lin,
+  var CORE = {Mesh: Mesh, boardVerts: boardVerts, world: worldFor, sky: skyVerts, VOX_PARTS: VOX_PARTS, HAIR_STYLES: HAIR_STYLES, HAIR_FEM: HAIR_FEM, LEN: LEN, WID: WID, POST: POST, BAR: BAR, STRIDE: FS, boxCorners: boxCorners, envFor: envFor, lin: lin,
     MAT: {MATTE: MAT_MATTE, GLOSS: MAT_GLOSS, METAL: MAT_METAL, GRASS: MAT_GRASS, EMIT: MAT_EMIT, CROWD: MAT_CROWD, SKY: MAT_SKY, UNLIT: MAT_UNLIT, LED: MAT_LED},
     VS_MAIN: VS_MAIN, FS_MAIN: FS_MAIN, VS_SHADOW: VS_SHADOW, FS_SHADOW: FS_SHADOW, VS_LITE: VS_LITE, FS_LITE: FS_LITE, U_NAMES: U_NAMES.slice(),
     DIGITS: DIGITS, ORIGIN: [LEN / 2, 0, MIDZ], VOXEL: 0.04};
