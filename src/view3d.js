@@ -575,7 +575,67 @@ var View3D = (function () {
     });
   }
 
-  /* ================= mascota (estilo Nintendogs sencillo) ================= */
+
+  /* ================= vóxeles para la mascota (mismo estilo que el partido 3D) =================
+     Las formas (elipsoides, cápsulas, conos, cajas) no se triangulan: se «estampan» en una rejilla de cubos
+     y luego solo se emiten las caras que dan al vacío, con el sombreado plano por cara de los jugadores. */
+  function VoxSet(vs) { this.vs = vs; this.parts = {}; this.order = []; }
+  VoxSet.prototype.part = function (n) { if (!this.parts[n]) { this.parts[n] = {}; this.order.push(n); } return this.parts[n]; };
+  VoxSet.prototype.fill = function (map, x0, y0, z0, x1, y1, z1, test) {
+    var vs = this.vs, i0 = Math.floor(x0 / vs), i1 = Math.ceil(x1 / vs), j0 = Math.floor(y0 / vs), j1 = Math.ceil(y1 / vs), k0 = Math.floor(z0 / vs), k1 = Math.ceil(z1 / vs), any = false;
+    for (var i = i0; i <= i1; i++) for (var j = j0; j <= j1; j++) for (var k = k0; k <= k1; k++) {
+      var c = test((i + 0.5) * vs, (j + 0.5) * vs, (k + 0.5) * vs);
+      if (c) { map[i + "," + j + "," + k] = c; any = true; }
+    }
+    return any;
+  };
+  VoxSet.prototype.dot = function (map, p, col) { var vs = this.vs; map[Math.floor(p[0] / vs) + "," + Math.floor(p[1] / vs) + "," + Math.floor(p[2] / vs)] = rgb(col); };
+  function voxPrims(V) {
+    return {
+      ellipsoid: function (map, c, r, col) {
+        var cf = typeof col === "function" ? col : null, cc = cf ? null : rgb(col), rx = Math.max(r[0], V.vs * 0.5), ry = Math.max(r[1], V.vs * 0.5), rz = Math.max(r[2], V.vs * 0.5);
+        if (!V.fill(map, c[0] - rx, c[1] - ry, c[2] - rz, c[0] + rx, c[1] + ry, c[2] + rz, function (x, y, z) {
+          var dx = (x - c[0]) / rx, dy = (y - c[1]) / ry, dz = (z - c[2]) / rz, d = dx * dx + dy * dy + dz * dz;
+          if (d > 1) return null; if (!cf) return cc; var l = Math.sqrt(d) || 1; return rgb(cf([dx / l, dy / l, dz / l]));
+        })) V.dot(map, c, cf ? cf([0, 1, 0]) : cc);
+      },
+      capsule: function (map, p0, p1, r0, r1, col) {
+        var cc = rgb(col), r = Math.max(r0, r1, V.vs * 0.5), d = [p1[0] - p0[0], p1[1] - p0[1], p1[2] - p0[2]], L2 = d[0] * d[0] + d[1] * d[1] + d[2] * d[2] || 1e-6;
+        if (!V.fill(map, Math.min(p0[0], p1[0]) - r, Math.min(p0[1], p1[1]) - r, Math.min(p0[2], p1[2]) - r, Math.max(p0[0], p1[0]) + r, Math.max(p0[1], p1[1]) + r, Math.max(p0[2], p1[2]) + r, function (x, y, z) {
+          var tt = clamp(((x - p0[0]) * d[0] + (y - p0[1]) * d[1] + (z - p0[2]) * d[2]) / L2, 0, 1), qx = p0[0] + d[0] * tt - x, qy = p0[1] + d[1] * tt - y, qz = p0[2] + d[2] * tt - z, rr = Math.max(lerp(r0, r1, tt), V.vs * 0.5);
+          return qx * qx + qy * qy + qz * qz <= rr * rr ? cc : null;
+        })) { V.dot(map, p0, cc); V.dot(map, p1, cc); }
+      },
+      cone: function (map, base, tip, r, col, seg, fl, flat) {
+        var cc = rgb(col), b = basis([tip[0] - base[0], tip[1] - base[1], tip[2] - base[2]]), fx = flat || 1, R = Math.max(r, V.vs * 0.5);
+        V.fill(map, Math.min(base[0], tip[0]) - R, Math.min(base[1], tip[1]) - R, Math.min(base[2], tip[2]) - R, Math.max(base[0], tip[0]) + R, Math.max(base[1], tip[1]) + R, Math.max(base[2], tip[2]) + R, function (x, y, z) {
+          var px = x - base[0], py = y - base[1], pz = z - base[2], h2 = px * b.z[0] + py * b.z[1] + pz * b.z[2];
+          if (h2 < 0 || h2 > b.l) return null;
+          var u = (px * b.x[0] + py * b.x[1] + pz * b.x[2]) / fx, w = px * b.y[0] + py * b.y[1] + pz * b.y[2], rr = Math.max(R * (1 - h2 / b.l), V.vs * 0.45);
+          return u * u + w * w <= rr * rr ? cc : null;
+        });
+        V.dot(map, base, cc);
+      },
+      box: function (map, x0, y0, z0, x1, y1, z1, col) { var cc = rgb(col); V.fill(map, x0, y0, z0, x1, y1, z1, function (x, y, z) { return x >= x0 && x <= x1 && y >= y0 && y <= y1 && z >= z0 && z <= z1 ? cc : null; }); }
+    };
+  }
+  /* rejilla → caras visibles, con el mismo sombreado por cara que los vóxeles del jugador */
+  function voxFaces(map, vs) {
+    var A = [], keys = Object.keys(map);
+    for (var n = 0; n < keys.length; n++) {
+      var k = keys[n], q = k.split(","), ix = +q[0], iy = +q[1], iz = +q[2], col = map[k];
+      for (var f = 0; f < 6; f++) {
+        var d = DIRS[f];
+        if (map[(ix + d[0]) + "," + (iy + d[1]) + "," + (iz + d[2])]) continue;
+        var sh = f === 2 ? 1.0 : f === 3 ? 0.66 : f === 4 ? 0.95 : f === 5 ? 0.76 : 0.85, c = [col[0] * sh, col[1] * sh, col[2] * sh];
+        var quad = FACE[f].map(function (o) { return [(ix + o[0]) * vs, (iy + o[1]) * vs, (iz + o[2]) * vs]; });
+        [0, 1, 2, 0, 2, 3].forEach(function (i) { V(A, quad[i], d, c); });
+      }
+    }
+    return new Float32Array(A);
+  }
+
+  /* ================= mascota (estilo Nintendogs sencillo, en vóxeles) ================= */
   var PALX = {K: "#1b1b24", W: "#ffffff", w: "#d8dde3", g: "#8a929c", R: "#e2403a", O: "#f08a24", o: "#b3561a", Y: "#f6c83a", y: "#c08a1c",
     N: "#4cb84a", n: "#2a7a32", B: "#3a7ad8", b: "#23468e", S: "#f2c09a", T: "#8a5a34", t: "#5a3a20", M: "#f070a8"};
   /* especies: formas simples con los colores del sprite. Medidas en unidades del mundo (perro adulto ≈ 0,6 de alto) */
@@ -604,10 +664,13 @@ var View3D = (function () {
   }
   /* modelo por partes con pivotes; la mascota mira hacia +z */
   function petModel(sp) {
-    var P = {}, piv = {}, s = sp.scale, B = sp.body.map(function (v) { return v * s; }), legL = (sp.leg ? sp.leg[0] : 0) * s, legR = (sp.leg ? sp.leg[1] : 0) * s;
+    var piv = {}, s = sp.scale, B = sp.body.map(function (v) { return v * s; }), legL = (sp.leg ? sp.leg[0] : 0) * s, legR = (sp.leg ? sp.leg[1] : 0) * s;
     var hr = (sp.head || 0) * s * sp.headK, c1 = sp.c1, c2 = sp.senior ? mix(sp.c2, "#ffffff", 0.35) : sp.c2, c3 = sp.c3;
     var bodyY = legL + B[1] * 0.85, A, i;
-    function part(n) { return (P[n] = P[n] || []); }
+    /* tamaño del vóxel según la mascota: unas 36 celdas de largo, como un jugador del partido */
+    var VX = new VoxSet(Math.max(0.011, (Math.max(B[0], B[1]) * 2 + hr * 2) / 36)), PR = voxPrims(VX);
+    var ellipsoid = PR.ellipsoid, capsule = PR.capsule, cone = PR.cone, box = PR.box;
+    function part(n) { return VX.part(n); }
     /* ojos aparte para que parpadeen y se cierren de gusto */
     function eyes(cx, cy, cz, r, sep) {
       var E = part("eyes");
@@ -721,8 +784,11 @@ var View3D = (function () {
         capsule(A, [x0, sy2 + B[1] * 0.2, z0], knee, 0.016 * s, 0.014 * s, c1, 6); capsule(A, knee, ft, 0.014 * s, 0.01 * s, c1, 6); piv[n2] = [x0, sy2 + B[1] * 0.2, z0]; }
       piv.body = [0, sy2, 0]; piv.head = [0, sy2, 0]; piv.headTop = [0, sy2 + B[1] * 0.9, 0]; piv.face = [0, sy2 + B[1] * 0.6, B[2] * 0.7]; piv.neck = [0, sy2 + B[1] * 0.1, B[2] * 0.4]; piv.mouth = [0, sy2, B[2] * 0.8]; piv.hr = B[0] * 0.6;
     }
-    var out = {}; Object.keys(P).forEach(function (k) { if (P[k].length) out[k] = new Float32Array(P[k]); });
-    return {parts: out, piv: piv, bodyY: piv.body ? piv.body[1] : 0, size: Math.max(B[0], B[2]) * 1.4 + hr};
+    /* los ojos se tallan en la cabeza (o el cuerpo de los peces): al cerrarse queda el párpado hundido */
+    var Pm = VX.parts;
+    if (Pm.eyes) Object.keys(Pm.eyes).forEach(function (k) { if (Pm.head) delete Pm.head[k]; if (Pm.body) delete Pm.body[k]; });
+    var out = {}; VX.order.forEach(function (k) { if (Object.keys(Pm[k]).length) out[k] = voxFaces(Pm[k], VX.vs); });
+    return {parts: out, piv: piv, bodyY: piv.body ? piv.body[1] : 0, size: Math.max(B[0], B[2]) * 1.4 + hr, vs: VX.vs};
   }
   /* accesorios: sus mismos sprites de píxeles en vóxeles finos, en la cabeza, la cara, el cuello o como juguete */
   function accModel(aico, slot, mdl) {
@@ -751,10 +817,10 @@ var View3D = (function () {
       if (k === newAcc) accDrop[sl[0]] = 0;
     });
     /* el juguete del hueco «juguete» (hueso, peluche…) es lo que se lanza; si no hay, un balón */
-    var ballA = []; ellipsoid(ballA, [0, 0.05, 0], [0.05, 0.05, 0.05], function (u) {
+    var BV = new VoxSet(Math.min(0.0125, mdl.vs)), BP = voxPrims(BV), ballA = BV.part("b"); BP.ellipsoid(ballA, [0, 0.05, 0], [0.05, 0.05, 0.05], function (u) {
       var D = [[0, 1, 0], [0, -1, 0], [0.89, 0.45, 0], [-0.89, -0.45, 0], [0.28, 0.45, 0.85], [-0.28, -0.45, -0.85], [0.28, 0.45, -0.85], [-0.28, -0.45, 0.85], [-0.72, 0.45, 0.53], [0.72, -0.45, -0.53], [-0.72, 0.45, -0.53], [0.72, -0.45, 0.53]];
       for (var i = 0; i < D.length; i++) if (u[0] * D[i][0] + u[1] * D[i][1] + u[2] * D[i][2] > 0.9) return "#1e2427"; return "#f4f6f0"; }, 14, 10);
-    mdl.parts.ball = accs.t ? accs.t.m.v : new Float32Array(ballA);
+    mdl.parts.ball = accs.t ? accs.t.m.v : voxFaces(ballA, BV.vs);
     var col = petColDef(pt.col || "nat"), rainbow = col[2] === "anim", CM = cssFilterMat(rainbow ? "" : col[2]);
     var tricks = Rig.knownTricks(pt), trickO = o.trick != null ? Rig.speciesTricks(pt)[o.trick] : null;
     var btns = '<div class="v3d-tricks"><button class="btn" data-v3d="ball">' + h(tr("Lanzar pelota")) + "</button>" +
