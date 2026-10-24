@@ -1958,8 +1958,8 @@
     var gk = f ? Math.round(f.or || 70) : 70, imp = f ? f.imp || 1 : 1;
     var skill = Math.round(kind === "fk" ? ((at.TIR || p.ovr) * 0.6 + (at.PAS || p.ovr) * 0.4) : (at.TIR || p.ovr));
     /* 4.7: tras fallos seguidos en el minijuego, la confianza suma (y se avisa) */
-    var cf = typeof blpMgBonus === "function" ? blpMgBonus() : 0;
-    if (cf) toast(tr("Confianza: después de los últimos fallos lo ves más claro (+{n}).", {n: cf}));
+    /* 5.6: sin ayudas anunciadas en los partidos (la ayuda anti-frustración solo existe, oculta, en el entrenamiento) */
+    var cf = 0;
     var opts = {skill: clamp(skill + cf, 40, 95), gk: clamp(gk, 40, 95), pressure: clamp(imp / 3, 0.1, 1), dist: 22, rand: R};
     if (kind === "gkpen" || kind === "gkfk") {
       var me = Math.round(((at.REF || p.ovr) + (at.EST || at.COL || p.ovr)) / 2);
@@ -1968,7 +1968,7 @@
       if (kind === "gkfk") Minigame.gkFreekick(gopts, save); else Minigame.gkPenalty(gopts, save);
       return;
     }
-    var go = function (res) { if (typeof blpMgResult === "function") blpMgResult(!!res.scored); FORCE_OUT = !!res.scored; doChoose(i); };
+    var go = function (res) { if (typeof blpMgResult === "function") blpMgResult(!!res.scored); if (UIX.hk.spAfter) UIX.hk.spAfter(kind, !!res.scored); FORCE_OUT = !!res.scored; doChoose(i); };
     if (kind === "fk") Minigame.freekick(opts, go); else Minigame.penalty(opts, go);
   }
   /* ---------- partido en directo ---------- */

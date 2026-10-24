@@ -277,9 +277,9 @@ var VoxCore = (function () {
   /* lotes estáticos: {id, verts (local), alpha, shadow, reflect, floor} */
   Engine.prototype.addStatic = function (id, verts, o) {
     o = o || {};
-    var gl = this.gl, b = gl.createBuffer(), w = this.world(verts);
+    var gl = this.gl, b = gl.createBuffer(), w = o.abs ? (verts instanceof Float32Array ? verts : new Float32Array(verts)) : this.world(verts);
     gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, w, gl.STATIC_DRAW);
-    var bt = {id: id, b: b, n: w.length / STRIDE, alpha: o.alpha == null ? 1 : o.alpha, shadow: o.shadow !== false, reflect: !!o.reflect, floor: !!o.floor, show: true, M: null};
+    var bt = {id: id, b: b, n: w.length / STRIDE, alpha: o.alpha == null ? 1 : o.alpha, shadow: o.shadow !== false, reflect: !!o.reflect, floor: !!o.floor, crowd: !!o.crowd, show: true, M: null};
     this.removeStatic(id); this.batches.push(bt);
     if (bt.floor) this.floorBatch = bt;
     return bt;
@@ -455,7 +455,7 @@ var VoxCore = (function () {
       gl.useProgram(this.shadowProg); gl.uniformMatrix4fv(this.sMvp, false, this.sMat);
       gl.enable(gl.POLYGON_OFFSET_FILL); gl.polygonOffset(1.5, 3);
       var SP = {a: {pos: this.sPos, col: -1, nrm: -1, mat: -1}};
-      this.batches.forEach(function (b) { if (b.show && b.shadow && b.alpha >= 1 && !b.floor) self.drawBuf(SP, b.b, b.n); });
+      this.batches.forEach(function (b) { if (b.show && b.shadow && b.alpha >= 1 && !b.floor && !b.crowd) self.drawBuf(SP, b.b, b.n); });
       this.drawBuf(SP, this.dbuf, this.dyn.n / STRIDE);
       gl.disable(gl.POLYGON_OFFSET_FILL); gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.enable(gl.BLEND);
       this.shadowPass = true;
@@ -484,7 +484,7 @@ var VoxCore = (function () {
       gl.colorMask(false, false, false, false); this.setUniforms(P, this.PV, 1); this.drawBuf(P, fb.b, fb.n); gl.colorMask(true, true, true, true);
     }
     this.setUniforms(P, this.PV, 1);
-    this.batches.forEach(function (b) { if (b.show && b.alpha >= 1 && !(refl && b === fb)) self.drawBuf(P, b.b, b.n); });
+    this.batches.forEach(function (b) { if (b.show && b.alpha >= 1 && !(refl && b === fb)) { if (b.crowd) gl.uniform1f(P.u.uCrowd, self.crowdAmt || 0); self.drawBuf(P, b.b, b.n); if (b.crowd) gl.uniform1f(P.u.uCrowd, 0); } });
     this.drawBuf(P, this.dbuf, this.dyn.n / STRIDE);
     /* translúcidos al final, sin escribir profundidad */
     gl.depthMask(false);

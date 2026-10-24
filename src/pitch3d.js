@@ -4983,7 +4983,30 @@ var Pitch3D = (function () {
   /* Núcleo compartido (5.6): la mascota y las vistas 3D usan exactamente la misma malla vóxel con
      oclusión por vértice, los mismos shaders de luz y sombra y la misma ambientación que el partido.
      Solo se exponen piezas sin estado (no tocan el contexto ni la simulación de este módulo). */
-  var CORE = {Mesh: Mesh, STRIDE: FS, boxCorners: boxCorners, envFor: envFor, lin: lin,
+  /* 5.6: estadio, campo, afición y cielo para los minijuegos de balón parado (mismo aspecto que el partido) */
+  function worldFor(cols) {
+    var keepC = colors, keepL = LAMPS, keepCM = crowdMeshes;
+    try {
+      colors = [kitColor(cols && cols[0], rgb(SHIRT[0])), kitColor(cols && cols[1], rgb(SHIRT[1]))];
+      LAMPS = []; crowdMeshes = [new Mesh(1 << 19), new Mesh(1 << 19)];
+      var sm = new Mesh(1 << 20); buildField(sm);
+      return {stat: sm.a.slice(0, sm.n), crowd: [crowdMeshes[0].a.slice(0, crowdMeshes[0].n), crowdMeshes[1].a.slice(0, crowdMeshes[1].n)], lamps: LAMPS.slice(), towers: TOWERS.map(function (t) { return t.slice(); })};
+    } finally { colors = keepC; LAMPS = keepL; crowdMeshes = keepCM; }
+  }
+  function skyVerts() {
+    var m = new Mesh(16384), R = 210, cx = LEN / 2, cz = MIDZ, seg = 24, rings = 8;
+    m.code = MAT_SKY;
+    for (var j = 0; j < rings; j++) {
+      var p0 = -0.25 + j * (PI / 2 + 0.25) / rings, p1 = -0.25 + (j + 1) * (PI / 2 + 0.25) / rings;
+      for (var i = 0; i < seg; i++) {
+        var a0 = i * TAU / seg, a1 = (i + 1) * TAU / seg;
+        m.quad([cx + R * Math.cos(p0) * Math.cos(a0), R * Math.sin(p0), cz + R * Math.cos(p0) * Math.sin(a0)], [cx + R * Math.cos(p0) * Math.cos(a1), R * Math.sin(p0), cz + R * Math.cos(p0) * Math.sin(a1)],
+          [cx + R * Math.cos(p1) * Math.cos(a1), R * Math.sin(p1), cz + R * Math.cos(p1) * Math.sin(a1)], [cx + R * Math.cos(p1) * Math.cos(a0), R * Math.sin(p1), cz + R * Math.cos(p1) * Math.sin(a0)], [1, 1, 1]);
+      }
+    }
+    return m.a.slice(0, m.n);
+  }
+  var CORE = {Mesh: Mesh, world: worldFor, sky: skyVerts, VOX_PARTS: VOX_PARTS, HAIR_STYLES: HAIR_STYLES, HAIR_FEM: HAIR_FEM, LEN: LEN, WID: WID, POST: POST, BAR: BAR, STRIDE: FS, boxCorners: boxCorners, envFor: envFor, lin: lin,
     MAT: {MATTE: MAT_MATTE, GLOSS: MAT_GLOSS, METAL: MAT_METAL, GRASS: MAT_GRASS, EMIT: MAT_EMIT, CROWD: MAT_CROWD, SKY: MAT_SKY, UNLIT: MAT_UNLIT, LED: MAT_LED},
     VS_MAIN: VS_MAIN, FS_MAIN: FS_MAIN, VS_SHADOW: VS_SHADOW, FS_SHADOW: FS_SHADOW, VS_LITE: VS_LITE, FS_LITE: FS_LITE, U_NAMES: U_NAMES.slice(),
     DIGITS: DIGITS, ORIGIN: [LEN / 2, 0, MIDZ], VOXEL: 0.04};

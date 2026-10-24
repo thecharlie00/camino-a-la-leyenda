@@ -609,6 +609,9 @@ var Minigame = (function () {
     var ball = ballG(svg, 11);
     ball.__shadow = bsh; ball.__ground = function (s) { return GY1 + 2 + (PEN_Y + 7 - GY1) * clamp((s - 0.6) / 0.4, 0, 1.2); };
     setBall(ball, PEN_X, PEN_Y, 1);
+    /* 5.6: escena vóxel 3D con la misma mecánica (si hay WebGL); el SVG deja solo las casillas */
+    var v3 = typeof SpModes !== "undefined" && SpModes ? SpModes.stage3d(ui, svg, "pen", {pressure: pressure}) : null;
+    if (v3) v3.layout(cells, labs, 3, 5);
 
     var sel = -1;
     function pick(i) {
@@ -647,9 +650,9 @@ var Minigame = (function () {
       if (!scored) how = (roll - p) / fail < missShare ? "fuera" : "parada";
       setProb(ui, LBL, p, true);
       setStep(ui, 2, t("¡Allá va!"));
-      wait(750, function () { animate(how, cell, sideR, pf, function () {
-        showResult(ui, how, p, LBL, function () { finish(ui, {p: Math.round(p * 100) / 100, scored: scored}, done); });
-      }); });
+      var after = function () { showResult(ui, how, p, LBL, function () { finish(ui, {p: Math.round(p * 100) / 100, scored: scored, how: how}, done); }); };
+      if (v3) wait(250, function () { SpModes.penShoot(v3, how, cell, sideR, pf, v, after); });
+      else wait(750, function () { animate(how, cell, sideR, pf, after); });
     }
 
     function animate(how, cell, sideR, pf, then) {
@@ -1163,6 +1166,8 @@ var Minigame = (function () {
     setBall(ball, PEN_X, PEN_Y, 1);
     var SH_X = 146, SH_Y = 297, shooter = shooterFig(svg);
     setBall(shooter, SH_X, SH_Y, 1.04);
+    var v3 = typeof SpModes !== "undefined" && SpModes ? SpModes.stage3d(ui, svg, "gkpen", {pressure: pressure}) : null;
+    if (v3) v3.layout(cells, labs, 2, 3, function (cc, chh) { return cc.r === 0 ? chh / 2 + 4.5 : chh - 9; });
 
     var sel = -1;
     function pick(i) {
@@ -1199,9 +1204,9 @@ var Minigame = (function () {
       else how = rand() < saveIf(sel, tz, tf) ? "parada" : "gol";
       setProb(ui, LBL, p, true);
       setStep(ui, 2, t("¡Atento!"));
-      wait(650, function () { animate(how, sel, tz, v, tf, function () {
-        showResult(ui, how, p, LBL, function () { finish(ui, {p: round2(p), saved: how === "parada", scored: how === "gol"}, done); });
-      }); });
+      var after = function () { showResult(ui, how, p, LBL, function () { finish(ui, {p: round2(p), saved: how === "parada", scored: how === "gol", how: how}, done); }); };
+      if (v3) wait(250, function () { SpModes.gkPenDive(v3, how, sel, tz, v, tf, rand, after); });
+      else wait(650, function () { animate(how, sel, tz, v, tf, after); });
     }
 
     function animate(how, d, tz, v, tf, then) {
