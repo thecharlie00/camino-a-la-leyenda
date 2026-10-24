@@ -368,6 +368,30 @@ var Minigame = (function () {
   }
 
   /* ---------- armazón de la superposición ---------- */
+  /* 5.6: marcador del partido con los escudos (lo prepara quien abre el minijuego con setBoard) */
+  var BOARD = null;
+  function setBoard(b) { BOARD = b || null; }
+  function takeBoard() { var b = BOARD; BOARD = null; return b; }
+  function boardEl(b) {
+    var el = document.createElement("div"); el.className = "mgb" + (b.tag ? " mgb-so" : "");
+    el.setAttribute("role", "group"); el.setAttribute("aria-label", t("Marcador"));
+    el.innerHTML = '<span class="mgb-t mgb-h' + (b.us === "h" ? " us" : "") + '"><span class="mgb-c">' + (b.h.icon || "") + '</span><b>' + esc(b.h.ab) + "</b></span>" +
+      '<span class="mgb-s"><b class="mgb-n" data-s="h">' + b.gh + '</b><i>–</i><b class="mgb-n" data-s="a">' + b.ga + "</b>" + (b.min != null ? '<small>' + esc(b.tag ? b.tag : b.min + "'") + "</small>" : b.tag ? "<small>" + esc(b.tag) + "</small>" : "") + "</span>" +
+      '<span class="mgb-t mgb-a' + (b.us === "a" ? " us" : "") + '"><b>' + esc(b.a.ab) + '</b><span class="mgb-c">' + (b.a.icon || "") + "</span></span>";
+    el.__b = b;
+    return el;
+  }
+  /* sube el marcador del equipo que marca (nuestro o del rival) con un pequeño rebote */
+  function boardGoal(el, ours) {
+    if (!el || !el.__b) return;
+    var b = el.__b, side = ours ? b.us : (b.us === "h" ? "a" : "h"), n = el.querySelector('.mgb-n[data-s="' + side + '"]');
+    if (side === "h") b.gh++; else b.ga++;
+    if (!n) return;
+    n.textContent = side === "h" ? b.gh : b.ga;
+    n.className = "mgb-n bump"; void n.offsetWidth; n.className = "mgb-n bump on";
+    el.classList.add(ours ? "good" : "bad");
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
   function shell(o) {
     injectCss();
     var ui = {alive: true, state: "aim", pc: null, steps: o.steps || 2, gkMode: !!o.gk};
@@ -384,6 +408,7 @@ var Minigame = (function () {
       c = hv("span", "mg-chip", chips, o.chips[i][0]);
       hv("b", "", c, String(o.chips[i][1]));
     }
+    var bd = takeBoard(); if (bd) { ui.board = boardEl(bd); box.insertBefore(ui.board, head); }
     var step = hv("div", "mg-step", box);
     ui.stepN = hv("span", "mg-stepn", step);
     ui.hint = hv("span", "mg-hint", step);
@@ -502,6 +527,7 @@ var Minigame = (function () {
     try { ui.pri.focus({preventScroll: true}); } catch (e) {}
   }
   function showResult(ui, how, p, probLabel, then) {
+    if (ui.board && how === "gol") boardGoal(ui.board, !ui.gkMode);
     var txt = {gol: t("¡GOL!"), parada: t("¡PARADA!"), fuera: t("¡FUERA!"), barrera: t("¡A LA BARRERA!"), palo: t("¡AL PALO!")}[how];
     ui.res.innerHTML = "";
     ui.res.className = "mg-res on mg-" + how;
@@ -1537,5 +1563,5 @@ var Minigame = (function () {
     return {close: function () { finish(ui, null, null); }};
   }
 
-  return {penalty: withPress(penalty), freekick: withPress(freekick), gkPenalty: withPress(gkPenalty), gkFreekick: withPress(gkFreekick)};
+  return {penalty: withPress(penalty), freekick: withPress(freekick), gkPenalty: withPress(gkPenalty), gkFreekick: withPress(gkFreekick), setBoard: setBoard, takeBoard: takeBoard, boardEl: boardEl, boardGoal: boardGoal};
 })();

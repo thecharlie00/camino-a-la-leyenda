@@ -1960,6 +1960,12 @@
     /* 4.7: tras fallos seguidos en el minijuego, la confianza suma (y se avisa) */
     /* 5.6: sin ayudas anunciadas en los partidos (la ayuda anti-frustración solo existe, oculta, en el entrenamiento) */
     var cf = 0;
+    /* 5.6: marcador con los escudos de los dos equipos en la pantalla del minijuego */
+    if (f && Minigame.setBoard) {
+      var mk = function (i) { return {ab: f.isNat ? (W.ctry[i] && W.ctry[i].code) || natName(i).slice(0, 3).toUpperCase() : W.clubs[i].ab || clubAbbr(W.clubs[i].n), icon: f.isNat ? flag(i) : crest(i)}; };
+      var us = mk(f.us), op = mk(f.opp), home = !!f.home;
+      Minigame.setBoard({h: home ? us : op, a: home ? op : us, gh: home ? f.gu : f.gt, ga: home ? f.gt : f.gu, min: f.mom ? f.mom.min : null, us: home ? "h" : "a"});
+    }
     var opts = {skill: clamp(skill + cf, 40, 95), gk: clamp(gk, 40, 95), pressure: clamp(imp / 3, 0.1, 1), dist: 22, rand: R};
     if (kind === "gkpen" || kind === "gkfk") {
       var me = Math.round(((at.REF || p.ovr) + (at.EST || at.COL || p.ovr)) / 2);

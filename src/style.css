@@ -1766,3 +1766,23 @@ html.rm .spo-big.on { animation-duration: .6s; }
 .sp-tab { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .sp-tab th, .sp-tab td { padding: 6px 4px; border-bottom: 1px solid var(--line); text-align: right; }
 .sp-tab th:first-child { text-align: left; font-weight: 500; }
+/* 5.6 · marcador con escudos en los minijuegos */
+.mgb { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 12px; background: rgba(8, 14, 18, .82); border: 1px solid var(--line, #24393f); color: #fff; font-variant-numeric: tabular-nums; }
+.mgb-t { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: var(--fs-sm); }
+.mgb-t b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: .04em; }
+.mgb-h { justify-content: flex-end; }
+.mgb-a { justify-content: flex-start; }
+.mgb-t.us b { color: var(--led, #ffd23a); }
+.mgb-c { display: inline-flex; width: 26px; height: 30px; align-items: center; justify-content: center; flex: none; }
+.mgb-c svg { width: 100%; height: 100%; }
+.mgb-c .flag { font-size: 22px; line-height: 1; }
+.mgb-s { display: flex; align-items: baseline; gap: 6px; position: relative; padding-bottom: 12px; }
+.mgb-s i { font-style: normal; opacity: .6; }
+.mgb-n { font-family: var(--f-disp, var(--f-body)); font-size: var(--fs-2xl); min-width: 1ch; text-align: center; display: inline-block; }
+.mgb-n.bump.on { animation: mgbump .7s cubic-bezier(.2, 1.6, .4, 1); color: var(--led, #ffd23a); }
+.mgb.bad .mgb-n.bump.on { color: #ff6b6b; }
+@keyframes mgbump { 0% { transform: scale(1); } 30% { transform: scale(1.7); } 100% { transform: scale(1); } }
+.mgb-s small { position: absolute; left: 50%; bottom: -1px; transform: translateX(-50%); font-size: var(--fs-xs); color: #c9d4d3; white-space: nowrap; }
+html.rm .mgb-n.bump.on { animation: none; }
+.spo-board { position: absolute; left: 50%; top: calc(max(12px, env(safe-area-inset-top)) + 48px); transform: translateX(-50%); width: min(78vw, 320px); pointer-events: none; }
+.spo-hint { top: calc(max(12px, env(safe-area-inset-top)) + 112px); }

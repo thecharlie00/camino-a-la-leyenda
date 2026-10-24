@@ -19,6 +19,9 @@ var SpPlay = (function () {
       (o.closable ? '<button class="iconbtn spo-x" data-sp="x" aria-label="' + esc(t("Cerrar")) + '">✕</button>' : "") + '</div><div class="spo-hint" aria-live="polite"></div><div class="spo-big" aria-live="assertive"></div><div class="spo-bar"></div><div class="spo-res"></div>';
     document.body.appendChild(el);
     var ui = {el: el, stage: el.querySelector(".spo-stage"), alive: true, o: o};
+    /* marcador del partido con los escudos */
+    var bd = Minigame.takeBoard ? Minigame.takeBoard() : null;
+    if (bd) { ui.board = Minigame.boardEl(bd); ui.board.classList.add("spo-board"); el.querySelector(".spo-top").appendChild(ui.board); }
     ui.hint = function (s) { el.querySelector(".spo-hint").textContent = s || ""; };
     ui.bar = function (h) { el.querySelector(".spo-bar").innerHTML = h || ""; };
     ui.big = function (s, cls) { var b = el.querySelector(".spo-big"); b.textContent = s; b.className = "spo-big on " + (cls || ""); clearTimeout(ui.bigT); ui.bigT = setTimeout(function () { b.className = "spo-big"; }, 1500); };
@@ -203,6 +206,7 @@ var SpPlay = (function () {
   }
   /* fin común: repetición automática corta en lo ajustado, pantalla de resultado y vuelta */
   function finishMode(ui, res, got, opt, done, out) {
+    if (ui.board && res.scored) Minigame.boardGoal(ui.board, !opt.gkMode);
     var S3 = ui.S3, pr = SpModes.prefs(), close = /post|touchin|save|catch/.test(res.how);
     var lines = got.map(function (a) { return "🏅 " + esc(t(a.n)) + ' · <b data-count="' + a.money + '">0</b> €'; });
     if (opt.reward && out.scored === !opt.gkMode) { lines.push("💶 " + esc(t("Premio del reto")) + ' · <b data-count="' + opt.reward + '">0</b> €'); try { S.p.money += opt.reward; } catch (e) {} }
