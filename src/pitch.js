@@ -1797,11 +1797,11 @@ var Pitch = (function () {
     }
     if (reveal && spin > 0.38) {
       c.fillStyle = "#382300"; c.textAlign = "center"; c.textBaseline = "middle";
-      c.font = "900 " + Math.round(r * 0.94) + "px system-ui, sans-serif";
+      c.font = "800 " + Math.round(r * 0.94) + "px 'Atkinson Hyperlegible Next', system-ui, sans-serif";
       c.fillText(co.face === "cara" ? "C" : "X", 0, 1);
     } else if (spin > 0.52) {
       c.fillStyle = "rgba(65,42,0,.82)"; c.textAlign = "center"; c.textBaseline = "middle";
-      c.font = "900 " + Math.round(r * 0.9) + "px system-ui, sans-serif";
+      c.font = "800 " + Math.round(r * 0.9) + "px 'Atkinson Hyperlegible Next', system-ui, sans-serif";
       c.fillText("?", 0, 1);
     }
     c.restore();
@@ -1919,7 +1919,7 @@ var Pitch = (function () {
       c.strokeStyle = "rgba(" + cl + "," + (1 - fa2).toFixed(3) + ")"; c.lineWidth = 2; c.beginPath(); c.arc(fxx, fyy, r * (0.6 + fa2 * 2.4), 0, PI2); c.stroke();
     }
     /* jugadores */
-    if (P.fontR !== r) { P.fontR = r; P.font = "800 " + Math.round(r * 1.02) + "px Archivo, system-ui, sans-serif"; }
+    if (P.fontR !== r) { P.fontR = r; P.font = "800 " + Math.round(r * 1.02) + "px 'Atkinson Hyperlegible Next', system-ui, sans-serif"; }
     c.textAlign = "center"; c.textBaseline = "middle"; c.font = P.font;
     for (s = 0; s < 2; s++) {
       var col = P.cols[s], tcol = ink(col), gcol = shade(col, 0.68), gink = ink(gcol), edge = lum(col) > 0.6 ? shade(col, 0.55) : "rgba(255,255,255,.85)";
@@ -2023,8 +2023,8 @@ var Pitch = (function () {
         c.fillStyle = "rgba(6,12,14,.55)"; c.fillRect(0, h / 2 - hh / 2, w, hh);
         c.fillStyle = P.msg.s < 0 ? "#edf1e8" : P.cols[P.msg.s];
         var fs0 = Math.round(P.msg.small ? h * 0.1 : h * 0.18);
-        c.font = "900 " + fs0 + "px 'Big Shoulders Display', Impact, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
-        var mw = c.measureText(P.msg.t).width; if (mw > w * 0.92) { fs0 = Math.floor(fs0 * w * 0.92 / mw); c.font = "900 " + fs0 + "px 'Big Shoulders Display', Impact, sans-serif"; }
+        c.font = "900 " + fs0 + "px CamDisp, 'Atkinson Hyperlegible Next', sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
+        var mw = c.measureText(P.msg.t).width; if (mw > w * 0.92) { fs0 = Math.floor(fs0 * w * 0.92 / mw); c.font = "900 " + fs0 + "px CamDisp, 'Atkinson Hyperlegible Next', sans-serif"; }
         c.strokeStyle = "rgba(0,0,0,.6)"; c.lineWidth = 4; c.strokeText(P.msg.t, w / 2, h / 2 + 2); c.fillText(P.msg.t, w / 2, h / 2 + 2);
         c.globalAlpha = 1;
       }
@@ -2104,7 +2104,7 @@ var Pitch = (function () {
   function rpBadge() {
     var c = P.ctx, dp = P.dpr, t = "↺ " + (P.lab.replay || "REPETICIÓN");
     c.setTransform(dp, 0, 0, dp, 0, 0);
-    c.font = "800 12px 'Archivo', sans-serif"; c.textAlign = "left"; c.textBaseline = "middle";
+    c.font = "800 12px 'Atkinson Hyperlegible Next', sans-serif"; c.textAlign = "left"; c.textBaseline = "middle";
     var w = c.measureText(t).width + 26, x0 = P.w - w - 8;
     c.fillStyle = "rgba(11,20,23,.78)"; c.fillRect(x0, 8, w, 22);
     c.fillStyle = "#ffb21e"; c.fillText(t, x0 + 8, 19);

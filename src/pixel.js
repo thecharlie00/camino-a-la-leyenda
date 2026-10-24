@@ -464,6 +464,36 @@ var PX = (function () {
   var CROSS = ["............", ".wwwwwwwwww.", ".wwwwRRwwww.", ".wwwwRRwwww.", ".wwRRRRRRww.", ".wwRRRRRRww.", ".wwwwRRwwww.",
     ".wwwwRRwwww.", ".wwwwwwwwww.", ".gggggggggg.", "............", "............"];
   var ICONS = {
+    /* 5.6: mascotas y sus accesorios en pixel art (antes eran emoji del sistema) */
+    "🐶": ["............", "............", ".tTTt.......", "tTTTTt......", "tTKTTt.....T", ".STTTt....T.", "KSSTTTTTTTT.", ".SMTTTTTTTT.", "..TTTTTTTTT.", "..T.T...T.T.", "..T.T...T.T.", "..t.t...t.t."],
+    "🐕": ["............", "............", "..tt........", ".TTTt......T", "TKTTt.....T.", "KTTTTTTTTTT.", ".TTTTTTTTTT.", "..TTTTTTTTT.", "..T.T...T.T.", "..T.T...T.T.", "..t.t...t.t.", "............"],
+    "🦮": ["............", "............", "..yy........", ".YYYy......Y", "YKYYy.....Y.", "KYYYRRRYYYY.", ".YYYRRRYYYY.", "..YYYRYYYYY.", "..Y.Y...Y.Y.", "..Y.Y...Y.Y.", "..y.y...y.y.", "............"],
+    "🐱": ["............", "............", "O.O.........", "OOOO........", "OKOOO.....O.", "MOOOO....O..", ".OOOOOOOOO..", ".OoOOoOOoO..", ".OOOOOOOOO..", ".O.O...O.O..", ".O.O...O.O..", ".o.o...o.o.."],
+    "🐈": ["............", "O.O.........", "OOO.........", "OKOO.......O", "OOOO......O.", ".OOOOOOOOOO.", ".OoOOoOOoOO.", "..OOOOOOOOO.", "..O.O...O.O.", "..O.O...O.O.", "..o.o...o.o.", "............"],
+    "🐰": ["...ww.......", "...wMw......", "....wMw.....", "...wwww.....", "..wKwww.....", ".Mwwwwwww...", "..wwwwwwwwW.", "..wwwwwwwwWW", "..wwwwwwwww.", "..ww...www..", ".www...www..", "............"],
+    "🐇": ["..ww........", "..wMw.......", "...wMw......", "..wwww......", ".wKwwww.....", "Mwwwwwwwww..", ".wwwwwwwwwW.", "..wwwwwwwwWW", "..wwwwwwww..", "..ww....ww..", ".ww....www..", "............"],
+    "🐟": ["............", "............", "....BBB.....", "..BBBBBB...B", ".BKBBBBBB.BB", "BBBBBBBBBBB.", "BbBBBBBBBBB.", ".bbbbbbbb.bb", "..bbbbbb...b", "....bbb.....", "............", "............"],
+    "🐠": ["............", "....YYY.....", "...OWYOO....", "..OOWOOOW..Y", ".OKOWOOOWOYY", "OOOOWOOOWOY.", ".OOOWOOOWOYY", "..OOWOOOW..Y", "...OWOOO....", "....YYY.....", "............", "............"],
+    "🐡": ["....y..y....", ".y.YYYYYY.y.", "..YYYYYYYY..", ".YYKYYYYKYY.", "yYYYYYYYYYYy", ".YYYYRRYYYY.", "yYLYYYYYYLYy", ".YYLYLYLYYY.", "..YYYYYYYY..", ".y.YYYYYY.y.", "....y..y....", "............"],
+    "🐢": ["............", "............", "............", "............", "....nnnn....", "...nNNNNn...", "NN.nNnnNNn..", "NKNnnNNnnnn.", "NNNyyyyyyyyN", "...NN....NN.", "............", "............"],
+    "🐹": ["............", "............", "............", "..oo........", ".oMOOOOOo...", ".OKOOOOOOO..", "MOOOOOOOOOO.", ".WWWOOOOOOO.", ".WWWWWWWWWO.", "..WWWWWWWW..", "..o.o..o.o..", "............"],
+    "🦜": ["....RRR.....", "...RRRRR....", "..WWRRRR....", ".KWKRRRR....", ".KKRRRRRR...", "...RRRRRRB..", "...RRRYYBB..", "....RRYBBB..", "....RRRBB...", "....TTTTTTT.", ".....R.R.B..", ".....R...B.."],
+    "🦎": ["............", "............", "............", "...n.n.n....", "..NNNNNNN...", ".NKNNNNNNN..", "NNNNNNNNNNN.", ".nnNNNNNNNNN", "..N.N..N.N.n", "..n.n..n.n.n", "...........n", "............"],
+    "🐍": ["............", "...NNNN.....", "..NKNNKN....", "..NNNNNN....", "...NRRN.....", "....NN......", "..NNNNNN....", ".NnnnnnnN...", "NnNNNNNNnN..", "NnnnnnnnnnN.", ".NNNNNNNNNN.", "............"],
+    "🦔": ["............", "............", "............", "....t.t.t...", "...tTtTtTt..", "..tTtTtTtTt.", ".SKTtTtTtTt.", "KSSSTtTtTtt.", ".SSSSSSSSs..", "..s.s..s.s..", "............", "............"],
+    "🦊": ["............", "O.O.........", "OOO.........", "OKOO........", "KWOO......OO", ".WOOOOOOOOOW", ".WWOOOOOOOO.", "..OOOOOOOO..", "..O.O..O.O..", "..O.O..O.O..", "..K.K..K.K..", "............"],
+    "🦫": ["............", "............", "............", "..TTTT......", ".TTTTTT.....", "TKTTTTTTTT..", "tTTTTTTTTTT.", "TTTTTTTTTTTt", ".TTTTTTTTTT.", ".tTt...tTt..", ".t.t...t.t..", "............"],
+    "🕷": ["............", "............", ".t..t..t..t.", "..t.t..t.t..", "...tTTTTt...", "tt.TTTTTT.tt", "..tTRTTRTt..", "tt.TTTTTT.tt", "...tTTTTt...", "..t.t..t.t..", ".t..t..t..t.", "............"],
+    "🧢": ["............", "............", "....BBBB....", "...BBWBBB...", "..BBBBBBBB..", "..BBBBBBBB..", "..bbbbbbbbbb", "............", "............", "............", "............", "............"],
+    "🎀": ["............", "............", ".MMM....MMM.", "MMWMM..MMWMM", "MMMMMmmMMMMM", "MMMMMmmMMMMM", "MMmMM..MMmMM", ".MMM....MMM.", "....M..M....", "...M....M...", "............", "............"],
+    "👒": ["............", "............", "............", "....yyyy....", "...yYYYYy...", "...MMMMMM...", ".yYYYYYYYYy.", "yYYYYYYYYYYy", ".yyyyyyyyyy.", "............", "............", "............"],
+    "🎩": ["............", "...KKKKKK...", "...KGKKKK...", "...KGKKKK...", "...KKKKKK...", "...RRRRRR...", "...KKKKKK...", "KKKKKKKKKKKK", ".GGGGGGGGGG.", "............", "............", "............"],
+    "👓": ["............", "............", "............", "............", ".KKKK..KKKK.", "KWCCKKKKWCCK", "KCCCK..KCCCK", ".KKKK..KKKK.", "............", "............", "............", "............"],
+    "🕶": ["............", "............", "............", "............", "KKKKKKKKKKKK", ".KGKK..KGKK.", ".KKKK..KKKK.", "..KK....KK..", "............", "............", "............", "............"],
+    "🧣": ["............", "............", "............", "............", "............", "RRRRRRRRRRRR", "RWRRWRRWRRWR", "rrrrrrrrRRRr", ".......RWR..", ".......RRR..", "......RWRR..", "......r.r..."],
+    "📿": ["............", "............", "............", "W..........W", ".w........w.", "..W......W..", "...wW..Ww...", ".....WW.....", "............", "............", "............", "............"],
+    "🦴": ["............", "............", "............", ".ww......ww.", "wWWw....wWWw", ".wWWWWWWWWw.", ".wWWWWWWWWw.", "wWWw....wWWw", ".ww......ww.", "............", "............", "............"],
+    "🧸": ["............", "..TT....TT..", ".TtTTTTTTtT.", "..TTTTTTTT..", "..TKTTTTKT..", "..TTTSSTTT..", "...TSKKST...", ".TTTTTTTTTT.", "TT.TTSSTT.TT", "...TTSSTT...", "..TT....TT..", "..tt....tt.."],
     "⚽": ["....gggg....", "..ggWWWWgg..", ".gWWWKKWWWg.", ".gWWKKKKWWg.", "gKWWKKKKWWKg", "gKKWWKKWWKKg", "gKWWWWWWWWKg",
       "gWWWWWWWWWWg", ".gWWKWWKWWg.", ".gWKKWWKKWg.", "..ggWWWWgg..", "....gggg...."],
     "🏆": ["..LYYYYYYy..", "YYLYYYYYYyYY", "Y.LYYYYYYy.Y", "Y.LYYYYYYy.Y", ".YLYYYYYYyY.", "..YYYYYYyy..", "....YYyy....",
@@ -654,6 +684,27 @@ var PX = (function () {
     if (e === "💀") { g.stamp(SMILE, {Y: "#eef0f2", y: "#b8bec6"}); return g.stamp(["............", "..KKK..KKK..", "..KKK..KKK..", ".....KK.....", "............", "...K.K.K.K..", "............"], PAL, 0, 3); }
     return null;
   }
+
+  /* 5.6: anclajes de cada mascota (en celdas del sprite): coronilla, cara, cuello, juguete, primera fila de patas y tipo.
+     Con ellos los accesorios se colocan en su sitio en 2D y en 3D, y la vista 3D sabe qué partes animar. */
+  var PET_ANCHOR = {"🐶": {"ht": [3, 2], "fc": [2.2, 4.6], "nk": [4.2, 7], "ty": [0.5, 11.5], "lr": 9, "kind": "quad"}, "🐕": {"ht": [2, 2], "fc": [1.6, 4.2], "nk": [3.6, 5.6], "ty": [0.3, 11], "lr": 8, "kind": "quad"}, "🦮": {"ht": [2, 2], "fc": [1.6, 4.2], "nk": [3.6, 5.6], "ty": [0.3, 11], "lr": 8, "kind": "quad"}, "🐱": {"ht": [2, 2.5], "fc": [1.6, 4.4], "nk": [3.6, 6], "ty": [0.2, 11.5], "lr": 9, "kind": "quad"}, "🐈": {"ht": [1.5, 1], "fc": [1.3, 3.4], "nk": [3, 5], "ty": [0.2, 11], "lr": 8, "kind": "quad"}, "🐰": {"ht": [3.6, 3], "fc": [3, 4.6], "nk": [4.6, 5.8], "ty": [0.5, 11], "lr": 9, "kind": "quad"}, "🐇": {"ht": [3, 3], "fc": [2.2, 4.6], "nk": [4, 5.8], "ty": [0.2, 11], "lr": 9, "kind": "quad"}, "🐹": {"ht": [3.6, 3.5], "fc": [2.4, 5.5], "nk": [4.2, 7], "ty": [0.2, 11], "lr": 10, "kind": "quad"}, "🦊": {"ht": [1.5, 1], "fc": [1.3, 3.5], "nk": [3, 5.2], "ty": [0.2, 11], "lr": 8, "kind": "quad"}, "🐟": {"ht": [3.5, 2], "fc": [2.5, 4.5], "nk": [4.5, 6.5], "ty": [0, 10], "lr": null, "kind": "fish"}, "🐠": {"ht": [5, 1], "fc": [2.5, 4.5], "nk": [4.5, 7], "ty": [0, 10], "lr": null, "kind": "fish"}, "🐡": {"ht": [6, 1], "fc": [6, 3.6], "nk": [6, 7], "ty": [11, 10.5], "lr": null, "kind": "fish"}, "🐢": {"ht": [1, 6], "fc": [1, 7.3], "nk": [2.2, 8.2], "ty": [0, 10], "lr": 9, "kind": "turtle"}, "🦜": {"ht": [5, 0], "fc": [3, 3.5], "nk": [5, 4.8], "ty": [11.5, 9.5], "lr": null, "kind": "bird"}, "🦎": {"ht": [3, 4], "fc": [2, 5.5], "nk": [3.5, 6.6], "ty": [0, 10], "lr": 8, "kind": "quad"}, "🐍": {"ht": [4.5, 1], "fc": [4.5, 2.5], "nk": [4.5, 5], "ty": [11.5, 11], "lr": null, "kind": "snake"}, "🦔": {"ht": [5, 3], "fc": [2, 6.5], "nk": [4, 8], "ty": [0, 10], "lr": 9, "kind": "quad"}, "🦫": {"ht": [3, 3], "fc": [1.6, 5.3], "nk": [4, 6.6], "ty": [0, 11], "lr": 9, "kind": "quad"}, "🕷": {"ht": [6, 4], "fc": [6, 6.4], "nk": [6, 8], "ty": [11.5, 11], "lr": null, "kind": "spider"}};
+  function bboxOf(g) { var x0 = 99, y0 = 99, x1 = -1, y1 = -1; for (var y = 0; y < g.h; y++) for (var x = 0; x < g.w; x++) if (g.get(x, y)) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; } return x1 < 0 ? null : [x0, y0, x1, y1]; }
+  function nfx(e) { return String(e || "").replace(/\uFE0F/g, ""); }
+  function petAnchor(e) { return PET_ANCHOR[nfx(e)] || null; }
+  /* sitio de un accesorio sobre una mascota, en el formato de la tarjeta (x: centro %, y: arriba %, s: tamaño em; caja de 1,55 em) */
+  function petAccPlace(petE, accE, slot) {
+    var A = petAnchor(petE), ag = iconGrid(nfx(accE)); if (!A || !ag) return null;
+    var bb = bboxOf(ag); if (!bb) return null;
+    var bw = bb[2] - bb[0] + 1, want = slot === "h" ? 5.2 : slot === "f" ? 4.2 : slot === "n" ? 4.4 : 4.6, s = want / bw;
+    var P = slot === "h" ? A.ht : slot === "f" ? A.fc : slot === "n" ? A.nk : A.ty, B = 0.275, C = 1 / 12;
+    var X = B + P[0] * C, Y = B + P[1] * C, ax = (bb[0] + bb[2] + 1) / 2, top;
+    if (slot === "h") top = Y - (bb[3] + 1) * s * C;
+    else if (slot === "f") top = Y - ((bb[1] + bb[3] + 1) / 2) * s * C;
+    else if (slot === "n") top = Y - (bb[1] + 0.5) * s * C;
+    else top = Y - (bb[3] + 1) * s * C;
+    var cx = X - ax * s * C + s / 2;
+    return {x: cx / 1.55 * 100, y: top / 1.55 * 100, s: s};
+  }
   var ICACHE = {};
   function icon(e, size) {
     var k = e + "|" + (size || "");
@@ -756,7 +807,7 @@ var PX = (function () {
     Object.keys(UI).forEach(function (k) { out[k] = new Grid(12, 12).stamp(UI[k], {"#": "currentColor"}).svg("1em", "1em", "pxi-svg"); });
     return out;
   }
-  return {Grid: Grid, face: face, trophy: trophy, honours: honours, guessKey: guessKey, uiIcons: uiIcons, UI: UI, crest: crest, kit: kit, icon: icon, has: has, emojify: emojify, shade: shade, mix: mixc,
+  return {Grid: Grid, face: face, trophy: trophy, honours: honours, guessKey: guessKey, uiIcons: uiIcons, UI: UI, crest: crest, kit: kit, icon: icon, iconGrid: iconGrid, petAnchor: petAnchor, petAccPlace: petAccPlace, bboxOf: bboxOf, has: has, emojify: emojify, shade: shade, mix: mixc,
     off: function () { on = false; }, ICONS: ICONS, TRO: TRO};
 })();
 

@@ -9,7 +9,7 @@
   --green: #74dd91;
   --green-dark: #173e2d;
   --gold: #ffb21e;
-  font-family: Archivo, Arial, sans-serif;
+  font-family: "Atkinson Hyperlegible Next", Arial, sans-serif; font-variant-numeric: tabular-nums;
   background: var(--bg);
   color: var(--text);
   font-synthesis: none;
@@ -28,7 +28,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
 }
-body, button, a { font-family: Archivo, Arial, sans-serif; }
+body, button, a { font-family: "Atkinson Hyperlegible Next", Arial, sans-serif; font-variant-numeric: tabular-nums; }
 img, svg, canvas { max-width: 100%; }
 img { display: block; }
 a { color: var(--green); text-underline-offset: .2em; }
@@ -156,7 +156,7 @@ details.lang { position: relative; flex: none; }
 h1, h2, h3, p, figure { margin-top: 0; }
 h1, h2, h3 { color: var(--text); }
 h1, h2 {
-  font-family: "Big Shoulders Display", Impact, sans-serif;
+  font-family: "CamDisp", "Atkinson Hyperlegible Next", sans-serif;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -448,8 +448,8 @@ body.play {
   --led-ink: #1d1404;
   --grass: #3fcf7c;
   --sky: #66b9ff;
-  --f-disp: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
-  --f-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-disp: "CamDisp", "Atkinson Hyperlegible Next", sans-serif;
+  --f-body: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -624,7 +624,7 @@ button.btn { cursor: pointer; }
   text-transform: uppercase;
 }
 .board .tm i { width: 9px; height: 9px; flex: none; border-radius: 50%; }
-.board .sc { color: var(--led); font: 900 20px/1 "Doto", monospace; }
+.board .sc { color: var(--led); font: 800 20px/1 "Atkinson Hyperlegible Next", sans-serif; font-variant-numeric: tabular-nums; }
 .match canvas { width: 100%; height: auto; margin-top: 8px; border-radius: 7px; }
 .match .say { min-height: 30px; padding: 7px 4px 1px; color: var(--mist); font-size: 12px; }
 .match .say .min { margin-right: 7px; color: var(--led); font-weight: 800; }

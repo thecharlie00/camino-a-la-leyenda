@@ -106,6 +106,6 @@
         o += '<div class="pomatch"><span class="' + (mt.w === mt.a ? "w" : "") + (mt.a === me ? " me" : "") + '">' + h(clubName(mt.a)) + '</span><b class="num">' + sc + '</b><span class="' + (mt.w === mt.b ? "w" : "") + (mt.b === me ? " me" : "") + '">' + h(clubName(mt.b)) + "</span></div>";
       });
     });
-    return o + '<p class="muted" style="font-size:13px;margin:8px 0 0">' + tr("Sube a {lg}: {club}.", {lg: h(trComp(lgDivRaw(L.upI))), club: h(clubName(po.w))}) + "</p></section>";
+    return o + '<p class="muted" style="font-size:var(--fs-sm);margin:8px 0 0">' + tr("Sube a {lg}: {club}.", {lg: h(trComp(lgDivRaw(L.upI))), club: h(clubName(po.w))}) + "</p></section>";
   });
 })();

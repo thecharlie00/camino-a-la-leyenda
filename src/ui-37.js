@@ -117,7 +117,7 @@
     return "<h2>" + tr("Versión") + '</h2><div class="stack"><div class="kvlist"><div><span>' + tr("Versión") + "</span><span>" + h(B.v) + " · " + tr("compilación {n}", {n: B.code}) + "</span></div><div><span>" + tr("Canal") + "</span><span>" + chan() + "</span></div>" +
       "<div><span>" + tr("Compilado") + "</span><span>" + (d && !isNaN(d) ? h(d.toLocaleString(LANG, {dateStyle: "medium", timeStyle: "short"})) : "—") + "</span></div></div>" +
       '<div><div class="lbl">' + tr("Novedades") + '</div><ul class="vnotes">' + NOTES.map(function (n) { return "<li>" + h(tr(n)) + "</li>"; }).join("") + "</ul></div>" +
-      '<button class="btn wide" data-a="vcopy">' + tr("Copiar información del sistema") + '</button><p class="muted" style="font-size:12.5px;margin:0">' + tr("Pégala cuando informes de un error: así sabremos qué versión y qué dispositivo usas.") + "</p>" +
+      '<button class="btn wide" data-a="vcopy">' + tr("Copiar información del sistema") + '</button><p class="muted" style="font-size:var(--fs-xs);margin:0">' + tr("Pégala cuando informes de un error: así sabremos qué versión y qué dispositivo usas.") + "</p>" +
       '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
   };
   U.actions.vcopy = function () {

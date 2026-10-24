@@ -36,7 +36,7 @@
     var k = kitOf(club, gk), c1 = k.c1, c2 = k.c2, txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
     var armCol = sl === "long" ? c1 : sl === "under" ? "#16191b" : skin, legCol = sl === "tights" ? "#16191b" : skin;
     /* figura de cuerpo entero en pixel art (celda 5, sin rasgos faciales) */
-    var R = [], B = function (x0, y0, x1, y1, c) { R.push([x0, y0, x1, y1, c]); };
+    var R = [], B = function (x0, y0, x1, y1, c, tag) { R.push([x0, y0, x1, y1, c, tag]); };
     var shade = function (c, k) { return typeof PX !== "undefined" ? PX.shade(c, k) : c; };
     B(6, 33, 17, 33, "rgba(0,0,0,.35)");
     if (hair === "long") { B(8, 3, 8, 10, hc); B(15, 3, 15, 10, hc); }
@@ -62,23 +62,52 @@
     else if (hair === "curly") { B(8, 1, 15, 2, hc); B(9, 0, 10, 0, hc); B(12, 0, 13, 0, hc); B(8, 3, 8, 4, hc); B(15, 3, 15, 4, hc); }
     else if (hair === "long") { B(9, 1, 14, 2, hc); B(9, 3, 14, 3, hc); }
     if (band !== "none" && band !== "cap") { var bc = band === "club" ? c1 : get("band").c || "#fff"; B(9, 3, 14, 3, bc); }
+    /* 5.6: ojos de un píxel (parpadean en la zona Yo) */
+    var eye = shade(skin, 0.32); B(10, 5, 10, 5, eye, "eyes"); B(13, 5, 13, 5, eye, "eyes");
     /* dorsal en cifras de píxel */
     var F = {"0": ["###", "#.#", "#.#", "#.#", "###"], "1": [".#.", "##.", ".#.", ".#.", "###"], "2": ["##.", "..#", ".#.", "#..", "###"], "3": ["##.", "..#", ".#.", "..#", "##."],
       "4": ["#.#", "#.#", "###", "..#", "..#"], "5": ["###", "#..", "##.", "..#", "##."], "6": [".##", "#..", "###", "#.#", "###"], "7": ["###", "..#", ".#.", ".#.", ".#."],
       "8": ["###", "#.#", "###", "#.#", "###"], "9": ["###", "#.#", "###", "..#", "##."]};
     var ns = String(num || ""), nw = ns.length * 4 - 1, nx0 = Math.round(12 - nw / 2);
+    var rig = / rig\b|^rig\b/.test(cls || "");
     var s = '<svg class="' + (cls || "lfsvg") + ' px" viewBox="0 0 120 170" role="img" aria-label="' + h(tr("Tu avatar")) + '" shape-rendering="crispEdges">';
-    R.forEach(function (b) { s += '<rect x="' + b[0] * 5 + '" y="' + b[1] * 5 + '" width="' + (b[2] - b[0] + 1) * 5 + '" height="' + (b[3] - b[1] + 1) * 5 + '" fill="' + b[4] + '"/>'; });
+    var rr = function (b) { return '<rect x="' + b[0] * 5 + '" y="' + b[1] * 5 + '" width="' + (b[2] - b[0] + 1) * 5 + '" height="' + (b[3] - b[1] + 1) * 5 + '" fill="' + b[4] + '"/>'; };
+    /* modelo de partes para la animación (y para la vista 3D): misma figura, agrupada por articulaciones */
+    U._avRects = R;
+    if (!rig) R.forEach(function (b) { s += rr(b); });
+    else {
+      var G = {sh: "", legL: "", legR: "", torso: "", armL: "", armR: "", head: "", eyes: ""};
+      R.forEach(function (b) { G[lifeRigPart(b)] += rr(b); });
+      s += '<g class="pa-sh">' + G.sh + '</g><g class="pa-body"><g class="pa-legL">' + G.legL + '</g><g class="pa-legR">' + G.legR + '</g><g class="pa-up"><g class="pa-armL">' + G.armL + '</g><g class="pa-torso">' + G.torso;
+    }
     /* el dorsal usa media celda para que quepan dos cifras */
     for (var di = 0; di < ns.length; di++) {
       var gph = F[ns.charAt(di)]; if (!gph) continue;
       for (var gy = 0; gy < 5; gy++) for (var gx = 0; gx < 3; gx++) if (gph[gy].charAt(gx) === "#")
         s += '<rect x="' + (60 - (nw * 2.5) / 2 + (di * 4 + gx) * 2.5).toFixed(1) + '" y="' + (68 + gy * 2.5) + '" width="2.5" height="2.5" fill="' + txt + '"/>';
     }
+    if (rig) s += '</g><g class="pa-armR">' + G.armR + '</g><g class="pa-head">' + G.head + '<g class="pa-eyes">' + G.eyes + "</g></g></g>" +
+      '<g class="pa-ball"><rect x="-6" y="-6" width="12" height="12" fill="#f4f4f0"/><rect x="-2" y="-2" width="4" height="4" fill="#1b1d1f"/><rect x="-6" y="-2" width="2" height="4" fill="#1b1d1f"/><rect x="4" y="-2" width="2" height="4" fill="#1b1d1f"/></g></g>';
     return s + "</svg>";
   }
+  /* a qué articulación pertenece cada bloque de la figura (celdas de 24 × 34) */
+  function lifeRigPart(b) {
+    if (b[5] === "eyes") return "eyes";
+    var x0 = b[0], y0 = b[1], x1 = b[2], y1 = b[3];
+    if (y0 >= 33) return "sh";
+    if (y1 <= 9 || ((x0 === 8 || x0 === 15) && x1 === x0 && y0 <= 10 && y0 >= 0 && y1 <= 10 && y0 < 9)) return "head";
+    if (x1 <= 6 && y0 >= 10) return "armL";
+    if (x0 >= 17 && y0 >= 10) return "armR";
+    if (y0 >= 24) return x1 <= 11 ? "legL" : "legR";
+    return "torso";
+  }
+  U.lifeRigPart = lifeRigPart;
+  U.lifeAvatar = avatar;
   function myLook() { return Object.assign({}, LIFE_COS_DEF, lifeOf().cos); }
   function myAvatar(cls) { var L = lifeOf(); return avatar(myLook(), S.p.club, L.num, isGK(), cls, !!S.p.flags.captain); }
+  U.myAvatar = myAvatar;
+  /* bloques de mi figura (para la vista 3D) y colores de la equipación */
+  U.myAvatarRects = function () { myAvatar(""); return U._avRects.slice(); };
 
   /* ---------- creación: dorsal preferido ---------- */
   U.add("create", function (c) {
@@ -110,7 +139,7 @@
     if (!L.num) lifeSyncNum();
     if (!L.rv && S.p.club >= 0) lifeNewRv();
     var p = S.p, rv = L.rv, act = Object.keys(L.svc).filter(function (k) { return L.svc[k].left > 0; });
-    var s = '<section class="card lfhub"><div class="lfhub-top"><div class="lfav">' + myAvatar() + '</div><div class="lfinfo">';
+    var s = '<section class="card lfhub"><div class="lfhub-top"><div class="lfav" data-a="lfavtap" role="button" tabindex="0" aria-label="' + h(tr("Tu jugador")) + '">' + myAvatar("lfsvg rig") + '</div><div class="lfinfo">';
     s += '<div class="eyebrow">' + tr("Fuera del campo") + "</div>";
     s += '<button class="lfnumbtn" data-a="lfopen" data-v="lnum"><b class="num">' + L.num + "</b><span>" + tr("Dorsal") + (L.num !== L.pref ? "<small>" + tr("Prefieres el {n}", {n: L.pref}) + "</small>" : "<small>" + tr("Cambiar") + "</small>") + "</span></button>";
     s += '<div class="lfcel"><span class="eyebrow">' + tr("Celebración") + "</span><b>" + h(tr(lifeCel().n)) + "</b></div>";
@@ -224,7 +253,8 @@
   }
   U.sheets.llook = function () {
     var gk = isGK();
-    var s = "<h2>" + tr("Look y celebración") + '</h2><div class="stack"><div class="lflookprev">' + myAvatar("lfsvg big") + '<div><span class="eyebrow">' + tr("Celebración") + "</span><b>" + h(tr(lifeCel().n)) + '</b><p class="muted lfhint">' + tr("Algunas piezas se desbloquean con fama, títulos o dinero.") + "</p></div></div>";
+    var s = "<h2>" + tr("Look y celebración") + '</h2><div class="stack"><div class="lflookprev">' + myAvatar("lfsvg big rig") + '<div><span class="eyebrow">' + tr("Celebración") + "</span><b>" + h(tr(lifeCel().n)) + '</b><p class="muted lfhint">' + tr("Algunas piezas se desbloquean con fama, títulos o dinero.") + "</p></div></div>";
+    if (typeof View3D !== "undefined" && View3D && View3D.supported()) s += '<button class="btn v3dbtn" data-a="lf3d">' + tr("Ver en 3D") + "</button>";
     s += cosRow("cel", tr("Celebración"));
     if (gk) s += cosRow("gloves", tr("Guantes"), true);
     s += cosRow("boots", tr("Botas"), true);
@@ -235,11 +265,14 @@
     s += cosRow("hcol", tr("Color de pelo"), true);
     return s + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
   };
+  U.actions.lf3d = function () { if (typeof View3D !== "undefined" && View3D) View3D.player({from: document.querySelector(".lflookprev svg")}); };
   U.actions.lfcos = function (b, v) {
-    var cat = b.getAttribute("data-k"), r = lifeSetCos(cat, v);
+    var cat = b.getAttribute("data-k"), prev = (lifeOf().cos || {})[cat] || LIFE_COS_DEF[cat], r = lifeSetCos(cat, v);
     if (!r.ok && r.lock) U.toast(r.poor ? tr("No te llega el dinero ({v}).", {v: money(r.lock.v)}) : tr("Bloqueado: {req}.", {req: lockTxt(r.lock).replace("🔒 ", "")}));
     else if (r.paid) U.toast(tr("Comprado por {v}.", {v: money(r.paid)}));
     rer();
+    /* 5.6: con la prenda nueva, el jugador se presenta en 3D */
+    if (r.ok && prev !== v && typeof View3D !== "undefined" && View3D) setTimeout(function () { View3D.player({item: cat, from: document.querySelector(".lflookprev svg")}); }, 60);
   };
 
   /* ---------- hoja: rivalidad ---------- */

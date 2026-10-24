@@ -10,25 +10,27 @@ FONTS = ROOT / "fonts" / "node_modules" / "@fontsource"
 DIST = pathlib.Path(os.environ["CAMINO_DIST"]) if os.environ.get("CAMINO_DIST") else ROOT / "dist"
 
 faces = [
-    ("Big Shoulders Display", "big-shoulders-display", 800, ["latin"]),
-    ("Big Shoulders Display", "big-shoulders-display", 900, ["latin"]),
-    ("Archivo", "archivo", 400, ["latin", "latin-ext"]),
-    ("Archivo", "archivo", 600, ["latin", "latin-ext"]),
-    ("Archivo", "archivo", 700, ["latin", "latin-ext"]),
-    ("Archivo", "archivo", 800, ["latin"]),
-    ("Doto", "doto", 900, ["latin"]),
-    ("Pixelify Sans", "pixelify-sans", 500, ["latin", "latin-ext"]),
-    ("Pixelify Sans", "pixelify-sans", 700, ["latin", "latin-ext"]),
-    ("Silkscreen", "silkscreen", 400, ["latin", "latin-ext"]),
+    # 5.6: tipografía legible. Atkinson Hyperlegible Next (OFL) para texto y cifras;
+    # Pixelify Sans solo para las letras de títulos y botones (sus cifras salen de Atkinson).
+    ("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 400, ["latin", "latin-ext"]),
+    ("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 500, ["latin", "latin-ext"]),
+    ("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 700, ["latin", "latin-ext"]),
+    ("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 800, ["latin", "latin-ext"]),
+    ("CamDisp", "pixelify-sans", 500, ["latin", "latin-ext"]),
+    ("CamDisp", "pixelify-sans", 700, ["latin", "latin-ext"]),
+    ("CamDisp", "atkinson-hyperlegible-next", 500, ["digits"]),
+    ("CamDisp", "atkinson-hyperlegible-next", 700, ["digits"]),
 ]
 RANGES = {
+    # cifras y signos que acompañan a los números: siempre de Atkinson, nunca en pixel
+    "digits": "U+0023-0025,U+002B-002E,U+0030-003A,U+20AC",
     "latin": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD",
     "latin-ext": "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF",
 }
 css_fonts = []
 for fam, pkg, w, subsets in faces:
     for sub in subsets:
-        f = FONTS / pkg / "files" / f"{pkg}-{sub}-{w}-normal.woff2"
+        f = FONTS / pkg / "files" / f"{pkg}-{'latin' if sub == 'digits' else sub}-{w}-normal.woff2"
         data = base64.b64encode(f.read_bytes()).decode()
         css_fonts.append(
             f'@font-face{{font-family:"{fam}";font-style:normal;font-weight:{w};font-display:swap;'
@@ -37,7 +39,7 @@ for fam, pkg, w, subsets in faces:
 
 css = "\n".join(css_fonts) + "\n" + (SRC / "style.css").read_text()
 LANG_FILES = ["lang-en.js", "lang-de.js", "lang-it.js", "lang-fr.js", "lang-fem.js"]
-ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "ui-boot.js"]
+ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "rig.js", "view3d.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "ui-boot.js"]
 web_config_path = ROOT / "web" / "config.json"
 web_config = json.loads(web_config_path.read_text(encoding="utf-8-sig")) if web_config_path.exists() else {}
 goat_api_url = os.environ.get("CAMINO_GOAT_API_URL", web_config.get("goat_api_url", "")).strip().rstrip("/")

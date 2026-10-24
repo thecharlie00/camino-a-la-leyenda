@@ -19,6 +19,7 @@ function openFk(o){Minigame.freekick(o||{skill:80,gk:70,dist:22,rand:seeded(11)}
 function openGkPen(o){Minigame.gkPenalty(o||{gk:74,skill:76,pressure:0.5,rand:seeded(21)},function(r){RESULTS.push({kind:"gkPenalty",res:r,overlays:document.querySelectorAll(".mg-ov").length});});}
 function openGkFk(o){Minigame.gkFreekick(o||{gk:74,skill:80,dist:22,rand:seeded(5)},function(r){RESULTS.push({kind:"gkFreekick",res:r,overlays:document.querySelectorAll(".mg-ov").length});});}
 </script>
+<script src="../src/anim.js"></script>
 <script src="../src/minigame.js"></script>
 </head>
 <body>

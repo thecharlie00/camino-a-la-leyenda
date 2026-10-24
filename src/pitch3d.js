@@ -4382,7 +4382,7 @@ var Pitch3D = (function () {
   /* ------------------------------------------------------------------ API */
 
   function coinButton(txt, attr, val) {
-    return '<button type="button" ' + attr + '="' + val + '" style="min-width:68px;padding:6px 10px;margin:2px;border-radius:7px;border:1px solid rgba(255,255,255,.38);background:rgba(244,190,48,.92);color:#172018;font:800 11px system-ui;cursor:pointer">' + txt + "</button>";
+    return '<button type="button" ' + attr + '="' + val + '" style="min-width:68px;padding:6px 10px;margin:2px;border-radius:7px;border:1px solid rgba(255,255,255,.38);background:rgba(244,190,48,.92);color:#172018;font:800 var(--fs-2xs) var(--f-body);cursor:pointer">' + txt + "</button>";
   }
 
   function tossContext() {
@@ -4440,14 +4440,14 @@ var Pitch3D = (function () {
   function tossCard(choice, title) {
     var a = tossAdvice(choice), html = '<div style="flex:1;min-width:0;padding:3px;border-radius:7px;background:rgba(255,255,255,.055);text-align:left">' +
       coinButton(title, "data-p3d-choice", choice);
-    for (var i = 0; i < a.pros.length; i++) html += '<span data-p3d-pro="' + choice + '" style="display:block;color:#b9ffd6;font:600 9px/1.18 system-ui;margin:2px 1px 0">✓ ' + a.pros[i] + "</span>";
-    for (var j = 0; j < a.cons.length; j++) html += '<span data-p3d-con="' + choice + '" style="display:block;color:#ffd0a8;font:600 9px/1.18 system-ui;margin:2px 1px 0">✗ ' + a.cons[j] + "</span>";
+    for (var i = 0; i < a.pros.length; i++) html += '<span data-p3d-pro="' + choice + '" style="display:block;color:#b9ffd6;font:600 var(--fs-2xs)/1.18 var(--f-body);margin:2px 1px 0">✓ ' + a.pros[i] + "</span>";
+    for (var j = 0; j < a.cons.length; j++) html += '<span data-p3d-con="' + choice + '" style="display:block;color:#ffd0a8;font:600 var(--fs-2xs)/1.18 var(--f-body);margin:2px 1px 0">✗ ' + a.cons[j] + "</span>";
     return html + "</div>";
   }
 
   function tossMeta() {
     var x = tossContext();
-    return '<div data-p3d-toss-meta="1" style="display:block;font:600 9px/1.3 system-ui;opacity:.82;margin-top:4px;text-align:left">' +
+    return '<div data-p3d-toss-meta="1" style="display:block;font:600 var(--fs-2xs)/1.3 var(--f-body);opacity:.82;margin-top:4px;text-align:left">' +
       "🌤 " + label("Clima") + ": " + x.wx.icon + " " + x.wx.name + " · " + x.wx.effect + " · " + label("Fatiga") + " ×" + x.wx.fatigue.toFixed(2).replace(".", ",") + "<br>" +
       label("Rival") + ": " + x.opp + " · " + label("Nivel") + " " + x.oppLevel + " · " + x.styleLabel + "</div>";
   }
@@ -4467,34 +4467,34 @@ var Pitch3D = (function () {
     if (!c || c.type !== "intro" || !c.coin || !c.coin.show) { hideCoinOverlay(); return; }
     var s = "", face = c.coin.face === "cara" ? label("Cara") : label("Cruz");
     if (c.stage === "coinCall") {
-      s = '<b style="display:block;font:800 12px/1.2 system-ui">' + label("Cara o cruz") + "</b>" +
-        '<span style="display:block;font:500 10px/1.25 system-ui;opacity:.84;margin-top:2px">' + label("Elige tu llamada.") + "</span>" +
+      s = '<b style="display:block;font:800 var(--fs-xs)/1.2 var(--f-body)">' + label("Cara o cruz") + "</b>" +
+        '<span style="display:block;font:500 var(--fs-2xs)/1.25 var(--f-body);opacity:.84;margin-top:2px">' + label("Elige tu llamada.") + "</span>" +
         '<div style="margin-top:4px">' + coinButton(label("Cara"), "data-p3d-coin", "cara") + coinButton(label("Cruz"), "data-p3d-coin", "cruz") + "</div>" +
-        '<span style="display:block;font:700 10px/1.3 system-ui;margin-top:4px;color:#fff0b0">⏱ ' + label("Tiempo para llamar") + ': <b data-p3d-timer="1">' + Math.max(0, Math.ceil(COIN_WAIT - (c.coin.waitT || 0))) + " s</b></span>";
+        '<span style="display:block;font:700 var(--fs-2xs)/1.3 var(--f-body);margin-top:4px;color:#fff0b0">⏱ ' + label("Tiempo para llamar") + ': <b data-p3d-timer="1">' + Math.max(0, Math.ceil(COIN_WAIT - (c.coin.waitT || 0))) + " s</b></span>";
     } else if (c.stage === "coinFlip") {
-      s = '<b style="display:block;font:800 12px system-ui">' + label("La moneda está en el aire…") + "</b>" +
-        '<span style="display:block;font:500 10px system-ui;opacity:.78;margin-top:2px">' + labelv("Has llamado {v}.", {v: c.coin.call === "cara" ? label("Cara") : label("Cruz")}) + "</span>";
+      s = '<b style="display:block;font:800 var(--fs-xs) var(--f-body)">' + label("La moneda está en el aire…") + "</b>" +
+        '<span style="display:block;font:500 var(--fs-2xs) var(--f-body);opacity:.78;margin-top:2px">' + labelv("Has llamado {v}.", {v: c.coin.call === "cara" ? label("Cara") : label("Cruz")}) + "</span>";
     } else if (c.stage === "coinResult") {
-      s = '<b style="display:block;font:800 13px system-ui">' + labelv("Salió {v}.", {v: face}) + "</b>" +
-        '<span style="display:block;font:600 10px system-ui;margin-top:2px;color:' + (c.coin.winner === 0 ? "#b9ffd6" : "#ffd0a8") + '">' +
+      s = '<b style="display:block;font:800 var(--fs-sm) var(--f-body)">' + labelv("Salió {v}.", {v: face}) + "</b>" +
+        '<span style="display:block;font:600 var(--fs-2xs) var(--f-body);margin-top:2px;color:' + (c.coin.winner === 0 ? "#b9ffd6" : "#ffd0a8") + '">' +
         (c.coin.winner === 0 ? label("Ganas el sorteo.") : label("Gana el rival.")) + "</span>";
     } else if (c.stage === "choose") {
-      s = '<b style="display:block;font:800 12px/1.2 system-ui">' + label("¡Ganaste el sorteo!") + "</b>" +
-        '<span style="display:block;font:500 10px/1.2 system-ui;opacity:.84;margin-top:2px">' + label("¿Campo o pelota?") + "</span>" +
+      s = '<b style="display:block;font:800 var(--fs-xs)/1.2 var(--f-body)">' + label("¡Ganaste el sorteo!") + "</b>" +
+        '<span style="display:block;font:500 var(--fs-2xs)/1.2 var(--f-body);opacity:.84;margin-top:2px">' + label("¿Campo o pelota?") + "</span>" +
         '<div style="display:flex;gap:4px;margin-top:4px">' + tossCard("campo", label("Campo")) + tossCard("pelota", label("Pelota")) + "</div>" +
-        '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + label("Campo cambia de lado · Pelota mantiene el saque") + "</span>" +
-        '<span style="display:block;font:700 10px/1.3 system-ui;margin-top:4px;color:#fff0b0">⏱ ' + label("Tiempo para elegir") + ': <b data-p3d-timer="1">' + Math.max(0, Math.ceil(CHOICE_WAIT - (c.coin.waitT || 0))) + " s</b></span>" + tossMeta();
+        '<span style="display:block;font:500 var(--fs-2xs)/1.2 var(--f-body);opacity:.62;margin-top:2px">' + label("Campo cambia de lado · Pelota mantiene el saque") + "</span>" +
+        '<span style="display:block;font:700 var(--fs-2xs)/1.3 var(--f-body);margin-top:4px;color:#fff0b0">⏱ ' + label("Tiempo para elegir") + ': <b data-p3d-timer="1">' + Math.max(0, Math.ceil(CHOICE_WAIT - (c.coin.waitT || 0))) + " s</b></span>" + tossMeta();
     } else if (c.stage === "rivalChoice") {
       var rp = c.coin.choice === "campo" ? label("Campo") : label("Pelota");
-      s = '<b style="display:block;font:800 12px system-ui">' + label("Gana el rival el sorteo") + "</b>" +
-        '<span style="display:block;font:600 10px/1.25 system-ui;margin-top:2px">' + labelv("Elige {v}.", {v: rp}) + "</span>" +
-        '<span data-p3d-rival-why="1" style="display:block;font:500 9px/1.25 system-ui;opacity:.82;margin-top:2px">' +
+      s = '<b style="display:block;font:800 var(--fs-xs) var(--f-body)">' + label("Gana el rival el sorteo") + "</b>" +
+        '<span style="display:block;font:600 var(--fs-2xs)/1.25 var(--f-body);margin-top:2px">' + labelv("Elige {v}.", {v: rp}) + "</span>" +
+        '<span data-p3d-rival-why="1" style="display:block;font:500 var(--fs-2xs)/1.25 var(--f-body);opacity:.82;margin-top:2px">' +
         (c.coin.rivalWhy || label("Elige el lado que mejor encaja con su plan de partido.")) + "</span>" + tossMeta();
     } else if (c.stage === "choiceResult") {
       var cc = c.coin.choice === "campo" ? label("Campo elegido") : label("Saque elegido");
       var res = c.coin.winner === 1 ? label("El rival decide: ") : "";
-      s = '<b style="display:block;font:800 12px system-ui">' + res + cc + "</b>" +
-        '<span data-p3d-choice-result="' + (c.coin.choice || "") + '" style="display:block;font:500 10px/1.25 system-ui;opacity:.82;margin-top:2px">' +
+      s = '<b style="display:block;font:800 var(--fs-xs) var(--f-body)">' + res + cc + "</b>" +
+        '<span data-p3d-choice-result="' + (c.coin.choice || "") + '" style="display:block;font:500 var(--fs-2xs)/1.25 var(--f-body);opacity:.82;margin-top:2px">' +
         (c.coin.choice === "campo" ? label("Cambiamos de lado antes del saque. Conservas el saque de centro.") : label("No cambiamos de lado. Conservas el saque de centro.")) + "</span>" +
         tossMeta();
     }
@@ -4547,17 +4547,17 @@ var Pitch3D = (function () {
     }
     hud = document.createElement("div");
     hud.className = "lpitch3d-hud";
-    hud.style.cssText = "position:absolute;z-index:19;left:6px;bottom:6px;padding:5px 7px;border-radius:5px;background:rgba(5,15,12,.78);color:#b9ffd6;font:600 10px ui-monospace,monospace;pointer-events:none";
+    hud.style.cssText = "position:absolute;z-index:19;left:6px;bottom:6px;padding:5px 7px;border-radius:5px;background:rgba(5,15,12,.78);color:#b9ffd6;font:600 var(--fs-2xs) ui-monospace,monospace;pointer-events:none";
     hud.textContent = "3D · midiendo rendimiento…";
     host.appendChild(hud);
     scoreHud = document.createElement("div");
     scoreHud.className = "lpitch3d-score";
     scoreHud.setAttribute("aria-live", "polite");
-    scoreHud.style.cssText = "position:absolute;z-index:19;left:6px;top:6px;display:none;align-items:center;gap:5px;padding:4px 7px;border-radius:5px;background:rgba(5,15,12,.80);color:#fff;font:700 10px/1 ui-monospace,monospace;pointer-events:none";
+    scoreHud.style.cssText = "position:absolute;z-index:19;left:6px;top:6px;display:none;align-items:center;gap:5px;padding:4px 7px;border-radius:5px;background:rgba(5,15,12,.80);color:#fff;font:700 var(--fs-2xs)/1 ui-monospace,monospace;pointer-events:none";
     host.appendChild(scoreHud);
     replayBtn = document.createElement("button"); replayBtn.type = "button";
     replayBtn.textContent = "↺"; replayBtn.setAttribute("aria-label", label("Ver la repetición"));
-    replayBtn.style.cssText = "position:absolute;z-index:20;right:6px;bottom:6px;width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,.35);background:rgba(8,20,18,.82);color:#fff;font:700 15px system-ui;cursor:pointer";
+    replayBtn.style.cssText = "position:absolute;z-index:20;right:6px;bottom:6px;width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,.35);background:rgba(8,20,18,.82);color:#fff;font:700 var(--fs-base) var(--f-body);cursor:pointer";
     replayBtn.addEventListener("click", function (ev) { ev.preventDefault(); ev.stopPropagation(); startReplay(); });
     host.appendChild(replayBtn);
     try { if (window.getComputedStyle(host).position === "static") host.style.position = "relative"; } catch (ignore) {}
@@ -5021,7 +5021,7 @@ var Pitch3D = (function () {
     host = el; mountOpts = o || {}; introSeen = false;
     if (!toggle) {
       toggle = document.createElement("button"); toggle.type = "button"; toggle.className = "p3dtoggle";
-      toggle.style.cssText = "position:absolute;z-index:20;top:6px;right:6px;padding:6px 9px;border:1px solid rgba(255,255,255,.4);border-radius:6px;background:rgba(8,20,18,.88);color:#fff;font:600 11px system-ui;cursor:pointer";
+      toggle.style.cssText = "position:absolute;z-index:20;top:6px;right:6px;padding:6px 9px;border:1px solid rgba(255,255,255,.4);border-radius:6px;background:rgba(8,20,18,.88);color:#fff;font:600 var(--fs-2xs) var(--f-body);cursor:pointer";
       toggle.addEventListener("click", function (ev) { ev.preventDefault(); ev.stopPropagation(); setMode(!mounted); });
     }
     if (toggle.parentNode !== host) host.appendChild(toggle);

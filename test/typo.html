@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tipografía — banco de legibilidad (solo desarrollo)</title>
+<!-- Solo desarrollo: no se empaqueta en la app. Comprueba que 5/2/8, 3/8, 6/9/0 y 1/7 se distinguen
+     en todos los tamaños de la escala, con la fuente de texto, la de títulos y la de marcadores. -->
+<link rel="stylesheet" href="../fonts/node_modules/@fontsource/atkinson-hyperlegible-next/latin-400.css">
+<link rel="stylesheet" href="../fonts/node_modules/@fontsource/atkinson-hyperlegible-next/latin-500.css">
+<link rel="stylesheet" href="../fonts/node_modules/@fontsource/atkinson-hyperlegible-next/latin-700.css">
+<link rel="stylesheet" href="../fonts/node_modules/@fontsource/atkinson-hyperlegible-next/latin-800.css">
+<style>
+@font-face{font-family:"CamDisp";font-weight:500;src:url(../fonts/node_modules/@fontsource/pixelify-sans/files/pixelify-sans-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"CamDisp";font-weight:700;src:url(../fonts/node_modules/@fontsource/pixelify-sans/files/pixelify-sans-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"CamDisp";font-weight:500;src:url(../fonts/node_modules/@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-500-normal.woff2) format("woff2");unicode-range:U+0023-0025,U+002B-002E,U+0030-003A,U+20AC}
+@font-face{font-family:"CamDisp";font-weight:700;src:url(../fonts/node_modules/@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-700-normal.woff2) format("woff2");unicode-range:U+0023-0025,U+002B-002E,U+0030-003A,U+20AC}
+</style>
+<link rel="stylesheet" href="../src/style.css">
+<style>
+body { padding: 12px; }
+.pane { padding: 10px 12px; border-radius: 4px; margin-bottom: 12px; }
+.pane.light { background: #f4f1e8; color: #14181a; }
+.pane.dark { background: var(--night); color: var(--chalk); border: 1px solid var(--line); }
+.row { display: flex; gap: 10px; align-items: baseline; padding: 2px 0; white-space: nowrap; overflow: hidden; }
+.row i { font: 400 11px var(--f-body); opacity: .6; width: 70px; flex: none; font-style: normal; }
+.disp { font-family: var(--f-disp); font-weight: 700; }
+h2 { font-size: var(--fs-lg); margin: 4px 0 6px; }
+</style>
+</head>
+<body>
+<div id="out"></div>
+<script>
+var SIZES = ["2xs", "xs", "sm", "md", "base", "lg", "xl", "2xl", "3xl", "score"];
+var SAMPLES = ["0123456789", "528 825 258 385 669 171", "88 55 22 58 85"];
+var html = "";
+["dark", "light"].forEach(function (bg) {
+  [["Texto (Atkinson)", ""], ["Títulos (CamDisp)", "disp"]].forEach(function (f) {
+    html += '<div class="pane ' + bg + '"><h2>' + f[0] + " · fondo " + (bg === "dark" ? "oscuro" : "claro") + "</h2>";
+    SIZES.forEach(function (s) {
+      html += '<div class="row ' + f[1] + '" style="font-size:var(--fs-' + s + ')"><i>' + s + "</i>" + SAMPLES.join(" · ") + "</div>";
+    });
+    html += "</div>";
+  });
+});
+document.getElementById("out").innerHTML = html;
+</script>
+</body>
+</html>

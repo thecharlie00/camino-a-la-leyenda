@@ -46,9 +46,9 @@ for a, b in (("var GOAT_WEB_BUILD = false;", "var GOAT_WEB_BUILD = true;"),
 (OUT / "jugar" / "juego.html").write_text(html)
 
 # --- tipografías del juego, servidas como archivos ---
-faces = [("Big Shoulders Display", "big-shoulders-display", 800), ("Big Shoulders Display", "big-shoulders-display", 900),
-         ("Archivo", "archivo", 400), ("Archivo", "archivo", 700), ("Archivo", "archivo", 800), ("Doto", "doto", 900),
-         ("Pixelify Sans", "pixelify-sans", 500), ("Pixelify Sans", "pixelify-sans", 700), ("Silkscreen", "silkscreen", 400)]
+faces = [("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 400), ("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 500),
+         ("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 700), ("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 800),
+         ("CamDisp", "pixelify-sans", 500), ("CamDisp", "pixelify-sans", 700)]
 css = []
 for fam, pkg, w in faces:
     for sub in ("latin", "latin-ext"):
@@ -58,6 +58,9 @@ for fam, pkg, w in faces:
         shutil.copy(src, OUT / "fonts" / src.name)
         rng = "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212" if sub == "latin" else "U+0100-024F,U+1E00-1EFF,U+20A0-20C0"
         css.append(f'@font-face{{font-family:"{fam}";font-weight:{w};font-style:normal;font-display:swap;src:url(fonts/{src.name}) format("woff2");unicode-range:{rng}}}')
+# las cifras de los títulos pixelados salen de Atkinson (legibles), definidas después para que ganen
+for w in (500, 700):
+    css.append(f'@font-face{{font-family:"CamDisp";font-weight:{w};font-style:normal;font-display:swap;src:url(fonts/atkinson-hyperlegible-next-latin-{w}-normal.woff2) format("woff2");unicode-range:U+0023-0025,U+002B-002E,U+0030-003A,U+20AC}}')
 (OUT / "site.css").write_text("\n".join(css) + "\n" + (WEB / "site.css").read_text())
 shutil.copy(WEB / "site.js", OUT / "site.js")
 shutil.copy(WEB / "goat-ladder.js", OUT / "goat-ladder.js")
@@ -97,7 +100,7 @@ def head(R):
          '<meta name="theme-color" content="#0b1417">\n'
          f'<link rel="icon" type="image/png" href="{R}img/favicon.png">\n<link rel="apple-touch-icon" href="{R}img/apple-touch-icon.png">\n'
          f'<link rel="manifest" href="{R}manifest.webmanifest">\n'
-         f'<link rel="preload" href="{R}fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>\n'
+         f'<link rel="preload" href="{R}fonts/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>\n'
          f'<link rel="stylesheet" href="{R}site.css">')
     if client:
         s += (f'\n<meta name="google-adsense-account" content="{client}">'

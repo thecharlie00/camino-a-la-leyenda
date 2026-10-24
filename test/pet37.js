@@ -13,7 +13,7 @@ fs.mkdirSync(OUT, { recursive: true });
   p.on("console", m => { if (m.type() === "error") errs.push("console: " + m.text()); });
   await p.goto("file://" + path.join(__dirname, "../dist/index.html"));
   await p.waitForTimeout(300);
-  const click = async (s) => { const e = await p.$(s); if (!e) return false; try { await e.click({ timeout: 4000 }); } catch (er) { return false; } await p.waitForTimeout(90); return true; };
+  const click = async (s) => { const e = await p.$(s); if (!e) return false; try { await e.click({ timeout: 4000 }); } catch (er) { return false; } await p.waitForTimeout(90); /* 5.6: comprar o ponerse un accesorio abre la vista 3D; se cierra para seguir */ await p.evaluate(() => { if (window.View3D && View3D.isOpen()) View3D.close(); document.querySelectorAll(".v3d").forEach(n => n.remove()); }); return true; };
   await click('[data-a="setlang"][data-v="es"]');
   await click('[data-a="newgame"]'); await click('[data-a="pickmode"][data-v="p"]');
   await p.fill("#fn", "Leo"); await p.fill("#ln", "Mascota");

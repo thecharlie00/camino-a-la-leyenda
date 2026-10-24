@@ -32,7 +32,11 @@
   };
   var BOX = 155;
   /* posición automática de cada accesorio: centro x y borde superior en % de la caja, tamaño en em */
-  function accBase(ico, sl) {
+  /* el accesorio que lleva la mascota en un hueco (para colocarlo según su dibujo) */
+  function accIcoOf(pt, sl) { var k = petEq(pt)[sl], a = k && petAccDef(k); return a ? a.ico : null; }
+  function accBase(ico, sl, aico) {
+    /* 5.6: con sprite de píxeles, la posición sale de los anclajes de la mascota y del dibujo del accesorio */
+    if (aico && typeof PX !== "undefined" && PX.petAccPlace) { var q = PX.petAccPlace(ico, aico, sl); if (q) return q; }
     var F = FACE[ico] || {f: [77, 72, 50], h: [77, 36, 50], n: [77, 128]};
     if (sl === "t") return {x: 128 / BOX * 100, y: (122 - 21) / BOX * 100, s: 0.42};
     if (sl === "f") { var sz = F.f[2] * 1.45; return {x: F.f[0] / BOX * 100, y: (F.f[1] - sz * 0.52) / BOX * 100, s: sz / 100}; }
@@ -42,7 +46,7 @@
   /* ajustes del modo edición: por emoji (cada etapa tiene su dibujo) y por hueco */
   function accAdj(pt, ico, sl) { var A = pt.adj && pt.adj[ico]; return (A && A[sl]) || null; }
   function accStyle(pt, ico, sl) {
-    var b = accBase(ico, sl), j = accAdj(pt, ico, sl) || {}, sc = clamp(j.s || 1, 0.4, 2.5);
+    var b = accBase(ico, sl, accIcoOf(pt, sl)), j = accAdj(pt, ico, sl) || {}, sc = clamp(j.s || 1, 0.4, 2.5);
     return "font-size:" + (b.s * sc).toFixed(3) + "em;left:" + (b.x + (j.x || 0)).toFixed(1) + "%;top:" + (b.y + (j.y || 0)).toFixed(1) + "%;bottom:auto;right:auto;transform:translateX(-50%)" + (j.r ? " rotate(" + j.r + "deg)" : "");
   }
   /* dibujo de la mascota con su color, fondo y accesorios */
@@ -58,6 +62,8 @@
     return s + "</span>";
   }
   U.petArt = art;
+  /* posición de cada accesorio (fracciones de la caja y escala relativa), con los ajustes del modo edición: la usa la vista 3D */
+  U.petAccPos = function (pt, ico, sl) { var b = accBase(ico, sl, accIcoOf(pt, sl)), j = accAdj(pt, ico, sl) || {}, sc = clamp(j.s || 1, 0.4, 2.5); return {x: (b.x + (j.x || 0)) / 100, y: (b.y + (j.y || 0)) / 100, s: b.s * sc}; };
   U.petNeed = function () { return !!(S && S.p && !U.isMgr() && petOn() && petNeeds()); };
 
   /* tarjeta en la pestaña Jugador */
@@ -101,16 +107,27 @@
     if (v === "trick") U.toast(r.learned ? tr("¡{pet} ha aprendido un truco nuevo! Ya sabe {n}.", {pet: pt.nm, n: pt.tricks}) : tr("{pet} todavía no lo pilla, pero os lo habéis pasado bien.", {pet: pt.nm}));
     else U.toast(tr(CARE_TXT[v] || CARE_TXT.pat, {pet: pt.nm}));
     rer();
+    /* 5.6: el truco nuevo se estrena en la vista 3D */
+    if (v === "trick" && r.learned && pt.tricks <= 8) show3d({trick: pt.tricks - 1});
   };
   U.actions.petcare = function () { if (petCare()) { U.toast(tr("Pasas la tarde con {pet}: el vínculo crece.", {pet: petOf().nm})); rer(); } };
   U.actions.petname = function () { var i = document.getElementById("petrn"); if (i && petRename(i.value)) { U.toast(tr("Ahora se llama {pet}.", {pet: petOf().nm})); rer(); } };
   U.actions.petcol = function (b, v) { if (petSetCol(v)) rer(); };
   U.actions.petbg = function (b, v) { if (petSetBg(v)) rer(); };
-  U.actions.petwear = function (b, v) { if (petWear(v)) rer(); };
+  function show3d(o) {
+    if (typeof View3D === "undefined" || !View3D) return;
+    o.from = document.querySelector(".sheet .pethero .petart") || document.querySelector(".petart");
+    setTimeout(function () { View3D.pet(o); }, 60);
+  }
+  U.actions.pet3d = function () { show3d({}); };
+  U.actions.petwear = function (b, v) {
+    var pt = petOf(), a = petAccDef(v), was = pt && a ? petEq(pt)[a.s] : null;
+    if (petWear(v)) { rer(); if (was !== v) show3d({acc: v}); }
+  };
   U.actions.petbuy = function (b, v) {
     var a = petAccDef(v), r = petBuyAcc(v);
     if (r.poor) { U.toast(tr("No tienes dinero suficiente.")); return; }
-    if (r.ok) { U.toast(tr("¡Compra hecha! {pet} ya lleva {acc}.", {pet: petOf() ? petOf().nm : "", acc: a.ico + " " + tr(a.n)})); rer(); }
+    if (r.ok) { U.toast(tr("¡Compra hecha! {pet} ya lleva {acc}.", {pet: petOf() ? petOf().nm : "", acc: a.ico + " " + tr(a.n)})); rer(); show3d({acc: v}); }
   };
 
   function careView(pt, d) {
@@ -234,6 +251,7 @@
       petAccSync(true);
       var d = petDef(pt.k), st = petStage(pt), v = U.ui().petView === "style" || U.ui().petView === "edit" ? U.ui().petView : "care";
       s = '<h2>' + tr("Tu mascota") + '</h2><div class="stack"><div class="pethero">' + art(pt, petSize(pt) + 30) + '<div><b class="petnm">' + h(pt.nm) + "</b><small>" + h(tr(d.n)) + " · " + trn(pt.age, "{n} año", "{n} años") + "</small>" + (petNeeds() ? '<small class="petneed">' + tr("Necesita atención") + "</small>" : "") + "</div></div>";
+      if (typeof View3D !== "undefined" && View3D && View3D.supported()) s += '<button class="btn v3dbtn" data-a="pet3d">' + tr("Ver en 3D") + (pt.tricks ? " · " + trn(Math.min(pt.tricks, 8), "{n} truco", "{n} trucos") : "") + "</button>";
       s += '<ol class="petstages">' + PET_STAGE.map(function (x, i) { return '<li class="' + (i < st ? "done" : i === st ? "now" : "") + '">' + h(tr(x)) + "</li>"; }).join("") + "</ol>";
       if (v === "edit") { s = '<h2>' + tr("Colocar accesorios") + '</h2><div class="stack">' + editView(pt); }
       else {
