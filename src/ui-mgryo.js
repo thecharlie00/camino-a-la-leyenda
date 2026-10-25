@@ -6,20 +6,9 @@
   function rm() { return document.documentElement.classList.contains("rm"); }
   var SN = {tac: N_("Táctica"), mot: N_("Motivación"), ves: N_("Vestuario"), pre: N_("Prensa"), jov: N_("Jóvenes"), fis: N_("Físico"), neg: N_("Negociación"), lec: N_("Lectura")};
   /* ---------- aspecto del míster (ropa equipada y la piel y el pelo del jugador que fue) ---------- */
-  function look() {
-    var o = {suit: "#2a3340", tie: "#7a1d1d", shirt: "#f4f4f0", shoes: "#2a1a10", coat: null, scarf: null, glasses: null, skin: "#c18a5e", hair: "#2a1a10"};
-    try {
-      var g = GXI.gear("m"), it = function (s) { var id = g && g.eq[s]; return id ? GXI.item(id) : null; };
-      var su = it("suit"); if (su) { o.suit = su.look.c; if (su.look.c2) o.tie = su.look.c2; }
-      var ti = it("tie"); if (ti) o.tie = ti.look.c; var sh = it("shoes"); if (sh) o.shoes = sh.look.c;
-      var co = it("coat"); if (co) o.coat = co.look.c; var sc = it("scarf"); if (sc) o.scarf = sc.look.c; var gl = it("glasses"); if (gl) o.glasses = gl.look.c;
-      var L = S.p && S.p.life, c = L && L.cos || {};
-      var sk = LIFE_COS.skin.filter(function (x) { return x.id === (c.skin || "s2"); })[0], hc = LIFE_COS.hcol.filter(function (x) { return x.id === (c.hcol || "h1"); })[0];
-      if (sk) o.skin = sk.c; if (hc) o.hair = hc.c;
-    } catch (e) {}
-    return o;
-  }
-  U.coachLook = function () { if (!S || S.mode !== "mgr") return null; var o = look(); return {suit: o.coat || o.suit, trousers: o.suit, tie: o.tie, shoes: o.shoes, skin: o.skin, hair: o.hair, fem: S.g === "f"}; };
+  function look() { return PLook.coach(); }
+  /* ctx: la ocasión (partido importante, frío…) decide traje, chándal y abrigo; sin ctx, lo de «Tu míster» */
+  U.coachLook = function (ctx) { if (!S || S.mode !== "mgr") return null; var o = PLook.coach(ctx); return {suit: o.coat || o.suit, trousers: o.suit, tie: o.tie, shoes: o.shoes, skin: o.skin, hair: o.hair, fem: S.g === "f", rig: PLook.coachRig(o)}; };
   /* ---------- figura vóxel: tres poses (reposo, brazos cruzados, señalando) ---------- */
   function fig(o, pose) {
     var V = {};

@@ -2162,7 +2162,7 @@
     if (!LV.el.querySelector("#lvbody")) {
       LV.el.innerHTML = '<div class="lpanel"><div id="lvtop"></div><div class="lpitchw" id="lvpitch"></div><div id="lvbody"></div><div id="lvctl"></div></div>';
       LV.ctlKey = null;
-      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === "f", pet: typeof petOf === "function" ? petOf() : null, coach: UIX.coachLook ? UIX.coachLook() : null, mySide: f.home ? 0 : 1, board: liveBoard(f), spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
+      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === "f", pet: typeof petOf === "function" ? petOf() : null, coach: UIX.coachLook ? UIX.coachLook({kind: "match", big: (f.imp || 0) >= 1, cold: typeof PLook !== "undefined" && PLook.cold(S.live && S.live.wx)}) : null, mySide: f.home ? 0 : 1, board: liveBoard(f), spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
         cinematics: !L.min,
         lab: {replay: tr("REPETICIÓN"), goal: tr("GOL"), goalOf: tr("¡GOL DE {n}!"), post: tr("¡PALO!"), half: tr("FIN DEL PRIMER TIEMPO"), end: tr("FINAL"), off: tr("FUERA DE JUEGO"), foul: tr("FALTA"), thr: tr("SAQUE DE BANDA"), cor: tr("CÓRNER"), gk: tr("SAQUE DE PUERTA")},
         onSpeed: function (n) { if (!LV) return; LV.speed = n; LV.run = true; LV.resume = false; liveTick(); liveRender(); }});

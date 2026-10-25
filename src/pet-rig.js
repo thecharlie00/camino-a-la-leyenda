@@ -11,6 +11,7 @@ var PetRig = (function () {
   function rot(rx, ry, rz) { var m = MX.m4(); if (ry) m = mul(m, MX.RY(ry)); if (rx) m = mul(m, MX.RX(rx)); if (rz) m = mul(m, MX.RZ(rz)); return m; }
   function Spring(k, d) { this.v = 0; this.x = 0; this.k = k || 60; this.d = d || 8; }
   Spring.prototype.step = function (target, dt) { var a = (target - this.x) * this.k - this.v * this.d; this.v += a * dt; this.x += this.v * dt; return this.x; };
+  var RK = ["y", "rx", "ry", "rz", "s", "sy", "ox", "oz"];  /* campos de la raíz que se funden entre clips */
   var WET = {m: [0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.78], o: [0, 0.01, 0.03]};
   var SMALL = {hamster: 1, hedgehog: 1, rabbit: 1, cat: 1, fennec: 1, tarantula: 1, macaw: 1, iguana: 1, turtle: 1, python: 1};
 
@@ -145,6 +146,12 @@ var PetRig = (function () {
   Actor.prototype.update = function (dt, world) {
     var a = this, P = this.P, R = P.root, M = this.M;
     this.t += dt;
+    /* 5.7: cada cambio de clip (empieza, acaba o se interrumpe) funde desde la última pose en 0,2 s: nada corta de golpe */
+    if (this.clip !== this._cprev) {
+      /* la pose de partida se copia solo en las transiciones; cada fotograma reutiliza el mismo búfer (sin basura en móviles flojos) */
+      if (this.lastP) { var cp = {P: {}, R: Object.assign({}, this.lastP.R)}; for (var cn in this.lastP.P) cp.P[cn] = this.lastP.P[cn].slice(); this.xf = {t: 0, d: this.clip && this._cprev ? 0.16 : 0.22, P: cp.P, R: cp.R}; }
+      this._cprev = this.clip;
+    }
     for (var n in P.r) { var r = P.r[n]; r[0] = r[1] = r[2] = 0; }
     R.y = 0; R.rx = 0; R.ry = 0; R.rz = 0; R.s = 1; R.sy = 1; R.ox = 0; R.oz = 0; R.pivY = this.midY; R.pivZ = 0;
     /* locomoción hacia el objetivo */
@@ -162,7 +169,8 @@ var PetRig = (function () {
     } else this.spd = lerp(this.spd, 0, Math.min(1, dt * 8));
     if (world && world.bounds) { var B = world.bounds; this.x = cl(this.x, B[0], B[2]); this.z = cl(this.z, B[1], B[3]); }
     var vx = (this.x - px) / Math.max(dt, 1e-4), vz = (this.z - pz) / Math.max(dt, 1e-4);
-    this.ax = lerp(this.ax, (vx - this.lx) / Math.max(dt, 1e-4), 0.2); this.az = lerp(this.az, (vz - this.lz) / Math.max(dt, 1e-4), 0.2); this.lx = vx; this.lz = vz;
+    /* 5.7: aceleración con un paso mínimo de 1/60 s: a fps bajos o irregulares las orejas no dan latigazos */
+    var da = Math.max(dt, 1 / 60); this.ax = lerp(this.ax, cl((vx - this.lx) / da, -40, 40), 0.2); this.az = lerp(this.az, cl((vz - this.lz) / da, -40, 40), 0.2); this.lx = vx; this.lz = vz;
     /* gravedad (saltos al soltarla) */
     if (!this.held && !this.float && this.y > 0) { this.vy -= 9.8 * dt; this.y += this.vy * dt; if (this.y <= 0) { this.y = 0; if (this.vy < -1.2) { this.say("dizzy", 0.8); if (world && world.onLand) world.onLand(this, -this.vy); } this.vy = 0; } }
     /* andar */
@@ -177,6 +185,8 @@ var PetRig = (function () {
     }
     /* respiración y cola en reposo */
     R.sy *= 1 + Math.sin(this.t * (this.clip && this.clip.n === "sleep" ? 1.6 : 3)) * 0.012;
+    /* 5.7: al tocarla se encoge un instante (respuesta inmediata al dedo); con una caricia brusca, más */
+    if (this.flinch > 0) { var fl0 = Math.min(1, this.flinch); R.sy *= 1 - 0.07 * fl0; R.y -= 0.004 * fl0; this.flinch = Math.max(0, this.flinch - dt * 7); }
     var mood = this.mood == null ? 70 : this.mood;
     wag(this, P, 6 + mood / 10, 0.12 + mood / 300);
     if (this.plan === "snake" && this.spd < 0.02) M.order.forEach(function (nm, i) { if (nm.indexOf("seg") === 0) add(P, nm, 0, Math.sin(a.t * 1.2 - i * 0.7) * 0.12, 0); });
@@ -203,8 +213,21 @@ var PetRig = (function () {
     var accF = cl((this.ax * Math.sin(this.yaw) + this.az * Math.cos(this.yaw)) * 0.03, -0.6, 0.6), accY = this.held ? Math.sin(this.t * 8) * 0.3 : 0;
     ["earL1", "earR1", "earL2", "earR2"].forEach(function (n) {
       if (!M.parts[n]) return; var s = a.sp[n] || (a.sp[n] = new Spring(70, 7));
-      var v = s.step(accF + accY + (a.vy > 0.5 ? -0.4 : 0), dt); add(P, n, v * (n.charAt(4) === "2" ? 1.5 : 1));
+      /* muelle en subpasos de como mucho 1/60 s: estable aunque el móvil vaya a 20 fps */
+      var tg = accF + accY + (a.vy > 0.5 ? -0.4 : 0), v = s.x, nn = Math.max(1, Math.ceil(dt * 60)); for (var si = 0; si < nn; si++) v = s.step(tg, dt / nn);
+      add(P, n, cl(v, -1.2, 1.2) * (n.charAt(4) === "2" ? 1.5 : 1));
     });
+    if (this.xf) {
+      var xf = this.xf; xf.t += dt; var kx = Math.min(1, xf.t / xf.d), wgt = 1 - kx * kx * (3 - 2 * kx);
+      if (wgt <= 0.001) this.xf = null;
+      else {
+        for (var pn in P.r) { var pr = P.r[pn], pf = xf.P[pn]; if (pf) { pr[0] += (pf[0] - pr[0]) * wgt; pr[1] += (pf[1] - pr[1]) * wgt; pr[2] += (pf[2] - pr[2]) * wgt; } }
+        for (var rk = 0; rk < RK.length; rk++) { var kk = RK[rk]; if (xf.R[kk] != null && R[kk] != null) R[kk] += (xf.R[kk] - R[kk]) * wgt; }
+      }
+    }
+    var snap = this.lastP || (this.lastP = {P: {}, R: {}});
+    for (var sn in P.r) { var dst = snap.P[sn] || (snap.P[sn] = [0, 0, 0]), src = P.r[sn]; dst[0] = src[0]; dst[1] = src[1]; dst[2] = src[2]; }
+    for (var ri = 0; ri < RK.length; ri++) snap.R[RK[ri]] = R[RK[ri]];
     /* expresión */
     this.exprT -= dt; this.blinkT -= dt;
     if (this.blinkT < 0) this.blinkT = 2.5 + Math.random() * 3;
@@ -235,7 +258,9 @@ var PetRig = (function () {
       if (!q.rel) { q.W = W[q.parent]; return; }
       var base = q.chainParent != null ? self.acc[q.chainParent].W : W[q.parent];
       var tgt = q.cape ? 0.15 + spd * 1.6 : q.wing ? Math.sin(self.t * (self.y > 0.02 ? 22 : 3)) * (self.y > 0.02 ? 0.8 : 0.08) : spd * 0.9;
-      var v = q.spr.step(tgt + (self.held ? Math.sin(self.t * 7) * 0.2 : 0), Math.min(0.05, self.dtLast || 0.016));
+      var tq = tgt + (self.held ? Math.sin(self.t * 7) * 0.2 : 0), dq = Math.min(0.05, self.dtLast || 0.016), nq = Math.max(1, Math.ceil(dq * 60)), v = q.spr.x;
+      for (var qi = 0; qi < nq; qi++) v = q.spr.step(tq, dq / nq);
+      v = cl(v, -1.4, 1.4);
       var m = mul(base, T(q.rel[0], q.rel[1], q.rel[2]));
       q.W = q.wing ? mul(m, MX.RZ(q.wing * (0.3 + v))) : mul(m, MX.RX(q.cape ? -v : v));
     });
@@ -249,7 +274,13 @@ var PetRig = (function () {
     var fm = M.faceMesh(this.curExpr()); if (fm) E.bake(fm, W[M.facePart], tint);
     if (this.dirt > 0) M.order.forEach(function (n) { if (n === "body" || n === "head" || /leg.*2|seg/.test(n)) { var dm = M.dirtMesh(n, self.dirt); if (dm) E.bake(dm, W[n]); } });
     this.acc.forEach(function (q) { E.bake(q.verts, q.W, tint); });
+    if (this.toy && this.toy.verts && !this.toyHide) E.bake(this.toy.verts, this.toyM());
     if (this.mouth) { var hp = M.parts.jaw ? "jaw" : M.facePart; E.bake(this.mouth.verts, mul(W[hp], T(0, -0.02, 0.05))); }
+  };
+  /* 5.7: juguete equipado (ranura t): descansa en el suelo junto a las patas delanteras y gira con la mascota */
+  Actor.prototype.toyM = function () {
+    var s = this.o.scale || 1, d = Math.max(0.12, this.M.height * 0.6) * s, a = this.yaw + 0.85;
+    return mul(mul(T(this.x + Math.sin(a) * d, 0, this.z + Math.cos(a) * d), MX.RY(this.yaw)), MX.S(s, s, s));
   };
   /* posición de un ancla en el mundo (para partículas, bocadillos y objetos) */
   Actor.prototype.anchor = function (name) {

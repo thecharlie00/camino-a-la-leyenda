@@ -15,13 +15,17 @@ var PetAudio = (function () {
   }
   function ok() { if (!vol) return false; if (!init()) return false; if (ac.state === "suspended") { try { ac.resume(); } catch (e) {} } return true; }
   function env(g, t, a, peak, dcy) { g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + dcy); }
+  /* 5.7: cada sonido varía un poco de tono y volumen para que no suene siempre igual */
+  function jit(a) { return 1 + (Math.random() - 0.5) * a; }
   function tone(type, f0, f1, dur, peak, delay, filt) {
+    var j = jit(0.12); f0 *= j; f1 *= j; peak *= jit(0.2); dur *= jit(0.1);
     var t = ac.currentTime + (delay || 0), o = ac.createOscillator(), g = ac.createGain(), node = o;
     o.type = type; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(Math.max(20, f1), t + dur);
     if (filt) { var f = ac.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = filt; o.connect(f); node = f; }
     node.connect(g); g.connect(out); env(g, t, Math.min(0.02, dur * 0.2), peak, dur); o.start(t); o.stop(t + dur + 0.05);
   }
   function hiss(dur, fc, q, peak, delay, type) {
+    fc *= jit(0.15); peak *= jit(0.2);
     var t = ac.currentTime + (delay || 0), s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain();
     s.buffer = noise; f.type = type || "bandpass"; f.frequency.value = fc; f.Q.value = q || 1;
     s.connect(f); f.connect(g); g.connect(out); env(g, t, 0.01, peak, dur); s.start(t, Math.random() * 0.5); s.stop(t + dur + 0.05);

@@ -227,7 +227,7 @@ var SpPlay = (function () {
     var press = cl(opt.press != null ? opt.press : opt.pressure || 0.3, 0, 1);
     var ui = shell({kicker: t("Bajo palos"), title: t("Falta en contra"), gk: true, closable: !!opt.training});
     var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), boardEl: ui.board, tod: opt.tod || I.todNow(), wx: opt.wx});
-    var kit = I.myKit(), me = S3.man(Object.assign({}, kit, {gk: true, shirt: "#2ad15a", shorts: "#111", gloves: "#f07a24", num: 1}));
+    var kit = I.myKit(), me = S3.man(Object.assign({}, kit, {gk: true, shirt: "#2ad15a", shorts: "#111", gloves: kit.gloves || "#f07a24", num: 1}));
     var taker = S3.man(I.rivalKit(false)), ref = S3.man({shirt: "#111", shorts: "#111", socks: "#111", official: true, hairStyle: 1});
     var striker = S3.man(Object.assign(I.rivalKit(false), {num: 9})); S3.place(striker, 13, ball.z * 0.3 + 2, true); S3.faceTo(striker, 0, 0); striker.play("idle");
     var spec = opt.taker || pick(D.fkTakers, rand);
@@ -456,7 +456,7 @@ var SpPlay = (function () {
     var rand = typeof opt.rand === "function" ? opt.rand : Math.random, press = cl(opt.press || opt.pressure * 0.6 || 0, 0, 1);
     var ui = shell({kicker: t("Bajo palos"), title: t("Penalti en contra"), gk: true, closable: !!opt.training});
     var S3 = ui.S3 = SP3.create(ui.stage, {ctx: opt.ctx || I.ctxFor(press), cols: I.colsNow(), pet: I.petNow(), boardEl: ui.board, tod: opt.tod || I.todNow(), wx: opt.wx});
-    var kit = I.myKit(), me = S3.man(Object.assign({}, kit, {gk: true, shirt: "#2ad15a", shorts: "#111", gloves: "#f07a24", num: 1}));
+    var kit = I.myKit(), me = S3.man(Object.assign({}, kit, {gk: true, shirt: "#2ad15a", shorts: "#111", gloves: kit.gloves || "#f07a24", num: 1}));
     var taker = S3.man(I.rivalKit(false)), ref = S3.man({shirt: "#111", shorts: "#111", socks: "#111", official: true, hairStyle: 1});
     var prof = opt.taker || pick(D.takers, rand), gz = 0, distract = 0;
     S3.place(me, 0.25, 0, false); me.play("gkready", {amp: 0.02});

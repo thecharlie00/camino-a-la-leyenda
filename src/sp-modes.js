@@ -91,8 +91,8 @@ var SpModes = (function () {
     try {
       var cc = clubColors(W.clubs[S.p.club].n); o.shirt = cc[0]; o.shorts = cc[1] || "#f2f2f2"; o.socks = cc[0]; o.trim = cc[1];
       if (S.p.num) o.num = S.p.num; o.fem = S.g === "f";
-      var L = S.p.life || {}; if (L.look) { if (L.look.skin) o.skin = L.look.skin; if (L.look.hair) o.hair = L.look.hair; }
-      var eq = L.eq || {}; if (eq.boots) o.boots = eq.boots.c || o.boots;
+      /* 5.7: el aspecto sale de PLook (Look + equipamiento), igual que en «Yo» */
+      if (typeof PLook !== "undefined" && S.mode !== "mgr") { var pl = PLook.player(); o = PLook.rig(pl, {ctx: "pitch", outfield: true, gk: false, gloves: pl.gloves ? pl.gloves.c : null}); }
     } catch (e) {}
     return o;
   }
@@ -210,7 +210,7 @@ var SpModes = (function () {
     host.classList.add("sp3-host");
     var isGk = mode === "gkpen", me = myKit(), rv = rivalKit(!isGk);
     var shooter = S3.man(isGk ? rv : Object.assign({}, me, {foot: o.foot}));
-    var keeper = S3.man(isGk ? Object.assign({}, me, {gk: true, gloves: "#f07a24", num: 1, shirt: "#2ad15a", shorts: "#111"}) : rivalKit(true));
+    var keeper = S3.man(isGk ? Object.assign({}, me, {gk: true, gloves: me.gloves || "#f07a24", num: 1, shirt: "#2ad15a", shorts: "#111"}) : rivalKit(true));
     var ref = S3.man({shirt: "#111", shorts: "#111", socks: "#111", official: true, skin: "#c88a62", hairStyle: 1});
     S3.place(keeper, 0.25, 0, false); keeper.play("gkready", {amp: 0.06});
     S3.place(shooter, isGk ? 18.6 : 13.2, isGk ? 1.2 : -2.9, true); shooter.play("idle");
