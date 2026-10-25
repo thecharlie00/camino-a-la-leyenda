@@ -50,7 +50,7 @@
     var c = D.challenges.filter(function (x) { return x.k === v; })[0]; if (!c) return;
     var s = st(); if (s.ch[c.k] === S.yr) return;
     U.close && U.close();
-    var o = {skill: skill(c.kind === "gkpen" || c.kind === "gkfk" ? "gk" : c.kind), gk: 80, press: c.press, dist: c.dist, ang: c.ang, ctx: c.ctx, reward: c.reward, training: false, rand: SpPhys.rng((Date.now() & 0xffffff) >>> 0)};
+    var o = {skill: skill(c.kind === "gkpen" || c.kind === "gkfk" ? "gk" : c.kind), gk: 80, press: c.press, dist: c.dist, ang: c.ang, ctx: c.ctx, reward: c.reward, ch: c.k, training: false, rand: SpPhys.rng((Date.now() & 0xffffff) >>> 0)};
     var cb = function (r) { if (r) { s.ch[c.k] = S.yr; U.persist(); U.render(false); } };
     if (c.kind === "fk") SpPlay.fkShoot(o, cb);
     else if (c.kind === "pen") SpPlay.penPro(o, cb);

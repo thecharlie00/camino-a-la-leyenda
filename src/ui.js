@@ -1974,7 +1974,7 @@
       if (kind === "gkfk") Minigame.gkFreekick(gopts, save); else Minigame.gkPenalty(gopts, save);
       return;
     }
-    var go = function (res) { if (typeof blpMgResult === "function") blpMgResult(!!res.scored); if (UIX.hk.spAfter) UIX.hk.spAfter(kind, !!res.scored); FORCE_OUT = !!res.scored; doChoose(i); };
+    var go = function (res) { if (typeof blpMgResult === "function") blpMgResult(!!res.scored); if (UIX.hk.spAfter) UIX.hk.spAfter(kind, !!res.scored); if (typeof GX !== "undefined") GX.ev("mini", {kind: kind, scored: !!res.scored, min: f && f.mom ? f.mom.min : 0}); FORCE_OUT = !!res.scored; doChoose(i); };
     if (kind === "fk") Minigame.freekick(opts, go); else Minigame.penalty(opts, go);
   }
   /* 5.6: escudos para el videomarcador del estadio 3D (se rasterizan en segundo plano) */

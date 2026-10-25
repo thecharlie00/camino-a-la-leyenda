@@ -9,6 +9,8 @@ var SpPlay = (function () {
   function gauss(r) { var u = Math.max(1e-9, r()), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * PI * v); }
   function sN(v) { return cl((v - 40) / 55, 0, 1); }
   function pick(list, r) { return list[Math.floor(r() * list.length) % list.length]; }
+  /* 5.6: el entrenamiento no cuenta en la carrera, pero sí para algunos trofeos */
+  function gxTrain(o) { try { if (typeof GX !== "undefined") GX.ev("sp", Object.assign({training: true}, o)); } catch (e) {} }
   var applyError = SpAI.applyError, aiKeeper = SpAI.aiKeeper, planDir = SpAI.planDir, buildWall = SpAI.buildWall, takerChoose = SpAI.takerChoose;
 
   /* ---------- carcasa a pantalla completa ---------- */
@@ -183,7 +185,9 @@ var SpPlay = (function () {
         onEvent: function (e) { if (e.k === "wall") { var m = wallMen[e.i]; if (m) m.play("ouch"); } },
         onResult: function (res, sim) {
           var top = res.scored && sim.ev.some(function (e) { return e.k === "goal" && e.y > 1.75 && Math.abs(e.z) > 2.6; });
-          var got = opt.training ? [] : SpModes.record("fk", res, {top: top, zone: Math.round((sim.ev.filter(function (e) { return e.k === "goal" || e.k === "wide" || e.k === "over"; })[0] || {z: 0}).z)});
+          var wallIn = res.scored && sim.ev.some(function (e) { return e.k === "wall"; });
+          if (opt.training) gxTrain({k: "fk", scored: !!res.scored, how: res.how});
+          var got = opt.training ? [] : SpModes.record("fk", res, {top: top, dist: dist, wallIn: wallIn, ch: opt.ch, zone: Math.round((sim.ev.filter(function (e) { return e.k === "goal" || e.k === "wide" || e.k === "over"; })[0] || {z: 0}).z)});
           I.react({shooter: me, keeper: gk, S3: S3, mineShoots: true}, res);
           var bf = bigFor(res, false); ui.big(bf[0], bf[1]); hap(res.scored ? "big" : "bad");
           if (res.scored && S3.ctx !== "barrio") S3.crowdT = 1;
@@ -431,11 +435,12 @@ var SpPlay = (function () {
             phase = "shot";
             if (tg) { var ge = (sim && sim.ev || []).filter(function (e) { return e.k === "goal"; })[0], hitT = ge && tg.pts.some(function (q) { return Math.hypot(ge.z - q[0], ge.y - q[1]) < tg.r; });
               ui.big(hitT ? t("¡DIANA!") : res.scored ? t("Cerca") : t("Fuera"), hitT ? "good" : "bad"); hap(hitT ? "big" : "tap");
-              res = {scored: !!hitT, how: hitT ? "goal" : res.how};
+              res = {scored: !!hitT, how: hitT ? "goal" : res.how}; gxTrain({k: "pen", target: 1, scored: !!hitT});
               setTimeout(function () { resultScreen(ui, hitT ? t("¡DIANA!") : t("Otra vez"), hitT ? "good" : "bad", [], function () { ui.close(); if (done) done({scored: !!hitT}); }); }, 1400); return; }
             var side = aim.z > 1 ? "L" : aim.z < -1 ? "R" : "C";
             if (s) { var mm = s.mem.pen || (s.mem.pen = {L: 0, R: 0, C: 0}); mm[side]++; }
-            var got = opt.training ? [] : SpModes.record("pen", res, {panenka: panenka, zone: side});
+            if (opt.training) gxTrain({k: "pen", scored: !!res.scored, how: res.how});
+            var got = opt.training ? [] : SpModes.record("pen", res, {panenka: panenka, zone: side, ch: opt.ch});
             I.react({shooter: me, keeper: gk, S3: S3, mineShoots: true}, res);
             var bf = bigFor(res, false); ui.big(bf[0], bf[1]); hap(res.scored ? "big" : "bad");
             finishMode(ui, res, got, opt, done, {scored: !!res.scored, how: res.how, p: res.scored ? 1 : 0});

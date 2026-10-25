@@ -1,4 +1,1846 @@
 {
+ "Goles": {
+  "w": [
+   "gx-data.js:7",
+   "engine-extra.js:38",
+   "ui.js:958",
+   "ui.js:972"
+  ],
+  "ctx": "[\"goals\", N_(\"Goles\"), \"⚽\"], [\"play\", N_(\"Asistencias y juego\"), \"🎯\"], [\"gk\", N_(\"Porteros\"), \"🧤\"], [\"sp\", N_(\"Penaltis y faltas\"), \"🥅\"],"
+ },
+ "Asistencias y juego": {
+  "w": [
+   "gx-data.js:7"
+  ],
+  "ctx": "[\"goals\", N_(\"Goles\"), \"⚽\"], [\"play\", N_(\"Asistencias y juego\"), \"🎯\"], [\"gk\", N_(\"Porteros\"), \"🧤\"], [\"sp\", N_(\"Penaltis y faltas\"), \"🥅\"],"
+ },
+ "Porteros": {
+  "w": [
+   "gx-data.js:7",
+   "ui.js:1278"
+  ],
+  "ctx": "[\"goals\", N_(\"Goles\"), \"⚽\"], [\"play\", N_(\"Asistencias y juego\"), \"🎯\"], [\"gk\", N_(\"Porteros\"), \"🧤\"], [\"sp\", N_(\"Penaltis y faltas\"), \"🥅\"],"
+ },
+ "Penaltis y faltas": {
+  "w": [
+   "gx-data.js:7"
+  ],
+  "ctx": "[\"goals\", N_(\"Goles\"), \"⚽\"], [\"play\", N_(\"Asistencias y juego\"), \"🎯\"], [\"gk\", N_(\"Porteros\"), \"🧤\"], [\"sp\", N_(\"Penaltis y faltas\"), \"🥅\"],"
+ },
+ "Carrera y clubes": {
+  "w": [
+   "gx-data.js:8"
+  ],
+  "ctx": "[\"career\", N_(\"Carrera y clubes\"), \"🧳\"], [\"nat\", N_(\"Selección\"), \"🌍\"], [\"awards\", N_(\"Premios individuales\"), \"🏅\"], [\"room\", N_(\"Decisiones y vestuario\"), \"🗳️\"],"
+ },
+ "Selección": {
+  "w": [
+   "gx-data.js:8",
+   "engine-player.js:311",
+   "mgr-plus.js:544",
+   "mgr-plus.js:648"
+  ],
+  "ctx": "[\"career\", N_(\"Carrera y clubes\"), \"🧳\"], [\"nat\", N_(\"Selección\"), \"🌍\"], [\"awards\", N_(\"Premios individuales\"), \"🏅\"], [\"room\", N_(\"Decisiones y vestuario\"), \"🗳️\"],"
+ },
+ "Premios individuales": {
+  "w": [
+   "gx-data.js:8",
+   "ui.js:1194"
+  ],
+  "ctx": "[\"career\", N_(\"Carrera y clubes\"), \"🧳\"], [\"nat\", N_(\"Selección\"), \"🌍\"], [\"awards\", N_(\"Premios individuales\"), \"🏅\"], [\"room\", N_(\"Decisiones y vestuario\"), \"🗳️\"],"
+ },
+ "Decisiones y vestuario": {
+  "w": [
+   "gx-data.js:8"
+  ],
+  "ctx": "[\"career\", N_(\"Carrera y clubes\"), \"🧳\"], [\"nat\", N_(\"Selección\"), \"🌍\"], [\"awards\", N_(\"Premios individuales\"), \"🏅\"], [\"room\", N_(\"Decisiones y vestuario\"), \"🗳️\"],"
+ },
+ "Prensa y afición": {
+  "w": [
+   "gx-data.js:9"
+  ],
+  "ctx": "[\"press\", N_(\"Prensa y afición\"), \"🎙️\"], [\"pet\", N_(\"Mascota\"), \"🐾\"], [\"mgr\", N_(\"Entrenador\"), \"📋\"], [\"mini\", N_(\"Minijuegos\"), \"🎮\"],"
+ },
+ "Mascota": {
+  "w": [
+   "gx-data.js:9"
+  ],
+  "ctx": "[\"press\", N_(\"Prensa y afición\"), \"🎙️\"], [\"pet\", N_(\"Mascota\"), \"🐾\"], [\"mgr\", N_(\"Entrenador\"), \"📋\"], [\"mini\", N_(\"Minijuegos\"), \"🎮\"],"
+ },
+ "Entrenador": {
+  "w": [
+   "gx-data.js:9",
+   "ui.js:1025",
+   "ui.js:1709",
+   "ui-46.js:76"
+  ],
+  "ctx": "[\"press\", N_(\"Prensa y afición\"), \"🎙️\"], [\"pet\", N_(\"Mascota\"), \"🐾\"], [\"mgr\", N_(\"Entrenador\"), \"📋\"], [\"mini\", N_(\"Minijuegos\"), \"🎮\"],"
+ },
+ "Minijuegos": {
+  "w": [
+   "gx-data.js:9"
+  ],
+  "ctx": "[\"press\", N_(\"Prensa y afición\"), \"🎙️\"], [\"pet\", N_(\"Mascota\"), \"🐾\"], [\"mgr\", N_(\"Entrenador\"), \"📋\"], [\"mini\", N_(\"Minijuegos\"), \"🎮\"],"
+ },
+ "Tienda y equipamiento": {
+  "w": [
+   "gx-data.js:10"
+  ],
+  "ctx": "[\"shop\", N_(\"Tienda y equipamiento\"), \"🛍️\"], [\"odd\", N_(\"Raros y absurdos\"), \"🌀\"], [\"base\", N_(\"Hitos\"), \"🏆\"]"
+ },
+ "Raros y absurdos": {
+  "w": [
+   "gx-data.js:10"
+  ],
+  "ctx": "[\"shop\", N_(\"Tienda y equipamiento\"), \"🛍️\"], [\"odd\", N_(\"Raros y absurdos\"), \"🌀\"], [\"base\", N_(\"Hitos\"), \"🏆\"]"
+ },
+ "Hitos": {
+  "w": [
+   "gx-data.js:10",
+   "ui.js:1197"
+  ],
+  "ctx": "[\"shop\", N_(\"Tienda y equipamiento\"), \"🛍️\"], [\"odd\", N_(\"Raros y absurdos\"), \"🌀\"], [\"base\", N_(\"Hitos\"), \"🏆\"]"
+ },
+ "Bronce": {
+  "w": [
+   "gx-data.js:12",
+   "chal32.js:12"
+  ],
+  "ctx": "var GX_RAR = {b: {n: N_(\"Bronce\"), c: \"#c88a52\", money: 5000}, s: {n: N_(\"Plata\"), c: \"#cfd8dc\", money: 25000}, g: {n: N_(\"Oro\"), c: \"#f6c83a\", money: 100000}, p: {n: N_(\"Platino\"), c: \"#b9f2ff\", money: 1000000}};"
+ },
+ "Plata": {
+  "w": [
+   "gx-data.js:12",
+   "chal32.js:12"
+  ],
+  "ctx": "var GX_RAR = {b: {n: N_(\"Bronce\"), c: \"#c88a52\", money: 5000}, s: {n: N_(\"Plata\"), c: \"#cfd8dc\", money: 25000}, g: {n: N_(\"Oro\"), c: \"#f6c83a\", money: 100000}, p: {n: N_(\"Platino\"), c: \"#b9f2ff\", money: 1000000}};"
+ },
+ "Oro": {
+  "w": [
+   "gx-data.js:12",
+   "pets.js:130",
+   "chal32.js:12"
+  ],
+  "ctx": "var GX_RAR = {b: {n: N_(\"Bronce\"), c: \"#c88a52\", money: 5000}, s: {n: N_(\"Plata\"), c: \"#cfd8dc\", money: 25000}, g: {n: N_(\"Oro\"), c: \"#f6c83a\", money: 100000}, p: {n: N_(\"Platino\"), c: \"#b9f2ff\", money: 1000000}};"
+ },
+ "Platino": {
+  "w": [
+   "gx-data.js:12"
+  ],
+  "ctx": "var GX_RAR = {b: {n: N_(\"Bronce\"), c: \"#c88a52\", money: 5000}, s: {n: N_(\"Plata\"), c: \"#cfd8dc\", money: 25000}, g: {n: N_(\"Oro\"), c: \"#f6c83a\", money: 100000}, p: {n: N_(\"Platino\"), c: \"#b9f2ff\", money: 1000000}};"
+ },
+ "Tres en raya": {
+  "w": [
+   "gx-data.js:15"
+  ],
+  "ctx": "[\"g_hat\", \"goals\", \"b\", 0, \"p\", N_(\"Tres en raya\"), N_(\"Marca tu primer hat-trick.\"), [\"f\", \"hat3\"]],"
+ },
+ "Marca tu primer hat-trick.": {
+  "w": [
+   "gx-data.js:15"
+  ],
+  "ctx": "[\"g_hat\", \"goals\", \"b\", 0, \"p\", N_(\"Tres en raya\"), N_(\"Marca tu primer hat-trick.\"), [\"f\", \"hat3\"]],"
+ },
+ "Di mi nombre": {
+  "w": [
+   "gx-data.js:16"
+  ],
+  "ctx": "[\"g_hathome\", \"goals\", \"s\", 0, \"p\", N_(\"Di mi nombre\"), N_(\"Marca un hat-trick en casa.\"), [\"f\", \"hat3home\"]],"
+ },
+ "Marca un hat-trick en casa.": {
+  "w": [
+   "gx-data.js:16"
+  ],
+  "ctx": "[\"g_hathome\", \"goals\", \"s\", 0, \"p\", N_(\"Di mi nombre\"), N_(\"Marca un hat-trick en casa.\"), [\"f\", \"hat3home\"]],"
+ },
+ "Póker de ases": {
+  "w": [
+   "gx-data.js:17"
+  ],
+  "ctx": "[\"g_poker\", \"goals\", \"g\", 0, \"p\", N_(\"Póker de ases\"), N_(\"Marca 4 goles en un partido.\"), [\"f\", \"poker\"]],"
+ },
+ "Marca 4 goles en un partido.": {
+  "w": [
+   "gx-data.js:17"
+  ],
+  "ctx": "[\"g_poker\", \"goals\", \"g\", 0, \"p\", N_(\"Póker de ases\"), N_(\"Marca 4 goles en un partido.\"), [\"f\", \"poker\"]],"
+ },
+ "Campo infinito": {
+  "w": [
+   "gx-data.js:18",
+   "gx-data.js:18"
+  ],
+  "ctx": "[\"g_ownhalf\", \"goals\", \"g\", 1, \"p\", N_(\"Campo infinito\"), N_(\"Marca desde tu propio campo.\"), [\"f\", \"ownhalf\"], {title: N_(\"Campo infinito\")}],"
+ },
+ "Marca desde tu propio campo.": {
+  "w": [
+   "gx-data.js:18"
+  ],
+  "ctx": "[\"g_ownhalf\", \"goals\", \"g\", 1, \"p\", N_(\"Campo infinito\"), N_(\"Marca desde tu propio campo.\"), [\"f\", \"ownhalf\"], {title: N_(\"Campo infinito\")}],"
+ },
+ "Fuga del banquillo": {
+  "w": [
+   "gx-data.js:19"
+  ],
+  "ctx": "[\"g_subfast\", \"goals\", \"s\", 0, \"p\", N_(\"Fuga del banquillo\"), N_(\"Sal de suplente y marca en tus 2 primeros minutos.\"), [\"f\", \"subfast\"]],"
+ },
+ "Sal de suplente y marca en tus 2 primeros minutos.": {
+  "w": [
+   "gx-data.js:19"
+  ],
+  "ctx": "[\"g_subfast\", \"goals\", \"s\", 0, \"p\", N_(\"Fuga del banquillo\"), N_(\"Sal de suplente y marca en tus 2 primeros minutos.\"), [\"f\", \"subfast\"]],"
+ },
+ "Atraco perfecto": {
+  "w": [
+   "gx-data.js:20"
+  ],
+  "ctx": "[\"g_heist\", \"goals\", \"s\", 0, \"p\", N_(\"Atraco perfecto\"), N_(\"Marca en el último minuto en campo rival para ganar.\"), [\"f\", \"heist\"]],"
+ },
+ "Marca en el último minuto en campo rival para ganar.": {
+  "w": [
+   "gx-data.js:20"
+  ],
+  "ctx": "[\"g_heist\", \"goals\", \"s\", 0, \"p\", N_(\"Atraco perfecto\"), N_(\"Marca en el último minuto en campo rival para ganar.\"), [\"f\", \"heist\"]],"
+ },
+ "Yo soy tu padre": {
+  "w": [
+   "gx-data.js:21"
+  ],
+  "ctx": "[\"g_exclub\", \"goals#\", \"s\", 0, \"p\", N_(\"Yo soy tu padre\"), N_(\"Márcale 5 goles a uno de tus ex clubes.\"), [\"s\", \"exGoals\", 5]],"
+ },
+ "Márcale 5 goles a uno de tus ex clubes.": {
+  "w": [
+   "gx-data.js:21"
+  ],
+  "ctx": "[\"g_exclub\", \"goals#\", \"s\", 0, \"p\", N_(\"Yo soy tu padre\"), N_(\"Márcale 5 goles a uno de tus ex clubes.\"), [\"s\", \"exGoals\", 5]],"
+ },
+ "El quinientos": {
+  "w": [
+   "gx-data.js:22"
+  ],
+  "ctx": "[\"g_500\", \"goals#\", \"g\", 0, \"p\", N_(\"El quinientos\"), N_(\"Llega a 500 goles oficiales.\"), [\"s\", \"goals\", 500]],"
+ },
+ "Llega a 500 goles oficiales.": {
+  "w": [
+   "gx-data.js:22"
+  ],
+  "ctx": "[\"g_500\", \"goals#\", \"g\", 0, \"p\", N_(\"El quinientos\"), N_(\"Llega a 500 goles oficiales.\"), [\"s\", \"goals\", 500]],"
+ },
+ "Las mil y una noches": {
+  "w": [
+   "gx-data.js:23"
+  ],
+  "ctx": "[\"g_1000\", \"goals#\", \"g\", 0, \"p\", N_(\"Las mil y una noches\"), N_(\"Llega a 1.000 goles oficiales.\"), [\"s\", \"goals\", 1000], {title: N_(\"Mil y una noches\")}],"
+ },
+ "Llega a 1.000 goles oficiales.": {
+  "w": [
+   "gx-data.js:23"
+  ],
+  "ctx": "[\"g_1000\", \"goals#\", \"g\", 0, \"p\", N_(\"Las mil y una noches\"), N_(\"Llega a 1.000 goles oficiales.\"), [\"s\", \"goals\", 1000], {title: N_(\"Mil y una noches\")}],"
+ },
+ "Mil y una noches": {
+  "w": [
+   "gx-data.js:23"
+  ],
+  "ctx": "[\"g_1000\", \"goals#\", \"g\", 0, \"p\", N_(\"Las mil y una noches\"), N_(\"Llega a 1.000 goles oficiales.\"), [\"s\", \"goals\", 1000], {title: N_(\"Mil y una noches\")}],"
+ },
+ "Temporada de cine": {
+  "w": [
+   "gx-data.js:24"
+  ],
+  "ctx": "[\"g_s40\", \"goals\", \"g\", 0, \"p\", N_(\"Temporada de cine\"), N_(\"Marca 40 goles en una temporada.\"), [\"s\", \"bestSeasonGoals\", 40]],"
+ },
+ "Marca 40 goles en una temporada.": {
+  "w": [
+   "gx-data.js:24"
+  ],
+  "ctx": "[\"g_s40\", \"goals\", \"g\", 0, \"p\", N_(\"Temporada de cine\"), N_(\"Marca 40 goles en una temporada.\"), [\"s\", \"bestSeasonGoals\", 40]],"
+ },
+ "El que lo petó": {
+  "w": [
+   "gx-data.js:25"
+  ],
+  "ctx": "[\"g_own\", \"goals\", \"b\", 1, \"p\", N_(\"El que lo petó\"), N_(\"Marca en propia puerta.\"), [\"f\", \"owngoal\"]],"
+ },
+ "Marca en propia puerta.": {
+  "w": [
+   "gx-data.js:25"
+  ],
+  "ctx": "[\"g_own\", \"goals\", \"b\", 1, \"p\", N_(\"El que lo petó\"), N_(\"Marca en propia puerta.\"), [\"f\", \"owngoal\"]],"
+ },
+ "El Profesor": {
+  "w": [
+   "gx-data.js:27",
+   "gx-data.js:27",
+   "engine-extra.js:114",
+   "press-ctx.js:892"
+  ],
+  "ctx": "[\"a_prof\", \"play\", \"g\", 0, \"p\", N_(\"El Profesor\"), N_(\"Da 50 asistencias en una temporada.\"), [\"s\", \"bestSeasonAssists\", 50], {title: N_(\"El Profesor\")}],"
+ },
+ "Da 50 asistencias en una temporada.": {
+  "w": [
+   "gx-data.js:27"
+  ],
+  "ctx": "[\"a_prof\", \"play\", \"g\", 0, \"p\", N_(\"El Profesor\"), N_(\"Da 50 asistencias en una temporada.\"), [\"s\", \"bestSeasonAssists\", 50], {title: N_(\"El Profesor\")}],"
+ },
+ "Plan sin fisuras": {
+  "w": [
+   "gx-data.js:28"
+  ],
+  "ctx": "[\"a_plan\", \"play\", \"s\", 0, \"p\", N_(\"Plan sin fisuras\"), N_(\"Da 20 asistencias en una temporada.\"), [\"s\", \"bestSeasonAssists\", 20]],"
+ },
+ "Da 20 asistencias en una temporada.": {
+  "w": [
+   "gx-data.js:28"
+  ],
+  "ctx": "[\"a_plan\", \"play\", \"s\", 0, \"p\", N_(\"Plan sin fisuras\"), N_(\"Da 20 asistencias en una temporada.\"), [\"s\", \"bestSeasonAssists\", 20]],"
+ },
+ "Visión de rayos X": {
+  "w": [
+   "gx-data.js:29"
+  ],
+  "ctx": "[\"a_200\", \"play#\", \"s\", 0, \"p\", N_(\"Visión de rayos X\"), N_(\"Llega a 200 asistencias.\"), [\"s\", \"assists\", 200]],"
+ },
+ "Llega a 200 asistencias.": {
+  "w": [
+   "gx-data.js:29"
+  ],
+  "ctx": "[\"a_200\", \"play#\", \"s\", 0, \"p\", N_(\"Visión de rayos X\"), N_(\"Llega a 200 asistencias.\"), [\"s\", \"assists\", 200]],"
+ },
+ "Seiscientas razones": {
+  "w": [
+   "gx-data.js:30"
+  ],
+  "ctx": "[\"a_600\", \"play#\", \"g\", 0, \"p\", N_(\"Seiscientas razones\"), N_(\"Llega a 600 asistencias.\"), [\"s\", \"assists\", 600]],"
+ },
+ "Llega a 600 asistencias.": {
+  "w": [
+   "gx-data.js:30"
+  ],
+  "ctx": "[\"a_600\", \"play#\", \"g\", 0, \"p\", N_(\"Seiscientas razones\"), N_(\"Llega a 600 asistencias.\"), [\"s\", \"assists\", 600]],"
+ },
+ "Doble o nada": {
+  "w": [
+   "gx-data.js:31"
+  ],
+  "ctx": "[\"a_both\", \"play#\", \"s\", 0, \"p\", N_(\"Doble o nada\"), N_(\"Marca y asiste en el mismo partido 25 veces.\"), [\"s\", \"goalAssistGames\", 25]],"
+ },
+ "Marca y asiste en el mismo partido 25 veces.": {
+  "w": [
+   "gx-data.js:31"
+  ],
+  "ctx": "[\"a_both\", \"play#\", \"s\", 0, \"p\", N_(\"Doble o nada\"), N_(\"Marca y asiste en el mismo partido 25 veces.\"), [\"s\", \"goalAssistGames\", 25]],"
+ },
+ "Pase a la red": {
+  "w": [
+   "gx-data.js:32"
+  ],
+  "ctx": "[\"a_three\", \"play\", \"s\", 0, \"p\", N_(\"Pase a la red\"), N_(\"Da 3 asistencias en un partido.\"), [\"f\", \"assist3\"]],"
+ },
+ "Da 3 asistencias en un partido.": {
+  "w": [
+   "gx-data.js:32"
+  ],
+  "ctx": "[\"a_three\", \"play\", \"s\", 0, \"p\", N_(\"Pase a la red\"), N_(\"Da 3 asistencias en un partido.\"), [\"f\", \"assist3\"]],"
+ },
+ "Comodín": {
+  "w": [
+   "gx-data.js:33"
+  ],
+  "ctx": "[\"a_pos\", \"play\", \"b\", 0, \"p\", N_(\"Comodín\"), N_(\"Juega en 4 posiciones distintas.\"), [\"s\", \"positions\", 4]],"
+ },
+ "Juega en 4 posiciones distintas.": {
+  "w": [
+   "gx-data.js:33"
+  ],
+  "ctx": "[\"a_pos\", \"play\", \"b\", 0, \"p\", N_(\"Comodín\"), N_(\"Juega en 4 posiciones distintas.\"), [\"s\", \"positions\", 4]],"
+ },
+ "¡Es de más de 9000!": {
+  "w": [
+   "gx-data.js:34",
+   "ach36.js:25"
+  ],
+  "ctx": "[\"a_9000\", \"play#\", \"s\", 0, \"p\", N_(\"¡Es de más de 9000!\"), N_(\"Supera 9.000 minutos jugados.\"), [\"s\", \"minutes\", 9001]],"
+ },
+ "Supera 9.000 minutos jugados.": {
+  "w": [
+   "gx-data.js:34"
+  ],
+  "ctx": "[\"a_9000\", \"play#\", \"s\", 0, \"p\", N_(\"¡Es de más de 9000!\"), N_(\"Supera 9.000 minutos jugados.\"), [\"s\", \"minutes\", 9001]],"
+ },
+ "Hierro forjado": {
+  "w": [
+   "gx-data.js:35"
+  ],
+  "ctx": "[\"a_iron\", \"play\", \"g\", 0, \"p\", N_(\"Hierro forjado\"), N_(\"Juega 50 partidos completos seguidos con tu club.\"), [\"s\", \"appStreakBest\", 50]],"
+ },
+ "Juega 50 partidos completos seguidos con tu club.": {
+  "w": [
+   "gx-data.js:35"
+  ],
+  "ctx": "[\"a_iron\", \"play\", \"g\", 0, \"p\", N_(\"Hierro forjado\"), N_(\"Juega 50 partidos completos seguidos con tu club.\"), [\"s\", \"appStreakBest\", 50]],"
+ },
+ "No pasarás": {
+  "w": [
+   "gx-data.js:37"
+  ],
+  "ctx": "[\"k_shall\", \"gk\", \"g\", 0, \"p\", N_(\"No pasarás\"), N_(\"Deja la portería a cero en 10 partidos seguidos.\"), [\"s\", \"csStreakBest\", 10], {title: N_(\"El Muro\")}],"
+ },
+ "Deja la portería a cero en 10 partidos seguidos.": {
+  "w": [
+   "gx-data.js:37"
+  ],
+  "ctx": "[\"k_shall\", \"gk\", \"g\", 0, \"p\", N_(\"No pasarás\"), N_(\"Deja la portería a cero en 10 partidos seguidos.\"), [\"s\", \"csStreakBest\", 10], {title: N_(\"El Muro\")}],"
+ },
+ "El Muro": {
+  "w": [
+   "gx-data.js:37",
+   "engine-extra.js:113",
+   "press-ctx.js:890",
+   "press-ctx.js:910"
+  ],
+  "ctx": "[\"k_shall\", \"gk\", \"g\", 0, \"p\", N_(\"No pasarás\"), N_(\"Deja la portería a cero en 10 partidos seguidos.\"), [\"s\", \"csStreakBest\", 10], {title: N_(\"El Muro\")}],"
+ },
+ "Telón de acero": {
+  "w": [
+   "gx-data.js:38"
+  ],
+  "ctx": "[\"k_iron\", \"gk\", \"s\", 0, \"p\", N_(\"Telón de acero\"), N_(\"Deja la portería a cero en 20 partidos de una temporada.\"), [\"s\", \"bestSeasonCS\", 20]],"
+ },
+ "Deja la portería a cero en 20 partidos de una temporada.": {
+  "w": [
+   "gx-data.js:38"
+  ],
+  "ctx": "[\"k_iron\", \"gk\", \"s\", 0, \"p\", N_(\"Telón de acero\"), N_(\"Deja la portería a cero en 20 partidos de una temporada.\"), [\"s\", \"bestSeasonCS\", 20]],"
+ },
+ "El guardián entre el centeno": {
+  "w": [
+   "gx-data.js:39"
+  ],
+  "ctx": "[\"k_200\", \"gk#\", \"g\", 0, \"p\", N_(\"El guardián entre el centeno\"), N_(\"Llega a 200 porterías a cero.\"), [\"s\", \"cleanSheets\", 200]],"
+ },
+ "Llega a 200 porterías a cero.": {
+  "w": [
+   "gx-data.js:39"
+  ],
+  "ctx": "[\"k_200\", \"gk#\", \"g\", 0, \"p\", N_(\"El guardián entre el centeno\"), N_(\"Llega a 200 porterías a cero.\"), [\"s\", \"cleanSheets\", 200]],"
+ },
+ "Manos de mantequilla": {
+  "w": [
+   "gx-data.js:40"
+  ],
+  "ctx": "[\"k_butter\", \"gk\", \"b\", 1, \"p\", N_(\"Manos de mantequilla\"), N_(\"Encaja 5 goles en un partido siendo el portero.\"), [\"f\", \"concede5\"]],"
+ },
+ "Encaja 5 goles en un partido siendo el portero.": {
+  "w": [
+   "gx-data.js:40"
+  ],
+  "ctx": "[\"k_butter\", \"gk\", \"b\", 1, \"p\", N_(\"Manos de mantequilla\"), N_(\"Encaja 5 goles en un partido siendo el portero.\"), [\"f\", \"concede5\"]],"
+ },
+ "Parada de manual": {
+  "w": [
+   "gx-data.js:41"
+  ],
+  "ctx": "[\"k_pen50\", \"gk#\", \"g\", 0, \"p\", N_(\"Parada de manual\"), N_(\"Para 50 penaltis en tu carrera (partidos y tandas).\"), [\"s\", \"penSaves\", 50]],"
+ },
+ "Para 50 penaltis en tu carrera (partidos y tandas).": {
+  "w": [
+   "gx-data.js:41"
+  ],
+  "ctx": "[\"k_pen50\", \"gk#\", \"g\", 0, \"p\", N_(\"Parada de manual\"), N_(\"Para 50 penaltis en tu carrera (partidos y tandas).\"), [\"s\", \"penSaves\", 50]],"
+ },
+ "Ultra Instinto": {
+  "w": [
+   "gx-data.js:42",
+   "gx-data.js:42"
+  ],
+  "ctx": "[\"k_ultra\", \"gk\", \"g\", 0, \"p\", N_(\"Ultra Instinto\"), N_(\"Para 3 penaltis en una tanda.\"), [\"f\", \"so3saves\"], {title: N_(\"Ultra Instinto\")}],"
+ },
+ "Para 3 penaltis en una tanda.": {
+  "w": [
+   "gx-data.js:42"
+  ],
+  "ctx": "[\"k_ultra\", \"gk\", \"g\", 0, \"p\", N_(\"Ultra Instinto\"), N_(\"Para 3 penaltis en una tanda.\"), [\"f\", \"so3saves\"], {title: N_(\"Ultra Instinto\")}],"
+ },
+ "El portero goleador": {
+  "w": [
+   "gx-data.js:43"
+  ],
+  "ctx": "[\"k_goal\", \"gk\", \"g\", 1, \"p\", N_(\"El portero goleador\"), N_(\"Marca un gol siendo portero.\"), [\"f\", \"gkgoal\"]],"
+ },
+ "Marca un gol siendo portero.": {
+  "w": [
+   "gx-data.js:43"
+  ],
+  "ctx": "[\"k_goal\", \"gk\", \"g\", 1, \"p\", N_(\"El portero goleador\"), N_(\"Marca un gol siendo portero.\"), [\"f\", \"gkgoal\"]],"
+ },
+ "Cero absoluto": {
+  "w": [
+   "gx-data.js:44"
+  ],
+  "ctx": "[\"k_zero\", \"gk\", \"g\", 0, \"p\", N_(\"Cero absoluto\"), N_(\"Termina una liga encajando menos de 15 goles como portero titular.\"), [\"f\", \"lgUnder15\"]],"
+ },
+ "Termina una liga encajando menos de 15 goles como portero titular.": {
+  "w": [
+   "gx-data.js:44"
+  ],
+  "ctx": "[\"k_zero\", \"gk\", \"g\", 0, \"p\", N_(\"Cero absoluto\"), N_(\"Termina una liga encajando menos de 15 goles como portero titular.\"), [\"f\", \"lgUnder15\"]],"
+ },
+ "Muralla china": {
+  "w": [
+   "gx-data.js:45"
+  ],
+  "ctx": "[\"k_china\", \"gk\", \"s\", 0, \"p\", N_(\"Muralla china\"), N_(\"Gana una final 1-0 siendo el portero.\"), [\"f\", \"final10gk\"]],"
+ },
+ "Gana una final 1-0 siendo el portero.": {
+  "w": [
+   "gx-data.js:45"
+  ],
+  "ctx": "[\"k_china\", \"gk\", \"s\", 0, \"p\", N_(\"Muralla china\"), N_(\"Gana una final 1-0 siendo el portero.\"), [\"f\", \"final10gk\"]],"
+ },
+ "El juego del penalti": {
+  "w": [
+   "gx-data.js:47"
+  ],
+  "ctx": "[\"sp_sd\", \"sp\", \"s\", 0, \"p\", N_(\"El juego del penalti\"), N_(\"Gana una tanda en muerte súbita.\"), [\"f\", \"soSudden\"]],"
+ },
+ "Gana una tanda en muerte súbita.": {
+  "w": [
+   "gx-data.js:47"
+  ],
+  "ctx": "[\"sp_sd\", \"sp\", \"s\", 0, \"p\", N_(\"El juego del penalti\"), N_(\"Gana una tanda en muerte súbita.\"), [\"f\", \"soSudden\"]],"
+ },
+ "Sangre fría": {
+  "w": [
+   "gx-data.js:48",
+   "sp-data.js:43",
+   "events.js:460",
+   "ui-shootout.js:163"
+  ],
+  "ctx": "[\"sp_10\", \"sp\", \"s\", 0, \"p\", N_(\"Sangre fría\"), N_(\"Marca 10 penaltis seguidos.\"), [\"s\", \"penStreakBest\", 10]],"
+ },
+ "Marca 10 penaltis seguidos.": {
+  "w": [
+   "gx-data.js:48"
+  ],
+  "ctx": "[\"sp_10\", \"sp\", \"s\", 0, \"p\", N_(\"Sangre fría\"), N_(\"Marca 10 penaltis seguidos.\"), [\"s\", \"penStreakBest\", 10]],"
+ },
+ "Cien de cien": {
+  "w": [
+   "gx-data.js:49"
+  ],
+  "ctx": "[\"sp_fk100\", \"sp#\", \"g\", 0, \"p\", N_(\"Cien de cien\"), N_(\"Marca 100 goles de falta directa.\"), [\"s\", \"fkGoals\", 100]],"
+ },
+ "Marca 100 goles de falta directa.": {
+  "w": [
+   "gx-data.js:49"
+  ],
+  "ctx": "[\"sp_fk100\", \"sp#\", \"g\", 0, \"p\", N_(\"Cien de cien\"), N_(\"Marca 100 goles de falta directa.\"), [\"s\", \"fkGoals\", 100]],"
+ },
+ "A balón parado": {
+  "w": [
+   "gx-data.js:50"
+  ],
+  "ctx": "[\"sp_fk10\", \"sp#\", \"s\", 0, \"p\", N_(\"A balón parado\"), N_(\"Marca 10 goles de falta directa.\"), [\"s\", \"fkGoals\", 10]],"
+ },
+ "Marca 10 goles de falta directa.": {
+  "w": [
+   "gx-data.js:50"
+  ],
+  "ctx": "[\"sp_fk10\", \"sp#\", \"s\", 0, \"p\", N_(\"A balón parado\"), N_(\"Marca 10 goles de falta directa.\"), [\"s\", \"fkGoals\", 10]],"
+ },
+ "Picadito": {
+  "w": [
+   "gx-data.js:51"
+  ],
+  "ctx": "[\"sp_pan3\", \"sp#\", \"s\", 0, \"p\", N_(\"Picadito\"), N_(\"Marca 3 penaltis a lo Panenka.\"), [\"s\", \"panenkas\", 3]],"
+ },
+ "Marca 3 penaltis a lo Panenka.": {
+  "w": [
+   "gx-data.js:51"
+  ],
+  "ctx": "[\"sp_pan3\", \"sp#\", \"s\", 0, \"p\", N_(\"Picadito\"), N_(\"Marca 3 penaltis a lo Panenka.\"), [\"s\", \"panenkas\", 3]],"
+ },
+ "Desde mi casa": {
+  "w": [
+   "gx-data.js:52"
+  ],
+  "ctx": "[\"sp_far\", \"sp\", \"g\", 0, \"p\", N_(\"Desde mi casa\"), N_(\"Marca una falta directa desde más de 30 metros.\"), [\"f\", \"fk30\"]],"
+ },
+ "Marca una falta directa desde más de 30 metros.": {
+  "w": [
+   "gx-data.js:52"
+  ],
+  "ctx": "[\"sp_far\", \"sp\", \"g\", 0, \"p\", N_(\"Desde mi casa\"), N_(\"Marca una falta directa desde más de 30 metros.\"), [\"f\", \"fk30\"]],"
+ },
+ "Tiembla la barrera": {
+  "w": [
+   "gx-data.js:53"
+  ],
+  "ctx": "[\"sp_wall\", \"sp\", \"s\", 1, \"p\", N_(\"Tiembla la barrera\"), N_(\"Marca una falta que toca en la barrera y entra.\"), [\"f\", \"wallIn\"]],"
+ },
+ "Marca una falta que toca en la barrera y entra.": {
+  "w": [
+   "gx-data.js:53"
+  ],
+  "ctx": "[\"sp_wall\", \"sp\", \"s\", 1, \"p\", N_(\"Tiembla la barrera\"), N_(\"Marca una falta que toca en la barrera y entra.\"), [\"f\", \"wallIn\"]],"
+ },
+ "Penalti en el descuento": {
+  "w": [
+   "gx-data.js:54"
+  ],
+  "ctx": "[\"sp_late\", \"sp\", \"b\", 0, \"p\", N_(\"Penalti en el descuento\"), N_(\"Marca un penalti a partir del minuto 89.\"), [\"f\", \"penLate\"]],"
+ },
+ "Marca un penalti a partir del minuto 89.": {
+  "w": [
+   "gx-data.js:54"
+  ],
+  "ctx": "[\"sp_late\", \"sp\", \"b\", 0, \"p\", N_(\"Penalti en el descuento\"), N_(\"Marca un penalti a partir del minuto 89.\"), [\"f\", \"penLate\"]],"
+ },
+ "El que falla, paga": {
+  "w": [
+   "gx-data.js:55"
+  ],
+  "ctx": "[\"sp_miss\", \"sp\", \"b\", 1, \"p\", N_(\"El que falla, paga\"), N_(\"Falla un penalti en una tanda y quedáis eliminados.\"), [\"f\", \"soMissOut\"]],"
+ },
+ "Falla un penalti en una tanda y quedáis eliminados.": {
+  "w": [
+   "gx-data.js:55"
+  ],
+  "ctx": "[\"sp_miss\", \"sp\", \"b\", 1, \"p\", N_(\"El que falla, paga\"), N_(\"Falla un penalti en una tanda y quedáis eliminados.\"), [\"f\", \"soMissOut\"]],"
+ },
+ "Se acerca el mercado de invierno": {
+  "w": [
+   "gx-data.js:57"
+  ],
+  "ctx": "[\"c_winter\", \"career\", \"b\", 0, \"p\", N_(\"Se acerca el mercado de invierno\"), N_(\"Ficha por otro club en el mercado de invierno.\"), [\"f\", \"janMove\"]],"
+ },
+ "Ficha por otro club en el mercado de invierno.": {
+  "w": [
+   "gx-data.js:57"
+  ],
+  "ctx": "[\"c_winter\", \"career\", \"b\", 0, \"p\", N_(\"Se acerca el mercado de invierno\"), N_(\"Ficha por otro club en el mercado de invierno.\"), [\"f\", \"janMove\"]],"
+ },
+ "Juego de banquillos": {
+  "w": [
+   "gx-data.js:58"
+  ],
+  "ctx": "[\"c_bench\", \"career\", \"b\", 1, \"p\", N_(\"Juego de banquillos\"), N_(\"Pasa 10 partidos seguidos en el banquillo sin jugar.\"), [\"s\", \"benchStreakBest\", 10]],"
+ },
+ "Pasa 10 partidos seguidos en el banquillo sin jugar.": {
+  "w": [
+   "gx-data.js:58"
+  ],
+  "ctx": "[\"c_bench\", \"career\", \"b\", 1, \"p\", N_(\"Juego de banquillos\"), N_(\"Pasa 10 partidos seguidos en el banquillo sin jugar.\"), [\"s\", \"benchStreakBest\", 10]],"
+ },
+ "La píldora roja": {
+  "w": [
+   "gx-data.js:59"
+  ],
+  "ctx": "[\"c_pill\", \"career\", \"s\", 0, \"p\", N_(\"La píldora roja\"), N_(\"Acepta una oferta de una liga exótica.\"), [\"f\", \"exotic\"]],"
+ },
+ "Acepta una oferta de una liga exótica.": {
+  "w": [
+   "gx-data.js:59"
+  ],
+  "ctx": "[\"c_pill\", \"career\", \"s\", 0, \"p\", N_(\"La píldora roja\"), N_(\"Acepta una oferta de una liga exótica.\"), [\"f\", \"exotic\"]],"
+ },
+ "Vuelta a casa": {
+  "w": [
+   "gx-data.js:60"
+  ],
+  "ctx": "[\"c_home\", \"career\", \"s\", 0, \"p\", N_(\"Vuelta a casa\"), N_(\"Vuelve al club en el que empezaste.\"), [\"f\", \"homecoming\"]],"
+ },
+ "Vuelve al club en el que empezaste.": {
+  "w": [
+   "gx-data.js:60"
+  ],
+  "ctx": "[\"c_home\", \"career\", \"s\", 0, \"p\", N_(\"Vuelta a casa\"), N_(\"Vuelve al club en el que empezaste.\"), [\"f\", \"homecoming\"]],"
+ },
+ "Hijo predilecto": {
+  "w": [
+   "gx-data.js:61",
+   "gx-data.js:61"
+  ],
+  "ctx": "[\"c_one\", \"career#\", \"g\", 0, \"p\", N_(\"Hijo predilecto\"), N_(\"Juega 10 temporadas en un mismo club.\"), [\"s\", \"oneClubBest\", 10], {title: N_(\"Hijo predilecto\")}],"
+ },
+ "Juega 10 temporadas en un mismo club.": {
+  "w": [
+   "gx-data.js:61"
+  ],
+  "ctx": "[\"c_one\", \"career#\", \"g\", 0, \"p\", N_(\"Hijo predilecto\"), N_(\"Juega 10 temporadas en un mismo club.\"), [\"s\", \"oneClubBest\", 10], {title: N_(\"Hijo predilecto\")}],"
+ },
+ "El viajero": {
+  "w": [
+   "gx-data.js:62"
+  ],
+  "ctx": "[\"c_world\", \"career#\", \"g\", 0, \"p\", N_(\"El viajero\"), N_(\"Juega en clubes de 6 países distintos.\"), [\"s\", \"countries\", 6]],"
+ },
+ "Juega en clubes de 6 países distintos.": {
+  "w": [
+   "gx-data.js:62"
+  ],
+  "ctx": "[\"c_world\", \"career#\", \"g\", 0, \"p\", N_(\"El viajero\"), N_(\"Juega en clubes de 6 países distintos.\"), [\"s\", \"countries\", 6]],"
+ },
+ "Mil batallas": {
+  "w": [
+   "gx-data.js:63"
+  ],
+  "ctx": "[\"c_1000\", \"career#\", \"g\", 0, \"p\", N_(\"Mil batallas\"), N_(\"Llega a 1.000 partidos oficiales.\"), [\"s\", \"apps\", 1000]],"
+ },
+ "Llega a 1.000 partidos oficiales.": {
+  "w": [
+   "gx-data.js:63"
+  ],
+  "ctx": "[\"c_1000\", \"career#\", \"g\", 0, \"p\", N_(\"Mil batallas\"), N_(\"Llega a 1.000 partidos oficiales.\"), [\"s\", \"apps\", 1000]],"
+ },
+ "El mundo del revés": {
+  "w": [
+   "gx-data.js:64"
+  ],
+  "ctx": "[\"c_upside\", \"career\", \"g\", 1, \"p\", N_(\"El mundo del revés\"), N_(\"Gana un partido en el que perdíais 0-3.\"), [\"f\", \"comeback3\"]],"
+ },
+ "Gana un partido en el que perdíais 0-3.": {
+  "w": [
+   "gx-data.js:64"
+  ],
+  "ctx": "[\"c_upside\", \"career\", \"g\", 1, \"p\", N_(\"El mundo del revés\"), N_(\"Gana un partido en el que perdíais 0-3.\"), [\"f\", \"comeback3\"]],"
+ },
+ "Believe": {
+  "w": [
+   "gx-data.js:65",
+   "gx-data.js:65"
+  ],
+  "ctx": "[\"c_believe\", \"career\", \"g\", 0, \"p\", N_(\"Believe\"), N_(\"Salva del descenso a tu equipo cuando iba último a partir de la jornada 30.\"), [\"f\", \"believe\"], {title: N_(\"Believe\")}],"
+ },
+ "Salva del descenso a tu equipo cuando iba último a partir de la jornada 30.": {
+  "w": [
+   "gx-data.js:65"
+  ],
+  "ctx": "[\"c_believe\", \"career\", \"g\", 0, \"p\", N_(\"Believe\"), N_(\"Salva del descenso a tu equipo cuando iba último a partir de la jornada 30.\"), [\"f\", \"believe\"], {title: N_(\"Believe\")}],"
+ },
+ "Se veía venir": {
+  "w": [
+   "gx-data.js:66"
+  ],
+  "ctx": "[\"c_jinx\", \"career\", \"b\", 1, \"p\", N_(\"Se veía venir\"), N_(\"Lesiónate en las 3 semanas siguientes a renovar.\"), [\"f\", \"injAfterRenew\"]],"
+ },
+ "Lesiónate en las 3 semanas siguientes a renovar.": {
+  "w": [
+   "gx-data.js:66"
+  ],
+  "ctx": "[\"c_jinx\", \"career\", \"b\", 1, \"p\", N_(\"Se veía venir\"), N_(\"Lesiónate en las 3 semanas siguientes a renovar.\"), [\"f\", \"injAfterRenew\"]],"
+ },
+ "Ascensor": {
+  "w": [
+   "gx-data.js:67"
+  ],
+  "ctx": "[\"c_lift\", \"career\", \"b\", 0, \"p\", N_(\"Ascensor\"), N_(\"Asciende y desciende con el mismo club.\"), [\"f\", \"upDown\"]],"
+ },
+ "Asciende y desciende con el mismo club.": {
+  "w": [
+   "gx-data.js:67"
+  ],
+  "ctx": "[\"c_lift\", \"career\", \"b\", 0, \"p\", N_(\"Ascensor\"), N_(\"Asciende y desciende con el mismo club.\"), [\"f\", \"upDown\"]],"
+ },
+ "Cuarentón": {
+  "w": [
+   "gx-data.js:68"
+  ],
+  "ctx": "[\"c_40\", \"career\", \"g\", 0, \"p\", N_(\"Cuarentón\"), N_(\"Juega un partido oficial con 40 años.\"), [\"f\", \"age40\"]],"
+ },
+ "Juega un partido oficial con 40 años.": {
+  "w": [
+   "gx-data.js:68"
+  ],
+  "ctx": "[\"c_40\", \"career\", \"g\", 0, \"p\", N_(\"Cuarentón\"), N_(\"Juega un partido oficial con 40 años.\"), [\"f\", \"age40\"]],"
+ },
+ "Llamada a filas": {
+  "w": [
+   "gx-data.js:70"
+  ],
+  "ctx": "[\"n_call\", \"nat\", \"b\", 0, \"p\", N_(\"Llamada a filas\"), N_(\"Juega tu primer partido con la selección.\"), [\"s\", \"caps\", 1]],"
+ },
+ "Juega tu primer partido con la selección.": {
+  "w": [
+   "gx-data.js:70"
+  ],
+  "ctx": "[\"n_call\", \"nat\", \"b\", 0, \"p\", N_(\"Llamada a filas\"), N_(\"Juega tu primer partido con la selección.\"), [\"s\", \"caps\", 1]],"
+ },
+ "Centurión": {
+  "w": [
+   "gx-data.js:71"
+  ],
+  "ctx": "[\"n_100\", \"nat#\", \"g\", 0, \"p\", N_(\"Centurión\"), N_(\"Llega a 100 partidos internacionales.\"), [\"s\", \"caps\", 100]],"
+ },
+ "Llega a 100 partidos internacionales.": {
+  "w": [
+   "gx-data.js:71"
+  ],
+  "ctx": "[\"n_100\", \"nat#\", \"g\", 0, \"p\", N_(\"Centurión\"), N_(\"Llega a 100 partidos internacionales.\"), [\"s\", \"caps\", 100]],"
+ },
+ "El elegido de la tribu": {
+  "w": [
+   "gx-data.js:72"
+  ],
+  "ctx": "[\"n_cap\", \"nat\", \"s\", 0, \"p\", N_(\"El elegido de la tribu\"), N_(\"Sé capitán de tu selección.\"), [\"f\", \"natCaptain\"]],"
+ },
+ "Sé capitán de tu selección.": {
+  "w": [
+   "gx-data.js:72"
+  ],
+  "ctx": "[\"n_cap\", \"nat\", \"s\", 0, \"p\", N_(\"El elegido de la tribu\"), N_(\"Sé capitán de tu selección.\"), [\"f\", \"natCaptain\"]],"
+ },
+ "Cuatro estrellas": {
+  "w": [
+   "gx-data.js:73"
+  ],
+  "ctx": "[\"n_wc\", \"nat\", \"g\", 0, \"p\", N_(\"Cuatro estrellas\"), N_(\"Gana un Mundial.\"), [\"s\", \"worldCups\", 1]],"
+ },
+ "Gana un Mundial.": {
+  "w": [
+   "gx-data.js:73"
+  ],
+  "ctx": "[\"n_wc\", \"nat\", \"g\", 0, \"p\", N_(\"Cuatro estrellas\"), N_(\"Gana un Mundial.\"), [\"s\", \"worldCups\", 1]],"
+ },
+ "Viejo continente": {
+  "w": [
+   "gx-data.js:74"
+  ],
+  "ctx": "[\"n_conf\", \"nat\", \"g\", 0, \"p\", N_(\"Viejo continente\"), N_(\"Gana el torneo de selecciones de tu confederación.\"), [\"s\", \"confCups\", 1]],"
+ },
+ "Gana el torneo de selecciones de tu confederación.": {
+  "w": [
+   "gx-data.js:74"
+  ],
+  "ctx": "[\"n_conf\", \"nat\", \"g\", 0, \"p\", N_(\"Viejo continente\"), N_(\"Gana el torneo de selecciones de tu confederación.\"), [\"s\", \"confCups\", 1]],"
+ },
+ "Doblete patrio": {
+  "w": [
+   "gx-data.js:75"
+  ],
+  "ctx": "[\"n_final\", \"nat\", \"s\", 0, \"p\", N_(\"Doblete patrio\"), N_(\"Marca en una final con tu selección.\"), [\"f\", \"natFinalGoal\"]],"
+ },
+ "Marca en una final con tu selección.": {
+  "w": [
+   "gx-data.js:75"
+  ],
+  "ctx": "[\"n_final\", \"nat\", \"s\", 0, \"p\", N_(\"Doblete patrio\"), N_(\"Marca en una final con tu selección.\"), [\"f\", \"natFinalGoal\"]],"
+ },
+ "El héroe del barrio": {
+  "w": [
+   "gx-data.js:76"
+  ],
+  "ctx": "[\"n_qual\", \"nat\", \"s\", 0, \"p\", N_(\"El héroe del barrio\"), N_(\"Marca en un partido de clasificación que tu selección gana por un gol.\"), [\"f\", \"qualHero\"]],"
+ },
+ "Marca en un partido de clasificación que tu selección gana por un gol.": {
+  "w": [
+   "gx-data.js:76"
+  ],
+  "ctx": "[\"n_qual\", \"nat\", \"s\", 0, \"p\", N_(\"El héroe del barrio\"), N_(\"Marca en un partido de clasificación que tu selección gana por un gol.\"), [\"f\", \"qualHero\"]],"
+ },
+ "Más de una bandera": {
+  "w": [
+   "gx-data.js:77"
+  ],
+  "ctx": "[\"n_dual\", \"nat\", \"b\", 0, \"p\", N_(\"Más de una bandera\"), N_(\"Elige selección teniendo doble nacionalidad.\"), [\"f\", \"dualNat\"]],"
+ },
+ "Elige selección teniendo doble nacionalidad.": {
+  "w": [
+   "gx-data.js:77"
+  ],
+  "ctx": "[\"n_dual\", \"nat\", \"b\", 0, \"p\", N_(\"Más de una bandera\"), N_(\"Elige selección teniendo doble nacionalidad.\"), [\"f\", \"dualNat\"]],"
+ },
+ "Has sido elegido": {
+  "w": [
+   "gx-data.js:79"
+  ],
+  "ctx": "[\"w_cap\", \"awards\", \"s\", 0, \"p\", N_(\"Has sido elegido\"), N_(\"Que te nombren capitán de tu club.\"), [\"s\", \"captain\", 1]],"
+ },
+ "Que te nombren capitán de tu club.": {
+  "w": [
+   "gx-data.js:79"
+  ],
+  "ctx": "[\"w_cap\", \"awards\", \"s\", 0, \"p\", N_(\"Has sido elegido\"), N_(\"Que te nombren capitán de tu club.\"), [\"s\", \"captain\", 1]],"
+ },
+ "El tercer hombre": {
+  "w": [
+   "gx-data.js:80"
+  ],
+  "ctx": "[\"w_pod\", \"awards\", \"s\", 0, \"p\", N_(\"El tercer hombre\"), N_(\"Queda entre los 3 primeros del Balón de Oro.\"), [\"s\", \"bdoPodiums\", 1]],"
+ },
+ "Queda entre los 3 primeros del Balón de Oro.": {
+  "w": [
+   "gx-data.js:80"
+  ],
+  "ctx": "[\"w_pod\", \"awards\", \"s\", 0, \"p\", N_(\"El tercer hombre\"), N_(\"Queda entre los 3 primeros del Balón de Oro.\"), [\"s\", \"bdoPodiums\", 1]],"
+ },
+ "El señor de los balones": {
+  "w": [
+   "gx-data.js:81"
+  ],
+  "ctx": "[\"w_bdo3\", \"awards#\", \"g\", 0, \"p\", N_(\"El señor de los balones\"), N_(\"Gana 3 Balones de Oro.\"), [\"s\", \"bdo\", 3]],"
+ },
+ "Gana 3 Balones de Oro.": {
+  "w": [
+   "gx-data.js:81"
+  ],
+  "ctx": "[\"w_bdo3\", \"awards#\", \"g\", 0, \"p\", N_(\"El señor de los balones\"), N_(\"Gana 3 Balones de Oro.\"), [\"s\", \"bdo\", 3]],"
+ },
+ "Más que leyenda": {
+  "w": [
+   "gx-data.js:82",
+   "gx-data.js:82"
+  ],
+  "ctx": "[\"w_bdo5\", \"awards#\", \"g\", 0, \"p\", N_(\"Más que leyenda\"), N_(\"Gana 5 Balones de Oro.\"), [\"s\", \"bdo\", 5], {title: N_(\"Más que leyenda\")}],"
+ },
+ "Gana 5 Balones de Oro.": {
+  "w": [
+   "gx-data.js:82"
+  ],
+  "ctx": "[\"w_bdo5\", \"awards#\", \"g\", 0, \"p\", N_(\"Más que leyenda\"), N_(\"Gana 5 Balones de Oro.\"), [\"s\", \"bdo\", 5], {title: N_(\"Más que leyenda\")}],"
+ },
+ "Bota de diamante": {
+  "w": [
+   "gx-data.js:83"
+  ],
+  "ctx": "[\"w_boot3\", \"awards#\", \"g\", 0, \"p\", N_(\"Bota de diamante\"), N_(\"Gana 3 Botas de Oro europeas.\"), [\"s\", \"boots\", 3]],"
+ },
+ "Gana 3 Botas de Oro europeas.": {
+  "w": [
+   "gx-data.js:83"
+  ],
+  "ctx": "[\"w_boot3\", \"awards#\", \"g\", 0, \"p\", N_(\"Bota de diamante\"), N_(\"Gana 3 Botas de Oro europeas.\"), [\"s\", \"boots\", 3]],"
+ },
+ "El chico de oro": {
+  "w": [
+   "gx-data.js:84"
+  ],
+  "ctx": "[\"w_young\", \"awards\", \"s\", 0, \"p\", N_(\"El chico de oro\"), N_(\"Gana un premio al mejor jugador joven.\"), [\"s\", \"youngAwards\", 1]],"
+ },
+ "Gana un premio al mejor jugador joven.": {
+  "w": [
+   "gx-data.js:84"
+  ],
+  "ctx": "[\"w_young\", \"awards\", \"s\", 0, \"p\", N_(\"El chico de oro\"), N_(\"Gana un premio al mejor jugador joven.\"), [\"s\", \"youngAwards\", 1]],"
+ },
+ "Mes tras mes": {
+  "w": [
+   "gx-data.js:85"
+  ],
+  "ctx": "[\"w_pom10\", \"awards#\", \"s\", 0, \"p\", N_(\"Mes tras mes\"), N_(\"Gana 10 premios al jugador del mes.\"), [\"s\", \"pom\", 10]],"
+ },
+ "Gana 10 premios al jugador del mes.": {
+  "w": [
+   "gx-data.js:85"
+  ],
+  "ctx": "[\"w_pom10\", \"awards#\", \"s\", 0, \"p\", N_(\"Mes tras mes\"), N_(\"Gana 10 premios al jugador del mes.\"), [\"s\", \"pom\", 10]],"
+ },
+ "El once ideal": {
+  "w": [
+   "gx-data.js:86"
+  ],
+  "ctx": "[\"w_xi\", \"awards\", \"s\", 0, \"p\", N_(\"El once ideal\"), N_(\"Entra en el once mundial del año.\"), [\"s\", \"teamOfYear\", 1]],"
+ },
+ "Entra en el once mundial del año.": {
+  "w": [
+   "gx-data.js:86"
+  ],
+  "ctx": "[\"w_xi\", \"awards\", \"s\", 0, \"p\", N_(\"El once ideal\"), N_(\"Entra en el once mundial del año.\"), [\"s\", \"teamOfYear\", 1]],"
+ },
+ "Un trofeo para gobernarlos": {
+  "w": [
+   "gx-data.js:87"
+  ],
+  "ctx": "[\"w_all\", \"awards\", \"g\", 0, \"p\", N_(\"Un trofeo para gobernarlos\"), N_(\"Gana 4 títulos en una misma temporada.\"), [\"s\", \"bestSeasonTitles\", 4]],"
+ },
+ "Gana 4 títulos en una misma temporada.": {
+  "w": [
+   "gx-data.js:87"
+  ],
+  "ctx": "[\"w_all\", \"awards\", \"g\", 0, \"p\", N_(\"Un trofeo para gobernarlos\"), N_(\"Gana 4 títulos en una misma temporada.\"), [\"s\", \"bestSeasonTitles\", 4]],"
+ },
+ "Mediador": {
+  "w": [
+   "gx-data.js:89"
+  ],
+  "ctx": "[\"d_peace\", \"room\", \"b\", 0, \"p\", N_(\"Mediador\"), N_(\"Pon paz en una pelea del vestuario.\"), [\"f\", \"mediator\"]],"
+ },
+ "Pon paz en una pelea del vestuario.": {
+  "w": [
+   "gx-data.js:89"
+  ],
+  "ctx": "[\"d_peace\", \"room\", \"b\", 0, \"p\", N_(\"Mediador\"), N_(\"Pon paz en una pelea del vestuario.\"), [\"f\", \"mediator\"]],"
+ },
+ "Mentor": {
+  "w": [
+   "gx-data.js:90",
+   "gx-data.js:90"
+  ],
+  "ctx": "[\"d_mentor\", \"room#\", \"s\", 0, \"p\", N_(\"Mentor\"), N_(\"Ayuda a 3 novatos que te pidan consejo.\"), [\"s\", \"mentored\", 3], {title: N_(\"Mentor\")}],"
+ },
+ "Ayuda a 3 novatos que te pidan consejo.": {
+  "w": [
+   "gx-data.js:90"
+  ],
+  "ctx": "[\"d_mentor\", \"room#\", \"s\", 0, \"p\", N_(\"Mentor\"), N_(\"Ayuda a 3 novatos que te pidan consejo.\"), [\"s\", \"mentored\", 3], {title: N_(\"Mentor\")}],"
+ },
+ "Lealtad ciega": {
+  "w": [
+   "gx-data.js:91"
+  ],
+  "ctx": "[\"d_cover\", \"room#\", \"b\", 1, \"p\", N_(\"Lealtad ciega\"), N_(\"Cubre a un compañero tres veces.\"), [\"s\", \"covered\", 3]],"
+ },
+ "Cubre a un compañero tres veces.": {
+  "w": [
+   "gx-data.js:91"
+  ],
+  "ctx": "[\"d_cover\", \"room#\", \"b\", 1, \"p\", N_(\"Lealtad ciega\"), N_(\"Cubre a un compañero tres veces.\"), [\"s\", \"covered\", 3]],"
+ },
+ "Aquí mando yo": {
+  "w": [
+   "gx-data.js:92"
+  ],
+  "ctx": "[\"d_boss\", \"room\", \"s\", 0, \"p\", N_(\"Aquí mando yo\"), N_(\"Pide el balón en un penalti siendo suplente de lanzador y márcalo.\"), [\"f\", \"askPenScore\"]],"
+ },
+ "Pide el balón en un penalti siendo suplente de lanzador y márcalo.": {
+  "w": [
+   "gx-data.js:92"
+  ],
+  "ctx": "[\"d_boss\", \"room\", \"s\", 0, \"p\", N_(\"Aquí mando yo\"), N_(\"Pide el balón en un penalti siendo suplente de lanzador y márcalo.\"), [\"f\", \"askPenScore\"]],"
+ },
+ "¡Pinocho!": {
+  "w": [
+   "gx-data.js:93"
+  ],
+  "ctx": "[\"d_liar\", \"room\", \"b\", 1, \"p\", N_(\"¡Pinocho!\"), N_(\"Miente a la prensa y que te pillen.\"), [\"f\", \"liar\"]],"
+ },
+ "Miente a la prensa y que te pillen.": {
+  "w": [
+   "gx-data.js:93"
+  ],
+  "ctx": "[\"d_liar\", \"room\", \"b\", 1, \"p\", N_(\"¡Pinocho!\"), N_(\"Miente a la prensa y que te pillen.\"), [\"f\", \"liar\"]],"
+ },
+ "Hasta el último aliento": {
+  "w": [
+   "gx-data.js:94"
+  ],
+  "ctx": "[\"d_last\", \"room\", \"s\", 0, \"p\", N_(\"Hasta el último aliento\"), N_(\"Juega tocado una final y ganadla.\"), [\"f\", \"hurtFinalWin\"]],"
+ },
+ "Juega tocado una final y ganadla.": {
+  "w": [
+   "gx-data.js:94"
+  ],
+  "ctx": "[\"d_last\", \"room\", \"s\", 0, \"p\", N_(\"Hasta el último aliento\"), N_(\"Juega tocado una final y ganadla.\"), [\"f\", \"hurtFinalWin\"]],"
+ },
+ "Fiesta, fiesta…": {
+  "w": [
+   "gx-data.js:95"
+  ],
+  "ctx": "[\"d_party\", \"room\", \"b\", 1, \"p\", N_(\"Fiesta, fiesta…\"), N_(\"Sal de fiesta la víspera de un partido y marca dos goles.\"), [\"f\", \"partyBrace\"]],"
+ },
+ "Sal de fiesta la víspera de un partido y marca dos goles.": {
+  "w": [
+   "gx-data.js:95"
+  ],
+  "ctx": "[\"d_party\", \"room\", \"b\", 1, \"p\", N_(\"Fiesta, fiesta…\"), N_(\"Sal de fiesta la víspera de un partido y marca dos goles.\"), [\"f\", \"partyBrace\"]],"
+ },
+ "Fichaje del verano": {
+  "w": [
+   "gx-data.js:96"
+  ],
+  "ctx": "[\"d_loyal\", \"room\", \"s\", 0, \"p\", N_(\"Fichaje del verano\"), N_(\"Rechaza la oferta de un grande por lealtad a tu club.\"), [\"f\", \"rejectBig\"]],"
+ },
+ "Rechaza la oferta de un grande por lealtad a tu club.": {
+  "w": [
+   "gx-data.js:96"
+  ],
+  "ctx": "[\"d_loyal\", \"room\", \"s\", 0, \"p\", N_(\"Fichaje del verano\"), N_(\"Rechaza la oferta de un grande por lealtad a tu club.\"), [\"f\", \"rejectBig\"]],"
+ },
+ "Doctor House": {
+  "w": [
+   "gx-data.js:97"
+  ],
+  "ctx": "[\"d_house\", \"room\", \"b\", 1, \"p\", N_(\"Doctor House\"), N_(\"Sigue el consejo del fisio frente al del médico y acierta.\"), [\"f\", \"physioRight\"]],"
+ },
+ "Sigue el consejo del fisio frente al del médico y acierta.": {
+  "w": [
+   "gx-data.js:97"
+  ],
+  "ctx": "[\"d_house\", \"room\", \"b\", 1, \"p\", N_(\"Doctor House\"), N_(\"Sigue el consejo del fisio frente al del médico y acierta.\"), [\"f\", \"physioRight\"]],"
+ },
+ "El último baile": {
+  "w": [
+   "gx-data.js:98"
+  ],
+  "ctx": "[\"d_dance\", \"room\", \"s\", 0, \"p\", N_(\"El último baile\"), N_(\"Juega tu partido homenaje.\"), [\"f\", \"tribute\"]],"
+ },
+ "Juega tu partido homenaje.": {
+  "w": [
+   "gx-data.js:98"
+  ],
+  "ctx": "[\"d_dance\", \"room\", \"s\", 0, \"p\", N_(\"El último baile\"), N_(\"Juega tu partido homenaje.\"), [\"f\", \"tribute\"]],"
+ },
+ "¡Váyase, señor árbitro!": {
+  "w": [
+   "gx-data.js:100"
+  ],
+  "ctx": "[\"r_ref\", \"press\", \"b\", 1, \"p\", N_(\"¡Váyase, señor árbitro!\"), N_(\"Ve 3 tarjetas rojas en una temporada.\"), [\"s\", \"bestSeasonReds\", 3]],"
+ },
+ "Ve 3 tarjetas rojas en una temporada.": {
+  "w": [
+   "gx-data.js:100"
+  ],
+  "ctx": "[\"r_ref\", \"press\", \"b\", 1, \"p\", N_(\"¡Váyase, señor árbitro!\"), N_(\"Ve 3 tarjetas rojas en una temporada.\"), [\"s\", \"bestSeasonReds\", 3]],"
+ },
+ "Influencer": {
+  "w": [
+   "gx-data.js:101",
+   "gx-data.js:101"
+  ],
+  "ctx": "[\"r_inf\", \"press#\", \"s\", 0, \"p\", N_(\"Influencer\"), N_(\"Llega a 10 millones de seguidores.\"), [\"s\", \"followers\", 1e7], {title: N_(\"Influencer\")}],"
+ },
+ "Llega a 10 millones de seguidores.": {
+  "w": [
+   "gx-data.js:101"
+  ],
+  "ctx": "[\"r_inf\", \"press#\", \"s\", 0, \"p\", N_(\"Influencer\"), N_(\"Llega a 10 millones de seguidores.\"), [\"s\", \"followers\", 1e7], {title: N_(\"Influencer\")}],"
+ },
+ "La grada es mía": {
+  "w": [
+   "gx-data.js:102"
+  ],
+  "ctx": "[\"r_fans\", \"press\", \"s\", 0, \"p\", N_(\"La grada es mía\"), N_(\"Mantén a la afición entregada durante toda una temporada.\"), [\"f\", \"fansMax\"]],"
+ },
+ "Mantén a la afición entregada durante toda una temporada.": {
+  "w": [
+   "gx-data.js:102"
+  ],
+  "ctx": "[\"r_fans\", \"press\", \"s\", 0, \"p\", N_(\"La grada es mía\"), N_(\"Mantén a la afición entregada durante toda una temporada.\"), [\"f\", \"fansMax\"]],"
+ },
+ "Pitada monumental": {
+  "w": [
+   "gx-data.js:103"
+  ],
+  "ctx": "[\"r_boo\", \"press\", \"b\", 1, \"p\", N_(\"Pitada monumental\"), N_(\"Que te pite tu propia afición.\"), [\"f\", \"booed\"]],"
+ },
+ "Que te pite tu propia afición.": {
+  "w": [
+   "gx-data.js:103"
+  ],
+  "ctx": "[\"r_boo\", \"press\", \"b\", 1, \"p\", N_(\"Pitada monumental\"), N_(\"Que te pite tu propia afición.\"), [\"f\", \"booed\"]],"
+ },
+ "Ídolo infantil": {
+  "w": [
+   "gx-data.js:104"
+  ],
+  "ctx": "[\"r_kid\", \"press\", \"b\", 0, \"p\", N_(\"Ídolo infantil\"), N_(\"Visita a un niño hospitalizado.\"), [\"f\", \"hospital\"]],"
+ },
+ "Visita a un niño hospitalizado.": {
+  "w": [
+   "gx-data.js:104"
+  ],
+  "ctx": "[\"r_kid\", \"press\", \"b\", 0, \"p\", N_(\"Ídolo infantil\"), N_(\"Visita a un niño hospitalizado.\"), [\"f\", \"hospital\"]],"
+ },
+ "Titular de portada": {
+  "w": [
+   "gx-data.js:105"
+  ],
+  "ctx": "[\"r_cover\", \"press#\", \"s\", 0, \"p\", N_(\"Titular de portada\"), N_(\"Protagoniza 20 grandes titulares.\"), [\"s\", \"headlines\", 20]],"
+ },
+ "Protagoniza 20 grandes titulares.": {
+  "w": [
+   "gx-data.js:105"
+  ],
+  "ctx": "[\"r_cover\", \"press#\", \"s\", 0, \"p\", N_(\"Titular de portada\"), N_(\"Protagoniza 20 grandes titulares.\"), [\"s\", \"headlines\", 20]],"
+ },
+ "Celebra con tu ex": {
+  "w": [
+   "gx-data.js:106"
+  ],
+  "ctx": "[\"r_ex\", \"press\", \"b\", 1, \"p\", N_(\"Celebra con tu ex\"), N_(\"Celebra un gol ante uno de tus ex clubes.\"), [\"f\", \"exCelebrate\"]],"
+ },
+ "Celebra un gol ante uno de tus ex clubes.": {
+  "w": [
+   "gx-data.js:106"
+  ],
+  "ctx": "[\"r_ex\", \"press\", \"b\", 1, \"p\", N_(\"Celebra con tu ex\"), N_(\"Celebra un gol ante uno de tus ex clubes.\"), [\"f\", \"exCelebrate\"]],"
+ },
+ "Sin pelos en la lengua": {
+  "w": [
+   "gx-data.js:107"
+  ],
+  "ctx": "[\"r_tongue\", \"press\", \"b\", 0, \"p\", N_(\"Sin pelos en la lengua\"), N_(\"Responde con dureza a la crítica de un exjugador.\"), [\"f\", \"pressFight\"]],"
+ },
+ "Responde con dureza a la crítica de un exjugador.": {
+  "w": [
+   "gx-data.js:107"
+  ],
+  "ctx": "[\"r_tongue\", \"press\", \"b\", 0, \"p\", N_(\"Sin pelos en la lengua\"), N_(\"Responde con dureza a la crítica de un exjugador.\"), [\"f\", \"pressFight\"]],"
+ },
+ "Pide un deseo": {
+  "w": [
+   "gx-data.js:109"
+  ],
+  "ctx": "[\"pt_wish\", \"pet#\", \"g\", 0, \"p\", N_(\"Pide un deseo\"), N_(\"Que tu mascota celebre contigo 100 goles.\"), [\"s\", \"petGoals\", 100]],"
+ },
+ "Que tu mascota celebre contigo 100 goles.": {
+  "w": [
+   "gx-data.js:109"
+  ],
+  "ctx": "[\"pt_wish\", \"pet#\", \"g\", 0, \"p\", N_(\"Pide un deseo\"), N_(\"Que tu mascota celebre contigo 100 goles.\"), [\"s\", \"petGoals\", 100]],"
+ },
+ "Mejores amigos para siempre": {
+  "w": [
+   "gx-data.js:110"
+  ],
+  "ctx": "[\"pt_bff\", \"pet\", \"s\", 0, \"p\", N_(\"Mejores amigos para siempre\"), N_(\"Llega al vínculo máximo con tu mascota.\"), [\"f\", \"petBond\"]],"
+ },
+ "Llega al vínculo máximo con tu mascota.": {
+  "w": [
+   "gx-data.js:110"
+  ],
+  "ctx": "[\"pt_bff\", \"pet\", \"s\", 0, \"p\", N_(\"Mejores amigos para siempre\"), N_(\"Llega al vínculo máximo con tu mascota.\"), [\"f\", \"petBond\"]],"
+ },
+ "El circo del sol": {
+  "w": [
+   "gx-data.js:111"
+  ],
+  "ctx": "[\"pt_circus\", \"pet\", \"g\", 0, \"p\", N_(\"El circo del sol\"), N_(\"Tu mascota domina todos sus trucos.\"), [\"f\", \"petAllTricks\"]],"
+ },
+ "Tu mascota domina todos sus trucos.": {
+  "w": [
+   "gx-data.js:111"
+  ],
+  "ctx": "[\"pt_circus\", \"pet\", \"g\", 0, \"p\", N_(\"El circo del sol\"), N_(\"Tu mascota domina todos sus trucos.\"), [\"f\", \"petAllTricks\"]],"
+ },
+ "Reina del desfile": {
+  "w": [
+   "gx-data.js:112"
+  ],
+  "ctx": "[\"pt_queen\", \"pet\", \"g\", 0, \"p\", N_(\"Reina del desfile\"), N_(\"Gana un concurso nacional de mascotas.\"), [\"f\", \"petNational\"]],"
+ },
+ "Gana un concurso nacional de mascotas.": {
+  "w": [
+   "gx-data.js:112",
+   "pet-items.js:80"
+  ],
+  "ctx": "[\"pt_queen\", \"pet\", \"g\", 0, \"p\", N_(\"Reina del desfile\"), N_(\"Gana un concurso nacional de mascotas.\"), [\"f\", \"petNational\"]],"
+ },
+ "Paseante incansable": {
+  "w": [
+   "gx-data.js:113"
+  ],
+  "ctx": "[\"pt_walk\", \"pet#\", \"s\", 0, \"p\", N_(\"Paseante incansable\"), N_(\"Sal de paseo 100 veces con tu mascota.\"), [\"s\", \"petWalks\", 100]],"
+ },
+ "Sal de paseo 100 veces con tu mascota.": {
+  "w": [
+   "gx-data.js:113"
+  ],
+  "ctx": "[\"pt_walk\", \"pet#\", \"s\", 0, \"p\", N_(\"Paseante incansable\"), N_(\"Sal de paseo 100 veces con tu mascota.\"), [\"s\", \"petWalks\", 100]],"
+ },
+ "Fashion week": {
+  "w": [
+   "gx-data.js:114"
+  ],
+  "ctx": "[\"pt_fashion\", \"pet#\", \"s\", 0, \"p\", N_(\"Fashion week\"), N_(\"Reúne 15 accesorios distintos para tu mascota.\"), [\"s\", \"petAcc\", 15]],"
+ },
+ "Reúne 15 accesorios distintos para tu mascota.": {
+  "w": [
+   "gx-data.js:114"
+  ],
+  "ctx": "[\"pt_fashion\", \"pet#\", \"s\", 0, \"p\", N_(\"Fashion week\"), N_(\"Reúne 15 accesorios distintos para tu mascota.\"), [\"s\", \"petAcc\", 15]],"
+ },
+ "Mascota oficial": {
+  "w": [
+   "gx-data.js:115"
+  ],
+  "ctx": "[\"pt_mascot\", \"pet\", \"s\", 0, \"p\", N_(\"Mascota oficial\"), N_(\"Tu mascota se convierte en la mascota del club.\"), [\"f\", \"petMascot\"]],"
+ },
+ "Tu mascota se convierte en la mascota del club.": {
+  "w": [
+   "gx-data.js:115"
+  ],
+  "ctx": "[\"pt_mascot\", \"pet\", \"s\", 0, \"p\", N_(\"Mascota oficial\"), N_(\"Tu mascota se convierte en la mascota del club.\"), [\"f\", \"petMascot\"]],"
+ },
+ "Estrella de anuncio": {
+  "w": [
+   "gx-data.js:116"
+  ],
+  "ctx": "[\"pt_ad\", \"pet\", \"b\", 0, \"p\", N_(\"Estrella de anuncio\"), N_(\"Rueda un anuncio con tu mascota.\"), [\"f\", \"petAd\"]],"
+ },
+ "Rueda un anuncio con tu mascota.": {
+  "w": [
+   "gx-data.js:116"
+  ],
+  "ctx": "[\"pt_ad\", \"pet\", \"b\", 0, \"p\", N_(\"Estrella de anuncio\"), N_(\"Rueda un anuncio con tu mascota.\"), [\"f\", \"petAd\"]],"
+ },
+ "Directo al charco": {
+  "w": [
+   "gx-data.js:117"
+  ],
+  "ctx": "[\"pt_puddle\", \"pet#\", \"b\", 1, \"p\", N_(\"Directo al charco\"), N_(\"Tu mascota salta en 10 charcos.\"), [\"s\", \"petPuddles\", 10]],"
+ },
+ "Tu mascota salta en 10 charcos.": {
+  "w": [
+   "gx-data.js:117"
+  ],
+  "ctx": "[\"pt_puddle\", \"pet#\", \"b\", 1, \"p\", N_(\"Directo al charco\"), N_(\"Tu mascota salta en 10 charcos.\"), [\"s\", \"petPuddles\", 10]],"
+ },
+ "Rey de la escuadra": {
+  "w": [
+   "gx-data.js:119"
+  ],
+  "ctx": "[\"mi_target\", \"mini#\", \"s\", 0, \"p\", N_(\"Rey de la escuadra\"), N_(\"Acierta 20 dianas en el entrenamiento.\"), [\"s\", \"targets\", 20]],"
+ },
+ "Acierta 20 dianas en el entrenamiento.": {
+  "w": [
+   "gx-data.js:119"
+  ],
+  "ctx": "[\"mi_target\", \"mini#\", \"s\", 0, \"p\", N_(\"Rey de la escuadra\"), N_(\"Acierta 20 dianas en el entrenamiento.\"), [\"s\", \"targets\", 20]],"
+ },
+ "Pulso de cirujano": {
+  "w": [
+   "gx-data.js:120"
+  ],
+  "ctx": "[\"mi_pulse\", \"mini\", \"b\", 0, \"p\", N_(\"Pulso de cirujano\"), N_(\"Marca 5 penaltis seguidos en el entrenamiento.\"), [\"s\", \"trainPenStreak\", 5]],"
+ },
+ "Marca 5 penaltis seguidos en el entrenamiento.": {
+  "w": [
+   "gx-data.js:120"
+  ],
+  "ctx": "[\"mi_pulse\", \"mini\", \"b\", 0, \"p\", N_(\"Pulso de cirujano\"), N_(\"Marca 5 penaltis seguidos en el entrenamiento.\"), [\"s\", \"trainPenStreak\", 5]],"
+ },
+ "Barrera humana": {
+  "w": [
+   "gx-data.js:121"
+  ],
+  "ctx": "[\"mi_wall\", \"mini\", \"s\", 0, \"p\", N_(\"Barrera humana\"), N_(\"Para 5 faltas seguidas.\"), [\"s\", \"fkSaveStreak\", 5]],"
+ },
+ "Para 5 faltas seguidas.": {
+  "w": [
+   "gx-data.js:121"
+  ],
+  "ctx": "[\"mi_wall\", \"mini\", \"s\", 0, \"p\", N_(\"Barrera humana\"), N_(\"Para 5 faltas seguidas.\"), [\"s\", \"fkSaveStreak\", 5]],"
+ },
+ "Héroe de la final": {
+  "w": [
+   "gx-data.js:122",
+   "sp-data.js:81"
+  ],
+  "ctx": "[\"mi_final\", \"mini\", \"g\", 0, \"p\", N_(\"Héroe de la final\"), N_(\"Para un penalti en una final.\"), [\"f\", \"savefinal\"]],"
+ },
+ "Para un penalti en una final.": {
+  "w": [
+   "gx-data.js:122",
+   "sp-data.js:81"
+  ],
+  "ctx": "[\"mi_final\", \"mini\", \"g\", 0, \"p\", N_(\"Héroe de la final\"), N_(\"Para un penalti en una final.\"), [\"f\", \"savefinal\"]],"
+ },
+ "Reto superado": {
+  "w": [
+   "gx-data.js:123"
+  ],
+  "ctx": "[\"mi_ch\", \"mini#\", \"g\", 0, \"p\", N_(\"Reto superado\"), N_(\"Supera los 5 retos de balón parado.\"), [\"s\", \"spChallenges\", 5]],"
+ },
+ "Supera los 5 retos de balón parado.": {
+  "w": [
+   "gx-data.js:123"
+  ],
+  "ctx": "[\"mi_ch\", \"mini#\", \"g\", 0, \"p\", N_(\"Reto superado\"), N_(\"Supera los 5 retos de balón parado.\"), [\"s\", \"spChallenges\", 5]],"
+ },
+ "Palo y dentro": {
+  "w": [
+   "gx-data.js:124",
+   "sp-data.js:82"
+  ],
+  "ctx": "[\"mi_postin\", \"mini\", \"b\", 0, \"p\", N_(\"Palo y dentro\"), N_(\"Marca después de tocar el poste.\"), [\"f\", \"postin\"]],"
+ },
+ "Marca después de tocar el poste.": {
+  "w": [
+   "gx-data.js:124",
+   "sp-data.js:82"
+  ],
+  "ctx": "[\"mi_postin\", \"mini\", \"b\", 0, \"p\", N_(\"Palo y dentro\"), N_(\"Marca después de tocar el poste.\"), [\"f\", \"postin\"]],"
+ },
+ "Al palo, otra vez": {
+  "w": [
+   "gx-data.js:125"
+  ],
+  "ctx": "[\"mi_posts\", \"mini#\", \"b\", 1, \"p\", N_(\"Al palo, otra vez\"), N_(\"Da 10 veces al palo en penaltis o faltas.\"), [\"s\", \"woodwork\", 10]],"
+ },
+ "Da 10 veces al palo en penaltis o faltas.": {
+  "w": [
+   "gx-data.js:125"
+  ],
+  "ctx": "[\"mi_posts\", \"mini#\", \"b\", 1, \"p\", N_(\"Al palo, otra vez\"), N_(\"Da 10 veces al palo en penaltis o faltas.\"), [\"s\", \"woodwork\", 10]],"
+ },
+ "Speedrunner": {
+  "w": [
+   "gx-data.js:126"
+  ],
+  "ctx": "[\"mi_speed\", \"mini\", \"s\", 0, \"p\", N_(\"Speedrunner\"), N_(\"Supera a la primera un reto de falta directa.\"), [\"f\", \"fkChallenge\"]],"
+ },
+ "Supera a la primera un reto de falta directa.": {
+  "w": [
+   "gx-data.js:126"
+  ],
+  "ctx": "[\"mi_speed\", \"mini\", \"s\", 0, \"p\", N_(\"Speedrunner\"), N_(\"Supera a la primera un reto de falta directa.\"), [\"f\", \"fkChallenge\"]],"
+ },
+ "Primera compra": {
+  "w": [
+   "gx-data.js:128"
+  ],
+  "ctx": "[\"sh_first\", \"shop\", \"b\", 0, \"p\", N_(\"Primera compra\"), N_(\"Compra tu primera pieza de equipamiento.\"), [\"s\", \"buys\", 1]],"
+ },
+ "Compra tu primera pieza de equipamiento.": {
+  "w": [
+   "gx-data.js:128"
+  ],
+  "ctx": "[\"sh_first\", \"shop\", \"b\", 0, \"p\", N_(\"Primera compra\"), N_(\"Compra tu primera pieza de equipamiento.\"), [\"s\", \"buys\", 1]],"
+ },
+ "De punta en blanco": {
+  "w": [
+   "gx-data.js:129"
+  ],
+  "ctx": "[\"sh_set\", \"shop\", \"s\", 0, \"p\", N_(\"De punta en blanco\"), N_(\"Lleva un conjunto completo de una misma línea.\"), [\"f\", \"fullSet\"]],"
+ },
+ "Lleva un conjunto completo de una misma línea.": {
+  "w": [
+   "gx-data.js:129"
+  ],
+  "ctx": "[\"sh_set\", \"shop\", \"s\", 0, \"p\", N_(\"De punta en blanco\"), N_(\"Lleva un conjunto completo de una misma línea.\"), [\"f\", \"fullSet\"]],"
+ },
+ "Elegido por los dioses": {
+  "w": [
+   "gx-data.js:130"
+  ],
+  "ctx": "[\"sh_leg\", \"shop\", \"g\", 0, \"p\", N_(\"Elegido por los dioses\"), N_(\"Consigue una pieza de tier Leyenda.\"), [\"f\", \"legendPiece\"]],"
+ },
+ "Consigue una pieza de tier Leyenda.": {
+  "w": [
+   "gx-data.js:130"
+  ],
+  "ctx": "[\"sh_leg\", \"shop\", \"g\", 0, \"p\", N_(\"Elegido por los dioses\"), N_(\"Consigue una pieza de tier Leyenda.\"), [\"f\", \"legendPiece\"]],"
+ },
+ "Dorado de pies a cabeza": {
+  "w": [
+   "gx-data.js:131"
+  ],
+  "ctx": "[\"sh_gold\", \"shop\", \"g\", 0, \"p\", N_(\"Dorado de pies a cabeza\"), N_(\"Equipa todas tus ranuras con piezas Oro o superiores.\"), [\"f\", \"allGold\"]],"
+ },
+ "Equipa todas tus ranuras con piezas Oro o superiores.": {
+  "w": [
+   "gx-data.js:131"
+  ],
+  "ctx": "[\"sh_gold\", \"shop\", \"g\", 0, \"p\", N_(\"Dorado de pies a cabeza\"), N_(\"Equipa todas tus ranuras con piezas Oro o superiores.\"), [\"f\", \"allGold\"]],"
+ },
+ "Ganga": {
+  "w": [
+   "gx-data.js:132"
+  ],
+  "ctx": "[\"sh_deal\", \"shop\", \"b\", 0, \"p\", N_(\"Ganga\"), N_(\"Compra algo en oferta.\"), [\"f\", \"bargain\"]],"
+ },
+ "Compra algo en oferta.": {
+  "w": [
+   "gx-data.js:132"
+  ],
+  "ctx": "[\"sh_deal\", \"shop\", \"b\", 0, \"p\", N_(\"Ganga\"), N_(\"Compra algo en oferta.\"), [\"f\", \"bargain\"]],"
+ },
+ "Coleccionista de botas": {
+  "w": [
+   "gx-data.js:133"
+  ],
+  "ctx": "[\"sh_boots\", \"shop#\", \"s\", 0, \"p\", N_(\"Coleccionista de botas\"), N_(\"Consigue 10 botas distintas.\"), [\"s\", \"bootsOwned\", 10]],"
+ },
+ "Consigue 10 botas distintas.": {
+  "w": [
+   "gx-data.js:133"
+  ],
+  "ctx": "[\"sh_boots\", \"shop#\", \"s\", 0, \"p\", N_(\"Coleccionista de botas\"), N_(\"Consigue 10 botas distintas.\"), [\"s\", \"bootsOwned\", 10]],"
+ },
+ "Mejora continua": {
+  "w": [
+   "gx-data.js:134"
+  ],
+  "ctx": "[\"sh_up\", \"shop#\", \"s\", 0, \"p\", N_(\"Mejora continua\"), N_(\"Mejora 10 veces el tier de una pieza.\"), [\"s\", \"upgrades\", 10]],"
+ },
+ "Mejora 10 veces el tier de una pieza.": {
+  "w": [
+   "gx-data.js:134"
+  ],
+  "ctx": "[\"sh_up\", \"shop#\", \"s\", 0, \"p\", N_(\"Mejora continua\"), N_(\"Mejora 10 veces el tier de una pieza.\"), [\"s\", \"upgrades\", 10]],"
+ },
+ "Ojo de halcón": {
+  "w": [
+   "gx-data.js:135"
+  ],
+  "ctx": "[\"sh_eye\", \"shop#\", \"b\", 0, \"p\", N_(\"Ojo de halcón\"), N_(\"Compra el destacado del día en 7 días distintos.\"), [\"s\", \"featuredDays\", 7]],"
+ },
+ "Compra el destacado del día en 7 días distintos.": {
+  "w": [
+   "gx-data.js:135"
+  ],
+  "ctx": "[\"sh_eye\", \"shop#\", \"b\", 0, \"p\", N_(\"Ojo de halcón\"), N_(\"Compra el destacado del día en 7 días distintos.\"), [\"s\", \"featuredDays\", 7]],"
+ },
+ "Esto es Esparta": {
+  "w": [
+   "gx-data.js:137"
+  ],
+  "ctx": "[\"o_sparta\", \"odd\", \"g\", 1, \"p\", N_(\"Esto es Esparta\"), N_(\"Gana un partido decisivo en el que te han expulsado.\"), [\"f\", \"spartan\"]],"
+ },
+ "Gana un partido decisivo en el que te han expulsado.": {
+  "w": [
+   "gx-data.js:137"
+  ],
+  "ctx": "[\"o_sparta\", \"odd\", \"g\", 1, \"p\", N_(\"Esto es Esparta\"), N_(\"Gana un partido decisivo en el que te han expulsado.\"), [\"f\", \"spartan\"]],"
+ },
+ "¡Multiplícate por cero!": {
+  "w": [
+   "gx-data.js:138"
+  ],
+  "ctx": "[\"o_zero\", \"odd\", \"b\", 1, \"p\", N_(\"¡Multiplícate por cero!\"), N_(\"Pierde un partido 0-5.\"), [\"f\", \"lose05\"]],"
+ },
+ "Pierde un partido 0-5.": {
+  "w": [
+   "gx-data.js:138"
+  ],
+  "ctx": "[\"o_zero\", \"odd\", \"b\", 1, \"p\", N_(\"¡Multiplícate por cero!\"), N_(\"Pierde un partido 0-5.\"), [\"f\", \"lose05\"]],"
+ },
+ "Aquí no hay quien juegue": {
+  "w": [
+   "gx-data.js:139"
+  ],
+  "ctx": "[\"o_rain\", \"odd\", \"b\", 1, \"p\", N_(\"Aquí no hay quien juegue\"), N_(\"Juega 7 partidos seguidos con lluvia.\"), [\"s\", \"rainStreakBest\", 7]],"
+ },
+ "Juega 7 partidos seguidos con lluvia.": {
+  "w": [
+   "gx-data.js:139"
+  ],
+  "ctx": "[\"o_rain\", \"odd\", \"b\", 1, \"p\", N_(\"Aquí no hay quien juegue\"), N_(\"Juega 7 partidos seguidos con lluvia.\"), [\"s\", \"rainStreakBest\", 7]],"
+ },
+ "Lleva todos esos dorsales a lo largo de tu carrera.": {
+  "w": [
+   "gx-data.js:140"
+  ],
+  "ctx": "[\"o_lost\", \"odd#\", \"g\", 1, \"p\", N_(\"4, 8, 15, 16, 23, 42\"), N_(\"Lleva todos esos dorsales a lo largo de tu carrera.\"), [\"s\", \"lostNumbers\", 6]],"
+ },
+ "Gol fantasma": {
+  "w": [
+   "gx-data.js:141"
+  ],
+  "ctx": "[\"o_ghost\", \"odd\", \"s\", 1, \"p\", N_(\"Gol fantasma\"), N_(\"Marca un gol que confirma la tecnología de gol.\"), [\"f\", \"ghost\"]],"
+ },
+ "Marca un gol que confirma la tecnología de gol.": {
+  "w": [
+   "gx-data.js:141"
+  ],
+  "ctx": "[\"o_ghost\", \"odd\", \"s\", 1, \"p\", N_(\"Gol fantasma\"), N_(\"Marca un gol que confirma la tecnología de gol.\"), [\"f\", \"ghost\"]],"
+ },
+ "El amigo invisible": {
+  "w": [
+   "gx-data.js:142"
+  ],
+  "ctx": "[\"o_invis\", \"odd\", \"b\", 1, \"p\", N_(\"El amigo invisible\"), N_(\"Termina un partido con una nota de 4,5 o menos.\"), [\"f\", \"invisible\"]],"
+ },
+ "Termina un partido con una nota de 4,5 o menos.": {
+  "w": [
+   "gx-data.js:142"
+  ],
+  "ctx": "[\"o_invis\", \"odd\", \"b\", 1, \"p\", N_(\"El amigo invisible\"), N_(\"Termina un partido con una nota de 4,5 o menos.\"), [\"f\", \"invisible\"]],"
+ },
+ "Doble fiesta": {
+  "w": [
+   "gx-data.js:143"
+  ],
+  "ctx": "[\"o_party\", \"odd\", \"b\", 1, \"p\", N_(\"Doble fiesta\"), N_(\"Marca en tu partido oficial número 100.\"), [\"f\", \"goal100th\"]],"
+ },
+ "Marca en tu partido oficial número 100.": {
+  "w": [
+   "gx-data.js:143"
+  ],
+  "ctx": "[\"o_party\", \"odd\", \"b\", 1, \"p\", N_(\"Doble fiesta\"), N_(\"Marca en tu partido oficial número 100.\"), [\"f\", \"goal100th\"]],"
+ },
+ "Noche de muertos vivientes": {
+  "w": [
+   "gx-data.js:144"
+  ],
+  "ctx": "[\"o_zombie\", \"odd\", \"g\", 1, \"p\", N_(\"Noche de muertos vivientes\"), N_(\"Empata un partido que perdíais por tres goles al descanso.\"), [\"f\", \"zombie\"]],"
+ },
+ "Empata un partido que perdíais por tres goles al descanso.": {
+  "w": [
+   "gx-data.js:144"
+  ],
+  "ctx": "[\"o_zombie\", \"odd\", \"g\", 1, \"p\", N_(\"Noche de muertos vivientes\"), N_(\"Empata un partido que perdíais por tres goles al descanso.\"), [\"f\", \"zombie\"]],"
+ },
+ "Cosas que pasan": {
+  "w": [
+   "gx-data.js:145"
+  ],
+  "ctx": "[\"o_redeb\", \"odd\", \"b\", 1, \"p\", N_(\"Cosas que pasan\"), N_(\"Que te expulsen en tu debut.\"), [\"f\", \"redDebut\"]],"
+ },
+ "Que te expulsen en tu debut.": {
+  "w": [
+   "gx-data.js:145"
+  ],
+  "ctx": "[\"o_redeb\", \"odd\", \"b\", 1, \"p\", N_(\"Cosas que pasan\"), N_(\"Que te expulsen en tu debut.\"), [\"f\", \"redDebut\"]],"
+ },
+ "Ah, el fútbol": {
+  "w": [
+   "gx-data.js:146"
+  ],
+  "ctx": "[\"o_ahfutbol\", \"odd\", \"b\", 1, \"p\", N_(\"Ah, el fútbol\"), N_(\"Pierde una final con un gol tuyo en propia puerta.\"), [\"f\", \"finalOwnGoal\"]],"
+ },
+ "Pierde una final con un gol tuyo en propia puerta.": {
+  "w": [
+   "gx-data.js:146"
+  ],
+  "ctx": "[\"o_ahfutbol\", \"odd\", \"b\", 1, \"p\", N_(\"Ah, el fútbol\"), N_(\"Pierde una final con un gol tuyo en propia puerta.\"), [\"f\", \"finalOwnGoal\"]],"
+ },
+ "Hecho a sí mismo": {
+  "w": [
+   "gx-data.js:148",
+   "gx-data.js:148"
+  ],
+  "ctx": "[\"m_self\", \"mgr\", \"g\", 0, \"m\", N_(\"Hecho a sí mismo\"), N_(\"Gana una liga con un equipo recién ascendido.\"), [\"f\", \"mPromotedChamp\"], {title: N_(\"Hecho a sí mismo\")}],"
+ },
+ "Gana una liga con un equipo recién ascendido.": {
+  "w": [
+   "gx-data.js:148"
+  ],
+  "ctx": "[\"m_self\", \"mgr\", \"g\", 0, \"m\", N_(\"Hecho a sí mismo\"), N_(\"Gana una liga con un equipo recién ascendido.\"), [\"f\", \"mPromotedChamp\"], {title: N_(\"Hecho a sí mismo\")}],"
+ },
+ "La cantera de mi barrio": {
+  "w": [
+   "gx-data.js:149"
+  ],
+  "ctx": "[\"m_youth\", \"mgr#\", \"g\", 0, \"m\", N_(\"La cantera de mi barrio\"), N_(\"Haz debutar a 20 canteranos.\"), [\"s\", \"mYouthDebuts\", 20]],"
+ },
+ "Haz debutar a 20 canteranos.": {
+  "w": [
+   "gx-data.js:149"
+  ],
+  "ctx": "[\"m_youth\", \"mgr#\", \"g\", 0, \"m\", N_(\"La cantera de mi barrio\"), N_(\"Haz debutar a 20 canteranos.\"), [\"s\", \"mYouthDebuts\", 20]],"
+ },
+ "Rey del continente": {
+  "w": [
+   "gx-data.js:150"
+  ],
+  "ctx": "[\"m_europe\", \"mgr#\", \"g\", 0, \"m\", N_(\"Rey del continente\"), N_(\"Gana 3 títulos continentales como míster.\"), [\"s\", \"mContinental\", 3]],"
+ },
+ "Gana 3 títulos continentales como míster.": {
+  "w": [
+   "gx-data.js:150"
+  ],
+  "ctx": "[\"m_europe\", \"mgr#\", \"g\", 0, \"m\", N_(\"Rey del continente\"), N_(\"Gana 3 títulos continentales como míster.\"), [\"s\", \"mContinental\", 3]],"
+ },
+ "¿Dónde está mi equipo?": {
+  "w": [
+   "gx-data.js:151"
+  ],
+  "ctx": "[\"m_where\", \"mgr\", \"s\", 1, \"m\", N_(\"¿Dónde está mi equipo?\"), N_(\"Gana un partido de liga con 7 jugadores fuera de su posición natural.\"), [\"f\", \"mOutOfPos\"]],"
+ },
+ "Gana un partido de liga con 7 jugadores fuera de su posición natural.": {
+  "w": [
+   "gx-data.js:151"
+  ],
+  "ctx": "[\"m_where\", \"mgr\", \"s\", 1, \"m\", N_(\"¿Dónde está mi equipo?\"), N_(\"Gana un partido de liga con 7 jugadores fuera de su posición natural.\"), [\"f\", \"mOutOfPos\"]],"
+ },
+ "El cambio perfecto": {
+  "w": [
+   "gx-data.js:152"
+  ],
+  "ctx": "[\"m_change\", \"mgr\", \"s\", 0, \"m\", N_(\"El cambio perfecto\"), N_(\"Gana un partido en directo tras hacer tres cambios.\"), [\"f\", \"mSubsWin\"]],"
+ },
+ "Gana un partido en directo tras hacer tres cambios.": {
+  "w": [
+   "gx-data.js:152"
+  ],
+  "ctx": "[\"m_change\", \"mgr\", \"s\", 0, \"m\", N_(\"El cambio perfecto\"), N_(\"Gana un partido en directo tras hacer tres cambios.\"), [\"f\", \"mSubsWin\"]],"
+ },
+ "Brazos cruzados": {
+  "w": [
+   "gx-data.js:153"
+  ],
+  "ctx": "[\"m_arms\", \"mgr#\", \"b\", 0, \"m\", N_(\"Brazos cruzados\"), N_(\"Dirige 100 partidos.\"), [\"s\", \"mGames\", 100]],"
+ },
+ "Dirige 100 partidos.": {
+  "w": [
+   "gx-data.js:153"
+  ],
+  "ctx": "[\"m_arms\", \"mgr#\", \"b\", 0, \"m\", N_(\"Brazos cruzados\"), N_(\"Dirige 100 partidos.\"), [\"s\", \"mGames\", 100]],"
+ },
+ "Bronca histórica": {
+  "w": [
+   "gx-data.js:154"
+  ],
+  "ctx": "[\"m_storm\", \"mgr\", \"b\", 1, \"m\", N_(\"Bronca histórica\"), N_(\"Pierde 3 partidos seguidos por tres goles o más.\"), [\"s\", \"mBigLossStreak\", 3]],"
+ },
+ "Pierde 3 partidos seguidos por tres goles o más.": {
+  "w": [
+   "gx-data.js:154"
+  ],
+  "ctx": "[\"m_storm\", \"mgr\", \"b\", 1, \"m\", N_(\"Bronca histórica\"), N_(\"Pierde 3 partidos seguidos por tres goles o más.\"), [\"s\", \"mBigLossStreak\", 3]],"
+ },
+ "Del banquillo al cielo": {
+  "w": [
+   "gx-data.js:155"
+  ],
+  "ctx": "[\"m_sky\", \"mgr\", \"g\", 0, \"m\", N_(\"Del banquillo al cielo\"), N_(\"Asciende dos temporadas seguidas.\"), [\"f\", \"mDoublePromo\"]],"
+ },
+ "Asciende dos temporadas seguidas.": {
+  "w": [
+   "gx-data.js:155"
+  ],
+  "ctx": "[\"m_sky\", \"mgr\", \"g\", 0, \"m\", N_(\"Del banquillo al cielo\"), N_(\"Asciende dos temporadas seguidas.\"), [\"f\", \"mDoublePromo\"]],"
+ },
+ "Mismo vestuario, otra silla": {
+  "w": [
+   "gx-data.js:156"
+  ],
+  "ctx": "[\"m_same\", \"mgr\", \"s\", 0, \"m\", N_(\"Mismo vestuario, otra silla\"), N_(\"Entrena a un club en el que jugaste.\"), [\"f\", \"mExClub\"]]"
+ },
+ "Entrena a un club en el que jugaste.": {
+  "w": [
+   "gx-data.js:156"
+  ],
+  "ctx": "[\"m_same\", \"mgr\", \"s\", 0, \"m\", N_(\"Mismo vestuario, otra silla\"), N_(\"Entrena a un club en el que jugaste.\"), [\"f\", \"mExClub\"]]"
+ },
+ "Leyenda total": {
+  "w": [
+   "gx-data.js:171",
+   "gx-data.js:171"
+  ],
+  "ctx": "var GX_PLAT = {p: {id: \"plat_p\", n: N_(\"Leyenda total\"), d: N_(\"Consigue todos los trofeos de jugador.\"), title: N_(\"Leyenda total\")}, m: {id: \"plat_m\", n: N_(\"Mister Universo\"), d: N_(\"Consigue todos los trofeos de entr"
+ },
+ "Consigue todos los trofeos de jugador.": {
+  "w": [
+   "gx-data.js:171"
+  ],
+  "ctx": "var GX_PLAT = {p: {id: \"plat_p\", n: N_(\"Leyenda total\"), d: N_(\"Consigue todos los trofeos de jugador.\"), title: N_(\"Leyenda total\")}, m: {id: \"plat_m\", n: N_(\"Mister Universo\"), d: N_(\"Consigue todos los trofeos de entr"
+ },
+ "Mister Universo": {
+  "w": [
+   "gx-data.js:171",
+   "gx-data.js:171"
+  ],
+  "ctx": "var GX_PLAT = {p: {id: \"plat_p\", n: N_(\"Leyenda total\"), d: N_(\"Consigue todos los trofeos de jugador.\"), title: N_(\"Leyenda total\")}, m: {id: \"plat_m\", n: N_(\"Mister Universo\"), d: N_(\"Consigue todos los trofeos de entr"
+ },
+ "Consigue todos los trofeos de entrenador.": {
+  "w": [
+   "gx-data.js:171"
+  ],
+  "ctx": "var GX_PLAT = {p: {id: \"plat_p\", n: N_(\"Leyenda total\"), d: N_(\"Consigue todos los trofeos de jugador.\"), title: N_(\"Leyenda total\")}, m: {id: \"plat_m\", n: N_(\"Mister Universo\"), d: N_(\"Consigue todos los trofeos de entr"
+ },
+ "Trofeo de bronce": {
+  "w": [
+   "ui-gx.js:97"
+  ],
+  "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
+ },
+ "Trofeo de plata": {
+  "w": [
+   "ui-gx.js:97"
+  ],
+  "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
+ },
+ "Trofeo de oro": {
+  "w": [
+   "ui-gx.js:97"
+  ],
+  "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
+ },
+ "Trofeo de platino": {
+  "w": [
+   "ui-gx.js:97",
+   "ui-gx.js:151"
+  ],
+  "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
+ },
+ "Nuevo título: «{t}»": {
+  "w": [
+   "ui-gx.js:152"
+  ],
+  "ctx": "(m.x && m.x.title ? '<p class=\"gxc-ti\">' + h(tr(\"Nuevo título: «{t}»\", {t: tr(m.x.title)})) + \"</p>\" : \"\") + '<button class=\"btn\" data-gx=\"ok\">' + h(tr(\"¡Leyenda!\")) + \"</button></div>\";"
+ },
+ "¡Leyenda!": {
+  "w": [
+   "ui-gx.js:152"
+  ],
+  "ctx": "(m.x && m.x.title ? '<p class=\"gxc-ti\">' + h(tr(\"Nuevo título: «{t}»\", {t: tr(m.x.title)})) + \"</p>\" : \"\") + '<button class=\"btn\" data-gx=\"ok\">' + h(tr(\"¡Leyenda!\")) + \"</button></div>\";"
+ },
+ "Trofeos": {
+  "w": [
+   "ui-gx.js:192"
+  ],
+  "ctx": "var s = '<h2>' + h(tr(\"Trofeos\")) + '</h2><div class=\"stack gxs\">';"
+ },
+ "{n} de {t} trofeos de esta carrera": {
+  "w": [
+   "ui-gx.js:194"
+  ],
+  "ctx": "h(tr(\"{n} de {t} trofeos de esta carrera\", {n: got.length, t: L.length})) + \"</small>\" +"
+ },
+ "Todas": {
+  "w": [
+   "ui-gx.js:199"
+  ],
+  "ctx": "s += '<div class=\"gxs-cats\">' + '<button data-a=\"gxcat\" data-v=\"\" aria-pressed=\"' + (!F.cat) + '\" class=\"gxc-b\"><span>🏆</span><b>' + h(tr(\"Todas\")) + \"</b></button>\" + cats.map(function (c) {"
+ },
+ "Trofeo oculto: sigue jugando para descubrirlo.": {
+  "w": [
+   "ui-gx.js:207"
+  ],
+  "ctx": "return '<li class=\"gxi gx-' + x.rar + (on ? \" on\" : \"\") + '\"><img src=\"' + GXV.img(sec ? \"lock\" : x.rar, 64) + '\" alt=\"\" width=\"40\" height=\"40\"><span class=\"grow\"><b>' + h(sec ? \"???\" : x.n) + '</b><small>' + h(sec ? tr("
+ },
+ "Nada por aquí con estos filtros.": {
+  "w": [
+   "ui-gx.js:211"
+  ],
+  "ctx": "}).join(\"\") + (vis.length ? \"\" : '<li class=\"muted\">' + h(tr(\"Nada por aquí con estos filtros.\")) + \"</li>\") + \"</ul>\";"
+ },
+ "En todas tus partidas: {n} de {t} logros clásicos.": {
+  "w": [
+   "ui-gx.js:213"
+  ],
+  "ctx": "if (gc) s += '<p class=\"muted\" style=\"margin:0;font-size:var(--fs-xs)\">' + h(tr(\"En todas tus partidas: {n} de {t} logros clásicos.\", {n: gc[0], t: gc[1]})) + \"</p>\";"
+ },
+ "Cerrar": {
+  "w": [
+   "ui-gx.js:214",
+   "view3d.js:300",
+   "pet-world.js:32",
+   "sp-play.js:21"
+  ],
+  "ctx": "return s + '<button class=\"btn wide\" data-a=\"close\">' + h(tr(\"Cerrar\")) + \"</button></div>\";"
+ },
+ "Vitrina": {
+  "w": [
+   "ui-gx.js:238",
+   "ui.js:1193"
+  ],
+  "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir"
+ },
+ "{n} trofeo de oro o platino": {
+  "w": [
+   "ui-gx.js:238"
+  ],
+  "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir",
+  "note": "plural:singular"
+ },
+ "{n} trofeos de oro o platino": {
+  "w": [
+   "ui-gx.js:238"
+  ],
+  "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir",
+  "note": "plural:plural"
+ },
+ "Aquí lucirán tus trofeos de oro y platino.": {
+  "w": [
+   "ui-gx.js:238"
+  ],
+  "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir"
+ },
  "Dar una vuelta": {
   "w": [
    "rig.js:212",
@@ -18,7 +1860,7 @@
    "rig.js:212",
    "pet-items.js:104",
    "ui-draw.js:58",
-   "ui-steps.js:139"
+   "ui-steps.js:140"
   ],
   "ctx": "spin: N_(\"Dar una vuelta\"), sit: N_(\"Sentarse\"), jump: N_(\"Saltar\"), paw: N_(\"Chocar la pata\"), roll: N_(\"Voltereta\"), dead: N_(\"Hacerse el muerto\"),"
  },
@@ -138,15 +1980,6 @@
    "rig.js:215"
   ],
   "ctx": "ball: N_(\"Hacerse una bola\"), swim: N_(\"Nadar en círculo\"), bubbles: N_(\"Hacer burbujas\"), wave: N_(\"Saludar\"), dive: N_(\"Zambullirse\"), chill: N_(\"Modo relax\")"
- },
- "Cerrar": {
-  "w": [
-   "view3d.js:300",
-   "pet-world.js:32",
-   "sp-play.js:19",
-   "ui-sp.js:86"
-  ],
-  "ctx": "el.innerHTML = '<canvas class=\"v3d-cv\"></canvas><div class=\"v3d-top\"><div><span class=\"eyebrow\">' + h(o.kicker || \"\") + \"</span><h2>\" + h(o.title || \"\") + '</h2></div><button class=\"iconbtn v3d-x\" data-v3d=\"x\" aria-label"
  },
  "Arrastra para girar · pellizca para acercar": {
   "w": [
@@ -754,12 +2587,6 @@
   "ctx": "{id: \"ribbon_local\", s: \"n\", n: N_(\"Escarapela de campeón local\"), r: \"r\", un: \"cont_local\", ud: N_(\"Gana un concurso local de mascotas.\"), tags: [\"shiny\"], rec: [[\"box\", -5, 0, -4, 4, 0, 4, \"B\", \"ring\"], [\"box\", -1, -2,"
  },
  "Banda de campeón nacional": {
-  "w": [
-   "pet-items.js:80"
-  ],
-  "ctx": "{id: \"sash_nat\", s: \"b\", n: N_(\"Banda de campeón nacional\"), r: \"l\", un: \"cont_nac\", ud: N_(\"Gana un concurso nacional de mascotas.\"), tags: [\"regal\", \"shiny\"], gen: \"sash\", glow: 1},"
- },
- "Gana un concurso nacional de mascotas.": {
   "w": [
    "pet-items.js:80"
   ],
@@ -1835,13 +3662,13 @@
   "w": [
    "pet-world.js:771"
   ],
-  "ctx": "else if (e.k === \"puddle\") { a.play(\"jump\"); fx(\"drop\", [a.x, 0.02, a.z], 20); sfx(\"splash\"); w.mud = true; a.dirt = Math.max(a.dirt, 2); say(tr(\"¡Directo al charco!\")); w.log.push(tr(\"Ha saltado en un charco.\")); }"
+  "ctx": "else if (e.k === \"puddle\") { a.play(\"jump\"); fx(\"drop\", [a.x, 0.02, a.z], 20); sfx(\"splash\"); w.mud = true; a.dirt = Math.max(a.dirt, 2); say(tr(\"¡Directo al charco!\")); if (typeof GX !== \"undefined\") GX.ev(\"pet\", {k: \"p"
  },
  "Ha saltado en un charco.": {
   "w": [
    "pet-world.js:771"
   ],
-  "ctx": "else if (e.k === \"puddle\") { a.play(\"jump\"); fx(\"drop\", [a.x, 0.02, a.z], 20); sfx(\"splash\"); w.mud = true; a.dirt = Math.max(a.dirt, 2); say(tr(\"¡Directo al charco!\")); w.log.push(tr(\"Ha saltado en un charco.\")); }"
+  "ctx": "else if (e.k === \"puddle\") { a.play(\"jump\"); fx(\"drop\", [a.x, 0.02, a.z], 20); sfx(\"splash\"); w.mud = true; a.dirt = Math.max(a.dirt, 2); say(tr(\"¡Directo al charco!\")); if (typeof GX !== \"undefined\") GX.ev(\"pet\", {k: \"p"
  },
  "Recoger": {
   "w": [
@@ -2260,14 +4087,6 @@
   ],
   "ctx": "{k: \"righty\", n: N_(\"Siempre a su derecha\"), side: 1, power: 0.5, panenka: 0.02, pause: 0.05, nerves: 0.3, hide: 0.1, high: 0.3},"
  },
- "Sangre fría": {
-  "w": [
-   "sp-data.js:43",
-   "events.js:460",
-   "ui-shootout.js:163"
-  ],
-  "ctx": "{k: \"cool\", n: N_(\"Sangre fría\"), side: 0, power: 0.45, panenka: 0.15, pause: 0.45, nerves: 0.05, hide: 0.8, high: 0.3},"
- },
  "Nervioso": {
   "w": [
    "sp-data.js:44"
@@ -2277,7 +4096,7 @@
  "Potencia": {
   "w": [
    "sp-data.js:49",
-   "minigame.js:421"
+   "minigame.js:422"
   ],
   "ctx": "{k: \"cannon\", n: N_(\"Potencia\"), shot: \"power\", far: 0.5, under: 0.1, hide: 0.2},"
  },
@@ -2426,30 +4245,6 @@
   ],
   "ctx": "{k: \"fktop\", n: N_(\"A la escuadra\"), d: N_(\"Marca una falta directa por la escuadra.\"), money: 400},"
  },
- "Héroe de la final": {
-  "w": [
-   "sp-data.js:81"
-  ],
-  "ctx": "{k: \"savefinal\", n: N_(\"Héroe de la final\"), d: N_(\"Para un penalti en una final.\"), money: 600},"
- },
- "Para un penalti en una final.": {
-  "w": [
-   "sp-data.js:81"
-  ],
-  "ctx": "{k: \"savefinal\", n: N_(\"Héroe de la final\"), d: N_(\"Para un penalti en una final.\"), money: 600},"
- },
- "Palo y dentro": {
-  "w": [
-   "sp-data.js:82"
-  ],
-  "ctx": "{k: \"postin\", n: N_(\"Palo y dentro\"), d: N_(\"Marca después de tocar el poste.\"), money: 200},"
- },
- "Marca después de tocar el poste.": {
-  "w": [
-   "sp-data.js:82"
-  ],
-  "ctx": "{k: \"postin\", n: N_(\"Palo y dentro\"), d: N_(\"Marca después de tocar el poste.\"), money: 200},"
- },
  "Especialista": {
   "w": [
    "sp-data.js:83"
@@ -2518,13 +4313,13 @@
  },
  "Ver repetición": {
   "w": [
-   "sp-play.js:41"
+   "sp-play.js:43"
   ],
   "ctx": "'<div class=\"spo-res-b\"><button class=\"btn\" data-sp=\"replay\">' + esc(t(\"Ver repetición\")) + '</button><button class=\"go\" data-sp=\"next\">' + esc(t(\"Continuar\")) + \"</button></div>\";"
  },
  "Continuar": {
   "w": [
-   "sp-play.js:41",
+   "sp-play.js:43",
    "engine-player.js:1075",
    "engine-manager.js:1129",
    "ui.js:1406"
@@ -2533,51 +4328,51 @@
  },
  "¡PALO Y DENTRO!": {
   "w": [
-   "sp-play.js:54"
+   "sp-play.js:56"
   ],
   "ctx": "if (res.scored) return h === \"postin\" ? [t(\"¡PALO Y DENTRO!\"), \"good\"] : [t(\"¡GOL!\"), gkMode ? \"bad\" : \"good\"];"
  },
  "¡GOL!": {
   "w": [
-   "sp-play.js:54",
-   "minigame.js:531",
+   "sp-play.js:56",
+   "minigame.js:532",
    "ui-shootout.js:205"
   ],
   "ctx": "if (res.scored) return h === \"postin\" ? [t(\"¡PALO Y DENTRO!\"), \"good\"] : [t(\"¡GOL!\"), gkMode ? \"bad\" : \"good\"];"
  },
  "¡PARADÓN!": {
   "w": [
-   "sp-play.js:55"
+   "sp-play.js:57"
   ],
   "ctx": "if (h === \"catch\" || h === \"save\") return [gkMode ? t(\"¡PARADÓN!\") : t(\"¡PARADA!\"), gkMode ? \"good\" : \"bad\"];"
  },
  "¡PARADA!": {
   "w": [
-   "sp-play.js:55",
-   "minigame.js:531",
+   "sp-play.js:57",
+   "minigame.js:532",
    "ui-shootout.js:205"
   ],
   "ctx": "if (h === \"catch\" || h === \"save\") return [gkMode ? t(\"¡PARADÓN!\") : t(\"¡PARADA!\"), gkMode ? \"good\" : \"bad\"];"
  },
  "¡AL PALO!": {
   "w": [
-   "sp-play.js:56",
-   "minigame.js:531",
+   "sp-play.js:58",
+   "minigame.js:532",
    "ui-shootout.js:205"
   ],
   "ctx": "if (h === \"post\") return [t(\"¡AL PALO!\"), gkMode ? \"good\" : \"bad\"];"
  },
  "¡A LA BARRERA!": {
   "w": [
-   "sp-play.js:57",
-   "minigame.js:531"
+   "sp-play.js:59",
+   "minigame.js:532"
   ],
   "ctx": "if (h === \"wall\") return [t(\"¡A LA BARRERA!\"), gkMode ? \"good\" : \"bad\"];"
  },
  "Fuera": {
   "w": [
-   "sp-play.js:58",
-   "sp-play.js:433",
+   "sp-play.js:60",
+   "sp-play.js:437",
    "ui-draw.js:78",
    "ui-draw.js:197"
   ],
@@ -2585,7 +4380,7 @@
  },
  "Balón parado": {
   "w": [
-   "sp-play.js:102",
+   "sp-play.js:104",
    "ui-sp.js:15",
    "ui-sp.js:63",
    "events-manager-more.js:269"
@@ -2594,28 +4389,28 @@
  },
  "Falta directa": {
   "w": [
-   "sp-play.js:102",
-   "minigame.js:828"
+   "sp-play.js:104",
+   "minigame.js:829"
   ],
   "ctx": "var ui = shell({kicker: t(\"Balón parado\"), title: t(\"Falta directa\"), closable: !!opt.training});"
  },
  "Carrera": {
   "w": [
-   "sp-play.js:131",
-   "sp-play.js:394"
+   "sp-play.js:133",
+   "sp-play.js:398"
   ],
   "ctx": "ui.bar(phase === \"study\" ? '<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Carrera\")) + \"</span>\" + [[0.35, N_(\"Recta\")], [0.6, N_(\"Media\")], [0.95, N_(\"Abierta\")]].map(function (x) { return '<button class=\"pw-chi"
  },
  "Recta": {
   "w": [
-   "sp-play.js:131"
+   "sp-play.js:133"
   ],
   "ctx": "ui.bar(phase === \"study\" ? '<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Carrera\")) + \"</span>\" + [[0.35, N_(\"Recta\")], [0.6, N_(\"Media\")], [0.95, N_(\"Abierta\")]].map(function (x) { return '<button class=\"pw-chi"
  },
  "Media": {
   "w": [
-   "sp-play.js:131",
-   "sp-play.js:394",
+   "sp-play.js:133",
+   "sp-play.js:398",
    "engine-player.js:1208",
    "engine-extra.js:805"
   ],
@@ -2623,19 +4418,19 @@
  },
  "Abierta": {
   "w": [
-   "sp-play.js:131"
+   "sp-play.js:133"
   ],
   "ctx": "ui.bar(phase === \"study\" ? '<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Carrera\")) + \"</span>\" + [[0.35, N_(\"Recta\")], [0.6, N_(\"Media\")], [0.95, N_(\"Abierta\")]].map(function (x) { return '<button class=\"pw-chi"
  },
  "Jugada": {
   "w": [
-   "sp-play.js:132"
+   "sp-play.js:134"
   ],
   "ctx": "'<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Jugada\")) + \"</span>\" + [[null, N_(\"Normal\")], [\"gap\", N_(\"Compañero en la barrera\")], [\"feint\", N_(\"Amago de un compañero\")]].map(function (x) { return '<button cla"
  },
  "Normal": {
   "w": [
-   "sp-play.js:132",
+   "sp-play.js:134",
    "engine-manager.js:29",
    "engine-modes.js:6",
    "engine-extra.js:8"
@@ -2644,233 +4439,233 @@
  },
  "Compañero en la barrera": {
   "w": [
-   "sp-play.js:132"
+   "sp-play.js:134"
   ],
   "ctx": "'<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Jugada\")) + \"</span>\" + [[null, N_(\"Normal\")], [\"gap\", N_(\"Compañero en la barrera\")], [\"feint\", N_(\"Amago de un compañero\")]].map(function (x) { return '<button cla"
  },
  "Amago de un compañero": {
   "w": [
-   "sp-play.js:132"
+   "sp-play.js:134"
   ],
   "ctx": "'<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Jugada\")) + \"</span>\" + [[null, N_(\"Normal\")], [\"gap\", N_(\"Compañero en la barrera\")], [\"feint\", N_(\"Amago de un compañero\")]].map(function (x) { return '<button cla"
  },
  "Preparado": {
   "w": [
-   "sp-play.js:133",
-   "sp-play.js:394"
+   "sp-play.js:135",
+   "sp-play.js:398"
   ],
   "ctx": "'<button class=\"go wide\" data-sp=\"ready\">' + esc(t(\"Preparado\")) + \"</button>\" : \"\");"
  },
  "Arrastra para estudiar el hueco; elige carrera y jugada.": {
   "w": [
-   "sp-play.js:135"
+   "sp-play.js:137"
   ],
   "ctx": "ui.hint(t(\"Arrastra para estudiar el hueco; elige carrera y jugada.\"));"
  },
  "Desliza desde el balón: dirección, fuerza y efecto. Donde lo toques decide la altura.": {
   "w": [
-   "sp-play.js:141"
+   "sp-play.js:143"
   ],
   "ctx": "if (a === \"ready\") { phase = \"aim\"; S3.camTo(camBack(), aimTgt, 40 - press * 4, 0.6); ui.bar(\"\"); ui.hint(t(\"Desliza desde el balón: dirección, fuerza y efecto. Donde lo toques decide la altura.\")); return; }"
  },
  "Empieza el gesto en el balón.": {
   "w": [
-   "sp-play.js:157",
-   "sp-play.js:407"
+   "sp-play.js:159",
+   "sp-play.js:411"
   ],
   "ctx": "var bs = S3.project(ball.x, R, ball.z); if (Math.hypot(path[0][0] - bs.x, path[0][1] - bs.y) > 90) { trail(null); ui.hint(t(\"Empieza el gesto en el balón.\")); return; }"
  },
  "Premio del reto": {
   "w": [
-   "sp-play.js:212"
+   "sp-play.js:216"
   ],
   "ctx": "if (opt.reward && out.scored === !opt.gkMode) { lines.push(\"💶 \" + esc(t(\"Premio del reto\")) + ' · <b data-count=\"' + opt.reward + '\">0</b> €'); try { S.p.money += opt.reward; } catch (e) {} }"
  },
  "Bajo palos": {
   "w": [
-   "sp-play.js:224",
-   "sp-play.js:452",
-   "minigame.js:1162",
-   "minigame.js:1301"
+   "sp-play.js:228",
+   "sp-play.js:457",
+   "minigame.js:1163",
+   "minigame.js:1302"
   ],
   "ctx": "var ui = shell({kicker: t(\"Bajo palos\"), title: t(\"Falta en contra\"), gk: true, closable: !!opt.training});"
  },
  "Falta en contra": {
   "w": [
-   "sp-play.js:224",
-   "minigame.js:1301",
+   "sp-play.js:228",
+   "minigame.js:1302",
    "evento:falta_contra_gk"
   ],
   "ctx": "var ui = shell({kicker: t(\"Bajo palos\"), title: t(\"Falta en contra\"), gk: true, closable: !!opt.training});"
  },
  "Barrera": {
   "w": [
-   "sp-play.js:247",
-   "minigame.js:1392",
-   "minigame.js:1471"
+   "sp-play.js:251",
+   "minigame.js:1393",
+   "minigame.js:1472"
   ],
   "ctx": "ui.bar('<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Barrera\")) + '</span><button class=\"pw-chip\" data-sp=\"n\" data-v=\"-1\">−</button><b class=\"spo-n\">' + org.n + '</b><button class=\"pw-chip\" data-sp=\"n\" data-v=\"1"
  },
  "Salto": {
   "w": [
-   "sp-play.js:249"
+   "sp-play.js:253"
   ],
   "ctx": "'<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Salto\")) + \"</span>\" + [[\"jump\", N_(\"Saltan\")], [\"stay\", N_(\"No saltan\")], [\"lie\", N_(\"Tumbado detrás\")]].map(function (x) { return '<button class=\"pw-chip\" data-sp="
  },
  "Saltan": {
   "w": [
-   "sp-play.js:249"
+   "sp-play.js:253"
   ],
   "ctx": "'<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Salto\")) + \"</span>\" + [[\"jump\", N_(\"Saltan\")], [\"stay\", N_(\"No saltan\")], [\"lie\", N_(\"Tumbado detrás\")]].map(function (x) { return '<button class=\"pw-chip\" data-sp="
  },
  "No saltan": {
   "w": [
-   "sp-play.js:249"
+   "sp-play.js:253"
   ],
   "ctx": "'<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Salto\")) + \"</span>\" + [[\"jump\", N_(\"Saltan\")], [\"stay\", N_(\"No saltan\")], [\"lie\", N_(\"Tumbado detrás\")]].map(function (x) { return '<button class=\"pw-chip\" data-sp="
  },
  "Tumbado detrás": {
   "w": [
-   "sp-play.js:249"
+   "sp-play.js:253"
   ],
   "ctx": "'<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Salto\")) + \"</span>\" + [[\"jump\", N_(\"Saltan\")], [\"stay\", N_(\"No saltan\")], [\"lie\", N_(\"Tumbado detrás\")]].map(function (x) { return '<button class=\"pw-chip\" data-sp="
  },
  "Tu posición": {
   "w": [
-   "sp-play.js:250",
-   "minigame.js:1481",
+   "sp-play.js:254",
+   "minigame.js:1482",
    "ui.js:1439"
   ],
   "ctx": "'<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Tu posición\")) + '</span><button class=\"pw-chip\" data-sp=\"gz\" data-v=\"1\">◀</button><button class=\"pw-chip\" data-sp=\"gz\" data-v=\"-1\">▶</button></div>' +"
  },
  "¡Listos!": {
   "w": [
-   "sp-play.js:251"
+   "sp-play.js:255"
   ],
   "ctx": "'<button class=\"go wide\" data-sp=\"go\">' + esc(t(\"¡Listos!\")) + ' <span class=\"spo-time\">' + left + \"</span></button>\");"
  },
  "Organiza la barrera antes de que pite el árbitro.": {
   "w": [
-   "sp-play.js:253"
+   "sp-play.js:257"
   ],
   "ctx": "ui.hint(t(\"Organiza la barrera antes de que pite el árbitro.\"));"
  },
  "Lee al lanzador. Desliza hacia donde te tiras: el momento cuenta.": {
   "w": [
-   "sp-play.js:283"
+   "sp-play.js:287"
   ],
   "ctx": "ui.hint(t(\"Lee al lanzador. Desliza hacia donde te tiras: el momento cuenta.\"));"
  },
  "¡Rechace!": {
   "w": [
-   "sp-play.js:363"
+   "sp-play.js:367"
   ],
   "ctx": "ui.big(t(\"¡Rechace!\"), \"warn\"); ui.hint(t(\"¡Toca rápido para atacar el balón!\"));"
  },
  "¡Toca rápido para atacar el balón!": {
   "w": [
-   "sp-play.js:363"
+   "sp-play.js:367"
   ],
   "ctx": "ui.big(t(\"¡Rechace!\"), \"warn\"); ui.hint(t(\"¡Toca rápido para atacar el balón!\"));"
  },
  "¡Atrapado!": {
   "w": [
-   "sp-play.js:372"
+   "sp-play.js:376"
   ],
   "ctx": "if (ok) { me.play(\"gkstay\"); AU.fx(\"catch\"); ui.big(t(\"¡Atrapado!\"), \"good\"); cb(false); }"
  },
  "Desde los once metros": {
   "w": [
-   "sp-play.js:381",
-   "minigame.js:610"
+   "sp-play.js:385",
+   "minigame.js:611"
   ],
   "ctx": "var ui = shell({kicker: t(\"Desde los once metros\"), title: t(\"Penalti\"), closable: !!opt.training});"
  },
  "Penalti": {
   "w": [
-   "sp-play.js:381",
-   "minigame.js:610"
+   "sp-play.js:385",
+   "minigame.js:611"
   ],
   "ctx": "var ui = shell({kicker: t(\"Desde los once metros\"), title: t(\"Penalti\"), closable: !!opt.training});"
  },
  "Corta": {
   "w": [
-   "sp-play.js:394"
+   "sp-play.js:398"
   ],
   "ctx": "function bar() { ui.bar('<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Carrera\")) + \"</span>\" + [[\"short\", N_(\"Corta\")], [\"mid\", N_(\"Media\")], [\"long\", N_(\"Larga\")]].map(function (x) { return '<button class=\"pw-c"
  },
  "Larga": {
   "w": [
-   "sp-play.js:394"
+   "sp-play.js:398"
   ],
   "ctx": "function bar() { ui.bar('<div class=\"spo-chips\"><span class=\"spo-l\">' + esc(t(\"Carrera\")) + \"</span>\" + [[\"short\", N_(\"Corta\")], [\"mid\", N_(\"Media\")], [\"long\", N_(\"Larga\")]].map(function (x) { return '<button class=\"pw-c"
  },
  "Elige la carrera. Luego desliza desde el balón.": {
   "w": [
-   "sp-play.js:395"
+   "sp-play.js:399"
   ],
   "ctx": "bar(); ui.hint(t(\"Elige la carrera. Luego desliza desde el balón.\"));"
  },
  "Desliza desde el balón. Toca la pantalla durante la carrera para frenar y mirar al portero.": {
   "w": [
-   "sp-play.js:400"
+   "sp-play.js:404"
   ],
   "ctx": "if (a === \"ready\") { phase = \"aim\"; ui.bar(\"\"); ui.hint(t(\"Desliza desde el balón. Toca la pantalla durante la carrera para frenar y mirar al portero.\")); }"
  },
  "¡DIANA!": {
   "w": [
-   "sp-play.js:433",
-   "sp-play.js:435"
+   "sp-play.js:437",
+   "sp-play.js:439"
   ],
   "ctx": "ui.big(hitT ? t(\"¡DIANA!\") : res.scored ? t(\"Cerca\") : t(\"Fuera\"), hitT ? \"good\" : \"bad\"); hap(hitT ? \"big\" : \"tap\");"
  },
  "Cerca": {
   "w": [
-   "sp-play.js:433"
+   "sp-play.js:437"
   ],
   "ctx": "ui.big(hitT ? t(\"¡DIANA!\") : res.scored ? t(\"Cerca\") : t(\"Fuera\"), hitT ? \"good\" : \"bad\"); hap(hitT ? \"big\" : \"tap\");"
  },
  "Otra vez": {
   "w": [
-   "sp-play.js:435"
+   "sp-play.js:439"
   ],
   "ctx": "setTimeout(function () { resultScreen(ui, hitT ? t(\"¡DIANA!\") : t(\"Otra vez\"), hitT ? \"good\" : \"bad\", [], function () { ui.close(); if (done) done({scored: !!hitT}); }); }, 1400); return; }"
  },
  "Penalti en contra": {
   "w": [
-   "sp-play.js:452",
-   "minigame.js:1162",
+   "sp-play.js:457",
+   "minigame.js:1163",
    "evento:penalti_contra"
   ],
   "ctx": "var ui = shell({kicker: t(\"Bajo palos\"), title: t(\"Penalti en contra\"), gk: true, closable: !!opt.training});"
  },
  "Abrir brazos": {
   "w": [
-   "sp-play.js:465"
+   "sp-play.js:470"
   ],
   "ctx": "function bar() { ui.bar('<div class=\"spo-chips\"><button class=\"pw-chip\" data-sp=\"mv\" data-v=\"1\">◀</button><button class=\"pw-chip\" data-sp=\"mv\" data-v=\"-1\">▶</button>' + [[\"arms\", N_(\"Abrir brazos\")], [\"hop\", N_(\"Saltitos"
  },
  "Saltitos": {
   "w": [
-   "sp-play.js:465"
+   "sp-play.js:470"
   ],
   "ctx": "function bar() { ui.bar('<div class=\"spo-chips\"><button class=\"pw-chip\" data-sp=\"mv\" data-v=\"1\">◀</button><button class=\"pw-chip\" data-sp=\"mv\" data-v=\"-1\">▶</button>' + [[\"arms\", N_(\"Abrir brazos\")], [\"hop\", N_(\"Saltitos"
  },
  "Señalar un lado": {
   "w": [
-   "sp-play.js:465"
+   "sp-play.js:470"
   ],
   "ctx": "function bar() { ui.bar('<div class=\"spo-chips\"><button class=\"pw-chip\" data-sp=\"mv\" data-v=\"1\">◀</button><button class=\"pw-chip\" data-sp=\"mv\" data-v=\"-1\">▶</button>' + [[\"arms\", N_(\"Abrir brazos\")], [\"hop\", N_(\"Saltitos"
  },
  "Muévete un poco en la línea y distráele si quieres. Desliza para tirarte.": {
   "w": [
-   "sp-play.js:466"
+   "sp-play.js:471"
   ],
   "ctx": "bar(); ui.hint(t(\"Muévete un poco en la línea y distráele si quieres. Desliza para tirarte.\"));"
  },
  "¡Repetición!": {
   "w": [
-   "sp-play.js:496"
+   "sp-play.js:501"
   ],
   "ctx": "if (early && !res.scored && rand() < 0.5 && !opt.noRetake) { ui.big(t(\"¡Repetición!\"), \"warn\"); ref.play(\"point\", {side: 0}); AU.fx(\"whistle\"); setTimeout(function () { ui.close(); gkPenPro(Object.assign({}, opt, {noReta"
  },
@@ -3277,8 +5072,8 @@
  "Tiro": {
   "w": [
    "engine-player.js:16",
-   "minigame.js:610",
-   "minigame.js:829",
+   "minigame.js:611",
+   "minigame.js:830",
    "ui-guide.js:59"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
@@ -3423,7 +5218,7 @@
   "w": [
    "engine-player.js:33",
    "ui.js:1302",
-   "ui.js:2119",
+   "ui.js:2128",
    "ui-guide.js:17"
   ],
   "ctx": "mental: {n: tr(\"Mentalidad\"), d: tr(\"Más regularidad y moral bajo presión.\"), att: [], gk: []}"
@@ -3593,15 +5388,6 @@
    "engine-player.js:311",
    "data:competición",
    "data:competición"
-  ],
-  "ctx": "if (!S.C.NQ) S.C.NQ = {k: \"NQ\", typ: \"nq\", nat: true, n: N_(\"Partidos de selección\"), s: N_(\"Selección\"), lvl: 1, done: false, win: -1};"
- },
- "Selección": {
-  "w": [
-   "engine-player.js:311",
-   "mgr-plus.js:544",
-   "mgr-plus.js:648",
-   "mgr-plus.js:664"
   ],
   "ctx": "if (!S.C.NQ) S.C.NQ = {k: \"NQ\", typ: \"nq\", nat: true, n: N_(\"Partidos de selección\"), s: N_(\"Selección\"), lvl: 1, done: false, win: -1};"
  },
@@ -14580,7 +16366,7 @@
  "Presión": {
   "w": [
    "events-manager.js:86",
-   "minigame.js:429",
+   "minigame.js:430",
    "ui-guide.js:79"
   ],
   "ctx": "ko: {txt: tr(\"Te convierten en meme y tus jugadores notan la presión.\"), fx: {sqMor: -5, rep: -3, buff: {v: -0.8, b: 1, n: tr(\"Presión\")}}}},"
@@ -28969,15 +30755,6 @@
   ],
   "ctx": "cats.push({n: N_(\"Minutos\"), list: mk(appsB, function (v) { v = Math.min(v, 42); var o = objT({k: \"apps\", v: v}, N_(\"Jugar {n} partidos\"), {n: v}); o.lv = objLevel(v / (appsB * Math.min(1.2, str))); return o; })});"
  },
- "Goles": {
-  "w": [
-   "engine-extra.js:38",
-   "ui.js:958",
-   "ui.js:972",
-   "ui.js:982"
-  ],
-  "ctx": "if (g === \"DEL\") { var gv = [22, 14, 8, 4, 2][tier]; cats.push({n: N_(\"Goles\"), list: mk(gv, function (v) { var o = objT({k: \"g\", v: v}, N_(\"Marcar {n} goles\"), {n: v}); o.lv = objLevel(v / (gv * str)); return o; })}); }"
- },
  "Goles y asistencias": {
   "w": [
    "engine-extra.js:39"
@@ -29074,14 +30851,6 @@
   ],
   "ctx": "POR: [N_(\"El Gato\"), N_(\"San {ln}\"), N_(\"La Muralla\"), N_(\"El Pulpo\"), N_(\"Manos de Seda\"), N_(\"El Candado\")],"
  },
- "El Muro": {
-  "w": [
-   "engine-extra.js:113",
-   "press-ctx.js:890",
-   "press-ctx.js:910"
-  ],
-  "ctx": "DEF: [N_(\"El Muro\"), N_(\"El Káiser\"), N_(\"El Sheriff\"), N_(\"La Roca\"), N_(\"El Jefe\"), N_(\"El Guardián\")],"
- },
  "El Káiser": {
   "w": [
    "engine-extra.js:113",
@@ -29122,13 +30891,6 @@
    "engine-extra.js:114",
    "press-ctx.js:892",
    "press-ctx.js:909"
-  ],
-  "ctx": "MED: [N_(\"El Arquitecto\"), N_(\"El Profesor\"), N_(\"El Metrónomo\"), N_(\"El Cerebro\"), N_(\"El Mago\"), N_(\"El Director de Orquesta\")],"
- },
- "El Profesor": {
-  "w": [
-   "engine-extra.js:114",
-   "press-ctx.js:892"
   ],
   "ctx": "MED: [N_(\"El Arquitecto\"), N_(\"El Profesor\"), N_(\"El Metrónomo\"), N_(\"El Cerebro\"), N_(\"El Mago\"), N_(\"El Director de Orquesta\")],"
  },
@@ -29962,7 +31724,7 @@
  "Simular lo que queda": {
   "w": [
    "engine-extra.js:766",
-   "ui.js:2131"
+   "ui.js:2140"
   ],
   "ctx": "{t: tr(\"Simular lo que queda\"), ok: {txt: tr(\"Simulas el resto del partido.\"), then: function () { if (!S.live) liveStart(x.fi); liveFinish(); }}}"
  },
@@ -30618,8 +32380,8 @@
   "w": [
    "press-ctx.js:203",
    "fam48.js:202",
-   "minigame.js:612",
-   "minigame.js:1166"
+   "minigame.js:613",
+   "minigame.js:1167"
   ],
   "ctx": "var PX_TOP = {tabla: N_(\"Clasificación\"), racha: N_(\"Racha\"), yo: N_(\"Tu momento\"), gk: N_(\"Portería\"), rival: N_(\"El rival\"), mote: N_(\"Tu mote\"), vest: N_(\"Vestuario\")};"
  },
@@ -34064,7 +35826,7 @@
  "jugadores": {
   "w": [
    "life.js:319",
-   "pitch3d.js:4321"
+   "pitch3d.js:4325"
   ],
   "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
  },
@@ -35419,13 +37181,6 @@
   ],
   "ctx": "[\"purple\", N_(\"Morado\"), \"hue-rotate(245deg) saturate(1.3)\"],"
  },
- "Oro": {
-  "w": [
-   "pets.js:130",
-   "chal32.js:12"
-  ],
-  "ctx": "[\"gold\", N_(\"Oro\"), \"sepia(1) saturate(3) hue-rotate(-8deg) brightness(1.08)\", \"bdo\"],"
- },
  "Arcoíris": {
   "w": [
    "pets.js:131"
@@ -35905,12 +37660,6 @@
    "ach36.js:24"
   ],
   "ctx": "[\"x_gta\", \"🚲\", \"b\", N_(\"Ah shit, here we go again\"), N_(\"Desciende de categoría o sufre tu primer despido.\"), achEv(\"x_gta\")],"
- },
- "¡Es de más de 9000!": {
-  "w": [
-   "ach36.js:25"
-  ],
-  "ctx": "[\"x_9000\", \"💥\", \"m\", N_(\"¡Es de más de 9000!\"), N_(\"Un juvenil de tu cantera llega a una media de 90.\"), function () { return achHas(\"x_9000\") || !!(S.m && S.m.sq.some(function (p) { return p.yth && p.ovr >= 90; })); }]"
  },
  "Un juvenil de tu cantera llega a una media de 90.": {
   "w": [
@@ -36949,18 +38698,6 @@
    "chal32.js:9"
   ],
   "ctx": "crisis: {ic: \"🔥\", n: N_(\"Remontar una crisis\"), d: N_(\"Un grande hundido: vestuario roto, afición enfadada y sin dinero.\"), goal: N_(\"Bronce: que no te echen · Plata: mitad alta · Oro: entre los tres primeros.\")}"
- },
- "Plata": {
-  "w": [
-   "chal32.js:12"
-  ],
-  "ctx": "var MEDAL_N = {gold: N_(\"Oro\"), silver: N_(\"Plata\"), bronze: N_(\"Bronce\")};"
- },
- "Bronce": {
-  "w": [
-   "chal32.js:12"
-  ],
-  "ctx": "var MEDAL_N = {gold: N_(\"Oro\"), silver: N_(\"Plata\"), bronze: N_(\"Bronce\")};"
  },
  "Desafío «{n}» superado: medalla de {m}.": {
   "w": [
@@ -39202,7 +40939,7 @@
  "Floja": {
   "w": [
    "minigame.js:83",
-   "minigame.js:432"
+   "minigame.js:433"
   ],
   "ctx": "function powerWord(v) { return v < IDEAL0 ? t(\"Floja\") : v > IDEAL1 ? t(\"Demasiado fuerte\") : t(\"Ideal\"); }"
  },
@@ -39215,7 +40952,7 @@
  "Ideal": {
   "w": [
    "minigame.js:83",
-   "minigame.js:432"
+   "minigame.js:433"
   ],
   "ctx": "function powerWord(v) { return v < IDEAL0 ? t(\"Floja\") : v > IDEAL1 ? t(\"Demasiado fuerte\") : t(\"Ideal\"); }"
  },
@@ -39227,125 +40964,125 @@
  },
  "Presión máxima": {
   "w": [
-   "minigame.js:429"
+   "minigame.js:430"
   ],
   "ctx": "ui.kickEl.setAttribute(\"data-p\", PRESS >= 0.85 ? t(\"Presión máxima\") : PRESS >= 0.5 ? t(\"Penalti decisivo\") : t(\"Presión\")); }"
  },
  "Penalti decisivo": {
   "w": [
-   "minigame.js:429"
+   "minigame.js:430"
   ],
   "ctx": "ui.kickEl.setAttribute(\"data-p\", PRESS >= 0.85 ? t(\"Presión máxima\") : PRESS >= 0.5 ? t(\"Penalti decisivo\") : t(\"Presión\")); }"
  },
  "Fuerte": {
   "w": [
-   "minigame.js:432"
+   "minigame.js:433"
   ],
   "ctx": "var lab = hv(\"div\", \"mg-barl\", ui.pow), bl = o.barLabs || [t(\"Floja\"), t(\"Ideal\"), t(\"Fuerte\")];"
  },
  "Elegir potencia": {
   "w": [
-   "minigame.js:439"
+   "minigame.js:440"
   ],
   "ctx": "ui.pri = hv(\"button\", \"mg-btn pri\", btns, o.priText || t(\"Elegir potencia\"));"
  },
  "Paso {n} de 3": {
   "w": [
-   "minigame.js:478"
+   "minigame.js:479"
   ],
   "ctx": "ui.stepN.textContent = ui.steps === 3 ? t(\"Paso {n} de 3\", {n: n}) : t(\"Paso {n} de 2\", {n: n});"
  },
  "Paso {n} de 2": {
   "w": [
-   "minigame.js:478"
+   "minigame.js:479"
   ],
   "ctx": "ui.stepN.textContent = ui.steps === 3 ? t(\"Paso {n} de 3\", {n: n}) : t(\"Paso {n} de 2\", {n: n});"
  },
  "¡Lanzar!": {
   "w": [
-   "minigame.js:498"
+   "minigame.js:499"
   ],
   "ctx": "ui.pri.textContent = cfg.btn || t(\"¡Lanzar!\");"
  },
  "¡Perfecto!": {
   "w": [
-   "minigame.js:522"
+   "minigame.js:523"
   ],
   "ctx": "if (pos >= IDEAL0 && pos <= IDEAL1) { floatAt(ui.mark, t(\"¡Perfecto!\"), \"good\"); if (FX) { FX.haptic(\"ok\"); FX.burstAt(ui.mark, {n: 10, colors: [\"#3fcf7c\", \"#bff5d2\", \"#ffffff\"], speed: 150, gravity: 200, life: 0.5, size"
  },
  "¡FUERA!": {
   "w": [
-   "minigame.js:531",
+   "minigame.js:532",
    "ui-shootout.js:205"
   ],
   "ctx": "var txt = {gol: t(\"¡GOL!\"), parada: t(\"¡PARADA!\"), fuera: t(\"¡FUERA!\"), barrera: t(\"¡A LA BARRERA!\"), palo: t(\"¡AL PALO!\")}[how];"
  },
  "Probabilidad de gol: {p} %": {
   "w": [
-   "minigame.js:609",
-   "minigame.js:621"
+   "minigame.js:610",
+   "minigame.js:622"
   ],
   "ctx": "var LBL = N_(\"Probabilidad de gol: {p} %\");"
  },
  "Portero": {
   "w": [
-   "minigame.js:610",
-   "minigame.js:829",
-   "minigame.js:1162",
-   "minigame.js:1302"
+   "minigame.js:611",
+   "minigame.js:830",
+   "minigame.js:1163",
+   "minigame.js:1303"
   ],
   "ctx": "var ui = shell({cls: \"mg-pen\", kicker: t(\"Desde los once metros\"), title: t(\"Penalti\"), chips: [[t(\"Tiro\"), skill], [t(\"Portero\"), gk]]});"
  },
  "Toca la zona de la portería donde quieres chutar": {
   "w": [
-   "minigame.js:660"
+   "minigame.js:661"
   ],
   "ctx": "setStep(ui, 1, t(\"Toca la zona de la portería donde quieres chutar\"));"
  },
  "Para la barra en la zona verde: toca la pantalla o pulsa Lanzar": {
   "w": [
-   "minigame.js:665",
-   "minigame.js:973"
+   "minigame.js:666",
+   "minigame.js:974"
   ],
   "ctx": "setStep(ui, 2, t(\"Para la barra en la zona verde: toca la pantalla o pulsa Lanzar\"));"
  },
  "¡Allá va!": {
   "w": [
-   "minigame.js:678",
-   "minigame.js:996"
+   "minigame.js:679",
+   "minigame.js:997"
   ],
   "ctx": "setStep(ui, 2, t(\"¡Allá va!\"));"
  },
  "Probabilidad: {p} %": {
   "w": [
-   "minigame.js:827"
+   "minigame.js:828"
   ],
   "ctx": "var LBL = N_(\"Probabilidad: {p} %\");"
  },
  "Volver a dibujar": {
   "w": [
-   "minigame.js:828"
+   "minigame.js:829"
   ],
   "ctx": "var ui = shell({cls: \"mg-fk\", kicker: t(\"Balón parado\"), title: t(\"Falta directa\"), sec: t(\"Volver a dibujar\"),"
  },
  "Distancia": {
   "w": [
-   "minigame.js:829",
-   "minigame.js:1302"
+   "minigame.js:830",
+   "minigame.js:1303"
   ],
   "ctx": "chips: [[t(\"Tiro\"), skill], [t(\"Portero\"), gk], [t(\"Distancia\"), t(\"{n} m\", {n: Math.round(dist)})]]});"
  },
  "{n} m": {
   "w": [
-   "minigame.js:829",
-   "minigame.js:1302"
+   "minigame.js:830",
+   "minigame.js:1303"
   ],
   "ctx": "chips: [[t(\"Tiro\"), skill], [t(\"Portero\"), gk], [t(\"Distancia\"), t(\"{n} m\", {n: Math.round(dist)})]]});"
  },
  "Campo": {
   "w": [
-   "minigame.js:836",
-   "minigame.js:1319",
+   "minigame.js:837",
+   "minigame.js:1320",
    "pitch.js:1202",
    "pitch.js:1206"
   ],
@@ -39353,171 +41090,171 @@
  },
  "Dibuja la trayectoria desde el balón con el dedo": {
   "w": [
-   "minigame.js:930"
+   "minigame.js:931"
   ],
   "ctx": "setStep(ui, 1, t(\"Dibuja la trayectoria desde el balón con el dedo\"));"
  },
  "Dibuja una trayectoria más larga, del balón hacia la portería": {
   "w": [
-   "minigame.js:958"
+   "minigame.js:959"
   ],
   "ctx": "setStep(ui, 1, t(\"Dibuja una trayectoria más larga, del balón hacia la portería\"));"
  },
  "¡Da en la barrera! Pasa por encima o por un lado": {
   "w": [
-   "minigame.js:965"
+   "minigame.js:966"
   ],
   "ctx": "setStep(ui, 1, ev.blocked ? t(\"¡Da en la barrera! Pasa por encima o por un lado\") : !ev.inside ? t(\"Va fuera: termina la trayectoria dentro de la portería\") : t(\"Puedes volver a dibujar o elegir la potencia\"));"
  },
  "Va fuera: termina la trayectoria dentro de la portería": {
   "w": [
-   "minigame.js:965"
+   "minigame.js:966"
   ],
   "ctx": "setStep(ui, 1, ev.blocked ? t(\"¡Da en la barrera! Pasa por encima o por un lado\") : !ev.inside ? t(\"Va fuera: termina la trayectoria dentro de la portería\") : t(\"Puedes volver a dibujar o elegir la potencia\"));"
  },
  "Puedes volver a dibujar o elegir la potencia": {
   "w": [
-   "minigame.js:965"
+   "minigame.js:966"
   ],
   "ctx": "setStep(ui, 1, ev.blocked ? t(\"¡Da en la barrera! Pasa por encima o por un lado\") : !ev.inside ? t(\"Va fuera: termina la trayectoria dentro de la portería\") : t(\"Puedes volver a dibujar o elegir la potencia\"));"
  },
  "Probabilidad de parada: {p} %": {
   "w": [
-   "minigame.js:1061",
-   "minigame.js:1175"
+   "minigame.js:1062",
+   "minigame.js:1176"
   ],
   "ctx": "var GK_LBL = N_(\"Probabilidad de parada: {p} %\");"
  },
  "TÚ": {
   "w": [
-   "minigame.js:1081"
+   "minigame.js:1082"
   ],
   "ctx": "sv(\"text\", {\"class\": \"mg-you\", x: 0, y: 6 + 10 * Math.max(s, 0.6), \"text-anchor\": \"middle\"}, g).textContent = t(\"TÚ\");"
  },
  "Informe": {
   "w": [
-   "minigame.js:1086"
+   "minigame.js:1087"
   ],
   "ctx": "hv(\"i\", \"\", d, t(\"Informe\"));"
  },
  "Pronto": {
   "w": [
-   "minigame.js:1102",
-   "minigame.js:1163",
-   "minigame.js:1303"
+   "minigame.js:1103",
+   "minigame.js:1164",
+   "minigame.js:1304"
   ],
   "ctx": "function timingWord(v) { return v < IDEAL0 ? t(\"Pronto\") : v > IDEAL1 ? t(\"Tarde\") : t(\"Justo\"); }"
  },
  "Tarde": {
   "w": [
-   "minigame.js:1102",
-   "minigame.js:1163",
-   "minigame.js:1303"
+   "minigame.js:1103",
+   "minigame.js:1164",
+   "minigame.js:1304"
   ],
   "ctx": "function timingWord(v) { return v < IDEAL0 ? t(\"Pronto\") : v > IDEAL1 ? t(\"Tarde\") : t(\"Justo\"); }"
  },
  "Justo": {
   "w": [
-   "minigame.js:1102",
-   "minigame.js:1163",
-   "minigame.js:1303",
+   "minigame.js:1103",
+   "minigame.js:1164",
+   "minigame.js:1304",
    "ui-37.js:5"
   ],
   "ctx": "function timingWord(v) { return v < IDEAL0 ? t(\"Pronto\") : v > IDEAL1 ? t(\"Tarde\") : t(\"Justo\"); }"
  },
  "Suele tirar a su izquierda": {
   "w": [
-   "minigame.js:1122"
+   "minigame.js:1123"
   ],
   "ctx": "{k: \"izq\", txt: t(\"Suele tirar a su izquierda\"), m: [2.6, 1, 1, 2.6, 1, 1]},"
  },
  "Suele tirar a su derecha": {
   "w": [
-   "minigame.js:1123"
+   "minigame.js:1124"
   ],
   "ctx": "{k: \"der\", txt: t(\"Suele tirar a su derecha\"), m: [1, 1, 2.6, 1, 1, 2.6]},"
  },
  "Busca la escuadra": {
   "w": [
-   "minigame.js:1124"
+   "minigame.js:1125"
   ],
   "ctx": "{k: \"esc\", txt: t(\"Busca la escuadra\"), m: [3.2, 0.6, 3.2, 0.8, 0.6, 0.8]},"
  },
  "Le gusta abrir el pie y tirar raso": {
   "w": [
-   "minigame.js:1125"
+   "minigame.js:1126"
   ],
   "ctx": "{k: \"raso\", txt: t(\"Le gusta abrir el pie y tirar raso\"), m: [0.45, 0.5, 0.45, 1.7, 0.8, 1.7]},"
  },
  "Le gusta tirar fuerte al centro": {
   "w": [
-   "minigame.js:1126"
+   "minigame.js:1127"
   ],
   "ctx": "{k: \"cen\", txt: t(\"Le gusta tirar fuerte al centro\"), m: [1, 3.4, 1, 1, 3.4, 1]},"
  },
  "Duda en los penaltis decisivos": {
   "w": [
-   "minigame.js:1127"
+   "minigame.js:1128"
   ],
   "ctx": "{k: \"duda\", txt: t(\"Duda en los penaltis decisivos\"), m: [1, hp, 1, 1, hp, 1]},"
  },
  "Espera a que te tires": {
   "w": [
-   "minigame.js:1128"
+   "minigame.js:1129"
   ],
   "ctx": "{k: \"esp\", txt: t(\"Espera a que te tires\"), m: [1, 1, 1, 1, 1, 1]}"
  },
  "Tirador": {
   "w": [
-   "minigame.js:1162",
-   "minigame.js:1302"
+   "minigame.js:1163",
+   "minigame.js:1303"
   ],
   "ctx": "var ui = shell({cls: \"mg-pen\", gk: true, kicker: t(\"Bajo palos\"), title: t(\"Penalti en contra\"), chips: [[t(\"Portero\"), gk], [t(\"Tirador\"), skill]],"
  },
  "Reacción": {
   "w": [
-   "minigame.js:1163",
-   "minigame.js:1303"
+   "minigame.js:1164",
+   "minigame.js:1304"
   ],
   "ctx": "barTitle: t(\"Reacción\"), barLabs: [t(\"Pronto\"), t(\"Justo\"), t(\"Tarde\")], priText: t(\"Elegir momento\")});"
  },
  "Elegir momento": {
   "w": [
-   "minigame.js:1163",
-   "minigame.js:1483"
+   "minigame.js:1164",
+   "minigame.js:1484"
   ],
   "ctx": "barTitle: t(\"Reacción\"), barLabs: [t(\"Pronto\"), t(\"Justo\"), t(\"Tarde\")], priText: t(\"Elegir momento\")});"
  },
  "Toca la zona a la que te vas a tirar": {
   "w": [
-   "minigame.js:1216"
+   "minigame.js:1217"
   ],
   "ctx": "setStep(ui, 1, t(\"Toca la zona a la que te vas a tirar\"));"
  },
  "Tírate a tiempo: para la barra en la zona verde": {
   "w": [
-   "minigame.js:1221",
-   "minigame.js:1493"
+   "minigame.js:1222",
+   "minigame.js:1494"
   ],
   "ctx": "setStep(ui, 2, t(\"Tírate a tiempo: para la barra en la zona verde\"));"
  },
  "¡Tirarse!": {
   "w": [
-   "minigame.js:1222",
-   "minigame.js:1494"
+   "minigame.js:1223",
+   "minigame.js:1495"
   ],
   "ctx": "startPower(ui, pressure, dive, {btn: t(\"¡Tirarse!\"), word: timingWord});"
  },
  "¡Atento!": {
   "w": [
-   "minigame.js:1232",
-   "minigame.js:1505"
+   "minigame.js:1233",
+   "minigame.js:1506"
   ],
   "ctx": "setStep(ui, 2, t(\"¡Atento!\"));"
  },
  "Atrás": {
   "w": [
-   "minigame.js:1301",
+   "minigame.js:1302",
    "ui.js:1413",
    "ui.js:1424",
    "ui.js:1479"
@@ -39526,56 +41263,56 @@
  },
  "Colocarme": {
   "w": [
-   "minigame.js:1303",
-   "minigame.js:1473"
+   "minigame.js:1304",
+   "minigame.js:1474"
   ],
   "ctx": "barTitle: t(\"Reacción\"), barLabs: [t(\"Pronto\"), t(\"Justo\"), t(\"Tarde\")], priText: t(\"Colocarme\")});"
  },
  "Jugadores en barrera": {
   "w": [
-   "minigame.js:1385"
+   "minigame.js:1386"
   ],
   "ctx": "hv(\"span\", \"mg-rowl\", rowN, t(\"Jugadores en barrera\"));"
  },
  "Quitar jugador": {
   "w": [
-   "minigame.js:1389"
+   "minigame.js:1390"
   ],
   "ctx": "minus.setAttribute(\"aria-label\", t(\"Quitar jugador\"));"
  },
  "Añadir jugador": {
   "w": [
-   "minigame.js:1390"
+   "minigame.js:1391"
   ],
   "ctx": "plus.setAttribute(\"aria-label\", t(\"Añadir jugador\"));"
  },
  "Palo izq.": {
   "w": [
-   "minigame.js:1393"
+   "minigame.js:1394"
   ],
   "ctx": "var segB = [t(\"Palo izq.\"), t(\"Centro\"), t(\"Palo der.\")].map(function (txt, i) {"
  },
  "Centro": {
   "w": [
-   "minigame.js:1393"
+   "minigame.js:1394"
   ],
   "ctx": "var segB = [t(\"Palo izq.\"), t(\"Centro\"), t(\"Palo der.\")].map(function (txt, i) {"
  },
  "Palo der.": {
   "w": [
-   "minigame.js:1393"
+   "minigame.js:1394"
   ],
   "ctx": "var segB = [t(\"Palo izq.\"), t(\"Centro\"), t(\"Palo der.\")].map(function (txt, i) {"
  },
  "Monta la barrera: jugadores y posición": {
   "w": [
-   "minigame.js:1472"
+   "minigame.js:1473"
   ],
   "ctx": "setStep(ui, 1, t(\"Monta la barrera: jugadores y posición\"));"
  },
  "Colócate: arrastra por la portería": {
   "w": [
-   "minigame.js:1482"
+   "minigame.js:1483"
   ],
   "ctx": "setStep(ui, 2, t(\"Colócate: arrastra por la portería\"));"
  },
@@ -39607,7 +41344,7 @@
  "Tu equipo": {
   "w": [
    "pitch.js:1092",
-   "pitch3d.js:4395"
+   "pitch3d.js:4399"
   ],
   "ctx": "return {myName: String(t.myName || tr(\"Tu equipo\")), opp: String(t.oppName || tr(\"Rival\")),"
  },
@@ -39615,197 +41352,197 @@
   "w": [
    "pitch.js:1092",
    "pitch.js:1151",
-   "pitch3d.js:4395",
-   "pitch3d.js:4453"
+   "pitch3d.js:4399",
+   "pitch3d.js:4457"
   ],
   "ctx": "return {myName: String(t.myName || tr(\"Tu equipo\")), opp: String(t.oppName || tr(\"Rival\")),"
  },
  "Eliges la orientación y hacia qué portería atacar.": {
   "w": [
    "pitch.js:1100",
-   "pitch3d.js:4404"
+   "pitch3d.js:4408"
   ],
   "ctx": "pros.push(tr(\"Eliges la orientación y hacia qué portería atacar.\"));"
  },
  "Con el césped resbaladizo, proteges el lado de tu salida.": {
   "w": [
    "pitch.js:1101",
-   "pitch3d.js:4405"
+   "pitch3d.js:4409"
   ],
   "ctx": "if (x.wx.key === \"rain\") pros.push(tr(\"Con el césped resbaladizo, proteges el lado de tu salida.\"));"
  },
  "Evitas atacar de cara al sol en el segundo tiempo.": {
   "w": [
    "pitch.js:1102",
-   "pitch3d.js:4406"
+   "pitch3d.js:4410"
   ],
   "ctx": "else if (x.wx.key === \"heat\") pros.push(tr(\"Evitas atacar de cara al sol en el segundo tiempo.\"));"
  },
  "Puedes elegir el lado con menos viento y nieve.": {
   "w": [
    "pitch.js:1103",
-   "pitch3d.js:4407"
+   "pitch3d.js:4411"
   ],
   "ctx": "else if (x.wx.key === \"cold\") pros.push(tr(\"Puedes elegir el lado con menos viento y nieve.\"));"
  },
  "Su posesión se adapta a cualquier orientación.": {
   "w": [
    "pitch.js:1104",
-   "pitch3d.js:4408"
+   "pitch3d.js:4412"
   ],
   "ctx": "if (x.style === \"possession\") cons.push(tr(\"Su posesión se adapta a cualquier orientación.\"));"
  },
  "Su presión alta puede cerrarte la banda que defiendes.": {
   "w": [
    "pitch.js:1105",
-   "pitch3d.js:4409"
+   "pitch3d.js:4413"
   ],
   "ctx": "else if (x.style === \"press\") cons.push(tr(\"Su presión alta puede cerrarte la banda que defiendes.\"));"
  },
  "Su juego directo funciona igual en las dos porterías.": {
   "w": [
    "pitch.js:1106",
-   "pitch3d.js:4410"
+   "pitch3d.js:4414"
   ],
   "ctx": "else if (x.style === \"direct\") cons.push(tr(\"Su juego directo funciona igual en las dos porterías.\"));"
  },
  "Te cederá el balón y buscará tu espalda desde el inicio.": {
   "w": [
    "pitch.js:1107",
-   "pitch3d.js:4411"
+   "pitch3d.js:4415"
   ],
   "ctx": "else if (x.style === \"counter\") cons.push(tr(\"Te cederá el balón y buscará tu espalda desde el inicio.\"));"
  },
  "El cambio de lado no compensa su superioridad.": {
   "w": [
    "pitch.js:1108",
-   "pitch3d.js:4412"
+   "pitch3d.js:4416"
   ],
   "ctx": "if (x.diff < -3) cons.push(tr(\"El cambio de lado no compensa su superioridad.\"));"
  },
  "Conservas el saque de centro y marcas el primer ritmo.": {
   "w": [
    "pitch.js:1110",
-   "pitch3d.js:4414"
+   "pitch3d.js:4418"
   ],
   "ctx": "pros.push(tr(\"Conservas el saque de centro y marcas el primer ritmo.\"));"
  },
  "Le obligas a correr detrás del balón desde el inicio.": {
   "w": [
    "pitch.js:1111",
-   "pitch3d.js:4415"
+   "pitch3d.js:4419"
   ],
   "ctx": "if (x.style === \"possession\") pros.push(tr(\"Le obligas a correr detrás del balón desde el inicio.\"));"
  },
  "Puedes jugar el primer balón en largo sin presión.": {
   "w": [
    "pitch.js:1112",
-   "pitch3d.js:4416"
+   "pitch3d.js:4420"
   ],
   "ctx": "else if (x.style === \"direct\") pros.push(tr(\"Puedes jugar el primer balón en largo sin presión.\"));"
  },
  "Su presión alta puede atrapar tu primer pase.": {
   "w": [
    "pitch.js:1113",
-   "pitch3d.js:4417"
+   "pitch3d.js:4421"
   ],
   "ctx": "else if (x.style === \"press\") cons.push(tr(\"Su presión alta puede atrapar tu primer pase.\"));"
  },
  "Te cede la iniciativa y espera tu error para salir en contra.": {
   "w": [
    "pitch.js:1114",
-   "pitch3d.js:4418"
+   "pitch3d.js:4422"
   ],
   "ctx": "else if (x.style === \"counter\") cons.push(tr(\"Te cede la iniciativa y espera tu error para salir en contra.\"));"
  },
  "El balón corre más: el primer pase puede escaparse.": {
   "w": [
    "pitch.js:1115",
-   "pitch3d.js:4419"
+   "pitch3d.js:4423"
   ],
   "ctx": "if (x.wx.key === \"rain\") cons.push(tr(\"El balón corre más: el primer pase puede escaparse.\"));"
  },
  "El balón pesado exige un primer toque más firme.": {
   "w": [
    "pitch.js:1116",
-   "pitch3d.js:4420"
+   "pitch3d.js:4424"
   ],
   "ctx": "else if (x.wx.key === \"cold\") cons.push(tr(\"El balón pesado exige un primer toque más firme.\"));"
  },
  "Dosificar el ritmo desde el saque ahorra fuerzas.": {
   "w": [
    "pitch.js:1117",
-   "pitch3d.js:4421"
+   "pitch3d.js:4425"
   ],
   "ctx": "else if (x.wx.key === \"heat\") pros.push(tr(\"Dosificar el ritmo desde el saque ahorra fuerzas.\"));"
  },
  "Tu superioridad te permite dominar el primer balón.": {
   "w": [
    "pitch.js:1118",
-   "pitch3d.js:4422"
+   "pitch3d.js:4426"
   ],
   "ctx": "if (x.diff > 3) pros.push(tr(\"Tu superioridad te permite dominar el primer balón.\"));"
  },
  "Si el rival es superior, perderás el balón en zonas peligrosas.": {
   "w": [
    "pitch.js:1119",
-   "pitch3d.js:4423"
+   "pitch3d.js:4427"
   ],
   "ctx": "if (x.diff < -3) cons.push(tr(\"Si el rival es superior, perderás el balón en zonas peligrosas.\"));"
  },
  "Mantienes tu plan de saque sin cambios.": {
   "w": [
    "pitch.js:1121",
-   "pitch3d.js:4425"
+   "pitch3d.js:4429"
   ],
   "ctx": "if (!pros.length) pros.push(tr(\"Mantienes tu plan de saque sin cambios.\"));"
  },
  "No cambias de lado: mantienes la orientación actual.": {
   "w": [
    "pitch.js:1122",
-   "pitch3d.js:4426"
+   "pitch3d.js:4430"
   ],
   "ctx": "if (!cons.length) cons.push(tr(\"No cambias de lado: mantienes la orientación actual.\"));"
  },
  "Quiere presionar hacia su propia grada en el primer tiempo.": {
   "w": [
    "pitch.js:1127",
-   "pitch3d.js:4432"
+   "pitch3d.js:4436"
   ],
   "ctx": "if (x.style === \"press\") return {choice: \"campo\", why: tr(\"Quiere presionar hacia su propia grada en el primer tiempo.\")};"
  },
  "Prefiere ordenar el campo y defender con la línea adelantada.": {
   "w": [
    "pitch.js:1128",
-   "pitch3d.js:4433"
+   "pitch3d.js:4437"
   ],
   "ctx": "if (x.style === \"possession\") return {choice: \"campo\", why: tr(\"Prefiere ordenar el campo y defender con la línea adelantada.\")};"
  },
  "Busca atacar con el sol o el viento a favor en el segundo tiempo.": {
   "w": [
    "pitch.js:1129",
-   "pitch3d.js:4434"
+   "pitch3d.js:4438"
   ],
   "ctx": "if (x.style === \"direct\") return {choice: \"campo\", why: tr(\"Busca atacar con el sol o el viento a favor en el segundo tiempo.\")};"
  },
  "Quiere que su bloque pueda salir en contra hacia su banquillo.": {
   "w": [
    "pitch.js:1130",
-   "pitch3d.js:4435"
+   "pitch3d.js:4439"
   ],
   "ctx": "if (x.style === \"counter\") return {choice: \"campo\", why: tr(\"Quiere que su bloque pueda salir en contra hacia su banquillo.\")};"
  },
  "No necesita cambiar nada: confía en su nivel y te deja el primer balón.": {
   "w": [
    "pitch.js:1131",
-   "pitch3d.js:4436"
+   "pitch3d.js:4440"
   ],
   "ctx": "if (x.diff <= -4) return {choice: \"pelota\", why: tr(\"No necesita cambiar nada: confía en su nivel y te deja el primer balón.\")};"
  },
  "Busca que la lluvia complique tu salida desde atrás.": {
   "w": [
    "pitch.js:1132",
-   "pitch3d.js:4437"
+   "pitch3d.js:4441"
   ],
   "ctx": "if (x.wx.key === \"rain\") return {choice: \"campo\", why: tr(\"Busca que la lluvia complique tu salida desde atrás.\")};"
  },
@@ -39813,25 +41550,25 @@
   "w": [
    "pitch.js:1133",
    "pitch.js:1210",
-   "pitch3d.js:4438",
-   "pitch3d.js:4493"
+   "pitch3d.js:4442",
+   "pitch3d.js:4497"
   ],
   "ctx": "return {choice: \"campo\", why: tr(\"Elige el lado que mejor encaja con su plan de partido.\")};"
  },
  "Clima": {
   "w": [
    "pitch.js:1150",
-   "ui.js:2086",
-   "pitch3d.js:4452"
+   "ui.js:2095",
+   "pitch3d.js:4456"
   ],
   "ctx": "\"🌤 \" + tr(\"Clima\") + \": \" + esc2D((wx.icon || \"☀\") + \" \" + (wx.name || tr(\"Despejado\"))) + \" · \" + esc2D(wx.effect || tr(\"Campo rápido\")) + \" · \" + tr(\"Fatiga\") + \" ×\" + fmtMul2D(mul) + \"<br>\" +"
  },
  "Fatiga": {
   "w": [
    "pitch.js:1150",
-   "ui.js:2087",
+   "ui.js:2096",
    "ui-shootout.js:163",
-   "pitch3d.js:4452"
+   "pitch3d.js:4456"
   ],
   "ctx": "\"🌤 \" + tr(\"Clima\") + \": \" + esc2D((wx.icon || \"☀\") + \" \" + (wx.name || tr(\"Despejado\"))) + \" · \" + esc2D(wx.effect || tr(\"Campo rápido\")) + \" · \" + tr(\"Fatiga\") + \" ×\" + fmtMul2D(mul) + \"<br>\" +"
  },
@@ -39839,7 +41576,7 @@
   "w": [
    "pitch.js:1151",
    "ui-mgrplus.js:63",
-   "pitch3d.js:4453"
+   "pitch3d.js:4457"
   ],
   "ctx": "tr(\"Rival\") + \": \" + esc2D(x.opp) + \" · \" + tr(\"Nivel\") + \" \" + x.oppLevel + \" · \" + esc2D(x.styleLabel) + \"</div>\";"
  },
@@ -39870,140 +41607,140 @@
  "Cara o cruz": {
   "w": [
    "pitch.js:1188",
-   "pitch3d.js:4471"
+   "pitch3d.js:4475"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Cara o cruz\") + \"</b>\" +"
  },
  "Elige tu llamada.": {
   "w": [
    "pitch.js:1189",
-   "pitch3d.js:4472"
+   "pitch3d.js:4476"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"Elige tu llamada.\") + \"</span>\" +"
  },
  "Tiempo para llamar": {
   "w": [
    "pitch.js:1191",
-   "pitch3d.js:4474"
+   "pitch3d.js:4478"
   ],
   "ctx": "timer2D(tr(\"Tiempo para llamar\"), COIN_WAIT) + tossMeta2D();"
  },
  "La moneda está en el aire…": {
   "w": [
    "pitch.js:1193",
-   "pitch3d.js:4476"
+   "pitch3d.js:4480"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"La moneda está en el aire…\") + \"</b>\" +"
  },
  "Has llamado {v}.": {
   "w": [
    "pitch.js:1194",
-   "pitch3d.js:4477"
+   "pitch3d.js:4481"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"Has llamado {v}.\", {v: coin.call === \"cara\" ? tr(\"Cara\") : tr(\"Cruz\")}) + \"</span>\" + tossMeta2D();"
  },
  "Salió {v}.": {
   "w": [
    "pitch.js:1196",
-   "pitch3d.js:4479"
+   "pitch3d.js:4483"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Salió {v}.\", {v: face}) + \"</b>\" +"
  },
  "Ganas el sorteo.": {
   "w": [
    "pitch.js:1198",
-   "pitch3d.js:4481"
+   "pitch3d.js:4485"
   ],
   "ctx": "(coin.winner === 0 ? tr(\"Ganas el sorteo.\") : tr(\"Gana el rival.\")) + \"</span>\" + tossMeta2D();"
  },
  "Gana el rival.": {
   "w": [
    "pitch.js:1198",
-   "pitch3d.js:4481"
+   "pitch3d.js:4485"
   ],
   "ctx": "(coin.winner === 0 ? tr(\"Ganas el sorteo.\") : tr(\"Gana el rival.\")) + \"</span>\" + tossMeta2D();"
  },
  "¡Ganaste el sorteo!": {
   "w": [
    "pitch.js:1200",
-   "pitch3d.js:4483"
+   "pitch3d.js:4487"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"¡Ganaste el sorteo!\") + \"</b>\" +"
  },
  "¿Campo o pelota?": {
   "w": [
    "pitch.js:1201",
-   "pitch3d.js:4484"
+   "pitch3d.js:4488"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"¿Campo o pelota?\") + \"</span>\" +"
  },
  "Campo cambia de lado · Pelota mantiene el saque": {
   "w": [
    "pitch.js:1203",
-   "pitch3d.js:4486"
+   "pitch3d.js:4490"
   ],
   "ctx": "'<span style=\"display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px\">' + tr(\"Campo cambia de lado · Pelota mantiene el saque\") + \"</span>\" +"
  },
  "Tiempo para elegir": {
   "w": [
    "pitch.js:1204",
-   "pitch3d.js:4487"
+   "pitch3d.js:4491"
   ],
   "ctx": "timer2D(tr(\"Tiempo para elegir\"), CHOICE_WAIT) + tossMeta2D();"
  },
  "Gana el rival el sorteo": {
   "w": [
    "pitch.js:1207",
-   "pitch3d.js:4490"
+   "pitch3d.js:4494"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Gana el rival el sorteo\") + \"</b>\" +"
  },
  "Elige {v}.": {
   "w": [
    "pitch.js:1208",
-   "pitch3d.js:4491"
+   "pitch3d.js:4495"
   ],
   "ctx": "'<span style=\"display:block;font:600 10px/1.25 system-ui;margin-top:2px\">' + tr(\"Elige {v}.\", {v: rp}) + \"</span>\" +"
  },
  "Campo elegido": {
   "w": [
    "pitch.js:1212",
-   "pitch3d.js:4495"
+   "pitch3d.js:4499"
   ],
   "ctx": "var cc = coin.choice === \"campo\" ? tr(\"Campo elegido\") : tr(\"Saque elegido\");"
  },
  "Saque elegido": {
   "w": [
    "pitch.js:1212",
-   "pitch3d.js:4495"
+   "pitch3d.js:4499"
   ],
   "ctx": "var cc = coin.choice === \"campo\" ? tr(\"Campo elegido\") : tr(\"Saque elegido\");"
  },
  "El rival decide: ": {
   "w": [
    "pitch.js:1213",
-   "pitch3d.js:4496"
+   "pitch3d.js:4500"
   ],
   "ctx": "var res = coin.winner === 1 ? tr(\"El rival decide: \") : \"\";"
  },
  "Cambiamos de lado antes del saque. Conservas el saque de centro.": {
   "w": [
    "pitch.js:1216",
-   "pitch3d.js:4499"
+   "pitch3d.js:4503"
   ],
   "ctx": "(coin.choice === \"campo\" ? tr(\"Cambiamos de lado antes del saque. Conservas el saque de centro.\") : tr(\"No cambiamos de lado. Conservas el saque de centro.\")) + \"</span>\" + tossMeta2D();"
  },
  "No cambiamos de lado. Conservas el saque de centro.": {
   "w": [
    "pitch.js:1216",
-   "pitch3d.js:4499"
+   "pitch3d.js:4503"
   ],
   "ctx": "(coin.choice === \"campo\" ? tr(\"Cambiamos de lado antes del saque. Conservas el saque de centro.\") : tr(\"No cambiamos de lado. Conservas el saque de centro.\")) + \"</span>\" + tossMeta2D();"
  },
  "FUERA DE JUEGO": {
   "w": [
    "pitch.js:1343",
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "Snd.whistle([0.28]); P.stopUntil = P.ck + 2.2; P.msg = {t: P.lab.off || tr(\"FUERA DE JUEGO\"), s: -1, at: P.ck, small: true};"
  },
@@ -40619,14 +42356,14 @@
  "año": {
   "w": [
    "ui.js:693",
-   "ui.js:2523"
+   "ui.js:2532"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
  "{pct} % de lo que piden": {
   "w": [
    "ui.js:693",
-   "ui.js:2524"
+   "ui.js:2533"
   ],
   "ctx": "o += '<div class=\"nslide\"><div class=\"nv\"><b id=\"negoval\">' + fmtMoney2(v) + (fee ? \"\" : \"<small>/\" + tr(\"año\") + \"</small>\") + '</b><span id=\"negopct\" class=\"' + (pctAsk >= 100 ? \"up\" : pctAsk >= 80 ? \"\" : \"down\") + '\">"
  },
@@ -41678,14 +43415,6 @@
   ],
   "ctx": "\"<div><span>\" + tr(\"Club\") + \"</span><span>\" + h(clubName(p.club)) + (p.loan ? \" \" + tr(\"(cedido por el {club})\", {club: h(clubName(p.loan.from))}) : \"\") + \"</span></div>\" +"
  },
- "Entrenador": {
-  "w": [
-   "ui.js:1025",
-   "ui.js:1709",
-   "ui-46.js:76"
-  ],
-  "ctx": "\"<div><span>\" + tr(\"Entrenador\") + \"</span><span>\" + h(coachName(p.club)) + \"</span></div>\" +"
- },
  "Rol en el equipo": {
   "w": [
    "ui.js:1026"
@@ -42051,23 +43780,11 @@
   ],
   "ctx": "s += '<div class=\"statline\"><div class=\"stat\"><b>' + tot.seasons + '</b><span>' + tr(\"Temporadas\") + '</span></div><div class=\"stat\"><b>' + tot.apps + '</b><span>' + tr(\"Partidos\") + '</span></div><div class=\"stat\"><b>' "
  },
- "Vitrina": {
-  "w": [
-   "ui.js:1193"
-  ],
-  "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Vitrina\") + '</h3>' + vitrina(p.trophies, tr(\"Todavía no has levantado ningún título.\")) + \"</section>\";"
- },
  "Todavía no has levantado ningún título.": {
   "w": [
    "ui.js:1193"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Vitrina\") + '</h3>' + vitrina(p.trophies, tr(\"Todavía no has levantado ningún título.\")) + \"</section>\";"
- },
- "Premios individuales": {
-  "w": [
-   "ui.js:1194"
-  ],
-  "ctx": "s += '<section class=\"card\"><h3>' + tr(\"Premios individuales\") + '</h3>' + awardsGrid(p.awards, tr(\"Los premios llegarán con las grandes temporadas.\")) + \"</section>\";"
  },
  "Los premios llegarán con las grandes temporadas.": {
   "w": [
@@ -42080,12 +43797,6 @@
    "ui.js:1196"
   ],
   "ctx": "if (p.tx.length) s += '<section class=\"card\"><h3>' + tr(\"Fichajes\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + p.tx.slice().reverse().map(function (t) { return \"<div><span>\" + seasonLabel(t.y) + \" · \" + h(clu"
- },
- "Hitos": {
-  "w": [
-   "ui.js:1197"
-  ],
-  "ctx": "if (p.ms.length) s += '<section class=\"card\"><h3>' + tr(\"Hitos\") + '</h3><div class=\"kvlist\" style=\"margin-top:6px\">' + p.ms.slice().reverse().map(function (m) { return \"<div><span>\" + h(tr(m.t)) + \"</span><span>\" + seas"
  },
  "Temporada a temporada": {
   "w": [
@@ -42293,12 +44004,6 @@
    "ui.js:1272"
   ],
   "ctx": "'<span class=\"pbars\" aria-label=\"' + h(UIX.hk && UIX.hk.phy ? tr(\"Media física {f}, moral {m}\", {f: plPhy(p), m: Math.round(p.mor)}) : tr(\"Físico {f}, moral {m}\", {f: Math.round(p.fit), m: Math.round(p.mor)})) + '\">' + ("
- },
- "Porteros": {
-  "w": [
-   "ui.js:1278"
-  ],
-  "ctx": "var SQ_GROUPS = [[N_(\"Porteros\"), [\"POR\"]], [N_(\"Defensas\"), [\"LD\", \"DFC\", \"LI\"]], [N_(\"Centrocampistas\"), [\"MCD\", \"MC\", \"MD\", \"MI\", \"MCO\"]], [N_(\"Delanteros\"), [\"ED\", \"EI\", \"DC\"]]];"
  },
  "Defensas": {
   "w": [
@@ -43277,7 +44982,7 @@
   "w": [
    "ui.js:1561",
    "ui.js:1562",
-   "ui.js:2535"
+   "ui.js:2544"
   ],
   "ctx": "s += '<div class=\"clubprev\">' + crestRaw(c.col, ab, true, c.crest) + (typeof kitSVG === \"function\" ? kitSVG({pat: c.kit.pat, col: [c.col[0], c.col[1], c.kit.col3], big: true}) : \"\") + '<div class=\"grow\"><b>' + h(c.cn || "
  },
@@ -44112,8 +45817,8 @@
  "Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.": {
   "w": [
    "ui.js:1801",
-   "ui.js:2371",
-   "ui.js:2381"
+   "ui.js:2380",
+   "ui.js:2390"
   ],
   "ctx": "if (slotsNow().length >= MAX_SLOTS && !slotsNow().some(function (x) { return x.id === s0.uid; })) { UI.sheet.err = tr(\"Tienes {n} partidas guardadas, el máximo. Borra alguna para empezar otra.\", {n: MAX_SLOTS}); renderSh"
  },
@@ -44259,399 +45964,399 @@
  },
  "Cambios": {
   "w": [
-   "ui.js:2004"
+   "ui.js:2013"
   ],
   "ctx": "var s = '<div class=\"lsubhd\"><span class=\"lbl\">' + tr(\"Cambios\") + '</span><ol class=\"lsteps\">' +"
  },
  "Quién sale": {
   "w": [
-   "ui.js:2005"
+   "ui.js:2014"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Quién entra": {
   "w": [
-   "ui.js:2005"
+   "ui.js:2014"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Confirmar": {
   "w": [
-   "ui.js:2005"
+   "ui.js:2014"
   ],
   "ctx": "[tr(\"Quién sale\"), tr(\"Quién entra\"), tr(\"Confirmar\")].map(function (t, k) { return '<li class=\"' + (k + 1 < step ? \"done\" : k + 1 === step ? \"now\" : \"\") + '\">' + h(t) + \"</li>\"; }).join(\"\") + \"</ol></div>\";"
  },
  "Sale": {
   "w": [
-   "ui.js:2012"
+   "ui.js:2021"
   ],
   "ctx": "'<div class=\"lswap\"><div class=\"out\"><span class=\"ar\">↓</span><div><small>' + tr(\"Sale\") + \"</small><b>\" + h(plName(po)) + \"</b></div></div>\" +"
  },
  "Entra de {pos}": {
   "w": [
-   "ui.js:2013"
+   "ui.js:2022"
   ],
   "ctx": "'<div class=\"in\"><span class=\"ar\">↑</span><div><small>' + tr(\"Entra de {pos}\", {pos: posAb(sp)}) + \"</small><b>\" + h(plName(pi)) + \"</b>\" +"
  },
  "Posición afín ({p})": {
   "w": [
-   "ui.js:2014"
+   "ui.js:2023"
   ],
   "ctx": "(pi && pi.pos !== sp ? '<em class=\"aff\">' + tr(\"Posición afín ({p})\", {p: posAb(pi.pos)}) + \"</em>\" : \"\") + \"</div></div></div>\" +"
  },
  "Confirmar cambio": {
   "w": [
-   "ui.js:2015"
+   "ui.js:2024"
   ],
   "ctx": "'<div class=\"lprevb\"><button class=\"btn\" data-a=\"lsubx\">' + tr(\"Cancelar\") + '</button><button class=\"go\" data-a=\"lsubok\">' + tr(\"Confirmar cambio\") + \"</button></div></div>\";"
  },
  "En el campo": {
   "w": [
-   "ui.js:2018"
+   "ui.js:2027"
   ],
   "ctx": "s += '<div class=\"lsubs\"><div><div class=\"lbl\">' + tr(\"En el campo\") + \"</div>\" + L.xi.map(function (id, i) {"
  },
  "Sin suplentes": {
   "w": [
-   "ui.js:2024"
+   "ui.js:2033"
   ],
   "ctx": "if (!L.bench.length) s += '<p class=\"muted\" style=\"font-size:var(--fs-sm)\">' + tr(\"Sin suplentes\") + \"</p>\";"
  },
  "afín": {
   "w": [
-   "ui.js:2030"
+   "ui.js:2039"
   ],
   "ctx": "return '<button class=\"lpl cand\" data-a=\"lin\" data-id=\"' + id + '\"><span class=\"pp\">' + h(posAb(p.pos)) + '</span><span class=\"ar\">↑</span>' + h(plShort(p)) + '<span class=\"fit\">' + Math.round(p.ovr) + \"</span>\" + (p.pos"
  },
  "Nadie en el banquillo puede jugar de {pos}.": {
   "w": [
-   "ui.js:2032"
+   "ui.js:2041"
   ],
   "ctx": "if (!ok.length) s += '<p class=\"muted\" style=\"font-size:var(--fs-xs)\">' + tr(\"Nadie en el banquillo puede jugar de {pos}.\", {pos: posAb(sp)}) + \"</p>\";"
  },
  "{n} suplente oculto: no puede jugar de {pos}.": {
   "w": [
-   "ui.js:2034"
+   "ui.js:2043"
   ],
   "ctx": "if (hid && ok.length) s += '<p class=\"muted\" style=\"font-size:var(--fs-xs);margin:2px 0 0\">' + trn(hid, \"{n} suplente oculto: no puede jugar de {pos}.\", \"{n} suplentes ocultos: no pueden jugar de {pos}.\").replace(\"{pos}\"",
   "note": "plural:singular"
  },
  "{n} suplentes ocultos: no pueden jugar de {pos}.": {
   "w": [
-   "ui.js:2034"
+   "ui.js:2043"
   ],
   "ctx": "if (hid && ok.length) s += '<p class=\"muted\" style=\"font-size:var(--fs-xs);margin:2px 0 0\">' + trn(hid, \"{n} suplente oculto: no puede jugar de {pos}.\", \"{n} suplentes ocultos: no pueden jugar de {pos}.\").replace(\"{pos}\"",
   "note": "plural:plural"
  },
  "Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.": {
   "w": [
-   "ui.js:2037"
+   "ui.js:2046"
   ],
   "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
  },
  "Elige quién entra. Solo ves a quien puede jugar en su puesto.": {
   "w": [
-   "ui.js:2037"
+   "ui.js:2046"
   ],
   "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
  },
  "Posesión": {
   "w": [
-   "ui.js:2104",
-   "ui.js:2105"
+   "ui.js:2113",
+   "ui.js:2114"
   ],
   "ctx": "s += '<div class=\"lmo\" role=\"img\" aria-label=\"' + h(tr(\"Posesión\")) + '\"><div class=\"lmot\"><i class=\"a\" style=\"width:' + (LV.mo == null ? left : LV.mo) + '%;background:' + cl + '\"></i><i class=\"b\" style=\"background:' + c"
  },
  "Tiros": {
   "w": [
-   "ui.js:2112"
+   "ui.js:2121"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "A puerta": {
   "w": [
-   "ui.js:2112"
+   "ui.js:2121"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "Ocasiones claras": {
   "w": [
-   "ui.js:2112"
+   "ui.js:2121"
   ],
   "ctx": "s += '<div class=\"lstats three\">' + st(tr(\"Tiros\"), L.shots[0], L.shots[1]) + st(tr(\"A puerta\"), L.on[0], L.on[1]) + st(tr(\"Ocasiones claras\"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + \"</div>\";"
  },
  "Comentarios": {
   "w": [
-   "ui.js:2115"
+   "ui.js:2124"
   ],
   "ctx": "s += '<div class=\"lbl\" style=\"margin-top:12px\">' + tr(\"Comentarios\") + '</div><div class=\"lfeed\">' + L.ev.slice(0, 18).map(function (e) { return '<div class=\"lev ' + e.t + (e.us === 1 ? \" us\" : e.us === 0 ? \" them\" : \"\")"
  },
  "Velocidad {n}": {
   "w": [
-   "ui.js:2118"
+   "ui.js:2127"
   ],
   "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L"
  },
  "Pausa": {
   "w": [
-   "ui.js:2118",
+   "ui.js:2127",
    "ui-shootout.js:215"
   ],
   "ctx": "s += '<div class=\"lctl\"><div class=\"seg\">' + [[0, \"⏸\"], [1, \"▶\"], [2, \"▶▶\"], [3, \"▶▶▶\"]].map(function (x) { return '<button data-a=\"lspeed\" data-v=\"' + x[0] + '\" aria-pressed=\"' + ((x[0] === 0 && !LV.run) || (LV.run && L"
  },
  "Sistema": {
   "w": [
-   "ui.js:2124"
+   "ui.js:2133"
   ],
   "ctx": "s += '<div class=\"lrow\"><label class=\"lbl\" for=\"lform\">' + tr(\"Sistema\") + '</label><select id=\"lform\" data-live=\"form\">' + Object.keys(FORMATIONS).map(function (k) { return '<option value=\"' + k + '\"' + (k === L.form ? "
  },
  "Te queda {n} cambio": {
   "w": [
-   "ui.js:2125"
+   "ui.js:2134"
   ],
   "ctx": "'<span class=\"muted\" style=\"font-size:var(--fs-sm)\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
   "note": "plural:singular"
  },
  "Te quedan {n} cambios": {
   "w": [
-   "ui.js:2125"
+   "ui.js:2134"
   ],
   "ctx": "'<span class=\"muted\" style=\"font-size:var(--fs-sm)\">' + trn(L.left, \"Te queda {n} cambio\", \"Te quedan {n} cambios\") + \"</span></div>\";",
   "note": "plural:plural"
  },
  "Volver al vestuario": {
   "w": [
-   "ui.js:2131"
+   "ui.js:2140"
   ],
   "ctx": "s += L.done ? '<button class=\"go\" data-a=\"lend\">' + tr(\"Volver al vestuario\") + \" \" + ICON.play + \"</button>\" : '<button class=\"btn wide\" data-a=\"lsim\">' + tr(\"Simular lo que queda\") + \"</button>\";"
  },
  "Velocidad de simulación": {
   "w": [
-   "ui.js:2135"
+   "ui.js:2144"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === \"f\", pet: typeof petOf === \"function\" ? petOf() : null, mySide: f.ho"
  },
  "Ver la repetición": {
   "w": [
-   "ui.js:2135",
-   "pitch3d.js:4561"
+   "ui.js:2144",
+   "pitch3d.js:4565"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === \"f\", pet: typeof petOf === \"function\" ? petOf() : null, mySide: f.ho"
  },
  "REPETICIÓN": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "GOL": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "¡GOL DE {n}!": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "¡PALO!": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FIN DEL PRIMER TIEMPO": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FINAL": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "FALTA": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "SAQUE DE BANDA": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "CÓRNER": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "SAQUE DE PUERTA": {
   "w": [
-   "ui.js:2137"
+   "ui.js:2146"
   ],
   "ctx": "lab: {replay: tr(\"REPETICIÓN\"), goal: tr(\"GOL\"), goalOf: tr(\"¡GOL DE {n}!\"), post: tr(\"¡PALO!\"), half: tr(\"FIN DEL PRIMER TIEMPO\"), end: tr(\"FINAL\"), off: tr(\"FUERA DE JUEGO\"), foul: tr(\"FALTA\"), thr: tr(\"SAQUE DE BANDA\""
  },
  "El banquillo está completo: suéltalo encima de un suplente para cambiarlos.": {
   "w": [
-   "ui.js:2289",
-   "ui.js:2433"
+   "ui.js:2298",
+   "ui.js:2442"
   ],
   "ctx": "if (res === \"full\") toast(tr(\"El banquillo está completo: suéltalo encima de un suplente para cambiarlos.\"));"
  },
  "Ese jugador no puede jugar en esa posición.": {
   "w": [
-   "ui.js:2290",
-   "ui.js:2429"
+   "ui.js:2299",
+   "ui.js:2438"
   ],
   "ctx": "else if (res === \"pos\") toast(tr(\"Ese jugador no puede jugar en esa posición.\"));"
  },
  "Partida borrada": {
   "w": [
-   "ui.js:2394"
+   "ui.js:2403"
   ],
   "ctx": "UI.sheet = null; render(false); toast(tr(\"Partida borrada\"));"
  },
  "Código copiado": {
   "w": [
-   "ui.js:2400",
-   "ui.js:2402"
+   "ui.js:2409",
+   "ui.js:2411"
   ],
   "ctx": "if (window.AndroidBridge && window.AndroidBridge.copy) { try { window.AndroidBridge.copy(code); toast(tr(\"Código copiado\")); break; } catch (err) {} }"
  },
  "Selecciona y copia el texto": {
   "w": [
-   "ui.js:2402",
-   "ui.js:2403"
+   "ui.js:2411",
+   "ui.js:2412"
   ],
   "ctx": "navigator.clipboard.writeText(code).then(function () { toast(tr(\"Código copiado\")); }, function () { ta.select(); toast(tr(\"Selecciona y copia el texto\")); });"
  },
  "No se pudo empezar la carrera de entrenador.": {
   "w": [
-   "ui.js:2412"
+   "ui.js:2421"
   ],
   "ctx": "try { startManager(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la carrera de entrenador.\")); break; }"
  },
  "No puedes fichar por ese club ahora.": {
   "w": [
-   "ui.js:2416"
+   "ui.js:2425"
   ],
   "ctx": "if (mgrTakeJob(+v)) { UI.sheet = null; UI.tab = \"club\"; persist(); render(true); } else toast(tr(\"No puedes fichar por ese club ahora.\"));"
  },
  "Hecho: {n} cambio en el once.": {
   "w": [
-   "ui.js:2426"
+   "ui.js:2435"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:singular"
  },
  "Hecho: {n} cambios en el once.": {
   "w": [
-   "ui.js:2426"
+   "ui.js:2435"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;",
   "note": "plural:plural"
  },
  "No hay suplentes disponibles para esas posiciones.": {
   "w": [
-   "ui.js:2426"
+   "ui.js:2435"
   ],
   "ctx": "case \"fixxi\": var nf = mFixUnav(); persist(); render(false); toast(nf ? trn(nf, \"Hecho: {n} cambio en el once.\", \"Hecho: {n} cambios en el once.\") : tr(\"No hay suplentes disponibles para esas posiciones.\")); break;"
  },
  "Once ideal y banquillo colocados": {
   "w": [
-   "ui.js:2436"
+   "ui.js:2445"
   ],
   "ctx": "case \"bestxi\": S.m.xi = mBestXI(S.m.form); S.m.bench = mBestBench(S.m.xi); persist(); render(false); toast(tr(\"Once ideal y banquillo colocados\")); break;"
  },
  "En la lista de venta: llegarán más ofertas": {
   "w": [
-   "ui.js:2440"
+   "ui.js:2449"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya no está en venta": {
   "w": [
-   "ui.js:2440"
+   "ui.js:2449"
   ],
   "ctx": "case \"mlist\": var pl = mPl(id); if (pl) { pl.list = !pl.list; persist(); renderSheet(); toast(pl.list ? tr(\"En la lista de venta: llegarán más ofertas\") : tr(\"Ya no está en venta\")); } break;"
  },
  "Ya negociasteis en este tramo.": {
   "w": [
-   "ui.js:2441"
+   "ui.js:2450"
   ],
   "ctx": "case \"mrenew\": openPend(mgrStartRenew(id), tr(\"Ya negociasteis en este tramo.\")); break;"
  },
  "Ya hablasteis en este tramo.": {
   "w": [
-   "ui.js:2442"
+   "ui.js:2451"
   ],
   "ctx": "case \"mtalk\": openPend(mgrStartTalk(id), tr(\"Ya hablasteis en este tramo.\")); break;"
  },
  "Nadie ha preguntado por él ahora mismo.": {
   "w": [
-   "ui.js:2443"
+   "ui.js:2452"
   ],
   "ctx": "case \"msell\": openPend(mgrStartSell(id), tr(\"Nadie ha preguntado por él ahora mismo.\")); break;"
  },
  "Ningún club puede acogerle ahora.": {
   "w": [
-   "ui.js:2444"
+   "ui.js:2453"
   ],
   "ctx": "case \"mloan\": openPend(mgrStartLoan(id), tr(\"Ningún club puede acogerle ahora.\")); break;"
  },
  "Nombre cambiado": {
   "w": [
-   "ui.js:2449"
+   "ui.js:2458"
   ],
   "ctx": "if (mgrRename(id, nf ? nf.value : \"\", nl ? nl.value : \"\")) { persist(); UI.sheet = {k: \"pl\", id: id}; renderSheet(); render(false); toast(tr(\"Nombre cambiado\")); }"
  },
  "Escribe al menos un nombre.": {
   "w": [
-   "ui.js:2450"
+   "ui.js:2459"
   ],
   "ctx": "else toast(tr(\"Escribe al menos un nombre.\"));"
  },
  "Ahora no se puede negociar.": {
   "w": [
-   "ui.js:2454",
+   "ui.js:2463",
    "ui-mgrplus.js:50"
   ],
   "ctx": "case \"mbid\": openPend(mgrStartBid(b.getAttribute(\"data-id\")), tr(\"Ahora no se puede negociar.\")); break;"
  },
  "Nuevo informe de ojeadores": {
   "w": [
-   "ui.js:2455"
+   "ui.js:2464"
   ],
   "ctx": "case \"mscout\": var mk = S.m.mk; if (mk.open && !mk.ref) { mk.ref = true; mk.list = mk.list.filter(function (t) { return t.done; }).concat(mgrScoutList(12)); persist(); render(false); toast(tr(\"Nuevo informe de ojeadores\""
  },
  "Objetivos fijados. ¡A por ellos!": {
   "w": [
-   "ui.js:2465"
+   "ui.js:2474"
   ],
   "ctx": "case \"objok\": if (confirmObjChoice()) { persist(); toast(tr(\"Objetivos fijados. ¡A por ellos!\")); render(true); } break;"
  },
  "Perfil actualizado": {
   "w": [
-   "ui.js:2490"
+   "ui.js:2499"
   ],
   "ctx": "UI.sheet = null; persist(); render(false); toast(tr(\"Perfil actualizado\"));"
  },
  "Plantilla nueva generada": {
   "w": [
-   "ui.js:2509"
+   "ui.js:2518"
   ],
   "ctx": "case \"redraft\": clubRedraft(); persist(); render(false); toast(tr(\"Plantilla nueva generada\")); break;"
  },
  "No se pudo empezar la temporada.": {
   "w": [
-   "ui.js:2511"
+   "ui.js:2520"
   ],
   "ctx": "try { clubStart(); } catch (err) { console.error(err); toast(tr(\"No se pudo empezar la temporada.\")); break; }"
  },
@@ -47016,194 +48721,194 @@
  },
  "Logro: {n}": {
   "w": [
-   "ui-steps.js:98",
+   "ui-steps.js:99",
    "ui-chal32.js:79"
   ],
   "ctx": "nw.forEach(function (a, i) { U.toast(a[1] + \" \" + tr(\"Logro: {n}\", {n: tr(a[2])})); if (i === 0) U.edgeFlash(true); });"
  },
  "Elige a tu entrenador": {
   "w": [
-   "ui-steps.js:111"
+   "ui-steps.js:112"
   ],
   "ctx": "typeof presOn === \"function\" && presOn() ? {ok: !!S.m.pres.coach, t: tr(\"Elige a tu entrenador\"), b: tr(\"Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto.\"), act: \"presopen\","
  },
  "Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto.": {
   "w": [
-   "ui-steps.js:111"
+   "ui-steps.js:112"
   ],
   "ctx": "typeof presOn === \"function\" && presOn() ? {ok: !!S.m.pres.coach, t: tr(\"Elige a tu entrenador\"), b: tr(\"Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto.\"), act: \"presopen\","
  },
  "Elegir entrenador": {
   "w": [
-   "ui-steps.js:111",
+   "ui-steps.js:112",
    "ui-club30.js:50"
   ],
   "ctx": "typeof presOn === \"function\" && presOn() ? {ok: !!S.m.pres.coach, t: tr(\"Elige a tu entrenador\"), b: tr(\"Eres el presidente: el entrenador dirige los partidos. Elige uno que encaje con tu presupuesto.\"), act: \"presopen\","
  },
  "Conoce a tu equipo": {
   "w": [
-   "ui-steps.js:112"
+   "ui-steps.js:113"
   ],
   "ctx": "{ok: seen(\"plantilla\"), t: tr(\"Conoce a tu equipo\"), b: tr(\"Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está.\"), go: \"plantilla\", gl: tr(\"Ir a Equipo\")},"
  },
  "Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está.": {
   "w": [
-   "ui-steps.js:112"
+   "ui-steps.js:113"
   ],
   "ctx": "{ok: seen(\"plantilla\"), t: tr(\"Conoce a tu equipo\"), b: tr(\"Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está.\"), go: \"plantilla\", gl: tr(\"Ir a Equipo\")},"
  },
  "Ir a Equipo": {
   "w": [
-   "ui-steps.js:112"
+   "ui-steps.js:113"
   ],
   "ctx": "{ok: seen(\"plantilla\"), t: tr(\"Conoce a tu equipo\"), b: tr(\"Abre «Equipo»: ahí eliges el once, la formación y la táctica. Si no sabes qué tocar, déjalo como está.\"), go: \"plantilla\", gl: tr(\"Ir a Equipo\")},"
  },
  "Juega tus primeros partidos": {
   "w": [
-   "ui-steps.js:113"
+   "ui-steps.js:114"
   ],
   "ctx": "{ok: played(), t: tr(\"Juega tus primeros partidos\"), b: tr(\"Pulsa el botón grande de abajo. El juego avanza unas semanas y se para cuando hay algo que decidir.\")},"
  },
  "Pulsa el botón grande de abajo. El juego avanza unas semanas y se para cuando hay algo que decidir.": {
   "w": [
-   "ui-steps.js:113"
+   "ui-steps.js:114"
   ],
   "ctx": "{ok: played(), t: tr(\"Juega tus primeros partidos\"), b: tr(\"Pulsa el botón grande de abajo. El juego avanza unas semanas y se para cuando hay algo que decidir.\")},"
  },
  "Echa un vistazo al mercado": {
   "w": [
-   "ui-steps.js:114"
+   "ui-steps.js:115"
   ],
   "ctx": "{ok: seen(\"mercado\"), t: tr(\"Echa un vistazo al mercado\"), b: tr(\"En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan.\"), go: \"mercado\", gl: tr(\"Ir a Mercado\")},"
  },
  "En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan.": {
   "w": [
-   "ui-steps.js:114"
+   "ui-steps.js:115"
   ],
   "ctx": "{ok: seen(\"mercado\"), t: tr(\"Echa un vistazo al mercado\"), b: tr(\"En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan.\"), go: \"mercado\", gl: tr(\"Ir a Mercado\")},"
  },
  "Ir a Mercado": {
   "w": [
-   "ui-steps.js:114"
+   "ui-steps.js:115"
   ],
   "ctx": "{ok: seen(\"mercado\"), t: tr(\"Echa un vistazo al mercado\"), b: tr(\"En «Mercado» verás jugadores que encajan en tu plantilla y lo que cuestan.\"), go: \"mercado\", gl: tr(\"Ir a Mercado\")},"
  },
  "Mira la clasificación": {
   "w": [
-   "ui-steps.js:115",
-   "ui-steps.js:122"
+   "ui-steps.js:116",
+   "ui-steps.js:123"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Más» → «Competición» ves cómo vas y quién viene después.\"), go: \"comp\", gl: tr(\"Ver clasificación\")},"
  },
  "En «Más» → «Competición» ves cómo vas y quién viene después.": {
   "w": [
-   "ui-steps.js:115"
+   "ui-steps.js:116"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Más» → «Competición» ves cómo vas y quién viene después.\"), go: \"comp\", gl: tr(\"Ver clasificación\")},"
  },
  "Ver clasificación": {
   "w": [
-   "ui-steps.js:115"
+   "ui-steps.js:116"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Más» → «Competición» ves cómo vas y quién viene después.\"), go: \"comp\", gl: tr(\"Ver clasificación\")},"
  },
  "Ten la guía a mano": {
   "w": [
-   "ui-steps.js:116",
-   "ui-steps.js:123"
+   "ui-steps.js:117",
+   "ui-steps.js:124"
   ],
   "ctx": "{ok: seen(\"guide\"), t: tr(\"Ten la guía a mano\"), b: tr(\"Si algo no se entiende, la «Guía del juego» lo explica en pocas líneas.\"), act: \"guide\", gl: tr(\"Abrir la guía\")},"
  },
  "Si algo no se entiende, la «Guía del juego» lo explica en pocas líneas.": {
   "w": [
-   "ui-steps.js:116",
-   "ui-steps.js:123"
+   "ui-steps.js:117",
+   "ui-steps.js:124"
   ],
   "ctx": "{ok: seen(\"guide\"), t: tr(\"Ten la guía a mano\"), b: tr(\"Si algo no se entiende, la «Guía del juego» lo explica en pocas líneas.\"), act: \"guide\", gl: tr(\"Abrir la guía\")},"
  },
  "Abrir la guía": {
   "w": [
-   "ui-steps.js:116",
-   "ui-steps.js:123"
+   "ui-steps.js:117",
+   "ui-steps.js:124"
   ],
   "ctx": "{ok: seen(\"guide\"), t: tr(\"Ten la guía a mano\"), b: tr(\"Si algo no se entiende, la «Guía del juego» lo explica en pocas líneas.\"), act: \"guide\", gl: tr(\"Abrir la guía\")},"
  },
  "Llega al final de la temporada": {
   "w": [
-   "ui-steps.js:117",
-   "ui-steps.js:124"
+   "ui-steps.js:118",
+   "ui-steps.js:125"
   ],
   "ctx": "{ok: S.bi >= 4 || S.m.seasons.length > 0, t: tr(\"Llega al final de la temporada\"), b: tr(\"Sigue avanzando. La directiva te juzgará por los objetivos que ves en «Inicio».\"), prog: true}"
  },
  "Sigue avanzando. La directiva te juzgará por los objetivos que ves en «Inicio».": {
   "w": [
-   "ui-steps.js:117"
+   "ui-steps.js:118"
   ],
   "ctx": "{ok: S.bi >= 4 || S.m.seasons.length > 0, t: tr(\"Llega al final de la temporada\"), b: tr(\"Sigue avanzando. La directiva te juzgará por los objetivos que ves en «Inicio».\"), prog: true}"
  },
  "Conoce a tu futbolista": {
   "w": [
-   "ui-steps.js:120"
+   "ui-steps.js:121"
   ],
   "ctx": "{ok: seen(\"jugador\"), t: tr(\"Conoce a tu futbolista\"), b: tr(\"Abre «Yo»: ahí ves tu nivel, tus atributos, tu forma y tu moral.\"), go: \"jugador\", gl: tr(\"Ir a Yo\")},"
  },
  "Abre «Yo»: ahí ves tu nivel, tus atributos, tu forma y tu moral.": {
   "w": [
-   "ui-steps.js:120"
+   "ui-steps.js:121"
   ],
   "ctx": "{ok: seen(\"jugador\"), t: tr(\"Conoce a tu futbolista\"), b: tr(\"Abre «Yo»: ahí ves tu nivel, tus atributos, tu forma y tu moral.\"), go: \"jugador\", gl: tr(\"Ir a Yo\")},"
  },
  "Ir a Yo": {
   "w": [
-   "ui-steps.js:120"
+   "ui-steps.js:121"
   ],
   "ctx": "{ok: seen(\"jugador\"), t: tr(\"Conoce a tu futbolista\"), b: tr(\"Abre «Yo»: ahí ves tu nivel, tus atributos, tu forma y tu moral.\"), go: \"jugador\", gl: tr(\"Ir a Yo\")},"
  },
  "Juega tu primer tramo": {
   "w": [
-   "ui-steps.js:121"
+   "ui-steps.js:122"
   ],
   "ctx": "{ok: played(), t: tr(\"Juega tu primer tramo\"), b: tr(\"Pulsa el botón grande de abajo. La temporada avanza unas semanas y se para cuando hay algo que decidir.\")},"
  },
  "Pulsa el botón grande de abajo. La temporada avanza unas semanas y se para cuando hay algo que decidir.": {
   "w": [
-   "ui-steps.js:121"
+   "ui-steps.js:122"
   ],
   "ctx": "{ok: played(), t: tr(\"Juega tu primer tramo\"), b: tr(\"Pulsa el botón grande de abajo. La temporada avanza unas semanas y se para cuando hay algo que decidir.\")},"
  },
  "En «Liga» ves cómo va tu equipo y tus números de la temporada.": {
   "w": [
-   "ui-steps.js:122"
+   "ui-steps.js:123"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Liga» ves cómo va tu equipo y tus números de la temporada.\"), go: \"comp\", gl: tr(\"Ir a Liga\")},"
  },
  "Ir a Liga": {
   "w": [
-   "ui-steps.js:122"
+   "ui-steps.js:123"
   ],
   "ctx": "{ok: seen(\"comp\"), t: tr(\"Mira la clasificación\"), b: tr(\"En «Liga» ves cómo va tu equipo y tus números de la temporada.\"), go: \"comp\", gl: tr(\"Ir a Liga\")},"
  },
  "Sigue avanzando. Cumple los objetivos del míster para ganar minutos y subir tu moral.": {
   "w": [
-   "ui-steps.js:124"
+   "ui-steps.js:125"
   ],
   "ctx": "{ok: S.bi >= 4 || S.p.seasons.length > 0, t: tr(\"Llega al final de la temporada\"), b: tr(\"Sigue avanzando. Cumple los objetivos del míster para ganar minutos y subir tu moral.\"), prog: true}"
  },
  "Primeros pasos · {i} de {n}": {
   "w": [
-   "ui-steps.js:139"
+   "ui-steps.js:140"
   ],
   "ctx": "return '<section class=\"card tut\" aria-live=\"polite\"><div class=\"tuthd\"><span class=\"eyebrow\">' + tr(\"Primeros pasos · {i} de {n}\", {i: i + 1, n: st.length}) + '</span><button class=\"tutx\" data-a=\"tutoff\" aria-label=\"' +"
  },
  "Saltar la guía": {
   "w": [
-   "ui-steps.js:139"
+   "ui-steps.js:140"
   ],
   "ctx": "return '<section class=\"card tut\" aria-live=\"polite\"><div class=\"tuthd\"><span class=\"eyebrow\">' + tr(\"Primeros pasos · {i} de {n}\", {i: i + 1, n: st.length}) + '</span><button class=\"tutx\" data-a=\"tutoff\" aria-label=\"' +"
  },
  "Guía cerrada. La tienes siempre en «Más» → «Guía del juego».": {
   "w": [
-   "ui-steps.js:151"
+   "ui-steps.js:152"
   ],
   "ctx": "U.actions.tutoff = function () { S.tut = S.tut || {seen: {}}; S.tut.off = 1; U.persist(); U.render(false); U.toast(tr(\"Guía cerrada. La tienes siempre en «Más» → «Guía del juego».\")); };"
  },
@@ -49168,7 +50873,7 @@
  },
  "Vista 3D del partido": {
   "w": [
-   "pitch3d.js:4542"
+   "pitch3d.js:4546"
   ],
   "ctx": "canvas.setAttribute(\"aria-label\", label(\"Vista 3D del partido\"));"
  },

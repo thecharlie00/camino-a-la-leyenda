@@ -95,6 +95,7 @@
     if (gSync() && !nw.length) return;
     if (!nw.length) return;
     U.persist();
+    if (U.gxNotify) { U.gxNotify(); return; }
     nw.forEach(function (a, i) { U.toast(a[1] + " " + tr("Logro: {n}", {n: tr(a[2])})); if (i === 0) U.edgeFlash(true); });
   });
 
