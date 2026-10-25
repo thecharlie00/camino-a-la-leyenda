@@ -1945,3 +1945,10 @@ html.rm .mgb-n.bump.on { animation: none; }
 .gtitle-l button[aria-pressed="true"] { border-color: var(--led); color: var(--led); background: rgba(255,178,30,.08); }
 .rm .myo-fig img { animation: none; } .rm .myo-fig .p0 { opacity: 1; } .rm .myo-r, .rm .myo-b i { animation: none !important; }
 .myo-r em.neg { color: var(--red); }
+/* ===== 5.6 modelo vóxel 3D en «Yo» ===== */
+.lfav.has3d, .myo-fig.has3d { position: relative; }
+.lfav.has3d { height: 128px; display: block; }
+.lfav.has3d > svg, .myo-fig.has3d > img { display: none; }
+.yo3d-cv { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; animation: gxscin .6s cubic-bezier(.2,.9,.3,1.15) both; }
+.yo3d-cv:active { cursor: grabbing; }
+.rm .yo3d-cv { animation: none; }

@@ -4695,7 +4695,7 @@ var Pitch3D = (function () {
     try {
       var co = opts.coach, O = [LEN / 2, 0, MIDZ];
       if (!coachA) {
-        coachA = new SpRig.Man({shirt: co.suit || "#2a3340", shorts: co.trousers || co.suit || "#2a3340", socks: co.trousers || "#1b1d1f", trim: co.tie || "#f4f4f0", skin: co.skin || "#c18a5e", hair: co.hair || "#2a1a10", boots: co.shoes || "#1b1d1f", hairStyle: co.hs || 0, fem: !!co.fem, official: true});
+        coachA = new SpRig.Man({shirt: co.suit || "#2a3340", shorts: co.trousers || co.suit || "#2a3340", socks: co.trousers || "#1b1d1f", trim: co.trousers || co.suit || "#2a3340", skin: co.skin || "#c18a5e", hair: co.hair || "#2a1a10", boots: co.shoes || "#1b1d1f", hairStyle: co.hs || 0, fem: !!co.fem, official: true, gk: true, gloves: co.skin || "#c18a5e", longLegs: true, tie: co.tie || "#7a1d1d"});
         coachA.x = LEN / 2 + (opts.mySide === 1 ? 9 : -9) - 1.6 - O[0]; coachA.z = -2.6 - O[2]; coachA.yaw = 0;
       }
       var now = sim.time || 0, dt = Math.min(0.05, Math.max(0, now - coachT)); coachT = now;

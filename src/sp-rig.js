@@ -41,6 +41,8 @@ var SpRig = (function () {
     C.VOX_PARTS.forEach(function (Q) {
       var col = pal[Q[7]] || pal.kit_shirt;
       if (Q[7] === "kit_shorts" && Q[0] === 14) col = pal.kit_shorts;
+      /* 5.6: pantalón largo (míster): sin piel en las piernas */
+      if (o.longLegs && Q[7] === "skin" && [14, 15, 16, 18, 19, 20].indexOf(Q[0]) >= 0) col = pal.kit_shorts;
       add(Q[0], Q[1], Q[2], Q[3], Q[4], Q[5], Q[6], col);
       if (Q[9]) add(MIRROR[Q[0]] || Q[0], -Q[4], Q[2], Q[3], -Q[1], Q[5], Q[6], col);
     });
@@ -54,6 +56,8 @@ var SpRig = (function () {
     }
     if (o.captain) add(7, 0.25, 1.30, -0.095, 0.40, 1.36, 0.095, rgb("#f6c83a"), 1);
     if (o.official) { add(3, 0.06, 1.33, 0.165, 0.16, 1.40, 0.178, rgb("#f6c83a"), 1); }
+    /* 5.6: camisa y corbata (míster) */
+    if (o.tie) { add(3, -0.075, 1.30, 0.163, 0.075, 1.45, 0.172, rgb(o.collar || "#f4f4f0"), 1); add(3, -0.028, 1.06, 0.170, 0.028, 1.43, 0.182, rgb(o.tie), 1); }
     var out = {mesh: {}, rel: {}};
     ORDER.forEach(function (n) {
       var B = BONES[n], par = B.par ? BONES[B.par].p : [0, 0, 0];

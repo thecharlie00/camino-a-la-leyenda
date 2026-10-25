@@ -1762,7 +1762,7 @@
  "Trofeo de platino": {
   "w": [
    "ui-gx.js:100",
-   "ui-gx.js:163"
+   "ui-gx.js:164"
   ],
   "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
  },
@@ -1780,56 +1780,56 @@
  },
  "Nuevo título: «{t}»": {
   "w": [
-   "ui-gx.js:164"
+   "ui-gx.js:165"
   ],
   "ctx": "(m.x && m.x.title ? '<p class=\"gxc-ti\">' + h(tr(\"Nuevo título: «{t}»\", {t: tr(m.x.title)})) + \"</p>\" : \"\") + '<button class=\"btn\" data-gx=\"ok\">' + h(tr(\"¡Leyenda!\")) + \"</button></div>\";"
  },
  "¡Leyenda!": {
   "w": [
-   "ui-gx.js:164"
+   "ui-gx.js:165"
   ],
   "ctx": "(m.x && m.x.title ? '<p class=\"gxc-ti\">' + h(tr(\"Nuevo título: «{t}»\", {t: tr(m.x.title)})) + \"</p>\" : \"\") + '<button class=\"btn\" data-gx=\"ok\">' + h(tr(\"¡Leyenda!\")) + \"</button></div>\";"
  },
  "Trofeos": {
   "w": [
-   "ui-gx.js:204",
+   "ui-gx.js:207",
    "ui-mgryo.js:75"
   ],
   "ctx": "var s = '<h2>' + h(tr(\"Trofeos\")) + '</h2><div class=\"stack gxs\">';"
  },
  "{n} de {t} trofeos de esta carrera": {
   "w": [
-   "ui-gx.js:206"
+   "ui-gx.js:209"
   ],
   "ctx": "h(tr(\"{n} de {t} trofeos de esta carrera\", {n: got.length, t: L.length})) + \"</small>\" +"
  },
  "Todas": {
   "w": [
-   "ui-gx.js:211"
+   "ui-gx.js:214"
   ],
   "ctx": "s += '<div class=\"gxs-cats\">' + '<button data-a=\"gxcat\" data-v=\"\" aria-pressed=\"' + (!F.cat) + '\" class=\"gxc-b\"><span>🏆</span><b>' + h(tr(\"Todas\")) + \"</b></button>\" + cats.map(function (c) {"
  },
  "Trofeo oculto: sigue jugando para descubrirlo.": {
   "w": [
-   "ui-gx.js:219"
+   "ui-gx.js:222"
   ],
   "ctx": "return '<li class=\"gxi gx-' + x.rar + (on ? \" on\" : \"\") + '\"><img src=\"' + GXV.img(sec ? \"lock\" : x.rar, 64) + '\" alt=\"\" width=\"40\" height=\"40\"><span class=\"grow\"><b>' + h(sec ? \"???\" : x.n) + '</b><small>' + h(sec ? tr("
  },
  "Nada por aquí con estos filtros.": {
   "w": [
-   "ui-gx.js:223"
+   "ui-gx.js:226"
   ],
   "ctx": "}).join(\"\") + (vis.length ? \"\" : '<li class=\"muted\">' + h(tr(\"Nada por aquí con estos filtros.\")) + \"</li>\") + \"</ul>\";"
  },
  "En todas tus partidas: {n} de {t} logros clásicos.": {
   "w": [
-   "ui-gx.js:225"
+   "ui-gx.js:228"
   ],
   "ctx": "if (gc) s += '<p class=\"muted\" style=\"margin:0;font-size:var(--fs-xs)\">' + h(tr(\"En todas tus partidas: {n} de {t} logros clásicos.\", {n: gc[0], t: gc[1]})) + \"</p>\";"
  },
  "Cerrar": {
   "w": [
-   "ui-gx.js:226",
+   "ui-gx.js:229",
    "ui-gear.js:109",
    "ui-shop.js:75",
    "view3d.js:300"
@@ -1838,28 +1838,28 @@
  },
  "Vitrina": {
   "w": [
-   "ui-gx.js:250",
+   "ui-gx.js:253",
    "ui.js:1214"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir"
  },
  "{n} trofeo de oro o platino": {
   "w": [
-   "ui-gx.js:250"
+   "ui-gx.js:253"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir",
   "note": "plural:singular"
  },
  "{n} trofeos de oro o platino": {
   "w": [
-   "ui-gx.js:250"
+   "ui-gx.js:253"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir",
   "note": "plural:plural"
  },
  "Aquí lucirán tus trofeos de oro y platino.": {
   "w": [
-   "ui-gx.js:250"
+   "ui-gx.js:253"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir"
  },
@@ -7272,6 +7272,12 @@
    "ui.js:492"
   ],
   "ctx": "return '<button class=\"card myo-mini\" data-a=\"tab\" data-t=\"yo\"><img src=\"' + pose(\"idle\") + '\" alt=\"\" width=\"40\" height=\"50\"><span class=\"grow\"><b>' + h(tr(\"Tu míster\")) + \"</b><small>\" + h(tr(\"Ropa, estadísticas, vitrin"
+ },
+ "Tu jugador en 3D": {
+  "w": [
+   "ui-yo3d.js:36"
+  ],
+  "ctx": "var cv = document.createElement(\"canvas\"); cv.className = \"yo3d-cv\"; cv.setAttribute(\"aria-label\", tr(\"Tu jugador en 3D\"));"
  },
  "Títulos {a} / {b}": {
   "w": [
