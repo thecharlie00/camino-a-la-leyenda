@@ -4,7 +4,7 @@
 (function () {
   if (typeof UIX === "undefined" || typeof GXV === "undefined") return;
   var U = UIX;
-  function cols() { try { var cc = clubColors(W.clubs[S.p.club].n); return [cc[0] || "#c8312f", cc[1] || "#f4f4f0"]; } catch (e) { return ["#c8312f", "#f4f4f0"]; } }
+  function cols() { try { var cc = clubColors(W.clubs[S.mode === "mgr" && S.m ? S.m.club : S.p.club].n); return [cc[0] || "#c8312f", cc[1] || "#f4f4f0"]; } catch (e) { return ["#c8312f", "#f4f4f0"]; } }
   function look() { var o = {skin: "#c18a5e", hair: "#1d1612"}; try { var L = S.p.life || {}, c = L.cos || {}; var sk = LIFE_COS.skin.filter(function (x) { return x.id === (c.skin || "s2"); })[0], hc = LIFE_COS.hcol.filter(function (x) { return x.id === (c.hcol || "h1"); })[0]; if (sk) o.skin = sk.c; if (hc) o.hair = hc.c; } catch (e) {} return o; }
   function build(sc, C, lk) {
     var V = {};

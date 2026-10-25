@@ -4220,6 +4220,7 @@ var Pitch3D = (function () {
       drawRefCard(dyn, oa);
     }
     drawPet(dyn);
+    drawCoach(dyn);
     drawBoard(dyn);
     buildCoin(dyn);
     drawNets(dyn);
@@ -4687,7 +4688,36 @@ var Pitch3D = (function () {
       petA.acc.forEach(function (q) { bake(q.verts, q.W); });
     } catch (e) { opts.pet = null; }
   }
+  /* 5.6: el míster vóxel en su área técnica (modo míster): señala, se cruza de brazos, aplaude y celebra */
+  var coachA = null, coachT = 0, coachNext = 2;
+  function drawCoach(m) {
+    if (!opts || !opts.coach || typeof SpRig === "undefined" || !SpRig) return;
+    try {
+      var co = opts.coach, O = [LEN / 2, 0, MIDZ];
+      if (!coachA) {
+        coachA = new SpRig.Man({shirt: co.suit || "#2a3340", shorts: co.trousers || co.suit || "#2a3340", socks: co.trousers || "#1b1d1f", trim: co.tie || "#f4f4f0", skin: co.skin || "#c18a5e", hair: co.hair || "#2a1a10", boots: co.shoes || "#1b1d1f", hairStyle: co.hs || 0, fem: !!co.fem, official: true});
+        coachA.x = LEN / 2 + (opts.mySide === 1 ? 9 : -9) - 1.6 - O[0]; coachA.z = -2.6 - O[2]; coachA.yaw = 0;
+      }
+      var now = sim.time || 0, dt = Math.min(0.05, Math.max(0, now - coachT)); coachT = now;
+      coachNext -= dt;
+      if (!coachA.clip && coachNext <= 0) {
+        var mine = sim.ball && sim.ball.side === (opts.mySide || 0);
+        coachA.play(mine ? (Math.random() < 0.6 ? "cpoint" : "cclap") : (Math.random() < 0.55 ? "ccross" : "cpoint"));
+        coachNext = 3 + Math.random() * 4;
+      }
+      /* mira hacia el balón girando poco a poco */
+      if (sim.ball) { var want = Math.atan2(sim.ball.x - O[0] - coachA.x, sim.ball.z - O[2] - coachA.z); var d = want - coachA.yaw; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; coachA.yaw += d * Math.min(1, dt * 2.5); }
+      coachA.update(dt); coachA.matrices();
+      var bake = function (verts, Mx) { VoxCore.Engine.prototype.bake.call({dyn: m}, verts, Mx, null, m); };
+      SpRig.ORDER.forEach(function (n) { bake(coachA.m.mesh[n], coachA.W[n]); });
+    } catch (e) { opts.coach = null; }
+  }
+  function coachGoal(side) {
+    if (!coachA) return;
+    coachA.clip = null; coachA.play(side === (opts.mySide || 0) ? "cfist" : "chead"); coachNext = 3;
+  }
   function petGoal(side) {
+    coachGoal(side);
     if (!petA) return;
     if (side === (opts.mySide || 0)) { petA.clip = null; petA.play("jump", {done: function () { petA.play("spin"); }}); petA.say("excited", 3); }
     else { petA.clip = null; petA.play("sad"); petA.say("sad", 2.5); }
@@ -4985,7 +5015,7 @@ var Pitch3D = (function () {
         playersInsideArea: ga.playersInsideArea || 0, opponentsMoved: ga.opponentsMoved || 0,
         safeDist: GK_SAFE_DIST};
     } else if (sim.lastGoalKick) gk = sim.lastGoalKick;
-    return {sim: sim, ball: sim.ball, action: sim.action, goalkick: gk, card: sim.lastCard,
+    return {coach: coachA ? {x: coachA.x, z: coachA.z, clip: coachA.clip ? coachA.clip.n : null} : null, sim: sim, ball: sim.ball, action: sim.action, goalkick: gk, card: sim.lastCard,
       weather: weatherInfo(sim.wx), toss: sim.toss, setPiece: sim.lastSetPiece, cinema: cinema(), quality: quality, fps: fps, frames: frameCount,
       gl: !!gl, glError: err, players: sim.players, history: sim.history.length, camera: cam, mesh: meshStats(),
       assets: {state: assetState, lods: assetLods, statics: assetModels ? Object.keys(assetModels.static).length : 0,

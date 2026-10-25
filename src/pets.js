@@ -33,7 +33,9 @@ var PET_DEF = [
 ];
 var PET_STAGE = [N_("Cría"), N_("Joven"), N_("Adulto"), N_("Senior")];
 function petDef(k) { for (var i = 0; i < PET_DEF.length; i++) if (PET_DEF[i].k === k) return PET_DEF[i]; return null; }
-function petOn() { return typeof lifeOn === "function" && lifeOn(); }
+function petOn() { return typeof lifeOn === "function" && (lifeOn() || !!(S && S.mode === "mgr" && S.p && S.m)); }
+/* 5.6: en modo míster la mascota sigue contigo y se paga con el dinero del míster */
+function petWallet() { return S && S.mode === "mgr" && S.m ? S.m : S.p; }
 function petOf() { if (!petOn()) return null; var L = lifeOf(); if (L.pet && L.pet.v !== 2 && typeof PetSim !== "undefined") PetSim.migrate(L); return L.pet || null; }
 /* 5.6: crece por temporadas de la carrera y la senior se queda para siempre */
 function petStage(pt) { var a = pt.age || 0; return a < 1 ? 0 : a < 3 ? 1 : a < 10 ? 2 : 3; }
@@ -49,7 +51,7 @@ function petAttBonus() {
 }
 function petCleanName(nm) { return String(nm || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 16); }
 function petAdopt(k, nm) {
-  var L = lifeOf(), p = S.p, d = petDef(k);
+  var L = lifeOf(), p = petWallet(), d = petDef(k);
   if (!d || L.pet) return {ok: false};
   nm = petCleanName(nm);
   if (!nm) return {ok: false, noName: true};
@@ -88,7 +90,7 @@ function petAct(k) {
   var A = petActs(pt);
   if (A[k]) return {ok: false, done: true};
   if (petActN(pt) >= PET_ACT_MAX) return {ok: false, tired: true};
-  var p = S.p, cost = petCareCost(c, pt);
+  var p = petWallet(), cost = petCareCost(c, pt);
   if (cost && p.money < cost) return {ok: false, poor: true};
   p.money -= cost; A[k] = 1; pt.cared = true; pt.need = false; pt.miss = 0;
   var gain = c.bond * (pt.bond > 85 ? 0.6 : 1), out = {ok: true, k: k};
@@ -193,7 +195,7 @@ function petAccSync(quiet) {
   return got;
 }
 function petBuyAcc(k) {
-  var a = petAccDef(k), p = S.p; if (!a || a.un || petHasAcc(k)) return {ok: false};
+  var a = petAccDef(k), p = petWallet(); if (!a || a.un || petHasAcc(k)) return {ok: false};
   if (p.money < a.price) return {ok: false, poor: true};
   p.money -= a.price; petOwned().push(k);
   var pt = petOf(); if (pt) { petEq(pt)[a.s] = k; }
@@ -222,7 +224,7 @@ function petBlock() {
 /* fin de temporada: cumple años y crece; los gastos se pagan si se puede (nunca se va ni muere) */
 function petSeason() {
   var L = lifeOf(), pt = petOf(); if (!pt) return [];
-  var d = petDef(pt.k), p = S.p, out = [], g = PetSim.season(pt);
+  var d = petDef(pt.k), p = petWallet(), out = [], g = PetSim.season(pt);
   if (p.money >= d.year) p.money -= d.year;
   if (g.grow != null) out.push({t: "ok", x: tr("🐾 {pet} cumple {n} y ya es {st}.", {pet: pt.nm, n: trn(pt.age, "{n} año", "{n} años"), st: tr(PET_STAGE[g.grow]).toLowerCase()})});
   else out.push({t: "ok", x: tr("🐾 {pet} cumple {n} años.", {pet: pt.nm, n: pt.age})});

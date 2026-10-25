@@ -1925,3 +1925,23 @@ html.rm .mgb-n.bump.on { animation: none; }
 @keyframes gxscin { from { opacity: 0; transform: translateY(10px) scale(.94); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
 @keyframes gxscf { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
 .rm .gxsc img, .rm .gxsc-l { animation: none !important; }
+/* ===== 5.6 zona del míster ===== */
+.myo-hero { display: flex; gap: 12px; align-items: center; background: radial-gradient(circle at 25% 40%, #1d3a42, var(--stand) 70%); }
+.myo-fig { position: relative; width: 112px; height: 140px; flex: none; }
+.myo-fig img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transform-origin: 50% 95%; animation: myopose 12s infinite both; }
+.myo-fig .p0 { animation-delay: 0s; } .myo-fig .p1 { animation-delay: 4s; } .myo-fig .p2 { animation-delay: 8s; }
+@keyframes myopose { 0% { opacity: 0; transform: scale(.97, 1.03); } 3% { opacity: 1; transform: scale(1.03, .97); } 6% { transform: none; } 30% { opacity: 1; transform: translateY(-1px); } 33.3% { opacity: 0; } 100% { opacity: 0; } }
+.myo-id { display: flex; flex-direction: column; gap: 2px; min-width: 0; } .myo-id h2 { font-size: 24px; } .myo-id small { color: var(--mist); }
+.myo-tl { align-self: flex-start; padding: 2px 9px; border-radius: 99px; background: rgba(255,178,30,.14); color: var(--led); font-size: var(--fs-xs); font-weight: var(--fw-bold); }
+.myo-st { display: flex; flex-direction: column; gap: 7px; }
+.myo-r { display: grid; grid-template-columns: 7.5em 1fr 2.2em 2.4em; gap: 8px; align-items: center; font-size: var(--fs-sm); animation: gxli .35s var(--d) ease-out both; }
+.myo-r b { font-family: var(--f-num); font-variant-numeric: tabular-nums; text-align: right; } .myo-r em { font-style: normal; color: var(--grass); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
+.myo-b { position: relative; display: block; height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.myo-b .bb { position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); background: var(--led); transform-origin: left; animation: gxbar .9s var(--d) cubic-bezier(.2,.8,.2,1) both; }
+.myo-b .bg { position: absolute; left: var(--l); top: 0; bottom: 0; width: var(--w); background: var(--grass); animation: gxin .6s calc(var(--d) + .7s) ease-out both; }
+.myo-mini { display: flex; gap: 10px; align-items: center; width: 100%; text-align: left; } .myo-mini small { display: block; color: var(--mist); font-size: var(--fs-xs); }
+.gtitle { display: flex; flex-direction: column; gap: 6px; } .gtitle-l { display: flex; gap: 6px; flex-wrap: wrap; }
+.gtitle-l button { padding: 5px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--stand); color: var(--chalk); font-size: var(--fs-xs); }
+.gtitle-l button[aria-pressed="true"] { border-color: var(--led); color: var(--led); background: rgba(255,178,30,.08); }
+.rm .myo-fig img { animation: none; } .rm .myo-fig .p0 { opacity: 1; } .rm .myo-r, .rm .myo-b i { animation: none !important; }
+.myo-r em.neg { color: var(--red); }

@@ -19,8 +19,9 @@ var PetSim = (function () {
   api.dayKey = dayKey;
   function hourOf(t) { var d = new Date(t); return d.getHours() + d.getMinutes() / 60; }
   api.hourOf = hourOf;
-  function money() { return S && S.p ? S.p.money : 0; }
-  function pay(v) { if (!S || !S.p || S.p.money < v) return false; S.p.money -= v; return true; }
+  function pwallet() { return typeof petWallet === "function" ? petWallet() : S.p; }
+  function money() { var w = typeof petWallet === "function" ? petWallet() : S && S.p; return w ? w.money : 0; }
+  function pay(v) { var w = typeof petWallet === "function" ? petWallet() : S && S.p; if (!w || w.money < v) return false; w.money -= v; return true; }
 
   /* ---------- crecimiento: por temporadas de la carrera; la senior se queda para siempre ---------- */
   api.stage = function (pt) { var a = pt.age || 0; return a < 1 ? 0 : a < 3 ? 1 : a < 10 ? 2 : 3; };
@@ -334,7 +335,7 @@ var PetSim = (function () {
     var r = rnd(s + 7)(), roll = r;
     if (roll < 0.04) { var pool = PET_ACC2.filter(function (a) { return !a.un && a.price && a.price <= 300 && !api.has(a.id); }); if (pool.length) { var a = pool[s % pool.length]; api.own().push(a.id); return {k: "acc", id: a.id}; } }
     if (roll < 0.45) { var inv = api.inv(); inv.treat = (inv.treat || 0) + 1; return {k: "treat"}; }
-    if (roll < 0.7) { if (S && S.p) S.p.money += 20; return {k: "coin", v: 20}; }
+    if (roll < 0.7) { if (S && S.p) pwallet().money += 20; return {k: "coin", v: 20}; }
     return {k: "stick"};
   };
   api.walkEnd = function (pt, k, o) {
@@ -382,7 +383,7 @@ var PetSim = (function () {
     var pos = 1 + rivals.filter(function (r) { return r > score; }).length, out = {pos: pos, rivals: rivals, score: score, prize: 0, unlock: null};
     pt.cont["t_" + c.k] = api.clock(); pt.stats.contests++;
     if (pos === 1) {
-      pt.lose = 0; pt.stats.wins++; out.prize = c.prize; if (S && S.p) S.p.money += c.prize;
+      pt.lose = 0; pt.stats.wins++; out.prize = c.prize; if (S && S.p) pwallet().money += c.prize;
       if (!pt.cont[c.k]) { pt.cont[c.k] = 1; out.firstWin = true; }
       else pt.cont[c.k]++;
       if (!api.has(c.tro)) { api.own().push(c.tro); out.tro = c.tro; }
@@ -390,7 +391,7 @@ var PetSim = (function () {
       if (acc && !api.has(acc.id)) { api.own().push(acc.id); out.unlock = acc.id; }
       bond(pt, 4, "contest"); first(pt, "win_" + c.k); ev(pt, "win", c.k);
       if (S && S.p) S.p.fame = cl(S.p.fame + [0.4, 0.8, 1.5][CONT.indexOf(c)], 0, 100);
-    } else { pt.lose = (pt.lose || 0) + 1; if (pos <= 3 && S && S.p) { out.prize = Math.round(c.prize * (pos === 2 ? 0.35 : 0.15)); S.p.money += out.prize; } bond(pt, 1.5, "contest"); }
+    } else { pt.lose = (pt.lose || 0) + 1; if (pos <= 3 && S && S.p) { out.prize = Math.round(c.prize * (pos === 2 ? 0.35 : 0.15)); pwallet().money += out.prize; } bond(pt, 1.5, "contest"); }
     pt.n.ene = cl(pt.n.ene - 12, 0, 100);
     return out;
   };

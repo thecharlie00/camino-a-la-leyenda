@@ -126,11 +126,18 @@
       if (!S) return;
       S.ts = Date.now();
       var json = serialize(), me = metaOf(S);
-      if (!this.lset("camino.active", json)) { this.ldel("camino.active"); this.lset("camino.active", json); }
+      /* 5.6: escritura atómica: primero a una clave temporal, se comprueba y solo entonces se sustituye */
+      this.atomic("camino.active", json);
       this.lset("camino.activeId", S.uid);
       var idx = this.index().filter(function (e) { return e.id !== me.id; });
       idx.unshift(me); this.setIndex(idx);
       this.schedule();
+    },
+    atomic: function (k, v) {
+      var tmp = k + ".tmp";
+      if (!this.lset(tmp, v) || this.lget(tmp) !== v) { this.ldel(tmp); if (!this.lset(k, v)) { this.ldel(k); return this.lset(k, v); } return true; }
+      if (!this.lset(k, v)) { this.ldel(k); if (!this.lset(k, v)) { this.ldel(tmp); return false; } }
+      this.ldel(tmp); return true;
     },
     schedule: function () { var self = this; clearTimeout(this.ptimer); this.ptimer = setTimeout(function () { self.flush(); }, 2500); },
     /* comprime la partida en curso en su ranura y la sube a la cuenta */
@@ -142,7 +149,10 @@
       this.busy = true; this.again = false;
       var json = serialize(), id = S.uid, ts = S.ts || Date.now();
       this.busyP = pack(json).then(function (pk) {
-        self.lset("camino.s." + id, JSON.stringify({ts: ts, z: pk.z, d: pk.d}));
+        /* 5.6: la ranura anterior queda como copia de seguridad antes de escribir la nueva */
+        var key = "camino.s." + id, prev = self.lget(key);
+        if (prev) { try { JSON.parse(prev); if (!self.lset(key + ".bak", prev)) self.ldel(key + ".bak"); } catch (e) {} }
+        self.atomic(key, JSON.stringify({ts: ts, z: pk.z, d: pk.d}));
         if (!self.cloud || pk.d.length > 240000) return;
         return self.doc("s-" + id).set({ts: ts, z: pk.z, d: pk.d}).then(function () { return self.pushIndex(); });
       }).catch(function () {}).then(function () { self.busy = false; if (self.again && S) return self.flush(); });
@@ -176,6 +186,14 @@
       var rawTs = raw ? (e ? e.ts || 0 : 0) : -1;
       var local = raw && (!pk || rawTs >= (pk.ts || 0)) ? Promise.resolve({json: raw, ts: rawTs})
         : pk ? unpack(pk.z, pk.d).then(function (j) { return {json: j, ts: pk.ts || 0}; }) : Promise.resolve(null);
+      /* 5.6: si lo guardado no se puede leer, se recurre a la copia de seguridad de la ranura */
+      var self0 = this, ok = function (j) { try { var o = JSON.parse(j); return !!(o && o.cr && (o.p || o.m)); } catch (e) { return false; } };
+      local = local.then(function (x) {
+        if (x && ok(x.json)) return x;
+        var bk = null; try { bk = JSON.parse(self0.lget("camino.s." + id + ".bak") || "null"); } catch (e) {}
+        if (!bk) return x;
+        return unpack(bk.z, bk.d).then(function (j) { return ok(j) ? {json: j, ts: bk.ts || 0} : x; }).catch(function () { return x; });
+      }).catch(function () { return null; });
       if (!this.cloud) return local.then(function (x) { return x && x.json; });
       return Promise.all([local, this.doc("s-" + id).get().then(function (snap) { return snap.exists ? snap.data() : null; }).catch(function () { return null; })]).then(function (r) {
         var loc = r[0], cd = r[1];
@@ -184,7 +202,7 @@
       });
     },
     remove: function (id) {
-      this.ldel("camino.s." + id);
+      this.ldel("camino.s." + id); this.ldel("camino.s." + id + ".bak");
       if (this.lget("camino.activeId") === id) { this.ldel("camino.active"); this.ldel("camino.activeId"); }
       this.setIndex(this.index().filter(function (e) { return e.id !== id; }));
       var dead = this.tomb();
@@ -458,7 +476,7 @@
     return '<div class="xiwarn" role="alert"><div class="xwt"><span class="xwi">!</span>' + trn(u.length, "{n} baja en tu once", "{n} bajas en tu once") + '</div><p>' + why + '</p><p class="xws">' + tr("Si juegas así, entrará un suplente de urgencia, el equipo rendirá peor y el vestuario perderá moral.") + '</p><div class="xwb"><button class="btn" data-a="fixxi">' + tr("Corregir automáticamente") + "</button>" + (UI.tab !== "plantilla" ? '<button class="btn" data-a="tab" data-t="plantilla">' + tr("Ver el once") + "</button>" : "") + "</div></div>";
   }
   /* navegación: cuatro pestañas; lo demás vive en «Más» */
-  function subTabs() { return isMgr() ? ["comp", "red", "hist"] : ["red", "hist", "mundo"]; }
+  function subTabs() { return isMgr() ? ["comp", "red", "hist", "yo"] : ["red", "hist", "mundo"]; }
   function tabsNav() {
     var t = isMgr() ? [["club", tr("Inicio"), ICON.home], ["plantilla", tr("Equipo"), ICON.shirt], ["mercado", tr("Mercado"), ICON.swap], ["mas", tr("Más"), ICON.grid]]
       : [["carrera", tr("Inicio"), ICON.home], ["jugador", tr("Yo"), ICON.shirt], ["comp", tr("Liga"), ICON.table], ["mas", tr("Más"), ICON.grid]];
@@ -471,6 +489,7 @@
   function tabMas() {
     var unread = socUnread(), mgr = isMgr(), rows = [];
     if (mgr) { var pos = S.m.club >= 0 ? posInLeague(S.m.club) : 0; rows.push(["tab", "comp", ICON.table, tr("Competición"), pos > 0 ? tr("Vais {pos} en {lg}", {pos: ord(pos), lg: lgName(S.cl[S.m.club])}) : tr("Clasificaciones y calendario")]); }
+    if (mgr && UIX.mgrYo) rows.push(["tab", "yo", ICON.shirt, tr("Tu míster"), tr("Ropa, estadísticas, vitrina y mascota")]);
     rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
     rows.push(["tab", "hist", ICON.trophy, tr("Historial"), tr("Temporadas, títulos y premios")]);
     if (!mgr) rows.push(["tab", "mundo", ICON.globe, tr("Mundo"), tr("Otras ligas, selecciones y rivales")]);
@@ -486,7 +505,7 @@
 
   function tabView() {
     var body = tabView0(), t = UI.tab, sub = subTabs().indexOf(t) >= 0;
-    var names = {comp: tr("Competición"), red: tr("Red social"), hist: tr("Historial"), mundo: tr("Mundo")};
+    var names = {comp: tr("Competición"), red: tr("Red social"), hist: tr("Historial"), mundo: tr("Mundo"), yo: tr("Tu míster")};
     return (sub ? '<div class="backbar"><button class="backbtn" data-a="tab" data-t="mas">‹ ' + tr("Más") + "</button><h2>" + h(names[t] || "") + "</h2></div>" : "") + slot(t + "Top") + body + slot(t);
   }
   function tabView0() {
@@ -498,6 +517,7 @@
         case "hist": return tabHistM();
         case "red": return tabRed();
         case "mas": return tabMas();
+        case "yo": if (UIX.mgrYo) return UIX.mgrYo(); UI.tab = "club"; return tabClub();
         default: UI.tab = "club"; return tabClub();
       }
     }
@@ -2142,7 +2162,7 @@
     if (!LV.el.querySelector("#lvbody")) {
       LV.el.innerHTML = '<div class="lpanel"><div id="lvtop"></div><div class="lpitchw" id="lvpitch"></div><div id="lvbody"></div><div id="lvctl"></div></div>';
       LV.ctlKey = null;
-      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === "f", pet: typeof petOf === "function" ? petOf() : null, mySide: f.home ? 0 : 1, board: liveBoard(f), spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
+      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === "f", pet: typeof petOf === "function" ? petOf() : null, coach: UIX.coachLook ? UIX.coachLook() : null, mySide: f.home ? 0 : 1, board: liveBoard(f), spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
         cinematics: !L.min,
         lab: {replay: tr("REPETICIÓN"), goal: tr("GOL"), goalOf: tr("¡GOL DE {n}!"), post: tr("¡PALO!"), half: tr("FIN DEL PRIMER TIEMPO"), end: tr("FINAL"), off: tr("FUERA DE JUEGO"), foul: tr("FALTA"), thr: tr("SAQUE DE BANDA"), cor: tr("CÓRNER"), gk: tr("SAQUE DE PUERTA")},
         onSpeed: function (n) { if (!LV) return; LV.speed = n; LV.run = true; LV.resume = false; liveTick(); liveRender(); }});
@@ -2609,7 +2629,7 @@
   })();
 
   /* helpers para los módulos ui-*.js */
-  Object.assign(UIX, {h: h, render: render, persist: persist, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, pack: function (j) { return pack(j); }, importCode: function (t) { UI.sheet = {k: "import"}; importCode(t); }, b64: function (u) { return b64(u); }, leagueField: function (c) { return leagueField(c); }, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
+  Object.assign(UIX, {h: h, render: render, persist: persist, store: Store, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, pack: function (j) { return pack(j); }, importCode: function (t) { UI.sheet = {k: "import"}; importCode(t); }, b64: function (u) { return b64(u); }, leagueField: function (c) { return leagueField(c); }, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
     chip: chip, edgeFlash: edgeFlash, confetti: confetti, openLive: function () { openLive(); }, isMgr: isMgr, ui: function () { return UI; }, icon: ICON,
     open: function (k, d) { UI.sheet = Object.assign({k: k}, d || {}); renderSheet(); }, slot: slot, choose: function (i) { doChoose(i); }});
 

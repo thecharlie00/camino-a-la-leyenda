@@ -263,7 +263,8 @@ var PetWorld = (function () {
     if (a === "mode") { if (v === W.modeK && v !== "home") v = "home"; setMode(v); return; }
     if (W.mode && W.mode.act) W.mode.act(a, v, b);
   }
-  function money() { return S && S.p ? fmtMoney(S.p.money) : ""; }
+  function pwallet() { return typeof petWallet === "function" ? petWallet() : S.p; }
+  function money() { return S && S.p ? fmtMoney(pwallet().money) : ""; }
   function owned(id) { return PetSim.has(id); }
   function invN(id) { return PetSim.inv()[id] || 0; }
 
@@ -863,7 +864,7 @@ var PetWorld = (function () {
   function shopView() {
     var W = cur, pt = W.pt, tab = W.shopTab, inv = PetSim.inv(), s = '<div class="pw-h">' + esc(tr("Tienda de mascotas")) + ' <span class="pw-money">' + esc(money()) + "</span></div>";
     s += '<div class="pw-tabs" role="tablist">' + [["acc", N_("Novedades de hoy")], ["food", N_("Comida")], ["care", N_("Cuidado")], ["toy", N_("Juguetes")], ["deco", N_("Jardín")]].map(function (x) { return '<button role="tab" data-pw="tab" data-v="' + x[0] + '" aria-selected="' + (tab === x[0]) + '">' + esc(tr(x[1])) + "</button>"; }).join("") + "</div>";
-    function row(it, extra, can) { var p = it.price || 0, poor = S.p.money < p; return '<div class="pw-item' + (W.tryOn === it.id ? " on" : "") + '"><b>' + esc(tr(it.n)) + "</b><small>" + esc(it.d ? tr(it.d) : "") + (extra || "") + '</small><div class="pw-row">' + (it.s ? '<button class="btn" data-pw="try" data-v="' + it.id + '">' + esc(tr("Probar")) + "</button>" : "") + (can === false ? '<span class="pw-own">' + esc(tr("Ya lo tienes")) + "</span>" : '<button class="go" data-pw="buy" data-v="' + it.id + '"' + (poor ? " disabled" : "") + ">" + esc(fmtMoney(p)) + "</button>") + "</div></div>"; }
+    function row(it, extra, can) { var p = it.price || 0, poor = pwallet().money < p; return '<div class="pw-item' + (W.tryOn === it.id ? " on" : "") + '"><b>' + esc(tr(it.n)) + "</b><small>" + esc(it.d ? tr(it.d) : "") + (extra || "") + '</small><div class="pw-row">' + (it.s ? '<button class="btn" data-pw="try" data-v="' + it.id + '">' + esc(tr("Probar")) + "</button>" : "") + (can === false ? '<span class="pw-own">' + esc(tr("Ya lo tienes")) + "</span>" : '<button class="go" data-pw="buy" data-v="' + it.id + '"' + (poor ? " disabled" : "") + ">" + esc(fmtMoney(p)) + "</button>") + "</div></div>"; }
     var list = [];
     if (tab === "acc") list = PetSim.stock(pt).map(function (id) { var it = petItem(id); return row(it, " · " + tr(PET_RARITY.filter(function (x) { return x[0] === it.r; })[0][1]), !owned(id)); });
     if (tab === "food") list = PET_FOOD.map(function (f) { return row(f, inv[f.id] ? " · " + tr("Tienes {n}", {n: inv[f.id]}) : ""); });
