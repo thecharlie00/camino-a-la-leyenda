@@ -40,6 +40,13 @@ const OUT = process.argv[2] || "/tmp/shop56"; fs.mkdirSync(OUT, { recursive: tru
   console.log("oferta", JSON.stringify(off)); if (!off.t) fail.push("ganga");
   await click('[data-a="shoptab"][data-v="pet"]'); await p.waitForTimeout(400);
   await click('[data-a="shoptab"][data-v="m"]'); await p.waitForTimeout(400); await p.screenshot({ path: path.join(OUT, "05-mister.png") });
+  /* retos */
+  await click('[data-a="close"]');
+  const ch = await js(() => { S.p.motm = 6; GXC.check(true); UIX.render(false); return { q: GX.st().q.slice(), done: GXC.done("c_motm5"), lock: GXI.lock(GXI.item("x_ph_motm")) }; });
+  console.log("reto", JSON.stringify(ch)); if (!ch.done || ch.lock) fail.push("reto");
+  await p.waitForTimeout(1000); await p.screenshot({ path: path.join(OUT, "06-reto.png") }); await p.waitForTimeout(4500);
+  await js(() => { UIX.ui().sh = { tab: "chal" }; UIX.open("shop"); }); await p.waitForTimeout(900);
+  console.log("lista retos", await js(() => document.querySelectorAll(".chi").length)); await p.screenshot({ path: path.join(OUT, "07-retos.png") });
   console.log(fail.length ? "FALLOS: " + fail.join(", ") : "shop56 OK"); console.log(errs.length ? "ERRORES:\n" + errs.join("\n") : "SIN ERRORES");
   await b.close();
 })();

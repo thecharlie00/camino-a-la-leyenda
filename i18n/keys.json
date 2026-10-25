@@ -548,7 +548,8 @@
  },
  "Marca 10 goles de falta directa.": {
   "w": [
-   "gx-data.js:50"
+   "gx-data.js:50",
+   "gx-chal.js:46"
   ],
   "ctx": "[\"sp_fk10\", \"sp#\", \"s\", 0, \"p\", N_(\"A balón parado\"), N_(\"Marca 10 goles de falta directa.\"), [\"s\", \"fkGoals\", 10]],"
  },
@@ -1105,7 +1106,8 @@
  },
  "Llega a 10 millones de seguidores.": {
   "w": [
-   "gx-data.js:101"
+   "gx-data.js:101",
+   "gx-chal.js:47"
   ],
   "ctx": "[\"r_inf\", \"press#\", \"s\", 0, \"p\", N_(\"Influencer\"), N_(\"Llega a 10 millones de seguidores.\"), [\"s\", \"followers\", 1e7], {title: N_(\"Influencer\")}],"
  },
@@ -1342,7 +1344,8 @@
  },
  "Reto superado": {
   "w": [
-   "gx-data.js:123"
+   "gx-data.js:123",
+   "ui-gx.js:124"
   ],
   "ctx": "[\"mi_ch\", \"mini#\", \"g\", 0, \"p\", N_(\"Reto superado\"), N_(\"Supera los 5 retos de balón parado.\"), [\"s\", \"spChallenges\", 5]],"
  },
@@ -1756,91 +1759,103 @@
  "Trofeo de platino": {
   "w": [
    "ui-gx.js:100",
-   "ui-gx.js:154"
+   "ui-gx.js:163"
   ],
   "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
  },
+ "Regalo para tu mascota: {x}": {
+  "w": [
+   "ui-gx.js:124"
+  ],
+  "ctx": "banner(cid, {rar: \"s\"}, done, {kick: tr(\"Reto superado\"), n: tr(c.n), d: it ? (c.pet ? tr(\"Regalo para tu mascota: {x}\", {x: tr(it.n)}) : tr(\"Desbloqueado en la tienda: {x}\", {x: tr(it.n)})) : tr(c.d), key: key || \"s\", r"
+ },
+ "Desbloqueado en la tienda: {x}": {
+  "w": [
+   "ui-gx.js:124"
+  ],
+  "ctx": "banner(cid, {rar: \"s\"}, done, {kick: tr(\"Reto superado\"), n: tr(c.n), d: it ? (c.pet ? tr(\"Regalo para tu mascota: {x}\", {x: tr(it.n)}) : tr(\"Desbloqueado en la tienda: {x}\", {x: tr(it.n)})) : tr(c.d), key: key || \"s\", r"
+ },
  "Nuevo título: «{t}»": {
   "w": [
-   "ui-gx.js:155"
+   "ui-gx.js:164"
   ],
   "ctx": "(m.x && m.x.title ? '<p class=\"gxc-ti\">' + h(tr(\"Nuevo título: «{t}»\", {t: tr(m.x.title)})) + \"</p>\" : \"\") + '<button class=\"btn\" data-gx=\"ok\">' + h(tr(\"¡Leyenda!\")) + \"</button></div>\";"
  },
  "¡Leyenda!": {
   "w": [
-   "ui-gx.js:155"
+   "ui-gx.js:164"
   ],
   "ctx": "(m.x && m.x.title ? '<p class=\"gxc-ti\">' + h(tr(\"Nuevo título: «{t}»\", {t: tr(m.x.title)})) + \"</p>\" : \"\") + '<button class=\"btn\" data-gx=\"ok\">' + h(tr(\"¡Leyenda!\")) + \"</button></div>\";"
  },
  "Trofeos": {
   "w": [
-   "ui-gx.js:195"
+   "ui-gx.js:204"
   ],
   "ctx": "var s = '<h2>' + h(tr(\"Trofeos\")) + '</h2><div class=\"stack gxs\">';"
  },
  "{n} de {t} trofeos de esta carrera": {
   "w": [
-   "ui-gx.js:197"
+   "ui-gx.js:206"
   ],
   "ctx": "h(tr(\"{n} de {t} trofeos de esta carrera\", {n: got.length, t: L.length})) + \"</small>\" +"
  },
  "Todas": {
   "w": [
-   "ui-gx.js:202"
+   "ui-gx.js:211"
   ],
   "ctx": "s += '<div class=\"gxs-cats\">' + '<button data-a=\"gxcat\" data-v=\"\" aria-pressed=\"' + (!F.cat) + '\" class=\"gxc-b\"><span>🏆</span><b>' + h(tr(\"Todas\")) + \"</b></button>\" + cats.map(function (c) {"
  },
  "Trofeo oculto: sigue jugando para descubrirlo.": {
   "w": [
-   "ui-gx.js:210"
+   "ui-gx.js:219"
   ],
   "ctx": "return '<li class=\"gxi gx-' + x.rar + (on ? \" on\" : \"\") + '\"><img src=\"' + GXV.img(sec ? \"lock\" : x.rar, 64) + '\" alt=\"\" width=\"40\" height=\"40\"><span class=\"grow\"><b>' + h(sec ? \"???\" : x.n) + '</b><small>' + h(sec ? tr("
  },
  "Nada por aquí con estos filtros.": {
   "w": [
-   "ui-gx.js:214"
+   "ui-gx.js:223"
   ],
   "ctx": "}).join(\"\") + (vis.length ? \"\" : '<li class=\"muted\">' + h(tr(\"Nada por aquí con estos filtros.\")) + \"</li>\") + \"</ul>\";"
  },
  "En todas tus partidas: {n} de {t} logros clásicos.": {
   "w": [
-   "ui-gx.js:216"
+   "ui-gx.js:225"
   ],
   "ctx": "if (gc) s += '<p class=\"muted\" style=\"margin:0;font-size:var(--fs-xs)\">' + h(tr(\"En todas tus partidas: {n} de {t} logros clásicos.\", {n: gc[0], t: gc[1]})) + \"</p>\";"
  },
  "Cerrar": {
   "w": [
-   "ui-gx.js:217",
+   "ui-gx.js:226",
    "ui-gear.js:109",
-   "ui-shop.js:74",
+   "ui-shop.js:75",
    "view3d.js:300"
   ],
   "ctx": "return s + '<button class=\"btn wide\" data-a=\"close\">' + h(tr(\"Cerrar\")) + \"</button></div>\";"
  },
  "Vitrina": {
   "w": [
-   "ui-gx.js:241",
+   "ui-gx.js:250",
    "ui.js:1193"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir"
  },
  "{n} trofeo de oro o platino": {
   "w": [
-   "ui-gx.js:241"
+   "ui-gx.js:250"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir",
   "note": "plural:singular"
  },
  "{n} trofeos de oro o platino": {
   "w": [
-   "ui-gx.js:241"
+   "ui-gx.js:250"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir",
   "note": "plural:plural"
  },
  "Aquí lucirán tus trofeos de oro y platino.": {
   "w": [
-   "ui-gx.js:241"
+   "ui-gx.js:250"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir"
  },
@@ -1853,7 +1868,8 @@
  },
  "Élite": {
   "w": [
-   "gx-items.js:8"
+   "gx-items.js:8",
+   "gx-chal.js:39"
   ],
   "ctx": "{k: 3, n: N_(\"Oro\"), c: \"#f6c83a\", m: 2}, {k: 4, n: N_(\"Élite\"), c: \"#b07cff\", m: 2.45}, {k: 5, n: N_(\"Leyenda\"), c: \"#ff6b3d\", m: 3}"
  },
@@ -2715,6 +2731,949 @@
   ],
   "ctx": "GX_SETS.push({k: \"mcl\", n: N_(\"Línea Pizarra\"), b3: {tac: 1}, bAll: {tac: 2, lec: 1}}, {k: \"mbr\", n: N_(\"Línea Despacho\"), b3: {neg: 1}, bAll: {neg: 2, pre: 1}}, {k: \"mtr\", n: N_(\"Línea Chándal\"), b3: {fis: 1}, bAll: {fi"
  },
+ "Primeros pasos": {
+  "w": [
+   "gx-chal.js:6"
+  ],
+  "ctx": "[\"c_apps10\", N_(\"Primeros pasos\"), N_(\"Juega 10 partidos oficiales.\"), [\"s\", \"apps\", 10], [\"x_socks_dbt\", \"socks\", N_(\"Medias del debut\"), {RIT: 1, rec: 1}, null, 12000, {c: \"#f4f4f0\"}]],"
+ },
+ "Juega 10 partidos oficiales.": {
+  "w": [
+   "gx-chal.js:6"
+  ],
+  "ctx": "[\"c_apps10\", N_(\"Primeros pasos\"), N_(\"Juega 10 partidos oficiales.\"), [\"s\", \"apps\", 10], [\"x_socks_dbt\", \"socks\", N_(\"Medias del debut\"), {RIT: 1, rec: 1}, null, 12000, {c: \"#f4f4f0\"}]],"
+ },
+ "Medias del debut": {
+  "w": [
+   "gx-chal.js:6"
+  ],
+  "ctx": "[\"c_apps10\", N_(\"Primeros pasos\"), N_(\"Juega 10 partidos oficiales.\"), [\"s\", \"apps\", 10], [\"x_socks_dbt\", \"socks\", N_(\"Medias del debut\"), {RIT: 1, rec: 1}, null, 12000, {c: \"#f4f4f0\"}]],"
+ },
+ "Olfato": {
+  "w": [
+   "gx-chal.js:7"
+  ],
+  "ctx": "[\"c_g10\", N_(\"Olfato\"), N_(\"Marca 10 goles oficiales.\"), [\"s\", \"goals\", 10], [\"x_band_g10\", \"band\", N_(\"Cinta del olfato\"), {TIR: 2}, \"can\", 30000, {c: \"#ff7a1a\"}]],"
+ },
+ "Marca 10 goles oficiales.": {
+  "w": [
+   "gx-chal.js:7"
+  ],
+  "ctx": "[\"c_g10\", N_(\"Olfato\"), N_(\"Marca 10 goles oficiales.\"), [\"s\", \"goals\", 10], [\"x_band_g10\", \"band\", N_(\"Cinta del olfato\"), {TIR: 2}, \"can\", 30000, {c: \"#ff7a1a\"}]],"
+ },
+ "Cinta del olfato": {
+  "w": [
+   "gx-chal.js:7"
+  ],
+  "ctx": "[\"c_g10\", N_(\"Olfato\"), N_(\"Marca 10 goles oficiales.\"), [\"s\", \"goals\", 10], [\"x_band_g10\", \"band\", N_(\"Cinta del olfato\"), {TIR: 2}, \"can\", 30000, {c: \"#ff7a1a\"}]],"
+ },
+ "Primer pase de gol": {
+  "w": [
+   "gx-chal.js:8"
+  ],
+  "ctx": "[\"c_a10\", N_(\"Primer pase de gol\"), N_(\"Da 10 asistencias.\"), [\"s\", \"assists\", 10], [\"x_wr_a10\", \"wrist\", N_(\"Muñequera del pasador\"), {PAS: 2}, \"led\", 25000, {c: \"#66b9ff\"}]],"
+ },
+ "Da 10 asistencias.": {
+  "w": [
+   "gx-chal.js:8"
+  ],
+  "ctx": "[\"c_a10\", N_(\"Primer pase de gol\"), N_(\"Da 10 asistencias.\"), [\"s\", \"assists\", 10], [\"x_wr_a10\", \"wrist\", N_(\"Muñequera del pasador\"), {PAS: 2}, \"led\", 25000, {c: \"#66b9ff\"}]],"
+ },
+ "Muñequera del pasador": {
+  "w": [
+   "gx-chal.js:8"
+  ],
+  "ctx": "[\"c_a10\", N_(\"Primer pase de gol\"), N_(\"Da 10 asistencias.\"), [\"s\", \"assists\", 10], [\"x_wr_a10\", \"wrist\", N_(\"Muñequera del pasador\"), {PAS: 2}, \"led\", 25000, {c: \"#66b9ff\"}]],"
+ },
+ "Ganar engancha": {
+  "w": [
+   "gx-chal.js:9"
+  ],
+  "ctx": "[\"c_w10\", N_(\"Ganar engancha\"), N_(\"Gana 10 partidos con tu club.\"), [\"s\", \"wins\", 10], [\"x_ho_w10\", \"hood\", N_(\"Sudadera ganadora\"), {FIS: 1, TIR: 1}, null, 30000, {c: \"#2ad15a\"}]],"
+ },
+ "Gana 10 partidos con tu club.": {
+  "w": [
+   "gx-chal.js:9"
+  ],
+  "ctx": "[\"c_w10\", N_(\"Ganar engancha\"), N_(\"Gana 10 partidos con tu club.\"), [\"s\", \"wins\", 10], [\"x_ho_w10\", \"hood\", N_(\"Sudadera ganadora\"), {FIS: 1, TIR: 1}, null, 30000, {c: \"#2ad15a\"}]],"
+ },
+ "Sudadera ganadora": {
+  "w": [
+   "gx-chal.js:9"
+  ],
+  "ctx": "[\"c_w10\", N_(\"Ganar engancha\"), N_(\"Gana 10 partidos con tu club.\"), [\"s\", \"wins\", 10], [\"x_ho_w10\", \"hood\", N_(\"Sudadera ganadora\"), {FIS: 1, TIR: 1}, null, 30000, {c: \"#2ad15a\"}]],"
+ },
+ "Candado": {
+  "w": [
+   "gx-chal.js:10"
+  ],
+  "ctx": "[\"c_cs10\", N_(\"Candado\"), N_(\"Deja la portería a cero 10 veces.\"), [\"s\", \"cleanSheets\", 10], [\"x_gl_cs10\", \"gloves\", N_(\"Guantes candado\"), {DEF: 2, REG: 1}, \"gua\", 40000, {c: \"#2a3a40\", c2: \"#ffb21e\"}]],"
+ },
+ "Deja la portería a cero 10 veces.": {
+  "w": [
+   "gx-chal.js:10"
+  ],
+  "ctx": "[\"c_cs10\", N_(\"Candado\"), N_(\"Deja la portería a cero 10 veces.\"), [\"s\", \"cleanSheets\", 10], [\"x_gl_cs10\", \"gloves\", N_(\"Guantes candado\"), {DEF: 2, REG: 1}, \"gua\", 40000, {c: \"#2a3a40\", c2: \"#ffb21e\"}]],"
+ },
+ "Guantes candado": {
+  "w": [
+   "gx-chal.js:10"
+  ],
+  "ctx": "[\"c_cs10\", N_(\"Candado\"), N_(\"Deja la portería a cero 10 veces.\"), [\"s\", \"cleanSheets\", 10], [\"x_gl_cs10\", \"gloves\", N_(\"Guantes candado\"), {DEF: 2, REG: 1}, \"gua\", 40000, {c: \"#2a3a40\", c2: \"#ffb21e\"}]],"
+ },
+ "Foco": {
+  "w": [
+   "gx-chal.js:11"
+  ],
+  "ctx": "[\"c_motm5\", N_(\"Foco\"), N_(\"Sé el mejor del partido 5 veces.\"), [\"s\", \"motm\", 5], [\"x_ph_motm\", \"phones\", N_(\"Cascos del foco\"), {TIR: 1, REG: 1}, null, 35000, {c: \"#ffb21e\"}]],"
+ },
+ "Sé el mejor del partido 5 veces.": {
+  "w": [
+   "gx-chal.js:11"
+  ],
+  "ctx": "[\"c_motm5\", N_(\"Foco\"), N_(\"Sé el mejor del partido 5 veces.\"), [\"s\", \"motm\", 5], [\"x_ph_motm\", \"phones\", N_(\"Cascos del foco\"), {TIR: 1, REG: 1}, null, 35000, {c: \"#ffb21e\"}]],"
+ },
+ "Cascos del foco": {
+  "w": [
+   "gx-chal.js:11"
+  ],
+  "ctx": "[\"c_motm5\", N_(\"Foco\"), N_(\"Sé el mejor del partido 5 veces.\"), [\"s\", \"motm\", 5], [\"x_ph_motm\", \"phones\", N_(\"Cascos del foco\"), {TIR: 1, REG: 1}, null, 35000, {c: \"#ffb21e\"}]],"
+ },
+ "Instinto asesino": {
+  "w": [
+   "gx-chal.js:12"
+  ],
+  "ctx": "[\"c_g25\", N_(\"Instinto asesino\"), N_(\"Marca 25 goles oficiales.\"), [\"s\", \"goals\", 25], [\"x_boots_g25\", \"boots\", N_(\"Botas del instinto\"), {TIR: 2, RIT: 1, DEF: -1}, \"can\", 90000, {c: \"#c8312f\", c2: \"#1d1404\"}]],"
+ },
+ "Marca 25 goles oficiales.": {
+  "w": [
+   "gx-chal.js:12"
+  ],
+  "ctx": "[\"c_g25\", N_(\"Instinto asesino\"), N_(\"Marca 25 goles oficiales.\"), [\"s\", \"goals\", 25], [\"x_boots_g25\", \"boots\", N_(\"Botas del instinto\"), {TIR: 2, RIT: 1, DEF: -1}, \"can\", 90000, {c: \"#c8312f\", c2: \"#1d1404\"}]],"
+ },
+ "Botas del instinto": {
+  "w": [
+   "gx-chal.js:12"
+  ],
+  "ctx": "[\"c_g25\", N_(\"Instinto asesino\"), N_(\"Marca 25 goles oficiales.\"), [\"s\", \"goals\", 25], [\"x_boots_g25\", \"boots\", N_(\"Botas del instinto\"), {TIR: 2, RIT: 1, DEF: -1}, \"can\", 90000, {c: \"#c8312f\", c2: \"#1d1404\"}]],"
+ },
+ "Habitual": {
+  "w": [
+   "gx-chal.js:13"
+  ],
+  "ctx": "[\"c_apps50\", N_(\"Habitual\"), N_(\"Juega 50 partidos oficiales.\"), [\"s\", \"apps\", 50], [\"x_sh_50\", \"shin\", N_(\"Espinilleras del habitual\"), {DEF: 1, FIS: 1, inj: 1}, \"tit\", 45000, {c: \"#3a4b50\"}]],"
+ },
+ "Juega 50 partidos oficiales.": {
+  "w": [
+   "gx-chal.js:13"
+  ],
+  "ctx": "[\"c_apps50\", N_(\"Habitual\"), N_(\"Juega 50 partidos oficiales.\"), [\"s\", \"apps\", 50], [\"x_sh_50\", \"shin\", N_(\"Espinilleras del habitual\"), {DEF: 1, FIS: 1, inj: 1}, \"tit\", 45000, {c: \"#3a4b50\"}]],"
+ },
+ "Espinilleras del habitual": {
+  "w": [
+   "gx-chal.js:13"
+  ],
+  "ctx": "[\"c_apps50\", N_(\"Habitual\"), N_(\"Juega 50 partidos oficiales.\"), [\"s\", \"apps\", 50], [\"x_sh_50\", \"shin\", N_(\"Espinilleras del habitual\"), {DEF: 1, FIS: 1, inj: 1}, \"tit\", 45000, {c: \"#3a4b50\"}]],"
+ },
+ "Kilómetros": {
+  "w": [
+   "gx-chal.js:14"
+  ],
+  "ctx": "[\"c_min3k\", N_(\"Kilómetros\"), N_(\"Juega 3.000 minutos.\"), [\"s\", \"minutes\", 3000], [\"x_wa_3k\", \"watch\", N_(\"Reloj de los kilómetros\"), {rec: 2, FIS: 1}, \"tit\", 50000, {c: \"#2ad15a\"}]],"
+ },
+ "Juega 3.000 minutos.": {
+  "w": [
+   "gx-chal.js:14"
+  ],
+  "ctx": "[\"c_min3k\", N_(\"Kilómetros\"), N_(\"Juega 3.000 minutos.\"), [\"s\", \"minutes\", 3000], [\"x_wa_3k\", \"watch\", N_(\"Reloj de los kilómetros\"), {rec: 2, FIS: 1}, \"tit\", 50000, {c: \"#2ad15a\"}]],"
+ },
+ "Reloj de los kilómetros": {
+  "w": [
+   "gx-chal.js:14"
+  ],
+  "ctx": "[\"c_min3k\", N_(\"Kilómetros\"), N_(\"Juega 3.000 minutos.\"), [\"s\", \"minutes\", 3000], [\"x_wa_3k\", \"watch\", N_(\"Reloj de los kilómetros\"), {rec: 2, FIS: 1}, \"tit\", 50000, {c: \"#2ad15a\"}]],"
+ },
+ "Triplete": {
+  "w": [
+   "gx-chal.js:15"
+  ],
+  "ctx": "[\"c_hat1\", N_(\"Triplete\"), N_(\"Marca un hat-trick.\"), [\"s\", \"hatTricks\", 1], [\"x_ne_hat\", \"neck\", N_(\"Colgante del triplete\"), {TIR: 2, PAS: 1}, null, 80000, {c: \"#f6c83a\"}]],"
+ },
+ "Marca un hat-trick.": {
+  "w": [
+   "gx-chal.js:15"
+  ],
+  "ctx": "[\"c_hat1\", N_(\"Triplete\"), N_(\"Marca un hat-trick.\"), [\"s\", \"hatTricks\", 1], [\"x_ne_hat\", \"neck\", N_(\"Colgante del triplete\"), {TIR: 2, PAS: 1}, null, 80000, {c: \"#f6c83a\"}]],"
+ },
+ "Colgante del triplete": {
+  "w": [
+   "gx-chal.js:15"
+  ],
+  "ctx": "[\"c_hat1\", N_(\"Triplete\"), N_(\"Marca un hat-trick.\"), [\"s\", \"hatTricks\", 1], [\"x_ne_hat\", \"neck\", N_(\"Colgante del triplete\"), {TIR: 2, PAS: 1}, null, 80000, {c: \"#f6c83a\"}]],"
+ },
+ "Primer metal": {
+  "w": [
+   "gx-chal.js:16"
+  ],
+  "ctx": "[\"c_t1\", N_(\"Primer metal\"), N_(\"Gana tu primer título.\"), [\"s\", \"titles\", 1], [\"x_ar_t1\", \"arm\", N_(\"Brazalete del campeón\"), {PAS: 1, FIS: 1}, \"led\", 60000, {c: \"#f6c83a\"}]],"
+ },
+ "Gana tu primer título.": {
+  "w": [
+   "gx-chal.js:16"
+  ],
+  "ctx": "[\"c_t1\", N_(\"Primer metal\"), N_(\"Gana tu primer título.\"), [\"s\", \"titles\", 1], [\"x_ar_t1\", \"arm\", N_(\"Brazalete del campeón\"), {PAS: 1, FIS: 1}, \"led\", 60000, {c: \"#f6c83a\"}]],"
+ },
+ "Brazalete del campeón": {
+  "w": [
+   "gx-chal.js:16"
+  ],
+  "ctx": "[\"c_t1\", N_(\"Primer metal\"), N_(\"Gana tu primer título.\"), [\"s\", \"titles\", 1], [\"x_ar_t1\", \"arm\", N_(\"Brazalete del campeón\"), {PAS: 1, FIS: 1}, \"led\", 60000, {c: \"#f6c83a\"}]],"
+ },
+ "La camiseta de tu país": {
+  "w": [
+   "gx-chal.js:17"
+  ],
+  "ctx": "[\"c_cap1\", N_(\"La camiseta de tu país\"), N_(\"Debuta con tu selección.\"), [\"s\", \"caps\", 1], [\"x_th_nat\", \"therm\", N_(\"Térmica de la selección\"), {FIS: 1, RIT: 1}, null, 40000, {c: \"#1f4a8a\"}]],"
+ },
+ "Debuta con tu selección.": {
+  "w": [
+   "gx-chal.js:17",
+   "achieve.js:21"
+  ],
+  "ctx": "[\"c_cap1\", N_(\"La camiseta de tu país\"), N_(\"Debuta con tu selección.\"), [\"s\", \"caps\", 1], [\"x_th_nat\", \"therm\", N_(\"Térmica de la selección\"), {FIS: 1, RIT: 1}, null, 40000, {c: \"#1f4a8a\"}]],"
+ },
+ "Térmica de la selección": {
+  "w": [
+   "gx-chal.js:17"
+  ],
+  "ctx": "[\"c_cap1\", N_(\"La camiseta de tu país\"), N_(\"Debuta con tu selección.\"), [\"s\", \"caps\", 1], [\"x_th_nat\", \"therm\", N_(\"Térmica de la selección\"), {FIS: 1, RIT: 1}, null, 40000, {c: \"#1f4a8a\"}]],"
+ },
+ "Mes de oro": {
+  "w": [
+   "gx-chal.js:18"
+  ],
+  "ctx": "[\"c_pom1\", N_(\"Mes de oro\"), N_(\"Gana un premio al jugador del mes.\"), [\"s\", \"pom\", 1], [\"x_wr_pom\", \"wrist\", N_(\"Muñequera del mes\"), {REG: 1, TIR: 1}, \"mag\", 45000, {c: \"#f6c83a\"}]],"
+ },
+ "Gana un premio al jugador del mes.": {
+  "w": [
+   "gx-chal.js:18"
+  ],
+  "ctx": "[\"c_pom1\", N_(\"Mes de oro\"), N_(\"Gana un premio al jugador del mes.\"), [\"s\", \"pom\", 1], [\"x_wr_pom\", \"wrist\", N_(\"Muñequera del mes\"), {REG: 1, TIR: 1}, \"mag\", 45000, {c: \"#f6c83a\"}]],"
+ },
+ "Muñequera del mes": {
+  "w": [
+   "gx-chal.js:18"
+  ],
+  "ctx": "[\"c_pom1\", N_(\"Mes de oro\"), N_(\"Gana un premio al jugador del mes.\"), [\"s\", \"pom\", 1], [\"x_wr_pom\", \"wrist\", N_(\"Muñequera del mes\"), {REG: 1, TIR: 1}, \"mag\", 45000, {c: \"#f6c83a\"}]],"
+ },
+ "Especialista": {
+  "w": [
+   "gx-chal.js:19",
+   "sp-data.js:83"
+  ],
+  "ctx": "[\"c_fk3\", N_(\"Especialista\"), N_(\"Marca 3 goles de falta directa.\"), [\"s\", \"fkGoals\", 3], [\"x_boots_fk\", \"boots\", N_(\"Botas del especialista\"), {TIR: 2, PAS: 1}, \"can\", 110000, {c: \"#7a3ad8\", c2: \"#f6c83a\"}]],"
+ },
+ "Marca 3 goles de falta directa.": {
+  "w": [
+   "gx-chal.js:19"
+  ],
+  "ctx": "[\"c_fk3\", N_(\"Especialista\"), N_(\"Marca 3 goles de falta directa.\"), [\"s\", \"fkGoals\", 3], [\"x_boots_fk\", \"boots\", N_(\"Botas del especialista\"), {TIR: 2, PAS: 1}, \"can\", 110000, {c: \"#7a3ad8\", c2: \"#f6c83a\"}]],"
+ },
+ "Botas del especialista": {
+  "w": [
+   "gx-chal.js:19"
+  ],
+  "ctx": "[\"c_fk3\", N_(\"Especialista\"), N_(\"Marca 3 goles de falta directa.\"), [\"s\", \"fkGoals\", 3], [\"x_boots_fk\", \"boots\", N_(\"Botas del especialista\"), {TIR: 2, PAS: 1}, \"can\", 110000, {c: \"#7a3ad8\", c2: \"#f6c83a\"}]],"
+ },
+ "Desde los once metros": {
+  "w": [
+   "gx-chal.js:20",
+   "sp-play.js:385",
+   "minigame.js:611"
+  ],
+  "ctx": "[\"c_pen10\", N_(\"Desde los once metros\"), N_(\"Marca 10 penaltis.\"), [\"s\", \"penGoals\", 10], [\"x_band_pen\", \"band\", N_(\"Cinta del lanzador\"), {TIR: 1, rec: 1}, null, 40000, {c: \"#f4f4f0\"}]],"
+ },
+ "Marca 10 penaltis.": {
+  "w": [
+   "gx-chal.js:20"
+  ],
+  "ctx": "[\"c_pen10\", N_(\"Desde los once metros\"), N_(\"Marca 10 penaltis.\"), [\"s\", \"penGoals\", 10], [\"x_band_pen\", \"band\", N_(\"Cinta del lanzador\"), {TIR: 1, rec: 1}, null, 40000, {c: \"#f4f4f0\"}]],"
+ },
+ "Cinta del lanzador": {
+  "w": [
+   "gx-chal.js:20"
+  ],
+  "ctx": "[\"c_pen10\", N_(\"Desde los once metros\"), N_(\"Marca 10 penaltis.\"), [\"s\", \"penGoals\", 10], [\"x_band_pen\", \"band\", N_(\"Cinta del lanzador\"), {TIR: 1, rec: 1}, null, 40000, {c: \"#f4f4f0\"}]],"
+ },
+ "Manos rápidas": {
+  "w": [
+   "gx-chal.js:21"
+  ],
+  "ctx": "[\"c_sav5\", N_(\"Manos rápidas\"), N_(\"Para 5 penaltis.\"), [\"s\", \"penSaves\", 5], [\"x_gl_sav\", \"gloves\", N_(\"Guantes manos rápidas\"), {REG: 2, DEF: 1}, \"gua\", 90000, {c: \"#c6f432\", c2: \"#1d1404\"}]],"
+ },
+ "Para 5 penaltis.": {
+  "w": [
+   "gx-chal.js:21"
+  ],
+  "ctx": "[\"c_sav5\", N_(\"Manos rápidas\"), N_(\"Para 5 penaltis.\"), [\"s\", \"penSaves\", 5], [\"x_gl_sav\", \"gloves\", N_(\"Guantes manos rápidas\"), {REG: 2, DEF: 1}, \"gua\", 90000, {c: \"#c6f432\", c2: \"#1d1404\"}]],"
+ },
+ "Guantes manos rápidas": {
+  "w": [
+   "gx-chal.js:21"
+  ],
+  "ctx": "[\"c_sav5\", N_(\"Manos rápidas\"), N_(\"Para 5 penaltis.\"), [\"s\", \"penSaves\", 5], [\"x_gl_sav\", \"gloves\", N_(\"Guantes manos rápidas\"), {REG: 2, DEF: 1}, \"gua\", 90000, {c: \"#c6f432\", c2: \"#1d1404\"}]],"
+ },
+ "Medio centenar": {
+  "w": [
+   "gx-chal.js:22"
+  ],
+  "ctx": "[\"c_g50\", N_(\"Medio centenar\"), N_(\"Marca 50 goles oficiales.\"), [\"s\", \"goals\", 50], [\"x_wa_g50\", \"watch\", N_(\"Reloj del cincuenta\"), {TIR: 1, RIT: 1}, \"ray\", 120000, {c: \"#c3cdd2\"}]],"
+ },
+ "Marca 50 goles oficiales.": {
+  "w": [
+   "gx-chal.js:22"
+  ],
+  "ctx": "[\"c_g50\", N_(\"Medio centenar\"), N_(\"Marca 50 goles oficiales.\"), [\"s\", \"goals\", 50], [\"x_wa_g50\", \"watch\", N_(\"Reloj del cincuenta\"), {TIR: 1, RIT: 1}, \"ray\", 120000, {c: \"#c3cdd2\"}]],"
+ },
+ "Reloj del cincuenta": {
+  "w": [
+   "gx-chal.js:22"
+  ],
+  "ctx": "[\"c_g50\", N_(\"Medio centenar\"), N_(\"Marca 50 goles oficiales.\"), [\"s\", \"goals\", 50], [\"x_wa_g50\", \"watch\", N_(\"Reloj del cincuenta\"), {TIR: 1, RIT: 1}, \"ray\", 120000, {c: \"#c3cdd2\"}]],"
+ },
+ "Visión": {
+  "w": [
+   "gx-chal.js:23"
+  ],
+  "ctx": "[\"c_a50\", N_(\"Visión\"), N_(\"Da 50 asistencias.\"), [\"s\", \"assists\", 50], [\"x_boots_a50\", \"boots\", N_(\"Botas de la visión\"), {PAS: 3, REG: 1, FIS: -1}, \"mag\", 130000, {c: \"#d9c6ff\", c2: \"#2a1a4a\"}]],"
+ },
+ "Da 50 asistencias.": {
+  "w": [
+   "gx-chal.js:23",
+   "achieve.js:24"
+  ],
+  "ctx": "[\"c_a50\", N_(\"Visión\"), N_(\"Da 50 asistencias.\"), [\"s\", \"assists\", 50], [\"x_boots_a50\", \"boots\", N_(\"Botas de la visión\"), {PAS: 3, REG: 1, FIS: -1}, \"mag\", 130000, {c: \"#d9c6ff\", c2: \"#2a1a4a\"}]],"
+ },
+ "Botas de la visión": {
+  "w": [
+   "gx-chal.js:23"
+  ],
+  "ctx": "[\"c_a50\", N_(\"Visión\"), N_(\"Da 50 asistencias.\"), [\"s\", \"assists\", 50], [\"x_boots_a50\", \"boots\", N_(\"Botas de la visión\"), {PAS: 3, REG: 1, FIS: -1}, \"mag\", 130000, {c: \"#d9c6ff\", c2: \"#2a1a4a\"}]],"
+ },
+ "Cultura ganadora": {
+  "w": [
+   "gx-chal.js:24"
+  ],
+  "ctx": "[\"c_w50\", N_(\"Cultura ganadora\"), N_(\"Gana 50 partidos con tu club.\"), [\"s\", \"wins\", 50], [\"x_ho_w50\", \"hood\", N_(\"Sudadera de la cultura ganadora\"), {FIS: 1, PAS: 1, rec: 1}, \"led\", 80000, {c: \"#c8312f\"}]],"
+ },
+ "Gana 50 partidos con tu club.": {
+  "w": [
+   "gx-chal.js:24"
+  ],
+  "ctx": "[\"c_w50\", N_(\"Cultura ganadora\"), N_(\"Gana 50 partidos con tu club.\"), [\"s\", \"wins\", 50], [\"x_ho_w50\", \"hood\", N_(\"Sudadera de la cultura ganadora\"), {FIS: 1, PAS: 1, rec: 1}, \"led\", 80000, {c: \"#c8312f\"}]],"
+ },
+ "Sudadera de la cultura ganadora": {
+  "w": [
+   "gx-chal.js:24"
+  ],
+  "ctx": "[\"c_w50\", N_(\"Cultura ganadora\"), N_(\"Gana 50 partidos con tu club.\"), [\"s\", \"wins\", 50], [\"x_ho_w50\", \"hood\", N_(\"Sudadera de la cultura ganadora\"), {FIS: 1, PAS: 1, rec: 1}, \"led\", 80000, {c: \"#c8312f\"}]],"
+ },
+ "Cerrojo": {
+  "w": [
+   "gx-chal.js:25"
+  ],
+  "ctx": "[\"c_cs25\", N_(\"Cerrojo\"), N_(\"Deja la portería a cero 25 veces.\"), [\"s\", \"cleanSheets\", 25], [\"x_th_cs\", \"therm\", N_(\"Térmica del cerrojo\"), {DEF: 2, FIS: 1, RIT: -1}, \"wal\", 90000, {c: \"#2a3a40\"}]],"
+ },
+ "Deja la portería a cero 25 veces.": {
+  "w": [
+   "gx-chal.js:25"
+  ],
+  "ctx": "[\"c_cs25\", N_(\"Cerrojo\"), N_(\"Deja la portería a cero 25 veces.\"), [\"s\", \"cleanSheets\", 25], [\"x_th_cs\", \"therm\", N_(\"Térmica del cerrojo\"), {DEF: 2, FIS: 1, RIT: -1}, \"wal\", 90000, {c: \"#2a3a40\"}]],"
+ },
+ "Térmica del cerrojo": {
+  "w": [
+   "gx-chal.js:25"
+  ],
+  "ctx": "[\"c_cs25\", N_(\"Cerrojo\"), N_(\"Deja la portería a cero 25 veces.\"), [\"s\", \"cleanSheets\", 25], [\"x_th_cs\", \"therm\", N_(\"Térmica del cerrojo\"), {DEF: 2, FIS: 1, RIT: -1}, \"wal\", 90000, {c: \"#2a3a40\"}]],"
+ },
+ "Veterano en ciernes": {
+  "w": [
+   "gx-chal.js:26"
+  ],
+  "ctx": "[\"c_seas3\", N_(\"Veterano en ciernes\"), N_(\"Completa 3 temporadas.\"), [\"s\", \"seasons\", 3], [\"x_ne_s3\", \"neck\", N_(\"Medalla de tres temporadas\"), {rec: 1, inj: 1}, null, 30000, {c: \"#c88a52\"}]],"
+ },
+ "Completa 3 temporadas.": {
+  "w": [
+   "gx-chal.js:26"
+  ],
+  "ctx": "[\"c_seas3\", N_(\"Veterano en ciernes\"), N_(\"Completa 3 temporadas.\"), [\"s\", \"seasons\", 3], [\"x_ne_s3\", \"neck\", N_(\"Medalla de tres temporadas\"), {rec: 1, inj: 1}, null, 30000, {c: \"#c88a52\"}]],"
+ },
+ "Medalla de tres temporadas": {
+  "w": [
+   "gx-chal.js:26"
+  ],
+  "ctx": "[\"c_seas3\", N_(\"Veterano en ciernes\"), N_(\"Completa 3 temporadas.\"), [\"s\", \"seasons\", 3], [\"x_ne_s3\", \"neck\", N_(\"Medalla de tres temporadas\"), {rec: 1, inj: 1}, null, 30000, {c: \"#c88a52\"}]],"
+ },
+ "Despegue": {
+  "w": [
+   "gx-chal.js:27"
+  ],
+  "ctx": "[\"c_ovr75\", N_(\"Despegue\"), N_(\"Alcanza una media de 75.\"), [\"s\", \"peakOvr\", 75], [\"x_sh_75\", \"shin\", N_(\"Espinilleras del despegue\"), {RIT: 1, DEF: 1}, \"ray\", 70000, {c: \"#2de0ff\"}]],"
+ },
+ "Alcanza una media de 75.": {
+  "w": [
+   "gx-chal.js:27"
+  ],
+  "ctx": "[\"c_ovr75\", N_(\"Despegue\"), N_(\"Alcanza una media de 75.\"), [\"s\", \"peakOvr\", 75], [\"x_sh_75\", \"shin\", N_(\"Espinilleras del despegue\"), {RIT: 1, DEF: 1}, \"ray\", 70000, {c: \"#2de0ff\"}]],"
+ },
+ "Espinilleras del despegue": {
+  "w": [
+   "gx-chal.js:27"
+  ],
+  "ctx": "[\"c_ovr75\", N_(\"Despegue\"), N_(\"Alcanza una media de 75.\"), [\"s\", \"peakOvr\", 75], [\"x_sh_75\", \"shin\", N_(\"Espinilleras del despegue\"), {RIT: 1, DEF: 1}, \"ray\", 70000, {c: \"#2de0ff\"}]],"
+ },
+ "Cara conocida": {
+  "w": [
+   "gx-chal.js:28"
+  ],
+  "ctx": "[\"c_fame40\", N_(\"Cara conocida\"), N_(\"Llega a 40 de fama.\"), [\"s\", \"fame\", 40], [\"x_ne_fame\", \"neck\", N_(\"Colgante de estrella\"), {TIR: 1, REG: 1}, null, 60000, {c: \"#16191b\"}]],"
+ },
+ "Llega a 40 de fama.": {
+  "w": [
+   "gx-chal.js:28"
+  ],
+  "ctx": "[\"c_fame40\", N_(\"Cara conocida\"), N_(\"Llega a 40 de fama.\"), [\"s\", \"fame\", 40], [\"x_ne_fame\", \"neck\", N_(\"Colgante de estrella\"), {TIR: 1, REG: 1}, null, 60000, {c: \"#16191b\"}]],"
+ },
+ "Colgante de estrella": {
+  "w": [
+   "gx-chal.js:28"
+  ],
+  "ctx": "[\"c_fame40\", N_(\"Cara conocida\"), N_(\"Llega a 40 de fama.\"), [\"s\", \"fame\", 40], [\"x_ne_fame\", \"neck\", N_(\"Colgante de estrella\"), {TIR: 1, REG: 1}, null, 60000, {c: \"#16191b\"}]],"
+ },
+ "Viral": {
+  "w": [
+   "gx-chal.js:29"
+  ],
+  "ctx": "[\"c_fol1m\", N_(\"Viral\"), N_(\"Llega a 1 millón de seguidores.\"), [\"s\", \"followers\", 1e6], [\"x_ph_viral\", \"phones\", N_(\"Cascos virales\"), {PAS: 1, REG: 1}, null, 70000, {c: \"#ff4fb1\"}]],"
+ },
+ "Llega a 1 millón de seguidores.": {
+  "w": [
+   "gx-chal.js:29"
+  ],
+  "ctx": "[\"c_fol1m\", N_(\"Viral\"), N_(\"Llega a 1 millón de seguidores.\"), [\"s\", \"followers\", 1e6], [\"x_ph_viral\", \"phones\", N_(\"Cascos virales\"), {PAS: 1, REG: 1}, null, 70000, {c: \"#ff4fb1\"}]],"
+ },
+ "Cascos virales": {
+  "w": [
+   "gx-chal.js:29"
+  ],
+  "ctx": "[\"c_fol1m\", N_(\"Viral\"), N_(\"Llega a 1 millón de seguidores.\"), [\"s\", \"followers\", 1e6], [\"x_ph_viral\", \"phones\", N_(\"Cascos virales\"), {PAS: 1, REG: 1}, null, 70000, {c: \"#ff4fb1\"}]],"
+ },
+ "Coleccionista de metales": {
+  "w": [
+   "gx-chal.js:30"
+  ],
+  "ctx": "[\"c_t3\", N_(\"Coleccionista de metales\"), N_(\"Gana 3 títulos.\"), [\"s\", \"titles\", 3], [\"x_boots_t3\", \"boots\", N_(\"Botas de campeón\"), {TIR: 1, PAS: 1, FIS: 1}, null, 200000, {c: \"#f6c83a\", c2: \"#7a5a12\"}]],"
+ },
+ "Gana 3 títulos.": {
+  "w": [
+   "gx-chal.js:30"
+  ],
+  "ctx": "[\"c_t3\", N_(\"Coleccionista de metales\"), N_(\"Gana 3 títulos.\"), [\"s\", \"titles\", 3], [\"x_boots_t3\", \"boots\", N_(\"Botas de campeón\"), {TIR: 1, PAS: 1, FIS: 1}, null, 200000, {c: \"#f6c83a\", c2: \"#7a5a12\"}]],"
+ },
+ "Botas de campeón": {
+  "w": [
+   "gx-chal.js:30"
+  ],
+  "ctx": "[\"c_t3\", N_(\"Coleccionista de metales\"), N_(\"Gana 3 títulos.\"), [\"s\", \"titles\", 3], [\"x_boots_t3\", \"boots\", N_(\"Botas de campeón\"), {TIR: 1, PAS: 1, FIS: 1}, null, 200000, {c: \"#f6c83a\", c2: \"#7a5a12\"}]],"
+ },
+ "Fijo con la selección": {
+  "w": [
+   "gx-chal.js:31"
+  ],
+  "ctx": "[\"c_caps10\", N_(\"Fijo con la selección\"), N_(\"Juega 10 partidos internacionales.\"), [\"s\", \"caps\", 10], [\"x_so_nat\", \"socks\", N_(\"Medias de la selección\"), {FIS: 1, RIT: 1}, null, 50000, {c: \"#1f4a8a\"}]],"
+ },
+ "Juega 10 partidos internacionales.": {
+  "w": [
+   "gx-chal.js:31"
+  ],
+  "ctx": "[\"c_caps10\", N_(\"Fijo con la selección\"), N_(\"Juega 10 partidos internacionales.\"), [\"s\", \"caps\", 10], [\"x_so_nat\", \"socks\", N_(\"Medias de la selección\"), {FIS: 1, RIT: 1}, null, 50000, {c: \"#1f4a8a\"}]],"
+ },
+ "Medias de la selección": {
+  "w": [
+   "gx-chal.js:31"
+  ],
+  "ctx": "[\"c_caps10\", N_(\"Fijo con la selección\"), N_(\"Juega 10 partidos internacionales.\"), [\"s\", \"caps\", 10], [\"x_so_nat\", \"socks\", N_(\"Medias de la selección\"), {FIS: 1, RIT: 1}, null, 50000, {c: \"#1f4a8a\"}]],"
+ },
+ "Goleador internacional": {
+  "w": [
+   "gx-chal.js:32"
+  ],
+  "ctx": "[\"c_ig5\", N_(\"Goleador internacional\"), N_(\"Marca 5 goles con tu selección.\"), [\"s\", \"intlGoals\", 5], [\"x_wr_nat\", \"wrist\", N_(\"Muñequera internacional\"), {TIR: 2}, \"can\", 60000, {c: \"#1f4a8a\"}]],"
+ },
+ "Marca 5 goles con tu selección.": {
+  "w": [
+   "gx-chal.js:32"
+  ],
+  "ctx": "[\"c_ig5\", N_(\"Goleador internacional\"), N_(\"Marca 5 goles con tu selección.\"), [\"s\", \"intlGoals\", 5], [\"x_wr_nat\", \"wrist\", N_(\"Muñequera internacional\"), {TIR: 2}, \"can\", 60000, {c: \"#1f4a8a\"}]],"
+ },
+ "Muñequera internacional": {
+  "w": [
+   "gx-chal.js:32"
+  ],
+  "ctx": "[\"c_ig5\", N_(\"Goleador internacional\"), N_(\"Marca 5 goles con tu selección.\"), [\"s\", \"intlGoals\", 5], [\"x_wr_nat\", \"wrist\", N_(\"Muñequera internacional\"), {TIR: 2}, \"can\", 60000, {c: \"#1f4a8a\"}]],"
+ },
+ "Centenario": {
+  "w": [
+   "gx-chal.js:33",
+   "achieve.js:31"
+  ],
+  "ctx": "[\"c_g100\", N_(\"Centenario\"), N_(\"Marca 100 goles oficiales.\"), [\"s\", \"goals\", 100], [\"x_boots_g100\", \"boots\", N_(\"Botas del centenario\"), {TIR: 3, RIT: 1, DEF: -1}, \"can\", 350000, {c: \"#ffe58a\", c2: \"#c8312f\"}]],"
+ },
+ "Marca 100 goles oficiales.": {
+  "w": [
+   "gx-chal.js:33"
+  ],
+  "ctx": "[\"c_g100\", N_(\"Centenario\"), N_(\"Marca 100 goles oficiales.\"), [\"s\", \"goals\", 100], [\"x_boots_g100\", \"boots\", N_(\"Botas del centenario\"), {TIR: 3, RIT: 1, DEF: -1}, \"can\", 350000, {c: \"#ffe58a\", c2: \"#c8312f\"}]],"
+ },
+ "Botas del centenario": {
+  "w": [
+   "gx-chal.js:33"
+  ],
+  "ctx": "[\"c_g100\", N_(\"Centenario\"), N_(\"Marca 100 goles oficiales.\"), [\"s\", \"goals\", 100], [\"x_boots_g100\", \"boots\", N_(\"Botas del centenario\"), {TIR: 3, RIT: 1, DEF: -1}, \"can\", 350000, {c: \"#ffe58a\", c2: \"#c8312f\"}]],"
+ },
+ "Asistente de oro": {
+  "w": [
+   "gx-chal.js:34",
+   "achieve.js:24"
+  ],
+  "ctx": "[\"c_a100\", N_(\"Asistente de oro\"), N_(\"Da 100 asistencias.\"), [\"s\", \"assists\", 100], [\"x_wa_a100\", \"watch\", N_(\"Cronógrafo del pasador\"), {PAS: 2, REG: 1}, \"mag\", 300000, {c: \"#d9c6ff\"}]],"
+ },
+ "Da 100 asistencias.": {
+  "w": [
+   "gx-chal.js:34"
+  ],
+  "ctx": "[\"c_a100\", N_(\"Asistente de oro\"), N_(\"Da 100 asistencias.\"), [\"s\", \"assists\", 100], [\"x_wa_a100\", \"watch\", N_(\"Cronógrafo del pasador\"), {PAS: 2, REG: 1}, \"mag\", 300000, {c: \"#d9c6ff\"}]],"
+ },
+ "Cronógrafo del pasador": {
+  "w": [
+   "gx-chal.js:34"
+  ],
+  "ctx": "[\"c_a100\", N_(\"Asistente de oro\"), N_(\"Da 100 asistencias.\"), [\"s\", \"assists\", 100], [\"x_wa_a100\", \"watch\", N_(\"Cronógrafo del pasador\"), {PAS: 2, REG: 1}, \"mag\", 300000, {c: \"#d9c6ff\"}]],"
+ },
+ "Incombustible": {
+  "w": [
+   "gx-chal.js:35",
+   "achieve.js:34"
+  ],
+  "ctx": "[\"c_apps200\", N_(\"Incombustible\"), N_(\"Juega 200 partidos oficiales.\"), [\"s\", \"apps\", 200], [\"x_th_200\", \"therm\", N_(\"Térmica incombustible\"), {FIS: 2, rec: 1}, \"tit\", 180000, {c: \"#ff7a1a\"}]],"
+ },
+ "Juega 200 partidos oficiales.": {
+  "w": [
+   "gx-chal.js:35"
+  ],
+  "ctx": "[\"c_apps200\", N_(\"Incombustible\"), N_(\"Juega 200 partidos oficiales.\"), [\"s\", \"apps\", 200], [\"x_th_200\", \"therm\", N_(\"Térmica incombustible\"), {FIS: 2, rec: 1}, \"tit\", 180000, {c: \"#ff7a1a\"}]],"
+ },
+ "Térmica incombustible": {
+  "w": [
+   "gx-chal.js:35"
+  ],
+  "ctx": "[\"c_apps200\", N_(\"Incombustible\"), N_(\"Juega 200 partidos oficiales.\"), [\"s\", \"apps\", 200], [\"x_th_200\", \"therm\", N_(\"Térmica incombustible\"), {FIS: 2, rec: 1}, \"tit\", 180000, {c: \"#ff7a1a\"}]],"
+ },
+ "Muro": {
+  "w": [
+   "gx-chal.js:36",
+   "sp-data.js:35",
+   "achieve.js:25"
+  ],
+  "ctx": "[\"c_cs75\", N_(\"Muro\"), N_(\"Deja la portería a cero 75 veces.\"), [\"s\", \"cleanSheets\", 75], [\"x_gl_cs75\", \"gloves\", N_(\"Guantes del muro\"), {DEF: 3, REG: 1, PAS: -1}, \"gua\", 300000, {c: \"#f6c83a\", c2: \"#1d1404\"}]],"
+ },
+ "Deja la portería a cero 75 veces.": {
+  "w": [
+   "gx-chal.js:36"
+  ],
+  "ctx": "[\"c_cs75\", N_(\"Muro\"), N_(\"Deja la portería a cero 75 veces.\"), [\"s\", \"cleanSheets\", 75], [\"x_gl_cs75\", \"gloves\", N_(\"Guantes del muro\"), {DEF: 3, REG: 1, PAS: -1}, \"gua\", 300000, {c: \"#f6c83a\", c2: \"#1d1404\"}]],"
+ },
+ "Guantes del muro": {
+  "w": [
+   "gx-chal.js:36"
+  ],
+  "ctx": "[\"c_cs75\", N_(\"Muro\"), N_(\"Deja la portería a cero 75 veces.\"), [\"s\", \"cleanSheets\", 75], [\"x_gl_cs75\", \"gloves\", N_(\"Guantes del muro\"), {DEF: 3, REG: 1, PAS: -1}, \"gua\", 300000, {c: \"#f6c83a\", c2: \"#1d1404\"}]],"
+ },
+ "Protagonista": {
+  "w": [
+   "gx-chal.js:37"
+  ],
+  "ctx": "[\"c_motm25\", N_(\"Protagonista\"), N_(\"Sé el mejor del partido 25 veces.\"), [\"s\", \"motm\", 25], [\"x_ho_motm\", \"hood\", N_(\"Sudadera del protagonista\"), {TIR: 1, REG: 1, PAS: 1}, null, 220000, {c: \"#ffb21e\"}]],"
+ },
+ "Sé el mejor del partido 25 veces.": {
+  "w": [
+   "gx-chal.js:37"
+  ],
+  "ctx": "[\"c_motm25\", N_(\"Protagonista\"), N_(\"Sé el mejor del partido 25 veces.\"), [\"s\", \"motm\", 25], [\"x_ho_motm\", \"hood\", N_(\"Sudadera del protagonista\"), {TIR: 1, REG: 1, PAS: 1}, null, 220000, {c: \"#ffb21e\"}]],"
+ },
+ "Sudadera del protagonista": {
+  "w": [
+   "gx-chal.js:37"
+  ],
+  "ctx": "[\"c_motm25\", N_(\"Protagonista\"), N_(\"Sé el mejor del partido 25 veces.\"), [\"s\", \"motm\", 25], [\"x_ho_motm\", \"hood\", N_(\"Sudadera del protagonista\"), {TIR: 1, REG: 1, PAS: 1}, null, 220000, {c: \"#ffb21e\"}]],"
+ },
+ "Triplete en serie": {
+  "w": [
+   "gx-chal.js:38"
+  ],
+  "ctx": "[\"c_hat5\", N_(\"Triplete en serie\"), N_(\"Marca 5 hat-tricks.\"), [\"s\", \"hatTricks\", 5], [\"x_band_hat\", \"band\", N_(\"Cinta de los tripletes\"), {TIR: 2, REG: 1}, \"can\", 250000, {c: \"#f6c83a\"}]],"
+ },
+ "Marca 5 hat-tricks.": {
+  "w": [
+   "gx-chal.js:38"
+  ],
+  "ctx": "[\"c_hat5\", N_(\"Triplete en serie\"), N_(\"Marca 5 hat-tricks.\"), [\"s\", \"hatTricks\", 5], [\"x_band_hat\", \"band\", N_(\"Cinta de los tripletes\"), {TIR: 2, REG: 1}, \"can\", 250000, {c: \"#f6c83a\"}]],"
+ },
+ "Cinta de los tripletes": {
+  "w": [
+   "gx-chal.js:38"
+  ],
+  "ctx": "[\"c_hat5\", N_(\"Triplete en serie\"), N_(\"Marca 5 hat-tricks.\"), [\"s\", \"hatTricks\", 5], [\"x_band_hat\", \"band\", N_(\"Cinta de los tripletes\"), {TIR: 2, REG: 1}, \"can\", 250000, {c: \"#f6c83a\"}]],"
+ },
+ "Alcanza una media de 85.": {
+  "w": [
+   "gx-chal.js:39"
+  ],
+  "ctx": "[\"c_ovr85\", N_(\"Élite\"), N_(\"Alcanza una media de 85.\"), [\"s\", \"peakOvr\", 85], [\"x_sh_85\", \"shin\", N_(\"Espinilleras de élite\"), {DEF: 1, RIT: 1, FIS: 1}, null, 260000, {c: \"#b07cff\"}]],"
+ },
+ "Espinilleras de élite": {
+  "w": [
+   "gx-chal.js:39"
+  ],
+  "ctx": "[\"c_ovr85\", N_(\"Élite\"), N_(\"Alcanza una media de 85.\"), [\"s\", \"peakOvr\", 85], [\"x_sh_85\", \"shin\", N_(\"Espinilleras de élite\"), {DEF: 1, RIT: 1, FIS: 1}, null, 260000, {c: \"#b07cff\"}]],"
+ },
+ "Vitrina repleta": {
+  "w": [
+   "gx-chal.js:40"
+  ],
+  "ctx": "[\"c_t8\", N_(\"Vitrina repleta\"), N_(\"Gana 8 títulos.\"), [\"s\", \"titles\", 8], [\"x_ne_t8\", \"neck\", N_(\"Cadena de los ocho títulos\"), {TIR: 1, PAS: 1, REG: 1}, null, 400000, {c: \"#f6c83a\"}]],"
+ },
+ "Gana 8 títulos.": {
+  "w": [
+   "gx-chal.js:40"
+  ],
+  "ctx": "[\"c_t8\", N_(\"Vitrina repleta\"), N_(\"Gana 8 títulos.\"), [\"s\", \"titles\", 8], [\"x_ne_t8\", \"neck\", N_(\"Cadena de los ocho títulos\"), {TIR: 1, PAS: 1, REG: 1}, null, 400000, {c: \"#f6c83a\"}]],"
+ },
+ "Cadena de los ocho títulos": {
+  "w": [
+   "gx-chal.js:40"
+  ],
+  "ctx": "[\"c_t8\", N_(\"Vitrina repleta\"), N_(\"Gana 8 títulos.\"), [\"s\", \"titles\", 8], [\"x_ne_t8\", \"neck\", N_(\"Cadena de los ocho títulos\"), {TIR: 1, PAS: 1, REG: 1}, null, 400000, {c: \"#f6c83a\"}]],"
+ },
+ "El mejor del mundo": {
+  "w": [
+   "gx-chal.js:41"
+  ],
+  "ctx": "[\"c_bdo1\", N_(\"El mejor del mundo\"), N_(\"Gana el Balón de Oro.\"), [\"s\", \"bdo\", 1], [\"x_boots_bdo\", \"boots\", N_(\"Botas doradas del mejor\"), {TIR: 3, REG: 2, DEF: -1}, null, 900000, {c: \"#ffe58a\", c2: \"#f6c83a\"}]],"
+ },
+ "Gana el Balón de Oro.": {
+  "w": [
+   "gx-chal.js:41",
+   "pet-items.js:37",
+   "pets.js:142",
+   "pets.js:183"
+  ],
+  "ctx": "[\"c_bdo1\", N_(\"El mejor del mundo\"), N_(\"Gana el Balón de Oro.\"), [\"s\", \"bdo\", 1], [\"x_boots_bdo\", \"boots\", N_(\"Botas doradas del mejor\"), {TIR: 3, REG: 2, DEF: -1}, null, 900000, {c: \"#ffe58a\", c2: \"#f6c83a\"}]],"
+ },
+ "Botas doradas del mejor": {
+  "w": [
+   "gx-chal.js:41"
+  ],
+  "ctx": "[\"c_bdo1\", N_(\"El mejor del mundo\"), N_(\"Gana el Balón de Oro.\"), [\"s\", \"bdo\", 1], [\"x_boots_bdo\", \"boots\", N_(\"Botas doradas del mejor\"), {TIR: 3, REG: 2, DEF: -1}, null, 900000, {c: \"#ffe58a\", c2: \"#f6c83a\"}]],"
+ },
+ "Leyenda nacional": {
+  "w": [
+   "gx-chal.js:42"
+  ],
+  "ctx": "[\"c_caps50\", N_(\"Leyenda nacional\"), N_(\"Juega 50 partidos internacionales.\"), [\"s\", \"caps\", 50], [\"x_ar_nat\", \"arm\", N_(\"Brazalete de la selección\"), {PAS: 1, DEF: 1, FIS: 1}, \"led\", 300000, {c: \"#1f4a8a\"}]],"
+ },
+ "Juega 50 partidos internacionales.": {
+  "w": [
+   "gx-chal.js:42"
+  ],
+  "ctx": "[\"c_caps50\", N_(\"Leyenda nacional\"), N_(\"Juega 50 partidos internacionales.\"), [\"s\", \"caps\", 50], [\"x_ar_nat\", \"arm\", N_(\"Brazalete de la selección\"), {PAS: 1, DEF: 1, FIS: 1}, \"led\", 300000, {c: \"#1f4a8a\"}]],"
+ },
+ "Brazalete de la selección": {
+  "w": [
+   "gx-chal.js:42"
+  ],
+  "ctx": "[\"c_caps50\", N_(\"Leyenda nacional\"), N_(\"Juega 50 partidos internacionales.\"), [\"s\", \"caps\", 50], [\"x_ar_nat\", \"arm\", N_(\"Brazalete de la selección\"), {PAS: 1, DEF: 1, FIS: 1}, \"led\", 300000, {c: \"#1f4a8a\"}]],"
+ },
+ "Doscientos": {
+  "w": [
+   "gx-chal.js:43"
+  ],
+  "ctx": "[\"c_g200\", N_(\"Doscientos\"), N_(\"Marca 200 goles oficiales.\"), [\"s\", \"goals\", 200], [\"x_wa_g200\", \"watch\", N_(\"Reloj de los doscientos\"), {TIR: 2, RIT: 1}, null, 700000, {c: \"#f6c83a\"}]],"
+ },
+ "Marca 200 goles oficiales.": {
+  "w": [
+   "gx-chal.js:43"
+  ],
+  "ctx": "[\"c_g200\", N_(\"Doscientos\"), N_(\"Marca 200 goles oficiales.\"), [\"s\", \"goals\", 200], [\"x_wa_g200\", \"watch\", N_(\"Reloj de los doscientos\"), {TIR: 2, RIT: 1}, null, 700000, {c: \"#f6c83a\"}]],"
+ },
+ "Reloj de los doscientos": {
+  "w": [
+   "gx-chal.js:43"
+  ],
+  "ctx": "[\"c_g200\", N_(\"Doscientos\"), N_(\"Marca 200 goles oficiales.\"), [\"s\", \"goals\", 200], [\"x_wa_g200\", \"watch\", N_(\"Reloj de los doscientos\"), {TIR: 2, RIT: 1}, null, 700000, {c: \"#f6c83a\"}]],"
+ },
+ "Leyenda del césped": {
+  "w": [
+   "gx-chal.js:44"
+  ],
+  "ctx": "[\"c_apps400\", N_(\"Leyenda del césped\"), N_(\"Juega 400 partidos oficiales.\"), [\"s\", \"apps\", 400], [\"x_so_400\", \"socks\", N_(\"Medias de leyenda\"), {FIS: 1, RIT: 1, rec: 1}, null, 350000, {c: \"#ff6b3d\"}]],"
+ },
+ "Juega 400 partidos oficiales.": {
+  "w": [
+   "gx-chal.js:44"
+  ],
+  "ctx": "[\"c_apps400\", N_(\"Leyenda del césped\"), N_(\"Juega 400 partidos oficiales.\"), [\"s\", \"apps\", 400], [\"x_so_400\", \"socks\", N_(\"Medias de leyenda\"), {FIS: 1, RIT: 1, rec: 1}, null, 350000, {c: \"#ff6b3d\"}]],"
+ },
+ "Medias de leyenda": {
+  "w": [
+   "gx-chal.js:44"
+  ],
+  "ctx": "[\"c_apps400\", N_(\"Leyenda del césped\"), N_(\"Juega 400 partidos oficiales.\"), [\"s\", \"apps\", 400], [\"x_so_400\", \"socks\", N_(\"Medias de leyenda\"), {FIS: 1, RIT: 1, rec: 1}, null, 350000, {c: \"#ff6b3d\"}]],"
+ },
+ "Una década": {
+  "w": [
+   "gx-chal.js:45"
+  ],
+  "ctx": "[\"c_seas10\", N_(\"Una década\"), N_(\"Completa 10 temporadas.\"), [\"s\", \"seasons\", 10], [\"x_ph_10\", \"phones\", N_(\"Cascos de la década\"), {PAS: 1, TIR: 1, rec: 1}, null, 300000, {c: \"#c3cdd2\"}]],"
+ },
+ "Completa 10 temporadas.": {
+  "w": [
+   "gx-chal.js:45"
+  ],
+  "ctx": "[\"c_seas10\", N_(\"Una década\"), N_(\"Completa 10 temporadas.\"), [\"s\", \"seasons\", 10], [\"x_ph_10\", \"phones\", N_(\"Cascos de la década\"), {PAS: 1, TIR: 1, rec: 1}, null, 300000, {c: \"#c3cdd2\"}]],"
+ },
+ "Cascos de la década": {
+  "w": [
+   "gx-chal.js:45"
+  ],
+  "ctx": "[\"c_seas10\", N_(\"Una década\"), N_(\"Completa 10 temporadas.\"), [\"s\", \"seasons\", 10], [\"x_ph_10\", \"phones\", N_(\"Cascos de la década\"), {PAS: 1, TIR: 1, rec: 1}, null, 300000, {c: \"#c3cdd2\"}]],"
+ },
+ "Maestro de la falta": {
+  "w": [
+   "gx-chal.js:46"
+  ],
+  "ctx": "[\"c_fk10\", N_(\"Maestro de la falta\"), N_(\"Marca 10 goles de falta directa.\"), [\"s\", \"fkGoals\", 10], [\"x_wr_fk\", \"wrist\", N_(\"Muñequera del maestro\"), {TIR: 1, PAS: 2}, \"mag\", 200000, {c: \"#7a3ad8\"}]],"
+ },
+ "Muñequera del maestro": {
+  "w": [
+   "gx-chal.js:46"
+  ],
+  "ctx": "[\"c_fk10\", N_(\"Maestro de la falta\"), N_(\"Marca 10 goles de falta directa.\"), [\"s\", \"fkGoals\", 10], [\"x_wr_fk\", \"wrist\", N_(\"Muñequera del maestro\"), {TIR: 1, PAS: 2}, \"mag\", 200000, {c: \"#7a3ad8\"}]],"
+ },
+ "Fenómeno global": {
+  "w": [
+   "gx-chal.js:47"
+  ],
+  "ctx": "[\"c_fol10m\", N_(\"Fenómeno global\"), N_(\"Llega a 10 millones de seguidores.\"), [\"s\", \"followers\", 1e7], [\"x_ho_fol\", \"hood\", N_(\"Sudadera de fenómeno\"), {REG: 2, TIR: 1}, null, 500000, {c: \"#ff4fb1\"}]],"
+ },
+ "Sudadera de fenómeno": {
+  "w": [
+   "gx-chal.js:47"
+  ],
+  "ctx": "[\"c_fol10m\", N_(\"Fenómeno global\"), N_(\"Llega a 10 millones de seguidores.\"), [\"s\", \"followers\", 1e7], [\"x_ho_fol\", \"hood\", N_(\"Sudadera de fenómeno\"), {REG: 2, TIR: 1}, null, 500000, {c: \"#ff4fb1\"}]],"
+ },
+ "Primeros partidos en el banquillo": {
+  "w": [
+   "gx-chal.js:49"
+  ],
+  "ctx": "[\"c_mg10\", N_(\"Primeros partidos en el banquillo\"), N_(\"Dirige 10 partidos.\"), [\"s\", \"mGames\", 10], [\"x_m_nb\", \"notes\", N_(\"Libreta del novato\"), {tac: 1, lec: 1}, \"mcl\", 15000, {c: \"#2ad15a\"}]],"
+ },
+ "Dirige 10 partidos.": {
+  "w": [
+   "gx-chal.js:49"
+  ],
+  "ctx": "[\"c_mg10\", N_(\"Primeros partidos en el banquillo\"), N_(\"Dirige 10 partidos.\"), [\"s\", \"mGames\", 10], [\"x_m_nb\", \"notes\", N_(\"Libreta del novato\"), {tac: 1, lec: 1}, \"mcl\", 15000, {c: \"#2ad15a\"}]],"
+ },
+ "Libreta del novato": {
+  "w": [
+   "gx-chal.js:49"
+  ],
+  "ctx": "[\"c_mg10\", N_(\"Primeros partidos en el banquillo\"), N_(\"Dirige 10 partidos.\"), [\"s\", \"mGames\", 10], [\"x_m_nb\", \"notes\", N_(\"Libreta del novato\"), {tac: 1, lec: 1}, \"mcl\", 15000, {c: \"#2ad15a\"}]],"
+ },
+ "Pizarra ganadora": {
+  "w": [
+   "gx-chal.js:50"
+  ],
+  "ctx": "[\"c_mw25\", N_(\"Pizarra ganadora\"), N_(\"Gana 25 partidos como míster.\"), [\"s\", \"mWins\", 25], [\"x_m_tie\", \"tie\", N_(\"Corbata de la suerte\"), {mot: 2}, null, 40000, {c: \"#ffb21e\"}]],"
+ },
+ "Gana 25 partidos como míster.": {
+  "w": [
+   "gx-chal.js:50"
+  ],
+  "ctx": "[\"c_mw25\", N_(\"Pizarra ganadora\"), N_(\"Gana 25 partidos como míster.\"), [\"s\", \"mWins\", 25], [\"x_m_tie\", \"tie\", N_(\"Corbata de la suerte\"), {mot: 2}, null, 40000, {c: \"#ffb21e\"}]],"
+ },
+ "Corbata de la suerte": {
+  "w": [
+   "gx-chal.js:50"
+  ],
+  "ctx": "[\"c_mw25\", N_(\"Pizarra ganadora\"), N_(\"Gana 25 partidos como míster.\"), [\"s\", \"mWins\", 25], [\"x_m_tie\", \"tie\", N_(\"Corbata de la suerte\"), {mot: 2}, null, 40000, {c: \"#ffb21e\"}]],"
+ },
+ "Primer título en el banquillo": {
+  "w": [
+   "gx-chal.js:51"
+  ],
+  "ctx": "[\"c_mt1\", N_(\"Primer título en el banquillo\"), N_(\"Gana un título como míster.\"), [\"s\", \"mTitles\", 1], [\"x_m_coat\", \"coat\", N_(\"Abrigo del campeón\"), {mot: 1, pre: 1, tac: 1}, null, 150000, {c: \"#2a1a10\"}]],"
+ },
+ "Gana un título como míster.": {
+  "w": [
+   "gx-chal.js:51"
+  ],
+  "ctx": "[\"c_mt1\", N_(\"Primer título en el banquillo\"), N_(\"Gana un título como míster.\"), [\"s\", \"mTitles\", 1], [\"x_m_coat\", \"coat\", N_(\"Abrigo del campeón\"), {mot: 1, pre: 1, tac: 1}, null, 150000, {c: \"#2a1a10\"}]],"
+ },
+ "Abrigo del campeón": {
+  "w": [
+   "gx-chal.js:51"
+  ],
+  "ctx": "[\"c_mt1\", N_(\"Primer título en el banquillo\"), N_(\"Gana un título como míster.\"), [\"s\", \"mTitles\", 1], [\"x_m_coat\", \"coat\", N_(\"Abrigo del campeón\"), {mot: 1, pre: 1, tac: 1}, null, 150000, {c: \"#2a1a10\"}]],"
+ },
+ "Ojo para el talento": {
+  "w": [
+   "gx-chal.js:52"
+  ],
+  "ctx": "[\"c_myd5\", N_(\"Ojo para el talento\"), N_(\"Haz debutar a 5 canteranos.\"), [\"s\", \"mYouthDebuts\", 5], [\"x_m_sc\", \"scarf\", N_(\"Bufanda de la cantera\"), {jov: 2, ves: 1}, \"mtr\", 60000, {c: \"#2ad15a\"}]],"
+ },
+ "Haz debutar a 5 canteranos.": {
+  "w": [
+   "gx-chal.js:52"
+  ],
+  "ctx": "[\"c_myd5\", N_(\"Ojo para el talento\"), N_(\"Haz debutar a 5 canteranos.\"), [\"s\", \"mYouthDebuts\", 5], [\"x_m_sc\", \"scarf\", N_(\"Bufanda de la cantera\"), {jov: 2, ves: 1}, \"mtr\", 60000, {c: \"#2ad15a\"}]],"
+ },
+ "Bufanda de la cantera": {
+  "w": [
+   "gx-chal.js:52"
+  ],
+  "ctx": "[\"c_myd5\", N_(\"Ojo para el talento\"), N_(\"Haz debutar a 5 canteranos.\"), [\"s\", \"mYouthDebuts\", 5], [\"x_m_sc\", \"scarf\", N_(\"Bufanda de la cantera\"), {jov: 2, ves: 1}, \"mtr\", 60000, {c: \"#2ad15a\"}]],"
+ },
+ "Respetado": {
+  "w": [
+   "gx-chal.js:53"
+  ],
+  "ctx": "[\"c_mrep70\", N_(\"Respetado\"), N_(\"Llega a 70 de prestigio.\"), [\"s\", \"mRep\", 70], [\"x_m_gl\", \"glasses\", N_(\"Gafas del respeto\"), {pre: 1, lec: 2}, \"mbr\", 120000, {c: \"#c3cdd2\"}]],"
+ },
+ "Llega a 70 de prestigio.": {
+  "w": [
+   "gx-chal.js:53"
+  ],
+  "ctx": "[\"c_mrep70\", N_(\"Respetado\"), N_(\"Llega a 70 de prestigio.\"), [\"s\", \"mRep\", 70], [\"x_m_gl\", \"glasses\", N_(\"Gafas del respeto\"), {pre: 1, lec: 2}, \"mbr\", 120000, {c: \"#c3cdd2\"}]],"
+ },
+ "Gafas del respeto": {
+  "w": [
+   "gx-chal.js:53"
+  ],
+  "ctx": "[\"c_mrep70\", N_(\"Respetado\"), N_(\"Llega a 70 de prestigio.\"), [\"s\", \"mRep\", 70], [\"x_m_gl\", \"glasses\", N_(\"Gafas del respeto\"), {pre: 1, lec: 2}, \"mbr\", 120000, {c: \"#c3cdd2\"}]],"
+ },
+ "Cien victorias": {
+  "w": [
+   "gx-chal.js:54"
+  ],
+  "ctx": "[\"c_mw100\", N_(\"Cien victorias\"), N_(\"Gana 100 partidos como míster.\"), [\"s\", \"mWins\", 100], [\"x_m_suit\", \"suit\", N_(\"Traje de las cien victorias\"), {tac: 2, mot: 1, neg: 1}, \"mbr\", 400000, {c: \"#1b2a40\", c2: \"#f6c83a\"}]"
+ },
+ "Gana 100 partidos como míster.": {
+  "w": [
+   "gx-chal.js:54"
+  ],
+  "ctx": "[\"c_mw100\", N_(\"Cien victorias\"), N_(\"Gana 100 partidos como míster.\"), [\"s\", \"mWins\", 100], [\"x_m_suit\", \"suit\", N_(\"Traje de las cien victorias\"), {tac: 2, mot: 1, neg: 1}, \"mbr\", 400000, {c: \"#1b2a40\", c2: \"#f6c83a\"}]"
+ },
+ "Traje de las cien victorias": {
+  "w": [
+   "gx-chal.js:54"
+  ],
+  "ctx": "[\"c_mw100\", N_(\"Cien victorias\"), N_(\"Gana 100 partidos como míster.\"), [\"s\", \"mWins\", 100], [\"x_m_suit\", \"suit\", N_(\"Traje de las cien victorias\"), {tac: 2, mot: 1, neg: 1}, \"mbr\", 400000, {c: \"#1b2a40\", c2: \"#f6c83a\"}]"
+ },
+ "Palmarés de míster": {
+  "w": [
+   "gx-chal.js:55"
+  ],
+  "ctx": "[\"c_mt5\", N_(\"Palmarés de míster\"), N_(\"Gana 5 títulos como míster.\"), [\"s\", \"mTitles\", 5], [\"x_m_wa\", \"watch\", N_(\"Reloj del palmarés\"), {lec: 2, tac: 1}, \"mcl\", 500000, {c: \"#f6c83a\"}]],"
+ },
+ "Gana 5 títulos como míster.": {
+  "w": [
+   "gx-chal.js:55"
+  ],
+  "ctx": "[\"c_mt5\", N_(\"Palmarés de míster\"), N_(\"Gana 5 títulos como míster.\"), [\"s\", \"mTitles\", 5], [\"x_m_wa\", \"watch\", N_(\"Reloj del palmarés\"), {lec: 2, tac: 1}, \"mcl\", 500000, {c: \"#f6c83a\"}]],"
+ },
+ "Reloj del palmarés": {
+  "w": [
+   "gx-chal.js:55"
+  ],
+  "ctx": "[\"c_mt5\", N_(\"Palmarés de míster\"), N_(\"Gana 5 títulos como míster.\"), [\"s\", \"mTitles\", 5], [\"x_m_wa\", \"watch\", N_(\"Reloj del palmarés\"), {lec: 2, tac: 1}, \"mcl\", 500000, {c: \"#f6c83a\"}]],"
+ },
+ "Banquillo curtido": {
+  "w": [
+   "gx-chal.js:56"
+  ],
+  "ctx": "[\"c_mseas5\", N_(\"Banquillo curtido\"), N_(\"Entrena 5 temporadas.\"), [\"s\", \"mSeasons\", 5], [\"x_m_shoe\", \"shoes\", N_(\"Zapatos curtidos\"), {ves: 1, fis: 1, neg: 1}, null, 90000, {c: \"#5a3a22\"}]],"
+ },
+ "Entrena 5 temporadas.": {
+  "w": [
+   "gx-chal.js:56"
+  ],
+  "ctx": "[\"c_mseas5\", N_(\"Banquillo curtido\"), N_(\"Entrena 5 temporadas.\"), [\"s\", \"mSeasons\", 5], [\"x_m_shoe\", \"shoes\", N_(\"Zapatos curtidos\"), {ves: 1, fis: 1, neg: 1}, null, 90000, {c: \"#5a3a22\"}]],"
+ },
+ "Zapatos curtidos": {
+  "w": [
+   "gx-chal.js:56"
+  ],
+  "ctx": "[\"c_mseas5\", N_(\"Banquillo curtido\"), N_(\"Entrena 5 temporadas.\"), [\"s\", \"mSeasons\", 5], [\"x_m_shoe\", \"shoes\", N_(\"Zapatos curtidos\"), {ves: 1, fis: 1, neg: 1}, null, 90000, {c: \"#5a3a22\"}]],"
+ },
+ "Paseos diarios": {
+  "w": [
+   "gx-chal.js:58"
+  ],
+  "ctx": "[\"c_pw10\", N_(\"Paseos diarios\"), N_(\"Sal de paseo 10 veces con tu mascota.\"), [\"s\", \"petWalks\", 10], \"pet\"],"
+ },
+ "Sal de paseo 10 veces con tu mascota.": {
+  "w": [
+   "gx-chal.js:58"
+  ],
+  "ctx": "[\"c_pw10\", N_(\"Paseos diarios\"), N_(\"Sal de paseo 10 veces con tu mascota.\"), [\"s\", \"petWalks\", 10], \"pet\"],"
+ },
+ "A la pasarela": {
+  "w": [
+   "gx-chal.js:59"
+  ],
+  "ctx": "[\"c_pc3\", N_(\"A la pasarela\"), N_(\"Participa en 3 concursos con tu mascota.\"), [\"s\", \"petContests\", 3], \"pet\"],"
+ },
+ "Participa en 3 concursos con tu mascota.": {
+  "w": [
+   "gx-chal.js:59"
+  ],
+  "ctx": "[\"c_pc3\", N_(\"A la pasarela\"), N_(\"Participa en 3 concursos con tu mascota.\"), [\"s\", \"petContests\", 3], \"pet\"],"
+ },
+ "Hincha de cuatro patas": {
+  "w": [
+   "gx-chal.js:60"
+  ],
+  "ctx": "[\"c_pg25\", N_(\"Hincha de cuatro patas\"), N_(\"Que tu mascota celebre contigo 25 goles.\"), [\"s\", \"petGoals\", 25], \"pet\"],"
+ },
+ "Que tu mascota celebre contigo 25 goles.": {
+  "w": [
+   "gx-chal.js:60"
+  ],
+  "ctx": "[\"c_pg25\", N_(\"Hincha de cuatro patas\"), N_(\"Que tu mascota celebre contigo 25 goles.\"), [\"s\", \"petGoals\", 25], \"pet\"],"
+ },
+ "Campeona del barrio": {
+  "w": [
+   "gx-chal.js:61"
+  ],
+  "ctx": "[\"c_pwin1\", N_(\"Campeona del barrio\"), N_(\"Gana un concurso con tu mascota.\"), [\"s\", \"petWins\", 1], \"pet\"]"
+ },
+ "Gana un concurso con tu mascota.": {
+  "w": [
+   "gx-chal.js:61"
+  ],
+  "ctx": "[\"c_pwin1\", N_(\"Campeona del barrio\"), N_(\"Gana un concurso con tu mascota.\"), [\"s\", \"petWins\", 1], \"pet\"]"
+ },
  "Equipamiento": {
   "w": [
    "ui-gear.js:75",
@@ -2767,14 +3726,14 @@
  "Frente a lo que llevas:": {
   "w": [
    "ui-gear.js:120",
-   "ui-shop.js:85"
+   "ui-shop.js:86"
   ],
   "ctx": "'<div class=\"gpc-st\">' + chips(st) + \"</div>\" + (!on && cur ? '<div class=\"gpc-cmp\"><small>' + h(tr(\"Frente a lo que llevas:\")) + \"</small> \" + (chips(st, curSt) || '<span class=\"muted\">' + h(tr(\"igual\")) + \"</span>\") + "
  },
  "igual": {
   "w": [
    "ui-gear.js:120",
-   "ui-shop.js:85"
+   "ui-shop.js:86"
   ],
   "ctx": "'<div class=\"gpc-st\">' + chips(st) + \"</div>\" + (!on && cur ? '<div class=\"gpc-cmp\"><small>' + h(tr(\"Frente a lo que llevas:\")) + \"</small> \" + (chips(st, curSt) || '<span class=\"muted\">' + h(tr(\"igual\")) + \"</span>\") + "
  },
@@ -2849,7 +3808,7 @@
  "Tienda": {
   "w": [
    "ui-shop.js:60",
-   "ui-shop.js:163"
+   "ui-shop.js:177"
   ],
   "ctx": "var s = \"<h2>\" + h(tr(\"Tienda\")) + '</h2><div class=\"stack shp\">';"
  },
@@ -2861,56 +3820,92 @@
  },
  "La ropa de entrenador estará disponible cuando te sientes en un banquillo.": {
   "w": [
-   "ui-shop.js:63"
+   "ui-shop.js:64"
   ],
-  "ctx": "if (tab === \"m\" && S.mode !== \"mgr\") s += '<p class=\"muted\">' + h(tr(\"La ropa de entrenador estará disponible cuando te sientes en un banquillo.\")) + \"</p>\";"
+  "ctx": "else if (tab === \"m\" && S.mode !== \"mgr\") s += '<p class=\"muted\">' + h(tr(\"La ropa de entrenador estará disponible cuando te sientes en un banquillo.\")) + \"</p>\";"
  },
  "Adopta una mascota para comprarle accesorios.": {
   "w": [
-   "ui-shop.js:64"
+   "ui-shop.js:65"
   ],
   "ctx": "else if (tab === \"pet\" && !petNow()) s += '<p class=\"muted\">' + h(tr(\"Adopta una mascota para comprarle accesorios.\")) + \"</p>\";"
  },
  "Hoy no queda nada por aquí: vuelve mañana.": {
   "w": [
-   "ui-shop.js:65"
+   "ui-shop.js:66"
   ],
   "ctx": "else if (!ids.length) s += '<p class=\"muted\">' + h(tr(\"Hoy no queda nada por aquí: vuelve mañana.\")) + \"</p>\";"
  },
  "Destacado": {
   "w": [
-   "ui-shop.js:71"
+   "ui-shop.js:72"
   ],
   "ctx": "(feat ? '<em class=\"shb f\">' + h(tr(\"Destacado\")) + \"</em>\" : off ? '<em class=\"shb o\">−30 %</em>' : \"\") + (lk ? '<i class=\"shl\" aria-hidden=\"true\">🔒</i>' : own ? '<i class=\"shl\" aria-hidden=\"true\">✓</i>' : \"\") + \"</but"
  },
  "Probar": {
   "w": [
-   "ui-shop.js:90",
+   "ui-shop.js:91",
    "pet-world.js:866"
   ],
   "ctx": "if (!pet && w === \"p\" && !own) s += '<button class=\"btn sm\" data-a=\"shoptry\" aria-pressed=\"' + !!U.ui().sh.tryOn + '\">' + h(tr(\"Probar\")) + \"</button>\";"
  },
  "Ya es tuya": {
   "w": [
-   "ui-shop.js:91"
+   "ui-shop.js:92"
   ],
   "ctx": "if (own) s += '<span class=\"gt-max\">' + h(tr(\"Ya es tuya\")) + \"</span>\";"
  },
  "Comprar": {
   "w": [
-   "ui-shop.js:92"
+   "ui-shop.js:93"
   ],
   "ctx": "else if (!lk) s += '<button class=\"btn sm pri\" data-a=\"shopbuy\" data-v=\"' + id + '\"' + (money >= price ? \"\" : \" disabled\") + \">\" + h(tr(\"Comprar\")) + \" <b>\" + (price < base ? \"<s>\" + h(fmtMoney(base)) + \"</s> \" : \"\") + h"
  },
  "Te faltan {m}": {
   "w": [
-   "ui-shop.js:92"
+   "ui-shop.js:93"
   ],
   "ctx": "else if (!lk) s += '<button class=\"btn sm pri\" data-a=\"shopbuy\" data-v=\"' + id + '\"' + (money >= price ? \"\" : \" disabled\") + \">\" + h(tr(\"Comprar\")) + \" <b>\" + (price < base ? \"<s>\" + h(fmtMoney(base)) + \"</s> \" : \"\") + h"
  },
+ "{n} de {t} retos superados. Cada uno desbloquea una pieza exclusiva.": {
+  "w": [
+   "ui-shop.js:102"
+  ],
+  "ctx": "return '<p class=\"muted\" style=\"margin:0\">' + h(tr(\"{n} de {t} retos superados. Cada uno desbloquea una pieza exclusiva.\", {n: n, t: L.length})) + '</p><ul class=\"gxl chl\">' + L.map(function (c, i) {"
+ },
+ "Desbloqueado: {x}": {
+  "w": [
+   "ui-shop.js:106"
+  ],
+  "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
+ },
+ "Regalo: {x}": {
+  "w": [
+   "ui-shop.js:106"
+  ],
+  "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
+ },
+ "Superado": {
+  "w": [
+   "ui-shop.js:106"
+  ],
+  "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
+ },
+ "Desbloquea: {x}": {
+  "w": [
+   "ui-shop.js:106"
+  ],
+  "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
+ },
+ "Regalo para tu mascota": {
+  "w": [
+   "ui-shop.js:106"
+  ],
+  "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
+ },
  "No te llega el dinero.": {
   "w": [
-   "ui-shop.js:115",
+   "ui-shop.js:129",
    "ui-life.js:224",
    "ui-life.js:232"
   ],
@@ -2918,19 +3913,19 @@
  },
  "No se puede comprar.": {
   "w": [
-   "ui-shop.js:115"
+   "ui-shop.js:129"
   ],
   "ctx": "if (!r || !r.ok) { U.toast(r && r.poor ? tr(\"No te llega el dinero.\") : tr(\"No se puede comprar.\")); return; }"
  },
  "¡Es tuya!": {
   "w": [
-   "ui-shop.js:141"
+   "ui-shop.js:155"
   ],
   "ctx": "el.innerHTML = '<canvas class=\"gup-fx\" aria-hidden=\"true\"></canvas><canvas class=\"gup-c\" width=\"360\" height=\"360\" aria-hidden=\"true\"></canvas><div class=\"gup-t\"><small>' + h(tr(\"¡Es tuya!\")) + \"</small><b>\" + h(tr(it.n))"
  },
  "Destacado del día y {n} ofertas. Las existencias cambian cada día.": {
   "w": [
-   "ui-shop.js:163"
+   "ui-shop.js:177"
   ],
   "ctx": "function entry() { var f = GXI.featured(), o = GXI.offers().length; return '<button class=\"card shcard\" data-a=\"shopopen\" data-v=\"feat\"><span class=\"shcard-ic\">' + (f ? '<img src=\"' + icon(f, 96) + '\" alt=\"\" width=\"40\" h"
  },
@@ -3351,15 +4346,6 @@
   "w": [
    "pet-items.js:37",
    "pets.js:142"
-  ],
-  "ctx": "{id: \"star\", s: \"h\", n: N_(\"Aura de estrella\"), r: \"l\", un: \"bdo\", ud: N_(\"Gana el Balón de Oro.\"), tags: [\"shiny\", \"regal\"], ico: \"🌟\", rec: [[\"box\", -5, 4, -5, 4, 4, 4, \"L\", \"ring\"]], glow: 1},"
- },
- "Gana el Balón de Oro.": {
-  "w": [
-   "pet-items.js:37",
-   "pets.js:142",
-   "pets.js:183",
-   "achieve.js:39"
   ],
   "ctx": "{id: \"star\", s: \"h\", n: N_(\"Aura de estrella\"), r: \"l\", un: \"bdo\", ud: N_(\"Gana el Balón de Oro.\"), tags: [\"shiny\", \"regal\"], ico: \"🌟\", rec: [[\"box\", -5, 4, -5, 4, 4, 4, \"L\", \"ring\"]], glow: 1},"
  },
@@ -5059,13 +6045,6 @@
   ],
   "ctx": "{k: \"showman\", n: N_(\"Showman\"), side: 0, guess: 0.6, refl: 0.6, reach: 0.7, dance: 0.9, adapt: 0.5, early: 0.12},"
  },
- "Muro": {
-  "w": [
-   "sp-data.js:35",
-   "achieve.js:25"
-  ],
-  "ctx": "{k: \"wall\", n: N_(\"Muro\"), side: 0, guess: 0.45, refl: 0.9, reach: 0.8, dance: 0.1, adapt: 0.8, early: 0.02}"
- },
  "Colocador": {
   "w": [
    "sp-data.js:39"
@@ -5247,12 +6226,6 @@
    "sp-data.js:80"
   ],
   "ctx": "{k: \"fktop\", n: N_(\"A la escuadra\"), d: N_(\"Marca una falta directa por la escuadra.\"), money: 400},"
- },
- "Especialista": {
-  "w": [
-   "sp-data.js:83"
-  ],
-  "ctx": "{k: \"hattrickfk\", n: N_(\"Especialista\"), d: N_(\"Marca tres faltas directas.\"), money: 700},"
  },
  "Marca tres faltas directas.": {
   "w": [
@@ -5576,13 +6549,6 @@
    "sp-play.js:376"
   ],
   "ctx": "if (ok) { me.play(\"gkstay\"); AU.fx(\"catch\"); ui.big(t(\"¡Atrapado!\"), \"good\"); cb(false); }"
- },
- "Desde los once metros": {
-  "w": [
-   "sp-play.js:385",
-   "minigame.js:611"
-  ],
-  "ctx": "var ui = shell({kicker: t(\"Desde los once metros\"), title: t(\"Penalti\"), closable: !!opt.training});"
  },
  "Penalti": {
   "w": [
@@ -38202,12 +39168,6 @@
   ],
   "ctx": "[\"p_cap1\", \"🧢\", N_(\"Internacional\"), N_(\"Debuta con tu selección.\"), function (c) { return S.p.intl.caps >= 1; }],"
  },
- "Debuta con tu selección.": {
-  "w": [
-   "achieve.js:21"
-  ],
-  "ctx": "[\"p_cap1\", \"🧢\", N_(\"Internacional\"), N_(\"Debuta con tu selección.\"), function (c) { return S.p.intl.caps >= 1; }],"
- },
  "Fijo en el once": {
   "w": [
    "achieve.js:22"
@@ -38231,18 +39191,6 @@
    "achieve.js:23"
   ],
   "ctx": "[\"p_g50\", \"🎯\", N_(\"Goleador\"), N_(\"Llega a 50 goles oficiales.\"), function (c) { return c.t.g >= 50; }],"
- },
- "Asistente de oro": {
-  "w": [
-   "achieve.js:24"
-  ],
-  "ctx": "[\"p_a50\", \"🤝\", N_(\"Asistente de oro\"), N_(\"Da 50 asistencias.\"), function (c) { return c.t.a >= 50; }],"
- },
- "Da 50 asistencias.": {
-  "w": [
-   "achieve.js:24"
-  ],
-  "ctx": "[\"p_a50\", \"🤝\", N_(\"Asistente de oro\"), N_(\"Da 50 asistencias.\"), function (c) { return c.t.a >= 50; }],"
  },
  "Deja la portería a cero en 50 partidos.": {
   "w": [
@@ -38307,12 +39255,6 @@
   ],
   "ctx": "[\"p_t5\", \"🏅\", N_(\"Coleccionista\"), N_(\"Gana 5 títulos.\"), function (c) { return S.p.trophies.length >= 5; }],"
  },
- "Centenario": {
-  "w": [
-   "achieve.js:31"
-  ],
-  "ctx": "[\"p_g100\", \"🔥\", N_(\"Centenario\"), N_(\"Llega a 100 goles oficiales.\"), function (c) { return c.t.g >= 100; }],"
- },
  "Llega a 100 goles oficiales.": {
   "w": [
    "achieve.js:31"
@@ -38342,12 +39284,6 @@
    "achieve.js:33"
   ],
   "ctx": "[\"p_season10\", \"⏳\", N_(\"Veterano\"), N_(\"Juega 10 temporadas.\"), function (c) { return c.t.seasons >= 10; }],"
- },
- "Incombustible": {
-  "w": [
-   "achieve.js:34"
-  ],
-  "ctx": "[\"p_apps500\", \"🦾\", N_(\"Incombustible\"), N_(\"Llega a 500 partidos oficiales.\"), function (c) { return c.t.apps >= 500; }],"
  },
  "Llega a 500 partidos oficiales.": {
   "w": [

@@ -4,6 +4,8 @@
    antigua desbloquea en silencio lo que ya había cumplido. Los trofeos se guardan como los logros de
    siempre (S.ach) y además con fecha y partido (S.gx.t). Los detalles de cada gol (desde dónde, minuto)
    salen de un generador propio con semilla: nunca se toca R() y los resultados no cambian. */
+/* cifras con separador de miles del idioma (dígitos tabulares en la interfaz) */
+function gxNum(n) { var s = String(Math.round(n)), sep = typeof LANG !== "undefined" ? (LANG === "en" ? "," : LANG === "fr" ? "\u202f" : ".") : "."; return s.replace(/\B(?=(\d{3})+(?!\d))/g, sep); }
 var GX = (function () {
   var api = {}, dirty = true, cache = null;
   function st() {

@@ -40,7 +40,7 @@
     if (lk.k === "ch" && typeof GXC !== "undefined") { var pr = GXC.prog(lk.v); return [tr(GXC.name(lk.v)) + " · " + pr[0] + " / " + pr[1], pr[0] / pr[1]]; }
     return [tr("Bloqueado"), 0];
   }
-  var TABS = [["feat", "Destacados"], ["p", "Jugador"], ["m", "Entrenador"], ["pet", "Mascota"]];
+  var TABS = [["feat", "Destacados"], ["p", "Jugador"], ["m", "Entrenador"], ["pet", "Mascota"], ["chal", "Retos"]];
   U.actions.shopopen = function (b, v) { var ui = U.ui(); ui.sh = {tab: v || "feat", sel: null, slot: b && b.getAttribute && b.getAttribute("data-s") || null, tryOn: false}; U.open("shop"); };
   U.gearShopLink = function (w, sl) { return '<button class="btn wide sm" data-a="shopopen" data-v="' + (w === "m" ? "m" : "p") + '" data-s="' + sl + '">' + h(tr("Buscar más en la tienda")) + "</button>"; };
   function list(tab) {
@@ -49,7 +49,7 @@
     var w = tab, all = GXI.items(w).filter(function (it) { return it.price > 0; });
     /* las existencias rotan cada día; lo bloqueado y lo que ya tienes se ve igual */
     var st = GXI.stock(w);
-    return all.filter(function (it) { return st.indexOf(it.id) >= 0 || GXI.lock(it) || GXI.owned(it.id, w); }).map(function (it) { return it.id; });
+    return all.filter(function (it) { return st.indexOf(it.id) >= 0 || GXI.lock(it) || GXI.owned(it.id, w) || (it.req && it.req.ch); }).sort(function (a, b) { return (a.req && a.req.ch ? 1 : 0) - (b.req && b.req.ch ? 1 : 0); }).map(function (it) { return it.id; });
   }
   U.sheets.shop = function () {
     var ui = U.ui().sh = U.ui().sh || {tab: "feat", sel: null}, tab = ui.tab, ids = list(tab);
@@ -60,7 +60,8 @@
     var s = "<h2>" + h(tr("Tienda")) + '</h2><div class="stack shp">';
     s += '<div class="seg shp-tabs">' + TABS.map(function (t) { return '<button data-a="shoptab" data-v="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '">' + h(tr(t[1])) + "</button>"; }).join("") + "</div>";
     s += '<div class="shp-top"><small class="muted">' + h(tr("Las existencias cambian cada día.")) + '</small><b class="shp-money">' + h(fmtMoney(pr ? pr.money : 0)) + "</b></div>";
-    if (tab === "m" && S.mode !== "mgr") s += '<p class="muted">' + h(tr("La ropa de entrenador estará disponible cuando te sientes en un banquillo.")) + "</p>";
+    if (tab === "chal") s += chalList();
+    else if (tab === "m" && S.mode !== "mgr") s += '<p class="muted">' + h(tr("La ropa de entrenador estará disponible cuando te sientes en un banquillo.")) + "</p>";
     else if (tab === "pet" && !petNow()) s += '<p class="muted">' + h(tr("Adopta una mascota para comprarle accesorios.")) + "</p>";
     else if (!ids.length) s += '<p class="muted">' + h(tr("Hoy no queda nada por aquí: vuelve mañana.")) + "</p>";
     else {
@@ -91,6 +92,19 @@
     if (own) s += '<span class="gt-max">' + h(tr("Ya es tuya")) + "</span>";
     else if (!lk) s += '<button class="btn sm pri" data-a="shopbuy" data-v="' + id + '"' + (money >= price ? "" : " disabled") + ">" + h(tr("Comprar")) + " <b>" + (price < base ? "<s>" + h(fmtMoney(base)) + "</s> " : "") + h(fmtMoney(price)) + "</b></button>" + (money < price ? '<small class="muted">' + h(tr("Te faltan {m}", {m: fmtMoney(price - money)})) + "</small>" : "");
     return s + "</div></div></div>";
+  }
+  /* retos: el progreso real de tu carrera y la pieza que desbloquean */
+  function chalList() {
+    if (typeof GXC === "undefined") return "";
+    var mgr = S.mode === "mgr", L = GXC.list().filter(function (c) { return mgr ? c.who === "m" : c.who !== "m"; });
+    L.sort(function (a, b) { var A = GXC.done(a.id) ? 1 : 0, B = GXC.done(b.id) ? 1 : 0; if (A !== B) return A - B; var pa = GXC.prog(a.id), pb = GXC.prog(b.id); return pb[0] / pb[1] - pa[0] / pa[1]; });
+    var n = L.filter(function (c) { return GXC.done(c.id); }).length;
+    return '<p class="muted" style="margin:0">' + h(tr("{n} de {t} retos superados. Cada uno desbloquea una pieza exclusiva.", {n: n, t: L.length})) + '</p><ul class="gxl chl">' + L.map(function (c, i) {
+      var pr = GXC.prog(c.id), ok = GXC.done(c.id), it = c.item ? GXI.item(c.item) : null, gift = ok && GX.st().ch[c.id] && GX.st().ch[c.id].gift;
+      var img = it ? icon(c.item, 64) : gift ? icon(gift, 64) : GXV.img("s", 64);
+      return '<li class="gxi chi' + (ok ? " on" : "") + '" style="--i:' + i + '"><img src="' + img + '" alt="" width="40" height="40"><span class="grow"><b>' + h(tr(c.n)) + "</b><small>" + h(tr(c.d)) + "</small>" +
+        (ok ? '<small class="gxd">' + h(it ? tr("Desbloqueado: {x}", {x: tr(it.n)}) : gift ? tr("Regalo: {x}", {x: tr(GXI.item(gift).n)}) : tr("Superado")) + "</small>" : '<span class="gxp"><i style="--w:' + Math.round(pr[0] / pr[1] * 100) + '%"></i><em>' + gxNum(pr[0]) + " / " + gxNum(pr[1]) + "</em></span>" + (it ? '<small class="muted">' + h(tr("Desbloquea: {x}", {x: tr(it.n)})) + "</small>" : c.pet ? '<small class="muted">' + h(tr("Regalo para tu mascota")) + "</small>" : "")) + "</span></li>";
+    }).join("") + "</ul>";
   }
   function petItemOf(id) { return typeof petItem === "function" ? petItem(id) : null; }
   function tryPanel(id) {

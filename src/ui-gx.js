@@ -111,18 +111,27 @@ var GXV = (function () {
     var g = S && GX.st(); if (!g || !g.q.length) { BUSY = false; return; }
     BUSY = true;
     var id = g.q.shift(); U.persist();
+    if (/^ch:/.test(id)) { chBanner(id.slice(3), function () { setTimeout(next, 180); }); return; }
     var m = GX.meta(id);
     if (m.rar === "p") { ceremony(id, next); return; }
     banner(id, m, function () { setTimeout(next, 180); });
   }
-  function banner(id, m, done) {
-    var t0 = performance.now(), T = rm() ? 2600 : 4300, rw = (GX.st().t[id] || {}).$ || 0;
+  /* reto superado: mismo aviso, con la pieza que se desbloquea girando */
+  function chBanner(cid, done) {
+    var c = typeof GXC !== "undefined" ? GXC.get(cid) : null; if (!c) { done(); return; }
+    var gift = (GX.st().ch[cid] || {}).gift, item = c.item || gift, it = item && typeof GXI !== "undefined" ? GXI.item(item) : null;
+    var key = it ? (it.own === "pet" ? null : "gi:" + item + ":0") : null; if (key && typeof GXG !== "undefined") GXG.icon(item, 0, 16);
+    banner(cid, {rar: "s"}, done, {kick: tr("Reto superado"), n: tr(c.n), d: it ? (c.pet ? tr("Regalo para tu mascota: {x}", {x: tr(it.n)}) : tr("Desbloqueado en la tienda: {x}", {x: tr(it.n)})) : tr(c.d), key: key || "s", rw: 0, tap: "shop"});
+  }
+  function banner(id, m, done, o) {
+    o = o || {};
+    var t0 = performance.now(), T = rm() ? 2600 : 4300, rw = o.rw != null ? o.rw : (GX.st().t[id] || {}).$ || 0;
     var el = document.createElement("div"); el.className = "gxb gx-" + m.rar; el.setAttribute("role", "status");
-    el.innerHTML = '<canvas width="168" height="168" aria-hidden="true"></canvas><div class="gxb-t"><small>' + h(tr(KICK[m.rar] || KICK.b)) + "</small><b>" + h(nameOf(id)) + "</b><span>" + h(descOf(id)) + "</span>" +
+    el.innerHTML = '<canvas width="168" height="168" aria-hidden="true"></canvas><div class="gxb-t"><small>' + h(o.kick || tr(KICK[m.rar] || KICK.b)) + "</small><b>" + h(o.n || nameOf(id)) + "</b><span>" + h(o.d || descOf(id)) + "</span>" +
       (rw ? '<em class="gxb-m">+<i>0</i></em>' : "") + "</div><span class=\"gxb-sh\" aria-hidden=\"true\"></span>";
     document.body.appendChild(el);
     var cv = el.querySelector("canvas"), mi = el.querySelector(".gxb-m i"), closed = false, raf = 0;
-    el.addEventListener("click", function () { close(); U.ui().gxF = {st: "on"}; U.open("ach"); });
+    el.addEventListener("click", function () { close(); if (o.tap === "shop") { U.ui().sh = {tab: "chal"}; U.open("shop"); return; } U.ui().gxF = {st: "on"}; U.open("ach"); });
     if (typeof Anim !== "undefined" && Anim.haptic) try { Anim.haptic(m.rar === "g" ? "big" : "ok"); } catch (e) {}
     try { if (typeof SpModes !== "undefined" && SpModes.AU && SpModes.AU.fx) SpModes.AU.fx(m.rar === "g" ? "cheer" : "coin"); } catch (e) {}
     function frame(now) {
@@ -136,7 +145,7 @@ var GXV = (function () {
       /* trofeo: aparece con escala elástica y un giro que frena */
       var ts = t < 0.25 ? 0 : Math.min(1, back(Math.min(1, (t - 0.25) / 0.45))), spin = -0.6 + (1 - ease(Math.min(1, t / 1.6))) * Math.PI * 4 + Math.sin(t * 1.4) * 0.25;
       var bob = Math.sin(t * 2.6) * 2;
-      GXV.draw(cv, m.rar, spin, {scale: ts, dy: bob, shine: t > 0.9 && t < 1.6 ? 1 : 0, shineX: (t - 0.9) / 0.7, metal: m.rar === "b" ? 0.35 : 0.7});
+      GXV.draw(cv, o.key || m.rar, spin, {scale: ts, dy: bob, shine: t > 0.9 && t < 1.6 ? 1 : 0, shineX: (t - 0.9) / 0.7, metal: m.rar === "b" ? 0.35 : 0.7});
       if (mi) mi.textContent = money(Math.round(rw * ease(Math.min(1, Math.max(0, t - 0.6) / 0.9)))).replace(/^\+/, "");
       if (t * 1000 > T) { close(); return; }
       raf = requestAnimationFrame(frame);
@@ -216,7 +225,7 @@ var GXV = (function () {
     if (gc) s += '<p class="muted" style="margin:0;font-size:var(--fs-xs)">' + h(tr("En todas tus partidas: {n} de {t} logros clásicos.", {n: gc[0], t: gc[1]})) + "</p>";
     return s + '<button class="btn wide" data-a="close">' + h(tr("Cerrar")) + "</button></div>";
   };
-  function fmtN(n) { return typeof fmtInt === "function" ? fmtInt(n) : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+  function fmtN(n) { return gxNum(n); }
   U.actions.gxst = function (b, v) { U.ui().gxF.st = v; U.renderSheet(); };
   U.actions.gxcat = function (b, v) { U.ui().gxF.cat = v; U.renderSheet(); };
   U.actions.gxrar = function (b, v) { var F = U.ui().gxF; F.rar = F.rar === v ? "" : v; U.renderSheet(); };
