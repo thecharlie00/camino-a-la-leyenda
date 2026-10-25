@@ -79,7 +79,11 @@ var PetSim = (function () {
   api.tick = function (pt, now) {
     if (!pt || pt.v !== 2) return 0;
     now = now || api.clock();
-    if (now < pt.tmax - 10 * 60e3) { pt.t = now; pt.back = 1; return 0; }  /* reloj atrasado: no pasa el tiempo */
+    if (now < pt.tmax - 10 * 60e3) {
+      /* reloj atrasado: no pasa el tiempo. 5.7: si es más de 3 días (un reloj que estuvo adelantado y se corrigió), se acepta la hora nueva para que la mascota no se quede congelada */
+      if (pt.tmax - now > 3 * DAY) { pt.tmax = now; pt.t = now; pt.back = 0; return 0; }
+      pt.t = now; pt.back = 1; return 0;
+    }
     var from = Math.max(pt.t, pt.back ? pt.tmax : pt.t); pt.back = 0;
     var hrs = (now - from) / H; if (hrs <= 0) { pt.t = now; return 0; }
     var away = hrs, cap = Math.min(hrs, CAP_H);
@@ -190,6 +194,12 @@ var PetSim = (function () {
     var p = pt.pers, z = pt.zones[zone] = (pt.zones[zone] || 0) + 1, out = {r: "ok", zone: zone};
     if (zone === pt.likes.hate && kind !== "pat") { out.r = "dislike"; pt.n.fun = cl(pt.n.fun - 2, 0, 100); return out; }
     if (kind === "poke") { out.r = p.ind > 0.6 ? "annoyed" : "curious"; return out; }
+    /* 5.7: caricia brusca: a las juguetonas les divierte; al resto les molesta un poco (y se nota) */
+    if (kind === "rough") {
+      if (p.act > 0.62) { pt.n.fun = cl(pt.n.fun + 2, 0, 100); bond(pt, 0.1, "touch"); out.r = "playful"; }
+      else { pt.n.aff = cl(pt.n.aff - 1, 0, 100); pt.n.fun = cl(pt.n.fun - 1, 0, 100); out.r = "rough"; }
+      pt.mood = api.mood(pt); return out;
+    }
     var gain = zone === pt.likes.zone ? 4.5 : 2;
     pt.n.aff = cl(pt.n.aff + gain, 0, 100);
     pt.missed = 0;
@@ -265,7 +275,8 @@ var PetSim = (function () {
     var ceil = st.d >= 3 ? 100 : st.d >= 2 ? 79 : 60;
     var g = Math.min(left, (win ? 7 : 2.5) * good * (kind === "treat" ? 1.3 : 1) * (0.7 + pt.bond / 200));
     var before = st.m;
-    st.m = cl(st.m + g, 0, ceil); st.today = (st.today || 0) + (st.m - before); st.last = now;
+    /* 5.7: al volver a practicar, el olvido empieza de cero (antes se arrastraba y la siguiente ausencia olvidaba menos) */
+    st.m = cl(st.m + g, 0, ceil); st.today = (st.today || 0) + (st.m - before); st.last = now; st.lost = 0;
     if (kind === "treat") { var inv = api.inv(), id = inv.treat_bone > 0 ? "treat_bone" : inv.treat > 0 ? "treat" : null; if (id) { inv[id]--; if (!inv[id]) delete inv[id]; pt.boost = cl((pt.boost || 0) + 3, 0, 30); } }
     bond(pt, win ? 0.8 : 0.3, "trick");
     var tierUp = api.tier(st.m) > api.tier(before);

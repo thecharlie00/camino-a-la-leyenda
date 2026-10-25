@@ -31,10 +31,11 @@
 
   /* ---------- avatar 2D (SVG) ---------- */
   function avatar(look, club, num, gk, cls, cap) {
-    var get = function (cat) { return lifeItem(cat, look[cat] || LIFE_COS_DEF[cat]); };
-    var skin = get("skin").c, hc = get("hcol").c, hair = (look.hair || "short"), boots = get("boots").c, sl = look.sleeve || "short", band = look.band || "none", gl = get("gloves");
+    /* 5.7: la figura se dibuja desde una descripción ya resuelta (la mía sale de PLook; la del rival, de su look) */
+    var R0 = look.__r ? look : cosLook(look);
+    var skin = R0.skin, hc = R0.hcol, hair = R0.hair || "short", boots = R0.boots, th = R0.therm, sl = th ? th.k : "short", gl = R0.gloves || {c: "#f4f4f0", c2: "#d33"};
     var k = kitOf(club, gk), c1 = k.c1, c2 = k.c2, txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
-    var armCol = sl === "long" ? c1 : sl === "under" ? "#16191b" : skin, legCol = sl === "tights" ? "#16191b" : skin;
+    var armCol = sl === "long" ? c1 : sl === "under" ? th.c : skin, legCol = sl === "tights" ? th.c : skin;
     /* figura de cuerpo entero en pixel art (celda 5, sin rasgos faciales) */
     var R = [], B = function (x0, y0, x1, y1, c, tag) { R.push([x0, y0, x1, y1, c, tag]); };
     var shade = function (c, k) { return typeof PX !== "undefined" ? PX.shade(c, k) : c; };
@@ -50,7 +51,7 @@
     B(5, 13, 6, 19, armCol); B(17, 13, 18, 19, armCol);
     if (sl !== "long") { B(5, 10, 6, 12, c1); B(17, 10, 18, 12, c1); B(5, 12, 6, 12, c2); B(17, 12, 18, 12, c2); }
     else { B(5, 10, 6, 12, c1); B(17, 10, 18, 12, c1); }
-    if (cap || band === "cap") B(5, 11, 6, 11, "#ffb21e");
+    if (cap || R0.arm) B(5, 11, 6, 11, R0.arm || "#ffb21e");
     if (gk) { B(4, 19, 6, 21, gl.c); B(17, 19, 19, 21, gl.c); B(4, 19, 6, 19, gl.c2); B(17, 19, 19, 19, gl.c2); }
     else { B(5, 20, 6, 20, skin); B(17, 20, 18, 20, skin); }
     /* camiseta con cuello en pico */
@@ -61,7 +62,7 @@
     else if (hair === "buzz") B(9, 2, 14, 2, shade(hc, 1.15));
     else if (hair === "curly") { B(8, 1, 15, 2, hc); B(9, 0, 10, 0, hc); B(12, 0, 13, 0, hc); B(8, 3, 8, 4, hc); B(15, 3, 15, 4, hc); }
     else if (hair === "long") { B(9, 1, 14, 2, hc); B(9, 3, 14, 3, hc); }
-    if (band !== "none" && band !== "cap") { var bc = band === "club" ? c1 : get("band").c || "#fff"; B(9, 3, 14, 3, bc); }
+    if (R0.band) B(9, 3, 14, 3, R0.band === "club" ? c1 : R0.band);
     /* 5.6: ojos de un píxel (parpadean en la zona Yo) */
     var eye = shade(skin, 0.32); B(10, 5, 10, 5, eye, "eyes"); B(13, 5, 13, 5, eye, "eyes");
     /* dorsal en cifras de píxel */
@@ -103,7 +104,17 @@
   }
   U.lifeRigPart = lifeRigPart;
   U.lifeAvatar = avatar;
-  function myLook() { return Object.assign({}, LIFE_COS_DEF, lifeOf().cos); }
+  /* look de partidas antiguas o del rival (ids de LIFE_COS) → descripción resuelta */
+  function cosLook(look) {
+    var get = function (cat) { return lifeItem(cat, look[cat] || LIFE_COS_DEF[cat]); }, sl = look.sleeve || "short", band = look.band || "none";
+    return {__r: 1, skin: get("skin").c, hcol: get("hcol").c, hair: look.hair || "short", boots: get("boots").c, gloves: get("gloves"),
+      therm: sl === "short" ? null : {k: sl, c: "#16191b"}, band: band === "none" || band === "cap" ? null : band === "club" ? "club" : get("band").c || "#fff", arm: band === "cap" ? "#ffb21e" : null};
+  }
+  function myLook() {
+    if (typeof PLook === "undefined") return Object.assign({}, LIFE_COS_DEF, lifeOf().cos);
+    var p = PLook.player(), band = p.gear.band && p.gear.band.cos === "band:club" ? "club" : p.band;
+    return {__r: 1, skin: p.skin, hcol: p.hair, hair: p.hairId, boots: p.boots, gloves: p.gloves, therm: p.therm, band: band, arm: p.gear.arm ? p.arm : null};
+  }
   function myAvatar(cls) { var L = lifeOf(); return avatar(myLook(), S.p.club, L.num, isGK(), cls, !!S.p.flags.captain); }
   U.myAvatar = myAvatar;
   /* bloques de mi figura (para la vista 3D) y colores de la equipación */
@@ -253,26 +264,24 @@
   }
   U.sheets.llook = function () {
     var gk = isGK();
-    var s = "<h2>" + tr("Look y celebración") + '</h2><div class="stack"><div class="lflookprev">' + myAvatar("lfsvg big rig") + '<div><span class="eyebrow">' + tr("Celebración") + "</span><b>" + h(tr(lifeCel().n)) + '</b><p class="muted lfhint">' + tr("Algunas piezas se desbloquean con fama, títulos o dinero.") + "</p></div></div>";
-    if (typeof View3D !== "undefined" && View3D && View3D.supported()) s += '<button class="btn v3dbtn" data-a="lf3d">' + tr("Ver en 3D") + "</button>";
+    /* al abrirse (sin repintar la pantalla de debajo) se coloca aquí el modelo 3D de «Yo» */
+    setTimeout(function () { var hh = document.querySelector(".sheet:not(.out) .lfprev3d"); if (hh && U.yo3d) U.yo3d.mount(hh, "p"); }, 0);
+    var s = "<h2>" + tr("Look y celebración") + '</h2><div class="stack"><div class="lflookprev"><div class="lfprev3d">' + myAvatar("lfsvg big rig") + '</div><div><span class="eyebrow">' + tr("Celebración") + "</span><b>" + h(tr(lifeCel().n)) + '</b><p class="muted lfhint">' + tr("Algunas piezas se desbloquean con fama, títulos o dinero.") + "</p></div></div>";
     s += cosRow("cel", tr("Celebración"));
-    if (gk) s += cosRow("gloves", tr("Guantes"), true);
-    s += cosRow("boots", tr("Botas"), true);
-    s += cosRow("sleeve", tr("Mangas y mallas"));
-    s += cosRow("band", tr("Cinta"));
     s += cosRow("skin", tr("Piel"), true);
     s += cosRow("hair", tr("Pelo"));
     s += cosRow("hcol", tr("Color de pelo"), true);
+    /* 5.7: botas, mangas, cinta y guantes se llevan desde el equipamiento (una sola fuente) */
+    s += '<button class="btn wide" data-a="gearopen" data-v="p">' + h(tr("Equipamiento")) + "</button>";
     return s + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
   };
-  U.actions.lf3d = function () { if (typeof View3D !== "undefined" && View3D) View3D.player({from: document.querySelector(".lflookprev svg")}); };
   U.actions.lfcos = function (b, v) {
     var cat = b.getAttribute("data-k"), prev = (lifeOf().cos || {})[cat] || LIFE_COS_DEF[cat], r = lifeSetCos(cat, v);
     if (!r.ok && r.lock) U.toast(r.poor ? tr("No te llega el dinero ({v}).", {v: money(r.lock.v)}) : tr("Bloqueado: {req}.", {req: lockTxt(r.lock).replace("🔒 ", "")}));
     else if (r.paid) U.toast(tr("Comprado por {v}.", {v: money(r.paid)}));
     rer();
-    /* 5.6: con la prenda nueva, el jugador se presenta en 3D */
-    if (r.ok && prev !== v && typeof View3D !== "undefined" && View3D) setTimeout(function () { View3D.player({item: cat, from: document.querySelector(".lflookprev svg")}); }, 60);
+    /* 5.7: la vista previa es el mismo modelo 3D de «Yo»: con una celebración nueva, la hace */
+    if (r.ok && prev !== v && cat === "cel" && U.yo3d) setTimeout(function () { U.yo3d.celebrate(); }, 60);
   };
 
   /* ---------- hoja: rivalidad ---------- */

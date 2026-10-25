@@ -86,7 +86,15 @@ var GXG = (function () {
     var raw = GXI.raw(w), cap = GXI.capped(raw), sc = GXI.setCount(g, w);
     var s = "<h2>" + h(tr("Equipamiento")) + '</h2><div class="stack gs">';
     if (U.gearTabs) s += U.gearTabs(ui);
-    if (ui.tab !== "eq" && U.gearTab) return s + U.gearTab(ui) + "</div>";
+    if (ui.tab !== "eq" && U.gearTab) { PLook.tryOn = null; return s + U.gearTab(ui) + "</div>"; }
+    /* 5.7: el personaje con lo que llevas (o lo que te estás probando), la cámara en la ranura elegida */
+    s += '<div class="gs-stage"><div class="gs-prev3d" data-w="' + w + '"></div><div class="gs-live">' + live(w, g, ui) + "</div></div>";
+    s += tools(w, ui);
+    setTimeout(function () {
+      var hh = document.querySelector(".sheet:not(.out) .gs-prev3d"); if (!hh || !U.yo3d) return;
+      var cl = ui.clips || []; ui.clips = null;
+      U.yo3d.dress(hh, w, {focus: ui.s, clips: cl});
+    }, 0);
     /* resumen: lo que suma y el tope */
     var keys = Object.keys(raw).filter(function (k) { return raw[k]; });
     s += '<div class="gs-sum">' + (keys.length ? keys.map(function (k) {
@@ -103,11 +111,96 @@ var GXG = (function () {
     }).join("") + "</div>";
     /* conjuntos */
     var sets = GX_SETS.filter(function (x) { return sc[x.k]; });
-    if (sets.length) s += '<div class="gs-sets">' + sets.map(function (x) { var n = sc[x.k], full = n >= x.need, on3 = n >= 3; return '<div class="gset' + (full ? " full" : on3 ? " half" : "") + '"><b>' + h(tr(x.n)) + "</b><small>" + n + "/" + x.need + "</small><span>" + chips(full ? x.bAll : x.b3) + "</span></div>"; }).join("") + "</div>";
+    if (sets.length) s += '<div class="gs-sets">' + sets.map(function (x) { var n = sc[x.k], full = n >= x.need, on3 = n >= 3; return '<div class="gset' + (full ? " full" : on3 ? " half" : "") + '"><b>' + h(tr(x.n)) + "</b><small>" + n + "/" + x.need + "</small><span>" + chips(full ? x.bAll : x.b3) + "</span>" + missing(x, g, w) + "</div>"; }).join("") + "</div>";
     /* piezas de la ranura elegida */
     if (ui.s) s += slotPanel(w, ui.s, g);
+    s += fits(w, g);
+    if (w === "m") s += occasions(g);
     return s + '<button class="btn wide" data-a="close">' + h(tr("Cerrar")) + "</button></div>";
   };
+  /* 5.7: el míster elige qué se pone en cada ocasión (solo cambia lo que se ve) */
+  function occasions(g) {
+    var pf = PLook.coachPrefs(), suits = Object.keys(g.own).map(GXI.item).filter(function (it) { return it && it.slot === "suit" && it.own === "m"; });
+    function pick(k, label) {
+      return '<label class="shp-sel"><span>' + h(label) + '</span><select data-gck="' + k + '"><option value="">' + h(tr("Lo que llevas puesto")) + "</option>" +
+        suits.map(function (it) { return '<option value="' + it.id + '"' + (pf[k] === it.id ? " selected" : "") + ">" + h(tr(it.n)) + "</option>"; }).join("") + "</select></label>";
+    }
+    var hasCoat = Object.keys(g.own).some(function (id) { var it = GXI.item(id); return it && it.slot === "coat"; });
+    return '<section class="gs-occ"><h3>' + h(tr("Para cada ocasión")) + '</h3><p class="muted gs-note">' + h(tr("Solo cambia lo que se ve: las estadísticas son siempre las de lo que tienes equipado.")) + '</p><div class="shp-sels">' +
+      pick("big", tr("Partidos importantes")) + pick("train", tr("Entrenamientos")) +
+      (hasCoat ? '<label class="shp-sel"><span>' + h(tr("Abrigo")) + '</span><select data-gck="coat"><option value="cold"' + (pf.coat !== "always" ? " selected" : "") + ">" + h(tr("Con frío o lluvia")) + '</option><option value="always"' + (pf.coat === "always" ? " selected" : "") + ">" + h(tr("Siempre")) + "</option></select></label>" : "") +
+      "</div></section>";
+  }
+  document.addEventListener("change", function (e) {
+    var t = e.target, k = t && t.getAttribute && t.getAttribute("data-gck"); if (!k) return;
+    var pf = PLook.coachPrefs(); pf[k] = t.value || (k === "coat" ? "cold" : null); U.persist();
+    try { Anim.haptic("tap"); } catch (er) {}
+  });
+  /* qué ranuras faltan para completar una línea (o el bonus de 3) */
+  function missing(x, g, w) {
+    var have = {}; Object.keys(g.eq).forEach(function (s) { var it = GXI.item(g.eq[s]); if (it && it.set === x.k) have[s] = 1; });
+    var lack = Object.keys(x.slots).filter(function (s) { return !have[s]; });
+    return lack.length ? '<small class="gset-miss">' + h(tr("Faltan: {x}", {x: lack.map(function (s) { return slotName(s, w); }).join(", ")})) + "</small>" : "";
+  }
+  /* ---------- 5.7: prueba con estadísticas en vivo ---------- */
+  function live(w, g, ui) {
+    var T = PLook.tryOn;
+    if (!T || T.w !== w) return '<p class="muted gs-hint">' + h(tr("Toca «Probar» en una pieza para vértela puesta sin equiparla.")) + "</p>";
+    var name = T.label || Object.keys(T.eq).map(function (s) { var it = GXI.item(T.eq[s]); return it ? tr(it.n) : tr("Sin {x}", {x: slotName(s, w)}); }).join(", ");
+    return '<div class="gs-try"><span class="eyebrow">' + h(tr("Probando")) + "</span><b>" + h(name) + "</b>" + delta(w, T.eq) +
+      '<div class="gpc-a"><button class="btn sm pri" data-a="geartryok">' + h(tr("Equipar")) + '</button><button class="btn sm" data-a="geartryno">' + h(tr("Cancelar")) + "</button></div></div>";
+  }
+  /* cada estadística que cambia (actual ▲/▼ nueva) y las líneas que se completan o se rompen; también lo usa la tienda */
+  function delta(w, eq) {
+    var g = GXI.gear(w), now = PLook.stats(w), then = PLook.withEq(w, eq, function () { return PLook.stats(w); });
+    var rows = Object.keys(then).filter(function (k) { return typeof then[k] === "number" && Math.round(then[k]) !== Math.round(now[k] || 0); }).map(function (k) {
+      var a = Math.round(now[k] || 0), b = Math.round(then[k]), up = b > a;
+      return '<div class="gs-lr"><span>' + h(statName(k)) + "</span><b class=\"num\">" + a + '</b><i class="' + (up ? "up" : "down") + '" aria-hidden="true">' + (up ? "▲" : "▼") + '</i><b class="num ' + (up ? "up" : "down") + '">' + b + "</b></div>";
+    }).join("");
+    /* conjuntos que se completan o se rompen con la prueba */
+    var sc0 = GXI.setCount(g, w), sc1 = PLook.withEq(w, eq, function () { return GXI.setCount(g, w); }), sets = "";
+    GX_SETS.forEach(function (x) { var a = sc0[x.k] || 0, b = sc1[x.k] || 0; if (a === b || !x.items) return; sets += '<small class="gs-ls' + (b > a ? " up" : " down") + '">' + h(tr(x.n)) + " " + a + "→" + b + "/" + x.need + "</small>"; });
+    return '<div class="gs-delta">' + (rows || '<p class="muted" style="margin:0">' + h(tr("No cambia tus estadísticas.")) + "</p>") + sets + "</div>";
+  }
+  U.gearDelta = delta;
+  /* quitar todo y equipar lo mejor (solo cuando lo pides; antes te lo enseña como prueba) */
+  function tools(w, ui) {
+    var keys = w === "m" ? GX_MSTATS : ["RIT", "TIR", "PAS", "REG", "DEF", "FIS"];
+    var s = '<div class="gs-tools"><button class="btn sm" data-a="gearoff">' + h(tr("Quitar todo")) + '</button><button class="btn sm" data-a="gearbest" aria-expanded="' + !!ui.best + '">' + h(tr("Equipar lo mejor")) + "</button></div>";
+    if (ui.best) s += '<div class="gs-bestk" role="group" aria-label="' + h(tr("Equipar lo mejor")) + '"><button class="chip" data-a="gearbestgo" data-v="">' + h(tr("Equilibrado")) + "</button>" + keys.map(function (k) { return '<button class="chip" data-a="gearbestgo" data-v="' + k + '">' + h(statName(k)) + "</button>"; }).join("") + "</div>";
+    return s;
+  }
+  /* conjuntos guardados */
+  function fits(w, g) {
+    var L = PLook.outfits(w);
+    var s = '<section class="gs-fits"><h3>' + h(tr("Conjuntos guardados")) + "</h3>";
+    s += L.map(function (f, i) {
+      var ic = Object.keys(f.eq).filter(function (k) { return f.eq[k] && g.own[f.eq[k]]; }).slice(0, 6).map(function (k) { var id = f.eq[k]; return '<img src="' + GXG.icon(id, g.own[id].t, 64) + '" alt="" width="22" height="22">'; }).join("");
+      return '<div class="gfit"><b>' + h(tr("Conjunto {n}", {n: f.i})) + '</b><span class="gfit-ic">' + ic + '</span><button class="btn sm pri" data-a="gearfitwear" data-v="' + i + '">' + h(tr("Ponerse")) + '</button><button class="btn sm" data-a="gearfitdel" data-v="' + i + '" aria-label="' + h(tr("Borrar")) + '">✕</button></div>';
+    }).join("");
+    if (L.length < 4) s += '<button class="btn wide sm" data-a="gearfitsave">' + h(tr("Guardar lo que llevas")) + "</button>";
+    return s + "</section>";
+  }
+  function slotClips(ch) { var out = []; ch.forEach(function (s) { var c = PLook.EQCLIP[s]; if (c && out.indexOf(c) < 0) out.push(c); }); return out.slice(0, 4); }
+  function done(clips) { var ui = U.ui().gr; ui.clips = clips || null; U.persist(); U.render(false); try { Anim.haptic("tap"); } catch (e) {} }
+  U.actions.geartry = function (b, v) { var ui = U.ui().gr, it = GXI.item(v), eq = {}; eq[it.slot] = v; PLook.tryOn = {w: ui.w, eq: eq}; ui.clips = slotClips([it.slot]); U.renderSheet(); };
+  U.actions.geartryno = function () { PLook.tryOn = null; U.renderSheet(); };
+  U.actions.geartryok = function () { var T = PLook.tryOn, ui = U.ui().gr; if (!T) return; PLook.tryOn = null; PLook.apply(ui.w, Object.assign({}, GXI.gear(ui.w).eq, T.eq)); ui.best = false; done(); };
+  U.actions.gearoff = function () { var ui = U.ui().gr; PLook.tryOn = null; PLook.apply(ui.w, {}); done(); };
+  U.actions.gearbest = function () { var ui = U.ui().gr; ui.best = !ui.best; U.renderSheet(); };
+  U.actions.gearbestgo = function (b, v) {
+    var ui = U.ui().gr, w = ui.w, cur = GXI.gear(w).eq, eq = PLook.best(w, v || null), diff = {};
+    GX_SLOTS[w].forEach(function (s) { var k = s[0]; if ((eq[k] || null) !== (cur[k] || null)) diff[k] = eq[k] || null; });
+    if (!Object.keys(diff).length) { U.toast(tr("Ya llevas lo mejor para eso.")); return; }
+    PLook.tryOn = {w: w, eq: diff, label: tr("Lo mejor: {x}", {x: v ? statName(v) : tr("Equilibrado")})}; ui.clips = slotClips(Object.keys(diff)); U.renderSheet();
+  };
+  U.actions.gearfitsave = function () {
+    var ui = U.ui().gr, L = PLook.outfits(ui.w); if (L.length >= 4) return;
+    var n = 1; while (L.some(function (f) { return f.i === n; })) n++;
+    L.push({i: n, eq: Object.assign({}, GXI.gear(ui.w).eq)}); U.persist(); U.renderSheet();
+  };
+  U.actions.gearfitwear = function (b, v) { var ui = U.ui().gr, f = PLook.outfits(ui.w)[+v]; if (!f) return; PLook.tryOn = null; done(slotClips(PLook.apply(ui.w, f.eq))); };
+  U.actions.gearfitdel = function (b, v) { PLook.outfits(U.ui().gr.w).splice(+v, 1); U.persist(); U.renderSheet(); };
   function slotPanel(w, sl, g) {
     var cur = g.eq[sl], curSt = cur ? GXI.stats(cur, g.own[cur].t, w) : {};
     var mine = Object.keys(g.own).map(GXI.item).filter(function (it) { return it && it.slot === sl && it.own === w; });
@@ -119,17 +212,45 @@ var GXG = (function () {
       return '<div class="gpc gt' + t + (on ? " on" : "") + '"><img src="' + GXG.icon(it.id, t, 120) + '" alt="" width="54" height="54"><div class="grow"><b>' + h(tr(it.n)) + "</b> " + tierTag(t) +
         '<div class="gpc-st">' + chips(st) + "</div>" + (!on && cur ? '<div class="gpc-cmp"><small>' + h(tr("Frente a lo que llevas:")) + "</small> " + (chips(st, curSt) || '<span class="muted">' + h(tr("igual")) + "</span>") + "</div>" : "") +
         (set ? '<small class="muted">' + h(tr(set.n)) + "</small>" : "") +
-        '<div class="gpc-a"><button class="btn sm' + (on ? "" : " pri") + '" data-a="gearwear" data-v="' + it.id + '">' + h(on ? tr("Quitar") : tr("Equipar")) + "</button>" +
-        (up ? '<button class="btn sm" data-a="gearup" data-v="' + it.id + '"' + (can ? "" : " disabled") + ">" + h(tr("Mejorar a {t}", {t: tr(GX_TIERS[up.to].n)})) + "<small>" + h(money(up.money)) + " · " + up.cu + " " + h(tr("cuero")) + (up.fi ? " · " + up.fi + " " + h(tr("fibra")) : "") + (up.es ? " · " + up.es + " ★" : "") + "</small></button>" : '<span class="gt-max">' + h(tr("Tier máximo")) + "</span>") + "</div></div></div>";
+        '<div class="gpc-a"><button class="btn sm' + (on ? "" : " pri") + '" data-a="gearwear" data-v="' + it.id + '">' + h(on ? tr("Quitar") : tr("Equipar")) + "</button>" + (on ? "" : '<button class="btn sm" data-a="geartry" data-v="' + it.id + '">' + h(tr("Probar")) + "</button>") +
+        (up ? '<button class="btn sm" data-a="gearup" data-v="' + it.id + '"' + (can ? "" : " disabled") + ">" + h(tr("Mejorar a {t}", {t: tr(GX_TIERS[up.to].n)})) + "<small>" + h(money(up.money)) + " · " + up.cu + " " + h(tr("cuero")) + (up.fi ? " · " + up.fi + " " + h(tr("fibra")) : "") + (up.es ? " · " + up.es + " ★" : "") + "</small></button>" : '<span class="gt-max">' + h(tr("Tier máximo")) + "</span>") + "</div>" +
+        /* 5.7: antes de mejorar, qué cambia (estadísticas de la pieza y, si la llevas, las tuyas) */
+        (up && U.ui().gr.upc === it.id ? '<div class="gupc"><span class="eyebrow">' + h(tr(GX_TIERS[t].n)) + " → " + h(tr(GX_TIERS[up.to].n)) + '</span><div class="gpc-st">' + chips(GXI.stats(it.id, up.to, w), st) + "</div>" +
+          (on ? upDelta(w, it.id, up.to) : "") + '<div class="gpc-a"><button class="btn sm pri" data-a="gearupok" data-v="' + it.id + '">' + h(tr("Confirmar mejora")) + '</button><button class="btn sm" data-a="gearupno">' + h(tr("Cancelar")) + "</button></div></div>" : "") + "</div></div>";
     }).join("");
     if (U.gearShopLink) s += U.gearShopLink(w, sl);
     return s + "</section>";
   }
   U.actions.gearslot = function (b, v) { var ui = U.ui().gr; ui.s = ui.s === v ? null : v; U.renderSheet(); setTimeout(function () { var p = document.querySelector(".gs-panel"); if (p && p.scrollIntoView) p.scrollIntoView({behavior: rm() ? "auto" : "smooth", block: "nearest"}); }, 30); };
-  U.actions.gearwear = function (b, v) { GXI.equip(v, U.ui().gr.w); U.persist(); U.renderSheet(); U.render(false); try { Anim.haptic("tap"); } catch (e) {} };
-  U.actions.gearup = function (b, v) {
-    var w = U.ui().gr.w, t = GXI.upgrade(v, w); if (!t) return;
-    U.persist(); upAnim(v, t, function () { U.renderSheet(); U.render(false); });
+  U.actions.gearwear = function (b, v) {
+    var ui = U.ui().gr, it = GXI.item(v), on = GXI.gear(ui.w).eq[it.slot] === v;
+    PLook.tryOn = null; GXI.equip(v, ui.w);
+    /* al ponérsela, el personaje hace el gesto de esa ranura (se salta tocándolo) */
+    done(on ? null : slotClips([it.slot]));
+  };
+  /* atrás (botón o gesto de Android, Escape): primero deshace la prueba o la mejora a medio confirmar, luego cierra */
+  window.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || !document.querySelector(".sheet:not(.out) .gs")) return;
+    var ui = U.ui().gr; if (!ui) return;
+    if (PLook.tryOn || ui.upc || ui.best) { PLook.tryOn = null; ui.upc = null; ui.best = false; U.renderSheet(); e.stopImmediatePropagation(); e.stopPropagation(); }
+  }, true);
+  /* tus estadísticas con la pieza ya mejorada (la llevas puesta) */
+  function upDelta(w, id, to) {
+    var g = GXI.gear(w), now = PLook.stats(w), then;
+    var t0 = g.own[id].t; g.own[id].t = to; try { then = PLook.stats(w); } finally { g.own[id].t = t0; }
+    var rows = Object.keys(then).filter(function (k) { return typeof then[k] === "number" && Math.round(then[k]) !== Math.round(now[k] || 0); }).map(function (k) {
+      var a = Math.round(now[k] || 0), b = Math.round(then[k]), up = b > a;
+      return '<div class="gs-lr"><span>' + h(statName(k)) + '</span><b class="num">' + a + '</b><i class="' + (up ? "up" : "down") + '" aria-hidden="true">' + (up ? "▲" : "▼") + '</i><b class="num ' + (up ? "up" : "down") + '">' + b + "</b></div>";
+    }).join("");
+    return '<div class="gs-delta">' + (rows || '<p class="muted" style="margin:0">' + h(tr("No cambia tus estadísticas.")) + "</p>") + "</div>";
+  }
+  /* mejorar: primero enseña qué cambia; al confirmar, la animación de la pieza */
+  U.actions.gearup = function (b, v) { var ui = U.ui().gr; ui.upc = ui.upc === v ? null : v; U.renderSheet(); };
+  U.actions.gearupno = function () { U.ui().gr.upc = null; U.renderSheet(); };
+  U.actions.gearupok = function (b, v) {
+    var ui = U.ui().gr, w = ui.w; if (ui.upBusy) return; ui.upc = null;
+    var t = GXI.upgrade(v, w); if (!t) { U.renderSheet(); return; }
+    ui.upBusy = true; U.persist(); upAnim(v, t, function () { ui.upBusy = false; U.renderSheet(); U.render(false); });
   };
   /* ---------- animación de mejora: la pieza sube, gira, se aplasta al caer y estalla en chispas del color del tier ---------- */
   function upAnim(id, t, done) {

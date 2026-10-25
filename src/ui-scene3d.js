@@ -20,7 +20,7 @@
     return v;
   }
   function build(sc) {
-    var mgr = S.mode === "mgr", plan = U.gxScenePlan(sc), look = mgr ? U.yo3d.mgr() : U.yo3d.player(), key = plan.key + JSON.stringify(look);
+    var mgr = S.mode === "mgr", plan = U.gxScenePlan(sc), look = (function () { try { return mgr ? PLook.coachRig(PLook.coach({kind: plan.kind, cold: PLook.cold(null)})) : PLook.rig(); } catch (e) { return mgr ? U.yo3d.mgr() : U.yo3d.player(); } })(), key = plan.key + JSON.stringify(look);
     if (key === V.key) return;
     V.key = key; V.sc = sc;
     var g = new VoxCore.VGrid();

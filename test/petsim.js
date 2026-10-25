@@ -33,4 +33,10 @@ var c = PetSim.CONT[0]; var res = PetSim.contRun(pt, c, "style", 99, function ()
 T(PetSim.contOpen(pt, PetSim.CONT[1]) && !PetSim.contOpen(pt, PetSim.CONT[2]), "contest ladder");
 var mor0 = S.p.mor; pt.bond = 90; pt.mood = 90; PetSim.block(pt); T(S.p.mor >= mor0, "hidden mor");
 T(PetSim.season(pt) && pt.age === 1 && PetSim.stage(pt) === 1, "grow");
+/* 5.7: reloj adelantado años y corregido → la mascota no se queda congelada; caricia brusca; el olvido empieza de cero al practicar */
+var pz = PetSim.fresh("dog", "Reloj"); now += PetSim.DAY * 400; PetSim.tick(pz, now); now -= PetSim.DAY * 400; PetSim.tick(pz, now); var hz0 = pz.n.hun; now += PetSim.H * 5; PetSim.tick(pz, now);
+T(pz.tmax <= now && pz.n.hun < hz0, "clock rebase after big backward jump");
+var pr = PetSim.fresh("cat", "Brusca"); pr.pers.act = 0.2; var a0 = pr.n.aff; T(PetSim.touch(pr, "back", "rough").r === "rough" && pr.n.aff < a0, "rough touch annoys calm pet");
+pr.pers.act = 0.9; T(PetSim.touch(pr, "back", "rough").r === "playful", "rough touch amuses playful pet");
+var pl = PetSim.fresh("dog", "Olvido"); pl.tr.sit = {m: 50, d: 3, ld: 0, lt: 0, last: now - PetSim.DAY * 30, lost: 12, pend: {r: "ok", t: now}}; PetSim.reward(pl, "sit", "pat"); T(pl.tr.sit.lost === 0, "forgetting resets on practice");
 console.log("petsim", ok, "ok,", bad, "fail"); process.exit(bad ? 1 : 0);

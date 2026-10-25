@@ -73,9 +73,9 @@
  "Entrenador": {
   "w": [
    "gx-data.js:9",
+   "ui-shop.js:64",
    "ui.js:1046",
-   "ui.js:1730",
-   "ui-46.js:76"
+   "ui.js:1730"
   ],
   "ctx": "[\"press\", N_(\"Prensa y afición\"), \"🎙️\"], [\"pet\", N_(\"Mascota\"), \"🐾\"], [\"mgr\", N_(\"Entrenador\"), \"📋\"], [\"mini\", N_(\"Minijuegos\"), \"🎮\"],"
  },
@@ -1793,7 +1793,7 @@
  "Trofeos": {
   "w": [
    "ui-gx.js:207",
-   "ui-mgryo.js:75"
+   "ui-mgryo.js:64"
   ],
   "ctx": "var s = '<h2>' + h(tr(\"Trofeos\")) + '</h2><div class=\"stack gxs\">';"
  },
@@ -1830,8 +1830,8 @@
  "Cerrar": {
   "w": [
    "ui-gx.js:229",
-   "ui-gear.js:109",
-   "ui-shop.js:75",
+   "ui-gear.js:119",
+   "ui-shop.js:163",
    "view3d.js:300"
   ],
   "ctx": "return s + '<button class=\"btn wide\" data-a=\"close\">' + h(tr(\"Cerrar\")) + \"</button></div>\";"
@@ -1886,8 +1886,7 @@
  },
  "Botas": {
   "w": [
-   "gx-items.js:13",
-   "ui-life.js:260"
+   "gx-items.js:13"
   ],
   "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
  },
@@ -1912,15 +1911,13 @@
  },
  "Cinta": {
   "w": [
-   "gx-items.js:13",
-   "ui-life.js:262"
+   "gx-items.js:13"
   ],
   "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
  },
  "Guantes": {
   "w": [
-   "gx-items.js:13",
-   "ui-life.js:259"
+   "gx-items.js:13"
   ],
   "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
  },
@@ -1970,7 +1967,8 @@
  },
  "Abrigo": {
   "w": [
-   "gx-items.js:15"
+   "gx-items.js:15",
+   "ui-gear.js:131"
   ],
   "ctx": "m: [[\"suit\", N_(\"Traje\")], [\"coat\", N_(\"Abrigo\")], [\"shoes\", N_(\"Zapatos\")], [\"tie\", N_(\"Corbata\")], [\"glasses\", N_(\"Gafas\")], [\"scarf\", N_(\"Bufanda\")], [\"notes\", N_(\"Libreta\")], [\"watch\", N_(\"Reloj\")]],"
  },
@@ -2010,7 +2008,7 @@
    "pet-items.js:8",
    "pets.js:160"
   ],
-  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Cuerpo\")]]"
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"t\", N_(\"Juguete\")]]"
  },
  "Cara": {
   "w": [
@@ -2019,7 +2017,7 @@
    "pets.js:160",
    "pitch.js:1180"
   ],
-  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Cuerpo\")]]"
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"t\", N_(\"Juguete\")]]"
  },
  "Cuello": {
   "w": [
@@ -2027,14 +2025,22 @@
    "pet-items.js:8",
    "pets.js:160"
   ],
-  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Cuerpo\")]]"
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"t\", N_(\"Juguete\")]]"
  },
  "Cuerpo": {
   "w": [
    "gx-items.js:16",
    "pet-items.js:8"
   ],
-  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Cuerpo\")]]"
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"t\", N_(\"Juguete\")]]"
+ },
+ "Juguete": {
+  "w": [
+   "gx-items.js:16",
+   "pet-items.js:8",
+   "pets.js:160"
+  ],
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"t\", N_(\"Juguete\")]]"
  },
  "Recuperación": {
   "w": [
@@ -2114,7 +2120,7 @@
  "Estilo": {
   "w": [
    "gx-items.js:22",
-   "pet-world.js:707",
+   "pet-world.js:743",
    "ui-pets.js:258"
   ],
   "ctx": "sty: N_(\"Estilo\"), bnd: N_(\"Vínculo\"), joy: N_(\"Ánimo\"), ene: N_(\"Energía\")};"
@@ -2423,7 +2429,7 @@
  "Básicos": {
   "w": [
    "gx-items.js:80",
-   "pet-world.js:633"
+   "pet-world.js:664"
   ],
   "ctx": "[\"ph_basic\", \"phones\", N_(\"Básicos\"), {TIR: 1}, null, 5000, null, {c: \"#1b1d1f\"}],"
  },
@@ -5188,8 +5194,8 @@
  "Jugar": {
   "w": [
    "gx-events.js:189",
-   "pet-world.js:245",
-   "pet-world.js:538",
+   "pet-world.js:259",
+   "pet-world.js:569",
    "ui.js:1427"
   ],
   "ctx": "opts: [{t: N_(\"Jugar\"), p: {att: \"FIS\", b: 0.55, k: 0.01}, ok: {txt: N_(\"Partido de barro y épica. Sales ovacionado.\"), fx: {fans: 3, fit: -4}}, ko: {txt: N_(\"Resbalones y un golpe tonto.\"), fx: {fit: -8}}},"
@@ -6419,7 +6425,7 @@
  "Ajustes": {
   "w": [
    "gx-mevents.js:49",
-   "pet-world.js:318",
+   "pet-world.js:349",
    "ui-sp.js:63"
   ],
   "ctx": "{t: N_(\"Ajustes tácticos en la pizarra\"), p: {st: \"tac\", b: 0.55, k: 0.01}, ok: {txt: N_(\"Dos cambios de posición y el partido es otro.\"), fx: {buff: {v: 1, b: 1, n: N_(\"Ajustes\")}}}, ko: {txt: N_(\"Los jugadores no entie"
@@ -7065,7 +7071,8 @@
  "Equipamiento": {
   "w": [
    "ui-gear.js:75",
-   "ui-gear.js:87"
+   "ui-gear.js:87",
+   "ui-life.js:275"
   ],
   "ctx": "return '<button class=\"card gcard\" data-a=\"gearopen\"><span class=\"gcard-h\"><b>' + h(tr(\"Equipamiento\")) + \"</b><small>\" + h(tot ? tr(\"Tu equipamiento suma {n} puntos.\", {n: Math.round(tot)}) : tr(\"Equípate para sumar a t"
  },
@@ -7083,89 +7090,250 @@
  },
  "Tope": {
   "w": [
-   "ui-gear.js:94"
+   "ui-gear.js:102"
   ],
   "ctx": "return '<div class=\"gs-at\"><span>' + h(statName(k)) + '</span><i class=\"gs-b\"><i style=\"--w:' + Math.round(Math.max(0, v) / lim * 100) + '%\"></i></i><b class=\"' + (v < 0 ? \"neg\" : \"\") + '\">' + (v > 0 ? \"+\" : v < 0 ? \"−\" "
  },
  "tope": {
   "w": [
-   "ui-gear.js:94"
+   "ui-gear.js:102"
   ],
   "ctx": "return '<div class=\"gs-at\"><span>' + h(statName(k)) + '</span><i class=\"gs-b\"><i style=\"--w:' + Math.round(Math.max(0, v) / lim * 100) + '%\"></i></i><b class=\"' + (v < 0 ? \"neg\" : \"\") + '\">' + (v > 0 ? \"+\" : v < 0 ? \"−\" "
  },
  "Aún no llevas nada que sume. Toca una ranura para equiparte.": {
   "w": [
-   "ui-gear.js:95"
+   "ui-gear.js:103"
   ],
   "ctx": "}).join(\"\") : '<p class=\"muted\" style=\"margin:0\">' + h(tr(\"Aún no llevas nada que sume. Toca una ranura para equiparte.\")) + \"</p>\") + \"</div>\";"
  },
  "El equipamiento suma con rendimientos decrecientes: hasta +{a} por atributo y +{t} en total.": {
   "w": [
-   "ui-gear.js:96"
+   "ui-gear.js:104"
   ],
   "ctx": "if (w === \"p\") s += '<p class=\"muted gs-note\">' + h(tr(\"El equipamiento suma con rendimientos decrecientes: hasta +{a} por atributo y +{t} en total.\", {a: GX_CAP.att, t: GX_CAP.total})) + \"</p>\";"
  },
+ "Lo que llevas puesto": {
+  "w": [
+   "ui-gear.js:125"
+  ],
+  "ctx": "return '<label class=\"shp-sel\"><span>' + h(label) + '</span><select data-gck=\"' + k + '\"><option value=\"\">' + h(tr(\"Lo que llevas puesto\")) + \"</option>\" +"
+ },
+ "Para cada ocasión": {
+  "w": [
+   "ui-gear.js:129"
+  ],
+  "ctx": "return '<section class=\"gs-occ\"><h3>' + h(tr(\"Para cada ocasión\")) + '</h3><p class=\"muted gs-note\">' + h(tr(\"Solo cambia lo que se ve: las estadísticas son siempre las de lo que tienes equipado.\")) + '</p><div class=\"sh"
+ },
+ "Solo cambia lo que se ve: las estadísticas son siempre las de lo que tienes equipado.": {
+  "w": [
+   "ui-gear.js:129"
+  ],
+  "ctx": "return '<section class=\"gs-occ\"><h3>' + h(tr(\"Para cada ocasión\")) + '</h3><p class=\"muted gs-note\">' + h(tr(\"Solo cambia lo que se ve: las estadísticas son siempre las de lo que tienes equipado.\")) + '</p><div class=\"sh"
+ },
+ "Partidos importantes": {
+  "w": [
+   "ui-gear.js:130"
+  ],
+  "ctx": "pick(\"big\", tr(\"Partidos importantes\")) + pick(\"train\", tr(\"Entrenamientos\")) +"
+ },
+ "Entrenamientos": {
+  "w": [
+   "ui-gear.js:130"
+  ],
+  "ctx": "pick(\"big\", tr(\"Partidos importantes\")) + pick(\"train\", tr(\"Entrenamientos\")) +"
+ },
+ "Con frío o lluvia": {
+  "w": [
+   "ui-gear.js:131"
+  ],
+  "ctx": "(hasCoat ? '<label class=\"shp-sel\"><span>' + h(tr(\"Abrigo\")) + '</span><select data-gck=\"coat\"><option value=\"cold\"' + (pf.coat !== \"always\" ? \" selected\" : \"\") + \">\" + h(tr(\"Con frío o lluvia\")) + '</option><option valu"
+ },
+ "Siempre": {
+  "w": [
+   "ui-gear.js:131"
+  ],
+  "ctx": "(hasCoat ? '<label class=\"shp-sel\"><span>' + h(tr(\"Abrigo\")) + '</span><select data-gck=\"coat\"><option value=\"cold\"' + (pf.coat !== \"always\" ? \" selected\" : \"\") + \">\" + h(tr(\"Con frío o lluvia\")) + '</option><option valu"
+ },
+ "Faltan: {x}": {
+  "w": [
+   "ui-gear.js:143"
+  ],
+  "ctx": "return lack.length ? '<small class=\"gset-miss\">' + h(tr(\"Faltan: {x}\", {x: lack.map(function (s) { return slotName(s, w); }).join(\", \")})) + \"</small>\" : \"\";"
+ },
+ "Toca «Probar» en una pieza para vértela puesta sin equiparla.": {
+  "w": [
+   "ui-gear.js:148"
+  ],
+  "ctx": "if (!T || T.w !== w) return '<p class=\"muted gs-hint\">' + h(tr(\"Toca «Probar» en una pieza para vértela puesta sin equiparla.\")) + \"</p>\";"
+ },
+ "Sin {x}": {
+  "w": [
+   "ui-gear.js:149"
+  ],
+  "ctx": "var name = T.label || Object.keys(T.eq).map(function (s) { var it = GXI.item(T.eq[s]); return it ? tr(it.n) : tr(\"Sin {x}\", {x: slotName(s, w)}); }).join(\", \");"
+ },
+ "Probando": {
+  "w": [
+   "ui-gear.js:150"
+  ],
+  "ctx": "return '<div class=\"gs-try\"><span class=\"eyebrow\">' + h(tr(\"Probando\")) + \"</span><b>\" + h(name) + \"</b>\" + delta(w, T.eq) +"
+ },
+ "Equipar": {
+  "w": [
+   "ui-gear.js:151",
+   "ui-gear.js:215",
+   "ui-shop.js:191"
+  ],
+  "ctx": "'<div class=\"gpc-a\"><button class=\"btn sm pri\" data-a=\"geartryok\">' + h(tr(\"Equipar\")) + '</button><button class=\"btn sm\" data-a=\"geartryno\">' + h(tr(\"Cancelar\")) + \"</button></div></div>\";"
+ },
+ "Cancelar": {
+  "w": [
+   "ui-gear.js:151",
+   "ui-gear.js:219",
+   "ui-shop.js:193",
+   "events-manager.js:637"
+  ],
+  "ctx": "'<div class=\"gpc-a\"><button class=\"btn sm pri\" data-a=\"geartryok\">' + h(tr(\"Equipar\")) + '</button><button class=\"btn sm\" data-a=\"geartryno\">' + h(tr(\"Cancelar\")) + \"</button></div></div>\";"
+ },
+ "No cambia tus estadísticas.": {
+  "w": [
+   "ui-gear.js:163",
+   "ui-gear.js:245"
+  ],
+  "ctx": "return '<div class=\"gs-delta\">' + (rows || '<p class=\"muted\" style=\"margin:0\">' + h(tr(\"No cambia tus estadísticas.\")) + \"</p>\") + sets + \"</div>\";"
+ },
+ "Quitar todo": {
+  "w": [
+   "ui-gear.js:169"
+  ],
+  "ctx": "var s = '<div class=\"gs-tools\"><button class=\"btn sm\" data-a=\"gearoff\">' + h(tr(\"Quitar todo\")) + '</button><button class=\"btn sm\" data-a=\"gearbest\" aria-expanded=\"' + !!ui.best + '\">' + h(tr(\"Equipar lo mejor\")) + \"</bu"
+ },
+ "Equipar lo mejor": {
+  "w": [
+   "ui-gear.js:169",
+   "ui-gear.js:170"
+  ],
+  "ctx": "var s = '<div class=\"gs-tools\"><button class=\"btn sm\" data-a=\"gearoff\">' + h(tr(\"Quitar todo\")) + '</button><button class=\"btn sm\" data-a=\"gearbest\" aria-expanded=\"' + !!ui.best + '\">' + h(tr(\"Equipar lo mejor\")) + \"</bu"
+ },
+ "Equilibrado": {
+  "w": [
+   "ui-gear.js:170",
+   "ui-gear.js:195",
+   "events-manager.js:490",
+   "club30.js:7"
+  ],
+  "ctx": "if (ui.best) s += '<div class=\"gs-bestk\" role=\"group\" aria-label=\"' + h(tr(\"Equipar lo mejor\")) + '\"><button class=\"chip\" data-a=\"gearbestgo\" data-v=\"\">' + h(tr(\"Equilibrado\")) + \"</button>\" + keys.map(function (k) { ret"
+ },
+ "Conjuntos guardados": {
+  "w": [
+   "ui-gear.js:176"
+  ],
+  "ctx": "var s = '<section class=\"gs-fits\"><h3>' + h(tr(\"Conjuntos guardados\")) + \"</h3>\";"
+ },
+ "Conjunto {n}": {
+  "w": [
+   "ui-gear.js:179"
+  ],
+  "ctx": "return '<div class=\"gfit\"><b>' + h(tr(\"Conjunto {n}\", {n: f.i})) + '</b><span class=\"gfit-ic\">' + ic + '</span><button class=\"btn sm pri\" data-a=\"gearfitwear\" data-v=\"' + i + '\">' + h(tr(\"Ponerse\")) + '</button><button c"
+ },
+ "Ponerse": {
+  "w": [
+   "ui-gear.js:179"
+  ],
+  "ctx": "return '<div class=\"gfit\"><b>' + h(tr(\"Conjunto {n}\", {n: f.i})) + '</b><span class=\"gfit-ic\">' + ic + '</span><button class=\"btn sm pri\" data-a=\"gearfitwear\" data-v=\"' + i + '\">' + h(tr(\"Ponerse\")) + '</button><button c"
+ },
+ "Borrar": {
+  "w": [
+   "ui-gear.js:179",
+   "ui.js:1427",
+   "ui.js:1716"
+  ],
+  "ctx": "return '<div class=\"gfit\"><b>' + h(tr(\"Conjunto {n}\", {n: f.i})) + '</b><span class=\"gfit-ic\">' + ic + '</span><button class=\"btn sm pri\" data-a=\"gearfitwear\" data-v=\"' + i + '\">' + h(tr(\"Ponerse\")) + '</button><button c"
+ },
+ "Guardar lo que llevas": {
+  "w": [
+   "ui-gear.js:181"
+  ],
+  "ctx": "if (L.length < 4) s += '<button class=\"btn wide sm\" data-a=\"gearfitsave\">' + h(tr(\"Guardar lo que llevas\")) + \"</button>\";"
+ },
+ "Ya llevas lo mejor para eso.": {
+  "w": [
+   "ui-gear.js:194"
+  ],
+  "ctx": "if (!Object.keys(diff).length) { U.toast(tr(\"Ya llevas lo mejor para eso.\")); return; }"
+ },
+ "Lo mejor: {x}": {
+  "w": [
+   "ui-gear.js:195"
+  ],
+  "ctx": "PLook.tryOn = {w: w, eq: diff, label: tr(\"Lo mejor: {x}\", {x: v ? statName(v) : tr(\"Equilibrado\")})}; ui.clips = slotClips(Object.keys(diff)); U.renderSheet();"
+ },
  "No tienes ninguna pieza para esta ranura.": {
   "w": [
-   "ui-gear.js:116"
+   "ui-gear.js:209"
   ],
   "ctx": "if (!mine.length) s += '<p class=\"muted\">' + h(tr(\"No tienes ninguna pieza para esta ranura.\")) + \"</p>\";"
  },
  "Frente a lo que llevas:": {
   "w": [
-   "ui-gear.js:120",
-   "ui-shop.js:86"
+   "ui-gear.js:213"
   ],
   "ctx": "'<div class=\"gpc-st\">' + chips(st) + \"</div>\" + (!on && cur ? '<div class=\"gpc-cmp\"><small>' + h(tr(\"Frente a lo que llevas:\")) + \"</small> \" + (chips(st, curSt) || '<span class=\"muted\">' + h(tr(\"igual\")) + \"</span>\") + "
  },
  "igual": {
   "w": [
-   "ui-gear.js:120",
-   "ui-shop.js:86"
+   "ui-gear.js:213"
   ],
   "ctx": "'<div class=\"gpc-st\">' + chips(st) + \"</div>\" + (!on && cur ? '<div class=\"gpc-cmp\"><small>' + h(tr(\"Frente a lo que llevas:\")) + \"</small> \" + (chips(st, curSt) || '<span class=\"muted\">' + h(tr(\"igual\")) + \"</span>\") + "
  },
  "Quitar": {
   "w": [
-   "ui-gear.js:122",
-   "pet-world.js:356",
+   "ui-gear.js:215",
+   "pet-world.js:387",
    "ui-48.js:69"
   ],
-  "ctx": "'<div class=\"gpc-a\"><button class=\"btn sm' + (on ? \"\" : \" pri\") + '\" data-a=\"gearwear\" data-v=\"' + it.id + '\">' + h(on ? tr(\"Quitar\") : tr(\"Equipar\")) + \"</button>\" +"
+  "ctx": "'<div class=\"gpc-a\"><button class=\"btn sm' + (on ? \"\" : \" pri\") + '\" data-a=\"gearwear\" data-v=\"' + it.id + '\">' + h(on ? tr(\"Quitar\") : tr(\"Equipar\")) + \"</button>\" + (on ? \"\" : '<button class=\"btn sm\" data-a=\"geartry\" d"
  },
- "Equipar": {
+ "Probar": {
   "w": [
-   "ui-gear.js:122"
+   "ui-gear.js:215",
+   "pet-world.js:903"
   ],
-  "ctx": "'<div class=\"gpc-a\"><button class=\"btn sm' + (on ? \"\" : \" pri\") + '\" data-a=\"gearwear\" data-v=\"' + it.id + '\">' + h(on ? tr(\"Quitar\") : tr(\"Equipar\")) + \"</button>\" +"
+  "ctx": "'<div class=\"gpc-a\"><button class=\"btn sm' + (on ? \"\" : \" pri\") + '\" data-a=\"gearwear\" data-v=\"' + it.id + '\">' + h(on ? tr(\"Quitar\") : tr(\"Equipar\")) + \"</button>\" + (on ? \"\" : '<button class=\"btn sm\" data-a=\"geartry\" d"
  },
  "Mejorar a {t}": {
   "w": [
-   "ui-gear.js:123"
+   "ui-gear.js:216"
   ],
   "ctx": "(up ? '<button class=\"btn sm\" data-a=\"gearup\" data-v=\"' + it.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + h(tr(\"Mejorar a {t}\", {t: tr(GX_TIERS[up.to].n)})) + \"<small>\" + h(money(up.money)) + \" · \" + up.cu + \" \" + h(tr(\"c"
  },
  "cuero": {
   "w": [
-   "ui-gear.js:123"
+   "ui-gear.js:216"
   ],
   "ctx": "(up ? '<button class=\"btn sm\" data-a=\"gearup\" data-v=\"' + it.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + h(tr(\"Mejorar a {t}\", {t: tr(GX_TIERS[up.to].n)})) + \"<small>\" + h(money(up.money)) + \" · \" + up.cu + \" \" + h(tr(\"c"
  },
  "fibra": {
   "w": [
-   "ui-gear.js:123"
+   "ui-gear.js:216"
   ],
   "ctx": "(up ? '<button class=\"btn sm\" data-a=\"gearup\" data-v=\"' + it.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + h(tr(\"Mejorar a {t}\", {t: tr(GX_TIERS[up.to].n)})) + \"<small>\" + h(money(up.money)) + \" · \" + up.cu + \" \" + h(tr(\"c"
  },
  "Tier máximo": {
   "w": [
-   "ui-gear.js:123"
+   "ui-gear.js:216"
   ],
   "ctx": "(up ? '<button class=\"btn sm\" data-a=\"gearup\" data-v=\"' + it.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + h(tr(\"Mejorar a {t}\", {t: tr(GX_TIERS[up.to].n)})) + \"<small>\" + h(money(up.money)) + \" · \" + up.cu + \" \" + h(tr(\"c"
  },
+ "Confirmar mejora": {
+  "w": [
+   "ui-gear.js:219"
+  ],
+  "ctx": "(on ? upDelta(w, it.id, up.to) : \"\") + '<div class=\"gpc-a\"><button class=\"btn sm pri\" data-a=\"gearupok\" data-v=\"' + it.id + '\">' + h(tr(\"Confirmar mejora\")) + '</button><button class=\"btn sm\" data-a=\"gearupno\">' + h(tr(\""
+ },
  "¡Mejorada!": {
   "w": [
-   "ui-gear.js:137"
+   "ui-gear.js:258"
   ],
   "ctx": "el.innerHTML = '<canvas class=\"gup-fx\" aria-hidden=\"true\"></canvas><canvas class=\"gup-c\" width=\"360\" height=\"360\" aria-hidden=\"true\"></canvas><div class=\"gup-t\"><small>' + h(tr(\"¡Mejorada!\")) + \"</small><b>\" + h(tr(GXI.i"
  },
@@ -7186,20 +7354,20 @@
  },
  "Título": {
   "w": [
-   "ui-mgryo.js:54"
+   "ui-mgryo.js:43"
   ],
   "ctx": "return '<div class=\"gtitle\"><span class=\"eyebrow\">' + h(tr(\"Título\")) + '</span><div class=\"gtitle-l\">' + [[\"\", tr(\"Sin título\")]].concat(L).map(function (t) { return '<button data-a=\"gxtitle\" data-v=\"' + t[0] + '\" aria-"
  },
  "Sin título": {
   "w": [
-   "ui-mgryo.js:54"
+   "ui-mgryo.js:43"
   ],
   "ctx": "return '<div class=\"gtitle\"><span class=\"eyebrow\">' + h(tr(\"Título\")) + '</span><div class=\"gtitle-l\">' + [[\"\", tr(\"Sin título\")]].concat(L).map(function (t) { return '<button data-a=\"gxtitle\" data-v=\"' + t[0] + '\" aria-"
  },
  "Tu míster": {
   "w": [
-   "ui-mgryo.js:63",
-   "ui-mgryo.js:87",
+   "ui-mgryo.js:52",
+   "ui-mgryo.js:76",
    "ui.js:492",
    "ui.js:508"
   ],
@@ -7207,7 +7375,7 @@
  },
  "Prestigio {n}": {
   "w": [
-   "ui-mgryo.js:64",
+   "ui-mgryo.js:53",
    "ui.js:451",
    "ui.js:807"
   ],
@@ -7215,51 +7383,52 @@
  },
  "Estadísticas del míster": {
   "w": [
-   "ui-mgryo.js:65"
+   "ui-mgryo.js:54"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + h(tr(\"Estadísticas del míster\")) + '</h3><p class=\"muted\" style=\"margin:0 0 8px;font-size:var(--fs-xs)\">' + h(tr(\"Crecen con tu trayectoria; la ropa suma un poco más.\")) + '</p><div cl"
  },
  "Crecen con tu trayectoria; la ropa suma un poco más.": {
   "w": [
-   "ui-mgryo.js:65"
+   "ui-mgryo.js:54"
   ],
   "ctx": "s += '<section class=\"card\"><h3>' + h(tr(\"Estadísticas del míster\")) + '</h3><p class=\"muted\" style=\"margin:0 0 8px;font-size:var(--fs-xs)\">' + h(tr(\"Crecen con tu trayectoria; la ropa suma un poco más.\")) + '</p><div cl"
  },
  "Retos del míster": {
   "w": [
-   "ui-mgryo.js:74"
+   "ui-mgryo.js:63"
   ],
   "ctx": "if (typeof GXC !== \"undefined\") { var L = GXC.list().filter(function (c) { return c.who === \"m\"; }), n = L.filter(function (c) { return GXC.done(c.id); }).length; s += '<button class=\"card shcard\" data-a=\"shopopen\" data-"
  },
  "{n} de {t} retos superados. Cada uno desbloquea una pieza exclusiva.": {
   "w": [
-   "ui-mgryo.js:74",
-   "ui-shop.js:102"
+   "ui-mgryo.js:63",
+   "ui-shop.js:213"
   ],
   "ctx": "if (typeof GXC !== \"undefined\") { var L = GXC.list().filter(function (c) { return c.who === \"m\"; }), n = L.filter(function (c) { return GXC.done(c.id); }).length; s += '<button class=\"card shcard\" data-a=\"shopopen\" data-"
  },
  "Tus trofeos de míster, con fecha y partido.": {
   "w": [
-   "ui-mgryo.js:75"
+   "ui-mgryo.js:64"
   ],
   "ctx": "s += '<button class=\"card shcard\" data-a=\"ach\"><span class=\"shcard-ic\"><img src=\"' + GXV.img(\"g\", 64) + '\" alt=\"\" width=\"36\" height=\"36\"></span><span class=\"grow\"><b>' + h(tr(\"Trofeos\")) + \"</b><small>\" + h(tr(\"Tus trofe"
  },
  "Adopta una mascota": {
   "w": [
-   "ui-mgryo.js:81",
+   "ui-mgryo.js:70",
+   "ui-shop.js:156",
    "ui-pets.js:73"
   ],
   "ctx": "if (!pt) return '<button class=\"card petcta\" data-a=\"petopen\"><span class=\"petcta-ic\" aria-hidden=\"true\">🐾</span><span><b>' + h(tr(\"Adopta una mascota\")) + \"</b><small>\" + h(tr(\"Te acompaña en el banquillo, crece contig"
  },
  "Te acompaña en el banquillo, crece contigo y mejora tu ánimo.": {
   "w": [
-   "ui-mgryo.js:81"
+   "ui-mgryo.js:70"
   ],
   "ctx": "if (!pt) return '<button class=\"card petcta\" data-a=\"petopen\"><span class=\"petcta-ic\" aria-hidden=\"true\">🐾</span><span><b>' + h(tr(\"Adopta una mascota\")) + \"</b><small>\" + h(tr(\"Te acompaña en el banquillo, crece contig"
  },
  "Tu mascota": {
   "w": [
-   "ui-mgryo.js:82",
+   "ui-mgryo.js:71",
    "view3d.js:901",
    "pet-world.js:31",
    "ui-pets.js:76"
@@ -7268,156 +7437,394 @@
  },
  "Ropa, estadísticas, vitrina y mascota": {
   "w": [
-   "ui-mgryo.js:87",
+   "ui-mgryo.js:76",
    "ui.js:492"
   ],
   "ctx": "return '<button class=\"card myo-mini\" data-a=\"tab\" data-t=\"yo\"><img src=\"' + pose(\"idle\") + '\" alt=\"\" width=\"40\" height=\"50\"><span class=\"grow\"><b>' + h(tr(\"Tu míster\")) + \"</b><small>\" + h(tr(\"Ropa, estadísticas, vitrin"
  },
  "Tu jugador en 3D": {
   "w": [
-   "ui-yo3d.js:36"
+   "ui-yo3d.js:25"
   ],
   "ctx": "var cv = document.createElement(\"canvas\"); cv.className = \"yo3d-cv\"; cv.setAttribute(\"aria-label\", tr(\"Tu jugador en 3D\"));"
  },
+ "Desbloqueado: {x}": {
+  "w": [
+   "ui-yo3d.js:105",
+   "ui-shop.js:217"
+  ],
+  "ctx": "try { if (S.p && S.mode !== \"mgr\" && S.p.life && S.p.life.gear) { var nw = PLook.unlocks(); if (nw.length) { U.persist(); nw.forEach(function (it) { U.toast(tr(\"Desbloqueado: {x}\", {x: tr(it.n)})); }); } } } catch (e) {}"
+ },
  "Títulos {a} / {b}": {
   "w": [
-   "ui-shop.js:38"
+   "ui-shop.js:59"
   ],
   "ctx": "if (lk.k === \"tro\") { var n = (S.mode === \"mgr\" ? m : p).trophies.length; return [tr(\"Títulos {a} / {b}\", {a: n, b: lk.v}), n / lk.v]; }"
  },
  "Necesitas ser capitán": {
   "w": [
-   "ui-shop.js:39"
+   "ui-shop.js:60"
   ],
   "ctx": "if (lk.k === \"cap\") return [tr(\"Necesitas ser capitán\"), 0];"
  },
  "Bloqueado": {
   "w": [
-   "ui-shop.js:41"
+   "ui-shop.js:62",
+   "ui-shop.js:141"
   ],
   "ctx": "return [tr(\"Bloqueado\"), 0];"
  },
+ "Destacados": {
+  "w": [
+   "ui-shop.js:64"
+  ],
+  "ctx": "var TABS = [[\"feat\", N_(\"Destacados\")], [\"p\", N_(\"Jugador\")], [\"m\", N_(\"Entrenador\")], [\"pet\", N_(\"Mascota\")], [\"chal\", N_(\"Retos\")]];"
+ },
+ "Jugador": {
+  "w": [
+   "ui-shop.js:64",
+   "ui-shop.js:155"
+  ],
+  "ctx": "var TABS = [[\"feat\", N_(\"Destacados\")], [\"p\", N_(\"Jugador\")], [\"m\", N_(\"Entrenador\")], [\"pet\", N_(\"Mascota\")], [\"chal\", N_(\"Retos\")]];"
+ },
+ "Retos": {
+  "w": [
+   "ui-shop.js:64",
+   "ui-shop.js:157",
+   "ui-sp.js:63"
+  ],
+  "ctx": "var TABS = [[\"feat\", N_(\"Destacados\")], [\"p\", N_(\"Jugador\")], [\"m\", N_(\"Entrenador\")], [\"pet\", N_(\"Mascota\")], [\"chal\", N_(\"Retos\")]];"
+ },
  "Buscar más en la tienda": {
   "w": [
-   "ui-shop.js:45"
+   "ui-shop.js:66"
   ],
   "ctx": "U.gearShopLink = function (w, sl) { return '<button class=\"btn wide sm\" data-a=\"shopopen\" data-v=\"' + (w === \"m\" ? \"m\" : \"p\") + '\" data-s=\"' + sl + '\">' + h(tr(\"Buscar más en la tienda\")) + \"</button>\"; };"
  },
+ "Buscar": {
+  "w": [
+   "ui-shop.js:119",
+   "ui-shop.js:119"
+  ],
+  "ctx": "if (ids.length > 12) s += '<input class=\"shp-q\" type=\"search\" inputmode=\"search\" placeholder=\"' + h(tr(\"Buscar\")) + '\" aria-label=\"' + h(tr(\"Buscar\")) + '\" value=\"' + h(ui.q || \"\") + '\">';"
+ },
+ "Ranura": {
+  "w": [
+   "ui-shop.js:122"
+  ],
+  "ctx": "if (slots.length > 1) s += '<div class=\"shp-slots\" role=\"group\" aria-label=\"' + h(tr(\"Ranura\")) + '\"><button class=\"chip\" data-a=\"shopslot\" data-v=\"\" aria-pressed=\"' + !ui.slot + '\">' + h(tr(\"Todo\")) + \"</button>\" +"
+ },
+ "Todo": {
+  "w": [
+   "ui-shop.js:122"
+  ],
+  "ctx": "if (slots.length > 1) s += '<div class=\"shp-slots\" role=\"group\" aria-label=\"' + h(tr(\"Ranura\")) + '\"><button class=\"chip\" data-a=\"shopslot\" data-v=\"\" aria-pressed=\"' + !ui.slot + '\">' + h(tr(\"Todo\")) + \"</button>\" +"
+ },
+ "Me lo puedo permitir": {
+  "w": [
+   "ui-shop.js:124"
+  ],
+  "ctx": "s += '<div class=\"shp-flt\"><button class=\"chip\" data-a=\"shopf\" data-v=\"afford\" aria-pressed=\"' + !!f.afford + '\">' + h(tr(\"Me lo puedo permitir\")) + '</button><button class=\"chip\" data-a=\"shopf\" data-v=\"fresh\" aria-press"
+ },
+ "Nuevo": {
+  "w": [
+   "ui-shop.js:124",
+   "ui-shop.js:140"
+  ],
+  "ctx": "s += '<div class=\"shp-flt\"><button class=\"chip\" data-a=\"shopf\" data-v=\"afford\" aria-pressed=\"' + !!f.afford + '\">' + h(tr(\"Me lo puedo permitir\")) + '</button><button class=\"chip\" data-a=\"shopf\" data-v=\"fresh\" aria-press"
+ },
+ "Orden": {
+  "w": [
+   "ui-shop.js:128"
+  ],
+  "ctx": "s += '<div class=\"shp-sels\">' + sel(\"ord\", tr(\"Orden\"), [[\"\", tr(\"Recomendado\")], [\"pa\", tr(\"Precio: de menos a más\")], [\"pd\", tr(\"Precio: de más a menos\")], [\"st\", tr(\"Estadísticas\")], [\"ti\", tr(\"Tier\")]], f.ord) +"
+ },
+ "Recomendado": {
+  "w": [
+   "ui-shop.js:128"
+  ],
+  "ctx": "s += '<div class=\"shp-sels\">' + sel(\"ord\", tr(\"Orden\"), [[\"\", tr(\"Recomendado\")], [\"pa\", tr(\"Precio: de menos a más\")], [\"pd\", tr(\"Precio: de más a menos\")], [\"st\", tr(\"Estadísticas\")], [\"ti\", tr(\"Tier\")]], f.ord) +"
+ },
+ "Precio: de menos a más": {
+  "w": [
+   "ui-shop.js:128"
+  ],
+  "ctx": "s += '<div class=\"shp-sels\">' + sel(\"ord\", tr(\"Orden\"), [[\"\", tr(\"Recomendado\")], [\"pa\", tr(\"Precio: de menos a más\")], [\"pd\", tr(\"Precio: de más a menos\")], [\"st\", tr(\"Estadísticas\")], [\"ti\", tr(\"Tier\")]], f.ord) +"
+ },
+ "Precio: de más a menos": {
+  "w": [
+   "ui-shop.js:128"
+  ],
+  "ctx": "s += '<div class=\"shp-sels\">' + sel(\"ord\", tr(\"Orden\"), [[\"\", tr(\"Recomendado\")], [\"pa\", tr(\"Precio: de menos a más\")], [\"pd\", tr(\"Precio: de más a menos\")], [\"st\", tr(\"Estadísticas\")], [\"ti\", tr(\"Tier\")]], f.ord) +"
+ },
+ "Estadísticas": {
+  "w": [
+   "ui-shop.js:128"
+  ],
+  "ctx": "s += '<div class=\"shp-sels\">' + sel(\"ord\", tr(\"Orden\"), [[\"\", tr(\"Recomendado\")], [\"pa\", tr(\"Precio: de menos a más\")], [\"pd\", tr(\"Precio: de más a menos\")], [\"st\", tr(\"Estadísticas\")], [\"ti\", tr(\"Tier\")]], f.ord) +"
+ },
+ "Tier": {
+  "w": [
+   "ui-shop.js:128"
+  ],
+  "ctx": "s += '<div class=\"shp-sels\">' + sel(\"ord\", tr(\"Orden\"), [[\"\", tr(\"Recomendado\")], [\"pa\", tr(\"Precio: de menos a más\")], [\"pd\", tr(\"Precio: de más a menos\")], [\"st\", tr(\"Estadísticas\")], [\"ti\", tr(\"Tier\")]], f.ord) +"
+ },
+ "Estadística": {
+  "w": [
+   "ui-shop.js:129"
+  ],
+  "ctx": "sel(\"st\", tr(\"Estadística\"), [[\"\", tr(\"Cualquiera\")]].concat(stk.map(function (k) { return [k, statName(k)]; })), f.st) +"
+ },
+ "Cualquiera": {
+  "w": [
+   "ui-shop.js:129",
+   "ui-shop.js:130"
+  ],
+  "ctx": "sel(\"st\", tr(\"Estadística\"), [[\"\", tr(\"Cualquiera\")]].concat(stk.map(function (k) { return [k, statName(k)]; })), f.st) +"
+ },
+ "Conjunto": {
+  "w": [
+   "ui-shop.js:130"
+  ],
+  "ctx": "(sets.length ? sel(\"set\", tr(\"Conjunto\"), [[\"\", tr(\"Cualquiera\")]].concat(sets.map(function (x) { return [x.k, tr(x.n)]; })), f.set) : \"\") + \"</div>\";"
+ },
+ "Nada coincide con lo que buscas.": {
+  "w": [
+   "ui-shop.js:135"
+  ],
+  "ctx": "if (!ids.length) return '<div class=\"shp-grid\"><p class=\"muted shp-none\">' + h(tr(\"Nada coincide con lo que buscas.\")) + ' <button class=\"btn sm\" data-a=\"shopclr\">' + h(tr(\"Quitar filtros\")) + \"</button></p></div>\";"
+ },
+ "Quitar filtros": {
+  "w": [
+   "ui-shop.js:135"
+  ],
+  "ctx": "if (!ids.length) return '<div class=\"shp-grid\"><p class=\"muted shp-none\">' + h(tr(\"Nada coincide con lo que buscas.\")) + ' <button class=\"btn sm\" data-a=\"shopclr\">' + h(tr(\"Quitar filtros\")) + \"</button></p></div>\";"
+ },
+ "Destacado": {
+  "w": [
+   "ui-shop.js:140"
+  ],
+  "ctx": "var badge = feat ? '<em class=\"shb f\">' + h(tr(\"Destacado\")) + \"</em>\" : off ? '<em class=\"shb o\">−30 %</em>' : !own && isNew(id) ? '<em class=\"shb n\">' + h(tr(\"Nuevo\")) + \"</em>\" : \"\";"
+ },
+ "Equipado": {
+  "w": [
+   "ui-shop.js:141",
+   "ui-shop.js:190"
+  ],
+  "ctx": "var state = eq ? tr(\"Equipado\") : own ? tr(\"En propiedad\") : lk ? tr(\"Bloqueado\") : \"\";"
+ },
+ "En propiedad": {
+  "w": [
+   "ui-shop.js:141",
+   "ui-shop.js:190"
+  ],
+  "ctx": "var state = eq ? tr(\"Equipado\") : own ? tr(\"En propiedad\") : lk ? tr(\"Bloqueado\") : \"\";"
+ },
  "Tienda": {
   "w": [
-   "ui-shop.js:60",
-   "ui-shop.js:177"
+   "ui-shop.js:151",
+   "ui-shop.js:311"
   ],
   "ctx": "var s = \"<h2>\" + h(tr(\"Tienda\")) + '</h2><div class=\"stack shp\">';"
  },
  "Las existencias cambian cada día.": {
   "w": [
-   "ui-shop.js:62"
+   "ui-shop.js:153"
   ],
-  "ctx": "s += '<div class=\"shp-top\"><small class=\"muted\">' + h(tr(\"Las existencias cambian cada día.\")) + '</small><b class=\"shp-money\">' + h(fmtMoney(pr ? pr.money : 0)) + \"</b></div>\";"
+  "ctx": "s += '<div class=\"shp-top\"><small class=\"muted\">' + h(tr(\"Las existencias cambian cada día.\")) + '</small><b class=\"shp-money num\">' + h(fmtMoney(pr ? pr.money : 0)) + \"</b></div>\";"
  },
  "La ropa de entrenador estará disponible cuando te sientes en un banquillo.": {
   "w": [
-   "ui-shop.js:64"
+   "ui-shop.js:155"
   ],
-  "ctx": "else if (tab === \"m\" && S.mode !== \"mgr\") s += '<p class=\"muted\">' + h(tr(\"La ropa de entrenador estará disponible cuando te sientes en un banquillo.\")) + \"</p>\";"
+  "ctx": "else if (tab === \"m\" && S.mode !== \"mgr\") s += '<p class=\"muted\">' + h(tr(\"La ropa de entrenador estará disponible cuando te sientes en un banquillo.\")) + '</p><button class=\"btn wide\" data-a=\"shoptab\" data-v=\"p\">' + h(t"
  },
  "Adopta una mascota para comprarle accesorios.": {
   "w": [
-   "ui-shop.js:65"
+   "ui-shop.js:156"
   ],
-  "ctx": "else if (tab === \"pet\" && !petNow()) s += '<p class=\"muted\">' + h(tr(\"Adopta una mascota para comprarle accesorios.\")) + \"</p>\";"
+  "ctx": "else if (tab === \"pet\" && !petNow()) s += '<p class=\"muted\">' + h(tr(\"Adopta una mascota para comprarle accesorios.\")) + '</p><button class=\"btn wide\" data-a=\"petopen\">🐾 ' + h(tr(\"Adopta una mascota\")) + \"</button>\";"
  },
  "Hoy no queda nada por aquí: vuelve mañana.": {
   "w": [
-   "ui-shop.js:66"
+   "ui-shop.js:157"
   ],
-  "ctx": "else if (!ids.length) s += '<p class=\"muted\">' + h(tr(\"Hoy no queda nada por aquí: vuelve mañana.\")) + \"</p>\";"
+  "ctx": "else if (!all.length) s += '<p class=\"muted\">' + h(tr(\"Hoy no queda nada por aquí: vuelve mañana.\")) + '</p><button class=\"btn wide\" data-a=\"shoptab\" data-v=\"chal\">' + h(tr(\"Retos\")) + \"</button>\";"
  },
- "Destacado": {
+ "Para los que viven a la espalda del defensa.": {
   "w": [
-   "ui-shop.js:72"
+   "ui-shop.js:166"
   ],
-  "ctx": "(feat ? '<em class=\"shb f\">' + h(tr(\"Destacado\")) + \"</em>\" : off ? '<em class=\"shb o\">−30 %</em>' : \"\") + (lk ? '<i class=\"shl\" aria-hidden=\"true\">🔒</i>' : own ? '<i class=\"shl\" aria-hidden=\"true\">✓</i>' : \"\") + \"</but"
+  "ctx": "var SETD = {ray: N_(\"Para los que viven a la espalda del defensa.\"), can: N_(\"Para los que no saben chutar flojo.\"), mag: N_(\"Para los que juegan con la pelota pegada al pie.\"),"
  },
- "Probar": {
+ "Para los que no saben chutar flojo.": {
   "w": [
-   "ui-shop.js:91",
-   "pet-world.js:867"
+   "ui-shop.js:166"
   ],
-  "ctx": "if (!pet && w === \"p\" && !own) s += '<button class=\"btn sm\" data-a=\"shoptry\" aria-pressed=\"' + !!U.ui().sh.tryOn + '\">' + h(tr(\"Probar\")) + \"</button>\";"
+  "ctx": "var SETD = {ray: N_(\"Para los que viven a la espalda del defensa.\"), can: N_(\"Para los que no saben chutar flojo.\"), mag: N_(\"Para los que juegan con la pelota pegada al pie.\"),"
  },
- "Ya es tuya": {
+ "Para los que juegan con la pelota pegada al pie.": {
   "w": [
-   "ui-shop.js:92"
+   "ui-shop.js:166"
   ],
-  "ctx": "if (own) s += '<span class=\"gt-max\">' + h(tr(\"Ya es tuya\")) + \"</span>\";"
+  "ctx": "var SETD = {ray: N_(\"Para los que viven a la espalda del defensa.\"), can: N_(\"Para los que no saben chutar flojo.\"), mag: N_(\"Para los que juegan con la pelota pegada al pie.\"),"
+ },
+ "Para los que no dejan pasar ni el aire.": {
+  "w": [
+   "ui-shop.js:167"
+  ],
+  "ctx": "wal: N_(\"Para los que no dejan pasar ni el aire.\"), tit: N_(\"Para los que aguantan los noventa y la prórroga.\"), led: N_(\"Para los que hablan en el túnel y los demás escuchan.\"),"
+ },
+ "Para los que aguantan los noventa y la prórroga.": {
+  "w": [
+   "ui-shop.js:167"
+  ],
+  "ctx": "wal: N_(\"Para los que no dejan pasar ni el aire.\"), tit: N_(\"Para los que aguantan los noventa y la prórroga.\"), led: N_(\"Para los que hablan en el túnel y los demás escuchan.\"),"
+ },
+ "Para los que hablan en el túnel y los demás escuchan.": {
+  "w": [
+   "ui-shop.js:167"
+  ],
+  "ctx": "wal: N_(\"Para los que no dejan pasar ni el aire.\"), tit: N_(\"Para los que aguantan los noventa y la prórroga.\"), led: N_(\"Para los que hablan en el túnel y los demás escuchan.\"),"
+ },
+ "Para los que viven bajo los palos.": {
+  "w": [
+   "ui-shop.js:168"
+  ],
+  "ctx": "gua: N_(\"Para los que viven bajo los palos.\"), mcl: N_(\"Para el míster que lo apunta todo.\"), mbr: N_(\"Para el míster que cierra fichajes con un apretón de manos.\"), mtr: N_(\"Para el míster que entrena con los jugadores."
+ },
+ "Para el míster que lo apunta todo.": {
+  "w": [
+   "ui-shop.js:168"
+  ],
+  "ctx": "gua: N_(\"Para los que viven bajo los palos.\"), mcl: N_(\"Para el míster que lo apunta todo.\"), mbr: N_(\"Para el míster que cierra fichajes con un apretón de manos.\"), mtr: N_(\"Para el míster que entrena con los jugadores."
+ },
+ "Para el míster que cierra fichajes con un apretón de manos.": {
+  "w": [
+   "ui-shop.js:168"
+  ],
+  "ctx": "gua: N_(\"Para los que viven bajo los palos.\"), mcl: N_(\"Para el míster que lo apunta todo.\"), mbr: N_(\"Para el míster que cierra fichajes con un apretón de manos.\"), mtr: N_(\"Para el míster que entrena con los jugadores."
+ },
+ "Para el míster que entrena con los jugadores.": {
+  "w": [
+   "ui-shop.js:168"
+  ],
+  "ctx": "gua: N_(\"Para los que viven bajo los palos.\"), mcl: N_(\"Para el míster que lo apunta todo.\"), mbr: N_(\"Para el míster que cierra fichajes con un apretón de manos.\"), mtr: N_(\"Para el míster que entrena con los jugadores."
+ },
+ "Pieza": {
+  "w": [
+   "ui-shop.js:177"
+  ],
+  "ctx": "if (canMe) s += '<div class=\"seg shv-view\"><button data-a=\"shopview\" data-v=\"item\" aria-pressed=\"' + !me + '\">' + h(tr(\"Pieza\")) + '</button><button data-a=\"shopview\" data-v=\"me\" aria-pressed=\"' + !!me + '\">' + h(tr(\"En "
+ },
+ "En ti": {
+  "w": [
+   "ui-shop.js:177"
+  ],
+  "ctx": "if (canMe) s += '<div class=\"seg shv-view\"><button data-a=\"shopview\" data-v=\"item\" aria-pressed=\"' + !me + '\">' + h(tr(\"Pieza\")) + '</button><button data-a=\"shopview\" data-v=\"me\" aria-pressed=\"' + !!me + '\">' + h(tr(\"En "
+ },
+ "3 piezas": {
+  "w": [
+   "ui-shop.js:186"
+  ],
+  "ctx": "if (set) s += '<small class=\"shv-set\">' + h(tr(set.n)) + \" · \" + h(tr(\"3 piezas\")) + \": \" + chips(set.b3 || {}) + \" · \" + h(tr(\"completa\")) + \": \" + chips(set.bAll || {}) + \"</small>\";"
+ },
+ "completa": {
+  "w": [
+   "ui-shop.js:186"
+  ],
+  "ctx": "if (set) s += '<small class=\"shv-set\">' + h(tr(set.n)) + \" · \" + h(tr(\"3 piezas\")) + \": \" + chips(set.b3 || {}) + \" · \" + h(tr(\"completa\")) + \": \" + chips(set.bAll || {}) + \"</small>\";"
+ },
+ "Equipar ya": {
+  "w": [
+   "ui-shop.js:191"
+  ],
+  "ctx": "if (!on && !petOn && (pet ? pt : w === \"p\" ? S.mode !== \"mgr\" : S.mode === \"mgr\")) s += '<button class=\"btn sm pri\" data-a=\"shopwear\" data-v=\"' + id + '\">' + h(ui.just === id ? tr(\"Equipar ya\") : tr(\"Equipar\")) + \"</butt"
+ },
+ "Precio": {
+  "w": [
+   "ui-shop.js:193",
+   "ui-45.js:55"
+  ],
+  "ctx": "if (ui.confirm === id) s += '<div class=\"shconf\" role=\"group\"><span>' + h(tr(\"Precio\")) + ' <b class=\"num\">' + h(fmtMoney(price)) + \"</b> · \" + h(tr(\"Te quedarán\")) + ' <b class=\"num\">' + h(fmtMoney(money - price)) + '</"
+ },
+ "Te quedarán": {
+  "w": [
+   "ui-shop.js:193"
+  ],
+  "ctx": "if (ui.confirm === id) s += '<div class=\"shconf\" role=\"group\"><span>' + h(tr(\"Precio\")) + ' <b class=\"num\">' + h(fmtMoney(price)) + \"</b> · \" + h(tr(\"Te quedarán\")) + ' <b class=\"num\">' + h(fmtMoney(money - price)) + '</"
+ },
+ "Confirmar compra": {
+  "w": [
+   "ui-shop.js:193"
+  ],
+  "ctx": "if (ui.confirm === id) s += '<div class=\"shconf\" role=\"group\"><span>' + h(tr(\"Precio\")) + ' <b class=\"num\">' + h(fmtMoney(price)) + \"</b> · \" + h(tr(\"Te quedarán\")) + ' <b class=\"num\">' + h(fmtMoney(money - price)) + '</"
  },
  "Comprar": {
   "w": [
-   "ui-shop.js:93"
+   "ui-shop.js:194"
   ],
-  "ctx": "else if (!lk) s += '<button class=\"btn sm pri\" data-a=\"shopbuy\" data-v=\"' + id + '\"' + (money >= price ? \"\" : \" disabled\") + \">\" + h(tr(\"Comprar\")) + \" <b>\" + (price < base ? \"<s>\" + h(fmtMoney(base)) + \"</s> \" : \"\") + h"
+  "ctx": "else if (money >= price) s += '<button class=\"btn sm pri\" data-a=\"shopbuy\" data-v=\"' + id + '\">' + h(tr(\"Comprar\")) + ' <b class=\"num\">' + (price < base ? \"<s>\" + h(fmtMoney(base)) + \"</s> \" : \"\") + h(fmtMoney(price)) + "
  },
  "Te faltan {m}": {
   "w": [
-   "ui-shop.js:93"
+   "ui-shop.js:195"
   ],
-  "ctx": "else if (!lk) s += '<button class=\"btn sm pri\" data-a=\"shopbuy\" data-v=\"' + id + '\"' + (money >= price ? \"\" : \" disabled\") + \">\" + h(tr(\"Comprar\")) + \" <b>\" + (price < base ? \"<s>\" + h(fmtMoney(base)) + \"</s> \" : \"\") + h"
- },
- "Desbloqueado: {x}": {
-  "w": [
-   "ui-shop.js:106"
-  ],
-  "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
+  "ctx": "else s += '<button class=\"btn sm\" disabled>' + h(tr(\"Te faltan {m}\", {m: fmtMoney(price - money)})) + \"</button>\";"
  },
  "Regalo: {x}": {
   "w": [
-   "ui-shop.js:106"
+   "ui-shop.js:217"
   ],
   "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
  },
  "Superado": {
   "w": [
-   "ui-shop.js:106"
+   "ui-shop.js:217"
   ],
   "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
  },
  "Desbloquea: {x}": {
   "w": [
-   "ui-shop.js:106"
+   "ui-shop.js:217"
   ],
   "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
  },
  "Regalo para tu mascota": {
   "w": [
-   "ui-shop.js:106"
+   "ui-shop.js:217"
   ],
   "ctx": "(ok ? '<small class=\"gxd\">' + h(it ? tr(\"Desbloqueado: {x}\", {x: tr(it.n)}) : gift ? tr(\"Regalo: {x}\", {x: tr(GXI.item(gift).n)}) : tr(\"Superado\")) + \"</small>\" : '<span class=\"gxp\"><i style=\"--w:' + Math.round(pr[0] / p"
  },
  "No te llega el dinero.": {
   "w": [
-   "ui-shop.js:129",
-   "ui-life.js:224",
-   "ui-life.js:232"
+   "ui-shop.js:253",
+   "ui-life.js:235",
+   "ui-life.js:243"
   ],
-  "ctx": "if (!r || !r.ok) { U.toast(r && r.poor ? tr(\"No te llega el dinero.\") : tr(\"No se puede comprar.\")); return; }"
+  "ctx": "if (!r || !r.ok) { ui.busy = false; U.toast(r && r.poor ? tr(\"No te llega el dinero.\") : tr(\"No se puede comprar.\")); U.renderSheet(); return; }"
  },
  "No se puede comprar.": {
   "w": [
-   "ui-shop.js:129"
+   "ui-shop.js:253"
   ],
-  "ctx": "if (!r || !r.ok) { U.toast(r && r.poor ? tr(\"No te llega el dinero.\") : tr(\"No se puede comprar.\")); return; }"
+  "ctx": "if (!r || !r.ok) { ui.busy = false; U.toast(r && r.poor ? tr(\"No te llega el dinero.\") : tr(\"No se puede comprar.\")); U.renderSheet(); return; }"
+ },
+ "Equipado: {x}": {
+  "w": [
+   "ui-shop.js:264"
+  ],
+  "ctx": "U.toast(tr(\"Equipado: {x}\", {x: tr(it.n)}));"
  },
  "¡Es tuya!": {
   "w": [
-   "ui-shop.js:155"
+   "ui-shop.js:289"
   ],
   "ctx": "el.innerHTML = '<canvas class=\"gup-fx\" aria-hidden=\"true\"></canvas><canvas class=\"gup-c\" width=\"360\" height=\"360\" aria-hidden=\"true\"></canvas><div class=\"gup-t\"><small>' + h(tr(\"¡Es tuya!\")) + \"</small><b>\" + h(tr(it.n))"
  },
  "Destacado del día y {n} ofertas. Las existencias cambian cada día.": {
   "w": [
-   "ui-shop.js:177"
+   "ui-shop.js:311"
   ],
   "ctx": "function entry() { var f = GXI.featured(), o = GXI.offers().length; return '<button class=\"card shcard\" data-a=\"shopopen\" data-v=\"feat\"><span class=\"shcard-ic\">' + (f ? '<img src=\"' + icon(f, 96) + '\" alt=\"\" width=\"40\" h"
  },
@@ -7570,16 +7977,16 @@
  "Tu jugador": {
   "w": [
    "view3d.js:553",
-   "ui-life.js:142"
+   "ui-life.js:153"
   ],
   "ctx": "title: o.title || tr(\"Tu jugador\"), kicker: o.kicker || tr(\"Vestuario\"), from: o.from, dist: 4.1, target: [0, 1.05, 0], pitch0: 0.16, yaw0: -0.5,"
  },
  "Celebración": {
   "w": [
    "view3d.js:554",
-   "ui-life.js:145",
-   "ui-life.js:256",
-   "ui-life.js:258"
+   "ui-life.js:156",
+   "ui-life.js:269",
+   "ui-life.js:270"
   ],
   "ctx": "buttons: '<button class=\"btn\" data-v3d=\"cel\">' + h(tr(\"Celebración\")) + \"</button>\","
  },
@@ -7652,13 +8059,6 @@
  "Cola": {
   "w": [
    "pet-items.js:8"
-  ],
-  "ctx": "var PET_SLOTS2 = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"k\", N_(\"Espalda\")], [\"p\", N_(\"Patas\")], [\"l\", N_(\"Cola\")], [\"t\", N_(\"Juguete\")]];"
- },
- "Juguete": {
-  "w": [
-   "pet-items.js:8",
-   "pets.js:160"
   ],
   "ctx": "var PET_SLOTS2 = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"k\", N_(\"Espalda\")], [\"p\", N_(\"Patas\")], [\"l\", N_(\"Cola\")], [\"t\", N_(\"Juguete\")]];"
  },
@@ -8266,44 +8666,44 @@
  },
  "Parque": {
   "w": [
-   "pet-sim.js:317"
+   "pet-sim.js:328"
   ],
   "ctx": "{k: \"park\", n: N_(\"Parque\"), min: 0, ene: 18, len: 180},"
  },
  "Barrio": {
   "w": [
-   "pet-sim.js:318"
+   "pet-sim.js:329"
   ],
   "ctx": "{k: \"barrio\", n: N_(\"Barrio\"), min: 0, ene: 14, len: 160},"
  },
  "Ciudad deportiva": {
   "w": [
-   "pet-sim.js:319",
+   "pet-sim.js:330",
    "ui-club30.js:30"
   ],
   "ctx": "{k: \"training\", n: N_(\"Ciudad deportiva\"), min: 1, ene: 22, len: 200},"
  },
  "Alrededores del estadio": {
   "w": [
-   "pet-sim.js:320"
+   "pet-sim.js:331"
   ],
   "ctx": "{k: \"stadium\", n: N_(\"Alrededores del estadio\"), min: 2, ene: 20, len: 200}"
  },
  "Concurso local": {
   "w": [
-   "pet-sim.js:355"
+   "pet-sim.js:366"
   ],
   "ctx": "{k: \"local\", n: N_(\"Concurso local\"), fee: 60, prize: 400, rivals: [28, 46], need: null, un: \"cont_local\", tro: \"trophy_local\"},"
  },
  "Concurso comarcal": {
   "w": [
-   "pet-sim.js:356"
+   "pet-sim.js:367"
   ],
   "ctx": "{k: \"com\", n: N_(\"Concurso comarcal\"), fee: 180, prize: 1500, rivals: [48, 66], need: \"local\", un: \"cont_com\", tro: \"trophy_com\"},"
  },
  "Concurso nacional": {
   "w": [
-   "pet-sim.js:357"
+   "pet-sim.js:368"
   ],
   "ctx": "{k: \"nac\", n: N_(\"Concurso nacional\"), fee: 600, prize: 6000, rivals: [66, 86], need: \"com\", un: \"cont_nac\", tro: \"trophy_nac\"}"
  },
@@ -8411,25 +8811,31 @@
  },
  "¡Se ha despertado!": {
   "w": [
-   "pet-world.js:233"
+   "pet-world.js:239"
   ],
   "ctx": "if (r.r === \"wake\") { PetSim.wake(pt); a.clip = null; a.play(\"yawn\"); a.say(\"blink\", 1); a.baseExpr = PetSim.expr(pt); say(tr(\"¡Se ha despertado!\")); return; }"
  },
  "¡Ahí le encanta!": {
   "w": [
-   "pet-world.js:235"
+   "pet-world.js:241"
   ],
   "ctx": "if (r.r === \"love\") { a.say(\"love\", 1.2); fx(\"heart\", h.p, 2); if (!a.clip) a.play(h.zone === \"belly\" ? \"happy\" : \"nuzzle\"); sfx(\"pop\"); hap(\"tap\"); if (r.found) say(tr(\"¡Ahí le encanta!\"), 2.4); }"
  },
+ "Más suave…": {
+  "w": [
+   "pet-world.js:250"
+  ],
+  "ctx": "else if (r.r === \"rough\") { a.say(\"sad\", 1.1); if (!red()) a.flinch = 1.6; if (!a.clip) a.play(\"shake\"); say(tr(\"Más suave…\"), 1.6); hap(\"bad\"); try { PetAudio.voice(pt.k, PetSim.stage(pt), \"sad\"); } catch (e) {} }"
+ },
  "Ahí no le gusta…": {
   "w": [
-   "pet-world.js:237"
+   "pet-world.js:251"
   ],
   "ctx": "else if (r.r === \"dislike\") { a.say(\"angry\", 1); if (!a.clip) a.play(\"shake\"); say(tr(\"Ahí no le gusta…\")); hap(\"bad\"); }"
  },
  "Casa": {
   "w": [
-   "pet-world.js:245",
+   "pet-world.js:259",
    "ui-draw.js:78",
    "ui-draw.js:197"
   ],
@@ -8437,124 +8843,124 @@
  },
  "Cuidar": {
   "w": [
-   "pet-world.js:245",
+   "pet-world.js:259",
    "ui-pets.js:258"
   ],
   "ctx": "var BAR = [[\"home\", \"🏡\", N_(\"Casa\")], [\"care\", \"🍖\", N_(\"Cuidar\")], [\"play\", \"🎾\", N_(\"Jugar\")], [\"train\", \"⭐\", N_(\"Trucos\")], [\"dress\", \"👕\", N_(\"Vestir\")], [\"out\", \"🧭\", N_(\"Salir\")]];"
  },
  "Trucos": {
   "w": [
-   "pet-world.js:245",
-   "pet-world.js:634",
-   "pet-world.js:708"
+   "pet-world.js:259",
+   "pet-world.js:665",
+   "pet-world.js:744"
   ],
   "ctx": "var BAR = [[\"home\", \"🏡\", N_(\"Casa\")], [\"care\", \"🍖\", N_(\"Cuidar\")], [\"play\", \"🎾\", N_(\"Jugar\")], [\"train\", \"⭐\", N_(\"Trucos\")], [\"dress\", \"👕\", N_(\"Vestir\")], [\"out\", \"🧭\", N_(\"Salir\")]];"
  },
  "Vestir": {
   "w": [
-   "pet-world.js:245"
+   "pet-world.js:259"
   ],
   "ctx": "var BAR = [[\"home\", \"🏡\", N_(\"Casa\")], [\"care\", \"🍖\", N_(\"Cuidar\")], [\"play\", \"🎾\", N_(\"Jugar\")], [\"train\", \"⭐\", N_(\"Trucos\")], [\"dress\", \"👕\", N_(\"Vestir\")], [\"out\", \"🧭\", N_(\"Salir\")]];"
  },
  "Salir": {
   "w": [
-   "pet-world.js:245"
+   "pet-world.js:259"
   ],
   "ctx": "var BAR = [[\"home\", \"🏡\", N_(\"Casa\")], [\"care\", \"🍖\", N_(\"Cuidar\")], [\"play\", \"🎾\", N_(\"Jugar\")], [\"train\", \"⭐\", N_(\"Trucos\")], [\"dress\", \"👕\", N_(\"Vestir\")], [\"out\", \"🧭\", N_(\"Salir\")]];"
  },
  "Foto": {
   "w": [
-   "pet-world.js:318",
-   "pet-world.js:538"
+   "pet-world.js:349",
+   "pet-world.js:569"
   ],
   "ctx": "panel('<div class=\"pw-row\">' + [[\"photo\", \"📷\", N_(\"Foto\")], [\"album\", \"🖼️\", N_(\"Álbum\")], [\"iso\", \"🧊\", N_(\"Vista\")], [\"deco\", \"🪴\", N_(\"Decorar\")], [\"prefs\", \"⚙️\", N_(\"Ajustes\")]].map(function (b) { return '<button cl"
  },
  "Álbum": {
   "w": [
-   "pet-world.js:318",
-   "pet-world.js:899"
+   "pet-world.js:349",
+   "pet-world.js:935"
   ],
   "ctx": "panel('<div class=\"pw-row\">' + [[\"photo\", \"📷\", N_(\"Foto\")], [\"album\", \"🖼️\", N_(\"Álbum\")], [\"iso\", \"🧊\", N_(\"Vista\")], [\"deco\", \"🪴\", N_(\"Decorar\")], [\"prefs\", \"⚙️\", N_(\"Ajustes\")]].map(function (b) { return '<button cl"
  },
  "Vista": {
   "w": [
-   "pet-world.js:318"
+   "pet-world.js:349"
   ],
   "ctx": "panel('<div class=\"pw-row\">' + [[\"photo\", \"📷\", N_(\"Foto\")], [\"album\", \"🖼️\", N_(\"Álbum\")], [\"iso\", \"🧊\", N_(\"Vista\")], [\"deco\", \"🪴\", N_(\"Decorar\")], [\"prefs\", \"⚙️\", N_(\"Ajustes\")]].map(function (b) { return '<button cl"
  },
  "Decorar": {
   "w": [
-   "pet-world.js:318"
+   "pet-world.js:349"
   ],
   "ctx": "panel('<div class=\"pw-row\">' + [[\"photo\", \"📷\", N_(\"Foto\")], [\"album\", \"🖼️\", N_(\"Álbum\")], [\"iso\", \"🧊\", N_(\"Vista\")], [\"deco\", \"🪴\", N_(\"Decorar\")], [\"prefs\", \"⚙️\", N_(\"Ajustes\")]].map(function (b) { return '<button cl"
  },
  "Acaríciale con el dedo · toca el suelo para llamarle · arrastra para girar": {
   "w": [
-   "pet-world.js:319"
+   "pet-world.js:350"
   ],
   "ctx": "'<p class=\"pw-hint\">' + esc(tr(\"Acaríciale con el dedo · toca el suelo para llamarle · arrastra para girar\")) + \"</p>\");"
  },
  "Toca el jardín para colocarlo": {
   "w": [
-   "pet-world.js:343"
+   "pet-world.js:374"
   ],
   "ctx": "if (k === \"decopick\") { W.decoPick = v; cap(tr(\"Toca el jardín para colocarlo\")); return; }"
  },
  "Se aplicará al volver a entrar": {
   "w": [
-   "pet-world.js:346"
+   "pet-world.js:377"
   ],
   "ctx": "if (k === \"q\") { PetStyle.setQuality(v); prefsView(); cap(tr(\"Se aplicará al volver a entrar\")); return; }"
  },
  "Decorar el jardín": {
   "w": [
-   "pet-world.js:354"
+   "pet-world.js:385"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Decorar el jardín\")) + '</div><div class=\"pw-grid\">' + list.map(function (d) {"
  },
  "Mover": {
   "w": [
-   "pet-world.js:356"
+   "pet-world.js:387"
   ],
   "ctx": "return '<div class=\"pw-item' + (on ? \" on\" : \"\") + '\"><b>' + esc(tr(d.n)) + '</b><div class=\"pw-row\">' + '<button class=\"btn\" data-pw=\"decopick\" data-v=\"' + d.id + '\">' + esc(on ? tr(\"Mover\") : tr(\"Colocar\")) + \"</button"
  },
  "Colocar": {
   "w": [
-   "pet-world.js:356"
+   "pet-world.js:387"
   ],
   "ctx": "return '<div class=\"pw-item' + (on ? \" on\" : \"\") + '\"><b>' + esc(tr(d.n)) + '</b><div class=\"pw-row\">' + '<button class=\"btn\" data-pw=\"decopick\" data-v=\"' + d.id + '\">' + esc(on ? tr(\"Mover\") : tr(\"Colocar\")) + \"</button"
  },
  "Más decoración en la tienda.": {
   "w": [
-   "pet-world.js:357"
+   "pet-world.js:388"
   ],
   "ctx": "}).join(\"\") + '</div><p class=\"pw-hint\">' + esc(tr(\"Más decoración en la tienda.\")) + '</p><button class=\"btn wide\" data-pw=\"back\">' + esc(tr(\"Listo\")) + \"</button>\");"
  },
  "Listo": {
   "w": [
-   "pet-world.js:357",
-   "pet-world.js:363",
-   "pet-world.js:412",
+   "pet-world.js:388",
+   "pet-world.js:394",
+   "pet-world.js:443",
    "ui-pets.js:202"
   ],
   "ctx": "}).join(\"\") + '</div><p class=\"pw-hint\">' + esc(tr(\"Más decoración en la tienda.\")) + '</p><button class=\"btn wide\" data-pw=\"back\">' + esc(tr(\"Listo\")) + \"</button>\");"
  },
  "Ajustes de la mascota": {
   "w": [
-   "pet-world.js:361"
+   "pet-world.js:392"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Ajustes de la mascota\")) + '</div><div class=\"lbl\">' + esc(tr(\"Gráficos\")) + '</div><div class=\"seg\">' + [[\"auto\", N_(\"Automático\")], [\"high\", N_(\"Alta\")], [\"low\", N_(\"Baja\")]].map(fu"
  },
  "Gráficos": {
   "w": [
-   "pet-world.js:361",
+   "pet-world.js:392",
    "ui-sp.js:83"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Ajustes de la mascota\")) + '</div><div class=\"lbl\">' + esc(tr(\"Gráficos\")) + '</div><div class=\"seg\">' + [[\"auto\", N_(\"Automático\")], [\"high\", N_(\"Alta\")], [\"low\", N_(\"Baja\")]].map(fu"
  },
  "Automático": {
   "w": [
-   "pet-world.js:361",
+   "pet-world.js:392",
    "ui-sp.js:83",
    "ui-45.js:67"
   ],
@@ -8562,7 +8968,7 @@
  },
  "Alta": {
   "w": [
-   "pet-world.js:361",
+   "pet-world.js:392",
    "ui-sp.js:83",
    "engine-extra.js:805",
    "press-ctx.js:26"
@@ -8571,7 +8977,7 @@
  },
  "Baja": {
   "w": [
-   "pet-world.js:361",
+   "pet-world.js:392",
    "ui-sp.js:83",
    "engine-extra.js:805",
    "press-ctx.js:26"
@@ -8580,326 +8986,326 @@
  },
  "Sonidos de la mascota": {
   "w": [
-   "pet-world.js:362"
+   "pet-world.js:393"
   ],
   "ctx": "'<div class=\"lbl\">' + esc(tr(\"Sonidos de la mascota\")) + '</div><div class=\"seg\">' + [[0, N_(\"No\")], [0.35, N_(\"Bajo\")], [0.7, N_(\"Medio\")], [1, N_(\"Alto\")]].map(function (x) { return '<button data-pw=\"vol\" data-v=\"' + x"
  },
  "No": {
   "w": [
-   "pet-world.js:362",
+   "pet-world.js:393",
    "ui-sp.js:82"
   ],
   "ctx": "'<div class=\"lbl\">' + esc(tr(\"Sonidos de la mascota\")) + '</div><div class=\"seg\">' + [[0, N_(\"No\")], [0.35, N_(\"Bajo\")], [0.7, N_(\"Medio\")], [1, N_(\"Alto\")]].map(function (x) { return '<button data-pw=\"vol\" data-v=\"' + x"
  },
  "Bajo": {
   "w": [
-   "pet-world.js:362"
+   "pet-world.js:393"
   ],
   "ctx": "'<div class=\"lbl\">' + esc(tr(\"Sonidos de la mascota\")) + '</div><div class=\"seg\">' + [[0, N_(\"No\")], [0.35, N_(\"Bajo\")], [0.7, N_(\"Medio\")], [1, N_(\"Alto\")]].map(function (x) { return '<button data-pw=\"vol\" data-v=\"' + x"
  },
  "Medio": {
   "w": [
-   "pet-world.js:362"
+   "pet-world.js:393"
   ],
   "ctx": "'<div class=\"lbl\">' + esc(tr(\"Sonidos de la mascota\")) + '</div><div class=\"seg\">' + [[0, N_(\"No\")], [0.35, N_(\"Bajo\")], [0.7, N_(\"Medio\")], [1, N_(\"Alto\")]].map(function (x) { return '<button data-pw=\"vol\" data-v=\"' + x"
  },
  "Alto": {
   "w": [
-   "pet-world.js:362",
+   "pet-world.js:393",
    "engine-extra.js:808"
   ],
   "ctx": "'<div class=\"lbl\">' + esc(tr(\"Sonidos de la mascota\")) + '</div><div class=\"seg\">' + [[0, N_(\"No\")], [0.35, N_(\"Bajo\")], [0.7, N_(\"Medio\")], [1, N_(\"Alto\")]].map(function (x) { return '<button data-pw=\"vol\" data-v=\"' + x"
  },
  "¡Brilla como nunca!": {
   "w": [
-   "pet-world.js:385"
+   "pet-world.js:416"
   ],
   "ctx": "if (r.ok && r.shine >= 1 && !W.brushing.done) { W.brushing.done = true; sfx(\"sparkle\"); cap(tr(\"¡Brilla como nunca!\")); fx(\"star\", null, 4); }"
  },
  "Está durmiendo": {
   "w": [
-   "pet-world.js:392"
+   "pet-world.js:423"
   ],
   "ctx": "if (pt.sleep) return cap(tr(\"Está durmiendo\"));"
  },
  "¡Está lleno!": {
   "w": [
-   "pet-world.js:394"
+   "pet-world.js:425"
   ],
   "ctx": "if (r.full) return say(tr(\"¡Está lleno!\"));"
  },
  "¡Su comida favorita!": {
   "w": [
-   "pet-world.js:398"
+   "pet-world.js:429"
   ],
   "ctx": "a.moveTo(bp ? bp.x : 0.3, (bp ? bp.z : 0.2) + 0.12, true, function () { a.yaw = PI; a.play(\"eat\"); W.eating = {t: 3, d: 3}; if (r.fav) { say(tr(\"¡Su comida favorita!\")); fx(\"heart\", null, 3); } });"
  },
  "No tiene sed": {
   "w": [
-   "pet-world.js:402"
+   "pet-world.js:433"
   ],
   "ctx": "var rw = PetSim.water(pt); if (rw.full) return say(tr(\"No tiene sed\")); homeProps(); sfx(\"splash\");"
  },
  "Necesitas un cepillo: lo tienes en la tienda.": {
   "w": [
-   "pet-world.js:409"
+   "pet-world.js:440"
   ],
   "ctx": "if (!invN(\"brush\")) { cap(tr(\"Necesitas un cepillo: lo tienes en la tienda.\")); return; }"
  },
  "Cepíllale con el dedo": {
   "w": [
-   "pet-world.js:412"
+   "pet-world.js:443"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Cepíllale con el dedo\")) + '</div><div class=\"pw-prog\"><i style=\"width:' + Math.round((pt.shine || 0) * 100) + '%\"></i></div><button class=\"btn wide\" data-pw=\"brushend\">' + esc(tr(\"Li"
  },
  "¡No tiene sueño!": {
   "w": [
-   "pet-world.js:417"
+   "pet-world.js:448"
   ],
   "ctx": "var rb = PetSim.toSleep(pt); if (rb.awake) { say(tr(\"¡No tiene sueño!\")); a.play(\"happy\"); return; }"
  },
  "Cuidados": {
   "w": [
-   "pet-world.js:428"
+   "pet-world.js:459"
   ],
   "ctx": "var s = '<div class=\"pw-h\">' + esc(tr(\"Cuidados\")) + \"</div>\";"
  },
  "Comprar comida": {
   "w": [
-   "pet-world.js:430"
+   "pet-world.js:461"
   ],
   "ctx": "(foods.length ? \"\" : '<button class=\"pw-chip\" data-pw=\"shop\">🛍️ ' + esc(tr(\"Comprar comida\")) + \"</button>\") + \"</div>\";"
  },
  "Agua": {
   "w": [
-   "pet-world.js:431"
+   "pet-world.js:462"
   ],
   "ctx": "s += '<div class=\"pw-row\"><button class=\"pw-chip\" data-pw=\"water\">💧 ' + esc(tr(\"Agua\")) + '</button><button class=\"pw-chip\" data-pw=\"bath\">🛁 ' + esc(tr(\"Baño\")) + (invN(\"shampoo\") ? \" ×\" + invN(\"shampoo\") : \"\") + '</bu"
  },
  "Baño": {
   "w": [
-   "pet-world.js:431"
+   "pet-world.js:462"
   ],
   "ctx": "s += '<div class=\"pw-row\"><button class=\"pw-chip\" data-pw=\"water\">💧 ' + esc(tr(\"Agua\")) + '</button><button class=\"pw-chip\" data-pw=\"bath\">🛁 ' + esc(tr(\"Baño\")) + (invN(\"shampoo\") ? \" ×\" + invN(\"shampoo\") : \"\") + '</bu"
  },
  "Cepillar": {
   "w": [
-   "pet-world.js:431"
+   "pet-world.js:462"
   ],
   "ctx": "s += '<div class=\"pw-row\"><button class=\"pw-chip\" data-pw=\"water\">💧 ' + esc(tr(\"Agua\")) + '</button><button class=\"pw-chip\" data-pw=\"bath\">🛁 ' + esc(tr(\"Baño\")) + (invN(\"shampoo\") ? \" ×\" + invN(\"shampoo\") : \"\") + '</bu"
  },
  "Despertar": {
   "w": [
-   "pet-world.js:432"
+   "pet-world.js:463"
   ],
   "ctx": "(pt.sleep ? '<button class=\"pw-chip\" data-pw=\"wake\">☀️ ' + esc(tr(\"Despertar\")) + \"</button>\" : '<button class=\"pw-chip\" data-pw=\"bed\">🛏️ ' + esc(tr(\"A dormir\")) + \"</button>\") + \"</div>\";"
  },
  "A dormir": {
   "w": [
-   "pet-world.js:432"
+   "pet-world.js:463"
   ],
   "ctx": "(pt.sleep ? '<button class=\"pw-chip\" data-pw=\"wake\">☀️ ' + esc(tr(\"Despertar\")) + \"</button>\" : '<button class=\"pw-chip\" data-pw=\"bed\">🛏️ ' + esc(tr(\"A dormir\")) + \"</button>\") + \"</div>\";"
  },
  "No le hace mucha gracia…": {
   "w": [
-   "pet-world.js:443"
+   "pet-world.js:474"
   ],
   "ctx": "if (W.pt.pers.ind > 0.65 && W.pt.k !== \"dog\") { a.say(\"angry\", 1.5); say(tr(\"No le hace mucha gracia…\")); }"
  },
  "Hora del baño": {
   "w": [
-   "pet-world.js:470"
+   "pet-world.js:501"
   ],
   "ctx": "var B = cur.bath, s = '<div class=\"pw-h\">' + esc(tr(\"Hora del baño\")) + \"</div>\";"
  },
  "Frota con el dedo para hacer espuma.": {
   "w": [
-   "pet-world.js:471"
+   "pet-world.js:502"
   ],
   "ctx": "if (B.step === 0) s += '<p class=\"pw-hint\">' + esc(tr(\"Frota con el dedo para hacer espuma.\")) + '</p><div class=\"pw-prog\"><i style=\"width:' + Math.round(B.p * 100) + '%\"></i></div>';"
  },
  "Ahora aclara: pasa el dedo por encima para la ducha.": {
   "w": [
-   "pet-world.js:472"
+   "pet-world.js:503"
   ],
   "ctx": "else if (B.step === 1) s += '<p class=\"pw-hint\">' + esc(tr(\"Ahora aclara: pasa el dedo por encima para la ducha.\")) + '</p><div class=\"pw-prog\"><i style=\"width:0%\"></i></div>';"
  },
  "¡Que se sacuda!": {
   "w": [
-   "pet-world.js:473"
+   "pet-world.js:504"
   ],
   "ctx": "else if (B.step === 2) s += '<p class=\"pw-hint\">' + esc(tr(\"¡Que se sacuda!\")) + '</p><button class=\"go\" data-pw=\"dry\">' + esc(tr(\"Sacudirse\")) + \"</button>\";"
  },
  "Sacudirse": {
   "w": [
-   "pet-world.js:473"
+   "pet-world.js:504"
   ],
   "ctx": "else if (B.step === 2) s += '<p class=\"pw-hint\">' + esc(tr(\"¡Que se sacuda!\")) + '</p><button class=\"go\" data-pw=\"dry\">' + esc(tr(\"Sacudirse\")) + \"</button>\";"
  },
  "Limpio, aunque con champú quedaría perfecto.": {
   "w": [
-   "pet-world.js:474"
+   "pet-world.js:505"
   ],
   "ctx": "else s += '<p class=\"pw-hint\">' + esc(r && !r.shampoo ? tr(\"Limpio, aunque con champú quedaría perfecto.\") : tr(\"¡Limpio y oliendo de maravilla!\")) + '</p><button class=\"btn wide\" data-pw=\"back\">' + esc(tr(\"Volver\")) + \""
  },
  "¡Limpio y oliendo de maravilla!": {
   "w": [
-   "pet-world.js:474"
+   "pet-world.js:505"
   ],
   "ctx": "else s += '<p class=\"pw-hint\">' + esc(r && !r.shampoo ? tr(\"Limpio, aunque con champú quedaría perfecto.\") : tr(\"¡Limpio y oliendo de maravilla!\")) + '</p><button class=\"btn wide\" data-pw=\"back\">' + esc(tr(\"Volver\")) + \""
  },
  "Volver": {
   "w": [
-   "pet-world.js:474",
-   "pet-world.js:709",
-   "pet-world.js:835",
-   "pet-world.js:874"
+   "pet-world.js:505",
+   "pet-world.js:745",
+   "pet-world.js:871",
+   "pet-world.js:910"
   ],
   "ctx": "else s += '<p class=\"pw-hint\">' + esc(r && !r.shampoo ? tr(\"Limpio, aunque con champú quedaría perfecto.\") : tr(\"¡Limpio y oliendo de maravilla!\")) + '</p><button class=\"btn wide\" data-pw=\"back\">' + esc(tr(\"Volver\")) + \""
  },
  "Está muy cansado…": {
   "w": [
-   "pet-world.js:495",
-   "pet-world.js:588"
+   "pet-world.js:526",
+   "pet-world.js:619"
   ],
   "ctx": "if (!a.goal && !a.clip && !a.held) { if (pt.n.ene < 12) { b.state = \"rest\"; a.play(\"lie\"); say(tr(\"Está muy cansado…\")); return; } a.moveTo(b.x, b.z, true); a.lookAt([b.x, 0, b.z], 1); b.state = \"chase\"; }"
  },
  "Arrastra el juguete y suéltalo para lanzarlo": {
   "w": [
-   "pet-world.js:530"
+   "pet-world.js:561"
   ],
   "ctx": "cap(tr(\"Arrastra el juguete y suéltalo para lanzarlo\")); return;"
  },
  "Más juguetes": {
   "w": [
-   "pet-world.js:538"
+   "pet-world.js:569"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Jugar\")) + '</div><div class=\"pw-row\">' + toys.map(function (t) { return '<button class=\"pw-chip\" data-pw=\"toy\" data-v=\"' + t.id + '\">' + esc(tr(t.n)) + \"</button>\"; }).join(\"\") + '<b"
  },
  "No conoce esa señal": {
   "w": [
-   "pet-world.js:571"
+   "pet-world.js:602"
   ],
   "ctx": "if (list.length) command(list[0].k); else cap(tr(\"No conoce esa señal\"));"
  },
  "Casi…": {
   "w": [
-   "pet-world.js:591"
+   "pet-world.js:622"
   ],
   "ctx": "else if (r.r === \"half\") { a.play(\"halfsit\", {done: function () { T2.win = 2.5; trainView(); }}); say(tr(\"Casi…\")); }"
  },
  "Ha hecho otro truco": {
   "w": [
-   "pet-world.js:592"
+   "pet-world.js:623"
   ],
   "ctx": "else if (r.r === \"other\") { var oc = r.other === \"dead\" ? \"dead\" : r.other; a.play(PetRig.CLIPS[oc] ? oc : \"spin\", {done: function () { T2.k = null; trainView(); }}); say(tr(\"Ha hecho otro truco\")); }"
  },
  "Se ha despistado": {
   "w": [
-   "pet-world.js:593"
+   "pet-world.js:624"
   ],
   "ctx": "else if (r.r === \"distracted\") { a.play(\"distract\", {done: function () { T2.k = null; trainView(); }}); say(tr(\"Se ha despistado\")); a.say(\"curious\", 1.2); }"
  },
  "¡Uy! Casi": {
   "w": [
-   "pet-world.js:594"
+   "pet-world.js:625"
   ],
   "ctx": "else { a.play(\"fall\", {done: function () { T2.k = null; trainView(); }}); a.say(\"dizzy\", 1); say(tr(\"¡Uy! Casi\")); }"
  },
  "¡Truco dominado!": {
   "w": [
-   "pet-world.js:620"
+   "pet-world.js:651"
   ],
   "ctx": "if (r.up && r.tier === 3) { cap(tr(\"¡Truco dominado!\"), 3); fx(\"star\", null, 5); sfx(\"success\"); }"
  },
  "¡Ya casi lo domina!": {
   "w": [
-   "pet-world.js:621"
+   "pet-world.js:652"
   ],
   "ctx": "else if (r.up && r.tier === 2) cap(tr(\"¡Ya casi lo domina!\"), 2.6);"
  },
  "Por hoy ya ha aprendido bastante. Mañana, más.": {
   "w": [
-   "pet-world.js:622"
+   "pet-world.js:653"
   ],
   "ctx": "else if (r.capped) cap(tr(\"Por hoy ya ha aprendido bastante. Mañana, más.\"), 3);"
  },
  "¡Prémiale ya!": {
   "w": [
-   "pet-world.js:629"
+   "pet-world.js:660"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"¡Prémiale ya!\")) + '</div><div class=\"pw-row\"><button class=\"go\" data-pw=\"rew\" data-v=\"pat\">💗 ' + esc(tr(\"Caricia\")) + '</button><button class=\"go\" data-pw=\"rew\" data-v=\"treat\"' + (("
  },
  "Caricia": {
   "w": [
-   "pet-world.js:629"
+   "pet-world.js:660"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"¡Prémiale ya!\")) + '</div><div class=\"pw-row\"><button class=\"go\" data-pw=\"rew\" data-v=\"pat\">💗 ' + esc(tr(\"Caricia\")) + '</button><button class=\"go\" data-pw=\"rew\" data-v=\"treat\"' + (("
  },
  "Premio": {
   "w": [
-   "pet-world.js:629"
+   "pet-world.js:660"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"¡Prémiale ya!\")) + '</div><div class=\"pw-row\"><button class=\"go\" data-pw=\"rew\" data-v=\"pat\">💗 ' + esc(tr(\"Caricia\")) + '</button><button class=\"go\" data-pw=\"rew\" data-v=\"treat\"' + (("
  },
  "Futboleros": {
   "w": [
-   "pet-world.js:633"
+   "pet-world.js:664"
   ],
   "ctx": "var cats = [[\"b\", N_(\"Básicos\")], [\"f\", N_(\"Futboleros\")], [\"s\", N_(\"Especiales\")]];"
  },
  "Especiales": {
   "w": [
-   "pet-world.js:633"
+   "pet-world.js:664"
   ],
   "ctx": "var cats = [[\"b\", N_(\"Básicos\")], [\"f\", N_(\"Futboleros\")], [\"s\", N_(\"Especiales\")]];"
  },
  "Da la orden y prémiale justo después de que lo haga. Practicad en días distintos.": {
   "w": [
-   "pet-world.js:634"
+   "pet-world.js:665"
   ],
   "ctx": "var s = '<div class=\"pw-h\">' + esc(tr(\"Trucos\")) + '</div><p class=\"pw-hint\">' + esc(tr(\"Da la orden y prémiale justo después de que lo haga. Practicad en días distintos.\")) + \"</p>\";"
  },
  "Con más vínculo aprenderá trucos especiales.": {
   "w": [
-   "pet-world.js:639"
+   "pet-world.js:670"
   ],
   "ctx": "if (locked.length) s += '<p class=\"pw-hint\">' + esc(tr(\"Con más vínculo aprenderá trucos especiales.\")) + \"</p>\";"
  },
  "También puedes dibujar la señal en la pantalla.": {
   "w": [
-   "pet-world.js:640"
+   "pet-world.js:671"
   ],
   "ctx": "s += '<p class=\"pw-hint\">' + esc(tr(\"También puedes dibujar la señal en la pantalla.\")) + \"</p>\";"
  },
  "¡Le encanta!": {
   "w": [
-   "pet-world.js:659"
+   "pet-world.js:690"
   ],
   "ctx": "if (pt.eq[petItem(v).s] === v) { var lk = PetSim.accLike(pt, v); if (lk > 0) { a.say(\"love\", 1.4); fx(\"heart\", null, 3); say(tr(\"¡Le encanta!\")); sfx(\"sparkle\"); a.clip = null; a.play(\"happy\"); } else if (lk < 0) { a.say"
  },
  "No le convence…": {
   "w": [
-   "pet-world.js:659"
+   "pet-world.js:690"
   ],
   "ctx": "if (pt.eq[petItem(v).s] === v) { var lk = PetSim.accLike(pt, v); if (lk > 0) { a.say(\"love\", 1.4); fx(\"heart\", null, 3); say(tr(\"¡Le encanta!\")); sfx(\"sparkle\"); a.clip = null; a.play(\"happy\"); } else if (lk < 0) { a.say"
  },
  "Ahora se llama {pet}.": {
   "w": [
-   "pet-world.js:663",
+   "pet-world.js:694",
    "ui-pets.js:114"
   ],
   "ctx": "if (k === \"name\") { var i = W.el.querySelector(\"#pwrn\"); if (i && petRename(i.value)) { hud(); cap(tr(\"Ahora se llama {pet}.\", {pet: pt.nm})); persist(); } return; }"
  },
  "Pelaje": {
   "w": [
-   "pet-world.js:668"
+   "pet-world.js:701"
   ],
   "ctx": "var W = cur, pt = W.pt, sl = W.slot, s = '<div class=\"pw-tabs\" role=\"tablist\">' + PET_SLOTS2.map(function (x) { return '<button role=\"tab\" data-pw=\"slot\" data-v=\"' + x[0] + '\" aria-selected=\"' + (sl === x[0]) + '\">' + es"
  },
  "Nombre": {
   "w": [
-   "pet-world.js:671",
+   "pet-world.js:704",
    "ui.js:1456",
    "ui.js:1514",
    "ui.js:1720"
@@ -8908,7 +9314,7 @@
  },
  "Cambiar nombre": {
   "w": [
-   "pet-world.js:671",
+   "pet-world.js:704",
    "ui.js:1720",
    "ui.js:1768",
    "ui-pets.js:148"
@@ -8917,256 +9323,262 @@
  },
  "Todavía no tienes nada para esta parte.": {
   "w": [
-   "pet-world.js:676"
+   "pet-world.js:709"
   ],
   "ctx": "if (!have.length) s += '<p class=\"pw-hint\">' + esc(tr(\"Todavía no tienes nada para esta parte.\")) + \"</p>\";"
  },
+ "Lo que lleva suma: {x}": {
+  "w": [
+   "pet-world.js:712"
+  ],
+  "ctx": "if (tk.length) s += '<p class=\"pw-hint pw-sum\">' + esc(tr(\"Lo que lleva suma: {x}\", {x: tk.map(function (k) { return \"+\" + Math.round(tb[k]) + \" \" + tr(GX_STATN[k] || k); }).join(\" · \")})) + \"</p>\";"
+ },
  "Ir a la tienda": {
   "w": [
-   "pet-world.js:677"
+   "pet-world.js:713"
   ],
   "ctx": "s += '<button class=\"btn wide\" data-pw=\"shop\">🛍️ ' + esc(tr(\"Ir a la tienda\")) + \"</button>\";"
  },
  "Paseos": {
   "w": [
-   "pet-world.js:695"
+   "pet-world.js:731"
   ],
   "ctx": "var W = cur, pt = W.pt, s = '<div class=\"pw-h\">' + esc(tr(\"Paseos\")) + '</div>' + (PetSim.canWalk(pt) ? \"\" : '<p class=\"pw-hint\">' + esc(tr(\"Prefiere quedarse en casa: nada de paseos.\")) + \"</p>\") + '<div class=\"pw-grid\""
  },
  "Prefiere quedarse en casa: nada de paseos.": {
   "w": [
-   "pet-world.js:695"
+   "pet-world.js:731"
   ],
   "ctx": "var W = cur, pt = W.pt, s = '<div class=\"pw-h\">' + esc(tr(\"Paseos\")) + '</div>' + (PetSim.canWalk(pt) ? \"\" : '<p class=\"pw-hint\">' + esc(tr(\"Prefiere quedarse en casa: nada de paseos.\")) + \"</p>\") + '<div class=\"pw-grid\""
  },
  "Se desbloquea paseando": {
   "w": [
-   "pet-world.js:696"
+   "pet-world.js:732"
   ],
   "ctx": "s += PetSim.ROUTES.map(function (r) { var ok = PetSim.routeOk(pt, r), ready = PetSim.walkReady(pt, r.k); return '<button class=\"pw-item\" data-pw=\"walk\" data-v=\"' + r.k + '\"' + (ok && ready ? \"\" : \" disabled\") + \"><b>\" + "
  },
  "Listo para salir": {
   "w": [
-   "pet-world.js:696"
+   "pet-world.js:732"
   ],
   "ctx": "s += PetSim.ROUTES.map(function (r) { var ok = PetSim.routeOk(pt, r), ready = PetSim.walkReady(pt, r.k); return '<button class=\"pw-item\" data-pw=\"walk\" data-v=\"' + r.k + '\"' + (ok && ready ? \"\" : \" disabled\") + \"><b>\" + "
  },
  "Descansando del último paseo": {
   "w": [
-   "pet-world.js:696"
+   "pet-world.js:732"
   ],
   "ctx": "s += PetSim.ROUTES.map(function (r) { var ok = PetSim.routeOk(pt, r), ready = PetSim.walkReady(pt, r.k); return '<button class=\"pw-item\" data-pw=\"walk\" data-v=\"' + r.k + '\"' + (ok && ready ? \"\" : \" disabled\") + \"><b>\" + "
  },
  "Concursos": {
   "w": [
-   "pet-world.js:697"
+   "pet-world.js:733"
   ],
   "ctx": "s += '</div><div class=\"pw-h\">' + esc(tr(\"Concursos\")) + '</div><div class=\"pw-grid\">';"
  },
  "Gana el anterior para entrar": {
   "w": [
-   "pet-world.js:698"
+   "pet-world.js:734"
   ],
   "ctx": "s += PetSim.CONT.map(function (c) { var ok = PetSim.contOpen(pt, c), ready = PetSim.contReady(pt, c); return '<button class=\"pw-item\" data-pw=\"cont\" data-v=\"' + c.k + '\"' + (ok && ready ? \"\" : \" disabled\") + \"><b>\" + (pt"
  },
  "Inscripción: {v}": {
   "w": [
-   "pet-world.js:698"
+   "pet-world.js:734"
   ],
   "ctx": "s += PetSim.CONT.map(function (c) { var ok = PetSim.contOpen(pt, c), ready = PetSim.contReady(pt, c); return '<button class=\"pw-item\" data-pw=\"cont\" data-v=\"' + c.k + '\"' + (ok && ready ? \"\" : \" disabled\") + \"><b>\" + (pt"
  },
  "Vuelve mañana": {
   "w": [
-   "pet-world.js:698"
+   "pet-world.js:734"
   ],
   "ctx": "s += PetSim.CONT.map(function (c) { var ok = PetSim.contOpen(pt, c), ready = PetSim.contReady(pt, c); return '<button class=\"pw-item\" data-pw=\"cont\" data-v=\"' + c.k + '\"' + (ok && ready ? \"\" : \" disabled\") + \"><b>\" + (pt"
  },
  "Tienda de mascotas": {
   "w": [
-   "pet-world.js:699",
-   "pet-world.js:865"
+   "pet-world.js:735",
+   "pet-world.js:901"
   ],
   "ctx": "s += '</div><button class=\"btn wide\" data-pw=\"shop\">🛍️ ' + esc(tr(\"Tienda de mascotas\")) + \" · \" + esc(money()) + \"</button>\";"
  },
  "deportivo": {
   "w": [
-   "pet-world.js:704"
+   "pet-world.js:740"
   ],
   "ctx": "var TH = {sporty: N_(\"deportivo\"), cute: N_(\"tierno\"), cozy: N_(\"cómodo\"), regal: N_(\"elegante\"), silly: N_(\"divertido\"), shiny: N_(\"brillante\")};"
  },
  "tierno": {
   "w": [
-   "pet-world.js:704"
+   "pet-world.js:740"
   ],
   "ctx": "var TH = {sporty: N_(\"deportivo\"), cute: N_(\"tierno\"), cozy: N_(\"cómodo\"), regal: N_(\"elegante\"), silly: N_(\"divertido\"), shiny: N_(\"brillante\")};"
  },
  "cómodo": {
   "w": [
-   "pet-world.js:704"
+   "pet-world.js:740"
   ],
   "ctx": "var TH = {sporty: N_(\"deportivo\"), cute: N_(\"tierno\"), cozy: N_(\"cómodo\"), regal: N_(\"elegante\"), silly: N_(\"divertido\"), shiny: N_(\"brillante\")};"
  },
  "elegante": {
   "w": [
-   "pet-world.js:704"
+   "pet-world.js:740"
   ],
   "ctx": "var TH = {sporty: N_(\"deportivo\"), cute: N_(\"tierno\"), cozy: N_(\"cómodo\"), regal: N_(\"elegante\"), silly: N_(\"divertido\"), shiny: N_(\"brillante\")};"
  },
  "divertido": {
   "w": [
-   "pet-world.js:704"
+   "pet-world.js:740"
   ],
   "ctx": "var TH = {sporty: N_(\"deportivo\"), cute: N_(\"tierno\"), cozy: N_(\"cómodo\"), regal: N_(\"elegante\"), silly: N_(\"divertido\"), shiny: N_(\"brillante\")};"
  },
  "brillante": {
   "w": [
-   "pet-world.js:704"
+   "pet-world.js:740"
   ],
   "ctx": "var TH = {sporty: N_(\"deportivo\"), cute: N_(\"tierno\"), cozy: N_(\"cómodo\"), regal: N_(\"elegante\"), silly: N_(\"divertido\"), shiny: N_(\"brillante\")};"
  },
  "Premio para el ganador: {v}.": {
   "w": [
-   "pet-world.js:706"
+   "pet-world.js:742"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(c.n)) + '</div><p class=\"pw-hint\">' + esc(tr(\"Premio para el ganador: {v}.\", {v: fmtMoney(c.prize)})) + '</p><div class=\"pw-grid\">' +"
  },
  "Tema de hoy: {t}": {
   "w": [
-   "pet-world.js:707"
+   "pet-world.js:743"
   ],
   "ctx": "'<button class=\"pw-item\" data-pw=\"contgo\" data-v=\"' + k + ':style\"><b>👗 ' + esc(tr(\"Estilo\")) + \"</b><small>\" + esc(tr(\"Tema de hoy: {t}\", {t: tr(TH[th])})) + \"</small></button>\" +"
  },
  "Elige tres trucos que domine": {
   "w": [
-   "pet-world.js:708"
+   "pet-world.js:744"
   ],
   "ctx": "'<button class=\"pw-item\" data-pw=\"contgo\" data-v=\"' + k + ':tricks\"' + (known >= 3 ? \"\" : \" disabled\") + \"><b>🎓 \" + esc(tr(\"Trucos\")) + \"</b><small>\" + esc(known >= 3 ? tr(\"Elige tres trucos que domine\") : tr(\"Necesita "
  },
  "Necesita al menos tres trucos casi dominados": {
   "w": [
-   "pet-world.js:708"
+   "pet-world.js:744"
   ],
   "ctx": "'<button class=\"pw-item\" data-pw=\"contgo\" data-v=\"' + k + ':tricks\"' + (known >= 3 ? \"\" : \" disabled\") + \"><b>🎓 \" + esc(tr(\"Trucos\")) + \"</b><small>\" + esc(known >= 3 ? tr(\"Elige tres trucos que domine\") : tr(\"Necesita "
  },
  "Mantén pulsado para caminar.": {
   "w": [
-   "pet-world.js:729"
+   "pet-world.js:765"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(R.n)) + '</div><p class=\"pw-hint\">' + esc(tr(\"Mantén pulsado para caminar.\")) + '</p><div class=\"pw-prog\"><i style=\"width:0%\"></i></div><div class=\"pw-row\"><button class=\"go pw-hold\" d"
  },
  "Caminar": {
   "w": [
-   "pet-world.js:729"
+   "pet-world.js:765"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(R.n)) + '</div><p class=\"pw-hint\">' + esc(tr(\"Mantén pulsado para caminar.\")) + '</p><div class=\"pw-prog\"><i style=\"width:0%\"></i></div><div class=\"pw-row\"><button class=\"go pw-hold\" d"
  },
  "Volver a casa": {
   "w": [
-   "pet-world.js:729",
-   "pet-world.js:783"
+   "pet-world.js:765",
+   "pet-world.js:819"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(R.n)) + '</div><p class=\"pw-hint\">' + esc(tr(\"Mantén pulsado para caminar.\")) + '</p><div class=\"pw-prog\"><i style=\"width:0%\"></i></div><div class=\"pw-row\"><button class=\"go pw-hold\" d"
  },
  "Has recogido lo suyo como un buen vecino.": {
   "w": [
-   "pet-world.js:759"
+   "pet-world.js:795"
   ],
   "ctx": "if (k === \"bag\") { W.walk.poo = false; W.walk.log.push(tr(\"Has recogido lo suyo como un buen vecino.\")); W.props = W.props.filter(function (p) { return p.id !== \"poo\"; }); sfx(\"pop\"); panelWalkMain(); return; }"
  },
  "¡Ha encontrado algo! {x}": {
   "w": [
-   "pet-world.js:768"
+   "pet-world.js:804"
   ],
   "ctx": "var t = f.k === \"acc\" ? tr(\"¡Ha encontrado algo! {x}\", {x: tr(petItem(f.id).n)}) : f.k === \"treat\" ? tr(\"¡Ha encontrado una chuche!\") : f.k === \"coin\" ? tr(\"¡Ha encontrado unas monedas!\") : tr(\"Ha encontrado un palo. Muy"
  },
  "¡Ha encontrado una chuche!": {
   "w": [
-   "pet-world.js:768"
+   "pet-world.js:804"
   ],
   "ctx": "var t = f.k === \"acc\" ? tr(\"¡Ha encontrado algo! {x}\", {x: tr(petItem(f.id).n)}) : f.k === \"treat\" ? tr(\"¡Ha encontrado una chuche!\") : f.k === \"coin\" ? tr(\"¡Ha encontrado unas monedas!\") : tr(\"Ha encontrado un palo. Muy"
  },
  "¡Ha encontrado unas monedas!": {
   "w": [
-   "pet-world.js:768"
+   "pet-world.js:804"
   ],
   "ctx": "var t = f.k === \"acc\" ? tr(\"¡Ha encontrado algo! {x}\", {x: tr(petItem(f.id).n)}) : f.k === \"treat\" ? tr(\"¡Ha encontrado una chuche!\") : f.k === \"coin\" ? tr(\"¡Ha encontrado unas monedas!\") : tr(\"Ha encontrado un palo. Muy"
  },
  "Ha encontrado un palo. Muy orgulloso.": {
   "w": [
-   "pet-world.js:768"
+   "pet-world.js:804"
   ],
   "ctx": "var t = f.k === \"acc\" ? tr(\"¡Ha encontrado algo! {x}\", {x: tr(petItem(f.id).n)}) : f.k === \"treat\" ? tr(\"¡Ha encontrado una chuche!\") : f.k === \"coin\" ? tr(\"¡Ha encontrado unas monedas!\") : tr(\"Ha encontrado un palo. Muy"
  },
  "¡Un nuevo amigo!": {
   "w": [
-   "pet-world.js:769"
+   "pet-world.js:805"
   ],
   "ctx": "else if (e.k === \"pet\") { var other = new PetRig.Actor({k: [\"dog\", \"cat\", \"rabbit\", \"fennec\", \"capybara\"][e.s % 5], stage: 2}); other.x = e.x + 0.3; other.z = e.z - 0.1; other.yaw = -PI / 2; W.npc = other; a.lookAt([othe"
  },
  "Ha hecho un amigo nuevo.": {
   "w": [
-   "pet-world.js:769"
+   "pet-world.js:805"
   ],
   "ctx": "else if (e.k === \"pet\") { var other = new PetRig.Actor({k: [\"dog\", \"cat\", \"rabbit\", \"fennec\", \"capybara\"][e.s % 5], stage: 2}); other.x = e.x + 0.3; other.z = e.z - 0.1; other.yaw = -PI / 2; W.npc = other; a.lookAt([othe"
  },
  "«¡Qué mascota más bonita!»": {
   "w": [
-   "pet-world.js:770"
+   "pet-world.js:806"
   ],
   "ctx": "else if (e.k === \"fan\") { w.fans++; say(tr(\"«¡Qué mascota más bonita!»\"), 2.4); a.play(\"happy\"); w.log.push(tr(\"Unos aficionados se han parado a saludar.\")); }"
  },
  "Unos aficionados se han parado a saludar.": {
   "w": [
-   "pet-world.js:770"
+   "pet-world.js:806"
   ],
   "ctx": "else if (e.k === \"fan\") { w.fans++; say(tr(\"«¡Qué mascota más bonita!»\"), 2.4); a.play(\"happy\"); w.log.push(tr(\"Unos aficionados se han parado a saludar.\")); }"
  },
  "¡Directo al charco!": {
   "w": [
-   "pet-world.js:772"
+   "pet-world.js:808"
   ],
   "ctx": "else if (e.k === \"puddle\") { a.play(\"jump\"); fx(\"drop\", [a.x, 0.02, a.z], 20); sfx(\"splash\"); w.mud = true; a.dirt = Math.max(a.dirt, 2); say(tr(\"¡Directo al charco!\")); if (typeof GX !== \"undefined\") GX.ev(\"pet\", {k: \"p"
  },
  "Ha saltado en un charco.": {
   "w": [
-   "pet-world.js:772"
+   "pet-world.js:808"
   ],
   "ctx": "else if (e.k === \"puddle\") { a.play(\"jump\"); fx(\"drop\", [a.x, 0.02, a.z], 20); sfx(\"splash\"); w.mud = true; a.dirt = Math.max(a.dirt, 2); say(tr(\"¡Directo al charco!\")); if (typeof GX !== \"undefined\") GX.ev(\"pet\", {k: \"p"
  },
  "Recoger": {
   "w": [
-   "pet-world.js:773"
+   "pet-world.js:809"
   ],
   "ctx": "else if (e.k === \"poo\") { a.play(\"sit\"); w.poo = true; W.props.push({id: \"poo\", m: PetProps.prop(\"poop\"), x: a.x - 0.05, z: a.z + 0.08, y: 0}); var row = W.el.querySelector(\".pw-panel .pw-row\"); if (row && !row.querySele"
  },
  "¡Un balón suelto!": {
   "w": [
-   "pet-world.js:775"
+   "pet-world.js:811"
   ],
   "ctx": "else if (e.k === \"ball\") { a.play(\"dribble\"); trickBall(\"dribble\"); say(tr(\"¡Un balón suelto!\")); w.stop = 3; }"
  },
  "Te has dejado algo en el camino…": {
   "w": [
-   "pet-world.js:780"
+   "pet-world.js:816"
   ],
   "ctx": "if (w.poo) w.log.push(tr(\"Te has dejado algo en el camino…\"));"
  },
  "¡Paseo terminado!": {
   "w": [
-   "pet-world.js:783"
+   "pet-world.js:819"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"¡Paseo terminado!\")) + \"</div><ul class=\\\"pw-log\\\">\" + (w.log.length ? w.log : [tr(\"Un paseo tranquilo.\")]).map(function (x) { return \"<li>\" + esc(x) + \"</li>\"; }).join(\"\") + '</ul><b"
  },
  "Un paseo tranquilo.": {
   "w": [
-   "pet-world.js:783"
+   "pet-world.js:819"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"¡Paseo terminado!\")) + \"</div><ul class=\\\"pw-log\\\">\" + (w.log.length ? w.log : [tr(\"Un paseo tranquilo.\")]).map(function (x) { return \"<li>\" + esc(x) + \"</li>\"; }).join(\"\") + '</ul><b"
  },
  "No tienes dinero suficiente.": {
   "w": [
-   "pet-world.js:791",
-   "pet-world.js:855",
+   "pet-world.js:827",
+   "pet-world.js:891",
    "ui-pets.js:94",
    "ui-pets.js:104"
   ],
@@ -9174,266 +9586,266 @@
  },
  "Desfile": {
   "w": [
-   "pet-world.js:798"
+   "pet-world.js:834"
   ],
   "ctx": "if (W.cont.cat === \"style\") { a.play(\"spin\", {done: function () { a.play(\"sitHold\"); }}); setTimeout(function () { if (cur === W) contResult(PetSim.styleScore(pt, W.cont.theme)); }, 2400); panel('<div class=\"pw-h\">' + es"
  },
  "El jurado observa cada detalle…": {
   "w": [
-   "pet-world.js:798"
+   "pet-world.js:834"
   ],
   "ctx": "if (W.cont.cat === \"style\") { a.play(\"spin\", {done: function () { a.play(\"sitHold\"); }}); setTimeout(function () { if (cur === W) contResult(PetSim.styleScore(pt, W.cont.theme)); }, 2400); panel('<div class=\"pw-h\">' + es"
  },
  "Elige tres trucos": {
   "w": [
-   "pet-world.js:821"
+   "pet-world.js:857"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Elige tres trucos\")) + '</div><div class=\"pw-grid tricks\">' + kn.map(function (k) { var t = petTrick(k), on = C.picks.indexOf(k) >= 0; return '<button class=\"pw-trick' + (on ? \" on\" :"
  },
  "¡A la pista!": {
   "w": [
-   "pet-world.js:821"
+   "pet-world.js:857"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Elige tres trucos\")) + '</div><div class=\"pw-grid tricks\">' + kn.map(function (k) { var t = petTrick(k), on = C.picks.indexOf(k) >= 0; return '<button class=\"pw-trick' + (on ? \" on\" :"
  },
  "Da la orden cuando el marcador pase por el centro.": {
   "w": [
-   "pet-world.js:825"
+   "pet-world.js:861"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(t.n)) + \" · \" + (C.step + 1) + \"/3</div><p class=\\\"pw-hint\\\">\" + esc(tr(\"Da la orden cuando el marcador pase por el centro.\")) + '</p><div class=\"pw-tim\" aria-hidden=\"true\"><b></b><i><"
  },
  "¡Ahora!": {
   "w": [
-   "pet-world.js:825"
+   "pet-world.js:861"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(t.n)) + \" · \" + (C.step + 1) + \"/3</div><p class=\\\"pw-hint\\\">\" + esc(tr(\"Da la orden cuando el marcador pase por el centro.\")) + '</p><div class=\"pw-tim\" aria-hidden=\"true\"><b></b><i><"
  },
  "¡Campeón!": {
   "w": [
-   "pet-world.js:832"
+   "pet-world.js:868"
   ],
   "ctx": "var s = '<div class=\"pw-h\">' + esc(win ? tr(\"¡Campeón!\") : tr(\"Puesto {n}\", {n: r.pos})) + '</div><p class=\"pw-hint\">' + esc(r.prize ? tr(\"Premio: {v}\", {v: fmtMoney(r.prize)}) : tr(\"Esta vez no ha habido suerte. ¡A segu"
  },
  "Puesto {n}": {
   "w": [
-   "pet-world.js:832"
+   "pet-world.js:868"
   ],
   "ctx": "var s = '<div class=\"pw-h\">' + esc(win ? tr(\"¡Campeón!\") : tr(\"Puesto {n}\", {n: r.pos})) + '</div><p class=\"pw-hint\">' + esc(r.prize ? tr(\"Premio: {v}\", {v: fmtMoney(r.prize)}) : tr(\"Esta vez no ha habido suerte. ¡A segu"
  },
  "Premio: {v}": {
   "w": [
-   "pet-world.js:832"
+   "pet-world.js:868"
   ],
   "ctx": "var s = '<div class=\"pw-h\">' + esc(win ? tr(\"¡Campeón!\") : tr(\"Puesto {n}\", {n: r.pos})) + '</div><p class=\"pw-hint\">' + esc(r.prize ? tr(\"Premio: {v}\", {v: fmtMoney(r.prize)}) : tr(\"Esta vez no ha habido suerte. ¡A segu"
  },
  "Esta vez no ha habido suerte. ¡A seguir entrenando!": {
   "w": [
-   "pet-world.js:832"
+   "pet-world.js:868"
   ],
   "ctx": "var s = '<div class=\"pw-h\">' + esc(win ? tr(\"¡Campeón!\") : tr(\"Puesto {n}\", {n: r.pos})) + '</div><p class=\"pw-hint\">' + esc(r.prize ? tr(\"Premio: {v}\", {v: fmtMoney(r.prize)}) : tr(\"Esta vez no ha habido suerte. ¡A segu"
  },
  "Nuevo accesorio: {x}": {
   "w": [
-   "pet-world.js:833"
+   "pet-world.js:869"
   ],
   "ctx": "if (r.unlock) s += '<p class=\"pw-hint\">🎁 ' + esc(tr(\"Nuevo accesorio: {x}\", {x: tr(petItem(r.unlock).n)})) + \"</p>\";"
  },
  "Trofeo para tu jardín: {x}": {
   "w": [
-   "pet-world.js:834"
+   "pet-world.js:870"
   ],
   "ctx": "if (r.tro) s += '<p class=\"pw-hint\">🏆 ' + esc(tr(\"Trofeo para tu jardín: {x}\", {x: tr(petItem(r.tro).n)})) + \"</p>\";"
  },
  "¡Comprado!": {
   "w": [
-   "pet-world.js:859"
+   "pet-world.js:895"
   ],
   "ctx": "cap(tr(\"¡Comprado!\")); persist(); shopView(); return;"
  },
  "Novedades de hoy": {
   "w": [
-   "pet-world.js:866"
+   "pet-world.js:902"
   ],
   "ctx": "s += '<div class=\"pw-tabs\" role=\"tablist\">' + [[\"acc\", N_(\"Novedades de hoy\")], [\"food\", N_(\"Comida\")], [\"care\", N_(\"Cuidado\")], [\"toy\", N_(\"Juguetes\")], [\"deco\", N_(\"Jardín\")]].map(function (x) { return '<button role=\"t"
  },
  "Comida": {
   "w": [
-   "pet-world.js:866"
+   "pet-world.js:902"
   ],
   "ctx": "s += '<div class=\"pw-tabs\" role=\"tablist\">' + [[\"acc\", N_(\"Novedades de hoy\")], [\"food\", N_(\"Comida\")], [\"care\", N_(\"Cuidado\")], [\"toy\", N_(\"Juguetes\")], [\"deco\", N_(\"Jardín\")]].map(function (x) { return '<button role=\"t"
  },
  "Cuidado": {
   "w": [
-   "pet-world.js:866"
+   "pet-world.js:902"
   ],
   "ctx": "s += '<div class=\"pw-tabs\" role=\"tablist\">' + [[\"acc\", N_(\"Novedades de hoy\")], [\"food\", N_(\"Comida\")], [\"care\", N_(\"Cuidado\")], [\"toy\", N_(\"Juguetes\")], [\"deco\", N_(\"Jardín\")]].map(function (x) { return '<button role=\"t"
  },
  "Juguetes": {
   "w": [
-   "pet-world.js:866"
+   "pet-world.js:902"
   ],
   "ctx": "s += '<div class=\"pw-tabs\" role=\"tablist\">' + [[\"acc\", N_(\"Novedades de hoy\")], [\"food\", N_(\"Comida\")], [\"care\", N_(\"Cuidado\")], [\"toy\", N_(\"Juguetes\")], [\"deco\", N_(\"Jardín\")]].map(function (x) { return '<button role=\"t"
  },
  "Jardín": {
   "w": [
-   "pet-world.js:866"
+   "pet-world.js:902"
   ],
   "ctx": "s += '<div class=\"pw-tabs\" role=\"tablist\">' + [[\"acc\", N_(\"Novedades de hoy\")], [\"food\", N_(\"Comida\")], [\"care\", N_(\"Cuidado\")], [\"toy\", N_(\"Juguetes\")], [\"deco\", N_(\"Jardín\")]].map(function (x) { return '<button role=\"t"
  },
  "Ya lo tienes": {
   "w": [
-   "pet-world.js:867"
+   "pet-world.js:903"
   ],
   "ctx": "function row(it, extra, can) { var p = it.price || 0, poor = pwallet().money < p; return '<div class=\"pw-item' + (W.tryOn === it.id ? \" on\" : \"\") + '\"><b>' + esc(tr(it.n)) + \"</b><small>\" + esc(it.d ? tr(it.d) : \"\") + (e"
  },
  "Tienes {n}": {
   "w": [
-   "pet-world.js:870",
-   "pet-world.js:871"
+   "pet-world.js:906",
+   "pet-world.js:907"
   ],
   "ctx": "if (tab === \"food\") list = PET_FOOD.map(function (f) { return row(f, inv[f.id] ? \" · \" + tr(\"Tienes {n}\", {n: inv[f.id]}) : \"\"); });"
  },
  "¡Foto guardada en el álbum!": {
   "w": [
-   "pet-world.js:893"
+   "pet-world.js:929"
   ],
   "ctx": "cap(tr(\"¡Foto guardada en el álbum!\"));"
  },
  "No se ha podido guardar la foto": {
   "w": [
-   "pet-world.js:894"
+   "pet-world.js:930"
   ],
   "ctx": "} catch (e) { cap(tr(\"No se ha podido guardar la foto\")); }"
  },
  "Foto de {pet}": {
   "w": [
-   "pet-world.js:899"
+   "pet-world.js:935"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Álbum\")) + \"</div>\" + (al.length ? '<div class=\"pw-album\">' + al.map(function (p) { var d = new Date(p.t); return '<figure><img src=\"' + p.u + '\" alt=\"' + esc(tr(\"Foto de {pet}\", {pet"
  },
  "Todavía no hay fotos. Pulsa Foto en casa o jugando.": {
   "w": [
-   "pet-world.js:899"
+   "pet-world.js:935"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"Álbum\")) + \"</div>\" + (al.length ? '<div class=\"pw-album\">' + al.map(function (p) { var d = new Date(p.t); return '<figure><img src=\"' + p.u + '\" alt=\"' + esc(tr(\"Foto de {pet}\", {pet"
  },
  "Llegó a casa": {
   "w": [
-   "pet-world.js:903"
+   "pet-world.js:939"
   ],
   "ctx": "var MEM_TXT = {adopt: N_(\"Llegó a casa\"), meal: N_(\"Primera comida\"), bath: N_(\"Primer baño\"), favzone: N_(\"Descubriste dónde le encantan los mimos\"), favtoy: N_(\"Encontró su juguete favorito\"), trick: N_(\"Dominó su prim"
  },
  "Primera comida": {
   "w": [
-   "pet-world.js:903"
+   "pet-world.js:939"
   ],
   "ctx": "var MEM_TXT = {adopt: N_(\"Llegó a casa\"), meal: N_(\"Primera comida\"), bath: N_(\"Primer baño\"), favzone: N_(\"Descubriste dónde le encantan los mimos\"), favtoy: N_(\"Encontró su juguete favorito\"), trick: N_(\"Dominó su prim"
  },
  "Primer baño": {
   "w": [
-   "pet-world.js:903"
+   "pet-world.js:939"
   ],
   "ctx": "var MEM_TXT = {adopt: N_(\"Llegó a casa\"), meal: N_(\"Primera comida\"), bath: N_(\"Primer baño\"), favzone: N_(\"Descubriste dónde le encantan los mimos\"), favtoy: N_(\"Encontró su juguete favorito\"), trick: N_(\"Dominó su prim"
  },
  "Descubriste dónde le encantan los mimos": {
   "w": [
-   "pet-world.js:903"
+   "pet-world.js:939"
   ],
   "ctx": "var MEM_TXT = {adopt: N_(\"Llegó a casa\"), meal: N_(\"Primera comida\"), bath: N_(\"Primer baño\"), favzone: N_(\"Descubriste dónde le encantan los mimos\"), favtoy: N_(\"Encontró su juguete favorito\"), trick: N_(\"Dominó su prim"
  },
  "Encontró su juguete favorito": {
   "w": [
-   "pet-world.js:903"
+   "pet-world.js:939"
   ],
   "ctx": "var MEM_TXT = {adopt: N_(\"Llegó a casa\"), meal: N_(\"Primera comida\"), bath: N_(\"Primer baño\"), favzone: N_(\"Descubriste dónde le encantan los mimos\"), favtoy: N_(\"Encontró su juguete favorito\"), trick: N_(\"Dominó su prim"
  },
  "Dominó su primer truco": {
   "w": [
-   "pet-world.js:903"
+   "pet-world.js:939"
   ],
   "ctx": "var MEM_TXT = {adopt: N_(\"Llegó a casa\"), meal: N_(\"Primera comida\"), bath: N_(\"Primer baño\"), favzone: N_(\"Descubriste dónde le encantan los mimos\"), favtoy: N_(\"Encontró su juguete favorito\"), trick: N_(\"Dominó su prim"
  },
  "Primer paseo por el parque": {
   "w": [
-   "pet-world.js:904"
+   "pet-world.js:940"
   ],
   "ctx": "walk_park: N_(\"Primer paseo por el parque\"), walk_barrio: N_(\"Primer paseo por el barrio\"), walk_training: N_(\"Visitó la ciudad deportiva\"), walk_stadium: N_(\"Paseó junto al estadio\"), photo: N_(\"Primera foto\"),"
  },
  "Primer paseo por el barrio": {
   "w": [
-   "pet-world.js:904"
+   "pet-world.js:940"
   ],
   "ctx": "walk_park: N_(\"Primer paseo por el parque\"), walk_barrio: N_(\"Primer paseo por el barrio\"), walk_training: N_(\"Visitó la ciudad deportiva\"), walk_stadium: N_(\"Paseó junto al estadio\"), photo: N_(\"Primera foto\"),"
  },
  "Visitó la ciudad deportiva": {
   "w": [
-   "pet-world.js:904"
+   "pet-world.js:940"
   ],
   "ctx": "walk_park: N_(\"Primer paseo por el parque\"), walk_barrio: N_(\"Primer paseo por el barrio\"), walk_training: N_(\"Visitó la ciudad deportiva\"), walk_stadium: N_(\"Paseó junto al estadio\"), photo: N_(\"Primera foto\"),"
  },
  "Paseó junto al estadio": {
   "w": [
-   "pet-world.js:904"
+   "pet-world.js:940"
   ],
   "ctx": "walk_park: N_(\"Primer paseo por el parque\"), walk_barrio: N_(\"Primer paseo por el barrio\"), walk_training: N_(\"Visitó la ciudad deportiva\"), walk_stadium: N_(\"Paseó junto al estadio\"), photo: N_(\"Primera foto\"),"
  },
  "Primera foto": {
   "w": [
-   "pet-world.js:904"
+   "pet-world.js:940"
   ],
   "ctx": "walk_park: N_(\"Primer paseo por el parque\"), walk_barrio: N_(\"Primer paseo por el barrio\"), walk_training: N_(\"Visitó la ciudad deportiva\"), walk_stadium: N_(\"Paseó junto al estadio\"), photo: N_(\"Primera foto\"),"
  },
  "Ganó su primer concurso": {
   "w": [
-   "pet-world.js:905"
+   "pet-world.js:941"
   ],
   "ctx": "win_local: N_(\"Ganó su primer concurso\"), win_com: N_(\"Campeón comarcal\"), win_nac: N_(\"Campeón nacional\"), lovedacc: N_(\"Estrenó un accesorio que le encanta\"), stage1: N_(\"Se hizo joven\"), stage2: N_(\"Llegó a adulto\"), "
  },
  "Campeón comarcal": {
   "w": [
-   "pet-world.js:905"
+   "pet-world.js:941"
   ],
   "ctx": "win_local: N_(\"Ganó su primer concurso\"), win_com: N_(\"Campeón comarcal\"), win_nac: N_(\"Campeón nacional\"), lovedacc: N_(\"Estrenó un accesorio que le encanta\"), stage1: N_(\"Se hizo joven\"), stage2: N_(\"Llegó a adulto\"), "
  },
  "Campeón nacional": {
   "w": [
-   "pet-world.js:905"
+   "pet-world.js:941"
   ],
   "ctx": "win_local: N_(\"Ganó su primer concurso\"), win_com: N_(\"Campeón comarcal\"), win_nac: N_(\"Campeón nacional\"), lovedacc: N_(\"Estrenó un accesorio que le encanta\"), stage1: N_(\"Se hizo joven\"), stage2: N_(\"Llegó a adulto\"), "
  },
  "Estrenó un accesorio que le encanta": {
   "w": [
-   "pet-world.js:905"
+   "pet-world.js:941"
   ],
   "ctx": "win_local: N_(\"Ganó su primer concurso\"), win_com: N_(\"Campeón comarcal\"), win_nac: N_(\"Campeón nacional\"), lovedacc: N_(\"Estrenó un accesorio que le encanta\"), stage1: N_(\"Se hizo joven\"), stage2: N_(\"Llegó a adulto\"), "
  },
  "Se hizo joven": {
   "w": [
-   "pet-world.js:905"
+   "pet-world.js:941"
   ],
   "ctx": "win_local: N_(\"Ganó su primer concurso\"), win_com: N_(\"Campeón comarcal\"), win_nac: N_(\"Campeón nacional\"), lovedacc: N_(\"Estrenó un accesorio que le encanta\"), stage1: N_(\"Se hizo joven\"), stage2: N_(\"Llegó a adulto\"), "
  },
  "Llegó a adulto": {
   "w": [
-   "pet-world.js:905"
+   "pet-world.js:941"
   ],
   "ctx": "win_local: N_(\"Ganó su primer concurso\"), win_com: N_(\"Campeón comarcal\"), win_nac: N_(\"Campeón nacional\"), lovedacc: N_(\"Estrenó un accesorio que le encanta\"), stage1: N_(\"Se hizo joven\"), stage2: N_(\"Llegó a adulto\"), "
  },
  "Ya es senior": {
   "w": [
-   "pet-world.js:905"
+   "pet-world.js:941"
   ],
   "ctx": "win_local: N_(\"Ganó su primer concurso\"), win_com: N_(\"Campeón comarcal\"), win_nac: N_(\"Campeón nacional\"), lovedacc: N_(\"Estrenó un accesorio que le encanta\"), stage1: N_(\"Se hizo joven\"), stage2: N_(\"Llegó a adulto\"), "
  },
  "Empezó una nueva etapa contigo": {
   "w": [
-   "pet-world.js:905"
+   "pet-world.js:941"
   ],
   "ctx": "win_local: N_(\"Ganó su primer concurso\"), win_com: N_(\"Campeón comarcal\"), win_nac: N_(\"Campeón nacional\"), lovedacc: N_(\"Estrenó un accesorio que le encanta\"), stage1: N_(\"Se hizo joven\"), stage2: N_(\"Llegó a adulto\"), "
  },
  "Recuerdos": {
   "w": [
-   "pet-world.js:909"
+   "pet-world.js:945"
   ],
   "ctx": "return '<div class=\"lbl\">' + esc(tr(\"Recuerdos\")) + '</div><ul class=\"pw-log\">' + m.slice(-12).reverse().map(function (x) { return \"<li>\" + esc(tr(MEM_TXT[x.k])) + ' <small>' + new Date(x.t).toLocaleDateString() + \"</sma"
  },
@@ -10111,12 +10523,6 @@
   ],
   "ctx": "var out = \"<h2>\" + tr(\"Balón parado\") + '</h2><div class=\"stack\"><div class=\"seg\">' + [[\"train\", N_(\"Entrenar\")], [\"ch\", N_(\"Retos\")], [\"hist\", N_(\"Historial\")], [\"set\", N_(\"Ajustes\")]].map(function (x) { return '<button"
  },
- "Retos": {
-  "w": [
-   "ui-sp.js:63"
-  ],
-  "ctx": "var out = \"<h2>\" + tr(\"Balón parado\") + '</h2><div class=\"stack\"><div class=\"seg\">' + [[\"train\", N_(\"Entrenar\")], [\"ch\", N_(\"Retos\")], [\"hist\", N_(\"Historial\")], [\"set\", N_(\"Ajustes\")]].map(function (x) { return '<button"
- },
  "Historial": {
   "w": [
    "ui-sp.js:63",
@@ -10534,7 +10940,7 @@
  "Paradas": {
   "w": [
    "engine-player.js:16",
-   "ui-life.js:301",
+   "ui-life.js:310",
    "ui-guide.js:65"
   ],
   "ctx": "ATT_NAMES = {RIT: tr(\"Ritmo\"), TIR: tr(\"Tiro\"), PAS: tr(\"Pase\"), REG: tr(\"Regate\"), DEF: tr(\"Defensa\"), FIS: tr(\"Físico\"), EST: tr(\"Estirada\"), PAR: tr(\"Paradas\"), SAQ: tr(\"Saque\"), REF: tr(\"Reflejos\"), VEL: tr(\"Velocida"
@@ -14278,7 +14684,7 @@
  "Invertir": {
   "w": [
    "events.js:779",
-   "ui-life.js:217"
+   "ui-life.js:228"
   ],
   "ctx": "{t: tr(\"Invertir\"), out: ["
  },
@@ -23203,13 +23609,6 @@
   ],
   "ctx": "mk(\"bus\", tr(\"Aparcar el autobús\"), tr(\"Todos atrás y a la contra: pocos goles en las dos porterías.\"), tr(\"Abril de 2010: el Inter de Mourinho se encerró en el Camp Nou con diez jugadores, perdió 1-0 y aun así eliminó a"
  },
- "Equilibrado": {
-  "w": [
-   "events-manager.js:490",
-   "club30.js:7"
-  ],
-  "ctx": "mk(1, tr(\"Equilibrado\"), tr(\"Tu idea de siempre.\")),"
- },
  "Tu idea de siempre.": {
   "w": [
    "events-manager.js:490"
@@ -23919,15 +24318,6 @@
    "events-manager.js:636"
   ],
   "ctx": "{t: tr(\"Que se lo gane en los entrenamientos\"), p: 0.4, ok: {txt: tr(\"Se lo toma como un reto.\"), fx: {pmor: 6, povr: 0.3}, then: mk}, ko: {txt: tr(\"Se siente ninguneado.\"), fx: {pmor: -8}, then: mk}},"
- },
- "Cancelar": {
-  "w": [
-   "events-manager.js:637",
-   "events-manager.js:645",
-   "events-manager.js:651",
-   "mgr-plus.js:260"
-  ],
-  "ctx": "{t: tr(\"Cancelar\"), ok: {txt: tr(\"Lo dejáis para otro día.\"), fx: {}}}"
  },
  "Lo dejáis para otro día.": {
   "w": [
@@ -35957,8 +36347,8 @@
   "w": [
    "engine-extra.js:45",
    "ui.js:1224",
-   "ui-life.js:299",
-   "ui-life.js:307"
+   "ui-life.js:308",
+   "ui-life.js:316"
   ],
   "ctx": "cats.push({n: N_(\"Porterías a cero\"), list: mk(cv, function (v) { var o = objT({k: \"cs\", v: v}, v === 1 ? N_(\"{n} portería a cero\") : N_(\"{n} porterías a cero\"), {n: v}); o.lv = objLevel(v / (cv * str)); return o; })});"
  },
@@ -40755,7 +41145,7 @@
   "w": [
    "life.js:173",
    "life.js:191",
-   "ui-life.js:144",
+   "ui-life.js:155",
    "ui-guide.js:50"
   ],
   "ctx": "return {tag: \"real\", tagTxt: tr(\"Decisión de carrera\"), cls: \"\", cat: tr(\"Dorsal\"), title: tr(\"¿Pides el {n}?\", {n: x.n}),"
@@ -40895,7 +41285,7 @@
  "jugadores": {
   "w": [
    "life.js:319",
-   "pitch3d.js:4326"
+   "pitch3d.js:4338"
   ],
   "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
  },
@@ -41004,7 +41394,7 @@
  "Asistencias": {
   "w": [
    "life.js:460",
-   "ui-life.js:306"
+   "ui-life.js:315"
   ],
   "ctx": "if (rv.g !== \"DEL\") out.push({k: \"ast\", n: N_(\"Asistencias\"), me: me.a, him: him.a});"
  },
@@ -46371,7 +46761,7 @@
  "Tu equipo": {
   "w": [
    "pitch.js:1092",
-   "pitch3d.js:4400"
+   "pitch3d.js:4412"
   ],
   "ctx": "return {myName: String(t.myName || tr(\"Tu equipo\")), opp: String(t.oppName || tr(\"Rival\")),"
  },
@@ -46379,197 +46769,197 @@
   "w": [
    "pitch.js:1092",
    "pitch.js:1151",
-   "pitch3d.js:4400",
-   "pitch3d.js:4458"
+   "pitch3d.js:4412",
+   "pitch3d.js:4470"
   ],
   "ctx": "return {myName: String(t.myName || tr(\"Tu equipo\")), opp: String(t.oppName || tr(\"Rival\")),"
  },
  "Eliges la orientación y hacia qué portería atacar.": {
   "w": [
    "pitch.js:1100",
-   "pitch3d.js:4409"
+   "pitch3d.js:4421"
   ],
   "ctx": "pros.push(tr(\"Eliges la orientación y hacia qué portería atacar.\"));"
  },
  "Con el césped resbaladizo, proteges el lado de tu salida.": {
   "w": [
    "pitch.js:1101",
-   "pitch3d.js:4410"
+   "pitch3d.js:4422"
   ],
   "ctx": "if (x.wx.key === \"rain\") pros.push(tr(\"Con el césped resbaladizo, proteges el lado de tu salida.\"));"
  },
  "Evitas atacar de cara al sol en el segundo tiempo.": {
   "w": [
    "pitch.js:1102",
-   "pitch3d.js:4411"
+   "pitch3d.js:4423"
   ],
   "ctx": "else if (x.wx.key === \"heat\") pros.push(tr(\"Evitas atacar de cara al sol en el segundo tiempo.\"));"
  },
  "Puedes elegir el lado con menos viento y nieve.": {
   "w": [
    "pitch.js:1103",
-   "pitch3d.js:4412"
+   "pitch3d.js:4424"
   ],
   "ctx": "else if (x.wx.key === \"cold\") pros.push(tr(\"Puedes elegir el lado con menos viento y nieve.\"));"
  },
  "Su posesión se adapta a cualquier orientación.": {
   "w": [
    "pitch.js:1104",
-   "pitch3d.js:4413"
+   "pitch3d.js:4425"
   ],
   "ctx": "if (x.style === \"possession\") cons.push(tr(\"Su posesión se adapta a cualquier orientación.\"));"
  },
  "Su presión alta puede cerrarte la banda que defiendes.": {
   "w": [
    "pitch.js:1105",
-   "pitch3d.js:4414"
+   "pitch3d.js:4426"
   ],
   "ctx": "else if (x.style === \"press\") cons.push(tr(\"Su presión alta puede cerrarte la banda que defiendes.\"));"
  },
  "Su juego directo funciona igual en las dos porterías.": {
   "w": [
    "pitch.js:1106",
-   "pitch3d.js:4415"
+   "pitch3d.js:4427"
   ],
   "ctx": "else if (x.style === \"direct\") cons.push(tr(\"Su juego directo funciona igual en las dos porterías.\"));"
  },
  "Te cederá el balón y buscará tu espalda desde el inicio.": {
   "w": [
    "pitch.js:1107",
-   "pitch3d.js:4416"
+   "pitch3d.js:4428"
   ],
   "ctx": "else if (x.style === \"counter\") cons.push(tr(\"Te cederá el balón y buscará tu espalda desde el inicio.\"));"
  },
  "El cambio de lado no compensa su superioridad.": {
   "w": [
    "pitch.js:1108",
-   "pitch3d.js:4417"
+   "pitch3d.js:4429"
   ],
   "ctx": "if (x.diff < -3) cons.push(tr(\"El cambio de lado no compensa su superioridad.\"));"
  },
  "Conservas el saque de centro y marcas el primer ritmo.": {
   "w": [
    "pitch.js:1110",
-   "pitch3d.js:4419"
+   "pitch3d.js:4431"
   ],
   "ctx": "pros.push(tr(\"Conservas el saque de centro y marcas el primer ritmo.\"));"
  },
  "Le obligas a correr detrás del balón desde el inicio.": {
   "w": [
    "pitch.js:1111",
-   "pitch3d.js:4420"
+   "pitch3d.js:4432"
   ],
   "ctx": "if (x.style === \"possession\") pros.push(tr(\"Le obligas a correr detrás del balón desde el inicio.\"));"
  },
  "Puedes jugar el primer balón en largo sin presión.": {
   "w": [
    "pitch.js:1112",
-   "pitch3d.js:4421"
+   "pitch3d.js:4433"
   ],
   "ctx": "else if (x.style === \"direct\") pros.push(tr(\"Puedes jugar el primer balón en largo sin presión.\"));"
  },
  "Su presión alta puede atrapar tu primer pase.": {
   "w": [
    "pitch.js:1113",
-   "pitch3d.js:4422"
+   "pitch3d.js:4434"
   ],
   "ctx": "else if (x.style === \"press\") cons.push(tr(\"Su presión alta puede atrapar tu primer pase.\"));"
  },
  "Te cede la iniciativa y espera tu error para salir en contra.": {
   "w": [
    "pitch.js:1114",
-   "pitch3d.js:4423"
+   "pitch3d.js:4435"
   ],
   "ctx": "else if (x.style === \"counter\") cons.push(tr(\"Te cede la iniciativa y espera tu error para salir en contra.\"));"
  },
  "El balón corre más: el primer pase puede escaparse.": {
   "w": [
    "pitch.js:1115",
-   "pitch3d.js:4424"
+   "pitch3d.js:4436"
   ],
   "ctx": "if (x.wx.key === \"rain\") cons.push(tr(\"El balón corre más: el primer pase puede escaparse.\"));"
  },
  "El balón pesado exige un primer toque más firme.": {
   "w": [
    "pitch.js:1116",
-   "pitch3d.js:4425"
+   "pitch3d.js:4437"
   ],
   "ctx": "else if (x.wx.key === \"cold\") cons.push(tr(\"El balón pesado exige un primer toque más firme.\"));"
  },
  "Dosificar el ritmo desde el saque ahorra fuerzas.": {
   "w": [
    "pitch.js:1117",
-   "pitch3d.js:4426"
+   "pitch3d.js:4438"
   ],
   "ctx": "else if (x.wx.key === \"heat\") pros.push(tr(\"Dosificar el ritmo desde el saque ahorra fuerzas.\"));"
  },
  "Tu superioridad te permite dominar el primer balón.": {
   "w": [
    "pitch.js:1118",
-   "pitch3d.js:4427"
+   "pitch3d.js:4439"
   ],
   "ctx": "if (x.diff > 3) pros.push(tr(\"Tu superioridad te permite dominar el primer balón.\"));"
  },
  "Si el rival es superior, perderás el balón en zonas peligrosas.": {
   "w": [
    "pitch.js:1119",
-   "pitch3d.js:4428"
+   "pitch3d.js:4440"
   ],
   "ctx": "if (x.diff < -3) cons.push(tr(\"Si el rival es superior, perderás el balón en zonas peligrosas.\"));"
  },
  "Mantienes tu plan de saque sin cambios.": {
   "w": [
    "pitch.js:1121",
-   "pitch3d.js:4430"
+   "pitch3d.js:4442"
   ],
   "ctx": "if (!pros.length) pros.push(tr(\"Mantienes tu plan de saque sin cambios.\"));"
  },
  "No cambias de lado: mantienes la orientación actual.": {
   "w": [
    "pitch.js:1122",
-   "pitch3d.js:4431"
+   "pitch3d.js:4443"
   ],
   "ctx": "if (!cons.length) cons.push(tr(\"No cambias de lado: mantienes la orientación actual.\"));"
  },
  "Quiere presionar hacia su propia grada en el primer tiempo.": {
   "w": [
    "pitch.js:1127",
-   "pitch3d.js:4437"
+   "pitch3d.js:4449"
   ],
   "ctx": "if (x.style === \"press\") return {choice: \"campo\", why: tr(\"Quiere presionar hacia su propia grada en el primer tiempo.\")};"
  },
  "Prefiere ordenar el campo y defender con la línea adelantada.": {
   "w": [
    "pitch.js:1128",
-   "pitch3d.js:4438"
+   "pitch3d.js:4450"
   ],
   "ctx": "if (x.style === \"possession\") return {choice: \"campo\", why: tr(\"Prefiere ordenar el campo y defender con la línea adelantada.\")};"
  },
  "Busca atacar con el sol o el viento a favor en el segundo tiempo.": {
   "w": [
    "pitch.js:1129",
-   "pitch3d.js:4439"
+   "pitch3d.js:4451"
   ],
   "ctx": "if (x.style === \"direct\") return {choice: \"campo\", why: tr(\"Busca atacar con el sol o el viento a favor en el segundo tiempo.\")};"
  },
  "Quiere que su bloque pueda salir en contra hacia su banquillo.": {
   "w": [
    "pitch.js:1130",
-   "pitch3d.js:4440"
+   "pitch3d.js:4452"
   ],
   "ctx": "if (x.style === \"counter\") return {choice: \"campo\", why: tr(\"Quiere que su bloque pueda salir en contra hacia su banquillo.\")};"
  },
  "No necesita cambiar nada: confía en su nivel y te deja el primer balón.": {
   "w": [
    "pitch.js:1131",
-   "pitch3d.js:4441"
+   "pitch3d.js:4453"
   ],
   "ctx": "if (x.diff <= -4) return {choice: \"pelota\", why: tr(\"No necesita cambiar nada: confía en su nivel y te deja el primer balón.\")};"
  },
  "Busca que la lluvia complique tu salida desde atrás.": {
   "w": [
    "pitch.js:1132",
-   "pitch3d.js:4442"
+   "pitch3d.js:4454"
   ],
   "ctx": "if (x.wx.key === \"rain\") return {choice: \"campo\", why: tr(\"Busca que la lluvia complique tu salida desde atrás.\")};"
  },
@@ -46577,8 +46967,8 @@
   "w": [
    "pitch.js:1133",
    "pitch.js:1210",
-   "pitch3d.js:4443",
-   "pitch3d.js:4498"
+   "pitch3d.js:4455",
+   "pitch3d.js:4510"
   ],
   "ctx": "return {choice: \"campo\", why: tr(\"Elige el lado que mejor encaja con su plan de partido.\")};"
  },
@@ -46586,7 +46976,7 @@
   "w": [
    "pitch.js:1150",
    "ui.js:2116",
-   "pitch3d.js:4457"
+   "pitch3d.js:4469"
   ],
   "ctx": "\"🌤 \" + tr(\"Clima\") + \": \" + esc2D((wx.icon || \"☀\") + \" \" + (wx.name || tr(\"Despejado\"))) + \" · \" + esc2D(wx.effect || tr(\"Campo rápido\")) + \" · \" + tr(\"Fatiga\") + \" ×\" + fmtMul2D(mul) + \"<br>\" +"
  },
@@ -46595,7 +46985,7 @@
    "pitch.js:1150",
    "ui.js:2117",
    "ui-shootout.js:163",
-   "pitch3d.js:4457"
+   "pitch3d.js:4469"
   ],
   "ctx": "\"🌤 \" + tr(\"Clima\") + \": \" + esc2D((wx.icon || \"☀\") + \" \" + (wx.name || tr(\"Despejado\"))) + \" · \" + esc2D(wx.effect || tr(\"Campo rápido\")) + \" · \" + tr(\"Fatiga\") + \" ×\" + fmtMul2D(mul) + \"<br>\" +"
  },
@@ -46603,7 +46993,7 @@
   "w": [
    "pitch.js:1151",
    "ui-mgrplus.js:63",
-   "pitch3d.js:4458"
+   "pitch3d.js:4470"
   ],
   "ctx": "tr(\"Rival\") + \": \" + esc2D(x.opp) + \" · \" + tr(\"Nivel\") + \" \" + x.oppLevel + \" · \" + esc2D(x.styleLabel) + \"</div>\";"
  },
@@ -46634,133 +47024,133 @@
  "Cara o cruz": {
   "w": [
    "pitch.js:1188",
-   "pitch3d.js:4476"
+   "pitch3d.js:4488"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Cara o cruz\") + \"</b>\" +"
  },
  "Elige tu llamada.": {
   "w": [
    "pitch.js:1189",
-   "pitch3d.js:4477"
+   "pitch3d.js:4489"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"Elige tu llamada.\") + \"</span>\" +"
  },
  "Tiempo para llamar": {
   "w": [
    "pitch.js:1191",
-   "pitch3d.js:4479"
+   "pitch3d.js:4491"
   ],
   "ctx": "timer2D(tr(\"Tiempo para llamar\"), COIN_WAIT) + tossMeta2D();"
  },
  "La moneda está en el aire…": {
   "w": [
    "pitch.js:1193",
-   "pitch3d.js:4481"
+   "pitch3d.js:4493"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"La moneda está en el aire…\") + \"</b>\" +"
  },
  "Has llamado {v}.": {
   "w": [
    "pitch.js:1194",
-   "pitch3d.js:4482"
+   "pitch3d.js:4494"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"Has llamado {v}.\", {v: coin.call === \"cara\" ? tr(\"Cara\") : tr(\"Cruz\")}) + \"</span>\" + tossMeta2D();"
  },
  "Salió {v}.": {
   "w": [
    "pitch.js:1196",
-   "pitch3d.js:4484"
+   "pitch3d.js:4496"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Salió {v}.\", {v: face}) + \"</b>\" +"
  },
  "Ganas el sorteo.": {
   "w": [
    "pitch.js:1198",
-   "pitch3d.js:4486"
+   "pitch3d.js:4498"
   ],
   "ctx": "(coin.winner === 0 ? tr(\"Ganas el sorteo.\") : tr(\"Gana el rival.\")) + \"</span>\" + tossMeta2D();"
  },
  "Gana el rival.": {
   "w": [
    "pitch.js:1198",
-   "pitch3d.js:4486"
+   "pitch3d.js:4498"
   ],
   "ctx": "(coin.winner === 0 ? tr(\"Ganas el sorteo.\") : tr(\"Gana el rival.\")) + \"</span>\" + tossMeta2D();"
  },
  "¡Ganaste el sorteo!": {
   "w": [
    "pitch.js:1200",
-   "pitch3d.js:4488"
+   "pitch3d.js:4500"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"¡Ganaste el sorteo!\") + \"</b>\" +"
  },
  "¿Campo o pelota?": {
   "w": [
    "pitch.js:1201",
-   "pitch3d.js:4489"
+   "pitch3d.js:4501"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"¿Campo o pelota?\") + \"</span>\" +"
  },
  "Campo cambia de lado · Pelota mantiene el saque": {
   "w": [
    "pitch.js:1203",
-   "pitch3d.js:4491"
+   "pitch3d.js:4503"
   ],
   "ctx": "'<span style=\"display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px\">' + tr(\"Campo cambia de lado · Pelota mantiene el saque\") + \"</span>\" +"
  },
  "Tiempo para elegir": {
   "w": [
    "pitch.js:1204",
-   "pitch3d.js:4492"
+   "pitch3d.js:4504"
   ],
   "ctx": "timer2D(tr(\"Tiempo para elegir\"), CHOICE_WAIT) + tossMeta2D();"
  },
  "Gana el rival el sorteo": {
   "w": [
    "pitch.js:1207",
-   "pitch3d.js:4495"
+   "pitch3d.js:4507"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Gana el rival el sorteo\") + \"</b>\" +"
  },
  "Elige {v}.": {
   "w": [
    "pitch.js:1208",
-   "pitch3d.js:4496"
+   "pitch3d.js:4508"
   ],
   "ctx": "'<span style=\"display:block;font:600 10px/1.25 system-ui;margin-top:2px\">' + tr(\"Elige {v}.\", {v: rp}) + \"</span>\" +"
  },
  "Campo elegido": {
   "w": [
    "pitch.js:1212",
-   "pitch3d.js:4500"
+   "pitch3d.js:4512"
   ],
   "ctx": "var cc = coin.choice === \"campo\" ? tr(\"Campo elegido\") : tr(\"Saque elegido\");"
  },
  "Saque elegido": {
   "w": [
    "pitch.js:1212",
-   "pitch3d.js:4500"
+   "pitch3d.js:4512"
   ],
   "ctx": "var cc = coin.choice === \"campo\" ? tr(\"Campo elegido\") : tr(\"Saque elegido\");"
  },
  "El rival decide: ": {
   "w": [
    "pitch.js:1213",
-   "pitch3d.js:4501"
+   "pitch3d.js:4513"
   ],
   "ctx": "var res = coin.winner === 1 ? tr(\"El rival decide: \") : \"\";"
  },
  "Cambiamos de lado antes del saque. Conservas el saque de centro.": {
   "w": [
    "pitch.js:1216",
-   "pitch3d.js:4504"
+   "pitch3d.js:4516"
   ],
   "ctx": "(coin.choice === \"campo\" ? tr(\"Cambiamos de lado antes del saque. Conservas el saque de centro.\") : tr(\"No cambiamos de lado. Conservas el saque de centro.\")) + \"</span>\" + tossMeta2D();"
  },
  "No cambiamos de lado. Conservas el saque de centro.": {
   "w": [
    "pitch.js:1216",
-   "pitch3d.js:4504"
+   "pitch3d.js:4516"
   ],
   "ctx": "(coin.choice === \"campo\" ? tr(\"Cambiamos de lado antes del saque. Conservas el saque de centro.\") : tr(\"No cambiamos de lado. Conservas el saque de centro.\")) + \"</span>\" + tossMeta2D();"
  },
@@ -48828,7 +49218,7 @@
  "Goles encajados": {
   "w": [
    "ui.js:1224",
-   "ui-life.js:300"
+   "ui-life.js:309"
   ],
   "ctx": "var s = '<section class=\"card\"><h3>' + tr(\"Temporada a temporada\") + '</h3><div class=\"tablewrap\" style=\"margin-top:6px\"><table><thead><tr><th>' + tr(\"Año\") + '</th><th>' + tr(\"Club\") + '</th><th>' + tr(\"PJ\") + '</th>' +"
  },
@@ -49541,13 +49931,6 @@
    "ui.js:1425"
   ],
   "ctx": "'<div class=\"slotrow\">' + cr + '<div class=\"grow\"><h3>' + h(e.n) + '</h3><div class=\"muted\" style=\"font-size:var(--fs-sm)\">' + h(e.cn || tr(\"Sin club\")) + (e.ret ? \" · \" + tr(\"retirado\") : \"\") + (e.ts ? \" · \" + h(fmtWhen"
- },
- "Borrar": {
-  "w": [
-   "ui.js:1427",
-   "ui.js:1716"
-  ],
-  "ctx": "'<div class=\"row2\" style=\"margin-top:12px\"><button class=\"btn wide danger\" data-a=\"askdel\" data-v=\"' + h(e.id) + '\">' + tr(\"Borrar\") + '</button><button class=\"btn pri wide\" data-a=\"loadslot\" data-v=\"' + h(e.id) + '\">' +"
  },
  "Tus partidas": {
   "w": [
@@ -50508,7 +50891,7 @@
   "w": [
    "ui.js:1730",
    "ui.js:1731",
-   "ui-life.js:241",
+   "ui-life.js:252",
    "ui-45.js:82"
   ],
   "ctx": "var det = e.g === \"DT\" ? tr(\"Entrenador\") + \" · \" + h(e.club) + \" · \" + e.y0 + \"–\" + e.y1 + \" · \" + trn(e.apps, \"{n} partido\", \"{n} partidos\") + \", \" + trn(e.gl, \"{n} victoria\", \"{n} victorias\") + \" · \" + trn(e.tro, \"{n}",
@@ -50518,7 +50901,7 @@
   "w": [
    "ui.js:1730",
    "ui.js:1731",
-   "ui-life.js:241",
+   "ui-life.js:252",
    "ui-45.js:82"
   ],
   "ctx": "var det = e.g === \"DT\" ? tr(\"Entrenador\") + \" · \" + h(e.club) + \" · \" + e.y0 + \"–\" + e.y1 + \" · \" + trn(e.apps, \"{n} partido\", \"{n} partidos\") + \", \" + trn(e.gl, \"{n} victoria\", \"{n} victorias\") + \" · \" + trn(e.tro, \"{n}",
@@ -51146,7 +51529,7 @@
  "Ver la repetición": {
   "w": [
    "ui.js:2165",
-   "pitch3d.js:4566"
+   "pitch3d.js:4578"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === \"f\", pet: typeof petOf === \"function\" ? petOf() : null, coach: UIX.c"
  },
@@ -51604,418 +51987,405 @@
  },
  "Tu avatar": {
   "w": [
-   "ui-life.js:73"
+   "ui-life.js:74"
   ],
   "ctx": "var s = '<svg class=\"' + (cls || \"lfsvg\") + ' px\" viewBox=\"0 0 120 170\" role=\"img\" aria-label=\"' + h(tr(\"Tu avatar\")) + '\" shape-rendering=\"crispEdges\">';"
  },
  "Dorsal preferido": {
   "w": [
-   "ui-life.js:118"
+   "ui-life.js:129"
   ],
   "ctx": "var s = '<div class=\"lfcreate\"><div class=\"lfcnum\" aria-hidden=\"true\">' + cur + '</div><div class=\"grow\"><label class=\"lbl\" for=\"lnum\">' + tr(\"Dorsal preferido\") + \"</label>\";"
  },
  "Elige cualquier número del 1 al 99": {
   "w": [
-   "ui-life.js:120"
+   "ui-life.js:131"
   ],
   "ctx": "s += '<select id=\"lnum\" data-f=\"lnum\" aria-label=\"' + h(tr(\"Elige cualquier número del 1 al 99\")) + '\">' + range(99).map(function (i) { return '<option value=\"' + (i + 1) + '\"' + (cur === i + 1 ? \" selected\" : \"\") + \">\" "
  },
  "Si en tu club ya lo lleva alguien, te darán el más cercano y podrás pedirlo la temporada siguiente.": {
   "w": [
-   "ui-life.js:121"
+   "ui-life.js:132"
   ],
   "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Si en tu club ya lo lleva alguien, te darán el más cercano y podrás pedirlo la temporada siguiente.\") + \"</p></div></div>\";"
  },
  "Fuera del campo": {
   "w": [
-   "ui-life.js:143"
+   "ui-life.js:154"
   ],
   "ctx": "s += '<div class=\"eyebrow\">' + tr(\"Fuera del campo\") + \"</div>\";"
  },
  "Prefieres el {n}": {
   "w": [
-   "ui-life.js:144"
+   "ui-life.js:155"
   ],
   "ctx": "s += '<button class=\"lfnumbtn\" data-a=\"lfopen\" data-v=\"lnum\"><b class=\"num\">' + L.num + \"</b><span>\" + tr(\"Dorsal\") + (L.num !== L.pref ? \"<small>\" + tr(\"Prefieres el {n}\", {n: L.pref}) + \"</small>\" : \"<small>\" + tr(\"Cam"
  },
  "Cambiar": {
   "w": [
-   "ui-life.js:144",
+   "ui-life.js:155",
    "ui-club30.js:51"
   ],
   "ctx": "s += '<button class=\"lfnumbtn\" data-a=\"lfopen\" data-v=\"lnum\"><b class=\"num\">' + L.num + \"</b><span>\" + tr(\"Dorsal\") + (L.num !== L.pref ? \"<small>\" + tr(\"Prefieres el {n}\", {n: L.pref}) + \"</small>\" : \"<small>\" + tr(\"Cam"
  },
  "Vida y dinero": {
   "w": [
-   "ui-life.js:148",
-   "ui-life.js:197"
+   "ui-life.js:159",
+   "ui-life.js:208"
   ],
   "ctx": "s += '<div class=\"lfbtns\"><button class=\"btn\" data-a=\"lfopen\" data-v=\"lvida\">' + tr(\"Vida y dinero\") + (act.length || L.inv.length ? ' <span class=\"lfbad\">' + (act.length + L.inv.length) + \"</span>\" : \"\") + '</button><bu"
  },
  "Look y celebración": {
   "w": [
-   "ui-life.js:148",
-   "ui-life.js:256"
+   "ui-life.js:159",
+   "ui-life.js:269"
   ],
   "ctx": "s += '<div class=\"lfbtns\"><button class=\"btn\" data-a=\"lfopen\" data-v=\"lvida\">' + tr(\"Vida y dinero\") + (act.length || L.inv.length ? ' <span class=\"lfbad\">' + (act.length + L.inv.length) + \"</span>\" : \"\") + '</button><bu"
  },
  "Tu rival": {
   "w": [
-   "ui-life.js:150"
+   "ui-life.js:161"
   ],
   "ctx": "s += '<button class=\"lfrvbtn\" data-a=\"lfopen\" data-v=\"lrival\"><span class=\"eyebrow\">' + tr(\"Tu rival\") + \"</span><span class=\\\"lfrvrow\\\">\" + U.crest(rv.club) + \"<b>\" + h(rv.n) + \"</b>\" + U.flag(rv.ni) + '<span class=\"lfh"
  },
  "Duelos: ganados, empates, perdidos": {
   "w": [
-   "ui-life.js:150"
+   "ui-life.js:161"
   ],
   "ctx": "s += '<button class=\"lfrvbtn\" data-a=\"lfopen\" data-v=\"lrival\"><span class=\"eyebrow\">' + tr(\"Tu rival\") + \"</span><span class=\\\"lfrvrow\\\">\" + U.crest(rv.club) + \"<b>\" + h(rv.n) + \"</b>\" + U.flag(rv.ni) + '<span class=\"lfh"
  },
  "Tu dorsal": {
   "w": [
-   "ui-life.js:169"
+   "ui-life.js:180"
   ],
   "ctx": "var s = \"<h2>\" + tr(\"Tu dorsal\") + '</h2><div class=\"stack\"><div class=\"lfnumhead\"><div class=\"lfcnum\">' + L.num + '</div><p class=\"muted\" style=\"margin:0\">' +"
  },
  "Llevas tu número preferido en el {club}.": {
   "w": [
-   "ui-life.js:170"
+   "ui-life.js:181"
   ],
   "ctx": "(L.num === L.pref ? tr(\"Llevas tu número preferido en el {club}.\", {club: h(clubName(S.p.club))}) : tr(\"Prefieres el {n}, pero en el {club} lo lleva {name}. Podrás pedirlo al empezar la temporada.\", {n: L.pref, club: h(c"
  },
  "Prefieres el {n}, pero en el {club} lo lleva {name}. Podrás pedirlo al empezar la temporada.": {
   "w": [
-   "ui-life.js:170"
+   "ui-life.js:181"
   ],
   "ctx": "(L.num === L.pref ? tr(\"Llevas tu número preferido en el {club}.\", {club: h(clubName(S.p.club))}) : tr(\"Prefieres el {n}, pero en el {club} lo lleva {name}. Podrás pedirlo al empezar la temporada.\", {n: L.pref, club: h(c"
  },
  "Elige dorsal": {
   "w": [
-   "ui-life.js:171"
+   "ui-life.js:182"
   ],
   "ctx": "s += '<div class=\"lfgrid\" role=\"group\" aria-label=\"' + h(tr(\"Elige dorsal\")) + '\">' + range(99).map(function (i) {"
  },
  "{n}, lo lleva {name}": {
   "w": [
-   "ui-life.js:173"
+   "ui-life.js:184"
   ],
   "ctx": "return '<button class=\"lfg' + (t ? \" tk\" : \"\") + (n === L.pref ? \" pf\" : \"\") + '\" data-a=\"lfsetnum\" data-v=\"' + n + '\" aria-pressed=\"' + me + '\"' + (t ? ' title=\"' + h(t) + '\" aria-label=\"' + h(tr(\"{n}, lo lleva {name}\","
  },
  "Tachados: números ocupados en tu club. Si eliges uno ocupado, lo pedirás la próxima temporada.": {
   "w": [
-   "ui-life.js:175"
+   "ui-life.js:186"
   ],
   "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Tachados: números ocupados en tu club. Si eliges uno ocupado, lo pedirás la próxima temporada.\") + \"</p>\";"
  },
  "Ahora llevas el {n}.": {
   "w": [
-   "ui-life.js:181"
+   "ui-life.js:192"
   ],
   "ctx": "U.toast(r.now ? tr(\"Ahora llevas el {n}.\", {n: +v}) : tr(\"El {n} lo lleva {name}: lo pedirás la próxima temporada.\", {n: +v, name: r.by}));"
  },
  "El {n} lo lleva {name}: lo pedirás la próxima temporada.": {
   "w": [
-   "ui-life.js:181"
+   "ui-life.js:192"
   ],
   "ctx": "U.toast(r.now ? tr(\"Ahora llevas el {n}.\", {n: +v}) : tr(\"El {n} lo lleva {name}: lo pedirás la próxima temporada.\", {n: +v, name: r.by}));"
  },
  "+6 % seguidores por tramo": {
   "w": [
-   "ui-life.js:189"
+   "ui-life.js:200"
   ],
   "ctx": "if (d.k === \"press\") out.push('<span class=\"chip up\">' + tr(\"+6 % seguidores por tramo\") + \"</span>\");"
  },
  "Riesgo de lesión −30 %": {
   "w": [
-   "ui-life.js:190"
+   "ui-life.js:201"
   ],
   "ctx": "if (d.k === \"physio\") out.push('<span class=\"chip up\">' + tr(\"Riesgo de lesión −30 %\") + \"</span>\");"
  },
  "Forma más estable": {
   "w": [
-   "ui-life.js:191"
+   "ui-life.js:202"
   ],
   "ctx": "if (d.k === \"mental\") out.push('<span class=\"chip up\">' + tr(\"Forma más estable\") + \"</span>\");"
  },
  "Más progresión": {
   "w": [
-   "ui-life.js:192"
+   "ui-life.js:203"
   ],
   "ctx": "if (d.k === \"trainer\") out.push('<span class=\"chip up\">' + tr(\"Más progresión\") + \"</span>\");"
  },
  "Tu dinero": {
   "w": [
-   "ui-life.js:197"
+   "ui-life.js:208"
   ],
   "ctx": "var s = \"<h2>\" + tr(\"Vida y dinero\") + '</h2><div class=\"stack\"><div class=\"lfmoney\"><span class=\"eyebrow\">' + tr(\"Tu dinero\") + '</span><b class=\"num\">' + money(p.money) + \"</b></div>\";"
  },
  "Tu equipo personal": {
   "w": [
-   "ui-life.js:198"
+   "ui-life.js:209"
   ],
   "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Tu equipo personal\") + '</h3><p class=\"muted lfhint\">' + tr(\"Se paga cada tramo de temporada. Un contrato dura una temporada (5 tramos).\") + \"</p>\";"
  },
  "Se paga cada tramo de temporada. Un contrato dura una temporada (5 tramos).": {
   "w": [
-   "ui-life.js:198"
+   "ui-life.js:209"
   ],
   "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Tu equipo personal\") + '</h3><p class=\"muted lfhint\">' + tr(\"Se paga cada tramo de temporada. Un contrato dura una temporada (5 tramos).\") + \"</p>\";"
  },
  "{cost} por tramo": {
   "w": [
-   "ui-life.js:203"
+   "ui-life.js:214"
   ],
   "ctx": "s += '<div class=\"lfrowf\"><span class=\"muted\">' + tr(\"{cost} por tramo\", {cost: money(cost)}) + \"</span>\";"
  },
  "Queda {n} tramo": {
   "w": [
-   "ui-life.js:204"
+   "ui-life.js:215"
   ],
   "ctx": "if (active) s += '<span class=\"lfleft\">' + trn(sv.left, \"Queda {n} tramo\", \"Quedan {n} tramos\") + '</span><button class=\"btn sm\" data-a=\"lffire\" data-v=\"' + d.k + '\">' + tr(\"Cancelar\") + \"</button>\";",
   "note": "plural:singular"
  },
  "Quedan {n} tramos": {
   "w": [
-   "ui-life.js:204"
+   "ui-life.js:215"
   ],
   "ctx": "if (active) s += '<span class=\"lfleft\">' + trn(sv.left, \"Queda {n} tramo\", \"Quedan {n} tramos\") + '</span><button class=\"btn sm\" data-a=\"lffire\" data-v=\"' + d.k + '\">' + tr(\"Cancelar\") + \"</button>\";",
   "note": "plural:plural"
  },
  "Contratar": {
   "w": [
-   "ui-life.js:205",
+   "ui-life.js:216",
    "ui-mgrplus.js:34"
   ],
   "ctx": "else s += '<button class=\"btn sm pri\" data-a=\"lfhire\" data-v=\"' + d.k + '\"' + (p.money < cost ? \" disabled\" : \"\") + \">\" + tr(\"Contratar\") + \"</button>\";"
  },
  "Inversiones": {
   "w": [
-   "ui-life.js:208"
+   "ui-life.js:219"
   ],
   "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Inversiones\") + '</h3><p class=\"muted lfhint\">' + tr(\"Se revalorizan (o no) al final de cada temporada. Puedes vender cuando quieras.\") + \"</p>\";"
  },
  "Se revalorizan (o no) al final de cada temporada. Puedes vender cuando quieras.": {
   "w": [
-   "ui-life.js:208"
+   "ui-life.js:219"
   ],
   "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Inversiones\") + '</h3><p class=\"muted lfhint\">' + tr(\"Se revalorizan (o no) al final de cada temporada. Puedes vender cuando quieras.\") + \"</p>\";"
  },
  "Compra: {p} ({year}) · Vale: {v}": {
   "w": [
-   "ui-life.js:211"
+   "ui-life.js:222"
   ],
   "ctx": "return '<div class=\"lfrow on\"><span class=\"lfico\" aria-hidden=\"true\">' + d.ico + '</span><div class=\"grow\"><b>' + h(tr(d.n)) + \"</b><small>\" + tr(\"Compra: {p} ({year}) · Vale: {v}\", {p: money(x.p), year: x.y, v: money(x."
  },
  "Vender": {
   "w": [
-   "ui-life.js:212",
+   "ui-life.js:223",
    "ui-45.js:51"
   ],
   "ctx": "'<div class=\"lfrowf\"><span class=\"' + (dif >= 0 ? \"pos\" : \"neg\") + '\">' + (dif >= 0 ? \"+\" : \"−\") + money(Math.abs(dif)) + '</span><button class=\"btn sm\" data-a=\"lfsell\" data-v=\"' + i + '\">' + tr(\"Vender\") + \"</button></d"
  },
  "Riesgo alto": {
   "w": [
-   "ui-life.js:215"
+   "ui-life.js:226"
   ],
   "ctx": "var risk = d.risk >= 2 ? tr(\"Riesgo alto\") : d.risk >= 1 ? tr(\"Riesgo medio\") : d.risk > 0 ? tr(\"Riesgo medio-bajo\") : tr(\"Riesgo bajo\");"
  },
  "Riesgo medio": {
   "w": [
-   "ui-life.js:215"
+   "ui-life.js:226"
   ],
   "ctx": "var risk = d.risk >= 2 ? tr(\"Riesgo alto\") : d.risk >= 1 ? tr(\"Riesgo medio\") : d.risk > 0 ? tr(\"Riesgo medio-bajo\") : tr(\"Riesgo bajo\");"
  },
  "Riesgo medio-bajo": {
   "w": [
-   "ui-life.js:215"
+   "ui-life.js:226"
   ],
   "ctx": "var risk = d.risk >= 2 ? tr(\"Riesgo alto\") : d.risk >= 1 ? tr(\"Riesgo medio\") : d.risk > 0 ? tr(\"Riesgo medio-bajo\") : tr(\"Riesgo bajo\");"
  },
  "Riesgo bajo": {
   "w": [
-   "ui-life.js:215"
+   "ui-life.js:226"
   ],
   "ctx": "var risk = d.risk >= 2 ? tr(\"Riesgo alto\") : d.risk >= 1 ? tr(\"Riesgo medio\") : d.risk > 0 ? tr(\"Riesgo medio-bajo\") : tr(\"Riesgo bajo\");"
  },
  "Contratado: {svc} ({cost}).": {
   "w": [
-   "ui-life.js:223"
+   "ui-life.js:234"
   ],
   "ctx": "if (r.ok) U.toast(tr(\"Contratado: {svc} ({cost}).\", {svc: tr(d.n), cost: money(r.cost)}));"
  },
  "Contrato cancelado.": {
   "w": [
-   "ui-life.js:227"
+   "ui-life.js:238"
   ],
   "ctx": "U.actions.lffire = function (b, v) { lifeFire(v); U.toast(tr(\"Contrato cancelado.\")); rer(); };"
  },
  "Inversión hecha: {inv}.": {
   "w": [
-   "ui-life.js:230"
+   "ui-life.js:241"
   ],
   "ctx": "if (r.ok) U.toast(tr(\"Inversión hecha: {inv}.\", {inv: tr(lifeInvDef(v).n)}));"
  },
  "Ya tienes demasiadas inversiones.": {
   "w": [
-   "ui-life.js:231"
+   "ui-life.js:242"
   ],
   "ctx": "else if (r.full) U.toast(tr(\"Ya tienes demasiadas inversiones.\"));"
  },
  "Vendido por {v}.": {
   "w": [
-   "ui-life.js:235"
+   "ui-life.js:246"
   ],
   "ctx": "U.actions.lfsell = function (b, v) { var m = lifeSell(+v); U.toast(tr(\"Vendido por {v}.\", {v: money(m)})); rer(); };"
  },
  "Fama {n}": {
   "w": [
-   "ui-life.js:240"
+   "ui-life.js:251"
   ],
   "ctx": "if (lk.k === \"fame\") return \"🔒 \" + tr(\"Fama {n}\", {n: lk.v});"
  },
  "Ser capitán": {
   "w": [
-   "ui-life.js:242"
+   "ui-life.js:253"
   ],
   "ctx": "if (lk.k === \"cap\") return \"🔒 \" + tr(\"Ser capitán\");"
  },
  "Tono {n}": {
   "w": [
-   "ui-life.js:251"
+   "ui-life.js:262"
   ],
   "ctx": "return '<button class=\"lfo' + (lk ? \" lk\" : \"\") + '\" data-a=\"lfcos\" data-k=\"' + cat + '\" data-v=\"' + it.id + '\" aria-pressed=\"' + sel + '\"' + (swatch && !it.n ? ' aria-label=\"' + h(tr(\"Tono {n}\", {n: it.id.slice(1)})) + "
  },
  "Algunas piezas se desbloquean con fama, títulos o dinero.": {
   "w": [
-   "ui-life.js:256"
+   "ui-life.js:269"
   ],
-  "ctx": "var s = \"<h2>\" + tr(\"Look y celebración\") + '</h2><div class=\"stack\"><div class=\"lflookprev\">' + myAvatar(\"lfsvg big rig\") + '<div><span class=\"eyebrow\">' + tr(\"Celebración\") + \"</span><b>\" + h(tr(lifeCel().n)) + '</b><p"
- },
- "Ver en 3D": {
-  "w": [
-   "ui-life.js:257",
-   "ui-pets.js:254"
-  ],
-  "ctx": "if (typeof View3D !== \"undefined\" && View3D && View3D.supported()) s += '<button class=\"btn v3dbtn\" data-a=\"lf3d\">' + tr(\"Ver en 3D\") + \"</button>\";"
- },
- "Mangas y mallas": {
-  "w": [
-   "ui-life.js:261"
-  ],
-  "ctx": "s += cosRow(\"sleeve\", tr(\"Mangas y mallas\"));"
+  "ctx": "var s = \"<h2>\" + tr(\"Look y celebración\") + '</h2><div class=\"stack\"><div class=\"lflookprev\"><div class=\"lfprev3d\">' + myAvatar(\"lfsvg big rig\") + '</div><div><span class=\"eyebrow\">' + tr(\"Celebración\") + \"</span><b>\" + "
  },
  "Piel": {
   "w": [
-   "ui-life.js:263"
+   "ui-life.js:271"
   ],
   "ctx": "s += cosRow(\"skin\", tr(\"Piel\"), true);"
  },
  "Pelo": {
   "w": [
-   "ui-life.js:264"
+   "ui-life.js:272"
   ],
   "ctx": "s += cosRow(\"hair\", tr(\"Pelo\"));"
  },
  "Color de pelo": {
   "w": [
-   "ui-life.js:265"
+   "ui-life.js:273"
   ],
   "ctx": "s += cosRow(\"hcol\", tr(\"Color de pelo\"), true);"
  },
  "No te llega el dinero ({v}).": {
   "w": [
-   "ui-life.js:271"
+   "ui-life.js:280"
   ],
   "ctx": "if (!r.ok && r.lock) U.toast(r.poor ? tr(\"No te llega el dinero ({v}).\", {v: money(r.lock.v)}) : tr(\"Bloqueado: {req}.\", {req: lockTxt(r.lock).replace(\"🔒 \", \"\")}));"
  },
  "Bloqueado: {req}.": {
   "w": [
-   "ui-life.js:271"
+   "ui-life.js:280"
   ],
   "ctx": "if (!r.ok && r.lock) U.toast(r.poor ? tr(\"No te llega el dinero ({v}).\", {v: money(r.lock.v)}) : tr(\"Bloqueado: {req}.\", {req: lockTxt(r.lock).replace(\"🔒 \", \"\")}));"
  },
  "Comprado por {v}.": {
   "w": [
-   "ui-life.js:272"
+   "ui-life.js:281"
   ],
   "ctx": "else if (r.paid) U.toast(tr(\"Comprado por {v}.\", {v: money(r.paid)}));"
  },
  "Rivalidad": {
   "w": [
-   "ui-life.js:289",
-   "ui-life.js:291"
+   "ui-life.js:298",
+   "ui-life.js:300"
   ],
   "ctx": "if (!rv) return \"<h2>\" + tr(\"Rivalidad\") + '</h2><p class=\"muted\">' + tr(\"Aún no tienes rival.\") + '</p><button class=\"btn wide\" data-a=\"close\">' + tr(\"Cerrar\") + \"</button>\";"
  },
  "Aún no tienes rival.": {
   "w": [
-   "ui-life.js:289"
+   "ui-life.js:298"
   ],
   "ctx": "if (!rv) return \"<h2>\" + tr(\"Rivalidad\") + '</h2><p class=\"muted\">' + tr(\"Aún no tienes rival.\") + '</p><button class=\"btn wide\" data-a=\"close\">' + tr(\"Cerrar\") + \"</button>\";"
  },
  "Duelos": {
   "w": [
-   "ui-life.js:293"
+   "ui-life.js:302"
   ],
   "ctx": "s += '<div class=\"lfmid\"><span class=\"eyebrow\">' + tr(\"Duelos\") + '</span><div class=\"lfscore num\"><b>' + rv.h2h[0] + \"</b><i>\" + rv.h2h[1] + \"</i><b>\" + rv.h2h[2] + '</b></div><small class=\"muted\">' + tr(\"G · E · P\") + "
  },
  "G · E · P": {
   "w": [
-   "ui-life.js:293"
+   "ui-life.js:302"
   ],
   "ctx": "s += '<div class=\"lfmid\"><span class=\"eyebrow\">' + tr(\"Duelos\") + '</span><div class=\"lfscore num\"><b>' + rv.h2h[0] + \"</b><i>\" + rv.h2h[1] + \"</i><b>\" + rv.h2h[2] + '</b></div><small class=\"muted\">' + tr(\"G · E · P\") + "
  },
  "Desde {year}": {
   "w": [
-   "ui-life.js:295"
+   "ui-life.js:304"
   ],
   "ctx": "s += '<div class=\"seg\"><button data-a=\"lfrvm\" data-v=\"s\" aria-pressed=\"' + (mode === \"s\") + '\">' + tr(\"Temporada {season}\", {season: seasonLabel(S.yr)}) + '</button><button data-a=\"lfrvm\" data-v=\"c\" aria-pressed=\"' + (mo"
  },
  "% de paradas": {
   "w": [
-   "ui-life.js:303"
+   "ui-life.js:312"
   ],
   "ctx": "s += statRow(tr(\"% de paradas\"), sp(me), sp(him), {fmt: function (x) { return fmtDec(x, 1) + \" %\"; }});"
  },
  "Nota media": {
   "w": [
-   "ui-life.js:310"
+   "ui-life.js:319"
   ],
   "ctx": "s += statRow(tr(\"Nota media\"), me.rn ? avg(me) : null, him.rn ? avg(him) : null, {fmt: function (x) { return fmtDec(x, 2); }});"
  },
  "Carreras": {
   "w": [
-   "ui-life.js:314"
+   "ui-life.js:323"
   ],
   "ctx": "s += '<h3 class=\"lfsec\">' + tr(\"Carreras\") + '</h3><div class=\"kvlist\">' + races.map(function (r) {"
  },
  "{n}º": {
   "w": [
-   "ui-life.js:316"
+   "ui-life.js:325"
   ],
   "ctx": "var f = function (x) { return x == null ? \"—\" : r.rank ? (x ? tr(\"{n}º\", {n: x}) : \"—\") : r.dec ? fmtDec(x, r.dec) : x; };"
  },
  "Titulares": {
   "w": [
-   "ui-life.js:321"
+   "ui-life.js:330"
   ],
   "ctx": "if (rv.hl.length) s += '<h3 class=\"lfsec\">' + tr(\"Titulares\") + '</h3><ul class=\"news lfnews\">' + rv.hl.map(function (x) { return '<li class=\"' + h(x.t || \"ok\") + '\"><small>' + seasonLabel(x.y) + \"</small> \" + h(tr(x.tk,"
  },
  "Últimos duelos": {
   "w": [
-   "ui-life.js:322"
+   "ui-life.js:331"
   ],
   "ctx": "if (rv.duels.length) s += '<h3 class=\"lfsec\">' + tr(\"Últimos duelos\") + '</h3><div class=\"kvlist\">' + rv.duels.map(function (d) {"
  },
  "Rivales anteriores": {
   "w": [
-   "ui-life.js:325"
+   "ui-life.js:334"
   ],
   "ctx": "if (L.rvh.length) s += '<h3 class=\"lfsec\">' + tr(\"Rivales anteriores\") + '</h3><div class=\"kvlist\">' + L.rvh.map(function (x) { return \"<div><span>\" + U.flag(x.ni) + \" \" + h(x.n) + \" · \" + x.a + \"–\" + x.b + '</span><span"
  },
  "Dorsales": {
   "w": [
-   "ui-life.js:337"
+   "ui-life.js:346"
   ],
   "ctx": "return '<section class=\"card\"><h3>' + tr(\"Dorsales\") + '</h3><div class=\"lfnumhist\">' + rows.slice().reverse().map(function (r) {"
  },
@@ -52330,6 +52700,12 @@
    "ui-pets.js:201"
   ],
   "ctx": "s += '<p class=\"muted lfhint\">' + tr(\"Cada etapa de tu mascota tiene su propio dibujo: cuando crezca, quizá tengas que volver a colocarlos.\") + \"</p>\";"
+ },
+ "Ver en 3D": {
+  "w": [
+   "ui-pets.js:254"
+  ],
+  "ctx": "if (typeof View3D !== \"undefined\" && View3D && View3D.supported()) s += '<button class=\"btn v3dbtn\" data-a=\"pet3d\">' + tr(\"Ver en 3D\") + (pt.tricks ? \" · \" + trn(Math.min(pt.tricks, 8), \"{n} truco\", \"{n} trucos\") : \"\") +"
  },
  "{n} truco": {
   "w": [
@@ -55134,12 +55510,6 @@
   ],
   "ctx": "o += '<div class=\"dlev ganga\"><div class=\"dlevh\">' + U.crest(t.club) + \"<div><b>\" + tr(\"Ganga: {name}\", {name: h(t.fn + \" \" + t.ln)}) + \"</b><small>\" + h(plLine(t)) + \" · \" + h(clubName(t.club)) + \"</small></div></div>\" "
  },
- "Precio": {
-  "w": [
-   "ui-45.js:55"
-  ],
-  "ctx": "'<div class=\"dlnums\"><span>' + tr(\"Precio\") + \" <b>\" + fmtMoney(e.fee) + \"</b> <s>\" + fmtMoney(t.ask) + \"</s></span><span>\" + tr(\"Sueldo\") + \" <b>\" + fmtMoney(t.sal) + \"</b></span><span>\" + tr(\"Caduca a las {t}\", {t: lef"
- },
  "Sueldo": {
   "w": [
    "ui-45.js:55"
@@ -55831,7 +56201,7 @@
  },
  "Vista 3D del partido": {
   "w": [
-   "pitch3d.js:4547"
+   "pitch3d.js:4559"
   ],
   "ctx": "canvas.setAttribute(\"aria-label\", label(\"Vista 3D del partido\"));"
  },

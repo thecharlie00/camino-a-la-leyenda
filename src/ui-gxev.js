@@ -5,13 +5,24 @@
   if (typeof UIX === "undefined" || typeof GXV === "undefined") return;
   var U = UIX;
   function cols() { try { var cc = clubColors(W.clubs[S.mode === "mgr" && S.m ? S.m.club : S.p.club].n); return [cc[0] || "#c8312f", cc[1] || "#f4f4f0"]; } catch (e) { return ["#c8312f", "#f4f4f0"]; } }
-  function look() { var o = {skin: "#c18a5e", hair: "#1d1612"}; try { var L = S.p.life || {}, c = L.cos || {}; var sk = LIFE_COS.skin.filter(function (x) { return x.id === (c.skin || "s2"); })[0], hc = LIFE_COS.hcol.filter(function (x) { return x.id === (c.hcol || "h1"); })[0]; if (sk) o.skin = sk.c; if (hc) o.hair = hc.c; } catch (e) {} return o; }
+  /* 5.7: el mismo aspecto que en «Yo» (PLook); en modo míster, el míster */
+  /* el míster va vestido según la escena: chándal en el entrenamiento, traje (sin abrigo) en sala de prensa y despacho, abrigo fuera si hace frío */
+  var SCK = {training: "train", stadium: "match", street: "out", locker: "indoor", press: "indoor", office: "indoor", home: "indoor", hospital: "indoor", party: "indoor", plane: "indoor"};
+  function look(sc) {
+    var o = {skin: "#c18a5e", hair: "#1d1612"};
+    try {
+      if (S.mode === "mgr") { var c = PLook.coach({kind: SCK[sc] || "indoor", cold: PLook.cold(null)}); o.skin = c.skin; o.hair = c.hair; o.boots = c.shoes; o.shirt = c.coat || c.suit; o.legs = c.suit; o.tie = c.tie; o.scarf = c.scarf; }
+      else { var p = PLook.player(); o.skin = p.skin; o.hair = p.hair; o.boots = p.boots; }
+    } catch (e) {}
+    return o;
+  }
   function build(sc, C, lk, spots) {
     var V = {};
     function box(x0, x1, y0, y1, z0, z1, c) { for (var x = x0; x <= x1; x++) for (var y = y0; y <= y1; y++) for (var z = z0; z <= z1; z++) V[x + "," + y + "," + z] = c; }
     function floor(c1, c2) { for (var x = -11; x <= 11; x++) for (var z = -6; z <= 6; z++) V[x + ",0," + z] = (x + z) % 2 === 0 ? c1 : c2 || c1; }
     function wall(c1, c2, h) { for (var x = -11; x <= 11; x++) for (var y = 1; y <= (h || 9); y++) V[x + "," + y + ",-6"] = (y % 3 === 0 && c2) ? c2 : c1; }
-    function man(x, z, shirt, shorts) { if (spots) { spots.push({x: x + 0.5, z: z, shirt: shirt, shorts: shorts, me: shirt === C[0]}); return; } box(x, x, 1, 2, z, z, "#1b1d1f"); box(x + 1, x + 1, 1, 2, z, z, "#1b1d1f"); box(x, x + 1, 3, 3, z, z, shorts || "#f4f4f0"); box(x - 1, x + 2, 4, 6, z, z, shirt); box(x, x + 1, 7, 8, z, z, lk.skin); box(x, x + 1, 9, 9, z, z, lk.hair); box(x - 1, x - 1, 4, 5, z, z, lk.skin); box(x + 2, x + 2, 4, 5, z, z, lk.skin); }
+    function man(x, z, shirt, shorts) { if (spots) { spots.push({x: x + 0.5, z: z, shirt: shirt, shorts: shorts, me: shirt === C[0]}); return; } box(x, x, 1, 1, z, z, lk.boots || "#1b1d1f"); box(x + 1, x + 1, 1, 1, z, z, lk.boots || "#1b1d1f"); box(x, x + 1, 2, 2, z, z, lk.legs || "#1b1d1f"); box(x, x + 1, 3, 3, z, z, lk.legs || shorts || "#f4f4f0"); box(x - 1, x + 2, 4, 6, z, z, lk.shirt || shirt);
+      if (lk.tie) { box(x, x + 1, 6, 6, z, z, "#f4f4f0"); box(x, x, 4, 5, z, z, lk.tie); } if (lk.scarf) box(x - 1, x + 2, 6, 6, z, z, lk.scarf); box(x, x + 1, 7, 8, z, z, lk.skin); box(x, x + 1, 9, 9, z, z, lk.hair); box(x - 1, x - 1, 4, 5, z, z, lk.skin); box(x + 2, x + 2, 4, 5, z, z, lk.skin); }
     function ball(x, y, z) { V[x + "," + y + "," + z] = "#f4f4f0"; V[(x + 1) + "," + y + "," + z] = "#1b1d1f"; }
     switch (sc) {
       case "locker":
@@ -58,14 +69,14 @@
   }
   var IMG = {};
   function img(sc) {
-    var C = cols(), lk = look(), k = sc + "|" + C.join("") + lk.skin + lk.hair;
+    var C = cols(), lk = look(sc), k = sc + "|" + C.join("") + JSON.stringify(lk);
     if (IMG[k]) return IMG[k];
     var key = "sc:" + k; GXV.reg(key, function () { return build(sc, C, lk); });
     try { var cv = document.createElement("canvas"); cv.width = 720; cv.height = 300; GXV.draw(cv, key, -0.5, {fit: true, scale: 1.35, shadow: false, metal: 0.05}); IMG[k] = cv.toDataURL(); } catch (e) { IMG[k] = ""; }
     return IMG[k];
   }
   /* plano 3D: vóxeles del decorado (sin personas) y dónde va cada persona */
-  U.gxScenePlan = function (sc) { var C = cols(), lk = look(), spots = [], V = build(sc, C, lk, spots); return {V: V, spots: spots, cols: C, key: sc + "|" + C.join("")}; };
+  U.gxScenePlan = function (sc) { var C = cols(), lk = look(sc), spots = [], V = build(sc, C, lk, spots); return {V: V, spots: spots, cols: C, kind: SCK[sc] || "indoor", key: sc + "|" + C.join("")}; };
   U.gxScene = function (sc) { var src = img(sc); return src ? '<div class="gxsc gxsc-' + sc + '" data-sc3="' + sc + '" aria-hidden="true"><img src="' + src + '" alt="" width="360" height="150"><i class="gxsc-l"></i></div>' : ""; };
   U.gxSceneImg = img;
 })();
