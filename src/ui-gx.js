@@ -108,7 +108,7 @@ var GXV = (function () {
   /* ---------- aviso en cola ---------- */
   var BUSY = false;
   function next() {
-    var g = S && GX.st(); if (!g || !g.q.length) { BUSY = false; return; }
+    var g = S && GX.st(); if (!g || !g.q.length || busyUI()) { BUSY = false; return; }
     BUSY = true;
     var id = g.q.shift(); U.persist();
     if (/^ch:/.test(id)) { chBanner(id.slice(3), function () { setTimeout(next, 180); }); return; }
@@ -148,6 +148,7 @@ var GXV = (function () {
       GXV.draw(cv, o.key || m.rar, spin, {scale: ts, dy: bob, shine: t > 0.9 && t < 1.6 ? 1 : 0, shineX: (t - 0.9) / 0.7, metal: m.rar === "b" ? 0.35 : 0.7});
       if (mi) mi.textContent = money(Math.round(rw * ease(Math.min(1, Math.max(0, t - 0.6) / 0.9)))).replace(/^\+/, "");
       if (t * 1000 > T) { close(); return; }
+      if (t > 0.3 && busyUI()) { if (!o.n && t < 2.5) GX.st().q.unshift(id); close(); return; }
       raf = requestAnimationFrame(frame);
     }
     function close() {
@@ -186,7 +187,9 @@ var GXV = (function () {
     });
     if (typeof Anim !== "undefined" && Anim.haptic) try { Anim.haptic("big"); } catch (e) {}
   }
-  U.gxNotify = function () { if (!BUSY && S && GX.st().q.length) next(); };
+  /* no tapa nada: espera a que se cierren el mundo de la mascota, los minijuegos, el directo y las animaciones */
+  function busyUI() { return !!document.querySelector(".pw, .spo, #live, .gup, .gxc, .mg, .sheet .shp"); }
+  U.gxNotify = function () { if (!BUSY && S && GX.st().q.length && !busyUI()) next(); };
 
   /* ---------- pantalla de trofeos ---------- */
   var old = U.sheets.ach;
