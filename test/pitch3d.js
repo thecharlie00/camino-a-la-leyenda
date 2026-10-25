@@ -152,8 +152,14 @@ function roster(prefix) {
   await p.waitForTimeout(900);
   const beforeX = await p.evaluate(() => Pitch3D.debug().ball.x);
   await p.evaluate(() => Pitch3D.state({ own: 0, bx: 82, speed: 1 }));
-  await p.waitForTimeout(900);
-  const afterAdvance = await p.evaluate(() => { const d = Pitch3D.debug(); return { x: d.ball.x, mode: d.ball.mode }; });
+  /* Se espera a la condición (hasta 6 s) y no un tiempo fijo: en CI el render por software va a pocos fps
+     y el reloj del partido avanza más despacio que el real (paso máximo de 0,25 s por fotograma). */
+  let afterAdvance = null;
+  for (let i = 0; i < 40; i++) {
+    await p.waitForTimeout(150);
+    afterAdvance = await p.evaluate(() => { const d = Pitch3D.debug(); return { x: d.ball.x, mode: d.ball.mode }; });
+    if (afterAdvance.x > beforeX + 2 || afterAdvance.mode === "flight") break;
+  }
   if (afterAdvance.x > beforeX + 2 || afterAdvance.mode === "flight") notes.push("posesión y avance · " + beforeX.toFixed(1) + "→" + afterAdvance.x.toFixed(1) + " " + afterAdvance.mode);
   else fail.push("posesión y avance: el balón no avanzó");
 
@@ -603,7 +609,8 @@ function roster(prefix) {
   await prival.evaluate(() => { Math.random = () => 0.9; });
   await prival.click("[data-p3d-coin='cara']");
   let rivalPlan = null;
-  for (let i = 0; i < 30; i++) {
+  /* moneda (1,15 s) + resultado (1,25 s) en tiempo del partido: con margen para CI lento */
+  for (let i = 0; i < 150; i++) {
     rivalPlan = await prival.evaluate(() => {
       const c = Pitch3D.cinema(), e = document.querySelector("[data-p3d-rival-why]");
       return c ? { stage: c.stage, choice: c.coin && c.coin.choice, why: e ? e.textContent : "" } : null;
@@ -615,7 +622,7 @@ function roster(prefix) {
     notes.push("sorteo rival · decide pelota y explica su motivo");
   else fail.push("sorteo rival: decisión/motivo incompletos " + JSON.stringify(rivalPlan));
   let rivalDone = null;
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 150; i++) {
     rivalDone = await prival.evaluate(() => {
       const d = Pitch3D.debug(), c = Pitch3D.cinema(), e = document.querySelector("[data-p3d-choice-result]");
       return { cinema: !!c, attack: d.sim.attack.slice(), result: e ? e.getAttribute("data-p3d-choice-result") : "",

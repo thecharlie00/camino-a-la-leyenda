@@ -2123,6 +2123,18 @@ var Pitch3D = (function () {
 
   function updateGoalKickAction(a) {
     var gk = a.gk, ph = a.phases[a.phaseIndex];
+    /* Hasta el golpeo, la zona se vigila en cada fotograma: si el saque se creó
+     * durante una repetición, al terminar esta se restauran las posiciones
+     * guardadas y algún rival puede volver a quedar dentro del área. Con el balón
+     * muerto se le recoloca fuera (y quieto) como en la preparación. */
+    if (gk && !a.launched) {
+      var chk = goalKickSpaceStats(a.side, gk);
+      if (!chk.outside || chk.minDist < GK_SAFE_DIST) {
+        var fix = placeGoalKickOpponents(a.side, gk);
+        a.opponentsMoved = (a.opponentsMoved || 0) + fix.moved;
+      }
+      if (a.t < 0) { var sp0 = goalKickSpaceStats(a.side, gk); a.opponentsOutside = sp0.outside; a.playersInsideArea = sp0.inside; }
+    }
     /* Ningún rival puede acercarse al portero durante el saque. La IA está
      * congelada y aquí solo se mide la separación para depurar/pruebas. */
     if (gk && a.t >= 0) {
