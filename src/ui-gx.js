@@ -40,9 +40,9 @@ var GXV = (function () {
   function reg(k, fn) { REG[k] = fn; delete CACHE[k]; Object.keys(IMG).forEach(function (i) { if (i.indexOf(k) === 0) delete IMG[i]; }); }
   function faces(rar) {
     if (CACHE[rar]) return CACHE[rar];
-    var V = REG[rar] ? REG[rar]() : model(rar), F = [], N = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]], miny = 99, maxy = -99;
+    var V = REG[rar] ? REG[rar]() : model(rar), F = [], N = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]], miny = 99, maxy = -99, rad = 0;
     Object.keys(V).forEach(function (k) {
-      var p = k.split(",").map(Number); miny = Math.min(miny, p[1]); maxy = Math.max(maxy, p[1]);
+      var p = k.split(",").map(Number); miny = Math.min(miny, p[1]); maxy = Math.max(maxy, p[1]); rad = Math.max(rad, Math.hypot(p[0], p[2]) + 0.8);
       N.forEach(function (n) {
         if (V[key(p[0] + n[0], p[1] + n[1], p[2] + n[2])]) return;
         var q = [], ax = n[0] ? 0 : n[1] ? 1 : 2, a = (ax + 1) % 3, b = (ax + 2) % 3;
@@ -50,7 +50,7 @@ var GXV = (function () {
         F.push({q: q, n: n, c: V[k]});
       });
     });
-    CACHE[rar] = {F: F, cy: (miny + maxy) / 2, h: maxy - miny + 1};
+    CACHE[rar] = {F: F, cy: (miny + maxy) / 2, h: maxy - miny + 1, r: rad};
     return CACHE[rar];
   }
   function shade(hex, k) {
@@ -61,7 +61,7 @@ var GXV = (function () {
   /* dibuja el trofeo girado «ang» (rad) dentro de un lienzo; brillo extra con «shine» (0..1) */
   function draw(cv, rar, ang, o) {
     o = o || {};
-    var ctx = cv.getContext("2d"), W = cv.width, H = cv.height, M = faces(rar), sc = (o.scale || 1) * H / (M.h + 6), ca = Math.cos(ang), sa = Math.sin(ang), tilt = 0.32, ct = Math.cos(tilt), stt = Math.sin(tilt);
+    var ctx = cv.getContext("2d"), W = cv.width, H = cv.height, M = faces(rar), sc = (o.scale || 1) * (o.fit ? Math.min(H / (M.h * 0.95 + M.r * 0.62 + 2), W / (M.r * 2.1)) : H / (M.h + 6)), ca = Math.cos(ang), sa = Math.sin(ang), tilt = 0.32, ct = Math.cos(tilt), stt = Math.sin(tilt);
     ctx.clearRect(0, 0, W, H);
     var L = [-0.45, 0.8, 0.4], ll = Math.hypot(L[0], L[1], L[2]); L = [L[0] / ll, L[1] / ll, L[2] / ll];
     var out = [];

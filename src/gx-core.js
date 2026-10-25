@@ -289,7 +289,10 @@ var GX = (function () {
     doble_nacionalidad: function () { api.flag("dualNat"); },
     periodista: function (i) { if (i === 0) api.flag("pressFight"); },
     arabia: function (i) { if (i === 0) api.flag("exotic"); },
-    renovacion: function (i) { var g = st(); g.f.renewTw = S.tw; g.f.renewY = S.yr; }
+    renovacion: function (i) { var g = st(); g.f.renewTw = S.tw; g.f.renewY = S.yr; },
+    gx_renovar_ya: function (i) { if (i === 0) { var g = st(); g.f.renewTw = S.tw; g.f.renewY = S.yr; } },
+    gx_tocado_final: function (i, ok) { if (i === 0 && ok) st().f.hurtEve = S.tw; },
+    gx_fiesta_vispera: function (i) { if (i === 0) st().f.partyEve = S.tw; }
   };
   api.CHOICE = CHOICE;
   api.on("choice", function (o) {
