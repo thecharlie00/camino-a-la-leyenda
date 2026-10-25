@@ -16,6 +16,7 @@ const OUT = process.argv[2] || "/tmp/shop56"; fs.mkdirSync(OUT, { recursive: tru
   await js(() => { S.p.money = 3e6; });
   await js(() => { UIX.ui().sh = { tab: "feat" }; UIX.open("shop"); }); await p.waitForTimeout(1200);
   await p.screenshot({ path: path.join(OUT, "01-destacados.png") });
+  console.log("fps con escaparate", await js(() => new Promise(res => { let n = 0, t0 = performance.now(); (function f() { n++; if (performance.now() - t0 < 1500) requestAnimationFrame(f); else res(Math.round(n / 1.5)); })(); })));
   const f = await js(() => ({ n: document.querySelectorAll(".shi").length, feat: GXI.featured(), off: GXI.offers(), stock: GXI.stock("p").length }));
   console.log("destacados", JSON.stringify(f)); if (f.n < 2) fail.push("destacados");
   await click('[data-a="shoptab"][data-v="p"]'); await p.waitForTimeout(600);

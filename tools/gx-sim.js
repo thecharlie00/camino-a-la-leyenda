@@ -6,7 +6,7 @@ const N = +(process.argv[2] || 6), MGR = process.argv.includes("--mgr");
 const ctx = {console, Math, Date, JSON}; vm.createContext(ctx);
 vm.runInContext(files.map(f => fs.readFileSync(path.join(SRC, f), "utf8")).join("\n"), ctx, {filename: "game.js"});
 const G = ctx; let rnd = 777; const r = () => (rnd = (rnd * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
-const got = {}, firstAt = {}, money = [], chs = []; let errs = 0;
+const got = {}, firstAt = {}, money = [], chs = [], mst = [], rich = []; let errs = 0;
 function pick(d) { const ok = d.opts.map((o, i) => o.dis ? -1 : i).filter(i => i >= 0); return ok.length ? ok[Math.floor(r() * ok.length)] : 0; }
 function step() {
   G.cleanPendPlayer(); const S = G.S;
@@ -24,8 +24,8 @@ for (let i = 0; i < N; i++) {
     const chk = () => { G.achCheck(); Object.keys(G.S.ach || {}).forEach(id => { if (!ids[id]) { ids[id] = 1; got[id] = (got[id] || 0) + 1; (firstAt[id] = firstAt[id] || []).push(G.S.p ? G.S.p.age : 0); } }); };
     while (G.S.ph !== "ret" && k++ < 40000) { step(); if (k % 25 === 0) chk(); }
     chk();
-    Object.keys((G.S.gx || {}).t || {}).forEach(id => { m0 += G.S.gx.t[id].$ || 0; }); money.push(m0); chs.push(Object.keys((G.S.gx || {}).ch || {}).length);
-    if (MGR) { G.S.p.age = 34; G.startManager(); let j = 0; while (G.S.ph !== "ret" && j++ < 120000) { mstep(); if (j % 40 === 0) chk(); if (G.S.m && G.S.m.seasons.length >= 10 && G.S.ph === "off" && !G.S.pend.length) break; } chk(); }
+    Object.keys((G.S.gx || {}).t || {}).forEach(id => { m0 += G.S.gx.t[id].$ || 0; }); money.push(m0); rich.push(Math.round((G.S.p.money || 0) / 1000)); chs.push(Object.keys((G.S.gx || {}).ch || {}).length);
+    if (MGR) { G.S.p.age = 34; G.startManager(); let j = 0; while (G.S.ph !== "ret" && j++ < 120000) { mstep(); if (j % 40 === 0) chk(); if (G.S.m && G.S.m.seasons.length >= 10 && G.S.ph === "off" && !G.S.pend.length) break; } chk(); mst.push(JSON.stringify(G.GXM.stats())); }
     process.stdout.write(".");
   } catch (e) { errs++; console.log("\nERROR", i, e.stack); }
 }
@@ -36,5 +36,7 @@ Object.keys(byR).forEach(k => { const a = byR[k]; console.log(k, "media de carre
 console.log("Nunca:", rows.filter(x => !x[3] && x[2] === (MGR ? x[2] : "p")).map(x => x[0]).join(" "));
 console.log("Siempre:", rows.filter(x => x[3] === N).map(x => x[0]).join(" "));
 console.log("Dinero de trofeos por carrera:", money.map(x => Math.round(x / 1000) + "k").join(" "));
+console.log("Dinero del jugador al retirarse (k€):", rich.join(" "));
+if (mst.length) console.log("Estadísticas finales del míster:\n " + mst.join("\n "));
 console.log("Retos superados por carrera (de 42 de jugador):", chs.join(" "));
 console.log(rows.filter(x => x[3]).map(x => x[0] + ":" + x[3]).join(" "));

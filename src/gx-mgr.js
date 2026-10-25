@@ -28,7 +28,7 @@ var GXM = (function () {
   /* nivel del partido: táctica, lectura y motivación (un empujón pequeño, nunca decisivo) */
   if (typeof mBuffs === "function") {
     var _mb = mBuffs;
-    root.mBuffs = function () { var b = _mb.apply(this, arguments); try { if (on()) { var s = GXM.stats(); b += Math.max(-0.25, Math.min(0.8, (s.tac - 48) * 0.011 + (s.lec - 48) * 0.008 + (s.mot - 48) * 0.004)); } } catch (e) {} return b; };
+    root.mBuffs = function () { var b = _mb.apply(this, arguments); try { if (on()) { var s = GXM.stats(); b += Math.max(-0.25, Math.min(0.6, (s.tac - 48) * 0.011 + (s.lec - 48) * 0.008 + (s.mot - 48) * 0.004)); } } catch (e) {} return b; };
   }
   /* tras cada partido: el vestuario y la motivación mueven la química; la prensa, la afición */
   if (typeof mgrFinish === "function") {

@@ -148,7 +148,7 @@ var GX_T = [
   ["m_self", "mgr", "g", 0, "m", N_("Hecho a sí mismo"), N_("Gana una liga con un equipo recién ascendido."), ["f", "mPromotedChamp"], {title: N_("Hecho a sí mismo")}],
   ["m_youth", "mgr#", "g", 0, "m", N_("La cantera de mi barrio"), N_("Haz debutar a 20 canteranos."), ["s", "mYouthDebuts", 20]],
   ["m_europe", "mgr#", "g", 0, "m", N_("Rey del continente"), N_("Gana 3 títulos continentales como míster."), ["s", "mContinental", 3]],
-  ["m_where", "mgr", "s", 1, "m", N_("¿Dónde está mi equipo?"), N_("Gana un partido de liga con 7 jugadores fuera de su posición natural."), ["f", "mOutOfPos"]],
+  ["m_where", "mgr", "s", 1, "m", N_("¿Dónde está mi equipo?"), N_("Gana un partido de liga con 5 jugadores fuera de su línea natural."), ["f", "mOutOfPos"]],
   ["m_change", "mgr", "s", 0, "m", N_("El cambio perfecto"), N_("Gana un partido en directo tras hacer tres cambios."), ["f", "mSubsWin"]],
   ["m_arms", "mgr#", "b", 0, "m", N_("Brazos cruzados"), N_("Dirige 100 partidos."), ["s", "mGames", 100]],
   ["m_storm", "mgr", "b", 1, "m", N_("Bronca histórica"), N_("Pierde 3 partidos seguidos por tres goles o más."), ["s", "mBigLossStreak", 3]],

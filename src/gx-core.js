@@ -340,8 +340,8 @@ var GX = (function () {
     api.streak("mBigLoss", gt - gu >= 3);
     if (o.debuts) api.add("mYouthDebuts", o.debuts);
     if (win && f.kind === "lg" && f.xi && f.xi.length === 11 && typeof FORMATIONS !== "undefined") {
-      var sl = FORMATIONS[m.form] || [], off = f.xi.filter(function (id, i) { var pl = mPl(id); return pl && sl[i] && posFit(pl.pos, sl[i]) > 0; }).length;
-      if (off >= 7) api.flag("mOutOfPos");
+      var sl = FORMATIONS[m.form] || [], off = f.xi.filter(function (id, i) { var pl = mPl(id); return pl && sl[i] && posFit(pl.pos, sl[i]) >= 7; }).length;
+      if (off >= 5) api.flag("mOutOfPos");
     }
     var L = S.live; if (win && f.liveDone && L && (L.tchg || 0) >= 3) api.flag("mSubsWin");
     var R0 = S.retiredP; if (R0 && R0.seasons && R0.seasons.some(function (r) { return (r.clubs || [r.club]).indexOf(m.club) >= 0; })) api.flag("mExClub");
@@ -382,7 +382,7 @@ var GX = (function () {
     wrap("blockDone", function () { api.ev("block", {}); });
     wrap("mgrFinish", function (a, r, snap) {
       var m = S.m, f = a[0], deb = 0; if (!m || !f || S.mode !== "mgr") return;
-      m.sq.forEach(function (p) { var s0 = snap && snap[p.id]; if (s0 && p.yth && s0 === 0 && p.st && p.st.apps > 0) deb++; });
+      m.sq.forEach(function (p) { var s0 = snap ? snap[p.id] : undefined; if (s0 === 0 && p.yth && p.st && p.st.apps > 0) deb++; });
       api.ev("mmatch", {f: f, debuts: deb});
     }, function () { var m = S.m, o = {}; if (m) m.sq.forEach(function (p) { o[p.id] = (p.st ? p.st.apps : 0) + (p.tot ? p.tot.apps : 0); }); return o; });
     wrap("mgrSeasonEnd", function (a, r, pre) {
