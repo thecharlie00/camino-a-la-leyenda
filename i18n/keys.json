@@ -1812,8 +1812,8 @@
   "w": [
    "ui-gx.js:217",
    "ui-gear.js:109",
-   "view3d.js:300",
-   "pet-world.js:32"
+   "ui-shop.js:74",
+   "view3d.js:300"
   ],
   "ctx": "return s + '<button class=\"btn wide\" data-a=\"close\">' + h(tr(\"Cerrar\")) + \"</button></div>\";"
  },
@@ -2543,6 +2543,178 @@
   ],
   "ctx": "var GX_MATS = [[\"cu\", N_(\"Cuero\"), \"#a8703a\"], [\"fi\", N_(\"Fibra\"), \"#66b9ff\"], [\"es\", N_(\"Esquirla de estrella\"), \"#ffe58a\"]];"
  },
+ "Traje clásico": {
+  "w": [
+   "gx-items.js:323"
+  ],
+  "ctx": "[\"m_suit_cls\", \"suit\", N_(\"Traje clásico\"), {tac: 1, pre: 1}, \"mcl\", 0, null, {c: \"#2a3340\", c2: \"#7a1d1d\"}],"
+ },
+ "Traje de tweed": {
+  "w": [
+   "gx-items.js:324"
+  ],
+  "ctx": "[\"m_suit_tw\", \"suit\", N_(\"Traje de tweed\"), {lec: 2, neg: 1, pre: -1}, \"mbr\", 120000, null, {c: \"#6b5a3a\", c2: \"#2a4a2a\"}],"
+ },
+ "Traje blanco de finales": {
+  "w": [
+   "gx-items.js:325"
+  ],
+  "ctx": "[\"m_suit_wht\", \"suit\", N_(\"Traje blanco de finales\"), {mot: 2, pre: 1}, null, 400000, {tro: 3}, {c: \"#ecebe4\", c2: \"#1d1404\"}],"
+ },
+ "Chándal de banquillo": {
+  "w": [
+   "gx-items.js:326"
+  ],
+  "ctx": "[\"m_suit_trk\", \"suit\", N_(\"Chándal de banquillo\"), {fis: 2, ves: 1, pre: -1}, \"mtr\", 30000, null, {c: \"#1f4a8a\", c2: \"#f4f4f0\"}],"
+ },
+ "Abrigo largo": {
+  "w": [
+   "gx-items.js:327"
+  ],
+  "ctx": "[\"m_coat_long\", \"coat\", N_(\"Abrigo largo\"), {tac: 1, lec: 1}, \"mcl\", 60000, null, {c: \"#1b1d1f\"}],"
+ },
+ "Plumífero de banquillo": {
+  "w": [
+   "gx-items.js:328"
+  ],
+  "ctx": "[\"m_coat_pad\", \"coat\", N_(\"Plumífero de banquillo\"), {ves: 1, fis: 1}, \"mtr\", 25000, null, {c: \"#1f4a8a\"}],"
+ },
+ "Gabardina camel": {
+  "w": [
+   "gx-items.js:329"
+  ],
+  "ctx": "[\"m_coat_cam\", \"coat\", N_(\"Gabardina camel\"), {pre: 2, neg: 1, fis: -1}, \"mbr\", 180000, null, {c: \"#b08a5a\"}],"
+ },
+ "Zapatos clásicos": {
+  "w": [
+   "gx-items.js:330"
+  ],
+  "ctx": "[\"m_shoe_cls\", \"shoes\", N_(\"Zapatos clásicos\"), {pre: 1}, \"mcl\", 0, null, {c: \"#2a1a10\"}],"
+ },
+ "Zapatillas": {
+  "w": [
+   "gx-items.js:331"
+  ],
+  "ctx": "[\"m_shoe_run\", \"shoes\", N_(\"Zapatillas\"), {fis: 1, ves: 1}, \"mtr\", 15000, null, {c: \"#f4f4f0\"}],"
+ },
+ "Zapatos de lujo": {
+  "w": [
+   "gx-items.js:332"
+  ],
+  "ctx": "[\"m_shoe_lux\", \"shoes\", N_(\"Zapatos de lujo\"), {neg: 2, ves: -1}, \"mbr\", 150000, null, {c: \"#7a1d1d\"}],"
+ },
+ "Corbata roja": {
+  "w": [
+   "gx-items.js:333"
+  ],
+  "ctx": "[\"m_tie_red\", \"tie\", N_(\"Corbata roja\"), {mot: 1}, \"mcl\", 8000, null, {c: \"#c8312f\"}],"
+ },
+ "Corbata del club": {
+  "w": [
+   "gx-items.js:334"
+  ],
+  "ctx": "[\"m_tie_club\", \"tie\", N_(\"Corbata del club\"), {ves: 1, mot: 1}, null, 20000, null, {c: \"#ffb21e\"}],"
+ },
+ "Corbata de punto": {
+  "w": [
+   "gx-items.js:335"
+  ],
+  "ctx": "[\"m_tie_knit\", \"tie\", N_(\"Corbata de punto\"), {lec: 1, tac: 1}, \"mbr\", 45000, null, {c: \"#2a4a2a\"}],"
+ },
+ "Gafas de lectura": {
+  "w": [
+   "gx-items.js:336"
+  ],
+  "ctx": "[\"m_gl_read\", \"glasses\", N_(\"Gafas de lectura\"), {lec: 2, mot: -1}, \"mbr\", 30000, null, {c: \"#1b1d1f\"}],"
+ },
+ "Gafas de sol": {
+  "w": [
+   "gx-items.js:337",
+   "pet-items.js:40",
+   "pets.js:144"
+  ],
+  "ctx": "[\"m_gl_sun\", \"glasses\", N_(\"Gafas de sol\"), {pre: 2, ves: -1}, null, 60000, null, {c: \"#16191b\", c2: \"#2a3a40\"}],"
+ },
+ "Gafas de pizarra": {
+  "w": [
+   "gx-items.js:338"
+  ],
+  "ctx": "[\"m_gl_tac\", \"glasses\", N_(\"Gafas de pizarra\"), {tac: 2}, \"mcl\", 90000, {fame: 60}, {c: \"#cfd8dc\"}],"
+ },
+ "Bufanda del club": {
+  "w": [
+   "gx-items.js:339",
+   "pet-items.js:45",
+   "pets.js:147"
+  ],
+  "ctx": "[\"m_sc_club\", \"scarf\", N_(\"Bufanda del club\"), {mot: 1, ves: 1}, null, 12000, null, {c: \"#c8312f\"}],"
+ },
+ "Bufanda de lana": {
+  "w": [
+   "gx-items.js:340"
+  ],
+  "ctx": "[\"m_sc_wool\", \"scarf\", N_(\"Bufanda de lana\"), {fis: 1, jov: 1}, \"mtr\", 18000, null, {c: \"#e8eef0\"}],"
+ },
+ "Pañuelo de seda": {
+  "w": [
+   "gx-items.js:341"
+  ],
+  "ctx": "[\"m_sc_silk\", \"scarf\", N_(\"Pañuelo de seda\"), {neg: 1, pre: 1}, \"mbr\", 70000, null, {c: \"#7a3ad8\"}],"
+ },
+ "Libreta de notas": {
+  "w": [
+   "gx-items.js:342"
+  ],
+  "ctx": "[\"m_nb_basic\", \"notes\", N_(\"Libreta de notas\"), {tac: 1}, null, 3000, null, {c: \"#ffb21e\"}],"
+ },
+ "Tableta de datos": {
+  "w": [
+   "gx-items.js:343"
+  ],
+  "ctx": "[\"m_nb_tab\", \"notes\", N_(\"Tableta de datos\"), {lec: 2, tac: 1, ves: -1}, \"mcl\", 140000, null, {c: \"#2a3a40\"}],"
+ },
+ "Cuaderno de la cantera": {
+  "w": [
+   "gx-items.js:344"
+  ],
+  "ctx": "[\"m_nb_youth\", \"notes\", N_(\"Cuaderno de la cantera\"), {jov: 2, tac: 1}, null, 50000, null, {c: \"#2ad15a\"}],"
+ },
+ "Reloj de bolsillo": {
+  "w": [
+   "gx-items.js:345"
+  ],
+  "ctx": "[\"m_wa_cls\", \"watch\", N_(\"Reloj de bolsillo\"), {lec: 1}, \"mcl\", 25000, null, {c: \"#e8c35a\"}],"
+ },
+ "Reloj deportivo": {
+  "w": [
+   "gx-items.js:346"
+  ],
+  "ctx": "[\"m_wa_sport\", \"watch\", N_(\"Reloj deportivo\"), {fis: 1, jov: 1}, \"mtr\", 20000, null, {c: \"#1b1d1f\"}],"
+ },
+ "Reloj de coleccionista": {
+  "w": [
+   "gx-items.js:347"
+  ],
+  "ctx": "[\"m_wa_lux\", \"watch\", N_(\"Reloj de coleccionista\"), {neg: 2, pre: 1, ves: -1}, \"mbr\", 500000, {fame: 70}, {c: \"#f6c83a\"}]"
+ },
+ "Línea Pizarra": {
+  "w": [
+   "gx-items.js:350"
+  ],
+  "ctx": "GX_SETS.push({k: \"mcl\", n: N_(\"Línea Pizarra\"), b3: {tac: 1}, bAll: {tac: 2, lec: 1}}, {k: \"mbr\", n: N_(\"Línea Despacho\"), b3: {neg: 1}, bAll: {neg: 2, pre: 1}}, {k: \"mtr\", n: N_(\"Línea Chándal\"), b3: {fis: 1}, bAll: {fi"
+ },
+ "Línea Despacho": {
+  "w": [
+   "gx-items.js:350"
+  ],
+  "ctx": "GX_SETS.push({k: \"mcl\", n: N_(\"Línea Pizarra\"), b3: {tac: 1}, bAll: {tac: 2, lec: 1}}, {k: \"mbr\", n: N_(\"Línea Despacho\"), b3: {neg: 1}, bAll: {neg: 2, pre: 1}}, {k: \"mtr\", n: N_(\"Línea Chándal\"), b3: {fis: 1}, bAll: {fi"
+ },
+ "Línea Chándal": {
+  "w": [
+   "gx-items.js:350"
+  ],
+  "ctx": "GX_SETS.push({k: \"mcl\", n: N_(\"Línea Pizarra\"), b3: {tac: 1}, bAll: {tac: 2, lec: 1}}, {k: \"mbr\", n: N_(\"Línea Despacho\"), b3: {neg: 1}, bAll: {neg: 2, pre: 1}}, {k: \"mtr\", n: N_(\"Línea Chándal\"), b3: {fis: 1}, bAll: {fi"
+ },
  "Equipamiento": {
   "w": [
    "ui-gear.js:75",
@@ -2594,13 +2766,15 @@
  },
  "Frente a lo que llevas:": {
   "w": [
-   "ui-gear.js:120"
+   "ui-gear.js:120",
+   "ui-shop.js:85"
   ],
   "ctx": "'<div class=\"gpc-st\">' + chips(st) + \"</div>\" + (!on && cur ? '<div class=\"gpc-cmp\"><small>' + h(tr(\"Frente a lo que llevas:\")) + \"</small> \" + (chips(st, curSt) || '<span class=\"muted\">' + h(tr(\"igual\")) + \"</span>\") + "
  },
  "igual": {
   "w": [
-   "ui-gear.js:120"
+   "ui-gear.js:120",
+   "ui-shop.js:85"
   ],
   "ctx": "'<div class=\"gpc-st\">' + chips(st) + \"</div>\" + (!on && cur ? '<div class=\"gpc-cmp\"><small>' + h(tr(\"Frente a lo que llevas:\")) + \"</small> \" + (chips(st, curSt) || '<span class=\"muted\">' + h(tr(\"igual\")) + \"</span>\") + "
  },
@@ -2647,6 +2821,118 @@
    "ui-gear.js:137"
   ],
   "ctx": "el.innerHTML = '<canvas class=\"gup-fx\" aria-hidden=\"true\"></canvas><canvas class=\"gup-c\" width=\"360\" height=\"360\" aria-hidden=\"true\"></canvas><div class=\"gup-t\"><small>' + h(tr(\"¡Mejorada!\")) + \"</small><b>\" + h(tr(GXI.i"
+ },
+ "Títulos {a} / {b}": {
+  "w": [
+   "ui-shop.js:38"
+  ],
+  "ctx": "if (lk.k === \"tro\") { var n = (S.mode === \"mgr\" ? m : p).trophies.length; return [tr(\"Títulos {a} / {b}\", {a: n, b: lk.v}), n / lk.v]; }"
+ },
+ "Necesitas ser capitán": {
+  "w": [
+   "ui-shop.js:39"
+  ],
+  "ctx": "if (lk.k === \"cap\") return [tr(\"Necesitas ser capitán\"), 0];"
+ },
+ "Bloqueado": {
+  "w": [
+   "ui-shop.js:41"
+  ],
+  "ctx": "return [tr(\"Bloqueado\"), 0];"
+ },
+ "Buscar más en la tienda": {
+  "w": [
+   "ui-shop.js:45"
+  ],
+  "ctx": "U.gearShopLink = function (w, sl) { return '<button class=\"btn wide sm\" data-a=\"shopopen\" data-v=\"' + (w === \"m\" ? \"m\" : \"p\") + '\" data-s=\"' + sl + '\">' + h(tr(\"Buscar más en la tienda\")) + \"</button>\"; };"
+ },
+ "Tienda": {
+  "w": [
+   "ui-shop.js:60",
+   "ui-shop.js:163"
+  ],
+  "ctx": "var s = \"<h2>\" + h(tr(\"Tienda\")) + '</h2><div class=\"stack shp\">';"
+ },
+ "Las existencias cambian cada día.": {
+  "w": [
+   "ui-shop.js:62"
+  ],
+  "ctx": "s += '<div class=\"shp-top\"><small class=\"muted\">' + h(tr(\"Las existencias cambian cada día.\")) + '</small><b class=\"shp-money\">' + h(fmtMoney(pr ? pr.money : 0)) + \"</b></div>\";"
+ },
+ "La ropa de entrenador estará disponible cuando te sientes en un banquillo.": {
+  "w": [
+   "ui-shop.js:63"
+  ],
+  "ctx": "if (tab === \"m\" && S.mode !== \"mgr\") s += '<p class=\"muted\">' + h(tr(\"La ropa de entrenador estará disponible cuando te sientes en un banquillo.\")) + \"</p>\";"
+ },
+ "Adopta una mascota para comprarle accesorios.": {
+  "w": [
+   "ui-shop.js:64"
+  ],
+  "ctx": "else if (tab === \"pet\" && !petNow()) s += '<p class=\"muted\">' + h(tr(\"Adopta una mascota para comprarle accesorios.\")) + \"</p>\";"
+ },
+ "Hoy no queda nada por aquí: vuelve mañana.": {
+  "w": [
+   "ui-shop.js:65"
+  ],
+  "ctx": "else if (!ids.length) s += '<p class=\"muted\">' + h(tr(\"Hoy no queda nada por aquí: vuelve mañana.\")) + \"</p>\";"
+ },
+ "Destacado": {
+  "w": [
+   "ui-shop.js:71"
+  ],
+  "ctx": "(feat ? '<em class=\"shb f\">' + h(tr(\"Destacado\")) + \"</em>\" : off ? '<em class=\"shb o\">−30 %</em>' : \"\") + (lk ? '<i class=\"shl\" aria-hidden=\"true\">🔒</i>' : own ? '<i class=\"shl\" aria-hidden=\"true\">✓</i>' : \"\") + \"</but"
+ },
+ "Probar": {
+  "w": [
+   "ui-shop.js:90",
+   "pet-world.js:866"
+  ],
+  "ctx": "if (!pet && w === \"p\" && !own) s += '<button class=\"btn sm\" data-a=\"shoptry\" aria-pressed=\"' + !!U.ui().sh.tryOn + '\">' + h(tr(\"Probar\")) + \"</button>\";"
+ },
+ "Ya es tuya": {
+  "w": [
+   "ui-shop.js:91"
+  ],
+  "ctx": "if (own) s += '<span class=\"gt-max\">' + h(tr(\"Ya es tuya\")) + \"</span>\";"
+ },
+ "Comprar": {
+  "w": [
+   "ui-shop.js:92"
+  ],
+  "ctx": "else if (!lk) s += '<button class=\"btn sm pri\" data-a=\"shopbuy\" data-v=\"' + id + '\"' + (money >= price ? \"\" : \" disabled\") + \">\" + h(tr(\"Comprar\")) + \" <b>\" + (price < base ? \"<s>\" + h(fmtMoney(base)) + \"</s> \" : \"\") + h"
+ },
+ "Te faltan {m}": {
+  "w": [
+   "ui-shop.js:92"
+  ],
+  "ctx": "else if (!lk) s += '<button class=\"btn sm pri\" data-a=\"shopbuy\" data-v=\"' + id + '\"' + (money >= price ? \"\" : \" disabled\") + \">\" + h(tr(\"Comprar\")) + \" <b>\" + (price < base ? \"<s>\" + h(fmtMoney(base)) + \"</s> \" : \"\") + h"
+ },
+ "No te llega el dinero.": {
+  "w": [
+   "ui-shop.js:115",
+   "ui-life.js:224",
+   "ui-life.js:232"
+  ],
+  "ctx": "if (!r || !r.ok) { U.toast(r && r.poor ? tr(\"No te llega el dinero.\") : tr(\"No se puede comprar.\")); return; }"
+ },
+ "No se puede comprar.": {
+  "w": [
+   "ui-shop.js:115"
+  ],
+  "ctx": "if (!r || !r.ok) { U.toast(r && r.poor ? tr(\"No te llega el dinero.\") : tr(\"No se puede comprar.\")); return; }"
+ },
+ "¡Es tuya!": {
+  "w": [
+   "ui-shop.js:141"
+  ],
+  "ctx": "el.innerHTML = '<canvas class=\"gup-fx\" aria-hidden=\"true\"></canvas><canvas class=\"gup-c\" width=\"360\" height=\"360\" aria-hidden=\"true\"></canvas><div class=\"gup-t\"><small>' + h(tr(\"¡Es tuya!\")) + \"</small><b>\" + h(tr(it.n))"
+ },
+ "Destacado del día y {n} ofertas. Las existencias cambian cada día.": {
+  "w": [
+   "ui-shop.js:163"
+  ],
+  "ctx": "function entry() { var f = GXI.featured(), o = GXI.offers().length; return '<button class=\"card shcard\" data-a=\"shopopen\" data-v=\"feat\"><span class=\"shcard-ic\">' + (f ? '<img src=\"' + icon(f, 96) + '\" alt=\"\" width=\"40\" h"
  },
  "Dar una vuelta": {
   "w": [
@@ -3084,13 +3370,6 @@
   ],
   "ctx": "{id: \"glasses\", s: \"f\", n: N_(\"Gafas de pasta\"), r: \"c\", price: 150, tags: [\"cozy\"], ico: \"👓\", rec: [[\"box\", -4, 0, 0, -1, 2, 0, \"K\", \"frame\"], [\"box\", 1, 0, 0, 4, 2, 0, \"K\", \"frame\"], [\"box\", -1, 1, 0, 1, 1, 0, \"K\"]]},"
  },
- "Gafas de sol": {
-  "w": [
-   "pet-items.js:40",
-   "pets.js:144"
-  ],
-  "ctx": "{id: \"sun\", s: \"f\", n: N_(\"Gafas de sol\"), r: \"c\", price: 200, tags: [\"shiny\", \"sporty\"], ico: \"🕶️\", rec: [[\"box\", -4, 0, 0, -1, 1, 0, \"K\"], [\"box\", 1, 0, 0, 4, 1, 0, \"K\"], [\"box\", -5, 2, 0, 5, 2, 0, \"K\"]]},"
- },
  "Bigote de incógnito": {
   "w": [
    "pet-items.js:41",
@@ -3110,13 +3389,6 @@
    "pets.js:146"
   ],
   "ctx": "{id: \"bell\", s: \"n\", n: N_(\"Collar con cascabel\"), r: \"c\", price: 60, tags: [\"cute\"], ico: \"🔔\", rec: [[\"box\", -5, 0, -4, 4, 0, 4, \"R\", \"ring\"], [\"box\", -1, -2, 5, 0, -1, 5, \"Y\"]]},"
- },
- "Bufanda del club": {
-  "w": [
-   "pet-items.js:45",
-   "pets.js:147"
-  ],
-  "ctx": "{id: \"scarf\", s: \"n\", n: N_(\"Bufanda del club\"), r: \"c\", price: 150, tags: [\"sporty\", \"cozy\"], ico: \"🧣\", gen: \"scarf\"},"
  },
  "Pañuelo": {
   "w": [
@@ -4553,12 +4825,6 @@
    "pet-world.js:865"
   ],
   "ctx": "s += '<div class=\"pw-tabs\" role=\"tablist\">' + [[\"acc\", N_(\"Novedades de hoy\")], [\"food\", N_(\"Comida\")], [\"care\", N_(\"Cuidado\")], [\"toy\", N_(\"Juguetes\")], [\"deco\", N_(\"Jardín\")]].map(function (x) { return '<button role=\"t"
- },
- "Probar": {
-  "w": [
-   "pet-world.js:866"
-  ],
-  "ctx": "function row(it, extra, can) { var p = it.price || 0, poor = S.p.money < p; return '<div class=\"pw-item' + (W.tryOn === it.id ? \" on\" : \"\") + '\"><b>' + esc(tr(it.n)) + \"</b><small>\" + esc(it.d ? tr(it.d) : \"\") + (extra |"
  },
  "Ya lo tienes": {
   "w": [
@@ -47427,13 +47693,6 @@
    "ui-life.js:223"
   ],
   "ctx": "if (r.ok) U.toast(tr(\"Contratado: {svc} ({cost}).\", {svc: tr(d.n), cost: money(r.cost)}));"
- },
- "No te llega el dinero.": {
-  "w": [
-   "ui-life.js:224",
-   "ui-life.js:232"
-  ],
-  "ctx": "else if (r.poor) U.toast(tr(\"No te llega el dinero.\"));"
  },
  "Contrato cancelado.": {
   "w": [

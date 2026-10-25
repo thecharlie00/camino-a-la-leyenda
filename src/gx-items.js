@@ -157,6 +157,7 @@ var GXI = (function () {
   api.lock = function (it) {
     var r = it.req; if (!r) return null;
     var p = S.p, m = S.m;
+    if (it.own === "m" && !m) return {k: "mgr", v: 1};
     if (r.fame && (it.own === "m" ? (m ? m.rep : 0) : p.fame) < r.fame) return {k: "fame", v: r.fame};
     if (r.tro && (it.own === "m" ? m.trophies.length : p.trophies.length) < r.tro) return {k: "tro", v: r.tro};
     if (r.cap && !(p && p.flags && p.flags.captain)) return {k: "cap", v: 1};
@@ -314,5 +315,107 @@ var GXI = (function () {
     if (_md) PetSim.mood = function (pt) { var m = _md.apply(this, arguments); try { var b = GXI.petBonus(pt); m = Math.round(clamp(m + (b.joy || 0) * 0.8, 0, 100)); } catch (e) {} return m; };
     PetSim.eneMul = function (pt) { try { return Math.max(0.6, 1 - (GXI.petBonus(pt).ene || 0) * 0.05); } catch (e) { return 1; } };
     PetSim.bondMul = function (pt) { try { return 1 + (GXI.petBonus(pt).bnd || 0) * 0.03; } catch (e) { return 1; } };
+  }
+})();
+
+/* ---------- piezas del míster (estadísticas propias: ver gx-mgr.js) ---------- */
+var GX_MGR_ITEMS = [
+  ["m_suit_cls", "suit", N_("Traje clásico"), {tac: 1, pre: 1}, "mcl", 0, null, {c: "#2a3340", c2: "#7a1d1d"}],
+  ["m_suit_tw", "suit", N_("Traje de tweed"), {lec: 2, neg: 1, pre: -1}, "mbr", 120000, null, {c: "#6b5a3a", c2: "#2a4a2a"}],
+  ["m_suit_wht", "suit", N_("Traje blanco de finales"), {mot: 2, pre: 1}, null, 400000, {tro: 3}, {c: "#ecebe4", c2: "#1d1404"}],
+  ["m_suit_trk", "suit", N_("Chándal de banquillo"), {fis: 2, ves: 1, pre: -1}, "mtr", 30000, null, {c: "#1f4a8a", c2: "#f4f4f0"}],
+  ["m_coat_long", "coat", N_("Abrigo largo"), {tac: 1, lec: 1}, "mcl", 60000, null, {c: "#1b1d1f"}],
+  ["m_coat_pad", "coat", N_("Plumífero de banquillo"), {ves: 1, fis: 1}, "mtr", 25000, null, {c: "#1f4a8a"}],
+  ["m_coat_cam", "coat", N_("Gabardina camel"), {pre: 2, neg: 1, fis: -1}, "mbr", 180000, null, {c: "#b08a5a"}],
+  ["m_shoe_cls", "shoes", N_("Zapatos clásicos"), {pre: 1}, "mcl", 0, null, {c: "#2a1a10"}],
+  ["m_shoe_run", "shoes", N_("Zapatillas"), {fis: 1, ves: 1}, "mtr", 15000, null, {c: "#f4f4f0"}],
+  ["m_shoe_lux", "shoes", N_("Zapatos de lujo"), {neg: 2, ves: -1}, "mbr", 150000, null, {c: "#7a1d1d"}],
+  ["m_tie_red", "tie", N_("Corbata roja"), {mot: 1}, "mcl", 8000, null, {c: "#c8312f"}],
+  ["m_tie_club", "tie", N_("Corbata del club"), {ves: 1, mot: 1}, null, 20000, null, {c: "#ffb21e"}],
+  ["m_tie_knit", "tie", N_("Corbata de punto"), {lec: 1, tac: 1}, "mbr", 45000, null, {c: "#2a4a2a"}],
+  ["m_gl_read", "glasses", N_("Gafas de lectura"), {lec: 2, mot: -1}, "mbr", 30000, null, {c: "#1b1d1f"}],
+  ["m_gl_sun", "glasses", N_("Gafas de sol"), {pre: 2, ves: -1}, null, 60000, null, {c: "#16191b", c2: "#2a3a40"}],
+  ["m_gl_tac", "glasses", N_("Gafas de pizarra"), {tac: 2}, "mcl", 90000, {fame: 60}, {c: "#cfd8dc"}],
+  ["m_sc_club", "scarf", N_("Bufanda del club"), {mot: 1, ves: 1}, null, 12000, null, {c: "#c8312f"}],
+  ["m_sc_wool", "scarf", N_("Bufanda de lana"), {fis: 1, jov: 1}, "mtr", 18000, null, {c: "#e8eef0"}],
+  ["m_sc_silk", "scarf", N_("Pañuelo de seda"), {neg: 1, pre: 1}, "mbr", 70000, null, {c: "#7a3ad8"}],
+  ["m_nb_basic", "notes", N_("Libreta de notas"), {tac: 1}, null, 3000, null, {c: "#ffb21e"}],
+  ["m_nb_tab", "notes", N_("Tableta de datos"), {lec: 2, tac: 1, ves: -1}, "mcl", 140000, null, {c: "#2a3a40"}],
+  ["m_nb_youth", "notes", N_("Cuaderno de la cantera"), {jov: 2, tac: 1}, null, 50000, null, {c: "#2ad15a"}],
+  ["m_wa_cls", "watch", N_("Reloj de bolsillo"), {lec: 1}, "mcl", 25000, null, {c: "#e8c35a"}],
+  ["m_wa_sport", "watch", N_("Reloj deportivo"), {fis: 1, jov: 1}, "mtr", 20000, null, {c: "#1b1d1f"}],
+  ["m_wa_lux", "watch", N_("Reloj de coleccionista"), {neg: 2, pre: 1, ves: -1}, "mbr", 500000, {fame: 70}, {c: "#f6c83a"}]
+];
+GXI.add(GX_MGR_ITEMS, "m");
+GX_SETS.push({k: "mcl", n: N_("Línea Pizarra"), b3: {tac: 1}, bAll: {tac: 2, lec: 1}}, {k: "mbr", n: N_("Línea Despacho"), b3: {neg: 1}, bAll: {neg: 2, pre: 1}}, {k: "mtr", n: N_("Línea Chándal"), b3: {fis: 1}, bAll: {fis: 2, ves: 1}});
+(function () {
+  GX_SETS.forEach(function (s) { if (s.items) return; var all = GXI.items(); s.items = all.filter(function (it) { return it.set === s.k; }).map(function (it) { return it.id; }); s.slots = {}; s.items.forEach(function (id) { s.slots[GXI.item(id).slot] = 1; }); s.need = Object.keys(s.slots).length; });
+  /* el traje y los zapatos clásicos los tiene todo míster al empezar */
+  var _g = GXI.gear;
+  GXI.gear = function (who) {
+    var fresh = who === "m" && S && S.m && !(S.m.gear && S.m.gear.v === 1), g = _g.apply(this, arguments);
+    if (fresh && g) { g.own.m_suit_cls = {t: 0, y: S.yr}; g.own.m_shoe_cls = {t: 0, y: S.yr}; g.eq.suit = "m_suit_cls"; g.eq.shoes = "m_shoe_cls"; }
+    return g;
+  };
+})();
+
+/* ---------- tienda: existencias del día, ofertas, destacado y compra ---------- */
+(function () {
+  function day() { return Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000); }
+  GXI.day = day;
+  function rnd(seed) { return GX.rng(GX.hs(seed)); }
+  function skey() { var o = S.mode === "mgr" ? S.m : S.p; return o ? (o.fn || "") + (o.ln || "") + (o.y0 || "") : ""; }
+  /* existencias: por sección, distintas cada día y para cada partida */
+  GXI.stock = function (who) {
+    var d = day(), seed = skey() + "|" + d, pool = GXI.items(who).filter(function (it) { return it.price > 0 && !GXI.owned(it.id, who); });
+    var r = rnd("shop|" + who + "|" + seed), out = [];
+    while (out.length < 8 && pool.length) out.push(pool.splice(Math.floor(r() * pool.length), 1)[0].id);
+    return out;
+  };
+  GXI.offers = function () {
+    var w = S.mode === "mgr" ? "m" : "p", r = rnd("off|" + w + "|" + skey() + "|" + day()), pool = GXI.items(w).filter(function (it) { return it.price > 0 && !GXI.owned(it.id, w) && !GXI.lock(it); }), out = [];
+    while (out.length < 3 && pool.length) out.push(pool.splice(Math.floor(r() * pool.length), 1)[0].id);
+    return out;
+  };
+  GXI.featured = function () {
+    var w = S.mode === "mgr" ? "m" : "p", r = rnd("feat|" + w + "|" + skey() + "|" + day()), pool = GXI.items(w).filter(function (it) { return it.price >= 40000 && !GXI.owned(it.id, w) && !GXI.lock(it); });
+    return pool.length ? pool[Math.floor(r() * pool.length)].id : null;
+  };
+  GXI.price = function (id) {
+    var it = GXI.item(id); if (!it) return 0;
+    var p = it.price; if (GXI.offers().indexOf(id) >= 0) p = Math.round(p * 0.7 / 500) * 500;
+    return p;
+  };
+  GXI.buy = function (id) {
+    var it = GXI.item(id); if (!it) return {ok: false};
+    var w = it.own, purse = w === "m" ? S.m : S.p; if (!purse) return {ok: false};
+    if (GXI.owned(id, w)) return {ok: false, owned: true};
+    var lk = GXI.lock(it); if (lk) return {ok: false, lock: lk};
+    var pr = GXI.price(id); if (purse.money < pr) return {ok: false, poor: true, price: pr};
+    purse.money -= pr; GXI.give(id, 0, w);
+    var g = GXI.gear(w); g.n.buy++;
+    if (typeof GX !== "undefined") {
+      GX.add("buys");
+      if (pr < it.price) GX.flag("bargain");
+    }
+    return {ok: true, price: pr};
+  };
+  /* el destacado se calcula sobre lo que aún no tienes: se fija antes de comprar */
+  var _buy = GXI.buy;
+  GXI.buy = function (id) { var f = GXI.featured(); var r = _buy(id); if (r.ok && f === id && typeof GX !== "undefined") GX.st().c["fd" + day()] = 1; return r; };
+  /* trofeos de tienda: se miran cada vez que cambia el equipamiento */
+  if (typeof GX !== "undefined") {
+    GX.STATS.buys = function () { var g = S.p && S.p.life && S.p.life.gear; return Math.max(GX.cnt("buys"), g ? g.n.buy : 0); };
+    GX.STATS.upgrades = function () { var g = S.p && S.p.life && S.p.life.gear; return Math.max(GX.cnt("upgrades"), g ? g.n.up : 0); };
+    GX.STATS.bootsOwned = function () { var g = S.p && S.p.life && S.p.life.gear; return g ? Object.keys(g.own).filter(function (id) { var it = GXI.item(id); return it && it.slot === "boots"; }).length : 0; };
+    GX.STATS.featuredDays = function () { var c = GX.st().c; return Object.keys(c).filter(function (k) { return /^fd\d+$/.test(k); }).length; };
+    GX.on("gear", function () {
+      ["p", "m"].forEach(function (w) {
+        var g = (w === "p" ? S.p && S.p.life && S.p.life.gear : S.m && S.m.gear); if (!g) return;
+        if (Object.keys(g.own).some(function (id) { return g.own[id].t >= 5; })) GX.flag(w === "p" ? "legendPiece" : "mLegendPiece");
+        var sc = GXI.setCount(g, w); if (GX_SETS.some(function (s) { return sc[s.k] >= s.need && s.need >= 3; })) GX.flag(w === "p" ? "fullSet" : "mFullSet");
+        var sl = GX_SLOTS[w], gold = sl.every(function (s) { var id = g.eq[s[0]]; return id && g.own[id] && g.own[id].t >= 3; }); if (gold) GX.flag(w === "p" ? "allGold" : "mAllGold");
+      });
+    });
   }
 })();
