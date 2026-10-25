@@ -35,9 +35,12 @@ var GXV = (function () {
   }
   /* caras visibles (sin las que tocan otro vóxel) */
   var CACHE = {};
+  /* modelos extra registrados por otros módulos (piezas de equipamiento): fn() → {"x,y,z": color} */
+  var REG = {};
+  function reg(k, fn) { REG[k] = fn; delete CACHE[k]; Object.keys(IMG).forEach(function (i) { if (i.indexOf(k) === 0) delete IMG[i]; }); }
   function faces(rar) {
     if (CACHE[rar]) return CACHE[rar];
-    var V = model(rar), F = [], N = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]], miny = 99, maxy = -99;
+    var V = REG[rar] ? REG[rar]() : model(rar), F = [], N = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]], miny = 99, maxy = -99;
     Object.keys(V).forEach(function (k) {
       var p = k.split(",").map(Number); miny = Math.min(miny, p[1]); maxy = Math.max(maxy, p[1]);
       N.forEach(function (n) {
@@ -87,7 +90,7 @@ var GXV = (function () {
     try { var cv = document.createElement("canvas"); cv.width = cv.height = px; draw(cv, rar, -0.6, {}); IMG[k] = cv.toDataURL(); } catch (e) { IMG[k] = ""; }
     return IMG[k];
   }
-  return {draw: draw, img: img, faces: faces, PAL: PAL};
+  return {draw: draw, img: img, faces: faces, PAL: PAL, reg: reg, shade: shade};
 })();
 
 (function () {

@@ -104,6 +104,7 @@
  "Bronce": {
   "w": [
    "gx-data.js:12",
+   "gx-items.js:7",
    "chal32.js:12"
   ],
   "ctx": "var GX_RAR = {b: {n: N_(\"Bronce\"), c: \"#c88a52\", money: 5000}, s: {n: N_(\"Plata\"), c: \"#cfd8dc\", money: 25000}, g: {n: N_(\"Oro\"), c: \"#f6c83a\", money: 100000}, p: {n: N_(\"Platino\"), c: \"#b9f2ff\", money: 1000000}};"
@@ -111,6 +112,7 @@
  "Plata": {
   "w": [
    "gx-data.js:12",
+   "gx-items.js:7",
    "chal32.js:12"
   ],
   "ctx": "var GX_RAR = {b: {n: N_(\"Bronce\"), c: \"#c88a52\", money: 5000}, s: {n: N_(\"Plata\"), c: \"#cfd8dc\", money: 25000}, g: {n: N_(\"Oro\"), c: \"#f6c83a\", money: 100000}, p: {n: N_(\"Platino\"), c: \"#b9f2ff\", money: 1000000}};"
@@ -118,6 +120,7 @@
  "Oro": {
   "w": [
    "gx-data.js:12",
+   "gx-items.js:8",
    "pets.js:130",
    "chal32.js:12"
   ],
@@ -1734,112 +1737,916 @@
  },
  "Trofeo de bronce": {
   "w": [
-   "ui-gx.js:97"
+   "ui-gx.js:100"
   ],
   "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
  },
  "Trofeo de plata": {
   "w": [
-   "ui-gx.js:97"
+   "ui-gx.js:100"
   ],
   "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
  },
  "Trofeo de oro": {
   "w": [
-   "ui-gx.js:97"
+   "ui-gx.js:100"
   ],
   "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
  },
  "Trofeo de platino": {
   "w": [
-   "ui-gx.js:97",
-   "ui-gx.js:151"
+   "ui-gx.js:100",
+   "ui-gx.js:154"
   ],
   "ctx": "var KICK = {b: N_(\"Trofeo de bronce\"), s: N_(\"Trofeo de plata\"), g: N_(\"Trofeo de oro\"), p: N_(\"Trofeo de platino\")};"
  },
  "Nuevo título: «{t}»": {
   "w": [
-   "ui-gx.js:152"
+   "ui-gx.js:155"
   ],
   "ctx": "(m.x && m.x.title ? '<p class=\"gxc-ti\">' + h(tr(\"Nuevo título: «{t}»\", {t: tr(m.x.title)})) + \"</p>\" : \"\") + '<button class=\"btn\" data-gx=\"ok\">' + h(tr(\"¡Leyenda!\")) + \"</button></div>\";"
  },
  "¡Leyenda!": {
   "w": [
-   "ui-gx.js:152"
+   "ui-gx.js:155"
   ],
   "ctx": "(m.x && m.x.title ? '<p class=\"gxc-ti\">' + h(tr(\"Nuevo título: «{t}»\", {t: tr(m.x.title)})) + \"</p>\" : \"\") + '<button class=\"btn\" data-gx=\"ok\">' + h(tr(\"¡Leyenda!\")) + \"</button></div>\";"
  },
  "Trofeos": {
   "w": [
-   "ui-gx.js:192"
+   "ui-gx.js:195"
   ],
   "ctx": "var s = '<h2>' + h(tr(\"Trofeos\")) + '</h2><div class=\"stack gxs\">';"
  },
  "{n} de {t} trofeos de esta carrera": {
   "w": [
-   "ui-gx.js:194"
+   "ui-gx.js:197"
   ],
   "ctx": "h(tr(\"{n} de {t} trofeos de esta carrera\", {n: got.length, t: L.length})) + \"</small>\" +"
  },
  "Todas": {
   "w": [
-   "ui-gx.js:199"
+   "ui-gx.js:202"
   ],
   "ctx": "s += '<div class=\"gxs-cats\">' + '<button data-a=\"gxcat\" data-v=\"\" aria-pressed=\"' + (!F.cat) + '\" class=\"gxc-b\"><span>🏆</span><b>' + h(tr(\"Todas\")) + \"</b></button>\" + cats.map(function (c) {"
  },
  "Trofeo oculto: sigue jugando para descubrirlo.": {
   "w": [
-   "ui-gx.js:207"
+   "ui-gx.js:210"
   ],
   "ctx": "return '<li class=\"gxi gx-' + x.rar + (on ? \" on\" : \"\") + '\"><img src=\"' + GXV.img(sec ? \"lock\" : x.rar, 64) + '\" alt=\"\" width=\"40\" height=\"40\"><span class=\"grow\"><b>' + h(sec ? \"???\" : x.n) + '</b><small>' + h(sec ? tr("
  },
  "Nada por aquí con estos filtros.": {
   "w": [
-   "ui-gx.js:211"
+   "ui-gx.js:214"
   ],
   "ctx": "}).join(\"\") + (vis.length ? \"\" : '<li class=\"muted\">' + h(tr(\"Nada por aquí con estos filtros.\")) + \"</li>\") + \"</ul>\";"
  },
  "En todas tus partidas: {n} de {t} logros clásicos.": {
   "w": [
-   "ui-gx.js:213"
+   "ui-gx.js:216"
   ],
   "ctx": "if (gc) s += '<p class=\"muted\" style=\"margin:0;font-size:var(--fs-xs)\">' + h(tr(\"En todas tus partidas: {n} de {t} logros clásicos.\", {n: gc[0], t: gc[1]})) + \"</p>\";"
  },
  "Cerrar": {
   "w": [
-   "ui-gx.js:214",
+   "ui-gx.js:217",
+   "ui-gear.js:109",
    "view3d.js:300",
-   "pet-world.js:32",
-   "sp-play.js:21"
+   "pet-world.js:32"
   ],
   "ctx": "return s + '<button class=\"btn wide\" data-a=\"close\">' + h(tr(\"Cerrar\")) + \"</button></div>\";"
  },
  "Vitrina": {
   "w": [
-   "ui-gx.js:238",
+   "ui-gx.js:241",
    "ui.js:1193"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir"
  },
  "{n} trofeo de oro o platino": {
   "w": [
-   "ui-gx.js:238"
+   "ui-gx.js:241"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir",
   "note": "plural:singular"
  },
  "{n} trofeos de oro o platino": {
   "w": [
-   "ui-gx.js:238"
+   "ui-gx.js:241"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir",
   "note": "plural:plural"
  },
  "Aquí lucirán tus trofeos de oro y platino.": {
   "w": [
-   "ui-gx.js:238"
+   "ui-gx.js:241"
   ],
   "ctx": "return '<button class=\"card gxv\" data-a=\"gxvit\"><span class=\"gxv-h\"><b>' + h(tr(\"Vitrina\")) + \"</b><small>\" + h(ids.length ? trn(ids.length, \"{n} trofeo de oro o platino\", \"{n} trofeos de oro o platino\") : tr(\"Aquí lucir"
+ },
+ "Común": {
+  "w": [
+   "gx-items.js:7",
+   "pet-items.js:7"
+  ],
+  "ctx": "{k: 0, n: N_(\"Común\"), c: \"#9aa7aa\", m: 1}, {k: 1, n: N_(\"Bronce\"), c: \"#c88a52\", m: 1.3}, {k: 2, n: N_(\"Plata\"), c: \"#cfd8dc\", m: 1.65},"
+ },
+ "Élite": {
+  "w": [
+   "gx-items.js:8"
+  ],
+  "ctx": "{k: 3, n: N_(\"Oro\"), c: \"#f6c83a\", m: 2}, {k: 4, n: N_(\"Élite\"), c: \"#b07cff\", m: 2.45}, {k: 5, n: N_(\"Leyenda\"), c: \"#ff6b3d\", m: 3}"
+ },
+ "Leyenda": {
+  "w": [
+   "gx-items.js:8",
+   "engine-modes.js:6"
+  ],
+  "ctx": "{k: 3, n: N_(\"Oro\"), c: \"#f6c83a\", m: 2}, {k: 4, n: N_(\"Élite\"), c: \"#b07cff\", m: 2.45}, {k: 5, n: N_(\"Leyenda\"), c: \"#ff6b3d\", m: 3}"
+ },
+ "Botas": {
+  "w": [
+   "gx-items.js:13",
+   "ui-life.js:260"
+  ],
+  "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
+ },
+ "Espinilleras": {
+  "w": [
+   "gx-items.js:13"
+  ],
+  "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
+ },
+ "Medias": {
+  "w": [
+   "gx-items.js:13"
+  ],
+  "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
+ },
+ "Muñequeras": {
+  "w": [
+   "gx-items.js:13",
+   "pet-items.js:66"
+  ],
+  "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
+ },
+ "Cinta": {
+  "w": [
+   "gx-items.js:13",
+   "ui-life.js:262"
+  ],
+  "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
+ },
+ "Guantes": {
+  "w": [
+   "gx-items.js:13",
+   "ui-life.js:259"
+  ],
+  "ctx": "p: [[\"boots\", N_(\"Botas\")], [\"shin\", N_(\"Espinilleras\")], [\"socks\", N_(\"Medias\")], [\"wrist\", N_(\"Muñequeras\")], [\"band\", N_(\"Cinta\")], [\"gloves\", N_(\"Guantes\")],"
+ },
+ "Térmica": {
+  "w": [
+   "gx-items.js:14"
+  ],
+  "ctx": "[\"therm\", N_(\"Térmica\")], [\"hood\", N_(\"Sudadera\")], [\"phones\", N_(\"Cascos\")], [\"arm\", N_(\"Brazalete\")], [\"neck\", N_(\"Colgante\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Sudadera": {
+  "w": [
+   "gx-items.js:14"
+  ],
+  "ctx": "[\"therm\", N_(\"Térmica\")], [\"hood\", N_(\"Sudadera\")], [\"phones\", N_(\"Cascos\")], [\"arm\", N_(\"Brazalete\")], [\"neck\", N_(\"Colgante\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Cascos": {
+  "w": [
+   "gx-items.js:14"
+  ],
+  "ctx": "[\"therm\", N_(\"Térmica\")], [\"hood\", N_(\"Sudadera\")], [\"phones\", N_(\"Cascos\")], [\"arm\", N_(\"Brazalete\")], [\"neck\", N_(\"Colgante\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Brazalete": {
+  "w": [
+   "gx-items.js:14",
+   "ui.js:1035"
+  ],
+  "ctx": "[\"therm\", N_(\"Térmica\")], [\"hood\", N_(\"Sudadera\")], [\"phones\", N_(\"Cascos\")], [\"arm\", N_(\"Brazalete\")], [\"neck\", N_(\"Colgante\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Colgante": {
+  "w": [
+   "gx-items.js:14"
+  ],
+  "ctx": "[\"therm\", N_(\"Térmica\")], [\"hood\", N_(\"Sudadera\")], [\"phones\", N_(\"Cascos\")], [\"arm\", N_(\"Brazalete\")], [\"neck\", N_(\"Colgante\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Reloj": {
+  "w": [
+   "gx-items.js:14",
+   "gx-items.js:15"
+  ],
+  "ctx": "[\"therm\", N_(\"Térmica\")], [\"hood\", N_(\"Sudadera\")], [\"phones\", N_(\"Cascos\")], [\"arm\", N_(\"Brazalete\")], [\"neck\", N_(\"Colgante\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Traje": {
+  "w": [
+   "gx-items.js:15"
+  ],
+  "ctx": "m: [[\"suit\", N_(\"Traje\")], [\"coat\", N_(\"Abrigo\")], [\"shoes\", N_(\"Zapatos\")], [\"tie\", N_(\"Corbata\")], [\"glasses\", N_(\"Gafas\")], [\"scarf\", N_(\"Bufanda\")], [\"notes\", N_(\"Libreta\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Abrigo": {
+  "w": [
+   "gx-items.js:15"
+  ],
+  "ctx": "m: [[\"suit\", N_(\"Traje\")], [\"coat\", N_(\"Abrigo\")], [\"shoes\", N_(\"Zapatos\")], [\"tie\", N_(\"Corbata\")], [\"glasses\", N_(\"Gafas\")], [\"scarf\", N_(\"Bufanda\")], [\"notes\", N_(\"Libreta\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Zapatos": {
+  "w": [
+   "gx-items.js:15"
+  ],
+  "ctx": "m: [[\"suit\", N_(\"Traje\")], [\"coat\", N_(\"Abrigo\")], [\"shoes\", N_(\"Zapatos\")], [\"tie\", N_(\"Corbata\")], [\"glasses\", N_(\"Gafas\")], [\"scarf\", N_(\"Bufanda\")], [\"notes\", N_(\"Libreta\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Corbata": {
+  "w": [
+   "gx-items.js:15"
+  ],
+  "ctx": "m: [[\"suit\", N_(\"Traje\")], [\"coat\", N_(\"Abrigo\")], [\"shoes\", N_(\"Zapatos\")], [\"tie\", N_(\"Corbata\")], [\"glasses\", N_(\"Gafas\")], [\"scarf\", N_(\"Bufanda\")], [\"notes\", N_(\"Libreta\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Gafas": {
+  "w": [
+   "gx-items.js:15"
+  ],
+  "ctx": "m: [[\"suit\", N_(\"Traje\")], [\"coat\", N_(\"Abrigo\")], [\"shoes\", N_(\"Zapatos\")], [\"tie\", N_(\"Corbata\")], [\"glasses\", N_(\"Gafas\")], [\"scarf\", N_(\"Bufanda\")], [\"notes\", N_(\"Libreta\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Bufanda": {
+  "w": [
+   "gx-items.js:15"
+  ],
+  "ctx": "m: [[\"suit\", N_(\"Traje\")], [\"coat\", N_(\"Abrigo\")], [\"shoes\", N_(\"Zapatos\")], [\"tie\", N_(\"Corbata\")], [\"glasses\", N_(\"Gafas\")], [\"scarf\", N_(\"Bufanda\")], [\"notes\", N_(\"Libreta\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Libreta": {
+  "w": [
+   "gx-items.js:15"
+  ],
+  "ctx": "m: [[\"suit\", N_(\"Traje\")], [\"coat\", N_(\"Abrigo\")], [\"shoes\", N_(\"Zapatos\")], [\"tie\", N_(\"Corbata\")], [\"glasses\", N_(\"Gafas\")], [\"scarf\", N_(\"Bufanda\")], [\"notes\", N_(\"Libreta\")], [\"watch\", N_(\"Reloj\")]],"
+ },
+ "Cabeza": {
+  "w": [
+   "gx-items.js:16",
+   "pet-items.js:8",
+   "pets.js:158"
+  ],
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Cuerpo\")]]"
+ },
+ "Cara": {
+  "w": [
+   "gx-items.js:16",
+   "pet-items.js:8",
+   "pets.js:158",
+   "pitch.js:1180"
+  ],
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Cuerpo\")]]"
+ },
+ "Cuello": {
+  "w": [
+   "gx-items.js:16",
+   "pet-items.js:8",
+   "pets.js:158"
+  ],
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Cuerpo\")]]"
+ },
+ "Cuerpo": {
+  "w": [
+   "gx-items.js:16",
+   "pet-items.js:8"
+  ],
+  "ctx": "pet: [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"t\", N_(\"Cuerpo\")]]"
+ },
+ "Recuperación": {
+  "w": [
+   "gx-items.js:20"
+  ],
+  "ctx": "var GX_STATN = {rec: N_(\"Recuperación\"), inj: N_(\"Resistencia\"),"
+ },
+ "Resistencia": {
+  "w": [
+   "gx-items.js:20",
+   "ui-37.js:57"
+  ],
+  "ctx": "var GX_STATN = {rec: N_(\"Recuperación\"), inj: N_(\"Resistencia\"),"
+ },
+ "Táctica": {
+  "w": [
+   "gx-items.js:21",
+   "engine-player.js:32",
+   "engine-manager.js:33",
+   "evento:fuera_posicion"
+  ],
+  "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
+ },
+ "Motivación": {
+  "w": [
+   "gx-items.js:21"
+  ],
+  "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
+ },
+ "Vestuario": {
+  "w": [
+   "gx-items.js:21",
+   "view3d.js:553",
+   "events-manager.js:631",
+   "press-ctx.js:203"
+  ],
+  "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
+ },
+ "Prensa": {
+  "w": [
+   "gx-items.js:21",
+   "engine-extra.js:221",
+   "engine-extra.js:248",
+   "engine-extra.js:407"
+  ],
+  "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
+ },
+ "Jóvenes": {
+  "w": [
+   "gx-items.js:21"
+  ],
+  "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
+ },
+ "Preparación física": {
+  "w": [
+   "gx-items.js:21"
+  ],
+  "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
+ },
+ "Negociación": {
+  "w": [
+   "gx-items.js:21",
+   "events-manager.js:566",
+   "engine-market.js:302"
+  ],
+  "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
+ },
+ "Lectura de partido": {
+  "w": [
+   "gx-items.js:21"
+  ],
+  "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
+ },
+ "Estilo": {
+  "w": [
+   "gx-items.js:22",
+   "pet-world.js:706",
+   "ui-pets.js:258"
+  ],
+  "ctx": "sty: N_(\"Estilo\"), bnd: N_(\"Vínculo\"), joy: N_(\"Ánimo\"), ene: N_(\"Energía\")};"
+ },
+ "Vínculo": {
+  "w": [
+   "gx-items.js:22",
+   "ui-pets.js:135"
+  ],
+  "ctx": "sty: N_(\"Estilo\"), bnd: N_(\"Vínculo\"), joy: N_(\"Ánimo\"), ene: N_(\"Energía\")};"
+ },
+ "Ánimo": {
+  "w": [
+   "gx-items.js:22"
+  ],
+  "ctx": "sty: N_(\"Estilo\"), bnd: N_(\"Vínculo\"), joy: N_(\"Ánimo\"), ene: N_(\"Energía\")};"
+ },
+ "Energía": {
+  "w": [
+   "gx-items.js:22"
+  ],
+  "ctx": "sty: N_(\"Estilo\"), bnd: N_(\"Vínculo\"), joy: N_(\"Ánimo\"), ene: N_(\"Energía\")};"
+ },
+ "Negras": {
+  "w": [
+   "gx-items.js:27",
+   "life.js:34"
+  ],
+  "ctx": "[\"L_boots_blk\", \"boots\", N_(\"Negras\"), {RIT: 1}, null, 0, null, {cos: \"boots:blk\", c: \"#16191b\"}],"
+ },
+ "Blancas": {
+  "w": [
+   "gx-items.js:28",
+   "life.js:34"
+  ],
+  "ctx": "[\"L_boots_wht\", \"boots\", N_(\"Blancas\"), {PAS: 1}, null, 0, null, {cos: \"boots:wht\", c: \"#f1f1ee\"}],"
+ },
+ "Rojo fuego": {
+  "w": [
+   "gx-items.js:29",
+   "life.js:34"
+  ],
+  "ctx": "[\"L_boots_red\", \"boots\", N_(\"Rojo fuego\"), {TIR: 2, DEF: -1}, \"can\", 20000, null, {cos: \"boots:red\", c: \"#e3262f\"}],"
+ },
+ "Azul eléctrico": {
+  "w": [
+   "gx-items.js:30",
+   "life.js:35"
+  ],
+  "ctx": "[\"L_boots_blu\", \"boots\", N_(\"Azul eléctrico\"), {RIT: 2, FIS: -1}, \"ray\", 20000, null, {cos: \"boots:blu\", c: \"#1f7cff\"}],"
+ },
+ "Rosa flúor": {
+  "w": [
+   "gx-items.js:31",
+   "life.js:35"
+  ],
+  "ctx": "[\"L_boots_pnk\", \"boots\", N_(\"Rosa flúor\"), {REG: 2, DEF: -1}, \"mag\", 30000, {fame: 40}, {cos: \"boots:pnk\", c: \"#ff4fb1\"}],"
+ },
+ "Doradas": {
+  "w": [
+   "gx-items.js:32",
+   "life.js:35"
+  ],
+  "ctx": "[\"L_boots_gld\", \"boots\", N_(\"Doradas\"), {TIR: 2, PAS: 1, FIS: -1}, null, 60000, {tro: 5}, {cos: \"boots:gld\", c: \"#e8c35a\"}],"
+ },
+ "Relámpago V": {
+  "w": [
+   "gx-items.js:33"
+  ],
+  "ctx": "[\"b_ray\", \"boots\", N_(\"Relámpago V\"), {RIT: 2, REG: 1, DEF: -1}, \"ray\", 90000, null, {c: \"#2de0ff\", c2: \"#0b3a52\"}],"
+ },
+ "Cañonera": {
+  "w": [
+   "gx-items.js:34"
+  ],
+  "ctx": "[\"b_can\", \"boots\", N_(\"Cañonera\"), {TIR: 3, REG: -1}, \"can\", 140000, null, {c: \"#ff7a1a\", c2: \"#2a1408\"}],"
+ },
+ "Seda": {
+  "w": [
+   "gx-items.js:35"
+  ],
+  "ctx": "[\"b_silk\", \"boots\", N_(\"Seda\"), {REG: 2, PAS: 1, FIS: -1}, \"mag\", 120000, null, {c: \"#d9c6ff\", c2: \"#3b2a66\"}],"
+ },
+ "Tanque": {
+  "w": [
+   "gx-items.js:36"
+  ],
+  "ctx": "[\"b_tank\", \"boots\", N_(\"Tanque\"), {DEF: 2, FIS: 1, RIT: -1}, \"wal\", 80000, null, {c: \"#4a5a3a\", c2: \"#c9d08a\"}],"
+ },
+ "Tacos de barro": {
+  "w": [
+   "gx-items.js:37"
+  ],
+  "ctx": "[\"b_mud\", \"boots\", N_(\"Tacos de barro\"), {FIS: 2, inj: 1}, \"tit\", 50000, null, {c: \"#6b4a2a\", c2: \"#e2c08a\"}],"
+ },
+ "Ligeras": {
+  "w": [
+   "gx-items.js:39"
+  ],
+  "ctx": "[\"sh_lite\", \"shin\", N_(\"Ligeras\"), {RIT: 1}, null, 6000, null, {c: \"#e8eef0\"}],"
+ },
+ "Blindadas": {
+  "w": [
+   "gx-items.js:40"
+  ],
+  "ctx": "[\"sh_armor\", \"shin\", N_(\"Blindadas\"), {DEF: 2, inj: 1, RIT: -1}, \"wal\", 45000, null, {c: \"#59656b\"}],"
+ },
+ "Carbono": {
+  "w": [
+   "gx-items.js:41"
+  ],
+  "ctx": "[\"sh_carbon\", \"shin\", N_(\"Carbono\"), {DEF: 1, FIS: 1}, \"tit\", 70000, null, {c: \"#1c2226\"}],"
+ },
+ "Rayo": {
+  "w": [
+   "gx-items.js:42",
+   "gx-items.js:48"
+  ],
+  "ctx": "[\"sh_ray\", \"shin\", N_(\"Rayo\"), {RIT: 1, DEF: 1}, \"ray\", 60000, null, {c: \"#2de0ff\"}],"
+ },
+ "Con foto familiar": {
+  "w": [
+   "gx-items.js:43"
+  ],
+  "ctx": "[\"sh_photo\", \"shin\", N_(\"Con foto familiar\"), {inj: 1, rec: 1}, null, 15000, null, {c: \"#f3d27a\"}],"
+ },
+ "Clásicas": {
+  "w": [
+   "gx-items.js:45"
+  ],
+  "ctx": "[\"so_cls\", \"socks\", N_(\"Clásicas\"), {FIS: 1}, null, 4000, null, {c: \"#f4f4f0\"}],"
+ },
+ "De compresión": {
+  "w": [
+   "gx-items.js:46"
+  ],
+  "ctx": "[\"so_comp\", \"socks\", N_(\"De compresión\"), {FIS: 1, rec: 1}, \"tit\", 35000, null, {c: \"#222a30\"}],"
+ },
+ "Antideslizantes": {
+  "w": [
+   "gx-items.js:47"
+  ],
+  "ctx": "[\"so_grip\", \"socks\", N_(\"Antideslizantes\"), {REG: 1, TIR: 1}, \"can\", 40000, null, {c: \"#ffb21e\"}],"
+ },
+ "Sedosas": {
+  "w": [
+   "gx-items.js:49"
+  ],
+  "ctx": "[\"so_silk\", \"socks\", N_(\"Sedosas\"), {REG: 1, PAS: 1}, \"mag\", 50000, null, {c: \"#d9c6ff\"}],"
+ },
+ "Básica": {
+  "w": [
+   "gx-items.js:51"
+  ],
+  "ctx": "[\"wr_basic\", \"wrist\", N_(\"Básica\"), {PAS: 1}, null, 3000, null, {c: \"#f4f4f0\"}],"
+ },
+ "De artillero": {
+  "w": [
+   "gx-items.js:52"
+  ],
+  "ctx": "[\"wr_can\", \"wrist\", N_(\"De artillero\"), {TIR: 1, PAS: 1}, \"can\", 30000, null, {c: \"#ff7a1a\"}],"
+ },
+ "Del mago": {
+  "w": [
+   "gx-items.js:53"
+  ],
+  "ctx": "[\"wr_mag\", \"wrist\", N_(\"Del mago\"), {REG: 2, DEF: -1}, \"mag\", 35000, null, {c: \"#7a3ad8\"}],"
+ },
+ "Del capitán": {
+  "w": [
+   "gx-items.js:54"
+  ],
+  "ctx": "[\"wr_lead\", \"wrist\", N_(\"Del capitán\"), {PAS: 1, DEF: 1}, \"led\", 40000, null, {c: \"#ffb21e\"}],"
+ },
+ "Cinta blanca": {
+  "w": [
+   "gx-items.js:56",
+   "life.js:37"
+  ],
+  "ctx": "[\"L_band_wht\", \"band\", N_(\"Cinta blanca\"), {REG: 1}, null, 0, null, {cos: \"band:wht\", c: \"#f4f4f0\"}],"
+ },
+ "Cinta negra": {
+  "w": [
+   "gx-items.js:57",
+   "life.js:37"
+  ],
+  "ctx": "[\"L_band_blk\", \"band\", N_(\"Cinta negra\"), {TIR: 1}, null, 0, null, {cos: \"band:blk\", c: \"#16191b\"}],"
+ },
+ "Cinta con los colores del club": {
+  "w": [
+   "gx-items.js:58",
+   "life.js:38"
+  ],
+  "ctx": "[\"L_band_club\", \"band\", N_(\"Cinta con los colores del club\"), {PAS: 1, FIS: 1}, \"led\", 0, {fame: 30}, {cos: \"band:club\", c: \"#c8312f\"}],"
+ },
+ "Concentración": {
+  "w": [
+   "gx-items.js:59"
+  ],
+  "ctx": "[\"ba_focus\", \"band\", N_(\"Concentración\"), {TIR: 1, PAS: 1}, null, 25000, null, {c: \"#66b9ff\"}],"
+ },
+ "Samurái": {
+  "w": [
+   "gx-items.js:60"
+  ],
+  "ctx": "[\"ba_samurai\", \"band\", N_(\"Samurái\"), {TIR: 2, REG: 1, DEF: -1}, \"can\", 75000, null, {c: \"#e3262f\"}],"
+ },
+ "Clásicos": {
+  "w": [
+   "gx-items.js:62",
+   "life.js:39"
+  ],
+  "ctx": "[\"L_gloves_cls\", \"gloves\", N_(\"Clásicos\"), {DEF: 1}, \"gua\", 0, null, {cos: \"gloves:cls\", c: \"#f4f4f0\", c2: \"#d33\"}],"
+ },
+ "Flúor": {
+  "w": [
+   "gx-items.js:63",
+   "life.js:39"
+  ],
+  "ctx": "[\"L_gloves_flu\", \"gloves\", N_(\"Flúor\"), {REG: 1}, \"gua\", 0, null, {cos: \"gloves:flu\", c: \"#c6f432\", c2: \"#16191b\"}],"
+ },
+ "Negros": {
+  "w": [
+   "gx-items.js:64",
+   "life.js:39"
+  ],
+  "ctx": "[\"L_gloves_blk\", \"gloves\", N_(\"Negros\"), {DEF: 1, FIS: 1}, null, 0, {fame: 20}, {cos: \"gloves:blk\", c: \"#1b1d1f\", c2: \"#ffb21e\"}],"
+ },
+ "Dorados": {
+  "w": [
+   "gx-items.js:65",
+   "life.js:40"
+  ],
+  "ctx": "[\"L_gloves_gld\", \"gloves\", N_(\"Dorados\"), {DEF: 2, REG: 1, RIT: -1}, null, 0, {tro: 3}, {cos: \"gloves:gld\", c: \"#e8c35a\", c2: \"#7a5a12\"}],"
+ },
+ "Edición leyenda": {
+  "w": [
+   "gx-items.js:66",
+   "life.js:40"
+  ],
+  "ctx": "[\"L_gloves_leg\", \"gloves\", N_(\"Edición leyenda\"), {DEF: 2, REG: 2, PAS: -1}, \"gua\", 250000, null, {cos: \"gloves:leg\", c: \"#6c2bd9\", c2: \"#e8c35a\"}],"
+ },
+ "Térmicos de campo": {
+  "w": [
+   "gx-items.js:67"
+  ],
+  "ctx": "[\"gl_therm\", \"gloves\", N_(\"Térmicos de campo\"), {FIS: 1, rec: 1}, null, 12000, null, {c: \"#222a30\", c2: \"#66b9ff\"}],"
+ },
+ "Manga larga": {
+  "w": [
+   "gx-items.js:69",
+   "life.js:36"
+  ],
+  "ctx": "[\"L_sleeve_long\", \"therm\", N_(\"Manga larga\"), {FIS: 1}, null, 0, null, {cos: \"sleeve:long\", c: \"#c8312f\"}],"
+ },
+ "Manguito térmico negro": {
+  "w": [
+   "gx-items.js:70",
+   "life.js:36"
+  ],
+  "ctx": "[\"L_sleeve_under\", \"therm\", N_(\"Manguito térmico negro\"), {FIS: 1, rec: 1}, \"tit\", 0, {fame: 15}, {cos: \"sleeve:under\", c: \"#16191b\"}],"
+ },
+ "Mallas térmicas": {
+  "w": [
+   "gx-items.js:71",
+   "life.js:36"
+  ],
+  "ctx": "[\"L_sleeve_tights\", \"therm\", N_(\"Mallas térmicas\"), {RIT: 1, rec: 1}, \"ray\", 0, {fame: 10}, {cos: \"sleeve:tights\", c: \"#16191b\"}],"
+ },
+ "Térmica pro": {
+  "w": [
+   "gx-items.js:72"
+  ],
+  "ctx": "[\"th_pro\", \"therm\", N_(\"Térmica pro\"), {FIS: 2, inj: 1, RIT: -1}, \"tit\", 65000, null, {c: \"#2a3a40\"}],"
+ },
+ "Térmica de portero": {
+  "w": [
+   "gx-items.js:73"
+  ],
+  "ctx": "[\"th_gk\", \"therm\", N_(\"Térmica de portero\"), {DEF: 1, FIS: 1}, \"gua\", 40000, null, {c: \"#2ad15a\"}],"
+ },
+ "Calentamiento": {
+  "w": [
+   "gx-items.js:75"
+  ],
+  "ctx": "[\"ho_warm\", \"hood\", N_(\"Calentamiento\"), {rec: 1}, null, 8000, null, {c: \"#3a4b50\"}],"
+ },
+ "Capucha del club": {
+  "w": [
+   "gx-items.js:76"
+  ],
+  "ctx": "[\"ho_club\", \"hood\", N_(\"Capucha del club\"), {FIS: 1, PAS: 1}, \"led\", 30000, null, {c: \"#c8312f\"}],"
+ },
+ "Modo zen": {
+  "w": [
+   "gx-items.js:77"
+  ],
+  "ctx": "[\"ho_zen\", \"hood\", N_(\"Modo zen\"), {TIR: 1, REG: 1}, null, 45000, null, {c: \"#e8eef0\"}],"
+ },
+ "Sudadera de portero": {
+  "w": [
+   "gx-items.js:78"
+  ],
+  "ctx": "[\"ho_gk\", \"hood\", N_(\"Sudadera de portero\"), {REG: 1, rec: 1}, \"gua\", 30000, null, {c: \"#7a3ad8\"}],"
+ },
+ "Básicos": {
+  "w": [
+   "gx-items.js:80",
+   "pet-world.js:632"
+  ],
+  "ctx": "[\"ph_basic\", \"phones\", N_(\"Básicos\"), {TIR: 1}, null, 5000, null, {c: \"#1b1d1f\"}],"
+ },
+ "Aislantes": {
+  "w": [
+   "gx-items.js:81"
+  ],
+  "ctx": "[\"ph_iso\", \"phones\", N_(\"Aislantes\"), {TIR: 1, PAS: 1, REG: -1}, \"can\", 38000, null, {c: \"#ff7a1a\"}],"
+ },
+ "De estudio": {
+  "w": [
+   "gx-items.js:82"
+  ],
+  "ctx": "[\"ph_studio\", \"phones\", N_(\"De estudio\"), {PAS: 2, DEF: -1}, \"mag\", 55000, null, {c: \"#d9c6ff\"}],"
+ },
+ "Con graves": {
+  "w": [
+   "gx-items.js:83"
+  ],
+  "ctx": "[\"ph_beat\", \"phones\", N_(\"Con graves\"), {FIS: 1, rec: 1}, \"tit\", 42000, null, {c: \"#e3262f\"}],"
+ },
+ "Brazalete de capitán": {
+  "w": [
+   "gx-items.js:85",
+   "life.js:38"
+  ],
+  "ctx": "[\"L_band_cap\", \"arm\", N_(\"Brazalete de capitán\"), {PAS: 1, DEF: 1}, \"led\", 0, {cap: 1}, {cos: \"band:cap\", c: \"#ffb21e\"}],"
+ },
+ "Líder nato": {
+  "w": [
+   "gx-items.js:86"
+  ],
+  "ctx": "[\"ar_lead\", \"arm\", N_(\"Líder nato\"), {PAS: 1, FIS: 1}, \"led\", 60000, {cap: 1}, {c: \"#ffb21e\"}],"
+ },
+ "Brazalete negro": {
+  "w": [
+   "gx-items.js:87"
+  ],
+  "ctx": "[\"ar_black\", \"arm\", N_(\"Brazalete negro\"), {DEF: 1}, null, 10000, null, {c: \"#16191b\"}],"
+ },
+ "Amuleto": {
+  "w": [
+   "gx-items.js:89"
+  ],
+  "ctx": "[\"ne_charm\", \"neck\", N_(\"Amuleto\"), {TIR: 1}, null, 6000, null, {c: \"#e8c35a\"}],"
+ },
+ "Cadena de oro": {
+  "w": [
+   "gx-items.js:90"
+  ],
+  "ctx": "[\"ne_gold\", \"neck\", N_(\"Cadena de oro\"), {REG: 1, PAS: 1, FIS: -1}, \"mag\", 90000, null, {c: \"#f6c83a\"}],"
+ },
+ "Medalla familiar": {
+  "w": [
+   "gx-items.js:91"
+  ],
+  "ctx": "[\"ne_fam\", \"neck\", N_(\"Medalla familiar\"), {rec: 1, inj: 1}, null, 20000, null, {c: \"#cfd8dc\"}],"
+ },
+ "Deportivo": {
+  "w": [
+   "gx-items.js:93"
+  ],
+  "ctx": "[\"wa_sport\", \"watch\", N_(\"Deportivo\"), {RIT: 1}, null, 9000, null, {c: \"#1b1d1f\"}],"
+ },
+ "Pulsómetro": {
+  "w": [
+   "gx-items.js:94"
+  ],
+  "ctx": "[\"wa_hr\", \"watch\", N_(\"Pulsómetro\"), {rec: 2}, \"tit\", 35000, null, {c: \"#2ad15a\"}],"
+ },
+ "Cronógrafo": {
+  "w": [
+   "gx-items.js:95"
+  ],
+  "ctx": "[\"wa_chrono\", \"watch\", N_(\"Cronógrafo\"), {PAS: 1, RIT: 1}, \"ray\", 85000, null, {c: \"#cfd8dc\"}],"
+ },
+ "De lujo": {
+  "w": [
+   "gx-items.js:96"
+  ],
+  "ctx": "[\"wa_lux\", \"watch\", N_(\"De lujo\"), {TIR: 1, REG: 1, FIS: -1}, null, 350000, {fame: 60}, {c: \"#f6c83a\"}]"
+ },
+ "Línea Relámpago": {
+  "w": [
+   "gx-items.js:100"
+  ],
+  "ctx": "{k: \"ray\", n: N_(\"Línea Relámpago\"), b3: {RIT: 1}, bAll: {RIT: 2, rec: 1}},"
+ },
+ "Línea Artillero": {
+  "w": [
+   "gx-items.js:101"
+  ],
+  "ctx": "{k: \"can\", n: N_(\"Línea Artillero\"), b3: {TIR: 1}, bAll: {TIR: 2, PAS: 1}},"
+ },
+ "Línea Mago": {
+  "w": [
+   "gx-items.js:102"
+  ],
+  "ctx": "{k: \"mag\", n: N_(\"Línea Mago\"), b3: {REG: 1}, bAll: {REG: 2, PAS: 1}},"
+ },
+ "Línea Muralla": {
+  "w": [
+   "gx-items.js:103"
+  ],
+  "ctx": "{k: \"wal\", n: N_(\"Línea Muralla\"), b3: {DEF: 1}, bAll: {DEF: 2, inj: 1}},"
+ },
+ "Línea Titán": {
+  "w": [
+   "gx-items.js:104"
+  ],
+  "ctx": "{k: \"tit\", n: N_(\"Línea Titán\"), b3: {FIS: 1}, bAll: {FIS: 2, rec: 1}},"
+ },
+ "Línea Capitán": {
+  "w": [
+   "gx-items.js:105"
+  ],
+  "ctx": "{k: \"led\", n: N_(\"Línea Capitán\"), b3: {PAS: 1}, bAll: {PAS: 1, DEF: 1, FIS: 1}},"
+ },
+ "Línea Guardián": {
+  "w": [
+   "gx-items.js:106"
+  ],
+  "ctx": "{k: \"gua\", n: N_(\"Línea Guardián\"), b3: {DEF: 1}, bAll: {DEF: 1, REG: 2}}"
+ },
+ "Cuero": {
+  "w": [
+   "gx-items.js:113"
+  ],
+  "ctx": "var GX_MATS = [[\"cu\", N_(\"Cuero\"), \"#a8703a\"], [\"fi\", N_(\"Fibra\"), \"#66b9ff\"], [\"es\", N_(\"Esquirla de estrella\"), \"#ffe58a\"]];"
+ },
+ "Fibra": {
+  "w": [
+   "gx-items.js:113"
+  ],
+  "ctx": "var GX_MATS = [[\"cu\", N_(\"Cuero\"), \"#a8703a\"], [\"fi\", N_(\"Fibra\"), \"#66b9ff\"], [\"es\", N_(\"Esquirla de estrella\"), \"#ffe58a\"]];"
+ },
+ "Esquirla de estrella": {
+  "w": [
+   "gx-items.js:113"
+  ],
+  "ctx": "var GX_MATS = [[\"cu\", N_(\"Cuero\"), \"#a8703a\"], [\"fi\", N_(\"Fibra\"), \"#66b9ff\"], [\"es\", N_(\"Esquirla de estrella\"), \"#ffe58a\"]];"
+ },
+ "Equipamiento": {
+  "w": [
+   "ui-gear.js:75",
+   "ui-gear.js:87"
+  ],
+  "ctx": "return '<button class=\"card gcard\" data-a=\"gearopen\"><span class=\"gcard-h\"><b>' + h(tr(\"Equipamiento\")) + \"</b><small>\" + h(tot ? tr(\"Tu equipamiento suma {n} puntos.\", {n: Math.round(tot)}) : tr(\"Equípate para sumar a t"
+ },
+ "Tu equipamiento suma {n} puntos.": {
+  "w": [
+   "ui-gear.js:75"
+  ],
+  "ctx": "return '<button class=\"card gcard\" data-a=\"gearopen\"><span class=\"gcard-h\"><b>' + h(tr(\"Equipamiento\")) + \"</b><small>\" + h(tot ? tr(\"Tu equipamiento suma {n} puntos.\", {n: Math.round(tot)}) : tr(\"Equípate para sumar a t"
+ },
+ "Equípate para sumar a tus atributos.": {
+  "w": [
+   "ui-gear.js:75"
+  ],
+  "ctx": "return '<button class=\"card gcard\" data-a=\"gearopen\"><span class=\"gcard-h\"><b>' + h(tr(\"Equipamiento\")) + \"</b><small>\" + h(tot ? tr(\"Tu equipamiento suma {n} puntos.\", {n: Math.round(tot)}) : tr(\"Equípate para sumar a t"
+ },
+ "Tope": {
+  "w": [
+   "ui-gear.js:94"
+  ],
+  "ctx": "return '<div class=\"gs-at\"><span>' + h(statName(k)) + '</span><i class=\"gs-b\"><i style=\"--w:' + Math.round(Math.max(0, v) / lim * 100) + '%\"></i></i><b class=\"' + (v < 0 ? \"neg\" : \"\") + '\">' + (v > 0 ? \"+\" : v < 0 ? \"−\" "
+ },
+ "tope": {
+  "w": [
+   "ui-gear.js:94"
+  ],
+  "ctx": "return '<div class=\"gs-at\"><span>' + h(statName(k)) + '</span><i class=\"gs-b\"><i style=\"--w:' + Math.round(Math.max(0, v) / lim * 100) + '%\"></i></i><b class=\"' + (v < 0 ? \"neg\" : \"\") + '\">' + (v > 0 ? \"+\" : v < 0 ? \"−\" "
+ },
+ "Aún no llevas nada que sume. Toca una ranura para equiparte.": {
+  "w": [
+   "ui-gear.js:95"
+  ],
+  "ctx": "}).join(\"\") : '<p class=\"muted\" style=\"margin:0\">' + h(tr(\"Aún no llevas nada que sume. Toca una ranura para equiparte.\")) + \"</p>\") + \"</div>\";"
+ },
+ "El equipamiento suma con rendimientos decrecientes: hasta +{a} por atributo y +{t} en total.": {
+  "w": [
+   "ui-gear.js:96"
+  ],
+  "ctx": "if (w === \"p\") s += '<p class=\"muted gs-note\">' + h(tr(\"El equipamiento suma con rendimientos decrecientes: hasta +{a} por atributo y +{t} en total.\", {a: GX_CAP.att, t: GX_CAP.total})) + \"</p>\";"
+ },
+ "No tienes ninguna pieza para esta ranura.": {
+  "w": [
+   "ui-gear.js:116"
+  ],
+  "ctx": "if (!mine.length) s += '<p class=\"muted\">' + h(tr(\"No tienes ninguna pieza para esta ranura.\")) + \"</p>\";"
+ },
+ "Frente a lo que llevas:": {
+  "w": [
+   "ui-gear.js:120"
+  ],
+  "ctx": "'<div class=\"gpc-st\">' + chips(st) + \"</div>\" + (!on && cur ? '<div class=\"gpc-cmp\"><small>' + h(tr(\"Frente a lo que llevas:\")) + \"</small> \" + (chips(st, curSt) || '<span class=\"muted\">' + h(tr(\"igual\")) + \"</span>\") + "
+ },
+ "igual": {
+  "w": [
+   "ui-gear.js:120"
+  ],
+  "ctx": "'<div class=\"gpc-st\">' + chips(st) + \"</div>\" + (!on && cur ? '<div class=\"gpc-cmp\"><small>' + h(tr(\"Frente a lo que llevas:\")) + \"</small> \" + (chips(st, curSt) || '<span class=\"muted\">' + h(tr(\"igual\")) + \"</span>\") + "
+ },
+ "Quitar": {
+  "w": [
+   "ui-gear.js:122",
+   "pet-world.js:355",
+   "ui-48.js:69"
+  ],
+  "ctx": "'<div class=\"gpc-a\"><button class=\"btn sm' + (on ? \"\" : \" pri\") + '\" data-a=\"gearwear\" data-v=\"' + it.id + '\">' + h(on ? tr(\"Quitar\") : tr(\"Equipar\")) + \"</button>\" +"
+ },
+ "Equipar": {
+  "w": [
+   "ui-gear.js:122"
+  ],
+  "ctx": "'<div class=\"gpc-a\"><button class=\"btn sm' + (on ? \"\" : \" pri\") + '\" data-a=\"gearwear\" data-v=\"' + it.id + '\">' + h(on ? tr(\"Quitar\") : tr(\"Equipar\")) + \"</button>\" +"
+ },
+ "Mejorar a {t}": {
+  "w": [
+   "ui-gear.js:123"
+  ],
+  "ctx": "(up ? '<button class=\"btn sm\" data-a=\"gearup\" data-v=\"' + it.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + h(tr(\"Mejorar a {t}\", {t: tr(GX_TIERS[up.to].n)})) + \"<small>\" + h(money(up.money)) + \" · \" + up.cu + \" \" + h(tr(\"c"
+ },
+ "cuero": {
+  "w": [
+   "ui-gear.js:123"
+  ],
+  "ctx": "(up ? '<button class=\"btn sm\" data-a=\"gearup\" data-v=\"' + it.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + h(tr(\"Mejorar a {t}\", {t: tr(GX_TIERS[up.to].n)})) + \"<small>\" + h(money(up.money)) + \" · \" + up.cu + \" \" + h(tr(\"c"
+ },
+ "fibra": {
+  "w": [
+   "ui-gear.js:123"
+  ],
+  "ctx": "(up ? '<button class=\"btn sm\" data-a=\"gearup\" data-v=\"' + it.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + h(tr(\"Mejorar a {t}\", {t: tr(GX_TIERS[up.to].n)})) + \"<small>\" + h(money(up.money)) + \" · \" + up.cu + \" \" + h(tr(\"c"
+ },
+ "Tier máximo": {
+  "w": [
+   "ui-gear.js:123"
+  ],
+  "ctx": "(up ? '<button class=\"btn sm\" data-a=\"gearup\" data-v=\"' + it.id + '\"' + (can ? \"\" : \" disabled\") + \">\" + h(tr(\"Mejorar a {t}\", {t: tr(GX_TIERS[up.to].n)})) + \"<small>\" + h(money(up.money)) + \" · \" + up.cu + \" \" + h(tr(\"c"
+ },
+ "¡Mejorada!": {
+  "w": [
+   "ui-gear.js:137"
+  ],
+  "ctx": "el.innerHTML = '<canvas class=\"gup-fx\" aria-hidden=\"true\"></canvas><canvas class=\"gup-c\" width=\"360\" height=\"360\" aria-hidden=\"true\"></canvas><div class=\"gup-t\"><small>' + h(tr(\"¡Mejorada!\")) + \"</small><b>\" + h(tr(GXI.i"
  },
  "Dar una vuelta": {
   "w": [
@@ -1994,15 +2801,6 @@
   ],
   "ctx": "title: o.title || tr(\"Tu jugador\"), kicker: o.kicker || tr(\"Vestuario\"), from: o.from, dist: 4.1, target: [0, 1.05, 0], pitch0: 0.16, yaw0: -0.5,"
  },
- "Vestuario": {
-  "w": [
-   "view3d.js:553",
-   "events-manager.js:631",
-   "press-ctx.js:203",
-   "mgr-plus.js:808"
-  ],
-  "ctx": "title: o.title || tr(\"Tu jugador\"), kicker: o.kicker || tr(\"Vestuario\"), from: o.from, dist: 4.1, target: [0, 1.05, 0], pitch0: 0.16, yaw0: -0.5,"
- },
  "Celebración": {
   "w": [
    "view3d.js:554",
@@ -2057,12 +2855,6 @@
   ],
   "ctx": "hint: mdl.bowl ? tr(\"Arrastra el dedo por la pecera y te seguirá · dale de comer · pellizca para acercar\") : tr(\"Acaríciale arrastrando sobre él · toca el césped para llamarle · pellizca para acercar\"),"
  },
- "Común": {
-  "w": [
-   "pet-items.js:7"
-  ],
-  "ctx": "var PET_RARITY = [[\"c\", N_(\"Común\")], [\"r\", N_(\"Rara\")], [\"e\", N_(\"Épica\")], [\"l\", N_(\"Legendaria\")]];"
- },
  "Rara": {
   "w": [
    "pet-items.js:7"
@@ -2080,35 +2872,6 @@
    "pet-items.js:7"
   ],
   "ctx": "var PET_RARITY = [[\"c\", N_(\"Común\")], [\"r\", N_(\"Rara\")], [\"e\", N_(\"Épica\")], [\"l\", N_(\"Legendaria\")]];"
- },
- "Cabeza": {
-  "w": [
-   "pet-items.js:8",
-   "pets.js:158"
-  ],
-  "ctx": "var PET_SLOTS2 = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"k\", N_(\"Espalda\")], [\"p\", N_(\"Patas\")], [\"l\", N_(\"Cola\")], [\"t\", N_(\"Juguete\")]];"
- },
- "Cara": {
-  "w": [
-   "pet-items.js:8",
-   "pets.js:158",
-   "pitch.js:1180",
-   "pitch.js:1190"
-  ],
-  "ctx": "var PET_SLOTS2 = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"k\", N_(\"Espalda\")], [\"p\", N_(\"Patas\")], [\"l\", N_(\"Cola\")], [\"t\", N_(\"Juguete\")]];"
- },
- "Cuello": {
-  "w": [
-   "pet-items.js:8",
-   "pets.js:158"
-  ],
-  "ctx": "var PET_SLOTS2 = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"k\", N_(\"Espalda\")], [\"p\", N_(\"Patas\")], [\"l\", N_(\"Cola\")], [\"t\", N_(\"Juguete\")]];"
- },
- "Cuerpo": {
-  "w": [
-   "pet-items.js:8"
-  ],
-  "ctx": "var PET_SLOTS2 = [[\"h\", N_(\"Cabeza\")], [\"f\", N_(\"Cara\")], [\"n\", N_(\"Cuello\")], [\"b\", N_(\"Cuerpo\")], [\"k\", N_(\"Espalda\")], [\"p\", N_(\"Patas\")], [\"l\", N_(\"Cola\")], [\"t\", N_(\"Juguete\")]];"
  },
  "Espalda": {
   "w": [
@@ -2498,12 +3261,6 @@
    "pets.js:155"
   ],
   "ctx": "{id: \"goldboots\", s: \"p\", n: N_(\"Botitas doradas\"), r: \"l\", un: \"scorer\", ud: N_(\"Gana un trofeo de máximo goleador.\"), tags: [\"sporty\", \"shiny\"], gen: \"boots\", c: \"#e8c35a\", c2: \"#fff4c0\", glow: 1},"
- },
- "Muñequeras": {
-  "w": [
-   "pet-items.js:66"
-  ],
-  "ctx": "{id: \"wrist\", s: \"p\", n: N_(\"Muñequeras\"), r: \"c\", price: 80, tags: [\"sporty\"], gen: \"wrist\"},"
  },
  "Calcetines del club": {
   "w": [
@@ -3041,13 +3798,6 @@
   ],
   "ctx": "return '<div class=\"pw-item' + (on ? \" on\" : \"\") + '\"><b>' + esc(tr(d.n)) + '</b><div class=\"pw-row\">' + '<button class=\"btn\" data-pw=\"decopick\" data-v=\"' + d.id + '\">' + esc(on ? tr(\"Mover\") : tr(\"Colocar\")) + \"</button"
  },
- "Quitar": {
-  "w": [
-   "pet-world.js:355",
-   "ui-48.js:69"
-  ],
-  "ctx": "return '<div class=\"pw-item' + (on ? \" on\" : \"\") + '\"><b>' + esc(tr(d.n)) + '</b><div class=\"pw-row\">' + '<button class=\"btn\" data-pw=\"decopick\" data-v=\"' + d.id + '\">' + esc(on ? tr(\"Mover\") : tr(\"Colocar\")) + \"</button"
- },
  "Más decoración en la tienda.": {
   "w": [
    "pet-world.js:356"
@@ -3366,12 +4116,6 @@
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(\"¡Prémiale ya!\")) + '</div><div class=\"pw-row\"><button class=\"go\" data-pw=\"rew\" data-v=\"pat\">💗 ' + esc(tr(\"Caricia\")) + '</button><button class=\"go\" data-pw=\"rew\" data-v=\"treat\"' + (("
  },
- "Básicos": {
-  "w": [
-   "pet-world.js:632"
-  ],
-  "ctx": "var cats = [[\"b\", N_(\"Básicos\")], [\"f\", N_(\"Futboleros\")], [\"s\", N_(\"Especiales\")]];"
- },
  "Futboleros": {
   "w": [
    "pet-world.js:632"
@@ -3559,13 +4303,6 @@
    "pet-world.js:705"
   ],
   "ctx": "panel('<div class=\"pw-h\">' + esc(tr(c.n)) + '</div><p class=\"pw-hint\">' + esc(tr(\"Premio para el ganador: {v}.\", {v: fmtMoney(c.prize)})) + '</p><div class=\"pw-grid\">' +"
- },
- "Estilo": {
-  "w": [
-   "pet-world.js:706",
-   "ui-pets.js:258"
-  ],
-  "ctx": "'<button class=\"pw-item\" data-pw=\"contgo\" data-v=\"' + k + ':style\"><b>👗 ' + esc(tr(\"Estilo\")) + \"</b><small>\" + esc(tr(\"Tema de hoy: {t}\", {t: tr(TH[th])})) + \"</small></button>\" +"
  },
  "Tema de hoy: {t}": {
   "w": [
@@ -5198,15 +5935,6 @@
    "engine-player.js:31"
   ],
   "ctx": "defensa: {n: tr(\"Defensa\"), d: tr(\"Mejor marcaje y anticipación.\"), att: [\"DEF\", \"FIS\"], gk: [\"PAR\", \"COL\"]},"
- },
- "Táctica": {
-  "w": [
-   "engine-player.js:32",
-   "engine-manager.js:33",
-   "evento:fuera_posicion",
-   "evento:y_presion_alta"
-  ],
-  "ctx": "tactica: {n: tr(\"Táctica\"), d: tr(\"Entiendes al míster: más minutos.\"), att: [], gk: []},"
  },
  "Entiendes al míster: más minutos.": {
   "w": [
@@ -18216,13 +18944,6 @@
   ],
   "ctx": "out.push({t: tr(\"Retirarte de la operación\"), ok: {txt: tr(\"Te retiras. Quizá en otro momento.\"), fx: {}}});"
  },
- "Negociación": {
-  "w": [
-   "events-manager.js:566",
-   "engine-market.js:302"
-  ],
-  "ctx": "return {tag: \"real\", tagTxt: tr(\"Fichaje\"), cls: \"\", cat: tr(\"Negociación\"), title: tr(\"Convencer a {name}\", {name: t.fn + \" \" + t.ln}),"
- },
  "Convencer a {name}": {
   "w": [
    "events-manager.js:566",
@@ -22316,12 +23037,6 @@
   "w": [
    "engine-modes.js:6",
    "engine-extra.js:8"
-  ],
-  "ctx": "var DIFFS = [N_(\"Fácil\"), N_(\"Normal\"), N_(\"Difícil\"), N_(\"Leyenda\")];"
- },
- "Leyenda": {
-  "w": [
-   "engine-modes.js:6"
   ],
   "ctx": "var DIFFS = [N_(\"Fácil\"), N_(\"Normal\"), N_(\"Difícil\"), N_(\"Leyenda\")];"
  },
@@ -31159,15 +31874,6 @@
   ],
   "ctx": "return {scene: \"press\", tag: \"real\", tagTxt: tr(\"Rueda de prensa\"), cls: \"\", cat: tr(\"Prensa\"), title: tr(\"¿Vas a la rueda de prensa?\"), text: pressCtxText(x.ctx) + \" \" + tr(\"Si vas, te harán tres preguntas.\"),"
  },
- "Prensa": {
-  "w": [
-   "engine-extra.js:221",
-   "engine-extra.js:248",
-   "engine-extra.js:407",
-   "press-ctx.js:731"
-  ],
-  "ctx": "return {scene: \"press\", tag: \"real\", tagTxt: tr(\"Rueda de prensa\"), cls: \"\", cat: tr(\"Prensa\"), title: tr(\"¿Vas a la rueda de prensa?\"), text: pressCtxText(x.ctx) + \" \" + tr(\"Si vas, te harán tres preguntas.\"),"
- },
  "¿Vas a la rueda de prensa?": {
   "w": [
    "engine-extra.js:221",
@@ -35490,61 +36196,7 @@
   ],
   "ctx": "hair: [{id: \"short\", n: N_(\"Corto\")}, {id: \"buzz\", n: N_(\"Rapado\")}, {id: \"curly\", n: N_(\"Rizado\")}, {id: \"long\", n: N_(\"Largo con coleta\")}, {id: \"bald\", n: N_(\"Sin pelo\")}],"
  },
- "Negras": {
-  "w": [
-   "life.js:34"
-  ],
-  "ctx": "boots: [{id: \"blk\", n: N_(\"Negras\"), c: \"#16191b\"}, {id: \"wht\", n: N_(\"Blancas\"), c: \"#f1f1ee\"}, {id: \"red\", n: N_(\"Rojo fuego\"), c: \"#e3262f\", req: {money: 20000}},"
- },
- "Blancas": {
-  "w": [
-   "life.js:34"
-  ],
-  "ctx": "boots: [{id: \"blk\", n: N_(\"Negras\"), c: \"#16191b\"}, {id: \"wht\", n: N_(\"Blancas\"), c: \"#f1f1ee\"}, {id: \"red\", n: N_(\"Rojo fuego\"), c: \"#e3262f\", req: {money: 20000}},"
- },
- "Rojo fuego": {
-  "w": [
-   "life.js:34"
-  ],
-  "ctx": "boots: [{id: \"blk\", n: N_(\"Negras\"), c: \"#16191b\"}, {id: \"wht\", n: N_(\"Blancas\"), c: \"#f1f1ee\"}, {id: \"red\", n: N_(\"Rojo fuego\"), c: \"#e3262f\", req: {money: 20000}},"
- },
- "Azul eléctrico": {
-  "w": [
-   "life.js:35"
-  ],
-  "ctx": "{id: \"blu\", n: N_(\"Azul eléctrico\"), c: \"#1f7cff\", req: {money: 20000}}, {id: \"pnk\", n: N_(\"Rosa flúor\"), c: \"#ff4fb1\", req: {fame: 40}}, {id: \"gld\", n: N_(\"Doradas\"), c: \"#e8c35a\", req: {tro: 5}}],"
- },
- "Rosa flúor": {
-  "w": [
-   "life.js:35"
-  ],
-  "ctx": "{id: \"blu\", n: N_(\"Azul eléctrico\"), c: \"#1f7cff\", req: {money: 20000}}, {id: \"pnk\", n: N_(\"Rosa flúor\"), c: \"#ff4fb1\", req: {fame: 40}}, {id: \"gld\", n: N_(\"Doradas\"), c: \"#e8c35a\", req: {tro: 5}}],"
- },
- "Doradas": {
-  "w": [
-   "life.js:35"
-  ],
-  "ctx": "{id: \"blu\", n: N_(\"Azul eléctrico\"), c: \"#1f7cff\", req: {money: 20000}}, {id: \"pnk\", n: N_(\"Rosa flúor\"), c: \"#ff4fb1\", req: {fame: 40}}, {id: \"gld\", n: N_(\"Doradas\"), c: \"#e8c35a\", req: {tro: 5}}],"
- },
  "Manga corta": {
-  "w": [
-   "life.js:36"
-  ],
-  "ctx": "sleeve: [{id: \"short\", n: N_(\"Manga corta\")}, {id: \"long\", n: N_(\"Manga larga\")}, {id: \"under\", n: N_(\"Manguito térmico negro\"), req: {fame: 15}}, {id: \"tights\", n: N_(\"Mallas térmicas\"), req: {fame: 10}}],"
- },
- "Manga larga": {
-  "w": [
-   "life.js:36"
-  ],
-  "ctx": "sleeve: [{id: \"short\", n: N_(\"Manga corta\")}, {id: \"long\", n: N_(\"Manga larga\")}, {id: \"under\", n: N_(\"Manguito térmico negro\"), req: {fame: 15}}, {id: \"tights\", n: N_(\"Mallas térmicas\"), req: {fame: 10}}],"
- },
- "Manguito térmico negro": {
-  "w": [
-   "life.js:36"
-  ],
-  "ctx": "sleeve: [{id: \"short\", n: N_(\"Manga corta\")}, {id: \"long\", n: N_(\"Manga larga\")}, {id: \"under\", n: N_(\"Manguito térmico negro\"), req: {fame: 15}}, {id: \"tights\", n: N_(\"Mallas térmicas\"), req: {fame: 10}}],"
- },
- "Mallas térmicas": {
   "w": [
    "life.js:36"
   ],
@@ -35555,60 +36207,6 @@
    "life.js:37"
   ],
   "ctx": "band: [{id: \"none\", n: N_(\"Sin cinta\")}, {id: \"wht\", n: N_(\"Cinta blanca\"), c: \"#f4f4f0\"}, {id: \"blk\", n: N_(\"Cinta negra\"), c: \"#16191b\"},"
- },
- "Cinta blanca": {
-  "w": [
-   "life.js:37"
-  ],
-  "ctx": "band: [{id: \"none\", n: N_(\"Sin cinta\")}, {id: \"wht\", n: N_(\"Cinta blanca\"), c: \"#f4f4f0\"}, {id: \"blk\", n: N_(\"Cinta negra\"), c: \"#16191b\"},"
- },
- "Cinta negra": {
-  "w": [
-   "life.js:37"
-  ],
-  "ctx": "band: [{id: \"none\", n: N_(\"Sin cinta\")}, {id: \"wht\", n: N_(\"Cinta blanca\"), c: \"#f4f4f0\"}, {id: \"blk\", n: N_(\"Cinta negra\"), c: \"#16191b\"},"
- },
- "Cinta con los colores del club": {
-  "w": [
-   "life.js:38"
-  ],
-  "ctx": "{id: \"club\", n: N_(\"Cinta con los colores del club\"), req: {fame: 30}}, {id: \"cap\", n: N_(\"Brazalete de capitán\"), req: {cap: 1}}],"
- },
- "Brazalete de capitán": {
-  "w": [
-   "life.js:38"
-  ],
-  "ctx": "{id: \"club\", n: N_(\"Cinta con los colores del club\"), req: {fame: 30}}, {id: \"cap\", n: N_(\"Brazalete de capitán\"), req: {cap: 1}}],"
- },
- "Clásicos": {
-  "w": [
-   "life.js:39"
-  ],
-  "ctx": "gloves: [{id: \"cls\", n: N_(\"Clásicos\"), c: \"#f4f4f0\", c2: \"#d33\"}, {id: \"flu\", n: N_(\"Flúor\"), c: \"#c6f432\", c2: \"#16191b\"}, {id: \"blk\", n: N_(\"Negros\"), c: \"#1b1d1f\", c2: \"#ffb21e\", req: {fame: 20}},"
- },
- "Flúor": {
-  "w": [
-   "life.js:39"
-  ],
-  "ctx": "gloves: [{id: \"cls\", n: N_(\"Clásicos\"), c: \"#f4f4f0\", c2: \"#d33\"}, {id: \"flu\", n: N_(\"Flúor\"), c: \"#c6f432\", c2: \"#16191b\"}, {id: \"blk\", n: N_(\"Negros\"), c: \"#1b1d1f\", c2: \"#ffb21e\", req: {fame: 20}},"
- },
- "Negros": {
-  "w": [
-   "life.js:39"
-  ],
-  "ctx": "gloves: [{id: \"cls\", n: N_(\"Clásicos\"), c: \"#f4f4f0\", c2: \"#d33\"}, {id: \"flu\", n: N_(\"Flúor\"), c: \"#c6f432\", c2: \"#16191b\"}, {id: \"blk\", n: N_(\"Negros\"), c: \"#1b1d1f\", c2: \"#ffb21e\", req: {fame: 20}},"
- },
- "Dorados": {
-  "w": [
-   "life.js:40"
-  ],
-  "ctx": "{id: \"gld\", n: N_(\"Dorados\"), c: \"#e8c35a\", c2: \"#7a5a12\", req: {tro: 3}}, {id: \"leg\", n: N_(\"Edición leyenda\"), c: \"#6c2bd9\", c2: \"#e8c35a\", req: {money: 250000}}],"
- },
- "Edición leyenda": {
-  "w": [
-   "life.js:40"
-  ],
-  "ctx": "{id: \"gld\", n: N_(\"Dorados\"), c: \"#e8c35a\", c2: \"#7a5a12\", req: {tro: 3}}, {id: \"leg\", n: N_(\"Edición leyenda\"), c: \"#6c2bd9\", c2: \"#e8c35a\", req: {money: 250000}}],"
  },
  "Puño al aire": {
   "w": [
@@ -43474,12 +44072,6 @@
   ],
   "ctx": "\"<div><span>\" + tr(\"Estado físico\") + \"</span><span\" + (p.inj && p.injT > S.tw ? ' class=\"neg\"' : \"\") + \">\" + inj + \"</span></div>\" +"
  },
- "Brazalete": {
-  "w": [
-   "ui.js:1035"
-  ],
-  "ctx": "(p.flags.captain ? \"<div><span>\" + tr(\"Brazalete\") + \"</span><span>\" + tr(\"Capitán\") + \"</span></div>\" : \"\") +"
- },
  "Capitán": {
   "w": [
    "ui.js:1035"
@@ -46898,29 +47490,11 @@
   ],
   "ctx": "if (typeof View3D !== \"undefined\" && View3D && View3D.supported()) s += '<button class=\"btn v3dbtn\" data-a=\"lf3d\">' + tr(\"Ver en 3D\") + \"</button>\";"
  },
- "Guantes": {
-  "w": [
-   "ui-life.js:259"
-  ],
-  "ctx": "if (gk) s += cosRow(\"gloves\", tr(\"Guantes\"), true);"
- },
- "Botas": {
-  "w": [
-   "ui-life.js:260"
-  ],
-  "ctx": "s += cosRow(\"boots\", tr(\"Botas\"), true);"
- },
  "Mangas y mallas": {
   "w": [
    "ui-life.js:261"
   ],
   "ctx": "s += cosRow(\"sleeve\", tr(\"Mangas y mallas\"));"
- },
- "Cinta": {
-  "w": [
-   "ui-life.js:262"
-  ],
-  "ctx": "s += cosRow(\"band\", tr(\"Cinta\"));"
  },
  "Piel": {
   "w": [
@@ -47182,12 +47756,6 @@
    "ui-pets.js:130"
   ],
   "ctx": "if (r.ok) { U.toast(tr(\"¡Compra hecha! {pet} ya lleva {acc}.\", {pet: petOf() ? petOf().nm : \"\", acc: a.ico + \" \" + tr(a.n)})); rer(); show3d({acc: v}); }"
- },
- "Vínculo": {
-  "w": [
-   "ui-pets.js:135"
-  ],
-  "ctx": "s += '<div><div class=\"lbl\">' + tr(\"Vínculo\") + \" · \" + Math.round(pt.bond) + ' %</div><div class=\"petbond big\"><i style=\"width:' + Math.round(pt.bond) + '%\"></i></div><p class=\"muted lfhint\">' + tr(\"Cuanto más fuerte el"
  },
  "Cuanto más fuerte el vínculo, más te ayuda. Si no le dedicas tiempo, se debilita.": {
   "w": [
@@ -49905,12 +50473,6 @@
    "ui-37.js:55"
   ],
   "ctx": "return '<div class=\"psphy l' + lv + '\"><div class=\"psphyh\"><span class=\"lbl\">' + tr(\"Media física\") + '</span><b>' + v + '</b><span class=\"psphyt\">' + h(tr(PHY_TXT[lv])) + \"</span></div>\" +"
- },
- "Resistencia": {
-  "w": [
-   "ui-37.js:57"
-  ],
-  "ctx": "'<div class=\"phyparts\"><span>' + tr(\"Resistencia\") + \" <b>\" + plRes(p) + \"</b></span><span>\" + tr(\"Condición\") + \" <b>\" + Math.round(p.fit) + \"</b></span><span>\" + tr(\"Fuerza y ritmo\") + \" <b>\" + plFza(p) + \"</b></span><"
  },
  "Condición": {
   "w": [

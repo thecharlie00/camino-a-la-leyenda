@@ -136,7 +136,7 @@ var PetSim = (function () {
     var dk = dayKey(api.clock()); if (!pt.bd || pt.bd.d !== dk) pt.bd = {d: dk, n: 0, k: {}};
     var used = pt.bd.k[kind] || 0, f = used < 3 ? 1 : used < 6 ? 0.5 : 0.15;
     pt.bd.k[kind] = used + 1; pt.bd.n++;
-    var g = v * f * (pt.bond > 85 ? 0.6 : 1);
+    var g = v * f * (pt.bond > 85 ? 0.6 : 1) * (v > 0 && api.bondMul ? api.bondMul(pt) : 1);
     pt.bond = cl(pt.bond + g, 5, 100);
     return g;
   }
@@ -340,7 +340,7 @@ var PetSim = (function () {
   api.walkEnd = function (pt, k, o) {
     var R = ROUTES.filter(function (x) { return x.k === k; })[0] || ROUTES[0];
     pt.walkT[k] = api.clock(); pt.stats.walks++; pt.stats.steps += Math.round(o && o.steps || R.len * 8);
-    pt.n.ene = cl(pt.n.ene - R.ene, 0, 100); pt.n.fun = cl(pt.n.fun + 30, 0, 100); pt.n.aff = cl(pt.n.aff + 10, 0, 100);
+    pt.n.ene = cl(pt.n.ene - R.ene * (api.eneMul ? api.eneMul(pt) : 1), 0, 100); pt.n.fun = cl(pt.n.fun + 30, 0, 100); pt.n.aff = cl(pt.n.aff + 10, 0, 100);
     if (o && o.mud) { pt.n.cln = cl(pt.n.cln - 25, 0, 100); pt.dirt = Math.max(pt.dirt || 0, 2); } else pt.n.cln = cl(pt.n.cln - 8, 0, 100);
     if (o && o.poo === false && pt.poo) pt.poo = 0;
     bond(pt, 3, "walk"); first(pt, "walk_" + k);
