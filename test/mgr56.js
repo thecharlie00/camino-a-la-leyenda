@@ -27,7 +27,7 @@ const OUT = process.argv[2] || "/tmp/mgr56"; fs.mkdirSync(OUT, { recursive: true
   await c('[data-a="close"]');
   /* decisión de míster en datos */
   const mev = await js(() => { S.pend.unshift({ k: "mev", id: "gxm_pizarra", s: 3 }); S.ph = "gap"; S.pend = S.pend.filter(x => x.k !== "jobs"); UIX.ui().tab = "club"; UIX.render(false); const d = document.querySelector(".decision"); return { sc: !!(d && d.querySelector(".gxsc img")), chips: d ? d.querySelectorAll(".chip,.pct").length : -1 }; });
-  console.log("decisión míster", JSON.stringify(mev)); if (!mev.sc || mev.chips) fail.push("decisión míster");
+  console.log("decisión míster", JSON.stringify(mev)); if (!mev.sc || !mev.chips) fail.push("decisión míster");
   await p.waitForTimeout(900); await js(() => { const d = document.querySelector(".decision"); if (d) d.scrollIntoView(); }); await p.screenshot({ path: path.join(OUT, "05-decision.png") });
   await c('.decision .opt[data-i="1"]'); await p.waitForTimeout(400);
   console.log("tras elegir", await js(() => JSON.stringify({ chips: (S.feed[0].chips || []).length, pct: S.feed[0].pct })));

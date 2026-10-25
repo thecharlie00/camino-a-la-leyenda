@@ -37,7 +37,7 @@
       MEV({id: "gxm_" + d.id, tipo: d.tipo || "real", cat: d.cat, title: d.title, w: d.w || 0.9, cd: d.cd != null ? d.cd : 2, gx: 1, sc: d.sc || "office",
         when: function (y) { return ok(d.when, y); },
         text: function (y) { var v = d.text; return tr(Array.isArray(v) ? Y.spick(v, "t") : v, vars()); },
-        opts: function () { return d.opts.map(function (o) { var r = {t: tr(o.t, vars()), blind: true}; r.ok = outc(o.ok, d.id); if (o.ko) { r.ko = outc(o.ko, d.id); r.p = o.p != null ? (typeof o.p === "number" ? o.p : clamp((o.p.b || 0.5) + ((GXM.stats() || {})[o.p.st] - 50) * (o.p.k || 0.01), 0.15, 0.88)) : 0.5; } return r; }); }});
+        opts: function () { return d.opts.map(function (o) { var r = {t: tr(o.t, vars())}; r.ok = outc(o.ok, d.id); if (o.ko) { r.ko = outc(o.ko, d.id); r.p = o.p != null ? (typeof o.p === "number" ? o.p : clamp((o.p.b || 0.5) + ((GXM.stats() || {})[o.p.st] - 50) * (o.p.k || 0.01), 0.15, 0.88)) : 0.5; } return r; }); }});
     });
   }
   add([
@@ -90,11 +90,11 @@
   var root = typeof globalThis !== "undefined" ? globalThis : window;
   if (typeof mgrResolve === "function") {
     var _mr = mgrResolve;
-    root.mgrResolve = function (i) { var x = S.pend && S.pend[0], ev = x && x.k === "mev" ? MEV_BY_ID[x.id] : null; var card = _mr.apply(this, arguments); try { if (card && ev && ev.gx) { card.chips = []; card.pct = null; } } catch (e) {} return card; };
+    root.mgrResolve = function (i) { var x = S.pend && S.pend[0], ev = x && x.k === "mev" ? MEV_BY_ID[x.id] : null; var card = _mr.apply(this, arguments);  return card; };
   }
   if (typeof mgrDesc === "function") {
     var _md = mgrDesc;
-    root.mgrDesc = function (x) { var d = _md.apply(this, arguments); try { var ev = x && x.k === "mev" ? MEV_BY_ID[x.id] : null; if (d && ev && ev.gx) d.vscene = ev.sc; } catch (e) {} return d; };
+    root.mgrDesc = function (x) { var d = _md.apply(this, arguments); try { var ev = x && x.k === "mev" ? MEV_BY_ID[x.id] : null; if (d && ev && !d.scene) d.vscene = ev.sc || GXE.scOf(ev); } catch (e) {} return d; };
   }
   if (typeof mgrBlockDone === "function") {
     var _bd = mgrBlockDone;

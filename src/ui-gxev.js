@@ -6,12 +6,12 @@
   var U = UIX;
   function cols() { try { var cc = clubColors(W.clubs[S.mode === "mgr" && S.m ? S.m.club : S.p.club].n); return [cc[0] || "#c8312f", cc[1] || "#f4f4f0"]; } catch (e) { return ["#c8312f", "#f4f4f0"]; } }
   function look() { var o = {skin: "#c18a5e", hair: "#1d1612"}; try { var L = S.p.life || {}, c = L.cos || {}; var sk = LIFE_COS.skin.filter(function (x) { return x.id === (c.skin || "s2"); })[0], hc = LIFE_COS.hcol.filter(function (x) { return x.id === (c.hcol || "h1"); })[0]; if (sk) o.skin = sk.c; if (hc) o.hair = hc.c; } catch (e) {} return o; }
-  function build(sc, C, lk) {
+  function build(sc, C, lk, spots) {
     var V = {};
     function box(x0, x1, y0, y1, z0, z1, c) { for (var x = x0; x <= x1; x++) for (var y = y0; y <= y1; y++) for (var z = z0; z <= z1; z++) V[x + "," + y + "," + z] = c; }
     function floor(c1, c2) { for (var x = -11; x <= 11; x++) for (var z = -6; z <= 6; z++) V[x + ",0," + z] = (x + z) % 2 === 0 ? c1 : c2 || c1; }
     function wall(c1, c2, h) { for (var x = -11; x <= 11; x++) for (var y = 1; y <= (h || 9); y++) V[x + "," + y + ",-6"] = (y % 3 === 0 && c2) ? c2 : c1; }
-    function man(x, z, shirt, shorts) { box(x, x, 1, 2, z, z, "#1b1d1f"); box(x + 1, x + 1, 1, 2, z, z, "#1b1d1f"); box(x, x + 1, 3, 3, z, z, shorts || "#f4f4f0"); box(x - 1, x + 2, 4, 6, z, z, shirt); box(x, x + 1, 7, 8, z, z, lk.skin); box(x, x + 1, 9, 9, z, z, lk.hair); box(x - 1, x - 1, 4, 5, z, z, lk.skin); box(x + 2, x + 2, 4, 5, z, z, lk.skin); }
+    function man(x, z, shirt, shorts) { if (spots) { spots.push({x: x + 0.5, z: z, shirt: shirt, shorts: shorts, me: shirt === C[0]}); return; } box(x, x, 1, 2, z, z, "#1b1d1f"); box(x + 1, x + 1, 1, 2, z, z, "#1b1d1f"); box(x, x + 1, 3, 3, z, z, shorts || "#f4f4f0"); box(x - 1, x + 2, 4, 6, z, z, shirt); box(x, x + 1, 7, 8, z, z, lk.skin); box(x, x + 1, 9, 9, z, z, lk.hair); box(x - 1, x - 1, 4, 5, z, z, lk.skin); box(x + 2, x + 2, 4, 5, z, z, lk.skin); }
     function ball(x, y, z) { V[x + "," + y + "," + z] = "#f4f4f0"; V[(x + 1) + "," + y + "," + z] = "#1b1d1f"; }
     switch (sc) {
       case "locker":
@@ -35,7 +35,7 @@
       case "press":
         floor("#1b2428", "#16202a"); for (var x2 = -11; x2 <= 11; x2++) for (var y2 = 1; y2 <= 10; y2++) V[x2 + "," + y2 + ",-6"] = ((x2 + 11) % 6 < 3) !== (y2 % 4 < 2) ? C[0] : "#24343a";
         box(-8, 8, 3, 3, -1, 1, "#3a4b50"); box(-8, 8, 1, 2, 1, 1, "#24343a"); [-5, 0, 5].forEach(function (x) { box(x, x, 4, 5, 0, 0, "#16191b"); V[x + ",6,0"] = "#91a4a6"; }); man(0, -2, C[0]);
-        [-9, -6, 6, 9].forEach(function (x, i) { box(x, x + 1, 1, 3, 5, 5, "#2f4045"); box(x, x + 1, 4, 5, 5, 5, ["#e0ac85", "#8d5a3b", "#f3d2b3", "#c18a5e"][i]); }); break;
+        [-9, -6, 6, 9].forEach(function (x, i) { if (spots) { spots.push({x: x + 0.5, z: 4, shirt: ["#2f4045", "#5a3a22", "#3a4b50", "#24343a"][i], shorts: "#1b1d1f", back: true}); return; } box(x, x + 1, 1, 3, 5, 5, "#2f4045"); box(x, x + 1, 4, 5, 5, 5, ["#e0ac85", "#8d5a3b", "#f3d2b3", "#c18a5e"][i]); }); break;
       case "stadium":
         floor("#3fa860", "#378f52"); for (var r = 0; r < 5; r++) for (var x3 = -11; x3 <= 11; x3++) { V[x3 + "," + (1 + r * 2) + "," + (-6 + r)] = "#2a3a40"; V[x3 + "," + (2 + r * 2) + "," + (-6 + r)] = (x3 * 7 + r * 3) % 5 === 0 ? C[1] : (x3 + r) % 3 === 0 ? C[0] : "#3a4b50"; }
         box(-11, -11, 1, 14, -6, -6, "#91a4a6"); box(-12, -10, 15, 15, -6, -6, "#fff6dc"); for (var x4 = -11; x4 <= 11; x4++) V[x4 + ",0,4"] = "#f4f4f0"; man(1, 3, C[0]); break;
@@ -64,6 +64,8 @@
     try { var cv = document.createElement("canvas"); cv.width = 720; cv.height = 300; GXV.draw(cv, key, -0.5, {fit: true, scale: 1.35, shadow: false, metal: 0.05}); IMG[k] = cv.toDataURL(); } catch (e) { IMG[k] = ""; }
     return IMG[k];
   }
-  U.gxScene = function (sc) { var src = img(sc); return src ? '<div class="gxsc gxsc-' + sc + '" aria-hidden="true"><img src="' + src + '" alt="" width="360" height="150"><i class="gxsc-l"></i></div>' : ""; };
+  /* plano 3D: vóxeles del decorado (sin personas) y dónde va cada persona */
+  U.gxScenePlan = function (sc) { var C = cols(), lk = look(), spots = [], V = build(sc, C, lk, spots); return {V: V, spots: spots, cols: C, key: sc + "|" + C.join("")}; };
+  U.gxScene = function (sc) { var src = img(sc); return src ? '<div class="gxsc gxsc-' + sc + '" data-sc3="' + sc + '" aria-hidden="true"><img src="' + src + '" alt="" width="360" height="150"><i class="gxsc-l"></i></div>' : ""; };
   U.gxSceneImg = img;
 })();

@@ -1952,3 +1952,7 @@ html.rm .mgb-n.bump.on { animation: none; }
 .yo3d-cv { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; animation: gxscin .6s cubic-bezier(.2,.9,.3,1.15) both; }
 .yo3d-cv:active { cursor: grabbing; }
 .rm .yo3d-cv { animation: none; }
+/* ===== 5.6 escenas 3D en vivo (decisiones y rueda de prensa) ===== */
+.gxsc.has3d > img, .gxsc.has3d > .gxsc-l { display: none; }
+.sc3-cv { display: block; width: 100%; height: 100%; animation: gxscin .7s cubic-bezier(.2,.9,.3,1.15) both; }
+.rm .sc3-cv { animation: none; }

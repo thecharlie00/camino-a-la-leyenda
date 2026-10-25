@@ -36,9 +36,9 @@
  "Selección": {
   "w": [
    "gx-data.js:8",
-   "gx-events.js:193",
-   "gx-events.js:195",
-   "gx-events.js:198"
+   "gx-events.js:197",
+   "gx-events.js:199",
+   "gx-events.js:202"
   ],
   "ctx": "[\"career\", N_(\"Carrera y clubes\"), \"🧳\"], [\"nat\", N_(\"Selección\"), \"🌍\"], [\"awards\", N_(\"Premios individuales\"), \"🏅\"], [\"room\", N_(\"Decisiones y vestuario\"), \"🗳️\"],"
  },
@@ -64,9 +64,9 @@
  "Mascota": {
   "w": [
    "gx-data.js:9",
-   "gx-events.js:223",
-   "gx-events.js:225",
-   "gx-events.js:228"
+   "gx-events.js:227",
+   "gx-events.js:229",
+   "gx-events.js:232"
   ],
   "ctx": "[\"press\", N_(\"Prensa y afición\"), \"🎙️\"], [\"pet\", N_(\"Mascota\"), \"🐾\"], [\"mgr\", N_(\"Entrenador\"), \"📋\"], [\"mini\", N_(\"Minijuegos\"), \"🎮\"],"
  },
@@ -2068,18 +2068,18 @@
  "Vestuario": {
   "w": [
    "gx-items.js:21",
-   "gx-events.js:97",
-   "gx-events.js:100",
-   "gx-events.js:103"
+   "gx-events.js:101",
+   "gx-events.js:104",
+   "gx-events.js:107"
   ],
   "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
  },
  "Prensa": {
   "w": [
    "gx-items.js:21",
-   "gx-events.js:121",
-   "gx-events.js:124",
-   "gx-events.js:127"
+   "gx-events.js:125",
+   "gx-events.js:128",
+   "gx-events.js:131"
   ],
   "ctx": "tac: N_(\"Táctica\"), mot: N_(\"Motivación\"), ves: N_(\"Vestuario\"), pre: N_(\"Prensa\"), jov: N_(\"Jóvenes\"), fis: N_(\"Preparación física\"), neg: N_(\"Negociación\"), lec: N_(\"Lectura de partido\"),"
  },
@@ -3683,7 +3683,7 @@
  },
  "rival": {
   "w": [
-   "gx-events.js:68",
+   "gx-events.js:67",
    "events.js:95",
    "engine-extra.js:181",
    "press-ctx.js:712"
@@ -3692,8 +3692,8 @@
  },
  "tu mascota": {
   "w": [
-   "gx-events.js:68",
-   "gx-events.js:68",
+   "gx-events.js:67",
+   "gx-events.js:67",
    "gx-mevents.js:24",
    "gx-mevents.js:24"
   ],
@@ -3701,447 +3701,447 @@
  },
  "Bronca en la ducha": {
   "w": [
-   "gx-events.js:97"
+   "gx-events.js:101"
   ],
   "ctx": "{id: \"pelea_mediar\", cat: N_(\"Vestuario\"), sc: \"locker\", title: N_(\"Bronca en la ducha\"), text: [N_(\"Dos compañeros llegan a las manos por una entrada fea en el entrenamiento. Todo el vestuario te mira.\"), N_(\"Un veteran"
  },
  "Dos compañeros llegan a las manos por una entrada fea en el entrenamiento. Todo el vestuario te mira.": {
   "w": [
-   "gx-events.js:97"
+   "gx-events.js:101"
   ],
   "ctx": "{id: \"pelea_mediar\", cat: N_(\"Vestuario\"), sc: \"locker\", title: N_(\"Bronca en la ducha\"), text: [N_(\"Dos compañeros llegan a las manos por una entrada fea en el entrenamiento. Todo el vestuario te mira.\"), N_(\"Un veteran"
  },
  "Un veterano y un recién llegado se encaran después del partido. Nadie se mete… de momento.": {
   "w": [
-   "gx-events.js:97"
+   "gx-events.js:101"
   ],
   "ctx": "{id: \"pelea_mediar\", cat: N_(\"Vestuario\"), sc: \"locker\", title: N_(\"Bronca en la ducha\"), text: [N_(\"Dos compañeros llegan a las manos por una entrada fea en el entrenamiento. Todo el vestuario te mira.\"), N_(\"Un veteran"
  },
  "Meterte en medio y calmarlos": {
   "w": [
-   "gx-events.js:98"
+   "gx-events.js:102"
   ],
   "ctx": "opts: [{t: N_(\"Meterte en medio y calmarlos\"), p: {st: \"prof\", b: 0.55, k: 0.006}, ok: {txt: N_(\"Los separas, hablas con los dos y acaban dándose la mano. El míster toma nota.\"), fx: {coach: 5, mor: 3}, gx: \"mediator\"}, "
  },
  "Los separas, hablas con los dos y acaban dándose la mano. El míster toma nota.": {
   "w": [
-   "gx-events.js:98"
+   "gx-events.js:102"
   ],
   "ctx": "opts: [{t: N_(\"Meterte en medio y calmarlos\"), p: {st: \"prof\", b: 0.55, k: 0.006}, ok: {txt: N_(\"Los separas, hablas con los dos y acaban dándose la mano. El míster toma nota.\"), fx: {coach: 5, mor: 3}, gx: \"mediator\"}, "
  },
  "Te llevas un empujón y la pelea sigue. Al menos lo intentaste.": {
   "w": [
-   "gx-events.js:98"
+   "gx-events.js:102"
   ],
   "ctx": "opts: [{t: N_(\"Meterte en medio y calmarlos\"), p: {st: \"prof\", b: 0.55, k: 0.006}, ok: {txt: N_(\"Los separas, hablas con los dos y acaban dándose la mano. El míster toma nota.\"), fx: {coach: 5, mor: 3}, gx: \"mediator\"}, "
  },
  "Mirar hacia otro lado": {
   "w": [
-   "gx-events.js:99",
+   "gx-events.js:103",
    "events-manager.js:218"
   ],
   "ctx": "{t: N_(\"Mirar hacia otro lado\"), ok: {txt: N_(\"No es tu guerra. El ambiente queda enrarecido unos días.\"), fx: {mor: -1}}}]},"
  },
  "No es tu guerra. El ambiente queda enrarecido unos días.": {
   "w": [
-   "gx-events.js:99"
+   "gx-events.js:103"
   ],
   "ctx": "{t: N_(\"Mirar hacia otro lado\"), ok: {txt: N_(\"No es tu guerra. El ambiente queda enrarecido unos días.\"), fx: {mor: -1}}}]},"
  },
  "Llegó tarde otra vez": {
   "w": [
-   "gx-events.js:100"
+   "gx-events.js:104"
   ],
   "ctx": "{id: \"cubrir\", cat: N_(\"Vestuario\"), sc: \"locker\", cd: 1, title: N_(\"Llegó tarde otra vez\"), text: [N_(\"Un compañero llega tarde a la sesión y te pide que digas que estaba contigo en el fisio.\"), N_(\"Un amigo del vestuar"
  },
  "Un compañero llega tarde a la sesión y te pide que digas que estaba contigo en el fisio.": {
   "w": [
-   "gx-events.js:100"
+   "gx-events.js:104"
   ],
   "ctx": "{id: \"cubrir\", cat: N_(\"Vestuario\"), sc: \"locker\", cd: 1, title: N_(\"Llegó tarde otra vez\"), text: [N_(\"Un compañero llega tarde a la sesión y te pide que digas que estaba contigo en el fisio.\"), N_(\"Un amigo del vestuar"
  },
  "Un amigo del vestuario se ha saltado la cena del equipo. Te pide que le cubras ante el delegado.": {
   "w": [
-   "gx-events.js:100"
+   "gx-events.js:104"
   ],
   "ctx": "{id: \"cubrir\", cat: N_(\"Vestuario\"), sc: \"locker\", cd: 1, title: N_(\"Llegó tarde otra vez\"), text: [N_(\"Un compañero llega tarde a la sesión y te pide que digas que estaba contigo en el fisio.\"), N_(\"Un amigo del vestuar"
  },
  "Cubrirle": {
   "w": [
-   "gx-events.js:101"
+   "gx-events.js:105"
   ],
   "ctx": "opts: [{t: N_(\"Cubrirle\"), p: 0.7, ok: {txt: N_(\"Cuela. Te debe una, y lo sabe.\"), fx: {mor: 2}, gx: \"+covered\"}, ko: {txt: N_(\"El delegado no se lo traga y os cae una multa a los dos.\"), fx: {money: -8000, coach: -4}, g"
  },
  "Cuela. Te debe una, y lo sabe.": {
   "w": [
-   "gx-events.js:101"
+   "gx-events.js:105"
   ],
   "ctx": "opts: [{t: N_(\"Cubrirle\"), p: 0.7, ok: {txt: N_(\"Cuela. Te debe una, y lo sabe.\"), fx: {mor: 2}, gx: \"+covered\"}, ko: {txt: N_(\"El delegado no se lo traga y os cae una multa a los dos.\"), fx: {money: -8000, coach: -4}, g"
  },
  "El delegado no se lo traga y os cae una multa a los dos.": {
   "w": [
-   "gx-events.js:101"
+   "gx-events.js:105"
   ],
   "ctx": "opts: [{t: N_(\"Cubrirle\"), p: 0.7, ok: {txt: N_(\"Cuela. Te debe una, y lo sabe.\"), fx: {mor: 2}, gx: \"+covered\"}, ko: {txt: N_(\"El delegado no se lo traga y os cae una multa a los dos.\"), fx: {money: -8000, coach: -4}, g"
  },
  "Decirle que no": {
   "w": [
-   "gx-events.js:102"
+   "gx-events.js:106"
   ],
   "ctx": "{t: N_(\"Decirle que no\"), ok: {txt: N_(\"Le dices que cada uno responde de lo suyo. Se enfada un tiempo.\"), fx: {prof: 2, mor: -1}}}]},"
  },
  "Le dices que cada uno responde de lo suyo. Se enfada un tiempo.": {
   "w": [
-   "gx-events.js:102"
+   "gx-events.js:106"
   ],
   "ctx": "{t: N_(\"Decirle que no\"), ok: {txt: N_(\"Le dices que cada uno responde de lo suyo. Se enfada un tiempo.\"), fx: {prof: 2, mor: -1}}}]},"
  },
  "El chaval de la cantera": {
   "w": [
-   "gx-events.js:103"
+   "gx-events.js:107"
   ],
   "ctx": "{id: \"novato_consejo\", cat: N_(\"Vestuario\"), sc: \"training\", cd: 1, title: N_(\"El chaval de la cantera\"), when: {age: [24, null]}, text: [N_(\"Un juvenil que acaba de subir te pregunta cómo hacías tú para no venirte abajo"
  },
  "Un juvenil que acaba de subir te pregunta cómo hacías tú para no venirte abajo tras un mal partido.": {
   "w": [
-   "gx-events.js:103"
+   "gx-events.js:107"
   ],
   "ctx": "{id: \"novato_consejo\", cat: N_(\"Vestuario\"), sc: \"training\", cd: 1, title: N_(\"El chaval de la cantera\"), when: {age: [24, null]}, text: [N_(\"Un juvenil que acaba de subir te pregunta cómo hacías tú para no venirte abajo"
  },
  "El canterano nuevo te sigue a todas partes. Hoy se atreve a pedirte consejo.": {
   "w": [
-   "gx-events.js:103"
+   "gx-events.js:107"
   ],
   "ctx": "{id: \"novato_consejo\", cat: N_(\"Vestuario\"), sc: \"training\", cd: 1, title: N_(\"El chaval de la cantera\"), when: {age: [24, null]}, text: [N_(\"Un juvenil que acaba de subir te pregunta cómo hacías tú para no venirte abajo"
  },
  "Dedicarle una tarde": {
   "w": [
-   "gx-events.js:104"
+   "gx-events.js:108"
   ],
   "ctx": "opts: [{t: N_(\"Dedicarle una tarde\"), ok: {txt: N_(\"Le cuentas tus peores días y cómo saliste. Se va con otra cara.\"), fx: {mor: 3, coach: 2}, gx: \"+mentored\", later: {b: 2, txt: N_(\"El canterano al que aconsejaste marca"
  },
  "Le cuentas tus peores días y cómo saliste. Se va con otra cara.": {
   "w": [
-   "gx-events.js:104"
+   "gx-events.js:108"
   ],
   "ctx": "opts: [{t: N_(\"Dedicarle una tarde\"), ok: {txt: N_(\"Le cuentas tus peores días y cómo saliste. Se va con otra cara.\"), fx: {mor: 3, coach: 2}, gx: \"+mentored\", later: {b: 2, txt: N_(\"El canterano al que aconsejaste marca"
  },
  "El canterano al que aconsejaste marca su primer gol y te lo dedica.": {
   "w": [
-   "gx-events.js:104"
+   "gx-events.js:108"
   ],
   "ctx": "opts: [{t: N_(\"Dedicarle una tarde\"), ok: {txt: N_(\"Le cuentas tus peores días y cómo saliste. Se va con otra cara.\"), fx: {mor: 3, coach: 2}, gx: \"+mentored\", later: {b: 2, txt: N_(\"El canterano al que aconsejaste marca"
  },
  "Mandarle al psicólogo del club": {
   "w": [
-   "gx-events.js:105"
+   "gx-events.js:109"
   ],
   "ctx": "{t: N_(\"Mandarle al psicólogo del club\"), ok: {txt: N_(\"Le das el contacto. Correcto, pero algo frío.\"), fx: {}}}]},"
  },
  "Le das el contacto. Correcto, pero algo frío.": {
   "w": [
-   "gx-events.js:105"
+   "gx-events.js:109"
   ],
   "ctx": "{t: N_(\"Mandarle al psicólogo del club\"), ok: {txt: N_(\"Le das el contacto. Correcto, pero algo frío.\"), fx: {}}}]},"
  },
  "La caja de multas": {
   "w": [
-   "gx-events.js:106"
+   "gx-events.js:110"
   ],
   "ctx": "{id: \"multa_interna\", cat: N_(\"Vestuario\"), sc: \"locker\", title: N_(\"La caja de multas\"), text: [N_(\"Te toca gestionar la caja de multas del vestuario. Un pesado no paga desde hace meses.\")],"
  },
  "Te toca gestionar la caja de multas del vestuario. Un pesado no paga desde hace meses.": {
   "w": [
-   "gx-events.js:106"
+   "gx-events.js:110"
   ],
   "ctx": "{id: \"multa_interna\", cat: N_(\"Vestuario\"), sc: \"locker\", title: N_(\"La caja de multas\"), text: [N_(\"Te toca gestionar la caja de multas del vestuario. Un pesado no paga desde hace meses.\")],"
  },
  "Exigirle que pague delante de todos": {
   "w": [
-   "gx-events.js:107",
+   "gx-events.js:111",
    "events-more.js:534"
   ],
   "ctx": "opts: [{t: N_(\"Exigirle que pague delante de todos\"), p: 0.6, ok: {txt: N_(\"Paga entre risas. Se ha impuesto el orden.\"), fx: {coach: 2, mor: 2}}, ko: {txt: N_(\"Se lo toma fatal y se monta un pique tonto.\"), fx: {mor: -3"
  },
  "Paga entre risas. Se ha impuesto el orden.": {
   "w": [
-   "gx-events.js:107"
+   "gx-events.js:111"
   ],
   "ctx": "opts: [{t: N_(\"Exigirle que pague delante de todos\"), p: 0.6, ok: {txt: N_(\"Paga entre risas. Se ha impuesto el orden.\"), fx: {coach: 2, mor: 2}}, ko: {txt: N_(\"Se lo toma fatal y se monta un pique tonto.\"), fx: {mor: -3"
  },
  "Se lo toma fatal y se monta un pique tonto.": {
   "w": [
-   "gx-events.js:107"
+   "gx-events.js:111"
   ],
   "ctx": "opts: [{t: N_(\"Exigirle que pague delante de todos\"), p: 0.6, ok: {txt: N_(\"Paga entre risas. Se ha impuesto el orden.\"), fx: {coach: 2, mor: 2}}, ko: {txt: N_(\"Se lo toma fatal y se monta un pique tonto.\"), fx: {mor: -3"
  },
  "Poner tú lo que falta": {
   "w": [
-   "gx-events.js:108"
+   "gx-events.js:112"
   ],
   "ctx": "{t: N_(\"Poner tú lo que falta\"), ok: {txt: N_(\"Pagas tú y nadie se entera. Paz en el vestuario.\"), fx: {money: -2000, mor: 1}}}]},"
  },
  "Pagas tú y nadie se entera. Paz en el vestuario.": {
   "w": [
-   "gx-events.js:108"
+   "gx-events.js:112"
   ],
   "ctx": "{t: N_(\"Poner tú lo que falta\"), ok: {txt: N_(\"Pagas tú y nadie se entera. Paz en el vestuario.\"), fx: {money: -2000, mor: 1}}}]},"
  },
  "Cumpleaños sorpresa": {
   "w": [
-   "gx-events.js:109"
+   "gx-events.js:113"
   ],
   "ctx": "{id: \"cumple_vestuario\", cat: N_(\"Vestuario\"), sc: \"party\", tipo: \"aleatoria\", title: N_(\"Cumpleaños sorpresa\"), text: [N_(\"Es tu cumpleaños y el vestuario ha preparado una tarta con tu cara. Hay que soplar delante de la"
  },
  "Es tu cumpleaños y el vestuario ha preparado una tarta con tu cara. Hay que soplar delante de las cámaras del club.": {
   "w": [
-   "gx-events.js:109"
+   "gx-events.js:113"
   ],
   "ctx": "{id: \"cumple_vestuario\", cat: N_(\"Vestuario\"), sc: \"party\", tipo: \"aleatoria\", title: N_(\"Cumpleaños sorpresa\"), text: [N_(\"Es tu cumpleaños y el vestuario ha preparado una tarta con tu cara. Hay que soplar delante de la"
  },
  "Soplar y dejar que te tiren la tarta": {
   "w": [
-   "gx-events.js:110"
+   "gx-events.js:114"
   ],
   "ctx": "opts: [{t: N_(\"Soplar y dejar que te tiren la tarta\"), ok: {txt: N_(\"El vídeo arrasa en las redes del club.\"), fx: {fol: 40, mor: 4}}}, {t: N_(\"Soplar con elegancia\"), ok: {txt: N_(\"Discreto y sonriente. Buena foto.\"), f"
  },
  "El vídeo arrasa en las redes del club.": {
   "w": [
-   "gx-events.js:110"
+   "gx-events.js:114"
   ],
   "ctx": "opts: [{t: N_(\"Soplar y dejar que te tiren la tarta\"), ok: {txt: N_(\"El vídeo arrasa en las redes del club.\"), fx: {fol: 40, mor: 4}}}, {t: N_(\"Soplar con elegancia\"), ok: {txt: N_(\"Discreto y sonriente. Buena foto.\"), f"
  },
  "Soplar con elegancia": {
   "w": [
-   "gx-events.js:110"
+   "gx-events.js:114"
   ],
   "ctx": "opts: [{t: N_(\"Soplar y dejar que te tiren la tarta\"), ok: {txt: N_(\"El vídeo arrasa en las redes del club.\"), fx: {fol: 40, mor: 4}}}, {t: N_(\"Soplar con elegancia\"), ok: {txt: N_(\"Discreto y sonriente. Buena foto.\"), f"
  },
  "Discreto y sonriente. Buena foto.": {
   "w": [
-   "gx-events.js:110"
+   "gx-events.js:114"
   ],
   "ctx": "opts: [{t: N_(\"Soplar y dejar que te tiren la tarta\"), ok: {txt: N_(\"El vídeo arrasa en las redes del club.\"), fx: {fol: 40, mor: 4}}}, {t: N_(\"Soplar con elegancia\"), ok: {txt: N_(\"Discreto y sonriente. Buena foto.\"), f"
  },
  "El audio del grupo": {
   "w": [
-   "gx-events.js:111"
+   "gx-events.js:115"
   ],
   "ctx": "{id: \"grupo_whatsapp\", cat: N_(\"Vestuario\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"El audio del grupo\"), text: [N_(\"Mandas sin querer un audio criticando al míster al grupo del equipo en vez de a tu pareja.\")],"
  },
  "Mandas sin querer un audio criticando al míster al grupo del equipo en vez de a tu pareja.": {
   "w": [
-   "gx-events.js:111"
+   "gx-events.js:115"
   ],
   "ctx": "{id: \"grupo_whatsapp\", cat: N_(\"Vestuario\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"El audio del grupo\"), text: [N_(\"Mandas sin querer un audio criticando al míster al grupo del equipo en vez de a tu pareja.\")],"
  },
  "Ir a pedirle perdón en persona": {
   "w": [
-   "gx-events.js:112"
+   "gx-events.js:116"
   ],
   "ctx": "opts: [{t: N_(\"Ir a pedirle perdón en persona\"), p: {st: \"coach\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Lo valora. «Prefiero que me lo digas a la cara.»\"), fx: {coach: 2}}, ko: {txt: N_(\"Te escucha, pero te deja en el banquill"
  },
  "Lo valora. «Prefiero que me lo digas a la cara.»": {
   "w": [
-   "gx-events.js:112"
+   "gx-events.js:116"
   ],
   "ctx": "opts: [{t: N_(\"Ir a pedirle perdón en persona\"), p: {st: \"coach\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Lo valora. «Prefiero que me lo digas a la cara.»\"), fx: {coach: 2}}, ko: {txt: N_(\"Te escucha, pero te deja en el banquill"
  },
  "Te escucha, pero te deja en el banquillo el domingo.": {
   "w": [
-   "gx-events.js:112"
+   "gx-events.js:116"
   ],
   "ctx": "opts: [{t: N_(\"Ir a pedirle perdón en persona\"), p: {st: \"coach\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Lo valora. «Prefiero que me lo digas a la cara.»\"), fx: {coach: 2}}, ko: {txt: N_(\"Te escucha, pero te deja en el banquill"
  },
  "Decir que te hackearon el móvil": {
   "w": [
-   "gx-events.js:113"
+   "gx-events.js:117"
   ],
   "ctx": "{t: N_(\"Decir que te hackearon el móvil\"), p: 0.35, ok: {txt: N_(\"Increíble, pero cuela.\"), fx: {}}, ko: {txt: N_(\"Nadie se lo cree. Te has ganado un apodo nuevo.\"), fx: {coach: -8, mor: -3}, gx: \"liar\"}}]},"
  },
  "Increíble, pero cuela.": {
   "w": [
-   "gx-events.js:113"
+   "gx-events.js:117"
   ],
   "ctx": "{t: N_(\"Decir que te hackearon el móvil\"), p: 0.35, ok: {txt: N_(\"Increíble, pero cuela.\"), fx: {}}, ko: {txt: N_(\"Nadie se lo cree. Te has ganado un apodo nuevo.\"), fx: {coach: -8, mor: -3}, gx: \"liar\"}}]},"
  },
  "Nadie se lo cree. Te has ganado un apodo nuevo.": {
   "w": [
-   "gx-events.js:113"
+   "gx-events.js:117"
   ],
   "ctx": "{t: N_(\"Decir que te hackearon el móvil\"), p: 0.35, ok: {txt: N_(\"Increíble, pero cuela.\"), fx: {}}, ko: {txt: N_(\"Nadie se lo cree. Te has ganado un apodo nuevo.\"), fx: {coach: -8, mor: -3}, gx: \"liar\"}}]},"
  },
  "Capitán en la sombra": {
   "w": [
-   "gx-events.js:114"
+   "gx-events.js:118"
   ],
   "ctx": "{id: \"brazalete_comp\", cat: N_(\"Vestuario\"), sc: \"locker\", when: {cap: 1}, title: N_(\"Capitán en la sombra\"), text: [N_(\"Llevas el brazalete, pero un veterano sigue mandando en el vestuario. Varios jóvenes te miran a ti."
  },
  "Llevas el brazalete, pero un veterano sigue mandando en el vestuario. Varios jóvenes te miran a ti.": {
   "w": [
-   "gx-events.js:114"
+   "gx-events.js:118"
   ],
   "ctx": "{id: \"brazalete_comp\", cat: N_(\"Vestuario\"), sc: \"locker\", when: {cap: 1}, title: N_(\"Capitán en la sombra\"), text: [N_(\"Llevas el brazalete, pero un veterano sigue mandando en el vestuario. Varios jóvenes te miran a ti."
  },
  "Hablar con él a solas": {
   "w": [
-   "gx-events.js:115"
+   "gx-events.js:119"
   ],
   "ctx": "opts: [{t: N_(\"Hablar con él a solas\"), p: {st: \"prof\", b: 0.55, k: 0.006}, ok: {txt: N_(\"Acordáis repartiros los papeles. Él manda fuera, tú dentro.\"), fx: {coach: 3, mor: 3}}, ko: {txt: N_(\"Se lo toma como una ofensa. "
  },
  "Acordáis repartiros los papeles. Él manda fuera, tú dentro.": {
   "w": [
-   "gx-events.js:115"
+   "gx-events.js:119"
   ],
   "ctx": "opts: [{t: N_(\"Hablar con él a solas\"), p: {st: \"prof\", b: 0.55, k: 0.006}, ok: {txt: N_(\"Acordáis repartiros los papeles. Él manda fuera, tú dentro.\"), fx: {coach: 3, mor: 3}}, ko: {txt: N_(\"Se lo toma como una ofensa. "
  },
  "Se lo toma como una ofensa. Habrá que convivir.": {
   "w": [
-   "gx-events.js:115"
+   "gx-events.js:119"
   ],
   "ctx": "opts: [{t: N_(\"Hablar con él a solas\"), p: {st: \"prof\", b: 0.55, k: 0.006}, ok: {txt: N_(\"Acordáis repartiros los papeles. Él manda fuera, tú dentro.\"), fx: {coach: 3, mor: 3}}, ko: {txt: N_(\"Se lo toma como una ofensa. "
  },
  "Dejar que el tiempo lo arregle": {
   "w": [
-   "gx-events.js:116"
+   "gx-events.js:120"
   ],
   "ctx": "{t: N_(\"Dejar que el tiempo lo arregle\"), ok: {txt: N_(\"No mueves nada. Las cosas siguen igual.\"), fx: {}}}]},"
  },
  "No mueves nada. Las cosas siguen igual.": {
   "w": [
-   "gx-events.js:116"
+   "gx-events.js:120"
   ],
   "ctx": "{t: N_(\"Dejar que el tiempo lo arregle\"), ok: {txt: N_(\"No mueves nada. Las cosas siguen igual.\"), fx: {}}}]},"
  },
  "La pizarra no convence": {
   "w": [
-   "gx-events.js:117"
+   "gx-events.js:121"
   ],
   "ctx": "{id: \"tactica_mal\", cat: N_(\"Vestuario\"), sc: \"office\", title: N_(\"La pizarra no convence\"), text: [N_(\"El míster quiere que juegues de forma que no te sale natural. Te pregunta qué opinas.\")],"
  },
  "El míster quiere que juegues de forma que no te sale natural. Te pregunta qué opinas.": {
   "w": [
-   "gx-events.js:117"
+   "gx-events.js:121"
   ],
   "ctx": "{id: \"tactica_mal\", cat: N_(\"Vestuario\"), sc: \"office\", title: N_(\"La pizarra no convence\"), text: [N_(\"El míster quiere que juegues de forma que no te sale natural. Te pregunta qué opinas.\")],"
  },
  "Decirle lo que piensas": {
   "w": [
-   "gx-events.js:118"
+   "gx-events.js:122"
   ],
   "ctx": "opts: [{t: N_(\"Decirle lo que piensas\"), p: {st: \"coach\", b: 0.45, k: 0.012}, ok: {txt: N_(\"Lo escucha y ajusta un detalle. Te sientes más cómodo.\"), fx: {form: 4, coach: 2}}, ko: {txt: N_(\"«Aquí decido yo.» Os quedáis f"
  },
  "Lo escucha y ajusta un detalle. Te sientes más cómodo.": {
   "w": [
-   "gx-events.js:118"
+   "gx-events.js:122"
   ],
   "ctx": "opts: [{t: N_(\"Decirle lo que piensas\"), p: {st: \"coach\", b: 0.45, k: 0.012}, ok: {txt: N_(\"Lo escucha y ajusta un detalle. Te sientes más cómodo.\"), fx: {form: 4, coach: 2}}, ko: {txt: N_(\"«Aquí decido yo.» Os quedáis f"
  },
  "«Aquí decido yo.» Os quedáis fríos.": {
   "w": [
-   "gx-events.js:118"
+   "gx-events.js:122"
   ],
   "ctx": "opts: [{t: N_(\"Decirle lo que piensas\"), p: {st: \"coach\", b: 0.45, k: 0.012}, ok: {txt: N_(\"Lo escucha y ajusta un detalle. Te sientes más cómodo.\"), fx: {form: 4, coach: 2}}, ko: {txt: N_(\"«Aquí decido yo.» Os quedáis f"
  },
  "Adaptarte sin rechistar": {
   "w": [
-   "gx-events.js:119"
+   "gx-events.js:123"
   ],
   "ctx": "{t: N_(\"Adaptarte sin rechistar\"), ok: {txt: N_(\"Haces lo que pide. Cuesta, pero aprendes algo.\"), fx: {prof: 2, form: -1}, later: {b: 2, txt: N_(\"Lo que te pidió el míster empieza a salirte solo.\"), fx: {form: 3}}}}]},"
  },
  "Haces lo que pide. Cuesta, pero aprendes algo.": {
   "w": [
-   "gx-events.js:119"
+   "gx-events.js:123"
   ],
   "ctx": "{t: N_(\"Adaptarte sin rechistar\"), ok: {txt: N_(\"Haces lo que pide. Cuesta, pero aprendes algo.\"), fx: {prof: 2, form: -1}, later: {b: 2, txt: N_(\"Lo que te pidió el míster empieza a salirte solo.\"), fx: {form: 3}}}}]},"
  },
  "Lo que te pidió el míster empieza a salirte solo.": {
   "w": [
-   "gx-events.js:119"
+   "gx-events.js:123"
   ],
   "ctx": "{t: N_(\"Adaptarte sin rechistar\"), ok: {txt: N_(\"Haces lo que pide. Cuesta, pero aprendes algo.\"), fx: {prof: 2, form: -1}, later: {b: 2, txt: N_(\"Lo que te pidió el míster empieza a salirte solo.\"), fx: {form: 3}}}}]},"
  },
  "¿Te vas o te quedas?": {
   "w": [
-   "gx-events.js:121"
+   "gx-events.js:125"
   ],
   "ctx": "{id: \"mentira_prensa\", cat: N_(\"Prensa\"), sc: \"press\", title: N_(\"¿Te vas o te quedas?\"), text: [N_(\"En rueda de prensa te preguntan por una oferta que existe de verdad. Tu agente te pidió silencio.\")],"
  },
  "En rueda de prensa te preguntan por una oferta que existe de verdad. Tu agente te pidió silencio.": {
   "w": [
-   "gx-events.js:121"
+   "gx-events.js:125"
   ],
   "ctx": "{id: \"mentira_prensa\", cat: N_(\"Prensa\"), sc: \"press\", title: N_(\"¿Te vas o te quedas?\"), text: [N_(\"En rueda de prensa te preguntan por una oferta que existe de verdad. Tu agente te pidió silencio.\")],"
  },
  "Negarlo todo": {
   "w": [
-   "gx-events.js:122"
+   "gx-events.js:126"
   ],
   "ctx": "opts: [{t: N_(\"Negarlo todo\"), p: 0.5, ok: {txt: N_(\"Nadie insiste. El tema se enfría.\"), fx: {}}, ko: {txt: N_(\"A los dos días publican la oferta con documentos. Te han pillado.\"), fx: {fans: -6, fame: 1}, gx: \"liar\"}},"
  },
  "Nadie insiste. El tema se enfría.": {
   "w": [
-   "gx-events.js:122"
+   "gx-events.js:126"
   ],
   "ctx": "opts: [{t: N_(\"Negarlo todo\"), p: 0.5, ok: {txt: N_(\"Nadie insiste. El tema se enfría.\"), fx: {}}, ko: {txt: N_(\"A los dos días publican la oferta con documentos. Te han pillado.\"), fx: {fans: -6, fame: 1}, gx: \"liar\"}},"
  },
  "A los dos días publican la oferta con documentos. Te han pillado.": {
   "w": [
-   "gx-events.js:122"
+   "gx-events.js:126"
   ],
   "ctx": "opts: [{t: N_(\"Negarlo todo\"), p: 0.5, ok: {txt: N_(\"Nadie insiste. El tema se enfría.\"), fx: {}}, ko: {txt: N_(\"A los dos días publican la oferta con documentos. Te han pillado.\"), fx: {fans: -6, fame: 1}, gx: \"liar\"}},"
  },
  "«Hay interés, pero estoy centrado aquí»": {
   "w": [
-   "gx-events.js:123"
+   "gx-events.js:127"
   ],
   "ctx": "{t: N_(\"«Hay interés, pero estoy centrado aquí»\"), ok: {txt: N_(\"Respuesta de manual. Nadie puede reprocharte nada.\"), fx: {fans: 1}}}]},"
  },
  "Respuesta de manual. Nadie puede reprocharte nada.": {
   "w": [
-   "gx-events.js:123"
+   "gx-events.js:127"
   ],
   "ctx": "{t: N_(\"«Hay interés, pero estoy centrado aquí»\"), ok: {txt: N_(\"Respuesta de manual. Nadie puede reprocharte nada.\"), fx: {fans: 1}}}]},"
  },
  "El exjugador opina": {
   "w": [
-   "gx-events.js:124"
+   "gx-events.js:128"
   ],
   "ctx": "{id: \"periodista_ex\", cat: N_(\"Prensa\"), sc: \"press\", title: N_(\"El exjugador opina\"), when: {fame: [20, null]}, text: [N_(\"Un exjugador convertido en tertuliano dice en la tele que estás «sobrevalorado y sin carácter».\""
  },
  "Un exjugador convertido en tertuliano dice en la tele que estás «sobrevalorado y sin carácter».": {
   "w": [
-   "gx-events.js:124"
+   "gx-events.js:128"
   ],
   "ctx": "{id: \"periodista_ex\", cat: N_(\"Prensa\"), sc: \"press\", title: N_(\"El exjugador opina\"), when: {fame: [20, null]}, text: [N_(\"Un exjugador convertido en tertuliano dice en la tele que estás «sobrevalorado y sin carácter».\""
  },
  "Un histórico del {club} te pone a parir en una columna. Medio país la comparte.": {
   "w": [
-   "gx-events.js:124"
+   "gx-events.js:128"
   ],
   "ctx": "{id: \"periodista_ex\", cat: N_(\"Prensa\"), sc: \"press\", title: N_(\"El exjugador opina\"), when: {fame: [20, null]}, text: [N_(\"Un exjugador convertido en tertuliano dice en la tele que estás «sobrevalorado y sin carácter».\""
  },
  "Contestarle con dureza": {
   "w": [
-   "gx-events.js:125"
+   "gx-events.js:129"
   ],
   "ctx": "opts: [{t: N_(\"Contestarle con dureza\"), p: 0.5, ok: {txt: N_(\"Tu respuesta se hace viral. La afición se pone de tu lado.\"), fx: {fol: 30, fans: 3}, gx: \"pressFight\"}, ko: {txt: N_(\"Te pasas de frenada. El club te pide c"
  },
  "Tu respuesta se hace viral. La afición se pone de tu lado.": {
   "w": [
-   "gx-events.js:125"
+   "gx-events.js:129"
   ],
   "ctx": "opts: [{t: N_(\"Contestarle con dureza\"), p: 0.5, ok: {txt: N_(\"Tu respuesta se hace viral. La afición se pone de tu lado.\"), fx: {fol: 30, fans: 3}, gx: \"pressFight\"}, ko: {txt: N_(\"Te pasas de frenada. El club te pide c"
  },
  "Te pasas de frenada. El club te pide calma.": {
   "w": [
-   "gx-events.js:125"
+   "gx-events.js:129"
   ],
   "ctx": "opts: [{t: N_(\"Contestarle con dureza\"), p: 0.5, ok: {txt: N_(\"Tu respuesta se hace viral. La afición se pone de tu lado.\"), fx: {fol: 30, fans: 3}, gx: \"pressFight\"}, ko: {txt: N_(\"Te pasas de frenada. El club te pide c"
  },
  "Responder en el campo": {
   "w": [
-   "gx-events.js:126",
+   "gx-events.js:130",
    "events.js:585",
    "events.js:804",
    "story33.js:90"
@@ -4150,90 +4150,90 @@
  },
  "Recortas la columna y la pegas en la taquilla.": {
   "w": [
-   "gx-events.js:126"
+   "gx-events.js:130"
   ],
   "ctx": "{t: N_(\"Responder en el campo\"), ok: {txt: N_(\"Recortas la columna y la pegas en la taquilla.\"), fx: {buff: {v: 1, b: 1, n: N_(\"Con rabia\")}}}}]},"
  },
  "Con rabia": {
   "w": [
-   "gx-events.js:126",
+   "gx-events.js:130",
    "events.js:804"
   ],
   "ctx": "{t: N_(\"Responder en el campo\"), ok: {txt: N_(\"Recortas la columna y la pegas en la taquilla.\"), fx: {buff: {v: 1, b: 1, n: N_(\"Con rabia\")}}}}]},"
  },
  "Sesión de fotos": {
   "w": [
-   "gx-events.js:127",
+   "gx-events.js:131",
    "pets.js:79"
   ],
   "ctx": "{id: \"portada\", cat: N_(\"Prensa\"), sc: \"press\", when: {fame: [30, null]}, title: N_(\"Sesión de fotos\"), text: [N_(\"Una revista quiere hacerte la portada del mes. La sesión dura todo el día libre.\")],"
  },
  "Una revista quiere hacerte la portada del mes. La sesión dura todo el día libre.": {
   "w": [
-   "gx-events.js:127"
+   "gx-events.js:131"
   ],
   "ctx": "{id: \"portada\", cat: N_(\"Prensa\"), sc: \"press\", when: {fame: [30, null]}, title: N_(\"Sesión de fotos\"), text: [N_(\"Una revista quiere hacerte la portada del mes. La sesión dura todo el día libre.\")],"
  },
  "Aceptar": {
   "w": [
-   "gx-events.js:128",
-   "gx-events.js:172",
-   "gx-events.js:191",
-   "gx-events.js:214"
+   "gx-events.js:132",
+   "gx-events.js:176",
+   "gx-events.js:195",
+   "gx-events.js:218"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Sales espectacular en la portada.\"), fx: {fame: 2, fol: 25, fit: -3}, gx: \"+headlines\"}}, {t: N_(\"Rechazarlo y descansar\"), ok: {txt: N_(\"Prefieres recuperar. El cuerpo lo agradece"
  },
  "Sales espectacular en la portada.": {
   "w": [
-   "gx-events.js:128"
+   "gx-events.js:132"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Sales espectacular en la portada.\"), fx: {fame: 2, fol: 25, fit: -3}, gx: \"+headlines\"}}, {t: N_(\"Rechazarlo y descansar\"), ok: {txt: N_(\"Prefieres recuperar. El cuerpo lo agradece"
  },
  "Rechazarlo y descansar": {
   "w": [
-   "gx-events.js:128"
+   "gx-events.js:132"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Sales espectacular en la portada.\"), fx: {fame: 2, fol: 25, fit: -3}, gx: \"+headlines\"}}, {t: N_(\"Rechazarlo y descansar\"), ok: {txt: N_(\"Prefieres recuperar. El cuerpo lo agradece"
  },
  "Prefieres recuperar. El cuerpo lo agradece.": {
   "w": [
-   "gx-events.js:128"
+   "gx-events.js:132"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Sales espectacular en la portada.\"), fx: {fame: 2, fol: 25, fit: -3}, gx: \"+headlines\"}}, {t: N_(\"Rechazarlo y descansar\"), ok: {txt: N_(\"Prefieres recuperar. El cuerpo lo agradece"
  },
  "La foto de madrugada": {
   "w": [
-   "gx-events.js:129"
+   "gx-events.js:133"
   ],
   "ctx": "{id: \"foto_noche\", cat: N_(\"Prensa\"), sc: \"party\", tipo: \"aleatoria\", when: {fame: [15, null]}, title: N_(\"La foto de madrugada\"), text: [N_(\"Un medio publica una foto tuya saliendo de un restaurante a la una de la mañan"
  },
  "Un medio publica una foto tuya saliendo de un restaurante a la una de la mañana, con un refresco en la mano.": {
   "w": [
-   "gx-events.js:129"
+   "gx-events.js:133"
   ],
   "ctx": "{id: \"foto_noche\", cat: N_(\"Prensa\"), sc: \"party\", tipo: \"aleatoria\", when: {fame: [15, null]}, title: N_(\"La foto de madrugada\"), text: [N_(\"Un medio publica una foto tuya saliendo de un restaurante a la una de la mañan"
  },
  "Explicarlo con humor": {
   "w": [
-   "gx-events.js:130"
+   "gx-events.js:134"
   ],
   "ctx": "opts: [{t: N_(\"Explicarlo con humor\"), p: 0.75, ok: {txt: N_(\"Tu tuit con la foto del refresco triunfa.\"), fx: {fol: 20, fans: 2}}, ko: {txt: N_(\"El humor no gusta a la directiva.\"), fx: {coach: -3}}},"
  },
  "Tu tuit con la foto del refresco triunfa.": {
   "w": [
-   "gx-events.js:130"
+   "gx-events.js:134"
   ],
   "ctx": "opts: [{t: N_(\"Explicarlo con humor\"), p: 0.75, ok: {txt: N_(\"Tu tuit con la foto del refresco triunfa.\"), fx: {fol: 20, fans: 2}}, ko: {txt: N_(\"El humor no gusta a la directiva.\"), fx: {coach: -3}}},"
  },
  "El humor no gusta a la directiva.": {
   "w": [
-   "gx-events.js:130"
+   "gx-events.js:134"
   ],
   "ctx": "opts: [{t: N_(\"Explicarlo con humor\"), p: 0.75, ok: {txt: N_(\"Tu tuit con la foto del refresco triunfa.\"), fx: {fol: 20, fans: 2}}, ko: {txt: N_(\"El humor no gusta a la directiva.\"), fx: {coach: -3}}},"
  },
  "No decir nada": {
   "w": [
-   "gx-events.js:131",
+   "gx-events.js:135",
    "events.js:430",
    "events.js:671",
    "events-extra.js:248"
@@ -4242,14 +4242,14 @@
  },
  "La noticia muere en un día.": {
   "w": [
-   "gx-events.js:131"
+   "gx-events.js:135"
   ],
   "ctx": "{t: N_(\"No decir nada\"), ok: {txt: N_(\"La noticia muere en un día.\"), fx: {}}}]},"
  },
  "Redes": {
   "w": [
-   "gx-events.js:132",
-   "gx-events.js:135",
+   "gx-events.js:136",
+   "gx-events.js:139",
    "evento:tuit_antiguo",
    "evento:meme"
   ],
@@ -4257,266 +4257,266 @@
  },
  "Directo en redes": {
   "w": [
-   "gx-events.js:132"
+   "gx-events.js:136"
   ],
   "ctx": "{id: \"stream\", cat: N_(\"Redes\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Directo en redes\"), text: [N_(\"Te proponen hacer un directo jugando a un videojuego de fútbol con un creador de contenido famoso.\")],"
  },
  "Te proponen hacer un directo jugando a un videojuego de fútbol con un creador de contenido famoso.": {
   "w": [
-   "gx-events.js:132"
+   "gx-events.js:136"
   ],
   "ctx": "{id: \"stream\", cat: N_(\"Redes\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Directo en redes\"), text: [N_(\"Te proponen hacer un directo jugando a un videojuego de fútbol con un creador de contenido famoso.\")],"
  },
  "Hacerlo": {
   "w": [
-   "gx-events.js:133"
+   "gx-events.js:137"
   ],
   "ctx": "opts: [{t: N_(\"Hacerlo\"), p: 0.7, ok: {txt: N_(\"Te lo pasas en grande y lo ven miles de chavales.\"), fx: {fol: 60, mor: 3}}, ko: {txt: N_(\"Pierdes 7-0 con tu propio equipo. Memes para semanas.\"), fx: {fol: 40, mor: -2}}}"
  },
  "Te lo pasas en grande y lo ven miles de chavales.": {
   "w": [
-   "gx-events.js:133"
+   "gx-events.js:137"
   ],
   "ctx": "opts: [{t: N_(\"Hacerlo\"), p: 0.7, ok: {txt: N_(\"Te lo pasas en grande y lo ven miles de chavales.\"), fx: {fol: 60, mor: 3}}, ko: {txt: N_(\"Pierdes 7-0 con tu propio equipo. Memes para semanas.\"), fx: {fol: 40, mor: -2}}}"
  },
  "Pierdes 7-0 con tu propio equipo. Memes para semanas.": {
   "w": [
-   "gx-events.js:133"
+   "gx-events.js:137"
   ],
   "ctx": "opts: [{t: N_(\"Hacerlo\"), p: 0.7, ok: {txt: N_(\"Te lo pasas en grande y lo ven miles de chavales.\"), fx: {fol: 60, mor: 3}}, ko: {txt: N_(\"Pierdes 7-0 con tu propio equipo. Memes para semanas.\"), fx: {fol: 40, mor: -2}}}"
  },
  "No es lo tuyo": {
   "w": [
-   "gx-events.js:134"
+   "gx-events.js:138"
   ],
   "ctx": "{t: N_(\"No es lo tuyo\"), ok: {txt: N_(\"Te quedas viendo una serie.\"), fx: {mor: 1}}}]},"
  },
  "Te quedas viendo una serie.": {
   "w": [
-   "gx-events.js:134"
+   "gx-events.js:138"
   ],
   "ctx": "{t: N_(\"No es lo tuyo\"), ok: {txt: N_(\"Te quedas viendo una serie.\"), fx: {mor: 1}}}]},"
  },
  "Contrato con una marca de bebidas": {
   "w": [
-   "gx-events.js:135"
+   "gx-events.js:139"
   ],
   "ctx": "{id: \"influencer_marca\", cat: N_(\"Redes\"), sc: \"office\", when: {fol: 500}, title: N_(\"Contrato con una marca de bebidas\"), text: [N_(\"Una marca de bebidas energéticas quiere que publiques tres veces por semana. Pagan bie"
  },
  "Una marca de bebidas energéticas quiere que publiques tres veces por semana. Pagan bien.": {
   "w": [
-   "gx-events.js:135"
+   "gx-events.js:139"
   ],
   "ctx": "{id: \"influencer_marca\", cat: N_(\"Redes\"), sc: \"office\", when: {fol: 500}, title: N_(\"Contrato con una marca de bebidas\"), text: [N_(\"Una marca de bebidas energéticas quiere que publiques tres veces por semana. Pagan bie"
  },
  "Firmar": {
   "w": [
-   "gx-events.js:136",
+   "gx-events.js:140",
    "events-more.js:459"
   ],
   "ctx": "opts: [{t: N_(\"Firmar\"), ok: {txt: N_(\"Dinero fácil, aunque a algunos aficionados no les hace gracia.\"), fx: {money: 60000, fans: -2, fol: 30}}}, {t: N_(\"No firmar\"), ok: {txt: N_(\"No quieres que tu muro parezca un anunc"
  },
  "Dinero fácil, aunque a algunos aficionados no les hace gracia.": {
   "w": [
-   "gx-events.js:136"
+   "gx-events.js:140"
   ],
   "ctx": "opts: [{t: N_(\"Firmar\"), ok: {txt: N_(\"Dinero fácil, aunque a algunos aficionados no les hace gracia.\"), fx: {money: 60000, fans: -2, fol: 30}}}, {t: N_(\"No firmar\"), ok: {txt: N_(\"No quieres que tu muro parezca un anunc"
  },
  "No firmar": {
   "w": [
-   "gx-events.js:136"
+   "gx-events.js:140"
   ],
   "ctx": "opts: [{t: N_(\"Firmar\"), ok: {txt: N_(\"Dinero fácil, aunque a algunos aficionados no les hace gracia.\"), fx: {money: 60000, fans: -2, fol: 30}}}, {t: N_(\"No firmar\"), ok: {txt: N_(\"No quieres que tu muro parezca un anunc"
  },
  "No quieres que tu muro parezca un anuncio.": {
   "w": [
-   "gx-events.js:136"
+   "gx-events.js:140"
   ],
   "ctx": "opts: [{t: N_(\"Firmar\"), ok: {txt: N_(\"Dinero fácil, aunque a algunos aficionados no les hace gracia.\"), fx: {money: 60000, fans: -2, fol: 30}}}, {t: N_(\"No firmar\"), ok: {txt: N_(\"No quieres que tu muro parezca un anunc"
  },
  "Afición": {
   "w": [
-   "gx-events.js:137",
-   "gx-events.js:140",
-   "gx-events.js:143",
-   "gx-events.js:245"
+   "gx-events.js:141",
+   "gx-events.js:144",
+   "gx-events.js:147",
+   "gx-events.js:249"
   ],
   "ctx": "{id: \"pitada\", cat: N_(\"Afición\"), sc: \"stadium\", when: {fans: [null, 35]}, title: N_(\"Pitos en tu estadio\"), text: [N_(\"Tu propia afición te pita al ser cambiado. Duele más que cualquier derrota.\")],"
  },
  "Pitos en tu estadio": {
   "w": [
-   "gx-events.js:137"
+   "gx-events.js:141"
   ],
   "ctx": "{id: \"pitada\", cat: N_(\"Afición\"), sc: \"stadium\", when: {fans: [null, 35]}, title: N_(\"Pitos en tu estadio\"), text: [N_(\"Tu propia afición te pita al ser cambiado. Duele más que cualquier derrota.\")],"
  },
  "Tu propia afición te pita al ser cambiado. Duele más que cualquier derrota.": {
   "w": [
-   "gx-events.js:137"
+   "gx-events.js:141"
   ],
   "ctx": "{id: \"pitada\", cat: N_(\"Afición\"), sc: \"stadium\", when: {fans: [null, 35]}, title: N_(\"Pitos en tu estadio\"), text: [N_(\"Tu propia afición te pita al ser cambiado. Duele más que cualquier derrota.\")],"
  },
  "Aplaudir a la grada": {
   "w": [
-   "gx-events.js:138"
+   "gx-events.js:142"
   ],
   "ctx": "opts: [{t: N_(\"Aplaudir a la grada\"), p: 0.5, ok: {txt: N_(\"El gesto cambia los pitos por un aplauso tímido.\"), fx: {fans: 6}}, ko: {txt: N_(\"Lo toman como ironía. Más pitos.\"), fx: {fans: -4, mor: -3}, gx: \"booed\"}},"
  },
  "El gesto cambia los pitos por un aplauso tímido.": {
   "w": [
-   "gx-events.js:138"
+   "gx-events.js:142"
   ],
   "ctx": "opts: [{t: N_(\"Aplaudir a la grada\"), p: 0.5, ok: {txt: N_(\"El gesto cambia los pitos por un aplauso tímido.\"), fx: {fans: 6}}, ko: {txt: N_(\"Lo toman como ironía. Más pitos.\"), fx: {fans: -4, mor: -3}, gx: \"booed\"}},"
  },
  "Lo toman como ironía. Más pitos.": {
   "w": [
-   "gx-events.js:138"
+   "gx-events.js:142"
   ],
   "ctx": "opts: [{t: N_(\"Aplaudir a la grada\"), p: 0.5, ok: {txt: N_(\"El gesto cambia los pitos por un aplauso tímido.\"), fx: {fans: 6}}, ko: {txt: N_(\"Lo toman como ironía. Más pitos.\"), fx: {fans: -4, mor: -3}, gx: \"booed\"}},"
  },
  "Irte directo al vestuario": {
   "w": [
-   "gx-events.js:139"
+   "gx-events.js:143"
   ],
   "ctx": "{t: N_(\"Irte directo al vestuario\"), ok: {txt: N_(\"No miras atrás. Mañana será otro día.\"), fx: {mor: -2}, gx: \"booed\"}}]},"
  },
  "No miras atrás. Mañana será otro día.": {
   "w": [
-   "gx-events.js:139"
+   "gx-events.js:143"
   ],
   "ctx": "{t: N_(\"Irte directo al vestuario\"), ok: {txt: N_(\"No miras atrás. Mañana será otro día.\"), fx: {mor: -2}, gx: \"booed\"}}]},"
  },
  "Una carta del hospital": {
   "w": [
-   "gx-events.js:140"
+   "gx-events.js:144"
   ],
   "ctx": "{id: \"nino_hospital2\", cat: N_(\"Afición\"), sc: \"hospital\", tipo: \"aleatoria\", cd: 3, title: N_(\"Una carta del hospital\"), text: [N_(\"Te llega la carta de una niña ingresada que dice que eres su jugador favorito.\")],"
  },
  "Te llega la carta de una niña ingresada que dice que eres su jugador favorito.": {
   "w": [
-   "gx-events.js:140"
+   "gx-events.js:144"
   ],
   "ctx": "{id: \"nino_hospital2\", cat: N_(\"Afición\"), sc: \"hospital\", tipo: \"aleatoria\", cd: 3, title: N_(\"Una carta del hospital\"), text: [N_(\"Te llega la carta de una niña ingresada que dice que eres su jugador favorito.\")],"
  },
  "Ir a verla por sorpresa": {
   "w": [
-   "gx-events.js:141"
+   "gx-events.js:145"
   ],
   "ctx": "opts: [{t: N_(\"Ir a verla por sorpresa\"), ok: {txt: N_(\"Su cara cuando entras por la puerta vale más que un título.\"), fx: {mor: 6, fans: 4}, gx: \"hospital\", later: {b: 1, txt: N_(\"La niña del hospital sale de alta y va "
  },
  "Su cara cuando entras por la puerta vale más que un título.": {
   "w": [
-   "gx-events.js:141"
+   "gx-events.js:145"
   ],
   "ctx": "opts: [{t: N_(\"Ir a verla por sorpresa\"), ok: {txt: N_(\"Su cara cuando entras por la puerta vale más que un título.\"), fx: {mor: 6, fans: 4}, gx: \"hospital\", later: {b: 1, txt: N_(\"La niña del hospital sale de alta y va "
  },
  "La niña del hospital sale de alta y va a verte al estadio con tu camiseta.": {
   "w": [
-   "gx-events.js:141"
+   "gx-events.js:145"
   ],
   "ctx": "opts: [{t: N_(\"Ir a verla por sorpresa\"), ok: {txt: N_(\"Su cara cuando entras por la puerta vale más que un título.\"), fx: {mor: 6, fans: 4}, gx: \"hospital\", later: {b: 1, txt: N_(\"La niña del hospital sale de alta y va "
  },
  "Mandarle una camiseta firmada": {
   "w": [
-   "gx-events.js:142"
+   "gx-events.js:146"
   ],
   "ctx": "{t: N_(\"Mandarle una camiseta firmada\"), ok: {txt: N_(\"Le hace muchísima ilusión.\"), fx: {mor: 2}}}]},"
  },
  "Le hace muchísima ilusión.": {
   "w": [
-   "gx-events.js:142"
+   "gx-events.js:146"
   ],
   "ctx": "{t: N_(\"Mandarle una camiseta firmada\"), ok: {txt: N_(\"Le hace muchísima ilusión.\"), fx: {mor: 2}}}]},"
  },
  "Tu cara en un brazo": {
   "w": [
-   "gx-events.js:143"
+   "gx-events.js:147"
   ],
   "ctx": "{id: \"fan_tatuaje\", cat: N_(\"Afición\"), sc: \"street\", tipo: \"aleatoria\", when: {fame: [25, null]}, title: N_(\"Tu cara en un brazo\"), text: [N_(\"Un aficionado te para por la calle para enseñarte que se ha tatuado tu cara."
  },
  "Un aficionado te para por la calle para enseñarte que se ha tatuado tu cara. El parecido es… discutible.": {
   "w": [
-   "gx-events.js:143"
+   "gx-events.js:147"
   ],
   "ctx": "{id: \"fan_tatuaje\", cat: N_(\"Afición\"), sc: \"street\", tipo: \"aleatoria\", when: {fame: [25, null]}, title: N_(\"Tu cara en un brazo\"), text: [N_(\"Un aficionado te para por la calle para enseñarte que se ha tatuado tu cara."
  },
  "Hacerte una foto con él": {
   "w": [
-   "gx-events.js:144"
+   "gx-events.js:148"
   ],
   "ctx": "opts: [{t: N_(\"Hacerte una foto con él\"), ok: {txt: N_(\"La foto da la vuelta al mundo.\"), fx: {fol: 30, fans: 2}}}, {t: N_(\"Darle las gracias y seguir\"), ok: {txt: N_(\"Cordial. Él se va feliz igualmente.\"), fx: {}}}]},"
  },
  "La foto da la vuelta al mundo.": {
   "w": [
-   "gx-events.js:144"
+   "gx-events.js:148"
   ],
   "ctx": "opts: [{t: N_(\"Hacerte una foto con él\"), ok: {txt: N_(\"La foto da la vuelta al mundo.\"), fx: {fol: 30, fans: 2}}}, {t: N_(\"Darle las gracias y seguir\"), ok: {txt: N_(\"Cordial. Él se va feliz igualmente.\"), fx: {}}}]},"
  },
  "Darle las gracias y seguir": {
   "w": [
-   "gx-events.js:144"
+   "gx-events.js:148"
   ],
   "ctx": "opts: [{t: N_(\"Hacerte una foto con él\"), ok: {txt: N_(\"La foto da la vuelta al mundo.\"), fx: {fol: 30, fans: 2}}}, {t: N_(\"Darle las gracias y seguir\"), ok: {txt: N_(\"Cordial. Él se va feliz igualmente.\"), fx: {}}}]},"
  },
  "Cordial. Él se va feliz igualmente.": {
   "w": [
-   "gx-events.js:144"
+   "gx-events.js:148"
   ],
   "ctx": "opts: [{t: N_(\"Hacerte una foto con él\"), ok: {txt: N_(\"La foto da la vuelta al mundo.\"), fx: {fol: 30, fans: 2}}}, {t: N_(\"Darle las gracias y seguir\"), ok: {txt: N_(\"Cordial. Él se va feliz igualmente.\"), fx: {}}}]},"
  },
  "Mercado": {
   "w": [
-   "gx-events.js:146",
    "gx-events.js:150",
-   "gx-events.js:155",
-   "gx-events.js:157"
+   "gx-events.js:154",
+   "gx-events.js:159",
+   "gx-events.js:161"
   ],
   "ctx": "{id: \"grande_llama\", cat: N_(\"Mercado\"), sc: \"office\", once: true, when: {yrs: 2, fame: [35, null]}, title: N_(\"Llama un grande\"), text: [N_(\"Un club gigante de otra liga pregunta por ti. Tu club no quiere venderte y la "
  },
  "Llama un grande": {
   "w": [
-   "gx-events.js:146"
+   "gx-events.js:150"
   ],
   "ctx": "{id: \"grande_llama\", cat: N_(\"Mercado\"), sc: \"office\", once: true, when: {yrs: 2, fame: [35, null]}, title: N_(\"Llama un grande\"), text: [N_(\"Un club gigante de otra liga pregunta por ti. Tu club no quiere venderte y la "
  },
  "Un club gigante de otra liga pregunta por ti. Tu club no quiere venderte y la afición te ha cantado toda la temporada.": {
   "w": [
-   "gx-events.js:146"
+   "gx-events.js:150"
   ],
   "ctx": "{id: \"grande_llama\", cat: N_(\"Mercado\"), sc: \"office\", once: true, when: {yrs: 2, fame: [35, null]}, title: N_(\"Llama un grande\"), text: [N_(\"Un club gigante de otra liga pregunta por ti. Tu club no quiere venderte y la "
  },
  "Quedarte por lealtad": {
   "w": [
-   "gx-events.js:147"
+   "gx-events.js:151"
   ],
   "ctx": "opts: [{t: N_(\"Quedarte por lealtad\"), ok: {txt: N_(\"Comunicas que te quedas. La grada corea tu nombre el domingo.\"), fx: {fans: 10, mor: 4, coach: 3}, gx: \"rejectBig\"}}, {t: N_(\"Pedir que escuchen la oferta\"), ok: {txt:"
  },
  "Comunicas que te quedas. La grada corea tu nombre el domingo.": {
   "w": [
-   "gx-events.js:147"
+   "gx-events.js:151"
   ],
   "ctx": "opts: [{t: N_(\"Quedarte por lealtad\"), ok: {txt: N_(\"Comunicas que te quedas. La grada corea tu nombre el domingo.\"), fx: {fans: 10, mor: 4, coach: 3}, gx: \"rejectBig\"}}, {t: N_(\"Pedir que escuchen la oferta\"), ok: {txt:"
  },
  "Pedir que escuchen la oferta": {
   "w": [
-   "gx-events.js:147"
+   "gx-events.js:151"
   ],
   "ctx": "opts: [{t: N_(\"Quedarte por lealtad\"), ok: {txt: N_(\"Comunicas que te quedas. La grada corea tu nombre el domingo.\"), fx: {fans: 10, mor: 4, coach: 3}, gx: \"rejectBig\"}}, {t: N_(\"Pedir que escuchen la oferta\"), ok: {txt:"
  },
  "Tu club lo entiende… a regañadientes.": {
   "w": [
-   "gx-events.js:147"
+   "gx-events.js:151"
   ],
   "ctx": "opts: [{t: N_(\"Quedarte por lealtad\"), ok: {txt: N_(\"Comunicas que te quedas. La grada corea tu nombre el domingo.\"), fx: {fans: 10, mor: 4, coach: 3}, gx: \"rejectBig\"}}, {t: N_(\"Pedir que escuchen la oferta\"), ok: {txt:"
  },
  "La oferta del grande se enfría. Te quedas, pero algo se ha roto con la grada.": {
   "w": [
-   "gx-events.js:147"
+   "gx-events.js:151"
   ],
   "ctx": "opts: [{t: N_(\"Quedarte por lealtad\"), ok: {txt: N_(\"Comunicas que te quedas. La grada corea tu nombre el domingo.\"), fx: {fans: 10, mor: 4, coach: 3}, gx: \"rejectBig\"}}, {t: N_(\"Pedir que escuchen la oferta\"), ok: {txt:"
  },
  "Contrato": {
   "w": [
-   "gx-events.js:148",
+   "gx-events.js:152",
    "events-manager.js:615",
    "events-manager.js:648",
    "ui.js:793"
@@ -4525,49 +4525,49 @@
  },
  "Renovación sobre la mesa": {
   "w": [
-   "gx-events.js:148"
+   "gx-events.js:152"
   ],
   "ctx": "{id: \"renovar_ya\", cat: N_(\"Contrato\"), sc: \"office\", when: {yrs: 1}, title: N_(\"Renovación sobre la mesa\"), text: [N_(\"El director deportivo te ofrece ampliar contrato un año más con una pequeña mejora.\")],"
  },
  "El director deportivo te ofrece ampliar contrato un año más con una pequeña mejora.": {
   "w": [
-   "gx-events.js:148"
+   "gx-events.js:152"
   ],
   "ctx": "{id: \"renovar_ya\", cat: N_(\"Contrato\"), sc: \"office\", when: {yrs: 1}, title: N_(\"Renovación sobre la mesa\"), text: [N_(\"El director deportivo te ofrece ampliar contrato un año más con una pequeña mejora.\")],"
  },
  "Firmar ahora": {
   "w": [
-   "gx-events.js:149"
+   "gx-events.js:153"
   ],
   "ctx": "opts: [{t: N_(\"Firmar ahora\"), ok: {txt: N_(\"Firmas. Tranquilidad para todos.\"), fx: {sal: 1.08, mor: 3}, gx: null}}, {t: N_(\"Esperar a final de temporada\"), p: {st: \"form\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Tu buen moment"
  },
  "Firmas. Tranquilidad para todos.": {
   "w": [
-   "gx-events.js:149"
+   "gx-events.js:153"
   ],
   "ctx": "opts: [{t: N_(\"Firmar ahora\"), ok: {txt: N_(\"Firmas. Tranquilidad para todos.\"), fx: {sal: 1.08, mor: 3}, gx: null}}, {t: N_(\"Esperar a final de temporada\"), p: {st: \"form\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Tu buen moment"
  },
  "Esperar a final de temporada": {
   "w": [
-   "gx-events.js:149"
+   "gx-events.js:153"
   ],
   "ctx": "opts: [{t: N_(\"Firmar ahora\"), ok: {txt: N_(\"Firmas. Tranquilidad para todos.\"), fx: {sal: 1.08, mor: 3}, gx: null}}, {t: N_(\"Esperar a final de temporada\"), p: {st: \"form\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Tu buen moment"
  },
  "Tu buen momento te dará más fuerza para negociar.": {
   "w": [
-   "gx-events.js:149"
+   "gx-events.js:153"
   ],
   "ctx": "opts: [{t: N_(\"Firmar ahora\"), ok: {txt: N_(\"Firmas. Tranquilidad para todos.\"), fx: {sal: 1.08, mor: 3}, gx: null}}, {t: N_(\"Esperar a final de temporada\"), p: {st: \"form\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Tu buen moment"
  },
  "El club se molesta y congela la negociación.": {
   "w": [
-   "gx-events.js:149"
+   "gx-events.js:153"
   ],
   "ctx": "opts: [{t: N_(\"Firmar ahora\"), ok: {txt: N_(\"Firmas. Tranquilidad para todos.\"), fx: {sal: 1.08, mor: 3}, gx: null}}, {t: N_(\"Esperar a final de temporada\"), p: {st: \"form\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Tu buen moment"
  },
  "Suplente": {
   "w": [
-   "gx-events.js:150",
+   "gx-events.js:154",
    "engine-player.js:62",
    "engine-manager.js:27"
   ],
@@ -4575,14 +4575,14 @@
  },
  "Reserva": {
   "w": [
-   "gx-events.js:150",
+   "gx-events.js:154",
    "engine-player.js:63"
   ],
   "ctx": "{id: \"cesion_dudosa\", cat: N_(\"Mercado\"), sc: \"office\", when: {role: [N_(\"Suplente\"), N_(\"Reserva\"), N_(\"Promesa\")], age: [null, 23]}, title: N_(\"¿Salir cedido?\"), text: [N_(\"No cuentas mucho para el míster. Un club mode"
  },
  "Promesa": {
   "w": [
-   "gx-events.js:150",
+   "gx-events.js:154",
    "engine-player.js:5",
    "engine-player.js:63",
    "engine-manager.js:27"
@@ -4591,50 +4591,50 @@
  },
  "¿Salir cedido?": {
   "w": [
-   "gx-events.js:150"
+   "gx-events.js:154"
   ],
   "ctx": "{id: \"cesion_dudosa\", cat: N_(\"Mercado\"), sc: \"office\", when: {role: [N_(\"Suplente\"), N_(\"Reserva\"), N_(\"Promesa\")], age: [null, 23]}, title: N_(\"¿Salir cedido?\"), text: [N_(\"No cuentas mucho para el míster. Un club mode"
  },
  "No cuentas mucho para el míster. Un club modesto te ofrece minutos asegurados hasta final de temporada.": {
   "w": [
-   "gx-events.js:150"
+   "gx-events.js:154"
   ],
   "ctx": "{id: \"cesion_dudosa\", cat: N_(\"Mercado\"), sc: \"office\", when: {role: [N_(\"Suplente\"), N_(\"Reserva\"), N_(\"Promesa\")], age: [null, 23]}, title: N_(\"¿Salir cedido?\"), text: [N_(\"No cuentas mucho para el míster. Un club mode"
  },
  "Pedir la cesión": {
   "w": [
-   "gx-events.js:151"
+   "gx-events.js:155"
   ],
   "ctx": "opts: [{t: N_(\"Pedir la cesión\"), ok: {txt: N_(\"Tu club lo estudia: quiere verte crecer.\"), fx: {mor: 3}, later: {b: 1, txt: N_(\"La cesión no llega a cerrarse, pero el míster ha captado el mensaje y te da más minutos.\"),"
  },
  "Tu club lo estudia: quiere verte crecer.": {
   "w": [
-   "gx-events.js:151"
+   "gx-events.js:155"
   ],
   "ctx": "opts: [{t: N_(\"Pedir la cesión\"), ok: {txt: N_(\"Tu club lo estudia: quiere verte crecer.\"), fx: {mor: 3}, later: {b: 1, txt: N_(\"La cesión no llega a cerrarse, pero el míster ha captado el mensaje y te da más minutos.\"),"
  },
  "La cesión no llega a cerrarse, pero el míster ha captado el mensaje y te da más minutos.": {
   "w": [
-   "gx-events.js:151"
+   "gx-events.js:155"
   ],
   "ctx": "opts: [{t: N_(\"Pedir la cesión\"), ok: {txt: N_(\"Tu club lo estudia: quiere verte crecer.\"), fx: {mor: 3}, later: {b: 1, txt: N_(\"La cesión no llega a cerrarse, pero el míster ha captado el mensaje y te da más minutos.\"),"
  },
  "Quedarte y pelear": {
   "w": [
-   "gx-events.js:151",
+   "gx-events.js:155",
    "events-more.js:728"
   ],
   "ctx": "opts: [{t: N_(\"Pedir la cesión\"), ok: {txt: N_(\"Tu club lo estudia: quiere verte crecer.\"), fx: {mor: 3}, later: {b: 1, txt: N_(\"La cesión no llega a cerrarse, pero el míster ha captado el mensaje y te da más minutos.\"),"
  },
  "Doblas los entrenamientos para ganarte el sitio.": {
   "w": [
-   "gx-events.js:151"
+   "gx-events.js:155"
   ],
   "ctx": "opts: [{t: N_(\"Pedir la cesión\"), ok: {txt: N_(\"Tu club lo estudia: quiere verte crecer.\"), fx: {mor: 3}, later: {b: 1, txt: N_(\"La cesión no llega a cerrarse, pero el míster ha captado el mensaje y te da más minutos.\"),"
  },
  "Agente": {
   "w": [
-   "gx-events.js:152",
+   "gx-events.js:156",
    "ui.js:1052",
    "evento:y_agente_doble"
   ],
@@ -4642,322 +4642,322 @@
  },
  "Tu agente quiere moverte": {
   "w": [
-   "gx-events.js:152"
+   "gx-events.js:156"
   ],
   "ctx": "{id: \"agente_presion\", cat: N_(\"Agente\"), sc: \"office\", title: N_(\"Tu agente quiere moverte\"), text: [N_(\"Tu agente insiste en filtrar que quieres salir para forzar una mejora de contrato.\")],"
  },
  "Tu agente insiste en filtrar que quieres salir para forzar una mejora de contrato.": {
   "w": [
-   "gx-events.js:152"
+   "gx-events.js:156"
   ],
   "ctx": "{id: \"agente_presion\", cat: N_(\"Agente\"), sc: \"office\", title: N_(\"Tu agente quiere moverte\"), text: [N_(\"Tu agente insiste en filtrar que quieres salir para forzar una mejora de contrato.\")],"
  },
  "Dejar que lo haga": {
   "w": [
-   "gx-events.js:153"
+   "gx-events.js:157"
   ],
   "ctx": "opts: [{t: N_(\"Dejar que lo haga\"), p: 0.45, ok: {txt: N_(\"El club mejora tu sueldo para calmar las aguas.\"), fx: {sal: 1.15, fans: -4}}, ko: {txt: N_(\"El club no entra al trapo y la grada te señala.\"), fx: {fans: -8, co"
  },
  "El club mejora tu sueldo para calmar las aguas.": {
   "w": [
-   "gx-events.js:153"
+   "gx-events.js:157"
   ],
   "ctx": "opts: [{t: N_(\"Dejar que lo haga\"), p: 0.45, ok: {txt: N_(\"El club mejora tu sueldo para calmar las aguas.\"), fx: {sal: 1.15, fans: -4}}, ko: {txt: N_(\"El club no entra al trapo y la grada te señala.\"), fx: {fans: -8, co"
  },
  "El club no entra al trapo y la grada te señala.": {
   "w": [
-   "gx-events.js:153"
+   "gx-events.js:157"
   ],
   "ctx": "opts: [{t: N_(\"Dejar que lo haga\"), p: 0.45, ok: {txt: N_(\"El club mejora tu sueldo para calmar las aguas.\"), fx: {sal: 1.15, fans: -4}}, ko: {txt: N_(\"El club no entra al trapo y la grada te señala.\"), fx: {fans: -8, co"
  },
  "Prohibírselo": {
   "w": [
-   "gx-events.js:154"
+   "gx-events.js:158"
   ],
   "ctx": "{t: N_(\"Prohibírselo\"), ok: {txt: N_(\"Le recuerdas quién manda. Se lo toma mal, pero obedece.\"), fx: {fans: 2}}}]},"
  },
  "Le recuerdas quién manda. Se lo toma mal, pero obedece.": {
   "w": [
-   "gx-events.js:154"
+   "gx-events.js:158"
   ],
   "ctx": "{t: N_(\"Prohibírselo\"), ok: {txt: N_(\"Le recuerdas quién manda. Se lo toma mal, pero obedece.\"), fx: {fans: 2}}}]},"
  },
  "Una oferta muy lejos": {
   "w": [
-   "gx-events.js:155"
+   "gx-events.js:159"
   ],
   "ctx": "{id: \"liga_exotica\", cat: N_(\"Mercado\"), sc: \"plane\", once: true, when: {age: [29, null]}, title: N_(\"Una oferta muy lejos\"), text: [N_(\"Un club de una liga lejana te ofrece el triple de sueldo y un ático frente al mar.\""
  },
  "Un club de una liga lejana te ofrece el triple de sueldo y un ático frente al mar.": {
   "w": [
-   "gx-events.js:155"
+   "gx-events.js:159"
   ],
   "ctx": "{id: \"liga_exotica\", cat: N_(\"Mercado\"), sc: \"plane\", once: true, when: {age: [29, null]}, title: N_(\"Una oferta muy lejos\"), text: [N_(\"Un club de una liga lejana te ofrece el triple de sueldo y un ático frente al mar.\""
  },
  "Te llama un representante con una oferta de una liga emergente. Dinero de otro planeta.": {
   "w": [
-   "gx-events.js:155"
+   "gx-events.js:159"
   ],
   "ctx": "{id: \"liga_exotica\", cat: N_(\"Mercado\"), sc: \"plane\", once: true, when: {age: [29, null]}, title: N_(\"Una oferta muy lejos\"), text: [N_(\"Un club de una liga lejana te ofrece el triple de sueldo y un ático frente al mar.\""
  },
  "Ir a conocer el proyecto": {
   "w": [
-   "gx-events.js:156"
+   "gx-events.js:160"
   ],
   "ctx": "opts: [{t: N_(\"Ir a conocer el proyecto\"), ok: {txt: N_(\"Vuelves impresionado. El proyecto es serio.\"), fx: {mor: 2}, gx: \"exotic\"}}, {t: N_(\"No te interesa\"), ok: {txt: N_(\"Aún te quedan cosas que demostrar donde estás."
  },
  "Vuelves impresionado. El proyecto es serio.": {
   "w": [
-   "gx-events.js:156"
+   "gx-events.js:160"
   ],
   "ctx": "opts: [{t: N_(\"Ir a conocer el proyecto\"), ok: {txt: N_(\"Vuelves impresionado. El proyecto es serio.\"), fx: {mor: 2}, gx: \"exotic\"}}, {t: N_(\"No te interesa\"), ok: {txt: N_(\"Aún te quedan cosas que demostrar donde estás."
  },
  "No te interesa": {
   "w": [
-   "gx-events.js:156"
+   "gx-events.js:160"
   ],
   "ctx": "opts: [{t: N_(\"Ir a conocer el proyecto\"), ok: {txt: N_(\"Vuelves impresionado. El proyecto es serio.\"), fx: {mor: 2}, gx: \"exotic\"}}, {t: N_(\"No te interesa\"), ok: {txt: N_(\"Aún te quedan cosas que demostrar donde estás."
  },
  "Aún te quedan cosas que demostrar donde estás.": {
   "w": [
-   "gx-events.js:156"
+   "gx-events.js:160"
   ],
   "ctx": "opts: [{t: N_(\"Ir a conocer el proyecto\"), ok: {txt: N_(\"Vuelves impresionado. El proyecto es serio.\"), fx: {mor: 2}, gx: \"exotic\"}}, {t: N_(\"No te interesa\"), ok: {txt: N_(\"Aún te quedan cosas que demostrar donde estás."
  },
  "El club de tu infancia": {
   "w": [
-   "gx-events.js:157"
+   "gx-events.js:161"
   ],
   "ctx": "{id: \"vuelta_origen\", cat: N_(\"Mercado\"), sc: \"street\", when: {age: [30, null]}, title: N_(\"El club de tu infancia\"), text: [N_(\"El presidente del club donde empezaste te llama: «Aquí siempre tendrás tu casa».\"), N_(\"Los"
  },
  "El presidente del club donde empezaste te llama: «Aquí siempre tendrás tu casa».": {
   "w": [
-   "gx-events.js:157"
+   "gx-events.js:161"
   ],
   "ctx": "{id: \"vuelta_origen\", cat: N_(\"Mercado\"), sc: \"street\", when: {age: [30, null]}, title: N_(\"El club de tu infancia\"), text: [N_(\"El presidente del club donde empezaste te llama: «Aquí siempre tendrás tu casa».\"), N_(\"Los"
  },
  "Los niños de la escuela de tu primer club te mandan un vídeo pidiéndote que vuelvas.": {
   "w": [
-   "gx-events.js:157"
+   "gx-events.js:161"
   ],
   "ctx": "{id: \"vuelta_origen\", cat: N_(\"Mercado\"), sc: \"street\", when: {age: [30, null]}, title: N_(\"El club de tu infancia\"), text: [N_(\"El presidente del club donde empezaste te llama: «Aquí siempre tendrás tu casa».\"), N_(\"Los"
  },
  "Prometer que volverás algún día": {
   "w": [
-   "gx-events.js:158"
+   "gx-events.js:162"
   ],
   "ctx": "opts: [{t: N_(\"Prometer que volverás algún día\"), ok: {txt: N_(\"La noticia emociona a tu ciudad.\"), fx: {fans: 3, mor: 4}}}, {t: N_(\"Dar las gracias y no prometer nada\"), ok: {txt: N_(\"Prudente. Nadie se ofende.\"), fx: {"
  },
  "La noticia emociona a tu ciudad.": {
   "w": [
-   "gx-events.js:158"
+   "gx-events.js:162"
   ],
   "ctx": "opts: [{t: N_(\"Prometer que volverás algún día\"), ok: {txt: N_(\"La noticia emociona a tu ciudad.\"), fx: {fans: 3, mor: 4}}}, {t: N_(\"Dar las gracias y no prometer nada\"), ok: {txt: N_(\"Prudente. Nadie se ofende.\"), fx: {"
  },
  "Dar las gracias y no prometer nada": {
   "w": [
-   "gx-events.js:158"
+   "gx-events.js:162"
   ],
   "ctx": "opts: [{t: N_(\"Prometer que volverás algún día\"), ok: {txt: N_(\"La noticia emociona a tu ciudad.\"), fx: {fans: 3, mor: 4}}}, {t: N_(\"Dar las gracias y no prometer nada\"), ok: {txt: N_(\"Prudente. Nadie se ofende.\"), fx: {"
  },
  "Prudente. Nadie se ofende.": {
   "w": [
-   "gx-events.js:158"
+   "gx-events.js:162"
   ],
   "ctx": "opts: [{t: N_(\"Prometer que volverás algún día\"), ok: {txt: N_(\"La noticia emociona a tu ciudad.\"), fx: {fans: 3, mor: 4}}}, {t: N_(\"Dar las gracias y no prometer nada\"), ok: {txt: N_(\"Prudente. Nadie se ofende.\"), fx: {"
  },
  "Salud": {
   "w": [
-   "gx-events.js:160",
-   "gx-events.js:163",
-   "gx-events.js:166",
-   "gx-events.js:169"
+   "gx-events.js:164",
+   "gx-events.js:167",
+   "gx-events.js:170",
+   "gx-events.js:173"
   ],
   "ctx": "{id: \"fisio_medico\", cat: N_(\"Salud\"), sc: \"hospital\", title: N_(\"Dos opiniones\"), text: [N_(\"Notas una molestia. El médico quiere que juegues; el fisio de toda la vida te dice que pares una semana.\")],"
  },
  "Dos opiniones": {
   "w": [
-   "gx-events.js:160"
+   "gx-events.js:164"
   ],
   "ctx": "{id: \"fisio_medico\", cat: N_(\"Salud\"), sc: \"hospital\", title: N_(\"Dos opiniones\"), text: [N_(\"Notas una molestia. El médico quiere que juegues; el fisio de toda la vida te dice que pares una semana.\")],"
  },
  "Notas una molestia. El médico quiere que juegues; el fisio de toda la vida te dice que pares una semana.": {
   "w": [
-   "gx-events.js:160"
+   "gx-events.js:164"
   ],
   "ctx": "{id: \"fisio_medico\", cat: N_(\"Salud\"), sc: \"hospital\", title: N_(\"Dos opiniones\"), text: [N_(\"Notas una molestia. El médico quiere que juegues; el fisio de toda la vida te dice que pares una semana.\")],"
  },
  "Hacer caso al fisio": {
   "w": [
-   "gx-events.js:161"
+   "gx-events.js:165"
   ],
   "ctx": "opts: [{t: N_(\"Hacer caso al fisio\"), p: 0.6, ok: {txt: N_(\"Tenía razón: habría sido una rotura. Vuelves como nuevo.\"), fx: {fit: 10, coach: -2}, gx: \"physioRight\"}, ko: {txt: N_(\"No era nada y te pierdes un partido impo"
  },
  "Tenía razón: habría sido una rotura. Vuelves como nuevo.": {
   "w": [
-   "gx-events.js:161"
+   "gx-events.js:165"
   ],
   "ctx": "opts: [{t: N_(\"Hacer caso al fisio\"), p: 0.6, ok: {txt: N_(\"Tenía razón: habría sido una rotura. Vuelves como nuevo.\"), fx: {fit: 10, coach: -2}, gx: \"physioRight\"}, ko: {txt: N_(\"No era nada y te pierdes un partido impo"
  },
  "No era nada y te pierdes un partido importante.": {
   "w": [
-   "gx-events.js:161"
+   "gx-events.js:165"
   ],
   "ctx": "opts: [{t: N_(\"Hacer caso al fisio\"), p: 0.6, ok: {txt: N_(\"Tenía razón: habría sido una rotura. Vuelves como nuevo.\"), fx: {fit: 10, coach: -2}, gx: \"physioRight\"}, ko: {txt: N_(\"No era nada y te pierdes un partido impo"
  },
  "Hacer caso al médico": {
   "w": [
-   "gx-events.js:162"
+   "gx-events.js:166"
   ],
   "ctx": "{t: N_(\"Hacer caso al médico\"), p: 0.6, ok: {txt: N_(\"Juegas sin problemas. Falsa alarma.\"), fx: {coach: 2}}, ko: {txt: N_(\"En el minuto 20 notas el pinchazo.\"), fx: {inj: [2, 4]}}}]},"
  },
  "Juegas sin problemas. Falsa alarma.": {
   "w": [
-   "gx-events.js:162"
+   "gx-events.js:166"
   ],
   "ctx": "{t: N_(\"Hacer caso al médico\"), p: 0.6, ok: {txt: N_(\"Juegas sin problemas. Falsa alarma.\"), fx: {coach: 2}}, ko: {txt: N_(\"En el minuto 20 notas el pinchazo.\"), fx: {inj: [2, 4]}}}]},"
  },
  "En el minuto 20 notas el pinchazo.": {
   "w": [
-   "gx-events.js:162"
+   "gx-events.js:166"
   ],
   "ctx": "{t: N_(\"Hacer caso al médico\"), p: 0.6, ok: {txt: N_(\"Juegas sin problemas. Falsa alarma.\"), fx: {coach: 2}}, ko: {txt: N_(\"En el minuto 20 notas el pinchazo.\"), fx: {inj: [2, 4]}}}]},"
  },
  "Infiltrarse o no": {
   "w": [
-   "gx-events.js:163"
+   "gx-events.js:167"
   ],
   "ctx": "{id: \"tocado_final\", cat: N_(\"Salud\"), sc: \"locker\", when: {fit: [null, 75]}, title: N_(\"Infiltrarse o no\"), text: [N_(\"Llega un partido gordo y no estás al cien. Te ofrecen infiltrarte para jugar.\")],"
  },
  "Llega un partido gordo y no estás al cien. Te ofrecen infiltrarte para jugar.": {
   "w": [
-   "gx-events.js:163"
+   "gx-events.js:167"
   ],
   "ctx": "{id: \"tocado_final\", cat: N_(\"Salud\"), sc: \"locker\", when: {fit: [null, 75]}, title: N_(\"Infiltrarse o no\"), text: [N_(\"Llega un partido gordo y no estás al cien. Te ofrecen infiltrarte para jugar.\")],"
  },
  "Infiltrarte y jugar": {
   "w": [
-   "gx-events.js:164"
+   "gx-events.js:168"
   ],
   "ctx": "opts: [{t: N_(\"Infiltrarte y jugar\"), p: 0.7, ok: {txt: N_(\"Aguantas y el vestuario lo valora.\"), fx: {coach: 5, fans: 3}, gx: null, later: {b: 1, txt: N_(\"Pagas el esfuerzo con unos días de cansancio.\"), fx: {fit: -6}, "
  },
  "Aguantas y el vestuario lo valora.": {
   "w": [
-   "gx-events.js:164"
+   "gx-events.js:168"
   ],
   "ctx": "opts: [{t: N_(\"Infiltrarte y jugar\"), p: 0.7, ok: {txt: N_(\"Aguantas y el vestuario lo valora.\"), fx: {coach: 5, fans: 3}, gx: null, later: {b: 1, txt: N_(\"Pagas el esfuerzo con unos días de cansancio.\"), fx: {fit: -6}, "
  },
  "Pagas el esfuerzo con unos días de cansancio.": {
   "w": [
-   "gx-events.js:164"
+   "gx-events.js:168"
   ],
   "ctx": "opts: [{t: N_(\"Infiltrarte y jugar\"), p: 0.7, ok: {txt: N_(\"Aguantas y el vestuario lo valora.\"), fx: {coach: 5, fans: 3}, gx: null, later: {b: 1, txt: N_(\"Pagas el esfuerzo con unos días de cansancio.\"), fx: {fit: -6}, "
  },
  "La molestia empeora. Te toca parar.": {
   "w": [
-   "gx-events.js:164"
+   "gx-events.js:168"
   ],
   "ctx": "opts: [{t: N_(\"Infiltrarte y jugar\"), p: 0.7, ok: {txt: N_(\"Aguantas y el vestuario lo valora.\"), fx: {coach: 5, fans: 3}, gx: null, later: {b: 1, txt: N_(\"Pagas el esfuerzo con unos días de cansancio.\"), fx: {fit: -6}, "
  },
  "Parar": {
   "w": [
-   "gx-events.js:165"
+   "gx-events.js:169"
   ],
   "ctx": "{t: N_(\"Parar\"), ok: {txt: N_(\"Recuperas bien. Los partidos importantes vendrán.\"), fx: {fit: 12, coach: -2}}}]},"
  },
  "Recuperas bien. Los partidos importantes vendrán.": {
   "w": [
-   "gx-events.js:165"
+   "gx-events.js:169"
   ],
   "ctx": "{t: N_(\"Parar\"), ok: {txt: N_(\"Recuperas bien. Los partidos importantes vendrán.\"), fx: {fit: 12, coach: -2}}}]},"
  },
  "Dieta de moda": {
   "w": [
-   "gx-events.js:166"
+   "gx-events.js:170"
   ],
   "ctx": "{id: \"dieta_nueva\", cat: N_(\"Salud\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Dieta de moda\"), text: [N_(\"Un compañero jura que una dieta sin nada de hidratos le ha cambiado la vida.\")],"
  },
  "Un compañero jura que una dieta sin nada de hidratos le ha cambiado la vida.": {
   "w": [
-   "gx-events.js:166"
+   "gx-events.js:170"
   ],
   "ctx": "{id: \"dieta_nueva\", cat: N_(\"Salud\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Dieta de moda\"), text: [N_(\"Un compañero jura que una dieta sin nada de hidratos le ha cambiado la vida.\")],"
  },
  "Probarla": {
   "w": [
-   "gx-events.js:167"
+   "gx-events.js:171"
   ],
   "ctx": "opts: [{t: N_(\"Probarla\"), p: 0.3, ok: {txt: N_(\"Te sienta bien. Te ves más ligero.\"), fx: {fit: 4}}, ko: {txt: N_(\"Te quedas sin energía en el segundo tiempo.\"), fx: {fit: -6, form: -3}}},"
  },
  "Te sienta bien. Te ves más ligero.": {
   "w": [
-   "gx-events.js:167"
+   "gx-events.js:171"
   ],
   "ctx": "opts: [{t: N_(\"Probarla\"), p: 0.3, ok: {txt: N_(\"Te sienta bien. Te ves más ligero.\"), fx: {fit: 4}}, ko: {txt: N_(\"Te quedas sin energía en el segundo tiempo.\"), fx: {fit: -6, form: -3}}},"
  },
  "Te quedas sin energía en el segundo tiempo.": {
   "w": [
-   "gx-events.js:167"
+   "gx-events.js:171"
   ],
   "ctx": "opts: [{t: N_(\"Probarla\"), p: 0.3, ok: {txt: N_(\"Te sienta bien. Te ves más ligero.\"), fx: {fit: 4}}, ko: {txt: N_(\"Te quedas sin energía en el segundo tiempo.\"), fx: {fit: -6, form: -3}}},"
  },
  "Preguntar al nutricionista del club": {
   "w": [
-   "gx-events.js:168"
+   "gx-events.js:172"
   ],
   "ctx": "{t: N_(\"Preguntar al nutricionista del club\"), ok: {txt: N_(\"Te ajusta la dieta con sentido común.\"), fx: {fit: 3, prof: 2}}}]},"
  },
  "Te ajusta la dieta con sentido común.": {
   "w": [
-   "gx-events.js:168"
+   "gx-events.js:172"
   ],
   "ctx": "{t: N_(\"Preguntar al nutricionista del club\"), ok: {txt: N_(\"Te ajusta la dieta con sentido común.\"), fx: {fit: 3, prof: 2}}}]},"
  },
  "No duermes": {
   "w": [
-   "gx-events.js:169"
+   "gx-events.js:173"
   ],
   "ctx": "{id: \"sueno\", cat: N_(\"Salud\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"No duermes\"), text: [N_(\"Llevas varias noches durmiendo mal antes de los partidos.\")],"
  },
  "Llevas varias noches durmiendo mal antes de los partidos.": {
   "w": [
-   "gx-events.js:169"
+   "gx-events.js:173"
   ],
   "ctx": "{id: \"sueno\", cat: N_(\"Salud\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"No duermes\"), text: [N_(\"Llevas varias noches durmiendo mal antes de los partidos.\")],"
  },
  "Hablar con el psicólogo": {
   "w": [
-   "gx-events.js:170"
+   "gx-events.js:174"
   ],
   "ctx": "opts: [{t: N_(\"Hablar con el psicólogo\"), ok: {txt: N_(\"Unas rutinas sencillas y vuelves a descansar.\"), fx: {mor: 3, fit: 3}}}, {t: N_(\"Aguantar\"), p: 0.5, ok: {txt: N_(\"Se pasa solo.\"), fx: {}}, ko: {txt: N_(\"Llegas al"
  },
  "Unas rutinas sencillas y vuelves a descansar.": {
   "w": [
-   "gx-events.js:170"
+   "gx-events.js:174"
   ],
   "ctx": "opts: [{t: N_(\"Hablar con el psicólogo\"), ok: {txt: N_(\"Unas rutinas sencillas y vuelves a descansar.\"), fx: {mor: 3, fit: 3}}}, {t: N_(\"Aguantar\"), p: 0.5, ok: {txt: N_(\"Se pasa solo.\"), fx: {}}, ko: {txt: N_(\"Llegas al"
  },
  "Aguantar": {
   "w": [
-   "gx-events.js:170"
+   "gx-events.js:174"
   ],
   "ctx": "opts: [{t: N_(\"Hablar con el psicólogo\"), ok: {txt: N_(\"Unas rutinas sencillas y vuelves a descansar.\"), fx: {mor: 3, fit: 3}}}, {t: N_(\"Aguantar\"), p: 0.5, ok: {txt: N_(\"Se pasa solo.\"), fx: {}}, ko: {txt: N_(\"Llegas al"
  },
  "Se pasa solo.": {
   "w": [
-   "gx-events.js:170"
+   "gx-events.js:174"
   ],
   "ctx": "opts: [{t: N_(\"Hablar con el psicólogo\"), ok: {txt: N_(\"Unas rutinas sencillas y vuelves a descansar.\"), fx: {mor: 3, fit: 3}}}, {t: N_(\"Aguantar\"), p: 0.5, ok: {txt: N_(\"Se pasa solo.\"), fx: {}}, ko: {txt: N_(\"Llegas al"
  },
  "Llegas al partido con los ojos cerrados.": {
   "w": [
-   "gx-events.js:170"
+   "gx-events.js:174"
   ],
   "ctx": "opts: [{t: N_(\"Hablar con el psicólogo\"), ok: {txt: N_(\"Unas rutinas sencillas y vuelves a descansar.\"), fx: {mor: 3, fit: 3}}}, {t: N_(\"Aguantar\"), p: 0.5, ok: {txt: N_(\"Se pasa solo.\"), fx: {}}, ko: {txt: N_(\"Llegas al"
  },
  "Entrenamiento": {
   "w": [
-   "gx-events.js:171",
+   "gx-events.js:175",
    "engine-player.js:1154",
    "events-manager.js:664",
    "ui.js:777"
@@ -4966,228 +4966,228 @@
  },
  "Doble sesión": {
   "w": [
-   "gx-events.js:171"
+   "gx-events.js:175"
   ],
   "ctx": "{id: \"pretemporada_extra\", cat: N_(\"Entrenamiento\"), sc: \"training\", title: N_(\"Doble sesión\"), when: {form: [null, 55]}, text: [N_(\"No estás en tu mejor momento. El preparador te ofrece una sesión extra cada tarde.\")],"
  },
  "No estás en tu mejor momento. El preparador te ofrece una sesión extra cada tarde.": {
   "w": [
-   "gx-events.js:171"
+   "gx-events.js:175"
   ],
   "ctx": "{id: \"pretemporada_extra\", cat: N_(\"Entrenamiento\"), sc: \"training\", title: N_(\"Doble sesión\"), when: {form: [null, 55]}, text: [N_(\"No estás en tu mejor momento. El preparador te ofrece una sesión extra cada tarde.\")],"
  },
  "Sudas como nunca.": {
   "w": [
-   "gx-events.js:172"
+   "gx-events.js:176"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Sudas como nunca.\"), fx: {fit: -4, prof: 2}, later: {b: 1, txt: N_(\"Las sesiones extra dan su fruto: vuelves a sentirte rápido.\"), fx: {form: 6}}}}, {t: N_(\"Descansar mejor\"), ok: "
  },
  "Las sesiones extra dan su fruto: vuelves a sentirte rápido.": {
   "w": [
-   "gx-events.js:172"
+   "gx-events.js:176"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Sudas como nunca.\"), fx: {fit: -4, prof: 2}, later: {b: 1, txt: N_(\"Las sesiones extra dan su fruto: vuelves a sentirte rápido.\"), fx: {form: 6}}}}, {t: N_(\"Descansar mejor\"), ok: "
  },
  "Descansar mejor": {
   "w": [
-   "gx-events.js:172"
+   "gx-events.js:176"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Sudas como nunca.\"), fx: {fit: -4, prof: 2}, later: {b: 1, txt: N_(\"Las sesiones extra dan su fruto: vuelves a sentirte rápido.\"), fx: {form: 6}}}}, {t: N_(\"Descansar mejor\"), ok: "
  },
  "Prefieres no cargar más las piernas.": {
   "w": [
-   "gx-events.js:172"
+   "gx-events.js:176"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Sudas como nunca.\"), fx: {fit: -4, prof: 2}, later: {b: 1, txt: N_(\"Las sesiones extra dan su fruto: vuelves a sentirte rápido.\"), fx: {form: 6}}}}, {t: N_(\"Descansar mejor\"), ok: "
  },
  "Partido": {
   "w": [
-   "gx-events.js:174",
-   "gx-events.js:177",
-   "gx-events.js:180",
-   "gx-events.js:182"
+   "gx-events.js:178",
+   "gx-events.js:181",
+   "gx-events.js:184",
+   "gx-events.js:186"
   ],
   "ctx": "{id: \"pedir_penalti\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"El balón del penalti\"), when: {noflag: \"pens\", gk: 0}, text: [N_(\"Penalti a favor en un partido apretado. El lanzador oficial duda. Tú tienes ganas.\")],"
  },
  "El balón del penalti": {
   "w": [
-   "gx-events.js:174"
+   "gx-events.js:178"
   ],
   "ctx": "{id: \"pedir_penalti\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"El balón del penalti\"), when: {noflag: \"pens\", gk: 0}, text: [N_(\"Penalti a favor en un partido apretado. El lanzador oficial duda. Tú tienes ganas.\")],"
  },
  "Penalti a favor en un partido apretado. El lanzador oficial duda. Tú tienes ganas.": {
   "w": [
-   "gx-events.js:174"
+   "gx-events.js:178"
   ],
   "ctx": "{id: \"pedir_penalti\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"El balón del penalti\"), when: {noflag: \"pens\", gk: 0}, text: [N_(\"Penalti a favor en un partido apretado. El lanzador oficial duda. Tú tienes ganas.\")],"
  },
  "Pedirle el balón": {
   "w": [
-   "gx-events.js:175"
+   "gx-events.js:179"
   ],
   "ctx": "opts: [{t: N_(\"Pedirle el balón\"), p: {att: \"TIR\", b: 0.6, k: 0.012}, ok: {txt: N_(\"Lo coges, miras al portero y la cuelas por la escuadra.\"), fx: {form: 5, fans: 3, coach: -1}, gx: \"askPenScore\"}, ko: {txt: N_(\"Lo falla"
  },
  "Lo coges, miras al portero y la cuelas por la escuadra.": {
   "w": [
-   "gx-events.js:175"
+   "gx-events.js:179"
   ],
   "ctx": "opts: [{t: N_(\"Pedirle el balón\"), p: {att: \"TIR\", b: 0.6, k: 0.012}, ok: {txt: N_(\"Lo coges, miras al portero y la cuelas por la escuadra.\"), fx: {form: 5, fans: 3, coach: -1}, gx: \"askPenScore\"}, ko: {txt: N_(\"Lo falla"
  },
  "Lo fallas. Todo el estadio sabe que no te tocaba.": {
   "w": [
-   "gx-events.js:175"
+   "gx-events.js:179"
   ],
   "ctx": "opts: [{t: N_(\"Pedirle el balón\"), p: {att: \"TIR\", b: 0.6, k: 0.012}, ok: {txt: N_(\"Lo coges, miras al portero y la cuelas por la escuadra.\"), fx: {form: 5, fans: 3, coach: -1}, gx: \"askPenScore\"}, ko: {txt: N_(\"Lo falla"
  },
  "Dejárselo a él": {
   "w": [
-   "gx-events.js:176"
+   "gx-events.js:180"
   ],
   "ctx": "{t: N_(\"Dejárselo a él\"), ok: {txt: N_(\"Lo tira él. Respeto a la jerarquía.\"), fx: {coach: 2}}}]},"
  },
  "Lo tira él. Respeto a la jerarquía.": {
   "w": [
-   "gx-events.js:176"
+   "gx-events.js:180"
   ],
   "ctx": "{t: N_(\"Dejárselo a él\"), ok: {txt: N_(\"Lo tira él. Respeto a la jerarquía.\"), fx: {coach: 2}}}]},"
  },
  "Tocado en el área": {
   "w": [
-   "gx-events.js:177"
+   "gx-events.js:181"
   ],
   "ctx": "{id: \"fingir\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"Tocado en el área\"), text: [N_(\"Un defensa te roza dentro del área. Podrías dejarte caer.\")],"
  },
  "Un defensa te roza dentro del área. Podrías dejarte caer.": {
   "w": [
-   "gx-events.js:177"
+   "gx-events.js:181"
   ],
   "ctx": "{id: \"fingir\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"Tocado en el área\"), text: [N_(\"Un defensa te roza dentro del área. Podrías dejarte caer.\")],"
  },
  "Tirarte": {
   "w": [
-   "gx-events.js:178"
+   "gx-events.js:182"
   ],
   "ctx": "opts: [{t: N_(\"Tirarte\"), p: 0.35, ok: {txt: N_(\"El árbitro pica: penalti.\"), fx: {fans: 1}}, ko: {txt: N_(\"Amarilla por simular y pitos de todo el campo.\"), fx: {fans: -4, fame: -1}}},"
  },
  "El árbitro pica: penalti.": {
   "w": [
-   "gx-events.js:178"
+   "gx-events.js:182"
   ],
   "ctx": "opts: [{t: N_(\"Tirarte\"), p: 0.35, ok: {txt: N_(\"El árbitro pica: penalti.\"), fx: {fans: 1}}, ko: {txt: N_(\"Amarilla por simular y pitos de todo el campo.\"), fx: {fans: -4, fame: -1}}},"
  },
  "Amarilla por simular y pitos de todo el campo.": {
   "w": [
-   "gx-events.js:178"
+   "gx-events.js:182"
   ],
   "ctx": "opts: [{t: N_(\"Tirarte\"), p: 0.35, ok: {txt: N_(\"El árbitro pica: penalti.\"), fx: {fans: 1}}, ko: {txt: N_(\"Amarilla por simular y pitos de todo el campo.\"), fx: {fans: -4, fame: -1}}},"
  },
  "Seguir de pie": {
   "w": [
-   "gx-events.js:179",
+   "gx-events.js:183",
    "events.js:1000"
   ],
   "ctx": "{t: N_(\"Seguir de pie\"), ok: {txt: N_(\"Sigues la jugada. El estadio aplaude tu deportividad.\"), fx: {fans: 2, prof: 1}}}]},"
  },
  "Sigues la jugada. El estadio aplaude tu deportividad.": {
   "w": [
-   "gx-events.js:179"
+   "gx-events.js:183"
   ],
   "ctx": "{t: N_(\"Seguir de pie\"), ok: {txt: N_(\"Sigues la jugada. El estadio aplaude tu deportividad.\"), fx: {fans: 2, prof: 1}}}]},"
  },
  "Un rival lesionado": {
   "w": [
-   "gx-events.js:180"
+   "gx-events.js:184"
   ],
   "ctx": "{id: \"gesto_rival\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"Un rival lesionado\"), text: [N_(\"Un rival cae lesionado y tu equipo tiene el balón en ataque.\")],"
  },
  "Un rival cae lesionado y tu equipo tiene el balón en ataque.": {
   "w": [
-   "gx-events.js:180"
+   "gx-events.js:184"
   ],
   "ctx": "{id: \"gesto_rival\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"Un rival lesionado\"), text: [N_(\"Un rival cae lesionado y tu equipo tiene el balón en ataque.\")],"
  },
  "Echar el balón fuera": {
   "w": [
-   "gx-events.js:181"
+   "gx-events.js:185"
   ],
   "ctx": "opts: [{t: N_(\"Echar el balón fuera\"), ok: {txt: N_(\"Gesto de deportividad. La prensa lo destaca.\"), fx: {fans: 2, fame: 1}}}, {t: N_(\"Seguir jugando\"), p: 0.5, ok: {txt: N_(\"Es fútbol: la jugada termina en córner.\"), fx"
  },
  "Gesto de deportividad. La prensa lo destaca.": {
   "w": [
-   "gx-events.js:181"
+   "gx-events.js:185"
   ],
   "ctx": "opts: [{t: N_(\"Echar el balón fuera\"), ok: {txt: N_(\"Gesto de deportividad. La prensa lo destaca.\"), fx: {fans: 2, fame: 1}}}, {t: N_(\"Seguir jugando\"), p: 0.5, ok: {txt: N_(\"Es fútbol: la jugada termina en córner.\"), fx"
  },
  "Seguir jugando": {
   "w": [
-   "gx-events.js:181",
+   "gx-events.js:185",
    "events.js:1098"
   ],
   "ctx": "opts: [{t: N_(\"Echar el balón fuera\"), ok: {txt: N_(\"Gesto de deportividad. La prensa lo destaca.\"), fx: {fans: 2, fame: 1}}}, {t: N_(\"Seguir jugando\"), p: 0.5, ok: {txt: N_(\"Es fútbol: la jugada termina en córner.\"), fx"
  },
  "Es fútbol: la jugada termina en córner.": {
   "w": [
-   "gx-events.js:181"
+   "gx-events.js:185"
   ],
   "ctx": "opts: [{t: N_(\"Echar el balón fuera\"), ok: {txt: N_(\"Gesto de deportividad. La prensa lo destaca.\"), fx: {fans: 2, fame: 1}}}, {t: N_(\"Seguir jugando\"), p: 0.5, ok: {txt: N_(\"Es fútbol: la jugada termina en córner.\"), fx"
  },
  "La grada rival te dedica una pitada histórica.": {
   "w": [
-   "gx-events.js:181"
+   "gx-events.js:185"
   ],
   "ctx": "opts: [{t: N_(\"Echar el balón fuera\"), ok: {txt: N_(\"Gesto de deportividad. La prensa lo destaca.\"), fx: {fans: 2, fame: 1}}}, {t: N_(\"Seguir jugando\"), p: 0.5, ok: {txt: N_(\"Es fútbol: la jugada termina en córner.\"), fx"
  },
  "La camiseta del ídolo": {
   "w": [
-   "gx-events.js:182"
+   "gx-events.js:186"
   ],
   "ctx": "{id: \"camiseta_rival\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"La camiseta del ídolo\"), text: [N_(\"Al acabar el partido, una estrella rival te pide cambiar las camisetas. Habéis perdido.\")],"
  },
  "Al acabar el partido, una estrella rival te pide cambiar las camisetas. Habéis perdido.": {
   "w": [
-   "gx-events.js:182"
+   "gx-events.js:186"
   ],
   "ctx": "{id: \"camiseta_rival\", cat: N_(\"Partido\"), sc: \"pitch\", title: N_(\"La camiseta del ídolo\"), text: [N_(\"Al acabar el partido, una estrella rival te pide cambiar las camisetas. Habéis perdido.\")],"
  },
  "Cambiarla igualmente": {
   "w": [
-   "gx-events.js:183"
+   "gx-events.js:187"
   ],
   "ctx": "opts: [{t: N_(\"Cambiarla igualmente\"), ok: {txt: N_(\"Un recuerdo para siempre… pero algunos aficionados no lo entienden.\"), fx: {mor: 3, fans: -2}}}, {t: N_(\"Hacerlo en el túnel, sin cámaras\"), ok: {txt: N_(\"Discreto. La"
  },
  "Un recuerdo para siempre… pero algunos aficionados no lo entienden.": {
   "w": [
-   "gx-events.js:183"
+   "gx-events.js:187"
   ],
   "ctx": "opts: [{t: N_(\"Cambiarla igualmente\"), ok: {txt: N_(\"Un recuerdo para siempre… pero algunos aficionados no lo entienden.\"), fx: {mor: 3, fans: -2}}}, {t: N_(\"Hacerlo en el túnel, sin cámaras\"), ok: {txt: N_(\"Discreto. La"
  },
  "Hacerlo en el túnel, sin cámaras": {
   "w": [
-   "gx-events.js:183"
+   "gx-events.js:187"
   ],
   "ctx": "opts: [{t: N_(\"Cambiarla igualmente\"), ok: {txt: N_(\"Un recuerdo para siempre… pero algunos aficionados no lo entienden.\"), fx: {mor: 3, fans: -2}}}, {t: N_(\"Hacerlo en el túnel, sin cámaras\"), ok: {txt: N_(\"Discreto. La"
  },
  "Discreto. La camiseta ya cuelga en tu casa.": {
   "w": [
-   "gx-events.js:183"
+   "gx-events.js:187"
   ],
   "ctx": "opts: [{t: N_(\"Cambiarla igualmente\"), ok: {txt: N_(\"Un recuerdo para siempre… pero algunos aficionados no lo entienden.\"), fx: {mor: 3, fans: -2}}}, {t: N_(\"Hacerlo en el túnel, sin cámaras\"), ok: {txt: N_(\"Discreto. La"
  },
  "Diluvio": {
   "w": [
-   "gx-events.js:184"
+   "gx-events.js:188"
   ],
   "ctx": "{id: \"lluvia_partido\", cat: N_(\"Partido\"), sc: \"stadium\", tipo: \"aleatoria\", title: N_(\"Diluvio\"), text: [N_(\"Cae un diluvio y el campo está encharcado. El árbitro pregunta a los capitanes si se puede jugar.\")],"
  },
  "Cae un diluvio y el campo está encharcado. El árbitro pregunta a los capitanes si se puede jugar.": {
   "w": [
-   "gx-events.js:184"
+   "gx-events.js:188"
   ],
   "ctx": "{id: \"lluvia_partido\", cat: N_(\"Partido\"), sc: \"stadium\", tipo: \"aleatoria\", title: N_(\"Diluvio\"), text: [N_(\"Cae un diluvio y el campo está encharcado. El árbitro pregunta a los capitanes si se puede jugar.\")],"
  },
  "Jugar": {
   "w": [
-   "gx-events.js:185",
+   "gx-events.js:189",
    "pet-world.js:245",
    "pet-world.js:538",
    "ui.js:1427"
@@ -5196,1034 +5196,1034 @@
  },
  "Partido de barro y épica. Sales ovacionado.": {
   "w": [
-   "gx-events.js:185"
+   "gx-events.js:189"
   ],
   "ctx": "opts: [{t: N_(\"Jugar\"), p: {att: \"FIS\", b: 0.55, k: 0.01}, ok: {txt: N_(\"Partido de barro y épica. Sales ovacionado.\"), fx: {fans: 3, fit: -4}}, ko: {txt: N_(\"Resbalones y un golpe tonto.\"), fx: {fit: -8}}},"
  },
  "Resbalones y un golpe tonto.": {
   "w": [
-   "gx-events.js:185"
+   "gx-events.js:189"
   ],
   "ctx": "opts: [{t: N_(\"Jugar\"), p: {att: \"FIS\", b: 0.55, k: 0.01}, ok: {txt: N_(\"Partido de barro y épica. Sales ovacionado.\"), fx: {fans: 3, fit: -4}}, ko: {txt: N_(\"Resbalones y un golpe tonto.\"), fx: {fit: -8}}},"
  },
  "Pedir el aplazamiento": {
   "w": [
-   "gx-events.js:186"
+   "gx-events.js:190"
   ],
   "ctx": "{t: N_(\"Pedir el aplazamiento\"), ok: {txt: N_(\"Se aplaza. Mejor para las piernas.\"), fx: {fit: 3}}}]},"
  },
  "Se aplaza. Mejor para las piernas.": {
   "w": [
-   "gx-events.js:186"
+   "gx-events.js:190"
   ],
   "ctx": "{t: N_(\"Pedir el aplazamiento\"), ok: {txt: N_(\"Se aplaza. Mejor para las piernas.\"), fx: {fit: 3}}}]},"
  },
  "Contra tu antiguo equipo": {
   "w": [
-   "gx-events.js:187"
+   "gx-events.js:191"
   ],
   "ctx": "{id: \"celebracion_polemica\", cat: N_(\"Partido\"), sc: \"stadium\", when: {ex: 1}, title: N_(\"Contra tu antiguo equipo\"), text: [N_(\"Juegas contra uno de tus ex clubes. Su grada no te ha perdonado la salida.\")],"
  },
  "Juegas contra uno de tus ex clubes. Su grada no te ha perdonado la salida.": {
   "w": [
-   "gx-events.js:187"
+   "gx-events.js:191"
   ],
   "ctx": "{id: \"celebracion_polemica\", cat: N_(\"Partido\"), sc: \"stadium\", when: {ex: 1}, title: N_(\"Contra tu antiguo equipo\"), text: [N_(\"Juegas contra uno de tus ex clubes. Su grada no te ha perdonado la salida.\")],"
  },
  "Celebrar el gol si llega": {
   "w": [
-   "gx-events.js:188"
+   "gx-events.js:192"
   ],
   "ctx": "opts: [{t: N_(\"Celebrar el gol si llega\"), p: {att: \"TIR\", b: 0.4, k: 0.01}, ok: {txt: N_(\"Marcas y lo celebras con todo delante de ellos.\"), fx: {fans: 4, fame: 2, coach: -1}, gx: \"exCelebrate\"}, ko: {txt: N_(\"No marcas"
  },
  "Marcas y lo celebras con todo delante de ellos.": {
   "w": [
-   "gx-events.js:188"
+   "gx-events.js:192"
   ],
   "ctx": "opts: [{t: N_(\"Celebrar el gol si llega\"), p: {att: \"TIR\", b: 0.4, k: 0.01}, ok: {txt: N_(\"Marcas y lo celebras con todo delante de ellos.\"), fx: {fans: 4, fame: 2, coach: -1}, gx: \"exCelebrate\"}, ko: {txt: N_(\"No marcas"
  },
  "No marcas y te cantan todo el partido.": {
   "w": [
-   "gx-events.js:188"
+   "gx-events.js:192"
   ],
   "ctx": "opts: [{t: N_(\"Celebrar el gol si llega\"), p: {att: \"TIR\", b: 0.4, k: 0.01}, ok: {txt: N_(\"Marcas y lo celebras con todo delante de ellos.\"), fx: {fans: 4, fame: 2, coach: -1}, gx: \"exCelebrate\"}, ko: {txt: N_(\"No marcas"
  },
  "Pedir perdón si marcas": {
   "w": [
-   "gx-events.js:189"
+   "gx-events.js:193"
   ],
   "ctx": "{t: N_(\"Pedir perdón si marcas\"), ok: {txt: N_(\"Respeto por tu pasado. Aplausos de las dos aficiones.\"), fx: {fans: 2, prof: 2}}}]},"
  },
  "Respeto por tu pasado. Aplausos de las dos aficiones.": {
   "w": [
-   "gx-events.js:189"
+   "gx-events.js:193"
   ],
   "ctx": "{t: N_(\"Pedir perdón si marcas\"), ok: {txt: N_(\"Respeto por tu pasado. Aplausos de las dos aficiones.\"), fx: {fans: 2, prof: 2}}}]},"
  },
  "Despedida": {
   "w": [
-   "gx-events.js:190"
+   "gx-events.js:194"
   ],
   "ctx": "{id: \"homenaje_final\", cat: N_(\"Despedida\"), sc: \"stadium\", once: true, when: {age: [35, null], fame: [40, null]}, title: N_(\"Partido homenaje\"), text: [N_(\"Tu club quiere organizarte un partido homenaje con antiguos com"
  },
  "Partido homenaje": {
   "w": [
-   "gx-events.js:190"
+   "gx-events.js:194"
   ],
   "ctx": "{id: \"homenaje_final\", cat: N_(\"Despedida\"), sc: \"stadium\", once: true, when: {age: [35, null], fame: [40, null]}, title: N_(\"Partido homenaje\"), text: [N_(\"Tu club quiere organizarte un partido homenaje con antiguos com"
  },
  "Tu club quiere organizarte un partido homenaje con antiguos compañeros. Estadio lleno asegurado.": {
   "w": [
-   "gx-events.js:190"
+   "gx-events.js:194"
   ],
   "ctx": "{id: \"homenaje_final\", cat: N_(\"Despedida\"), sc: \"stadium\", once: true, when: {age: [35, null], fame: [40, null]}, title: N_(\"Partido homenaje\"), text: [N_(\"Tu club quiere organizarte un partido homenaje con antiguos com"
  },
  "Noche inolvidable: te mantean, lloras y tu familia salta al césped.": {
   "w": [
-   "gx-events.js:191"
+   "gx-events.js:195"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Noche inolvidable: te mantean, lloras y tu familia salta al césped.\"), fx: {mor: 10, fans: 8, fame: 3}, gx: \"tribute\"}}, {t: N_(\"Preferir una despedida discreta\"), ok: {txt: N_(\"Un"
  },
  "Preferir una despedida discreta": {
   "w": [
-   "gx-events.js:191"
+   "gx-events.js:195"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Noche inolvidable: te mantean, lloras y tu familia salta al césped.\"), fx: {mor: 10, fans: 8, fame: 3}, gx: \"tribute\"}}, {t: N_(\"Preferir una despedida discreta\"), ok: {txt: N_(\"Un"
  },
  "Un aplauso del vestuario y una cena con los tuyos.": {
   "w": [
-   "gx-events.js:191"
+   "gx-events.js:195"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Noche inolvidable: te mantean, lloras y tu familia salta al césped.\"), fx: {mor: 10, fans: 8, fame: 3}, gx: \"tribute\"}}, {t: N_(\"Preferir una despedida discreta\"), ok: {txt: N_(\"Un"
  },
  "El brazalete de tu país": {
   "w": [
-   "gx-events.js:193"
+   "gx-events.js:197"
   ],
   "ctx": "{id: \"capitan_seleccion\", cat: N_(\"Selección\"), sc: \"stadium\", once: true, when: {caps: 30, age: [26, null]}, title: N_(\"El brazalete de tu país\"), text: [N_(\"El seleccionador te llama: el capitán se retira y quiere que "
  },
  "El seleccionador te llama: el capitán se retira y quiere que el brazalete sea tuyo.": {
   "w": [
-   "gx-events.js:193"
+   "gx-events.js:197"
   ],
   "ctx": "{id: \"capitan_seleccion\", cat: N_(\"Selección\"), sc: \"stadium\", once: true, when: {caps: 30, age: [26, null]}, title: N_(\"El brazalete de tu país\"), text: [N_(\"El seleccionador te llama: el capitán se retira y quiere que "
  },
  "Aceptar con orgullo": {
   "w": [
-   "gx-events.js:194"
+   "gx-events.js:198"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar con orgullo\"), ok: {txt: N_(\"Capitán de {nat}. Tu familia no se lo cree.\"), fx: {mor: 8, fame: 4}, gx: \"natCaptain\"}}, {t: N_(\"Proponer a otro\"), ok: {txt: N_(\"Prefieres liderar sin brazalete. El s"
  },
  "Capitán de {nat}. Tu familia no se lo cree.": {
   "w": [
-   "gx-events.js:194"
+   "gx-events.js:198"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar con orgullo\"), ok: {txt: N_(\"Capitán de {nat}. Tu familia no se lo cree.\"), fx: {mor: 8, fame: 4}, gx: \"natCaptain\"}}, {t: N_(\"Proponer a otro\"), ok: {txt: N_(\"Prefieres liderar sin brazalete. El s"
  },
  "Proponer a otro": {
   "w": [
-   "gx-events.js:194"
+   "gx-events.js:198"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar con orgullo\"), ok: {txt: N_(\"Capitán de {nat}. Tu familia no se lo cree.\"), fx: {mor: 8, fame: 4}, gx: \"natCaptain\"}}, {t: N_(\"Proponer a otro\"), ok: {txt: N_(\"Prefieres liderar sin brazalete. El s"
  },
  "Prefieres liderar sin brazalete. El seleccionador lo respeta.": {
   "w": [
-   "gx-events.js:194"
+   "gx-events.js:198"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar con orgullo\"), ok: {txt: N_(\"Capitán de {nat}. Tu familia no se lo cree.\"), fx: {mor: 8, fame: 4}, gx: \"natCaptain\"}}, {t: N_(\"Proponer a otro\"), ok: {txt: N_(\"Prefieres liderar sin brazalete. El s"
  },
  "Convocado tocado": {
   "w": [
-   "gx-events.js:195"
+   "gx-events.js:199"
   ],
   "ctx": "{id: \"seleccion_lesion\", cat: N_(\"Selección\"), sc: \"plane\", when: {caps: 1}, title: N_(\"Convocado tocado\"), text: [N_(\"Te convocan con la selección, pero tu club pide que no viajes porque arrastras molestias.\")],"
  },
  "Te convocan con la selección, pero tu club pide que no viajes porque arrastras molestias.": {
   "w": [
-   "gx-events.js:195"
+   "gx-events.js:199"
   ],
   "ctx": "{id: \"seleccion_lesion\", cat: N_(\"Selección\"), sc: \"plane\", when: {caps: 1}, title: N_(\"Convocado tocado\"), text: [N_(\"Te convocan con la selección, pero tu club pide que no viajes porque arrastras molestias.\")],"
  },
  "Ir con la selección": {
   "w": [
-   "gx-events.js:196",
+   "gx-events.js:200",
    "events-extra.js:343"
   ],
   "ctx": "opts: [{t: N_(\"Ir con la selección\"), p: 0.6, ok: {txt: N_(\"Juegas bien y vuelves entero.\"), fx: {fame: 2, coach: -3}}, ko: {txt: N_(\"Vuelves peor. Tu club está furioso.\"), fx: {coach: -8, fit: -8}}},"
  },
  "Juegas bien y vuelves entero.": {
   "w": [
-   "gx-events.js:196"
+   "gx-events.js:200"
   ],
   "ctx": "opts: [{t: N_(\"Ir con la selección\"), p: 0.6, ok: {txt: N_(\"Juegas bien y vuelves entero.\"), fx: {fame: 2, coach: -3}}, ko: {txt: N_(\"Vuelves peor. Tu club está furioso.\"), fx: {coach: -8, fit: -8}}},"
  },
  "Vuelves peor. Tu club está furioso.": {
   "w": [
-   "gx-events.js:196"
+   "gx-events.js:200"
   ],
   "ctx": "opts: [{t: N_(\"Ir con la selección\"), p: 0.6, ok: {txt: N_(\"Juegas bien y vuelves entero.\"), fx: {fame: 2, coach: -3}}, ko: {txt: N_(\"Vuelves peor. Tu club está furioso.\"), fx: {coach: -8, fit: -8}}},"
  },
  "Quedarte a recuperar": {
   "w": [
-   "gx-events.js:197"
+   "gx-events.js:201"
   ],
   "ctx": "{t: N_(\"Quedarte a recuperar\"), ok: {txt: N_(\"Tu club te lo agradece. La prensa de tu país, no tanto.\"), fx: {coach: 4, fans: -1}}}]},"
  },
  "Tu club te lo agradece. La prensa de tu país, no tanto.": {
   "w": [
-   "gx-events.js:197"
+   "gx-events.js:201"
   ],
   "ctx": "{t: N_(\"Quedarte a recuperar\"), ok: {txt: N_(\"Tu club te lo agradece. La prensa de tu país, no tanto.\"), fx: {coach: 4, fans: -1}}}]},"
  },
  "Se rompe la megafonía": {
   "w": [
-   "gx-events.js:198"
+   "gx-events.js:202"
   ],
   "ctx": "{id: \"himno\", cat: N_(\"Selección\"), sc: \"stadium\", tipo: \"aleatoria\", when: {caps: 1}, title: N_(\"Se rompe la megafonía\"), text: [N_(\"En pleno himno se cae el sonido del estadio. Los jugadores se miran.\")],"
  },
  "En pleno himno se cae el sonido del estadio. Los jugadores se miran.": {
   "w": [
-   "gx-events.js:198"
+   "gx-events.js:202"
   ],
   "ctx": "{id: \"himno\", cat: N_(\"Selección\"), sc: \"stadium\", tipo: \"aleatoria\", when: {caps: 1}, title: N_(\"Se rompe la megafonía\"), text: [N_(\"En pleno himno se cae el sonido del estadio. Los jugadores se miran.\")],"
  },
  "Seguir cantándolo a capela": {
   "w": [
-   "gx-events.js:199"
+   "gx-events.js:203"
   ],
   "ctx": "opts: [{t: N_(\"Seguir cantándolo a capela\"), ok: {txt: N_(\"Todo el equipo te sigue. Piel de gallina en el estadio.\"), fx: {fans: 3, mor: 4, fol: 20}}}, {t: N_(\"Esperar en silencio\"), ok: {txt: N_(\"Vuelve el sonido y se r"
  },
  "Todo el equipo te sigue. Piel de gallina en el estadio.": {
   "w": [
-   "gx-events.js:199"
+   "gx-events.js:203"
   ],
   "ctx": "opts: [{t: N_(\"Seguir cantándolo a capela\"), ok: {txt: N_(\"Todo el equipo te sigue. Piel de gallina en el estadio.\"), fx: {fans: 3, mor: 4, fol: 20}}}, {t: N_(\"Esperar en silencio\"), ok: {txt: N_(\"Vuelve el sonido y se r"
  },
  "Esperar en silencio": {
   "w": [
-   "gx-events.js:199"
+   "gx-events.js:203"
   ],
   "ctx": "opts: [{t: N_(\"Seguir cantándolo a capela\"), ok: {txt: N_(\"Todo el equipo te sigue. Piel de gallina en el estadio.\"), fx: {fans: 3, mor: 4, fol: 20}}}, {t: N_(\"Esperar en silencio\"), ok: {txt: N_(\"Vuelve el sonido y se r"
  },
  "Vuelve el sonido y se reanuda. Anécdota.": {
   "w": [
-   "gx-events.js:199"
+   "gx-events.js:203"
   ],
   "ctx": "opts: [{t: N_(\"Seguir cantándolo a capela\"), ok: {txt: N_(\"Todo el equipo te sigue. Piel de gallina en el estadio.\"), fx: {fans: 3, mor: 4, fol: 20}}}, {t: N_(\"Esperar en silencio\"), ok: {txt: N_(\"Vuelve el sonido y se r"
  },
  "Vida": {
   "w": [
-   "gx-events.js:201",
-   "gx-events.js:203",
    "gx-events.js:205",
-   "gx-events.js:208"
+   "gx-events.js:207",
+   "gx-events.js:209",
+   "gx-events.js:212"
   ],
   "ctx": "{id: \"coche_nuevo\", cat: N_(\"Vida\"), sc: \"street\", tipo: \"aleatoria\", when: {money: 200000}, title: N_(\"El coche de tus sueños\"), text: [N_(\"Pasas por delante de un concesionario y ahí está: el deportivo que tenías en un"
  },
  "El coche de tus sueños": {
   "w": [
-   "gx-events.js:201",
+   "gx-events.js:205",
    "evento:deportivo"
   ],
   "ctx": "{id: \"coche_nuevo\", cat: N_(\"Vida\"), sc: \"street\", tipo: \"aleatoria\", when: {money: 200000}, title: N_(\"El coche de tus sueños\"), text: [N_(\"Pasas por delante de un concesionario y ahí está: el deportivo que tenías en un"
  },
  "Pasas por delante de un concesionario y ahí está: el deportivo que tenías en un póster de niño.": {
   "w": [
-   "gx-events.js:201"
+   "gx-events.js:205"
   ],
   "ctx": "{id: \"coche_nuevo\", cat: N_(\"Vida\"), sc: \"street\", tipo: \"aleatoria\", when: {money: 200000}, title: N_(\"El coche de tus sueños\"), text: [N_(\"Pasas por delante de un concesionario y ahí está: el deportivo que tenías en un"
  },
  "Comprarlo": {
   "w": [
-   "gx-events.js:202",
+   "gx-events.js:206",
    "events.js:791"
   ],
   "ctx": "opts: [{t: N_(\"Comprarlo\"), ok: {txt: N_(\"Lo aparcas en la ciudad deportiva. Envidia general.\"), fx: {money: -150000, mor: 5}}}, {t: N_(\"Seguir andando\"), ok: {txt: N_(\"Tu yo de doce años no te lo perdona.\"), fx: {}}}]},"
  },
  "Lo aparcas en la ciudad deportiva. Envidia general.": {
   "w": [
-   "gx-events.js:202"
+   "gx-events.js:206"
   ],
   "ctx": "opts: [{t: N_(\"Comprarlo\"), ok: {txt: N_(\"Lo aparcas en la ciudad deportiva. Envidia general.\"), fx: {money: -150000, mor: 5}}}, {t: N_(\"Seguir andando\"), ok: {txt: N_(\"Tu yo de doce años no te lo perdona.\"), fx: {}}}]},"
  },
  "Seguir andando": {
   "w": [
-   "gx-events.js:202"
+   "gx-events.js:206"
   ],
   "ctx": "opts: [{t: N_(\"Comprarlo\"), ok: {txt: N_(\"Lo aparcas en la ciudad deportiva. Envidia general.\"), fx: {money: -150000, mor: 5}}}, {t: N_(\"Seguir andando\"), ok: {txt: N_(\"Tu yo de doce años no te lo perdona.\"), fx: {}}}]},"
  },
  "Tu yo de doce años no te lo perdona.": {
   "w": [
-   "gx-events.js:202"
+   "gx-events.js:206"
   ],
   "ctx": "opts: [{t: N_(\"Comprarlo\"), ok: {txt: N_(\"Lo aparcas en la ciudad deportiva. Envidia general.\"), fx: {money: -150000, mor: 5}}}, {t: N_(\"Seguir andando\"), ok: {txt: N_(\"Tu yo de doce años no te lo perdona.\"), fx: {}}}]},"
  },
  "Visita de la familia": {
   "w": [
-   "gx-events.js:203"
+   "gx-events.js:207"
   ],
   "ctx": "{id: \"familia_visita\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Visita de la familia\"), text: [N_(\"Tus padres vienen a pasar una semana contigo.\"), N_(\"Tu abuela se presenta por sorpresa con comida para"
  },
  "Tus padres vienen a pasar una semana contigo.": {
   "w": [
-   "gx-events.js:203"
+   "gx-events.js:207"
   ],
   "ctx": "{id: \"familia_visita\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Visita de la familia\"), text: [N_(\"Tus padres vienen a pasar una semana contigo.\"), N_(\"Tu abuela se presenta por sorpresa con comida para"
  },
  "Tu abuela se presenta por sorpresa con comida para un mes.": {
   "w": [
-   "gx-events.js:203"
+   "gx-events.js:207"
   ],
   "ctx": "{id: \"familia_visita\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Visita de la familia\"), text: [N_(\"Tus padres vienen a pasar una semana contigo.\"), N_(\"Tu abuela se presenta por sorpresa con comida para"
  },
  "Dedicarles todo el tiempo libre": {
   "w": [
-   "gx-events.js:204"
+   "gx-events.js:208"
   ],
   "ctx": "opts: [{t: N_(\"Dedicarles todo el tiempo libre\"), ok: {txt: N_(\"Recargas pilas como hacía tiempo.\"), fx: {mor: 6, fit: -1}}}, {t: N_(\"Seguir tu rutina\"), ok: {txt: N_(\"Disciplina ante todo.\"), fx: {prof: 2, mor: 1}}}]},"
  },
  "Recargas pilas como hacía tiempo.": {
   "w": [
-   "gx-events.js:204"
+   "gx-events.js:208"
   ],
   "ctx": "opts: [{t: N_(\"Dedicarles todo el tiempo libre\"), ok: {txt: N_(\"Recargas pilas como hacía tiempo.\"), fx: {mor: 6, fit: -1}}}, {t: N_(\"Seguir tu rutina\"), ok: {txt: N_(\"Disciplina ante todo.\"), fx: {prof: 2, mor: 1}}}]},"
  },
  "Seguir tu rutina": {
   "w": [
-   "gx-events.js:204"
+   "gx-events.js:208"
   ],
   "ctx": "opts: [{t: N_(\"Dedicarles todo el tiempo libre\"), ok: {txt: N_(\"Recargas pilas como hacía tiempo.\"), fx: {mor: 6, fit: -1}}}, {t: N_(\"Seguir tu rutina\"), ok: {txt: N_(\"Disciplina ante todo.\"), fx: {prof: 2, mor: 1}}}]},"
  },
  "Disciplina ante todo.": {
   "w": [
-   "gx-events.js:204"
+   "gx-events.js:208"
   ],
   "ctx": "opts: [{t: N_(\"Dedicarles todo el tiempo libre\"), ok: {txt: N_(\"Recargas pilas como hacía tiempo.\"), fx: {mor: 6, fit: -1}}}, {t: N_(\"Seguir tu rutina\"), ok: {txt: N_(\"Disciplina ante todo.\"), fx: {prof: 2, mor: 1}}}]},"
  },
  "Fiesta la noche antes": {
   "w": [
-   "gx-events.js:205"
+   "gx-events.js:209"
   ],
   "ctx": "{id: \"fiesta_vispera\", cat: N_(\"Vida\"), sc: \"party\", tipo: \"aleatoria\", title: N_(\"Fiesta la noche antes\"), text: [N_(\"Unos amigos celebran un cumpleaños la víspera del partido. Insisten en que vayas «solo un rato».\"), N"
  },
  "Unos amigos celebran un cumpleaños la víspera del partido. Insisten en que vayas «solo un rato».": {
   "w": [
-   "gx-events.js:205"
+   "gx-events.js:209"
   ],
   "ctx": "{id: \"fiesta_vispera\", cat: N_(\"Vida\"), sc: \"party\", tipo: \"aleatoria\", title: N_(\"Fiesta la noche antes\"), text: [N_(\"Unos amigos celebran un cumpleaños la víspera del partido. Insisten en que vayas «solo un rato».\"), N"
  },
  "Tu primo se casa el sábado por la noche… y el domingo juegas.": {
   "w": [
-   "gx-events.js:205"
+   "gx-events.js:209"
   ],
   "ctx": "{id: \"fiesta_vispera\", cat: N_(\"Vida\"), sc: \"party\", tipo: \"aleatoria\", title: N_(\"Fiesta la noche antes\"), text: [N_(\"Unos amigos celebran un cumpleaños la víspera del partido. Insisten en que vayas «solo un rato».\"), N"
  },
  "Ir un rato": {
   "w": [
-   "gx-events.js:206"
+   "gx-events.js:210"
   ],
   "ctx": "opts: [{t: N_(\"Ir un rato\"), p: 0.55, ok: {txt: N_(\"Vuelves a una hora decente y con buen ánimo.\"), fx: {mor: 4}}, ko: {txt: N_(\"Se te va de las manos. Al día siguiente lo notas.\"), fx: {fit: -8, form: -4, coach: -3}}},"
  },
  "Vuelves a una hora decente y con buen ánimo.": {
   "w": [
-   "gx-events.js:206"
+   "gx-events.js:210"
   ],
   "ctx": "opts: [{t: N_(\"Ir un rato\"), p: 0.55, ok: {txt: N_(\"Vuelves a una hora decente y con buen ánimo.\"), fx: {mor: 4}}, ko: {txt: N_(\"Se te va de las manos. Al día siguiente lo notas.\"), fx: {fit: -8, form: -4, coach: -3}}},"
  },
  "Se te va de las manos. Al día siguiente lo notas.": {
   "w": [
-   "gx-events.js:206"
+   "gx-events.js:210"
   ],
   "ctx": "opts: [{t: N_(\"Ir un rato\"), p: 0.55, ok: {txt: N_(\"Vuelves a una hora decente y con buen ánimo.\"), fx: {mor: 4}}, ko: {txt: N_(\"Se te va de las manos. Al día siguiente lo notas.\"), fx: {fit: -8, form: -4, coach: -3}}},"
  },
  "Quedarte en casa": {
   "w": [
-   "gx-events.js:207",
+   "gx-events.js:211",
    "events.js:707"
   ],
   "ctx": "{t: N_(\"Quedarte en casa\"), ok: {txt: N_(\"Te pierdes la fiesta, pero llegas fresco.\"), fx: {fit: 3}}}]},"
  },
  "Te pierdes la fiesta, pero llegas fresco.": {
   "w": [
-   "gx-events.js:207"
+   "gx-events.js:211"
   ],
   "ctx": "{t: N_(\"Quedarte en casa\"), ok: {txt: N_(\"Te pierdes la fiesta, pero llegas fresco.\"), fx: {fit: 3}}}]},"
  },
  "Padrino de boda": {
   "w": [
-   "gx-events.js:208"
+   "gx-events.js:212"
   ],
   "ctx": "{id: \"boda_amigo\", cat: N_(\"Vida\"), sc: \"party\", tipo: \"aleatoria\", title: N_(\"Padrino de boda\"), text: [N_(\"Tu mejor amigo de la infancia te pide que seas su padrino. La boda cae en semana de partido.\")],"
  },
  "Tu mejor amigo de la infancia te pide que seas su padrino. La boda cae en semana de partido.": {
   "w": [
-   "gx-events.js:208"
+   "gx-events.js:212"
   ],
   "ctx": "{id: \"boda_amigo\", cat: N_(\"Vida\"), sc: \"party\", tipo: \"aleatoria\", title: N_(\"Padrino de boda\"), text: [N_(\"Tu mejor amigo de la infancia te pide que seas su padrino. La boda cae en semana de partido.\")],"
  },
  "Pedir permiso al club para ir": {
   "w": [
-   "gx-events.js:209"
+   "gx-events.js:213"
   ],
   "ctx": "opts: [{t: N_(\"Pedir permiso al club para ir\"), p: {st: \"coach\", b: 0.5, k: 0.012}, ok: {txt: N_(\"Te dejan ir. Discurso épico.\"), fx: {mor: 7}}, ko: {txt: N_(\"El club se niega. Lo ves por videollamada.\"), fx: {mor: -4}}}"
  },
  "Te dejan ir. Discurso épico.": {
   "w": [
-   "gx-events.js:209"
+   "gx-events.js:213"
   ],
   "ctx": "opts: [{t: N_(\"Pedir permiso al club para ir\"), p: {st: \"coach\", b: 0.5, k: 0.012}, ok: {txt: N_(\"Te dejan ir. Discurso épico.\"), fx: {mor: 7}}, ko: {txt: N_(\"El club se niega. Lo ves por videollamada.\"), fx: {mor: -4}}}"
  },
  "El club se niega. Lo ves por videollamada.": {
   "w": [
-   "gx-events.js:209"
+   "gx-events.js:213"
   ],
   "ctx": "opts: [{t: N_(\"Pedir permiso al club para ir\"), p: {st: \"coach\", b: 0.5, k: 0.012}, ok: {txt: N_(\"Te dejan ir. Discurso épico.\"), fx: {mor: 7}}, ko: {txt: N_(\"El club se niega. Lo ves por videollamada.\"), fx: {mor: -4}}}"
  },
  "Disculparte con él": {
   "w": [
-   "gx-events.js:210"
+   "gx-events.js:214"
   ],
   "ctx": "{t: N_(\"Disculparte con él\"), ok: {txt: N_(\"Lo entiende, pero le duele.\"), fx: {mor: -2}}}]},"
  },
  "Lo entiende, pero le duele.": {
   "w": [
-   "gx-events.js:210"
+   "gx-events.js:214"
   ],
   "ctx": "{t: N_(\"Disculparte con él\"), ok: {txt: N_(\"Lo entiende, pero le duele.\"), fx: {mor: -2}}}]},"
  },
  "Volver a estudiar": {
   "w": [
-   "gx-events.js:211",
+   "gx-events.js:215",
    "evento:estudios"
   ],
   "ctx": "{id: \"estudios\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", when: {age: [21, null]}, title: N_(\"Volver a estudiar\"), text: [N_(\"Te planteas matricularte en una carrera a distancia para cuando cuelgues las botas.\")],"
  },
  "Te planteas matricularte en una carrera a distancia para cuando cuelgues las botas.": {
   "w": [
-   "gx-events.js:211"
+   "gx-events.js:215"
   ],
   "ctx": "{id: \"estudios\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", when: {age: [21, null]}, title: N_(\"Volver a estudiar\"), text: [N_(\"Te planteas matricularte en una carrera a distancia para cuando cuelgues las botas.\")],"
  },
  "Matricularte": {
   "w": [
-   "gx-events.js:212",
+   "gx-events.js:216",
    "events.js:896"
   ],
   "ctx": "opts: [{t: N_(\"Matricularte\"), ok: {txt: N_(\"Apuntes entre viajes. Tu madre está orgullosa.\"), fx: {mor: 3, fit: -1}, later: {b: 2, txt: N_(\"Apruebas tus primeros exámenes a distancia.\"), fx: {mor: 3}}}}, {t: N_(\"Más ade"
  },
  "Apuntes entre viajes. Tu madre está orgullosa.": {
   "w": [
-   "gx-events.js:212"
+   "gx-events.js:216"
   ],
   "ctx": "opts: [{t: N_(\"Matricularte\"), ok: {txt: N_(\"Apuntes entre viajes. Tu madre está orgullosa.\"), fx: {mor: 3, fit: -1}, later: {b: 2, txt: N_(\"Apruebas tus primeros exámenes a distancia.\"), fx: {mor: 3}}}}, {t: N_(\"Más ade"
  },
  "Apruebas tus primeros exámenes a distancia.": {
   "w": [
-   "gx-events.js:212"
+   "gx-events.js:216"
   ],
   "ctx": "opts: [{t: N_(\"Matricularte\"), ok: {txt: N_(\"Apuntes entre viajes. Tu madre está orgullosa.\"), fx: {mor: 3, fit: -1}, later: {b: 2, txt: N_(\"Apruebas tus primeros exámenes a distancia.\"), fx: {mor: 3}}}}, {t: N_(\"Más ade"
  },
  "Más adelante": {
   "w": [
-   "gx-events.js:212"
+   "gx-events.js:216"
   ],
   "ctx": "opts: [{t: N_(\"Matricularte\"), ok: {txt: N_(\"Apuntes entre viajes. Tu madre está orgullosa.\"), fx: {mor: 3, fit: -1}, later: {b: 2, txt: N_(\"Apruebas tus primeros exámenes a distancia.\"), fx: {mor: 3}}}}, {t: N_(\"Más ade"
  },
  "Ahora toca fútbol.": {
   "w": [
-   "gx-events.js:212"
+   "gx-events.js:216"
   ],
   "ctx": "opts: [{t: N_(\"Matricularte\"), ok: {txt: N_(\"Apuntes entre viajes. Tu madre está orgullosa.\"), fx: {mor: 3, fit: -1}, later: {b: 2, txt: N_(\"Apruebas tus primeros exámenes a distancia.\"), fx: {mor: 3}}}}, {t: N_(\"Más ade"
  },
  "Fundación propia": {
   "w": [
-   "gx-events.js:213"
+   "gx-events.js:217"
   ],
   "ctx": "{id: \"ong\", cat: N_(\"Vida\"), sc: \"street\", tipo: \"aleatoria\", when: {money: 100000}, title: N_(\"Fundación propia\"), text: [N_(\"Una ONG de tu barrio te propone ser su imagen y donar parte de tus primas.\")],"
  },
  "Una ONG de tu barrio te propone ser su imagen y donar parte de tus primas.": {
   "w": [
-   "gx-events.js:213"
+   "gx-events.js:217"
   ],
   "ctx": "{id: \"ong\", cat: N_(\"Vida\"), sc: \"street\", tipo: \"aleatoria\", when: {money: 100000}, title: N_(\"Fundación propia\"), text: [N_(\"Una ONG de tu barrio te propone ser su imagen y donar parte de tus primas.\")],"
  },
  "Tu barrio te lo agradece con un mural.": {
   "w": [
-   "gx-events.js:214"
+   "gx-events.js:218"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Tu barrio te lo agradece con un mural.\"), fx: {money: -40000, fans: 5, mor: 5}}}, {t: N_(\"Colaborar sin poner tu imagen\"), ok: {txt: N_(\"Ayudas en silencio.\"), fx: {money: -20000, "
  },
  "Colaborar sin poner tu imagen": {
   "w": [
-   "gx-events.js:214"
+   "gx-events.js:218"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Tu barrio te lo agradece con un mural.\"), fx: {money: -40000, fans: 5, mor: 5}}}, {t: N_(\"Colaborar sin poner tu imagen\"), ok: {txt: N_(\"Ayudas en silencio.\"), fx: {money: -20000, "
  },
  "Ayudas en silencio.": {
   "w": [
-   "gx-events.js:214"
+   "gx-events.js:218"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"Tu barrio te lo agradece con un mural.\"), fx: {money: -40000, fans: 5, mor: 5}}}, {t: N_(\"Colaborar sin poner tu imagen\"), ok: {txt: N_(\"Ayudas en silencio.\"), fx: {money: -20000, "
  },
  "Vecinos ruidosos": {
   "w": [
-   "gx-events.js:215"
+   "gx-events.js:219"
   ],
   "ctx": "{id: \"mudanza\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Vecinos ruidosos\"), text: [N_(\"Tus vecinos montan fiestas cada noche y no hay manera de dormir.\")],"
  },
  "Tus vecinos montan fiestas cada noche y no hay manera de dormir.": {
   "w": [
-   "gx-events.js:215"
+   "gx-events.js:219"
   ],
   "ctx": "{id: \"mudanza\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Vecinos ruidosos\"), text: [N_(\"Tus vecinos montan fiestas cada noche y no hay manera de dormir.\")],"
  },
  "Mudarte": {
   "w": [
-   "gx-events.js:216"
+   "gx-events.js:220"
   ],
   "ctx": "opts: [{t: N_(\"Mudarte\"), ok: {txt: N_(\"Casa nueva, silencio nuevo.\"), fx: {money: -25000, fit: 3}}}, {t: N_(\"Invitarles a un partido\"), p: 0.6, ok: {txt: N_(\"Se hacen socios del club y bajan la música.\"), fx: {mor: 2}},"
  },
  "Casa nueva, silencio nuevo.": {
   "w": [
-   "gx-events.js:216"
+   "gx-events.js:220"
   ],
   "ctx": "opts: [{t: N_(\"Mudarte\"), ok: {txt: N_(\"Casa nueva, silencio nuevo.\"), fx: {money: -25000, fit: 3}}}, {t: N_(\"Invitarles a un partido\"), p: 0.6, ok: {txt: N_(\"Se hacen socios del club y bajan la música.\"), fx: {mor: 2}},"
  },
  "Invitarles a un partido": {
   "w": [
-   "gx-events.js:216"
+   "gx-events.js:220"
   ],
   "ctx": "opts: [{t: N_(\"Mudarte\"), ok: {txt: N_(\"Casa nueva, silencio nuevo.\"), fx: {money: -25000, fit: 3}}}, {t: N_(\"Invitarles a un partido\"), p: 0.6, ok: {txt: N_(\"Se hacen socios del club y bajan la música.\"), fx: {mor: 2}},"
  },
  "Se hacen socios del club y bajan la música.": {
   "w": [
-   "gx-events.js:216"
+   "gx-events.js:220"
   ],
   "ctx": "opts: [{t: N_(\"Mudarte\"), ok: {txt: N_(\"Casa nueva, silencio nuevo.\"), fx: {money: -25000, fit: 3}}}, {t: N_(\"Invitarles a un partido\"), p: 0.6, ok: {txt: N_(\"Se hacen socios del club y bajan la música.\"), fx: {mor: 2}},"
  },
  "Van al partido… y siguen de fiesta después.": {
   "w": [
-   "gx-events.js:216"
+   "gx-events.js:220"
   ],
   "ctx": "opts: [{t: N_(\"Mudarte\"), ok: {txt: N_(\"Casa nueva, silencio nuevo.\"), fx: {money: -25000, fit: 3}}}, {t: N_(\"Invitarles a un partido\"), p: 0.6, ok: {txt: N_(\"Se hacen socios del club y bajan la música.\"), fx: {mor: 2}},"
  },
  "Tu media en el videojuego": {
   "w": [
-   "gx-events.js:217"
+   "gx-events.js:221"
   ],
   "ctx": "{id: \"videojuego_media\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Tu media en el videojuego\"), text: [N_(\"Sale el nuevo videojuego de fútbol y tu valoración es más baja de lo que crees merecer.\")],"
  },
  "Sale el nuevo videojuego de fútbol y tu valoración es más baja de lo que crees merecer.": {
   "w": [
-   "gx-events.js:217"
+   "gx-events.js:221"
   ],
   "ctx": "{id: \"videojuego_media\", cat: N_(\"Vida\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"Tu media en el videojuego\"), text: [N_(\"Sale el nuevo videojuego de fútbol y tu valoración es más baja de lo que crees merecer.\")],"
  },
  "Quejarte en redes": {
   "w": [
-   "gx-events.js:218"
+   "gx-events.js:222"
   ],
   "ctx": "opts: [{t: N_(\"Quejarte en redes\"), p: 0.5, ok: {txt: N_(\"Te suben un punto en la siguiente actualización. Victoria.\"), fx: {fol: 25}}, ko: {txt: N_(\"Los aficionados te sacan tus estadísticas. Silencio.\"), fx: {fol: 10, "
  },
  "Te suben un punto en la siguiente actualización. Victoria.": {
   "w": [
-   "gx-events.js:218"
+   "gx-events.js:222"
   ],
   "ctx": "opts: [{t: N_(\"Quejarte en redes\"), p: 0.5, ok: {txt: N_(\"Te suben un punto en la siguiente actualización. Victoria.\"), fx: {fol: 25}}, ko: {txt: N_(\"Los aficionados te sacan tus estadísticas. Silencio.\"), fx: {fol: 10, "
  },
  "Los aficionados te sacan tus estadísticas. Silencio.": {
   "w": [
-   "gx-events.js:218"
+   "gx-events.js:222"
   ],
   "ctx": "opts: [{t: N_(\"Quejarte en redes\"), p: 0.5, ok: {txt: N_(\"Te suben un punto en la siguiente actualización. Victoria.\"), fx: {fol: 25}}, ko: {txt: N_(\"Los aficionados te sacan tus estadísticas. Silencio.\"), fx: {fol: 10, "
  },
  "Usarlo como motivación": {
   "w": [
-   "gx-events.js:219"
+   "gx-events.js:223"
   ],
   "ctx": "{t: N_(\"Usarlo como motivación\"), ok: {txt: N_(\"Haces captura y la guardas en el móvil.\"), fx: {buff: {v: 0.8, b: 1, n: N_(\"Motivado\")}}}}]},"
  },
  "Haces captura y la guardas en el móvil.": {
   "w": [
-   "gx-events.js:219"
+   "gx-events.js:223"
   ],
   "ctx": "{t: N_(\"Usarlo como motivación\"), ok: {txt: N_(\"Haces captura y la guardas en el móvil.\"), fx: {buff: {v: 0.8, b: 1, n: N_(\"Motivado\")}}}}]},"
  },
  "Motivado": {
   "w": [
-   "gx-events.js:219"
+   "gx-events.js:223"
   ],
   "ctx": "{t: N_(\"Usarlo como motivación\"), ok: {txt: N_(\"Haces captura y la guardas en el móvil.\"), fx: {buff: {v: 0.8, b: 1, n: N_(\"Motivado\")}}}}]},"
  },
  "El amuleto": {
   "w": [
-   "gx-events.js:220"
+   "gx-events.js:224"
   ],
   "ctx": "{id: \"moneda_suerte\", cat: N_(\"Vida\"), sc: \"street\", tipo: \"aleatoria\", title: N_(\"El amuleto\"), text: [N_(\"Encuentras una moneda antigua en el aparcamiento el día que marcas. ¿Será casualidad?\")],"
  },
  "Encuentras una moneda antigua en el aparcamiento el día que marcas. ¿Será casualidad?": {
   "w": [
-   "gx-events.js:220"
+   "gx-events.js:224"
   ],
   "ctx": "{id: \"moneda_suerte\", cat: N_(\"Vida\"), sc: \"street\", tipo: \"aleatoria\", title: N_(\"El amuleto\"), text: [N_(\"Encuentras una moneda antigua en el aparcamiento el día que marcas. ¿Será casualidad?\")],"
  },
  "Llevarla en la bota cada partido": {
   "w": [
-   "gx-events.js:221"
+   "gx-events.js:225"
   ],
   "ctx": "opts: [{t: N_(\"Llevarla en la bota cada partido\"), ok: {txt: N_(\"Superstición asumida. El utillero ya lo sabe.\"), fx: {mor: 3}}}, {t: N_(\"Guardarla en un cajón\"), ok: {txt: N_(\"No crees en esas cosas… o eso dices.\"), fx:"
  },
  "Superstición asumida. El utillero ya lo sabe.": {
   "w": [
-   "gx-events.js:221"
+   "gx-events.js:225"
   ],
   "ctx": "opts: [{t: N_(\"Llevarla en la bota cada partido\"), ok: {txt: N_(\"Superstición asumida. El utillero ya lo sabe.\"), fx: {mor: 3}}}, {t: N_(\"Guardarla en un cajón\"), ok: {txt: N_(\"No crees en esas cosas… o eso dices.\"), fx:"
  },
  "Guardarla en un cajón": {
   "w": [
-   "gx-events.js:221"
+   "gx-events.js:225"
   ],
   "ctx": "opts: [{t: N_(\"Llevarla en la bota cada partido\"), ok: {txt: N_(\"Superstición asumida. El utillero ya lo sabe.\"), fx: {mor: 3}}}, {t: N_(\"Guardarla en un cajón\"), ok: {txt: N_(\"No crees en esas cosas… o eso dices.\"), fx:"
  },
  "No crees en esas cosas… o eso dices.": {
   "w": [
-   "gx-events.js:221"
+   "gx-events.js:225"
   ],
   "ctx": "opts: [{t: N_(\"Llevarla en la bota cada partido\"), ok: {txt: N_(\"Superstición asumida. El utillero ya lo sabe.\"), fx: {mor: 3}}}, {t: N_(\"Guardarla en un cajón\"), ok: {txt: N_(\"No crees en esas cosas… o eso dices.\"), fx:"
  },
  "¿Mascota oficial?": {
   "w": [
-   "gx-events.js:223"
+   "gx-events.js:227"
   ],
   "ctx": "{id: \"mascota_club\", cat: N_(\"Mascota\"), sc: \"stadium\", once: true, when: {pet: 1, fame: [30, null]}, title: N_(\"¿Mascota oficial?\"), text: [N_(\"El departamento de marketing ha visto a {pet} en tus redes y quiere que sea"
  },
  "El departamento de marketing ha visto a {pet} en tus redes y quiere que sea la mascota oficial del club una temporada.": {
   "w": [
-   "gx-events.js:223"
+   "gx-events.js:227"
   ],
   "ctx": "{id: \"mascota_club\", cat: N_(\"Mascota\"), sc: \"stadium\", once: true, when: {pet: 1, fame: [30, null]}, title: N_(\"¿Mascota oficial?\"), text: [N_(\"El departamento de marketing ha visto a {pet} en tus redes y quiere que sea"
  },
  "{pet} sale al césped antes de cada partido. Los niños enloquecen.": {
   "w": [
-   "gx-events.js:224"
+   "gx-events.js:228"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"{pet} sale al césped antes de cada partido. Los niños enloquecen.\"), fx: {fans: 6, fol: 40}, gx: \"petMascot\"}}, {t: N_(\"Preferir que siga en casa\"), ok: {txt: N_(\"Lo tuyo con {pet}"
  },
  "Preferir que siga en casa": {
   "w": [
-   "gx-events.js:224"
+   "gx-events.js:228"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"{pet} sale al césped antes de cada partido. Los niños enloquecen.\"), fx: {fans: 6, fol: 40}, gx: \"petMascot\"}}, {t: N_(\"Preferir que siga en casa\"), ok: {txt: N_(\"Lo tuyo con {pet}"
  },
  "Lo tuyo con {pet} es privado.": {
   "w": [
-   "gx-events.js:224"
+   "gx-events.js:228"
   ],
   "ctx": "opts: [{t: N_(\"Aceptar\"), ok: {txt: N_(\"{pet} sale al césped antes de cada partido. Los niños enloquecen.\"), fx: {fans: 6, fol: 40}, gx: \"petMascot\"}}, {t: N_(\"Preferir que siga en casa\"), ok: {txt: N_(\"Lo tuyo con {pet}"
  },
  "Un anuncio con {pet}": {
   "w": [
-   "gx-events.js:225"
+   "gx-events.js:229"
   ],
   "ctx": "{id: \"mascota_anuncio\", cat: N_(\"Mascota\"), sc: \"office\", when: {pet: 1}, title: N_(\"Un anuncio con {pet}\"), text: [N_(\"Una marca de comida para mascotas quiere rodar un anuncio contigo y con {pet}.\")],"
  },
  "Una marca de comida para mascotas quiere rodar un anuncio contigo y con {pet}.": {
   "w": [
-   "gx-events.js:225"
+   "gx-events.js:229"
   ],
   "ctx": "{id: \"mascota_anuncio\", cat: N_(\"Mascota\"), sc: \"office\", when: {pet: 1}, title: N_(\"Un anuncio con {pet}\"), text: [N_(\"Una marca de comida para mascotas quiere rodar un anuncio contigo y con {pet}.\")],"
  },
  "Rodarlo": {
   "w": [
-   "gx-events.js:226"
+   "gx-events.js:230"
   ],
   "ctx": "opts: [{t: N_(\"Rodarlo\"), p: 0.75, ok: {txt: N_(\"{pet} es una estrella natural. El anuncio triunfa.\"), fx: {money: 30000, fol: 50}, gx: \"petAd\"}, ko: {txt: N_(\"{pet} se come el decorado. El anuncio sale igual… y es aún m"
  },
  "{pet} es una estrella natural. El anuncio triunfa.": {
   "w": [
-   "gx-events.js:226"
+   "gx-events.js:230"
   ],
   "ctx": "opts: [{t: N_(\"Rodarlo\"), p: 0.75, ok: {txt: N_(\"{pet} es una estrella natural. El anuncio triunfa.\"), fx: {money: 30000, fol: 50}, gx: \"petAd\"}, ko: {txt: N_(\"{pet} se come el decorado. El anuncio sale igual… y es aún m"
  },
  "{pet} se come el decorado. El anuncio sale igual… y es aún más gracioso.": {
   "w": [
-   "gx-events.js:226"
+   "gx-events.js:230"
   ],
   "ctx": "opts: [{t: N_(\"Rodarlo\"), p: 0.75, ok: {txt: N_(\"{pet} es una estrella natural. El anuncio triunfa.\"), fx: {money: 30000, fol: 50}, gx: \"petAd\"}, ko: {txt: N_(\"{pet} se come el decorado. El anuncio sale igual… y es aún m"
  },
  "No exponer a {pet}": {
   "w": [
-   "gx-events.js:227"
+   "gx-events.js:231"
   ],
   "ctx": "{t: N_(\"No exponer a {pet}\"), ok: {txt: N_(\"Lo rechazas con cariño.\"), fx: {}}}]},"
  },
  "Lo rechazas con cariño.": {
   "w": [
-   "gx-events.js:227"
+   "gx-events.js:231"
   ],
   "ctx": "{t: N_(\"No exponer a {pet}\"), ok: {txt: N_(\"Lo rechazas con cariño.\"), fx: {}}}]},"
  },
  "¡{pet} se ha escapado!": {
   "w": [
-   "gx-events.js:228"
+   "gx-events.js:232"
   ],
   "ctx": "{id: \"mascota_perdida\", cat: N_(\"Mascota\"), sc: \"street\", tipo: \"aleatoria\", when: {pet: 1}, title: N_(\"¡{pet} se ha escapado!\"), text: [N_(\"Al volver del entrenamiento, la puerta está abierta y {pet} no aparece.\")],"
  },
  "Al volver del entrenamiento, la puerta está abierta y {pet} no aparece.": {
   "w": [
-   "gx-events.js:228"
+   "gx-events.js:232"
   ],
   "ctx": "{id: \"mascota_perdida\", cat: N_(\"Mascota\"), sc: \"street\", tipo: \"aleatoria\", when: {pet: 1}, title: N_(\"¡{pet} se ha escapado!\"), text: [N_(\"Al volver del entrenamiento, la puerta está abierta y {pet} no aparece.\")],"
  },
  "Salir a buscarle tú mismo": {
   "w": [
-   "gx-events.js:229"
+   "gx-events.js:233"
   ],
   "ctx": "opts: [{t: N_(\"Salir a buscarle tú mismo\"), ok: {txt: N_(\"Le encuentras dos calles más allá, jugando con unos niños.\"), fx: {mor: 2, fit: -2}}}, {t: N_(\"Pedir ayuda en redes\"), ok: {txt: N_(\"En una hora te mandan foto de"
  },
  "Le encuentras dos calles más allá, jugando con unos niños.": {
   "w": [
-   "gx-events.js:229"
+   "gx-events.js:233"
   ],
   "ctx": "opts: [{t: N_(\"Salir a buscarle tú mismo\"), ok: {txt: N_(\"Le encuentras dos calles más allá, jugando con unos niños.\"), fx: {mor: 2, fit: -2}}}, {t: N_(\"Pedir ayuda en redes\"), ok: {txt: N_(\"En una hora te mandan foto de"
  },
  "Pedir ayuda en redes": {
   "w": [
-   "gx-events.js:229"
+   "gx-events.js:233"
   ],
   "ctx": "opts: [{t: N_(\"Salir a buscarle tú mismo\"), ok: {txt: N_(\"Le encuentras dos calles más allá, jugando con unos niños.\"), fx: {mor: 2, fit: -2}}}, {t: N_(\"Pedir ayuda en redes\"), ok: {txt: N_(\"En una hora te mandan foto de"
  },
  "En una hora te mandan foto de dónde está. Tus seguidores son los mejores.": {
   "w": [
-   "gx-events.js:229"
+   "gx-events.js:233"
   ],
   "ctx": "opts: [{t: N_(\"Salir a buscarle tú mismo\"), ok: {txt: N_(\"Le encuentras dos calles más allá, jugando con unos niños.\"), fx: {mor: 2, fit: -2}}}, {t: N_(\"Pedir ayuda en redes\"), ok: {txt: N_(\"En una hora te mandan foto de"
  },
  "Invasión de campo": {
   "w": [
-   "gx-events.js:230"
+   "gx-events.js:234"
   ],
   "ctx": "{id: \"mascota_entreno\", cat: N_(\"Mascota\"), sc: \"training\", tipo: \"aleatoria\", when: {pet: 1}, title: N_(\"Invasión de campo\"), text: [N_(\"{pet} se cuela en la ciudad deportiva y se pone a perseguir el balón en pleno rond"
  },
  "{pet} se cuela en la ciudad deportiva y se pone a perseguir el balón en pleno rondo.": {
   "w": [
-   "gx-events.js:230"
+   "gx-events.js:234"
   ],
   "ctx": "{id: \"mascota_entreno\", cat: N_(\"Mascota\"), sc: \"training\", tipo: \"aleatoria\", when: {pet: 1}, title: N_(\"Invasión de campo\"), text: [N_(\"{pet} se cuela en la ciudad deportiva y se pone a perseguir el balón en pleno rond"
  },
  "Dejar que juegue un rato": {
   "w": [
-   "gx-events.js:231"
+   "gx-events.js:235"
   ],
   "ctx": "opts: [{t: N_(\"Dejar que juegue un rato\"), ok: {txt: N_(\"El vídeo del rondo con {pet} lo comparte hasta el club.\"), fx: {fol: 35, mor: 3}}}, {t: N_(\"Llevarle a casa\"), ok: {txt: N_(\"El míster agradece que no se pierda la"
  },
  "El vídeo del rondo con {pet} lo comparte hasta el club.": {
   "w": [
-   "gx-events.js:231"
+   "gx-events.js:235"
   ],
   "ctx": "opts: [{t: N_(\"Dejar que juegue un rato\"), ok: {txt: N_(\"El vídeo del rondo con {pet} lo comparte hasta el club.\"), fx: {fol: 35, mor: 3}}}, {t: N_(\"Llevarle a casa\"), ok: {txt: N_(\"El míster agradece que no se pierda la"
  },
  "Llevarle a casa": {
   "w": [
-   "gx-events.js:231"
+   "gx-events.js:235"
   ],
   "ctx": "opts: [{t: N_(\"Dejar que juegue un rato\"), ok: {txt: N_(\"El vídeo del rondo con {pet} lo comparte hasta el club.\"), fx: {fol: 35, mor: 3}}}, {t: N_(\"Llevarle a casa\"), ok: {txt: N_(\"El míster agradece que no se pierda la"
  },
  "El míster agradece que no se pierda la sesión.": {
   "w": [
-   "gx-events.js:231"
+   "gx-events.js:235"
   ],
   "ctx": "opts: [{t: N_(\"Dejar que juegue un rato\"), ok: {txt: N_(\"El vídeo del rondo con {pet} lo comparte hasta el club.\"), fx: {fol: 35, mor: 3}}}, {t: N_(\"Llevarle a casa\"), ok: {txt: N_(\"El míster agradece que no se pierda la"
  },
  "Imprevisto": {
   "w": [
-   "gx-events.js:233",
-   "gx-events.js:236",
-   "gx-events.js:239",
-   "gx-events.js:241"
+   "gx-events.js:237",
+   "gx-events.js:240",
+   "gx-events.js:243",
+   "gx-events.js:245"
   ],
   "ctx": "{id: \"atasco\", cat: N_(\"Imprevisto\"), sc: \"street\", tipo: \"aleatoria\", title: N_(\"Atasco antes del partido\"), text: [N_(\"Un accidente en la autopista y vas a llegar tarde a la concentración.\")],"
  },
  "Atasco antes del partido": {
   "w": [
-   "gx-events.js:233"
+   "gx-events.js:237"
   ],
   "ctx": "{id: \"atasco\", cat: N_(\"Imprevisto\"), sc: \"street\", tipo: \"aleatoria\", title: N_(\"Atasco antes del partido\"), text: [N_(\"Un accidente en la autopista y vas a llegar tarde a la concentración.\")],"
  },
  "Un accidente en la autopista y vas a llegar tarde a la concentración.": {
   "w": [
-   "gx-events.js:233"
+   "gx-events.js:237"
   ],
   "ctx": "{id: \"atasco\", cat: N_(\"Imprevisto\"), sc: \"street\", tipo: \"aleatoria\", title: N_(\"Atasco antes del partido\"), text: [N_(\"Un accidente en la autopista y vas a llegar tarde a la concentración.\")],"
  },
  "Ir en moto con un aficionado": {
   "w": [
-   "gx-events.js:234"
+   "gx-events.js:238"
   ],
   "ctx": "opts: [{t: N_(\"Ir en moto con un aficionado\"), p: 0.7, ok: {txt: N_(\"Llegas a tiempo. El aficionado tiene historia para toda la vida.\"), fx: {fans: 2, fol: 15}}, ko: {txt: N_(\"Pinchazo a mitad de camino. Llegas tardísimo"
  },
  "Llegas a tiempo. El aficionado tiene historia para toda la vida.": {
   "w": [
-   "gx-events.js:234"
+   "gx-events.js:238"
   ],
   "ctx": "opts: [{t: N_(\"Ir en moto con un aficionado\"), p: 0.7, ok: {txt: N_(\"Llegas a tiempo. El aficionado tiene historia para toda la vida.\"), fx: {fans: 2, fol: 15}}, ko: {txt: N_(\"Pinchazo a mitad de camino. Llegas tardísimo"
  },
  "Pinchazo a mitad de camino. Llegas tardísimo.": {
   "w": [
-   "gx-events.js:234"
+   "gx-events.js:238"
   ],
   "ctx": "opts: [{t: N_(\"Ir en moto con un aficionado\"), p: 0.7, ok: {txt: N_(\"Llegas a tiempo. El aficionado tiene historia para toda la vida.\"), fx: {fans: 2, fol: 15}}, ko: {txt: N_(\"Pinchazo a mitad de camino. Llegas tardísimo"
  },
  "Llamar al delegado y esperar": {
   "w": [
-   "gx-events.js:235"
+   "gx-events.js:239"
   ],
   "ctx": "{t: N_(\"Llamar al delegado y esperar\"), ok: {txt: N_(\"Llegas tarde, pero avisaste. Sin drama.\"), fx: {coach: -1}}}]},"
  },
  "Llegas tarde, pero avisaste. Sin drama.": {
   "w": [
-   "gx-events.js:235"
+   "gx-events.js:239"
   ],
   "ctx": "{t: N_(\"Llamar al delegado y esperar\"), ok: {txt: N_(\"Llegas tarde, pero avisaste. Sin drama.\"), fx: {coach: -1}}}]},"
  },
  "Sin botas": {
   "w": [
-   "gx-events.js:236"
+   "gx-events.js:240"
   ],
   "ctx": "{id: \"botas_olvidadas\", cat: N_(\"Imprevisto\"), sc: \"locker\", tipo: \"aleatoria\", title: N_(\"Sin botas\"), text: [N_(\"Abres la bolsa en el vestuario visitante: te has dejado las botas en casa.\")],"
  },
  "Abres la bolsa en el vestuario visitante: te has dejado las botas en casa.": {
   "w": [
-   "gx-events.js:236"
+   "gx-events.js:240"
   ],
   "ctx": "{id: \"botas_olvidadas\", cat: N_(\"Imprevisto\"), sc: \"locker\", tipo: \"aleatoria\", title: N_(\"Sin botas\"), text: [N_(\"Abres la bolsa en el vestuario visitante: te has dejado las botas en casa.\")],"
  },
  "Jugar con unas prestadas": {
   "w": [
-   "gx-events.js:237"
+   "gx-events.js:241"
   ],
   "ctx": "opts: [{t: N_(\"Jugar con unas prestadas\"), p: {att: \"REG\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Te quedan perfectas. Igual son mejores que las tuyas.\"), fx: {form: 2}}, ko: {txt: N_(\"Dos números más grandes. Partido para olvi"
  },
  "Te quedan perfectas. Igual son mejores que las tuyas.": {
   "w": [
-   "gx-events.js:237"
+   "gx-events.js:241"
   ],
   "ctx": "opts: [{t: N_(\"Jugar con unas prestadas\"), p: {att: \"REG\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Te quedan perfectas. Igual son mejores que las tuyas.\"), fx: {form: 2}}, ko: {txt: N_(\"Dos números más grandes. Partido para olvi"
  },
  "Dos números más grandes. Partido para olvidar.": {
   "w": [
-   "gx-events.js:237"
+   "gx-events.js:241"
   ],
   "ctx": "opts: [{t: N_(\"Jugar con unas prestadas\"), p: {att: \"REG\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Te quedan perfectas. Igual son mejores que las tuyas.\"), fx: {form: 2}}, ko: {txt: N_(\"Dos números más grandes. Partido para olvi"
  },
  "Pedir que te las traigan": {
   "w": [
-   "gx-events.js:238"
+   "gx-events.js:242"
   ],
   "ctx": "{t: N_(\"Pedir que te las traigan\"), ok: {txt: N_(\"Llegan justo en el calentamiento. Qué nervios.\"), fx: {mor: -1}}}]},"
  },
  "Llegan justo en el calentamiento. Qué nervios.": {
   "w": [
-   "gx-events.js:238"
+   "gx-events.js:242"
   ],
   "ctx": "{t: N_(\"Pedir que te las traigan\"), ok: {txt: N_(\"Llegan justo en el calentamiento. Qué nervios.\"), fx: {mor: -1}}}]},"
  },
  "Turbulencias": {
   "w": [
-   "gx-events.js:239"
+   "gx-events.js:243"
   ],
   "ctx": "{id: \"vuelo\", cat: N_(\"Imprevisto\"), sc: \"plane\", tipo: \"aleatoria\", title: N_(\"Turbulencias\"), text: [N_(\"El avión del equipo atraviesa una tormenta. Medio vestuario está blanco.\")],"
  },
  "El avión del equipo atraviesa una tormenta. Medio vestuario está blanco.": {
   "w": [
-   "gx-events.js:239"
+   "gx-events.js:243"
   ],
   "ctx": "{id: \"vuelo\", cat: N_(\"Imprevisto\"), sc: \"plane\", tipo: \"aleatoria\", title: N_(\"Turbulencias\"), text: [N_(\"El avión del equipo atraviesa una tormenta. Medio vestuario está blanco.\")],"
  },
  "Hacer bromas para calmar a todos": {
   "w": [
-   "gx-events.js:240"
+   "gx-events.js:244"
   ],
   "ctx": "opts: [{t: N_(\"Hacer bromas para calmar a todos\"), ok: {txt: N_(\"Risas nerviosas y aterrizaje perfecto. Eres el héroe del vuelo.\"), fx: {mor: 3, coach: 1}}}, {t: N_(\"Ponerte los cascos y cerrar los ojos\"), ok: {txt: N_(\""
  },
  "Risas nerviosas y aterrizaje perfecto. Eres el héroe del vuelo.": {
   "w": [
-   "gx-events.js:240"
+   "gx-events.js:244"
   ],
   "ctx": "opts: [{t: N_(\"Hacer bromas para calmar a todos\"), ok: {txt: N_(\"Risas nerviosas y aterrizaje perfecto. Eres el héroe del vuelo.\"), fx: {mor: 3, coach: 1}}}, {t: N_(\"Ponerte los cascos y cerrar los ojos\"), ok: {txt: N_(\""
  },
  "Ponerte los cascos y cerrar los ojos": {
   "w": [
-   "gx-events.js:240"
+   "gx-events.js:244"
   ],
   "ctx": "opts: [{t: N_(\"Hacer bromas para calmar a todos\"), ok: {txt: N_(\"Risas nerviosas y aterrizaje perfecto. Eres el héroe del vuelo.\"), fx: {mor: 3, coach: 1}}}, {t: N_(\"Ponerte los cascos y cerrar los ojos\"), ok: {txt: N_(\""
  },
  "Cada uno lo lleva como puede.": {
   "w": [
-   "gx-events.js:240"
+   "gx-events.js:244"
   ],
   "ctx": "opts: [{t: N_(\"Hacer bromas para calmar a todos\"), ok: {txt: N_(\"Risas nerviosas y aterrizaje perfecto. Eres el héroe del vuelo.\"), fx: {mor: 3, coach: 1}}}, {t: N_(\"Ponerte los cascos y cerrar los ojos\"), ok: {txt: N_(\""
  },
  "El árbitro te sigue": {
   "w": [
-   "gx-events.js:241"
+   "gx-events.js:245"
   ],
   "ctx": "{id: \"arbitro_redes\", cat: N_(\"Imprevisto\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"El árbitro te sigue\"), text: [N_(\"Descubres que el árbitro del próximo partido te sigue en redes y le da «me gusta» a tus fotos.\")],"
  },
  "Descubres que el árbitro del próximo partido te sigue en redes y le da «me gusta» a tus fotos.": {
   "w": [
-   "gx-events.js:241"
+   "gx-events.js:245"
   ],
   "ctx": "{id: \"arbitro_redes\", cat: N_(\"Imprevisto\"), sc: \"home\", tipo: \"aleatoria\", title: N_(\"El árbitro te sigue\"), text: [N_(\"Descubres que el árbitro del próximo partido te sigue en redes y le da «me gusta» a tus fotos.\")],"
  },
  "Hacer como si nada": {
   "w": [
-   "gx-events.js:242"
+   "gx-events.js:246"
   ],
   "ctx": "opts: [{t: N_(\"Hacer como si nada\"), ok: {txt: N_(\"Coincidencia rara. Nada más.\"), fx: {}}}, {t: N_(\"Comentarlo en una entrevista\"), p: 0.4, ok: {txt: N_(\"Risas en la sala de prensa.\"), fx: {fol: 15}}, ko: {txt: N_(\"La f"
  },
  "Coincidencia rara. Nada más.": {
   "w": [
-   "gx-events.js:242"
+   "gx-events.js:246"
   ],
   "ctx": "opts: [{t: N_(\"Hacer como si nada\"), ok: {txt: N_(\"Coincidencia rara. Nada más.\"), fx: {}}}, {t: N_(\"Comentarlo en una entrevista\"), p: 0.4, ok: {txt: N_(\"Risas en la sala de prensa.\"), fx: {fol: 15}}, ko: {txt: N_(\"La f"
  },
  "Comentarlo en una entrevista": {
   "w": [
-   "gx-events.js:242"
+   "gx-events.js:246"
   ],
   "ctx": "opts: [{t: N_(\"Hacer como si nada\"), ok: {txt: N_(\"Coincidencia rara. Nada más.\"), fx: {}}}, {t: N_(\"Comentarlo en una entrevista\"), p: 0.4, ok: {txt: N_(\"Risas en la sala de prensa.\"), fx: {fol: 15}}, ko: {txt: N_(\"La f"
  },
  "Risas en la sala de prensa.": {
   "w": [
-   "gx-events.js:242"
+   "gx-events.js:246"
   ],
   "ctx": "opts: [{t: N_(\"Hacer como si nada\"), ok: {txt: N_(\"Coincidencia rara. Nada más.\"), fx: {}}}, {t: N_(\"Comentarlo en una entrevista\"), p: 0.4, ok: {txt: N_(\"Risas en la sala de prensa.\"), fx: {fol: 15}}, ko: {txt: N_(\"La f"
  },
  "La federación abre una consulta. Qué lío más tonto.": {
   "w": [
-   "gx-events.js:242"
+   "gx-events.js:246"
   ],
   "ctx": "opts: [{t: N_(\"Hacer como si nada\"), ok: {txt: N_(\"Coincidencia rara. Nada más.\"), fx: {}}}, {t: N_(\"Comentarlo en una entrevista\"), p: 0.4, ok: {txt: N_(\"Risas en la sala de prensa.\"), fx: {fol: 15}}, ko: {txt: N_(\"La f"
  },
  "Un silbato en la grada": {
   "w": [
-   "gx-events.js:243"
+   "gx-events.js:247"
   ],
   "ctx": "{id: \"silbato_grada\", cat: N_(\"Imprevisto\"), sc: \"stadium\", tipo: \"aleatoria\", title: N_(\"Un silbato en la grada\"), text: [N_(\"Alguien en la grada imita el silbato del árbitro y te paras en plena contra.\")],"
  },
  "Alguien en la grada imita el silbato del árbitro y te paras en plena contra.": {
   "w": [
-   "gx-events.js:243"
+   "gx-events.js:247"
   ],
   "ctx": "{id: \"silbato_grada\", cat: N_(\"Imprevisto\"), sc: \"stadium\", tipo: \"aleatoria\", title: N_(\"Un silbato en la grada\"), text: [N_(\"Alguien en la grada imita el silbato del árbitro y te paras en plena contra.\")],"
  },
  "Pedir al árbitro que lo comunique": {
   "w": [
-   "gx-events.js:244"
+   "gx-events.js:248"
   ],
   "ctx": "opts: [{t: N_(\"Pedir al árbitro que lo comunique\"), ok: {txt: N_(\"Avisan por megafonía. Se acabaron las bromas.\"), fx: {}}}, {t: N_(\"Reírte y seguir\"), ok: {txt: N_(\"Te lo tomas con humor. La grada te aplaude.\"), fx: {fa"
  },
  "Avisan por megafonía. Se acabaron las bromas.": {
   "w": [
-   "gx-events.js:244"
+   "gx-events.js:248"
   ],
   "ctx": "opts: [{t: N_(\"Pedir al árbitro que lo comunique\"), ok: {txt: N_(\"Avisan por megafonía. Se acabaron las bromas.\"), fx: {}}}, {t: N_(\"Reírte y seguir\"), ok: {txt: N_(\"Te lo tomas con humor. La grada te aplaude.\"), fx: {fa"
  },
  "Reírte y seguir": {
   "w": [
-   "gx-events.js:244"
+   "gx-events.js:248"
   ],
   "ctx": "opts: [{t: N_(\"Pedir al árbitro que lo comunique\"), ok: {txt: N_(\"Avisan por megafonía. Se acabaron las bromas.\"), fx: {}}}, {t: N_(\"Reírte y seguir\"), ok: {txt: N_(\"Te lo tomas con humor. La grada te aplaude.\"), fx: {fa"
  },
  "Te lo tomas con humor. La grada te aplaude.": {
   "w": [
-   "gx-events.js:244"
+   "gx-events.js:248"
   ],
   "ctx": "opts: [{t: N_(\"Pedir al árbitro que lo comunique\"), ok: {txt: N_(\"Avisan por megafonía. Se acabaron las bromas.\"), fx: {}}}, {t: N_(\"Reírte y seguir\"), ok: {txt: N_(\"Te lo tomas con humor. La grada te aplaude.\"), fx: {fa"
  },
  "Ultras en el entrenamiento": {
   "w": [
-   "gx-events.js:245"
+   "gx-events.js:249"
   ],
   "ctx": "{id: \"autobus_ultras\", cat: N_(\"Afición\"), sc: \"street\", when: {lgLow: 4}, title: N_(\"Ultras en el entrenamiento\"), text: [N_(\"Un grupo de ultras se presenta en la ciudad deportiva exigiendo explicaciones por la mala rac"
  },
  "Un grupo de ultras se presenta en la ciudad deportiva exigiendo explicaciones por la mala racha.": {
   "w": [
-   "gx-events.js:245"
+   "gx-events.js:249"
   ],
   "ctx": "{id: \"autobus_ultras\", cat: N_(\"Afición\"), sc: \"street\", when: {lgLow: 4}, title: N_(\"Ultras en el entrenamiento\"), text: [N_(\"Un grupo de ultras se presenta en la ciudad deportiva exigiendo explicaciones por la mala rac"
  },
  "Salir a hablar con ellos": {
   "w": [
-   "gx-events.js:246"
+   "gx-events.js:250"
   ],
   "ctx": "opts: [{t: N_(\"Salir a hablar con ellos\"), p: {st: \"fans\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Escuchas, das la cara y se van más tranquilos.\"), fx: {fans: 5, coach: 2}}, ko: {txt: N_(\"Los gritos suben de tono. Seguridad tie"
  },
  "Escuchas, das la cara y se van más tranquilos.": {
   "w": [
-   "gx-events.js:246"
+   "gx-events.js:250"
   ],
   "ctx": "opts: [{t: N_(\"Salir a hablar con ellos\"), p: {st: \"fans\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Escuchas, das la cara y se van más tranquilos.\"), fx: {fans: 5, coach: 2}}, ko: {txt: N_(\"Los gritos suben de tono. Seguridad tie"
  },
  "Los gritos suben de tono. Seguridad tiene que intervenir.": {
   "w": [
-   "gx-events.js:246"
+   "gx-events.js:250"
   ],
   "ctx": "opts: [{t: N_(\"Salir a hablar con ellos\"), p: {st: \"fans\", b: 0.5, k: 0.01}, ok: {txt: N_(\"Escuchas, das la cara y se van más tranquilos.\"), fx: {fans: 5, coach: 2}}, ko: {txt: N_(\"Los gritos suben de tono. Seguridad tie"
  },
  "Quedarte dentro": {
   "w": [
-   "gx-events.js:247"
+   "gx-events.js:251"
   ],
   "ctx": "{t: N_(\"Quedarte dentro\"), ok: {txt: N_(\"Lo gestiona el club. Mejor no echar leña.\"), fx: {fans: -1}}}]},"
  },
  "Lo gestiona el club. Mejor no echar leña.": {
   "w": [
-   "gx-events.js:247"
+   "gx-events.js:251"
   ],
   "ctx": "{t: N_(\"Quedarte dentro\"), ok: {txt: N_(\"Lo gestiona el club. Mejor no echar leña.\"), fx: {fans: -1}}}]},"
  },
  "Tu nombre en una pancarta": {
   "w": [
-   "gx-events.js:248"
+   "gx-events.js:252"
   ],
   "ctx": "{id: \"pancarta\", cat: N_(\"Afición\"), sc: \"stadium\", when: {fans: [70, null]}, title: N_(\"Tu nombre en una pancarta\"), text: [N_(\"La grada de animación despliega una pancarta gigante con tu nombre.\")],"
  },
  "La grada de animación despliega una pancarta gigante con tu nombre.": {
   "w": [
-   "gx-events.js:248"
+   "gx-events.js:252"
   ],
   "ctx": "{id: \"pancarta\", cat: N_(\"Afición\"), sc: \"stadium\", when: {fans: [70, null]}, title: N_(\"Tu nombre en una pancarta\"), text: [N_(\"La grada de animación despliega una pancarta gigante con tu nombre.\")],"
  },
  "Ir a saludarles al acabar": {
   "w": [
-   "gx-events.js:249"
+   "gx-events.js:253"
   ],
   "ctx": "opts: [{t: N_(\"Ir a saludarles al acabar\"), ok: {txt: N_(\"Te lanzan una bufanda y te la pones. Momento mágico.\"), fx: {fans: 4, mor: 4}}}, {t: N_(\"Agradecerlo en redes\"), ok: {txt: N_(\"Tu foto con la pancarta es la más v"
  },
  "Te lanzan una bufanda y te la pones. Momento mágico.": {
   "w": [
-   "gx-events.js:249"
+   "gx-events.js:253"
   ],
   "ctx": "opts: [{t: N_(\"Ir a saludarles al acabar\"), ok: {txt: N_(\"Te lanzan una bufanda y te la pones. Momento mágico.\"), fx: {fans: 4, mor: 4}}}, {t: N_(\"Agradecerlo en redes\"), ok: {txt: N_(\"Tu foto con la pancarta es la más v"
  },
  "Agradecerlo en redes": {
   "w": [
-   "gx-events.js:249"
+   "gx-events.js:253"
   ],
   "ctx": "opts: [{t: N_(\"Ir a saludarles al acabar\"), ok: {txt: N_(\"Te lanzan una bufanda y te la pones. Momento mágico.\"), fx: {fans: 4, mor: 4}}}, {t: N_(\"Agradecerlo en redes\"), ok: {txt: N_(\"Tu foto con la pancarta es la más v"
  },
  "Tu foto con la pancarta es la más vista de la semana.": {
   "w": [
-   "gx-events.js:249"
+   "gx-events.js:253"
   ],
   "ctx": "opts: [{t: N_(\"Ir a saludarles al acabar\"), ok: {txt: N_(\"Te lanzan una bufanda y te la pones. Momento mágico.\"), fx: {fans: 4, mor: 4}}}, {t: N_(\"Agradecerlo en redes\"), ok: {txt: N_(\"Tu foto con la pancarta es la más v"
  },
  "Carrera": {
   "w": [
-   "gx-events.js:250",
-   "gx-events.js:253",
+   "gx-events.js:254",
+   "gx-events.js:257",
    "gx-mevents.js:81",
    "sp-play.js:133"
   ],
@@ -6231,86 +6231,86 @@
  },
  "Un récord a tiro": {
   "w": [
-   "gx-events.js:250"
+   "gx-events.js:254"
   ],
   "ctx": "{id: \"record_club\", cat: N_(\"Carrera\"), sc: \"stadium\", when: {yrs: 3, fame: [30, null]}, title: N_(\"Un récord a tiro\"), text: [N_(\"Estás a punto de superar un récord histórico del {club}. La prensa no habla de otra cosa."
  },
  "Estás a punto de superar un récord histórico del {club}. La prensa no habla de otra cosa.": {
   "w": [
-   "gx-events.js:250"
+   "gx-events.js:254"
   ],
   "ctx": "{id: \"record_club\", cat: N_(\"Carrera\"), sc: \"stadium\", when: {yrs: 3, fame: [30, null]}, title: N_(\"Un récord a tiro\"), text: [N_(\"Estás a punto de superar un récord histórico del {club}. La prensa no habla de otra cosa."
  },
  "Hablar del récord sin miedo": {
   "w": [
-   "gx-events.js:251"
+   "gx-events.js:255"
   ],
   "ctx": "opts: [{t: N_(\"Hablar del récord sin miedo\"), p: {st: \"mor\", b: 0.5, k: 0.01}, ok: {txt: N_(\"La presión te motiva. Lo vas a conseguir.\"), fx: {buff: {v: 1, b: 1, n: N_(\"A por el récord\")}}}, ko: {txt: N_(\"La presión te p"
  },
  "La presión te motiva. Lo vas a conseguir.": {
   "w": [
-   "gx-events.js:251"
+   "gx-events.js:255"
   ],
   "ctx": "opts: [{t: N_(\"Hablar del récord sin miedo\"), p: {st: \"mor\", b: 0.5, k: 0.01}, ok: {txt: N_(\"La presión te motiva. Lo vas a conseguir.\"), fx: {buff: {v: 1, b: 1, n: N_(\"A por el récord\")}}}, ko: {txt: N_(\"La presión te p"
  },
  "A por el récord": {
   "w": [
-   "gx-events.js:251"
+   "gx-events.js:255"
   ],
   "ctx": "opts: [{t: N_(\"Hablar del récord sin miedo\"), p: {st: \"mor\", b: 0.5, k: 0.01}, ok: {txt: N_(\"La presión te motiva. Lo vas a conseguir.\"), fx: {buff: {v: 1, b: 1, n: N_(\"A por el récord\")}}}, ko: {txt: N_(\"La presión te p"
  },
  "La presión te pesa y te bloqueas un par de partidos.": {
   "w": [
-   "gx-events.js:251"
+   "gx-events.js:255"
   ],
   "ctx": "opts: [{t: N_(\"Hablar del récord sin miedo\"), p: {st: \"mor\", b: 0.5, k: 0.01}, ok: {txt: N_(\"La presión te motiva. Lo vas a conseguir.\"), fx: {buff: {v: 1, b: 1, n: N_(\"A por el récord\")}}}, ko: {txt: N_(\"La presión te p"
  },
  "Quitarle importancia": {
   "w": [
-   "gx-events.js:252"
+   "gx-events.js:256"
   ],
   "ctx": "{t: N_(\"Quitarle importancia\"), ok: {txt: N_(\"«Lo importante es el equipo.» Te quitas la presión.\"), fx: {mor: 2}}}]},"
  },
  "«Lo importante es el equipo.» Te quitas la presión.": {
   "w": [
-   "gx-events.js:252"
+   "gx-events.js:256"
   ],
   "ctx": "{t: N_(\"Quitarle importancia\"), ok: {txt: N_(\"«Lo importante es el equipo.» Te quitas la presión.\"), fx: {mor: 2}}}]},"
  },
  "Clase magistral": {
   "w": [
-   "gx-events.js:253"
+   "gx-events.js:257"
   ],
   "ctx": "{id: \"cantera_visita\", cat: N_(\"Carrera\"), sc: \"training\", when: {age: [28, null]}, title: N_(\"Clase magistral\"), text: [N_(\"La escuela del club te invita a dar una clase a los niños de diez años.\")],"
  },
  "La escuela del club te invita a dar una clase a los niños de diez años.": {
   "w": [
-   "gx-events.js:253"
+   "gx-events.js:257"
   ],
   "ctx": "{id: \"cantera_visita\", cat: N_(\"Carrera\"), sc: \"training\", when: {age: [28, null]}, title: N_(\"Clase magistral\"), text: [N_(\"La escuela del club te invita a dar una clase a los niños de diez años.\")],"
  },
  "Ir y jugar con ellos": {
   "w": [
-   "gx-events.js:254"
+   "gx-events.js:258"
   ],
   "ctx": "opts: [{t: N_(\"Ir y jugar con ellos\"), ok: {txt: N_(\"Te hacen un túnel delante de todos. Risas y fotos.\"), fx: {mor: 5, fans: 3}, gx: \"+mentored\"}}, {t: N_(\"Mandar un vídeo\"), ok: {txt: N_(\"Un saludo grabado. Algo es alg"
  },
  "Te hacen un túnel delante de todos. Risas y fotos.": {
   "w": [
-   "gx-events.js:254"
+   "gx-events.js:258"
   ],
   "ctx": "opts: [{t: N_(\"Ir y jugar con ellos\"), ok: {txt: N_(\"Te hacen un túnel delante de todos. Risas y fotos.\"), fx: {mor: 5, fans: 3}, gx: \"+mentored\"}}, {t: N_(\"Mandar un vídeo\"), ok: {txt: N_(\"Un saludo grabado. Algo es alg"
  },
  "Mandar un vídeo": {
   "w": [
-   "gx-events.js:254",
+   "gx-events.js:258",
    "events.js:889"
   ],
   "ctx": "opts: [{t: N_(\"Ir y jugar con ellos\"), ok: {txt: N_(\"Te hacen un túnel delante de todos. Risas y fotos.\"), fx: {mor: 5, fans: 3}, gx: \"+mentored\"}}, {t: N_(\"Mandar un vídeo\"), ok: {txt: N_(\"Un saludo grabado. Algo es alg"
  },
  "Un saludo grabado. Algo es algo.": {
   "w": [
-   "gx-events.js:254"
+   "gx-events.js:258"
   ],
   "ctx": "opts: [{t: N_(\"Ir y jugar con ellos\"), ok: {txt: N_(\"Te hacen un túnel delante de todos. Risas y fotos.\"), fx: {mor: 5, fans: 3}, gx: \"+mentored\"}}, {t: N_(\"Mandar un vídeo\"), ok: {txt: N_(\"Un saludo grabado. Algo es alg"
  },

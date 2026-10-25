@@ -1,7 +1,6 @@
 /* gx-events.js — motor de decisiones en datos (5.6) y 60 decisiones nuevas del jugador.
    Cada decisión declara: condiciones (when), peso, enfriamiento en temporadas (cd), variantes de texto,
-   opciones con desenlaces (la probabilidad puede depender de tus atributos o tu estado), efectos que
-   no se enseñan en números, consecuencias aplazadas (later: llegan uno o dos tramos después),
+   opciones con desenlaces (la probabilidad puede depender de tus atributos o tu estado) y sus efectos, consecuencias aplazadas (later: llegan uno o dos tramos después),
    marcas para los trofeos (gx) y la escena de vóxeles que la ilustra (sc). */
 var GXE = (function () {
   var api = {};
@@ -73,6 +72,11 @@ var GXE = (function () {
     if (o.gx || o.later) r.then = function () { if (o.gx) [].concat(o.gx).forEach(function (k) { if (/^\+/.test(k)) GX.add(k.slice(1)); else GX.flag(k); }); if (o.later) later(o.later, id); };
     return r;
   }
+  /* escena 3D de las decisiones de siempre según su categoría */
+  var SC_CAT = {"Representación": "office", "Contrato": "office", "Futuro": "office", "Mercado": "office", "Agente": "office", "Dinero": "office", "Patrocinio": "office", "Marca personal": "office", "Club": "office", "Directiva": "office", "Datos": "office", "Oportunidad": "office", "Compromiso": "office",
+    "Salud": "hospital", "Médico": "hospital", "Selección": "stadium", "Premios": "stadium", "Récord": "stadium", "Afición": "stadium", "Vestuario": "locker", "Disciplina": "locker", "Plantilla": "locker", "Ética": "locker", "Igualdad": "locker", "Adaptación": "locker",
+    "Táctica": "training", "Entrenamiento": "training", "Cantera": "training", "Mente": "home", "Prensa": "press", "Fama": "press", "Imagen": "press", "Familia": "home", "Vida": "home", "Verano": "home", "Redes": "home", "Partido": "pitch", "Viajes": "plane"};
+  api.scOf = function (ev) { var c = ev && ev._es && ev._es.cat || (ev && ev.cat); return SC_CAT[c] || "office"; };
   /* ---------- registro como decisiones del motor de siempre ---------- */
   api.add = function (list) {
     list.forEach(function (d) {
@@ -81,7 +85,7 @@ var GXE = (function () {
         text: function (x) { var v = d.text; return tr(Array.isArray(v) ? X.spick(v, "t") : v, vars()); },
         opts: function (x) {
           return d.opts.map(function (o) {
-            var r = {t: tr(o.t, vars()), blind: true};
+            var r = {t: tr(o.t, vars())};
             var pp = prob(o.p, x);
             r.ok = outc(o.ok, d.id); if (o.ko) { r.ko = outc(o.ko, d.id); r.p = pp != null ? pp : 0.5; }
             return r;
@@ -261,13 +265,13 @@ GXE.add([
     root.resolvePendingPlayer = function (choice) {
       var x = S.pend && S.pend[0], ev = x && x.k === "ev" ? EVENT_BY_ID[x.id] : null;
       var card = _rp.apply(this, arguments);
-      try { if (card && ev && ev.gx) { card.chips = []; card.pct = null; card.gxsc = ev.sc; } } catch (e) {}
+      try { if (card && ev) card.gxsc = ev.sc || GXE.scOf(ev); } catch (e) {}
       return card;
     };
   }
   if (typeof playerDesc === "function") {
     var _pd = playerDesc;
-    root.playerDesc = function (x) { var d = _pd.apply(this, arguments); try { var ev = x && x.k === "ev" ? EVENT_BY_ID[x.id] : null; if (d && ev && ev.gx) d.vscene = ev.sc; } catch (e) {} return d; };
+    root.playerDesc = function (x) { var d = _pd.apply(this, arguments); try { var ev = x && x.k === "ev" ? EVENT_BY_ID[x.id] : null; if (d && ev && !d.scene) d.vscene = ev.sc || GXE.scOf(ev); } catch (e) {} return d; };
   }
   if (typeof GX !== "undefined") GX.on("block", function () { GXE.tick(); });
 })();

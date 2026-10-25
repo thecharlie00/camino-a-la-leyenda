@@ -16,11 +16,11 @@ const OUT = process.argv[2] || "/tmp/ev56"; fs.mkdirSync(OUT, { recursive: true 
   await js(() => { S.pend = [{ k: "ev", id: "gx_novato_consejo", s: 7 }]; S.ph = "gap"; S.p.age = 26; UIX.render(false); window.scrollTo(0, 0); });
   await p.waitForTimeout(1200); await p.screenshot({ path: path.join(OUT, "01-decision.png") });
   const d = await js(() => ({ sc: !!document.querySelector(".decision .gxsc img"), chips: document.querySelectorAll(".decision .opt .chip").length, pct: document.querySelectorAll(".decision .opt .pct").length, opts: document.querySelectorAll(".decision .opt").length }));
-  console.log("tarjeta", JSON.stringify(d)); if (!d.sc || d.chips || d.pct) fail.push("tarjeta");
+  console.log("tarjeta", JSON.stringify(d)); if (!d.sc || !d.pct) fail.push("tarjeta");
   const before = await js(() => (GX.st().later || []).length);
   await click('.decision .opt[data-i="0"]'); await p.waitForTimeout(800);
   const after = await js(() => ({ later: (GX.st().later || []).length, mentored: GX.cnt("mentored"), card: S.feed[0] && { t: S.feed[0].t, chips: (S.feed[0].chips || []).length, pct: S.feed[0].pct } }));
-  console.log("tras elegir", JSON.stringify(after), "aplazadas antes", before); if (after.later !== before + 1 || after.card.chips) fail.push("resultado");
+  console.log("tras elegir", JSON.stringify(after), "aplazadas antes", before); if (after.later !== before + 1) fail.push("resultado");
   await p.screenshot({ path: path.join(OUT, "02-resultado.png") });
   /* la consecuencia llega dos tramos después */
   const tick = await js(() => { const L = GX.st().later[0]; S.bi += 2; GXE.tick(); return { left: GX.st().later.length, news: S.bnews.slice(-1)[0] }; });

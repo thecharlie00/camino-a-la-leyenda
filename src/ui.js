@@ -681,7 +681,7 @@
   }
   function descCard(d) {
     var o = '<section class="card decision ' + (d.cls || "") + '" aria-live="polite"><div class="head"><span class="tag ' + h(d.tag) + '"><span class="dot"></span>' + h(d.tagTxt) + '</span><span class="eyebrow">' + h(d.cat || "") + "</span></div>";
-    if (d.scene === "press") o += pressRoomSVG(d.sceneQ);
+    if (d.scene === "press") o += UIX.gxScene ? UIX.gxScene("press") : pressRoomSVG(d.sceneQ);
     else if (d.vscene && UIX.gxScene) o += UIX.gxScene(d.vscene);
     o += "<h3>" + h(d.title) + "</h3>";
     if (d.board) o += boardHTML(d.board);

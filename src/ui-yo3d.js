@@ -103,5 +103,5 @@
     if (h && S.p && S.mode !== "mgr") mountInto(h, "p");
     else if (mh && S.mode === "mgr") mountInto(mh, "m");
   });
-  U.yo3d = {mount: mountInto, get: function () { return V; }};
+  U.yo3d = {mount: mountInto, get: function () { return V; }, player: playerLook, mgr: mgrLook, celeb: celebClip};
 })();
