@@ -6,7 +6,8 @@
   var U = UIX, h = U.h;
   function rm() { return document.documentElement.classList.contains("rm"); }
   function who() { return S && S.mode === "mgr" ? "m" : "p"; }
-  function purse(w) { return w === "m" ? S.m : S.p; }
+  /* la mascota se paga con quien la cuida ahora (el míster, en su modo): lo mismo que cobra PetSim */
+  function purse(w) { return w === "m" ? S.m : w === "pet" && typeof petWallet === "function" ? petWallet() : S.p; }
   function petNow() { try { var L = S.p && S.p.life; return L && L.pet && L.pet.v === 2 ? L.pet : null; } catch (e) { return null; } }
   GXV.reg("shopbox", function () {
     var V = {}; function box(x0, x1, y0, y1, z0, z1, c) { for (var x = x0; x <= x1; x++) for (var y = y0; y <= y1; y++) for (var z = z0; z <= z1; z++) V[x + "," + y + "," + z] = c; }
@@ -19,10 +20,30 @@
   });
   function icon(id, px) {
     var it = GXI.item(id); if (!it) return "";
-    if (it.own === "pet") { var k = "pi:" + id; if (!icon.r[k]) { icon.r[k] = 1; var col = {c: "#9aa7aa", r: "#66b9ff", e: "#b07cff", l: "#ff6b3d"}[it.r] || "#9aa7aa"; GXV.reg(k, function () { return GXG.make(it.slot === "h" ? "band" : it.slot === "n" ? "neck" : it.slot === "f" ? "glasses" : "therm", col, null, "#ffffff"); }); } return GXV.img(k, px); }
+    if (it.own === "pet") { var k = "pi:" + id; if (!icon.r[k]) { icon.r[k] = 1; var col = {c: "#9aa7aa", r: "#66b9ff", e: "#b07cff", l: "#ff6b3d"}[it.r] || "#9aa7aa"; GXV.reg(k, function () { return petVox(id) || GXG.make(it.slot === "h" ? "band" : it.slot === "n" ? "neck" : it.slot === "f" ? "glasses" : "therm", col, null, "#ffffff"); }); } return GXV.img(k, px); }
     return GXG.icon(id, GXI.tier(id, it.own), px);
   }
   icon.r = {};
+  /* 5.7: el icono de un accesorio de mascota es su propio modelo (la receta de vóxeles que lleva puesta), no uno genérico */
+  function petVox(id) {
+    var d = typeof petItem === "function" ? petItem(id) : null; if (!d || !d.rec || typeof PetStyle === "undefined") return null;
+    var PAL = PetStyle.PAL, T = PetStyle.teamColors(), V = {};
+    /* el renderizador de iconos trabaja en hex; los colores del club pueden venir en hsl */
+    function hx(x) { if (/^#[0-9a-f]{6}$/i.test(x)) return x; try { return "#" + VoxCore.rgb(x).map(function (v) { return ("0" + Math.round(v * 255).toString(16)).slice(-2); }).join(""); } catch (e) { return "#9aa7aa"; } }
+    function c(x) { return hx(x === "T1" ? T[0] : x === "T2" ? T[1] : x && x.length <= 2 && PAL[x] ? PAL[x] : x); }
+    d.rec.forEach(function (r) {
+      if (r[0] !== "box") return; var fl = r[8], col = c(r[7]);
+      for (var i = r[1]; i <= r[4]; i++) for (var j = r[2]; j <= r[5]; j++) for (var q = r[3]; q <= r[6]; q++) {
+        if (fl === "ring" && !(i === r[1] || i === r[4] || q === r[3] || q === r[6])) continue;
+        if (fl === "beads" && (!(i === r[1] || i === r[4] || q === r[3] || q === r[6]) || (i + q) % 2)) continue;
+        if (fl === "frame" && !(i === r[1] || i === r[4] || j === r[2] || j === r[5])) continue;
+        if (fl === "shell" && !(i === r[1] || i === r[4] || j === r[5] || q === r[3] || q === r[6])) continue;
+        if (fl === "net" && (i + j) % 2) continue;
+        V[i + "," + j + "," + q] = col;
+      }
+    });
+    return Object.keys(V).length ? V : null;
+  }
   function statName(k) {
     if (/^[A-Z]{3}$/.test(k)) { var kk = typeof isGK === "function" && S.p && isGK() ? GX_GKMAP[k] || k : k; return tr(ATT_NAMES[kk] || kk); }
     return tr(GX_STATN[k] || k);
@@ -40,9 +61,18 @@
     if (lk.k === "ch" && typeof GXC !== "undefined") { var pr = GXC.prog(lk.v); return [tr(GXC.name(lk.v)) + " · " + pr[0] + " / " + pr[1], pr[0] / pr[1]]; }
     return [tr("Bloqueado"), 0];
   }
-  var TABS = [["feat", "Destacados"], ["p", "Jugador"], ["m", "Entrenador"], ["pet", "Mascota"], ["chal", "Retos"]];
-  U.actions.shopopen = function (b, v) { var ui = U.ui(); ui.sh = {tab: v || "feat", sel: null, slot: b && b.getAttribute && b.getAttribute("data-s") || null, tryOn: false}; U.open("shop"); };
+  var TABS = [["feat", N_("Destacados")], ["p", N_("Jugador")], ["m", N_("Entrenador")], ["pet", N_("Mascota")], ["chal", N_("Retos")]];
+  U.actions.shopopen = function (b, v) { var ui = U.ui(); ui.sh = {tab: v || "feat", sel: null, slot: b && b.getAttribute && b.getAttribute("data-s") || null, view: "item", f: {}}; U.open("shop"); };
   U.gearShopLink = function (w, sl) { return '<button class="btn wide sm" data-a="shopopen" data-v="' + (w === "m" ? "m" : "p") + '" data-s="' + sl + '">' + h(tr("Buscar más en la tienda")) + "</button>"; };
+  /* ---------- 5.7: qué has visto ya («Nuevo») ---------- */
+  function seenOf(w) { var g = GXI.gear(w === "m" ? "m" : "p"); return g ? g.seen || (g.seen = {}) : {}; }
+  function isNew(id) { var it = GXI.item(id); return it && !seenOf(it.own)[id]; }
+  function markSeen(ids) { ids.forEach(function (id) { var it = GXI.item(id); if (it && (it.own !== "m" || S.m)) seenOf(it.own)[id] = 1; }); }
+  /* lo que se ha enseñado en la rejilla pasa a visto al cerrar la tienda */
+  U.add("after", function () {
+    var ui = U.ui(), sh = ui && ui.sh; if (!sh || !sh.shown || document.querySelector(".sheet:not(.out) .shp")) return;
+    try { markSeen(Object.keys(sh.shown)); U.persist(); } catch (e) {} sh.shown = null;
+  });
   function list(tab) {
     if (tab === "feat") { var f = GXI.featured(), o = GXI.offers(); return (f ? [f] : []).concat(o.filter(function (x) { return x !== f; })); }
     if (tab === "pet") { var pt = petNow(); return pt && typeof PetSim !== "undefined" ? PetSim.stock(pt).filter(function (id) { var it = GXI.item(id); return it; }) : []; }
@@ -51,47 +81,128 @@
     var st = GXI.stock(w);
     return all.filter(function (it) { return st.indexOf(it.id) >= 0 || GXI.lock(it) || GXI.owned(it.id, w) || (it.req && it.req.ch); }).sort(function (a, b) { return (a.req && a.req.ch ? 1 : 0) - (b.req && b.req.ch ? 1 : 0); }).map(function (it) { return it.id; });
   }
+  /* ---------- 5.7: ranura, filtros, orden y búsqueda ---------- */
+  function owns(id) { var it = GXI.item(id); return it.own === "pet" ? PetSim.has(id) : GXI.owned(id, it.own); }
+  function priceOf(id) { var it = GXI.item(id); return it.own === "pet" ? PetSim.price(petItemOf(id)) : GXI.price(id); }
+  function walletOf(it) { var p = purse(it.own); return p ? p.money : 0; }
+  function sumSt(id) { var st = GXI.stats(id, 0, GXI.item(id).own), v = 0; Object.keys(st).forEach(function (k) { v += st[k]; }); return v; }
+  function norm(t) { return String(t).toLowerCase().normalize ? String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") : String(t).toLowerCase(); }
+  function filtered(ids, ui) {
+    var f = ui.f || {};
+    var out = ids.filter(function (id) {
+      var it = GXI.item(id);
+      if (ui.slot && it.slot !== ui.slot) return false;
+      if (f.afford && (owns(id) || priceOf(id) > walletOf(it) || (it.own !== "pet" && GXI.lock(it)))) return false;
+      if (f.fresh && !isNew(id)) return false;
+      if (f.set && it.set !== f.set) return false;
+      if (f.st && !(GXI.stats(id, 0, it.own)[f.st] > 0)) return false;
+      /* se busca por nombre, ranura y línea («botas», «relámpago»…) */
+      if (ui.q) { var sl = (GX_SLOTS[it.own] || PET_SLOT).filter(function (x) { return x[0] === it.slot; })[0], st2 = it.set && GXI.set(it.set);
+        if (norm(tr(it.n) + " " + (sl ? tr(sl[1]) : "") + " " + (st2 ? tr(st2.n) : "")).indexOf(norm(ui.q)) < 0) return false; }
+      return true;
+    });
+    var o = f.ord || "";
+    if (o) out.sort(function (a, b) {
+      if (o === "pa") return priceOf(a) - priceOf(b);
+      if (o === "pd") return priceOf(b) - priceOf(a);
+      if (o === "st") return f.st ? (GXI.stats(b, 0, GXI.item(b).own)[f.st] || 0) - (GXI.stats(a, 0, GXI.item(a).own)[f.st] || 0) : sumSt(b) - sumSt(a);
+      if (o === "ti") return GXI.tier(b, GXI.item(b).own) - GXI.tier(a, GXI.item(a).own);
+      return 0;
+    });
+    return out;
+  }
+  function sel(k, label, opts, cur) {
+    return '<label class="shp-sel"><span>' + h(label) + '</span><select data-shk="' + k + '">' + opts.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === (cur || "") ? " selected" : "") + ">" + h(o[1]) + "</option>"; }).join("") + "</select></label>";
+  }
+  function toolbar(tab, ids, ui) {
+    var w = tab === "pet" ? "pet" : tab, f = ui.f || {}, s = "";
+    if (ids.length > 12) s += '<input class="shp-q" type="search" inputmode="search" placeholder="' + h(tr("Buscar")) + '" aria-label="' + h(tr("Buscar")) + '" value="' + h(ui.q || "") + '">';
+    var present = {}; ids.forEach(function (id) { present[GXI.item(id).slot] = 1; });
+    var slots = (GX_SLOTS[w] || []).filter(function (x) { return present[x[0]]; });
+    if (slots.length > 1) s += '<div class="shp-slots" role="group" aria-label="' + h(tr("Ranura")) + '"><button class="chip" data-a="shopslot" data-v="" aria-pressed="' + !ui.slot + '">' + h(tr("Todo")) + "</button>" +
+      slots.map(function (x) { return '<button class="chip" data-a="shopslot" data-v="' + x[0] + '" aria-pressed="' + (ui.slot === x[0]) + '">' + h(tr(x[1])) + "</button>"; }).join("") + "</div>";
+    s += '<div class="shp-flt"><button class="chip" data-a="shopf" data-v="afford" aria-pressed="' + !!f.afford + '">' + h(tr("Me lo puedo permitir")) + '</button><button class="chip" data-a="shopf" data-v="fresh" aria-pressed="' + !!f.fresh + '">' + h(tr("Nuevo")) + "</button></div>";
+    if (tab !== "pet") {
+      var sets = GX_SETS.filter(function (x) { return ids.some(function (id) { return GXI.item(id).set === x.k; }); });
+      var stk = tab === "m" ? GX_MSTATS : ["RIT", "TIR", "PAS", "REG", "DEF", "FIS", "rec", "inj"];
+      s += '<div class="shp-sels">' + sel("ord", tr("Orden"), [["", tr("Recomendado")], ["pa", tr("Precio: de menos a más")], ["pd", tr("Precio: de más a menos")], ["st", tr("Estadísticas")], ["ti", tr("Tier")]], f.ord) +
+        sel("st", tr("Estadística"), [["", tr("Cualquiera")]].concat(stk.map(function (k) { return [k, statName(k)]; })), f.st) +
+        (sets.length ? sel("set", tr("Conjunto"), [["", tr("Cualquiera")]].concat(sets.map(function (x) { return [x.k, tr(x.n)]; })), f.set) : "") + "</div>";
+    }
+    return '<div class="shp-bar">' + s + "</div>";
+  }
+  function grid(tab, ids, ui) {
+    if (!ids.length) return '<div class="shp-grid"><p class="muted shp-none">' + h(tr("Nada coincide con lo que buscas.")) + ' <button class="btn sm" data-a="shopclr">' + h(tr("Quitar filtros")) + "</button></p></div>";
+    ui.shown = ui.shown || {};
+    return '<div class="shp-grid">' + ids.map(function (id, i) {
+      ui.shown[id] = 1;
+      var it = GXI.item(id), lk = it.own === "pet" ? null : GXI.lock(it), own = owns(id), off = tab !== "pet" && GXI.offers().indexOf(id) >= 0, feat = tab !== "pet" && GXI.featured() === id, eq = own && it.own !== "pet" && GXI.gear(it.own).eq[it.slot] === id;
+      var badge = feat ? '<em class="shb f">' + h(tr("Destacado")) + "</em>" : off ? '<em class="shb o">−30 %</em>' : !own && isNew(id) ? '<em class="shb n">' + h(tr("Nuevo")) + "</em>" : "";
+      var state = eq ? tr("Equipado") : own ? tr("En propiedad") : lk ? tr("Bloqueado") : "";
+      return '<button class="shi' + (ui.sel === id ? " on" : "") + (lk ? " lk" : "") + (own ? " own" : "") + '" data-a="shopsel" data-v="' + id + '" style="--d:' + (Math.min(i, 12) * 35) + 'ms" aria-label="' + h(tr(it.n) + (state ? " · " + state : "")) + '"><img src="' + icon(id, 96) + '" alt="" width="46" height="46"><small>' + h(tr(it.n)) + "</small>" +
+        badge + (lk ? '<i class="shl" aria-hidden="true">🔒</i>' : eq ? '<i class="shl eq" aria-hidden="true">●</i>' : own ? '<i class="shl" aria-hidden="true">✓</i>' : "") + "</button>";
+    }).join("") + "</div>";
+  }
   U.sheets.shop = function () {
-    var ui = U.ui().sh = U.ui().sh || {tab: "feat", sel: null}, tab = ui.tab, ids = list(tab);
-    setTimeout(function () { if (document.querySelector(".shv-c")) loop(); }, 30);
-    if (ui.slot) { var only = ids.filter(function (id) { return GXI.item(id).slot === ui.slot; }); if (only.length) ids = only; }
-    if (!ui.sel || ids.indexOf(ui.sel) < 0) ui.sel = ids[0] || null;
-    var w = tab === "pet" ? "pet" : tab === "feat" ? who() : tab, pr = purse(w === "pet" ? "p" : w);
+    var ui = U.ui().sh = U.ui().sh || {tab: "feat", sel: null}, tab = ui.tab, all = list(tab), ids = tab === "feat" ? all : filtered(all, ui);
+    setTimeout(function () { if (document.querySelector(".shv-c")) loop(); mountMe(); }, 30);
+    if (!ui.sel || all.indexOf(ui.sel) < 0) ui.sel = ids[0] || all[0] || null;
+    var w = tab === "pet" ? "pet" : tab === "feat" ? who() : tab, pr = purse(w);
     var s = "<h2>" + h(tr("Tienda")) + '</h2><div class="stack shp">';
     s += '<div class="seg shp-tabs">' + TABS.map(function (t) { return '<button data-a="shoptab" data-v="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '">' + h(tr(t[1])) + "</button>"; }).join("") + "</div>";
-    s += '<div class="shp-top"><small class="muted">' + h(tr("Las existencias cambian cada día.")) + '</small><b class="shp-money">' + h(fmtMoney(pr ? pr.money : 0)) + "</b></div>";
+    s += '<div class="shp-top"><small class="muted">' + h(tr("Las existencias cambian cada día.")) + '</small><b class="shp-money num">' + h(fmtMoney(pr ? pr.money : 0)) + "</b></div>";
     if (tab === "chal") s += chalList();
-    else if (tab === "m" && S.mode !== "mgr") s += '<p class="muted">' + h(tr("La ropa de entrenador estará disponible cuando te sientes en un banquillo.")) + "</p>";
-    else if (tab === "pet" && !petNow()) s += '<p class="muted">' + h(tr("Adopta una mascota para comprarle accesorios.")) + "</p>";
-    else if (!ids.length) s += '<p class="muted">' + h(tr("Hoy no queda nada por aquí: vuelve mañana.")) + "</p>";
+    else if (tab === "m" && S.mode !== "mgr") s += '<p class="muted">' + h(tr("La ropa de entrenador estará disponible cuando te sientes en un banquillo.")) + '</p><button class="btn wide" data-a="shoptab" data-v="p">' + h(tr("Jugador")) + "</button>";
+    else if (tab === "pet" && !petNow()) s += '<p class="muted">' + h(tr("Adopta una mascota para comprarle accesorios.")) + '</p><button class="btn wide" data-a="petopen">🐾 ' + h(tr("Adopta una mascota")) + "</button>";
+    else if (!all.length) s += '<p class="muted">' + h(tr("Hoy no queda nada por aquí: vuelve mañana.")) + '</p><button class="btn wide" data-a="shoptab" data-v="chal">' + h(tr("Retos")) + "</button>";
     else {
       s += vitrine(ui.sel, tab);
-      s += '<div class="shp-grid">' + ids.map(function (id, i) {
-        var it = GXI.item(id), lk = it.own === "pet" ? null : GXI.lock(it), own = it.own === "pet" ? PetSim.has(id) : GXI.owned(id, it.own), off = tab !== "pet" && GXI.offers().indexOf(id) >= 0, feat = tab !== "pet" && GXI.featured() === id;
-        return '<button class="shi' + (ui.sel === id ? " on" : "") + (lk ? " lk" : "") + (own ? " own" : "") + '" data-a="shopsel" data-v="' + id + '" style="--d:' + (i * 35) + 'ms"><img src="' + icon(id, 96) + '" alt="" width="46" height="46"><small>' + h(tr(it.n)) + "</small>" +
-          (feat ? '<em class="shb f">' + h(tr("Destacado")) + "</em>" : off ? '<em class="shb o">−30 %</em>' : "") + (lk ? '<i class="shl" aria-hidden="true">🔒</i>' : own ? '<i class="shl" aria-hidden="true">✓</i>' : "") + "</button>";
-      }).join("") + "</div>";
+      if (tab !== "feat") s += toolbar(tab, all, ui);
+      s += grid(tab, ids, ui);
     }
     return s + '<button class="btn wide" data-a="close">' + h(tr("Cerrar")) + "</button></div>";
   };
+  /* una línea con personalidad por línea de equipamiento (sin efectos que no existan) */
+  var SETD = {ray: N_("Para los que viven a la espalda del defensa."), can: N_("Para los que no saben chutar flojo."), mag: N_("Para los que juegan con la pelota pegada al pie."),
+    wal: N_("Para los que no dejan pasar ni el aire."), tit: N_("Para los que aguantan los noventa y la prórroga."), led: N_("Para los que hablan en el túnel y los demás escuchan."),
+    gua: N_("Para los que viven bajo los palos."), mcl: N_("Para el míster que lo apunta todo."), mbr: N_("Para el míster que cierra fichajes con un apretón de manos."), mtr: N_("Para el míster que entrena con los jugadores.")};
   function vitrine(id, tab) {
     if (!id) return "";
-    var it = GXI.item(id), w = it.own, pet = w === "pet", lk = pet ? null : GXI.lock(it), own = pet ? PetSim.has(id) : GXI.owned(id, w);
-    var price = pet ? PetSim.price(petItemOf(id)) : GXI.price(id), base = it.price, money = purse(pet ? "p" : w).money, st = GXI.stats(id, 0, w);
-    var g = pet ? null : GXI.gear(w), cur = g && g.eq[it.slot], curSt = cur ? GXI.stats(cur, g.own[cur].t, w) : {};
-    var s = '<div class="shv"><canvas class="shv-c" width="300" height="240" data-shv="' + id + '" aria-hidden="true"></canvas><div class="shv-i"><b>' + h(tr(it.n)) + "</b>";
-    var sl = (GX_SLOTS[pet ? "pet" : w] || []).filter(function (x) { return x[0] === it.slot; })[0];
-    if (sl) s += "<small>" + h(tr(sl[1])) + (it.set && GXI.set(it.set) ? " · " + h(tr(GXI.set(it.set).n)) : "") + "</small>";
+    var ui = U.ui().sh, it = GXI.item(id), w = it.own, pet = w === "pet", lk = pet ? null : GXI.lock(it), own = owns(id);
+    var price = priceOf(id), base = it.price, money = walletOf(it), st = GXI.stats(id, 0, w);
+    var g = pet ? null : GXI.gear(w), cur = g && g.eq[it.slot], on = own && cur === id, pt = pet ? petNow() : null, petOn = pet && pt && pt.eq && pt.eq[it.slot] === id;
+    /* «en ti»: la pieza puesta en tu personaje (jugador o míster) con lo que ya llevas */
+    var canMe = !pet && (w === "p" ? S.mode !== "mgr" : S.mode === "mgr") && U.yo3d, me = canMe && ui.view === "me";
+    var s = '<div class="shv">' + (me ? '<div class="shv-me gs-prev3d" data-w="' + w + '"></div>' : '<canvas class="shv-c" width="300" height="240" data-shv="' + id + '" aria-hidden="true"></canvas>') + '<div class="shv-i">';
+    if (canMe) s += '<div class="seg shv-view"><button data-a="shopview" data-v="item" aria-pressed="' + !me + '">' + h(tr("Pieza")) + '</button><button data-a="shopview" data-v="me" aria-pressed="' + !!me + '">' + h(tr("En ti")) + "</button></div>";
+    s += "<b>" + h(tr(it.n)) + "</b>";
+    var sl = (GX_SLOTS[pet ? "pet" : w] || PET_SLOT).filter(function (x) { return x[0] === it.slot; })[0] || (pet ? PET_SLOT.filter(function (x) { return x[0] === it.slot; })[0] : null);
+    s += "<small>" + (sl ? h(tr(sl[1])) + " · " : "") + (pet ? h(tr(GX_TIERS[0].n)) : '<span class="gt-tag gt' + GXI.tier(id, w) + '">' + h(tr(GX_TIERS[GXI.tier(id, w)].n)) + "</span>") + "</small>";
+    var set = it.set && GXI.set(it.set);
+    if (set && SETD[it.set]) s += '<p class="shv-d">' + h(tr(SETD[it.set])) + "</p>";
     s += '<div class="gpc-st">' + chips(st) + "</div>";
-    if (!pet && cur && cur !== id && !own) s += '<div class="gpc-cmp"><small>' + h(tr("Frente a lo que llevas:")) + "</small> " + (chips(st, curSt) || '<span class="muted">' + h(tr("igual")) + "</span>") + "</div>";
-    /* prueba: qué te quedaría en los atributos con la pieza puesta */
-    if (!pet && w === "p" && U.ui().sh.tryOn) s += tryPanel(id);
+    /* qué te cambia frente a lo que llevas en esa ranura (contras incluidos) */
+    if (!pet && !on && U.gearDelta && (w === "p" ? S.mode !== "mgr" : S.mode === "mgr")) { var eqx = {}; eqx[it.slot] = id; s += U.gearDelta(w, eqx); }
+    if (set) s += '<small class="shv-set">' + h(tr(set.n)) + " · " + h(tr("3 piezas")) + ": " + chips(set.b3 || {}) + " · " + h(tr("completa")) + ": " + chips(set.bAll || {}) + "</small>";
     if (lk) { var li = lockInfo(lk); s += '<div class="shlock"><span>🔒 ' + h(li[0]) + '</span><i class="gxp"><i style="--w:' + Math.round(Math.min(1, li[1]) * 100) + '%"></i></i></div>'; }
     s += '<div class="gpc-a">';
-    if (!pet && w === "p" && !own) s += '<button class="btn sm" data-a="shoptry" aria-pressed="' + !!U.ui().sh.tryOn + '">' + h(tr("Probar")) + "</button>";
-    if (own) s += '<span class="gt-max">' + h(tr("Ya es tuya")) + "</span>";
-    else if (!lk) s += '<button class="btn sm pri" data-a="shopbuy" data-v="' + id + '"' + (money >= price ? "" : " disabled") + ">" + h(tr("Comprar")) + " <b>" + (price < base ? "<s>" + h(fmtMoney(base)) + "</s> " : "") + h(fmtMoney(price)) + "</b></button>" + (money < price ? '<small class="muted">' + h(tr("Te faltan {m}", {m: fmtMoney(price - money)})) + "</small>" : "");
+    if (own) {
+      s += '<span class="gt-max">' + h(on || petOn ? tr("Equipado") : tr("En propiedad")) + "</span>";
+      if (!on && !petOn && (pet ? pt : w === "p" ? S.mode !== "mgr" : S.mode === "mgr")) s += '<button class="btn sm pri" data-a="shopwear" data-v="' + id + '">' + h(ui.just === id ? tr("Equipar ya") : tr("Equipar")) + "</button>";
+    } else if (!lk) {
+      if (ui.confirm === id) s += '<div class="shconf" role="group"><span>' + h(tr("Precio")) + ' <b class="num">' + h(fmtMoney(price)) + "</b> · " + h(tr("Te quedarán")) + ' <b class="num">' + h(fmtMoney(money - price)) + '</b></span><button class="btn sm pri" data-a="shopbuyok" data-v="' + id + '">' + h(tr("Confirmar compra")) + '</button><button class="btn sm" data-a="shopbuyno">' + h(tr("Cancelar")) + "</button></div>";
+      else if (money >= price) s += '<button class="btn sm pri" data-a="shopbuy" data-v="' + id + '">' + h(tr("Comprar")) + ' <b class="num">' + (price < base ? "<s>" + h(fmtMoney(base)) + "</s> " : "") + h(fmtMoney(price)) + "</b></button>";
+      else s += '<button class="btn sm" disabled>' + h(tr("Te faltan {m}", {m: fmtMoney(price - money)})) + "</button>";
+    }
     return s + "</div></div></div>";
+  }
+  /* monta el personaje en la ficha cuando se pide «En ti» */
+  function mountMe() {
+    var ui = U.ui().sh, hh = document.querySelector(".sheet:not(.out) .shv-me"); if (!ui || !hh || !U.yo3d) return;
+    var it = GXI.item(ui.sel), eq = {}; eq[it.slot] = ui.sel;
+    var fresh = !PLook.tryOn || PLook.tryOn.eq[it.slot] !== ui.sel;
+    PLook.tryOn = {w: it.own, eq: eq};
+    U.yo3d.dress(hh, it.own, {focus: it.slot, clips: fresh ? [PLook.EQCLIP[it.slot]].filter(Boolean) : []});
   }
   /* retos: el progreso real de tu carrera y la pieza que desbloquean */
   function chalList() {
@@ -107,27 +218,50 @@
     }).join("") + "</ul>";
   }
   function petItemOf(id) { return typeof petItem === "function" ? petItem(id) : null; }
-  function tryPanel(id) {
-    var it = GXI.item(id), g = GXI.gear("p"), now = GXI.bonus("p");
-    var save = g.eq[it.slot], had = g.own[id]; if (!had) g.own[id] = {t: 0}; g.eq[it.slot] = id;
-    var then = GXI.bonus("p"); g.eq[it.slot] = save; if (!had) delete g.own[id];
-    var keys = Object.keys(then).concat(Object.keys(now)).filter(function (k, i, a) { return a.indexOf(k) === i && /^[A-Z]{3}$/.test(k); });
-    var at = attrs();
-    return '<div class="shtry">' + keys.map(function (k) {
-      var gk = isGK() ? GX_GKMAP[k] || k : k, a = Math.round(then[k] || 0) - Math.round(now[k] || 0), base = at[gk];
-      if (base == null) return "";
-      return '<div class="shtr"><span>' + h(statName(k)) + "</span><b>" + base + "</b><i>→</i><b class=\"" + (a > 0 ? "up" : a < 0 ? "down" : "") + "\">" + (base + a) + "</b></div>";
-    }).join("") + "</div>";
-  }
-  U.actions.shoptab = function (b, v) { var ui = U.ui().sh; ui.tab = v; ui.sel = null; ui.slot = null; ui.tryOn = false; U.renderSheet(); };
-  U.actions.shopsel = function (b, v) { var ui = U.ui().sh; ui.sel = v; ui.tryOn = false; U.renderSheet(); try { Anim.haptic("tap"); } catch (e) {} };
-  U.actions.shoptry = function () { var ui = U.ui().sh; ui.tryOn = !ui.tryOn; U.renderSheet(); };
-  U.actions.shopbuy = function (b, v) {
-    var it = GXI.item(v), r;
+  function reset(ui) { ui.confirm = null; ui.just = null; }
+  U.actions.shoptab = function (b, v) { var ui = U.ui().sh; ui.tab = v; ui.sel = null; ui.slot = null; ui.q = ""; reset(ui); if (ui.view === "me") PLook.tryOn = null; U.renderSheet(); };
+  U.actions.shopsel = function (b, v) { var ui = U.ui().sh; ui.sel = v; reset(ui); markSeen([v]); U.renderSheet(); try { Anim.haptic("tap"); } catch (e) {} };
+  U.actions.shopview = function (b, v) { var ui = U.ui().sh; ui.view = v; if (v !== "me") PLook.tryOn = null; U.renderSheet(); };
+  U.actions.shopslot = function (b, v) { var ui = U.ui().sh; ui.slot = v || null; U.renderSheet(); };
+  U.actions.shopf = function (b, v) { var ui = U.ui().sh; ui.f = ui.f || {}; ui.f[v] = !ui.f[v]; U.renderSheet(); };
+  U.actions.shopclr = function () { var ui = U.ui().sh; ui.f = {}; ui.slot = null; ui.q = ""; U.renderSheet(); };
+  /* desplegables (orden, estadística, conjunto) y búsqueda: la búsqueda solo repinta la rejilla para no perder el teclado */
+  document.addEventListener("change", function (e) {
+    var t = e.target; if (!t || !t.getAttribute || !t.getAttribute("data-shk") || !U.ui().sh) return;
+    var ui = U.ui().sh; ui.f = ui.f || {}; ui.f[t.getAttribute("data-shk")] = t.value || null; U.renderSheet();
+  });
+  document.addEventListener("input", function (e) {
+    var t = e.target; if (!t || !t.classList || !t.classList.contains("shp-q")) return;
+    var ui = U.ui().sh; if (!ui) return; ui.q = t.value;
+    var gr = document.querySelector(".sheet:not(.out) .shp-grid"); if (!gr) return;
+    var tmp = document.createElement("div"); tmp.innerHTML = grid(ui.tab, filtered(list(ui.tab), ui), ui); gr.replaceWith(tmp.firstChild);
+  });
+  /* atrás (botón o gesto de Android, Escape): primero cancela la confirmación de compra, luego cierra */
+  window.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return; var ui = U.ui && U.ui().sh;
+    if (ui && ui.confirm && document.querySelector(".sheet:not(.out) .shconf")) { ui.confirm = null; U.renderSheet(); e.stopImmediatePropagation(); e.stopPropagation(); }
+  }, true);
+  /* comprar: primero confirma con el precio y el saldo que te queda */
+  U.actions.shopbuy = function (b, v) { var ui = U.ui().sh; if (ui.busy) return; ui.confirm = v; U.renderSheet(); try { Anim.haptic("tap"); } catch (e) {} };
+  U.actions.shopbuyno = function () { U.ui().sh.confirm = null; U.renderSheet(); };
+  U.actions.shopbuyok = function (b, v) {
+    var ui = U.ui().sh, it = GXI.item(v), r;
+    /* nada de compras dobles por toques rápidos ni de comprar lo que ya tienes */
+    if (ui.busy || owns(v)) return; ui.busy = true; ui.confirm = null;
     if (it.own === "pet") { r = PetSim.buy(v); if (r && r.ok) { try { GX.add("buys"); GX.dirty(); } catch (e) {} } }
     else r = GXI.buy(v);
-    if (!r || !r.ok) { U.toast(r && r.poor ? tr("No te llega el dinero.") : tr("No se puede comprar.")); return; }
-    U.persist(); buyAnim(v, function () { U.renderSheet(); U.render(false); });
+    if (!r || !r.ok) { ui.busy = false; U.toast(r && r.poor ? tr("No te llega el dinero.") : tr("No se puede comprar.")); U.renderSheet(); return; }
+    /* la ficha pasa ya a «tuya» debajo de la animación (sin botón de confirmar que siga a la vista) */
+    ui.just = v; U.persist(); U.renderSheet(); buyAnim(v, function () { ui.busy = false; U.renderSheet(); U.render(false); });
+  };
+  /* equipar ya, desde la ficha */
+  U.actions.shopwear = function (b, v) {
+    var ui = U.ui().sh, it = GXI.item(v);
+    if (it.own === "pet") { var pt = petNow(); if (!pt || !PetSim.wear(pt, v)) return; }
+    else { if (GXI.gear(it.own).eq[it.slot] === v) return; GXI.equip(v, it.own); }
+    ui.just = null; PLook.tryOn = null; U.persist(); U.render(false);
+    try { Anim.haptic("ok"); } catch (e) {}
+    U.toast(tr("Equipado: {x}", {x: tr(it.n)}));
   };
   /* ---------- escaparate giratorio ---------- */
   var spin = {raf: 0};
@@ -176,5 +310,15 @@
   /* entrada en «Yo» (jugador) y en el club (míster) */
   function entry() { var f = GXI.featured(), o = GXI.offers().length; return '<button class="card shcard" data-a="shopopen" data-v="feat"><span class="shcard-ic">' + (f ? '<img src="' + icon(f, 96) + '" alt="" width="40" height="40">' : "🛍️") + '</span><span class="grow"><b>' + h(tr("Tienda")) + "</b><small>" + h(tr("Destacado del día y {n} ofertas. Las existencias cambian cada día.", {n: o})) + '</small></span><span class="chev" aria-hidden="true">›</span></button>'; }
   U.add("jugador", function () { return S && S.p && !U.isMgr() ? entry() : ""; });
+  /* 5.7: precarga — los iconos de lo que hay hoy en la tienda (y de lo tuyo) se generan en ratos libres, de pocos en pocos,
+     para que abrir la tienda o el vestidor no dé tirones en móviles flojos */
+  var warmed = "";
+  U.add("after", function () {
+    if (!S || !(S.p || S.m) || document.querySelector(".sheet:not(.out)")) return;
+    var w = who(), key = w + GXI.day(); if (warmed === key) return; warmed = key;
+    var g = GXI.gear(w), ids = GXI.stock(w).concat(GXI.offers(), g ? Object.keys(g.own) : []), i = 0;
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(function () { f({timeRemaining: function () { return 8; }}); }, 120); };
+    idle(function s0(d) { while (i < ids.length && d.timeRemaining() > 4) { try { icon(ids[i], 96); } catch (e) {} i++; } if (i < ids.length) idle(s0); });
+  });
   U.shopEntry = entry;
 })();

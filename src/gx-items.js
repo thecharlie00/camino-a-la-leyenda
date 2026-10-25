@@ -13,7 +13,7 @@ var GX_SLOTS = {
   p: [["boots", N_("Botas")], ["shin", N_("Espinilleras")], ["socks", N_("Medias")], ["wrist", N_("Muñequeras")], ["band", N_("Cinta")], ["gloves", N_("Guantes")],
     ["therm", N_("Térmica")], ["hood", N_("Sudadera")], ["phones", N_("Cascos")], ["arm", N_("Brazalete")], ["neck", N_("Colgante")], ["watch", N_("Reloj")]],
   m: [["suit", N_("Traje")], ["coat", N_("Abrigo")], ["shoes", N_("Zapatos")], ["tie", N_("Corbata")], ["glasses", N_("Gafas")], ["scarf", N_("Bufanda")], ["notes", N_("Libreta")], ["watch", N_("Reloj")]],
-  pet: [["h", N_("Cabeza")], ["f", N_("Cara")], ["n", N_("Cuello")], ["t", N_("Cuerpo")]]
+  pet: [["h", N_("Cabeza")], ["f", N_("Cara")], ["n", N_("Cuello")], ["b", N_("Cuerpo")], ["t", N_("Juguete")]]
 };
 /* estadísticas: atributos de campo (el portero los recibe traducidos) y extras */
 var GX_GKMAP = {RIT: "VEL", TIR: "COL", PAS: "SAQ", REG: "REF", DEF: "PAR", FIS: "EST"};

@@ -184,7 +184,8 @@ var PetWorld = (function () {
       var R = E.ray(e.clientX, e.clientY), h = W.actor.hit(E, R);
       p.onPet = h; W.drag = null;
       if (W.mode && W.mode.down && W.mode.down(p, h, R)) { p.claimed = true; return; }
-      if (h) { p.petT = 0; W.actor.lookAt(h.p, 1); }
+      /* 5.7: respuesta inmediata al dedo: mira, parpadea y se encoge un pelo (antes de saber si es toque o caricia) */
+      if (h) { p.petT = 0; W.actor.lookAt(h.p, 1); if (!W.pt.sleep) { W.actor.say("blink", 0.12); if (!red()) W.actor.flinch = 1; } hap("tick"); }
       p.lp = setTimeout(function () { if (!p.moved && p.onPet && W.mode && W.mode.longPress) W.mode.longPress(p); }, 480);
     });
     cv.addEventListener("pointermove", function (e) {
@@ -197,7 +198,12 @@ var PetWorld = (function () {
       if (p.claimed) { if (W.mode.move) W.mode.move(p, dx, dy); return; }
       if (p.onPet && !W.mode.noPet) {
         var R = E.ray(e.clientX, e.clientY), h = W.actor.hit(E, R);
-        if (h) { W.actor.lookAt(h.p, 0.6); p.rub = (p.rub || 0) + Math.abs(dx) + Math.abs(dy); if (p.rub > 70) { p.rub = 0; pet(h, "pat"); } return; }
+        /* caricia suave o brusca según la velocidad del dedo: recorrido (no desplazamiento) en los últimos 120 ms, en px/ms */
+        if (h) {
+          W.actor.lookAt(h.p, 0.6); p.rub = (p.rub || 0) + Math.abs(dx) + Math.abs(dy);
+          if (p.rub > 70) { p.rub = 0; var pa = p.path, now2 = performance.now(), i0 = pa.length - 1; while (i0 > 0 && now2 - pa[i0 - 1][2] < 120) i0--; var seg = pa[pa.length - 1], st0 = pa[i0], ms = Math.max(16, seg[2] - st0[2]), len = 0; for (var j0 = i0 + 1; j0 < pa.length; j0++) len += Math.hypot(pa[j0][0] - pa[j0 - 1][0], pa[j0][1] - pa[j0 - 1][1]); var vel = len / ms; pet(h, vel > 1.5 ? "rough" : "pat"); }
+          return;
+        }
       }
       if (W.mode && W.mode.noOrbit) return;
       E.cam.yaw -= dx * 0.008; E.cam.pitch = cl(E.cam.pitch + dy * 0.004, 0.08, 1.2); W.idleCam = 0;
@@ -233,7 +239,15 @@ var PetWorld = (function () {
     if (r.r === "wake") { PetSim.wake(pt); a.clip = null; a.play("yawn"); a.say("blink", 1); a.baseExpr = PetSim.expr(pt); say(tr("¡Se ha despertado!")); return; }
     if (r.r === "sleepy") { fx("zz", null, 1); return; }
     if (r.r === "love") { a.say("love", 1.2); fx("heart", h.p, 2); if (!a.clip) a.play(h.zone === "belly" ? "happy" : "nuzzle"); sfx("pop"); hap("tap"); if (r.found) say(tr("¡Ahí le encanta!"), 2.4); }
-    else if (r.r === "ok") { a.say(Math.random() < 0.5 ? "happy" : "content", 0.9); fx("heart", h.p, 1); if (!a.clip && Math.random() < 0.3) a.play("happy"); }
+    else if (r.r === "ok") {
+      /* reacción distinta según la zona */
+      a.say(Math.random() < 0.5 ? "happy" : "content", 0.9); fx("heart", h.p, 1);
+      var ZR = {head: ["nuzzle", "happy"], chin: ["happy", "nuzzle"], back: ["stretch", "happy"], belly: ["happy", "roll"], ears: ["shake", "nuzzle"], cheek: ["nuzzle", "happy"]}, zr = ZR[h.zone] || ["happy"];
+      if (!a.clip && Math.random() < 0.35) { var cz = zr[Math.floor(Math.random() * zr.length)]; if (a.plan === "quad" || cz === "happy") a.play(cz); }
+      if (Math.random() < 0.25) { try { PetAudio.voice(pt.k, PetSim.stage(pt), "happy"); } catch (e) {} }
+    }
+    else if (r.r === "playful") { a.say("excited", 1); if (!a.clip) a.play("happy"); sfx("bounce"); hap("tap"); }
+    else if (r.r === "rough") { a.say("sad", 1.1); if (!red()) a.flinch = 1.6; if (!a.clip) a.play("shake"); say(tr("Más suave…"), 1.6); hap("bad"); try { PetAudio.voice(pt.k, PetSim.stage(pt), "sad"); } catch (e) {} }
     else if (r.r === "dislike") { a.say("angry", 1); if (!a.clip) a.play("shake"); say(tr("Ahí no le gusta…")); hap("bad"); }
     else if (r.r === "enough") { a.say("content", 1); if (!a.clip) a.play("stretch"); }
     else if (r.r === "annoyed") { a.say("angry", 0.8); a.yaw += 0.6; }
@@ -250,7 +264,7 @@ var PetWorld = (function () {
   function setMode(m, arg) {
     var W = cur; if (!W) return;
     if (W.mode && W.mode.exit) W.mode.exit();
-    W.ball = null; W.props = []; W.actor.mouth = null;
+    W.ball = null; W.props = []; W.actor.mouth = null; W.actor.toyHide = false;
     var M = MODES[m] || MODES.home; W.modeK = m; W.mode = M;
     bar(M.bar || m);
     W.camMin = 0.6; W.camMax = 4;
@@ -294,15 +308,32 @@ var PetWorld = (function () {
     var W = cur, a = W.actor, pt = W.pt;
     if (a.held || a.clip || a.goal || W.busy) { W.idleT = 0; return; }
     W.idleT = (W.idleT || 0) + dt;
-    if (W.idleT < rnd(1.5, 4)) return;
-    W.idleT = 0;
-    var p = pt.pers, r = Math.random();
-    if (pt.n.ene < 20 && r < 0.4) { a.play("yawn"); return; }
-    if (r < 0.32 + p.act * 0.2) { var ang = rnd(0, 2 * PI), d = rnd(0.2, 0.6); a.moveTo(cl(Math.cos(ang) * d, -1, 1), cl(Math.sin(ang) * d, -0.7, 0.8), Math.random() < p.act * 0.4); return; }
-    if (r < 0.5) { a.play(p.cur > 0.5 ? "sniff" : "stretch"); return; }
-    if (r < 0.6 && a.plan === "quad") { a.play("scratch"); return; }
-    if (r < 0.78) { a.lookAt(camEye(), 1); a.play("happy"); if (Math.random() < 0.4) { try { PetAudio.voice(pt.k, PetSim.stage(pt)); } catch (e) {} } return; }
-    if (r < 0.88 && a.plan === "quad") { a.play("sit"); return; }
+    if (W.idleWait == null) W.idleWait = rnd(1.5, 4);
+    if (W.idleT < W.idleWait) return;
+    W.idleT = 0; W.idleWait = rnd(1.8, 4.8);
+    var p = pt.pers, n = pt.n, quad = a.plan === "quad", dec = PetSim.decor ? PetSim.decor(pt) : {};
+    function go(id, then) { var d = dec[id]; if (!d) return false; a.moveTo(d[0] * 2 + 0.12, d[1] * 2 + 0.12, false, function () { a.lookAt([d[0] * 2, 0, d[1] * 2], 1); if (then) then(); }); return true; }
+    /* 5.7: lo que necesita se lee en la propia mascota (sin mirar barras): va al comedero, al bebedero, bosteza, se rasca, te busca */
+    if (!pt.sleep && Math.random() < 0.7) {
+      if (n.hun < 30 && go("bowl_food", function () { a.play(quad ? "beg" : "sad"); a.say("sad", 1.4); })) return;
+      if (n.thi < 30 && go("bowl_water", function () { a.play("sniff"); a.say("sad", 1.2); })) return;
+      if (n.ene < 25) { a.play(Math.random() < 0.5 ? "yawn" : quad ? "lie" : "yawn"); a.say("blink", 1); return; }
+      if (n.cln < 30 && quad) { a.play(Math.random() < 0.5 ? "scratch" : "shake"); return; }
+      if (n.aff < 30) { var e = camEye(); a.moveTo(cl(e[0] * 0.3, -1, 1), cl(e[2] * 0.3, -0.7, 0.8), false, function () { a.lookAt(camEye(), 1); a.play(quad ? "beg" : "happy"); a.say("sad", 1.2); }); return; }
+      if (n.fun < 30 && a.toy) { a.play(quad ? "paw" : "happy"); a.say("curious", 1); return; }
+    }
+    /* el resto: repertorio amplio, sin repetir lo último y según su carácter */
+    var r = Math.random(), opts = [["walk", 0.3 + p.act * 0.2], ["sniff", 0.12 + p.cur * 0.15], ["stretch", 0.1], ["cam", 0.16 + p.aff * 0.1]];
+    if (quad) opts.push(["scratch", 0.06], ["sit", 0.1], ["halfsit", 0.07], ["lie", 0.06 + (1 - p.act) * 0.08]);
+    if (a.toy) opts.push(["toy", 0.1 + p.act * 0.1]);
+    opts = opts.filter(function (o) { return o[0] !== W.lastIdle || o[0] === "walk"; });
+    var tot = opts.reduce(function (s0, o) { return s0 + o[1]; }, 0), x = r * tot, pick = opts[0][0];
+    for (var i = 0; i < opts.length; i++) { x -= opts[i][1]; if (x <= 0) { pick = opts[i][0]; break; } }
+    W.lastIdle = pick;
+    if (pick === "walk") { var ang = rnd(0, 2 * PI), d = rnd(0.2, 0.6); a.moveTo(cl(Math.cos(ang) * d, -1, 1), cl(Math.sin(ang) * d, -0.7, 0.8), Math.random() < p.act * 0.4); return; }
+    if (pick === "cam") { a.lookAt(camEye(), 1); a.play("happy"); if (Math.random() < 0.4) { try { PetAudio.voice(pt.k, PetSim.stage(pt)); } catch (e) {} } return; }
+    if (pick === "toy") { a.play(quad ? "paw" : "happy"); a.say("excited", 0.8); return; }
+    a.play(pick);
   }
 
   /* ===================== modos ===================== */
@@ -523,7 +554,7 @@ var PetWorld = (function () {
     act: function (k, v) {
       var W = cur, a = W.actor;
       if (k === "toy") {
-        W.toyId = v; var it = petItem(v), kind = it.model;
+        W.toyId = v; a.toyHide = true; var it = petItem(v), kind = it.model;
         if (kind === "rope" || kind === "plush") { W.ball = null; a.clip = null; a.moveTo(0, 0.3, true, function () { a.mouth = PetProps.prop(kind); a.play(kind === "rope" ? "shake" : "happy", {done: function () { a.mouth = null; var r = PetSim.play(W.pt, v, true); fx("heart", null, r.fav ? 3 : 1); a.say("happy", 1); hud(); persist(); }}); }); return; }
         var m = PetProps.prop(kind), c = W.E.cam;
         W.ball = {m: m, kind: kind, x: c.target[0] + Math.sin(c.yaw) * 0.5, z: c.target[2] + Math.cos(c.yaw) * 0.5, y: 0.05, vx: 0, vy: 0, vz: 0, r: kind === "frisbee" ? 0.02 : 0.05, show: true, state: "rest"};
@@ -664,6 +695,8 @@ var PetWorld = (function () {
       if (k === "shop") return setMode("shop", "dress");
     }
   };
+  /* estadísticas de un accesorio en su tier */
+  function accSt(id) { if (typeof GXI === "undefined") return ""; var st = GXI.stats(id, GXI.petTier(id), "pet"), k = Object.keys(st); return k.length ? '<small class="pw-st">' + esc(k.map(function (x) { return "+" + st[x] + " " + tr(GX_STATN[x] || x); }).join(" · ")) + "</small>" : ""; }
   function dressView() {
     var W = cur, pt = W.pt, sl = W.slot, s = '<div class="pw-tabs" role="tablist">' + PET_SLOTS2.map(function (x) { return '<button role="tab" data-pw="slot" data-v="' + x[0] + '" aria-selected="' + (sl === x[0]) + '">' + esc(tr(x[1])) + "</button>"; }).join("") + '<button role="tab" data-pw="slot" data-v="col" aria-selected="' + (sl === "col") + '">' + esc(tr("Pelaje")) + "</button></div>";
     if (sl === "col") {
@@ -671,9 +704,12 @@ var PetWorld = (function () {
       s += '<div class="pw-row"><input id="pwrn" maxlength="16" value="' + esc(pt.nm) + '" aria-label="' + esc(tr("Nombre")) + '"><button class="btn" data-pw="name">' + esc(tr("Cambiar nombre")) + "</button></div>";
     } else {
       var items = PET_ACC2.filter(function (a) { return a.s === sl; }), have = items.filter(function (a) { return owned(a.id); }), locked = items.filter(function (a) { return !owned(a.id) && a.un; });
-      s += '<div class="pw-grid">' + have.map(function (a) { var on = pt.eq[sl] === a.id; return '<button class="pw-item r' + a.r + (on ? " on" : "") + '" data-pw="wear" data-v="' + a.id + '" aria-pressed="' + on + '"><b>' + esc(tr(a.n)) + "</b><small>" + esc(tr(PET_RARITY.filter(function (x) { return x[0] === a.r; })[0][1])) + "</small></button>"; }).join("") +
+      s += '<div class="pw-grid">' + have.map(function (a) { var on = pt.eq[sl] === a.id; return '<button class="pw-item r' + a.r + (on ? " on" : "") + '" data-pw="wear" data-v="' + a.id + '" aria-pressed="' + on + '"><b>' + esc(tr(a.n)) + "</b><small>" + esc(tr(PET_RARITY.filter(function (x) { return x[0] === a.r; })[0][1])) + "</small>" + accSt(a.id) + "</button>"; }).join("") +
         locked.map(function (a) { return '<div class="pw-item locked"><b>🔒 ' + esc(tr(a.n)) + "</b><small>" + esc(tr(a.ud || "")) + "</small></div>"; }).join("") + "</div>";
       if (!have.length) s += '<p class="pw-hint">' + esc(tr("Todavía no tienes nada para esta parte.")) + "</p>";
+      /* 5.7: lo que suma todo lo que lleva puesto (estilo en concursos, ánimo, vínculo, energía) */
+      var tb = typeof GXI !== "undefined" ? GXI.petBonus(pt) : {}, tk = Object.keys(tb).filter(function (k) { return tb[k]; });
+      if (tk.length) s += '<p class="pw-hint pw-sum">' + esc(tr("Lo que lleva suma: {x}", {x: tk.map(function (k) { return "+" + Math.round(tb[k]) + " " + tr(GX_STATN[k] || k); }).join(" · ")})) + "</p>";
       s += '<button class="btn wide" data-pw="shop">🛍️ ' + esc(tr("Ir a la tienda")) + "</button>";
     }
     panel(s);

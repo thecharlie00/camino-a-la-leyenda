@@ -4686,6 +4686,7 @@ var Pitch3D = (function () {
       M.order.forEach(function (n) { bake(M.mesh[n], W[n]); });
       var fm = M.faceMesh(ex); if (fm) bake(fm, W[M.facePart]);
       petA.acc.forEach(function (q) { bake(q.verts, q.W); });
+      if (petA.toy && petA.toy.verts) bake(petA.toy.verts, petA.toyM());
     } catch (e) { opts.pet = null; }
   }
   /* 5.6: el míster vóxel en su área técnica (modo míster): señala, se cruza de brazos, aplaude y celebra */
@@ -4695,14 +4696,16 @@ var Pitch3D = (function () {
     try {
       var co = opts.coach, O = [LEN / 2, 0, MIDZ];
       if (!coachA) {
-        coachA = new SpRig.Man({shirt: co.suit || "#2a3340", shorts: co.trousers || co.suit || "#2a3340", socks: co.trousers || "#1b1d1f", trim: co.trousers || co.suit || "#2a3340", skin: co.skin || "#c18a5e", hair: co.hair || "#2a1a10", boots: co.shoes || "#1b1d1f", hairStyle: co.hs || 0, fem: !!co.fem, official: true, gk: true, gloves: co.skin || "#c18a5e", longLegs: true, tie: co.tie || "#7a1d1d"});
+        coachA = new SpRig.Man(co.rig || {shirt: co.suit || "#2a3340", shorts: co.trousers || co.suit || "#2a3340", socks: co.trousers || "#1b1d1f", trim: co.trousers || co.suit || "#2a3340", skin: co.skin || "#c18a5e", hair: co.hair || "#2a1a10", boots: co.shoes || "#1b1d1f", hairStyle: co.hs || 0, fem: !!co.fem, official: true, gk: true, gloves: co.skin || "#c18a5e", longLegs: true, tie: co.tie || "#7a1d1d"});
         coachA.x = LEN / 2 + (opts.mySide === 1 ? 9 : -9) - 1.6 - O[0]; coachA.z = -2.6 - O[2]; coachA.yaw = 0;
       }
       var now = sim.time || 0, dt = Math.min(0.05, Math.max(0, now - coachT)); coachT = now;
       coachNext -= dt;
       if (!coachA.clip && coachNext <= 0) {
         var mine = sim.ball && sim.ball.side === (opts.mySide || 0);
-        coachA.play(mine ? (Math.random() < 0.6 ? "cpoint" : "cclap") : (Math.random() < 0.55 ? "ccross" : "cpoint"));
+        /* 5.7: con libreta o tableta, a ratos apunta (más cuando el rival tiene el balón) */
+        var nt = coachA.o && coachA.o.notes && SpRig.CLIPS.cnotes && Math.random() < (mine ? 0.15 : 0.35);
+        coachA.play(nt ? "cnotes" : mine ? (Math.random() < 0.6 ? "cpoint" : "cclap") : (Math.random() < 0.55 ? "ccross" : "cpoint"));
         coachNext = 3 + Math.random() * 4;
       }
       /* mira hacia el balón girando poco a poco */
