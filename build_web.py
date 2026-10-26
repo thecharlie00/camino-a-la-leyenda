@@ -14,7 +14,7 @@ ROOT = pathlib.Path(__file__).resolve().parent
 WEB = ROOT / "web"
 DIST = pathlib.Path(os.environ["CAMINO_DIST"]) if os.environ.get("CAMINO_DIST") else ROOT / "dist"
 OUT = DIST / "site"
-FONTS = ROOT / "fonts" / "node_modules" / "@fontsource"
+FONTS = ROOT / "fonts" / "files"
 
 cfg = json.loads(pathlib.Path(os.environ.get("CAMINO_WEB_CONFIG") or (WEB / "config.json")).read_text(encoding="utf-8-sig"))
 goat_api_url = os.environ.get("CAMINO_GOAT_API_URL", cfg.get("goat_api_url", "")).strip().rstrip("/")
@@ -36,14 +36,14 @@ if OUT.exists():
 (OUT / "fonts").mkdir()
 
 # --- juego: sin el SDK de Android y con la política de privacidad de la web con AdSense ---
-html = game.read_text()
+html = game.read_text(encoding="utf-8")
 for a, b in (("var GOAT_WEB_BUILD = false;", "var GOAT_WEB_BUILD = true;"),
               ("var WEB_BUILD = false;", "var WEB_BUILD = true;"),
               ("var NO_ADS = false;", "var NO_ADS = true;"),
               ("var WEB_ADS = false;", "var WEB_ADS = true;" if client else "var WEB_ADS = false;")):
     assert html.count(a) == 1, "falta la marca " + a
     html = html.replace(a, b)
-(OUT / "jugar" / "juego.html").write_text(html)
+(OUT / "jugar" / "juego.html").write_text(html, encoding="utf-8")
 
 # --- tipografías del juego, servidas como archivos ---
 faces = [("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 400), ("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 500),
@@ -52,7 +52,7 @@ faces = [("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next", 400), ("At
 css = []
 for fam, pkg, w in faces:
     for sub in ("latin", "latin-ext"):
-        src = FONTS / pkg / "files" / f"{pkg}-{sub}-{w}-normal.woff2"
+        src = FONTS / f"{pkg}-{sub}-{w}-normal.woff2"
         if not src.exists():
             continue
         shutil.copy(src, OUT / "fonts" / src.name)
@@ -61,7 +61,7 @@ for fam, pkg, w in faces:
 # las cifras de los títulos pixelados salen de Atkinson (legibles), definidas después para que ganen
 for w in (500, 700):
     css.append(f'@font-face{{font-family:"CamDisp";font-weight:{w};font-style:normal;font-display:swap;src:url(fonts/atkinson-hyperlegible-next-latin-{w}-normal.woff2) format("woff2");unicode-range:U+0023-0025,U+002B-002E,U+0030-003A,U+20AC}}')
-(OUT / "site.css").write_text("\n".join(css) + "\n" + (WEB / "site.css").read_text())
+(OUT / "site.css").write_text("\n".join(css) + "\n" + (WEB / "site.css").read_text(encoding="utf-8"), encoding="utf-8")
 shutil.copy(WEB / "site.js", OUT / "site.js")
 shutil.copy(WEB / "goat-ladder.js", OUT / "goat-ladder.js")
 shutil.copy(ROOT / "src" / "pixel.js", OUT / "pixel.js")
@@ -69,7 +69,7 @@ shutil.copy(ROOT / "src" / "trophies.js", OUT / "trophies.js")
 shutil.copytree(WEB / "img", OUT / "img")
 
 # --- plantillas, una por idioma: castellano en la raíz y /en/, /de/, /it/, /fr/ ---
-TR = json.loads((WEB / "i18n.json").read_text())
+TR = json.loads((WEB / "i18n.json").read_text(encoding="utf-8"))
 LANGS = ["es", "en", "de", "it", "fr"]
 LOCALE = {"es": "es_ES", "en": "en_GB", "de": "de_DE", "it": "it_IT", "fr": "fr_FR"}
 PAGES = [("index.html", ""), ("jugar.html", "jugar/"), ("goat-ladder.html", "goat-ladder/"), ("privacidad.html", "privacidad/")]
@@ -151,7 +151,7 @@ def render(name, l, page):
         "{{HOST}}": t(l, "p_host", a=link("https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement", t(l, "p_host_a"))),
         "{{CHG}}": t(l, "p_chg", a=link(repo_url, t(l, "p_chg_a"))),
     }
-    s2 = (WEB / name).read_text()
+    s2 = (WEB / name).read_text(encoding="utf-8")
     for a, b in rep.items():
         s2 = s2.replace(a, b)
     s2 = re.sub(r"\{\{SHOT:(\w+)\}\}", shot, s2)
@@ -164,26 +164,26 @@ for l in LANGS:
     for name, page in PAGES:
         d = OUT / ("" if l == "es" else l) / page
         d.mkdir(parents=True, exist_ok=True)
-        (d / "index.html").write_text(render(name, l, page))
-(OUT / "404.html").write_text(render("index.html", "es", "").replace('<link rel="canonical"', '<meta name="robots" content="noindex"><link rel="canonical"'))
+        (d / "index.html").write_text(render(name, l, page), encoding="utf-8")
+(OUT / "404.html").write_text(render("index.html", "es", "").replace('<link rel="canonical"', '<meta name="robots" content="noindex"><link rel="canonical"'), encoding="utf-8")
 # en una ruta desconocida las rutas relativas no valen: el 404 usa la base absoluta
 if base.startswith("http"):
-    t404 = (OUT / "404.html").read_text()
+    t404 = (OUT / "404.html").read_text(encoding="utf-8")
     t404 = re.sub(r'(href|src)="(?!https?:|#|data:)([^"]*)"', lambda m: f'{m.group(1)}="{base}{m.group(2).lstrip("./")}"' if not m.group(2).startswith("/") else m.group(0), t404)
-    (OUT / "404.html").write_text(t404)
+    (OUT / "404.html").write_text(t404, encoding="utf-8")
 
 (OUT / "manifest.webmanifest").write_text(json.dumps({
     "name": "Camino a la Leyenda", "short_name": "Camino", "start_url": "./jugar/", "display": "standalone",
     "background_color": "#0b1417", "theme_color": "#0b1417", "lang": "es",
-    "icons": [{"src": "img/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png"}]}, ensure_ascii=False))
-(OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {base}sitemap.xml\n")
+    "icons": [{"src": "img/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png"}]}, ensure_ascii=False), encoding="utf-8")
+(OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {base}sitemap.xml\n", encoding="utf-8")
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
     "".join(f"<url><loc>{base}{'' if l == 'es' else l + '/'}{p}</loc>" + "".join(f'<xhtml:link rel="alternate" hreflang="{o}" href="{base}{"" if o == "es" else o + "/"}{p}"/>' for o in LANGS) + "</url>\n"
-            for l in LANGS for _, p in PAGES) + "</urlset>\n")
+            for l in LANGS for _, p in PAGES) + "</urlset>\n", encoding="utf-8")
 if client:
-    (OUT / "ads.txt").write_text(f"google.com, {client.replace('ca-', '')}, DIRECT, f08c47fec0942fa0\n")
+    (OUT / "ads.txt").write_text(f"google.com, {client.replace('ca-', '')}, DIRECT, f08c47fec0942fa0\n", encoding="utf-8")
 if domain:
-    (OUT / "CNAME").write_text(domain + "\n")
-(OUT / ".nojekyll").write_text("")
+    (OUT / "CNAME").write_text(domain + "\n", encoding="utf-8")
+(OUT / ".nojekyll").write_text("", encoding="utf-8")
 n = sum(1 for _ in OUT.rglob("*") if _.is_file())
 print(f"web: {n} archivos en {OUT} · anuncios {'activados (' + client + ')' if client else 'desactivados (falta adsense_client)'} · base {base}")

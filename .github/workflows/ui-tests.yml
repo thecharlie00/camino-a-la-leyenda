@@ -1,0 +1,59 @@
+name: Regresión de equipamiento y tienda
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "test/**"
+      - "build.py"
+      - "fonts/**"
+      - "tools/**"
+      - ".github/workflows/ui-tests.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "test/**"
+      - "build.py"
+      - "fonts/**"
+      - "tools/**"
+      - ".github/workflows/ui-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ui-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gear-shop:
+    name: Equipamiento y tienda (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NODE_PATH: ${{ github.workspace }}/tools/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instalar dependencias de build y Playwright
+        run: |
+          cd tools
+          npm ci --silent
+          npm install --no-save --no-package-lock playwright@1.64.1
+          npx playwright install --with-deps chromium
+      - name: Compilar el juego
+        run: |
+          node tools/i18n.js build
+          python3 build.py
+      - name: Pruebas de equipamiento y tienda
+        run: |
+          node test/gear56.js /tmp/gear56
+          node test/shop56.js /tmp/shop56

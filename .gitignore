@@ -18,10 +18,15 @@ android-studio/app/src/*/assets/index.html
 # --- Herramientas descargables y temporales ---
 tools/node_modules/
 tools/bt/
+fonts/node_modules/
 __pycache__/
 *.pyc
 work/
 .DS_Store
+
+# --- Artefactos locales de desarrollo/QA ---
+.claude/
+qa-shots/
 
 # --- Assets generados (se producen con tools/assets/build_assets.mjs) ---
 assets/generated/

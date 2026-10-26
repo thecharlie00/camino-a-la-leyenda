@@ -1803,6 +1803,26 @@
   ],
   "ctx": "h(tr(\"{n} de {t} trofeos de esta carrera\", {n: got.length, t: L.length})) + \"</small>\" +"
  },
+ "Todos": {
+  "w": [
+   "ui-gx.js:211",
+   "ui.js:1350",
+   "ui.js:1727"
+  ],
+  "ctx": "s += '<div class=\"seg gxs-st\">' + [[\"all\", N_(\"Todos\")], [\"on\", N_(\"Conseguidos\")], [\"off\", N_(\"Pendientes\")]].map(function (x) { return '<button data-a=\"gxst\" data-v=\"' + x[0] + '\" aria-pressed=\"' + (F.st === x[0]) + '\""
+ },
+ "Conseguidos": {
+  "w": [
+   "ui-gx.js:211"
+  ],
+  "ctx": "s += '<div class=\"seg gxs-st\">' + [[\"all\", N_(\"Todos\")], [\"on\", N_(\"Conseguidos\")], [\"off\", N_(\"Pendientes\")]].map(function (x) { return '<button data-a=\"gxst\" data-v=\"' + x[0] + '\" aria-pressed=\"' + (F.st === x[0]) + '\""
+ },
+ "Pendientes": {
+  "w": [
+   "ui-gx.js:211"
+  ],
+  "ctx": "s += '<div class=\"seg gxs-st\">' + [[\"all\", N_(\"Todos\")], [\"on\", N_(\"Conseguidos\")], [\"off\", N_(\"Pendientes\")]].map(function (x) { return '<button data-a=\"gxst\" data-v=\"' + x[0] + '\" aria-pressed=\"' + (F.st === x[0]) + '\""
+ },
  "Todas": {
   "w": [
    "ui-gx.js:214"
@@ -41285,7 +41305,7 @@
  "jugadores": {
   "w": [
    "life.js:319",
-   "pitch3d.js:4338"
+   "pitch3d.js:4339"
   ],
   "ctx": "function lifeGroupName(g) { return {POR: N_(\"porteros\"), DEF: N_(\"defensas\"), MED: N_(\"centrocampistas\"), DEL: N_(\"delanteros\")}[g] || N_(\"jugadores\"); }"
  },
@@ -44763,31 +44783,36 @@
   "w": [
    "match41.js:19",
    "pitch.js:1091",
-   "pitch.js:1150"
+   "pitch.js:1150",
+   "pitch3d.js:4781"
   ],
   "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
  },
  "Nublado": {
   "w": [
-   "match41.js:19"
+   "match41.js:19",
+   "pitch3d.js:4782"
   ],
   "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
  },
  "Lluvia": {
   "w": [
-   "match41.js:19"
+   "match41.js:19",
+   "pitch3d.js:4783"
   ],
   "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
  },
  "Calor": {
   "w": [
-   "match41.js:19"
+   "match41.js:19",
+   "pitch3d.js:4784"
   ],
   "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
  },
  "Frío": {
   "w": [
-   "match41.js:19"
+   "match41.js:19",
+   "pitch3d.js:4785"
   ],
   "ctx": "var MX_WX = [[\"sun\", \"☀️\", N_(\"Despejado\"), 1], [\"mild\", \"⛅\", N_(\"Nublado\"), 1], [\"rain\", \"🌧️\", N_(\"Lluvia\"), 1.06], [\"heat\", \"🥵\", N_(\"Calor\"), 1.16], [\"cold\", \"❄️\", N_(\"Frío\"), 0.95]];"
  },
@@ -46754,14 +46779,16 @@
  "Campo rápido": {
   "w": [
    "pitch.js:1091",
-   "pitch.js:1150"
+   "pitch.js:1150",
+   "ui.js:2094",
+   "pitch3d.js:4781"
   ],
   "ctx": "if (!wx.key) wx = {key: \"sun\", icon: \"☀\", name: tr(\"Despejado\"), effect: tr(\"Campo rápido\"), mul: 1};"
  },
  "Tu equipo": {
   "w": [
    "pitch.js:1092",
-   "pitch3d.js:4412"
+   "pitch3d.js:4413"
   ],
   "ctx": "return {myName: String(t.myName || tr(\"Tu equipo\")), opp: String(t.oppName || tr(\"Rival\")),"
  },
@@ -46769,197 +46796,197 @@
   "w": [
    "pitch.js:1092",
    "pitch.js:1151",
-   "pitch3d.js:4412",
-   "pitch3d.js:4470"
+   "pitch3d.js:4413",
+   "pitch3d.js:4471"
   ],
   "ctx": "return {myName: String(t.myName || tr(\"Tu equipo\")), opp: String(t.oppName || tr(\"Rival\")),"
  },
  "Eliges la orientación y hacia qué portería atacar.": {
   "w": [
    "pitch.js:1100",
-   "pitch3d.js:4421"
+   "pitch3d.js:4422"
   ],
   "ctx": "pros.push(tr(\"Eliges la orientación y hacia qué portería atacar.\"));"
  },
  "Con el césped resbaladizo, proteges el lado de tu salida.": {
   "w": [
    "pitch.js:1101",
-   "pitch3d.js:4422"
+   "pitch3d.js:4423"
   ],
   "ctx": "if (x.wx.key === \"rain\") pros.push(tr(\"Con el césped resbaladizo, proteges el lado de tu salida.\"));"
  },
  "Evitas atacar de cara al sol en el segundo tiempo.": {
   "w": [
    "pitch.js:1102",
-   "pitch3d.js:4423"
+   "pitch3d.js:4424"
   ],
   "ctx": "else if (x.wx.key === \"heat\") pros.push(tr(\"Evitas atacar de cara al sol en el segundo tiempo.\"));"
  },
  "Puedes elegir el lado con menos viento y nieve.": {
   "w": [
    "pitch.js:1103",
-   "pitch3d.js:4424"
+   "pitch3d.js:4425"
   ],
   "ctx": "else if (x.wx.key === \"cold\") pros.push(tr(\"Puedes elegir el lado con menos viento y nieve.\"));"
  },
  "Su posesión se adapta a cualquier orientación.": {
   "w": [
    "pitch.js:1104",
-   "pitch3d.js:4425"
+   "pitch3d.js:4426"
   ],
   "ctx": "if (x.style === \"possession\") cons.push(tr(\"Su posesión se adapta a cualquier orientación.\"));"
  },
  "Su presión alta puede cerrarte la banda que defiendes.": {
   "w": [
    "pitch.js:1105",
-   "pitch3d.js:4426"
+   "pitch3d.js:4427"
   ],
   "ctx": "else if (x.style === \"press\") cons.push(tr(\"Su presión alta puede cerrarte la banda que defiendes.\"));"
  },
  "Su juego directo funciona igual en las dos porterías.": {
   "w": [
    "pitch.js:1106",
-   "pitch3d.js:4427"
+   "pitch3d.js:4428"
   ],
   "ctx": "else if (x.style === \"direct\") cons.push(tr(\"Su juego directo funciona igual en las dos porterías.\"));"
  },
  "Te cederá el balón y buscará tu espalda desde el inicio.": {
   "w": [
    "pitch.js:1107",
-   "pitch3d.js:4428"
+   "pitch3d.js:4429"
   ],
   "ctx": "else if (x.style === \"counter\") cons.push(tr(\"Te cederá el balón y buscará tu espalda desde el inicio.\"));"
  },
  "El cambio de lado no compensa su superioridad.": {
   "w": [
    "pitch.js:1108",
-   "pitch3d.js:4429"
+   "pitch3d.js:4430"
   ],
   "ctx": "if (x.diff < -3) cons.push(tr(\"El cambio de lado no compensa su superioridad.\"));"
  },
  "Conservas el saque de centro y marcas el primer ritmo.": {
   "w": [
    "pitch.js:1110",
-   "pitch3d.js:4431"
+   "pitch3d.js:4432"
   ],
   "ctx": "pros.push(tr(\"Conservas el saque de centro y marcas el primer ritmo.\"));"
  },
  "Le obligas a correr detrás del balón desde el inicio.": {
   "w": [
    "pitch.js:1111",
-   "pitch3d.js:4432"
+   "pitch3d.js:4433"
   ],
   "ctx": "if (x.style === \"possession\") pros.push(tr(\"Le obligas a correr detrás del balón desde el inicio.\"));"
  },
  "Puedes jugar el primer balón en largo sin presión.": {
   "w": [
    "pitch.js:1112",
-   "pitch3d.js:4433"
+   "pitch3d.js:4434"
   ],
   "ctx": "else if (x.style === \"direct\") pros.push(tr(\"Puedes jugar el primer balón en largo sin presión.\"));"
  },
  "Su presión alta puede atrapar tu primer pase.": {
   "w": [
    "pitch.js:1113",
-   "pitch3d.js:4434"
+   "pitch3d.js:4435"
   ],
   "ctx": "else if (x.style === \"press\") cons.push(tr(\"Su presión alta puede atrapar tu primer pase.\"));"
  },
  "Te cede la iniciativa y espera tu error para salir en contra.": {
   "w": [
    "pitch.js:1114",
-   "pitch3d.js:4435"
+   "pitch3d.js:4436"
   ],
   "ctx": "else if (x.style === \"counter\") cons.push(tr(\"Te cede la iniciativa y espera tu error para salir en contra.\"));"
  },
  "El balón corre más: el primer pase puede escaparse.": {
   "w": [
    "pitch.js:1115",
-   "pitch3d.js:4436"
+   "pitch3d.js:4437"
   ],
   "ctx": "if (x.wx.key === \"rain\") cons.push(tr(\"El balón corre más: el primer pase puede escaparse.\"));"
  },
  "El balón pesado exige un primer toque más firme.": {
   "w": [
    "pitch.js:1116",
-   "pitch3d.js:4437"
+   "pitch3d.js:4438"
   ],
   "ctx": "else if (x.wx.key === \"cold\") cons.push(tr(\"El balón pesado exige un primer toque más firme.\"));"
  },
  "Dosificar el ritmo desde el saque ahorra fuerzas.": {
   "w": [
    "pitch.js:1117",
-   "pitch3d.js:4438"
+   "pitch3d.js:4439"
   ],
   "ctx": "else if (x.wx.key === \"heat\") pros.push(tr(\"Dosificar el ritmo desde el saque ahorra fuerzas.\"));"
  },
  "Tu superioridad te permite dominar el primer balón.": {
   "w": [
    "pitch.js:1118",
-   "pitch3d.js:4439"
+   "pitch3d.js:4440"
   ],
   "ctx": "if (x.diff > 3) pros.push(tr(\"Tu superioridad te permite dominar el primer balón.\"));"
  },
  "Si el rival es superior, perderás el balón en zonas peligrosas.": {
   "w": [
    "pitch.js:1119",
-   "pitch3d.js:4440"
+   "pitch3d.js:4441"
   ],
   "ctx": "if (x.diff < -3) cons.push(tr(\"Si el rival es superior, perderás el balón en zonas peligrosas.\"));"
  },
  "Mantienes tu plan de saque sin cambios.": {
   "w": [
    "pitch.js:1121",
-   "pitch3d.js:4442"
+   "pitch3d.js:4443"
   ],
   "ctx": "if (!pros.length) pros.push(tr(\"Mantienes tu plan de saque sin cambios.\"));"
  },
  "No cambias de lado: mantienes la orientación actual.": {
   "w": [
    "pitch.js:1122",
-   "pitch3d.js:4443"
+   "pitch3d.js:4444"
   ],
   "ctx": "if (!cons.length) cons.push(tr(\"No cambias de lado: mantienes la orientación actual.\"));"
  },
  "Quiere presionar hacia su propia grada en el primer tiempo.": {
   "w": [
    "pitch.js:1127",
-   "pitch3d.js:4449"
+   "pitch3d.js:4450"
   ],
   "ctx": "if (x.style === \"press\") return {choice: \"campo\", why: tr(\"Quiere presionar hacia su propia grada en el primer tiempo.\")};"
  },
  "Prefiere ordenar el campo y defender con la línea adelantada.": {
   "w": [
    "pitch.js:1128",
-   "pitch3d.js:4450"
+   "pitch3d.js:4451"
   ],
   "ctx": "if (x.style === \"possession\") return {choice: \"campo\", why: tr(\"Prefiere ordenar el campo y defender con la línea adelantada.\")};"
  },
  "Busca atacar con el sol o el viento a favor en el segundo tiempo.": {
   "w": [
    "pitch.js:1129",
-   "pitch3d.js:4451"
+   "pitch3d.js:4452"
   ],
   "ctx": "if (x.style === \"direct\") return {choice: \"campo\", why: tr(\"Busca atacar con el sol o el viento a favor en el segundo tiempo.\")};"
  },
  "Quiere que su bloque pueda salir en contra hacia su banquillo.": {
   "w": [
    "pitch.js:1130",
-   "pitch3d.js:4452"
+   "pitch3d.js:4453"
   ],
   "ctx": "if (x.style === \"counter\") return {choice: \"campo\", why: tr(\"Quiere que su bloque pueda salir en contra hacia su banquillo.\")};"
  },
  "No necesita cambiar nada: confía en su nivel y te deja el primer balón.": {
   "w": [
    "pitch.js:1131",
-   "pitch3d.js:4453"
+   "pitch3d.js:4454"
   ],
   "ctx": "if (x.diff <= -4) return {choice: \"pelota\", why: tr(\"No necesita cambiar nada: confía en su nivel y te deja el primer balón.\")};"
  },
  "Busca que la lluvia complique tu salida desde atrás.": {
   "w": [
    "pitch.js:1132",
-   "pitch3d.js:4454"
+   "pitch3d.js:4455"
   ],
   "ctx": "if (x.wx.key === \"rain\") return {choice: \"campo\", why: tr(\"Busca que la lluvia complique tu salida desde atrás.\")};"
  },
@@ -46967,8 +46994,8 @@
   "w": [
    "pitch.js:1133",
    "pitch.js:1210",
-   "pitch3d.js:4455",
-   "pitch3d.js:4510"
+   "pitch3d.js:4456",
+   "pitch3d.js:4511"
   ],
   "ctx": "return {choice: \"campo\", why: tr(\"Elige el lado que mejor encaja con su plan de partido.\")};"
  },
@@ -46976,7 +47003,7 @@
   "w": [
    "pitch.js:1150",
    "ui.js:2116",
-   "pitch3d.js:4469"
+   "pitch3d.js:4470"
   ],
   "ctx": "\"🌤 \" + tr(\"Clima\") + \": \" + esc2D((wx.icon || \"☀\") + \" \" + (wx.name || tr(\"Despejado\"))) + \" · \" + esc2D(wx.effect || tr(\"Campo rápido\")) + \" · \" + tr(\"Fatiga\") + \" ×\" + fmtMul2D(mul) + \"<br>\" +"
  },
@@ -46985,7 +47012,7 @@
    "pitch.js:1150",
    "ui.js:2117",
    "ui-shootout.js:163",
-   "pitch3d.js:4469"
+   "pitch3d.js:4470"
   ],
   "ctx": "\"🌤 \" + tr(\"Clima\") + \": \" + esc2D((wx.icon || \"☀\") + \" \" + (wx.name || tr(\"Despejado\"))) + \" · \" + esc2D(wx.effect || tr(\"Campo rápido\")) + \" · \" + tr(\"Fatiga\") + \" ×\" + fmtMul2D(mul) + \"<br>\" +"
  },
@@ -46993,7 +47020,7 @@
   "w": [
    "pitch.js:1151",
    "ui-mgrplus.js:63",
-   "pitch3d.js:4470"
+   "pitch3d.js:4471"
   ],
   "ctx": "tr(\"Rival\") + \": \" + esc2D(x.opp) + \" · \" + tr(\"Nivel\") + \" \" + x.oppLevel + \" · \" + esc2D(x.styleLabel) + \"</div>\";"
  },
@@ -47024,133 +47051,133 @@
  "Cara o cruz": {
   "w": [
    "pitch.js:1188",
-   "pitch3d.js:4488"
+   "pitch3d.js:4489"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Cara o cruz\") + \"</b>\" +"
  },
  "Elige tu llamada.": {
   "w": [
    "pitch.js:1189",
-   "pitch3d.js:4489"
+   "pitch3d.js:4490"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"Elige tu llamada.\") + \"</span>\" +"
  },
  "Tiempo para llamar": {
   "w": [
    "pitch.js:1191",
-   "pitch3d.js:4491"
+   "pitch3d.js:4492"
   ],
   "ctx": "timer2D(tr(\"Tiempo para llamar\"), COIN_WAIT) + tossMeta2D();"
  },
  "La moneda está en el aire…": {
   "w": [
    "pitch.js:1193",
-   "pitch3d.js:4493"
+   "pitch3d.js:4494"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"La moneda está en el aire…\") + \"</b>\" +"
  },
  "Has llamado {v}.": {
   "w": [
    "pitch.js:1194",
-   "pitch3d.js:4494"
+   "pitch3d.js:4495"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"Has llamado {v}.\", {v: coin.call === \"cara\" ? tr(\"Cara\") : tr(\"Cruz\")}) + \"</span>\" + tossMeta2D();"
  },
  "Salió {v}.": {
   "w": [
    "pitch.js:1196",
-   "pitch3d.js:4496"
+   "pitch3d.js:4497"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Salió {v}.\", {v: face}) + \"</b>\" +"
  },
  "Ganas el sorteo.": {
   "w": [
    "pitch.js:1198",
-   "pitch3d.js:4498"
+   "pitch3d.js:4499"
   ],
   "ctx": "(coin.winner === 0 ? tr(\"Ganas el sorteo.\") : tr(\"Gana el rival.\")) + \"</span>\" + tossMeta2D();"
  },
  "Gana el rival.": {
   "w": [
    "pitch.js:1198",
-   "pitch3d.js:4498"
+   "pitch3d.js:4499"
   ],
   "ctx": "(coin.winner === 0 ? tr(\"Ganas el sorteo.\") : tr(\"Gana el rival.\")) + \"</span>\" + tossMeta2D();"
  },
  "¡Ganaste el sorteo!": {
   "w": [
    "pitch.js:1200",
-   "pitch3d.js:4500"
+   "pitch3d.js:4501"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"¡Ganaste el sorteo!\") + \"</b>\" +"
  },
  "¿Campo o pelota?": {
   "w": [
    "pitch.js:1201",
-   "pitch3d.js:4501"
+   "pitch3d.js:4502"
   ],
   "ctx": "'<span style=\"' + sub + '\">' + tr(\"¿Campo o pelota?\") + \"</span>\" +"
  },
  "Campo cambia de lado · Pelota mantiene el saque": {
   "w": [
    "pitch.js:1203",
-   "pitch3d.js:4503"
+   "pitch3d.js:4504"
   ],
   "ctx": "'<span style=\"display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px\">' + tr(\"Campo cambia de lado · Pelota mantiene el saque\") + \"</span>\" +"
  },
  "Tiempo para elegir": {
   "w": [
    "pitch.js:1204",
-   "pitch3d.js:4504"
+   "pitch3d.js:4505"
   ],
   "ctx": "timer2D(tr(\"Tiempo para elegir\"), CHOICE_WAIT) + tossMeta2D();"
  },
  "Gana el rival el sorteo": {
   "w": [
    "pitch.js:1207",
-   "pitch3d.js:4507"
+   "pitch3d.js:4508"
   ],
   "ctx": "s = '<b style=\"' + title + '\">' + tr(\"Gana el rival el sorteo\") + \"</b>\" +"
  },
  "Elige {v}.": {
   "w": [
    "pitch.js:1208",
-   "pitch3d.js:4508"
+   "pitch3d.js:4509"
   ],
   "ctx": "'<span style=\"display:block;font:600 10px/1.25 system-ui;margin-top:2px\">' + tr(\"Elige {v}.\", {v: rp}) + \"</span>\" +"
  },
  "Campo elegido": {
   "w": [
    "pitch.js:1212",
-   "pitch3d.js:4512"
+   "pitch3d.js:4513"
   ],
   "ctx": "var cc = coin.choice === \"campo\" ? tr(\"Campo elegido\") : tr(\"Saque elegido\");"
  },
  "Saque elegido": {
   "w": [
    "pitch.js:1212",
-   "pitch3d.js:4512"
+   "pitch3d.js:4513"
   ],
   "ctx": "var cc = coin.choice === \"campo\" ? tr(\"Campo elegido\") : tr(\"Saque elegido\");"
  },
  "El rival decide: ": {
   "w": [
    "pitch.js:1213",
-   "pitch3d.js:4513"
+   "pitch3d.js:4514"
   ],
   "ctx": "var res = coin.winner === 1 ? tr(\"El rival decide: \") : \"\";"
  },
  "Cambiamos de lado antes del saque. Conservas el saque de centro.": {
   "w": [
    "pitch.js:1216",
-   "pitch3d.js:4516"
+   "pitch3d.js:4517"
   ],
   "ctx": "(coin.choice === \"campo\" ? tr(\"Cambiamos de lado antes del saque. Conservas el saque de centro.\") : tr(\"No cambiamos de lado. Conservas el saque de centro.\")) + \"</span>\" + tossMeta2D();"
  },
  "No cambiamos de lado. Conservas el saque de centro.": {
   "w": [
    "pitch.js:1216",
-   "pitch3d.js:4516"
+   "pitch3d.js:4517"
   ],
   "ctx": "(coin.choice === \"campo\" ? tr(\"Cambiamos de lado antes del saque. Conservas el saque de centro.\") : tr(\"No cambiamos de lado. Conservas el saque de centro.\")) + \"</span>\" + tossMeta2D();"
  },
@@ -48293,7 +48320,7 @@
  "Novedades": {
   "w": [
    "ui.js:873",
-   "ui-37.js:119"
+   "ui-37.js:126"
   ],
   "ctx": "return '<h3 class=\"sech\">' + tr(\"Novedades\") + '</h3><p class=\"sechint\">' + tr(\"Toca para abrir · desliza a la derecha para quitar\") + \"</p>\" + l.slice(0, UI.feedAll ? l.length : 6).map(function (c, i) { return i === 0 |"
  },
@@ -49592,13 +49619,6 @@
   ],
   "ctx": "s += '<section class=\"card\"><div class=\"head\"><h3>' + tr(\"Informes de ojeadores\") + '</h3><span class=\"eyebrow\">' + trn((m.mk.list || []).length, \"{n} jugador\", \"{n} jugadores\") + \"</span></div>\";",
   "note": "plural:plural"
- },
- "Todos": {
-  "w": [
-   "ui.js:1350",
-   "ui.js:1727"
-  ],
-  "ctx": "s += '<div class=\"seg\" style=\"margin-bottom:6px\">' + [[tr(\"Todos\"), \"ALL\"], [\"POR\", \"POR\"], [\"DEF\", \"DEF\"], [\"MED\", \"MED\"], [\"DEL\", \"DEL\"]].map(function (x) { return '<button data-a=\"mkf\" data-v=\"' + x[1] + '\" aria-press"
  },
  "Fichado": {
   "w": [
@@ -51450,6 +51470,34 @@
   ],
   "ctx": "s += '<p class=\"lhint\">' + (step === 1 ? tr(\"Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.\") : tr(\"Elige quién entra. Solo ves a quien puede jugar en su puesto.\")) + \"</p>\";"
  },
+ "Sin efecto claro": {
+  "w": [
+   "ui.js:2094",
+   "pitch3d.js:4782"
+  ],
+  "ctx": "var LIVE_WX_FX = {sun: N_(\"Campo rápido\"), mild: N_(\"Sin efecto claro\"), rain: N_(\"Balón vivo y césped resbaladizo\"),"
+ },
+ "Balón vivo y césped resbaladizo": {
+  "w": [
+   "ui.js:2094",
+   "pitch3d.js:4783"
+  ],
+  "ctx": "var LIVE_WX_FX = {sun: N_(\"Campo rápido\"), mild: N_(\"Sin efecto claro\"), rain: N_(\"Balón vivo y césped resbaladizo\"),"
+ },
+ "Ritmo lento y fatiga alta": {
+  "w": [
+   "ui.js:2095",
+   "pitch3d.js:4784"
+  ],
+  "ctx": "heat: N_(\"Ritmo lento y fatiga alta\"), cold: N_(\"Balón pesado y bote seco\")};"
+ },
+ "Balón pesado y bote seco": {
+  "w": [
+   "ui.js:2095",
+   "pitch3d.js:4785"
+  ],
+  "ctx": "heat: N_(\"Ritmo lento y fatiga alta\"), cold: N_(\"Balón pesado y bote seco\")};"
+ },
  "Posesión": {
   "w": [
    "ui.js:2134",
@@ -51529,7 +51577,7 @@
  "Ver la repetición": {
   "w": [
    "ui.js:2165",
-   "pitch3d.js:4578"
+   "pitch3d.js:4579"
   ],
   "ctx": "if (typeof Pitch !== \"undefined\") Pitch.mount(document.getElementById(\"lvpitch\"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === \"f\", pet: typeof petOf === \"function\" ? petOf() : null, coach: UIX.c"
  },
@@ -55362,48 +55410,90 @@
   ],
   "ctx": "var NOTES = [N_(\"Pareja, hijos y una relación que cuidar, como jugador y como entrenador\"), N_(\"Ficha a tu hijo o a tu hija y sigue su carrera\"), N_(\"El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia"
  },
+ "Camino a la Leyenda {tag}": {
+  "w": [
+   "ui-37.js:103"
+  ],
+  "ctx": "tr(\"Camino a la Leyenda {tag}\", {tag: tagTxt()}),"
+ },
+ "Build: {build}": {
+  "w": [
+   "ui-37.js:104"
+  ],
+  "ctx": "tr(\"Build: {build}\", {build: B.t || \"?\"}),"
+ },
+ "Idioma: {lang}": {
+  "w": [
+   "ui-37.js:105"
+  ],
+  "ctx": "tr(\"Idioma: {lang}\", {lang: LANG}),"
+ },
+ "Modo: {mode}": {
+  "w": [
+   "ui-37.js:106"
+  ],
+  "ctx": "tr(\"Modo: {mode}\", {mode: S ? (S.mode || \"p\") + (S.g === \"f\" ? \" (f)\" : \"\") : \"-\"}),"
+ },
+ "Temporada: {season}": {
+  "w": [
+   "ui-37.js:107"
+  ],
+  "ctx": "tr(\"Temporada: {season}\", {season: S ? S.yr : \"-\"}),"
+ },
+ "Pantalla: {size} @{dpr}": {
+  "w": [
+   "ui-37.js:108"
+  ],
+  "ctx": "tr(\"Pantalla: {size} @{dpr}\", {size: window.innerWidth + \"x\" + window.innerHeight, dpr: window.devicePixelRatio || 1}),"
+ },
+ "Navegador: {ua}": {
+  "w": [
+   "ui-37.js:109"
+  ],
+  "ctx": "tr(\"Navegador: {ua}\", {ua: navigator.userAgent})"
+ },
  "Versión": {
   "w": [
-   "ui-37.js:117",
-   "ui-37.js:117"
+   "ui-37.js:124",
+   "ui-37.js:124"
   ],
   "ctx": "return \"<h2>\" + tr(\"Versión\") + '</h2><div class=\"stack\"><div class=\"kvlist\"><div><span>' + tr(\"Versión\") + \"</span><span>\" + h(B.v) + \" · \" + tr(\"compilación {n}\", {n: B.code}) + \"</span></div><div><span>\" + tr(\"Canal\")"
  },
  "compilación {n}": {
   "w": [
-   "ui-37.js:117"
+   "ui-37.js:124"
   ],
   "ctx": "return \"<h2>\" + tr(\"Versión\") + '</h2><div class=\"stack\"><div class=\"kvlist\"><div><span>' + tr(\"Versión\") + \"</span><span>\" + h(B.v) + \" · \" + tr(\"compilación {n}\", {n: B.code}) + \"</span></div><div><span>\" + tr(\"Canal\")"
  },
  "Canal": {
   "w": [
-   "ui-37.js:117"
+   "ui-37.js:124"
   ],
   "ctx": "return \"<h2>\" + tr(\"Versión\") + '</h2><div class=\"stack\"><div class=\"kvlist\"><div><span>' + tr(\"Versión\") + \"</span><span>\" + h(B.v) + \" · \" + tr(\"compilación {n}\", {n: B.code}) + \"</span></div><div><span>\" + tr(\"Canal\")"
  },
  "Compilado": {
   "w": [
-   "ui-37.js:118"
+   "ui-37.js:125"
   ],
   "ctx": "\"<div><span>\" + tr(\"Compilado\") + \"</span><span>\" + (d && !isNaN(d) ? h(d.toLocaleString(LANG, {dateStyle: \"medium\", timeStyle: \"short\"})) : \"—\") + \"</span></div></div>\" +"
  },
  "Copiar información del sistema": {
   "w": [
-   "ui-37.js:120",
-   "ui-37.js:126",
-   "ui-37.js:127"
+   "ui-37.js:127",
+   "ui-37.js:133",
+   "ui-37.js:134"
   ],
   "ctx": "'<button class=\"btn wide\" data-a=\"vcopy\">' + tr(\"Copiar información del sistema\") + '</button><p class=\"muted\" style=\"font-size:var(--fs-xs);margin:0\">' + tr(\"Pégala cuando informes de un error: así sabremos qué versión "
  },
  "Pégala cuando informes de un error: así sabremos qué versión y qué dispositivo usas.": {
   "w": [
-   "ui-37.js:120"
+   "ui-37.js:127"
   ],
   "ctx": "'<button class=\"btn wide\" data-a=\"vcopy\">' + tr(\"Copiar información del sistema\") + '</button><p class=\"muted\" style=\"font-size:var(--fs-xs);margin:0\">' + tr(\"Pégala cuando informes de un error: así sabremos qué versión "
  },
  "Información copiada": {
   "w": [
-   "ui-37.js:124"
+   "ui-37.js:131"
   ],
   "ctx": "var t = sysInfo(), ok = function () { U.toast(tr(\"Información copiada\")); };"
  },
@@ -56201,9 +56291,75 @@
  },
  "Vista 3D del partido": {
   "w": [
-   "pitch3d.js:4559"
+   "pitch3d.js:4560"
   ],
   "ctx": "canvas.setAttribute(\"aria-label\", label(\"Vista 3D del partido\"));"
+ },
+ "3D · midiendo rendimiento…": {
+  "w": [
+   "pitch3d.js:4571"
+  ],
+  "ctx": "hud.textContent = label(\"3D · midiendo rendimiento…\");"
+ },
+ "3D · volver a 2D": {
+  "w": [
+   "pitch3d.js:5125"
+  ],
+  "ctx": "toggle.textContent = mounted ? label(\"3D · volver a 2D\") : label(\"Probar vista 3D\");"
+ },
+ "Probar vista 3D": {
+  "w": [
+   "pitch3d.js:5125"
+  ],
+  "ctx": "toggle.textContent = mounted ? label(\"3D · volver a 2D\") : label(\"Probar vista 3D\");"
+ },
+ "Campeones de {comp}": {
+  "w": [
+   "goat.js:32"
+  ],
+  "ctx": "if (blog.pos === 1) return tr(\"Campeones de {comp}\", {comp: competition});"
+ },
+ "Temporada invicta": {
+  "w": [
+   "goat.js:33"
+  ],
+  "ctx": "if (blog.l === 0) return tr(\"Temporada invicta\");"
+ },
+ "Temporada histórica en {comp}": {
+  "w": [
+   "goat.js:34"
+  ],
+  "ctx": "return tr(\"Temporada histórica en {comp}\", {comp: competition});"
+ },
+ "Hat-trick en {comp}": {
+  "w": [
+   "goat.js:36"
+  ],
+  "ctx": "if (mode === \"player\" && (blog.g || 0) >= 3) return tr(\"Hat-trick en {comp}\", {comp: competition});"
+ },
+ "La remontada ante {opp}": {
+  "w": [
+   "goat.js:37"
+  ],
+  "ctx": "if (comeback) return tr(\"La remontada ante {opp}\", {opp: opponent});"
+ },
+ "La final de {comp}": {
+  "w": [
+   "goat.js:38"
+  ],
+  "ctx": "if (isFinal && blog.gu > blog.gt) return tr(\"La final de {comp}\", {comp: competition});"
+ },
+ "Victoria ante {opp}": {
+  "w": [
+   "goat.js:39"
+  ],
+  "ctx": "if (mode === \"manager\" && blog.gu > blog.gt && blog.gu - blog.gt === 1) return tr(\"Victoria ante {opp}\", {opp: opponent});"
+ },
+ "Actuación ante {opp}": {
+  "w": [
+   "goat.js:40"
+  ],
+  "ctx": "return tr(\"Actuación ante {opp}\", {opp: opponent});"
  },
  "España": {
   "w": [

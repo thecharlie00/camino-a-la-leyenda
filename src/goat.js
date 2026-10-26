@@ -27,16 +27,17 @@
     }
   }
   function titleFor(mode, event, blog, opponent, competition, isFinal, comeback) {
+    competition = trComp(competition);
     if (event === "season") {
-      if (blog.pos === 1) return "Campeones de " + competition;
-      if (blog.l === 0) return "Temporada invicta";
-      return "Temporada histórica en " + competition;
+      if (blog.pos === 1) return tr("Campeones de {comp}", {comp: competition});
+      if (blog.l === 0) return tr("Temporada invicta");
+      return tr("Temporada histórica en {comp}", {comp: competition});
     }
-    if (mode === "player" && (blog.g || 0) >= 3) return "Hat-trick en " + competition;
-    if (comeback) return "La remontada ante " + opponent;
-    if (isFinal && blog.gu > blog.gt) return "La final de " + competition;
-    if (mode === "manager" && blog.gu > blog.gt && blog.gu - blog.gt === 1) return "Victoria ante " + opponent;
-    return "Actuación ante " + opponent;
+    if (mode === "player" && (blog.g || 0) >= 3) return tr("Hat-trick en {comp}", {comp: competition});
+    if (comeback) return tr("La remontada ante {opp}", {opp: opponent});
+    if (isFinal && blog.gu > blog.gt) return tr("La final de {comp}", {comp: competition});
+    if (mode === "manager" && blog.gu > blog.gt && blog.gu - blog.gt === 1) return tr("Victoria ante {opp}", {opp: opponent});
+    return tr("Actuación ante {opp}", {opp: opponent});
   }
   function depthOfLeague(index) {
     var depth = 1, current = index;
@@ -254,6 +255,8 @@
     canDelete: function (id) { return !!(memoryDeleteTokens[id] || storedDeleteTokens()[id]); },
     t: function (key) {
       var language = typeof LANG === "string" ? LANG : "es";
+      var fem = typeof FEM !== "undefined" && FEM && root.GOAT_FEM_TEXT ? root.GOAT_FEM_TEXT[language] : null;
+      if (fem && fem[key]) return fem[key];
       return (root.GOAT_TEXT[language] || root.GOAT_TEXT.es)[key] || root.GOAT_TEXT.es[key] || key;
     },
     list: function (mode, timeframe) {

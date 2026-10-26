@@ -12,6 +12,7 @@
 var Pitch3D = (function () {
   "use strict";
 
+  var N_ = (typeof window !== "undefined" && typeof window.N_ === "function") ? window.N_ : function (s) { return s; };
   var LEN = 105, WID = 68, MIDZ = WID / 2, POST = 3.66, BAR = 2.44, GRAV = 9.8;
   var PEN_DEPTH = 16.5, PEN_HALF = 20.16, GK_SAFE_DIST = 13.5;
   var PI = Math.PI, TAU = PI * 2, STEP = 1 / 60, AI_STEP = 1 / 30;
@@ -4567,7 +4568,7 @@ var Pitch3D = (function () {
     hud = document.createElement("div");
     hud.className = "lpitch3d-hud";
     hud.style.cssText = "position:absolute;z-index:19;left:6px;bottom:6px;padding:5px 7px;border-radius:5px;background:rgba(5,15,12,.78);color:#b9ffd6;font:600 var(--fs-2xs) ui-monospace,monospace;pointer-events:none";
-    hud.textContent = "3D · midiendo rendimiento…";
+    hud.textContent = label("3D · midiendo rendimiento…");
     host.appendChild(hud);
     scoreHud = document.createElement("div");
     scoreHud.className = "lpitch3d-score";
@@ -4777,12 +4778,12 @@ var Pitch3D = (function () {
 
   function weatherInfo(wx) {
     var fx = weatherFx(wx), meta = {
-      sun: ["☀", "Despejado", "Campo rápido"],
-      mild: ["☁", "Nublado", "Sin efecto claro"],
-      rain: ["🌧", "Lluvia", "Balón vivo y césped resbaladizo"],
-      heat: ["🔥", "Calor", "Ritmo lento y fatiga alta"],
-      cold: ["❄", "Frío", "Balón pesado y bote seco"]
-    }[fx.key] || ["☀", "Despejado", "Campo rápido"];
+      sun: ["☀", N_("Despejado"), N_("Campo rápido")],
+      mild: ["☁", N_("Nublado"), N_("Sin efecto claro")],
+      rain: ["🌧", N_("Lluvia"), N_("Balón vivo y césped resbaladizo")],
+      heat: ["🔥", N_("Calor"), N_("Ritmo lento y fatiga alta")],
+      cold: ["❄", N_("Frío"), N_("Balón pesado y bote seco")]
+    }[fx.key] || ["☀", N_("Despejado"), N_("Campo rápido")];
     return {key: fx.key, icon: meta[0], name: label(meta[1]), effect: label(meta[2]),
       fatigue: fx.fatigue, friction: fx.friction, bounce: fx.bounce, near: fx.near, far: fx.far};
   }
@@ -5113,7 +5114,6 @@ var Pitch3D = (function () {
   ["mount", "teams", "state", "event", "busy", "reset", "freeze", "destroy", "clearMsg", "replay", "active", "sound", "debug", "cinema", "skipCinema"].forEach(function (k) {
     originalApi[k] = original[k];
   });
-  function tr3(k) { return typeof tr === "function" ? tr(k) : k; }
   function preferred() {
     try {
       if (/(?:^|[?&])pitch3d=1(?:&|$)/.test(window.location.search)) return true;
@@ -5122,7 +5122,7 @@ var Pitch3D = (function () {
   }
   function updateToggle() {
     if (!toggle) return;
-    toggle.textContent = mounted ? tr3("3D · volver a 2D") : tr3("Probar vista 3D");
+    toggle.textContent = mounted ? label("3D · volver a 2D") : label("Probar vista 3D");
     toggle.setAttribute("aria-pressed", mounted ? "true" : "false");
   }
   function onLost() { if (mounted) setMode(false); }

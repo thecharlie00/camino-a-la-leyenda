@@ -208,7 +208,7 @@ var GXV = (function () {
     s += '<div class="gxs-top"><div class="gxs-pct" data-gxpct="' + pct + '"><b>0</b><small>%</small></div><div class="grow"><div class="gxs-bar"><i style="--w:' + pct + '%"></i></div><small class="muted">' +
       h(tr("{n} de {t} trofeos de esta carrera", {n: got.length, t: L.length})) + "</small>" +
       '<div class="gxs-rar">' + ["p", "g", "s", "b"].map(function (r) { return '<button data-a="gxrar" data-v="' + r + '" class="gxr gx-' + r + (F.rar === r ? " on" : "") + '" aria-pressed="' + (F.rar === r) + '"><img src="' + GXV.img(r, 48) + '" alt="" width="24" height="24"><span>' + byR[r][0] + "/" + byR[r][1] + "</span></button>"; }).join("") + "</div></div></div>";
-    s += '<div class="seg gxs-st">' + [["all", "Todos"], ["on", "Conseguidos"], ["off", "Pendientes"]].map(function (x) { return '<button data-a="gxst" data-v="' + x[0] + '" aria-pressed="' + (F.st === x[0]) + '">' + h(tr(x[1])) + "</button>"; }).join("") + "</div>";
+    s += '<div class="seg gxs-st">' + [["all", N_("Todos")], ["on", N_("Conseguidos")], ["off", N_("Pendientes")]].map(function (x) { return '<button data-a="gxst" data-v="' + x[0] + '" aria-pressed="' + (F.st === x[0]) + '">' + h(tr(x[1])) + "</button>"; }).join("") + "</div>";
     /* categorías con barra de progreso */
     var cats = GX_CATS.filter(function (c) { return L.some(function (x) { return x.cat === c[0]; }); });
     s += '<div class="gxs-cats">' + '<button data-a="gxcat" data-v="" aria-pressed="' + (!F.cat) + '" class="gxc-b"><span>🏆</span><b>' + h(tr("Todas")) + "</b></button>" + cats.map(function (c) {

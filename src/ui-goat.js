@@ -193,7 +193,33 @@
       deleteSaved: "Tu peux supprimer cette entrée depuis cet appareil.", deleteNotSaved: "La clé de suppression n'a pas pu être enregistrée sur cet appareil."
     }
   };
+  var FEM_TEXT = {
+    es: {
+      player: "Jugadora", manager: "Entrenadora",
+      modePlayer: "Ranking Jugadora", modeManager: "Ranking Entrenadora",
+      careerTitlePlayer: "Carrera de Jugadora", careerTitleManager: "Carrera de Entrenadora",
+      verified: "Sin verificar · enviada por la comunidad"
+    },
+    de: {
+      player: "Spielerin", manager: "Trainerin",
+      modePlayer: "Spielerinnen-Rangliste", modeManager: "Trainerinnen-Rangliste",
+      careerTitlePlayer: "Spielerinnenkarriere", careerTitleManager: "Trainerinnenkarriere"
+    },
+    it: {
+      player: "Giocatrice", manager: "Allenatrice",
+      modePlayer: "Classifica giocatrici", modeManager: "Classifica allenatrici",
+      careerTitlePlayer: "Carriera da giocatrice", careerTitleManager: "Carriera da allenatrice",
+      verified: "Non verificata · segnalata dalla community"
+    },
+    fr: {
+      player: "Joueuse", manager: "Entraîneuse",
+      modePlayer: "Classement joueuse", modeManager: "Classement entraîneuse",
+      careerTitlePlayer: "Carrière de joueuse", careerTitleManager: "Carrière d'entraîneuse",
+      verified: "Non vérifiée · déclarée par la communauté"
+    }
+  };
   window.GOAT_TEXT = TEXT;
+  window.GOAT_FEM_TEXT = FEM_TEXT;
   var service = window.GoatLadder;
   var tr = service.t;
 
@@ -202,6 +228,7 @@
       return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[char];
     });
   }
+  function compName(value) { return typeof trComp === "function" ? trComp(value) : value; }
   function stat(label, value) {
     if (value == null || value === "") return "";
     return '<span class="goat-stat"><small>' + esc(label) + '</small><b>' + esc(value) + "</b></span>";
@@ -249,7 +276,7 @@
   }
   function CareerSeasonHistory(entry) {
     var rows = (entry.history || []).slice().reverse().map(function (season) {
-      var heading = [season.season, season.club, season.competition].filter(Boolean).join(" · ");
+      var heading = [season.season, season.club, compName(season.competition)].filter(Boolean).join(" · ");
       var summary = entry.game_mode === "player"
         ? [tr("careerAppearances") + ": " + season.appearances, tr("careerGoals") + ": " + season.goals,
           tr("careerAssists") + ": " + season.assists, tr("careerTrophies") + ": " + (season.trophies || []).length]
@@ -260,9 +287,9 @@
       return '<p class="goat-season"><b>' + esc(heading) + '</b><span>' +
         esc(summary.join(" · ")) + "</span>" +
         (season.trophies && season.trophies.length ? '<span>' +
-          esc(tr("careerTrophies") + ": " + season.trophies.join(", ")) + "</span>" : "") +
+          esc(tr("careerTrophies") + ": " + season.trophies.map(compName).join(", ")) + "</span>" : "") +
         (season.awards && season.awards.length ? '<span>' +
-          esc(tr("careerAwards") + ": " + season.awards.join(", ")) + "</span>" : "") + "</p>";
+          esc(tr("careerAwards") + ": " + season.awards.map(compName).join(", ")) + "</span>" : "") + "</p>";
     }).join("");
     return '<details class="goat-history"><summary>' + esc(tr("careerHistory")) +
       "</summary>" + rows + "</details>";
@@ -277,7 +304,7 @@
       var items = list.filter(function (h) { return h.ind === ind; });
       if (!items.length) return "";
       return '<div class="goat-hon-h">' + esc(tr(ind ? "honoursInd" : "honoursTeam")) + '</div><div class="goat-hon">' + items.map(function (h) {
-        var name = !ind && typeof trComp === "function" ? trComp(h.name) : h.name;
+        var name = compName(h.name);
         var yrs = h.years.filter(function (y, i, a) { return a.indexOf(y) === i; }).join(", ");
         return '<span class="goat-hon-i" title="' + esc(name + (yrs ? " · " + yrs : "")) + '">' + PXm.trophy(h.key, 30, name) +
           '<span><b>' + esc(name) + "</b>" + (h.n > 1 ? '<em>×' + h.n + "</em>" : "") + "</span></span>";
@@ -305,7 +332,7 @@
     return '<article class="card goat-card"><div class="head"><span class="tag real">#' + (index + 1) +
       " · " + tr(entry.event_type === "season" ? "eventSeason" : "eventMatch") + '</span><strong class="goat-score">' +
       esc(entry.goat_score) + '</strong></div><h3>' + esc(entry.title) + '</h3><p class="goat-meta">' +
-      esc(entry.display_name) + " · " + esc(entry.club_name) + " · " + esc(entry.competition_name) +
+      esc(entry.display_name) + " · " + esc(entry.club_name) + " · " + esc(compName(entry.competition_name)) +
       esc(opponent) + '</p>' + MatchStatsSummary(entry) + '<p class="goat-unverified">' +
       esc(tr("verified")) + "</p>" + (service.canDelete(entry.id)
         ? '<button class="btn wide" data-a="goatdelete" data-v="' + esc(entry.id) + '">' +
@@ -550,7 +577,7 @@
         ? '<section class="card goat-publish"><div class="head"><span class="tag hot">' +
           esc(tr("latest")) + '</span><span>' + esc(tr(latest.event_type === "season" ? "eventSeason" : "eventMatch")) +
           "</span></div><h3>" + esc(latest.title) + '</h3><p class="goat-meta">' +
-          esc(latest.club_name) + " · " + esc(latest.competition_name) +
+          esc(latest.club_name) + " · " + esc(compName(latest.competition_name)) +
           (latest.opponent_name ? " · " + esc(latest.opponent_name) : "") +
           "</p>" + MatchStatsSummary({game_mode: latest.game_mode, metrics: latest}) +
           inputLabel("alias", "alias", sheet.alias || "") + inputLabel("title", "title", sheet.title || title) +

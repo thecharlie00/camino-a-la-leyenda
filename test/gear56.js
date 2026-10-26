@@ -29,7 +29,8 @@ const OUT = process.argv[2] || "/tmp/gear56"; fs.mkdirSync(OUT, { recursive: tru
   await p.screenshot({ path: path.join(OUT, "01-equipo.png") });
   const sh = await js(() => ({ slots: document.querySelectorAll(".gsl").length, pieces: document.querySelectorAll(".gpc").length, cmp: document.querySelectorAll(".gpc-cmp").length, sets: document.querySelectorAll(".gset").length }));
   console.log("hoja", JSON.stringify(sh)); if (sh.slots !== 12 || sh.pieces < 3) fail.push("hoja");
-  await js(() => document.querySelector('.gpc.on [data-a="gearup"]').click()); await p.waitForTimeout(800);
+  await js(() => document.querySelector('.gpc.on [data-a="gearup"]').click()); await p.waitForTimeout(300);
+  await click('[data-a="gearupok"]'); await p.waitForTimeout(800);
   await p.screenshot({ path: path.join(OUT, "02-mejora.png") });
   await p.waitForTimeout(2600);
   const t1 = await js(() => GXI.tier("b_ray")); console.log("tier tras mejorar", t1); if (t1 !== 1) fail.push("mejora");

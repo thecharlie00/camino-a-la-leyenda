@@ -99,8 +99,15 @@
   var NOTES = [N_("Pareja, hijos y una relación que cuidar, como jugador y como entrenador"), N_("Ficha a tu hijo o a tu hija y sigue su carrera"), N_("El relevo puede ser tu hijo o tu hija, y llegan las ligas de Tailandia")];
   function sysInfo() {
     var n = 0; try { n = (U.ui().slots || []).length; } catch (e) {}
-    return ["Camino a la Leyenda " + tagTxt(), "Build: " + (B.t || "?"), "Idioma: " + LANG, "Modo: " + (S ? (S.mode || "p") + (S.g === "f" ? " (f)" : "") : "-"), "Temporada: " + (S ? S.yr : "-"),
-      "Pantalla: " + window.innerWidth + "x" + window.innerHeight + " @" + (window.devicePixelRatio || 1), "Navegador: " + navigator.userAgent].join("\n");
+    return [
+      tr("Camino a la Leyenda {tag}", {tag: tagTxt()}),
+      tr("Build: {build}", {build: B.t || "?"}),
+      tr("Idioma: {lang}", {lang: LANG}),
+      tr("Modo: {mode}", {mode: S ? (S.mode || "p") + (S.g === "f" ? " (f)" : "") : "-"}),
+      tr("Temporada: {season}", {season: S ? S.yr : "-"}),
+      tr("Pantalla: {size} @{dpr}", {size: window.innerWidth + "x" + window.innerHeight, dpr: window.devicePixelRatio || 1}),
+      tr("Navegador: {ua}", {ua: navigator.userAgent})
+    ].join("\n");
   }
   U.add("after", function () {
     var home = document.querySelector('#main [data-a="newgame"]');

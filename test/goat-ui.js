@@ -50,6 +50,10 @@ const vm = require("vm");
   vm.runInNewContext(fs.readFileSync("src/pixel.js", "utf8"), pxCtx);
   window.PX = pxCtx.PX;
   vm.runInNewContext(fs.readFileSync("src/ui-goat.js", "utf8"), {window, document, console});
+  assert.strictEqual(window.GOAT_FEM_TEXT.es.player, "Jugadora");
+  assert.strictEqual(window.GOAT_FEM_TEXT.es.careerTitleManager, "Carrera de Entrenadora");
+  assert.strictEqual(window.GOAT_FEM_TEXT.it.manager, "Allenatrice");
+  assert.strictEqual(window.GOAT_FEM_TEXT.fr.careerTitlePlayer, "Carrière de joueuse");
 
   UIX.actions.goat();
   await new Promise(resolve => setImmediate(resolve));

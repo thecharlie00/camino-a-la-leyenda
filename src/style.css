@@ -1558,7 +1558,7 @@ svg.face.px { border-radius: 0; }
 
 /* ===== 5.4: interfaz en pixel art (casa con los iconos y sprites) =====
    Tipografía pixelada en títulos y botones, esquinas casi rectas, sombras duras
-   de 8 bits y barras por segmentos. El texto largo sigue en Archivo para leerse bien. */
+   de 8 bits y barras por segmentos. El texto largo sigue en Atkinson para leerse bien. */
 :root {
   --r: 4px;
   --px-sh: 0 3px 0 rgba(0, 0, 0, .45);

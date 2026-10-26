@@ -33,7 +33,7 @@ const OUT = process.argv[2] || "/tmp/shop56"; fs.mkdirSync(OUT, { recursive: tru
   /* comprar */
   await js(id => { UIX.ui().sh.sel = id; UIX.renderSheet(); }, sel); await p.waitForTimeout(300);
   const m0 = await js(() => S.p.money);
-  await click('[data-a="shopbuy"]'); await p.waitForTimeout(700); await p.screenshot({ path: path.join(OUT, "04-compra.png") }); await p.waitForTimeout(2200);
+  await click('[data-a="shopbuy"]'); await click('[data-a="shopbuyok"]'); await p.waitForTimeout(700); await p.screenshot({ path: path.join(OUT, "04-compra.png") }); await p.waitForTimeout(2200);
   const after = await js(id => ({ own: GXI.owned(id, "p"), money: S.p.money, buys: GX.stat("buys") }), sel);
   console.log("compra", sel, JSON.stringify(after), "gastado", m0 - after.money); if (!after.own) fail.push("compra");
   /* oferta → trofeo Ganga */

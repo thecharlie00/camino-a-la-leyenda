@@ -2091,8 +2091,8 @@
       liveTick();
     }, wait);
   }
-  var LIVE_WX_FX = {sun: "Campo rápido", mild: "Sin efecto claro", rain: "Balón vivo y césped resbaladizo",
-    heat: "Ritmo lento y fatiga alta", cold: "Balón pesado y bote seco"};
+  var LIVE_WX_FX = {sun: N_("Campo rápido"), mild: N_("Sin efecto claro"), rain: N_("Balón vivo y césped resbaladizo"),
+    heat: N_("Ritmo lento y fatiga alta"), cold: N_("Balón pesado y bote seco")};
   function liveWxInfo(wx) {
     var row = (typeof MX_WX !== "undefined" ? MX_WX.filter(function (w) { return w[0] === wx; })[0] : null) || ["sun", "☀", "Despejado", 1];
     return {key: row[0], icon: row[1], name: tr(row[2]), effect: tr(LIVE_WX_FX[row[0]] || LIVE_WX_FX.sun), mul: row[3]};
