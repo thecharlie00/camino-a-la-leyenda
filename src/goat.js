@@ -27,17 +27,16 @@
     }
   }
   function titleFor(mode, event, blog, opponent, competition, isFinal, comeback) {
-    competition = trComp(competition);
     if (event === "season") {
-      if (blog.pos === 1) return tr("Campeones de {comp}", {comp: competition});
-      if (blog.l === 0) return tr("Temporada invicta");
-      return tr("Temporada histórica en {comp}", {comp: competition});
+      if (blog.pos === 1) return "Campeones de " + competition;
+      if (blog.l === 0) return "Temporada invicta";
+      return "Temporada histórica en " + competition;
     }
-    if (mode === "player" && (blog.g || 0) >= 3) return tr("Hat-trick en {comp}", {comp: competition});
-    if (comeback) return tr("La remontada ante {opp}", {opp: opponent});
-    if (isFinal && blog.gu > blog.gt) return tr("La final de {comp}", {comp: competition});
-    if (mode === "manager" && blog.gu > blog.gt && blog.gu - blog.gt === 1) return tr("Victoria ante {opp}", {opp: opponent});
-    return tr("Actuación ante {opp}", {opp: opponent});
+    if (mode === "player" && (blog.g || 0) >= 3) return "Hat-trick en " + competition;
+    if (comeback) return "La remontada ante " + opponent;
+    if (isFinal && blog.gu > blog.gt) return "La final de " + competition;
+    if (mode === "manager" && blog.gu > blog.gt && blog.gu - blog.gt === 1) return "Victoria ante " + opponent;
+    return "Actuación ante " + opponent;
   }
   function depthOfLeague(index) {
     var depth = 1, current = index;
@@ -56,29 +55,16 @@
     if (!names.length && fallback != null) names.push(safeName(clubName(fallback)));
     return names;
   }
-  /* Títulos y premios de una temporada con su clave de icono (para el palmarés del ranking). */
-  function seasonHonours(list, year, isAward) {
-    var label = typeof seasonLabel === "function" ? seasonLabel(year) : null;
-    var items = (list || []).filter(function (t) {
-      if (!t) return false;
-      if (isAward) return t.k !== "bdo_nom" && (t.y === year + 1 || (t.y === year && /month|pom/.test(String(t.k))));
-      return t.s === label;
-    }).slice(0, 30);
-    return {names: items.map(function (t) { return safeName(t.n).slice(0, 64); }), keys: items.map(function (t) { return String(t.k || "").slice(0, 40); })};
-  }
   function playerCareerRow(row, active) {
     var player = S.p, clubs = active ? player.ss.clubs : row.clubs;
     var club = active ? player.club : row.club, league = active ? S.cl[player.club] : row.lg;
-    var year = active ? S.yr : row.y, tro = seasonHonours(player.trophies, year, false), aw = seasonHonours(player.awards, year, true);
-    if (!player.trophies && !active) tro = {names: (row.tro || []).map(safeName), keys: []};
-    if (!player.awards && !active) aw = {names: (row.aw || []).map(safeName), keys: []};
     return {
-      season: year,
+      season: active ? S.yr : row.y,
       club: safeName(clubName(club)),
       clubs: namesForClubs(clubs, club),
       competition: safeName(W.lg[league] ? W.lg[league].n : ""),
-      trophies: tro.names, trophy_keys: tro.keys,
-      awards: aw.names, award_keys: aw.keys,
+      trophies: active ? [] : (row.tro || []).map(safeName),
+      awards: active ? [] : (row.aw || []).map(safeName),
       appearances: active ? player.ss.apps || 0 : row.apps || 0,
       goals: active ? player.ss.g || 0 : row.g || 0,
       assists: active ? player.ss.a || 0 : row.a || 0,
@@ -93,14 +79,14 @@
     var club = active ? S.m.club : row.club, league = active ? S.cl[club] : row.lg;
     var promoted = !active && !!next && row.club === next.club && W.lg[row.lg] &&
       W.lg[row.lg].upI === next.lg;
-    var year = active ? S.yr : row.y, tro = seasonHonours(S.m.trophies, year, false), aw = seasonHonours(S.m.awards, year, true);
-    if (!S.m.trophies && !active) tro = {names: (row.tro || []).map(safeName), keys: []};
     return {
-      season: year,
+      season: active ? S.yr : row.y,
       club: safeName(clubName(club)),
       competition: safeName(W.lg[league] ? W.lg[league].n : ""),
-      trophies: tro.names, trophy_keys: tro.keys,
-      awards: aw.names, award_keys: aw.keys,
+      trophies: active ? [] : (row.tro || []).map(safeName),
+      awards: active ? [] : (S.m.awards || []).filter(function (award) {
+        return award.y === row.y + 1;
+      }).map(function (award) { return safeName(award.n); }),
       wins: active ? S.m.ss.w || 0 : row.w || 0,
       draws: active ? S.m.ss.d || 0 : row.d || 0,
       losses: active ? S.m.ss.l || 0 : row.l || 0,
@@ -255,8 +241,6 @@
     canDelete: function (id) { return !!(memoryDeleteTokens[id] || storedDeleteTokens()[id]); },
     t: function (key) {
       var language = typeof LANG === "string" ? LANG : "es";
-      var fem = typeof FEM !== "undefined" && FEM && root.GOAT_FEM_TEXT ? root.GOAT_FEM_TEXT[language] : null;
-      if (fem && fem[key]) return fem[key];
       return (root.GOAT_TEXT[language] || root.GOAT_TEXT.es)[key] || root.GOAT_TEXT.es[key] || key;
     },
     list: function (mode, timeframe) {

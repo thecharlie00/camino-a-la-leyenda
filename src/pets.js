@@ -1,6 +1,6 @@
 /* pets.js — mascotas en el modo jugador/a (parche 2.7; cariño, estilo y accesorios en la 3.7).
    Se adopta una cría, se le pone nombre y crece con los años (cría → joven → adulta → senior).
-   5.6: vive en tiempo real (pet-sim.js), no muere y su efecto en la moral es suave y no se muestra. */
+   Afecta al rendimiento (atributos, moral, forma, fama) según el vínculo; cuando muere, golpea la moral. */
 var PET_DEF = [
   /* normales */
   {k: "dog", ex: false, ico: ["🐶", "🐶", "🐕", "🦮"], n: N_("Perro"), price: 1500, year: 2000, life: [11, 15], att: {FIS: 2, RIT: 1}, gk: {VEL: 1, EST: 1}, mor: 1.5,
@@ -33,12 +33,9 @@ var PET_DEF = [
 ];
 var PET_STAGE = [N_("Cría"), N_("Joven"), N_("Adulto"), N_("Senior")];
 function petDef(k) { for (var i = 0; i < PET_DEF.length; i++) if (PET_DEF[i].k === k) return PET_DEF[i]; return null; }
-function petOn() { return typeof lifeOn === "function" && (lifeOn() || !!(S && S.mode === "mgr" && S.p && S.m)); }
-/* 5.6: en modo míster la mascota sigue contigo y se paga con el dinero del míster */
-function petWallet() { return S && S.mode === "mgr" && S.m ? S.m : S.p; }
-function petOf() { if (!petOn()) return null; var L = lifeOf(); if (L.pet && L.pet.v !== 2 && typeof PetSim !== "undefined") PetSim.migrate(L); return L.pet || null; }
-/* 5.6: crece por temporadas de la carrera y la senior se queda para siempre */
-function petStage(pt) { var a = pt.age || 0; return a < 1 ? 0 : a < 3 ? 1 : a < 10 ? 2 : 3; }
+function petOn() { return typeof lifeOn === "function" && lifeOn(); }
+function petOf() { return petOn() ? (lifeOf().pet || null) : null; }
+function petStage(pt) { var f = pt.age / Math.max(1, pt.life); return f < 0.12 ? 0 : f < 0.3 ? 1 : f < 0.78 ? 2 : 3; }
 function petIco(pt) { var d = petDef(pt.k); return d ? d.ico[petStage(pt)] : "🐾"; }
 /* fuerza del efecto: crece al hacerse mayor (la cría todavía es pequeña), baja en la vejez y depende del vínculo */
 function petPower(pt) { var st = petStage(pt), m = [0.5, 1, 1, 0.6][st]; return m * clamp(pt.bond / 70, 0, 1.2); }
@@ -51,13 +48,13 @@ function petAttBonus() {
 }
 function petCleanName(nm) { return String(nm || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 16); }
 function petAdopt(k, nm) {
-  var L = lifeOf(), p = petWallet(), d = petDef(k);
+  var L = lifeOf(), p = S.p, d = petDef(k);
   if (!d || L.pet) return {ok: false};
   nm = petCleanName(nm);
   if (!nm) return {ok: false, noName: true};
   if (p.money < d.price) return {ok: false, poor: true};
   p.money -= d.price;
-  L.pet = PetSim.fresh(k, nm); PetSim.inv(); PetSim.first(L.pet, "adopt");
+  L.pet = {k: k, nm: nm, age: 0, life: ri(d.life[0], d.life[1]), bond: 60, y0: S.yr, cared: false, acts: {}, col: "nat", bg: "none", eq: {}, tricks: 0};
   petAccSync(true);
   p.mor = clamp(p.mor + 4, 0, 100);
   if (typeof socPostRaw === "function") socPostRaw({by: chance(0.5) ? "fan" : "press", tk: d.ex ? N_("{name} sorprende con su nueva mascota exótica: {pet}. Las redes no hablan de otra cosa.") : N_("{name} presenta a su nueva mascota: {pet}. ¡Ternura máxima! 🐾"), tp: {name: socSelfName(), pet: nm}, mood: 1});
@@ -90,7 +87,7 @@ function petAct(k) {
   var A = petActs(pt);
   if (A[k]) return {ok: false, done: true};
   if (petActN(pt) >= PET_ACT_MAX) return {ok: false, tired: true};
-  var p = petWallet(), cost = petCareCost(c, pt);
+  var p = S.p, cost = petCareCost(c, pt);
   if (cost && p.money < cost) return {ok: false, poor: true};
   p.money -= cost; A[k] = 1; pt.cared = true; pt.need = false; pt.miss = 0;
   var gain = c.bond * (pt.bond > 85 ? 0.6 : 1), out = {ok: true, k: k};
@@ -117,7 +114,7 @@ function petAct(k) {
 }
 /* compatibilidad: la acción clásica de «pasar tiempo» son los mimos (o la primera que admita) */
 function petCare() { var pt = petOf(); if (!pt) return false; var l = petCareList(pt); return petAct(l[0].k).ok; }
-function petNeeds() { var pt = petOf(); if (!pt) return false; PetSim.tick(pt); return PetSim.wants(pt); }
+function petNeeds() { var pt = petOf(); return !!(pt && (pt.need || pt.bond < 30) && !pt.cared); }
 
 /* ---------- estilo: color del pelaje, fondo y accesorios ---------- */
 var PET_COL = [
@@ -176,7 +173,6 @@ function petUnTest(u) {
     case "bdo": return A(["bdo"]);
     case "scorer": return A(["pichichi", "boot", "tboot"]);
     case "gk": return A(["yashin", "tglove", "bestgk"]);
-    case "mvp": return aw.length > 0;
   }
   return false;
 }
@@ -188,14 +184,13 @@ function petAccSync(quiet) {
   if (!petOn()) return [];
   var own = petOwned(), L = lifeOf(), got = [];
   PET_ACC.forEach(function (a) { if (a.un && own.indexOf(a.k) < 0 && petUnTest(a.un)) { own.push(a.k); got.push(a); } });
-  if (typeof PET_ACC2 !== "undefined") PET_ACC2.forEach(function (a) { if (a.un && !/^cont_/.test(a.un) && own.indexOf(a.id) < 0 && petUnTest(a.un)) { own.push(a.id); got.push({ico: a.ico || "🎁", n: a.n}); } });
   L.petColU = L.petColU || [];
   PET_COL.forEach(function (c) { if (c[3] && L.petColU.indexOf(c[0]) < 0 && petColOk(c)) { L.petColU.push(c[0]); got.push({ico: "🎨", n: c[1], col: 1}); } });
   if (!quiet && got.length && L.pet) got.forEach(function (a) { notify(tr("🎁 Nuevo para {pet}: {acc}. Lo has ganado con tus títulos.", {pet: L.pet.nm, acc: a.ico + " " + tr(a.n)}), "green"); });
   return got;
 }
 function petBuyAcc(k) {
-  var a = petAccDef(k), p = petWallet(); if (!a || a.un || petHasAcc(k)) return {ok: false};
+  var a = petAccDef(k), p = S.p; if (!a || a.un || petHasAcc(k)) return {ok: false};
   if (p.money < a.price) return {ok: false, poor: true};
   p.money -= a.price; petOwned().push(k);
   var pt = petOf(); if (pt) { petEq(pt)[a.s] = k; }
@@ -210,35 +205,72 @@ function petWear(k) {
 function petSetCol(k) { var pt = petOf(), c = petColDef(k); if (!pt || c[0] !== k) return false; if (c[3] && !petColOk(c)) return false; pt.col = k; return true; }
 function petSetBg(k) { var pt = petOf(), b = petBgDef(k); if (!pt || b[0] !== k) return false; pt.bg = k; return true; }
 
-/* cada tramo: efecto suave y oculto en la moral según vínculo y ánimo; un aviso discreto si te echa de menos */
+/* cada tramo: moral, fama y vínculo; si no le has hecho caso, te avisa */
 function petBlock() {
   var pt = petOf(); if (!pt) return;
-  PetSim.block(pt);
-  var d = petDef(pt.k), p = S.p;
-  if (d.fame) { p.fame = clamp(p.fame + d.fame * 0.15 * clamp(pt.bond / 70, 0, 1.2), 0, 100); }
-  if (PetSim.wants(pt) && !pt.warned) { pt.warned = 1; notify(tr("🐾 {pet} te echa de menos. Pásate por Yo › Tu mascota.", {pet: pt.nm}), "amber"); }
-  else if (!PetSim.wants(pt)) pt.warned = 0;
-  if (chance(0.06) && typeof socPostRaw === "function") socPostRaw({by: "fan", tk: N_("Foto del día: {name} con {pet} en casa 🐾"), tp: {name: socSelfName(), pet: pt.nm}, mood: 1});
+  var d = petDef(pt.k), p = S.p, pw = petPower(pt);
+  if (!pt.cared) {
+    pt.miss = (pt.miss || 0) + 1;
+    pt.bond = clamp(pt.bond - (pt.miss >= 2 ? 9 : 6), 0, 100);
+    pt.need = true;
+    if (pt.bond < 20) notify(tr("{pet} te echa de menos: pasa más tiempo con tu mascota.", {pet: pt.nm}), "red");
+    else notify(tr("🐾 {pet} necesita atención: este tramo no le has hecho caso. Entra en Yo › Tu mascota.", {pet: pt.nm}), "amber");
+  }
+  pt.cared = false; pt.acts = {};
+  p.mor = clamp(p.mor + d.mor * pw, 0, 100);
+  if (d.fame) { p.fame = clamp(p.fame + d.fame * 0.25 * pw, 0, 100); p.fol = (p.fol || 0) * (1 + 0.01 * d.fame * pw); }
+  if (chance(0.08) && typeof socPostRaw === "function") socPostRaw({by: "fan", tk: N_("Foto del día: {name} con {pet} en casa 🐾"), tp: {name: socSelfName(), pet: pt.nm}, mood: 1});
   petAccSync();
 }
-/* fin de temporada: cumple años y crece; los gastos se pagan si se puede (nunca se va ni muere) */
+/* fin de temporada: cumple años, gastos, sustos y, al final de su vida, despedida */
 function petSeason() {
-  var L = lifeOf(), pt = petOf(); if (!pt) return [];
-  var d = petDef(pt.k), p = petWallet(), out = [], g = PetSim.season(pt);
-  if (p.money >= d.year) p.money -= d.year;
-  if (g.grow != null) out.push({t: "ok", x: tr("🐾 {pet} cumple {n} y ya es {st}.", {pet: pt.nm, n: trn(pt.age, "{n} año", "{n} años"), st: tr(PET_STAGE[g.grow]).toLowerCase()})});
-  else out.push({t: "ok", x: tr("🐾 {pet} cumple {n} años.", {pet: pt.nm, n: pt.age})});
+  var L = lifeOf(), pt = L.pet; if (!pt) return [];
+  var d = petDef(pt.k), p = S.p, out = [];
+  pt.age++;
+  if (p.money < d.year) {
+    L.pet = null; p.mor = clamp(p.mor - 6, 0, 100);
+    notify(tr("No puedes mantener a {pet}: se queda con tu familia. Te duele despedirte.", {pet: pt.nm}), "red");
+    out.push({t: "bad", x: tr("🐾 {pet} se va a vivir con tu familia: no podías pagar sus cuidados.", {pet: pt.nm})});
+    return out;
+  }
+  p.money -= d.year;
+  if (d.risk && chance(d.risk)) {
+    var bill = Math.round(d.price * 0.5 / 10) * 10;
+    p.money = Math.max(0, p.money - bill); p.mor = clamp(p.mor - 3, 0, 100);
+    notify(tr("Susto con {pet}: visita urgente al veterinario ({v}).", {pet: pt.nm, v: fmtMoney(bill)}), "amber");
+  }
+  var dies = pt.age >= pt.life || (petStage(pt) === 3 && chance(0.06));
+  if (dies) {
+    var hit = Math.round(8 + pt.bond / 8);
+    p.mor = clamp(p.mor - hit, 0, 100); p.form = clamp(p.form - 4, 0, 100);
+    (L.petMem = L.petMem || []).push({k: pt.k, nm: pt.nm, y0: pt.y0, y1: S.yr, age: pt.age});
+    L.pet = null; L.petBye = S.yr;
+    notify(tr("🌈 {pet} ha muerto con {n} años. Te afecta mucho: −{m} de moral.", {pet: pt.nm, n: pt.age, m: hit}), "red");
+    out.push({t: "bad", x: tr("🌈 Hasta siempre, {pet} ({n} años). Te acompañó desde {y}.", {pet: pt.nm, n: pt.age, y: seasonLabel(pt.y0)})});
+    if (typeof socPostRaw === "function") socPostRaw({by: "fan", tk: N_("Mucho ánimo, {name}. Descansa, {pet} 🌈"), tp: {name: socSelfName(), pet: pt.nm}, mood: -1});
+  } else if (petStage(pt) === 3 && pt.age === Math.ceil(pt.life * 0.78)) {
+    out.push({t: "ok", x: tr("🐾 {pet} cumple {n} años y ya es senior: rinde algo menos, pero sigue a tu lado.", {pet: pt.nm, n: pt.age})});
+  } else out.push({t: "ok", x: tr("🐾 {pet} cumple {n} años.", {pet: pt.nm, n: pt.age})});
   return out;
 }
 
 (function () {
-  if (typeof blockDone !== "function") return;
+  if (typeof attrs !== "function") return;
+  var _attrs = attrs;
+  attrs = function () {
+    var out = _attrs.apply(this, arguments);
+    if (!petOn() || !S.p.life) return out;
+    var b = petAttBonus();
+    Object.keys(b).forEach(function (k) { if (out[k] != null) out[k] = Math.round(clamp(out[k] + b[k], 20, 99)); });
+    return out;
+  };
   var _block = blockDone;
   blockDone = function () { if (petOn()) petBlock(); return _block.apply(this, arguments); };
   var _fin = finishPlayer;
   finishPlayer = function (f) {
-    var r = _fin.apply(this, arguments), pt = petOf();
-    if (pt && f && f.min > 0) { var gu = f.gu + (f.etu || 0), gt = f.gt + (f.ett || 0); PetSim.matchMood(pt, gu > gt ? "W" : gu < gt ? "L" : "D"); }
+    var pt = petOf(), d = pt ? petDef(pt.k) : null, f0 = S.p ? S.p.form : 0;
+    var r = _fin.apply(this, arguments);
+    if (d && d.calm && S.p.form < f0) S.p.form = f0 - (f0 - S.p.form) * (1 - (1 - d.calm) * petPower(pt));
     return r;
   };
   var _se = seasonEnd;

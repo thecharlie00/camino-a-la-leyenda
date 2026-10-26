@@ -51,7 +51,7 @@
               '<div class="row2"><button class="btn" data-a="dlno" data-v="' + e.id + '">' + tr("Rechazar") + '</button><button class="btn pri" data-a="dlyes" data-v="' + e.id + '">' + tr("Vender") + "</button></div></div>";
           } else {
             var t = e.tg, can = e.fee <= m.bud && bill + t.sal <= m.wcap * 1.1;
-            o += '<div class="dlev ganga"><div class="dlevh">' + U.crest(t.club) + "<div><b>" + tr("Ganga: {name}", {name: h(t.fn + " " + t.ln)}) + "</b><small>" + h(plLine(t)) + " · " + h(clubName(t.club)) + "</small></div></div>" +
+            o += '<div class="dlev bar"><div class="dlevh">' + U.crest(t.club) + "<div><b>" + tr("Ganga: {name}", {name: h(t.fn + " " + t.ln)}) + "</b><small>" + h(plLine(t)) + " · " + h(clubName(t.club)) + "</small></div></div>" +
               '<div class="dlnums"><span>' + tr("Precio") + " <b>" + fmtMoney(e.fee) + "</b> <s>" + fmtMoney(t.ask) + "</s></span><span>" + tr("Sueldo") + " <b>" + fmtMoney(t.sal) + "</b></span><span>" + tr("Caduca a las {t}", {t: left}) + "</span></div>" +
               '<div class="row2"><button class="btn" data-a="dlno" data-v="' + e.id + '">' + tr("Pasar") + '</button><button class="btn pri" data-a="dlyes" data-v="' + e.id + '"' + (can ? "" : ' aria-disabled="true"') + ">" + tr("Fichar") + "</button></div></div>";
           }
@@ -106,6 +106,6 @@
         o += '<div class="pomatch"><span class="' + (mt.w === mt.a ? "w" : "") + (mt.a === me ? " me" : "") + '">' + h(clubName(mt.a)) + '</span><b class="num">' + sc + '</b><span class="' + (mt.w === mt.b ? "w" : "") + (mt.b === me ? " me" : "") + '">' + h(clubName(mt.b)) + "</span></div>";
       });
     });
-    return o + '<p class="muted" style="font-size:var(--fs-sm);margin:8px 0 0">' + tr("Sube a {lg}: {club}.", {lg: h(trComp(lgDivRaw(L.upI))), club: h(clubName(po.w))}) + "</p></section>";
+    return o + '<p class="muted" style="font-size:13px;margin:8px 0 0">' + tr("Sube a {lg}: {club}.", {lg: h(trComp(lgDivRaw(L.upI))), club: h(clubName(po.w))}) + "</p></section>";
   });
 })();

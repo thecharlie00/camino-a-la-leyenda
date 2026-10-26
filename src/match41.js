@@ -48,17 +48,14 @@ function mxBig(L, us, sh) {
   else p = resolveAction(0, mxDefRel(L), mxMentCtx(L, false) + mom);
   return R() < p * 0.66;
 }
-/* contexto del tiro y xG (regresión logística calibrada: media ~0,37 en clarísimas y ~0,16 en el resto) */
-function mxShot(L, us, sh, big, shotD) {
-  var d = shotD != null ? clamp(+shotD || 0, 6, 30) : (big ? 6 + R() * 7 : 12 + 18 * Math.pow(R(), 1.3));
-  var y = (R() - 0.5) * (big ? 10 : 26), g = 3.66;
+/* contexto del tiro y xG (regresión logística calibrada: media 0,36 en clarísimas y 0,12 en el resto) */
+function mxShot(L, us, sh, big) {
+  var d = big ? 6 + R() * 7 : 12 + 18 * Math.pow(R(), 1.3), y = (R() - 0.5) * (big ? 10 : 26), g = 3.66;
   var ang = Math.atan2(7.32 * d, d * d + y * y - g * g); if (ang < 0) ang += Math.PI;
   var press = us ? mxSig(gauss() * 0.9 - (L.ored ? 0.3 : 0)) : mxSig(gauss() * 0.9 + mxDefRel(L) / 4 + (String(L.ment) === "bus" ? 0.25 : 0));
   var fin = us && sh ? clamp(sh.ovr - mxTeamAvg(L) + (MX_FIN[sh.pos] || 0) - 1.5, -15, 15) : gauss() * 4;
   if (us && sh) fin -= mxDrop(L, sh) * 0.1;
-  /* La base del tiro no clarísimo se recalibró al usar la distancia real del balón
-     (antes se sorteaba una distancia más lejana): así el global sigue en ~0,20 xG. */
-  var z = (big ? -0.70 : -1.30) + 1.6 * ang - 0.11 * d - 1.1 * (press - 0.5) + 0.045 * fin;
+  var z = (big ? -0.70 : -0.57) + 1.6 * ang - 0.11 * d - 1.1 * (press - 0.5) + 0.045 * fin;
   var xg = clamp(mxSig(z), 0.01, 0.85);
   /* zona del tiro en la rejilla (columna 5 o 0 según quién ataca; carril por la posición lateral) */
   var lane = y < -4 ? 0 : y > 4 ? 2 : 1, col = us ? (d < 17 ? 5 : 4) : (d < 17 ? 0 : 1);
@@ -154,8 +151,8 @@ function mxInit(L) {
   };
 })();
 /* el xG de cada tiro lo pone el modelo; se acumula por equipo */
-function mxShotXG(L, us, sh, big, d) {
-  var s = typeof mxShot === "function" ? mxShot(L, us, sh, big, d) : {xg: big ? 0.36 : 0.12, d: d};
+function mxShotXG(L, us, sh, big) {
+  var s = typeof mxShot === "function" ? mxShot(L, us, sh, big) : {xg: big ? 0.36 : 0.12};
   if (L.xg) L.xg[us ? 0 : 1] += s.xg;
   MX_CUR = s; /* el comentario de este tiro se elige según su distancia */
   return s;

@@ -3,7 +3,6 @@
   "use strict";
   var TEXT = {
     es: {
-      honours: "Palmarés", honoursTeam: "Títulos colectivos", honoursInd: "Títulos individuales",
       boardCareers: "Carreras", boardAchievements: "Gestas", careerTitlePlayer: "Carrera de Jugador",
       careerTitleManager: "Carrera de Míster", publishCareer: "Publicar carrera completa",
       careerConsent: "Acepto publicar este alias, el título, las métricas agregadas y el historial completo de temporadas de esta carrera. No se enviará la partida guardada.",
@@ -41,7 +40,6 @@
       deleteSaved: "Puedes eliminar esta entrada desde este dispositivo.", deleteNotSaved: "No se pudo guardar la clave de eliminación en este dispositivo."
     },
     en: {
-      honours: "Honours", honoursTeam: "Team titles", honoursInd: "Individual awards",
       boardCareers: "Careers", boardAchievements: "Achievements", careerTitlePlayer: "Player career",
       careerTitleManager: "Manager career", publishCareer: "Publish complete career",
       careerConsent: "I agree to publish this alias, title, aggregate metrics and the full season history for this career. The save file will not be sent.",
@@ -79,7 +77,6 @@
       deleteSaved: "You can delete this entry from this device.", deleteNotSaved: "The deletion key could not be saved on this device."
     },
     de: {
-      honours: "Erfolge", honoursTeam: "Mannschaftstitel", honoursInd: "Einzelauszeichnungen",
       boardCareers: "Karrieren", boardAchievements: "Erfolge", careerTitlePlayer: "Spielerkarriere",
       careerTitleManager: "Managerkarriere", publishCareer: "Komplette Karriere veröffentlichen",
       careerConsent: "Ich stimme zu, diesen Alias, Titel, zusammengefasste Kennzahlen und den vollständigen Saisonverlauf dieser Karriere zu veröffentlichen. Der Spielstand wird nicht gesendet.",
@@ -117,7 +114,6 @@
       deleteSaved: "Du kannst diesen Eintrag auf diesem Gerät löschen.", deleteNotSaved: "Der Löschschlüssel konnte auf diesem Gerät nicht gespeichert werden."
     },
     it: {
-      honours: "Palmarès", honoursTeam: "Titoli di squadra", honoursInd: "Premi individuali",
       boardCareers: "Carriere", boardAchievements: "Imprese", careerTitlePlayer: "Carriera da giocatore",
       careerTitleManager: "Carriera da mister", publishCareer: "Pubblica la carriera completa",
       careerConsent: "Accetto di pubblicare questo alias, il titolo, le metriche aggregate e lo storico completo delle stagioni. Il salvataggio non verrà inviato.",
@@ -155,7 +151,6 @@
       deleteSaved: "Puoi eliminare questa voce da questo dispositivo.", deleteNotSaved: "Impossibile salvare la chiave di eliminazione su questo dispositivo."
     },
     fr: {
-      honours: "Palmarès", honoursTeam: "Titres collectifs", honoursInd: "Distinctions individuelles",
       boardCareers: "Carrières", boardAchievements: "Exploits", careerTitlePlayer: "Carrière de joueur",
       careerTitleManager: "Carrière de manager", publishCareer: "Publier la carrière complète",
       careerConsent: "J'accepte de publier cet alias, le titre, les statistiques agrégées et l'historique complet des saisons. La sauvegarde ne sera pas envoyée.",
@@ -193,33 +188,7 @@
       deleteSaved: "Tu peux supprimer cette entrée depuis cet appareil.", deleteNotSaved: "La clé de suppression n'a pas pu être enregistrée sur cet appareil."
     }
   };
-  var FEM_TEXT = {
-    es: {
-      player: "Jugadora", manager: "Entrenadora",
-      modePlayer: "Ranking Jugadora", modeManager: "Ranking Entrenadora",
-      careerTitlePlayer: "Carrera de Jugadora", careerTitleManager: "Carrera de Entrenadora",
-      verified: "Sin verificar · enviada por la comunidad"
-    },
-    de: {
-      player: "Spielerin", manager: "Trainerin",
-      modePlayer: "Spielerinnen-Rangliste", modeManager: "Trainerinnen-Rangliste",
-      careerTitlePlayer: "Spielerinnenkarriere", careerTitleManager: "Trainerinnenkarriere"
-    },
-    it: {
-      player: "Giocatrice", manager: "Allenatrice",
-      modePlayer: "Classifica giocatrici", modeManager: "Classifica allenatrici",
-      careerTitlePlayer: "Carriera da giocatrice", careerTitleManager: "Carriera da allenatrice",
-      verified: "Non verificata · segnalata dalla community"
-    },
-    fr: {
-      player: "Joueuse", manager: "Entraîneuse",
-      modePlayer: "Classement joueuse", modeManager: "Classement entraîneuse",
-      careerTitlePlayer: "Carrière de joueuse", careerTitleManager: "Carrière d'entraîneuse",
-      verified: "Non vérifiée · déclarée par la communauté"
-    }
-  };
   window.GOAT_TEXT = TEXT;
-  window.GOAT_FEM_TEXT = FEM_TEXT;
   var service = window.GoatLadder;
   var tr = service.t;
 
@@ -228,7 +197,6 @@
       return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[char];
     });
   }
-  function compName(value) { return typeof trComp === "function" ? trComp(value) : value; }
   function stat(label, value) {
     if (value == null || value === "") return "";
     return '<span class="goat-stat"><small>' + esc(label) + '</small><b>' + esc(value) + "</b></span>";
@@ -276,7 +244,7 @@
   }
   function CareerSeasonHistory(entry) {
     var rows = (entry.history || []).slice().reverse().map(function (season) {
-      var heading = [season.season, season.club, compName(season.competition)].filter(Boolean).join(" · ");
+      var heading = [season.season, season.club, season.competition].filter(Boolean).join(" · ");
       var summary = entry.game_mode === "player"
         ? [tr("careerAppearances") + ": " + season.appearances, tr("careerGoals") + ": " + season.goals,
           tr("careerAssists") + ": " + season.assists, tr("careerTrophies") + ": " + (season.trophies || []).length]
@@ -287,30 +255,12 @@
       return '<p class="goat-season"><b>' + esc(heading) + '</b><span>' +
         esc(summary.join(" · ")) + "</span>" +
         (season.trophies && season.trophies.length ? '<span>' +
-          esc(tr("careerTrophies") + ": " + season.trophies.map(compName).join(", ")) + "</span>" : "") +
+          esc(tr("careerTrophies") + ": " + season.trophies.join(", ")) + "</span>" : "") +
         (season.awards && season.awards.length ? '<span>' +
-          esc(tr("careerAwards") + ": " + season.awards.map(compName).join(", ")) + "</span>" : "") + "</p>";
+          esc(tr("careerAwards") + ": " + season.awards.join(", ")) + "</span>" : "") + "</p>";
     }).join("");
     return '<details class="goat-history"><summary>' + esc(tr("careerHistory")) +
       "</summary>" + rows + "</details>";
-  }
-  /* Palmarés con icono pixelado: títulos colectivos e individuales agregados de toda la carrera */
-  function CareerHonours(entry) {
-    var PXm = window.PX;
-    if (!PXm || !PXm.honours) return "";
-    var list = PXm.honours(entry.history || []);
-    if (!list.length) return "";
-    var block = function (ind) {
-      var items = list.filter(function (h) { return h.ind === ind; });
-      if (!items.length) return "";
-      return '<div class="goat-hon-h">' + esc(tr(ind ? "honoursInd" : "honoursTeam")) + '</div><div class="goat-hon">' + items.map(function (h) {
-        var name = compName(h.name);
-        var yrs = h.years.filter(function (y, i, a) { return a.indexOf(y) === i; }).join(", ");
-        return '<span class="goat-hon-i" title="' + esc(name + (yrs ? " · " + yrs : "")) + '">' + PXm.trophy(h.key, 30, name) +
-          '<span><b>' + esc(name) + "</b>" + (h.n > 1 ? '<em>×' + h.n + "</em>" : "") + "</span></span>";
-      }).join("") + "</div>";
-    };
-    return '<div class="goat-honours"><div class="goat-hon-t">' + esc(tr("honours")) + "</div>" + block(false) + block(true) + "</div>";
   }
   function CareerLadderCard(entry, index, metric) {
     var metrics = entry.metrics || {};
@@ -321,7 +271,7 @@
       esc(careerMetricValue(metrics, metric)) + " " + esc(metricLabel) + "</strong></div><h3>" +
       esc(entry.title) + '</h3><p class="goat-meta">' + esc(entry.display_name) + " · " +
       esc(entry.current_club) + " · " + esc(entry.started_season + "–" + entry.latest_season) +
-      "</p>" + CareerStatsSummary(metrics, entry.game_mode) + CareerHonours(entry) + CareerSeasonHistory(entry) +
+      "</p>" + CareerStatsSummary(metrics, entry.game_mode) + CareerSeasonHistory(entry) +
       '<p class="goat-unverified">' + esc(tr("verified")) + "</p>" +
       (service.canDelete(entry.id) ? '<button class="btn wide" data-a="goatcareerdelete" data-v="' +
         esc(entry.id) + '"' + (entry.id === window.__goatSheet.deletingCareer ? " disabled" : "") +
@@ -332,7 +282,7 @@
     return '<article class="card goat-card"><div class="head"><span class="tag real">#' + (index + 1) +
       " · " + tr(entry.event_type === "season" ? "eventSeason" : "eventMatch") + '</span><strong class="goat-score">' +
       esc(entry.goat_score) + '</strong></div><h3>' + esc(entry.title) + '</h3><p class="goat-meta">' +
-      esc(entry.display_name) + " · " + esc(entry.club_name) + " · " + esc(compName(entry.competition_name)) +
+      esc(entry.display_name) + " · " + esc(entry.club_name) + " · " + esc(entry.competition_name) +
       esc(opponent) + '</p>' + MatchStatsSummary(entry) + '<p class="goat-unverified">' +
       esc(tr("verified")) + "</p>" + (service.canDelete(entry.id)
         ? '<button class="btn wide" data-a="goatdelete" data-v="' + esc(entry.id) + '">' +
@@ -577,7 +527,7 @@
         ? '<section class="card goat-publish"><div class="head"><span class="tag hot">' +
           esc(tr("latest")) + '</span><span>' + esc(tr(latest.event_type === "season" ? "eventSeason" : "eventMatch")) +
           "</span></div><h3>" + esc(latest.title) + '</h3><p class="goat-meta">' +
-          esc(latest.club_name) + " · " + esc(compName(latest.competition_name)) +
+          esc(latest.club_name) + " · " + esc(latest.competition_name) +
           (latest.opponent_name ? " · " + esc(latest.opponent_name) : "") +
           "</p>" + MatchStatsSummary({game_mode: latest.game_mode, metrics: latest}) +
           inputLabel("alias", "alias", sheet.alias || "") + inputLabel("title", "title", sheet.title || title) +

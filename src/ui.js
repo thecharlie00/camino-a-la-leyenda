@@ -21,9 +21,6 @@
     board: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 4v13M8 21l2-4M16 21l-2-4"/><circle cx="12" cy="10.5" r="2"/></svg>'
   };
 
-  /* pixel art: los iconos de navegación pasan a sprites de píxeles */
-  if (typeof PX !== "undefined" && PX.uiIcons) { var PXUI = PX.uiIcons(); for (var pk in PXUI) if (ICON[pk]) ICON[pk] = PXUI[pk]; }
-
   /* ---------- utilidades ---------- */
   function h(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]; }); }
   function dec(x, n) { return fmtDec(x, n); }
@@ -126,18 +123,11 @@
       if (!S) return;
       S.ts = Date.now();
       var json = serialize(), me = metaOf(S);
-      /* 5.6: escritura atómica: primero a una clave temporal, se comprueba y solo entonces se sustituye */
-      this.atomic("camino.active", json);
+      if (!this.lset("camino.active", json)) { this.ldel("camino.active"); this.lset("camino.active", json); }
       this.lset("camino.activeId", S.uid);
       var idx = this.index().filter(function (e) { return e.id !== me.id; });
       idx.unshift(me); this.setIndex(idx);
       this.schedule();
-    },
-    atomic: function (k, v) {
-      var tmp = k + ".tmp";
-      if (!this.lset(tmp, v) || this.lget(tmp) !== v) { this.ldel(tmp); if (!this.lset(k, v)) { this.ldel(k); return this.lset(k, v); } return true; }
-      if (!this.lset(k, v)) { this.ldel(k); if (!this.lset(k, v)) { this.ldel(tmp); return false; } }
-      this.ldel(tmp); return true;
     },
     schedule: function () { var self = this; clearTimeout(this.ptimer); this.ptimer = setTimeout(function () { self.flush(); }, 2500); },
     /* comprime la partida en curso en su ranura y la sube a la cuenta */
@@ -149,10 +139,7 @@
       this.busy = true; this.again = false;
       var json = serialize(), id = S.uid, ts = S.ts || Date.now();
       this.busyP = pack(json).then(function (pk) {
-        /* 5.6: la ranura anterior queda como copia de seguridad antes de escribir la nueva */
-        var key = "camino.s." + id, prev = self.lget(key);
-        if (prev) { try { JSON.parse(prev); if (!self.lset(key + ".bak", prev)) self.ldel(key + ".bak"); } catch (e) {} }
-        self.atomic(key, JSON.stringify({ts: ts, z: pk.z, d: pk.d}));
+        self.lset("camino.s." + id, JSON.stringify({ts: ts, z: pk.z, d: pk.d}));
         if (!self.cloud || pk.d.length > 240000) return;
         return self.doc("s-" + id).set({ts: ts, z: pk.z, d: pk.d}).then(function () { return self.pushIndex(); });
       }).catch(function () {}).then(function () { self.busy = false; if (self.again && S) return self.flush(); });
@@ -186,14 +173,6 @@
       var rawTs = raw ? (e ? e.ts || 0 : 0) : -1;
       var local = raw && (!pk || rawTs >= (pk.ts || 0)) ? Promise.resolve({json: raw, ts: rawTs})
         : pk ? unpack(pk.z, pk.d).then(function (j) { return {json: j, ts: pk.ts || 0}; }) : Promise.resolve(null);
-      /* 5.6: si lo guardado no se puede leer, se recurre a la copia de seguridad de la ranura */
-      var self0 = this, ok = function (j) { try { var o = JSON.parse(j); return !!(o && o.cr && (o.p || o.m)); } catch (e) { return false; } };
-      local = local.then(function (x) {
-        if (x && ok(x.json)) return x;
-        var bk = null; try { bk = JSON.parse(self0.lget("camino.s." + id + ".bak") || "null"); } catch (e) {}
-        if (!bk) return x;
-        return unpack(bk.z, bk.d).then(function (j) { return ok(j) ? {json: j, ts: bk.ts || 0} : x; }).catch(function () { return x; });
-      }).catch(function () { return null; });
       if (!this.cloud) return local.then(function (x) { return x && x.json; });
       return Promise.all([local, this.doc("s-" + id).get().then(function (snap) { return snap.exists ? snap.data() : null; }).catch(function () { return null; })]).then(function (r) {
         var loc = r[0], cd = r[1];
@@ -202,7 +181,7 @@
       });
     },
     remove: function (id) {
-      this.ldel("camino.s." + id); this.ldel("camino.s." + id + ".bak");
+      this.ldel("camino.s." + id);
       if (this.lget("camino.activeId") === id) { this.ldel("camino.active"); this.ldel("camino.activeId"); }
       this.setIndex(this.index().filter(function (e) { return e.id !== id; }));
       var dead = this.tomb();
@@ -289,14 +268,14 @@
   function persist() { Store.saveLocal(); }
   /* ---------- efectos: bordes de color y confeti ---------- */
   var LANG_FLAG = {es: "ES", en: "GB", de: "DE", it: "IT", fr: "FR"};
-  function calm() { if (typeof Anim !== "undefined") return Anim.reduced(); try { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
+  function calm() { try { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   function edgeFlash(good) {
     if (good == null) return;
     var o = document.createElement("div");
     o.className = "edge " + (good ? "good" : "bad");
     o.setAttribute("aria-hidden", "true");
     document.body.appendChild(o);
-    if (typeof Anim !== "undefined") Anim.haptic(good ? "ok" : "bad");
+    try { if (navigator.vibrate) navigator.vibrate(good ? 25 : [40, 60, 40]); } catch (e) {}
     setTimeout(function () { o.remove(); }, 1300);
   }
   function confetti(gold) {
@@ -355,7 +334,7 @@
     el.innerHTML = '<div class="tropanel"><div class="trorays" aria-hidden="true"></div><div class="trokick">' + h(tr("¡Campeones!")) + '</div><div class="troimg">' + (typeof trophySVG === "function" ? trophySVG(t.k, 132) : "🏆") + "</div>" +
       "<h2>" + h(trComp(t.n)) + '</h2><div class="troseason">' + h(t.s || "") + " · " + h(who) + '</div><div class="chips">' + chips.join("") + '</div><button class="go" data-a="troclose">' + h(tr("¡A celebrarlo!")) + "</button></div>";
     document.body.appendChild(el);
-    if (typeof Anim !== "undefined") Anim.haptic("big");
+    try { if (navigator.vibrate) navigator.vibrate([30, 60, 30]); } catch (e) {}
     confetti(true);
   }
   function celebrate(b) {
@@ -476,7 +455,7 @@
     return '<div class="xiwarn" role="alert"><div class="xwt"><span class="xwi">!</span>' + trn(u.length, "{n} baja en tu once", "{n} bajas en tu once") + '</div><p>' + why + '</p><p class="xws">' + tr("Si juegas así, entrará un suplente de urgencia, el equipo rendirá peor y el vestuario perderá moral.") + '</p><div class="xwb"><button class="btn" data-a="fixxi">' + tr("Corregir automáticamente") + "</button>" + (UI.tab !== "plantilla" ? '<button class="btn" data-a="tab" data-t="plantilla">' + tr("Ver el once") + "</button>" : "") + "</div></div>";
   }
   /* navegación: cuatro pestañas; lo demás vive en «Más» */
-  function subTabs() { return isMgr() ? ["comp", "red", "hist", "yo"] : ["red", "hist", "mundo"]; }
+  function subTabs() { return isMgr() ? ["comp", "red", "hist"] : ["red", "hist", "mundo"]; }
   function tabsNav() {
     var t = isMgr() ? [["club", tr("Inicio"), ICON.home], ["plantilla", tr("Equipo"), ICON.shirt], ["mercado", tr("Mercado"), ICON.swap], ["mas", tr("Más"), ICON.grid]]
       : [["carrera", tr("Inicio"), ICON.home], ["jugador", tr("Yo"), ICON.shirt], ["comp", tr("Liga"), ICON.table], ["mas", tr("Más"), ICON.grid]];
@@ -489,7 +468,6 @@
   function tabMas() {
     var unread = socUnread(), mgr = isMgr(), rows = [];
     if (mgr) { var pos = S.m.club >= 0 ? posInLeague(S.m.club) : 0; rows.push(["tab", "comp", ICON.table, tr("Competición"), pos > 0 ? tr("Vais {pos} en {lg}", {pos: ord(pos), lg: lgName(S.cl[S.m.club])}) : tr("Clasificaciones y calendario")]); }
-    if (mgr && UIX.mgrYo) rows.push(["tab", "yo", ICON.shirt, tr("Tu míster"), tr("Ropa, estadísticas, vitrina y mascota")]);
     rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
     rows.push(["tab", "hist", ICON.trophy, tr("Historial"), tr("Temporadas, títulos y premios")]);
     if (!mgr) rows.push(["tab", "mundo", ICON.globe, tr("Mundo"), tr("Otras ligas, selecciones y rivales")]);
@@ -505,7 +483,7 @@
 
   function tabView() {
     var body = tabView0(), t = UI.tab, sub = subTabs().indexOf(t) >= 0;
-    var names = {comp: tr("Competición"), red: tr("Red social"), hist: tr("Historial"), mundo: tr("Mundo"), yo: tr("Tu míster")};
+    var names = {comp: tr("Competición"), red: tr("Red social"), hist: tr("Historial"), mundo: tr("Mundo")};
     return (sub ? '<div class="backbar"><button class="backbtn" data-a="tab" data-t="mas">‹ ' + tr("Más") + "</button><h2>" + h(names[t] || "") + "</h2></div>" : "") + slot(t + "Top") + body + slot(t);
   }
   function tabView0() {
@@ -517,7 +495,6 @@
         case "hist": return tabHistM();
         case "red": return tabRed();
         case "mas": return tabMas();
-        case "yo": if (UIX.mgrYo) return UIX.mgrYo(); UI.tab = "club"; return tabClub();
         default: UI.tab = "club"; return tabClub();
       }
     }
@@ -631,7 +608,7 @@
     var mgr = S.mode === "mgr", ci = mgr ? S.m.club : S.p.club, c = W.clubs[ci] || {}, id = "pr" + (++PR_ID);
     var col = [0, 1].map(function (i) { return c.col && COL_OK.test(c.col[i]) ? c.col[i] : i ? "#ffb21e" : "#24393f"; });
     var ab = h(c.ab || "FC"), nm = h(socSelfName()), s = "";
-    s += '<svg class="pressroom" viewBox="0 0 360 168" shape-rendering="crispEdges" role="img" aria-label="' + h(tr("Sala de prensa")) + '"><defs>';
+    s += '<svg class="pressroom" viewBox="0 0 360 168" role="img" aria-label="' + h(tr("Sala de prensa")) + '"><defs>';
     s += '<linearGradient id="' + id + 'w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16262b"/><stop offset="1" stop-color="#0c1619"/></linearGradient>';
     s += '<radialGradient id="' + id + 'l" cx=".5" cy=".25" r=".6"><stop offset="0" stop-color="#fff6dc" stop-opacity=".22"/><stop offset="1" stop-color="#fff6dc" stop-opacity="0"/></radialGradient>';
     s += '<pattern id="' + id + 'p" width="60" height="34" patternUnits="userSpaceOnUse">' +
@@ -646,12 +623,10 @@
     /* protagonista sentado */
     var shirt = mgr ? "#1b2328" : col[0], trim = mgr ? "#e9e3d6" : col[1];
     s += '<g transform="translate(0 -5)">';
-    /* protagonista en pixel art (celda 4, sin rasgos faciales) */
-    var PB = function (x, y, w, hh, c) { s += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + hh + '" fill="' + c + '"/>'; };
-    PB(156, 84, 48, 33, shirt); PB(152, 92, 56, 25, shirt); PB(160, 80, 40, 4, shirt);
-    if (mgr) { PB(176, 80, 8, 12, trim); PB(178, 84, 4, 12, col[0]); } else { PB(172, 80, 16, 4, trim); PB(176, 84, 8, 4, trim); }
-    PB(176, 72, 8, 8, "#c99470"); PB(168, 52, 24, 20, "#d6a27a"); PB(188, 52, 4, 20, "#c99470"); PB(164, 60, 4, 8, "#c99470"); PB(192, 60, 4, 8, "#c99470");
-    PB(168, 48, 24, 8, "#2b1d14"); PB(168, 56, 4, 4, "#2b1d14"); s += '</g>';
+    s += '<path d="M152 117 Q152 84 168 80 L192 80 Q208 84 208 112 Z" fill="' + shirt + '"/>';
+    s += mgr ? '<path d="M174 80 L180 94 L186 80 Z" fill="' + trim + '"/><path d="M179 84 L181 84 L182 98 L178 98 Z" fill="' + col[0] + '"/>' : '<path d="M172 80 Q180 87 188 80" fill="none" stroke="' + trim + '" stroke-width="2.4"/>';
+    s += '<rect x="176" y="70" width="8" height="11" rx="3" fill="#c99470"/><ellipse cx="180" cy="62" rx="10" ry="11.5" fill="#d6a27a"/>';
+    s += '<path d="M170 60 Q170 49 180 49 Q191 49 190 61 Q186 54 176 56 Z" fill="#2b1d14"/><ellipse cx="170" cy="63" rx="1.8" ry="3" fill="#c99470"/><ellipse cx="190" cy="63" rx="1.8" ry="3" fill="#c99470"/></g>';
     /* mesa, micrófonos, agua y cartel */
     s += '<rect x="70" y="108" width="220" height="7" rx="2" fill="#2a3a3f"/><rect x="74" y="115" width="212" height="30" fill="url(#' + id + 't)"/>';
     s += '<rect x="148" y="121" width="64" height="12" rx="2" fill="#0b1417" opacity=".75"/><text x="180" y="130" text-anchor="middle" font-size="7.5" font-weight="700" fill="#edf1e8" font-family="var(--f-body,sans-serif)">' + (nm.length > 18 ? nm.slice(0, 17) + "…" : nm) + "</text>";
@@ -681,14 +656,13 @@
   }
   function descCard(d) {
     var o = '<section class="card decision ' + (d.cls || "") + '" aria-live="polite"><div class="head"><span class="tag ' + h(d.tag) + '"><span class="dot"></span>' + h(d.tagTxt) + '</span><span class="eyebrow">' + h(d.cat || "") + "</span></div>";
-    if (d.scene === "press") o += UIX.gxScene ? UIX.gxScene("press") : pressRoomSVG(d.sceneQ);
-    else if (d.vscene && UIX.gxScene) o += UIX.gxScene(d.vscene);
+    if (d.scene === "press") o += pressRoomSVG(d.sceneQ);
     o += "<h3>" + h(d.title) + "</h3>";
     if (d.board) o += boardHTML(d.board);
     o += '<p class="lead">' + h(d.text) + "</p>";
     if (d.ref) o += '<div class="ref"><b>' + tr("Pasó de verdad") + '</b>' + h(d.ref) + "</div>";
     o += '<div class="opts">' + d.opts.map(optHTML).join("") + "</div>";
-    if (S && S.pend[0] && S.pend[0].k === "moment" && d.opts.length > 1) o += '<button class="btn wide msim" data-a="msim">⏩ ' + tr("Simular la jugada") + '</button><p class="muted" style="font-size:var(--fs-xs);margin:6px 0 0">' + tr("El juego decide por ti y te dice cómo acaba el partido.") + "</p>";
+    if (S && S.pend[0] && S.pend[0].k === "moment" && d.opts.length > 1) o += '<button class="btn wide msim" data-a="msim">⏩ ' + tr("Simular la jugada") + '</button><p class="muted" style="font-size:12px;margin:6px 0 0">' + tr("El juego decide por ti y te dice cómo acaba el partido.") + "</p>";
     return o + "</section>";
   }
   /* marcador final tras un momento de partido */
@@ -717,7 +691,7 @@
     if (!fee) o += '<button class="pickrow" data-a="negoprom" aria-pressed="' + !!x.prom + '"><div class="grow"><b>' + tr("Prometerle que será Clave") + "</b><small>" + tr("Lo convence más, pero si no juega se sentirá engañado.") + "</small></div></button>";
     if (x.log && x.log.length) o += '<ul class="nlog">' + x.log.filter(function (l) { return l.txt; }).slice(0, 4).map(function (l) { return '<li class="' + h(l.r) + '">' + h(l.txt) + "</li>"; }).join("") + "</ul>";
     o += '<div class="opts"><button class="btn pri wide" data-a="negooff">' + (fee ? tr("Hacer la oferta") : tr("Ofrecer este sueldo")) + '</button><button class="btn wide" data-a="negoquit">' + tr("Retirarte de la operación") + "</button></div>";
-    o += '<p class="muted" style="font-size:var(--fs-xs);margin:8px 0 0">' + trn(x.tries, "{n} oferta hecha.", "{n} ofertas hechas.") + " " + tr("Ofertas muy bajas los enfadan más.") + "</p>";
+    o += '<p class="muted" style="font-size:12.5px;margin:8px 0 0">' + trn(x.tries, "{n} oferta hecha.", "{n} ofertas hechas.") + " " + tr("Ofertas muy bajas los enfadan más.") + "</p>";
     return o + "</section>";
   }
   /* avisos temporales que manda el motor: lesiones, rojas, mercado, resultados */
@@ -746,7 +720,7 @@
       });
       var endDrag = function () {
         if (sx == null) return; sx = null; el.classList.remove("swiping");
-        if (drag && dx > 80) { gone = true; el.style.transform = "translateX(110%)"; el.style.opacity = "0"; if (typeof Anim !== "undefined") Anim.haptic("tap"); setTimeout(function () { el.remove(); }, 220); return; }
+        if (drag && dx > 80) { gone = true; el.style.transform = "translateX(110%)"; el.style.opacity = "0"; try { if (navigator.vibrate) navigator.vibrate(10); } catch (er) {} setTimeout(function () { el.remove(); }, 220); return; }
         if (drag) { el.style.transform = ""; el.style.opacity = ""; el._nodrop = Date.now(); }
         keep();
       };
@@ -788,7 +762,7 @@
       o += "<h3>" + (x.forced ? tr("Eres agente libre: elige tu nuevo club") : tr("Tienes ofertas sobre la mesa")) + '</h3><p class="lead">' + tr("Tu valor de mercado: {value}. Ahora cobras {sal} al año en el {club}.", {value: fmtMoney(marketValue()), sal: fmtMoney(S.p.con.sal), club: h(clubName(S.p.club))}) + '</p><div class="opts">';
       x.list.forEach(function (of, i) {
         var li = S.cl[of.club];
-        o += '<div class="offer">' + crest(of.club, true) + '<div style="min-width:0"><div class="nm">' + h(clubName(of.club)) + '</div><div class="muted" style="font-size:var(--fs-sm)">' + flag(W.clubs[of.club].ci) + " " + h(lgName(li)) + " · " + tr("nivel {n}", {n: Math.round(S.cr[of.club])}) + (of.promised ? " · " + tr("te lo prometieron") : "") + (of.blp ? " · " + tr("te quieren de titular") : "") + "</div></div>" +
+        o += '<div class="offer">' + crest(of.club, true) + '<div style="min-width:0"><div class="nm">' + h(clubName(of.club)) + '</div><div class="muted" style="font-size:13px">' + flag(W.clubs[of.club].ci) + " " + h(lgName(li)) + " · " + tr("nivel {n}", {n: Math.round(S.cr[of.club])}) + (of.promised ? " · " + tr("te lo prometieron") : "") + (of.blp ? " · " + tr("te quieren de titular") : "") + "</div></div>" +
           '<div class="kv"><div><span>' + tr("Rol") + '</span><b>' + h(tr(of.role)) + "</b></div><div><span>" + (of.loan ? tr("Tipo") : tr("Traspaso")) + "</span><b>" + (of.loan ? tr("Cesión 1 año") : of.fee ? fmtMoney(of.fee) : tr("Libre")) + "</b></div>" +
           "<div><span>" + tr("Sueldo/año") + "</span><b>" + fmtMoney(of.sal) + "</b></div><div><span>" + tr("Contrato") + "</span><b>" + (of.loan ? "—" : trn(of.yrs, "{n} año", "{n} años")) + "</b></div></div>" +
           '<button class="btn pri sign" data-a="choose" data-i="' + i + '">' + (of.loan ? tr("Aceptar cesión") : tr("Fichar por el {club}", {club: h(clubName(of.club))})) + "</button></div>";
@@ -808,10 +782,10 @@
     o += "<h3>" + title + '</h3><p class="lead">' + (x.first ? tr("Con tu nombre y tu carrera como jugador, estos clubes te ofrecen su banquillo.") + " " : "") + tr("Puedes dirigir clubes de nivel {n} o menos; con más prestigio llegarán los grandes.", {n: Math.round(max)}) + "</p><div class=\"opts\">";
     x.list.forEach(function (of, i) {
       var li = S.cl[of.club], L = S.L && S.L[li], ex = L ? L.exp.indexOf(of.club) + 1 : 0;
-      o += '<div class="offer">' + crest(of.club, true) + '<div style="min-width:0"><div class="nm">' + h(clubName(of.club)) + '</div><div class="muted" style="font-size:var(--fs-sm)">' + flag(W.clubs[of.club].ci) + " " + h(lgName(li)) + " · " + tr("nivel {n}", {n: Math.round(S.cr[of.club])}) + (of.club === m.exClub ? " · " + tr("tu antiguo club") : "") + "</div></div>" +
+      o += '<div class="offer">' + crest(of.club, true) + '<div style="min-width:0"><div class="nm">' + h(clubName(of.club)) + '</div><div class="muted" style="font-size:13px">' + flag(W.clubs[of.club].ci) + " " + h(lgName(li)) + " · " + tr("nivel {n}", {n: Math.round(S.cr[of.club])}) + (of.club === m.exClub ? " · " + tr("tu antiguo club") : "") + "</div></div>" +
         '<div class="kv"><div><span>' + tr("Presupuesto") + '</span><b>' + fmtMoney(mBudgetFor(of.club)) + "</b></div><div><span>" + tr("Sueldo/año") + "</span><b>" + fmtMoney(of.sal) + "</b></div>" +
         "<div><span>" + tr("Contrato") + "</span><b>" + trn(of.yrs, "{n} año", "{n} años") + "</b></div><div><span>" + tr("Favorito a") + "</span><b>" + (ex ? tr("{pos} en liga", {pos: ord(ex)}) : "—") + "</b></div></div>" +
-        '<p class="muted" style="font-size:var(--fs-xs);margin:6px 0 0">' + tr("Sustituirías a {n}.", {n: h(coachName(of.club))}) + "</p>" +
+        '<p class="muted" style="font-size:12.5px;margin:6px 0 0">' + tr("Sustituirías a {n}.", {n: h(coachName(of.club))}) + "</p>" +
         '<button class="btn pri sign" data-a="choose" data-i="' + i + '">' + tr("Firmar con el {club}", {club: h(clubName(of.club))}) + "</button></div>";
     });
     o += '<button class="btn wide" data-a="jobpick">' + tr("Buscar otro banquillo") + '</button>';
@@ -887,7 +861,7 @@
           "<h3>" + h(c.title) + '</h3><p class="lead"><b>' + h(c.choice) + ".</b> " + h(c.txt) + '</p><div class="chips">' + (c.chips || []).map(chip).join("") + "</div></article>";
       case "moment":
         return '<article class="card' + fl + '"><div class="head"><span class="tag hot">' + (c.tipo === "mgr" ? tr("Desde la banda") : tr("Momento clave")) + "</span>" + (c.good != null ? resTag(c) : "") + "</div>" +
-          "<h3>" + h(c.title) + '</h3><div class="muted" style="font-size:var(--fs-sm);margin-top:4px">' + h(c.ctx || "") + '</div><p class="lead"><b>' + h(c.choice) + ".</b> " + h(c.txt) + "</p>" + (c.fin ? finBox(c.fin) : "") +
+          "<h3>" + h(c.title) + '</h3><div class="muted" style="font-size:13px;margin-top:4px">' + h(c.ctx || "") + '</div><p class="lead"><b>' + h(c.choice) + ".</b> " + h(c.txt) + "</p>" + (c.fin ? finBox(c.fin) : "") +
           (c.chips && c.chips.length ? '<div class="chips">' + c.chips.map(chip).join("") + "</div>" : "") + "</article>";
       case "block": return blockCard(c, fl);
       case "transfer":
@@ -897,7 +871,7 @@
           '<p class="lead">' + tr("Llegas como {role} a {lg}.", {role: h(lc(tr(String(c.role)))), lg: h(lgName(S.cl[c.to]))}) + "</p></article>";
       case "season":
         return '<article class="card' + fl + '"><div class="head"><span class="tag">' + tr("Arranca la temporada") + '</span><span class="eyebrow">' + seasonLabel(c.y) + '</span></div><div style="display:flex;align-items:center;gap:10px">' + crest(c.club, true) +
-          '<div style="min-width:0"><h3>' + h(clubName(c.club)) + '</h3><div class="muted" style="font-size:var(--fs-sm)">' + h(lgName(c.lg)) + " · " + h(tr(c.role)) + " · " + tr("media {n}", {n: c.ovr}) + " · " + trn(c.age, "{n} año", "{n} años") + "</div></div></div></article>";
+          '<div style="min-width:0"><h3>' + h(clubName(c.club)) + '</h3><div class="muted" style="font-size:13px">' + h(lgName(c.lg)) + " · " + h(tr(c.role)) + " · " + tr("media {n}", {n: c.ovr}) + " · " + trn(c.age, "{n} año", "{n} años") + "</div></div></div></article>";
       case "seasonEnd": return seasonEndCard(c, fl);
       case "summer": return summerCard(c, fl);
       case "awards": return awardsCard(c, fl);
@@ -906,13 +880,13 @@
         return '<article class="card' + fl + '"><div class="head"><span class="tag real">' + tr("Nueva etapa") + '</span><span class="eyebrow">' + seasonLabel(c.y) + '</span></div><h3>' + tr("Del césped al banquillo") + '</h3><p class="lead">' + tr("Te sacas el título de entrenador. Empiezas con {rep} de prestigio: cuanto más ganes, más grandes serán los clubes que te llamen.", {rep: c.rep}) + "</p></article>";
       case "mfound":
         return '<article class="card' + fl + '"><div class="head"><span class="tag real">' + tr("Club propio") + '</span><span class="eyebrow">' + seasonLabel(c.y) + '</span></div><div style="display:flex;align-items:center;gap:10px">' + crest(c.club, true) +
-          '<div style="min-width:0"><h3>' + tr("Nace el {c}", {c: h(clubName(c.club))}) + '</h3><div class="muted" style="font-size:var(--fs-sm)">' + h(lgName(c.lg)) + " · " + tr("nivel {n}", {n: c.r}) + " · " + tr("presupuesto {m}", {m: fmtMoney(c.bud)}) + " · " + h(tr(DIFFS[c.diff] || "")) + '</div></div></div><p class="lead" style="margin:10px 0 0">' + tr("Eres el dueño y el entrenador: nadie puede despedirte, pero el dinero y la plantilla dependen de tus resultados.") + "</p></article>";
+          '<div style="min-width:0"><h3>' + tr("Nace el {c}", {c: h(clubName(c.club))}) + '</h3><div class="muted" style="font-size:13px">' + h(lgName(c.lg)) + " · " + tr("nivel {n}", {n: c.r}) + " · " + tr("presupuesto {m}", {m: fmtMoney(c.bud)}) + " · " + h(tr(DIFFS[c.diff] || "")) + '</div></div></div><p class="lead" style="margin:10px 0 0">' + tr("Eres el dueño y el entrenador: nadie puede despedirte, pero el dinero y la plantilla dependen de tus resultados.") + "</p></article>";
       case "mjob":
         return '<article class="card' + fl + '"><div class="head"><span class="tag real">' + (c.mid ? tr("Nuevo banquillo") : tr("Presentación")) + '</span><span class="eyebrow">' + seasonLabel(c.y) + '</span></div><div style="display:flex;align-items:center;gap:10px">' + crest(c.club, true) +
-          '<div style="min-width:0"><h3>' + tr("Entrenador del {club}", {club: h(clubName(c.club))}) + '</h3><div class="muted" style="font-size:var(--fs-sm)">' + h(lgName(c.lg)) + " · " + tr("nivel {n}", {n: c.r}) + " · " + tr("presupuesto {m}", {m: fmtMoney(c.bud)}) + "</div></div></div></article>";
+          '<div style="min-width:0"><h3>' + tr("Entrenador del {club}", {club: h(clubName(c.club))}) + '</h3><div class="muted" style="font-size:13px">' + h(lgName(c.lg)) + " · " + tr("nivel {n}", {n: c.r}) + " · " + tr("presupuesto {m}", {m: fmtMoney(c.bud)}) + "</div></div></div></article>";
       case "mseason":
         return '<article class="card' + fl + '"><div class="head"><span class="tag">' + tr("Arranca la temporada") + '</span><span class="eyebrow">' + seasonLabel(c.y) + '</span></div><div style="display:flex;align-items:center;gap:10px">' + crest(c.club, true) +
-          '<div style="min-width:0"><h3>' + h(clubName(c.club)) + '</h3><div class="muted" style="font-size:var(--fs-sm)">' + h(lgName(c.lg)) + " · " + tr("nivel {n}", {n: c.r}) + " · " + tr("presupuesto {m}", {m: fmtMoney(c.bud)}) + "</div></div></div>" +
+          '<div style="min-width:0"><h3>' + h(clubName(c.club)) + '</h3><div class="muted" style="font-size:13px">' + h(lgName(c.lg)) + " · " + tr("nivel {n}", {n: c.r}) + " · " + tr("presupuesto {m}", {m: fmtMoney(c.bud)}) + "</div></div></div>" +
           (c.objs && c.objs.length ? '<ul class="news">' + c.objs.map(function (o) { return '<li class="star">' + h(typeof o === "string" ? o : objName(o)) + "</li>"; }).join("") + "</ul>" : "") + "</article>";
       case "mblock": return mBlockCard(c, fl);
       case "mseasonEnd": return mSeasonEndCard(c, fl);
@@ -922,7 +896,7 @@
       case "mtransfer":
         var inn = c.inn, other = inn ? c.from : c.to;
         return '<article class="card' + fl + '"><div class="head"><span class="tag ' + (inn ? "ok" : "") + '">' + (inn ? tr("Fichaje") : tr("Salida")) + '</span><span class="eyebrow">' + seasonLabel(c.y) + "</span></div>" +
-          "<h3>" + h(c.n) + '</h3><div class="muted" style="font-size:var(--fs-sm);margin-top:2px">' + h(posAb(c.pos)) + " · " + trn(c.age, "{n} año", "{n} años") + " · " + tr("media {n}", {n: c.ovr}) + "</div>" +
+          "<h3>" + h(c.n) + '</h3><div class="muted" style="font-size:13px;margin-top:2px">' + h(posAb(c.pos)) + " · " + trn(c.age, "{n} año", "{n} años") + " · " + tr("media {n}", {n: c.ovr}) + "</div>" +
           '<div class="statline"><div class="stat"><b>' + (c.fee ? fmtMoney(c.fee) : tr("Libre")) + "</b><span>" + tr("Traspaso") + "</span></div>" + (inn ? '<div class="stat"><b>' + fmtMoney(c.sal) + '</b><span>' + tr("Sueldo/año") + '</span></div><div class="stat"><b>' + c.yrs + "</b><span>" + tr("Años") + "</span></div>" : "") + "</div>" +
           '<p class="lead">' + (inn ? (other >= 0 ? tr("Llega desde el {club} con rol de {role}.", {club: h(clubName(other)), role: h(lc(ROLES[c.role].n))}) : tr("Llega como agente libre con rol de {role}.", {role: h(lc(ROLES[c.role].n))})) : (c.why ? h(c.why) : tr("Deja el club")) + ".") + "</p></article>";
     }
@@ -977,7 +951,7 @@
     o += '<div class="statline"><div class="stat"><b>' + r.apps + '</b><span>' + tr("Partidos") + '</span></div>' + (gkRow
       ? '<div class="stat"><b>' + r.cs + '</b><span>' + tr("Port. a cero") + '</span></div><div class="stat"><b>' + r.gc + '</b><span>' + tr("Encajados") + '</span></div>'
       : '<div class="stat"><b>' + r.g + '</b><span>' + tr("Goles") + '</span></div><div class="stat"><b>' + r.a + '</b><span>' + tr("Asist.") + '</span></div>') + '<div class="stat"><b>' + (r.rt ? dec(r.rt) : "—") + '</b><span>' + tr("Nota") + '</span></div><div class="stat"><b>' + r.ovr1 + '</b><span>' + tr("Media") + '</span></div></div>';
-    if (gkRow && r.apps) o += '<p class="muted" style="font-size:var(--fs-sm);margin:8px 0 0">' + tr("{cs} porterías a cero y {gc} goles encajados ({avg} por partido).", {cs: r.cs, gc: r.gc, avg: fmtDec(r.gc / Math.max(1, r.apps), 2)}) + "</p>";
+    if (gkRow && r.apps) o += '<p class="muted" style="font-size:13px;margin:8px 0 0">' + tr("{cs} porterías a cero y {gc} goles encajados ({avg} por partido).", {cs: r.cs, gc: r.gc, avg: fmtDec(r.gc / Math.max(1, r.apps), 2)}) + "</p>";
     if (c.objs && c.objs.length) o += '<div style="margin-top:10px">' + c.objs.map(function (ob) { return '<div class="obj"><div><span>' + h(objName(ob)) + '</span><span class="' + (ob.met ? "pos" : "neg") + '">' + (ob.met ? tr("Cumplido") : tr("No cumplido")) + "</span></div></div>"; }).join("") + "</div>";
     var tro = S.p.trophies.filter(function (t) { return t.s === seasonLabel(c.y); });
     if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(t.n)); }).join("") + "</div>";
@@ -1012,7 +986,7 @@
   function awardsCard(c, fl) {
     var o = '<article class="card' + fl + '"><div class="head"><span class="tag real">' + tr("Gala de premios {year}", {year: c.y}) + '</span><span class="eyebrow">' + (c.mgr ? "" : c.pos && c.pos <= 30 ? tr("Tú: {pos}", {pos: ord(c.pos)}) : tr("No nominado")) + "</span></div><h3>" + tr("Balón de Oro {year}", {year: c.y}) + "</h3>";
     o += '<div style="margin-top:8px">' + c.top.map(function (x, i) {
-      return '<div class="rank' + (x.me ? " me" : "") + '"><b>' + (i + 1) + "</b><span>" + flag(x.ni) + " " + (x.me ? (c.mgr ? tr("{name} (tu jugador)", {name: h(x.n)}) : tr("{name} (tú)", {name: h(x.n)})) : h(x.n)) + '</span><span class="muted" style="font-size:var(--fs-xs)">' + h(clubName(x.club)) + "</span></div>";
+      return '<div class="rank' + (x.me ? " me" : "") + '"><b>' + (i + 1) + "</b><span>" + flag(x.ni) + " " + (x.me ? (c.mgr ? tr("{name} (tu jugador)", {name: h(x.n)}) : tr("{name} (tú)", {name: h(x.n)})) : h(x.n)) + '</span><span class="muted" style="font-size:12px">' + h(clubName(x.club)) + "</span></div>";
     }).join("") + "</div>";
     if (!c.mgr && c.pos > 10 && c.pos <= 30) o += '<div class="rank me"><b>' + c.pos + "</b><span>" + tr("Tú") + "</span><span></span></div>";
     if (c.won && c.won.length) o += '<ul class="news">' + c.won.map(function (a) { return '<li class="' + (a.minor ? "ok" : "trophy") + '">' + h(awardName(a)) + "</li>"; }).join("") + "</ul>";
@@ -1104,10 +1078,10 @@
       if (c.typ === "swiss") {
         var st = sortTable(c.teams, c.tb, false), pos = st.findIndex(function (x) { return x.c === me; });
         var lo = Math.max(0, Math.min(pos - 3, st.length - 7)), part = st.slice(lo, lo + 7);
-        o += '<p class="muted" style="margin:4px 0 6px;font-size:var(--fs-sm)">' + tr("Fase de liga: los 8 primeros van a octavos; del 9º al 24º, playoff.") + "</p>" + miniTable(part, lo, me, nat);
+        o += '<p class="muted" style="margin:4px 0 6px;font-size:13px">' + tr("Fase de liga: los 8 primeros van a octavos; del 9º al 24º, playoff.") + "</p>" + miniTable(part, lo, me, nat);
       } else {
         var gi = c.g.findIndex(function (g) { return g.indexOf(me) >= 0; });
-        if (gi >= 0) o += '<p class="muted" style="margin:4px 0 6px;font-size:var(--fs-sm)">' + (c.sub ? h(tr(c.sub)) : tr("Grupo {g}", {g: String.fromCharCode(65 + gi)})) + "</p>" + miniTable(sortTable(c.g[gi], c.gt[gi], nat), 0, me, nat);
+        if (gi >= 0) o += '<p class="muted" style="margin:4px 0 6px;font-size:13px">' + (c.sub ? h(tr(c.sub)) : tr("Grupo {g}", {g: String.fromCharCode(65 + gi)})) + "</p>" + miniTable(sortTable(c.g[gi], c.gt[gi], nat), 0, me, nat);
       }
     }
     if (c.ko) {
@@ -1318,10 +1292,10 @@
     var bench = m.bench.map(mPl).filter(Boolean);
     s += '<div class="bhead"><span class="sgroup">' + tr("Banquillo") + '</span><span class="eyebrow">' + bench.length + "/" + BENCH_N + "</span></div>";
     s += '<div class="bstrip" data-drop="bench">' + (bench.length ? bench.map(benchChip).join("") : '<p class="empty" style="margin:0">' + tr("Arrastra aquí a tus suplentes.") + "</p>") + "</div>";
-    s += '<p class="muted" style="font-size:var(--fs-xs);margin:8px 0 0">' + tr("Mantén pulsado un jugador y arrástralo al campo, al banquillo o a los no convocados; si lo sueltas encima de otro, se cambian. Toca un hueco del campo para elegir de una lista.") + "</p>";
+    s += '<p class="muted" style="font-size:12.5px;margin:8px 0 0">' + tr("Mantén pulsado un jugador y arrástralo al campo, al banquillo o a los no convocados; si lo sueltas encima de otro, se cambian. Toca un hueco del campo para elegir de una lista.") + "</p>";
     s += '<div class="row2" style="margin-top:10px"><div><label class="lbl" for="mform">' + tr("Formación") + '</label><select id="mform">' + Object.keys(FORMATIONS).map(function (f) { return '<option value="' + f + '"' + (f === m.form ? " selected" : "") + ">" + f + "</option>"; }).join("") + '</select></div><div><label class="lbl">&nbsp;</label><button class="btn wide" data-a="bestxi">' + tr("Once ideal") + "</button></div></div>";
     s += '<div style="margin-top:10px"><label class="lbl">' + tr("Mentalidad") + '</label><div class="seg">' + MENT_NAMES.map(function (n, i) { return '<button data-a="ment" data-v="' + i + '" aria-pressed="' + (m.ment === i) + '">' + h(tr(n)) + "</button>"; }).join("") + "</div></div>";
-    s += '<div style="margin-top:10px"><label class="lbl">' + tr("Rotaciones") + '</label><div class="seg">' + ROT_NAMES.map(function (n, i) { return '<button data-a="rot" data-v="' + i + '" aria-pressed="' + (m.rot === i) + '">' + h(tr(n)) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-xs);margin:6px 0 0">' + tr("Más rotación descansa a los cansados en los partidos menores; en los grandes siempre juegan los mejores. Los cambios salen del banquillo.") + "</p></div>";
+    s += '<div style="margin-top:10px"><label class="lbl">' + tr("Rotaciones") + '</label><div class="seg">' + ROT_NAMES.map(function (n, i) { return '<button data-a="rot" data-v="' + i + '" aria-pressed="' + (m.rot === i) + '">' + h(tr(n)) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:12.5px;margin:6px 0 0">' + tr("Más rotación descansa a los cansados en los partidos menores; en los grandes siempre juegan los mejores. Los cambios salen del banquillo.") + "</p></div>";
     s += "</section>";
     var inXI = {}, onB = {};
     m.xi.forEach(function (id) { if (id != null) inXI[id] = 1; });
@@ -1333,7 +1307,7 @@
       if (l.length) s += '<div class="sgroup">' + h(tr(g[0])) + "</div>" + l.map(function (p) { return squadRow(p, "nc"); }).join("");
     });
     if (!nc.length) s += '<p class="empty">' + tr("Todos tus jugadores están en el once o en el banquillo.") + "</p>";
-    s += '<p class="muted" style="font-size:var(--fs-xs);margin:8px 0 0">' + (UIX.hk && UIX.hk.phy ? tr("Barras: media física (verde, ámbar o rojo) y moral.") : tr("Barras: físico (azul) y moral.")) + " " + tr("Masa salarial: {m} al año.", {m: fmtMoney(mWageBill())}) + "</p></section>";
+    s += '<p class="muted" style="font-size:12px;margin:8px 0 0">' + (UIX.hk && UIX.hk.phy ? tr("Barras: media física (verde, ámbar o rojo) y moral.") : tr("Barras: físico (azul) y moral.")) + " " + tr("Masa salarial: {m} al año.", {m: fmtMoney(mWageBill())}) + "</p></section>";
     var loans = m.sq.filter(function (p) { return p.loanOut; });
     if (loans.length) s += '<section class="card"><h3>' + tr("Cedidos") + '</h3><div class="kvlist" style="margin-top:6px">' + loans.map(function (p) { return "<div><span>" + h(plName(p)) + " (" + h(posAb(p.pos)) + ", " + Math.round(p.ovr) + ")</span><span>" + h(clubName(p.loanOut.club)) + "</span></div>"; }).join("") + "</div></section>";
     return s + "</div>";
@@ -1344,7 +1318,7 @@
     var open = !!m.mk.open, bill = mWageBill();
     var s = '<div class="stack"><section class="card"><div class="head"><h3>' + tr("Mercado") + '</h3>' + (open ? '<span class="tag ok"><span class="dot"></span>' + tr("Abierto") + " · " + h(tr(m.mk.open)) + "</span>" : '<span class="tag">' + tr("Cerrado") + "</span>") + "</div>";
     s += '<div class="statline"><div class="stat"><b>' + fmtMoney(m.bud) + '</b><span>' + tr("Presupuesto") + '</span></div><div class="stat"><b class="' + (bill > m.wcap ? "neg" : "") + '">' + fmtMoney(bill) + '</b><span>' + tr("Masa salarial") + '</span></div><div class="stat"><b>' + fmtMoney(m.wcap) + "</b><span>" + tr("Tope salarial") + "</span></div></div>";
-    s += '<p class="muted" style="font-size:var(--fs-sm);margin:10px 0 0">' + (open ? tr("Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.") : tr("Puedes estudiar la lista, pero solo se ficha en verano (pretemporada) y en invierno (antes del tramo Feb–Mar).")) + "</p></section>";
+    s += '<p class="muted" style="font-size:13px;margin:10px 0 0">' + (open ? tr("Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.") : tr("Puedes estudiar la lista, pero solo se ficha en verano (pretemporada) y en invierno (antes del tramo Feb–Mar).")) + "</p></section>";
     var list = (m.mk.list || []).filter(function (t) { return UI.mkF === "ALL" || W.pos[t.pos].g === UI.mkF; });
     s += '<section class="card"><div class="head"><h3>' + tr("Informes de ojeadores") + '</h3><span class="eyebrow">' + trn((m.mk.list || []).length, "{n} jugador", "{n} jugadores") + "</span></div>";
     s += '<div class="seg" style="margin-bottom:6px">' + [[tr("Todos"), "ALL"], ["POR", "POR"], ["DEF", "DEF"], ["MED", "MED"], ["DEL", "DEL"]].map(function (x) { return '<button data-a="mkf" data-v="' + x[1] + '" aria-pressed="' + (UI.mkF === x[1]) + '">' + x[0] + "</button>"; }).join("") + "</div>";
@@ -1353,7 +1327,7 @@
       var can = open && !t.done && t.ask <= m.bud;
       return '<div class="trow' + (t.done ? " done" : "") + '"><span class="pp">' + h(posAb(t.pos)) + '</span><span class="pn"><b>' + flag(t.nat) + " " + h(t.fn.charAt(0) + ". " + t.ln) + '</b><small>' + tr("{n} años", {n: t.age}) + " · " + (t.club >= 0 ? h(clubName(t.club)) : tr("Sin equipo")) + " · " + tr("pot. {a}–{b}", {a: t.potR[0], b: t.potR[1]}) + "</small><small>" +
         (t.club >= 0 ? tr("Piden {x}", {x: fmtMoney(t.ask)}) : tr("Gratis")) + " · " + tr("{sal}/año", {sal: fmtMoney(t.sal)}) + "</small>" + mkFitTag(t) + "</span><span class=\"po\">" + Math.round(t.ovr) + "</span>" +
-        (st ? '<span class="dim" style="font-size:var(--fs-xs)">' + st + "</span>" : '<button class="btn sm pri" data-a="mbid" data-id="' + t.id + '"' + (can ? "" : " disabled") + ">" + (t.club >= 0 ? tr("Fichar") : tr("Negociar")) + "</button>") + "</div>";
+        (st ? '<span class="dim" style="font-size:12px">' + st + "</span>" : '<button class="btn sm pri" data-a="mbid" data-id="' + t.id + '"' + (can ? "" : " disabled") + ">" + (t.club >= 0 ? tr("Fichar") : tr("Negociar")) + "</button>") + "</div>";
     }).join("") : '<p class="empty">' + tr("No hay jugadores en esta posición.") + "</p>";
     if (open && !m.mk.ref) s += '<button class="btn wide" style="margin-top:10px" data-a="mscout">' + tr("Pedir otro informe a los ojeadores") + '</button>';
     s += "</section>";
@@ -1374,7 +1348,7 @@
       m.seasons.slice().reverse().forEach(function (r) {
         s += "<tr><td>" + seasonLabel(r.y) + '</td><td class="club"><div class="cl">' + crest(r.club) + "<span>" + h(clubName(r.club)) + (r.mid ? " *" : "") + "</span></div></td><td>" + ord(r.pos) + "</td><td>" + r.w + "-" + r.d + "-" + r.l + "</td><td>" + r.tro.length + "</td></tr>";
       });
-      s += '</tbody></table></div><p class="muted" style="font-size:var(--fs-xs);margin:6px 0 0">' + tr("* Llegaste a mitad de temporada.") + "</p></section>";
+      s += '</tbody></table></div><p class="muted" style="font-size:12px;margin:6px 0 0">' + tr("* Llegaste a mitad de temporada.") + "</p></section>";
     }
     if (m.spells.length) s += '<section class="card"><h3>' + tr("Clubes dirigidos") + '</h3><div class="kvlist" style="margin-top:6px">' + m.spells.slice().reverse().map(function (sp) {
       return '<div><span><span style="display:inline-flex;align-items:center;gap:6px">' + crest(sp.club) + h(clubName(sp.club)) + "</span> · " + sp.y0 + "–" + (sp.y1 || tr("hoy")) + "</span><span>" + tr("{w}V {d}E {l}D", {w: sp.w, d: sp.d, l: sp.l}) + (sp.tro ? " · " + tr("{n} tít.", {n: sp.tro}) : "") + "</span></div>";
@@ -1422,7 +1396,7 @@
     var cr = e.cu ? crestRaw(e.cu.col, e.cu.ab, true) : (e.club >= 0 && W.clubs[e.club] ? crestRaw(W.clubs[e.club].col, W.clubs[e.club].ab, true) : "");
     var lvTier = e.pos === "DT" ? repTier(e.lv) : tier(e.lv), cur = S && S.uid === e.id;
     return '<section class="card slotc"><div class="head"><span class="tag' + (e.ret ? "" : " ok") + '"><span class="dot"></span>' + h(tr(MODE_NAMES[e.mode] || "")) + (e.g === "f" ? " · " + h(tr("Femenino")) : "") + '</span><span class="eyebrow">' + (e.yr ? seasonLabel(e.draft ? e.yr + 1 : e.yr) : "") + "</span></div>" +
-      '<div class="slotrow">' + cr + '<div class="grow"><h3>' + h(e.n) + '</h3><div class="muted" style="font-size:var(--fs-sm)">' + h(e.cn || tr("Sin club")) + (e.ret ? " · " + tr("retirado") : "") + (e.ts ? " · " + h(fmtWhen(e.ts)) : "") + (e.cloud ? " · " + tr("en tu cuenta") : "") + "</div></div>" +
+      '<div class="slotrow">' + cr + '<div class="grow"><h3>' + h(e.n) + '</h3><div class="muted" style="font-size:13px">' + h(e.cn || tr("Sin club")) + (e.ret ? " · " + tr("retirado") : "") + (e.ts ? " · " + h(fmtWhen(e.ts)) : "") + (e.cloud ? " · " + tr("en tu cuenta") : "") + "</div></div>" +
       '<div class="ovr tier-' + lvTier + '"><b>' + e.lv + "</b><small>" + h(e.pos === "DT" ? tr("DT") : posAb(e.pos)) + "</small></div></div>" +
       '<div class="row2" style="margin-top:12px"><button class="btn wide danger" data-a="askdel" data-v="' + h(e.id) + '">' + tr("Borrar") + '</button><button class="btn pri wide" data-a="loadslot" data-v="' + h(e.id) + '">' + (cur ? tr("Continuar") : tr("Jugar")) + "</button></div></section>";
   }
@@ -1452,12 +1426,12 @@
   function createPlayerView() {
     var c = UI.cr, st = c.step, s = '<main id="main"><div class="stack"><div class="steps">' + [0, 1, 2, 3].map(function (i) { return '<i class="' + (i <= st ? "on" : "") + '"></i>'; }).join("") + "</div>";
     if (st === 0) {
-      s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 1}) + '</div><h2 style="font-size:var(--fs-score);text-transform:uppercase">' + tr("¿Quién eres?") + "</h2></section>";
+      s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 1}) + '</div><h2 style="font-size:34px;text-transform:uppercase">' + tr("¿Quién eres?") + "</h2></section>";
       s += '<div class="row2"><div><label class="lbl" for="fn">' + tr("Nombre") + '</label><input type="text" id="fn" data-f="fn" value="' + h(c.fn) + '" maxlength="18" autocomplete="off"></div><div><label class="lbl" for="ln">' + tr("Apellido") + '</label><input type="text" id="ln" data-f="ln" value="' + h(c.ln) + '" maxlength="20" autocomplete="off"></div></div>';
       s += '<div><label class="lbl" for="nat">' + tr("Nacionalidad") + '</label><select id="nat" data-f="nat">' + natOptions(c.nat) + "</select></div>";
-      s += '<div><label class="lbl" for="nat2">' + tr("Segunda nacionalidad (opcional)") + '</label><select id="nat2" data-f="nat2">' + natOptions(c.nat2, true) + '</select><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + tr("Si tienes dos, cuando destaques te tocará elegir selección.") + "</p></div>";
+      s += '<div><label class="lbl" for="nat2">' + tr("Segunda nacionalidad (opcional)") + '</label><select id="nat2" data-f="nat2">' + natOptions(c.nat2, true) + '</select><p class="muted" style="font-size:13px;margin:6px 0 0">' + tr("Si tienes dos, cuando destaques te tocará elegir selección.") + "</p></div>";
     } else if (st === 1) {
-      s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 2}) + '</div><h2 style="font-size:var(--fs-score);text-transform:uppercase">' + tr("Tu posición") + "</h2></section>";
+      s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 2}) + '</div><h2 style="font-size:34px;text-transform:uppercase">' + tr("Tu posición") + "</h2></section>";
       s += '<div class="pitch" role="group" aria-label="' + h(tr("Elige posición")) + '"><div class="box t"></div><div class="box b"></div>' + Object.keys(POS_XY).map(function (k) {
         return '<button data-a="cpos" data-v="' + k + '" style="left:' + POS_XY[k][0] + "%;top:" + POS_XY[k][1] + '%" aria-pressed="' + (c.pos === k) + '" aria-label="' + h(posName(k)) + '">' + h(posAb(k)) + "</button>";
       }).join("") + "</div>";
@@ -1466,12 +1440,12 @@
       s += '<div><label class="lbl">' + tr("Edad al debutar") + '</label><div class="seg">' + [16, 17, 18, 19].map(function (a) { return '<button data-a="cset" data-k="age" data-v="' + a + '" aria-pressed="' + (c.age === a) + '">' + a + "</button>"; }).join("") + "</div></div></div>";
       s += slot("create", c);
     } else if (st === 2) {
-      s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 3}) + '</div><h2 style="font-size:var(--fs-score);text-transform:uppercase">' + tr("Tu talento") + '</h2></section><div class="opts">';
+      s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 3}) + '</div><h2 style="font-size:34px;text-transform:uppercase">' + tr("Tu talento") + '</h2></section><div class="opts">';
       var desc = {promesa: tr("Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti."), joya: tr("Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba."), elegido: tr("Empiezas con 65. Todos esperan mucho de ti, y eso también pesa."), misterio: tr("Tu media inicial es una sorpresa. Nadie sabe qué futbolista puedes llegar a ser.")};
       Object.keys(TALENT).forEach(function (k) { s += '<button class="pickrow" data-a="cset" data-k="talent" data-v="' + k + '" aria-pressed="' + (c.talent === k) + '"><div class="grow"><b>' + h(TALENT[k].n) + "</b><small>" + h(desc[k]) + "</small></div></button>"; });
-      s += '</div><div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[tr("Tranquilo"), 0], [tr("Normal"), 1], [tr("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + x[0] + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + evDesc(c.ev, false) + "</p></div>" + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
+      s += '</div><div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[tr("Tranquilo"), 0], [tr("Normal"), 1], [tr("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + x[0] + "</button>"; }).join("") + '</div><p class="muted" style="font-size:13px;margin:6px 0 0">' + evDesc(c.ev, false) + "</p></div>" + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:13px;margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
     } else {
-      s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 4}) + '</div><h2 style="font-size:var(--fs-score);text-transform:uppercase">' + tr("Tu primer club") + "</h2></section>";
+      s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 4}) + '</div><h2 style="font-size:34px;text-transform:uppercase">' + tr("Tu primer club") + "</h2></section>";
       s += '<div class="seg"><button data-a="cset" data-k="mode" data-v="rand" aria-pressed="' + (c.mode === "rand") + '">' + tr("Cantera de mi país") + '</button><button data-a="cset" data-k="mode" data-v="pick" aria-pressed="' + (c.mode === "pick") + '">' + tr("Elegir club") + "</button></div>";
       if (c.mode === "rand") {
         var pb = (TALENT[c.talent].ovr || 59) + ({16: -3, 17: -1.5, 18: 0, 19: 1.5}[c.age] || 0);
@@ -1493,12 +1467,12 @@
           var r = W.clubs[ci].r0, role = roleFor(base - r, c.age);
           s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + tr("Rol esperado: {role}", {role: h(tr(role))}) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
         });
-        s += '</div><p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Un grande te da prestigio, pero quizá no minutos. Un club pequeño, el escaparate para crecer.") + "</p>";
+        s += '</div><p class="muted" style="font-size:13px;margin:0">' + tr("Un grande te da prestigio, pero quizá no minutos. Un club pequeño, el escaparate para crecer.") + "</p>";
       }
     }
     var canNext = st === 0 ? (c.fn.trim() && c.ln.trim()) : st === 3 ? c.club >= 0 : true;
     s += '<div class="row2" style="margin-top:6px"><button class="btn wide" data-a="cback">' + (st === 0 ? tr("Cancelar") : tr("Atrás")) + '</button><button class="btn pri wide" data-a="cnext"' + (canNext ? "" : " disabled") + ">" + (st === 3 ? tr("Empezar carrera") : tr("Siguiente")) + "</button></div>";
-    if (st === 0 && !canNext) s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
+    if (st === 0 && !canNext) s += '<p class="muted" style="font-size:13px;margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
     return s + "</div></main>";
   }
   function createView() {
@@ -1526,7 +1500,7 @@
   }
   function diffFields(c, desc) {
     var s = '<div class="opts">' + DIFFS.map(function (n, i) { return '<button class="pickrow" data-a="cset" data-k="diff" data-v="' + i + '" aria-pressed="' + (c.diff === i) + '"><div class="grow"><b>' + h(tr(n)) + "</b><small>" + h(tr(desc[i])) + "</small></div></button>"; }).join("") + "</div>";
-    s += '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + evDesc(c.ev, true) + "</p></div>" + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
+    s += '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:13px;margin:6px 0 0">' + evDesc(c.ev, true) + "</p></div>" + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:13px;margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
     return s;
   }
   function leagueField(c) {
@@ -1566,11 +1540,11 @@
         var r = W.clubs[ci].r0, big = r > maxR + 2;
         s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + (big ? tr("Un grande: la afición no tendrá paciencia") : tr("Nivel adecuado para empezar")) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
       });
-      s += '</div><p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Puedes empezar en cualquier club. Si ganas, llegarán ofertas de clubes más grandes.") + "</p>";
+      s += '</div><p class="muted" style="font-size:13px;margin:0">' + tr("Puedes empezar en cualquier club. Si ganas, llegarán ofertas de clubes más grandes.") + "</p>";
     }
     var canNext = st === 0 ? !!(c.fn.trim() && c.ln.trim()) : st === 2 ? c.club >= 0 : true;
     s += navRow(st, n, canNext, tr("Empezar"));
-    if (st === 0 && !canNext) s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
+    if (st === 0 && !canNext) s += '<p class="muted" style="font-size:13px;margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
     return s + "</div></main>";
   }
   var CLUB_COLS = ["#c8102e", "#8a1538", "#f26522", "#ffcd00", "#00843d", "#0b5d3b", "#6cabdd", "#0057b8", "#0b2545", "#5b2a86", "#111111", "#ffffff", "#9aa5ab", "#d4a017"];
@@ -1590,17 +1564,17 @@
       s += stepHead(st, n, tr("¿Dónde juega?")) + leagueField(c);
       var cl = W.lg[+c.lg].cl0.slice().sort(function (a, b) { return W.clubs[b].r0 - W.clubs[a].r0; });
       if (c.club < 0 || cl.indexOf(c.club) < 0) c.club = cl[cl.length - 1];
-      s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Tu club ocupará la plaza de uno de estos equipos, que desaparece de la liga.") + '</p><div class="list">';
+      s += '<p class="muted" style="font-size:13px;margin:0">' + tr("Tu club ocupará la plaza de uno de estos equipos, que desaparece de la liga.") + '</p><div class="list">';
       cl.forEach(function (ci) { s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + (c.club === ci ? tr("Tu club ocupa su plaza") : tr("Sustituir a este club")) + '</small></div><span class="lvl">' + Math.round(W.clubs[ci].r0) + "</span></button>"; });
       s += "</div>";
     } else if (st === 2) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_C); }
     else {
-      s += stepHead(st, n, c.role === "pres" ? tr("Tú, el presidente") : tr("Tú, el míster")) + '<div><label class="lbl">' + tr("Tu papel") + '</label><div class="seg"><button data-a="cset" data-k="role" data-v="pm" aria-pressed="' + (c.role !== "pres") + '">' + tr("Presidente y míster") + '</button><button data-a="cset" data-k="role" data-v="pres" aria-pressed="' + (c.role === "pres") + '">' + tr("Solo presidente") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (c.role === "pres" ? tr("Fichas a un entrenador que dirige los partidos. Tú llevas las cuentas, el estadio y los fichajes, y respondes ante la afición.") : tr("Lo haces todo: alineación, táctica, fichajes y las cuentas del club.")) + "</p></div>" + whoFields(c, [30, 35, 40, 45, 50, 55]);
+      s += stepHead(st, n, c.role === "pres" ? tr("Tú, el presidente") : tr("Tú, el míster")) + '<div><label class="lbl">' + tr("Tu papel") + '</label><div class="seg"><button data-a="cset" data-k="role" data-v="pm" aria-pressed="' + (c.role !== "pres") + '">' + tr("Presidente y míster") + '</button><button data-a="cset" data-k="role" data-v="pres" aria-pressed="' + (c.role === "pres") + '">' + tr("Solo presidente") + '</button></div><p class="muted" style="font-size:13px;margin:6px 0 0">' + (c.role === "pres" ? tr("Fichas a un entrenador que dirige los partidos. Tú llevas las cuentas, el estadio y los fichajes, y respondes ante la afición.") : tr("Lo haces todo: alineación, táctica, fichajes y las cuentas del club.")) + "</p></div>" + whoFields(c, [30, 35, 40, 45, 50, 55]);
     }
     var canNext = st === 0 ? c.cn.trim().length >= 2 : st === 1 ? c.club >= 0 : st === 3 ? !!(c.fn.trim() && c.ln.trim()) : true;
     s += navRow(st, n, canNext, tr("Crear el club"));
-    if (st === 0 && !canNext) s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Ponle un nombre a tu club para seguir.") + "</p>";
-    if (st === 3 && !canNext) s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
+    if (st === 0 && !canNext) s += '<p class="muted" style="font-size:13px;margin:0">' + tr("Ponle un nombre a tu club para seguir.") + "</p>";
+    if (st === 3 && !canNext) s += '<p class="muted" style="font-size:13px;margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
     return s + "</div></main>";
   }
   function draftView() {
@@ -1644,14 +1618,7 @@
   }
   /* ---------- paneles ---------- */
   function renderSheet() {
-    var old = document.querySelector(".sheet:not(.out)"), oldTop = old && old.firstChild ? old.firstChild.scrollTop : 0;
-    /* 5.6: al cerrar, la hoja sale con un fundido rápido en lugar de desaparecer de golpe */
-    if (old && !UI.sheet && !calm() && old.animate) {
-      old.classList.add("out"); old.style.pointerEvents = "none";
-      var a = old.animate([{opacity: 1}, {opacity: 0}], {duration: 150, easing: "ease-in"}), gone = function () { if (old.parentNode) old.remove(); };
-      a.onfinish = gone; setTimeout(gone, 300);
-      var pn = old.firstChild; if (pn && pn.animate) pn.animate([{transform: "none"}, {transform: "translateY(24px) scale(.98)"}], {duration: 150, easing: "ease-in", fill: "forwards"});
-    } else if (old) old.remove();
+    var old = document.querySelector(".sheet"), oldTop = old && old.firstChild ? old.firstChild.scrollTop : 0; if (old) old.remove();
     if (!UI.sheet) { UI.sheetK = null; return; }
     var html = sheetHTML();
     if (!html) { UI.sheet = null; return; }
@@ -1669,13 +1636,13 @@
     if (t.k === "statinfo") {
       var it = statusItems();
       return "<h2>" + (isMgr() ? tr("Estado del club") : tr("Tu estado")) + '</h2><div class="stack"><div class="stlist">' + it.map(function (x) { var w = lvlWord(x[1]), v = Math.round(x[1]); return '<div class="stli"><div class="stlt"><span>' + h(x[0]) + '</span><b class="' + w[1] + '">' + h(w[0]) + " · " + v + '</b></div><div class="bar"><i class="' + barCls(v) + '" style="width:' + v + '%"></i></div></div>'; }).join("") + "</div>" +
-        '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + (isMgr() ? tr("Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.") : tr("Forma, moral y físico deciden cómo rindes; el míster y la afición, tus minutos y tu fama.")) + '</p><button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
+        '<p class="muted" style="font-size:13px;margin:0">' + (isMgr() ? tr("Directiva y afición deciden tu futuro; vestuario, química y forma, cómo rinde el equipo.") : tr("Forma, moral y físico deciden cómo rindes; el míster y la afición, tus minutos y tu fama.")) + '</p><button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
     }
     if (t.k === "menu") {
       var ev = S ? S.set.ev : 1;
       return '<h2>' + tr("Menú") + '</h2><div class="stack">' + updBanner(true) + slot("menu") + '<div><label class="lbl">' + tr("Idioma") + '</label><div class="seg langseg">' + LANGS.map(function (l) { return '<button data-a="setlang" data-v="' + l[0] + '" lang="' + l[0] + '" aria-pressed="' + (LANG === l[0]) + '" title="' + h(l[1]) + '"><span class="lflag sm" aria-hidden="true">' + flagOf(LANG_FLAG[l[0]]) + "</span>" + l[0].toUpperCase() + "</button>"; }).join("") + "</div></div>" +
-        '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="setev" data-v="' + x[1] + '" aria-pressed="' + (ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + evDesc(ev, isMgr()) + "</p></div>" +
-        '<p class="muted" style="margin:0;font-size:var(--fs-sm)">' + (Store.cloud ? tr("Tu partida se guarda sola en tu cuenta y en este dispositivo.") : tr("Tu partida se guarda sola en este dispositivo. Usa el código para pasarla a otro móvil.")) + "</p>" +
+        '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="setev" data-v="' + x[1] + '" aria-pressed="' + (ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:13px;margin:6px 0 0">' + evDesc(ev, isMgr()) + "</p></div>" +
+        '<p class="muted" style="margin:0;font-size:13px">' + (Store.cloud ? tr("Tu partida se guarda sola en tu cuenta y en este dispositivo.") : tr("Tu partida se guarda sola en este dispositivo. Usa el código para pasarla a otro móvil.")) + "</p>" +
         '<button class="btn wide" data-a="home">' + tr("Menú principal") + '</button><button class="btn wide" data-a="export">' + tr("Copiar código de partida") + '</button><button class="btn wide" data-a="import">' + tr("Cargar partida con código") + '</button><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + "</button>" +
         '<button class="btn wide" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="btn wide" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
     }
@@ -1704,7 +1671,7 @@
         [N_("Borrar tus datos"), N_("Puedes borrar cualquier partida desde «Cargar partida». Si borras los datos de este sitio en tu navegador, se elimina todo lo guardado. Para borrar los datos publicitarios que tiene Google, entra en myadcenter.google.com.")],
         P[7], P[8], P[9]];
       if (window.GoatLadder) P.push([N_("GOAT LADDER"), window.GoatLadder.t("privacy")]);
-      return "<h2>" + tr("Política de privacidad") + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:var(--fs-sm)">' + tr("Última actualización: {d}", {d: "10/10/2026"}) + '</p><div class="policy">' + P.map(function (x) { return "<h3>" + h(tr(x[0])) + "</h3><p>" + h(tr(x[1])) + "</p>"; }).join("") + '</div><button class="btn wide" style="margin-top:12px" data-a="close">' + tr("Cerrar") + "</button>";
+      return "<h2>" + tr("Política de privacidad") + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:13px">' + tr("Última actualización: {d}", {d: "10/10/2026"}) + '</p><div class="policy">' + P.map(function (x) { return "<h3>" + h(tr(x[0])) + "</h3><p>" + h(tr(x[1])) + "</p>"; }).join("") + '</div><button class="btn wide" style="margin-top:12px" data-a="close">' + tr("Cerrar") + "</button>";
     }
     if (t.k === "update") {
       return '<div class="upd">' + ICON.play + '</div><h2>' + tr("¡Nueva versión disponible!") + '</h2><p class="lead">' + tr("Hay una actualización de Camino a la Leyenda con novedades y mejoras. Tus partidas se conservan.") + "</p>" +
@@ -1718,10 +1685,10 @@
     if (t.k === "ren") {
       var rp = mPl(t.id); if (!rp) return "";
       return "<h2>" + tr("Cambiar nombre") + '</h2><div class="stack"><div class="row2"><div><label class="lbl" for="rfn">' + tr("Nombre") + '</label><input type="text" id="rfn" value="' + h(rp.fn) + '" maxlength="20" autocomplete="off"></div><div><label class="lbl" for="rln">' + tr("Apellido") + '</label><input type="text" id="rln" value="' + h(rp.ln) + '" maxlength="24" autocomplete="off"></div></div>' +
-        '<p class="muted" style="margin:0;font-size:var(--fs-sm)">' + tr("Puedes dejar el nombre en blanco si se le conoce por un solo nombre.") + '</p><div class="row2"><button class="btn wide" data-a="pl" data-id="' + rp.id + '">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="dorename" data-id="' + rp.id + '">' + tr("Guardar") + "</button></div></div>";
+        '<p class="muted" style="margin:0;font-size:13px">' + tr("Puedes dejar el nombre en blanco si se le conoce por un solo nombre.") + '</p><div class="row2"><button class="btn wide" data-a="pl" data-id="' + rp.id + '">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="dorename" data-id="' + rp.id + '">' + tr("Guardar") + "</button></div></div>";
     }
-    if (t.k === "export") return "<h2>" + tr("Código de partida") + '</h2><p class="muted" style="margin:0 0 10px;font-size:var(--fs-md)">' + tr("Cópialo y guárdalo donde quieras. Pegándolo en «Cargar partida» recuperas esta carrera en cualquier dispositivo.") + '</p><textarea id="code" readonly>' + h(t.code || tr("Generando…")) + '</textarea><div class="row2" style="margin-top:10px"><button class="btn wide" data-a="close">' + tr("Cerrar") + '</button><button class="btn pri wide" data-a="copy">' + tr("Copiar") + "</button></div>";
-    if (t.k === "import") return "<h2>" + tr("Cargar partida") + '</h2><p class="muted" style="margin:0 0 10px;font-size:var(--fs-md)">' + tr("Pega el código de una partida. Se añadirá a tus partidas guardadas.") + '</p><textarea id="incode" placeholder="CAMINO1:…"></textarea>' + (t.err ? '<p class="neg" style="margin:8px 0 0">' + h(t.err) + "</p>" : "") + '<div class="row2" style="margin-top:10px"><button class="btn wide" data-a="close">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="doImport">' + tr("Cargar") + "</button></div>";
+    if (t.k === "export") return "<h2>" + tr("Código de partida") + '</h2><p class="muted" style="margin:0 0 10px;font-size:14px">' + tr("Cópialo y guárdalo donde quieras. Pegándolo en «Cargar partida» recuperas esta carrera en cualquier dispositivo.") + '</p><textarea id="code" readonly>' + h(t.code || tr("Generando…")) + '</textarea><div class="row2" style="margin-top:10px"><button class="btn wide" data-a="close">' + tr("Cerrar") + '</button><button class="btn pri wide" data-a="copy">' + tr("Copiar") + "</button></div>";
+    if (t.k === "import") return "<h2>" + tr("Cargar partida") + '</h2><p class="muted" style="margin:0 0 10px;font-size:14px">' + tr("Pega el código de una partida. Se añadirá a tus partidas guardadas.") + '</p><textarea id="incode" placeholder="CAMINO1:…"></textarea>' + (t.err ? '<p class="neg" style="margin:8px 0 0">' + h(t.err) + "</p>" : "") + '<div class="row2" style="margin-top:10px"><button class="btn wide" data-a="close">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="doImport">' + tr("Cargar") + "</button></div>";
     if (t.k === "hof") {
       var list = (t.list || []).filter(function (e) { return UI.hofF === "ALL" || e.g === UI.hofF; });
       return "<h2>" + tr("Salón de la fama") + '</h2><div class="seg" style="margin-bottom:12px">' + [[N_("Todos"), "ALL"], [N_("POR"), "POR"], [N_("DEF"), "DEF"], [N_("MED"), "MED"], [N_("DEL"), "DEL"], [N_("DT"), "DT"]].map(function (x) { return '<button data-a="hoff" data-v="' + x[1] + '" aria-pressed="' + (UI.hofF === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + "</div>" +
@@ -1745,7 +1712,7 @@
   function playerSheet(p) {
     if (!p) return "";
     var m = S.m, open = !!m.mk.open, st = p.st, now = S.yr * 10 + S.bi;
-    var s = (UIX.hk && UIX.hk.psTop ? UIX.hk.psTop(p) : "") + '<div class="pshead"><div class="ovr tier-' + tier(Math.round(p.ovr)) + '"><b>' + Math.round(p.ovr) + "</b><small>" + h(posAb(p.pos)) + '</small></div><div style="min-width:0"><h2 style="margin:0">' + h(plName(p)) + '</h2><div class="muted" style="font-size:var(--fs-sm)">' + flag(p.nat) + " " + h(natName(p.nat)) + " · " + h(posName(p.pos)) + " · " + tr("{n} años", {n: p.age}) + "</div></div></div>";
+    var s = (UIX.hk && UIX.hk.psTop ? UIX.hk.psTop(p) : "") + '<div class="pshead"><div class="ovr tier-' + tier(Math.round(p.ovr)) + '"><b>' + Math.round(p.ovr) + "</b><small>" + h(posAb(p.pos)) + '</small></div><div style="min-width:0"><h2 style="margin:0">' + h(plName(p)) + '</h2><div class="muted" style="font-size:13px">' + flag(p.nat) + " " + h(natName(p.nat)) + " · " + h(posName(p.pos)) + " · " + tr("{n} años", {n: p.age}) + "</div></div></div>";
     s += '<div class="meters" style="grid-template-columns:repeat(3,1fr);margin-top:12px">' + meter(tr("Forma"), p.form) + meter(tr("Moral"), p.mor) + meter(tr("Físico"), p.fit) + "</div>" + (UIX.hk && UIX.hk.psPhy ? UIX.hk.psPhy(p) : "");
     s += '<div class="kvlist" style="margin-top:10px">' +
       "<div><span>" + tr("Potencial") + "</span><span>" + Math.round(Math.max(p.ovr, p.pot - (m.flags.data ? 1 : 3))) + "–" + Math.round(Math.min(95, p.pot + (m.flags.data ? 1 : 3))) + "</span></div>" +
@@ -1759,7 +1726,7 @@
       (p.prom ? "<div>" + tr("<span>Promesa</span><span>Le prometiste ser Clave</span>") + "</div>" : "") +
       "</div>";
     s += '<label class="lbl" style="margin-top:12px">' + tr("Rol en la plantilla") + '</label><div class="seg">' + ROLE_ORDER.map(function (r) { return '<button data-a="mrole" data-id="' + p.id + '" data-v="' + r + '" aria-pressed="' + (p.role === r) + '">' + tr(ROLES[r].n) + "</button>"; }).join("") + "</div>";
-    s += '<p class="muted" style="font-size:var(--fs-xs);margin:6px 0 0">' + tr("Espera jugar alrededor del {pct} % de los minutos. Bajarle el rol le sienta mal.", {pct: Math.round(ROLES[p.role].s * 100)}) + "</p>";
+    s += '<p class="muted" style="font-size:12.5px;margin:6px 0 0">' + tr("Espera jugar alrededor del {pct} % de los minutos. Bajarle el rol le sienta mal.", {pct: Math.round(ROLES[p.role].s * 100)}) + "</p>";
     var zn = mZoneOf(p.id)[0];
     s += '<label class="lbl" style="margin-top:12px">' + tr("Convocatoria") + '</label><div class="kvlist"><div><span>' + (zn === "xi" ? tr("En el once titular") : zn === "bench" ? tr("En el banquillo") : tr("No convocado")) + "</span><span>" +
       (zn !== "bench" ? '<button class="btn sm" data-a="mzone" data-id="' + p.id + '" data-v="bench">' + tr("Al banquillo") + "</button> " : "") +
@@ -1786,7 +1753,7 @@
     var all = m.sq.filter(function (p) { return !p.loanOut; });
     var l = all.filter(function (p) { return posOk(p.pos, sp, p) && (xiSwapOk(p.id, i)); }).sort(function (a, b) { return (mAvail(b) - mAvail(a)) || (mSlotEff(b, sp) - mSlotEff(a, sp)); });
     var hid = all.length - l.length;
-    var s = "<h2>" + h(posName(sp)) + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:var(--fs-sm)">' + tr("Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.") + (hid ? " " + trn(hid, "{n} jugador no aparece porque no puede jugar ahí.", "{n} jugadores no aparecen porque no pueden jugar ahí.") : "") + '</p><div class="list" style="max-height:62vh">';
+    var s = "<h2>" + h(posName(sp)) + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:13px">' + tr("Elige quién juega en este puesto. Si ya era titular en otro hueco, se intercambian.") + (hid ? " " + trn(hid, "{n} jugador no aparece porque no puede jugar ahí.", "{n} jugadores no aparecen porque no pueden jugar ahí.") : "") + '</p><div class="list" style="max-height:62vh">';
     s += l.map(function (p) {
       var eff = Math.round(p.ovr - posFit(p.pos, sp, p)), xi = m.xi.indexOf(p.id);
       var zn = xi >= 0 ? (xi !== i ? tr("Titular de {p}", {p: posAb(FORMATIONS[m.form][xi])}) + " · " : "") : (m.bench || []).indexOf(p.id) >= 0 ? tr("Banquillo") + " · " : tr("No convocado") + " · ";
@@ -1799,7 +1766,7 @@
   function pickClubSheet(t) {
     var max = mgrMaxClubR(), li = t.lg != null ? t.lg : curLeague();
     var cl = teamsOfLeague(li).sort(function (a, b) { return S.cr[b] - S.cr[a]; });
-    var s = "<h2>" + tr("Buscar banquillo") + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:var(--fs-sm)">' + tr("Con tu prestigio puedes dirigir clubes de nivel {n} o menos.", {n: Math.round(max)}) + "</p>" + leagueSelect("pcl", li) + '<div class="list" style="margin-top:10px;max-height:56vh">';
+    var s = "<h2>" + tr("Buscar banquillo") + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:13px">' + tr("Con tu prestigio puedes dirigir clubes de nivel {n} o menos.", {n: Math.round(max)}) + "</p>" + leagueSelect("pcl", li) + '<div class="list" style="margin-top:10px;max-height:56vh">';
     s += cl.map(function (c) {
       var ok = S.cr[c] <= max && c !== S.m.club;
       return '<button class="pickrow" data-a="takejob" data-v="' + c + '"' + (ok ? "" : " disabled") + ">" + crest(c, true) + '<div class="grow"><b>' + h(clubName(c)) + "</b><small>" + (ok ? tr("Presupuesto {m}", {m: fmtMoney(mBudgetFor(c))}) : c === S.m.club ? tr("Tu club actual") : tr("Te falta prestigio")) + '</small></div><span class="lvl">' + Math.round(S.cr[c]) + "</span></button>";
@@ -1952,7 +1919,7 @@
     s += '<h3 style="margin:6px 0 0">' + h(prof.name) + (fol >= 100 ? ' <span class="sver">✔</span>' : "") + '</h3><div class="muted">@' + h(prof.handle) + "</div>";
     if (prof.bio) s += '<p style="margin:8px 0 0">' + h(prof.bio) + "</p>";
     var n = nickName(isMgr() ? S.m : S.p);
-    if (n) s += '<p class="muted" style="margin:6px 0 0;font-size:var(--fs-sm)">' + tr("Para la afición: «{nick}»", {nick: h(n)}) + "</p>";
+    if (n) s += '<p class="muted" style="margin:6px 0 0;font-size:13px">' + tr("Para la afición: «{nick}»", {nick: h(n)}) + "</p>";
     s += '<div class="sfol"><span><b>' + h(fmtFol(fol)) + "</b> " + tr("seguidores") + "</span><span><b>" + (180 + (hashStr(prof.handle) % 400)) + "</b> " + tr("siguiendo") + "</span></div></div></section>";
     if (!soc.posts.length) s += '<p class="empty">' + tr("Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.") + "</p>";
     else s += '<section class="sfeed">' + soc.posts.slice(0, 80).map(socPostHTML).join("") + "</section>";
@@ -1979,14 +1946,8 @@
     var gk = f ? Math.round(f.or || 70) : 70, imp = f ? f.imp || 1 : 1;
     var skill = Math.round(kind === "fk" ? ((at.TIR || p.ovr) * 0.6 + (at.PAS || p.ovr) * 0.4) : (at.TIR || p.ovr));
     /* 4.7: tras fallos seguidos en el minijuego, la confianza suma (y se avisa) */
-    /* 5.6: sin ayudas anunciadas en los partidos (la ayuda anti-frustración solo existe, oculta, en el entrenamiento) */
-    var cf = 0;
-    /* 5.6: marcador con los escudos de los dos equipos en la pantalla del minijuego */
-    if (f && Minigame.setBoard) {
-      var mk = function (i) { return {ab: f.isNat ? (W.ctry[i] && W.ctry[i].code) || natName(i).slice(0, 3).toUpperCase() : W.clubs[i].ab || clubAbbr(W.clubs[i].n), icon: f.isNat ? flag(i) : crest(i)}; };
-      var us = mk(f.us), op = mk(f.opp), home = !!f.home;
-      Minigame.setBoard({h: home ? us : op, a: home ? op : us, gh: home ? f.gu : f.gt, ga: home ? f.gt : f.gu, min: f.mom ? f.mom.min : null, us: home ? "h" : "a"});
-    }
+    var cf = typeof blpMgBonus === "function" ? blpMgBonus() : 0;
+    if (cf) toast(tr("Confianza: después de los últimos fallos lo ves más claro (+{n}).", {n: cf}));
     var opts = {skill: clamp(skill + cf, 40, 95), gk: clamp(gk, 40, 95), pressure: clamp(imp / 3, 0.1, 1), dist: 22, rand: R};
     if (kind === "gkpen" || kind === "gkfk") {
       var me = Math.round(((at.REF || p.ovr) + (at.EST || at.COL || p.ovr)) / 2);
@@ -1995,17 +1956,8 @@
       if (kind === "gkfk") Minigame.gkFreekick(gopts, save); else Minigame.gkPenalty(gopts, save);
       return;
     }
-    var go = function (res) { if (typeof blpMgResult === "function") blpMgResult(!!res.scored); if (UIX.hk.spAfter) UIX.hk.spAfter(kind, !!res.scored); if (typeof GX !== "undefined") GX.ev("mini", {kind: kind, scored: !!res.scored, min: f && f.mom ? f.mom.min : 0}); FORCE_OUT = !!res.scored; doChoose(i); };
+    var go = function (res) { if (typeof blpMgResult === "function") blpMgResult(!!res.scored); FORCE_OUT = !!res.scored; doChoose(i); };
     if (kind === "fk") Minigame.freekick(opts, go); else Minigame.penalty(opts, go);
-  }
-  /* 5.6: escudos para el videomarcador del estadio 3D (se rasterizan en segundo plano) */
-  function liveBoard(f) {
-    try {
-      var mk = function (i) { return {ab: f.isNat ? (W.ctry[i] && W.ctry[i].code) || natName(i).slice(0, 3).toUpperCase() : W.clubs[i].ab || clubAbbr(W.clubs[i].n), icon: f.isNat ? flag(i) : crest(i)}; };
-      var us = mk(f.us), op = mk(f.opp), b = {h: f.home ? us : op, a: f.home ? op : us, v: 0};
-      if (typeof SpModes !== "undefined" && SpModes && SpModes.rasterBoard) SpModes.rasterBoard(b);
-      return b;
-    } catch (e) { return null; }
   }
   /* ---------- partido en directo ---------- */
   var LV = null;
@@ -2051,7 +2003,7 @@
       return '<button class="lpl' + (on ? " on out" : "") + (id === L.red ? " red" : "") + (id === L.hurt ? " hurt" : "") + (L.yc && L.yc[id] && id !== L.red ? " yc" : "") + '" data-a="lout" data-id="' + id + '"' + (id === L.red ? " disabled" : "") + ' aria-pressed="' + on + '"><span class="pp">' + h(posAb(slots[i])) + "</span>" + (on ? '<span class="ar">↓</span>' : "") + h(plShort(p)) + (UIX.hk && UIX.hk.lfit ? UIX.hk.lfit(L, p) : '<span class="fit">' + Math.round(p.fit) + "</span>") + "</button>";
     }).join("") + "</div>";
     s += '<div><div class="lbl">' + tr("Banquillo") + "</div>";
-    if (!L.bench.length) s += '<p class="muted" style="font-size:var(--fs-sm)">' + tr("Sin suplentes") + "</p>";
+    if (!L.bench.length) s += '<p class="muted" style="font-size:13px">' + tr("Sin suplentes") + "</p>";
     else if (sp == null) s += L.bench.map(function (id) { var p = mPl(id); return p ? '<div class="lpl ghost"><span class="pp">' + h(posAb(p.pos)) + "</span>" + h(plShort(p)) + '<span class="fit">' + Math.round(p.ovr) + "</span></div>" : ""; }).join("");
     else {
       var ok = L.bench.filter(function (id) { var p = mPl(id); return p && posOk(p.pos, sp); });
@@ -2059,62 +2011,29 @@
         var p = mPl(id);
         return '<button class="lpl cand" data-a="lin" data-id="' + id + '"><span class="pp">' + h(posAb(p.pos)) + '</span><span class="ar">↑</span>' + h(plShort(p)) + '<span class="fit">' + Math.round(p.ovr) + "</span>" + (p.pos === sp ? "" : '<em class="aff">' + tr("afín") + "</em>") + "</button>";
       }).join("");
-      if (!ok.length) s += '<p class="muted" style="font-size:var(--fs-xs)">' + tr("Nadie en el banquillo puede jugar de {pos}.", {pos: posAb(sp)}) + "</p>";
+      if (!ok.length) s += '<p class="muted" style="font-size:12.5px">' + tr("Nadie en el banquillo puede jugar de {pos}.", {pos: posAb(sp)}) + "</p>";
       var hid = L.bench.length - ok.length;
-      if (hid && ok.length) s += '<p class="muted" style="font-size:var(--fs-xs);margin:2px 0 0">' + trn(hid, "{n} suplente oculto: no puede jugar de {pos}.", "{n} suplentes ocultos: no pueden jugar de {pos}.").replace("{pos}", h(posAb(sp))) + "</p>";
+      if (hid && ok.length) s += '<p class="muted" style="font-size:12px;margin:2px 0 0">' + trn(hid, "{n} suplente oculto: no puede jugar de {pos}.", "{n} suplentes ocultos: no pueden jugar de {pos}.").replace("{pos}", h(posAb(sp))) + "</p>";
     }
     s += "</div></div>";
     s += '<p class="lhint">' + (step === 1 ? tr("Toca al jugador que quieres sacar. El partido se pausa mientras haces el cambio.") : tr("Elige quién entra. Solo ves a quien puede jugar en su puesto.")) + "</p>";
     return s;
   }
   function subDone() { if (LV && LV.resume) { LV.resume = false; LV.run = true; liveTick(); } }
-  function pitchCinema() {
-    try { return typeof Pitch !== "undefined" && Pitch.cinema ? !!Pitch.cinema() : false; } catch (e) { return false; }
-  }
   function liveTick() {
     if (!LV) return;
     if (LV.timer) clearTimeout(LV.timer);
     var L = S.live;
     if (!L || L.done || !LV.run) { liveRender(); return; }
-    var wait = Math.max([0, 700, 340, 120][LV.speed] || 700, typeof Pitch !== "undefined" ? Pitch.busy() : 0);
-    /* La entrada, el descanso y la despedida se sondean sin avanzar minutos. */
-    if (pitchCinema()) wait = Math.min(wait || 420, 420);
     LV.timer = setTimeout(function () {
       if (!LV || !S.live) return;
-      var pb = typeof Pitch !== "undefined" ? Pitch.busy() : 0;
-      if (pitchCinema() || pb > 0) { liveRender(); liveTick(); return; }
       var ev = liveStep();
       livePitchFeed(ev);
       if (ev.some(function (e) { return e.t === "half"; })) LV.run = false;
       if (ev.some(function (e) { return e.t === "goal" || e.t === "red" || e.t === "inj"; }) && LV.speed > 1) LV.run = LV.speed < 4;
       liveRender();
       liveTick();
-    }, wait);
-  }
-  var LIVE_WX_FX = {sun: N_("Campo rápido"), mild: N_("Sin efecto claro"), rain: N_("Balón vivo y césped resbaladizo"),
-    heat: N_("Ritmo lento y fatiga alta"), cold: N_("Balón pesado y bote seco")};
-  function liveWxInfo(wx) {
-    var row = (typeof MX_WX !== "undefined" ? MX_WX.filter(function (w) { return w[0] === wx; })[0] : null) || ["sun", "☀", "Despejado", 1];
-    return {key: row[0], icon: row[1], name: tr(row[2]), effect: tr(LIVE_WX_FX[row[0]] || LIVE_WX_FX.sun), mul: row[3]};
-  }
-  function liveOppStyle(f, mine, opp) {
-    var h = typeof hashStr === "function" ? hashStr(String(S.yr || "") + "|" + String(S.tw || 0) + "|" + String(f.opp || 0) + "|toss") : 0, r = h % 100;
-    if (opp >= mine + 4) return r < 55 ? "possession" : r < 82 ? "press" : "counter";
-    if (opp <= mine - 4) return r < 48 ? "direct" : r < 76 ? "counter" : "balanced";
-    return r < 28 ? "possession" : r < 53 ? "direct" : r < 78 ? "press" : r < 90 ? "counter" : "balanced";
-  }
-  function liveTossInfo(L, f) {
-    var mine = L.xi.map(function (id) { var p = id == null ? null : mPl(id); return p ? p.ovr : 70; });
-    var my = mine.length ? mine.reduce(function (a, b) { return a + b; }, 0) / mine.length : 75;
-    var opp = f.or != null ? +f.or : (S.cr && S.cr[f.opp] != null ? +S.cr[f.opp] : 75);
-    return {myName: clubName(S.m.club), oppName: clubName(f.opp), myLevel: Math.round(my), oppLevel: Math.round(opp),
-      style: liveOppStyle(f, my, opp), wx: liveWxInfo(L.wx)};
-  }
-  function liveWxChip(L) {
-    var w = liveWxInfo(L.wx), mul = (Math.round(w.mul * 100) / 100).toFixed(2).replace(".", ",");
-    return '<div class="lwx" data-wx="' + h(w.key) + '"><span class="lwx-ic" aria-hidden="true">' + w.icon + "</span>" +
-      '<span class="lwx-name"><b>' + tr("Clima") + "</b> " + h(w.name) + "</span>" +
-      '<span class="lwx-fx">' + h(w.effect) + " · " + tr("Fatiga") + " ×" + mul + "</span></div>";
+    }, Math.max([0, 700, 340, 120][LV.speed] || 700, typeof Pitch !== "undefined" ? Pitch.busy() : 0));
   }
   function liveRender() {
     if (!LV || !S.live) return;
@@ -2122,7 +2041,7 @@
     var us = '<span class="lteam">' + crest(m.club) + "<b>" + h(clubName(m.club)) + "</b></span>", them = '<span class="lteam r"><b>' + h(clubName(f.opp)) + "</b>" + crest(f.opp) + "</span>";
     var sc = f.home ? us + '<span class="lsc num">' + L.gu + " - " + L.gt + "</span>" + them : them.replace(' r"', '"') + '<span class="lsc num">' + L.gt + " - " + L.gu + "</span>" + us.replace('"lteam"', '"lteam r"');
     var s = '<div class="lhead"><span class="lmin num">' + (L.done ? tr("Final") : L.min + "'") + "</span>" + '<span class="muted">' + h(compShort(f)) + "</span></div>";
-    s += '<div class="lscore">' + sc + "</div>" + (L.wx ? liveWxChip(L) : "");
+    s += '<div class="lscore">' + sc + "</div>";
     var cu = liveCol(m.club, f.opp), poss = (L.poss[0] + L.poss[1]) ? Math.round(L.poss[0] / (L.poss[0] + L.poss[1]) * 100) : 50, mo = L.mo == null ? pu : Math.round(L.mo);
     var gls = function (us) { var l = (L.gl || []).filter(function (g) { return g.us === us; }); return l.length ? l.map(function (g) { return h(g.n) + " " + g.min + "'"; }).join(", ") : ""; };
     var lg = gls(1), rg = gls(0);
@@ -2152,7 +2071,7 @@
         s += '<div class="ltac">' + Object.keys(LIVE_TAC).map(function (k) { return '<div class="ltacr"><span class="lbl">' + h(tr(LIVE_TAC[k].n)) + '</span><div class="seg sm">' + LIVE_TAC[k].o.map(function (o, i) { return '<button data-a="ltac" data-k="' + k + '" data-v="' + i + '" aria-pressed="' + (tac[k] === i) + '">' + h(tr(o)) + "</button>"; }).join("") + "</div></div>"; }).join("") + "</div>";
       }
       s += '<div class="lrow"><label class="lbl" for="lform">' + tr("Sistema") + '</label><select id="lform" data-live="form">' + Object.keys(FORMATIONS).map(function (k) { return '<option value="' + k + '"' + (k === L.form ? " selected" : "") + ">" + k + "</option>"; }).join("") + "</select>" +
-        '<span class="muted" style="font-size:var(--fs-sm)">' + trn(L.left, "Te queda {n} cambio", "Te quedan {n} cambios") + "</span></div>";
+        '<span class="muted" style="font-size:13px">' + trn(L.left, "Te queda {n} cambio", "Te quedan {n} cambios") + "</span></div>";
       if (L.left > 0) {
         var slots = FORMATIONS[L.form];
         s += liveSubsH(L, slots);
@@ -2162,8 +2081,7 @@
     if (!LV.el.querySelector("#lvbody")) {
       LV.el.innerHTML = '<div class="lpanel"><div id="lvtop"></div><div class="lpitchw" id="lvpitch"></div><div id="lvbody"></div><div id="lvctl"></div></div>';
       LV.ctlKey = null;
-      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], fem: S.g === "f", pet: typeof petOf === "function" ? petOf() : null, coach: UIX.coachLook ? UIX.coachLook({kind: "match", big: (f.imp || 0) >= 1, cold: typeof PLook !== "undefined" && PLook.cold(S.live && S.live.wx)}) : null, mySide: f.home ? 0 : 1, board: liveBoard(f), spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
-        cinematics: !L.min,
+      if (typeof Pitch !== "undefined") Pitch.mount(document.getElementById("lvpitch"), {cols: [f.home ? cu[0] : cu[1], f.home ? cu[1] : cu[0]], spdLabel: tr("Velocidad de simulación"), rpLabel: tr("Ver la repetición"),
         lab: {replay: tr("REPETICIÓN"), goal: tr("GOL"), goalOf: tr("¡GOL DE {n}!"), post: tr("¡PALO!"), half: tr("FIN DEL PRIMER TIEMPO"), end: tr("FINAL"), off: tr("FUERA DE JUEGO"), foul: tr("FALTA"), thr: tr("SAQUE DE BANDA"), cor: tr("CÓRNER"), gk: tr("SAQUE DE PUERTA")},
         onSpeed: function (n) { if (!LV) return; LV.speed = n; LV.run = true; LV.resume = false; liveTick(); liveRender(); }});
     }
@@ -2173,9 +2091,6 @@
     var ck = [L.done, LV.run, LV.speed, String(L.ment), L.form, L.left, LV.sel, LV.pin, L.red, L.hurt, L.xi.join(","), L.bench.join(","), JSON.stringify(L.tac || {}), Math.floor((L.min || 0) / 5)].join("|");
     if (ck !== LV.ctlKey) { LV.ctlKey = ck; document.getElementById("lvctl").innerHTML = s; }
     livePitchTeams();
-    /* El sorteo necesita saber quién saca antes de que termine la entrada;
-       el primer minuto aún no se ha jugado, así que se siembra el estado. */
-    if (!LV.seeded) { LV.seeded = true; livePitchFeed([]); }
     if (typeof Pitch !== "undefined") Pitch.freeze(!LV.run && !L.done);
     /* animar la barra desde donde estaba */
     var mt = LV.el.querySelector(".lmot .a"), bl = LV.el.querySelector(".lball");
@@ -2216,14 +2131,7 @@
       if (e.us === 0 && e.ox != null && e.ox >= 0) who = e.ox;
       Pitch.event({t: e.t, side: side, who: who, k: e.k, txt: e.txt, d: e.d, ly: e.ly});
     });
-    var mt = typeof liveTac === "function" ? liveTac(L) : null, tacs = [null, null];
-    if (mt) tacs[me] = {line: mt.line, width: mt.width, pass: mt.pass, tempo: mt.tempo, ment: L.ment};
-    /* El HUD 3D usa siempre [local, visitante], igual que su chip izquierdo y
-       derecho. Antes se enviaba [nuestro, rival] y el orden se invertía al
-       jugar fuera de casa. */
-    var hs = f.home ? [L.gu, L.gt] : [L.gt, L.gu];
-    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1, tac: tacs, ment: L.ment,
-      fem: S.g === "f", wx: L.wx, score: hs, min: L.min, toss: liveTossInfo(L, f)});
+    Pitch.state({own: L.own === 0 ? me : 1 - me, bx: f.home ? L.bx : 100 - L.bx, speed: LV ? LV.speed : 1});
   }
   /* colores de los dos clubes, que se distingan entre sí */
   function liveCol(a, b) {
@@ -2277,7 +2185,7 @@
     DR.ghost = g; DR.started = true;
     DR.el.classList.add("dsrc");
     document.body.classList.add("dragging");
-    if (typeof Anim !== "undefined") Anim.haptic("tap");
+    try { if (navigator.vibrate) navigator.vibrate(12); } catch (e) {}
     dragMove(x, y);
     DR.raf = requestAnimationFrame(dragScroll);
   }
@@ -2520,7 +2428,7 @@
         UI.sheet = null; persist(); render(false); toast(tr("Perfil actualizado"));
         break;
       /* partido en directo */
-      case "lspeed": if (LV) { var sv = +v; LV.run = sv > 0; if (sv > 0) { LV.speed = sv; if (typeof Pitch !== "undefined") livePitchFeed([]); } liveTick(); liveRender(); } break;
+      case "lspeed": if (LV) { var sv = +v; LV.run = sv > 0; if (sv > 0) LV.speed = sv; liveTick(); liveRender(); } break;
       case "lment": liveSet("ment", v === "bus" || v === "press" ? v : +v); liveRender(); break;
       case "lout": if (LV) { if (LV.sel == null && LV.run) { LV.resume = true; LV.run = false; } LV.sel = LV.sel === id ? null : id; LV.pin = null; if (LV.sel == null) subDone(); liveRender(); } break;
       case "lin": if (LV && LV.sel != null) { LV.pin = id; liveRender(); } break;
@@ -2614,7 +2522,7 @@
       if (done) {
         var id = c.getAttribute("data-fid");
         c.style.transform = "translateX(110%) rotate(6deg)"; c.style.opacity = "0";
-        if (typeof Anim !== "undefined") Anim.haptic("tap");
+        try { if (navigator.vibrate) navigator.vibrate(12); } catch (e) {}
         setTimeout(function () {
           c.style.height = c.offsetHeight + "px"; c.classList.add("gone");
           setTimeout(function () { (S.feed || []).forEach(function (f) { if (String(f.id) === id) f.hid = 1; }); c.remove(); persist(); }, 260);
@@ -2629,7 +2537,7 @@
   })();
 
   /* helpers para los módulos ui-*.js */
-  Object.assign(UIX, {h: h, render: render, persist: persist, store: Store, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, pack: function (j) { return pack(j); }, importCode: function (t) { UI.sheet = {k: "import"}; importCode(t); }, b64: function (u) { return b64(u); }, leagueField: function (c) { return leagueField(c); }, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
+  Object.assign(UIX, {h: h, render: render, persist: persist, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, pack: function (j) { return pack(j); }, importCode: function (t) { UI.sheet = {k: "import"}; importCode(t); }, b64: function (u) { return b64(u); }, leagueField: function (c) { return leagueField(c); }, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
     chip: chip, edgeFlash: edgeFlash, confetti: confetti, openLive: function () { openLive(); }, isMgr: isMgr, ui: function () { return UI; }, icon: ICON,
     open: function (k, d) { UI.sheet = Object.assign({k: k}, d || {}); renderSheet(); }, slot: slot, choose: function (i) { doChoose(i); }});
 

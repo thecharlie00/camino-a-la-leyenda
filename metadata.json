@@ -1,0 +1,8 @@
+{
+  "name": "Camino a la Leyenda",
+  "description": "Juego de carrera futbolística: carrera de jugador o jugadora, carrera de míster y Crea tu club, con 87 ligas, simulación de partidos 3D y 2D, mercado, prensa, redes sociales y trofeos.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -72,13 +72,13 @@
   /* ---------- menú: tema, avisos y copias ---------- */
   U.add("menu", function () {
     var o = '<details class="fold a11y35"><summary>' + tr("Tema, avisos y copias") + '</summary><div class="stack">' + themeBlock();
-    if (bridge()) o += '<div><label class="lbl">' + tr("Avisos en el móvil") + '</label><div class="seg"><button data-a="notif" data-v="1" aria-pressed="' + notifOn() + '">' + tr("Activados") + '</button><button data-a="notif" data-v="0" aria-pressed="' + !notifOn() + '">' + tr("Desactivados") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + tr("Si no juegas en un día, te recordamos el cierre del mercado o tus decisiones pendientes.") + "</p></div>";
+    if (bridge()) o += '<div><label class="lbl">' + tr("Avisos en el móvil") + '</label><div class="seg"><button data-a="notif" data-v="1" aria-pressed="' + notifOn() + '">' + tr("Activados") + '</button><button data-a="notif" data-v="0" aria-pressed="' + !notifOn() + '">' + tr("Desactivados") + '</button></div><p class="muted" style="font-size:13px;margin:6px 0 0">' + tr("Si no juegas en un día, te recordamos el cierre del mercado o tus decisiones pendientes.") + "</p></div>";
     if (S && S.uid) {
       var l = bkList(S.uid);
       o += '<div><label class="lbl">' + tr("Copias de seguridad") + "</label>" + (l.length ? '<ul class="dlist">' + l.slice().reverse().map(function (x, i) {
         var idx = l.length - 1 - i;
         return '<li><span aria-hidden="true">💾</span><span class="grow">' + h(seasonLabel(x.y)) + ' · <small class="muted">' + h(new Date(x.ts).toLocaleDateString(LANG)) + '</small></span><button class="btn sm" data-a="bkrestore" data-v="' + idx + '">' + tr("Restaurar") + "</button></li>";
-      }).join("") + "</ul>" : '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Se guarda una copia sola al empezar cada temporada.") + "</p>") + "</div>";
+      }).join("") + "</ul>" : '<p class="muted" style="font-size:13px;margin:0">' + tr("Se guarda una copia sola al empezar cada temporada.") + "</p>") + "</div>";
     }
     return o + "</div></details>";
   });
@@ -105,7 +105,7 @@
     return "#888888";
   }
   U.sheets.editor = function () {
-    var ui = U.ui(), tab = ui.edTab || "cl", li = +ui.edLg || 0, s = "<h2>" + tr("Editor de la partida") + '</h2><div class="stack"><p class="muted" style="margin:0;font-size:var(--fs-sm)">' + tr("Los cambios solo afectan a esta partida. Deja un campo vacío para volver al original.") + "</p>";
+    var ui = U.ui(), tab = ui.edTab || "cl", li = +ui.edLg || 0, s = "<h2>" + tr("Editor de la partida") + '</h2><div class="stack"><p class="muted" style="margin:0;font-size:13px">' + tr("Los cambios solo afectan a esta partida. Deja un campo vacío para volver al original.") + "</p>";
     s += '<div class="seg"><button data-a="edtab" data-v="cl" aria-pressed="' + (tab === "cl") + '">' + tr("Clubes") + '</button><button data-a="edtab" data-v="cp" aria-pressed="' + (tab === "cp") + '">' + tr("Ligas y copas") + "</button></div>";
     if (tab === "cl") {
       s += '<label class="lbl" for="edlg">' + tr("Liga") + '</label><select id="edlg">' + W.lg.map(function (l, i) { return '<option value="' + i + '"' + (i === li ? " selected" : "") + ">" + W.ctry[l.ci].flag + " " + h(lgName(i)) + "</option>"; }).join("") + "</select>";

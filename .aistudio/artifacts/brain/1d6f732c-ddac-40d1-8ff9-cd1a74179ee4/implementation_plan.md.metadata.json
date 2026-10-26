@@ -1,0 +1,6 @@
+{
+  "summary": "Propuesta técnica exhaustiva y modular para la integración de un motor de partidos 3D en Unity exportado como librería nativa (UaaL) para Android en Road to Legend. Cubre desacoplamiento simulación-render (Fixed Tick 25Hz con interpolación a 60 FPS), optimización de modelos móviles y LODs (3.5k-5k tris LOD0, compresión ASTC), máquina de estados de animación (Playables API, Blend Trees 2D, Foot IK, In-place con ball-snapping), cámara televisiva broadcast amortiguada con iluminación URP optimizada, y roadmap de ejecución en 4 fases con código de ejemplo y diagramas de flujo.",
+  "updatedAt": "2026-10-20T09:48:46.684757175Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

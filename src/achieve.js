@@ -54,33 +54,21 @@ var ACH_M = [
   ["m_t15", "🏛️", N_("Vitrina llena"), N_("Gana 15 títulos."), function (c) { return S.m.trophies.length >= 15; }],
   ["m_best", "🥇", N_("Mejor entrenador"), N_("Gana el premio al mejor entrenador del año."), function (c) { return S.m.awards.some(function (a) { return a.k === "mgr_year"; }); }]
 ];
-function achList() {
-  var mgr = S && S.mode === "mgr", md = mgr ? "m" : "p", l = (mgr ? ACH_M : ACH_P).concat(typeof achX === "function" ? achX(md) : []);
-  /* 5.6: trofeos ampliados (gx-data.js) y el platino del modo, que se evalúa el último */
-  if (typeof GX !== "undefined") { GX.rows(md).forEach(function (r) { r.gx = 1; l.push(r); }); var pl = GX.platRow(md); pl.gx = 1; l.push(pl); }
-  return l;
-}
+function achList() { var mgr = S && S.mode === "mgr"; return (mgr ? ACH_M : ACH_P).concat(typeof achX === "function" ? achX(mgr ? "m" : "p") : []); }
 function achCtx() { return {t: S.mode === "mgr" ? achMgrTot() : achPlayerTot()}; }
 /* comprueba y devuelve los logros nuevos; la primera vez en una partida antigua no avisa */
 function achCheck() {
   if (!S || (S.mode === "mgr" ? !S.m : !S.p)) return [];
-  var first = !S.ach, out = [], c, gxOn = typeof GX !== "undefined", gxRun = gxOn ? GX.check() || first : false, gst = gxOn ? GX.st() : null, gxNew = gst && !gst.init;
+  var first = !S.ach, out = [], c;
   S.ach = S.ach || {};
   try { c = achCtx(); } catch (e) { return []; }
   achList().forEach(function (a) {
-    if (a.gx && !gxRun && !gxNew) return;
     if (S.ach[a[0]]) return;
     var ok = false;
     try { ok = a[4](c); } catch (e) { ok = false; }
     if (ok) { S.ach[a[0]] = S.yr; out.push(a); }
   });
-  if (gxOn) {
-    /* partida que llega de una versión anterior: lo ya cumplido se desbloquea en silencio */
-    if (first || gxNew) { GX.unlocked(out, true); gst.init = 1; }
-    else GX.unlocked(out, false);
-  }
   if (first) { S.achN0 = out.length; return []; }
-  if (gxNew) { S.achN0 = (S.achN0 || 0) + out.length; return []; }
   return out;
 }
 function achCount() { var l = achList(), n = 0; l.forEach(function (a) { if (S.ach && S.ach[a[0]]) n++; }); return [n, l.length]; }
