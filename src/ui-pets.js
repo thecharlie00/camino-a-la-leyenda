@@ -5,12 +5,10 @@
   var U = UIX, h = U.h;
   function rer() { U.persist(); U.renderSheet(); U.render(false); }
   function chips(d) {
-    var m = (isGK() ? d.gk : d.att) || {}, out = [];
-    Object.keys(m).forEach(function (a) { out.push('<span class="chip up">+' + m[a] + " " + h(tr(ATT_NAMES[a])) + "</span>"); });
-    out.push('<span class="chip up">' + tr("Moral +{n}", {n: d.mor}) + "</span>");
-    if (d.calm) out.push('<span class="chip up">' + tr("Forma más estable") + "</span>");
-    if (d.fame) out.push('<span class="chip up">' + tr("Fama y seguidores") + "</span>");
-    if (d.risk) out.push('<span class="chip down">' + tr("Sustos y veterinario") + "</span>");
+    /* 5.6: sin cifras ni bonificaciones visibles; sólo el carácter de la especie */
+    var out = [];
+    if (d.fame) out.push('<span class="chip">' + tr("Llama la atención en redes") + "</span>");
+    if (d.calm) out.push('<span class="chip">' + tr("Tranquila") + "</span>");
     return out.join("");
   }
   function petSize(pt) { return [34, 46, 58, 58][petStage(pt)]; }
@@ -32,7 +30,11 @@
   };
   var BOX = 155;
   /* posición automática de cada accesorio: centro x y borde superior en % de la caja, tamaño en em */
-  function accBase(ico, sl) {
+  /* el accesorio que lleva la mascota en un hueco (para colocarlo según su dibujo) */
+  function accIcoOf(pt, sl) { var k = petEq(pt)[sl], a = k && petAccDef(k); return a ? a.ico : null; }
+  function accBase(ico, sl, aico) {
+    /* 5.6: con sprite de píxeles, la posición sale de los anclajes de la mascota y del dibujo del accesorio */
+    if (aico && typeof PX !== "undefined" && PX.petAccPlace) { var q = PX.petAccPlace(ico, aico, sl); if (q) return q; }
     var F = FACE[ico] || {f: [77, 72, 50], h: [77, 36, 50], n: [77, 128]};
     if (sl === "t") return {x: 128 / BOX * 100, y: (122 - 21) / BOX * 100, s: 0.42};
     if (sl === "f") { var sz = F.f[2] * 1.45; return {x: F.f[0] / BOX * 100, y: (F.f[1] - sz * 0.52) / BOX * 100, s: sz / 100}; }
@@ -42,11 +44,13 @@
   /* ajustes del modo edición: por emoji (cada etapa tiene su dibujo) y por hueco */
   function accAdj(pt, ico, sl) { var A = pt.adj && pt.adj[ico]; return (A && A[sl]) || null; }
   function accStyle(pt, ico, sl) {
-    var b = accBase(ico, sl), j = accAdj(pt, ico, sl) || {}, sc = clamp(j.s || 1, 0.4, 2.5);
+    var b = accBase(ico, sl, accIcoOf(pt, sl)), j = accAdj(pt, ico, sl) || {}, sc = clamp(j.s || 1, 0.4, 2.5);
     return "font-size:" + (b.s * sc).toFixed(3) + "em;left:" + (b.x + (j.x || 0)).toFixed(1) + "%;top:" + (b.y + (j.y || 0)).toFixed(1) + "%;bottom:auto;right:auto;transform:translateX(-50%)" + (j.r ? " rotate(" + j.r + "deg)" : "");
   }
   /* dibujo de la mascota con su color, fondo y accesorios */
   function art(pt, size, over) {
+    /* 5.6: miniatura en vóxeles (caché) donde haya WebGL */
+    if (!over && typeof PetWorld !== "undefined" && PetWorld && pt.v === 2) { var url = PetWorld.thumb(pt); if (url) return '<span class="petart" style="font-size:' + size + 'px;width:' + Math.round(size * 1.5) + "px;height:" + Math.round(size * 1.5) + 'px" aria-hidden="true"><img class="petthumb" src="' + url + '" alt=""></span>'; }
     var o = over || {}, col = petColDef(o.col || pt.col || "nat"), bg = bgCss(o.bg || pt.bg || "none"), eq = petEq(pt), ico = o.ico || petIco(pt);
     var f = col[2] === "anim" ? "" : col[2];
     var s = '<span class="petart' + (bg ? " hasbg" : "") + '" style="font-size:' + size + "px" + (bg ? ";background:" + bg : "") + '"' + (o.edit ? ' data-ico="' + ico + '"' : ' aria-hidden="true"') + '><span class="petbody' + (col[2] === "anim" ? " rainbow" : "") + '"' + (f ? ' style="filter:' + f + '"' : "") + ">" + ico + "</span>";
@@ -58,6 +62,8 @@
     return s + "</span>";
   }
   U.petArt = art;
+  /* posición de cada accesorio (fracciones de la caja y escala relativa), con los ajustes del modo edición: la usa la vista 3D */
+  U.petAccPos = function (pt, ico, sl) { var b = accBase(ico, sl, accIcoOf(pt, sl)), j = accAdj(pt, ico, sl) || {}, sc = clamp(j.s || 1, 0.4, 2.5); return {x: (b.x + (j.x || 0)) / 100, y: (b.y + (j.y || 0)) / 100, s: b.s * sc}; };
   U.petNeed = function () { return !!(S && S.p && !U.isMgr() && petOn() && petNeeds()); };
 
   /* tarjeta en la pestaña Jugador */
@@ -69,7 +75,7 @@
     return '<button class="card petcard' + (need ? " need" : "") + '" data-a="petopen">' + art(pt, petSize(pt)) +
       '<span class="petinfo"><span class="eyebrow">' + tr("Tu mascota") + "</span><b>" + h(pt.nm) + "</b><small>" + (need ? '<span class="petneed">' + tr("Necesita atención") + "</span>" : h(tr(d.n)) + " · " + trn(pt.age, "{n} año", "{n} años") + " · " + h(tr(PET_STAGE[petStage(pt)]))) + "</small>" +
       '<span class="petbond" aria-label="' + h(tr("Vínculo {n} %", {n: Math.round(pt.bond)})) + '"><i style="width:' + Math.round(pt.bond) + '%"></i></span></span>' +
-      (pt.cared ? "" : '<span class="petdot" title="' + h(tr("Quiere jugar contigo")) + '">!</span>') + '<span class="chev" aria-hidden="true">›</span></button>';
+      (!need ? "" : '<span class="petdot" title="' + h(tr("Quiere jugar contigo")) + '">!</span>') + '<span class="chev" aria-hidden="true">›</span></button>';
   });
   /* aviso en la portada de la carrera si te está esperando */
   U.add("carreraTop", function () {
@@ -78,7 +84,7 @@
     return '<button class="card petalert" data-a="petopen">' + art(pt, 30) + '<span class="grow"><b>' + tr("{pet} necesita atención", {pet: h(pt.nm)}) + "</b><small>" + tr("Dedícale un rato antes de que se debilite el vínculo.") + '</small></span><span class="chev" aria-hidden="true">›</span></button>';
   });
 
-  U.actions.petopen = function () { var ui = U.ui(); ui.petTab = ui.petTab || "n"; ui.petPick = null; ui.petView = "care"; U.open("lpet"); };
+  U.actions.petopen = function () { if (petOf() && typeof PetWorld !== "undefined" && PetWorld && PetWorld.open()) return; var ui = U.ui(); ui.petTab = ui.petTab || "n"; ui.petPick = null; ui.petView = "care"; U.open("lpet"); };
   U.actions.pettab = function (b, v) { U.ui().petTab = v; U.ui().petPick = null; U.renderSheet(); };
   U.actions.petview = function (b, v) { U.ui().petView = v; U.renderSheet(); var pn = document.querySelector(".sheet .panel"); if (pn) pn.scrollTop = 0; };
   U.actions.petpick = function (b, v) { U.ui().petPick = v; U.renderSheet(); var i = document.getElementById("petnm"); if (i) i.focus(); };
@@ -101,16 +107,27 @@
     if (v === "trick") U.toast(r.learned ? tr("¡{pet} ha aprendido un truco nuevo! Ya sabe {n}.", {pet: pt.nm, n: pt.tricks}) : tr("{pet} todavía no lo pilla, pero os lo habéis pasado bien.", {pet: pt.nm}));
     else U.toast(tr(CARE_TXT[v] || CARE_TXT.pat, {pet: pt.nm}));
     rer();
+    /* 5.6: el truco nuevo se estrena en la vista 3D */
+    if (v === "trick" && r.learned && pt.tricks <= 8) show3d({trick: pt.tricks - 1});
   };
   U.actions.petcare = function () { if (petCare()) { U.toast(tr("Pasas la tarde con {pet}: el vínculo crece.", {pet: petOf().nm})); rer(); } };
   U.actions.petname = function () { var i = document.getElementById("petrn"); if (i && petRename(i.value)) { U.toast(tr("Ahora se llama {pet}.", {pet: petOf().nm})); rer(); } };
   U.actions.petcol = function (b, v) { if (petSetCol(v)) rer(); };
   U.actions.petbg = function (b, v) { if (petSetBg(v)) rer(); };
-  U.actions.petwear = function (b, v) { if (petWear(v)) rer(); };
+  function show3d(o) {
+    if (typeof View3D === "undefined" || !View3D) return;
+    o.from = document.querySelector(".sheet .pethero .petart") || document.querySelector(".petart");
+    setTimeout(function () { View3D.pet(o); }, 60);
+  }
+  U.actions.pet3d = function () { show3d({}); };
+  U.actions.petwear = function (b, v) {
+    var pt = petOf(), a = petAccDef(v), was = pt && a ? petEq(pt)[a.s] : null;
+    if (petWear(v)) { rer(); if (was !== v) show3d({acc: v}); }
+  };
   U.actions.petbuy = function (b, v) {
     var a = petAccDef(v), r = petBuyAcc(v);
     if (r.poor) { U.toast(tr("No tienes dinero suficiente.")); return; }
-    if (r.ok) { U.toast(tr("¡Compra hecha! {pet} ya lleva {acc}.", {pet: petOf() ? petOf().nm : "", acc: a.ico + " " + tr(a.n)})); rer(); }
+    if (r.ok) { U.toast(tr("¡Compra hecha! {pet} ya lleva {acc}.", {pet: petOf() ? petOf().nm : "", acc: a.ico + " " + tr(a.n)})); rer(); show3d({acc: v}); }
   };
 
   function careView(pt, d) {
@@ -234,6 +251,7 @@
       petAccSync(true);
       var d = petDef(pt.k), st = petStage(pt), v = U.ui().petView === "style" || U.ui().petView === "edit" ? U.ui().petView : "care";
       s = '<h2>' + tr("Tu mascota") + '</h2><div class="stack"><div class="pethero">' + art(pt, petSize(pt) + 30) + '<div><b class="petnm">' + h(pt.nm) + "</b><small>" + h(tr(d.n)) + " · " + trn(pt.age, "{n} año", "{n} años") + "</small>" + (petNeeds() ? '<small class="petneed">' + tr("Necesita atención") + "</small>" : "") + "</div></div>";
+      if (typeof View3D !== "undefined" && View3D && View3D.supported()) s += '<button class="btn v3dbtn" data-a="pet3d">' + tr("Ver en 3D") + (pt.tricks ? " · " + trn(Math.min(pt.tricks, 8), "{n} truco", "{n} trucos") : "") + "</button>";
       s += '<ol class="petstages">' + PET_STAGE.map(function (x, i) { return '<li class="' + (i < st ? "done" : i === st ? "now" : "") + '">' + h(tr(x)) + "</li>"; }).join("") + "</ol>";
       if (v === "edit") { s = '<h2>' + tr("Colocar accesorios") + '</h2><div class="stack">' + editView(pt); }
       else {
@@ -248,7 +266,7 @@
       s += '<div class="petlist">' + list.map(function (d) {
         var on = pick === d.k, can = S.p.money >= d.price;
         return '<div class="petrow' + (on ? " on" : "") + '"><button class="petrowb" data-a="petpick" data-v="' + d.k + '" aria-pressed="' + on + '"' + (can ? "" : " disabled") + '><span class="petic" aria-hidden="true">' + d.ico[0] + '</span><span class="grow"><b>' + h(tr(d.n)) + "</b><small>" + h(tr(d.d)) + "</small><small class=\"muted\">" +
-          tr("{p} · {y}/año · vive {a}–{b} años", {p: fmtMoney(d.price), y: fmtMoney(d.year), a: d.life[0], b: d.life[1]}) + '</small><span class="chips">' + chips(d) + "</span></span></button>" +
+          tr("{p} · {y}/año", {p: fmtMoney(d.price), y: fmtMoney(d.year)}) + '</small><span class="chips">' + chips(d) + "</span></span></button>" +
           (on ? '<div class="petadopt"><input id="petnm" maxlength="16" placeholder="' + h(tr("¿Cómo se va a llamar?")) + '" aria-label="' + h(tr("Nombre de la mascota")) + '"><button class="go" data-a="petadopt">' + tr("Adoptar") + "</button></div>" : "") + "</div>";
       }).join("") + "</div>";
       if (L.petAcc && L.petAcc.length) s += '<p class="muted lfhint">' + trn(L.petAcc.length, "Guardas {n} accesorio para tu próxima mascota.", "Guardas {n} accesorios para tu próxima mascota.") + "</p>";

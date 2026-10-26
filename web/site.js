@@ -171,7 +171,7 @@
     for (var s = 0; s < 2; s++) T[s].forEach(function (p, i) {
       ctx.fillStyle = "rgba(0,0,0,.28)"; ctx.beginPath(); ctx.arc(p.x * K + 2, p.y * K + 3, r, 0, 6.283); ctx.fill();
       ctx.fillStyle = i === 0 ? "#edf1e8" : COL[s]; ctx.beginPath(); ctx.arc(p.x * K, p.y * K, r, 0, 6.283); ctx.fill();
-      ctx.fillStyle = i === 0 ? "#1b2a2e" : INK[s]; ctx.font = "800 " + Math.round(r * 1.15) + "px Archivo, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillStyle = i === 0 ? "#1b2a2e" : INK[s]; ctx.font = "800 " + Math.round(r * 1.15) + "px 'Atkinson Hyperlegible Next', sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
       ctx.fillText(String(p.n), p.x * K, p.y * K + 1);
     });
     ctx.fillStyle = "rgba(0,0,0,.3)"; ctx.beginPath(); ctx.arc(ball.x * K + 2 + ball.z * 2, ball.y * K + 3 + ball.z * 2, 0.6 * K, 0, 6.283); ctx.fill();

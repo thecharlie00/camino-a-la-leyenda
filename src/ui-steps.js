@@ -8,11 +8,14 @@
 
   /* ---------- accesibilidad ---------- */
   var A11Y_KEY = "camino.a11y";
-  function a11yGet() { try { var o = JSON.parse(localStorage.getItem(A11Y_KEY) || "{}"); return {fs: +o.fs || 0, cb: o.cb ? 1 : 0}; } catch (e) { return {fs: 0, cb: 0}; } }
-  function a11ySet(o) { try { localStorage.setItem(A11Y_KEY, JSON.stringify(o)); } catch (e) {} a11yApply(o); }
+  function a11yGet() { try { var o = JSON.parse(localStorage.getItem(A11Y_KEY) || "{}"); return {fs: +o.fs || 0, cb: o.cb ? 1 : 0, rm: +o.rm || 0, vib: o.vib === 0 ? 0 : 1}; } catch (e) { return {fs: 0, cb: 0, rm: 0, vib: 1}; } }
+  function a11ySet(o) { try { localStorage.setItem(A11Y_KEY, JSON.stringify(o)); } catch (e) {} if (typeof Anim !== "undefined") Anim.invalidate(); a11yApply(o); }
   function a11yApply(o) {
     var el = document.documentElement; if (!el) return;
-    el.classList.remove("fs1", "fs2", "cb");
+    el.classList.remove("fs1", "fs2", "cb", "rm");
+    /* animaciones reducidas: por ajuste del juego o, en «Según el sistema», por la preferencia del sistema */
+    var sysRm = false; try { sysRm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+    if (o.rm === 1 || (!o.rm && sysRm)) el.classList.add("rm");
     if (o.fs === 1) el.classList.add("fs1"); else if (o.fs === 2) el.classList.add("fs2");
     if (o.cb) el.classList.add("cb");
   }
@@ -25,13 +28,20 @@
       return '<button data-a="a11yfs" data-v="' + x[1] + '" aria-pressed="' + (o.fs === x[1]) + '">' + h(tr(x[0])) + "</button>";
     }).join("") + '</div></div><div><label class="lbl">' + tr("Colores") + '</label><div class="seg">' +
       '<button data-a="a11ycb" data-v="0" aria-pressed="' + !o.cb + '">' + tr("Estándar") + '</button><button data-a="a11ycb" data-v="1" aria-pressed="' + !!o.cb + '">' + tr("Daltonismo") + "</button></div>" +
-      '<p class="muted" style="font-size:13px;margin:6px 0 0">' + (o.cb ? tr("Lo bueno se ve en azul y lo malo en naranja, en lugar de verde y rojo.") : tr("Verde para lo bueno y rojo para lo malo.")) + "</p></div>";
+      '<p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (o.cb ? tr("Lo bueno se ve en azul y lo malo en naranja, en lugar de verde y rojo.") : tr("Verde para lo bueno y rojo para lo malo.")) + "</p></div>" +
+      '<div><label class="lbl">' + tr("Animaciones") + '</label><div class="seg">' + [[N_("Según el sistema"), 0], [N_("Completas"), 2], [N_("Reducidas"), 1]].map(function (x) {
+        return '<button data-a="a11yrm" data-v="' + x[1] + '" aria-pressed="' + (o.rm === x[1]) + '">' + h(tr(x[0])) + "</button>";
+      }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + tr("Reducidas: sin sacudidas de pantalla, pausas de impacto, partículas intensas ni reflejos 3D.") + "</p></div>" +
+      '<div><label class="lbl">' + tr("Vibración") + '</label><div class="seg">' +
+      '<button data-a="a11yvib" data-v="1" aria-pressed="' + !!o.vib + '">' + tr("Activada") + '</button><button data-a="a11yvib" data-v="0" aria-pressed="' + !o.vib + '">' + tr("Desactivada") + "</button></div></div>";
   }
   U.add("menu", function () { return '<details class="fold a11y"><summary>' + tr("Accesibilidad") + "</summary>" + '<div class="stack">' + a11yBlock() + "</div></details>"; });
   U.sheets.a11y = function () { return "<h2>" + tr("Accesibilidad") + '</h2><div class="stack">' + a11yBlock() + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>"; };
   U.actions.a11y = function () { U.open("a11y"); };
   U.actions.a11yfs = function (b, v) { var o = a11yGet(); o.fs = +v; a11ySet(o); U.renderSheet(); keepA11yOpen(); };
   U.actions.a11ycb = function (b, v) { var o = a11yGet(); o.cb = +v ? 1 : 0; a11ySet(o); U.renderSheet(); U.render(false); keepA11yOpen(); };
+  U.actions.a11yrm = function (b, v) { var o = a11yGet(); o.rm = +v; a11ySet(o); U.renderSheet(); keepA11yOpen(); };
+  U.actions.a11yvib = function (b, v) { var o = a11yGet(); o.vib = +v ? 1 : 0; a11ySet(o); U.renderSheet(); keepA11yOpen(); if (o.vib && typeof Anim !== "undefined") Anim.haptic("ok"); };
   function keepA11yOpen() { var d = document.querySelector("details.a11y"); if (d) d.open = true; }
 
   /* ---------- logros ---------- */
@@ -67,7 +77,7 @@
   U.sheets.ach = function () {
     if (S && typeof achCheck === "function") { achCheck(); gSync(); }
     var g = gGet(), c = gCount();
-    var s = "<h2>" + tr("Logros") + '</h2><div class="stack"><p class="muted" style="margin:0;font-size:13px">' + tr("Son tuyos para siempre: se guardan en este dispositivo y cuentan los de todas tus partidas.") + '</p><div><div class="lbl">' + tr("{n} de {m} conseguidos", {n: c[0], m: c[1]}) + '</div><div class="bar"><i class="hi" style="width:' + Math.round(c[0] / c[1] * 100) + '%"></i></div></div>';
+    var s = "<h2>" + tr("Logros") + '</h2><div class="stack"><p class="muted" style="margin:0;font-size:var(--fs-sm)">' + tr("Son tuyos para siempre: se guardan en este dispositivo y cuentan los de todas tus partidas.") + '</p><div><div class="lbl">' + tr("{n} de {m} conseguidos", {n: c[0], m: c[1]}) + '</div><div class="bar"><i class="hi" style="width:' + Math.round(c[0] / c[1] * 100) + '%"></i></div></div>';
     /* una sola lista: primero los conseguidos (los más recientes arriba) y luego los pendientes */
     var all = [], cnt = {};
     allAch().forEach(function (gr) { gr[1].forEach(function (a) { all.push({a: a, m: gr[0]}); cnt[a[2]] = (cnt[a[2]] || 0) + 1; }); });
@@ -85,6 +95,7 @@
     if (gSync() && !nw.length) return;
     if (!nw.length) return;
     U.persist();
+    if (U.gxNotify) { U.gxNotify(); return; }
     nw.forEach(function (a, i) { U.toast(a[1] + " " + tr("Logro: {n}", {n: tr(a[2])})); if (i === 0) U.edgeFlash(true); });
   });
 

@@ -57,10 +57,10 @@
     o += '<div><label class="lbl">' + tr("Pareja") + '</label><div class="seg">' + [["none", tr("Sin pareja")], ["m", tr("Un hombre")], ["f", tr("Una mujer")]].map(function (x) {
       return '<button data-a="fspt" data-v="' + x[0] + '" aria-pressed="' + (FS.pt === x[0]) + '">' + h(x[1]) + "</button>"; }).join("") + "</div>";
     if (FS.pt !== "none") o += '<label class="lbl" for="fsptn" style="margin-top:8px">' + tr("Nombre de tu pareja") + '</label><input type="text" id="fsptn" maxlength="20" autocomplete="off" value="' + h(FS.ptn) + '">' +
-      (FS.pt === famMe() ? '<p class="muted" style="font-size:13px;margin:4px 0 0">' + tr("Si queréis ampliar la familia, adoptaréis a un niño o a una niña.") + "</p>" : "");
+      (FS.pt === famMe() ? '<p class="muted" style="font-size:var(--fs-sm);margin:4px 0 0">' + tr("Si queréis ampliar la familia, adoptaréis a un niño o a una niña.") + "</p>" : "");
     o += "</div>";
     var maxAge = Math.min(15, famHero().age - 18);
-    if (maxAge < 0) return o + '<p class="muted" style="font-size:13px;margin:0">' + tr("Con tu edad, los hijos llegarán más adelante.") + '</p><button class="btn pri wide" data-a="fsgo">' + tr("Guardar") + '</button><button class="btn wide" data-a="close">' + tr("Cancelar") + "</button></div>";
+    if (maxAge < 0) return o + '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Con tu edad, los hijos llegarán más adelante.") + '</p><button class="btn pri wide" data-a="fsgo">' + tr("Guardar") + '</button><button class="btn wide" data-a="close">' + tr("Cancelar") + "</button></div>";
     o += '<div><label class="lbl">' + tr("Hijos") + "</label>";
     FS.kids.forEach(function (k, i) {
       o += '<div class="famkrow"><input type="text" id="fsk' + i + '" maxlength="20" autocomplete="off" value="' + h(k.fn) + '" aria-label="' + h(tr("Nombre")) + '">' +
@@ -69,7 +69,7 @@
         '<button class="btn" data-a="fskdel" data-v="' + i + '" aria-label="' + h(tr("Quitar")) + '">✕</button></div>';
     });
     if (FS.kids.length < 3) o += '<button class="btn wide" data-a="fskadd">+ ' + tr("Añadir hijo o hija") + "</button>";
-    o += '<p class="muted" style="font-size:13px;margin:6px 0 0">' + tr("A los 16 años podrán querer ser futbolistas. Si juegan en tu mismo fútbol, podrás ficharlos.") + "</p></div>";
+    o += '<p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + tr("A los 16 años podrán querer ser futbolistas. Si juegan en tu mismo fútbol, podrás ficharlos.") + "</p></div>";
     return o + '<button class="btn pri wide" data-a="fsgo">' + tr("Guardar") + '</button><button class="btn wide" data-a="close">' + tr("Cancelar") + "</button></div>";
   };
 
@@ -85,23 +85,23 @@
   };
   U.sheets.fam = function () {
     var f = famOf(), o = "<h2>" + tr("Tu familia") + "</h2>";
-    if (f.par) o += '<section class="famblk"><div class="famhd"><b>' + h(tr("Tus padres")) + "</b></div><p class=\"muted\" style=\"font-size:13px;margin:4px 0 0\">" + h(f.par.pt ? f.par.fn + " · " + f.par.pt : f.par.fn) + "</p></section>";
+    if (f.par) o += '<section class="famblk"><div class="famhd"><b>' + h(tr("Tus padres")) + "</b></div><p class=\"muted\" style=\"font-size:var(--fs-sm);margin:4px 0 0\">" + h(f.par.pt ? f.par.fn + " · " + f.par.pt : f.par.fn) + "</p></section>";
     if (f.pt) {
       o += '<section class="famblk"><div class="famhd"><b>' + h(f.pt.fn) + "</b><span>" + h(relWord(f.pt.rel)) + " · " + Math.round(f.pt.rel) + "</span></div>" + relBar(f.pt.rel) +
-        '<p class="muted" style="font-size:13px;margin:6px 0 0">' + tr("La relación se resiente con el trabajo: un club grande, una crisis o niños pequeños en casa. Las decisiones que la cuidan la mejoran. Bien cuidada te da química; descuidada, te la quita.") + "</p></section>";
+        '<p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + tr("La relación se resiente con el trabajo: un club grande, una crisis o niños pequeños en casa. Las decisiones que la cuidan la mejoran. Bien cuidada te da química; descuidada, te la quita.") + "</p></section>";
     } else o += '<p class="muted">' + (f.ex ? tr("Ahora mismo no tienes pareja.") : tr("No tienes pareja. Puede que conozcas a alguien.")) + "</p>";
     if (!famKids(f).length) o += '<p class="muted">' + tr("Todavía no tienes hijos.") + "</p>";
     f.kids.forEach(function (k) {
       var I = famKidInfo(k);
       o += '<section class="famblk"><div class="famhd">' + kidLine(k) + "</div>";
       if (I.fb) {
-        o += '<p class="muted" style="font-size:13px;margin:4px 0 6px">' + h(tr("{pos} · {apps} partidos y {g} goles en su carrera", {pos: posName(I.fb.pos), apps: I.tot.apps, g: I.tot.g})) + "</p>";
+        o += '<p class="muted" style="font-size:var(--fs-sm);margin:4px 0 6px">' + h(tr("{pos} · {apps} partidos y {g} goles en su carrera", {pos: posName(I.fb.pos), apps: I.tot.apps, g: I.tot.g})) + "</p>";
         if (I.fb.seasons.length) o += '<table class="famtbl"><thead><tr><th>' + tr("Temporada") + "</th><th>" + tr("Club") + "</th><th>" + tr("PJ") + "</th><th>" + tr("Goles") + "</th><th>" + tr("Media") + "</th></tr></thead><tbody>" +
           I.fb.seasons.slice().reverse().map(function (s) { return "<tr" + (s.mine ? ' class="mine"' : "") + "><td>" + seasonLabel(s.y) + "</td><td>" + h(s.club >= 0 ? clubName(s.club) : s.cn || "—") + (s.mine ? " ★" : "") + "</td><td>" + s.apps + "</td><td>" + s.g + "</td><td>" + s.ovr + "</td></tr>"; }).join("") + "</tbody></table>";
-        if (I.mine && I.p) o += '<p class="muted" style="font-size:13px;margin:6px 0 0">' + h(tr("Esta temporada contigo: {apps} partidos, {g} goles.", {apps: I.p.st.apps, g: I.p.st.g})) + "</p>";
+        if (I.mine && I.p) o += '<p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + h(tr("Esta temporada contigo: {apps} partidos, {g} goles.", {apps: I.p.st.apps, g: I.p.st.g})) + "</p>";
         if (famSignable(k)) { var fee = famFee(k.fb, I.age); o += '<button class="btn pri wide" style="margin-top:8px" data-a="famsign" data-v="' + k.id + '">' + h(fee ? tr("Ficharle por {fee}", {fee: fmtMoney(fee)}) : tr("Ficharle (sin coste)")) + "</button>"; }
-        else if (!famSame(k) && !I.fb.ret) o += '<p class="muted" style="font-size:13px;margin:6px 0 0">' + h(k.g === "f" ? tr("Juega en el fútbol femenino: no puedes ficharla, pero sigues su carrera.") : tr("Juega en el fútbol masculino: no puedes ficharlo, pero sigues su carrera.")) + "</p>";
-      } else if (I.age < 16 && !k.no) o += '<p class="muted" style="font-size:13px;margin:4px 0 0">' + h(trn(16 - I.age, "En {n} año podrá decidir si quiere ser futbolista.", "En {n} años podrá decidir si quiere ser futbolista.")) + "</p>";
+        else if (!famSame(k) && !I.fb.ret) o += '<p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + h(k.g === "f" ? tr("Juega en el fútbol femenino: no puedes ficharla, pero sigues su carrera.") : tr("Juega en el fútbol masculino: no puedes ficharlo, pero sigues su carrera.")) + "</p>";
+      } else if (I.age < 16 && !k.no) o += '<p class="muted" style="font-size:var(--fs-sm);margin:4px 0 0">' + h(trn(16 - I.age, "En {n} año podrá decidir si quiere ser futbolista.", "En {n} años podrá decidir si quiere ser futbolista.")) + "</p>";
       o += "</section>";
     });
     return o + '<button class="btn wide" data-a="close" style="margin-top:12px">' + tr("Cerrar") + "</button>";

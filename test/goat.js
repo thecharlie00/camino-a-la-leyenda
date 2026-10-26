@@ -72,7 +72,8 @@ const vm = require("vm");
 
   const gameContext = {
     GOAT_API_URL: "",
-    GOAT_TEXT: {es: {careerTitlePlayer: "Carrera de Jugador", careerTitleManager: "Carrera de Míster"}},
+    GOAT_TEXT: {es: {careerTitlePlayer: "Carrera de Jugador", careerTitleManager: "Carrera de Míster", player: "Jugador", manager: "Míster"}},
+    GOAT_FEM_TEXT: {es: {careerTitlePlayer: "Carrera de Jugadora", careerTitleManager: "Carrera de Entrenadora", player: "Jugadora", manager: "Entrenadora"}},
     LANG: "es",
     W: {lg: [{n: "League 2", upI: 1}, {n: "League 1", upI: -1}]},
     clubName: id => "Club " + id,
@@ -89,6 +90,12 @@ const vm = require("vm");
   };
   const playerSnapshot = gameContext.GoatLadder.career();
   assert.strictEqual(playerSnapshot.metrics.goals, 45);
+  assert.strictEqual(playerSnapshot.title, "Carrera de Jugador");
+  assert.strictEqual(gameContext.GoatLadder.t("player"), "Jugador");
+  gameContext.FEM = true;
+  assert.strictEqual(gameContext.GoatLadder.t("player"), "Jugadora");
+  assert.strictEqual(gameContext.GoatLadder.t("manager"), "Entrenadora");
+  assert.strictEqual(gameContext.GoatLadder.career().title, "Carrera de Jugadora");
   assert.strictEqual(validateCareerEntry({...playerSnapshot, display_name: "Player"}).history.length, 2);
   gameContext.S = {
     uid: "manager-save-unique", mode: "mgr", yr: 2031, ph: "ret", cl: {},
@@ -99,6 +106,7 @@ const vm = require("vm");
   };
   const managerSnapshot = gameContext.GoatLadder.career();
   assert.strictEqual(managerSnapshot.metrics.promotions, 1);
+  assert.strictEqual(managerSnapshot.title, "Carrera de Entrenadora");
   assert.strictEqual(validateCareerEntry({...managerSnapshot, display_name: "Manager"}).history.length, 2);
 
   let inserted = false, deleted = false, listFiltered = false, careerInserted = false, careerDeleted = false;

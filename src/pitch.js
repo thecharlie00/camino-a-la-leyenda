@@ -12,6 +12,10 @@ var Pitch = (function () {
   "use strict";
   var LEN = 105, WID = 68, MIDY = 34, PH = 3.66, BAR = 2.44, GRAV = 9.8, PI2 = Math.PI * 2;
   var P = null, RM = false, SPEEDK = 1.35;
+  /* La entrada 2D sigue los mismos tiempos que la puesta en escena 3D. */
+  var INTRO_WALK = 4.2, INTRO_GREET = 2.6, COIN_FLIP = 1.15, COIN_RESULT = 1.25, RIVAL_WAIT = 1.25, INTRO_LINEUP = 1.5;
+  /* La llamada cara/cruz tiene 10 s; la decisión campo/pelota, 20 s. */
+  var COIN_WAIT = 10, CHOICE_WAIT = 20;
   /* posición base de cada demarcación para un equipo que ataca hacia la derecha (x: 0 propia portería → 1 rival; y: 0 arriba → 1 abajo) */
   var BASE = {POR: [0.045, 0.5], LD: [0.24, 0.84], LI: [0.24, 0.16], DFC: [0.2, 0.5], MCD: [0.36, 0.5], MC: [0.46, 0.5], MCO: [0.58, 0.5],
     MD: [0.52, 0.86], MI: [0.52, 0.14], ED: [0.7, 0.84], EI: [0.7, 0.16], DC: [0.76, 0.5]};
@@ -46,7 +50,11 @@ var Pitch = (function () {
   /* ---------- sonido de grada (Web Audio, sin ficheros) ---------- */
   var Snd = (function () {
     var KEY = "camino.pitch.snd", VOL = 0.32;
-    var ac = null, master = null, bedG = null, roarG = null, roarF = null, on = true, loaded = false, lastExc = -1, unlock = null;
+    /* El audio no pertenece a un canvas concreto: sobrevive al cambio 2D/3D y
+       solo se apaga cuando la vista activa lo libera. `active` sustituye a la
+       antigua dependencia de P, que dejaba mudo el 3D al destruir el canvas. */
+    var ac = null, master = null, bedG = null, roarG = null, roarF = null, on = true, loaded = false, active = false, lastExc = -1, unlock = null, stopTimer = null, calls = 0, lastCue = "";
+    function cue(name) { calls++; lastCue = name; }
     function load() { if (loaded) return; loaded = true; try { if (window.localStorage && localStorage.getItem(KEY) === "0") on = false; } catch (e) {} }
     function save() { try { if (window.localStorage) localStorage.setItem(KEY, on ? "1" : "0"); } catch (e) {} }
     function noiseSrc(buf, rate, off, dest) {
@@ -82,30 +90,40 @@ var Pitch = (function () {
     function t() { return ac.currentTime; }
     function apply() {
       if (!ac || !master) return;
-      master.gain.cancelScheduledValues(t()); master.gain.setTargetAtTime(on && P && !document.hidden ? VOL : 0, t(), 0.25);
+      master.gain.cancelScheduledValues(t()); master.gain.setTargetAtTime(on && active && !document.hidden ? VOL : 0, t(), 0.25);
     }
     function mount() {
       load();
-      if (!on) return;
+      active = true;
+      if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+      if (!on) { apply(); return; }
       if (!init()) return;
       if (ac.state === "suspended") { try { ac.resume(); } catch (e) {} }
       if (!unlock) {
-        unlock = function () { if (ac && ac.state === "suspended" && on && P) { try { ac.resume(); } catch (e) {} } };
+        unlock = function () { if (ac && ac.state === "suspended" && on && active) { try { ac.resume(); } catch (e) {} } };
         document.addEventListener("pointerdown", unlock, true); document.addEventListener("touchstart", unlock, true);
       }
       lastExc = -1; apply();
     }
     function stop() {
+      active = false;
       if (!ac) return;
       master.gain.cancelScheduledValues(t()); master.gain.setTargetAtTime(0, t(), 0.12);
-      setTimeout(function () { if (ac && !P) { try { ac.suspend(); } catch (e) {} } }, 500);
+      if (stopTimer) clearTimeout(stopTimer);
+      /* La pausa se retrasa: el cambio de vista destruye una vista y monta la
+         otra en la misma tarea, y `mount()` cancela este apagado. */
+      stopTimer = setTimeout(function () {
+        stopTimer = null;
+        if (ac && !active) { try { ac.suspend(); } catch (e) {} }
+      }, 260);
     }
     function vis() {
       if (!ac) return;
       if (document.hidden) { try { ac.suspend(); } catch (e) {} }
-      else if (on && P) { try { ac.resume(); } catch (e2) {} apply(); }
+      else if (on && active) { try { ac.resume(); } catch (e2) {} apply(); }
     }
     function exc(x) {
+      cue("exc");
       if (!ac || !on || Math.abs(x - lastExc) < 0.03) return;
       lastExc = x;
       roarG.gain.setTargetAtTime(x * x * 0.85, t(), 0.45);
@@ -113,6 +131,7 @@ var Pitch = (function () {
     }
     /* gol: explosión de la grada (más grande si marca el local) */
     function cheer(big) {
+      cue("cheer");
       if (!ac || !on) return;
       var g = roarG.gain, f = roarF.frequency, n = t();
       g.cancelScheduledValues(n); g.setValueAtTime(g.value, n); g.linearRampToValueAtTime(big ? 2.1 : 0.9, n + 0.3); g.setTargetAtTime(0.18, n + 1.6, 1.3);
@@ -121,6 +140,7 @@ var Pitch = (function () {
     }
     /* «¡uy!»: subida corta y caída */
     function ooh() {
+      cue("ooh");
       if (!ac || !on) return;
       var g = roarG.gain, f = roarF.frequency, n = t();
       g.cancelScheduledValues(n); g.setValueAtTime(g.value, n); g.linearRampToValueAtTime(1.1, n + 0.18); g.setTargetAtTime(0.15, n + 0.4, 0.5);
@@ -128,6 +148,7 @@ var Pitch = (function () {
       lastExc = -1;
     }
     function kick(pw) {
+      cue("kick");
       if (!ac || !on) return;
       try {
         var o = ac.createOscillator(), g = ac.createGain(), n = t();
@@ -138,6 +159,7 @@ var Pitch = (function () {
     }
     /* silbato de bolita: tono agudo con trino */
     function whistle(pat) {
+      cue("whistle");
       if (!ac || !on) return;
       try {
         var n = t() + 0.02;
@@ -153,8 +175,14 @@ var Pitch = (function () {
     }
     function toggle() { load(); on = !on; save(); if (on) mount(); else apply(); return on; }
     function isOn() { load(); return on; }
-    return {mount: mount, stop: stop, vis: vis, exc: exc, cheer: cheer, ooh: ooh, kick: kick, whistle: whistle, toggle: toggle, isOn: isOn};
+    function state() {
+      load();
+      return {on: on, active: active, ready: !!ac, context: ac ? ac.state : "none", calls: calls, lastCue: lastCue};
+    }
+    return {mount: mount, stop: stop, vis: vis, exc: exc, cheer: cheer, ooh: ooh, kick: kick, whistle: whistle, toggle: toggle, isOn: isOn, state: state};
   })();
+  /* Motor de audio compartido por el campo 2D y la puesta en escena 3D. */
+  if (typeof window !== "undefined") window.PitchAudio = Snd;
 
   /* posiciones base de un once (demarcaciones de su sistema) */
   function layout(list) {
@@ -207,6 +235,17 @@ var Pitch = (function () {
     rb.addEventListener("click", function (ev) { ev.stopPropagation(); replay(); });
     sp.appendChild(rb);
     el.appendChild(sp);
+    /* Boca del túnel y panel del sorteo: son DOM para que funcionen igual en
+       cualquier canvas 2D, también en file:// y en la APK. */
+    var tu = document.createElement("div");
+    tu.className = "l2d-tunnel"; tu.setAttribute("aria-hidden", "true");
+    tu.style.cssText = "position:absolute;z-index:6;left:50%;top:0;transform:translateX(-50%);width:96px;height:26px;border-radius:0 0 10px 10px;background:linear-gradient(#050b09,#132a22);border:1px solid rgba(255,255,255,.25);border-top:0;color:#b9ffd6;font:800 9px/26px system-ui;text-align:center;letter-spacing:.08em;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.4);display:none";
+    tu.textContent = tr("TÚNEL");
+    el.appendChild(tu);
+    var ce = document.createElement("div");
+    ce.className = "l2d-coin"; ce.setAttribute("role", "status"); ce.setAttribute("aria-live", "polite");
+    ce.style.cssText = "position:absolute;z-index:24;left:50%;bottom:8px;transform:translateX(-50%);width:min(392px,94%);max-height:56%;overflow:auto;box-sizing:border-box;padding:6px 9px;border:1px solid rgba(255,255,255,.30);border-radius:9px;background:rgba(5,15,12,.90);color:#fff;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.32);display:none";
+    el.appendChild(ce);
     RM = reduced();
     P = {el: el, cv: cv, ctx: cv.getContext("2d"), btn: btn, cols: o.cols || ["#ffb21e", "#66b9ff"], lab: o.lab || {goal: "GOL", post: "¡PALO!", half: "DESCANSO", end: "FINAL"},
       frozen: false, qa: {nan: 0, oob: 0, pass: 0, perr: 0}, T: [[], []], own: 0, bxw: LEN / 2, speed: 1, rate: SPEEDK, ck: 0, last: now(), run: true,
@@ -214,9 +253,20 @@ var Pitch = (function () {
       q: [], cues: [], hardUntil: 0, softUntil: 0, sid: 0, soft: 0, passAt: 0, cards: [], cele: null, msg: null,
       tac: [defTac(), defTac()], line: [22, 22], steal: -1, stealUntil: 0, chase: -1, cp: [0, 0], ret: [0, 0], trap: [0, 0], stopUntil: 0, pendOwn: null, recv: null,
       cam: {x: LEN / 2, y: MIDY, z: 1}, focus: null, shake: 0, exc: 0, excT: 0, excAt: 0, sndAt: 0, net: null, flag: null, font: "", fontR: 0,
-      trails: [], icons: [], fx: [], offLine: null, lt: -1, flip: false, ko0: 0, half2: false, camN: 0, hiUntil: 0, onSpeed: o.onSpeed || null, tickTxt: ""};
+      trails: [], icons: [], fx: [], offLine: null, lt: -1, flip: false, ko0: 0, koSet: false, half2: false, camN: 0, hiUntil: 0, onSpeed: o.onSpeed || null, tickTxt: "",
+      cinematics: o.cinematics !== false, introDone: o.cinematics === false, pendingIntro: o.intro || null,
+      cine: null, toss: null, wx: "sun", tunnelEl: null, coinEl: null, wxParts: []};
     btn.addEventListener("click", function (ev) { ev.stopPropagation(); Snd.toggle(); sndBtn(); });
-    P.tk = tk; P.sp = sp;
+    P.tk = tk; P.sp = sp; P.tunnelEl = tu; P.coinEl = ce;
+    for (var wp = 0; wp < 34; wp++) P.wxParts.push({x: Math.random(), y: Math.random(), s: 0.55 + Math.random() * 0.9, v: 0.55 + Math.random() * 0.8});
+    ce.addEventListener("click", function (ev) {
+      ev.preventDefault(); ev.stopPropagation();
+      var b = ev.target;
+      while (b && b !== ce && !b.getAttribute("data-p2d-coin") && !b.getAttribute("data-p2d-choice")) b = b.parentNode;
+      if (!b || b === ce) return;
+      if (b.getAttribute("data-p2d-coin")) coinCall2D(b.getAttribute("data-p2d-coin"));
+      else coinChoice2D(b.getAttribute("data-p2d-choice"));
+    });
     sp.setAttribute("aria-label", o.spdLabel || "Velocidad");
     sp.addEventListener("click", function (ev) { var b0 = ev.target.closest && ev.target.closest("[data-ps]"); if (!b0 || !P) return; ev.stopPropagation(); var n = +b0.getAttribute("data-ps"); if (P.onSpeed) P.onSpeed(n); P.speed = n; P.rate = SPEEDK / ([1, 1, 0.62, 0.42][n] || 1); spdBtns(); });
     spdBtns();
@@ -239,8 +289,9 @@ var Pitch = (function () {
     var on = Snd.isOn();
     P.btn.setAttribute("aria-pressed", on ? "true" : "false");
     P.btn.setAttribute("aria-label", on ? tr("Silenciar el ambiente del estadio") : tr("Activar el ambiente del estadio"));
-    P.btn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/>' +
-      (on ? '<path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' : '<path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>') + "</svg>";
+    /* altavoz en píxeles */
+    P.btn.innerHTML = '<svg viewBox="0 0 12 12" width="18" height="18" shape-rendering="crispEdges" aria-hidden="true" fill="currentColor"><rect x="1" y="4" width="2" height="4"/><rect x="3" y="3" width="1" height="6"/><rect x="4" y="2" width="1" height="8"/><rect x="5" y="1" width="1" height="10"/>' +
+      (on ? '<rect x="7" y="4" width="1" height="4"/><rect x="9" y="2" width="1" height="2"/><rect x="10" y="4" width="1" height="4"/><rect x="9" y="8" width="1" height="2"/>' : '<rect x="7" y="4" width="1" height="1"/><rect x="8" y="5" width="1" height="2"/><rect x="9" y="7" width="1" height="1"/><rect x="9" y="4" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/>') + "</svg>";
   }
   function resize() {
     if (!P) return;
@@ -260,6 +311,8 @@ var Pitch = (function () {
     if (P.btn.parentNode) P.btn.parentNode.removeChild(P.btn);
     if (P.tk && P.tk.parentNode) P.tk.parentNode.removeChild(P.tk);
     if (P.sp && P.sp.parentNode) P.sp.parentNode.removeChild(P.sp);
+    if (P.tunnelEl && P.tunnelEl.parentNode) P.tunnelEl.parentNode.removeChild(P.tunnelEl);
+    if (P.coinEl && P.coinEl.parentNode) P.coinEl.parentNode.removeChild(P.coinEl);
     P = null;
     Snd.stop();
   }
@@ -301,7 +354,10 @@ var Pitch = (function () {
     });
     var b = P.ball;
     if (b.m === 0 && !pl(b.hs, b.hi)) b.m = 2;
-    if (b.m === 2 && !scripted() && P.chase < 0 && Math.abs(b.vx) + Math.abs(b.vy) < 0.1) giveTo(P.own, mid(P.own));
+    if (!P.cine && b.m === 2 && !scripted() && P.chase < 0 && Math.abs(b.vx) + Math.abs(b.vy) < 0.1) giveTo(P.own, mid(P.own));
+    /* La entrada solo se reproduce en el arranque real del directo; al
+       reabrir o cambiar de vista con minutos jugados no se repite. */
+    if (!P.introDone && !P.cine && P.cinematics && P.T[0].length && P.T[1].length) startIntro2D(P.pendingIntro);
   }
   function pl(s, i) { if (s !== 0 && s !== 1 || i == null || i < 0) return null; var p = P.T[s][i]; return p && !p.gone && !p.off ? p : null; }
   function alive(s) { var out = []; for (var i = 0; i < P.T[s].length; i++) if (pl(s, i)) out.push(i); return out; }
@@ -404,21 +460,36 @@ var Pitch = (function () {
   /* ---------- estado del minuto: quién tiene el balón y dónde ---------- */
   function state(o) {
     if (!P) return;
+    if (o.wx) P.wx = String(o.wx);
+    if (o.toss && typeof o.toss === "object") P.toss = o.toss;
     if (o.speed) { P.speed = o.speed; P.rate = SPEEDK / ([1, 1, 0.62, 0.42][o.speed] || 1); spdBtns(); }
     P.bxw = clamp((o.bx == null ? 50 : o.bx) / 100, 0.05, 0.95) * LEN;
     if (o.tac) { P.tac[0] = mapTac(o.tac[0]); P.tac[1] = mapTac(o.tac[1]); }
+    /* el primer estado dice qué lado saca de centro; el segundo tiempo lo hace el otro */
+    if (o.own != null && !P.koSet) { P.ko0 = o.own === 1 ? 1 : 0; P.koSet = true; }
+    /* Durante la entrada el motor manda: se guarda quién saca, pero no se
+       mueve el balón ni se provoca un cambio de posesión ficticio. */
+    if (P.cine) { if (o.own != null) { P.own = o.own === 1 ? 1 : 0; P.pendOwn = null; } return; }
     if (o.own != null && o.own !== P.own) {
       if (scripted() || P.cele) P.pendOwn = o.own;
       else turnover(o.own);
     }
   }
   function turnover(s) {
-    var lost = 1 - s;
+    var lost = 1 - s, b = P.ball;
     P.own = s; P.pendOwn = null;
     P.steal = s; P.stealUntil = P.ck + 1.7;
     if (P.tac[lost].press) P.cp[lost] = P.ck + 2.6;
     if (P.tac[lost].ret) P.ret[lost] = P.ck + 3.5;
-    if (P.ball.m === 2) P.chase = s;
+    /* al cambiar de dueño el balón NO se teletransporta: sale suelto desde donde estaba.
+       El equipo que roba lo persigue; si un jugador está encima, lo controla. */
+    if (b.m === 0) {
+      b.m = 2; b.hs = -1; b.hi = -1; b.fl = null; b.z = 0.05; b.vz = 0;
+      b.vx = rnd(-1.4, 1.4); b.vy = rnd(-1.4, 1.4);
+      P.chase = s;
+      var j = nearestTo(s, b.x, b.y, true), p = j >= 0 ? pl(s, j) : null;
+      if (p && Math.sqrt((p.x - b.x) * (p.x - b.x) + (p.y - b.y) * (p.y - b.y)) < 2.2) giveTo(s, j);
+    } else P.chase = s;
   }
 
   /* ---------- guion de jugadas ---------- */
@@ -465,8 +536,12 @@ var Pitch = (function () {
   function ensureBall(s, i) {
     var b = P.ball;
     if (b.m === 0 && b.hs === s) return;
-    var j = i != null && pl(s, i) ? i : nearestTo(s, b.x, b.y, true);
-    if (j >= 0) { giveTo(s, j); var p = pl(s, j); if (p && b.m === 0) { b.x = lerp(b.x, p.x, 0.5); b.y = lerp(b.y, p.y, 0.5); } }
+    var j = i != null && pl(s, i) ? i : nearestTo(s, b.x, b.y, true), p = j >= 0 ? pl(s, j) : null;
+    if (!p) return;
+    var dd = Math.sqrt((p.x - b.x) * (p.x - b.x) + (p.y - b.y) * (p.y - b.y));
+    /* solo se entrega si está al alcance; si no, el balón sigue su camino y el jugador corre */
+    if ((b.m === 2 && dd < 4.5) || (b.m === 0 && b.hs !== s && dd < 2.8)) { giveTo(s, j); return; }
+    P.own = s; P.chase = s;
   }
   /* pase a un punto: bombeado si es largo */
   function passTo(x, y, d, then, o) {
@@ -724,6 +799,426 @@ var Pitch = (function () {
     /* pase inicial hacia atrás a un medio */
     var mm = mid(s), mp0 = pl(s, mm);
     if (mp0 && mm !== c) setTimeout2(0.35, function () { var bb = P.ball; if (bb.m === 0 && bb.hs === s) { var q = pl(s, mm); if (q) kick(q.x, q.y, {prof: 0, d: 0.45, then: function () { receive(s, mm); }}); } });
+  }
+  /* ---------- entrada 2D: túnel, cara o cruz y elección ----------
+     Reproduce en el campo de bolitas la misma puesta en escena que el 3D:
+     salida desde el túnel, saludo, llamada, moneda, resultado, elección de
+     campo/pelota y formación. El motor no avanza ningún minuto mientras
+     `P.cine` exista; `Pitch.cinema()` es la señal que ya consulta `liveTick`. */
+  function startIntro2D(resume) {
+    if (!P || P.cine) return;
+    var r = resume && typeof resume === "object" ? resume : null;
+    P.pendingIntro = null;
+    P.cine = {type: "intro", stage: "", stageT: 0, t: 0, hudKey: "", fieldFlipped: false,
+      coin: {show: false, call: null, face: null, winner: null, choice: null, rivalWhy: null, angle: 0, waitT: 0}};
+    P.introDone = false;
+    P.q = []; P.cues = []; P.cele = null; P.msg = null; P.focus = null;
+    P.hardUntil = 0; P.softUntil = 0; P.stopUntil = 0; P.pendOwn = null; P.steal = -1; P.chase = -1;
+    P.trails.length = 0; P.icons.length = 0; P.fx.length = 0;
+    var b = P.ball;
+    b.x = LEN / 2; b.y = MIDY; b.z = 0; b.m = 2; b.hs = -1; b.hi = -1; b.fl = null; b.vx = b.vy = b.vz = 0;
+    P.cam.x = LEN / 2; P.cam.y = MIDY; P.cam.z = 1;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      var st = tunnelSpot2D(s, i);
+      p.x = st.x; p.y = st.y; p.ix = p.x; p.iy = p.y; p.vx = p.vy = 0;
+      p.tx = p.x; p.ty = p.y; p.fa = s ? Math.PI : 0; p.greet = 0;
+    }
+    if (r) resumeIntro2D(r);
+    else setIntroStage2D("walkout");
+  }
+  /* Al cambiar de vista en plena entrada, el 2D retoma la misma fase y el
+     mismo estado del sorteo en vez de repetir el túnel o saltarse la moneda. */
+  function resumeIntro2D(r) {
+    var c = P.cine; if (!c) return;
+    var stages = ["walkout", "greet", "coinCall", "coinFlip", "coinResult", "choose", "rivalChoice", "choiceResult", "lineup"];
+    var stage = stages.indexOf(r.stage) >= 0 ? r.stage : "walkout";
+    var max = stage === "walkout" ? INTRO_WALK : stage === "greet" ? INTRO_GREET :
+      stage === "coinFlip" ? COIN_FLIP : (stage === "coinResult" || stage === "choiceResult") ? COIN_RESULT :
+      stage === "lineup" ? INTRO_LINEUP : stage === "choose" ? CHOICE_WAIT : stage === "rivalChoice" ? RIVAL_WAIT : COIN_WAIT;
+    var st = +r.stageT;
+    if (!isFinite(st) || st < 0) st = 0;
+    c.stage = stage; c.stageT = Math.min(st, max);
+    c.t = isFinite(+r.t) && +r.t > 0 ? +r.t : c.stageT;
+    c.hudKey = "";
+    var rc = r.coin && typeof r.coin === "object" ? r.coin : {};
+    c.coin.call = rc.call === "cara" || rc.call === "cruz" ? rc.call : null;
+    c.coin.face = rc.face === "cara" || rc.face === "cruz" ? rc.face : null;
+    c.coin.winner = rc.winner === 0 || rc.winner === 1 ? rc.winner : null;
+    c.coin.choice = rc.choice === "campo" || rc.choice === "pelota" ? rc.choice : null;
+    c.coin.rivalWhy = rc.rivalWhy ? String(rc.rivalWhy) : null;
+    c.coin.waitT = isFinite(+rc.waitT) && +rc.waitT > 0 ? +rc.waitT : 0;
+    c.coin.angle = isFinite(+rc.angle) ? +rc.angle : 0;
+    c.coin.show = stage !== "walkout" && stage !== "greet" && stage !== "lineup";
+    if (stage === "walkout") {
+      if (P.tunnelEl) P.tunnelEl.style.display = "block";
+      animateWalkout2D(c);
+    } else {
+      if (P.tunnelEl) P.tunnelEl.style.display = "none";
+      if (stage === "greet") { placeRow2D(); beginGreet2D(); animateGreet2D(c); }
+      else if (stage === "lineup") { placeCoinLineup2D(); beginLineup2D(); animateLineup2D(c); }
+      else placeCoinLineup2D();
+    }
+    /* El 3D ya había aplicado el campo antes de cambiar de vista. */
+    if ((stage === "choiceResult" || stage === "lineup") && c.coin.choice === "campo" && !c.fieldFlipped) {
+      c.fieldFlipped = true;
+      P.flip = !P.flip;
+    }
+    renderCoin2D(true);
+  }
+  /* La fila 2D replica la 3D: una columna por equipo, el capitán (slot 9) al
+     frente y el resto esperando detrás, con la cola dentro del túnel. */
+  function captainIndex2D(s) {
+    var t = P.T[s] || [];
+    if (t[9]) return 9;
+    if (t[5]) return 5;
+    for (var i = 0; i < t.length; i++) if (t[i]) return i;
+    return -1;
+  }
+  function tunnelRank2D(s, i) {
+    var cs = captainIndex2D(s);
+    if (cs < 0) return i;
+    if (i === cs) return 0;
+    return 1 + (i < cs ? i : i - 1);
+  }
+  function tunnelSpot2D(s, i) {
+    var rank = tunnelRank2D(s, i);
+    var lane = LEN / 2 + (s ? 2.35 : -2.35);
+    return {x: lane, y: -2.2 - rank * 0.85, rowX: lane, rowY: 21.8 - rank * 1.9,
+      delay: rank * 0.09, dur: 2.9};
+  }
+  function animateWalkout2D(c) {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      var st = tunnelSpot2D(s, i);
+      var k = clamp((c.stageT - st.delay) / st.dur, 0, 1);
+      var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      p.x = lerp(st.x, st.rowX, e); p.y = lerp(st.y, st.rowY, e);
+      p.vx = p.vy = 0; p.tx = st.rowX; p.ty = st.rowY;
+      p.fa = Math.PI / 2; p.greet = 0;
+    }
+  }
+  function placeRow2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      var st = tunnelSpot2D(s, i);
+      p.x = p.tx = st.rowX; p.y = p.ty = st.rowY;
+      p.vx = p.vy = 0; p.fa = Math.PI / 2; p.greet = 0;
+    }
+  }
+  function beginGreet2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      p.gsx = p.x; p.gsy = p.y; p.gfa = p.fa; p.greet = 0;
+    }
+  }
+  function animateGreet2D(c) {
+    var k = clamp(c.stageT / 1.75, 0, 1);
+    var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      var cap = i === captainIndex2D(s);
+      var tx = cap ? LEN / 2 + (s ? 3.8 : -3.8) : p.hu;
+      var ty = cap ? MIDY : p.hy;
+      p.x = lerp(p.gsx == null ? p.x : p.gsx, tx, e);
+      p.y = lerp(p.gsy == null ? p.y : p.gsy, ty, e);
+      p.vx = p.vy = 0; p.tx = tx; p.ty = ty;
+      p.fa = s ? Math.PI : 0;
+      var g = clamp((c.stageT - (i % 3) * 0.14) / 0.42, 0, 1);
+      if (c.stageT > INTRO_GREET - 0.35) g *= clamp((INTRO_GREET - c.stageT) / 0.35, 0, 1);
+      p.greet = g;
+    }
+  }
+  function placeCoinLineup2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      var cap = i === captainIndex2D(s);
+      p.x = p.tx = cap ? LEN / 2 + (s ? 3.8 : -3.8) : p.hu;
+      p.y = p.ty = cap ? MIDY : p.hy;
+      p.vx = p.vy = 0; p.fa = s ? Math.PI : 0; p.greet = 0;
+    }
+  }
+  function placeFormation2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      p.x = p.hu; p.y = p.hy; p.vx = p.vy = 0; p.tx = p.hu; p.ty = p.hy; p.fa = s ? Math.PI : 0; p.greet = 0;
+    }
+  }
+  function beginLineup2D() {
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      p.lsx = p.x; p.lsy = p.y;
+    }
+  }
+  function animateLineup2D(c) {
+    var k = clamp(c.stageT / Math.max(0.35, INTRO_LINEUP - 0.2), 0, 1);
+    var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      p.x = lerp(p.lsx == null ? p.x : p.lsx, p.hu, e);
+      p.y = lerp(p.lsy == null ? p.y : p.lsy, p.hy, e);
+      p.vx = p.vy = 0; p.tx = p.hu; p.ty = p.hy; p.fa = s ? Math.PI : 0; p.greet = 0;
+    }
+  }
+  function setIntroStage2D(name) {
+    var c = P.cine; if (!c) return;
+    c.stage = name; c.stageT = 0; c.hudKey = "";
+    if (name === "walkout") { if (P.tunnelEl) P.tunnelEl.style.display = "block"; }
+    else { if (P.tunnelEl) P.tunnelEl.style.display = "none"; }
+    if (name === "greet") beginGreet2D();
+    else if (name === "coinCall") placeCoinLineup2D();
+    else if (name === "lineup") beginLineup2D();
+    if (c.coin) {
+      if (name === "coinCall") {
+        c.coin.show = true; c.coin.waitT = 0; c.coin.angle = 0;
+        c.coin.face = null; c.coin.call = null; c.coin.winner = null; c.coin.choice = null; c.coin.rivalWhy = null;
+      } else if (name === "choose" || name === "rivalChoice") {
+        c.coin.show = true; c.coin.waitT = 0; c.coin.angle = 0;
+      } else if (name === "lineup") c.coin.show = false;
+    }
+    renderCoin2D(true);
+  }
+  function tickCinema2D(dt) {
+    var c = P.cine; if (!c) return;
+    c.t += dt; c.stageT += dt;
+    P.cam.x = LEN / 2; P.cam.y = MIDY; P.cam.z = 1; P.focus = null;
+    if (c.coin) {
+      c.coin.angle += dt * (c.stage === "coinFlip" ? 17 : 1.1);
+      if (c.stage === "coinCall") {
+        c.coin.waitT += dt;
+        if (c.coin.waitT >= COIN_WAIT) coinCall2D(Math.random() < 0.5 ? "cara" : "cruz");
+      }
+    }
+    if (!P.cine) return;
+    if (c.stage === "walkout") {
+      animateWalkout2D(c);
+      if (c.stageT >= INTRO_WALK) setIntroStage2D("greet");
+    } else if (c.stage === "greet") {
+      animateGreet2D(c);
+      if (c.stageT >= INTRO_GREET) setIntroStage2D("coinCall");
+    } else if (c.stage === "coinFlip") {
+      if (c.stageT >= COIN_FLIP) setIntroStage2D("coinResult");
+    } else if (c.stage === "coinResult") {
+      if (c.stageT >= COIN_RESULT) {
+        if (c.coin.winner === 0) setIntroStage2D("choose");
+        else {
+          var plan = chooseRivalToss2D();
+          c.coin.choice = plan.choice; c.coin.rivalWhy = plan.why;
+          setIntroStage2D("rivalChoice");
+        }
+      }
+    } else if (c.stage === "choose") {
+      c.coin.waitT += dt;
+      if (c.coin.choice == null && c.coin.waitT >= CHOICE_WAIT) coinChoice2D(Math.random() < 0.5 ? "campo" : "pelota");
+    } else if (c.stage === "rivalChoice") {
+      if (c.stageT >= RIVAL_WAIT) { setIntroStage2D("choiceResult"); applyCoinChoice2D(); }
+    } else if (c.stage === "choiceResult") {
+      if (c.stageT >= COIN_RESULT) setIntroStage2D("lineup");
+    } else if (c.stage === "lineup") {
+      animateLineup2D(c);
+      if (c.stageT >= INTRO_LINEUP) { finishIntro2D(); return; }
+    }
+    if (!P.cine) return;
+    renderCoin2D(false);
+  }
+  function coinCall2D(v) {
+    var c = P.cine;
+    if (!c || c.stage !== "coinCall" || (v !== "cara" && v !== "cruz")) return false;
+    if (c.coin.call != null) return false;
+    c.coin.call = v;
+    c.coin.face = Math.random() < 0.5 ? "cara" : "cruz";
+    c.coin.winner = c.coin.face === c.coin.call ? 0 : 1;
+    setIntroStage2D("coinFlip");
+    return true;
+  }
+  function coinChoice2D(v) {
+    var c = P.cine;
+    if (!c || c.stage !== "choose" || (v !== "campo" && v !== "pelota")) return false;
+    if (c.coin.choice != null) return false;
+    c.coin.choice = v;
+    setIntroStage2D("choiceResult");
+    if (v === "campo") applyCoinChoice2D();
+    return true;
+  }
+  function applyCoinChoice2D() {
+    var c = P.cine; if (!c || c.fieldFlipped) return;
+    if (!c.coin || c.coin.choice !== "campo") return;
+    c.fieldFlipped = true;
+    P.flip = !P.flip;
+    P.cam.x = LEN / 2; P.cam.y = MIDY; P.cam.z = 1;
+  }
+  function finishIntro2D() {
+    var c = P.cine; if (!c) return;
+    applyCoinChoice2D();
+    P.cine = null; P.introDone = true;
+    if (P.tunnelEl) P.tunnelEl.style.display = "none";
+    hideCoin2D();
+    P.msg = null; P.focus = null; P.cele = null; P.hardUntil = 0; P.softUntil = 0;
+    P.cam.x = LEN / 2; P.cam.y = MIDY; P.cam.z = 1;
+    for (var s = 0; s < 2; s++) for (var i = 0; i < P.T[s].length; i++) {
+      var p = P.T[s][i]; if (!p) continue;
+      p.x = p.hu; p.y = p.hy; p.ix = p.x; p.iy = p.y; p.fa = s ? Math.PI : 0; p.greet = 0;
+    }
+    kickoff(P.own);
+  }
+  function cinema() {
+    if (!P || !P.cine) return null;
+    var c = P.cine, coin = null;
+    if (c.coin) coin = {show: !!c.coin.show, call: c.coin.call, face: c.coin.face, winner: c.coin.winner,
+      choice: c.coin.choice, waitT: +(c.coin.waitT || 0).toFixed(3), angle: +(c.coin.angle || 0).toFixed(3), rivalWhy: c.coin.rivalWhy || null};
+    return {type: c.type, stage: c.stage, t: +c.t.toFixed(3), stageT: +c.stageT.toFixed(3), coin: coin};
+  }
+  function skipCinema() {
+    if (!P || !P.cine) return false;
+    var c = P.cine;
+    if (c.coin && c.coin.choice == null) c.coin.choice = "pelota";
+    finishIntro2D();
+    return true;
+  }
+  function esc2D(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (ch) {
+      return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[ch];
+    });
+  }
+  function fmtMul2D(v) { return (Math.round((v == null ? 1 : +v) * 100) / 100).toFixed(2).replace(".", ","); }
+  function tossContext2D() {
+    var t = P.toss || {}, my = +t.myLevel, opp = +t.oppLevel;
+    if (!isFinite(my)) my = 75;
+    if (!isFinite(opp)) opp = 75;
+    var style = String(t.style || "balanced");
+    if (["possession", "direct", "press", "counter", "balanced"].indexOf(style) < 0) style = "balanced";
+    var wx = t.wx && typeof t.wx === "object" ? t.wx : {};
+    if (!wx.key) wx = {key: "sun", icon: "☀", name: tr("Despejado"), effect: tr("Campo rápido"), mul: 1};
+    return {myName: String(t.myName || tr("Tu equipo")), opp: String(t.oppName || tr("Rival")),
+      myLevel: my, oppLevel: opp, diff: my - opp, style: style,
+      styleLabel: tr({possession: "Posesión", direct: "Juego directo", press: "Presión alta",
+        counter: "Contragolpe", balanced: "Equilibrado"}[style]), wx: wx};
+  }
+  function tossAdvice2D(choice) {
+    var x = tossContext2D(), pros = [], cons = [];
+    if (choice === "campo") {
+      pros.push(tr("Eliges la orientación y hacia qué portería atacar."));
+      if (x.wx.key === "rain") pros.push(tr("Con el césped resbaladizo, proteges el lado de tu salida."));
+      else if (x.wx.key === "heat") pros.push(tr("Evitas atacar de cara al sol en el segundo tiempo."));
+      else if (x.wx.key === "cold") pros.push(tr("Puedes elegir el lado con menos viento y nieve."));
+      if (x.style === "possession") cons.push(tr("Su posesión se adapta a cualquier orientación."));
+      else if (x.style === "press") cons.push(tr("Su presión alta puede cerrarte la banda que defiendes."));
+      else if (x.style === "direct") cons.push(tr("Su juego directo funciona igual en las dos porterías."));
+      else if (x.style === "counter") cons.push(tr("Te cederá el balón y buscará tu espalda desde el inicio."));
+      if (x.diff < -3) cons.push(tr("El cambio de lado no compensa su superioridad."));
+    } else {
+      pros.push(tr("Conservas el saque de centro y marcas el primer ritmo."));
+      if (x.style === "possession") pros.push(tr("Le obligas a correr detrás del balón desde el inicio."));
+      else if (x.style === "direct") pros.push(tr("Puedes jugar el primer balón en largo sin presión."));
+      else if (x.style === "press") cons.push(tr("Su presión alta puede atrapar tu primer pase."));
+      else if (x.style === "counter") cons.push(tr("Te cede la iniciativa y espera tu error para salir en contra."));
+      if (x.wx.key === "rain") cons.push(tr("El balón corre más: el primer pase puede escaparse."));
+      else if (x.wx.key === "cold") cons.push(tr("El balón pesado exige un primer toque más firme."));
+      else if (x.wx.key === "heat") pros.push(tr("Dosificar el ritmo desde el saque ahorra fuerzas."));
+      if (x.diff > 3) pros.push(tr("Tu superioridad te permite dominar el primer balón."));
+      if (x.diff < -3) cons.push(tr("Si el rival es superior, perderás el balón en zonas peligrosas."));
+    }
+    if (!pros.length) pros.push(tr("Mantienes tu plan de saque sin cambios."));
+    if (!cons.length) cons.push(tr("No cambias de lado: mantienes la orientación actual."));
+    return {pros: pros.slice(0, 2), cons: cons.slice(0, 2)};
+  }
+  function chooseRivalToss2D() {
+    var x = tossContext2D();
+    if (x.style === "press") return {choice: "campo", why: tr("Quiere presionar hacia su propia grada en el primer tiempo.")};
+    if (x.style === "possession") return {choice: "campo", why: tr("Prefiere ordenar el campo y defender con la línea adelantada.")};
+    if (x.style === "direct") return {choice: "campo", why: tr("Busca atacar con el sol o el viento a favor en el segundo tiempo.")};
+    if (x.style === "counter") return {choice: "campo", why: tr("Quiere que su bloque pueda salir en contra hacia su banquillo.")};
+    if (x.diff <= -4) return {choice: "pelota", why: tr("No necesita cambiar nada: confía en su nivel y te deja el primer balón.")};
+    if (x.wx.key === "rain") return {choice: "campo", why: tr("Busca que la lluvia complique tu salida desde atrás.")};
+    return {choice: "campo", why: tr("Elige el lado que mejor encaja con su plan de partido.")};
+  }
+  function coinButton2D(txt, attr, val) {
+    return '<button type="button" ' + attr + '="' + val + '" style="min-width:68px;padding:6px 10px;margin:2px;border-radius:7px;border:1px solid rgba(255,255,255,.38);background:rgba(244,190,48,.92);color:#172018;font:800 11px system-ui;cursor:pointer">' + txt + "</button>";
+  }
+  function tossCard2D(choice, title) {
+    var a = tossAdvice2D(choice);
+    var html = '<div style="flex:1;min-width:0;padding:3px;border-radius:7px;background:rgba(255,255,255,.055);text-align:left">' +
+      coinButton2D(title, "data-p2d-choice", choice);
+    for (var i = 0; i < a.pros.length; i++) html += '<span data-p2d-pro="' + choice + '" style="display:block;color:#b9ffd6;font:600 9px/1.18 system-ui;margin:2px 1px 0">✓ ' + esc2D(a.pros[i]) + "</span>";
+    for (var j = 0; j < a.cons.length; j++) html += '<span data-p2d-con="' + choice + '" style="display:block;color:#ffd0a8;font:600 9px/1.18 system-ui;margin:2px 1px 0">✗ ' + esc2D(a.cons[j]) + "</span>";
+    return html + "</div>";
+  }
+  function tossMeta2D() {
+    var x = tossContext2D(), wx = x.wx;
+    var mul = wx.mul != null ? wx.mul : wx.fatigue;
+    return '<div data-p2d-toss-meta="1" style="display:block;font:600 9px/1.3 system-ui;opacity:.82;margin-top:4px;text-align:left">' +
+      "🌤 " + tr("Clima") + ": " + esc2D((wx.icon || "☀") + " " + (wx.name || tr("Despejado"))) + " · " + esc2D(wx.effect || tr("Campo rápido")) + " · " + tr("Fatiga") + " ×" + fmtMul2D(mul) + "<br>" +
+      tr("Rival") + ": " + esc2D(x.opp) + " · " + tr("Nivel") + " " + x.oppLevel + " · " + esc2D(x.styleLabel) + "</div>";
+  }
+  function timer2D(labelTxt, max) {
+    var c = P.cine, total = max || (c && c.stage === "choose" ? CHOICE_WAIT : COIN_WAIT);
+    var left = Math.max(0, Math.ceil(total - ((c && c.coin && c.coin.waitT) || 0)));
+    return '<div data-p2d-timer="1" style="display:block;font:700 10px/1.3 system-ui;margin-top:4px;color:#fff0b0">⏱ ' + esc2D(labelTxt) + ': <b>' + left + " s</b></div>";
+  }
+  function updateTimer2D() {
+    if (!P || !P.coinEl) return;
+    var el = P.coinEl.querySelector("[data-p2d-timer] b"); if (!el) return;
+    var c = P.cine; if (!c || !c.coin) return;
+    var total = c.stage === "choose" ? CHOICE_WAIT : COIN_WAIT;
+    el.textContent = Math.max(0, Math.ceil(total - (c.coin.waitT || 0))) + " s";
+  }
+  function hideCoin2D() {
+    if (!P || !P.coinEl) return;
+    P.coinEl.style.display = "none";
+    P.coinEl.innerHTML = "";
+  }
+  function renderCoin2D(force) {
+    if (!P || !P.coinEl) return;
+    var c = P.cine;
+    if (!c) { hideCoin2D(); return; }
+    var stage = c.stage, coin = c.coin || {};
+    var key = stage + "|" + (coin.winner == null ? "" : coin.winner) + "|" + (coin.choice || "") + "|" + (coin.call || "") + "|" +
+      (coin.face || "") + "|" + (P.toss ? [P.toss.myLevel, P.toss.oppLevel, P.toss.style, P.toss.wx && P.toss.wx.key].join(",") : "");
+    if (!force && key === c.hudKey) { updateTimer2D(); return; }
+    c.hudKey = key;
+    var title = "display:block;font:800 12px/1.2 system-ui", sub = "display:block;font:500 10px/1.25 system-ui;opacity:.84;margin-top:2px";
+    var s = "", face = coin.face === "cara" ? tr("Cara") : tr("Cruz");
+    if (stage === "walkout") {
+      s = '<b style="' + title + '">' + tr("Salida de los equipos") + "</b>" +
+        '<span style="' + sub + '">' + tr("Los jugadores salen del túnel. Después, el sorteo.") + "</span>" + tossMeta2D();
+    } else if (stage === "greet") {
+      s = '<b style="' + title + '">' + tr("Alineaciones listas") + "</b>" +
+        '<span style="' + sub + '">' + tr("En breve, el cara o cruz.") + "</span>" + tossMeta2D();
+    } else if (stage === "coinCall") {
+      s = '<b style="' + title + '">' + tr("Cara o cruz") + "</b>" +
+        '<span style="' + sub + '">' + tr("Elige tu llamada.") + "</span>" +
+        '<div style="margin-top:4px">' + coinButton2D(tr("Cara"), "data-p2d-coin", "cara") + coinButton2D(tr("Cruz"), "data-p2d-coin", "cruz") + "</div>" +
+        timer2D(tr("Tiempo para llamar"), COIN_WAIT) + tossMeta2D();
+    } else if (stage === "coinFlip") {
+      s = '<b style="' + title + '">' + tr("La moneda está en el aire…") + "</b>" +
+        '<span style="' + sub + '">' + tr("Has llamado {v}.", {v: coin.call === "cara" ? tr("Cara") : tr("Cruz")}) + "</span>" + tossMeta2D();
+    } else if (stage === "coinResult") {
+      s = '<b style="' + title + '">' + tr("Salió {v}.", {v: face}) + "</b>" +
+        '<span style="display:block;font:600 10px system-ui;margin-top:2px;color:' + (coin.winner === 0 ? "#b9ffd6" : "#ffd0a8") + '">' +
+        (coin.winner === 0 ? tr("Ganas el sorteo.") : tr("Gana el rival.")) + "</span>" + tossMeta2D();
+    } else if (stage === "choose") {
+      s = '<b style="' + title + '">' + tr("¡Ganaste el sorteo!") + "</b>" +
+        '<span style="' + sub + '">' + tr("¿Campo o pelota?") + "</span>" +
+        '<div style="display:flex;gap:4px;margin-top:4px">' + tossCard2D("campo", tr("Campo")) + tossCard2D("pelota", tr("Pelota")) + "</div>" +
+        '<span style="display:block;font:500 9px/1.2 system-ui;opacity:.62;margin-top:2px">' + tr("Campo cambia de lado · Pelota mantiene el saque") + "</span>" +
+        timer2D(tr("Tiempo para elegir"), CHOICE_WAIT) + tossMeta2D();
+    } else if (stage === "rivalChoice") {
+      var rp = coin.choice === "campo" ? tr("Campo") : tr("Pelota");
+      s = '<b style="' + title + '">' + tr("Gana el rival el sorteo") + "</b>" +
+        '<span style="display:block;font:600 10px/1.25 system-ui;margin-top:2px">' + tr("Elige {v}.", {v: rp}) + "</span>" +
+        '<span data-p2d-rival-why="1" style="display:block;font:500 9px/1.25 system-ui;opacity:.82;margin-top:2px">' +
+        esc2D(coin.rivalWhy || tr("Elige el lado que mejor encaja con su plan de partido.")) + "</span>" + tossMeta2D();
+    } else if (stage === "choiceResult") {
+      var cc = coin.choice === "campo" ? tr("Campo elegido") : tr("Saque elegido");
+      var res = coin.winner === 1 ? tr("El rival decide: ") : "";
+      s = '<b style="' + title + '">' + esc2D(res + cc) + "</b>" +
+        '<span data-p2d-choice-result="' + (coin.choice || "") + '" style="display:block;font:500 10px/1.25 system-ui;opacity:.82;margin-top:2px">' +
+        (coin.choice === "campo" ? tr("Cambiamos de lado antes del saque. Conservas el saque de centro.") : tr("No cambiamos de lado. Conservas el saque de centro.")) + "</span>" + tossMeta2D();
+    }
+    if (!s) { hideCoin2D(); return; }
+    P.coinEl.innerHTML = s;
+    P.coinEl.style.display = "block";
+    updateTimer2D();
   }
   function goalLabel(s, who) {
     var p = P.T[s] && P.T[s][who], n = p && p.nm ? p.nm : "";
@@ -983,6 +1478,12 @@ var Pitch = (function () {
   function event(e) {
     if (!P) return;
     if (P.rp) { P.rp.ev.push(e); return; }
+    /* el descanso/final espera a que termine la jugada en curso (un gol en el 45') */
+    if ((e.t === "half" || e.t === "end") && P.ck + 0.01 < P.hardUntil) {
+      var delayed = Object.assign({}, e);
+      setTimeout2(P.hardUntil - P.ck + 0.1, function () { event(delayed); });
+      return;
+    }
     /* arranca la segunda parte: fuera el cartel del descanso */
     if (e.t !== "half" && e.t !== "end") clearHalf();
     var t0 = P.ck, cue = e.cue;
@@ -1008,6 +1509,7 @@ var Pitch = (function () {
   function effRate() { return P.speed >= 3 && P.ck < P.hiUntil ? SPEEDK : P.rate; }
   function busy() {
     if (!P) return 0;
+    if (P.cine) return 620;
     var b = Math.max(0, P.hardUntil - P.ck) / effRate() * 1000;
     if (P.rp) b += (P.rp.fr[P.rp.fr.length - 1].ck - P.rp.ck) / 0.42 * 1000;
     if (P.rpAt) b += Math.max(0, P.rpAt.at - P.ck) / effRate() * 1000 + (P.rpAt.to - P.rpAt.from) / 0.42 * 1000;
@@ -1017,6 +1519,7 @@ var Pitch = (function () {
     if (!P) return;
     flushCues();
     P.q = []; P.cele = null; P.hardUntil = 0; P.softUntil = 0; P.msg = null; P.focus = null; P.stopUntil = 0;
+    if (P.cine) { P.cine = null; P.introDone = true; hideCoin2D(); if (P.tunnelEl) P.tunnelEl.style.display = "none"; }
     clearOv(); kickoff(P.own);
   }
 
@@ -1024,6 +1527,8 @@ var Pitch = (function () {
   function tick(dt) {
     var sdt = dt * effRate(), ck, s, i;
     P.ck += sdt; ck = P.ck;
+    P.lastSdt = sdt;
+    if (P.cine) { tickCinema2D(sdt); return; }
     while (P.q.length && P.q[0].at <= ck) { var st = P.q.shift(); try { st.go(); } catch (e) { if (window.console) console.error(e); } }
     for (i = P.cues.length - 1; i >= 0; i--) if (P.cues[i].at <= ck + 0.01) { var c = P.cues[i]; P.cues.splice(i, 1); try { c.fn(); } catch (e2) {} }
     ballTick(sdt);
@@ -1251,6 +1756,68 @@ var Pitch = (function () {
     if (hh * 2 >= WID + 2 * my) cam.y = MIDY;
   }
 
+  /* Moneda 2D dibujada sobre el círculo central. Usa el mismo ángulo que la
+     moneda 3D: gira sobre su eje y se aplana en los cantos. */
+  function drawCoin2D(c, m, sx, sy, ck) {
+    var cine = P.cine, co = cine && cine.coin;
+    if (!co || !co.show) { P.coinVisual = null; return; }
+    var cx = m + LEN / 2 * sx, cy = m + MIDY * sy;
+    var r = Math.max(11, Math.min(P.w, P.h) * 0.047);
+    var spin = Math.abs(Math.cos(co.angle || 0));
+    var ry = Math.max(2.8, r * spin);
+    var y = cy - 2 + Math.sin(ck * 2.4) * 1.6;
+    var reveal = (co.face === "cara" || co.face === "cruz") && cine.stage !== "coinCall" && cine.stage !== "coinFlip";
+    P.coinVisual = {visible: true, stage: cine.stage, x: +(cx / sx - m / sx).toFixed(3), y: +(cy / sy - m / sy).toFixed(3),
+      angle: +(co.angle || 0).toFixed(3), spin: +spin.toFixed(3), face: co.face || null, radius: +r.toFixed(2)};
+    c.save();
+    /* halo y sombra sobre el césped */
+    var glow = c.createRadialGradient(cx, y, ry * 0.2, cx, y, r * 2.35);
+    glow.addColorStop(0, "rgba(255,229,128,.34)");
+    glow.addColorStop(0.55, "rgba(255,201,63,.12)");
+    glow.addColorStop(1, "rgba(255,201,63,0)");
+    c.fillStyle = glow; c.beginPath(); c.arc(cx, y, r * 2.35, 0, PI2); c.fill();
+    c.fillStyle = "rgba(0,0,0,.30)";
+    c.beginPath(); c.ellipse(cx + 2, cy + r * 0.82, r * 0.72, r * 0.22, 0, 0, PI2); c.fill();
+    /* El espejo del segundo tiempo no debe invertir la cara de la moneda. */
+    c.translate(cx, y);
+    if (P.flip) c.scale(-1, 1);
+    c.fillStyle = "#7d5205";
+    c.beginPath(); c.ellipse(0, 0, r * 1.05, Math.max(3, ry * 1.05), 0, 0, PI2); c.fill();
+    var grad = c.createLinearGradient(-r, -ry, r, ry);
+    grad.addColorStop(0, "#fff0a8"); grad.addColorStop(0.34, "#f5c531");
+    grad.addColorStop(0.68, "#d99a10"); grad.addColorStop(1, "#8c5d04");
+    c.fillStyle = grad;
+    c.beginPath(); c.ellipse(0, 0, r, ry, 0, 0, PI2); c.fill();
+    c.strokeStyle = "rgba(255,248,190,.92)"; c.lineWidth = Math.max(1.2, r * 0.07); c.stroke();
+    if (ry > r * 0.28) {
+      c.strokeStyle = "rgba(112,70,0,.58)"; c.lineWidth = Math.max(1, r * 0.045);
+      c.beginPath(); c.ellipse(0, 0, r * 0.78, ry * 0.78, 0, 0, PI2); c.stroke();
+      c.fillStyle = "rgba(255,249,205,.30)";
+      c.beginPath(); c.ellipse(-r * 0.28, -ry * 0.28, r * 0.38, Math.max(1, ry * 0.25), -0.62, 0, PI2); c.fill();
+    }
+    if (reveal && spin > 0.38) {
+      c.fillStyle = "#382300"; c.textAlign = "center"; c.textBaseline = "middle";
+      c.font = "800 " + Math.round(r * 0.94) + "px 'Atkinson Hyperlegible Next', system-ui, sans-serif";
+      c.fillText(co.face === "cara" ? "C" : "X", 0, 1);
+    } else if (spin > 0.52) {
+      c.fillStyle = "rgba(65,42,0,.82)"; c.textAlign = "center"; c.textBaseline = "middle";
+      c.font = "800 " + Math.round(r * 0.9) + "px 'Atkinson Hyperlegible Next', system-ui, sans-serif";
+      c.fillText("?", 0, 1);
+    }
+    c.restore();
+    /* destellos alrededor para que el giro se lea incluso en pantallas pequeñas */
+    var tw = 0.55 + 0.45 * Math.sin(ck * 6.2);
+    c.strokeStyle = "rgba(255,240,164," + (0.38 + 0.42 * tw).toFixed(2) + ")";
+    c.lineWidth = Math.max(1, r * 0.055);
+    for (var i = 0; i < 4; i++) {
+      var a = ck * 0.8 + i * Math.PI / 2, d0 = r * 1.24, d1 = r * (1.38 + 0.1 * tw);
+      c.beginPath();
+      c.moveTo(cx + Math.cos(a) * d0, y + Math.sin(a) * d0 * 0.72);
+      c.lineTo(cx + Math.cos(a) * d1, y + Math.sin(a) * d1 * 0.72);
+      c.stroke();
+    }
+  }
+
   /* ---------- dibujo ---------- */
   function draw() {
     var c = P.ctx, w = P.w, h = P.h, dp = P.dpr, m = P.m, sx = P.sx, sy = P.sy, cam = P.cam, z = cam.z, ck = P.ck, i, s;
@@ -1289,6 +1856,20 @@ var Pitch = (function () {
       c.beginPath(); c.moveTo(X0, y1); c.lineTo(back, y1); c.quadraticCurveTo(back - dd * Math.abs(nb), m + nyy * sy, back, y2); c.lineTo(X0, y2); c.stroke();
       c.restore();
     }
+    /* boca del túnel: la fila 2D sale de una boca visible, no de la nada */
+    if (P.cine && P.cine.stage === "walkout") {
+      var tmx = m + LEN / 2 * sx, tmw = Math.max(18, 8.5 * sx), tmh = Math.max(16, 5.8 * sy);
+      var tg = c.createLinearGradient(0, m - tmh, 0, m + tmh * 0.45);
+      tg.addColorStop(0, "rgba(2,7,6,.98)"); tg.addColorStop(0.62, "rgba(5,15,12,.92)"); tg.addColorStop(1, "rgba(5,15,12,0)");
+      c.save();
+      c.fillStyle = tg;
+      c.beginPath(); c.moveTo(tmx - tmw, m - tmh); c.lineTo(tmx - tmw, m);
+      c.quadraticCurveTo(tmx, m + tmh * 0.52, tmx + tmw, m);
+      c.lineTo(tmx + tmw, m - tmh); c.closePath(); c.fill();
+      c.strokeStyle = "rgba(185,255,214,.32)"; c.lineWidth = 1.2;
+      c.beginPath(); c.moveTo(tmx - tmw * 0.86, m); c.quadraticCurveTo(tmx, m + tmh * 0.36, tmx + tmw * 0.86, m); c.stroke();
+      c.restore();
+    }
     /* sombras primero (sol desde arriba a la izquierda) */
     var r = P.r, b = P.ball;
     c.fillStyle = "rgba(0,0,0,.3)";
@@ -1300,8 +1881,10 @@ var Pitch = (function () {
     c.globalAlpha = 1;
     /* sombra del balón: más pequeña, más tenue y desplazada cuanto más alto va */
     var br = Math.max(3.2, r * 0.44), bx = m + b.x * sx, by = m + b.y * sy, bz = b.z;
-    c.fillStyle = "rgba(0,0,0," + (0.38 * (1 - Math.min(0.65, bz * 0.07))).toFixed(3) + ")";
-    c.beginPath(); c.ellipse(bx + 1 + bz * sx * 0.32, by + br * 0.55 + bz * sy * 0.12, br * (1 - Math.min(0.35, bz * 0.04)), br * 0.45 * (1 - Math.min(0.35, bz * 0.04)), 0, 0, PI2); c.fill();
+    if (!P.cine) {
+      c.fillStyle = "rgba(0,0,0," + (0.38 * (1 - Math.min(0.65, bz * 0.07))).toFixed(3) + ")";
+      c.beginPath(); c.ellipse(bx + 1 + bz * sx * 0.32, by + br * 0.55 + bz * sy * 0.12, br * (1 - Math.min(0.35, bz * 0.04)), br * 0.45 * (1 - Math.min(0.35, bz * 0.04)), 0, 0, PI2); c.fill();
+    }
     /* estela de pases y tiros (0,3 s) */
     var tn = now();
     for (i = P.trails.length - 1; i >= 0; i--) {
@@ -1336,7 +1919,7 @@ var Pitch = (function () {
       c.strokeStyle = "rgba(" + cl + "," + (1 - fa2).toFixed(3) + ")"; c.lineWidth = 2; c.beginPath(); c.arc(fxx, fyy, r * (0.6 + fa2 * 2.4), 0, PI2); c.stroke();
     }
     /* jugadores */
-    if (P.fontR !== r) { P.fontR = r; P.font = "800 " + Math.round(r * 1.02) + "px Archivo, system-ui, sans-serif"; }
+    if (P.fontR !== r) { P.fontR = r; P.font = "800 " + Math.round(r * 1.02) + "px 'Atkinson Hyperlegible Next', system-ui, sans-serif"; }
     c.textAlign = "center"; c.textBaseline = "middle"; c.font = P.font;
     for (s = 0; s < 2; s++) {
       var col = P.cols[s], tcol = ink(col), gcol = shade(col, 0.68), gink = ink(gcol), edge = lum(col) > 0.6 ? shade(col, 0.55) : "rgba(255,255,255,.85)";
@@ -1368,6 +1951,18 @@ var Pitch = (function () {
         }
         c.fillStyle = q.off ? "#ffd7da" : q.gk ? gink : tcol;
         txt(String(q.n), x, y + 0.5);
+        /* saludo de la entrada: brazo y mano visibles en ambos equipos */
+        if (q.greet > 0.02 && !q.off && !q.dive) {
+          var asd = s === 0 ? 1 : -1;
+          var hx = x + asd * r * (0.9 + 0.16 * q.greet);
+          var hy = y - r * (0.72 + 0.6 * q.greet) + Math.sin(ck * 8 + q.ph) * r * 0.08;
+          c.strokeStyle = "rgba(255,247,225,.92)"; c.lineWidth = Math.max(1.5, r * 0.2); c.lineCap = "round";
+          c.beginPath(); c.moveTo(x + fx * r * 0.55, y + fy * r * 0.55);
+          c.quadraticCurveTo(x + asd * r * 0.42, y - r * 0.52, hx, hy); c.stroke();
+          c.fillStyle = "#f2d1a7"; c.strokeStyle = "rgba(25,22,15,.45)"; c.lineWidth = 1;
+          c.beginPath(); c.arc(hx, hy, Math.max(1.2, r * 0.27), 0, PI2); c.fill(); c.stroke();
+          c.lineCap = "butt";
+        }
         /* amonestado: contorno amarillo fijo */
         if (q.yc && !q.off) { c.strokeStyle = "#ffd23a"; c.lineWidth = 2.2; c.beginPath(); c.arc(x, y, r + 2.2, 0, PI2); c.stroke(); }
         if (q.off) { c.strokeStyle = "#ff3b48"; c.lineWidth = 2.2; c.beginPath(); c.arc(x, y, r + 2.2, 0, PI2); c.stroke(); }
@@ -1382,6 +1977,8 @@ var Pitch = (function () {
         c.globalAlpha = 1;
       }
     }
+    /* moneda del sorteo: el dibujo sustituye al antiguo panel sin animación */
+    drawCoin2D(c, m, sx, sy, ck);
     /* tarjetas */
     for (i = 0; i < P.cards.length; i++) {
       var kd = P.cards[i], cp = pl(kd.s, kd.i) || (P.T[kd.s] && P.T[kd.s][kd.i]); if (!cp || ck < kd.at) continue;
@@ -1398,11 +1995,13 @@ var Pitch = (function () {
       c.fillStyle = "#ffd23a"; c.fillRect(fxp, fyp + up * 12 - (up < 0 ? 0 : 6), 7, 6);
       c.fillStyle = "#ff3b48"; c.fillRect(fxp + 3.5, fyp + up * 12 - (up < 0 ? 0 : 6), 3.5, 3);
     }
-    /* balón (crece con la altura) */
-    var lift = bz * sy * 0.55, rr = br * (1 + Math.min(1.4, bz * 0.085));
-    c.fillStyle = "#fbfbf6"; c.strokeStyle = "#20262a"; c.lineWidth = 1.1;
-    c.beginPath(); c.arc(bx, by - lift, rr, 0, PI2); c.fill(); c.stroke();
-    c.fillStyle = "#20262a"; c.beginPath(); c.arc(bx, by - lift, rr * 0.36, 0, PI2); c.fill();
+    /* balón (crece con la altura); en la entrada está guardado en el túnel */
+    if (!P.cine) {
+      var lift = bz * sy * 0.55, rr = br * (1 + Math.min(1.4, bz * 0.085));
+      c.fillStyle = "#fbfbf6"; c.strokeStyle = "#20262a"; c.lineWidth = 1.1;
+      c.beginPath(); c.arc(bx, by - lift, rr, 0, PI2); c.fill(); c.stroke();
+      c.fillStyle = "#20262a"; c.beginPath(); c.arc(bx, by - lift, rr * 0.36, 0, PI2); c.fill();
+    }
     /* iconos flotantes sobre las fichas */
     c.font = Math.round(r * 1.25) + "px sans-serif";
     for (i = P.icons.length - 1; i >= 0; i--) {
@@ -1414,6 +2013,7 @@ var Pitch = (function () {
     c.globalAlpha = 1; c.font = P.font;
     /* rótulos (sin cámara) */
     c.setTransform(dp, 0, 0, dp, 0, 0);
+    drawWeather2D(c, w, h, ck);
     if (P.msg) {
       var age = ck - P.msg.at, life = P.msg.small ? 1.4 : P.msg.long ? 2.3 : 1.9;
       if (!P.msg.keep && age > life + 0.4) P.msg = null;
@@ -1423,13 +2023,44 @@ var Pitch = (function () {
         c.fillStyle = "rgba(6,12,14,.55)"; c.fillRect(0, h / 2 - hh / 2, w, hh);
         c.fillStyle = P.msg.s < 0 ? "#edf1e8" : P.cols[P.msg.s];
         var fs0 = Math.round(P.msg.small ? h * 0.1 : h * 0.18);
-        c.font = "900 " + fs0 + "px 'Big Shoulders Display', Impact, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
-        var mw = c.measureText(P.msg.t).width; if (mw > w * 0.92) { fs0 = Math.floor(fs0 * w * 0.92 / mw); c.font = "900 " + fs0 + "px 'Big Shoulders Display', Impact, sans-serif"; }
+        c.font = "900 " + fs0 + "px CamDisp, 'Atkinson Hyperlegible Next', sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
+        var mw = c.measureText(P.msg.t).width; if (mw > w * 0.92) { fs0 = Math.floor(fs0 * w * 0.92 / mw); c.font = "900 " + fs0 + "px CamDisp, 'Atkinson Hyperlegible Next', sans-serif"; }
         c.strokeStyle = "rgba(0,0,0,.6)"; c.lineWidth = 4; c.strokeText(P.msg.t, w / 2, h / 2 + 2); c.fillText(P.msg.t, w / 2, h / 2 + 2);
         c.globalAlpha = 1;
       }
     }
   }
+  /* lluvia y nieve 2D: mismo estado que el 3D, sin assets ni WebGL. */
+  function drawWeather2D(c, w, h, ck) {
+    if (!P || !P.wxParts) return;
+    var kind = P.wx;
+    if (kind !== "rain" && kind !== "cold" && kind !== "heat") return;
+    var n = RM ? Math.min(16, P.wxParts.length) : P.wxParts.length;
+    c.save();
+    if (kind === "heat") {
+      var hg = c.createLinearGradient(0, 0, 0, h);
+      hg.addColorStop(0, "rgba(255,158,54,.055)"); hg.addColorStop(1, "rgba(255,88,20,.025)");
+      c.fillStyle = hg; c.fillRect(0, 0, w, h);
+    } else if (kind === "rain") {
+      c.strokeStyle = "rgba(185,215,255,.42)"; c.lineWidth = 1;
+      for (var i = 0; i < n; i++) {
+        var p = P.wxParts[i];
+        var x = ((p.x + ck * 0.012 * p.v) % 1) * w;
+        var y = ((p.y + ck * 0.55 * p.v) % 1) * h;
+        c.beginPath(); c.moveTo(x, y); c.lineTo(x - 2.2 * p.s, y + 9 * p.s); c.stroke();
+      }
+    } else {
+      c.fillStyle = "rgba(255,255,255,.72)";
+      for (var j = 0; j < n; j++) {
+        var q = P.wxParts[j];
+        var sx = ((q.x + Math.sin(ck * 0.4 + q.y * 6) * 0.01) % 1) * w;
+        var sy = ((q.y + ck * 0.035 * q.v) % 1) * h;
+        c.beginPath(); c.arc(sx, sy, 1.1 * q.s, 0, PI2); c.fill();
+      }
+    }
+    c.restore();
+  }
+
   /* ---------- repeticiones (versión 3.1): se graban los últimos segundos y se reproducen a cámara lenta ---------- */
   function rpRec() {
     var f = P.rpF = P.rpF || [], ck = P.ck;
@@ -1473,13 +2104,13 @@ var Pitch = (function () {
   function rpBadge() {
     var c = P.ctx, dp = P.dpr, t = "↺ " + (P.lab.replay || "REPETICIÓN");
     c.setTransform(dp, 0, 0, dp, 0, 0);
-    c.font = "800 12px 'Archivo', sans-serif"; c.textAlign = "left"; c.textBaseline = "middle";
+    c.font = "800 12px 'Atkinson Hyperlegible Next', sans-serif"; c.textAlign = "left"; c.textBaseline = "middle";
     var w = c.measureText(t).width + 26, x0 = P.w - w - 8;
     c.fillStyle = "rgba(11,20,23,.78)"; c.fillRect(x0, 8, w, 22);
     c.fillStyle = "#ffb21e"; c.fillText(t, x0 + 8, 19);
     if (Math.floor(now() / 500) % 2) { c.fillStyle = "#ff5b66"; c.beginPath(); c.arc(x0 + w - 9, 19, 3.5, 0, 6.3); c.fill(); }
   }
-  function replay() { if (!P || P.rp || P.frozen) return false; return rpStart(P.ck - 6, P.ck); }
+  function replay() { if (!P || P.rp || P.frozen || P.cine) return false; return rpStart(P.ck - 6, P.ck); }
   /* bucle: la física avanza a paso fijo (30 por segundo, con subpasos a velocidad alta) y el dibujo interpola
      entre los dos últimos estados, así se ve igual de suave en cualquier pantalla y la simulación no depende de los FPS */
   var STEP = 1 / 30;
@@ -1525,5 +2156,6 @@ var Pitch = (function () {
   function clearHalf() { if (P && P.msg && P.msg.keep && P.msg.t === P.lab.half) P.msg = null; }
   function freeze(v) { if (P) { if (v && !P.frozen) flushCues(); P.frozen = !!v; if (!v) { P.last = now(); if (P.half2) clearHalf(); } } }
   return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy, reset: reset, clearMsg: clearMsg, freeze: freeze, replay: replay,
+    cinema: cinema, skipCinema: skipCinema,
     active: function () { return !!P; }, sound: function () { return Snd.isOn(); }, debug: function () { return P; }};
 })();

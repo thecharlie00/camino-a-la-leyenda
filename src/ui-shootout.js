@@ -87,6 +87,8 @@
     if (!nk || typeof Minigame === "undefined") return;
     var pressure = Math.max(0.1, Math.min(1, (st.imp || 1) / 3));
     V.wait = false; V.run = true;
+    /* 5.6: marcador de la tanda con los escudos dentro del minijuego */
+    if (Minigame.setBoard) { var tm = teams(), sc = SO.score(st); Minigame.setBoard({h: tm[0], a: tm[1], gh: sc[0], ga: sc[1], us: "h", tag: tr("Penaltis")}); }
     if (nk.side === 0) {
       var sk = Math.round(Math.max(40, Math.min(95, nk.t.pen - Math.max(0, nk.t.fat - 20) * 0.2)));
       Minigame.penalty({skill: sk, gk: Math.round(Math.max(40, Math.min(95, st.gkThem))), pressure: pressure, press: nk.press, rand: R}, function (res) {

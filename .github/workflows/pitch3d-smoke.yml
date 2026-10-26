@@ -1,0 +1,85 @@
+name: Smoke test del prototipo 3D
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/pitch3d.js"
+      - "src/pitch3d-assets.js"
+      - "src/pitch.js"
+      - "src/match41.js"
+      - "src/ui.js"
+      - "assets/**"
+      - "build.py"
+      - "test/**"
+      - ".github/workflows/pitch3d-smoke.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pitch3d-smoke-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  web-smoke:
+    name: Build web + syntax + simulation tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install build dependencies
+        run: cd tools && npm ci --silent
+      - name: Check JavaScript syntax
+        run: |
+          node --check src/pitch3d-assets.js
+          node --check src/pitch3d.js
+          node --check src/pitch.js
+          node --check src/match41.js
+          node --check test/pitch3d.js
+      - name: Build bundled game
+        run: |
+          node tools/i18n.js build
+          python3 build.py
+          test -s dist/index-noads.html
+          grep -q "Probar vista 3D" dist/index-noads.html
+          python3 - <<'PY'
+          import json, pathlib, re
+          html = pathlib.Path("dist/index.html").read_text()
+          m = re.search(r"var P3D_ASSET_PACK = (\{.*?\});", html)
+          pack = json.loads(m.group(1)) if m else {}
+          assert len(pack) == 12, "P3D_ASSET_PACK incompleto: %d" % len(pack)
+          assert "ball_lod1" in pack and "female_lod1" in pack, "faltan GLB de jugadora o balón"
+          assert "Pitch3DAssets" in html, "falta el parser de assets"
+          print("Pitch3D: 12 GLB incrustados")
+          PY
+      - name: Existing simulation regression tests
+        run: |
+          node test/sim.js 3
+          node test/modes.js
+
+  browser-smoke:
+    name: Navegador + WebGL (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NODE_PATH: ${{ github.workspace }}/tools/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright and Chromium
+        run: |
+          cd tools
+          npm ci --silent
+          npm install --no-save --no-package-lock playwright@1.64.1
+          npx playwright install --with-deps chromium
+      - name: Run isolated 3D browser smoke
+        run: node test/pitch3d.js

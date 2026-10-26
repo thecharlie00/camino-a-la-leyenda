@@ -29,7 +29,7 @@
       var x = CHAL[S.ch.k], r = S.ch.res;
       o += '<section class="card chcard"><div class="head"><span class="tag hot"><span class="dot"></span>' + tr("Desafío") + '</span><span class="eyebrow">' + h(tr(x.n)) + "</span></div>" +
         (r ? '<p class="chres">' + (r.medal ? MEDAL_IC[r.medal] + " " + tr("Superado: medalla de {m}.", {m: h(medalW(r.medal))}) : tr("No superado. La partida sigue: puedes intentarlo de nuevo en otra.")) + "</p>"
-          : '<p class="muted" style="margin:6px 0 0;font-size:13.5px">' + h(tr(x.goal)) + "</p>" + (S.ch.k === "cant" ? '<p class="muted" style="margin:4px 0 0;font-size:13px">' + tr("Temporada {n} de 3. El mercado de fichajes está cerrado para ti.", {n: Math.min(3, S.m.seasons.length - S.ch.n0 + 1)}) + "</p>" : "")) + "</section>";
+          : '<p class="muted" style="margin:6px 0 0;font-size:var(--fs-sm)">' + h(tr(x.goal)) + "</p>" + (S.ch.k === "cant" ? '<p class="muted" style="margin:4px 0 0;font-size:var(--fs-sm)">' + tr("Temporada {n} de 3. El mercado de fichajes está cerrado para ti.", {n: Math.min(3, S.m.seasons.length - S.ch.n0 + 1)}) + "</p>" : "")) + "</section>";
     }
     var cr = S.m.crisis || 0;
     if (cr && S.m.club >= 0) o += '<section class="card crcard lv' + cr + '"><div class="presrow"><span class="presic" aria-hidden="true">' + (cr >= 3 ? "🚨" : cr === 2 ? "⚠️" : "😬") + '</span><div class="grow"><b>' + tr("Crisis de nivel {n} de 3", {n: cr}) + "</b><small>" + (cr >= 2 ? tr("La directiva aprieta y el vestuario está tocado. Dos buenos resultados seguidos la rebajan.") : tr("Malas sensaciones. Si sigues perdiendo, irá a más.")) + "</small></div></div></section>";
@@ -50,10 +50,10 @@
     var o = "", me = U.myClub(), li = me >= 0 ? S.cl[me] : -1;
     if (S.mode === "mgr" && S.m && typeof rvTop === "function") {
       var top = rvTop(3);
-      if (top.length) o += '<section class="card"><h3>' + tr("Tus rivalidades") + '</h3><div class="kvlist" style="margin-top:6px">' + top.map(function (c) { var v = rvOf()[c], f = v >= 8 ? "🔥🔥🔥" : v >= 5 ? "🔥🔥" : "🔥"; return "<div><span>" + U.crest(c) + " " + h(clubName(c)) + "</span><span>" + f + "</span></div>"; }).join("") + '</div><p class="muted" style="font-size:12.5px;margin:6px 0 0">' + tr("Crecen con derbis, finales, expulsiones y derrotas. Ganar a un gran rival alegra a la afición; perder, la enfada.") + "</p></section>";
+      if (top.length) o += '<section class="card"><h3>' + tr("Tus rivalidades") + '</h3><div class="kvlist" style="margin-top:6px">' + top.map(function (c) { var v = rvOf()[c], f = v >= 8 ? "🔥🔥🔥" : v >= 5 ? "🔥🔥" : "🔥"; return "<div><span>" + U.crest(c) + " " + h(clubName(c)) + "</span><span>" + f + "</span></div>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-xs);margin:6px 0 0">' + tr("Crecen con derbis, finales, expulsiones y derrotas. Ganar a un gran rival alegra a la afición; perder, la enfada.") + "</p></section>";
     }
     var R = li >= 0 ? recOf(li) : null;
-    if (R) o += '<section class="card"><h3>' + tr("Récords de {lg}", {lg: h(lgName(li))}) + '</h3><div class="kvlist" style="margin-top:6px">' + recRow(tr("Más puntos"), R.pts) + recRow(tr("Más goles a favor"), R.gf) + recRow(tr("Menos goles en contra"), R.ga) + '</div><p class="muted" style="font-size:12.5px;margin:6px 0 0">' + tr("Desde que empezó tu partida.") + "</p></section>";
+    if (R) o += '<section class="card"><h3>' + tr("Récords de {lg}", {lg: h(lgName(li))}) + '</h3><div class="kvlist" style="margin-top:6px">' + recRow(tr("Más puntos"), R.pts) + recRow(tr("Más goles a favor"), R.gf) + recRow(tr("Menos goles en contra"), R.ga) + '</div><p class="muted" style="font-size:var(--fs-xs);margin:6px 0 0">' + tr("Desde que empezó tu partida.") + "</p></section>";
     return o;
   });
 

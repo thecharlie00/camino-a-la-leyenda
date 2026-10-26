@@ -35,7 +35,7 @@
       o += card("🪑", trn(b.bench, "{n} partido sin jugar", "{n} partidos sin jugar"),
         h(b.promise ? tr("El míster te ha prometido la titularidad en el próximo partido.") : pc ? tr("El míster se lo está pensando: +{p} % de opciones de ser titular en el próximo partido.", {p: pc}) : tr("Si sigues sin jugar, el míster empezará a plantearse darte una oportunidad.")), "lv1");
     }
-    if (blpMgBonus()) o += '<div class="qchip blpchip">🎯 ' + h(tr("Confianza +{n} en tu próximo penalti o falta", {n: blpMgBonus()})) + "</div>";
+    if (false && blpMgBonus()) o += '<div class="qchip blpchip">🎯 ' + h(tr("Confianza +{n} en tu próximo penalti o falta", {n: blpMgBonus()})) + "</div>";
     return o;
   });
 })();

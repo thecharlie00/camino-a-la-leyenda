@@ -39,6 +39,19 @@ public class MainActivity extends Activity {
         public void remind(String title, String text, int minutes) { Remind.schedule(MainActivity.this, title, text, minutes); }
         @JavascriptInterface
         public void cancelRemind() { Remind.cancel(MainActivity.this); }
+        /* 5.6: respuesta háptica corta. performHapticFeedback respeta el ajuste de vibración táctil del sistema
+           y no necesita permisos. kind: "tap" (suave), "ok" (acierto), "bad" (fallo), "big" (gol, parada) */
+        @JavascriptInterface
+        public void haptic(final String kind) {
+            runOnUiThread(new Runnable() { public void run() {
+                if (web == null) return;
+                int c = android.view.HapticFeedbackConstants.KEYBOARD_TAP;
+                if ("ok".equals(kind)) c = android.os.Build.VERSION.SDK_INT >= 30 ? 16 /* CONFIRM */ : android.view.HapticFeedbackConstants.VIRTUAL_KEY;
+                else if ("bad".equals(kind)) c = android.os.Build.VERSION.SDK_INT >= 30 ? 17 /* REJECT */ : android.view.HapticFeedbackConstants.LONG_PRESS;
+                else if ("big".equals(kind)) c = android.view.HapticFeedbackConstants.LONG_PRESS;
+                web.performHapticFeedback(c);
+            } });
+        }
         @JavascriptInterface
         public void askNotify() {
             runOnUiThread(new Runnable() { public void run() {

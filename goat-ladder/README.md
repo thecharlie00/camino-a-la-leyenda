@@ -54,3 +54,7 @@ Every score is capped at 1,000. Match score components are returned as a breakdo
 - **Manager season:** win rate (0–300), unbeaten season (120), division/team-strength challenge (0–250), goal difference (0–100), trophies (0–240), and league title (180).
 
 The game currently does not generate possession, xG or key passes. Those schema fields remain nullable and are not fabricated in client submissions. `test/goat.js` checks input validation, score boundaries, CORS, and create/delete API behavior.
+
+## Honours (palmarés)
+
+Each season row can carry optional `trophy_keys` and `award_keys` arrays (same length as `trophies`/`awards`) so the ranking can draw each title with its pixel trophy. The Worker keeps them when they match the names one-to-one and drops them otherwise. Without them (older entries or a Worker deployed before this change), the clients guess the icon from the title's name. No database migration is needed: the keys live inside `history_json`. Redeploy the Worker to start storing them.
