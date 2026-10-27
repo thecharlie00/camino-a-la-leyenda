@@ -2,7 +2,7 @@ var GOAT_WEB_BUILD = true;
 var WEB_BUILD = true;
 var NO_ADS = true;
 var BUILD = {v: "5.2", code: 42, t: "2026-10-19T15:00:00Z"};
-var GOAT_API_URL = "";
+var GOAT_API_URL = "https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev";
 
 ;
 /* ===== IDIOMAS =====
@@ -56831,9 +56831,33 @@ function blpLuck(k) { return Math.min(BLP.luckMax, blpBad(k) * BLP.luckStep); }
 /* Envío voluntario del resumen de partido/temporada a GOAT LADDER. */
 (function (root) {
   "use strict";
-  var apiOrigin = typeof GOAT_API_URL === "string" ? GOAT_API_URL.replace(/\/+$/, "") : "";
+  /* Origen del servicio. Se normaliza para que una URL mal copiada (esquema duplicado,
+     espacios, barra final o un «/api» de más) no acabe en un fetch imposible que el
+     navegador solo puede resolver con «Failed to fetch». */
+  var apiOrigin = normalizeOrigin(typeof GOAT_API_URL === "string" ? GOAT_API_URL : "");
   var memoryDeleteTokens = {};
   var TOKEN_STORAGE_KEY = "camino.goat.deleteTokens";
+  var REQUEST_TIMEOUT = 15000;
+  var CAREER_TIMEOUT = 25000;
+  var SIMPLE_CONTENT_TYPE = "text/plain;charset=UTF-8";
+  var MAX_CAREER_BYTES = 100000;
+
+  function normalizeOrigin(value) {
+    var raw = String(value == null ? "" : value).replace(/^\s+|\s+$/g, "");
+    if (!raw) return "";
+    var secure = !/^http:\/\//i.test(raw);
+    var host = raw.replace(/^(?:https?:)?[:\/]+/i, "");
+    while (/^https?[:\/]/i.test(host)) host = host.replace(/^https?[:\/]+/i, "");
+    host = host.replace(/\/+$/, "");
+    if (!/^[a-z0-9.-]+(:\d+)?(\/[^\s]*)?$/i.test(host)) return "";
+    var hostname = host.split(/[\/:]/)[0];
+    if (!hostname || (hostname !== "localhost" && hostname.indexOf(".") < 0)) return "";
+    var parsed;
+    try { parsed = new URL((secure ? "https://" : "http://") + host); } catch (error) { return ""; }
+    var base = (parsed.origin + parsed.pathname).replace(/\/+$/, "");
+    if (/\/api$/i.test(base)) base = base.replace(/\/api$/i, "");
+    return base;
+  }
 
   function safeName(name) {
     return String(name == null ? "" : name).replace(/^\s+|\s+$/g, "");
@@ -57020,15 +57044,123 @@ function blpLuck(k) { return Math.min(BLP.luckMax, blpBad(k) * BLP.luckStep); }
       goal_difference: row.gf - row.ga
     });
   }
-  function request(path, options) {
-    return fetch(apiOrigin + path, options).then(function (response) {
-      return response.text().then(function (body) {
-        var data;
-        try { data = body ? JSON.parse(body) : {}; } catch (error) { throw new Error("Invalid GOAT LADDER response"); }
-        if (!response.ok) throw new Error(data.error || ("GOAT LADDER HTTP " + response.status));
-        return data;
+  /* Textos del servicio (los define ui-goat.js en GOAT_TEXT). */
+  function text(key) {
+    var language = typeof LANG === "string" ? LANG : "es";
+    var tables = root.GOAT_TEXT || {};
+    var table = tables[language] || tables.es || {};
+    return table[key] || (tables.es || {})[key] || key;
+  }
+  function delay(ms) {
+    return new Promise(function (resolve) { setTimeout(resolve, ms); });
+  }
+  /* Error con un mensaje ya traducido y apto para enseñar tal cual en la interfaz. */
+  function failure(kind, extra) {
+    var error = new Error(text(kind));
+    error.goatKind = kind;
+    if (extra && extra.status != null) error.status = extra.status;
+    if (extra && extra.cause) error.cause = extra.cause;
+    return error;
+  }
+  function isNetworkFailure(error) {
+    if (!error || error.goatKind || error.name === "AbortError") return false;
+    if (typeof TypeError === "function" && error instanceof TypeError) return true;
+    return /load failed|failed to fetch|networkerror|network request failed/i.test(String(error.message || ""));
+  }
+  function isContentTypeRejection(error) {
+    return !!(error && !error.goatKind && (error.status === 415 || error.status === 400 || error.status === 405));
+  }
+  function timedFetch(url, options, timeout) {
+    var controller = typeof AbortController === "function" ? new AbortController() : null;
+    var copy = {};
+    Object.keys(options || {}).forEach(function (key) { copy[key] = options[key]; });
+    var timer = null;
+    if (controller) {
+      copy.signal = controller.signal;
+      timer = setTimeout(function () { controller.abort(); }, timeout);
+    }
+    return fetch(url, copy).then(function (response) {
+      if (timer) clearTimeout(timer);
+      return response;
+    }, function (error) {
+      if (timer) clearTimeout(timer);
+      if (error && error.name === "AbortError") throw failure("timeoutError", {cause: error});
+      throw error;
+    });
+  }
+  function readResponse(response) {
+    return response.text().then(function (body) {
+      var data;
+      try { data = body ? JSON.parse(body) : {}; } catch (error) { throw failure("responseError", {status: response.status}); }
+      if (!response.ok) {
+        var rejected = new Error(data && typeof data.error === "string" && data.error
+          ? data.error : "GOAT LADDER HTTP " + response.status);
+        rejected.status = response.status;
+        throw rejected;
+      }
+      return data;
+    });
+  }
+  /* Petición al ranking. Se intenta primero como hasta ahora (JSON con su petición previa
+     de CORS); si la red falla, se reintenta enviando el mismo JSON como «text/plain», que
+     no dispara ese preflight y evita el temido «Failed to fetch» cuando el servicio no
+     responde bien a las peticiones OPTIONS. Si el servicio exige «application/json», se
+     vuelve a ese tipo. Los cortes de red se reintentan una sola vez. */
+  function request(path, options, config) {
+    config = config || {};
+    if (!apiOrigin) return Promise.reject(failure("unavailable"));
+    if (root.navigator && root.navigator.onLine === false) return Promise.reject(failure("offlineError"));
+    var url = apiOrigin + path;
+    var timeout = config.timeout || REQUEST_TIMEOUT;
+    var body = options && typeof options.body === "string" ? options.body : null;
+    function attempt(contentType) {
+      var copy = {};
+      Object.keys(options || {}).forEach(function (key) { copy[key] = options[key]; });
+      var headers = {};
+      Object.keys(copy.headers || {}).forEach(function (key) { headers[key] = copy.headers[key]; });
+      headers.Accept = "application/json";
+      if (body != null && contentType) headers["Content-Type"] = contentType;
+      copy.headers = headers;
+      copy.mode = "cors";
+      copy.credentials = "omit";
+      copy.cache = "no-store";
+      return timedFetch(url, copy, timeout).then(readResponse);
+    }
+    function send(contentType) {
+      return attempt(contentType).catch(function (error) {
+        if (body != null && contentType !== "application/json" && isContentTypeRejection(error)) {
+          return attempt("application/json");
+        }
+        throw error;
+      });
+    }
+    return Promise.resolve().then(function () {
+      return send(body != null ? "application/json" : null);
+    }).catch(function (error) {
+      if (!isNetworkFailure(error)) throw error;
+      return delay(config.retryDelay == null ? 700 : config.retryDelay).then(function () {
+        return send(SIMPLE_CONTENT_TYPE);
+      }).catch(function (second) {
+        if (!isNetworkFailure(second)) throw second;
+        try { console.error("GOAT LADDER request failed", url, second); } catch (logError) {}
+        throw failure("networkError", {cause: second});
       });
     });
+  }
+  /* El ranking solo necesita el resumen; si el historial es enorme se recortan las
+     temporadas más antiguas (las métricas agregadas no cambian) para que el envío
+     no se rechace por tamaño. */
+  function careerPayload(career) {
+    var payload = {};
+    Object.keys(career).forEach(function (key) { payload[key] = career[key]; });
+    if (!Array.isArray(payload.history)) return payload;
+    var history = payload.history.slice();
+    payload.history = history;
+    while (history.length > 1 && utf8Size(JSON.stringify(payload)) > MAX_CAREER_BYTES) history.shift();
+    return payload;
+  }
+  function utf8Size(value) {
+    try { return new TextEncoder().encode(value).length; } catch (error) { return value.length * 2; }
   }
   function storedDeleteTokens() {
     try {
@@ -57069,35 +57201,30 @@ function blpLuck(k) { return Math.min(BLP.luckMax, blpBad(k) * BLP.luckStep); }
     latest: function () { return S && S.goatLatest ? S.goatLatest : null; },
     career: careerSnapshot,
     canDelete: function (id) { return !!(memoryDeleteTokens[id] || storedDeleteTokens()[id]); },
-    t: function (key) {
-      var language = typeof LANG === "string" ? LANG : "es";
-      return (root.GOAT_TEXT[language] || root.GOAT_TEXT.es)[key] || root.GOAT_TEXT.es[key] || key;
-    },
+    t: text,
     list: function (mode, timeframe) {
-      if (!apiOrigin) return Promise.reject(new Error("GOAT API is not configured"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
       return Promise.resolve().then(function () {
         return request("/api/goat-ladder?mode=" + encodeURIComponent(mode) + "&timeframe=" +
           encodeURIComponent(timeframe), {method: "GET"});
       }).then(function (data) { return data.entries || []; });
     },
     submit: function (latest, displayName, title) {
-      if (!apiOrigin) return Promise.reject(new Error("GOAT API is not configured"));
-      if (!latest || !latest.event_key) return Promise.reject(new Error("No match or season is ready to publish"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
+      if (!latest || !latest.event_key) return Promise.reject(failure("noLatest"));
       var payload = {};
       Object.keys(latest).forEach(function (key) { payload[key] = latest[key]; });
       payload.display_name = safeName(displayName);
       payload.title = safeName(title);
       return Promise.resolve().then(function () {
-        return request("/api/goat-ladder", {
-          method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)
-        });
+        return request("/api/goat-ladder", {method: "POST", body: JSON.stringify(payload)});
       }).then(function (data) {
         data.delete_token_saved = keepDeleteToken(data.id, data.delete_token);
         return data;
       });
     },
     listCareers: function (mode, timeframe, metric) {
-      if (!apiOrigin) return Promise.reject(new Error("GOAT API is not configured"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
       return Promise.resolve().then(function () {
         return request("/api/goat-ladder/careers?mode=" + encodeURIComponent(mode) +
           "&timeframe=" + encodeURIComponent(timeframe) + "&metric=" + encodeURIComponent(metric),
@@ -57105,16 +57232,14 @@ function blpLuck(k) { return Math.min(BLP.luckMax, blpBad(k) * BLP.luckStep); }
       }).then(function (data) { return data.entries || []; });
     },
     submitCareer: function (career, displayName, title) {
-      if (!apiOrigin) return Promise.reject(new Error("GOAT API is not configured"));
-      if (!career || !career.event_key) return Promise.reject(new Error("No career is ready to publish"));
-      var payload = {};
-      Object.keys(career).forEach(function (key) { payload[key] = career[key]; });
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
+      if (!career || !career.event_key) return Promise.reject(failure("careerNoData"));
+      var payload = careerPayload(career);
       payload.display_name = safeName(displayName);
       payload.title = safeName(title);
       return Promise.resolve().then(function () {
-        return request("/api/goat-ladder/careers", {
-          method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)
-        });
+        return request("/api/goat-ladder/careers", {method: "POST", body: JSON.stringify(payload)},
+          {timeout: CAREER_TIMEOUT});
       }).then(function (data) {
         data.delete_token_saved = keepDeleteToken(data.id, data.delete_token);
         return data;
@@ -57122,7 +57247,8 @@ function blpLuck(k) { return Math.min(BLP.luckMax, blpBad(k) * BLP.luckStep); }
     },
     deleteEntry: function (id) {
       var token = memoryDeleteTokens[id] || storedDeleteTokens()[id];
-      if (!apiOrigin || !token) return Promise.reject(new Error("No deletion token is available on this device"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
+      if (!token) return Promise.reject(failure("deleteMissing"));
       return request("/api/goat-ladder?id=" + encodeURIComponent(id), {
         method: "DELETE", headers: {Authorization: "Bearer " + token}
       }).then(function (data) {
@@ -57132,7 +57258,8 @@ function blpLuck(k) { return Math.min(BLP.luckMax, blpBad(k) * BLP.luckStep); }
     },
     deleteCareer: function (id) {
       var token = memoryDeleteTokens[id] || storedDeleteTokens()[id];
-      if (!apiOrigin || !token) return Promise.reject(new Error("No deletion token is available on this device"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
+      if (!token) return Promise.reject(failure("deleteMissing"));
       return request("/api/goat-ladder/careers?id=" + encodeURIComponent(id), {
         method: "DELETE", headers: {Authorization: "Bearer " + token}
       }).then(function (data) {
@@ -57175,6 +57302,8 @@ function blpLuck(k) { return Math.min(BLP.luckMax, blpBad(k) * BLP.luckStep); }
     };
   }
 })(typeof window !== "undefined" ? window : this);
+
+
 
 ;
 /* Escudos y camisetas en SVG inline. Autónomo (ES5), sin dependencias.
@@ -63269,6 +63398,12 @@ var Pitch = (function () {
       minutes: "Minutos", result: "Resultado", record: "Balance", position: "Posición",
       competition: "Competición", club: "Club",
       opponent: "Rival", submitted: "Gesta publicada", error: "No se pudo completar la solicitud", close: "Cerrar",
+      networkError: "No se pudo conectar con el ranking. Comprueba tu conexión (y desactiva VPN, DNS privado o bloqueadores) y vuelve a intentarlo.",
+      timeoutError: "El ranking está tardando demasiado en responder. Vuelve a intentarlo en un momento.",
+      offlineError: "Parece que no hay conexión. Conéctate a internet y vuelve a intentarlo.",
+      responseError: "El ranking devolvió una respuesta no válida. Vuelve a intentarlo más tarde.",
+      retrySubmit: "Reintentar envío",
+      deleteMissing: "No hay ninguna clave de eliminación guardada en este dispositivo.",
       modePlayer: "Ranking Jugador", modeManager: "Ranking Míster", login: "No hace falta crear una cuenta.",
       submitConsent: "Debes aceptar la publicación antes de enviar.", validation: "Escribe un alias de 2 a 32 caracteres y un título.",
       delete: "Eliminar mi gesta", deleteConfirm: "¿Quieres eliminar esta entrada del ranking?",
@@ -63306,6 +63441,12 @@ var Pitch = (function () {
       minutes: "Minutes", result: "Result", record: "W-D-L", position: "Position",
       competition: "Competition", club: "Club",
       opponent: "Opponent", submitted: "Record published", error: "The request could not be completed", close: "Close",
+      networkError: "Could not reach the ranking. Check your connection (turn off VPNs, private DNS or blockers) and try again.",
+      timeoutError: "The ranking is taking too long to respond. Please try again in a moment.",
+      offlineError: "You appear to be offline. Connect to the internet and try again.",
+      responseError: "The ranking returned an invalid response. Please try again later.",
+      retrySubmit: "Retry submission",
+      deleteMissing: "No deletion key is stored on this device.",
       modePlayer: "Player ranking", modeManager: "Manager ranking", login: "No account is required.",
       submitConsent: "Accept publication before submitting.", validation: "Enter an alias (2–32 characters) and a title.",
       delete: "Delete my record", deleteConfirm: "Delete this entry from the ranking?",
@@ -63343,6 +63484,12 @@ var Pitch = (function () {
       minutes: "Minuten", result: "Ergebnis", record: "Bilanz", position: "Platz",
       competition: "Wettbewerb", club: "Verein",
       opponent: "Gegner", submitted: "Erfolg veröffentlicht", error: "Die Anfrage konnte nicht abgeschlossen werden", close: "Schließen",
+      networkError: "Keine Verbindung zur Rangliste. Prüfe deine Verbindung (und deaktiviere VPN, privates DNS oder Blocker) und versuche es erneut.",
+      timeoutError: "Die Rangliste antwortet zu langsam. Bitte versuche es gleich noch einmal.",
+      offlineError: "Du bist offline. Stelle eine Internetverbindung her und versuche es erneut.",
+      responseError: "Die Rangliste hat eine ungültige Antwort geliefert. Bitte versuche es später erneut.",
+      retrySubmit: "Erneut senden",
+      deleteMissing: "Auf diesem Gerät ist kein Löschschlüssel gespeichert.",
       modePlayer: "Spieler-Rangliste", modeManager: "Manager-Rangliste", login: "Kein Konto erforderlich.",
       submitConsent: "Stimme der Veröffentlichung vor dem Senden zu.", validation: "Gib einen Alias (2–32 Zeichen) und einen Titel ein.",
       delete: "Meinen Eintrag löschen", deleteConfirm: "Diesen Eintrag aus der Rangliste löschen?",
@@ -63380,6 +63527,12 @@ var Pitch = (function () {
       minutes: "Minuti", result: "Risultato", record: "Bilancio", position: "Posizione",
       competition: "Competizione", club: "Club",
       opponent: "Avversario", submitted: "Impresa pubblicata", error: "Impossibile completare la richiesta", close: "Chiudi",
+      networkError: "Impossibile raggiungere la classifica. Controlla la connessione (e disattiva VPN, DNS privato o blocchi) e riprova.",
+      timeoutError: "La classifica sta impiegando troppo a rispondere. Riprova tra un momento.",
+      offlineError: "Sembra che tu non sia connesso. Connettiti a internet e riprova.",
+      responseError: "La classifica ha restituito una risposta non valida. Riprova più tardi.",
+      retrySubmit: "Riprova invio",
+      deleteMissing: "Nessuna chiave di eliminazione salvata su questo dispositivo.",
       modePlayer: "Classifica giocatori", modeManager: "Classifica mister", login: "Non serve un account.",
       submitConsent: "Accetta la pubblicazione prima di inviare.", validation: "Inserisci un alias (2–32 caratteri) e un titolo.",
       delete: "Elimina il mio record", deleteConfirm: "Eliminare questa voce dalla classifica?",
@@ -63417,6 +63570,12 @@ var Pitch = (function () {
       minutes: "Minutes", result: "Résultat", record: "B-N-D", position: "Position",
       competition: "Compétition", club: "Club",
       opponent: "Adversaire", submitted: "Exploit publié", error: "La requête n'a pas pu aboutir", close: "Fermer",
+      networkError: "Impossible de joindre le classement. Vérifie ta connexion (désactive VPN, DNS privé ou bloqueurs) et réessaie.",
+      timeoutError: "Le classement met trop de temps à répondre. Réessaie dans un instant.",
+      offlineError: "Tu sembles hors ligne. Connecte-toi à internet et réessaie.",
+      responseError: "Le classement a renvoyé une réponse non valide. Réessaie plus tard.",
+      retrySubmit: "Renvoyer",
+      deleteMissing: "Aucune clé de suppression n'est enregistrée sur cet appareil.",
       modePlayer: "Classement joueur", modeManager: "Classement manager", login: "Aucun compte requis.",
       submitConsent: "Accepte la publication avant l'envoi.", validation: "Saisis un alias (2–32 caractères) et un titre.",
       delete: "Supprimer mon record", deleteConfirm: "Supprimer cette entrée du classement ?",
@@ -63583,21 +63742,29 @@ var Pitch = (function () {
     var title = titleInput ? titleInput.value.trim() : "";
     sheet.alias = alias;
     sheet.title = title;
-    if (!consent || !consent.checked) { sheet.submitError = tr("submitConsent"); window.UIX.renderSheet(); return; }
+    sheet.consent = !!(consent && consent.checked);
+    if (!sheet.consent) {
+      sheet.submitError = tr("submitConsent"); sheet.submitFailed = false;
+      window.UIX.renderSheet(); return;
+    }
     if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
-      sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
+      sheet.submitError = tr("validation"); sheet.submitFailed = false;
+      window.UIX.renderSheet(); return;
     }
     sheet.submitting = true;
     sheet.submitError = "";
+    sheet.submitFailed = false;
     window.UIX.renderSheet();
     service.submit(latest, alias, title).then(function (result) {
       sheet.submitting = false;
+      sheet.submitFailed = false;
       sheet.submitSuccess = result.goat_score;
       sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
       load(sheet);
     }).catch(function (error) {
       console.error("GOAT LADDER submission failed", error);
       sheet.submitting = false;
+      sheet.submitFailed = true;
       sheet.submitError = error.message || tr("error");
       window.UIX.renderSheet();
     });
@@ -63611,21 +63778,29 @@ var Pitch = (function () {
     var title = titleInput ? titleInput.value.trim() : "";
     sheet.careerAlias = alias;
     sheet.careerTitle = title;
-    if (!consent || !consent.checked) { sheet.submitError = tr("submitConsent"); window.UIX.renderSheet(); return; }
+    sheet.careerConsent = !!(consent && consent.checked);
+    if (!sheet.careerConsent) {
+      sheet.submitError = tr("submitConsent"); sheet.submitFailed = false;
+      window.UIX.renderSheet(); return;
+    }
     if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
-      sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
+      sheet.submitError = tr("validation"); sheet.submitFailed = false;
+      window.UIX.renderSheet(); return;
     }
     sheet.submitting = true;
     sheet.submitError = "";
+    sheet.submitFailed = false;
     window.UIX.renderSheet();
     service.submitCareer(career, alias, title).then(function (result) {
       sheet.submitting = false;
+      sheet.submitFailed = false;
       sheet.submitSuccess = tr("careerPublished");
       sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
       window.UIX.renderSheet();
     }).catch(function (error) {
       console.error("GOAT LADDER career submission failed", error);
       sheet.submitting = false;
+      sheet.submitFailed = true;
       sheet.submitError = error.message || tr("error");
       window.UIX.renderSheet();
     });
@@ -63652,7 +63827,8 @@ var Pitch = (function () {
       "</p>" + CareerStatsSummary(career.metrics, career.game_mode) +
       careerInputLabel("alias", "alias", sheet.careerAlias || "") +
       careerInputLabel("title", "title", sheet.careerTitle || career.title) +
-      '<label class="goat-consent"><input type="checkbox" data-career-consent> ' +
+      '<label class="goat-consent"><input type="checkbox" data-career-consent' +
+      (sheet.careerConsent ? " checked" : "") + "> " +
       esc(tr("careerConsent")) + '</label><p class="goat-privacy">' +
       esc(tr("careerPrivacy")) + "</p>" +
       (sheet.submitError ? '<p class="goat-error" role="alert">' + esc(sheet.submitError) + "</p>" : "") +
@@ -63660,7 +63836,7 @@ var Pitch = (function () {
       (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
       '<button class="btn pri wide" data-a="goatcareerpublish"' +
       (sheet.submitting ? " disabled" : "") + ">" +
-      esc(sheet.submitting ? tr("loading") : tr("publishCareer")) +
+      esc(sheet.submitting ? tr("loading") : (sheet.submitFailed ? tr("retrySubmit") : tr("publishCareer"))) +
       '</button><button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
   }
   function inputLabel(key, attribute, value) {
@@ -63766,14 +63942,16 @@ var Pitch = (function () {
           (latest.opponent_name ? " · " + esc(latest.opponent_name) : "") +
           "</p>" + MatchStatsSummary({game_mode: latest.game_mode, metrics: latest}) +
           inputLabel("alias", "alias", sheet.alias || "") + inputLabel("title", "title", sheet.title || title) +
-          '<label class="goat-consent"><input type="checkbox" data-goat-consent> ' + esc(tr("consent")) +
+          '<label class="goat-consent"><input type="checkbox" data-goat-consent' +
+          (sheet.consent ? " checked" : "") + "> " + esc(tr("consent")) +
           '</label><p class="goat-privacy">' + esc(tr("privacy")) + "</p>" +
           (sheet.submitError ? '<p class="goat-error" role="alert">' + esc(sheet.submitError) + "</p>" : "") +
           (sheet.submitSuccess != null ? '<p class="pos">' + esc(tr("submitted")) + " · " +
             esc(sheet.submitSuccess) + " " + esc(tr("score")) + "</p>" : "") +
           (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
           '<button class="btn pri wide" data-a="goatsubmit"' + (sheet.submitting ? " disabled" : "") + ">" +
-          esc(sheet.submitting ? tr("loading") : tr("publish")) + "</button></section>"
+          esc(sheet.submitting ? tr("loading") : (sheet.submitFailed ? tr("retrySubmit") : tr("publish"))) +
+          "</button></section>"
         : '<div class="card goat-notice"><p class="muted">' + esc(tr("noLatest")) + "</p></div>";
     return '<h2>🏆 ' + esc(tr("home")) + '</h2><p class="muted">' + esc(tr("login")) + "</p>" +
       GoatFilterTabs(sheet.board, sheet.mode, sheet.timeframe, sheet.metric) +

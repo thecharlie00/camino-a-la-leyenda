@@ -15,8 +15,12 @@ android-studio/app/build/
 android-studio/local.properties
 android-studio/app/src/*/assets/index.html
 
-# --- Herramientas descargables y temporales ---
+# --- Dependencias instaladas (npm/bun/pnpm) ---
+node_modules/
+
 tools/node_modules/
+
+# --- Herramientas descargables y temporales ---
 tools/bt/
 __pycache__/
 *.pyc

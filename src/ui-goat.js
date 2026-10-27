@@ -34,6 +34,12 @@
       minutes: "Minutos", result: "Resultado", record: "Balance", position: "Posición",
       competition: "Competición", club: "Club",
       opponent: "Rival", submitted: "Gesta publicada", error: "No se pudo completar la solicitud", close: "Cerrar",
+      networkError: "No se pudo conectar con el ranking. Comprueba tu conexión (y desactiva VPN, DNS privado o bloqueadores) y vuelve a intentarlo.",
+      timeoutError: "El ranking está tardando demasiado en responder. Vuelve a intentarlo en un momento.",
+      offlineError: "Parece que no hay conexión. Conéctate a internet y vuelve a intentarlo.",
+      responseError: "El ranking devolvió una respuesta no válida. Vuelve a intentarlo más tarde.",
+      retrySubmit: "Reintentar envío",
+      deleteMissing: "No hay ninguna clave de eliminación guardada en este dispositivo.",
       modePlayer: "Ranking Jugador", modeManager: "Ranking Míster", login: "No hace falta crear una cuenta.",
       submitConsent: "Debes aceptar la publicación antes de enviar.", validation: "Escribe un alias de 2 a 32 caracteres y un título.",
       delete: "Eliminar mi gesta", deleteConfirm: "¿Quieres eliminar esta entrada del ranking?",
@@ -71,6 +77,12 @@
       minutes: "Minutes", result: "Result", record: "W-D-L", position: "Position",
       competition: "Competition", club: "Club",
       opponent: "Opponent", submitted: "Record published", error: "The request could not be completed", close: "Close",
+      networkError: "Could not reach the ranking. Check your connection (turn off VPNs, private DNS or blockers) and try again.",
+      timeoutError: "The ranking is taking too long to respond. Please try again in a moment.",
+      offlineError: "You appear to be offline. Connect to the internet and try again.",
+      responseError: "The ranking returned an invalid response. Please try again later.",
+      retrySubmit: "Retry submission",
+      deleteMissing: "No deletion key is stored on this device.",
       modePlayer: "Player ranking", modeManager: "Manager ranking", login: "No account is required.",
       submitConsent: "Accept publication before submitting.", validation: "Enter an alias (2–32 characters) and a title.",
       delete: "Delete my record", deleteConfirm: "Delete this entry from the ranking?",
@@ -108,6 +120,12 @@
       minutes: "Minuten", result: "Ergebnis", record: "Bilanz", position: "Platz",
       competition: "Wettbewerb", club: "Verein",
       opponent: "Gegner", submitted: "Erfolg veröffentlicht", error: "Die Anfrage konnte nicht abgeschlossen werden", close: "Schließen",
+      networkError: "Keine Verbindung zur Rangliste. Prüfe deine Verbindung (und deaktiviere VPN, privates DNS oder Blocker) und versuche es erneut.",
+      timeoutError: "Die Rangliste antwortet zu langsam. Bitte versuche es gleich noch einmal.",
+      offlineError: "Du bist offline. Stelle eine Internetverbindung her und versuche es erneut.",
+      responseError: "Die Rangliste hat eine ungültige Antwort geliefert. Bitte versuche es später erneut.",
+      retrySubmit: "Erneut senden",
+      deleteMissing: "Auf diesem Gerät ist kein Löschschlüssel gespeichert.",
       modePlayer: "Spieler-Rangliste", modeManager: "Manager-Rangliste", login: "Kein Konto erforderlich.",
       submitConsent: "Stimme der Veröffentlichung vor dem Senden zu.", validation: "Gib einen Alias (2–32 Zeichen) und einen Titel ein.",
       delete: "Meinen Eintrag löschen", deleteConfirm: "Diesen Eintrag aus der Rangliste löschen?",
@@ -145,6 +163,12 @@
       minutes: "Minuti", result: "Risultato", record: "Bilancio", position: "Posizione",
       competition: "Competizione", club: "Club",
       opponent: "Avversario", submitted: "Impresa pubblicata", error: "Impossibile completare la richiesta", close: "Chiudi",
+      networkError: "Impossibile raggiungere la classifica. Controlla la connessione (e disattiva VPN, DNS privato o blocchi) e riprova.",
+      timeoutError: "La classifica sta impiegando troppo a rispondere. Riprova tra un momento.",
+      offlineError: "Sembra che tu non sia connesso. Connettiti a internet e riprova.",
+      responseError: "La classifica ha restituito una risposta non valida. Riprova più tardi.",
+      retrySubmit: "Riprova invio",
+      deleteMissing: "Nessuna chiave di eliminazione salvata su questo dispositivo.",
       modePlayer: "Classifica giocatori", modeManager: "Classifica mister", login: "Non serve un account.",
       submitConsent: "Accetta la pubblicazione prima di inviare.", validation: "Inserisci un alias (2–32 caratteri) e un titolo.",
       delete: "Elimina il mio record", deleteConfirm: "Eliminare questa voce dalla classifica?",
@@ -182,6 +206,12 @@
       minutes: "Minutes", result: "Résultat", record: "B-N-D", position: "Position",
       competition: "Compétition", club: "Club",
       opponent: "Adversaire", submitted: "Exploit publié", error: "La requête n'a pas pu aboutir", close: "Fermer",
+      networkError: "Impossible de joindre le classement. Vérifie ta connexion (désactive VPN, DNS privé ou bloqueurs) et réessaie.",
+      timeoutError: "Le classement met trop de temps à répondre. Réessaie dans un instant.",
+      offlineError: "Tu sembles hors ligne. Connecte-toi à internet et réessaie.",
+      responseError: "Le classement a renvoyé une réponse non valide. Réessaie plus tard.",
+      retrySubmit: "Renvoyer",
+      deleteMissing: "Aucune clé de suppression n'est enregistrée sur cet appareil.",
       modePlayer: "Classement joueur", modeManager: "Classement manager", login: "Aucun compte requis.",
       submitConsent: "Accepte la publication avant l'envoi.", validation: "Saisis un alias (2–32 caractères) et un titre.",
       delete: "Supprimer mon record", deleteConfirm: "Supprimer cette entrée du classement ?",
@@ -348,21 +378,29 @@
     var title = titleInput ? titleInput.value.trim() : "";
     sheet.alias = alias;
     sheet.title = title;
-    if (!consent || !consent.checked) { sheet.submitError = tr("submitConsent"); window.UIX.renderSheet(); return; }
+    sheet.consent = !!(consent && consent.checked);
+    if (!sheet.consent) {
+      sheet.submitError = tr("submitConsent"); sheet.submitFailed = false;
+      window.UIX.renderSheet(); return;
+    }
     if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
-      sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
+      sheet.submitError = tr("validation"); sheet.submitFailed = false;
+      window.UIX.renderSheet(); return;
     }
     sheet.submitting = true;
     sheet.submitError = "";
+    sheet.submitFailed = false;
     window.UIX.renderSheet();
     service.submit(latest, alias, title).then(function (result) {
       sheet.submitting = false;
+      sheet.submitFailed = false;
       sheet.submitSuccess = result.goat_score;
       sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
       load(sheet);
     }).catch(function (error) {
       console.error("GOAT LADDER submission failed", error);
       sheet.submitting = false;
+      sheet.submitFailed = true;
       sheet.submitError = error.message || tr("error");
       window.UIX.renderSheet();
     });
@@ -376,21 +414,29 @@
     var title = titleInput ? titleInput.value.trim() : "";
     sheet.careerAlias = alias;
     sheet.careerTitle = title;
-    if (!consent || !consent.checked) { sheet.submitError = tr("submitConsent"); window.UIX.renderSheet(); return; }
+    sheet.careerConsent = !!(consent && consent.checked);
+    if (!sheet.careerConsent) {
+      sheet.submitError = tr("submitConsent"); sheet.submitFailed = false;
+      window.UIX.renderSheet(); return;
+    }
     if (alias.length < 2 || alias.length > 32 || !title || title.length > 64) {
-      sheet.submitError = tr("validation"); window.UIX.renderSheet(); return;
+      sheet.submitError = tr("validation"); sheet.submitFailed = false;
+      window.UIX.renderSheet(); return;
     }
     sheet.submitting = true;
     sheet.submitError = "";
+    sheet.submitFailed = false;
     window.UIX.renderSheet();
     service.submitCareer(career, alias, title).then(function (result) {
       sheet.submitting = false;
+      sheet.submitFailed = false;
       sheet.submitSuccess = tr("careerPublished");
       sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
       window.UIX.renderSheet();
     }).catch(function (error) {
       console.error("GOAT LADDER career submission failed", error);
       sheet.submitting = false;
+      sheet.submitFailed = true;
       sheet.submitError = error.message || tr("error");
       window.UIX.renderSheet();
     });
@@ -417,7 +463,8 @@
       "</p>" + CareerStatsSummary(career.metrics, career.game_mode) +
       careerInputLabel("alias", "alias", sheet.careerAlias || "") +
       careerInputLabel("title", "title", sheet.careerTitle || career.title) +
-      '<label class="goat-consent"><input type="checkbox" data-career-consent> ' +
+      '<label class="goat-consent"><input type="checkbox" data-career-consent' +
+      (sheet.careerConsent ? " checked" : "") + "> " +
       esc(tr("careerConsent")) + '</label><p class="goat-privacy">' +
       esc(tr("careerPrivacy")) + "</p>" +
       (sheet.submitError ? '<p class="goat-error" role="alert">' + esc(sheet.submitError) + "</p>" : "") +
@@ -425,7 +472,7 @@
       (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
       '<button class="btn pri wide" data-a="goatcareerpublish"' +
       (sheet.submitting ? " disabled" : "") + ">" +
-      esc(sheet.submitting ? tr("loading") : tr("publishCareer")) +
+      esc(sheet.submitting ? tr("loading") : (sheet.submitFailed ? tr("retrySubmit") : tr("publishCareer"))) +
       '</button><button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
   }
   function inputLabel(key, attribute, value) {
@@ -531,14 +578,16 @@
           (latest.opponent_name ? " · " + esc(latest.opponent_name) : "") +
           "</p>" + MatchStatsSummary({game_mode: latest.game_mode, metrics: latest}) +
           inputLabel("alias", "alias", sheet.alias || "") + inputLabel("title", "title", sheet.title || title) +
-          '<label class="goat-consent"><input type="checkbox" data-goat-consent> ' + esc(tr("consent")) +
+          '<label class="goat-consent"><input type="checkbox" data-goat-consent' +
+          (sheet.consent ? " checked" : "") + "> " + esc(tr("consent")) +
           '</label><p class="goat-privacy">' + esc(tr("privacy")) + "</p>" +
           (sheet.submitError ? '<p class="goat-error" role="alert">' + esc(sheet.submitError) + "</p>" : "") +
           (sheet.submitSuccess != null ? '<p class="pos">' + esc(tr("submitted")) + " · " +
             esc(sheet.submitSuccess) + " " + esc(tr("score")) + "</p>" : "") +
           (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
           '<button class="btn pri wide" data-a="goatsubmit"' + (sheet.submitting ? " disabled" : "") + ">" +
-          esc(sheet.submitting ? tr("loading") : tr("publish")) + "</button></section>"
+          esc(sheet.submitting ? tr("loading") : (sheet.submitFailed ? tr("retrySubmit") : tr("publish"))) +
+          "</button></section>"
         : '<div class="card goat-notice"><p class="muted">' + esc(tr("noLatest")) + "</p></div>";
     return '<h2>🏆 ' + esc(tr("home")) + '</h2><p class="muted">' + esc(tr("login")) + "</p>" +
       GoatFilterTabs(sheet.board, sheet.mode, sheet.timeframe, sheet.metric) +
