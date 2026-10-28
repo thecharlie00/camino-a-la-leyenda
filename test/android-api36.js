@@ -13,9 +13,9 @@ const gameBuilder = read('../build_legacy_game.py');
 const gameCss = read('../legacy-game/src/style.css');
 
 assert.match(manifest, /android:minSdkVersion="24"\s+android:targetSdkVersion="36"/);
-assert.match(manifest, /android:versionCode="59"/);
-assert.match(manifest, /android:versionName="5\.9"/);
-assert.equal(packageJson.version, '5.9.0');
+assert.match(manifest, /android:versionCode="60"/);
+assert.match(manifest, /android:versionName="5\.10"/);
+assert.equal(packageJson.version, '5.10.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
@@ -30,6 +30,7 @@ assert.match(activity, /setAllowUniversalAccessFromFileURLs\(false\)/);
 assert.match(activity, /setMixedContentMode\(WebSettings\.MIXED_CONTENT_NEVER_ALLOW\)/);
 
 assert.match(aabBuilder, /MANIFEST_TARGET_SDK/);
+assert.match(aabBuilder, /dist\/android\/jugar\/juego\.html/, 'AAB builder must package the Android-only startup artifact');
 assert.match(aabBuilder, /--target-sdk-version "\$TARGET_SDK_VERSION"/);
 assert.match(aabBuilder, /TARGET_SDK_VERSION must match AndroidManifest\.xml/);
 assert.match(workflow, /BUILD_TOOLS: "36\.0\.0"/);

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "2020s",
+  "label": "2020s",
+  "years": [2020, 2029],
+  "startYear": 2020,
+  "rosterMode": "generated-archetypes",
+  "rules": {"winPoints": 3, "backPassBanned": true, "transferWindows": true, "maxSubs": 5, "bosmanFreeAgency": true, "goldenGoal": false, "goalLineTech": true, "fiveSubs": true, "varByCompetition": {"FIFA World Cup": true, "Premier League": true, "UEFA Champions League": true, "La Liga": true}},
+  "media": {"channels": ["instagram", "tiktok", "here-we-go", "fan-channels", "viral-clips"], "socialMedia": true, "deadlineDayCircus": true, "rumorSpeed": "immediate"},
+  "economy": {"recordTransfer": 222000000, "wageScale": 1.0, "marketScale": 1.0, "shirtSponsorship": true, "tvDealMultiplier": 4.0, "currency": "EUR"},
+  "presentation": {"pitchWear": "hybrid-heated", "terraces": "all-seater", "fences": "removed", "heating": true, "kits": "modern-performance", "ball": "connected-match-ball", "adBoards": "dynamic-led", "uiSkin": "flat-modern", "broadcast": "4k-graphics"},
+  "staff": {"analysts": true, "sportsScience": "elite-data", "backroomMax": 14, "agents": "superagents"},
+  "playerModel": {"paceScale": 1.0, "staminaScale": 1.0, "pressingScale": 1.0, "trainingScale": 1.0},
+  "referenceClubs": ["Manchester City", "Manchester United", "Liverpool", "Chelsea", "Arsenal", "Real Madrid", "FC Barcelona", "Atlético de Madrid", "Paris Saint-Germain", "Bayern Múnich", "Inter", "Juventus"]
+}

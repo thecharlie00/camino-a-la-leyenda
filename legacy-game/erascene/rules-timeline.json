@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "events": [
+    {"year": 1981, "id": "three-points-for-win", "changes": {"rules": {"winPoints": 3}}},
+    {"year": 1990, "id": "post-taylor-grounds", "changes": {"presentation": {"terraces": "all-seater-transition", "fences": "removed-progressively"}}},
+    {"year": 1992, "id": "backpass-and-premier-league-era", "changes": {"rules": {"backPassBanned": true, "premierLeague": true, "championsLeagueBrand": true}}},
+    {"year": 1993, "id": "fixed-squad-numbers-and-golden-goal", "changes": {"rules": {"fixedShirtNumbers": true, "goldenGoal": true}}},
+    {"year": 1995, "id": "bosman-and-three-substitutes", "changes": {"rules": {"bosmanFreeAgency": true, "maxSubs": 3}}},
+    {"year": 1999, "id": "cup-winners-cup-ends", "changes": {"rules": {"recopaActive": false}}},
+    {"year": 2002, "id": "mandatory-transfer-windows", "changes": {"rules": {"transferWindows": true}}},
+    {"year": 2004, "id": "golden-goal-ends-and-commercial-web", "changes": {"rules": {"goldenGoal": false}, "media": {"socialMedia": false, "channels": ["club-websites", "forums", "sms-alerts", "sports-news-tv", "deadline-day"]}}},
+    {"year": 2010, "id": "social-networks-data-analysis-and-sports-science", "changes": {"media": {"socialMedia": true, "channels": ["websites", "twitter", "youtube", "live-blogs"]}, "staff": {"analysts": true, "sportsScience": "advanced", "backroomMax": 10}}},
+    {"year": 2013, "id": "goal-line-technology", "changes": {"rules": {"goalLineTech": true}}},
+    {"year": 2018, "id": "var-world-cup-and-european-competitions", "changes": {"rules": {"varByCompetition": {"FIFA World Cup": true, "UEFA Champions League": true, "La Liga": true}}}},
+    {"year": 2019, "id": "var-premier-league", "changes": {"rules": {"varByCompetition": {"Premier League": true}}}},
+    {"year": 2020, "id": "covid-five-substitutions", "changes": {"rules": {"fiveSubs": true, "maxSubs": 5, "compressedCovidCalendar": true}}},
+    {"year": 2022, "id": "post-covid-calendar", "changes": {"rules": {"compressedCovidCalendar": false}}}
+  ]
+}

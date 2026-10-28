@@ -1,57 +1,129 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { runInNewContext } from 'node:vm';
+import { runInNewContext, Script } from 'node:vm';
 
 const output = process.argv[2] || 'dist';
-const gamePage = join(output, 'jugar', 'juego.html');
+const webGamePage = join(output, 'jugar', 'juego.html');
+const androidGamePage = join(output, 'android', 'jugar', 'juego.html');
 const webPage = join(output, 'index.html');
 const siteRuntime = join(output, 'site.js');
 const translatedPage = join(output, 'en', 'index.html');
-
-for (const file of [gamePage, webPage, siteRuntime, translatedPage]) {
+for (const file of [webGamePage, androidGamePage, webPage, siteRuntime, translatedPage]) {
   assert.ok(existsSync(file), `Missing build output: ${file}`);
 }
 
-const html = readFileSync(gamePage, 'utf8');
-assert.match(html, /var BUILD = \{v: "5\.9", code: 59,/, 'Game bundle must match app version 5.9 (59)');
-const packMatch = html.match(/var P3D_ASSET_PACK = (\{[^;]+\});/);
-assert.ok(packMatch, 'Embedded 3D model pack is missing');
-const modelPack = JSON.parse(packMatch[1]);
+const html = readFileSync(webGamePage, 'utf8');
+const androidHtml = readFileSync(androidGamePage, 'utf8');
+const scriptMatch = html.match(/<script>\s*([\s\S]*?)<\/script>/);
+assert.ok(scriptMatch, 'Web game script is missing');
+const gameSource = scriptMatch[1];
+new Script(gameSource, {filename: 'web-game.js'});
+assert.match(gameSource, /var BUILD = \{v: "5\.10", code: 60,/);
+assert.match(gameSource, /var GOAT_WEB_BUILD = true;/);
+assert.match(gameSource, /var WEB_BUILD = true;/);
+assert.match(gameSource, /var NO_ADS = true;/);
+assert.doesNotMatch(html, /camino-module-\d+/, 'Web build must retain its existing monolithic startup');
+assert.doesNotMatch(html, /boot-screen/, 'Mobile loading UI must not leak into the web page');
+
+const webPackMatch = gameSource.match(/var P3D_ASSET_PACK = (\{[^;]+\});/);
+assert.ok(webPackMatch, 'Web build must retain its existing embedded 3D asset pack');
+const modelPack = JSON.parse(webPackMatch[1]);
 for (const model of ['male_lod1', 'female_lod1', 'goalkeeper_lod1', 'ball_lod1']) {
-  assert.ok(modelPack[model]?.length > 1000, `Missing or empty 3D model: ${model}`);
+  assert.ok(modelPack[model]?.length > 1000, `Missing web model: ${model}`);
 }
-assert.match(html, /var Pitch3D = \(function \(\)/, '3D match renderer is missing');
-assert.match(html, /var PetWorld = \(function \(\)/, '3D pet world is missing');
-assert.match(html, /var PetAudio = \(function \(\)/, 'Pet audio system is missing');
-assert.match(html, /var Music = \(function \(\)/, 'Background music system is missing');
-assert.match(html, /data-a="bgm"/, 'Background music control is missing');
-assert.match(html, /var LIFE_KIT_CATALOG = \[\]/, 'Expanded wearable kit catalog is missing');
+for (const language of ['en', 'de', 'it', 'fr']) {
+  assert.match(gameSource, new RegExp(`I18N\\.${language} = \\{`), `Web ${language} translations must remain inline`);
+}
+
+const loaderMatch = androidHtml.match(/<script>\s*([\s\S]*?)<\/script>/);
+assert.ok(loaderMatch, 'Android game loader script is missing');
+new Script(loaderMatch[1], {filename: 'android-game-loader.js'});
+assert.ok(Buffer.byteLength(loaderMatch[1]) < 5000, 'Android must execute only a tiny scheduler synchronously');
+const moduleMatches = [...androidHtml.matchAll(/<script type="text\/plain" id="camino-module-\d+">([\s\S]*?)<\/script>/g)];
+assert.ok(moduleMatches.length >= 100, `Expected Android game to be split into launch modules, got ${moduleMatches.length}`);
+const largestModule = Math.max(...moduleMatches.map((match) => Buffer.byteLength(match[1])));
+assert.ok(largestModule <= 300_000, `Android startup task is too large (${largestModule} bytes); split the module`);
+const androidSource = moduleMatches.map((match) => match[1]).join('\n');
+new Script(androidSource, {filename: 'android-game-modules.js'});
+assert.match(androidSource, /var BUILD = \{v: "5\.10", code: 60,/);
+assert.match(androidSource, /var ERAS_MODE = true;/, 'Era Mode feature flag must be embedded for Android');
+assert.doesNotMatch(androidSource, /I18N\.(en|de|it|fr) = \{"%/, 'Android locale catalogs must stay out of executable startup code');
+assert.match(androidHtml, /<template id="pitch3d-asset-pack">/, 'Android models must be deferred in a template');
+for (const language of ['en', 'de', 'it', 'fr', 'fem']) {
+  assert.match(androidHtml, new RegExp(`id="camino-i18n-${language}"`), `Missing Android lazy locale ${language}`);
+}
+assert.match(androidHtml, /function ensureI18n\(lang\)/);
+assert.match(androidHtml, /Cargando el juego…/);
+
+function readEmbeddedObject(source, marker) {
+  const markerAt = source.indexOf(marker);
+  assert.ok(markerAt >= 0, `Missing embedded object: ${marker}`);
+  const start = source.indexOf('{', markerAt + marker.length);
+  let depth = 0, quoted = false, escaped = false;
+  for (let i = start; i < source.length; i++) {
+    const ch = source[i];
+    if (quoted) {
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === '"') quoted = false;
+      continue;
+    }
+    if (ch === '"') quoted = true;
+    else if (ch === '{') depth++;
+    else if (ch === '}' && --depth === 0) return JSON.parse(source.slice(start, i + 1));
+  }
+  throw new Error(`Unterminated embedded object: ${marker}`);
+}
+const erasData = readEmbeddedObject(gameSource, 'var ERAS_DATA =');
+const erasI18n = readEmbeddedObject(gameSource, 'var ERAS_I18N =');
+const androidErasData = readEmbeddedObject(androidSource, 'var ERAS_DATA =');
+const androidErasI18n = readEmbeddedObject(androidSource, 'var ERAS_I18N =');
+assert.deepEqual(androidErasData, erasData, 'Web and Android must share the same Era Mode data');
+assert.deepEqual(androidErasI18n, erasI18n, 'Web and Android must share the same Era Mode translations');
+assert.deepEqual(erasData.packs.map((pack) => pack.id), ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']);
+assert.ok(erasData.timeline.events.some((event) => event.year === 2010 && event.changes.media.socialMedia === true), 'The social-media transition must be 2010');
+assert.ok(erasI18n['Modo Épocas']?.en, 'Era Mode translations are not embedded');
+for (const [target, source] of [['web', gameSource], ['Android', androidSource]]) {
+  assert.match(source, /var Pitch3D = \(function \(\)/, `${target} 3D match renderer is missing`);
+  assert.match(source, /var PetWorld = \(function \(\)/, `${target} 3D pet world is missing`);
+  assert.match(source, /var PetAudio = \(function \(\)/, `${target} 3D pet audio system is missing`);
+  assert.match(source, /var Music = \(function \(\)/, `${target} background music system is missing`);
+  assert.match(source, /SOC_CUSTOM_OPTIONS = \[/, `${target} player social interface is missing`);
+  assert.match(source, /var PLAYER_DECISION_THEMES = \[/, `${target} player decisions are missing`);
+  assert.match(source, /var LIFE_KIT_CATALOG = \[\]/, `${target} wearable kit catalog is missing`);
+  assert.match(source, /shirtPattern/, `${target} custom 3D kit rendering is missing`);
+}
+assert.match(gameSource, /data-a="bgm"/, 'Background music control is missing');
+assert.match(gameSource, /data-a="bgm"/, 'Background music control is missing');
+assert.match(gameSource, /var LIFE_KIT_CATALOG = \[\]/, 'Expanded wearable kit catalog is missing');
 const lifeSource = readFileSync('legacy-game/src/life.js', 'utf8');
 const catalogStart = lifeSource.indexOf('var LIFE_KIT_PATTERNS = [');
 const catalogEnd = lifeSource.indexOf('var LIFE_COS_DEF =', catalogStart);
 assert.ok(catalogStart >= 0 && catalogEnd > catalogStart, 'Kit catalog source block is missing');
-const catalogContext = { N_: (text) => text, LIFE_COS: { shirt: [] } };
+const catalogContext = {N_: (text) => text, LIFE_COS: {shirt: []}};
 runInNewContext(lifeSource.slice(catalogStart, catalogEnd), catalogContext);
 assert.equal(catalogContext.LIFE_KIT_CATALOG.length, 260, 'Expected 260 unlockable shirt designs');
 assert.equal(catalogContext.LIFE_COS.shirt.length, 260, 'All 260 kits should be selectable in the wardrobe');
-assert.match(html, /function lifeAttBonus\(\)/, 'Wearable kit stat bonuses are missing');
-assert.match(html, /SOC_CUSTOM_OPTIONS = \[/, 'Career-aware social post options are missing');
-assert.match(html, /socCustomSend\(key, target\)/, 'Social posting and reply simulation is missing');
-assert.match(html, /reply \? socState\.replyPeriod === period/, 'A previous post must not disable replying to a comment');
-assert.match(html, /soc\.replyPeriod = period/, 'Reply cooldown must be tracked separately from custom posts');
-assert.match(html, /p_assist100/, 'Expanded player achievements are missing');
-assert.match(html, /m_bigbudget/, 'Expanded manager achievements are missing');
-assert.match(html, /MYS1/, 'Post-migration league expansion is missing');
-assert.match(html, /mx_minutos_cantera/, 'Post-migration manager decisions are missing');
-assert.match(html, /var PLAYER_DECISION_THEMES = \[/, 'Post-migration player decisions are missing');
-assert.match(html, /shirtPattern/, 'Custom kit patterns are not connected to the 3D player rig');
-assert.doesNotMatch(html, /<script\s+[^>]*src=/i, 'Game must be self-contained for WebView/offline use');
+assert.match(gameSource, /function lifeAttBonus\(\)/, 'Wearable kit stat bonuses are missing');
+assert.match(gameSource, /SOC_CUSTOM_OPTIONS = \[/, 'Career-aware social post options are missing');
+assert.match(gameSource, /socCustomSend\(key, target\)/, 'Social posting and reply simulation is missing');
+assert.match(gameSource, /reply \? socState\.replyPeriod === period/, 'A previous post must not disable replying to a comment');
+assert.match(gameSource, /soc\.replyPeriod = period/, 'Reply cooldown must be tracked separately from custom posts');
+assert.match(gameSource, /p_assist100/, 'Expanded player achievements are missing');
+assert.match(gameSource, /m_bigbudget/, 'Expanded manager achievements are missing');
+assert.match(gameSource, /MYS1/, 'Post-migration league expansion is missing');
+assert.match(gameSource, /mx_minutos_cantera/, 'Post-migration manager decisions are missing');
+assert.match(gameSource, /var PLAYER_DECISION_THEMES = \[/, 'Post-migration player decisions are missing');
+assert.match(gameSource, /shirtPattern/, 'Custom kit patterns are not connected to the 3D player rig');
+assert.doesNotMatch(html, /<script\s+[^>]*src=/i, 'Web game must remain self-contained');
+assert.doesNotMatch(androidHtml, /<script\s+[^>]*src=/i, 'Android game must remain self-contained');
 assert.ok(!existsSync(join(output, 'camino-engine.js')), 'Stale v5.2 engine bundle must not be published');
 
 const assets = join(output, 'assets');
 assert.ok(existsSync(assets), 'Vite assets directory is missing');
 assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No website CSS bundle was emitted');
-assert.ok(statSync(gamePage).size > 1_000_000, 'Self-contained 3D game bundle is unexpectedly small');
+assert.ok(statSync(webGamePage).size > 1_000_000, 'Self-contained web game bundle is unexpectedly small');
+assert.ok(statSync(androidGamePage).size > 1_000_000, 'Self-contained Android game bundle is unexpectedly small');
 
-console.log(`Build smoke test passed: v5.9 (59), music, 3D players, 3D pet, ${Math.round(statSync(gamePage).size / 1024)} KB`);
+console.log(`Build smoke passed: web unchanged startup + Android incremental startup; v5.10 (60).`);

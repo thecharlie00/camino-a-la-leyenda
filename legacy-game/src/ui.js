@@ -144,7 +144,7 @@
     flush: function () {
       var self = this;
       clearTimeout(this.ptimer);
-      if (!S) return Promise.resolve();
+      if (!S || (S.era && S.era.active)) return Promise.resolve();
       if (this.busy) { this.again = true; return this.busyP; }
       this.busy = true; this.again = false;
       var json = serialize(), id = S.uid, ts = S.ts || Date.now();
@@ -286,7 +286,7 @@
   }
 
   /* ---------- acciones del juego ---------- */
-  function persist() { Store.saveLocal(); }
+  function persist() { if (S && S.era && typeof EraStore !== "undefined") { EraStore.save(); return; } Store.saveLocal(); }
   /* ---------- efectos: bordes de color y confeti ---------- */
   var LANG_FLAG = {es: "ES", en: "GB", de: "DE", it: "IT", fr: "FR"};
   function calm() { if (typeof Anim !== "undefined") return Anim.reduced(); try { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
@@ -392,6 +392,7 @@
     if (S && S.liveReq != null) openLive();
   }
   function onRetire() {
+    if (S && S.era) return; // El Salón de la fama moderno no absorbe carreras de Épocas.
     if (isMgr()) {
       var m = S.m, r = S.mretired; if (!r) return;
       Store.addHof({id: S.uid + "m" + (S.dyn && S.dyn.g > 1 ? "g" + S.dyn.g : ""), n: m.fn + " " + m.ln, nat: W.ctry[m.nat].code, pos: "DT", g: "DT", peak: Math.round(m.peakRep), club: clubName(r.main), y0: m.y0, y1: r.y,
@@ -481,21 +482,29 @@
     return '<div class="xiwarn" role="alert"><div class="xwt"><span class="xwi">!</span>' + trn(u.length, "{n} baja en tu once", "{n} bajas en tu once") + '</div><p>' + why + '</p><p class="xws">' + tr("Si juegas así, entrará un suplente de urgencia, el equipo rendirá peor y el vestuario perderá moral.") + '</p><div class="xwb"><button class="btn" data-a="fixxi">' + tr("Corregir automáticamente") + "</button>" + (UI.tab !== "plantilla" ? '<button class="btn" data-a="tab" data-t="plantilla">' + tr("Ver el once") + "</button>" : "") + "</div></div>";
   }
   /* navegación: cuatro pestañas; lo demás vive en «Más» */
-  function subTabs() { return isMgr() ? ["comp", "red", "hist", "yo"] : ["red", "hist", "mundo"]; }
+  function eraSocialAvailable() {
+    if (!S || !S.era || typeof eraInfoForYear !== "function") return true;
+    var info = eraInfoForYear(S.yr);
+    return !info || !!info.media.socialMedia;
+  }
+  function subTabs() {
+    var tabs = isMgr() ? ["comp", "red", "hist", "yo"] : ["red", "hist", "mundo"];
+    return eraSocialAvailable() ? tabs : tabs.filter(function (tab) { return tab !== "red"; });
+  }
   function tabsNav() {
     var t = isMgr() ? [["club", tr("Inicio"), ICON.home], ["plantilla", tr("Equipo"), ICON.shirt], ["mercado", tr("Mercado"), ICON.swap], ["mas", tr("Más"), ICON.grid]]
       : [["carrera", tr("Inicio"), ICON.home], ["jugador", tr("Yo"), ICON.shirt], ["comp", tr("Liga"), ICON.table], ["mas", tr("Más"), ICON.grid]];
-    var unread = socUnread(), cur = subTabs().indexOf(UI.tab) >= 0 ? "mas" : UI.tab;
+    var unread = eraSocialAvailable() ? socUnread() : 0, cur = subTabs().indexOf(UI.tab) >= 0 ? "mas" : UI.tab;
     return '<nav class="tabs four" aria-label="' + h(tr("Secciones")) + '">' + t.map(function (x) {
       return '<button data-a="tab" data-t="' + x[0] + '"' + (cur === x[0] ? ' aria-current="page"' : "") + ">" + x[2] + "<span>" + x[1] + "</span>" + (x[0] === "mas" && unread && UI.tab !== "red" ? '<span class="nbadge">' + (unread > 9 ? "9+" : unread) + "</span>" : "") + (x[0] === "jugador" && UIX.petNeed && UIX.petNeed() ? '<span class="nbadge pet" aria-label="' + h(tr("Tu mascota necesita atención")) + '">🐾</span>' : "") + "</button>";
     }).join("") + "</nav>";
   }
   /* «Más»: el resto del juego en una lista clara */
   function tabMas() {
-    var unread = socUnread(), mgr = isMgr(), rows = [];
+    var unread = eraSocialAvailable() ? socUnread() : 0, mgr = isMgr(), rows = [];
     if (mgr) { var pos = S.m.club >= 0 ? posInLeague(S.m.club) : 0; rows.push(["tab", "comp", ICON.table, tr("Competición"), pos > 0 ? tr("Vais {pos} en {lg}", {pos: ord(pos), lg: lgName(S.cl[S.m.club])}) : tr("Clasificaciones y calendario")]); }
     if (mgr && UIX.mgrYo) rows.push(["tab", "yo", ICON.shirt, tr("Tu míster"), tr("Ropa, estadísticas, vitrina y mascota")]);
-    rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
+    if (eraSocialAvailable()) rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
     rows.push(["tab", "hist", ICON.trophy, tr("Historial"), tr("Temporadas, títulos y premios")]);
     if (!mgr) rows.push(["tab", "mundo", ICON.globe, tr("Mundo"), tr("Otras ligas, selecciones y rivales")]);
     if (UIX.achG) { achCheck(); var ac = UIX.achG(); rows.push(["ach", "", ICON.medal, tr("Logros"), tr("{n} de {m} conseguidos", {n: ac[0], m: ac[1]})]); }
@@ -1262,11 +1271,11 @@
   }
   function aheadCardM() {
     var m = S.m, li = S.cl[m.club], pos = posInLeague(m.club), inj = mActive().filter(function (p) { return p.inj > S.tw; }).length;
-    var win = m.mk.open ? '<span class="tag ok"><span class="dot"></span>' + tr("Mercado abierto") + "</span>" : '<span class="tag ok"><span class="dot"></span>' + tr("Siguiente") + "</span>";
+    var yearRound = !!(S.era && eraRulesForYear(S.yr) && !eraRulesForYear(S.yr).transferWindows), win = m.mk.open ? '<span class="tag ok"><span class="dot"></span>' + tr("Mercado abierto") + (yearRound ? ' · ' + eraText("Todo el año") : "") + "</span>" : '<span class="tag ok"><span class="dot"></span>' + tr("Siguiente") + "</span>";
     var o = '<section class="card"><div class="head">' + win + '<span class="eyebrow">' + tr("Nivel {n}", {n: Math.round(mTeamRating(m.xi))}) + "</span></div>";
     o += "<h3>" + (S.ph === "pre" ? tr("Pretemporada en el {club}", {club: h(clubName(m.club))}) : tr("Tramo {n} de 5: {blk}", {n: S.bi + 1, blk: tr(BLOCKS[S.bi][2])})) + "</h3>";
     o += '<p class="lead">' + (S.ph === "pre" ? tr("Revisa el once y la táctica, y aprovecha el mercado de verano antes de empezar.") : (pos > 0 ? tr("{pos} en {lg}.", {pos: ord(pos), lg: h(lgName(li))}) + " " : "") + (inj ? trn(inj, "{n} lesionado.", "{n} lesionados.") : tr("Sin lesionados."))) +
-      (m.mk.open ? " " + tr("El mercado cierra cuando empiece el tramo.") : "") + "</p>";
+      (m.mk.open ? " " + (yearRound ? eraText("Las transferencias se permiten durante todo el año.") : tr("El mercado cierra cuando empiece el tramo.")) : "") + "</p>";
     if (m.objs.length) o += '<div style="margin-top:10px">' + m.objs.map(function (ob) {
       var pr = mgrObjProgress(ob);
       return '<div class="obj"><div><span>' + h(objName(ob)) + objPill(ob) + '</span><span class="num ' + (pr.met ? "pos" : "") + '">' + h(pr.txt) + '</span></div><div class="bar"><i class="' + (pr.met ? "hi" : "mid") + '" style="width:' + Math.round(pr.pct) + '%"></i></div></div>';
@@ -1346,10 +1355,11 @@
   function tabMercado() {
     var m = S.m;
     if (m.club < 0) return '<div class="stack"><p class="empty">' + tr("Sin equipo no hay mercado.") + '</p></div>';
-    var open = !!m.mk.open, bill = mWageBill();
-    var s = '<div class="stack"><section class="card"><div class="head"><h3>' + tr("Mercado") + '</h3>' + (open ? '<span class="tag ok"><span class="dot"></span>' + tr("Abierto") + " · " + h(tr(m.mk.open)) + "</span>" : '<span class="tag">' + tr("Cerrado") + "</span>") + "</div>";
+    var open = !!m.mk.open, bill = mWageBill(), yearRound = !!(S.era && eraRulesForYear(S.yr) && !eraRulesForYear(S.yr).transferWindows);
+    var openLabel = yearRound ? eraText("Todo el año") : tr(m.mk.open);
+    var s = '<div class="stack"><section class="card"><div class="head"><h3>' + tr("Mercado") + '</h3>' + (open ? '<span class="tag ok"><span class="dot"></span>' + tr("Abierto") + " · " + h(openLabel) + "</span>" : '<span class="tag">' + tr("Cerrado") + "</span>") + "</div>";
     s += '<div class="statline"><div class="stat"><b>' + fmtMoney(m.bud) + '</b><span>' + tr("Presupuesto") + '</span></div><div class="stat"><b class="' + (bill > m.wcap ? "neg" : "") + '">' + fmtMoney(bill) + '</b><span>' + tr("Masa salarial") + '</span></div><div class="stat"><b>' + fmtMoney(m.wcap) + "</b><span>" + tr("Tope salarial") + "</span></div></div>";
-    s += '<p class="muted" style="font-size:var(--fs-sm);margin:10px 0 0">' + (open ? tr("Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.") : tr("Puedes estudiar la lista, pero solo se ficha en verano (pretemporada) y en invierno (antes del tramo Feb–Mar).")) + "</p></section>";
+    s += '<p class="muted" style="font-size:var(--fs-sm);margin:10px 0 0">' + (open ? (yearRound ? eraText("Puedes fichar, vender o ceder durante todo el año.") : tr("Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.")) : tr("Puedes estudiar la lista, pero solo se ficha en verano (pretemporada) y en invierno (antes del tramo Feb–Mar).")) + "</p></section>";
     var list = (m.mk.list || []).filter(function (t) { return UI.mkF === "ALL" || W.pos[t.pos].g === UI.mkF; });
     s += '<section class="card"><div class="head"><h3>' + tr("Informes de ojeadores") + '</h3><span class="eyebrow">' + trn((m.mk.list || []).length, "{n} jugador", "{n} jugadores") + "</span></div>";
     s += '<div class="seg" style="margin-bottom:6px">' + [[tr("Todos"), "ALL"], ["POR", "POR"], ["DEF", "DEF"], ["MED", "MED"], ["DEL", "DEL"]].map(function (x) { return '<button data-a="mkf" data-v="' + x[1] + '" aria-pressed="' + (UI.mkF === x[1]) + '">' + x[0] + "</button>"; }).join("") + "</div>";
@@ -1848,7 +1858,7 @@
   /* guardar la partida actual antes de cambiar; si el guardado tarda o falla, se sigue igualmente (antes se quedaba esperando) */
   function switchGame(fn) {
     var done = false, go = function () { if (done) return; done = true; fn(); };
-    var pr; try { pr = S ? Store.flush() : null; } catch (e) { pr = null; }
+    var pr; try { if (S && S.era && typeof EraStore !== "undefined") { EraStore.save(); pr = null; } else pr = S ? Store.flush() : null; } catch (e) { pr = null; }
     if (pr && typeof pr.then === "function") { pr.then(go, go); setTimeout(go, 1500); } else go();
   }
   function enterGame() {
@@ -1960,6 +1970,7 @@
   }
   function fmtCount(n) { return n >= 1e6 ? fmtDec(n / 1e6, 1) + "M" : n >= 1e3 ? fmtDec(n / 1e3, 1) + "k" : String(n); }
   function tabRed() {
+    if (!eraSocialAvailable()) return '<div class="stack"><p class="empty">' + eraText("Las redes sociales todavía no están disponibles en este año.") + '</p></div>';
     var soc = socInit(), prof = soc.prof, fol = socFollowers();
     soc.seen = soc.posts.length;
     var usedThisBlock = soc.customPeriod === socCustomPeriod();
@@ -2439,6 +2450,7 @@
       /* tras retirarte: empezar otra carrera de jugador/a desde cero (la retirada queda guardada) */
       case "newcareer":
         UI.sheet = null; closeLive(true);
+        if (S && S.era && S.era.active) { persist(); S = null; UI.cr = null; UI.exp = {}; UI.view = "home"; render(true); showAd("menu"); break; }
         try { persist(); Store.flush && Store.flush(); } catch (err) {}
         /* con el máximo de partidas, la carrera terminada deja su hueco (ya está en el Salón de la fama) */
         if (slotsNow().length >= MAX_SLOTS && S && S.ph === "ret") { var oldId = S.uid; try { Store.remove(oldId); } catch (err) {} UI.slots = slotsNow().filter(function (x) { return x.id !== oldId; }); }
@@ -2470,7 +2482,7 @@
       case "doImport": importCode((document.getElementById("incode") || {}).value); break;
       case "hof": UI.sheet = {k: "hof", list: null}; renderSheet(); Store.hof().then(function (l) { if (UI.sheet && UI.sheet.k === "hof") { UI.sheet.list = l.sort(function (x, y) { return y.sc - x.sc; }); renderSheet(); } }); break;
       case "hoff": UI.hofF = v; renderSheet(); break;
-      case "home": UI.sheet = null; Store.flush(); UI.view = "home"; refreshSlots(); render(true); showAd("menu"); break;
+      case "home": UI.sheet = null; if (S && S.era && typeof EraStore !== "undefined") { EraStore.save(); S = null; } else Store.flush(); UI.view = "home"; refreshSlots(); render(true); showAd("menu"); break;
       case "continue": enterGame(); render(true); showAd("load"); break;
       case "startmgr":
         try { startManager(); } catch (err) { console.error(err); toast(tr("No se pudo empezar la carrera de entrenador.")); break; }
@@ -2541,13 +2553,14 @@
       /* minijuego */
       case "mini": doMini(+b.getAttribute("data-i"), b.getAttribute("data-m")); break;
       /* red social */
-      case "soccompose": UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k}; renderSheet(); break;
+      case "soccompose": if (eraSocialAvailable()) { UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k}; renderSheet(); } break;
       case "socreplay":
         var replyIdx = +b.getAttribute("data-i"), replyPost = S.soc && S.soc.posts[replyIdx];
         if (replyPost) UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k, reply: {id: replyPost.id || null, target: socPostAuthor(replyPost), text: socText(replyPost).slice(0, 180)}};
         renderSheet(); break;
       case "socpick": if (UI.sheet && UI.sheet.k === "soccompose") { UI.sheet.pick = v; renderSheet(); } break;
       case "socsend":
+        if (!eraSocialAvailable()) break;
         var sendReply = UI.sheet && UI.sheet.k === "soccompose" && UI.sheet.reply;
         var sendResult = socCustomSend(v, sendReply || "");
         if (sendResult.ok) { persist(); UI.sheet = null; render(false); toast(tr(sendResult.reply ? "Respuesta enviada." : "Publicación enviada.")); }
@@ -2635,7 +2648,7 @@
     }
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && UI.sheet) { closeSheet(); render(false); } });
-  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") { try { Store.flush(); } catch (err) {} } });
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") { try { if (S && S.era && typeof EraStore !== "undefined") EraStore.save(); else Store.flush(); } catch (err) {} } });
 
   /* ---------- deslizar a la derecha para descartar tarjetas ---------- */
   (function () {
