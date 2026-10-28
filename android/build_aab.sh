@@ -24,8 +24,9 @@ if [[ ! -f "$ROOT/dist/jugar/juego.html" ]]; then
 fi
 
 rm -rf build-aab assets
-mkdir -p build-aab/{classes,dex,module} assets "$ROOT/dist"
-cp -a "$ROOT/dist/." assets/
+mkdir -p build-aab/{classes,dex,module} "$ROOT/dist" assets/jugar
+# The game HTML is self-contained (3D models, CSS, music and pet engine inline).
+cp "$ROOT/dist/jugar/juego.html" assets/jugar/juego.html
 
 # Create an Android proto-APK to supply the base module manifest and packaged assets.
 "$AAPT2" link \

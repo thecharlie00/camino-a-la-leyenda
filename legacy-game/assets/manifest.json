@@ -1,0 +1,1629 @@
+{
+  "schema": "camino.assets3d/1",
+  "project": "camino-a-la-leyenda",
+  "generated": "2026-10-20",
+  "pipeline": {
+    "source": "tools/assets/build_assets.mjs (generator is the editable source; Blender is not installed in this environment)",
+    "node": "v24.20.0",
+    "three": "0.186.1 (MIT, offline build tool only)",
+    "exporter": "three/examples/jsm/exporters/GLTFExporter",
+    "format": "glTF 2.0 binary (.glb)",
+    "previews": "tools/assets/render_previews.mjs + local Chrome headless (puppeteer-core, offline only)",
+    "runtimeDependencies": "none; assets are plain GLB + JSON"
+  },
+  "contract": {
+    "units": "meters",
+    "up": "+Y",
+    "forward": "+Z",
+    "characterOrigin": "between the feet at ground level (0,0,0)",
+    "ballOrigin": "center",
+    "propOrigin": "footprint centre at ground level; +Z is the front/opening unless documented otherwise",
+    "scale": "1 unit = 1 metre",
+    "texturePolicy": "no image textures; COLOR_0 vertex colors multiply named material baseColorFactor",
+    "lodDistancesMeters": {
+      "LOD0": "0-18",
+      "LOD1": "18-40",
+      "LOD2": "40+"
+    },
+    "recommendedDrawCalls": "6 outfield / 7 goalkeeper at LOD1/2; 7 outfield / 8 goalkeeper at LOD0 (one SkinnedMesh per material primitive)",
+    "animationFps": 30,
+    "meshMode": "TRIANGLES; flat normals; no morph targets",
+    "skinning": "4 influences per vertex, max 22 joints"
+  },
+  "palettes": {
+    "local": {
+      "label": "Local",
+      "kit_shirt": "#2f6fed",
+      "kit_shorts": "#f4f7fb",
+      "kit_socks": "#2f6fed",
+      "kit_trim": "#ffd23f",
+      "skin": "#b97a52",
+      "hair": "#24160f",
+      "boots": "#15181e",
+      "gloves": "#ff7a1a"
+    },
+    "away": {
+      "label": "Visitante",
+      "kit_shirt": "#f4f7fb",
+      "kit_shorts": "#d92b3a",
+      "kit_socks": "#f4f7fb",
+      "kit_trim": "#14213d",
+      "skin": "#b97a52",
+      "hair": "#24160f",
+      "boots": "#15181e",
+      "gloves": "#ff7a1a"
+    },
+    "goalkeeper": {
+      "label": "Portero",
+      "kit_shirt": "#17a673",
+      "kit_shorts": "#11161c",
+      "kit_socks": "#17a673",
+      "kit_trim": "#f5f7f2",
+      "skin": "#b97a52",
+      "hair": "#24160f",
+      "boots": "#15181e",
+      "gloves": "#ff7a1a"
+    }
+  },
+  "skinTones": [
+    {
+      "name": "light",
+      "hex": "#f0c8a8"
+    },
+    {
+      "name": "medium",
+      "hex": "#b97a52"
+    },
+    {
+      "name": "olive",
+      "hex": "#c99a6b"
+    },
+    {
+      "name": "dark",
+      "hex": "#7b4a30"
+    },
+    {
+      "name": "deep",
+      "hex": "#5a3522"
+    }
+  ],
+  "hairColors": [
+    {
+      "name": "black",
+      "hex": "#1b1512"
+    },
+    {
+      "name": "dark_brown",
+      "hex": "#2b1a10"
+    },
+    {
+      "name": "brown",
+      "hex": "#4a2c18"
+    },
+    {
+      "name": "auburn",
+      "hex": "#6b2f1d"
+    },
+    {
+      "name": "blond",
+      "hex": "#b8874b"
+    }
+  ],
+  "budgets": {
+    "player": {
+      "LOD0": 2500,
+      "LOD1": 1000,
+      "LOD2": 400
+    },
+    "ball": {
+      "LOD0": 500,
+      "LOD1": 200,
+      "LOD2": 100
+    },
+    "goal": {
+      "LOD0": 2000,
+      "LOD1": 600
+    },
+    "props": {
+      "LOD0": 1000
+    }
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "duration": 2,
+      "loop": true
+    },
+    {
+      "name": "run",
+      "duration": 0.8,
+      "loop": true
+    },
+    {
+      "name": "kick",
+      "duration": 1.2,
+      "loop": false
+    },
+    {
+      "name": "dive",
+      "duration": 1.4,
+      "loop": false
+    },
+    {
+      "name": "celebrate",
+      "duration": 2,
+      "loop": true
+    }
+  ],
+  "assets": [
+    {
+      "id": "male_lod0",
+      "kind": "player",
+      "variant": "male",
+      "lod": 0,
+      "path": "assets/players/male/male_lod0.glb",
+      "bytes": 368200,
+      "sha256": "b97e3d76b1ebd88598aadf86183004a5592e1b1c7c05de65a9d2360e85900e88",
+      "triangles": 1590,
+      "vertices": 4770,
+      "bounds": {
+        "min": [
+          -0.3507,
+          0,
+          -0.118
+        ],
+        "max": [
+          0.3507,
+          1.8242,
+          0.1575
+        ],
+        "size": [
+          0.7015,
+          1.8242,
+          0.2755
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#f4f7fb"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "kit_trim",
+          "defaultColor": "#ffd23f"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.8242,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "local",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "male_lod1",
+      "kind": "player",
+      "variant": "male",
+      "lod": 1,
+      "path": "assets/players/male/male_lod1.glb",
+      "bytes": 231232,
+      "sha256": "ce46b34039dc73c9f284fb68d427e59ed5b037708f85ff280d56a5c10025b551",
+      "triangles": 856,
+      "vertices": 2568,
+      "bounds": {
+        "min": [
+          -0.3507,
+          0,
+          -0.118
+        ],
+        "max": [
+          0.3507,
+          1.8242,
+          0.1575
+        ],
+        "size": [
+          0.7015,
+          1.8242,
+          0.2755
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#f4f7fb"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.8242,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "local",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "male_lod2",
+      "kind": "player",
+      "variant": "male",
+      "lod": 2,
+      "path": "assets/players/male/male_lod2.glb",
+      "bytes": 125692,
+      "sha256": "288ceb75e32adf0a105bd97e5c607979f72254e06b741698021b97b88f27033f",
+      "triangles": 290,
+      "vertices": 870,
+      "bounds": {
+        "min": [
+          -0.349,
+          0,
+          -0.1027
+        ],
+        "max": [
+          0.349,
+          1.8242,
+          0.155
+        ],
+        "size": [
+          0.698,
+          1.8242,
+          0.2577
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#f4f7fb"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.8242,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "local",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "female_lod0",
+      "kind": "player",
+      "variant": "female",
+      "lod": 0,
+      "path": "assets/players/female/female_lod0.glb",
+      "bytes": 382656,
+      "sha256": "aaad3baed48b89e58c5a36f99cc1f88b0375a5a701628060ba91327113b03b8c",
+      "triangles": 1668,
+      "vertices": 5004,
+      "bounds": {
+        "min": [
+          -0.3277,
+          0,
+          -0.1639
+        ],
+        "max": [
+          0.3277,
+          1.7391,
+          0.1575
+        ],
+        "size": [
+          0.6555,
+          1.7391,
+          0.3214
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#f4f7fb"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "kit_trim",
+          "defaultColor": "#ffd23f"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.7391,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "local",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "female_lod1",
+      "kind": "player",
+      "variant": "female",
+      "lod": 1,
+      "path": "assets/players/female/female_lod1.glb",
+      "bytes": 237876,
+      "sha256": "bf3c5e7309613671711b050ffd24d67728700873165ddc85e53d3a538d31acd8",
+      "triangles": 892,
+      "vertices": 2676,
+      "bounds": {
+        "min": [
+          -0.3277,
+          0,
+          -0.1602
+        ],
+        "max": [
+          0.3277,
+          1.7331,
+          0.1575
+        ],
+        "size": [
+          0.6555,
+          1.7331,
+          0.3177
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#f4f7fb"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.7331,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "local",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "female_lod2",
+      "kind": "player",
+      "variant": "female",
+      "lod": 2,
+      "path": "assets/players/female/female_lod2.glb",
+      "bytes": 126760,
+      "sha256": "8653e8ab8d6f9a882293d5ae4bb631f21ef1c3bee64a2eaf968e691de300be8b",
+      "triangles": 296,
+      "vertices": 888,
+      "bounds": {
+        "min": [
+          -0.326,
+          0,
+          -0.1489
+        ],
+        "max": [
+          0.326,
+          1.7331,
+          0.155
+        ],
+        "size": [
+          0.652,
+          1.7331,
+          0.3039
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#f4f7fb"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.7331,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "local",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "goalkeeper_lod0",
+      "kind": "player",
+      "variant": "goalkeeper",
+      "lod": 0,
+      "path": "assets/players/goalkeeper/goalkeeper_lod0.glb",
+      "bytes": 393984,
+      "sha256": "60ef0375e9554f95585e463d4c5b7b5693a9b18acd0b5c775e6a8a4a00413a51",
+      "triangles": 1726,
+      "vertices": 5178,
+      "bounds": {
+        "min": [
+          -0.4016,
+          0,
+          -0.12
+        ],
+        "max": [
+          0.4016,
+          1.8972,
+          0.1575
+        ],
+        "size": [
+          0.8032,
+          1.8972,
+          0.2775
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#17a673"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#11161c"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#17a673"
+        },
+        {
+          "name": "kit_trim",
+          "defaultColor": "#f5f7f2"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        },
+        {
+          "name": "gloves",
+          "defaultColor": "#ff7a1a"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.8972,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "goalkeeper",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "goalkeeper_lod1",
+      "kind": "player",
+      "variant": "goalkeeper",
+      "lod": 1,
+      "path": "assets/players/goalkeeper/goalkeeper_lod1.glb",
+      "bytes": 242120,
+      "sha256": "5aa006350bd57fde2d631ff6702fc2eb4ec6911ece4fce1ae46a37e24dabe86e",
+      "triangles": 912,
+      "vertices": 2736,
+      "bounds": {
+        "min": [
+          -0.4016,
+          0,
+          -0.12
+        ],
+        "max": [
+          0.4016,
+          1.8972,
+          0.1575
+        ],
+        "size": [
+          0.8031,
+          1.8972,
+          0.2775
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#17a673"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#11161c"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#17a673"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        },
+        {
+          "name": "gloves",
+          "defaultColor": "#ff7a1a"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.8972,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "goalkeeper",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "goalkeeper_lod2",
+      "kind": "player",
+      "variant": "goalkeeper",
+      "lod": 2,
+      "path": "assets/players/goalkeeper/goalkeeper_lod2.glb",
+      "bytes": 129884,
+      "sha256": "be7e478d9755ab48412fbc0f6ad213a7931bb95e732f4b594e7b0e7c44e165c5",
+      "triangles": 310,
+      "vertices": 930,
+      "bounds": {
+        "min": [
+          -0.3935,
+          0,
+          -0.1039
+        ],
+        "max": [
+          0.3935,
+          1.8972,
+          0.155
+        ],
+        "size": [
+          0.787,
+          1.8972,
+          0.2589
+        ]
+      },
+      "materials": [
+        {
+          "name": "kit_shirt",
+          "defaultColor": "#17a673"
+        },
+        {
+          "name": "kit_shorts",
+          "defaultColor": "#11161c"
+        },
+        {
+          "name": "kit_socks",
+          "defaultColor": "#17a673"
+        },
+        {
+          "name": "skin",
+          "defaultColor": "#b97a52"
+        },
+        {
+          "name": "hair",
+          "defaultColor": "#24160f"
+        },
+        {
+          "name": "boots",
+          "defaultColor": "#15181e"
+        },
+        {
+          "name": "gloves",
+          "defaultColor": "#ff7a1a"
+        }
+      ],
+      "clips": [
+        "idle",
+        "run",
+        "kick",
+        "dive",
+        "celebrate"
+      ],
+      "extras": {
+        "height": 1.8972,
+        "origin": "between feet, ground level",
+        "forward": "+Z",
+        "skeleton": [
+          "root",
+          "hips",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "shoulder.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "shoulder.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ],
+        "joints": 22,
+        "clips": [
+          "idle",
+          "run",
+          "kick",
+          "dive",
+          "celebrate"
+        ],
+        "defaultPalette": "goalkeeper",
+        "lodBudgets": {
+          "LOD0": 2500,
+          "LOD1": 1000,
+          "LOD2": 400
+        },
+        "vertexColors": true,
+        "textures": 0
+      }
+    },
+    {
+      "id": "ball_lod0",
+      "kind": "ball",
+      "variant": "ball",
+      "lod": 0,
+      "path": "assets/ball/ball_lod0.glb",
+      "bytes": 38184,
+      "sha256": "ecb67857fd3ae75396754afbe065ff9c82f9570f6d037beea43878689bb76bba",
+      "triangles": 320,
+      "vertices": 960,
+      "bounds": {
+        "min": [
+          -0.11,
+          -0.11,
+          -0.11
+        ],
+        "max": [
+          0.11,
+          0.11,
+          0.11
+        ],
+        "size": [
+          0.22,
+          0.22,
+          0.22
+        ]
+      },
+      "materials": [
+        {
+          "name": "ball_panel",
+          "defaultColor": "#ffffff"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "radius": 0.11,
+        "diameter": 0.22,
+        "origin": "center",
+        "forward": "n/a",
+        "lodBudgets": {
+          "LOD0": 500,
+          "LOD1": 200,
+          "LOD2": 100
+        },
+        "textures": 0,
+        "vertexColors": true
+      }
+    },
+    {
+      "id": "ball_lod1",
+      "kind": "ball",
+      "variant": "ball",
+      "lod": 1,
+      "path": "assets/ball/ball_lod1.glb",
+      "bytes": 10816,
+      "sha256": "e4318cb85991eab5b8eec503e621871715a72dd7faeaaaebef05cd39470455ed",
+      "triangles": 80,
+      "vertices": 240,
+      "bounds": {
+        "min": [
+          -0.11,
+          -0.11,
+          -0.11
+        ],
+        "max": [
+          0.11,
+          0.11,
+          0.11
+        ],
+        "size": [
+          0.22,
+          0.22,
+          0.22
+        ]
+      },
+      "materials": [
+        {
+          "name": "ball_panel",
+          "defaultColor": "#ffffff"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "radius": 0.11,
+        "diameter": 0.22,
+        "origin": "center",
+        "forward": "n/a",
+        "lodBudgets": {
+          "LOD0": 500,
+          "LOD1": 200,
+          "LOD2": 100
+        },
+        "textures": 0,
+        "vertexColors": true
+      }
+    },
+    {
+      "id": "ball_lod2",
+      "kind": "ball",
+      "variant": "ball",
+      "lod": 2,
+      "path": "assets/ball/ball_lod2.glb",
+      "bytes": 10816,
+      "sha256": "416f0ac6b1758c8814d26618b628adbc65e586f2085ac25a883a6c5ea11d32b2",
+      "triangles": 80,
+      "vertices": 240,
+      "bounds": {
+        "min": [
+          -0.11,
+          -0.11,
+          -0.11
+        ],
+        "max": [
+          0.11,
+          0.11,
+          0.11
+        ],
+        "size": [
+          0.22,
+          0.22,
+          0.22
+        ]
+      },
+      "materials": [
+        {
+          "name": "ball_panel",
+          "defaultColor": "#ffffff"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "radius": 0.11,
+        "diameter": 0.22,
+        "origin": "center",
+        "forward": "n/a",
+        "lodBudgets": {
+          "LOD0": 500,
+          "LOD1": 200,
+          "LOD2": 100
+        },
+        "textures": 0,
+        "vertexColors": true
+      }
+    },
+    {
+      "id": "goal_lod0",
+      "kind": "goal",
+      "variant": null,
+      "lod": 0,
+      "path": "assets/stadium/goal_lod0.glb",
+      "bytes": 71052,
+      "sha256": "4a98e97ee584603fbc8c0744be98c326e8cdcc8455732174a18c5c1a105ed568",
+      "triangles": 598,
+      "vertices": 1794,
+      "bounds": {
+        "min": [
+          -3.725,
+          -0.0137,
+          -2.052
+        ],
+        "max": [
+          3.725,
+          2.505,
+          0.065
+        ],
+        "size": [
+          7.45,
+          2.5188,
+          2.117
+        ]
+      },
+      "materials": [
+        {
+          "name": "goal_frame",
+          "defaultColor": "#f2f4ef"
+        },
+        {
+          "name": "goal_net",
+          "defaultColor": "#c9d4ce"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "origin": "center of goal line at ground level",
+        "widthInside": 7.32,
+        "heightInside": 2.44,
+        "depth": 2,
+        "outerBounds": "approx. 7.45 x 2.52 x 2.12 including post radius",
+        "opening": "+Z",
+        "net": "-Z",
+        "modularMeshes": [
+          "goal_frame",
+          "goal_net"
+        ]
+      }
+    },
+    {
+      "id": "goal_lod1",
+      "kind": "goal",
+      "variant": null,
+      "lod": 1,
+      "path": "assets/stadium/goal_lod1.glb",
+      "bytes": 49612,
+      "sha256": "1a47cee528213975f053e367cf408afc2c3a40a859a61aacb23bef32910809c8",
+      "triangles": 410,
+      "vertices": 1230,
+      "bounds": {
+        "min": [
+          -3.725,
+          -0.0072,
+          -2.052
+        ],
+        "max": [
+          3.725,
+          2.4963,
+          0.065
+        ],
+        "size": [
+          7.45,
+          2.5035,
+          2.117
+        ]
+      },
+      "materials": [
+        {
+          "name": "goal_frame",
+          "defaultColor": "#f2f4ef"
+        },
+        {
+          "name": "goal_net",
+          "defaultColor": "#c9d4ce"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "origin": "center of goal line at ground level",
+        "widthInside": 7.32,
+        "heightInside": 2.44,
+        "depth": 2,
+        "outerBounds": "approx. 7.45 x 2.51 x 2.12 including post radius",
+        "opening": "+Z",
+        "net": "-Z",
+        "modularMeshes": [
+          "goal_frame",
+          "goal_net"
+        ]
+      }
+    },
+    {
+      "id": "corner_flag_lod0",
+      "kind": "corner_flag",
+      "variant": null,
+      "lod": 0,
+      "path": "assets/stadium/corner_flag_lod0.glb",
+      "bytes": 12832,
+      "sha256": "8c89db43d06a4c3c7ed991c3831f57aaa27d43b6911ae3987caba2988f9c16c9",
+      "triangles": 86,
+      "vertices": 258,
+      "bounds": {
+        "min": [
+          -0.14,
+          0,
+          -0.1331
+        ],
+        "max": [
+          0.46,
+          1.52,
+          0.1331
+        ],
+        "size": [
+          0.6,
+          1.52,
+          0.2663
+        ]
+      },
+      "materials": [
+        {
+          "name": "flag_base",
+          "defaultColor": "#22282b"
+        },
+        {
+          "name": "flag_pole",
+          "defaultColor": "#eef2ee"
+        },
+        {
+          "name": "flag_cloth",
+          "defaultColor": "#ffcf33"
+        },
+        {
+          "name": "flag_accent",
+          "defaultColor": "#e23b3b"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "origin": "ground level, footprint centre; +Z front/opening",
+        "height": 1.52,
+        "clothDirection": "+X"
+      }
+    },
+    {
+      "id": "bench_lod0",
+      "kind": "bench",
+      "variant": null,
+      "lod": 0,
+      "path": "assets/stadium/bench_lod0.glb",
+      "bytes": 22324,
+      "sha256": "b028085c918be686ba028fa600f27757d5d1d8fa45ebd66da861021984cbf97a",
+      "triangles": 170,
+      "vertices": 510,
+      "bounds": {
+        "min": [
+          -1.36,
+          0,
+          -0.7
+        ],
+        "max": [
+          1.36,
+          2,
+          0.58
+        ],
+        "size": [
+          2.72,
+          2,
+          1.28
+        ]
+      },
+      "materials": [
+        {
+          "name": "bench_frame",
+          "defaultColor": "#2b3138"
+        },
+        {
+          "name": "bench_seat",
+          "defaultColor": "#2f6fed"
+        },
+        {
+          "name": "bench_roof",
+          "defaultColor": "#e7ecef"
+        },
+        {
+          "name": "bench_accent",
+          "defaultColor": "#ffd23f"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "origin": "ground level, footprint centre; +Z front/opening",
+        "width": 2.72,
+        "height": 1.98,
+        "depth": 1.34
+      }
+    },
+    {
+      "id": "ad_board_lod0",
+      "kind": "ad_board",
+      "variant": null,
+      "lod": 0,
+      "path": "assets/stadium/ad_board_lod0.glb",
+      "bytes": 16172,
+      "sha256": "6b9ea6b46a7030f847908a1409205aa38cd1027d068ac6a9188ef8d3a578e9f1",
+      "triangles": 120,
+      "vertices": 360,
+      "bounds": {
+        "min": [
+          -1.5,
+          0,
+          -0.33
+        ],
+        "max": [
+          1.5,
+          0.92,
+          0.28
+        ],
+        "size": [
+          3,
+          0.92,
+          0.61
+        ]
+      },
+      "materials": [
+        {
+          "name": "ad_frame",
+          "defaultColor": "#1b2026"
+        },
+        {
+          "name": "ad_panel",
+          "defaultColor": "#1c5fd6"
+        },
+        {
+          "name": "ad_accent",
+          "defaultColor": "#ffd23f"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "origin": "ground level, footprint centre; +Z front/opening",
+        "width": 3,
+        "height": 0.92,
+        "depth": 0.62
+      }
+    },
+    {
+      "id": "barrier_lod0",
+      "kind": "barrier",
+      "variant": null,
+      "lod": 0,
+      "path": "assets/stadium/barrier_lod0.glb",
+      "bytes": 23580,
+      "sha256": "b1461c17dee24a20bbcae2748303a8c7891ced1a8e6bc5d7037575dbc74aed0a",
+      "triangles": 192,
+      "vertices": 576,
+      "bounds": {
+        "min": [
+          -1.11,
+          0,
+          -0.17
+        ],
+        "max": [
+          1.11,
+          1.0225,
+          0.17
+        ],
+        "size": [
+          2.22,
+          1.0225,
+          0.34
+        ]
+      },
+      "materials": [
+        {
+          "name": "barrier_metal",
+          "defaultColor": "#cfd8dc"
+        }
+      ],
+      "clips": [],
+      "extras": {
+        "origin": "ground level, footprint centre; +Z front/opening",
+        "width": 2,
+        "height": 1,
+        "depth": 0.34
+      }
+    }
+  ],
+  "previews": [
+    {
+      "id": "male",
+      "path": "assets/previews/male.png",
+      "shows": "male LOD0, idle, local kit"
+    },
+    {
+      "id": "female",
+      "path": "assets/previews/female.png",
+      "shows": "female LOD0, idle, away kit"
+    },
+    {
+      "id": "goalkeeper",
+      "path": "assets/previews/goalkeeper.png",
+      "shows": "goalkeeper LOD0, dive, GK kit"
+    },
+    {
+      "id": "players_lineup",
+      "path": "assets/previews/players_lineup.png",
+      "shows": "male/female/goalkeeper LOD0 scale comparison"
+    },
+    {
+      "id": "ball",
+      "path": "assets/previews/ball.png",
+      "shows": "ball LOD0 close-up"
+    },
+    {
+      "id": "stadium_props",
+      "path": "assets/previews/stadium_props.png",
+      "shows": "goal, corner flag, bench, ad board, barrier and ball"
+    },
+    {
+      "id": "lod_comparison",
+      "path": "assets/previews/lod_comparison.png",
+      "shows": "male LOD0/LOD1/LOD2 comparison"
+    },
+    {
+      "id": "pose_sheet",
+      "path": "assets/previews/pose_sheet.png",
+      "shows": "idle/run/kick/celebrate/dive poses"
+    }
+  ],
+  "notes": [
+    "All geometry is generated procedurally for this project; no paid, ripped or downloaded meshes/textures are used.",
+    "Each player GLB contains the full 22-joint skeleton and all five clips, so LOD swaps do not need a separate animation file.",
+    "Kit colors are runtime material overrides by material name; vertex colors are neutral shading multipliers.",
+    "Hair/skin variation is handled by material color overrides and silhouette variants (male crop, female ponytail, GK headband); no extra geometry copies."
+  ]
+}
