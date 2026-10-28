@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "1990s",
+  "label": "1990s",
+  "years": [1990, 1999],
+  "startYear": 1992,
+  "rosterMode": "generated-archetypes",
+  "rules": {"winPoints": 3, "backPassBanned": false, "transferWindows": false, "maxSubs": 2, "bosmanFreeAgency": false, "goldenGoal": false, "goalLineTech": false, "fiveSubs": false, "varByCompetition": {}},
+  "media": {"channels": ["tabloids", "teletext", "fanzines", "phone-in", "live-tv"], "socialMedia": false, "deadlineDayCircus": false, "rumorSpeed": "measured"},
+  "economy": {"recordTransfer": 15000000, "wageScale": 0.12, "marketScale": 0.42, "shirtSponsorship": true, "tvDealMultiplier": 1.0, "currency": "EUR"},
+  "presentation": {"pitchWear": "mud-winter", "terraces": "all-seater-transition", "fences": "removed-progressively", "heating": false, "kits": "baggy-90s", "ball": "umbro-leather-hybrid", "adBoards": "static", "uiSkin": "teletext", "broadcast": "sd-4:3-first-gen-eng"},
+  "staff": {"analysts": false, "sportsScience": "basic", "backroomMax": 4, "agents": "post-bosman-growing"},
+  "playerModel": {"paceScale": 0.91, "staminaScale": 0.92, "pressingScale": 0.72, "trainingScale": 0.9},
+  "referenceClubs": ["Manchester United", "Arsenal", "Liverpool", "Chelsea", "Blackburn Rovers", "Leeds United", "Real Madrid", "FC Barcelona", "AC Milan", "Juventus", "Ajax", "Bayern Múnich"]
+}

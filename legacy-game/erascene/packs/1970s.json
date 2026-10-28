@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "1970s",
+  "label": "1970s",
+  "years": [1970, 1979],
+  "startYear": 1970,
+  "rosterMode": "generated-archetypes",
+  "rules": {"winPoints": 2, "backPassBanned": false, "transferWindows": false, "maxSubs": 2, "bosmanFreeAgency": false, "goldenGoal": false, "goalLineTech": false, "fiveSubs": false, "varByCompetition": {}},
+  "media": {"channels": ["newspapers", "radio", "weekly-tv-highlights"], "socialMedia": false, "deadlineDayCircus": false, "rumorSpeed": "slow"},
+  "economy": {"recordTransfer": 1000000, "wageScale": 0.025, "marketScale": 0.08, "shirtSponsorship": false, "tvDealMultiplier": 0.08, "currency": "EUR"},
+  "presentation": {"pitchWear": "mud-winter", "terraces": "standing", "fences": "where-applicable", "heating": false, "kits": "classic-70s", "ball": "heavy-leather", "adBoards": "static", "uiSkin": "print-scoreboard", "broadcast": "grainy-4:3"},
+  "staff": {"analysts": false, "sportsScience": "basic", "backroomMax": 3, "agents": "rare"},
+  "playerModel": {"paceScale": 0.84, "staminaScale": 0.86, "pressingScale": 0.55, "trainingScale": 0.78},
+  "referenceClubs": ["Liverpool", "Arsenal", "Manchester United", "Real Madrid", "Ajax", "Bayern Múnich"]
+}

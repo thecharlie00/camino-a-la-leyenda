@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { runInNewContext } from 'node:vm';
+import { runInNewContext, Script } from 'node:vm';
 
 const output = process.argv[2] || 'dist';
 const gamePage = join(output, 'jugar', 'juego.html');
@@ -14,6 +14,34 @@ for (const file of [gamePage, webPage, siteRuntime, translatedPage]) {
 }
 
 const html = readFileSync(gamePage, 'utf8');
+const scriptMatch = html.match(/<script>\s*([\s\S]*?)<\/script>/);
+assert.ok(scriptMatch, 'Inline game script is missing');
+new Script(scriptMatch[1], {filename: 'built-game.js'});
+assert.match(html, /var ERAS_MODE = true;/, 'Era Mode feature flag was not embedded');
+function readEmbeddedObject(source, marker) {
+  const markerAt = source.indexOf(marker);
+  assert.ok(markerAt >= 0, `Missing embedded object: ${marker}`);
+  const start = source.indexOf('{', markerAt + marker.length);
+  let depth = 0, quoted = false, escaped = false;
+  for (let i = start; i < source.length; i++) {
+    const ch = source[i];
+    if (quoted) {
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === '"') quoted = false;
+      continue;
+    }
+    if (ch === '"') quoted = true;
+    else if (ch === '{') depth++;
+    else if (ch === '}' && --depth === 0) return JSON.parse(source.slice(start, i + 1));
+  }
+  throw new Error(`Unterminated embedded object: ${marker}`);
+}
+const erasData = readEmbeddedObject(scriptMatch[1], 'var ERAS_DATA =');
+const erasI18n = readEmbeddedObject(scriptMatch[1], 'var ERAS_I18N =');
+assert.deepEqual(erasData.packs.map((pack) => pack.id), ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']);
+assert.ok(erasData.timeline.events.some((event) => event.year === 2010 && event.changes.media.socialMedia === true), 'The social-media transition must be 2010');
+assert.ok(erasI18n['Modo Épocas']?.en, 'Era Mode translations are not embedded');
 assert.match(html, /var BUILD = \{v: "5\.9", code: 59,/, 'Game bundle must match app version 5.9 (59)');
 const packMatch = html.match(/var P3D_ASSET_PACK = (\{[^;]+\});/);
 assert.ok(packMatch, 'Embedded 3D model pack is missing');

@@ -42,7 +42,38 @@ for fam, pkg, w, subsets in faces:
 
 css = "\n".join(css_fonts) + "\n" + (SRC / "style.css").read_text(encoding="utf-8")
 LANG_FILES = ["lang-en.js", "lang-de.js", "lang-it.js", "lang-fr.js", "lang-fem.js"]
-ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "ui-boot.js"]
+ERAS_ROOT = GAME_ROOT / "erascene"
+ERAS_PACKS = [json.loads(path.read_text(encoding="utf-8")) for path in sorted((ERAS_ROOT / "packs").glob("*.json"))]
+ERAS_TIMELINE = json.loads((ERAS_ROOT / "rules-timeline.json").read_text(encoding="utf-8"))
+ERAS_I18N = json.loads((ERAS_ROOT / "translations.json").read_text(encoding="utf-8"))
+EXPECTED_ERAS = ["1970s", "1980s", "1990s", "2000s", "2010s", "2020s"]
+if [pack.get("id") for pack in ERAS_PACKS] != EXPECTED_ERAS:
+    raise ValueError("Era packs must cover 1970s through 2020s exactly once")
+available_clubs = {name for clubs in re.findall(r'clubs:\"([^\"]+)\"', (SRC / "data.js").read_text(encoding="utf-8")) for name in clubs.split("|")}
+for pack in ERAS_PACKS:
+    years = pack.get("years", [])
+    if pack.get("schema") != 1 or len(years) != 2 or years[1] - years[0] != 9:
+        raise ValueError(f"Invalid year range or schema in era pack {pack.get('id')}")
+    for section in ("rules", "media", "economy", "presentation", "staff", "playerModel", "referenceClubs"):
+        if section not in pack:
+            raise ValueError(f"Era pack {pack['id']} is missing {section}")
+    missing_clubs = [name for name in pack["referenceClubs"] if name not in available_clubs]
+    if missing_clubs:
+        raise ValueError(f"Era pack {pack['id']} has clubs absent from the shared world: {missing_clubs}")
+for key, locales in ERAS_I18N.items():
+    for language in ("en", "de", "it", "fr"):
+        if not locales.get(language):
+            raise ValueError(f"Era translation {key!r} is missing {language}")
+        source_tokens = sorted(re.findall(r"\{[A-Za-z_]+\}", key))
+        translated_tokens = sorted(re.findall(r"\{[A-Za-z_]+\}", locales[language]))
+        if source_tokens != translated_tokens:
+            raise ValueError(f"Era translation placeholders do not match for {key!r} ({language})")
+if ERAS_TIMELINE.get("schema") != 1 or any("year" not in event or "changes" not in event for event in ERAS_TIMELINE.get("events", [])):
+    raise ValueError("Era rules timeline is invalid")
+if [event["year"] for event in ERAS_TIMELINE["events"]] != sorted(event["year"] for event in ERAS_TIMELINE["events"]):
+    raise ValueError("Era rules timeline events must be chronological")
+ERAS_DATA_JS = "var ERAS_MODE = true;\nvar ERAS_DATA = " + json.dumps({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE}, ensure_ascii=False, separators=(",", ":")) + ";\nvar ERAS_I18N = " + json.dumps(ERAS_I18N, ensure_ascii=False, separators=(",", ":")) + ";\n"
+ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "ui-eras.js", "ui-boot.js"]
 web_config_path = ROOT / "web" / "config.json"
 web_config = json.loads(web_config_path.read_text(encoding="utf-8-sig")) if web_config_path.exists() else {}
 goat_api_url = os.environ.get("CAMINO_GOAT_API_URL", web_config.get("goat_api_url", "")).strip().rstrip("/")
@@ -78,7 +109,7 @@ asset_js = "var P3D_ASSET_PACK = " + json.dumps(asset_pack, separators=(",", ":"
 if not asset_pack:
     print("Pitch3D: sin GLB de runtime; se usará el fallback procedural")
 
-js = asset_js + "var GOAT_WEB_BUILD = false;\n" + "\n".join((SRC / n).read_text(encoding="utf-8") for n in ORDER if (SRC / n).exists())
+js = asset_js + "var GOAT_WEB_BUILD = false;\n" + ERAS_DATA_JS + "\n".join((SRC / n).read_text(encoding="utf-8") for n in ORDER if (SRC / n).exists())
 # etiqueta de versión: nombre y código de la app Android y la fecha de compilación
 import re as _re, datetime as _dt
 _man = (ROOT / "android" / "AndroidManifest.xml").read_text(encoding="utf-8") if (ROOT / "android" / "AndroidManifest.xml").exists() else ""
