@@ -25,15 +25,15 @@ if [[ ! -s "$KEYSTORE" ]]; then
   echo "Keystore not found or empty: $KEYSTORE" >&2
   exit 1
 fi
-if [[ ! -f "$ROOT/dist/jugar/juego.html" ]]; then
-  echo "Game entry point missing; run npm run build first." >&2
+if [[ ! -f "$ROOT/dist/android/jugar/juego.html" ]]; then
+  echo "Android game entry point missing; run npm run build first." >&2
   exit 1
 fi
 
 rm -rf build-aab assets
 mkdir -p build-aab/{classes,dex,module} "$ROOT/dist" assets/jugar
 # The game HTML is self-contained (3D models, CSS, music and pet engine inline).
-cp "$ROOT/dist/jugar/juego.html" assets/jugar/juego.html
+cp "$ROOT/dist/android/jugar/juego.html" assets/jugar/juego.html
 
 # Create an Android proto-APK to supply the base module manifest and packaged assets.
 "$AAPT2" link \

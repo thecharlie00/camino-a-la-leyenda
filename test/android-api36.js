@@ -30,6 +30,7 @@ assert.match(activity, /setAllowUniversalAccessFromFileURLs\(false\)/);
 assert.match(activity, /setMixedContentMode\(WebSettings\.MIXED_CONTENT_NEVER_ALLOW\)/);
 
 assert.match(aabBuilder, /MANIFEST_TARGET_SDK/);
+assert.match(aabBuilder, /dist\/android\/jugar\/juego\.html/, 'AAB builder must package the Android-only startup artifact');
 assert.match(aabBuilder, /--target-sdk-version "\$TARGET_SDK_VERSION"/);
 assert.match(aabBuilder, /TARGET_SDK_VERSION must match AndroidManifest\.xml/);
 assert.match(workflow, /BUILD_TOOLS: "36\.0\.0"/);

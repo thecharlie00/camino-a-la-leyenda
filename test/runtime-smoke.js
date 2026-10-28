@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { JSDOM, VirtualConsole } from 'jsdom';
 
-const html = readFileSync('dist/jugar/juego.html', 'utf8');
+const html = readFileSync('dist/android/jugar/juego.html', 'utf8');
 const errors = [];
 const virtualConsole = new VirtualConsole();
 virtualConsole.on('jsdomError', (error) => errors.push(`jsdom: ${error.message}`));

@@ -3,14 +3,13 @@
 import base64, json, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parent
-import os, shutil
+import os
 from urllib.parse import urlparse
 # Snapshot of the complete 5.7 game engine, including its 3D rigs, models, music and pet world.
 GAME_ROOT = ROOT / "legacy-game"
 SRC = GAME_ROOT / "src"
 FONTS = GAME_ROOT / "fonts" / "files"
 ASSET_ROOT = GAME_ROOT
-DIST = ROOT / "dist" / ".legacy-game-build"
 
 faces = [
     # 5.6: tipografía legible. Atkinson Hyperlegible Next (OFL) para texto y cifras;
@@ -45,7 +44,7 @@ LANG_FILES = ["lang-en.js", "lang-de.js", "lang-it.js", "lang-fr.js", "lang-fem.
 LANG_DATA = {name: (SRC / name).read_text(encoding="utf-8") for name in LANG_FILES}
 LANG_MARKUP = "\n".join(
     '<script type="text/plain" id="camino-i18n-' + ("fem" if name == "lang-fem.js" else name[5:7]) + '">' +
-    source + '</script>'
+    source.replace("</script", "<" + chr(92) + "/script") + '</script>'
     for name, source in LANG_DATA.items()
 )
 ERAS_ROOT = GAME_ROOT / "erascene"
@@ -115,31 +114,47 @@ asset_markup = '<template id="pitch3d-asset-pack">' + json.dumps(asset_pack, sep
 if not asset_pack:
     print("Pitch3D: sin GLB de runtime; se usará el fallback procedural")
 
-# etiqueta de versión: nombre y código de la app Android y la fecha de compilación
+# Version metadata is shared; runtime packaging differs only by target.
 import re as _re, datetime as _dt
 _man = (ROOT / "android" / "AndroidManifest.xml").read_text(encoding="utf-8") if (ROOT / "android" / "AndroidManifest.xml").exists() else ""
 _vn = (_re.search(r'versionName="([^"]+)"', _man) or [None, "?"])[1]
 _vc = (_re.search(r'versionCode="(\d+)"', _man) or [None, "0"])[1]
 build_js = 'var BUILD = {v: "%s", code: %s, t: "%s"};\n' % (_vn, _vc, _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
-module_sources = [("runtime-config", "var GOAT_API_URL = " + json.dumps(goat_api_url) + ";\n" + build_js + "var GOAT_WEB_BUILD = false;\n" + ERAS_DATA_JS)]
-module_sources.extend((name, (SRC / name).read_text(encoding="utf-8")) for name in ORDER if (SRC / name).exists() and name not in LANG_FILES)
-js = "\n".join(source for _, source in module_sources).replace("</script", "<\\/script")
-web_modules = list(module_sources)
+source_files = [(name, (SRC / name).read_text(encoding="utf-8")) for name in ORDER if (SRC / name).exists()]
+common_prefix = "var GOAT_API_URL = " + json.dumps(goat_api_url) + ";\n" + build_js + "var GOAT_WEB_BUILD = false;\n" + ERAS_DATA_JS
+
+# The public web build stays as one self-contained page with its existing startup behavior.
+web_js = "var P3D_ASSET_PACK = " + json.dumps(asset_pack, separators=(",", ":")) + ";\n" + common_prefix + "\n".join(source for _, source in source_files)
 for old, new in (
     ("var GOAT_WEB_BUILD = false;", "var GOAT_WEB_BUILD = true;"),
     ("var WEB_BUILD = false;", "var WEB_BUILD = true;"),
     ("var NO_ADS = false;", "var NO_ADS = true;"),
 ):
-    found = [i for i, (_, source) in enumerate(web_modules) if old in source]
+    if web_js.count(old) != 1:
+        raise SystemExit(f"Expected one web build marker: {old}")
+    web_js = web_js.replace(old, new, 1)
+web_js = web_js.replace("</script", "<" + chr(92) + "/script")
+
+# The Android WebView uses the same game sources/UI, but yields between modules
+# and keeps the large locale/model payloads inert until they are actually needed.
+mobile_sources = [("runtime-config", common_prefix)]
+mobile_sources.extend((name, source) for name, source in source_files if name not in LANG_FILES)
+mobile_js = list(mobile_sources)
+for old, new in (
+    ("var GOAT_WEB_BUILD = false;", "var GOAT_WEB_BUILD = true;"),
+    ("var WEB_BUILD = false;", "var WEB_BUILD = true;"),
+    ("var NO_ADS = false;", "var NO_ADS = true;"),
+):
+    found = [i for i, (_, source) in enumerate(mobile_js) if old in source]
     if len(found) != 1:
-        raise SystemExit(f"Expected one build marker: {old}")
+        raise SystemExit(f"Expected one mobile build marker: {old}")
     i = found[0]
-    name, source = web_modules[i]
-    web_modules[i] = (name, source.replace(old, new, 1))
-module_ids = ["camino-module-%03d" % i for i in range(len(web_modules))]
+    name, source = mobile_js[i]
+    mobile_js[i] = (name, source.replace(old, new, 1))
+module_ids = ["camino-module-%03d" % i for i in range(len(mobile_js))]
 MODULE_MARKUP = "\n".join(
-    '<script type="text/plain" id="' + module_ids[i] + '">' + source.replace("</script", "<\\/script") + '</script>'
-    for i, (_, source) in enumerate(web_modules)
+    '<script type="text/plain" id="' + module_ids[i] + '">' + source.replace("</script", "<" + chr(92) + "/script") + '</script>'
+    for i, (_, source) in enumerate(mobile_js)
 )
 MODULE_BOOTSTRAP = """(function () {
   var ids = %s, index = 0, splash = document.querySelector('.boot-screen'), booting = true, failed = false;
@@ -175,33 +190,32 @@ MODULE_BOOTSTRAP = """(function () {
 connect_src = goat_api_url if goat_api_url else "'none'"
 
 ICON = base64.b64encode((SRC / "icon96.png").read_bytes()).decode() if (SRC / "icon96.png").exists() else ""
-body = f"""<title>Fútbol: Camino a la Leyenda</title>
+head = f"""<title>Fútbol: Camino a la Leyenda</title>
 <link rel="icon" href="data:image/png;base64,{ICON}">
 <link rel="apple-touch-icon" href="data:image/png;base64,{ICON}">
 <meta name="theme-color" content="#0b1417">
 <style>
 {css}
 </style>
-<div id="app"><div class="boot-screen" role="status" aria-live="polite" style="min-height:100dvh;display:grid;place-items:center;color:#f4f4ee;background:#0b1417;font:600 16px system-ui">Cargando el juego…</div></div>
-{asset_markup}
-{LANG_MARKUP}
-<script>
-{js}
-</script>
 """
-if DIST.exists():
-    shutil.rmtree(DIST)
-DIST.mkdir(parents=True)
-(DIST / "camino.html").write_text(body.replace("var NO_ADS = false;", "var NO_ADS = true;"), encoding="utf-8")
-
-full = f"""<!doctype html>
+html_head = f"""<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src {connect_src}; form-action 'none'; base-uri 'none'">
-{body.split('<div id="app">')[0]}</head>
-<body>
+{head}</head>
+"""
+
+web_html = html_head + f"""<body>
+<div id="app"></div>
+<script>
+{web_js}
+</script>
+</body>
+</html>
+"""
+mobile_html = html_head + f"""<body>
 <div id="app"><div class="boot-screen" role="status" aria-live="polite" style="min-height:100dvh;display:grid;place-items:center;color:#f4f4ee;background:#0b1417;font:600 16px system-ui">Cargando el juego…</div></div>
 {asset_markup}
 {LANG_MARKUP}
@@ -213,13 +227,12 @@ full = f"""<!doctype html>
 </html>
 """
 
-# Publish the complete 5.7 game source with the current 5.10/60 build metadata.
-# The web and Android targets use the same self-contained document: CSS, music,
-# 3D models, match engine, and the voxel pet world are embedded in this file.
-
-legacy_page = ROOT / "dist" / "jugar" / "juego.html"
-legacy_page.parent.mkdir(parents=True, exist_ok=True)
-legacy_page.write_text(full, encoding="utf-8")
+web_page = ROOT / "dist" / "jugar" / "juego.html"
+web_page.parent.mkdir(parents=True, exist_ok=True)
+web_page.write_text(web_html, encoding="utf-8")
+mobile_page = ROOT / "dist" / "android" / "jugar" / "juego.html"
+mobile_page.parent.mkdir(parents=True, exist_ok=True)
+mobile_page.write_text(mobile_html, encoding="utf-8")
 
 # Do not ship the stale v5.2 bundle from public/; the generated v5.10/60 game
 # is now the only engine used by the Web page and Android WebView.
@@ -227,5 +240,5 @@ stale_bundle = ROOT / "dist" / "camino-engine.js"
 if stale_bundle.exists():
     stale_bundle.unlink()
 
-print("game.html", round(len(full) / 1024), "KB · build", _vn, "(code", _vc, ")")
-shutil.rmtree(DIST)
+print("web game.html", round(len(web_html) / 1024), "KB · build", _vn, "(code", _vc, ")")
+print("Android game.html", round(len(mobile_html) / 1024), "KB ·", len(module_ids), "yielded modules")
