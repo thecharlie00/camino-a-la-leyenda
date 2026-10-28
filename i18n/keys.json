@@ -20670,11 +20670,11 @@
   ],
   "ctx": "{by: \"memefut\", t: N_(\"Cuando ganas y todo el grupo de WhatsApp se llena de audios de 3 minutos 🗣️🗣️🗣️\")},"
  },
- "Another three points for {club}. Not bad at all, not bad at all.": {
+ "Tres puntos más para el {club}. Nada mal, nada mal.": {
   "w": [
    "social-data.js:106"
   ],
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Another three points for {club}. Not bad at all, not bad at all.\")},"
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Tres puntos más para el {club}. Nada mal, nada mal.\")},"
  },
  "¡Tres puntos que valen oro! Gracias a la afición por empujar hasta el final 💪 {score}": {
   "w": [
@@ -21402,11 +21402,11 @@
   ],
   "ctx": "{by: \"rival\", mood: -1, t: N_(\"Hay que reconocerlo: un triplete es un triplete. Respeto, aunque duela.\")},"
  },
- "Hat-trick! The ball goes home with {name}. Lovely stuff.": {
+ "¡Triplete! El balón se va a casa con {name}. ¡Qué maravilla!": {
   "w": [
    "social-data.js:244"
   ],
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Hat-trick! The ball goes home with {name}. Lovely stuff.\")},"
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"¡Triplete! El balón se va a casa con {name}. ¡Qué maravilla!\")},"
  },
  "TRIPLETE DE {name}. ¿Alguien tiene un pulso? Yo no. Qué barbaridad.": {
   "w": [
@@ -21924,11 +21924,11 @@
   ],
   "ctx": "{by: \"gazzetta\", t: N_(\"Calciomercato: il {to} accelera per {name}. Possibile offerta da {fee}.\")},"
  },
- "Sky Sportz understands {to} are preparing a bid for {name}. Talks expected this week.": {
+ "Sky Sportz informa de que {to} prepara una oferta por {name}. Se esperan conversaciones esta semana.": {
   "w": [
    "social-data.js:345"
   ],
-  "ctx": "{by: \"skysportz\", t: N_(\"Sky Sportz understands {to} are preparing a bid for {name}. Talks expected this week.\")},"
+  "ctx": "{by: \"skysportz\", t: N_(\"Sky Sportz informa de que {to} prepara una oferta por {name}. Se esperan conversaciones esta semana.\")},"
  },
  "Que ni se les ocurra tocar a {name}. Si se va, me quito de socio 😤": {
   "w": [
@@ -22038,11 +22038,11 @@
   ],
   "ctx": "{by: \"transfermarket\", t: N_(\"✅ Fichaje confirmado: {name} ({from} → {club}) por {fee}. Contrato hasta {year}.\")},"
  },
- "DONE DEAL: {name} joins {club} from {from}. Contract until {year}.": {
+ "FICHAJE CERRADO: {name} llega al {club} desde el {from}. Contrato hasta {year}.": {
   "w": [
    "social-data.js:366"
   ],
-  "ctx": "{by: \"skysportz\", mood: 1, t: N_(\"DONE DEAL: {name} joins {club} from {from}. Contract until {year}.\")},"
+  "ctx": "{by: \"skysportz\", mood: 1, t: N_(\"FICHAJE CERRADO: {name} llega al {club} desde el {from}. Contrato hasta {year}.\")},"
  },
  "✍️ ¡Bienvenido, {name}! Ya es oficial: nueva etapa en {club}. ¡A por todas! 💙": {
   "w": [
@@ -22458,11 +22458,11 @@
   ],
   "ctx": "{by: \"ibai\", mood: 1, t: N_(\"CAMPEONES. {trophy}. ¡Qué locura, qué alegría! Gracias, {club}, por darnos esto.\")},"
  },
- "Congratulations, {club}! A deserved {trophy}.": {
+ "¡Enhorabuena, {club}! Un {trophy} más que merecido.": {
   "w": [
    "social-data.js:444"
   ],
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Congratulations, {club}! A deserved {trophy}.\")},"
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"¡Enhorabuena, {club}! Un {trophy} más que merecido.\")},"
  },
  "🏆 El {club} es campeón de {trophy}. ¡Enhorabuena a toda su afición!": {
   "w": [
@@ -22620,11 +22620,11 @@
   ],
   "ctx": "{by: \"memefut\", t: N_(\"{name} recogiendo el premio: 'quiero agradecer a mi madre, mi agente y a todos los que dudaron' 🎤😂\")},"
  },
- "Well done, {name}. A deserved award, no doubt.": {
+ "Bien hecho, {name}. Un premio más que merecido.": {
   "w": [
    "social-data.js:475"
   ],
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Well done, {name}. A deserved award, no doubt.\")},"
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Bien hecho, {name}. Un premio más que merecido.\")},"
  },
  "🏆 {name}, premiado. ¡Enhorabuena a un talento del {club}!": {
   "w": [
@@ -22716,11 +22716,11 @@
   ],
   "ctx": "{by: \"ibai\", mood: 1, t: N_(\"{name} entre los candidatos/as al Balón de Oro. Qué locura. Qué orgullo.\")},"
  },
- "{name} on the Ballon d'Or list. About time, to be honest.": {
+ "{name} está entre los candidatos al Balón de Oro. Ya era hora, la verdad.": {
   "w": [
    "social-data.js:493"
   ],
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"{name} on the Ballon d'Or list. About time, to be honest.\")}"
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"{name} está entre los candidatos al Balón de Oro. Ya era hora, la verdad.\")}"
  },
  "Hasta aquí hemos llegado. Si no cambian cosas ya, me llevo mi abono a otro lado 😤": {
   "w": [
@@ -23118,11 +23118,11 @@
   ],
   "ctx": "{by: \"memefut\", t: N_(\"{name} cantando el himno por primera vez: 🥹🎶\")},"
  },
- "A debut for {name} on the international stage. A moment to savour.": {
+ "Debut internacional de {name}. Un momento para disfrutar.": {
   "w": [
    "social-data.js:568"
   ],
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"A debut for {name} on the international stage. A moment to savour.\")},"
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Debut internacional de {name}. Un momento para disfrutar.\")},"
  },
  "Hoy ha sido uno de los días más especiales de mi vida. Gracias a todos por el cariño 🇪🇸🥹": {
   "w": [
@@ -23274,17 +23274,17 @@
   ],
   "ctx": "{by: \"memefut\", t: N_(\"{name} al retirarse: 'por fin puedo comer lo que quiera' 🍕😂\")},"
  },
- "What a career for {name}. Time to hang up the boots. Thanks for everything.": {
+ "Qué carrera la de {name}. Toca colgar las botas. Gracias por todo.": {
   "w": [
    "social-data.js:598"
   ],
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"What a career for {name}. Time to hang up the boots. Thanks for everything.\")},"
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Qué carrera la de {name}. Toca colgar las botas. Gracias por todo.\")},"
  },
- "Respect to {name}. A proper pro, a proper character. Enjoy retirement.": {
+ "Todo mi respeto, {name}. Un profesional de verdad y una gran persona. Disfruta de tu retiro.": {
   "w": [
    "social-data.js:599"
   ],
-  "ctx": "{by: \"ferdinan\", mood: 1, t: N_(\"Respect to {name}. A proper pro, a proper character. Enjoy retirement.\")},"
+  "ctx": "{by: \"ferdinan\", mood: 1, t: N_(\"Todo mi respeto, {name}. Un profesional de verdad y una gran persona. Disfruta de tu retiro.\")},"
  },
  "Hoy digo adiós, pero no al fútbol. Gracias por todo. Ha sido un sueño 💙": {
   "w": [
@@ -23706,17 +23706,17 @@
   ],
   "ctx": "{by: \"bildd\", t: N_(\"{lg}: {player} mit dem Siegtor für {club}! Was für ein Spiel!\")},"
  },
- "{lg} | {player} stars as {club} pull off a stunning result. Pure drama.": {
+ "{lg} | {player} brilla en una victoria espectacular del {club}. Puro drama.": {
   "w": [
    "social-data.js:680"
   ],
-  "ctx": "{by: \"skysportz\", t: N_(\"{lg} | {player} stars as {club} pull off a stunning result. Pure drama.\")},"
+  "ctx": "{by: \"skysportz\", t: N_(\"{lg} | {player} brilla en una victoria espectacular del {club}. Puro drama.\")},"
  },
- "How {player} is changing {club}'s season in {lg}: a deep dive.": {
+ "Cómo está cambiando {player} la temporada del {club} en {lg}: análisis a fondo.": {
   "w": [
    "social-data.js:681"
   ],
-  "ctx": "{by: \"athletick\", t: N_(\"How {player} is changing {club}'s season in {lg}: a deep dive.\")},"
+  "ctx": "{by: \"athletick\", t: N_(\"Cómo está cambiando {player} la temporada del {club} en {lg}: análisis a fondo.\")},"
  },
  "📊 {lg}: {player} ya es máximo goleador de la competición con {goals} goles.": {
   "w": [
@@ -23760,11 +23760,11 @@
   ],
   "ctx": "{by: \"ibai\", t: N_(\"Chicos, lo de {lg} esta jornada fue una locura. {player} se ha salido. Me quedo sin palabras.\")},"
  },
- "Great weekend in {lg}. {player} was superb for {club}.": {
+ "Gran fin de semana en {lg}. {player} estuvo espectacular con el {club}.": {
   "w": [
    "social-data.js:689"
   ],
-  "ctx": "{by: \"linekker\", t: N_(\"Great weekend in {lg}. {player} was superb for {club}.\")},"
+  "ctx": "{by: \"linekker\", t: N_(\"Gran fin de semana en {lg}. {player} estuvo espectacular con el {club}.\")},"
  },
  "Mientras tanto, en la {lg}: {player} lidera al {club} en una jornada espectacular. 💜": {
   "w": [

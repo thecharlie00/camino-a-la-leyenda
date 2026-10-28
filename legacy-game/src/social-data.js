@@ -103,7 +103,7 @@ var SOCIAL_T = {
     {by: "teammate", mood: 1, t: N_("Gran victoria de equipo, así se hace. Vamos a por la siguiente 🤝 #UnidosSomosMás")},
     {by: "marka", mood: 1, t: N_("VICTORIA | {club}-{opp}, {score}: el equipo no falla y mira hacia arriba.")},
     {by: "memefut", t: N_("Cuando ganas y todo el grupo de WhatsApp se llena de audios de 3 minutos 🗣️🗣️🗣️")},
-    {by: "linekker", mood: 1, t: N_("Another three points for {club}. Not bad at all, not bad at all.")},
+    {by: "linekker", mood: 1, t: N_("Tres puntos más para el {club}. Nada mal, nada mal.")},
     {by: "self", mood: 1, t: N_("¡Tres puntos que valen oro! Gracias a la afición por empujar hasta el final 💪 {score}")}
   ],
   bigwin: [
@@ -241,7 +241,7 @@ var SOCIAL_T = {
     {by: "teammate", mood: 1, t: N_("¡TRIPLETE! Te lo has ganado, {name}. ¡La cena de hoy la pagas tú! 😂")},
     {by: "memefut", t: N_("{name} después del triplete: 'solo hago mi trabajo' (mientras mira la hoja del balón de oro) 👀")},
     {by: "rival", mood: -1, t: N_("Hay que reconocerlo: un triplete es un triplete. Respeto, aunque duela.")},
-    {by: "linekker", mood: 1, t: N_("Hat-trick! The ball goes home with {name}. Lovely stuff.")},
+    {by: "linekker", mood: 1, t: N_("¡Triplete! El balón se va a casa con {name}. ¡Qué maravilla!")},
     {by: "ibai", mood: 1, t: N_("TRIPLETE DE {name}. ¿Alguien tiene un pulso? Yo no. Qué barbaridad.")}
   ],
   assist: [
@@ -342,7 +342,7 @@ var SOCIAL_T = {
     {by: "marka", t: N_("EXCLUSIVA | El {to} quiere a {name}. El {club}, atento a la situación.")},
     {by: "deportibo", t: N_("{name}, en el radar del {to}. La operación podría moverse en las próximas semanas.")},
     {by: "gazzetta", t: N_("Calciomercato: il {to} accelera per {name}. Possibile offerta da {fee}.")},
-    {by: "skysportz", t: N_("Sky Sportz understands {to} are preparing a bid for {name}. Talks expected this week.")},
+    {by: "skysportz", t: N_("Sky Sportz informa de que {to} prepara una oferta por {name}. Se esperan conversaciones esta semana.")},
     {by: "fan", mood: -1, t: N_("Que ni se les ocurra tocar a {name}. Si se va, me quito de socio 😤")},
     {by: "fan", mood: 1, t: N_("Vente al {to}, {name}, que aquí te queremos 😂")},
     {by: "fan", t: N_("A ver si es verdad o es otro bulo de verano. Ya me han quemado otras veces.")},
@@ -363,7 +363,7 @@ var SOCIAL_T = {
     {by: "az", mood: 1, t: N_("FICHAJE | El {club} cierra a {name} desde {from}. Vinculación hasta {year}.")},
     {by: "deportibo", mood: 1, t: N_("El {club} oficializa a {name}. Un fichaje que levanta la ilusión del entorno.")},
     {by: "transfermarket", t: N_("✅ Fichaje confirmado: {name} ({from} → {club}) por {fee}. Contrato hasta {year}.")},
-    {by: "skysportz", mood: 1, t: N_("DONE DEAL: {name} joins {club} from {from}. Contract until {year}.")},
+    {by: "skysportz", mood: 1, t: N_("FICHAJE CERRADO: {name} llega al {club} desde el {from}. Contrato hasta {year}.")},
     {by: "club", mood: 1, t: N_("✍️ ¡Bienvenido, {name}! Ya es oficial: nueva etapa en {club}. ¡A por todas! 💙")},
     {by: "fan", mood: 1, t: N_("¡¡FICHAJE!! {name} al {club}. Ya me veo con la camiseta puesta 😍")},
     {by: "fan", mood: 1, t: N_("Ojo al dato: {name}, de {from} a nuestro {club}. Esto es ambición 🚀")},
@@ -441,7 +441,7 @@ var SOCIAL_T = {
     {by: "memefut", t: N_("Aficionado del {club}, resaca épica y camiseta empapada de champán: 🥂🍾")},
     {by: "rival", mood: -1, t: N_("Enhorabuena al {club}. Qué envidia, qué rabia, qué ganas de ganar el siguiente 😤👏")},
     {by: "ibai", mood: 1, t: N_("CAMPEONES. {trophy}. ¡Qué locura, qué alegría! Gracias, {club}, por darnos esto.")},
-    {by: "linekker", mood: 1, t: N_("Congratulations, {club}! A deserved {trophy}.")},
+    {by: "linekker", mood: 1, t: N_("¡Enhorabuena, {club}! Un {trophy} más que merecido.")},
     {by: "laligue", mood: 1, t: N_("🏆 El {club} es campeón de {trophy}. ¡Enhorabuena a toda su afición!")}
   ],
   title_lost: [
@@ -472,7 +472,7 @@ var SOCIAL_T = {
     {by: "teammate", mood: 1, t: N_("Premio más que merecido, {name}. Lo has ganado con trabajo. ¡Enhorabuena! 🥇")},
     {by: "stats", t: N_("📊 {name} suma {goals} goles y {n} asistencias esta temporada. Premio avalado por los números.")},
     {by: "memefut", t: N_("{name} recogiendo el premio: 'quiero agradecer a mi madre, mi agente y a todos los que dudaron' 🎤😂")},
-    {by: "linekker", mood: 1, t: N_("Well done, {name}. A deserved award, no doubt.")},
+    {by: "linekker", mood: 1, t: N_("Bien hecho, {name}. Un premio más que merecido.")},
     {by: "laligue", mood: 1, t: N_("🏆 {name}, premiado. ¡Enhorabuena a un talento del {club}!")},
     {by: "self", mood: 1, t: N_("Gracias por este premio. Es de todo el equipo y de la afición 💙🏅")}
   ],
@@ -490,7 +490,7 @@ var SOCIAL_T = {
     {by: "memefut", t: N_("{name} mirando a todos los que dudaron: 'Aquí estoy' 🏆😎")},
     {by: "pikee", t: N_("{name} para el Balón de Oro. Ya lo he dicho. Quien no lo vea, que se revise la vista 👀")},
     {by: "ibai", mood: 1, t: N_("{name} entre los candidatos/as al Balón de Oro. Qué locura. Qué orgullo.")},
-    {by: "linekker", mood: 1, t: N_("{name} on the Ballon d'Or list. About time, to be honest.")}
+    {by: "linekker", mood: 1, t: N_("{name} está entre los candidatos al Balón de Oro. Ya era hora, la verdad.")}
   ],
   fans_low: [
     {by: "fan", mood: -1, t: N_("Hasta aquí hemos llegado. Si no cambian cosas ya, me llevo mi abono a otro lado 😤")},
@@ -565,7 +565,7 @@ var SOCIAL_T = {
     {by: "teammate", mood: 1, t: N_("¡Enhorabuena, {name}! Un orgullo ver a un compañero con la camiseta de la selección 🫶")},
     {by: "stats", t: N_("📊 {name} se convierte en internacional por primera vez. Tercer jugador del {club} en la selección esta temporada.")},
     {by: "memefut", t: N_("{name} cantando el himno por primera vez: 🥹🎶")},
-    {by: "linekker", mood: 1, t: N_("A debut for {name} on the international stage. A moment to savour.")},
+    {by: "linekker", mood: 1, t: N_("Debut internacional de {name}. Un momento para disfrutar.")},
     {by: "self", mood: 1, t: N_("Hoy ha sido uno de los días más especiales de mi vida. Gracias a todos por el cariño 🇪🇸🥹")}
   ],
   milestone: [
@@ -595,8 +595,8 @@ var SOCIAL_T = {
     {by: "stats", t: N_("📊 La carrera de {name}: {n} partidos, {goals} goles y {trophy}. Retirada con honores.")},
     {by: "teammate", mood: 1, t: N_("Un honor haber compartido vestuario contigo, {name}. Descansa, que te lo has ganado 🫂")},
     {by: "memefut", t: N_("{name} al retirarse: 'por fin puedo comer lo que quiera' 🍕😂")},
-    {by: "linekker", mood: 1, t: N_("What a career for {name}. Time to hang up the boots. Thanks for everything.")},
-    {by: "ferdinan", mood: 1, t: N_("Respect to {name}. A proper pro, a proper character. Enjoy retirement.")},
+    {by: "linekker", mood: 1, t: N_("Qué carrera la de {name}. Toca colgar las botas. Gracias por todo.")},
+    {by: "ferdinan", mood: 1, t: N_("Todo mi respeto, {name}. Un profesional de verdad y una gran persona. Disfruta de tu retiro.")},
     {by: "self", mood: 1, t: N_("Hoy digo adiós, pero no al fútbol. Gracias por todo. Ha sido un sueño 💙")}
   ],
   sacked: [
@@ -677,8 +677,8 @@ var SOCIAL_T = {
     {by: "ekipe", t: N_("{lg} : {player} signe un doublé et propulse le {club} vers le sommet. Magnifique.")},
     {by: "gazzetta", t: N_("{lg}: gol e spettacolo. {player} trascina il {club}. Che partita!")},
     {by: "bildd", t: N_("{lg}: {player} mit dem Siegtor für {club}! Was für ein Spiel!")},
-    {by: "skysportz", t: N_("{lg} | {player} stars as {club} pull off a stunning result. Pure drama.")},
-    {by: "athletick", t: N_("How {player} is changing {club}'s season in {lg}: a deep dive.")},
+    {by: "skysportz", t: N_("{lg} | {player} brilla en una victoria espectacular del {club}. Puro drama.")},
+    {by: "athletick", t: N_("Cómo está cambiando {player} la temporada del {club} en {lg}: análisis a fondo.")},
     {by: "stats", t: N_("📊 {lg}: {player} ya es máximo goleador de la competición con {goals} goles.")},
     {by: "optajoel", t: N_("En la {lg}, el {club} ha ganado 6 de sus últimos 7 partidos. Racha espectacular.")},
     {by: "fan", t: N_("Yo veo la {lg} más que la nuestra. {player} es un crack, ¡qué nivel tiene! 👀")},
@@ -686,7 +686,7 @@ var SOCIAL_T = {
     {by: "fan", mood: -1, t: N_("En la {lg} sí que se juega al fútbol. Aquí parece el parque 😭")},
     {by: "memefut", t: N_("{lg} esta semana: '¿Quién necesita series pudiendo ver esto?' 🍿")},
     {by: "ibai", t: N_("Chicos, lo de {lg} esta jornada fue una locura. {player} se ha salido. Me quedo sin palabras.")},
-    {by: "linekker", t: N_("Great weekend in {lg}. {player} was superb for {club}.")},
+    {by: "linekker", t: N_("Gran fin de semana en {lg}. {player} estuvo espectacular con el {club}.")},
     {by: "futfem", t: N_("Mientras tanto, en la {lg}: {player} lidera al {club} en una jornada espectacular. 💜")}
   ],
   followers: [

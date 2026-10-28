@@ -83,12 +83,12 @@
   "ctx": "{by: \"memefut\", t: N_(\"{name} al retirarse: 'por fin puedo comer lo que quiera' 🍕😂\")},",
   "where": "social-data.js:546"
  },
- "What a career for {name}. Time to hang up the boots. Thanks for everything.": {
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"What a career for {name}. Time to hang up the boots. Thanks for everything.\")},",
+ "Qué carrera la de {name}. Toca colgar las botas. Gracias por todo.": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Qué carrera la de {name}. Toca colgar las botas. Gracias por todo.\")},",
   "where": "social-data.js:547"
  },
- "Respect to {name}. A proper pro, a proper character. Enjoy retirement.": {
-  "ctx": "{by: \"ferdinan\", mood: 1, t: N_(\"Respect to {name}. A proper pro, a proper character. Enjoy retirement.\")},",
+ "Todo mi respeto, {name}. Un profesional de verdad y una gran persona. Disfruta de tu retiro.": {
+  "ctx": "{by: \"ferdinan\", mood: 1, t: N_(\"Todo mi respeto, {name}. Un profesional de verdad y una gran persona. Disfruta de tu retiro.\")},",
   "where": "social-data.js:548"
  },
  "Hoy digo adiós, pero no al fútbol. Gracias por todo. Ha sido un sueño 💙": {
@@ -371,12 +371,12 @@
   "ctx": "{by: \"bildd\", t: N_(\"{lg}: {player} mit dem Siegtor für {club}! Was für ein Spiel!\")},",
   "where": "social-data.js:628"
  },
- "{lg} | {player} stars as {club} pull off a stunning result. Pure drama.": {
-  "ctx": "{by: \"skysportz\", t: N_(\"{lg} | {player} stars as {club} pull off a stunning result. Pure drama.\")},",
+ "{lg} | {player} brilla en una victoria espectacular del {club}. Puro drama.": {
+  "ctx": "{by: \"skysportz\", t: N_(\"{lg} | {player} brilla en una victoria espectacular del {club}. Puro drama.\")},",
   "where": "social-data.js:629"
  },
- "How {player} is changing {club}'s season in {lg}: a deep dive.": {
-  "ctx": "{by: \"athletick\", t: N_(\"How {player} is changing {club}'s season in {lg}: a deep dive.\")},",
+ "Cómo está cambiando {player} la temporada del {club} en {lg}: análisis a fondo.": {
+  "ctx": "{by: \"athletick\", t: N_(\"Cómo está cambiando {player} la temporada del {club} en {lg}: análisis a fondo.\")},",
   "where": "social-data.js:630"
  },
  "📊 {lg}: {player} ya es máximo goleador de la competición con {goals} goles.": {
@@ -407,8 +407,8 @@
   "ctx": "{by: \"ibai\", t: N_(\"Chicos, lo de {lg} esta jornada fue una locura. {player} se ha salido. Me quedo sin palabras.\")},",
   "where": "social-data.js:637"
  },
- "Great weekend in {lg}. {player} was superb for {club}.": {
-  "ctx": "{by: \"linekker\", t: N_(\"Great weekend in {lg}. {player} was superb for {club}.\")},",
+ "Gran fin de semana en {lg}. {player} estuvo espectacular con el {club}.": {
+  "ctx": "{by: \"linekker\", t: N_(\"Gran fin de semana en {lg}. {player} estuvo espectacular con el {club}.\")},",
   "where": "social-data.js:638"
  },
  "Mientras tanto, en la {lg}: {player} lidera al {club} en una jornada espectacular. 💜": {
