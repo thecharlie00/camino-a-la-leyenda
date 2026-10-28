@@ -24,8 +24,9 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
-      BUILD_TOOLS: "35.0.0"
-      PLATFORM: "android-35"
+      BUILD_TOOLS: "36.0.0"
+      PLATFORM: "android-36"
+      TARGET_SDK_VERSION: "36"
       BUNDLETOOL_VERSION: "1.18.3"
     steps:
       - uses: actions/checkout@v7

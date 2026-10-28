@@ -13,6 +13,13 @@ KEYSTORE="${CAMINO_KEYSTORE:-$ROOT/android/camino.keystore}"
 KEY_ALIAS="${CAMINO_KEY_ALIAS:-camino}"
 VERSION_CODE="${VERSION_CODE:-$(sed -n 's/.*android:versionCode="\([0-9]*\)".*/\1/p' AndroidManifest.xml)}"
 VERSION_NAME="${VERSION_NAME:-$(sed -n 's/.*android:versionName="\([^"]*\)".*/\1/p' AndroidManifest.xml)}"
+MANIFEST_TARGET_SDK="$(sed -n 's/.*android:targetSdkVersion="\([0-9]*\)".*/\1/p' AndroidManifest.xml)"
+TARGET_SDK_VERSION="${TARGET_SDK_VERSION:-$MANIFEST_TARGET_SDK}"
+
+if [[ -z "$TARGET_SDK_VERSION" || "$TARGET_SDK_VERSION" != "$MANIFEST_TARGET_SDK" ]]; then
+  echo "TARGET_SDK_VERSION must match AndroidManifest.xml ($MANIFEST_TARGET_SDK)." >&2
+  exit 1
+fi
 
 if [[ ! -s "$KEYSTORE" ]]; then
   echo "Keystore not found or empty: $KEYSTORE" >&2
@@ -32,7 +39,7 @@ cp "$ROOT/dist/jugar/juego.html" assets/jugar/juego.html
 "$AAPT2" link \
   --proto-format \
   --min-sdk-version 24 \
-  --target-sdk-version 35 \
+  --target-sdk-version "$TARGET_SDK_VERSION" \
   --version-code "$VERSION_CODE" \
   --version-name "$VERSION_NAME" \
   -I "$ANDROID_JAR" \
