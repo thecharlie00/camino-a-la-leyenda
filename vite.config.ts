@@ -1,7 +1,7 @@
-import { cpSync, copyFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { cpSync, copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { defineConfig } from 'vite';
+import { defineConfig, type ViteDevServer } from 'vite';
 import react from '@vitejs/plugin-react';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
@@ -31,17 +31,36 @@ function copyLegacySiteFiles() {
   };
 }
 
+function serveBuiltGameInDev() {
+  return {
+    name: 'serve-self-contained-game-in-dev',
+    configureServer(server: ViteDevServer) {
+      const gameFile = resolve(root, 'dist/jugar/juego.html');
+      server.middlewares.use((req, res, next) => {
+        if ((req.url || '').split('?')[0] !== '/jugar/juego.html') return next();
+        if (!existsSync(gameFile)) {
+          res.statusCode = 503;
+          res.end('Run npm run dev again to build the game runtime.');
+          return;
+        }
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.end(readFileSync(gameFile, 'utf8'));
+      });
+    },
+  };
+}
+
 // Build the existing public site and the two play pages. The game page is also
 // the WebView entry point packaged into the Android App Bundle.
 export default defineConfig({
   base: './',
-  plugins: [react(), copyLegacySiteFiles()],
+  plugins: [react(), copyLegacySiteFiles(), serveBuiltGameInDev()],
   build: {
     rollupOptions: {
       input: {
         main: resolve(root, 'index.html'),
         play: resolve(root, 'jugar/index.html'),
-        game: resolve(root, 'jugar/juego.html'),
       },
     },
   },
