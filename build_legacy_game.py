@@ -42,6 +42,12 @@ for fam, pkg, w, subsets in faces:
 
 css = "\n".join(css_fonts) + "\n" + (SRC / "style.css").read_text(encoding="utf-8")
 LANG_FILES = ["lang-en.js", "lang-de.js", "lang-it.js", "lang-fr.js", "lang-fem.js"]
+LANG_DATA = {name: (SRC / name).read_text(encoding="utf-8") for name in LANG_FILES}
+LANG_MARKUP = "\n".join(
+    '<script type="text/plain" id="camino-i18n-' + ("fem" if name == "lang-fem.js" else name[5:7]) + '">' +
+    source + '</script>'
+    for name, source in LANG_DATA.items()
+)
 ERAS_ROOT = GAME_ROOT / "erascene"
 ERAS_PACKS = [json.loads(path.read_text(encoding="utf-8")) for path in sorted((ERAS_ROOT / "packs").glob("*.json"))]
 ERAS_TIMELINE = json.loads((ERAS_ROOT / "rules-timeline.json").read_text(encoding="utf-8"))
@@ -105,19 +111,67 @@ for asset_id, rel in ASSET_FILES.items():
     asset_path = ASSET_ROOT / rel
     if asset_path.exists():
         asset_pack[asset_id] = base64.b64encode(asset_path.read_bytes()).decode("ascii")
-asset_js = "var P3D_ASSET_PACK = " + json.dumps(asset_pack, separators=(",", ":")) + ";\n"
+asset_markup = '<template id="pitch3d-asset-pack">' + json.dumps(asset_pack, separators=(",", ":")) + '</template>'
 if not asset_pack:
     print("Pitch3D: sin GLB de runtime; se usará el fallback procedural")
 
-js = asset_js + "var GOAT_WEB_BUILD = false;\n" + ERAS_DATA_JS + "\n".join((SRC / n).read_text(encoding="utf-8") for n in ORDER if (SRC / n).exists())
 # etiqueta de versión: nombre y código de la app Android y la fecha de compilación
 import re as _re, datetime as _dt
 _man = (ROOT / "android" / "AndroidManifest.xml").read_text(encoding="utf-8") if (ROOT / "android" / "AndroidManifest.xml").exists() else ""
 _vn = (_re.search(r'versionName="([^"]+)"', _man) or [None, "?"])[1]
 _vc = (_re.search(r'versionCode="(\d+)"', _man) or [None, "0"])[1]
-js = 'var BUILD = {v: "%s", code: %s, t: "%s"};\n' % (_vn, _vc, _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")) + js
-js = "var GOAT_API_URL = " + json.dumps(goat_api_url) + ";\n" + js
-js = js.replace("</script", "<\\/script")
+build_js = 'var BUILD = {v: "%s", code: %s, t: "%s"};\n' % (_vn, _vc, _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
+module_sources = [("runtime-config", "var GOAT_API_URL = " + json.dumps(goat_api_url) + ";\n" + build_js + "var GOAT_WEB_BUILD = false;\n" + ERAS_DATA_JS)]
+module_sources.extend((name, (SRC / name).read_text(encoding="utf-8")) for name in ORDER if (SRC / name).exists() and name not in LANG_FILES)
+js = "\n".join(source for _, source in module_sources).replace("</script", "<\\/script")
+web_modules = list(module_sources)
+for old, new in (
+    ("var GOAT_WEB_BUILD = false;", "var GOAT_WEB_BUILD = true;"),
+    ("var WEB_BUILD = false;", "var WEB_BUILD = true;"),
+    ("var NO_ADS = false;", "var NO_ADS = true;"),
+):
+    found = [i for i, (_, source) in enumerate(web_modules) if old in source]
+    if len(found) != 1:
+        raise SystemExit(f"Expected one build marker: {old}")
+    i = found[0]
+    name, source = web_modules[i]
+    web_modules[i] = (name, source.replace(old, new, 1))
+module_ids = ["camino-module-%03d" % i for i in range(len(web_modules))]
+MODULE_MARKUP = "\n".join(
+    '<script type="text/plain" id="' + module_ids[i] + '">' + source.replace("</script", "<\\/script") + '</script>'
+    for i, (_, source) in enumerate(web_modules)
+)
+MODULE_BOOTSTRAP = """(function () {
+  var ids = %s, index = 0, splash = document.querySelector('.boot-screen'), booting = true, failed = false;
+  function fail(error) {
+    if (failed) return;
+    failed = true; booting = false;
+    if (window.console && console.error) console.error('No se pudo iniciar el juego', error);
+    var app = document.getElementById('app');
+    if (app) app.innerHTML = '<main role="alert" style="padding:24px;color:#fff;background:#0b1417;font:16px system-ui"><h1>No se pudo iniciar el juego</h1><p>Recarga la página para volver a intentarlo.</p><button type="button" onclick="location.reload()">Recargar</button></main>';
+  }
+  window.addEventListener('error', function (event) { if (booting) fail(event.error || event.message || 'Error JavaScript al iniciar'); });
+  function next() {
+    if (failed) return;
+    var data = document.getElementById(ids[index]);
+    if (!data) { fail(new Error('Falta el módulo ' + ids[index])); return; }
+    try {
+      var script = document.createElement('script');
+      script.textContent = data.textContent || '';
+      (document.head || document.documentElement).appendChild(script);
+      script.parentNode.removeChild(script);
+      data.parentNode.removeChild(data);
+    } catch (error) { fail(error); return; }
+    index++;
+    if (splash && index %% 10 === 0) splash.textContent = 'Cargando el juego… ' + Math.round(index * 100 / ids.length) + '%%';
+    if (index < ids.length) setTimeout(next, 0);
+    else {
+      booting = false;
+      if (!window.UIX || typeof window.UIX.ui !== 'function') fail(new Error('El motor no terminó de inicializarse'));
+    }
+  }
+  setTimeout(next, 0);
+})();""" % json.dumps(module_ids)
 connect_src = goat_api_url if goat_api_url else "'none'"
 
 ICON = base64.b64encode((SRC / "icon96.png").read_bytes()).decode() if (SRC / "icon96.png").exists() else ""
@@ -128,7 +182,9 @@ body = f"""<title>Fútbol: Camino a la Leyenda</title>
 <style>
 {css}
 </style>
-<div id="app"></div>
+<div id="app"><div class="boot-screen" role="status" aria-live="polite" style="min-height:100dvh;display:grid;place-items:center;color:#f4f4ee;background:#0b1417;font:600 16px system-ui">Cargando el juego…</div></div>
+{asset_markup}
+{LANG_MARKUP}
 <script>
 {js}
 </script>
@@ -146,31 +202,26 @@ full = f"""<!doctype html>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src {connect_src}; form-action 'none'; base-uri 'none'">
 {body.split('<div id="app">')[0]}</head>
 <body>
-<div id="app"></div>
+<div id="app"><div class="boot-screen" role="status" aria-live="polite" style="min-height:100dvh;display:grid;place-items:center;color:#f4f4ee;background:#0b1417;font:600 16px system-ui">Cargando el juego…</div></div>
+{asset_markup}
+{LANG_MARKUP}
+{MODULE_MARKUP}
 <script>
-{js}
+{MODULE_BOOTSTRAP}
 </script>
 </body>
 </html>
 """
 
-# Publish the complete 5.7 game source with the current 5.9/59 build metadata.
+# Publish the complete 5.7 game source with the current 5.10/60 build metadata.
 # The web and Android targets use the same self-contained document: CSS, music,
 # 3D models, match engine, and the voxel pet world are embedded in this file.
-for old, new in (
-    ("var GOAT_WEB_BUILD = false;", "var GOAT_WEB_BUILD = true;"),
-    ("var WEB_BUILD = false;", "var WEB_BUILD = true;"),
-    ("var NO_ADS = false;", "var NO_ADS = true;"),
-):
-    if full.count(old) != 1:
-        raise SystemExit(f"Expected one build marker: {old}")
-    full = full.replace(old, new)
 
 legacy_page = ROOT / "dist" / "jugar" / "juego.html"
 legacy_page.parent.mkdir(parents=True, exist_ok=True)
 legacy_page.write_text(full, encoding="utf-8")
 
-# Do not ship the stale v5.2 bundle from public/; the generated v5.9/59 game
+# Do not ship the stale v5.2 bundle from public/; the generated v5.10/60 game
 # is now the only engine used by the Web page and Android WebView.
 stale_bundle = ROOT / "dist" / "camino-engine.js"
 if stale_bundle.exists():

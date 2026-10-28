@@ -15,9 +15,16 @@ for (const file of [gamePage, webPage, siteRuntime, translatedPage]) {
 
 const html = readFileSync(gamePage, 'utf8');
 const scriptMatch = html.match(/<script>\s*([\s\S]*?)<\/script>/);
-assert.ok(scriptMatch, 'Inline game script is missing');
-new Script(scriptMatch[1], {filename: 'built-game.js'});
-assert.match(html, /var ERAS_MODE = true;/, 'Era Mode feature flag was not embedded');
+assert.ok(scriptMatch, 'Game loader script is missing');
+new Script(scriptMatch[1], {filename: 'game-loader.js'});
+const moduleMatches = [...html.matchAll(/<script type="text\/plain" id="camino-module-\d+">([\s\S]*?)<\/script>/g)];
+assert.ok(moduleMatches.length >= 100, `Expected the game to be split into small launch modules, got ${moduleMatches.length}`);
+assert.ok(Buffer.byteLength(scriptMatch[1]) < 5000, 'Only a tiny scheduler should execute synchronously at launch');
+const largestModule = Math.max(...moduleMatches.map((match) => Buffer.byteLength(match[1])));
+assert.ok(largestModule <= 300_000, `A startup task is too large (${largestModule} bytes); split the module`);
+const gameSource = moduleMatches.map((match) => match[1]).join('\n');
+new Script(gameSource, {filename: 'built-game-modules.js'});
+assert.match(gameSource, /var ERAS_MODE = true;/, 'Era Mode feature flag was not embedded');
 function readEmbeddedObject(source, marker) {
   const markerAt = source.indexOf(marker);
   assert.ok(markerAt >= 0, `Missing embedded object: ${marker}`);
@@ -37,15 +44,22 @@ function readEmbeddedObject(source, marker) {
   }
   throw new Error(`Unterminated embedded object: ${marker}`);
 }
-const erasData = readEmbeddedObject(scriptMatch[1], 'var ERAS_DATA =');
-const erasI18n = readEmbeddedObject(scriptMatch[1], 'var ERAS_I18N =');
+const erasData = readEmbeddedObject(gameSource, 'var ERAS_DATA =');
+const erasI18n = readEmbeddedObject(gameSource, 'var ERAS_I18N =');
 assert.deepEqual(erasData.packs.map((pack) => pack.id), ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']);
 assert.ok(erasData.timeline.events.some((event) => event.year === 2010 && event.changes.media.socialMedia === true), 'The social-media transition must be 2010');
 assert.ok(erasI18n['Modo Épocas']?.en, 'Era Mode translations are not embedded');
-assert.match(html, /var BUILD = \{v: "5\.9", code: 59,/, 'Game bundle must match app version 5.9 (59)');
-const packMatch = html.match(/var P3D_ASSET_PACK = (\{[^;]+\});/);
+assert.match(gameSource, /var BUILD = \{v: "5\.10", code: 60,/, 'Game bundle must match app version 5.10 (60)');
+const packMatch = html.match(/<template id="pitch3d-asset-pack">([\s\S]*?)<\/template>/);
 assert.ok(packMatch, 'Embedded 3D model pack is missing');
 const modelPack = JSON.parse(packMatch[1]);
+for (const language of ['en', 'de', 'it', 'fr']) {
+  assert.match(html, new RegExp(`<script type="text/plain" id="camino-i18n-${language}">`), `Lazy ${language} catalog is missing`);
+  assert.doesNotMatch(gameSource, new RegExp(`I18N\\.${language} = \\{\\"%`), `${language} translations must not execute during initial boot`);
+}
+assert.match(html, /<script type="text\/plain" id="camino-i18n-fem">/, 'Lazy female translation catalog is missing');
+assert.match(html, /function ensureI18n\(lang\)/, 'Language catalogs must load on demand');
+assert.match(html, /Cargando el juego…/, 'The game should paint a loading state before initialization');
 for (const model of ['male_lod1', 'female_lod1', 'goalkeeper_lod1', 'ball_lod1']) {
   assert.ok(modelPack[model]?.length > 1000, `Missing or empty 3D model: ${model}`);
 }
@@ -82,4 +96,4 @@ assert.ok(existsSync(assets), 'Vite assets directory is missing');
 assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No website CSS bundle was emitted');
 assert.ok(statSync(gamePage).size > 1_000_000, 'Self-contained 3D game bundle is unexpectedly small');
 
-console.log(`Build smoke test passed: v5.9 (59), music, 3D players, 3D pet, ${Math.round(statSync(gamePage).size / 1024)} KB`);
+console.log(`Build smoke test passed: v5.10 (60), music, 3D players, 3D pet, ${Math.round(statSync(gamePage).size / 1024)} KB`);

@@ -33,16 +33,16 @@ function loadService(options) {
       removeItem: function (key) { delete store[key]; }
     },
     TextEncoder: TextEncoder, AbortController: AbortController, URL: URL, TypeError: TypeError,
-    console: console, Promise: Promise, setTimeout: setTimeout, clearTimeout: clearTimeout,
+    console: {log: function () {}, warn: function () {}, error: function () {}}, Promise: Promise, setTimeout: setTimeout, clearTimeout: clearTimeout,
     fetch: function (url, init) { calls.push({url: url, init: init}); return options.fetch(url, init, calls.length); }
   };
   env.window = env;
   var source = fs.readFileSync(path.join(root, "src/goat.js"), "utf8");
   /* El módulo usa variables globales del juego (S, W, LANG, GOAT_TEXT, GOAT_API_URL). */
   var factory = new Function("window", "GOAT_API_URL", "GOAT_TEXT", "LANG", "navigator",
-    "localStorage", "fetch", "TextEncoder", "AbortController", source);
+    "localStorage", "fetch", "TextEncoder", "AbortController", "console", source);
   factory(env, env.GOAT_API_URL, env.GOAT_TEXT, env.LANG, env.navigator, env.localStorage, env.fetch,
-    env.TextEncoder, env.AbortController);
+    env.TextEncoder, env.AbortController, env.console);
   return {service: env.GoatLadder, calls: calls};
 }
 

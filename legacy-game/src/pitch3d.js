@@ -3089,9 +3089,8 @@ var Pitch3D = (function () {
     if (assetState !== "none") return;
     assetState = "unavailable";
     try {
-      if (typeof P3D_ASSET_PACK === "undefined" || !P3D_ASSET_PACK ||
-        typeof Pitch3DAssets === "undefined" || !Pitch3DAssets.load) return;
-      assetModels = Pitch3DAssets.load(P3D_ASSET_PACK);
+      if (typeof Pitch3DAssets === "undefined" || !Pitch3DAssets.loadEmbedded) return;
+      assetModels = Pitch3DAssets.loadEmbedded();
       var male = assetModels && assetModels.players && assetModels.players.male;
       if (male && (male[1] || male[2])) assetState = "ready";
       else assetState = "failed";

@@ -6,12 +6,39 @@
    - onLang(fn) ejecuta fn ahora y cada vez que cambia el idioma (tablas con textos). */
 var LANGS = [["es", "Español"], ["en", "English"], ["de", "Deutsch"], ["it", "Italiano"], ["fr", "Français"]];
 var I18N = {en: {}, de: {}, it: {}, fr: {}};
+var I18N_LOADED = {es: true};
+var I18N_F_LOADED = false;
 var LANG = "es";
 var LANG_HOOKS = [];
 /* fútbol femenino: FEM se activa con la partida (S.g === "f"); I18N_F guarda las versiones en femenino de los textos */
 var FEM = false;
 var I18N_F = {es: {}, en: {}, de: {}, it: {}, fr: {}};
 function N_(s) { return s; }
+function loadI18nModule(id) {
+  if (typeof document === "undefined") return false;
+  var data = document.getElementById("camino-i18n-" + id);
+  if (!data) return false;
+  try {
+    var script = document.createElement("script");
+    script.text = data.textContent || "";
+    (document.head || document.documentElement).appendChild(script);
+    script.parentNode.removeChild(script);
+    data.parentNode.removeChild(data);
+    return true;
+  } catch (e) { return false; }
+}
+function ensureI18n(lang) {
+  if (lang !== "es" && !I18N_LOADED[lang]) {
+    loadI18nModule(lang);
+    I18N_LOADED[lang] = true;
+  }
+}
+function ensureI18nFemale() {
+  if (!I18N_F_LOADED) {
+    loadI18nModule("fem");
+    I18N_F_LOADED = true;
+  }
+}
 function onLang(fn) { LANG_HOOKS.push(fn); fn(); }
 function fillT(t, p) {
   if (p == null) return t;
@@ -26,6 +53,8 @@ function frElide(t) {
 function tr(s, p) {
   if (s == null) return "";
   s = String(s);
+  if (LANG !== "es") ensureI18n(LANG);
+  if (FEM) ensureI18nFemale();
   var t = null;
   if (FEM) { var f = I18N_F[LANG]; t = f ? f[s] : null; }
   if (typeof t !== "string" || !t) { var d = LANG !== "es" ? I18N[LANG] : null; t = d ? d[s] : null; }
@@ -51,6 +80,8 @@ function savedLang() {
 }
 function setLang(l) {
   if (l !== "es" && !I18N[l]) l = "es";
+  if (l !== "es") ensureI18n(l);
+  if (FEM) ensureI18nFemale();
   LANG = l;
   try { localStorage.setItem("camino.lang", l); } catch (e) {}
   if (typeof document !== "undefined" && document.documentElement) { document.documentElement.lang = l; document.title = tr("Fútbol: Camino a la Leyenda"); }
