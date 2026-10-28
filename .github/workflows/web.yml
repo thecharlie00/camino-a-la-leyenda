@@ -1,8 +1,5 @@
-# Publica la web (GitHub Pages, rama gh-pages) con el juego para jugar en el navegador.
-# Solo publica cuando se pide:
-# - a mano, desde la pestaña Actions («Run workflow»), o
-# - con un commit en main cuyo mensaje incluya «[web]».
-# Ajustes de anuncios y dominio: web/config.json. Primera vez: Settings → Pages → «Deploy from a branch» → gh-pages / (root).
+# Builds the Vite site/game and publishes it to the gh-pages branch.
+# Run on demand or with a [web] commit to main.
 name: Web
 
 on:
@@ -20,23 +17,38 @@ concurrency:
 jobs:
   pages:
     if: github.event_name != 'push' || contains(github.event.head_commit.message, '[web]')
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
         with:
-          python-version: "3.12"
-      - name: Compilar el juego y la web
+          node-version: "22"
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci --no-audit --no-fund
+
+      - name: Compilar web y juego
+        run: npm run build
+
+      - name: Comprobar los archivos publicados
+        run: npm run test:build
+
+      - name: Preparar sitio
         run: |
-          python3 build.py
-          python3 build_web.py
+          mkdir -p web-output/site
+          cp -a dist/. web-output/site/
+
       - name: Publicar en la rama gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          cd dist/site
+          cd web-output/site
           git init -q -b gh-pages
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -q -m "Web ${GITHUB_SHA::7}"
-          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages

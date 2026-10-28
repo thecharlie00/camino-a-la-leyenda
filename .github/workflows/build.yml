@@ -1,12 +1,8 @@
-# Compila el juego y el Android App Bundle (.aab) firmado en GitHub.
-# Solo compila cuando se pide:
-# - a mano, desde la pestaña Actions («Run workflow»), o
-# - con un commit en main cuyo mensaje incluya «[compilar]».
-# Los demás push a main no compilan. Al subir una etiqueta vX.Y también crea una release de borrador con el .aab.
-#
-# Secretos necesarios (Settings → Secrets and variables → Actions):
-#   CAMINO_KEYSTORE_B64  el archivo camino.keystore en base64
-#   CAMINO_KS_PASS       la contraseña del keystore
+# Builds and signs the Android App Bundle from the React/Vite game.
+# Run on demand, for [compilar] commits to main, or when a vX.Y tag is pushed.
+# Required repository secrets:
+#   CAMINO_KEYSTORE_B64  the signing keystore, base64 encoded
+#   CAMINO_KS_PASS       the keystore/key password
 name: Compilar
 
 on:
@@ -25,78 +21,79 @@ concurrency:
 jobs:
   aab:
     if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/') || contains(github.event.head_commit.message, '[compilar]')
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
     env:
       BUILD_TOOLS: "35.0.0"
       PLATFORM: "android-35"
-      BUNDLETOOL_VERSION: "1.17.2"
+      BUNDLETOOL_VERSION: "1.18.3"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "22"
+          cache: npm
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "17"
 
-      - name: Herramientas de Android
+      - name: Instalar dependencias
+        run: npm ci --no-audit --no-fund
+
+      - name: Compilar web y juego
+        run: npm run build
+
+      - name: Prueba de salida del juego
+        run: npm run test:build
+
+      - name: Preparar herramientas Android
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "build-tools;$BUILD_TOOLS" "platforms;$PLATFORM" > /dev/null
           echo "ANDROID_JAR=$ANDROID_HOME/platforms/$PLATFORM/android.jar" >> "$GITHUB_ENV"
           echo "AAPT2=$ANDROID_HOME/build-tools/$BUILD_TOOLS/aapt2" >> "$GITHUB_ENV"
           echo "D8=$ANDROID_HOME/build-tools/$BUILD_TOOLS/d8" >> "$GITHUB_ENV"
-          mkdir -p tools/bt
-          curl -sSL -o tools/bt/bundletool.jar "https://github.com/google/bundletool/releases/download/$BUNDLETOOL_VERSION/bundletool-all-$BUNDLETOOL_VERSION.jar"
-          echo "BUNDLETOOL_JAR=$GITHUB_WORKSPACE/tools/bt/bundletool.jar" >> "$GITHUB_ENV"
-
-      - name: Compilar el juego
-        run: |
-          (cd tools && npm ci --silent)
-          node tools/i18n.js build
-          python3 build.py
-
-      - name: Pruebas rápidas
-        run: |
-          node test/sim.js 3
-          node test/modes.js
+          mkdir -p "$RUNNER_TEMP/bundletool"
+          curl -fsSL -o "$RUNNER_TEMP/bundletool/bundletool.jar" \
+            "https://github.com/google/bundletool/releases/download/$BUNDLETOOL_VERSION/bundletool-all-$BUNDLETOOL_VERSION.jar"
+          echo "BUNDLETOOL_JAR=$RUNNER_TEMP/bundletool/bundletool.jar" >> "$GITHUB_ENV"
 
       - name: Versión
         id: ver
+        shell: bash
         run: |
+          set -euo pipefail
           code=$(sed -n 's/.*android:versionCode="\([0-9]*\)".*/\1/p' android/AndroidManifest.xml)
           name=$(sed -n 's/.*android:versionName="\([^"]*\)".*/\1/p' android/AndroidManifest.xml)
-          echo "code=$code" >> "$GITHUB_OUTPUT"; echo "name=$name" >> "$GITHUB_OUTPUT"
+          test -n "$code" && test -n "$name"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
           echo "Versión $name (código $code)" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Firmar y compilar el .aab
         env:
           CAMINO_KEYSTORE_B64: ${{ secrets.CAMINO_KEYSTORE_B64 }}
           CAMINO_KS_PASS: ${{ secrets.CAMINO_KS_PASS }}
+          VERSION_CODE: ${{ steps.ver.outputs.code }}
+          VERSION_NAME: ${{ steps.ver.outputs.name }}
         run: |
+          set -euo pipefail
           if [ -z "$CAMINO_KEYSTORE_B64" ] || [ -z "$CAMINO_KS_PASS" ]; then
-            echo "::error::Faltan los secretos CAMINO_KEYSTORE_B64 y CAMINO_KS_PASS (Settings → Secrets and variables → Actions)."
+            echo "::error::Faltan CAMINO_KEYSTORE_B64 o CAMINO_KS_PASS en Settings → Secrets and variables → Actions."
             exit 1
           fi
-          echo "$CAMINO_KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/camino.keystore"
+          trap 'rm -f "$RUNNER_TEMP/camino.keystore"' EXIT
+          echo "$CAMINO_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/camino.keystore"
           CAMINO_KEYSTORE="$RUNNER_TEMP/camino.keystore" bash android/build_aab.sh
-          rm -f "$RUNNER_TEMP/camino.keystore"
-          mv dist/CaminoALaLeyenda.aab "dist/CaminoALaLeyenda-${{ steps.ver.outputs.name }}.aab"
+          mv dist/CaminoALaLeyenda.aab "dist/CaminoALaLeyenda-${VERSION_NAME}.aab"
 
       - name: Guardar el .aab
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: CaminoALaLeyenda-${{ steps.ver.outputs.name }}-codigo-${{ steps.ver.outputs.code }}
-          path: |
-            dist/CaminoALaLeyenda-${{ steps.ver.outputs.name }}.aab
-            dist/camino.html
+          path: dist/CaminoALaLeyenda-${{ steps.ver.outputs.name }}.aab
           retention-days: 30
 
       - name: Release en borrador (solo con etiqueta)
