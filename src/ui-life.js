@@ -32,8 +32,8 @@
   /* ---------- avatar 2D (SVG) ---------- */
   function avatar(look, club, num, gk, cls, cap) {
     var get = function (cat) { return lifeItem(cat, look[cat] || LIFE_COS_DEF[cat]); };
-    var skin = get("skin").c, hc = get("hcol").c, hair = (look.hair || "short"), boots = get("boots").c, sl = look.sleeve || "short", band = look.band || "none", gl = get("gloves");
-    var k = kitOf(club, gk), c1 = k.c1, c2 = k.c2, txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
+    var skin = get("skin").c, hc = get("hcol").c, hair = (look.hair || "short"), boots = get("boots").c, sl = look.sleeve || "short", band = look.band || "none", gl = get("gloves"), shirtItem = get("shirt");
+    var k = kitOf(club, gk), c1 = shirtItem.c || k.c1, c2 = shirtItem.c2 || k.c2, txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
     var armCol = sl === "long" ? c1 : sl === "under" ? "#16191b" : skin, legCol = sl === "tights" ? "#16191b" : skin;
     var s = '<svg class="' + (cls || "lfsvg") + '" viewBox="0 0 120 170" role="img" aria-label="' + h(tr("Tu avatar")) + '">';
     s += '<ellipse cx="60" cy="163" rx="34" ry="5" fill="rgba(0,0,0,.35)"/>';
@@ -43,7 +43,7 @@
     s += '<rect x="44.5" y="134" width="12" height="3" fill="' + c2 + '" opacity=".85"/><rect x="63.5" y="134" width="12" height="3" fill="' + c2 + '" opacity=".85"/>';
     s += '<path d="M43 152h14v5c0 2-1 3-3 3H39c-2 0-3-1-2-3z" fill="' + boots + '"/><path d="M63 152h14l6 5c1 2 0 3-2 3H66c-2 0-3-1-3-3z" fill="' + boots + '"/>';
     /* pantalón */
-    s += '<path d="M40 98h40l3 24H63l-3-10-3 10H37z" fill="' + k.sh + '"/>';
+    s += '<path d="M40 98h40l3 24H63l-3-10-3 10H37z" fill="' + (shirtItem.shorts || k.sh) + '"/>';
     /* brazos */
     s += '<path d="M37 52l-11 22 4 32h8l-1-28 6-14z" fill="' + armCol + '"/><path d="M83 52l11 22-4 32h-8l1-28-6-14z" fill="' + armCol + '"/>';
     if (sl !== "long") s += '<path d="M37 51l-12 21 9 4 9-15z" fill="' + c1 + '"/><path d="M83 51l12 21-9 4-9-15z" fill="' + c1 + '"/><path d="M25 72l9 4" stroke="' + c2 + '" stroke-width="2"/><path d="M95 72l-9 4" stroke="' + c2 + '" stroke-width="2"/>';
@@ -53,6 +53,20 @@
     else s += '<circle cx="34" cy="107" r="5" fill="' + skin + '"/><circle cx="86" cy="107" r="5" fill="' + skin + '"/>';
     /* camiseta y dorsal */
     s += '<path d="M38 48c6-3 14-5 22-5s16 2 22 5l3 8-4 46H39l-4-46z" fill="' + c1 + '"/>';
+    var shirt = shirtItem.pattern || look.shirt || LIFE_COS_DEF.shirt;
+    if (shirt === "stripes" || shirt === "pinstripe") s += '<path d="M45 46v60h5V45zm13-3v63h5V43zm13 2v61h5V45z" fill="' + c2 + '" opacity=".92"/>';
+    else if (shirt === "hoops") s += '<path d="M38 60h45v6H38zm2 16h42v6H40zm1 16h40v5H41z" fill="' + c2 + '" opacity=".94"/>';
+    else if (shirt === "sash") s += '<path d="M43 46l9-3 25 59h-9z" fill="' + c2 + '" opacity=".95"/>';
+    else if (shirt === "retro") s += '<path d="M51 44l9 8 9-8-4-2h-10z" fill="' + c2 + '"/><path d="M51 44l9 8 9-8" fill="none" stroke="' + c2 + '" stroke-width="2"/>';
+    else if (shirt === "diamond") s += '<path d="M47 55l5-5 5 5-5 5zm16 0l5-5 5 5-5 5zm-8 16l5-5 5 5-5 5zm-8 16l5-5 5 5-5 5zm16 0l5-5 5 5-5 5z" fill="' + c2 + '" opacity=".92"/>';
+    else if (shirt === "split") s += '<path d="M60 48h23l-4 57H60z" fill="' + c2 + '" opacity=".95"/>';
+    else if (shirt === "chevron") s += '<path d="M38 58l22 12 22-12v8L60 80 38 66zm0 22l22 12 22-12v8L60 102 38 88z" fill="' + c2 + '" opacity=".9"/>';
+    else if (shirt === "checker") s += '<path d="M42 54h10v10H42zm20 0h10v10H62zM52 64h10v10H52zm20 0h10v10H72zM42 74h10v10H42zm20 0h10v10H62zM52 84h10v10H52zm20 0h10v10H72z" fill="' + c2 + '" opacity=".9"/>';
+    else if (shirt === "pixel") s += '<path d="M42 56h8v8h-8zm16 8h8v8h-8zm16-8h8v8h-8zM50 76h8v8h-8zm16 8h8v8h-8zM42 96h8v8h-8zm32 0h8v8h-8z" fill="' + c2 + '"/>';
+    else if (shirt === "lightning") s += '<path d="M62 48l-13 27h10l-4 27 18-35H62l8-19z" fill="' + c2 + '"/>';
+    else if (shirt === "gradient") s += '<path d="M38 75h46v12H38z" fill="' + c2 + '" opacity=".35"/><path d="M39 90h44v10H39z" fill="' + c2 + '" opacity=".65"/>';
+    else if (shirt === "star") s += '<text x="60" y="76" text-anchor="middle" font-size="20" fill="' + c2 + '">★</text><text x="48" y="98" text-anchor="middle" font-size="9" fill="' + c2 + '">★</text><text x="72" y="98" text-anchor="middle" font-size="9" fill="' + c2 + '">★</text>';
+    else if (shirt === "triangles") s += '<path d="M42 56l8 12h-16zm27 0l8 12H61zm-14 20l8 12H47zm22 20l8 12H69zm-30 0l8 12H39z" fill="' + c2 + '" opacity=".9"/>';
     s += '<path d="M52 44l8 8 8-8" fill="none" stroke="' + c2 + '" stroke-width="3" stroke-linejoin="round"/>';
     if (num) s += '<text x="60" y="88" text-anchor="middle" font-family="Big Shoulders Display, Arial Narrow, sans-serif" font-weight="900" font-size="24" fill="' + txt + '">' + num + "</text>";
     /* cabeza */
@@ -205,13 +219,23 @@
     return money(lk.v);
   }
   function cosRow(cat, label, swatch) {
-    var cur = lifeCos(cat);
-    return '<div class="lfcos"><span class="lbl">' + h(label) + '</span><div class="lfopts' + (swatch ? " sw" : "") + '">' + LIFE_COS[cat].map(function (it) {
-      var lk = lifeLocked(cat, it), sel = cur === it.id;
-      var inner = swatch ? '<i style="background:' + it.c + '"></i>' : "<b>" + h(tr(it.n)) + "</b>" + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
+    var cur = lifeCos(cat), items = LIFE_COS[cat] || [], pageSize = 18, ui = U.ui();
+    ui.lfcosPage = ui.lfcosPage || {};
+    var pages = Math.max(1, Math.ceil(items.length / pageSize)), page = clamp(+ui.lfcosPage[cat] || 0, 0, pages - 1);
+    ui.lfcosPage[cat] = page;
+    var shown = items.slice(page * pageSize, (page + 1) * pageSize);
+    var out = '<div class="lfcos"><span class="lbl">' + h(label) + '</span><div class="lfopts' + (swatch ? " sw" : "") + '">' + shown.map(function (it) {
+      var lk = lifeLocked(cat, it), sel = cur === it.id, statMap = cat === "shirt" ? (isGK() ? it.gk : it.att) : null;
+      var statTxt = statMap ? Object.keys(statMap).filter(function (k) { return statMap[k]; }).map(function (k) {
+        var nm = typeof ATT_NAMES !== "undefined" && ATT_NAMES[k] ? ATT_NAMES[k] : k;
+        return "+" + statMap[k] + " " + nm;
+      }).join(" · ") : "";
+      var inner = swatch ? '<i style="background:' + it.c + '"></i>' : "<b>" + h(tr(it.n)) + "</b>" + (statTxt ? '<small class="lfstats">' + h(statTxt) + "</small>" : "") + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
       if (swatch && it.n) inner += "<b>" + h(tr(it.n)) + "</b>" + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
       return '<button class="lfo' + (lk ? " lk" : "") + '" data-a="lfcos" data-k="' + cat + '" data-v="' + it.id + '" aria-pressed="' + sel + '"' + (swatch && !it.n ? ' aria-label="' + h(tr("Tono {n}", {n: it.id.slice(1)})) + '"' : "") + ">" + inner + "</button>";
-    }).join("") + "</div></div>";
+    }).join("") + "</div>";
+    if (pages > 1) out += '<div class="lfpages" style="display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:6px 0 12px"><button class="btn sm" data-a="lfcpage" data-k="' + cat + '" data-v="' + Math.max(0, page - 1) + '" aria-label="' + h(tr("Página anterior")) + '"' + (page === 0 ? " disabled" : "") + '>‹</button><span class="muted">' + tr("Página {page} de {pages}", {page: page + 1, pages: pages}) + '</span><button class="btn sm" data-a="lfcpage" data-k="' + cat + '" data-v="' + Math.min(pages - 1, page + 1) + '" aria-label="' + h(tr("Página siguiente")) + '"' + (page === pages - 1 ? " disabled" : "") + '>›</button></div>';
+    return out + "</div>";
   }
   U.sheets.llook = function () {
     var gk = isGK();
@@ -219,12 +243,16 @@
     s += cosRow("cel", tr("Celebración"));
     if (gk) s += cosRow("gloves", tr("Guantes"), true);
     s += cosRow("boots", tr("Botas"), true);
+    s += cosRow("shirt", tr("Diseño de camiseta"));
     s += cosRow("sleeve", tr("Mangas y mallas"));
     s += cosRow("band", tr("Cinta"));
     s += cosRow("skin", tr("Piel"), true);
     s += cosRow("hair", tr("Pelo"));
     s += cosRow("hcol", tr("Color de pelo"), true);
     return s + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
+  };
+  U.actions.lfcpage = function (b, v) {
+    var cat = b.getAttribute("data-k"), ui = U.ui(); ui.lfcosPage = ui.lfcosPage || {}; ui.lfcosPage[cat] = +v || 0; rer();
   };
   U.actions.lfcos = function (b, v) {
     var cat = b.getAttribute("data-k"), r = lifeSetCos(cat, v);

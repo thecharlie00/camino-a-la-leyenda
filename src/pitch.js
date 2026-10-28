@@ -156,6 +156,119 @@ var Pitch = (function () {
     return {mount: mount, stop: stop, vis: vis, exc: exc, cheer: cheer, ooh: ooh, kick: kick, whistle: whistle, toggle: toggle, isOn: isOn};
   })();
 
+  /* ---------- música ambiente original en bucle (no requiere archivos ni conexión) ---------- */
+  var Music = (function () {
+    var KEY = "camino.pitch.music", ac = null, master = null, on = false, loaded = false, timer = null, button = null, unlocking = false, watchingVisibility = false;
+    var bpm = 94, beat = 60 / bpm, bar = beat * 4;
+    var progression = [
+      {root: 48, chord: [60, 64, 67]}, {root: 45, chord: [57, 60, 64]},
+      {root: 41, chord: [53, 57, 60]}, {root: 43, chord: [55, 59, 62]}
+    ];
+    var melody = [72, 76, 79, 76, 74, 72, 67, 71, 72, 76, 81, 79, 76, 74, 72, 67];
+    var label = function () {
+      var lang = typeof LANG === "string" ? LANG : "es";
+      var words = {
+        es: ["Activar música de fondo", "Silenciar música de fondo"],
+        en: ["Turn background music on", "Turn background music off"],
+        de: ["Hintergrundmusik einschalten", "Hintergrundmusik ausschalten"],
+        it: ["Attiva musica di sottofondo", "Disattiva musica di sottofondo"],
+        fr: ["Activer la musique de fond", "Couper la musique de fond"]
+      };
+      return (words[lang] || words.es)[on ? 1 : 0];
+    };
+    function save() { try { localStorage.setItem(KEY, on ? "1" : "0"); } catch (e) {} }
+    function load() { if (loaded) return; loaded = true; try { on = localStorage.getItem(KEY) === "1"; } catch (e) { on = false; } }
+    function updateButton() {
+      var buttons = document.querySelectorAll("[data-a='bgm'], [data-music]");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].setAttribute("aria-pressed", on ? "true" : "false");
+        buttons[i].setAttribute("aria-label", label()); buttons[i].title = label();
+        buttons[i].textContent = on ? "♫" : "♪";
+      }
+    }
+    function init() {
+      if (ac) return true;
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return false;
+      try {
+        ac = new AC(); master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+        return true;
+      } catch (e) { ac = null; master = null; return false; }
+    }
+    function frequency(note) { return 440 * Math.pow(2, (note - 69) / 12); }
+    function note(midi, at, duration, type, volume, cutoff) {
+      var osc = ac.createOscillator(), filter = ac.createBiquadFilter(), gain = ac.createGain();
+      osc.type = type; osc.frequency.setValueAtTime(frequency(midi), at);
+      filter.type = "lowpass"; filter.frequency.setValueAtTime(cutoff, at);
+      gain.gain.setValueAtTime(0.0001, at); gain.gain.exponentialRampToValueAtTime(volume, at + 0.035);
+      gain.gain.exponentialRampToValueAtTime(0.0001, at + duration);
+      osc.connect(filter); filter.connect(gain); gain.connect(master);
+      osc.start(at); osc.stop(at + duration + 0.03);
+    }
+    function loop() {
+      if (!on || !ac || ac.state !== "running") return;
+      var start = ac.currentTime + 0.08;
+      progression.forEach(function (part, measure) {
+        var at = start + measure * bar;
+        part.chord.forEach(function (n) { note(n, at, bar * 0.94, "sine", 0.018, 900); });
+        note(part.root, at, beat * 1.65, "triangle", 0.075, 420);
+        note(part.root + 7, at + beat * 2, beat * 1.55, "triangle", 0.055, 420);
+        for (var step = 0; step < 4; step++) {
+          var tune = melody[measure * 4 + step];
+          note(tune, at + step * beat, beat * 0.48, "sine", 0.055, 1500);
+          if (step === 1 || step === 3) note(tune - 12, at + step * beat + beat * 0.5, beat * 0.35, "sine", 0.032, 1300);
+        }
+      });
+      timer = setTimeout(loop, bar * progression.length * 1000 - 100);
+    }
+    function start() {
+      if (!on || timer || !init()) return;
+      try {
+        var p = ac.resume();
+        if (p && p.then) p.then(function () { if (on && !timer) loop(); }).catch(function () {});
+        else if (!timer) loop();
+      } catch (e) {}
+    }
+    function stop() {
+      if (timer) clearTimeout(timer); timer = null;
+      if (ac && master) {
+        try {
+          master.gain.cancelScheduledValues(ac.currentTime);
+          master.gain.setTargetAtTime(0, ac.currentTime, 0.08);
+          setTimeout(function () { if ((!on || !button) && ac && ac.state === "running") ac.suspend(); }, 350);
+        } catch (e) {}
+      }
+    }
+    function watchVisibility() {
+      if (watchingVisibility) return;
+      watchingVisibility = true;
+      document.addEventListener("visibilitychange", vis);
+    }
+    function watchUnlock() {
+      if (unlocking) return;
+      unlocking = true;
+      document.addEventListener("pointerdown", function () { if (on) start(); }, true);
+    }
+    function toggle() {
+      load(); watchVisibility(); watchUnlock();
+      on = !on; save(); updateButton();
+      if (on) start(); else stop();
+    }
+    function mount(btn) {
+      watchVisibility(); watchUnlock();
+      button = btn; load(); updateButton();
+      if (on) start();
+    }
+    function vis() {
+      if (!ac) return;
+      if (document.hidden) { if (timer) clearTimeout(timer); timer = null; try { ac.suspend(); } catch (e) {} }
+      else if (on) start();
+    }
+    function unmount() { button = null; }
+    function isOn() { load(); watchVisibility(); watchUnlock(); return on; }
+    return {mount: mount, toggle: toggle, vis: vis, unmount: unmount, isOn: isOn, label: label};
+  })();
+
   /* posiciones base de un once (demarcaciones de su sistema) */
   function layout(list) {
     var count = {}, seen = {};
@@ -207,6 +320,9 @@ var Pitch = (function () {
     rb.addEventListener("click", function (ev) { ev.stopPropagation(); replay(); });
     sp.appendChild(rb);
     el.appendChild(sp);
+    var mb = document.createElement("button"); mb.type = "button"; mb.className = "pmusic"; mb.setAttribute("data-music", "1");
+    mb.addEventListener("click", function (ev) { ev.stopPropagation(); Music.toggle(); });
+    el.appendChild(mb);
     RM = reduced();
     P = {el: el, cv: cv, ctx: cv.getContext("2d"), btn: btn, cols: o.cols || ["#ffb21e", "#66b9ff"], lab: o.lab || {goal: "GOL", post: "¡PALO!", half: "DESCANSO", end: "FINAL"},
       frozen: false, qa: {nan: 0, oob: 0, pass: 0, perr: 0}, T: [[], []], own: 0, bxw: LEN / 2, speed: 1, rate: SPEEDK, ck: 0, last: now(), run: true,
@@ -226,6 +342,7 @@ var Pitch = (function () {
     P.onVis = function () { Snd.vis(); if (P) P.last = now(); };
     window.addEventListener("resize", P.onResize);
     document.addEventListener("visibilitychange", P.onVis);
+    Music.mount(mb);
     Snd.mount();
     loop();
   }
@@ -254,6 +371,7 @@ var Pitch = (function () {
     if (!P) return;
     flushCues();
     P.run = false;
+    Music.unmount();
     window.removeEventListener("resize", P.onResize);
     document.removeEventListener("visibilitychange", P.onVis);
     if (P.cv.parentNode) P.cv.parentNode.removeChild(P.cv);
@@ -1525,5 +1643,5 @@ var Pitch = (function () {
   function clearHalf() { if (P && P.msg && P.msg.keep && P.msg.t === P.lab.half) P.msg = null; }
   function freeze(v) { if (P) { if (v && !P.frozen) flushCues(); P.frozen = !!v; if (!v) { P.last = now(); if (P.half2) clearHalf(); } } }
   return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy, reset: reset, clearMsg: clearMsg, freeze: freeze, replay: replay,
-    active: function () { return !!P; }, sound: function () { return Snd.isOn(); }, debug: function () { return P; }};
+    active: function () { return !!P; }, sound: function () { return Snd.isOn(); }, musicToggle: Music.toggle, musicOn: Music.isOn, musicLabel: Music.label, debug: function () { return P; }};
 })();

@@ -32,7 +32,10 @@ var LIFE_COS = {
   hair: [{id: "short", n: N_("Corto")}, {id: "buzz", n: N_("Rapado")}, {id: "curly", n: N_("Rizado")}, {id: "long", n: N_("Largo con coleta")}, {id: "bald", n: N_("Sin pelo")}],
   hcol: [{id: "h1", c: "#1d1612"}, {id: "h2", c: "#5a3a22"}, {id: "h3", c: "#b07a3c"}, {id: "h4", c: "#e5c27a"}, {id: "h5", c: "#b9b9b9"}],
   boots: [{id: "blk", n: N_("Negras"), c: "#16191b"}, {id: "wht", n: N_("Blancas"), c: "#f1f1ee"}, {id: "red", n: N_("Rojo fuego"), c: "#e3262f", req: {money: 20000}},
-    {id: "blu", n: N_("Azul eléctrico"), c: "#1f7cff", req: {money: 20000}}, {id: "pnk", n: N_("Rosa flúor"), c: "#ff4fb1", req: {fame: 40}}, {id: "gld", n: N_("Doradas"), c: "#e8c35a", req: {tro: 5}}],
+    {id: "blu", n: N_("Azul eléctrico"), c: "#1f7cff", req: {money: 20000}}, {id: "pnk", n: N_("Rosa flúor"), c: "#ff4fb1", req: {fame: 40}}, {id: "gld", n: N_("Doradas"), c: "#e8c35a", req: {tro: 5}},
+    {id: "mint", n: N_("Menta"), c: "#61e6bc", req: {fame: 25}}, {id: "vio", n: N_("Violeta"), c: "#8c55ff", req: {tro: 2}}],
+  shirt: [{id: "plain", n: N_("Clásica"), att: {FIS: 1}, gk: {EST: 1}}, {id: "stripes", n: N_("Franjas"), req: {fame: 10}, att: {PAS: 1}, gk: {SAQ: 1}}, {id: "hoops", n: N_("Aros"), req: {fame: 15}, att: {TIR: 1}, gk: {PAR: 1}},
+    {id: "sash", n: N_("Banda diagonal"), req: {tro: 1}, att: {RIT: 1}, gk: {VEL: 1}}, {id: "retro", n: N_("Cuello retro"), req: {money: 30000}, att: {REG: 1}, gk: {COL: 1}}, {id: "diamond", n: N_("Diamantes"), req: {tro: 4}, att: {DEF: 1}, gk: {REF: 1}}],
   sleeve: [{id: "short", n: N_("Manga corta")}, {id: "long", n: N_("Manga larga")}, {id: "under", n: N_("Manguito térmico negro"), req: {fame: 15}}, {id: "tights", n: N_("Mallas térmicas"), req: {fame: 10}}],
   band: [{id: "none", n: N_("Sin cinta")}, {id: "wht", n: N_("Cinta blanca"), c: "#f4f4f0"}, {id: "blk", n: N_("Cinta negra"), c: "#16191b"},
     {id: "club", n: N_("Cinta con los colores del club"), req: {fame: 30}}, {id: "cap", n: N_("Brazalete de capitán"), req: {cap: 1}}],
@@ -43,7 +46,49 @@ var LIFE_COS = {
     {id: "spin", n: N_("Salto con giro"), req: {tro: 2}}, {id: "statue", n: N_("La estatua"), req: {tro: 6}}, {id: "dance", n: N_("Baile en el córner"), req: {money: 50000}},
     {id: "roar", n: N_("Rugido a la grada")}, {id: "chest", n: N_("Golpes en el pecho")}]
 };
-var LIFE_COS_DEF = {skin: "s2", hair: "short", hcol: "h1", boots: "blk", sleeve: "short", band: "none", gloves: "cls", cel: "fist"};
+/* 260 equipaciones completas: 13 cortes gráficos x 20 paletas, seleccionables y guardadas por carrera. */
+var LIFE_KIT_PATTERNS = [
+  {id: "pinstripe", n: N_("Líneas finas")}, {id: "hoops", n: N_("Aros clásicos")}, {id: "sash", n: N_("Banda diagonal")},
+  {id: "retro", n: N_("Cuello vintage")}, {id: "diamond", n: N_("Diamantes")}, {id: "split", n: N_("Mitad y mitad")},
+  {id: "chevron", n: N_("Chevron")}, {id: "checker", n: N_("Cuadros")}, {id: "pixel", n: N_("Pixel")},
+  {id: "lightning", n: N_("Rayo")}, {id: "gradient", n: N_("Degradado")}, {id: "star", n: N_("Estrellas")},
+  {id: "triangles", n: N_("Triángulos")}
+];
+var LIFE_KIT_STAT_LINKS = [
+  {att: "PAS", gk: "SAQ"}, {att: "TIR", gk: "PAR"}, {att: "RIT", gk: "VEL"}, {att: "FIS", gk: "EST"},
+  {att: "REG", gk: "COL"}, {att: "DEF", gk: "REF"}, {att: "RIT", gk: "VEL"}, {att: "PAS", gk: "SAQ"},
+  {att: "REG", gk: "REF"}, {att: "RIT", gk: "VEL"}, {att: "FIS", gk: "COL"}, {att: "TIR", gk: "PAR"},
+  {att: "DEF", gk: "EST"}
+];
+var LIFE_KIT_PALETTES = [
+  {id: "cobalt", n: N_("Cobalto"), c: "#1957d2", c2: "#f6f4ec", shorts: "#10264b"}, {id: "coral", n: N_("Coral"), c: "#ef604d", c2: "#fff3e6", shorts: "#282328"},
+  {id: "emerald", n: N_("Esmeralda"), c: "#078453", c2: "#f4f0dc", shorts: "#123d31"}, {id: "violet", n: N_("Violeta"), c: "#7042bb", c2: "#f7e8c4", shorts: "#30234b"},
+  {id: "amber", n: N_("Ámbar"), c: "#d99800", c2: "#18232c", shorts: "#22252a"}, {id: "carbon", n: N_("Carbón"), c: "#20252b", c2: "#f4f1e8", shorts: "#111418"},
+  {id: "turquoise", n: N_("Turquesa"), c: "#03a6a6", c2: "#f2f5ee", shorts: "#12434d"}, {id: "cherry", n: N_("Cereza"), c: "#ae1931", c2: "#fff5e9", shorts: "#351d28"},
+  {id: "navy", n: N_("Marino"), c: "#152a50", c2: "#e8c35a", shorts: "#111a2c"}, {id: "lime", n: N_("Lima"), c: "#82b315", c2: "#101c22", shorts: "#203229"},
+  {id: "rose", n: N_("Rosa"), c: "#e14682", c2: "#fff2ea", shorts: "#3a2130"}, {id: "orange", n: N_("Naranja"), c: "#f07623", c2: "#17212a", shorts: "#303038"},
+  {id: "ice", n: N_("Hielo"), c: "#c7e8f3", c2: "#103d5a", shorts: "#14334a"}, {id: "sand", n: N_("Arena"), c: "#c4a26b", c2: "#2f2520", shorts: "#312820"},
+  {id: "magenta", n: N_("Magenta"), c: "#b425a0", c2: "#fff3ed", shorts: "#34213e"}, {id: "electric", n: N_("Azul eléctrico"), c: "#126bff", c2: "#f4f4ef", shorts: "#171b26"},
+  {id: "scarlet", n: N_("Escarlata"), c: "#df2e36", c2: "#111923", shorts: "#20222b"}, {id: "olive", n: N_("Oliva"), c: "#5c7040", c2: "#f1e8d4", shorts: "#252b24"},
+  {id: "silver", n: N_("Plata"), c: "#989fa9", c2: "#152330", shorts: "#242832"}, {id: "gold", n: N_("Dorado"), c: "#d0a439", c2: "#20191a", shorts: "#2b2421"}
+];
+var LIFE_KIT_CATALOG = [];
+LIFE_KIT_PATTERNS.forEach(function (pattern, pi) {
+  LIFE_KIT_PALETTES.forEach(function (palette, ci) {
+    var rank = pi * LIFE_KIT_PALETTES.length + ci, req = null;
+    if (rank >= 20) {
+      if (rank % 3 === 0) req = {fame: Math.min(80, 5 + Math.floor(rank / 15) * 5)};
+      else if (rank % 3 === 1) req = {tro: Math.min(12, 1 + Math.floor(rank / 35))};
+      else req = {money: 5000 + rank * 300};
+    }
+    var statLink = LIFE_KIT_STAT_LINKS[pi], statLevel = ci % 7 === 6 ? 2 : 1;
+    var item = {id: "kit_" + String(rank + 1).padStart(3, "0"), n: N_("Equipación " + pattern.n + " · " + palette.n),
+      pattern: pattern.id, c: palette.c, c2: palette.c2, shorts: palette.shorts, att: (function () { var o = {}; o[statLink.att] = statLevel; return o; })(),
+      gk: (function () { var o = {}; o[statLink.gk] = statLevel; return o; })(), req: req || undefined};
+    LIFE_COS.shirt.push(item); LIFE_KIT_CATALOG.push(item);
+  });
+});
+var LIFE_COS_DEF = {skin: "s2", hair: "short", hcol: "h1", boots: "blk", shirt: "plain", sleeve: "short", band: "none", gloves: "cls", cel: "fist"};
 var LIFE_NEXT_NUM = null;
 
 /* ---------- estado ---------- */
@@ -216,6 +261,8 @@ function lifeAttBonus() {
     var m = gk ? d.gk : d.att;
     if (m) Object.keys(m).forEach(function (a) { out[a] = (out[a] || 0) + m[a]; });
   });
+  var kit = lifeItem("shirt", lifeCos("shirt")), kitStats = kit && (gk ? kit.gk : kit.att);
+  if (kitStats) Object.keys(kitStats).forEach(function (a) { out[a] = (out[a] || 0) + kitStats[a]; });
   return out;
 }
 /* cobrar y descontar un tramo (al final de cada tramo de temporada) */

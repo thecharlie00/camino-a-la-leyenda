@@ -36,7 +36,11 @@ var ACH_P = [
   ["p_t15", "🏛️", N_("Vitrina llena"), N_("Gana 15 títulos."), function (c) { return S.p.trophies.length >= 15; }],
   ["p_g300", "👑", N_("Leyenda del gol"), N_("Llega a 300 goles oficiales."), function (c) { return c.t.g >= 300; }],
   ["p_knee", "🏹", N_("Antes era un aventurero como tú..."), N_("Lesiónate la rodilla."), function (c) { return !!(S.p.flags && S.p.flags.knee); }, 1],
-  ["p_bdo", "🥇", N_("Balón de Oro"), N_("Gana el Balón de Oro."), function (c) { return S.p.awards.some(function (a) { return a.k === "bdo"; }); }]
+  ["p_bdo", "🥇", N_("Balón de Oro"), N_("Gana el Balón de Oro."), function (c) { return S.p.awards.some(function (a) { return a.k === "bdo"; }); }],
+  ["p_assist100", "🪄", N_("Arquitecto del juego"), N_("Da 100 asistencias oficiales."), function (c) { return c.t.a >= 100; }],
+  ["p_apps1000", "🧭", N_("Mil batallas"), N_("Juega 1.000 partidos oficiales."), function (c) { return c.t.apps >= 1000; }],
+  ["p_treble", "👑", N_("Triplete inolvidable"), N_("Gana tres títulos en una misma temporada."), function () { return typeof achTreble === "function" && achTreble(S.p.trophies); }],
+  ["p_nat100", "🌍", N_("Leyenda nacional"), N_("Llega a 100 partidos con tu selección."), function () { return S.p.intl.caps >= 100; }]
 ];
 var ACH_M = [
   ["m_w1", "✅", N_("Primera victoria"), N_("Gana tu primer partido como míster."), function (c) { return c.t.w >= 1; }],
@@ -52,8 +56,48 @@ var ACH_M = [
   ["m_w200", "🦾", N_("Doscientas victorias"), N_("Suma 200 victorias."), function (c) { return c.t.w >= 200; }],
   ["m_season10", "⏳", N_("Banquillo eterno"), N_("Entrena 10 temporadas."), function (c) { return c.t.seasons >= 10; }],
   ["m_t15", "🏛️", N_("Vitrina llena"), N_("Gana 15 títulos."), function (c) { return S.m.trophies.length >= 15; }],
-  ["m_best", "🥇", N_("Mejor entrenador"), N_("Gana el premio al mejor entrenador del año."), function (c) { return S.m.awards.some(function (a) { return a.k === "mgr_year"; }); }]
+  ["m_best", "🥇", N_("Mejor entrenador"), N_("Gana el premio al mejor entrenador del año."), function (c) { return S.m.awards.some(function (a) { return a.k === "mgr_year"; }); }],
+  ["m_w500", "🧠", N_("Quinientas victorias"), N_("Suma 500 victorias como entrenador."), function (c) { return c.t.w >= 500; }],
+  ["m_treble", "👑", N_("Triplete desde el banquillo"), N_("Gana liga, copa y torneo continental en una temporada."), function () { return typeof achTreble === "function" && achTreble(S.m.trophies); }],
+  ["m_invincible", "🛡️", N_("Temporada perfecta"), N_("Completa una temporada de liga sin derrotas y con al menos 20 partidos."), function () { return S.m.seasons.some(function (r) { return r.l === 0 && r.w + r.d >= 20; }); }],
+  ["m_world", "🌐", N_("Míster mundial"), N_("Entrena en cinco clubes diferentes."), function () { return achClubs(S.m.seasons) >= 5; }]
 ];
+/* 30 logros de expansión: 15 para cada recorrido, con pruebas sobre estadísticas ya guardadas. */
+ACH_P.push(
+  ["p_apps750", "🎽", N_("Setecientos cincuenta partidos"), N_("Juega 750 partidos oficiales."), function (c) { return c.t.apps >= 750; }],
+  ["p_apps1500", "🏟️", N_("Estadio lleno"), N_("Juega 1.500 partidos oficiales."), function (c) { return c.t.apps >= 1500; }],
+  ["p_g150", "🥅", N_("Instinto goleador"), N_("Marca 150 goles oficiales."), function (c) { return c.t.g >= 150; }],
+  ["p_g500", "🚀", N_("Quinientos goles"), N_("Marca 500 goles oficiales."), function (c) { return c.t.g >= 500; }],
+  ["p_a200", "🧩", N_("Socio perfecto"), N_("Da 200 asistencias oficiales."), function (c) { return c.t.a >= 200; }],
+  ["p_a300", "🎨", N_("Pase de museo"), N_("Da 300 asistencias oficiales."), function (c) { return c.t.a >= 300; }],
+  ["p_season15", "🗓️", N_("Quince temporadas"), N_("Completa 15 temporadas."), function (c) { return c.t.seasons >= 15; }],
+  ["p_season20", "⌛", N_("Dos décadas de fútbol"), N_("Completa 20 temporadas."), function (c) { return c.t.seasons >= 20; }],
+  ["p_titles25", "🏆", N_("Vitrina de plata"), N_("Gana 25 títulos."), function () { return S.p.trophies.length >= 25; }],
+  ["p_titles40", "🥇", N_("Dinastía"), N_("Gana 40 títulos."), function () { return S.p.trophies.length >= 40; }],
+  ["p_clubs5", "🗺️", N_("Cinco escudos"), N_("Juega en cinco clubes distintos."), function () { return achClubs(S.p.seasons) >= 5; }],
+  ["p_clubs10", "🌐", N_("Pasaporte lleno"), N_("Juega en diez clubes distintos."), function () { return achClubs(S.p.seasons) >= 10; }],
+  ["p_cs100", "🧤", N_("Cien porterías a cero"), N_("Deja la portería a cero en 100 partidos."), function (c) { return c.t.cs >= 100; }],
+  ["p_intcaps150", "🇺🇳", N_("Ciento cincuenta veces internacional"), N_("Juega 150 partidos con tu selección."), function () { return S.p.intl.caps >= 150; }],
+  ["p_fame90", "✨", N_("Ídolo mundial"), N_("Alcanza 90 de fama."), function () { return S.p.fame >= 90; }]
+);
+ACH_M.push(
+  ["m_w100", "📊", N_("Centena en el banquillo"), N_("Suma 100 victorias como entrenador."), function (c) { return c.t.w >= 100; }],
+  ["m_w300", "⚙️", N_("Trescientas victorias"), N_("Suma 300 victorias como entrenador."), function (c) { return c.t.w >= 300; }],
+  ["m_w1000", "🏅", N_("Mil triunfos"), N_("Suma 1.000 victorias como entrenador."), function (c) { return c.t.w >= 1000; }],
+  ["m_season5", "📚", N_("Proyecto consolidado"), N_("Completa cinco temporadas como entrenador."), function (c) { return c.t.seasons >= 5; }],
+  ["m_season20", "🕰️", N_("Leyenda del banquillo"), N_("Completa 20 temporadas como entrenador."), function (c) { return c.t.seasons >= 20; }],
+  ["m_titles10", "🏆", N_("Diez títulos"), N_("Gana 10 títulos como entrenador."), function () { return S.m.trophies.length >= 10; }],
+  ["m_titles25", "🥇", N_("Veinticinco títulos"), N_("Gana 25 títulos como entrenador."), function () { return S.m.trophies.length >= 25; }],
+  ["m_titles50", "👑", N_("Cincuenta títulos"), N_("Gana 50 títulos como entrenador."), function () { return S.m.trophies.length >= 50; }],
+  ["m_clubs5", "🧭", N_("Cinco vestuarios"), N_("Entrena a cinco clubes distintos."), function () { return achClubs(S.m.seasons) >= 5; }],
+  ["m_clubs10", "🌍", N_("Carrera internacional"), N_("Entrena a diez clubes distintos."), function () { return achClubs(S.m.seasons) >= 10; }],
+  ["m_rep90", "💫", N_("Respeto universal"), N_("Alcanza 90 de reputación."), function () { return S.m.rep >= 90; }],
+  ["m_awards3", "🎖️", N_("Tres veces míster del año"), N_("Gana tres premios individuales como entrenador."), function () { return S.m.awards.length >= 3; }],
+  ["m_gf120", "💥", N_("Ataque imparable"), N_("Marca 120 goles en una temporada de liga."), function () { return S.m.seasons.some(function (r) { return r.gf >= 120; }); }],
+  ["m_inv30", "🧱", N_("Treinta jornadas invicto"), N_("Completa una temporada de liga de al menos 30 partidos sin perder."), function () { return S.m.seasons.some(function (r) { return r.l === 0 && r.w + r.d >= 30; }); }],
+  ["m_bigbudget", "💼", N_("Presupuesto de élite"), N_("Dirige un club con al menos 20 millones de presupuesto."), function () { return S.m.bud >= 20000000; }]
+);
+
 function achList() { var mgr = S && S.mode === "mgr"; return (mgr ? ACH_M : ACH_P).concat(typeof achX === "function" ? achX(mgr ? "m" : "p") : []); }
 function achCtx() { return {t: S.mode === "mgr" ? achMgrTot() : achPlayerTot()}; }
 /* comprueba y devuelve los logros nuevos; la primera vez en una partida antigua no avisa */

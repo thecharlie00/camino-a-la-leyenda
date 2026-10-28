@@ -40183,9 +40183,10 @@ DATA.leaguesF = [{"id":"ENG1","c":"ENG","n":"Premier League","t":1,"top":86,"bot
 })();
 
 ;
-/* data-48.js — Tailandia (versión 4.8).
-   Masculino: Thai League 1 y Thai League 2 (xl: los clubes se crean al final para no mover los índices de las partidas guardadas).
-   Femenino (mundo "f2"): Thai Women's League. Clubes reales, plantillas ficticias. */
+/* data-48.js — expansión de ligas (versión 4.8).
+   Incorpora campeonatos masculinos y femeninos de Asia y África, además de las ligas tailandesas.
+   Las expansiones se añaden al final para conservar los índices de las partidas guardadas; las nuevas ligas femeninas
+   forman parte del mundo ampliado "f2". Los clubes usan plantillas generadas por el motor. */
 (function () {
   var used = {};
   DATA.leagues.forEach(function (l) { l.clubs.split("|").forEach(function (n) { used[n] = 1; }); });
@@ -40200,6 +40201,29 @@ DATA.leaguesF = [{"id":"ENG1","c":"ENG","n":"Premier League","t":1,"top":86,"bot
     L({id: "THA2", c: "TH", n: "Thai League 2", t: 2, top: 58, bot: 51, w: 0.2, gs: 1, po: [3, 6]},
       "Nongbua Pitchaya|Khon Kaen United|Nakhon Pathom United|Police Tero|Chiangmai United|Trat FC|Lampang FC|Pattaya United|Suphanburi FC|Chanthaburi FC|Kasetsart FC|Phrae United|Sisaket United|Chainat Hornbill|Nakhon Si United|Mahasarakham SBT|Bangkok FC|Songkhla FC")
   );
+
+  /* Nuevos campeonatos de expansión: los clubes se añaden al final para conservar índices de guardados. */
+  DATA.leagues.push(
+    L({id: "MYS1", c: "MY", n: "Malaysia Super League", t: 1, top: 57, bot: 46, cup: "Malaysia FA Cup", w: 0.25, gs: 1},
+      "Johor Darul Ta'zim|Selangor FC|Kuala Lumpur City|Sabah FC|Terengganu FC|Kedah Darul Aman|Pahang Rangers|Negeri Sembilan|Penang FC|Kuching City|Perak FC|Kelantan Darul Naim"),
+    L({id: "NGA1", c: "NG", n: "Nigeria Premier Football League", t: 1, top: 59, bot: 46, cup: "Nigeria FA Cup", caf: 1, w: 0.3, gs: 1},
+      "Enyimba|Rivers United|Remo Stars|Rangers International|Kano Pillars|Shooting Stars|Bendel Insurance|Plateau United|Abia Warriors|Lobi Stars|Nasarawa United|Katsina United|Akwa United|Bayelsa United|Niger Tornadoes|Sunshine Stars|Heartland FC|Doma United|Kwara United|Gombe United"),
+    L({id: "IDN1", c: "ID", n: "Liga 1 Indonesia", t: 1, top: 59, bot: 47, cup: "Piala Indonesia", w: 0.3, gs: 1},
+      "Persib Bandung|Persija Jakarta|Bali United|Persebaya Surabaya|Arema FC|Borneo Samarinda|PSM Makassar|Madura United|Dewa United|Persik Kediri|PSIS Semarang|Persita Tangerang|PSS Sleman|Barito Putera|Persis Solo|RANS Nusantara|Malut United|Semen Padang"),
+    L({id: "VIE1", c: "VN", n: "V.League 1", t: 1, top: 57, bot: 45, cup: "Vietnamese National Cup", w: 0.25, gs: 1},
+      "Hanoi FC|The Cong Viettel|Nam Dinh FC|Becamex Binh Duong|Hoang Anh Gia Lai|Song Lam Nghe An|Hai Phong FC|Da Nang FC|Quang Nam FC|Thanh Hoa FC|Hong Linh Ha Tinh|Binh Dinh FC|Ho Chi Minh City FC|Khanh Hoa FC")
+  );
+
+  /* Ligas femeninas adicionales para las cuatro confederaciones/regiones anteriores. */
+  var womenExtra = [
+    {id: "MYS1", c: "MY", n: "Malaysia Women's League", t: 1, top: 49, bot: 40, w: 0.12, gs: 0.5, xl: true, clubs: "Selangor Women|Sabah Women|Kedah Women|Penang Women|Johor Women|Kuala Lumpur Women|Terengganu Women|Pahang Women"},
+    {id: "NGA1", c: "NG", n: "Nigeria Women's Premier League", t: 1, top: 56, bot: 44, w: 0.2, gs: 0.5, xl: true, clubs: "Rivers Angels|Bayelsa Queens|Edo Queens|Delta Queens|Nasarawa Amazons|Robo Queens|Confluence Queens|Abia Angels|Sunshine Queens|Ibom Angels|Heartland Queens|Adamawa Queens"},
+    {id: "IDN1", c: "ID", n: "Indonesia Women's League", t: 1, top: 49, bot: 39, w: 0.12, gs: 0.5, xl: true, clubs: "Persib Putri|Arema Women|Persija Putri|Bali United Women|PSS Sleman Women|Madura United Women|PSM Makassar Women|Persis Women"},
+    {id: "VIE1", c: "VN", n: "Vietnam Women's League", t: 1, top: 52, bot: 42, w: 0.15, gs: 0.5, xl: true, clubs: "Ho Chi Minh City Women|Hanoi Women|Than Khoang San Viet Nam|Phong Phu Ha Nam|Thai Nguyen T&T|Son La Women|Thai Nguyen Women|Ha Noi II Women"}
+  ];
+  function copyLeague(l) { var o = {}; Object.keys(l).forEach(function (k) { o[k] = l[k]; }); return o; }
+  /* El mundo femenino ampliado es exclusivo de nuevas carreras (f2), igual que las expansiones previas. */
+  if (DATA.leaguesF2) womenExtra.forEach(function (l) { DATA.leaguesF2.push(copyLeague(l)); });
   if (DATA.leaguesF2) DATA.leaguesF2.push({id: "THA1", c: "TH", n: "Thai Women's League", t: 1, top: 56, bot: 46, w: 0.2, gs: 1, xl: true,
     clubs: "BG Bundit Asia|Chonburi FC|College of Asian Scholars|Kasem Bundit University|Bangkok FC|Lampang Sports School|Nakhon Ratchasima|Chiangmai FC"});
 })();
@@ -50170,7 +50194,8 @@ function socPostRaw(o) {
   if (!S || typeof SOCIAL_T === "undefined") return null;
   var soc = socInit(), fol = socFollowers(), au = socAuthor(o.by || "fan");
   var base = au.id ? 3 + Math.random() * 40 : 0.02 + Math.random() * 0.6;
-  var post = {au: au, tk: o.tk, tp: o.tp || {}, y: S.yr, bi: S.bi, ph: S.ph, m: o.mood || 0,
+  soc.seq = (+soc.seq || 0) + 1;
+  var post = {id: soc.seq, au: au, tk: o.tk, tp: o.tp || {}, y: S.yr, bi: S.bi, ph: S.ph, m: o.mood || 0,
     lk: Math.round((base + fol * 0.02) * 1000 * (0.4 + Math.random())), rt: 0};
   post.rt = Math.round(post.lk * (0.08 + Math.random() * 0.2));
   soc.posts.unshift(post);
@@ -50193,6 +50218,53 @@ function socPost(trig, tp, opt) {
   }
   var t = socRnd(list);
   return socPostRaw({by: t.by, tk: t.t, tp: tp, mood: t.mood || 0});
+}
+/* publicaciones prefabricadas del usuario: mismas categorías para futbolista y míster,
+   con consecuencias coherentes con cada carrera. */
+var SOC_CUSTOM_OPTIONS = [
+  {k: "grateful", ico: "🙏", n: N_("Agradecer"), post: N_("Gracias por el apoyo. Cada día toca trabajar un poco más. 🙌"), reply: N_("Gracias, {target}. Se agradece que estés ahí; seguiremos trabajando. 🙌"), mood: 1,
+    player: {fame: 1, fol: 20, fans: 1}, manager: {rep: 1, fans: 1}},
+  {k: "team", ico: "🤝", n: N_("Apoyar al equipo"), post: N_("El mérito es de todo el equipo. Seguimos juntos. 🤝"), reply: N_("Gracias, {target}. El mérito es de todo el equipo; seguimos juntos. 🤝"), mood: 1,
+    player: {mor: 1, coach: 1, fans: 1}, manager: {sqMor: 2, chem: 1, fans: 1}},
+  {k: "ambition", ico: "🎯", n: N_("Mostrar ambición"), post: N_("Seguimos creciendo. Lo mejor todavía está por venir. 🎯"), reply: N_("Gracias, {target}. Seguimos creciendo y no vamos a conformarnos. 🎯"), mood: 1,
+    player: {fame: 2, fol: 50}, manager: {rep: 2, fans: 1}},
+  {k: "calm", ico: "🧠", n: N_("Mantener la calma"), post: N_("Respeto todas las opiniones; yo prefiero responder con trabajo. 🧠"), reply: N_("Te leo, {target}. Respeto tu opinión; prefiero contestar con trabajo. 🧠"), mood: 0,
+    player: {prof: 1, coach: 1}, manager: {rep: 1, board: 1}},
+  {k: "bold", ico: "🔥", n: N_("Responder con carácter"), post: N_("Que hablen. Nosotros seguimos a lo nuestro. 🔥"), reply: N_("Te respeto, {target}; nosotros responderemos donde toca: en el campo. 🔥"), mood: 1,
+    player: {fame: 2, fol: 60, fans: 1, coach: -1}, manager: {rep: 2, fans: 2, board: -1}},
+  {k: "aggressive", ico: "💥", n: N_("Ser agresivo"), post: N_("No me busques excusas: si tienes algo que decir, dilo de frente. En el campo responderemos. 💥"), reply: N_("Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥"), mood: 1,
+    player: {fame: 3, fol: 90, fans: -1, coach: -2, prof: -1}, manager: {rep: 3, fans: 1, board: -3, sqMor: -1}},
+  {k: "sarcastic", ico: "😏", n: N_("Tirar de sarcasmo"), post: N_("Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏"), reply: N_("¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏"), mood: 0,
+    player: {fame: 1, fol: 55, fans: 1, coach: -1, prof: -1}, manager: {rep: 1, fans: 1, board: -1, chem: -1}},
+  {k: "accountability", ico: "🙏", n: N_("Asumir el resultado"), post: N_("No salió como queríamos. Lo asumo y trabajaré para mejorar. 🙏"), reply: N_("Tienes razón, {target}. No salió bien; asumo mi parte y trabajaré más. 🙏"), mood: 0,
+    player: {prof: 1, coach: 2, fans: 1}, manager: {board: 2, sqMor: 1, rep: 1}}
+];
+function socCustomPeriod() {
+  var clock = S.bi != null ? S.bi : S.tw != null ? S.tw : S.w != null ? S.w : 0;
+  return String(S.yr) + "|" + String(clock);
+}
+function socCustomFx(key) {
+  for (var i = 0; i < SOC_CUSTOM_OPTIONS.length; i++) if (SOC_CUSTOM_OPTIONS[i].k === key) return S.mode === "mgr" ? SOC_CUSTOM_OPTIONS[i].manager : SOC_CUSTOM_OPTIONS[i].player;
+  return null;
+}
+function socCustomSend(key, target) {
+  if (!S || typeof SOCIAL_T === "undefined") return {ok: false};
+  var option = null;
+  for (var i = 0; i < SOC_CUSTOM_OPTIONS.length; i++) if (SOC_CUSTOM_OPTIONS[i].k === key) { option = SOC_CUSTOM_OPTIONS[i]; break; }
+  if (!option) return {ok: false};
+  var soc = socInit(), period = socCustomPeriod();
+  if (soc.customPeriod === period) return {ok: false, limit: true};
+  var replyMeta = target && typeof target === "object" ? target : null;
+  target = String(replyMeta ? replyMeta.target : target || "").replace(/[<>]/g, "").trim().slice(0, 40);
+  var fx = S.mode === "mgr" ? option.manager : option.player;
+  if (S.mode === "mgr") mgrFx(fx);
+  else applyFx(fx);
+  var isReply = !!target, tp = isReply ? {target: target} : {};
+  var post = socPostRaw({by: "self", tk: isReply ? option.reply : option.post, tp: tp, mood: option.mood});
+  if (!post) return {ok: false};
+  if (isReply) post.replyTo = {id: replyMeta && replyMeta.id || null, target: target, text: String(replyMeta && replyMeta.text || "").slice(0, 180)};
+  soc.customPeriod = period;
+  return {ok: true, fx: fx, reply: isReply};
 }
 /* fichajes: a veces el «here we go» clásico, a veces otro periodista o medio */
 function socProBy() { return Math.random() < 0.35 ? {by: "romano"} : {acc: 1}; }
@@ -52640,7 +52712,10 @@ var LIFE_COS = {
   hair: [{id: "short", n: N_("Corto")}, {id: "buzz", n: N_("Rapado")}, {id: "curly", n: N_("Rizado")}, {id: "long", n: N_("Largo con coleta")}, {id: "bald", n: N_("Sin pelo")}],
   hcol: [{id: "h1", c: "#1d1612"}, {id: "h2", c: "#5a3a22"}, {id: "h3", c: "#b07a3c"}, {id: "h4", c: "#e5c27a"}, {id: "h5", c: "#b9b9b9"}],
   boots: [{id: "blk", n: N_("Negras"), c: "#16191b"}, {id: "wht", n: N_("Blancas"), c: "#f1f1ee"}, {id: "red", n: N_("Rojo fuego"), c: "#e3262f", req: {money: 20000}},
-    {id: "blu", n: N_("Azul eléctrico"), c: "#1f7cff", req: {money: 20000}}, {id: "pnk", n: N_("Rosa flúor"), c: "#ff4fb1", req: {fame: 40}}, {id: "gld", n: N_("Doradas"), c: "#e8c35a", req: {tro: 5}}],
+    {id: "blu", n: N_("Azul eléctrico"), c: "#1f7cff", req: {money: 20000}}, {id: "pnk", n: N_("Rosa flúor"), c: "#ff4fb1", req: {fame: 40}}, {id: "gld", n: N_("Doradas"), c: "#e8c35a", req: {tro: 5}},
+    {id: "mint", n: N_("Menta"), c: "#61e6bc", req: {fame: 25}}, {id: "vio", n: N_("Violeta"), c: "#8c55ff", req: {tro: 2}}],
+  shirt: [{id: "plain", n: N_("Clásica"), att: {FIS: 1}, gk: {EST: 1}}, {id: "stripes", n: N_("Franjas"), req: {fame: 10}, att: {PAS: 1}, gk: {SAQ: 1}}, {id: "hoops", n: N_("Aros"), req: {fame: 15}, att: {TIR: 1}, gk: {PAR: 1}},
+    {id: "sash", n: N_("Banda diagonal"), req: {tro: 1}, att: {RIT: 1}, gk: {VEL: 1}}, {id: "retro", n: N_("Cuello retro"), req: {money: 30000}, att: {REG: 1}, gk: {COL: 1}}, {id: "diamond", n: N_("Diamantes"), req: {tro: 4}, att: {DEF: 1}, gk: {REF: 1}}],
   sleeve: [{id: "short", n: N_("Manga corta")}, {id: "long", n: N_("Manga larga")}, {id: "under", n: N_("Manguito térmico negro"), req: {fame: 15}}, {id: "tights", n: N_("Mallas térmicas"), req: {fame: 10}}],
   band: [{id: "none", n: N_("Sin cinta")}, {id: "wht", n: N_("Cinta blanca"), c: "#f4f4f0"}, {id: "blk", n: N_("Cinta negra"), c: "#16191b"},
     {id: "club", n: N_("Cinta con los colores del club"), req: {fame: 30}}, {id: "cap", n: N_("Brazalete de capitán"), req: {cap: 1}}],
@@ -52651,7 +52726,49 @@ var LIFE_COS = {
     {id: "spin", n: N_("Salto con giro"), req: {tro: 2}}, {id: "statue", n: N_("La estatua"), req: {tro: 6}}, {id: "dance", n: N_("Baile en el córner"), req: {money: 50000}},
     {id: "roar", n: N_("Rugido a la grada")}, {id: "chest", n: N_("Golpes en el pecho")}]
 };
-var LIFE_COS_DEF = {skin: "s2", hair: "short", hcol: "h1", boots: "blk", sleeve: "short", band: "none", gloves: "cls", cel: "fist"};
+/* 260 equipaciones completas: 13 cortes gráficos x 20 paletas, seleccionables y guardadas por carrera. */
+var LIFE_KIT_PATTERNS = [
+  {id: "pinstripe", n: N_("Líneas finas")}, {id: "hoops", n: N_("Aros clásicos")}, {id: "sash", n: N_("Banda diagonal")},
+  {id: "retro", n: N_("Cuello vintage")}, {id: "diamond", n: N_("Diamantes")}, {id: "split", n: N_("Mitad y mitad")},
+  {id: "chevron", n: N_("Chevron")}, {id: "checker", n: N_("Cuadros")}, {id: "pixel", n: N_("Pixel")},
+  {id: "lightning", n: N_("Rayo")}, {id: "gradient", n: N_("Degradado")}, {id: "star", n: N_("Estrellas")},
+  {id: "triangles", n: N_("Triángulos")}
+];
+var LIFE_KIT_STAT_LINKS = [
+  {att: "PAS", gk: "SAQ"}, {att: "TIR", gk: "PAR"}, {att: "RIT", gk: "VEL"}, {att: "FIS", gk: "EST"},
+  {att: "REG", gk: "COL"}, {att: "DEF", gk: "REF"}, {att: "RIT", gk: "VEL"}, {att: "PAS", gk: "SAQ"},
+  {att: "REG", gk: "REF"}, {att: "RIT", gk: "VEL"}, {att: "FIS", gk: "COL"}, {att: "TIR", gk: "PAR"},
+  {att: "DEF", gk: "EST"}
+];
+var LIFE_KIT_PALETTES = [
+  {id: "cobalt", n: N_("Cobalto"), c: "#1957d2", c2: "#f6f4ec", shorts: "#10264b"}, {id: "coral", n: N_("Coral"), c: "#ef604d", c2: "#fff3e6", shorts: "#282328"},
+  {id: "emerald", n: N_("Esmeralda"), c: "#078453", c2: "#f4f0dc", shorts: "#123d31"}, {id: "violet", n: N_("Violeta"), c: "#7042bb", c2: "#f7e8c4", shorts: "#30234b"},
+  {id: "amber", n: N_("Ámbar"), c: "#d99800", c2: "#18232c", shorts: "#22252a"}, {id: "carbon", n: N_("Carbón"), c: "#20252b", c2: "#f4f1e8", shorts: "#111418"},
+  {id: "turquoise", n: N_("Turquesa"), c: "#03a6a6", c2: "#f2f5ee", shorts: "#12434d"}, {id: "cherry", n: N_("Cereza"), c: "#ae1931", c2: "#fff5e9", shorts: "#351d28"},
+  {id: "navy", n: N_("Marino"), c: "#152a50", c2: "#e8c35a", shorts: "#111a2c"}, {id: "lime", n: N_("Lima"), c: "#82b315", c2: "#101c22", shorts: "#203229"},
+  {id: "rose", n: N_("Rosa"), c: "#e14682", c2: "#fff2ea", shorts: "#3a2130"}, {id: "orange", n: N_("Naranja"), c: "#f07623", c2: "#17212a", shorts: "#303038"},
+  {id: "ice", n: N_("Hielo"), c: "#c7e8f3", c2: "#103d5a", shorts: "#14334a"}, {id: "sand", n: N_("Arena"), c: "#c4a26b", c2: "#2f2520", shorts: "#312820"},
+  {id: "magenta", n: N_("Magenta"), c: "#b425a0", c2: "#fff3ed", shorts: "#34213e"}, {id: "electric", n: N_("Azul eléctrico"), c: "#126bff", c2: "#f4f4ef", shorts: "#171b26"},
+  {id: "scarlet", n: N_("Escarlata"), c: "#df2e36", c2: "#111923", shorts: "#20222b"}, {id: "olive", n: N_("Oliva"), c: "#5c7040", c2: "#f1e8d4", shorts: "#252b24"},
+  {id: "silver", n: N_("Plata"), c: "#989fa9", c2: "#152330", shorts: "#242832"}, {id: "gold", n: N_("Dorado"), c: "#d0a439", c2: "#20191a", shorts: "#2b2421"}
+];
+var LIFE_KIT_CATALOG = [];
+LIFE_KIT_PATTERNS.forEach(function (pattern, pi) {
+  LIFE_KIT_PALETTES.forEach(function (palette, ci) {
+    var rank = pi * LIFE_KIT_PALETTES.length + ci, req = null;
+    if (rank >= 20) {
+      if (rank % 3 === 0) req = {fame: Math.min(80, 5 + Math.floor(rank / 15) * 5)};
+      else if (rank % 3 === 1) req = {tro: Math.min(12, 1 + Math.floor(rank / 35))};
+      else req = {money: 5000 + rank * 300};
+    }
+    var statLink = LIFE_KIT_STAT_LINKS[pi], statLevel = ci % 7 === 6 ? 2 : 1;
+    var item = {id: "kit_" + String(rank + 1).padStart(3, "0"), n: N_("Equipación " + pattern.n + " · " + palette.n),
+      pattern: pattern.id, c: palette.c, c2: palette.c2, shorts: palette.shorts, att: (function () { var o = {}; o[statLink.att] = statLevel; return o; })(),
+      gk: (function () { var o = {}; o[statLink.gk] = statLevel; return o; })(), req: req || undefined};
+    LIFE_COS.shirt.push(item); LIFE_KIT_CATALOG.push(item);
+  });
+});
+var LIFE_COS_DEF = {skin: "s2", hair: "short", hcol: "h1", boots: "blk", shirt: "plain", sleeve: "short", band: "none", gloves: "cls", cel: "fist"};
 var LIFE_NEXT_NUM = null;
 
 /* ---------- estado ---------- */
@@ -52824,6 +52941,8 @@ function lifeAttBonus() {
     var m = gk ? d.gk : d.att;
     if (m) Object.keys(m).forEach(function (a) { out[a] = (out[a] || 0) + m[a]; });
   });
+  var kit = lifeItem("shirt", lifeCos("shirt")), kitStats = kit && (gk ? kit.gk : kit.att);
+  if (kitStats) Object.keys(kitStats).forEach(function (a) { out[a] = (out[a] || 0) + kitStats[a]; });
   return out;
 }
 /* cobrar y descontar un tramo (al final de cada tramo de temporada) */
@@ -54508,7 +54627,11 @@ var ACH_P = [
   ["p_t15", "🏛️", N_("Vitrina llena"), N_("Gana 15 títulos."), function (c) { return S.p.trophies.length >= 15; }],
   ["p_g300", "👑", N_("Leyenda del gol"), N_("Llega a 300 goles oficiales."), function (c) { return c.t.g >= 300; }],
   ["p_knee", "🏹", N_("Antes era un aventurero como tú..."), N_("Lesiónate la rodilla."), function (c) { return !!(S.p.flags && S.p.flags.knee); }, 1],
-  ["p_bdo", "🥇", N_("Balón de Oro"), N_("Gana el Balón de Oro."), function (c) { return S.p.awards.some(function (a) { return a.k === "bdo"; }); }]
+  ["p_bdo", "🥇", N_("Balón de Oro"), N_("Gana el Balón de Oro."), function (c) { return S.p.awards.some(function (a) { return a.k === "bdo"; }); }],
+  ["p_assist100", "🪄", N_("Arquitecto del juego"), N_("Da 100 asistencias oficiales."), function (c) { return c.t.a >= 100; }],
+  ["p_apps1000", "🧭", N_("Mil batallas"), N_("Juega 1.000 partidos oficiales."), function (c) { return c.t.apps >= 1000; }],
+  ["p_treble", "👑", N_("Triplete inolvidable"), N_("Gana tres títulos en una misma temporada."), function () { return typeof achTreble === "function" && achTreble(S.p.trophies); }],
+  ["p_nat100", "🌍", N_("Leyenda nacional"), N_("Llega a 100 partidos con tu selección."), function () { return S.p.intl.caps >= 100; }]
 ];
 var ACH_M = [
   ["m_w1", "✅", N_("Primera victoria"), N_("Gana tu primer partido como míster."), function (c) { return c.t.w >= 1; }],
@@ -54524,8 +54647,48 @@ var ACH_M = [
   ["m_w200", "🦾", N_("Doscientas victorias"), N_("Suma 200 victorias."), function (c) { return c.t.w >= 200; }],
   ["m_season10", "⏳", N_("Banquillo eterno"), N_("Entrena 10 temporadas."), function (c) { return c.t.seasons >= 10; }],
   ["m_t15", "🏛️", N_("Vitrina llena"), N_("Gana 15 títulos."), function (c) { return S.m.trophies.length >= 15; }],
-  ["m_best", "🥇", N_("Mejor entrenador"), N_("Gana el premio al mejor entrenador del año."), function (c) { return S.m.awards.some(function (a) { return a.k === "mgr_year"; }); }]
+  ["m_best", "🥇", N_("Mejor entrenador"), N_("Gana el premio al mejor entrenador del año."), function (c) { return S.m.awards.some(function (a) { return a.k === "mgr_year"; }); }],
+  ["m_w500", "🧠", N_("Quinientas victorias"), N_("Suma 500 victorias como entrenador."), function (c) { return c.t.w >= 500; }],
+  ["m_treble", "👑", N_("Triplete desde el banquillo"), N_("Gana liga, copa y torneo continental en una temporada."), function () { return typeof achTreble === "function" && achTreble(S.m.trophies); }],
+  ["m_invincible", "🛡️", N_("Temporada perfecta"), N_("Completa una temporada de liga sin derrotas y con al menos 20 partidos."), function () { return S.m.seasons.some(function (r) { return r.l === 0 && r.w + r.d >= 20; }); }],
+  ["m_world", "🌐", N_("Míster mundial"), N_("Entrena en cinco clubes diferentes."), function () { return achClubs(S.m.seasons) >= 5; }]
 ];
+/* 30 logros de expansión: 15 para cada recorrido, con pruebas sobre estadísticas ya guardadas. */
+ACH_P.push(
+  ["p_apps750", "🎽", N_("Setecientos cincuenta partidos"), N_("Juega 750 partidos oficiales."), function (c) { return c.t.apps >= 750; }],
+  ["p_apps1500", "🏟️", N_("Estadio lleno"), N_("Juega 1.500 partidos oficiales."), function (c) { return c.t.apps >= 1500; }],
+  ["p_g150", "🥅", N_("Instinto goleador"), N_("Marca 150 goles oficiales."), function (c) { return c.t.g >= 150; }],
+  ["p_g500", "🚀", N_("Quinientos goles"), N_("Marca 500 goles oficiales."), function (c) { return c.t.g >= 500; }],
+  ["p_a200", "🧩", N_("Socio perfecto"), N_("Da 200 asistencias oficiales."), function (c) { return c.t.a >= 200; }],
+  ["p_a300", "🎨", N_("Pase de museo"), N_("Da 300 asistencias oficiales."), function (c) { return c.t.a >= 300; }],
+  ["p_season15", "🗓️", N_("Quince temporadas"), N_("Completa 15 temporadas."), function (c) { return c.t.seasons >= 15; }],
+  ["p_season20", "⌛", N_("Dos décadas de fútbol"), N_("Completa 20 temporadas."), function (c) { return c.t.seasons >= 20; }],
+  ["p_titles25", "🏆", N_("Vitrina de plata"), N_("Gana 25 títulos."), function () { return S.p.trophies.length >= 25; }],
+  ["p_titles40", "🥇", N_("Dinastía"), N_("Gana 40 títulos."), function () { return S.p.trophies.length >= 40; }],
+  ["p_clubs5", "🗺️", N_("Cinco escudos"), N_("Juega en cinco clubes distintos."), function () { return achClubs(S.p.seasons) >= 5; }],
+  ["p_clubs10", "🌐", N_("Pasaporte lleno"), N_("Juega en diez clubes distintos."), function () { return achClubs(S.p.seasons) >= 10; }],
+  ["p_cs100", "🧤", N_("Cien porterías a cero"), N_("Deja la portería a cero en 100 partidos."), function (c) { return c.t.cs >= 100; }],
+  ["p_intcaps150", "🇺🇳", N_("Ciento cincuenta veces internacional"), N_("Juega 150 partidos con tu selección."), function () { return S.p.intl.caps >= 150; }],
+  ["p_fame90", "✨", N_("Ídolo mundial"), N_("Alcanza 90 de fama."), function () { return S.p.fame >= 90; }]
+);
+ACH_M.push(
+  ["m_w100", "📊", N_("Centena en el banquillo"), N_("Suma 100 victorias como entrenador."), function (c) { return c.t.w >= 100; }],
+  ["m_w300", "⚙️", N_("Trescientas victorias"), N_("Suma 300 victorias como entrenador."), function (c) { return c.t.w >= 300; }],
+  ["m_w1000", "🏅", N_("Mil triunfos"), N_("Suma 1.000 victorias como entrenador."), function (c) { return c.t.w >= 1000; }],
+  ["m_season5", "📚", N_("Proyecto consolidado"), N_("Completa cinco temporadas como entrenador."), function (c) { return c.t.seasons >= 5; }],
+  ["m_season20", "🕰️", N_("Leyenda del banquillo"), N_("Completa 20 temporadas como entrenador."), function (c) { return c.t.seasons >= 20; }],
+  ["m_titles10", "🏆", N_("Diez títulos"), N_("Gana 10 títulos como entrenador."), function () { return S.m.trophies.length >= 10; }],
+  ["m_titles25", "🥇", N_("Veinticinco títulos"), N_("Gana 25 títulos como entrenador."), function () { return S.m.trophies.length >= 25; }],
+  ["m_titles50", "👑", N_("Cincuenta títulos"), N_("Gana 50 títulos como entrenador."), function () { return S.m.trophies.length >= 50; }],
+  ["m_clubs5", "🧭", N_("Cinco vestuarios"), N_("Entrena a cinco clubes distintos."), function () { return achClubs(S.m.seasons) >= 5; }],
+  ["m_clubs10", "🌍", N_("Carrera internacional"), N_("Entrena a diez clubes distintos."), function () { return achClubs(S.m.seasons) >= 10; }],
+  ["m_rep90", "💫", N_("Respeto universal"), N_("Alcanza 90 de reputación."), function () { return S.m.rep >= 90; }],
+  ["m_awards3", "🎖️", N_("Tres veces míster del año"), N_("Gana tres premios individuales como entrenador."), function () { return S.m.awards.length >= 3; }],
+  ["m_gf120", "💥", N_("Ataque imparable"), N_("Marca 120 goles en una temporada de liga."), function () { return S.m.seasons.some(function (r) { return r.gf >= 120; }); }],
+  ["m_inv30", "🧱", N_("Treinta jornadas invicto"), N_("Completa una temporada de liga de al menos 30 partidos sin perder."), function () { return S.m.seasons.some(function (r) { return r.l === 0 && r.w + r.d >= 30; }); }],
+  ["m_bigbudget", "💼", N_("Presupuesto de élite"), N_("Dirige un club con al menos 20 millones de presupuesto."), function () { return S.m.bud >= 20000000; }]
+);
+
 function achList() { var mgr = S && S.mode === "mgr"; return (mgr ? ACH_M : ACH_P).concat(typeof achX === "function" ? achX(mgr ? "m" : "p") : []); }
 function achCtx() { return {t: S.mode === "mgr" ? achMgrTot() : achPlayerTot()}; }
 /* comprueba y devuelve los logros nuevos; la primera vez en una partida antigua no avisa */
@@ -59419,6 +59582,119 @@ var Pitch = (function () {
     return {mount: mount, stop: stop, vis: vis, exc: exc, cheer: cheer, ooh: ooh, kick: kick, whistle: whistle, toggle: toggle, isOn: isOn};
   })();
 
+  /* ---------- música ambiente original en bucle (no requiere archivos ni conexión) ---------- */
+  var Music = (function () {
+    var KEY = "camino.pitch.music", ac = null, master = null, on = false, loaded = false, timer = null, button = null, unlocking = false, watchingVisibility = false;
+    var bpm = 94, beat = 60 / bpm, bar = beat * 4;
+    var progression = [
+      {root: 48, chord: [60, 64, 67]}, {root: 45, chord: [57, 60, 64]},
+      {root: 41, chord: [53, 57, 60]}, {root: 43, chord: [55, 59, 62]}
+    ];
+    var melody = [72, 76, 79, 76, 74, 72, 67, 71, 72, 76, 81, 79, 76, 74, 72, 67];
+    var label = function () {
+      var lang = typeof LANG === "string" ? LANG : "es";
+      var words = {
+        es: ["Activar música de fondo", "Silenciar música de fondo"],
+        en: ["Turn background music on", "Turn background music off"],
+        de: ["Hintergrundmusik einschalten", "Hintergrundmusik ausschalten"],
+        it: ["Attiva musica di sottofondo", "Disattiva musica di sottofondo"],
+        fr: ["Activer la musique de fond", "Couper la musique de fond"]
+      };
+      return (words[lang] || words.es)[on ? 1 : 0];
+    };
+    function save() { try { localStorage.setItem(KEY, on ? "1" : "0"); } catch (e) {} }
+    function load() { if (loaded) return; loaded = true; try { on = localStorage.getItem(KEY) === "1"; } catch (e) { on = false; } }
+    function updateButton() {
+      var buttons = document.querySelectorAll("[data-a='bgm'], [data-music]");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].setAttribute("aria-pressed", on ? "true" : "false");
+        buttons[i].setAttribute("aria-label", label()); buttons[i].title = label();
+        buttons[i].textContent = on ? "♫" : "♪";
+      }
+    }
+    function init() {
+      if (ac) return true;
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return false;
+      try {
+        ac = new AC(); master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+        return true;
+      } catch (e) { ac = null; master = null; return false; }
+    }
+    function frequency(note) { return 440 * Math.pow(2, (note - 69) / 12); }
+    function note(midi, at, duration, type, volume, cutoff) {
+      var osc = ac.createOscillator(), filter = ac.createBiquadFilter(), gain = ac.createGain();
+      osc.type = type; osc.frequency.setValueAtTime(frequency(midi), at);
+      filter.type = "lowpass"; filter.frequency.setValueAtTime(cutoff, at);
+      gain.gain.setValueAtTime(0.0001, at); gain.gain.exponentialRampToValueAtTime(volume, at + 0.035);
+      gain.gain.exponentialRampToValueAtTime(0.0001, at + duration);
+      osc.connect(filter); filter.connect(gain); gain.connect(master);
+      osc.start(at); osc.stop(at + duration + 0.03);
+    }
+    function loop() {
+      if (!on || !ac || ac.state !== "running") return;
+      var start = ac.currentTime + 0.08;
+      progression.forEach(function (part, measure) {
+        var at = start + measure * bar;
+        part.chord.forEach(function (n) { note(n, at, bar * 0.94, "sine", 0.018, 900); });
+        note(part.root, at, beat * 1.65, "triangle", 0.075, 420);
+        note(part.root + 7, at + beat * 2, beat * 1.55, "triangle", 0.055, 420);
+        for (var step = 0; step < 4; step++) {
+          var tune = melody[measure * 4 + step];
+          note(tune, at + step * beat, beat * 0.48, "sine", 0.055, 1500);
+          if (step === 1 || step === 3) note(tune - 12, at + step * beat + beat * 0.5, beat * 0.35, "sine", 0.032, 1300);
+        }
+      });
+      timer = setTimeout(loop, bar * progression.length * 1000 - 100);
+    }
+    function start() {
+      if (!on || timer || !init()) return;
+      try {
+        var p = ac.resume();
+        if (p && p.then) p.then(function () { if (on && !timer) loop(); }).catch(function () {});
+        else if (!timer) loop();
+      } catch (e) {}
+    }
+    function stop() {
+      if (timer) clearTimeout(timer); timer = null;
+      if (ac && master) {
+        try {
+          master.gain.cancelScheduledValues(ac.currentTime);
+          master.gain.setTargetAtTime(0, ac.currentTime, 0.08);
+          setTimeout(function () { if ((!on || !button) && ac && ac.state === "running") ac.suspend(); }, 350);
+        } catch (e) {}
+      }
+    }
+    function watchVisibility() {
+      if (watchingVisibility) return;
+      watchingVisibility = true;
+      document.addEventListener("visibilitychange", vis);
+    }
+    function watchUnlock() {
+      if (unlocking) return;
+      unlocking = true;
+      document.addEventListener("pointerdown", function () { if (on) start(); }, true);
+    }
+    function toggle() {
+      load(); watchVisibility(); watchUnlock();
+      on = !on; save(); updateButton();
+      if (on) start(); else stop();
+    }
+    function mount(btn) {
+      watchVisibility(); watchUnlock();
+      button = btn; load(); updateButton();
+      if (on) start();
+    }
+    function vis() {
+      if (!ac) return;
+      if (document.hidden) { if (timer) clearTimeout(timer); timer = null; try { ac.suspend(); } catch (e) {} }
+      else if (on) start();
+    }
+    function unmount() { button = null; }
+    function isOn() { load(); watchVisibility(); watchUnlock(); return on; }
+    return {mount: mount, toggle: toggle, vis: vis, unmount: unmount, isOn: isOn, label: label};
+  })();
+
   /* posiciones base de un once (demarcaciones de su sistema) */
   function layout(list) {
     var count = {}, seen = {};
@@ -59470,6 +59746,9 @@ var Pitch = (function () {
     rb.addEventListener("click", function (ev) { ev.stopPropagation(); replay(); });
     sp.appendChild(rb);
     el.appendChild(sp);
+    var mb = document.createElement("button"); mb.type = "button"; mb.className = "pmusic"; mb.setAttribute("data-music", "1");
+    mb.addEventListener("click", function (ev) { ev.stopPropagation(); Music.toggle(); });
+    el.appendChild(mb);
     RM = reduced();
     P = {el: el, cv: cv, ctx: cv.getContext("2d"), btn: btn, cols: o.cols || ["#ffb21e", "#66b9ff"], lab: o.lab || {goal: "GOL", post: "¡PALO!", half: "DESCANSO", end: "FINAL"},
       frozen: false, qa: {nan: 0, oob: 0, pass: 0, perr: 0}, T: [[], []], own: 0, bxw: LEN / 2, speed: 1, rate: SPEEDK, ck: 0, last: now(), run: true,
@@ -59489,6 +59768,7 @@ var Pitch = (function () {
     P.onVis = function () { Snd.vis(); if (P) P.last = now(); };
     window.addEventListener("resize", P.onResize);
     document.addEventListener("visibilitychange", P.onVis);
+    Music.mount(mb);
     Snd.mount();
     loop();
   }
@@ -59517,6 +59797,7 @@ var Pitch = (function () {
     if (!P) return;
     flushCues();
     P.run = false;
+    Music.unmount();
     window.removeEventListener("resize", P.onResize);
     document.removeEventListener("visibilitychange", P.onVis);
     if (P.cv.parentNode) P.cv.parentNode.removeChild(P.cv);
@@ -60788,7 +61069,7 @@ var Pitch = (function () {
   function clearHalf() { if (P && P.msg && P.msg.keep && P.msg.t === P.lab.half) P.msg = null; }
   function freeze(v) { if (P) { if (v && !P.frozen) flushCues(); P.frozen = !!v; if (!v) { P.last = now(); if (P.half2) clearHalf(); } } }
   return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy, reset: reset, clearMsg: clearMsg, freeze: freeze, replay: replay,
-    active: function () { return !!P; }, sound: function () { return Snd.isOn(); }, debug: function () { return P; }};
+    active: function () { return !!P; }, sound: function () { return Snd.isOn(); }, musicToggle: Music.toggle, musicOn: Music.isOn, musicLabel: Music.label, debug: function () { return P; }};
 })();
 
 ;
@@ -61213,17 +61494,22 @@ var Pitch = (function () {
     slot("after");
   }
   function calm2() { return !!document.querySelector(".mg-ov"); }
+  function musicButton() {
+    var on = typeof Pitch !== "undefined" && Pitch.musicOn ? Pitch.musicOn() : false;
+    var label = typeof Pitch !== "undefined" && Pitch.musicLabel ? Pitch.musicLabel() : tr("Música de fondo");
+    return '<button class="iconbtn music-app-btn" data-a="bgm" aria-pressed="' + (on ? "true" : "false") + '" aria-label="' + h(label) + '" title="' + h(label) + '">' + (on ? "♫" : "♪") + "</button>";
+  }
   function topBar() {
     var p = S.p, o = ovrInt(), ni = p.inat >= 0 ? p.inat : p.nat;
     return '<header class="top"><div class="ovr tier-' + tier(o) + '" aria-label="' + h(tr("Media {n}", {n: o})) + '"><b class="num">' + o + "</b><small>" + h(posAb(p.pos)) + "</small></div>" +
       '<div class="who"><h1>' + h(p.fn + " " + p.ln) + '</h1><div class="sub">' + crest(p.club) + "<span>" + (p.loan ? tr("{club} (cedido)", {club: h(clubName(p.club))}) : h(clubName(p.club))) + "</span><span>· " + trn(p.age, "{n} año", "{n} años") + "</span>" + flag(ni) + "</div></div>" +
-      '<button class="iconbtn" data-a="menu" aria-label="' + h(tr("Menú")) + '">' + ICON.dots + "</button></header>";
+      musicButton() + '<button class="iconbtn" data-a="menu" aria-label="' + h(tr("Menú")) + '">' + ICON.dots + "</button></header>";
   }
   function topBarM() {
     var m = S.m, r = Math.round(m.rep);
     return '<header class="top"><div class="ovr tier-' + repTier(r) + '" aria-label="' + h(tr("Prestigio {n}", {n: r})) + '"><b class="num">' + r + "</b><small>" + tr("DT") + "</small></div>" +
       '<div class="who"><h1>' + h(m.fn + " " + m.ln) + '</h1><div class="sub">' + (m.club >= 0 ? crest(m.club) + "<span>" + h(clubName(m.club)) + "</span>" : "<span>" + tr("Sin banquillo") + "</span>") + "<span>· " + trn(m.age, "{n} año", "{n} años") + "</span>" + flag(m.nat) + "</div></div>" +
-      '<button class="iconbtn" data-a="menu" aria-label="' + h(tr("Menú")) + '">' + ICON.dots + "</button></header>";
+      musicButton() + '<button class="iconbtn" data-a="menu" aria-label="' + h(tr("Menú")) + '">' + ICON.dots + "</button></header>";
   }
   function mainTab() { return isMgr() ? "club" : "carrera"; }
   function dock() {
@@ -62472,6 +62758,7 @@ var Pitch = (function () {
         '<div class="row2" style="margin-top:14px"><button class="btn wide" data-a="close">' + tr("Más tarde") + '</button><button class="btn pri wide" data-a="doupdate">' + tr("Actualizar") + "</button></div>";
     }
     if (t.k === "socedit") return socEditHTML();
+    if (t.k === "soccompose") return socComposeHTML();
     if (t.k === "askdel") {
       var e = slotsNow().filter(function (x) { return x.id === t.id; })[0];
       return "<h2>" + tr("¿Borrar la partida?") + '</h2><p class="lead">' + tr("Se borrará la partida de {n} de este dispositivo y de tu cuenta. No se puede deshacer.", {n: h(e ? e.n : "")}) + '</p><div class="row2" style="margin-top:14px"><button class="btn wide" data-a="close">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="dodel" data-v="' + h(t.id) + '">' + tr("Borrar") + "</button></div>";
@@ -62695,7 +62982,14 @@ var Pitch = (function () {
     if (tp.choice) tp.choice = String(tp.choice);
     return tr(p.tk, tp);
   }
-  function socPostHTML(p) {
+  function socPostAuthor(p) {
+    var a = p.au || {}, acc = a.id ? socAcc(a.id) : null;
+    if (acc) return acc.name;
+    if (a.self) return S.soc.prof.name;
+    if (a.club != null) return a.n || clubName(a.club);
+    return a.n || tr("Hincha");
+  }
+  function socPostHTML(p, idx) {
     var a = p.au || {}, acc = a.id ? socAcc(a.id) : null, prof = S.soc.prof, nm, hd, av, col = "#2b3b40", ver = false;
     if (acc) { nm = acc.name; hd = acc.handle; av = acc.av; col = acc.col || col; ver = !!acc.verified; }
     else if (a.self) { nm = prof.name; hd = prof.handle; av = prof.av; col = prof.col; ver = socFollowers() >= 100; }
@@ -62703,13 +62997,17 @@ var Pitch = (function () {
     else { nm = a.n; hd = a.hd; av = a.av || "🙂"; }
     var avHTML = a.club != null && W.clubs[a.club] ? '<span class="sav">' + crest(a.club) + "</span>" : '<span class="sav" style="background:' + h(col) + '">' + h(av) + "</span>";
     return '<article class="spost' + (p.m < 0 ? " neg" : p.m > 0 ? " posm" : "") + '">' + avHTML + '<div class="sbody"><div class="shead"><b>' + h(nm) + "</b>" + (ver ? '<span class="sver" aria-label="' + h(tr("Verificado")) + '">✔</span>' : "") + '<span class="shd">@' + h(hd) + " · " + h(socWhen(p)) + "</span></div>" +
-      '<p class="stext">' + h(socText(p)) + '</p><div class="sstats"><span>♥ ' + h(fmtCount(p.lk)) + "</span><span>⟲ " + h(fmtCount(p.rt)) + "</span></div></div></article>";
+      (p.replyTo ? '<div class="soc-replyto">↪ ' + h(tr("Responde a {target}", {target: p.replyTo.target})) + (p.replyTo.text ? '<small>“' + h(p.replyTo.text) + '”</small>' : "") + '</div>' : "") +
+      '<p class="stext">' + h(socText(p)) + '</p><div class="sstats"><span>♥ ' + h(fmtCount(p.lk)) + "</span><span>⟲ " + h(fmtCount(p.rt)) + "</span><button class=\"sreply\" data-a=\"socreplay\" data-i=\"' + idx + '\">↩ " + tr("Responder") + "</button></div></div></article>";
   }
   function fmtCount(n) { return n >= 1e6 ? fmtDec(n / 1e6, 1) + "M" : n >= 1e3 ? fmtDec(n / 1e3, 1) + "k" : String(n); }
   function tabRed() {
     var soc = socInit(), prof = soc.prof, fol = socFollowers();
     soc.seen = soc.posts.length;
-    var s = '<div class="stack"><section class="card sprof"><div class="sban" style="background:' + h(prof.col) + '"></div><div class="sinfo"><div class="srow"><span class="sav big" style="background:' + h(prof.col) + '">' + h(prof.av) + '</span><button class="btn sm" data-a="socedit">' + tr("Editar perfil") + "</button></div>";
+    var usedThisBlock = soc.customPeriod === socCustomPeriod();
+    var s = '<div class="stack"><section class="soc-composebar"><div><b>✍️ ' + tr("Dale voz a tu perfil") + '</b><small>' + tr("Elige una intención; el mensaje también tiene efecto en tu carrera.") + '</small></div><button class="btn pri" data-a="soccompose">' + tr("Publicar un mensaje") + "</button></section>" +
+      (usedThisBlock ? '<p class="muted soc-cooldown">' + tr("Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente.") + "</p>" : "") +
+      '<section class="card sprof"><div class="sban" style="background:' + h(prof.col) + '"></div><div class="sinfo"><div class="srow"><span class="sav big" style="background:' + h(prof.col) + '">' + h(prof.av) + '</span><button class="btn sm" data-a="socedit">' + tr("Editar perfil") + "</button></div>";
     s += '<h3 style="margin:6px 0 0">' + h(prof.name) + (fol >= 100 ? ' <span class="sver">✔</span>' : "") + '</h3><div class="muted">@' + h(prof.handle) + "</div>";
     if (prof.bio) s += '<p style="margin:8px 0 0">' + h(prof.bio) + "</p>";
     var n = nickName(isMgr() ? S.m : S.p);
@@ -62718,6 +63016,21 @@ var Pitch = (function () {
     if (!soc.posts.length) s += '<p class="empty">' + tr("Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.") + "</p>";
     else s += '<section class="sfeed">' + soc.posts.slice(0, 80).map(socPostHTML).join("") + "</section>";
     return s + "</div>";
+  }
+  function socComposeHTML() {
+    var sheet = UI.sheet || {}, reply = sheet.reply || null, pick = sheet.pick || SOC_CUSTOM_OPTIONS[0].k;
+    var option = SOC_CUSTOM_OPTIONS.filter(function (x) { return x.k === pick; })[0] || SOC_CUSTOM_OPTIONS[0];
+    var fx = socCustomFx(option.k) || {}, periodUsed = socInit().customPeriod === socCustomPeriod();
+    var message = tr(reply ? option.reply : option.post, reply ? {target: reply.target} : {});
+    var s = '<h2>' + (reply ? tr("Responder a {target}", {target: h(reply.target)}) : tr("Crear publicación")) + '</h2><div class="stack">';
+    if (reply) s += '<blockquote class="soc-quote"><b>' + tr("Publicación a la que respondes") + ' · @' + h(reply.target) + '</b><span>' + h(reply.text) + '</span></blockquote>';
+    s += '<div><span class="lbl">' + tr("¿Qué quieres transmitir?") + '</span><div class="soc-intents">' + SOC_CUSTOM_OPTIONS.map(function (x) {
+      return '<button class="chipb" data-a="socpick" data-v="' + x.k + '" aria-pressed="' + (x.k === option.k) + '">' + x.ico + " " + h(tr(x.n)) + "</button>";
+    }).join("") + "</div></div>";
+    s += '<section class="soc-preview"><span class="eyebrow">' + tr("Vista previa") + '</span><p>' + h(message) + '</p><span class="eyebrow">' + tr("Efectos de esta publicación") + '</span><div class="chips">' + Object.keys(fx).map(function (k) { return chip([k, fx[k]]); }).join("") + "</div></section>";
+    s += '<p class="muted soc-cooldown">' + tr("Puedes enviar una publicación personalizada por bloque para que cada mensaje importe.") + "</p>";
+    s += '<div class="row2"><button class="btn wide" data-a="close">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="socsend" data-v="' + option.k + '"' + (periodUsed ? " disabled" : "") + ">" + tr(reply ? "Enviar respuesta" : "Publicar") + "</button></div></div>";
+    return s;
   }
   function socDraft() {
     var g = function (id) { var e = document.getElementById(id); return e ? e.value : null; };
@@ -63090,6 +63403,7 @@ var Pitch = (function () {
       case "tab": UI.tab = b.getAttribute("data-t"); render(true); break;
       case "more": UI.exp[id] = !UI.exp[id]; render(false); break;
       case "menu": UI.sheet = {k: "menu"}; renderSheet(); break;
+      case "bgm": if (typeof Pitch !== "undefined" && Pitch.musicToggle) Pitch.musicToggle(); render(false); break;
       case "close": closeSheet(); render(false); break;
       case "setev": S.set.ev = +v; persist(); renderSheet(); break;
       case "setlang": setLangUI(v); break;
@@ -63209,6 +63523,18 @@ var Pitch = (function () {
       /* minijuego */
       case "mini": doMini(+b.getAttribute("data-i"), b.getAttribute("data-m")); break;
       /* red social */
+      case "soccompose": UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k}; renderSheet(); break;
+      case "socreplay":
+        var replyIdx = +b.getAttribute("data-i"), replyPost = S.soc && S.soc.posts[replyIdx];
+        if (replyPost) UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k, reply: {id: replyPost.id || null, target: socPostAuthor(replyPost), text: socText(replyPost).slice(0, 180)}};
+        renderSheet(); break;
+      case "socpick": if (UI.sheet && UI.sheet.k === "soccompose") { UI.sheet.pick = v; renderSheet(); } break;
+      case "socsend":
+        var sendReply = UI.sheet && UI.sheet.k === "soccompose" && UI.sheet.reply;
+        var sendResult = socCustomSend(v, sendReply || "");
+        if (sendResult.ok) { persist(); UI.sheet = null; render(false); toast(tr(sendResult.reply ? "Respuesta enviada." : "Publicación enviada.")); }
+        else if (sendResult.limit) toast(tr("Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente."));
+        break;
       case "socedit": UI.sheet = {k: "socedit"}; renderSheet(); break;
       case "socav": socDraft(); UI.sheet.d.av = v; renderSheet(); break;
       case "soccol": socDraft(); UI.sheet.d.col = v; renderSheet(); break;
@@ -64462,8 +64788,8 @@ var Pitch = (function () {
   /* ---------- avatar 2D (SVG) ---------- */
   function avatar(look, club, num, gk, cls, cap) {
     var get = function (cat) { return lifeItem(cat, look[cat] || LIFE_COS_DEF[cat]); };
-    var skin = get("skin").c, hc = get("hcol").c, hair = (look.hair || "short"), boots = get("boots").c, sl = look.sleeve || "short", band = look.band || "none", gl = get("gloves");
-    var k = kitOf(club, gk), c1 = k.c1, c2 = k.c2, txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
+    var skin = get("skin").c, hc = get("hcol").c, hair = (look.hair || "short"), boots = get("boots").c, sl = look.sleeve || "short", band = look.band || "none", gl = get("gloves"), shirtItem = get("shirt");
+    var k = kitOf(club, gk), c1 = shirtItem.c || k.c1, c2 = shirtItem.c2 || k.c2, txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
     var armCol = sl === "long" ? c1 : sl === "under" ? "#16191b" : skin, legCol = sl === "tights" ? "#16191b" : skin;
     var s = '<svg class="' + (cls || "lfsvg") + '" viewBox="0 0 120 170" role="img" aria-label="' + h(tr("Tu avatar")) + '">';
     s += '<ellipse cx="60" cy="163" rx="34" ry="5" fill="rgba(0,0,0,.35)"/>';
@@ -64473,7 +64799,7 @@ var Pitch = (function () {
     s += '<rect x="44.5" y="134" width="12" height="3" fill="' + c2 + '" opacity=".85"/><rect x="63.5" y="134" width="12" height="3" fill="' + c2 + '" opacity=".85"/>';
     s += '<path d="M43 152h14v5c0 2-1 3-3 3H39c-2 0-3-1-2-3z" fill="' + boots + '"/><path d="M63 152h14l6 5c1 2 0 3-2 3H66c-2 0-3-1-3-3z" fill="' + boots + '"/>';
     /* pantalón */
-    s += '<path d="M40 98h40l3 24H63l-3-10-3 10H37z" fill="' + k.sh + '"/>';
+    s += '<path d="M40 98h40l3 24H63l-3-10-3 10H37z" fill="' + (shirtItem.shorts || k.sh) + '"/>';
     /* brazos */
     s += '<path d="M37 52l-11 22 4 32h8l-1-28 6-14z" fill="' + armCol + '"/><path d="M83 52l11 22-4 32h-8l1-28-6-14z" fill="' + armCol + '"/>';
     if (sl !== "long") s += '<path d="M37 51l-12 21 9 4 9-15z" fill="' + c1 + '"/><path d="M83 51l12 21-9 4-9-15z" fill="' + c1 + '"/><path d="M25 72l9 4" stroke="' + c2 + '" stroke-width="2"/><path d="M95 72l-9 4" stroke="' + c2 + '" stroke-width="2"/>';
@@ -64483,6 +64809,20 @@ var Pitch = (function () {
     else s += '<circle cx="34" cy="107" r="5" fill="' + skin + '"/><circle cx="86" cy="107" r="5" fill="' + skin + '"/>';
     /* camiseta y dorsal */
     s += '<path d="M38 48c6-3 14-5 22-5s16 2 22 5l3 8-4 46H39l-4-46z" fill="' + c1 + '"/>';
+    var shirt = shirtItem.pattern || look.shirt || LIFE_COS_DEF.shirt;
+    if (shirt === "stripes" || shirt === "pinstripe") s += '<path d="M45 46v60h5V45zm13-3v63h5V43zm13 2v61h5V45z" fill="' + c2 + '" opacity=".92"/>';
+    else if (shirt === "hoops") s += '<path d="M38 60h45v6H38zm2 16h42v6H40zm1 16h40v5H41z" fill="' + c2 + '" opacity=".94"/>';
+    else if (shirt === "sash") s += '<path d="M43 46l9-3 25 59h-9z" fill="' + c2 + '" opacity=".95"/>';
+    else if (shirt === "retro") s += '<path d="M51 44l9 8 9-8-4-2h-10z" fill="' + c2 + '"/><path d="M51 44l9 8 9-8" fill="none" stroke="' + c2 + '" stroke-width="2"/>';
+    else if (shirt === "diamond") s += '<path d="M47 55l5-5 5 5-5 5zm16 0l5-5 5 5-5 5zm-8 16l5-5 5 5-5 5zm-8 16l5-5 5 5-5 5zm16 0l5-5 5 5-5 5z" fill="' + c2 + '" opacity=".92"/>';
+    else if (shirt === "split") s += '<path d="M60 48h23l-4 57H60z" fill="' + c2 + '" opacity=".95"/>';
+    else if (shirt === "chevron") s += '<path d="M38 58l22 12 22-12v8L60 80 38 66zm0 22l22 12 22-12v8L60 102 38 88z" fill="' + c2 + '" opacity=".9"/>';
+    else if (shirt === "checker") s += '<path d="M42 54h10v10H42zm20 0h10v10H62zM52 64h10v10H52zm20 0h10v10H72zM42 74h10v10H42zm20 0h10v10H62zM52 84h10v10H52zm20 0h10v10H72z" fill="' + c2 + '" opacity=".9"/>';
+    else if (shirt === "pixel") s += '<path d="M42 56h8v8h-8zm16 8h8v8h-8zm16-8h8v8h-8zM50 76h8v8h-8zm16 8h8v8h-8zM42 96h8v8h-8zm32 0h8v8h-8z" fill="' + c2 + '"/>';
+    else if (shirt === "lightning") s += '<path d="M62 48l-13 27h10l-4 27 18-35H62l8-19z" fill="' + c2 + '"/>';
+    else if (shirt === "gradient") s += '<path d="M38 75h46v12H38z" fill="' + c2 + '" opacity=".35"/><path d="M39 90h44v10H39z" fill="' + c2 + '" opacity=".65"/>';
+    else if (shirt === "star") s += '<text x="60" y="76" text-anchor="middle" font-size="20" fill="' + c2 + '">★</text><text x="48" y="98" text-anchor="middle" font-size="9" fill="' + c2 + '">★</text><text x="72" y="98" text-anchor="middle" font-size="9" fill="' + c2 + '">★</text>';
+    else if (shirt === "triangles") s += '<path d="M42 56l8 12h-16zm27 0l8 12H61zm-14 20l8 12H47zm22 20l8 12H69zm-30 0l8 12H39z" fill="' + c2 + '" opacity=".9"/>';
     s += '<path d="M52 44l8 8 8-8" fill="none" stroke="' + c2 + '" stroke-width="3" stroke-linejoin="round"/>';
     if (num) s += '<text x="60" y="88" text-anchor="middle" font-family="Big Shoulders Display, Arial Narrow, sans-serif" font-weight="900" font-size="24" fill="' + txt + '">' + num + "</text>";
     /* cabeza */
@@ -64635,13 +64975,23 @@ var Pitch = (function () {
     return money(lk.v);
   }
   function cosRow(cat, label, swatch) {
-    var cur = lifeCos(cat);
-    return '<div class="lfcos"><span class="lbl">' + h(label) + '</span><div class="lfopts' + (swatch ? " sw" : "") + '">' + LIFE_COS[cat].map(function (it) {
-      var lk = lifeLocked(cat, it), sel = cur === it.id;
-      var inner = swatch ? '<i style="background:' + it.c + '"></i>' : "<b>" + h(tr(it.n)) + "</b>" + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
+    var cur = lifeCos(cat), items = LIFE_COS[cat] || [], pageSize = 18, ui = U.ui();
+    ui.lfcosPage = ui.lfcosPage || {};
+    var pages = Math.max(1, Math.ceil(items.length / pageSize)), page = clamp(+ui.lfcosPage[cat] || 0, 0, pages - 1);
+    ui.lfcosPage[cat] = page;
+    var shown = items.slice(page * pageSize, (page + 1) * pageSize);
+    var out = '<div class="lfcos"><span class="lbl">' + h(label) + '</span><div class="lfopts' + (swatch ? " sw" : "") + '">' + shown.map(function (it) {
+      var lk = lifeLocked(cat, it), sel = cur === it.id, statMap = cat === "shirt" ? (isGK() ? it.gk : it.att) : null;
+      var statTxt = statMap ? Object.keys(statMap).filter(function (k) { return statMap[k]; }).map(function (k) {
+        var nm = typeof ATT_NAMES !== "undefined" && ATT_NAMES[k] ? ATT_NAMES[k] : k;
+        return "+" + statMap[k] + " " + nm;
+      }).join(" · ") : "";
+      var inner = swatch ? '<i style="background:' + it.c + '"></i>' : "<b>" + h(tr(it.n)) + "</b>" + (statTxt ? '<small class="lfstats">' + h(statTxt) + "</small>" : "") + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
       if (swatch && it.n) inner += "<b>" + h(tr(it.n)) + "</b>" + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
       return '<button class="lfo' + (lk ? " lk" : "") + '" data-a="lfcos" data-k="' + cat + '" data-v="' + it.id + '" aria-pressed="' + sel + '"' + (swatch && !it.n ? ' aria-label="' + h(tr("Tono {n}", {n: it.id.slice(1)})) + '"' : "") + ">" + inner + "</button>";
-    }).join("") + "</div></div>";
+    }).join("") + "</div>";
+    if (pages > 1) out += '<div class="lfpages" style="display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:6px 0 12px"><button class="btn sm" data-a="lfcpage" data-k="' + cat + '" data-v="' + Math.max(0, page - 1) + '" aria-label="' + h(tr("Página anterior")) + '"' + (page === 0 ? " disabled" : "") + '>‹</button><span class="muted">' + tr("Página {page} de {pages}", {page: page + 1, pages: pages}) + '</span><button class="btn sm" data-a="lfcpage" data-k="' + cat + '" data-v="' + Math.min(pages - 1, page + 1) + '" aria-label="' + h(tr("Página siguiente")) + '"' + (page === pages - 1 ? " disabled" : "") + '>›</button></div>';
+    return out + "</div>";
   }
   U.sheets.llook = function () {
     var gk = isGK();
@@ -64649,12 +64999,16 @@ var Pitch = (function () {
     s += cosRow("cel", tr("Celebración"));
     if (gk) s += cosRow("gloves", tr("Guantes"), true);
     s += cosRow("boots", tr("Botas"), true);
+    s += cosRow("shirt", tr("Diseño de camiseta"));
     s += cosRow("sleeve", tr("Mangas y mallas"));
     s += cosRow("band", tr("Cinta"));
     s += cosRow("skin", tr("Piel"), true);
     s += cosRow("hair", tr("Pelo"));
     s += cosRow("hcol", tr("Color de pelo"), true);
     return s + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
+  };
+  U.actions.lfcpage = function (b, v) {
+    var cat = b.getAttribute("data-k"), ui = U.ui(); ui.lfcosPage = ui.lfcosPage || {}; ui.lfcosPage[cat] = +v || 0; rer();
   };
   U.actions.lfcos = function (b, v) {
     var cat = b.getAttribute("data-k"), r = lifeSetCos(cat, v);
@@ -66343,6 +66697,343 @@ var Pitch = (function () {
   window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(apply, 120); });
 })();
 
+
+/* Contenido añadido: 100 decisiones de jugador/a y 100 de entrenador/a. */
+EV({id: "y_recovery_plan", tipo: "aleatoria", cat: "Rendimiento", title: "El plan de recuperación", w: 1.1, cd: 3,
+  when: function (x) { return x.inSeason && x.p.fame >= 5; },
+  text: function () { return tr("El calendario viene cargado y el cuerpo te pide una pausa. El fisio propone ajustar el descanso, pero el entrenador quiere verte entrenar a tope."); },
+  opts: function () { return [
+    {t: tr("Seguir el plan del fisio"), ok: {txt: tr("Llegas más fresco al próximo partido."), fx: {form: 4, mor: 2}}},
+    {t: tr("Completar una sesión extra"), p: 0.65,
+      ok: {txt: tr("El esfuerzo extra da resultado y te notas más rápido."), fx: {form: 2, prof: 3}},
+      ko: {txt: tr("Te pasas de carga y las piernas se quedan pesadas."), fx: {form: -4, mor: -2}}},
+    {t: tr("Pedir una rotación al míster"), ok: {txt: tr("Te reserva unos minutos y recuperas energía."), fx: {coach: 2, mor: 3, form: 3}}}
+  ]; }});
+
+EV({id: "y_brazo_capitan", tipo: "aleatoria", cat: "Vestuario", title: "Un compañero necesita apoyo", w: 0.9, cd: 4,
+  when: function (x) { return x.inSeason && x.p.ovr >= 60; },
+  text: function () { return tr("Un compañero joven encadena errores y algunos veteranos empiezan a señalarle. Te busca para saber si crees que puede salir adelante."); },
+  opts: function () { return [
+    {t: tr("Hablar con él en privado"), ok: {txt: tr("Se siente escuchado y vuelve a entrenar con confianza."), fx: {mor: 3, coach: 2, prof: 2}}},
+    {t: tr("Defenderle delante de todo el grupo"), p: 0.7,
+      ok: {txt: tr("El vestuario se une y el joven responde en el campo."), fx: {mor: 4, fans: 2, prof: 2}},
+      ko: {txt: tr("El gesto se interpreta como una crítica a los veteranos."), fx: {coach: -3, mor: -2}}},
+    {t: tr("Dejar que resuelva sus problemas"), ok: {txt: tr("Cada uno aprende a su ritmo, aunque la distancia entre ambos aumenta."), fx: {prof: 1, mor: -1}}}
+  ]; }});
+
+EV({id: "y_entrevista_tactica", tipo: "aleatoria", cat: "Prensa", title: "Una pregunta sobre tu posición", w: 1, cd: 3,
+  when: function (x) { return x.inSeason && x.p.fame >= 12; },
+  text: function () { return tr("En una entrevista te preguntan si prefieres jugar en tu posición natural o aceptar cualquier papel que te pida el entrenador."); },
+  opts: function () { return [
+    {t: tr("Poner al equipo por delante"), ok: {txt: tr("El míster agradece tu compromiso y la prensa destaca tu profesionalidad."), fx: {coach: 4, prof: 3, fans: 2}}},
+    {t: tr("Explicar dónde rindes mejor"), ok: {txt: tr("Hablas claro sin faltar al respeto. El cuerpo técnico toma nota."), fx: {coach: 2, prof: 2}}},
+    {t: tr("Exigir jugar siempre en tu sitio"), p: 0.45,
+      ok: {txt: tr("Tu sinceridad abre una conversación útil con el entrenador."), fx: {coach: 3, mor: 2}},
+      ko: {txt: tr("El titular suena a ultimátum y el míster se molesta."), fx: {coach: -5, fans: -2}}}
+  ]; }});
+
+/* 100 situaciones nuevas de carrera de jugador/a. Cada tema combina diez casos jugables,
+   con decisiones, consecuencias y claves únicas para que las partidas puedan recordarlas. */
+var PLAYER_DECISION_THEMES = [
+  {cat: "Entrenamiento", title: "Una sesión a tu medida", open: "El cuerpo técnico está diseñando el trabajo de la semana.", choices: ["Pedir un objetivo técnico concreto", "Probar el reto más exigente", "Acordar una sesión equilibrada"], cases: [
+    ["Primer toque", "El analista señala que el control orientado te ayudaría a salir de la presión."], ["Pierna menos hábil", "El preparador propone terminar cada ejercicio con tu pierna menos hábil."], ["Juego aéreo", "El equipo quiere que practiques saltos y disputas en el área."], ["Pase vertical", "El vídeo de tu último partido muestra varios pases hacia atrás evitables."], ["Cambio de ritmo", "El preparador físico ha medido una bajada de velocidad en el último tramo."], ["Centros", "Los laterales te piden repetir centros y remates al segundo palo."], ["Presión tras pérdida", "El nuevo sistema exige reaccionar en los segundos posteriores a perder el balón."], ["Tiros lejanos", "En el entrenamiento te quedan diez minutos y el portero propone una competición de disparos."], ["Cobertura defensiva", "El míster quiere que mejores la coordinación con quien juega a tu lado."], ["Balón parado", "El especialista de faltas te ofrece ensayar una jugada nueva."]]},
+  {cat: "Prensa", title: "Una pregunta incómoda", open: "Un periodista busca una respuesta que abra los titulares de mañana.", choices: ["Responder con calma", "Convertirlo en un desafío público", "Desviar la atención hacia el equipo"], cases: [
+    ["La suplencia", "Te preguntan si estás molesto por haber empezado el último partido en el banquillo."], ["El gol fallado", "Una repetición de tu ocasión más clara vuelve a circular por todos los programas."], ["El cambio temprano", "Quieren saber si te sentó mal que el entrenador te sustituyera."], ["El rival", "Un delantero rival ha dicho que no le preocupa enfrentarse contigo."], ["El contrato", "La prensa publica una cifra de renovación que nadie ha confirmado."], ["La afición", "Te preguntan por los silbidos de un sector de la grada."], ["La selección", "Un reportero te plantea si mereces más minutos con tu país."], ["La posición", "El entrevistador afirma que rindes mejor en otra demarcación."], ["El vestuario", "Un periodista insinúa que hay mal ambiente entre los titulares y los suplentes."], ["La racha", "Te preguntan si el equipo puede mantener el buen momento hasta final de temporada."]]},
+  {cat: "Recuperación", title: "Tu cuerpo pide una decisión", open: "El calendario aprieta y el equipo médico revisa tus cargas.", choices: ["Seguir el protocolo del fisio", "Acelerar la vuelta por tu cuenta", "Negociar una recuperación intermedia"], cases: [
+    ["Viaje largo", "Regresas de un desplazamiento nocturno con poco descanso."], ["Dos partidos seguidos", "Hay otro encuentro importante apenas tres días después del último."], ["Molestia muscular", "Notas una pequeña sobrecarga que todavía no aparece en el parte médico."], ["Calor extremo", "La previsión anuncia temperaturas altas para el siguiente partido."], ["Sueño irregular", "El personal del club detecta que estás descansando peor de lo habitual."], ["Carga de gimnasio", "Las piernas siguen pesadas tras una sesión de fuerza exigente."], ["Tobillo sensible", "El vendaje te ayuda, pero la articulación continúa rígida."], ["Regreso a los entrenamientos", "Ya estás recuperado y quieres saber cuánto debes forzar en la primera semana."], ["Menos minutos", "Has jugado poco últimamente y te preocupa perder ritmo competitivo."], ["Rutina personal", "Una aplicación deportiva te recomienda un plan distinto al del club."]]},
+  {cat: "Vestuario", title: "Una conversación en el vestuario", open: "Un compañero se acerca cuando la mayoría ya se ha marchado.", choices: ["Escucharle en privado", "Hablar del tema con todo el grupo", "Pedir ayuda a un veterano"], cases: [
+    ["Un juvenil nervioso", "El canterano que debuta este mes teme cometer un error decisivo."], ["Un compañero aislado", "Un recién llegado come solo y apenas participa en las charlas del equipo."], ["Dos líderes enfrentados", "Los capitanes discrepan sobre quién debe lanzar el próximo penalti."], ["Un suplente frustrado", "Un compañero cree que merece más minutos y está perdiendo la motivación."], ["Una broma pesada", "Un jugador joven te cuenta que las bromas del grupo han ido demasiado lejos."], ["Una discusión táctica", "Dos compañeros discuten por quién debía cubrir una carrera del rival."], ["Un error repetido", "El portero quiere hablar contigo después de varios goles encajados."], ["Un regreso difícil", "Un compañero vuelve de una lesión larga y no se siente al nivel del grupo."], ["Un idioma nuevo", "Un fichaje extranjero no comprende algunas indicaciones del vestuario."], ["Una despedida", "Un veterano te confiesa que está pensando en retirarse al acabar el año."]]},
+  {cat: "Rol", title: "El míster te pide flexibilidad", open: "La planificación del próximo encuentro plantea una función distinta para ti.", choices: ["Aceptar el nuevo papel", "Pedir una explicación antes de decidir", "Proponer una alternativa táctica"], cases: [
+    ["Un puesto más retrasado", "El entrenador quiere que ayudes a iniciar las jugadas desde atrás."], ["La banda contraria", "Una lesión obliga al equipo a cambiarte de banda."], ["Falso nueve", "El míster piensa usar tu movilidad como referencia ofensiva."], ["Lateral por sorpresa", "El equipo necesita que cubras una posición poco habitual durante un partido."], ["Capitán suplente", "Te proponen llevar el brazalete mientras descansa el capitán."], ["Especialista de córners", "El cuerpo técnico quiere que ejecutes los saques de esquina."], ["Presión individual", "Te asignan seguir de cerca al organizador rival."], ["Entrada desde el banquillo", "El entrenador te plantea cambiar el partido en la segunda parte."], ["Doble pivote", "Quieren que formes una pareja en el centro con un compañero más defensivo."], ["Delantero de apoyo", "El plan requiere que juegues cerca del goleador en lugar de ser la referencia."]]},
+  {cat: "Mercado", title: "Tu representante trae una propuesta", open: "Tu agente te llama antes de que el club publique nada.", choices: ["Escuchar la propuesta sin compromiso", "Pedir que la negociación espere", "Hablar primero con tu entrenador"], cases: [
+    ["Interés desde otra liga", "Un equipo extranjero ha preguntado por tu situación contractual."], ["Renovación anticipada", "Tu club quiere empezar a negociar antes de que termine la temporada."], ["Cesión con minutos", "Un equipo cercano ofrece un préstamo con una promesa de titularidad."], ["Cláusula de rescisión", "El agente sugiere incluir una cláusula para facilitar un futuro traspaso."], ["Cambio de patrocinador", "Una marca rival quiere ofrecerte un contrato personal."], ["Oferta de última hora", "Un club presenta una oferta cuando el mercado está a punto de cerrar."], ["Intermediario nuevo", "Un representante desconocido promete contactos en varios campeonatos."], ["Aumento de sueldo", "Tu agente cree que tus actuaciones justifican una mejora salarial."], ["Club recién ascendido", "Un proyecto nuevo te ofrece ser una de sus caras principales."], ["Contrato corto", "Una oferta interesante solo garantiza una temporada de duración."]]},
+  {cat: "Afición", title: "La grada espera un gesto", open: "Los aficionados hablan de ti en redes y alrededor del estadio.", choices: ["Acercarte a la afición", "Responder con un mensaje público", "Dejar que tus actuaciones hablen"], cases: [
+    ["Entrenamiento abierto", "Un grupo de niños espera al equipo a la salida de la ciudad deportiva."], ["Camisetas firmadas", "Una asociación local pide tu ayuda para una rifa benéfica."], ["Una pancarta", "La grada prepara un mensaje de apoyo antes del próximo partido."], ["Críticas en redes", "Un vídeo de un error tuyo acumula comentarios duros."], ["Viaje de seguidores", "Aficionados han recorrido cientos de kilómetros para verte jugar."], ["Visita a un hospital", "El club organiza una mañana con pacientes jóvenes."], ["Una camiseta antigua", "Un hincha te regala una camiseta histórica de tu club."], ["Afición visitante", "Una familia rival te pide una foto después del encuentro."], ["Campaña solidaria", "Los seguidores proponen recaudar fondos para un proyecto del barrio."], ["Silbidos tras el partido", "Algunos aficionados muestran su enfado cuando te acercas a la grada."]]},
+  {cat: "Patrocinio", title: "Una marca quiere asociarse contigo", open: "Una empresa se pone en contacto para usar tu imagen.", choices: ["Aceptar con condiciones claras", "Rechazar y cuidar tu independencia", "Pedir consejo al club"], cases: [
+    ["Calzado deportivo", "Una firma de botas te ofrece probar su nuevo modelo."], ["Ropa de calle", "Una marca de moda quiere grabar una campaña durante tu día libre."], ["Videojuego", "Un estudio te invita a aparecer en una promoción futbolística."], ["Bebida energética", "La propuesta incluye publicar varias fotos con el producto."], ["Marca local", "Una tienda de tu ciudad quiere patrocinar tus actividades comunitarias."], ["Colección retro", "Una empresa prepara una línea de camisetas inspirada en tu carrera."], ["Evento comercial", "Te piden dedicar una tarde a firmar autógrafos en un centro comercial."], ["Equipo tecnológico", "Una marca te ofrece dispositivos a cambio de una recomendación pública."], ["Campaña benéfica", "La empresa propone donar parte de los ingresos a una fundación."], ["Embajador internacional", "Una agencia te invita a representar una marca en otro país."]]},
+  {cat: "Selección", title: "Una oportunidad internacional", open: "El calendario de selecciones puede cambiar tu temporada.", choices: ["Prepararte para darlo todo", "Hablar con el seleccionador", "Priorizar la recuperación y ser sincero"], cases: [
+    ["Primera convocatoria", "Tu teléfono recibe una llamada inesperada del cuerpo técnico nacional."], ["Partido amistoso", "Te ofrecen participar en un amistoso lejos de casa."], ["Cambio de entrenador", "Un nuevo seleccionador quiere conocerte antes de tomar decisiones."], ["Puesto por cubrir", "Una baja abre una vacante en tu posición para el próximo torneo."], ["Concentración larga", "La convocatoria coincide con varias semanas lejos de tu club."], ["Compañero convocado", "Un compañero de equipo te pregunta cómo es el ambiente en la selección."], ["Debut aplazado", "Viajaste con el grupo, pero aún no has tenido minutos internacionales."], ["Capitanía juvenil", "El entrenador de una selección formativa te ofrece liderar al equipo."], ["Regreso cansado", "Vuelves de representar a tu país justo antes de un partido decisivo."], ["Clasificación complicada", "La selección necesita puntos y el próximo rival es uno de los favoritos."]]},
+  {cat: "Vida personal", title: "Fuera del campo también decides", open: "Tu entorno te plantea una decisión que no aparece en el plan de partido.", choices: ["Proteger tu tiempo personal", "Aprovechar la oportunidad", "Buscar una solución compartida"], cases: [
+    ["Estudios", "Una universidad te ofrece compatibilizar entrenamientos con una titulación."], ["Mudanza", "Tu familia valora trasladarse más cerca de la ciudad deportiva."], ["Fundación propia", "Un amigo propone crear una iniciativa social con tu nombre."], ["Descanso familiar", "Un compromiso familiar coincide con una actividad opcional del club."], ["Curso de idiomas", "El club ofrece clases para facilitar la adaptación al vestuario."], ["Proyecto de inversión", "Un conocido te presenta un negocio que requiere tiempo y dinero."], ["Vacaciones cortas", "Tienes dos días libres antes de volver a entrenar."], ["Entrevista larga", "Un documental quiere grabar en tu casa durante varias semanas."], ["Rutina digital", "Tu equipo de comunicación sugiere publicar más contenido personal."], ["Mentoría", "Un exjugador te ofrece acompañarte en la transición hacia el futuro."]]},
+];
+function playerWardrobeDecisionFx(theme, variant, option, failed) {
+  var n = 1 + (variant % 3), t = theme % 5;
+  if (option === 0) return {mor: n + (failed ? -1 : 1), prof: 1, coach: t === 0 ? 1 : 0};
+  if (option === 1) return failed ? {mor: -n, coach: -n, fame: -1} : {fame: n, fans: n, prof: 1};
+  return t === 1 ? {fit: n * 2, form: n} : (t === 2 ? {money: -n * 1000, prof: 1} : {coach: 1, form: n, mor: 1});
+}
+var PLAYER_DECISION_COUNT = 0;
+PLAYER_DECISION_THEMES.forEach(function (theme, ti) {
+  theme.cases.forEach(function (caseRow, vi) {
+    var index = PLAYER_DECISION_COUNT++;
+    EV({id: "extra_player_" + String(index + 1).padStart(3, "0"), tipo: "aleatoria", cat: theme.cat,
+      title: N_(theme.title + " · " + caseRow[0]), once: true, w: 0.22,
+      when: function (x) { return x.inSeason && !!x.p && (ti % 3 !== 0 || !x.p.inj); },
+      text: function () { return tr(theme.open + " " + caseRow[1]); },
+      opts: function () {
+        var chance = 0.48 + (vi % 4) * 0.07;
+        return [
+          {t: tr(theme.choices[0]), ok: {txt: tr("Tu postura se entiende y te deja margen para concentrarte en el fútbol."), fx: playerWardrobeDecisionFx(ti, vi, 0, false)}},
+          {t: tr(theme.choices[1]), p: chance,
+            ok: {txt: tr("La apuesta sale bien y el grupo reconoce tu iniciativa."), fx: playerWardrobeDecisionFx(ti, vi, 1, false)},
+            ko: {txt: tr("La decisión no tiene el efecto que esperabas y el ambiente se resiente."), fx: playerWardrobeDecisionFx(ti, vi, 1, true)}},
+          {t: tr(theme.choices[2]), ok: {txt: tr("Encuentras un punto medio y sigues adelante sin hacer ruido."), fx: playerWardrobeDecisionFx(ti, vi, 2, false)}}
+        ];
+      }
+    });
+  });
+});
+
+MEV({id: "mx_minutos_cantera", tipo: "aleatoria", cat: "Cantera", title: "El juvenil pide una oportunidad", w: 1.2, cd: 3,
+  when: function (y) { return y.inSeason && y.m.sq.some(function (p) { return p.yth && p.age <= 20; }); },
+  target: function (y) { var a = y.m.sq.filter(function (p) { return p.yth && p.age <= 20 && !p.inj; }); return a.length ? a[0].id : null; },
+  text: function (y) { return tr("{name} siente que está preparado para el primer equipo y pide una oportunidad en la próxima convocatoria.", {name: plName(y.pl)}); },
+  opts: function (y) { return [
+    {t: tr("Darle minutos en el próximo partido"), p: 0.65,
+      ok: {txt: tr("El juvenil responde con personalidad y el vestuario celebra su debut."), fx: {pmor: 7, youth: 1, fans: 2}},
+      ko: {txt: tr("Los nervios le pueden y comete un error en una zona peligrosa."), fx: {pmor: -3, board: -1}}},
+    {t: tr("Diseñar un plan de cesión"), ok: {txt: tr("Encontrará minutos en otro equipo y volverá con experiencia."), fx: {pmor: 3, youth: 1, board: 1}}},
+    {t: tr("Pedirle que siga trabajando"), ok: {txt: tr("Acepta la decisión, aunque espera que no le hayas cerrado la puerta."), fx: {pmor: -2, chem: 1}}}
+  ]; }});
+
+MEV({id: "mx_objetivo_directiva", tipo: "aleatoria", cat: "Directiva", title: "La directiva cambia el objetivo", w: 0.8, cd: 4,
+  when: function (y) { return y.inSeason && S.bi >= 2; },
+  text: function () { return tr("Tras una buena racha, la directiva te pide públicamente que luches por un objetivo más ambicioso. La plantilla nota el aumento de presión."); },
+  opts: function () { return [
+    {t: tr("Aceptar el reto y marcar una meta clara"), p: 0.6,
+      ok: {txt: tr("El grupo se motiva y la directiva respalda tu liderazgo."), fx: {board: 4, sqMor: 3, fans: 2}},
+      ko: {txt: tr("El objetivo resulta demasiado exigente y crecen las dudas."), fx: {board: -3, sqMor: -3}}},
+    {t: tr("Rebajar la presión y hablar de proceso"), ok: {txt: tr("Proteges al vestuario, aunque el palco esperaba una promesa más contundente."), fx: {sqMor: 3, board: -1, chem: 1}}},
+    {t: tr("Pedir recursos antes de prometer resultados"), ok: {txt: tr("La directiva valora que pongas condiciones concretas sobre la mesa."), fx: {bud: mxBud(y, 0.02, 1e5), board: 1}}}
+  ]; }});
+
+MEV({id: "mx_analisis_rival", tipo: "aleatoria", cat: "Táctica", title: "Filtración del análisis táctico", w: 0.9, cd: 3,
+  when: function (y) { return y.inSeason && S.bi >= 1; },
+  text: function () { return tr("Un medio publica parte del plan táctico que preparaste para el próximo rival. El analista ofrece rehacerlo, pero queda poco tiempo."); },
+  opts: function () { return [
+    {t: tr("Cambiar el plan a última hora"), p: 0.65,
+      ok: {txt: tr("El rival llega preparado para otra cosa y vuestro ajuste funciona."), fx: {buff: {v: 0.8, b: 1, n: tr("Plan alternativo")}, rep: 2}},
+      ko: {txt: tr("Los cambios confunden a varios titulares."), fx: {chem: -3, sqMor: -2}}},
+    {t: tr("Mantener el plan y confiar en la ejecución"), ok: {txt: tr("El equipo conoce el sistema y no se deja distraer por la filtración."), fx: {chem: 2, buff: {v: 0.35, b: 1, n: tr("Convicción")}}}},
+    {t: tr("Investigar quién lo filtró"), ok: {txt: tr("El vestuario se compromete a cuidar mejor la información interna."), fx: {chem: 1, board: 1, fans: -1}}}
+  ]; }});
+
+/* 100 decisiones nuevas para la carrera de entrenador/a, registradas como MEV del juego. */
+var MANAGER_DECISION_THEMES = [
+  {cat: "Entrenamiento", title: "Ajustar la semana de trabajo", open: "El cuerpo técnico te presenta el plan de sesiones.", choices: ["Concentrar el trabajo en una prioridad", "Doblar la carga de preparación", "Dejar que cada jugador adapte la sesión"], cases: [
+    ["Salida desde atrás", "Los centrales piden practicar la salida ante la presión alta."], ["Transiciones", "El análisis señala que el equipo tarda demasiado en replegarse."], ["Finalización", "Los delanteros acumulan ocasiones claras sin convertirlas."], ["Balón parado", "El equipo ha encajado varios goles en jugadas de estrategia."], ["Presión coordinada", "Los atacantes saltan a presionar, pero el resto no siempre les acompaña."], ["Centros laterales", "Los extremos quieren ensayar centros con distintas trayectorias."], ["Defensa del área", "El portero pide mejorar las marcas en los centros laterales."], ["Juego de posición", "Los mediocampistas creen que pueden ofrecer mejores líneas de pase."], ["Velocidad de reacción", "El preparador físico observa una bajada de intensidad al final de los partidos."], ["Penaltis", "Una eliminatoria próxima podría decidirse desde los once metros."]]},
+  {cat: "Alineación", title: "Gestionar los minutos", open: "El calendario obliga a tomar decisiones sobre la convocatoria.", choices: ["Rotar con un plan claro", "Mantener a los titulares", "Dar una oportunidad a los suplentes"], cases: [
+    ["Tres partidos en siete días", "La semana incluye liga y dos compromisos de copa."], ["Veteranos cargados", "Varios titulares superan los treinta años y acumulan muchos minutos."], ["Un regreso esperado", "Un jugador importante acaba de recibir el alta médica."], ["El portero suplente", "El segundo guardameta pregunta si tendrá minutos esta semana."], ["Una final cercana", "El equipo afronta una final dentro de pocos días."], ["Viaje continental", "El desplazamiento europeo implica volver de madrugada."], ["Jóvenes en forma", "Dos canteranos han destacado en los entrenamientos recientes."], ["Calendario despejado", "Por primera vez en semanas hay tiempo para repetir el mismo once."], ["Un jugador sancionado", "La suspensión de un titular obliga a reorganizar varias posiciones."], ["Derbi de máxima presión", "La afición espera que alinees a todos tus nombres más reconocibles."]]},
+  {cat: "Cantera", title: "Una decisión para la academia", open: "El director de cantera solicita tu opinión antes de cerrar la semana.", choices: ["Apostar por el desarrollo técnico", "Dar minutos inmediatos al talento", "Mantener el plan gradual"], cases: [
+    ["Central zurdo", "Un central zurdo de la cantera destaca por su salida de balón."], ["Portero juvenil", "El guardameta sub-19 acaba de detener dos penaltis en un torneo."], ["Extremo veloz", "Un extremo joven supera a los defensas en cada entrenamiento."], ["Mediocentro creativo", "El filial tiene un organizador que pide entrenar con el primer equipo."], ["Joven goleadora", "Una delantera juvenil ha marcado en cinco partidos consecutivos."], ["Instalaciones", "La residencia necesita mejoras para retener a las promesas."], ["Ojeador local", "Un ojeador propone ampliar la búsqueda a clubes pequeños de la región."], ["Torneo internacional", "La cantera recibe una invitación para competir fuera del país."], ["Mentoría", "Un veterano se ofrece a acompañar a un joven durante la temporada."], ["Equipo filial", "El responsable del filial pide compartir un preparador físico."]]},
+  {cat: "Táctica", title: "Preparar una respuesta táctica", open: "El analista presenta un problema que puede cambiar el próximo partido.", choices: ["Ajustar el plan desde el inicio", "Esperar y reaccionar durante el partido", "Confiar en el sistema habitual"], cases: [
+    ["Bloque bajo", "El próximo rival suele defender muy cerca de su área."], ["Presión alta", "El rival presiona a los centrales desde el saque de puerta."], ["Carrileros ofensivos", "El equipo contrario genera peligro con sus laterales largos."], ["Delantero referencia", "Un ariete dominante gana casi todos los duelos aéreos."], ["Falso nueve", "El rival utiliza un delantero que abandona continuamente el área."], ["Transición rápida", "El oponente busca contraatacar con pases directos."], ["Doble pivote", "El mediocampo rival acumula jugadores por el centro."], ["Balón parado defensivo", "El rival ha marcado muchos goles de córner esta temporada."], ["Extremos a pierna cambiada", "Los dos extremos rivales buscan recortar hacia dentro."], ["Partido de vuelta", "La eliminatoria exige gestionar el marcador de la ida."]]},
+  {cat: "Directiva", title: "Una petición de la dirección", open: "La directiva te convoca para conversar sobre las prioridades del club.", choices: ["Presentar un plan con objetivos medibles", "Pedir más margen y proteger al grupo", "Negociar recursos concretos"], cases: [
+    ["Objetivo revisado", "La directiva eleva la meta después de una buena racha."], ["Presupuesto congelado", "Finanzas comunica que no habrá fondos adicionales este mes."], ["Reunión de mitad de temporada", "El presidente quiere revisar el proyecto antes de lo previsto."], ["Obligación de cantera", "La propiedad quiere ver más jugadores formados en casa."], ["Gira comercial", "El club propone una gira que coincide con la preparación física."], ["Renovación pendiente", "La junta te pide una recomendación sobre un jugador veterano."], ["Nuevo patrocinador", "Un acuerdo comercial permitiría reforzar el presupuesto del equipo."], ["Rumores de venta", "La posible venta del club inquieta a los empleados."], ["Resultados económicos", "El director financiero pide reducir gastos de viaje y concentración."], ["Estadio en obras", "Las reformas obligan a jugar varios partidos lejos de casa."]]},
+  {cat: "Prensa", title: "Una rueda de prensa delicada", open: "Los medios buscan una frase que resuma el momento del equipo.", choices: ["Hablar con franqueza", "Defender públicamente al vestuario", "No entrar en polémicas"], cases: [
+    ["Error arbitral", "La última derrota estuvo marcada por una decisión discutida."], ["Fichaje criticado", "Un fichaje caro todavía no ha encontrado su mejor nivel."], ["Racha negativa", "Los periodistas preguntan si has perdido el control del equipo."], ["Rival provocador", "El entrenador rival cuestiona tus decisiones antes del derbi."], ["Promesa de título", "Un titular afirma que garantizaste ganar la competición."], ["Cambio del capitán", "Te preguntan por qué el capitán empezó el partido en el banquillo."], ["Juvenil debutante", "La prensa pide saber si el joven seguirá teniendo oportunidades."], ["Táctica filtrada", "Un medio publica una parte de tu plan para el siguiente encuentro."], ["Mercado de fichajes", "Los reporteros quieren nombres antes de que el club cierre una operación."], ["Afición impaciente", "Los seguidores han pedido explicaciones tras el último resultado."]]},
+  {cat: "Mercado", title: "El mercado ofrece alternativas", open: "El director deportivo comparte una oportunidad que exige una respuesta rápida.", choices: ["Apostar por el perfil recomendado", "Buscar una opción de menor coste", "Esperar antes de comprometer el presupuesto"], cases: [
+    ["Delantero cedible", "Un delantero joven podría llegar cedido con opción de compra."], ["Contrato finalizado", "Un mediocampista experimentado quedará libre al acabar el mes."], ["Interés por un titular", "Un club extranjero pregunta por uno de tus jugadores más importantes."], ["Mercado de invierno", "Una lesión abre una necesidad inesperada en la plantilla."], ["Jugador polivalente", "Un agente ofrece un futbolista capaz de cubrir tres posiciones."], ["Portero prometedor", "El ojeador recomienda un guardameta de una liga menor."], ["Cláusula asequible", "Un defensa tiene una cláusula que se ajusta al presupuesto actual."], ["Salario elevado", "Un goleador acepta negociar, aunque pide un sueldo alto."], ["Renovación urgente", "Un jugador clave entra en su último año de contrato."], ["Oferta por un suplente", "Una propuesta permite liberar salario y abrir espacio para un juvenil."]]},
+  {cat: "Vestuario", title: "Mantener unido al grupo", open: "El responsable de vestuario detecta un asunto que conviene resolver pronto.", choices: ["Reunir al grupo y escuchar", "Hablar directamente con los implicados", "Dejar que los líderes lo gestionen"], cases: [
+    ["Capitanes divididos", "Dos capitanes discrepan sobre cómo responder a las críticas."], ["Recién llegado", "Un fichaje nuevo todavía no ha encontrado su lugar en el grupo."], ["Suplente descontento", "Un jugador importante ha pedido explicaciones por sus pocos minutos."], ["Celebración excesiva", "Algunos jugadores salieron hasta tarde después de una victoria."], ["Rumor de filtración", "Alguien parece estar compartiendo información interna con la prensa."], ["Veterano y juvenil", "Un veterano se queja de que un joven no respeta las normas del equipo."], ["Grupo de idiomas", "Los jugadores internacionales se agrupan y cuesta integrar a todos."], ["Tensión por el brazalete", "Varios futbolistas creen que deberían ser capitanes."], ["Bono pendiente", "La plantilla pregunta por una prima que todavía no ha sido abonada."], ["Diferencias de entrenamiento", "Un grupo considera que las cargas no son iguales para todos."]]},
+  {cat: "Afición", title: "Responder a la grada", open: "El club pide una idea para acercar el equipo a sus seguidores.", choices: ["Organizar un encuentro abierto", "Enviar un mensaje institucional", "Invitar a representantes de la afición"], cases: [
+    ["Entrenamiento abierto", "Las familias quieren ver una sesión antes del próximo partido en casa."], ["Viaje visitante", "Un grupo de seguidores ha organizado un desplazamiento largo."], ["Club de barrio", "Una escuela local pide que el equipo visite sus instalaciones."], ["Protesta por precios", "Los aficionados cuestionan el precio de las entradas para la copa."], ["Homenaje a un socio", "La grada quiere recordar a un seguidor histórico del club."], ["Camiseta especial", "Los seguidores proponen un diseño para una campaña solidaria."], ["Derrota dolorosa", "La afición espera una explicación después de una eliminación inesperada."], ["Fiesta del club", "El ayuntamiento ofrece una plaza para celebrar el aniversario del equipo."], ["Redes del club", "El departamento de comunicación propone una sesión de preguntas abierta."], ["Afición visitante", "Un grupo rival solicita compartir una iniciativa contra la violencia."]]},
+  {cat: "Preparación", title: "Planificar la concentración", open: "El calendario y el estado anímico del equipo obligan a elegir cómo prepararse.", choices: ["Mantener una rutina estricta", "Cambiar el entorno para despejar la mente", "Dejar que los jugadores participen en el plan"], cases: [
+    ["Derbi fuera de casa", "El partido más tenso del calendario llega después de varios viajes."], ["Final continental", "El equipo debe desplazarse antes de una final de máxima exigencia."], ["Semana sin partidos", "Hay varios días libres que podrían dedicarse a fortalecer automatismos."], ["Clima extremo", "El rival juega en una ciudad con calor o frío poco habituales."], ["Hotel ruidoso", "La concentración anterior estuvo marcada por interrupciones nocturnas."], ["Cambio de campo", "Las obras obligan a entrenar en una instalación diferente."], ["Dos ciudades", "El calendario permite elegir entre viajar antes o hacerlo el mismo día."], ["Partido a mediodía", "El horario obliga a modificar los hábitos de sueño y alimentación."], ["Descanso mental", "El grupo pide una tarde libre tras un mes de mucha presión."], ["Preparación con vídeo", "El analista quiere sustituir parte del entrenamiento por una sesión de vídeo."]]},
+];
+function managerExpansionFx(theme, variant, option, failed) {
+  var n = 1 + (variant % 3), t = theme % 5;
+  if (option === 0) return {chem: n, sqMor: n + 1};
+  if (option === 1) return failed ? {board: -n, sqMor: -n} : {rep: 1, fans: n, board: n};
+  return t === 0 ? {sfit: n * 2, chem: 1} : (t === 1 ? {bud: -n * 25000, youth: 1} : {chem: n, board: 1});
+}
+var MANAGER_DECISION_COUNT = 0;
+MANAGER_DECISION_THEMES.forEach(function (theme, ti) {
+  theme.cases.forEach(function (caseRow, vi) {
+    var index = MANAGER_DECISION_COUNT++;
+    MEV({id: "extra_manager_" + String(index + 1).padStart(3, "0"), tipo: "aleatoria", cat: theme.cat,
+      title: N_(theme.title + " · " + caseRow[0]), once: true, w: 0.22,
+      when: function (y) { return y.inSeason && y.m && y.m.club >= 0 && (ti % 4 !== 0 || y.m.chem < 100); },
+      text: function () { return tr(theme.open + " " + caseRow[1]); },
+      opts: function () {
+        var chance = 0.45 + (vi % 4) * 0.07;
+        return [
+          {t: tr(theme.choices[0]), ok: {txt: tr("El vestuario entiende el plan y acepta la decisión."), fx: managerExpansionFx(ti, vi, 0, false)}},
+          {t: tr(theme.choices[1]), p: chance,
+            ok: {txt: tr("La apuesta funciona y el club nota un cambio positivo."), fx: managerExpansionFx(ti, vi, 1, false)},
+            ko: {txt: tr("La decisión genera dudas y tendrás que recuperar la confianza."), fx: managerExpansionFx(ti, vi, 1, true)}},
+          {t: tr(theme.choices[2]), ok: {txt: tr("Encuentras una salida práctica sin romper la armonía del grupo."), fx: managerExpansionFx(ti, vi, 2, false)}}
+        ];
+      }
+    });
+  });
+});
 ;
 /* arranque: siempre el último fichero */
 if (typeof window !== "undefined" && window.__camBoot) window.__camBoot();
+; (function () {
+  var add_en = {"Agradecer":"Show gratitude",
+"Apoyar al equipo":"Back the team",
+"Mostrar ambición":"Show ambition",
+"Mantener la calma":"Stay calm",
+"Responder con carácter":"Reply with confidence",
+"Asumir el resultado":"Take responsibility",
+"Gracias por el apoyo. Cada día toca trabajar un poco más. 🙌":"Thanks for the support. There is more work to do every day. 🙌",
+"Gracias, {target}. Se agradece que estés ahí; seguiremos trabajando. 🙌":"Thanks, {target}. I appreciate you being there; we will keep working. 🙌",
+"El mérito es de todo el equipo. Seguimos juntos. 🤝":"The credit goes to the whole team. We stick together. 🤝",
+"Gracias, {target}. El mérito es de todo el equipo; seguimos juntos. 🤝":"Thanks, {target}. The whole team deserves the credit; we stick together. 🤝",
+"Seguimos creciendo. Lo mejor todavía está por venir. 🎯":"We keep growing. The best is still to come. 🎯",
+"Gracias, {target}. Seguimos creciendo y no vamos a conformarnos. 🎯":"Thanks, {target}. We keep growing and will not settle. 🎯",
+"Respeto todas las opiniones; yo prefiero responder con trabajo. 🧠":"I respect every opinion; I prefer to answer with hard work. 🧠",
+"Te leo, {target}. Respeto tu opinión; prefiero contestar con trabajo. 🧠":"I hear you, {target}. I respect your opinion; I prefer to answer with hard work. 🧠",
+"Que hablen. Nosotros seguimos a lo nuestro. 🔥":"Let them talk. We will keep doing our thing. 🔥",
+"Te respeto, {target}; nosotros responderemos donde toca: en el campo. 🔥":"I respect you, {target}; we will answer where it matters: on the pitch. 🔥",
+"No salió como queríamos. Lo asumo y trabajaré para mejorar. 🙏":"It did not go as we hoped. I take responsibility and will work to improve. 🙏",
+"Tienes razón, {target}. No salió bien; asumo mi parte y trabajaré más. 🙏":"You are right, {target}. It was not good enough; I own my part and will work harder. 🙏",
+"Dale voz a tu perfil":"Give your profile a voice",
+"Elige una intención; el mensaje también tiene efecto en tu carrera.":"Choose an intention; your message also affects your career.",
+"Publicar un mensaje":"Write a post",
+"Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente.":"You have posted in this block; you can post again in the next one.",
+"Responder a {target}":"Reply to {target}",
+"Crear publicación":"Create a post",
+"Publicación a la que respondes":"Post you are replying to",
+"¿Qué quieres transmitir?":"What do you want to say?",
+"Vista previa":"Preview",
+"Efectos de esta publicación":"Effects of this post",
+"Puedes enviar una publicación personalizada por bloque para que cada mensaje importe.":"You can send one custom post per block so every message matters.",
+"Enviar respuesta":"Send reply",
+"Publicar":"Post",
+"Respuesta enviada.":"Reply sent.",
+"Publicación enviada.":"Post sent.",
+"Responder":"Reply",
+"Responde a {target}":"Replying to {target}",
+"Ser agresivo":"Get aggressive",
+"No me busques excusas: si tienes algo que decir, dilo de frente. En el campo responderemos. 💥":"No more excuses: if you have something to say, say it to my face. We will answer on the pitch. 💥",
+"Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥":"Keep talking, {target}. We will see who is right on the pitch. 💥",
+"Tirar de sarcasmo":"Use sarcasm",
+"Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"What an unexpected comment. I will file it next to the criticism that actually keeps me up at night. 😏",
+"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Seriously, {target}? And here I thought I had already used up my sarcasm for today. 😏"}; Object.keys(add_en).forEach(function (k) { I18N.en[k] = add_en[k]; });
+  var add_de = {"Agradecer":"Dankbarkeit zeigen",
+"Apoyar al equipo":"Das Team unterstützen",
+"Mostrar ambición":"Ehrgeiz zeigen",
+"Mantener la calma":"Ruhe bewahren",
+"Responder con carácter":"Selbstbewusst antworten",
+"Asumir el resultado":"Verantwortung übernehmen",
+"Gracias por el apoyo. Cada día toca trabajar un poco más. 🙌":"Danke für die Unterstützung. Jeden Tag wartet neue Arbeit. 🙌",
+"Gracias, {target}. Se agradece que estés ahí; seguiremos trabajando. 🙌":"Danke, {target}. Es bedeutet mir viel, dass du da bist. Wir arbeiten weiter. 🙌",
+"El mérito es de todo el equipo. Seguimos juntos. 🤝":"Der Verdienst gebührt dem ganzen Team. Wir halten zusammen. 🤝",
+"Gracias, {target}. El mérito es de todo el equipo; seguimos juntos. 🤝":"Danke, {target}. Das ganze Team verdient Anerkennung. Wir halten zusammen. 🤝",
+"Seguimos creciendo. Lo mejor todavía está por venir. 🎯":"Wir entwickeln uns weiter. Das Beste kommt erst noch. 🎯",
+"Gracias, {target}. Seguimos creciendo y no vamos a conformarnos. 🎯":"Danke, {target}. Wir wachsen weiter und geben uns nicht zufrieden. 🎯",
+"Respeto todas las opiniones; yo prefiero responder con trabajo. 🧠":"Ich respektiere jede Meinung; ich antworte lieber mit harter Arbeit. 🧠",
+"Te leo, {target}. Respeto tu opinión; prefiero contestar con trabajo. 🧠":"Ich höre dich, {target}. Ich respektiere deine Meinung und antworte lieber mit Arbeit. 🧠",
+"Que hablen. Nosotros seguimos a lo nuestro. 🔥":"Sollen sie reden. Wir machen weiter unser Ding. 🔥",
+"Te respeto, {target}; nosotros responderemos donde toca: en el campo. 🔥":"Ich respektiere dich, {target}; wir antworten dort, wo es zählt: auf dem Platz. 🔥",
+"No salió como queríamos. Lo asumo y trabajaré para mejorar. 🙏":"Es lief nicht wie erhofft. Ich übernehme Verantwortung und arbeite an Verbesserungen. 🙏",
+"Tienes razón, {target}. No salió bien; asumo mi parte y trabajaré más. 🙏":"Du hast recht, {target}. Das war nicht gut genug; ich übernehme meinen Teil und arbeite härter. 🙏",
+"Dale voz a tu perfil":"Gib deinem Profil eine Stimme",
+"Elige una intención; el mensaje también tiene efecto en tu carrera.":"Wähle eine Absicht; deine Nachricht wirkt sich auch auf deine Karriere aus.",
+"Publicar un mensaje":"Beitrag verfassen",
+"Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente.":"Du hast in diesem Abschnitt bereits gepostet; im nächsten ist es wieder möglich.",
+"Responder a {target}":"Antwort an {target}",
+"Crear publicación":"Beitrag erstellen",
+"Publicación a la que respondes":"Beitrag, auf den du antwortest",
+"¿Qué quieres transmitir?":"Was möchtest du ausdrücken?",
+"Vista previa":"Vorschau",
+"Efectos de esta publicación":"Auswirkungen dieses Beitrags",
+"Puedes enviar una publicación personalizada por bloque para que cada mensaje importe.":"Du kannst pro Abschnitt einen eigenen Beitrag senden, damit jede Nachricht zählt.",
+"Enviar respuesta":"Antwort senden",
+"Publicar":"Posten",
+"Respuesta enviada.":"Antwort gesendet.",
+"Publicación enviada.":"Beitrag gesendet.",
+"Responder":"Antworten",
+"Responde a {target}":"Antwort an {target}",
+"Ser agresivo":"Aggressiv werden",
+"No me busques excusas: si tienes algo que decir, dilo de frente. En el campo responderemos. 💥":"Keine Ausreden: Wenn du etwas zu sagen hast, sag es mir ins Gesicht. Auf dem Platz antworten wir. 💥",
+"Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥":"Red ruhig weiter, {target}. Auf dem Platz zeigt sich, wer recht hat. 💥",
+"Tirar de sarcasmo":"Sarkasmus einsetzen",
+"Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"Was für ein unerwarteter Kommentar. Ich lege ihn zu den Kritiken, die mir wirklich den Schlaf rauben. 😏",
+"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Im Ernst, {target}? Und ich dachte, mein Sarkasmus-Kontingent für heute wäre schon aufgebraucht. 😏"}; Object.keys(add_de).forEach(function (k) { I18N.de[k] = add_de[k]; });
+  var add_it = {"Agradecer":"Ringraziare",
+"Apoyar al equipo":"Sostenere la squadra",
+"Mostrar ambición":"Mostrare ambizione",
+"Mantener la calma":"Mantenere la calma",
+"Responder con carácter":"Rispondere con carattere",
+"Asumir el resultado":"Assumersi la responsabilità",
+"Gracias por el apoyo. Cada día toca trabajar un poco más. 🙌":"Grazie per il sostegno. Ogni giorno c’è ancora da lavorare. 🙌",
+"Gracias, {target}. Se agradece que estés ahí; seguiremos trabajando. 🙌":"Grazie, {target}. Apprezzo il tuo sostegno; continueremo a lavorare. 🙌",
+"El mérito es de todo el equipo. Seguimos juntos. 🤝":"Il merito è di tutta la squadra. Restiamo uniti. 🤝",
+"Gracias, {target}. El mérito es de todo el equipo; seguimos juntos. 🤝":"Grazie, {target}. Il merito è di tutta la squadra; restiamo uniti. 🤝",
+"Seguimos creciendo. Lo mejor todavía está por venir. 🎯":"Continuiamo a crescere. Il meglio deve ancora arrivare. 🎯",
+"Gracias, {target}. Seguimos creciendo y no vamos a conformarnos. 🎯":"Grazie, {target}. Continuiamo a crescere e non ci accontentiamo. 🎯",
+"Respeto todas las opiniones; yo prefiero responder con trabajo. 🧠":"Rispetto tutte le opinioni; preferisco rispondere con il lavoro. 🧠",
+"Te leo, {target}. Respeto tu opinión; prefiero contestar con trabajo. 🧠":"Ti leggo, {target}. Rispetto la tua opinione; preferisco rispondere lavorando. 🧠",
+"Que hablen. Nosotros seguimos a lo nuestro. 🔥":"Lasciateli parlare. Noi andiamo avanti per la nostra strada. 🔥",
+"Te respeto, {target}; nosotros responderemos donde toca: en el campo. 🔥":"Ti rispetto, {target}; risponderemo dove conta: in campo. 🔥",
+"No salió como queríamos. Lo asumo y trabajaré para mejorar. 🙏":"Non è andata come speravamo. Me ne assumo la responsabilità e lavorerò per migliorare. 🙏",
+"Tienes razón, {target}. No salió bien; asumo mi parte y trabajaré más. 🙏":"Hai ragione, {target}. Non è andata bene; mi assumo la mia parte e lavorerò di più. 🙏",
+"Dale voz a tu perfil":"Dai voce al tuo profilo",
+"Elige una intención; el mensaje también tiene efecto en tu carrera.":"Scegli un’intenzione: il messaggio avrà effetti anche sulla tua carriera.",
+"Publicar un mensaje":"Scrivi un post",
+"Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente.":"Hai già pubblicato in questo blocco; potrai farlo di nuovo nel prossimo.",
+"Responder a {target}":"Rispondi a {target}",
+"Crear publicación":"Crea un post",
+"Publicación a la que respondes":"Post a cui stai rispondendo",
+"¿Qué quieres transmitir?":"Cosa vuoi comunicare?",
+"Vista previa":"Anteprima",
+"Efectos de esta publicación":"Effetti del post",
+"Puedes enviar una publicación personalizada por bloque para que cada mensaje importe.":"Puoi inviare un post personalizzato per blocco, così ogni messaggio conta.",
+"Enviar respuesta":"Invia risposta",
+"Publicar":"Pubblica",
+"Respuesta enviada.":"Risposta inviata.",
+"Publicación enviada.":"Post pubblicato.",
+"Responder":"Rispondi",
+"Responde a {target}":"In risposta a {target}",
+"Ser agresivo":"Essere aggressivo",
+"No me busques excusas: si tienes algo que decir, dilo de frente. En el campo responderemos. 💥":"Niente scuse: se hai qualcosa da dire, dimmelo in faccia. Risponderemo in campo. 💥",
+"Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥":"Continua pure, {target}. In campo si vedrà chi ha ragione. 💥",
+"Tirar de sarcasmo":"Usare il sarcasmo",
+"Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"Che commento inaspettato. Lo conserverò insieme alle critiche che mi tolgono davvero il sonno. 😏",
+"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Davvero, {target}? E io che pensavo di aver già esaurito la mia dose di sarcasmo per oggi. 😏"}; Object.keys(add_it).forEach(function (k) { I18N.it[k] = add_it[k]; });
+  var add_fr = {"Agradecer":"Remercier",
+"Apoyar al equipo":"Soutenir l’équipe",
+"Mostrar ambición":"Afficher ses ambitions",
+"Mantener la calma":"Garder son calme",
+"Responder con carácter":"Répondre avec assurance",
+"Asumir el resultado":"Assumer le résultat",
+"Gracias por el apoyo. Cada día toca trabajar un poco más. 🙌":"Merci pour votre soutien. Il reste du travail chaque jour. 🙌",
+"Gracias, {target}. Se agradece que estés ahí; seguiremos trabajando. 🙌":"Merci, {target}. Ton soutien compte ; nous allons continuer à travailler. 🙌",
+"El mérito es de todo el equipo. Seguimos juntos. 🤝":"Le mérite revient à toute l’équipe. Restons unis. 🤝",
+"Gracias, {target}. El mérito es de todo el equipo; seguimos juntos. 🤝":"Merci, {target}. Toute l’équipe mérite ces félicitations ; restons unis. 🤝",
+"Seguimos creciendo. Lo mejor todavía está por venir. 🎯":"Nous continuons de progresser. Le meilleur reste à venir. 🎯",
+"Gracias, {target}. Seguimos creciendo y no vamos a conformarnos. 🎯":"Merci, {target}. Nous progressons et nous ne comptons pas nous arrêter là. 🎯",
+"Respeto todas las opiniones; yo prefiero responder con trabajo. 🧠":"Je respecte toutes les opinions ; je préfère répondre par le travail. 🧠",
+"Te leo, {target}. Respeto tu opinión; prefiero contestar con trabajo. 🧠":"Je t’écoute, {target}. Je respecte ton avis ; je préfère répondre par le travail. 🧠",
+"Que hablen. Nosotros seguimos a lo nuestro. 🔥":"Qu’ils parlent. Nous continuons notre chemin. 🔥",
+"Te respeto, {target}; nosotros responderemos donde toca: en el campo. 🔥":"Je te respecte, {target} ; nous répondrons là où il faut : sur le terrain. 🔥",
+"No salió como queríamos. Lo asumo y trabajaré para mejorar. 🙏":"Cela ne s’est pas passé comme prévu. J’assume et je travaillerai pour faire mieux. 🙏",
+"Tienes razón, {target}. No salió bien; asumo mi parte y trabajaré más. 🙏":"Tu as raison, {target}. Ce n’était pas assez bien ; j’assume ma part et je vais travailler davantage. 🙏",
+"Dale voz a tu perfil":"Fais entendre ta voix",
+"Elige una intención; el mensaje también tiene efecto en tu carrera.":"Choisis une intention ; ton message aura aussi un effet sur ta carrière.",
+"Publicar un mensaje":"Écrire une publication",
+"Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente.":"Tu as déjà publié pendant ce bloc ; tu pourras recommencer au prochain.",
+"Responder a {target}":"Répondre à {target}",
+"Crear publicación":"Créer une publication",
+"Publicación a la que respondes":"Publication à laquelle tu réponds",
+"¿Qué quieres transmitir?":"Que veux-tu exprimer ?",
+"Vista previa":"Aperçu",
+"Efectos de esta publicación":"Effets de cette publication",
+"Puedes enviar una publicación personalizada por bloque para que cada mensaje importe.":"Tu peux publier un message personnalisé par bloc pour que chaque message compte.",
+"Enviar respuesta":"Envoyer la réponse",
+"Publicar":"Publier",
+"Respuesta enviada.":"Réponse envoyée.",
+"Publicación enviada.":"Publication envoyée.",
+"Responder":"Répondre",
+"Responde a {target}":"En réponse à {target}",
+"Ser agresivo":"Se montrer agressif",
+"No me busques excusas: si tienes algo que decir, dilo de frente. En el campo responderemos. 💥":"Pas d’excuses : si tu as quelque chose à dire, dis-le-moi en face. Nous répondrons sur le terrain. 💥",
+"Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥":"Continue de parler, {target}. Le terrain dira qui a raison. 💥",
+"Tirar de sarcasmo":"User de sarcasme",
+"Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"Quel commentaire inattendu. Je vais le ranger avec les critiques qui m’empêchent vraiment de dormir. 😏",
+"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Sérieusement, {target} ? Je croyais avoir déjà épuisé mon quota de sarcasme pour aujourd’hui. 😏"}; Object.keys(add_fr).forEach(function (k) { I18N.fr[k] = add_fr[k]; });
+})();

@@ -8,6 +8,33 @@ interface Pitch3DProps {
   lang: Language;
 }
 
+const KIT_PATTERNS = [
+  ['pinstripe', 'kit_pinstripe'], ['hoops', 'kit_hoops'], ['sash', 'kit_sash'], ['retro', 'kit_retro'], ['diamond', 'kit_diamond'],
+  ['split', 'kit_split'], ['chevron', 'kit_chevron'], ['checker', 'kit_checker'], ['pixel', 'kit_pixel'], ['lightning', 'kit_lightning'],
+  ['gradient', 'kit_gradient'], ['star', 'kit_star'], ['triangles', 'kit_triangles'],
+] as const;
+const KIT_PALETTES = [
+  ['Cobalto', '#1957d2', '#f6f4ec', '#10264b'], ['Coral', '#ef604d', '#fff3e6', '#282328'], ['Esmeralda', '#078453', '#f4f0dc', '#123d31'],
+  ['Violeta', '#7042bb', '#f7e8c4', '#30234b'], ['Ámbar', '#d99800', '#18232c', '#22252a'], ['Carbón', '#20252b', '#f4f1e8', '#111418'],
+  ['Turquesa', '#03a6a6', '#f2f5ee', '#12434d'], ['Cereza', '#ae1931', '#fff5e9', '#351d28'], ['Marino', '#152a50', '#e8c35a', '#111a2c'],
+  ['Lima', '#82b315', '#101c22', '#203229'], ['Rosa', '#e14682', '#fff2ea', '#3a2130'], ['Naranja', '#f07623', '#17212a', '#303038'],
+  ['Hielo', '#c7e8f3', '#103d5a', '#14334a'], ['Arena', '#c4a26b', '#2f2520', '#312820'], ['Magenta', '#b425a0', '#fff3ed', '#34213e'],
+  ['Azul eléctrico', '#126bff', '#f4f4ef', '#171b26'], ['Escarlata', '#df2e36', '#111923', '#20222b'], ['Oliva', '#5c7040', '#f1e8d4', '#252b24'],
+  ['Plata', '#989fa9', '#152330', '#242832'], ['Dorado', '#d0a439', '#20191a', '#2b2421'],
+] as const;
+const COACH_PALETTES = [
+  {name: 'Grafito', top: '#26333d', trim: '#e8c35a', trousers: '#192027'}, {name: 'Marino', top: '#12294b', trim: '#f1f2e8', trousers: '#172130'},
+  {name: 'Esmeralda', top: '#08734c', trim: '#e6d9a4', trousers: '#202c2a'}, {name: 'Borgoña', top: '#77283b', trim: '#f3eadd', trousers: '#27232a'},
+  {name: 'Azul cielo', top: '#298db4', trim: '#f3f0dc', trousers: '#183245'}, {name: 'Arena', top: '#bca36a', trim: '#35291f', trousers: '#302820'},
+  {name: 'Violeta', top: '#6743a0', trim: '#f5e8c6', trousers: '#282338'}, {name: 'Rojo', top: '#c9363a', trim: '#202832', trousers: '#20232a'},
+  {name: 'Lima', top: '#8aa82b', trim: '#15252a', trousers: '#252e28'}, {name: 'Negro y oro', top: '#171a1c', trim: '#d5a83a', trousers: '#111417'},
+] as const;
+const BOOT_MODELS = [['stud', 'gear_boot_studs'], ['speed', 'gear_boot_speed'], ['classic', 'gear_boot_classic'], ['gold', 'gear_boot_gold']] as const;
+const SLEEVE_MODELS = [['short', 'gear_sleeve_short'], ['long', 'gear_sleeve_long'], ['thermal', 'gear_sleeve_thermal']] as const;
+const BAND_MODELS = [['none', 'gear_band_none'], ['head', 'gear_band_head'], ['captain', 'gear_band_captain'], ['wrist', 'gear_band_wrist']] as const;
+const GLOVE_MODELS = [['classic', 'gear_glove_classic'], ['neon', 'gear_glove_neon'], ['padded', 'gear_glove_padded']] as const;
+const COACH_ACCESSORIES = [['none', 'gear_coach_none'], ['cap', 'gear_coach_cap'], ['headset', 'gear_coach_headset'], ['whistle', 'gear_coach_whistle'], ['clipboard', 'gear_coach_clipboard']] as const;
+
 export const Pitch3DSimulator: React.FC<Pitch3DProps> = ({ lang }) => {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -16,6 +43,15 @@ export const Pitch3DSimulator: React.FC<Pitch3DProps> = ({ lang }) => {
   const [score, setScore] = useState<[number, number]>([0, 0]);
   const [commentary, setCommentary] = useState<string>('');
   const [cameraMode, setCameraMode] = useState<'broadcast' | 'tactical' | 'goal'>('broadcast');
+  const [kitStyle, setKitStyle] = useState<string>('pinstripe');
+  const [kitPaletteIndex, setKitPaletteIndex] = useState<number>(0);
+  const [bootModel, setBootModel] = useState<string>('stud');
+  const [sleeveModel, setSleeveModel] = useState<string>('short');
+  const [bandModel, setBandModel] = useState<string>('none');
+  const [gloveModel, setGloveModel] = useState<string>('classic');
+  const [coachWear, setCoachWear] = useState<'tracksuit' | 'blazer' | 'polo' | 'raincoat'>('tracksuit');
+  const [coachAccessory, setCoachAccessory] = useState<string>('none');
+  const [coachPaletteIndex, setCoachPaletteIndex] = useState<number>(0);
 
   const t = useCallback((k: string, p?: Record<string, string | number>) => getTranslation(lang, k, p), [lang]);
 
@@ -299,11 +335,124 @@ export const Pitch3DSimulator: React.FC<Pitch3DProps> = ({ lang }) => {
     scene.add(ballShadow);
 
     // --- 3D Players ---
-    const teamColors = [0xffb21e, 0x4da8ff];
-    const shortsColors = [0x111e28, 0xedf1e8];
+    const selectedKit = KIT_PALETTES[kitPaletteIndex] || KIT_PALETTES[0];
+    const asColor = (hex: string) => parseInt(hex.slice(1), 16);
+    const teamColors = [asColor(selectedKit[1]), asColor(selectedKit[2])];
+    const shortsColors = [asColor(selectedKit[3]), asColor(selectedKit[3])];
     const gkColors = [0x32cd32, 0xff007f];
 
     const playerMeshes: Array<Array<THREE.Group>> = [[], []];
+
+    const jerseyTexture = (base: number, accent: number) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 256; canvas.height = 256;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
+      const color = (n: number) => `#${n.toString(16).padStart(6, '0')}`;
+      ctx.fillStyle = color(base); ctx.fillRect(0, 0, 256, 256);
+      ctx.fillStyle = color(accent);
+      if (kitStyle === 'pinstripe') {
+        for (let x = 0; x < 256; x += 48) ctx.fillRect(x, 0, 13, 256);
+      } else if (kitStyle === 'hoops') {
+        for (let y = 20; y < 256; y += 64) ctx.fillRect(0, y, 256, 20);
+      } else if (kitStyle === 'sash') {
+        ctx.beginPath(); ctx.moveTo(24, 0); ctx.lineTo(80, 0); ctx.lineTo(232, 256); ctx.lineTo(176, 256); ctx.closePath(); ctx.fill();
+      } else if (kitStyle === 'retro') {
+        ctx.fillRect(0, 0, 256, 18); ctx.fillRect(0, 238, 256, 18); ctx.fillRect(92, 0, 72, 30);
+      } else if (kitStyle === 'diamond') {
+        for (let x = 0; x < 256; x += 42) for (let y = 0; y < 256; y += 60) { ctx.beginPath(); ctx.moveTo(x + 21, y); ctx.lineTo(x + 42, y + 30); ctx.lineTo(x + 21, y + 60); ctx.lineTo(x, y + 30); ctx.closePath(); ctx.fill(); }
+      } else if (kitStyle === 'split') {
+        ctx.fillRect(128, 0, 128, 256);
+      } else if (kitStyle === 'chevron') {
+        for (let y = 16; y < 256; y += 64) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(128, y + 32); ctx.lineTo(256, y); ctx.lineTo(256, y + 22); ctx.lineTo(128, y + 54); ctx.lineTo(0, y + 22); ctx.closePath(); ctx.fill(); }
+      } else if (kitStyle === 'checker' || kitStyle === 'pixel') {
+        const cell = kitStyle === 'checker' ? 42 : 24;
+        for (let x = 0; x < 256; x += cell * 2) for (let y = 0; y < 256; y += cell * 2) { ctx.fillRect(x, y, cell, cell); ctx.fillRect(x + cell, y + cell, cell, cell); }
+      } else if (kitStyle === 'lightning') {
+        ctx.beginPath(); ctx.moveTo(145, 0); ctx.lineTo(90, 115); ctx.lineTo(135, 115); ctx.lineTo(84, 256); ctx.lineTo(190, 95); ctx.lineTo(143, 95); ctx.closePath(); ctx.fill();
+      } else if (kitStyle === 'gradient') {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 256); gradient.addColorStop(0, color(accent)); gradient.addColorStop(1, color(base)); ctx.fillStyle = gradient; ctx.fillRect(0, 0, 256, 256);
+      } else if (kitStyle === 'star') {
+        ctx.font = 'bold 42px sans-serif'; ctx.textAlign = 'center'; for (let x = 24; x < 256; x += 64) for (let y = 44; y < 256; y += 84) ctx.fillText('★', x, y);
+      } else if (kitStyle === 'triangles') {
+        for (let x = 0; x < 256; x += 52) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + 52, 128); ctx.lineTo(x, 256); ctx.closePath(); ctx.fill(); }
+      } else {
+        ctx.fillRect(0, 0, 256, 12); ctx.fillRect(0, 244, 256, 12);
+      }
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      return texture;
+    };
+    const jerseyMaps = [
+      jerseyTexture(teamColors[0], teamColors[1]), jerseyTexture(teamColors[1], teamColors[0]),
+      jerseyTexture(gkColors[0], teamColors[1]), jerseyTexture(gkColors[1], teamColors[0]),
+    ];
+
+    // Staff wear a full, selectable 3D sideline outfit rather than a floating marker.
+    const selectedCoachPalette = COACH_PALETTES[coachPaletteIndex] || COACH_PALETTES[0];
+    const coachColors = {top: asColor(selectedCoachPalette.top), trim: asColor(selectedCoachPalette.trim), trousers: asColor(selectedCoachPalette.trousers)};
+    for (let side = 0; side < 2; side++) {
+      const coach = new THREE.Group();
+      const skin = new THREE.MeshStandardMaterial({color: 0xc58f6b, roughness: 0.78});
+      const jacket = new THREE.MeshStandardMaterial({color: coachColors.top, roughness: 0.72});
+      const detail = new THREE.MeshStandardMaterial({color: coachColors.trim, roughness: 0.65});
+      const trousers = new THREE.MeshStandardMaterial({color: coachColors.trousers, roughness: 0.8});
+      const shoe = new THREE.MeshStandardMaterial({color: 0x111519, roughness: 0.62});
+      const torso = new THREE.Mesh(new THREE.BoxGeometry(0.66, 0.78, 0.34), jacket);
+      torso.position.y = 1.12; torso.castShadow = true; coach.add(torso);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 10), skin);
+      head.position.y = 1.72; head.castShadow = true; coach.add(head);
+      const legs = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.6, 0.28), trousers);
+      legs.position.y = 0.42; legs.castShadow = true; coach.add(legs);
+      [-1, 1].forEach((dir) => {
+        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.08, 0.58, 8), jacket);
+        arm.position.set(dir * 0.42, 1.08, 0); arm.rotation.z = dir * -0.12; arm.castShadow = true; coach.add(arm);
+        const foot = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.1, 0.34), shoe);
+        foot.position.set(dir * 0.14, 0.08, 0.06); foot.castShadow = true; coach.add(foot);
+      });
+      if (coachWear === 'blazer') {
+        const shirt = new THREE.Mesh(new THREE.BoxGeometry(0.19, 0.63, 0.025), detail);
+        shirt.position.set(0, 1.14, 0.18); coach.add(shirt);
+        const tie = new THREE.Mesh(new THREE.BoxGeometry(0.055, 0.34, 0.03), new THREE.MeshStandardMaterial({color: 0xa43a3a}));
+        tie.position.set(0, 1.04, 0.205); coach.add(tie);
+      } else if (coachWear === 'tracksuit' || coachWear === 'raincoat') {
+        const zip = new THREE.Mesh(new THREE.BoxGeometry(0.025, 0.67, 0.025), detail);
+        zip.position.set(0, 1.13, 0.18); coach.add(zip);
+      } else {
+        const collar = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.08, 0.04), detail);
+        collar.position.set(0, 1.46, 0.18); coach.add(collar);
+      }
+      // Accesorios 3D de entrenador: cabeza, comunicación y material de banquillo.
+      if (coachAccessory === 'cap') {
+        const crown = new THREE.Mesh(new THREE.SphereGeometry(0.22, 12, 8, 0, Math.PI * 2, 0, Math.PI * 0.52), detail);
+        crown.position.set(0, 1.88, 0); crown.castShadow = true; coach.add(crown);
+        const brim = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.035, 0.2), detail);
+        brim.position.set(0, 1.83, 0.16); coach.add(brim);
+      } else if (coachAccessory === 'headset') {
+        const earCupMat = new THREE.MeshStandardMaterial({color: 0x171d20, roughness: 0.45, metalness: 0.18});
+        [-1, 1].forEach((dir) => {
+          const cup = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.16, 0.12), earCupMat);
+          cup.position.set(dir * 0.2, 1.7, 0.02); cup.castShadow = true; coach.add(cup);
+        });
+        const mic = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.22, 6), earCupMat);
+        mic.position.set(-0.13, 1.62, 0.12); mic.rotation.z = -0.8; coach.add(mic);
+      } else if (coachAccessory === 'whistle') {
+        const cord = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.012, 5, 16, Math.PI), detail);
+        cord.position.set(0, 1.36, 0.19); cord.rotation.z = Math.PI; coach.add(cord);
+        const whistle = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.1, 0.035), new THREE.MeshStandardMaterial({color: 0xd5b24b, metalness: 0.55, roughness: 0.3}));
+        whistle.position.set(0, 1.2, 0.25); coach.add(whistle);
+      } else if (coachAccessory === 'clipboard') {
+        const board = new THREE.Mesh(new THREE.BoxGeometry(0.31, 0.42, 0.045), new THREE.MeshStandardMaterial({color: 0xa87945, roughness: 0.78}));
+        board.position.set(0.34, 1.05, 0.22); board.rotation.z = -0.12; board.castShadow = true; coach.add(board);
+        const paper = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.34, 0.012), new THREE.MeshStandardMaterial({color: 0xf0ead8, roughness: 0.9}));
+        paper.position.set(0.34, 1.06, 0.25); paper.rotation.z = -0.12; coach.add(paper);
+        const clip = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.035, 0.018), detail);
+        clip.position.set(0.34, 1.25, 0.26); coach.add(clip);
+      }
+      coach.position.set(side === 0 ? -9 : 9, 0, side === 0 ? -35.3 : 35.3);
+      coach.rotation.y = side === 0 ? 0 : Math.PI;
+      scene.add(coach);
+    }
 
     for (let s = 0; s < 2; s++) {
       for (let i = 0; i < 11; i++) {
@@ -314,11 +463,51 @@ export const Pitch3DSimulator: React.FC<Pitch3DProps> = ({ lang }) => {
 
         // Torso / Jersey
         const torsoGeo = new THREE.CylinderGeometry(0.35, 0.3, 0.85, 10);
-        const torsoMat = new THREE.MeshStandardMaterial({ color: jerseyColor, roughness: 0.6 });
+        const pattern = jerseyMaps[s + (isGk ? 2 : 0)];
+        const torsoMat = new THREE.MeshStandardMaterial({ color: pattern ? 0xffffff : jerseyColor, map: pattern || undefined, roughness: 0.6 });
         const torso = new THREE.Mesh(torsoGeo, torsoMat);
         torso.position.y = 1.15;
         torso.castShadow = true;
         playerGroup.add(torso);
+
+        // Categoría «mangas»: cada opción construye una manga/capa 3D distinta.
+        const sleeveLength = sleeveModel === 'short' ? 0.4 : 0.52;
+        const sleeveColor = sleeveModel === 'thermal' ? 0x171d20 : jerseyColor;
+        const sleeveMat = new THREE.MeshStandardMaterial({color: sleeveColor, roughness: 0.65});
+        const armGeo = new THREE.CylinderGeometry(0.09, 0.08, sleeveLength, 8);
+        const accessoryTrim = new THREE.MeshStandardMaterial({color: asColor(selectedKit[2]), roughness: 0.58});
+        [-1, 1].forEach((dir) => {
+          const arm = new THREE.Mesh(armGeo, sleeveMat);
+          arm.position.set(dir * 0.34, sleeveModel === 'short' ? 1.13 : 1.08, 0); arm.rotation.z = dir * -0.16; arm.castShadow = true; playerGroup.add(arm);
+          const hand = new THREE.Mesh(new THREE.SphereGeometry(0.085, 8, 6), new THREE.MeshStandardMaterial({color: isGk ? (s === 0 ? teamColors[1] : teamColors[0]) : 0xd4a373, roughness: 0.8}));
+          hand.position.set(dir * 0.39, 0.88, 0); playerGroup.add(hand);
+          if (isGk) {
+            const gloveColor = gloveModel === 'neon' ? 0xb8f430 : gloveModel === 'padded' ? 0x222832 : 0xf2f0e8;
+            const gloveMat = new THREE.MeshStandardMaterial({color: gloveColor, roughness: 0.48, metalness: gloveModel === 'padded' ? 0.12 : 0.02});
+            const palm = new THREE.Mesh(new THREE.BoxGeometry(gloveModel === 'padded' ? 0.17 : 0.14, 0.15, 0.07), gloveMat);
+            palm.position.set(dir * 0.39, 0.88, 0.035); palm.castShadow = true; playerGroup.add(palm);
+            for (let finger = 0; finger < 4; finger++) {
+              const digit = new THREE.Mesh(new THREE.BoxGeometry(0.027, 0.075, 0.05), gloveMat);
+              digit.position.set(dir * 0.39 + (finger - 1.5) * 0.033, 0.98, 0.035); playerGroup.add(digit);
+            }
+            const thumb = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.085, 0.05), gloveMat);
+            thumb.position.set(dir * 0.39 + dir * 0.09, 0.9, 0.035); thumb.rotation.z = dir * 0.55; playerGroup.add(thumb);
+            const cuff = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.085, 0.09, 8), accessoryTrim);
+            cuff.position.set(dir * 0.37, 0.96, 0); cuff.rotation.z = Math.PI / 2; playerGroup.add(cuff);
+          }
+          if (sleeveModel !== 'short') {
+            const cuff = new THREE.Mesh(new THREE.CylinderGeometry(0.084, 0.084, 0.055, 8), accessoryTrim);
+            cuff.position.set(dir * 0.39, 0.88, 0); cuff.rotation.z = Math.PI / 2; cuff.castShadow = true; playerGroup.add(cuff);
+          }
+          if (bandModel === 'wrist') {
+            const wristBand = new THREE.Mesh(new THREE.CylinderGeometry(0.092, 0.092, 0.07, 8), accessoryTrim);
+            wristBand.position.set(dir * 0.36, 0.98, 0); wristBand.rotation.z = Math.PI / 2; playerGroup.add(wristBand);
+          }
+          if (bandModel === 'captain' && dir === -1) {
+            const captainBand = new THREE.Mesh(new THREE.CylinderGeometry(0.105, 0.105, 0.075, 8), accessoryTrim);
+            captainBand.position.set(dir * 0.31, 1.29, 0); captainBand.rotation.z = Math.PI / 2; playerGroup.add(captainBand);
+          }
+        });
 
         // Shorts
         const shortsGeo = new THREE.CylinderGeometry(0.32, 0.34, 0.4, 10);
@@ -340,6 +529,42 @@ export const Pitch3DSimulator: React.FC<Pitch3DProps> = ({ lang }) => {
         rightLeg.castShadow = true;
         rightLeg.name = 'rightLeg';
         playerGroup.add(leftLeg, rightLeg);
+        const sockMat = new THREE.MeshStandardMaterial({color: jerseyColor, roughness: 0.7});
+        const bootBaseColor = bootModel === 'gold' ? 0xd0a439 : bootModel === 'classic' ? 0x20252b : asColor(selectedKit[3]);
+        const bootMat = new THREE.MeshStandardMaterial({color: bootBaseColor, roughness: bootModel === 'classic' ? 0.72 : 0.42, metalness: bootModel === 'gold' ? 0.42 : 0.04});
+        const bootTrim = new THREE.MeshStandardMaterial({color: bootModel === 'gold' ? 0xffe7a0 : asColor(selectedKit[2]), roughness: 0.42, metalness: bootModel === 'gold' ? 0.36 : 0.02});
+        const soleMat = new THREE.MeshStandardMaterial({color: 0x111518, roughness: 0.82});
+        [-1, 1].forEach((dir) => {
+          const sock = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.08, 0.24, 8), sockMat);
+          sock.position.set(dir * 0.16, 0.16, 0); playerGroup.add(sock);
+          const boot = new THREE.Group();
+          const sole = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.035, 0.32), soleMat);
+          sole.position.set(0, 0.012, 0.04); boot.add(sole);
+          const upper = new THREE.Mesh(new THREE.BoxGeometry(bootModel === 'speed' ? 0.115 : 0.135, 0.075, 0.24), bootMat);
+          upper.position.set(0, 0.062, 0.035); upper.castShadow = true; boot.add(upper);
+          const toe = new THREE.Mesh(new THREE.SphereGeometry(0.065, 8, 6), bootMat);
+          toe.scale.set(0.95, 0.72, 1.55); toe.position.set(0, 0.05, 0.13); boot.add(toe);
+          if (bootModel === 'classic' || bootModel === 'gold') {
+            for (let lace = 0; lace < 3; lace++) {
+              const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.012, 0.012), bootTrim);
+              stripe.position.set(0, 0.103, -0.035 + lace * 0.035); boot.add(stripe);
+            }
+          }
+          if (bootModel === 'stud') {
+            [-0.09, 0, 0.09].forEach((z) => {
+              const stud = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.014, 0.028, 6), soleMat);
+              stud.position.set(0, -0.008, z); boot.add(stud);
+            });
+            [-1, 1].forEach((x) => {
+              const stud = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.012, 0.025, 6), soleMat);
+              stud.position.set(x * 0.052, -0.008, 0.1); boot.add(stud);
+            });
+          } else if (bootModel === 'speed') {
+            const sideStripe = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.035, 0.15), bootTrim);
+            sideStripe.position.set(0.058, 0.07, 0.02); boot.add(sideStripe);
+          }
+          boot.position.set(dir * 0.16, 0.025, 0.08); playerGroup.add(boot);
+        });
 
         // Head
         const headGeo = new THREE.SphereGeometry(0.24, 12, 12);
@@ -348,6 +573,10 @@ export const Pitch3DSimulator: React.FC<Pitch3DProps> = ({ lang }) => {
         head.position.y = 1.8;
         head.castShadow = true;
         playerGroup.add(head);
+        if (bandModel === 'head') {
+          const headband = new THREE.Mesh(new THREE.TorusGeometry(0.19, 0.025, 7, 18), accessoryTrim);
+          headband.rotation.x = Math.PI / 2; headband.position.set(0, 1.84, 0); headband.castShadow = true; playerGroup.add(headband);
+        }
 
         // Player shadow blob
         const pShadow = new THREE.Mesh(shadowGeo, shadowMat);
@@ -659,7 +888,7 @@ export const Pitch3DSimulator: React.FC<Pitch3DProps> = ({ lang }) => {
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
     };
-  }, [isPlaying, speed, cameraMode, t]);
+  }, [isPlaying, speed, cameraMode, kitStyle, kitPaletteIndex, bootModel, sleeveModel, bandModel, gloveModel, coachWear, coachAccessory, coachPaletteIndex, t]);
 
   return (
     <div style={{ maxWidth: '960px', margin: '20px auto', padding: '0 16px', width: '100%' }}>
@@ -704,6 +933,55 @@ export const Pitch3DSimulator: React.FC<Pitch3DProps> = ({ lang }) => {
             position: 'relative',
           }}
         />
+
+        {/* 260 equipaciones de jugador/a y 40 conjuntos de entrenador/a */}
+        <div style={{position: 'absolute', top: '56px', left: '12px', zIndex: 10, display: 'flex', gap: '6px', flexWrap: 'wrap', maxWidth: '86%'}}>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('kit_style')}<select aria-label={t('kit_style')} value={kitStyle} onChange={(e) => setKitStyle(e.target.value)} style={{maxWidth: '112px'}}>
+              {KIT_PATTERNS.map(([id, key]) => <option key={id} value={id}>{t(key)}</option>)}
+            </select>
+          </label>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('kit_colorway')}<select aria-label={t('kit_colorway')} value={kitPaletteIndex} onChange={(e) => setKitPaletteIndex(Number(e.target.value))} style={{maxWidth: '112px'}}>
+              {KIT_PALETTES.map(([name], i) => <option key={name} value={i}>{t('palette_n', {n: i + 1})} · {name}</option>)}
+            </select>
+          </label>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('gear_boot_category')}<select aria-label={t('gear_boot_category')} value={bootModel} onChange={(e) => setBootModel(e.target.value)} style={{maxWidth: '112px'}}>
+              {BOOT_MODELS.map(([id, key]) => <option key={id} value={id}>{t(key)}</option>)}
+            </select>
+          </label>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('gear_sleeve_category')}<select aria-label={t('gear_sleeve_category')} value={sleeveModel} onChange={(e) => setSleeveModel(e.target.value)} style={{maxWidth: '112px'}}>
+              {SLEEVE_MODELS.map(([id, key]) => <option key={id} value={id}>{t(key)}</option>)}
+            </select>
+          </label>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('gear_band_category')}<select aria-label={t('gear_band_category')} value={bandModel} onChange={(e) => setBandModel(e.target.value)} style={{maxWidth: '112px'}}>
+              {BAND_MODELS.map(([id, key]) => <option key={id} value={id}>{t(key)}</option>)}
+            </select>
+          </label>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('gear_glove_category')}<select aria-label={t('gear_glove_category')} value={gloveModel} onChange={(e) => setGloveModel(e.target.value)} style={{maxWidth: '112px'}}>
+              {GLOVE_MODELS.map(([id, key]) => <option key={id} value={id}>{t(key)}</option>)}
+            </select>
+          </label>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('coach_outfit')}<select aria-label={t('coach_outfit')} value={coachWear} onChange={(e) => setCoachWear(e.target.value as typeof coachWear)} style={{maxWidth: '112px'}}>
+              <option value="tracksuit">{t('wear_tracksuit')}</option><option value="blazer">{t('wear_blazer')}</option><option value="polo">{t('wear_polo')}</option><option value="raincoat">{t('wear_raincoat')}</option>
+            </select>
+          </label>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('gear_coach_category')}<select aria-label={t('gear_coach_category')} value={coachAccessory} onChange={(e) => setCoachAccessory(e.target.value)} style={{maxWidth: '112px'}}>
+              {COACH_ACCESSORIES.map(([id, key]) => <option key={id} value={id}>{t(key)}</option>)}
+            </select>
+          </label>
+          <label style={{display: 'flex', alignItems: 'center', gap: '5px', padding: '4px 7px', borderRadius: '8px', color: 'var(--chalk)', background: 'rgba(17,30,34,.82)', fontSize: '12px'}}>
+            {t('coach_palette')}<select aria-label={t('coach_palette')} value={coachPaletteIndex} onChange={(e) => setCoachPaletteIndex(Number(e.target.value))} style={{maxWidth: '112px'}}>
+              {COACH_PALETTES.map((palette, i) => <option key={palette.name} value={i}>{t('palette_n', {n: i + 1})} · {palette.name}</option>)}
+            </select>
+          </label>
+        </div>
 
         {/* Camera angle badges floating over canvas */}
         <div
