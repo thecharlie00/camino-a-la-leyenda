@@ -1,7 +1,7 @@
 # QA_AUDIT_REPORT.md — Camino a la Leyenda
 
 **Fecha:** 2026-10-28
-**Estado:** Fase 1 parcial; auditoría interactiva bloqueada por el entorno. No se inicia Fase 2 hasta recibir aprobación explícita de hallazgos.
+**Estado:** Fase 1 parcial; smoke interactivo móvil completado para creación e inicio de los tres modos, con cobertura posterior aún incompleta. No se inicia Fase 2 hasta recibir aprobación explícita de hallazgos.
 **Build/commit de referencia:** Android `5.8` / `versionCode 58`; workspace en `9ad5a99`.
 **Rama:** `arena/63ee066d-camino-a-la-leyenda` (fijada por Arena; no se crea ni cambia a una rama `qa/…`).
 
@@ -9,20 +9,22 @@
 
 La compilación de producción y las pruebas automatizadas disponibles pasan. El juego se empaqueta como HTML autocontenido de **10.575.128 bytes** (aprox. 10,33 MiB); el servidor local respondió `HTTP 200` a `/jugar/juego.html` con TTFB de 74 ms y transferencia local total de 87 ms. Esas cifras son del build/servidor local, no una medición de carga real en dispositivo.
 
-No se pudo arrancar una sesión interactiva de Chromium: el binario headless disponible no encuentra `libnspr4.so` ni `libnss3.so`. Por ello no hay evidencia visual/de interacción sobre recorridos, controles, colisiones, accesibilidad, audio audible ni FPS. No se afirma que esos recorridos hayan pasado.
+Se desbloqueó Chromium headless extrayendo sus bibliotecas de runtime temporales. En Chromium 153, emulando un viewport móvil de 390×844 y en español, se recorrió la pantalla inicial, selección de modo y creación/inicio de carrera de jugador, carrera de míster y Crea tu club. Los tres alcanzaron la pantalla de juego; en jugador también se observó la decisión inicial de agente, en míster una renovación pendiente y en Crea tu club la plantilla generada y el inicio de temporada. No hubo errores JavaScript, errores de consola ni solicitudes fallidas en esos recorridos.
 
-**Salud comprobada:** build y contenido autocontenido presentes; los módulos/modelos requeridos están en el paquete; pruebas Node de build, GOAT y respuestas sociales pasan.
-**Salud jugable:** no determinada. Se requiere una sesión en navegador/dispositivo para completar el smoke test y la cobertura.
+Esto es evidencia de smoke manual en navegador headless con viewport/táctil emulado, no una prueba en teléfono físico ni una prueba de gestos táctiles. Tampoco valida progresión de temporada, partidos, guardado/carga, visuales 3D, audio audible, accesibilidad o rendimiento. No se afirma que esos recorridos completos hayan pasado.
+
+**Salud comprobada:** build y contenido autocontenido presentes; los módulos/modelos requeridos están en el paquete; pruebas Node de build, GOAT y respuestas sociales pasan; creación e inicio básicos de los tres modos se observaron en navegador.
+**Salud jugable:** parcialmente comprobada. Se necesita completar recorridos y pruebas en dispositivo para cerrar la matriz.
 
 ### Riesgos principales pendientes (no son fallos confirmados salvo donde se indica)
 
-1. Sin prueba interactiva de inicio, avance y salida de los modos de jugador, entrenador y Crea tu club.
+1. Los tres modos ya se crearon e iniciaron en navegador, pero falta probar avance, partido, guardado/carga y salida; el smoke no cubre una temporada completa.
 2. El renderer WebGL, GLB y mascota 3D no se inspeccionaron visualmente en navegador.
 3. No se comprobó la reproducción audible de música, efectos ni mezcla.
 4. No hay FPS medio/p1, memoria de navegador ni métricas de frame-time por sección.
 5. No hay tiempos de completar los recorridos ni muertes/bloqueos por zona; el juego no tiene niveles tradicionales.
 6. No se validó un AAB ni se ejecutó una prueba en dispositivo Android en esta auditoría.
-7. No se probó paridad web/móvil con interacción táctil y orientación en dispositivo real.
+7. La interacción fue click-driven en Chromium con viewport móvil/táctil emulado; no se probó paridad web/móvil, gestos u orientación en un dispositivo real.
 8. **QA-001:** el historial de analytics puede poblarse con 120 eventos sintéticos; no usar ese historial como telemetría real.
 9. No se probó accesibilidad con lector de pantalla, teclado, contraste o preferencias de movimiento reducido.
 10. La suite actual no reproduce flujos completos de carrera, guardado/carga y salida en un navegador; ver **QA-002**.
@@ -37,9 +39,9 @@ No se pudo arrancar una sesión interactiva de Chromium: el binario headless dis
 | Cliente GOAT | PASS | `node test/goat-client.js`: “Todo correcto”; prueba deliberadamente errores/red simulados, no disponibilidad del servicio real. |
 | Sintaxis JS | PASS | `node --check` en `legacy-game/src/*.js`. |
 | Servicio local | PASS estático | `GET /jugar/juego.html`: HTTP 200, 10.575.128 bytes, TTFB 0,074 s, total 0,087 s en loopback. No equivale a carga hasta pantalla interactiva. |
-| Navegador interactivo | BLOQUEADO | Chromium headless no inicia por bibliotecas del sistema ausentes: `libnspr4.so` y `libnss3.so`. No se obtuvieron capturas ni logs de ejecución del juego. |
+| Navegador interactivo | PARCIAL PASS | Chromium 153 headless, viewport emulado 390×844: idioma español, menú/modos, creación e inicio de jugador, míster y Crea tu club. Sin errores de página/consola ni solicitudes fallidas. Cobertura click-driven; no es dispositivo físico ni prueba completa. |
 | Tamaño del sitio | Medido | `dist/index.html`: 14.997 bytes. `dist/jugar/juego.html`: 10.575.128 bytes. |
-| FPS / memoria / tiempos por modo | SIN MEDICIÓN | Requiere navegador ejecutable y perfil/dispositivo objetivo; no inferirlos del tiempo de build o `curl`. |
+| FPS / memoria / tiempos por modo | SIN MEDICIÓN | Requiere instrumentar el navegador y perfilar hardware/dispositivo objetivo; no inferirlos del tiempo de build o `curl`. |
 | Tag/rama QA | No creado | La sesión Arena fija la rama; auditoría de código en lectura y el reporte se mantiene en la rama activa. |
 
 La salida de build incluye dos avisos de Vite sobre scripts clásicos `site.js` sin `type="module"`; el build termina correctamente y el plugin copia ese runtime. No se registran como fallo de juego sin evidencia de regresión.
@@ -56,13 +58,15 @@ No hay archivos de niveles o escenas de Unity/Unreal/Godot. Para cobertura QA se
 
 ## 4. Matriz de cobertura
 
-`U` = sin prueba interactiva/evidencia visual en esta ejecución. Las pruebas de build comprueban presencia del bundle y módulos, pero no cambian `U` a “pasó”. `N/A` se reservaría para una categoría realmente no aplicable; aquí no se usa porque falta evidencia para decidirlo.
+`U` = sin prueba interactiva/evidencia visual en esta ejecución. `Parcial` indica únicamente el subrecorrido descrito y no aprueba el modo completo. Las pruebas de build comprueban presencia del bundle y módulos, pero no cambian `U` a “pasó”. `N/A` se reservaría para una categoría realmente no aplicable; aquí no se usa porque falta evidencia para decidirlo.
+
+**Entorno y límites del smoke:** Chromium 153 headless, viewport móvil emulado 390×844 con emulación táctil activada; todas las acciones de esta pasada se hicieron mediante click automatizado. Para cada modo se rellenaron datos de prueba y se alcanzó el juego; carrera de jugador quedó en onboarding/decisión de agente, míster en onboarding con renovación pendiente y Crea tu club en onboarding tras generar plantilla e iniciar temporada. La captura es temporal en `/tmp/qa-browser/` y no se incorpora al repositorio. La selección de ofertas/club y contenido generado puede variar entre ejecuciones.
 
 | Modo/recorrido | Funcional | Geometría/colisiones | Flujo/pacing | Signposting | Dificultad/economía | Controles/UX | Rendimiento | Accesibilidad | Narrativa/audio |
 |---|---|---|---|---|---|---|---|---|---|
-| Carrera de jugador/a | U | U | U | U | U | U | U | U | U |
-| Carrera de entrenador | U | U | U | U | U | U | U | U | U |
-| Crea tu club | U | U | U | U | U | U | U | U | U |
+| Carrera de jugador/a | Parcial: creación e inicio; no se avanzó temporada | U | U | U | U | U | U | U | U |
+| Carrera de entrenador | Parcial: creación e inicio; queda decisión de renovación en pantalla | U | U | U | U | U | U | U | U |
+| Crea tu club | Parcial: creación, plantilla generada e inicio de temporada | U | U | U | U | U | U | U | U |
 | Partido 2D / directo | U | U | U | U | U | U | U | U | U |
 | Situaciones 3D / penaltis / faltas | U | U | U | U | U | U | U | U | U |
 | Vestuario, tienda y mascota 3D | U | U | U | U | U | U | U | U | U |
@@ -81,7 +85,7 @@ No hay archivos de niveles o escenas de Unity/Unreal/Godot. Para cobertura QA se
   3. Revisar `localStorage['camino.analytics_events']` o el panel analítico.
 - **Esperado:** un historial vacío/declarado como demo hasta recibir eventos reales, o una separación visible entre datos demo y producción.
 - **Observado (evidencia de código):** `getOrSeedEvents()` genera 120 eventos históricos aleatorios cuando el almacenamiento está vacío (`src/analytics/tracker.ts`, líneas 67–113), y `logAnalyticsEvent()` usa esa función antes de guardar un evento (`líneas 125–127`).
-- **Evidencia:** `src/analytics/tracker.ts:67–113,125–127`; `src/App.tsx:47–50`. El repro de UI no se ejecutó porque Chromium no arranca; el flujo estático está demostrado por el código.
+- **Evidencia:** `src/analytics/tracker.ts:67–113,125–127`; `src/App.tsx:47–50`. El flujo estático está demostrado por el código; la interfaz de analytics no se incluyó en el smoke interactivo.
 - **Hipótesis de causa raíz:** se añadió historial ficticio para dar contenido al panel y el fixture comparte la misma clave/flujo que los eventos reales.
 - **Fix propuesto:** separar datos demo de producción y no sembrar eventos sintéticos en el almacenamiento operativo ni enviarlos a analytics.
 - **Alcance de regresión:** primera visita con almacenamiento vacío, panel admin, navegación/eventos reales, nueva visita con datos existentes y configuración GA4.
@@ -97,7 +101,7 @@ No hay archivos de niveles o escenas de Unity/Unreal/Godot. Para cobertura QA se
   3. Comprobar que las pruebas validan bundle/modelos/marcadores y lógica aislada, pero no abren el juego para completar una carrera/partido.
 - **Esperado:** smoke E2E reproducible para iniciar, avanzar, guardar/cargar y salir en cada modo; prueba móvil de gestos/viewport.
 - **Observado:** `test/build-smoke.js`, `test/goat-client.js` y `test/social-replies.js` existen; no hay Playwright/Cypress/Selenium en dependencias y no se ejecutan flujos end-to-end.
-- **Evidencia:** inventario de `test/`, `package.json`; Chromium no disponible por `libnspr4.so`/`libnss3.so` ausentes.
+- **Evidencia:** inventario de `test/`, `package.json`; el smoke manual recién ejecutado cubrió creación e inicio básico, pero no queda automatizado ni cubre avance, partido, guardado/carga o salida.
 - **Hipótesis de causa raíz:** regresión y extracción de contenido se validan mayoritariamente por build/smoke estático, sin un harness de navegador.
 - **Fix propuesto:** añadir E2E de navegador para los flujos críticos y ejecutarlo en CI con backend/almacenamiento controlados.
 - **Alcance de regresión:** los cinco recorridos de la matriz, viewport táctil, WebGL fallback y carga/guardado.
@@ -109,7 +113,7 @@ No hay archivos de niveles o escenas de Unity/Unreal/Godot. Para cobertura QA se
 | Build completo | 3,7 s observado en este entorno; no es tiempo de carga del juego. |
 | Juego autocontenido | 10.575.128 bytes (aprox. 10,33 MiB). |
 | Respuesta local del HTML | TTFB 74 ms; transferencia total 87 ms por loopback, no representa red/dispositivo real. |
-| FPS medio / p1% | No medido: no arrancó un navegador interactivo. |
+| FPS medio / p1% | No medido: el smoke headless no incluyó captura de frame-time ni perfil de rendimiento. |
 | Memoria | No medida. |
 | Tiempo de carga hasta juego interactivo | No medido; solo se midió la descarga del HTML estático. |
 | Tiempo de completar/muertes por zona | No aplicable a niveles convencionales y no medido en recorridos de carrera. |
@@ -117,4 +121,4 @@ No hay archivos de niveles o escenas de Unity/Unreal/Godot. Para cobertura QA se
 
 ## Estado del gate
 
-Fase 2 **bloqueada** hasta que el usuario revise y apruebe/rechace `QA-001` y `QA-002`. Además, antes de considerar la auditoría completa hace falta completar la matriz interactiva en navegador/dispositivo: el informe no afirma que haya cero blockers ni que los recorridos hayan pasado.
+Fase 2 **bloqueada** hasta que el usuario revise y apruebe/rechace `QA-001` y `QA-002`. Además, antes de considerar la auditoría completa hace falta ampliar la matriz interactiva: avanzar los tres modos, probar partidos/sistemas transversales y ejecutar las comprobaciones en dispositivo que correspondan. El informe no afirma que haya cero blockers ni que los recorridos completos hayan pasado.
