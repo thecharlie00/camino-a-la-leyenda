@@ -490,7 +490,20 @@ nav.tabs .nbadge { position: absolute; top: 4px; left: calc(50% + 6px); min-widt
 .shead b { color: var(--chalk); }
 .shd { color: var(--dim); font-size: var(--fs-xs); overflow: hidden; text-overflow: ellipsis; }
 .stext { margin: 3px 0 6px; font-size: var(--fs-md); line-height: 1.4; color: var(--chalk); overflow-wrap: anywhere; }
-.sstats { display: flex; gap: 18px; color: var(--dim); font-size: var(--fs-xs); }
+.sstats { display: flex; align-items: center; gap: 18px; color: var(--dim); font-size: var(--fs-xs); }
+.sreply { border: 0; background: none; color: var(--sky); font: inherit; padding: 0 4px; cursor: pointer; }
+.soc-composebar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); background: linear-gradient(110deg, rgba(29,155,240,.12), var(--stand)); }
+.soc-composebar > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.soc-composebar small { color: var(--mist); font-size: 12px; }
+.soc-cooldown { margin: -4px 0 0; font-size: 12px; }
+.soc-intents { display: flex; flex-wrap: wrap; gap: 6px; }
+.soc-intents .chipb[aria-pressed="true"] { border-color: var(--sky); background: rgba(29,155,240,.14); color: var(--chalk); }
+.soc-preview { display: flex; flex-direction: column; gap: 7px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--tunnel); }
+.soc-preview p { margin: 0 0 3px; font-size: 15px; line-height: 1.45; color: var(--chalk); }
+.soc-quote { display: flex; flex-direction: column; gap: 5px; margin: 0; padding: 10px 12px; border-left: 3px solid var(--sky); border-radius: 8px; background: var(--tunnel); color: var(--mist); font-size: 13px; }
+.soc-quote b { color: var(--chalk); }
+.soc-replyto { display: flex; flex-direction: column; gap: 2px; margin: 2px 0 5px; color: var(--sky); font-size: 12px; }
+.soc-replyto small { color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* partido en directo */
 .live { position: fixed; inset: 0; z-index: 40; background: var(--night); display: flex; justify-content: center; overflow-y: auto; }
 .lpanel { width: 100%; max-width: 560px; padding: calc(14px + env(safe-area-inset-top, 0px)) 16px calc(18px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 10px; }
@@ -1037,6 +1050,9 @@ details.fold[open] > summary { margin-bottom: 10px; }
 
 /* ---------- Campo 2D: velocidad, rótulo de comentario (2.6) ---------- */
 .lpitchw { position: relative; }
+.lpitchw > .pmusic { position: absolute; top: 8px; right: 8px; z-index: 3; display: grid; width: 34px; height: 34px; place-items: center; padding: 0; border: 1px solid rgba(255,255,255,.18); border-radius: 9px; background: rgba(6,12,14,.72); color: var(--led); font: 800 18px/1 var(--f-body); backdrop-filter: blur(4px); }
+.lpitchw > .pmusic[aria-pressed="true"] { background: var(--led); color: var(--led-ink); }
+.lpitchw > .pmusic:focus-visible { outline: 2px solid var(--chalk); outline-offset: 2px; }
 .pspd { position: absolute; left: 8px; top: 8px; display: flex; gap: 2px; padding: 2px; border-radius: 3px; background: rgba(6,12,14,.62); backdrop-filter: blur(4px); z-index: 2; }
 .pspd button { border: 0; background: none; color: #dfe6dd; font: 800 var(--fs-xs)/1 var(--f-body); padding: 6px 8px; border-radius: 3px; }
 .pspd button[aria-pressed="true"] { background: var(--led); color: var(--led-ink); }
@@ -2008,3 +2024,9 @@ html.rm .mgb-n.bump.on { animation: none; }
 .gxsc.has3d > img, .gxsc.has3d > .gxsc-l { display: none; }
 .sc3-cv { display: block; width: 100%; height: 100%; animation: gxscin .7s cubic-bezier(.2,.9,.3,1.15) both; }
 .rm .sc3-cv { animation: none; }
+
+
+/* Catálogo amplio de equipaciones en el vestuario: navegación compacta para móvil y escritorio. */
+.lfpages { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin: 6px 0 12px; }
+.lfpages .btn { min-width: 34px; padding-left: 8px; padding-right: 8px; }
+.lfstats { color: var(--grass); }

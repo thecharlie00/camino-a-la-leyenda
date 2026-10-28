@@ -313,7 +313,8 @@ function socPostRaw(o) {
   if (!S || typeof SOCIAL_T === "undefined") return null;
   var soc = socInit(), fol = socFollowers(), au = socAuthor(o.by || "fan");
   var base = au.id ? 3 + Math.random() * 40 : 0.02 + Math.random() * 0.6;
-  var post = {au: au, tk: o.tk, tp: o.tp || {}, y: S.yr, bi: S.bi, ph: S.ph, m: o.mood || 0,
+  soc.seq = (+soc.seq || 0) + 1;
+  var post = {id: soc.seq, au: au, tk: o.tk, tp: o.tp || {}, y: S.yr, bi: S.bi, ph: S.ph, m: o.mood || 0,
     lk: Math.round((base + fol * 0.02) * 1000 * (0.4 + Math.random())), rt: 0};
   post.rt = Math.round(post.lk * (0.08 + Math.random() * 0.2));
   soc.posts.unshift(post);
@@ -336,6 +337,53 @@ function socPost(trig, tp, opt) {
   }
   var t = socRnd(list);
   return socPostRaw({by: t.by, tk: t.t, tp: tp, mood: t.mood || 0});
+}
+/* publicaciones prefabricadas del usuario: mismas categorías para futbolista y míster,
+   con consecuencias coherentes con cada carrera. */
+var SOC_CUSTOM_OPTIONS = [
+  {k: "grateful", ico: "🙏", n: N_("Agradecer"), post: N_("Gracias por el apoyo. Cada día toca trabajar un poco más. 🙌"), reply: N_("Gracias, {target}. Se agradece que estés ahí; seguiremos trabajando. 🙌"), mood: 1,
+    player: {fame: 1, fol: 20, fans: 1}, manager: {rep: 1, fans: 1}},
+  {k: "team", ico: "🤝", n: N_("Apoyar al equipo"), post: N_("El mérito es de todo el equipo. Seguimos juntos. 🤝"), reply: N_("Gracias, {target}. El mérito es de todo el equipo; seguimos juntos. 🤝"), mood: 1,
+    player: {mor: 1, coach: 1, fans: 1}, manager: {sqMor: 2, chem: 1, fans: 1}},
+  {k: "ambition", ico: "🎯", n: N_("Mostrar ambición"), post: N_("Seguimos creciendo. Lo mejor todavía está por venir. 🎯"), reply: N_("Gracias, {target}. Seguimos creciendo y no vamos a conformarnos. 🎯"), mood: 1,
+    player: {fame: 2, fol: 50}, manager: {rep: 2, fans: 1}},
+  {k: "calm", ico: "🧠", n: N_("Mantener la calma"), post: N_("Respeto todas las opiniones; yo prefiero responder con trabajo. 🧠"), reply: N_("Te leo, {target}. Respeto tu opinión; prefiero contestar con trabajo. 🧠"), mood: 0,
+    player: {prof: 1, coach: 1}, manager: {rep: 1, board: 1}},
+  {k: "bold", ico: "🔥", n: N_("Responder con carácter"), post: N_("Que hablen. Nosotros seguimos a lo nuestro. 🔥"), reply: N_("Te respeto, {target}; nosotros responderemos donde toca: en el campo. 🔥"), mood: 1,
+    player: {fame: 2, fol: 60, fans: 1, coach: -1}, manager: {rep: 2, fans: 2, board: -1}},
+  {k: "aggressive", ico: "💥", n: N_("Ser agresivo"), post: N_("No me busques excusas: si tienes algo que decir, dilo de frente. En el campo responderemos. 💥"), reply: N_("Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥"), mood: 1,
+    player: {fame: 3, fol: 90, fans: -1, coach: -2, prof: -1}, manager: {rep: 3, fans: 1, board: -3, sqMor: -1}},
+  {k: "sarcastic", ico: "😏", n: N_("Tirar de sarcasmo"), post: N_("Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏"), reply: N_("¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏"), mood: 0,
+    player: {fame: 1, fol: 55, fans: 1, coach: -1, prof: -1}, manager: {rep: 1, fans: 1, board: -1, chem: -1}},
+  {k: "accountability", ico: "🙏", n: N_("Asumir el resultado"), post: N_("No salió como queríamos. Lo asumo y trabajaré para mejorar. 🙏"), reply: N_("Tienes razón, {target}. No salió bien; asumo mi parte y trabajaré más. 🙏"), mood: 0,
+    player: {prof: 1, coach: 2, fans: 1}, manager: {board: 2, sqMor: 1, rep: 1}}
+];
+function socCustomPeriod() {
+  var clock = S.bi != null ? S.bi : S.tw != null ? S.tw : S.w != null ? S.w : 0;
+  return String(S.yr) + "|" + String(clock);
+}
+function socCustomFx(key) {
+  for (var i = 0; i < SOC_CUSTOM_OPTIONS.length; i++) if (SOC_CUSTOM_OPTIONS[i].k === key) return S.mode === "mgr" ? SOC_CUSTOM_OPTIONS[i].manager : SOC_CUSTOM_OPTIONS[i].player;
+  return null;
+}
+function socCustomSend(key, target) {
+  if (!S || typeof SOCIAL_T === "undefined") return {ok: false};
+  var option = null;
+  for (var i = 0; i < SOC_CUSTOM_OPTIONS.length; i++) if (SOC_CUSTOM_OPTIONS[i].k === key) { option = SOC_CUSTOM_OPTIONS[i]; break; }
+  if (!option) return {ok: false};
+  var soc = socInit(), period = socCustomPeriod();
+  if (soc.customPeriod === period) return {ok: false, limit: true};
+  var replyMeta = target && typeof target === "object" ? target : null;
+  target = String(replyMeta ? replyMeta.target : target || "").replace(/[<>]/g, "").trim().slice(0, 40);
+  var fx = S.mode === "mgr" ? option.manager : option.player;
+  if (S.mode === "mgr") mgrFx(fx);
+  else applyFx(fx);
+  var isReply = !!target, tp = isReply ? {target: target} : {};
+  var post = socPostRaw({by: "self", tk: isReply ? option.reply : option.post, tp: tp, mood: option.mood});
+  if (!post) return {ok: false};
+  if (isReply) post.replyTo = {id: replyMeta && replyMeta.id || null, target: target, text: String(replyMeta && replyMeta.text || "").slice(0, 180)};
+  soc.customPeriod = period;
+  return {ok: true, fx: fx, reply: isReply};
 }
 /* fichajes: a veces el «here we go» clásico, a veces otro periodista o medio */
 function socProBy() { return Math.random() < 0.35 ? {by: "romano"} : {acc: 1}; }

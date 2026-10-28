@@ -51,6 +51,34 @@ var SpRig = (function () {
       add(Q[0], Q[1], Q[2], Q[3], Q[4], Q[5], Q[6], col);
       if (Q[9]) add(MIRROR[Q[0]] || Q[0], -Q[4], Q[2], Q[3], -Q[1], Q[5], Q[6], col);
     });
+    /* La camiseta elegida en el vestuario también se ve en el modelo vóxel 3D. */
+    var pattern = o.shirtPattern || "plain", pc = pal.kit_trim;
+    function mark(x0, y0, x1, y1, z0) { add(3, x0, y0, z0 || 0.168, x1, y1, (z0 || 0.168) + 0.014, pc, 1); }
+    if (pattern === "stripes" || pattern === "pinstripe") {
+      mark(-0.15, 1.25, -0.105, 1.45); mark(-0.025, 1.25, 0.025, 1.45); mark(0.105, 1.25, 0.15, 1.45);
+    } else if (pattern === "hoops") {
+      mark(-0.22, 1.27, 0.22, 1.315); mark(-0.22, 1.35, 0.22, 1.395); mark(-0.19, 1.43, 0.19, 1.465);
+    } else if (pattern === "sash") {
+      mark(-0.20, 1.26, -0.10, 1.31); mark(-0.12, 1.31, -0.02, 1.36); mark(-0.04, 1.36, 0.06, 1.41); mark(0.04, 1.41, 0.14, 1.46);
+    } else if (pattern === "retro") {
+      mark(-0.09, 1.435, 0.09, 1.455); mark(-0.035, 1.31, 0.035, 1.42);
+    } else if (pattern === "diamond") {
+      mark(-0.14, 1.34, -0.08, 1.40); mark(-0.03, 1.27, 0.03, 1.33); mark(0.08, 1.34, 0.14, 1.40);
+    } else if (pattern === "split") {
+      mark(0, 1.24, 0.22, 1.47);
+    } else if (pattern === "chevron") {
+      mark(-0.22, 1.39, -0.11, 1.43); mark(-0.12, 1.34, -0.02, 1.38); mark(-0.03, 1.29, 0.03, 1.33); mark(0.02, 1.34, 0.12, 1.38); mark(0.11, 1.39, 0.22, 1.43);
+    } else if (pattern === "checker" || pattern === "pixel") {
+      [[-0.17,1.39],[-0.07,1.39],[0.03,1.39],[0.13,1.39],[-0.12,1.31],[-0.02,1.31],[0.08,1.31],[0.18,1.31]].forEach(function (v) { mark(v[0], v[1], v[0] + 0.045, v[1] + 0.045); });
+    } else if (pattern === "lightning") {
+      mark(0.035, 1.44, 0.11, 1.46); mark(-0.015, 1.39, 0.06, 1.42); mark(-0.065, 1.34, 0.01, 1.37); mark(-0.025, 1.29, 0.05, 1.32);
+    } else if (pattern === "gradient") {
+      mark(-0.22, 1.27, 0.22, 1.30); mark(-0.22, 1.34, 0.22, 1.38); mark(-0.19, 1.42, 0.19, 1.45);
+    } else if (pattern === "star") {
+      mark(-0.025, 1.36, 0.025, 1.43); mark(-0.075, 1.385, 0.075, 1.415);
+    } else if (pattern === "triangles") {
+      mark(-0.20, 1.40, -0.12, 1.44); mark(-0.12, 1.36, -0.04, 1.40); mark(-0.04, 1.32, 0.04, 1.36); mark(0.04, 1.36, 0.12, 1.40); mark(0.12, 1.40, 0.20, 1.44);
+    }
     var hs = o.fem ? C.HAIR_FEM : C.HAIR_STYLES[(o.hairStyle || 0) % C.HAIR_STYLES.length];
     hs.forEach(function (H) { add(5, H[0], H[1], H[2], H[3], H[4], H[5], pal.hair, 0.9); });
     /* dorsal en la espalda (cifras pixel del partido) */

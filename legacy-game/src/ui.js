@@ -1716,6 +1716,7 @@
         '<div class="row2" style="margin-top:14px"><button class="btn wide" data-a="close">' + tr("Más tarde") + '</button><button class="btn pri wide" data-a="doupdate">' + tr("Actualizar") + "</button></div>";
     }
     if (t.k === "socedit") return socEditHTML();
+    if (t.k === "soccompose") return socComposeHTML();
     if (t.k === "askdel") {
       var e = slotsNow().filter(function (x) { return x.id === t.id; })[0];
       return "<h2>" + tr("¿Borrar la partida?") + '</h2><p class="lead">' + tr("Se borrará la partida de {n} de este dispositivo y de tu cuenta. No se puede deshacer.", {n: h(e ? e.n : "")}) + '</p><div class="row2" style="margin-top:14px"><button class="btn wide" data-a="close">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="dodel" data-v="' + h(t.id) + '">' + tr("Borrar") + "</button></div>";
@@ -1939,7 +1940,14 @@
     if (tp.choice) tp.choice = String(tp.choice);
     return tr(p.tk, tp);
   }
-  function socPostHTML(p) {
+  function socPostAuthor(p) {
+    var a = p.au || {}, acc = a.id ? socAcc(a.id) : null;
+    if (acc) return acc.name;
+    if (a.self) return S.soc.prof.name;
+    if (a.club != null) return a.n || clubName(a.club);
+    return a.n || tr("Hincha");
+  }
+  function socPostHTML(p, idx) {
     var a = p.au || {}, acc = a.id ? socAcc(a.id) : null, prof = S.soc.prof, nm, hd, av, col = "#2b3b40", ver = false;
     if (acc) { nm = acc.name; hd = acc.handle; av = acc.av; col = acc.col || col; ver = !!acc.verified; }
     else if (a.self) { nm = prof.name; hd = prof.handle; av = prof.av; col = prof.col; ver = socFollowers() >= 100; }
@@ -1947,13 +1955,17 @@
     else { nm = a.n; hd = a.hd; av = a.av || "🙂"; }
     var avHTML = a.club != null && W.clubs[a.club] ? '<span class="sav">' + crest(a.club) + "</span>" : '<span class="sav" style="background:' + h(col) + '">' + h(av) + "</span>";
     return '<article class="spost' + (p.m < 0 ? " neg" : p.m > 0 ? " posm" : "") + '">' + avHTML + '<div class="sbody"><div class="shead"><b>' + h(nm) + "</b>" + (ver ? '<span class="sver" aria-label="' + h(tr("Verificado")) + '">✔</span>' : "") + '<span class="shd">@' + h(hd) + " · " + h(socWhen(p)) + "</span></div>" +
-      '<p class="stext">' + h(socText(p)) + '</p><div class="sstats"><span>♥ ' + h(fmtCount(p.lk)) + "</span><span>⟲ " + h(fmtCount(p.rt)) + "</span></div></div></article>";
+      (p.replyTo ? '<div class="soc-replyto">↪ ' + h(tr("Responde a {target}", {target: p.replyTo.target})) + (p.replyTo.text ? '<small>“' + h(p.replyTo.text) + '”</small>' : "") + '</div>' : "") +
+      '<p class="stext">' + h(socText(p)) + '</p><div class="sstats"><span>♥ ' + h(fmtCount(p.lk)) + "</span><span>⟲ " + h(fmtCount(p.rt)) + "</span><button class=\"sreply\" data-a=\"socreplay\" data-i=\"' + idx + '\">↩ " + tr("Responder") + "</button></div></div></article>";
   }
   function fmtCount(n) { return n >= 1e6 ? fmtDec(n / 1e6, 1) + "M" : n >= 1e3 ? fmtDec(n / 1e3, 1) + "k" : String(n); }
   function tabRed() {
     var soc = socInit(), prof = soc.prof, fol = socFollowers();
     soc.seen = soc.posts.length;
-    var s = '<div class="stack"><section class="card sprof"><div class="sban" style="background:' + h(prof.col) + '"></div><div class="sinfo"><div class="srow"><span class="sav big" style="background:' + h(prof.col) + '">' + h(prof.av) + '</span><button class="btn sm" data-a="socedit">' + tr("Editar perfil") + "</button></div>";
+    var usedThisBlock = soc.customPeriod === socCustomPeriod();
+    var s = '<div class="stack"><section class="soc-composebar"><div><b>✍️ ' + tr("Dale voz a tu perfil") + '</b><small>' + tr("Elige una intención; el mensaje también tiene efecto en tu carrera.") + '</small></div><button class="btn pri" data-a="soccompose">' + tr("Publicar un mensaje") + "</button></section>" +
+      (usedThisBlock ? '<p class="muted soc-cooldown">' + tr("Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente.") + "</p>" : "") +
+      '<section class="card sprof"><div class="sban" style="background:' + h(prof.col) + '"></div><div class="sinfo"><div class="srow"><span class="sav big" style="background:' + h(prof.col) + '">' + h(prof.av) + '</span><button class="btn sm" data-a="socedit">' + tr("Editar perfil") + "</button></div>";
     s += '<h3 style="margin:6px 0 0">' + h(prof.name) + (fol >= 100 ? ' <span class="sver">✔</span>' : "") + '</h3><div class="muted">@' + h(prof.handle) + "</div>";
     if (prof.bio) s += '<p style="margin:8px 0 0">' + h(prof.bio) + "</p>";
     var n = nickName(isMgr() ? S.m : S.p);
@@ -1962,6 +1974,21 @@
     if (!soc.posts.length) s += '<p class="empty">' + tr("Todavía no se habla de ti. Juega unos partidos y las redes empezarán a echar humo.") + "</p>";
     else s += '<section class="sfeed">' + soc.posts.slice(0, 80).map(socPostHTML).join("") + "</section>";
     return s + "</div>";
+  }
+  function socComposeHTML() {
+    var sheet = UI.sheet || {}, reply = sheet.reply || null, pick = sheet.pick || SOC_CUSTOM_OPTIONS[0].k;
+    var option = SOC_CUSTOM_OPTIONS.filter(function (x) { return x.k === pick; })[0] || SOC_CUSTOM_OPTIONS[0];
+    var fx = socCustomFx(option.k) || {}, periodUsed = socInit().customPeriod === socCustomPeriod();
+    var message = tr(reply ? option.reply : option.post, reply ? {target: reply.target} : {});
+    var s = '<h2>' + (reply ? tr("Responder a {target}", {target: h(reply.target)}) : tr("Crear publicación")) + '</h2><div class="stack">';
+    if (reply) s += '<blockquote class="soc-quote"><b>' + tr("Publicación a la que respondes") + ' · @' + h(reply.target) + '</b><span>' + h(reply.text) + '</span></blockquote>';
+    s += '<div><span class="lbl">' + tr("¿Qué quieres transmitir?") + '</span><div class="soc-intents">' + SOC_CUSTOM_OPTIONS.map(function (x) {
+      return '<button class="chipb" data-a="socpick" data-v="' + x.k + '" aria-pressed="' + (x.k === option.k) + '">' + x.ico + " " + h(tr(x.n)) + "</button>";
+    }).join("") + "</div></div>";
+    s += '<section class="soc-preview"><span class="eyebrow">' + tr("Vista previa") + '</span><p>' + h(message) + '</p><span class="eyebrow">' + tr("Efectos de esta publicación") + '</span><div class="chips">' + Object.keys(fx).map(function (k) { return chip([k, fx[k]]); }).join("") + "</div></section>";
+    s += '<p class="muted soc-cooldown">' + tr("Puedes enviar una publicación personalizada por bloque para que cada mensaje importe.") + "</p>";
+    s += '<div class="row2"><button class="btn wide" data-a="close">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="socsend" data-v="' + option.k + '"' + (periodUsed ? " disabled" : "") + ">" + tr(reply ? "Enviar respuesta" : "Publicar") + "</button></div></div>";
+    return s;
   }
   function socDraft() {
     var g = function (id) { var e = document.getElementById(id); return e ? e.value : null; };
@@ -2513,6 +2540,18 @@
       /* minijuego */
       case "mini": doMini(+b.getAttribute("data-i"), b.getAttribute("data-m")); break;
       /* red social */
+      case "soccompose": UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k}; renderSheet(); break;
+      case "socreplay":
+        var replyIdx = +b.getAttribute("data-i"), replyPost = S.soc && S.soc.posts[replyIdx];
+        if (replyPost) UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k, reply: {id: replyPost.id || null, target: socPostAuthor(replyPost), text: socText(replyPost).slice(0, 180)}};
+        renderSheet(); break;
+      case "socpick": if (UI.sheet && UI.sheet.k === "soccompose") { UI.sheet.pick = v; renderSheet(); } break;
+      case "socsend":
+        var sendReply = UI.sheet && UI.sheet.k === "soccompose" && UI.sheet.reply;
+        var sendResult = socCustomSend(v, sendReply || "");
+        if (sendResult.ok) { persist(); UI.sheet = null; render(false); toast(tr(sendResult.reply ? "Respuesta enviada." : "Publicación enviada.")); }
+        else if (sendResult.limit) toast(tr("Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente."));
+        break;
       case "socedit": UI.sheet = {k: "socedit"}; renderSheet(); break;
       case "socav": socDraft(); UI.sheet.d.av = v; renderSheet(); break;
       case "soccol": socDraft(); UI.sheet.d.col = v; renderSheet(); break;

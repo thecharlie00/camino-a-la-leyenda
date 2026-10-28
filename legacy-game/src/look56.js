@@ -38,6 +38,7 @@ var PLook = (function () {
     o.hairId = c.hair || LIFE_COS_DEF.hair; o.hairStyle = HS[o.hairId] || 0;
     o.fem = S.g === "f"; o.num = (L && L.num) || p.num || 9; o.club = p.club;
     o.gk = typeof isGK === "function" && isGK(); o.captain = !!(p.flags && p.flags.captain);
+    o.shirt = typeof lifeItem === "function" ? lifeItem("shirt", c.shirt || LIFE_COS_DEF.shirt) : null;
     var eq = g ? api.eqOf(g, "p") : {};
     if (g) GX_SLOTS.p.forEach(function (s) {
       var id = eq[s[0]], it = id && (g.own[id] || api.tried(id)) ? GXI.item(id) : null; if (!it) return;
@@ -62,7 +63,8 @@ var PLook = (function () {
   api.rig = function (pl, extra) {
     pl = pl || api.player();
     var ctx = extra && extra.ctx || "yo", kit = api.kit(pl.club, pl.gk && !(extra && extra.outfield));
-    var o = {shirt: kit.shirt, shorts: kit.shorts, socks: kit.socks, trim: kit.trim, num: pl.num, skin: pl.skin, hair: pl.hair, hairStyle: pl.hairStyle, fem: pl.fem,
+    if (pl.shirt) kit = Object.assign({}, kit, {shirt: pl.shirt.c || kit.shirt, shorts: pl.shirt.shorts || kit.shorts, socks: pl.shirt.c || kit.socks, trim: pl.shirt.c2 || kit.trim});
+    var o = {shirt: kit.shirt, shorts: kit.shorts, socks: kit.socks, trim: kit.trim, shirtPattern: pl.shirt && (pl.shirt.pattern || pl.shirt.id) || "plain", num: pl.num, skin: pl.skin, hair: pl.hair, hairStyle: pl.hairStyle, fem: pl.fem,
       boots: pl.boots, gk: pl.gk, gloves: pl.gloves ? pl.gloves.c : "#f4f4f0"};
     if (pl.arm) o.armband = pl.arm;
     /* equipamiento visible en este contexto; colores del equipo donde toca (cinta y sudadera «del club») */

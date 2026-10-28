@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { runInNewContext } from 'node:vm';
 
 const output = process.argv[2] || 'dist';
 const gamePage = join(output, 'jugar', 'juego.html');
@@ -25,6 +26,24 @@ assert.match(html, /var PetWorld = \(function \(\)/, '3D pet world is missing');
 assert.match(html, /var PetAudio = \(function \(\)/, 'Pet audio system is missing');
 assert.match(html, /var Music = \(function \(\)/, 'Background music system is missing');
 assert.match(html, /data-a="bgm"/, 'Background music control is missing');
+assert.match(html, /var LIFE_KIT_CATALOG = \[\]/, 'Expanded wearable kit catalog is missing');
+const lifeSource = readFileSync('legacy-game/src/life.js', 'utf8');
+const catalogStart = lifeSource.indexOf('var LIFE_KIT_PATTERNS = [');
+const catalogEnd = lifeSource.indexOf('var LIFE_COS_DEF =', catalogStart);
+assert.ok(catalogStart >= 0 && catalogEnd > catalogStart, 'Kit catalog source block is missing');
+const catalogContext = { N_: (text) => text, LIFE_COS: { shirt: [] } };
+runInNewContext(lifeSource.slice(catalogStart, catalogEnd), catalogContext);
+assert.equal(catalogContext.LIFE_KIT_CATALOG.length, 260, 'Expected 260 unlockable shirt designs');
+assert.equal(catalogContext.LIFE_COS.shirt.length, 260, 'All 260 kits should be selectable in the wardrobe');
+assert.match(html, /function lifeAttBonus\(\)/, 'Wearable kit stat bonuses are missing');
+assert.match(html, /SOC_CUSTOM_OPTIONS = \[/, 'Career-aware social post options are missing');
+assert.match(html, /socCustomSend\(key, target\)/, 'Social posting and reply simulation is missing');
+assert.match(html, /p_assist100/, 'Expanded player achievements are missing');
+assert.match(html, /m_bigbudget/, 'Expanded manager achievements are missing');
+assert.match(html, /MYS1/, 'Post-migration league expansion is missing');
+assert.match(html, /mx_minutos_cantera/, 'Post-migration manager decisions are missing');
+assert.match(html, /var PLAYER_DECISION_THEMES = \[/, 'Post-migration player decisions are missing');
+assert.match(html, /shirtPattern/, 'Custom kit patterns are not connected to the 3D player rig');
 assert.doesNotMatch(html, /<script\s+[^>]*src=/i, 'Game must be self-contained for WebView/offline use');
 assert.ok(!existsSync(join(output, 'camino-engine.js')), 'Stale v5.2 engine bundle must not be published');
 

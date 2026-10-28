@@ -34,7 +34,9 @@
     /* 5.7: la figura se dibuja desde una descripción ya resuelta (la mía sale de PLook; la del rival, de su look) */
     var R0 = look.__r ? look : cosLook(look);
     var skin = R0.skin, hc = R0.hcol, hair = R0.hair || "short", boots = R0.boots, th = R0.therm, sl = th ? th.k : "short", gl = R0.gloves || {c: "#f4f4f0", c2: "#d33"};
-    var k = kitOf(club, gk), c1 = k.c1, c2 = k.c2, txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
+    var shirtItem = R0.shirt || null, k = kitOf(club, gk), c1 = shirtItem && shirtItem.c || k.c1, c2 = shirtItem && shirtItem.c2 || k.c2;
+    if (shirtItem && shirtItem.shorts) k.sh = shirtItem.shorts;
+    var txt = ink(c1) === "#141414" ? (lum(c2) < 0.6 ? c2 : "#141414") : (lum(c2) > 0.45 ? c2 : "#ffffff");
     var armCol = sl === "long" ? c1 : sl === "under" ? th.c : skin, legCol = sl === "tights" ? th.c : skin;
     /* figura de cuerpo entero en pixel art (celda 5, sin rasgos faciales) */
     var R = [], B = function (x0, y0, x1, y1, c, tag) { R.push([x0, y0, x1, y1, c, tag]); };
@@ -56,6 +58,19 @@
     else { B(5, 20, 6, 20, skin); B(17, 20, 18, 20, skin); }
     /* camiseta con cuello en pico */
     B(7, 10, 16, 19, c1); B(7, 10, 8, 19, shade(c1, 0.82)); B(10, 10, 13, 10, c2); B(11, 11, 12, 11, c2);
+    var shirtPattern = shirtItem && (shirtItem.pattern || shirtItem.id) || "plain";
+    if (shirtPattern === "stripes" || shirtPattern === "pinstripe") { B(9, 11, 9, 18, c2); B(12, 11, 12, 18, c2); B(15, 11, 15, 18, c2); }
+    else if (shirtPattern === "hoops") { B(8, 12, 15, 12, c2); B(8, 15, 15, 15, c2); B(8, 18, 15, 18, c2); }
+    else if (shirtPattern === "sash") { B(9, 11, 10, 12, c2); B(10, 13, 11, 14, c2); B(11, 15, 12, 16, c2); B(12, 17, 13, 18, c2); }
+    else if (shirtPattern === "retro") { B(10, 11, 13, 11, c2); B(10, 12, 10, 12, c2); B(13, 12, 13, 12, c2); }
+    else if (shirtPattern === "diamond") { B(9, 12, 9, 12, c2); B(8, 13, 10, 13, c2); B(9, 14, 9, 14, c2); B(14, 15, 14, 15, c2); B(13, 16, 15, 16, c2); B(14, 17, 14, 17, c2); }
+    else if (shirtPattern === "split") { B(12, 11, 16, 18, c2); }
+    else if (shirtPattern === "chevron") { B(8, 12, 9, 12, c2); B(10, 13, 11, 13, c2); B(12, 14, 13, 14, c2); B(14, 13, 15, 13, c2); B(8, 16, 9, 16, c2); B(10, 17, 11, 17, c2); B(12, 18, 13, 18, c2); B(14, 17, 15, 17, c2); }
+    else if (shirtPattern === "checker" || shirtPattern === "pixel") { B(8, 12, 9, 13, c2); B(12, 12, 13, 13, c2); B(10, 14, 11, 15, c2); B(14, 14, 15, 15, c2); B(8, 16, 9, 17, c2); B(12, 16, 13, 17, c2); }
+    else if (shirtPattern === "lightning") { B(12, 11, 13, 12, c2); B(11, 13, 12, 14, c2); B(10, 15, 12, 16, c2); B(11, 17, 11, 18, c2); }
+    else if (shirtPattern === "gradient") { B(8, 15, 15, 15, c2); B(8, 17, 15, 18, c2); }
+    else if (shirtPattern === "star") { B(11, 13, 12, 15, c2); B(10, 14, 13, 14, c2); }
+    else if (shirtPattern === "triangles") { B(8, 12, 10, 14, c2); B(13, 15, 15, 17, c2); }
     /* cabeza: cuello, cara lisa y orejas */
     B(11, 9, 12, 9, shade(skin, 0.85)); B(9, 3, 14, 8, skin); B(14, 3, 14, 8, shade(skin, 0.86)); B(8, 5, 8, 6, skin); B(15, 5, 15, 6, shade(skin, 0.86));
     if (hair === "short") { B(9, 1, 14, 2, hc); B(9, 3, 9, 4, hc); B(14, 3, 14, 3, hc); }
@@ -113,7 +128,7 @@
   function myLook() {
     if (typeof PLook === "undefined") return Object.assign({}, LIFE_COS_DEF, lifeOf().cos);
     var p = PLook.player(), band = p.gear.band && p.gear.band.cos === "band:club" ? "club" : p.band;
-    return {__r: 1, skin: p.skin, hcol: p.hair, hair: p.hairId, boots: p.boots, gloves: p.gloves, therm: p.therm, band: band, arm: p.gear.arm ? p.arm : null};
+    return {__r: 1, skin: p.skin, hcol: p.hair, hair: p.hairId, boots: p.boots, gloves: p.gloves, therm: p.therm, band: band, arm: p.gear.arm ? p.arm : null, shirt: p.shirt};
   }
   function myAvatar(cls) { var L = lifeOf(); return avatar(myLook(), S.p.club, L.num, isGK(), cls, !!S.p.flags.captain); }
   U.myAvatar = myAvatar;
@@ -254,13 +269,23 @@
     return money(lk.v);
   }
   function cosRow(cat, label, swatch) {
-    var cur = lifeCos(cat);
-    return '<div class="lfcos"><span class="lbl">' + h(label) + '</span><div class="lfopts' + (swatch ? " sw" : "") + '">' + LIFE_COS[cat].map(function (it) {
-      var lk = lifeLocked(cat, it), sel = cur === it.id;
-      var inner = swatch ? '<i style="background:' + it.c + '"></i>' : "<b>" + h(tr(it.n)) + "</b>" + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
+    var cur = lifeCos(cat), items = LIFE_COS[cat] || [], pageSize = 18, ui = U.ui();
+    ui.lfcosPage = ui.lfcosPage || {};
+    var pages = Math.max(1, Math.ceil(items.length / pageSize)), page = clamp(+ui.lfcosPage[cat] || 0, 0, pages - 1);
+    ui.lfcosPage[cat] = page;
+    var shown = items.slice(page * pageSize, (page + 1) * pageSize);
+    var out = '<div class="lfcos"><span class="lbl">' + h(label) + '</span><div class="lfopts' + (swatch ? " sw" : "") + '">' + shown.map(function (it) {
+      var lk = lifeLocked(cat, it), sel = cur === it.id, statMap = cat === "shirt" ? (isGK() ? it.gk : it.att) : null;
+      var statTxt = statMap ? Object.keys(statMap).filter(function (k) { return statMap[k]; }).map(function (k) {
+        var nm = typeof ATT_NAMES !== "undefined" && ATT_NAMES[k] ? ATT_NAMES[k] : k;
+        return "+" + statMap[k] + " " + nm;
+      }).join(" · ") : "";
+      var inner = swatch ? '<i style="background:' + it.c + '"></i>' : "<b>" + h(tr(it.n)) + "</b>" + (statTxt ? '<small class="lfstats">' + h(statTxt) + "</small>" : "") + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
       if (swatch && it.n) inner += "<b>" + h(tr(it.n)) + "</b>" + (lk ? "<small>" + h(lockTxt(lk)) + "</small>" : "");
       return '<button class="lfo' + (lk ? " lk" : "") + '" data-a="lfcos" data-k="' + cat + '" data-v="' + it.id + '" aria-pressed="' + sel + '"' + (swatch && !it.n ? ' aria-label="' + h(tr("Tono {n}", {n: it.id.slice(1)})) + '"' : "") + ">" + inner + "</button>";
-    }).join("") + "</div></div>";
+    }).join("") + "</div>";
+    if (pages > 1) out += '<div class="lfpages"><button class="btn sm" data-a="lfcpage" data-k="' + cat + '" data-v="' + Math.max(0, page - 1) + '" aria-label="' + h(tr("Página anterior")) + '"' + (page === 0 ? " disabled" : "") + '>‹</button><span class="muted">' + tr("Página {page} de {pages}", {page: page + 1, pages: pages}) + '</span><button class="btn sm" data-a="lfcpage" data-k="' + cat + '" data-v="' + Math.min(pages - 1, page + 1) + '" aria-label="' + h(tr("Página siguiente")) + '"' + (page === pages - 1 ? " disabled" : "") + '>›</button></div>';
+    return out + "</div>";
   }
   U.sheets.llook = function () {
     var gk = isGK();
@@ -271,9 +296,13 @@
     s += cosRow("skin", tr("Piel"), true);
     s += cosRow("hair", tr("Pelo"));
     s += cosRow("hcol", tr("Color de pelo"), true);
+    s += cosRow("shirt", tr("Diseño de camiseta"));
     /* 5.7: botas, mangas, cinta y guantes se llevan desde el equipamiento (una sola fuente) */
     s += '<button class="btn wide" data-a="gearopen" data-v="p">' + h(tr("Equipamiento")) + "</button>";
     return s + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
+  };
+  U.actions.lfcpage = function (b, v) {
+    var cat = b.getAttribute("data-k"), ui = U.ui(); ui.lfcosPage = ui.lfcosPage || {}; ui.lfcosPage[cat] = +v || 0; rer();
   };
   U.actions.lfcos = function (b, v) {
     var cat = b.getAttribute("data-k"), prev = (lifeOf().cos || {})[cat] || LIFE_COS_DEF[cat], r = lifeSetCos(cat, v);
