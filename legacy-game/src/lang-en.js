@@ -10005,4 +10005,6 @@ I18N.en = {"% de paradas":"Save %",
 "Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥":"Keep talking, {target}. We will see who is right on the pitch. 💥",
 "Tirar de sarcasmo":"Use sarcasm",
 "Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"What an unexpected comment. I will file it next to the criticism that actually keeps me up at night. 😏",
-"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Seriously, {target}? And here I thought I had already used up my sarcasm for today. 😏"};
+"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Seriously, {target}? And here I thought I had already used up my sarcasm for today. 😏",
+"Puedes responder una vez por bloque.":"You can reply once per block.",
+"Ya respondiste en este bloque; podrás volver a hacerlo en el siguiente.":"You have already replied in this block; you can reply again in the next one."};

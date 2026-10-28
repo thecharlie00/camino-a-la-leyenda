@@ -10005,4 +10005,6 @@ I18N.fr = {"% de paradas":"% d'arrêts",
 "Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥":"Continue de parler, {target}. Le terrain dira qui a raison. 💥",
 "Tirar de sarcasmo":"User de sarcasme",
 "Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"Quel commentaire inattendu. Je vais le ranger avec les critiques qui m’empêchent vraiment de dormir. 😏",
-"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Sérieusement, {target} ? Je croyais avoir déjà épuisé mon quota de sarcasme pour aujourd’hui. 😏"};
+"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Sérieusement, {target} ? Je croyais avoir déjà épuisé mon quota de sarcasme pour aujourd’hui. 😏",
+"Puedes responder una vez por bloque.":"Tu peux répondre une fois par bloc.",
+"Ya respondiste en este bloque; podrás volver a hacerlo en el siguiente.":"Tu as déjà répondu pendant ce bloc ; tu pourras répondre de nouveau au prochain."};

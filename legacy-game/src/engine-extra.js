@@ -372,17 +372,21 @@ function socCustomSend(key, target) {
   for (var i = 0; i < SOC_CUSTOM_OPTIONS.length; i++) if (SOC_CUSTOM_OPTIONS[i].k === key) { option = SOC_CUSTOM_OPTIONS[i]; break; }
   if (!option) return {ok: false};
   var soc = socInit(), period = socCustomPeriod();
-  if (soc.customPeriod === period) return {ok: false, limit: true};
   var replyMeta = target && typeof target === "object" ? target : null;
   target = String(replyMeta ? replyMeta.target : target || "").replace(/[<>]/g, "").trim().slice(0, 40);
+  var isReply = !!target;
+  /* Una respuesta tiene su propio límite: no queda bloqueada por una publicación normal del mismo tramo. */
+  if (isReply ? soc.replyPeriod === period : soc.customPeriod === period) return {ok: false, limit: true};
   var fx = S.mode === "mgr" ? option.manager : option.player;
   if (S.mode === "mgr") mgrFx(fx);
   else applyFx(fx);
-  var isReply = !!target, tp = isReply ? {target: target} : {};
+  var tp = isReply ? {target: target} : {};
   var post = socPostRaw({by: "self", tk: isReply ? option.reply : option.post, tp: tp, mood: option.mood});
   if (!post) return {ok: false};
-  if (isReply) post.replyTo = {id: replyMeta && replyMeta.id || null, target: target, text: String(replyMeta && replyMeta.text || "").slice(0, 180)};
-  soc.customPeriod = period;
+  if (isReply) {
+    post.replyTo = {id: replyMeta && replyMeta.id || null, target: target, text: String(replyMeta && replyMeta.text || "").slice(0, 180)};
+    soc.replyPeriod = period;
+  } else soc.customPeriod = period;
   return {ok: true, fx: fx, reply: isReply};
 }
 /* fichajes: a veces el «here we go» clásico, a veces otro periodista o medio */

@@ -38,6 +38,8 @@ assert.equal(catalogContext.LIFE_COS.shirt.length, 260, 'All 260 kits should be 
 assert.match(html, /function lifeAttBonus\(\)/, 'Wearable kit stat bonuses are missing');
 assert.match(html, /SOC_CUSTOM_OPTIONS = \[/, 'Career-aware social post options are missing');
 assert.match(html, /socCustomSend\(key, target\)/, 'Social posting and reply simulation is missing');
+assert.match(html, /reply \? socState\.replyPeriod === period/, 'A previous post must not disable replying to a comment');
+assert.match(html, /soc\.replyPeriod = period/, 'Reply cooldown must be tracked separately from custom posts');
 assert.match(html, /p_assist100/, 'Expanded player achievements are missing');
 assert.match(html, /m_bigbudget/, 'Expanded manager achievements are missing');
 assert.match(html, /MYS1/, 'Post-migration league expansion is missing');
