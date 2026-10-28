@@ -733,3 +733,88 @@ EV({id: "y_cesion_invierno", tipo: "aleatoria", cat: "Mercado", title: "Un club 
       ko: {txt: tr("El club se niega en redondo y no le gusta tu insistencia."), fx: {coach: -5, mor: -3}}},
     {t: tr("Entrenar con el filial para coger ritmo"), ok: {txt: tr("Partidos de verdad, aunque sea en una categoría menor."), fx: {form: 4, prof: 2, coach: 2}}}
   ]; }});
+
+EV({id: "y_recovery_plan", tipo: "aleatoria", cat: "Rendimiento", title: "El plan de recuperación", w: 1.1, cd: 3,
+  when: function (x) { return x.inSeason && x.p.fame >= 5; },
+  text: function () { return tr("El calendario viene cargado y el cuerpo te pide una pausa. El fisio propone ajustar el descanso, pero el entrenador quiere verte entrenar a tope."); },
+  opts: function () { return [
+    {t: tr("Seguir el plan del fisio"), ok: {txt: tr("Llegas más fresco al próximo partido."), fx: {form: 4, mor: 2}}},
+    {t: tr("Completar una sesión extra"), p: 0.65,
+      ok: {txt: tr("El esfuerzo extra da resultado y te notas más rápido."), fx: {form: 2, prof: 3}},
+      ko: {txt: tr("Te pasas de carga y las piernas se quedan pesadas."), fx: {form: -4, mor: -2}}},
+    {t: tr("Pedir una rotación al míster"), ok: {txt: tr("Te reserva unos minutos y recuperas energía."), fx: {coach: 2, mor: 3, form: 3}}}
+  ]; }});
+
+EV({id: "y_brazo_capitan", tipo: "aleatoria", cat: "Vestuario", title: "Un compañero necesita apoyo", w: 0.9, cd: 4,
+  when: function (x) { return x.inSeason && x.p.ovr >= 60; },
+  text: function () { return tr("Un compañero joven encadena errores y algunos veteranos empiezan a señalarle. Te busca para saber si crees que puede salir adelante."); },
+  opts: function () { return [
+    {t: tr("Hablar con él en privado"), ok: {txt: tr("Se siente escuchado y vuelve a entrenar con confianza."), fx: {mor: 3, coach: 2, prof: 2}}},
+    {t: tr("Defenderle delante de todo el grupo"), p: 0.7,
+      ok: {txt: tr("El vestuario se une y el joven responde en el campo."), fx: {mor: 4, fans: 2, prof: 2}},
+      ko: {txt: tr("El gesto se interpreta como una crítica a los veteranos."), fx: {coach: -3, mor: -2}}},
+    {t: tr("Dejar que resuelva sus problemas"), ok: {txt: tr("Cada uno aprende a su ritmo, aunque la distancia entre ambos aumenta."), fx: {prof: 1, mor: -1}}}
+  ]; }});
+
+EV({id: "y_entrevista_tactica", tipo: "aleatoria", cat: "Prensa", title: "Una pregunta sobre tu posición", w: 1, cd: 3,
+  when: function (x) { return x.inSeason && x.p.fame >= 12; },
+  text: function () { return tr("En una entrevista te preguntan si prefieres jugar en tu posición natural o aceptar cualquier papel que te pida el entrenador."); },
+  opts: function () { return [
+    {t: tr("Poner al equipo por delante"), ok: {txt: tr("El míster agradece tu compromiso y la prensa destaca tu profesionalidad."), fx: {coach: 4, prof: 3, fans: 2}}},
+    {t: tr("Explicar dónde rindes mejor"), ok: {txt: tr("Hablas claro sin faltar al respeto. El cuerpo técnico toma nota."), fx: {coach: 2, prof: 2}}},
+    {t: tr("Exigir jugar siempre en tu sitio"), p: 0.45,
+      ok: {txt: tr("Tu sinceridad abre una conversación útil con el entrenador."), fx: {coach: 3, mor: 2}},
+      ko: {txt: tr("El titular suena a ultimátum y el míster se molesta."), fx: {coach: -5, fans: -2}}}
+  ]; }});
+
+/* 100 situaciones nuevas de carrera de jugador/a. Cada tema combina diez casos jugables,
+   con decisiones, consecuencias y claves únicas para que las partidas puedan recordarlas. */
+var PLAYER_DECISION_THEMES = [
+  {cat: "Entrenamiento", title: "Una sesión a tu medida", open: "El cuerpo técnico está diseñando el trabajo de la semana.", choices: ["Pedir un objetivo técnico concreto", "Probar el reto más exigente", "Acordar una sesión equilibrada"], cases: [
+    ["Primer toque", "El analista señala que el control orientado te ayudaría a salir de la presión."], ["Pierna menos hábil", "El preparador propone terminar cada ejercicio con tu pierna menos hábil."], ["Juego aéreo", "El equipo quiere que practiques saltos y disputas en el área."], ["Pase vertical", "El vídeo de tu último partido muestra varios pases hacia atrás evitables."], ["Cambio de ritmo", "El preparador físico ha medido una bajada de velocidad en el último tramo."], ["Centros", "Los laterales te piden repetir centros y remates al segundo palo."], ["Presión tras pérdida", "El nuevo sistema exige reaccionar en los segundos posteriores a perder el balón."], ["Tiros lejanos", "En el entrenamiento te quedan diez minutos y el portero propone una competición de disparos."], ["Cobertura defensiva", "El míster quiere que mejores la coordinación con quien juega a tu lado."], ["Balón parado", "El especialista de faltas te ofrece ensayar una jugada nueva."]]},
+  {cat: "Prensa", title: "Una pregunta incómoda", open: "Un periodista busca una respuesta que abra los titulares de mañana.", choices: ["Responder con calma", "Convertirlo en un desafío público", "Desviar la atención hacia el equipo"], cases: [
+    ["La suplencia", "Te preguntan si estás molesto por haber empezado el último partido en el banquillo."], ["El gol fallado", "Una repetición de tu ocasión más clara vuelve a circular por todos los programas."], ["El cambio temprano", "Quieren saber si te sentó mal que el entrenador te sustituyera."], ["El rival", "Un delantero rival ha dicho que no le preocupa enfrentarse contigo."], ["El contrato", "La prensa publica una cifra de renovación que nadie ha confirmado."], ["La afición", "Te preguntan por los silbidos de un sector de la grada."], ["La selección", "Un reportero te plantea si mereces más minutos con tu país."], ["La posición", "El entrevistador afirma que rindes mejor en otra demarcación."], ["El vestuario", "Un periodista insinúa que hay mal ambiente entre los titulares y los suplentes."], ["La racha", "Te preguntan si el equipo puede mantener el buen momento hasta final de temporada."]]},
+  {cat: "Recuperación", title: "Tu cuerpo pide una decisión", open: "El calendario aprieta y el equipo médico revisa tus cargas.", choices: ["Seguir el protocolo del fisio", "Acelerar la vuelta por tu cuenta", "Negociar una recuperación intermedia"], cases: [
+    ["Viaje largo", "Regresas de un desplazamiento nocturno con poco descanso."], ["Dos partidos seguidos", "Hay otro encuentro importante apenas tres días después del último."], ["Molestia muscular", "Notas una pequeña sobrecarga que todavía no aparece en el parte médico."], ["Calor extremo", "La previsión anuncia temperaturas altas para el siguiente partido."], ["Sueño irregular", "El personal del club detecta que estás descansando peor de lo habitual."], ["Carga de gimnasio", "Las piernas siguen pesadas tras una sesión de fuerza exigente."], ["Tobillo sensible", "El vendaje te ayuda, pero la articulación continúa rígida."], ["Regreso a los entrenamientos", "Ya estás recuperado y quieres saber cuánto debes forzar en la primera semana."], ["Menos minutos", "Has jugado poco últimamente y te preocupa perder ritmo competitivo."], ["Rutina personal", "Una aplicación deportiva te recomienda un plan distinto al del club."]]},
+  {cat: "Vestuario", title: "Una conversación en el vestuario", open: "Un compañero se acerca cuando la mayoría ya se ha marchado.", choices: ["Escucharle en privado", "Hablar del tema con todo el grupo", "Pedir ayuda a un veterano"], cases: [
+    ["Un juvenil nervioso", "El canterano que debuta este mes teme cometer un error decisivo."], ["Un compañero aislado", "Un recién llegado come solo y apenas participa en las charlas del equipo."], ["Dos líderes enfrentados", "Los capitanes discrepan sobre quién debe lanzar el próximo penalti."], ["Un suplente frustrado", "Un compañero cree que merece más minutos y está perdiendo la motivación."], ["Una broma pesada", "Un jugador joven te cuenta que las bromas del grupo han ido demasiado lejos."], ["Una discusión táctica", "Dos compañeros discuten por quién debía cubrir una carrera del rival."], ["Un error repetido", "El portero quiere hablar contigo después de varios goles encajados."], ["Un regreso difícil", "Un compañero vuelve de una lesión larga y no se siente al nivel del grupo."], ["Un idioma nuevo", "Un fichaje extranjero no comprende algunas indicaciones del vestuario."], ["Una despedida", "Un veterano te confiesa que está pensando en retirarse al acabar el año."]]},
+  {cat: "Rol", title: "El míster te pide flexibilidad", open: "La planificación del próximo encuentro plantea una función distinta para ti.", choices: ["Aceptar el nuevo papel", "Pedir una explicación antes de decidir", "Proponer una alternativa táctica"], cases: [
+    ["Un puesto más retrasado", "El entrenador quiere que ayudes a iniciar las jugadas desde atrás."], ["La banda contraria", "Una lesión obliga al equipo a cambiarte de banda."], ["Falso nueve", "El míster piensa usar tu movilidad como referencia ofensiva."], ["Lateral por sorpresa", "El equipo necesita que cubras una posición poco habitual durante un partido."], ["Capitán suplente", "Te proponen llevar el brazalete mientras descansa el capitán."], ["Especialista de córners", "El cuerpo técnico quiere que ejecutes los saques de esquina."], ["Presión individual", "Te asignan seguir de cerca al organizador rival."], ["Entrada desde el banquillo", "El entrenador te plantea cambiar el partido en la segunda parte."], ["Doble pivote", "Quieren que formes una pareja en el centro con un compañero más defensivo."], ["Delantero de apoyo", "El plan requiere que juegues cerca del goleador en lugar de ser la referencia."]]},
+  {cat: "Mercado", title: "Tu representante trae una propuesta", open: "Tu agente te llama antes de que el club publique nada.", choices: ["Escuchar la propuesta sin compromiso", "Pedir que la negociación espere", "Hablar primero con tu entrenador"], cases: [
+    ["Interés desde otra liga", "Un equipo extranjero ha preguntado por tu situación contractual."], ["Renovación anticipada", "Tu club quiere empezar a negociar antes de que termine la temporada."], ["Cesión con minutos", "Un equipo cercano ofrece un préstamo con una promesa de titularidad."], ["Cláusula de rescisión", "El agente sugiere incluir una cláusula para facilitar un futuro traspaso."], ["Cambio de patrocinador", "Una marca rival quiere ofrecerte un contrato personal."], ["Oferta de última hora", "Un club presenta una oferta cuando el mercado está a punto de cerrar."], ["Intermediario nuevo", "Un representante desconocido promete contactos en varios campeonatos."], ["Aumento de sueldo", "Tu agente cree que tus actuaciones justifican una mejora salarial."], ["Club recién ascendido", "Un proyecto nuevo te ofrece ser una de sus caras principales."], ["Contrato corto", "Una oferta interesante solo garantiza una temporada de duración."]]},
+  {cat: "Afición", title: "La grada espera un gesto", open: "Los aficionados hablan de ti en redes y alrededor del estadio.", choices: ["Acercarte a la afición", "Responder con un mensaje público", "Dejar que tus actuaciones hablen"], cases: [
+    ["Entrenamiento abierto", "Un grupo de niños espera al equipo a la salida de la ciudad deportiva."], ["Camisetas firmadas", "Una asociación local pide tu ayuda para una rifa benéfica."], ["Una pancarta", "La grada prepara un mensaje de apoyo antes del próximo partido."], ["Críticas en redes", "Un vídeo de un error tuyo acumula comentarios duros."], ["Viaje de seguidores", "Aficionados han recorrido cientos de kilómetros para verte jugar."], ["Visita a un hospital", "El club organiza una mañana con pacientes jóvenes."], ["Una camiseta antigua", "Un hincha te regala una camiseta histórica de tu club."], ["Afición visitante", "Una familia rival te pide una foto después del encuentro."], ["Campaña solidaria", "Los seguidores proponen recaudar fondos para un proyecto del barrio."], ["Silbidos tras el partido", "Algunos aficionados muestran su enfado cuando te acercas a la grada."]]},
+  {cat: "Patrocinio", title: "Una marca quiere asociarse contigo", open: "Una empresa se pone en contacto para usar tu imagen.", choices: ["Aceptar con condiciones claras", "Rechazar y cuidar tu independencia", "Pedir consejo al club"], cases: [
+    ["Calzado deportivo", "Una firma de botas te ofrece probar su nuevo modelo."], ["Ropa de calle", "Una marca de moda quiere grabar una campaña durante tu día libre."], ["Videojuego", "Un estudio te invita a aparecer en una promoción futbolística."], ["Bebida energética", "La propuesta incluye publicar varias fotos con el producto."], ["Marca local", "Una tienda de tu ciudad quiere patrocinar tus actividades comunitarias."], ["Colección retro", "Una empresa prepara una línea de camisetas inspirada en tu carrera."], ["Evento comercial", "Te piden dedicar una tarde a firmar autógrafos en un centro comercial."], ["Equipo tecnológico", "Una marca te ofrece dispositivos a cambio de una recomendación pública."], ["Campaña benéfica", "La empresa propone donar parte de los ingresos a una fundación."], ["Embajador internacional", "Una agencia te invita a representar una marca en otro país."]]},
+  {cat: "Selección", title: "Una oportunidad internacional", open: "El calendario de selecciones puede cambiar tu temporada.", choices: ["Prepararte para darlo todo", "Hablar con el seleccionador", "Priorizar la recuperación y ser sincero"], cases: [
+    ["Primera convocatoria", "Tu teléfono recibe una llamada inesperada del cuerpo técnico nacional."], ["Partido amistoso", "Te ofrecen participar en un amistoso lejos de casa."], ["Cambio de entrenador", "Un nuevo seleccionador quiere conocerte antes de tomar decisiones."], ["Puesto por cubrir", "Una baja abre una vacante en tu posición para el próximo torneo."], ["Concentración larga", "La convocatoria coincide con varias semanas lejos de tu club."], ["Compañero convocado", "Un compañero de equipo te pregunta cómo es el ambiente en la selección."], ["Debut aplazado", "Viajaste con el grupo, pero aún no has tenido minutos internacionales."], ["Capitanía juvenil", "El entrenador de una selección formativa te ofrece liderar al equipo."], ["Regreso cansado", "Vuelves de representar a tu país justo antes de un partido decisivo."], ["Clasificación complicada", "La selección necesita puntos y el próximo rival es uno de los favoritos."]]},
+  {cat: "Vida personal", title: "Fuera del campo también decides", open: "Tu entorno te plantea una decisión que no aparece en el plan de partido.", choices: ["Proteger tu tiempo personal", "Aprovechar la oportunidad", "Buscar una solución compartida"], cases: [
+    ["Estudios", "Una universidad te ofrece compatibilizar entrenamientos con una titulación."], ["Mudanza", "Tu familia valora trasladarse más cerca de la ciudad deportiva."], ["Fundación propia", "Un amigo propone crear una iniciativa social con tu nombre."], ["Descanso familiar", "Un compromiso familiar coincide con una actividad opcional del club."], ["Curso de idiomas", "El club ofrece clases para facilitar la adaptación al vestuario."], ["Proyecto de inversión", "Un conocido te presenta un negocio que requiere tiempo y dinero."], ["Vacaciones cortas", "Tienes dos días libres antes de volver a entrenar."], ["Entrevista larga", "Un documental quiere grabar en tu casa durante varias semanas."], ["Rutina digital", "Tu equipo de comunicación sugiere publicar más contenido personal."], ["Mentoría", "Un exjugador te ofrece acompañarte en la transición hacia el futuro."]]},
+];
+function playerWardrobeDecisionFx(theme, variant, option, failed) {
+  var n = 1 + (variant % 3), t = theme % 5;
+  if (option === 0) return {mor: n + (failed ? -1 : 1), prof: 1, coach: t === 0 ? 1 : 0};
+  if (option === 1) return failed ? {mor: -n, coach: -n, fame: -1} : {fame: n, fans: n, prof: 1};
+  return t === 1 ? {fit: n * 2, form: n} : (t === 2 ? {money: -n * 1000, prof: 1} : {coach: 1, form: n, mor: 1});
+}
+var PLAYER_DECISION_COUNT = 0;
+PLAYER_DECISION_THEMES.forEach(function (theme, ti) {
+  theme.cases.forEach(function (caseRow, vi) {
+    var index = PLAYER_DECISION_COUNT++;
+    EV({id: "extra_player_" + String(index + 1).padStart(3, "0"), tipo: "aleatoria", cat: theme.cat,
+      title: N_(theme.title + " · " + caseRow[0]), once: true, w: 0.22,
+      when: function (x) { return x.inSeason && !!x.p && (ti % 3 !== 0 || !x.p.inj); },
+      text: function () { return tr(theme.open + " " + caseRow[1]); },
+      opts: function () {
+        var chance = 0.48 + (vi % 4) * 0.07;
+        return [
+          {t: tr(theme.choices[0]), ok: {txt: tr("Tu postura se entiende y te deja margen para concentrarte en el fútbol."), fx: playerWardrobeDecisionFx(ti, vi, 0, false)}},
+          {t: tr(theme.choices[1]), p: chance,
+            ok: {txt: tr("La apuesta sale bien y el grupo reconoce tu iniciativa."), fx: playerWardrobeDecisionFx(ti, vi, 1, false)},
+            ko: {txt: tr("La decisión no tiene el efecto que esperabas y el ambiente se resiente."), fx: playerWardrobeDecisionFx(ti, vi, 1, true)}},
+          {t: tr(theme.choices[2]), ok: {txt: tr("Encuentras un punto medio y sigues adelante sin hacer ruido."), fx: playerWardrobeDecisionFx(ti, vi, 2, false)}}
+        ];
+      }
+    });
+  });
+});

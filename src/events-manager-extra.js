@@ -265,3 +265,88 @@ MEV({id: "mx_fichaje_idioma", tipo: "aleatoria", cat: "Vestuario", title: "Un fi
       ko: {txt: tr("Se entienden a medias. El jugador sigue desubicado."), fx: {pmor: -2}}},
     {t: tr("Dejar que se las apañe"), ok: {txt: tr("«Aquí se viene aprendido». El jugador se hunde un poco más."), fx: {pmor: -6}}}
   ]; }});
+
+MEV({id: "mx_minutos_cantera", tipo: "aleatoria", cat: "Cantera", title: "El juvenil pide una oportunidad", w: 1.2, cd: 3,
+  when: function (y) { return y.inSeason && y.m.sq.some(function (p) { return p.yth && p.age <= 20; }); },
+  target: function (y) { var a = y.m.sq.filter(function (p) { return p.yth && p.age <= 20 && !p.inj; }); return a.length ? a[0].id : null; },
+  text: function (y) { return tr("{name} siente que está preparado para el primer equipo y pide una oportunidad en la próxima convocatoria.", {name: plName(y.pl)}); },
+  opts: function (y) { return [
+    {t: tr("Darle minutos en el próximo partido"), p: 0.65,
+      ok: {txt: tr("El juvenil responde con personalidad y el vestuario celebra su debut."), fx: {pmor: 7, youth: 1, fans: 2}},
+      ko: {txt: tr("Los nervios le pueden y comete un error en una zona peligrosa."), fx: {pmor: -3, board: -1}}},
+    {t: tr("Diseñar un plan de cesión"), ok: {txt: tr("Encontrará minutos en otro equipo y volverá con experiencia."), fx: {pmor: 3, youth: 1, board: 1}}},
+    {t: tr("Pedirle que siga trabajando"), ok: {txt: tr("Acepta la decisión, aunque espera que no le hayas cerrado la puerta."), fx: {pmor: -2, chem: 1}}}
+  ]; }});
+
+MEV({id: "mx_objetivo_directiva", tipo: "aleatoria", cat: "Directiva", title: "La directiva cambia el objetivo", w: 0.8, cd: 4,
+  when: function (y) { return y.inSeason && S.bi >= 2; },
+  text: function () { return tr("Tras una buena racha, la directiva te pide públicamente que luches por un objetivo más ambicioso. La plantilla nota el aumento de presión."); },
+  opts: function () { return [
+    {t: tr("Aceptar el reto y marcar una meta clara"), p: 0.6,
+      ok: {txt: tr("El grupo se motiva y la directiva respalda tu liderazgo."), fx: {board: 4, sqMor: 3, fans: 2}},
+      ko: {txt: tr("El objetivo resulta demasiado exigente y crecen las dudas."), fx: {board: -3, sqMor: -3}}},
+    {t: tr("Rebajar la presión y hablar de proceso"), ok: {txt: tr("Proteges al vestuario, aunque el palco esperaba una promesa más contundente."), fx: {sqMor: 3, board: -1, chem: 1}}},
+    {t: tr("Pedir recursos antes de prometer resultados"), ok: {txt: tr("La directiva valora que pongas condiciones concretas sobre la mesa."), fx: {bud: mxBud(y, 0.02, 1e5), board: 1}}}
+  ]; }});
+
+MEV({id: "mx_analisis_rival", tipo: "aleatoria", cat: "Táctica", title: "Filtración del análisis táctico", w: 0.9, cd: 3,
+  when: function (y) { return y.inSeason && S.bi >= 1; },
+  text: function () { return tr("Un medio publica parte del plan táctico que preparaste para el próximo rival. El analista ofrece rehacerlo, pero queda poco tiempo."); },
+  opts: function () { return [
+    {t: tr("Cambiar el plan a última hora"), p: 0.65,
+      ok: {txt: tr("El rival llega preparado para otra cosa y vuestro ajuste funciona."), fx: {buff: {v: 0.8, b: 1, n: tr("Plan alternativo")}, rep: 2}},
+      ko: {txt: tr("Los cambios confunden a varios titulares."), fx: {chem: -3, sqMor: -2}}},
+    {t: tr("Mantener el plan y confiar en la ejecución"), ok: {txt: tr("El equipo conoce el sistema y no se deja distraer por la filtración."), fx: {chem: 2, buff: {v: 0.35, b: 1, n: tr("Convicción")}}}},
+    {t: tr("Investigar quién lo filtró"), ok: {txt: tr("El vestuario se compromete a cuidar mejor la información interna."), fx: {chem: 1, board: 1, fans: -1}}}
+  ]; }});
+
+/* 100 decisiones nuevas para la carrera de entrenador/a, registradas como MEV del juego. */
+var MANAGER_DECISION_THEMES = [
+  {cat: "Entrenamiento", title: "Ajustar la semana de trabajo", open: "El cuerpo técnico te presenta el plan de sesiones.", choices: ["Concentrar el trabajo en una prioridad", "Doblar la carga de preparación", "Dejar que cada jugador adapte la sesión"], cases: [
+    ["Salida desde atrás", "Los centrales piden practicar la salida ante la presión alta."], ["Transiciones", "El análisis señala que el equipo tarda demasiado en replegarse."], ["Finalización", "Los delanteros acumulan ocasiones claras sin convertirlas."], ["Balón parado", "El equipo ha encajado varios goles en jugadas de estrategia."], ["Presión coordinada", "Los atacantes saltan a presionar, pero el resto no siempre les acompaña."], ["Centros laterales", "Los extremos quieren ensayar centros con distintas trayectorias."], ["Defensa del área", "El portero pide mejorar las marcas en los centros laterales."], ["Juego de posición", "Los mediocampistas creen que pueden ofrecer mejores líneas de pase."], ["Velocidad de reacción", "El preparador físico observa una bajada de intensidad al final de los partidos."], ["Penaltis", "Una eliminatoria próxima podría decidirse desde los once metros."]]},
+  {cat: "Alineación", title: "Gestionar los minutos", open: "El calendario obliga a tomar decisiones sobre la convocatoria.", choices: ["Rotar con un plan claro", "Mantener a los titulares", "Dar una oportunidad a los suplentes"], cases: [
+    ["Tres partidos en siete días", "La semana incluye liga y dos compromisos de copa."], ["Veteranos cargados", "Varios titulares superan los treinta años y acumulan muchos minutos."], ["Un regreso esperado", "Un jugador importante acaba de recibir el alta médica."], ["El portero suplente", "El segundo guardameta pregunta si tendrá minutos esta semana."], ["Una final cercana", "El equipo afronta una final dentro de pocos días."], ["Viaje continental", "El desplazamiento europeo implica volver de madrugada."], ["Jóvenes en forma", "Dos canteranos han destacado en los entrenamientos recientes."], ["Calendario despejado", "Por primera vez en semanas hay tiempo para repetir el mismo once."], ["Un jugador sancionado", "La suspensión de un titular obliga a reorganizar varias posiciones."], ["Derbi de máxima presión", "La afición espera que alinees a todos tus nombres más reconocibles."]]},
+  {cat: "Cantera", title: "Una decisión para la academia", open: "El director de cantera solicita tu opinión antes de cerrar la semana.", choices: ["Apostar por el desarrollo técnico", "Dar minutos inmediatos al talento", "Mantener el plan gradual"], cases: [
+    ["Central zurdo", "Un central zurdo de la cantera destaca por su salida de balón."], ["Portero juvenil", "El guardameta sub-19 acaba de detener dos penaltis en un torneo."], ["Extremo veloz", "Un extremo joven supera a los defensas en cada entrenamiento."], ["Mediocentro creativo", "El filial tiene un organizador que pide entrenar con el primer equipo."], ["Joven goleadora", "Una delantera juvenil ha marcado en cinco partidos consecutivos."], ["Instalaciones", "La residencia necesita mejoras para retener a las promesas."], ["Ojeador local", "Un ojeador propone ampliar la búsqueda a clubes pequeños de la región."], ["Torneo internacional", "La cantera recibe una invitación para competir fuera del país."], ["Mentoría", "Un veterano se ofrece a acompañar a un joven durante la temporada."], ["Equipo filial", "El responsable del filial pide compartir un preparador físico."]]},
+  {cat: "Táctica", title: "Preparar una respuesta táctica", open: "El analista presenta un problema que puede cambiar el próximo partido.", choices: ["Ajustar el plan desde el inicio", "Esperar y reaccionar durante el partido", "Confiar en el sistema habitual"], cases: [
+    ["Bloque bajo", "El próximo rival suele defender muy cerca de su área."], ["Presión alta", "El rival presiona a los centrales desde el saque de puerta."], ["Carrileros ofensivos", "El equipo contrario genera peligro con sus laterales largos."], ["Delantero referencia", "Un ariete dominante gana casi todos los duelos aéreos."], ["Falso nueve", "El rival utiliza un delantero que abandona continuamente el área."], ["Transición rápida", "El oponente busca contraatacar con pases directos."], ["Doble pivote", "El mediocampo rival acumula jugadores por el centro."], ["Balón parado defensivo", "El rival ha marcado muchos goles de córner esta temporada."], ["Extremos a pierna cambiada", "Los dos extremos rivales buscan recortar hacia dentro."], ["Partido de vuelta", "La eliminatoria exige gestionar el marcador de la ida."]]},
+  {cat: "Directiva", title: "Una petición de la dirección", open: "La directiva te convoca para conversar sobre las prioridades del club.", choices: ["Presentar un plan con objetivos medibles", "Pedir más margen y proteger al grupo", "Negociar recursos concretos"], cases: [
+    ["Objetivo revisado", "La directiva eleva la meta después de una buena racha."], ["Presupuesto congelado", "Finanzas comunica que no habrá fondos adicionales este mes."], ["Reunión de mitad de temporada", "El presidente quiere revisar el proyecto antes de lo previsto."], ["Obligación de cantera", "La propiedad quiere ver más jugadores formados en casa."], ["Gira comercial", "El club propone una gira que coincide con la preparación física."], ["Renovación pendiente", "La junta te pide una recomendación sobre un jugador veterano."], ["Nuevo patrocinador", "Un acuerdo comercial permitiría reforzar el presupuesto del equipo."], ["Rumores de venta", "La posible venta del club inquieta a los empleados."], ["Resultados económicos", "El director financiero pide reducir gastos de viaje y concentración."], ["Estadio en obras", "Las reformas obligan a jugar varios partidos lejos de casa."]]},
+  {cat: "Prensa", title: "Una rueda de prensa delicada", open: "Los medios buscan una frase que resuma el momento del equipo.", choices: ["Hablar con franqueza", "Defender públicamente al vestuario", "No entrar en polémicas"], cases: [
+    ["Error arbitral", "La última derrota estuvo marcada por una decisión discutida."], ["Fichaje criticado", "Un fichaje caro todavía no ha encontrado su mejor nivel."], ["Racha negativa", "Los periodistas preguntan si has perdido el control del equipo."], ["Rival provocador", "El entrenador rival cuestiona tus decisiones antes del derbi."], ["Promesa de título", "Un titular afirma que garantizaste ganar la competición."], ["Cambio del capitán", "Te preguntan por qué el capitán empezó el partido en el banquillo."], ["Juvenil debutante", "La prensa pide saber si el joven seguirá teniendo oportunidades."], ["Táctica filtrada", "Un medio publica una parte de tu plan para el siguiente encuentro."], ["Mercado de fichajes", "Los reporteros quieren nombres antes de que el club cierre una operación."], ["Afición impaciente", "Los seguidores han pedido explicaciones tras el último resultado."]]},
+  {cat: "Mercado", title: "El mercado ofrece alternativas", open: "El director deportivo comparte una oportunidad que exige una respuesta rápida.", choices: ["Apostar por el perfil recomendado", "Buscar una opción de menor coste", "Esperar antes de comprometer el presupuesto"], cases: [
+    ["Delantero cedible", "Un delantero joven podría llegar cedido con opción de compra."], ["Contrato finalizado", "Un mediocampista experimentado quedará libre al acabar el mes."], ["Interés por un titular", "Un club extranjero pregunta por uno de tus jugadores más importantes."], ["Mercado de invierno", "Una lesión abre una necesidad inesperada en la plantilla."], ["Jugador polivalente", "Un agente ofrece un futbolista capaz de cubrir tres posiciones."], ["Portero prometedor", "El ojeador recomienda un guardameta de una liga menor."], ["Cláusula asequible", "Un defensa tiene una cláusula que se ajusta al presupuesto actual."], ["Salario elevado", "Un goleador acepta negociar, aunque pide un sueldo alto."], ["Renovación urgente", "Un jugador clave entra en su último año de contrato."], ["Oferta por un suplente", "Una propuesta permite liberar salario y abrir espacio para un juvenil."]]},
+  {cat: "Vestuario", title: "Mantener unido al grupo", open: "El responsable de vestuario detecta un asunto que conviene resolver pronto.", choices: ["Reunir al grupo y escuchar", "Hablar directamente con los implicados", "Dejar que los líderes lo gestionen"], cases: [
+    ["Capitanes divididos", "Dos capitanes discrepan sobre cómo responder a las críticas."], ["Recién llegado", "Un fichaje nuevo todavía no ha encontrado su lugar en el grupo."], ["Suplente descontento", "Un jugador importante ha pedido explicaciones por sus pocos minutos."], ["Celebración excesiva", "Algunos jugadores salieron hasta tarde después de una victoria."], ["Rumor de filtración", "Alguien parece estar compartiendo información interna con la prensa."], ["Veterano y juvenil", "Un veterano se queja de que un joven no respeta las normas del equipo."], ["Grupo de idiomas", "Los jugadores internacionales se agrupan y cuesta integrar a todos."], ["Tensión por el brazalete", "Varios futbolistas creen que deberían ser capitanes."], ["Bono pendiente", "La plantilla pregunta por una prima que todavía no ha sido abonada."], ["Diferencias de entrenamiento", "Un grupo considera que las cargas no son iguales para todos."]]},
+  {cat: "Afición", title: "Responder a la grada", open: "El club pide una idea para acercar el equipo a sus seguidores.", choices: ["Organizar un encuentro abierto", "Enviar un mensaje institucional", "Invitar a representantes de la afición"], cases: [
+    ["Entrenamiento abierto", "Las familias quieren ver una sesión antes del próximo partido en casa."], ["Viaje visitante", "Un grupo de seguidores ha organizado un desplazamiento largo."], ["Club de barrio", "Una escuela local pide que el equipo visite sus instalaciones."], ["Protesta por precios", "Los aficionados cuestionan el precio de las entradas para la copa."], ["Homenaje a un socio", "La grada quiere recordar a un seguidor histórico del club."], ["Camiseta especial", "Los seguidores proponen un diseño para una campaña solidaria."], ["Derrota dolorosa", "La afición espera una explicación después de una eliminación inesperada."], ["Fiesta del club", "El ayuntamiento ofrece una plaza para celebrar el aniversario del equipo."], ["Redes del club", "El departamento de comunicación propone una sesión de preguntas abierta."], ["Afición visitante", "Un grupo rival solicita compartir una iniciativa contra la violencia."]]},
+  {cat: "Preparación", title: "Planificar la concentración", open: "El calendario y el estado anímico del equipo obligan a elegir cómo prepararse.", choices: ["Mantener una rutina estricta", "Cambiar el entorno para despejar la mente", "Dejar que los jugadores participen en el plan"], cases: [
+    ["Derbi fuera de casa", "El partido más tenso del calendario llega después de varios viajes."], ["Final continental", "El equipo debe desplazarse antes de una final de máxima exigencia."], ["Semana sin partidos", "Hay varios días libres que podrían dedicarse a fortalecer automatismos."], ["Clima extremo", "El rival juega en una ciudad con calor o frío poco habituales."], ["Hotel ruidoso", "La concentración anterior estuvo marcada por interrupciones nocturnas."], ["Cambio de campo", "Las obras obligan a entrenar en una instalación diferente."], ["Dos ciudades", "El calendario permite elegir entre viajar antes o hacerlo el mismo día."], ["Partido a mediodía", "El horario obliga a modificar los hábitos de sueño y alimentación."], ["Descanso mental", "El grupo pide una tarde libre tras un mes de mucha presión."], ["Preparación con vídeo", "El analista quiere sustituir parte del entrenamiento por una sesión de vídeo."]]},
+];
+function managerExpansionFx(theme, variant, option, failed) {
+  var n = 1 + (variant % 3), t = theme % 5;
+  if (option === 0) return {chem: n, sqMor: n + 1};
+  if (option === 1) return failed ? {board: -n, sqMor: -n} : {rep: 1, fans: n, board: n};
+  return t === 0 ? {sfit: n * 2, chem: 1} : (t === 1 ? {bud: -n * 25000, youth: 1} : {chem: n, board: 1});
+}
+var MANAGER_DECISION_COUNT = 0;
+MANAGER_DECISION_THEMES.forEach(function (theme, ti) {
+  theme.cases.forEach(function (caseRow, vi) {
+    var index = MANAGER_DECISION_COUNT++;
+    MEV({id: "extra_manager_" + String(index + 1).padStart(3, "0"), tipo: "aleatoria", cat: theme.cat,
+      title: N_(theme.title + " · " + caseRow[0]), once: true, w: 0.22,
+      when: function (y) { return y.inSeason && y.m && y.m.club >= 0 && (ti % 4 !== 0 || y.m.chem < 100); },
+      text: function () { return tr(theme.open + " " + caseRow[1]); },
+      opts: function () {
+        var chance = 0.45 + (vi % 4) * 0.07;
+        return [
+          {t: tr(theme.choices[0]), ok: {txt: tr("El vestuario entiende el plan y acepta la decisión."), fx: managerExpansionFx(ti, vi, 0, false)}},
+          {t: tr(theme.choices[1]), p: chance,
+            ok: {txt: tr("La apuesta funciona y el club nota un cambio positivo."), fx: managerExpansionFx(ti, vi, 1, false)},
+            ko: {txt: tr("La decisión genera dudas y tendrás que recuperar la confianza."), fx: managerExpansionFx(ti, vi, 1, true)}},
+          {t: tr(theme.choices[2]), ok: {txt: tr("Encuentras una salida práctica sin romper la armonía del grupo."), fx: managerExpansionFx(ti, vi, 2, false)}}
+        ];
+      }
+    });
+  });
+});

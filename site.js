@@ -30,6 +30,34 @@
   /* ---------- idioma de la web ---------- */
   var ll = document.querySelectorAll("[data-weblang]");
   for (var li = 0; li < ll.length; li++) ll[li].addEventListener("click", function () { try { localStorage.setItem("camino.webpick", this.getAttribute("data-weblang")); } catch (e) {} });
+  /* El idioma de la página decide qué tráiler se carga: castellano en ES, inglés en el resto. */
+  var trailer = document.querySelector("[data-game-trailer]");
+  if (trailer) {
+    var isSpanish = document.documentElement.lang.toLowerCase().slice(0, 2) === "es";
+    var trailerId = isSpanish ? "o4JXeEnTkcA" : "BLAzRpcs0Z0";
+    var trailerSrc = trailer.getAttribute(isSpanish ? "data-trailer-es" : "data-trailer-en");
+    if (trailer.getAttribute("src") !== trailerSrc) trailer.src = trailerSrc;
+    trailer.title = isSpanish ? "Tráiler oficial de Camino a la Leyenda en castellano" : "Camino a la Leyenda official game trailer in English";
+    var trailerWatch = document.querySelector("[data-trailer-watch]");
+    if (trailerWatch) trailerWatch.href = "https://www.youtube.com/watch?v=" + trailerId;
+  }
+  /* Entrada suave de las secciones al recorrer la página; no afecta a quien reduce movimiento. */
+  if (!reduce && "IntersectionObserver" in window) {
+    var revealItems = document.querySelectorAll(".trailer-copy, .trailer-frame, .modes li, .shots figure, .feats > div");
+    if (revealItems.length) {
+      document.documentElement.classList.add("has-reveal");
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add("is-visible"); revealObserver.unobserve(entry.target); }
+        });
+      }, {threshold: 0.12, rootMargin: "0px 0px -30px 0px"});
+      for (var ri = 0; ri < revealItems.length; ri++) {
+        revealItems[ri].classList.add("reveal-item");
+        revealItems[ri].style.transitionDelay = Math.min(ri % 4, 3) * 65 + "ms";
+        revealObserver.observe(revealItems[ri]);
+      }
+    }
+  }
   document.addEventListener("click", function (ev) { var d = document.querySelectorAll("details.lang[open]"); for (var i = 0; i < d.length; i++) if (!d[i].contains(ev.target)) d[i].open = false; });
   try {
     var root = document.documentElement.lang === "es" && document.querySelector("link[rel=alternate][hreflang=en]") && /\/(index\.html)?$/.test(location.pathname) && document.getElementById("pitch");
@@ -75,6 +103,11 @@
   var sc = document.getElementById("sc"), say = document.getElementById("say");
   var TT = window.T || {kick: "Empieza el partido.", again: "Empieza otro partido.", shot: "Tiro de {n}…", try: "Lo intenta {n}…", goal: "¡Gol de {n}! {t} celebra.", out: "Fuera. Saca de puerta el portero.", rec: "Recupera {n}.", a: "Ribera", b: "Montaña"};
   function tt(k, p) { var v = TT[k] || ""; for (var x in p || {}) v = v.split("{" + x + "}").join(p[x]); return v; }
+  function celebrateScore() {
+    if (!sc) return;
+    sc.classList.remove("scored"); void sc.offsetWidth; sc.classList.add("scored");
+    window.setTimeout(function () { if (sc) sc.classList.remove("scored"); }, 700);
+  }
 
   for (var s = 0; s < 2; s++) for (var i = 0; i < 11; i++) {
     var x = s ? W - F[i][0] : F[i][0], y = s ? H - F[i][1] : F[i][1];
@@ -129,6 +162,7 @@
       var s0 = shot.s, who = shot.who; shot = null;
       if (Math.abs(ball.ty - 34) < 3.66 && Math.random() < 0.85) {
         goals[s0]++; if (sc) sc.textContent = goals[0] + "-" + goals[1];
+        celebrateScore();
         burstGoal(s0 === 0 ? W : 0);
         line(tt("goal", {n: who, t: s0 ? TT.b : TT.a}));
       } else line(tt("out"));
@@ -143,7 +177,11 @@
   function step(dt) {
     clock += dt;
     if (clock > minute * 1.25 && minute < 90) minute++;
-    if (minute >= 90 && clock > minute * 1.25 + 4) { minute = 1; clock = 0; goals = [0, 0]; if (sc) sc.textContent = "0-0"; line(tt("again")); }
+    if (minute >= 90 && clock > minute * 1.25 + 4) {
+      minute = 1; clock = 0; goals = [0, 0];
+      if (sc) { sc.textContent = "0-0"; sc.classList.remove("scored"); }
+      line(tt("again"));
+    }
     if (pause > 0) pause -= dt;
     if (holder < 0) {
       ball.t += dt; var k = Math.min(1, ball.t / ball.d), e = k * (2 - k);
@@ -206,6 +244,16 @@
     });
     ctx2d.fillStyle = "rgba(0,0,0,.3)"; ctx2d.beginPath(); ctx2d.arc(ball.x * K + 2 + ball.z * 2, ball.y * K + 3 + ball.z * 2, 0.6 * K, 0, 6.283); ctx2d.fill();
     ctx2d.fillStyle = "#fff"; ctx2d.beginPath(); ctx2d.arc(ball.x * K, (ball.y - ball.z * 0.35) * K, (0.62 + ball.z * 0.05) * K, 0, 6.283); ctx2d.fill();
+    // Misma celebración de gol en las dos vistas: confeti compartido del simulador.
+    if (particles.length) {
+      ctx2d.save(); ctx2d.globalCompositeOperation = "lighter";
+      particles.forEach(function (pt) {
+        var alpha = Math.max(0, Math.min(1, pt.life / 1.8)), size = (0.35 + pt.y * 0.16) * K;
+        ctx2d.fillStyle = "rgba(" + Math.round(pt.c[0] * 255) + "," + Math.round(pt.c[1] * 255) + "," + Math.round(pt.c[2] * 255) + "," + alpha.toFixed(2) + ")";
+        ctx2d.fillRect(pt.x * K - size / 2, (pt.z - pt.y * 0.35) * K - size / 2, size, size);
+      });
+      ctx2d.restore();
+    }
   }
 
   /* ---------- RENDERER 3D (WebGL 1 puro sin dependencias) ---------- */
@@ -453,6 +501,7 @@
   var modePills = document.querySelectorAll("[data-mode]");
   var camBar = document.getElementById("cam-bar");
   function setMatchMode(want3d) {
+    var previousMode = mode3d;
     mode3d = want3d && p3dAvailable;
     if (cv3d) cv3d.style.display = mode3d ? "block" : "none";
     if (cv2d) cv2d.style.display = mode3d ? "none" : "block";
@@ -460,6 +509,11 @@
     for (var m = 0; m < modePills.length; m++) {
       var is3 = modePills[m].getAttribute("data-mode") === "3d";
       modePills[m].classList.toggle("active", is3 === mode3d);
+    }
+    // Pintar inmediatamente la vista seleccionada, manteniendo el partido compartido entre ambos modos.
+    if (previousMode !== mode3d) {
+      if (mode3d && p3dAvailable) draw3D();
+      else draw2D();
     }
   }
   for (var mpi = 0; mpi < modePills.length; mpi++) {
@@ -638,11 +692,12 @@
   }
 
   /* ---------- LOOP PRINCIPAL ---------- */
-  var last = 0, visible = true, run = !reduce;
+  // El partido debe seguir jugándose aunque se oculte uno de los canvases o se prefiera menos movimiento.
+  var last = 0, run = true;
   function frame(ts) {
     if (!run) return;
     var dt = Math.min(0.05, ((ts - last) / 1000) || 0); last = ts;
-    if (visible && !document.hidden) {
+    if (!document.hidden) {
       step(dt);
       if (mode3d && p3dAvailable) draw3D();
       else draw2D();
@@ -653,11 +708,5 @@
   for (var w = 0; w < 120; w++) step(1 / 30);
   if (p3dAvailable) draw3D(); else draw2D();
 
-  if (run) {
-    var obsTarget = cv3d || cv2d;
-    if ("IntersectionObserver" in window && obsTarget) {
-      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(obsTarget);
-    }
-    requestAnimationFrame(function (ts) { last = ts; frame(ts); });
-  }
+  if (run) requestAnimationFrame(function (ts) { last = ts; frame(ts); });
 })();
