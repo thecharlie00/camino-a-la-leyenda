@@ -4,11 +4,12 @@
 android/signing.env
 android-studio/signing.properties
 
-# --- Salidas de compilación (se generan con build.py y los scripts de Android) ---
+# --- Salidas de compilación (Vite y el empaquetado Android) ---
 dist/
+web-output/
 android/build/
 android/build-aab/
-android/assets/index.html
+android/assets/
 android-studio/.gradle/
 android-studio/build/
 android-studio/app/build/

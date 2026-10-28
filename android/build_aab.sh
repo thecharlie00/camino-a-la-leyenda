@@ -1,22 +1,75 @@
-#!/bin/bash
-. "$(dirname "$0")/signing.env" 2>/dev/null; : "${CAMINO_KS_PASS:?Falta la contraseña: crea android/signing.env con CAMINO_KS_PASS=...}"
-# Compila el Android App Bundle (.aab) firmado con la clave de subida, a partir de dist/index.html
-set -e
-cd "$(dirname "$0")"
-# Rutas configurables (en GitHub Actions las pone el workflow; aquí, los valores locales de siempre)
-SDK=${ANDROID_JAR:-/usr/lib/android-sdk/platforms/android-23/android.jar}
-BT=${BUNDLETOOL_JAR:-../tools/bt/bundletool.jar}
-AAPT2=${AAPT2:-aapt2}
-KEYSTORE=${CAMINO_KEYSTORE:-camino.keystore}
-rm -rf build-aab && mkdir -p build-aab/gen build-aab/obj build-aab/module assets
-cp ../dist/index-noads.html assets/index.html
-$AAPT2 compile --dir res -o build-aab/res.zip
-$AAPT2 link --proto-format -o build-aab/base.apk -I "$SDK" --manifest AndroidManifest.xml -R build-aab/res.zip -A assets --auto-add-overlay --java build-aab/gen
-javac -nowarn -source 8 -target 8 -bootclasspath "$SDK" -classpath "$SDK" -d build-aab/obj build-aab/gen/com/caminoleyenda/app/R.java src/com/caminoleyenda/app/MainActivity.java src/com/caminoleyenda/app/Remind.java 2>build-aab/javac.log || { cat build-aab/javac.log; exit 1; }
-grep -v warning build-aab/javac.log | grep -v "^Note:" || true
-if [ -n "$D8" ]; then "$D8" --min-api 24 --lib "$SDK" --output build-aab $(find build-aab/obj -name '*.class'); else dalvik-exchange --dex --min-sdk-version=24 --output=build-aab/classes.dex build-aab/obj; fi
-cd build-aab/module && unzip -q ../base.apk && mkdir -p manifest dex && mv AndroidManifest.xml manifest/ && cp ../classes.dex dex/ && zip -q -r ../base.zip . && cd ../..
-java -jar "$BT" build-bundle --modules=build-aab/base.zip --output=build-aab/app.aab --overwrite
-jarsigner -sigalg SHA256withRSA -digestalg SHA-256 -keystore "$KEYSTORE" -storepass $CAMINO_KS_PASS -keypass $CAMINO_KS_PASS -signedjar ../dist/CaminoALaLeyenda.aab build-aab/app.aab camino >/dev/null
-jarsigner -verify ../dist/CaminoALaLeyenda.aab | tail -1
-echo "AAB: $(du -h ../dist/CaminoALaLeyenda.aab | cut -f1)"
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT/android"
+
+: "${ANDROID_JAR:?Set ANDROID_JAR to the Android platform android.jar}"
+: "${AAPT2:?Set AAPT2 to the Android aapt2 executable}"
+: "${D8:?Set D8 to the Android d8 executable}"
+: "${BUNDLETOOL_JAR:?Set BUNDLETOOL_JAR to bundletool-all.jar}"
+: "${CAMINO_KS_PASS:?Missing CAMINO_KS_PASS}"
+KEYSTORE="${CAMINO_KEYSTORE:-$ROOT/android/camino.keystore}"
+KEY_ALIAS="${CAMINO_KEY_ALIAS:-camino}"
+VERSION_CODE="${VERSION_CODE:-$(sed -n 's/.*android:versionCode="\([0-9]*\)".*/\1/p' AndroidManifest.xml)}"
+VERSION_NAME="${VERSION_NAME:-$(sed -n 's/.*android:versionName="\([^"]*\)".*/\1/p' AndroidManifest.xml)}"
+
+if [[ ! -s "$KEYSTORE" ]]; then
+  echo "Keystore not found or empty: $KEYSTORE" >&2
+  exit 1
+fi
+if [[ ! -f "$ROOT/dist/jugar/juego.html" ]]; then
+  echo "Game entry point missing; run npm run build first." >&2
+  exit 1
+fi
+
+rm -rf build-aab assets
+mkdir -p build-aab/{classes,dex,module} assets "$ROOT/dist"
+cp -a "$ROOT/dist/." assets/
+
+# Create an Android proto-APK to supply the base module manifest and packaged assets.
+"$AAPT2" link \
+  --proto-format \
+  --min-sdk-version 24 \
+  --target-sdk-version 35 \
+  --version-code "$VERSION_CODE" \
+  --version-name "$VERSION_NAME" \
+  -I "$ANDROID_JAR" \
+  --manifest AndroidManifest.xml \
+  -A assets \
+  -o build-aab/base.apk
+
+javac -encoding UTF-8 -source 8 -target 8 \
+  -bootclasspath "$ANDROID_JAR" \
+  -classpath "$ANDROID_JAR" \
+  -d build-aab/classes \
+  src/com/caminoleyenda/app/MainActivity.java
+
+mapfile -d '' CLASS_FILES < <(find build-aab/classes -name '*.class' -print0)
+"$D8" --min-api 24 --lib "$ANDROID_JAR" --output build-aab/dex "${CLASS_FILES[@]}"
+
+unzip -q build-aab/base.apk -d build-aab/module
+mkdir -p build-aab/module/manifest build-aab/module/dex
+mv build-aab/module/AndroidManifest.xml build-aab/module/manifest/AndroidManifest.xml
+cp build-aab/dex/classes.dex build-aab/module/dex/classes.dex
+(
+  cd build-aab/module
+  zip -q -r ../base.zip .
+)
+
+java -jar "$BUNDLETOOL_JAR" build-bundle \
+  --modules=build-aab/base.zip \
+  --output=build-aab/app-unsigned.aab \
+  --overwrite
+jarsigner \
+  -sigalg SHA256withRSA \
+  -digestalg SHA-256 \
+  -keystore "$KEYSTORE" \
+  -storepass "$CAMINO_KS_PASS" \
+  -keypass "$CAMINO_KS_PASS" \
+  -signedjar "$ROOT/dist/CaminoALaLeyenda.aab" \
+  build-aab/app-unsigned.aab \
+  "$KEY_ALIAS"
+jarsigner -verify "$ROOT/dist/CaminoALaLeyenda.aab" >/dev/null
+
+echo "AAB firmado: $ROOT/dist/CaminoALaLeyenda.aab ($(du -h "$ROOT/dist/CaminoALaLeyenda.aab" | cut -f1))"
