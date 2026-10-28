@@ -14,7 +14,7 @@ for (const file of [gamePage, webPage, siteRuntime, translatedPage]) {
 }
 
 const html = readFileSync(gamePage, 'utf8');
-assert.match(html, /var BUILD = \{v: "5\.8", code: 58,/, 'Game bundle must match app version 5.8 (58)');
+assert.match(html, /var BUILD = \{v: "5\.9", code: 59,/, 'Game bundle must match app version 5.9 (59)');
 const packMatch = html.match(/var P3D_ASSET_PACK = (\{[^;]+\});/);
 assert.ok(packMatch, 'Embedded 3D model pack is missing');
 const modelPack = JSON.parse(packMatch[1]);
@@ -54,4 +54,4 @@ assert.ok(existsSync(assets), 'Vite assets directory is missing');
 assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No website CSS bundle was emitted');
 assert.ok(statSync(gamePage).size > 1_000_000, 'Self-contained 3D game bundle is unexpectedly small');
 
-console.log(`Build smoke test passed: v5.8 (58), music, 3D players, 3D pet, ${Math.round(statSync(gamePage).size / 1024)} KB`);
+console.log(`Build smoke test passed: v5.9 (59), music, 3D players, 3D pet, ${Math.round(statSync(gamePage).size / 1024)} KB`);

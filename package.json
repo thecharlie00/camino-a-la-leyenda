@@ -1,7 +1,7 @@
 {
   "name": "camino-a-la-leyenda",
   "private": true,
-  "version": "5.8.0",
+  "version": "5.9.0",
   "type": "module",
   "scripts": {
     "dev": "python3 build_legacy_game.py && vite --host 0.0.0.0 --port 3000",

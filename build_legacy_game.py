@@ -123,7 +123,7 @@ full = f"""<!doctype html>
 </html>
 """
 
-# Publish the complete 5.7 game source with the current 5.8/58 build metadata.
+# Publish the complete 5.7 game source with the current 5.9/59 build metadata.
 # The web and Android targets use the same self-contained document: CSS, music,
 # 3D models, match engine, and the voxel pet world are embedded in this file.
 for old, new in (
@@ -139,7 +139,7 @@ legacy_page = ROOT / "dist" / "jugar" / "juego.html"
 legacy_page.parent.mkdir(parents=True, exist_ok=True)
 legacy_page.write_text(full, encoding="utf-8")
 
-# Do not ship the stale v5.2 bundle from public/; the generated v5.8/58 game
+# Do not ship the stale v5.2 bundle from public/; the generated v5.9/59 game
 # is now the only engine used by the Web page and Android WebView.
 stale_bundle = ROOT / "dist" / "camino-engine.js"
 if stale_bundle.exists():
