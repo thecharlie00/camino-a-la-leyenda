@@ -93,9 +93,7 @@ export const GameContainer: React.FC<GameContainerProps> = ({ lang }) => {
       if (!existingScript) {
         const script = document.createElement('script');
         script.id = 'camino-engine-script';
-        // The game page lives under /jugar/ (and android_asset/jugar/ in the AAB).
-        // Resolve the legacy engine relative to that page so both hosting modes work.
-        script.src = new URL('../camino-engine.js', document.baseURI).toString();
+        script.src = '/camino-engine.js';
         script.async = false;
         script.onload = () => {
           setTimeout(bootGame, 50);
