@@ -14,13 +14,13 @@ for (const file of [gamePage, webPage, engine, siteRuntime, translatedPage]) {
 }
 
 const html = readFileSync(gamePage, 'utf8');
-assert.match(html, /<div id="root"><\/div>/, 'Game page must mount the React app');
-assert.match(html, /<script[^>]+type="module"[^>]+src=/, 'Game page must load the Vite app bundle');
+assert.match(html, /<div id="app"><\/div>/, 'Game page must mount the original game UI');
+assert.match(html, /<script[^>]+src="\.\.\/camino-engine\.js"/, 'Game page must load the same engine as mobile');
+assert.match(html, /stylesheet/, 'Game page must load the original game styles');
 assert.match(readFileSync(engine, 'utf8'), /__camBoot/, 'Legacy game engine must be included');
 
 const assets = join(output, 'assets');
 assert.ok(existsSync(assets), 'Vite assets directory is missing');
-assert.ok(readdirSync(assets).some((name) => name.endsWith('.js')), 'No JavaScript bundle was emitted');
 assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No CSS bundle was emitted');
 assert.ok(statSync(gamePage).size > 100, 'Game HTML output is unexpectedly small');
 
