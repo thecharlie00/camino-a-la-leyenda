@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 
 const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
 const manifest = read('../android/AndroidManifest.xml');
+const packageJson = JSON.parse(read('../package.json'));
+const packageLock = JSON.parse(read('../package-lock.json'));
 const activity = read('../android/src/com/caminoleyenda/app/MainActivity.java');
 const aabBuilder = read('../android/build_aab.sh');
 const apkBuilder = read('../android/build_apk.sh');
@@ -11,8 +13,11 @@ const gameBuilder = read('../build_legacy_game.py');
 const gameCss = read('../legacy-game/src/style.css');
 
 assert.match(manifest, /android:minSdkVersion="24"\s+android:targetSdkVersion="36"/);
-assert.match(manifest, /android:versionCode="58"/);
-assert.match(manifest, /android:versionName="5\.8"/);
+assert.match(manifest, /android:versionCode="59"/);
+assert.match(manifest, /android:versionName="5\.9"/);
+assert.equal(packageJson.version, '5.9.0');
+assert.equal(packageLock.version, packageJson.version);
+assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
 assert.match(manifest, /android:enableOnBackInvokedCallback="true"/);
 assert.doesNotMatch(manifest, /android:screenOrientation=/, 'Android 16 large-screen windows must not be locked to portrait');
