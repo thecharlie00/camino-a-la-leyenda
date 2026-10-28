@@ -10005,4 +10005,6 @@ I18N.de = {"% de paradas":"Paradenquote",
 "Sigue hablando, {target}. En el campo se verá quién tiene razón. 💥":"Red ruhig weiter, {target}. Auf dem Platz zeigt sich, wer recht hat. 💥",
 "Tirar de sarcasmo":"Sarkasmus einsetzen",
 "Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"Was für ein unerwarteter Kommentar. Ich lege ihn zu den Kritiken, die mir wirklich den Schlaf rauben. 😏",
-"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Im Ernst, {target}? Und ich dachte, mein Sarkasmus-Kontingent für heute wäre schon aufgebraucht. 😏"};
+"¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Im Ernst, {target}? Und ich dachte, mein Sarkasmus-Kontingent für heute wäre schon aufgebraucht. 😏",
+"Puedes responder una vez por bloque.":"Du kannst einmal pro Abschnitt antworten.",
+"Ya respondiste en este bloque; podrás volver a hacerlo en el siguiente.":"Du hast in diesem Abschnitt bereits geantwortet; im nächsten kannst du wieder antworten."};

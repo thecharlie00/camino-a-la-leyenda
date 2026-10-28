@@ -1978,7 +1978,8 @@
   function socComposeHTML() {
     var sheet = UI.sheet || {}, reply = sheet.reply || null, pick = sheet.pick || SOC_CUSTOM_OPTIONS[0].k;
     var option = SOC_CUSTOM_OPTIONS.filter(function (x) { return x.k === pick; })[0] || SOC_CUSTOM_OPTIONS[0];
-    var fx = socCustomFx(option.k) || {}, periodUsed = socInit().customPeriod === socCustomPeriod();
+    var socState = socInit(), period = socCustomPeriod(), fx = socCustomFx(option.k) || {};
+    var periodUsed = reply ? socState.replyPeriod === period : socState.customPeriod === period;
     var message = tr(reply ? option.reply : option.post, reply ? {target: reply.target} : {});
     var s = '<h2>' + (reply ? tr("Responder a {target}", {target: h(reply.target)}) : tr("Crear publicación")) + '</h2><div class="stack">';
     if (reply) s += '<blockquote class="soc-quote"><b>' + tr("Publicación a la que respondes") + ' · @' + h(reply.target) + '</b><span>' + h(reply.text) + '</span></blockquote>';
@@ -1986,7 +1987,7 @@
       return '<button class="chipb" data-a="socpick" data-v="' + x.k + '" aria-pressed="' + (x.k === option.k) + '">' + x.ico + " " + h(tr(x.n)) + "</button>";
     }).join("") + "</div></div>";
     s += '<section class="soc-preview"><span class="eyebrow">' + tr("Vista previa") + '</span><p>' + h(message) + '</p><span class="eyebrow">' + tr("Efectos de esta publicación") + '</span><div class="chips">' + Object.keys(fx).map(function (k) { return chip([k, fx[k]]); }).join("") + "</div></section>";
-    s += '<p class="muted soc-cooldown">' + tr("Puedes enviar una publicación personalizada por bloque para que cada mensaje importe.") + "</p>";
+    s += '<p class="muted soc-cooldown">' + tr(reply ? "Puedes responder una vez por bloque." : "Puedes enviar una publicación personalizada por bloque para que cada mensaje importe.") + "</p>";
     s += '<div class="row2"><button class="btn wide" data-a="close">' + tr("Cancelar") + '</button><button class="btn pri wide" data-a="socsend" data-v="' + option.k + '"' + (periodUsed ? " disabled" : "") + ">" + tr(reply ? "Enviar respuesta" : "Publicar") + "</button></div></div>";
     return s;
   }
@@ -2550,7 +2551,7 @@
         var sendReply = UI.sheet && UI.sheet.k === "soccompose" && UI.sheet.reply;
         var sendResult = socCustomSend(v, sendReply || "");
         if (sendResult.ok) { persist(); UI.sheet = null; render(false); toast(tr(sendResult.reply ? "Respuesta enviada." : "Publicación enviada.")); }
-        else if (sendResult.limit) toast(tr("Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente."));
+        else if (sendResult.limit) toast(tr(sendReply ? "Ya respondiste en este bloque; podrás volver a hacerlo en el siguiente." : "Ya publicaste en este bloque; podrás volver a hacerlo en el siguiente."));
         break;
       case "socedit": UI.sheet = {k: "socedit"}; renderSheet(); break;
       case "socav": socDraft(); UI.sheet.d.av = v; renderSheet(); break;
