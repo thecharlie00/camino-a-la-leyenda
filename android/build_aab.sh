@@ -32,7 +32,8 @@ fi
 
 rm -rf build-aab assets
 mkdir -p build-aab/{classes,dex,module} "$ROOT/dist" assets/jugar
-# The game HTML is self-contained (3D models, CSS, music and pet engine inline).
+# Package the Android launcher icon alongside the self-contained game HTML.
+"$AAPT2" compile --dir res -o build-aab/resources.zip
 cp "$ROOT/dist/android/jugar/juego.html" assets/jugar/juego.html
 
 # Create an Android proto-APK to supply the base module manifest and packaged assets.
@@ -43,6 +44,7 @@ cp "$ROOT/dist/android/jugar/juego.html" assets/jugar/juego.html
   --version-code "$VERSION_CODE" \
   --version-name "$VERSION_NAME" \
   -I "$ANDROID_JAR" \
+  -R build-aab/resources.zip \
   --manifest AndroidManifest.xml \
   -A assets \
   -o build-aab/base.apk

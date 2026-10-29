@@ -19,7 +19,7 @@ const scriptMatch = html.match(/<script>\s*([\s\S]*?)<\/script>/);
 assert.ok(scriptMatch, 'Web game script is missing');
 const gameSource = scriptMatch[1];
 new Script(gameSource, {filename: 'web-game.js'});
-assert.match(gameSource, /var BUILD = \{v: "5\.10", code: 60,/);
+assert.match(gameSource, /var BUILD = \{v: "5\.11", code: 61,/);
 assert.match(gameSource, /var GOAT_WEB_BUILD = true;/);
 assert.match(gameSource, /var WEB_BUILD = true;/);
 assert.match(gameSource, /var NO_ADS = true;/);
@@ -46,7 +46,7 @@ const largestModule = Math.max(...moduleMatches.map((match) => Buffer.byteLength
 assert.ok(largestModule <= 300_000, `Android startup task is too large (${largestModule} bytes); split the module`);
 const androidSource = moduleMatches.map((match) => match[1]).join('\n');
 new Script(androidSource, {filename: 'android-game-modules.js'});
-assert.match(androidSource, /var BUILD = \{v: "5\.10", code: 60,/);
+assert.match(androidSource, /var BUILD = \{v: "5\.11", code: 61,/);
 assert.match(androidSource, /var ERAS_MODE = true;/, 'Era Mode feature flag must be embedded for Android');
 assert.doesNotMatch(androidSource, /I18N\.(en|de|it|fr) = \{"%/, 'Android locale catalogs must stay out of executable startup code');
 assert.match(androidHtml, /<template id="pitch3d-asset-pack">/, 'Android models must be deferred in a template');
@@ -126,4 +126,4 @@ assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No website
 assert.ok(statSync(webGamePage).size > 1_000_000, 'Self-contained web game bundle is unexpectedly small');
 assert.ok(statSync(androidGamePage).size > 1_000_000, 'Self-contained Android game bundle is unexpectedly small');
 
-console.log(`Build smoke passed: web unchanged startup + Android incremental startup; v5.10 (60).`);
+console.log(`Build smoke passed: web unchanged startup + Android incremental startup; v5.11 (61).`);

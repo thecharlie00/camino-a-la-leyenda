@@ -17,7 +17,8 @@ import android.window.OnBackInvokedDispatcher;
 
 public final class MainActivity extends Activity {
     private WebView webView;
-    private OnBackInvokedCallback backInvokedCallback;
+    // Object avoids resolving the API-33 callback type on devices below API 33.
+    private Object backInvokedCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,8 @@ public final class MainActivity extends Activity {
 
         webView = new WebView(this);
         webView.setBackgroundColor(Color.rgb(11, 20, 23));
-        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        // Keep WebView's normal hardware-accelerated rendering. Forcing an extra
+        // hardware layer can add GPU memory pressure for the canvas-heavy game.
         webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
 
@@ -63,17 +65,10 @@ public final class MainActivity extends Activity {
             window.setNavigationBarColor(appSurface);
         }
         if (Build.VERSION.SDK_INT >= 29) {
-            window.setStatusBarContrastEnforced(false);
-            window.setNavigationBarContrastEnforced(false);
+            Api29.disableSystemBarContrastEnforcement(window);
         }
         if (Build.VERSION.SDK_INT >= 30) {
-            window.setDecorFitsSystemWindows(false);
-            WindowInsetsController controller = window.getInsetsController();
-            if (controller != null) {
-                int lightBarMask = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-                    | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;
-                controller.setSystemBarsAppearance(0, lightBarMask);
-            }
+            Api30.configureEdgeToEdge(window);
         } else if (Build.VERSION.SDK_INT >= 28) {
             window.getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -84,14 +79,7 @@ public final class MainActivity extends Activity {
 
     private void registerPredictiveBack() {
         if (Build.VERSION.SDK_INT >= 33) {
-            backInvokedCallback = new OnBackInvokedCallback() {
-                @Override
-                public void onBackInvoked() {
-                    handleBack();
-                }
-            };
-            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
-                OnBackInvokedDispatcher.PRIORITY_DEFAULT, backInvokedCallback);
+            backInvokedCallback = Api33.register(this);
         }
     }
 
@@ -128,7 +116,7 @@ public final class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         if (Build.VERSION.SDK_INT >= 33 && backInvokedCallback != null) {
-            getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(backInvokedCallback);
+            Api33.unregister(this, backInvokedCallback);
             backInvokedCallback = null;
         }
         if (webView != null) {
@@ -136,5 +124,45 @@ public final class MainActivity extends Activity {
             webView = null;
         }
         super.onDestroy();
+    }
+
+    // Keep newer framework API references out of the base Activity methods so
+    // class verification on API 24-28 doesn't eagerly resolve them.
+    private static final class Api29 {
+        static void disableSystemBarContrastEnforcement(Window window) {
+            window.setStatusBarContrastEnforced(false);
+            window.setNavigationBarContrastEnforced(false);
+        }
+    }
+
+    private static final class Api30 {
+        static void configureEdgeToEdge(Window window) {
+            window.setDecorFitsSystemWindows(false);
+            WindowInsetsController controller = window.getInsetsController();
+            if (controller != null) {
+                int lightBarMask = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                    | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;
+                controller.setSystemBarsAppearance(0, lightBarMask);
+            }
+        }
+    }
+
+    private static final class Api33 {
+        static Object register(MainActivity activity) {
+            OnBackInvokedCallback callback = new OnBackInvokedCallback() {
+                @Override
+                public void onBackInvoked() {
+                    activity.handleBack();
+                }
+            };
+            activity.getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                OnBackInvokedDispatcher.PRIORITY_DEFAULT, callback);
+            return callback;
+        }
+
+        static void unregister(MainActivity activity, Object callback) {
+            activity.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(
+                (OnBackInvokedCallback) callback);
+        }
     }
 }
