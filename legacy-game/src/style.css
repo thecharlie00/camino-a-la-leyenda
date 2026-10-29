@@ -55,6 +55,20 @@ h1, h2, h3 { font-family: var(--f-disp); font-weight: 800; letter-spacing: 0.01e
 [hidden] { display: none !important; }
 
 #app { height: 100%; display: flex; flex-direction: column; max-width: 720px; margin: 0 auto; position: relative; }
+.boot-screen { min-height: 100vh; min-height: 100dvh; width: 100%; flex: 1; display: grid; place-items: center; padding: max(28px, env(safe-area-inset-top, 0px)) 20px max(28px, env(safe-area-inset-bottom, 0px)); overflow: hidden; text-align: center; background: radial-gradient(ellipse at 50% 42%, #14343a 0%, #0b1a1e 42%, #0b1417 76%); color: var(--chalk); }
+.boot-card { width: min(100%, 400px); }
+.boot-mark { position: relative; width: 76px; height: 76px; display: grid; place-items: center; margin: 0 auto 22px; border: 1px solid rgba(255,178,30,.3); border-radius: 50%; background: rgba(255,178,30,.08); box-shadow: 0 0 36px rgba(255,178,30,.12); }
+.boot-mark::before { position: absolute; inset: -4px; content: ""; border: 3px solid transparent; border-top-color: var(--led); border-right-color: rgba(255,178,30,.3); border-radius: 50%; animation: bootspin 1.1s linear infinite; }
+.boot-mark span { font-size: 34px; line-height: 1; animation: bootball 1s ease-in-out infinite alternate; }
+.boot-kicker { margin: 0 0 8px; color: var(--led); font: 800 var(--fs-2xs)/1.2 var(--f-body); letter-spacing: .18em; }
+.boot-title { font: 900 clamp(25px, 7vw, 34px)/1.05 var(--f-disp); text-transform: uppercase; }
+.boot-status { min-height: 24px; margin: 12px 0 18px; color: var(--mist); font-size: var(--fs-sm); }
+.boot-track { width: min(100%, 240px); height: 5px; overflow: hidden; margin: 0 auto; border-radius: 99px; background: rgba(237,241,232,.12); }
+.boot-track i { display: block; width: 38%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff9e12, #ffe08a); box-shadow: 0 0 12px rgba(255,178,30,.65); animation: bootload 1.4s ease-in-out infinite; }
+@keyframes bootspin { to { transform: rotate(360deg); } }
+@keyframes bootball { to { transform: translateY(-5px) rotate(12deg); } }
+@keyframes bootload { 0% { transform: translateX(-120%); } 55% { transform: translateX(160%); } 100% { transform: translateX(320%); } }
+@media (prefers-reduced-motion: reduce) { .boot-mark::before, .boot-mark span { animation: none; } .boot-track i { width: 100%; animation: none; opacity: .65; } }
 
 /* ---------- barra superior: el cromo en miniatura ---------- */
 .top { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: linear-gradient(180deg, var(--stand), var(--night)); border-bottom: 1px solid var(--line); flex: none; }
@@ -2035,3 +2049,64 @@ html.rm .mgb-n.bump.on { animation: none; }
 .lfpages { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin: 6px 0 12px; }
 .lfpages .btn { min-width: 34px; padding-left: 8px; padding-right: 8px; }
 .lfstats { color: var(--grass); }
+
+/* ===== Identidad visual del Modo Épocas: archivo deportivo con seis lenguajes de década ===== */
+#app.era-active,
+#era-overlay .eras-dialog { --era-accent: #d99b56; --era-deep: #2b2118; --era-ink: #17120e; --era-pattern-size: 100% 24px; --era-page-pattern: repeating-linear-gradient(0deg, transparent 0 23px, rgba(217,155,86,.035) 23px 24px); --era-cover-pattern: repeating-linear-gradient(0deg, transparent 0 19px, rgba(255,255,255,.07) 19px 20px), linear-gradient(120deg, rgba(217,155,86,.22), transparent 62%); }
+#app.era-active[data-era-decade="1970s"], #era-overlay[data-era-decade="1970s"] .eras-dialog { --era-accent: #e2a461; --era-deep: #392619; --era-ink: #21150e; --era-pattern-size: 100% 28px; --era-page-pattern: repeating-linear-gradient(0deg, transparent 0 27px, rgba(226,164,97,.04) 27px 28px); --era-cover-pattern: repeating-linear-gradient(0deg, transparent 0 17px, rgba(255,225,180,.08) 17px 18px), linear-gradient(120deg, #50321d, #211713 72%); }
+#app.era-active[data-era-decade="1980s"], #era-overlay[data-era-decade="1980s"] .eras-dialog { --era-accent: #64d6cc; --era-deep: #122e38; --era-ink: #082022; --era-pattern-size: 48px 48px; --era-page-pattern: repeating-linear-gradient(135deg, transparent 0 31px, rgba(100,214,204,.045) 31px 33px, transparent 33px 48px); --era-cover-pattern: repeating-linear-gradient(135deg, transparent 0 24px, rgba(100,214,204,.12) 24px 27px, transparent 27px 48px), linear-gradient(120deg, #123d4b, #17172d 75%); }
+#app.era-active[data-era-decade="1990s"], #era-overlay[data-era-decade="1990s"] .eras-dialog { --era-accent: #b9d75c; --era-deep: #29331d; --era-ink: #19200c; --era-pattern-size: 55px 55px; --era-page-pattern: repeating-linear-gradient(145deg, transparent 0 34px, rgba(185,215,92,.045) 34px 36px, transparent 36px 55px); --era-cover-pattern: repeating-linear-gradient(145deg, transparent 0 24px, rgba(185,215,92,.12) 24px 27px, transparent 27px 52px), linear-gradient(120deg, #354521, #17242b 75%); }
+#app.era-active[data-era-decade="2000s"], #era-overlay[data-era-decade="2000s"] .eras-dialog { --era-accent: #68c9f1; --era-deep: #153148; --era-ink: #0c1b28; --era-pattern-size: 24px 24px; --era-page-pattern: linear-gradient(rgba(104,201,241,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(104,201,241,.035) 1px, transparent 1px); --era-cover-pattern: linear-gradient(90deg, transparent 48%, rgba(104,201,241,.12) 49% 51%, transparent 52%), linear-gradient(120deg, #173c57, #171e30 75%); }
+#app.era-active[data-era-decade="2010s"], #era-overlay[data-era-decade="2010s"] .eras-dialog { --era-accent: #59d6ad; --era-deep: #16352f; --era-ink: #0a2119; --era-pattern-size: 20px 20px; --era-page-pattern: radial-gradient(circle, rgba(89,214,173,.08) 1px, transparent 1.5px); --era-cover-pattern: radial-gradient(circle at 82% 28%, rgba(89,214,173,.25) 0 2px, transparent 3px), linear-gradient(120deg, #164c42, #14232d 75%); }
+#app.era-active[data-era-decade="2020s"], #era-overlay[data-era-decade="2020s"] .eras-dialog { --era-accent: #b9a5ff; --era-deep: #30274a; --era-ink: #1b1630; --era-pattern-size: 22px 22px; --era-page-pattern: radial-gradient(circle at 1px 1px, rgba(185,165,255,.07) 1px, transparent 1.5px); --era-cover-pattern: radial-gradient(ellipse at 85% 15%, rgba(185,165,255,.2), transparent 42%), linear-gradient(120deg, #30244f, #152a32 78%); }
+
+#app.era-active main { background-image: var(--era-page-pattern); background-size: var(--era-pattern-size, auto); }
+#app.era-active .top { border-top: 2px solid var(--era-accent); box-shadow: inset 0 1px rgba(255,255,255,.025); }
+#app.era-active .top .who h1 { text-decoration-color: var(--era-accent); }
+#app.era-active .card { border-left-color: var(--era-accent); }
+#app.era-active .tag.real, #app.era-active .myo-tl { color: var(--era-accent); }
+#app.era-active .tag.real { background: rgba(255,255,255,.07); }
+#app.era-active nav.tabs button[aria-current="page"] { color: var(--era-accent); border-color: var(--era-accent); }
+#app.era-active nav.tabs button[aria-current="page"] span { color: var(--era-accent); }
+#app.era-active .eras-hud, .eras-hud[data-era-decade] { border-color: var(--era-accent, #d99b56); }
+#app.era-active .eras-hud button, .eras-hud[data-era-decade] button { border: 1px solid rgba(255,255,255,.18); }
+
+#era-overlay { --era-accent: #d99b56; }
+#era-overlay .eras-dialog { position: relative; overflow: hidden; border-color: var(--era-accent); border-radius: 16px; background: linear-gradient(160deg, rgba(255,255,255,.025), transparent 35%), #101c20; }
+#era-overlay .eras-cover { position: relative; isolation: isolate; display: flex; min-height: 116px; align-items: flex-end; justify-content: space-between; gap: 12px; overflow: hidden; margin: -18px -18px 17px; padding: 18px; border-bottom: 1px solid rgba(255,255,255,.14); background: linear-gradient(145deg, var(--era-deep), #10191d 78%); color: #f5f1e7; }
+#era-overlay .eras-cover::before { position: absolute; z-index: -1; inset: 0; content: ""; background-image: var(--era-cover-pattern); opacity: .95; }
+#era-overlay .eras-cover::after { position: absolute; z-index: -1; top: -46px; right: 42px; width: 136px; height: 136px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; box-shadow: 0 0 0 11px rgba(255,255,255,.025), 0 0 0 25px rgba(255,255,255,.02); content: ""; }
+#era-overlay .eras-cover-decade { max-width: 65%; font: 900 clamp(30px, 8vw, 48px)/.9 var(--f-disp, system-ui,sans-serif); letter-spacing: -.035em; text-transform: uppercase; text-shadow: 0 2px 18px #0008; }
+#era-overlay .eras-cover-years { position: absolute; left: 20px; top: 17px; color: rgba(255,255,255,.72); font: 700 11px/1.2 var(--f-num, system-ui,sans-serif); letter-spacing: .17em; }
+#era-overlay .eras-cover-stamp { display: grid; place-items: center; width: 62px; height: 62px; flex: none; border: 1px solid var(--era-accent); border-radius: 50%; background: rgba(8,13,16,.55); color: var(--era-accent); font: 800 17px/1 var(--f-num, system-ui,sans-serif); box-shadow: 0 0 0 5px rgba(0,0,0,.12); }
+#era-overlay .eras-dialog .eras-kicker { color: var(--era-accent); }
+#era-overlay .eras-dialog .eras-summary { border-left-color: var(--era-accent); background: linear-gradient(100deg, var(--era-deep), #0a1316 58%); }
+#era-overlay .eras-dialog .eras-tag { border-color: rgba(255,255,255,.2); }
+#era-overlay .eras-dialog .eras-actions .primary { background: var(--era-accent); border-color: var(--era-accent); color: var(--era-ink); }
+#era-overlay .eras-dialog h3 { border-left: 2px solid var(--era-accent); padding-left: 8px; }
+#era-overlay .eras-history li b { color: var(--era-accent); }
+#era-overlay[data-era-decade="1980s"] .eras-cover-decade, #app.era-active[data-era-decade="1980s"] .who h1 { letter-spacing: .045em; }
+#era-overlay[data-era-decade="2000s"] .eras-cover::after { border-radius: 8px; transform: rotate(18deg); }
+#era-overlay[data-era-decade="2010s"] .eras-cover::after { width: 96px; height: 96px; top: -22px; right: 52px; }
+#era-overlay[data-era-decade="2020s"] .eras-cover::after { width: 150px; height: 96px; top: 10px; right: 28px; border-radius: 48px; transform: rotate(-28deg); }
+
+.eras-tile, .eras-mode { position: relative; overflow: hidden; }
+.eras-tile { min-height: 76px; border-left: 3px solid #b9d75c; background: linear-gradient(105deg, rgba(185,215,92,.14), rgba(12,20,24,.96) 65%); }
+.eras-tile::after, .eras-mode::after { position: absolute; top: 0; right: 0; bottom: 0; width: 30%; background: repeating-linear-gradient(135deg, transparent 0 10px, rgba(185,215,92,.08) 10px 12px, transparent 12px 23px); content: ""; pointer-events: none; }
+.eras-tile > *, .eras-mode > * { position: relative; z-index: 1; }
+.eras-mode { border-color: rgba(185,215,92,.35) !important; background: linear-gradient(100deg, rgba(185,215,92,.09), transparent 66%), var(--stand); }
+.eras-tile:focus-visible, .eras-mode:focus-visible { outline-color: #b9d75c; }
+@media (max-width: 520px) {
+  #era-overlay .eras-cover { min-height: 102px; margin: -14px -14px 14px; padding: 14px; }
+  #era-overlay .eras-cover-years { left: 16px; top: 14px; }
+  #era-overlay .eras-cover-stamp { width: 54px; height: 54px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #era-overlay .eras-cover::after { box-shadow: none; }
+}
+.eras-hud[data-era-decade="1970s"] { --era-accent: #e2a461; }
+.eras-hud[data-era-decade="1980s"] { --era-accent: #64d6cc; }
+.eras-hud[data-era-decade="1990s"] { --era-accent: #b9d75c; }
+.eras-hud[data-era-decade="2000s"] { --era-accent: #68c9f1; }
+.eras-hud[data-era-decade="2010s"] { --era-accent: #59d6ad; }
+.eras-hud[data-era-decade="2020s"] { --era-accent: #b9a5ff; }

@@ -1,0 +1,4329 @@
+{
+  "schema": 1,
+  "topics": [
+    {
+      "key": "Ojeo e información imperfecta",
+      "lever": "insight"
+    },
+    {
+      "key": "Cantera y continuidad generacional",
+      "lever": "training"
+    },
+    {
+      "key": "Entrenamiento y preparación física",
+      "lever": "training"
+    },
+    {
+      "key": "Fichajes y contratos",
+      "lever": "funds"
+    },
+    {
+      "key": "Economía y control salarial",
+      "lever": "funds"
+    },
+    {
+      "key": "Instalaciones y recursos del club",
+      "lever": "training"
+    },
+    {
+      "key": "Equipación e identidad del club",
+      "lever": "culture"
+    },
+    {
+      "key": "Medios y reputación",
+      "lever": "reputation"
+    },
+    {
+      "key": "Táctica y adaptación al reglamento",
+      "lever": "training"
+    },
+    {
+      "key": "Viajes, calendario y recuperación",
+      "lever": "fitness"
+    }
+  ],
+  "contexts": {
+    "1970s": [
+      "El informe en papel del ojeador local solo cubre una observación del posible fichaje.",
+      "El campo pesado y un viaje largo obligan a repartir el trabajo físico con cuidado.",
+      "Una promesa necesita aprender junto a un titular, pero el once exige resultados.",
+      "Un veterano propone enseñar sus rutinas a los jóvenes antes de renovar.",
+      "El personal disponible no puede atender a la vez la recuperación y el entrenamiento extra.",
+      "La directiva limita el gasto y pide decidir qué mejora del club puede esperar.",
+      "La afición quiere que la nueva camiseta conserve una seña reconocible del club.",
+      "La planificación del viaje compite con una sesión adicional antes del partido.",
+      "La prensa local cuestiona que un titular se quede fuera de la convocatoria.",
+      "Una variación en las reglas de la competición obliga a preparar otra respuesta táctica."
+    ],
+    "1980s": [
+      "Unas grabaciones de vídeo amplían el informe del ojeador, pero dejan dudas sobre el jugador.",
+      "La plantilla pide recuperar mejor entre partidos y desplazamientos.",
+      "El patrocinador ofrece recursos a cambio de mayor presencia en la equipación.",
+      "Un veterano con influencia interna pide garantías antes de renovar.",
+      "El club puede contratar apoyo para la preparación, pero tendría que recortar otra partida.",
+      "La directiva fija un tope de gasto antes de completar la plantilla.",
+      "El diseño de la camiseta enfrenta tradición del club y una propuesta comercial.",
+      "La información del equipo llega por distintos canales y el vestuario pide un mensaje claro.",
+      "El rival cambia su planteamiento y el cuerpo técnico debe decidir cuánto arriesgar.",
+      "Un juvenil destaca en entrenamientos, aunque todavía necesita minutos y protección."
+    ],
+    "1990s": [
+      "Un jugador queda disponible con su contrato próximo a terminar; su potencial no está claro.",
+      "La inversión en el estadio y el presupuesto de la plantilla compiten por los mismos recursos.",
+      "Un ajuste de reglas cambia una rutina que el equipo daba por segura.",
+      "La plantilla pide ordenar los dorsales y responsabilidades antes de la nueva temporada.",
+      "La televisión aumenta la atención sobre el equipo, pero no todas las ligas reciben el mismo foco.",
+      "La identidad visual del club debe convivir con nuevas exigencias de patrocinio.",
+      "Una promesa solicita minutos en una plantilla que pelea por objetivos inmediatos.",
+      "Un ojeador recomienda ampliar la búsqueda, aunque el club conoce poco ese mercado.",
+      "La prensa y los aficionados discrepan sobre cuánto debe explicar el entrenador.",
+      "El equipo debe elegir entre una adaptación prudente y una táctica más arriesgada."
+    ],
+    "2000s": [
+      "Una ventana de fichajes se acerca y el club todavía necesita cubrir una posición.",
+      "La web del club y los foros transmiten rumores antes de que la directiva cierre su decisión.",
+      "Una alerta por teléfono acelera una negociación, pero faltan datos para valorar la oferta.",
+      "La nómina crece y la directiva pide proteger el presupuesto de la temporada.",
+      "Un fichaje de otra liga requiere más observación de la que permite el calendario.",
+      "El club puede ampliar su preparación física, aunque el nuevo apoyo cuesta dinero.",
+      "Una marca ofrece financiar una mejora a cambio de más espacio en la camiseta.",
+      "La cantera pide inversión ahora; el primer equipo necesita soluciones para este año.",
+      "La congestión de partidos reduce las sesiones disponibles para entrenar.",
+      "Un jugador clave quiere revisar su contrato antes de que empiece el mercado."
+    ],
+    "2010s": [
+      "Una publicación en redes sociales divide a la afición mientras el equipo prepara el siguiente partido.",
+      "Los analistas detectan un patrón, pero el cuerpo técnico duda de cuánto cambiar por los datos.",
+      "La preparación avanzada promete mejoras, aunque exige coordinar a más especialistas.",
+      "Un jugador pide cuidar su recuperación ante la presión de competir cada semana.",
+      "El mercado ofrece alternativas, pero las ventanas limitan cuándo puede cerrarse el fichaje.",
+      "Una revisión arbitral genera preguntas distintas según la competición en la que juega el club.",
+      "Una entrevista en directo puede aclarar el mensaje o alimentar una polémica.",
+      "La plantilla necesita rotar sin perder cohesión en un tramo cargado de partidos.",
+      "Una promesa pide un plan de desarrollo medible antes de comprometerse con el club.",
+      "El rival estudia tus patrones; decides si mantener el plan o introducir una variante."
+    ],
+    "2020s": [
+      "El calendario comprimido y el límite ampliado de cambios obligan a replantear la rotación.",
+      "Un clip viral domina la conversación mientras el vestuario necesita concentrarse.",
+      "Los datos de rendimiento señalan una alerta, pero no explican por sí solos su causa.",
+      "La plantilla pide descanso; la competición todavía exige varios partidos en poco tiempo.",
+      "Un jugador solicita apoyo personal además del plan físico habitual.",
+      "El viaje y la recuperación compiten con una sesión táctica antes del siguiente encuentro.",
+      "Un balón y una equipación de nueva tecnología requieren adaptación, no solo promoción.",
+      "La directiva busca equilibrar una gran inversión con la estabilidad salarial del club.",
+      "Los canales digitales permiten reaccionar rápido, pero hacen más difícil corregir un rumor.",
+      "La opción de cinco cambios abre alternativas tácticas y también nuevas expectativas."
+    ]
+  },
+  "periods": {
+    "1970s": "Marco de juego de los años 70: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.",
+    "1980s": "Marco de juego de los años 80: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.",
+    "1990s": "Marco de juego de los años 90: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.",
+    "2000s": "Marco de juego de los años 2000: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.",
+    "2010s": "Marco de juego de los años 2010: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.",
+    "2020s": "Marco de juego de los años 2020: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal."
+  },
+  "records": [
+    {
+      "id": "1970s-001",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-002",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-003",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-004",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-005",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-006",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-007",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-008",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-009",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-010",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-011",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-012",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-013",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-014",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-015",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-016",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-017",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-018",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-019",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-020",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-021",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-022",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-023",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-024",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-025",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-026",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-027",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-028",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-029",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-030",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-031",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-032",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-033",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-034",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-035",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-036",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-037",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-038",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-039",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-040",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-041",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-042",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-043",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-044",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-045",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-046",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-047",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-048",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-049",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-050",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-051",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-052",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-053",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-054",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-055",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-056",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-057",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-058",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-059",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-060",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-061",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-062",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-063",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-064",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-065",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-066",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-067",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-068",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-069",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-070",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-071",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-072",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-073",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-074",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-075",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-076",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-077",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-078",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-079",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-080",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-081",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-082",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-083",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-084",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-085",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-086",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-087",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-088",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-089",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-090",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-091",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-092",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-093",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-094",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-095",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-096",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-097",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1970s-098",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1970s-099",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1970s-100",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-001",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-002",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-003",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-004",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-005",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-006",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-007",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-008",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-009",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-010",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-011",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-012",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-013",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-014",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-015",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-016",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-017",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-018",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-019",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-020",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-021",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-022",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-023",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-024",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-025",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-026",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-027",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-028",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-029",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-030",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-031",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-032",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-033",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-034",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-035",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-036",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-037",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-038",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-039",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-040",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-041",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-042",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-043",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-044",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-045",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-046",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-047",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-048",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-049",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-050",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-051",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-052",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-053",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-054",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-055",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-056",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-057",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-058",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-059",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-060",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-061",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-062",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-063",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-064",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-065",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-066",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-067",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-068",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-069",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-070",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-071",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-072",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-073",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-074",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-075",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-076",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-077",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-078",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-079",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-080",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-081",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-082",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-083",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-084",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-085",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-086",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-087",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-088",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-089",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-090",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-091",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-092",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-093",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-094",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-095",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-096",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-097",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1980s-098",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1980s-099",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1980s-100",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-001",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-002",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-003",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-004",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-005",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-006",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-007",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-008",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-009",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-010",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-011",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-012",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-013",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-014",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-015",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-016",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-017",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-018",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-019",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-020",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-021",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-022",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-023",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-024",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-025",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-026",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-027",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-028",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-029",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-030",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-031",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-032",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-033",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-034",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-035",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-036",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-037",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-038",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-039",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-040",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-041",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-042",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-043",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-044",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-045",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-046",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-047",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-048",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-049",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-050",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-051",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-052",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-053",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-054",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-055",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-056",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-057",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-058",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-059",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-060",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-061",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-062",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-063",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-064",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-065",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-066",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-067",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-068",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-069",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-070",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-071",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-072",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-073",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-074",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-075",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-076",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-077",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-078",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-079",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-080",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-081",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-082",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-083",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-084",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-085",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-086",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-087",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-088",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-089",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-090",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-091",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-092",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-093",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-094",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-095",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-096",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-097",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "1990s-098",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "1990s-099",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "1990s-100",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-001",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-002",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-003",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-004",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-005",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-006",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-007",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-008",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-009",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-010",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-011",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-012",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-013",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-014",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-015",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-016",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-017",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-018",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-019",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-020",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-021",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-022",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-023",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-024",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-025",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-026",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-027",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-028",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-029",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-030",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-031",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-032",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-033",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-034",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-035",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-036",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-037",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-038",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-039",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-040",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-041",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-042",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-043",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-044",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-045",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-046",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-047",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-048",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-049",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-050",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-051",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-052",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-053",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-054",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-055",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-056",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-057",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-058",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-059",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-060",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-061",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-062",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-063",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-064",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-065",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-066",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-067",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-068",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-069",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-070",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-071",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-072",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-073",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-074",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-075",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-076",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-077",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-078",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-079",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-080",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-081",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-082",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-083",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-084",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-085",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-086",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-087",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-088",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-089",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-090",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-091",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-092",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-093",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-094",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-095",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-096",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-097",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2000s-098",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2000s-099",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2000s-100",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-001",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-002",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-003",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-004",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-005",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-006",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-007",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-008",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-009",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-010",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-011",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-012",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-013",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-014",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-015",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-016",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-017",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-018",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-019",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-020",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-021",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-022",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-023",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-024",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-025",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-026",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-027",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-028",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-029",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-030",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-031",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-032",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-033",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-034",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-035",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-036",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-037",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-038",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-039",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-040",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-041",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-042",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-043",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-044",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-045",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-046",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-047",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-048",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-049",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-050",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-051",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-052",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-053",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-054",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-055",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-056",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-057",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-058",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-059",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-060",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-061",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-062",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-063",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-064",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-065",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-066",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-067",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-068",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-069",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-070",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-071",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-072",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-073",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-074",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-075",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-076",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-077",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-078",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-079",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-080",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-081",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-082",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-083",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-084",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-085",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-086",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-087",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-088",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-089",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-090",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-091",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-092",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-093",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-094",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-095",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-096",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-097",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2010s-098",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2010s-099",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2010s-100",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-001",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-002",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-003",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-004",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-005",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-006",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-007",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-008",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-009",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-010",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-011",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-012",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-013",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-014",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-015",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-016",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-017",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-018",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-019",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-020",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-021",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-022",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-023",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-024",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-025",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-026",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-027",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-028",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-029",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-030",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-031",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-032",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-033",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-034",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-035",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-036",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-037",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-038",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-039",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-040",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-041",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-042",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-043",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-044",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-045",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-046",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-047",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-048",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-049",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-050",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-051",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-052",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-053",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-054",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-055",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-056",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-057",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-058",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-059",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-060",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-061",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-062",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-063",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-064",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-065",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-066",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-067",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-068",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-069",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-070",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-071",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-072",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-073",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-074",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-075",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-076",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-077",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-078",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-079",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-080",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-081",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-082",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-083",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-084",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-085",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-086",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-087",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-088",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-089",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-090",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-091",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-092",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-093",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-094",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-095",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-096",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-097",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 3
+    },
+    {
+      "id": "2020s-098",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 1
+    },
+    {
+      "id": "2020s-099",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 2
+    },
+    {
+      "id": "2020s-100",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 3
+    }
+  ]
+}

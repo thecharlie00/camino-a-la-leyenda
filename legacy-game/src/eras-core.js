@@ -66,12 +66,70 @@ function eraWrapPlayerMarket() {
     return result;
   };
 }
+function eraWrapSeasonDecision(name) {
+  if (typeof window[name] !== "function") return;
+  var original = window[name];
+  window[name] = function () {
+    var result = original.apply(this, arguments);
+    eraQueueSeasonDecision();
+    return result;
+  };
+}
+function eraWrapScouting() {
+  if (typeof window.mgrScoutList !== "function") return;
+  var original = window.mgrScoutList;
+  window.mgrScoutList = function (count) {
+    if (!eraIsActive()) return original.apply(this, arguments);
+    var level = Math.max(0, Math.min(5, +(S.era.scoutingLevel || 0)));
+    var targets = original.call(this, Math.max(0, (+count || 0) + level));
+    if (level && Array.isArray(targets)) targets.forEach(function (target) {
+      if (!target || target.pot == null || !Array.isArray(target.potR)) return;
+      var error = Math.max(0, 4 - level);
+      target.potR = [Math.max(target.ovr || 0, Math.round(target.pot - error)), Math.min(95, Math.round(target.pot + error))];
+    });
+    return targets;
+  };
+}
+function eraInstallKitHooks() {
+  if (typeof PLook === "undefined" || !PLook || typeof PLook.rig !== "function") return;
+  var original = PLook.rig;
+  PLook.rig = function (player, extra) {
+    var source = player || (typeof PLook.player === "function" ? PLook.player() : null);
+    var rig = original.apply(this, arguments), info = eraInfoForYear(S && S.yr);
+    var ownShirt = source && (source.gear && source.gear.shirt || source.shirt && source.shirt.id && source.shirt.id !== "plain");
+    if (!info || !S.era || !S.era.active || !rig || ownShirt) return rig;
+    var patterns = {"classic-70s": "retro", "classic-80s": "chevron", "baggy-90s": "hoops", "fitted-00s": "split", "modern-athletic": "diamond", "modern-performance": "lightning"};
+    rig.shirtPattern = patterns[info.presentation.kits] || "plain";
+    return rig;
+  };
+}
+function eraInstallManagerDecisionHooks() {
+  if (typeof mgrPendValid === "function") {
+    var oldValid = mgrPendValid;
+    mgrPendValid = function (item) { return item && item.k === "eraDecision" ? !!(eraIsActive() && eraDecisionRecord(item.id)) : oldValid.apply(this, arguments); };
+  }
+  if (typeof mgrDesc === "function") {
+    var oldDesc = mgrDesc;
+    mgrDesc = function (item) { return item && item.k === "eraDecision" ? eraDecisionDescription(item, true) : oldDesc.apply(this, arguments); };
+  }
+  if (typeof mgrResolve === "function") {
+    var oldResolve = mgrResolve;
+    mgrResolve = function (choice) {
+      if (typeof mgrCleanPend === "function") mgrCleanPend();
+      var item = S && S.pend && S.pend[0];
+      if (!item || item.k !== "eraDecision") return oldResolve.apply(this, arguments);
+      return eraResolveDecision(item, choice, true);
+    };
+  }
+}
 function eraWrapGrowth(name, managerMode) {
   if (typeof window[name] !== "function") return;
   var original = window[name];
   window[name] = function () {
-    var info = eraInfoForYear(S && S.yr), scale = info && info.playerModel ? info.playerModel.trainingScale : 1;
-    if (!info || scale === 1) return original.apply(this, arguments);
+    var info = eraInfoForYear(S && S.yr);
+    if (!info || !info.playerModel) return original.apply(this, arguments);
+    var scale = Math.max(0.4, Math.min(1.25, info.playerModel.trainingScale + (S.era ? +S.era.trainingBonus || 0 : 0)));
+    if (scale === 1) return original.apply(this, arguments);
     var players = managerMode ? S && S.m && S.m.sq || [] : S && S.p ? [S.p] : [];
     var before = players.map(function (player) { return {player: player, ovr: player.ovr, attributes: !managerMode && player.tr && typeof player.tr === "object" ? eraClone(player.tr) : null}; });
     var result = original.apply(this, arguments);
@@ -108,6 +166,128 @@ function eraMediaChannel(year, salt) {
   if (!info || !info.media || !info.media.channels.length) return "newspapers";
   var h = typeof hashStr === "function" ? hashStr(String(year) + "|" + String(salt || "")) : (+year || 0);
   return info.media.channels[h % info.media.channels.length];
+}
+function eraDecisionRecord(id) {
+  var records = ERAS_DATA && ERAS_DATA.decisions && ERAS_DATA.decisions.records || [];
+  for (var i = 0; i < records.length; i++) if (records[i].id === id) return records[i];
+  return null;
+}
+function eraDecisionLabel(record) {
+  var catalog = ERAS_DATA.decisions, topic = catalog.topics[record.topic], context = catalog.contexts[record.decade][record.context];
+  return eraText(topic.key) + " · " + eraText(context);
+}
+function eraDecisionOptions(record) {
+  var lever = ERAS_DATA.decisions.topics[record.topic].lever, n = record.intensity;
+  var invest = {funds: -n, morale: -1, reputation: 1}, pilot = {funds: -1, morale: 1}, defer = {funds: 1, reputation: -1};
+  if (lever !== "funds") {
+    invest[lever] = (invest[lever] || 0) + 1 + n;
+    pilot[lever] = (pilot[lever] || 0) + 1;
+    defer[lever] = (defer[lever] || 0) - 1;
+  }
+  return [invest, pilot, defer];
+}
+function eraDecisionFundsAmount(amount, managerMode) {
+  if (!amount) return 0;
+  if (managerMode) {
+    var m = S && S.m, base = m ? Math.max(250000, +m.bud || 0) : 250000;
+    var raw = Math.max(25000, Math.round(base * 0.025 * Math.abs(amount) / 10000) * 10000);
+    return amount < 0 ? -Math.min(Math.max(0, +m.bud || 0), raw) : raw;
+  }
+  var p = S && S.p, salary = p ? Math.max(10000, +p.sal || 0) : 10000;
+  var money = p ? Math.max(0, +p.money || 0) : 0;
+  var playerAmount = Math.max(1000, Math.round(salary * 0.12 * Math.abs(amount) / 1000) * 1000);
+  return amount < 0 ? -Math.min(money, playerAmount) : playerAmount;
+}
+function eraDecisionChips(record, choice, managerMode) {
+  var fx = eraDecisionOptions(record)[choice], chips = [], topics = ERAS_DATA.decisions.topics, lever = topics[record.topic].lever;
+  var cash = eraDecisionFundsAmount(fx.funds, managerMode);
+  if (cash) chips.push([managerMode ? "bud" : "money", cash]);
+  if (fx.morale) { chips.push([managerMode ? "sqMor" : "mor", fx.morale * 2]); if (managerMode) chips.push(["chem", fx.morale * 2]); }
+  if (fx.reputation) { chips.push([managerMode ? "rep" : "fame", fx.reputation * 2]); if (managerMode) chips.push(["board", fx.reputation * 2]); }
+  if (lever === "training" && fx.training) chips.push(["note", 0, eraText("Entrenamiento futuro {n} puntos porcentuales", {n: Math.round(fx.training * 2)})]);
+  if (lever === "insight" && fx.insight) chips.push(["note", 0, eraText(managerMode ? "Nivel de ojeo {n}" : "Profesionalidad {n}", {n: fx.insight})]);
+  if (lever === "fitness" && fx.fitness) chips.push([managerMode ? "sfit" : "fit", fx.fitness * 2]);
+  if (lever === "culture" && fx.culture) chips.push([managerMode ? "chem" : "fans", fx.culture * 2]);
+  return chips;
+}
+function eraDecisionDescription(item, managerMode) {
+  var record = eraDecisionRecord(item && item.id);
+  if (!record || !eraIsActive()) return null;
+  var catalog = ERAS_DATA.decisions, context = catalog.contexts[record.decade][record.context], profile = eraInfoForYear(S.yr), opts = [
+    {label: "Acelerar con inversión", description: "Coste inmediato alto; refuerza el área elegida a largo plazo."},
+    {label: "Probar por fases", description: "Coste y beneficio moderados; permite aprender antes de ampliar."},
+    {label: "Aplazar y proteger recursos", description: "Protege recursos ahora, pero reduce el impulso futuro."}
+  ];
+  return {tag: "real", tagTxt: eraText("Decisión de época"), cat: eraText("Decisión de gestión"), title: eraDecisionLabel(record),
+    text: eraText(catalog.periods[record.decade]) + " " + eraText("Perfil de juego: {points} puntos por victoria, máximo {subs} cambios, {windows}; {social}.", {
+      points: profile.rules.winPoints, subs: profile.rules.maxSubs,
+      windows: eraText(profile.rules.transferWindows ? "Ventanas de fichajes" : "Sin ventanas obligatorias"),
+      social: eraText(profile.media.socialMedia ? "Redes disponibles" : "Sin redes sociales")
+    }) + " " + eraText(context) + " " + eraText("Este dilema de gestión es una situación ficticia de juego, no un episodio histórico atribuido a un club real. Elige según los efectos mostrados."),
+    opts: opts.map(function (option, i) {
+      var desc = eraText(option.description);
+      return {t: eraText(option.label), d: desc, outs: [{p: 1, good: true, sure: true, lab: eraText("Efecto confirmado"), chips: eraDecisionChips(record, i, managerMode)}]};
+    })};
+}
+function eraApplyDecision(record, choice, managerMode) {
+  var options = eraDecisionOptions(record), fx = options[choice], desc = eraDecisionDescription({id: record.id}, managerMode);
+  if (!eraIsActive() || !fx || !desc) return null;
+  var chips = [], cash = eraDecisionFundsAmount(fx.funds, managerMode), lever = ERAS_DATA.decisions.topics[record.topic].lever;
+  if (managerMode) {
+    var m = S.m;
+    if (cash) { m.bud = Math.max(0, (+m.bud || 0) + cash); chips.push(["bud", cash]); }
+    if (fx.morale) { m.chem = clamp((+m.chem || 0) + fx.morale * 2, 0, 100); (m.sq || []).forEach(function (p) { p.mor = clamp((+p.mor || 0) + fx.morale * 2, 0, 100); }); chips.push(["sqMor", fx.morale * 2], ["chem", fx.morale * 2]); }
+    if (fx.reputation) { m.rep = clamp((+m.rep || 0) + fx.reputation * 2, 0, 100); m.board = clamp((+m.board || 0) + fx.reputation * 2, 0, 100); m.peakRep = Math.max(+m.peakRep || 0, m.rep); chips.push(["rep", fx.reputation * 2], ["board", fx.reputation * 2]); }
+    if (lever === "training" && fx.training) S.era.trainingBonus = clamp((+S.era.trainingBonus || 0) + fx.training * 0.02, -0.2, 0.2);
+    if (lever === "insight" && fx.insight) S.era.scoutingLevel = clamp((+S.era.scoutingLevel || 0) + fx.insight, 0, 5);
+    if (lever === "fitness" && fx.fitness) { (m.sq || []).forEach(function (p) { p.fit = clamp((+p.fit || 0) + fx.fitness * 2, 0, 100); }); chips.push(["sfit", fx.fitness * 2]); }
+    if (lever === "culture" && fx.culture) { m.chem = clamp((+m.chem || 0) + fx.culture * 2, 0, 100); m.fans = clamp((+m.fans || 0) + fx.culture * 2, 0, 100); chips.push(["chem", fx.culture * 2], ["fans", fx.culture * 2]); }
+  } else {
+    var p = S.p;
+    if (cash) { p.money = Math.max(0, (+p.money || 0) + cash); chips.push(["money", cash]); }
+    if (fx.morale) { p.mor = clamp((+p.mor || 0) + fx.morale * 2, 0, 100); chips.push(["mor", fx.morale * 2]); }
+    if (fx.reputation) { p.fame = clamp((+p.fame || 0) + fx.reputation * 2, 0, 100); chips.push(["fame", fx.reputation * 2]); }
+    if (lever === "training" && fx.training) S.era.trainingBonus = clamp((+S.era.trainingBonus || 0) + fx.training * 0.02, -0.2, 0.2);
+    if (lever === "insight" && fx.insight) { p.prof = clamp((+p.prof || 0) + fx.insight, 0, 100); chips.push(["prof", fx.insight]); }
+    if (lever === "fitness" && fx.fitness) { p.fit = clamp((+p.fit || 0) + fx.fitness * 2, 0, 100); chips.push(["fit", fx.fitness * 2]); }
+    if (lever === "culture" && fx.culture) { p.fans = clamp((+p.fans || 0) + fx.culture * 2, 0, 100); chips.push(["fans", fx.culture * 2]); }
+  }
+  if (lever === "training" && fx.training) chips.push(["note", 0, eraText("Entrenamiento futuro {n} puntos porcentuales", {n: Math.round(fx.training * 2)})]);
+  if (lever === "insight" && fx.insight && managerMode) chips.push(["note", 0, eraText("Nivel de ojeo {n}", {n: fx.insight})]);
+  S.era.decisionLog = Array.isArray(S.era.decisionLog) ? S.era.decisionLog : [];
+  S.era.decisionSeen = S.era.decisionSeen || {};
+  S.era.decisionSeen[record.decade] = Array.isArray(S.era.decisionSeen[record.decade]) ? S.era.decisionSeen[record.decade] : [];
+  if (S.era.decisionSeen[record.decade].indexOf(record.id) < 0) S.era.decisionSeen[record.decade].push(record.id);
+  S.era.decisionLog.push({id: record.id, year: S.yr, choice: choice});
+  if (S.era.decisionLog.length > 200) S.era.decisionLog.splice(0, S.era.decisionLog.length - 200);
+  S.pend.shift();
+  var result = {t: "decision", tipo: managerMode ? "mgr" : "real", cat: desc.cat, title: desc.title, choice: desc.opts[choice].t,
+    txt: eraText("Decisión de época aplicada y añadida a tu legado."), chips: chips, y: S.yr, good: true, pct: 100, eraDecisionId: record.id};
+  if (managerMode && typeof feed === "function") feed(result);
+  return result;
+}
+function eraQueueSeasonDecision() {
+  if (!eraIsActive() || !S || !S.era || !S.era.active) return false;
+  S.pend = Array.isArray(S.pend) ? S.pend : [];
+  S.era.decisionYears = S.era.decisionYears || {};
+  var yearKey = String(S.yr);
+  if (S.era.decisionYears[yearKey]) return false;
+  var pack = eraPackForYear(S.yr), all = ERAS_DATA && ERAS_DATA.decisions && ERAS_DATA.decisions.records || [];
+  var options = all.filter(function (record) { return record.decade === pack.id; });
+  if (!options.length) return false;
+  var seen = S.era.decisionSeen && S.era.decisionSeen[pack.id] || [];
+  var fresh = options.filter(function (record) { return seen.indexOf(record.id) < 0; });
+  if (!fresh.length) fresh = options;
+  var seed = typeof hashStr === "function" ? hashStr(String(S.uid || "") + "|" + yearKey + "|" + pack.id) : +S.yr;
+  var decision = fresh[Math.abs(seed) % fresh.length];
+  S.era.decisionYears[yearKey] = decision.id;
+  S.pend.push({k: "eraDecision", id: decision.id});
+  return decision;
+}
+function eraResolveDecision(item, choice, managerMode) {
+  var record = eraDecisionRecord(item && item.id), desc = eraDecisionDescription(item, managerMode);
+  if (!record || !desc || choice < 0 || choice >= desc.opts.length) return null;
+  return eraApplyDecision(record, choice, managerMode);
 }
 function eraKnownYear(year) { return !!eraPackForYear(year); }
 function eraText(text, values) {
@@ -198,7 +378,8 @@ function eraStartCareer(mode, year, identity) {
   var now = Date.now();
   S.uid = "era-" + now.toString(36) + "-" + Math.floor(Math.random() * 1e6).toString(36);
   S.era = {active: true, saveSchema: ERA_SAVE_SCHEMA, mode: mode, profileId: pack.id, startDecade: pack.id,
-    startYear: year, startLabel: pack.label, createdAt: now, playerNames: "generated-archetypes"};
+    startYear: year, startLabel: pack.label, createdAt: now, playerNames: "generated-archetypes", decisionLog: [], decisionSeen: {}, decisionYears: {}};
+  eraQueueSeasonDecision();
   return S;
 }
 function eraStartWithContext(mode, year, identity) {
@@ -218,6 +399,11 @@ function eraStartWithContext(mode, year, identity) {
   }
   ["mgrStartSeason", "mgrStartBlock", "mgrQueueBetween", "mgrStartSummer"].forEach(eraWrapMarketPhase);
   eraWrapPlayerMarket();
+  eraWrapSeasonDecision("startSeason");
+  eraWrapSeasonDecision("mgrStartSeason");
+  eraWrapScouting();
+  eraInstallManagerDecisionHooks();
+  eraInstallKitHooks();
   eraWrapGrowth("growthTick", false);
   eraWrapGrowth("mgrGrowth", true);
   if (typeof extraTime === "function") {
@@ -316,3 +502,7 @@ function eraStartWithContext(mode, year, identity) {
     };
   });
 })();
+if (typeof EX_PEND !== "undefined") EX_PEND.eraDecision = {
+  desc: function (item) { return eraDecisionDescription(item, false); },
+  resolve: function (item, choice) { return eraResolveDecision(item, choice, false); }
+};

@@ -37,6 +37,7 @@ const dom = new JSDOM(html, {
 });
 
 const {window} = dom;
+assert.ok(window.document.querySelector('.boot-screen'), 'loading screen should be visible while the game modules are booting');
 const waitFor = async (predicate, description) => {
   const start = Date.now();
   while (!predicate()) {

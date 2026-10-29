@@ -51,6 +51,7 @@ ERAS_ROOT = GAME_ROOT / "erascene"
 ERAS_PACKS = [json.loads(path.read_text(encoding="utf-8")) for path in sorted((ERAS_ROOT / "packs").glob("*.json"))]
 ERAS_TIMELINE = json.loads((ERAS_ROOT / "rules-timeline.json").read_text(encoding="utf-8"))
 ERAS_I18N = json.loads((ERAS_ROOT / "translations.json").read_text(encoding="utf-8"))
+ERAS_DECISIONS = json.loads((ERAS_ROOT / "decisions.json").read_text(encoding="utf-8"))
 EXPECTED_ERAS = ["1970s", "1980s", "1990s", "2000s", "2010s", "2020s"]
 if [pack.get("id") for pack in ERAS_PACKS] != EXPECTED_ERAS:
     raise ValueError("Era packs must cover 1970s through 2020s exactly once")
@@ -65,6 +66,29 @@ for pack in ERAS_PACKS:
     missing_clubs = [name for name in pack["referenceClubs"] if name not in available_clubs]
     if missing_clubs:
         raise ValueError(f"Era pack {pack['id']} has clubs absent from the shared world: {missing_clubs}")
+if ERAS_DECISIONS.get("schema") != 1 or len(ERAS_DECISIONS.get("topics", [])) != 10:
+    raise ValueError("Era decision catalogue must define ten topics")
+if set(ERAS_DECISIONS.get("contexts", {})) != set(EXPECTED_ERAS) or any(len(items) != 10 for items in ERAS_DECISIONS.get("contexts", {}).values()):
+    raise ValueError("Era decision catalogue must define ten period-specific situations for every decade")
+if set(ERAS_DECISIONS.get("periods", {})) != set(EXPECTED_ERAS):
+    raise ValueError("Era decision catalogue must define a frame for all six decades")
+seen_decisions = set()
+for decade in EXPECTED_ERAS:
+    records = [record for record in ERAS_DECISIONS.get("records", []) if record.get("decade") == decade]
+    pairs = {(record.get("topic"), record.get("context")) for record in records}
+    if len(records) != 100 or len(pairs) != 100:
+        raise ValueError(f"Era decision catalogue must contain 100 distinct topic/situation combinations for {decade}")
+    for record in records:
+        if not record.get("id") or record["id"] in seen_decisions:
+            raise ValueError(f"Era decision id is missing or duplicated: {record.get('id')}")
+        seen_decisions.add(record["id"])
+        if not (0 <= record.get("topic", -1) < len(ERAS_DECISIONS["topics"])) or not (0 <= record.get("context", -1) < len(ERAS_DECISIONS["contexts"][decade])):
+            raise ValueError(f"Era decision {record['id']} references an unknown topic or situation")
+        if record.get("intensity") not in (1, 2, 3):
+            raise ValueError(f"Era decision {record['id']} has invalid intensity")
+for phrase in [phrase for items in ERAS_DECISIONS["contexts"].values() for phrase in items] + [topic["key"] for topic in ERAS_DECISIONS["topics"]] + list(ERAS_DECISIONS["periods"].values()):
+    if phrase not in ERAS_I18N:
+        raise ValueError(f"Era decision phrase is missing from translations: {phrase}")
 for key, locales in ERAS_I18N.items():
     for language in ("en", "de", "it", "fr"):
         if not locales.get(language):
@@ -77,7 +101,7 @@ if ERAS_TIMELINE.get("schema") != 1 or any("year" not in event or "changes" not 
     raise ValueError("Era rules timeline is invalid")
 if [event["year"] for event in ERAS_TIMELINE["events"]] != sorted(event["year"] for event in ERAS_TIMELINE["events"]):
     raise ValueError("Era rules timeline events must be chronological")
-ERAS_DATA_JS = "var ERAS_MODE = true;\nvar ERAS_DATA = " + json.dumps({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE}, ensure_ascii=False, separators=(",", ":")) + ";\nvar ERAS_I18N = " + json.dumps(ERAS_I18N, ensure_ascii=False, separators=(",", ":")) + ";\n"
+ERAS_DATA_JS = "var ERAS_MODE = true;\nvar ERAS_DATA = " + json.dumps({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE, "decisions": ERAS_DECISIONS}, ensure_ascii=False, separators=(",", ":")) + ";\nvar ERAS_I18N = " + json.dumps(ERAS_I18N, ensure_ascii=False, separators=(",", ":")) + ";\n"
 ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "ui-eras.js", "ui-boot.js"]
 web_config_path = ROOT / "web" / "config.json"
 web_config = json.loads(web_config_path.read_text(encoding="utf-8-sig")) if web_config_path.exists() else {}
@@ -184,7 +208,10 @@ MODULE_BOOTSTRAP = """(function () {
     } catch (error) { fail(error); return; }
     finally { executingModule = false; }
     index++;
-    if (splash && index %% 10 === 0) splash.textContent = 'Cargando el juego… ' + Math.round(index * 100 / ids.length) + '%%';
+    if (splash && index %% 10 === 0) {
+      var status = splash.querySelector('[data-boot-status]');
+      if (status) status.textContent = 'Cargando el juego… ' + Math.round(index * 100 / ids.length) + '%%';
+    }
     if (index < ids.length) setTimeout(next, 0);
     else {
       booting = false;
@@ -213,16 +240,48 @@ html_head = f"""<!doctype html>
 {head}</head>
 """
 
+LOADING_SCREEN = """<div class="boot-screen" role="status" aria-live="polite">
+  <div class="boot-card">
+    <div class="boot-mark" aria-hidden="true"><span>⚽</span></div>
+    <p class="boot-kicker">CAMINO A LA LEYENDA</p>
+    <h1 class="boot-title">Preparando el juego</h1>
+    <p class="boot-status" data-boot-status>Cargando el juego…</p>
+    <div class="boot-track" aria-hidden="true"><i></i></div>
+  </div>
+</div>"""
+
+WEB_BOOTSTRAP = """(function () {
+  var source = document.getElementById('web-game-source');
+  function fail() {
+    var app = document.getElementById('app');
+    if (app) app.innerHTML = '<div class="boot-screen" role="alert"><div class="boot-card"><h1 class="boot-title">No se pudo iniciar el juego</h1><p class="boot-status">Recarga la página para volver a intentarlo.</p><button type="button" class="btn pri" onclick="location.reload()">Recargar</button></div></div>';
+  }
+  function launch() {
+    if (!source || !source.parentNode) { fail(); return; }
+    var script = document.createElement('script');
+    script.textContent = source.textContent || '';
+    source.parentNode.removeChild(source);
+    try {
+      (document.head || document.documentElement).appendChild(script);
+      script.parentNode.removeChild(script);
+    } catch (error) { fail(); return; }
+    if (!document.querySelector('#app main')) fail();
+  }
+  if (window.requestAnimationFrame) window.requestAnimationFrame(function () { window.setTimeout(launch, 0); });
+  else window.setTimeout(launch, 32);
+})();"""
+
 web_html = html_head + f"""<body>
-<div id="app"></div>
+<div id="app">{LOADING_SCREEN}</div>
+<script type="text/plain" id="web-game-source">{web_js}</script>
 <script>
-{web_js}
+{WEB_BOOTSTRAP}
 </script>
 </body>
 </html>
 """
 mobile_html = html_head + f"""<body>
-<div id="app"><div class="boot-screen" role="status" aria-live="polite" style="min-height:100dvh;display:grid;place-items:center;color:#f4f4ee;background:#0b1417;font:600 16px system-ui">Cargando el juego…</div></div>
+<div id="app">{LOADING_SCREEN}</div>
 {asset_markup}
 {LANG_MARKUP}
 {MODULE_MARKUP}
@@ -240,7 +299,7 @@ mobile_page = ROOT / "dist" / "android" / "jugar" / "juego.html"
 mobile_page.parent.mkdir(parents=True, exist_ok=True)
 mobile_page.write_text(mobile_html, encoding="utf-8")
 
-# Do not ship the stale v5.2 bundle from public/; the generated v5.12/62 game
+# Do not ship the stale v5.2 bundle from public/; the generated v5.13/63 game
 # is now the only engine used by the Web page and Android WebView.
 stale_bundle = ROOT / "dist" / "camino-engine.js"
 if stale_bundle.exists():
