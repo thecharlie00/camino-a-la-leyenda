@@ -34,6 +34,14 @@ assert.match(gameSource, /var GOAT_WEB_BUILD = false;/);
 assert.match(gameSource, /var GOAT_API_URL = "https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev";/);
 assert.match(gameSource, /UIX\.add\("mainhome"/);
 assert.match(gameSource, /UIX\.add\("modes"[\s\S]*?data-a="era-open"/);
+assert.match(gameSource, /S\.ntfHistory/);
+assert.match(gameSource, /rows\.push\(\["ntfcenter"/);
+assert.match(gameSource, /function openNtfCenter\(\)/);
+assert.match(gameSource, /MAX_NTF_HISTORY = 60/);
+assert.match(androidHtml, /ntf-history-list/);
+for (const translation of ['Notifications', 'Benachrichtigungen', 'Notifiche', 'Alertes de match']) {
+  assert.ok(gameSource.includes(translation), `Missing localized notifications UI text: ${translation}`);
+}
 assert.match(gameSource, /var WEB_BUILD = true;/);
 assert.match(gameSource, /var NO_ADS = true;/);
 assert.doesNotMatch(html, /camino-module-\d+/, 'Web build must retain its existing monolithic startup');

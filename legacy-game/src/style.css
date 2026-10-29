@@ -588,6 +588,17 @@ nav.tabs .nbadge { position: absolute; top: 4px; left: calc(50% + 6px); min-widt
 .ntf.res b small { font-family: var(--f-body); font-size: var(--fs-xs); color: var(--mist); text-transform: none; margin-left: 6px; letter-spacing: 0; }
 .ntf.res span { font-weight: 500; font-size: var(--fs-sm); }
 .ntf.out { opacity: 0; transform: translateY(-8px); transition: opacity .35s, transform .35s; }
+.ntf-history-intro { margin: 0 0 10px; font-size: var(--fs-sm); }
+.ntf-history-list { display: flex; flex-direction: column; gap: 8px; max-height: min(56dvh, 520px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y; padding: 2px 3px 8px 0; }
+.ntf-history-item { padding: 10px 12px; border: 1px solid var(--line); border-left: 4px solid var(--sky); border-radius: 3px; background: var(--night); }
+.ntf-history-item.res, .ntf-history-item.amber { border-left-color: var(--led); }
+.ntf-history-item.good { border-left-color: var(--grass); }
+.ntf-history-item.red, .ntf-history-item.bad { border-left-color: var(--red); }
+.ntf-history-item p { margin: 0; color: var(--chalk); overflow-wrap: anywhere; }
+.ntf-history-item small { display: block; margin-top: 5px; color: var(--dim); font-size: var(--fs-xs); }
+.ntf-history-empty { margin: 16px 0; padding: 18px 12px; text-align: center; color: var(--mist); border: 1px dashed var(--line); }
+.ntf-history-actions { position: sticky; bottom: -1px; margin-top: 12px; padding: 10px 0 max(8px, env(safe-area-inset-bottom, 0px)); background: linear-gradient(transparent, var(--stand) 18%); }
+.ntf-history-actions .btn { min-height: 44px; }
 @keyframes ntfin { from { opacity: 0; transform: translateY(-14px) scale(.97); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ntf { animation: none; } .ntf.out { transition: none; } }
 /* marcador final tras un momento */
@@ -866,8 +877,8 @@ html, body { overscroll-behavior-x: none; }
 .lfhn { width: 34px; text-align: center; font: 900 var(--fs-xl)/1 var(--f-disp); color: var(--led); }
 @media (max-width: 360px) { .lfgrid { grid-template-columns: repeat(8, 1fr); } .lfside .lfsvg { width: 80px; } }
 .dock.two { display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px; } .dock.two .go { font-size: var(--fs-lg); padding-left: 8px; padding-right: 8px; }
-/* los avisos no tapan la cabecera (botón de menú) y no bloquean al desaparecer */
-.ntfs { top: calc(80px + env(safe-area-inset-top, 0px)); }
+/* Deja libres la zona segura y la cabecera; el aviso sigue siendo fácil de tocar en móvil. */
+.ntfs { top: max(80px, calc(12px + env(safe-area-inset-top, 0px))); }
 .ntf.out { pointer-events: none; }
 /* míster+: ojeadores, selección, filial, charlas rápidas */
 .mpcard .mpnote { font-size: var(--fs-xs); margin: 6px 0 0; }
