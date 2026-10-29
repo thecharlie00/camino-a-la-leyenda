@@ -16,14 +16,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowInsetsController;
 import android.webkit.JavascriptInterface;
-import android.webkit.RenderProcessGoneDetail;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.window.OnBackInvokedDispatcher;
 
 public final class MainActivity extends Activity {
     private WebView webView;
@@ -34,7 +32,7 @@ public final class MainActivity extends Activity {
         @JavascriptInterface
         public void copy(final String text) {
             if (text == null || text.length() > 2000000) return;
-            runOnUiThread(new Runnable() {
+            runUiSafely(new Runnable() {
                 public void run() {
                     ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                     if (cm != null) {
@@ -46,7 +44,7 @@ public final class MainActivity extends Activity {
 
         @JavascriptInterface
         public void haptic(final String kind) {
-            runOnUiThread(new Runnable() {
+            runUiSafely(new Runnable() {
                 public void run() {
                     if (webView == null) return;
                     int feedback = HapticFeedbackConstants.KEYBOARD_TAP;
@@ -85,7 +83,7 @@ public final class MainActivity extends Activity {
 
         @JavascriptInterface
         public void openStore() {
-            runOnUiThread(new Runnable() {
+            runUiSafely(new Runnable() {
                 public void run() {
                     String pkg = getPackageName();
                     try {
@@ -141,45 +139,7 @@ public final class MainActivity extends Activity {
         try {
             webView = new WebView(this);
             webView.setBackgroundColor(Color.rgb(11, 20, 23));
-            webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    if (url != null && url.startsWith("file:///android_asset/")) {
-                        return false;
-                    }
-                    if (url != null && (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("mailto:"))) {
-                        try {
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        } catch (Throwable ignored) {}
-                    }
-                    return true;
-                }
-
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                    if (request != null && request.getUrl() != null) {
-                        return shouldOverrideUrlLoading(view, request.getUrl().toString());
-                    }
-                    return false;
-                }
-
-                @Override
-                public boolean onRenderProcessGone(WebView view, RenderProcessGoneDetail detail) {
-                    if (webView != null) {
-                        try {
-                            if (webView.getParent() instanceof android.view.ViewGroup) {
-                                ((android.view.ViewGroup) webView.getParent()).removeView(webView);
-                            }
-                            webView.destroy();
-                        } catch (Throwable ignored) {}
-                        webView = null;
-                    }
-                    finish();
-                    return true;
-                }
-            });
+            webView.setWebViewClient(createWebViewClient());
             webView.setWebChromeClient(new WebChromeClient());
 
             WebSettings settings = webView.getSettings();
@@ -203,6 +163,7 @@ public final class MainActivity extends Activity {
             }
             registerPredictiveBack();
         } catch (Throwable t) {
+            disposeWebView(webView);
             try {
                 android.widget.TextView tv = new android.widget.TextView(this);
                 tv.setText("No se pudo iniciar el componente WebView del sistema. Asegúrate de tener Android System WebView actualizado.");
@@ -212,6 +173,65 @@ public final class MainActivity extends Activity {
                 setContentView(tv);
             } catch (Throwable ignored) {}
         }
+    }
+
+    private WebViewClient createWebViewClient() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            try {
+                return Api26.createWebViewClient(this);
+            } catch (Throwable ignored) {
+                // Fall back to the API-24-safe client if the platform callback is unavailable.
+            }
+        }
+        return new NavigationWebViewClient(this);
+    }
+
+    private void runUiSafely(Runnable action) {
+        try {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        if (!isFinishing()) action.run();
+                    } catch (Throwable ignored) {}
+                }
+            });
+        } catch (Throwable ignored) {}
+    }
+
+    private boolean openExternalUrl(String url) {
+        if (url == null) return true;
+        if (url.startsWith("file:///android_asset/")) return false;
+        try {
+            String scheme = Uri.parse(url).getScheme();
+            if ("http".equalsIgnoreCase(scheme)
+                    || "https".equalsIgnoreCase(scheme)
+                    || "mailto".equalsIgnoreCase(scheme)) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        } catch (Throwable ignored) {}
+        return true;
+    }
+
+    private void disposeWebView(WebView target) {
+        WebView old = target != null ? target : webView;
+        if (old == null) return;
+        if (old == webView) webView = null;
+        try { old.stopLoading(); } catch (Throwable ignored) {}
+        try {
+            if (old.getParent() instanceof android.view.ViewGroup) {
+                ((android.view.ViewGroup) old.getParent()).removeView(old);
+            }
+        } catch (Throwable ignored) {}
+        try { old.destroy(); } catch (Throwable ignored) {}
+    }
+
+    private boolean onRenderProcessGone(WebView view) {
+        disposeWebView(view);
+        finish();
+        return true;
     }
 
     private void configureEdgeToEdge() {
@@ -304,11 +324,48 @@ public final class MainActivity extends Activity {
             Api33.unregister(this, backInvokedCallback);
             backInvokedCallback = null;
         }
-        if (webView != null) {
-            webView.destroy();
-            webView = null;
-        }
+        disposeWebView(webView);
         super.onDestroy();
+    }
+
+    private static class NavigationWebViewClient extends WebViewClient {
+        protected final MainActivity activity;
+
+        NavigationWebViewClient(MainActivity activity) {
+            this.activity = activity;
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return activity.openExternalUrl(url);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            if (request != null && request.getUrl() != null) {
+                return activity.openExternalUrl(request.getUrl().toString());
+            }
+            return false;
+        }
+    }
+
+    // RenderProcessGoneDetail/onRenderProcessGone were added in API 26. Keep that
+    // type out of the API-24/25 WebViewClient loaded on older Android releases.
+    private static final class Api26 {
+        static WebViewClient createWebViewClient(MainActivity activity) {
+            return new RenderAwareWebViewClient(activity);
+        }
+
+        private static final class RenderAwareWebViewClient extends NavigationWebViewClient {
+            RenderAwareWebViewClient(MainActivity activity) {
+                super(activity);
+            }
+
+            @Override
+            public boolean onRenderProcessGone(WebView view, android.webkit.RenderProcessGoneDetail detail) {
+                return activity.onRenderProcessGone(view);
+            }
+        }
     }
 
     // Keep newer framework API references out of the base Activity methods so
@@ -368,9 +425,9 @@ public final class MainActivity extends Activity {
                             return null;
                         }
                     });
-                int priority = OnBackInvokedDispatcher.PRIORITY_DEFAULT;
+                // PRIORITY_DEFAULT is the integer value 0; avoid statically linking the API-33 type.
                 dispCls.getMethod("registerOnBackInvokedCallback", int.class, cbCls)
-                    .invoke(disp, priority, callback);
+                    .invoke(disp, 0, callback);
                 return callback;
             } catch (Throwable ignored) {
                 return null;

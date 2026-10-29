@@ -35,7 +35,20 @@ mkdir -p build-aab/{classes,dex,module} "$ROOT/dist" assets/jugar
 # Package the Android launcher icon alongside the self-contained game HTML.
 "$AAPT2" compile --dir res -o build-aab/resources.zip
 cp "$ROOT/dist/android/jugar/juego.html" assets/jugar/juego.html
-cp "$ROOT/dist/android/jugar/juego.html" assets/index.html
+# Keep the legacy entry point but redirect it instead of shipping a second 10 MB game copy.
+cat > assets/index.html <<'EOF'
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="refresh" content="0;url=file:///android_asset/jugar/juego.html">
+  <title>Camino a la Leyenda</title>
+  <script>location.replace("file:///android_asset/jugar/juego.html");</script>
+</head>
+<body><a href="file:///android_asset/jugar/juego.html">Abrir el juego</a></body>
+</html>
+EOF
 
 # Create an Android proto-APK to supply the base module manifest and packaged assets.
 "$AAPT2" link \
