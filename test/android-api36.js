@@ -13,9 +13,9 @@ const gameBuilder = read('../build_legacy_game.py');
 const gameCss = read('../legacy-game/src/style.css');
 
 assert.match(manifest, /android:minSdkVersion="24"\s+android:targetSdkVersion="36"/);
-assert.match(manifest, /android:versionCode="61"/);
-assert.match(manifest, /android:versionName="5\.11"/);
-assert.equal(packageJson.version, '5.11.0');
+assert.match(manifest, /android:versionCode="62"/);
+assert.match(manifest, /android:versionName="5\.12"/);
+assert.equal(packageJson.version, '5.12.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
