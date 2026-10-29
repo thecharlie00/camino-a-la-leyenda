@@ -3,7 +3,7 @@
   if (!ERAS_MODE || !window.UIX) return;
   var state = {open: false, packId: "1990s", year: 1992, mode: "player", firstName: "Alex", lastName: "Leyenda", club: ""};
   var layer = null;
-  var kitNames = {"classic-70s": "Corte clásico de los 70", "classic-80s": "Corte clásico de los 80", "baggy-90s": "Camiseta holgada de los 90", "fitted-00s": "Equipación entallada de los 2000", "modern-athletic": "Corte atlético moderno", "modern-performance": "Equipación de alto rendimiento"};
+  var kitNames = {"classic-70s": "Detalle retro de los 70", "classic-80s": "Patrón chevron de los 80", "baggy-90s": "Franjas horizontales de los 90", "fitted-00s": "Panel dividido de los 2000", "modern-athletic": "Diseño geométrico de los 2010", "modern-performance": "Detalle técnico geométrico de los 2020"};
   var pitchNames = {"mud-winter": "Barro invernal", "hybrid-emerging": "Transición a césped híbrido", hybrid: "Césped híbrido", "hybrid-heated": "Césped híbrido con calefacción"};
   var broadcastNames = {"grainy-4:3": "Televisión 4:3 granulada", "sd-4:3-first-gen-eng": "Televisión 4:3 granulada", "sd-16:9": "Definición estándar panorámica", "hd-16:9": "Alta definición", "4k-graphics": "4K y gráficos actuales"};
   var scienceNames = {basic: "Preparación física básica", growing: "Ciencia deportiva en desarrollo", advanced: "Ciencia deportiva avanzada", "elite-data": "Ciencia deportiva con análisis de datos"};
@@ -16,7 +16,7 @@
   function theme() {
     if (!document.getElementById("eras-style")) {
       var style = document.createElement("style"); style.id = "eras-style";
-      style.textContent = ".eras-tile{border:1px solid rgba(203,166,76,.55);background:linear-gradient(120deg,rgba(203,166,76,.14),rgba(12,20,24,.96));text-align:left}.eras-tile b{color:#f0d58b}.eras-hud{position:fixed;z-index:58;top:6px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;max-width:calc(100vw - 16px);padding:5px 7px;border:1px solid rgba(220,190,108,.65);border-radius:12px;background:rgba(7,14,17,.94);box-shadow:0 4px 14px #0008;color:#f3e8c8;font:700 11px/1.2 system-ui,sans-serif}.eras-hud span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.eras-hud button{border:0;border-radius:8px;padding:5px 7px;background:#24343a;color:#fff;font:inherit}.eras-overlay{position:fixed;z-index:1000;inset:0;background:rgba(3,8,10,.88);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px 10px 30px}.eras-dialog{width:min(680px,100%);margin:auto;background:#101c20;color:#e9eee7;border:1px solid rgba(220,190,108,.48);border-radius:18px;padding:18px;box-shadow:0 18px 60px #000b}.eras-dialog h2,.eras-dialog h3{margin:0 0 7px}.eras-kicker{color:#e0bf67;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.eras-lead{color:#b9c7c2;line-height:1.45}.eras-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.eras-field{display:flex;flex-direction:column;gap:5px;min-width:0}.eras-field label{font-size:.78rem;color:#b9c7c2}.eras-field input,.eras-field select{box-sizing:border-box;width:100%;min-height:42px;border:1px solid #42545a;border-radius:10px;padding:8px 10px;background:#091316;color:#f4f4ee;font:inherit}.eras-summary{margin:14px 0;padding:12px;border-radius:12px;background:#0a1316;border-left:3px solid #d0ae5d}.eras-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.eras-tag{border:1px solid #34474c;border-radius:99px;padding:4px 8px;color:#d8e1da;font-size:.72rem}.eras-actions{display:flex;gap:8px;margin-top:14px}.eras-actions button,.eras-save button{min-height:40px;border:1px solid #43565b;border-radius:10px;padding:8px 12px;background:#1b2a2f;color:#f5f5ee;font:700 .9rem system-ui,sans-serif}.eras-actions .primary{background:#b7913c;color:#141414;border-color:#d7b45f}.eras-save{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #26363a}.eras-save small{display:block;color:#b9c7c2}.eras-saves{max-height:210px;overflow:auto}.era-skin-teletext .top{border-bottom:2px solid #4ad65a}.era-skin-teletext .top .name,.era-skin-teletext .tag{font-family:ui-monospace,monospace}.era-skin-teletext .card{border-radius:2px}.era-skin-print-scoreboard .top{border-top:3px solid #b58e3f}@media(max-width:520px){.eras-dialog{padding:14px}.eras-grid{grid-template-columns:1fr}.eras-hud{font-size:10px}.eras-hud button{padding:5px}}";
+      style.textContent = ".eras-tile{border:1px solid rgba(203,166,76,.55);background:linear-gradient(120deg,rgba(203,166,76,.14),rgba(12,20,24,.96));text-align:left}.eras-tile b{color:#f0d58b}.eras-hud{position:fixed;z-index:58;top:6px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;max-width:calc(100vw - 16px);padding:5px 7px;border:1px solid rgba(220,190,108,.65);border-radius:12px;background:rgba(7,14,17,.94);box-shadow:0 4px 14px #0008;color:#f3e8c8;font:700 11px/1.2 system-ui,sans-serif}.eras-hud span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.eras-hud button{border:0;border-radius:8px;padding:5px 7px;background:#24343a;color:#fff;font:inherit}.eras-overlay{position:fixed;z-index:1000;inset:0;background:rgba(3,8,10,.88);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px 10px 30px}.eras-dialog{width:min(680px,100%);margin:auto;background:#101c20;color:#e9eee7;border:1px solid rgba(220,190,108,.48);border-radius:18px;padding:18px;box-shadow:0 18px 60px #000b}.eras-dialog h2,.eras-dialog h3{margin:0 0 7px}.eras-kicker{color:#e0bf67;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.eras-lead{color:#b9c7c2;line-height:1.45}.eras-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.eras-field{display:flex;flex-direction:column;gap:5px;min-width:0}.eras-field label{font-size:.78rem;color:#b9c7c2}.eras-field input,.eras-field select{box-sizing:border-box;width:100%;min-height:42px;border:1px solid #42545a;border-radius:10px;padding:8px 10px;background:#091316;color:#f4f4ee;font:inherit}.eras-summary{margin:14px 0;padding:12px;border-radius:12px;background:#0a1316;border-left:3px solid #d0ae5d}.eras-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.eras-tag{border:1px solid #34474c;border-radius:99px;padding:4px 8px;color:#d8e1da;font-size:.72rem}.eras-actions{display:flex;gap:8px;margin-top:14px}.eras-actions button,.eras-save button{min-height:40px;border:1px solid #43565b;border-radius:10px;padding:8px 12px;background:#1b2a2f;color:#f5f5ee;font:700 .9rem system-ui,sans-serif}.eras-actions .primary{background:#b7913c;color:#141414;border-color:#d7b45f}.eras-save{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #26363a}.eras-save small{display:block;color:#b9c7c2}.eras-saves{max-height:210px;overflow:auto}.eras-history{margin:8px 0 0;padding-left:22px;color:#d8e1da}.eras-history li{padding:6px 0;border-bottom:1px solid #26363a}.eras-history li span{display:block}.eras-history li small{display:block;color:#b9c7c2;margin-top:2px}.era-skin-teletext .top{border-bottom:2px solid #4ad65a}.era-skin-teletext .top .name,.era-skin-teletext .tag{font-family:ui-monospace,monospace}.era-skin-teletext .card{border-radius:2px}.era-skin-print-scoreboard .top{border-top:3px solid #b58e3f}@media(max-width:520px){.eras-dialog{padding:14px}.eras-grid{grid-template-columns:1fr}.eras-hud{font-size:10px}.eras-hud button{padding:5px}}";
       document.head.appendChild(style);
     }
   }
@@ -26,20 +26,20 @@
     return (pack.referenceClubs || []).filter(function (name) { return !!available[name]; }).map(function (name) { return {id: name, name: name}; });
   }
   function profileSummary(p) {
-    var rules = p.rules, media = p.media, presentation = p.presentation, economy = p.economy, staff = p.staff;
+    var rules = p.rules, media = p.media, presentation = p.presentation, economy = p.economy;
     var social = media.socialMedia ? t("Redes disponibles") : t("Sin redes sociales");
-    var activeVars = Object.keys(rules.varByCompetition || {}).filter(function (name) { return rules.varByCompetition[name]; });
-    var varText = activeVars.length ? t("VAR: {competitions}", {competitions: activeVars.join(", ")}) : t("VAR: no disponible");
-    return '<div class="eras-summary"><b>' + t("Reglas en {year}", {year: state.year}) + '</b><div class="eras-tags">' +
+    var implementedVar = !!((rules.varByCompetition || {})["Premier League"] || (rules.varByCompetition || {})["La Liga"]);
+    var varText = implementedVar ? t("VAR aplicado solo en Premier League y La Liga cuando la cronología lo permite.") : t("VAR: no disponible");
+    var skinText = presentation.uiSkin === "teletext" ? t("Interfaz aplicada: teletexto.") : presentation.uiSkin === "print-scoreboard" ? t("Interfaz aplicada: marcador impreso.") : t("Skin del perfil ({skin}) aún no aplicada; se conserva la interfaz estándar.", {skin: presentation.uiSkin});
+    return '<div class="eras-summary"><b>' + t("Reglas en {year}", {year: p.currentYear || state.year}) + '</b><div class="eras-tags">' +
       '<span class="eras-tag">' + t("{n} puntos por victoria", {n: rules.winPoints}) + '</span>' +
-      '<span class="eras-tag">' + t("Máximo {n} cambios", {n: rules.maxSubs}) + '</span>' +
-      '<span class="eras-tag">' + (rules.backPassBanned ? t("Pase atrás prohibido") : t("Pase atrás permitido")) + '</span>' +
+      '<span class="eras-tag">' + t("En directo: máximo {n} cambios", {n: rules.maxSubs}) + '</span>' +
       '<span class="eras-tag">' + (rules.transferWindows ? t("Ventanas de fichajes") : t("Sin ventanas obligatorias")) + '</span>' +
       '<span class="eras-tag">' + social + '</span><span class="eras-tag">' + varText + '</span></div>' +
-      '<p class="eras-lead" style="margin:10px 0 0">' + t("Presentación: {kit}; {pitch}; {broadcast}.", {kit: t(kitNames[presentation.kits] || presentation.kits), pitch: t(pitchNames[presentation.pitchWear] || presentation.pitchWear), broadcast: t(broadcastNames[presentation.broadcast] || presentation.broadcast)}) + '</p>' +
-      '<p class="eras-lead" style="margin:6px 0 0">' + t("Canales: {channels}.", {channels: media.channels.map(channelLabel).join(" · ")}) + '</p>' +
-      '<p class="eras-lead" style="margin:6px 0 0">' + t("Economía: salarios ×{wage}; mercado ×{market}; televisión ×{tv} ({currency}).", {wage: economy.wageScale.toFixed(2), market: economy.marketScale.toFixed(2), tv: economy.tvDealMultiplier.toFixed(2), currency: economy.currency}) + '</p>' +
-      '<p class="eras-lead" style="margin:6px 0 0">' + t("Personal de apoyo: {n}; {science}; {analytics}.", {n: staff.backroomMax, science: t(scienceNames[staff.sportsScience] || staff.sportsScience), analytics: staff.analysts ? t("Análisis de datos disponible") : t("Análisis de datos no disponible")}) + '</p></div>';
+      '<p class="eras-lead" style="margin:10px 0 0">' + skinText + '</p>' +
+      '<p class="eras-lead" style="margin:6px 0 0">' + t("Escalas económicas simuladas para salarios, valores y presupuestos.") + ' · ' + t("Salarios ×{wage}; mercado ×{market}; presupuesto ×{tv}.", {wage: economy.wageScale.toFixed(2), market: economy.marketScale.toFixed(2), tv: economy.tvDealMultiplier.toFixed(2)}) + '</p>' +
+      '<p class="eras-lead" style="margin:6px 0 0">' + t("Canales mostrados en el HUD; no simulan una red de contactos.") + ' ' + t("Canales: {channels}.", {channels: media.channels.map(channelLabel).join(" · ")}) + '</p>' +
+      '<p class="eras-lead" style="margin:6px 0 0">' + t("Estilo de prenda 3D del perfil (si no llevas una propia): {kit}, con colores del club; terreno y TV aún son referencias: {pitch}; {broadcast}.", {kit: t(kitNames[presentation.kits] || presentation.kits), pitch: t(pitchNames[presentation.pitchWear] || presentation.pitchWear), broadcast: t(broadcastNames[presentation.broadcast] || presentation.broadcast)}) + '</p></div>';
   }
   function savedRows() {
     var list = EraStore.getIndex();
@@ -48,6 +48,18 @@
       return '<div class="eras-save"><div><b>' + eraEscape(entry.player || t("Carrera")) + '</b><small>' + eraEscape(entry.decade || "") + ' · ' + eraEscape(entry.startYear) + ' · ' + eraEscape(entry.club || t("Sin club")) + '</small></div>' +
         '<div><button type="button" data-era-act="load" data-era-id="' + eraEscape(entry.id) + '">' + t("Continuar") + '</button> <button type="button" data-era-act="delete" data-era-id="' + eraEscape(entry.id) + '" aria-label="' + t("Borrar guardado") + '">×</button></div></div>';
     }).join("");
+  }
+  function recentDecisions() {
+    var history = S && S.era && Array.isArray(S.era.decisionLog) ? S.era.decisionLog.slice(-8).reverse() : [];
+    if (!history.length) return '<h3>' + t("Decisiones recientes") + '</h3><p class="eras-lead">' + t("Aún no has tomado decisiones de época.") + '</p>';
+    var labels = ["Acelerar con inversión", "Probar por fases", "Aplazar y proteger recursos"];
+    var rows = history.map(function (entry) {
+      var record = ERAS_DATA.decisions.records.filter(function (item) { return item.id === entry.id; })[0];
+      if (!record) return "";
+      var title = eraText(ERAS_DATA.decisions.topics[record.topic].key) + " · " + eraText(ERAS_DATA.decisions.contexts[record.decade][record.context]);
+      return '<li><b>' + eraEscape(entry.year) + '</b><span>' + eraEscape(title) + '</span><small>' + t(labels[entry.choice] || labels[1]) + '</small></li>';
+    }).filter(Boolean).join("");
+    return '<h3>' + t("Decisiones recientes") + '</h3><ol class="eras-history">' + rows + '</ol>';
   }
   function renderDialog() {
     if (!layer) return;
@@ -59,7 +71,10 @@
       if (!clubList.some(function (club) { return club.id === state.club; })) state.club = clubList.length ? clubList[0].id : "Manchester United";
     } else state.club = "";
     var clubs = state.mode === "manager" ? '<div class="eras-field"><label for="era-club">' + t("Club") + '</label><select id="era-club" data-era-field="club">' + clubList.map(function (club) { return '<option value="' + club.id + '"' + (club.id === state.club ? ' selected' : '') + '>' + eraEscape(club.name) + '</option>'; }).join("") + '</select></div>' : '';
-    layer.innerHTML = '<section class="eras-dialog" role="dialog" aria-modal="true" aria-labelledby="eras-title"><div class="eras-kicker">' + t("Modo aislado · guardados separados") + '</div><h2 id="eras-title">' + t("Modo Épocas") + '</h2><p class="eras-lead">' + t("Empieza una carrera en otro momento de la historia. La partida moderna y sus guardados no se modifican.") + '</p>' +
+    layer.setAttribute("data-era-decade", pack.id);
+    layer.setAttribute("data-era-year", state.year);
+    var cover = '<div class="eras-cover" aria-hidden="true"><span class="eras-cover-decade">' + eraEscape(pack.label) + '</span><span class="eras-cover-years">' + pack.years[0] + ' — ' + pack.years[1] + '</span><span class="eras-cover-stamp">' + state.year + '</span></div>';
+    layer.innerHTML = '<section class="eras-dialog" data-era-decade="' + eraEscape(pack.id) + '" role="dialog" aria-modal="true" aria-labelledby="eras-title">' + cover + '<div class="eras-kicker">' + t("Modo aislado · guardados separados") + '</div><h2 id="eras-title">' + t("Modo Épocas") + '</h2><p class="eras-lead">' + t("Empieza una carrera en otro momento de la historia. La partida moderna y sus guardados no se modifican.") + '</p>' +
       '<div class="eras-grid"><div class="eras-field"><label for="era-decade">' + t("Década de inicio") + '</label><select id="era-decade" data-era-field="pack">' + packs().map(function (item) { return '<option value="' + item.id + '"' + (item.id === pack.id ? ' selected' : '') + '>' + eraEscape(item.label) + '</option>'; }).join("") + '</select></div>' +
       '<div class="eras-field"><label for="era-year">' + t("Año exacto") + '</label><select id="era-year" data-era-field="year">' + years.map(function (n) { return '<option value="' + n + '"' + (n === state.year ? ' selected' : '') + '>' + n + '</option>'; }).join("") + '</select></div>' +
       '<div class="eras-field"><label for="era-mode">' + t("Tipo de carrera") + '</label><select id="era-mode" data-era-field="mode"><option value="player"' + (state.mode === "player" ? ' selected' : '') + '>' + t("Carrera de jugador") + '</option><option value="manager"' + (state.mode === "manager" ? ' selected' : '') + '>' + t("Carrera de míster") + '</option></select></div>' + clubs +
@@ -83,7 +98,9 @@
     state.packId = pack.id; state.year = S.yr;
     var details = profileSummary(eraInfoForYear(S.yr).profile);
     state.packId = oldPack; state.year = oldYear;
-    layer.innerHTML = '<section class="eras-dialog" role="dialog" aria-modal="true" aria-labelledby="eras-current-title"><div class="eras-kicker">' + eraEscape(S.era.startDecade) + '</div><h2 id="eras-current-title">' + t("Reglas en {year}", {year: S.yr}) + '</h2>' + details + '<div class="eras-actions"><button type="button" data-era-act="close">' + t("Volver") + '</button></div></section>';
+    layer.setAttribute("data-era-decade", pack.id);
+    layer.setAttribute("data-era-year", S.yr);
+    layer.innerHTML = '<section class="eras-dialog" data-era-decade="' + eraEscape(pack.id) + '" role="dialog" aria-modal="true" aria-labelledby="eras-current-title"><div class="eras-kicker">' + eraEscape(S.era.startDecade) + '</div><h2 id="eras-current-title">' + t("Reglas en {year}", {year: S.yr}) + '</h2>' + details + recentDecisions() + '<div class="eras-actions"><button type="button" data-era-act="close">' + t("Volver") + '</button></div></section>';
   }
   function start() {
     var pack = selectedPack();
@@ -170,7 +187,11 @@
     var hud = document.getElementById("era-hud"), app = document.getElementById("app");
     if (!active) {
       if (hud) hud.remove();
-      if (app) { app.classList.remove("era-skin-teletext", "era-skin-print-scoreboard", "era-active"); }
+      if (app) {
+        app.classList.remove("era-skin-teletext", "era-skin-print-scoreboard", "era-active");
+        app.removeAttribute("data-era-decade"); app.removeAttribute("data-era-year");
+      }
+      if (hud) { hud.removeAttribute("data-era-decade"); hud.removeAttribute("data-era-year"); }
       return;
     }
     var info = eraInfoForYear(S.yr), rules = info.rules;
@@ -178,8 +199,12 @@
       app.classList.add("era-active");
       app.classList.toggle("era-skin-teletext", info.presentation.uiSkin === "teletext");
       app.classList.toggle("era-skin-print-scoreboard", info.presentation.uiSkin === "print-scoreboard");
+      app.setAttribute("data-era-decade", eraPackForYear(S.yr).id);
+      app.setAttribute("data-era-year", S.yr);
     }
     if (!hud) { hud = document.createElement("div"); hud.id = "era-hud"; hud.className = "eras-hud"; document.body.appendChild(hud); }
+    hud.setAttribute("data-era-decade", eraPackForYear(S.yr).id);
+    hud.setAttribute("data-era-year", S.yr);
     var currentChannel = channelLabel(eraMediaChannel(S.yr, S.yr + "|" + S.bi));
     hud.innerHTML = '<span>' + t("{decade} · {year}", {decade: eraEscape(S.era.startDecade), year: S.yr}) + ' · ' + t("{n} pts/victoria", {n: rules.winPoints}) + ' · ' + eraEscape(currentChannel) + '</span><button type="button" data-a="era-rules">' + t("Reglas") + '</button><button type="button" data-a="era-exit">' + t("Salir") + '</button>';
   });

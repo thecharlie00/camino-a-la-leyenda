@@ -15,11 +15,16 @@ for (const file of [webGamePage, androidGamePage, webPage, siteRuntime, translat
 
 const html = readFileSync(webGamePage, 'utf8');
 const androidHtml = readFileSync(androidGamePage, 'utf8');
-const scriptMatch = html.match(/<script>\s*([\s\S]*?)<\/script>/);
-assert.ok(scriptMatch, 'Web game script is missing');
-const gameSource = scriptMatch[1];
+const gameSourceMatch = html.match(/<script type="text\/plain" id="web-game-source">([\s\S]*?)<\/script>/);
+assert.ok(gameSourceMatch, 'Web game source payload is missing');
+const gameSource = gameSourceMatch[1];
 new Script(gameSource, {filename: 'web-game.js'});
-assert.match(gameSource, /var BUILD = \{v: "5\.12", code: 62,/);
+const webBootstrapMatch = html.match(/<script>\s*([\s\S]*?)<\/script>/);
+assert.ok(webBootstrapMatch, 'Web startup bootstrap is missing');
+new Script(webBootstrapMatch[1], {filename: 'web-game-bootstrap.js'});
+assert.match(webBootstrapMatch[1], /requestAnimationFrame/);
+assert.match(html, /class="boot-screen"[\s\S]*?data-boot-status/, 'Web page must show a loading screen before the game starts');
+assert.match(gameSource, /var BUILD = \{v: "5\.13", code: 63,/);
 assert.match(gameSource, /var GOAT_WEB_BUILD = false;/);
 assert.match(gameSource, /var GOAT_API_URL = "https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev";/);
 assert.match(gameSource, /UIX\.add\("mainhome"/);
@@ -27,7 +32,8 @@ assert.match(gameSource, /UIX\.add\("modes"[\s\S]*?data-a="era-open"/);
 assert.match(gameSource, /var WEB_BUILD = true;/);
 assert.match(gameSource, /var NO_ADS = true;/);
 assert.doesNotMatch(html, /camino-module-\d+/, 'Web build must retain its existing monolithic startup');
-assert.doesNotMatch(html, /boot-screen/, 'Mobile loading UI must not leak into the web page');
+assert.match(androidHtml, /class="boot-screen"[\s\S]*?data-boot-status/, 'Android page must show the shared loading screen');
+assert.match(androidHtml, /boot-track/, 'Android loading screen should include the progress animation');
 
 const webPackMatch = gameSource.match(/var P3D_ASSET_PACK = (\{[^;]+\});/);
 assert.ok(webPackMatch, 'Web build must retain its existing embedded 3D asset pack');
@@ -49,7 +55,7 @@ const largestModule = Math.max(...moduleMatches.map((match) => Buffer.byteLength
 assert.ok(largestModule <= 300_000, `Android startup task is too large (${largestModule} bytes); split the module`);
 const androidSource = moduleMatches.map((match) => match[1]).join('\n');
 new Script(androidSource, {filename: 'android-game-modules.js'});
-assert.match(androidSource, /var BUILD = \{v: "5\.12", code: 62,/);
+assert.match(androidSource, /var BUILD = \{v: "5\.13", code: 63,/);
 assert.match(androidSource, /var GOAT_WEB_BUILD = false;/);
 assert.match(androidSource, /var GOAT_API_URL = "https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev";/);
 assert.match(androidSource, /UIX\.add\("mainhome"/);
@@ -92,6 +98,12 @@ assert.deepEqual(androidErasData, erasData, 'Web and Android must share the same
 assert.deepEqual(androidErasI18n, erasI18n, 'Web and Android must share the same Era Mode translations');
 assert.deepEqual(erasData.packs.map((pack) => pack.id), ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']);
 assert.ok(erasData.timeline.events.some((event) => event.year === 2010 && event.changes.media.socialMedia === true), 'The social-media transition must be 2010');
+assert.equal(erasData.decisions.records.length, 600, 'Era Mode must include 100 decision scenarios for each decade');
+for (const decade of erasData.packs.map((pack) => pack.id)) {
+  const records = erasData.decisions.records.filter((record) => record.decade === decade);
+  assert.equal(records.length, 100, `${decade} must contain 100 distinct decisions`);
+  assert.equal(new Set(records.map((record) => `${record.topic}:${record.context}`)).size, 100, `${decade} decision contexts must be distinct`);
+}
 assert.ok(erasI18n['Modo Épocas']?.en, 'Era Mode translations are not embedded');
 for (const [target, source] of [['web', gameSource], ['Android', androidSource]]) {
   assert.match(source, /var Pitch3D = \(function \(\)/, `${target} 3D match renderer is missing`);
@@ -134,4 +146,4 @@ assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No website
 assert.ok(statSync(webGamePage).size > 1_000_000, 'Self-contained web game bundle is unexpectedly small');
 assert.ok(statSync(androidGamePage).size > 1_000_000, 'Self-contained Android game bundle is unexpectedly small');
 
-console.log(`Build smoke passed: web unchanged startup + Android incremental startup; v5.12 (62).`);
+console.log(`Build smoke passed: shared loading screen, web startup, Android incremental startup; v5.13 (63).`);
