@@ -11,6 +11,8 @@ const apkBuilder = read('../android/build_apk.sh');
 const workflow = read('../.github/workflows/build.yml');
 const gameBuilder = read('../build_legacy_game.py');
 const gameCss = read('../legacy-game/src/style.css');
+const gameUi = read('../legacy-game/src/ui.js');
+const playStoreFeed = JSON.parse(read('../public/play-store-version.json'));
 
 assert.match(manifest, /android:minSdkVersion="24"\s+android:targetSdkVersion="36"/);
 assert.match(manifest, /android:versionCode="65"/);
@@ -57,6 +59,19 @@ assert.doesNotMatch(activity.slice(0, api26Start), /import .*RenderProcessGoneDe
 for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updateName', 'openStore', 'showAd', 'privacyOptionsRequired', 'showPrivacyOptions', 'remind', 'cancelRemind', 'askNotify']) {
   assert.match(activity, new RegExp(`@JavascriptInterface\\s+public\\s+[^\\n]+\\b${method}\\s*\\(`), `Missing AndroidBridge method ${method}`);
 }
+assert.equal(playStoreFeed.packageName, 'com.caminoleyenda.app');
+assert.ok(playStoreFeed.versionCode > 0 && playStoreFeed.versionName);
+assert.match(activity, /PLAY_RELEASE_URL = "https:\/\/futbolroadtolegend\.com\/play-store-version\.json"/);
+assert.match(activity, /private void checkForPlayStoreUpdate\(\)/);
+assert.match(activity, /latestCode > installedVersionCode\(\)/,
+  'Only a Play-published version newer than the installed build may trigger the notice');
+assert.match(activity, /notifyWebOfUpdate\(\)/);
+assert.match(activity, /checkForPlayStoreUpdate\(\);/);
+assert.doesNotMatch(activity, /public int updateAvailable\(\)\s*\{\s*return 0;/,
+  'AndroidBridge must return the checked Play Store version rather than a stub');
+assert.match(gameUi, /window\.caminoUpdate = function \(code, name\)/);
+assert.match(gameUi, /data-a=.*doupdate/);
+assert.match(gameUi, /case \"doupdate\": try \{ window\.AndroidBridge\.openStore\(\);/);
 assert.match(activity, /onConfigurationChanged\(Configuration newConfig\)/);
 assert.match(activity, /setAllowUniversalAccessFromFileURLs\(false\)/);
 assert.match(activity, /setMixedContentMode\(WebSettings\.MIXED_CONTENT_NEVER_ALLOW\)/);

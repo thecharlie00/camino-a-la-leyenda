@@ -12,6 +12,11 @@ const translatedPage = join(output, 'en', 'index.html');
 for (const file of [webGamePage, androidGamePage, webPage, siteRuntime, translatedPage]) {
   assert.ok(existsSync(file), `Missing build output: ${file}`);
 }
+const playStoreFeedPath = join(output, 'play-store-version.json');
+assert.ok(existsSync(playStoreFeedPath), 'Play Store update feed must ship with the static site');
+const playStoreFeed = JSON.parse(readFileSync(playStoreFeedPath, 'utf8'));
+assert.equal(playStoreFeed.packageName, 'com.caminoleyenda.app');
+assert.ok(Number.isInteger(playStoreFeed.versionCode) && playStoreFeed.versionCode > 0);
 
 const html = readFileSync(webGamePage, 'utf8');
 const androidHtml = readFileSync(androidGamePage, 'utf8');

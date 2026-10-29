@@ -23,9 +23,28 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
+import javax.net.ssl.HttpsURLConnection;
 
 public final class MainActivity extends Activity {
+    private static final String PLAY_RELEASE_URL = "https://futbolroadtolegend.com/play-store-version.json";
+    private static final long UPDATE_CHECK_INTERVAL_MS = 2L * 60L * 1000L;
+    private static final int MAX_UPDATE_FEED_CHARS = 16384;
     private WebView webView;
+    private volatile int availableUpdateCode;
+    private volatile String availableUpdateName = "";
+    private volatile long lastUpdateCheckAt;
+    private final AtomicBoolean updateCheckRunning = new AtomicBoolean(false);
+    private final ExecutorService updateChecker = Executors.newSingleThreadExecutor();
     // Object avoids resolving the API-33 callback type on devices below API 33.
     private Object backInvokedCallback;
 
@@ -65,21 +84,17 @@ public final class MainActivity extends Activity {
 
         @JavascriptInterface
         public int versionCode() {
-            try {
-                return getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
-            } catch (Throwable ignored) {
-                return 61;
-            }
+            return installedVersionCode();
         }
 
         @JavascriptInterface
         public int updateAvailable() {
-            return 0;
+            return availableUpdateCode;
         }
 
         @JavascriptInterface
         public String updateName() {
-            return "";
+            return availableUpdateName;
         }
 
         @JavascriptInterface
@@ -214,6 +229,90 @@ public final class MainActivity extends Activity {
         } catch (Throwable ignored) {}
     }
 
+    private int installedVersionCode() {
+        try {
+            return getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+        } catch (Throwable ignored) {
+            return 0;
+        }
+    }
+
+    // The site publishes this small release pointer only after that version is live
+    // in Google Play. Check off the UI thread; the game can keep running offline.
+    private void checkForPlayStoreUpdate() {
+        final long now = System.currentTimeMillis();
+        if (!updateCheckRunning.compareAndSet(false, true)) return;
+        synchronized (this) {
+            if (lastUpdateCheckAt != 0 && now - lastUpdateCheckAt < UPDATE_CHECK_INTERVAL_MS) {
+                updateCheckRunning.set(false);
+                return;
+            }
+            lastUpdateCheckAt = now;
+        }
+        try {
+            updateChecker.execute(new Runnable() {
+                @Override
+                public void run() {
+                    HttpsURLConnection connection = null;
+                    try {
+                        connection = (HttpsURLConnection) new URL(PLAY_RELEASE_URL).openConnection();
+                        connection.setRequestMethod("GET");
+                        connection.setConnectTimeout(5000);
+                        connection.setReadTimeout(5000);
+                        connection.setUseCaches(false);
+                        connection.setRequestProperty("Accept", "application/json");
+                        connection.setRequestProperty("Cache-Control", "no-cache");
+                        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) return;
+                        StringBuilder body = new StringBuilder();
+                        InputStream input = connection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
+                        char[] buffer = new char[1024];
+                        int count;
+                        while ((count = reader.read(buffer)) != -1) {
+                            if (body.length() + count > MAX_UPDATE_FEED_CHARS) return;
+                            body.append(buffer, 0, count);
+                        }
+                        reader.close();
+                        JSONObject feed = new JSONObject(body.toString());
+                        if (!getPackageName().equals(feed.optString("packageName", ""))) return;
+                        int latestCode = feed.optInt("versionCode", 0);
+                        String latestName = feed.optString("versionName", "");
+                        if (latestCode > installedVersionCode()) {
+                            availableUpdateCode = latestCode;
+                            availableUpdateName = latestName;
+                            notifyWebOfUpdate();
+                        } else {
+                            availableUpdateCode = 0;
+                            availableUpdateName = "";
+                        }
+                    } catch (Throwable ignored) {
+                        // A missing feed or network connection must never block game startup.
+                    } finally {
+                        if (connection != null) connection.disconnect();
+                        updateCheckRunning.set(false);
+                    }
+                }
+            });
+        } catch (Throwable ignored) {
+            updateCheckRunning.set(false);
+        }
+    }
+
+    private void notifyWebOfUpdate() {
+        final int code = availableUpdateCode;
+        final String name = availableUpdateName;
+        if (code <= 0 || webView == null) return;
+        runUiSafely(new Runnable() {
+            @Override
+            public void run() {
+                WebView target = webView;
+                if (target == null) return;
+                target.evaluateJavascript("if(typeof window.caminoUpdate==='function'){window.caminoUpdate("
+                    + code + "," + JSONObject.quote(name) + ");}", null);
+            }
+        });
+    }
+
     private boolean openExternalUrl(String url) {
         if (url == null) return true;
         if (url.startsWith("file:///android_asset/")) return false;
@@ -303,6 +402,12 @@ public final class MainActivity extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        checkForPlayStoreUpdate();
+    }
+
+    @Override
     public void onBackPressed() {
         handleBack();
     }
@@ -339,6 +444,7 @@ public final class MainActivity extends Activity {
             Api33.unregister(this, backInvokedCallback);
             backInvokedCallback = null;
         }
+        updateChecker.shutdownNow();
         disposeWebView(webView);
         super.onDestroy();
     }
