@@ -12,6 +12,11 @@ const translatedPage = join(output, 'en', 'index.html');
 for (const file of [webGamePage, androidGamePage, webPage, siteRuntime, translatedPage]) {
   assert.ok(existsSync(file), `Missing build output: ${file}`);
 }
+const playStoreFeedPath = join(output, 'play-store-version.json');
+assert.ok(existsSync(playStoreFeedPath), 'Play Store update feed must ship with the static site');
+const playStoreFeed = JSON.parse(readFileSync(playStoreFeedPath, 'utf8'));
+assert.equal(playStoreFeed.packageName, 'com.caminoleyenda.app');
+assert.ok(Number.isInteger(playStoreFeed.versionCode) && playStoreFeed.versionCode > 0);
 
 const html = readFileSync(webGamePage, 'utf8');
 const androidHtml = readFileSync(androidGamePage, 'utf8');
@@ -24,7 +29,7 @@ assert.ok(webBootstrapMatch, 'Web startup bootstrap is missing');
 new Script(webBootstrapMatch[1], {filename: 'web-game-bootstrap.js'});
 assert.match(webBootstrapMatch[1], /requestAnimationFrame/);
 assert.match(html, /class="boot-screen"[\s\S]*?data-boot-status/, 'Web page must show a loading screen before the game starts');
-assert.match(gameSource, /var BUILD = \{v: "5\.15", code: 65,/);
+assert.match(gameSource, /var BUILD = \{v: "5\.16", code: 66,/);
 assert.match(gameSource, /var GOAT_WEB_BUILD = false;/);
 assert.match(gameSource, /var GOAT_API_URL = "https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev";/);
 assert.match(gameSource, /UIX\.add\("mainhome"/);
@@ -55,7 +60,7 @@ const largestModule = Math.max(...moduleMatches.map((match) => Buffer.byteLength
 assert.ok(largestModule <= 300_000, `Android startup task is too large (${largestModule} bytes); split the module`);
 const androidSource = moduleMatches.map((match) => match[1]).join('\n');
 new Script(androidSource, {filename: 'android-game-modules.js'});
-assert.match(androidSource, /var BUILD = \{v: "5\.15", code: 65,/);
+assert.match(androidSource, /var BUILD = \{v: "5\.16", code: 66,/);
 assert.match(androidSource, /var GOAT_WEB_BUILD = false;/);
 assert.match(androidSource, /var GOAT_API_URL = "https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev";/);
 assert.match(androidSource, /UIX\.add\("mainhome"/);
@@ -167,4 +172,4 @@ assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No website
 assert.ok(statSync(webGamePage).size > 1_000_000, 'Self-contained web game bundle is unexpectedly small');
 assert.ok(statSync(androidGamePage).size > 1_000_000, 'Self-contained Android game bundle is unexpectedly small');
 
-console.log(`Build smoke passed: shared loading screen, web startup, Android incremental startup; v5.15 (65).`);
+console.log(`Build smoke passed: shared loading screen, web startup, Android incremental startup; v5.16 (66).`);
