@@ -5,7 +5,6 @@ import { Footer } from './components/Footer';
 import { GameContainer } from './components/GameContainer';
 import { Pitch3DSimulator } from './components/Pitch3DSimulator';
 import { PitchDemo } from './components/PitchDemo';
-import { GoatLadderView } from './components/GoatLadderView';
 import { GuideView } from './components/GuideView';
 import { AdminAnalyticsView } from './components/AdminAnalyticsView';
 import { logAnalyticsEvent } from './analytics/tracker';
@@ -122,7 +121,6 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {activeView === 'goat' && <GoatLadderView lang={lang} />}
         {activeView === 'guide' && <GuideView lang={lang} />}
         {activeView === 'admin' && (
           <AdminAnalyticsView onBackToGame={() => setActiveView('game')} />

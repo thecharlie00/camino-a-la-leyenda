@@ -19,6 +19,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleFullscreen,
 }) => {
   const t = (k: string) => getTranslation(lang, k);
+  const goatLadderHref = lang === 'es' ? '/goat-ladder/' : `/${lang}/goat-ladder/`;
 
   return (
     <header className="app-header">
@@ -65,15 +66,14 @@ export const Header: React.FC<HeaderProps> = ({
             <span>{t('tab_pitch')}</span>
           </button>
 
-          <button
-            type="button"
-            className={`nav-tab ${activeView === 'goat' ? 'active' : ''}`}
-            onClick={() => setActiveView('goat')}
+          <a
+            className="nav-tab"
+            href={goatLadderHref}
             title={t('tab_goat')}
           >
             <Trophy size={16} />
             <span>{t('tab_goat')}</span>
-          </button>
+          </a>
 
           <button
             type="button"
