@@ -280,6 +280,45 @@
       throw error;
     });
   }
+  /* The Android game is served from file:// (an opaque CORS origin), so use its
+     HTTPS bridge for career POSTs. Browsers keep using fetch below. */
+  var nativeRequestSequence = 0;
+  var nativeRequests = {};
+  function nativeCareerFetch(body, contentType, timeout) {
+    var bridge = root.AndroidBridge;
+    if (!bridge || typeof bridge.goatCareerPost !== "function") return null;
+    return new Promise(function (resolve, reject) {
+      var id = "goat_" + Date.now() + "_" + (++nativeRequestSequence);
+      var timer = setTimeout(function () {
+        delete nativeRequests[id];
+        reject(failure("timeoutError"));
+      }, timeout);
+      nativeRequests[id] = {resolve: resolve, reject: reject, timer: timer};
+      if (!root.__caminoGoatNativeComplete) {
+        root.__caminoGoatNativeComplete = function (requestId, status, responseBody) {
+          var pending = nativeRequests[requestId];
+          if (!pending) return;
+          delete nativeRequests[requestId];
+          clearTimeout(pending.timer);
+          if (status === -1) {
+            pending.reject(failure("timeoutError"));
+          } else if (status === 0) {
+            pending.reject(new TypeError("Failed to fetch"));
+          } else {
+            pending.resolve({ok: status >= 200 && status < 300, status: status,
+              text: function () { return Promise.resolve(responseBody || ""); }});
+          }
+        };
+      }
+      try {
+        bridge.goatCareerPost(id, body, contentType || "application/json");
+      } catch (error) {
+        delete nativeRequests[id];
+        clearTimeout(timer);
+        reject(error);
+      }
+    });
+  }
   function readResponse(response) {
     return response.text().then(function (body) {
       var data;
@@ -310,7 +349,9 @@
       copy.mode = "cors";
       copy.credentials = "omit";
       copy.cache = "no-store";
-      return timedFetch(url, copy, timeout).then(readResponse);
+      var isCareerPost = body != null && copy.method === "POST" && /\/api\/goat-ladder\/careers$/.test(path);
+      var nativeFetch = isCareerPost ? nativeCareerFetch(body, contentType, timeout) : null;
+      return (nativeFetch || timedFetch(url, copy, timeout)).then(readResponse);
     }
     function send(contentType) {
       return attempt(contentType).catch(function (error) {

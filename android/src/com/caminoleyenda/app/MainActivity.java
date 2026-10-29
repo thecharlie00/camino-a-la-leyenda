@@ -25,7 +25,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import org.json.JSONObject;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,14 +39,18 @@ import javax.net.ssl.HttpsURLConnection;
 
 public final class MainActivity extends Activity {
     private static final String PLAY_RELEASE_URL = "https://futbolroadtolegend.com/play-store-version.json";
+    private static final String GOAT_CAREER_URL = "https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev/api/goat-ladder/careers";
     private static final long UPDATE_CHECK_INTERVAL_MS = 2L * 60L * 1000L;
     private static final int MAX_UPDATE_FEED_CHARS = 16384;
+    private static final int MAX_GOAT_REQUEST_BYTES = 100000;
+    private static final int MAX_GOAT_RESPONSE_BYTES = 1000000;
     private WebView webView;
     private volatile int availableUpdateCode;
     private volatile String availableUpdateName = "";
     private volatile long lastUpdateCheckAt;
     private final AtomicBoolean updateCheckRunning = new AtomicBoolean(false);
     private final ExecutorService updateChecker = Executors.newSingleThreadExecutor();
+    private final ExecutorService goatRequestWorker = Executors.newFixedThreadPool(2);
     // Object avoids resolving the API-33 callback type on devices below API 33.
     private Object backInvokedCallback;
 
@@ -145,6 +151,92 @@ public final class MainActivity extends Activity {
         public void askNotify() {
             // Safe stub for notification permission prompt
         }
+
+        @JavascriptInterface
+        public void goatCareerPost(final String requestId, final String body, final String contentType) {
+            if (requestId == null || !requestId.matches("goat_[A-Za-z0-9_]+")) return;
+            if (body == null || body.getBytes(StandardCharsets.UTF_8).length > MAX_GOAT_REQUEST_BYTES
+                    || !("application/json".equalsIgnoreCase(contentType)
+                        || "text/plain;charset=UTF-8".equalsIgnoreCase(contentType))) {
+                completeGoatCareerRequest(requestId, 400, "{\"error\":\"Invalid GOAT career request\"}");
+                return;
+            }
+            try {
+                goatRequestWorker.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        performGoatCareerRequest(requestId, body, contentType);
+                    }
+                });
+            } catch (Throwable error) {
+                completeGoatCareerRequest(requestId, 0, "");
+            }
+        }
+    }
+
+    // Android loads the game from file://, whose opaque origin can be rejected by
+    // a cross-origin WebView POST. Send career submissions natively over HTTPS so
+    // browser CORS is not involved; the URL is fixed (never supplied by JavaScript).
+    private void performGoatCareerRequest(String requestId, String body, String contentType) {
+        HttpURLConnection connection = null;
+        int status = 0;
+        String responseBody = "";
+        OutputStream output = null;
+        InputStream input = null;
+        try {
+            connection = (HttpURLConnection) new URL(GOAT_CAREER_URL).openConnection();
+            connection.setRequestMethod("POST");
+            connection.setConnectTimeout(7000);
+            connection.setReadTimeout(16000);
+            connection.setUseCaches(false);
+            connection.setInstanceFollowRedirects(false);
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", contentType);
+            byte[] payload = body.getBytes(StandardCharsets.UTF_8);
+            output = connection.getOutputStream();
+            output.write(payload);
+            output.flush();
+            status = connection.getResponseCode();
+            input = status >= 400 ? connection.getErrorStream() : connection.getInputStream();
+            responseBody = readGoatResponse(input);
+        } catch (java.net.SocketTimeoutException timeout) {
+            status = -1;
+        } catch (Throwable error) {
+            status = 0;
+        } finally {
+            if (output != null) try { output.close(); } catch (Throwable ignored) {}
+            if (input != null) try { input.close(); } catch (Throwable ignored) {}
+            if (connection != null) connection.disconnect();
+        }
+        completeGoatCareerRequest(requestId, status, responseBody);
+    }
+
+    private String readGoatResponse(InputStream input) throws Exception {
+        if (input == null) return "";
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int count;
+        while ((count = input.read(buffer)) != -1) {
+            int remaining = MAX_GOAT_RESPONSE_BYTES - output.size();
+            if (remaining <= 0) break;
+            output.write(buffer, 0, Math.min(count, remaining));
+        }
+        return new String(output.toByteArray(), StandardCharsets.UTF_8);
+    }
+
+    private void completeGoatCareerRequest(final String requestId, final int status, final String body) {
+        if (requestId == null || !requestId.matches("goat_[A-Za-z0-9_]+")) return;
+        runUiSafely(new Runnable() {
+            @Override
+            public void run() {
+                WebView target = webView;
+                if (target == null) return;
+                String script = "if(window.__caminoGoatNativeComplete){window.__caminoGoatNativeComplete("
+                    + JSONObject.quote(requestId) + "," + status + "," + JSONObject.quote(body == null ? "" : body) + ");}";
+                target.evaluateJavascript(script, null);
+            }
+        });
     }
 
     @Override
@@ -445,6 +537,7 @@ public final class MainActivity extends Activity {
             backInvokedCallback = null;
         }
         updateChecker.shutdownNow();
+        goatRequestWorker.shutdownNow();
         disposeWebView(webView);
         super.onDestroy();
     }
