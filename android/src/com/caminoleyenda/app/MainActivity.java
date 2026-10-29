@@ -14,6 +14,7 @@ import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
@@ -154,6 +155,20 @@ public final class MainActivity extends Activity {
             settings.setSupportMultipleWindows(false);
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
             settings.setMediaPlaybackRequiresUserGesture(false);
+
+            // Edge-to-edge draws the WebView behind Android's status bar. Keep the
+            // game content (including its top-bar buttons) below that inset while
+            // leaving the WebView background and the lower navigation area edge-to-edge.
+            webView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+                @Override
+                public WindowInsets onApplyWindowInsets(View view, WindowInsets insets) {
+                    int topInset = Build.VERSION.SDK_INT >= 28 ? insets.getSystemWindowInsetTop() : 0;
+                    if (view.getPaddingTop() != topInset) {
+                        view.setPadding(view.getPaddingLeft(), topInset, view.getPaddingRight(), view.getPaddingBottom());
+                    }
+                    return insets;
+                }
+            });
 
             webView.addJavascriptInterface(new Bridge(), "AndroidBridge");
             setContentView(webView);

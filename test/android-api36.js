@@ -13,9 +13,9 @@ const gameBuilder = read('../build_legacy_game.py');
 const gameCss = read('../legacy-game/src/style.css');
 
 assert.match(manifest, /android:minSdkVersion="24"\s+android:targetSdkVersion="36"/);
-assert.match(manifest, /android:versionCode="64"/);
-assert.match(manifest, /android:versionName="5\.14"/);
-assert.equal(packageJson.version, '5.14.0');
+assert.match(manifest, /android:versionCode="65"/);
+assert.match(manifest, /android:versionName="5\.15"/);
+assert.equal(packageJson.version, '5.15.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
@@ -32,6 +32,12 @@ assert.match(manifest, /screenLayout\|screenSize\|smallestScreenSize/);
 assert.match(manifest, /android:hardwareAccelerated="true"/);
 assert.doesNotMatch(activity, /setLayerType\(View\.LAYER_TYPE_HARDWARE/, 'Do not force a second hardware layer for the canvas-heavy WebView');
 assert.match(activity, /window\.setDecorFitsSystemWindows\(false\)/);
+assert.match(activity, /setOnApplyWindowInsetsListener\(new View\.OnApplyWindowInsetsListener\(\)/,
+  'Android must inset the WebView content below the status bar');
+assert.match(activity, /int topInset = Build\.VERSION\.SDK_INT >= 28 \? insets\.getSystemWindowInsetTop\(\) : 0/,
+  'Only edge-to-edge Android versions should add a native top inset');
+assert.match(activity, /view\.setPadding\(view\.getPaddingLeft\(\), topInset, view\.getPaddingRight\(\), view\.getPaddingBottom\(\)\)/);
+assert.match(activity, /import android\.view\.WindowInsets;/, 'Safe-area handling must use the API 24-compatible WindowInsets type');
 assert.match(activity, /private static final class Api26/);
 assert.match(activity, /private static final class Api29/);
 assert.match(activity, /private static final class Api30/);

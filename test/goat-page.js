@@ -4,6 +4,15 @@ import { JSDOM } from 'jsdom';
 
 const html = readFileSync('goat-ladder/index.html', 'utf8');
 const script = readFileSync('goat-ladder.js', 'utf8');
+const appSource = readFileSync('src/App.tsx', 'utf8');
+const headerSource = readFileSync('src/components/Header.tsx', 'utf8');
+assert.match(headerSource, /const goatLadderHref = lang === 'es' \? '\/goat-ladder\/' : `\/\$\{lang\}\/goat-ladder\/`;/,
+  'The React app should link to the canonical GOAT page for the selected language');
+assert.match(headerSource, /href=\{goatLadderHref\}/);
+assert.doesNotMatch(headerSource, /setActiveView\('goat'\)/,
+  'The GOAT navigation must not open the disconnected local demo');
+assert.doesNotMatch(appSource, /GoatLadderView/,
+  'The React app must not render the old fake GOAT leaderboard');
 const dom = new JSDOM(html, {runScripts: 'outside-only', url: 'https://example.test/goat-ladder/'});
 const {window} = dom;
 window.GOAT_API_URL = 'https://api.example.test';

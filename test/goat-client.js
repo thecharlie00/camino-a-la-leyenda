@@ -23,13 +23,13 @@ var goatLocales = ["", "en/", "de/", "it/", "fr/"];
 goatLocales.forEach(function (locale) {
   var page = fs.readFileSync(path.join(root, locale, "goat-ladder/index.html"), "utf8");
   check("GOAT Ladder origin " + (locale || "es"), page.indexOf('window.GOAT_API_URL = "' + goatOrigin + '"') >= 0);
-  check("GOAT Ladder web build version " + (locale || "es"), page.indexOf("5.14") >= 0 && page.indexOf("5.7") < 0);
+  check("GOAT Ladder web build version " + (locale || "es"), page.indexOf("5.15") >= 0 && page.indexOf("5.7") < 0);
 });
 var siteCss = fs.readFileSync(path.join(root, "site.css"), "utf8");
 check("web GOAT filters have 44px touch targets", /\.goat-segment button\s*\{[^}]*min-height:\s*44px;[^}]*touch-action:\s*manipulation;/s.test(siteCss));
 
 /* Carga src/goat.js con un entorno mínimo (sin DOM). */
-function loadService(options) {
+function loadService(options, sourcePath) {
   var store = {}, calls = [];
   var texts = {es: {networkError: "SIN_RED", timeoutError: "TIEMPO", offlineError: "SIN_CONEXION",
     responseError: "RESPUESTA", unavailable: "NO_CONFIGURADO", noLatest: "SIN_GESTA",
@@ -47,7 +47,7 @@ function loadService(options) {
     fetch: function (url, init) { calls.push({url: url, init: init}); return options.fetch(url, init, calls.length); }
   };
   env.window = env;
-  var source = fs.readFileSync(path.join(root, "src/goat.js"), "utf8");
+  var source = fs.readFileSync(path.join(root, sourcePath || "src/goat.js"), "utf8");
   /* El módulo usa variables globales del juego (S, W, LANG, GOAT_TEXT, GOAT_API_URL). */
   var factory = new Function("window", "GOAT_API_URL", "GOAT_TEXT", "LANG", "navigator",
     "localStorage", "fetch", "TextEncoder", "AbortController", "console", source);
@@ -180,6 +180,42 @@ function loadService(options) {
     check("se conservan las temporadas más recientes",
       payload.history[payload.history.length - 1].season === 2399 && payload.history.length < 400, payload.history.length);
     check("la carrera original no se modifica", seasons.length === 400);
+  }
+
+  console.log("Cliente incluido en la app (legacy-game)");
+  {
+    var managerSeasons = [];
+    for (var k = 0; k < 31; k++) {
+      var awards = [];
+      for (var a = 0; a < 30; a++) awards.push("Premio de entrenador de la temporada " + k + " — " + "historial detallado ".repeat(8));
+      managerSeasons.push({season: 2100 + k, club: "Club " + k, competition: "Liga", trophies: ["Liga"],
+        awards: awards, award_keys: awards.map(function () { return "manager_award"; }), appearances: 50,
+        wins: 35, draws: 8, losses: 7, goals: 95, assists: 0, clean_sheets: 0});
+    }
+    var managerCareer = {event_key: "career:manager:31", game_mode: "manager",
+      metrics: {seasons: 31, wins: 1085, trophies: 31, awards: 930}, history: managerSeasons};
+    var legacyBody = null;
+    var legacyEnv = loadService({url: "https://api.test/api/", fetch: function (url, init, attempt) {
+      if (attempt === 1) return networkError();
+      legacyBody = init.body;
+      return jsonResponse({id: "manager-31", delete_token: "token"});
+    }}, "legacy-game/src/goat.js");
+    var legacyResult = await legacyEnv.service.submitCareer(managerCareer, "  Míster  ", "  31 temporadas  ");
+    var legacyPayload = JSON.parse(legacyBody);
+    check("el cliente de la app reintenta Failed to fetch sin preflight",
+      legacyEnv.calls.length === 2 && legacyEnv.calls[1].init.headers["Content-Type"] === "text/plain;charset=UTF-8",
+      legacyEnv.calls.map(function (call) { return call.init.headers["Content-Type"]; }));
+    check("publica una carrera manager en la ruta de carreras",
+      legacyEnv.calls[0].url === "https://api.test/api/goat-ladder/careers" && legacyPayload.game_mode === "manager");
+    check("recorta el historial extenso por debajo de 100 KB y conserva la temporada reciente",
+      Buffer.byteLength(legacyBody, "utf8") <= 100000 && legacyPayload.history.length < 31 &&
+      legacyPayload.history[legacyPayload.history.length - 1].season === 2130,
+      {bytes: Buffer.byteLength(legacyBody, "utf8"), seasons: legacyPayload.history.length});
+    check("conserva métricas agregadas y no muta el guardado del míster",
+      legacyPayload.metrics.seasons === 31 && legacyPayload.metrics.awards === 930 &&
+      managerCareer.history.length === 31 && legacyResult.id === "manager-31");
+    check("normaliza la URL del cliente legacy",
+      legacyEnv.calls[0].url.indexOf("/api/api/") < 0 && legacyEnv.calls[0].url.indexOf("/api/goat-ladder/careers") >= 0);
   }
 
   console.log(failures ? "\n" + failures + " comprobaciones fallidas" : "\nTodo correcto");
