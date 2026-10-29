@@ -15,6 +15,9 @@ const erasUiSource = readFileSync('legacy-game/src/ui-eras.js', 'utf8');
 assert.match(uiSource, /if \(!S \|\| \(S\.era && S\.era\.active\)\) return Promise\.resolve\(\)/, 'Modern Store.flush must ignore Era Mode saves');
 assert.match(erasUiSource, /store\.flush\(\)[\s\S]*?flushed\.then\(begin\)/, 'The modern save must flush before replacing S with an era career');
 assert.match(erasUiSource, /flushed\.then\(applyLoad\)/, 'The modern save must flush before an era save replaces S');
+assert.match(uiSource, /s \+= slot\("modes"\)/, 'The mode selection screen must render its extensible mode slot');
+assert.match(erasUiSource, /UIX\.add\("modes"[\s\S]*?data-a="era-open"/, 'Era Mode must be offered in the Play > Choose a mode menu');
+assert.match(erasUiSource, /UIX\.actions\["era-open"\]/, 'The Era Mode option must open its existing setup flow');
 assert.match(uiSource, /if \(S && S\.era && S\.era\.active\) \{ persist\(\); S = null;/, 'Retiring from Era Mode must return to its isolated home, not modern slot management');
 assert.match(uiSource, /function eraSocialAvailable\(\)/, 'Era Mode must gate social-media navigation by the current year');
 

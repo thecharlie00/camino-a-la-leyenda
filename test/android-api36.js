@@ -76,5 +76,10 @@ assert.match(apkBuilder, /--mode=universal/);
 assert.match(gameBuilder, /viewport-fit=cover/);
 assert.match(gameCss, /safe-area-inset-top/);
 assert.match(gameCss, /safe-area-inset-bottom/);
+assert.match(gameCss, /@supports \(height: 100dvh\)/, 'App viewport should track modern dynamic screen heights');
+assert.match(gameCss, /touch-action: pan-y; scroll-padding-block: 16px;/, 'Scrollable modal controls must remain touch-accessible');
+assert.match(gameCss, /\.goat-board \.seg \{ width: 100%; grid-auto-columns: minmax\(0, 1fr\); \}/, 'GOAT filter groups must fit the modal width');
+assert.match(gameCss, /\.goat-board \.seg button \{ min-width: 0; min-height: 44px; padding-inline: 4px; overflow-wrap: anywhere; touch-action: manipulation; \}/, 'GOAT filters must have mobile-sized touch targets');
+assert.match(gameCss, /\.pickrow\.modec\.eras-mode \{[^}]*touch-action: manipulation;/, 'Era Mode selection must remain touch-accessible');
 
 console.log('Android API 36 manifest, builders, edge-to-edge, large screens and back-navigation checks passed.');

@@ -153,6 +153,11 @@
     var count = EraStore.getIndex().length;
     return '<button class="go eras-tile" data-a="era-open"><span aria-hidden="true">🕰️</span> <b>' + t("Modo Épocas") + '</b><small style="display:block;margin-top:4px;color:#c9d1c8">' + t("1970 · 1980 · 1990 · 2000 · 2010 · 2020") + (count ? ' · ' + t("{n} guardadas", {n: count}) : "") + '</small></button>';
   });
+  UIX.add("modes", function () {
+    if (!ERAS_MODE) return "";
+    var count = EraStore.getIndex().length;
+    return '<button class="pickrow modec eras-mode" data-a="era-open"><span class="micon" aria-hidden="true">🕰️</span><div class="grow"><b>' + t("Modo Épocas") + '</b><small>' + t("1970 · 1980 · 1990 · 2000 · 2010 · 2020") + ' · ' + t("Modo aislado · guardados separados") + (count ? ' · ' + t("{n} guardadas", {n: count}) : "") + '</small></div></button>';
+  });
   UIX.actions["era-open"] = function () { open(); };
   UIX.actions["era-exit"] = function () {
     if (S && S.era) { EraStore.save(); S = null; }
