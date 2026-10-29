@@ -4,6 +4,7 @@ import { JSDOM, VirtualConsole } from 'jsdom';
 
 const html = readFileSync('dist/android/jugar/juego.html', 'utf8');
 const errors = [];
+const goatCalls = [];
 const virtualConsole = new VirtualConsole();
 virtualConsole.on('jsdomError', (error) => errors.push(`jsdom: ${error.message}`));
 virtualConsole.on('error', (...args) => errors.push(`console: ${args.join(' ')}`));
@@ -22,6 +23,24 @@ const dom = new JSDOM(html, {
     window.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} };
     window.IntersectionObserver = class { observe() {} unobserve() {} disconnect() {} };
     window.HTMLCanvasElement.prototype.toDataURL = () => 'data:image/png;base64,';
+    window.fetch = (url, init = {}) => {
+      const call = {url: String(url), init};
+      goatCalls.push(call);
+      const body = init.method === 'POST'
+        ? {id: `smoke-${goatCalls.length}`, delete_token: 'smoke-delete-token', goat_score: 321}
+        : String(url).includes('/careers')
+          ? {entries: [{id: 'public-career', display_name: 'Community Legend', title: 'A shared career',
+            game_mode: 'player', current_club: 'FC Barcelona', started_season: 2020, latest_season: 2025,
+            metrics: {appearances: 120, goals: 50, assists: 20, clean_sheets: 0, trophies: 2, awards: 1,
+              international_caps: 8, international_goals: 2, clubs: 2, seasons: 6},
+            history: [{season: 2025, club: 'FC Barcelona', competition: 'Liga', appearances: 30, goals: 15,
+              assists: 8, trophies: ['Liga'], awards: ['Jugador del año']}]}]}
+          : {entries: [{id: 'public-record', display_name: 'Community Legend', title: 'A big match',
+            game_mode: 'player', event_type: 'match', goat_score: 90, club_name: 'FC Barcelona',
+            competition_name: 'Liga', opponent_name: 'Rival FC', metrics: {goals: 3, assists: 1,
+              match_rating: 9.2, minutes_played: 90}}]};
+      return Promise.resolve({ok: true, status: 200, text: () => Promise.resolve(JSON.stringify(body))});
+    };
     window.HTMLCanvasElement.prototype.getContext = function () {
       const methods = {
         measureText: (text) => ({width: String(text).length * 6}),
@@ -83,6 +102,9 @@ try {
   assert.equal(window.document.getElementById('pitch3d-asset-pack'), null, 'parsed model payload should be released');
 
   window.localStorage.setItem('camino.slots', '[]');
+  assert.equal(window.document.querySelector('[data-a="era-open"]'), null, 'Era Mode must not appear as a direct main-menu shortcut');
+  click('[data-a="newgame"]');
+  assert.ok(window.document.querySelector('[data-a="era-open"]'), 'Era Mode remains available from the mode-selection menu');
   click('[data-a="era-open"]');
   assert.equal(window.document.querySelectorAll('[data-era-field="pack"] option').length, 6);
   assert.equal(window.document.querySelectorAll('[data-era-field="year"] option').length, 10);
@@ -120,8 +142,52 @@ try {
   assert.ok(firstDecision, 'a new player career should present its first decision');
   firstDecision.click();
   assert.ok(window.S, 'resolving a career decision should keep the save active');
+
   click('[data-a="menu"]');
   click('[data-a="home"]');
+  click('[data-a="goat"]');
+  await waitFor(() => window.__goatSheet && !window.__goatSheet.loading &&
+    window.document.querySelector('.goat-career-share'), 'GOAT career board');
+  assert.ok(window.document.querySelector('.goat-card')?.textContent.includes('Community Legend'),
+    'shared careers should be visible in the Careers board');
+  click('[data-a="goatcareeropen"]');
+  assert.equal(window.UIX.getSheet().k, 'goatCareerPublish');
+  assert.ok(window.document.querySelector('.goat-history'), 'career publishing should preview the season history');
+  const careerAlias = window.document.querySelector('[data-career-alias]');
+  const careerTitle = window.document.querySelector('[data-career-title]');
+  careerAlias.value = 'Smoke Player';
+  careerTitle.value = 'My complete career';
+  window.document.querySelector('[data-career-consent]').checked = true;
+  click('[data-a="goatcareerpublish"]');
+  await waitFor(() => window.UIX.getSheet()?.submitSuccess, 'career publication');
+  const careerPost = goatCalls.find((call) => call.init.method === 'POST' && call.url.includes('/careers'));
+  assert.ok(careerPost, 'publishing a career should POST to the careers endpoint');
+  assert.equal(JSON.parse(careerPost.init.body).display_name, 'Smoke Player');
+
+  click('[data-a="close"]');
+  window.S.goatLatest = {event_key: 'smoke-player-season', event_type: 'season', game_mode: 'player',
+    title: 'Champions season', club_name: 'FC Barcelona', competition_name: 'Liga', season: window.S.yr,
+    goals: 18, assists: 7, match_rating: 8.1, minutes_played: 1800};
+  click('[data-a="goat"]');
+  await waitFor(() => window.__goatSheet && !window.__goatSheet.loading, 'GOAT achievements board');
+  click('[data-a="goatboard"][data-v="achievements"]');
+  await waitFor(() => !window.__goatSheet.loading &&
+    window.document.querySelector('[data-a="goatsubmit"]'), 'milestone publication form');
+  assert.ok(window.document.querySelector('.goat-card')?.textContent.includes('Community Legend'),
+    'shared achievements should be visible in the Achievements board');
+  const milestoneAlias = window.document.querySelector('[data-goat-alias]');
+  const milestoneTitle = window.document.querySelector('[data-goat-title]');
+  milestoneAlias.value = 'Smoke Player';
+  milestoneTitle.value = 'Champions season';
+  window.document.querySelector('[data-goat-consent]').checked = true;
+  click('[data-a="goatsubmit"]');
+  await waitFor(() => window.__goatSheet.submitSuccess != null, 'milestone publication');
+  const milestonePost = goatCalls.find((call) => call.init.method === 'POST' && !call.url.includes('/careers'));
+  assert.ok(milestonePost, 'publishing a milestone should POST to the achievements endpoint');
+  assert.equal(JSON.parse(milestonePost.init.body).event_type, 'season');
+  assert.equal(JSON.parse(milestonePost.init.body).display_name, 'Smoke Player');
+
+  click('[data-a="close"]');
   click('[data-a="newgame"]');
   click('[data-a="pickmode"][data-v="mgr"]');
   for (const [selector, value] of [['#fn', 'Smoke'], ['#ln', 'Manager']]) {
@@ -159,7 +225,7 @@ try {
   assert.equal(window.UIX.ui().view, 'game', 'custom club roster draft should start a season');
   assert.ok(window.S.m.sq.length >= 18, 'custom club should have a generated squad');
   assert.deepEqual(errors, [], `Unexpected runtime errors: ${errors.join('\n')}`);
-  console.log('Runtime smoke passed: boot, five locales, GLB assets, Era isolation, player decisions, manager and custom-club creation.');
+  console.log('Runtime smoke passed: boot, five locales, GOAT career/milestone sharing, GLB assets, Era isolation, player decisions, manager and custom-club creation.');
 } finally {
   window.close();
 }

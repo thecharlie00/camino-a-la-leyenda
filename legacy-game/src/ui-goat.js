@@ -277,11 +277,23 @@
   function CareerSeasonHistory(entry) {
     var rows = (entry.history || []).slice().reverse().map(function (season) {
       var heading = [season.season, season.club, compName(season.competition)].filter(Boolean).join(" · ");
-      var summary = entry.game_mode === "player"
-        ? [tr("careerAppearances") + ": " + season.appearances, tr("careerGoals") + ": " + season.goals,
-          tr("careerAssists") + ": " + season.assists, tr("careerTrophies") + ": " + (season.trophies || []).length]
-        : [tr("careerWins") + ": " + season.wins + "-" + season.draws + "-" + season.losses,
-          tr("goals") + ": " + season.goals_for + "–" + season.goals_against];
+      var summary = [];
+      function add(label, value) { if (value != null && value !== "") summary.push(label + ": " + value); }
+      if (entry.game_mode === "player") {
+        add(tr("careerAppearances"), season.appearances);
+        add(tr("careerGoals"), season.goals);
+        add(tr("careerAssists"), season.assists);
+        if (season.trophies) add(tr("careerTrophies"), season.trophies.length);
+      } else {
+        if (season.wins != null || season.draws != null || season.losses != null) {
+          add(tr("careerWins") + "/" + tr("careerDraws") + "/" + tr("careerLosses"),
+            [season.wins, season.draws, season.losses].map(function (value) { return value == null ? "—" : value; }).join("-"));
+        }
+        if (season.goals_for != null || season.goals_against != null) {
+          add(tr("goals"), (season.goals_for == null ? "—" : season.goals_for) + "–" +
+            (season.goals_against == null ? "—" : season.goals_against));
+        }
+      }
       if (season.position != null) summary.push(tr("careerPosition") + ": " + season.position);
       if (season.promoted) summary.push(tr("careerPromoted"));
       return '<p class="goat-season"><b>' + esc(heading) + '</b><span>' +
@@ -456,7 +468,7 @@
   }
   function careerPublishSheet(sheet) {
     var career = service.career();
-    if (!career) return '<h2>' + esc(tr("careerNoData")) + "</h2>";
+    if (!career) return '<h2>' + esc(tr("careerNoData")) + "</h2><button class=\"btn wide\" data-a=\"close\">" + esc(tr("close")) + "</button>";
     if (!service.available()) {
       return '<h2>' + esc(tr("publishCareer")) + '</h2><p class="goat-error">' +
         esc(tr("unavailable")) + "</p><button class=\"btn wide\" data-a=\"close\">" +
@@ -464,8 +476,8 @@
     }
     return '<h2>' + esc(tr("publishCareer")) + '</h2><p class="goat-meta">' +
       esc(career.current_club) + " · " + esc(career.started_season + "–" + career.latest_season) +
-      "</p>" + CareerStatsSummary(career.metrics, career.game_mode) +
-      careerInputLabel("alias", "alias", sheet.careerAlias || "") +
+      "</p>" + CareerStatsSummary(career.metrics, career.game_mode) + CareerHonours(career) +
+      CareerSeasonHistory(career) + careerInputLabel("alias", "alias", sheet.careerAlias || "") +
       careerInputLabel("title", "title", sheet.careerTitle || career.title) +
       '<label class="goat-consent"><input type="checkbox" data-career-consent> ' +
       esc(tr("careerConsent")) + '</label><p class="goat-privacy">' +
@@ -477,6 +489,19 @@
       (sheet.submitting ? " disabled" : "") + ">" +
       esc(sheet.submitting ? tr("loading") : tr("publishCareer")) +
       '</button><button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
+  }
+  function careerPublishCard() {
+    if (!service.available()) return '<section class="card goat-notice"><b>' + esc(tr("unavailable")) +
+      '</b><p class="muted">' + esc(tr("setup")) + "</p></section>";
+    var career = service.career();
+    if (!career) return '<section class="card goat-notice"><b>' + esc(tr("publishCareer")) +
+      '</b><p class="muted">' + esc(tr("careerNoData")) + "</p></section>";
+    return '<section class="card goat-publish goat-career-share"><div class="head"><span class="tag hot">' +
+      esc(tr("publishCareer")) + '</span><span class="eyebrow">' + esc(career.game_mode === "manager" ? tr("manager") : tr("player")) +
+      '</span></div><h3>' + esc(career.title) + '</h3><p class="goat-meta">' +
+      esc(career.current_club) + " · " + esc(career.started_season + "–" + career.latest_season) +
+      "</p>" + CareerStatsSummary(career.metrics, career.game_mode) +
+      '<button class="btn pri wide" data-a="goatcareeropen">' + esc(tr("publishCareer")) + "</button></section>";
   }
   function inputLabel(key, attribute, value) {
     return '<label class="lbl">' + esc(tr(key)) + '<input class="goat-input" maxlength="' +
@@ -592,7 +617,7 @@
         : '<div class="card goat-notice"><p class="muted">' + esc(tr("noLatest")) + "</p></div>";
     return '<h2>🏆 ' + esc(tr("home")) + '</h2><p class="muted">' + esc(tr("login")) + "</p>" +
       GoatFilterTabs(sheet.board, sheet.mode, sheet.timeframe, sheet.metric) +
-      (sheet.board === "achievements" ? publish : "") +
+      (sheet.board === "careers" ? careerPublishCard() : publish) +
       '<div class="stack goat-list">' + list + "</div>" +
         '<button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
   };

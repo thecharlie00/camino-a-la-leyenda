@@ -19,7 +19,8 @@ assert.match(erasUiSource, /store\.flush\(\)[\s\S]*?flushed\.then\(begin\)/, 'Th
 assert.match(erasUiSource, /flushed\.then\(applyLoad\)/, 'The modern save must flush before an era save replaces S');
 assert.match(erasUiSource, /function recentDecisions\(\)[\s\S]*?S\.era\.decisionLog/, 'the era ledger must surface recorded decisions in the existing rules view');
 assert.match(uiSource, /s \+= slot\("modes"\)/, 'The mode selection screen must render its extensible mode slot');
-assert.match(erasUiSource, /UIX\.add\("modes"[\s\S]*?data-a="era-open"/, 'Era Mode must be offered in the Play > Choose a mode menu');
+assert.match(erasUiSource, /UIX\.add\("modes"[\s\S]*?data-a="era-open"/, 'Era Mode must remain available in the existing mode selector');
+assert.doesNotMatch(erasUiSource, /UIX\.add\("mainhome"/, 'Era Mode must no longer have a separate shortcut on the main menu');
 assert.doesNotMatch(erasUiSource, /rules\.backPassBanned/, 'the setup must not claim that an unimplemented back-pass rule affects play');
 assert.match(erasUiSource, /no simulan una red de contactos/, 'media channels must be described as HUD context, not a functional contact network');
 assert.match(erasUiSource, /UIX\.actions\["era-open"\]/, 'The Era Mode option must open its existing setup flow');

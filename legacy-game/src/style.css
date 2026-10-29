@@ -2090,12 +2090,11 @@ html.rm .mgb-n.bump.on { animation: none; }
 #era-overlay[data-era-decade="2010s"] .eras-cover::after { width: 96px; height: 96px; top: -22px; right: 52px; }
 #era-overlay[data-era-decade="2020s"] .eras-cover::after { width: 150px; height: 96px; top: 10px; right: 28px; border-radius: 48px; transform: rotate(-28deg); }
 
-.eras-tile, .eras-mode { position: relative; overflow: hidden; }
-.eras-tile { min-height: 76px; border-left: 3px solid #b9d75c; background: linear-gradient(105deg, rgba(185,215,92,.14), rgba(12,20,24,.96) 65%); }
-.eras-tile::after, .eras-mode::after { position: absolute; top: 0; right: 0; bottom: 0; width: 30%; background: repeating-linear-gradient(135deg, transparent 0 10px, rgba(185,215,92,.08) 10px 12px, transparent 12px 23px); content: ""; pointer-events: none; }
-.eras-tile > *, .eras-mode > * { position: relative; z-index: 1; }
+.eras-mode { position: relative; overflow: hidden; }
+.eras-mode::after { position: absolute; top: 0; right: 0; bottom: 0; width: 30%; background: repeating-linear-gradient(135deg, transparent 0 10px, rgba(185,215,92,.08) 10px 12px, transparent 12px 23px); content: ""; pointer-events: none; }
+.eras-mode > * { position: relative; z-index: 1; }
 .eras-mode { border-color: rgba(185,215,92,.35) !important; background: linear-gradient(100deg, rgba(185,215,92,.09), transparent 66%), var(--stand); }
-.eras-tile:focus-visible, .eras-mode:focus-visible { outline-color: #b9d75c; }
+.eras-mode:focus-visible { outline-color: #b9d75c; }
 @media (max-width: 520px) {
   #era-overlay .eras-cover { min-height: 102px; margin: -14px -14px 14px; padding: 14px; }
   #era-overlay .eras-cover-years { left: 16px; top: 14px; }

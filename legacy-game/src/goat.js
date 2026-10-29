@@ -189,7 +189,7 @@
   }
   function rememberSeason() {
     if (!S || !S.m || !S.m.seasons || !S.m.seasons.length) return;
-    var row = S.m.seasons[S.m.seasons.length - 1], league = W.lg[row.lg];
+    var row = S.m.seasons[S.m.seasons.length - 1], league = row && W.lg[row.lg];
     if (!row || !league) return;
     remember({
       event_type: "season", game_mode: "manager", title: titleFor("manager", "season", row, "", league.n),
@@ -202,6 +202,21 @@
       wins: row.w, draws: row.d, losses: row.l, league_position: row.pos,
       division_depth: depthOfLeague(row.lg), trophies_count: (row.tro || []).length,
       goal_difference: row.gf - row.ga
+    });
+  }
+  function rememberPlayerSeason() {
+    if (!S || !S.p || !Array.isArray(S.p.seasons) || !S.p.seasons.length) return;
+    var row = S.p.seasons[S.p.seasons.length - 1], league = row && W.lg[row.lg];
+    if (!row || !league) return;
+    remember({
+      event_type: "season", game_mode: "player", title: titleFor("player", "season", row, "", league.n),
+      club_name: safeName(clubName(row.club)), competition_name: safeName(league.n), opponent_name: null,
+      season: row.y, goals: row.g || 0, assists: row.a || 0, match_rating: row.rt,
+      minutes_played: row.min || 0, key_passes: null, possession: null, xg: null, decisive_goal_minute: null,
+      own_score: null, opponent_score: null, goals_for: null, goals_against: null,
+      halftime_own_score: 0, halftime_opponent_score: 0, opponent_strength: null,
+      team_strength: row.ovr1, importance: 2, is_final: false, league_position: row.pos,
+      trophies_count: (row.tro || []).length, awards_count: (row.aw || []).length
     });
   }
   function request(path, options) {
@@ -348,6 +363,15 @@
       if (S && S.blog && S.blog.length > before) capture(function () {
         rememberMatch(fixture, "manager", S.blog[S.blog.length - 1]);
       });
+      return result;
+    };
+  }
+  if (typeof seasonEnd === "function") {
+    var originalPlayerSeasonEnd = seasonEnd;
+    seasonEnd = function () {
+      var before = S && S.p && S.p.seasons ? S.p.seasons.length : 0;
+      var result = originalPlayerSeasonEnd.apply(this, arguments);
+      if (S && S.p && S.p.seasons && S.p.seasons.length > before) capture(rememberPlayerSeason);
       return result;
     };
   }
