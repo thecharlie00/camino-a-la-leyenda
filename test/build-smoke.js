@@ -38,6 +38,9 @@ assert.match(gameSource, /S\.ntfHistory/);
 assert.match(gameSource, /rows\.push\(\["ntfcenter"/);
 assert.match(gameSource, /function openNtfCenter\(\)/);
 assert.match(gameSource, /MAX_NTF_HISTORY = 60/);
+assert.match(html, /@media \(orientation: landscape\) and \(max-height: 560px\)/, 'Shared game CSS must adapt the layout to short landscape viewports');
+assert.match(html, /max-height: calc\(100dvh - 96px/, 'In-game notices must stay within the visible viewport height');
+assert.match(html, /\.ntfs \{[\s\S]*?overflow-y: auto/, 'The in-game notice stack must remain scrollable when several notices are visible');
 assert.match(androidHtml, /ntf-history-list/);
 for (const translation of ['Notifications', 'Benachrichtigungen', 'Notifiche', 'Alertes de match']) {
   assert.ok(gameSource.includes(translation), `Missing localized notifications UI text: ${translation}`);

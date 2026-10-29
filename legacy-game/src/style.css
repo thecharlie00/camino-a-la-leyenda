@@ -2145,3 +2145,43 @@ html.rm .mgb-n.bump.on { animation: none; }
 .eras-hud[data-era-decade="2000s"] { --era-accent: #68c9f1; }
 .eras-hud[data-era-decade="2010s"] { --era-accent: #59d6ad; }
 .eras-hud[data-era-decade="2020s"] { --era-accent: #b9a5ff; }
+
+/* Layout adapts to the actual Web viewport on web and in Android WebView.
+   Keep the game viewport scrollable instead of hiding content on compact screens. */
+#app { min-width: 0; }
+main { min-height: 0; }
+.ntfs {
+  max-height: calc(100dvh - 96px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  scrollbar-width: thin;
+}
+
+@media (max-width: 380px) {
+  .top { gap: 8px; padding-inline: 12px; }
+  .top .iconbtn { width: 38px; height: 38px; }
+  main { padding: 10px 12px 18px; }
+  .dock { padding-inline: 12px; }
+  nav.tabs button { min-height: 44px; }
+  .ntfs { width: calc(100% - 16px); }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  .top { gap: 8px; padding: 5px 12px; }
+  .top .ovr { width: 42px; height: 46px; }
+  .top .iconbtn { width: 38px; height: 38px; }
+  main { padding: 8px 12px 12px; }
+  .stack { gap: 10px; }
+  .dock { padding: 4px 12px; }
+  .dock .go { min-height: 44px; padding-block: 10px; }
+  nav.tabs button { min-height: 44px; padding-block: 4px 5px; }
+  .ntfs {
+    top: max(52px, calc(6px + env(safe-area-inset-top, 0px)));
+    max-height: calc(100dvh - 72px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (pointer: coarse) {
+  .top .iconbtn, nav.tabs button { min-height: 44px; }
+}
