@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1417">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="apple-touch-icon" href="../../img/apple-touch-icon.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="preload" href="../../fonts/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../site.css">
+<meta name="google-adsense-account" content="ca-pub-3919867907492197">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3919867907492197" crossorigin="anonymous"></script>
+<title>Jouer · Camino a la Leyenda</title>
+<meta name="description" content="Joue à Camino a la Leyenda dans ton navigateur : carrière de joueur, d'entraîneur ou crée ton club. Gratuit et sans compte.">
+<link rel="canonical" href="https://futbolroadtolegend.com/fr/jugar/">
+<link rel="alternate" hreflang="es" href="https://futbolroadtolegend.com/jugar/">
+<link rel="alternate" hreflang="en" href="https://futbolroadtolegend.com/en/jugar/">
+<link rel="alternate" hreflang="de" href="https://futbolroadtolegend.com/de/jugar/">
+<link rel="alternate" hreflang="it" href="https://futbolroadtolegend.com/it/jugar/">
+<link rel="alternate" hreflang="fr" href="https://futbolroadtolegend.com/fr/jugar/">
+<link rel="alternate" hreflang="x-default" href="https://futbolroadtolegend.com/jugar/">
+</head>
+<body class="play" data-lang="fr">
+<header class="pbar">
+  <a class="brand" href="../"><img src="../../img/icon-72.png" width="28" height="28" alt="">Camino a la Leyenda</a>
+  <span class="sp"><a href="../privacidad/">Confidentialité</a><a class="goat-tab" href="https://futbolroadtolegend.com/fr/goat-ladder/">GOAT LADDER</a><button type="button" class="linkbtn" data-consent>Cookies</button><details class="lang"><summary aria-label="Langue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>FR</summary><div class="langm"><a href="../../jugar/" hreflang="es" lang="es" data-weblang="es">Español</a><a href="../../en/jugar/" hreflang="en" lang="en" data-weblang="en">English</a><a href="../../de/jugar/" hreflang="de" lang="de" data-weblang="de">Deutsch</a><a href="../../it/jugar/" hreflang="it" lang="it" data-weblang="it">Italiano</a><a href="../../fr/jugar/" hreflang="fr" lang="fr" data-weblang="fr" aria-current="page">Français</a></div></details>
+    <button type="button" class="btn sm" id="fs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Plein écran</button></span>
+</header>
+
+<div class="pmain">
+  <div class="pframe" id="pframe">
+    <iframe id="game" data-src="../../jugar/juego.html" title="Camino a la Leyenda" allow="clipboard-write; fullscreen" allowfullscreen></iframe>
+  </div>
+  <aside class="rail" aria-label="Publicité">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3919867907492197"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </aside>
+</div>
+<div class="rot" id="rot" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+  <p>Le jeu est pensé pour le téléphone à la verticale. Tourne-le pour mieux voir.</p>
+  <button type="button" class="btn" id="rotok">Rester à l'horizontale</button>
+</div>
+<script>
+/* el juego arranca en el idioma de la página la primera vez y cada vez que se cambia el idioma de la web */
+(function () {
+  var l = document.body.getAttribute("data-lang"), f = document.getElementById("game");
+  try {
+    var prev = localStorage.getItem("camino.weblang");
+    if (prev !== l || !localStorage.getItem("camino.lang")) localStorage.setItem("camino.lang", l);
+    localStorage.setItem("camino.weblang", l);
+  } catch (e) {}
+  f.src = f.getAttribute("data-src");
+})();
+</script>
+<script src="../../site.js" defer></script>
+</body>
+</html>

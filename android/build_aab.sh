@@ -35,6 +35,7 @@ mkdir -p build-aab/{classes,dex,module} "$ROOT/dist" assets/jugar
 # Package the Android launcher icon alongside the self-contained game HTML.
 "$AAPT2" compile --dir res -o build-aab/resources.zip
 cp "$ROOT/dist/android/jugar/juego.html" assets/jugar/juego.html
+cp "$ROOT/dist/android/jugar/juego.html" assets/index.html
 
 # Create an Android proto-APK to supply the base module manifest and packaged assets.
 "$AAPT2" link \

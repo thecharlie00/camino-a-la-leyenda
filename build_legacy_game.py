@@ -165,7 +165,11 @@ MODULE_BOOTSTRAP = """(function () {
     var app = document.getElementById('app');
     if (app) app.innerHTML = '<main role="alert" style="padding:24px;color:#fff;background:#0b1417;font:16px system-ui"><h1>No se pudo iniciar el juego</h1><p>Recarga la página para volver a intentarlo.</p><button type="button" onclick="location.reload()">Recargar</button></main>';
   }
-  window.addEventListener('error', function (event) { if (booting) fail(event.error || event.message || 'Error JavaScript al iniciar'); });
+  window.addEventListener('error', function (event) {
+    if (!booting) return;
+    if (event && event.target && event.target !== window) return;
+    fail(event.error || event.message || 'Error JavaScript al iniciar');
+  });
   function next() {
     if (failed) return;
     var data = document.getElementById(ids[index]);
