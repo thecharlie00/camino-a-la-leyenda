@@ -98,8 +98,84 @@ ACH_M.push(
   ["m_bigbudget", "💼", N_("Presupuesto de élite"), N_("Dirige un club con al menos 20 millones de presupuesto."), function () { return S.m.bud >= 20000000; }]
 );
 
-function achList() {
+/* Logros exclusivos de Épocas. Las pruebas usan estadísticas ya guardadas en la carrera,
+   y achList solo los ofrece cuando el guardado tiene el metadato activo del modo. */
+function eraAchActive() { return !!(typeof ERAS_MODE !== "undefined" && ERAS_MODE && S && S.era && S.era.active); }
+function eraAchDecisions() { return eraAchActive() && Array.isArray(S.era.decisionLog) ? S.era.decisionLog : []; }
+function eraAchSeasons() { return S && S.mode === "mgr" ? (S.m && S.m.seasons || []) : (S && S.p && S.p.seasons || []); }
+function eraAchDecade(year) {
+  var pack = typeof eraPackForYear === "function" ? eraPackForYear(year) : null;
+  return pack ? pack.id : "";
+}
+function eraAchVisitedDecades() {
+  var seen = {};
+  eraAchDecisions().forEach(function (entry) { var decade = eraAchDecade(entry.year); if (decade) seen[decade] = true; });
+  return Object.keys(seen).length;
+}
+function eraAchStartDecade(decade) { return eraAchActive() && eraAchDecade(S.era.startYear) === decade; }
+function eraAchSpan(years) { return eraAchActive() && S.yr - S.era.startYear >= years; }
+function eraAchPlayerTot() { try { return achPlayerTot(); } catch (e) { return {apps: 0, g: 0, a: 0, seasons: 0}; } }
+function eraAchManagerTot() { try { return achMgrTot(); } catch (e) { return {w: 0, seasons: 0}; } }
+function eraAchClubs() { try { return achClubs(eraAchSeasons()); } catch (e) { return 0; } }
+function achTranslate(text) {
+  return typeof ERAS_I18N !== "undefined" && ERAS_I18N[text] && typeof eraText === "function"
+    ? eraText(text) : tr(text);
+}
+var ACH_ERA = [
+  ["era_first_match", "⚽", N_("Primer silbatazo"), N_("Juega tu primer partido en una carrera de Épocas."), function () { var ss = S.m && S.m.ss || {}; return (+S.bi || 0) > 0 || (S.p && S.p.ss && S.p.ss.apps > 0) || ((ss.w || 0) + (ss.d || 0) + (ss.l || 0) > 0); }],
+  ["era_first_decision", "🗞️", N_("Una decisión para la historia"), N_("Resuelve una decisión de época."), function () { return eraAchDecisions().length >= 1; }],
+  ["era_decisions5", "📜", N_("Cinco capítulos"), N_("Resuelve cinco decisiones de época."), function () { return eraAchDecisions().length >= 5; }],
+  ["era_decisions15", "📚", N_("Quince capítulos"), N_("Resuelve quince decisiones de época."), function () { return eraAchDecisions().length >= 15; }],
+  ["era_choices_all", "⚖️", N_("A cada problema, su respuesta"), N_("Elige las tres estrategias disponibles en decisiones de época distintas."), function () { var choices = {}; eraAchDecisions().forEach(function (entry) { choices[entry.choice] = true; }); return choices[0] && choices[1] && choices[2]; }],
+  ["era_two_decades", "🕰️", N_("Viajero de las décadas"), N_("Resuelve decisiones en dos décadas diferentes."), function () { return eraAchVisitedDecades() >= 2; }],
+  ["era_span5", "🗓️", N_("Cinco años después"), N_("Mantén tu carrera histórica durante cinco años."), function () { return eraAchSpan(5); }],
+  ["era_span10", "⌛", N_("Una década de legado"), N_("Mantén tu carrera histórica durante diez años."), function () { return eraAchSpan(10); }],
+  ["era_span20", "🏛️", N_("Veinte años de historia"), N_("Mantén tu carrera histórica durante veinte años."), function () { return eraAchSpan(20); }],
+  ["era_cross2000", "💿", N_("Cambio de milenio"), N_("Empieza antes del año 2000 y lleva tu carrera hasta el nuevo milenio."), function () { return S.era.startYear < 2000 && S.yr >= 2000; }],
+  ["era_cross2010", "📱", N_("La era de las redes"), N_("Llega a 2010, cuando el fútbol entra en la era de las redes sociales."), function () { return S.yr >= 2010; }],
+  ["era_reach2020", "🛰️", N_("Fútbol del futuro"), N_("Llega a una temporada de 2020 o posterior."), function () { return S.yr >= 2020; }],
+  ["era_start70s", "📺", N_("Archivo: años setenta"), N_("Empieza tu carrera histórica en los años setenta."), function () { return eraAchStartDecade("1970s"); }],
+  ["era_start80s", "📼", N_("Archivo: años ochenta"), N_("Empieza tu carrera histórica en los años ochenta."), function () { return eraAchStartDecade("1980s"); }],
+  ["era_start90s", "🎮", N_("Archivo: años noventa"), N_("Empieza tu carrera histórica en los años noventa."), function () { return eraAchStartDecade("1990s"); }],
+  ["era_start00s", "💽", N_("Archivo: años dos mil"), N_("Empieza tu carrera histórica en los años dos mil."), function () { return eraAchStartDecade("2000s"); }],
+  ["era_start10s", "📲", N_("Archivo: años dos mil diez"), N_("Empieza tu carrera histórica en los años dos mil diez."), function () { return eraAchStartDecade("2010s"); }],
+  ["era_start20s", "🖥️", N_("Archivo: años dos mil veinte"), N_("Empieza tu carrera histórica en los años dos mil veinte."), function () { return eraAchStartDecade("2020s"); }],
+  ["era_p_debut", "👟", N_("Debut de época"), N_("Juega tu primer partido oficial en Modo Épocas."), function () { return eraAchPlayerTot().apps >= 1; }, 0, "player"],
+  ["era_p_goal1", "⚽", N_("Gol para el archivo"), N_("Marca tu primer gol oficial en Modo Épocas."), function () { return eraAchPlayerTot().g >= 1; }, 0, "player"],
+  ["era_p_goals50", "🎯", N_("Cincuenta goles históricos"), N_("Marca 50 goles oficiales en Modo Épocas."), function () { return eraAchPlayerTot().g >= 50; }, 0, "player"],
+  ["era_p_goals100", "🔥", N_("Centenario de época"), N_("Marca 100 goles oficiales en Modo Épocas."), function () { return eraAchPlayerTot().g >= 100; }, 0, "player"],
+  ["era_p_goals500", "👑", N_("Quinientos goles de leyenda"), N_("Marca 500 goles oficiales en Modo Épocas."), function () { return eraAchPlayerTot().g >= 500; }, 0, "player"],
+  ["era_p_assists100", "🤝", N_("Socio de época"), N_("Da 100 asistencias oficiales en Modo Épocas."), function () { return eraAchPlayerTot().a >= 100; }, 0, "player"],
+  ["era_p_apps300", "🏟️", N_("Tres siglos de partidos"), N_("Juega 300 partidos oficiales en Modo Épocas."), function () { return eraAchPlayerTot().apps >= 300; }, 0, "player"],
+  ["era_p_apps1000", "🧭", N_("Mil partidos en el tiempo"), N_("Juega 1.000 partidos oficiales en Modo Épocas."), function () { return eraAchPlayerTot().apps >= 1000; }, 0, "player"],
+  ["era_p_seasons5", "📅", N_("Cinco temporadas históricas"), N_("Completa cinco temporadas de jugador en Modo Épocas."), function () { return eraAchPlayerTot().seasons >= 5; }, 0, "player"],
+  ["era_p_seasons10", "⏳", N_("Una década en el césped"), N_("Completa diez temporadas de jugador en Modo Épocas."), function () { return eraAchPlayerTot().seasons >= 10; }, 0, "player"],
+  ["era_p_seasons20", "🏆", N_("Veinte temporadas de jugador"), N_("Completa veinte temporadas de jugador en Modo Épocas."), function () { return eraAchPlayerTot().seasons >= 20; }, 0, "player"],
+  ["era_p_clubs3", "🧳", N_("Tres escudos históricos"), N_("Juega en tres clubes distintos en Modo Épocas."), function () { return eraAchClubs() >= 3; }, 0, "player"],
+  ["era_p_clubs5", "🌍", N_("Cinco clubes, seis décadas"), N_("Juega en cinco clubes distintos en Modo Épocas."), function () { return eraAchClubs() >= 5; }, 0, "player"],
+  ["era_p_trophy", "🏅", N_("Primer trofeo de época"), N_("Gana tu primer título como jugador en Modo Épocas."), function () { return S.p.trophies.length >= 1; }, 0, "player"],
+  ["era_p_caps", "🧢", N_("Internacional de época"), N_("Debuta con tu selección en Modo Épocas."), function () { return S.p.intl.caps >= 1; }, 0, "player"],
+  ["era_p_ovr90", "💎", N_("Clase mundial histórica"), N_("Alcanza una media de 90 en Modo Épocas."), function () { return Math.round(S.p.peak || S.p.ovr) >= 90; }, 0, "player"],
+  ["era_m_firstwin", "✅", N_("Primer triunfo de época"), N_("Gana tu primer partido como míster en Modo Épocas."), function () { return eraAchManagerTot().w >= 1; }, 0, "manager"],
+  ["era_m_wins50", "📈", N_("Cincuenta victorias históricas"), N_("Suma 50 victorias como míster en Modo Épocas."), function () { return eraAchManagerTot().w >= 50; }, 0, "manager"],
+  ["era_m_wins200", "🧠", N_("Doscientas victorias históricas"), N_("Suma 200 victorias como míster en Modo Épocas."), function () { return eraAchManagerTot().w >= 200; }, 0, "manager"],
+  ["era_m_wins500", "🏅", N_("Quinientas victorias históricas"), N_("Suma 500 victorias como míster en Modo Épocas."), function () { return eraAchManagerTot().w >= 500; }, 0, "manager"],
+  ["era_m_seasons5", "📚", N_("Proyecto de época"), N_("Completa cinco temporadas como míster en Modo Épocas."), function () { return eraAchManagerTot().seasons >= 5; }, 0, "manager"],
+  ["era_m_seasons10", "🗓️", N_("Una década en el banquillo"), N_("Completa diez temporadas como míster en Modo Épocas."), function () { return eraAchManagerTot().seasons >= 10; }, 0, "manager"],
+  ["era_m_seasons20", "🕰️", N_("Veinte temporadas al mando"), N_("Completa veinte temporadas como míster en Modo Épocas."), function () { return eraAchManagerTot().seasons >= 20; }, 0, "manager"],
+  ["era_m_trophy", "🏆", N_("Primer título desde el banquillo"), N_("Gana tu primer título como míster en Modo Épocas."), function () { return S.m.trophies.length >= 1; }, 0, "manager"],
+  ["era_m_trophies5", "🥇", N_("Vitrina histórica"), N_("Gana cinco títulos como míster en Modo Épocas."), function () { return S.m.trophies.length >= 5; }, 0, "manager"],
+  ["era_m_trophies15", "👑", N_("Dinastía de época"), N_("Gana quince títulos como míster en Modo Épocas."), function () { return S.m.trophies.length >= 15; }, 0, "manager"],
+  ["era_m_unbeaten", "🧱", N_("Invicto en la historia"), N_("Completa una temporada de liga sin derrotas y con diez partidos o más en Modo Épocas."), function () { return S.m.seasons.some(function (row) { return row.l === 0 && row.w + row.d >= 10; }); }, 0, "manager"],
+  ["era_m_goals90", "💥", N_("Ataque de otra época"), N_("Marca 90 goles en una temporada de liga como míster en Modo Épocas."), function () { return S.m.seasons.some(function (row) { return row.gf >= 90; }); }, 0, "manager"],
+  ["era_m_clubs3", "🧭", N_("Tres banquillos históricos"), N_("Entrena a tres clubes distintos en Modo Épocas."), function () { return eraAchClubs() >= 3; }, 0, "manager"],
+  ["era_m_clubs5", "🌐", N_("Cinco escudos, una carrera"), N_("Entrena a cinco clubes distintos en Modo Épocas."), function () { return eraAchClubs() >= 5; }, 0, "manager"],
+  ["era_m_rep90", "⭐", N_("Respeto de época"), N_("Alcanza 90 de reputación como míster en Modo Épocas."), function () { return S.m.rep >= 90; }, 0, "manager"],
+  ["era_m_wins1000", "🏟️", N_("Mil victorias de leyenda"), N_("Suma 1.000 victorias como míster en Modo Épocas."), function () { return eraAchManagerTot().w >= 1000; }, 0, "manager"]
+];
+function achList(showAllEra) {
   var mgr = S && S.mode === "mgr", md = mgr ? "m" : "p", l = (mgr ? ACH_M : ACH_P).concat(typeof achX === "function" ? achX(md) : []);
+  if (eraAchActive()) l = l.concat(ACH_ERA.filter(function (achievement) { return showAllEra || !achievement[6] || achievement[6] === (mgr ? "manager" : "player"); }));
   /* 5.6: trofeos ampliados (gx-data.js) y el platino del modo, que se evalúa el último */
   if (typeof GX !== "undefined") { GX.rows(md).forEach(function (r) { r.gx = 1; l.push(r); }); var pl = GX.platRow(md); pl.gx = 1; l.push(pl); }
   return l;

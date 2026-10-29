@@ -98,14 +98,35 @@ assert.deepEqual(androidErasData, erasData, 'Web and Android must share the same
 assert.deepEqual(androidErasI18n, erasI18n, 'Web and Android must share the same Era Mode translations');
 assert.deepEqual(erasData.packs.map((pack) => pack.id), ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']);
 assert.ok(erasData.timeline.events.some((event) => event.year === 2010 && event.changes.media.socialMedia === true), 'The social-media transition must be 2010');
-assert.equal(erasData.decisions.records.length, 600, 'Era Mode must include 100 decision scenarios for each decade');
+assert.equal(erasData.decisions.schema, 2, 'the historical decision catalogue schema must be current');
+assert.equal(erasData.decisions.records.length, 1000, 'Era Mode must contain 600 original and 400 historical decision scenarios');
+assert.equal(erasData.decisions.historyEvents.length, 40, 'the 400 historical decisions must be grounded in 40 real-event anchors');
+assert.equal(erasData.decisions.records.filter((record) => record.historyEventId).length, 400, 'exactly 400 scenarios must reference historical events');
 for (const decade of erasData.packs.map((pack) => pack.id)) {
   const records = erasData.decisions.records.filter((record) => record.decade === decade);
-  assert.equal(records.length, 100, `${decade} must contain 100 distinct decisions`);
-  assert.equal(new Set(records.map((record) => `${record.topic}:${record.context}`)).size, 100, `${decade} decision contexts must be distinct`);
+  const original = records.filter((record) => !record.historyEventId);
+  const historical = records.filter((record) => record.historyEventId);
+  assert.equal(original.length, 100, `${decade} must preserve its 100 original decisions`);
+  assert.equal(historical.length, decade === '2010s' || decade === '2020s' ? 60 : 70, `${decade} must receive its share of the 400 historical decisions`);
+  assert.equal(new Set(original.map((record) => `${record.topic}:${record.context}`)).size, 100, `${decade} original decision contexts must remain distinct`);
+  for (const record of historical) {
+    const event = erasData.decisions.historyEvents.find((candidate) => candidate.id === record.historyEventId);
+    assert.ok(event, `${record.id} must reference a real historical anchor`);
+    assert.equal(event.decade, record.decade, `${record.id} must stay in its anchor decade`);
+  }
+}
+for (const event of erasData.decisions.historyEvents) {
+  for (const field of ['label', 'fact']) for (const language of ['es', 'en', 'de', 'it', 'fr']) {
+    assert.ok(event[field]?.[language], `${event.id} is missing ${field} in ${language}`);
+  }
+  const linked = erasData.decisions.records.filter((record) => record.historyEventId === event.id);
+  assert.equal(linked.length, 10, `${event.id} must ground ten decision variations`);
+  assert.equal(new Set(linked.map((record) => record.topic)).size, 10, `${event.id} must cover all decision topics`);
 }
 assert.ok(erasI18n['Modo Épocas']?.en, 'Era Mode translations are not embedded');
 for (const [target, source] of [['web', gameSource], ['Android', androidSource]]) {
+  assert.match(source, /home-groups/, `${target} main menu must use the grouped home layout`);
+  assert.match(source, /home-mainhome-slot/, `${target} must render the direct GOAT Ladder home-menu slot`);
   assert.match(source, /var Pitch3D = \(function \(\)/, `${target} 3D match renderer is missing`);
   assert.match(source, /var PetWorld = \(function \(\)/, `${target} 3D pet world is missing`);
   assert.match(source, /var PetAudio = \(function \(\)/, `${target} 3D pet audio system is missing`);

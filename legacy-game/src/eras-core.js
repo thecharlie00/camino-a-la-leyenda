@@ -172,9 +172,21 @@ function eraDecisionRecord(id) {
   for (var i = 0; i < records.length; i++) if (records[i].id === id) return records[i];
   return null;
 }
+function eraDecisionEvent(record) {
+  var events = ERAS_DATA && ERAS_DATA.decisions && ERAS_DATA.decisions.historyEvents || [];
+  if (!record || !record.historyEventId) return null;
+  for (var i = 0; i < events.length; i++) if (events[i].id === record.historyEventId) return events[i];
+  return null;
+}
+function eraEventText(event, field) {
+  var localized = event && event[field], language = typeof LANG === "string" ? LANG : "es";
+  if (localized && localized[language]) return localized[language];
+  return localized && localized.es || "";
+}
 function eraDecisionLabel(record) {
   var catalog = ERAS_DATA.decisions, topic = catalog.topics[record.topic], context = catalog.contexts[record.decade][record.context];
-  return eraText(topic.key) + " · " + eraText(context);
+  var event = eraDecisionEvent(record);
+  return eraText(topic.key) + " · " + (event ? eraEventText(event, "label") : eraText(context));
 }
 function eraDecisionOptions(record) {
   var lever = ERAS_DATA.decisions.topics[record.topic].lever, n = record.intensity;
@@ -211,8 +223,8 @@ function eraDecisionChips(record, choice, managerMode) {
   return chips;
 }
 function eraDecisionDescription(item, managerMode) {
-  var record = eraDecisionRecord(item && item.id);
-  if (!record || !eraIsActive()) return null;
+  var record = eraDecisionRecord(item && item.id), event = eraDecisionEvent(record), currentPack = S && eraPackForYear(S.yr);
+  if (!record || !eraIsActive() || !currentPack || currentPack.id !== record.decade || (event && event.year > +S.yr)) return null;
   var catalog = ERAS_DATA.decisions, context = catalog.contexts[record.decade][record.context], profile = eraInfoForYear(S.yr), opts = [
     {label: "Acelerar con inversión", description: "Coste inmediato alto; refuerza el área elegida a largo plazo."},
     {label: "Probar por fases", description: "Coste y beneficio moderados; permite aprender antes de ampliar."},
@@ -223,7 +235,7 @@ function eraDecisionDescription(item, managerMode) {
       points: profile.rules.winPoints, subs: profile.rules.maxSubs,
       windows: eraText(profile.rules.transferWindows ? "Ventanas de fichajes" : "Sin ventanas obligatorias"),
       social: eraText(profile.media.socialMedia ? "Redes disponibles" : "Sin redes sociales")
-    }) + " " + eraText(context) + " " + eraText("Este dilema de gestión es una situación ficticia de juego, no un episodio histórico atribuido a un club real. Elige según los efectos mostrados."),
+    }) + " " + (event ? eraText("Marco histórico ({year}): {fact}", {year: event.year, fact: eraEventText(event, "fact")}) + " " + eraText("El hecho histórico sirve solo de contexto; el dilema y sus efectos son ficticios y no se atribuyen a clubes o personas reales. Elige según los efectos mostrados.") : eraText(context) + " " + eraText("Este dilema de gestión es una situación ficticia de juego, no un episodio histórico atribuido a un club real. Elige según los efectos mostrados.")),
     opts: opts.map(function (option, i) {
       var desc = eraText(option.description);
       return {t: eraText(option.label), d: desc, outs: [{p: 1, good: true, sure: true, lab: eraText("Efecto confirmado"), chips: eraDecisionChips(record, i, managerMode)}]};
@@ -273,7 +285,11 @@ function eraQueueSeasonDecision() {
   var yearKey = String(S.yr);
   if (S.era.decisionYears[yearKey]) return false;
   var pack = eraPackForYear(S.yr), all = ERAS_DATA && ERAS_DATA.decisions && ERAS_DATA.decisions.records || [];
-  var options = all.filter(function (record) { return record.decade === pack.id; });
+  var options = all.filter(function (record) {
+    if (record.decade !== pack.id) return false;
+    var event = eraDecisionEvent(record);
+    return !event || event.year <= +S.yr;
+  });
   if (!options.length) return false;
   var seen = S.era.decisionSeen && S.era.decisionSeen[pack.id] || [];
   var fresh = options.filter(function (record) { return seen.indexOf(record.id) < 0; });

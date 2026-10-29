@@ -129,6 +129,8 @@ var GX = (function () {
   api.meta = function (id) {
     var o = api.get(id); if (o) return o;
     if (id === GX_PLAT.p.id || id === GX_PLAT.m.id) { var pl = id === GX_PLAT.p.id ? GX_PLAT.p : GX_PLAT.m; return {id: id, cat: "base", rar: "p", hide: false, mode: id === GX_PLAT.p.id ? "p" : "m", n: pl.n, d: pl.d, x: {title: pl.title}}; }
+    var eraAchievement = typeof ACH_ERA !== "undefined" ? ACH_ERA.filter(function (achievement) { return achievement[0] === id; })[0] : null;
+    if (eraAchievement) return {id: id, cat: "career", rar: "s", hide: !!eraAchievement[5], mode: eraAchievement[6] === "manager" ? "m" : eraAchievement[6] === "player" ? "p" : "b", era: true};
     var od = GX_OLD[id]; if (!od) return {id: id, cat: "base", rar: "b", hide: false, mode: /^m_/.test(id) ? "m" : "p"};
     var mode = /^m_/.test(id) ? "m" : /^p_/.test(id) ? "p" : null;
     if (!mode && typeof ACH_X !== "undefined") { var x = ACH_X.filter(function (a) { return a[0] === id; })[0]; mode = x ? x[2] : "b"; }
@@ -158,7 +160,7 @@ var GX = (function () {
   api.money = function (rar) { var r = GX_RAR[rar]; return r ? Math.round(r.money * scale() / 500) * 500 : 0; };
   function reward(m) {
     var out = {money: 0, title: null};
-    if (!m || !GX_RAR[m.rar] || GX_OLD[m.id]) return out;
+    if (!m || !GX_RAR[m.rar] || GX_OLD[m.id] || m.era) return out;
     out.money = api.money(m.rar);
     var who = S.mode === "mgr" ? S.m : S.p;
     if (who && out.money) who.money = (who.money || 0) + out.money;

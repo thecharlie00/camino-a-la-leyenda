@@ -66,18 +66,33 @@ for pack in ERAS_PACKS:
     missing_clubs = [name for name in pack["referenceClubs"] if name not in available_clubs]
     if missing_clubs:
         raise ValueError(f"Era pack {pack['id']} has clubs absent from the shared world: {missing_clubs}")
-if ERAS_DECISIONS.get("schema") != 1 or len(ERAS_DECISIONS.get("topics", [])) != 10:
-    raise ValueError("Era decision catalogue must define ten topics")
+if ERAS_DECISIONS.get("schema") != 2 or len(ERAS_DECISIONS.get("topics", [])) != 10:
+    raise ValueError("Era decision catalogue schema 2 must define ten topics")
 if set(ERAS_DECISIONS.get("contexts", {})) != set(EXPECTED_ERAS) or any(len(items) != 10 for items in ERAS_DECISIONS.get("contexts", {}).values()):
     raise ValueError("Era decision catalogue must define ten period-specific situations for every decade")
 if set(ERAS_DECISIONS.get("periods", {})) != set(EXPECTED_ERAS):
     raise ValueError("Era decision catalogue must define a frame for all six decades")
+expected_records = {"1970s": 170, "1980s": 170, "1990s": 170, "2000s": 170, "2010s": 160, "2020s": 160}
+history_events = ERAS_DECISIONS.get("historyEvents", [])
+events_by_id = {event.get("id"): event for event in history_events}
+if len(history_events) != 40 or len(events_by_id) != 40:
+    raise ValueError("Era decision catalogue must define 40 unique historical anchors")
+for event in history_events:
+    year = event.get("year")
+    if not event.get("id") or event.get("decade") not in EXPECTED_ERAS or not isinstance(year, int) or year // 10 * 10 != int(event["decade"][:4]):
+        raise ValueError(f"Invalid historical decision anchor: {event.get('id')}")
+    for field in ("label", "fact"):
+        if set(event.get(field, {})) != {"es", "en", "de", "it", "fr"} or any(not event[field].get(language) for language in ("es", "en", "de", "it", "fr")):
+            raise ValueError(f"Historical anchor {event['id']} is missing localized {field} text")
 seen_decisions = set()
 for decade in EXPECTED_ERAS:
     records = [record for record in ERAS_DECISIONS.get("records", []) if record.get("decade") == decade]
-    pairs = {(record.get("topic"), record.get("context")) for record in records}
-    if len(records) != 100 or len(pairs) != 100:
-        raise ValueError(f"Era decision catalogue must contain 100 distinct topic/situation combinations for {decade}")
+    base_records = [record for record in records if not record.get("historyEventId")]
+    if len(records) != expected_records[decade] or len(base_records) != 100:
+        raise ValueError(f"Era decision catalogue must contain 100 base decisions plus historical decisions for {decade}")
+    base_pairs = {(record.get("topic"), record.get("context")) for record in base_records}
+    if len(base_pairs) != 100:
+        raise ValueError(f"Era decision catalogue must preserve 100 distinct original topic/situation combinations for {decade}")
     for record in records:
         if not record.get("id") or record["id"] in seen_decisions:
             raise ValueError(f"Era decision id is missing or duplicated: {record.get('id')}")
@@ -86,7 +101,18 @@ for decade in EXPECTED_ERAS:
             raise ValueError(f"Era decision {record['id']} references an unknown topic or situation")
         if record.get("intensity") not in (1, 2, 3):
             raise ValueError(f"Era decision {record['id']} has invalid intensity")
-for phrase in [phrase for items in ERAS_DECISIONS["contexts"].values() for phrase in items] + [topic["key"] for topic in ERAS_DECISIONS["topics"]] + list(ERAS_DECISIONS["periods"].values()):
+        if record.get("historyEventId"):
+            event = events_by_id.get(record["historyEventId"])
+            if not event or event["decade"] != decade:
+                raise ValueError(f"Historical decision {record['id']} points to an event from another decade")
+historical_records = [record for record in ERAS_DECISIONS["records"] if record.get("historyEventId")]
+if len(ERAS_DECISIONS["records"]) != 1000 or len(historical_records) != 400:
+    raise ValueError("Era decision catalogue must contain exactly 600 original and 400 historical decisions")
+for event in history_events:
+    linked = [record for record in historical_records if record["historyEventId"] == event["id"]]
+    if len(linked) != 10 or {record["topic"] for record in linked} != set(range(10)):
+        raise ValueError(f"Historical anchor {event['id']} must have one decision for each of the ten topics")
+for phrase in [phrase for items in ERAS_DECISIONS["contexts"].values() for phrase in items] + [topic["key"] for topic in ERAS_DECISIONS["topics"]] + list(ERAS_DECISIONS["periods"].values()) + ["Marco histórico ({year}): {fact}", "El hecho histórico sirve solo de contexto; el dilema y sus efectos son ficticios y no se atribuyen a clubes o personas reales. Elige según los efectos mostrados."]:
     if phrase not in ERAS_I18N:
         raise ValueError(f"Era decision phrase is missing from translations: {phrase}")
 for key, locales in ERAS_I18N.items():

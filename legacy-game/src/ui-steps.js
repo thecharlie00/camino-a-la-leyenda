@@ -54,8 +54,21 @@
     var mgr = S.mode === "mgr", o = mgr ? S.m : S.p;
     return o ? ((o.fn ? o.fn + " " : "") + (o.ln || "")).trim() : "";
   }
-  function saveMode() { if (!S) return ""; if (S.mode === "mgr") return S.kind === "club" ? "club" : "mgr"; return S.g === "f" ? "pf" : "p"; }
-  function modeTxt(k) { return k === "club" ? tr("Crea tu club") : k === "mgr" ? tr("Carrera de míster") : k === "pf" ? tr("Carrera de jugadora") : tr("Carrera de jugador"); }
+  function saveMode() {
+    if (!S) return "";
+    if (S.era && S.era.active) return S.mode === "mgr" ? "era-mgr" : "era-p";
+    if (S.mode === "mgr") return S.kind === "club" ? "club" : "mgr";
+    return S.g === "f" ? "pf" : "p";
+  }
+  function achievementText(text) {
+    return typeof eraText === "function" && typeof ERAS_I18N !== "undefined" && ERAS_I18N[text]
+      ? eraText(text) : tr(text);
+  }
+  function modeTxt(k) {
+    if (k === "era-mgr") return achievementText("Modo Épocas") + " · " + tr("Carrera de míster");
+    if (k === "era-p") return achievementText("Modo Épocas") + " · " + tr("Carrera de jugador");
+    return k === "club" ? tr("Crea tu club") : k === "mgr" ? tr("Carrera de míster") : k === "pf" ? tr("Carrera de jugadora") : tr("Carrera de jugador");
+  }
   function gSync() {
     if (!S || !S.ach) return 0;
     var g = gGet(), n = 0, nm = saveName(), md = saveMode();
@@ -65,13 +78,15 @@
   }
   function allAch() {
     var x = typeof ACH_X !== "undefined" ? ACH_X.map(function (a) { return [a[0], a[1], a[3], a[4], a[5], a[6]]; }) : [];
-    return [[tr("Carrera de jugador"), ACH_P], [tr("Carrera de míster"), ACH_M], [tr("Cultura pop"), x]];
+    var eras = typeof ACH_ERA !== "undefined" ? ACH_ERA.map(function (a) { return [a[0], a[1], a[3], a[4], a[5], a[6]]; }) : [];
+    return [[tr("Carrera de jugador"), ACH_P], [tr("Carrera de míster"), ACH_M], [tr("Cultura pop"), x],
+      [achievementText("Modo Épocas"), eras]];
   }
   function gCount() { var g = gGet(), n = 0, t = 0; allAch().forEach(function (gr) { gr[1].forEach(function (a) { t++; if (g[a[0]]) n++; }); }); return [n, t]; }
   U.achG = gCount;
   function achRow(a, g, mode) {
     var x = g[a[0]], on = !!x, sec = a[5] && !on;
-    return '<li class="achi' + (on ? " on" : "") + '"><span class="achic" aria-hidden="true">' + (on ? a[1] : sec ? "❔" : "🔒") + '</span><span class="grow"><b>' + h(sec ? tr("Logro secreto") : tr(a[2])) + "</b><small>" + h(sec ? tr("Ya lo descubrirás… o no.") : tr(a[3]) + (mode ? " (" + mode.toLowerCase() + ")" : "")) + "</small>" +
+    return '<li class="achi' + (on ? " on" : "") + '"><span class="achic" aria-hidden="true">' + (on ? a[1] : sec ? "❔" : "🔒") + '</span><span class="grow"><b>' + h(sec ? tr("Logro secreto") : achievementText(a[2])) + "</b><small>" + h(sec ? tr("Ya lo descubrirás… o no.") : achievementText(a[3]) + (mode ? " (" + mode.toLowerCase() + ")" : "")) + "</small>" +
       (on ? '<small class="achsv">' + tr("Conseguido con «{n}» · {m}", {n: h(x.n || "—"), m: h(modeTxt(x.m))}) + (x.y ? " · " + h(seasonLabel(x.y)) : "") + "</small>" : "") + "</span></li>";
   }
   U.sheets.ach = function () {

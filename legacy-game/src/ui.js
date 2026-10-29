@@ -1416,13 +1416,21 @@
   }
   function slotsNow() { return UI.slots || Store.index(); }
   function homeView() {
-    var n = slotsNow().length;
-    var s = '<main id="main"><div class="stack">' + updBanner(false) + '<section class="hero"><div class="eyebrow">' + tr("Jugador, míster o tu propio club") + "</div>" + titleHTML() +
+    var n = slotsNow().length, mainHomeExtras = slot("mainhome");
+    var s = '<main id="main"><div class="stack home-stack">' + updBanner(false) + '<section class="hero"><div class="eyebrow">' + tr("Jugador, míster o tu propio club") + "</div>" + titleHTML() +
       "<p>" + tr("{n} ligas de los cinco continentes, todas las selecciones del mundo, copas, Champions, Libertadores, Mundiales y el Balón de Oro.", {n: W.lg.length}) + "</p>" +
       '<div class="scoreline"><span>' + tr("{n} LIGAS", {n: W.lg.length}) + "</span><span>" + tr("{n} CLUBES", {n: W.clubs.length - 2}) + "</span><span>" + tr("{n} SELECCIONES", {n: W.ctry.length}) + "</span></div></section>";
-    s += '<div class="opts"><button class="go" data-a="goload"' + (n ? "" : " disabled") + ">" + tr("Cargar partida") + (n ? " · " + n : "") + " " + ICON.play + '</button><button class="go ghost" data-a="newgame">' + tr("Nueva partida") + '</button><button class="btn wide gde-open" data-a="guide">📖 ' + tr("Guía del juego") + "</button></div>" +
-      '<div class="opts">' + slot("mainhome") + "</div>";
-    s += '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ": " + h(langName()) + '</button><button class="btn wide" data-a="ach">🏅 ' + tr("Logros") + (UIX.achG ? " · " + UIX.achG()[0] + "/" + UIX.achG()[1] : "") + '</button><button class="btn wide" data-a="a11y">' + tr("Accesibilidad") + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + "</div></div></main>";
+    s += '<section class="home-play"><div class="eyebrow">' + tr("Jugar") + '</div><div class="home-main-actions' + (n ? "" : " solo") + '">' +
+      (n ? '<button class="go ghost" data-a="goload">' + tr("Cargar partida") + " · " + n + " " + ICON.play + '</button>' : "") +
+      '<button class="go" data-a="newgame">' + tr("Nueva partida") + " " + ICON.play + '</button></div></section>';
+    if (mainHomeExtras) s += '<div class="home-mainhome-slot">' + mainHomeExtras + '</div>';
+    s += '<div class="home-groups">' +
+      '<details class="fold home-group"><summary><span class="home-group-icon">' + ICON.gear + '</span><span class="home-group-copy"><b>' + tr("Ajustes y partidas") + '</b><small>' + tr("Idioma") + ' · ' + tr("Accesibilidad") + ' · ' + tr("Cargar una partida con código") + '</small></span><span class="home-group-chevron" aria-hidden="true">›</span></summary><div class="home-group-body"><div class="opts">' +
+      '<button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ': ' + h(langName()) + '</button><button class="btn wide" data-a="a11y">' + tr("Accesibilidad") + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + '</button>' + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + '</button>' : "") +
+      '</div></div></details>' +
+      '<details class="fold home-group"><summary><span class="home-group-icon">' + ICON.grid + '</span><span class="home-group-copy"><b>' + tr("Más") + '</b><small>' + tr("Guía del juego") + ' · ' + tr("Salón de la fama") + ' · ' + tr("Logros") + '</small></span><span class="home-group-chevron" aria-hidden="true">›</span></summary><div class="home-group-body"><div class="opts">' +
+      '<button class="btn wide gde-open" data-a="guide">' + ICON.book + ' ' + tr("Guía del juego") + '</button><button class="btn wide" data-a="hof">' + ICON.trophy + ' ' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="ach">' + ICON.medal + ' ' + tr("Logros") + (UIX.achG ? " · " + UIX.achG()[0] + "/" + UIX.achG()[1] : "") + '</button>' +
+      '</div></div></details></div></div></main>';
     return s;
   }
   function fmtWhen(ts) {
