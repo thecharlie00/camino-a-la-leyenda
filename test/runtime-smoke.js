@@ -114,6 +114,13 @@ try {
   assert.equal(window.EraStore.save(), true);
   assert.equal(window.localStorage.getItem('camino.slots'), '[]', 'Era saves must not touch modern saves');
   assert.ok(window.localStorage.getItem('camino.eras.v1.index'));
+  assert.equal(window.ACH_ERA.length, 50, 'the game should register 50 Era-only achievements');
+  window.UIX.actions.ach();
+  assert.ok(window.document.querySelector('.gxl')?.textContent.includes('Primer silbatazo'),
+    'Era achievements should be visible in the existing achievements screen');
+  assert.ok(window.document.querySelector('.gxl')?.textContent.includes('Mil victorias de leyenda'),
+    'the Era achievement list should include manager challenges too');
+  click('[data-a="close"]');
   click('[data-a="era-exit"]');
   assert.equal(window.S, null);
   assert.equal(window.UIX.ui().view, 'home');
@@ -225,7 +232,7 @@ try {
   assert.equal(window.UIX.ui().view, 'game', 'custom club roster draft should start a season');
   assert.ok(window.S.m.sq.length >= 18, 'custom club should have a generated squad');
   assert.deepEqual(errors, [], `Unexpected runtime errors: ${errors.join('\n')}`);
-  console.log('Runtime smoke passed: boot, five locales, GOAT career/milestone sharing, GLB assets, Era isolation, player decisions, manager and custom-club creation.');
+  console.log('Runtime smoke passed: boot, five locales, GOAT sharing, all 50 Era achievements, Era isolation, player decisions, manager and custom-club creation.');
 } finally {
   window.close();
 }

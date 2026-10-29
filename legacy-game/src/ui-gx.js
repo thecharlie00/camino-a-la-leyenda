@@ -100,8 +100,8 @@ var GXV = (function () {
   var KICK = {b: N_("Trofeo de bronce"), s: N_("Trofeo de plata"), g: N_("Trofeo de oro"), p: N_("Trofeo de platino")};
   function rarName(r) { return tr(GX_RAR[r] ? GX_RAR[r].n : "Bronce"); }
   function money(n) { return typeof fmtMoney === "function" ? fmtMoney(n) : n + " €"; }
-  function nameOf(id) { var m = GX.meta(id); if (m.n) return tr(m.n); var a = (typeof achList === "function" ? achList() : []).filter(function (x) { return x[0] === id; })[0]; return a ? tr(a[2]) : id; }
-  function descOf(id) { var m = GX.meta(id); if (m.d) return tr(m.d); var a = (typeof achList === "function" ? achList() : []).filter(function (x) { return x[0] === id; })[0]; return a ? tr(a[3]) : ""; }
+  function nameOf(id) { var m = GX.meta(id); if (m.n) return tr(m.n); var a = (typeof achList === "function" ? achList(true) : []).filter(function (x) { return x[0] === id; })[0]; return a ? (typeof achTranslate === "function" ? achTranslate(a[2]) : tr(a[2])) : id; }
+  function descOf(id) { var m = GX.meta(id); if (m.d) return tr(m.d); var a = (typeof achList === "function" ? achList(true) : []).filter(function (x) { return x[0] === id; })[0]; return a ? (typeof achTranslate === "function" ? achTranslate(a[3]) : tr(a[3])) : ""; }
   function ease(t) { return 1 - Math.pow(1 - t, 3); }
   function back(t) { var c = 1.70158 * 1.3; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); }
 
@@ -195,7 +195,7 @@ var GXV = (function () {
   var old = U.sheets.ach;
   function mode() { return S && S.mode === "mgr" ? "m" : "p"; }
   function all() {
-    var md = mode(), l = achList().map(function (a) { var m = GX.meta(a[0]); return {id: a[0], cat: m.cat, rar: m.rar, hide: !!(m.hide || a[5]), n: tr(a[2]), d: tr(a[3])}; });
+    var md = mode(), l = achList(true).map(function (a) { var m = GX.meta(a[0]); return {id: a[0], cat: m.cat, rar: m.rar, hide: !!(m.hide || a[5]), n: typeof achTranslate === "function" ? achTranslate(a[2]) : tr(a[2]), d: typeof achTranslate === "function" ? achTranslate(a[3]) : tr(a[3])}; });
     return l;
   }
   U.sheets.ach = function () {

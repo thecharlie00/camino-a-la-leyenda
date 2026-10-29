@@ -41,12 +41,24 @@ for (const pack of packs) {
   for (const key of ['rules', 'media', 'economy', 'presentation', 'staff', 'playerModel', 'referenceClubs']) assert.ok(pack[key], `${pack.id} missing ${key}`);
   for (const key of ['winPoints', 'backPassBanned', 'transferWindows', 'maxSubs', 'varByCompetition']) assert.ok(key in pack.rules, `${pack.id} missing rule ${key}`);
 }
-assert.equal(decisions.records.length, 600, 'the catalog must contain 100 scenarios per decade');
-assert.equal(new Set(decisions.records.map((record) => record.id)).size, 600, 'decision IDs must be unique');
+assert.equal(decisions.schema, 2, 'the expanded historical decision catalogue must use schema 2');
+assert.equal(decisions.records.length, 1000, 'the catalog must contain 600 original plus 400 historical scenarios');
+assert.equal(new Set(decisions.records.map((record) => record.id)).size, 1000, 'decision IDs must be unique');
+assert.equal(decisions.historyEvents.length, 40, 'historical scenarios must reference a set of real-event anchors');
+assert.equal(decisions.records.filter((record) => record.historyEventId).length, 400, 'exactly 400 scenarios must be historical');
 for (const decade of ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']) {
   const records = decisions.records.filter((record) => record.decade === decade);
-  assert.equal(records.length, 100, `${decade} must have 100 scenarios`);
-  assert.equal(new Set(records.map((record) => `${record.topic}:${record.context}`)).size, 100, `${decade} must have distinct combinations`);
+  const original = records.filter((record) => !record.historyEventId);
+  const historical = records.filter((record) => record.historyEventId);
+  assert.equal(original.length, 100, `${decade} must retain its 100 original scenarios`);
+  assert.equal(historical.length, decade === '2010s' || decade === '2020s' ? 60 : 70, `${decade} must contain the expected historical scenarios`);
+  assert.equal(new Set(original.map((record) => `${record.topic}:${record.context}`)).size, 100, `${decade} original combinations must stay distinct`);
+  for (const record of historical) {
+    const event = decisions.historyEvents.find((candidate) => candidate.id === record.historyEventId);
+    assert.ok(event, `${record.id} must reference a known historical event`);
+    assert.equal(event.decade, record.decade, `${record.id} may only reference an event from its own decade`);
+    assert.ok(event.year >= Number(decade.slice(0, 4)) && event.year <= Number(decade.slice(0, 4)) + 9, `${record.id} event year must fit its decade`);
+  }
 }
 for (const phrase of [...Object.values(decisions.contexts).flat(), ...decisions.topics.map((topic) => topic.key), ...Object.values(decisions.periods)]) assert.ok(translations[phrase], `Missing translated decision phrase ${phrase}`);
 for (const [key, locales] of Object.entries(translations)) {
@@ -109,6 +121,71 @@ const context = {
   tr: (text) => text
 };
 runInNewContext(readFileSync('legacy-game/src/eras-core.js', 'utf8'), context, {filename: 'eras-core.js'});
+runInNewContext(readFileSync('legacy-game/src/achieve.js', 'utf8'), context, {filename: 'achieve.js'});
+for (const pack of packs) {
+  context.S = {yr: pack.years[0], uid: `queue-${pack.id}`, era: {active: true, decisionYears: {}, decisionSeen: {}}, pend: []};
+  const queued = context.eraQueueSeasonDecision();
+  assert.ok(queued, `${pack.id} should queue a season decision`);
+  assert.equal(queued.decade, pack.id, `the ${pack.id} runtime queue must not leak another decade's decision`);
+  if (queued.historyEventId) {
+    const anchor = decisions.historyEvents.find((event) => event.id === queued.historyEventId);
+    assert.equal(anchor.decade, pack.id, `the ${pack.id} queue must preserve the historical event decade`);
+    assert.ok(anchor.year <= pack.years[0], `the ${pack.id} queue must not show a historical event before it happened`);
+  }
+}
+const historicalRecord = decisions.records.find((record) => record.historyEventId);
+const historicalEvent = decisions.historyEvents.find((event) => event.id === historicalRecord.historyEventId);
+context.S = {yr: historicalEvent.year, era: {active: true}, p: {}};
+for (const language of ['es', 'en', 'de', 'it', 'fr']) {
+  context.LANG = language;
+  const historicalDescription = context.eraDecisionDescription({id: historicalRecord.id}, false);
+  assert.ok(historicalDescription.text.includes(historicalEvent.fact[language]), `historical decisions must show their factual frame in ${language}`);
+  assert.ok(historicalDescription.title.includes(historicalEvent.label[language]), `historical decision titles must be localized in ${language}`);
+}
+context.LANG = 'es';
+const spanishHistoricalDescription = context.eraDecisionDescription({id: historicalRecord.id}, false);
+assert.ok(spanishHistoricalDescription.text.includes('sirve solo de contexto'), 'the UI must distinguish factual history from fictional game dilemmas');
+const decadeStart = Number(historicalRecord.decade.slice(0, 4));
+if (historicalEvent.year > decadeStart) {
+  context.S.yr = historicalEvent.year - 1;
+  assert.equal(context.eraDecisionDescription({id: historicalRecord.id}, false), null, 'a historical decision must not appear before its event happens');
+}
+context.S.yr = decadeStart + 10;
+assert.equal(context.eraDecisionDescription({id: historicalRecord.id}, false), null, 'a historical decision must not be displayed outside its own decade');
+const eraAchievementIds = context.ACH_ERA.map((achievement) => achievement[0]);
+assert.equal(eraAchievementIds.length, 50, 'Era Mode must define exactly 50 exclusive achievements');
+assert.equal(new Set(eraAchievementIds).size, 50, 'Era achievement IDs must be unique');
+assert.ok(context.ACH_ERA.every((achievement) => typeof achievement[4] === 'function'), 'Each Era achievement must have an unlock condition');
+context.S = {mode: 'p', yr: 1992, p: {seasons: []}};
+assert.equal(context.achList().filter((achievement) => achievement[0].startsWith('era_')).length, 0,
+  'Modern careers must not be offered Era achievements for unlocking');
+context.S = {mode: 'p', yr: 1992, era: {active: true, startYear: 1992, decisionLog: []}, p: {seasons: []}};
+assert.equal(context.achList().filter((achievement) => achievement[0].startsWith('era_')).length, 34,
+  'Era player careers can unlock shared and player-only achievements');
+assert.equal(context.achList(true).filter((achievement) => achievement[0].startsWith('era_')).length, 50,
+  'the Era achievements screen must display all 50 player and manager challenges');
+context.S = {mode: 'mgr', yr: 1992, era: {active: true, startYear: 1992, decisionLog: []}, m: {seasons: []}};
+assert.equal(context.achList().filter((achievement) => achievement[0].startsWith('era_')).length, 34,
+  'Era manager careers can unlock shared and manager-only achievements');
+assert.equal(context.achList(true).filter((achievement) => achievement[0].startsWith('era_')).length, 50,
+  'the Era achievements screen must display all 50 challenges in either career type');
+context.S = {mode: 'p', yr: 1992, era: {active: true, startYear: 1992, decisionLog: []}, p: {seasons: []}};
+const firstEraDecision = context.ACH_ERA.find((achievement) => achievement[0] === 'era_first_decision');
+assert.equal(firstEraDecision[4](), false, 'Era achievements remain locked until their gameplay condition is met');
+context.S.era.decisionLog.push({id: 'test-decision', year: 1992, choice: 0});
+assert.equal(firstEraDecision[4](), true, 'resolving an Era decision unlocks the associated achievement condition');
+context.careerTotals = () => ({apps: 0, g: 0, a: 0, cs: 0, seasons: 0});
+const playerAchievementState = (era) => ({mode: 'p', yr: 1992, bi: 0, ach: {}, era,
+  p: {seasons: [], ss: {apps: 0, g: 0, a: 0, cs: 0}, trophies: [], awards: [], intl: {caps: 0},
+    peak: 60, ovr: 60, money: 0, flags: {}}});
+context.S = playerAchievementState(undefined);
+context.achCheck();
+assert.equal(context.S.ach.era_start90s, undefined, 'a modern save cannot unlock an Era-only achievement');
+context.S = playerAchievementState({active: true, startYear: 1992, startDecade: '1990s',
+  decisionLog: [{id: 'test-decision', year: 1992, choice: 0}]});
+context.achCheck();
+assert.equal(context.S.ach.era_start90s, 1992, 'starting an Era career can unlock its decade achievement');
+assert.equal(context.S.ach.era_first_decision, 1992, 'Era achievements are saved in the active Era career');
 
 for (const [year, points] of [[1979, 2], [1980, 2], [1981, 3], [1992, 3]]) {
   context.S = {yr: year, era: {active: true}};
@@ -215,7 +292,7 @@ assert.equal(context.S.pend[0]?.k, 'eraDecision', 'a new era career should recei
 const managerDecision = context.S.pend[0];
 const managerDecisionDesc = context.mgrDesc(managerDecision);
 assert.equal(managerDecisionDesc.opts.length, 3, 'manager era decisions should expose three actionable strategies');
-assert.ok(managerDecisionDesc.text.includes('situación ficticia'), 'decisions must not be passed off as documented historical episodes');
+assert.ok(managerDecisionDesc.text.includes('situación ficticia') || managerDecisionDesc.text.includes('son ficticios'), 'decisions must distinguish fictional dilemmas from historical context');
 const managerBudgetBeforeDecision = context.S.m.bud;
 context.mgrResolve(0);
 assert.equal(context.S.era.decisionLog.length, 1, 'the resolved manager decision should be recorded in the isolated era save');
@@ -263,4 +340,4 @@ context.window.growthTick();
 assert.ok(context.S.p.ovr - growthBeforeDecision > 9.1, 'the era decision training bonus must feed into actual future player growth');
 assert.equal(memory.get('camino.slots'), '["modern-slot"]', 'player-era decisions must not alter the modern save index');
 
-console.log('Era packs, year-by-year rules, 600-decision catalog, playable choices, procedural 3D kits, modern-mode isolation and independent saves passed.');
+console.log('Era packs, 1,000 playable decisions (400 historical and decade-locked), 50 Era-only achievements, web home/selector visibility, Era rules, kits and isolated saves passed.');

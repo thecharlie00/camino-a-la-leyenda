@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "topics": [
     {
       "key": "Ojeo e información imperfecta",
@@ -4324,6 +4324,3968 @@
       "topic": 9,
       "context": 9,
       "intensity": 3
+    },
+    {
+      "id": "1970s-H101",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H102",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H103",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H104",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H105",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H106",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H107",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H108",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H109",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H110",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-wc-1970"
+    },
+    {
+      "id": "1970s-H111",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H112",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H113",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H114",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H115",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H116",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H117",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H118",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H119",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H120",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-uefa-cup-1972"
+    },
+    {
+      "id": "1970s-H121",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H122",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H123",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H124",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H125",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H126",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H127",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H128",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H129",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H130",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-wc-1974"
+    },
+    {
+      "id": "1970s-H131",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H132",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H133",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H134",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H135",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H136",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H137",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H138",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H139",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H140",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-copa-america-1975"
+    },
+    {
+      "id": "1970s-H141",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H142",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H143",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H144",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H145",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H146",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H147",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H148",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H149",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H150",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-euro-1976"
+    },
+    {
+      "id": "1970s-H151",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H152",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H153",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H154",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H155",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H156",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H157",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H158",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H159",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H160",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-wc-1978"
+    },
+    {
+      "id": "1970s-H161",
+      "decade": "1970s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H162",
+      "decade": "1970s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H163",
+      "decade": "1970s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H164",
+      "decade": "1970s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H165",
+      "decade": "1970s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H166",
+      "decade": "1970s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H167",
+      "decade": "1970s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H168",
+      "decade": "1970s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H169",
+      "decade": "1970s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1970s-H170",
+      "decade": "1970s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-forest-europe-1979"
+    },
+    {
+      "id": "1980s-H101",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H102",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H103",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H104",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H105",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H106",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H107",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H108",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H109",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H110",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-euro-1980"
+    },
+    {
+      "id": "1980s-H111",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H112",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H113",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H114",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H115",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H116",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H117",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H118",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H119",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H120",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-wc-1982"
+    },
+    {
+      "id": "1980s-H121",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H122",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H123",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H124",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H125",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H126",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H127",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H128",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H129",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H130",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-euro-1984"
+    },
+    {
+      "id": "1980s-H131",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H132",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H133",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H134",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H135",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H136",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H137",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H138",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H139",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H140",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-heysel-1985"
+    },
+    {
+      "id": "1980s-H141",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H142",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H143",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H144",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H145",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H146",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H147",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H148",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H149",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H150",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-wc-1986"
+    },
+    {
+      "id": "1980s-H151",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H152",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H153",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H154",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H155",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H156",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H157",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H158",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H159",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H160",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-euro-1988"
+    },
+    {
+      "id": "1980s-H161",
+      "decade": "1980s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H162",
+      "decade": "1980s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H163",
+      "decade": "1980s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H164",
+      "decade": "1980s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H165",
+      "decade": "1980s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H166",
+      "decade": "1980s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H167",
+      "decade": "1980s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H168",
+      "decade": "1980s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H169",
+      "decade": "1980s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1980s-H170",
+      "decade": "1980s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-hillsborough-1989"
+    },
+    {
+      "id": "1990s-H101",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H102",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H103",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H104",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H105",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H106",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H107",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H108",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H109",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H110",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-wc-1990"
+    },
+    {
+      "id": "1990s-H111",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H112",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H113",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H114",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H115",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H116",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H117",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H118",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H119",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H120",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-1991"
+    },
+    {
+      "id": "1990s-H121",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H122",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H123",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H124",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H125",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H126",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H127",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H128",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H129",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H130",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-premier-league-backpass-1992"
+    },
+    {
+      "id": "1990s-H131",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H132",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H133",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H134",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H135",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H136",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H137",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H138",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H139",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H140",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-wc-1994"
+    },
+    {
+      "id": "1990s-H141",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H142",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H143",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H144",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H145",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H146",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H147",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H148",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H149",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H150",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-bosman-1995"
+    },
+    {
+      "id": "1990s-H151",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H152",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H153",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H154",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H155",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H156",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H157",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H158",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H159",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H160",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-euro-1996"
+    },
+    {
+      "id": "1990s-H161",
+      "decade": "1990s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H162",
+      "decade": "1990s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H163",
+      "decade": "1990s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H164",
+      "decade": "1990s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H165",
+      "decade": "1990s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H166",
+      "decade": "1990s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H167",
+      "decade": "1990s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H168",
+      "decade": "1990s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H169",
+      "decade": "1990s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "1990s-H170",
+      "decade": "1990s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-wc-1998"
+    },
+    {
+      "id": "2000s-H101",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H102",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H103",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H104",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H105",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H106",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H107",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H108",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H109",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H110",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-euro-2000"
+    },
+    {
+      "id": "2000s-H111",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H112",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H113",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H114",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H115",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H116",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H117",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H118",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H119",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H120",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-wc-2002"
+    },
+    {
+      "id": "2000s-H121",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H122",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H123",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H124",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H125",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H126",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H127",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H128",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H129",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H130",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-euro-2004"
+    },
+    {
+      "id": "2000s-H131",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H132",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H133",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H134",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H135",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H136",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H137",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H138",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H139",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H140",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-istanbul-2005"
+    },
+    {
+      "id": "2000s-H141",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H142",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H143",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H144",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H145",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H146",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H147",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H148",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H149",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H150",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-calciopoli-2006"
+    },
+    {
+      "id": "2000s-H151",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H152",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H153",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H154",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H155",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H156",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H157",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H158",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H159",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H160",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-euro-2008"
+    },
+    {
+      "id": "2000s-H161",
+      "decade": "2000s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H162",
+      "decade": "2000s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H163",
+      "decade": "2000s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H164",
+      "decade": "2000s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H165",
+      "decade": "2000s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H166",
+      "decade": "2000s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H167",
+      "decade": "2000s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H168",
+      "decade": "2000s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H169",
+      "decade": "2000s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2000s-H170",
+      "decade": "2000s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-barcelona-six-2009"
+    },
+    {
+      "id": "2010s-H101",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H102",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H103",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H104",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H105",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H106",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H107",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H108",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H109",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H110",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-wc-2010"
+    },
+    {
+      "id": "2010s-H111",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H112",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H113",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H114",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H115",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H116",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H117",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H118",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H119",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H120",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-wc-2014"
+    },
+    {
+      "id": "2010s-H121",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H122",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H123",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H124",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H125",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H126",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H127",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H128",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H129",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H130",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2015"
+    },
+    {
+      "id": "2010s-H131",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H132",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H133",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H134",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H135",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H136",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H137",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H138",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H139",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H140",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-leicester-2016"
+    },
+    {
+      "id": "2010s-H141",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H142",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H143",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H144",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H145",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H146",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H147",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H148",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H149",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H150",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-var-wc-2018"
+    },
+    {
+      "id": "2010s-H151",
+      "decade": "2010s",
+      "topic": 0,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H152",
+      "decade": "2010s",
+      "topic": 1,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H153",
+      "decade": "2010s",
+      "topic": 2,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H154",
+      "decade": "2010s",
+      "topic": 3,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H155",
+      "decade": "2010s",
+      "topic": 4,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H156",
+      "decade": "2010s",
+      "topic": 5,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H157",
+      "decade": "2010s",
+      "topic": 6,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H158",
+      "decade": "2010s",
+      "topic": 7,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H159",
+      "decade": "2010s",
+      "topic": 8,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2010s-H160",
+      "decade": "2010s",
+      "topic": 9,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2019"
+    },
+    {
+      "id": "2020s-H101",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H102",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H103",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H104",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H105",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H106",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H107",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H108",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H109",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H110",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-covid-2020"
+    },
+    {
+      "id": "2020s-H111",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H112",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H113",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H114",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H115",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H116",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H117",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H118",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H119",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H120",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-euro-2020-played-2021"
+    },
+    {
+      "id": "2020s-H121",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H122",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 9,
+      "intensity": 2,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H123",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 2,
+      "intensity": 3,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H124",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 5,
+      "intensity": 1,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H125",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 8,
+      "intensity": 2,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H126",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 1,
+      "intensity": 3,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H127",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 4,
+      "intensity": 1,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H128",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H129",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H130",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-wc-2022"
+    },
+    {
+      "id": "2020s-H131",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 7,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H132",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 0,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H133",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 3,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H134",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 6,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H135",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 9,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H136",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 2,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H137",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 5,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H138",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H139",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H140",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-womens-wc-2023"
+    },
+    {
+      "id": "2020s-H141",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 8,
+      "intensity": 3,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H142",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 1,
+      "intensity": 1,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H143",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 4,
+      "intensity": 2,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H144",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 7,
+      "intensity": 3,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H145",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 0,
+      "intensity": 1,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H146",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 3,
+      "intensity": 2,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H147",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 6,
+      "intensity": 3,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H148",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H149",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H150",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-euro-2024"
+    },
+    {
+      "id": "2020s-H151",
+      "decade": "2020s",
+      "topic": 0,
+      "context": 9,
+      "intensity": 1,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H152",
+      "decade": "2020s",
+      "topic": 1,
+      "context": 2,
+      "intensity": 2,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H153",
+      "decade": "2020s",
+      "topic": 2,
+      "context": 5,
+      "intensity": 3,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H154",
+      "decade": "2020s",
+      "topic": 3,
+      "context": 8,
+      "intensity": 1,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H155",
+      "decade": "2020s",
+      "topic": 4,
+      "context": 1,
+      "intensity": 2,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H156",
+      "decade": "2020s",
+      "topic": 5,
+      "context": 4,
+      "intensity": 3,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H157",
+      "decade": "2020s",
+      "topic": 6,
+      "context": 7,
+      "intensity": 1,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H158",
+      "decade": "2020s",
+      "topic": 7,
+      "context": 0,
+      "intensity": 2,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H159",
+      "decade": "2020s",
+      "topic": 8,
+      "context": 3,
+      "intensity": 3,
+      "historyEventId": "event-club-wc-2025"
+    },
+    {
+      "id": "2020s-H160",
+      "decade": "2020s",
+      "topic": 9,
+      "context": 6,
+      "intensity": 1,
+      "historyEventId": "event-club-wc-2025"
+    }
+  ],
+  "historyEvents": [
+    {
+      "id": "event-wc-1970",
+      "decade": "1970s",
+      "year": 1970,
+      "label": {
+        "es": "México 1970",
+        "en": "Mexico 1970",
+        "de": "Mexiko 1970",
+        "it": "Messico 1970",
+        "fr": "Mexique 1970"
+      },
+      "fact": {
+        "es": "Brasil ganó su tercer Mundial y recibió el trofeo Jules Rimet en propiedad.",
+        "en": "Brazil won its third World Cup and received the Jules Rimet Trophy permanently.",
+        "de": "Brasilien gewann seine dritte Weltmeisterschaft und erhielt den Jules-Rimet-Pokal dauerhaft.",
+        "it": "Il Brasile vinse il suo terzo Mondiale e ricevette definitivamente il Trofeo Jules Rimet.",
+        "fr": "Le Brésil remporta sa troisième Coupe du monde et reçut définitivement le trophée Jules-Rimet."
+      }
+    },
+    {
+      "id": "event-uefa-cup-1972",
+      "decade": "1970s",
+      "year": 1972,
+      "label": {
+        "es": "Nace la Copa de la UEFA",
+        "en": "UEFA Cup begins",
+        "de": "Der UEFA-Pokal startet",
+        "it": "Nasce la Coppa UEFA",
+        "fr": "Naissance de la Coupe UEFA"
+      },
+      "fact": {
+        "es": "El Tottenham fue el primer campeón de la Copa de la UEFA, en 1972.",
+        "en": "Tottenham became the first UEFA Cup winner in 1972.",
+        "de": "Tottenham wurde 1972 erster Gewinner des UEFA-Pokals.",
+        "it": "Il Tottenham fu il primo vincitore della Coppa UEFA nel 1972.",
+        "fr": "Tottenham fut le premier vainqueur de la Coupe UEFA en 1972."
+      }
+    },
+    {
+      "id": "event-wc-1974",
+      "decade": "1970s",
+      "year": 1974,
+      "label": {
+        "es": "Mundial de Alemania Occidental",
+        "en": "West Germany World Cup",
+        "de": "WM in der Bundesrepublik",
+        "it": "Mondiale della Germania Ovest",
+        "fr": "Coupe du monde en RFA"
+      },
+      "fact": {
+        "es": "Alemania Occidental ganó el Mundial de 1974 al vencer a Países Bajos en la final.",
+        "en": "West Germany won the 1974 World Cup, defeating the Netherlands in the final.",
+        "de": "Die Bundesrepublik gewann 1974 die Weltmeisterschaft mit einem Finalsieg gegen die Niederlande.",
+        "it": "La Germania Ovest vinse il Mondiale 1974 battendo i Paesi Bassi in finale.",
+        "fr": "La RFA remporta la Coupe du monde 1974 en battant les Pays-Bas en finale."
+      }
+    },
+    {
+      "id": "event-copa-america-1975",
+      "decade": "1970s",
+      "year": 1975,
+      "label": {
+        "es": "Perú gana la Copa América",
+        "en": "Peru wins Copa América",
+        "de": "Peru gewinnt die Copa América",
+        "it": "Il Perù vince la Copa América",
+        "fr": "Le Pérou remporte la Copa América"
+      },
+      "fact": {
+        "es": "Perú conquistó la Copa América de 1975, disputada sin una sede fija única.",
+        "en": "Peru won the 1975 Copa América, which had no single fixed host.",
+        "de": "Peru gewann die Copa América 1975, die keinen einzelnen festen Austragungsort hatte.",
+        "it": "Il Perù vinse la Copa América 1975, disputata senza un’unica sede fissa.",
+        "fr": "Le Pérou remporta la Copa América 1975, disputée sans pays hôte unique."
+      }
+    },
+    {
+      "id": "event-euro-1976",
+      "decade": "1970s",
+      "year": 1976,
+      "label": {
+        "es": "Final de la Euro 1976",
+        "en": "Euro 1976 final",
+        "de": "EM-Finale 1976",
+        "it": "Finale di Euro 1976",
+        "fr": "Finale de l’Euro 1976"
+      },
+      "fact": {
+        "es": "Checoslovaquia ganó la final de la Euro 1976 en la primera tanda de penaltis de una final del torneo.",
+        "en": "Czechoslovakia won the Euro 1976 final in the competition’s first final penalty shoot-out.",
+        "de": "Die Tschechoslowakei gewann das EM-Finale 1976 im ersten Elfmeterschießen eines Endspiels des Wettbewerbs.",
+        "it": "La Cecoslovacchia vinse la finale di Euro 1976 ai rigori, nella prima finale del torneo decisa così.",
+        "fr": "La Tchécoslovaquie remporta la finale de l’Euro 1976 aux tirs au but, une première pour une finale du tournoi."
+      }
+    },
+    {
+      "id": "event-wc-1978",
+      "decade": "1970s",
+      "year": 1978,
+      "label": {
+        "es": "Argentina, campeona del mundo",
+        "en": "Argentina world champions",
+        "de": "Argentinien wird Weltmeister",
+        "it": "Argentina campione del mondo",
+        "fr": "L’Argentine championne du monde"
+      },
+      "fact": {
+        "es": "Argentina ganó su primer Mundial al vencer a Países Bajos en la final de 1978.",
+        "en": "Argentina won its first World Cup by defeating the Netherlands in the 1978 final.",
+        "de": "Argentinien gewann 1978 mit einem Finalsieg gegen die Niederlande seine erste Weltmeisterschaft.",
+        "it": "L’Argentina vinse il suo primo Mondiale battendo i Paesi Bassi nella finale del 1978.",
+        "fr": "L’Argentine remporta sa première Coupe du monde en battant les Pays-Bas en finale en 1978."
+      }
+    },
+    {
+      "id": "event-forest-europe-1979",
+      "decade": "1970s",
+      "year": 1979,
+      "label": {
+        "es": "Forest conquista Europa",
+        "en": "Forest conquer Europe",
+        "de": "Forest erobert Europa",
+        "it": "Il Forest conquista l’Europa",
+        "fr": "Forest conquiert l’Europe"
+      },
+      "fact": {
+        "es": "Nottingham Forest ganó su primera Copa de Europa en 1979, dos temporadas después de ascender a la máxima división inglesa.",
+        "en": "Nottingham Forest won its first European Cup in 1979, two seasons after promotion to England’s top division.",
+        "de": "Nottingham Forest gewann 1979 seinen ersten Europapokal, zwei Spielzeiten nach dem Aufstieg in Englands höchste Liga.",
+        "it": "Il Nottingham Forest vinse la sua prima Coppa dei Campioni nel 1979, due stagioni dopo la promozione nella massima serie inglese.",
+        "fr": "Nottingham Forest remporta sa première Coupe d’Europe en 1979, deux saisons après sa montée dans l’élite anglaise."
+      }
+    },
+    {
+      "id": "event-euro-1980",
+      "decade": "1980s",
+      "year": 1980,
+      "label": {
+        "es": "Euro 1980",
+        "en": "Euro 1980",
+        "de": "EM 1980",
+        "it": "Euro 1980",
+        "fr": "Euro 1980"
+      },
+      "fact": {
+        "es": "Alemania Occidental ganó la Euro 1980, la primera edición con ocho selecciones en la fase final.",
+        "en": "West Germany won Euro 1980, the first edition with eight teams in the final tournament.",
+        "de": "Die Bundesrepublik gewann die EM 1980, die erste Endrunde mit acht Mannschaften.",
+        "it": "La Germania Ovest vinse Euro 1980, la prima edizione con otto squadre alla fase finale.",
+        "fr": "La RFA remporta l’Euro 1980, première édition avec huit équipes en phase finale."
+      }
+    },
+    {
+      "id": "event-wc-1982",
+      "decade": "1980s",
+      "year": 1982,
+      "label": {
+        "es": "Italia gana el Mundial",
+        "en": "Italy wins the World Cup",
+        "de": "Italien gewinnt die WM",
+        "it": "L’Italia vince il Mondiale",
+        "fr": "L’Italie remporte la Coupe du monde"
+      },
+      "fact": {
+        "es": "Italia ganó el Mundial de 1982 en España; Paolo Rossi fue el máximo goleador del torneo.",
+        "en": "Italy won the 1982 World Cup in Spain; Paolo Rossi was the tournament’s top scorer.",
+        "de": "Italien gewann 1982 die Weltmeisterschaft in Spanien; Paolo Rossi war Torschützenkönig.",
+        "it": "L’Italia vinse il Mondiale 1982 in Spagna; Paolo Rossi fu il capocannoniere del torneo.",
+        "fr": "L’Italie remporta la Coupe du monde 1982 en Espagne ; Paolo Rossi fut le meilleur buteur du tournoi."
+      }
+    },
+    {
+      "id": "event-euro-1984",
+      "decade": "1980s",
+      "year": 1984,
+      "label": {
+        "es": "Francia gana la Euro",
+        "en": "France wins the Euros",
+        "de": "Frankreich gewinnt die EM",
+        "it": "La Francia vince l’Europeo",
+        "fr": "La France remporte l’Euro"
+      },
+      "fact": {
+        "es": "Francia ganó la Euro 1984 como anfitriona y Michel Platini marcó nueve goles en el torneo.",
+        "en": "France won Euro 1984 as host, with Michel Platini scoring nine goals in the tournament.",
+        "de": "Frankreich gewann die EM 1984 als Gastgeber; Michel Platini erzielte neun Turniertore.",
+        "it": "La Francia vinse Euro 1984 in casa; Michel Platini segnò nove gol nel torneo.",
+        "fr": "La France remporta l’Euro 1984 à domicile ; Michel Platini inscrivit neuf buts dans le tournoi."
+      }
+    },
+    {
+      "id": "event-heysel-1985",
+      "decade": "1980s",
+      "year": 1985,
+      "label": {
+        "es": "Tragedia de Heysel",
+        "en": "Heysel tragedy",
+        "de": "Tragödie von Heysel",
+        "it": "Tragedia dell’Heysel",
+        "fr": "Drame du Heysel"
+      },
+      "fact": {
+        "es": "La tragedia de Heysel ocurrió antes de la final de la Copa de Europa de 1985 y causó 39 muertes.",
+        "en": "The Heysel disaster occurred before the 1985 European Cup final and caused 39 deaths.",
+        "de": "Die Katastrophe von Heysel ereignete sich vor dem Europapokalfinale 1985 und forderte 39 Todesopfer.",
+        "it": "La tragedia dell’Heysel avvenne prima della finale di Coppa dei Campioni del 1985 e causò 39 morti.",
+        "fr": "Le drame du Heysel eut lieu avant la finale de la Coupe des clubs champions 1985 et fit 39 morts."
+      }
+    },
+    {
+      "id": "event-wc-1986",
+      "decade": "1980s",
+      "year": 1986,
+      "label": {
+        "es": "Argentina gana el Mundial",
+        "en": "Argentina wins the World Cup",
+        "de": "Argentinien gewinnt die WM",
+        "it": "L’Argentina vince il Mondiale",
+        "fr": "L’Argentine remporte la Coupe du monde"
+      },
+      "fact": {
+        "es": "Argentina ganó el Mundial de 1986 en México, con Diego Maradona como capitán.",
+        "en": "Argentina won the 1986 World Cup in Mexico, with Diego Maradona as captain.",
+        "de": "Argentinien gewann 1986 in Mexiko die Weltmeisterschaft; Diego Maradona war Kapitän.",
+        "it": "L’Argentina vinse il Mondiale 1986 in Messico, con Diego Maradona capitano.",
+        "fr": "L’Argentine remporta la Coupe du monde 1986 au Mexique, avec Diego Maradona comme capitaine."
+      }
+    },
+    {
+      "id": "event-euro-1988",
+      "decade": "1980s",
+      "year": 1988,
+      "label": {
+        "es": "Países Bajos gana la Euro",
+        "en": "Netherlands wins the Euros",
+        "de": "Die Niederlande gewinnen die EM",
+        "it": "I Paesi Bassi vincono l’Europeo",
+        "fr": "Les Pays-Bas remportent l’Euro"
+      },
+      "fact": {
+        "es": "Países Bajos ganó su primer gran título internacional masculino al conquistar la Euro 1988.",
+        "en": "The Netherlands won its first major men’s international title by winning Euro 1988.",
+        "de": "Die Niederlande gewannen mit der EM 1988 ihren ersten großen internationalen Männertitel.",
+        "it": "I Paesi Bassi conquistarono il primo grande titolo internazionale maschile vincendo Euro 1988.",
+        "fr": "Les Pays-Bas remportèrent leur premier grand titre international masculin en gagnant l’Euro 1988."
+      }
+    },
+    {
+      "id": "event-hillsborough-1989",
+      "decade": "1980s",
+      "year": 1989,
+      "label": {
+        "es": "Hillsborough",
+        "en": "Hillsborough",
+        "de": "Hillsborough",
+        "it": "Hillsborough",
+        "fr": "Hillsborough"
+      },
+      "fact": {
+        "es": "La tragedia de Hillsborough ocurrió en 1989 y abrió un profundo debate sobre la seguridad en los estadios.",
+        "en": "The Hillsborough disaster occurred in 1989 and prompted deep debate about stadium safety.",
+        "de": "Die Katastrophe von Hillsborough ereignete sich 1989 und löste eine intensive Debatte über Stadionsicherheit aus.",
+        "it": "La tragedia di Hillsborough avvenne nel 1989 e aprì un ampio dibattito sulla sicurezza negli stadi.",
+        "fr": "La tragédie de Hillsborough eut lieu en 1989 et ouvrit un vaste débat sur la sécurité dans les stades."
+      }
+    },
+    {
+      "id": "event-wc-1990",
+      "decade": "1990s",
+      "year": 1990,
+      "label": {
+        "es": "Alemania gana el Mundial",
+        "en": "Germany wins the World Cup",
+        "de": "Deutschland gewinnt die WM",
+        "it": "La Germania vince il Mondiale",
+        "fr": "L’Allemagne remporte la Coupe du monde"
+      },
+      "fact": {
+        "es": "Alemania Occidental ganó el Mundial de 1990 en Italia y logró su tercer título.",
+        "en": "West Germany won the 1990 World Cup in Italy for its third title.",
+        "de": "Die Bundesrepublik gewann 1990 in Italien ihren dritten Weltmeistertitel.",
+        "it": "La Germania Ovest vinse il Mondiale 1990 in Italia, conquistando il terzo titolo.",
+        "fr": "La RFA remporta la Coupe du monde 1990 en Italie, décrochant son troisième titre."
+      }
+    },
+    {
+      "id": "event-womens-wc-1991",
+      "decade": "1990s",
+      "year": 1991,
+      "label": {
+        "es": "Primer Mundial femenino FIFA",
+        "en": "First FIFA Women’s World Cup",
+        "de": "Erste FIFA-Frauen-WM",
+        "it": "Prima Coppa del mondo femminile FIFA",
+        "fr": "Première Coupe du monde féminine FIFA"
+      },
+      "fact": {
+        "es": "China organizó en 1991 la primera Copa Mundial Femenina de la FIFA; Estados Unidos ganó el torneo.",
+        "en": "China hosted the first FIFA Women’s World Cup in 1991; the United States won the tournament.",
+        "de": "China richtete 1991 die erste FIFA-Frauen-Weltmeisterschaft aus; die USA gewannen das Turnier.",
+        "it": "La Cina ospitò nel 1991 la prima Coppa del mondo femminile FIFA; gli Stati Uniti vinsero il torneo.",
+        "fr": "La Chine accueillit en 1991 la première Coupe du monde féminine de la FIFA ; les États-Unis remportèrent le tournoi."
+      }
+    },
+    {
+      "id": "event-premier-league-backpass-1992",
+      "decade": "1990s",
+      "year": 1992,
+      "label": {
+        "es": "Una nueva liga y una nueva regla",
+        "en": "A new league and a new rule",
+        "de": "Neue Liga, neue Rückpassregel",
+        "it": "Una nuova lega e una nuova regola",
+        "fr": "Nouvelle ligue, nouvelle règle"
+      },
+      "fact": {
+        "es": "La Premier League comenzó en 1992 y ese año entró en vigor la prohibición de que el portero recogiera con las manos un pase deliberado del compañero.",
+        "en": "The Premier League began in 1992, when the ban on goalkeepers handling deliberate teammate back-passes also took effect.",
+        "de": "Die Premier League startete 1992; zugleich trat das Verbot in Kraft, absichtliche Rückpässe von Mitspielern mit der Hand aufzunehmen.",
+        "it": "La Premier League iniziò nel 1992, anno in cui entrò in vigore il divieto per i portieri di raccogliere con le mani un retropassaggio volontario.",
+        "fr": "La Premier League débuta en 1992, année de l’entrée en vigueur de l’interdiction pour le gardien de prendre à la main une passe volontaire d’un coéquipier."
+      }
+    },
+    {
+      "id": "event-wc-1994",
+      "decade": "1990s",
+      "year": 1994,
+      "label": {
+        "es": "Brasil, campeón en Estados Unidos",
+        "en": "Brazil champions in the USA",
+        "de": "Brasilien gewinnt in den USA",
+        "it": "Brasile campione negli Stati Uniti",
+        "fr": "Le Brésil champion aux États-Unis"
+      },
+      "fact": {
+        "es": "Brasil ganó el Mundial de 1994 en Estados Unidos y obtuvo su cuarto título.",
+        "en": "Brazil won the 1994 World Cup in the United States for its fourth title.",
+        "de": "Brasilien gewann 1994 in den USA seinen vierten Weltmeistertitel.",
+        "it": "Il Brasile vinse il Mondiale 1994 negli Stati Uniti, conquistando il quarto titolo.",
+        "fr": "Le Brésil remporta la Coupe du monde 1994 aux États-Unis, décrochant son quatrième titre."
+      }
+    },
+    {
+      "id": "event-bosman-1995",
+      "decade": "1990s",
+      "year": 1995,
+      "label": {
+        "es": "Sentencia Bosman",
+        "en": "Bosman ruling",
+        "de": "Bosman-Urteil",
+        "it": "Sentenza Bosman",
+        "fr": "Arrêt Bosman"
+      },
+      "fact": {
+        "es": "La sentencia Bosman de 1995 cambió las transferencias de jugadores al finalizar contrato dentro de la Unión Europea.",
+        "en": "The 1995 Bosman ruling changed the movement of out-of-contract players within the European Union.",
+        "de": "Das Bosman-Urteil von 1995 veränderte den Wechsel vertragsloser Spieler innerhalb der Europäischen Union.",
+        "it": "La sentenza Bosman del 1995 cambiò i trasferimenti dei giocatori a fine contratto nell’Unione europea.",
+        "fr": "L’arrêt Bosman de 1995 transforma les transferts des joueurs en fin de contrat au sein de l’Union européenne."
+      }
+    },
+    {
+      "id": "event-euro-1996",
+      "decade": "1990s",
+      "year": 1996,
+      "label": {
+        "es": "Alemania y el gol de oro",
+        "en": "Germany and the golden goal",
+        "de": "Deutschland und das Golden Goal",
+        "it": "Germania e golden goal",
+        "fr": "Allemagne et but en or"
+      },
+      "fact": {
+        "es": "Alemania ganó la Euro 1996 con un gol de oro en la prórroga de la final.",
+        "en": "Germany won Euro 1996 with a golden goal in the final’s extra time.",
+        "de": "Deutschland gewann die EM 1996 durch ein Golden Goal in der Verlängerung des Endspiels.",
+        "it": "La Germania vinse Euro 1996 con un golden goal nei supplementari della finale.",
+        "fr": "L’Allemagne remporta l’Euro 1996 grâce à un but en or pendant la prolongation de la finale."
+      }
+    },
+    {
+      "id": "event-wc-1998",
+      "decade": "1990s",
+      "year": 1998,
+      "label": {
+        "es": "Francia gana en casa",
+        "en": "France wins at home",
+        "de": "Frankreich gewinnt zuhause",
+        "it": "La Francia vince in casa",
+        "fr": "La France triomphe à domicile"
+      },
+      "fact": {
+        "es": "Francia ganó su primer Mundial en 1998 como anfitriona, al vencer a Brasil en la final.",
+        "en": "France won its first World Cup as host in 1998, defeating Brazil in the final.",
+        "de": "Frankreich gewann 1998 als Gastgeber seine erste Weltmeisterschaft mit einem Finalsieg gegen Brasilien.",
+        "it": "La Francia vinse il suo primo Mondiale in casa nel 1998, battendo il Brasile in finale.",
+        "fr": "La France remporta sa première Coupe du monde à domicile en 1998, en battant le Brésil en finale."
+      }
+    },
+    {
+      "id": "event-euro-2000",
+      "decade": "2000s",
+      "year": 2000,
+      "label": {
+        "es": "Francia repite con gol de oro",
+        "en": "France wins with a golden goal",
+        "de": "Frankreich siegt mit Golden Goal",
+        "it": "La Francia vince con golden goal",
+        "fr": "La France s’impose au but en or"
+      },
+      "fact": {
+        "es": "Francia ganó la Euro 2000 gracias a un gol de oro de David Trezeguet en la final.",
+        "en": "France won Euro 2000 with David Trezeguet’s golden goal in the final.",
+        "de": "Frankreich gewann die EM 2000 durch David Trezeguets Golden Goal im Finale.",
+        "it": "La Francia vinse Euro 2000 grazie al golden goal di David Trezeguet in finale.",
+        "fr": "La France remporta l’Euro 2000 grâce au but en or de David Trezeguet en finale."
+      }
+    },
+    {
+      "id": "event-wc-2002",
+      "decade": "2000s",
+      "year": 2002,
+      "label": {
+        "es": "Brasil logra su quinto Mundial",
+        "en": "Brazil wins a fifth World Cup",
+        "de": "Brasilien holt den fünften WM-Titel",
+        "it": "Il Brasile conquista il quinto Mondiale",
+        "fr": "Le Brésil décroche sa cinquième Coupe du monde"
+      },
+      "fact": {
+        "es": "Brasil ganó el Mundial de 2002 en Corea del Sur y Japón y se convirtió en pentacampeón.",
+        "en": "Brazil won the 2002 World Cup in South Korea and Japan, earning a fifth title.",
+        "de": "Brasilien gewann 2002 in Südkorea und Japan seinen fünften Weltmeistertitel.",
+        "it": "Il Brasile vinse il Mondiale 2002 in Corea del Sud e Giappone, conquistando il quinto titolo.",
+        "fr": "Le Brésil remporta la Coupe du monde 2002 en Corée du Sud et au Japon, décrochant un cinquième titre."
+      }
+    },
+    {
+      "id": "event-euro-2004",
+      "decade": "2000s",
+      "year": 2004,
+      "label": {
+        "es": "Grecia sorprende en la Euro",
+        "en": "Greece shocks at the Euros",
+        "de": "Griechenland überrascht bei der EM",
+        "it": "La Grecia sorprende all’Europeo",
+        "fr": "La Grèce surprend à l’Euro"
+      },
+      "fact": {
+        "es": "Grecia venció a Portugal en la final de la Euro 2004, disputada en Portugal.",
+        "en": "Greece defeated Portugal in the Euro 2004 final, played in Portugal.",
+        "de": "Griechenland besiegte Portugal im EM-Finale 2004, das in Portugal ausgetragen wurde.",
+        "it": "La Grecia sconfisse il Portogallo nella finale di Euro 2004, disputata in Portogallo.",
+        "fr": "La Grèce battit le Portugal en finale de l’Euro 2004, disputée au Portugal."
+      }
+    },
+    {
+      "id": "event-istanbul-2005",
+      "decade": "2000s",
+      "year": 2005,
+      "label": {
+        "es": "La final de Estambul",
+        "en": "The Istanbul final",
+        "de": "Das Finale von Istanbul",
+        "it": "La finale di Istanbul",
+        "fr": "La finale d’Istanbul"
+      },
+      "fact": {
+        "es": "Liverpool remontó un 0-3 ante el Milan y ganó la final de la Liga de Campeones de 2005 en los penaltis.",
+        "en": "Liverpool came back from 0–3 against Milan and won the 2005 Champions League final on penalties.",
+        "de": "Liverpool drehte im Champions-League-Finale 2005 einen 0:3-Rückstand gegen Milan und gewann im Elfmeterschießen.",
+        "it": "Il Liverpool rimontò da 0-3 contro il Milan e vinse ai rigori la finale di Champions League 2005.",
+        "fr": "Liverpool remonta un 0-3 contre Milan et remporte aux tirs au but la finale de la Ligue des champions 2005."
+      }
+    },
+    {
+      "id": "event-calciopoli-2006",
+      "decade": "2000s",
+      "year": 2006,
+      "label": {
+        "es": "Investigación Calciopoli",
+        "en": "Calciopoli investigation",
+        "de": "Calciopoli-Ermittlungen",
+        "it": "Indagine Calciopoli",
+        "fr": "Enquête Calciopoli"
+      },
+      "fact": {
+        "es": "El escándalo Calciopoli provocó sanciones deportivas en Italia, incluido el descenso administrativo de Juventus.",
+        "en": "The Calciopoli scandal led to sporting sanctions in Italy, including Juventus’s administrative relegation.",
+        "de": "Der Calciopoli-Skandal führte in Italien zu sportlichen Sanktionen, darunter der Zwangsabstieg von Juventus.",
+        "it": "Lo scandalo Calciopoli portò a sanzioni sportive in Italia, inclusa la retrocessione a tavolino della Juventus.",
+        "fr": "Le scandale Calciopoli entraîna des sanctions sportives en Italie, dont la relégation administrative de la Juventus."
+      }
+    },
+    {
+      "id": "event-euro-2008",
+      "decade": "2000s",
+      "year": 2008,
+      "label": {
+        "es": "España conquista la Euro",
+        "en": "Spain wins the Euros",
+        "de": "Spanien gewinnt die EM",
+        "it": "La Spagna conquista l’Europeo",
+        "fr": "L’Espagne remporte l’Euro"
+      },
+      "fact": {
+        "es": "España ganó la Euro 2008, su primer gran título internacional desde 1964.",
+        "en": "Spain won Euro 2008, its first major international title since 1964.",
+        "de": "Spanien gewann die EM 2008, den ersten großen internationalen Titel seit 1964.",
+        "it": "La Spagna vinse Euro 2008, il primo grande titolo internazionale dal 1964.",
+        "fr": "L’Espagne remporta l’Euro 2008, son premier grand titre international depuis 1964."
+      }
+    },
+    {
+      "id": "event-barcelona-six-2009",
+      "decade": "2000s",
+      "year": 2009,
+      "label": {
+        "es": "Un año de seis títulos",
+        "en": "A year of six trophies",
+        "de": "Ein Jahr mit sechs Titeln",
+        "it": "Un anno da sei trofei",
+        "fr": "Une année à six trophées"
+      },
+      "fact": {
+        "es": "El Barcelona de 2009 ganó los seis títulos oficiales que disputó en el año natural.",
+        "en": "Barcelona won all six official competitions it entered during the 2009 calendar year.",
+        "de": "Der FC Barcelona gewann 2009 alle sechs offiziellen Wettbewerbe, an denen er im Kalenderjahr teilnahm.",
+        "it": "Nel 2009 il Barcellona vinse tutti e sei i trofei ufficiali a cui partecipò nell’anno solare.",
+        "fr": "En 2009, le FC Barcelone remporta les six compétitions officielles auxquelles il participa durant l’année civile."
+      }
+    },
+    {
+      "id": "event-wc-2010",
+      "decade": "2010s",
+      "year": 2010,
+      "label": {
+        "es": "España gana en Sudáfrica",
+        "en": "Spain wins in South Africa",
+        "de": "Spanien siegt in Südafrika",
+        "it": "La Spagna vince in Sudafrica",
+        "fr": "L’Espagne gagne en Afrique du Sud"
+      },
+      "fact": {
+        "es": "España ganó su primer Mundial en 2010, en la primera edición celebrada en África.",
+        "en": "Spain won its first World Cup in 2010, at the first edition held in Africa.",
+        "de": "Spanien gewann 2010 seine erste Weltmeisterschaft, bei der ersten Austragung in Afrika.",
+        "it": "La Spagna vinse il suo primo Mondiale nel 2010, nella prima edizione ospitata in Africa.",
+        "fr": "L’Espagne remporta sa première Coupe du monde en 2010, lors de la première édition organisée en Afrique."
+      }
+    },
+    {
+      "id": "event-wc-2014",
+      "decade": "2010s",
+      "year": 2014,
+      "label": {
+        "es": "Alemania, campeona en Brasil",
+        "en": "Germany champions in Brazil",
+        "de": "Deutschland wird in Brasilien Weltmeister",
+        "it": "Germania campione in Brasile",
+        "fr": "L’Allemagne sacrée au Brésil"
+      },
+      "fact": {
+        "es": "Alemania ganó el Mundial de 2014 en Brasil y obtuvo su cuarto título.",
+        "en": "Germany won the 2014 World Cup in Brazil for its fourth title.",
+        "de": "Deutschland gewann 2014 in Brasilien seinen vierten Weltmeistertitel.",
+        "it": "La Germania vinse il Mondiale 2014 in Brasile, conquistando il quarto titolo.",
+        "fr": "L’Allemagne remporta la Coupe du monde 2014 au Brésil, décrochant son quatrième titre."
+      }
+    },
+    {
+      "id": "event-womens-wc-2015",
+      "decade": "2010s",
+      "year": 2015,
+      "label": {
+        "es": "Mundial femenino de 2015",
+        "en": "2015 Women’s World Cup",
+        "de": "Frauen-WM 2015",
+        "it": "Mondiale femminile 2015",
+        "fr": "Mondial féminin 2015"
+      },
+      "fact": {
+        "es": "Estados Unidos ganó el Mundial femenino de 2015, primera edición del torneo con 24 selecciones.",
+        "en": "The United States won the 2015 Women’s World Cup, the tournament’s first edition with 24 teams.",
+        "de": "Die USA gewannen die Frauen-WM 2015, die erstmals mit 24 Teams ausgetragen wurde.",
+        "it": "Gli Stati Uniti vinsero il Mondiale femminile 2015, la prima edizione con 24 squadre.",
+        "fr": "Les États-Unis remportèrent le Mondial féminin 2015, première édition disputée avec 24 équipes."
+      }
+    },
+    {
+      "id": "event-leicester-2016",
+      "decade": "2010s",
+      "year": 2016,
+      "label": {
+        "es": "Leicester, campeón de Inglaterra",
+        "en": "Leicester champions of England",
+        "de": "Leicester wird englischer Meister",
+        "it": "Leicester campione d’Inghilterra",
+        "fr": "Leicester champion d’Angleterre"
+      },
+      "fact": {
+        "es": "Leicester City ganó la Premier League 2015-16, su primer título de liga inglesa de primera división.",
+        "en": "Leicester City won the 2015–16 Premier League, its first English top-flight league title.",
+        "de": "Leicester City gewann 2015/16 erstmals die englische Meisterschaft in der höchsten Liga.",
+        "it": "Il Leicester City vinse la Premier League 2015-16, il suo primo titolo nella massima serie inglese.",
+        "fr": "Leicester City remporta la Premier League 2015-2016, son premier titre dans l’élite anglaise."
+      }
+    },
+    {
+      "id": "event-var-wc-2018",
+      "decade": "2010s",
+      "year": 2018,
+      "label": {
+        "es": "VAR en el Mundial",
+        "en": "VAR at the World Cup",
+        "de": "VAR bei der Weltmeisterschaft",
+        "it": "VAR ai Mondiali",
+        "fr": "La VAR à la Coupe du monde"
+      },
+      "fact": {
+        "es": "La asistencia arbitral por vídeo se utilizó por primera vez en un Mundial masculino en 2018; Francia fue campeona.",
+        "en": "Video assistant refereeing was used for the first time at a men’s World Cup in 2018; France were champions.",
+        "de": "Bei der Männer-WM 2018 kam erstmals der Video-Assistent zum Einsatz; Frankreich wurde Weltmeister.",
+        "it": "La VAR fu usata per la prima volta in un Mondiale maschile nel 2018; la Francia vinse il torneo.",
+        "fr": "L’assistance vidéo à l’arbitrage fut utilisée pour la première fois en Coupe du monde masculine en 2018 ; la France fut championne."
+      }
+    },
+    {
+      "id": "event-womens-wc-2019",
+      "decade": "2010s",
+      "year": 2019,
+      "label": {
+        "es": "Mundial femenino en Francia",
+        "en": "Women’s World Cup in France",
+        "de": "Frauen-WM in Frankreich",
+        "it": "Mondiale femminile in Francia",
+        "fr": "Mondial féminin en France"
+      },
+      "fact": {
+        "es": "Estados Unidos ganó en Francia su cuarto Mundial femenino, tras vencer a Países Bajos en la final de 2019.",
+        "en": "The United States won its fourth Women’s World Cup in France, defeating the Netherlands in the 2019 final.",
+        "de": "Die USA gewannen in Frankreich ihre vierte Frauen-WM und besiegten 2019 im Finale die Niederlande.",
+        "it": "Gli Stati Uniti vinsero in Francia il quarto Mondiale femminile, battendo i Paesi Bassi nella finale 2019.",
+        "fr": "Les États-Unis remportèrent leur quatrième Mondial féminin en France, en battant les Pays-Bas en finale en 2019."
+      }
+    },
+    {
+      "id": "event-covid-2020",
+      "decade": "2020s",
+      "year": 2020,
+      "label": {
+        "es": "Una temporada interrumpida",
+        "en": "A season interrupted",
+        "de": "Eine unterbrochene Saison",
+        "it": "Una stagione interrotta",
+        "fr": "Une saison interrompue"
+      },
+      "fact": {
+        "es": "La pandemia de COVID-19 interrumpió competiciones de fútbol en 2020 y aplazó la Euro prevista para ese año.",
+        "en": "The COVID-19 pandemic interrupted football competitions in 2020 and postponed that year’s scheduled Euros.",
+        "de": "Die COVID-19-Pandemie unterbrach 2020 Fußballwettbewerbe und verschob die für dieses Jahr geplante EM.",
+        "it": "La pandemia di COVID-19 interruppe le competizioni calcistiche nel 2020 e rinviò l’Europeo previsto quell’anno.",
+        "fr": "La pandémie de COVID-19 interrompit les compétitions de football en 2020 et reporta l’Euro prévu cette année-là."
+      }
+    },
+    {
+      "id": "event-euro-2020-played-2021",
+      "decade": "2020s",
+      "year": 2021,
+      "label": {
+        "es": "La Euro aplazada se juega en 2021",
+        "en": "The postponed Euros take place in 2021",
+        "de": "Die verschobene EM findet 2021 statt",
+        "it": "L’Europeo rinviato si gioca nel 2021",
+        "fr": "L’Euro reporté se joue en 2021"
+      },
+      "fact": {
+        "es": "La Euro 2020 se disputó en 2021 por la pandemia; Italia venció a Inglaterra en la final.",
+        "en": "Euro 2020 was played in 2021 because of the pandemic; Italy defeated England in the final.",
+        "de": "Die EM 2020 wurde pandemiebedingt 2021 ausgetragen; Italien besiegte England im Finale.",
+        "it": "Euro 2020 si disputò nel 2021 a causa della pandemia; l’Italia batté l’Inghilterra in finale.",
+        "fr": "L’Euro 2020 se joua en 2021 en raison de la pandémie ; l’Italie battit l’Angleterre en finale."
+      }
+    },
+    {
+      "id": "event-wc-2022",
+      "decade": "2020s",
+      "year": 2022,
+      "label": {
+        "es": "Mundial de invierno en Catar",
+        "en": "Winter World Cup in Qatar",
+        "de": "Winter-WM in Katar",
+        "it": "Mondiale invernale in Qatar",
+        "fr": "Coupe du monde d’hiver au Qatar"
+      },
+      "fact": {
+        "es": "El Mundial de Catar se disputó en noviembre y diciembre de 2022; Argentina ganó el título.",
+        "en": "The Qatar World Cup took place in November and December 2022; Argentina won the title.",
+        "de": "Die Weltmeisterschaft in Katar fand im November und Dezember 2022 statt; Argentinien gewann den Titel.",
+        "it": "Il Mondiale in Qatar si svolse tra novembre e dicembre 2022; l’Argentina vinse il titolo.",
+        "fr": "La Coupe du monde au Qatar se déroula en novembre et décembre 2022 ; l’Argentine remporta le titre."
+      }
+    },
+    {
+      "id": "event-womens-wc-2023",
+      "decade": "2020s",
+      "year": 2023,
+      "label": {
+        "es": "Mundial femenino ampliado",
+        "en": "Expanded Women’s World Cup",
+        "de": "Erweiterte Frauen-WM",
+        "it": "Mondiale femminile ampliato",
+        "fr": "Mondial féminin élargi"
+      },
+      "fact": {
+        "es": "La Copa Mundial Femenina de 2023 reunió por primera vez a 32 selecciones; España ganó el torneo.",
+        "en": "The 2023 FIFA Women’s World Cup featured 32 teams for the first time; Spain won the tournament.",
+        "de": "Die Frauen-WM 2023 umfasste erstmals 32 Teams; Spanien gewann das Turnier.",
+        "it": "La Coppa del mondo femminile 2023 riunì per la prima volta 32 squadre; la Spagna vinse il torneo.",
+        "fr": "La Coupe du monde féminine 2023 réunit 32 équipes pour la première fois ; l’Espagne remporta le tournoi."
+      }
+    },
+    {
+      "id": "event-euro-2024",
+      "decade": "2020s",
+      "year": 2024,
+      "label": {
+        "es": "España logra su cuarta Euro",
+        "en": "Spain wins a fourth Euros",
+        "de": "Spanien holt den vierten EM-Titel",
+        "it": "La Spagna conquista il quarto Europeo",
+        "fr": "L’Espagne remporte son quatrième Euro"
+      },
+      "fact": {
+        "es": "España ganó la Euro 2024 y se convirtió en la selección con más títulos del torneo, con cuatro.",
+        "en": "Spain won Euro 2024 and became the tournament’s most successful team with four titles.",
+        "de": "Spanien gewann die EM 2024 und wurde mit vier Titeln zum erfolgreichsten Team des Wettbewerbs.",
+        "it": "La Spagna vinse Euro 2024, diventando la nazionale più titolata del torneo con quattro successi.",
+        "fr": "L’Espagne remporta l’Euro 2024 et devint l’équipe la plus titrée du tournoi avec quatre sacres."
+      }
+    },
+    {
+      "id": "event-club-wc-2025",
+      "decade": "2020s",
+      "year": 2025,
+      "label": {
+        "es": "Nuevo Mundial de Clubes",
+        "en": "New Club World Cup",
+        "de": "Neue Klub-WM",
+        "it": "Nuovo Mondiale per club",
+        "fr": "Nouvelle Coupe du monde des clubs"
+      },
+      "fact": {
+        "es": "La edición de 2025 fue la primera Copa Mundial de Clubes de la FIFA con 32 equipos.",
+        "en": "The 2025 edition was the first FIFA Club World Cup to feature 32 teams.",
+        "de": "Die Ausgabe 2025 war die erste FIFA-Klub-Weltmeisterschaft mit 32 Teams.",
+        "it": "L’edizione 2025 fu la prima Coppa del mondo per club FIFA con 32 squadre.",
+        "fr": "L’édition 2025 fut la première Coupe du monde des clubs de la FIFA à 32 équipes."
+      }
     }
   ]
 }

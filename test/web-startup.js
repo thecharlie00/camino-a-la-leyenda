@@ -51,8 +51,27 @@ try {
     window.document.querySelector('#app main'), 'web game startup');
   assert.equal(window.document.querySelector('.boot-screen'), null, 'loading screen should be replaced by the game UI');
   assert.match(window.document.getElementById('app').textContent, /Español/);
+  window.document.querySelector('[data-a="setlang"][data-v="es"]')?.click();
+  assert.equal(window.UIX.ui().view, 'home');
+  assert.equal(window.document.querySelector('[data-a="era-open"]'), null,
+    'Era Mode must not appear as a direct shortcut on the web home screen');
+  const homeGroups = [...window.document.querySelectorAll('.home-group')];
+  assert.equal(homeGroups.length, 2, 'secondary home actions must be grouped into two compact categories');
+  assert.ok(homeGroups.every((group) => !group.open), 'secondary categories should stay collapsed until requested');
+  assert.ok(homeGroups[0].querySelector('[data-a="import"]'), 'save import belongs in the saves and settings category');
+  assert.ok(homeGroups[1].querySelector('[data-a="guide"]') && homeGroups[1].querySelector('[data-a="hof"]') && homeGroups[1].querySelector('[data-a="ach"]'),
+    'guide, hall of fame and achievements belong together in the more category');
+  assert.equal(homeGroups[1].querySelector('[data-a="goat"]'), null, 'GOAT Ladder must be removed from the More category');
+  const goatEntry = window.document.querySelector('.home-mainhome-slot [data-a="goat"]');
+  assert.ok(goatEntry, 'GOAT Ladder must have a direct button on the main menu');
+  assert.equal(goatEntry.closest('.home-group'), null, 'the GOAT Ladder main-menu button must remain outside collapsed categories');
+  assert.ok(window.document.querySelector('.home-main-actions [data-a="newgame"]'), 'new career remains a primary home action');
+  window.document.querySelector('[data-a="newgame"]')?.click();
+  assert.equal(window.UIX.ui().view, 'modes');
+  assert.ok(window.document.querySelector('[data-a="era-open"]'),
+    'Era Mode remains available in the web mode selector');
   assert.deepEqual(errors, [], `Unexpected web startup errors: ${errors.join('\n')}`);
-  console.log('Web startup passed: loading screen appears, game boots, splash is replaced.');
+  console.log('Web startup passed: loading screen, home without Era shortcut, selector access and startup.');
 } finally {
   window.close();
 }
