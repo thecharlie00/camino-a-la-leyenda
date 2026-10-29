@@ -41,6 +41,7 @@
   color-scheme: dark;
 }
 html, body { height: 100%; }
+@supports (height: 100dvh) { html, body, #app { height: 100dvh; } }
 body { margin: 0; background: var(--night); color: var(--chalk); font: var(--fs-base)/1.45 var(--f-body); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
 * { box-sizing: border-box; }
 button { font: inherit; color: inherit; cursor: pointer; }
@@ -116,6 +117,8 @@ main { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling
 .goat-mode { margin-top: 14px; }
 .goat-period { margin-top: 8px; }
 .goat-board { margin-top: 14px; }
+.goat-board .seg { width: 100%; grid-auto-columns: minmax(0, 1fr); }
+.goat-board .seg button { min-width: 0; min-height: 44px; padding-inline: 4px; overflow-wrap: anywhere; touch-action: manipulation; }
 .goat-metric { display: block; margin-top: 10px; }
 .goat-metric select { display: block; width: 100%; margin-top: 5px; border: 1px solid var(--line); border-radius: 3px; background: var(--tunnel); color: var(--chalk); padding: 10px; font: inherit; }
 .goat-card, .goat-publish { margin-top: 10px; }
@@ -285,7 +288,7 @@ label.lbl { display: block; font: 700 var(--fs-2xs)/1 var(--f-body); letter-spac
 
 /* panel modal */
 .sheet { position: fixed; inset: 0; z-index: 20; display: flex; align-items: flex-end; justify-content: center; background: rgba(3,7,8,.72); }
-.sheet .panel { width: 100%; max-width: 720px; max-height: 92%; overflow-y: auto; background: var(--stand); border: 1px solid var(--line); border-radius: 3px 3px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom, 0px)); }
+.sheet .panel { width: 100%; max-width: 720px; max-height: 92vh; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y; scroll-padding-block: 16px; background: var(--stand); border: 1px solid var(--line); border-radius: 3px 3px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom, 0px)); padding-top: max(18px, env(safe-area-inset-top, 0px)); padding-bottom: max(18px, env(safe-area-inset-bottom, 0px)); }
 .sheet .panel h2 { font-size: var(--fs-2xl); text-transform: uppercase; margin-bottom: 12px; }
 .toast { position: fixed; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--chalk); color: var(--night); font-weight: 700; padding: 10px 14px; border-radius: 3px; z-index: 30; font-size: var(--fs-md); max-width: calc(100% - 32px); }
 
@@ -372,6 +375,8 @@ label.lbl { display: block; font: 700 var(--fs-2xs)/1 var(--f-body); letter-spac
 .pickrow.modec { align-items: flex-start; padding: 14px 12px; }
 .pickrow.modec .grow b { font: 900 var(--fs-xl)/1.1 var(--f-disp); text-transform: uppercase; white-space: normal; margin-bottom: 4px; }
 .pickrow.modec .grow small { display: block; font-size: var(--fs-sm); line-height: 1.35; }
+.pickrow.modec.eras-mode { border-color: rgba(203,166,76,.55); background: linear-gradient(120deg, rgba(203,166,76,.12), var(--tunnel)); touch-action: manipulation; }
+.pickrow.modec.eras-mode .micon { color: var(--gold); border-color: rgba(203,166,76,.45); }
 .micon { flex: none; width: 42px; height: 42px; border-radius: 3px; background: var(--stand); border: 1px solid var(--line); display: grid; place-items: center; color: var(--led); }
 .micon svg { width: 22px; height: 22px; }
 .slotrow { display: flex; gap: 12px; align-items: center; }

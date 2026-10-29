@@ -38,7 +38,7 @@
   /* ---------- extensiones: módulos de interfaz en ficheros aparte (ui-*.js) se enganchan aquí ----------
      UIX.actions[accion] = function (boton, valor, id) · UIX.sheets[k] = function (sheet) → html
      UIX.pend[k] = function (x) → html de la decisión · UIX.slots[sitio] = [function () → html]
-     sitios: home, mainhome, menu, carrera, jugador, club, plantilla, mercado, hist, histM, create, after (tras cada render) */
+     sitios: home, mainhome, modes, menu, carrera, jugador, club, plantilla, mercado, hist, histM, create, after (tras cada render) */
   var UIX = window.UIX = {actions: {}, sheets: {}, pend: {}, slots: {}, hk: {}};
   UIX.getSheet = function () { return UI.sheet; };
   UIX.setSheet = function (sheet) { UI.sheet = sheet; renderSheet(); };
@@ -1457,6 +1457,7 @@
     s += '<div class="seg gseg">' + [["m", N_("Fútbol masculino")], ["f", N_("Fútbol femenino")]].map(function (x) { return '<button data-a="gsel" data-v="' + x[0] + '" aria-pressed="' + ((UI.gsel || "m") === x[0]) + '">' + h(tr(x[1])) + "</button>"; }).join("") + "</div>";
     s += '<div class="opts">';
     s += modes.map(function (x) { return '<button class="pickrow modec" data-a="pickmode" data-v="' + x[0] + '"><span class="micon">' + x[1] + '</span><div class="grow"><b>' + h(tr(x[2])) + "</b><small>" + h(tr(x[3])) + "</small></div></button>"; }).join("");
+    s += slot("modes");
     return s + '</div><button class="btn wide" data-a="gohome">' + tr("Atrás") + "</button></div></main>";
   }
   var POS_XY = {DC: [50, 12], EI: [18, 21], ED: [82, 21], MCO: [50, 31], MI: [17, 44], MC: [50, 47], MD: [83, 44], MCD: [50, 61], LI: [15, 72], DFC: [50, 77], LD: [85, 72], POR: [50, 92]};

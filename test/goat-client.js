@@ -18,6 +18,15 @@ function jsonResponse(body, status) {
 }
 function networkError() { return Promise.reject(new TypeError("Failed to fetch")); }
 
+var goatOrigin = "https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev";
+var goatLocales = ["", "en/", "de/", "it/", "fr/"];
+goatLocales.forEach(function (locale) {
+  var page = fs.readFileSync(path.join(root, locale, "goat-ladder/index.html"), "utf8");
+  check("GOAT Ladder origin " + (locale || "es"), page.indexOf('window.GOAT_API_URL = "' + goatOrigin + '"') >= 0);
+});
+var siteCss = fs.readFileSync(path.join(root, "site.css"), "utf8");
+check("web GOAT filters have 44px touch targets", /\.goat-segment button\s*\{[^}]*min-height:\s*44px;[^}]*touch-action:\s*manipulation;/s.test(siteCss));
+
 /* Carga src/goat.js con un entorno mínimo (sin DOM). */
 function loadService(options) {
   var store = {}, calls = [];

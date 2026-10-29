@@ -860,8 +860,10 @@ body.play { min-height: 100vh; display: flex; flex-direction: column; }
 .goat-filters { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
 .goat-segment { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 11px; background: var(--stand); }
 .goat-segment button {
-  min-height: 38px;
+  min-height: 44px;
+  min-width: 44px;
   padding: 8px 13px;
+  touch-action: manipulation;
   border: 0;
   border-radius: 8px;
   background: transparent;
