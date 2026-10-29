@@ -4,11 +4,12 @@
   var api = (window.GOAT_API_URL || "").replace(/\/+$/, "");
   var lang = document.documentElement.lang || "es";
   var text = {
-    es: {honours:"Palmarés", honoursTeam:"Títulos colectivos", honoursInd:"Títulos individuales", loading:"Cargando ranking…", error:"No se pudo cargar el ranking.", empty:"Aún no hay carreras en este ranking.", emptyAchievements:"Aún no hay gestas en este ranking.", unverified:"Sin verificar · enviado por la comunidad", score:"GOAT SCORE", match:"Partido", season:"Temporada", goals:"Goles", assists:"Asistencias", rating:"Valoración", minutes:"Minutos", result:"Resultado", record:"Balance", position:"Posición", club:"Club", competition:"Competición", opponent:"Rival", seasons:"Temporadas", appearances:"Partidos", clean_sheets:"Porterías a cero", trophies:"Títulos", awards:"Premios", international_caps:"Partidos internacionales", international_goals:"Goles internacionales", wins:"Victorias", draws:"Empates", losses:"Derrotas", unbeaten_seasons:"Temporadas invictas", promotions:"Ascensos", clubs:"Clubes", win_percentage:"Porcentaje de victorias", history:"Historial de temporadas", promoted:"Ascenso", goals_for:"Goles a favor", goals_against:"Goles en contra", career:"Carrera", metric:"Métrica"},
-    en: {honours:"Honours", honoursTeam:"Team titles", honoursInd:"Individual awards", loading:"Loading ranking…", error:"The ranking could not be loaded.", empty:"There are no careers in this ranking yet.", emptyAchievements:"There are no achievements in this ranking yet.", unverified:"Unverified · community-reported", score:"GOAT SCORE", match:"Match", season:"Season", goals:"Goals", assists:"Assists", rating:"Rating", minutes:"Minutes", result:"Result", record:"Record", position:"Position", club:"Club", competition:"Competition", opponent:"Opponent", seasons:"Seasons", appearances:"Appearances", clean_sheets:"Clean sheets", trophies:"Trophies", awards:"Awards", international_caps:"International appearances", international_goals:"International goals", wins:"Wins", draws:"Draws", losses:"Losses", unbeaten_seasons:"Unbeaten seasons", promotions:"Promotions", clubs:"Clubs", win_percentage:"Win percentage", history:"Season history", promoted:"Promoted", goals_for:"Goals for", goals_against:"Goals against", career:"Career", metric:"Metric"},
-    de: {honours:"Erfolge", honoursTeam:"Mannschaftstitel", honoursInd:"Einzelauszeichnungen", loading:"Rangliste wird geladen…", error:"Die Rangliste konnte nicht geladen werden.", empty:"Noch keine Karrieren in dieser Rangliste.", emptyAchievements:"Noch keine Erfolge in dieser Rangliste.", unverified:"Nicht verifiziert · von der Community gemeldet", score:"GOAT SCORE", match:"Spiel", season:"Saison", goals:"Tore", assists:"Vorlagen", rating:"Bewertung", minutes:"Minuten", result:"Ergebnis", record:"Bilanz", position:"Platz", club:"Verein", competition:"Wettbewerb", opponent:"Gegner", seasons:"Saisons", appearances:"Einsätze", clean_sheets:"Zu-Null-Spiele", trophies:"Titel", awards:"Auszeichnungen", international_caps:"Länderspiele", international_goals:"Länderspieltore", wins:"Siege", draws:"Unentschieden", losses:"Niederlagen", unbeaten_seasons:"Ungeschlagene Saisons", promotions:"Aufstiege", clubs:"Vereine", win_percentage:"Siegquote", history:"Saisonverlauf", promoted:"Aufgestiegen", goals_for:"Tore", goals_against:"Gegentore", career:"Karriere", metric:"Kennzahl"},
-    it: {honours:"Palmarès", honoursTeam:"Titoli di squadra", honoursInd:"Premi individuali", loading:"Caricamento classifica…", error:"Impossibile caricare la classifica.", empty:"Non ci sono ancora carriere in questa classifica.", emptyAchievements:"Non ci sono ancora imprese in questa classifica.", unverified:"Non verificato · segnalato dalla community", score:"GOAT SCORE", match:"Partita", season:"Stagione", goals:"Gol", assists:"Assist", rating:"Voto", minutes:"Minuti", result:"Risultato", record:"Bilancio", position:"Posizione", club:"Club", competition:"Competizione", opponent:"Avversario", seasons:"Stagioni", appearances:"Presenze", clean_sheets:"Partite senza subire gol", trophies:"Titoli", awards:"Premi", international_caps:"Presenze internazionali", international_goals:"Gol internazionali", wins:"Vittorie", draws:"Pareggi", losses:"Sconfitte", unbeaten_seasons:"Stagioni imbattute", promotions:"Promozioni", clubs:"Club", win_percentage:"Percentuale vittorie", history:"Storico stagioni", promoted:"Promosso", goals_for:"Gol fatti", goals_against:"Gol subiti", career:"Carriera", metric:"Metrica"},
-    fr: {honours:"Palmarès", honoursTeam:"Titres collectifs", honoursInd:"Distinctions individuelles", loading:"Chargement du classement…", error:"Impossible de charger le classement.", empty:"Aucune carrière dans ce classement pour le moment.", emptyAchievements:"Aucun exploit dans ce classement pour le moment.", unverified:"Non vérifié · déclaré par la communauté", score:"GOAT SCORE", match:"Match", season:"Saison", goals:"Buts", assists:"Passes décisives", rating:"Note", minutes:"Minutes", result:"Résultat", record:"Bilan", position:"Position", club:"Club", competition:"Compétition", opponent:"Adversaire", seasons:"Saisons", appearances:"Apparitions", clean_sheets:"Matchs sans encaisser", trophies:"Titres", awards:"Récompenses", international_caps:"Sélections", international_goals:"Buts internationaux", wins:"Victoires", draws:"Matchs nuls", losses:"Défaites", unbeaten_seasons:"Saisons sans défaite", promotions:"Promotions", clubs:"Clubs", win_percentage:"Pourcentage de victoires", history:"Historique des saisons", promoted:"Promu", goals_for:"Buts marqués", goals_against:"Buts encaissés", career:"Carrière", metric:"Statistique"}
+    es: {honours:"Palmarés", honoursTeam:"Títulos colectivos", honoursInd:"Títulos individuales", loading:"Cargando ranking…", error:"No se pudo cargar el ranking.", timeout:"El ranking está tardando demasiado. Comprueba la conexión y vuelve a intentarlo.", unavailable:"El ranking no está configurado en este momento.", empty:"Aún no hay carreras en este ranking.", emptyAchievements:"Aún no hay gestas en este ranking.", unverified:"Sin verificar · enviado por la comunidad", score:"GOAT SCORE", match:"Partido", season:"Temporada", goals:"Goles", assists:"Asistencias", rating:"Valoración", minutes:"Minutos", result:"Resultado", record:"Balance", position:"Posición", club:"Club", competition:"Competición", opponent:"Rival", seasons:"Temporadas", appearances:"Partidos", clean_sheets:"Porterías a cero", trophies:"Títulos", awards:"Premios", international_caps:"Partidos internacionales", international_goals:"Goles internacionales", wins:"Victorias", draws:"Empates", losses:"Derrotas", unbeaten_seasons:"Temporadas invictas", promotions:"Ascensos", clubs:"Clubes", win_percentage:"Porcentaje de victorias", history:"Historial de temporadas", promoted:"Ascenso", goals_for:"Goles a favor", goals_against:"Goles en contra", career:"Carrera", metric:"Métrica"},
+
+    en: {honours:"Honours", honoursTeam:"Team titles", honoursInd:"Individual awards", loading:"Loading ranking…", error:"The ranking could not be loaded.", timeout:"The ranking is taking too long to respond. Check your connection and try again.", unavailable:"The ranking is not configured right now.", empty:"There are no careers in this ranking yet.", emptyAchievements:"There are no achievements in this ranking yet.", unverified:"Unverified · community-reported", score:"GOAT SCORE", match:"Match", season:"Season", goals:"Goals", assists:"Assists", rating:"Rating", minutes:"Minutes", result:"Result", record:"Record", position:"Position", club:"Club", competition:"Competition", opponent:"Opponent", seasons:"Seasons", appearances:"Appearances", clean_sheets:"Clean sheets", trophies:"Trophies", awards:"Awards", international_caps:"International appearances", international_goals:"International goals", wins:"Wins", draws:"Draws", losses:"Losses", unbeaten_seasons:"Unbeaten seasons", promotions:"Promotions", clubs:"Clubs", win_percentage:"Win percentage", history:"Season history", promoted:"Promoted", goals_for:"Goals for", goals_against:"Goals against", career:"Career", metric:"Metric"},
+    de: {honours:"Erfolge", honoursTeam:"Mannschaftstitel", honoursInd:"Einzelauszeichnungen", loading:"Rangliste wird geladen…", error:"Die Rangliste konnte nicht geladen werden.", timeout:"Die Rangliste braucht zu lange. Prüfe deine Verbindung und versuche es erneut.", unavailable:"Die Rangliste ist momentan nicht konfiguriert.", empty:"Noch keine Karrieren in dieser Rangliste.", emptyAchievements:"Noch keine Erfolge in dieser Rangliste.", unverified:"Nicht verifiziert · von der Community gemeldet", score:"GOAT SCORE", match:"Spiel", season:"Saison", goals:"Tore", assists:"Vorlagen", rating:"Bewertung", minutes:"Minuten", result:"Ergebnis", record:"Bilanz", position:"Platz", club:"Verein", competition:"Wettbewerb", opponent:"Gegner", seasons:"Saisons", appearances:"Einsätze", clean_sheets:"Zu-Null-Spiele", trophies:"Titel", awards:"Auszeichnungen", international_caps:"Länderspiele", international_goals:"Länderspieltore", wins:"Siege", draws:"Unentschieden", losses:"Niederlagen", unbeaten_seasons:"Ungeschlagene Saisons", promotions:"Aufstiege", clubs:"Vereine", win_percentage:"Siegquote", history:"Saisonverlauf", promoted:"Aufgestiegen", goals_for:"Tore", goals_against:"Gegentore", career:"Karriere", metric:"Kennzahl"},
+    it: {honours:"Palmarès", honoursTeam:"Titoli di squadra", honoursInd:"Premi individuali", loading:"Caricamento classifica…", error:"Impossibile caricare la classifica.", timeout:"La classifica impiega troppo a rispondere. Controlla la connessione e riprova.", unavailable:"La classifica non è configurata al momento.", empty:"Non ci sono ancora carriere in questa classifica.", emptyAchievements:"Non ci sono ancora imprese in questa classifica.", unverified:"Non verificato · segnalato dalla community", score:"GOAT SCORE", match:"Partita", season:"Stagione", goals:"Gol", assists:"Assist", rating:"Voto", minutes:"Minuti", result:"Risultato", record:"Bilancio", position:"Posizione", club:"Club", competition:"Competizione", opponent:"Avversario", seasons:"Stagioni", appearances:"Presenze", clean_sheets:"Partite senza subire gol", trophies:"Titoli", awards:"Premi", international_caps:"Presenze internazionali", international_goals:"Gol internazionali", wins:"Vittorie", draws:"Pareggi", losses:"Sconfitte", unbeaten_seasons:"Stagioni imbattute", promotions:"Promozioni", clubs:"Club", win_percentage:"Percentuale vittorie", history:"Storico stagioni", promoted:"Promosso", goals_for:"Gol fatti", goals_against:"Gol subiti", career:"Carriera", metric:"Metrica"},
+    fr: {honours:"Palmarès", honoursTeam:"Titres collectifs", honoursInd:"Distinctions individuelles", loading:"Chargement du classement…", error:"Impossible de charger le classement.", timeout:"Le classement met trop de temps à répondre. Vérifie ta connexion et réessaie.", unavailable:"Le classement n'est pas configuré pour le moment.", empty:"Aucune carrière dans ce classement pour le moment.", emptyAchievements:"Aucun exploit dans ce classement pour le moment.", unverified:"Non vérifié · déclaré par la communauté", score:"GOAT SCORE", match:"Match", season:"Saison", goals:"Buts", assists:"Passes décisives", rating:"Note", minutes:"Minutes", result:"Résultat", record:"Bilan", position:"Position", club:"Club", competition:"Compétition", opponent:"Adversaire", seasons:"Saisons", appearances:"Apparitions", clean_sheets:"Matchs sans encaisser", trophies:"Titres", awards:"Récompenses", international_caps:"Sélections", international_goals:"Buts internationaux", wins:"Victoires", draws:"Matchs nuls", losses:"Défaites", unbeaten_seasons:"Saisons sans défaite", promotions:"Promotions", clubs:"Clubs", win_percentage:"Pourcentage de victoires", history:"Historique des saisons", promoted:"Promu", goals_for:"Buts marqués", goals_against:"Buts encaissés", career:"Carrière", metric:"Statistique"}
   };
   var metricKeys = {
     player: ["appearances", "goals", "assists", "trophies", "awards", "clean_sheets", "international_caps", "international_goals", "clubs", "seasons"],
@@ -19,7 +20,7 @@
   var entries = document.getElementById("goat-entries");
   var retry = document.getElementById("goat-retry");
   var metricSelect = document.getElementById("goat-metric");
-  var mode = "player", timeframe = "all-time", board = "careers", metric = "appearances", loadId = 0;
+  var mode = "player", timeframe = "all-time", board = "careers", metric = "appearances", loadId = 0, activeController = null;
 
   function node(tag, className, value) {
     var el = document.createElement(tag);
@@ -59,11 +60,17 @@
       var row = node("p", "goat-season-row");
       var head = [season.season, season.club, season.competition].filter(Boolean).join(" · ");
       row.appendChild(node("strong", "", head));
-      var values = entry.game_mode === "player"
-        ? [t.appearances + ": " + season.appearances, t.goals + ": " + season.goals,
-          t.assists + ": " + season.assists, t.trophies + ": " + (season.trophies || []).length]
-        : [t.wins + ": " + season.wins + "-" + season.draws + "-" + season.losses,
-          t.goals_for + ": " + season.goals_for, t.goals_against + ": " + season.goals_against];
+      var values = [];
+      function addValue(label, value) { if (value != null && value !== "") values.push(label + ": " + value); }
+      if (entry.game_mode === "player") {
+        addValue(t.appearances, season.appearances); addValue(t.goals, season.goals); addValue(t.assists, season.assists);
+        if (season.trophies) addValue(t.trophies, season.trophies.length);
+      } else {
+        if (season.wins != null || season.draws != null || season.losses != null) {
+          addValue(t.wins + "/" + t.draws + "/" + t.losses, [season.wins, season.draws, season.losses].map(function (n) { return n == null ? "—" : n; }).join("-"));
+        }
+        addValue(t.goals_for, season.goals_for); addValue(t.goals_against, season.goals_against);
+      }
       if (season.position != null) values.push(t.position + ": " + season.position);
       if (season.promoted) values.push(t.promoted);
       row.appendChild(node("span", "", values.join(" · ")));
@@ -150,29 +157,43 @@
     return article;
   }
   function load() {
-    var requestId = ++loadId;
+    if (activeController) activeController.abort();
+    var requestId = ++loadId, controller = typeof AbortController === "function" ? new AbortController() : null;
+    activeController = controller;
     entries.replaceChildren();
     retry.hidden = true;
     status.textContent = t.loading;
     if (!api) {
-      status.textContent = t.error;
+      status.textContent = t.unavailable;
       retry.hidden = false;
+      activeController = null;
       return;
     }
     renderMetricOptions();
     var path = board === "careers" ? "/api/goat-ladder/careers" : "/api/goat-ladder";
     var query = "?mode=" + encodeURIComponent(mode) + "&timeframe=" + encodeURIComponent(timeframe);
     if (board === "careers") query += "&metric=" + encodeURIComponent(metric);
-    fetch(api + path + query)
-      .then(function (response) {
-        return response.json().then(function (data) {
-          if (!response.ok) throw new Error(data.error || ("HTTP " + response.status));
-          return data;
-        });
-      })
+    var timedOut = false, timeoutId;
+    var options = controller ? {signal: controller.signal} : {};
+    var request = fetch(api + path + query, options).then(function (response) {
+      return response.json().then(function (data) {
+        if (!response.ok) throw new Error(data.error || ("HTTP " + response.status));
+        return data;
+      });
+    });
+    var timeout = new Promise(function (_, reject) {
+      timeoutId = setTimeout(function () {
+        timedOut = true;
+        if (controller) controller.abort();
+        var error = new Error("GOAT LADDER request timed out");
+        error.name = "TimeoutError";
+        reject(error);
+      }, 15000);
+    });
+    Promise.race([request, timeout])
       .then(function (data) {
         if (requestId !== loadId) return;
-        var list = data.entries || [];
+        var list = data && Array.isArray(data.entries) ? data.entries : [];
         status.textContent = list.length ? "" : t[board === "careers" ? "empty" : "emptyAchievements"];
         list.forEach(function (entry, index) {
           entries.appendChild(board === "careers" ? careerCard(entry, index) : achievementCard(entry, index));
@@ -181,8 +202,12 @@
       .catch(function (error) {
         if (requestId !== loadId) return;
         console.error("GOAT LADDER ranking request failed", error);
-        status.textContent = t.error;
+        status.textContent = timedOut || (error && error.name === "TimeoutError") ? t.timeout : t.error;
         retry.hidden = false;
+      })
+      .then(function () {
+        clearTimeout(timeoutId);
+        if (activeController === controller) activeController = null;
       });
   }
   document.addEventListener("change", function (event) {
@@ -191,6 +216,7 @@
   document.addEventListener("click", function (event) {
     var button = event.target.closest("[data-board], [data-mode], [data-period], #goat-retry");
     if (!button) return;
+    if (button.id === "goat-retry") { load(); return; }
     if (button.hasAttribute("data-board")) board = button.getAttribute("data-board") === "achievements" ? "achievements" : "careers";
     if (button.hasAttribute("data-mode")) mode = button.getAttribute("data-mode");
     if (button.hasAttribute("data-period")) timeframe = button.getAttribute("data-period");

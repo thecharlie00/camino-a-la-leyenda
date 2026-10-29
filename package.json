@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "python3 build_legacy_game.py && vite --host 0.0.0.0 --port 3000",
     "build": "tsc && vite build && python3 build_legacy_game.py",
-    "test:build": "node test/build-smoke.js && node test/web-startup.js && node test/social-replies.js && node test/social-localization.js && node test/android-api36.js && node test/web-publishing.js && node test/eras-mode.js && node test/runtime-smoke.js && node test/goat-client.js",
+    "test:build": "node test/build-smoke.js && node test/web-startup.js && node test/social-replies.js && node test/social-localization.js && node test/android-api36.js && node test/web-publishing.js && node test/eras-mode.js && node test/runtime-smoke.js && node test/goat-client.js && node test/goat-player-season.js && node test/goat-page.js",
     "preview": "vite preview --host 0.0.0.0 --port 3000"
   },
   "dependencies": {
