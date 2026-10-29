@@ -157,7 +157,7 @@ MODULE_MARKUP = "\n".join(
     for i, (_, source) in enumerate(mobile_js)
 )
 MODULE_BOOTSTRAP = """(function () {
-  var ids = %s, index = 0, splash = document.querySelector('.boot-screen'), booting = true, failed = false;
+  var ids = %s, index = 0, splash = document.querySelector('.boot-screen'), booting = true, failed = false, executingModule = false;
   function fail(error) {
     if (failed) return;
     failed = true; booting = false;
@@ -166,7 +166,7 @@ MODULE_BOOTSTRAP = """(function () {
     if (app) app.innerHTML = '<main role="alert" style="padding:24px;color:#fff;background:#0b1417;font:16px system-ui"><h1>No se pudo iniciar el juego</h1><p>Recarga la página para volver a intentarlo.</p><button type="button" onclick="location.reload()">Recargar</button></main>';
   }
   window.addEventListener('error', function (event) {
-    if (!booting) return;
+    if (!booting || !executingModule) return;
     if (event && event.target && event.target !== window) return;
     fail(event.error || event.message || 'Error JavaScript al iniciar');
   });
@@ -177,10 +177,12 @@ MODULE_BOOTSTRAP = """(function () {
     try {
       var script = document.createElement('script');
       script.textContent = data.textContent || '';
+      executingModule = true;
       (document.head || document.documentElement).appendChild(script);
       script.parentNode.removeChild(script);
       data.parentNode.removeChild(data);
     } catch (error) { fail(error); return; }
+    finally { executingModule = false; }
     index++;
     if (splash && index %% 10 === 0) splash.textContent = 'Cargando el juego… ' + Math.round(index * 100 / ids.length) + '%%';
     if (index < ids.length) setTimeout(next, 0);

@@ -55,6 +55,8 @@ for (const language of ['en', 'de', 'it', 'fr', 'fem']) {
 }
 assert.match(androidHtml, /function ensureI18n\(lang\)/);
 assert.match(androidHtml, /Cargando el juego…/);
+assert.match(androidHtml, /executingModule = true/);
+assert.match(androidHtml, /if \(!booting \|\| !executingModule\) return;/, 'Non-game global error events must not abort the incremental boot');
 
 function readEmbeddedObject(source, marker) {
   const markerAt = source.indexOf(marker);
@@ -94,7 +96,6 @@ for (const [target, source] of [['web', gameSource], ['Android', androidSource]]
   assert.match(source, /var LIFE_KIT_CATALOG = \[\]/, `${target} wearable kit catalog is missing`);
   assert.match(source, /shirtPattern/, `${target} custom 3D kit rendering is missing`);
 }
-assert.match(gameSource, /data-a="bgm"/, 'Background music control is missing');
 assert.match(gameSource, /data-a="bgm"/, 'Background music control is missing');
 assert.match(gameSource, /var LIFE_KIT_CATALOG = \[\]/, 'Expanded wearable kit catalog is missing');
 const lifeSource = readFileSync('legacy-game/src/life.js', 'utf8');
