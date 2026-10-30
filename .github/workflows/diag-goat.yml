@@ -2,12 +2,16 @@ name: Diagnóstico GOAT
 on:
   push:
     branches: [diag-goat-check]
+permissions:
+  contents: write
 jobs:
   check:
     runs-on: ubuntu-24.04
     steps:
+      - uses: actions/checkout@v4
       - name: Servidor GOAT
         run: |
+          exec > >(tee diag.txt) 2>&1
           A=https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev
           getent hosts camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev || echo "DNS: no resuelve"
           for u in "/" "/api/goat-ladder?mode=player&timeframe=all" "/api/goat-ladder/careers?mode=player&timeframe=all&metric=score" "/api/goat-ladder/careers?mode=manager&timeframe=all&metric=score"; do
@@ -18,3 +22,8 @@ jobs:
             echo "=== GET careers desde $o"; curl -sS -m 20 -o /dev/null -D - -H "Origin: $o" "$A/api/goat-ladder/careers?mode=player&timeframe=all&metric=score" | grep -iE "^HTTP|access-control" || true
           done
           echo "=== play-store-version.json"; curl -sS -m 20 -w "\nHTTP %{http_code}\n" https://futbolroadtolegend.com/play-store-version.json || true
+      - name: Guardar resultado
+        if: always()
+        run: |
+          git config user.name "github-actions"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add diag.txt; git commit -m "Resultado del diagnóstico [skip ci]"; git push
