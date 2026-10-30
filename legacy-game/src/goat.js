@@ -105,7 +105,7 @@
       assists: active ? player.ss.a || 0 : row.a || 0,
       clean_sheets: active ? player.ss.cs || 0 : row.cs || 0,
       rating: active || row.rt == null ? null : roundedOrNull(row.rt * 10) / 10,
-      overall: active ? player.ovr : row.ovr1,
+      overall: roundedOrNull(active ? player.ovr : row.ovr1),
       international_caps: active ? player.ns.apps || 0 : row.caps || 0,
       international_goals: active ? player.ns.g || 0 : row.ig || 0
     };
