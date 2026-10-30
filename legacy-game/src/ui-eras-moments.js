@@ -148,7 +148,7 @@
   }
   function shoot() {
     var st = view.st, m = EM.byId(st.id), me = m.teams[st.you], them = m.teams[1 - st.you], kind = st.chance;
-    var opts = {skill: Math.min(95, me.r + 3 * EM.help(m.id)), gk: Math.max(45, them.r - 4), pressure: 0.7, press: true};
+    var opts = {skill: Math.min(95, me.r + 3 * EM.help(m.id)), gk: Math.max(45, them.r - 4), pressure: 0.7, press: true, eraYear: m.year};
     hide();
     var go = function (res) {
       show();
@@ -179,8 +179,8 @@
       if (p.round >= 12) { st.pensWinner = Math.random() < 0.5 ? 0 : 1; finish(); return; }
       render();
     };
-    if (gkMode) Minigame.gkPenalty({gk: Math.min(95, me.r + 3 * EM.help(m.id)), skill: them.r, pressure: 0.8, press: true}, done);
-    else Minigame.penalty({skill: Math.min(95, me.r + 3 * EM.help(m.id)), gk: Math.max(45, them.r - 4), pressure: 0.8, press: true}, done);
+    if (gkMode) Minigame.gkPenalty({gk: Math.min(95, me.r + 3 * EM.help(m.id)), skill: them.r, pressure: 0.8, press: true, eraYear: m.year}, done);
+    else Minigame.penalty({skill: Math.min(95, me.r + 3 * EM.help(m.id)), gk: Math.max(45, them.r - 4), pressure: 0.8, press: true, eraYear: m.year}, done);
   }
   function hide() { if (layer) layer.style.display = "none"; }
   function show() { if (layer) layer.style.display = ""; }

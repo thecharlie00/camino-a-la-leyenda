@@ -4,8 +4,6 @@
   var state = {open: false, packId: "1990s", year: 1992, mode: "player", firstName: "Alex", lastName: "Leyenda", club: ""};
   var layer = null;
   var kitNames = {"classic-70s": "Detalle retro de los 70", "classic-80s": "Patrón chevron de los 80", "baggy-90s": "Franjas horizontales de los 90", "fitted-00s": "Panel dividido de los 2000", "modern-athletic": "Diseño geométrico de los 2010", "modern-performance": "Detalle técnico geométrico de los 2020"};
-  var pitchNames = {"mud-winter": "Barro invernal", "hybrid-emerging": "Transición a césped híbrido", hybrid: "Césped híbrido", "hybrid-heated": "Césped híbrido con calefacción"};
-  var broadcastNames = {"grainy-4:3": "Televisión 4:3 granulada", "sd-4:3-first-gen-eng": "Televisión 4:3 granulada", "sd-16:9": "Definición estándar panorámica", "hd-16:9": "Alta definición", "4k-graphics": "4K y gráficos actuales"};
   var scienceNames = {basic: "Preparación física básica", growing: "Ciencia deportiva en desarrollo", advanced: "Ciencia deportiva avanzada", "elite-data": "Ciencia deportiva con análisis de datos"};
   var channelNames = {newspapers: "Periódicos", radio: "Radio", "weekly-tv-highlights": "Resúmenes televisivos semanales", tabloids: "Tabloides", teletext: "Teletexto", "teletext-late-decade": "Teletexto", fanzines: "Fanzines", "phone-in": "Programas de llamadas", "live-tv": "Televisión en directo", "club-websites": "Webs de clubes", forums: "Foros", "sms-alerts": "Alertas SMS", "sports-news-tv": "Televisión deportiva", "deadline-day": "Mercado de fichajes", "early-social-web": "Redes sociales", websites: "Webs de clubes", twitter: "Twitter", youtube: "YouTube", "live-blogs": "Webs de clubes", instagram: "Instagram", tiktok: "TikTok", "here-we-go": "Here we go", "fan-channels": "Canales de aficionados", "viral-clips": "Clips virales"};
   function t(text, values) { return eraText(text, values); }
@@ -40,7 +38,8 @@
       '<p class="eras-lead" style="margin:10px 0 0">' + skinText + '</p>' +
       '<p class="eras-lead" style="margin:6px 0 0">' + t("Escalas económicas simuladas para salarios, valores y presupuestos.") + ' · ' + t("Salarios ×{wage}; mercado ×{market}; presupuesto ×{tv}.", {wage: economy.wageScale.toFixed(2), market: economy.marketScale.toFixed(2), tv: economy.tvDealMultiplier.toFixed(2)}) + '</p>' +
       '<p class="eras-lead" style="margin:6px 0 0">' + t("Canales mostrados en el HUD; no simulan una red de contactos.") + ' ' + t("Canales: {channels}.", {channels: media.channels.map(channelLabel).join(" · ")}) + '</p>' +
-      '<p class="eras-lead" style="margin:6px 0 0">' + t("Estilo de prenda 3D del perfil (si no llevas una propia): {kit}, con colores del club; terreno y TV aún son referencias: {pitch}; {broadcast}.", {kit: t(kitNames[presentation.kits] || presentation.kits), pitch: t(pitchNames[presentation.pitchWear] || presentation.pitchWear), broadcast: t(broadcastNames[presentation.broadcast] || presentation.broadcast)}) + '</p></div>';
+      '<p class="eras-lead" style="margin:6px 0 0">' + t("Estilo de prenda 3D del perfil (si no llevas una propia): {kit}, con colores del club.", {kit: t(kitNames[presentation.kits] || presentation.kits)}) + '</p>' +
+      (typeof eraSceneLines === "function" ? '<p class="eras-lead" style="margin:6px 0 0"><b>' + t("Partido en 3D y minijuegos") + ':</b> ' + eraEscape(eraSceneLines(p.currentYear || state.year).join(" ")) + '</p>' : "") + '</div>';
   }
   function savedRows() {
     var list = EraStore.getIndex();

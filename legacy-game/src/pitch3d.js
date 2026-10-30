@@ -460,7 +460,7 @@ var Pitch3D = (function () {
   function ledBoard(m, x, z, len, axis, toward, cols) {
     m.code = MAT_MATTE;
     if (axis === "x") m.box(x, 0, z, len, 0.95, 0.28, DARK, 0.7); else m.box(x, 0, z, 0.28, 0.95, len, DARK, 0.7);
-    m.code = MAT_LED;
+    m.code = opts && opts.era && opts.era.staticBoards ? MAT_MATTE : MAT_LED;
     var n = Math.max(1, Math.round(len / 1.0));
     for (var i = 0; i < n; i++) {
       var t0 = -len / 2 + i * len / n, t1 = t0 + len / n, c = cols[Math.floor(i / 3) % cols.length];
@@ -675,6 +675,8 @@ var Pitch3D = (function () {
     e.grassMul = wx === "rain" ? [0.80, 0.92, 0.84] : wx === "heat" ? [1.18, 1.02, 0.66] : wx === "mild" ? [0.95, 0.98, 0.95] : [1, 1, 1];
     e.grassMix = wx === "cold" ? [0.20, 0.25, 0.25, 0.20] : wx === "heat" ? [0.17, 0.14, 0.05, 0.22] : [0, 0, 0, 0];
     e.wet = wx === "rain" ? 1 : 0;
+    /* Épocas: desgaste del terreno de la década (barro en el centro, césped híbrido...) */
+    if (opts && opts.era && opts.era.grassMix && opts.era.grassMix[3] > e.grassMix[3]) { e.grassMix = opts.era.grassMix; var gm = opts.era.grassMul || [1, 1, 1]; e.grassMul = [e.grassMul[0] * gm[0], e.grassMul[1] * gm[1], e.grassMul[2] * gm[2]]; }
     if (e.stars == null) e.stars = e.night;
     e.zenith = lin(e.zenith); e.horizon = lin(e.horizon); e.sky = lin(e.sky); e.ground = lin(e.ground);
     e.fog = mix(e.horizon, e.sky, 0.25);
@@ -1511,7 +1513,7 @@ var Pitch3D = (function () {
       a.st = p.st == null ? 1 : clamp(+p.st, 0.05, 1);
       var fza = p.fza == null ? a.ovr : +p.fza;
       a.pace = clamp(0.76 + (fza - 50) * 0.004 + (a.st - 0.7) * 0.12, 0.72, 1.16);
-      a.number = fixed && fixed[p.id] != null ? fixed[p.id] : (p.num || 0);
+      a.number = opts && opts.era && opts.era.numbers ? i + 1 : fixed && fixed[p.id] != null ? fixed[p.id] : (p.num || 0);
       a.gone = !!p.gone || !!sim.red[side][key];
       a.sentOff = !!sim.red[side][key];
       arr[i] = a;
@@ -1841,6 +1843,7 @@ var Pitch3D = (function () {
 
   function launchBall(tx, tz, ty, dur, arc, next, curve) {
     var b = sim.ball;
+    if (opts && opts.era && opts.era.ballDur) dur *= opts.era.ballDur; /* Épocas: balón de cuero más pesado */
     b.fl = {x0: b.x, y0: b.y, z0: b.z, x1: tx, y1: ty, z1: tz, t: 0, dur: Math.max(0.08, dur),
       arc: arc || 0, curve: curve || 0};
     fxKick(b, tx, tz, dur, arc);
@@ -3516,7 +3519,7 @@ var Pitch3D = (function () {
   function buildPlayer(m, a) {
     var dxc = a.x - cam.x, dzc = a.z - cam.z, far = dxc * dxc + dzc * dzc > 1600;
     var q = quality < 0.7 || far ? 0 : 1, seg = q ? 8 : 6, rings = q ? 5 : 4;
-    var shirt = a.official ? (a.official === "ref" ? [0.055, 0.06, 0.07] : [0.085, 0.095, 0.105]) :
+    var shirt = a.official ? (opts && opts.era && opts.era.ref ? opts.era.ref : a.official === "ref" ? [0.055, 0.06, 0.07] : [0.085, 0.095, 0.105]) :
       a.gk ? (a.side ? [0.55, 0.26, 0.76] : [0.96, 0.55, 0.12]) : (colors[a.side] || rgb(SHIRT[a.side]));
     var shorts = a.official ? [0.04, 0.045, 0.055] : a.gk ? [0.08, 0.10, 0.12] : (SHORTS[a.side] || SHORTS[0]);
     var skin = a.skin || SKIN, hair = a.hair || HAIR;
@@ -4098,6 +4101,7 @@ var Pitch3D = (function () {
     aoDisc(m, x, z, 0.32, 0.32, 0.45, 10);
     var top = [x, y + r, z], bot = [x, y - r, z], a = [x + r, y, z], c = [x - r, y, z], d = [x, y, z + r], e = [x, y, z - r];
     var w = [0.95, 0.95, 0.9], k = [0.12, 0.14, 0.15];
+    if (opts && opts.era && opts.era.ball) { w = opts.era.ball[0]; k = opts.era.ball[1]; }
     m.tri(top, a, d, w); m.tri(top, d, c, k); m.tri(top, c, e, w); m.tri(top, e, a, k);
     m.tri(bot, d, a, k); m.tri(bot, c, d, w); m.tri(bot, e, c, k); m.tri(bot, a, e, w);
   }
@@ -4236,7 +4240,7 @@ var Pitch3D = (function () {
     drawBoard(dyn);
     buildCoin(dyn);
     drawNets(dyn);
-    if (!sim.ballHidden && !buildAssetBall(dyn)) buildBall(dyn);
+    if (!sim.ballHidden && ((opts && opts.era && opts.era.ball) || !buildAssetBall(dyn))) buildBall(dyn);
     var solidN = dyn.n;
     drawFx(dyn);
     drawWeather(dyn);
@@ -4551,6 +4555,8 @@ var Pitch3D = (function () {
     var srcCols = opts.cols && opts.cols.length ? opts.cols : SHIRT;
     colors = [kitColor(srcCols[0], rgb(SHIRT[0])), kitColor(srcCols[1], rgb(SHIRT[1]))];
     disposed = false; frozen = false; reduced = false;
+    opts.era = null;
+    if (typeof eraScene3D === "function") { try { opts.era = eraScene3D(); } catch (ignore) { opts.era = null; } }
     loadAssets();
     todSel = pickTod();
     try { reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (ignore) {}
@@ -4559,6 +4565,7 @@ var Pitch3D = (function () {
     canvas.setAttribute("aria-label", label("Vista 3D del partido"));
     canvas.style.display = "block"; canvas.style.width = "100%"; canvas.style.minHeight = "210px";
     host.appendChild(canvas);
+    if (opts.era && opts.era.tv) { canvas.classList.add("era-tv-" + opts.era.tv); var tvl = document.createElement("div"); tvl.className = "era-tv-layer era-tv-" + opts.era.tv; tvl.setAttribute("aria-hidden", "true"); host.appendChild(tvl); }
     quality = opts.quality != null ? +opts.quality : (window.devicePixelRatio || 1) > 2 ? 0.75 : 1;
     try { initGL(); } catch (err) {
       if (window.console) console.warn("Pitch3D: se activa el campo 2D de reserva", err);
@@ -4630,6 +4637,7 @@ var Pitch3D = (function () {
     if (scoreHud && scoreHud.parentNode) scoreHud.parentNode.removeChild(scoreHud); scoreHud = null;
     if (replayBtn && replayBtn.parentNode) replayBtn.parentNode.removeChild(replayBtn); replayBtn = null;
     if (coinEl && coinEl.parentNode) coinEl.parentNode.removeChild(coinEl); coinEl = null;
+    if (host && host.querySelectorAll) [].slice.call(host.querySelectorAll(".era-tv-layer")).forEach(function (el) { el.parentNode.removeChild(el); });
     host = null; sim = newSim(); freezeWanted = false; frozen = false; lastTs = 0; fps = 0;
     if (pitchAudio()) pitchAudio().stop();
   }

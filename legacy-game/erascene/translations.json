@@ -2476,5 +2476,89 @@
   "de": "Epochen-Herausforderung geschafft!",
   "it": "Sfida d'epoca completata!",
   "fr": "Défi d'époque réussi !"
+ },
+ "Estilo de prenda 3D del perfil (si no llevas una propia): {kit}, con colores del club.": {
+  "en": "3D kit style for this profile (unless you wear your own): {kit}, in club colours.",
+  "de": "3D-Trikotstil des Profils (wenn du kein eigenes trägst): {kit}, in Vereinsfarben.",
+  "it": "Stile della maglia 3D del profilo (se non ne indossi una tua): {kit}, con i colori del club.",
+  "fr": "Style de maillot 3D du profil (si tu n'en portes pas un à toi) : {kit}, aux couleurs du club."
+ },
+ "Partido en 3D y minijuegos": {
+  "en": "3D match and minigames",
+  "de": "3D-Spiel und Minispiele",
+  "it": "Partita 3D e minigiochi",
+  "fr": "Match en 3D et mini-jeux"
+ },
+ "Árbitro vestido de negro.": {
+  "en": "Referee dressed in black.",
+  "de": "Schiedsrichter in Schwarz.",
+  "it": "Arbitro vestito di nero.",
+  "fr": "Arbitre vêtu de noir."
+ },
+ "Árbitro con camiseta de color.": {
+  "en": "Referee in a coloured shirt.",
+  "de": "Schiedsrichter im farbigen Trikot.",
+  "it": "Arbitro con maglia colorata.",
+  "fr": "Arbitre en maillot de couleur."
+ },
+ "Dorsales del 1 al 11 según la alineación.": {
+  "en": "Shirt numbers 1 to 11 by line-up.",
+  "de": "Rückennummern 1 bis 11 nach Aufstellung.",
+  "it": "Numeri dall'1 all'11 secondo la formazione.",
+  "fr": "Numéros de 1 à 11 selon la composition."
+ },
+ "Terreno embarrado y gastado.": {
+  "en": "Muddy, worn pitch.",
+  "de": "Schlammiger, abgenutzter Platz.",
+  "it": "Campo fangoso e consumato.",
+  "fr": "Terrain boueux et usé."
+ },
+ "Césped en transición al híbrido, algo gastado.": {
+  "en": "Grass moving to hybrid, slightly worn.",
+  "de": "Rasen im Übergang zum Hybridrasen, leicht abgenutzt.",
+  "it": "Erba in transizione all'ibrido, un po' consumata.",
+  "fr": "Pelouse en transition vers l'hybride, un peu usée."
+ },
+ "Balón de cuero marrón y pesado: vuela más despacio.": {
+  "en": "Heavy brown leather ball: it flies more slowly.",
+  "de": "Schwerer brauner Lederball: Er fliegt langsamer.",
+  "it": "Pallone di cuoio marrone e pesante: vola più lento.",
+  "fr": "Ballon en cuir marron et lourd : il vole plus lentement."
+ },
+ "Balón clásico blanco y negro, algo más lento que el actual.": {
+  "en": "Classic black-and-white ball, a little slower than today's.",
+  "de": "Klassischer schwarz-weißer Ball, etwas langsamer als heute.",
+  "it": "Pallone classico bianco e nero, un po' più lento di quello attuale.",
+  "fr": "Ballon classique noir et blanc, un peu plus lent que l'actuel."
+ },
+ "Vallas publicitarias estáticas, sin luces.": {
+  "en": "Static advertising boards, no lights.",
+  "de": "Statische Werbebanden ohne Licht.",
+  "it": "Cartelloni pubblicitari statici, senza luci.",
+  "fr": "Panneaux publicitaires statiques, sans lumières."
+ },
+ "Imagen de televisión de definición estándar.": {
+  "en": "Standard-definition TV picture.",
+  "de": "Fernsehbild in Standardauflösung.",
+  "it": "Immagine televisiva a definizione standard.",
+  "fr": "Image télévisée en définition standard."
+ },
+ "Imagen de televisión 4:3 de la época, con grano.": {
+  "en": "Period 4:3 TV picture, with grain.",
+  "de": "Körniges 4:3-Fernsehbild der Zeit.",
+  "it": "Immagine televisiva 4:3 d'epoca, sgranata.",
+  "fr": "Image télé 4:3 d'époque, avec du grain."
+ },
+ "Penaltis: el portero no puede moverse antes del lanzamiento.": {
+  "en": "Penalties: the goalkeeper may not move before the kick.",
+  "de": "Elfmeter: Der Torwart darf sich vor dem Schuss nicht bewegen.",
+  "it": "Rigori: il portiere non può muoversi prima del tiro.",
+  "fr": "Penaltys : le gardien ne peut pas bouger avant le tir."
+ },
+ "Faltas y penaltis con un balón que pesa más.": {
+  "en": "Free kicks and penalties with a heavier ball.",
+  "de": "Freistöße und Elfmeter mit einem schwereren Ball.",
+  "it": "Punizioni e rigori con un pallone più pesante.",
+  "fr": "Coups francs et penaltys avec un ballon plus lourd."
  }
 }
