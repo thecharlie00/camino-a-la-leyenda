@@ -1050,6 +1050,596 @@
   "Unionistas de Salamanca CF": {
    "founded": 2013,
    "src": "memory"
+  },
+  "AFC Wimbledon": {
+   "founded": 2002,
+   "src": "memory"
+  },
+  "MK Dons": {
+   "founded": 2004,
+   "src": "memory",
+   "note": "Heredero del Wimbledon FC trasladado a Milton Keynes"
+  },
+  "Salford City": {
+   "founded": 1940,
+   "src": "memory"
+  },
+  "Fleetwood Town": {
+   "founded": 1997,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Harrogate Town": {
+   "founded": 1914,
+   "src": "memory"
+  },
+  "Bromley": {
+   "founded": 1892,
+   "src": "memory"
+  },
+  "Stevenage": {
+   "founded": 1976,
+   "src": "memory"
+  },
+  "Burton Albion": {
+   "founded": 1950,
+   "src": "memory"
+  },
+  "Crawley Town": {
+   "founded": 1896,
+   "src": "memory"
+  },
+  "FC Copenhague": {
+   "founded": 1992,
+   "src": "memory"
+  },
+  "FC Midtjylland": {
+   "founded": 1999,
+   "src": "memory"
+  },
+  "FC Nordsjælland": {
+   "founded": 1991,
+   "src": "memory",
+   "names": [
+    [
+     1991,
+     "FC Farum"
+    ],
+    [
+     2003,
+     "FC Nordsjælland"
+    ]
+   ]
+  },
+  "Sønderjyske": {
+   "founded": 2004,
+   "src": "memory"
+  },
+  "Randers FC": {
+   "founded": 2003,
+   "src": "memory"
+  },
+  "Ludogorets": {
+   "founded": 2001,
+   "src": "memory"
+  },
+  "CSKA 1948": {
+   "founded": 1948,
+   "src": "memory",
+   "doubtful": true,
+   "note": "Club refundado en 2016"
+  },
+  "Arda Kardzhali": {
+   "founded": 1924,
+   "src": "memory"
+  },
+  "Septemvri Sofía": {
+   "founded": 1944,
+   "src": "memory"
+  },
+  "Dobrudzha": {
+   "founded": 1919,
+   "src": "memory"
+  },
+  "FCSB": {
+   "founded": 1947,
+   "src": "memory",
+   "names": [
+    [
+     1947,
+     "Steaua Bucarest"
+    ],
+    [
+     2017,
+     "FCSB"
+    ]
+   ]
+  },
+  "FC Hermannstadt": {
+   "founded": 2015,
+   "src": "memory"
+  },
+  "FC Botoșani": {
+   "founded": 2001,
+   "src": "memory"
+  },
+  "FK Csíkszereda": {
+   "founded": 2008,
+   "src": "memory"
+  },
+  "Metaloglobus": {
+   "founded": 1923,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Unirea Slobozia": {
+   "founded": 1956,
+   "src": "memory"
+  },
+  "Puskás Akadémia": {
+   "founded": 2005,
+   "src": "memory"
+  },
+  "Kisvárda": {
+   "founded": 1911,
+   "src": "memory"
+  },
+  "FC Astana": {
+   "founded": 2009,
+   "src": "memory"
+  },
+  "Ulytau": {
+   "founded": 2010,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Turan": {
+   "founded": 2016,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Zhenis": {
+   "founded": 2000,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Elimai": {
+   "founded": 1963,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Dinamo Zagreb": {
+   "founded": 1945,
+   "src": "memory",
+   "names": [
+    [
+     1945,
+     "Dinamo Zagreb"
+    ],
+    [
+     1991,
+     "HAŠK Građanski"
+    ],
+    [
+     1993,
+     "Croatia Zagreb"
+    ],
+    [
+     2000,
+     "Dinamo Zagreb"
+    ]
+   ]
+  },
+  "NK Istra 1961": {
+   "founded": 1961,
+   "src": "memory"
+  },
+  "HNK Gorica": {
+   "founded": 2009,
+   "src": "memory"
+  },
+  "NK Vukovar 1991": {
+   "founded": 2012,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Lokomotiva Zagreb": {
+   "founded": 1914,
+   "src": "memory"
+  },
+  "TSC Bačka Topola": {
+   "founded": 1913,
+   "src": "memory"
+  },
+  "IMT Novi Beograd": {
+   "founded": 1951,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Radnički 1923": {
+   "founded": 1923,
+   "src": "memory"
+  },
+  "Pafos FC": {
+   "founded": 2014,
+   "src": "memory"
+  },
+  "AEK Larnaca": {
+   "founded": 1994,
+   "src": "memory"
+  },
+  "Krasava": {
+   "founded": 2012,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Akritas Chlorakas": {
+   "founded": 1971,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Volos NFC": {
+   "founded": 2017,
+   "src": "memory"
+  },
+  "AO Kifisia": {
+   "founded": 2012,
+   "src": "memory",
+   "doubtful": true
+  },
+  "KRC Genk": {
+   "founded": 1988,
+   "src": "memory",
+   "note": "Fusión de Waterschei y Winterslag"
+  },
+  "OH Leuven": {
+   "founded": 2002,
+   "src": "memory"
+  },
+  "Zulte Waregem": {
+   "founded": 2001,
+   "src": "memory"
+  },
+  "RAAL La Louvière": {
+   "founded": 2009,
+   "src": "memory",
+   "doubtful": true
+  },
+  "FCV Dender": {
+   "founded": 1943,
+   "src": "memory"
+  },
+  "Club NXT": {
+   "founded": 2020,
+   "src": "memory"
+  },
+  "RSCA Futures": {
+   "founded": 2022,
+   "src": "memory"
+  },
+  "Jong Genk": {
+   "founded": 2022,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Jong Gent": {
+   "founded": 2023,
+   "src": "memory",
+   "doubtful": true
+  },
+  "RWDM Brussels": {
+   "founded": 2015,
+   "src": "memory"
+  },
+  "Lierse Kempenzonen": {
+   "founded": 1972,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Francs Borains": {
+   "founded": 1910,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Olympic Charleroi": {
+   "founded": 1912,
+   "src": "memory"
+  },
+  "Patro Eisden Maasmechelen": {
+   "founded": 1942,
+   "src": "memory"
+  },
+  "FC Groningen": {
+   "founded": 1971,
+   "src": "memory"
+  },
+  "FC Twente": {
+   "founded": 1965,
+   "src": "memory"
+  },
+  "FC Utrecht": {
+   "founded": 1970,
+   "src": "memory"
+  },
+  "AZ Alkmaar": {
+   "founded": 1967,
+   "src": "memory"
+  },
+  "Almere City FC": {
+   "founded": 2001,
+   "src": "memory"
+  },
+  "FC Emmen": {
+   "founded": 1925,
+   "src": "memory"
+  },
+  "Jong Ajax": {
+   "founded": 2013,
+   "src": "memory",
+   "note": "Filial en el fútbol profesional desde 2013"
+  },
+  "Jong PSV": {
+   "founded": 2013,
+   "src": "memory"
+  },
+  "Jong AZ": {
+   "founded": 2013,
+   "src": "memory"
+  },
+  "Jong FC Utrecht": {
+   "founded": 2016,
+   "src": "memory"
+  },
+  "Getafe CF": {
+   "founded": 1983,
+   "src": "memory"
+  },
+  "SD Eibar": {
+   "founded": 1940,
+   "src": "memory"
+  },
+  "FC Andorra": {
+   "founded": 1942,
+   "src": "memory"
+  },
+  "Real Sociedad B": {
+   "founded": 1951,
+   "src": "memory"
+  },
+  "Celta Fortuna": {
+   "founded": 1927,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Südtirol": {
+   "founded": 1995,
+   "src": "memory"
+  },
+  "Parma": {
+   "founded": 1913,
+   "src": "memory",
+   "doubtful": true,
+   "note": "Refundado en 2015"
+  },
+  "Alcione Milano": {
+   "founded": 1952,
+   "src": "memory"
+  },
+  "Inter U23": {
+   "founded": 2025,
+   "src": "memory"
+  },
+  "Union Brescia": {
+   "founded": 2025,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Dolomiti Bellunesi": {
+   "founded": 2023,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Arzignano Valchiampo": {
+   "founded": 2011,
+   "src": "memory",
+   "doubtful": true
+  },
+  "1. FC Heidenheim": {
+   "founded": 2007,
+   "src": "memory"
+  },
+  "SC Paderborn": {
+   "founded": 1985,
+   "src": "memory"
+  },
+  "Greuther Fürth": {
+   "founded": 1996,
+   "src": "memory"
+  },
+  "1. FC Magdeburg": {
+   "founded": 1965,
+   "src": "memory"
+  },
+  "Energie Cottbus": {
+   "founded": 1966,
+   "src": "memory"
+  },
+  "FC Ingolstadt 04": {
+   "founded": 2004,
+   "src": "memory"
+  },
+  "Viktoria Köln": {
+   "founded": 1904,
+   "src": "memory"
+  },
+  "TSG Hoffenheim II": {
+   "founded": 1899,
+   "src": "memory",
+   "doubtful": true
+  },
+  "SpVgg Unterhaching": {
+   "founded": 1925,
+   "src": "memory"
+  },
+  "ESTAC Troyes": {
+   "founded": 1986,
+   "src": "memory"
+  },
+  "Clermont Foot": {
+   "founded": 1990,
+   "src": "memory"
+  },
+  "Grenoble Foot": {
+   "founded": 1997,
+   "src": "memory"
+  },
+  "Le Mans FC": {
+   "founded": 1985,
+   "src": "memory"
+  },
+  "FC Annecy": {
+   "founded": 1927,
+   "src": "memory"
+  },
+  "Rodez AF": {
+   "founded": 1929,
+   "src": "memory"
+  },
+  "Paris 13 Atletico": {
+   "founded": 1969,
+   "src": "memory",
+   "doubtful": true
+  },
+  "FC Versailles": {
+   "founded": 1989,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Quevilly-Rouen": {
+   "founded": 1902,
+   "src": "memory"
+  },
+  "Aubagne FC": {
+   "founded": 1924,
+   "src": "memory",
+   "doubtful": true
+  },
+  "FC Fleury 91": {
+   "founded": 1991,
+   "src": "memory"
+  },
+  "Estrela da Amadora": {
+   "founded": 2020,
+   "src": "memory",
+   "note": "Heredero del CF Estrela da Amadora (1932-2011)"
+  },
+  "FC Vizela": {
+   "founded": 1939,
+   "src": "memory"
+  },
+  "FC Felgueiras 1932": {
+   "founded": 2006,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Lusitânia de Lourosa": {
+   "founded": 1924,
+   "src": "memory"
+  },
+  "Gaziantep FK": {
+   "founded": 1988,
+   "src": "memory"
+  },
+  "Erzurumspor": {
+   "founded": 2005,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Çorum FK": {
+   "founded": 1997,
+   "src": "memory"
+  },
+  "Esenler Erokspor": {
+   "founded": 2015,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Iğdır FK": {
+   "founded": 2017,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Bodrum FK": {
+   "founded": 1931,
+   "src": "memory"
+  },
+  "Pendikspor": {
+   "founded": 1950,
+   "src": "memory"
+  },
+  "Hatayspor": {
+   "founded": 1967,
+   "src": "memory"
+  },
+  "Ümraniyespor": {
+   "founded": 1938,
+   "src": "memory"
+  },
+  "Manisa FK": {
+   "founded": 1994,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Vanspor FK": {
+   "founded": 1974,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Serikspor": {
+   "founded": 1948,
+   "src": "memory",
+   "doubtful": true
+  },
+  "FC Sochi": {
+   "founded": 2018,
+   "src": "memory"
+  },
+  "Baltika Kaliningrado": {
+   "founded": 1954,
+   "src": "memory"
+  },
+  "Dinamo Makhachkala": {
+   "founded": 1927,
+   "src": "memory",
+   "doubtful": true
+  },
+  "Sarpsborg 08": {
+   "founded": 2008,
+   "src": "memory"
+  },
+  "KFUM Oslo": {
+   "founded": 1939,
+   "src": "memory"
+  },
+  "IF Brommapojkarna": {
+   "founded": 1942,
+   "src": "memory"
+  },
+  "Mjällby AIF": {
+   "founded": 1939,
+   "src": "memory"
+  },
+  "BK Häcken": {
+   "founded": 1940,
+   "src": "memory"
+  },
+  "Västerås SK": {
+   "founded": 1904,
+   "src": "memory"
+  },
+  "Ross County": {
+   "founded": 1929,
+   "src": "memory"
   }
  }
 }
