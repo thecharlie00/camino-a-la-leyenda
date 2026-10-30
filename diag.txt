@@ -2,20 +2,18 @@
 HTTP 500
 error code: 1101
 
-=== POST diag/v_a_1fila_activa.json (application/json)
-HTTP 400
-{"error":"Career wins total does not match history"}
-=== POST diag/v_b_1fila_cerrada.json (application/json)
-HTTP 400
-{"error":"Career wins total does not match history"}
-=== POST diag/v_c_sin_trofeos.json (application/json)
+=== POST diag/v1_short_clubs.json (application/json)
 HTTP 500
 error code: 1101
 
-=== POST diag/v_d_sin_null.json (application/json)
+=== POST diag/v2_short_pos.json (application/json)
 HTTP 500
 error code: 1101
 
-=== POST diag/v_e_5filas.json (application/json)
+=== POST diag/v3_short_sin_metricas_extra.json (application/json)
+HTTP 500
+error code: 1101
+
+=== POST diag/v4_short_sin_promoted_pos.json (application/json)
 HTTP 400
-{"error":"Career wins total does not match history"}
+{"error":"Invalid promoted"}
