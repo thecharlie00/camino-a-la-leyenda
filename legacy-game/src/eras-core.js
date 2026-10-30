@@ -417,18 +417,23 @@ function eraStartCareer(mode, year, identity) {
   var pack = eraPackForYear(year);
   if (!pack || year < pack.years[0] || year > pack.years[1]) throw new Error("Año fuera del perfil elegido");
   identity = identity || {};
-  var selectedClubName = identity.clubName || (Number.isInteger(identity.club) && W.clubs[identity.club] ? W.clubs[identity.club].n : null);
   buildWorld("m");
+  var selectedClubName = identity.clubName || (Number.isInteger(identity.club) && identity.club >= 0 && W.clubs[identity.club] ? W.clubs[identity.club].n : null);
   var previousStartYear = START_YEAR, previousContext = ERA_CREATE_CONTEXT;
   ERA_CREATE_CONTEXT = {active: true, startYear: year, mode: mode};
   START_YEAR = year;
   try {
+    var common = {fn: identity.firstName || "Alex", ln: identity.lastName || "Leyenda", nat: identity.nat || "ES", ev: identity.ev != null ? +identity.ev : 1, g: "m"};
     if (mode === "manager") {
-      var chosenClub = selectedClubName && W.cName[selectedClubName] != null ? W.cName[selectedClubName] : (W.cName["Manchester United"] != null ? W.cName["Manchester United"] : 0);
-      newManagerCareer({fn: identity.firstName || "Alex", ln: identity.lastName || "Leyenda", nat: identity.nat || "ES", age: 40, diff: 1, ev: 0, club: chosenClub, g: "m"});
+      /* el míster elige su club entre todos los que existían ese año: ya no hay uno impuesto */
+      var chosenClub = selectedClubName && W.cName[selectedClubName] != null ? W.cName[selectedClubName] : -1;
+      if (chosenClub < 0 || !eraClubExists(W.clubs[chosenClub].n, year)) throw new Error("Elige un club que exista en " + year);
+      newManagerCareer(Object.assign(common, {age: identity.age || 40, diff: identity.diff != null ? +identity.diff : 1, club: chosenClub}));
     } else {
-      var playerClub = Number.isInteger(identity.club) && W.clubs[identity.club] ? identity.club : -1;
-      newCareer({fn: identity.firstName || "Alex", ln: identity.lastName || "Leyenda", nat: identity.nat || "ES", pos: identity.position || "DC", foot: identity.foot || "Diestro", age: 18, talent: "promesa", club: playerClub, ev: 0, g: "m"});
+      var playerClub = selectedClubName && W.cName[selectedClubName] != null ? W.cName[selectedClubName] : -1;
+      if (playerClub >= 0 && !eraClubExists(W.clubs[playerClub].n, year)) playerClub = -1;
+      newCareer(Object.assign(common, {nat2: identity.nat2 || null, pos: identity.position || "DC", foot: identity.foot || "Diestro",
+        age: identity.age || 18, talent: identity.talent || "promesa", club: playerClub}));
     }
   } finally {
     START_YEAR = previousStartYear;
@@ -450,6 +455,22 @@ function eraStartWithContext(mode, year, identity) {
   if (window.UIX && window.UIX.render) window.UIX.render(true);
 }
 
+/* Desde el formulario normal de creación (ui.js finishCreate con c.era) */
+function eraStartFromCreateNow(c) {
+  var mode = c.kind === "mgr" ? "manager" : "player";
+  eraStartWithContext(mode, c.era.year, {firstName: (c.fn || "").trim(), lastName: (c.ln || "").trim(), nat: c.nat, nat2: c.nat2 || null,
+    position: c.pos, foot: c.foot, age: c.age, talent: c.talent, ev: c.ev, diff: c.diff,
+    clubName: c.club >= 0 && W.clubs[c.club] ? W.clubs[c.club].n : null});
+}
+/* Antes de la ley Bosman: límite de extranjeros alineados en las ligas UEFA. Un extranjero que no es de los mejores de su
+   equipo juega menos (consecuencia, no prohibición). Valores en el pack (rules.foreignLimit) y fin con Bosman en el timeline. */
+function eraForeignLimitApplies() {
+  if (!eraIsActive() || !S.p || S.p.club < 0) return 0;
+  var rules = eraRulesForYear(S.yr), li = S.cl[S.p.club], lg = li >= 0 ? W.lg[li] : null;
+  if (!rules || !rules.foreignLimit || !lg || lg.conf !== "UEFA") return 0;
+  if (S.p.nat === lg.ci || S.p.nat2 === lg.ci) return 0;
+  return rules.foreignLimit;
+}
 /* Los cambios se evalúan con S.yr en cada operación; no hay un bool global de reglas. */
 (function installEraRules() {
   if (!ERAS_MODE) return;
@@ -475,6 +496,24 @@ function eraStartWithContext(mode, year, identity) {
       return eraWithScope(eraScopeOfFixture(f), function () { return original.apply(self, args); });
     };
   });
+  if (typeof selection === "function") {
+    var oldSelection = selection;
+    selection = function (f, c, tr, or, nat) {
+      var role = oldSelection.apply(this, arguments);
+      if (nat || !eraForeignLimitApplies() || S.p.ovr - S.cr[S.p.club] >= 4) return role;
+      if (role === "start" && chance(0.3)) return "sub";
+      if (role === "sub" && chance(0.3)) return "bench";
+      return role;
+    };
+  }
+  if (typeof randomStartClub === "function") {
+    var oldRandomStart = randomStartClub;
+    randomStartClub = function () {
+      var club = oldRandomStart.apply(this, arguments), year = ERA_CREATE_CONTEXT ? ERA_CREATE_CONTEXT.startYear : S && S.yr;
+      for (var tries = 0; tries < 25 && eraContextForYear(year) && club >= 0 && !eraClubExists(W.clubs[club].n, year); tries++) club = oldRandomStart.apply(this, arguments);
+      return club;
+    };
+  }
   if (typeof extraTime === "function") {
     var oldExtraTime = extraTime;
     extraTime = function () {

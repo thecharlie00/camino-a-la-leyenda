@@ -143,6 +143,93 @@
   "KOR1": {
    "since": 1983,
    "src": "memory"
+  },
+  "ENG2": {
+   "names": [
+    [
+     1892,
+     "Football League Second Division"
+    ],
+    [
+     1992,
+     "Football League First Division"
+    ],
+    [
+     2004,
+     "EFL Championship"
+    ]
+   ],
+   "src": "memory"
+  },
+  "ENG3": {
+   "names": [
+    [
+     1958,
+     "Football League Third Division"
+    ],
+    [
+     1992,
+     "Football League Second Division"
+    ],
+    [
+     2004,
+     "EFL League One"
+    ]
+   ],
+   "src": "memory"
+  },
+  "ENG4": {
+   "names": [
+    [
+     1958,
+     "Football League Fourth Division"
+    ],
+    [
+     1992,
+     "Football League Third Division"
+    ],
+    [
+     2004,
+     "EFL League Two"
+    ]
+   ],
+   "src": "memory"
+  },
+  "ESP2": {
+   "names": [
+    [
+     1929,
+     "Segunda División"
+    ],
+    [
+     2016,
+     "LaLiga Hypermotion"
+    ]
+   ],
+   "src": "memory",
+   "doubtful": true
+  },
+  "FRA2": {
+   "names": [
+    [
+     1933,
+     "Division 2"
+    ],
+    [
+     2002,
+     "Ligue 2"
+    ]
+   ],
+   "src": "memory"
+  },
+  "GER2": {
+   "since": 1974,
+   "src": "memory",
+   "note": "2. Bundesliga desde 1974 (regional hasta 1981)"
+  },
+  "GER3": {
+   "since": 2008,
+   "src": "memory"
   }
  },
  "clubs": {
@@ -959,6 +1046,10 @@
      "JEF United Chiba"
     ]
    ]
+  },
+  "Unionistas de Salamanca CF": {
+   "founded": 2013,
+   "src": "memory"
   }
  }
 }

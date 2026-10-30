@@ -28,7 +28,8 @@
   "compressedCovidCalendar": false,
   "recopaActive": false,
   "premierLeague": false,
-  "championsLeagueBrand": true
+  "championsLeagueBrand": true,
+  "foreignLimit": null
  },
  "media": {
   "channels": [

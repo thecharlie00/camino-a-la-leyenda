@@ -369,6 +369,24 @@ assert.ok(context.S.p.ovr - growthBeforeDecision > 9.1, 'the era decision traini
 assert.equal(memory.get('camino.slots'), '["modern-slot"]', 'player-era decisions must not alter the modern save index');
 
 
+
+/* inicio libre: el míster no tiene club impuesto y solo puede elegir clubes que existieran ese año */
+context.buildWorld = () => { context.W.clubs = [{n: 'Arsenal'}, {n: 'RB Leipzig'}]; context.W.cName = {Arsenal: 0, 'RB Leipzig': 1}; };
+assert.throws(() => context.eraStartCareer('manager', 1992, {firstName: 'No', lastName: 'Club'}), /Elige un club/, 'a manager career needs an explicit club; Manchester United is no longer imposed');
+assert.throws(() => context.eraStartCareer('manager', 1995, {firstName: 'Red', lastName: 'Bull', clubName: 'RB Leipzig'}), /Elige un club/, 'a club founded later cannot be chosen');
+context.eraStartCareer('manager', 1995, {firstName: 'Gun', lastName: 'Ner', clubName: 'Arsenal', diff: 2, age: 35});
+assert.equal(context.lastManagerOptions.club, 0);
+assert.equal(context.lastManagerOptions.diff, 2, 'the difficulty chosen in the standard form is kept');
+assert.equal(context.lastManagerOptions.age, 35, 'the age chosen in the standard form is kept');
+/* límite de extranjeros antes de Bosman: consecuencia en la selección, no prohibición */
+context.W.lg = [{id: 'ENG1', conf: 'UEFA', ci: 2}];
+context.S = {yr: 1985, era: {active: true}, mode: 'p', cl: [0], cr: [80], p: {club: 0, nat: 7, nat2: -1, ovr: 70}};
+assert.equal(context.eraForeignLimitApplies(), 3, 'a foreign player in an English club in 1985 is under the foreign-player limit');
+context.S.p.nat = 2;
+assert.equal(context.eraForeignLimitApplies(), 0, 'a local player is not affected');
+context.S.p.nat = 7; context.S.yr = 1996;
+assert.equal(context.eraForeignLimitApplies(), 0, 'the limit ends with the Bosman ruling');
+context.W.lg = [{id: 'ENG1'}, {id: 'ESP1'}];
 /* historia de clubes y ligas: existencia y nombres de época */
 assert.equal(context.eraClubExists('RB Leipzig', 2008), false, 'RB Leipzig did not exist before 2009');
 assert.equal(context.eraClubExists('RB Leipzig', 2009), true);

@@ -109,8 +109,27 @@ try {
   assert.equal(window.document.querySelectorAll('[data-era-field="pack"] option').length, 6);
   assert.equal(window.document.querySelectorAll('[data-era-field="year"] option').length, 10);
   click('[data-era-act="start"]');
+  /* Épocas usa el formulario normal de creación: nacionalidad, posición, pie, edad, talento y club libre */
+  assert.equal(window.UIX.ui().view, 'create', 'Era Mode must open the standard creation form');
+  assert.equal(window.UIX.ui().cr.era.year, 1992);
+  for (const [selector, value] of [['#fn', 'Era'], ['#ln', 'Smoke']]) {
+    const input = window.document.querySelector(selector);
+    input.value = value;
+    input.dispatchEvent(new window.Event('input', {bubbles: true}));
+  }
+  click('[data-a="cnext"]');
+  click('[data-a="cnext"]');
+  click('[data-a="cnext"]');
+  click('[data-a="cset"][data-k="mode"][data-v="pick"]');
+  const eraLeagues = [...window.document.querySelectorAll('#clg option')].map((option) => option.textContent);
+  assert.ok(!eraLeagues.some((name) => /MLS/.test(name)), 'leagues that did not exist yet (MLS, 1996) are not offered in 1992');
+  click('[data-a="cclub"]');
+  assert.ok(window.document.querySelector('.eras-clubcard'), 'the chosen club shows its period profile');
+  click('[data-a="cnext"]');
+  await new Promise((resolve) => setTimeout(resolve, 50));
   assert.equal(window.S.era.active, true);
   assert.equal(window.S.yr, 1992);
+  assert.ok(window.S.p.club >= 0, 'the player starts at the club picked in the form');
   assert.equal(window.EraStore.save(), true);
   assert.equal(window.localStorage.getItem('camino.slots'), '[]', 'Era saves must not touch modern saves');
   assert.ok(window.localStorage.getItem('camino.eras.v1.index'));

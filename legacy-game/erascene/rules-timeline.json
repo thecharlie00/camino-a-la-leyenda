@@ -9,6 +9,24 @@
  ],
  "events": [
   {
+   "year": 1970,
+   "id": "foreign-player-limits",
+   "scope": {
+    "type": "confederation",
+    "confederations": [
+     "UEFA"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "foreignLimit": 3
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Bosman_ruling",
+   "doubtful": true,
+   "note": "El límite exacto variaba por país y año (p. ej. Italia cerró la puerta a extranjeros de 1966 a 1980; la UEFA fijó la regla 3+2 en 1991). Se usa 3 como valor común."
+  },
+  {
    "year": 1981,
    "id": "three-points-england",
    "scope": {
@@ -216,7 +234,8 @@
    },
    "changes": {
     "rules": {
-     "bosmanFreeAgency": true
+     "bosmanFreeAgency": true,
+     "foreignLimit": null
     }
    },
    "source": "https://en.wikipedia.org/wiki/Bosman_ruling"

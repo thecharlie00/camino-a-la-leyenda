@@ -1499,6 +1499,13 @@
     var list = W.ctry.map(function (c, i) { return i; }).filter(natLive).sort(function (a, b) { return natName(a).localeCompare(natName(b), LANG); });
     return (allowNone ? '<option value="">' + tr("Ninguna") + "</option>" : "") + list.map(function (i) { var c = W.ctry[i]; return '<option value="' + c.code + '"' + (c.code === sel ? " selected" : "") + ">" + c.flag + " " + h(natName(i)) + "</option>"; }).join("");
   }
+  /* Modo Épocas: el mismo formulario de creación, con los clubes y ligas que existían ese año y su nombre de época */
+  function crEra() { return UI.cr && UI.cr.era && typeof eraClubExists === "function" ? UI.cr.era : null; }
+  function crClubOk(ci) { var e = crEra(); return !e || eraClubExists(W.clubs[ci].n, e.year); }
+  function crLgOk(i) { var e = crEra(); return !e || (eraLeagueExists(W.lg[i].id, e.year) && W.lg[i].cl0.some(crClubOk)); }
+  function crClub(ci) { var e = crEra(); return e ? eraClubName(W.clubs[ci].n, e.year) : W.clubs[ci].n; }
+  function crLg(i) { var e = crEra(); return e ? eraLeagueName(W.lg[i].id, lgName(i), e.year) : lgName(i); }
+  function crOffers(list) { return crEra() ? list.filter(crClubOk) : list; }
   function createPlayerView() {
     var c = UI.cr, st = c.step, s = '<main id="main"><div class="stack"><div class="steps">' + [0, 1, 2, 3].map(function (i) { return '<i class="' + (i <= st ? "on" : "") + '"></i>'; }).join("") + "</div>";
     if (st === 0) {
@@ -1525,28 +1532,30 @@
       s += '<div class="seg"><button data-a="cset" data-k="mode" data-v="rand" aria-pressed="' + (c.mode === "rand") + '">' + tr("Cantera de mi país") + '</button><button data-a="cset" data-k="mode" data-v="pick" aria-pressed="' + (c.mode === "pick") + '">' + tr("Elegir club") + "</button></div>";
       if (c.mode === "rand") {
         var pb = (TALENT[c.talent].ovr || 59) + ({16: -3, 17: -1.5, 18: 0, 19: 1.5}[c.age] || 0);
-        if (!c.offers || c.offKey !== c.nat) { c.offers = startOffersPlayer(c.nat, pb); c.offKey = c.nat; if (c.offers.indexOf(c.club) < 0) c.club = -1; }
+        if (!c.offers || c.offKey !== c.nat) { c.offers = crOffers(startOffersPlayer(c.nat, pb)); c.offKey = c.nat; if (c.offers.indexOf(c.club) < 0) c.club = -1; }
         s += '<p class="lead">' + tr("Tres clubes modestos quieren subirte de la cantera. Elige dónde debutar.") + '</p><div class="list">' + offerRows(c, pb) + "</div>";
         s += '<button class="btn wide" data-a="reoffer">' + tr("Buscar otras ofertas") + "</button>";
       }
+      else if (c.mode === "none") { /* Épocas: sin elegir club; lo explica UIX.eraCreateExtra */ }
       else {
-        if (c.lg == null) c.lg = (W.byCountry[W.cIdx[c.nat]] || [W.lgIdx.ESP1])[0];
+        if (c.lg == null || !crLgOk(+c.lg)) c.lg = ((W.byCountry[W.cIdx[c.nat]] || []).filter(crLgOk)[0]) != null ? (W.byCountry[W.cIdx[c.nat]] || []).filter(crLgOk)[0] : W.lg.map(function (l, i) { return i; }).filter(crLgOk)[0];
         s += '<div><label class="lbl" for="clg">' + tr("Liga") + '</label><select id="clg" data-f="lg">';
         W.confs.forEach(function (cf) {
-          var ls = W.lg.map(function (l, i) { return i; }).filter(function (i) { return W.lg[i].conf === cf; });
-          if (ls.length) s += '<optgroup label="' + h(tr(cf)) + '">' + ls.map(function (i) { return '<option value="' + i + '"' + (i === +c.lg ? " selected" : "") + ">" + W.ctry[W.lg[i].ci].flag + " " + h(lgName(i)) + "</option>"; }).join("") + "</optgroup>";
+          var ls = W.lg.map(function (l, i) { return i; }).filter(function (i) { return W.lg[i].conf === cf && crLgOk(i); });
+          if (ls.length) s += '<optgroup label="' + h(tr(cf)) + '">' + ls.map(function (i) { return '<option value="' + i + '"' + (i === +c.lg ? " selected" : "") + ">" + W.ctry[W.lg[i].ci].flag + " " + h(crLg(i)) + "</option>"; }).join("") + "</optgroup>";
         });
         s += '</select></div><div class="list">';
         var base = TALENT[c.talent].ovr || 59;
         base += {16: -3, 17: -1.5, 18: 0, 19: 1.5}[c.age] || 0;
-        W.lg[+c.lg].cl0.forEach(function (ci) {
+        W.lg[+c.lg].cl0.filter(crClubOk).forEach(function (ci) {
           var r = W.clubs[ci].r0, role = roleFor(base - r, c.age);
-          s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + tr("Rol esperado: {role}", {role: h(tr(role))}) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
+          s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(crClub(ci)) + "</b><small>" + tr("Rol esperado: {role}", {role: h(tr(role))}) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
         });
         s += '</div><p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Un grande te da prestigio, pero quizá no minutos. Un club pequeño, el escaparate para crecer.") + "</p>";
       }
     }
-    var canNext = st === 0 ? (c.fn.trim() && c.ln.trim()) : st === 3 ? c.club >= 0 : true;
+    if (st === 3 && crEra() && UIX.eraCreateExtra) s += UIX.eraCreateExtra(c);
+    var canNext = st === 0 ? (c.fn.trim() && c.ln.trim()) : st === 3 ? (c.club >= 0 || (crEra() && c.mode === "none")) : true;
     s += '<div class="row2" style="margin-top:6px"><button class="btn wide" data-a="cback">' + (st === 0 ? tr("Cancelar") : tr("Atrás")) + '</button><button class="btn pri wide" data-a="cnext"' + (canNext ? "" : " disabled") + ">" + (st === 3 ? tr("Empezar carrera") : tr("Siguiente")) + "</button></div>";
     if (st === 0 && !canNext) s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
     return s + "</div></main>";
@@ -1580,19 +1589,19 @@
     return s;
   }
   function leagueField(c) {
-    if (c.lg == null) c.lg = (W.byCountry[W.cIdx[c.nat]] || [W.lgIdx.ESP1])[0];
+    if (c.lg == null || !crLgOk(+c.lg)) c.lg = ((W.byCountry[W.cIdx[c.nat]] || []).filter(crLgOk)[0]) != null ? (W.byCountry[W.cIdx[c.nat]] || []).filter(crLgOk)[0] : W.lg.map(function (l, i) { return i; }).filter(crLgOk)[0];
     var s = '<div><label class="lbl" for="clg">' + tr("Liga") + '</label><select id="clg" data-f="lg">';
     W.confs.forEach(function (cf) {
-      var ls = W.lg.map(function (l, i) { return i; }).filter(function (i) { return W.lg[i].conf === cf; });
-      if (ls.length) s += '<optgroup label="' + cf + '">' + ls.map(function (i) { return '<option value="' + i + '"' + (i === +c.lg ? " selected" : "") + ">" + W.ctry[W.lg[i].ci].flag + " " + h(lgName(i)) + "</option>"; }).join("") + "</optgroup>";
+      var ls = W.lg.map(function (l, i) { return i; }).filter(function (i) { return W.lg[i].conf === cf && crLgOk(i); });
+      if (ls.length) s += '<optgroup label="' + cf + '">' + ls.map(function (i) { return '<option value="' + i + '"' + (i === +c.lg ? " selected" : "") + ">" + W.ctry[W.lg[i].ci].flag + " " + h(crLg(i)) + "</option>"; }).join("") + "</optgroup>";
     });
     return s + "</select></div>";
   }
   /* tarjetas de oferta para empezar (jugador: rol esperado; míster: liga y nivel) */
   function offerRows(c, base) {
     return c.offers.map(function (ci) {
-      var cl = W.clubs[ci], li = cl.lg0, sub = base != null ? tr("{lg} · rol esperado: {role}", {lg: h(lgName(li)), role: h(tr(roleFor(base - cl.r0, c.age)))}) : flag(cl.ci) + " " + h(lgName(li));
-      return '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(cl.n) + "</b><small>" + sub + '</small></div><span class="lvl">' + Math.round(cl.r0) + "</span></button>";
+      var cl = W.clubs[ci], li = cl.lg0, sub = base != null ? tr("{lg} · rol esperado: {role}", {lg: h(crLg(li)), role: h(tr(roleFor(base - cl.r0, c.age)))}) : flag(cl.ci) + " " + h(crLg(li));
+      return '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(crClub(ci)) + "</b><small>" + sub + '</small></div><span class="lvl">' + Math.round(cl.r0) + "</span></button>";
     }).join("");
   }
   function createMgrView() {
@@ -1601,10 +1610,10 @@
     else if (st === 1) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_M); }
     else {
       s += stepHead(st, n, tr("Tu banquillo"));
-      s += '<div class="seg"><button data-a="cset" data-k="mmode" data-v="off" aria-pressed="' + (c.mmode === "off") + '">' + tr("Empezar desde abajo") + '</button><button data-a="cset" data-k="mmode" data-v="pick" aria-pressed="' + (c.mmode === "pick") + '">' + tr("Elegir club") + '</button>' + (typeof CHAL !== "undefined" ? '<button data-a="cset" data-k="mmode" data-v="chal" aria-pressed="' + (c.mmode === "chal") + '">' + tr("Desafío") + "</button>" : "") + "</div>";
+      s += '<div class="seg"><button data-a="cset" data-k="mmode" data-v="off" aria-pressed="' + (c.mmode === "off") + '">' + tr("Empezar desde abajo") + '</button><button data-a="cset" data-k="mmode" data-v="pick" aria-pressed="' + (c.mmode === "pick") + '">' + tr("Elegir club") + '</button>' + (typeof CHAL !== "undefined" && !crEra() ? '<button data-a="cset" data-k="mmode" data-v="chal" aria-pressed="' + (c.mmode === "chal") + '">' + tr("Desafío") + "</button>" : "") + "</div>";
       if (c.mmode === "chal" && UIX.chalCreate) s += UIX.chalCreate(c);
       if (c.mmode === "off") {
-        if (!c.offers) { c.offers = startOffersMgr(); if (c.offers.indexOf(c.club) < 0) c.club = -1; }
+        if (!c.offers) { c.offers = crOffers(startOffersMgr()); if (c.offers.indexOf(c.club) < 0) c.club = -1; }
         s += '<p class="lead">' + tr("Tres clubes de ligas menos potentes te ofrecen su banquillo. Gana allí y llamarán los grandes.") + '</p><div class="list">' + offerRows(c, null) + "</div>";
         s += '<button class="btn wide" data-a="reoffer">' + tr("Buscar otras ofertas") + "</button>";
       }
@@ -1612,12 +1621,13 @@
     if (st === 2 && c.mmode === "pick") {
       s += leagueField(c) + '<div class="list">';
       var maxR = 61 + DIFF_REP[c.diff] * 0.32;
-      W.lg[+c.lg].cl0.slice().sort(function (a, b) { return W.clubs[b].r0 - W.clubs[a].r0; }).forEach(function (ci) {
+      W.lg[+c.lg].cl0.filter(crClubOk).sort(function (a, b) { return W.clubs[b].r0 - W.clubs[a].r0; }).forEach(function (ci) {
         var r = W.clubs[ci].r0, big = r > maxR + 2;
-        s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + (big ? tr("Un grande: la afición no tendrá paciencia") : tr("Nivel adecuado para empezar")) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
+        s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(crClub(ci)) + "</b><small>" + (big ? tr("Un grande: la afición no tendrá paciencia") : tr("Nivel adecuado para empezar")) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
       });
       s += '</div><p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Puedes empezar en cualquier club. Si ganas, llegarán ofertas de clubes más grandes.") + "</p>";
     }
+    if (st === 2 && crEra() && UIX.eraCreateExtra) s += UIX.eraCreateExtra(c);
     var canNext = st === 0 ? !!(c.fn.trim() && c.ln.trim()) : st === 2 ? c.club >= 0 : true;
     s += navRow(st, n, canNext, tr("Empezar"));
     if (st === 0 && !canNext) s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
@@ -1679,8 +1689,14 @@
     if (c.kind === "club") Object.assign(c, {cn: "", ab: "", col: ["#c8102e", "#ffffff"], lg: W.lgIdx.ESP1, crest: {shape: "shield", pat: "band"}, kit: {pat: "plain", col3: "#ffffff"}});
     UI.cr = c; UI.view = "create"; render(true);
   }
+  /* Épocas: abre el formulario normal con el año elegido; al terminar crea la carrera histórica */
+  UIX.startCreate = function (kind, extra) { startCreate(kind); Object.assign(UI.cr, extra || {}); if (UI.cr.era) { UI.cr.club = -1; UI.cr.offers = null; UI.cr.lg = null; } render(true); };
   function finishCreate() {
     var c = UI.cr;
+    if (c.era && typeof eraStartFromCreate === "function") {
+      try { eraStartFromCreate(c); } catch (e) { console.error(e); toast(tr("No se pudo crear la partida.")); }
+      return;
+    }
     switchGame(function () {
       try {
         if (c.kind === "mgr") newManagerCareer({quick: !!c.quick, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, club: c.club, g: c.g, chal: c.mmode === "chal" ? c.chal : null});

@@ -20,11 +20,7 @@
       document.head.appendChild(style);
     }
   }
-  function clubOptions(pack) {
-    var available = {};
-    (DATA.leagues || []).forEach(function (league) { String(league.clubs || "").split("|").forEach(function (name) { if (name) available[name] = true; }); });
-    return (pack.referenceClubs || []).filter(function (name) { return !!available[name]; }).map(function (name) { return {id: name, name: name}; });
-  }
+
   function profileSummary(p) {
     var rules = p.rules, media = p.media, presentation = p.presentation, economy = p.economy;
     var social = media.socialMedia ? t("Redes disponibles") : t("Sin redes sociales");
@@ -66,20 +62,15 @@
     var pack = selectedPack(), years = [];
     for (var y = pack.years[0]; y <= pack.years[1]; y++) years.push(y);
     if (years.indexOf(state.year) < 0) state.year = pack.startYear;
-    var clubList = clubOptions(pack);
-    if (state.mode === "manager") {
-      if (!clubList.some(function (club) { return club.id === state.club; })) state.club = clubList.length ? clubList[0].id : "Manchester United";
-    } else state.club = "";
-    var clubs = state.mode === "manager" ? '<div class="eras-field"><label for="era-club">' + t("Club") + '</label><select id="era-club" data-era-field="club">' + clubList.map(function (club) { return '<option value="' + club.id + '"' + (club.id === state.club ? ' selected' : '') + '>' + eraEscape(club.name) + '</option>'; }).join("") + '</select></div>' : '';
     layer.setAttribute("data-era-decade", pack.id);
     layer.setAttribute("data-era-year", state.year);
     var cover = '<div class="eras-cover" aria-hidden="true"><span class="eras-cover-decade">' + eraEscape(pack.label) + '</span><span class="eras-cover-years">' + pack.years[0] + ' — ' + pack.years[1] + '</span><span class="eras-cover-stamp">' + state.year + '</span></div>';
     layer.innerHTML = '<section class="eras-dialog" data-era-decade="' + eraEscape(pack.id) + '" role="dialog" aria-modal="true" aria-labelledby="eras-title">' + cover + '<div class="eras-kicker">' + t("Modo aislado · guardados separados") + '</div><h2 id="eras-title">' + t("Modo Épocas") + '</h2><p class="eras-lead">' + t("Empieza una carrera en otro momento de la historia. La partida moderna y sus guardados no se modifican.") + '</p>' +
       '<div class="eras-grid"><div class="eras-field"><label for="era-decade">' + t("Década de inicio") + '</label><select id="era-decade" data-era-field="pack">' + packs().map(function (item) { return '<option value="' + item.id + '"' + (item.id === pack.id ? ' selected' : '') + '>' + eraEscape(item.label) + '</option>'; }).join("") + '</select></div>' +
       '<div class="eras-field"><label for="era-year">' + t("Año exacto") + '</label><select id="era-year" data-era-field="year">' + years.map(function (n) { return '<option value="' + n + '"' + (n === state.year ? ' selected' : '') + '>' + n + '</option>'; }).join("") + '</select></div>' +
-      '<div class="eras-field"><label for="era-mode">' + t("Tipo de carrera") + '</label><select id="era-mode" data-era-field="mode"><option value="player"' + (state.mode === "player" ? ' selected' : '') + '>' + t("Carrera de jugador") + '</option><option value="manager"' + (state.mode === "manager" ? ' selected' : '') + '>' + t("Carrera de míster") + '</option></select></div>' + clubs +
-      '<div class="eras-field"><label for="era-first">' + t("Nombre") + '</label><input id="era-first" data-era-field="firstName" maxlength="18" value="' + eraEscape(state.firstName) + '"></div><div class="eras-field"><label for="era-last">' + t("Apellido") + '</label><input id="era-last" data-era-field="lastName" maxlength="24" value="' + eraEscape(state.lastName) + '"></div></div>' +
-      profileSummary(profile(state.year)) + '<div class="eras-actions"><button type="button" class="primary" data-era-act="start">' + t("Empezar en {year}", {year: state.year}) + '</button><button type="button" data-era-act="close">' + t("Volver") + '</button></div>' +
+      '<div class="eras-field"><label for="era-mode">' + t("Tipo de carrera") + '</label><select id="era-mode" data-era-field="mode"><option value="player"' + (state.mode === "player" ? ' selected' : '') + '>' + t("Carrera de jugador") + '</option><option value="manager"' + (state.mode === "manager" ? ' selected' : '') + '>' + t("Carrera de míster") + '</option></select></div>' +
+      '</div>' +
+      profileSummary(profile(state.year)) + '<div class="eras-actions"><button type="button" class="primary" data-era-act="start">' + t("Elegir club y empezar en {year}", {year: state.year}) + '</button><button type="button" data-era-act="close">' + t("Volver") + '</button></div>' +
       '<h3 style="margin-top:20px">' + t("Tus carreras históricas") + '</h3><div class="eras-saves">' + savedRows() + '</div></section>';
   }
   function open() {
@@ -102,20 +93,53 @@
     layer.setAttribute("data-era-year", S.yr);
     layer.innerHTML = '<section class="eras-dialog" data-era-decade="' + eraEscape(pack.id) + '" role="dialog" aria-modal="true" aria-labelledby="eras-current-title"><div class="eras-kicker">' + eraEscape(S.era.startDecade) + '</div><h2 id="eras-current-title">' + t("Reglas en {year}", {year: S.yr}) + '</h2>' + details + recentDecisions() + '<div class="eras-actions"><button type="button" data-era-act="close">' + t("Volver") + '</button></div></section>';
   }
+  /* Ficha de época del club elegido y opciones propias de Épocas dentro del formulario de creación */
+  function rivalOf(ci) {
+    var best = -1;
+    Object.keys(W.derby || {}).forEach(function (key) {
+      var pair = key.split("-").map(Number);
+      if (pair[0] === ci && pair[1] !== ci) best = best < 0 ? pair[1] : best;
+      else if (pair[1] === ci && pair[0] !== ci) best = best < 0 ? pair[0] : best;
+    });
+    return best;
+  }
+  window.UIX.eraCreateExtra = function (c) {
+    var year = c.era.year, out = "";
+    if (c.kind !== "mgr") out += '<button class="btn wide" data-a="cset" data-k="mode" data-v="none" aria-pressed="' + (c.mode === "none") + '">' + t("Sin elegir club (cantera al azar)") + "</button>" +
+      (c.mode === "none" ? '<p class="lead">' + t("Debutarás en un club de tu país que existiera en {year}, elegido al azar.", {year: year}) + "</p>" : "");
+    if (c.club < 0 || !W.clubs[c.club]) return out;
+    var club = W.clubs[c.club], li = club.lg0, lg = W.lg[li], hist = (ERAS_DATA.clubsHistory.clubs || {})[club.n];
+    var name = eraClubName(club.n, year), league = eraLeagueName(lg.id, lg.n, year), rival = rivalOf(c.club);
+    var ranked = lg.cl0.filter(function (ci) { return eraClubExists(W.clubs[ci].n, year); }).sort(function (a, b) { return W.clubs[b].r0 - W.clubs[a].r0; });
+    var pos = ranked.indexOf(c.club) + 1, size = pos <= Math.max(1, Math.round(ranked.length / 5)) ? t("uno de los grandes de su liga") : pos > ranked.length * 0.6 ? t("un club modesto de su liga") : t("un club de mitad de tabla");
+    var lines = [t("En {year} es {size}: nivel {n}, puesto {p} de {t} por fuerza.", {year: year, size: size, n: Math.round(club.r0), p: pos, t: ranked.length})];
+    if (hist && hist.names && name !== club.n) lines.push(t("Hoy se llama {now}.", {now: club.n}));
+    if (hist && hist.doubtful) lines.push(t("Datos históricos de este club pendientes de verificar."));
+    if (rival >= 0 && eraClubExists(W.clubs[rival].n, year)) lines.push(t("Rival histórico: {rival}.", {rival: eraClubName(W.clubs[rival].n, year)}));
+    if (c.kind !== "mgr") {
+      var prof = eraProfileForYear(year, {league: lg.id, conf: lg.conf}), rules = prof && prof.rules, nat = W.cIdx[c.nat], nat2 = c.nat2 ? W.cIdx[c.nat2] : -1;
+      if (rules && rules.foreignLimit && lg.conf === "UEFA" && nat !== lg.ci && nat2 !== lg.ci)
+        lines.push(t("Antes de la ley Bosman los clubes solo alinean {n} extranjeros: si no eres de los mejores del equipo, jugarás menos.", {n: rules.foreignLimit}));
+    }
+    var colors = (club.col || []).slice(0, 2).map(function (col) { return '<i style="display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid rgba(255,255,255,.3);background:' + eraEscape(col) + '"></i>'; }).join(" ");
+    return out + '<section class="card eras-clubcard"><span class="eyebrow">' + t("Ficha de {year}", {year: year}) + '</span><h3 style="margin:4px 0">' + eraEscape(name) + " " + colors + '</h3><small class="muted">' + eraEscape(league) + "</small>" +
+      lines.map(function (line) { return '<p class="lead" style="margin:6px 0 0">' + eraEscape(line) + "</p>"; }).join("") + "</section>";
+  };
+  /* El inicio usa el formulario normal de creación (nacionalidad, posición, pie, edad, talento y cualquier club que existiera ese año). */
   function start() {
     var pack = selectedPack();
-    if (state.starting || !pack || state.year < pack.years[0] || state.year > pack.years[1]) return;
+    if (!pack || state.year < pack.years[0] || state.year > pack.years[1]) return;
+    var year = state.year, mode = state.mode;
+    close();
+    window.UIX.startCreate(mode === "manager" ? "mgr" : "p", {era: {year: year, packId: pack.id}});
+  }
+  /* Al terminar el formulario: guarda la partida abierta (moderna o de Épocas) y crea la carrera histórica */
+  window.eraStartFromCreate = function (c) {
     function begin() {
-      if (!state.open) { state.starting = false; return; }
-      try {
-        state.starting = false;
-        eraStartWithContext(state.mode, state.year, {firstName: state.firstName.trim() || "Alex", lastName: state.lastName.trim() || "Leyenda", club: -1, clubName: state.mode === "manager" ? state.club : null, nat: "ES"});
-        close();
-      } catch (e) { fail(e); }
+      try { eraStartFromCreateNow(c); } catch (e) { fail(e); }
     }
     function fail(error) {
-      state.starting = false; console.error(error);
-      if (state.open) renderDialog();
+      console.error(error);
       if (window.UIX.toast) window.UIX.toast(t("No se pudo iniciar la carrera de Épocas."));
     }
     try {
@@ -123,17 +147,11 @@
       if (S && window.UIX.persist) {
         window.UIX.persist();
         var store = window.UIX.store, flushed = store && typeof store.flush === "function" ? store.flush() : null;
-        if (flushed && typeof flushed.then === "function") {
-          state.starting = true;
-          var button = layer && layer.querySelector('[data-era-act="start"]');
-          if (button) { button.disabled = true; button.setAttribute("aria-busy", "true"); }
-          flushed.then(begin).catch(fail);
-          return;
-        }
+        if (flushed && typeof flushed.then === "function") { flushed.then(begin).catch(fail); return; }
       }
       begin();
     } catch (e) { fail(e); }
-  }
+  };
   function load(id) {
     if (state.loading) return;
     function applyLoad() {

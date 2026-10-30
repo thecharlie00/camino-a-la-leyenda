@@ -1324,5 +1324,77 @@
   "de": "Die Regeln ändern sich je nach Liga und Wettbewerb: Dies sind die allgemeinen Regeln für {year}.",
   "it": "Le regole cambiano in base al campionato e alla competizione: queste sono quelle generali del {year}.",
   "fr": "Les règles changent selon le championnat et la compétition : voici les règles générales de {year}."
+ },
+ "Elegir club y empezar en {year}": {
+  "en": "Choose a club and start in {year}",
+  "de": "Verein wählen und {year} beginnen",
+  "it": "Scegli un club e inizia nel {year}",
+  "fr": "Choisir un club et commencer en {year}"
+ },
+ "Sin elegir club (cantera al azar)": {
+  "en": "No club choice (random academy)",
+  "de": "Ohne Vereinswahl (zufällige Jugend)",
+  "it": "Senza scegliere il club (vivaio a caso)",
+  "fr": "Sans choisir de club (centre de formation au hasard)"
+ },
+ "Debutarás en un club de tu país que existiera en {year}, elegido al azar.": {
+  "en": "You will debut at a random club from your country that existed in {year}.",
+  "de": "Du debütierst bei einem zufälligen Verein deines Landes, den es {year} gab.",
+  "it": "Esordirai in un club del tuo paese che esisteva nel {year}, scelto a caso.",
+  "fr": "Tu débuteras dans un club de ton pays qui existait en {year}, choisi au hasard."
+ },
+ "uno de los grandes de su liga": {
+  "en": "one of the giants of its league",
+  "de": "einer der Großen seiner Liga",
+  "it": "una delle grandi del suo campionato",
+  "fr": "l'un des grands de son championnat"
+ },
+ "un club modesto de su liga": {
+  "en": "a modest club in its league",
+  "de": "ein bescheidener Verein seiner Liga",
+  "it": "un club modesto del suo campionato",
+  "fr": "un club modeste de son championnat"
+ },
+ "un club de mitad de tabla": {
+  "en": "a mid-table club",
+  "de": "ein Mittelfeldverein",
+  "it": "un club di metà classifica",
+  "fr": "un club de milieu de tableau"
+ },
+ "En {year} es {size}: nivel {n}, puesto {p} de {t} por fuerza.": {
+  "en": "In {year} it is {size}: level {n}, ranked {p} of {t} by strength.",
+  "de": "{year} ist er {size}: Stufe {n}, Platz {p} von {t} nach Stärke.",
+  "it": "Nel {year} è {size}: livello {n}, {p}° su {t} per forza.",
+  "fr": "En {year}, c'est {size} : niveau {n}, {p}e sur {t} en force."
+ },
+ "Hoy se llama {now}.": {
+  "en": "Today it is called {now}.",
+  "de": "Heute heißt er {now}.",
+  "it": "Oggi si chiama {now}.",
+  "fr": "Aujourd'hui, il s'appelle {now}."
+ },
+ "Datos históricos de este club pendientes de verificar.": {
+  "en": "This club's historical data is still to be verified.",
+  "de": "Die historischen Daten dieses Vereins sind noch zu prüfen.",
+  "it": "I dati storici di questo club sono ancora da verificare.",
+  "fr": "Les données historiques de ce club restent à vérifier."
+ },
+ "Rival histórico: {rival}.": {
+  "en": "Historic rival: {rival}.",
+  "de": "Historischer Rivale: {rival}.",
+  "it": "Rivale storico: {rival}.",
+  "fr": "Rival historique : {rival}."
+ },
+ "Antes de la ley Bosman los clubes solo alinean {n} extranjeros: si no eres de los mejores del equipo, jugarás menos.": {
+  "en": "Before the Bosman ruling clubs can only field {n} foreigners: unless you are one of the team's best, you will play less.",
+  "de": "Vor dem Bosman-Urteil dürfen Vereine nur {n} Ausländer aufstellen: Wenn du nicht zu den Besten gehörst, spielst du weniger.",
+  "it": "Prima della sentenza Bosman i club schierano solo {n} stranieri: se non sei tra i migliori della squadra, giocherai meno.",
+  "fr": "Avant l'arrêt Bosman, les clubs ne peuvent aligner que {n} étrangers : si tu n'es pas parmi les meilleurs de l'équipe, tu joueras moins."
+ },
+ "Ficha de {year}": {
+  "en": "{year} profile",
+  "de": "Steckbrief {year}",
+  "it": "Scheda {year}",
+  "fr": "Fiche {year}"
  }
 }

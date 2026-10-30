@@ -124,7 +124,7 @@ for key, locales in ERAS_I18N.items():
         if source_tokens != translated_tokens:
             raise ValueError(f"Era translation placeholders do not match for {key!r} ({language})")
 ERA_RULE_KEYS = {"winPoints", "backPassBanned", "transferWindows", "maxSubs", "var", "goldenGoal", "silverGoal", "goalLineTech",
-                 "offsideLevelOnside", "goalkeeperSub", "awayGoals", "tackleFromBehindRed", "fixedShirtNumbers", "goalkeeperSeconds"}
+                 "offsideLevelOnside", "goalkeeperSub", "awayGoals", "tackleFromBehindRed", "fixedShirtNumbers", "goalkeeperSeconds", "foreignLimit"}
 if ERAS_TIMELINE.get("schema") != 2 or any("year" not in event or "changes" not in event for event in ERAS_TIMELINE.get("events", [])):
     raise ValueError("Era rules timeline is invalid (schema 2: year, scope, changes)")
 _ids = set()
