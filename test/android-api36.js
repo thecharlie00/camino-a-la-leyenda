@@ -15,9 +15,9 @@ const gameUi = read('../legacy-game/src/ui.js');
 const playStoreFeed = JSON.parse(read('../public/play-store-version.json'));
 
 assert.match(manifest, /android:minSdkVersion="24"\s+android:targetSdkVersion="36"/);
-assert.match(manifest, /android:versionCode="66"/);
-assert.match(manifest, /android:versionName="5\.16"/);
-assert.equal(packageJson.version, '5.16.0');
+assert.match(manifest, /android:versionCode="67"/);
+assert.match(manifest, /android:versionName="5\.17"/);
+assert.equal(packageJson.version, '5.17.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
