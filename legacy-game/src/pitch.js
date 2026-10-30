@@ -184,15 +184,21 @@ var Pitch = (function () {
   /* Motor de audio compartido por el campo 2D y la puesta en escena 3D. */
   if (typeof window !== "undefined") window.PitchAudio = Snd;
 
-  /* ---------- música ambiente original en bucle (no requiere archivos ni conexión) ---------- */
+  /* ---------- música de fondo: chiptune original en bucle («Camino a la Leyenda», 16 compases) ----------
+     Sintetizada con Web Audio (pulso, triángulo y ruido): sin archivos ni conexión. Se programa compás a compás. */
   var Music = (function () {
-    var KEY = "camino.pitch.music", ac = null, master = null, on = false, loaded = false, timer = null, button = null, unlocking = false, watchingVisibility = false;
-    var bpm = 94, beat = 60 / bpm, bar = beat * 4;
-    var progression = [
-      {root: 48, chord: [60, 64, 67]}, {root: 45, chord: [57, 60, 64]},
-      {root: 41, chord: [53, 57, 60]}, {root: 43, chord: [55, 59, 62]}
+    var KEY = "camino.pitch.music", ac = null, master = null, noiseBuf = null, on = false, loaded = false, timer = null, button = null, unlocking = false, watchingVisibility = false;
+    var VOL = 0.7, BPM = 118, S16 = 60 / BPM / 4, BAR = S16 * 16, nextAt = 0, barIdx = 0;
+    /* acordes: arpegio y bajo */
+    var CH = {Am: [[69, 72, 76], 45], F: [[65, 69, 72], 41], C: [[67, 72, 76], 48], G: [[67, 71, 74], 43], E: [[68, 71, 76], 40], Em: [[67, 71, 76], 40]};
+    var PROG = ["Am", "F", "C", "G", "Am", "F", "G", "E", "F", "G", "Em", "Am", "F", "G", "C", "E"];
+    /* melodía en corcheas: nota MIDI, 0 silencio, -1 alarga la anterior */
+    var MEL = [
+      [76, 0, 76, 74, 72, 0, 69, 72], [74, 0, 72, 69, 72, -1, 0, 0], [76, 0, 76, 79, 81, -1, 79, 76], [74, -1, 71, 74, 79, -1, 0, 0],
+      [76, 0, 76, 74, 72, 0, 69, 72], [77, -1, 76, 74, 72, -1, 69, 72], [74, 0, 74, 76, 74, 71, 67, 71], [68, -1, 71, -1, 76, -1, 0, 0],
+      [81, -1, -1, 79, 77, -1, 76, 77], [79, -1, -1, 77, 76, -1, 74, 71], [76, -1, 79, -1, 83, -1, 79, 76], [81, -1, -1, -1, 76, 0, 72, 76],
+      [77, -1, 81, -1, 84, -1, 81, 77], [79, -1, 83, -1, 86, -1, 83, 79], [84, -1, 83, 81, 79, 76, 79, 81], [80, -1, -1, -1, 83, -1, 0, 0]
     ];
-    var melody = [72, 76, 79, 76, 74, 72, 67, 71, 72, 76, 81, 79, 76, 74, 72, 67];
     var label = function () {
       var lang = typeof LANG === "string" ? LANG : "es";
       var words = {
@@ -220,41 +226,65 @@ var Pitch = (function () {
       if (!AC) return false;
       try {
         ac = new AC(); master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+        noiseBuf = ac.createBuffer(1, Math.floor(ac.sampleRate * 0.4), ac.sampleRate);
+        var d = noiseBuf.getChannelData(0), seed = 7;
+        for (var i = 0; i < d.length; i++) { seed = (seed * 16807) % 2147483647; d[i] = seed / 1073741823.5 - 1; }
         return true;
       } catch (e) { ac = null; master = null; return false; }
     }
-    function frequency(note) { return 440 * Math.pow(2, (note - 69) / 12); }
-    function note(midi, at, duration, type, volume, cutoff) {
-      var osc = ac.createOscillator(), filter = ac.createBiquadFilter(), gain = ac.createGain();
-      osc.type = type; osc.frequency.setValueAtTime(frequency(midi), at);
-      filter.type = "lowpass"; filter.frequency.setValueAtTime(cutoff, at);
-      gain.gain.setValueAtTime(0.0001, at); gain.gain.exponentialRampToValueAtTime(volume, at + 0.035);
-      gain.gain.exponentialRampToValueAtTime(0.0001, at + duration);
-      osc.connect(filter); filter.connect(gain); gain.connect(master);
-      osc.start(at); osc.stop(at + duration + 0.03);
+    function hz(n) { return 440 * Math.pow(2, (n - 69) / 12); }
+    function tone(midi, at, dur, type, vol, cutoff, slide) {
+      var o = ac.createOscillator(), f = ac.createBiquadFilter(), g = ac.createGain();
+      o.type = type; o.frequency.setValueAtTime(hz(midi), at);
+      if (slide) o.frequency.exponentialRampToValueAtTime(hz(midi) * slide, at + dur);
+      f.type = "lowpass"; f.frequency.setValueAtTime(cutoff, at);
+      g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(vol, at + 0.008);
+      g.gain.setValueAtTime(vol, at + dur * 0.6); g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+      o.connect(f); f.connect(g); g.connect(master); o.start(at); o.stop(at + dur + 0.02);
     }
-    function loop() {
+    function noise(at, dur, vol, type, freq) {
+      var src = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain();
+      src.buffer = noiseBuf; f.type = type; f.frequency.setValueAtTime(freq, at);
+      g.gain.setValueAtTime(vol, at); g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+      src.connect(f); f.connect(g); g.connect(master); src.start(at); src.stop(at + dur + 0.02);
+    }
+    function kick(at) { tone(52, at, 0.16, "sine", 0.32, 900, 0.35); }
+    /* un compás: bajo de triángulo a corcheas, arpegio de pulso a semicorcheas, melodía cuadrada y batería de ruido */
+    function scheduleBar(i, at) {
+      var bar = i % 16, ch = CH[PROG[bar]], b = bar >= 8, mel = MEL[bar];
+      for (var k = 0; k < 8; k++) tone(ch[1] + (k % 2 ? 12 : 0), at + k * 2 * S16, S16 * 1.7, "triangle", 0.16, 1200);
+      for (var a = 0; a < 16; a++) tone(ch[0][a % 3] + (a % 6 >= 3 ? 12 : 0), at + a * S16, S16 * 0.8, "square", b ? 0.022 : 0.016, 2200);
+      for (var m = 0; m < 8; m++) {
+        var n = mel[m]; if (n <= 0) continue;
+        var len = 1; while (m + len < 8 && mel[m + len] === -1) len++;
+        tone(n, at + m * 2 * S16, len * 2 * S16 * 0.92, "square", 0.05, 3200);
+        tone(n + 0.08, at + m * 2 * S16 + 0.012, len * 2 * S16 * 0.9, "square", 0.018, 2600); /* eco desafinado: más cuerpo */
+      }
+      for (var s = 0; s < 16; s++) {
+        var t0 = at + s * S16;
+        if (s === 0 || s === 8 || (b && (s === 6 || s === 14)) || (!b && s === 10)) kick(t0);
+        if (s === 4 || s === 12) noise(t0, 0.13, 0.12, "bandpass", 1800);
+        if (s % 2 === 0) noise(t0, 0.03, s % 4 === 2 ? 0.05 : 0.03, "highpass", 7000);
+      }
+      if (bar === 15) { noise(at + 14 * S16, 0.12, 0.1, "bandpass", 1500); noise(at + 15 * S16, 0.12, 0.12, "bandpass", 1300); }
+    }
+    function pump() {
+      timer = null;
       if (!on || !ac || ac.state !== "running") return;
-      var start = ac.currentTime + 0.08;
-      progression.forEach(function (part, measure) {
-        var at = start + measure * bar;
-        part.chord.forEach(function (n) { note(n, at, bar * 0.94, "sine", 0.018, 900); });
-        note(part.root, at, beat * 1.65, "triangle", 0.075, 420);
-        note(part.root + 7, at + beat * 2, beat * 1.55, "triangle", 0.055, 420);
-        for (var step = 0; step < 4; step++) {
-          var tune = melody[measure * 4 + step];
-          note(tune, at + step * beat, beat * 0.48, "sine", 0.055, 1500);
-          if (step === 1 || step === 3) note(tune - 12, at + step * beat + beat * 0.5, beat * 0.35, "sine", 0.032, 1300);
-        }
-      });
-      timer = setTimeout(loop, bar * progression.length * 1000 - 100);
+      if (nextAt < ac.currentTime + 0.05) nextAt = ac.currentTime + 0.1;
+      while (nextAt < ac.currentTime + BAR * 1.2) { scheduleBar(barIdx++, nextAt); nextAt += BAR; }
+      timer = setTimeout(pump, 400);
     }
     function start() {
       if (!on || timer || !init()) return;
       try {
+        var go = function () {
+          if (!on || timer) return;
+          master.gain.cancelScheduledValues(ac.currentTime); master.gain.setTargetAtTime(VOL, ac.currentTime, 0.3);
+          pump();
+        };
         var p = ac.resume();
-        if (p && p.then) p.then(function () { if (on && !timer) loop(); }).catch(function () {});
-        else if (!timer) loop();
+        if (p && p.then) p.then(go).catch(function () {}); else go();
       } catch (e) {}
     }
     function stop() {
@@ -263,7 +293,8 @@ var Pitch = (function () {
         try {
           master.gain.cancelScheduledValues(ac.currentTime);
           master.gain.setTargetAtTime(0, ac.currentTime, 0.08);
-          setTimeout(function () { if ((!on || !button) && ac && ac.state === "running") ac.suspend(); }, 350);
+          nextAt = 0; barIdx = 0;
+          setTimeout(function () { if (!on && ac && ac.state === "running") ac.suspend(); }, 400);
         } catch (e) {}
       }
     }
@@ -289,12 +320,20 @@ var Pitch = (function () {
     }
     function vis() {
       if (!ac) return;
-      if (document.hidden) { if (timer) clearTimeout(timer); timer = null; try { ac.suspend(); } catch (e) {} }
+      if (document.hidden) { if (timer) clearTimeout(timer); timer = null; nextAt = 0; try { ac.suspend(); } catch (e) {} }
       else if (on) start();
     }
     function unmount() { button = null; }
     function isOn() { load(); watchVisibility(); watchUnlock(); if (on) start(); return on; }
-    return {mount: mount, toggle: toggle, vis: vis, unmount: unmount, isOn: isOn, label: label};
+    /* renderiza el bucle completo en un OfflineAudioContext (pruebas y exportación) */
+    function renderLoop(ctx) {
+      var keep = [ac, master, noiseBuf]; ac = null; var AC = window.AudioContext;
+      window.AudioContext = function () { return ctx; }; try { init(); } finally { window.AudioContext = AC; }
+      master.gain.value = VOL;
+      for (var i = 0; i < 16; i++) scheduleBar(i, 0.05 + i * BAR);
+      var out = ctx.startRendering(); ac = keep[0]; master = keep[1]; noiseBuf = keep[2]; return out;
+    }
+    return {mount: mount, toggle: toggle, vis: vis, unmount: unmount, isOn: isOn, label: label, renderLoop: renderLoop, loopSeconds: function () { return BAR * 16; }};
   })();
 
   /* posiciones base de un once (demarcaciones de su sistema) */
@@ -2270,5 +2309,5 @@ var Pitch = (function () {
   function freeze(v) { if (P) { if (v && !P.frozen) flushCues(); P.frozen = !!v; if (!v) { P.last = now(); if (P.half2) clearHalf(); } } }
   return {mount: mount, destroy: destroy, teams: teams, state: state, event: event, busy: busy, reset: reset, clearMsg: clearMsg, freeze: freeze, replay: replay,
     cinema: cinema, skipCinema: skipCinema,
-    active: function () { return !!P; }, sound: function () { return Snd.isOn(); }, musicToggle: Music.toggle, musicOn: Music.isOn, musicLabel: Music.label, debug: function () { return P; }};
+    active: function () { return !!P; }, sound: function () { return Snd.isOn(); }, musicToggle: Music.toggle, musicOn: Music.isOn, musicLabel: Music.label, musicRender: Music.renderLoop, musicSeconds: Music.loopSeconds, debug: function () { return P; }};
 })();
