@@ -1,0 +1,22 @@
+name: Diag CI
+on:
+  push:
+    branches: [diag-ci]
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-24.04
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - run: |
+          npm run test:build > diag.txt 2>&1 || echo "EXIT $?" >> diag.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f diag.txt && git commit -q -m "Resultado [skip ci]" && git push -q origin HEAD:diag-ci
