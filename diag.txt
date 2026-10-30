@@ -1,19 +1,15 @@
+=== POST diag/m_1victoria.json (application/json)
+HTTP 500
+error code: 1101
+
+=== POST diag/m_key_nueva.json (application/json)
+HTTP 500
+error code: 1101
+
 === POST diag/mgr_short.json (application/json)
 HTTP 500
 error code: 1101
 
-=== POST diag/v1_short_clubs.json (application/json)
-HTTP 500
-error code: 1101
-
-=== POST diag/v2_short_pos.json (application/json)
-HTTP 500
-error code: 1101
-
-=== POST diag/v3_short_sin_metricas_extra.json (application/json)
-HTTP 500
-error code: 1101
-
-=== POST diag/v4_short_sin_promoted_pos.json (application/json)
+=== POST diag/p_player.json (application/json)
 HTTP 400
-{"error":"Invalid promoted"}
+{"error":"Expected integer field"}
