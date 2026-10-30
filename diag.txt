@@ -1,5 +1,21 @@
-=== POST diag/mgr_long.json (application/json)
+=== POST diag/mgr_short.json (application/json)
 HTTP 500
 error code: 1101
 
-jq: parse error: Invalid numeric literal at line 1, column 6
+=== POST diag/v_a_1fila_activa.json (application/json)
+HTTP 400
+{"error":"Career wins total does not match history"}
+=== POST diag/v_b_1fila_cerrada.json (application/json)
+HTTP 400
+{"error":"Career wins total does not match history"}
+=== POST diag/v_c_sin_trofeos.json (application/json)
+HTTP 500
+error code: 1101
+
+=== POST diag/v_d_sin_null.json (application/json)
+HTTP 500
+error code: 1101
+
+=== POST diag/v_e_5filas.json (application/json)
+HTTP 400
+{"error":"Career wins total does not match history"}
