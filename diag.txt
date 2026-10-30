@@ -1,46 +1,5 @@
-2606:4700:3030::ac43:b91b camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev
-2606:4700:3035::6815:4413 camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev
-=== GET /
-HTTP 404 · 0.077970s
-Not found
-=== GET /api/goat-ladder?mode=player&timeframe=all-time
-HTTP 200 · 0.218849s
-{"entries":[]}
-=== GET /api/goat-ladder/careers?mode=player&timeframe=all-time&metric=appearances
-HTTP 200 · 0.199430s
-{"metric":"appearances","entries":[{"id":"fb30022a-b001-4993-9f82-9fedc91e2c92","game_mode":"player","display_name":"Epi Pappadopoulous","title":"Carrera de Jugador","current_club":"Real Sociedad","started_season":2026,"latest_season":2043,"created_at":"2026-10-19T15:24:09.334Z","metrics":{"seasons":18,"appearances":874,"goals":569,"assists":144,"clean_sheets":0,"trophies":8,"awards":41,"international_caps":123,"international_goals":90,"clubs":7},"history":[{"season":2026,"club":"PAOK","competition":"Super League Grecia","clubs":["PAOK"],"trophies":[],"awards":[],"appearances":10,"goals":1,"as
-=== GET /api/goat-ladder/careers?mode=manager&timeframe=all-time&metric=appearances
-HTTP 400 · 0.064386s
-{"error":"Invalid career metric"}
-=== OPTIONS careers desde https://futbolroadtolegend.com
-HTTP/2 204 
-access-control-allow-origin: https://futbolroadtolegend.com
-access-control-allow-headers: Content-Type, Authorization
-access-control-allow-methods: GET, POST, DELETE, OPTIONS
-access-control-max-age: 86400
-=== GET careers desde https://futbolroadtolegend.com
-HTTP/2 200 
-access-control-allow-origin: https://futbolroadtolegend.com
-access-control-allow-headers: Content-Type, Authorization
-access-control-allow-methods: GET, POST, DELETE, OPTIONS
-access-control-max-age: 86400
-=== OPTIONS careers desde null
-HTTP/2 204 
-access-control-allow-origin: null
-access-control-allow-headers: Content-Type, Authorization
-access-control-allow-methods: GET, POST, DELETE, OPTIONS
-access-control-max-age: 86400
-=== GET careers desde null
-HTTP/2 200 
-access-control-allow-origin: null
-access-control-allow-headers: Content-Type, Authorization
-access-control-allow-methods: GET, POST, DELETE, OPTIONS
-access-control-max-age: 86400
-=== play-store-version.json
-{
-  "packageName": "com.caminoleyenda.app",
-  "versionCode": 65,
-  "versionName": "5.15"
-}
+=== POST diag/mgr_long.json (application/json)
+HTTP 500
+error code: 1101
 
-HTTP 200
+jq: parse error: Invalid numeric literal at line 1, column 6
