@@ -248,16 +248,32 @@ for page in ERAS_MOMENTS["album"]["pages"]:
 for r in ERAS_MOMENTS["rewards"]:
     if r["who"] not in ("p", "m") or set(r["names"]) != {"en", "de", "it", "fr"}:
         raise ValueError(f"Era reward {r['id']} needs an owner and four translations")
+ERAS_LEGENDS = json.loads((ERAS_ROOT / "legends.json").read_text(encoding="utf-8"))
+if ERAS_LEGENDS.get("schema") != 1 or set(ERAS_LEGENDS.get("stars", {})) != set(EXPECTED_ERAS):
+    raise ValueError("Era legends must use schema 1 and list stars for every decade")
+for decade, stars in ERAS_LEGENDS["stars"].items():
+    if not 4 <= len(stars) <= 6:
+        raise ValueError(f"Era legends need four to six stars in {decade}")
+    for star in stars:
+        if star["club"] not in _world_clubs or star["from"] > star["until"] or not star["from"] <= star["year"] <= star["until"]:
+            raise ValueError(f"Era star {star['ln']} has an unknown club or invalid years")
+        if (star["fn"] + " " + star["ln"]) in ("Johan Cruyff", "Diego Maradona", "Michel Platini", "Lionel Messi", "Cristiano Ronaldo", "Kylian Mbappé", "Erling Haaland", "Zinedine Zidane"):
+            raise ValueError(f"Era stars must use versioned names, not {star['fn']} {star['ln']}")
+if set(ERAS_LEGENDS["signature"]["homeAdv"]) != set(EXPECTED_ERAS) or not ERAS_LEGENDS["signature"].get("src"):
+    raise ValueError("Era signature mechanics need a home advantage per decade and a source")
+for ch in ERAS_LEGENDS["challenges"]:
+    if ch["club"] not in _world_clubs or ch["mode"] not in ("player", "manager") or not ch["year"] <= ch["by"] or set(ch["name"]) != _LANGS5 or set(ch["goal"]) != _LANGS5:
+        raise ValueError(f"Era challenge {ch['id']} is invalid")
 _j = lambda value: json.dumps(value, ensure_ascii=False, separators=(",", ":"))
 # en Android cada parte es un módulo propio para que ninguna tarea de arranque sea demasiado grande
 ERAS_PARTS = [
     "var ERAS_MODE = true;\nvar ERAS_DATA = " + _j({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE, "clubsHistory": ERAS_CLUBS, "competitions": ERAS_COMPS, "history": ERAS_HISTORY}) + ";\n",
     "ERAS_DATA.decisions = " + _j(ERAS_DECISIONS) + ";\n",
-    "ERAS_DATA.moments = " + _j(ERAS_MOMENTS) + ";\n",
+    "ERAS_DATA.moments = " + _j(ERAS_MOMENTS) + ";\nERAS_DATA.legends = " + _j(ERAS_LEGENDS) + ";\n",
     "var ERAS_I18N = " + _j(ERAS_I18N) + ";\n",
 ]
 ERAS_DATA_JS = "".join(ERAS_PARTS)
-ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "eras-comps.js", "eras-moments.js", "ui-eras.js", "ui-eras-moments.js", "ui-boot.js"]
+ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "eras-comps.js", "eras-moments.js", "eras-legends.js", "ui-eras.js", "ui-eras-moments.js", "ui-eras-legends.js", "ui-boot.js"]
 web_config_path = ROOT / "web" / "config.json"
 web_config = json.loads(web_config_path.read_text(encoding="utf-8-sig")) if web_config_path.exists() else {}
 # Keep the same public GOAT Ladder worker configured on the localized web pages.

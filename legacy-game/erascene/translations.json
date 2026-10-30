@@ -2302,5 +2302,179 @@
   "de": "Album der 80er",
   "it": "Album degli anni '80",
   "fr": "Album des années 80"
+ },
+ "Aceptar el desafío": {
+  "en": "Accept the challenge",
+  "de": "Herausforderung annehmen",
+  "it": "Accetta la sfida",
+  "fr": "Relever le défi"
+ },
+ "Con la cesión al portero permitida, quien gana duerme el partido: unos {n} % menos goles.": {
+  "en": "With the back-pass to the keeper still allowed, the side in front kills the game: about {n}% fewer goals.",
+  "de": "Solange der Rückpass zum Torwart erlaubt ist, verwaltet die führende Mannschaft das Spiel: etwa {n} % weniger Tore.",
+  "it": "Con il retropassaggio al portiere consentito, chi vince addormenta la partita: circa il {n}% di gol in meno.",
+  "fr": "Avec la passe en retrait au gardien autorisée, l'équipe qui mène endort le match : environ {n} % de buts en moins."
+ },
+ "Continuar la dinastía en {y}": {
+  "en": "Continue the dynasty in {y}",
+  "de": "Die Dynastie {y} fortsetzen",
+  "it": "Continua la dinastia nel {y}",
+  "fr": "Poursuivre la dynastie en {y}"
+ },
+ "Desafío conseguido en {y}.": {
+  "en": "Challenge completed in {y}.",
+  "de": "Herausforderung {y} geschafft.",
+  "it": "Sfida completata nel {y}.",
+  "fr": "Défi réussi en {y}."
+ },
+ "Desafío del día ({date})": {
+  "en": "Daily challenge ({date})",
+  "de": "Tagesherausforderung ({date})",
+  "it": "Sfida del giorno ({date})",
+  "fr": "Défi du jour ({date})"
+ },
+ "Desafíos de época": {
+  "en": "Era challenges",
+  "de": "Epochen-Herausforderungen",
+  "it": "Sfide d'epoca",
+  "fr": "Défis d'époque"
+ },
+ "Desafíos históricos": {
+  "en": "Historic challenges",
+  "de": "Historische Herausforderungen",
+  "it": "Sfide storiche",
+  "fr": "Défis historiques"
+ },
+ "Dinastía · generación {n}": {
+  "en": "Dynasty · generation {n}",
+  "de": "Dynastie · Generation {n}",
+  "it": "Dinastia · generazione {n}",
+  "fr": "Dynastie · génération {n}"
+ },
+ "Empieza en un club y un año concretos con una meta histórica. Si no llegas a tiempo, la carrera sigue: no pierdes nada.": {
+  "en": "Start at a specific club and year with a historic goal. If you miss the deadline, the career carries on: you lose nothing.",
+  "de": "Starte bei einem bestimmten Klub und Jahr mit einem historischen Ziel. Schaffst du es nicht rechtzeitig, geht die Karriere weiter: Du verlierst nichts.",
+  "it": "Inizia in un club e in un anno precisi con un obiettivo storico. Se non arrivi in tempo, la carriera continua: non perdi nulla.",
+  "fr": "Commence dans un club et une année précis avec un objectif historique. Si tu n'y arrives pas à temps, la carrière continue : tu ne perds rien."
+ },
+ "En juego hasta la temporada {y}.": {
+  "en": "Open until the {y} season.",
+  "de": "Offen bis zur Saison {y}.",
+  "it": "In gioco fino alla stagione {y}.",
+  "fr": "En jeu jusqu'à la saison {y}."
+ },
+ "Estadios vacíos: casi no hay ventaja por jugar en casa.": {
+  "en": "Empty stadiums: almost no home advantage.",
+  "de": "Leere Stadien: kaum Heimvorteil.",
+  "it": "Stadi vuoti: quasi nessun vantaggio casalingo.",
+  "fr": "Stades vides : presque aucun avantage à domicile."
+ },
+ "Estrella de la época en este club: {n}.": {
+  "en": "Star of the era at this club: {n}.",
+  "de": "Star der Epoche bei diesem Klub: {n}.",
+  "it": "Stella dell'epoca in questo club: {n}.",
+  "fr": "Star de l'époque dans ce club : {n}."
+ },
+ "Estrellas de {year}: {n}.": {
+  "en": "Stars of {year}: {n}.",
+  "de": "Stars von {year}: {n}.",
+  "it": "Stelle del {year}: {n}.",
+  "fr": "Stars de {year} : {n}."
+ },
+ "Gana la liga con {club} en {n} temporadas.": {
+  "en": "Win the league with {club} within {n} seasons.",
+  "de": "Gewinne mit {club} die Liga in {n} Saisons.",
+  "it": "Vinci il campionato con {club} in {n} stagioni.",
+  "fr": "Gagne le championnat avec {club} en {n} saisons."
+ },
+ "Gana un título con {club} en {n} temporadas.": {
+  "en": "Win a trophy with {club} within {n} seasons.",
+  "de": "Gewinne mit {club} einen Titel in {n} Saisons.",
+  "it": "Vinci un titolo con {club} in {n} stagioni.",
+  "fr": "Gagne un titre avec {club} en {n} saisons."
+ },
+ "Heredas el apellido y la historia que cambió tu familia.": {
+  "en": "You inherit the surname and the history your family changed.",
+  "de": "Du erbst den Nachnamen und die Geschichte, die deine Familie verändert hat.",
+  "it": "Erediti il cognome e la storia che la tua famiglia ha cambiato.",
+  "fr": "Tu hérites du nom et de l'histoire que ta famille a changée."
+ },
+ "Hoy": {
+  "en": "Today",
+  "de": "Heute",
+  "it": "Oggi",
+  "fr": "Aujourd'hui"
+ },
+ "Jugar en casa pesa más que hoy: +{n} % de ventaja local.": {
+  "en": "Playing at home matters more than today: +{n}% home advantage.",
+  "de": "Heimspiele zählen mehr als heute: +{n} % Heimvorteil.",
+  "it": "Giocare in casa pesa più di oggi: +{n}% di vantaggio casalingo.",
+  "fr": "Jouer à domicile compte plus qu'aujourd'hui : +{n} % d'avantage."
+ },
+ "Leyenda rival: {n} ({club})": {
+  "en": "Rival legend: {n} ({club})",
+  "de": "Rivalisierende Legende: {n} ({club})",
+  "it": "Leggenda rivale: {n} ({club})",
+  "fr": "Légende rivale : {n} ({club})"
+ },
+ "Mecánica de la época": {
+  "en": "Era mechanic",
+  "de": "Mechanik der Epoche",
+  "it": "Meccanica dell'epoca",
+  "fr": "Mécanique de l'époque"
+ },
+ "No llegó a tiempo. La carrera sigue igual.": {
+  "en": "Didn't make it in time. The career carries on as normal.",
+  "de": "Nicht rechtzeitig geschafft. Die Karriere geht normal weiter.",
+  "it": "Non è arrivata in tempo. La carriera continua come prima.",
+  "fr": "Pas à temps. La carrière continue normalement."
+ },
+ "Tu club será {club}.": {
+  "en": "Your club will be {club}.",
+  "de": "Dein Klub ist {club}.",
+  "it": "Il tuo club sarà {club}.",
+  "fr": "Ton club sera {club}."
+ },
+ "Título: Retador de épocas": {
+  "en": "Title: Era challenger",
+  "de": "Titel: Herausforderer der Epochen",
+  "it": "Titolo: Sfidante delle epoche",
+  "fr": "Titre : Challenger des époques"
+ },
+ "Títulos desde que empezó el duelo: tu equipo {a}, el suyo {b}.": {
+  "en": "Trophies since the duel began: your team {a}, theirs {b}.",
+  "de": "Titel seit Beginn des Duells: dein Team {a}, seins {b}.",
+  "it": "Titoli dall'inizio del duello: la tua squadra {a}, la sua {b}.",
+  "fr": "Titres depuis le début du duel : ton équipe {a}, la sienne {b}."
+ },
+ "Volver a jugar": {
+  "en": "Play again",
+  "de": "Erneut spielen",
+  "it": "Rigioca",
+  "fr": "Rejouer"
+ },
+ "Ya colgó las botas o cambió de aires.": {
+  "en": "He has since retired or moved on.",
+  "de": "Er hat inzwischen aufgehört oder den Verein gewechselt.",
+  "it": "Nel frattempo si è ritirato o ha cambiato aria.",
+  "fr": "Il a depuis pris sa retraite ou changé d'air."
+ },
+ "{n} desafíos conseguidos": {
+  "en": "{n} challenges completed",
+  "de": "{n} Herausforderungen geschafft",
+  "it": "{n} sfide completate",
+  "fr": "{n} défis réussis"
+ },
+ "{n} títulos": {
+  "en": "{n} trophies",
+  "de": "{n} Titel",
+  "it": "{n} titoli",
+  "fr": "{n} titres"
+ },
+ "¡Desafío de época conseguido!": {
+  "en": "Era challenge completed!",
+  "de": "Epochen-Herausforderung geschafft!",
+  "it": "Sfida d'epoca completata!",
+  "fr": "Défi d'époque réussi !"
  }
 }

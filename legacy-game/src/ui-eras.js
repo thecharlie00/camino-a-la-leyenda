@@ -36,6 +36,7 @@
       '<span class="eras-tag">' + (rules.backPassBanned ? t("Cesión al portero prohibida") : t("Cesión al portero permitida: quien gana puede dormir el partido")) + '</span>' +
       (rules.awayGoals ? '<span class="eras-tag">' + t("Goles fuera valen doble en eliminatorias") + '</span>' : '') +
       (rules.tackleFromBehindRed ? '<span class="eras-tag">' + t("Entrada por detrás: roja") + '</span>' : '<span class="eras-tag">' + t("Menos expulsiones que hoy") + '</span>') + '</div>' + scopeText +
+      (window.EraLegends ? EraLegends.signatureLines(p.currentYear || state.year).map(function (line) { return '<p class="eras-lead" style="margin:8px 0 0"><b>' + t("Mecánica de la época") + ':</b> ' + eraEscape(line) + '</p>'; }).join("") : "") +
       '<p class="eras-lead" style="margin:10px 0 0">' + skinText + '</p>' +
       '<p class="eras-lead" style="margin:6px 0 0">' + t("Escalas económicas simuladas para salarios, valores y presupuestos.") + ' · ' + t("Salarios ×{wage}; mercado ×{market}; presupuesto ×{tv}.", {wage: economy.wageScale.toFixed(2), market: economy.marketScale.toFixed(2), tv: economy.tvDealMultiplier.toFixed(2)}) + '</p>' +
       '<p class="eras-lead" style="margin:6px 0 0">' + t("Canales mostrados en el HUD; no simulan una red de contactos.") + ' ' + t("Canales: {channels}.", {channels: media.channels.map(channelLabel).join(" · ")}) + '</p>' +
@@ -144,6 +145,7 @@
     var year = c.era.year, out = "";
     if (c.kind !== "mgr") out += '<button class="btn wide" data-a="cset" data-k="mode" data-v="none" aria-pressed="' + (c.mode === "none") + '">' + t("Sin elegir club (cantera al azar)") + "</button>" +
       (c.mode === "none" ? '<p class="lead">' + t("Debutarás en un club de tu país que existiera en {year}, elegido al azar.", {year: year}) + "</p>" : "");
+    if (window.UIX.eraCreateNote) out += window.UIX.eraCreateNote(c);
     if (c.club < 0 || !W.clubs[c.club]) return out;
     var club = W.clubs[c.club], li = club.lg0, lg = W.lg[li], hist = (ERAS_DATA.clubsHistory.clubs || {})[club.n];
     var name = eraClubName(club.n, year), league = eraLeagueName(lg.id, lg.n, year), rival = rivalOf(c.club);
@@ -158,6 +160,7 @@
       if (rules && rules.foreignLimit && lg.conf === "UEFA" && nat !== lg.ci && nat2 !== lg.ci)
         lines.push(t("Antes de la ley Bosman los clubes solo alinean {n} extranjeros: si no eres de los mejores del equipo, jugarás menos.", {n: rules.foreignLimit}));
     }
+    if (window.EraLegends) { var sl = EraLegends.starsLine(year, club.n); if (sl) lines.push(sl); }
     var colors = (club.col || []).slice(0, 2).map(function (col) { return '<i style="display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid rgba(255,255,255,.3);background:' + eraEscape(col) + '"></i>'; }).join(" ");
     return out + '<section class="card eras-clubcard"><span class="eyebrow">' + t("Ficha de {year}", {year: year}) + '</span><h3 style="margin:4px 0">' + eraEscape(name) + " " + colors + '</h3><small class="muted">' + eraEscape(league) + "</small>" +
       lines.map(function (line) { return '<p class="lead" style="margin:6px 0 0">' + eraEscape(line) + "</p>"; }).join("") + "</section>";
@@ -259,6 +262,7 @@
     var pack = eraPackForYear(S.yr), retired = S.ph === "ret" || !!S.retired || !!S.retiredP;
     var body = '<div class="eras-summary"><b>' + t("Divergencia: {n} %", {n: book.divergence}) + '</b><p class="eras-lead" style="margin:6px 0 0">' +
       (book.compared ? t("{c} de {n} títulos han cambiado respecto a la historia real.", {c: book.changed, n: book.compared}) : t("Juega una temporada completa para comparar tu historia con la real.")) + "</p></div>";
+    if (window.UIX.eraBookExtra) body += window.UIX.eraBookExtra(retired);
     if (retired) {
       var mineRows = [], rewritten = 0;
       book.seasons.forEach(function (season) { season.rows.forEach(function (r) { if (r.mine) { mineRows.push({season: season, row: r}); if (!r.same) rewritten++; } }); });

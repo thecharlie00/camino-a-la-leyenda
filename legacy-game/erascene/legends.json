@@ -1,0 +1,582 @@
+{
+ "schema": 1,
+ "starsSource": "memory",
+ "starsDoubtful": true,
+ "stars": {
+  "1970s": [
+   {
+    "fn": "Johan",
+    "ln": "Kruiff",
+    "pos": "MCO",
+    "age": 27,
+    "year": 1974,
+    "ovr": 92,
+    "nat": "NL",
+    "club": "FC Barcelona",
+    "from": 1973,
+    "until": 1977
+   },
+   {
+    "fn": "Franz",
+    "ln": "Bekenbauer",
+    "pos": "DFC",
+    "age": 29,
+    "year": 1974,
+    "ovr": 91,
+    "nat": "DE",
+    "club": "Bayern Múnich",
+    "from": 1970,
+    "until": 1976
+   },
+   {
+    "fn": "Gerd",
+    "ln": "Mülller",
+    "pos": "DC",
+    "age": 29,
+    "year": 1974,
+    "ovr": 90,
+    "nat": "DE",
+    "club": "Bayern Múnich",
+    "from": 1970,
+    "until": 1978
+   },
+   {
+    "fn": "Kevin",
+    "ln": "Keagan",
+    "pos": "DC",
+    "age": 23,
+    "year": 1974,
+    "ovr": 85,
+    "nat": "ENG",
+    "club": "Liverpool",
+    "from": 1971,
+    "until": 1976
+   },
+   {
+    "fn": "Mario",
+    "ln": "Kempess",
+    "pos": "DC",
+    "age": 22,
+    "year": 1976,
+    "ovr": 86,
+    "nat": "AR",
+    "club": "Valencia CF",
+    "from": 1976,
+    "until": 1980
+   }
+  ],
+  "1980s": [
+   {
+    "fn": "Diego",
+    "ln": "Maradonna",
+    "pos": "MCO",
+    "age": 24,
+    "year": 1985,
+    "ovr": 93,
+    "nat": "AR",
+    "club": "Napoli",
+    "from": 1984,
+    "until": 1990
+   },
+   {
+    "fn": "Michel",
+    "ln": "Platinni",
+    "pos": "MCO",
+    "age": 30,
+    "year": 1985,
+    "ovr": 91,
+    "nat": "FR",
+    "club": "Juventus",
+    "from": 1982,
+    "until": 1986
+   },
+   {
+    "fn": "Marco",
+    "ln": "van Bastem",
+    "pos": "DC",
+    "age": 22,
+    "year": 1987,
+    "ovr": 89,
+    "nat": "NL",
+    "club": "AC Milan",
+    "from": 1987,
+    "until": 1994
+   },
+   {
+    "fn": "Ruud",
+    "ln": "Gulitt",
+    "pos": "MC",
+    "age": 25,
+    "year": 1987,
+    "ovr": 89,
+    "nat": "NL",
+    "club": "AC Milan",
+    "from": 1987,
+    "until": 1992
+   },
+   {
+    "fn": "Hugo",
+    "ln": "Sanches",
+    "pos": "DC",
+    "age": 27,
+    "year": 1985,
+    "ovr": 89,
+    "nat": "MX",
+    "club": "Real Madrid",
+    "from": 1985,
+    "until": 1991
+   },
+   {
+    "fn": "Ian",
+    "ln": "Rusch",
+    "pos": "DC",
+    "age": 23,
+    "year": 1985,
+    "ovr": 87,
+    "nat": "WAL",
+    "club": "Liverpool",
+    "from": 1980,
+    "until": 1986
+   }
+  ],
+  "1990s": [
+   {
+    "fn": "Ronalldo",
+    "ln": "Nazarió",
+    "pos": "DC",
+    "age": 21,
+    "year": 1997,
+    "ovr": 93,
+    "nat": "BR",
+    "club": "Inter",
+    "from": 1997,
+    "until": 2001
+   },
+   {
+    "fn": "Zinedine",
+    "ln": "Zidanne",
+    "pos": "MCO",
+    "age": 24,
+    "year": 1996,
+    "ovr": 90,
+    "nat": "FR",
+    "club": "Juventus",
+    "from": 1996,
+    "until": 2000
+   },
+   {
+    "fn": "Roberto",
+    "ln": "Bagio",
+    "pos": "MCO",
+    "age": 27,
+    "year": 1994,
+    "ovr": 89,
+    "nat": "IT",
+    "club": "Juventus",
+    "from": 1990,
+    "until": 1994
+   },
+   {
+    "fn": "Paolo",
+    "ln": "Maldinni",
+    "pos": "LI",
+    "age": 27,
+    "year": 1995,
+    "ovr": 89,
+    "nat": "IT",
+    "club": "AC Milan",
+    "from": 1985,
+    "until": 2008
+   },
+   {
+    "fn": "Gabriel",
+    "ln": "Batistutta",
+    "pos": "DC",
+    "age": 26,
+    "year": 1995,
+    "ovr": 88,
+    "nat": "AR",
+    "club": "Fiorentina",
+    "from": 1991,
+    "until": 1999
+   },
+   {
+    "fn": "Eric",
+    "ln": "Cantonna",
+    "pos": "DC",
+    "age": 28,
+    "year": 1994,
+    "ovr": 88,
+    "nat": "FR",
+    "club": "Manchester United",
+    "from": 1992,
+    "until": 1996
+   }
+  ],
+  "2000s": [
+   {
+    "fn": "Ronaldinyo",
+    "ln": "Gaúcho",
+    "pos": "MCO",
+    "age": 25,
+    "year": 2005,
+    "ovr": 92,
+    "nat": "BR",
+    "club": "FC Barcelona",
+    "from": 2003,
+    "until": 2007
+   },
+   {
+    "fn": "Thierry",
+    "ln": "Henrri",
+    "pos": "DC",
+    "age": 28,
+    "year": 2005,
+    "ovr": 91,
+    "nat": "FR",
+    "club": "Arsenal",
+    "from": 1999,
+    "until": 2006
+   },
+   {
+    "fn": "Andrij",
+    "ln": "Shevchenco",
+    "pos": "DC",
+    "age": 29,
+    "year": 2005,
+    "ovr": 89,
+    "nat": "UA",
+    "club": "AC Milan",
+    "from": 1999,
+    "until": 2005
+   },
+   {
+    "fn": "Ricardo",
+    "ln": "Kacá",
+    "pos": "MCO",
+    "age": 23,
+    "year": 2005,
+    "ovr": 89,
+    "nat": "BR",
+    "club": "AC Milan",
+    "from": 2003,
+    "until": 2008
+   },
+   {
+    "fn": "Steven",
+    "ln": "Gerard",
+    "pos": "MC",
+    "age": 25,
+    "year": 2005,
+    "ovr": 88,
+    "nat": "ENG",
+    "club": "Liverpool",
+    "from": 1998,
+    "until": 2014
+   }
+  ],
+  "2010s": [
+   {
+    "fn": "Lionel",
+    "ln": "Messy",
+    "pos": "ED",
+    "age": 28,
+    "year": 2015,
+    "ovr": 94,
+    "nat": "AR",
+    "club": "FC Barcelona",
+    "from": 2004,
+    "until": 2020
+   },
+   {
+    "fn": "Cristiano",
+    "ln": "Ronalldo",
+    "pos": "EI",
+    "age": 30,
+    "year": 2015,
+    "ovr": 93,
+    "nat": "PT",
+    "club": "Real Madrid",
+    "from": 2009,
+    "until": 2017
+   },
+   {
+    "fn": "Robert",
+    "ln": "Lewandovski",
+    "pos": "DC",
+    "age": 27,
+    "year": 2015,
+    "ovr": 89,
+    "nat": "PL",
+    "club": "Bayern Múnich",
+    "from": 2014,
+    "until": 2021
+   },
+   {
+    "fn": "Luka",
+    "ln": "Modrik",
+    "pos": "MC",
+    "age": 30,
+    "year": 2015,
+    "ovr": 88,
+    "nat": "HR",
+    "club": "Real Madrid",
+    "from": 2012,
+    "until": 2024
+   },
+   {
+    "fn": "Andrés",
+    "ln": "Inyesta",
+    "pos": "MC",
+    "age": 31,
+    "year": 2015,
+    "ovr": 89,
+    "nat": "ES",
+    "club": "FC Barcelona",
+    "from": 2002,
+    "until": 2017
+   }
+  ],
+  "2020s": [
+   {
+    "fn": "Kylian",
+    "ln": "Mbapé",
+    "pos": "DC",
+    "age": 24,
+    "year": 2023,
+    "ovr": 91,
+    "nat": "FR",
+    "club": "Paris Saint-Germain",
+    "from": 2017,
+    "until": 2023
+   },
+   {
+    "fn": "Erling",
+    "ln": "Haalan",
+    "pos": "DC",
+    "age": 23,
+    "year": 2023,
+    "ovr": 91,
+    "nat": "NO",
+    "club": "Manchester City",
+    "from": 2022,
+    "until": 2029
+   },
+   {
+    "fn": "Kevin",
+    "ln": "De Bruine",
+    "pos": "MCO",
+    "age": 32,
+    "year": 2023,
+    "ovr": 89,
+    "nat": "BE",
+    "club": "Manchester City",
+    "from": 2015,
+    "until": 2024
+   },
+   {
+    "fn": "Jude",
+    "ln": "Belingham",
+    "pos": "MCO",
+    "age": 20,
+    "year": 2023,
+    "ovr": 88,
+    "nat": "ENG",
+    "club": "Real Madrid",
+    "from": 2023,
+    "until": 2029
+   },
+   {
+    "fn": "Vinicius",
+    "ln": "Junyor",
+    "pos": "EI",
+    "age": 23,
+    "year": 2023,
+    "ovr": 89,
+    "nat": "BR",
+    "club": "Real Madrid",
+    "from": 2018,
+    "until": 2029
+   }
+  ]
+ },
+ "signature": {
+  "src": "Tendencia documentada de caída de la ventaja local (estudios de goles por partido, 1970-2020); valores redondeados",
+  "doubtful": true,
+  "homeAdv": {
+   "1970s": 0.2,
+   "1980s": 0.17,
+   "1990s": 0.14,
+   "2000s": 0.12,
+   "2010s": 0.1,
+   "2020s": 0.1
+  },
+  "covidHomeAdv": 0.02,
+  "backPassGoalScale": 0.93
+ },
+ "challenges": [
+  {
+   "id": "ch-forest",
+   "mode": "manager",
+   "year": 1977,
+   "club": "Nottingham Forest",
+   "key": "UCL",
+   "by": 1979,
+   "name": {
+    "es": "El milagro del recién ascendido",
+    "en": "The newly promoted miracle",
+    "de": "Das Wunder des Aufsteigers",
+    "it": "Il miracolo della neopromossa",
+    "fr": "Le miracle du promu"
+   },
+   "goal": {
+    "es": "Gana la Copa de Europa antes de 1980.",
+    "en": "Win the European Cup before 1980.",
+    "de": "Gewinne den Europapokal der Landesmeister vor 1980.",
+    "it": "Vinci la Coppa dei Campioni prima del 1980.",
+    "fr": "Gagne la Coupe des clubs champions avant 1980."
+   }
+  },
+  {
+   "id": "ch-aberdeen",
+   "mode": "manager",
+   "year": 1980,
+   "club": "Aberdeen",
+   "key": "UCWC",
+   "by": 1982,
+   "name": {
+    "es": "Escocia contra los gigantes",
+    "en": "Scotland against the giants",
+    "de": "Schottland gegen die Riesen",
+    "it": "La Scozia contro i giganti",
+    "fr": "L'Écosse contre les géants"
+   },
+   "goal": {
+    "es": "Gana la Recopa antes del verano de 1983.",
+    "en": "Win the Cup Winners' Cup before summer 1983.",
+    "de": "Gewinne den Pokalsiegerwettbewerb vor dem Sommer 1983.",
+    "it": "Vinci la Coppa delle Coppe entro l'estate 1983.",
+    "fr": "Gagne la Coupe des coupes avant l'été 1983."
+   }
+  },
+  {
+   "id": "ch-steaua",
+   "mode": "manager",
+   "year": 1984,
+   "club": "FCSB",
+   "key": "UCL",
+   "by": 1985,
+   "name": {
+    "es": "La copa del Este",
+    "en": "The Eastern cup",
+    "de": "Der Pokal aus dem Osten",
+    "it": "La coppa dell'Est",
+    "fr": "La coupe de l'Est"
+   },
+   "goal": {
+    "es": "Gana la Copa de Europa antes del verano de 1986.",
+    "en": "Win the European Cup before summer 1986.",
+    "de": "Gewinne den Europapokal der Landesmeister vor dem Sommer 1986.",
+    "it": "Vinci la Coppa dei Campioni entro l'estate 1986.",
+    "fr": "Gagne la Coupe des clubs champions avant l'été 1986."
+   }
+  },
+  {
+   "id": "ch-ajax",
+   "mode": "player",
+   "year": 1992,
+   "club": "Ajax",
+   "key": "UCL",
+   "by": 1994,
+   "name": {
+    "es": "La cantera campeona",
+    "en": "The academy champions",
+    "de": "Die Meister aus der eigenen Jugend",
+    "it": "Il vivaio campione",
+    "fr": "Le centre de formation champion"
+   },
+   "goal": {
+    "es": "Gana la Champions con el Ajax antes del verano de 1995.",
+    "en": "Win the Champions League with Ajax before summer 1995.",
+    "de": "Gewinne mit Ajax die Champions League vor dem Sommer 1995.",
+    "it": "Vinci la Champions con l'Ajax entro l'estate 1995.",
+    "fr": "Gagne la Ligue des champions avec l'Ajax avant l'été 1995."
+   }
+  },
+  {
+   "id": "ch-porto",
+   "mode": "manager",
+   "year": 2002,
+   "club": "FC Porto",
+   "key": "UCL",
+   "by": 2003,
+   "name": {
+    "es": "El asalto portugués",
+    "en": "The Portuguese raid",
+    "de": "Der portugiesische Coup",
+    "it": "L'assalto portoghese",
+    "fr": "Le coup portugais"
+   },
+   "goal": {
+    "es": "Gana la Champions antes del verano de 2004.",
+    "en": "Win the Champions League before summer 2004.",
+    "de": "Gewinne die Champions League vor dem Sommer 2004.",
+    "it": "Vinci la Champions entro l'estate 2004.",
+    "fr": "Gagne la Ligue des champions avant l'été 2004."
+   }
+  },
+  {
+   "id": "ch-atalanta",
+   "mode": "manager",
+   "year": 2021,
+   "club": "Atalanta",
+   "key": "UEL",
+   "by": 2023,
+   "name": {
+    "es": "La noche de Bérgamo",
+    "en": "The Bergamo night",
+    "de": "Die Nacht von Bergamo",
+    "it": "La notte di Bergamo",
+    "fr": "La nuit de Bergame"
+   },
+   "goal": {
+    "es": "Gana la Europa League antes del verano de 2024.",
+    "en": "Win the Europa League before summer 2024.",
+    "de": "Gewinne die Europa League vor dem Sommer 2024.",
+    "it": "Vinci l'Europa League entro l'estate 2024.",
+    "fr": "Gagne la Ligue Europa avant l'été 2024."
+   }
+  },
+  {
+   "id": "ch-leverkusen",
+   "mode": "manager",
+   "year": 2021,
+   "club": "Bayer Leverkusen",
+   "key": "L:GER1",
+   "by": 2023,
+   "name": {
+    "es": "Romper la maldición",
+    "en": "Break the curse",
+    "de": "Den Fluch brechen",
+    "it": "Spezzare la maledizione",
+    "fr": "Briser la malédiction"
+   },
+   "goal": {
+    "es": "Gana la Bundesliga antes del verano de 2024.",
+    "en": "Win the Bundesliga before summer 2024.",
+    "de": "Gewinne die Bundesliga vor dem Sommer 2024.",
+    "it": "Vinci la Bundesliga entro l'estate 2024.",
+    "fr": "Gagne la Bundesliga avant l'été 2024."
+   }
+  }
+ ],
+ "dailyLeagues": [
+  "ENG1",
+  "ESP1",
+  "ITA1",
+  "GER1",
+  "FRA1",
+  "NED1",
+  "POR1"
+ ]
+}

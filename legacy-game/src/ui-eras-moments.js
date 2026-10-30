@@ -209,6 +209,7 @@
     try { if (S && window.eraGrantRewards) window.eraGrantRewards(); } catch (e) {}
     if (S && S.era && S.era.newCards && window.UIX.toast) { var n = S.era.newCards; S.era.newCards = 0; window.UIX.toast(t("{n} cromos nuevos para el Álbum de los 80", {n: n})); }
   });
+  window.UIX.eraMoCss = css;
   window.UIX.eraMomentsButtons = function () {
     return '<button type="button" data-mo-act="open">' + t("Momentos de leyenda") + '</button><button type="button" data-mo-act="album-open">' + t("Álbum de los 80") + "</button>";
   };

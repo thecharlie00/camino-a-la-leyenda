@@ -1690,7 +1690,10 @@
     UI.cr = c; UI.view = "create"; render(true);
   }
   /* Épocas: abre el formulario normal con el año elegido; al terminar crea la carrera histórica */
-  UIX.startCreate = function (kind, extra) { startCreate(kind); Object.assign(UI.cr, extra || {}); if (UI.cr.era) { UI.cr.club = -1; UI.cr.offers = null; UI.cr.lg = null; } render(true); };
+  UIX.startCreate = function (kind, extra) { startCreate(kind); Object.assign(UI.cr, extra || {}); if (UI.cr.era) {
+    var ch = UI.cr.era.challenge && window.EraLegends ? EraLegends.challengeById(UI.cr.era.challenge) : null, ci = ch && W.cName[ch.club] != null ? W.cName[ch.club] : -1;
+    UI.cr.club = ci; UI.cr.offers = null; UI.cr.lg = ci >= 0 ? W.clubs[ci].lg0 : null; if (ci >= 0) { if (UI.cr.kind === "p") UI.cr.mode = "pick"; else UI.cr.mmode = "pick"; }
+  } render(true); };
   function finishCreate() {
     var c = UI.cr;
     if (c.era && typeof eraStartFromCreate === "function") {
