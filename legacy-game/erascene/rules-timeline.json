@@ -27,6 +27,33 @@
    "note": "El límite exacto variaba por país y año (p. ej. Italia cerró la puerta a extranjeros de 1966 a 1980; la UEFA fijó la regla 3+2 en 1991). Se usa 3 como valor común."
   },
   {
+   "year": 1971,
+   "id": "comp-uefa-cup",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "La Copa de Ferias se convierte en la Copa UEFA."
+  },
+  {
+   "year": 1972,
+   "id": "comp-super-cup",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "Nace la Supercopa de Europa."
+  },
+  {
+   "year": 1980,
+   "id": "comp-intercontinental-japan",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "La Copa Intercontinental pasa a jugarse a partido único en Japón."
+  },
+  {
    "year": 1981,
    "id": "three-points-england",
    "scope": {
@@ -40,7 +67,17 @@
      "winPoints": 3
     }
    },
-   "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win"
+   "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win",
+   "news": "Inglaterra estrena los tres puntos por victoria."
+  },
+  {
+   "year": 1981,
+   "id": "comp-world-cup-24",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "El Mundial de 1982 será el primero con 24 selecciones."
   },
   {
    "year": 1990,
@@ -72,7 +109,8 @@
      "fences": "removed-progressively"
     }
    },
-   "source": "https://en.wikipedia.org/wiki/Taylor_Report"
+   "source": "https://en.wikipedia.org/wiki/Taylor_Report",
+   "news": "El Informe Taylor obliga a los estadios ingleses a tener solo asientos."
   },
   {
    "year": 1992,
@@ -82,10 +120,12 @@
    },
    "changes": {
     "rules": {
-     "backPassBanned": true
+     "backPassBanned": true,
+     "backPassLeadHold": 0
     }
    },
-   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html"
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html",
+   "news": "Nueva regla: el portero ya no puede coger con las manos una cesión de un compañero."
   },
   {
    "year": 1992,
@@ -98,7 +138,8 @@
      "championsLeagueBrand": true
     }
    },
-   "source": "https://rsssf.org/tablese/ec1.html"
+   "source": "https://rsssf.org/tablese/ec1.html",
+   "news": "La Copa de Europa pasa a llamarse Champions League y estrena fase de grupos."
   },
   {
    "year": 1992,
@@ -114,7 +155,17 @@
      "premierLeague": true
     }
    },
-   "source": "https://en.wikipedia.org/wiki/Premier_League"
+   "source": "https://en.wikipedia.org/wiki/Premier_League",
+   "news": "Nace la Premier League: los grandes ingleses se separan de la Football League."
+  },
+  {
+   "year": 1992,
+   "id": "comp-copa-conmebol",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "Nace la Copa Conmebol."
   },
   {
    "year": 1993,
@@ -148,7 +199,8 @@
      "winPoints": 3
     }
    },
-   "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win"
+   "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win",
+   "news": "Francia, Escocia e Italia pasan a dar tres puntos por victoria."
   },
   {
    "year": 1994,
@@ -178,7 +230,8 @@
      "goalkeeperSub": true
     }
    },
-   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html"
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html",
+   "news": "Se permiten dos cambios más un portero suplente."
   },
   {
    "year": 1994,
@@ -207,7 +260,8 @@
     }
    },
    "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win",
-   "note": "FIFA lo adopta en 1995: España, Alemania, Países Bajos, Portugal, Argentina, Brasil y Champions"
+   "note": "FIFA lo adopta en 1995: España, Alemania, Países Bajos, Portugal, Argentina, Brasil y Champions",
+   "news": "La FIFA generaliza los tres puntos por victoria."
   },
   {
    "year": 1995,
@@ -221,7 +275,8 @@
      "goalkeeperSub": false
     }
    },
-   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html"
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html",
+   "news": "Ya se pueden hacer tres cambios por partido."
   },
   {
    "year": 1995,
@@ -238,7 +293,8 @@
      "foreignLimit": null
     }
    },
-   "source": "https://en.wikipedia.org/wiki/Bosman_ruling"
+   "source": "https://en.wikipedia.org/wiki/Bosman_ruling",
+   "news": "La sentencia Bosman: libertad al acabar contrato y fin del límite de extranjeros comunitarios."
   },
   {
    "year": 1995,
@@ -289,7 +345,8 @@
     }
    },
    "source": "https://en.wikipedia.org/wiki/Golden_goal",
-   "until": 2000
+   "until": 2000,
+   "news": "La Eurocopa estrena el gol de oro en la prórroga."
   },
   {
    "year": 1997,
@@ -304,6 +361,15 @@
    },
    "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html",
    "note": "Instrucción de 5-6 segundos en 1997; ley de 6 segundos en 2000"
+  },
+  {
+   "year": 1997,
+   "id": "comp-world-cup-32",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "El Mundial de 1998 será el primero con 32 selecciones."
   },
   {
    "year": 1998,
@@ -330,10 +396,12 @@
    },
    "changes": {
     "rules": {
-     "tackleFromBehindRed": true
+     "tackleFromBehindRed": true,
+     "redCardScale": 1
     }
    },
-   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html"
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html",
+   "news": "La entrada por detrás que pone en peligro al rival se castiga con roja."
   },
   {
    "year": 1999,
@@ -346,7 +414,8 @@
      "recopaActive": false
     }
    },
-   "source": "https://en.wikipedia.org/wiki/UEFA_Cup_Winners%27_Cup"
+   "source": "https://en.wikipedia.org/wiki/UEFA_Cup_Winners%27_Cup",
+   "news": "Se juega la última Recopa de Europa."
   },
   {
    "year": 2002,
@@ -359,7 +428,8 @@
      "transferWindows": true
     }
    },
-   "source": "https://en.wikipedia.org/wiki/Transfer_window"
+   "source": "https://en.wikipedia.org/wiki/Transfer_window",
+   "news": "La FIFA impone ventanas de fichajes: se acabó fichar todo el año."
   },
   {
    "year": 2002,
@@ -378,7 +448,17 @@
     }
    },
    "source": "https://en.wikipedia.org/wiki/Golden_goal",
-   "until": 2003
+   "until": 2003,
+   "news": "Las copas europeas cambian el gol de oro por el gol de plata."
+  },
+  {
+   "year": 2002,
+   "id": "comp-sudamericana",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "Nace la Copa Sudamericana."
   },
   {
    "year": 2004,
@@ -418,6 +498,15 @@
    }
   },
   {
+   "year": 2009,
+   "id": "comp-europa-league",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "La Copa UEFA pasa a llamarse Europa League."
+  },
+  {
    "year": 2010,
    "id": "social-networks-data-analysis-and-sports-science",
    "scope": {
@@ -454,7 +543,8 @@
      "goalLineTech": true
     }
    },
-   "source": "https://www.aljazeera.com/sports/2013/4/11/premier-league-approves-goal-line-technology"
+   "source": "https://www.aljazeera.com/sports/2013/4/11/premier-league-approves-goal-line-technology",
+   "news": "La Premier League estrena la tecnología de línea de gol."
   },
   {
    "year": 2014,
@@ -524,7 +614,8 @@
      "var": true
     }
    },
-   "source": "https://bbc.in/2qzDiWT"
+   "source": "https://bbc.in/2qzDiWT",
+   "news": "La Bundesliga y la Serie A estrenan el VAR."
   },
   {
    "year": 2018,
@@ -540,7 +631,8 @@
      "var": true
     }
    },
-   "source": "https://bbc.in/2qzDiWT"
+   "source": "https://bbc.in/2qzDiWT",
+   "news": "El Mundial estrena el VAR."
   },
   {
    "year": 2018,
@@ -557,7 +649,8 @@
      "var": true
     }
    },
-   "source": "https://www.si.com/soccer/2017/10/26/la-liga-set-utilise-video-assistant-referee-technology-201819-onwards"
+   "source": "https://www.si.com/soccer/2017/10/26/la-liga-set-utilise-video-assistant-referee-technology-201819-onwards",
+   "news": "LaLiga y la Ligue 1 estrenan el VAR."
   },
   {
    "year": 2018,
@@ -578,6 +671,15 @@
    "note": "Solo desde octavos de 2018-19; toda la competición desde 2019-20"
   },
   {
+   "year": 2018,
+   "id": "comp-nations-league",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "Nace la UEFA Nations League."
+  },
+  {
    "year": 2019,
    "id": "var-premier-league",
    "scope": {
@@ -591,7 +693,8 @@
      "var": true
     }
    },
-   "source": "https://www.si.com/soccer/2018/11/15/premier-league-clubs-agree-utilise-var-technology-201920-season-onwards"
+   "source": "https://www.si.com/soccer/2018/11/15/premier-league-clubs-agree-utilise-var-technology-201920-season-onwards",
+   "news": "La Premier League estrena el VAR."
   },
   {
    "year": 2020,
@@ -605,7 +708,8 @@
      "maxSubs": 5
     }
    },
-   "source": "https://en.wikipedia.org/wiki/Substitute_(association_football)"
+   "source": "https://en.wikipedia.org/wiki/Substitute_(association_football)",
+   "news": "Se permiten cinco cambios por partido."
   },
   {
    "year": 2020,
@@ -639,7 +743,26 @@
     }
    },
    "source": "https://www.uefa.com/news-media/news/0268-12157d69ce2d-9f011c70f6fa-1000--abolition-of-the-away-goals-rule-in-all-uefa-club-competitions/",
-   "doubtful": true
+   "doubtful": true,
+   "news": "La UEFA elimina el valor doble de los goles fuera."
+  },
+  {
+   "year": 2021,
+   "id": "comp-conference",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "Nace la Conference League."
+  },
+  {
+   "year": 2024,
+   "id": "comp-league-phase",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "La Champions estrena la fase de liga de 36 equipos."
   },
   {
    "year": 2025,
@@ -654,6 +777,15 @@
     }
    },
    "source": "https://downloads.theifab.com/downloads/goalkeeper-holding-the-ball-for-too-long-protocol?l=en"
+  },
+  {
+   "year": 2025,
+   "id": "comp-world-cup-48",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {},
+   "news": "El Mundial de 2026 será el primero con 48 selecciones."
   },
   {
    "year": 2026,
@@ -674,5 +806,6 @@
    "doubtful": true,
    "note": "Fecha exacta de entrada en vigor por confirmar; aplicadas en el Mundial 2026"
   }
- ]
+ ],
+ "notes": "backPassLeadHold y redCardScale son valores de diseño del juego (no históricos): probabilidad de que el que gana duerma el partido con cesiones al portero y frecuencia relativa de expulsiones."
 }

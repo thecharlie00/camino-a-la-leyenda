@@ -22,7 +22,7 @@ assert.match(erasUiSource, /function recentDecisions\(\)[\s\S]*?S\.era\.decision
 assert.match(uiSource, /s \+= slot\("modes"\)/, 'The mode selection screen must render its extensible mode slot');
 assert.match(erasUiSource, /UIX\.add\("modes"[\s\S]*?data-a="era-open"/, 'Era Mode must remain available in the existing mode selector');
 assert.doesNotMatch(erasUiSource, /UIX\.add\("mainhome"/, 'Era Mode must no longer have a separate shortcut on the main menu');
-assert.doesNotMatch(erasUiSource, /rules\.backPassBanned/, 'the setup must not claim that an unimplemented back-pass rule affects play');
+assert.match(erasUiSource, /rules\.backPassBanned/, 'the setup explains the back-pass rule, which is applied in the simulation');
 assert.match(erasUiSource, /no simulan una red de contactos/, 'media channels must be described as HUD context, not a functional contact network');
 assert.match(erasUiSource, /UIX\.actions\["era-open"\]/, 'The Era Mode option must open its existing setup flow');
 assert.match(erasUiSource, /layer\.setAttribute\("data-era-decade", pack\.id\)/, 'Era screens must expose the selected decade to their visual theme');
@@ -107,6 +107,7 @@ const context = {
   serialize: () => JSON.stringify(context.S),
   newCareer(options) { context.S = {yr: context.START_YEAR, p: {fn: options.fn, ln: options.ln, club: 0, money: 100000, sal: 50000, mor: 60, fit: 60, prof: 50, fame: 20, fans: 20, ovr: 60, tr: {}, peak: 60}, cr: [], cl: [], pend: [], mode: 'p'}; return context.S; },
   newManagerCareer(options) { context.lastManagerOptions = options; context.S = {yr: context.START_YEAR, m: {fn: options.fn, ln: options.ln, club: options.club, bud: 2000000, rep: 60, board: 60, peakRep: 60, chem: 60, fans: 50, sq: [{mor: 60, fit: 60}]}, cr: [], cl: [], pend: [], mode: 'mgr'}; return context.S; },
+  simGoals: () => [2, 1],
   tblAdd(row, gf, ga) { row[0]++; row[4] += gf; row[5] += ga; if (gf > ga) { row[1]++; row[6] += 3; } else if (gf === ga) { row[2]++; row[6]++; } else row[3]++; },
   salaryFor: () => 100000,
   marketValue: () => 100000,
@@ -387,6 +388,40 @@ assert.equal(context.eraForeignLimitApplies(), 0, 'a local player is not affecte
 context.S.p.nat = 7; context.S.yr = 1996;
 assert.equal(context.eraForeignLimitApplies(), 0, 'the limit ends with the Bosman ruling');
 context.W.lg = [{id: 'ENG1'}, {id: 'ESP1'}];
+
+/* reglas aplicadas: cesión al portero, goles fuera, gol de plata, expulsiones y noticias de cambio de regla */
+context.R = () => 0;
+context.S = {yr: 1985, era: {active: true}};
+assert.deepEqual(Array.from(context.simGoals(80, 80, 1)), [2, 0], 'before 1992 the team ahead can kill the game with back passes to its goalkeeper');
+context.S.yr = 1992;
+assert.deepEqual(Array.from(context.simGoals(80, 80, 1)), [2, 1], 'from 1992 the back-pass rule removes that advantage');
+context.S = {yr: 2026};
+assert.deepEqual(Array.from(context.simGoals(80, 80, 1)), [2, 1], 'modern careers are unaffected');
+context.S = {yr: 1985, era: {active: true}};
+assert.equal(context.eraFactor('red'), 0.75, 'fewer red cards before the 1998 tackle-from-behind rule');
+context.S.yr = 1998;
+assert.equal(context.eraFactor('red'), 1);
+context.S = {yr: 2026};
+assert.equal(context.eraFactor('red'), 1, 'modern red-card rate unchanged');
+assert.equal(context.eraFactor('subs', 3), 3, 'modern automatic substitutions unchanged');
+/* goles fuera: ida 2-1 en casa de A; vuelta 1-0 para B en su casa → global 2-2, B ganó con un gol fuera */
+const tie = {a: 10, b: 20, s: [[2, 1]], w: -1};
+context.S = {yr: 1985, era: {active: true}, C: {UCL: {ko: {r: [{ties: [tie]}]}}}};
+assert.equal(context.eraAwayGoalsApply({ck: 'UCL', kind: 'ko', legs: 2, leg: 1, ri: 0, ti: 0}), true);
+context.recordFixtureBase = (f, res) => { const pa = [res.pa, res.ph]; tie.w = pa[0] > pa[1] ? tie.a : tie.b; tie.p = pa; };
+const awayResult = {gh: 1, ga: 0};
+const tally = context.eraAwayTally(tie, 1, 0);
+assert.deepEqual(JSON.parse(JSON.stringify(tally)), {a: 2, b: 2, awayA: 0, awayB: 1}, 'aggregate and away goals are counted from both legs');
+context.S.yr = 2021;
+assert.equal(context.eraAwayGoalsApply({ck: 'UCL', kind: 'ko', legs: 2, leg: 1, ri: 0, ti: 0}), false, 'UEFA abolished the away goals rule from 2021-22');
+/* gol de plata en la Eurocopa 2004: R() = 0 → todos los goles de la prórroga caen en la primera parte */
+context.S = {yr: 2004, era: {active: true}};
+assert.deepEqual(Array.from(context.eraWithScope({comp: 'EURO', year: 2004}, () => context.extraTime())), [3, 1], 'silver goal: whoever leads at half-time of extra time wins');
+context.S = {yr: 1992, era: {active: true, newsYears: {}}, mode: 'p', bi: 0, bnews: []};
+context.eraAnnounceRules();
+assert.ok(context.S.bnews.some((n) => /cesión/.test(n.x)), 'the back-pass rule is announced in the season it starts');
+context.eraAnnounceRules();
+assert.equal(context.S.bnews.filter((n) => /cesión/.test(n.x)).length, 1, 'each rule is announced only once');
 /* historia de clubes y ligas: existencia y nombres de época */
 assert.equal(context.eraClubExists('RB Leipzig', 2008), false, 'RB Leipzig did not exist before 2009');
 assert.equal(context.eraClubExists('RB Leipzig', 2009), true);

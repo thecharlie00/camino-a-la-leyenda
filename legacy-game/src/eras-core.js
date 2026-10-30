@@ -471,6 +471,50 @@ function eraForeignLimitApplies() {
   if (S.p.nat === lg.ci || S.p.nat2 === lg.ci) return 0;
   return rules.foreignLimit;
 }
+/* Factores de regla para ganchos mínimos del motor (fuera de Épocas devuelven el valor normal) */
+function eraFactor(kind, normal) {
+  var rules = eraIsActive() ? eraRulesForYear(S.yr) : null;
+  if (!rules) return normal != null ? normal : 1;
+  if (kind === "red") return rules.redCardScale != null ? rules.redCardScale : 1;
+  if (kind === "subs") return Math.max(1, Math.min(rules.maxSubs || normal, 5));
+  return normal != null ? normal : 1;
+}
+/* Desempate a doble partido con valor doble de los goles fuera: tras los 90 minutos, si el global está empatado y los
+   goles fuera no, no hay prórroga; tras la prórroga, cuentan también los goles fuera de la prórroga; después, penaltis. */
+function eraTieOf(f) {
+  var c = S && S.C ? S.C[f.ck] : null;
+  return c && c.ko && c.ko.r[f.ri] ? c.ko.r[f.ri].ties[f.ti] : null;
+}
+function eraAwayGoalsApply(f) {
+  if (!f || f.kind !== "ko" || f.legs !== 2 || f.leg !== 1) return false;
+  var rules = eraRulesForYear(S.yr, eraScopeOfFixture(f));
+  return !!(rules && rules.awayGoals);
+}
+/* goles del equipo A y B en la eliminatoria y goles fuera de cada uno, con el resultado de la vuelta (de local, de visitante) */
+function eraAwayTally(t, homeGoals, awayGoals) {
+  var first = t.s[0] || [0, 0];
+  return {a: first[0] + awayGoals, b: first[1] + homeGoals, awayA: awayGoals, awayB: first[1]};
+}
+/* Noticias de cambios de reglas y competiciones: cada evento del timeline con «news» se anuncia al empezar la temporada
+   en la que entra en vigor (global, de tu liga o de tu confederación, o de una competición). */
+function eraRuleNewsFor(year) {
+  var scope = eraCareerScope(), events = ERAS_DATA.timeline && ERAS_DATA.timeline.events || [];
+  return events.filter(function (event) {
+    if (event.year !== year || !event.news) return false;
+    var kind = event.scope && event.scope.type;
+    return kind === "global" || kind === "competition" || eraScopeMatches(event.scope, scope);
+  }).map(function (event) { return eraText(event.news); });
+}
+function eraAnnounceRules() {
+  if (!eraIsActive()) return;
+  S.era.newsYears = S.era.newsYears || {};
+  if (S.era.newsYears[S.yr]) return;
+  S.era.newsYears[S.yr] = true;
+  eraRuleNewsFor(S.yr).forEach(function (text) {
+    if (S.mode === "mgr" && typeof mNews === "function") mNews("star", text);
+    else if (Array.isArray(S.bnews)) S.bnews.push({t: "star", x: text});
+  });
+}
 /* Los cambios se evalúan con S.yr en cada operación; no hay un bool global de reglas. */
 (function installEraRules() {
   if (!ERAS_MODE) return;
@@ -531,11 +575,83 @@ function eraForeignLimitApplies() {
       return eraLeagueName(W.lg[li].id, name, S.yr);
     };
   }
+  /* goles fuera en eliminatorias simuladas */
+  if (typeof simFixture === "function") {
+    var scopedSim = simFixture;
+    simFixture = function (f) {
+      var res = scopedSim.apply(this, arguments);
+      if (res && res.et && eraAwayGoalsApply(f)) {
+        var t = eraTieOf(f), x = t ? eraAwayTally(t, res.gh, res.ga) : null;
+        if (x && x.a === x.b && x.awayA !== x.awayB) { res.eh = 0; res.ea = 0; res.et = false; delete res.ph; delete res.pa; }
+      }
+      return res;
+    };
+  }
+  ["mgrExtra", "computeExtra"].forEach(function (name) {
+    if (typeof window[name] !== "function") return;
+    var scoped = window[name];
+    window[name] = function (f) {
+      var out = scoped.apply(this, arguments);
+      if (f && f.et && eraAwayGoalsApply(f)) {
+        var t = eraTieOf(f), home = f.home ? f.gu : f.gt, away = f.home ? f.gt : f.gu;
+        var x = t ? eraAwayTally(t, home, away) : null;
+        if (x && x.a === x.b && x.awayA !== x.awayB) { f.etu = 0; f.ett = 0; f.et = false; f.needPens = false; }
+        else if (x && f.needPens) {
+          var hET = home + (f.home ? f.etu : f.ett), aET = away + (f.home ? f.ett : f.etu), y = eraAwayTally(t, hET, aET);
+          if (y.a === y.b && y.awayA !== y.awayB) f.needPens = false;
+        }
+      }
+      return out;
+    };
+  });
+  if (typeof recordFixture === "function") {
+    var scopedRecord = recordFixture;
+    recordFixture = function (f, res) {
+      var t = eraTieOf(f), decided = null;
+      if (t && res && eraAwayGoalsApply(f)) {
+        var hTot = res.gh + (res.eh || 0), aTot = res.ga + (res.ea || 0), x = eraAwayTally(t, hTot, aTot);
+        if (x.a === x.b && x.awayA !== x.awayB) {
+          decided = x.awayA > x.awayB ? t.a : t.b;
+          var homeWins = decided === f.h;
+          res.ph = homeWins ? 1 : 0; res.pa = homeWins ? 0 : 1;
+        }
+      }
+      var out = scopedRecord.apply(this, arguments);
+      if (decided != null && t) { t.p = null; t.ag = true; }
+      return out;
+    };
+  }
+  /* cesión al portero: antes de 1992 el que va ganando puede dormir el partido pasando atrás para que el portero la coja */
+  if (typeof simGoals === "function") {
+    var oldSimGoals = simGoals;
+    simGoals = function () {
+      var g = oldSimGoals.apply(this, arguments), rules = eraIsActive() ? eraRulesForYear(S.yr) : null;
+      if (!rules || rules.backPassBanned || !rules.backPassLeadHold || g[0] === g[1]) return g;
+      var trail = g[0] < g[1] ? 0 : 1;
+      if (g[trail] > 0 && R() < rules.backPassLeadHold) g[trail]--;
+      return g;
+    };
+  }
+  ["startBlock", "mgrStartSeason"].forEach(function (name) {
+    if (typeof window[name] !== "function") return;
+    var original = window[name];
+    window[name] = function () {
+      var out = original.apply(this, arguments);
+      if (name === "mgrStartSeason" || S.bi === 0) eraAnnounceRules();
+      return out;
+    };
+  });
   if (typeof extraTime === "function") {
     var oldExtraTime = extraTime;
     extraTime = function () {
       var result = oldExtraTime.apply(this, arguments), rules = eraRulesForYear(S && S.yr);
       if (rules && rules.goldenGoal && result[0] !== result[1]) return result[0] > result[1] ? [1, 0] : [0, 1];
+      if (rules && rules.silverGoal && (result[0] || result[1])) {
+        /* gol de plata: si alguien va ganando al descanso de la prórroga, se acaba ahí */
+        var half = [0, 0];
+        for (var side = 0; side < 2; side++) for (var gi = 0; gi < result[side]; gi++) if (R() < 0.5) half[side]++;
+        if (half[0] !== half[1]) return half;
+      }
       return result;
     };
   }

@@ -29,7 +29,9 @@
   "recopaActive": true,
   "premierLeague": false,
   "championsLeagueBrand": false,
-  "foreignLimit": 3
+  "foreignLimit": 3,
+  "backPassLeadHold": 0.12,
+  "redCardScale": 0.75
  },
  "media": {
   "channels": [

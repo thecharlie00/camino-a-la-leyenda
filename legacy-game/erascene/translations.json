@@ -1396,5 +1396,239 @@
   "de": "Steckbrief {year}",
   "it": "Scheda {year}",
   "fr": "Fiche {year}"
+ },
+ "Inglaterra estrena los tres puntos por victoria.": {
+  "en": "England introduces three points for a win.",
+  "de": "England führt drei Punkte pro Sieg ein.",
+  "it": "L'Inghilterra introduce i tre punti a vittoria.",
+  "fr": "L'Angleterre adopte les trois points par victoire."
+ },
+ "El Informe Taylor obliga a los estadios ingleses a tener solo asientos.": {
+  "en": "The Taylor Report forces English grounds to become all-seater.",
+  "de": "Der Taylor-Report schreibt in England reine Sitzplatzstadien vor.",
+  "it": "Il Rapporto Taylor impone stadi inglesi con soli posti a sedere.",
+  "fr": "Le rapport Taylor impose des stades anglais à places assises."
+ },
+ "Nueva regla: el portero ya no puede coger con las manos una cesión de un compañero.": {
+  "en": "New rule: goalkeepers can no longer handle a deliberate back pass.",
+  "de": "Neue Regel: Torhüter dürfen einen Rückpass nicht mehr mit der Hand aufnehmen.",
+  "it": "Nuova regola: il portiere non può più prendere con le mani un retropassaggio.",
+  "fr": "Nouvelle règle : le gardien ne peut plus prendre à la main une passe en retrait."
+ },
+ "La Copa de Europa pasa a llamarse Champions League y estrena fase de grupos.": {
+  "en": "The European Cup becomes the Champions League, with a group stage.",
+  "de": "Der Europapokal heißt jetzt Champions League und bekommt eine Gruppenphase.",
+  "it": "La Coppa dei Campioni diventa Champions League, con la fase a gironi.",
+  "fr": "La Coupe d'Europe devient la Ligue des champions, avec une phase de groupes."
+ },
+ "Nace la Premier League: los grandes ingleses se separan de la Football League.": {
+  "en": "The Premier League is born as England's top clubs break away.",
+  "de": "Die Premier League entsteht: Englands Topklubs verlassen die Football League.",
+  "it": "Nasce la Premier League: i grandi club inglesi lasciano la Football League.",
+  "fr": "La Premier League voit le jour : les grands clubs anglais quittent la Football League."
+ },
+ "Francia, Escocia e Italia pasan a dar tres puntos por victoria.": {
+  "en": "France, Scotland and Italy move to three points for a win.",
+  "de": "Frankreich, Schottland und Italien vergeben jetzt drei Punkte pro Sieg.",
+  "it": "Francia, Scozia e Italia passano ai tre punti a vittoria.",
+  "fr": "La France, l'Écosse et l'Italie passent aux trois points par victoire."
+ },
+ "Se permiten dos cambios más un portero suplente.": {
+  "en": "Two substitutes plus a substitute goalkeeper are now allowed.",
+  "de": "Zwei Wechsel plus ein Ersatztorwart sind nun erlaubt.",
+  "it": "Sono consentite due sostituzioni più il portiere di riserva.",
+  "fr": "Deux remplacements plus un gardien remplaçant sont désormais autorisés."
+ },
+ "La FIFA generaliza los tres puntos por victoria.": {
+  "en": "FIFA makes three points for a win the norm.",
+  "de": "Die FIFA führt drei Punkte pro Sieg allgemein ein.",
+  "it": "La FIFA generalizza i tre punti a vittoria.",
+  "fr": "La FIFA généralise les trois points par victoire."
+ },
+ "Ya se pueden hacer tres cambios por partido.": {
+  "en": "Three substitutions per match are now allowed.",
+  "de": "Drei Wechsel pro Spiel sind nun erlaubt.",
+  "it": "Ora si possono fare tre sostituzioni a partita.",
+  "fr": "Trois remplacements par match sont désormais autorisés."
+ },
+ "La sentencia Bosman: libertad al acabar contrato y fin del límite de extranjeros comunitarios.": {
+  "en": "The Bosman ruling: free transfers at the end of contracts and no limit on EU players.",
+  "de": "Das Bosman-Urteil: ablösefreie Wechsel nach Vertragsende und kein Limit für EU-Spieler.",
+  "it": "La sentenza Bosman: svincolo a fine contratto e niente limite per i comunitari.",
+  "fr": "L'arrêt Bosman : transferts libres en fin de contrat et plus de quota pour les joueurs communautaires."
+ },
+ "La Eurocopa estrena el gol de oro en la prórroga.": {
+  "en": "The European Championship introduces the golden goal in extra time.",
+  "de": "Die EM führt das Golden Goal in der Verlängerung ein.",
+  "it": "L'Europeo introduce il golden gol nei supplementari.",
+  "fr": "L'Euro introduit le but en or en prolongation."
+ },
+ "La entrada por detrás que pone en peligro al rival se castiga con roja.": {
+  "en": "A tackle from behind that endangers an opponent is now a red card.",
+  "de": "Ein gefährliches Tackling von hinten wird jetzt mit Rot bestraft.",
+  "it": "Il tackle da dietro che mette in pericolo l'avversario è ora punito con il rosso.",
+  "fr": "Le tacle par derrière qui met l'adversaire en danger est désormais sanctionné d'un rouge."
+ },
+ "Se juega la última Recopa de Europa.": {
+  "en": "The last European Cup Winners' Cup is played.",
+  "de": "Der letzte Europapokal der Pokalsieger wird ausgespielt.",
+  "it": "Si gioca l'ultima Coppa delle Coppe.",
+  "fr": "La dernière Coupe des coupes est disputée."
+ },
+ "La FIFA impone ventanas de fichajes: se acabó fichar todo el año.": {
+  "en": "FIFA imposes transfer windows: no more year-round signings.",
+  "de": "Die FIFA führt Transferfenster ein: Schluss mit Wechseln das ganze Jahr.",
+  "it": "La FIFA impone le finestre di mercato: niente più acquisti tutto l'anno.",
+  "fr": "La FIFA impose les fenêtres de transferts : fini les recrutements toute l'année."
+ },
+ "Las copas europeas cambian el gol de oro por el gol de plata.": {
+  "en": "European club cups swap the golden goal for the silver goal.",
+  "de": "Die Europapokale ersetzen das Golden Goal durch das Silver Goal.",
+  "it": "Le coppe europee sostituiscono il golden gol con il silver gol.",
+  "fr": "Les coupes d'Europe remplacent le but en or par le but en argent."
+ },
+ "La Premier League estrena la tecnología de línea de gol.": {
+  "en": "The Premier League introduces goal-line technology.",
+  "de": "Die Premier League führt die Torlinientechnik ein.",
+  "it": "La Premier League introduce la goal-line technology.",
+  "fr": "La Premier League adopte la technologie sur la ligne de but."
+ },
+ "La Bundesliga y la Serie A estrenan el VAR.": {
+  "en": "The Bundesliga and Serie A introduce VAR.",
+  "de": "Bundesliga und Serie A führen den VAR ein.",
+  "it": "Bundesliga e Serie A introducono il VAR.",
+  "fr": "La Bundesliga et la Serie A adoptent la VAR."
+ },
+ "El Mundial estrena el VAR.": {
+  "en": "The World Cup introduces VAR.",
+  "de": "Die WM führt den VAR ein.",
+  "it": "Il Mondiale introduce il VAR.",
+  "fr": "La Coupe du monde adopte la VAR."
+ },
+ "LaLiga y la Ligue 1 estrenan el VAR.": {
+  "en": "LaLiga and Ligue 1 introduce VAR.",
+  "de": "LaLiga und Ligue 1 führen den VAR ein.",
+  "it": "LaLiga e Ligue 1 introducono il VAR.",
+  "fr": "LaLiga et la Ligue 1 adoptent la VAR."
+ },
+ "La Premier League estrena el VAR.": {
+  "en": "The Premier League introduces VAR.",
+  "de": "Die Premier League führt den VAR ein.",
+  "it": "La Premier League introduce il VAR.",
+  "fr": "La Premier League adopte la VAR."
+ },
+ "Se permiten cinco cambios por partido.": {
+  "en": "Five substitutions per match are now allowed.",
+  "de": "Fünf Wechsel pro Spiel sind nun erlaubt.",
+  "it": "Sono consentite cinque sostituzioni a partita.",
+  "fr": "Cinq remplacements par match sont désormais autorisés."
+ },
+ "La UEFA elimina el valor doble de los goles fuera.": {
+  "en": "UEFA abolishes the away goals rule.",
+  "de": "Die UEFA schafft die Auswärtstorregel ab.",
+  "it": "La UEFA abolisce la regola dei gol in trasferta.",
+  "fr": "L'UEFA supprime la règle des buts à l'extérieur."
+ },
+ "La Copa de Ferias se convierte en la Copa UEFA.": {
+  "en": "The Fairs Cup becomes the UEFA Cup.",
+  "de": "Der Messepokal wird zum UEFA-Pokal.",
+  "it": "La Coppa delle Fiere diventa Coppa UEFA.",
+  "fr": "La Coupe des villes de foires devient la Coupe UEFA."
+ },
+ "Nace la Supercopa de Europa.": {
+  "en": "The European Super Cup is born.",
+  "de": "Der europäische Supercup entsteht.",
+  "it": "Nasce la Supercoppa europea.",
+  "fr": "La Supercoupe d'Europe voit le jour."
+ },
+ "La Copa Intercontinental pasa a jugarse a partido único en Japón.": {
+  "en": "The Intercontinental Cup becomes a single match in Japan.",
+  "de": "Der Weltpokal wird ein einziges Spiel in Japan.",
+  "it": "La Coppa Intercontinentale diventa una gara unica in Giappone.",
+  "fr": "La Coupe intercontinentale se joue désormais en un match au Japon."
+ },
+ "Nace la Copa Conmebol.": {
+  "en": "The Copa Conmebol is born.",
+  "de": "Die Copa Conmebol entsteht.",
+  "it": "Nasce la Copa Conmebol.",
+  "fr": "La Copa Conmebol voit le jour."
+ },
+ "Nace la Copa Sudamericana.": {
+  "en": "The Copa Sudamericana is born.",
+  "de": "Die Copa Sudamericana entsteht.",
+  "it": "Nasce la Copa Sudamericana.",
+  "fr": "La Copa Sudamericana voit le jour."
+ },
+ "La Copa UEFA pasa a llamarse Europa League.": {
+  "en": "The UEFA Cup becomes the Europa League.",
+  "de": "Der UEFA-Pokal heißt jetzt Europa League.",
+  "it": "La Coppa UEFA diventa Europa League.",
+  "fr": "La Coupe UEFA devient la Ligue Europa."
+ },
+ "Nace la Conference League.": {
+  "en": "The Conference League is born.",
+  "de": "Die Conference League entsteht.",
+  "it": "Nasce la Conference League.",
+  "fr": "La Ligue Europa Conférence voit le jour."
+ },
+ "La Champions estrena la fase de liga de 36 equipos.": {
+  "en": "The Champions League introduces a 36-team league phase.",
+  "de": "Die Champions League führt eine Ligaphase mit 36 Teams ein.",
+  "it": "La Champions introduce la fase campionato a 36 squadre.",
+  "fr": "La Ligue des champions adopte une phase de ligue à 36 équipes."
+ },
+ "El Mundial de 1982 será el primero con 24 selecciones.": {
+  "en": "The 1982 World Cup will be the first with 24 teams.",
+  "de": "Die WM 1982 wird die erste mit 24 Teams.",
+  "it": "Il Mondiale 1982 sarà il primo a 24 squadre.",
+  "fr": "La Coupe du monde 1982 sera la première à 24 équipes."
+ },
+ "El Mundial de 1998 será el primero con 32 selecciones.": {
+  "en": "The 1998 World Cup will be the first with 32 teams.",
+  "de": "Die WM 1998 wird die erste mit 32 Teams.",
+  "it": "Il Mondiale 1998 sarà il primo a 32 squadre.",
+  "fr": "La Coupe du monde 1998 sera la première à 32 équipes."
+ },
+ "El Mundial de 2026 será el primero con 48 selecciones.": {
+  "en": "The 2026 World Cup will be the first with 48 teams.",
+  "de": "Die WM 2026 wird die erste mit 48 Teams.",
+  "it": "Il Mondiale 2026 sarà il primo a 48 squadre.",
+  "fr": "La Coupe du monde 2026 sera la première à 48 équipes."
+ },
+ "Nace la UEFA Nations League.": {
+  "en": "The UEFA Nations League is born.",
+  "de": "Die UEFA Nations League entsteht.",
+  "it": "Nasce la UEFA Nations League.",
+  "fr": "La Ligue des nations de l'UEFA voit le jour."
+ },
+ "Cesión al portero prohibida": {
+  "en": "Back pass to the goalkeeper banned",
+  "de": "Rückpass zum Torwart verboten",
+  "it": "Retropassaggio al portiere vietato",
+  "fr": "Passe en retrait au gardien interdite"
+ },
+ "Cesión al portero permitida: quien gana puede dormir el partido": {
+  "en": "Back pass to the goalkeeper allowed: the team ahead can kill the game",
+  "de": "Rückpass zum Torwart erlaubt: Wer führt, kann das Spiel einschläfern",
+  "it": "Retropassaggio al portiere consentito: chi vince può addormentare la partita",
+  "fr": "Passe en retrait autorisée : l'équipe qui mène peut endormir le match"
+ },
+ "Goles fuera valen doble en eliminatorias": {
+  "en": "Away goals count double in knockout ties",
+  "de": "Auswärtstore zählen in K.-o.-Duellen doppelt",
+  "it": "I gol in trasferta valgono doppio a eliminazione diretta",
+  "fr": "Les buts à l'extérieur comptent double en élimination directe"
+ },
+ "Entrada por detrás: roja": {
+  "en": "Tackle from behind: red card",
+  "de": "Tackling von hinten: Rot",
+  "it": "Tackle da dietro: rosso",
+  "fr": "Tacle par derrière : rouge"
+ },
+ "Menos expulsiones que hoy": {
+  "en": "Fewer sendings-off than today",
+  "de": "Weniger Platzverweise als heute",
+  "it": "Meno espulsioni di oggi",
+  "fr": "Moins d'expulsions qu'aujourd'hui"
  }
 }

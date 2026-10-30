@@ -502,7 +502,7 @@ function finishPlayer(f) {
     rating = clamp(round1(r), 3.5, 10);
     // tarjetas, cansancio y lesiones
     var yc = f.yc || chance(({DFC: 0.17, MCD: 0.17, LD: 0.12, LI: 0.12, MC: 0.12}[p.pos] || 0.07) * frac);
-    if (!f.red && chance(0.01 * frac)) { f.red = true; p.susp += 1; p.flags.recentRed = true; if (f.isNat && f.imp >= 2) p.flags.natVillain = S.yr; }
+    if (!f.red && chance(0.01 * frac * (typeof eraFactor === "function" ? eraFactor("red") : 1))) { f.red = true; p.susp += 1; p.flags.recentRed = true; if (f.isNat && f.imp >= 2) p.flags.natVillain = S.yr; }
     p.fit = clamp(p.fit - frac * 7 - (f.isNat ? 1.5 : 0), 5, 100);
     var risk = 0.0085 * frac * (1 + Math.max(0, 60 - p.fit) / 30) * (1.25 - p.prof / 200) * (p.flags.injMul || 1);
     if (f.minj || chance(risk)) injure(f.minj);

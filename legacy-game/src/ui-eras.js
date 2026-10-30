@@ -31,7 +31,10 @@
       '<span class="eras-tag">' + t("{n} puntos por victoria", {n: rules.winPoints}) + '</span>' +
       '<span class="eras-tag">' + t("En directo: máximo {n} cambios", {n: rules.maxSubs}) + '</span>' +
       '<span class="eras-tag">' + (rules.transferWindows ? t("Ventanas de fichajes") : t("Sin ventanas obligatorias")) + '</span>' +
-      '<span class="eras-tag">' + social + '</span><span class="eras-tag">' + varText + '</span></div>' + scopeText +
+      '<span class="eras-tag">' + social + '</span><span class="eras-tag">' + varText + '</span>' +
+      '<span class="eras-tag">' + (rules.backPassBanned ? t("Cesión al portero prohibida") : t("Cesión al portero permitida: quien gana puede dormir el partido")) + '</span>' +
+      (rules.awayGoals ? '<span class="eras-tag">' + t("Goles fuera valen doble en eliminatorias") + '</span>' : '') +
+      (rules.tackleFromBehindRed ? '<span class="eras-tag">' + t("Entrada por detrás: roja") + '</span>' : '<span class="eras-tag">' + t("Menos expulsiones que hoy") + '</span>') + '</div>' + scopeText +
       '<p class="eras-lead" style="margin:10px 0 0">' + skinText + '</p>' +
       '<p class="eras-lead" style="margin:6px 0 0">' + t("Escalas económicas simuladas para salarios, valores y presupuestos.") + ' · ' + t("Salarios ×{wage}; mercado ×{market}; presupuesto ×{tv}.", {wage: economy.wageScale.toFixed(2), market: economy.marketScale.toFixed(2), tv: economy.tvDealMultiplier.toFixed(2)}) + '</p>' +
       '<p class="eras-lead" style="margin:6px 0 0">' + t("Canales mostrados en el HUD; no simulan una red de contactos.") + ' ' + t("Canales: {channels}.", {channels: media.channels.map(channelLabel).join(" · ")}) + '</p>' +

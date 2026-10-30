@@ -615,7 +615,7 @@ function mgrFinish(f) {
   if (f.liveSubs && f.liveSubs.length) f.liveSubs.forEach(function (sb) { var q = mPl(sb["in"]); if (!q) return; if (mins[sb.out] != null) mins[sb.out] = Math.min(mins[sb.out], sb.min); mins[q.id] = full - sb.min; played.push(q); });
   /* cambios: entran hasta tres suplentes por los más cansados */
   var bench = f.bench ? f.bench.map(mPl).filter(function (p) { return p && mAvail(p) && f.xi.indexOf(p.id) < 0; }) : m.sq.filter(function (p) { return mAvail(p) && f.xi.indexOf(p.id) < 0; });
-  var tired = f.liveSubs ? [] : played.filter(function (p) { return p.id !== f.redId; }).sort(function (a, b) { return a.fit - b.fit; }).slice(0, 3);
+  var tired = f.liveSubs ? [] : played.filter(function (p) { return p.id !== f.redId; }).sort(function (a, b) { return a.fit - b.fit; }).slice(0, typeof eraFactor === "function" ? eraFactor("subs", 3) : 3);
   var slots = FORMATIONS[m.form], subs = [];
   if (f.liveSubs) f.liveSubs.forEach(function (sb) { var q = mPl(sb["in"]); if (q) subs.push(q); });
   tired.forEach(function (out) {
