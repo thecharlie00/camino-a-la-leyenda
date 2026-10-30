@@ -1,0 +1,20 @@
+name: Diagnóstico GOAT
+on:
+  push:
+    branches: [diag-goat-check]
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Servidor GOAT
+        run: |
+          A=https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev
+          getent hosts camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev || echo "DNS: no resuelve"
+          for u in "/" "/api/goat-ladder?mode=player&timeframe=all" "/api/goat-ladder/careers?mode=player&timeframe=all&metric=score" "/api/goat-ladder/careers?mode=manager&timeframe=all&metric=score"; do
+            echo "=== GET $u"; curl -sS -m 20 -o body.txt -w "HTTP %{http_code} · %{time_total}s\n" "$A$u" || true; head -c 600 body.txt; echo
+          done
+          for o in https://futbolroadtolegend.com null; do
+            echo "=== OPTIONS careers desde $o"; curl -sS -m 20 -o /dev/null -D - -X OPTIONS -H "Origin: $o" -H "Access-Control-Request-Method: POST" -H "Access-Control-Request-Headers: content-type" "$A/api/goat-ladder/careers" | grep -iE "^HTTP|access-control" || true
+            echo "=== GET careers desde $o"; curl -sS -m 20 -o /dev/null -D - -H "Origin: $o" "$A/api/goat-ladder/careers?mode=player&timeframe=all&metric=score" | grep -iE "^HTTP|access-control" || true
+          done
+          echo "=== play-store-version.json"; curl -sS -m 20 -w "\nHTTP %{http_code}\n" https://futbolroadtolegend.com/play-store-version.json || true
