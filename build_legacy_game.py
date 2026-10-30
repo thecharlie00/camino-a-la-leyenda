@@ -478,7 +478,7 @@ mobile_page = ROOT / "dist" / "android" / "jugar" / "juego.html"
 mobile_page.parent.mkdir(parents=True, exist_ok=True)
 mobile_page.write_text(mobile_html, encoding="utf-8")
 
-# Do not ship the stale v5.2 bundle from public/; the generated v5.18/68 game
+# Do not ship the stale v5.2 bundle from public/; the generated v5.19/69 game
 # is now the only engine used by the Web page and Android WebView.
 stale_bundle = ROOT / "dist" / "camino-engine.js"
 if stale_bundle.exists():
