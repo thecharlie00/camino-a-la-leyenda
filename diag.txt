@@ -1,0 +1,46 @@
+2606:4700:3030::ac43:b91b camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev
+2606:4700:3035::6815:4413 camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev
+=== GET /
+HTTP 404 · 0.137834s
+Not found
+=== GET /api/goat-ladder?mode=player&timeframe=all
+HTTP 400 · 0.075971s
+{"error":"Invalid timeframe"}
+=== GET /api/goat-ladder/careers?mode=player&timeframe=all&metric=score
+HTTP 400 · 0.052183s
+{"error":"Invalid timeframe"}
+=== GET /api/goat-ladder/careers?mode=manager&timeframe=all&metric=score
+HTTP 400 · 0.073175s
+{"error":"Invalid timeframe"}
+=== OPTIONS careers desde https://futbolroadtolegend.com
+HTTP/2 204 
+access-control-allow-origin: https://futbolroadtolegend.com
+access-control-allow-headers: Content-Type, Authorization
+access-control-allow-methods: GET, POST, DELETE, OPTIONS
+access-control-max-age: 86400
+=== GET careers desde https://futbolroadtolegend.com
+HTTP/2 400 
+access-control-allow-origin: https://futbolroadtolegend.com
+access-control-allow-headers: Content-Type, Authorization
+access-control-allow-methods: GET, POST, DELETE, OPTIONS
+access-control-max-age: 86400
+=== OPTIONS careers desde null
+HTTP/2 204 
+access-control-allow-origin: null
+access-control-allow-headers: Content-Type, Authorization
+access-control-allow-methods: GET, POST, DELETE, OPTIONS
+access-control-max-age: 86400
+=== GET careers desde null
+HTTP/2 400 
+access-control-allow-origin: null
+access-control-allow-headers: Content-Type, Authorization
+access-control-allow-methods: GET, POST, DELETE, OPTIONS
+access-control-max-age: 86400
+=== play-store-version.json
+{
+  "packageName": "com.caminoleyenda.app",
+  "versionCode": 65,
+  "versionName": "5.15"
+}
+
+HTTP 200
