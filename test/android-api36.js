@@ -34,11 +34,13 @@ assert.match(manifest, /screenLayout\|screenSize\|smallestScreenSize/);
 assert.match(manifest, /android:hardwareAccelerated="true"/);
 assert.doesNotMatch(activity, /setLayerType\(View\.LAYER_TYPE_HARDWARE/, 'Do not force a second hardware layer for the canvas-heavy WebView');
 assert.match(activity, /window\.setDecorFitsSystemWindows\(false\)/);
-assert.match(activity, /setOnApplyWindowInsetsListener\(new View\.OnApplyWindowInsetsListener\(\)/,
-  'Android must inset the WebView content below the status bar');
-assert.match(activity, /int topInset = Build\.VERSION\.SDK_INT >= 28 \? insets\.getSystemWindowInsetTop\(\) : 0/,
-  'Only edge-to-edge Android versions should add a native top inset');
-assert.match(activity, /view\.setPadding\(view\.getPaddingLeft\(\), topInset, view\.getPaddingRight\(\), view\.getPaddingBottom\(\)\)/);
+assert.match(activity, /root\.setOnApplyWindowInsetsListener\(new View\.OnApplyWindowInsetsListener\(\)/,
+  'Android must keep the game inside the system bars with a padded container (a WebView ignores its own padding)');
+assert.match(activity, /root\.addView\(webView,/, 'The WebView must live inside the padded container');
+assert.match(activity, /setContentView\(root\)/, 'The padded container must be the content view');
+assert.match(activity, /view\.setPadding\(bars\[0\], bars\[1\], bars\[2\], bars\[3\]\)/, 'All four system-bar sides must be applied');
+assert.match(activity, /WindowInsets\.Type\.systemBars\(\) \| WindowInsets\.Type\.displayCutout\(\)/, 'API 30+ must include status, navigation and cutout insets');
+assert.match(activity, /insets\.getSystemWindowInsetTop\(\)/, 'API 28-29 must fall back to the system window insets');
 assert.match(activity, /import android\.view\.WindowInsets;/, 'Safe-area handling must use the API 24-compatible WindowInsets type');
 assert.match(activity, /private static final class Api26/);
 assert.match(activity, /private static final class Api29/);
