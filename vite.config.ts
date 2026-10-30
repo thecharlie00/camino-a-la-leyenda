@@ -15,16 +15,16 @@ function copyLegacySiteFiles() {
       outDir = resolve(config.root, config.build.outDir);
     },
     closeBundle() {
-      for (const directory of ['en', 'de', 'fr', 'it', 'goat-ladder', 'fonts']) {
+      for (const directory of ['en', 'de', 'fr', 'it', 'goat-ladder', 'privacidad', 'fonts']) {
         cpSync(resolve(root, directory), resolve(outDir, directory), { recursive: true });
       }
-      for (const file of ['404.html', 'CNAME', '.nojekyll', 'ads.txt', 'site.css', 'site.js']) {
+      for (const file of ['404.html', 'CNAME', '.nojekyll', 'ads.txt', 'site.css', 'site.js', 'goat-ladder.js', 'trophies.js', 'pixel.js', 'manifest.webmanifest', 'sitemap.xml']) {
         copyFileSync(resolve(root, file), resolve(outDir, file));
       }
       const sourceImages = resolve(root, 'img');
       const targetImages = resolve(outDir, 'img');
       mkdirSync(targetImages, { recursive: true });
-      for (const file of readdirSync(sourceImages).filter((name) => name.startsWith('store-shot-'))) {
+      for (const file of readdirSync(sourceImages).filter((name) => !existsSync(resolve(targetImages, name)))) {
         copyFileSync(resolve(sourceImages, file), resolve(targetImages, file));
       }
     },
