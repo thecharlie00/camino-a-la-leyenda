@@ -33,7 +33,7 @@
         return '<button data-a="a11yrm" data-v="' + x[1] + '" aria-pressed="' + (o.rm === x[1]) + '">' + h(tr(x[0])) + "</button>";
       }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + tr("Reducidas: sin sacudidas de pantalla, pausas de impacto, partículas intensas ni reflejos 3D.") + "</p></div>" +
       '<div><label class="lbl">' + tr("Vibración") + '</label><div class="seg">' +
-      '<button data-a="a11yvib" data-v="1" aria-pressed="' + !!o.vib + '">' + tr("Activada") + '</button><button data-a="a11yvib" data-v="0" aria-pressed="' + !o.vib + '">' + tr("Desactivada") + "</button></div></div>";
+      '<button data-a="a11yvib" data-v="1" aria-pressed="' + !!o.vib + '">' + tr("Activada") + '</button><button data-a="a11yvib" data-v="0" aria-pressed="' + !o.vib + '">' + tr("Desactivada") + "</button></div></div>" + (window.SfxUI ? SfxUI.block() : "");
   }
   U.add("menu", function () { return '<details class="fold a11y"><summary>' + tr("Accesibilidad") + "</summary>" + '<div class="stack">' + a11yBlock() + "</div></details>"; });
   U.sheets.a11y = function () { return "<h2>" + tr("Accesibilidad") + '</h2><div class="stack">' + a11yBlock() + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>"; };

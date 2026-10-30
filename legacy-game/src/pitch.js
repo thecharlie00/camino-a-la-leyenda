@@ -188,16 +188,17 @@ var Pitch = (function () {
      Sintetizada con Web Audio (pulso, triángulo y ruido): sin archivos ni conexión. Se programa compás a compás. */
   var Music = (function () {
     var KEY = "camino.pitch.music", ac = null, master = null, noiseBuf = null, on = false, loaded = false, timer = null, button = null, unlocking = false, watchingVisibility = false;
-    var VOL = 0.7, BPM = 118, S16 = 60 / BPM / 4, BAR = S16 * 16, nextAt = 0, barIdx = 0;
-    /* acordes: arpegio y bajo */
-    var CH = {Am: [[69, 72, 76], 45], F: [[65, 69, 72], 41], C: [[67, 72, 76], 48], G: [[67, 71, 74], 43], E: [[68, 71, 76], 40], Em: [[67, 71, 76], 40]};
-    var PROG = ["Am", "F", "C", "G", "Am", "F", "G", "E", "F", "G", "Em", "Am", "F", "G", "C", "E"];
+    var VOL = 0.7, BPM = 128, S16 = 60 / BPM / 4, BAR = S16 * 16, nextAt = 0, barIdx = 0;
+    /* acordes: tríada aguda (arpegio y metales) y raíz del bajo */
+    var CH = {Am: [[69, 72, 76], 45], F: [[65, 69, 72], 41], C: [[67, 72, 76], 48], G: [[67, 71, 74], 43], E: [[68, 71, 76], 40], Dm: [[65, 69, 74], 38]};
+    /* 8 compases de marcha heroica y 8 de himno */
+    var PROG = ["Am", "F", "C", "G", "Am", "F", "E", "E", "F", "G", "C", "Am", "Dm", "E", "Am", "E"];
     /* melodía en corcheas: nota MIDI, 0 silencio, -1 alarga la anterior */
     var MEL = [
-      [76, 0, 76, 74, 72, 0, 69, 72], [74, 0, 72, 69, 72, -1, 0, 0], [76, 0, 76, 79, 81, -1, 79, 76], [74, -1, 71, 74, 79, -1, 0, 0],
-      [76, 0, 76, 74, 72, 0, 69, 72], [77, -1, 76, 74, 72, -1, 69, 72], [74, 0, 74, 76, 74, 71, 67, 71], [68, -1, 71, -1, 76, -1, 0, 0],
-      [81, -1, -1, 79, 77, -1, 76, 77], [79, -1, -1, 77, 76, -1, 74, 71], [76, -1, 79, -1, 83, -1, 79, 76], [81, -1, -1, -1, 76, 0, 72, 76],
-      [77, -1, 81, -1, 84, -1, 81, 77], [79, -1, 83, -1, 86, -1, 83, 79], [84, -1, 83, 81, 79, 76, 79, 81], [80, -1, -1, -1, 83, -1, 0, 0]
+      [76, -1, -1, 74, 76, -1, 81, -1], [77, -1, 76, 74, 72, -1, -1, -1], [76, -1, -1, 74, 76, -1, 79, -1], [79, -1, 77, 76, 74, -1, -1, -1],
+      [76, -1, -1, 74, 76, -1, 81, -1], [84, -1, -1, 83, 81, -1, 77, -1], [80, -1, -1, 81, 83, -1, -1, -1], [83, -1, 80, -1, 76, -1, 71, -1],
+      [81, -1, -1, -1, 84, -1, -1, -1], [83, -1, -1, 79, 86, -1, -1, -1], [84, -1, -1, -1, 79, -1, 76, -1], [81, -1, -1, -1, -1, -1, -1, -1],
+      [81, -1, -1, -1, 86, -1, 84, -1], [83, -1, -1, -1, 80, -1, 83, -1], [84, -1, -1, 83, 81, -1, 76, -1], [80, -1, 83, -1, 88, -1, -1, -1]
     ];
     var label = function () {
       var lang = typeof LANG === "string" ? LANG : "es";
@@ -225,7 +226,9 @@ var Pitch = (function () {
       var AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return false;
       try {
-        ac = new AC(); master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+        ac = new AC(); master = ac.createGain(); master.gain.value = 0;
+        var comp = ac.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 3; comp.attack.value = 0.01; comp.release.value = 0.2;
+        master.connect(comp); comp.connect(ac.destination);
         noiseBuf = ac.createBuffer(1, Math.floor(ac.sampleRate * 0.4), ac.sampleRate);
         var d = noiseBuf.getChannelData(0), seed = 7;
         for (var i = 0; i < d.length; i++) { seed = (seed * 16807) % 2147483647; d[i] = seed / 1073741823.5 - 1; }
@@ -248,25 +251,46 @@ var Pitch = (function () {
       g.gain.setValueAtTime(vol, at); g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
       src.connect(f); f.connect(g); g.connect(master); src.start(at); src.stop(at + dur + 0.02);
     }
-    function kick(at) { tone(52, at, 0.16, "sine", 0.32, 900, 0.35); }
-    /* un compás: bajo de triángulo a corcheas, arpegio de pulso a semicorcheas, melodía cuadrada y batería de ruido */
+    function kick(at, v) { tone(50, at, 0.2, "sine", v || 0.34, 900, 0.3); }
+    function tom(at, n) { tone(n, at, 0.28, "triangle", 0.2, 800, 0.55); }
+    function crash(at) { noise(at, 1.3, 0.09, "highpass", 5200); }
+    function snare(at, v) { noise(at, 0.16, v || 0.13, "bandpass", 1900); tone(55, at, 0.08, "triangle", 0.06, 900, 0.7); }
+    /* metales: tres sierras con ataque suave, como una sección de vientos */
+    function brass(notes, at, dur, vol) {
+      notes.forEach(function (n) {
+        var o = ac.createOscillator(), f = ac.createBiquadFilter(), g = ac.createGain();
+        o.type = "sawtooth"; o.frequency.setValueAtTime(hz(n), at); o.detune.setValueAtTime((n % 3 - 1) * 6, at);
+        f.type = "lowpass"; f.frequency.setValueAtTime(700, at); f.frequency.linearRampToValueAtTime(2000, at + 0.12); f.frequency.linearRampToValueAtTime(1200, at + dur);
+        g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(vol, at + 0.09);
+        g.gain.setValueAtTime(vol, at + dur * 0.8); g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+        o.connect(f); f.connect(g); g.connect(master); o.start(at); o.stop(at + dur + 0.02);
+      });
+    }
+    /* un compás: bajo galopante, metales, arpegio de pulso, melodía doblada a la octava en el himno y percusión de marcha */
     function scheduleBar(i, at) {
-      var bar = i % 16, ch = CH[PROG[bar]], b = bar >= 8, mel = MEL[bar];
-      for (var k = 0; k < 8; k++) tone(ch[1] + (k % 2 ? 12 : 0), at + k * 2 * S16, S16 * 1.7, "triangle", 0.16, 1200);
-      for (var a = 0; a < 16; a++) tone(ch[0][a % 3] + (a % 6 >= 3 ? 12 : 0), at + a * S16, S16 * 0.8, "square", b ? 0.022 : 0.016, 2200);
+      var bar = i % 16, ch = CH[PROG[bar]], hymn = bar >= 8, mel = MEL[bar], low = ch[0].map(function (n) { return n - 12; });
+      for (var k = 0; k < 16; k++) if (k % 4 !== 1) tone(ch[1] + (k % 8 === 6 ? 7 : k % 4 === 2 ? 12 : 0), at + k * S16, S16 * 0.95, k % 4 === 0 ? "sawtooth" : "triangle", k % 4 === 0 ? 0.07 : 0.13, 900);
+      if (hymn) { brass(low, at, BAR * 0.55, 0.035); brass(low, at + BAR * 0.625, BAR * 0.36, 0.03); }
+      else { brass(low, at, S16 * 3, 0.04); brass(low, at + S16 * 6, S16 * 2, 0.03); brass(low, at + S16 * 10, S16 * 5, 0.035); }
+      for (var a = 0; a < 16; a++) tone(ch[0][a % 3] + (a % 6 >= 3 ? 12 : 0), at + a * S16, S16 * 0.7, "square", hymn ? 0.014 : 0.011, 2400);
       for (var m = 0; m < 8; m++) {
         var n = mel[m]; if (n <= 0) continue;
         var len = 1; while (m + len < 8 && mel[m + len] === -1) len++;
-        tone(n, at + m * 2 * S16, len * 2 * S16 * 0.92, "square", 0.05, 3200);
-        tone(n + 0.08, at + m * 2 * S16 + 0.012, len * 2 * S16 * 0.9, "square", 0.018, 2600); /* eco desafinado: más cuerpo */
+        var d = len * 2 * S16 * 0.94;
+        tone(n, at + m * 2 * S16, d, "square", 0.05, 3400);
+        tone(n + 0.1, at + m * 2 * S16 + 0.01, d, "sawtooth", 0.018, 2600);
+        if (hymn) tone(n - 12, at + m * 2 * S16, d, "sawtooth", 0.03, 2200);
       }
       for (var s = 0; s < 16; s++) {
         var t0 = at + s * S16;
-        if (s === 0 || s === 8 || (b && (s === 6 || s === 14)) || (!b && s === 10)) kick(t0);
-        if (s === 4 || s === 12) noise(t0, 0.13, 0.12, "bandpass", 1800);
-        if (s % 2 === 0) noise(t0, 0.03, s % 4 === 2 ? 0.05 : 0.03, "highpass", 7000);
+        if (hymn ? s % 4 === 0 : (s === 0 || s === 8 || s === 11)) kick(t0);
+        if (s === 4 || s === 12) snare(t0);
+        else if (!hymn && (s === 14 || s === 15 || s === 7)) snare(t0, 0.05); /* redobles de marcha */
+        if (s % 2 === 0) noise(t0, 0.03, s % 4 === 2 ? 0.045 : 0.025, "highpass", 7500);
       }
-      if (bar === 15) { noise(at + 14 * S16, 0.12, 0.1, "bandpass", 1500); noise(at + 15 * S16, 0.12, 0.12, "bandpass", 1300); }
+      if (bar === 0 || bar === 8) crash(at);
+      if (bar === 7 || bar === 15) { tom(at + 12 * S16, 52); tom(at + 13 * S16, 48); tom(at + 14 * S16, 45); tom(at + 15 * S16, 40); }
+      else if (bar === 3 || bar === 11) { snare(at + 14 * S16, 0.09); snare(at + 15 * S16, 0.11); }
     }
     function pump() {
       timer = null;
