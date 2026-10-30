@@ -66,6 +66,16 @@ for (const [year, key, size] of [[1970, 'WC', 16], [1978, 'WC', 16], [1982, 'WC'
 }
 assert.equal(window.natTournamentsOf(1977).length, 0, 'no major national tournament in 1977');
 assert.ok(!window.natTournamentsOf(2016).some((t) => t.k === 'NLF'), 'no Nations League finals before 2019');
+
+/* Anuario: la historia real frente a la tuya */
+window.eval("ERA_CREATE_CONTEXT = null; eraStartCareer('manager', 1985, {firstName: 'Book', lastName: 'Test', clubName: 'Liverpool'}); for (let w = 0; w <= 45; w++) weekFixtures(w).forEach(f => { const r = simFixture(f); if (r) recordFixture(f, r); }); seasonEndWorld(); S.yr++; setupSeasonComps();");
+const book = JSON.parse(JSON.stringify(window.eraYearbook()));
+assert.equal(book.seasons[0].year, 1985, 'the yearbook starts in the first season of the career');
+const englandRow = book.seasons[0].rows.find((row) => row.key === 'L:ENG1');
+assert.equal(englandRow.real, 'Liverpool', 'Liverpool won the English title in 1985-86');
+assert.equal(book.seasons[0].rows.find((row) => row.key === 'UCL').real, 'Steaua București', 'Steaua won the 1985-86 European Cup');
+assert.ok(book.compared >= 10 && book.divergence >= 0 && book.divergence <= 100, 'the yearbook compares real and simulated champions');
+assert.equal(window.eraRealClub('Bayern Munich'), window.W.cName['Bayern Múnich'], 'real club names resolve to the game world through aliases');
 assert.equal(errors.length, 0, errors.join('\n'));
-console.log('Era competitions passed: 1975, 1994, 1998, 2005, 2021 and 2025 calendars, Super Cup and Intercontinental, and World Cup/Euro editions.');
+console.log('Era competitions passed: 1975, 1994, 1998, 2005, 2021 and 2025 calendars, Super Cup and Intercontinental, World Cup/Euro editions and the history yearbook.');
 window.close();

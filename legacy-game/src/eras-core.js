@@ -515,6 +515,42 @@ function eraAnnounceRules() {
     else if (Array.isArray(S.bnews)) S.bnews.push({t: "star", x: text});
   });
 }
+/* Anuario: la historia real (erascene/history.json) frente a tu partida, temporada a temporada */
+function eraRealClub(name) {
+  var h = ERAS_DATA.history || {}, alias = (h.aliases || {})[name] || name;
+  return W.cName && W.cName[alias] != null ? W.cName[alias] : -1;
+}
+function eraHistWinner(key, year) {
+  var list = S.hist && S.hist[key] || [];
+  for (var i = list.length - 1; i >= 0; i--) if (list[i][0] === year) return list[i][1];
+  return null;
+}
+function eraYearbook() {
+  if (!eraIsActive()) return null;
+  var h = ERAS_DATA.history || {seasons: {}, national: {}}, scope = eraCareerScope(), mine = S.mode === "mgr" ? S.m && S.m.club : S.p && S.p.club;
+  var seasons = [], compared = 0, changed = 0;
+  for (var y = S.era.startYear; y < S.yr; y++) {
+    var real = h.seasons[String(y)] || {}, keys = Object.keys(real);
+    if (scope && real["L:" + scope.league]) keys = ["L:" + scope.league].concat(keys.filter(function (k) { return k !== "L:" + scope.league; }));
+    var rows = [];
+    keys.forEach(function (key) {
+      var yours = eraHistWinner(key, y);
+      if (yours == null) return;
+      var realIdx = eraRealClub(real[key]), same = realIdx >= 0 && realIdx === yours;
+      compared++; if (!same) changed++;
+      rows.push({key: key, real: real[key], yours: yours, same: same, mine: yours === mine});
+    });
+    Object.keys(h.national || {}).forEach(function (tk) {
+      var code = h.national[tk][String(y + 1)], yours = eraHistWinner(tk, y + 1);
+      if (!code || yours == null || !W.ctry[yours]) return;
+      var same = W.ctry[yours].code === code;
+      compared++; if (!same) changed++;
+      rows.push({key: tk, nat: true, year: y + 1, real: code, yours: yours, same: same, mine: S.p && S.p.inat === yours});
+    });
+    if (rows.length) seasons.push({year: y, rows: rows});
+  }
+  return {seasons: seasons, compared: compared, changed: changed, divergence: compared ? Math.round(changed / compared * 100) : 0};
+}
 /* Los cambios se evalúan con S.yr en cada operación; no hay un bool global de reglas. */
 (function installEraRules() {
   if (!ERAS_MODE) return;

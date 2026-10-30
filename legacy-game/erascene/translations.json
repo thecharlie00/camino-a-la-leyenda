@@ -1774,5 +1774,107 @@
   "de": "Die Gruppenphase 1991-93 wird als K.-o.-Runden gespielt",
   "it": "La fase a gironi 1991-93 si gioca a eliminazione diretta",
   "fr": "La phase de groupes 1991-93 est jouée en élimination directe"
+ },
+ "Anuario": {
+  "en": "Yearbook",
+  "de": "Jahrbuch",
+  "it": "Annuario",
+  "fr": "Annuaire"
+ },
+ "Anuario de la historia": {
+  "en": "History yearbook",
+  "de": "Jahrbuch der Geschichte",
+  "it": "Annuario della storia",
+  "fr": "Annuaire de l'histoire"
+ },
+ "Mundial": {
+  "en": "World Cup",
+  "de": "Weltmeisterschaft",
+  "it": "Mondiale",
+  "fr": "Coupe du monde"
+ },
+ "Eurocopa": {
+  "en": "European Championship",
+  "de": "Europameisterschaft",
+  "it": "Europeo",
+  "fr": "Euro"
+ },
+ "Copa América": {
+  "en": "Copa América",
+  "de": "Copa América",
+  "it": "Copa América",
+  "fr": "Copa América"
+ },
+ "¡{club} gana {comp}, como en la historia real!": {
+  "en": "{club} win the {comp}, just as in real history!",
+  "de": "{club} gewinnt {comp}, wie in der echten Geschichte!",
+  "it": "Il {club} vince {comp}, come nella storia reale!",
+  "fr": "{club} remporte {comp}, comme dans l'histoire réelle !"
+ },
+ "¡{club} gana {comp}! En la realidad fue {real}.": {
+  "en": "{club} win the {comp}! In reality it was {real}.",
+  "de": "{club} gewinnt {comp}! In Wirklichkeit war es {real}.",
+  "it": "Il {club} vince {comp}! Nella realtà fu {real}.",
+  "fr": "{club} remporte {comp} ! En réalité, ce fut {real}."
+ },
+ "La historia cambia: {club} gana {comp} (en la realidad, {real}).": {
+  "en": "History changes: {club} win the {comp} (in reality, {real}).",
+  "de": "Die Geschichte ändert sich: {club} gewinnt {comp} (in Wirklichkeit {real}).",
+  "it": "La storia cambia: il {club} vince {comp} (nella realtà, {real}).",
+  "fr": "L'histoire change : {club} remporte {comp} (en réalité, {real})."
+ },
+ "La temporada sigue la historia real.": {
+  "en": "The season follows real history.",
+  "de": "Die Saison folgt der echten Geschichte.",
+  "it": "La stagione segue la storia reale.",
+  "fr": "La saison suit l'histoire réelle."
+ },
+ "Divergencia: {n} %": {
+  "en": "Divergence: {n}%",
+  "de": "Abweichung: {n} %",
+  "it": "Divergenza: {n}%",
+  "fr": "Divergence : {n} %"
+ },
+ "{c} de {n} títulos han cambiado respecto a la historia real.": {
+  "en": "{c} of {n} titles have changed from real history.",
+  "de": "{c} von {n} Titeln haben sich gegenüber der echten Geschichte geändert.",
+  "it": "{c} titoli su {n} sono cambiati rispetto alla storia reale.",
+  "fr": "{c} titres sur {n} ont changé par rapport à l'histoire réelle."
+ },
+ "Juega una temporada completa para comparar tu historia con la real.": {
+  "en": "Play a full season to compare your history with the real one.",
+  "de": "Spiele eine ganze Saison, um deine Geschichte mit der echten zu vergleichen.",
+  "it": "Gioca una stagione completa per confrontare la tua storia con quella reale.",
+  "fr": "Joue une saison complète pour comparer ton histoire à la réelle."
+ },
+ "Documental: tu paso por la historia": {
+  "en": "Documentary: your mark on history",
+  "de": "Dokumentation: deine Spur in der Geschichte",
+  "it": "Documentario: il tuo segno nella storia",
+  "fr": "Documentaire : ta trace dans l'histoire"
+ },
+ "{t} títulos con tu equipo; {r} de ellos no existían en la historia real.": {
+  "en": "{t} titles with your team; {r} of them never happened in real history.",
+  "de": "{t} Titel mit deinem Team; {r} davon gab es in der echten Geschichte nicht.",
+  "it": "{t} titoli con la tua squadra; {r} di questi non esistevano nella storia reale.",
+  "fr": "{t} titres avec ton équipe ; {r} d'entre eux n'existaient pas dans l'histoire réelle."
+ },
+ "Competición": {
+  "en": "Competition",
+  "de": "Wettbewerb",
+  "it": "Competizione",
+  "fr": "Compétition"
+ },
+ "Historia real": {
+  "en": "Real history",
+  "de": "Echte Geschichte",
+  "it": "Storia reale",
+  "fr": "Histoire réelle"
+ },
+ "Tu historia": {
+  "en": "Your history",
+  "de": "Deine Geschichte",
+  "it": "La tua storia",
+  "fr": "Ton histoire"
  }
 }

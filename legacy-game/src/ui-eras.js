@@ -16,7 +16,7 @@
   function theme() {
     if (!document.getElementById("eras-style")) {
       var style = document.createElement("style"); style.id = "eras-style";
-      style.textContent = ".eras-hud{position:fixed;z-index:58;top:6px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;max-width:calc(100vw - 16px);padding:5px 7px;border:1px solid rgba(220,190,108,.65);border-radius:12px;background:rgba(7,14,17,.94);box-shadow:0 4px 14px #0008;color:#f3e8c8;font:700 11px/1.2 system-ui,sans-serif}#app.era-active header.top{flex-wrap:wrap}header.top .eras-hud{position:static;transform:none;flex:1 0 100%;order:9;max-width:none;justify-content:center;margin:2px 0 0;box-shadow:none}.eras-hud span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.eras-hud button{border:0;border-radius:8px;padding:5px 7px;background:#24343a;color:#fff;font:inherit}.eras-overlay{position:fixed;z-index:1000;inset:0;background:rgba(3,8,10,.88);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px 10px 30px}.eras-dialog{width:min(680px,100%);margin:auto;background:#101c20;color:#e9eee7;border:1px solid rgba(220,190,108,.48);border-radius:18px;padding:18px;box-shadow:0 18px 60px #000b}.eras-dialog h2,.eras-dialog h3{margin:0 0 7px}.eras-kicker{color:#e0bf67;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.eras-lead{color:#b9c7c2;line-height:1.45}.eras-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.eras-field{display:flex;flex-direction:column;gap:5px;min-width:0}.eras-field label{font-size:.78rem;color:#b9c7c2}.eras-field input,.eras-field select{box-sizing:border-box;width:100%;min-height:42px;border:1px solid #42545a;border-radius:10px;padding:8px 10px;background:#091316;color:#f4f4ee;font:inherit}.eras-summary{margin:14px 0;padding:12px;border-radius:12px;background:#0a1316;border-left:3px solid #d0ae5d}.eras-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.eras-tag{border:1px solid #34474c;border-radius:99px;padding:4px 8px;color:#d8e1da;font-size:.72rem}.eras-actions{display:flex;gap:8px;margin-top:14px}.eras-actions button,.eras-save button{min-height:40px;border:1px solid #43565b;border-radius:10px;padding:8px 12px;background:#1b2a2f;color:#f5f5ee;font:700 .9rem system-ui,sans-serif}.eras-actions .primary{background:#b7913c;color:#141414;border-color:#d7b45f}.eras-save{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #26363a}.eras-save small{display:block;color:#b9c7c2}.eras-saves{max-height:210px;overflow:auto}.eras-history{margin:8px 0 0;padding-left:22px;color:#d8e1da}.eras-history li{padding:6px 0;border-bottom:1px solid #26363a}.eras-history li span{display:block}.eras-history li small{display:block;color:#b9c7c2;margin-top:2px}.era-skin-teletext .top{border-bottom:2px solid #4ad65a}.era-skin-teletext .top .name,.era-skin-teletext .tag{font-family:ui-monospace,monospace}.era-skin-teletext .card{border-radius:2px}.era-skin-print-scoreboard .top{border-top:3px solid #b58e3f}@media(max-width:520px){.eras-dialog{padding:14px}.eras-grid{grid-template-columns:1fr}.eras-hud{font-size:10px}.eras-hud button{padding:5px}}";
+      style.textContent = ".eras-hud{position:fixed;z-index:58;top:6px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;max-width:calc(100vw - 16px);padding:5px 7px;border:1px solid rgba(220,190,108,.65);border-radius:12px;background:rgba(7,14,17,.94);box-shadow:0 4px 14px #0008;color:#f3e8c8;font:700 11px/1.2 system-ui,sans-serif}#app.era-active header.top{flex-wrap:wrap}header.top .eras-hud{position:static;transform:none;flex:1 0 100%;order:9;max-width:none;justify-content:center;margin:2px 0 0;box-shadow:none}.eras-paper{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(220,190,108,.35);border-radius:12px;background:rgba(255,255,255,.03)}.eras-paper-head{display:flex;flex-direction:column;gap:2px;margin:0 0 8px}.eras-paper-head span{font-size:12px;opacity:.75;letter-spacing:.08em;text-transform:uppercase}.eras-paper-head b{font-size:15px;line-height:1.3}.eras-book{list-style:none;margin:0;padding:0;font-size:13px;text-align:left}.eras-book li{display:flex;flex-direction:column;gap:1px;padding:6px 0;border-top:1px solid rgba(255,255,255,.08)}.eras-book li span{font-weight:600}.eras-book li small{opacity:.85}.eras-book li.diff small:last-child{color:#f0c96a}.eras-book li.mine span{color:#f0c96a}.eras-hud span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.eras-hud button{border:0;border-radius:8px;padding:5px 7px;background:#24343a;color:#fff;font:inherit}.eras-overlay{position:fixed;z-index:1000;inset:0;background:rgba(3,8,10,.88);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px 10px 30px}.eras-dialog{width:min(680px,100%);margin:auto;background:#101c20;color:#e9eee7;border:1px solid rgba(220,190,108,.48);border-radius:18px;padding:18px;box-shadow:0 18px 60px #000b}.eras-dialog h2,.eras-dialog h3{margin:0 0 7px}.eras-kicker{color:#e0bf67;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.eras-lead{color:#b9c7c2;line-height:1.45}.eras-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.eras-field{display:flex;flex-direction:column;gap:5px;min-width:0}.eras-field label{font-size:.78rem;color:#b9c7c2}.eras-field input,.eras-field select{box-sizing:border-box;width:100%;min-height:42px;border:1px solid #42545a;border-radius:10px;padding:8px 10px;background:#091316;color:#f4f4ee;font:inherit}.eras-summary{margin:14px 0;padding:12px;border-radius:12px;background:#0a1316;border-left:3px solid #d0ae5d}.eras-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.eras-tag{border:1px solid #34474c;border-radius:99px;padding:4px 8px;color:#d8e1da;font-size:.72rem}.eras-actions{display:flex;gap:8px;margin-top:14px}.eras-actions button,.eras-save button{min-height:40px;border:1px solid #43565b;border-radius:10px;padding:8px 12px;background:#1b2a2f;color:#f5f5ee;font:700 .9rem system-ui,sans-serif}.eras-actions .primary{background:#b7913c;color:#141414;border-color:#d7b45f}.eras-save{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #26363a}.eras-save small{display:block;color:#b9c7c2}.eras-saves{max-height:210px;overflow:auto}.eras-history{margin:8px 0 0;padding-left:22px;color:#d8e1da}.eras-history li{padding:6px 0;border-bottom:1px solid #26363a}.eras-history li span{display:block}.eras-history li small{display:block;color:#b9c7c2;margin-top:2px}.era-skin-teletext .top{border-bottom:2px solid #4ad65a}.era-skin-teletext .top .name,.era-skin-teletext .tag{font-family:ui-monospace,monospace}.era-skin-teletext .card{border-radius:2px}.era-skin-print-scoreboard .top{border-top:3px solid #b58e3f}@media(max-width:520px){.eras-dialog{padding:14px}.eras-grid{grid-template-columns:1fr}.eras-hud{font-size:10px}.eras-hud button{padding:5px}}";
       document.head.appendChild(style);
     }
   }
@@ -230,6 +230,52 @@
     var ui = window.UIX.ui(); ui.view = "home"; ui.cr = null; ui.sheet = null;
     window.UIX.render(true);
   };
+  /* ---------- Anuario: historia real frente a la tuya ---------- */
+  function compLabel(key, year) {
+    if (key.indexOf("L:") === 0) { var li = W.lgIdx ? W.lgIdx[key.slice(2)] : null; return li != null ? lgName(li) : key.slice(2); }
+    var comp = window.EraComps && EraComps.clubComp(key);
+    if (comp) return EraComps.naming(comp, year).n;
+    return {WC: t("Mundial"), EURO: t("Eurocopa"), CA: t("Copa América")}[key] || key;
+  }
+  function realLabel(row) {
+    if (row.nat) { var ni = W.cIdx[row.real]; return ni != null ? natName(ni) : row.real; }
+    var ci = eraRealClub(row.real); return ci >= 0 ? clubName(ci) : row.real;
+  }
+  function yoursLabel(row) { return row.nat ? natName(row.yours) : clubName(row.yours); }
+  function headline(season) {
+    var mine = season.rows.filter(function (r) { return r.mine; })[0], diff = season.rows.filter(function (r) { return !r.same; })[0];
+    var label = season.rows[0] && season.rows[0].nat ? season.rows[0].year : season.year;
+    if (mine) return mine.same ? t("¡{club} gana {comp}, como en la historia real!", {club: yoursLabel(mine), comp: compLabel(mine.key, label)})
+      : t("¡{club} gana {comp}! En la realidad fue {real}.", {club: yoursLabel(mine), comp: compLabel(mine.key, label), real: realLabel(mine)});
+    if (diff) return t("La historia cambia: {club} gana {comp} (en la realidad, {real}).", {club: yoursLabel(diff), comp: compLabel(diff.key, season.year), real: realLabel(diff)});
+    return t("La temporada sigue la historia real.");
+  }
+  function showYearbook() {
+    var book = eraYearbook(); if (!book) return;
+    theme(); state.open = true;
+    layer = document.getElementById("era-overlay");
+    if (!layer) { layer = document.createElement("div"); layer.id = "era-overlay"; layer.className = "eras-overlay"; document.body.appendChild(layer); }
+    var pack = eraPackForYear(S.yr), retired = S.ph === "ret" || !!S.retired || !!S.retiredP;
+    var body = '<div class="eras-summary"><b>' + t("Divergencia: {n} %", {n: book.divergence}) + '</b><p class="eras-lead" style="margin:6px 0 0">' +
+      (book.compared ? t("{c} de {n} títulos han cambiado respecto a la historia real.", {c: book.changed, n: book.compared}) : t("Juega una temporada completa para comparar tu historia con la real.")) + "</p></div>";
+    if (retired) {
+      var mineRows = [], rewritten = 0;
+      book.seasons.forEach(function (season) { season.rows.forEach(function (r) { if (r.mine) { mineRows.push({season: season, row: r}); if (!r.same) rewritten++; } }); });
+      body += '<section class="eras-summary"><b>' + t("Documental: tu paso por la historia") + '</b><p class="eras-lead" style="margin:6px 0 0">' +
+        t("{t} títulos con tu equipo; {r} de ellos no existían en la historia real.", {t: mineRows.length, r: rewritten}) + "</p>" +
+        mineRows.slice(0, 8).map(function (x) { return '<p class="eras-lead" style="margin:4px 0 0">' + eraEscape(x.season.year + " · " + compLabel(x.row.key, x.season.year)) + "</p>"; }).join("") + "</section>";
+    }
+    body += book.seasons.slice().reverse().map(function (season) {
+      return '<section class="eras-paper"><div class="eras-paper-head"><span>' + eraEscape(typeof seasonLabel === "function" ? seasonLabel(season.year) : season.year) + '</span><b>' + eraEscape(headline(season)) + '</b></div><ul class="eras-book">' +
+        season.rows.map(function (r) {
+          return '<li class="' + (r.same ? "same" : "diff") + (r.mine ? " mine" : "") + '"><span>' + eraEscape(compLabel(r.key, r.nat ? r.year : season.year)) + '</span><small>' + t("Historia real") + ": " + eraEscape(realLabel(r)) + '</small><small>' + t("Tu historia") + ": " + (r.same ? "= " : "≠ ") + eraEscape(yoursLabel(r)) + "</small></li>";
+        }).join("") + "</ul></section>";
+    }).join("");
+    layer.setAttribute("data-era-decade", pack.id);
+    layer.innerHTML = '<section class="eras-dialog" data-era-decade="' + eraEscape(pack.id) + '" role="dialog" aria-modal="true" aria-labelledby="eras-book-title"><div class="eras-kicker">' + eraEscape(S.era.startDecade) + '</div><h2 id="eras-book-title">' + t("Anuario de la historia") + "</h2>" + body +
+      '<div class="eras-actions"><button type="button" data-era-act="close">' + t("Volver") + "</button></div></section>";
+  }
+  UIX.actions["era-book"] = function () { showYearbook(); };
   UIX.actions["era-rules"] = function () { showCurrentRules(); };
   UIX.add("after", function () {
     var ui = window.UIX.ui(), active = ERAS_MODE && S && S.era && S.era.active && ui.view !== "home";
@@ -259,7 +305,7 @@
     hud.setAttribute("data-era-decade", eraPackForYear(S.yr).id);
     hud.setAttribute("data-era-year", S.yr);
     var currentChannel = channelLabel(eraMediaChannel(S.yr, S.yr + "|" + S.bi));
-    hud.innerHTML = '<span>' + t("{decade} · {year}", {decade: eraEscape(S.era.startDecade), year: S.yr}) + ' · ' + t("{n} pts/victoria", {n: rules.winPoints}) + ' · ' + eraEscape(currentChannel) + '</span><button type="button" data-a="era-rules">' + t("Reglas") + '</button><button type="button" data-a="era-exit">' + t("Salir") + '</button>';
+    hud.innerHTML = '<span>' + t("{decade} · {year}", {decade: eraEscape(S.era.startDecade), year: S.yr}) + ' · ' + t("{n} pts/victoria", {n: rules.winPoints}) + ' · ' + eraEscape(currentChannel) + '</span><button type="button" data-a="era-book">' + t("Anuario") + '</button><button type="button" data-a="era-rules">' + t("Reglas") + '</button><button type="button" data-a="era-exit">' + t("Salir") + '</button>';
   });
   document.addEventListener("change", function (event) {
     var field = event.target && event.target.getAttribute("data-era-field");
