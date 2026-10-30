@@ -1,0 +1,29 @@
+name: Diagnóstico GOAT
+on:
+  push:
+    branches: [diag-goat-check]
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enviar carreras de míster de prueba (y borrarlas)
+        run: |
+          exec > >(tee diag.txt) 2>&1
+          A=https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev/api/goat-ladder/careers
+          for f in diag/*.json; do
+            for ct in "application/json"; do
+              echo "=== POST $f ($ct)"
+              curl -sS -m 30 -o r.json -w "HTTP %{http_code}\n" -X POST -H "Origin: https://futbolroadtolegend.com" -H "Content-Type: $ct" --data-binary @"$f" "$A" || true
+              head -c 400 r.json; echo
+              id=$(jq -r ".id // empty" r.json 2>/dev/null || true); tok=$(jq -r ".delete_token // empty" r.json 2>/dev/null || true)
+              if [ -n "$id" ]; then echo "--- DELETE $id"; curl -sS -m 30 -w " HTTP %{http_code}\n" -X DELETE -H "Authorization: Bearer $tok" "$A?id=$id" || true; fi
+            done
+          done
+      - name: Guardar resultado
+        if: always()
+        run: |
+          git config user.name "github-actions"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add diag.txt; git commit -m "Resultado [skip ci]"; git push
