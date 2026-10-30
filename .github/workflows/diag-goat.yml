@@ -14,11 +14,11 @@ jobs:
           exec > >(tee diag.txt) 2>&1
           A=https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev/api/goat-ladder/careers
           for f in diag/*.json; do
-            for ct in "application/json" "text/plain;charset=UTF-8"; do
+            for ct in "application/json"; do
               echo "=== POST $f ($ct)"
               curl -sS -m 30 -o r.json -w "HTTP %{http_code}\n" -X POST -H "Origin: https://futbolroadtolegend.com" -H "Content-Type: $ct" --data-binary @"$f" "$A" || true
               head -c 400 r.json; echo
-              id=$(jq -r '.id // empty' r.json); tok=$(jq -r '.delete_token // empty' r.json)
+              id=$(jq -r ".id // empty" r.json 2>/dev/null || true); tok=$(jq -r ".delete_token // empty" r.json 2>/dev/null || true)
               if [ -n "$id" ]; then echo "--- DELETE $id"; curl -sS -m 30 -w " HTTP %{http_code}\n" -X DELETE -H "Authorization: Bearer $tok" "$A?id=$id" || true; fi
             done
           done
