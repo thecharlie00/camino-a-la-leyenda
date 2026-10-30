@@ -22,7 +22,7 @@ const dom = new JSDOM(html, {
 });
 const {window} = dom;
 const start = Date.now();
-while (!(window.UIX && window.eraStartCareer && window.eraScene3D && window.Pitch3D)) {
+while (!(window.UIX && window.eraStartCareer && window.eraScene3D && window.Pitch3D && window.UIX.actions && window.UIX.actions["era-rules"] && window.UIX.eraBookExtra)) {
   if (Date.now() - start > 30000) throw new Error('game did not boot');
   await new Promise((resolve) => setTimeout(resolve, 20));
 }
