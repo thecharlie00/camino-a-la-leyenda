@@ -1876,5 +1876,431 @@
   "de": "Deine Geschichte",
   "it": "La tua storia",
   "fr": "Ton histoire"
+ },
+ "Alemania Federal": {
+  "en": "West Germany",
+  "de": "BR Deutschland",
+  "it": "Germania Ovest",
+  "fr": "RFA"
+ },
+ "Atacar": {
+  "en": "Attack",
+  "de": "Angreifen",
+  "it": "Attaccare",
+  "fr": "Attaquer"
+ },
+ "Atacas": {
+  "en": "You attack",
+  "de": "Du greifst an",
+  "it": "Attacchi",
+  "fr": "Tu attaques"
+ },
+ "Cambia la historia: que gane {team}": {
+  "en": "Change history: make {team} win",
+  "de": "Ändere die Geschichte: {team} soll gewinnen",
+  "it": "Cambia la storia: fai vincere {team}",
+  "fr": "Change l'histoire : fais gagner {team}"
+ },
+ "Cambiar": {
+  "en": "Swap",
+  "de": "Tauschen",
+  "it": "Scambia",
+  "fr": "Échanger"
+ },
+ "Cambio hecho: {c}": {
+  "en": "Swap done: {c}",
+  "de": "Getauscht: {c}",
+  "it": "Scambio fatto: {c}",
+  "fr": "Échange effectué : {c}"
+ },
+ "Checoslovaquia": {
+  "en": "Czechoslovakia",
+  "de": "Tschechoslowakei",
+  "it": "Cecoslovacchia",
+  "fr": "Tchécoslovaquie"
+ },
+ "Consigue cromos jugando carreras de Épocas en los 80 (dos por temporada y uno por cada título de tu equipo) y con los momentos de los 80. {n} repetidos se cambian por el cromo que elijas.": {
+  "en": "Earn stickers by playing Era Mode careers in the 1980s (two per season and one for each title your team wins) and through the 1980s moments. {n} duplicates can be swapped for the sticker of your choice.",
+  "de": "Sammle Bilder in Epochen-Karrieren der 80er (zwei pro Saison und eins für jeden Titel deines Teams) und mit den Momenten der 80er. {n} doppelte Bilder tauschst du gegen ein Bild deiner Wahl.",
+  "it": "Ottieni figurine giocando carriere Epoche negli anni '80 (due a stagione e una per ogni titolo della tua squadra) e con i momenti degli anni '80. {n} doppioni si scambiano con la figurina che preferisci.",
+  "fr": "Gagne des vignettes en jouant des carrières Époques dans les années 80 (deux par saison et une par titre de ton équipe) et avec les moments des années 80. {n} doubles s'échangent contre la vignette de ton choix."
+ },
+ "Cromo nuevo: {c}": {
+  "en": "New sticker: {c}",
+  "de": "Neues Bild: {c}",
+  "it": "Nuova figurina: {c}",
+  "fr": "Nouvelle vignette : {c}"
+ },
+ "Decídelo sin prórroga": {
+  "en": "Settle it without extra time",
+  "de": "Entscheide es ohne Verlängerung",
+  "it": "Chiudila senza supplementari",
+  "fr": "Décide-le sans prolongation"
+ },
+ "Defender": {
+  "en": "Defend",
+  "de": "Verteidigen",
+  "it": "Difendere",
+  "fr": "Défendre"
+ },
+ "Elige cómo juegas el siguiente tramo.": {
+  "en": "Choose how you play the next spell.",
+  "de": "Wähle, wie du den nächsten Abschnitt spielst.",
+  "it": "Scegli come giocare il prossimo tratto.",
+  "fr": "Choisis comment jouer la prochaine période."
+ },
+ "Empate al final: prórroga.": {
+  "en": "Level at full time: extra time.",
+  "de": "Unentschieden nach 90 Minuten: Verlängerung.",
+  "it": "Parità al 90': supplementari.",
+  "fr": "Égalité à la fin : prolongation."
+ },
+ "Empate: se decide en los penaltis.": {
+  "en": "Still level: it goes to penalties.",
+  "de": "Immer noch unentschieden: Elfmeterschießen.",
+  "it": "Ancora pari: si va ai rigori.",
+  "fr": "Toujours à égalité : tirs au but."
+ },
+ "Empezar": {
+  "en": "Start",
+  "de": "Starten",
+  "it": "Inizia",
+  "fr": "Commencer"
+ },
+ "Encaja como mucho 1 penalti": {
+  "en": "Concede 1 penalty at most",
+  "de": "Kassiere höchstens 1 Elfmeter",
+  "it": "Subisci al massimo 1 rigore",
+  "fr": "Encaisse 1 penalty au maximum"
+ },
+ "Equilibrado": {
+  "en": "Balanced",
+  "de": "Ausgewogen",
+  "it": "Equilibrato",
+  "fr": "Équilibré"
+ },
+ "Esta vez no salió": {
+  "en": "Not this time",
+  "de": "Diesmal nicht",
+  "it": "Non questa volta",
+  "fr": "Pas cette fois"
+ },
+ "Falta al borde del área. Te toca a ti.": {
+  "en": "Free kick on the edge of the box. It's yours.",
+  "de": "Freistoß an der Strafraumgrenze. Du schießt.",
+  "it": "Punizione al limite dell'area. Tocca a te.",
+  "fr": "Coup franc à l'entrée de la surface. À toi."
+ },
+ "Gana como en la historia real": {
+  "en": "Win, as in real history",
+  "de": "Gewinne wie in der echten Geschichte",
+  "it": "Vinci come nella storia reale",
+  "fr": "Gagne, comme dans l'histoire réelle"
+ },
+ "Gana en las cinco primeras rondas": {
+  "en": "Win within the first five rounds",
+  "de": "Gewinne in den ersten fünf Runden",
+  "it": "Vinci entro i primi cinque tiri",
+  "fr": "Gagne dans les cinq premiers tirs"
+ },
+ "Gana por {n} goles o más": {
+  "en": "Win by {n} goals or more",
+  "de": "Gewinne mit {n} oder mehr Toren Vorsprung",
+  "it": "Vinci con {n} o più gol di scarto",
+  "fr": "Gagne par {n} buts d'écart ou plus"
+ },
+ "Gol del rival": {
+  "en": "Opponent goal",
+  "de": "Gegentor",
+  "it": "Gol degli avversari",
+  "fr": "But adverse"
+ },
+ "Juegas con {team}.": {
+  "en": "You play as {team}.",
+  "de": "Du spielst mit {team}.",
+  "it": "Giochi con {team}.",
+  "fr": "Tu joues avec {team}."
+ },
+ "Juegas equilibrado": {
+  "en": "You play balanced",
+  "de": "Du spielst ausgewogen",
+  "it": "Giochi in equilibrio",
+  "fr": "Tu joues équilibré"
+ },
+ "Lanzar": {
+  "en": "Shoot",
+  "de": "Schießen",
+  "it": "Tira",
+  "fr": "Tirer"
+ },
+ "Lanzar tu penalti": {
+  "en": "Take your penalty",
+  "de": "Deinen Elfmeter schießen",
+  "it": "Tira il tuo rigore",
+  "fr": "Tirer ton penalty"
+ },
+ "Lo que pasó": {
+  "en": "What happened",
+  "de": "Was geschah",
+  "it": "Cosa successe",
+  "fr": "Ce qui s'est passé"
+ },
+ "Marca al menos 2 goles": {
+  "en": "Score at least 2 goals",
+  "de": "Erziele mindestens 2 Tore",
+  "it": "Segna almeno 2 gol",
+  "fr": "Marque au moins 2 buts"
+ },
+ "Marca al menos 3 goles": {
+  "en": "Score at least 3 goals",
+  "de": "Erziele mindestens 3 Tore",
+  "it": "Segna almeno 3 gol",
+  "fr": "Marque au moins 3 buts"
+ },
+ "Marca todos tus penaltis": {
+  "en": "Score all your penalties",
+  "de": "Verwandle alle deine Elfmeter",
+  "it": "Segna tutti i tuoi rigori",
+  "fr": "Marque tous tes penaltys"
+ },
+ "Marca un penalti arriesgado (menos del 60 %)": {
+  "en": "Score a risky penalty (under 60%)",
+  "de": "Verwandle einen riskanten Elfmeter (unter 60 %)",
+  "it": "Segna un rigore rischioso (sotto il 60%)",
+  "fr": "Marque un penalty risqué (moins de 60 %)"
+ },
+ "Modo Épocas: completa el álbum de los 80": {
+  "en": "Era Mode: complete the 1980s album",
+  "de": "Epochenmodus: Vervollständige das Album der 80er",
+  "it": "Modalità epoche: completa l'album degli anni '80",
+  "fr": "Mode Époques : complète l'album des années 80"
+ },
+ "Modo Épocas: completa la página «{p}» del álbum": {
+  "en": "Era Mode: complete the album page “{p}”",
+  "de": "Epochenmodus: Vervollständige die Albumseite „{p}“",
+  "it": "Modalità epoche: completa la pagina «{p}» dell'album",
+  "fr": "Mode Époques : complète la page « {p} » de l'album"
+ },
+ "Modo Épocas: completa los momentos de leyenda de los {d}": {
+  "en": "Era Mode: complete the legend moments of the '{d}s",
+  "de": "Epochenmodus: Schließe die Legendenmomente der {d}er ab",
+  "it": "Modalità epoche: completa i momenti leggendari degli anni '{d}",
+  "fr": "Mode Époques : termine les moments de légende des années {d}"
+ },
+ "Momento de leyenda": {
+  "en": "Legend moment",
+  "de": "Legendenmoment",
+  "it": "Momento leggendario",
+  "fr": "Moment de légende"
+ },
+ "Momentos": {
+  "en": "Moments",
+  "de": "Momente",
+  "it": "Momenti",
+  "fr": "Moments"
+ },
+ "Momentos de leyenda": {
+  "en": "Legend moments",
+  "de": "Legendenmomente",
+  "it": "Momenti leggendari",
+  "fr": "Moments de légende"
+ },
+ "No encajes ningún gol": {
+  "en": "Don't concede a goal",
+  "de": "Kassiere kein Tor",
+  "it": "Non subire gol",
+  "fr": "N'encaisse aucun but"
+ },
+ "No pierdas": {
+  "en": "Don't lose",
+  "de": "Verliere nicht",
+  "it": "Non perdere",
+  "fr": "Ne perds pas"
+ },
+ "No te encierres atrás en ningún tramo": {
+  "en": "Never sit back in any spell",
+  "de": "Igle dich in keinem Abschnitt ein",
+  "it": "Non chiuderti mai in difesa",
+  "fr": "Ne recule dans aucune période"
+ },
+ "No tienes repetidos suficientes.": {
+  "en": "You don't have enough duplicates.",
+  "de": "Du hast nicht genug doppelte Bilder.",
+  "it": "Non hai abbastanza doppioni.",
+  "fr": "Tu n'as pas assez de doubles."
+ },
+ "Ocasión perdida.": {
+  "en": "Chance missed.",
+  "de": "Chance vergeben.",
+  "it": "Occasione sprecata.",
+  "fr": "Occasion manquée."
+ },
+ "Para al menos 2 penaltis": {
+  "en": "Save at least 2 penalties",
+  "de": "Halte mindestens 2 Elfmeter",
+  "it": "Para almeno 2 rigori",
+  "fr": "Arrête au moins 2 penaltys"
+ },
+ "Para al menos 3 penaltis": {
+  "en": "Save at least 3 penalties",
+  "de": "Halte mindestens 3 Elfmeter",
+  "it": "Para almeno 3 rigori",
+  "fr": "Arrête au moins 3 penaltys"
+ },
+ "Partidos que marcaron cada década. Recréalos como fueron o cambia la historia. No afectan a tus carreras.": {
+  "en": "Matches that defined each decade. Recreate them as they were or change history. They don't affect your careers.",
+  "de": "Spiele, die jedes Jahrzehnt geprägt haben. Spiele sie nach oder ändere die Geschichte. Deine Karrieren bleiben unberührt.",
+  "it": "Partite che hanno segnato ogni decennio. Ricreale com'erano o cambia la storia. Non toccano le tue carriere.",
+  "fr": "Des matchs qui ont marqué chaque décennie. Recrée-les ou change l'histoire. Ils n'affectent pas tes carrières."
+ },
+ "Penalti a favor. Te toca a ti.": {
+  "en": "Penalty to you. It's yours.",
+  "de": "Elfmeter für dich. Du schießt.",
+  "it": "Rigore a favore. Tocca a te.",
+  "fr": "Penalty pour toi. À toi."
+ },
+ "Penaltis": {
+  "en": "Penalties",
+  "de": "Elfmeterschießen",
+  "it": "Rigori",
+  "fr": "Tirs au but"
+ },
+ "Ponerte bajo palos": {
+  "en": "Go in goal",
+  "de": "Ins Tor gehen",
+  "it": "Vai in porta",
+  "fr": "Aller dans les buts"
+ },
+ "Premio de la página: {r}": {
+  "en": "Page reward: {r}",
+  "de": "Belohnung der Seite: {r}",
+  "it": "Premio della pagina: {r}",
+  "fr": "Récompense de la page : {r}"
+ },
+ "Principal: {o}": {
+  "en": "Main: {o}",
+  "de": "Hauptziel: {o}",
+  "it": "Principale: {o}",
+  "fr": "Principal : {o}"
+ },
+ "Prórroga": {
+  "en": "Extra time",
+  "de": "Verlängerung",
+  "it": "Supplementari",
+  "fr": "Prolongation"
+ },
+ "Recompensa desbloqueada para todas tus partidas: {r}": {
+  "en": "Reward unlocked for all your saves: {r}",
+  "de": "Belohnung für alle Spielstände freigeschaltet: {r}",
+  "it": "Ricompensa sbloccata per tutte le partite: {r}",
+  "fr": "Récompense débloquée pour toutes tes parties : {r}"
+ },
+ "Recrear": {
+  "en": "Recreate",
+  "de": "Nachspielen",
+  "it": "Ricrea",
+  "fr": "Recréer"
+ },
+ "Reescribir": {
+  "en": "Rewrite",
+  "de": "Umschreiben",
+  "it": "Riscrivi",
+  "fr": "Réécrire"
+ },
+ "Repetir": {
+  "en": "Try again",
+  "de": "Nochmal",
+  "it": "Riprova",
+  "fr": "Rejouer"
+ },
+ "Resultado": {
+  "en": "Result",
+  "de": "Ergebnis",
+  "it": "Risultato",
+  "fr": "Résultat"
+ },
+ "Ronda {n}: tú {a} · rival {b}": {
+  "en": "Round {n}: you {a} · opponent {b}",
+  "de": "Runde {n}: du {a} · Gegner {b}",
+  "it": "Turno {n}: tu {a} · avversari {b}",
+  "fr": "Tir {n} : toi {a} · adversaire {b}"
+ },
+ "Tanda de penaltis": {
+  "en": "Penalty shoot-out",
+  "de": "Elfmeterschießen",
+  "it": "Rigori",
+  "fr": "Séance de tirs au but"
+ },
+ "Te cierras": {
+  "en": "You sit back",
+  "de": "Du igelst dich ein",
+  "it": "Ti chiudi",
+  "fr": "Tu recules"
+ },
+ "Títulos: {t}": {
+  "en": "Titles: {t}",
+  "de": "Titel: {t}",
+  "it": "Titoli: {t}",
+  "fr": "Titres : {t}"
+ },
+ "{a} de {b} cromos": {
+  "en": "{a} of {b} stickers",
+  "de": "{a} von {b} Bildern",
+  "it": "{a} di {b} figurine",
+  "fr": "{a} vignettes sur {b}"
+ },
+ "{n} cromos nuevos para el Álbum de los 80": {
+  "en": "{n} new stickers for the 1980s album",
+  "de": "{n} neue Bilder für das Album der 80er",
+  "it": "{n} nuove figurine per l'album degli anni '80",
+  "fr": "{n} nouvelles vignettes pour l'album des années 80"
+ },
+ "{n} de {m} estrellas": {
+  "en": "{n} of {m} stars",
+  "de": "{n} von {m} Sternen",
+  "it": "{n} stelle su {m}",
+  "fr": "{n} étoiles sur {m}"
+ },
+ "{n} repetidos": {
+  "en": "{n} duplicates",
+  "de": "{n} doppelte",
+  "it": "{n} doppioni",
+  "fr": "{n} doubles"
+ },
+ "¡Gol a balón parado!": {
+  "en": "Set-piece goal!",
+  "de": "Tor nach Standard!",
+  "it": "Gol da palla inattiva!",
+  "fr": "But sur coup de pied arrêté !"
+ },
+ "¡Gol tuyo!": {
+  "en": "Your goal!",
+  "de": "Dein Tor!",
+  "it": "Gol tuo!",
+  "fr": "But pour toi !"
+ },
+ "¡Has cambiado la historia!": {
+  "en": "You changed history!",
+  "de": "Du hast die Geschichte verändert!",
+  "it": "Hai cambiato la storia!",
+  "fr": "Tu as changé l'histoire !"
+ },
+ "¡Momento recreado!": {
+  "en": "Moment recreated!",
+  "de": "Moment nachgespielt!",
+  "it": "Momento ricreato!",
+  "fr": "Moment recréé !"
+ },
+ "¡Ocasión!": {
+  "en": "Chance!",
+  "de": "Chance!",
+  "it": "Occasione!",
+  "fr": "Occasion !"
+ },
+ "Álbum de los 80": {
+  "en": "1980s album",
+  "de": "Album der 80er",
+  "it": "Album degli anni '80",
+  "fr": "Album des années 80"
  }
 }

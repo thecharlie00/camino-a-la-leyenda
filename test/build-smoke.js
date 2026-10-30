@@ -106,9 +106,10 @@ function readEmbeddedObject(source, marker) {
   }
   throw new Error(`Unterminated embedded object: ${marker}`);
 }
-const erasData = readEmbeddedObject(gameSource, 'var ERAS_DATA =');
+const withParts = (source) => Object.assign(readEmbeddedObject(source, 'var ERAS_DATA ='), {decisions: readEmbeddedObject(source, 'ERAS_DATA.decisions ='), moments: readEmbeddedObject(source, 'ERAS_DATA.moments =')});
+const erasData = withParts(gameSource);
 const erasI18n = readEmbeddedObject(gameSource, 'var ERAS_I18N =');
-const androidErasData = readEmbeddedObject(androidSource, 'var ERAS_DATA =');
+const androidErasData = withParts(androidSource);
 const androidErasI18n = readEmbeddedObject(androidSource, 'var ERAS_I18N =');
 assert.deepEqual(androidErasData, erasData, 'Web and Android must share the same Era Mode data');
 assert.deepEqual(androidErasI18n, erasI18n, 'Web and Android must share the same Era Mode translations');

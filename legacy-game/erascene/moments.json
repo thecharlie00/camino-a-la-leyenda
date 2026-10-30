@@ -1,0 +1,1401 @@
+{
+ "schema": 1,
+ "moments": [
+  {
+   "id": "m1974-wc-final",
+   "decade": "1970s",
+   "year": 1974,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Alemania Federal",
+     "type": "nat",
+     "r": 84,
+     "code": "DE",
+     "era": true
+    },
+    {
+     "name": "Países Bajos",
+     "type": "nat",
+     "r": 85,
+     "code": "NL"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "La final del Mundial de 1974 empezó con un penalti a favor de los neerlandeses en el primer minuto; la anfitriona remontó y ganó 2-1.",
+    "en": "The 1974 World Cup final began with a penalty to the Dutch in the first minute; the hosts came back to win 2-1.",
+    "de": "Das WM-Finale 1974 begann mit einem Elfmeter für die Niederlande in der ersten Minute; der Gastgeber drehte das Spiel und gewann 2:1.",
+    "it": "La finale del Mondiale 1974 iniziò con un rigore per l'Olanda al primo minuto; i padroni di casa rimontarono e vinsero 2-1.",
+    "fr": "La finale de la Coupe du monde 1974 commença par un penalty pour les Néerlandais dès la première minute ; le pays hôte remonta et gagna 2-1."
+   },
+   "setup": {
+    "es": "Final del Mundial. Minuto 26, 1-1.",
+    "en": "World Cup final. Minute 26, 1-1.",
+    "de": "WM-Finale. 26. Minute, 1:1.",
+    "it": "Finale del Mondiale. Minuto 26, 1-1.",
+    "fr": "Finale de la Coupe du monde. 26e minute, 1-1."
+   },
+   "minute": 26,
+   "score": [
+    1,
+    1
+   ],
+   "knockout": true,
+   "secondary": [
+    "clean",
+    "score2",
+    "noET"
+   ]
+  },
+  {
+   "id": "m1976-euro-final",
+   "decade": "1970s",
+   "year": 1976,
+   "kind": "shootout",
+   "teams": [
+    {
+     "name": "Checoslovaquia",
+     "type": "nat",
+     "r": 80,
+     "code": "CZ",
+     "era": true
+    },
+    {
+     "name": "Alemania Federal",
+     "type": "nat",
+     "r": 85,
+     "code": "DE",
+     "era": true
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "La final de la Eurocopa de 1976 fue la primera gran final de selecciones decidida en una tanda de penaltis.",
+    "en": "The 1976 European Championship final was the first major international final decided by a penalty shoot-out.",
+    "de": "Das EM-Finale 1976 war das erste große Länderspiel-Finale, das im Elfmeterschießen entschieden wurde.",
+    "it": "La finale dell'Europeo 1976 fu la prima grande finale tra nazionali decisa ai rigori.",
+    "fr": "La finale de l'Euro 1976 fut la première grande finale internationale décidée aux tirs au but."
+   },
+   "setup": {
+    "es": "Final de la Eurocopa. 2-2 tras la prórroga: penaltis.",
+    "en": "European Championship final. 2-2 after extra time: penalties.",
+    "de": "EM-Finale. 2:2 nach Verlängerung: Elfmeterschießen.",
+    "it": "Finale dell'Europeo. 2-2 dopo i supplementari: rigori.",
+    "fr": "Finale de l'Euro. 2-2 après prolongation : tirs au but."
+   },
+   "secondary": [
+    "allPens",
+    "firstFive",
+    "bestShot"
+   ]
+  },
+  {
+   "id": "m1979-ec-final",
+   "decade": "1970s",
+   "year": 1979,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Nottingham Forest",
+     "type": "club",
+     "r": 80
+    },
+    {
+     "name": "Malmö FF",
+     "type": "club",
+     "r": 74
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "Un club inglés que dos años antes jugaba en Segunda ganó la Copa de Europa de 1979 con un 1-0 al campeón sueco.",
+    "en": "An English club that had been in the second tier two years earlier won the 1979 European Cup, beating the Swedish champions 1-0.",
+    "de": "Ein englischer Klub, der zwei Jahre zuvor noch zweitklassig war, gewann 1979 den Europapokal der Landesmeister mit 1:0 gegen den schwedischen Meister.",
+    "it": "Un club inglese che due anni prima giocava in seconda divisione vinse la Coppa dei Campioni 1979 battendo 1-0 i campioni svedesi.",
+    "fr": "Un club anglais qui jouait en deuxième division deux ans plus tôt remporta la Coupe des clubs champions 1979 en battant 1-0 le champion suédois."
+   },
+   "setup": {
+    "es": "Final de la Copa de Europa. Descanso, 1-0.",
+    "en": "European Cup final. Half-time, 1-0.",
+    "de": "Finale im Europapokal der Landesmeister. Halbzeit, 1:0.",
+    "it": "Finale di Coppa dei Campioni. Intervallo, 1-0.",
+    "fr": "Finale de la Coupe des clubs champions. Mi-temps, 1-0."
+   },
+   "minute": 46,
+   "score": [
+    1,
+    0
+   ],
+   "knockout": true,
+   "secondary": [
+    "clean",
+    "score2",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m1983-cwc-final",
+   "decade": "1980s",
+   "year": 1983,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Aberdeen",
+     "type": "club",
+     "r": 76
+    },
+    {
+     "name": "Real Madrid",
+     "type": "club",
+     "r": 84
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "Un club escocés ganó la Recopa de 1983 al Real Madrid con un gol en la prórroga.",
+    "en": "A Scottish club won the 1983 Cup Winners' Cup against Real Madrid with a goal in extra time.",
+    "de": "Ein schottischer Klub gewann 1983 den Europapokal der Pokalsieger gegen Real Madrid mit einem Tor in der Verlängerung.",
+    "it": "Un club scozzese vinse la Coppa delle Coppe 1983 contro il Real Madrid con un gol ai supplementari.",
+    "fr": "Un club écossais remporta la Coupe des coupes 1983 face au Real Madrid grâce à un but en prolongation."
+   },
+   "setup": {
+    "es": "Final de la Recopa. Minuto 90, 1-1: prórroga.",
+    "en": "Cup Winners' Cup final. Minute 90, 1-1: extra time.",
+    "de": "Finale im Pokalsiegerwettbewerb. 90. Minute, 1:1: Verlängerung.",
+    "it": "Finale di Coppa delle Coppe. Minuto 90, 1-1: supplementari.",
+    "fr": "Finale de la Coupe des coupes. 90e minute, 1-1 : prolongation."
+   },
+   "minute": 90,
+   "score": [
+    1,
+    1
+   ],
+   "knockout": true,
+   "secondary": [
+    "clean",
+    "score2",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m1986-ec-final",
+   "decade": "1980s",
+   "year": 1986,
+   "kind": "gkshootout",
+   "teams": [
+    {
+     "name": "FCSB",
+     "type": "club",
+     "r": 78
+    },
+    {
+     "name": "FC Barcelona",
+     "type": "club",
+     "r": 84
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "La final de la Copa de Europa de 1986 acabó 0-0 y el campeón rumano ganó la tanda 2-0: su portero detuvo los cuatro penaltis rivales.",
+    "en": "The 1986 European Cup final ended 0-0 and the Romanian champions won the shoot-out 2-0: their goalkeeper saved all four penalties.",
+    "de": "Das Finale im Europapokal der Landesmeister 1986 endete 0:0, der rumänische Meister gewann das Elfmeterschießen 2:0: Sein Torwart hielt alle vier Elfmeter.",
+    "it": "La finale di Coppa dei Campioni 1986 finì 0-0 e i campioni rumeni vinsero i rigori 2-0: il loro portiere parò tutti e quattro i tiri.",
+    "fr": "La finale de la Coupe des clubs champions 1986 se termina 0-0 et le champion roumain gagna la séance 2-0 : son gardien arrêta les quatre tirs."
+   },
+   "setup": {
+    "es": "Final de la Copa de Europa. 0-0 tras la prórroga: penaltis. Tú estás bajo palos.",
+    "en": "European Cup final. 0-0 after extra time: penalties. You are in goal.",
+    "de": "Finale im Europapokal der Landesmeister. 0:0 nach Verlängerung: Elfmeterschießen. Du stehst im Tor.",
+    "it": "Finale di Coppa dei Campioni. 0-0 dopo i supplementari: rigori. In porta ci sei tu.",
+    "fr": "Finale de la Coupe des clubs champions. 0-0 après prolongation : tirs au but. Tu es dans les buts."
+   },
+   "secondary": [
+    "save2",
+    "save3",
+    "concede1"
+   ]
+  },
+  {
+   "id": "m1989-title-decider",
+   "decade": "1980s",
+   "year": 1989,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Arsenal",
+     "type": "club",
+     "r": 80
+    },
+    {
+     "name": "Liverpool",
+     "type": "club",
+     "r": 84
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "La liga inglesa de 1989 se decidió en la última jornada: el visitante necesitaba ganar por dos goles y marcó el 0-2 en el último minuto.",
+    "en": "The 1989 English title was decided on the final day: the away side needed to win by two goals and scored the second in the last minute.",
+    "de": "Die englische Meisterschaft 1989 wurde am letzten Spieltag entschieden: Der Gast musste mit zwei Toren gewinnen und traf in der letzten Minute zum 2:0.",
+    "it": "Il campionato inglese 1989 si decise all'ultima giornata: gli ospiti dovevano vincere con due gol di scarto e segnarono lo 0-2 all'ultimo minuto.",
+    "fr": "Le titre anglais 1989 se joua lors de la dernière journée : l'équipe visiteuse devait gagner par deux buts et marqua le second à la dernière minute."
+   },
+   "setup": {
+    "es": "Última jornada de liga. Minuto 75, 1-0: necesitas ganar por dos goles.",
+    "en": "Final league day. Minute 75, 1-0: you need to win by two goals.",
+    "de": "Letzter Spieltag. 75. Minute, 1:0: Du musst mit zwei Toren gewinnen.",
+    "it": "Ultima giornata. Minuto 75, 1-0: devi vincere con due gol di scarto.",
+    "fr": "Dernière journée. 75e minute, 1-0 : il faut gagner par deux buts."
+   },
+   "minute": 75,
+   "score": [
+    1,
+    0
+   ],
+   "needMargin": 2,
+   "secondary": [
+    "clean",
+    "score3",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m1992-euro-final",
+   "decade": "1990s",
+   "year": 1992,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Dinamarca",
+     "type": "nat",
+     "r": 79,
+     "code": "DK"
+    },
+    {
+     "name": "Alemania",
+     "type": "nat",
+     "r": 86,
+     "code": "DE"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "Dinamarca entró en la Eurocopa de 1992 a última hora, en lugar de Yugoslavia, y la ganó con un 2-0 en la final.",
+    "en": "Denmark entered Euro 1992 at the last minute in place of Yugoslavia and won it with a 2-0 in the final.",
+    "de": "Dänemark rückte kurzfristig für Jugoslawien in die EM 1992 nach und gewann sie mit einem 2:0 im Finale.",
+    "it": "La Danimarca entrò all'ultimo momento nell'Europeo 1992 al posto della Jugoslavia e lo vinse con un 2-0 in finale.",
+    "fr": "Le Danemark intégra l'Euro 1992 au dernier moment à la place de la Yougoslavie et le remporta 2-0 en finale."
+   },
+   "setup": {
+    "es": "Final de la Eurocopa. Minuto 60, 1-0.",
+    "en": "European Championship final. Minute 60, 1-0.",
+    "de": "EM-Finale. 60. Minute, 1:0.",
+    "it": "Finale dell'Europeo. Minuto 60, 1-0.",
+    "fr": "Finale de l'Euro. 60e minute, 1-0."
+   },
+   "minute": 60,
+   "score": [
+    1,
+    0
+   ],
+   "knockout": true,
+   "secondary": [
+    "clean",
+    "score2",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m1994-wc-final",
+   "decade": "1990s",
+   "year": 1994,
+   "kind": "shootout",
+   "teams": [
+    {
+     "name": "Brasil",
+     "type": "nat",
+     "r": 87,
+     "code": "BR"
+    },
+    {
+     "name": "Italia",
+     "type": "nat",
+     "r": 86,
+     "code": "IT"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "La final del Mundial de 1994 terminó 0-0 y fue la primera final de un Mundial decidida en los penaltis.",
+    "en": "The 1994 World Cup final ended 0-0 and was the first World Cup final decided on penalties.",
+    "de": "Das WM-Finale 1994 endete 0:0 und war das erste WM-Finale, das im Elfmeterschießen entschieden wurde.",
+    "it": "La finale del Mondiale 1994 finì 0-0 e fu la prima finale mondiale decisa ai rigori.",
+    "fr": "La finale de la Coupe du monde 1994 se termina 0-0 et fut la première finale de Coupe du monde décidée aux tirs au but."
+   },
+   "setup": {
+    "es": "Final del Mundial. 0-0 tras la prórroga: penaltis.",
+    "en": "World Cup final. 0-0 after extra time: penalties.",
+    "de": "WM-Finale. 0:0 nach Verlängerung: Elfmeterschießen.",
+    "it": "Finale del Mondiale. 0-0 dopo i supplementari: rigori.",
+    "fr": "Finale de la Coupe du monde. 0-0 après prolongation : tirs au but."
+   },
+   "secondary": [
+    "allPens",
+    "firstFive",
+    "bestShot"
+   ]
+  },
+  {
+   "id": "m1999-cl-final",
+   "decade": "1990s",
+   "year": 1999,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Manchester United",
+     "type": "club",
+     "r": 87
+    },
+    {
+     "name": "Bayern Múnich",
+     "type": "club",
+     "r": 86
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "La final de la Champions de 1999 cambió en el tiempo añadido: el equipo inglés perdía 0-1 y marcó dos goles en tres minutos.",
+    "en": "The 1999 Champions League final turned in stoppage time: the English side were losing 0-1 and scored twice in three minutes.",
+    "de": "Das Champions-League-Finale 1999 kippte in der Nachspielzeit: Das englische Team lag 0:1 zurück und traf zweimal in drei Minuten.",
+    "it": "La finale di Champions 1999 cambiò nel recupero: gli inglesi perdevano 0-1 e segnarono due gol in tre minuti.",
+    "fr": "La finale de la Ligue des champions 1999 bascula dans le temps additionnel : les Anglais perdaient 0-1 et marquèrent deux fois en trois minutes."
+   },
+   "setup": {
+    "es": "Final de la Champions. Minuto 85, 0-1.",
+    "en": "Champions League final. Minute 85, 0-1.",
+    "de": "Champions-League-Finale. 85. Minute, 0:1.",
+    "it": "Finale di Champions. Minuto 85, 0-1.",
+    "fr": "Finale de la Ligue des champions. 85e minute, 0-1."
+   },
+   "minute": 85,
+   "score": [
+    0,
+    1
+   ],
+   "knockout": true,
+   "secondary": [
+    "noET",
+    "score2",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m2004-euro-final",
+   "decade": "2000s",
+   "year": 2004,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Grecia",
+     "type": "nat",
+     "r": 78,
+     "code": "GR"
+    },
+    {
+     "name": "Portugal",
+     "type": "nat",
+     "r": 85,
+     "code": "PT"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "Grecia ganó la Eurocopa de 2004 al anfitrión con un 1-0 en la final, en la que fue su segunda participación en el torneo.",
+    "en": "Greece won Euro 2004 by beating the hosts 1-0 in the final, in only their second appearance at the tournament.",
+    "de": "Griechenland gewann die EM 2004 mit einem 1:0 im Finale gegen den Gastgeber, bei seiner erst zweiten Teilnahme.",
+    "it": "La Grecia vinse l'Europeo 2004 battendo 1-0 i padroni di casa in finale, alla sua seconda partecipazione al torneo.",
+    "fr": "La Grèce remporta l'Euro 2004 en battant 1-0 le pays hôte en finale, pour sa deuxième participation seulement."
+   },
+   "setup": {
+    "es": "Final de la Eurocopa. Minuto 60, 1-0.",
+    "en": "European Championship final. Minute 60, 1-0.",
+    "de": "EM-Finale. 60. Minute, 1:0.",
+    "it": "Finale dell'Europeo. Minuto 60, 1-0.",
+    "fr": "Finale de l'Euro. 60e minute, 1-0."
+   },
+   "minute": 60,
+   "score": [
+    1,
+    0
+   ],
+   "knockout": true,
+   "secondary": [
+    "clean",
+    "score2",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m2005-cl-final",
+   "decade": "2000s",
+   "year": 2005,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Liverpool",
+     "type": "club",
+     "r": 84
+    },
+    {
+     "name": "AC Milan",
+     "type": "club",
+     "r": 88
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "En la final de la Champions de 2005 el equipo inglés perdía 0-3 al descanso, empató en seis minutos y ganó en los penaltis.",
+    "en": "In the 2005 Champions League final the English side were 0-3 down at half-time, equalised within six minutes and won on penalties.",
+    "de": "Im Champions-League-Finale 2005 lag das englische Team zur Pause 0:3 zurück, glich binnen sechs Minuten aus und gewann im Elfmeterschießen.",
+    "it": "Nella finale di Champions 2005 gli inglesi perdevano 0-3 all'intervallo, pareggiarono in sei minuti e vinsero ai rigori.",
+    "fr": "En finale de la Ligue des champions 2005, les Anglais étaient menés 0-3 à la pause, égalisèrent en six minutes et gagnèrent aux tirs au but."
+   },
+   "setup": {
+    "es": "Final de la Champions. Descanso, 0-3.",
+    "en": "Champions League final. Half-time, 0-3.",
+    "de": "Champions-League-Finale. Halbzeit, 0:3.",
+    "it": "Finale di Champions. Intervallo, 0-3.",
+    "fr": "Finale de la Ligue des champions. Mi-temps, 0-3."
+   },
+   "minute": 46,
+   "score": [
+    0,
+    3
+   ],
+   "knockout": true,
+   "secondary": [
+    "score3",
+    "noET",
+    "clean"
+   ]
+  },
+  {
+   "id": "m2006-wc-final",
+   "decade": "2000s",
+   "year": 2006,
+   "kind": "shootout",
+   "teams": [
+    {
+     "name": "Italia",
+     "type": "nat",
+     "r": 87,
+     "code": "IT"
+    },
+    {
+     "name": "Francia",
+     "type": "nat",
+     "r": 87,
+     "code": "FR"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "La final del Mundial de 2006 terminó 1-1 y se decidió en los penaltis, 5-3.",
+    "en": "The 2006 World Cup final ended 1-1 and was decided 5-3 on penalties.",
+    "de": "Das WM-Finale 2006 endete 1:1 und wurde mit 5:3 im Elfmeterschießen entschieden.",
+    "it": "La finale del Mondiale 2006 finì 1-1 e si decise 5-3 ai rigori.",
+    "fr": "La finale de la Coupe du monde 2006 se termina 1-1 et se joua 5-3 aux tirs au but."
+   },
+   "setup": {
+    "es": "Final del Mundial. 1-1 tras la prórroga: penaltis.",
+    "en": "World Cup final. 1-1 after extra time: penalties.",
+    "de": "WM-Finale. 1:1 nach Verlängerung: Elfmeterschießen.",
+    "it": "Finale del Mondiale. 1-1 dopo i supplementari: rigori.",
+    "fr": "Finale de la Coupe du monde. 1-1 après prolongation : tirs au but."
+   },
+   "secondary": [
+    "allPens",
+    "firstFive",
+    "bestShot"
+   ]
+  },
+  {
+   "id": "m2014-wc-semi",
+   "decade": "2010s",
+   "year": 2014,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Alemania",
+     "type": "nat",
+     "r": 89,
+     "code": "DE"
+    },
+    {
+     "name": "Brasil",
+     "type": "nat",
+     "r": 87,
+     "code": "BR"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "En la semifinal del Mundial de 2014 la anfitriona perdió 1-7; el ganador marcó cinco goles en el primer media hora.",
+    "en": "In the 2014 World Cup semi-final the hosts lost 1-7; the winners scored five goals in the first half hour.",
+    "de": "Im WM-Halbfinale 2014 verlor der Gastgeber 1:7; der Sieger erzielte fünf Tore in der ersten halben Stunde.",
+    "it": "Nella semifinale del Mondiale 2014 i padroni di casa persero 1-7; i vincitori segnarono cinque gol nella prima mezz'ora.",
+    "fr": "En demi-finale de la Coupe du monde 2014, le pays hôte perdit 1-7 ; le vainqueur marqua cinq buts dans la première demi-heure."
+   },
+   "setup": {
+    "es": "Semifinal del Mundial en casa del anfitrión. Minuto 1, 0-0.",
+    "en": "World Cup semi-final at the hosts. Minute 1, 0-0.",
+    "de": "WM-Halbfinale beim Gastgeber. 1. Minute, 0:0.",
+    "it": "Semifinale del Mondiale in casa dei padroni. Minuto 1, 0-0.",
+    "fr": "Demi-finale de la Coupe du monde chez le pays hôte. 1re minute, 0-0."
+   },
+   "minute": 1,
+   "score": [
+    0,
+    0
+   ],
+   "knockout": true,
+   "secondary": [
+    "score3",
+    "clean",
+    "noET"
+   ]
+  },
+  {
+   "id": "m2016-title-chelsea",
+   "decade": "2010s",
+   "year": 2016,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Chelsea",
+     "type": "club",
+     "r": 82
+    },
+    {
+     "name": "Tottenham Hotspur",
+     "type": "club",
+     "r": 84
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "El Leicester City fue campeón de Inglaterra en 2016 cuando su perseguidor, que ganaba 0-2 al descanso en Stamford Bridge, acabó empatando 2-2.",
+    "en": "Leicester City became English champions in 2016 when their pursuers, 2-0 up at half-time at Stamford Bridge, were held 2-2.",
+    "de": "Leicester City wurde 2016 englischer Meister, als der Verfolger nach einer 2:0-Pausenführung an der Stamford Bridge nur 2:2 spielte.",
+    "it": "Il Leicester City fu campione d'Inghilterra nel 2016 quando gli inseguitori, avanti 0-2 all'intervallo a Stamford Bridge, furono fermati sul 2-2.",
+    "fr": "Leicester City fut sacré champion d'Angleterre en 2016 quand son poursuivant, mené 0-2 à la pause à Stamford Bridge, fut tenu en échec 2-2."
+   },
+   "setup": {
+    "es": "Liga inglesa. Descanso, 0-2: si no pierdes, el título es del Leicester.",
+    "en": "English league. Half-time, 0-2: if you avoid defeat, the title goes to Leicester.",
+    "de": "Englische Liga. Halbzeit, 0:2: Wenn du nicht verlierst, geht der Titel an Leicester.",
+    "it": "Campionato inglese. Intervallo, 0-2: se non perdi, il titolo va al Leicester.",
+    "fr": "Championnat anglais. Mi-temps, 0-2 : si tu ne perds pas, le titre va à Leicester."
+   },
+   "minute": 46,
+   "score": [
+    0,
+    2
+   ],
+   "needDraw": true,
+   "secondary": [
+    "score2",
+    "clean",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m2016-euro-final",
+   "decade": "2010s",
+   "year": 2016,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Portugal",
+     "type": "nat",
+     "r": 85,
+     "code": "PT"
+    },
+    {
+     "name": "Francia",
+     "type": "nat",
+     "r": 87,
+     "code": "FR"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "Portugal ganó la Eurocopa de 2016 al anfitrión con un gol en la prórroga de la final.",
+    "en": "Portugal won Euro 2016 against the hosts with an extra-time goal in the final.",
+    "de": "Portugal gewann die EM 2016 gegen den Gastgeber mit einem Tor in der Verlängerung des Finales.",
+    "it": "Il Portogallo vinse l'Europeo 2016 contro i padroni di casa con un gol ai supplementari della finale.",
+    "fr": "Le Portugal remporta l'Euro 2016 face au pays hôte grâce à un but en prolongation de la finale."
+   },
+   "setup": {
+    "es": "Final de la Eurocopa. Minuto 90, 0-0: prórroga.",
+    "en": "European Championship final. Minute 90, 0-0: extra time.",
+    "de": "EM-Finale. 90. Minute, 0:0: Verlängerung.",
+    "it": "Finale dell'Europeo. Minuto 90, 0-0: supplementari.",
+    "fr": "Finale de l'Euro. 90e minute, 0-0 : prolongation."
+   },
+   "minute": 90,
+   "score": [
+    0,
+    0
+   ],
+   "knockout": true,
+   "secondary": [
+    "clean",
+    "score2",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m2022-wc-final",
+   "decade": "2020s",
+   "year": 2022,
+   "kind": "shootout",
+   "teams": [
+    {
+     "name": "Argentina",
+     "type": "nat",
+     "r": 88,
+     "code": "AR"
+    },
+    {
+     "name": "Francia",
+     "type": "nat",
+     "r": 89,
+     "code": "FR"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "La final del Mundial de 2022 acabó 3-3 tras la prórroga y se decidió en los penaltis, 4-2.",
+    "en": "The 2022 World Cup final ended 3-3 after extra time and was decided 4-2 on penalties.",
+    "de": "Das WM-Finale 2022 endete nach Verlängerung 3:3 und wurde 4:2 im Elfmeterschießen entschieden.",
+    "it": "La finale del Mondiale 2022 finì 3-3 dopo i supplementari e si decise 4-2 ai rigori.",
+    "fr": "La finale de la Coupe du monde 2022 se termina 3-3 après prolongation et se joua 4-2 aux tirs au but."
+   },
+   "setup": {
+    "es": "Final del Mundial. 3-3 tras la prórroga: penaltis.",
+    "en": "World Cup final. 3-3 after extra time: penalties.",
+    "de": "WM-Finale. 3:3 nach Verlängerung: Elfmeterschießen.",
+    "it": "Finale del Mondiale. 3-3 dopo i supplementari: rigori.",
+    "fr": "Finale de la Coupe du monde. 3-3 après prolongation : tirs au but."
+   },
+   "secondary": [
+    "allPens",
+    "firstFive",
+    "bestShot"
+   ]
+  },
+  {
+   "id": "m2024-unbeaten",
+   "decade": "2020s",
+   "year": 2023,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "Bayer Leverkusen",
+     "type": "club",
+     "r": 86
+    },
+    {
+     "name": "FC Augsburg",
+     "type": "club",
+     "r": 76
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "El Bayer Leverkusen ganó la Bundesliga 2023-24 sin perder ningún partido: el primer campeón invicto de su historia.",
+    "en": "Bayer Leverkusen won the 2023-24 Bundesliga without losing a match: the first unbeaten champions in its history.",
+    "de": "Bayer Leverkusen gewann die Bundesliga 2023/24 ohne Niederlage: der erste ungeschlagene Meister ihrer Geschichte.",
+    "it": "Il Bayer Leverkusen vinse la Bundesliga 2023-24 senza perdere una partita: il primo campione imbattuto della sua storia.",
+    "fr": "Le Bayer Leverkusen remporta la Bundesliga 2023-24 sans perdre un match : le premier champion invaincu de son histoire."
+   },
+   "setup": {
+    "es": "Última jornada de la Bundesliga. Minuto 1, 0-0: no puedes perder.",
+    "en": "Final Bundesliga matchday. Minute 1, 0-0: you cannot lose.",
+    "de": "Letzter Bundesliga-Spieltag. 1. Minute, 0:0: Du darfst nicht verlieren.",
+    "it": "Ultima giornata di Bundesliga. Minuto 1, 0-0: non puoi perdere.",
+    "fr": "Dernière journée de Bundesliga. 1re minute, 0-0 : interdit de perdre."
+   },
+   "minute": 1,
+   "score": [
+    0,
+    0
+   ],
+   "needDraw": true,
+   "secondary": [
+    "clean",
+    "score2",
+    "noDefend"
+   ]
+  },
+  {
+   "id": "m2024-euro-final",
+   "decade": "2020s",
+   "year": 2024,
+   "kind": "match",
+   "teams": [
+    {
+     "name": "España",
+     "type": "nat",
+     "r": 88,
+     "code": "ES"
+    },
+    {
+     "name": "Inglaterra",
+     "type": "nat",
+     "r": 87,
+     "code": "ENG"
+    }
+   ],
+   "realWinner": 0,
+   "fact": {
+    "es": "España ganó la Eurocopa de 2024, su cuarta, con un gol en el minuto 86 de la final.",
+    "en": "Spain won Euro 2024, their fourth, with a goal in the 86th minute of the final.",
+    "de": "Spanien gewann die EM 2024, seine vierte, mit einem Tor in der 86. Minute des Finales.",
+    "it": "La Spagna vinse l'Europeo 2024, il suo quarto, con un gol all'86' della finale.",
+    "fr": "L'Espagne remporta l'Euro 2024, son quatrième, grâce à un but à la 86e minute de la finale."
+   },
+   "setup": {
+    "es": "Final de la Eurocopa. Minuto 80, 1-1.",
+    "en": "European Championship final. Minute 80, 1-1.",
+    "de": "EM-Finale. 80. Minute, 1:1.",
+    "it": "Finale dell'Europeo. Minuto 80, 1-1.",
+    "fr": "Finale de l'Euro. 80e minute, 1-1."
+   },
+   "minute": 80,
+   "score": [
+    1,
+    1
+   ],
+   "knockout": true,
+   "secondary": [
+    "noET",
+    "clean",
+    "noDefend"
+   ]
+  }
+ ],
+ "album": {
+  "decade": "1980s",
+  "swap": 4,
+  "pages": [
+   {
+    "id": "p1",
+    "name": {
+     "es": "Copas de clubes",
+     "en": "Club cups",
+     "de": "Klubpokale",
+     "it": "Coppe per club",
+     "fr": "Coupes de clubs"
+    },
+    "reward": "r80_boots",
+    "cards": [
+     {
+      "id": "c_ec",
+      "name": {
+       "es": "Copa de Europa",
+       "en": "European Cup",
+       "de": "Europapokal der Landesmeister",
+       "it": "Coppa dei Campioni",
+       "fr": "Coupe des clubs champions"
+      },
+      "kind": "comp",
+      "ref": "UCL"
+     },
+     {
+      "id": "c_cwc",
+      "name": {
+       "es": "Recopa de Europa",
+       "en": "Cup Winners' Cup",
+       "de": "Europapokal der Pokalsieger",
+       "it": "Coppa delle Coppe",
+       "fr": "Coupe des coupes"
+      },
+      "kind": "comp",
+      "ref": "UCWC"
+     },
+     {
+      "id": "c_uefa",
+      "name": {
+       "es": "Copa de la UEFA",
+       "en": "UEFA Cup",
+       "de": "UEFA-Pokal",
+       "it": "Coppa UEFA",
+       "fr": "Coupe UEFA"
+      },
+      "kind": "comp",
+      "ref": "UEL"
+     },
+     {
+      "id": "c_usc",
+      "name": {
+       "es": "Supercopa de Europa",
+       "en": "European Super Cup",
+       "de": "Europäischer Supercup",
+       "it": "Supercoppa europea",
+       "fr": "Supercoupe d'Europe"
+      },
+      "kind": "comp",
+      "ref": "USC"
+     },
+     {
+      "id": "c_icc",
+      "name": {
+       "es": "Copa Intercontinental",
+       "en": "Intercontinental Cup",
+       "de": "Weltpokal",
+       "it": "Coppa Intercontinentale",
+       "fr": "Coupe intercontinentale"
+      },
+      "kind": "comp",
+      "ref": "ICC"
+     },
+     {
+      "id": "c_lib",
+      "name": {
+       "es": "Copa Libertadores",
+       "en": "Copa Libertadores",
+       "de": "Copa Libertadores",
+       "it": "Coppa Libertadores",
+       "fr": "Copa Libertadores"
+      },
+      "kind": "comp",
+      "ref": "LIB"
+     }
+    ]
+   },
+   {
+    "id": "p2",
+    "name": {
+     "es": "Torneos de selecciones",
+     "en": "International tournaments",
+     "de": "Länderturniere",
+     "it": "Tornei per nazionali",
+     "fr": "Tournois internationaux"
+    },
+    "reward": "r80_shin",
+    "cards": [
+     {
+      "id": "c_wc82",
+      "name": {
+       "es": "Mundial 1982",
+       "en": "1982 World Cup",
+       "de": "WM 1982",
+       "it": "Mondiale 1982",
+       "fr": "Coupe du monde 1982"
+      },
+      "kind": "nat",
+      "ref": "WC:1982"
+     },
+     {
+      "id": "c_wc86",
+      "name": {
+       "es": "Mundial 1986",
+       "en": "1986 World Cup",
+       "de": "WM 1986",
+       "it": "Mondiale 1986",
+       "fr": "Coupe du monde 1986"
+      },
+      "kind": "nat",
+      "ref": "WC:1986"
+     },
+     {
+      "id": "c_eu84",
+      "name": {
+       "es": "Eurocopa 1984",
+       "en": "Euro 1984",
+       "de": "EM 1984",
+       "it": "Europeo 1984",
+       "fr": "Euro 1984"
+      },
+      "kind": "nat",
+      "ref": "EURO:1984"
+     },
+     {
+      "id": "c_eu88",
+      "name": {
+       "es": "Eurocopa 1988",
+       "en": "Euro 1988",
+       "de": "EM 1988",
+       "it": "Europeo 1988",
+       "fr": "Euro 1988"
+      },
+      "kind": "nat",
+      "ref": "EURO:1988"
+     },
+     {
+      "id": "c_ca83",
+      "name": {
+       "es": "Copa América 1983",
+       "en": "1983 Copa América",
+       "de": "Copa América 1983",
+       "it": "Copa América 1983",
+       "fr": "Copa América 1983"
+      },
+      "kind": "nat",
+      "ref": "CA:1983"
+     },
+     {
+      "id": "c_ca89",
+      "name": {
+       "es": "Copa América 1989",
+       "en": "1989 Copa América",
+       "de": "Copa América 1989",
+       "it": "Copa América 1989",
+       "fr": "Copa América 1989"
+      },
+      "kind": "nat",
+      "ref": "CA:1989"
+     }
+    ]
+   },
+   {
+    "id": "p3",
+    "name": {
+     "es": "Clubes de la década",
+     "en": "Clubs of the decade",
+     "de": "Klubs des Jahrzehnts",
+     "it": "Club del decennio",
+     "fr": "Clubs de la décennie"
+    },
+    "reward": "r80_wrist",
+    "cards": [
+     {
+      "id": "k_0",
+      "name": {
+       "es": "Liverpool",
+       "en": "Liverpool",
+       "de": "Liverpool",
+       "it": "Liverpool",
+       "fr": "Liverpool"
+      },
+      "kind": "club",
+      "ref": "Liverpool"
+     },
+     {
+      "id": "k_1",
+      "name": {
+       "es": "Arsenal",
+       "en": "Arsenal",
+       "de": "Arsenal",
+       "it": "Arsenal",
+       "fr": "Arsenal"
+      },
+      "kind": "club",
+      "ref": "Arsenal"
+     },
+     {
+      "id": "k_2",
+      "name": {
+       "es": "Manchester United",
+       "en": "Manchester United",
+       "de": "Manchester United",
+       "it": "Manchester United",
+       "fr": "Manchester United"
+      },
+      "kind": "club",
+      "ref": "Manchester United"
+     },
+     {
+      "id": "k_3",
+      "name": {
+       "es": "Real Madrid",
+       "en": "Real Madrid",
+       "de": "Real Madrid",
+       "it": "Real Madrid",
+       "fr": "Real Madrid"
+      },
+      "kind": "club",
+      "ref": "Real Madrid"
+     },
+     {
+      "id": "k_4",
+      "name": {
+       "es": "Ajax",
+       "en": "Ajax",
+       "de": "Ajax",
+       "it": "Ajax",
+       "fr": "Ajax"
+      },
+      "kind": "club",
+      "ref": "Ajax"
+     },
+     {
+      "id": "k_5",
+      "name": {
+       "es": "Bayern Múnich",
+       "en": "Bayern Múnich",
+       "de": "Bayern Múnich",
+       "it": "Bayern Múnich",
+       "fr": "Bayern Múnich"
+      },
+      "kind": "club",
+      "ref": "Bayern Múnich"
+     }
+    ]
+   },
+   {
+    "id": "p4",
+    "name": {
+     "es": "Así se jugaba",
+     "en": "How it was played",
+     "de": "So wurde gespielt",
+     "it": "Come si giocava",
+     "fr": "Comment on jouait"
+    },
+    "reward": "rm80_coat",
+    "cards": [
+     {
+      "id": "r_2pts",
+      "name": {
+       "es": "Dos puntos por victoria",
+       "en": "Two points for a win",
+       "de": "Zwei Punkte für einen Sieg",
+       "it": "Due punti a vittoria",
+       "fr": "Deux points par victoire"
+      },
+      "kind": "rule"
+     },
+     {
+      "id": "r_back",
+      "name": {
+       "es": "Cesión al portero permitida",
+       "en": "Back-pass to the keeper allowed",
+       "de": "Rückpass zum Torwart erlaubt",
+       "it": "Retropassaggio al portiere consentito",
+       "fr": "Passe en retrait au gardien autorisée"
+      },
+      "kind": "rule"
+     },
+     {
+      "id": "r_tele",
+      "name": {
+       "es": "Teletexto",
+       "en": "Teletext",
+       "de": "Videotext",
+       "it": "Televideo",
+       "fr": "Télétexte"
+      },
+      "kind": "rule"
+     },
+     {
+      "id": "m_cwc83",
+      "name": {
+       "es": "Prórroga en la Recopa de 1983",
+       "en": "Extra time in the 1983 Cup Winners' Cup",
+       "de": "Verlängerung im Pokalsiegerfinale 1983",
+       "it": "Supplementari nella Coppa delle Coppe 1983",
+       "fr": "Prolongation en Coupe des coupes 1983"
+      },
+      "kind": "moment",
+      "ref": "m1983-cwc-final"
+     },
+     {
+      "id": "m_ec86",
+      "name": {
+       "es": "La tanda de 1986",
+       "en": "The 1986 shoot-out",
+       "de": "Das Elfmeterschießen von 1986",
+       "it": "I rigori del 1986",
+       "fr": "La séance de 1986"
+      },
+      "kind": "moment",
+      "ref": "m1986-ec-final"
+     },
+     {
+      "id": "m_lg89",
+      "name": {
+       "es": "La última jornada de 1989",
+       "en": "The final day of 1989",
+       "de": "Der letzte Spieltag 1989",
+       "it": "L'ultima giornata del 1989",
+       "fr": "La dernière journée de 1989"
+      },
+      "kind": "moment",
+      "ref": "m1989-title-decider"
+     }
+    ]
+   }
+  ],
+  "complete": {
+   "reward": "rm80_glasses",
+   "title": {
+    "es": "Coleccionista de los 80",
+    "en": "1980s collector",
+    "de": "Sammler der 80er",
+    "it": "Collezionista degli anni '80",
+    "fr": "Collectionneur des années 80"
+   }
+  }
+ },
+ "rewards": [
+  {
+   "id": "r70_socks",
+   "who": "p",
+   "slot": "socks",
+   "name": "Medias bajadas de los 70",
+   "stats": {
+    "FIS": 1,
+    "REG": 1
+   },
+   "look": {
+    "c": "#f4f4f0"
+   },
+   "names": {
+    "en": "1970s rolled-down socks",
+    "de": "Heruntergerollte Stutzen der 70er",
+    "it": "Calzettoni abbassati anni '70",
+    "fr": "Chaussettes baissées des années 70"
+   },
+   "unlock": {
+    "decade": "1970s"
+   }
+  },
+  {
+   "id": "r80_band",
+   "who": "p",
+   "slot": "band",
+   "name": "Cinta de rizo",
+   "stats": {
+    "REG": 1,
+    "PAS": 1
+   },
+   "look": {
+    "c": "#e3262f"
+   },
+   "names": {
+    "en": "Terry headband",
+    "de": "Frottee-Stirnband",
+    "it": "Fascia di spugna",
+    "fr": "Bandeau en éponge"
+   },
+   "unlock": {
+    "decade": "1980s"
+   }
+  },
+  {
+   "id": "r90_boots",
+   "who": "p",
+   "slot": "boots",
+   "name": "Botas de lengüeta larga",
+   "stats": {
+    "TIR": 2,
+    "PAS": 1,
+    "RIT": -1
+   },
+   "look": {
+    "c": "#16191b",
+    "c2": "#f1f1ee"
+   },
+   "names": {
+    "en": "Long-tongue boots",
+    "de": "Schuhe mit langer Lasche",
+    "it": "Scarpe con linguetta lunga",
+    "fr": "Chaussures à longue languette"
+   },
+   "unlock": {
+    "decade": "1990s"
+   }
+  },
+  {
+   "id": "r00_wrist",
+   "who": "p",
+   "slot": "wrist",
+   "name": "Pulsera de silicona",
+   "stats": {
+    "PAS": 1,
+    "TIR": 1
+   },
+   "look": {
+    "c": "#ffb21e"
+   },
+   "names": {
+    "en": "Silicone wristband",
+    "de": "Silikonarmband",
+    "it": "Braccialetto di silicone",
+    "fr": "Bracelet en silicone"
+   },
+   "unlock": {
+    "decade": "2000s"
+   }
+  },
+  {
+   "id": "r10_therm",
+   "who": "p",
+   "slot": "therm",
+   "name": "Térmica de manga larga",
+   "stats": {
+    "FIS": 1,
+    "rec": 1
+   },
+   "look": {
+    "c": "#1c2226"
+   },
+   "names": {
+    "en": "Long-sleeve base layer",
+    "de": "Langärmliges Funktionsshirt",
+    "it": "Maglia termica a maniche lunghe",
+    "fr": "Sous-maillot à manches longues"
+   },
+   "unlock": {
+    "decade": "2010s"
+   }
+  },
+  {
+   "id": "r20_phones",
+   "who": "p",
+   "slot": "phones",
+   "name": "Cascos de la concentración",
+   "stats": {
+    "REG": 1,
+    "rec": 1
+   },
+   "look": {
+    "c": "#f4f4f0"
+   },
+   "names": {
+    "en": "Focus headphones",
+    "de": "Konzentrationskopfhörer",
+    "it": "Cuffie della concentrazione",
+    "fr": "Casque de concentration"
+   },
+   "unlock": {
+    "decade": "2020s"
+   }
+  },
+  {
+   "id": "r80_boots",
+   "who": "p",
+   "slot": "boots",
+   "name": "Botas de cuero clásicas",
+   "stats": {
+    "TIR": 2,
+    "REG": 1,
+    "RIT": -1
+   },
+   "look": {
+    "c": "#111314",
+    "c2": "#f1f1ee"
+   },
+   "names": {
+    "en": "Classic leather boots",
+    "de": "Klassische Lederschuhe",
+    "it": "Scarpe classiche di cuoio",
+    "fr": "Chaussures classiques en cuir"
+   },
+   "unlock": {
+    "page": "p1"
+   }
+  },
+  {
+   "id": "r80_shin",
+   "who": "p",
+   "slot": "shin",
+   "name": "Espinilleras pequeñas",
+   "stats": {
+    "RIT": 1,
+    "REG": 1
+   },
+   "look": {
+    "c": "#e8eef0"
+   },
+   "names": {
+    "en": "Small shin pads",
+    "de": "Kleine Schienbeinschoner",
+    "it": "Parastinchi piccoli",
+    "fr": "Petits protège-tibias"
+   },
+   "unlock": {
+    "page": "p2"
+   }
+  },
+  {
+   "id": "r80_wrist",
+   "who": "p",
+   "slot": "wrist",
+   "name": "Muñequera de felpa",
+   "stats": {
+    "PAS": 1,
+    "REG": 1
+   },
+   "look": {
+    "c": "#f4f4f0"
+   },
+   "names": {
+    "en": "Towelling wristband",
+    "de": "Frottee-Schweißband",
+    "it": "Polsino di spugna",
+    "fr": "Poignet en éponge"
+   },
+   "unlock": {
+    "page": "p3"
+   }
+  },
+  {
+   "id": "rm80_coat",
+   "who": "m",
+   "slot": "coat",
+   "name": "Abrigo largo de banquillo",
+   "stats": {
+    "tac": 1,
+    "mot": 1
+   },
+   "look": {
+    "c": "#2b2b2e",
+    "c2": "#7a5a3a"
+   },
+   "names": {
+    "en": "Long touchline coat",
+    "de": "Langer Trainermantel",
+    "it": "Cappotto lungo da panchina",
+    "fr": "Long manteau de banc"
+   },
+   "unlock": {
+    "page": "p4"
+   }
+  },
+  {
+   "id": "rm80_glasses",
+   "who": "m",
+   "slot": "glasses",
+   "name": "Gafas de aviador",
+   "stats": {
+    "pre": 1,
+    "lec": 1
+   },
+   "look": {
+    "c": "#c9a24a"
+   },
+   "names": {
+    "en": "Aviator glasses",
+    "de": "Pilotenbrille",
+    "it": "Occhiali da aviatore",
+    "fr": "Lunettes d'aviateur"
+   },
+   "unlock": {
+    "album": "1980s"
+   }
+  }
+ ],
+ "titles": {
+  "all": {
+   "es": "Leyenda de todas las épocas",
+   "en": "Legend of every era",
+   "de": "Legende aller Epochen",
+   "it": "Leggenda di tutte le epoche",
+   "fr": "Légende de toutes les époques"
+  }
+ }
+}

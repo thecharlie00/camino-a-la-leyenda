@@ -21,6 +21,7 @@
     }
   }
 
+  window.UIX.eraTheme = theme;
   function profileSummary(p) {
     var rules = p.rules, media = p.media, presentation = p.presentation, economy = p.economy;
     var social = media.socialMedia ? t("Redes disponibles") : t("Sin redes sociales");
@@ -73,7 +74,7 @@
       '<div class="eras-field"><label for="era-year">' + t("Año exacto") + '</label><select id="era-year" data-era-field="year">' + years.map(function (n) { return '<option value="' + n + '"' + (n === state.year ? ' selected' : '') + '>' + n + '</option>'; }).join("") + '</select></div>' +
       '<div class="eras-field"><label for="era-mode">' + t("Tipo de carrera") + '</label><select id="era-mode" data-era-field="mode"><option value="player"' + (state.mode === "player" ? ' selected' : '') + '>' + t("Carrera de jugador") + '</option><option value="manager"' + (state.mode === "manager" ? ' selected' : '') + '>' + t("Carrera de míster") + '</option></select></div>' +
       '</div>' +
-      profileSummary(profile(state.year)) + '<div class="eras-actions"><button type="button" class="primary" data-era-act="start">' + t("Elegir club y empezar en {year}", {year: state.year}) + '</button><button type="button" data-era-act="close">' + t("Volver") + '</button></div>' +
+      profileSummary(profile(state.year)) + '<div class="eras-actions"><button type="button" class="primary" data-era-act="start">' + t("Elegir club y empezar en {year}", {year: state.year}) + '</button><button type="button" data-era-act="close">' + t("Volver") + '</button>' + (window.UIX.eraMomentsButtons ? window.UIX.eraMomentsButtons() : "") + '</div>' +
       '<h3 style="margin-top:20px">' + t("Tus carreras históricas") + '</h3><div class="eras-saves">' + savedRows() + '</div></section>';
   }
   function open() {
@@ -273,7 +274,7 @@
     }).join("");
     layer.setAttribute("data-era-decade", pack.id);
     layer.innerHTML = '<section class="eras-dialog" data-era-decade="' + eraEscape(pack.id) + '" role="dialog" aria-modal="true" aria-labelledby="eras-book-title"><div class="eras-kicker">' + eraEscape(S.era.startDecade) + '</div><h2 id="eras-book-title">' + t("Anuario de la historia") + "</h2>" + body +
-      '<div class="eras-actions"><button type="button" data-era-act="close">' + t("Volver") + "</button></div></section>";
+      '<div class="eras-actions"><button type="button" data-era-act="close">' + t("Volver") + "</button>" + (window.UIX.eraMomentsButtons ? window.UIX.eraMomentsButtons() : "") + "</div></section>";
   }
   UIX.actions["era-book"] = function () { showYearbook(); };
   UIX.actions["era-rules"] = function () { showCurrentRules(); };

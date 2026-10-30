@@ -212,8 +212,52 @@ _decision_text = json.dumps(ERAS_DECISIONS, ensure_ascii=False)
 for real_name in ("Paolo Rossi", "Michel Platini", "Diego Maradona", "David Trezeguet"):
     if real_name in _decision_text:
         raise ValueError(f"Era decisions must use versioned player names, not {real_name}")
-ERAS_DATA_JS = "var ERAS_MODE = true;\nvar ERAS_DATA = " + json.dumps({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE, "decisions": ERAS_DECISIONS, "clubsHistory": ERAS_CLUBS, "competitions": ERAS_COMPS, "history": ERAS_HISTORY}, ensure_ascii=False, separators=(",", ":")) + ";\nvar ERAS_I18N = " + json.dumps(ERAS_I18N, ensure_ascii=False, separators=(",", ":")) + ";\n"
-ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "eras-comps.js", "ui-eras.js", "ui-boot.js"]
+ERAS_MOMENTS = json.loads((ERAS_ROOT / "moments.json").read_text(encoding="utf-8"))
+_LANGS5 = {"es", "en", "de", "it", "fr"}
+_SECONDARY = {"clean", "score2", "score3", "noET", "noDefend", "allPens", "firstFive", "bestShot", "save2", "save3", "concede1"}
+if ERAS_MOMENTS.get("schema") != 1 or len(ERAS_MOMENTS.get("moments", [])) != 18:
+    raise ValueError("Era moments must use schema 1 and define 18 legend moments")
+_moment_ids = set()
+for decade in EXPECTED_ERAS:
+    if len([m for m in ERAS_MOMENTS["moments"] if m.get("decade") == decade]) != 3:
+        raise ValueError(f"Era moments must define three legend moments for {decade}")
+for m in ERAS_MOMENTS["moments"]:
+    if m["id"] in _moment_ids or m["year"] // 10 * 10 != int(m["decade"][:4]) or m["kind"] not in ("match", "shootout", "gkshootout"):
+        raise ValueError(f"Era moment {m['id']} is duplicated or has an invalid year or kind")
+    _moment_ids.add(m["id"])
+    for field in ("fact", "setup"):
+        if set(m[field]) != _LANGS5 or not all(m[field].values()):
+            raise ValueError(f"Era moment {m['id']} is missing localized {field}")
+    if len(m.get("secondary", [])) != 3 or not set(m["secondary"]) <= _SECONDARY:
+        raise ValueError(f"Era moment {m['id']} needs three known secondary objectives")
+    for team in m["teams"]:
+        if team["type"] == "club" and team["name"] not in _world_clubs:
+            raise ValueError(f"Era moment {m['id']} names a club absent from the world: {team['name']}")
+_cards = [c for p in ERAS_MOMENTS["album"]["pages"] for c in p["cards"]]
+if len({c["id"] for c in _cards}) != len(_cards) or any(set(c["name"]) != _LANGS5 for c in _cards):
+    raise ValueError("Era album cards must be unique and localized")
+_reward_ids = {r["id"] for r in ERAS_MOMENTS["rewards"]}
+for c in _cards:
+    if c["kind"] == "moment" and c["ref"] not in _moment_ids:
+        raise ValueError(f"Era album card {c['id']} points to an unknown moment")
+    if c["kind"] == "club" and c["ref"] not in _world_clubs:
+        raise ValueError(f"Era album card {c['id']} names a club absent from the world")
+for page in ERAS_MOMENTS["album"]["pages"]:
+    if page["reward"] not in _reward_ids:
+        raise ValueError(f"Era album page {page['id']} has an unknown reward")
+for r in ERAS_MOMENTS["rewards"]:
+    if r["who"] not in ("p", "m") or set(r["names"]) != {"en", "de", "it", "fr"}:
+        raise ValueError(f"Era reward {r['id']} needs an owner and four translations")
+_j = lambda value: json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+# en Android cada parte es un módulo propio para que ninguna tarea de arranque sea demasiado grande
+ERAS_PARTS = [
+    "var ERAS_MODE = true;\nvar ERAS_DATA = " + _j({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE, "clubsHistory": ERAS_CLUBS, "competitions": ERAS_COMPS, "history": ERAS_HISTORY}) + ";\n",
+    "ERAS_DATA.decisions = " + _j(ERAS_DECISIONS) + ";\n",
+    "ERAS_DATA.moments = " + _j(ERAS_MOMENTS) + ";\n",
+    "var ERAS_I18N = " + _j(ERAS_I18N) + ";\n",
+]
+ERAS_DATA_JS = "".join(ERAS_PARTS)
+ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "eras-comps.js", "eras-moments.js", "ui-eras.js", "ui-eras-moments.js", "ui-boot.js"]
 web_config_path = ROOT / "web" / "config.json"
 web_config = json.loads(web_config_path.read_text(encoding="utf-8-sig")) if web_config_path.exists() else {}
 # Keep the same public GOAT Ladder worker configured on the localized web pages.
@@ -258,7 +302,8 @@ _vn = (_re.search(r'versionName="([^"]+)"', _man) or [None, "?"])[1]
 _vc = (_re.search(r'versionCode="(\d+)"', _man) or [None, "0"])[1]
 build_js = 'var BUILD = {v: "%s", code: %s, t: "%s"};\n' % (_vn, _vc, _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
 source_files = [(name, (SRC / name).read_text(encoding="utf-8")) for name in ORDER if (SRC / name).exists()]
-common_prefix = "var GOAT_API_URL = " + json.dumps(goat_api_url) + ";\n" + build_js + "var GOAT_WEB_BUILD = false;\n" + ERAS_DATA_JS
+runtime_prefix = "var GOAT_API_URL = " + json.dumps(goat_api_url) + ";\n" + build_js + "var GOAT_WEB_BUILD = false;\n"
+common_prefix = runtime_prefix + ERAS_DATA_JS
 
 # The public web build stays as one self-contained page with its existing startup behavior.
 web_js = "var P3D_ASSET_PACK = " + json.dumps(asset_pack, separators=(",", ":")) + ";\n" + common_prefix + "\n".join(source for _, source in source_files)
@@ -273,7 +318,7 @@ web_js = web_js.replace("</script", "<" + chr(92) + "/script")
 
 # The Android WebView uses the same game sources/UI, but yields between modules
 # and keeps the large locale/model payloads inert until they are actually needed.
-mobile_sources = [("runtime-config", common_prefix)]
+mobile_sources = [("runtime-config", runtime_prefix + ERAS_PARTS[0])] + [("eras-data-%d" % i, part) for i, part in enumerate(ERAS_PARTS[1:], 1)]
 mobile_sources.extend((name, source) for name, source in source_files if name not in LANG_FILES)
 mobile_js = list(mobile_sources)
 for old, new in (
