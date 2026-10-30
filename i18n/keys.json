@@ -37257,6 +37257,48 @@
   ],
   "ctx": "rows.push([\"guide\", \"\", ICON.book, tr(\"Guía del juego\"), tr(\"Cómo funciona cada parte\")]);"
  },
+ "Notificaciones": {
+  "w": [
+   "ui.js:508"
+  ],
+  "ctx": "rows.push([\"ntfcenter\", \"\", ICON.bell, tr(\"Notificaciones\"), noticeHistory.length"
+ },
+ "Tus avisos de partidos, mercado y carrera": {
+  "w": [
+   "ui.js:511"
+  ],
+  "ctx": "tr(\"Tus avisos de partidos, mercado y carrera\")"
+ },
+ "{n} aviso guardado": {
+  "w": [
+   "ui.js:510"
+  ],
+  "ctx": "trn(noticeHistory.length, \"{n} aviso guardado\", \"{n} avisos guardados\")"
+ },
+ "{n} avisos guardados": {
+  "w": [
+   "ui.js:510"
+  ],
+  "ctx": "trn(noticeHistory.length, \"{n} aviso guardado\", \"{n} avisos guardados\")"
+ },
+ "Se guardan aquí tus avisos recientes de esta carrera.": {
+  "w": [
+   "ui.js:1748"
+  ],
+  "ctx": "tr(\"Se guardan aquí tus avisos recientes de esta carrera.\")"
+ },
+ "Todavía no hay notificaciones.": {
+  "w": [
+   "ui.js:1750"
+  ],
+  "ctx": "tr(\"Todavía no hay notificaciones.\")"
+ },
+ "Borrar historial": {
+  "w": [
+   "ui.js:1752"
+  ],
+  "ctx": "tr(\"Borrar historial\")"
+ },
  "Ajustes y partidas": {
   "w": [
    "ui.js:475"

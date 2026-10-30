@@ -56,9 +56,16 @@ const api29Start = activity.indexOf('private static final class Api29');
 assert.ok(api26Start >= 0 && api29Start > api26Start);
 assert.match(activity.slice(api26Start, api29Start), /onRenderProcessGone\(WebView view, android\.webkit\.RenderProcessGoneDetail detail\)/);
 assert.doesNotMatch(activity.slice(0, api26Start), /import .*RenderProcessGoneDetail|onRenderProcessGone\(WebView view,/);
-for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updateName', 'openStore', 'showAd', 'privacyOptionsRequired', 'showPrivacyOptions', 'remind', 'cancelRemind', 'askNotify']) {
+for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updateName', 'openStore', 'showAd', 'privacyOptionsRequired', 'showPrivacyOptions', 'remind', 'cancelRemind', 'askNotify', 'goatCareerPost']) {
   assert.match(activity, new RegExp(`@JavascriptInterface\\s+public\\s+[^\\n]+\\b${method}\\s*\\(`), `Missing AndroidBridge method ${method}`);
 }
+const goatOrigin = gameBuilder.match(/DEFAULT_GOAT_API_URL = "([^"]+)"/)[1];
+assert.ok(activity.includes(`GOAT_CAREER_URL = "${goatOrigin}/api/goat-ladder/careers"`),
+  'Android native career requests must match the game-configured GOAT API');
+assert.match(activity, /connection\.setRequestMethod\("POST"\)/);
+assert.match(activity, /connection\.setRequestProperty\("Content-Type", contentType\)/);
+assert.match(activity, /MAX_GOAT_REQUEST_BYTES = 100000/);
+assert.match(activity, /completeGoatCareerRequest\(requestId, status, responseBody\)/);
 assert.equal(playStoreFeed.packageName, 'com.caminoleyenda.app');
 assert.ok(playStoreFeed.versionCode > 0 && playStoreFeed.versionName);
 assert.ok(playStoreFeed.versionCode <= Number(manifest.match(/android:versionCode="([0-9]+)"/)[1]),

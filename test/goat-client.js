@@ -35,7 +35,7 @@ function loadService(options, sourcePath) {
     responseError: "RESPUESTA", unavailable: "NO_CONFIGURADO", noLatest: "SIN_GESTA",
     careerNoData: "SIN_CARRERA", deleteMissing: "SIN_CLAVE"}};
   var env = {
-    GOAT_API_URL: options.url, GOAT_TEXT: texts, LANG: "es",
+    GOAT_API_URL: options.url, GOAT_TEXT: texts, LANG: "es", AndroidBridge: options.bridge,
     navigator: {onLine: options.online !== false},
     localStorage: {
       getItem: function (key) { return key in store ? store[key] : null; },
@@ -53,7 +53,7 @@ function loadService(options, sourcePath) {
     "localStorage", "fetch", "TextEncoder", "AbortController", "console", source);
   factory(env, env.GOAT_API_URL, env.GOAT_TEXT, env.LANG, env.navigator, env.localStorage, env.fetch,
     env.TextEncoder, env.AbortController, env.console);
-  return {service: env.GoatLadder, calls: calls};
+  return {service: env.GoatLadder, calls: calls, window: env};
 }
 
 (async function () {
@@ -216,6 +216,26 @@ function loadService(options, sourcePath) {
       managerCareer.history.length === 31 && legacyResult.id === "manager-31");
     check("normaliza la URL del cliente legacy",
       legacyEnv.calls[0].url.indexOf("/api/api/") < 0 && legacyEnv.calls[0].url.indexOf("/api/goat-ladder/careers") >= 0);
+  }
+
+  console.log("Envío Android nativo (sin CORS de origen file://)");
+  for (var nativeSource of ["src/goat.js", "legacy-game/src/goat.js"]) {
+    var nativeEnv;
+    var nativeCalls = [];
+    nativeEnv = loadService({url: "https://api.test", bridge: {
+      goatCareerPost: function (requestId, body, contentType) {
+        nativeCalls.push({requestId: requestId, body: body, contentType: contentType});
+        Promise.resolve().then(function () {
+          nativeEnv.window.__caminoGoatNativeComplete(requestId, 201,
+            JSON.stringify({id: "native-career", delete_token: "native-token"}));
+        });
+      }
+    }, fetch: function () { throw new Error("The Android bridge should bypass WebView fetch"); }}, nativeSource);
+    var nativeResult = await nativeEnv.service.submitCareer({event_key: "career:native", game_mode: "manager",
+      metrics: {seasons: 1}, history: [{season: 2129}]}, "Alias", "Career title");
+    check("" + nativeSource + " career request uses AndroidBridge, not WebView CORS",
+      nativeCalls.length === 1 && nativeCalls[0].contentType === "application/json" &&
+      JSON.parse(nativeCalls[0].body).event_key === "career:native" && nativeResult.id === "native-career");
   }
 
   console.log(failures ? "\n" + failures + " comprobaciones fallidas" : "\nTodo correcto");

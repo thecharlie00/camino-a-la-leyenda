@@ -17,6 +17,7 @@
     table: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 9v11"/></svg>',
     trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8M9.5 18h5"/></svg>',
     globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>',
+    bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>',
     swap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14l-4-4M20 16H6l4 4"/></svg>',
     board: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 4v13M8 21l2-4M16 21l-2-4"/><circle cx="12" cy="10.5" r="2"/></svg>'
   };
@@ -502,6 +503,11 @@
   /* «Más»: el resto del juego en una lista clara */
   function tabMas() {
     var unread = eraSocialAvailable() ? socUnread() : 0, mgr = isMgr(), rows = [];
+    var noticeHistory = S && Array.isArray(S.ntfHistory) ? S.ntfHistory : [];
+    var noticeUnread = Math.max(0, Number(S && S.ntfUnread) || 0);
+    rows.push(["ntfcenter", "", ICON.bell, tr("Notificaciones"), noticeHistory.length
+      ? trn(noticeHistory.length, "{n} aviso guardado", "{n} avisos guardados")
+      : tr("Tus avisos de partidos, mercado y carrera")]);
     if (mgr) { var pos = S.m.club >= 0 ? posInLeague(S.m.club) : 0; rows.push(["tab", "comp", ICON.table, tr("Competición"), pos > 0 ? tr("Vais {pos} en {lg}", {pos: ord(pos), lg: lgName(S.cl[S.m.club])}) : tr("Clasificaciones y calendario")]); }
     if (mgr && UIX.mgrYo) rows.push(["tab", "yo", ICON.shirt, tr("Tu míster"), tr("Ropa, estadísticas, vitrina y mascota")]);
     if (eraSocialAvailable()) rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
@@ -513,7 +519,7 @@
     rows.push(["guide", "", ICON.book, tr("Guía del juego"), tr("Cómo funciona cada parte")]);
     rows.push(["menu", "", ICON.gear, tr("Ajustes y partidas"), tr("Idioma, ritmo, guardar y cargar")]);
     return '<div class="stack"><h2 class="scrt">' + tr("Más") + '</h2><div class="mlist">' + rows.map(function (r) {
-      return '<button class="mrow" data-a="' + r[0] + '"' + (r[1] ? ' data-t="' + r[1] + '"' : "") + '><span class="mic">' + r[2] + '</span><span class="mtx"><b>' + h(r[3]) + "</b><small>" + h(r[4]) + "</small></span>" + (r[1] === "red" && unread ? '<span class="nbadge in">' + (unread > 9 ? "9+" : unread) + "</span>" : "") + '<span class="chev" aria-hidden="true">›</span></button>';
+      return '<button class="mrow" data-a="' + r[0] + '"' + (r[1] ? ' data-t="' + r[1] + '"' : "") + '><span class="mic">' + r[2] + '</span><span class="mtx"><b>' + h(r[3]) + "</b><small>" + h(r[4]) + "</small></span>" + (r[1] === "red" && unread ? '<span class="nbadge in">' + (unread > 9 ? "9+" : unread) + "</span>" : "") + (r[0] === "ntfcenter" && noticeUnread ? '<span class="nbadge in">' + (noticeUnread > 9 ? "9+" : noticeUnread) + "</span>" : "") + '<span class="chev" aria-hidden="true">›</span></button>';
     }).join("") + "</div></div>";
   }
 
@@ -734,10 +740,27 @@
     o += '<p class="muted" style="font-size:var(--fs-xs);margin:8px 0 0">' + trn(x.tries, "{n} oferta hecha.", "{n} ofertas hechas.") + " " + tr("Ofertas muy bajas los enfadan más.") + "</p>";
     return o + "</section>";
   }
+  var MAX_NTF_HISTORY = 60;
+  function openNtfCenter() {
+    if (!S) return;
+    S.ntfUnread = 0;
+    persist();
+    UI.sheet = {k: "ntfcenter"};
+    renderSheet();
+  }
   /* avisos temporales que manda el motor: lesiones, rojas, mercado, resultados */
   function flushNtf() {
     if (!S || !S.ntf || !S.ntf.length || LV) return; /* durante el partido en directo se guardan para después */
     var q = S.ntf; S.ntf = [];
+    var history = Array.isArray(S.ntfHistory) ? S.ntfHistory : (S.ntfHistory = []);
+    var createdAt = Date.now();
+    q.forEach(function (n, index) {
+      if (!n || !n.t) return;
+      history.push({t: String(n.t).slice(0, 500), k: String(n.k || "info"), r: n.r == null ? null : n.r,
+        at: createdAt + index});
+    });
+    if (history.length > MAX_NTF_HISTORY) history.splice(0, history.length - MAX_NTF_HISTORY);
+    S.ntfUnread = Math.min(99, (Number(S.ntfUnread) || 0) + q.length);
     var res = q.filter(function (n) { return n.k === "res"; }), rest = q.filter(function (n) { return n.k !== "res"; });
     var wrap = document.getElementById("ntfs");
     if (!wrap) { wrap = document.createElement("div"); wrap.id = "ntfs"; wrap.className = "ntfs"; wrap.setAttribute("aria-live", "polite"); document.body.appendChild(wrap); }
@@ -746,8 +769,11 @@
       var tm = null, gone = false;
       var close = function () { if (gone) return; gone = true; el.classList.add("out"); setTimeout(function () { el.remove(); }, 400); };
       var arm = function (t) { clearTimeout(tm); tm = setTimeout(close, t); };
-      /* tocar la lista o desplazarla la mantiene abierta; tocar fuera de la lista la cierra */
-      el.addEventListener("click", function (e) { if (el._nodrop && Date.now() - el._nodrop < 300) return; if (!(e.target.closest && e.target.closest(".ntfl"))) close(); });
+      /* tocar un aviso abre el historial; deslizar por su lista solo reinicia el temporizador */
+      el.addEventListener("click", function () {
+        if (el._nodrop && Date.now() - el._nodrop < 300) return;
+        close(); openNtfCenter();
+      });
       var keep = function () { arm(4000); };
       /* deslizar a la derecha para quitarla */
       var sx = null, sy = null, dx = 0, drag = false;
@@ -1690,6 +1716,22 @@
   function sheetHTML() {
     var t = UI.sheet;
     if (UIX.sheets[t.k]) return UIX.sheets[t.k](t);
+    if (t.k === "ntfcenter") {
+      var notices = S && Array.isArray(S.ntfHistory) ? S.ntfHistory.slice().reverse() : [];
+      var noticeRows = notices.map(function (notice) {
+        var kind = /^(res|good|bad|info|red|amber)$/.test(notice.k) ? notice.k : "info";
+        var date = Number(notice.at) > 0 ? new Date(notice.at).toLocaleString() : "";
+        return '<article class="ntf-history-item ' + kind + '"><p>' + h(notice.t) + '</p>' +
+          (date ? '<small>' + h(date) + '</small>' : "") + '</article>';
+      }).join("");
+      return '<h2>' + tr("Notificaciones") + '</h2><p class="muted ntf-history-intro">' +
+        tr("Se guardan aquí tus avisos recientes de esta carrera.") + '</p>' +
+        (noticeRows ? '<div class="ntf-history-list">' + noticeRows + '</div>' :
+          '<p class="ntf-history-empty">' + tr("Todavía no hay notificaciones.") + '</p>') +
+        '<div class="row2 ntf-history-actions"><button class="btn wide" data-a="close">' + tr("Cerrar") +
+        '</button><button class="btn wide" data-a="ntfclear"' + (notices.length ? "" : " disabled") + '>' +
+        tr("Borrar historial") + '</button></div>';
+    }
     if (t.k === "statinfo") {
       var it = statusItems();
       return "<h2>" + (isMgr() ? tr("Estado del club") : tr("Tu estado")) + '</h2><div class="stack"><div class="stlist">' + it.map(function (x) { var w = lvlWord(x[1]), v = Math.round(x[1]); return '<div class="stli"><div class="stlt"><span>' + h(x[0]) + '</span><b class="' + w[1] + '">' + h(w[0]) + " · " + v + '</b></div><div class="bar"><i class="' + barCls(v) + '" style="width:' + v + '%"></i></div></div>'; }).join("") + "</div>" +
@@ -2443,6 +2485,8 @@
       case "bgm": if (typeof Pitch !== "undefined" && Pitch.musicToggle) Pitch.musicToggle(); render(false); break;
       case "menu": UI.sheet = {k: "menu"}; renderSheet(); break;
       case "close": closeSheet(); render(false); break;
+      case "ntfcenter": openNtfCenter(); break;
+      case "ntfclear": S.ntfHistory = []; S.ntfUnread = 0; persist(); renderSheet(); break;
       case "setev": S.set.ev = +v; persist(); renderSheet(); break;
       case "setlang": setLangUI(v); break;
       case "golang": UI.view = "lang"; render(true); break;
