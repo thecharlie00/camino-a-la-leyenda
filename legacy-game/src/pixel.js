@@ -266,6 +266,10 @@ var PX = (function () {
       if (/Equipo de la temporada|Team of the season/i.test(n)) return "tots";
       return "mvp";
     }
+    if (/Recopa de Europa|Cup Winners/i.test(n)) return "UCWC";
+    if (/Copa Conmebol/i.test(n)) return "CCMB";
+    if (/Copa de Europa|European Cup/i.test(n)) return "UCL";
+    if (/Copa UEFA|UEFA Cup|Copa de Ferias|Fairs Cup/i.test(n)) return "UEL";
     if (/Champions|Campeones de Europa/i.test(n)) return "UCL";
     if (/Europa League|Liga Europa/i.test(n)) return "UEL";
     if (/Conference/i.test(n)) return "UECL";

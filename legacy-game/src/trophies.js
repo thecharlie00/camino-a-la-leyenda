@@ -14,6 +14,8 @@ var TROPHY_SPEC = {
   UCL: ["wing", "gold"], UEL: ["tallcup", "bronze"], UECL: ["diamond", "teal"], LIB: ["flame", "gold"], SUD: ["cone", "silver"],
   CCC: ["star", "silver"], ACL: ["spire", "rose"], CAF: ["cone", "gold"], CWC: ["obelisk", "gold"], ICC: ["wing", "silver"],
   USC: ["diamond", "silver"], REC: ["goblet", "bronze"],
+  /* competiciones de época (Modo Épocas) */
+  UCWC: ["goblet", "silver"], CCMB: ["ring", "bronze"],
   WC: ["star", "gold"], EURO: ["spire", "silver"], CA: ["ring", "silver"], AFCON: ["ring", "gold"], ASIAN: ["flame", "silver"],
   GOLD: ["diamond", "gold"], OFCN: ["obelisk", "silver"], NLF: ["wing", "teal"], OLY: ["medal", "gold"],
   /* premios individuales y de entrenador */

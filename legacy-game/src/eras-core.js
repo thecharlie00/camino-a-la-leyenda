@@ -45,7 +45,7 @@ function eraScopeOfFixture(f) {
   if (!f || typeof f.ck !== "string") return null;
   if (f.ck.charAt(0) === "L" && f.ck.charAt(1) === ":") { var lg = W.lg[+f.ck.slice(2)]; return lg ? {league: lg.id, conf: lg.conf || null} : null; }
   var c = S && S.C ? S.C[f.ck] : null;
-  return {comp: f.ck, conf: c && c.conf || null, year: c && c.nat && c.y ? c.y : null};
+  return {comp: f.ck, conf: c && c.conf || null, year: c && c.nat && c.year ? c.year : null};
 }
 function eraWithScope(ctx, fn) {
   var previous = ERA_SCOPE;
@@ -512,6 +512,23 @@ function eraForeignLimitApplies() {
       var club = oldRandomStart.apply(this, arguments), year = ERA_CREATE_CONTEXT ? ERA_CREATE_CONTEXT.startYear : S && S.yr;
       for (var tries = 0; tries < 25 && eraContextForYear(year) && club >= 0 && !eraClubExists(W.clubs[club].n, year); tries++) club = oldRandomStart.apply(this, arguments);
       return club;
+    };
+  }
+  /* nombres de época de clubes y ligas en toda la partida (salvo los que el jugador haya editado) */
+  if (typeof clubName === "function") {
+    var oldClubName = clubName;
+    clubName = function (c) {
+      var name = oldClubName.apply(this, arguments);
+      if (!eraIsActive() || !(c >= 0) || !W.clubs[c] || name !== W.clubs[c].n) return name;
+      return eraClubName(name, S.yr);
+    };
+  }
+  if (typeof lgName === "function") {
+    var oldLgName = lgName;
+    lgName = function (li) {
+      var name = oldLgName.apply(this, arguments);
+      if (!eraIsActive() || !(li >= 0) || !W.lg[li] || name !== W.lg[li].n) return name;
+      return eraLeagueName(W.lg[li].id, name, S.yr);
     };
   }
   if (typeof extraTime === "function") {

@@ -156,6 +156,29 @@ for pack in ERAS_PACKS:
 if [event["year"] for event in ERAS_TIMELINE["events"]] != sorted(event["year"] for event in ERAS_TIMELINE["events"]):
     raise ValueError("Era rules timeline events must be chronological")
 ERAS_CLUBS = json.loads((ERAS_ROOT / "clubs-history.json").read_text(encoding="utf-8"))
+ERAS_COMPS = json.loads((ERAS_ROOT / "competitions.json").read_text(encoding="utf-8"))
+if ERAS_COMPS.get("schema") != 1:
+    raise ValueError("Era competitions must use schema 1")
+for comp in ERAS_COMPS["club"]:
+    years, names, formats = comp.get("years"), comp.get("names", []), comp.get("formats", [])
+    if not comp.get("key") or not isinstance(years, list) or len(years) != 2 or not names or not formats:
+        raise ValueError(f"Era competition {comp.get('key')} needs key, years, names and formats")
+    if names[0][0] > years[0] or [n[0] for n in names] != sorted(n[0] for n in names):
+        raise ValueError(f"Era competition {comp['key']} names must be chronological and cover its first year")
+    if [f["from"] for f in formats] != sorted(f["from"] for f in formats) or formats[0]["from"] > years[0]:
+        raise ValueError(f"Era competition {comp['key']} formats must be chronological and cover its first year")
+    for f in formats:
+        if f["type"] in ("ko", "groups") and not (isinstance(f.get("size"), int) and f["size"] >= 4 and (f["size"] & (f["size"] - 1)) == 0 or f["type"] == "groups"):
+            raise ValueError(f"Era competition {comp['key']} knockout size must be a power of two")
+        if f["type"] == "groups" and f["size"] % f["groups"]:
+            raise ValueError(f"Era competition {comp['key']} groups must divide its size")
+for comp in ERAS_COMPS["national"]:
+    years = [e["y"] for e in comp.get("editions", [])]
+    if not years or years != sorted(years) or len(set(years)) != len(years):
+        raise ValueError(f"Era national tournament {comp.get('key')} editions must be unique and chronological")
+    for e in comp["editions"]:
+        if e.get("groups") and e["size"] % e["groups"]:
+            raise ValueError(f"Era national tournament {comp['key']} {e['y']}: groups must divide the size")
 _world_sources = "".join(path.read_text(encoding="utf-8") for path in sorted(SRC.glob("data*.js")))
 _league_ids = set(re.findall(r'id:\s*"([A-Z]{2,4}[0-9]*)"', _world_sources))
 _world_clubs = {name for chunk in re.findall(r'"([^"\n]*\|[^"\n]*)"', _world_sources) for name in chunk.split("|")}
@@ -178,8 +201,8 @@ _decision_text = json.dumps(ERAS_DECISIONS, ensure_ascii=False)
 for real_name in ("Paolo Rossi", "Michel Platini", "Diego Maradona", "David Trezeguet"):
     if real_name in _decision_text:
         raise ValueError(f"Era decisions must use versioned player names, not {real_name}")
-ERAS_DATA_JS = "var ERAS_MODE = true;\nvar ERAS_DATA = " + json.dumps({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE, "decisions": ERAS_DECISIONS, "clubsHistory": ERAS_CLUBS}, ensure_ascii=False, separators=(",", ":")) + ";\nvar ERAS_I18N = " + json.dumps(ERAS_I18N, ensure_ascii=False, separators=(",", ":")) + ";\n"
-ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "ui-eras.js", "ui-boot.js"]
+ERAS_DATA_JS = "var ERAS_MODE = true;\nvar ERAS_DATA = " + json.dumps({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE, "decisions": ERAS_DECISIONS, "clubsHistory": ERAS_CLUBS, "competitions": ERAS_COMPS}, ensure_ascii=False, separators=(",", ":")) + ";\nvar ERAS_I18N = " + json.dumps(ERAS_I18N, ensure_ascii=False, separators=(",", ":")) + ";\n"
+ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "eras-comps.js", "ui-eras.js", "ui-boot.js"]
 web_config_path = ROOT / "web" / "config.json"
 web_config = json.loads(web_config_path.read_text(encoding="utf-8-sig")) if web_config_path.exists() else {}
 # Keep the same public GOAT Ladder worker configured on the localized web pages.

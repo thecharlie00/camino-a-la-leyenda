@@ -1,0 +1,1809 @@
+{
+ "schema": 1,
+ "yearConvention": "clubes: año de inicio de temporada; selecciones: año del torneo",
+ "club": [
+  {
+   "key": "UCL",
+   "conf": "UEFA",
+   "years": [
+    1955,
+    null
+   ],
+   "names": [
+    [
+     1955,
+     "Copa de Europa",
+     "Copa de Europa"
+    ],
+    [
+     1992,
+     "Champions League",
+     "Champions"
+    ]
+   ],
+   "qual": [
+    [
+     1955,
+     "champions"
+    ],
+    [
+     1997,
+     "coefficient"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1955,
+     "type": "ko",
+     "size": 32,
+     "legs": 2,
+     "final": "single-neutral"
+    },
+    {
+     "from": 1991,
+     "type": "ko-groups",
+     "size": 32,
+     "koRounds": 2,
+     "groups": 2,
+     "perGroup": 1,
+     "note": "Dos rondas de eliminatorias y dos grupos de 4; los ganadores de grupo juegan la final (1993-94 añadió semifinales)",
+     "doubtful": true
+    },
+    {
+     "from": 1994,
+     "type": "groups",
+     "size": 16,
+     "groups": 4,
+     "perGroup": 2,
+     "koLegs": 2
+    },
+    {
+     "from": 1997,
+     "type": "groups",
+     "size": 24,
+     "groups": 6,
+     "perGroup": 1,
+     "bestSeconds": 2,
+     "koLegs": 2
+    },
+    {
+     "from": 1999,
+     "type": "groups",
+     "size": 32,
+     "groups": 8,
+     "perGroup": 2,
+     "koLegs": 2,
+     "simplified": "La segunda fase de grupos (1999-2003) se simula como octavos"
+    },
+    {
+     "from": 2003,
+     "type": "groups",
+     "size": 32,
+     "groups": 8,
+     "perGroup": 2,
+     "koLegs": 2
+    },
+    {
+     "from": 2024,
+     "type": "original"
+    }
+   ],
+   "tiebreak": [
+    {
+     "from": 1955,
+     "rule": "replay-or-coin",
+     "doubtful": true
+    },
+    {
+     "from": 1967,
+     "rule": "away-goals-replay",
+     "doubtful": true
+    },
+    {
+     "from": 1970,
+     "rule": "away-goals-penalties",
+     "doubtful": true
+    },
+    {
+     "from": 2021,
+     "rule": "extra-time-penalties"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "wing",
+     "gold"
+    ],
+    "colors": [
+     "#0b1d51",
+     "#d9a93c"
+    ]
+   },
+   "sources": [
+    "https://rsssf.org/tablese/ec1.html",
+    "https://rsssf.org/miscellaneous/ecfaq.html"
+   ]
+  },
+  {
+   "key": "UEL",
+   "conf": "UEFA",
+   "years": [
+    1955,
+    null
+   ],
+   "names": [
+    [
+     1955,
+     "Copa de Ferias",
+     "Ferias"
+    ],
+    [
+     1971,
+     "Copa UEFA",
+     "Copa UEFA"
+    ],
+    [
+     2009,
+     "Europa League",
+     "Europa League"
+    ]
+   ],
+   "qual": [
+    [
+     1955,
+     "one-per-city"
+    ],
+    [
+     1971,
+     "league-places"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1955,
+     "type": "ko",
+     "size": 32,
+     "legs": 2,
+     "final": "two-legs",
+     "simplified": "Las primeras ediciones (1955-58 y 1958-60) duraron varias temporadas y mezclaron grupos; se simulan como eliminatorias anuales",
+     "doubtful": true
+    },
+    {
+     "from": 1971,
+     "type": "ko",
+     "size": 64,
+     "legs": 2,
+     "final": "two-legs"
+    },
+    {
+     "from": 1997,
+     "type": "ko",
+     "size": 64,
+     "legs": 2,
+     "final": "single-neutral"
+    },
+    {
+     "from": 2004,
+     "type": "groups",
+     "size": 32,
+     "groups": 8,
+     "perGroup": 2,
+     "koLegs": 2,
+     "simplified": "La fase de grupos de 2004-09 (40 equipos, grupos de 5 a una vuelta) se simula con grupos de 4"
+    },
+    {
+     "from": 2009,
+     "type": "groups",
+     "size": 32,
+     "groups": 8,
+     "perGroup": 2,
+     "koLegs": 2,
+     "simplified": "48 equipos y dieciseisavos reales; se simula con 32"
+    },
+    {
+     "from": 2024,
+     "type": "original"
+    }
+   ],
+   "tiebreak": [
+    {
+     "from": 1955,
+     "rule": "replay-or-coin",
+     "doubtful": true
+    },
+    {
+     "from": 1967,
+     "rule": "away-goals-replay",
+     "doubtful": true
+    },
+    {
+     "from": 1970,
+     "rule": "away-goals-penalties",
+     "doubtful": true
+    },
+    {
+     "from": 2021,
+     "rule": "extra-time-penalties"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "tallcup",
+     "bronze"
+    ],
+    "colors": [
+     "#5a2d0c",
+     "#d99a63"
+    ]
+   },
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fairs_Cup",
+    "https://en.wikipedia.org/wiki/1971%E2%80%9372_UEFA_Cup",
+    "https://rsssf.org/miscellaneous/ecfaq.html"
+   ]
+  },
+  {
+   "key": "UCWC",
+   "conf": "UEFA",
+   "years": [
+    1960,
+    1998
+   ],
+   "names": [
+    [
+     1960,
+     "Recopa de Europa",
+     "Recopa"
+    ]
+   ],
+   "qual": [
+    [
+     1960,
+     "cup-winners"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1960,
+     "type": "ko",
+     "size": 32,
+     "legs": 2,
+     "final": "single-neutral"
+    }
+   ],
+   "tiebreak": [
+    {
+     "from": 1955,
+     "rule": "replay-or-coin",
+     "doubtful": true
+    },
+    {
+     "from": 1967,
+     "rule": "away-goals-replay",
+     "doubtful": true
+    },
+    {
+     "from": 1970,
+     "rule": "away-goals-penalties",
+     "doubtful": true
+    },
+    {
+     "from": 2021,
+     "rule": "extra-time-penalties"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "goblet",
+     "silver"
+    ],
+    "colors": [
+     "#123c69",
+     "#c0c0c0"
+    ]
+   },
+   "sources": [
+    "https://en.wikipedia.org/wiki/UEFA_Cup_Winners%27_Cup"
+   ]
+  },
+  {
+   "key": "UECL",
+   "conf": "UEFA",
+   "years": [
+    2021,
+    null
+   ],
+   "names": [
+    [
+     2021,
+     "Conference League",
+     "Conference"
+    ]
+   ],
+   "qual": [
+    [
+     2021,
+     "league-places"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 2021,
+     "type": "original",
+     "simplified": "2021-24 tuvo fase de grupos; se usa la fase de liga actual"
+    }
+   ],
+   "tiebreak": [
+    {
+     "from": 1955,
+     "rule": "replay-or-coin",
+     "doubtful": true
+    },
+    {
+     "from": 1967,
+     "rule": "away-goals-replay",
+     "doubtful": true
+    },
+    {
+     "from": 1970,
+     "rule": "away-goals-penalties",
+     "doubtful": true
+    },
+    {
+     "from": 2021,
+     "rule": "extra-time-penalties"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "diamond",
+     "teal"
+    ]
+   },
+   "sources": []
+  },
+  {
+   "key": "USC",
+   "conf": "UEFA",
+   "years": [
+    1972,
+    null
+   ],
+   "names": [
+    [
+     1972,
+     "Supercopa de Europa",
+     "Supercopa UEFA"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1972,
+     "type": "final",
+     "legs": 2
+    },
+    {
+     "from": 1998,
+     "type": "original"
+    }
+   ],
+   "tiebreak": [
+    {
+     "from": 1955,
+     "rule": "replay-or-coin",
+     "doubtful": true
+    },
+    {
+     "from": 1967,
+     "rule": "away-goals-replay",
+     "doubtful": true
+    },
+    {
+     "from": 1970,
+     "rule": "away-goals-penalties",
+     "doubtful": true
+    },
+    {
+     "from": 2021,
+     "rule": "extra-time-penalties"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "diamond",
+     "silver"
+    ]
+   },
+   "sources": [
+    "https://en.wikipedia.org/wiki/UEFA_Super_Cup"
+   ]
+  },
+  {
+   "key": "ICC",
+   "conf": "ALL",
+   "years": [
+    1960,
+    2004
+   ],
+   "names": [
+    [
+     1960,
+     "Copa Intercontinental",
+     "Intercontinental"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1960,
+     "type": "final",
+     "legs": 2,
+     "note": "Por puntos con partido de desempate hasta 1968; goles y goles fuera de 1969 a 1979",
+     "doubtful": true
+    },
+    {
+     "from": 1980,
+     "type": "final",
+     "legs": 1,
+     "neutral": true
+    }
+   ],
+   "modern": {
+    "from": 2024,
+    "note": "Vuelve como Copa Intercontinental de la FIFA: se usa el formato actual del juego"
+   },
+   "identity": {
+    "trophy": [
+     "wing",
+     "silver"
+    ]
+   },
+   "sources": [
+    "https://en.wikipedia.org/wiki/Intercontinental_Cup_(1960%E2%80%932004)"
+   ]
+  },
+  {
+   "key": "LIB",
+   "conf": "CONMEBOL",
+   "years": [
+    1960,
+    null
+   ],
+   "names": [
+    [
+     1960,
+     "Copa Libertadores",
+     "Libertadores"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1960,
+     "type": "original",
+     "simplified": "Los formatos por etapas de la Libertadores se simulan con la fase de grupos actual",
+     "doubtful": true
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "flame",
+     "gold"
+    ]
+   },
+   "sources": [
+    "https://www.rsssf.com/tabless/sam-ccsf.html"
+   ]
+  },
+  {
+   "key": "SUD",
+   "conf": "CONMEBOL",
+   "years": [
+    2002,
+    null
+   ],
+   "names": [
+    [
+     2002,
+     "Copa Sudamericana",
+     "Sudamericana"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 2002,
+     "type": "original"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "cone",
+     "silver"
+    ]
+   },
+   "sources": []
+  },
+  {
+   "key": "CCMB",
+   "conf": "CONMEBOL",
+   "years": [
+    1992,
+    1999
+   ],
+   "names": [
+    [
+     1992,
+     "Copa Conmebol",
+     "Copa Conmebol"
+    ]
+   ],
+   "qual": [
+    [
+     1992,
+     "league-places"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1992,
+     "type": "ko",
+     "size": 16,
+     "legs": 2,
+     "final": "two-legs"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "ring",
+     "bronze"
+    ]
+   },
+   "sources": [
+    "https://en.wikipedia.org/wiki/List_of_abolished_CONMEBOL_tournaments_winning_managers_(1988%E2%80%932001)"
+   ]
+  },
+  {
+   "key": "REC",
+   "conf": "CONMEBOL",
+   "years": [
+    2003,
+    null
+   ],
+   "names": [
+    [
+     2003,
+     "Recopa Sudamericana",
+     "Recopa"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 2003,
+     "type": "original"
+    }
+   ],
+   "note": "De 1989 a 2002 enfrentaba al campeón de la Libertadores con el de la Supercopa; esa Supercopa no se simula",
+   "identity": {
+    "trophy": [
+     "goblet",
+     "bronze"
+    ]
+   },
+   "sources": [
+    "https://en.wikipedia.org/wiki/Recopa_Sudamericana"
+   ]
+  },
+  {
+   "key": "ACL",
+   "conf": "AFC",
+   "years": [
+    1967,
+    null
+   ],
+   "names": [
+    [
+     1967,
+     "Copa de Campeones de Asia",
+     "Campeones de Asia"
+    ],
+    [
+     2002,
+     "AFC Champions League",
+     "AFC Champions"
+    ],
+    [
+     2024,
+     "AFC Champions League Elite",
+     "AFC Champions"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1967,
+     "type": "ko",
+     "size": 16,
+     "legs": 2,
+     "final": "two-legs",
+     "doubtful": true
+    },
+    {
+     "from": 2002,
+     "type": "original",
+     "simplified": "Se usa la fase de liga actual"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "spire",
+     "rose"
+    ]
+   },
+   "sources": [],
+   "doubtful": true
+  },
+  {
+   "key": "CAF",
+   "conf": "CAF",
+   "years": [
+    1964,
+    null
+   ],
+   "names": [
+    [
+     1964,
+     "Copa de Campeones de África",
+     "Campeones de África"
+    ],
+    [
+     1997,
+     "CAF Champions League",
+     "CAF Champions"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1964,
+     "type": "ko",
+     "size": 16,
+     "legs": 2,
+     "final": "two-legs",
+     "doubtful": true
+    },
+    {
+     "from": 1997,
+     "type": "original"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "cone",
+     "gold"
+    ]
+   },
+   "sources": [],
+   "doubtful": true
+  },
+  {
+   "key": "CCC",
+   "conf": "CONCACAF",
+   "years": [
+    1962,
+    null
+   ],
+   "names": [
+    [
+     1962,
+     "Copa de Campeones de la Concacaf",
+     "Concacaf"
+    ],
+    [
+     2008,
+     "Liga de Campeones de la Concacaf",
+     "Concachampions"
+    ],
+    [
+     2024,
+     "Concacaf Champions Cup",
+     "Concachampions"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 1962,
+     "type": "original"
+    }
+   ],
+   "identity": {
+    "trophy": [
+     "star",
+     "silver"
+    ]
+   },
+   "sources": [],
+   "doubtful": true
+  },
+  {
+   "key": "NL",
+   "conf": "UEFA",
+   "years": [
+    2018,
+    null
+   ],
+   "names": [
+    [
+     2018,
+     "UEFA Nations League",
+     "Nations League"
+    ]
+   ],
+   "formats": [
+    {
+     "from": 2018,
+     "type": "original"
+    }
+   ],
+   "sources": []
+  }
+ ],
+ "national": [
+  {
+   "key": "WC",
+   "n": "Mundial",
+   "conf": "ALL",
+   "editions": [
+    {
+     "y": 1970,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "hosts": [
+      "MX"
+     ]
+    },
+    {
+     "y": 1974,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "simplified": "1974 y 1978 tuvieron una segunda fase de grupos; se simulan con cuartos",
+     "hosts": [
+      "DE"
+     ]
+    },
+    {
+     "y": 1978,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "simplified": "1974 y 1978 tuvieron una segunda fase de grupos; se simulan con cuartos",
+     "hosts": [
+      "AR"
+     ]
+    },
+    {
+     "y": 1982,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4,
+     "simplified": "1982 tuvo una segunda fase en grupos de 3; se simula con octavos",
+     "hosts": [
+      "ES"
+     ]
+    },
+    {
+     "y": 1986,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4,
+     "hosts": [
+      "MX"
+     ]
+    },
+    {
+     "y": 1990,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4,
+     "hosts": [
+      "IT"
+     ]
+    },
+    {
+     "y": 1994,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4,
+     "hosts": [
+      "US"
+     ]
+    },
+    {
+     "y": 1998,
+     "size": 32,
+     "groups": 8,
+     "thirds": 0,
+     "hosts": [
+      "FR"
+     ]
+    },
+    {
+     "y": 2002,
+     "size": 32,
+     "groups": 8,
+     "thirds": 0,
+     "hosts": [
+      "KR",
+      "JP"
+     ]
+    },
+    {
+     "y": 2006,
+     "size": 32,
+     "groups": 8,
+     "thirds": 0,
+     "hosts": [
+      "DE"
+     ]
+    },
+    {
+     "y": 2010,
+     "size": 32,
+     "groups": 8,
+     "thirds": 0,
+     "hosts": [
+      "ZA"
+     ]
+    },
+    {
+     "y": 2014,
+     "size": 32,
+     "groups": 8,
+     "thirds": 0,
+     "hosts": [
+      "BR"
+     ]
+    },
+    {
+     "y": 2018,
+     "size": 32,
+     "groups": 8,
+     "thirds": 0,
+     "hosts": [
+      "RU"
+     ]
+    },
+    {
+     "y": 2022,
+     "size": 32,
+     "groups": 8,
+     "thirds": 0,
+     "hosts": [
+      "QA"
+     ]
+    },
+    {
+     "y": 2026,
+     "size": 48,
+     "groups": 12,
+     "thirds": 8,
+     "hosts": [
+      "US",
+      "MX",
+      "CA"
+     ]
+    },
+    {
+     "y": 2030,
+     "size": 48,
+     "groups": 12,
+     "thirds": 8,
+     "hosts": [
+      "ES",
+      "PT",
+      "MA",
+      "AR",
+      "UY",
+      "PY"
+     ]
+    },
+    {
+     "y": 2034,
+     "size": 48,
+     "groups": 12,
+     "thirds": 8,
+     "hosts": [
+      "SA"
+     ]
+    }
+   ],
+   "tiebreak": [
+    {
+     "from": 1970,
+     "rule": "coin-toss",
+     "doubtful": true
+    },
+    {
+     "from": 1978,
+     "rule": "penalties"
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/FIFA_World_Cup"
+   ]
+  },
+  {
+   "key": "EURO",
+   "n": "Eurocopa",
+   "conf": "UEFA",
+   "editions": [
+    {
+     "y": 1972,
+     "size": 4,
+     "final4": true,
+     "hosts": [
+      "BE"
+     ]
+    },
+    {
+     "y": 1976,
+     "size": 4,
+     "final4": true,
+     "hosts": [
+      "RS"
+     ]
+    },
+    {
+     "y": 1980,
+     "size": 8,
+     "groups": 2,
+     "perGroup": 1,
+     "thirds": 0,
+     "hosts": [
+      "IT"
+     ]
+    },
+    {
+     "y": 1984,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0,
+     "hosts": [
+      "FR"
+     ]
+    },
+    {
+     "y": 1988,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0,
+     "hosts": [
+      "DE"
+     ]
+    },
+    {
+     "y": 1992,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0,
+     "hosts": [
+      "SE"
+     ]
+    },
+    {
+     "y": 1996,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "hosts": [
+      "ENG"
+     ]
+    },
+    {
+     "y": 2000,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "hosts": [
+      "BE",
+      "NL"
+     ]
+    },
+    {
+     "y": 2004,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "hosts": [
+      "PT"
+     ]
+    },
+    {
+     "y": 2008,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "hosts": [
+      "AT",
+      "CH"
+     ]
+    },
+    {
+     "y": 2012,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "hosts": [
+      "PL",
+      "UA"
+     ]
+    },
+    {
+     "y": 2016,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4,
+     "hosts": [
+      "FR"
+     ]
+    },
+    {
+     "y": 2020,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    },
+    {
+     "y": 2024,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4,
+     "hosts": [
+      "DE"
+     ]
+    },
+    {
+     "y": 2028,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4,
+     "hosts": [
+      "ENG",
+      "SCO",
+      "WAL",
+      "IE"
+     ]
+    },
+    {
+     "y": 2032,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4,
+     "hosts": [
+      "IT",
+      "TR"
+     ]
+    }
+   ],
+   "note": "Hasta 1976, fase final de 4 selecciones (semifinales y final); la de 2020 se jugó en 2021 en varias sedes",
+   "sources": [
+    "https://en.wikipedia.org/wiki/UEFA_European_Championship"
+   ]
+  },
+  {
+   "key": "CA",
+   "n": "Copa América",
+   "names": [
+    [
+     1916,
+     "Campeonato Sudamericano"
+    ],
+    [
+     1975,
+     "Copa América"
+    ]
+   ],
+   "conf": "CONMEBOL",
+   "noQual": true,
+   "guestsFrom": 1993,
+   "editions": [
+    {
+     "y": 1975,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2,
+     "simplified": "Formato de 12 equipos de 1993-2015; las ediciones anteriores tuvieron formatos irregulares"
+    },
+    {
+     "y": 1979,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2,
+     "simplified": "Formato de 12 equipos de 1993-2015; las ediciones anteriores tuvieron formatos irregulares"
+    },
+    {
+     "y": 1983,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2,
+     "simplified": "Formato de 12 equipos de 1993-2015; las ediciones anteriores tuvieron formatos irregulares"
+    },
+    {
+     "y": 1987,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2,
+     "simplified": "Formato de 12 equipos de 1993-2015; las ediciones anteriores tuvieron formatos irregulares"
+    },
+    {
+     "y": 1989,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2,
+     "simplified": "Formato de 12 equipos de 1993-2015; las ediciones anteriores tuvieron formatos irregulares"
+    },
+    {
+     "y": 1991,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2,
+     "simplified": "Formato de 12 equipos de 1993-2015; las ediciones anteriores tuvieron formatos irregulares"
+    },
+    {
+     "y": 1993,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 1995,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 1997,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 1999,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2001,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2004,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2007,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2011,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2015,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2016,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2019,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2021,
+     "size": 10,
+     "groups": 2,
+     "perGroup": 4,
+     "thirds": 0,
+     "simplified": "Dos grupos de 5"
+    },
+    {
+     "y": 2024,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2028,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Copa_Am%C3%A9rica"
+   ],
+   "doubtful": true
+  },
+  {
+   "key": "NLF",
+   "n": "Nations League",
+   "conf": "UEFA",
+   "special": "nlf",
+   "editions": [
+    {
+     "y": 2019
+    },
+    {
+     "y": 2021
+    },
+    {
+     "y": 2023
+    },
+    {
+     "y": 2025
+    },
+    {
+     "y": 2027
+    },
+    {
+     "y": 2029
+    },
+    {
+     "y": 2031
+    },
+    {
+     "y": 2033
+    }
+   ],
+   "sources": []
+  },
+  {
+   "key": "AFCON",
+   "n": "Copa África",
+   "conf": "CAF",
+   "editions": [
+    {
+     "y": 1970,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1972,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1974,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1976,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1978,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1980,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1982,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1984,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1986,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1988,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1990,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1992,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 1994,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 1996,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 1998,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2000,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2002,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2004,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2006,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2008,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2010,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2012,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2013,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2015,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2017,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2019,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    },
+    {
+     "y": 2021,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    },
+    {
+     "y": 2023,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    },
+    {
+     "y": 2025,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    },
+    {
+     "y": 2027,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    }
+   ],
+   "doubtful": true,
+   "sources": []
+  },
+  {
+   "key": "ASIAN",
+   "n": "Copa Asiática",
+   "conf": "AFC",
+   "editions": [
+    {
+     "y": 1972,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1976,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1980,
+     "size": 8,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1984,
+     "size": 10,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1988,
+     "size": 10,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1992,
+     "size": 10,
+     "groups": 2,
+     "thirds": 0
+    },
+    {
+     "y": 1996,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2000,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2004,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2007,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2011,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2015,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2019,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    },
+    {
+     "y": 2023,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    },
+    {
+     "y": 2027,
+     "size": 24,
+     "groups": 6,
+     "thirds": 4
+    }
+   ],
+   "doubtful": true,
+   "sources": []
+  },
+  {
+   "key": "GOLD",
+   "n": "Copa Oro",
+   "conf": "CONCACAF",
+   "editions": [
+    {
+     "y": 1991,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 1993,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 1996,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 1998,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2000,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2002,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2003,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2005,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2007,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2009,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2011,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2013,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2015,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2017,
+     "size": 12,
+     "groups": 3,
+     "thirds": 2
+    },
+    {
+     "y": 2019,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2021,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2023,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2025,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2027,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    }
+   ],
+   "doubtful": true,
+   "sources": []
+  },
+  {
+   "key": "OLY",
+   "n": "Juegos Olímpicos",
+   "conf": "ALL",
+   "u23": true,
+   "editions": [
+    {
+     "y": 1992,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 1996,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2000,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2004,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2008,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2012,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2016,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2020,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2024,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0
+    },
+    {
+     "y": 2028,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "hosts": [
+      "US"
+     ]
+    },
+    {
+     "y": 2032,
+     "size": 16,
+     "groups": 4,
+     "thirds": 0,
+     "hosts": [
+      "AU"
+     ]
+    }
+   ],
+   "note": "Sub-23 desde 1992",
+   "sources": []
+  }
+ ],
+ "domestic": {
+  "supercups": {
+   "ES": {
+    "since": 1982,
+    "fourSince": 2019
+   },
+   "IT": {
+    "since": 1988,
+    "fourSince": 2023
+   },
+   "SA": {
+    "since": 2013,
+    "fourSince": 2018,
+    "doubtful": true
+   },
+   "DE": {
+    "since": 1987,
+    "gaps": [
+     [
+      1997,
+      2009
+     ]
+    ],
+    "doubtful": true
+   },
+   "FR": {
+    "since": 1995,
+    "doubtful": true
+   },
+   "PT": {
+    "since": 1979
+   },
+   "NL": {
+    "since": 1991
+   },
+   "ENG": {
+    "since": 1908
+   }
+  },
+  "note": "Año de inicio de las supercopas nacionales principales; el resto se mantiene"
+ }
+}

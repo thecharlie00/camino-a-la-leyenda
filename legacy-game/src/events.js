@@ -126,7 +126,7 @@ var X = {
   /* competición continental en la que sigues vivo en una eliminatoria */
   aliveKO: function () {
     var found = null;
-    ["UCL", "LIB", "UEL", "ACL", "CAF", "CCC", "SUD", "UECL"].some(function (k) {
+    ["UCL", "LIB", "UEL", "ACL", "CAF", "CCC", "SUD", "UECL", "UCWC", "CCMB"].some(function (k) {
       var c = S.C && S.C[k]; if (!c || !c.ko || c.done) return false;
       var rd = c.ko.r[c.ko.ri]; if (!rd) return false;
       if (rd.ties.some(function (t) { return t.w < 0 && (t.a === S.p.club || t.b === S.p.club); })) { found = c; return true; }

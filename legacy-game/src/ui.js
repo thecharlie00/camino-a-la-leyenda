@@ -609,7 +609,7 @@
   }
   function inCont() {
     var c = null, me = myClub();
-    ["UCL", "UEL", "UECL", "LIB", "SUD", "ACL", "CAF", "CCC"].some(function (k) { var x = S.C[k]; if (x && x.teams && x.teams.indexOf(me) >= 0) { c = x.n; return true; } return false; });
+    ["UCL", "UEL", "UECL", "LIB", "SUD", "ACL", "CAF", "CCC", "UCWC", "CCMB"].some(function (k) { var x = S.C[k]; if (x && x.teams && x.teams.indexOf(me) >= 0) { c = x.n; return true; } return false; });
     return c;
   }
   function objRow(o) {

@@ -335,7 +335,7 @@ function mgrSetObjectives() {
     var d = exp <= 2 ? 1 : exp <= 6 ? 2 : 3;
     objs.push(objT({k: "cup", ck: cup.k, v: d}, ["", N_("Llegar a la final de {comp}"), N_("Llegar a semifinales de {comp}"), N_("Llegar a cuartos de {comp}")][d], {comp: cup.n}));
   }
-  ["UCL", "LIB", "UEL", "ACL", "CAF", "CCC", "SUD", "UECL"].forEach(function (k) {
+  ["UCL", "LIB", "UEL", "ACL", "CAF", "CCC", "SUD", "UECL", "UCWC", "CCMB"].forEach(function (k) {
     var c = S.C[k];
     if (!c || !compHas(c, m.club)) return;
     var rank = c.teams && c.teams.length ? c.teams.slice().sort(byRating).indexOf(m.club) + 1 : 10;

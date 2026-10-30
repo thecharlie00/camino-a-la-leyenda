@@ -336,12 +336,12 @@ function buildKOFromTable(c) {
     c.gst = c.g.map(function (g, gi) { return sortTable(g, c.gt[gi], c.nat); });
     c.gst.forEach(function (st, gi) {
       if (st[0]) firsts.push({t: st[0].c, r: st[0].r, g: gi});
-      if (c.perGroup > 1 && st[1]) seconds.push({t: st[1].c, r: st[1].r, g: gi});
+      if ((c.perGroup > 1 || c.bestSeconds) && st[1]) seconds.push({t: st[1].c, r: st[1].r, g: gi});
       if (st[2]) thirds.push({t: st[2].c, r: st[2].r, g: gi});
     });
     function cmp(a, b) { return b.r[6] - a.r[6] || (b.r[4] - b.r[5]) - (a.r[4] - a.r[5]) || b.r[4] - a.r[4] || rt[b.t] - rt[a.t]; }
     firsts.sort(cmp); seconds.sort(cmp); thirds.sort(cmp);
-    var q = firsts.concat(seconds).concat(thirds.slice(0, c.thirds));
+    var q = firsts.concat(c.perGroup > 1 ? seconds : seconds.slice(0, c.bestSeconds || 0)).concat(thirds.slice(0, c.thirds));
     seeds = q.map(function (x) { return x.t; });
     var grpOf = {}; q.forEach(function (x) { grpOf[x.t] = x.g; });
     c.grpOf = grpOf;
