@@ -263,22 +263,31 @@ public final class MainActivity extends Activity {
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
             settings.setMediaPlaybackRequiresUserGesture(false);
 
-            // Edge-to-edge draws the WebView behind Android's status bar. Keep the
-            // game content (including its top-bar buttons) below that inset while
-            // leaving the WebView background and the lower navigation area edge-to-edge.
-            webView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+            // Edge-to-edge draws the window behind Android's status and navigation bars.
+            // A WebView ignores its own padding when it paints the page, so the game is
+            // placed inside a container whose padding follows the system bars and the
+            // camera cutout: the header stays below the status bar and the bottom tabs
+            // above the gesture bar, on every Android version and in landscape.
+            final android.widget.FrameLayout root = new android.widget.FrameLayout(this);
+            root.setBackgroundColor(Color.rgb(11, 20, 23));
+            root.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
                 @Override
                 public WindowInsets onApplyWindowInsets(View view, WindowInsets insets) {
-                    int topInset = Build.VERSION.SDK_INT >= 28 ? insets.getSystemWindowInsetTop() : 0;
-                    if (view.getPaddingTop() != topInset) {
-                        view.setPadding(view.getPaddingLeft(), topInset, view.getPaddingRight(), view.getPaddingBottom());
+                    int[] bars = systemBarInsets(insets);
+                    if (view.getPaddingLeft() != bars[0] || view.getPaddingTop() != bars[1]
+                        || view.getPaddingRight() != bars[2] || view.getPaddingBottom() != bars[3]) {
+                        view.setPadding(bars[0], bars[1], bars[2], bars[3]);
                     }
                     return insets;
                 }
             });
+            root.addView(webView, new android.widget.FrameLayout.LayoutParams(
+                android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
+                android.widget.FrameLayout.LayoutParams.MATCH_PARENT));
 
             webView.addJavascriptInterface(new Bridge(), "AndroidBridge");
-            setContentView(webView);
+            setContentView(root);
+            root.requestApplyInsets();
 
             if (savedInstanceState == null || webView.restoreState(savedInstanceState) == null || webView.getUrl() == null) {
                 webView.loadUrl("file:///android_asset/jugar/juego.html");
@@ -295,6 +304,16 @@ public final class MainActivity extends Activity {
                 setContentView(tv);
             } catch (Throwable ignored) {}
         }
+    }
+
+    /** Left, top, right and bottom space taken by the system bars and the display cutout. */
+    static int[] systemBarInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= 30) return Api30.systemBars(insets);
+        if (Build.VERSION.SDK_INT >= 28) {
+            return new int[]{insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(),
+                insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom()};
+        }
+        return new int[]{0, 0, 0, 0};
     }
 
     private WebViewClient createWebViewClient() {
@@ -595,6 +614,11 @@ public final class MainActivity extends Activity {
     }
 
     private static final class Api30 {
+        static int[] systemBars(WindowInsets insets) {
+            android.graphics.Insets i = insets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+            return new int[]{i.left, i.top, i.right, i.bottom};
+        }
+
         static void configureEdgeToEdge(Window window) {
             try {
                 window.setDecorFitsSystemWindows(false);
