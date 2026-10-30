@@ -5118,6 +5118,7 @@ var Pitch3D = (function () {
   if (typeof window === "undefined" || typeof Pitch === "undefined" || typeof Pitch3D === "undefined") return;
   var original = Pitch, originalApi = {}, host = null, mountOpts = null, toggle = null;
   var mounted = false, switching = false, lastTeams = null, lastState = null, lastFrozen = false, introSeen = false;
+  function label(k) { return typeof tr === "function" ? tr(k) : k; }
   ["mount", "teams", "state", "event", "busy", "reset", "freeze", "destroy", "clearMsg", "replay", "active", "sound", "debug", "cinema", "skipCinema"].forEach(function (k) {
     originalApi[k] = original[k];
   });
