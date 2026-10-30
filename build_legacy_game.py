@@ -123,11 +123,62 @@ for key, locales in ERAS_I18N.items():
         translated_tokens = sorted(re.findall(r"\{[A-Za-z_]+\}", locales[language]))
         if source_tokens != translated_tokens:
             raise ValueError(f"Era translation placeholders do not match for {key!r} ({language})")
-if ERAS_TIMELINE.get("schema") != 1 or any("year" not in event or "changes" not in event for event in ERAS_TIMELINE.get("events", [])):
-    raise ValueError("Era rules timeline is invalid")
+ERA_RULE_KEYS = {"winPoints", "backPassBanned", "transferWindows", "maxSubs", "var", "goldenGoal", "silverGoal", "goalLineTech",
+                 "offsideLevelOnside", "goalkeeperSub", "awayGoals", "tackleFromBehindRed", "fixedShirtNumbers", "goalkeeperSeconds"}
+if ERAS_TIMELINE.get("schema") != 2 or any("year" not in event or "changes" not in event for event in ERAS_TIMELINE.get("events", [])):
+    raise ValueError("Era rules timeline is invalid (schema 2: year, scope, changes)")
+_ids = set()
+for event in ERAS_TIMELINE["events"]:
+    scope = event.get("scope") or {}
+    kind = scope.get("type")
+    if event.get("id") in _ids:
+        raise ValueError(f"Duplicate era timeline event {event.get('id')}")
+    _ids.add(event.get("id"))
+    if kind not in ("global", "league", "competition", "confederation"):
+        raise ValueError(f"Era timeline event {event.get('id')} has an invalid scope")
+    lists = {"league": "leagues", "competition": "competitions", "confederation": "confederations"}
+    if kind != "global" and not (isinstance(scope.get(lists[kind]), list) and scope[lists[kind]]):
+        raise ValueError(f"Era timeline event {event.get('id')} needs a non-empty {lists[kind]} list")
+    if kind == "league" and any(not re.fullmatch(r"[A-Z]{3}[0-9]*", code) for code in scope["leagues"]):
+        raise ValueError(f"Era timeline event {event.get('id')} uses an unknown league code")
+    if "until" in event and (not isinstance(event["until"], int) or event["until"] < event["year"]):
+        raise ValueError(f"Era timeline event {event.get('id')} has an invalid until year")
+    if "rules" in event["changes"] and not event.get("source"):
+        raise ValueError(f"Era rule change {event.get('id')} must cite a source")
+for pack in ERAS_PACKS:
+    missing_rules = ERA_RULE_KEYS - set(pack["rules"])
+    if missing_rules:
+        raise ValueError(f"Era pack {pack['id']} is missing rules {sorted(missing_rules)}")
+    if "varByCompetition" in pack["rules"]:
+        raise ValueError(f"Era pack {pack['id']} still uses varByCompetition; VAR is scoped in the timeline")
+    if re.search(r"umbro|adidas|nike|puma|mitre|select", json.dumps(pack["presentation"]).lower()):
+        raise ValueError(f"Era pack {pack['id']} names a brand in its presentation")
 if [event["year"] for event in ERAS_TIMELINE["events"]] != sorted(event["year"] for event in ERAS_TIMELINE["events"]):
     raise ValueError("Era rules timeline events must be chronological")
-ERAS_DATA_JS = "var ERAS_MODE = true;\nvar ERAS_DATA = " + json.dumps({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE, "decisions": ERAS_DECISIONS}, ensure_ascii=False, separators=(",", ":")) + ";\nvar ERAS_I18N = " + json.dumps(ERAS_I18N, ensure_ascii=False, separators=(",", ":")) + ";\n"
+ERAS_CLUBS = json.loads((ERAS_ROOT / "clubs-history.json").read_text(encoding="utf-8"))
+_world_sources = "".join(path.read_text(encoding="utf-8") for path in sorted(SRC.glob("data*.js")))
+_league_ids = set(re.findall(r'id:\s*"([A-Z]{2,4}[0-9]*)"', _world_sources))
+_world_clubs = {name for chunk in re.findall(r'"([^"\n]*\|[^"\n]*)"', _world_sources) for name in chunk.split("|")}
+if ERAS_CLUBS.get("schema") != 1:
+    raise ValueError("Era club history must use schema 1")
+for name, entry in ERAS_CLUBS["clubs"].items():
+    if name not in _world_clubs:
+        raise ValueError(f"Era club history names a club absent from the world: {name}")
+    if not isinstance(entry.get("founded"), int) or not entry.get("src"):
+        raise ValueError(f"Era club history entry {name} needs a founding year and a source")
+    names = entry.get("names", [])
+    if [n[0] for n in names] != sorted(n[0] for n in names) or (names and names[0][0] < entry["founded"]):
+        raise ValueError(f"Era club history names for {name} must be chronological and not predate the club")
+for league_id, entry in ERAS_CLUBS["leagues"].items():
+    if _league_ids and league_id not in _league_ids:
+        raise ValueError(f"Era club history names an unknown league: {league_id}")
+    if not entry.get("src"):
+        raise ValueError(f"Era league history {league_id} needs a source")
+_decision_text = json.dumps(ERAS_DECISIONS, ensure_ascii=False)
+for real_name in ("Paolo Rossi", "Michel Platini", "Diego Maradona", "David Trezeguet"):
+    if real_name in _decision_text:
+        raise ValueError(f"Era decisions must use versioned player names, not {real_name}")
+ERAS_DATA_JS = "var ERAS_MODE = true;\nvar ERAS_DATA = " + json.dumps({"packs": ERAS_PACKS, "timeline": ERAS_TIMELINE, "decisions": ERAS_DECISIONS, "clubsHistory": ERAS_CLUBS}, ensure_ascii=False, separators=(",", ":")) + ";\nvar ERAS_I18N = " + json.dumps(ERAS_I18N, ensure_ascii=False, separators=(",", ":")) + ";\n"
 ORDER = ["i18n.js"] + LANG_FILES + ["data.js", "data-es.js", "data-f.js", "data-45.js", "data-48.js", "names.js", "real.js", "real-f.js", "engine-core.js", "engine-player.js", "events.js", "events-extra.js", "events-more.js", "trophies.js", "engine-manager.js", "events-manager.js", "events-manager-extra.js", "events-manager-more.js", "engine-modes.js", "press-data.js", "social-data.js", "engine-extra.js", "engine-market.js", "press-ctx.js", "draw.js", "shootout.js", "life.js", "mgr-plus.js", "market26.js", "pets.js", "pet-items.js", "pet-sim.js", "achieve.js", "ach36.js", "week29.js", "club30.js", "nat31.js", "chal32.js", "story33.js", "edit35.js", "squad37.js", "match41.js", "world45.js", "dyn46.js", "blp47.js", "fam48.js", "goat.js", "crest.js", "faces.js", "pixel.js", "anim.js", "minigame.js",  "bolas.js", "pitch.js", "pitch3d-assets.js", "pitch3d.js", "vox-core.js", "sp-data.js", "sp-phys.js", "sp-ai.js", "sp-rig.js", "sp-3d.js", "sp-modes.js", "sp-play.js", "save56.js", "gx-data.js", "gx-core.js", "gx-items.js", "gx-chal.js", "gx-events.js", "gx-mgr.js", "gx-mevents.js", "look56.js", "pet-style.js", "pet-models.js", "pet-props.js", "pet-audio.js", "ui.js", "ui-goat.js", "ui-press.js", "ui-draw.js", "ui-shootout.js", "ui-life.js", "ui-pets.js", "ui-sp.js", "rig.js", "view3d.js", "pet-rig.js", "pet-world.js", "ui-mgrplus.js", "ui-guide.js", "ui-steps.js", "ui-gx.js", "ui-gear.js", "ui-shop.js", "ui-gxev.js", "ui-mgryo.js", "ui-yo3d.js", "ui-scene3d.js", "ui-cups.js", "ui-week.js", "ui-club30.js", "ui-chal32.js", "ui-story33.js", "ui-35.js", "ui-37.js", "ui-41.js", "ui-45.js", "ui-46.js", "ui-47.js", "ui-48.js", "wide42.js", "eras-core.js", "ui-eras.js", "ui-boot.js"]
 web_config_path = ROOT / "web" / "config.json"
 web_config = json.loads(web_config_path.read_text(encoding="utf-8-sig")) if web_config_path.exists() else {}

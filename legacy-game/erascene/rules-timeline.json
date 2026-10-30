@@ -1,19 +1,659 @@
 {
-  "schema": 1,
-  "events": [
-    {"year": 1981, "id": "three-points-for-win", "changes": {"rules": {"winPoints": 3}}},
-    {"year": 1990, "id": "post-taylor-grounds", "changes": {"presentation": {"terraces": "all-seater-transition", "fences": "removed-progressively"}}},
-    {"year": 1992, "id": "backpass-and-premier-league-era", "changes": {"rules": {"backPassBanned": true, "premierLeague": true, "championsLeagueBrand": true}}},
-    {"year": 1993, "id": "fixed-squad-numbers-and-golden-goal", "changes": {"rules": {"fixedShirtNumbers": true, "goldenGoal": true}}},
-    {"year": 1995, "id": "bosman-and-three-substitutes", "changes": {"rules": {"bosmanFreeAgency": true, "maxSubs": 3}}},
-    {"year": 1999, "id": "cup-winners-cup-ends", "changes": {"rules": {"recopaActive": false}}},
-    {"year": 2002, "id": "mandatory-transfer-windows", "changes": {"rules": {"transferWindows": true}}},
-    {"year": 2004, "id": "golden-goal-ends-and-commercial-web", "changes": {"rules": {"goldenGoal": false}, "media": {"socialMedia": false, "channels": ["club-websites", "forums", "sms-alerts", "sports-news-tv", "deadline-day"]}}},
-    {"year": 2010, "id": "social-networks-data-analysis-and-sports-science", "changes": {"media": {"socialMedia": true, "channels": ["websites", "twitter", "youtube", "live-blogs"]}, "staff": {"analysts": true, "sportsScience": "advanced", "backroomMax": 10}}},
-    {"year": 2013, "id": "goal-line-technology", "changes": {"rules": {"goalLineTech": true}}},
-    {"year": 2018, "id": "var-world-cup-and-european-competitions", "changes": {"rules": {"varByCompetition": {"FIFA World Cup": true, "UEFA Champions League": true, "La Liga": true}}}},
-    {"year": 2019, "id": "var-premier-league", "changes": {"rules": {"varByCompetition": {"Premier League": true}}}},
-    {"year": 2020, "id": "covid-five-substitutions", "changes": {"rules": {"fiveSubs": true, "maxSubs": 5, "compressedCovidCalendar": true}}},
-    {"year": 2022, "id": "post-covid-calendar", "changes": {"rules": {"compressedCovidCalendar": false}}}
-  ]
+ "schema": 2,
+ "yearConvention": "year = año de inicio de la temporada (1992 = 1992-93); en torneos de selecciones, año del torneo",
+ "scopeTypes": [
+  "global",
+  "league",
+  "competition",
+  "confederation"
+ ],
+ "events": [
+  {
+   "year": 1981,
+   "id": "three-points-england",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "ENG"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "winPoints": 3
+    }
+   },
+   "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win"
+  },
+  {
+   "year": 1990,
+   "id": "offside-level-onside",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "offsideLevelOnside": true
+    }
+   },
+   "source": "https://www.theifab.com/history/",
+   "doubtful": true,
+   "note": "IFAB 1990; fuente secundaria pendiente de confirmar con el acta"
+  },
+  {
+   "year": 1990,
+   "id": "post-taylor-grounds",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "ENG"
+    ]
+   },
+   "changes": {
+    "presentation": {
+     "terraces": "all-seater-transition",
+     "fences": "removed-progressively"
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Taylor_Report"
+  },
+  {
+   "year": 1992,
+   "id": "backpass-rule",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "backPassBanned": true
+    }
+   },
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html"
+  },
+  {
+   "year": 1992,
+   "id": "champions-league-brand",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "championsLeagueBrand": true
+    }
+   },
+   "source": "https://rsssf.org/tablese/ec1.html"
+  },
+  {
+   "year": 1992,
+   "id": "premier-league-founded",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "ENG1"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "premierLeague": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Premier_League"
+  },
+  {
+   "year": 1993,
+   "id": "fixed-numbers-england",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "ENG1"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "fixedShirtNumbers": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Squad_number_(association_football)"
+  },
+  {
+   "year": 1994,
+   "id": "three-points-france-scotland-italy",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "FRA",
+     "SCO",
+     "ITA"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "winPoints": 3
+    }
+   },
+   "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win"
+  },
+  {
+   "year": 1994,
+   "id": "three-points-world-cup",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "WC"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "winPoints": 3
+    }
+   },
+   "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win"
+  },
+  {
+   "year": 1994,
+   "id": "two-subs-plus-goalkeeper",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "maxSubs": 2,
+     "goalkeeperSub": true
+    }
+   },
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html"
+  },
+  {
+   "year": 1994,
+   "id": "referees-coloured-shirts",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "presentation": {
+     "refereeShirt": "coloured"
+    }
+   },
+   "source": "https://www.fifamuseum.com/explore/fifamuseumplus/blog/USA-94-A-World-Cup-o",
+   "doubtful": true,
+   "note": "Mundial 1994; adopción por ligas progresiva"
+  },
+  {
+   "year": 1995,
+   "id": "three-points-fifa",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "winPoints": 3
+    }
+   },
+   "source": "https://www.wikiwand.com/en/articles/3_points_for_a_win",
+   "note": "FIFA lo adopta en 1995: España, Alemania, Países Bajos, Portugal, Argentina, Brasil y Champions"
+  },
+  {
+   "year": 1995,
+   "id": "three-substitutes",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "maxSubs": 3,
+     "goalkeeperSub": false
+    }
+   },
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html"
+  },
+  {
+   "year": 1995,
+   "id": "bosman-ruling",
+   "scope": {
+    "type": "confederation",
+    "confederations": [
+     "UEFA"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "bosmanFreeAgency": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Bosman_ruling"
+  },
+  {
+   "year": 1995,
+   "id": "fixed-numbers-italy-spain",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "ITA",
+     "ESP"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "fixedShirtNumbers": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Squad_number_(association_football)"
+  },
+  {
+   "year": 1995,
+   "id": "fixed-numbers-germany",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "GER"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "fixedShirtNumbers": true
+    }
+   },
+   "source": "https://museumofjerseys.com/2023/12/18/season-in-numbers-bayern-munich-1995-96/",
+   "doubtful": true
+  },
+  {
+   "year": 1996,
+   "id": "golden-goal-euro",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "EURO"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "goldenGoal": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Golden_goal",
+   "until": 2000
+  },
+  {
+   "year": 1997,
+   "id": "goalkeeper-time-instruction",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "goalkeeperSeconds": 6
+    }
+   },
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html",
+   "note": "Instrucción de 5-6 segundos en 1997; ley de 6 segundos en 2000"
+  },
+  {
+   "year": 1998,
+   "id": "golden-goal-world-cup",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "WC"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "goldenGoal": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Golden_goal",
+   "until": 2002
+  },
+  {
+   "year": 1998,
+   "id": "tackle-from-behind-red",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "tackleFromBehindRed": true
+    }
+   },
+   "source": "https://playturn.blogspot.com/2017/06/history-of-laws-of-game-1990-2000.html"
+  },
+  {
+   "year": 1999,
+   "id": "cup-winners-cup-ends",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "recopaActive": false
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/UEFA_Cup_Winners%27_Cup"
+  },
+  {
+   "year": 2002,
+   "id": "mandatory-transfer-windows",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "transferWindows": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Transfer_window"
+  },
+  {
+   "year": 2002,
+   "id": "silver-goal-uefa-clubs",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "UCL",
+     "UEL",
+     "USC"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "silverGoal": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Golden_goal",
+   "until": 2003
+  },
+  {
+   "year": 2004,
+   "id": "silver-goal-euro",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "EURO"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "goldenGoal": false,
+     "silverGoal": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Golden_goal",
+   "until": 2004
+  },
+  {
+   "year": 2004,
+   "id": "commercial-web",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "media": {
+     "socialMedia": false,
+     "channels": [
+      "club-websites",
+      "forums",
+      "sms-alerts",
+      "sports-news-tv",
+      "deadline-day"
+     ]
+    }
+   }
+  },
+  {
+   "year": 2010,
+   "id": "social-networks-data-analysis-and-sports-science",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "media": {
+     "socialMedia": true,
+     "channels": [
+      "websites",
+      "twitter",
+      "youtube",
+      "live-blogs"
+     ]
+    },
+    "staff": {
+     "analysts": true,
+     "sportsScience": "advanced",
+     "backroomMax": 10
+    }
+   }
+  },
+  {
+   "year": 2013,
+   "id": "goal-line-technology-england",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "ENG1"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "goalLineTech": true
+    }
+   },
+   "source": "https://www.aljazeera.com/sports/2013/4/11/premier-league-approves-goal-line-technology"
+  },
+  {
+   "year": 2014,
+   "id": "goal-line-technology-world-cup",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "WC"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "goalLineTech": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Goal-line_technology"
+  },
+  {
+   "year": 2015,
+   "id": "goal-line-technology-germany-italy-france",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "GER1",
+     "ITA1",
+     "FRA1"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "goalLineTech": true
+    }
+   },
+   "source": "https://fcbayern.com/en/news/2014/12/bundesliga-to-adopt-goal-line-technology"
+  },
+  {
+   "year": 2016,
+   "id": "goal-line-technology-uefa",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "EURO",
+     "UCL",
+     "UEL",
+     "USC"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "goalLineTech": true
+    }
+   },
+   "source": "https://worldsoccertalk.com/2016/01/22/uefa-approves-the-use-of-goal-line-technology-in-all-competitions-starting-with-euro-2016/"
+  },
+  {
+   "year": 2017,
+   "id": "var-germany-italy",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "GER1",
+     "ITA1"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "var": true
+    }
+   },
+   "source": "https://bbc.in/2qzDiWT"
+  },
+  {
+   "year": 2018,
+   "id": "var-world-cup",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "WC"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "var": true
+    }
+   },
+   "source": "https://bbc.in/2qzDiWT"
+  },
+  {
+   "year": 2018,
+   "id": "var-spain-france",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "ESP1",
+     "FRA1"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "var": true
+    }
+   },
+   "source": "https://www.si.com/soccer/2017/10/26/la-liga-set-utilise-video-assistant-referee-technology-201819-onwards"
+  },
+  {
+   "year": 2018,
+   "id": "var-champions-knockouts",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "UCL"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "var": true
+    }
+   },
+   "source": "https://www.goal.com/en/news/var-fast-tracked-into-champions-league-knockout-stage/1bsmdx8olp89j1xdrl8kbsculp",
+   "doubtful": true,
+   "note": "Solo desde octavos de 2018-19; toda la competición desde 2019-20"
+  },
+  {
+   "year": 2019,
+   "id": "var-premier-league",
+   "scope": {
+    "type": "league",
+    "leagues": [
+     "ENG1"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "var": true
+    }
+   },
+   "source": "https://www.si.com/soccer/2018/11/15/premier-league-clubs-agree-utilise-var-technology-201920-season-onwards"
+  },
+  {
+   "year": 2020,
+   "id": "covid-five-substitutions",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "fiveSubs": true,
+     "maxSubs": 5
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Substitute_(association_football)"
+  },
+  {
+   "year": 2020,
+   "until": 2021,
+   "id": "covid-compressed-calendar",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "compressedCovidCalendar": true
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Impact_of_the_COVID-19_pandemic_on_association_football"
+  },
+  {
+   "year": 2021,
+   "id": "away-goals-abolished",
+   "scope": {
+    "type": "competition",
+    "competitions": [
+     "UCL",
+     "UEL",
+     "UECL",
+     "USC"
+    ]
+   },
+   "changes": {
+    "rules": {
+     "awayGoals": false
+    }
+   },
+   "source": "https://www.uefa.com/news-media/news/0268-12157d69ce2d-9f011c70f6fa-1000--abolition-of-the-away-goals-rule-in-all-uefa-club-competitions/",
+   "doubtful": true
+  },
+  {
+   "year": 2025,
+   "id": "goalkeeper-eight-seconds-corner",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "goalkeeperSeconds": 8,
+     "goalkeeperTimeCorner": true
+    }
+   },
+   "source": "https://downloads.theifab.com/downloads/goalkeeper-holding-the-ball-for-too-long-protocol?l=en"
+  },
+  {
+   "year": 2026,
+   "id": "restart-countdowns-and-var-scope",
+   "scope": {
+    "type": "global"
+   },
+   "changes": {
+    "rules": {
+     "restartCountdown": 5,
+     "substitutionSeconds": 10,
+     "injuredOffMinute": true,
+     "varSecondYellow": true,
+     "varMistakenIdentity": true
+    }
+   },
+   "source": "https://downloads.theifab.com/downloads/changes-to-the-laws-of-the-game-202627?l=en",
+   "doubtful": true,
+   "note": "Fecha exacta de entrada en vigor por confirmar; aplicadas en el Mundial 2026"
+  }
+ ]
 }

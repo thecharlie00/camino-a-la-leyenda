@@ -8,7 +8,8 @@ const packs = packFiles.map((name) => readJson(`legacy-game/erascene/packs/${nam
 const timeline = readJson('legacy-game/erascene/rules-timeline.json');
 const translations = readJson('legacy-game/erascene/translations.json');
 const decisions = readJson('legacy-game/erascene/decisions.json');
-const erasData = { packs, timeline, decisions };
+const clubsHistory = readJson('legacy-game/erascene/clubs-history.json');
+const erasData = { packs, timeline, decisions, clubsHistory };
 const gameDataSource = readFileSync('legacy-game/src/data.js', 'utf8');
 const availableClubNames = new Set([...gameDataSource.matchAll(/clubs:\"([^\"]+)\"/g)].flatMap((match) => match[1].split('|')));
 const uiSource = readFileSync('legacy-game/src/ui.js', 'utf8');
@@ -39,7 +40,8 @@ for (const pack of packs) {
   assert.equal(pack.years[1] - pack.years[0], 9);
   for (const club of pack.referenceClubs) assert.ok(availableClubNames.has(club), `${pack.id} references a club absent from the shared game database: ${club}`);
   for (const key of ['rules', 'media', 'economy', 'presentation', 'staff', 'playerModel', 'referenceClubs']) assert.ok(pack[key], `${pack.id} missing ${key}`);
-  for (const key of ['winPoints', 'backPassBanned', 'transferWindows', 'maxSubs', 'varByCompetition']) assert.ok(key in pack.rules, `${pack.id} missing rule ${key}`);
+  for (const key of ['winPoints', 'backPassBanned', 'transferWindows', 'maxSubs', 'var', 'goldenGoal', 'silverGoal', 'goalLineTech', 'awayGoals']) assert.ok(key in pack.rules, `${pack.id} missing rule ${key}`);
+  assert.equal(pack.rules.varByCompetition, undefined, `${pack.id} must scope VAR in the timeline, not by competition name`);
 }
 assert.equal(decisions.schema, 2, 'the expanded historical decision catalogue must use schema 2');
 assert.equal(decisions.records.length, 1000, 'the catalog must contain 600 original plus 400 historical scenarios');
@@ -187,15 +189,40 @@ context.achCheck();
 assert.equal(context.S.ach.era_start90s, 1992, 'starting an Era career can unlock its decade achievement');
 assert.equal(context.S.ach.era_first_decision, 1992, 'Era achievements are saved in the active Era career');
 
-for (const [year, points] of [[1979, 2], [1980, 2], [1981, 3], [1992, 3]]) {
+/* timeline v2: cada regla tiene alcance (global, liga, competición o confederación) y fuente */
+assert.equal(timeline.schema, 2, 'the rules timeline must use schema 2 with scopes');
+for (const event of timeline.events) {
+  assert.ok(event.scope && ['global', 'league', 'competition', 'confederation'].includes(event.scope.type), `${event.id} needs a scope`);
+  if (event.changes.rules) assert.ok(/^https?:\/\//.test(event.source || ''), `${event.id} must cite a source`);
+}
+const pointsFor = (year, scope) => {
   context.S = {yr: year, era: {active: true}};
   const row = [0, 0, 0, 0, 0, 0, 0];
-  context.tblAdd(row, 2, 1);
-  assert.equal(row[6], points, `wrong win points for ${year}`);
-}
+  context.eraWithScope(scope, () => context.tblAdd(row, 2, 1));
+  return row[6];
+};
+for (const [year, scope, points, why] of [
+  [1980, {league: 'ENG1'}, 2, 'England still gave two points in 1980-81'],
+  [1981, {league: 'ENG1'}, 3, 'England adopted three points in 1981-82'],
+  [1981, {league: 'ENG3'}, 3, 'the English lower divisions follow the same rule'],
+  [1981, {league: 'ESP1'}, 2, 'Spain did not adopt three points until 1995-96'],
+  [1994, {league: 'ESP1'}, 2, 'Spain still gave two points in 1994-95'],
+  [1994, {league: 'ITA1'}, 3, 'Italy adopted three points in 1994-95'],
+  [1994, {comp: 'WC', year: 1994}, 3, 'the 1994 World Cup used three points'],
+  [1990, {comp: 'WC', year: 1990}, 2, 'the 1990 World Cup used two points'],
+  [1995, {league: 'ESP1'}, 3, 'Spain adopted three points in 1995-96'],
+  [1995, {league: 'GER1'}, 3, 'Germany adopted three points in 1995-96'],
+  [1992, null, 2, 'no global three-point rule before FIFA adopted it in 1995']]) assert.equal(pointsFor(year, scope), points, why);
 assert.equal(context.eraRulesForYear(1991).backPassBanned, false);
 assert.equal(context.eraRulesForYear(1992).backPassBanned, true);
-assert.equal(context.eraRulesForYear(1993).goldenGoal, true);
+assert.equal(context.eraRulesForYear(1993, {league: 'ENG1'}).goldenGoal, false, 'golden goal was never a league rule');
+assert.equal(context.eraRulesForYear(1996, {comp: 'EURO', year: 1996}).goldenGoal, true, 'Euro 96 used the golden goal');
+assert.equal(context.eraRulesForYear(2004, {comp: 'EURO', year: 2004}).goldenGoal, false, 'Euro 2004 replaced it with the silver goal');
+assert.equal(context.eraRulesForYear(2004, {comp: 'EURO', year: 2004}).silverGoal, true, 'Euro 2004 used the silver goal');
+assert.equal(context.eraRulesForYear(2008, {comp: 'EURO', year: 2008}).silverGoal, false, 'the silver goal ended after Euro 2004');
+assert.equal(context.eraRulesForYear(2015, {league: 'ESP1'}).goalLineTech, false, 'LaLiga never adopted goal-line technology');
+assert.equal(context.eraRulesForYear(2013, {league: 'ENG1'}).goalLineTech, true, 'the Premier League adopted goal-line technology in 2013-14');
+assert.equal(context.eraRulesForYear(2017, {league: 'GER1'}).var, true, 'the Bundesliga adopted VAR in 2017-18');
 for (const [year, pattern] of [[1974, 'retro'], [1984, 'chevron'], [1995, 'hoops'], [2005, 'split'], [2015, 'diamond'], [2025, 'lightning']]) {
   context.S = {yr: year, era: {active: true}};
   assert.equal(context.PLook.rig({gear: {}}).shirtPattern, pattern, `the ${year}s kit should receive its procedural period pattern`);
@@ -204,20 +231,21 @@ assert.equal(context.PLook.rig({gear: {shirt: {id: 'equipped-shirt'}}}).shirtPat
 assert.equal(context.PLook.rig({gear: {}, shirt: {id: 'stripes', pattern: 'stripes'}}).shirtPattern, 'stripes', 'a user-selected look shirt and its stat source must be respected');
 context.S = {yr: 2026};
 assert.equal(context.PLook.rig({gear: {}}).shirtPattern, 'plain', 'modern player clothing must not receive an era pattern');
-context.S = {yr: 1992, era: {active: true}};
-assert.deepEqual(Array.from(context.extraTime()), [3, 1]);
-context.S.yr = 1993;
-assert.deepEqual(Array.from(context.extraTime()), [1, 0], 'golden goal ends extra time after a winning goal');
-context.S.yr = 2004;
-assert.deepEqual(Array.from(context.extraTime()), [3, 1], 'golden goal is removed from 2004');
+context.S = {yr: 1996, era: {active: true}};
+assert.deepEqual(Array.from(context.extraTime()), [3, 1], 'outside a golden-goal competition extra time is played in full');
+assert.deepEqual(Array.from(context.eraWithScope({comp: 'EURO', year: 1996}, () => context.extraTime())), [1, 0], 'golden goal ends extra time after a winning goal at Euro 96');
+assert.deepEqual(Array.from(context.eraWithScope({league: 'ENG1'}, () => context.extraTime())), [3, 1], 'a league cup tie in 1996 has no golden goal');
+context.S.yr = 2005;
+assert.deepEqual(Array.from(context.eraWithScope({comp: 'EURO', year: 2008}, () => context.extraTime())), [3, 1], 'golden goal is gone after 2004');
 assert.equal(context.eraRulesForYear(1994).maxSubs, 2);
+assert.equal(context.eraRulesForYear(1994).goalkeeperSub, true, '1994-95 allowed two substitutes plus a goalkeeper');
 assert.equal(context.eraRulesForYear(1995).maxSubs, 3);
 assert.equal(context.eraRulesForYear(2001).transferWindows, false);
 assert.equal(context.eraRulesForYear(2002).transferWindows, true);
-assert.equal(context.eraRulesForYear(2017).varByCompetition['Premier League'], undefined);
-assert.equal(context.eraRulesForYear(2018).varByCompetition['La Liga'], true);
-assert.equal(context.eraRulesForYear(2018).varByCompetition['Premier League'], undefined);
-assert.equal(context.eraRulesForYear(2019).varByCompetition['Premier League'], true);
+assert.equal(context.eraRulesForYear(2017, {league: 'ENG1'}).var, false);
+assert.equal(context.eraRulesForYear(2018, {league: 'ESP1'}).var, true);
+assert.equal(context.eraRulesForYear(2018, {league: 'ENG1'}).var, false);
+assert.equal(context.eraRulesForYear(2019, {league: 'ENG1'}).var, true);
 context.S = {yr: 2018, era: {active: true}, p: {club: 0}, cl: [0]};
 assert.equal(context.EVENT_BY_ID.x_var_anulado.when({inSeason: true}), false, 'VAR is not available in the Premier League during 2018');
 context.W.lg[0].id = 'ESP1';
@@ -340,4 +368,19 @@ context.window.growthTick();
 assert.ok(context.S.p.ovr - growthBeforeDecision > 9.1, 'the era decision training bonus must feed into actual future player growth');
 assert.equal(memory.get('camino.slots'), '["modern-slot"]', 'player-era decisions must not alter the modern save index');
 
+
+/* historia de clubes y ligas: existencia y nombres de época */
+assert.equal(context.eraClubExists('RB Leipzig', 2008), false, 'RB Leipzig did not exist before 2009');
+assert.equal(context.eraClubExists('RB Leipzig', 2009), true);
+assert.equal(context.eraClubExists('Real Madrid', 1970), true, 'a club without history data exists with its current name');
+assert.equal(context.eraClubName('New York Red Bulls', 2000), 'NY/NJ MetroStars');
+assert.equal(context.eraClubName('Red Bull Salzburgo', 1990), 'Austria Salzburgo');
+assert.equal(context.eraClubName('Red Bull Salzburgo', 2005), 'Red Bull Salzburgo');
+assert.equal(context.eraLeagueName('ENG1', 'Premier League', 1975), 'Football League First Division', 'the English top flight was the First Division in 1975');
+assert.equal(context.eraLeagueName('ENG1', 'Premier League', 1992), 'Premier League');
+assert.equal(context.eraLeagueExists('MLS', 1990), false, 'MLS began in 1996');
+assert.equal(context.eraLeagueExists('MLS', 1996), true);
+for (const [name, entry] of Object.entries(clubsHistory.clubs)) assert.ok(entry.src, `${name} needs a source or 'memory'`);
+const decisionText = JSON.stringify(decisions);
+for (const realName of ['Paolo Rossi', 'Michel Platini', 'Diego Maradona', 'David Trezeguet']) assert.ok(!decisionText.includes(realName), `historical decisions must use a versioned name instead of ${realName}`);
 console.log('Era packs, 1,000 playable decisions (400 historical and decade-locked), 50 Era-only achievements, web home/selector visibility, Era rules, kits and isolated saves passed.');

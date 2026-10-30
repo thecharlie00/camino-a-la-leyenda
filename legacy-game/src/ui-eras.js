@@ -28,14 +28,14 @@
   function profileSummary(p) {
     var rules = p.rules, media = p.media, presentation = p.presentation, economy = p.economy;
     var social = media.socialMedia ? t("Redes disponibles") : t("Sin redes sociales");
-    var implementedVar = !!((rules.varByCompetition || {})["Premier League"] || (rules.varByCompetition || {})["La Liga"]);
-    var varText = implementedVar ? t("VAR aplicado solo en Premier League y La Liga cuando la cronología lo permite.") : t("VAR: no disponible");
+    var varText = rules.var ? t("VAR disponible") : t("VAR: no disponible");
+    var scopeText = p.scope ? "" : '<p class="eras-lead" style="margin:8px 0 0">' + t("Las reglas cambian según la liga y la competición: estas son las generales de {year}.", {year: p.currentYear || state.year}) + '</p>';
     var skinText = presentation.uiSkin === "teletext" ? t("Interfaz aplicada: teletexto.") : presentation.uiSkin === "print-scoreboard" ? t("Interfaz aplicada: marcador impreso.") : t("Skin del perfil ({skin}) aún no aplicada; se conserva la interfaz estándar.", {skin: presentation.uiSkin});
     return '<div class="eras-summary"><b>' + t("Reglas en {year}", {year: p.currentYear || state.year}) + '</b><div class="eras-tags">' +
       '<span class="eras-tag">' + t("{n} puntos por victoria", {n: rules.winPoints}) + '</span>' +
       '<span class="eras-tag">' + t("En directo: máximo {n} cambios", {n: rules.maxSubs}) + '</span>' +
       '<span class="eras-tag">' + (rules.transferWindows ? t("Ventanas de fichajes") : t("Sin ventanas obligatorias")) + '</span>' +
-      '<span class="eras-tag">' + social + '</span><span class="eras-tag">' + varText + '</span></div>' +
+      '<span class="eras-tag">' + social + '</span><span class="eras-tag">' + varText + '</span></div>' + scopeText +
       '<p class="eras-lead" style="margin:10px 0 0">' + skinText + '</p>' +
       '<p class="eras-lead" style="margin:6px 0 0">' + t("Escalas económicas simuladas para salarios, valores y presupuestos.") + ' · ' + t("Salarios ×{wage}; mercado ×{market}; presupuesto ×{tv}.", {wage: economy.wageScale.toFixed(2), market: economy.marketScale.toFixed(2), tv: economy.tvDealMultiplier.toFixed(2)}) + '</p>' +
       '<p class="eras-lead" style="margin:6px 0 0">' + t("Canales mostrados en el HUD; no simulan una red de contactos.") + ' ' + t("Canales: {channels}.", {channels: media.channels.map(channelLabel).join(" · ")}) + '</p>' +

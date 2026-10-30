@@ -1,221 +1,1328 @@
 {
-  "Modo aislado · guardados separados": {"en": "Isolated mode · separate saves", "de": "Isolierter Modus · separate Spielstände", "it": "Modalità isolata · salvataggi separati", "fr": "Mode isolé · sauvegardes séparées"},
-  "Modo Épocas": {"en": "Era Mode", "de": "Epochenmodus", "it": "Modalità epoche", "fr": "Mode Époques"},
-  "Empieza una carrera en otro momento de la historia. La partida moderna y sus guardados no se modifican.": {"en": "Start a career in another time. Your modern career and its saves stay untouched.", "de": "Starte eine Karriere in einer anderen Zeit. Deine moderne Karriere und ihre Spielstände bleiben unverändert.", "it": "Inizia una carriera in un'altra epoca. La carriera moderna e i suoi salvataggi restano intatti.", "fr": "Commence une carrière à une autre époque. La carrière moderne et ses sauvegardes restent intactes."},
-  "Década de inicio": {"en": "Starting decade", "de": "Startjahrzehnt", "it": "Decennio di partenza", "fr": "Décennie de départ"},
-  "Año exacto": {"en": "Exact year", "de": "Genaues Jahr", "it": "Anno esatto", "fr": "Année exacte"},
-  "Tipo de carrera": {"en": "Career type", "de": "Karrieretyp", "it": "Tipo di carriera", "fr": "Type de carrière"},
-  "Carrera de jugador": {"en": "Player career", "de": "Spielerkarriere", "it": "Carriera da giocatore", "fr": "Carrière de joueur"},
-  "Carrera de míster": {"en": "Manager career", "de": "Trainerkarriere", "it": "Carriera da allenatore", "fr": "Carrière d'entraîneur"},
-  "Club": {"en": "Club", "de": "Verein", "it": "Club", "fr": "Club"},
-  "Nombre": {"en": "First name", "de": "Vorname", "it": "Nome", "fr": "Prénom"},
-  "Apellido": {"en": "Surname", "de": "Nachname", "it": "Cognome", "fr": "Nom"},
-  "Reglas en {year}": {"en": "Rules in {year}", "de": "Regeln im Jahr {year}", "it": "Regole nel {year}", "fr": "Règles en {year}"},
-  "{n} puntos por victoria": {"en": "{n} points per win", "de": "{n} Punkte pro Sieg", "it": "{n} punti per vittoria", "fr": "{n} points par victoire"},
-  "Máximo {n} cambios": {"en": "Maximum {n} substitutions", "de": "Maximal {n} Auswechslungen", "it": "Massimo {n} sostituzioni", "fr": "Maximum {n} remplacements"},
-  "Pase atrás prohibido": {"en": "Back-pass rule active", "de": "Rückpassregel aktiv", "it": "Retropassaggio vietato", "fr": "Passe en retrait interdite"},
-  "Pase atrás permitido": {"en": "Back-pass allowed", "de": "Rückpass erlaubt", "it": "Retropassaggio consentito", "fr": "Passe en retrait autorisée"},
-  "Ventanas de fichajes": {"en": "Transfer windows", "de": "Transferfenster", "it": "Finestre di mercato", "fr": "Fenêtres de transferts"},
-  "Sin ventanas obligatorias": {"en": "No mandatory windows", "de": "Keine Pflicht-Transferfenster", "it": "Nessuna finestra obbligatoria", "fr": "Pas de fenêtres obligatoires"},
-  "Redes disponibles": {"en": "Social media available", "de": "Soziale Medien verfügbar", "it": "Social media disponibili", "fr": "Réseaux sociaux disponibles"},
-  "Sin redes sociales": {"en": "No social media", "de": "Keine sozialen Medien", "it": "Niente social network", "fr": "Pas de réseaux sociaux"},
-  "VAR: no disponible": {"en": "VAR: unavailable", "de": "VAR: nicht verfügbar", "it": "VAR: non disponibile", "fr": "VAR : indisponible"},
-  "VAR: {competitions}": {"en": "VAR: {competitions}", "de": "VAR: {competitions}", "it": "VAR: {competitions}", "fr": "VAR : {competitions}"},
-  "Presentación: {kit}; {pitch}; {broadcast}.": {"en": "Presentation: {kit}; {pitch}; {broadcast}.", "de": "Präsentation: {kit}; {pitch}; {broadcast}.", "it": "Presentazione: {kit}; {pitch}; {broadcast}.", "fr": "Présentation : {kit} ; {pitch} ; {broadcast}."},
-  "Canales: {channels}.": {"en": "Media: {channels}.", "de": "Medien: {channels}.", "it": "Media: {channels}.", "fr": "Médias : {channels}."},
-  "Aún no hay carreras de Épocas guardadas en este dispositivo.": {"en": "No era careers are saved on this device yet.", "de": "Auf diesem Gerät sind noch keine Epochenkarrieren gespeichert.", "it": "Non ci sono ancora carriere epoca salvate su questo dispositivo.", "fr": "Aucune carrière d'époque n'est encore enregistrée sur cet appareil."},
-  "Carrera": {"en": "Career", "de": "Karriere", "it": "Carriera", "fr": "Carrière"},
-  "Sin club": {"en": "No club", "de": "Kein Verein", "it": "Senza club", "fr": "Sans club"},
-  "Borrar guardado": {"en": "Delete save", "de": "Spielstand löschen", "it": "Elimina salvataggio", "fr": "Supprimer la sauvegarde"},
-  "Continuar": {"en": "Continue", "de": "Fortsetzen", "it": "Continua", "fr": "Continuer"},
-  "Empezar en {year}": {"en": "Start in {year}", "de": "Start im Jahr {year}", "it": "Inizia nel {year}", "fr": "Commencer en {year}"},
-  "Volver": {"en": "Back", "de": "Zurück", "it": "Indietro", "fr": "Retour"},
-  "Tus carreras históricas": {"en": "Your era careers", "de": "Deine Epochenkarrieren", "it": "Le tue carriere d'epoca", "fr": "Tes carrières d'époque"},
-  "No se pudo iniciar la carrera de Épocas.": {"en": "Could not start the era career.", "de": "Die Epochenkarriere konnte nicht gestartet werden.", "it": "Impossibile avviare la carriera epoca.", "fr": "Impossible de démarrer la carrière d'époque."},
-  "No se pudo cargar la carrera histórica.": {"en": "Could not load the era career.", "de": "Die Epochenkarriere konnte nicht geladen werden.", "it": "Impossibile caricare la carriera epoca.", "fr": "Impossible de charger la carrière d'époque."},
-  "{decade} · {year}": {"en": "{decade} · {year}", "de": "{decade} · {year}", "it": "{decade} · {year}", "fr": "{decade} · {year}"},
-  "{n} pts/victoria": {"en": "{n} pts/win", "de": "{n} Pkt/Sieg", "it": "{n} pt/vittoria", "fr": "{n} pts/victoire"},
-  "Reglas": {"en": "Rules", "de": "Regeln", "it": "Regole", "fr": "Règles"},
-  "Salir": {"en": "Exit", "de": "Beenden", "it": "Esci", "fr": "Quitter"},
-  "Esta época permite {n} cambios por partido.": {"en": "This era allows {n} substitutions per match.", "de": "In dieser Epoche sind {n} Auswechslungen pro Spiel erlaubt.", "it": "In quest'epoca sono consentite {n} sostituzioni a partita.", "fr": "Cette époque autorise {n} remplacements par match."},
-  "{n} guardadas": {"en": "{n} saved", "de": "{n} gespeichert", "it": "{n} salvate", "fr": "{n} sauvegardées"},
-  "Periódicos": {"en": "newspapers", "de": "Zeitungen", "it": "giornali", "fr": "journaux"},
-  "Radio": {"en": "radio", "de": "Radio", "it": "radio", "fr": "radio"},
-  "Resúmenes televisivos semanales": {"en": "weekly TV highlights", "de": "wöchentliche TV-Zusammenfassungen", "it": "highlights TV settimanali", "fr": "résumés TV hebdomadaires"},
-  "Tabloides": {"en": "tabloids", "de": "Boulevardzeitungen", "it": "tabloid", "fr": "tabloïds"},
-  "Teletexto": {"en": "teletext", "de": "Teletext", "it": "televideo", "fr": "télétexte"},
-  "Fanzines": {"en": "fanzines", "de": "Fanzines", "it": "fanzine", "fr": "fanzines"},
-  "Programas de llamadas": {"en": "phone-in shows", "de": "Call-in-Sendungen", "it": "programmi con telefonate", "fr": "émissions interactives"},
-  "Televisión en directo": {"en": "live television", "de": "Live-Fernsehen", "it": "TV in diretta", "fr": "télévision en direct"},
-  "Webs de clubes": {"en": "club websites", "de": "Vereinswebsites", "it": "siti dei club", "fr": "sites des clubs"},
-  "Foros": {"en": "forums", "de": "Foren", "it": "forum", "fr": "forums"},
-  "Alertas SMS": {"en": "SMS alerts", "de": "SMS-Benachrichtigungen", "it": "avvisi SMS", "fr": "alertes SMS"},
-  "Televisión deportiva": {"en": "sports news TV", "de": "Sportnachrichten im TV", "it": "TV sportiva", "fr": "TV sportive"},
-  "Mercado de fichajes": {"en": "transfer deadline day", "de": "Deadline Day", "it": "ultimo giorno di mercato", "fr": "dernier jour du mercato"},
-  "Redes sociales": {"en": "social media", "de": "soziale Medien", "it": "social media", "fr": "réseaux sociaux"},
-  "Twitter": {"en": "Twitter", "de": "Twitter", "it": "Twitter", "fr": "Twitter"},
-  "YouTube": {"en": "YouTube", "de": "YouTube", "it": "YouTube", "fr": "YouTube"},
-  "Instagram": {"en": "Instagram", "de": "Instagram", "it": "Instagram", "fr": "Instagram"},
-  "TikTok": {"en": "TikTok", "de": "TikTok", "it": "TikTok", "fr": "TikTok"},
-  "Canales de aficionados": {"en": "fan channels", "de": "Fan-Kanäle", "it": "canali dei tifosi", "fr": "chaînes de supporters"},
-  "Clips virales": {"en": "viral clips", "de": "virale Clips", "it": "clip virali", "fr": "extraits viraux"},
-  "Barro invernal": {"en": "winter mud", "de": "Wintermatsch", "it": "fango invernale", "fr": "boue hivernale"},
-  "Transición a césped híbrido": {"en": "transition to hybrid turf", "de": "Umstellung auf Hybridrasen", "it": "transizione all'erba ibrida", "fr": "transition vers une pelouse hybride"},
-  "Césped híbrido": {"en": "hybrid turf", "de": "Hybridrasen", "it": "erba ibrida", "fr": "pelouse hybride"},
-  "Césped híbrido con calefacción": {"en": "heated hybrid turf", "de": "beheizter Hybridrasen", "it": "erba ibrida riscaldata", "fr": "pelouse hybride chauffée"},
-  "Transición a gradas con asientos": {"en": "gradual all-seater transition", "de": "schrittweiser Umbau zu Sitzplätzen", "it": "transizione graduale ai posti a sedere", "fr": "transition progressive vers les tribunes assises"},
-  "Gradas de pie": {"en": "standing terraces", "de": "Stehplätze", "it": "tribune in piedi", "fr": "tribunes debout"},
-  "Estadios con asientos": {"en": "all-seater grounds", "de": "Stadien mit Sitzplätzen", "it": "stadi con posti a sedere", "fr": "stades tout assis"},
-  "Balón de cuero pesado": {"en": "heavy leather ball", "de": "schwerer Lederball", "it": "pallone di cuoio pesante", "fr": "ballon en cuir lourd"},
-  "Balón híbrido Umbro": {"en": "Umbro leather hybrid ball", "de": "Umbro-Leder-Hybridball", "it": "pallone ibrido in pelle Umbro", "fr": "ballon hybride cuir Umbro"},
-  "Anuncios estáticos": {"en": "static advertising boards", "de": "statische Werbebanden", "it": "cartelloni statici", "fr": "panneaux publicitaires statiques"},
-  "LED dinámico": {"en": "dynamic LED boards", "de": "dynamische LED-Banden", "it": "pannelli LED dinamici", "fr": "panneaux LED dynamiques"},
-  "Televisión 4:3 granulada": {"en": "grainy 4:3 broadcast", "de": "körnige 4:3-Übertragung", "it": "trasmissione 4:3 granulosa", "fr": "diffusion 4:3 granuleuse"},
-  "Definición estándar panorámica": {"en": "SD widescreen", "de": "SD-Breitbild", "it": "SD panoramica", "fr": "SD panoramique"},
-  "Alta definición": {"en": "high definition", "de": "hohe Auflösung", "it": "alta definizione", "fr": "haute définition"},
-  "4K y gráficos actuales": {"en": "4K with modern graphics", "de": "4K mit moderner Grafik", "it": "4K con grafica moderna", "fr": "4K avec graphismes modernes"},
-  "Corte clásico de los 70": {"en": "classic 70s cut", "de": "klassischer 70er-Schnitt", "it": "taglio classico anni '70", "fr": "coupe classique des années 70"},
-  "Corte clásico de los 80": {"en": "classic 80s cut", "de": "klassischer 80er-Schnitt", "it": "taglio classico anni '80", "fr": "coupe classique des années 80"},
-  "Camiseta holgada de los 90": {"en": "baggy 90s shirt", "de": "weites Trikot der 90er", "it": "maglia larga anni '90", "fr": "maillot ample des années 90"},
-  "Equipación entallada de los 2000": {"en": "fitted 00s kit", "de": "eng anliegendes Trikot der 2000er", "it": "maglia aderente anni 2000", "fr": "maillot ajusté des années 2000"},
-  "Corte atlético moderno": {"en": "modern athletic cut", "de": "moderner sportlicher Schnitt", "it": "taglio atletico moderno", "fr": "coupe sportive moderne"},
-  "Equipación de alto rendimiento": {"en": "performance kit", "de": "Performance-Trikot", "it": "divisa tecnica", "fr": "tenue haute performance"},
-  "Todo el año": {"en": "Year-round", "de": "Ganzjährig", "it": "Tutto l'anno", "fr": "Toute l'année"},
-  "Las transferencias se permiten durante todo el año.": {"en": "Transfers are allowed throughout the year.", "de": "Transfers sind das ganze Jahr über möglich.", "it": "I trasferimenti sono consentiti tutto l'anno.", "fr": "Les transferts sont autorisés toute l'année."},
-  "Puedes fichar, vender o ceder durante todo el año.": {"en": "You can sign, sell or loan players throughout the year.", "de": "Du kannst das ganze Jahr über Spieler verpflichten, verkaufen oder verleihen.", "it": "Puoi acquistare, vendere o cedere giocatori tutto l'anno.", "fr": "Tu peux recruter, vendre ou prêter des joueurs toute l'année."},
-  "Economía: salarios ×{wage}; mercado ×{market}; televisión ×{tv} ({currency}).": {"en": "Economy: wages ×{wage}; market ×{market}; television ×{tv} ({currency}).", "de": "Wirtschaft: Gehälter ×{wage}; Markt ×{market}; TV ×{tv} ({currency}).", "it": "Economia: stipendi ×{wage}; mercato ×{market}; TV ×{tv} ({currency}).", "fr": "Économie : salaires ×{wage} ; marché ×{market} ; télévision ×{tv} ({currency})."},
-  "Personal de apoyo: {n}; {science}; {analytics}.": {"en": "Backroom staff: {n}; {science}; {analytics}.", "de": "Betreuerstab: {n}; {science}; {analytics}.", "it": "Staff: {n}; {science}; {analytics}.", "fr": "Encadrement : {n} ; {science} ; {analytics}."},
-  "Preparación física básica": {"en": "basic sports science", "de": "grundlegende Sportwissenschaft", "it": "preparazione atletica di base", "fr": "préparation physique de base"},
-  "Ciencia deportiva en desarrollo": {"en": "developing sports science", "de": "Sportwissenschaft im Aufbau", "it": "scienza dello sport in crescita", "fr": "science du sport en développement"},
-  "Ciencia deportiva avanzada": {"en": "advanced sports science", "de": "fortgeschrittene Sportwissenschaft", "it": "scienza dello sport avanzata", "fr": "science du sport avancée"},
-  "Ciencia deportiva con análisis de datos": {"en": "data-driven sports science", "de": "datenbasierte Sportwissenschaft", "it": "scienza dello sport basata sui dati", "fr": "science du sport pilotée par les données"},
-  "Análisis de datos disponible": {"en": "data analysis available", "de": "Datenanalyse verfügbar", "it": "analisi dei dati disponibile", "fr": "analyse de données disponible"},
-  "Análisis de datos no disponible": {"en": "no data analysis", "de": "keine Datenanalyse", "it": "analisi dei dati non disponibile", "fr": "pas d'analyse de données"},
-  "Las redes sociales todavía no están disponibles en este año.": {"en": "Social media are not available in this year yet.", "de": "Soziale Medien sind in diesem Jahr noch nicht verfügbar.", "it": "I social media non sono ancora disponibili in quest'anno.", "fr": "Les réseaux sociaux ne sont pas encore disponibles cette année."},
-  "Ojeo e información imperfecta": {"en": "Scouting and imperfect information", "de": "Scouting und unvollständige Informationen", "it": "Scouting e informazioni incomplete", "fr": "Recrutement et information imparfaite"},
-  "Cantera y continuidad generacional": {"en": "Academy and the next generation", "de": "Nachwuchs und die nächste Generation", "it": "Settore giovanile e nuova generazione", "fr": "Centre de formation et nouvelle génération"},
-  "Entrenamiento y preparación física": {"en": "Training and fitness", "de": "Training und Fitness", "it": "Allenamento e preparazione fisica", "fr": "Entraînement et préparation physique"},
-  "Fichajes y contratos": {"en": "Transfers and contracts", "de": "Transfers und Verträge", "it": "Trasferimenti e contratti", "fr": "Transferts et contrats"},
-  "Economía y control salarial": {"en": "Club finances and wage control", "de": "Vereinsfinanzen und Gehaltskontrolle", "it": "Finanze del club e controllo degli stipendi", "fr": "Finances du club et maîtrise salariale"},
-  "Instalaciones y recursos del club": {"en": "Facilities and club resources", "de": "Anlagen und Vereinsressourcen", "it": "Strutture e risorse del club", "fr": "Infrastructures et ressources du club"},
-  "Equipación e identidad del club": {"en": "Kits and club identity", "de": "Trikots und Vereinsidentität", "it": "Divise e identità del club", "fr": "Tenues et identité du club"},
-  "Medios y reputación": {"en": "Media and reputation", "de": "Medien und Ansehen", "it": "Media e reputazione", "fr": "Médias et réputation"},
-  "Táctica y adaptación al reglamento": {"en": "Tactics and adapting to the rules", "de": "Taktik und Anpassung an die Regeln", "it": "Tattica e adattamento alle regole", "fr": "Tactique et adaptation au règlement"},
-  "Viajes, calendario y recuperación": {"en": "Travel, scheduling and recovery", "de": "Reisen, Spielplan und Erholung", "it": "Viaggi, calendario e recupero", "fr": "Déplacements, calendrier et récupération"},
-  "{topic} · {context}": {"en": "{topic} · {context}", "de": "{topic} · {context}", "it": "{topic} · {context}", "fr": "{topic} · {context}"},
-  "{period} {body}": {"en": "{period} {body}", "de": "{period} {body}", "it": "{period} {body}", "fr": "{period} {body}"},
-  "Este dilema de gestión es una situación ficticia de juego, no un episodio histórico atribuido a un club real. Elige según los efectos mostrados.": {"en": "This management dilemma is a fictional game scenario, not a historical event attributed to a real club. Choose based on the effects shown.", "de": "Dieses Management-Dilemma ist eine fiktive Spielsituation und kein realem Verein zugeschriebenes historisches Ereignis. Entscheide anhand der angezeigten Folgen.", "it": "Questo dilemma gestionale è una situazione di gioco fittizia, non un evento storico attribuito a un club reale. Scegli in base agli effetti mostrati.", "fr": "Ce dilemme de gestion est une situation fictive du jeu, pas un événement historique attribué à un vrai club. Choisis selon les effets affichés."},
-  "Acelerar con inversión": {"en": "Invest now", "de": "Jetzt investieren", "it": "Investire subito", "fr": "Investir maintenant"},
-  "Probar por fases": {"en": "Pilot in stages", "de": "Schrittweise erproben", "it": "Sperimentare per fasi", "fr": "Tester par étapes"},
-  "Aplazar y proteger recursos": {"en": "Delay and protect resources", "de": "Verschieben und Ressourcen schonen", "it": "Rimandare e proteggere le risorse", "fr": "Reporter et préserver les ressources"},
-  "Mayor coste inmediato; impulsa {lever}, desarrollo y conocimiento.": {"en": "Higher immediate cost; boosts {lever}, development and knowledge.", "de": "Höhere Sofortkosten; stärkt {lever}, Entwicklung und Wissen.", "it": "Costo immediato maggiore; favorisce {lever}, sviluppo e conoscenze.", "fr": "Coût immédiat plus élevé ; stimule {lever}, le développement et les connaissances."},
-  "Coste moderado y avance gradual; opción equilibrada.": {"en": "Moderate cost and gradual progress; a balanced option.", "de": "Moderate Kosten und schrittweiser Fortschritt; eine ausgewogene Option.", "it": "Costo moderato e progressi graduali; una scelta equilibrata.", "fr": "Coût modéré et progrès progressifs ; une option équilibrée."},
-  "Libera recursos ahora, pero sacrifica impulso en {lever}.": {"en": "Frees resources now, but gives up momentum in {lever}.", "de": "Schont jetzt Ressourcen, kostet aber Schwung bei {lever}.", "it": "Libera risorse ora, ma sacrifica slancio in {lever}.", "fr": "Libère des ressources aujourd'hui, mais freine {lever}."},
-  "Ojeo y conocimiento": {"en": "scouting and knowledge", "de": "Scouting und Wissen", "it": "scouting e conoscenze", "fr": "recrutement et connaissance"},
-  "desarrollo": {"en": "development", "de": "Entwicklung", "it": "sviluppo", "fr": "développement"},
-  "preparación": {"en": "fitness", "de": "Fitness", "it": "preparazione", "fr": "préparation"},
-  "presupuesto": {"en": "club funds", "de": "Vereinsbudget", "it": "budget del club", "fr": "budget du club"},
-  "cultura": {"en": "club culture", "de": "Vereinskultur", "it": "cultura del club", "fr": "culture du club"},
-  "reputación": {"en": "reputation", "de": "Ansehen", "it": "reputazione", "fr": "réputation"},
-  "rendimiento físico": {"en": "fitness", "de": "Fitness", "it": "condizione fisica", "fr": "condition physique"},
-  "Decisión de época": {"en": "Era decision", "de": "Epochenentscheidung", "it": "Decisione d'epoca", "fr": "Décision d'époque"},
-  "Decisión de gestión": {"en": "Management decision", "de": "Managemententscheidung", "it": "Decisione gestionale", "fr": "Décision de gestion"},
-  "Se ha alcanzado el máximo de decisiones del registro.": {"en": "The decision log has reached its limit.", "de": "Das Entscheidungsprotokoll hat seine Grenze erreicht.", "it": "Il registro delle decisioni ha raggiunto il limite.", "fr": "Le journal des décisions a atteint sa limite."},
-  "Marco de juego de los años 70: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {"en": "Game frame for the 1970s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.", "de": "Spielrahmen der 1970er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.", "it": "Cornice di gioco degli anni 70: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.", "fr": "Cadre de jeu des années 70 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."},
-  "Marco de juego de los años 80: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {"en": "Game frame for the 1980s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.", "de": "Spielrahmen der 1980er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.", "it": "Cornice di gioco degli anni 80: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.", "fr": "Cadre de jeu des années 80 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."},
-  "Marco de juego de los años 90: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {"en": "Game frame for the 1990s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.", "de": "Spielrahmen der 1990er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.", "it": "Cornice di gioco degli anni 90: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.", "fr": "Cadre de jeu des années 90 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."},
-  "Marco de juego de los años 2000: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {"en": "Game frame for the 2000s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.", "de": "Spielrahmen der 2000er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.", "it": "Cornice di gioco degli anni 2000: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.", "fr": "Cadre de jeu des années 2000 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."},
-  "Marco de juego de los años 2010: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {"en": "Game frame for the 2010s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.", "de": "Spielrahmen der 2010er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.", "it": "Cornice di gioco degli anni 2010: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.", "fr": "Cadre de jeu des années 2010 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."},
-  "Marco de juego de los años 2020: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {"en": "Game frame for the 2020s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.", "de": "Spielrahmen der 2020er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.", "it": "Cornice di gioco degli anni 2020: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.", "fr": "Cadre de jeu des années 2020 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."},
-  "Efecto confirmado": {"en": "Confirmed effect", "de": "Bestätigte Wirkung", "it": "Effetto confermato", "fr": "Effet confirmé"},
-  "Decisión de época aplicada y añadida a tu legado.": {"en": "Era decision applied and added to your legacy.", "de": "Epochenentscheidung angewendet und zum Vermächtnis hinzugefügt.", "it": "Decisione d'epoca applicata e aggiunta alla tua storia.", "fr": "Décision d'époque appliquée et ajoutée à ton héritage."},
-  "Entrenamiento futuro {n} puntos porcentuales": {"en": "Future training growth {n} percentage points", "de": "Künftiger Trainingszuwachs {n} Prozentpunkte", "it": "Crescita futura dall'allenamento {n} punti percentuali", "fr": "Progression future à l'entraînement {n} points de pourcentage"},
-  "Nivel de ojeo {n}": {"en": "Scouting level {n}", "de": "Scouting-Stufe {n}", "it": "Livello di scouting {n}", "fr": "Niveau de recrutement {n}"},
-  "Profesionalidad {n}": {"en": "Professionalism {n}", "de": "Professionalität {n}", "it": "Professionalità {n}", "fr": "Professionnalisme {n}"},
-  "VAR aplicado solo en Premier League y La Liga cuando la cronología lo permite.": {"en": "VAR is applied only in the Premier League and La Liga when the timeline enables it.", "de": "VAR wird nur in der Premier League und La Liga angewendet, wenn die Chronologie es vorsieht.", "it": "Il VAR è applicato solo in Premier League e Liga quando la cronologia lo consente.", "fr": "La VAR est appliquée uniquement en Premier League et en Liga lorsque la chronologie le permet."},
-  "Canales mostrados en el HUD; no simulan una red de contactos.": {"en": "Channels shown in the HUD; they do not simulate a contact network.", "de": "Im HUD angezeigte Kanäle; sie simulieren kein Kontaktnetzwerk.", "it": "Canali mostrati nell'HUD; non simulano una rete di contatti.", "fr": "Canaux affichés dans le HUD ; ils ne simulent pas un réseau de contacts."},
-  "Referencia de ambientación, aún no aplicada al juego: {kit}; {pitch}; {broadcast}.": {"en": "Atmosphere reference, not yet applied in-game: {kit}; {pitch}; {broadcast}.", "de": "Atmosphärische Referenz, noch nicht im Spiel umgesetzt: {kit}; {pitch}; {broadcast}.", "it": "Riferimento di ambientazione, non ancora applicato nel gioco: {kit}; {pitch}; {broadcast}.", "fr": "Référence d'ambiance, pas encore appliquée en jeu : {kit} ; {pitch} ; {broadcast}."},
-  "Interfaz aplicada: teletexto.": {"en": "Applied interface: teletext.", "de": "Angewendete Oberfläche: Teletext.", "it": "Interfaccia applicata: televideo.", "fr": "Interface appliquée : télétexte."},
-  "Interfaz aplicada: marcador impreso.": {"en": "Applied interface: printed scoreboard.", "de": "Angewendete Oberfläche: gedruckte Anzeigetafel.", "it": "Interfaccia applicata: tabellone stampato.", "fr": "Interface appliquée : tableau d'affichage imprimé."},
-  "Interfaz aplicada: estilo moderno.": {"en": "Applied interface: modern style.", "de": "Angewendete Oberfläche: moderner Stil.", "it": "Interfaccia applicata: stile moderno.", "fr": "Interface appliquée : style moderne."},
-  "Escalas económicas simuladas para salarios, valores y presupuestos.": {"en": "Simulated economic scales for wages, market values and budgets.", "de": "Simulierte Wirtschaftsfaktoren für Gehälter, Marktwerte und Budgets.", "it": "Scale economiche simulate per stipendi, valori di mercato e budget.", "fr": "Échelles économiques simulées pour les salaires, valeurs marchandes et budgets."},
-  "Salarios ×{wage}; mercado ×{market}; presupuesto ×{tv}.": {"en": "Wages ×{wage}; market values ×{market}; budgets ×{tv}.", "de": "Gehälter ×{wage}; Marktwerte ×{market}; Budgets ×{tv}.", "it": "Stipendi ×{wage}; valori di mercato ×{market}; budget ×{tv}.", "fr": "Salaires ×{wage} ; valeurs marchandes ×{market} ; budgets ×{tv}."},
-  "Coste inmediato alto; refuerza el área elegida a largo plazo.": {"en": "Higher immediate cost; strengthens the chosen area over time.", "de": "Höhere Sofortkosten; stärkt den gewählten Bereich langfristig.", "it": "Costo immediato maggiore; rafforza nel tempo l'area scelta.", "fr": "Coût immédiat plus élevé ; renforce le domaine choisi à long terme."},
-  "Coste y beneficio moderados; permite aprender antes de ampliar.": {"en": "Moderate cost and benefit; learn before scaling up.", "de": "Moderate Kosten und Vorteile; erst lernen, dann ausbauen.", "it": "Costi e benefici moderati; permette di imparare prima di ampliare.", "fr": "Coût et bénéfice modérés ; permet d'apprendre avant d'élargir."},
-  "Protege recursos ahora, pero reduce el impulso futuro.": {"en": "Protects resources now, but reduces future momentum.", "de": "Schont jetzt Ressourcen, bremst aber den künftigen Fortschritt.", "it": "Protegge le risorse ora, ma riduce lo slancio futuro.", "fr": "Préserve les ressources aujourd'hui, mais réduit l'élan futur."},
-  "Prenda 3D generada con colores del club: {kit}; terreno y TV aún son referencias: {pitch}; {broadcast}.": {"en": "Procedural 3D kit in club colours: {kit}; pitch and broadcast are still references: {pitch}; {broadcast}.", "de": "Prozedurales 3D-Trikot in Vereinsfarben: {kit}; Platz und Übertragung sind weiterhin Referenzen: {pitch}; {broadcast}.", "it": "Divisa 3D procedurale nei colori del club: {kit}; campo e TV sono ancora riferimenti: {pitch}; {broadcast}.", "fr": "Tenue 3D procédurale aux couleurs du club : {kit} ; terrain et diffusion restent des références : {pitch} ; {broadcast}."},
-  "Detalle retro de los 70": {"en": "1970s retro detail", "de": "Retro-Detail der 1970er", "it": "Dettaglio rétro anni 70", "fr": "Détail rétro des années 70"},
-  "Patrón chevron de los 80": {"en": "1980s chevron pattern", "de": "Chevronmuster der 1980er", "it": "Motivo chevron anni 80", "fr": "Motif chevron des années 80"},
-  "Franjas horizontales de los 90": {"en": "1990s horizontal hoops", "de": "Horizontale Streifen der 1990er", "it": "Fasce orizzontali anni 90", "fr": "Bandes horizontales des années 90"},
-  "Panel dividido de los 2000": {"en": "2000s split panel", "de": "Geteiltes Panel der 2000er", "it": "Pannello diviso anni 2000", "fr": "Panneau divisé des années 2000"},
-  "Diseño geométrico de los 2010": {"en": "2010s geometric design", "de": "Geometrisches Design der 2010er", "it": "Design geometrico anni 2010", "fr": "Design géométrique des années 2010"},
-  "Detalle técnico geométrico de los 2020": {"en": "2020s technical geometric detail", "de": "Technisches geometrisches Detail der 2020er", "it": "Dettaglio geometrico tecnico anni 2020", "fr": "Détail géométrique technique des années 2020"},
-  "Perfil de juego: {points} puntos por victoria, máximo {subs} cambios, {windows}; {social}.": {"en": "Game profile: {points} points per win, maximum {subs} substitutions, {windows}; {social}.", "de": "Spielprofil: {points} Punkte pro Sieg, maximal {subs} Auswechslungen, {windows}; {social}.", "it": "Profilo di gioco: {points} punti a vittoria, massimo {subs} sostituzioni, {windows}; {social}.", "fr": "Profil de jeu : {points} points par victoire, {subs} remplacements maximum, {windows} ; {social}."},
-  "Skin del perfil ({skin}) aún no aplicada; se conserva la interfaz estándar.": {"en": "Profile skin ({skin}) is not applied yet; the standard interface is kept.", "de": "Profil-Skin ({skin}) noch nicht angewendet; die Standardoberfläche bleibt erhalten.", "it": "La skin del profilo ({skin}) non è ancora applicata; resta l'interfaccia standard.", "fr": "Le thème du profil ({skin}) n'est pas encore appliqué ; l'interface standard est conservée."},
-  "Estilo de prenda 3D del perfil (si no llevas una propia): {kit}, con colores del club; terreno y TV aún son referencias: {pitch}; {broadcast}.": {"en": "Profile 3D kit style (unless you wear your own): {kit}, in club colours; pitch and TV remain references: {pitch}; {broadcast}.", "de": "3D-Trikotstil des Profils (sofern kein eigenes getragen wird): {kit} in Vereinsfarben; Platz und TV bleiben Referenzen: {pitch}; {broadcast}.", "it": "Stile della divisa 3D del profilo (se non ne indossi una tua): {kit}, nei colori del club; campo e TV restano riferimenti: {pitch}; {broadcast}.", "fr": "Style de tenue 3D du profil (sauf si tu en portes une à toi) : {kit}, aux couleurs du club ; terrain et TV restent des références : {pitch} ; {broadcast}."},
-  "En directo: máximo {n} cambios": {"en": "Live match: maximum {n} substitutions", "de": "Live-Spiel: maximal {n} Auswechslungen", "it": "Partita in diretta: massimo {n} sostituzioni", "fr": "Match en direct : {n} remplacements maximum"},
-  "Decisiones recientes": {"en": "Recent decisions", "de": "Letzte Entscheidungen", "it": "Decisioni recenti", "fr": "Décisions récentes"},
-  "Aún no has tomado decisiones de época.": {"en": "You have not made any era decisions yet.", "de": "Du hast noch keine Epochenentscheidungen getroffen.", "it": "Non hai ancora preso decisioni d'epoca.", "fr": "Tu n'as pas encore pris de décisions d'époque."},
-  "El informe en papel del ojeador local solo cubre una observación del posible fichaje.": {"en": "The local scout's paper report covers only one viewing of the potential signing.", "de": "Der Papierbericht des lokalen Scouts beruht nur auf einer Beobachtung des möglichen Neuzugangs.", "it": "Il rapporto cartaceo dell'osservatore locale copre una sola visione del possibile acquisto.", "fr": "Le rapport papier de l'observateur local ne couvre qu'une seule observation de la recrue potentielle."},
-  "El campo pesado y un viaje largo obligan a repartir el trabajo físico con cuidado.": {"en": "A heavy pitch and a long trip call for careful management of physical work.", "de": "Ein schwerer Platz und eine lange Reise erfordern eine sorgfältige Verteilung der körperlichen Belastung.", "it": "Un campo pesante e una lunga trasferta impongono di distribuire con attenzione il lavoro fisico.", "fr": "Un terrain lourd et un long déplacement obligent à répartir prudemment le travail physique."},
-  "Una promesa necesita aprender junto a un titular, pero el once exige resultados.": {"en": "A prospect needs to learn beside a starter, but the first team demands results.", "de": "Ein Talent muss von einem Stammspieler lernen, doch die erste Mannschaft verlangt Ergebnisse.", "it": "Un giovane deve imparare accanto a un titolare, ma la prima squadra pretende risultati.", "fr": "Un espoir doit apprendre aux côtés d'un titulaire, mais l'équipe première exige des résultats."},
-  "Un veterano propone enseñar sus rutinas a los jóvenes antes de renovar.": {"en": "A veteran offers to teach their routines to younger players before renewing.", "de": "Ein Routinier bietet an, den Jüngeren vor einer Verlängerung seine Abläufe zu vermitteln.", "it": "Un veterano propone di insegnare ai giovani le proprie abitudini prima di rinnovare.", "fr": "Un vétéran propose de transmettre ses habitudes aux jeunes avant de renouveler."},
-  "El personal disponible no puede atender a la vez la recuperación y el entrenamiento extra.": {"en": "The available staff cannot handle recovery and extra training at the same time.", "de": "Das verfügbare Personal kann Erholung und zusätzliches Training nicht gleichzeitig betreuen.", "it": "Lo staff disponibile non riesce a seguire contemporaneamente recupero e allenamento extra.", "fr": "Le personnel disponible ne peut pas gérer à la fois la récupération et l'entraînement supplémentaire."},
-  "La directiva limita el gasto y pide decidir qué mejora del club puede esperar.": {"en": "The board limits spending and asks which club improvement can wait.", "de": "Die Vereinsführung begrenzt die Ausgaben und fragt, welche Verbesserung warten kann.", "it": "La dirigenza limita le spese e chiede quale miglioramento del club possa attendere.", "fr": "La direction limite les dépenses et demande quelle amélioration du club peut attendre."},
-  "La afición quiere que la nueva camiseta conserve una seña reconocible del club.": {"en": "Supporters want the new shirt to keep a recognizable club feature.", "de": "Die Fans möchten, dass das neue Trikot ein erkennbares Vereinsmerkmal bewahrt.", "it": "I tifosi vogliono che la nuova maglia conservi un segno riconoscibile del club.", "fr": "Les supporters veulent que le nouveau maillot conserve un signe distinctif du club."},
-  "La planificación del viaje compite con una sesión adicional antes del partido.": {"en": "Travel planning competes with an extra session before the match.", "de": "Die Reiseplanung konkurriert mit einer zusätzlichen Einheit vor dem Spiel.", "it": "La pianificazione del viaggio compete con una seduta aggiuntiva prima della partita.", "fr": "La préparation du déplacement entre en concurrence avec une séance supplémentaire avant le match."},
-  "La prensa local cuestiona que un titular se quede fuera de la convocatoria.": {"en": "The local press questions why a starter is left out of the squad.", "de": "Die lokale Presse fragt, warum ein Stammspieler nicht im Kader steht.", "it": "La stampa locale si chiede perché un titolare sia stato escluso dalla convocazione.", "fr": "La presse locale demande pourquoi un titulaire est écarté du groupe."},
-  "Una variación en las reglas de la competición obliga a preparar otra respuesta táctica.": {"en": "A competition rule change requires the team to prepare another tactical response.", "de": "Eine Regeländerung des Wettbewerbs verlangt eine weitere taktische Antwort.", "it": "Un cambio di regolamento della competizione richiede una risposta tattica alternativa.", "fr": "Un changement de règlement de la compétition impose une autre réponse tactique."},
-  "Unas grabaciones de vídeo amplían el informe del ojeador, pero dejan dudas sobre el jugador.": {"en": "Video recordings expand the scout's report but still leave doubts about the player.", "de": "Videoaufnahmen ergänzen den Scoutbericht, lassen aber Zweifel am Spieler offen.", "it": "Le registrazioni video ampliano il rapporto dell'osservatore, ma lasciano dubbi sul giocatore.", "fr": "Des enregistrements vidéo complètent le rapport du recruteur, mais laissent des doutes sur le joueur."},
-  "La plantilla pide recuperar mejor entre partidos y desplazamientos.": {"en": "The squad asks for better recovery between matches and trips.", "de": "Der Kader verlangt bessere Erholung zwischen Spielen und Reisen.", "it": "La squadra chiede un recupero migliore tra partite e trasferte.", "fr": "L'effectif demande une meilleure récupération entre les matchs et les déplacements."},
-  "El patrocinador ofrece recursos a cambio de mayor presencia en la equipación.": {"en": "The sponsor offers resources in exchange for greater visibility on the kit.", "de": "Der Sponsor bietet Mittel im Gegenzug für mehr Präsenz auf dem Trikot.", "it": "Lo sponsor offre risorse in cambio di maggiore visibilità sulla maglia.", "fr": "Le sponsor offre des moyens en échange d'une plus grande visibilité sur la tenue."},
-  "Un veterano con influencia interna pide garantías antes de renovar.": {"en": "An influential veteran asks for assurances before renewing.", "de": "Ein einflussreicher Routinier verlangt vor einer Verlängerung Zusicherungen.", "it": "Un veterano influente chiede garanzie prima di rinnovare.", "fr": "Un vétéran influent demande des garanties avant de renouveler."},
-  "El club puede contratar apoyo para la preparación, pero tendría que recortar otra partida.": {"en": "The club can hire preparation support, but another budget line must be cut.", "de": "Der Verein kann Unterstützung für die Vorbereitung einstellen, muss dafür aber anderswo kürzen.", "it": "Il club può assumere un supporto per la preparazione, ma deve tagliare un'altra voce.", "fr": "Le club peut renforcer la préparation, mais doit réduire un autre poste budgétaire."},
-  "La directiva fija un tope de gasto antes de completar la plantilla.": {"en": "The board sets a spending ceiling before the squad is complete.", "de": "Die Vereinsführung setzt eine Ausgabenobergrenze, bevor der Kader vollständig ist.", "it": "La dirigenza fissa un tetto di spesa prima di completare la rosa.", "fr": "La direction fixe un plafond de dépenses avant que l'effectif soit complet."},
-  "El diseño de la camiseta enfrenta tradición del club y una propuesta comercial.": {"en": "The shirt design pits club tradition against a commercial proposal.", "de": "Beim Trikotdesign stehen Vereinstradition und ein kommerzieller Vorschlag gegeneinander.", "it": "Il design della maglia mette a confronto la tradizione del club e una proposta commerciale.", "fr": "Le design du maillot oppose la tradition du club à une proposition commerciale."},
-  "La información del equipo llega por distintos canales y el vestuario pide un mensaje claro.": {"en": "Team information arrives through several channels and the dressing room wants one clear message.", "de": "Teaminformationen kommen über mehrere Kanäle; die Kabine wünscht eine klare Botschaft.", "it": "Le informazioni sulla squadra arrivano da più canali e lo spogliatoio chiede un messaggio chiaro.", "fr": "Les informations sur l'équipe circulent par plusieurs canaux et le vestiaire réclame un message clair."},
-  "El rival cambia su planteamiento y el cuerpo técnico debe decidir cuánto arriesgar.": {"en": "The opponent changes its approach and the coaching staff must decide how much to risk.", "de": "Der Gegner ändert seinen Ansatz und das Trainerteam muss das Risiko abwägen.", "it": "L'avversario cambia approccio e lo staff tecnico deve decidere quanto rischiare.", "fr": "L'adversaire change d'approche et le staff doit décider jusqu'où prendre des risques."},
-  "Un juvenil destaca en entrenamientos, aunque todavía necesita minutos y protección.": {"en": "A youth player excels in training but still needs minutes and protection.", "de": "Ein Jugendspieler überzeugt im Training, braucht aber noch Einsatzzeit und Schutz.", "it": "Un giovane brilla in allenamento, ma ha ancora bisogno di minuti e protezione.", "fr": "Un jeune brille à l'entraînement, mais a encore besoin de temps de jeu et de protection."},
-  "Un jugador queda disponible con su contrato próximo a terminar; su potencial no está claro.": {"en": "A player becomes available with their contract nearing its end; their potential is unclear.", "de": "Ein Spieler wird bei auslaufendem Vertrag verfügbar; sein Potenzial ist unklar.", "it": "Un giocatore è disponibile con il contratto in scadenza, ma il suo potenziale è incerto.", "fr": "Un joueur devient disponible à l'approche de la fin de son contrat ; son potentiel reste incertain."},
-  "La inversión en el estadio y el presupuesto de la plantilla compiten por los mismos recursos.": {"en": "Investment in the stadium and the squad compete for the same resources.", "de": "Stadioninvestitionen und Kaderbudget konkurrieren um dieselben Mittel.", "it": "Gli investimenti nello stadio e nella squadra competono per le stesse risorse.", "fr": "L'investissement dans le stade et dans l'effectif mobilise les mêmes ressources."},
-  "Un ajuste de reglas cambia una rutina que el equipo daba por segura.": {"en": "A rule adjustment changes a routine the team took for granted.", "de": "Eine Regelanpassung verändert eine bislang selbstverständliche Routine.", "it": "Un adeguamento delle regole cambia un'abitudine che la squadra dava per scontata.", "fr": "Un ajustement du règlement bouleverse une routine que l'équipe tenait pour acquise."},
-  "La plantilla pide ordenar los dorsales y responsabilidades antes de la nueva temporada.": {"en": "The squad wants shirt numbers and responsibilities settled before the new season.", "de": "Der Kader möchte Rückennummern und Zuständigkeiten vor der neuen Saison klären.", "it": "La squadra vuole definire numeri di maglia e responsabilità prima della nuova stagione.", "fr": "L'effectif veut régler les numéros et les responsabilités avant la nouvelle saison."},
-  "La televisión aumenta la atención sobre el equipo, pero no todas las ligas reciben el mismo foco.": {"en": "Television increases attention on the team, but not every league receives the same focus.", "de": "Das Fernsehen erhöht die Aufmerksamkeit, doch nicht jede Liga steht gleich im Mittelpunkt.", "it": "La televisione aumenta l'attenzione sulla squadra, ma non tutte le leghe hanno la stessa visibilità.", "fr": "La télévision accroît l'attention portée à l'équipe, mais toutes les ligues ne bénéficient pas du même intérêt."},
-  "La identidad visual del club debe convivir con nuevas exigencias de patrocinio.": {"en": "The club's visual identity must coexist with new sponsorship demands.", "de": "Die visuelle Identität des Vereins muss mit neuen Sponsorenwünschen vereinbart werden.", "it": "L'identità visiva del club deve convivere con nuove richieste degli sponsor.", "fr": "L'identité visuelle du club doit composer avec de nouvelles exigences des sponsors."},
-  "Una promesa solicita minutos en una plantilla que pelea por objetivos inmediatos.": {"en": "A prospect asks for minutes in a squad chasing immediate targets.", "de": "Ein Talent fordert Einsatzzeit in einem Kader mit unmittelbaren Zielen.", "it": "Un giovane chiede minuti in una squadra che punta a obiettivi immediati.", "fr": "Un espoir demande du temps de jeu dans un effectif visant des objectifs immédiats."},
-  "Un ojeador recomienda ampliar la búsqueda, aunque el club conoce poco ese mercado.": {"en": "A scout recommends widening the search, although the club knows little about that market.", "de": "Ein Scout empfiehlt eine breitere Suche, obwohl der Verein diesen Markt kaum kennt.", "it": "Un osservatore consiglia di ampliare la ricerca, ma il club conosce poco quel mercato.", "fr": "Un recruteur conseille d'élargir les recherches, même si le club connaît mal ce marché."},
-  "La prensa y los aficionados discrepan sobre cuánto debe explicar el entrenador.": {"en": "The press and supporters disagree on how much the manager should explain.", "de": "Presse und Fans sind sich uneinig, wie viel der Trainer erklären sollte.", "it": "Stampa e tifosi non concordano su quanto l'allenatore debba spiegare.", "fr": "La presse et les supporters divergent sur le niveau d'explication attendu du manager."},
-  "El equipo debe elegir entre una adaptación prudente y una táctica más arriesgada.": {"en": "The team must choose between a cautious adjustment and a riskier tactic.", "de": "Das Team muss zwischen einer vorsichtigen Anpassung und einer riskanteren Taktik wählen.", "it": "La squadra deve scegliere tra un adattamento prudente e una tattica più rischiosa.", "fr": "L'équipe doit choisir entre un ajustement prudent et une tactique plus risquée."},
-  "Una ventana de fichajes se acerca y el club todavía necesita cubrir una posición.": {"en": "A transfer window is approaching and the club still needs to cover a position.", "de": "Ein Transferfenster steht bevor und der Verein muss noch eine Position besetzen.", "it": "Si avvicina una finestra di mercato e il club deve ancora coprire un ruolo.", "fr": "Une fenêtre de transferts approche et le club doit encore renforcer un poste."},
-  "La web del club y los foros transmiten rumores antes de que la directiva cierre su decisión.": {"en": "The club website and forums spread rumours before the board has decided.", "de": "Vereinswebsite und Foren verbreiten Gerüchte, bevor die Vereinsführung entschieden hat.", "it": "Il sito del club e i forum diffondono voci prima che la dirigenza abbia deciso.", "fr": "Le site du club et les forums propagent des rumeurs avant la décision de la direction."},
-  "Una alerta por teléfono acelera una negociación, pero faltan datos para valorar la oferta.": {"en": "A phone alert speeds up a negotiation, but information is missing to value the offer.", "de": "Eine SMS beschleunigt die Verhandlung, doch wichtige Angebotsdaten fehlen.", "it": "Un avviso telefonico accelera la trattativa, ma mancano dati per valutare l'offerta.", "fr": "Une alerte téléphonique accélère la négociation, mais des informations manquent pour évaluer l'offre."},
-  "La nómina crece y la directiva pide proteger el presupuesto de la temporada.": {"en": "The wage bill is growing and the board asks to protect the season budget.", "de": "Die Gehaltskosten steigen und die Vereinsführung will das Saisonbudget schützen.", "it": "Il monte ingaggi cresce e la dirigenza chiede di proteggere il budget stagionale.", "fr": "La masse salariale augmente et la direction demande de protéger le budget de la saison."},
-  "Un fichaje de otra liga requiere más observación de la que permite el calendario.": {"en": "A signing from another league requires more observation than the schedule allows.", "de": "Ein Neuzugang aus einer anderen Liga müsste öfter beobachtet werden, als der Spielplan erlaubt.", "it": "Un acquisto da un'altra lega richiede più osservazioni di quante ne consenta il calendario.", "fr": "Une recrue d'une autre ligue exige davantage d'observations que le calendrier ne le permet."},
-  "El club puede ampliar su preparación física, aunque el nuevo apoyo cuesta dinero.": {"en": "The club can expand physical preparation, but the new support costs money.", "de": "Der Verein kann die Athletikbetreuung ausbauen, doch zusätzliches Personal kostet Geld.", "it": "Il club può ampliare la preparazione atletica, ma il nuovo supporto ha un costo.", "fr": "Le club peut renforcer la préparation physique, mais ce soutien supplémentaire coûte cher."},
-  "Una marca ofrece financiar una mejora a cambio de más espacio en la camiseta.": {"en": "A brand will fund an improvement in exchange for more space on the shirt.", "de": "Eine Marke finanziert eine Verbesserung und verlangt dafür mehr Platz auf dem Trikot.", "it": "Un marchio finanzia un miglioramento in cambio di più spazio sulla maglia.", "fr": "Une marque finance une amélioration en échange d'une plus grande place sur le maillot."},
-  "La cantera pide inversión ahora; el primer equipo necesita soluciones para este año.": {"en": "The academy needs investment now; the first team needs solutions this year.", "de": "Die Akademie braucht jetzt Investitionen; die erste Mannschaft braucht Lösungen für dieses Jahr.", "it": "Il vivaio ha bisogno di investimenti subito; la prima squadra di soluzioni per quest'anno.", "fr": "Le centre de formation a besoin d'investissements immédiats ; l'équipe première, de solutions cette année."},
-  "La congestión de partidos reduce las sesiones disponibles para entrenar.": {"en": "A crowded fixture list leaves fewer sessions available for training.", "de": "Ein dichter Spielplan lässt weniger Einheiten für das Training übrig.", "it": "Un calendario fitto lascia meno sedute disponibili per allenarsi.", "fr": "Un calendrier chargé laisse moins de séances disponibles pour l'entraînement."},
-  "Un jugador clave quiere revisar su contrato antes de que empiece el mercado.": {"en": "A key player wants to review their contract before the market opens.", "de": "Ein Schlüsselspieler möchte seinen Vertrag vor Öffnung des Marktes neu besprechen.", "it": "Un giocatore chiave vuole rivedere il contratto prima dell'apertura del mercato.", "fr": "Un joueur clé veut revoir son contrat avant l'ouverture du marché."},
-  "Una publicación en redes sociales divide a la afición mientras el equipo prepara el siguiente partido.": {"en": "A social post divides supporters while the team prepares for its next match.", "de": "Ein Social-Media-Beitrag spaltet die Fans, während sich das Team auf das nächste Spiel vorbereitet.", "it": "Un post social divide i tifosi mentre la squadra prepara la prossima partita.", "fr": "Une publication sur les réseaux divise les supporters pendant que l'équipe prépare le prochain match."},
-  "Los analistas detectan un patrón, pero el cuerpo técnico duda de cuánto cambiar por los datos.": {"en": "Analysts spot a pattern, but the coaching staff doubts how much to change based on data.", "de": "Analysten erkennen ein Muster, doch das Trainerteam zweifelt am nötigen Ausmaß der Anpassung.", "it": "Gli analisti individuano uno schema, ma lo staff dubita di quanto cambiare sulla base dei dati.", "fr": "Les analystes repèrent une tendance, mais le staff hésite sur l'ampleur des changements à partir des données."},
-  "La preparación avanzada promete mejoras, aunque exige coordinar a más especialistas.": {"en": "Advanced preparation could help, but it requires coordination among more specialists.", "de": "Fortgeschrittene Vorbereitung könnte helfen, verlangt aber die Abstimmung weiterer Fachkräfte.", "it": "Una preparazione avanzata può aiutare, ma richiede il coordinamento di più specialisti.", "fr": "Une préparation avancée peut aider, mais nécessite de coordonner davantage de spécialistes."},
-  "Un jugador pide cuidar su recuperación ante la presión de competir cada semana.": {"en": "A player asks for careful recovery while competing every week.", "de": "Ein Spieler bittet um sorgfältige Regeneration bei wöchentlichen Einsätzen.", "it": "Un giocatore chiede di curare il recupero mentre si gioca ogni settimana.", "fr": "Un joueur demande une récupération adaptée alors que les matchs s'enchaînent chaque semaine."},
-  "El mercado ofrece alternativas, pero las ventanas limitan cuándo puede cerrarse el fichaje.": {"en": "The market offers alternatives, but transfer windows limit when a deal can be completed.", "de": "Der Markt bietet Alternativen, doch Transferfenster begrenzen den Abschlusszeitpunkt.", "it": "Il mercato offre alternative, ma le finestre limitano quando si può concludere l'affare.", "fr": "Le marché offre des options, mais les fenêtres limitent la période de conclusion d'un transfert."},
-  "Una revisión arbitral genera preguntas distintas según la competición en la que juega el club.": {"en": "A video review raises different questions depending on the competition.", "de": "Eine Videoüberprüfung wirft je nach Wettbewerb unterschiedliche Fragen auf.", "it": "Una revisione video solleva questioni diverse a seconda della competizione.", "fr": "Une assistance vidéo soulève des questions différentes selon la compétition."},
-  "Una entrevista en directo puede aclarar el mensaje o alimentar una polémica.": {"en": "A live interview could clarify the message or fuel a controversy.", "de": "Ein Live-Interview könnte die Botschaft klären oder eine Kontroverse anheizen.", "it": "Un'intervista in diretta può chiarire il messaggio o alimentare una polemica.", "fr": "Une interview en direct peut clarifier le message ou alimenter une polémique."},
-  "La plantilla necesita rotar sin perder cohesión en un tramo cargado de partidos.": {"en": "The squad needs rotation without losing cohesion during a packed run of matches.", "de": "Der Kader muss rotieren, ohne in einer dichten Spielphase den Zusammenhalt zu verlieren.", "it": "La squadra deve ruotare senza perdere coesione in un periodo fitto di partite.", "fr": "L'effectif doit tourner sans perdre sa cohésion pendant une série de matchs rapprochés."},
-  "Una promesa pide un plan de desarrollo medible antes de comprometerse con el club.": {"en": "A prospect asks for a measurable development plan before committing to the club.", "de": "Ein Talent verlangt vor seiner Zusage einen messbaren Entwicklungsplan.", "it": "Un giovane chiede un piano di crescita misurabile prima di impegnarsi con il club.", "fr": "Un espoir demande un plan de progression mesurable avant de s'engager avec le club."},
-  "El rival estudia tus patrones; decides si mantener el plan o introducir una variante.": {"en": "The opponent studies your patterns; decide whether to keep the plan or introduce a variation.", "de": "Der Gegner analysiert deine Muster; behalte den Plan bei oder führe eine Variante ein.", "it": "L'avversario studia i tuoi schemi: decidi se mantenere il piano o introdurre una variante.", "fr": "L'adversaire étudie tes habitudes ; garde le plan ou introduis une variante."},
-  "El calendario comprimido y el límite ampliado de cambios obligan a replantear la rotación.": {"en": "A compressed schedule and the expanded substitution limit require a new rotation plan.", "de": "Ein komprimierter Spielplan und mehr Wechsel erfordern einen neuen Rotationsplan.", "it": "Un calendario compresso e il limite ampliato di cambi richiedono un nuovo piano di rotazioni.", "fr": "Un calendrier resserré et une limite de remplacements élargie imposent un nouveau plan de rotation."},
-  "Un clip viral domina la conversación mientras el vestuario necesita concentrarse.": {"en": "A viral clip dominates the conversation while the dressing room needs to focus.", "de": "Ein viraler Clip beherrscht die Diskussion, während sich die Kabine konzentrieren muss.", "it": "Un video virale domina la conversazione mentre lo spogliatoio deve concentrarsi.", "fr": "Un clip viral domine la conversation alors que le vestiaire doit rester concentré."},
-  "Los datos de rendimiento señalan una alerta, pero no explican por sí solos su causa.": {"en": "Performance data shows a warning sign but cannot explain its cause by itself.", "de": "Leistungsdaten zeigen ein Warnsignal, erklären dessen Ursache aber nicht allein.", "it": "I dati prestazionali segnalano un problema, ma da soli non ne spiegano la causa.", "fr": "Les données de performance signalent un problème, mais n'en expliquent pas seules la cause."},
-  "La plantilla pide descanso; la competición todavía exige varios partidos en poco tiempo.": {"en": "The squad asks for rest while the competition still requires several matches in little time.", "de": "Der Kader braucht Erholung, während mehrere Spiele in kurzer Zeit anstehen.", "it": "La squadra chiede riposo mentre la competizione impone ancora più partite in poco tempo.", "fr": "L'effectif réclame du repos alors que la compétition impose encore plusieurs matchs rapprochés."},
-  "Un jugador solicita apoyo personal además del plan físico habitual.": {"en": "A player requests personal support in addition to the usual physical plan.", "de": "Ein Spieler bittet zusätzlich zum üblichen Athletikplan um persönliche Unterstützung.", "it": "Un giocatore chiede supporto personale oltre al consueto piano fisico.", "fr": "Un joueur demande un accompagnement personnel en plus du programme physique habituel."},
-  "El viaje y la recuperación compiten con una sesión táctica antes del siguiente encuentro.": {"en": "Travel and recovery compete with a tactical session before the next match.", "de": "Reise und Regeneration konkurrieren mit einer Taktikeinheit vor dem nächsten Spiel.", "it": "Viaggio e recupero competono con una seduta tattica prima della prossima partita.", "fr": "Le déplacement et la récupération entrent en concurrence avec une séance tactique avant le prochain match."},
-  "Un balón y una equipación de nueva tecnología requieren adaptación, no solo promoción.": {"en": "A new-tech ball and kit require adaptation, not just promotion.", "de": "Ein neuer Spielball und eine neue Ausrüstung verlangen Anpassung, nicht nur Werbung.", "it": "Un pallone e una divisa di nuova tecnologia richiedono adattamento, non solo promozione.", "fr": "Un ballon et une tenue de nouvelle technologie demandent une adaptation, pas seulement de la promotion."},
-  "La directiva busca equilibrar una gran inversión con la estabilidad salarial del club.": {"en": "The board must balance a major investment with the club's wage stability.", "de": "Die Vereinsführung muss eine große Investition mit stabilen Gehaltskosten vereinbaren.", "it": "La dirigenza deve bilanciare un grande investimento con la stabilità salariale del club.", "fr": "La direction doit équilibrer un investissement important avec la stabilité salariale du club."},
-  "Los canales digitales permiten reaccionar rápido, pero hacen más difícil corregir un rumor.": {"en": "Digital channels allow quick reactions but make rumours harder to correct.", "de": "Digitale Kanäle ermöglichen schnelle Reaktionen, erschweren aber die Korrektur von Gerüchten.", "it": "I canali digitali permettono reazioni rapide, ma rendono più difficile correggere le voci.", "fr": "Les canaux numériques permettent de réagir vite, mais rendent les rumeurs plus difficiles à corriger."},
-  "La opción de cinco cambios abre alternativas tácticas y también nuevas expectativas.": {"en": "The five-substitution option opens tactical choices and creates new expectations.", "de": "Die Möglichkeit von fünf Wechseln eröffnet taktische Optionen und neue Erwartungen.", "it": "La possibilità di cinque sostituzioni apre opzioni tattiche e crea nuove aspettative.", "fr": "La possibilité de cinq remplacements ouvre des choix tactiques et crée de nouvelles attentes."},
-  "Marco histórico ({year}): {fact}": {"en": "Historical frame ({year}): {fact}", "de": "Historischer Rahmen ({year}): {fact}", "it": "Contesto storico ({year}): {fact}", "fr": "Contexte historique ({year}) : {fact}"},
-  "El hecho histórico sirve solo de contexto; el dilema y sus efectos son ficticios y no se atribuyen a clubes o personas reales. Elige según los efectos mostrados.": {"en": "The historical event is context only; the dilemma and its effects are fictional and are not attributed to real clubs or people. Choose based on the effects shown.", "de": "Das historische Ereignis dient nur als Kontext; das Dilemma und seine Folgen sind fiktiv und werden keinen realen Vereinen oder Personen zugeschrieben. Entscheide anhand der angezeigten Folgen.", "it": "L’evento storico è solo un contesto; il dilemma e i suoi effetti sono fittizi e non sono attribuiti a club o persone reali. Scegli in base agli effetti mostrati.", "fr": "L’événement historique sert uniquement de contexte ; le dilemme et ses effets sont fictifs et ne sont attribués à aucun club ni à aucune personne réelle. Choisis selon les effets affichés."}
+ "Modo aislado · guardados separados": {
+  "en": "Isolated mode · separate saves",
+  "de": "Isolierter Modus · separate Spielstände",
+  "it": "Modalità isolata · salvataggi separati",
+  "fr": "Mode isolé · sauvegardes séparées"
+ },
+ "Modo Épocas": {
+  "en": "Era Mode",
+  "de": "Epochenmodus",
+  "it": "Modalità epoche",
+  "fr": "Mode Époques"
+ },
+ "Empieza una carrera en otro momento de la historia. La partida moderna y sus guardados no se modifican.": {
+  "en": "Start a career in another time. Your modern career and its saves stay untouched.",
+  "de": "Starte eine Karriere in einer anderen Zeit. Deine moderne Karriere und ihre Spielstände bleiben unverändert.",
+  "it": "Inizia una carriera in un'altra epoca. La carriera moderna e i suoi salvataggi restano intatti.",
+  "fr": "Commence une carrière à une autre époque. La carrière moderne et ses sauvegardes restent intactes."
+ },
+ "Década de inicio": {
+  "en": "Starting decade",
+  "de": "Startjahrzehnt",
+  "it": "Decennio di partenza",
+  "fr": "Décennie de départ"
+ },
+ "Año exacto": {
+  "en": "Exact year",
+  "de": "Genaues Jahr",
+  "it": "Anno esatto",
+  "fr": "Année exacte"
+ },
+ "Tipo de carrera": {
+  "en": "Career type",
+  "de": "Karrieretyp",
+  "it": "Tipo di carriera",
+  "fr": "Type de carrière"
+ },
+ "Carrera de jugador": {
+  "en": "Player career",
+  "de": "Spielerkarriere",
+  "it": "Carriera da giocatore",
+  "fr": "Carrière de joueur"
+ },
+ "Carrera de míster": {
+  "en": "Manager career",
+  "de": "Trainerkarriere",
+  "it": "Carriera da allenatore",
+  "fr": "Carrière d'entraîneur"
+ },
+ "Club": {
+  "en": "Club",
+  "de": "Verein",
+  "it": "Club",
+  "fr": "Club"
+ },
+ "Nombre": {
+  "en": "First name",
+  "de": "Vorname",
+  "it": "Nome",
+  "fr": "Prénom"
+ },
+ "Apellido": {
+  "en": "Surname",
+  "de": "Nachname",
+  "it": "Cognome",
+  "fr": "Nom"
+ },
+ "Reglas en {year}": {
+  "en": "Rules in {year}",
+  "de": "Regeln im Jahr {year}",
+  "it": "Regole nel {year}",
+  "fr": "Règles en {year}"
+ },
+ "{n} puntos por victoria": {
+  "en": "{n} points per win",
+  "de": "{n} Punkte pro Sieg",
+  "it": "{n} punti per vittoria",
+  "fr": "{n} points par victoire"
+ },
+ "Máximo {n} cambios": {
+  "en": "Maximum {n} substitutions",
+  "de": "Maximal {n} Auswechslungen",
+  "it": "Massimo {n} sostituzioni",
+  "fr": "Maximum {n} remplacements"
+ },
+ "Pase atrás prohibido": {
+  "en": "Back-pass rule active",
+  "de": "Rückpassregel aktiv",
+  "it": "Retropassaggio vietato",
+  "fr": "Passe en retrait interdite"
+ },
+ "Pase atrás permitido": {
+  "en": "Back-pass allowed",
+  "de": "Rückpass erlaubt",
+  "it": "Retropassaggio consentito",
+  "fr": "Passe en retrait autorisée"
+ },
+ "Ventanas de fichajes": {
+  "en": "Transfer windows",
+  "de": "Transferfenster",
+  "it": "Finestre di mercato",
+  "fr": "Fenêtres de transferts"
+ },
+ "Sin ventanas obligatorias": {
+  "en": "No mandatory windows",
+  "de": "Keine Pflicht-Transferfenster",
+  "it": "Nessuna finestra obbligatoria",
+  "fr": "Pas de fenêtres obligatoires"
+ },
+ "Redes disponibles": {
+  "en": "Social media available",
+  "de": "Soziale Medien verfügbar",
+  "it": "Social media disponibili",
+  "fr": "Réseaux sociaux disponibles"
+ },
+ "Sin redes sociales": {
+  "en": "No social media",
+  "de": "Keine sozialen Medien",
+  "it": "Niente social network",
+  "fr": "Pas de réseaux sociaux"
+ },
+ "VAR: no disponible": {
+  "en": "VAR: unavailable",
+  "de": "VAR: nicht verfügbar",
+  "it": "VAR: non disponibile",
+  "fr": "VAR : indisponible"
+ },
+ "VAR: {competitions}": {
+  "en": "VAR: {competitions}",
+  "de": "VAR: {competitions}",
+  "it": "VAR: {competitions}",
+  "fr": "VAR : {competitions}"
+ },
+ "Presentación: {kit}; {pitch}; {broadcast}.": {
+  "en": "Presentation: {kit}; {pitch}; {broadcast}.",
+  "de": "Präsentation: {kit}; {pitch}; {broadcast}.",
+  "it": "Presentazione: {kit}; {pitch}; {broadcast}.",
+  "fr": "Présentation : {kit} ; {pitch} ; {broadcast}."
+ },
+ "Canales: {channels}.": {
+  "en": "Media: {channels}.",
+  "de": "Medien: {channels}.",
+  "it": "Media: {channels}.",
+  "fr": "Médias : {channels}."
+ },
+ "Aún no hay carreras de Épocas guardadas en este dispositivo.": {
+  "en": "No era careers are saved on this device yet.",
+  "de": "Auf diesem Gerät sind noch keine Epochenkarrieren gespeichert.",
+  "it": "Non ci sono ancora carriere epoca salvate su questo dispositivo.",
+  "fr": "Aucune carrière d'époque n'est encore enregistrée sur cet appareil."
+ },
+ "Carrera": {
+  "en": "Career",
+  "de": "Karriere",
+  "it": "Carriera",
+  "fr": "Carrière"
+ },
+ "Sin club": {
+  "en": "No club",
+  "de": "Kein Verein",
+  "it": "Senza club",
+  "fr": "Sans club"
+ },
+ "Borrar guardado": {
+  "en": "Delete save",
+  "de": "Spielstand löschen",
+  "it": "Elimina salvataggio",
+  "fr": "Supprimer la sauvegarde"
+ },
+ "Continuar": {
+  "en": "Continue",
+  "de": "Fortsetzen",
+  "it": "Continua",
+  "fr": "Continuer"
+ },
+ "Empezar en {year}": {
+  "en": "Start in {year}",
+  "de": "Start im Jahr {year}",
+  "it": "Inizia nel {year}",
+  "fr": "Commencer en {year}"
+ },
+ "Volver": {
+  "en": "Back",
+  "de": "Zurück",
+  "it": "Indietro",
+  "fr": "Retour"
+ },
+ "Tus carreras históricas": {
+  "en": "Your era careers",
+  "de": "Deine Epochenkarrieren",
+  "it": "Le tue carriere d'epoca",
+  "fr": "Tes carrières d'époque"
+ },
+ "No se pudo iniciar la carrera de Épocas.": {
+  "en": "Could not start the era career.",
+  "de": "Die Epochenkarriere konnte nicht gestartet werden.",
+  "it": "Impossibile avviare la carriera epoca.",
+  "fr": "Impossible de démarrer la carrière d'époque."
+ },
+ "No se pudo cargar la carrera histórica.": {
+  "en": "Could not load the era career.",
+  "de": "Die Epochenkarriere konnte nicht geladen werden.",
+  "it": "Impossibile caricare la carriera epoca.",
+  "fr": "Impossible de charger la carrière d'époque."
+ },
+ "{decade} · {year}": {
+  "en": "{decade} · {year}",
+  "de": "{decade} · {year}",
+  "it": "{decade} · {year}",
+  "fr": "{decade} · {year}"
+ },
+ "{n} pts/victoria": {
+  "en": "{n} pts/win",
+  "de": "{n} Pkt/Sieg",
+  "it": "{n} pt/vittoria",
+  "fr": "{n} pts/victoire"
+ },
+ "Reglas": {
+  "en": "Rules",
+  "de": "Regeln",
+  "it": "Regole",
+  "fr": "Règles"
+ },
+ "Salir": {
+  "en": "Exit",
+  "de": "Beenden",
+  "it": "Esci",
+  "fr": "Quitter"
+ },
+ "Esta época permite {n} cambios por partido.": {
+  "en": "This era allows {n} substitutions per match.",
+  "de": "In dieser Epoche sind {n} Auswechslungen pro Spiel erlaubt.",
+  "it": "In quest'epoca sono consentite {n} sostituzioni a partita.",
+  "fr": "Cette époque autorise {n} remplacements par match."
+ },
+ "{n} guardadas": {
+  "en": "{n} saved",
+  "de": "{n} gespeichert",
+  "it": "{n} salvate",
+  "fr": "{n} sauvegardées"
+ },
+ "Periódicos": {
+  "en": "newspapers",
+  "de": "Zeitungen",
+  "it": "giornali",
+  "fr": "journaux"
+ },
+ "Radio": {
+  "en": "radio",
+  "de": "Radio",
+  "it": "radio",
+  "fr": "radio"
+ },
+ "Resúmenes televisivos semanales": {
+  "en": "weekly TV highlights",
+  "de": "wöchentliche TV-Zusammenfassungen",
+  "it": "highlights TV settimanali",
+  "fr": "résumés TV hebdomadaires"
+ },
+ "Tabloides": {
+  "en": "tabloids",
+  "de": "Boulevardzeitungen",
+  "it": "tabloid",
+  "fr": "tabloïds"
+ },
+ "Teletexto": {
+  "en": "teletext",
+  "de": "Teletext",
+  "it": "televideo",
+  "fr": "télétexte"
+ },
+ "Fanzines": {
+  "en": "fanzines",
+  "de": "Fanzines",
+  "it": "fanzine",
+  "fr": "fanzines"
+ },
+ "Programas de llamadas": {
+  "en": "phone-in shows",
+  "de": "Call-in-Sendungen",
+  "it": "programmi con telefonate",
+  "fr": "émissions interactives"
+ },
+ "Televisión en directo": {
+  "en": "live television",
+  "de": "Live-Fernsehen",
+  "it": "TV in diretta",
+  "fr": "télévision en direct"
+ },
+ "Webs de clubes": {
+  "en": "club websites",
+  "de": "Vereinswebsites",
+  "it": "siti dei club",
+  "fr": "sites des clubs"
+ },
+ "Foros": {
+  "en": "forums",
+  "de": "Foren",
+  "it": "forum",
+  "fr": "forums"
+ },
+ "Alertas SMS": {
+  "en": "SMS alerts",
+  "de": "SMS-Benachrichtigungen",
+  "it": "avvisi SMS",
+  "fr": "alertes SMS"
+ },
+ "Televisión deportiva": {
+  "en": "sports news TV",
+  "de": "Sportnachrichten im TV",
+  "it": "TV sportiva",
+  "fr": "TV sportive"
+ },
+ "Mercado de fichajes": {
+  "en": "transfer deadline day",
+  "de": "Deadline Day",
+  "it": "ultimo giorno di mercato",
+  "fr": "dernier jour du mercato"
+ },
+ "Redes sociales": {
+  "en": "social media",
+  "de": "soziale Medien",
+  "it": "social media",
+  "fr": "réseaux sociaux"
+ },
+ "Twitter": {
+  "en": "Twitter",
+  "de": "Twitter",
+  "it": "Twitter",
+  "fr": "Twitter"
+ },
+ "YouTube": {
+  "en": "YouTube",
+  "de": "YouTube",
+  "it": "YouTube",
+  "fr": "YouTube"
+ },
+ "Instagram": {
+  "en": "Instagram",
+  "de": "Instagram",
+  "it": "Instagram",
+  "fr": "Instagram"
+ },
+ "TikTok": {
+  "en": "TikTok",
+  "de": "TikTok",
+  "it": "TikTok",
+  "fr": "TikTok"
+ },
+ "Canales de aficionados": {
+  "en": "fan channels",
+  "de": "Fan-Kanäle",
+  "it": "canali dei tifosi",
+  "fr": "chaînes de supporters"
+ },
+ "Clips virales": {
+  "en": "viral clips",
+  "de": "virale Clips",
+  "it": "clip virali",
+  "fr": "extraits viraux"
+ },
+ "Barro invernal": {
+  "en": "winter mud",
+  "de": "Wintermatsch",
+  "it": "fango invernale",
+  "fr": "boue hivernale"
+ },
+ "Transición a césped híbrido": {
+  "en": "transition to hybrid turf",
+  "de": "Umstellung auf Hybridrasen",
+  "it": "transizione all'erba ibrida",
+  "fr": "transition vers une pelouse hybride"
+ },
+ "Césped híbrido": {
+  "en": "hybrid turf",
+  "de": "Hybridrasen",
+  "it": "erba ibrida",
+  "fr": "pelouse hybride"
+ },
+ "Césped híbrido con calefacción": {
+  "en": "heated hybrid turf",
+  "de": "beheizter Hybridrasen",
+  "it": "erba ibrida riscaldata",
+  "fr": "pelouse hybride chauffée"
+ },
+ "Transición a gradas con asientos": {
+  "en": "gradual all-seater transition",
+  "de": "schrittweiser Umbau zu Sitzplätzen",
+  "it": "transizione graduale ai posti a sedere",
+  "fr": "transition progressive vers les tribunes assises"
+ },
+ "Gradas de pie": {
+  "en": "standing terraces",
+  "de": "Stehplätze",
+  "it": "tribune in piedi",
+  "fr": "tribunes debout"
+ },
+ "Estadios con asientos": {
+  "en": "all-seater grounds",
+  "de": "Stadien mit Sitzplätzen",
+  "it": "stadi con posti a sedere",
+  "fr": "stades tout assis"
+ },
+ "Balón de cuero pesado": {
+  "en": "heavy leather ball",
+  "de": "schwerer Lederball",
+  "it": "pallone di cuoio pesante",
+  "fr": "ballon en cuir lourd"
+ },
+ "Balón híbrido Umbro": {
+  "en": "Umbro leather hybrid ball",
+  "de": "Umbro-Leder-Hybridball",
+  "it": "pallone ibrido in pelle Umbro",
+  "fr": "ballon hybride cuir Umbro"
+ },
+ "Anuncios estáticos": {
+  "en": "static advertising boards",
+  "de": "statische Werbebanden",
+  "it": "cartelloni statici",
+  "fr": "panneaux publicitaires statiques"
+ },
+ "LED dinámico": {
+  "en": "dynamic LED boards",
+  "de": "dynamische LED-Banden",
+  "it": "pannelli LED dinamici",
+  "fr": "panneaux LED dynamiques"
+ },
+ "Televisión 4:3 granulada": {
+  "en": "grainy 4:3 broadcast",
+  "de": "körnige 4:3-Übertragung",
+  "it": "trasmissione 4:3 granulosa",
+  "fr": "diffusion 4:3 granuleuse"
+ },
+ "Definición estándar panorámica": {
+  "en": "SD widescreen",
+  "de": "SD-Breitbild",
+  "it": "SD panoramica",
+  "fr": "SD panoramique"
+ },
+ "Alta definición": {
+  "en": "high definition",
+  "de": "hohe Auflösung",
+  "it": "alta definizione",
+  "fr": "haute définition"
+ },
+ "4K y gráficos actuales": {
+  "en": "4K with modern graphics",
+  "de": "4K mit moderner Grafik",
+  "it": "4K con grafica moderna",
+  "fr": "4K avec graphismes modernes"
+ },
+ "Corte clásico de los 70": {
+  "en": "classic 70s cut",
+  "de": "klassischer 70er-Schnitt",
+  "it": "taglio classico anni '70",
+  "fr": "coupe classique des années 70"
+ },
+ "Corte clásico de los 80": {
+  "en": "classic 80s cut",
+  "de": "klassischer 80er-Schnitt",
+  "it": "taglio classico anni '80",
+  "fr": "coupe classique des années 80"
+ },
+ "Camiseta holgada de los 90": {
+  "en": "baggy 90s shirt",
+  "de": "weites Trikot der 90er",
+  "it": "maglia larga anni '90",
+  "fr": "maillot ample des années 90"
+ },
+ "Equipación entallada de los 2000": {
+  "en": "fitted 00s kit",
+  "de": "eng anliegendes Trikot der 2000er",
+  "it": "maglia aderente anni 2000",
+  "fr": "maillot ajusté des années 2000"
+ },
+ "Corte atlético moderno": {
+  "en": "modern athletic cut",
+  "de": "moderner sportlicher Schnitt",
+  "it": "taglio atletico moderno",
+  "fr": "coupe sportive moderne"
+ },
+ "Equipación de alto rendimiento": {
+  "en": "performance kit",
+  "de": "Performance-Trikot",
+  "it": "divisa tecnica",
+  "fr": "tenue haute performance"
+ },
+ "Todo el año": {
+  "en": "Year-round",
+  "de": "Ganzjährig",
+  "it": "Tutto l'anno",
+  "fr": "Toute l'année"
+ },
+ "Las transferencias se permiten durante todo el año.": {
+  "en": "Transfers are allowed throughout the year.",
+  "de": "Transfers sind das ganze Jahr über möglich.",
+  "it": "I trasferimenti sono consentiti tutto l'anno.",
+  "fr": "Les transferts sont autorisés toute l'année."
+ },
+ "Puedes fichar, vender o ceder durante todo el año.": {
+  "en": "You can sign, sell or loan players throughout the year.",
+  "de": "Du kannst das ganze Jahr über Spieler verpflichten, verkaufen oder verleihen.",
+  "it": "Puoi acquistare, vendere o cedere giocatori tutto l'anno.",
+  "fr": "Tu peux recruter, vendre ou prêter des joueurs toute l'année."
+ },
+ "Economía: salarios ×{wage}; mercado ×{market}; televisión ×{tv} ({currency}).": {
+  "en": "Economy: wages ×{wage}; market ×{market}; television ×{tv} ({currency}).",
+  "de": "Wirtschaft: Gehälter ×{wage}; Markt ×{market}; TV ×{tv} ({currency}).",
+  "it": "Economia: stipendi ×{wage}; mercato ×{market}; TV ×{tv} ({currency}).",
+  "fr": "Économie : salaires ×{wage} ; marché ×{market} ; télévision ×{tv} ({currency})."
+ },
+ "Personal de apoyo: {n}; {science}; {analytics}.": {
+  "en": "Backroom staff: {n}; {science}; {analytics}.",
+  "de": "Betreuerstab: {n}; {science}; {analytics}.",
+  "it": "Staff: {n}; {science}; {analytics}.",
+  "fr": "Encadrement : {n} ; {science} ; {analytics}."
+ },
+ "Preparación física básica": {
+  "en": "basic sports science",
+  "de": "grundlegende Sportwissenschaft",
+  "it": "preparazione atletica di base",
+  "fr": "préparation physique de base"
+ },
+ "Ciencia deportiva en desarrollo": {
+  "en": "developing sports science",
+  "de": "Sportwissenschaft im Aufbau",
+  "it": "scienza dello sport in crescita",
+  "fr": "science du sport en développement"
+ },
+ "Ciencia deportiva avanzada": {
+  "en": "advanced sports science",
+  "de": "fortgeschrittene Sportwissenschaft",
+  "it": "scienza dello sport avanzata",
+  "fr": "science du sport avancée"
+ },
+ "Ciencia deportiva con análisis de datos": {
+  "en": "data-driven sports science",
+  "de": "datenbasierte Sportwissenschaft",
+  "it": "scienza dello sport basata sui dati",
+  "fr": "science du sport pilotée par les données"
+ },
+ "Análisis de datos disponible": {
+  "en": "data analysis available",
+  "de": "Datenanalyse verfügbar",
+  "it": "analisi dei dati disponibile",
+  "fr": "analyse de données disponible"
+ },
+ "Análisis de datos no disponible": {
+  "en": "no data analysis",
+  "de": "keine Datenanalyse",
+  "it": "analisi dei dati non disponibile",
+  "fr": "pas d'analyse de données"
+ },
+ "Las redes sociales todavía no están disponibles en este año.": {
+  "en": "Social media are not available in this year yet.",
+  "de": "Soziale Medien sind in diesem Jahr noch nicht verfügbar.",
+  "it": "I social media non sono ancora disponibili in quest'anno.",
+  "fr": "Les réseaux sociaux ne sont pas encore disponibles cette année."
+ },
+ "Ojeo e información imperfecta": {
+  "en": "Scouting and imperfect information",
+  "de": "Scouting und unvollständige Informationen",
+  "it": "Scouting e informazioni incomplete",
+  "fr": "Recrutement et information imparfaite"
+ },
+ "Cantera y continuidad generacional": {
+  "en": "Academy and the next generation",
+  "de": "Nachwuchs und die nächste Generation",
+  "it": "Settore giovanile e nuova generazione",
+  "fr": "Centre de formation et nouvelle génération"
+ },
+ "Entrenamiento y preparación física": {
+  "en": "Training and fitness",
+  "de": "Training und Fitness",
+  "it": "Allenamento e preparazione fisica",
+  "fr": "Entraînement et préparation physique"
+ },
+ "Fichajes y contratos": {
+  "en": "Transfers and contracts",
+  "de": "Transfers und Verträge",
+  "it": "Trasferimenti e contratti",
+  "fr": "Transferts et contrats"
+ },
+ "Economía y control salarial": {
+  "en": "Club finances and wage control",
+  "de": "Vereinsfinanzen und Gehaltskontrolle",
+  "it": "Finanze del club e controllo degli stipendi",
+  "fr": "Finances du club et maîtrise salariale"
+ },
+ "Instalaciones y recursos del club": {
+  "en": "Facilities and club resources",
+  "de": "Anlagen und Vereinsressourcen",
+  "it": "Strutture e risorse del club",
+  "fr": "Infrastructures et ressources du club"
+ },
+ "Equipación e identidad del club": {
+  "en": "Kits and club identity",
+  "de": "Trikots und Vereinsidentität",
+  "it": "Divise e identità del club",
+  "fr": "Tenues et identité du club"
+ },
+ "Medios y reputación": {
+  "en": "Media and reputation",
+  "de": "Medien und Ansehen",
+  "it": "Media e reputazione",
+  "fr": "Médias et réputation"
+ },
+ "Táctica y adaptación al reglamento": {
+  "en": "Tactics and adapting to the rules",
+  "de": "Taktik und Anpassung an die Regeln",
+  "it": "Tattica e adattamento alle regole",
+  "fr": "Tactique et adaptation au règlement"
+ },
+ "Viajes, calendario y recuperación": {
+  "en": "Travel, scheduling and recovery",
+  "de": "Reisen, Spielplan und Erholung",
+  "it": "Viaggi, calendario e recupero",
+  "fr": "Déplacements, calendrier et récupération"
+ },
+ "{topic} · {context}": {
+  "en": "{topic} · {context}",
+  "de": "{topic} · {context}",
+  "it": "{topic} · {context}",
+  "fr": "{topic} · {context}"
+ },
+ "{period} {body}": {
+  "en": "{period} {body}",
+  "de": "{period} {body}",
+  "it": "{period} {body}",
+  "fr": "{period} {body}"
+ },
+ "Este dilema de gestión es una situación ficticia de juego, no un episodio histórico atribuido a un club real. Elige según los efectos mostrados.": {
+  "en": "This management dilemma is a fictional game scenario, not a historical event attributed to a real club. Choose based on the effects shown.",
+  "de": "Dieses Management-Dilemma ist eine fiktive Spielsituation und kein realem Verein zugeschriebenes historisches Ereignis. Entscheide anhand der angezeigten Folgen.",
+  "it": "Questo dilemma gestionale è una situazione di gioco fittizia, non un evento storico attribuito a un club reale. Scegli in base agli effetti mostrati.",
+  "fr": "Ce dilemme de gestion est une situation fictive du jeu, pas un événement historique attribué à un vrai club. Choisis selon les effets affichés."
+ },
+ "Acelerar con inversión": {
+  "en": "Invest now",
+  "de": "Jetzt investieren",
+  "it": "Investire subito",
+  "fr": "Investir maintenant"
+ },
+ "Probar por fases": {
+  "en": "Pilot in stages",
+  "de": "Schrittweise erproben",
+  "it": "Sperimentare per fasi",
+  "fr": "Tester par étapes"
+ },
+ "Aplazar y proteger recursos": {
+  "en": "Delay and protect resources",
+  "de": "Verschieben und Ressourcen schonen",
+  "it": "Rimandare e proteggere le risorse",
+  "fr": "Reporter et préserver les ressources"
+ },
+ "Mayor coste inmediato; impulsa {lever}, desarrollo y conocimiento.": {
+  "en": "Higher immediate cost; boosts {lever}, development and knowledge.",
+  "de": "Höhere Sofortkosten; stärkt {lever}, Entwicklung und Wissen.",
+  "it": "Costo immediato maggiore; favorisce {lever}, sviluppo e conoscenze.",
+  "fr": "Coût immédiat plus élevé ; stimule {lever}, le développement et les connaissances."
+ },
+ "Coste moderado y avance gradual; opción equilibrada.": {
+  "en": "Moderate cost and gradual progress; a balanced option.",
+  "de": "Moderate Kosten und schrittweiser Fortschritt; eine ausgewogene Option.",
+  "it": "Costo moderato e progressi graduali; una scelta equilibrata.",
+  "fr": "Coût modéré et progrès progressifs ; une option équilibrée."
+ },
+ "Libera recursos ahora, pero sacrifica impulso en {lever}.": {
+  "en": "Frees resources now, but gives up momentum in {lever}.",
+  "de": "Schont jetzt Ressourcen, kostet aber Schwung bei {lever}.",
+  "it": "Libera risorse ora, ma sacrifica slancio in {lever}.",
+  "fr": "Libère des ressources aujourd'hui, mais freine {lever}."
+ },
+ "Ojeo y conocimiento": {
+  "en": "scouting and knowledge",
+  "de": "Scouting und Wissen",
+  "it": "scouting e conoscenze",
+  "fr": "recrutement et connaissance"
+ },
+ "desarrollo": {
+  "en": "development",
+  "de": "Entwicklung",
+  "it": "sviluppo",
+  "fr": "développement"
+ },
+ "preparación": {
+  "en": "fitness",
+  "de": "Fitness",
+  "it": "preparazione",
+  "fr": "préparation"
+ },
+ "presupuesto": {
+  "en": "club funds",
+  "de": "Vereinsbudget",
+  "it": "budget del club",
+  "fr": "budget du club"
+ },
+ "cultura": {
+  "en": "club culture",
+  "de": "Vereinskultur",
+  "it": "cultura del club",
+  "fr": "culture du club"
+ },
+ "reputación": {
+  "en": "reputation",
+  "de": "Ansehen",
+  "it": "reputazione",
+  "fr": "réputation"
+ },
+ "rendimiento físico": {
+  "en": "fitness",
+  "de": "Fitness",
+  "it": "condizione fisica",
+  "fr": "condition physique"
+ },
+ "Decisión de época": {
+  "en": "Era decision",
+  "de": "Epochenentscheidung",
+  "it": "Decisione d'epoca",
+  "fr": "Décision d'époque"
+ },
+ "Decisión de gestión": {
+  "en": "Management decision",
+  "de": "Managemententscheidung",
+  "it": "Decisione gestionale",
+  "fr": "Décision de gestion"
+ },
+ "Se ha alcanzado el máximo de decisiones del registro.": {
+  "en": "The decision log has reached its limit.",
+  "de": "Das Entscheidungsprotokoll hat seine Grenze erreicht.",
+  "it": "Il registro delle decisioni ha raggiunto il limite.",
+  "fr": "Le journal des décisions a atteint sa limite."
+ },
+ "Marco de juego de los años 70: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {
+  "en": "Game frame for the 1970s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.",
+  "de": "Spielrahmen der 1970er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.",
+  "it": "Cornice di gioco degli anni 70: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.",
+  "fr": "Cadre de jeu des années 70 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."
+ },
+ "Marco de juego de los años 80: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {
+  "en": "Game frame for the 1980s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.",
+  "de": "Spielrahmen der 1980er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.",
+  "it": "Cornice di gioco degli anni 80: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.",
+  "fr": "Cadre de jeu des années 80 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."
+ },
+ "Marco de juego de los años 90: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {
+  "en": "Game frame for the 1990s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.",
+  "de": "Spielrahmen der 1990er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.",
+  "it": "Cornice di gioco degli anni 90: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.",
+  "fr": "Cadre de jeu des années 90 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."
+ },
+ "Marco de juego de los años 2000: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {
+  "en": "Game frame for the 2000s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.",
+  "de": "Spielrahmen der 2000er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.",
+  "it": "Cornice di gioco degli anni 2000: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.",
+  "fr": "Cadre de jeu des années 2000 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."
+ },
+ "Marco de juego de los años 2010: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {
+  "en": "Game frame for the 2010s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.",
+  "de": "Spielrahmen der 2010er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.",
+  "it": "Cornice di gioco degli anni 2010: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.",
+  "fr": "Cadre de jeu des années 2010 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."
+ },
+ "Marco de juego de los años 2020: las diferencias de economía, medios y presentación siguen el perfil configurado; es una simplificación, no una descripción universal.": {
+  "en": "Game frame for the 2020s: economic, media and presentation differences follow the configured profile; this is a simplification, not a universal description.",
+  "de": "Spielrahmen der 2020er: Unterschiede bei Wirtschaft, Medien und Präsentation folgen dem konfigurierten Profil; eine Vereinfachung, keine allgemeingültige Beschreibung.",
+  "it": "Cornice di gioco degli anni 2020: le differenze economiche, mediatiche e di presentazione seguono il profilo configurato; è una semplificazione, non una descrizione universale.",
+  "fr": "Cadre de jeu des années 2020 : les différences économiques, médiatiques et de présentation suivent le profil configuré ; c'est une simplification, pas une description universelle."
+ },
+ "Efecto confirmado": {
+  "en": "Confirmed effect",
+  "de": "Bestätigte Wirkung",
+  "it": "Effetto confermato",
+  "fr": "Effet confirmé"
+ },
+ "Decisión de época aplicada y añadida a tu legado.": {
+  "en": "Era decision applied and added to your legacy.",
+  "de": "Epochenentscheidung angewendet und zum Vermächtnis hinzugefügt.",
+  "it": "Decisione d'epoca applicata e aggiunta alla tua storia.",
+  "fr": "Décision d'époque appliquée et ajoutée à ton héritage."
+ },
+ "Entrenamiento futuro {n} puntos porcentuales": {
+  "en": "Future training growth {n} percentage points",
+  "de": "Künftiger Trainingszuwachs {n} Prozentpunkte",
+  "it": "Crescita futura dall'allenamento {n} punti percentuali",
+  "fr": "Progression future à l'entraînement {n} points de pourcentage"
+ },
+ "Nivel de ojeo {n}": {
+  "en": "Scouting level {n}",
+  "de": "Scouting-Stufe {n}",
+  "it": "Livello di scouting {n}",
+  "fr": "Niveau de recrutement {n}"
+ },
+ "Profesionalidad {n}": {
+  "en": "Professionalism {n}",
+  "de": "Professionalität {n}",
+  "it": "Professionalità {n}",
+  "fr": "Professionnalisme {n}"
+ },
+ "VAR aplicado solo en Premier League y La Liga cuando la cronología lo permite.": {
+  "en": "VAR is applied only in the Premier League and La Liga when the timeline enables it.",
+  "de": "VAR wird nur in der Premier League und La Liga angewendet, wenn die Chronologie es vorsieht.",
+  "it": "Il VAR è applicato solo in Premier League e Liga quando la cronologia lo consente.",
+  "fr": "La VAR est appliquée uniquement en Premier League et en Liga lorsque la chronologie le permet."
+ },
+ "Canales mostrados en el HUD; no simulan una red de contactos.": {
+  "en": "Channels shown in the HUD; they do not simulate a contact network.",
+  "de": "Im HUD angezeigte Kanäle; sie simulieren kein Kontaktnetzwerk.",
+  "it": "Canali mostrati nell'HUD; non simulano una rete di contatti.",
+  "fr": "Canaux affichés dans le HUD ; ils ne simulent pas un réseau de contacts."
+ },
+ "Referencia de ambientación, aún no aplicada al juego: {kit}; {pitch}; {broadcast}.": {
+  "en": "Atmosphere reference, not yet applied in-game: {kit}; {pitch}; {broadcast}.",
+  "de": "Atmosphärische Referenz, noch nicht im Spiel umgesetzt: {kit}; {pitch}; {broadcast}.",
+  "it": "Riferimento di ambientazione, non ancora applicato nel gioco: {kit}; {pitch}; {broadcast}.",
+  "fr": "Référence d'ambiance, pas encore appliquée en jeu : {kit} ; {pitch} ; {broadcast}."
+ },
+ "Interfaz aplicada: teletexto.": {
+  "en": "Applied interface: teletext.",
+  "de": "Angewendete Oberfläche: Teletext.",
+  "it": "Interfaccia applicata: televideo.",
+  "fr": "Interface appliquée : télétexte."
+ },
+ "Interfaz aplicada: marcador impreso.": {
+  "en": "Applied interface: printed scoreboard.",
+  "de": "Angewendete Oberfläche: gedruckte Anzeigetafel.",
+  "it": "Interfaccia applicata: tabellone stampato.",
+  "fr": "Interface appliquée : tableau d'affichage imprimé."
+ },
+ "Interfaz aplicada: estilo moderno.": {
+  "en": "Applied interface: modern style.",
+  "de": "Angewendete Oberfläche: moderner Stil.",
+  "it": "Interfaccia applicata: stile moderno.",
+  "fr": "Interface appliquée : style moderne."
+ },
+ "Escalas económicas simuladas para salarios, valores y presupuestos.": {
+  "en": "Simulated economic scales for wages, market values and budgets.",
+  "de": "Simulierte Wirtschaftsfaktoren für Gehälter, Marktwerte und Budgets.",
+  "it": "Scale economiche simulate per stipendi, valori di mercato e budget.",
+  "fr": "Échelles économiques simulées pour les salaires, valeurs marchandes et budgets."
+ },
+ "Salarios ×{wage}; mercado ×{market}; presupuesto ×{tv}.": {
+  "en": "Wages ×{wage}; market values ×{market}; budgets ×{tv}.",
+  "de": "Gehälter ×{wage}; Marktwerte ×{market}; Budgets ×{tv}.",
+  "it": "Stipendi ×{wage}; valori di mercato ×{market}; budget ×{tv}.",
+  "fr": "Salaires ×{wage} ; valeurs marchandes ×{market} ; budgets ×{tv}."
+ },
+ "Coste inmediato alto; refuerza el área elegida a largo plazo.": {
+  "en": "Higher immediate cost; strengthens the chosen area over time.",
+  "de": "Höhere Sofortkosten; stärkt den gewählten Bereich langfristig.",
+  "it": "Costo immediato maggiore; rafforza nel tempo l'area scelta.",
+  "fr": "Coût immédiat plus élevé ; renforce le domaine choisi à long terme."
+ },
+ "Coste y beneficio moderados; permite aprender antes de ampliar.": {
+  "en": "Moderate cost and benefit; learn before scaling up.",
+  "de": "Moderate Kosten und Vorteile; erst lernen, dann ausbauen.",
+  "it": "Costi e benefici moderati; permette di imparare prima di ampliare.",
+  "fr": "Coût et bénéfice modérés ; permet d'apprendre avant d'élargir."
+ },
+ "Protege recursos ahora, pero reduce el impulso futuro.": {
+  "en": "Protects resources now, but reduces future momentum.",
+  "de": "Schont jetzt Ressourcen, bremst aber den künftigen Fortschritt.",
+  "it": "Protegge le risorse ora, ma riduce lo slancio futuro.",
+  "fr": "Préserve les ressources aujourd'hui, mais réduit l'élan futur."
+ },
+ "Prenda 3D generada con colores del club: {kit}; terreno y TV aún son referencias: {pitch}; {broadcast}.": {
+  "en": "Procedural 3D kit in club colours: {kit}; pitch and broadcast are still references: {pitch}; {broadcast}.",
+  "de": "Prozedurales 3D-Trikot in Vereinsfarben: {kit}; Platz und Übertragung sind weiterhin Referenzen: {pitch}; {broadcast}.",
+  "it": "Divisa 3D procedurale nei colori del club: {kit}; campo e TV sono ancora riferimenti: {pitch}; {broadcast}.",
+  "fr": "Tenue 3D procédurale aux couleurs du club : {kit} ; terrain et diffusion restent des références : {pitch} ; {broadcast}."
+ },
+ "Detalle retro de los 70": {
+  "en": "1970s retro detail",
+  "de": "Retro-Detail der 1970er",
+  "it": "Dettaglio rétro anni 70",
+  "fr": "Détail rétro des années 70"
+ },
+ "Patrón chevron de los 80": {
+  "en": "1980s chevron pattern",
+  "de": "Chevronmuster der 1980er",
+  "it": "Motivo chevron anni 80",
+  "fr": "Motif chevron des années 80"
+ },
+ "Franjas horizontales de los 90": {
+  "en": "1990s horizontal hoops",
+  "de": "Horizontale Streifen der 1990er",
+  "it": "Fasce orizzontali anni 90",
+  "fr": "Bandes horizontales des années 90"
+ },
+ "Panel dividido de los 2000": {
+  "en": "2000s split panel",
+  "de": "Geteiltes Panel der 2000er",
+  "it": "Pannello diviso anni 2000",
+  "fr": "Panneau divisé des années 2000"
+ },
+ "Diseño geométrico de los 2010": {
+  "en": "2010s geometric design",
+  "de": "Geometrisches Design der 2010er",
+  "it": "Design geometrico anni 2010",
+  "fr": "Design géométrique des années 2010"
+ },
+ "Detalle técnico geométrico de los 2020": {
+  "en": "2020s technical geometric detail",
+  "de": "Technisches geometrisches Detail der 2020er",
+  "it": "Dettaglio geometrico tecnico anni 2020",
+  "fr": "Détail géométrique technique des années 2020"
+ },
+ "Perfil de juego: {points} puntos por victoria, máximo {subs} cambios, {windows}; {social}.": {
+  "en": "Game profile: {points} points per win, maximum {subs} substitutions, {windows}; {social}.",
+  "de": "Spielprofil: {points} Punkte pro Sieg, maximal {subs} Auswechslungen, {windows}; {social}.",
+  "it": "Profilo di gioco: {points} punti a vittoria, massimo {subs} sostituzioni, {windows}; {social}.",
+  "fr": "Profil de jeu : {points} points par victoire, {subs} remplacements maximum, {windows} ; {social}."
+ },
+ "Skin del perfil ({skin}) aún no aplicada; se conserva la interfaz estándar.": {
+  "en": "Profile skin ({skin}) is not applied yet; the standard interface is kept.",
+  "de": "Profil-Skin ({skin}) noch nicht angewendet; die Standardoberfläche bleibt erhalten.",
+  "it": "La skin del profilo ({skin}) non è ancora applicata; resta l'interfaccia standard.",
+  "fr": "Le thème du profil ({skin}) n'est pas encore appliqué ; l'interface standard est conservée."
+ },
+ "Estilo de prenda 3D del perfil (si no llevas una propia): {kit}, con colores del club; terreno y TV aún son referencias: {pitch}; {broadcast}.": {
+  "en": "Profile 3D kit style (unless you wear your own): {kit}, in club colours; pitch and TV remain references: {pitch}; {broadcast}.",
+  "de": "3D-Trikotstil des Profils (sofern kein eigenes getragen wird): {kit} in Vereinsfarben; Platz und TV bleiben Referenzen: {pitch}; {broadcast}.",
+  "it": "Stile della divisa 3D del profilo (se non ne indossi una tua): {kit}, nei colori del club; campo e TV restano riferimenti: {pitch}; {broadcast}.",
+  "fr": "Style de tenue 3D du profil (sauf si tu en portes une à toi) : {kit}, aux couleurs du club ; terrain et TV restent des références : {pitch} ; {broadcast}."
+ },
+ "En directo: máximo {n} cambios": {
+  "en": "Live match: maximum {n} substitutions",
+  "de": "Live-Spiel: maximal {n} Auswechslungen",
+  "it": "Partita in diretta: massimo {n} sostituzioni",
+  "fr": "Match en direct : {n} remplacements maximum"
+ },
+ "Decisiones recientes": {
+  "en": "Recent decisions",
+  "de": "Letzte Entscheidungen",
+  "it": "Decisioni recenti",
+  "fr": "Décisions récentes"
+ },
+ "Aún no has tomado decisiones de época.": {
+  "en": "You have not made any era decisions yet.",
+  "de": "Du hast noch keine Epochenentscheidungen getroffen.",
+  "it": "Non hai ancora preso decisioni d'epoca.",
+  "fr": "Tu n'as pas encore pris de décisions d'époque."
+ },
+ "El informe en papel del ojeador local solo cubre una observación del posible fichaje.": {
+  "en": "The local scout's paper report covers only one viewing of the potential signing.",
+  "de": "Der Papierbericht des lokalen Scouts beruht nur auf einer Beobachtung des möglichen Neuzugangs.",
+  "it": "Il rapporto cartaceo dell'osservatore locale copre una sola visione del possibile acquisto.",
+  "fr": "Le rapport papier de l'observateur local ne couvre qu'une seule observation de la recrue potentielle."
+ },
+ "El campo pesado y un viaje largo obligan a repartir el trabajo físico con cuidado.": {
+  "en": "A heavy pitch and a long trip call for careful management of physical work.",
+  "de": "Ein schwerer Platz und eine lange Reise erfordern eine sorgfältige Verteilung der körperlichen Belastung.",
+  "it": "Un campo pesante e una lunga trasferta impongono di distribuire con attenzione il lavoro fisico.",
+  "fr": "Un terrain lourd et un long déplacement obligent à répartir prudemment le travail physique."
+ },
+ "Una promesa necesita aprender junto a un titular, pero el once exige resultados.": {
+  "en": "A prospect needs to learn beside a starter, but the first team demands results.",
+  "de": "Ein Talent muss von einem Stammspieler lernen, doch die erste Mannschaft verlangt Ergebnisse.",
+  "it": "Un giovane deve imparare accanto a un titolare, ma la prima squadra pretende risultati.",
+  "fr": "Un espoir doit apprendre aux côtés d'un titulaire, mais l'équipe première exige des résultats."
+ },
+ "Un veterano propone enseñar sus rutinas a los jóvenes antes de renovar.": {
+  "en": "A veteran offers to teach their routines to younger players before renewing.",
+  "de": "Ein Routinier bietet an, den Jüngeren vor einer Verlängerung seine Abläufe zu vermitteln.",
+  "it": "Un veterano propone di insegnare ai giovani le proprie abitudini prima di rinnovare.",
+  "fr": "Un vétéran propose de transmettre ses habitudes aux jeunes avant de renouveler."
+ },
+ "El personal disponible no puede atender a la vez la recuperación y el entrenamiento extra.": {
+  "en": "The available staff cannot handle recovery and extra training at the same time.",
+  "de": "Das verfügbare Personal kann Erholung und zusätzliches Training nicht gleichzeitig betreuen.",
+  "it": "Lo staff disponibile non riesce a seguire contemporaneamente recupero e allenamento extra.",
+  "fr": "Le personnel disponible ne peut pas gérer à la fois la récupération et l'entraînement supplémentaire."
+ },
+ "La directiva limita el gasto y pide decidir qué mejora del club puede esperar.": {
+  "en": "The board limits spending and asks which club improvement can wait.",
+  "de": "Die Vereinsführung begrenzt die Ausgaben und fragt, welche Verbesserung warten kann.",
+  "it": "La dirigenza limita le spese e chiede quale miglioramento del club possa attendere.",
+  "fr": "La direction limite les dépenses et demande quelle amélioration du club peut attendre."
+ },
+ "La afición quiere que la nueva camiseta conserve una seña reconocible del club.": {
+  "en": "Supporters want the new shirt to keep a recognizable club feature.",
+  "de": "Die Fans möchten, dass das neue Trikot ein erkennbares Vereinsmerkmal bewahrt.",
+  "it": "I tifosi vogliono che la nuova maglia conservi un segno riconoscibile del club.",
+  "fr": "Les supporters veulent que le nouveau maillot conserve un signe distinctif du club."
+ },
+ "La planificación del viaje compite con una sesión adicional antes del partido.": {
+  "en": "Travel planning competes with an extra session before the match.",
+  "de": "Die Reiseplanung konkurriert mit einer zusätzlichen Einheit vor dem Spiel.",
+  "it": "La pianificazione del viaggio compete con una seduta aggiuntiva prima della partita.",
+  "fr": "La préparation du déplacement entre en concurrence avec une séance supplémentaire avant le match."
+ },
+ "La prensa local cuestiona que un titular se quede fuera de la convocatoria.": {
+  "en": "The local press questions why a starter is left out of the squad.",
+  "de": "Die lokale Presse fragt, warum ein Stammspieler nicht im Kader steht.",
+  "it": "La stampa locale si chiede perché un titolare sia stato escluso dalla convocazione.",
+  "fr": "La presse locale demande pourquoi un titulaire est écarté du groupe."
+ },
+ "Una variación en las reglas de la competición obliga a preparar otra respuesta táctica.": {
+  "en": "A competition rule change requires the team to prepare another tactical response.",
+  "de": "Eine Regeländerung des Wettbewerbs verlangt eine weitere taktische Antwort.",
+  "it": "Un cambio di regolamento della competizione richiede una risposta tattica alternativa.",
+  "fr": "Un changement de règlement de la compétition impose une autre réponse tactique."
+ },
+ "Unas grabaciones de vídeo amplían el informe del ojeador, pero dejan dudas sobre el jugador.": {
+  "en": "Video recordings expand the scout's report but still leave doubts about the player.",
+  "de": "Videoaufnahmen ergänzen den Scoutbericht, lassen aber Zweifel am Spieler offen.",
+  "it": "Le registrazioni video ampliano il rapporto dell'osservatore, ma lasciano dubbi sul giocatore.",
+  "fr": "Des enregistrements vidéo complètent le rapport du recruteur, mais laissent des doutes sur le joueur."
+ },
+ "La plantilla pide recuperar mejor entre partidos y desplazamientos.": {
+  "en": "The squad asks for better recovery between matches and trips.",
+  "de": "Der Kader verlangt bessere Erholung zwischen Spielen und Reisen.",
+  "it": "La squadra chiede un recupero migliore tra partite e trasferte.",
+  "fr": "L'effectif demande une meilleure récupération entre les matchs et les déplacements."
+ },
+ "El patrocinador ofrece recursos a cambio de mayor presencia en la equipación.": {
+  "en": "The sponsor offers resources in exchange for greater visibility on the kit.",
+  "de": "Der Sponsor bietet Mittel im Gegenzug für mehr Präsenz auf dem Trikot.",
+  "it": "Lo sponsor offre risorse in cambio di maggiore visibilità sulla maglia.",
+  "fr": "Le sponsor offre des moyens en échange d'une plus grande visibilité sur la tenue."
+ },
+ "Un veterano con influencia interna pide garantías antes de renovar.": {
+  "en": "An influential veteran asks for assurances before renewing.",
+  "de": "Ein einflussreicher Routinier verlangt vor einer Verlängerung Zusicherungen.",
+  "it": "Un veterano influente chiede garanzie prima di rinnovare.",
+  "fr": "Un vétéran influent demande des garanties avant de renouveler."
+ },
+ "El club puede contratar apoyo para la preparación, pero tendría que recortar otra partida.": {
+  "en": "The club can hire preparation support, but another budget line must be cut.",
+  "de": "Der Verein kann Unterstützung für die Vorbereitung einstellen, muss dafür aber anderswo kürzen.",
+  "it": "Il club può assumere un supporto per la preparazione, ma deve tagliare un'altra voce.",
+  "fr": "Le club peut renforcer la préparation, mais doit réduire un autre poste budgétaire."
+ },
+ "La directiva fija un tope de gasto antes de completar la plantilla.": {
+  "en": "The board sets a spending ceiling before the squad is complete.",
+  "de": "Die Vereinsführung setzt eine Ausgabenobergrenze, bevor der Kader vollständig ist.",
+  "it": "La dirigenza fissa un tetto di spesa prima di completare la rosa.",
+  "fr": "La direction fixe un plafond de dépenses avant que l'effectif soit complet."
+ },
+ "El diseño de la camiseta enfrenta tradición del club y una propuesta comercial.": {
+  "en": "The shirt design pits club tradition against a commercial proposal.",
+  "de": "Beim Trikotdesign stehen Vereinstradition und ein kommerzieller Vorschlag gegeneinander.",
+  "it": "Il design della maglia mette a confronto la tradizione del club e una proposta commerciale.",
+  "fr": "Le design du maillot oppose la tradition du club à une proposition commerciale."
+ },
+ "La información del equipo llega por distintos canales y el vestuario pide un mensaje claro.": {
+  "en": "Team information arrives through several channels and the dressing room wants one clear message.",
+  "de": "Teaminformationen kommen über mehrere Kanäle; die Kabine wünscht eine klare Botschaft.",
+  "it": "Le informazioni sulla squadra arrivano da più canali e lo spogliatoio chiede un messaggio chiaro.",
+  "fr": "Les informations sur l'équipe circulent par plusieurs canaux et le vestiaire réclame un message clair."
+ },
+ "El rival cambia su planteamiento y el cuerpo técnico debe decidir cuánto arriesgar.": {
+  "en": "The opponent changes its approach and the coaching staff must decide how much to risk.",
+  "de": "Der Gegner ändert seinen Ansatz und das Trainerteam muss das Risiko abwägen.",
+  "it": "L'avversario cambia approccio e lo staff tecnico deve decidere quanto rischiare.",
+  "fr": "L'adversaire change d'approche et le staff doit décider jusqu'où prendre des risques."
+ },
+ "Un juvenil destaca en entrenamientos, aunque todavía necesita minutos y protección.": {
+  "en": "A youth player excels in training but still needs minutes and protection.",
+  "de": "Ein Jugendspieler überzeugt im Training, braucht aber noch Einsatzzeit und Schutz.",
+  "it": "Un giovane brilla in allenamento, ma ha ancora bisogno di minuti e protezione.",
+  "fr": "Un jeune brille à l'entraînement, mais a encore besoin de temps de jeu et de protection."
+ },
+ "Un jugador queda disponible con su contrato próximo a terminar; su potencial no está claro.": {
+  "en": "A player becomes available with their contract nearing its end; their potential is unclear.",
+  "de": "Ein Spieler wird bei auslaufendem Vertrag verfügbar; sein Potenzial ist unklar.",
+  "it": "Un giocatore è disponibile con il contratto in scadenza, ma il suo potenziale è incerto.",
+  "fr": "Un joueur devient disponible à l'approche de la fin de son contrat ; son potentiel reste incertain."
+ },
+ "La inversión en el estadio y el presupuesto de la plantilla compiten por los mismos recursos.": {
+  "en": "Investment in the stadium and the squad compete for the same resources.",
+  "de": "Stadioninvestitionen und Kaderbudget konkurrieren um dieselben Mittel.",
+  "it": "Gli investimenti nello stadio e nella squadra competono per le stesse risorse.",
+  "fr": "L'investissement dans le stade et dans l'effectif mobilise les mêmes ressources."
+ },
+ "Un ajuste de reglas cambia una rutina que el equipo daba por segura.": {
+  "en": "A rule adjustment changes a routine the team took for granted.",
+  "de": "Eine Regelanpassung verändert eine bislang selbstverständliche Routine.",
+  "it": "Un adeguamento delle regole cambia un'abitudine che la squadra dava per scontata.",
+  "fr": "Un ajustement du règlement bouleverse une routine que l'équipe tenait pour acquise."
+ },
+ "La plantilla pide ordenar los dorsales y responsabilidades antes de la nueva temporada.": {
+  "en": "The squad wants shirt numbers and responsibilities settled before the new season.",
+  "de": "Der Kader möchte Rückennummern und Zuständigkeiten vor der neuen Saison klären.",
+  "it": "La squadra vuole definire numeri di maglia e responsabilità prima della nuova stagione.",
+  "fr": "L'effectif veut régler les numéros et les responsabilités avant la nouvelle saison."
+ },
+ "La televisión aumenta la atención sobre el equipo, pero no todas las ligas reciben el mismo foco.": {
+  "en": "Television increases attention on the team, but not every league receives the same focus.",
+  "de": "Das Fernsehen erhöht die Aufmerksamkeit, doch nicht jede Liga steht gleich im Mittelpunkt.",
+  "it": "La televisione aumenta l'attenzione sulla squadra, ma non tutte le leghe hanno la stessa visibilità.",
+  "fr": "La télévision accroît l'attention portée à l'équipe, mais toutes les ligues ne bénéficient pas du même intérêt."
+ },
+ "La identidad visual del club debe convivir con nuevas exigencias de patrocinio.": {
+  "en": "The club's visual identity must coexist with new sponsorship demands.",
+  "de": "Die visuelle Identität des Vereins muss mit neuen Sponsorenwünschen vereinbart werden.",
+  "it": "L'identità visiva del club deve convivere con nuove richieste degli sponsor.",
+  "fr": "L'identité visuelle du club doit composer avec de nouvelles exigences des sponsors."
+ },
+ "Una promesa solicita minutos en una plantilla que pelea por objetivos inmediatos.": {
+  "en": "A prospect asks for minutes in a squad chasing immediate targets.",
+  "de": "Ein Talent fordert Einsatzzeit in einem Kader mit unmittelbaren Zielen.",
+  "it": "Un giovane chiede minuti in una squadra che punta a obiettivi immediati.",
+  "fr": "Un espoir demande du temps de jeu dans un effectif visant des objectifs immédiats."
+ },
+ "Un ojeador recomienda ampliar la búsqueda, aunque el club conoce poco ese mercado.": {
+  "en": "A scout recommends widening the search, although the club knows little about that market.",
+  "de": "Ein Scout empfiehlt eine breitere Suche, obwohl der Verein diesen Markt kaum kennt.",
+  "it": "Un osservatore consiglia di ampliare la ricerca, ma il club conosce poco quel mercato.",
+  "fr": "Un recruteur conseille d'élargir les recherches, même si le club connaît mal ce marché."
+ },
+ "La prensa y los aficionados discrepan sobre cuánto debe explicar el entrenador.": {
+  "en": "The press and supporters disagree on how much the manager should explain.",
+  "de": "Presse und Fans sind sich uneinig, wie viel der Trainer erklären sollte.",
+  "it": "Stampa e tifosi non concordano su quanto l'allenatore debba spiegare.",
+  "fr": "La presse et les supporters divergent sur le niveau d'explication attendu du manager."
+ },
+ "El equipo debe elegir entre una adaptación prudente y una táctica más arriesgada.": {
+  "en": "The team must choose between a cautious adjustment and a riskier tactic.",
+  "de": "Das Team muss zwischen einer vorsichtigen Anpassung und einer riskanteren Taktik wählen.",
+  "it": "La squadra deve scegliere tra un adattamento prudente e una tattica più rischiosa.",
+  "fr": "L'équipe doit choisir entre un ajustement prudent et une tactique plus risquée."
+ },
+ "Una ventana de fichajes se acerca y el club todavía necesita cubrir una posición.": {
+  "en": "A transfer window is approaching and the club still needs to cover a position.",
+  "de": "Ein Transferfenster steht bevor und der Verein muss noch eine Position besetzen.",
+  "it": "Si avvicina una finestra di mercato e il club deve ancora coprire un ruolo.",
+  "fr": "Une fenêtre de transferts approche et le club doit encore renforcer un poste."
+ },
+ "La web del club y los foros transmiten rumores antes de que la directiva cierre su decisión.": {
+  "en": "The club website and forums spread rumours before the board has decided.",
+  "de": "Vereinswebsite und Foren verbreiten Gerüchte, bevor die Vereinsführung entschieden hat.",
+  "it": "Il sito del club e i forum diffondono voci prima che la dirigenza abbia deciso.",
+  "fr": "Le site du club et les forums propagent des rumeurs avant la décision de la direction."
+ },
+ "Una alerta por teléfono acelera una negociación, pero faltan datos para valorar la oferta.": {
+  "en": "A phone alert speeds up a negotiation, but information is missing to value the offer.",
+  "de": "Eine SMS beschleunigt die Verhandlung, doch wichtige Angebotsdaten fehlen.",
+  "it": "Un avviso telefonico accelera la trattativa, ma mancano dati per valutare l'offerta.",
+  "fr": "Une alerte téléphonique accélère la négociation, mais des informations manquent pour évaluer l'offre."
+ },
+ "La nómina crece y la directiva pide proteger el presupuesto de la temporada.": {
+  "en": "The wage bill is growing and the board asks to protect the season budget.",
+  "de": "Die Gehaltskosten steigen und die Vereinsführung will das Saisonbudget schützen.",
+  "it": "Il monte ingaggi cresce e la dirigenza chiede di proteggere il budget stagionale.",
+  "fr": "La masse salariale augmente et la direction demande de protéger le budget de la saison."
+ },
+ "Un fichaje de otra liga requiere más observación de la que permite el calendario.": {
+  "en": "A signing from another league requires more observation than the schedule allows.",
+  "de": "Ein Neuzugang aus einer anderen Liga müsste öfter beobachtet werden, als der Spielplan erlaubt.",
+  "it": "Un acquisto da un'altra lega richiede più osservazioni di quante ne consenta il calendario.",
+  "fr": "Une recrue d'une autre ligue exige davantage d'observations que le calendrier ne le permet."
+ },
+ "El club puede ampliar su preparación física, aunque el nuevo apoyo cuesta dinero.": {
+  "en": "The club can expand physical preparation, but the new support costs money.",
+  "de": "Der Verein kann die Athletikbetreuung ausbauen, doch zusätzliches Personal kostet Geld.",
+  "it": "Il club può ampliare la preparazione atletica, ma il nuovo supporto ha un costo.",
+  "fr": "Le club peut renforcer la préparation physique, mais ce soutien supplémentaire coûte cher."
+ },
+ "Una marca ofrece financiar una mejora a cambio de más espacio en la camiseta.": {
+  "en": "A brand will fund an improvement in exchange for more space on the shirt.",
+  "de": "Eine Marke finanziert eine Verbesserung und verlangt dafür mehr Platz auf dem Trikot.",
+  "it": "Un marchio finanzia un miglioramento in cambio di più spazio sulla maglia.",
+  "fr": "Une marque finance une amélioration en échange d'une plus grande place sur le maillot."
+ },
+ "La cantera pide inversión ahora; el primer equipo necesita soluciones para este año.": {
+  "en": "The academy needs investment now; the first team needs solutions this year.",
+  "de": "Die Akademie braucht jetzt Investitionen; die erste Mannschaft braucht Lösungen für dieses Jahr.",
+  "it": "Il vivaio ha bisogno di investimenti subito; la prima squadra di soluzioni per quest'anno.",
+  "fr": "Le centre de formation a besoin d'investissements immédiats ; l'équipe première, de solutions cette année."
+ },
+ "La congestión de partidos reduce las sesiones disponibles para entrenar.": {
+  "en": "A crowded fixture list leaves fewer sessions available for training.",
+  "de": "Ein dichter Spielplan lässt weniger Einheiten für das Training übrig.",
+  "it": "Un calendario fitto lascia meno sedute disponibili per allenarsi.",
+  "fr": "Un calendrier chargé laisse moins de séances disponibles pour l'entraînement."
+ },
+ "Un jugador clave quiere revisar su contrato antes de que empiece el mercado.": {
+  "en": "A key player wants to review their contract before the market opens.",
+  "de": "Ein Schlüsselspieler möchte seinen Vertrag vor Öffnung des Marktes neu besprechen.",
+  "it": "Un giocatore chiave vuole rivedere il contratto prima dell'apertura del mercato.",
+  "fr": "Un joueur clé veut revoir son contrat avant l'ouverture du marché."
+ },
+ "Una publicación en redes sociales divide a la afición mientras el equipo prepara el siguiente partido.": {
+  "en": "A social post divides supporters while the team prepares for its next match.",
+  "de": "Ein Social-Media-Beitrag spaltet die Fans, während sich das Team auf das nächste Spiel vorbereitet.",
+  "it": "Un post social divide i tifosi mentre la squadra prepara la prossima partita.",
+  "fr": "Une publication sur les réseaux divise les supporters pendant que l'équipe prépare le prochain match."
+ },
+ "Los analistas detectan un patrón, pero el cuerpo técnico duda de cuánto cambiar por los datos.": {
+  "en": "Analysts spot a pattern, but the coaching staff doubts how much to change based on data.",
+  "de": "Analysten erkennen ein Muster, doch das Trainerteam zweifelt am nötigen Ausmaß der Anpassung.",
+  "it": "Gli analisti individuano uno schema, ma lo staff dubita di quanto cambiare sulla base dei dati.",
+  "fr": "Les analystes repèrent une tendance, mais le staff hésite sur l'ampleur des changements à partir des données."
+ },
+ "La preparación avanzada promete mejoras, aunque exige coordinar a más especialistas.": {
+  "en": "Advanced preparation could help, but it requires coordination among more specialists.",
+  "de": "Fortgeschrittene Vorbereitung könnte helfen, verlangt aber die Abstimmung weiterer Fachkräfte.",
+  "it": "Una preparazione avanzata può aiutare, ma richiede il coordinamento di più specialisti.",
+  "fr": "Une préparation avancée peut aider, mais nécessite de coordonner davantage de spécialistes."
+ },
+ "Un jugador pide cuidar su recuperación ante la presión de competir cada semana.": {
+  "en": "A player asks for careful recovery while competing every week.",
+  "de": "Ein Spieler bittet um sorgfältige Regeneration bei wöchentlichen Einsätzen.",
+  "it": "Un giocatore chiede di curare il recupero mentre si gioca ogni settimana.",
+  "fr": "Un joueur demande une récupération adaptée alors que les matchs s'enchaînent chaque semaine."
+ },
+ "El mercado ofrece alternativas, pero las ventanas limitan cuándo puede cerrarse el fichaje.": {
+  "en": "The market offers alternatives, but transfer windows limit when a deal can be completed.",
+  "de": "Der Markt bietet Alternativen, doch Transferfenster begrenzen den Abschlusszeitpunkt.",
+  "it": "Il mercato offre alternative, ma le finestre limitano quando si può concludere l'affare.",
+  "fr": "Le marché offre des options, mais les fenêtres limitent la période de conclusion d'un transfert."
+ },
+ "Una revisión arbitral genera preguntas distintas según la competición en la que juega el club.": {
+  "en": "A video review raises different questions depending on the competition.",
+  "de": "Eine Videoüberprüfung wirft je nach Wettbewerb unterschiedliche Fragen auf.",
+  "it": "Una revisione video solleva questioni diverse a seconda della competizione.",
+  "fr": "Une assistance vidéo soulève des questions différentes selon la compétition."
+ },
+ "Una entrevista en directo puede aclarar el mensaje o alimentar una polémica.": {
+  "en": "A live interview could clarify the message or fuel a controversy.",
+  "de": "Ein Live-Interview könnte die Botschaft klären oder eine Kontroverse anheizen.",
+  "it": "Un'intervista in diretta può chiarire il messaggio o alimentare una polemica.",
+  "fr": "Une interview en direct peut clarifier le message ou alimenter une polémique."
+ },
+ "La plantilla necesita rotar sin perder cohesión en un tramo cargado de partidos.": {
+  "en": "The squad needs rotation without losing cohesion during a packed run of matches.",
+  "de": "Der Kader muss rotieren, ohne in einer dichten Spielphase den Zusammenhalt zu verlieren.",
+  "it": "La squadra deve ruotare senza perdere coesione in un periodo fitto di partite.",
+  "fr": "L'effectif doit tourner sans perdre sa cohésion pendant une série de matchs rapprochés."
+ },
+ "Una promesa pide un plan de desarrollo medible antes de comprometerse con el club.": {
+  "en": "A prospect asks for a measurable development plan before committing to the club.",
+  "de": "Ein Talent verlangt vor seiner Zusage einen messbaren Entwicklungsplan.",
+  "it": "Un giovane chiede un piano di crescita misurabile prima di impegnarsi con il club.",
+  "fr": "Un espoir demande un plan de progression mesurable avant de s'engager avec le club."
+ },
+ "El rival estudia tus patrones; decides si mantener el plan o introducir una variante.": {
+  "en": "The opponent studies your patterns; decide whether to keep the plan or introduce a variation.",
+  "de": "Der Gegner analysiert deine Muster; behalte den Plan bei oder führe eine Variante ein.",
+  "it": "L'avversario studia i tuoi schemi: decidi se mantenere il piano o introdurre una variante.",
+  "fr": "L'adversaire étudie tes habitudes ; garde le plan ou introduis une variante."
+ },
+ "El calendario comprimido y el límite ampliado de cambios obligan a replantear la rotación.": {
+  "en": "A compressed schedule and the expanded substitution limit require a new rotation plan.",
+  "de": "Ein komprimierter Spielplan und mehr Wechsel erfordern einen neuen Rotationsplan.",
+  "it": "Un calendario compresso e il limite ampliato di cambi richiedono un nuovo piano di rotazioni.",
+  "fr": "Un calendrier resserré et une limite de remplacements élargie imposent un nouveau plan de rotation."
+ },
+ "Un clip viral domina la conversación mientras el vestuario necesita concentrarse.": {
+  "en": "A viral clip dominates the conversation while the dressing room needs to focus.",
+  "de": "Ein viraler Clip beherrscht die Diskussion, während sich die Kabine konzentrieren muss.",
+  "it": "Un video virale domina la conversazione mentre lo spogliatoio deve concentrarsi.",
+  "fr": "Un clip viral domine la conversation alors que le vestiaire doit rester concentré."
+ },
+ "Los datos de rendimiento señalan una alerta, pero no explican por sí solos su causa.": {
+  "en": "Performance data shows a warning sign but cannot explain its cause by itself.",
+  "de": "Leistungsdaten zeigen ein Warnsignal, erklären dessen Ursache aber nicht allein.",
+  "it": "I dati prestazionali segnalano un problema, ma da soli non ne spiegano la causa.",
+  "fr": "Les données de performance signalent un problème, mais n'en expliquent pas seules la cause."
+ },
+ "La plantilla pide descanso; la competición todavía exige varios partidos en poco tiempo.": {
+  "en": "The squad asks for rest while the competition still requires several matches in little time.",
+  "de": "Der Kader braucht Erholung, während mehrere Spiele in kurzer Zeit anstehen.",
+  "it": "La squadra chiede riposo mentre la competizione impone ancora più partite in poco tempo.",
+  "fr": "L'effectif réclame du repos alors que la compétition impose encore plusieurs matchs rapprochés."
+ },
+ "Un jugador solicita apoyo personal además del plan físico habitual.": {
+  "en": "A player requests personal support in addition to the usual physical plan.",
+  "de": "Ein Spieler bittet zusätzlich zum üblichen Athletikplan um persönliche Unterstützung.",
+  "it": "Un giocatore chiede supporto personale oltre al consueto piano fisico.",
+  "fr": "Un joueur demande un accompagnement personnel en plus du programme physique habituel."
+ },
+ "El viaje y la recuperación compiten con una sesión táctica antes del siguiente encuentro.": {
+  "en": "Travel and recovery compete with a tactical session before the next match.",
+  "de": "Reise und Regeneration konkurrieren mit einer Taktikeinheit vor dem nächsten Spiel.",
+  "it": "Viaggio e recupero competono con una seduta tattica prima della prossima partita.",
+  "fr": "Le déplacement et la récupération entrent en concurrence avec une séance tactique avant le prochain match."
+ },
+ "Un balón y una equipación de nueva tecnología requieren adaptación, no solo promoción.": {
+  "en": "A new-tech ball and kit require adaptation, not just promotion.",
+  "de": "Ein neuer Spielball und eine neue Ausrüstung verlangen Anpassung, nicht nur Werbung.",
+  "it": "Un pallone e una divisa di nuova tecnologia richiedono adattamento, non solo promozione.",
+  "fr": "Un ballon et une tenue de nouvelle technologie demandent une adaptation, pas seulement de la promotion."
+ },
+ "La directiva busca equilibrar una gran inversión con la estabilidad salarial del club.": {
+  "en": "The board must balance a major investment with the club's wage stability.",
+  "de": "Die Vereinsführung muss eine große Investition mit stabilen Gehaltskosten vereinbaren.",
+  "it": "La dirigenza deve bilanciare un grande investimento con la stabilità salariale del club.",
+  "fr": "La direction doit équilibrer un investissement important avec la stabilité salariale du club."
+ },
+ "Los canales digitales permiten reaccionar rápido, pero hacen más difícil corregir un rumor.": {
+  "en": "Digital channels allow quick reactions but make rumours harder to correct.",
+  "de": "Digitale Kanäle ermöglichen schnelle Reaktionen, erschweren aber die Korrektur von Gerüchten.",
+  "it": "I canali digitali permettono reazioni rapide, ma rendono più difficile correggere le voci.",
+  "fr": "Les canaux numériques permettent de réagir vite, mais rendent les rumeurs plus difficiles à corriger."
+ },
+ "La opción de cinco cambios abre alternativas tácticas y también nuevas expectativas.": {
+  "en": "The five-substitution option opens tactical choices and creates new expectations.",
+  "de": "Die Möglichkeit von fünf Wechseln eröffnet taktische Optionen und neue Erwartungen.",
+  "it": "La possibilità di cinque sostituzioni apre opzioni tattiche e crea nuove aspettative.",
+  "fr": "La possibilité de cinq remplacements ouvre des choix tactiques et crée de nouvelles attentes."
+ },
+ "Marco histórico ({year}): {fact}": {
+  "en": "Historical frame ({year}): {fact}",
+  "de": "Historischer Rahmen ({year}): {fact}",
+  "it": "Contesto storico ({year}): {fact}",
+  "fr": "Contexte historique ({year}) : {fact}"
+ },
+ "El hecho histórico sirve solo de contexto; el dilema y sus efectos son ficticios y no se atribuyen a clubes o personas reales. Elige según los efectos mostrados.": {
+  "en": "The historical event is context only; the dilemma and its effects are fictional and are not attributed to real clubs or people. Choose based on the effects shown.",
+  "de": "Das historische Ereignis dient nur als Kontext; das Dilemma und seine Folgen sind fiktiv und werden keinen realen Vereinen oder Personen zugeschrieben. Entscheide anhand der angezeigten Folgen.",
+  "it": "L’evento storico è solo un contesto; il dilemma e i suoi effetti sono fittizi e non sono attribuiti a club o persone reali. Scegli in base agli effetti mostrati.",
+  "fr": "L’événement historique sert uniquement de contexte ; le dilemme et ses effets sont fictifs et ne sont attribués à aucun club ni à aucune personne réelle. Choisis selon les effets affichés."
+ },
+ "VAR disponible": {
+  "en": "VAR available",
+  "de": "VAR verfügbar",
+  "it": "VAR disponibile",
+  "fr": "VAR disponible"
+ },
+ "Las reglas cambian según la liga y la competición: estas son las generales de {year}.": {
+  "en": "Rules change by league and competition: these are the general ones for {year}.",
+  "de": "Die Regeln ändern sich je nach Liga und Wettbewerb: Dies sind die allgemeinen Regeln für {year}.",
+  "it": "Le regole cambiano in base al campionato e alla competizione: queste sono quelle generali del {year}.",
+  "fr": "Les règles changent selon le championnat et la compétition : voici les règles générales de {year}."
+ }
 }

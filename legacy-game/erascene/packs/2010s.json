@@ -1,15 +1,91 @@
 {
-  "schema": 1,
-  "id": "2010s",
-  "label": "2010s",
-  "years": [2010, 2019],
-  "startYear": 2010,
-  "rosterMode": "generated-archetypes",
-  "rules": {"winPoints": 3, "backPassBanned": true, "transferWindows": true, "maxSubs": 3, "bosmanFreeAgency": true, "goldenGoal": false, "goalLineTech": false, "fiveSubs": false, "varByCompetition": {}},
-  "media": {"channels": ["websites", "twitter", "youtube", "live-blogs"], "socialMedia": true, "deadlineDayCircus": true, "rumorSpeed": "viral"},
-  "economy": {"recordTransfer": 105000000, "wageScale": 0.82, "marketScale": 0.9, "shirtSponsorship": true, "tvDealMultiplier": 3.0, "currency": "EUR"},
-  "presentation": {"pitchWear": "hybrid", "terraces": "all-seater", "fences": "removed", "heating": true, "kits": "modern-athletic", "ball": "thermo-bonded", "adBoards": "led", "uiSkin": "flat", "broadcast": "hd-16:9"},
-  "staff": {"analysts": true, "sportsScience": "advanced", "backroomMax": 10, "agents": "superagents-emerging"},
-  "playerModel": {"paceScale": 1.0, "staminaScale": 1.0, "pressingScale": 1.0, "trainingScale": 1.0},
-  "referenceClubs": ["Manchester City", "Manchester United", "Liverpool", "Chelsea", "Arsenal", "Tottenham Hotspur", "Real Madrid", "FC Barcelona", "Atlético de Madrid", "Bayern Múnich", "Borussia Dortmund", "Paris Saint-Germain", "Juventus"]
+ "schema": 1,
+ "id": "2010s",
+ "label": "2010s",
+ "years": [
+  2010,
+  2019
+ ],
+ "startYear": 2010,
+ "rosterMode": "generated-archetypes",
+ "rules": {
+  "winPoints": 3,
+  "backPassBanned": true,
+  "transferWindows": true,
+  "maxSubs": 3,
+  "bosmanFreeAgency": true,
+  "goldenGoal": false,
+  "goalLineTech": false,
+  "fiveSubs": false,
+  "var": false,
+  "offsideLevelOnside": true,
+  "goalkeeperSub": false,
+  "silverGoal": false,
+  "awayGoals": true,
+  "tackleFromBehindRed": true,
+  "fixedShirtNumbers": true,
+  "goalkeeperSeconds": 6,
+  "compressedCovidCalendar": false,
+  "recopaActive": false,
+  "premierLeague": false,
+  "championsLeagueBrand": true
+ },
+ "media": {
+  "channels": [
+   "websites",
+   "twitter",
+   "youtube",
+   "live-blogs"
+  ],
+  "socialMedia": true,
+  "deadlineDayCircus": true,
+  "rumorSpeed": "viral"
+ },
+ "economy": {
+  "recordTransfer": 105000000,
+  "wageScale": 0.82,
+  "marketScale": 0.9,
+  "shirtSponsorship": true,
+  "tvDealMultiplier": 3.0,
+  "currency": "EUR"
+ },
+ "presentation": {
+  "pitchWear": "hybrid",
+  "terraces": "all-seater",
+  "fences": "removed",
+  "heating": true,
+  "kits": "modern-athletic",
+  "ball": "thermo-bonded",
+  "adBoards": "led",
+  "uiSkin": "flat",
+  "broadcast": "hd-16:9",
+  "refereeShirt": "coloured"
+ },
+ "staff": {
+  "analysts": true,
+  "sportsScience": "advanced",
+  "backroomMax": 10,
+  "agents": "superagents-emerging"
+ },
+ "playerModel": {
+  "paceScale": 1.0,
+  "staminaScale": 1.0,
+  "pressingScale": 1.0,
+  "trainingScale": 1.0
+ },
+ "referenceClubs": [
+  "Manchester City",
+  "Manchester United",
+  "Liverpool",
+  "Chelsea",
+  "Arsenal",
+  "Tottenham Hotspur",
+  "Real Madrid",
+  "FC Barcelona",
+  "Atlético de Madrid",
+  "Bayern Múnich",
+  "Borussia Dortmund",
+  "Paris Saint-Germain",
+  "Juventus"
+ ]
 }

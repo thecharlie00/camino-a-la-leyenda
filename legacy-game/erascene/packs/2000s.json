@@ -1,15 +1,90 @@
 {
-  "schema": 1,
-  "id": "2000s",
-  "label": "2000s",
-  "years": [2000, 2009],
-  "startYear": 2000,
-  "rosterMode": "generated-archetypes",
-  "rules": {"winPoints": 3, "backPassBanned": true, "transferWindows": false, "maxSubs": 3, "bosmanFreeAgency": true, "goldenGoal": false, "goalLineTech": false, "fiveSubs": false, "varByCompetition": {}},
-  "media": {"channels": ["club-websites", "forums", "sms-alerts", "sports-news-tv", "deadline-day"], "socialMedia": false, "deadlineDayCircus": true, "rumorSpeed": "fast"},
-  "economy": {"recordTransfer": 50000000, "wageScale": 0.42, "marketScale": 0.62, "shirtSponsorship": true, "tvDealMultiplier": 1.8, "currency": "EUR"},
-  "presentation": {"pitchWear": "hybrid-emerging", "terraces": "all-seater", "fences": "removed", "heating": false, "kits": "fitted-00s", "ball": "synthetic-panel", "adBoards": "static-to-led", "uiSkin": "web2", "broadcast": "sd-16:9"},
-  "staff": {"analysts": false, "sportsScience": "growing", "backroomMax": 7, "agents": "powerful"},
-  "playerModel": {"paceScale": 0.96, "staminaScale": 0.97, "pressingScale": 0.88, "trainingScale": 0.96},
-  "referenceClubs": ["Manchester United", "Arsenal", "Liverpool", "Chelsea", "Real Madrid", "FC Barcelona", "AC Milan", "Inter", "Juventus", "Bayern Múnich", "Ajax"]
+ "schema": 1,
+ "id": "2000s",
+ "label": "2000s",
+ "years": [
+  2000,
+  2009
+ ],
+ "startYear": 2000,
+ "rosterMode": "generated-archetypes",
+ "rules": {
+  "winPoints": 3,
+  "backPassBanned": true,
+  "transferWindows": false,
+  "maxSubs": 3,
+  "bosmanFreeAgency": true,
+  "goldenGoal": false,
+  "goalLineTech": false,
+  "fiveSubs": false,
+  "var": false,
+  "offsideLevelOnside": true,
+  "goalkeeperSub": false,
+  "silverGoal": false,
+  "awayGoals": true,
+  "tackleFromBehindRed": true,
+  "fixedShirtNumbers": false,
+  "goalkeeperSeconds": 6,
+  "compressedCovidCalendar": false,
+  "recopaActive": false,
+  "premierLeague": false,
+  "championsLeagueBrand": true
+ },
+ "media": {
+  "channels": [
+   "club-websites",
+   "forums",
+   "sms-alerts",
+   "sports-news-tv",
+   "deadline-day"
+  ],
+  "socialMedia": false,
+  "deadlineDayCircus": true,
+  "rumorSpeed": "fast"
+ },
+ "economy": {
+  "recordTransfer": 50000000,
+  "wageScale": 0.42,
+  "marketScale": 0.62,
+  "shirtSponsorship": true,
+  "tvDealMultiplier": 1.8,
+  "currency": "EUR"
+ },
+ "presentation": {
+  "pitchWear": "hybrid-emerging",
+  "terraces": "all-seater",
+  "fences": "removed",
+  "heating": false,
+  "kits": "fitted-00s",
+  "ball": "synthetic-panel",
+  "adBoards": "static-to-led",
+  "uiSkin": "web2",
+  "broadcast": "sd-16:9",
+  "refereeShirt": "coloured"
+ },
+ "staff": {
+  "analysts": false,
+  "sportsScience": "growing",
+  "backroomMax": 7,
+  "agents": "powerful"
+ },
+ "playerModel": {
+  "paceScale": 0.96,
+  "staminaScale": 0.97,
+  "pressingScale": 0.88,
+  "trainingScale": 0.96
+ },
+ "referenceClubs": [
+  "Manchester United",
+  "Arsenal",
+  "Liverpool",
+  "Chelsea",
+  "Real Madrid",
+  "FC Barcelona",
+  "AC Milan",
+  "Inter",
+  "Juventus",
+  "Bayern Múnich",
+  "Ajax"
+ ]
 }

@@ -22,22 +22,69 @@ function eraPackForYear(year) {
   if (packs.length && y < packs[0].years[0]) return packs[0];
   return packs.length ? packs[packs.length - 1] : null;
 }
-function eraProfileForYear(year) {
+/* Alcance de las reglas: cada evento del timeline es global o se limita a ligas (prefijo de país «ENG» o id «ENG1»),
+   competiciones (clave de S.C) o confederaciones. ctx = {league, comp, conf, year?}; sin ctx, la liga de tu club. */
+var ERA_SCOPE = null, ERA_PROFILE_CACHE = {};
+function eraScopeMatches(scope, ctx) {
+  if (!scope || scope.type === "global") return true;
+  if (!ctx) return false;
+  if (scope.type === "league") return !!ctx.league && (scope.leagues || []).some(function (id) {
+    return ctx.league === id || (ctx.league.indexOf(id) === 0 && /^[0-9]/.test(ctx.league.slice(id.length)));
+  });
+  if (scope.type === "competition") return !!ctx.comp && (scope.competitions || []).indexOf(ctx.comp) >= 0;
+  if (scope.type === "confederation") return !!ctx.conf && (scope.confederations || []).indexOf(ctx.conf) >= 0;
+  return false;
+}
+function eraCareerScope() {
+  if (!S || typeof W === "undefined" || !W || !W.lg) return null;
+  var club = S.m && S.mode === "mgr" ? S.m.club : S.p ? S.p.club : S.m ? S.m.club : -1;
+  var li = club >= 0 && S.cl ? S.cl[club] : -1, lg = li >= 0 ? W.lg[li] : null;
+  return lg ? {league: lg.id, conf: lg.conf || null} : null;
+}
+function eraScopeOfFixture(f) {
+  if (!f || typeof f.ck !== "string") return null;
+  if (f.ck.charAt(0) === "L" && f.ck.charAt(1) === ":") { var lg = W.lg[+f.ck.slice(2)]; return lg ? {league: lg.id, conf: lg.conf || null} : null; }
+  var c = S && S.C ? S.C[f.ck] : null;
+  return {comp: f.ck, conf: c && c.conf || null, year: c && c.nat && c.y ? c.y : null};
+}
+function eraWithScope(ctx, fn) {
+  var previous = ERA_SCOPE;
+  ERA_SCOPE = ctx;
+  try { return fn(); } finally { ERA_SCOPE = previous; }
+}
+function eraProfileForYear(year, ctx) {
   var pack = eraPackForYear(year);
   if (!pack) return null;
+  var key = year + "|" + (ctx ? [ctx.league || "", ctx.comp || "", ctx.conf || ""].join("/") : "");
+  if (ERA_PROFILE_CACHE[key]) return ERA_PROFILE_CACHE[key];
   var result = eraClone(pack), events = ERAS_DATA.timeline && ERAS_DATA.timeline.events || [];
   events.slice().sort(function (a, b) { return a.year - b.year; }).forEach(function (event) {
-    if (event.year <= year) eraDeepMerge(result, event.changes);
+    if (event.year <= year && (event.until == null || year <= event.until) && eraScopeMatches(event.scope, ctx)) eraDeepMerge(result, event.changes);
   });
   result.currentYear = +year;
+  result.scope = ctx || null;
+  ERA_PROFILE_CACHE[key] = result;
   return result;
 }
-function eraContextForYear(year) {
+function eraContextForYear(year, ctx) {
   if (!ERAS_MODE) return null;
-  if (S && S.era && S.era.active) return eraProfileForYear(year == null ? S.yr : year);
-  if (ERA_CREATE_CONTEXT) return eraProfileForYear(year == null || +year < ERA_CREATE_CONTEXT.startYear ? ERA_CREATE_CONTEXT.startYear : year);
+  var scope = ctx || ERA_SCOPE || eraCareerScope();
+  if (scope && scope.year != null) year = scope.year;
+  if (S && S.era && S.era.active) return eraProfileForYear(year == null ? S.yr : year, scope);
+  if (ERA_CREATE_CONTEXT) return eraProfileForYear(year == null || +year < ERA_CREATE_CONTEXT.startYear ? ERA_CREATE_CONTEXT.startYear : year, scope);
   return null;
 }
+/* Historia de clubes y ligas (erascene/clubs-history.json): existencia y nombre de época. Sin entrada = existe con su nombre actual. */
+function eraHistory() { return ERAS_DATA && ERAS_DATA.clubsHistory || {clubs: {}, leagues: {}}; }
+function eraNameAt(names, year, fallback) {
+  var name = fallback;
+  (names || []).forEach(function (entry) { if (entry[0] <= year) name = entry[1]; });
+  return name;
+}
+function eraClubExists(name, year) { var h = eraHistory().clubs[name]; return !h || h.founded <= year; }
+function eraClubName(name, year) { var h = eraHistory().clubs[name]; return h ? eraNameAt(h.names, year, name) : name; }
+function eraLeagueExists(id, year) { var h = eraHistory().leagues[id]; return !h || h.since == null || h.since <= year; }
+function eraLeagueName(id, fallback, year) { var h = eraHistory().leagues[id]; return h ? eraNameAt(h.names, year, fallback) : fallback; }
 function eraIsActive() { return !!(ERAS_MODE && S && S.era && S.era.active); }
 function eraKeepYearRoundMarket() {
   var rules = eraRulesForYear(S && S.yr), market = S && S.m && S.m.mk;
@@ -143,17 +190,14 @@ function eraWrapGrowth(name, managerMode) {
     return result;
   };
 }
-function eraRulesForYear(year) {
-  var profile = eraContextForYear(year);
+function eraRulesForYear(year, ctx) {
+  var profile = eraContextForYear(year, ctx);
   return profile ? profile.rules : null;
 }
+/* VAR por liga y competición, según el timeline (antes solo Premier y LaLiga) */
 function eraVarAllowed(rules) {
   if (!rules) return true;
-  var allowed = rules.varByCompetition || {}, club = S && S.m ? S.m.club : S && S.p ? S.p.club : -1;
-  var li = S && S.cl && club >= 0 ? S.cl[club] : -1, league = li >= 0 && W && W.lg ? W.lg[li] : null;
-  if (!league) return false;
-  var competition = league.id === "ENG1" ? "Premier League" : league.id === "ESP1" ? "La Liga" : null;
-  return !!(competition && allowed[competition]);
+  return !!rules.var;
 }
 function eraInfoForYear(year) {
   var profile = eraContextForYear(year);
@@ -422,6 +466,15 @@ function eraStartWithContext(mode, year, identity) {
   eraInstallKitHooks();
   eraWrapGrowth("growthTick", false);
   eraWrapGrowth("mgrGrowth", true);
+  ["simFixture", "recordFixture", "mgrExtra", "computeExtra"].forEach(function (name) {
+    if (typeof window[name] !== "function") return;
+    var original = window[name];
+    window[name] = function (f) {
+      var self = this, args = arguments;
+      if (!eraContextForYear(S && S.yr)) return original.apply(self, args);
+      return eraWithScope(eraScopeOfFixture(f), function () { return original.apply(self, args); });
+    };
+  });
   if (typeof extraTime === "function") {
     var oldExtraTime = extraTime;
     extraTime = function () {

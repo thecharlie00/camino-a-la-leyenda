@@ -1,15 +1,84 @@
 {
-  "schema": 1,
-  "id": "1980s",
-  "label": "1980s",
-  "years": [1980, 1989],
-  "startYear": 1980,
-  "rosterMode": "generated-archetypes",
-  "rules": {"winPoints": 2, "backPassBanned": false, "transferWindows": false, "maxSubs": 2, "bosmanFreeAgency": false, "goldenGoal": false, "goalLineTech": false, "fiveSubs": false, "varByCompetition": {}},
-  "media": {"channels": ["newspapers", "radio", "weekly-tv-highlights", "teletext-late-decade"], "socialMedia": false, "deadlineDayCircus": false, "rumorSpeed": "slow"},
-  "economy": {"recordTransfer": 2200000, "wageScale": 0.055, "marketScale": 0.16, "shirtSponsorship": true, "tvDealMultiplier": 0.2, "currency": "EUR"},
-  "presentation": {"pitchWear": "mud-winter", "terraces": "standing", "fences": "where-applicable", "heating": false, "kits": "classic-80s", "ball": "leather-synthetic", "adBoards": "static", "uiSkin": "teletext", "broadcast": "grainy-4:3"},
-  "staff": {"analysts": false, "sportsScience": "basic", "backroomMax": 4, "agents": "rare"},
-  "playerModel": {"paceScale": 0.87, "staminaScale": 0.89, "pressingScale": 0.62, "trainingScale": 0.82},
-  "referenceClubs": ["Liverpool", "Arsenal", "Manchester United", "Real Madrid", "Ajax", "Bayern Múnich"]
+ "schema": 1,
+ "id": "1980s",
+ "label": "1980s",
+ "years": [
+  1980,
+  1989
+ ],
+ "startYear": 1980,
+ "rosterMode": "generated-archetypes",
+ "rules": {
+  "winPoints": 2,
+  "backPassBanned": false,
+  "transferWindows": false,
+  "maxSubs": 2,
+  "bosmanFreeAgency": false,
+  "goldenGoal": false,
+  "goalLineTech": false,
+  "fiveSubs": false,
+  "var": false,
+  "offsideLevelOnside": false,
+  "goalkeeperSub": false,
+  "silverGoal": false,
+  "awayGoals": true,
+  "tackleFromBehindRed": false,
+  "fixedShirtNumbers": false,
+  "goalkeeperSeconds": null,
+  "compressedCovidCalendar": false,
+  "recopaActive": true,
+  "premierLeague": false,
+  "championsLeagueBrand": false
+ },
+ "media": {
+  "channels": [
+   "newspapers",
+   "radio",
+   "weekly-tv-highlights",
+   "teletext-late-decade"
+  ],
+  "socialMedia": false,
+  "deadlineDayCircus": false,
+  "rumorSpeed": "slow"
+ },
+ "economy": {
+  "recordTransfer": 2200000,
+  "wageScale": 0.055,
+  "marketScale": 0.16,
+  "shirtSponsorship": true,
+  "tvDealMultiplier": 0.2,
+  "currency": "EUR"
+ },
+ "presentation": {
+  "pitchWear": "mud-winter",
+  "terraces": "standing",
+  "fences": "where-applicable",
+  "heating": false,
+  "kits": "classic-80s",
+  "ball": "leather-synthetic",
+  "adBoards": "static",
+  "uiSkin": "teletext",
+  "broadcast": "grainy-4:3",
+  "refereeShirt": "black"
+ },
+ "staff": {
+  "analysts": false,
+  "sportsScience": "basic",
+  "backroomMax": 4,
+  "agents": "rare"
+ },
+ "playerModel": {
+  "paceScale": 0.87,
+  "staminaScale": 0.89,
+  "pressingScale": 0.62,
+  "trainingScale": 0.82
+ },
+ "referenceClubs": [
+  "Liverpool",
+  "Arsenal",
+  "Manchester United",
+  "Real Madrid",
+  "Ajax",
+  "Bayern Múnich"
+ ]
 }
