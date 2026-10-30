@@ -1630,5 +1630,149 @@
   "de": "Weniger Platzverweise als heute",
   "it": "Meno espulsioni di oggi",
   "fr": "Moins d'expulsions qu'aujourd'hui"
+ },
+ "(v. goles fuera)": {
+  "en": "(away goals)",
+  "de": "(Auswärtstore)",
+  "it": "(gol in trasferta)",
+  "fr": "(buts à l'extérieur)"
+ },
+ "Eliminatorias a ida y vuelta, también la final": {
+  "en": "Two-legged ties, including the final",
+  "de": "Hin- und Rückspiele, auch im Finale",
+  "it": "Andata e ritorno, finale compresa",
+  "fr": "Matchs aller-retour, finale comprise"
+ },
+ "Eliminatorias a ida y vuelta y final a partido único en campo neutral": {
+  "en": "Two-legged ties and a one-off final at a neutral venue",
+  "de": "Hin- und Rückspiele und ein Endspiel auf neutralem Platz",
+  "it": "Andata e ritorno e finale secca in campo neutro",
+  "fr": "Matchs aller-retour et finale unique sur terrain neutre"
+ },
+ "{g} grupos y eliminatorias": {
+  "en": "{g} groups and knockout rounds",
+  "de": "{g} Gruppen und K.-o.-Runden",
+  "it": "{g} gironi ed eliminazione diretta",
+  "fr": "{g} groupes et phase à élimination directe"
+ },
+ "Final a ida y vuelta": {
+  "en": "Two-legged final",
+  "de": "Finale mit Hin- und Rückspiel",
+  "it": "Finale di andata e ritorno",
+  "fr": "Finale aller-retour"
+ },
+ "Final a partido único en campo neutral": {
+  "en": "One-off final at a neutral venue",
+  "de": "Endspiel auf neutralem Platz",
+  "it": "Finale secca in campo neutro",
+  "fr": "Finale unique sur terrain neutre"
+ },
+ "Solo campeones de liga y el campeón vigente": {
+  "en": "League champions and the holders only",
+  "de": "Nur Landesmeister und der Titelverteidiger",
+  "it": "Solo campioni nazionali e detentori",
+  "fr": "Uniquement les champions nationaux et le tenant du titre"
+ },
+ "Campeones de copa de cada país": {
+  "en": "Each country's cup winners",
+  "de": "Die Pokalsieger jedes Landes",
+  "it": "Le vincitrici delle coppe nazionali",
+  "fr": "Les vainqueurs des coupes nationales"
+ },
+ "Clubes de ciudades con feria de muestras, uno por ciudad": {
+  "en": "Clubs from trade-fair cities, one per city",
+  "de": "Klubs aus Messestädten, einer pro Stadt",
+  "it": "Club delle città con fiera campionaria, uno per città",
+  "fr": "Clubs des villes de foire, un par ville"
+ },
+ "goles fuera": {
+  "en": "away goals",
+  "de": "Auswärtstore",
+  "it": "gol in trasferta",
+  "fr": "buts à l'extérieur"
+ },
+ "gol de oro": {
+  "en": "golden goal",
+  "de": "Golden Goal",
+  "it": "golden gol",
+  "fr": "but en or"
+ },
+ "gol de plata": {
+  "en": "silver goal",
+  "de": "Silver Goal",
+  "it": "silver gol",
+  "fr": "but en argent"
+ },
+ "penaltis": {
+  "en": "penalties",
+  "de": "Elfmeterschießen",
+  "it": "rigori",
+  "fr": "tirs au but"
+ },
+ "Desempate: {list}": {
+  "en": "Tiebreak: {list}",
+  "de": "Entscheidung: {list}",
+  "it": "Spareggio: {list}",
+  "fr": "Départage : {list}"
+ },
+ "Formato simplificado en el juego: {note}": {
+  "en": "Format simplified in the game: {note}",
+  "de": "Im Spiel vereinfachtes Format: {note}",
+  "it": "Formato semplificato nel gioco: {note}",
+  "fr": "Format simplifié dans le jeu : {note}"
+ },
+ "Temporada {y}": {
+  "en": "{y} season",
+  "de": "Saison {y}",
+  "it": "Stagione {y}",
+  "fr": "Saison {y}"
+ },
+ "La segunda fase de grupos (1999-2003) se simula como octavos": {
+  "en": "The second group stage (1999-2003) is played as a round of 16",
+  "de": "Die zweite Gruppenphase (1999-2003) wird als Achtelfinale gespielt",
+  "it": "La seconda fase a gironi (1999-2003) si gioca come ottavi",
+  "fr": "La deuxième phase de groupes (1999-2003) est jouée en huitièmes"
+ },
+ "Las primeras ediciones (1955-58 y 1958-60) duraron varias temporadas y mezclaron grupos; se simulan como eliminatorias anuales": {
+  "en": "The first editions (1955-58 and 1958-60) spanned several seasons and mixed groups; they are played as yearly knockouts",
+  "de": "Die ersten Ausgaben (1955-58 und 1958-60) dauerten mehrere Saisons; sie werden als jährliche K.-o.-Runden gespielt",
+  "it": "Le prime edizioni (1955-58 e 1958-60) durarono più stagioni; si giocano come eliminazione annuale",
+  "fr": "Les premières éditions (1955-58 et 1958-60) ont duré plusieurs saisons ; elles sont jouées en élimination annuelle"
+ },
+ "La fase de grupos de 2004-09 (40 equipos, grupos de 5 a una vuelta) se simula con grupos de 4": {
+  "en": "The 2004-09 group stage (40 teams, single round-robin groups of 5) is played with groups of 4",
+  "de": "Die Gruppenphase 2004-09 (40 Teams, Fünfergruppen) wird mit Vierergruppen gespielt",
+  "it": "La fase a gironi 2004-09 (40 squadre, gironi da 5) si gioca con gironi da 4",
+  "fr": "La phase de groupes 2004-09 (40 équipes, groupes de 5) est jouée en groupes de 4"
+ },
+ "48 equipos y dieciseisavos reales; se simula con 32": {
+  "en": "48 teams and a real round of 32; played with 32",
+  "de": "48 Teams und Sechzehntelfinale; gespielt mit 32",
+  "it": "48 squadre e sedicesimi reali; si gioca con 32",
+  "fr": "48 équipes et seizièmes réels ; joué avec 32"
+ },
+ "2021-24 tuvo fase de grupos; se usa la fase de liga actual": {
+  "en": "2021-24 had a group stage; the current league phase is used",
+  "de": "2021-24 gab es eine Gruppenphase; die heutige Ligaphase wird genutzt",
+  "it": "Nel 2021-24 c'era la fase a gironi; si usa la fase campionato attuale",
+  "fr": "En 2021-24 il y avait une phase de groupes ; la phase de ligue actuelle est utilisée"
+ },
+ "Los formatos por etapas de la Libertadores se simulan con la fase de grupos actual": {
+  "en": "The Libertadores' historical formats are played with the current group stage",
+  "de": "Die historischen Formate der Libertadores werden mit der heutigen Gruppenphase gespielt",
+  "it": "I formati storici della Libertadores si giocano con la fase a gironi attuale",
+  "fr": "Les formats historiques de la Libertadores sont joués avec la phase de groupes actuelle"
+ },
+ "Se usa la fase de liga actual": {
+  "en": "The current league phase is used",
+  "de": "Die heutige Ligaphase wird genutzt",
+  "it": "Si usa la fase campionato attuale",
+  "fr": "La phase de ligue actuelle est utilisée"
+ },
+ "La fase de grupos de 1991-93 se simula como eliminatorias": {
+  "en": "The 1991-93 group stage is played as knockout rounds",
+  "de": "Die Gruppenphase 1991-93 wird als K.-o.-Runden gespielt",
+  "it": "La fase a gironi 1991-93 si gioca a eliminazione diretta",
+  "fr": "La phase de groupes 1991-93 est jouée en élimination directe"
  }
 }

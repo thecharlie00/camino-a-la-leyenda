@@ -25,7 +25,7 @@
     if (t.b < 0 || t.a < 0) { var only = t.a < 0 ? t.b : t.a; return '<li class="cuptie' + (only === me ? " me" : "") + '"><span class="ct-a">' + U.team(nat, only) + '</span><span class="ct-s muted">' + tr("Exento") + "</span><span></span></li>"; }
     var sc = t.s.length ? t.s.map(function (s) { return s[0] + "-" + s[1]; }).join(" / ") : "—";
     var wa = t.w === t.a, wb = t.w === t.b;
-    return '<li class="cuptie' + (t.a === me || t.b === me ? " me" : "") + '"><span class="ct-a' + (wa ? " w" : wb ? " l" : "") + '">' + U.team(nat, t.a) + '</span><span class="ct-s">' + sc + (t.p ? '<small>' + tr("(pen.)") + "</small>" : "") + '</span><span class="ct-b' + (wb ? " w" : wa ? " l" : "") + '">' + U.team(nat, t.b) + "</span></li>";
+    return '<li class="cuptie' + (t.a === me || t.b === me ? " me" : "") + '"><span class="ct-a' + (wa ? " w" : wb ? " l" : "") + '">' + U.team(nat, t.a) + '</span><span class="ct-s">' + sc + (t.p ? '<small>' + tr("(pen.)") + "</small>" : "") + (t.ag && U.eraAgLabel ? '<small>' + U.eraAgLabel() + "</small>" : "") + '</span><span class="ct-b' + (wb ? " w" : wa ? " l" : "") + '">' + U.team(nat, t.b) + "</span></li>";
   }
   function koBlock(c, nat, me) {
     if (!c.ko) return "";
@@ -44,7 +44,7 @@
   }
   function cupDetail(k) {
     var c = S.C[k]; if (!c) return "";
-    var nat = !!c.nat, me = nat ? U.myNat() : U.myClub(), o = "";
+    var nat = !!c.nat, me = nat ? U.myNat() : U.myClub(), o = U.eraCupHead ? U.eraCupHead(c, k) : "";
     if (c.win >= 0 && (c.done || c.typ === "lite")) o += '<p class="lead cupchamp">🏆 ' + (c.win === me ? '<b class="pos">' + tr("¡Campeones!") + "</b>" : tr("Campeón: {team}", {team: U.team(nat, c.win)})) + "</p>";
     if (c.typ === "lite") return o + '<p class="muted">' + tr("Esta temporada no la disputas: aquí solo se guarda el campeón.") + "</p>";
     o += koBlock(c, nat, me);

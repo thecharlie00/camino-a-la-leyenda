@@ -41,13 +41,16 @@
     },
     {
      "from": 1991,
-     "type": "ko-groups",
+     "type": "ko",
      "size": 32,
      "koRounds": 2,
      "groups": 2,
      "perGroup": 1,
      "note": "Dos rondas de eliminatorias y dos grupos de 4; los ganadores de grupo juegan la final (1993-94 añadió semifinales)",
-     "doubtful": true
+     "doubtful": true,
+     "legs": 2,
+     "final": "single-neutral",
+     "simplified": "La fase de grupos de 1991-93 se simula como eliminatorias"
     },
     {
      "from": 1994,

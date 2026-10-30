@@ -96,6 +96,39 @@
     layer.setAttribute("data-era-year", S.yr);
     layer.innerHTML = '<section class="eras-dialog" data-era-decade="' + eraEscape(pack.id) + '" role="dialog" aria-modal="true" aria-labelledby="eras-current-title"><div class="eras-kicker">' + eraEscape(S.era.startDecade) + '</div><h2 id="eras-current-title">' + t("Reglas en {year}", {year: S.yr}) + '</h2>' + details + recentDecisions() + '<div class="eras-actions"><button type="button" data-era-act="close">' + t("Volver") + '</button></div></section>';
   }
+  /* Identidad de las competiciones de época: cabecera con trofeo, colores, formato, participantes y desempates del año */
+  window.UIX.eraAgLabel = function () { return t("(v. goles fuera)"); };
+  function formatText(f) {
+    if (!f) return "";
+    if (f.type === "ko") return f.final === "two-legs" ? t("Eliminatorias a ida y vuelta, también la final") : t("Eliminatorias a ida y vuelta y final a partido único en campo neutral");
+    if (f.type === "groups") return t("{g} grupos y eliminatorias", {g: f.groups});
+    if (f.type === "final") return f.legs === 2 ? t("Final a ida y vuelta") : t("Final a partido único en campo neutral");
+    return "";
+  }
+  function qualText(q) {
+    return q === "champions" ? t("Solo campeones de liga y el campeón vigente") : q === "cup-winners" ? t("Campeones de copa de cada país") : q === "one-per-city" ? t("Clubes de ciudades con feria de muestras, uno por ciudad") : "";
+  }
+  window.UIX.eraCupHead = function (c, k) {
+    if (!S || !S.era || !S.era.active || c.nat || typeof EraComps === "undefined") return "";
+    var comp = EraComps.clubComp(k); if (!comp) return "";
+    var year = S.yr, f = EraComps.format(comp, year), q = comp.qual ? (comp.qual.filter(function (x) { return x[0] <= year; }).pop() || [])[1] : null;
+    var rules = eraRulesForYear(year, {comp: k, conf: comp.conf}), lines = [];
+    var ft = formatText(f); if (ft) lines.push(ft);
+    var qt = qualText(q); if (qt) lines.push(qt);
+    if (rules) {
+      var tb = [];
+      if (rules.awayGoals && (f.legs === 2 || f.type === "ko" || f.type === "groups")) tb.push(t("goles fuera"));
+      if (rules.goldenGoal) tb.push(t("gol de oro")); if (rules.silverGoal) tb.push(t("gol de plata"));
+      tb.push(t("penaltis"));
+      lines.push(t("Desempate: {list}", {list: tb.join(" · ")}));
+    }
+    if (f.simplified) lines.push(t("Formato simplificado en el juego: {note}", {note: t(f.simplified)}));
+    var cols = (comp.identity && comp.identity.colors) || ["#13262c", "#d9a93c"];
+    return '<section class="card eras-cuphead" style="border-left:6px solid ' + eraEscape(cols[1]) + ';background:linear-gradient(135deg,' + eraEscape(cols[0]) + '33,transparent 70%)">' +
+      '<div style="display:flex;gap:12px;align-items:center">' + (typeof trophySVG === "function" ? trophySVG(k, 56, c.n) : "") +
+      '<div><span class="eyebrow">' + t("Temporada {y}", {y: typeof seasonLabel === "function" ? seasonLabel(year) : year}) + '</span><h3 style="margin:2px 0">' + eraEscape(c.n) + "</h3></div></div>" +
+      lines.map(function (line) { return '<p class="lead" style="margin:6px 0 0;font-size:var(--fs-sm)">' + eraEscape(line) + "</p>"; }).join("") + "</section>";
+  };
   /* Ficha de época del club elegido y opciones propias de Épocas dentro del formulario de creación */
   function rivalOf(ci) {
     var best = -1;
