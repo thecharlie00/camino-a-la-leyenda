@@ -966,3 +966,8 @@ html.has-reveal .reveal-item.is-visible { opacity: 1; transform: none; }
 .hero { background-image: radial-gradient(ellipse at 78% 18%, rgba(255,178,30,.075), transparent 36%), radial-gradient(ellipse at 20% 72%, rgba(34,127,80,.12), transparent 45%); }
 .match { border-color: rgba(89,151,111,.38); box-shadow: 0 0 0 1px rgba(255,255,255,.025), 0 28px 85px rgba(0,0,0,.38), 0 0 60px rgba(30,107,67,.12); }
 @media (prefers-reduced-motion: reduce) { .poss-track i { transition: none; } }
+/* Nombre largo (Futbol: Road to Glory): en móvil el logo pasa a dos líneas para no pisar el menú */
+@media (max-width: 640px) {
+  .top .brand { white-space: normal; font-size: 14px; line-height: 1.05; max-width: 46%; }
+  .top nav { flex: none; }
+}
