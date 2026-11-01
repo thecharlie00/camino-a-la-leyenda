@@ -1,4 +1,4 @@
-/* Web de Camino a la Leyenda: anuncios, consent, idioma, pantalla completa y partido en directo (3D WebGL y 2D). */
+/* Web de Futbol: Road to Glory: anuncios, consent, idioma, pantalla completa y partido en directo (3D WebGL y 2D). */
 (function () {
   "use strict";
   var reduce = false;
@@ -37,7 +37,7 @@
     var trailerId = isSpanish ? "o4JXeEnTkcA" : "BLAzRpcs0Z0";
     var trailerSrc = trailer.getAttribute(isSpanish ? "data-trailer-es" : "data-trailer-en");
     if (trailer.getAttribute("src") !== trailerSrc) trailer.src = trailerSrc;
-    trailer.title = isSpanish ? "Tráiler oficial de Camino a la Leyenda en castellano" : "Camino a la Leyenda official game trailer in English";
+    trailer.title = isSpanish ? "Tráiler oficial de Futbol: Road to Glory en castellano" : "Futbol: Road to Glory official game trailer in English";
     var trailerWatch = document.querySelector("[data-trailer-watch]");
     if (trailerWatch) trailerWatch.href = "https://www.youtube.com/watch?v=" + trailerId;
   }
