@@ -503,7 +503,7 @@ public final class MainActivity extends Activity {
                 || adLoading || interstitialAd != null) return;
         adsHandler.removeCallbacks(retryInterstitialLoad);
         adLoading = true;
-        boolean useTestAds = BuildConfig.DEBUG || BuildConfig.USE_ADMOB_TEST_ADS;
+        boolean useTestAds = BuildConfig.DEBUG;
         String adUnitId = useTestAds ? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID;
         Log.i(ADS_LOG_TAG, "Requesting " + (useTestAds ? "Google test" : "AdMob production") + " interstitial.");
         try {

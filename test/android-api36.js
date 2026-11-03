@@ -63,8 +63,8 @@ for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updat
 }
 assert.match(activity, /ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197\/1191061575"/);
 assert.match(activity, /TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544\/1033173712"/);
-assert.match(activity, /BuildConfig\.DEBUG \|\| BuildConfig\.USE_ADMOB_TEST_ADS/,
-  'Debug and explicitly opted-in closed-test release builds must use Google test inventory');
+assert.match(activity, /boolean useTestAds = BuildConfig\.DEBUG/,
+  'Only debug builds should use Google test inventory; release builds use the real production ad unit');
 assert.match(activity, /String adUnitId = useTestAds \? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID/);
 assert.match(activity, /if \(!"menu"\.equals\(where\)\) return;/, 'Native bridge must reject every placement except the safe return-to-menu transition');
 assert.match(activity, /MIN_INTERSTITIAL_INTERVAL_MS = 5L \* 60L \* 1000L/);
@@ -111,8 +111,6 @@ assert.match(activity, /setMixedContentMode\(WebSettings\.MIXED_CONTENT_NEVER_AL
 assert.match(manifest, /com\.google\.android\.gms\.ads\.APPLICATION_ID/);
 assert.match(manifest, /ca-app-pub-3919867907492197~2991228409/);
 assert.match(aabBuilder, /Gradle is required/);
-assert.match(aabBuilder, /CAMINO_ADMOB_TEST_ADS=\"\$\{CAMINO_ADMOB_TEST_ADS:-false\}\"/,
-  'The AAB builder must preserve the opt-in flag through to Gradle');
 assert.match(aabBuilder, /:app:bundleRelease/);
 assert.match(aabBuilder, /outputs\/bundle\/release\/app-release\.aab/);
 assert.match(aabBuilder, /dist\/android\/jugar\/juego\.html/, 'AAB builder must package the Android-only startup artifact');
@@ -125,11 +123,6 @@ assert.match(gradleConfig, /compileSdk 37/);
 assert.match(gradleConfig, /minSdk 24/);
 assert.match(gradleConfig, /targetSdk 36/, 'Keep Android 17 runtime behavior opt-in until it is tested');
 assert.match(gradleConfig, /buildToolsVersion '37\.0\.0'/);
-assert.match(gradleConfig, /buildConfigField 'boolean', 'USE_ADMOB_TEST_ADS', 'true'/,
-  'Debug builds must always use Google test ad units');
-assert.match(gradleConfig, /envOr\('CAMINO_ADMOB_TEST_ADS', 'false'\)\.toBoolean\(\)\.toString\(\)/,
-  'Release builds must use Google test ad units only with an explicit opt-in');
-assert.match(gradleConfig, /buildConfigField 'boolean', 'USE_ADMOB_TEST_ADS', 'false'/);
 assert.match(gradleConfig, /prepareVariantGameAssets/);
 assert.match(gradleConfig, /generated\/game-assets\/\$\{variant\.name\}/);
 assert.match(gradleConfig, /onVariants\(selector\(\)\.all\(\), \{ variant ->/);
@@ -143,10 +136,8 @@ assert.match(activity, /webView\.addJavascriptInterface\(new Bridge\(\), "Androi
 assert.match(activity, /shouldOverrideUrlLoading\(WebView view, WebResourceRequest request\)/);
 assert.match(activity, /Intent\.ACTION_VIEW/);
 assert.match(activity, /onRenderProcessGone\(WebView view, android\.webkit\.RenderProcessGoneDetail detail\)/);
-assert.match(workflow, /admob_test_ads:/,
-  'Manual release builds must offer an explicit Google test-ad toggle for closed testing');
-assert.match(workflow, /CAMINO_ADMOB_TEST_ADS: \$\{\{ inputs\.admob_test_ads \|\| false \}\}/);
-assert.match(workflow, /Do not use it for production/);
+assert.doesNotMatch(workflow, /admob_test_ads|CAMINO_ADMOB_TEST_ADS/,
+  'Release AABs must keep the real AdMob unit so closed testing checks actual ad delivery');
 assert.match(workflow, /gradle\/actions\/setup-gradle@v4/);
 assert.match(workflow, /gradle-version: "9\.6\.0"/);
 assert.match(workflow, /BUILD_TOOLS: "37\.0\.0"/);
