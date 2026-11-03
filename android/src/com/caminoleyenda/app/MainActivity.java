@@ -30,6 +30,7 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.ump.ConsentForm;
 import com.google.android.ump.ConsentInformation;
 import com.google.android.ump.ConsentRequestParameters;
 import com.google.android.ump.FormError;
@@ -172,7 +173,7 @@ public final class MainActivity extends Activity {
                     if (info == null || isFinishing()) return;
                     consentFormShowing = true;
                     try {
-                        UserMessagingPlatform.showPrivacyOptionsForm(MainActivity.this, new UserMessagingPlatform.OnConsentFormDismissedListener() {
+                        UserMessagingPlatform.showPrivacyOptionsForm(MainActivity.this, new ConsentForm.OnConsentFormDismissedListener() {
                             @Override
                             public void onConsentFormDismissed(FormError error) {
                                 consentFormShowing = false;
@@ -403,7 +404,7 @@ public final class MainActivity extends Activity {
                         consentFormShowing = true;
                         try {
                             UserMessagingPlatform.loadAndShowConsentFormIfRequired(MainActivity.this,
-                                new UserMessagingPlatform.OnConsentFormDismissedListener() {
+                                new ConsentForm.OnConsentFormDismissedListener() {
                                     @Override
                                     public void onConsentFormDismissed(FormError error) {
                                         consentFormShowing = false;
