@@ -81,7 +81,7 @@ android {
 }
 
 androidComponents {
-    onVariants { variant ->
+    onVariants(selector().all(), { variant ->
         def prepareVariantGameAssets = tasks.register("prepare${variant.name.capitalize()}GameAssets", PrepareGameAssetsTask) {
             gameHtml.set(gameHtmlFile)
             outputDirectory.set(layout.buildDirectory.dir("generated/game-assets/${variant.name}"))
@@ -90,7 +90,7 @@ androidComponents {
             prepareVariantGameAssets,
             PrepareGameAssetsTask::getOutputDirectory
         )
-    }
+    })
 }
 
 dependencies {
