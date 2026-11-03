@@ -29,7 +29,7 @@ assert.ok(webBootstrapMatch, 'Web startup bootstrap is missing');
 new Script(webBootstrapMatch[1], {filename: 'web-game-bootstrap.js'});
 assert.match(webBootstrapMatch[1], /requestAnimationFrame/);
 assert.match(html, /class="boot-screen"[\s\S]*?data-boot-status/, 'Web page must show a loading screen before the game starts');
-assert.match(gameSource, /var BUILD = \{v: "5\.23", code: 73,/);
+assert.match(gameSource, /var BUILD = \{v: "5\.24", code: 74,/);
 assert.match(gameSource, /var GOAT_WEB_BUILD = false;/);
 assert.match(gameSource, /var GOAT_API_URL = "https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev";/);
 assert.match(gameSource, /UIX\.add\("mainhome"/);
@@ -73,7 +73,7 @@ const androidSource = moduleMatches.map((match) => match[1]).join('\n');
 new Script(androidSource, {filename: 'android-game-modules.js'});
 assert.match(androidSource, /var NO_ADS = false;/, 'Android must route ads only through the consent-aware native bridge');
 assert.match(androidSource, /var WEB_ADS = false;/, 'Android AdMob placements must remain independent from web AdSense');
-assert.match(androidSource, /var BUILD = \{v: "5\.23", code: 73,/);
+assert.match(androidSource, /var BUILD = \{v: "5\.24", code: 74,/);
 assert.match(androidSource, /var GOAT_WEB_BUILD = false;/);
 assert.match(androidSource, /var GOAT_API_URL = "https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev";/);
 assert.match(androidSource, /UIX\.add\("mainhome"/);
@@ -186,4 +186,4 @@ assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No website
 assert.ok(statSync(webGamePage).size > 1_000_000, 'Self-contained web game bundle is unexpectedly small');
 assert.ok(statSync(androidGamePage).size > 1_000_000, 'Self-contained Android game bundle is unexpectedly small');
 
-console.log(`Build smoke passed: shared loading screen, web startup, Android incremental startup; v5.23 (73).`);
+console.log(`Build smoke passed: shared loading screen, web startup, Android incremental startup; v5.24 (74).`);
