@@ -63,7 +63,9 @@ for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updat
 }
 assert.match(activity, /ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197\/1191061575"/);
 assert.match(activity, /TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544\/1033173712"/);
-assert.match(activity, /BuildConfig\.DEBUG \? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID/);
+assert.match(activity, /boolean useTestAds = BuildConfig\.DEBUG/,
+  'Only debug builds should use Google test inventory; release builds use the real production ad unit');
+assert.match(activity, /String adUnitId = useTestAds \? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID/);
 assert.match(activity, /if \(!"menu"\.equals\(where\)\) return;/, 'Native bridge must reject every placement except the safe return-to-menu transition');
 assert.match(activity, /MIN_INTERSTITIAL_INTERVAL_MS = 5L \* 60L \* 1000L/);
 assert.match(activity, /consentInformation\.requestConsentInfoUpdate/);
@@ -72,6 +74,13 @@ assert.match(activity, /showPrivacyOptionsForm/);
 assert.match(activity, /ConsentForm\.OnConsentFormDismissedListener/);
 assert.doesNotMatch(activity, /UserMessagingPlatform\.OnConsentFormDismissedListener/);
 assert.match(activity, /info\.canRequestAds\(\)/);
+assert.match(activity, /FIRST_AD_RETRY_DELAY_MS = 30L \* 1000L/);
+assert.match(activity, /MAX_AD_RETRY_DELAY_MS = 5L \* 60L \* 1000L/);
+assert.match(activity, /private void scheduleInterstitialRetry\(\)/);
+assert.match(activity, /onAdFailedToLoad\(LoadAdError error\)/);
+assert.match(activity, /scheduleInterstitialRetry\(\)/,
+  'A failed request must retry with a bounded delay while consent still permits ads');
+assert.match(activity, /Log\.w\(ADS_LOG_TAG, "Interstitial load failed/);
 assert.match(activity, /onAdDismissedFullScreenContent/);
 const goatOrigin = gameBuilder.match(/DEFAULT_GOAT_API_URL = "([^"]+)"/)[1];
 assert.ok(activity.includes(`GOAT_CAREER_URL = "${goatOrigin}/api/goat-ladder/careers"`),
@@ -127,6 +136,8 @@ assert.match(activity, /webView\.addJavascriptInterface\(new Bridge\(\), "Androi
 assert.match(activity, /shouldOverrideUrlLoading\(WebView view, WebResourceRequest request\)/);
 assert.match(activity, /Intent\.ACTION_VIEW/);
 assert.match(activity, /onRenderProcessGone\(WebView view, android\.webkit\.RenderProcessGoneDetail detail\)/);
+assert.doesNotMatch(workflow, /admob_test_ads|CAMINO_ADMOB_TEST_ADS/,
+  'Release AABs must keep the real AdMob unit so closed testing checks actual ad delivery');
 assert.match(workflow, /gradle\/actions\/setup-gradle@v4/);
 assert.match(workflow, /gradle-version: "9\.6\.0"/);
 assert.match(workflow, /BUILD_TOOLS: "37\.0\.0"/);
