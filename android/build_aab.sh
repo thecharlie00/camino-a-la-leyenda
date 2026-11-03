@@ -20,7 +20,7 @@ if [[ ! -f "$ROOT/dist/android/jugar/juego.html" ]]; then
   exit 1
 fi
 if ! command -v "$GRADLE_BIN" >/dev/null 2>&1; then
-  echo "Gradle is required. Install Gradle 8.13+ and Android SDK platform/build-tools 36." >&2
+  echo "Gradle is required. Install Gradle 9.6+ and Android SDK platform 37.0/build-tools 37.0.0." >&2
   exit 1
 fi
 

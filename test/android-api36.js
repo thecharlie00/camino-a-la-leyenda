@@ -15,9 +15,9 @@ const gameUi = read('../legacy-game/src/ui.js');
 const playStoreFeed = JSON.parse(read('../public/play-store-version.json'));
 
 assert.match(manifest, /android:minSdkVersion="24"\s+android:targetSdkVersion="36"/);
-assert.match(manifest, /android:versionCode="70"/);
-assert.match(manifest, /android:versionName="5\.20"/);
-assert.equal(packageJson.version, '5.20.0');
+assert.match(manifest, /android:versionCode="71"/);
+assert.match(manifest, /android:versionName="5\.21"/);
+assert.equal(packageJson.version, '5.21.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
@@ -108,8 +108,9 @@ const gradleConfig = read('../android/app/build.gradle');
 const settingsGradle = read('../android/settings.gradle');
 assert.match(gradleConfig, /play-services-ads:24\.7\.0/);
 assert.match(gradleConfig, /user-messaging-platform:3\.2\.0/);
-assert.match(gradleConfig, /compileSdk 36/);
-assert.match(gradleConfig, /targetSdk 36/);
+assert.match(gradleConfig, /compileSdk 37/);
+assert.match(gradleConfig, /targetSdk 36/, 'Keep Android 17 runtime behavior opt-in until it is tested');
+assert.match(gradleConfig, /buildToolsVersion '37\.0\.0'/);
 assert.match(gradleConfig, /prepareGameAssets/);
 assert.match(settingsGradle, /include ':app'/);
 assert.match(activity, /webView\.getUrl\(\) == null/, 'State restoration must reload the game when the saved URL is empty');
@@ -118,9 +119,10 @@ assert.match(activity, /shouldOverrideUrlLoading\(WebView view, WebResourceReque
 assert.match(activity, /Intent\.ACTION_VIEW/);
 assert.match(activity, /onRenderProcessGone\(WebView view, android\.webkit\.RenderProcessGoneDetail detail\)/);
 assert.match(workflow, /gradle\/actions\/setup-gradle@v4/);
-assert.match(workflow, /gradle-version: "8\.14\.3"/);
-assert.match(workflow, /BUILD_TOOLS: "36\.0\.0"/);
-assert.match(workflow, /PLATFORM: "android-36"/);
+assert.match(workflow, /gradle-version: "9\.6\.0"/);
+assert.match(workflow, /BUILD_TOOLS: "37\.0\.0"/);
+assert.match(workflow, /PLATFORM: "android-37\.0"/);
+assert.match(read('../android/build.gradle'), /com\.android\.application' version '9\.5\.0'/);
 for (const policyPath of [
   '../privacidad/app/index.html', '../privacidad/index.html', '../en/privacidad/index.html',
   '../de/privacidad/index.html', '../fr/privacidad/index.html', '../it/privacidad/index.html'
@@ -144,4 +146,4 @@ assert.match(gameCss, /\.goat-board \.seg \{ width: 100%; grid-auto-columns: min
 assert.match(gameCss, /\.goat-board \.seg button \{ min-width: 0; min-height: 44px; padding-inline: 4px; overflow-wrap: anywhere; touch-action: manipulation; \}/, 'GOAT filters must have mobile-sized touch targets');
 assert.match(gameCss, /\.pickrow\.modec\.eras-mode \{[^}]*touch-action: manipulation;/, 'Era Mode selection must remain touch-accessible');
 
-console.log('Android API 36 manifest, builders, edge-to-edge, large screens and back-navigation checks passed.');
+console.log('Android target API 36 / compile API 37 manifest, Gradle build, edge-to-edge, large screens and back-navigation checks passed.');

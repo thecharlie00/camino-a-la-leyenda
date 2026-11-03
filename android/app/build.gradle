@@ -11,15 +11,15 @@ def envOr = { String key, String fallback ->
 
 android {
     namespace 'com.caminoleyenda.app'
-    compileSdk 36
-    buildToolsVersion '36.0.0'
+    compileSdk 37
+    buildToolsVersion '37.0.0'
 
     defaultConfig {
         applicationId 'com.caminoleyenda.app'
         minSdk 24
         targetSdk 36
-        versionCode envOr('VERSION_CODE', '70').toInteger()
-        versionName envOr('VERSION_NAME', '5.20')
+        versionCode envOr('VERSION_CODE', '71').toInteger()
+        versionName envOr('VERSION_NAME', '5.21')
     }
 
     sourceSets {

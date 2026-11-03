@@ -24,8 +24,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
-      BUILD_TOOLS: "36.0.0"
-      PLATFORM: "android-36"
+      BUILD_TOOLS: "37.0.0"
+      PLATFORM: "android-37.0"
     steps:
       - uses: actions/checkout@v7
 
@@ -41,7 +41,7 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "8.14.3"
+          gradle-version: "9.6.0"
 
       - name: Instalar dependencias
         run: npm ci --no-audit --no-fund
