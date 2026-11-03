@@ -112,6 +112,10 @@ assert.match(gradleConfig, /compileSdk 37/);
 assert.match(gradleConfig, /targetSdk 36/, 'Keep Android 17 runtime behavior opt-in until it is tested');
 assert.match(gradleConfig, /buildToolsVersion '37\.0\.0'/);
 assert.match(gradleConfig, /prepareGameAssets/);
+assert.match(gradleConfig, /variant\.sources\.assets\?\.addGeneratedSourceDirectory/,
+  'Generated Android assets must use the AGP Variant Sources API');
+assert.match(gradleConfig, /PrepareGameAssetsTask::getOutputDirectory/);
+assert.match(gradleConfig, /@OutputDirectory\s+abstract DirectoryProperty getOutputDirectory\(\)/);
 assert.match(settingsGradle, /include ':app'/);
 assert.match(activity, /webView\.getUrl\(\) == null/, 'State restoration must reload the game when the saved URL is empty');
 assert.match(activity, /webView\.addJavascriptInterface\(new Bridge\(\), "AndroidBridge"\)/);

@@ -1,8 +1,35 @@
+import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.TaskAction
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
 plugins {
     id 'com.android.application'
 }
 
-def gameAssetsDir = layout.buildDirectory.dir('generated/game-assets')
+abstract class PrepareGameAssetsTask extends DefaultTask {
+    @InputFile
+    abstract RegularFileProperty getGameHtml()
+
+    @OutputDirectory
+    abstract DirectoryProperty getOutputDirectory()
+
+    @TaskAction
+    void copyGameHtml() {
+        File destination = outputDirectory.get().file('jugar/juego.html').asFile
+        destination.parentFile.mkdirs()
+        Files.copy(gameHtml.get().asFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING)
+    }
+}
+
+def prepareGameAssets = tasks.register('prepareGameAssets', PrepareGameAssetsTask) {
+    gameHtml.set(rootProject.file('../dist/android/jugar/juego.html'))
+    outputDirectory.set(layout.buildDirectory.dir('generated/game-assets'))
+}
 
 def envOr = { String key, String fallback ->
     def value = System.getenv(key)
@@ -27,7 +54,6 @@ android {
             manifest.srcFile '../AndroidManifest.xml'
             java.srcDirs = ['../src']
             res.srcDirs = ['../res']
-            assets.srcDir(gameAssetsDir)
         }
     }
 
@@ -57,13 +83,13 @@ android {
     }
 }
 
-tasks.register('prepareGameAssets', Copy) {
-    from(rootProject.file('../dist/android/jugar/juego.html'))
-    into(gameAssetsDir.map { it.dir('jugar') })
-}
-
-tasks.named('preBuild').configure {
-    dependsOn(tasks.named('prepareGameAssets'))
+androidComponents {
+    onVariants { variant ->
+        variant.sources.assets?.addGeneratedSourceDirectory(
+            prepareGameAssets,
+            PrepareGameAssetsTask::getOutputDirectory
+        )
+    }
 }
 
 dependencies {
