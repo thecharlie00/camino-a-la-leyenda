@@ -61,6 +61,16 @@ assert.doesNotMatch(activity.slice(0, api26Start), /import .*RenderProcessGoneDe
 for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updateName', 'openStore', 'showAd', 'privacyOptionsRequired', 'showPrivacyOptions', 'remind', 'cancelRemind', 'askNotify', 'goatCareerPost']) {
   assert.match(activity, new RegExp(`@JavascriptInterface\\s+public\\s+[^\\n]+\\b${method}\\s*\\(`), `Missing AndroidBridge method ${method}`);
 }
+assert.match(activity, /ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197\/1191061575"/);
+assert.match(activity, /TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544\/1033173712"/);
+assert.match(activity, /BuildConfig\.DEBUG \? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID/);
+assert.match(activity, /if \(!"menu"\.equals\(where\)\) return;/, 'Native bridge must reject every placement except the safe return-to-menu transition');
+assert.match(activity, /MIN_INTERSTITIAL_INTERVAL_MS = 5L \* 60L \* 1000L/);
+assert.match(activity, /consentInformation\.requestConsentInfoUpdate/);
+assert.match(activity, /loadAndShowConsentFormIfRequired/);
+assert.match(activity, /showPrivacyOptionsForm/);
+assert.match(activity, /info\.canRequestAds\(\)/);
+assert.match(activity, /onAdDismissedFullScreenContent/);
 const goatOrigin = gameBuilder.match(/DEFAULT_GOAT_API_URL = "([^"]+)"/)[1];
 assert.ok(activity.includes(`GOAT_CAREER_URL = "${goatOrigin}/api/goat-ladder/careers"`),
   'Android native career requests must match the game-configured GOAT API');
@@ -87,22 +97,42 @@ assert.match(activity, /onConfigurationChanged\(Configuration newConfig\)/);
 assert.match(activity, /setAllowUniversalAccessFromFileURLs\(false\)/);
 assert.match(activity, /setMixedContentMode\(WebSettings\.MIXED_CONTENT_NEVER_ALLOW\)/);
 
-assert.match(aabBuilder, /MANIFEST_TARGET_SDK/);
-assert.match(aabBuilder, /"\$AAPT2" compile --dir res -o build-aab\/resources\.zip/, 'AAB builder must compile launcher resources');
-assert.match(aabBuilder, /-R build-aab\/resources\.zip/, 'AAB link must include the compiled launcher icon');
+assert.match(manifest, /com\.google\.android\.gms\.ads\.APPLICATION_ID/);
+assert.match(manifest, /ca-app-pub-3919867907492197~2991228409/);
+assert.match(aabBuilder, /Gradle is required/);
+assert.match(aabBuilder, /:app:bundleRelease/);
+assert.match(aabBuilder, /outputs\/bundle\/release\/app-release\.aab/);
 assert.match(aabBuilder, /dist\/android\/jugar\/juego\.html/, 'AAB builder must package the Android-only startup artifact');
-assert.match(aabBuilder, /assets\/jugar\/juego\.html/);
-assert.match(aabBuilder, /assets\/index\.html/, 'AAB must retain the compatibility entry point');
-assert.match(aabBuilder, /file:\/\/\/android_asset\/jugar\/juego\.html/, 'Legacy entry point must forward restored WebView state to the game without duplicating the bundle');
+assert.doesNotMatch(aabBuilder, /AAPT2|BUNDLETOOL_JAR|MANIFEST_TARGET_SDK/, 'AdMob dependency resolution is handled by Gradle, not the old manual packager');
+const gradleConfig = read('../android/app/build.gradle');
+const settingsGradle = read('../android/settings.gradle');
+assert.match(gradleConfig, /play-services-ads:24\.7\.0/);
+assert.match(gradleConfig, /user-messaging-platform:3\.2\.0/);
+assert.match(gradleConfig, /compileSdk 36/);
+assert.match(gradleConfig, /targetSdk 36/);
+assert.match(gradleConfig, /prepareGameAssets/);
+assert.match(settingsGradle, /include ':app'/);
 assert.match(activity, /webView\.getUrl\(\) == null/, 'State restoration must reload the game when the saved URL is empty');
 assert.match(activity, /webView\.addJavascriptInterface\(new Bridge\(\), "AndroidBridge"\)/);
 assert.match(activity, /shouldOverrideUrlLoading\(WebView view, WebResourceRequest request\)/);
 assert.match(activity, /Intent\.ACTION_VIEW/);
 assert.match(activity, /onRenderProcessGone\(WebView view, android\.webkit\.RenderProcessGoneDetail detail\)/);
-assert.match(aabBuilder, /--target-sdk-version "\$TARGET_SDK_VERSION"/);
-assert.match(aabBuilder, /TARGET_SDK_VERSION must match AndroidManifest\.xml/);
+assert.match(workflow, /gradle\/actions\/setup-gradle@v4/);
+assert.match(workflow, /gradle-version: "8\.14\.3"/);
 assert.match(workflow, /BUILD_TOOLS: "36\.0\.0"/);
 assert.match(workflow, /PLATFORM: "android-36"/);
+for (const policyPath of [
+  '../privacidad/app/index.html', '../privacidad/index.html', '../en/privacidad/index.html',
+  '../de/privacidad/index.html', '../fr/privacidad/index.html', '../it/privacidad/index.html'
+]) {
+  const policy = read(policyPath);
+  assert.match(policy, /AdMob/);
+  assert.match(policy, /never during matches?|nunca durante (los partidos|(un )?partido)|niemals während eines Spiels|jamais pendant un match|mai durante una partita/i,
+    `Policy must explain that ads never interrupt matches: ${policyPath}`);
+  assert.doesNotMatch(policy, /does not show ads|no muestra anuncios|zeigt keine Werbung|n'affiche pas de publicit|non mostra pubblicità/i,
+    `Policy must not claim Android has no ads: ${policyPath}`);
+}
+
 assert.doesNotMatch(apkBuilder, /android-23|index-noads\.html|dalvik-exchange/);
 assert.match(apkBuilder, /--mode=universal/);
 assert.match(gameBuilder, /viewport-fit=cover/);

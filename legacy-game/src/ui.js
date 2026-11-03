@@ -1935,11 +1935,11 @@
     UI.exp = {}; UI.wl = null; UI.flash = null; UI.sheet = null; UI.cr = null;
     UI.view = S.ph === "draft" ? "draft" : "game"; UI.tab = isMgr() ? "club" : "carrera";
   }
-  /* ---------- anuncios (solo en la app de Android; en la web no hay) ----------
-     Se muestran en las transiciones: empezar partida, volver al menú, cargar partida y pasar de jugador a entrenador.
-     Mínimo 60 s entre anuncios para no encadenarlos (p. ej. menú → cargar). */
-  var AD_GAP = 60000, lastAd = 0;
-  var NO_ADS = false; /* build.py lo pone a true en la versión sin anuncios */
+  /* ---------- anuncios (Android; la web mantiene NO_ADS=true) ----------
+     El host nativo solo admite la transición explícita de vuelta al menú, y aplica
+     además un límite independiente de cinco minutos entre intersticiales. */
+  var AD_GAP = 300000, lastAd = 0;
+  var NO_ADS = false; /* la compilación web lo pone a true; Android usa AndroidBridge */
   var WEB_ADS = false; /* build_web.py lo pone a true en la web pública, que lleva anuncios de AdSense fuera del juego */
   function showAd(where) {
     var B = window.AndroidBridge;

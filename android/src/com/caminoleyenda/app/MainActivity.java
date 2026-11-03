@@ -23,6 +23,17 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.ump.ConsentInformation;
+import com.google.android.ump.ConsentRequestParameters;
+import com.google.android.ump.FormError;
+import com.google.android.ump.UserMessagingPlatform;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -44,7 +55,19 @@ public final class MainActivity extends Activity {
     private static final int MAX_UPDATE_FEED_CHARS = 16384;
     private static final int MAX_GOAT_REQUEST_BYTES = 100000;
     private static final int MAX_GOAT_RESPONSE_BYTES = 1000000;
+    private static final String ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197/1191061575";
+    private static final String TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
+    private static final long MIN_INTERSTITIAL_INTERVAL_MS = 5L * 60L * 1000L;
     private WebView webView;
+    private ConsentInformation consentInformation;
+    private volatile boolean adsConsentGranted;
+    private volatile boolean privacyOptionsAreRequired;
+    private boolean adsInitializationStarted;
+    private boolean mobileAdsInitialized;
+    private boolean adLoading;
+    private boolean consentFormShowing;
+    private InterstitialAd interstitialAd;
+    private long lastInterstitialShownAt;
     private volatile int availableUpdateCode;
     private volatile String availableUpdateName = "";
     private volatile long lastUpdateCheckAt;
@@ -124,17 +147,43 @@ public final class MainActivity extends Activity {
 
         @JavascriptInterface
         public void showAd(final String where) {
-            // Safe stub for interstitial / transition ads
+            // Only the explicit return-to-menu transition is an ad placement. In
+            // particular, do not show on career start, save loading or match screens.
+            if (!"menu".equals(where)) return;
+            runUiSafely(new Runnable() {
+                @Override
+                public void run() {
+                    showLoadedInterstitial();
+                }
+            });
         }
 
         @JavascriptInterface
         public boolean privacyOptionsRequired() {
-            return false;
+            return privacyOptionsAreRequired;
         }
 
         @JavascriptInterface
         public void showPrivacyOptions() {
-            // Safe stub for consent / privacy settings dialog
+            runUiSafely(new Runnable() {
+                @Override
+                public void run() {
+                    ConsentInformation info = consentInformation;
+                    if (info == null || isFinishing()) return;
+                    consentFormShowing = true;
+                    try {
+                        UserMessagingPlatform.showPrivacyOptionsForm(MainActivity.this, new UserMessagingPlatform.OnConsentFormDismissedListener() {
+                            @Override
+                            public void onConsentFormDismissed(FormError error) {
+                                consentFormShowing = false;
+                                updateAdRequestPermission();
+                            }
+                        });
+                    } catch (Throwable ignored) {
+                        consentFormShowing = false;
+                    }
+                }
+            });
         }
 
         @JavascriptInterface
@@ -293,6 +342,7 @@ public final class MainActivity extends Activity {
                 webView.loadUrl("file:///android_asset/jugar/juego.html");
             }
             registerPredictiveBack();
+            requestConsentAndInitializeAds();
         } catch (Throwable t) {
             disposeWebView(webView);
             try {
@@ -338,6 +388,145 @@ public final class MainActivity extends Activity {
                 }
             });
         } catch (Throwable ignored) {}
+    }
+
+    private void requestConsentAndInitializeAds() {
+        try {
+            consentInformation = UserMessagingPlatform.getConsentInformation(this);
+            ConsentRequestParameters parameters = new ConsentRequestParameters.Builder().build();
+            consentInformation.requestConsentInfoUpdate(this, parameters,
+                new ConsentInformation.OnConsentInfoUpdateSuccessListener() {
+                    @Override
+                    public void onConsentInfoUpdateSuccess() {
+                        if (isFinishing()) return;
+                        refreshPrivacyOptionsStatus();
+                        consentFormShowing = true;
+                        try {
+                            UserMessagingPlatform.loadAndShowConsentFormIfRequired(MainActivity.this,
+                                new UserMessagingPlatform.OnConsentFormDismissedListener() {
+                                    @Override
+                                    public void onConsentFormDismissed(FormError error) {
+                                        consentFormShowing = false;
+                                        updateAdRequestPermission();
+                                    }
+                                });
+                        } catch (Throwable ignored) {
+                            consentFormShowing = false;
+                            updateAdRequestPermission();
+                        }
+                    }
+                },
+                new ConsentInformation.OnConsentInfoUpdateFailureListener() {
+                    @Override
+                    public void onConsentInfoUpdateFailure(FormError error) {
+                        updateAdRequestPermission();
+                    }
+                });
+            // Reuse an existing valid choice immediately while refreshing its status.
+            updateAdRequestPermission();
+        } catch (Throwable ignored) {
+            adsConsentGranted = false;
+        }
+    }
+
+    private void refreshPrivacyOptionsStatus() {
+        try {
+            ConsentInformation info = consentInformation;
+            privacyOptionsAreRequired = info != null && info.getPrivacyOptionsRequirementStatus()
+                == ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED;
+        } catch (Throwable ignored) {
+            privacyOptionsAreRequired = false;
+        }
+    }
+
+    private void updateAdRequestPermission() {
+        try {
+            ConsentInformation info = consentInformation;
+            adsConsentGranted = info != null && info.canRequestAds();
+            refreshPrivacyOptionsStatus();
+            if (adsConsentGranted) {
+                initializeAdsIfAllowed();
+                if (mobileAdsInitialized) requestInterstitial();
+            } else {
+                interstitialAd = null;
+            }
+        } catch (Throwable ignored) {
+            adsConsentGranted = false;
+            interstitialAd = null;
+            privacyOptionsAreRequired = false;
+        }
+    }
+
+    private void initializeAdsIfAllowed() {
+        if (!adsConsentGranted || adsInitializationStarted || isFinishing()) return;
+        adsInitializationStarted = true;
+        try {
+            MobileAds.initialize(this, initializationStatus -> runUiSafely(new Runnable() {
+                @Override
+                public void run() {
+                    mobileAdsInitialized = true;
+                    if (adsConsentGranted) requestInterstitial();
+                }
+            }));
+        } catch (Throwable ignored) {
+            adsInitializationStarted = false;
+        }
+    }
+
+    private void requestInterstitial() {
+        if (!adsConsentGranted || consentFormShowing || isFinishing() || adLoading || interstitialAd != null) return;
+        adLoading = true;
+        String adUnitId = BuildConfig.DEBUG ? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID;
+        try {
+            InterstitialAd.load(this, adUnitId, new AdRequest.Builder().build(), new InterstitialAdLoadCallback() {
+                @Override
+                public void onAdLoaded(InterstitialAd ad) {
+                    adLoading = false;
+                    if (isFinishing() || !adsConsentGranted) return;
+                    interstitialAd = ad;
+                }
+
+                @Override
+                public void onAdFailedToLoad(LoadAdError error) {
+                    adLoading = false;
+                    interstitialAd = null;
+                }
+            });
+        } catch (Throwable ignored) {
+            adLoading = false;
+        }
+    }
+
+    private void showLoadedInterstitial() {
+        ConsentInformation info = consentInformation;
+        if (!adsConsentGranted || info == null || !info.canRequestAds() || consentFormShowing
+                || interstitialAd == null || isFinishing()) return;
+        long now = System.currentTimeMillis();
+        if (lastInterstitialShownAt > 0 && now - lastInterstitialShownAt < MIN_INTERSTITIAL_INTERVAL_MS) return;
+
+        final InterstitialAd ad = interstitialAd;
+        interstitialAd = null;
+        ad.setFullScreenContentCallback(new FullScreenContentCallback() {
+            @Override
+            public void onAdShowedFullScreenContent() {
+                lastInterstitialShownAt = System.currentTimeMillis();
+            }
+
+            @Override
+            public void onAdDismissedFullScreenContent() {
+                requestInterstitial();
+            }
+
+            @Override
+            public void onAdFailedToShowFullScreenContent(AdError error) {
+                requestInterstitial();
+            }
+        });
+        try {
+            ad.show(this);
+        } catch (Throwable ignored) {
+            requestInterstitial();
+        }
     }
 
     private int installedVersionCode() {

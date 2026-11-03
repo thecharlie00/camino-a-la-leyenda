@@ -1,4 +1,4 @@
-# Builds and signs the Android App Bundle from the React/Vite game.
+# Builds and signs the Android App Bundle from the self-contained WebView game.
 # Run on demand, for [compilar] commits to main, or when a vX.Y tag is pushed.
 # Required repository secrets:
 #   CAMINO_KEYSTORE_B64  the signing keystore, base64 encoded
@@ -26,8 +26,6 @@ jobs:
     env:
       BUILD_TOOLS: "36.0.0"
       PLATFORM: "android-36"
-      TARGET_SDK_VERSION: "36"
-      BUNDLETOOL_VERSION: "1.18.3"
     steps:
       - uses: actions/checkout@v7
 
@@ -41,6 +39,10 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.14.3"
+
       - name: Instalar dependencias
         run: npm ci --no-audit --no-fund
 
@@ -50,16 +52,9 @@ jobs:
       - name: Prueba de salida del juego
         run: npm run test:build
 
-      - name: Preparar herramientas Android
+      - name: Preparar Android SDK
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "build-tools;$BUILD_TOOLS" "platforms;$PLATFORM" > /dev/null
-          echo "ANDROID_JAR=$ANDROID_HOME/platforms/$PLATFORM/android.jar" >> "$GITHUB_ENV"
-          echo "AAPT2=$ANDROID_HOME/build-tools/$BUILD_TOOLS/aapt2" >> "$GITHUB_ENV"
-          echo "D8=$ANDROID_HOME/build-tools/$BUILD_TOOLS/d8" >> "$GITHUB_ENV"
-          mkdir -p "$RUNNER_TEMP/bundletool"
-          curl -fsSL -o "$RUNNER_TEMP/bundletool/bundletool.jar" \
-            "https://github.com/google/bundletool/releases/download/$BUNDLETOOL_VERSION/bundletool-all-$BUNDLETOOL_VERSION.jar"
-          echo "BUNDLETOOL_JAR=$RUNNER_TEMP/bundletool/bundletool.jar" >> "$GITHUB_ENV"
 
       - name: Versión
         id: ver

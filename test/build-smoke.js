@@ -71,6 +71,8 @@ const largestModule = Math.max(...moduleMatches.map((match) => Buffer.byteLength
 assert.ok(largestModule <= 300_000, `Android startup task is too large (${largestModule} bytes); split the module`);
 const androidSource = moduleMatches.map((match) => match[1]).join('\n');
 new Script(androidSource, {filename: 'android-game-modules.js'});
+assert.match(androidSource, /var NO_ADS = false;/, 'Android must route ads only through the consent-aware native bridge');
+assert.match(androidSource, /var WEB_ADS = false;/, 'Android AdMob placements must remain independent from web AdSense');
 assert.match(androidSource, /var BUILD = \{v: "5\.20", code: 70,/);
 assert.match(androidSource, /var GOAT_WEB_BUILD = false;/);
 assert.match(androidSource, /var GOAT_API_URL = "https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev";/);
