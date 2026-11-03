@@ -12,6 +12,10 @@ for (const path of ['ads.txt', 'public/ads.txt', 'dist/ads.txt']) {
   assert.equal(read(path).trim(), expectedAdsTxt, `Invalid AdSense seller declaration in ${path}`);
 }
 
+for (const path of ['app-ads.txt', 'public/app-ads.txt', 'dist/app-ads.txt']) {
+  assert.equal(read(path).trim(), expectedAdsTxt, `Invalid AdMob app-ads.txt seller declaration in ${path}`);
+}
+
 for (const locale of locales) {
   for (const root of ['', 'dist/']) {
     const path = join(root, locale, 'index.html');
@@ -32,4 +36,4 @@ for (const locale of locales) {
   }
 }
 
-console.log('AdSense metadata, ads.txt and active Google Play links validated for all five languages.');
+console.log('AdSense metadata, ads.txt, AdMob app-ads.txt and active Google Play links validated for all five languages.');
