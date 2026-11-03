@@ -69,6 +69,8 @@ assert.match(activity, /MIN_INTERSTITIAL_INTERVAL_MS = 5L \* 60L \* 1000L/);
 assert.match(activity, /consentInformation\.requestConsentInfoUpdate/);
 assert.match(activity, /loadAndShowConsentFormIfRequired/);
 assert.match(activity, /showPrivacyOptionsForm/);
+assert.match(activity, /ConsentForm\.OnConsentFormDismissedListener/);
+assert.doesNotMatch(activity, /UserMessagingPlatform\.OnConsentFormDismissedListener/);
 assert.match(activity, /info\.canRequestAds\(\)/);
 assert.match(activity, /onAdDismissedFullScreenContent/);
 const goatOrigin = gameBuilder.match(/DEFAULT_GOAT_API_URL = "([^"]+)"/)[1];
