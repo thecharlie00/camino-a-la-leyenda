@@ -14,7 +14,7 @@ const gameCss = read('../legacy-game/src/style.css');
 const gameUi = read('../legacy-game/src/ui.js');
 const playStoreFeed = JSON.parse(read('../public/play-store-version.json'));
 
-assert.match(manifest, /android:minSdkVersion="24"\s+android:targetSdkVersion="36"/);
+assert.doesNotMatch(manifest, /<uses-sdk\b/, 'SDK levels belong in Gradle DSL, not the manifest under AGP 9');
 assert.match(manifest, /android:versionCode="71"/);
 assert.match(manifest, /android:versionName="5\.21"/);
 assert.equal(packageJson.version, '5.21.0');
@@ -109,6 +109,7 @@ const settingsGradle = read('../android/settings.gradle');
 assert.match(gradleConfig, /play-services-ads:24\.7\.0/);
 assert.match(gradleConfig, /user-messaging-platform:3\.2\.0/);
 assert.match(gradleConfig, /compileSdk 37/);
+assert.match(gradleConfig, /minSdk 24/);
 assert.match(gradleConfig, /targetSdk 36/, 'Keep Android 17 runtime behavior opt-in until it is tested');
 assert.match(gradleConfig, /buildToolsVersion '37\.0\.0'/);
 assert.match(gradleConfig, /prepareVariantGameAssets/);
