@@ -1,8 +1,32 @@
+import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.TaskAction
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
 plugins {
     id 'com.android.application'
 }
 
-def gameAssetsDir = layout.buildDirectory.dir('generated/game-assets')
+abstract class PrepareGameAssetsTask extends DefaultTask {
+    @InputFile
+    abstract RegularFileProperty getGameHtml()
+
+    @OutputDirectory
+    abstract DirectoryProperty getOutputDirectory()
+
+    @TaskAction
+    void copyGameHtml() {
+        File destination = outputDirectory.get().file('jugar/juego.html').asFile
+        destination.parentFile.mkdirs()
+        Files.copy(gameHtml.get().asFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING)
+    }
+}
+
+def gameHtmlFile = rootProject.file('../dist/android/jugar/juego.html')
 
 def envOr = { String key, String fallback ->
     def value = System.getenv(key)
@@ -27,7 +51,6 @@ android {
             manifest.srcFile '../AndroidManifest.xml'
             java.srcDirs = ['../src']
             res.srcDirs = ['../res']
-            assets.srcDir(gameAssetsDir)
         }
     }
 
@@ -57,13 +80,17 @@ android {
     }
 }
 
-tasks.register('prepareGameAssets', Copy) {
-    from(rootProject.file('../dist/android/jugar/juego.html'))
-    into(gameAssetsDir.map { it.dir('jugar') })
-}
-
-tasks.named('preBuild').configure {
-    dependsOn(tasks.named('prepareGameAssets'))
+androidComponents {
+    onVariants { variant ->
+        def prepareVariantGameAssets = tasks.register("prepare${variant.name.capitalize()}GameAssets", PrepareGameAssetsTask) {
+            gameHtml.set(gameHtmlFile)
+            outputDirectory.set(layout.buildDirectory.dir("generated/game-assets/${variant.name}"))
+        }
+        variant.sources.assets?.addGeneratedSourceDirectory(
+            prepareVariantGameAssets,
+            PrepareGameAssetsTask::getOutputDirectory
+        )
+    }
 }
 
 dependencies {
