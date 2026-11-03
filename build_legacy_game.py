@@ -346,7 +346,6 @@ mobile_sources.extend((name, source) for name, source in source_files if name no
 mobile_js = list(mobile_sources)
 for old, new in (
     ("var WEB_BUILD = false;", "var WEB_BUILD = true;"),
-    ("var NO_ADS = false;", "var NO_ADS = true;"),
 ):
     found = [i for i, (_, source) in enumerate(mobile_js) if old in source]
     if len(found) != 1:
@@ -354,6 +353,8 @@ for old, new in (
     i = found[0]
     name, source = mobile_js[i]
     mobile_js[i] = (name, source.replace(old, new, 1))
+if sum(source.count("var NO_ADS = false;") for _, source in mobile_js) != 1:
+    raise SystemExit("Android build must retain exactly one AndroidBridge-controlled ad marker")
 module_ids = ["camino-module-%03d" % i for i in range(len(mobile_js))]
 MODULE_MARKUP = "\n".join(
     '<script type="text/plain" id="' + module_ids[i] + '">' + source.replace("</script", "<" + chr(92) + "/script") + '</script>'

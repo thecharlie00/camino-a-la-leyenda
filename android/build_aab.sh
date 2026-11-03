@@ -2,24 +2,14 @@
 set -Eeuo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-cd "$ROOT/android"
+cd "$ROOT"
 
-: "${ANDROID_JAR:?Set ANDROID_JAR to the Android platform android.jar}"
-: "${AAPT2:?Set AAPT2 to the Android aapt2 executable}"
-: "${D8:?Set D8 to the Android d8 executable}"
-: "${BUNDLETOOL_JAR:?Set BUNDLETOOL_JAR to bundletool-all.jar}"
 : "${CAMINO_KS_PASS:?Missing CAMINO_KS_PASS}"
 KEYSTORE="${CAMINO_KEYSTORE:-$ROOT/android/camino.keystore}"
 KEY_ALIAS="${CAMINO_KEY_ALIAS:-camino}"
-VERSION_CODE="${VERSION_CODE:-$(sed -n 's/.*android:versionCode="\([0-9]*\)".*/\1/p' AndroidManifest.xml)}"
-VERSION_NAME="${VERSION_NAME:-$(sed -n 's/.*android:versionName="\([^"]*\)".*/\1/p' AndroidManifest.xml)}"
-MANIFEST_TARGET_SDK="$(sed -n 's/.*android:targetSdkVersion="\([0-9]*\)".*/\1/p' AndroidManifest.xml)"
-TARGET_SDK_VERSION="${TARGET_SDK_VERSION:-$MANIFEST_TARGET_SDK}"
-
-if [[ -z "$TARGET_SDK_VERSION" || "$TARGET_SDK_VERSION" != "$MANIFEST_TARGET_SDK" ]]; then
-  echo "TARGET_SDK_VERSION must match AndroidManifest.xml ($MANIFEST_TARGET_SDK)." >&2
-  exit 1
-fi
+GRADLE_BIN="${GRADLE_BIN:-gradle}"
+VERSION_CODE="${VERSION_CODE:-$(sed -n 's/.*android:versionCode="\([0-9]*\)".*/\1/p' android/AndroidManifest.xml)}"
+VERSION_NAME="${VERSION_NAME:-$(sed -n 's/.*android:versionName="\([^"]*\)".*/\1/p' android/AndroidManifest.xml)}"
 
 if [[ ! -s "$KEYSTORE" ]]; then
   echo "Keystore not found or empty: $KEYSTORE" >&2
@@ -29,71 +19,23 @@ if [[ ! -f "$ROOT/dist/android/jugar/juego.html" ]]; then
   echo "Android game entry point missing; run npm run build first." >&2
   exit 1
 fi
+if ! command -v "$GRADLE_BIN" >/dev/null 2>&1; then
+  echo "Gradle is required. Install Gradle 8.13+ and Android SDK platform/build-tools 36." >&2
+  exit 1
+fi
 
-rm -rf build-aab assets
-mkdir -p build-aab/{classes,dex,module} "$ROOT/dist" assets/jugar
-# Package the Android launcher icon alongside the self-contained game HTML.
-"$AAPT2" compile --dir res -o build-aab/resources.zip
-cp "$ROOT/dist/android/jugar/juego.html" assets/jugar/juego.html
-# Keep the legacy entry point but redirect it instead of shipping a second 10 MB game copy.
-cat > assets/index.html <<'EOF'
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="refresh" content="0;url=file:///android_asset/jugar/juego.html">
-  <title>Camino a la Leyenda</title>
-  <script>location.replace("file:///android_asset/jugar/juego.html");</script>
-</head>
-<body><a href="file:///android_asset/jugar/juego.html">Abrir el juego</a></body>
-</html>
-EOF
+CAMINO_KEYSTORE="$KEYSTORE" \
+CAMINO_KEY_ALIAS="$KEY_ALIAS" \
+VERSION_CODE="$VERSION_CODE" \
+VERSION_NAME="$VERSION_NAME" \
+"$GRADLE_BIN" --no-daemon --project-dir "$ROOT/android" :app:bundleRelease
 
-# Create an Android proto-APK to supply the base module manifest and packaged assets.
-"$AAPT2" link \
-  --proto-format \
-  --min-sdk-version 24 \
-  --target-sdk-version "$TARGET_SDK_VERSION" \
-  --version-code "$VERSION_CODE" \
-  --version-name "$VERSION_NAME" \
-  -I "$ANDROID_JAR" \
-  -R build-aab/resources.zip \
-  --manifest AndroidManifest.xml \
-  -A assets \
-  -o build-aab/base.apk
-
-javac -encoding UTF-8 -source 8 -target 8 \
-  -bootclasspath "$ANDROID_JAR" \
-  -classpath "$ANDROID_JAR" \
-  -d build-aab/classes \
-  src/com/caminoleyenda/app/MainActivity.java
-
-mapfile -d '' CLASS_FILES < <(find build-aab/classes -name '*.class' -print0)
-"$D8" --min-api 24 --lib "$ANDROID_JAR" --output build-aab/dex "${CLASS_FILES[@]}"
-
-unzip -q build-aab/base.apk -d build-aab/module
-mkdir -p build-aab/module/manifest build-aab/module/dex
-mv build-aab/module/AndroidManifest.xml build-aab/module/manifest/AndroidManifest.xml
-cp build-aab/dex/classes.dex build-aab/module/dex/classes.dex
-(
-  cd build-aab/module
-  zip -q -r ../base.zip .
-)
-
-java -jar "$BUNDLETOOL_JAR" build-bundle \
-  --modules=build-aab/base.zip \
-  --output=build-aab/app-unsigned.aab \
-  --overwrite
-jarsigner \
-  -sigalg SHA256withRSA \
-  -digestalg SHA-256 \
-  -keystore "$KEYSTORE" \
-  -storepass "$CAMINO_KS_PASS" \
-  -keypass "$CAMINO_KS_PASS" \
-  -signedjar "$ROOT/dist/CaminoALaLeyenda.aab" \
-  build-aab/app-unsigned.aab \
-  "$KEY_ALIAS"
+AAB="$ROOT/android/app/build/outputs/bundle/release/app-release.aab"
+if [[ ! -s "$AAB" ]]; then
+  echo "Gradle completed without producing $AAB" >&2
+  exit 1
+fi
+mkdir -p "$ROOT/dist"
+cp "$AAB" "$ROOT/dist/CaminoALaLeyenda.aab"
 jarsigner -verify "$ROOT/dist/CaminoALaLeyenda.aab" >/dev/null
-
 echo "AAB firmado: $ROOT/dist/CaminoALaLeyenda.aab ($(du -h "$ROOT/dist/CaminoALaLeyenda.aab" | cut -f1))"
