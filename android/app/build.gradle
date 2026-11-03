@@ -26,10 +26,7 @@ abstract class PrepareGameAssetsTask extends DefaultTask {
     }
 }
 
-def prepareGameAssets = tasks.register('prepareGameAssets', PrepareGameAssetsTask) {
-    gameHtml.set(rootProject.file('../dist/android/jugar/juego.html'))
-    outputDirectory.set(layout.buildDirectory.dir('generated/game-assets'))
-}
+def gameHtmlFile = rootProject.file('../dist/android/jugar/juego.html')
 
 def envOr = { String key, String fallback ->
     def value = System.getenv(key)
@@ -85,8 +82,12 @@ android {
 
 androidComponents {
     onVariants { variant ->
+        def prepareVariantGameAssets = tasks.register("prepare${variant.name.capitalize()}GameAssets", PrepareGameAssetsTask) {
+            gameHtml.set(gameHtmlFile)
+            outputDirectory.set(layout.buildDirectory.dir("generated/game-assets/${variant.name}"))
+        }
         variant.sources.assets?.addGeneratedSourceDirectory(
-            prepareGameAssets,
+            prepareVariantGameAssets,
             PrepareGameAssetsTask::getOutputDirectory
         )
     }

@@ -111,7 +111,8 @@ assert.match(gradleConfig, /user-messaging-platform:3\.2\.0/);
 assert.match(gradleConfig, /compileSdk 37/);
 assert.match(gradleConfig, /targetSdk 36/, 'Keep Android 17 runtime behavior opt-in until it is tested');
 assert.match(gradleConfig, /buildToolsVersion '37\.0\.0'/);
-assert.match(gradleConfig, /prepareGameAssets/);
+assert.match(gradleConfig, /prepareVariantGameAssets/);
+assert.match(gradleConfig, /generated\/game-assets\/\$\{variant\.name\}/);
 assert.match(gradleConfig, /variant\.sources\.assets\?\.addGeneratedSourceDirectory/,
   'Generated Android assets must use the AGP Variant Sources API');
 assert.match(gradleConfig, /PrepareGameAssetsTask::getOutputDirectory/);
