@@ -15,9 +15,9 @@ const gameUi = read('../legacy-game/src/ui.js');
 const playStoreFeed = JSON.parse(read('../public/play-store-version.json'));
 
 assert.doesNotMatch(manifest, /<uses-sdk\b/, 'SDK levels belong in Gradle DSL, not the manifest under AGP 9');
-assert.match(manifest, /android:versionCode="71"/);
-assert.match(manifest, /android:versionName="5\.21"/);
-assert.equal(packageJson.version, '5.21.0');
+assert.match(manifest, /android:versionCode="72"/);
+assert.match(manifest, /android:versionName="5\.22"/);
+assert.equal(packageJson.version, '5.22.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
