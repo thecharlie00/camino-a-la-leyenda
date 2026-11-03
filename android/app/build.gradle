@@ -44,6 +44,7 @@ android {
         targetSdk 36
         versionCode envOr('VERSION_CODE', '71').toInteger()
         versionName envOr('VERSION_NAME', '5.21')
+        buildConfigField 'boolean', 'USE_ADMOB_TEST_ADS', 'false'
     }
 
     sourceSets {
@@ -73,9 +74,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField 'boolean', 'USE_ADMOB_TEST_ADS', 'true'
+        }
         release {
             signingConfig signingConfigs.release
             minifyEnabled false
+            buildConfigField 'boolean', 'USE_ADMOB_TEST_ADS', envOr('CAMINO_ADMOB_TEST_ADS', 'false').toBoolean().toString()
         }
     }
 }

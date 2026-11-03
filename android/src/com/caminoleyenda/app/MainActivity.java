@@ -10,6 +10,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.View;
@@ -58,7 +61,10 @@ public final class MainActivity extends Activity {
     private static final int MAX_GOAT_RESPONSE_BYTES = 1000000;
     private static final String ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197/1191061575";
     private static final String TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
+    private static final String ADS_LOG_TAG = "CaminoAds";
     private static final long MIN_INTERSTITIAL_INTERVAL_MS = 5L * 60L * 1000L;
+    private static final long FIRST_AD_RETRY_DELAY_MS = 30L * 1000L;
+    private static final long MAX_AD_RETRY_DELAY_MS = 5L * 60L * 1000L;
     private WebView webView;
     private ConsentInformation consentInformation;
     private volatile boolean adsConsentGranted;
@@ -66,6 +72,14 @@ public final class MainActivity extends Activity {
     private boolean adsInitializationStarted;
     private boolean mobileAdsInitialized;
     private boolean adLoading;
+    private int consecutiveAdLoadFailures;
+    private final Handler adsHandler = new Handler(Looper.getMainLooper());
+    private final Runnable retryInterstitialLoad = new Runnable() {
+        @Override
+        public void run() {
+            requestInterstitial();
+        }
+    };
     private boolean consentFormShowing;
     private InterstitialAd interstitialAd;
     private long lastInterstitialShownAt;
@@ -177,6 +191,7 @@ public final class MainActivity extends Activity {
                             @Override
                             public void onConsentFormDismissed(FormError error) {
                                 consentFormShowing = false;
+                                if (error != null) Log.w(ADS_LOG_TAG, "UMP consent form ended with an error: " + error.getMessage());
                                 updateAdRequestPermission();
                             }
                         });
@@ -400,6 +415,7 @@ public final class MainActivity extends Activity {
                     @Override
                     public void onConsentInfoUpdateSuccess() {
                         if (isFinishing()) return;
+                        Log.i(ADS_LOG_TAG, "UMP consent information updated.");
                         refreshPrivacyOptionsStatus();
                         consentFormShowing = true;
                         try {
@@ -408,6 +424,7 @@ public final class MainActivity extends Activity {
                                     @Override
                                     public void onConsentFormDismissed(FormError error) {
                                         consentFormShowing = false;
+                                        if (error != null) Log.w(ADS_LOG_TAG, "UMP consent form ended with an error: " + error.getMessage());
                                         updateAdRequestPermission();
                                     }
                                 });
@@ -420,6 +437,7 @@ public final class MainActivity extends Activity {
                 new ConsentInformation.OnConsentInfoUpdateFailureListener() {
                     @Override
                     public void onConsentInfoUpdateFailure(FormError error) {
+                        Log.w(ADS_LOG_TAG, "UMP consent info update failed: " + error.getMessage());
                         updateAdRequestPermission();
                     }
                 });
@@ -449,10 +467,14 @@ public final class MainActivity extends Activity {
                 initializeAdsIfAllowed();
                 if (mobileAdsInitialized) requestInterstitial();
             } else {
+                Log.i(ADS_LOG_TAG, "Ad requests are disabled because UMP does not currently allow them.");
+                adsHandler.removeCallbacks(retryInterstitialLoad);
                 interstitialAd = null;
             }
-        } catch (Throwable ignored) {
+        } catch (Throwable error) {
+            Log.w(ADS_LOG_TAG, "Could not read UMP consent state; ads remain disabled.", error);
             adsConsentGranted = false;
+            adsHandler.removeCallbacks(retryInterstitialLoad);
             interstitialAd = null;
             privacyOptionsAreRequired = false;
         }
@@ -466,42 +488,70 @@ public final class MainActivity extends Activity {
                 @Override
                 public void run() {
                     mobileAdsInitialized = true;
+                    Log.i(ADS_LOG_TAG, "Google Mobile Ads initialized.");
                     if (adsConsentGranted) requestInterstitial();
                 }
             }));
-        } catch (Throwable ignored) {
+        } catch (Throwable error) {
+            Log.e(ADS_LOG_TAG, "Could not initialize Google Mobile Ads.", error);
             adsInitializationStarted = false;
         }
     }
 
     private void requestInterstitial() {
-        if (!adsConsentGranted || consentFormShowing || isFinishing() || adLoading || interstitialAd != null) return;
+        if (!adsConsentGranted || !mobileAdsInitialized || consentFormShowing || isFinishing()
+                || adLoading || interstitialAd != null) return;
+        adsHandler.removeCallbacks(retryInterstitialLoad);
         adLoading = true;
-        String adUnitId = BuildConfig.DEBUG ? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID;
+        boolean useTestAds = BuildConfig.DEBUG || BuildConfig.USE_ADMOB_TEST_ADS;
+        String adUnitId = useTestAds ? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID;
+        Log.i(ADS_LOG_TAG, "Requesting " + (useTestAds ? "Google test" : "AdMob production") + " interstitial.");
         try {
             InterstitialAd.load(this, adUnitId, new AdRequest.Builder().build(), new InterstitialAdLoadCallback() {
                 @Override
                 public void onAdLoaded(InterstitialAd ad) {
                     adLoading = false;
+                    consecutiveAdLoadFailures = 0;
+                    adsHandler.removeCallbacks(retryInterstitialLoad);
                     if (isFinishing() || !adsConsentGranted) return;
                     interstitialAd = ad;
+                    Log.i(ADS_LOG_TAG, "Interstitial loaded and waiting for a safe menu transition.");
                 }
 
                 @Override
                 public void onAdFailedToLoad(LoadAdError error) {
                     adLoading = false;
                     interstitialAd = null;
+                    consecutiveAdLoadFailures = Math.min(consecutiveAdLoadFailures + 1, 10);
+                    Log.w(ADS_LOG_TAG, "Interstitial load failed (" + error.getCode() + "): " + error.getMessage());
+                    scheduleInterstitialRetry();
                 }
             });
-        } catch (Throwable ignored) {
+        } catch (Throwable error) {
             adLoading = false;
+            consecutiveAdLoadFailures = Math.min(consecutiveAdLoadFailures + 1, 10);
+            Log.e(ADS_LOG_TAG, "Interstitial request threw an exception.", error);
+            scheduleInterstitialRetry();
         }
+    }
+
+    private void scheduleInterstitialRetry() {
+        if (!adsConsentGranted || !mobileAdsInitialized || isFinishing()) return;
+        int shift = Math.min(Math.max(consecutiveAdLoadFailures - 1, 0), 4);
+        long delay = Math.min(MAX_AD_RETRY_DELAY_MS, FIRST_AD_RETRY_DELAY_MS << shift);
+        adsHandler.removeCallbacks(retryInterstitialLoad);
+        Log.i(ADS_LOG_TAG, "Retrying interstitial load in " + (delay / 1000L) + " seconds.");
+        adsHandler.postDelayed(retryInterstitialLoad, delay);
     }
 
     private void showLoadedInterstitial() {
         ConsentInformation info = consentInformation;
-        if (!adsConsentGranted || info == null || !info.canRequestAds() || consentFormShowing
-                || interstitialAd == null || isFinishing()) return;
+        if (!adsConsentGranted || info == null || !info.canRequestAds() || consentFormShowing || isFinishing()) return;
+        if (interstitialAd == null) {
+            Log.i(ADS_LOG_TAG, "No interstitial is ready at the menu; requesting one for the next safe transition.");
+            requestInterstitial();
+            return;
+        }
         long now = System.currentTimeMillis();
         if (lastInterstitialShownAt > 0 && now - lastInterstitialShownAt < MIN_INTERSTITIAL_INTERVAL_MS) return;
 
@@ -745,6 +795,7 @@ public final class MainActivity extends Activity {
             Api33.unregister(this, backInvokedCallback);
             backInvokedCallback = null;
         }
+        adsHandler.removeCallbacks(retryInterstitialLoad);
         updateChecker.shutdownNow();
         goatRequestWorker.shutdownNow();
         disposeWebView(webView);

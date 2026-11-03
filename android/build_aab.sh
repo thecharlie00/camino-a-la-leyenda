@@ -28,6 +28,7 @@ CAMINO_KEYSTORE="$KEYSTORE" \
 CAMINO_KEY_ALIAS="$KEY_ALIAS" \
 VERSION_CODE="$VERSION_CODE" \
 VERSION_NAME="$VERSION_NAME" \
+CAMINO_ADMOB_TEST_ADS="${CAMINO_ADMOB_TEST_ADS:-false}" \
 "$GRADLE_BIN" --no-daemon --project-dir "$ROOT/android" :app:bundleRelease
 
 AAB="$ROOT/android/app/build/outputs/bundle/release/app-release.aab"
