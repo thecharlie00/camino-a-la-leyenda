@@ -18,6 +18,7 @@
     if (!dynHeirStart({kid: +v})) { U.toast(tr("No se pudo empezar la nueva generación.")); return; }
     var ui = U.ui(); ui.tab = "carrera"; ui.exp = {}; ui.wl = null;
     U.closeSheet(); U.persist(); U.render(true);
+    if (U.showAdLater) U.showAdLater("heir_start", 1200, function () { return !!S && UI.view !== "create" && UI.view !== "modes"; });
   };
 
   /* ---------- formulario del relevo ---------- */
@@ -50,6 +51,7 @@
     if (!dynHeirStart({fn: fn, pos: heir.pos || "MC", foot: heir.foot || "Diestro", g: heir.g})) { U.toast(tr("No se pudo empezar la nueva generación.")); return; }
     var ui = U.ui(); ui.tab = "carrera"; ui.exp = {}; ui.wl = null;
     U.closeSheet(); U.persist(); U.render(true);
+    if (U.showAdLater) U.showAdLater("heir_start", 1200, function () { return !!S && UI.view !== "create" && UI.view !== "modes"; });
   };
   U.sheets.heir = function () {
     var d = dynOf(), par = S.mode === "mgr" ? S.m : S.p, home = S.mode === "mgr" ? (S.mretired ? S.mretired.main : S.m.club) : (S.retired ? S.retired.main : S.p.club);

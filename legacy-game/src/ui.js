@@ -421,21 +421,47 @@
     if (a.bdo > b.bdo) { confetti(true); setTimeout(function () { confetti(true); }, 700); }
     else if (a.tro > b.tro) confetti(false);
   }
-  function doAdvance() {
+  function waitForPreMatchAd(matchState, phase) {
+    var startedAt = Date.now(), sawAd = false;
+    function check() {
+      var showing = false, bridge = window.AndroidBridge;
+      try { showing = !!(bridge && bridge.isFullScreenAdShowing && bridge.isFullScreenAdShowing()); } catch (e) {}
+      if (showing) sawAd = true;
+      var elapsed = Date.now() - startedAt;
+      if ((sawAd && !showing) || (!sawAd && elapsed >= 900) || elapsed >= 120000) {
+        if (S === matchState && UI.view === "game" && S.ph === phase) {
+          UI.busy = false;
+          doAdvance(true);
+        } else UI.busy = false;
+        return;
+      }
+      setTimeout(check, 100);
+    }
+    setTimeout(check, 100);
+  }
+  function doAdvance(matchAdWaited) {
     if (UI.busy) return;
     UI.busy = true;
-    var before = S.feed[0] ? S.feed[0].id : null, snap = snapshot();
+    var before = S.feed[0] ? S.feed[0].id : null, snap = snapshot(), wasRetired = S.ph === "ret";
+    /* Keep the fixture screen visible until any launched interstitial is dismissed. */
+    if (!matchAdWaited && (S.ph === "pre" || S.ph === "gap") && !S.pend.length && showAd("match_start")) {
+      waitForPreMatchAd(S, S.ph);
+      return;
+    }
     try { advance(); } catch (e) { console.error(e); toast(tr("Algo ha fallado al simular. Tu partida sigue guardada.")); }
     UI.busy = false;
     UI.flash = S.feed[0] && S.feed[0].id !== before ? S.feed[0].id : null;
+    var retiredNow = !wasRetired && S.ph === "ret";
     if (S.ph === "ret") onRetire();
     persist(); UI.tab = isMgr() ? "club" : "carrera"; render(true);
     celebrate(snap);
+    if (retiredNow) showAdLater("retire", 1400, function () { return !!(S && UI.view === "game" && S.ph === "ret" && !UI.sheet && !document.getElementById("tromod")); });
   }
   function doChoose(i) {
-    var before = S.feed[0] ? S.feed[0].id : null, inSheet = !!(UI.sheet && UI.sheet.k === "pend"), card = null, snap = snapshot();
+    var before = S.feed[0] ? S.feed[0].id : null, inSheet = !!(UI.sheet && UI.sheet.k === "pend"), card = null, snap = snapshot(), wasRetired = S.ph === "ret";
     try { card = resolvePending(i); } catch (e) { console.error(e); toast(tr("No se pudo aplicar la decisión.")); }
     UI.flash = S.feed[0] && S.feed[0].id !== before ? S.feed[0].id : null;
+    var retiredNow = !wasRetired && S.ph === "ret";
     if (S.ph === "ret") onRetire();
     persist();
     if (inSheet) {
@@ -446,6 +472,7 @@
     if (card) edgeFlash(card.good);
     celebrate(snap);
     if (S && S.liveReq != null) openLive();
+    if (retiredNow) showAdLater("retire", 1400, function () { return !!(S && UI.view === "game" && S.ph === "ret" && !UI.sheet && !document.getElementById("tromod")); });
   }
   function onRetire() {
     if (S && S.era) return; // El Salón de la fama moderno no absorbe carreras de Épocas.
@@ -1764,7 +1791,8 @@
       } catch (e) { console.error(e); toast(tr("No se pudo crear la partida.")); return; }
       UI.cr = null; UI.exp = {}; UI.wl = null; UI.flash = null; UI.sheet = null;
       UI.view = S.ph === "draft" ? "draft" : "game"; UI.tab = isMgr() ? "club" : "carrera";
-      persist(); refreshSlots(); render(true); showAd("start");
+      persist(); refreshSlots(); render(true);
+      if (c.kind !== "club") showAdLater("career_start", 1200, function () { return !!(S && UI.view !== "create" && UI.view !== "modes"); });
     });
   }
   /* ---------- paneles ---------- */
@@ -1998,16 +2026,33 @@
     UI.view = S.ph === "draft" ? "draft" : "game"; UI.tab = isMgr() ? "club" : "carrera";
   }
   /* ---------- anuncios (Android; la web mantiene NO_ADS=true) ----------
-     El host nativo solo admite la transición explícita de vuelta al menú, y aplica
-     además un límite independiente de cinco minutos entre intersticiales. */
+     El host nativo solo admite ubicaciones de transición explícitas, nunca durante
+     un partido, y aplica además un límite independiente de cinco minutos. */
   var AD_GAP = 300000, lastAd = 0;
   var NO_ADS = false; /* la compilación web lo pone a true; Android usa AndroidBridge */
   var WEB_ADS = false; /* build_web.py lo pone a true en la web pública, que lleva anuncios de AdSense fuera del juego */
   function showAd(where) {
     var B = window.AndroidBridge;
-    if (NO_ADS || !B || !B.showAd || Date.now() - lastAd < AD_GAP) return;
-    try { if (B.showAd(String(where))) lastAd = Date.now(); } catch (e) {}
+    if (NO_ADS || !B || !B.showAd || Date.now() - lastAd < AD_GAP) return false;
+    try {
+      B.showAd(String(where));
+      lastAd = Date.now();
+      return true;
+    } catch (e) { return false; }
   }
+  function showAdLater(where, delay, isSafe) {
+    var retries = 0;
+    function attempt() {
+      if (isSafe && !isSafe()) {
+        if (retries++ < 8) setTimeout(attempt, 750);
+        return;
+      }
+      showAd(where);
+    }
+    setTimeout(attempt, Math.max(250, delay || 1200));
+  }
+  UIX.showAd = showAd;
+  UIX.showAdLater = showAdLater;
   function adPrivacyRequired() {
     var B = window.AndroidBridge;
     try { return !!(B && B.privacyOptionsRequired && B.privacyOptionsRequired()); } catch (e) { return false; }
@@ -2027,11 +2072,11 @@
     return '<section class="updbar' + (inMenu ? " inmenu" : "") + '"><div class="ui">' + ICON.play + '</div><div class="grow"><b>' + (UI.upd.name ? tr("Versión {v} disponible", {v: h(UI.upd.name)}) : tr("Nueva versión disponible")) + "</b><small>" + tr("Actualiza desde Google Play. Tus partidas se conservan.") + '</small></div><button class="btn pri sm" data-a="doupdate">' + tr("Actualizar") + "</button></section>";
   }
   function loadSlot(id) {
-    if (S && S.uid === id) { enterGame(); render(true); showAd("load"); return; }
+        if (S && S.uid === id) { enterGame(); render(true); return; }
     switchGame(function () {
       Store.load(id).then(function (json) {
         if (!json) throw new Error("vacía");
-        restore(json); enterGame(); persist(); render(true); showAd("load");
+        restore(json); enterGame(); persist(); render(true);
       }).catch(function (e) { console.error(e); toast(tr("No se pudo cargar esa partida.")); refreshSlots(); });
     });
   }
@@ -2598,7 +2643,7 @@
         UI.gsel = S && S.g === "f" ? "f" : UI.gsel;
         S = null;
         UI.tab = null; UI.exp = {}; UI.flash = null;
-        startCreate("p"); showAd("menu");
+        startCreate("p");
         break;
       case "gsel": UI.gsel = v === "f" ? "f" : "m"; render(false); break;
       case "loadslot": loadSlot(v); break;
@@ -2623,10 +2668,10 @@
       case "hof": UI.sheet = {k: "hof", list: null}; renderSheet(); Store.hof().then(function (l) { if (UI.sheet && UI.sheet.k === "hof") { UI.sheet.list = l.sort(function (x, y) { return y.sc - x.sc; }); renderSheet(); } }); break;
       case "hoff": UI.hofF = v; renderSheet(); break;
       case "home": UI.sheet = null; if (S && S.era && typeof EraStore !== "undefined") { EraStore.save(); S = null; } else Store.flush(); UI.view = "home"; refreshSlots(); render(true); showAd("menu"); break;
-      case "continue": enterGame(); render(true); showAd("load"); break;
+      case "continue": enterGame(); render(true); break;
       case "startmgr":
         try { startManager(); } catch (err) { console.error(err); toast(tr("No se pudo empezar la carrera de entrenador.")); break; }
-        UI.tab = "club"; UI.exp = {}; UI.wl = null; persist(); render(true); showAd("manager"); break;
+        UI.tab = "club"; UI.exp = {}; UI.wl = null; persist(); render(true); showAd("manager_start"); break;
       case "jobpick": UI.sheet = {k: "pickclub", lg: null}; renderSheet(); break;
       case "takejob":
         if (mgrTakeJob(+v)) { UI.sheet = null; UI.tab = "club"; persist(); render(true); } else toast(tr("No puedes fichar por ese club ahora."));
@@ -2738,7 +2783,7 @@
       case "redraft": clubRedraft(); persist(); render(false); toast(tr("Plantilla nueva generada")); break;
       case "startclub":
         try { clubStart(); } catch (err) { console.error(err); toast(tr("No se pudo empezar la temporada.")); break; }
-        enterGame(); persist(); render(true); break;
+        enterGame(); persist(); render(true); showAdLater("career_start", 1200, function () { return !!(S && UI.view !== "create" && UI.view !== "modes"); }); break;
     }
   });
   document.addEventListener("toggle", function (e) {

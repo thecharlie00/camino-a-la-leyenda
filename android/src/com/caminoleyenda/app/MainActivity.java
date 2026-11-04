@@ -172,9 +172,9 @@ public final class MainActivity extends Activity {
 
         @JavascriptInterface
         public void showAd(final String where) {
-            // Only the explicit return-to-menu transition is an ad placement. In
-            // particular, do not show on career start, save loading or match screens.
-            if (!"menu".equals(where)) return;
+            // Whitelist only explicit transitions out of play. Match-start is called
+            // before simulation begins; no placement is allowed during a live match.
+            if (!isAllowedAdPlacement(where)) return;
             runUiSafely(new Runnable() {
                 @Override
                 public void run() {
@@ -554,11 +554,21 @@ public final class MainActivity extends Activity {
         adsHandler.postDelayed(retryInterstitialLoad, delay);
     }
 
+    private static boolean isAllowedAdPlacement(String where) {
+        return "menu".equals(where)
+            || "match_start".equals(where)
+            || "goat_upload".equals(where)
+            || "retire".equals(where)
+            || "heir_start".equals(where)
+            || "manager_start".equals(where)
+            || "career_start".equals(where);
+    }
+
     private void showLoadedInterstitial() {
         ConsentInformation info = consentInformation;
         if (!adsConsentGranted || info == null || !info.canRequestAds() || consentFormShowing || isFinishing()) return;
         if (interstitialAd == null) {
-            Log.i(ADS_LOG_TAG, "No interstitial is ready at the menu; requesting one for the next safe transition.");
+            Log.i(ADS_LOG_TAG, "No interstitial is ready at this safe transition; requesting one for the next placement.");
             requestInterstitial();
             return;
         }
