@@ -69,6 +69,10 @@
   function repTier(r) { return r >= 80 ? "e" : r >= 60 ? "g" : r >= 40 ? "s" : "b"; }
   function barCls(v) { return v < 35 ? "lo" : v < 60 ? "mid" : "hi"; }
   function isMgr() { return !!S && S.mode === "mgr"; }
+  function syncSelectedLanguage() {
+    var selected = savedLang();
+    if (selected && selected !== LANG) setLang(selected);
+  }
   var RATE_STATE_KEY = "camino.rating-prompt.v1";
   var RATE_AFTER_PLAY_MS = 15 * 60 * 1000;
   var RATE_SNOOZE_MS = 14 * 24 * 60 * 60 * 1000;
@@ -99,6 +103,7 @@
     if (ratePromptTimer) return;
     ratePromptTimer = setTimeout(function () {
       ratePromptTimer = null;
+      syncSelectedLanguage();
       if (!ratePromptDue() || !window.AndroidBridge || UI.view !== "home" || UI.sheet || document.visibilityState !== "visible") return;
       try {
         if (window.AndroidBridge.isFullScreenAdShowing && window.AndroidBridge.isFullScreenAdShowing()) {
@@ -2010,6 +2015,7 @@
   /* aviso de actualización: la app de Android pregunta a Google Play y llama a caminoUpdate(versión) */
   window.caminoUpdate = function (code, name) {
     if (!code) return;
+    syncSelectedLanguage();
     UI.upd = {code: +code, name: name ? String(name).replace(/[^0-9.]/g, "").slice(0, 12) : ""};
     if (UI.view === "home") render(false);
     if (UI.updShown) return;

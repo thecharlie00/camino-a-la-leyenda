@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
 
 const read = (path) => readFileSync(path, 'utf8');
 const ui = read('legacy-game/src/ui.js');
+const i18n = read('legacy-game/src/i18n.js');
 const css = read('legacy-game/src/style.css');
 const activity = read('android/src/com/caminoleyenda/app/MainActivity.java');
 
@@ -20,6 +22,10 @@ assert.match(ui, /rateState\.done = true; saveRateState\(\)/,
   'Choosing to rate should prevent further reminders');
 assert.match(ui, /window\.AndroidBridge\.openStore\(\)/,
   'The rating action should open this app’s Google Play listing');
+assert.match(ui, /function syncSelectedLanguage\(\)[\s\S]*?savedLang\(\)[\s\S]*?setLang\(selected\)/,
+  'Use the player’s saved language immediately before showing either notice');
+assert.match(ui, /window\.caminoUpdate = function \(code, name\)[\s\S]*?syncSelectedLanguage\(\)/,
+  'The update callback must synchronize the selected language before rendering');
 assert.match(activity, /public boolean isFullScreenAdShowing\(\)/);
 assert.match(activity, /return interstitialShowing \|\| consentFormShowing/);
 assert.match(activity, /interstitialShowing = true/);
@@ -28,20 +34,47 @@ assert.match(css, /\.rate-mark[\s\S]*?animation: rate-mark-in/);
 assert.match(css, /@keyframes rate-mark-in/);
 assert.match(css, /prefers-reduced-motion: reduce[^}]*\.rate-mark/);
 
-const prompts = [
+const noticeKeys = [
   '¿Te está gustando Camino a la Leyenda?',
   'Si disfrutas del juego, déjanos una valoración en Google Play. Tu opinión nos ayuda a seguir mejorándolo.',
   'Valorar en Google Play',
   'Ahora no',
+  '¡Nueva versión disponible!',
+  'Hay una actualización de Camino a la Leyenda con novedades y mejoras. Tus partidas se conservan.',
+  'Más tarde',
+  'Actualizar',
+  'Versión {v} disponible',
+  'Nueva versión disponible',
+  'Actualiza desde Google Play. Tus partidas se conservan.',
 ];
+assert.match(ui, /tr\("¡Nueva versión disponible!"\)/);
+assert.match(ui, /tr\("Hay una actualización de Camino a la Leyenda con novedades y mejoras\. Tus partidas se conservan\."\)/);
+assert.match(ui, /tr\("Valorar en Google Play"\)/);
+assert.match(ui, /tr\("Actualiza desde Google Play\. Tus partidas se conservan\."\)/);
+
 for (const lang of ['en', 'de', 'it', 'fr']) {
   const runtime = read(`legacy-game/src/lang-${lang}.js`);
   const catalog = JSON.parse(read(`i18n/${lang}/extra.json`));
-  for (const key of prompts) {
+  for (const key of noticeKeys) {
     assert.ok(runtime.includes(JSON.stringify(key)),
-      `Missing ${lang} runtime rating-prompt translation: ${key}`);
-    assert.ok(catalog[key], `Missing ${lang} catalog rating-prompt translation: ${key}`);
+      `Missing ${lang} runtime translation: ${key}`);
+    assert.ok(catalog[key], `Missing ${lang} catalog translation: ${key}`);
+  }
+
+  // Exercise the actual language-selection and tr() path, not just catalog presence.
+  const context = vm.createContext({
+    localStorage: {getItem: () => null, setItem: () => {}},
+    document: {documentElement: {}, getElementById: () => null},
+  });
+  vm.runInContext(i18n, context);
+  vm.runInContext(runtime, context);
+  context.setLang(lang);
+  for (const key of noticeKeys) {
+    const expected = catalog[key].replace('{v}', '5.24');
+    const actual = context.tr(key, {v: '5.24'});
+    assert.equal(actual, expected, `${lang} should render the selected-language translation for: ${key}`);
+    assert.notEqual(actual, key, `${lang} must not fall back to Spanish for: ${key}`);
   }
 }
 
-console.log('Android rating prompt checks passed: 15-minute active-play threshold, safe home-only timing, snoozing, Play Store action, motion and translations.');
+console.log('Android rating and update notices use the selected language for all five locales.');
