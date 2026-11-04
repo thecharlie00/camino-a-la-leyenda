@@ -69,6 +69,56 @@
   function repTier(r) { return r >= 80 ? "e" : r >= 60 ? "g" : r >= 40 ? "s" : "b"; }
   function barCls(v) { return v < 35 ? "lo" : v < 60 ? "mid" : "hi"; }
   function isMgr() { return !!S && S.mode === "mgr"; }
+  var RATE_STATE_KEY = "camino.rating-prompt.v1";
+  var RATE_AFTER_PLAY_MS = 15 * 60 * 1000;
+  var RATE_SNOOZE_MS = 14 * 24 * 60 * 60 * 1000;
+  var RATE_MAX_PROMPTS = 3;
+  var ratePromptTimer = null, ratePlayTimer = null;
+  function loadRateState() {
+    try {
+      var saved = JSON.parse(localStorage.getItem(RATE_STATE_KEY) || "null");
+      return saved && typeof saved === "object" ? {
+        playedMs: Math.max(0, Number(saved.playedMs) || 0),
+        snoozeUntil: Math.max(0, Number(saved.snoozeUntil) || 0),
+        prompts: Math.max(0, Math.floor(Number(saved.prompts) || 0)),
+        done: saved.done === true
+      } : {playedMs: 0, snoozeUntil: 0, prompts: 0, done: false};
+    } catch (e) { return {playedMs: 0, snoozeUntil: 0, prompts: 0, done: false}; }
+  }
+  var rateState = loadRateState();
+  function saveRateState() {
+    try { localStorage.setItem(RATE_STATE_KEY, JSON.stringify(rateState)); } catch (e) {}
+  }
+  function ratePromptDue() {
+    return !rateState.done && rateState.prompts < RATE_MAX_PROMPTS && rateState.playedMs >= RATE_AFTER_PLAY_MS && Date.now() >= rateState.snoozeUntil;
+  }
+  function queueRatePrompt(delay) {
+    if (!ratePromptDue() || !window.AndroidBridge || UI.view !== "home" || UI.sheet || document.visibilityState !== "visible") {
+      clearTimeout(ratePromptTimer); ratePromptTimer = null; return;
+    }
+    if (ratePromptTimer) return;
+    ratePromptTimer = setTimeout(function () {
+      ratePromptTimer = null;
+      if (!ratePromptDue() || !window.AndroidBridge || UI.view !== "home" || UI.sheet || document.visibilityState !== "visible") return;
+      try {
+        if (window.AndroidBridge.isFullScreenAdShowing && window.AndroidBridge.isFullScreenAdShowing()) {
+          queueRatePrompt(5000); return;
+        }
+      } catch (e) { queueRatePrompt(5000); return; }
+      rateState.prompts++;
+      rateState.snoozeUntil = Date.now() + RATE_SNOOZE_MS;
+      saveRateState();
+      UI.sheet = {k: "rate"};
+      renderSheet();
+    }, Math.max(1000, delay || 2500));
+  }
+  function countActivePlaytime() {
+    if (window.AndroidBridge && document.visibilityState === "visible" && UI.view === "game" && S && !UI.sheet) {
+      rateState.playedMs = Math.min(rateState.playedMs + 15000, 365 * 24 * 60 * 60 * 1000);
+      saveRateState();
+    }
+    if (UI.view === "home" && !UI.sheet) queueRatePrompt();
+  }
   function myClub() { return isMgr() ? S.m.club : S.p.club; }
   function myNat() { return isMgr() ? -1 : S.p.inat; }
   /* avisos breves en cola: nunca se pisan dos a la vez; los repetidos seguidos se descartan */
@@ -440,6 +490,7 @@
     UI.vkey = key; UI.vback = false;
     if (UI.view === "game" && !calm2()) setTimeout(flushNtf, 60);
     slot("after");
+    queueRatePrompt();
   }
   function calm2() { return !!document.querySelector(".mg-ov"); }
   function musicButton() {
@@ -1791,6 +1842,12 @@
       if (window.GoatLadder) P.push([N_("GOAT LADDER"), window.GoatLadder.t("privacy")]);
       return "<h2>" + tr("Política de privacidad") + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:var(--fs-sm)">' + tr("Última actualización: {d}", {d: "10/10/2026"}) + '</p><div class="policy">' + P.map(function (x) { return "<h3>" + h(tr(x[0])) + "</h3><p>" + h(tr(x[1])) + "</p>"; }).join("") + '</div><button class="btn wide" style="margin-top:12px" data-a="close">' + tr("Cerrar") + "</button>";
     }
+    if (t.k === "rate") {
+      return '<div class="rate-mark" aria-hidden="true">★</div><h2>' + tr("¿Te está gustando Camino a la Leyenda?") + '</h2><p class="lead">' +
+        tr("Si disfrutas del juego, déjanos una valoración en Google Play. Tu opinión nos ayuda a seguir mejorándolo.") + "</p>" +
+        '<div class="row2" style="margin-top:14px"><button class="btn wide" data-a="ratelater">' + tr("Ahora no") +
+        '</button><button class="btn pri wide" data-a="rateapp">' + tr("Valorar en Google Play") + "</button></div>";
+    }
     if (t.k === "update") {
       return '<div class="upd">' + ICON.play + '</div><h2>' + tr("¡Nueva versión disponible!") + '</h2><p class="lead">' + tr("Hay una actualización de Camino a la Leyenda con novedades y mejoras. Tus partidas se conservan.") + "</p>" +
         '<div class="row2" style="margin-top:14px"><button class="btn wide" data-a="close">' + tr("Más tarde") + '</button><button class="btn pri wide" data-a="doupdate">' + tr("Actualizar") + "</button></div>";
@@ -2511,6 +2568,11 @@
       case "golang": UI.view = "lang"; render(true); break;
       case "privacy": UI.sheet = {k: "privacy"}; renderSheet(); break;
       case "doupdate": try { window.AndroidBridge.openStore(); } catch (err) {} closeSheet(); render(false); break;
+      case "ratelater": closeSheet(); render(false); break;
+      case "rateapp":
+        rateState.done = true; saveRateState(); closeSheet(); render(false);
+        try { window.AndroidBridge.openStore(); } catch (err) {}
+        break;
       case "adprivacy": try { window.AndroidBridge.showPrivacyOptions(); } catch (err) {} break;
       case "gohome": var fromDraft = UI.view === "draft"; UI.vback = true; UI.view = "home"; UI.cr = null; render(true); if (fromDraft) showAd("menu"); break;
       case "goload": UI.view = "load"; render(true); refreshSlots(); break;
@@ -2720,7 +2782,12 @@
     }
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && UI.sheet) { closeSheet(); render(false); } });
-  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") { try { if (S && S.era && typeof EraStore !== "undefined") EraStore.save(); else Store.flush(); } catch (err) {} } });
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      saveRateState();
+      try { if (S && S.era && typeof EraStore !== "undefined") EraStore.save(); else Store.flush(); } catch (err) {}
+    } else queueRatePrompt();
+  });
 
   /* ---------- deslizar a la derecha para descartar tarjetas ---------- */
   (function () {
@@ -2776,6 +2843,7 @@
       try { restore(data.save); enterGame(); if (data.tab) UI.tab = data.tab; } catch (e) { S = null; UI.view = "home"; }
     } else UI.view = l ? "home" : "lang";
     render(true);
+    if (window.AndroidBridge && !ratePlayTimer) ratePlayTimer = setInterval(countActivePlaytime, 15000);
     try { var AB = window.AndroidBridge; if (AB && AB.updateAvailable && AB.updateAvailable() > 0) window.caminoUpdate(AB.updateAvailable(), AB.updateName ? AB.updateName() : ""); } catch (e) {}
     Store.init().then(function () {
       if (!Store.cloud) return;

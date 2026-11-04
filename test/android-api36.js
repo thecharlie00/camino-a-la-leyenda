@@ -58,7 +58,7 @@ const api29Start = activity.indexOf('private static final class Api29');
 assert.ok(api26Start >= 0 && api29Start > api26Start);
 assert.match(activity.slice(api26Start, api29Start), /onRenderProcessGone\(WebView view, android\.webkit\.RenderProcessGoneDetail detail\)/);
 assert.doesNotMatch(activity.slice(0, api26Start), /import .*RenderProcessGoneDetail|onRenderProcessGone\(WebView view,/);
-for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updateName', 'openStore', 'showAd', 'privacyOptionsRequired', 'showPrivacyOptions', 'remind', 'cancelRemind', 'askNotify', 'goatCareerPost']) {
+for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updateName', 'openStore', 'showAd', 'privacyOptionsRequired', 'showPrivacyOptions', 'isFullScreenAdShowing', 'remind', 'cancelRemind', 'askNotify', 'goatCareerPost']) {
   assert.match(activity, new RegExp(`@JavascriptInterface\\s+public\\s+[^\\n]+\\b${method}\\s*\\(`), `Missing AndroidBridge method ${method}`);
 }
 assert.match(activity, /ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197\/1191061575"/);
@@ -95,6 +95,12 @@ assert.ok(playStoreFeed.versionCode <= Number(manifest.match(/android:versionCod
   'The Play release pointer must not announce a build newer than the app package');
 assert.match(activity, /PLAY_RELEASE_URL = "https:\/\/futbolroadtolegend\.com\/play-store-version\.json"/);
 assert.match(activity, /private void checkForPlayStoreUpdate\(\)/);
+assert.match(activity, /AppUpdateManagerFactory\.create\(this\)/,
+  'Query Google Play directly instead of depending only on the manually maintained version feed');
+assert.match(activity, /info\.updateAvailability\(\) == UpdateAvailability\.UPDATE_AVAILABLE/);
+assert.match(activity, /info\.availableVersionCode\(\)/);
+assert.match(activity, /addOnFailureListener\(error -> checkReleaseFeedFallback\(\)\)/,
+  'Use the published release feed only as a fallback if the Play API cannot answer');
 assert.match(activity, /latestCode > installedVersionCode\(\)/,
   'Only a Play-published version newer than the installed build may trigger the notice');
 assert.match(activity, /notifyWebOfUpdate\(\)/);
@@ -119,6 +125,7 @@ const gradleConfig = read('../android/app/build.gradle');
 const settingsGradle = read('../android/settings.gradle');
 assert.match(gradleConfig, /play-services-ads:24\.7\.0/);
 assert.match(gradleConfig, /user-messaging-platform:3\.2\.0/);
+assert.match(gradleConfig, /com\.google\.android\.play:app-update:2\.1\.0/);
 assert.match(gradleConfig, /compileSdk 37/);
 assert.match(gradleConfig, /minSdk 24/);
 assert.match(gradleConfig, /targetSdk 36/, 'Keep Android 17 runtime behavior opt-in until it is tested');

@@ -10014,4 +10014,9 @@ I18N.en = {"% de paradas":"Save %",
 "Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"What an unexpected comment. I will file it next to the criticism that actually keeps me up at night. 😏",
 "¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Seriously, {target}? And here I thought I had already used up my sarcasm for today. 😏",
 "Puedes responder una vez por bloque.":"You can reply once per block.",
-"Ya respondiste en este bloque; podrás volver a hacerlo en el siguiente.":"You have already replied in this block; you can reply again in the next one."};
+"Ya respondiste en este bloque; podrás volver a hacerlo en el siguiente.":"You have already replied in this block; you can reply again in the next one.",
+  "¿Te está gustando Camino a la Leyenda?": "Enjoying Camino a la Leyenda?",
+  "Si disfrutas del juego, déjanos una valoración en Google Play. Tu opinión nos ayuda a seguir mejorándolo.": "If you're enjoying the game, leave us a rating on Google Play. Your feedback helps us keep improving it.",
+  "Valorar en Google Play": "Rate on Google Play",
+  "Ahora no": "Not now"
+};

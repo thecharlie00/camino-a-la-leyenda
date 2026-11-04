@@ -1,7 +1,7 @@
 # Aviso de actualización de Google Play
 
-La app Android comprueba `https://futbolroadtolegend.com/play-store-version.json` al volver al primer plano. Si `versionCode` es superior al instalado y `packageName` coincide con `com.caminoleyenda.app`, el juego muestra el aviso traducido que ya incluye el botón **Actualizar**; el botón abre la ficha de Google Play y conserva la alternativa web si la app Play Store no está disponible.
+Al volver al primer plano, la app Android consulta directamente Google Play mediante Play Core (`AppUpdateManager`). Si Play informa de una versión más nueva disponible para esa instalación —incluidos lanzamientos de prueba a los que la cuenta tenga acceso—, el juego muestra el aviso traducido con el botón **Actualizar**, que abre la ficha de la app en Google Play.
 
-`public/play-store-version.json` es el puntero de versiones publicadas en Play, no el número del último AAB compilado. Actualiza `versionCode` y `versionName` ahí **solo cuando esa versión esté disponible para los usuarios en Google Play**. Así, publicar el sitio o compilar un AAB antes de completar el despliegue no dispara un aviso prematuro. Mantén `packageName` igual al `package` de `android/AndroidManifest.xml`.
+Play Core solo puede confirmar actualizaciones para instalaciones reconocidas por Google Play y elegibles para esa versión. Si la consulta no puede completarse (por ejemplo, por una instalación externa o un fallo del servicio), Android usa como alternativa `https://futbolroadtolegend.com/play-store-version.json`. Ese feed debe reflejar una versión ya disponible en Play, no el último AAB compilado; actualiza sus campos solo tras completar la publicación. Mantén `packageName` igual al paquete de `android/AndroidManifest.xml`.
 
-El chequeo usa HTTPS en segundo plano, tiene límites de tiempo y tamaño, y falla de forma silenciosa si no hay conexión o el feed no responde; no bloquea el arranque ni el juego.
+Las consultas se limitan a una cada dos minutos, usan red en segundo plano y fallan de forma silenciosa si no hay conexión; nunca bloquean el arranque ni el juego. El aviso se muestra dentro de la app, no como notificación del sistema.

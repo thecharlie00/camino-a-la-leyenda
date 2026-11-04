@@ -38,6 +38,10 @@ import com.google.android.ump.ConsentInformation;
 import com.google.android.ump.ConsentRequestParameters;
 import com.google.android.ump.FormError;
 import com.google.android.ump.UserMessagingPlatform;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -80,7 +84,8 @@ public final class MainActivity extends Activity {
             requestInterstitial();
         }
     };
-    private boolean consentFormShowing;
+    private volatile boolean consentFormShowing;
+    private volatile boolean interstitialShowing;
     private InterstitialAd interstitialAd;
     private long lastInterstitialShownAt;
     private volatile int availableUpdateCode;
@@ -158,6 +163,11 @@ public final class MainActivity extends Activity {
                     }
                 }
             });
+        }
+
+        @JavascriptInterface
+        public boolean isFullScreenAdShowing() {
+            return interstitialShowing || consentFormShowing;
         }
 
         @JavascriptInterface
@@ -560,22 +570,26 @@ public final class MainActivity extends Activity {
         ad.setFullScreenContentCallback(new FullScreenContentCallback() {
             @Override
             public void onAdShowedFullScreenContent() {
+                interstitialShowing = true;
                 lastInterstitialShownAt = System.currentTimeMillis();
             }
 
             @Override
             public void onAdDismissedFullScreenContent() {
+                interstitialShowing = false;
                 requestInterstitial();
             }
 
             @Override
             public void onAdFailedToShowFullScreenContent(AdError error) {
+                interstitialShowing = false;
                 requestInterstitial();
             }
         });
         try {
             ad.show(this);
         } catch (Throwable ignored) {
+            interstitialShowing = false;
             requestInterstitial();
         }
     }
@@ -588,8 +602,9 @@ public final class MainActivity extends Activity {
         }
     }
 
-    // The site publishes this small release pointer only after that version is live
-    // in Google Play. Check off the UI thread; the game can keep running offline.
+    // Ask Google Play itself first, so staged/closed-test updates are detected without
+    // relying on a manually edited version pointer. Use the site feed only as a fallback
+    // when Play Core cannot answer (for example, an install not obtained from Play).
     private void checkForPlayStoreUpdate() {
         final long now = System.currentTimeMillis();
         if (!updateCheckRunning.compareAndSet(false, true)) return;
@@ -600,6 +615,30 @@ public final class MainActivity extends Activity {
             }
             lastUpdateCheckAt = now;
         }
+        try {
+            AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
+            appUpdateManager.getAppUpdateInfo()
+                .addOnSuccessListener(info -> {
+                    int latestCode = info.availableVersionCode();
+                    if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                            && latestCode > installedVersionCode()) {
+                        availableUpdateCode = latestCode;
+                        availableUpdateName = "";
+                        notifyWebOfUpdate();
+                        updateCheckRunning.set(false);
+                    } else {
+                        availableUpdateCode = 0;
+                        availableUpdateName = "";
+                        updateCheckRunning.set(false);
+                    }
+                })
+                .addOnFailureListener(error -> checkReleaseFeedFallback());
+        } catch (Throwable ignored) {
+            checkReleaseFeedFallback();
+        }
+    }
+
+    private void checkReleaseFeedFallback() {
         try {
             updateChecker.execute(new Runnable() {
                 @Override
@@ -637,7 +676,7 @@ public final class MainActivity extends Activity {
                             availableUpdateName = "";
                         }
                     } catch (Throwable ignored) {
-                        // A missing feed or network connection must never block game startup.
+                        // Offline or missing release feed must never block game startup.
                     } finally {
                         if (connection != null) connection.disconnect();
                         updateCheckRunning.set(false);

@@ -10014,4 +10014,9 @@ I18N.de = {"% de paradas":"Paradenquote",
 "Qué comentario tan inesperado. Voy a guardarlo junto a las críticas que sí me quitan el sueño. 😏":"Was für ein unerwarteter Kommentar. Ich lege ihn zu den Kritiken, die mir wirklich den Schlaf rauben. 😏",
 "¿En serio, {target}? Y yo que pensaba que hoy ya había gastado mi cuota de sarcasmo. 😏":"Im Ernst, {target}? Und ich dachte, mein Sarkasmus-Kontingent für heute wäre schon aufgebraucht. 😏",
 "Puedes responder una vez por bloque.":"Du kannst einmal pro Abschnitt antworten.",
-"Ya respondiste en este bloque; podrás volver a hacerlo en el siguiente.":"Du hast in diesem Abschnitt bereits geantwortet; im nächsten kannst du wieder antworten."};
+"Ya respondiste en este bloque; podrás volver a hacerlo en el siguiente.":"Du hast in diesem Abschnitt bereits geantwortet; im nächsten kannst du wieder antworten.",
+  "¿Te está gustando Camino a la Leyenda?": "Gefällt dir Camino a la Leyenda?",
+  "Si disfrutas del juego, déjanos una valoración en Google Play. Tu opinión nos ayuda a seguir mejorándolo.": "Wenn dir das Spiel gefällt, bewerte es bei Google Play. Dein Feedback hilft uns, es weiter zu verbessern.",
+  "Valorar en Google Play": "Bei Google Play bewerten",
+  "Ahora no": "Jetzt nicht"
+};
