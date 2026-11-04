@@ -453,6 +453,9 @@ function eraStartWithContext(mode, year, identity) {
   if (ui) { ui.cr = null; ui.view = S.ph === "draft" ? "draft" : "game"; ui.tab = S.mode === "mgr" ? "club" : "carrera"; }
   if (window.UIX && window.UIX.persist) window.UIX.persist();
   if (window.UIX && window.UIX.render) window.UIX.render(true);
+  if (window.UIX && window.UIX.showAdLater) window.UIX.showAdLater("career_start", 1200, function () {
+    return !!S && window.UIX.ui().view !== "create" && window.UIX.ui().view !== "modes";
+  });
 }
 
 /* Desde el formulario normal de creación (ui.js finishCreate con c.era) */

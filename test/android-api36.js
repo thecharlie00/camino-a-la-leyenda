@@ -12,12 +12,15 @@ const workflow = read('../.github/workflows/build.yml');
 const gameBuilder = read('../build_legacy_game.py');
 const gameCss = read('../legacy-game/src/style.css');
 const gameUi = read('../legacy-game/src/ui.js');
+const goatUi = read('../legacy-game/src/ui-goat.js');
+const heirUi = read('../legacy-game/src/ui-46.js');
+const eraCore = read('../legacy-game/src/eras-core.js');
 const playStoreFeed = JSON.parse(read('../public/play-store-version.json'));
 
 assert.doesNotMatch(manifest, /<uses-sdk\b/, 'SDK levels belong in Gradle DSL, not the manifest under AGP 9');
-assert.match(manifest, /android:versionCode="75"/);
-assert.match(manifest, /android:versionName="5\.25"/);
-assert.equal(packageJson.version, '5.25.0');
+assert.match(manifest, /android:versionCode="76"/);
+assert.match(manifest, /android:versionName="5\.26"/);
+assert.equal(packageJson.version, '5.26.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
@@ -66,7 +69,11 @@ assert.match(activity, /TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544\/103
 assert.match(activity, /boolean useTestAds = BuildConfig\.DEBUG/,
   'Only debug builds should use Google test inventory; release builds use the real production ad unit');
 assert.match(activity, /String adUnitId = useTestAds \? TEST_INTERSTITIAL_ID : ADMOB_INTERSTITIAL_ID/);
-assert.match(activity, /if \(!"menu"\.equals\(where\)\) return;/, 'Native bridge must reject every placement except the safe return-to-menu transition');
+assert.match(activity, /private static boolean isAllowedAdPlacement\(String where\)/);
+for (const placement of ['menu', 'match_start', 'goat_upload', 'retire', 'heir_start', 'manager_start', 'career_start']) {
+  assert.match(activity, new RegExp(`"${placement}"\\.equals\\(where\\)`), `Native bridge must allow ${placement}`);
+}
+assert.match(activity, /if \(!isAllowedAdPlacement\(where\)\) return;/, 'Native bridge must reject placements outside the explicit transition allowlist');
 assert.match(activity, /MIN_INTERSTITIAL_INTERVAL_MS = 5L \* 60L \* 1000L/);
 assert.match(activity, /consentInformation\.requestConsentInfoUpdate/);
 assert.match(activity, /loadAndShowConsentFormIfRequired/);
@@ -107,6 +114,21 @@ assert.match(activity, /notifyWebOfUpdate\(\)/);
 assert.match(activity, /checkForPlayStoreUpdate\(\);/);
 assert.doesNotMatch(activity, /public int updateAvailable\(\)\s*\{\s*return 0;/,
   'AndroidBridge must return the checked Play Store version rather than a stub');
+assert.match(gameUi, /S\.ph === "pre" \|\| S\.ph === "gap"\) && !S\.pend\.length && showAd\("match_start"\)/,
+  'Match-start interstitials may only be requested before a block from pre/gap, with no pending decision');
+assert.match(gameUi, /function waitForPreMatchAd\(matchState, phase\)/);
+assert.match(gameUi, /isFullScreenAdShowing\(\)/,
+  'A match block must wait while an interstitial is actually on screen');
+assert.equal((gameUi.match(/showAdLater\("retire"/g) || []).length, 2,
+  'Player and manager retirement transitions must both schedule an interstitial');
+assert.match(gameUi, /showAdLater\("career_start"/);
+assert.match(eraCore, /showAdLater\("career_start"/);
+assert.match(gameUi, /showAd\("manager_start"\)/);
+assert.doesNotMatch(gameUi, /showAd\("load"\)/,
+  'Save loading is not an approved placement and must not consume the JavaScript frequency cap');
+assert.match(goatUi, /showAdLater\("goat_upload"/);
+assert.equal((heirUi.match(/showAdLater\("heir_start"/g) || []).length, 2,
+  'Both existing-child and new-child career starts must schedule an interstitial');
 assert.match(gameUi, /window\.caminoUpdate = function \(code, name\)/);
 assert.match(gameUi, /data-a=.*doupdate/);
 assert.match(gameUi, /case \"doupdate\": try \{ window\.AndroidBridge\.openStore\(\);/);

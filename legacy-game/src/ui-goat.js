@@ -427,6 +427,9 @@
       sheet.submitSuccess = result.goat_score;
       sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
       load(sheet);
+      if (window.UIX.showAdLater) window.UIX.showAdLater("goat_upload", 1200, function () {
+        return window.UIX.getSheet() === sheet && sheet.submitSuccess != null;
+      });
     }).catch(function (error) {
       console.error("GOAT LADDER submission failed", error);
       sheet.submitting = false;
@@ -455,6 +458,9 @@
       sheet.submitSuccess = tr("careerPublished");
       sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
       window.UIX.renderSheet();
+      if (window.UIX.showAdLater) window.UIX.showAdLater("goat_upload", 1200, function () {
+        return window.UIX.getSheet() === sheet && sheet.submitSuccess != null;
+      });
     }).catch(function (error) {
       console.error("GOAT LADDER career submission failed", error);
       sheet.submitting = false;
