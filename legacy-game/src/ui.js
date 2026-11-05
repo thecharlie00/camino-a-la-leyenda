@@ -388,6 +388,11 @@
     var mgr = isMgr();
     return {tro: mgr ? S.m.trophies.length : (S.p ? S.p.trophies.length : 0), bdo: !mgr && S.p ? S.p.awards.filter(function (a) { return a.k === "bdo"; }).length : 0};
   }
+  function trophyCompName(t) { return typeof eraTrophyName === "function" ? eraTrophyName(t) : t.n; }
+  function leagueNameForSeason(li, year) {
+    if (S && S.era && S.era.active && W.lg[li] && typeof eraLeagueName === "function") return eraLeagueName(W.lg[li].id, W.lg[li].n, year);
+    return lgName(li);
+  }
   /* celebración de un título: ventana con el trofeo, la temporada y lo que gana el club */
   function trophyModal() {
     if (!S || !S.troQ || !S.troQ.length || document.getElementById("tromod")) return;
@@ -409,7 +414,7 @@
     var who = mgr ? clubName(t.club) : t.nat >= 0 ? natName(t.nat) : clubName(t.team);
     var el = document.createElement("div"); el.id = "tromod"; el.className = "tromod"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
     el.innerHTML = '<div class="tropanel"><div class="trorays" aria-hidden="true"></div><div class="trokick">' + h(tr("¡Campeones!")) + '</div><div class="troimg">' + (typeof trophySVG === "function" ? trophySVG(t.k, 132) : "🏆") + "</div>" +
-      "<h2>" + h(trComp(t.n)) + '</h2><div class="troseason">' + h(t.s || "") + " · " + h(who) + '</div><div class="chips">' + chips.join("") + '</div><button class="go" data-a="troclose">' + h(tr("¡A celebrarlo!")) + "</button></div>";
+      "<h2>" + h(trComp(trophyCompName(t))) + '</h2><div class="troseason">' + h(t.s || "") + " · " + h(who) + '</div><div class="chips">' + chips.join("") + '</div><button class="go" data-a="troclose">' + h(tr("¡A celebrarlo!")) + "</button></div>";
     document.body.appendChild(el);
     if (typeof Anim !== "undefined") Anim.haptic("big");
     confetti(true);
@@ -1095,7 +1100,7 @@
   function seasonEndCard(c, fl) {
     var r = c.row, champ = c.pos === 1;
     var o = '<article class="card' + fl + '"><div class="head"><span class="tag ' + (champ ? "real" : "") + '">' + tr("Balance {season}", {season: seasonLabel(c.y)}) + '</span><span class="eyebrow">' + h(clubName(c.club)) + "</span></div>";
-    o += "<h3>" + (champ ? tr("¡Campeón de {lg}!", {lg: h(lgName(c.lg))}) : tr("{pos} en {lg}", {pos: ord(c.pos), lg: h(lgName(c.lg))})) + "</h3>";
+    o += "<h3>" + (champ ? tr("¡Campeón de {lg}!", {lg: h(leagueNameForSeason(c.lg, c.y))}) : tr("{pos} en {lg}", {pos: ord(c.pos), lg: h(leagueNameForSeason(c.lg, c.y))})) + "</h3>";
     var gkRow = r.gc != null && W.pos[S.p.pos] && W.pos[S.p.pos].g === "POR";
     o += '<div class="statline"><div class="stat"><b>' + r.apps + '</b><span>' + tr("Partidos") + '</span></div>' + (gkRow
       ? '<div class="stat"><b>' + r.cs + '</b><span>' + tr("Port. a cero") + '</span></div><div class="stat"><b>' + r.gc + '</b><span>' + tr("Encajados") + '</span></div>'
@@ -1103,20 +1108,21 @@
     if (gkRow && r.apps) o += '<p class="muted" style="font-size:var(--fs-sm);margin:8px 0 0">' + tr("{cs} porterías a cero y {gc} goles encajados ({avg} por partido).", {cs: r.cs, gc: r.gc, avg: fmtDec(r.gc / Math.max(1, r.apps), 2)}) + "</p>";
     if (c.objs && c.objs.length) o += '<div style="margin-top:10px">' + c.objs.map(function (ob) { return '<div class="obj"><div><span>' + h(objName(ob)) + '</span><span class="' + (ob.met ? "pos" : "neg") + '">' + (ob.met ? tr("Cumplido") : tr("No cumplido")) + "</span></div></div>"; }).join("") + "</div>";
     var tro = S.p.trophies.filter(function (t) { return t.s === seasonLabel(c.y); });
-    if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(t.n)); }).join("") + "</div>";
+    if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(trophyCompName(t))); }).join("") + "</div>";
     var news = (c.news || []).slice();
-    (r.tro || []).forEach(function (t) { if (!news.some(function (n) { return n.x.indexOf(t) >= 0; })) news.push({t: "trophy", x: tr("Título: {t}", {t: trComp(t)})}); });
+    var trophyNames = tro.length ? tro.map(function (t) { return trComp(trophyCompName(t)); }) : (r.tro || []);
+    trophyNames.forEach(function (t) { if (!news.some(function (n) { return n.x.indexOf(t) >= 0; })) news.push({t: "trophy", x: tr("Título: {t}", {t: t})}); });
     if (news.length) o += '<ul class="news">' + news.map(function (n) { return '<li class="' + n.t + '">' + h(n.x) + "</li>"; }).join("") + "</ul>";
     return o + "</article>";
   }
   function mSeasonEndCard(c, fl) {
     var r = c.row, champ = c.pos === 1;
     var o = '<article class="card' + fl + '"><div class="head"><span class="tag ' + (champ ? "real" : "") + '">' + tr("Balance {season}", {season: seasonLabel(c.y)}) + '</span><span class="eyebrow">' + h(clubName(c.club)) + "</span></div>";
-    o += "<h3>" + (champ ? tr("¡Campeones de {lg}!", {lg: h(lgName(c.lg))}) : tr("{pos} en {lg}", {pos: ord(c.pos), lg: h(lgName(c.lg))})) + "</h3>";
+    o += "<h3>" + (champ ? tr("¡Campeones de {lg}!", {lg: h(leagueNameForSeason(c.lg, c.y))}) : tr("{pos} en {lg}", {pos: ord(c.pos), lg: h(leagueNameForSeason(c.lg, c.y))})) + "</h3>";
     o += '<div class="statline"><div class="stat"><b>' + r.w + "</b><span>" + tr("Victorias") + '</span></div><div class="stat"><b>' + r.d + "</b><span>" + tr("Empates") + '</span></div><div class="stat"><b>' + r.l + "</b><span>" + tr("Derrotas") + '</span></div><div class="stat"><b>' + r.gf + ":" + r.ga + "</b><span>" + tr("Goles") + '</span></div><div class="stat"><b>' + c.board + "</b><span>" + tr("Directiva") + "</span></div></div>";
     if (c.objs && c.objs.length) o += '<div style="margin-top:10px">' + c.objs.map(function (ob) { return '<div class="obj"><div><span>' + h(objName(ob)) + '</span><span class="' + (ob.met ? "pos" : "neg") + '">' + (ob.met ? tr("Cumplido") : tr("No cumplido")) + "</span></div></div>"; }).join("") + "</div>";
     var tro = S.m.trophies.filter(function (t) { return t.s === seasonLabel(c.y); });
-    if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(t.n)); }).join("") + "</div>";
+    if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(trophyCompName(t))); }).join("") + "</div>";
     if (c.news && c.news.length) o += '<ul class="news">' + c.news.map(function (n) { return '<li class="' + n.t + '">' + h(n.x) + "</li>"; }).join("") + "</ul>";
     return o + "</article>";
   }
@@ -1305,7 +1311,7 @@
   /* ---------- vitrina ---------- */
   function vitrina(list, emptyTxt) {
     var grp = {};
-    list.forEach(function (t) { var k = trComp(t.n.replace(/ \d{4}$/, "")); (grp[k] = grp[k] || []).push(t); });
+    list.forEach(function (t) { var k = trComp(trophyCompName(t).replace(/ \d{4}$/, "")); (grp[k] = grp[k] || []).push(t); });
     var keys = Object.keys(grp).sort(function (a, b) { return grp[b][0].w - grp[a][0].w || grp[b].length - grp[a].length; });
     if (!keys.length) return '<p class="empty">' + h(emptyTxt) + "</p>";
     return '<div class="tgrid">' + keys.map(function (k) {

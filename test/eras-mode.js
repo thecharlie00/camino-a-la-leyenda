@@ -31,6 +31,8 @@ for (const decade of ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']) {
   assert.ok(gameCss.includes(`data-era-decade="${decade}"`), `the art direction must define a visual treatment for ${decade}`);
 }
 assert.match(uiSource, /if \(S && S\.era && S\.era\.active\) \{ persist\(\); S = null;/, 'Retiring from Era Mode must return to its isolated home, not modern slot management');
+assert.match(uiSource, /function trophyCompName\(t\)/, 'trophy displays must resolve Era league names from the trophy season');
+assert.match(uiSource, /function leagueNameForSeason\(li, year\)/, 'Era season summaries must use the league name from the season being displayed');
 assert.match(uiSource, /function eraSocialAvailable\(\)/, 'Era Mode must gate social-media navigation by the current year');
 
 assert.deepEqual(packs.map((pack) => pack.id), ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']);
@@ -431,6 +433,13 @@ assert.equal(context.eraClubName('Red Bull Salzburgo', 1990), 'Austria Salzburgo
 assert.equal(context.eraClubName('Red Bull Salzburgo', 2005), 'Red Bull Salzburgo');
 assert.equal(context.eraLeagueName('ENG1', 'Premier League', 1975), 'Football League First Division', 'the English top flight was the First Division in 1975');
 assert.equal(context.eraLeagueName('ENG1', 'Premier League', 1992), 'Premier League');
+context.S = {yr: 2026, era: {active: true}};
+assert.equal(context.eraTrophyName({k: 'L:ESP1', n: 'LaLiga EA Sports', s: '1970/71'}), 'Primera División', 'an old save trophy must use the Spanish league name from its own season');
+assert.equal(context.eraTrophyName({k: 'L:ESP1', n: 'LaLiga EA Sports', s: '2016/17'}), 'LaLiga', 'the trophy season, not the current Era year, selects the league name');
+assert.equal(context.eraTrophyName({k: 'UCL', n: 'Copa de Europa', s: '1970/71'}), 'Copa de Europa', 'non-league trophy names are not replaced');
+context.S = {yr: 2026};
+assert.equal(context.eraTrophyName({k: 'L:ESP1', n: 'LaLiga EA Sports', s: '1970/71'}), 'LaLiga EA Sports', 'modern-mode trophies keep their saved name');
+context.S = {yr: 2026, era: {active: true}};
 assert.equal(context.eraLeagueExists('MLS', 1990), false, 'MLS began in 1996');
 assert.equal(context.eraLeagueExists('MLS', 1996), true);
 for (const [name, entry] of Object.entries(clubsHistory.clubs)) assert.ok(entry.src, `${name} needs a source or 'memory'`);
