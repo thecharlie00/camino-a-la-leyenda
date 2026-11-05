@@ -18,9 +18,9 @@ const eraCore = read('../legacy-game/src/eras-core.js');
 const playStoreFeed = JSON.parse(read('../public/play-store-version.json'));
 
 assert.doesNotMatch(manifest, /<uses-sdk\b/, 'SDK levels belong in Gradle DSL, not the manifest under AGP 9');
-assert.match(manifest, /android:versionCode="78"/);
-assert.match(manifest, /android:versionName="5\.28"/);
-assert.equal(packageJson.version, '5.28.0');
+assert.match(manifest, /android:versionCode="79"/);
+assert.match(manifest, /android:versionName="5\.29"/);
+assert.equal(packageJson.version, '5.29.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);
@@ -64,7 +64,7 @@ assert.doesNotMatch(activity.slice(0, api26Start), /import .*RenderProcessGoneDe
 for (const method of ['copy', 'haptic', 'versionCode', 'updateAvailable', 'updateName', 'openStore', 'showAd', 'privacyOptionsRequired', 'showPrivacyOptions', 'isFullScreenAdShowing', 'remind', 'cancelRemind', 'askNotify', 'goatCareerPost']) {
   assert.match(activity, new RegExp(`@JavascriptInterface\\s+public\\s+[^\\n]+\\b${method}\\s*\\(`), `Missing AndroidBridge method ${method}`);
 }
-assert.match(activity, /ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197\/1191061575"/);
+assert.match(activity, /ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197\/1645003478"/);
 assert.match(activity, /TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544\/1033173712"/);
 assert.match(activity, /boolean useTestAds = BuildConfig\.DEBUG/,
   'Only debug builds should use Google test inventory; release builds use the real production ad unit');

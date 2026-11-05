@@ -63,7 +63,7 @@ public final class MainActivity extends Activity {
     private static final int MAX_UPDATE_FEED_CHARS = 16384;
     private static final int MAX_GOAT_REQUEST_BYTES = 100000;
     private static final int MAX_GOAT_RESPONSE_BYTES = 1000000;
-    private static final String ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197/1191061575";
+    private static final String ADMOB_INTERSTITIAL_ID = "ca-app-pub-3919867907492197/1645003478";
     private static final String TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
     private static final String ADS_LOG_TAG = "CaminoAds";
     private static final long MIN_INTERSTITIAL_INTERVAL_MS = 5L * 60L * 1000L;
