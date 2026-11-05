@@ -117,6 +117,9 @@ assert.doesNotMatch(activity, /public int updateAvailable\(\)\s*\{\s*return 0;/,
 assert.match(gameUi, /S\.ph === "pre" \|\| S\.ph === "gap"\) && !S\.pend\.length && showAd\("match_start"\)/,
   'Match-start interstitials may only be requested before a block from pre/gap, with no pending decision');
 assert.match(gameUi, /function waitForPreMatchAd\(matchState, phase\)/);
+assert.doesNotMatch(gameUi, /AD_GAP|lastAd/,
+  'The native bridge owns the frequency cap; a void JS bridge must not suppress retries after a failed or unfilled request');
+assert.match(gameUi, /B\.showAd\(String\(where\)\)/);
 assert.match(gameUi, /isFullScreenAdShowing\(\)/,
   'A match block must wait while an interstitial is actually on screen');
 assert.equal((gameUi.match(/showAdLater\("retire"/g) || []).length, 2,

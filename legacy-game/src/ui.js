@@ -2028,15 +2028,15 @@
   /* ---------- anuncios (Android; la web mantiene NO_ADS=true) ----------
      El host nativo solo admite ubicaciones de transición explícitas, nunca durante
      un partido, y aplica además un límite independiente de cinco minutos. */
-  var AD_GAP = 300000, lastAd = 0;
   var NO_ADS = false; /* la compilación web lo pone a true; Android usa AndroidBridge */
   var WEB_ADS = false; /* build_web.py lo pone a true en la web pública, que lleva anuncios de AdSense fuera del juego */
   function showAd(where) {
     var B = window.AndroidBridge;
-    if (NO_ADS || !B || !B.showAd || Date.now() - lastAd < AD_GAP) return false;
+    if (NO_ADS || !B || !B.showAd) return false;
     try {
+      /* Android aplica el límite de cinco minutos al anuncio realmente mostrado. No
+         bloquear aquí: el puente devuelve void, y una carga fallida no debe consumirlo. */
       B.showAd(String(where));
-      lastAd = Date.now();
       return true;
     } catch (e) { return false; }
   }
