@@ -85,6 +85,12 @@ function eraClubExists(name, year) { var h = eraHistory().clubs[name]; return !h
 function eraClubName(name, year) { var h = eraHistory().clubs[name]; return h ? eraNameAt(h.names, year, name) : name; }
 function eraLeagueExists(id, year) { var h = eraHistory().leagues[id]; return !h || h.since == null || h.since <= year; }
 function eraLeagueName(id, fallback, year) { var h = eraHistory().leagues[id]; return h ? eraNameAt(h.names, year, fallback) : fallback; }
+function eraTrophyName(trophy) {
+  if (!trophy || !trophy.n || !eraIsActive() || typeof trophy.k !== "string" || trophy.k.indexOf("L:") !== 0) return trophy && trophy.n;
+  var seasonYear = parseInt(String(trophy.s || ""), 10);
+  if (!isFinite(seasonYear)) seasonYear = trophy.y != null ? +trophy.y - 1 : S.yr;
+  return eraLeagueName(trophy.k.slice(2), trophy.n, seasonYear);
+}
 function eraIsActive() { return !!(ERAS_MODE && S && S.era && S.era.active); }
 function eraKeepYearRoundMarket() {
   var rules = eraRulesForYear(S && S.yr), market = S && S.m && S.m.mk;

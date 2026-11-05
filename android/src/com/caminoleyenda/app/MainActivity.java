@@ -525,7 +525,7 @@ public final class MainActivity extends Activity {
                     adsHandler.removeCallbacks(retryInterstitialLoad);
                     if (isFinishing() || !adsConsentGranted) return;
                     interstitialAd = ad;
-                    Log.i(ADS_LOG_TAG, "Interstitial loaded and waiting for a safe menu transition.");
+                    Log.i(ADS_LOG_TAG, "Interstitial loaded and waiting for a safe placement.");
                 }
 
                 @Override
