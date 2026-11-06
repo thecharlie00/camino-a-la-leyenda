@@ -7,11 +7,11 @@
   /* ---------- consentimiento, publicidad web y analítica ---------- */
   var CONSENT_KEY = "camino.webconsent.v1";
   var CONSENT_COPY = {
-    es: {title: "Privacidad y cookies", text: "La web puede cargar anuncios de abscloud.org y bauval.org y estadísticas de Google Analytics. Solo activamos estos servicios opcionales si aceptas. Puedes rechazar y seguir usando la web; cambia tu elección desde este aviso o el enlace del pie.", yes: "Aceptar opcionales", no: "Rechazar opcionales", close: "Cerrar", policy: "Política de privacidad"},
-    en: {title: "Privacy and cookies", text: "This site can load ads from abscloud.org and bauval.org and Google Analytics. These optional services load only if you accept. You can reject them and keep using the site; change your choice here or from the footer link.", yes: "Accept optional", no: "Reject optional", close: "Close", policy: "Privacy policy"},
-    de: {title: "Datenschutz und Cookies", text: "Diese Website kann Anzeigen von abscloud.org und bauval.org sowie Google Analytics laden. Diese optionalen Dienste werden nur mit deiner Zustimmung aktiviert. Du kannst ablehnen und die Website weiter nutzen; ändere deine Wahl hier oder über den Link im Fußbereich.", yes: "Optionale akzeptieren", no: "Optionale ablehnen", close: "Schließen", policy: "Datenschutzerklärung"},
-    it: {title: "Privacy e cookie", text: "Questo sito può caricare annunci da abscloud.org e bauval.org e Google Analytics. Questi servizi facoltativi si attivano solo con il tuo consenso. Puoi rifiutarli e continuare a usare il sito; cambia scelta qui o dal link nel piè di pagina.", yes: "Accetta facoltativi", no: "Rifiuta facoltativi", close: "Chiudi", policy: "Informativa sulla privacy"},
-    fr: {title: "Confidentialité et cookies", text: "Ce site peut charger des annonces d’abscloud.org et bauval.org ainsi que Google Analytics. Ces services facultatifs ne sont activés qu’avec ton accord. Tu peux refuser et continuer à utiliser le site ; modifie ton choix ici ou via le lien en bas de page.", yes: "Accepter les options", no: "Refuser les options", close: "Fermer", policy: "Politique de confidentialité"}
+    es: {title: "Privacidad y cookies", text: "La web puede cargar anuncios de bauval.org y estadísticas de Google Analytics. Solo activamos estos servicios opcionales si aceptas. Puedes rechazar y seguir usando la web; cambia tu elección desde este aviso o el enlace del pie.", yes: "Aceptar opcionales", no: "Rechazar opcionales", close: "Cerrar", policy: "Política de privacidad"},
+    en: {title: "Privacy and cookies", text: "This site can load ads from bauval.org and Google Analytics. These optional services load only if you accept. You can reject them and keep using the site; change your choice here or from the footer link.", yes: "Accept optional", no: "Reject optional", close: "Close", policy: "Privacy policy"},
+    de: {title: "Datenschutz und Cookies", text: "Diese Website kann Anzeigen von bauval.org sowie Google Analytics laden. Diese optionalen Dienste werden nur mit deiner Zustimmung aktiviert. Du kannst ablehnen und die Website weiter nutzen; ändere deine Wahl hier oder über den Link im Fußbereich.", yes: "Optionale akzeptieren", no: "Optionale ablehnen", close: "Schließen", policy: "Datenschutzerklärung"},
+    it: {title: "Privacy e cookie", text: "Questo sito può caricare annunci da bauval.org e Google Analytics. Questi servizi facoltativi si attivano solo con il tuo consenso. Puoi rifiutarli e continuare a usare il sito; cambia scelta qui o dal link nel piè di pagina.", yes: "Accetta facoltativi", no: "Rifiuta facoltativi", close: "Chiudi", policy: "Informativa sulla privacy"},
+    fr: {title: "Confidentialité et cookies", text: "Ce site peut charger des annonces de bauval.org ainsi que Google Analytics. Ces services facultatifs ne sont activés qu’avec ton accord. Tu peux refuser et continuer à utiliser le site ; modifie ton choix ici ou via le lien en bas de page.", yes: "Accepter les options", no: "Refuser les options", close: "Fermer", policy: "Politique de confidentialité"}
   };
   function readConsent() {
     try { var value = JSON.parse(localStorage.getItem(CONSENT_KEY) || "null"); return value && typeof value.ads === "boolean" ? value : null; }
@@ -28,7 +28,6 @@
     if (document.querySelector("[data-network-ads]:not([data-loaded])")) {
       var networkSlot = document.querySelector("[data-network-ads]:not([data-loaded])");
       networkSlot.setAttribute("data-loaded", "true");
-      appendScript("https://abscloud.org/1/88abf9d555a4a30b9f834a14f05cfd91", document.body, true);
       appendScript("https://bauval.org/14/658905d412d2a8d77d2857f1d878c9e6", document.body, true);
     }
     var banners = window.innerWidth >= 761 ? document.querySelectorAll("[data-bauval-banner]:not([data-loaded])") : [];

@@ -1,2 +1,2 @@
-# Web ads use abscloud.org and bauval.org tags.
-# Add the seller records supplied by those networks before monetized launch.
+# Web ads use bauval.org tags.
+# Add the seller records supplied by the network before monetized launch.
