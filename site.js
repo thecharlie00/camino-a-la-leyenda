@@ -4,28 +4,81 @@
   var reduce = false;
   try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
 
-  /* ---------- anuncios: se piden solo los huecos que se ven ---------- */
-  function fillAds() {
-    var list = document.querySelectorAll("ins.adsbygoogle:not([data-done])");
-    for (var i = 0; i < list.length; i++) {
-      var el = list[i];
-      if (!el.offsetWidth) continue;
-      el.setAttribute("data-done", "1");
-      try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+  /* ---------- consentimiento, publicidad web y analítica ---------- */
+  var CONSENT_KEY = "camino.webconsent.v1";
+  var CONSENT_COPY = {
+    es: {title: "Privacidad y cookies", text: "La web puede cargar anuncios de abscloud.org y bauval.org y estadísticas de Google Analytics. Solo activamos estos servicios opcionales si aceptas. Puedes rechazar y seguir usando la web; cambia tu elección desde este aviso o el enlace del pie.", yes: "Aceptar opcionales", no: "Rechazar opcionales", close: "Cerrar", policy: "Política de privacidad"},
+    en: {title: "Privacy and cookies", text: "This site can load ads from abscloud.org and bauval.org and Google Analytics. These optional services load only if you accept. You can reject them and keep using the site; change your choice here or from the footer link.", yes: "Accept optional", no: "Reject optional", close: "Close", policy: "Privacy policy"},
+    de: {title: "Datenschutz und Cookies", text: "Diese Website kann Anzeigen von abscloud.org und bauval.org sowie Google Analytics laden. Diese optionalen Dienste werden nur mit deiner Zustimmung aktiviert. Du kannst ablehnen und die Website weiter nutzen; ändere deine Wahl hier oder über den Link im Fußbereich.", yes: "Optionale akzeptieren", no: "Optionale ablehnen", close: "Schließen", policy: "Datenschutzerklärung"},
+    it: {title: "Privacy e cookie", text: "Questo sito può caricare annunci da abscloud.org e bauval.org e Google Analytics. Questi servizi facoltativi si attivano solo con il tuo consenso. Puoi rifiutarli e continuare a usare il sito; cambia scelta qui o dal link nel piè di pagina.", yes: "Accetta facoltativi", no: "Rifiuta facoltativi", close: "Chiudi", policy: "Informativa sulla privacy"},
+    fr: {title: "Confidentialité et cookies", text: "Ce site peut charger des annonces d’abscloud.org et bauval.org ainsi que Google Analytics. Ces services facultatifs ne sont activés qu’avec ton accord. Tu peux refuser et continuer à utiliser le site ; modifie ton choix ici ou via le lien en bas de page.", yes: "Accepter les options", no: "Refuser les options", close: "Fermer", policy: "Politique de confidentialité"}
+  };
+  function readConsent() {
+    try { var value = JSON.parse(localStorage.getItem(CONSENT_KEY) || "null"); return value && typeof value.ads === "boolean" ? value : null; }
+    catch (e) { return null; }
+  }
+  function appendScript(src, parent, cfasync) {
+    var script = document.createElement("script");
+    script.src = src; script.async = false;
+    if (cfasync) script.setAttribute("data-cfasync", "false");
+    (parent || document.body || document.head).appendChild(script);
+    return script;
+  }
+  function loadWebAds() {
+    if (document.querySelector("[data-network-ads]:not([data-loaded])")) {
+      var networkSlot = document.querySelector("[data-network-ads]:not([data-loaded])");
+      networkSlot.setAttribute("data-loaded", "true");
+      appendScript("https://abscloud.org/1/88abf9d555a4a30b9f834a14f05cfd91", document.body, true);
+      appendScript("https://bauval.org/14/658905d412d2a8d77d2857f1d878c9e6", document.body, true);
+    }
+    var banners = window.innerWidth >= 761 ? document.querySelectorAll("[data-bauval-banner]:not([data-loaded])") : [];
+    for (var i = 0; i < banners.length; i++) {
+      var el = banners[i]; el.setAttribute("data-loaded", "true");
+      window.atOptions = {key: "b4c1dc5f8033cebc60622af9c1b9e516", format: "iframe", height: 90, width: 728, params: {}};
+      appendScript("https://bauval.org/22/b4c1dc5f8033cebc60622af9c1b9e516", el, false);
     }
   }
-  if (document.querySelector("ins.adsbygoogle")) {
-    fillAds();
-    var t0 = 0;
-    window.addEventListener("resize", function () { clearTimeout(t0); t0 = setTimeout(fillAds, 400); });
+  function loadAnalytics() {
+    if (window.caminoAnalyticsLoaded) return;
+    window.caminoAnalyticsLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag("consent", "default", {ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "denied", wait_for_update: 1000});
+    window.gtag("consent", "update", {analytics_storage: "granted"});
+    window.gtag("js", new Date());
+    window.gtag("config", "G-LGPGHRGSSC");
+    appendScript("https://www.googletagmanager.com/gtag/js?id=G-LGPGHRGSSC", document.head, false);
   }
-  /* «Privacidad y cookies»: vuelve a mostrar el mensaje de consentimiento de Google */
+  function applyConsent(value) {
+    if (!value) return;
+    if (value.ads) loadWebAds();
+    if (value.analytics) loadAnalytics();
+  }
+  function showConsent() {
+    var existing = document.querySelector(".site-consent"); if (existing) existing.remove();
+    var lang = (document.documentElement.lang || "es").slice(0, 2).toLowerCase();
+    var t = CONSENT_COPY[lang] || CONSENT_COPY.es;
+    var privacyPath = lang === "es" ? "/privacidad/" : "/" + lang + "/privacidad/";
+    var panel = document.createElement("aside");
+    panel.className = "site-consent"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-label", t.title);
+    panel.innerHTML = '<div class="site-consent-inner"><div class="site-consent-copy"><b>' + t.title + '</b><p>' + t.text + '</p><a href="' + privacyPath + '">' + t.policy + '</a></div><div class="site-consent-actions"><button type="button" data-consent-choice="yes">' + t.yes + '</button><button type="button" data-consent-choice="no">' + t.no + '</button><button type="button" class="site-consent-close" data-consent-choice="close">' + t.close + '</button></div></div>';
+    document.body.appendChild(panel);
+    panel.addEventListener("click", function (event) {
+      var button = event.target.closest("[data-consent-choice]"); if (!button) return;
+      var choice = button.getAttribute("data-consent-choice");
+      if (choice === "close") { panel.remove(); return; }
+      var allow = choice === "yes", previous = readConsent();
+      try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ads: allow, analytics: allow, at: Date.now()})); } catch (e) {}
+      panel.remove();
+      if (!allow && previous && (previous.ads || previous.analytics)) { location.reload(); return; }
+      applyConsent({ads: allow, analytics: allow});
+    });
+  }
+  var consent = readConsent();
+  if (consent) applyConsent(consent); else showConsent();
+  window.addEventListener("resize", function () { var current = readConsent(); if (current && current.ads) loadWebAds(); });
   var cl = document.querySelectorAll("[data-consent]");
-  for (var c = 0; c < cl.length; c++) cl[c].addEventListener("click", function () {
-    var fc = window.googlefc;
-    if (fc && typeof fc.showRevocationMessage === "function") fc.showRevocationMessage();
-    else { window.googlefc = fc || {}; window.googlefc.callbackQueue = window.googlefc.callbackQueue || []; window.googlefc.callbackQueue.push({CONSENT_API_READY: function () { window.googlefc.showRevocationMessage(); }}); }
-  });
+  for (var c = 0; c < cl.length; c++) cl[c].addEventListener("click", showConsent);
 
   /* ---------- idioma de la web ---------- */
   var ll = document.querySelectorAll("[data-weblang]");
