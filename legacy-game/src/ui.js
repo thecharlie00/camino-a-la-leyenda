@@ -949,6 +949,7 @@
 
   /* ---------- chips y tarjetas del feed ---------- */
   var MCHIP = {board: N_("Directiva"), fans: N_("Afición"), rep: N_("Prestigio"), chem: N_("Química"), sqMor: N_("Moral del vestuario"), sfit: N_("Físico de la plantilla"), pts: N_("Puntos en liga"), rel: N_("Relación")};
+  window.UIX = window.UIX || {}; window.UIX.chipHtml = function (c) { return chip(c); };
   function chip(c) {
     var k = c[0], v = c[1], ex = c[2], cls = "", t;
     switch (k) {

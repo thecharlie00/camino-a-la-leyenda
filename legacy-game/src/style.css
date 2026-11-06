@@ -1710,6 +1710,7 @@ nav.tabs button span { font-size: var(--fs-2xs); text-transform: uppercase; }
 /* capa de efectos: texto flotante */
 .fxfloat { position: fixed; z-index: 10000; pointer-events: none; transform: translate(-50%, -50%); font: 800 var(--fs-2xl)/1 var(--f-disp); color: var(--led); text-shadow: 0 3px 0 rgba(0, 0, 0, .5); white-space: nowrap; }
 .fxfloat.good { color: var(--grass); } .fxfloat.bad { color: var(--red); } .fxfloat.big { font-size: var(--fs-hero); }
+.fxfloat.fxchip { font: 800 var(--fs-lg)/1 var(--f-disp); white-space: nowrap; }
 .fxfloat.fxzz { font: 700 var(--fs-md)/1 var(--f-body); color: var(--mist); text-shadow: none; }
 
 /* vista 3D de presentación */
