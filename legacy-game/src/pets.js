@@ -71,7 +71,7 @@ var PET_CARE = [
   {k: "pat", ico: "🤲", n: N_("Mimos"), d: N_("Caricias y rascarle justo donde le gusta."), bond: 8, mor: 1, no: ["fish", "tarantula"]},
   {k: "walk", ico: "🦮", n: N_("Salir a pasear"), d: N_("Un buen paseo: también te pone en forma."), bond: 12, form: 1, sp: ["dog", "fennec", "capybara"]},
   {k: "play", ico: "🎾", n: N_("Jugar juntos"), d: N_("Su juguete favorito y un rato de risas."), bond: 10, mor: 2, sp: ["dog", "cat", "rabbit", "hamster", "hedgehog", "fennec", "macaw"]},
-  {k: "trick", ico: "🎓", n: N_("Enseñarle un truco"), d: N_("Cuesta, pero cuando lo aprende es un vídeo viral."), bond: 7, sp: ["dog", "cat", "rabbit", "macaw", "fennec"]},
+  {k: "trick", ico: "💡", n: N_("Enseñarle un truco"), d: N_("Cuesta, pero cuando lo aprende es un vídeo viral."), bond: 7, sp: ["dog", "cat", "rabbit", "macaw", "fennec"]},
   {k: "home", ico: "🫧", n: N_("Limpiar su hogar"), d: N_("Acuario o terrario impecable: vive más feliz."), bond: 10, sp: ["fish", "turtle", "iguana", "python", "tarantula", "hamster"]},
   {k: "watch", ico: "🧘", n: N_("Contemplarla un rato"), d: N_("Mirarla sin prisas te baja las pulsaciones."), bond: 6, mor: 2, calm: 1, sp: ["fish", "turtle", "iguana", "python", "tarantula", "capybara"]},
   {k: "treat", ico: "🍖", n: N_("Darle un premio"), d: N_("Su comida favorita: vínculo rápido."), bond: 7, cost: 0.02},
