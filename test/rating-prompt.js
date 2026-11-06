@@ -70,8 +70,8 @@ for (const lang of ['en', 'de', 'it', 'fr']) {
   vm.runInContext(runtime, context);
   context.setLang(lang);
   for (const key of noticeKeys) {
-    const expected = catalog[key].replace('{v}', '5.29');
-    const actual = context.tr(key, {v: '5.29'});
+    const expected = catalog[key].replace('{v}', '5.30');
+    const actual = context.tr(key, {v: '5.30'});
     assert.equal(actual, expected, `${lang} should render the selected-language translation for: ${key}`);
     assert.notEqual(actual, key, `${lang} must not fall back to Spanish for: ${key}`);
   }
