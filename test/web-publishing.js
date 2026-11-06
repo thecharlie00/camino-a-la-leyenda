@@ -2,18 +2,23 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const publisherId = 'ca-pub-3919867907492197';
-const expectedAdsTxt = 'google.com, pub-3919867907492197, DIRECT, f08c47fec0942fa0';
+const expectedAppAdsTxt = 'google.com, pub-3919867907492197, DIRECT, f08c47fec0942fa0';
 const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.caminoleyenda.app';
 const locales = ['', 'en/', 'de/', 'it/', 'fr/'];
 const read = (path) => readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
+// Website ads now come from the user-provided networks. Their seller rows were not provided,
+// so keep the web ads.txt explicit rather than falsely claiming Google AdSense web inventory.
 for (const path of ['ads.txt', 'public/ads.txt', 'dist/ads.txt']) {
-  assert.equal(read(path).trim(), expectedAdsTxt, `Invalid AdSense seller declaration in ${path}`);
+  const text = read(path);
+  assert.doesNotMatch(text, /^google\.com, pub-/m, `${path} must not claim web AdSense inventory`);
+  assert.match(text, /abscloud\.org/);
+  assert.match(text, /bauval\.org/);
 }
 
+// Android AdMob authorization remains separate and unchanged.
 for (const path of ['app-ads.txt', 'public/app-ads.txt', 'dist/app-ads.txt']) {
-  assert.equal(read(path).trim(), expectedAdsTxt, `Invalid AdMob app-ads.txt seller declaration in ${path}`);
+  assert.equal(read(path).trim(), expectedAppAdsTxt, `Invalid AdMob app-ads.txt seller declaration in ${path}`);
 }
 
 for (const locale of locales) {
@@ -26,14 +31,36 @@ for (const locale of locales) {
     assert.match(playStoreCtas[0][0], /target=["']_blank["']/i, `${path} Google Play CTA should open the listing separately`);
     assert.match(playStoreCtas[0][0], /rel=["'][^"']*noopener[^"']*["']/i, `${path} Google Play CTA must be safe for a new tab`);
     assert.doesNotMatch(html, /class=["']store-disabled["']|class=["']police-ribbon["']/, `${path} must not show the old disabled Play label`);
-    const metaPattern = new RegExp(`<meta\\s+name=["']google-adsense-account["']\\s+content=["']${publisherId}["']\\s*>`, 'gi');
-    const adsScripts = [...html.matchAll(/<script\b[^>]*adsbygoogle\.js\?client=([^"'&\s]+)[^>]*>/gi)];
-    assert.equal([...html.matchAll(metaPattern)].length, 1, `${path} must contain exactly one AdSense account meta tag`);
-    assert.equal(adsScripts.length, 1, `${path} must load AdSense exactly once`);
-    assert.equal(adsScripts[0][1], publisherId, `${path} AdSense client ID does not match the account meta tag`);
-    assert.match(adsScripts[0][0], /\basync\b/i, `${path} AdSense script must load asynchronously`);
-    assert.match(adsScripts[0][0], /crossorigin=["']anonymous["']/i, `${path} AdSense script must use anonymous CORS`);
+    assert.doesNotMatch(html, /google-adsense-account|adsbygoogle\.js|<ins[^>]*adsbygoogle/i, `${path} must not load AdSense`);
+    assert.match(html, /data-bauval-banner/, `${path} must include the replacement banner slot`);
+    assert.match(html, /data-network-ads/, `${path} must include the two consent-gated site ad tags`);
+  }
+
+  for (const root of ['', 'dist/']) {
+    const play = read(join(root, locale, 'jugar/index.html'));
+    assert.doesNotMatch(play, /google-adsense-account|adsbygoogle\.js|<ins[^>]*adsbygoogle/i);
+    assert.match(play, /data-bauval-banner/, `${root}${locale}jugar must include the replacement banner slot`);
+    assert.doesNotMatch(play, /data-network-ads/, 'Pop-capable network tags must not load on the game page');
+
+    const goat = read(join(root, locale, 'goat-ladder/index.html'));
+    assert.doesNotMatch(goat, /google-adsense-account|adsbygoogle\.js|<ins[^>]*adsbygoogle/i);
+    assert.match(goat, /data-bauval-banner/);
+    assert.match(goat, /data-network-ads/);
+
+    const privacy = read(join(root, locale, 'privacidad/index.html'));
+    assert.doesNotMatch(privacy, /google-adsense-account|adsbygoogle\.js|Google AdSense/i);
+    assert.match(privacy, /abscloud\.org/);
+    assert.match(privacy, /bauval\.org/);
   }
 }
 
-console.log('AdSense metadata, ads.txt, AdMob app-ads.txt and active Google Play links validated for all five languages.');
+const loader = read('site.js');
+for (const url of [
+  'https://abscloud.org/1/88abf9d555a4a30b9f834a14f05cfd91',
+  'https://bauval.org/14/658905d412d2a8d77d2857f1d878c9e6',
+  'https://bauval.org/22/b4c1dc5f8033cebc60622af9c1b9e516',
+]) assert.ok(loader.includes(url), `Missing replacement ad tag: ${url}`);
+assert.match(loader, /if \(value\.ads\) loadWebAds\(\)/, 'Third-party ad scripts must be gated by consent');
+assert.match(loader, /window\.innerWidth >= 761/, 'The fixed 728x90 banner should not overflow phone layouts');
+
+console.log('Replacement web ad tags, consent gating, privacy disclosures, AdMob app-ads.txt and Google Play links validated.');
