@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ID del proyecto de Google Play Juegos. Vacío = integración desactivada.
+         Se rellena con: python3 tools/pgs_map.py games-ids.xml -->
+    <string name="game_services_project_id" translatable="false"></string>
+</resources>
