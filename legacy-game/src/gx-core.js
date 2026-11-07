@@ -177,7 +177,7 @@ var GX = (function () {
       var id = a[0]; if (g.t[id]) return;
       var m = api.meta(id), rw = reward(m);
       g.t[id] = {y: S.yr, d: Date.now(), m: match, $: rw.money};
-      if (!silent) g.q.push(id);
+      if (!silent && !(typeof achSeenEver === "function" && achSeenEver(id))) g.q.push(id); /* repetido en otra partida: sin aviso */
     });
     if (silent && list.length) g.retro += list.length;
   };

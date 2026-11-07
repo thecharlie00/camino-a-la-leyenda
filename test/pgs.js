@@ -51,6 +51,13 @@ window.UIX.actions.pgsshow();
 assert.equal(window.__pgsShown, 1);
 window.__pgsState = 'off';
 assert.doesNotMatch(window.UIX.sheets.ach(), /data-a="pgsshow"/, 'hidden when Play Games is not configured');
+/* un logro solo se anuncia la primera vez en el dispositivo: en otras partidas se desbloquea sin aviso */
+window.localStorage.setItem('camino.achG', JSON.stringify({gx_seen_test: {ts: 1}}));
+assert.equal(window.achSeenEver('gx_seen_test'), true);
+assert.equal(window.achSeenEver('gx_new_test'), false);
+window.eval("GX.st().q.length = 0; GX.unlocked([['gx_seen_test'], ['gx_new_test']], false);");
+assert.deepEqual([...window.eval('GX.st().q')], ['gx_new_test'], 'repeated achievements are not queued for a notice');
+window.eval('GX.st().q.length = 0;');
 /* los logros del juego y el paquete de Play Console coinciden */
 const master = JSON.parse(readFileSync('store/play-games/logros.json', 'utf8')).achievements;
 const ids = window.eval("(function(){ var o = {}; [ACH_P, ACH_M, ACH_ERA, achX('p'), achX('m'), GX.rows('p'), GX.rows('m'), [GX.platRow('p'), GX.platRow('m')]].forEach(function (l) { l.forEach(function (a) { o[a[0]] = 1; }); }); return Object.keys(o); })()");
