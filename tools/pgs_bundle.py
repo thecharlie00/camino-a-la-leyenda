@@ -56,6 +56,28 @@ def main():
         dup = {n for n in names if names.count(n) > 1}
         if dup:
             raise SystemExit(f"Nombres repetidos en {lang}: {sorted(dup)}")
+    # descripciones únicas por idioma (Play no admite dos iguales)
+    for lang in ["es"] + list(LOCALES):
+        seen = {}
+        for r in rows:
+            seen.setdefault(clean(r[lang][1], 500).lower(), []).append(r)
+        for group in seen.values():
+            if len(group) < 2:
+                continue
+            groups = {r["group"] for r in group}
+            for k, r in enumerate(group):
+                tag = SUFFIX[r["group"]][lang] if len(groups) > 1 else ""
+                num = ["", "II", "III", "IV", "V", "VI", "VII", "VIII"][min(k, 7)] if len(groups) == 1 or sum(1 for x in group if x["group"] == r["group"]) > 1 else ""
+                extra = " ".join(x for x in [tag, num] if x)
+                if extra:
+                    base = clean(r[lang][1], 480).rstrip(".")
+                    r[lang] = [r[lang][0], base + " (" + extra + ")."]
+        descs = [clean(r[lang][1], 500).lower() for r in rows]
+        dup = {d for d in descs if descs.count(d) > 1}
+        if dup:
+            raise SystemExit(f"Descripciones repetidas en {lang}: {sorted(dup)[:5]}")
+    if len({r["icon"] for r in rows}) != len(rows):
+        raise SystemExit("Play exige un icono distinto por logro")
     total = sum(POINTS[r["rar"]] for r in rows)
     if total > 2000:
         raise SystemExit(f"Los puntos suman {total}; Play Games admite 2000 como máximo")
