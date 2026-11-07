@@ -89,7 +89,7 @@ def main():
         with zipfile.ZipFile(OUT / f"play-games-logros-{n}.zip", "w", zipfile.ZIP_DEFLATED) as z:
             z.writestr("AchievementsMetadata.csv", meta)
             z.writestr("AchievementsLocalizations.csv", loc)
-            z.writestr("AchievementsIconMappings.csv", icm)
+            z.writestr("AchievementsIconsMappings.csv", icm)
             for icon in sorted({a["icon"] for a in pack}):
                 z.writestr(icon, small_png(SRC / "icons" / icon))
         print(f"play-games-logros-{n}.zip: {len(pack)} logros, {len({a['icon'] for a in pack})} iconos")
