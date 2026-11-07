@@ -31,7 +31,7 @@ def main():
     out, missing = {}, []
     for a in master:
         key = norm(a["name"])
-        pid = play.get(key)
+        pid = play.get(key) or play.get(norm(a["name"].encode("ascii", "ignore").decode()))  # Play quita las letras con tilde
         if not pid:
             close = difflib.get_close_matches(key, play.keys(), n=1, cutoff=0.92)
             pid = play.get(close[0]) if close else None
