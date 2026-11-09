@@ -42,6 +42,8 @@ import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.gms.games.PlayGames;
+import com.google.android.gms.games.PlayGamesSdk;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -91,6 +93,11 @@ public final class MainActivity extends Activity {
     private volatile int availableUpdateCode;
     private volatile String availableUpdateName = "";
     private volatile long lastUpdateCheckAt;
+    /* Google Play Juegos: solo se activa con el ID del proyecto y el mapa de logros (tools/pgs_map.py) */
+    private static final int PGS_ACHIEVEMENTS_UI = 9003;
+    private volatile boolean pgsOn;
+    private volatile boolean pgsSigned;
+    private JSONObject pgsMap = new JSONObject();
     private final AtomicBoolean updateCheckRunning = new AtomicBoolean(false);
     private final ExecutorService updateChecker = Executors.newSingleThreadExecutor();
     private final ExecutorService goatRequestWorker = Executors.newFixedThreadPool(2);
@@ -98,6 +105,41 @@ public final class MainActivity extends Activity {
     private Object backInvokedCallback;
 
     public class Bridge {
+        /* «off»: Play Juegos no está configurado; «out»: sin sesión; «in»: con sesión */
+        @JavascriptInterface
+        public String pgsState() {
+            return !pgsOn ? "off" : pgsSigned ? "in" : "out";
+        }
+
+        /* Desbloquea en Play Juegos el logro del juego con esta clave. Devuelve true si se ha enviado
+           (Play lo guarda y lo sincroniza aunque no haya conexión); false para reintentarlo más tarde. */
+        @JavascriptInterface
+        public boolean pgsUnlock(final String key) {
+            if (!pgsOn || !pgsSigned || key == null) return false;
+            final String id = pgsMap.optString(key, "");
+            if (id.isEmpty()) return false;
+            runUiSafely(new Runnable() {
+                @Override
+                public void run() {
+                    PlayGames.getAchievementsClient(MainActivity.this).unlock(id);
+                }
+            });
+            return true;
+        }
+
+        /* Abre la pantalla de logros de Play Juegos (inicia sesión antes si hace falta) */
+        @JavascriptInterface
+        public void pgsShow() {
+            if (!pgsOn) return;
+            runUiSafely(new Runnable() {
+                @Override
+                public void run() {
+                    if (pgsSigned) showPlayAchievements();
+                    else pgsSignIn(true);
+                }
+            });
+        }
+
         @JavascriptInterface
         public void copy(final String text) {
             if (text == null || text.length() > 2000000) return;
@@ -361,6 +403,7 @@ public final class MainActivity extends Activity {
                 android.widget.FrameLayout.LayoutParams.MATCH_PARENT));
 
             webView.addJavascriptInterface(new Bridge(), "AndroidBridge");
+            initPlayGames();
             setContentView(root);
             root.requestApplyInsets();
 
@@ -401,6 +444,64 @@ public final class MainActivity extends Activity {
             }
         }
         return new NavigationWebViewClient(this);
+    }
+
+    private void initPlayGames() {
+        try {
+            String project = getString(R.string.game_services_project_id).trim();
+            if (project.isEmpty()) return;
+            InputStream in = getResources().openRawResource(R.raw.pgs_achievements);
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            byte[] chunk = new byte[8192];
+            for (int n; (n = in.read(chunk)) > 0; ) buf.write(chunk, 0, n);
+            in.close();
+            pgsMap = new JSONObject(new String(buf.toByteArray(), StandardCharsets.UTF_8));
+            if (pgsMap.length() == 0) return;
+            PlayGamesSdk.initialize(this);
+            pgsOn = true;
+            /* Play Juegos v2 inicia sesión solo al abrir el juego si el jugador ya lo usa */
+            PlayGames.getGamesSignInClient(this).isAuthenticated().addOnCompleteListener(task -> {
+                pgsSigned = task.isSuccessful() && task.getResult() != null && task.getResult().isAuthenticated();
+                if (pgsSigned) notifyPlayGames();
+            });
+        } catch (Throwable error) {
+            pgsOn = false;
+            Log.w("CaminoPGS", "Play Juegos no disponible", error);
+        }
+    }
+
+    private void pgsSignIn(final boolean thenShow) {
+        try {
+            PlayGames.getGamesSignInClient(this).signIn().addOnCompleteListener(task -> {
+                pgsSigned = task.isSuccessful() && task.getResult() != null && task.getResult().isAuthenticated();
+                if (pgsSigned) {
+                    notifyPlayGames();
+                    if (thenShow) showPlayAchievements();
+                }
+            });
+        } catch (Throwable error) {
+            Log.w("CaminoPGS", "No se pudo iniciar sesión en Play Juegos", error);
+        }
+    }
+
+    private void showPlayAchievements() {
+        try {
+            PlayGames.getAchievementsClient(this).getAchievementsIntent().addOnSuccessListener(intent -> {
+                try { startActivityForResult(intent, PGS_ACHIEVEMENTS_UI); } catch (Throwable ignored) {}
+            });
+        } catch (Throwable error) {
+            Log.w("CaminoPGS", "No se pudo abrir la pantalla de logros", error);
+        }
+    }
+
+    /* avisa al juego para que envíe los logros que tenga pendientes */
+    private void notifyPlayGames() {
+        runUiSafely(new Runnable() {
+            @Override
+            public void run() {
+                if (webView != null) webView.evaluateJavascript("window.pgsSync && window.pgsSync()", null);
+            }
+        });
     }
 
     private void runUiSafely(Runnable action) {

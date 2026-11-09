@@ -42,8 +42,8 @@ android {
         applicationId 'com.caminoleyenda.app'
         minSdk 24
         targetSdk 36
-        versionCode envOr('VERSION_CODE', '80').toInteger()
-        versionName envOr('VERSION_NAME', '5.30')
+        versionCode envOr('VERSION_CODE', '82').toInteger()
+        versionName envOr('VERSION_NAME', '5.32')
     }
 
     sourceSets {
@@ -97,4 +97,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:24.7.0'
     implementation 'com.google.android.ump:user-messaging-platform:3.2.0'
     implementation 'com.google.android.play:app-update:2.1.0'
+    implementation 'com.google.android.gms:play-services-games-v2:22.1.0'
 }

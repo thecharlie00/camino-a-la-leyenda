@@ -30,3 +30,4 @@ work/
 .aistudio/
 .cache/
 public/assets/aistudio/
+build/

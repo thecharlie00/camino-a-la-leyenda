@@ -18,9 +18,9 @@ const eraCore = read('../legacy-game/src/eras-core.js');
 const playStoreFeed = JSON.parse(read('../public/play-store-version.json'));
 
 assert.doesNotMatch(manifest, /<uses-sdk\b/, 'SDK levels belong in Gradle DSL, not the manifest under AGP 9');
-assert.match(manifest, /android:versionCode="80"/);
-assert.match(manifest, /android:versionName="5\.30"/);
-assert.equal(packageJson.version, '5.30.0');
+assert.match(manifest, /android:versionCode="82"/);
+assert.match(manifest, /android:versionName="5\.32"/);
+assert.equal(packageJson.version, '5.32.0');
 assert.equal(packageLock.version, packageJson.version);
 assert.equal(packageLock.packages[''].version, packageJson.version);
 assert.match(manifest, /android:resizeableActivity="true"/);

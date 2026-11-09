@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.caminoleyenda.app"
-    android:versionCode="80"
-    android:versionName="5.30">
+    android:versionCode="82"
+    android:versionName="5.32">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="Camino a la Leyenda"
@@ -16,6 +16,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3919867907492197~2991228409" />
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/game_services_project_id" />
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"

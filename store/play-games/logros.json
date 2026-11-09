@@ -1,0 +1,8183 @@
+{
+ "total_points": 1795,
+ "achievements": [
+  {
+   "key": "p_debut",
+   "name": "Debut",
+   "description": "Juega tu primer partido oficial.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 1,
+   "icon": "ach_p_debut.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Debut",
+     "Play your first official match."
+    ],
+    "de-DE": [
+     "Debüt",
+     "Bestreite dein erstes Pflichtspiel."
+    ],
+    "it-IT": [
+     "Esordio",
+     "Gioca la tua prima partita ufficiale."
+    ],
+    "fr-FR": [
+     "Débuts",
+     "Joue ton premier match officiel."
+    ]
+   }
+  },
+  {
+   "key": "p_g1",
+   "name": "Primer gol",
+   "description": "Marca tu primer gol oficial.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 2,
+   "icon": "ach_p_g1.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "First goal",
+     "Score your first official goal."
+    ],
+    "de-DE": [
+     "Erstes Tor",
+     "Erziele dein erstes Pflichtspieltor."
+    ],
+    "it-IT": [
+     "Primo gol",
+     "Segna il tuo primo gol ufficiale."
+    ],
+    "fr-FR": [
+     "Premier but",
+     "Marque ton premier but officiel."
+    ]
+   }
+  },
+  {
+   "key": "p_season1",
+   "name": "Primera temporada (jugador)",
+   "description": "Completa tu primera temporada.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 3,
+   "icon": "ach_p_season1.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "First season (player)",
+     "Complete your first season."
+    ],
+    "de-DE": [
+     "Erste Saison (Spieler)",
+     "Schließe deine erste Saison ab."
+    ],
+    "it-IT": [
+     "Prima stagione (giocatore)",
+     "Completa la tua prima stagione."
+    ],
+    "fr-FR": [
+     "Première saison (joueur)",
+     "Termine ta première saison."
+    ]
+   }
+  },
+  {
+   "key": "p_pom",
+   "name": "Jugador del mes",
+   "description": "Gana un premio al mejor del mes.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 4,
+   "icon": "ach_p_pom.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Player of the Month",
+     "Win a player of the month award."
+    ],
+    "de-DE": [
+     "Spieler des Monats",
+     "Gewinne eine Auszeichnung als Spieler des Monats."
+    ],
+    "it-IT": [
+     "Giocatore del mese",
+     "Vinci un premio di giocatore del mese."
+    ],
+    "fr-FR": [
+     "Joueur du mois",
+     "Remporte un trophée de joueur du mois."
+    ]
+   }
+  },
+  {
+   "key": "p_t1",
+   "name": "Primer título (jugador)",
+   "description": "Levanta tu primer trofeo (jugador).",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 5,
+   "icon": "ach_p_t1.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "First title (player)",
+     "Lift your first trophy (player)."
+    ],
+    "de-DE": [
+     "Erster Titel (Spieler)",
+     "Hol deinen ersten Pokal (Spieler)."
+    ],
+    "it-IT": [
+     "Primo titolo (giocatore)",
+     "Alza il tuo primo trofeo (giocatore)."
+    ],
+    "fr-FR": [
+     "Premier titre (joueur)",
+     "Soulève ton premier trophée (joueur)."
+    ]
+   }
+  },
+  {
+   "key": "p_cap1",
+   "name": "Internacional",
+   "description": "Debuta con tu selección.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 6,
+   "icon": "ach_p_cap1.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "International",
+     "Make your national team debut."
+    ],
+    "de-DE": [
+     "Nationalspieler",
+     "Gib dein Debüt für die Nationalmannschaft."
+    ],
+    "it-IT": [
+     "Nazionale",
+     "Debutta con la tua nazionale."
+    ],
+    "fr-FR": [
+     "International",
+     "Fais tes débuts en sélection."
+    ]
+   }
+  },
+  {
+   "key": "p_apps100",
+   "name": "Fijo en el once",
+   "description": "Llega a 100 partidos oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 7,
+   "icon": "ach_p_apps100.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Regular starter",
+     "Reach 100 official matches."
+    ],
+    "de-DE": [
+     "Stammspieler",
+     "Erreiche 100 Pflichtspiele."
+    ],
+    "it-IT": [
+     "Titolare fisso",
+     "Arriva a 100 partite ufficiali."
+    ],
+    "fr-FR": [
+     "Titulaire indiscutable",
+     "Atteins 100 matchs officiels."
+    ]
+   }
+  },
+  {
+   "key": "p_g50",
+   "name": "Goleador",
+   "description": "Llega a 50 goles oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 8,
+   "icon": "ach_p_g50.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Goalscorer",
+     "Reach 50 official goals."
+    ],
+    "de-DE": [
+     "Torjäger",
+     "Erreiche 50 Pflichtspieltore."
+    ],
+    "it-IT": [
+     "Bomber",
+     "Arriva a 50 gol ufficiali."
+    ],
+    "fr-FR": [
+     "Buteur",
+     "Atteins 50 buts officiels."
+    ]
+   }
+  },
+  {
+   "key": "p_a50",
+   "name": "Asistente de oro",
+   "description": "Da 50 asistencias.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 9,
+   "icon": "ach_p_a50.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Golden provider",
+     "Make 50 assists."
+    ],
+    "de-DE": [
+     "Vorlagengeber",
+     "Gib 50 Vorlagen."
+    ],
+    "it-IT": [
+     "Assistman d'oro",
+     "Fornisci 50 assist."
+    ],
+    "fr-FR": [
+     "Passeur en or",
+     "Délivre 50 passes décisives."
+    ]
+   }
+  },
+  {
+   "key": "p_cs50",
+   "name": "Muro",
+   "description": "Deja la portería a cero en 50 partidos.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 10,
+   "icon": "ach_p_cs50.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The Wall",
+     "Keep 50 clean sheets."
+    ],
+    "de-DE": [
+     "Die Mauer",
+     "Spiele 50-mal zu null."
+    ],
+    "it-IT": [
+     "Il Muro",
+     "Mantieni la porta inviolata in 50 partite."
+    ],
+    "fr-FR": [
+     "Le Mur",
+     "Garde ta cage inviolée lors de 50 matchs."
+    ]
+   }
+  },
+  {
+   "key": "p_ovr80",
+   "name": "Estrella",
+   "description": "Alcanza una media de 80.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 11,
+   "icon": "ach_p_ovr80.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Star",
+     "Reach an overall rating of 80."
+    ],
+    "de-DE": [
+     "Star",
+     "Erreiche eine Gesamtstärke von 80."
+    ],
+    "it-IT": [
+     "Stella",
+     "Raggiungi una valutazione di 80."
+    ],
+    "fr-FR": [
+     "Star",
+     "Atteins une note globale de 80."
+    ]
+   }
+  },
+  {
+   "key": "p_m1",
+   "name": "Primer millón",
+   "description": "Ahorra 1 millón.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 12,
+   "icon": "ach_p_m1.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "First million",
+     "Save 1 million."
+    ],
+    "de-DE": [
+     "Erste Million",
+     "Spare 1 Million."
+    ],
+    "it-IT": [
+     "Primo milione",
+     "Risparmia 1 milione."
+    ],
+    "fr-FR": [
+     "Premier million",
+     "Économise 1 million."
+    ]
+   }
+  },
+  {
+   "key": "p_pet",
+   "name": "Mejor amigo",
+   "description": "Adopta una mascota.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 13,
+   "icon": "ach_p_pet.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Best friend",
+     "Adopt a pet."
+    ],
+    "de-DE": [
+     "Bester Freund",
+     "Adoptiere ein Haustier."
+    ],
+    "it-IT": [
+     "Migliore amico",
+     "Adotta un animale."
+    ],
+    "fr-FR": [
+     "Meilleur ami",
+     "Adopte un animal."
+    ]
+   }
+  },
+  {
+   "key": "p_clubs3",
+   "name": "Trotamundos (jugador)",
+   "description": "Juega en 3 clubes distintos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 14,
+   "icon": "ach_p_clubs3.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Globetrotter (player)",
+     "Play for 3 different clubs."
+    ],
+    "de-DE": [
+     "Weltenbummler (Spieler)",
+     "Spiele für 3 verschiedene Vereine."
+    ],
+    "it-IT": [
+     "Giramondo (giocatore)",
+     "Gioca in 3 club diversi."
+    ],
+    "fr-FR": [
+     "Globe-trotter (joueur)",
+     "Joue dans 3 clubs différents."
+    ]
+   }
+  },
+  {
+   "key": "p_t5",
+   "name": "Coleccionista (jugador)",
+   "description": "Gana 5 títulos (jugador).",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 15,
+   "icon": "ach_p_t5.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Collector (player)",
+     "Win 5 titles (player)."
+    ],
+    "de-DE": [
+     "Sammler (Spieler)",
+     "Gewinne 5 Titel (Spieler)."
+    ],
+    "it-IT": [
+     "Collezionista (giocatore)",
+     "Vinci 5 titoli (giocatore)."
+    ],
+    "fr-FR": [
+     "Collectionneur (joueur)",
+     "Remporte 5 titres (joueur)."
+    ]
+   }
+  },
+  {
+   "key": "p_g100",
+   "name": "Centenario",
+   "description": "Llega a 100 goles oficiales.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 16,
+   "icon": "ach_p_g100.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Centurion (player)",
+     "Reach 100 official goals."
+    ],
+    "de-DE": [
+     "Hundertschaft",
+     "Erreiche 100 Pflichtspieltore."
+    ],
+    "it-IT": [
+     "Centenario",
+     "Arriva a 100 gol ufficiali."
+    ],
+    "fr-FR": [
+     "Centenaire",
+     "Atteins 100 buts officiels."
+    ]
+   }
+  },
+  {
+   "key": "p_cap50",
+   "name": "Cincuenta con la selección",
+   "description": "Llega a 50 partidos internacionales.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 17,
+   "icon": "ach_p_cap50.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Fifty caps",
+     "Reach 50 international matches."
+    ],
+    "de-DE": [
+     "Fünfzig Länderspiele",
+     "Erreiche 50 Länderspiele."
+    ],
+    "it-IT": [
+     "Cinquanta in nazionale",
+     "Arriva a 50 presenze in nazionale."
+    ],
+    "fr-FR": [
+     "Cinquante sélections",
+     "Atteins 50 matchs internationaux."
+    ]
+   }
+  },
+  {
+   "key": "p_season10",
+   "name": "Veterano",
+   "description": "Juega 10 temporadas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 18,
+   "icon": "ach_p_season10.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Veteran",
+     "Play 10 seasons."
+    ],
+    "de-DE": [
+     "Routinier",
+     "Spiele 10 Saisons."
+    ],
+    "it-IT": [
+     "Veterano",
+     "Gioca 10 stagioni."
+    ],
+    "fr-FR": [
+     "Vétéran",
+     "Joue 10 saisons."
+    ]
+   }
+  },
+  {
+   "key": "p_apps500",
+   "name": "Incombustible",
+   "description": "Llega a 500 partidos oficiales.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 19,
+   "icon": "ach_p_apps500.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Tireless",
+     "Reach 500 official matches."
+    ],
+    "de-DE": [
+     "Unermüdlich",
+     "Erreiche 500 Pflichtspiele."
+    ],
+    "it-IT": [
+     "Instancabile",
+     "Arriva a 500 partite ufficiali."
+    ],
+    "fr-FR": [
+     "Infatigable",
+     "Atteins 500 matchs officiels."
+    ]
+   }
+  },
+  {
+   "key": "p_ovr90",
+   "name": "Clase mundial",
+   "description": "Alcanza una media de 90.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 20,
+   "icon": "ach_p_ovr90.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "World class",
+     "Reach an overall rating of 90."
+    ],
+    "de-DE": [
+     "Weltklasse",
+     "Erreiche eine Gesamtstärke von 90."
+    ],
+    "it-IT": [
+     "Fuoriclasse",
+     "Raggiungi una valutazione di 90."
+    ],
+    "fr-FR": [
+     "Classe mondiale",
+     "Atteins une note globale de 90."
+    ]
+   }
+  },
+  {
+   "key": "p_t15",
+   "name": "Vitrina llena (jugador)",
+   "description": "Gana 15 títulos (jugador).",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 21,
+   "icon": "ach_p_t15.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Full trophy cabinet (player)",
+     "Win 15 titles (player)."
+    ],
+    "de-DE": [
+     "Volle Vitrine (Spieler)",
+     "Gewinne 15 Titel (Spieler)."
+    ],
+    "it-IT": [
+     "Bacheca piena (giocatore)",
+     "Vinci 15 titoli (giocatore)."
+    ],
+    "fr-FR": [
+     "Vitrine pleine (joueur)",
+     "Remporte 15 titres (joueur)."
+    ]
+   }
+  },
+  {
+   "key": "p_g300",
+   "name": "Leyenda del gol",
+   "description": "Llega a 300 goles oficiales.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 22,
+   "icon": "ach_p_g300.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Goal legend",
+     "Reach 300 official goals."
+    ],
+    "de-DE": [
+     "Torlegende",
+     "Erreiche 300 Pflichtspieltore."
+    ],
+    "it-IT": [
+     "Leggenda del gol",
+     "Arriva a 300 gol ufficiali."
+    ],
+    "fr-FR": [
+     "Légende du but",
+     "Atteins 300 buts officiels."
+    ]
+   }
+  },
+  {
+   "key": "p_knee",
+   "name": "Antes era un aventurero como tú...",
+   "description": "Lesiónate la rodilla.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 23,
+   "icon": "ach_p_knee.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "I used to be an adventurer like you...",
+     "Injure your knee."
+    ],
+    "de-DE": [
+     "Früher war ich ein Abenteurer wie du...",
+     "Verletze dich am Knie."
+    ],
+    "it-IT": [
+     "Una volta ero un avventuriero come te...",
+     "Infortunati al ginocchio."
+    ],
+    "fr-FR": [
+     "Avant · j'étais un aventurier comme toi...",
+     "Blesse-toi au genou."
+    ]
+   }
+  },
+  {
+   "key": "p_bdo",
+   "name": "Balón de Oro",
+   "description": "Gana el Balón de Oro.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 24,
+   "icon": "ach_p_bdo.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Ballon d'Or",
+     "Win the Ballon d'Or."
+    ],
+    "de-DE": [
+     "Ballon d'Or",
+     "Gewinne den Ballon d'Or."
+    ],
+    "it-IT": [
+     "Pallone d'Oro",
+     "Vinci il Pallone d'Oro."
+    ],
+    "fr-FR": [
+     "Ballon d'Or",
+     "Remporte le Ballon d'Or."
+    ]
+   }
+  },
+  {
+   "key": "p_assist100",
+   "name": "Arquitecto del juego",
+   "description": "Da 100 asistencias oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 25,
+   "icon": "ach_p_assist100.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Arquitecto del juego",
+     "Da 100 asistencias oficiales."
+    ],
+    "de-DE": [
+     "Arquitecto del juego",
+     "Da 100 asistencias oficiales."
+    ],
+    "it-IT": [
+     "Arquitecto del juego",
+     "Da 100 asistencias oficiales."
+    ],
+    "fr-FR": [
+     "Arquitecto del juego",
+     "Da 100 asistencias oficiales."
+    ]
+   }
+  },
+  {
+   "key": "p_apps1000",
+   "name": "Mil batallas (jugador)",
+   "description": "Juega 1.000 partidos oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 26,
+   "icon": "ach_p_apps1000.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "A thousand battles (player)",
+     "Juega 1.000 partidos oficiales."
+    ],
+    "de-DE": [
+     "Tausend Schlachten (Spieler)",
+     "Juega 1.000 partidos oficiales."
+    ],
+    "it-IT": [
+     "Mille battaglie (giocatore)",
+     "Juega 1.000 partidos oficiales."
+    ],
+    "fr-FR": [
+     "Mille batailles (joueur)",
+     "Juega 1.000 partidos oficiales."
+    ]
+   }
+  },
+  {
+   "key": "p_treble",
+   "name": "Triplete inolvidable",
+   "description": "Gana tres títulos en una misma temporada.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 27,
+   "icon": "ach_p_treble.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Triplete inolvidable",
+     "Gana tres títulos en una misma temporada."
+    ],
+    "de-DE": [
+     "Triplete inolvidable",
+     "Gana tres títulos en una misma temporada."
+    ],
+    "it-IT": [
+     "Triplete inolvidable",
+     "Gana tres títulos en una misma temporada."
+    ],
+    "fr-FR": [
+     "Triplete inolvidable",
+     "Gana tres títulos en una misma temporada."
+    ]
+   }
+  },
+  {
+   "key": "p_nat100",
+   "name": "Leyenda nacional",
+   "description": "Llega a 100 partidos con tu selección.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 28,
+   "icon": "ach_p_nat100.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "National legend",
+     "Llega a 100 partidos con tu selección."
+    ],
+    "de-DE": [
+     "Nationallegende",
+     "Llega a 100 partidos con tu selección."
+    ],
+    "it-IT": [
+     "Leggenda nazionale",
+     "Llega a 100 partidos con tu selección."
+    ],
+    "fr-FR": [
+     "Légende nationale",
+     "Llega a 100 partidos con tu selección."
+    ]
+   }
+  },
+  {
+   "key": "p_apps750",
+   "name": "Setecientos cincuenta partidos",
+   "description": "Juega 750 partidos oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 29,
+   "icon": "ach_p_apps750.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Setecientos cincuenta partidos",
+     "Juega 750 partidos oficiales."
+    ],
+    "de-DE": [
+     "Setecientos cincuenta partidos",
+     "Juega 750 partidos oficiales."
+    ],
+    "it-IT": [
+     "Setecientos cincuenta partidos",
+     "Juega 750 partidos oficiales."
+    ],
+    "fr-FR": [
+     "Setecientos cincuenta partidos",
+     "Juega 750 partidos oficiales."
+    ]
+   }
+  },
+  {
+   "key": "p_apps1500",
+   "name": "Estadio lleno",
+   "description": "Juega 1.500 partidos oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 30,
+   "icon": "ach_p_apps1500.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Estadio lleno",
+     "Juega 1.500 partidos oficiales."
+    ],
+    "de-DE": [
+     "Estadio lleno",
+     "Juega 1.500 partidos oficiales."
+    ],
+    "it-IT": [
+     "Estadio lleno",
+     "Juega 1.500 partidos oficiales."
+    ],
+    "fr-FR": [
+     "Estadio lleno",
+     "Juega 1.500 partidos oficiales."
+    ]
+   }
+  },
+  {
+   "key": "p_g150",
+   "name": "Instinto goleador",
+   "description": "Marca 150 goles oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 31,
+   "icon": "ach_p_g150.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Instinto goleador",
+     "Marca 150 goles oficiales."
+    ],
+    "de-DE": [
+     "Instinto goleador",
+     "Marca 150 goles oficiales."
+    ],
+    "it-IT": [
+     "Instinto goleador",
+     "Marca 150 goles oficiales."
+    ],
+    "fr-FR": [
+     "Instinto goleador",
+     "Marca 150 goles oficiales."
+    ]
+   }
+  },
+  {
+   "key": "p_g500",
+   "name": "Quinientos goles",
+   "description": "Marca 500 goles oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 32,
+   "icon": "ach_p_g500.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Quinientos goles",
+     "Marca 500 goles oficiales."
+    ],
+    "de-DE": [
+     "Quinientos goles",
+     "Marca 500 goles oficiales."
+    ],
+    "it-IT": [
+     "Quinientos goles",
+     "Marca 500 goles oficiales."
+    ],
+    "fr-FR": [
+     "Quinientos goles",
+     "Marca 500 goles oficiales."
+    ]
+   }
+  },
+  {
+   "key": "p_a200",
+   "name": "Socio perfecto",
+   "description": "Da 200 asistencias oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 33,
+   "icon": "ach_p_a200.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Socio perfecto",
+     "Da 200 asistencias oficiales."
+    ],
+    "de-DE": [
+     "Socio perfecto",
+     "Da 200 asistencias oficiales."
+    ],
+    "it-IT": [
+     "Socio perfecto",
+     "Da 200 asistencias oficiales."
+    ],
+    "fr-FR": [
+     "Socio perfecto",
+     "Da 200 asistencias oficiales."
+    ]
+   }
+  },
+  {
+   "key": "p_a300",
+   "name": "Pase de museo",
+   "description": "Da 300 asistencias oficiales.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 34,
+   "icon": "ach_p_a300.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Pase de museo",
+     "Da 300 asistencias oficiales."
+    ],
+    "de-DE": [
+     "Pase de museo",
+     "Da 300 asistencias oficiales."
+    ],
+    "it-IT": [
+     "Pase de museo",
+     "Da 300 asistencias oficiales."
+    ],
+    "fr-FR": [
+     "Pase de museo",
+     "Da 300 asistencias oficiales."
+    ]
+   }
+  },
+  {
+   "key": "p_season15",
+   "name": "Quince temporadas",
+   "description": "Completa 15 temporadas.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 35,
+   "icon": "ach_p_season15.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Quince temporadas",
+     "Completa 15 temporadas."
+    ],
+    "de-DE": [
+     "Quince temporadas",
+     "Completa 15 temporadas."
+    ],
+    "it-IT": [
+     "Quince temporadas",
+     "Completa 15 temporadas."
+    ],
+    "fr-FR": [
+     "Quince temporadas",
+     "Completa 15 temporadas."
+    ]
+   }
+  },
+  {
+   "key": "p_season20",
+   "name": "Dos décadas de fútbol",
+   "description": "Completa 20 temporadas.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 36,
+   "icon": "ach_p_season20.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Dos décadas de fútbol",
+     "Completa 20 temporadas."
+    ],
+    "de-DE": [
+     "Dos décadas de fútbol",
+     "Completa 20 temporadas."
+    ],
+    "it-IT": [
+     "Dos décadas de fútbol",
+     "Completa 20 temporadas."
+    ],
+    "fr-FR": [
+     "Dos décadas de fútbol",
+     "Completa 20 temporadas."
+    ]
+   }
+  },
+  {
+   "key": "p_titles25",
+   "name": "Vitrina de plata",
+   "description": "Gana 25 títulos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 37,
+   "icon": "ach_p_titles25.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Vitrina de plata",
+     "Gana 25 títulos."
+    ],
+    "de-DE": [
+     "Vitrina de plata",
+     "Gana 25 títulos."
+    ],
+    "it-IT": [
+     "Vitrina de plata",
+     "Gana 25 títulos."
+    ],
+    "fr-FR": [
+     "Vitrina de plata",
+     "Gana 25 títulos."
+    ]
+   }
+  },
+  {
+   "key": "p_titles40",
+   "name": "Dinastía",
+   "description": "Gana 40 títulos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 38,
+   "icon": "ach_p_titles40.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Dynasty",
+     "Gana 40 títulos."
+    ],
+    "de-DE": [
+     "Dynastie",
+     "Gana 40 títulos."
+    ],
+    "it-IT": [
+     "Dinastia",
+     "Gana 40 títulos."
+    ],
+    "fr-FR": [
+     "Dynastie",
+     "Gana 40 títulos."
+    ]
+   }
+  },
+  {
+   "key": "p_clubs5",
+   "name": "Cinco escudos",
+   "description": "Juega en cinco clubes distintos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 39,
+   "icon": "ach_p_clubs5.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Cinco escudos",
+     "Juega en cinco clubes distintos."
+    ],
+    "de-DE": [
+     "Cinco escudos",
+     "Juega en cinco clubes distintos."
+    ],
+    "it-IT": [
+     "Cinco escudos",
+     "Juega en cinco clubes distintos."
+    ],
+    "fr-FR": [
+     "Cinco escudos",
+     "Juega en cinco clubes distintos."
+    ]
+   }
+  },
+  {
+   "key": "p_clubs10",
+   "name": "Pasaporte lleno",
+   "description": "Juega en diez clubes distintos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 40,
+   "icon": "ach_p_clubs10.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Pasaporte lleno",
+     "Juega en diez clubes distintos."
+    ],
+    "de-DE": [
+     "Pasaporte lleno",
+     "Juega en diez clubes distintos."
+    ],
+    "it-IT": [
+     "Pasaporte lleno",
+     "Juega en diez clubes distintos."
+    ],
+    "fr-FR": [
+     "Pasaporte lleno",
+     "Juega en diez clubes distintos."
+    ]
+   }
+  },
+  {
+   "key": "p_cs100",
+   "name": "Cien porterías a cero",
+   "description": "Deja la portería a cero en 100 partidos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 41,
+   "icon": "ach_p_cs100.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Cien porterías a cero",
+     "Deja la portería a cero en 100 partidos."
+    ],
+    "de-DE": [
+     "Cien porterías a cero",
+     "Deja la portería a cero en 100 partidos."
+    ],
+    "it-IT": [
+     "Cien porterías a cero",
+     "Deja la portería a cero en 100 partidos."
+    ],
+    "fr-FR": [
+     "Cien porterías a cero",
+     "Deja la portería a cero en 100 partidos."
+    ]
+   }
+  },
+  {
+   "key": "p_intcaps150",
+   "name": "Ciento cincuenta veces internacional",
+   "description": "Juega 150 partidos con tu selección.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 42,
+   "icon": "ach_p_intcaps150.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Ciento cincuenta veces internacional",
+     "Juega 150 partidos con tu selección."
+    ],
+    "de-DE": [
+     "Ciento cincuenta veces internacional",
+     "Juega 150 partidos con tu selección."
+    ],
+    "it-IT": [
+     "Ciento cincuenta veces internacional",
+     "Juega 150 partidos con tu selección."
+    ],
+    "fr-FR": [
+     "Ciento cincuenta veces internacional",
+     "Juega 150 partidos con tu selección."
+    ]
+   }
+  },
+  {
+   "key": "p_fame90",
+   "name": "Ídolo mundial",
+   "description": "Alcanza 90 de fama.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 43,
+   "icon": "ach_p_fame90.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Ídolo mundial",
+     "Alcanza 90 de fama."
+    ],
+    "de-DE": [
+     "Ídolo mundial",
+     "Alcanza 90 de fama."
+    ],
+    "it-IT": [
+     "Ídolo mundial",
+     "Alcanza 90 de fama."
+    ],
+    "fr-FR": [
+     "Ídolo mundial",
+     "Alcanza 90 de fama."
+    ]
+   }
+  },
+  {
+   "key": "m_w1",
+   "name": "Primera victoria",
+   "description": "Gana tu primer partido como míster.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 44,
+   "icon": "ach_m_w1.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "First win",
+     "Win your first match as a manager."
+    ],
+    "de-DE": [
+     "Erster Sieg",
+     "Gewinne dein erstes Spiel als Trainer."
+    ],
+    "it-IT": [
+     "Prima vittoria",
+     "Vinci la tua prima partita da allenatore."
+    ],
+    "fr-FR": [
+     "Première victoire",
+     "Gagne ton premier match comme entraîneur."
+    ]
+   }
+  },
+  {
+   "key": "m_season1",
+   "name": "Primera temporada (míster)",
+   "description": "Completa tu primera temporada en el banquillo.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 45,
+   "icon": "ach_m_season1.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "First season (manager)",
+     "Complete your first season in the dugout."
+    ],
+    "de-DE": [
+     "Erste Saison (Trainer)",
+     "Schließe deine erste Saison auf der Bank ab."
+    ],
+    "it-IT": [
+     "Prima stagione (allenatore)",
+     "Completa la tua prima stagione in panchina."
+    ],
+    "fr-FR": [
+     "Première saison (entraîneur)",
+     "Termine ta première saison sur le banc."
+    ]
+   }
+  },
+  {
+   "key": "m_t1",
+   "name": "Primer título (míster)",
+   "description": "Levanta tu primer trofeo (míster).",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 46,
+   "icon": "ach_m_t1.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "First title (manager)",
+     "Lift your first trophy (manager)."
+    ],
+    "de-DE": [
+     "Erster Titel (Trainer)",
+     "Hol deinen ersten Pokal (Trainer)."
+    ],
+    "it-IT": [
+     "Primo titolo (allenatore)",
+     "Alza il tuo primo trofeo (allenatore)."
+    ],
+    "fr-FR": [
+     "Premier titre (entraîneur)",
+     "Soulève ton premier trophée (entraîneur)."
+    ]
+   }
+  },
+  {
+   "key": "m_lg",
+   "name": "Campeón de liga",
+   "description": "Gana una liga.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 47,
+   "icon": "ach_m_lg.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "League champion",
+     "Win a league."
+    ],
+    "de-DE": [
+     "Meister",
+     "Gewinne eine Liga."
+    ],
+    "it-IT": [
+     "Campione",
+     "Vinci un campionato."
+    ],
+    "fr-FR": [
+     "Champion",
+     "Remporte un championnat."
+    ]
+   }
+  },
+  {
+   "key": "m_w50",
+   "name": "Cincuenta victorias",
+   "description": "Suma 50 victorias.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 48,
+   "icon": "ach_m_w50.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Fifty wins",
+     "Reach 50 wins."
+    ],
+    "de-DE": [
+     "Fünfzig Siege",
+     "Erreiche 50 Siege."
+    ],
+    "it-IT": [
+     "Cinquanta vittorie",
+     "Arriva a 50 vittorie."
+    ],
+    "fr-FR": [
+     "Cinquante victoires",
+     "Atteins 50 victoires."
+    ]
+   }
+  },
+  {
+   "key": "m_unb",
+   "name": "Invictos",
+   "description": "Termina una temporada de liga sin perder.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 49,
+   "icon": "ach_m_unb.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Unbeaten",
+     "Finish a league season unbeaten."
+    ],
+    "de-DE": [
+     "Ungeschlagen",
+     "Beende eine Ligasaison ohne Niederlage."
+    ],
+    "it-IT": [
+     "Imbattuti",
+     "Chiudi una stagione di campionato da imbattuto."
+    ],
+    "fr-FR": [
+     "Invaincus",
+     "Termine une saison de championnat sans défaite."
+    ]
+   }
+  },
+  {
+   "key": "m_gf",
+   "name": "Máquina de goles",
+   "description": "Marca 90 goles en una temporada.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 50,
+   "icon": "ach_m_gf.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Goal machine",
+     "Score 90 goals in a season."
+    ],
+    "de-DE": [
+     "Torfabrik",
+     "Erziele 90 Tore in einer Saison."
+    ],
+    "it-IT": [
+     "Macchina da gol",
+     "Segna 90 gol in una stagione."
+    ],
+    "fr-FR": [
+     "Machine à buts",
+     "Marque 90 buts en une saison."
+    ]
+   }
+  },
+  {
+   "key": "m_clubs3",
+   "name": "Trotamundos (míster)",
+   "description": "Entrena a 3 clubes distintos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 51,
+   "icon": "ach_m_clubs3.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Globetrotter (manager)",
+     "Manage 3 different clubs."
+    ],
+    "de-DE": [
+     "Weltenbummler (Trainer)",
+     "Trainiere 3 verschiedene Vereine."
+    ],
+    "it-IT": [
+     "Giramondo (allenatore)",
+     "Allena 3 club diversi."
+    ],
+    "fr-FR": [
+     "Globe-trotter (entraîneur)",
+     "Entraîne 3 clubs différents."
+    ]
+   }
+  },
+  {
+   "key": "m_t5",
+   "name": "Coleccionista (míster)",
+   "description": "Gana 5 títulos (míster).",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 52,
+   "icon": "ach_m_t5.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Collector (manager)",
+     "Win 5 titles (manager)."
+    ],
+    "de-DE": [
+     "Sammler (Trainer)",
+     "Gewinne 5 Titel (Trainer)."
+    ],
+    "it-IT": [
+     "Collezionista (allenatore)",
+     "Vinci 5 titoli (allenatore)."
+    ],
+    "fr-FR": [
+     "Collectionneur (entraîneur)",
+     "Remporte 5 titres (entraîneur)."
+    ]
+   }
+  },
+  {
+   "key": "m_rep80",
+   "name": "Prestigio",
+   "description": "Llega a 80 de reputación.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 53,
+   "icon": "ach_m_rep80.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Reputation",
+     "Reach 80 reputation."
+    ],
+    "de-DE": [
+     "Ansehen",
+     "Erreiche 80 Ansehen."
+    ],
+    "it-IT": [
+     "Prestigio",
+     "Arriva a 80 di reputazione."
+    ],
+    "fr-FR": [
+     "Prestige",
+     "Atteins 80 de réputation."
+    ]
+   }
+  },
+  {
+   "key": "m_w200",
+   "name": "Doscientas victorias",
+   "description": "Suma 200 victorias.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 54,
+   "icon": "ach_m_w200.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Two hundred wins",
+     "Reach 200 wins."
+    ],
+    "de-DE": [
+     "Zweihundert Siege",
+     "Erreiche 200 Siege."
+    ],
+    "it-IT": [
+     "Duecento vittorie",
+     "Arriva a 200 vittorie."
+    ],
+    "fr-FR": [
+     "Deux cents victoires",
+     "Atteins 200 victoires."
+    ]
+   }
+  },
+  {
+   "key": "m_season10",
+   "name": "Banquillo eterno",
+   "description": "Entrena 10 temporadas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 55,
+   "icon": "ach_m_season10.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Lifetime in the dugout",
+     "Manage for 10 seasons."
+    ],
+    "de-DE": [
+     "Ewig auf der Bank",
+     "Trainiere 10 Saisons."
+    ],
+    "it-IT": [
+     "Una vita in panchina",
+     "Allena per 10 stagioni."
+    ],
+    "fr-FR": [
+     "Une vie sur le banc",
+     "Entraîne pendant 10 saisons."
+    ]
+   }
+  },
+  {
+   "key": "m_t15",
+   "name": "Vitrina llena (míster)",
+   "description": "Gana 15 títulos (míster).",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 56,
+   "icon": "ach_m_t15.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Full trophy cabinet (manager)",
+     "Win 15 titles (manager)."
+    ],
+    "de-DE": [
+     "Volle Vitrine (Trainer)",
+     "Gewinne 15 Titel (Trainer)."
+    ],
+    "it-IT": [
+     "Bacheca piena (allenatore)",
+     "Vinci 15 titoli (allenatore)."
+    ],
+    "fr-FR": [
+     "Vitrine pleine (entraîneur)",
+     "Remporte 15 titres (entraîneur)."
+    ]
+   }
+  },
+  {
+   "key": "m_best",
+   "name": "Mejor entrenador",
+   "description": "Gana el premio al mejor entrenador del año.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 57,
+   "icon": "ach_m_best.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Best manager",
+     "Win the manager of the year award."
+    ],
+    "de-DE": [
+     "Bester Trainer",
+     "Gewinne die Auszeichnung zum Trainer des Jahres."
+    ],
+    "it-IT": [
+     "Miglior allenatore",
+     "Vinci il premio di allenatore dell'anno."
+    ],
+    "fr-FR": [
+     "Meilleur entraîneur",
+     "Remporte le prix d'entraîneur de l'année."
+    ]
+   }
+  },
+  {
+   "key": "m_w500",
+   "name": "Quinientas victorias",
+   "description": "Suma 500 victorias como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 58,
+   "icon": "ach_m_w500.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Quinientas victorias",
+     "Suma 500 victorias como entrenador."
+    ],
+    "de-DE": [
+     "Quinientas victorias",
+     "Suma 500 victorias como entrenador."
+    ],
+    "it-IT": [
+     "Quinientas victorias",
+     "Suma 500 victorias como entrenador."
+    ],
+    "fr-FR": [
+     "Quinientas victorias",
+     "Suma 500 victorias como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_treble",
+   "name": "Triplete desde el banquillo",
+   "description": "Gana liga · copa y torneo continental en una temporada.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 59,
+   "icon": "ach_m_treble.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Triplete desde el banquillo",
+     "Gana liga · copa y torneo continental en una temporada."
+    ],
+    "de-DE": [
+     "Triplete desde el banquillo",
+     "Gana liga · copa y torneo continental en una temporada."
+    ],
+    "it-IT": [
+     "Triplete desde el banquillo",
+     "Gana liga · copa y torneo continental en una temporada."
+    ],
+    "fr-FR": [
+     "Triplete desde el banquillo",
+     "Gana liga · copa y torneo continental en una temporada."
+    ]
+   }
+  },
+  {
+   "key": "m_invincible",
+   "name": "Temporada perfecta",
+   "description": "Completa una temporada de liga sin derrotas y con al menos 20 partidos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 60,
+   "icon": "ach_m_invincible.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Temporada perfecta",
+     "Completa una temporada de liga sin derrotas y con al menos 20 partidos."
+    ],
+    "de-DE": [
+     "Temporada perfecta",
+     "Completa una temporada de liga sin derrotas y con al menos 20 partidos."
+    ],
+    "it-IT": [
+     "Temporada perfecta",
+     "Completa una temporada de liga sin derrotas y con al menos 20 partidos."
+    ],
+    "fr-FR": [
+     "Temporada perfecta",
+     "Completa una temporada de liga sin derrotas y con al menos 20 partidos."
+    ]
+   }
+  },
+  {
+   "key": "m_world",
+   "name": "Míster mundial",
+   "description": "Entrena en cinco clubes diferentes.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 61,
+   "icon": "ach_m_world.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Míster mundial",
+     "Entrena en cinco clubes diferentes."
+    ],
+    "de-DE": [
+     "Míster mundial",
+     "Entrena en cinco clubes diferentes."
+    ],
+    "it-IT": [
+     "Míster mundial",
+     "Entrena en cinco clubes diferentes."
+    ],
+    "fr-FR": [
+     "Míster mundial",
+     "Entrena en cinco clubes diferentes."
+    ]
+   }
+  },
+  {
+   "key": "m_w100",
+   "name": "Centena en el banquillo",
+   "description": "Suma 100 victorias como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 62,
+   "icon": "ach_m_w100.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Centena en el banquillo",
+     "Suma 100 victorias como entrenador."
+    ],
+    "de-DE": [
+     "Centena en el banquillo",
+     "Suma 100 victorias como entrenador."
+    ],
+    "it-IT": [
+     "Centena en el banquillo",
+     "Suma 100 victorias como entrenador."
+    ],
+    "fr-FR": [
+     "Centena en el banquillo",
+     "Suma 100 victorias como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_w300",
+   "name": "Trescientas victorias",
+   "description": "Suma 300 victorias como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 63,
+   "icon": "ach_m_w300.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Trescientas victorias",
+     "Suma 300 victorias como entrenador."
+    ],
+    "de-DE": [
+     "Trescientas victorias",
+     "Suma 300 victorias como entrenador."
+    ],
+    "it-IT": [
+     "Trescientas victorias",
+     "Suma 300 victorias como entrenador."
+    ],
+    "fr-FR": [
+     "Trescientas victorias",
+     "Suma 300 victorias como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_w1000",
+   "name": "Mil triunfos",
+   "description": "Suma 1.000 victorias como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 64,
+   "icon": "ach_m_w1000.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Mil triunfos",
+     "Suma 1.000 victorias como entrenador."
+    ],
+    "de-DE": [
+     "Mil triunfos",
+     "Suma 1.000 victorias como entrenador."
+    ],
+    "it-IT": [
+     "Mil triunfos",
+     "Suma 1.000 victorias como entrenador."
+    ],
+    "fr-FR": [
+     "Mil triunfos",
+     "Suma 1.000 victorias como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_season5",
+   "name": "Proyecto consolidado",
+   "description": "Completa cinco temporadas como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 65,
+   "icon": "ach_m_season5.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Proyecto consolidado",
+     "Completa cinco temporadas como entrenador."
+    ],
+    "de-DE": [
+     "Proyecto consolidado",
+     "Completa cinco temporadas como entrenador."
+    ],
+    "it-IT": [
+     "Proyecto consolidado",
+     "Completa cinco temporadas como entrenador."
+    ],
+    "fr-FR": [
+     "Proyecto consolidado",
+     "Completa cinco temporadas como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_season20",
+   "name": "Leyenda del banquillo",
+   "description": "Completa 20 temporadas como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 66,
+   "icon": "ach_m_season20.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Leyenda del banquillo",
+     "Completa 20 temporadas como entrenador."
+    ],
+    "de-DE": [
+     "Leyenda del banquillo",
+     "Completa 20 temporadas como entrenador."
+    ],
+    "it-IT": [
+     "Leyenda del banquillo",
+     "Completa 20 temporadas como entrenador."
+    ],
+    "fr-FR": [
+     "Leyenda del banquillo",
+     "Completa 20 temporadas como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_titles10",
+   "name": "Diez títulos",
+   "description": "Gana 10 títulos como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 67,
+   "icon": "ach_m_titles10.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Diez títulos",
+     "Gana 10 títulos como entrenador."
+    ],
+    "de-DE": [
+     "Diez títulos",
+     "Gana 10 títulos como entrenador."
+    ],
+    "it-IT": [
+     "Diez títulos",
+     "Gana 10 títulos como entrenador."
+    ],
+    "fr-FR": [
+     "Diez títulos",
+     "Gana 10 títulos como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_titles25",
+   "name": "Veinticinco títulos",
+   "description": "Gana 25 títulos como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 68,
+   "icon": "ach_m_titles25.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Veinticinco títulos",
+     "Gana 25 títulos como entrenador."
+    ],
+    "de-DE": [
+     "Veinticinco títulos",
+     "Gana 25 títulos como entrenador."
+    ],
+    "it-IT": [
+     "Veinticinco títulos",
+     "Gana 25 títulos como entrenador."
+    ],
+    "fr-FR": [
+     "Veinticinco títulos",
+     "Gana 25 títulos como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_titles50",
+   "name": "Cincuenta títulos",
+   "description": "Gana 50 títulos como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 69,
+   "icon": "ach_m_titles50.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Cincuenta títulos",
+     "Gana 50 títulos como entrenador."
+    ],
+    "de-DE": [
+     "Cincuenta títulos",
+     "Gana 50 títulos como entrenador."
+    ],
+    "it-IT": [
+     "Cincuenta títulos",
+     "Gana 50 títulos como entrenador."
+    ],
+    "fr-FR": [
+     "Cincuenta títulos",
+     "Gana 50 títulos como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_clubs5",
+   "name": "Cinco vestuarios",
+   "description": "Entrena a cinco clubes distintos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 70,
+   "icon": "ach_m_clubs5.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Cinco vestuarios",
+     "Entrena a cinco clubes distintos."
+    ],
+    "de-DE": [
+     "Cinco vestuarios",
+     "Entrena a cinco clubes distintos."
+    ],
+    "it-IT": [
+     "Cinco vestuarios",
+     "Entrena a cinco clubes distintos."
+    ],
+    "fr-FR": [
+     "Cinco vestuarios",
+     "Entrena a cinco clubes distintos."
+    ]
+   }
+  },
+  {
+   "key": "m_clubs10",
+   "name": "Carrera internacional",
+   "description": "Entrena a diez clubes distintos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 71,
+   "icon": "ach_m_clubs10.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Carrera internacional",
+     "Entrena a diez clubes distintos."
+    ],
+    "de-DE": [
+     "Carrera internacional",
+     "Entrena a diez clubes distintos."
+    ],
+    "it-IT": [
+     "Carrera internacional",
+     "Entrena a diez clubes distintos."
+    ],
+    "fr-FR": [
+     "Carrera internacional",
+     "Entrena a diez clubes distintos."
+    ]
+   }
+  },
+  {
+   "key": "m_rep90",
+   "name": "Respeto universal",
+   "description": "Alcanza 90 de reputación.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 72,
+   "icon": "ach_m_rep90.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Respeto universal",
+     "Alcanza 90 de reputación."
+    ],
+    "de-DE": [
+     "Respeto universal",
+     "Alcanza 90 de reputación."
+    ],
+    "it-IT": [
+     "Respeto universal",
+     "Alcanza 90 de reputación."
+    ],
+    "fr-FR": [
+     "Respeto universal",
+     "Alcanza 90 de reputación."
+    ]
+   }
+  },
+  {
+   "key": "m_awards3",
+   "name": "Tres veces míster del año",
+   "description": "Gana tres premios individuales como entrenador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 73,
+   "icon": "ach_m_awards3.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Tres veces míster del año",
+     "Gana tres premios individuales como entrenador."
+    ],
+    "de-DE": [
+     "Tres veces míster del año",
+     "Gana tres premios individuales como entrenador."
+    ],
+    "it-IT": [
+     "Tres veces míster del año",
+     "Gana tres premios individuales como entrenador."
+    ],
+    "fr-FR": [
+     "Tres veces míster del año",
+     "Gana tres premios individuales como entrenador."
+    ]
+   }
+  },
+  {
+   "key": "m_gf120",
+   "name": "Ataque imparable",
+   "description": "Marca 120 goles en una temporada de liga.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 74,
+   "icon": "ach_m_gf120.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Ataque imparable",
+     "Marca 120 goles en una temporada de liga."
+    ],
+    "de-DE": [
+     "Ataque imparable",
+     "Marca 120 goles en una temporada de liga."
+    ],
+    "it-IT": [
+     "Ataque imparable",
+     "Marca 120 goles en una temporada de liga."
+    ],
+    "fr-FR": [
+     "Ataque imparable",
+     "Marca 120 goles en una temporada de liga."
+    ]
+   }
+  },
+  {
+   "key": "m_inv30",
+   "name": "Treinta jornadas invicto",
+   "description": "Completa una temporada de liga de al menos 30 partidos sin perder.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 75,
+   "icon": "ach_m_inv30.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Treinta jornadas invicto",
+     "Completa una temporada de liga de al menos 30 partidos sin perder."
+    ],
+    "de-DE": [
+     "Treinta jornadas invicto",
+     "Completa una temporada de liga de al menos 30 partidos sin perder."
+    ],
+    "it-IT": [
+     "Treinta jornadas invicto",
+     "Completa una temporada de liga de al menos 30 partidos sin perder."
+    ],
+    "fr-FR": [
+     "Treinta jornadas invicto",
+     "Completa una temporada de liga de al menos 30 partidos sin perder."
+    ]
+   }
+  },
+  {
+   "key": "m_bigbudget",
+   "name": "Presupuesto de élite",
+   "description": "Dirige un club con al menos 20 millones de presupuesto.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 76,
+   "icon": "ach_m_bigbudget.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Presupuesto de élite",
+     "Dirige un club con al menos 20 millones de presupuesto."
+    ],
+    "de-DE": [
+     "Presupuesto de élite",
+     "Dirige un club con al menos 20 millones de presupuesto."
+    ],
+    "it-IT": [
+     "Presupuesto de élite",
+     "Dirige un club con al menos 20 millones de presupuesto."
+    ],
+    "fr-FR": [
+     "Presupuesto de élite",
+     "Dirige un club con al menos 20 millones de presupuesto."
+    ]
+   }
+  },
+  {
+   "key": "x_gta",
+   "name": "Ah shit · here we go again",
+   "description": "Desciende de categoría o sufre tu primer despido.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 77,
+   "icon": "ach_x_gta.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Ah shit · here we go again",
+     "Get relegated or suffer your first sacking."
+    ],
+    "de-DE": [
+     "Ah shit · here we go again",
+     "Steig ab oder werde zum ersten Mal entlassen."
+    ],
+    "it-IT": [
+     "Ah shit · here we go again",
+     "Retrocedi o subisci il tuo primo esonero."
+    ],
+    "fr-FR": [
+     "Ah shit · here we go again",
+     "Descends ou subis ton premier limogeage."
+    ]
+   }
+  },
+  {
+   "key": "x_sun",
+   "name": "Praise the Sun! \\o/",
+   "description": "Gana una final después de ir perdiendo.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 78,
+   "icon": "ach_x_sun.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Praise the Sun! \\o/",
+     "Win a final after being behind."
+    ],
+    "de-DE": [
+     "Praise the Sun! \\o/",
+     "Gewinne ein Finale nach Rückstand."
+    ],
+    "it-IT": [
+     "Praise the Sun! \\o/",
+     "Vinci una finale dopo essere stato in svantaggio."
+    ],
+    "fr-FR": [
+     "Praise the Sun! \\o/",
+     "Gagne une finale après avoir été mené."
+    ]
+   }
+  },
+  {
+   "key": "x_fus",
+   "name": "Fus Ro Dah!",
+   "description": "Marca un golazo desde fuera del área.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 79,
+   "icon": "ach_x_fus.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Fus Ro Dah!",
+     "Score a screamer from outside the box."
+    ],
+    "de-DE": [
+     "Fus Ro Dah!",
+     "Erziele ein Traumtor von außerhalb des Strafraums."
+    ],
+    "it-IT": [
+     "Fus Ro Dah!",
+     "Segna un golazo da fuori area."
+    ],
+    "fr-FR": [
+     "Fus Ro Dah!",
+     "Marque un bijou de l'extérieur de la surface."
+    ]
+   }
+  },
+  {
+   "key": "x_mine",
+   "name": "Diamante en bruto",
+   "description": "Marca en tu debut con 17 años o menos (o que lo haga un juvenil de tu cantera).",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 80,
+   "icon": "ach_x_mine.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Diamond in the rough",
+     "Score on your debut aged 17 or under (or have an academy youngster do it)."
+    ],
+    "de-DE": [
+     "Rohdiamant",
+     "Triff bei deinem Debüt mit 17 Jahren oder jünger (oder lass es einen Nachwuchsspieler tun)."
+    ],
+    "it-IT": [
+     "Diamante grezzo",
+     "Segna al debutto con 17 anni o meno (o fallo fare a un giovane del vivaio)."
+    ],
+    "fr-FR": [
+     "Diamant brut",
+     "Marque pour tes débuts à 17 ans ou moins (ou qu'un jeune du centre de formation le fasse)."
+    ]
+   }
+  },
+  {
+   "key": "x_witcher",
+   "name": "Geralt de Rivia",
+   "description": "Gana un derbi en el campo del rival.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 81,
+   "icon": "ach_x_witcher.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Geralt of Rivia",
+     "Win a derby at your rival's ground."
+    ],
+    "de-DE": [
+     "Geralt von Riva",
+     "Gewinne ein Derby im Stadion des Rivalen."
+    ],
+    "it-IT": [
+     "Geralt di Rivia",
+     "Vinci un derby in casa del rivale."
+    ],
+    "fr-FR": [
+     "Geralt de Riv",
+     "Gagne un derby sur le terrain du rival."
+    ]
+   }
+  },
+  {
+   "key": "x_goldfish",
+   "name": "Be a goldfish",
+   "description": "Gana el siguiente partido de liga justo después de perder por cuatro goles o más.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 82,
+   "icon": "ach_x_goldfish.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Be a goldfish",
+     "Win your next league match right after losing by four goals or more."
+    ],
+    "de-DE": [
+     "Be a goldfish",
+     "Gewinne das nächste Ligaspiel direkt nach einer Niederlage mit vier oder mehr Toren Unterschied."
+    ],
+    "it-IT": [
+     "Be a goldfish",
+     "Vinci la partita di campionato successiva subito dopo aver perso con quattro o più gol di scarto."
+    ],
+    "fr-FR": [
+     "Be a goldfish",
+     "Gagne le match de championnat suivant juste après une défaite par quatre buts d'écart ou plus."
+    ]
+   }
+  },
+  {
+   "key": "x_force",
+   "name": "¡Que la Fuerza te acompañe!",
+   "description": "Gana una final en la tanda de penaltis.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 83,
+   "icon": "ach_x_force.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "May the Force be with you!",
+     "Win a final on penalties."
+    ],
+    "de-DE": [
+     "Möge die Macht mit dir sein!",
+     "Gewinne ein Finale im Elfmeterschießen."
+    ],
+    "it-IT": [
+     "Che la Forza sia con te!",
+     "Vinci una finale ai rigori."
+    ],
+    "fr-FR": [
+     "Que la Force soit avec toi !",
+     "Gagne une finale aux tirs au but."
+    ]
+   }
+  },
+  {
+   "key": "x_ring",
+   "name": "Un anillo para gobernarlos a todos",
+   "description": "Gana liga · copa y una competición continental en la misma temporada.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 84,
+   "icon": "ach_x_ring.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "One ring to rule them all",
+     "Win the league · the cup and a continental competition in the same season."
+    ],
+    "de-DE": [
+     "Ein Ring · sie zu knechten",
+     "Gewinne Liga · Pokal und einen kontinentalen Wettbewerb in derselben Saison."
+    ],
+    "it-IT": [
+     "Un anello per domarli tutti",
+     "Vinci campionato · coppa e una competizione continentale nella stessa stagione."
+    ],
+    "fr-FR": [
+     "Un anneau pour les gouverner tous",
+     "Remporte le championnat · la coupe et une compétition continentale la même saison."
+    ]
+   }
+  },
+  {
+   "key": "x_papel",
+   "name": "¡Sorpresa · cabrones!",
+   "description": "Gana un partido que perdías por dos goles a falta de diez minutos.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 85,
+   "icon": "ach_x_papel.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Surprise · suckers!",
+     "Win a match you were losing by two goals with ten minutes left."
+    ],
+    "de-DE": [
+     "Überraschung · ihr Trottel!",
+     "Gewinne ein Spiel · in dem du zehn Minuten vor Schluss mit zwei Toren zurücklagst."
+    ],
+    "it-IT": [
+     "Sorpresa · sfigati!",
+     "Vinci una partita che perdevi di due gol a dieci minuti dalla fine."
+    ],
+    "fr-FR": [
+     "Surprise · bande de nazes !",
+     "Gagne un match que tu perdais de deux buts à dix minutes de la fin."
+    ]
+   }
+  },
+  {
+   "key": "x_cruyff",
+   "name": "Jugador total",
+   "description": "Sal desde el banquillo y marca el gol de la victoria.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 86,
+   "icon": "ach_x_cruyff.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Total player",
+     "Come off the bench and score the winning goal."
+    ],
+    "de-DE": [
+     "Totaler Spieler",
+     "Komm von der Bank und erziele das Siegtor."
+    ],
+    "it-IT": [
+     "Giocatore totale",
+     "Entra dalla panchina e segna il gol della vittoria."
+    ],
+    "fr-FR": [
+     "Joueur total",
+     "Entre en cours de jeu et marque le but de la victoire."
+    ]
+   }
+  },
+  {
+   "key": "x_bushido",
+   "name": "El camino del guerrero",
+   "description": "Juega una temporada entera de 30 partidos o más como titular sin ser sustituido nunca.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 87,
+   "icon": "ach_x_bushido.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The way of the warrior",
+     "Play a whole season of 30 or more matches as a starter without ever being substituted."
+    ],
+    "de-DE": [
+     "Der Weg des Kriegers",
+     "Spiele eine ganze Saison mit 30 oder mehr Spielen von Beginn an · ohne je ausgewechselt zu werden."
+    ],
+    "it-IT": [
+     "La via del guerriero",
+     "Gioca un'intera stagione di 30 o più partite da titolare senza mai essere sostituito."
+    ],
+    "fr-FR": [
+     "La voie du guerrier",
+     "Joue une saison entière de 30 matchs ou plus comme titulaire sans jamais être remplacé."
+    ]
+   }
+  },
+  {
+   "key": "x_real",
+   "name": "La cruda realidad",
+   "description": "Pierde un partido en el que ganabas por tres goles al descanso.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 88,
+   "icon": "ach_x_real.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Harsh reality",
+     "Lose a match you were winning by three goals at half-time."
+    ],
+    "de-DE": [
+     "Die harte Realität",
+     "Verliere ein Spiel · in dem du zur Pause mit drei Toren geführt hast."
+    ],
+    "it-IT": [
+     "La dura realtà",
+     "Perdi una partita in cui vincevi di tre gol all'intervallo."
+    ],
+    "fr-FR": [
+     "La dure réalité",
+     "Perds un match que tu menais de trois buts à la mi-temps."
+    ]
+   }
+  },
+  {
+   "key": "x_ea",
+   "name": "It's in the game...",
+   "description": "Falla tu jugada clave y aun así gana el partido.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 89,
+   "icon": "ach_x_ea.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "It's in the game...",
+     "Fail your key moment and still win the match."
+    ],
+    "de-DE": [
+     "It's in the game...",
+     "Vergib deinen Schlüsselmoment und gewinne trotzdem das Spiel."
+    ],
+    "it-IT": [
+     "It's in the game...",
+     "Sbaglia la tua azione chiave e vinci comunque la partita."
+    ],
+    "fr-FR": [
+     "It's in the game...",
+     "Rate ton action clé et gagne quand même le match."
+    ]
+   }
+  },
+  {
+   "key": "x_9000",
+   "name": "¡Es de más de 9000! (míster)",
+   "description": "Un juvenil de tu cantera llega a una media de 90.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 90,
+   "icon": "ach_x_9000.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "It's over 9000! (manager)",
+     "A youth player from your academy reaches an overall rating of 90."
+    ],
+    "de-DE": [
+     "Es ist über 9000! (Trainer)",
+     "Ein Nachwuchsspieler aus deiner Akademie erreicht eine Gesamtstärke von 90."
+    ],
+    "it-IT": [
+     "È più di 9000! (allenatore)",
+     "Un giovane del tuo vivaio arriva a una valutazione di 90."
+    ],
+    "fr-FR": [
+     "C'est plus de 9000 ! (entraîneur)",
+     "Un jeune de ton centre de formation atteint une note globale de 90."
+    ]
+   }
+  },
+  {
+   "key": "x_poke",
+   "name": "Hazme con todos",
+   "description": "Ficha a una joya de 20 años o menos (potencial 82+) de cinco confederaciones distintas.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 91,
+   "icon": "ach_x_poke.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Gotta catch 'em all",
+     "Sign a gem aged 20 or under (potential 82+) from five different confederations."
+    ],
+    "de-DE": [
+     "Schnapp sie dir alle",
+     "Verpflichte ein Juwel bis 20 Jahre (Potenzial 82+) aus fünf verschiedenen Konföderationen."
+    ],
+    "it-IT": [
+     "Acchiappali tutti",
+     "Ingaggia un gioiello di 20 anni o meno (potenziale 82+) da cinque confederazioni diverse."
+    ],
+    "fr-FR": [
+     "Attrapez-les tous",
+     "Recrute une pépite de 20 ans ou moins (potentiel 82+) dans cinq confédérations différentes."
+    ]
+   }
+  },
+  {
+   "key": "x_speed",
+   "name": "Speedrun",
+   "description": "Que te despidan antes de dirigir cinco partidos en un club.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 92,
+   "icon": "ach_x_speed.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Speedrun",
+     "Get sacked before managing five matches at a club."
+    ],
+    "de-DE": [
+     "Speedrun",
+     "Werde entlassen · bevor du fünf Spiele bei einem Verein geleitet hast."
+    ],
+    "it-IT": [
+     "Speedrun",
+     "Fatti esonerare prima di dirigere cinque partite in un club."
+    ],
+    "fr-FR": [
+     "Speedrun",
+     "Fais-toi limoger avant d'avoir dirigé cinq matchs dans un club."
+    ]
+   }
+  },
+  {
+   "key": "x_mgs",
+   "name": "Misión sigilosa",
+   "description": "Gana 1-0 con la mentalidad «Encerrarse» o con el bloque bajo.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 93,
+   "icon": "ach_x_mgs.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Stealth mission",
+     "Win 1-0 with the «Park the bus» mentality or the low block."
+    ],
+    "de-DE": [
+     "Schleichmission",
+     "Gewinne 1:0 mit der Mentalität «Mauern» oder dem tiefen Block."
+    ],
+    "it-IT": [
+     "Missione furtiva",
+     "Vinci 1-0 con la mentalità «Barricata» o con il blocco basso."
+    ],
+    "fr-FR": [
+     "Mission d'infiltration",
+     "Gagne 1-0 avec la mentalité «Bétonner» ou le bloc bas."
+    ]
+   }
+  },
+  {
+   "key": "x_pass",
+   "name": "¡No puedes pasar!",
+   "description": "Gana sin encajar jugando con uno menos ante un rival claramente mejor.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 94,
+   "icon": "ach_x_pass.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "You shall not pass!",
+     "Win to nil with ten men against a clearly better opponent."
+    ],
+    "de-DE": [
+     "Du kannst nicht vorbei!",
+     "Gewinne zu null in Unterzahl gegen einen klar stärkeren Gegner."
+    ],
+    "it-IT": [
+     "Tu non puoi passare!",
+     "Vinci senza subire gol in inferiorità numerica contro un avversario nettamente più forte."
+    ],
+    "fr-FR": [
+     "Vous ne passerez pas !",
+     "Gagne sans encaisser à dix contre onze face à un adversaire nettement meilleur."
+    ]
+   }
+  },
+  {
+   "key": "x_knock",
+   "name": "I am the one who knocks",
+   "description": "Gana en el campo del líder invicto con una mentalidad ofensiva o de presión alta.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 95,
+   "icon": "ach_x_knock.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "I am the one who knocks",
+     "Win away at the unbeaten leader with an attacking or high-press mentality."
+    ],
+    "de-DE": [
+     "I am the one who knocks",
+     "Gewinne beim ungeschlagenen Tabellenführer mit offensiver Mentalität oder hohem Pressing."
+    ],
+    "it-IT": [
+     "I am the one who knocks",
+     "Vinci in casa della capolista imbattuta con una mentalità offensiva o di pressing alto."
+    ],
+    "fr-FR": [
+     "I am the one who knocks",
+     "Gagne chez le leader invaincu avec une mentalité offensive ou de pressing haut."
+    ]
+   }
+  },
+  {
+   "key": "x_matrix",
+   "name": "El Elegido",
+   "description": "Gana encerrado atrás a un rival al menos seis puntos de media mejor.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 96,
+   "icon": "ach_x_matrix.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "The Chosen One",
+     "Win parking the bus against an opponent at least six rating points better."
+    ],
+    "de-DE": [
+     "Der Auserwählte",
+     "Gewinne mauernd gegen einen Gegner · der mindestens sechs Stärkepunkte besser ist."
+    ],
+    "it-IT": [
+     "Il Prescelto",
+     "Vinci chiuso in difesa contro un avversario più forte di almeno sei punti di valutazione."
+    ],
+    "fr-FR": [
+     "L'Élu",
+     "Gagne en bétonnant contre un adversaire d'au moins six points de note supérieur."
+    ]
+   }
+  },
+  {
+   "key": "x_fight",
+   "name": "El club de la lucha",
+   "description": "Termina un partido con cinco o más jugadores amonestados.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 97,
+   "icon": "ach_x_fight.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Fight Club",
+     "Finish a match with five or more players booked."
+    ],
+    "de-DE": [
+     "Fight Club",
+     "Beende ein Spiel mit fünf oder mehr verwarnten Spielern."
+    ],
+    "it-IT": [
+     "Fight Club",
+     "Chiudi una partita con cinque o più giocatori ammoniti."
+    ],
+    "fr-FR": [
+     "Fight Club",
+     "Termine un match avec cinq joueurs avertis ou plus."
+    ]
+   }
+  },
+  {
+   "key": "x_fine",
+   "name": "This is fine",
+   "description": "Aguanta un tramo con la directiva furiosa · cinco lesionados y las cuentas en rojo sin perder el puesto.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 98,
+   "icon": "ach_x_fine.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "This is fine",
+     "Survive a stretch with a furious board · five injured players and the accounts in the red without losing your job."
+    ],
+    "de-DE": [
+     "This is fine",
+     "Überstehe einen Abschnitt mit wütendem Vorstand · fünf Verletzten und roten Zahlen · ohne deinen Job zu verlieren."
+    ],
+    "it-IT": [
+     "This is fine",
+     "Supera una fase con la dirigenza furiosa · cinque infortunati e i conti in rosso senza perdere il posto."
+    ],
+    "fr-FR": [
+     "This is fine",
+     "Tiens une période avec une direction furieuse · cinq blessés et les comptes dans le rouge sans perdre ta place."
+    ]
+   }
+  },
+  {
+   "key": "x_wolf",
+   "name": "El lobo de Wall Street",
+   "description": "Vende a un veterano de 31 años o más por el triple de su valor.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 99,
+   "icon": "ach_x_wolf.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "The Wolf of Wall Street",
+     "Sell a veteran aged 31 or over for three times his value."
+    ],
+    "de-DE": [
+     "The Wolf of Wall Street",
+     "Verkaufe einen Routinier ab 31 Jahren für das Dreifache seines Werts."
+    ],
+    "it-IT": [
+     "The Wolf of Wall Street",
+     "Vendi un veterano di 31 anni o più al triplo del suo valore."
+    ],
+    "fr-FR": [
+     "Le Loup de Wall Street",
+     "Vends un vétéran de 31 ans ou plus au triple de sa valeur."
+    ]
+   }
+  },
+  {
+   "key": "x_war",
+   "name": "El arte de la guerra",
+   "description": "Haz tres cambios tácticos en un partido en directo y gánalo.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 100,
+   "icon": "ach_x_war.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "The Art of War",
+     "Make three tactical changes in a live match and win it."
+    ],
+    "de-DE": [
+     "Die Kunst des Krieges",
+     "Nimm in einem Live-Spiel drei taktische Änderungen vor und gewinne es."
+    ],
+    "it-IT": [
+     "L'arte della guerra",
+     "Fai tre cambi tattici in una partita in diretta e vincila."
+    ],
+    "fr-FR": [
+     "L'Art de la guerre",
+     "Fais trois changements tactiques dans un match en direct et gagne-le."
+    ]
+   }
+  },
+  {
+   "key": "x_brain",
+   "name": "El cerebro en llamas",
+   "description": "Gana con los once titulares en su posición natural y la química del equipo por encima de 85.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 101,
+   "icon": "ach_x_brain.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Brain on fire",
+     "Win with all eleven starters in their natural position and team chemistry above 85."
+    ],
+    "de-DE": [
+     "Gehirn in Flammen",
+     "Gewinne mit allen elf Startern auf ihrer Stammposition und einer Teamchemie über 85."
+    ],
+    "it-IT": [
+     "Cervello in fiamme",
+     "Vinci con tutti gli undici titolari nel loro ruolo naturale e l'intesa della squadra sopra 85."
+    ],
+    "fr-FR": [
+     "Cerveau en feu",
+     "Gagne avec tes onze titulaires à leur poste naturel et une cohésion d'équipe supérieure à 85."
+    ]
+   }
+  },
+  {
+   "key": "era_first_match",
+   "name": "Primer silbatazo",
+   "description": "Juega tu primer partido en una carrera de Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 102,
+   "icon": "ach_era_first_match.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Primer silbatazo",
+     "Juega tu primer partido en una carrera de Épocas."
+    ],
+    "de-DE": [
+     "Primer silbatazo",
+     "Juega tu primer partido en una carrera de Épocas."
+    ],
+    "it-IT": [
+     "Primer silbatazo",
+     "Juega tu primer partido en una carrera de Épocas."
+    ],
+    "fr-FR": [
+     "Primer silbatazo",
+     "Juega tu primer partido en una carrera d'Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_first_decision",
+   "name": "Una decisión para la historia",
+   "description": "Resuelve una decisión de época.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 103,
+   "icon": "ach_era_first_decision.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Una decisión para la historia",
+     "Resuelve una decisión de época."
+    ],
+    "de-DE": [
+     "Una decisión para la historia",
+     "Resuelve una decisión de época."
+    ],
+    "it-IT": [
+     "Una decisión para la historia",
+     "Resuelve una decisión de época."
+    ],
+    "fr-FR": [
+     "Una decisión para la historia",
+     "Resuelve una decisión de época."
+    ]
+   }
+  },
+  {
+   "key": "era_decisions5",
+   "name": "Cinco capítulos",
+   "description": "Resuelve cinco decisiones de época.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 104,
+   "icon": "ach_era_decisions5.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Cinco capítulos",
+     "Resuelve cinco decisiones de época."
+    ],
+    "de-DE": [
+     "Cinco capítulos",
+     "Resuelve cinco decisiones de época."
+    ],
+    "it-IT": [
+     "Cinco capítulos",
+     "Resuelve cinco decisiones de época."
+    ],
+    "fr-FR": [
+     "Cinco capítulos",
+     "Resuelve cinco decisiones de época."
+    ]
+   }
+  },
+  {
+   "key": "era_decisions15",
+   "name": "Quince capítulos",
+   "description": "Resuelve quince decisiones de época.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 105,
+   "icon": "ach_era_decisions15.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Quince capítulos",
+     "Resuelve quince decisiones de época."
+    ],
+    "de-DE": [
+     "Quince capítulos",
+     "Resuelve quince decisiones de época."
+    ],
+    "it-IT": [
+     "Quince capítulos",
+     "Resuelve quince decisiones de época."
+    ],
+    "fr-FR": [
+     "Quince capítulos",
+     "Resuelve quince decisiones de época."
+    ]
+   }
+  },
+  {
+   "key": "era_choices_all",
+   "name": "A cada problema · su respuesta",
+   "description": "Elige las tres estrategias disponibles en decisiones de época distintas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 106,
+   "icon": "ach_era_choices_all.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "A cada problema · su respuesta",
+     "Elige las tres estrategias disponibles en decisiones de época distintas."
+    ],
+    "de-DE": [
+     "A cada problema · su respuesta",
+     "Elige las tres estrategias disponibles en decisiones de época distintas."
+    ],
+    "it-IT": [
+     "A cada problema · su respuesta",
+     "Elige las tres estrategias disponibles en decisiones de época distintas."
+    ],
+    "fr-FR": [
+     "A cada problema · su respuesta",
+     "Elige las tres estrategias disponibles en decisiones de época distintas."
+    ]
+   }
+  },
+  {
+   "key": "era_two_decades",
+   "name": "Viajero de las décadas",
+   "description": "Resuelve decisiones en dos décadas diferentes.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 107,
+   "icon": "ach_era_two_decades.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Viajero de las décadas",
+     "Resuelve decisiones en dos décadas diferentes."
+    ],
+    "de-DE": [
+     "Viajero de las décadas",
+     "Resuelve decisiones en dos décadas diferentes."
+    ],
+    "it-IT": [
+     "Viajero de las décadas",
+     "Resuelve decisiones en dos décadas diferentes."
+    ],
+    "fr-FR": [
+     "Viajero de las décadas",
+     "Resuelve decisiones en dos décadas diferentes."
+    ]
+   }
+  },
+  {
+   "key": "era_span5",
+   "name": "Cinco años después",
+   "description": "Mantén tu carrera histórica durante cinco años.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 108,
+   "icon": "ach_era_span5.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Cinco años después",
+     "Mantén tu carrera histórica durante cinco años."
+    ],
+    "de-DE": [
+     "Cinco años después",
+     "Mantén tu carrera histórica durante cinco años."
+    ],
+    "it-IT": [
+     "Cinco años después",
+     "Mantén tu carrera histórica durante cinco años."
+    ],
+    "fr-FR": [
+     "Cinco años después",
+     "Mantén tu carrera histórica durante cinco años."
+    ]
+   }
+  },
+  {
+   "key": "era_span10",
+   "name": "Una década de legado",
+   "description": "Mantén tu carrera histórica durante diez años.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 109,
+   "icon": "ach_era_span10.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Una década de legado",
+     "Mantén tu carrera histórica durante diez años."
+    ],
+    "de-DE": [
+     "Una década de legado",
+     "Mantén tu carrera histórica durante diez años."
+    ],
+    "it-IT": [
+     "Una década de legado",
+     "Mantén tu carrera histórica durante diez años."
+    ],
+    "fr-FR": [
+     "Una década de legado",
+     "Mantén tu carrera histórica durante diez años."
+    ]
+   }
+  },
+  {
+   "key": "era_span20",
+   "name": "Veinte años de historia",
+   "description": "Mantén tu carrera histórica durante veinte años.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 110,
+   "icon": "ach_era_span20.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Veinte años de historia",
+     "Mantén tu carrera histórica durante veinte años."
+    ],
+    "de-DE": [
+     "Veinte años de historia",
+     "Mantén tu carrera histórica durante veinte años."
+    ],
+    "it-IT": [
+     "Veinte años de historia",
+     "Mantén tu carrera histórica durante veinte años."
+    ],
+    "fr-FR": [
+     "Veinte años de historia",
+     "Mantén tu carrera histórica durante veinte años."
+    ]
+   }
+  },
+  {
+   "key": "era_cross2000",
+   "name": "Cambio de milenio",
+   "description": "Empieza antes del año 2000 y lleva tu carrera hasta el nuevo milenio.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 111,
+   "icon": "ach_era_cross2000.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Cambio de milenio",
+     "Empieza antes del año 2000 y lleva tu carrera hasta el nuevo milenio."
+    ],
+    "de-DE": [
+     "Cambio de milenio",
+     "Empieza antes del año 2000 y lleva tu carrera hasta el nuevo milenio."
+    ],
+    "it-IT": [
+     "Cambio de milenio",
+     "Empieza antes del año 2000 y lleva tu carrera hasta el nuevo milenio."
+    ],
+    "fr-FR": [
+     "Cambio de milenio",
+     "Empieza antes del año 2000 y lleva tu carrera hasta el nuevo milenio."
+    ]
+   }
+  },
+  {
+   "key": "era_cross2010",
+   "name": "La era de las redes",
+   "description": "Llega a 2010 · cuando el fútbol entra en la era de las redes sociales.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 112,
+   "icon": "ach_era_cross2010.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "La era de las redes",
+     "Llega a 2010 · cuando el fútbol entra en la era de las redes sociales."
+    ],
+    "de-DE": [
+     "La era de las redes",
+     "Llega a 2010 · cuando el fútbol entra en la era de las redes sociales."
+    ],
+    "it-IT": [
+     "La era de las redes",
+     "Llega a 2010 · cuando el fútbol entra en la era de las redes sociales."
+    ],
+    "fr-FR": [
+     "La era de las redes",
+     "Llega a 2010 · cuando el fútbol entra en la era de las redes sociales."
+    ]
+   }
+  },
+  {
+   "key": "era_reach2020",
+   "name": "Fútbol del futuro",
+   "description": "Llega a una temporada de 2020 o posterior.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 113,
+   "icon": "ach_era_reach2020.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Fútbol del futuro",
+     "Llega a una temporada de 2020 o posterior."
+    ],
+    "de-DE": [
+     "Fútbol del futuro",
+     "Llega a una temporada de 2020 o posterior."
+    ],
+    "it-IT": [
+     "Fútbol del futuro",
+     "Llega a una temporada de 2020 o posterior."
+    ],
+    "fr-FR": [
+     "Fútbol del futuro",
+     "Llega a una temporada de 2020 o posterior."
+    ]
+   }
+  },
+  {
+   "key": "era_start70s",
+   "name": "Archivo: años setenta",
+   "description": "Empieza tu carrera histórica en los años setenta.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 114,
+   "icon": "ach_era_start70s.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Archivo: años setenta",
+     "Empieza tu carrera histórica en los años setenta."
+    ],
+    "de-DE": [
+     "Archivo: años setenta",
+     "Empieza tu carrera histórica en los años setenta."
+    ],
+    "it-IT": [
+     "Archivo: años setenta",
+     "Empieza tu carrera histórica en los años setenta."
+    ],
+    "fr-FR": [
+     "Archivo: años setenta",
+     "Empieza tu carrera histórica en los años setenta."
+    ]
+   }
+  },
+  {
+   "key": "era_start80s",
+   "name": "Archivo: años ochenta",
+   "description": "Empieza tu carrera histórica en los años ochenta.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 115,
+   "icon": "ach_era_start80s.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Archivo: años ochenta",
+     "Empieza tu carrera histórica en los años ochenta."
+    ],
+    "de-DE": [
+     "Archivo: años ochenta",
+     "Empieza tu carrera histórica en los años ochenta."
+    ],
+    "it-IT": [
+     "Archivo: años ochenta",
+     "Empieza tu carrera histórica en los años ochenta."
+    ],
+    "fr-FR": [
+     "Archivo: años ochenta",
+     "Empieza tu carrera histórica en los años ochenta."
+    ]
+   }
+  },
+  {
+   "key": "era_start90s",
+   "name": "Archivo: años noventa",
+   "description": "Empieza tu carrera histórica en los años noventa.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 116,
+   "icon": "ach_era_start90s.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Archivo: años noventa",
+     "Empieza tu carrera histórica en los años noventa."
+    ],
+    "de-DE": [
+     "Archivo: años noventa",
+     "Empieza tu carrera histórica en los años noventa."
+    ],
+    "it-IT": [
+     "Archivo: años noventa",
+     "Empieza tu carrera histórica en los años noventa."
+    ],
+    "fr-FR": [
+     "Archivo: años noventa",
+     "Empieza tu carrera histórica en los años noventa."
+    ]
+   }
+  },
+  {
+   "key": "era_start00s",
+   "name": "Archivo: años dos mil",
+   "description": "Empieza tu carrera histórica en los años dos mil.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 117,
+   "icon": "ach_era_start00s.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Archivo: años dos mil",
+     "Empieza tu carrera histórica en los años dos mil."
+    ],
+    "de-DE": [
+     "Archivo: años dos mil",
+     "Empieza tu carrera histórica en los años dos mil."
+    ],
+    "it-IT": [
+     "Archivo: años dos mil",
+     "Empieza tu carrera histórica en los años dos mil."
+    ],
+    "fr-FR": [
+     "Archivo: años dos mil",
+     "Empieza tu carrera histórica en los años dos mil."
+    ]
+   }
+  },
+  {
+   "key": "era_start10s",
+   "name": "Archivo: años dos mil diez",
+   "description": "Empieza tu carrera histórica en los años dos mil diez.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 118,
+   "icon": "ach_era_start10s.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Archivo: años dos mil diez",
+     "Empieza tu carrera histórica en los años dos mil diez."
+    ],
+    "de-DE": [
+     "Archivo: años dos mil diez",
+     "Empieza tu carrera histórica en los años dos mil diez."
+    ],
+    "it-IT": [
+     "Archivo: años dos mil diez",
+     "Empieza tu carrera histórica en los años dos mil diez."
+    ],
+    "fr-FR": [
+     "Archivo: años dos mil diez",
+     "Empieza tu carrera histórica en los años dos mil diez."
+    ]
+   }
+  },
+  {
+   "key": "era_start20s",
+   "name": "Archivo: años dos mil veinte",
+   "description": "Empieza tu carrera histórica en los años dos mil veinte.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 119,
+   "icon": "ach_era_start20s.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Archivo: años dos mil veinte",
+     "Empieza tu carrera histórica en los años dos mil veinte."
+    ],
+    "de-DE": [
+     "Archivo: años dos mil veinte",
+     "Empieza tu carrera histórica en los años dos mil veinte."
+    ],
+    "it-IT": [
+     "Archivo: años dos mil veinte",
+     "Empieza tu carrera histórica en los años dos mil veinte."
+    ],
+    "fr-FR": [
+     "Archivo: años dos mil veinte",
+     "Empieza tu carrera histórica en los años dos mil veinte."
+    ]
+   }
+  },
+  {
+   "key": "era_p_debut",
+   "name": "Debut de época",
+   "description": "Juega tu primer partido oficial en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 120,
+   "icon": "ach_era_p_debut.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Debut de época",
+     "Juega tu primer partido oficial en Modo Épocas."
+    ],
+    "de-DE": [
+     "Debut de época",
+     "Juega tu primer partido oficial en Modo Épocas."
+    ],
+    "it-IT": [
+     "Debut de época",
+     "Juega tu primer partido oficial en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Debut de época",
+     "Juega tu primer partido oficial en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_goal1",
+   "name": "Gol para el archivo",
+   "description": "Marca tu primer gol oficial en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 121,
+   "icon": "ach_era_p_goal1.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Gol para el archivo",
+     "Marca tu primer gol oficial en Modo Épocas."
+    ],
+    "de-DE": [
+     "Gol para el archivo",
+     "Marca tu primer gol oficial en Modo Épocas."
+    ],
+    "it-IT": [
+     "Gol para el archivo",
+     "Marca tu primer gol oficial en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Gol para el archivo",
+     "Marca tu primer gol oficial en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_goals50",
+   "name": "Cincuenta goles históricos",
+   "description": "Marca 50 goles oficiales en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 122,
+   "icon": "ach_era_p_goals50.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Cincuenta goles históricos",
+     "Marca 50 goles oficiales en Modo Épocas."
+    ],
+    "de-DE": [
+     "Cincuenta goles históricos",
+     "Marca 50 goles oficiales en Modo Épocas."
+    ],
+    "it-IT": [
+     "Cincuenta goles históricos",
+     "Marca 50 goles oficiales en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Cincuenta goles históricos",
+     "Marca 50 goles oficiales en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_goals100",
+   "name": "Centenario de época",
+   "description": "Marca 100 goles oficiales en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 123,
+   "icon": "ach_era_p_goals100.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Centenario de época",
+     "Marca 100 goles oficiales en Modo Épocas."
+    ],
+    "de-DE": [
+     "Centenario de época",
+     "Marca 100 goles oficiales en Modo Épocas."
+    ],
+    "it-IT": [
+     "Centenario de época",
+     "Marca 100 goles oficiales en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Centenario de época",
+     "Marca 100 goles oficiales en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_goals500",
+   "name": "Quinientos goles de leyenda",
+   "description": "Marca 500 goles oficiales en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 124,
+   "icon": "ach_era_p_goals500.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Quinientos goles de leyenda",
+     "Marca 500 goles oficiales en Modo Épocas."
+    ],
+    "de-DE": [
+     "Quinientos goles de leyenda",
+     "Marca 500 goles oficiales en Modo Épocas."
+    ],
+    "it-IT": [
+     "Quinientos goles de leyenda",
+     "Marca 500 goles oficiales en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Quinientos goles de leyenda",
+     "Marca 500 goles oficiales en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_assists100",
+   "name": "Socio de época",
+   "description": "Da 100 asistencias oficiales en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 125,
+   "icon": "ach_era_p_assists100.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Socio de época",
+     "Da 100 asistencias oficiales en Modo Épocas."
+    ],
+    "de-DE": [
+     "Socio de época",
+     "Da 100 asistencias oficiales en Modo Épocas."
+    ],
+    "it-IT": [
+     "Socio de época",
+     "Da 100 asistencias oficiales en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Socio de época",
+     "Da 100 asistencias oficiales en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_apps300",
+   "name": "Tres siglos de partidos",
+   "description": "Juega 300 partidos oficiales en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 126,
+   "icon": "ach_era_p_apps300.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Tres siglos de partidos",
+     "Juega 300 partidos oficiales en Modo Épocas."
+    ],
+    "de-DE": [
+     "Tres siglos de partidos",
+     "Juega 300 partidos oficiales en Modo Épocas."
+    ],
+    "it-IT": [
+     "Tres siglos de partidos",
+     "Juega 300 partidos oficiales en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Tres siglos de partidos",
+     "Juega 300 partidos oficiales en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_apps1000",
+   "name": "Mil partidos en el tiempo",
+   "description": "Juega 1.000 partidos oficiales en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 127,
+   "icon": "ach_era_p_apps1000.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Mil partidos en el tiempo",
+     "Juega 1.000 partidos oficiales en Modo Épocas."
+    ],
+    "de-DE": [
+     "Mil partidos en el tiempo",
+     "Juega 1.000 partidos oficiales en Modo Épocas."
+    ],
+    "it-IT": [
+     "Mil partidos en el tiempo",
+     "Juega 1.000 partidos oficiales en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Mil partidos en el tiempo",
+     "Juega 1.000 partidos oficiales en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_seasons5",
+   "name": "Cinco temporadas históricas",
+   "description": "Completa cinco temporadas de jugador en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 128,
+   "icon": "ach_era_p_seasons5.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Cinco temporadas históricas",
+     "Completa cinco temporadas de jugador en Modo Épocas."
+    ],
+    "de-DE": [
+     "Cinco temporadas históricas",
+     "Completa cinco temporadas de jugador en Modo Épocas."
+    ],
+    "it-IT": [
+     "Cinco temporadas históricas",
+     "Completa cinco temporadas de jugador en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Cinco temporadas históricas",
+     "Completa cinco temporadas de jugador en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_seasons10",
+   "name": "Una década en el césped",
+   "description": "Completa diez temporadas de jugador en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 129,
+   "icon": "ach_era_p_seasons10.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Una década en el césped",
+     "Completa diez temporadas de jugador en Modo Épocas."
+    ],
+    "de-DE": [
+     "Una década en el césped",
+     "Completa diez temporadas de jugador en Modo Épocas."
+    ],
+    "it-IT": [
+     "Una década en el césped",
+     "Completa diez temporadas de jugador en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Una década en el césped",
+     "Completa diez temporadas de jugador en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_seasons20",
+   "name": "Veinte temporadas de jugador",
+   "description": "Completa veinte temporadas de jugador en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 130,
+   "icon": "ach_era_p_seasons20.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Veinte temporadas de jugador",
+     "Completa veinte temporadas de jugador en Modo Épocas."
+    ],
+    "de-DE": [
+     "Veinte temporadas de jugador",
+     "Completa veinte temporadas de jugador en Modo Épocas."
+    ],
+    "it-IT": [
+     "Veinte temporadas de jugador",
+     "Completa veinte temporadas de jugador en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Veinte temporadas de jugador",
+     "Completa veinte temporadas de jugador en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_clubs3",
+   "name": "Tres escudos históricos",
+   "description": "Juega en tres clubes distintos en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 131,
+   "icon": "ach_era_p_clubs3.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Tres escudos históricos",
+     "Juega en tres clubes distintos en Modo Épocas."
+    ],
+    "de-DE": [
+     "Tres escudos históricos",
+     "Juega en tres clubes distintos en Modo Épocas."
+    ],
+    "it-IT": [
+     "Tres escudos históricos",
+     "Juega en tres clubes distintos en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Tres escudos históricos",
+     "Juega en tres clubes distintos en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_clubs5",
+   "name": "Cinco clubes · seis décadas",
+   "description": "Juega en cinco clubes distintos en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 132,
+   "icon": "ach_era_p_clubs5.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Cinco clubes · seis décadas",
+     "Juega en cinco clubes distintos en Modo Épocas."
+    ],
+    "de-DE": [
+     "Cinco clubes · seis décadas",
+     "Juega en cinco clubes distintos en Modo Épocas."
+    ],
+    "it-IT": [
+     "Cinco clubes · seis décadas",
+     "Juega en cinco clubes distintos en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Cinco clubes · seis décadas",
+     "Juega en cinco clubes distintos en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_trophy",
+   "name": "Primer trofeo de época",
+   "description": "Gana tu primer título como jugador en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 133,
+   "icon": "ach_era_p_trophy.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Primer trofeo de época",
+     "Gana tu primer título como jugador en Modo Épocas."
+    ],
+    "de-DE": [
+     "Primer trofeo de época",
+     "Gana tu primer título como jugador en Modo Épocas."
+    ],
+    "it-IT": [
+     "Primer trofeo de época",
+     "Gana tu primer título como jugador en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Primer trofeo de época",
+     "Gana tu primer título como jugador en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_caps",
+   "name": "Internacional de época",
+   "description": "Debuta con tu selección en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 134,
+   "icon": "ach_era_p_caps.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Internacional de época",
+     "Debuta con tu selección en Modo Épocas."
+    ],
+    "de-DE": [
+     "Internacional de época",
+     "Debuta con tu selección en Modo Épocas."
+    ],
+    "it-IT": [
+     "Internacional de época",
+     "Debuta con tu selección en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Internacional de época",
+     "Debuta con tu selección en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_p_ovr90",
+   "name": "Clase mundial histórica",
+   "description": "Alcanza una media de 90 en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 135,
+   "icon": "ach_era_p_ovr90.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Clase mundial histórica",
+     "Alcanza una media de 90 en Modo Épocas."
+    ],
+    "de-DE": [
+     "Clase mundial histórica",
+     "Alcanza una media de 90 en Modo Épocas."
+    ],
+    "it-IT": [
+     "Clase mundial histórica",
+     "Alcanza una media de 90 en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Clase mundial histórica",
+     "Alcanza una media de 90 en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_firstwin",
+   "name": "Primer triunfo de época",
+   "description": "Gana tu primer partido como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 136,
+   "icon": "ach_era_m_firstwin.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Primer triunfo de época",
+     "Gana tu primer partido como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Primer triunfo de época",
+     "Gana tu primer partido como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Primer triunfo de época",
+     "Gana tu primer partido como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Primer triunfo de época",
+     "Gana tu primer partido como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_wins50",
+   "name": "Cincuenta victorias históricas",
+   "description": "Suma 50 victorias como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 137,
+   "icon": "ach_era_m_wins50.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Cincuenta victorias históricas",
+     "Suma 50 victorias como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Cincuenta victorias históricas",
+     "Suma 50 victorias como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Cincuenta victorias históricas",
+     "Suma 50 victorias como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Cincuenta victorias históricas",
+     "Suma 50 victorias como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_wins200",
+   "name": "Doscientas victorias históricas",
+   "description": "Suma 200 victorias como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 138,
+   "icon": "ach_era_m_wins200.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Doscientas victorias históricas",
+     "Suma 200 victorias como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Doscientas victorias históricas",
+     "Suma 200 victorias como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Doscientas victorias históricas",
+     "Suma 200 victorias como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Doscientas victorias históricas",
+     "Suma 200 victorias como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_wins500",
+   "name": "Quinientas victorias históricas",
+   "description": "Suma 500 victorias como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 139,
+   "icon": "ach_era_m_wins500.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Quinientas victorias históricas",
+     "Suma 500 victorias como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Quinientas victorias históricas",
+     "Suma 500 victorias como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Quinientas victorias históricas",
+     "Suma 500 victorias como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Quinientas victorias históricas",
+     "Suma 500 victorias como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_seasons5",
+   "name": "Proyecto de época",
+   "description": "Completa cinco temporadas como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 140,
+   "icon": "ach_era_m_seasons5.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Proyecto de época",
+     "Completa cinco temporadas como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Proyecto de época",
+     "Completa cinco temporadas como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Proyecto de época",
+     "Completa cinco temporadas como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Proyecto de época",
+     "Completa cinco temporadas como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_seasons10",
+   "name": "Una década en el banquillo",
+   "description": "Completa diez temporadas como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 141,
+   "icon": "ach_era_m_seasons10.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Una década en el banquillo",
+     "Completa diez temporadas como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Una década en el banquillo",
+     "Completa diez temporadas como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Una década en el banquillo",
+     "Completa diez temporadas como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Una década en el banquillo",
+     "Completa diez temporadas como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_seasons20",
+   "name": "Veinte temporadas al mando",
+   "description": "Completa veinte temporadas como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 142,
+   "icon": "ach_era_m_seasons20.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Veinte temporadas al mando",
+     "Completa veinte temporadas como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Veinte temporadas al mando",
+     "Completa veinte temporadas como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Veinte temporadas al mando",
+     "Completa veinte temporadas como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Veinte temporadas al mando",
+     "Completa veinte temporadas como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_trophy",
+   "name": "Primer título desde el banquillo",
+   "description": "Gana tu primer título como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 143,
+   "icon": "ach_era_m_trophy.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Primer título desde el banquillo",
+     "Gana tu primer título como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Primer título desde el banquillo",
+     "Gana tu primer título como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Primer título desde el banquillo",
+     "Gana tu primer título como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Primer título desde el banquillo",
+     "Gana tu primer título como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_trophies5",
+   "name": "Vitrina histórica",
+   "description": "Gana cinco títulos como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 144,
+   "icon": "ach_era_m_trophies5.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Vitrina histórica",
+     "Gana cinco títulos como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Vitrina histórica",
+     "Gana cinco títulos como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Vitrina histórica",
+     "Gana cinco títulos como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Vitrina histórica",
+     "Gana cinco títulos como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_trophies15",
+   "name": "Dinastía de época",
+   "description": "Gana quince títulos como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 145,
+   "icon": "ach_era_m_trophies15.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Dinastía de época",
+     "Gana quince títulos como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Dinastía de época",
+     "Gana quince títulos como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Dinastía de época",
+     "Gana quince títulos como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Dinastía de época",
+     "Gana quince títulos como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_unbeaten",
+   "name": "Invicto en la historia",
+   "description": "Completa una temporada de liga sin derrotas y con diez partidos o más en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 146,
+   "icon": "ach_era_m_unbeaten.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Invicto en la historia",
+     "Completa una temporada de liga sin derrotas y con diez partidos o más en Modo Épocas."
+    ],
+    "de-DE": [
+     "Invicto en la historia",
+     "Completa una temporada de liga sin derrotas y con diez partidos o más en Modo Épocas."
+    ],
+    "it-IT": [
+     "Invicto en la historia",
+     "Completa una temporada de liga sin derrotas y con diez partidos o más en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Invicto en la historia",
+     "Completa una temporada de liga sin derrotas y con diez partidos o más en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_goals90",
+   "name": "Ataque de otra época",
+   "description": "Marca 90 goles en una temporada de liga como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 147,
+   "icon": "ach_era_m_goals90.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Ataque de otra época",
+     "Marca 90 goles en una temporada de liga como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Ataque de otra época",
+     "Marca 90 goles en una temporada de liga como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Ataque de otra época",
+     "Marca 90 goles en una temporada de liga como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Ataque de otra época",
+     "Marca 90 goles en una temporada de liga como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_clubs3",
+   "name": "Tres banquillos históricos",
+   "description": "Entrena a tres clubes distintos en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 148,
+   "icon": "ach_era_m_clubs3.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Tres banquillos históricos",
+     "Entrena a tres clubes distintos en Modo Épocas."
+    ],
+    "de-DE": [
+     "Tres banquillos históricos",
+     "Entrena a tres clubes distintos en Modo Épocas."
+    ],
+    "it-IT": [
+     "Tres banquillos históricos",
+     "Entrena a tres clubes distintos en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Tres banquillos históricos",
+     "Entrena a tres clubes distintos en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_clubs5",
+   "name": "Cinco escudos · una carrera",
+   "description": "Entrena a cinco clubes distintos en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 149,
+   "icon": "ach_era_m_clubs5.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Cinco escudos · una carrera",
+     "Entrena a cinco clubes distintos en Modo Épocas."
+    ],
+    "de-DE": [
+     "Cinco escudos · una carrera",
+     "Entrena a cinco clubes distintos en Modo Épocas."
+    ],
+    "it-IT": [
+     "Cinco escudos · una carrera",
+     "Entrena a cinco clubes distintos en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Cinco escudos · una carrera",
+     "Entrena a cinco clubes distintos en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_rep90",
+   "name": "Respeto de época",
+   "description": "Alcanza 90 de reputación como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 150,
+   "icon": "ach_era_m_rep90.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Respeto de época",
+     "Alcanza 90 de reputación como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Respeto de época",
+     "Alcanza 90 de reputación como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Respeto de época",
+     "Alcanza 90 de reputación como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Respeto de época",
+     "Alcanza 90 de reputación como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "era_m_wins1000",
+   "name": "Mil victorias de leyenda",
+   "description": "Suma 1.000 victorias como míster en Modo Épocas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 151,
+   "icon": "ach_era_m_wins1000.png",
+   "group": "e",
+   "translations": {
+    "en-US": [
+     "Mil victorias de leyenda",
+     "Suma 1.000 victorias como míster en Modo Épocas."
+    ],
+    "de-DE": [
+     "Mil victorias de leyenda",
+     "Suma 1.000 victorias como míster en Modo Épocas."
+    ],
+    "it-IT": [
+     "Mil victorias de leyenda",
+     "Suma 1.000 victorias como míster en Modo Épocas."
+    ],
+    "fr-FR": [
+     "Mil victorias de leyenda",
+     "Suma 1.000 victorias como míster en Modo Épocas."
+    ]
+   }
+  },
+  {
+   "key": "g_hat",
+   "name": "Tres en raya",
+   "description": "Marca tu primer hat-trick.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 152,
+   "icon": "ach_g_hat.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Tic-tac-toe",
+     "Score your first hat-trick."
+    ],
+    "de-DE": [
+     "Drei gewinnt",
+     "Erziele deinen ersten Hattrick."
+    ],
+    "it-IT": [
+     "Tris",
+     "Segna la tua prima tripletta."
+    ],
+    "fr-FR": [
+     "Morpion",
+     "Marque ton premier triplé."
+    ]
+   }
+  },
+  {
+   "key": "g_hathome",
+   "name": "Di mi nombre",
+   "description": "Marca un hat-trick en casa.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 153,
+   "icon": "ach_g_hathome.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Say my name",
+     "Score a hat-trick at home."
+    ],
+    "de-DE": [
+     "Sag meinen Namen",
+     "Erziele einen Hattrick zu Hause."
+    ],
+    "it-IT": [
+     "Di' il mio nome",
+     "Segna una tripletta in casa."
+    ],
+    "fr-FR": [
+     "Dis mon nom",
+     "Marque un triplé à domicile."
+    ]
+   }
+  },
+  {
+   "key": "g_poker",
+   "name": "Póker de ases",
+   "description": "Marca 4 goles en un partido.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 154,
+   "icon": "ach_g_poker.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Four of a kind",
+     "Score 4 goals in a match."
+    ],
+    "de-DE": [
+     "Vier Asse",
+     "Erziele 4 Tore in einem Spiel."
+    ],
+    "it-IT": [
+     "Poker d'assi",
+     "Segna 4 gol in una partita."
+    ],
+    "fr-FR": [
+     "Carré d'as",
+     "Marque 4 buts dans un match."
+    ]
+   }
+  },
+  {
+   "key": "g_ownhalf",
+   "name": "Campo infinito",
+   "description": "Marca desde tu propio campo.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": true,
+   "order": 155,
+   "icon": "ach_g_ownhalf.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Infinite pitch",
+     "Score from your own half."
+    ],
+    "de-DE": [
+     "Unendlicher Platz",
+     "Triff aus der eigenen Hälfte."
+    ],
+    "it-IT": [
+     "Campo infinito",
+     "Segna dalla tua metà campo."
+    ],
+    "fr-FR": [
+     "Terrain infini",
+     "Marque depuis ta propre moitié."
+    ]
+   }
+  },
+  {
+   "key": "g_subfast",
+   "name": "Fuga del banquillo",
+   "description": "Sal de suplente y marca en tus 2 primeros minutos.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 156,
+   "icon": "ach_g_subfast.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Bench breakout",
+     "Come off the bench and score within 2 minutes."
+    ],
+    "de-DE": [
+     "Ausbruch von der Bank",
+     "Komm von der Bank und triff in den ersten 2 Minuten."
+    ],
+    "it-IT": [
+     "Fuga dalla panchina",
+     "Entra dalla panchina e segna nei primi 2 minuti."
+    ],
+    "fr-FR": [
+     "Évasion du banc",
+     "Entre en jeu et marque dans tes 2 premières minutes."
+    ]
+   }
+  },
+  {
+   "key": "g_heist",
+   "name": "Atraco perfecto",
+   "description": "Marca en el último minuto en campo rival para ganar.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 157,
+   "icon": "ach_g_heist.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The perfect heist",
+     "Score a last-minute away winner."
+    ],
+    "de-DE": [
+     "Der perfekte Coup",
+     "Erziele auswärts in der letzten Minute den Siegtreffer."
+    ],
+    "it-IT": [
+     "Il colpo perfetto",
+     "Segna il gol vittoria all'ultimo minuto in trasferta."
+    ],
+    "fr-FR": [
+     "Le casse parfait",
+     "Marque le but de la victoire à la dernière minute à l'extérieur."
+    ]
+   }
+  },
+  {
+   "key": "g_exclub",
+   "name": "Yo soy tu padre",
+   "description": "Márcale 5 goles a uno de tus ex clubes.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 158,
+   "icon": "ach_g_exclub.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "I am your father",
+     "Score 5 goals against one of your former clubs."
+    ],
+    "de-DE": [
+     "Ich bin dein Vater",
+     "Erziele 5 Tore gegen einen deiner Ex-Vereine."
+    ],
+    "it-IT": [
+     "Io sono tuo padre",
+     "Segna 5 gol a uno dei tuoi ex club."
+    ],
+    "fr-FR": [
+     "Je suis ton père",
+     "Marque 5 buts contre un de tes anciens clubs."
+    ]
+   }
+  },
+  {
+   "key": "g_500",
+   "name": "El quinientos",
+   "description": "Llega a 500 goles oficiales.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 159,
+   "icon": "ach_g_500.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Five hundred",
+     "Reach 500 official goals."
+    ],
+    "de-DE": [
+     "Fünfhundert",
+     "Erreiche 500 Pflichtspieltore."
+    ],
+    "it-IT": [
+     "Il cinquecento",
+     "Arriva a 500 gol ufficiali."
+    ],
+    "fr-FR": [
+     "Cinq cents",
+     "Atteins 500 buts officiels."
+    ]
+   }
+  },
+  {
+   "key": "g_1000",
+   "name": "Las mil y una noches",
+   "description": "Llega a 1.000 goles oficiales.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 160,
+   "icon": "ach_g_1000.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "One thousand and one nights",
+     "Reach 1 ·000 official goals."
+    ],
+    "de-DE": [
+     "Tausendundeine Nacht",
+     "Erreiche 1.000 Pflichtspieltore."
+    ],
+    "it-IT": [
+     "Le mille e una notte",
+     "Arriva a 1.000 gol ufficiali."
+    ],
+    "fr-FR": [
+     "Les mille et une nuits",
+     "Atteins 1 000 buts officiels."
+    ]
+   }
+  },
+  {
+   "key": "g_s40",
+   "name": "Temporada de cine",
+   "description": "Marca 40 goles en una temporada.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 161,
+   "icon": "ach_g_s40.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Blockbuster season",
+     "Score 40 goals in a season."
+    ],
+    "de-DE": [
+     "Kinoreife Saison",
+     "Erziele 40 Tore in einer Saison."
+    ],
+    "it-IT": [
+     "Stagione da film",
+     "Segna 40 gol in una stagione."
+    ],
+    "fr-FR": [
+     "Saison de cinéma",
+     "Marque 40 buts en une saison."
+    ]
+   }
+  },
+  {
+   "key": "g_own",
+   "name": "El que lo petó",
+   "description": "Marca en propia puerta.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 162,
+   "icon": "ach_g_own.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Oops · I did it",
+     "Score an own goal."
+    ],
+    "de-DE": [
+     "Volles Rohr daneben",
+     "Erziele ein Eigentor."
+    ],
+    "it-IT": [
+     "Quello che l'ha combinata",
+     "Segna un autogol."
+    ],
+    "fr-FR": [
+     "Celui qui a tout cassé",
+     "Marque contre ton camp."
+    ]
+   }
+  },
+  {
+   "key": "a_prof",
+   "name": "El Profesor",
+   "description": "Da 50 asistencias en una temporada.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 163,
+   "icon": "ach_a_prof.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The Professor",
+     "Make 50 assists in a season."
+    ],
+    "de-DE": [
+     "Der Professor",
+     "Gib 50 Vorlagen in einer Saison."
+    ],
+    "it-IT": [
+     "Il Professore",
+     "Fornisci 50 assist in una stagione."
+    ],
+    "fr-FR": [
+     "Le Professeur",
+     "Délivre 50 passes décisives en une saison."
+    ]
+   }
+  },
+  {
+   "key": "a_plan",
+   "name": "Plan sin fisuras",
+   "description": "Da 20 asistencias en una temporada.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 164,
+   "icon": "ach_a_plan.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Flawless plan",
+     "Make 20 assists in a season."
+    ],
+    "de-DE": [
+     "Lückenloser Plan",
+     "Gib 20 Vorlagen in einer Saison."
+    ],
+    "it-IT": [
+     "Piano perfetto",
+     "Fornisci 20 assist in una stagione."
+    ],
+    "fr-FR": [
+     "Plan sans faille",
+     "Délivre 20 passes décisives en une saison."
+    ]
+   }
+  },
+  {
+   "key": "a_200",
+   "name": "Visión de rayos X",
+   "description": "Llega a 200 asistencias.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 165,
+   "icon": "ach_a_200.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "X-ray vision",
+     "Reach 200 assists."
+    ],
+    "de-DE": [
+     "Röntgenblick",
+     "Erreiche 200 Vorlagen."
+    ],
+    "it-IT": [
+     "Vista a raggi X",
+     "Arriva a 200 assist."
+    ],
+    "fr-FR": [
+     "Vision à rayons X",
+     "Atteins 200 passes décisives."
+    ]
+   }
+  },
+  {
+   "key": "a_600",
+   "name": "Seiscientas razones",
+   "description": "Llega a 600 asistencias.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 166,
+   "icon": "ach_a_600.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Six hundred reasons",
+     "Reach 600 assists."
+    ],
+    "de-DE": [
+     "Sechshundert Gründe",
+     "Erreiche 600 Vorlagen."
+    ],
+    "it-IT": [
+     "Seicento ragioni",
+     "Arriva a 600 assist."
+    ],
+    "fr-FR": [
+     "Six cents raisons",
+     "Atteins 600 passes décisives."
+    ]
+   }
+  },
+  {
+   "key": "a_both",
+   "name": "Doble o nada",
+   "description": "Marca y asiste en el mismo partido 25 veces.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 167,
+   "icon": "ach_a_both.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Double or nothing",
+     "Score and assist in the same match 25 times."
+    ],
+    "de-DE": [
+     "Doppelt oder nichts",
+     "Triff und gib eine Vorlage im selben Spiel · 25-mal."
+    ],
+    "it-IT": [
+     "Lascia o raddoppia",
+     "Segna e fornisci un assist nella stessa partita 25 volte."
+    ],
+    "fr-FR": [
+     "Quitte ou double",
+     "Marque et fais une passe décisive dans le même match 25 fois."
+    ]
+   }
+  },
+  {
+   "key": "a_three",
+   "name": "Pase a la red",
+   "description": "Da 3 asistencias en un partido.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 168,
+   "icon": "ach_a_three.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Pass to the net",
+     "Make 3 assists in a match."
+    ],
+    "de-DE": [
+     "Pass ins Netz",
+     "Gib 3 Vorlagen in einem Spiel."
+    ],
+    "it-IT": [
+     "Passaggio in rete",
+     "Fornisci 3 assist in una partita."
+    ],
+    "fr-FR": [
+     "Passe au filet",
+     "Délivre 3 passes décisives dans un match."
+    ]
+   }
+  },
+  {
+   "key": "a_pos",
+   "name": "Comodín",
+   "description": "Juega en 4 posiciones distintas.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 169,
+   "icon": "ach_a_pos.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Wildcard",
+     "Play in 4 different positions."
+    ],
+    "de-DE": [
+     "Joker",
+     "Spiele auf 4 verschiedenen Positionen."
+    ],
+    "it-IT": [
+     "Jolly",
+     "Gioca in 4 ruoli diversi."
+    ],
+    "fr-FR": [
+     "Joker",
+     "Joue à 4 postes différents."
+    ]
+   }
+  },
+  {
+   "key": "a_9000",
+   "name": "¡Es de más de 9000! (jugador)",
+   "description": "Supera 9.000 minutos jugados.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 170,
+   "icon": "ach_a_9000.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "It's over 9000! (player)",
+     "Play more than 9 ·000 minutes."
+    ],
+    "de-DE": [
+     "Es ist über 9000! (Spieler)",
+     "Spiele mehr als 9.000 Minuten."
+    ],
+    "it-IT": [
+     "È più di 9000! (giocatore)",
+     "Supera 9.000 minuti giocati."
+    ],
+    "fr-FR": [
+     "C'est plus de 9000 ! (joueur)",
+     "Dépasse 9 000 minutes jouées."
+    ]
+   }
+  },
+  {
+   "key": "a_iron",
+   "name": "Hierro forjado",
+   "description": "Juega 50 partidos completos seguidos con tu club.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 171,
+   "icon": "ach_a_iron.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Forged iron",
+     "Play 50 full matches in a row for your club."
+    ],
+    "de-DE": [
+     "Geschmiedetes Eisen",
+     "Bestreite 50 komplette Spiele in Folge für deinen Verein."
+    ],
+    "it-IT": [
+     "Ferro battuto",
+     "Gioca 50 partite intere di fila con il tuo club."
+    ],
+    "fr-FR": [
+     "Fer forgé",
+     "Joue 50 matchs complets d'affilée avec ton club."
+    ]
+   }
+  },
+  {
+   "key": "k_shall",
+   "name": "No pasarás",
+   "description": "Deja la portería a cero en 10 partidos seguidos.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 172,
+   "icon": "ach_k_shall.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "You shall not pass",
+     "Keep 10 clean sheets in a row."
+    ],
+    "de-DE": [
+     "Du kommst nicht vorbei",
+     "Bleib 10 Spiele in Folge ohne Gegentor."
+    ],
+    "it-IT": [
+     "Non passerai",
+     "Mantieni la porta inviolata per 10 partite di fila."
+    ],
+    "fr-FR": [
+     "Tu ne passeras pas",
+     "Garde ta cage inviolée 10 matchs d'affilée."
+    ]
+   }
+  },
+  {
+   "key": "k_iron",
+   "name": "Telón de acero",
+   "description": "Deja la portería a cero en 20 partidos de una temporada.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 173,
+   "icon": "ach_k_iron.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Iron curtain",
+     "Keep 20 clean sheets in a season."
+    ],
+    "de-DE": [
+     "Eiserner Vorhang",
+     "Bleib in 20 Spielen einer Saison ohne Gegentor."
+    ],
+    "it-IT": [
+     "Cortina di ferro",
+     "Mantieni la porta inviolata in 20 partite di una stagione."
+    ],
+    "fr-FR": [
+     "Rideau de fer",
+     "Garde ta cage inviolée lors de 20 matchs d'une saison."
+    ]
+   }
+  },
+  {
+   "key": "k_200",
+   "name": "El guardián entre el centeno",
+   "description": "Llega a 200 porterías a cero.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 174,
+   "icon": "ach_k_200.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The catcher in the rye",
+     "Reach 200 clean sheets."
+    ],
+    "de-DE": [
+     "Der Fänger im Roggen",
+     "Erreiche 200 Spiele ohne Gegentor."
+    ],
+    "it-IT": [
+     "Il giovane Holden",
+     "Arriva a 200 porte inviolate."
+    ],
+    "fr-FR": [
+     "L'attrape-cœurs",
+     "Atteins 200 clean sheets."
+    ]
+   }
+  },
+  {
+   "key": "k_butter",
+   "name": "Manos de mantequilla",
+   "description": "Encaja 5 goles en un partido siendo el portero.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 175,
+   "icon": "ach_k_butter.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Butterfingers",
+     "Concede 5 goals in a match as the goalkeeper."
+    ],
+    "de-DE": [
+     "Butterfinger",
+     "Kassiere als Torwart 5 Tore in einem Spiel."
+    ],
+    "it-IT": [
+     "Mani di burro",
+     "Subisci 5 gol in una partita da portiere."
+    ],
+    "fr-FR": [
+     "Mains de beurre",
+     "Encaisse 5 buts dans un match en tant que gardien."
+    ]
+   }
+  },
+  {
+   "key": "k_pen50",
+   "name": "Parada de manual",
+   "description": "Para 50 penaltis en tu carrera (partidos y tandas).",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 176,
+   "icon": "ach_k_pen50.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Textbook save",
+     "Save 50 penalties in your career (matches and shootouts)."
+    ],
+    "de-DE": [
+     "Lehrbuchparade",
+     "Halte in deiner Karriere 50 Elfmeter (Spiele und Elfmeterschießen)."
+    ],
+    "it-IT": [
+     "Parata da manuale",
+     "Para 50 rigori in carriera (partite e lotterie)."
+    ],
+    "fr-FR": [
+     "Arrêt d'école",
+     "Arrête 50 penaltys dans ta carrière (matchs et séances de tirs au but)."
+    ]
+   }
+  },
+  {
+   "key": "k_ultra",
+   "name": "Ultra Instinto",
+   "description": "Para 3 penaltis en una tanda.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 177,
+   "icon": "ach_k_ultra.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Ultra Instinct",
+     "Save 3 penalties in a shootout."
+    ],
+    "de-DE": [
+     "Ultra-Instinkt",
+     "Halte 3 Elfmeter in einem Elfmeterschießen."
+    ],
+    "it-IT": [
+     "Ultra Istinto",
+     "Para 3 rigori in una lotteria."
+    ],
+    "fr-FR": [
+     "Ultra Instinct",
+     "Arrête 3 penaltys dans une séance de tirs au but."
+    ]
+   }
+  },
+  {
+   "key": "k_goal",
+   "name": "El portero goleador",
+   "description": "Marca un gol siendo portero.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": true,
+   "order": 178,
+   "icon": "ach_k_goal.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The goalscoring keeper",
+     "Score a goal as a goalkeeper."
+    ],
+    "de-DE": [
+     "Der Torwart als Torjäger",
+     "Erziele als Torwart ein Tor."
+    ],
+    "it-IT": [
+     "Il portiere goleador",
+     "Segna un gol da portiere."
+    ],
+    "fr-FR": [
+     "Le gardien buteur",
+     "Marque un but en tant que gardien."
+    ]
+   }
+  },
+  {
+   "key": "k_zero",
+   "name": "Cero absoluto",
+   "description": "Termina una liga encajando menos de 15 goles como portero titular.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 179,
+   "icon": "ach_k_zero.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Absolute zero",
+     "Finish a league season conceding fewer than 15 goals as first-choice keeper."
+    ],
+    "de-DE": [
+     "Absoluter Nullpunkt",
+     "Beende eine Ligasaison als Stammtorwart mit weniger als 15 Gegentoren."
+    ],
+    "it-IT": [
+     "Zero assoluto",
+     "Chiudi un campionato subendo meno di 15 gol da portiere titolare."
+    ],
+    "fr-FR": [
+     "Zéro absolu",
+     "Termine un championnat en encaissant moins de 15 buts comme gardien titulaire."
+    ]
+   }
+  },
+  {
+   "key": "k_china",
+   "name": "Muralla china",
+   "description": "Gana una final 1-0 siendo el portero.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 180,
+   "icon": "ach_k_china.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Great Wall",
+     "Win a final 1-0 as the goalkeeper."
+    ],
+    "de-DE": [
+     "Chinesische Mauer",
+     "Gewinne als Torwart ein Finale mit 1:0."
+    ],
+    "it-IT": [
+     "Muraglia cinese",
+     "Vinci una finale 1-0 da portiere."
+    ],
+    "fr-FR": [
+     "Grande Muraille",
+     "Gagne une finale 1-0 en tant que gardien."
+    ]
+   }
+  },
+  {
+   "key": "sp_sd",
+   "name": "El juego del penalti",
+   "description": "Gana una tanda en muerte súbita.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 181,
+   "icon": "ach_sp_sd.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The penalty game",
+     "Win a shootout in sudden death."
+    ],
+    "de-DE": [
+     "Das Elfmeterspiel",
+     "Gewinne ein Elfmeterschießen im K.-o.-Modus nach dem fünften Schützen."
+    ],
+    "it-IT": [
+     "Il gioco del rigore",
+     "Vinci una lotteria ai rigori a oltranza."
+    ],
+    "fr-FR": [
+     "Le jeu du penalty",
+     "Gagne une séance de tirs au but à la mort subite."
+    ]
+   }
+  },
+  {
+   "key": "sp_10",
+   "name": "Sangre fría",
+   "description": "Marca 10 penaltis seguidos.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 182,
+   "icon": "ach_sp_10.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Cool head",
+     "Score 10 penalties in a row."
+    ],
+    "de-DE": [
+     "Kaltblütigkeit",
+     "Verwandle 10 Elfmeter in Folge."
+    ],
+    "it-IT": [
+     "Sangue freddo",
+     "Segna 10 rigori di fila."
+    ],
+    "fr-FR": [
+     "Sang-froid",
+     "Marque 10 penaltys d'affilée."
+    ]
+   }
+  },
+  {
+   "key": "sp_fk100",
+   "name": "Cien de cien",
+   "description": "Marca 100 goles de falta directa.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 183,
+   "icon": "ach_sp_fk100.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "A hundred out of a hundred",
+     "Score 100 direct free-kick goals."
+    ],
+    "de-DE": [
+     "Hundert von hundert",
+     "Erziele 100 direkte Freistoßtore."
+    ],
+    "it-IT": [
+     "Cento su cento",
+     "Segna 100 gol su punizione diretta."
+    ],
+    "fr-FR": [
+     "Cent sur cent",
+     "Marque 100 coups francs directs."
+    ]
+   }
+  },
+  {
+   "key": "sp_fk10",
+   "name": "A balón parado",
+   "description": "Marca 10 goles de falta directa.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 184,
+   "icon": "ach_sp_fk10.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Set-piece specialist",
+     "Score 10 direct free-kick goals."
+    ],
+    "de-DE": [
+     "Ruhender Ball",
+     "Erziele 10 direkte Freistoßtore."
+    ],
+    "it-IT": [
+     "Palla inattiva",
+     "Segna 10 gol su punizione diretta."
+    ],
+    "fr-FR": [
+     "Coup de pied arrêté",
+     "Marque 10 coups francs directs."
+    ]
+   }
+  },
+  {
+   "key": "sp_pan3",
+   "name": "Picadito",
+   "description": "Marca 3 penaltis a lo Panenka.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 185,
+   "icon": "ach_sp_pan3.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Chipped",
+     "Score 3 Panenka penalties."
+    ],
+    "de-DE": [
+     "Gelupft",
+     "Verwandle 3 Elfmeter im Panenka-Stil."
+    ],
+    "it-IT": [
+     "Il cucchiaio",
+     "Segna 3 rigori alla Panenka."
+    ],
+    "fr-FR": [
+     "Piqué",
+     "Marque 3 penaltys à la Panenka."
+    ]
+   }
+  },
+  {
+   "key": "sp_far",
+   "name": "Desde mi casa",
+   "description": "Marca una falta directa desde más de 30 metros.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 186,
+   "icon": "ach_sp_far.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "From my living room",
+     "Score a direct free kick from more than 30 metres."
+    ],
+    "de-DE": [
+     "Von zu Hause aus",
+     "Verwandle einen direkten Freistoß aus mehr als 30 Metern."
+    ],
+    "it-IT": [
+     "Da casa mia",
+     "Segna una punizione diretta da oltre 30 metri."
+    ],
+    "fr-FR": [
+     "Depuis chez moi",
+     "Marque un coup franc direct à plus de 30 mètres."
+    ]
+   }
+  },
+  {
+   "key": "sp_wall",
+   "name": "Tiembla la barrera",
+   "description": "Marca una falta que toca en la barrera y entra.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": true,
+   "order": 187,
+   "icon": "ach_sp_wall.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The wall trembles",
+     "Score a free kick that clips the wall and goes in."
+    ],
+    "de-DE": [
+     "Die Mauer zittert",
+     "Erziele ein Freistoßtor · das von der Mauer abgefälscht wird."
+    ],
+    "it-IT": [
+     "Trema la barriera",
+     "Segna una punizione che tocca la barriera ed entra."
+    ],
+    "fr-FR": [
+     "Le mur tremble",
+     "Marque un coup franc qui touche le mur et entre."
+    ]
+   }
+  },
+  {
+   "key": "sp_late",
+   "name": "Penalti en el descuento",
+   "description": "Marca un penalti a partir del minuto 89.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 188,
+   "icon": "ach_sp_late.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Stoppage-time penalty",
+     "Score a penalty from the 89th minute onwards."
+    ],
+    "de-DE": [
+     "Elfmeter in der Nachspielzeit",
+     "Verwandle einen Elfmeter ab der 89. Minute."
+    ],
+    "it-IT": [
+     "Rigore al recupero",
+     "Segna un rigore dall'89° minuto in poi."
+    ],
+    "fr-FR": [
+     "Penalty dans le temps additionnel",
+     "Marque un penalty à partir de la 89e minute."
+    ]
+   }
+  },
+  {
+   "key": "sp_miss",
+   "name": "El que falla · paga",
+   "description": "Falla un penalti en una tanda y quedáis eliminados.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 189,
+   "icon": "ach_sp_miss.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Miss and you pay",
+     "Miss a shootout penalty and get knocked out."
+    ],
+    "de-DE": [
+     "Wer verschießt · zahlt",
+     "Verschieße im Elfmeterschießen und scheide aus."
+    ],
+    "it-IT": [
+     "Chi sbaglia paga",
+     "Sbaglia un rigore in una lotteria e venite eliminati."
+    ],
+    "fr-FR": [
+     "Qui rate paie",
+     "Rate un tir au but et ton équipe est éliminée."
+    ]
+   }
+  },
+  {
+   "key": "c_winter",
+   "name": "Se acerca el mercado de invierno",
+   "description": "Ficha por otro club en el mercado de invierno.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 190,
+   "icon": "ach_c_winter.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Winter window is coming",
+     "Join another club in the winter window."
+    ],
+    "de-DE": [
+     "Das Wintertransferfenster naht",
+     "Wechsle im Winter zu einem anderen Verein."
+    ],
+    "it-IT": [
+     "L'inverno sta arrivando… e il mercato pure",
+     "Firma per un altro club nel mercato invernale."
+    ],
+    "fr-FR": [
+     "Le mercato d'hiver arrive",
+     "Signe dans un autre club au mercato d'hiver."
+    ]
+   }
+  },
+  {
+   "key": "c_bench",
+   "name": "Juego de banquillos",
+   "description": "Pasa 10 partidos seguidos en el banquillo sin jugar.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 191,
+   "icon": "ach_c_bench.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Game of benches",
+     "Spend 10 matches in a row on the bench without playing."
+    ],
+    "de-DE": [
+     "Game of Benches",
+     "Sitz 10 Spiele in Folge auf der Bank · ohne zu spielen."
+    ],
+    "it-IT": [
+     "Il trono di panchine",
+     "Passa 10 partite di fila in panchina senza giocare."
+    ],
+    "fr-FR": [
+     "Le jeu des bancs",
+     "Passe 10 matchs d'affilée sur le banc sans jouer."
+    ]
+   }
+  },
+  {
+   "key": "c_pill",
+   "name": "La píldora roja",
+   "description": "Acepta una oferta de una liga exótica.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 192,
+   "icon": "ach_c_pill.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The red pill",
+     "Accept an offer from an exotic league."
+    ],
+    "de-DE": [
+     "Die rote Pille",
+     "Nimm ein Angebot aus einer exotischen Liga an."
+    ],
+    "it-IT": [
+     "La pillola rossa",
+     "Accetta un'offerta da un campionato esotico."
+    ],
+    "fr-FR": [
+     "La pilule rouge",
+     "Accepte une offre d'un championnat exotique."
+    ]
+   }
+  },
+  {
+   "key": "c_home",
+   "name": "Vuelta a casa",
+   "description": "Vuelve al club en el que empezaste.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 193,
+   "icon": "ach_c_home.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Homecoming",
+     "Return to the club where you started."
+    ],
+    "de-DE": [
+     "Heimkehr",
+     "Kehre zu deinem ersten Verein zurück."
+    ],
+    "it-IT": [
+     "Ritorno a casa",
+     "Torna al club dove hai iniziato."
+    ],
+    "fr-FR": [
+     "Retour à la maison",
+     "Reviens dans le club de tes débuts."
+    ]
+   }
+  },
+  {
+   "key": "c_one",
+   "name": "Hijo predilecto",
+   "description": "Juega 10 temporadas en un mismo club.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 194,
+   "icon": "ach_c_one.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Favourite son",
+     "Play 10 seasons at the same club."
+    ],
+    "de-DE": [
+     "Lieblingssohn",
+     "Spiele 10 Saisons für denselben Verein."
+    ],
+    "it-IT": [
+     "Figlio prediletto",
+     "Gioca 10 stagioni nello stesso club."
+    ],
+    "fr-FR": [
+     "Fils préféré",
+     "Joue 10 saisons dans le même club."
+    ]
+   }
+  },
+  {
+   "key": "c_world",
+   "name": "El viajero",
+   "description": "Juega en clubes de 6 países distintos.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 195,
+   "icon": "ach_c_world.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The traveller",
+     "Play for clubs in 6 different countries."
+    ],
+    "de-DE": [
+     "Der Reisende",
+     "Spiele für Vereine in 6 verschiedenen Ländern."
+    ],
+    "it-IT": [
+     "Il viaggiatore",
+     "Gioca in club di 6 paesi diversi."
+    ],
+    "fr-FR": [
+     "Le voyageur",
+     "Joue dans des clubs de 6 pays différents."
+    ]
+   }
+  },
+  {
+   "key": "c_1000",
+   "name": "Mil batallas (jugador) II",
+   "description": "Llega a 1.000 partidos oficiales.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 196,
+   "icon": "ach_c_1000.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "A thousand battles (player) II",
+     "Reach 1 ·000 official matches."
+    ],
+    "de-DE": [
+     "Tausend Schlachten (Spieler) II",
+     "Erreiche 1.000 Pflichtspiele."
+    ],
+    "it-IT": [
+     "Mille battaglie (giocatore) II",
+     "Arriva a 1.000 partite ufficiali."
+    ],
+    "fr-FR": [
+     "Mille batailles (joueur) II",
+     "Atteins 1 000 matchs officiels."
+    ]
+   }
+  },
+  {
+   "key": "c_upside",
+   "name": "El mundo del revés",
+   "description": "Gana un partido en el que perdíais 0-3.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": true,
+   "order": 197,
+   "icon": "ach_c_upside.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Upside down",
+     "Win a match after trailing 0-3."
+    ],
+    "de-DE": [
+     "Die verkehrte Welt",
+     "Gewinne ein Spiel nach 0:3-Rückstand."
+    ],
+    "it-IT": [
+     "Il mondo alla rovescia",
+     "Vinci una partita in cui perdevate 0-3."
+    ],
+    "fr-FR": [
+     "Le monde à l'envers",
+     "Gagne un match après avoir été mené 0-3."
+    ]
+   }
+  },
+  {
+   "key": "c_believe",
+   "name": "Believe",
+   "description": "Salva del descenso a tu equipo cuando iba último a partir de la jornada 30.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 198,
+   "icon": "ach_c_believe.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Believe",
+     "Keep your team up after being bottom from matchday 30 onwards."
+    ],
+    "de-DE": [
+     "Believe",
+     "Rette dein Team vor dem Abstieg · obwohl es ab dem 30. Spieltag Letzter war."
+    ],
+    "it-IT": [
+     "Believe",
+     "Salva la tua squadra dalla retrocessione dopo essere stati ultimi dalla 30ª giornata."
+    ],
+    "fr-FR": [
+     "Believe",
+     "Sauve ton équipe de la relégation alors qu'elle était dernière à partir de la 30e journée."
+    ]
+   }
+  },
+  {
+   "key": "c_jinx",
+   "name": "Se veía venir",
+   "description": "Lesiónate en las 3 semanas siguientes a renovar.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 199,
+   "icon": "ach_c_jinx.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Saw it coming",
+     "Get injured within 3 weeks of renewing your contract."
+    ],
+    "de-DE": [
+     "Das war ja klar",
+     "Verletz dich innerhalb von 3 Wochen nach der Vertragsverlängerung."
+    ],
+    "it-IT": [
+     "Si vedeva arrivare",
+     "Infortunati entro 3 settimane dal rinnovo."
+    ],
+    "fr-FR": [
+     "On l'avait vu venir",
+     "Blesse-toi dans les 3 semaines suivant ta prolongation."
+    ]
+   }
+  },
+  {
+   "key": "c_lift",
+   "name": "Ascensor",
+   "description": "Asciende y desciende con el mismo club.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 200,
+   "icon": "ach_c_lift.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Yo-yo club",
+     "Win promotion and suffer relegation with the same club."
+    ],
+    "de-DE": [
+     "Fahrstuhl",
+     "Steige mit demselben Verein auf und ab."
+    ],
+    "it-IT": [
+     "Ascensore",
+     "Sali e retrocedi con lo stesso club."
+    ],
+    "fr-FR": [
+     "Ascenseur",
+     "Monte et descends avec le même club."
+    ]
+   }
+  },
+  {
+   "key": "c_40",
+   "name": "Cuarentón",
+   "description": "Juega un partido oficial con 40 años.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 201,
+   "icon": "ach_c_40.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Forty-something",
+     "Play an official match aged 40."
+    ],
+    "de-DE": [
+     "Ü40",
+     "Bestreite mit 40 Jahren ein Pflichtspiel."
+    ],
+    "it-IT": [
+     "Quarantenne",
+     "Gioca una partita ufficiale a 40 anni."
+    ],
+    "fr-FR": [
+     "Quadra",
+     "Joue un match officiel à 40 ans."
+    ]
+   }
+  },
+  {
+   "key": "n_call",
+   "name": "Llamada a filas",
+   "description": "Juega tu primer partido con la selección.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 202,
+   "icon": "ach_n_call.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Call-up",
+     "Play your first match for your national team."
+    ],
+    "de-DE": [
+     "Einberufung",
+     "Bestreite dein erstes Länderspiel."
+    ],
+    "it-IT": [
+     "Chiamata alle armi",
+     "Gioca la tua prima partita in nazionale."
+    ],
+    "fr-FR": [
+     "Appel sous les drapeaux",
+     "Joue ton premier match en sélection."
+    ]
+   }
+  },
+  {
+   "key": "n_100",
+   "name": "Centurión",
+   "description": "Llega a 100 partidos internacionales.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 203,
+   "icon": "ach_n_100.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Centurion (player) II",
+     "Reach 100 international caps."
+    ],
+    "de-DE": [
+     "Zenturio",
+     "Erreiche 100 Länderspiele."
+    ],
+    "it-IT": [
+     "Centurione",
+     "Arriva a 100 presenze in nazionale."
+    ],
+    "fr-FR": [
+     "Centurion",
+     "Atteins 100 sélections."
+    ]
+   }
+  },
+  {
+   "key": "n_cap",
+   "name": "El elegido de la tribu",
+   "description": "Sé capitán de tu selección.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 204,
+   "icon": "ach_n_cap.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Chosen by the tribe",
+     "Captain your national team."
+    ],
+    "de-DE": [
+     "Der Auserwählte des Stammes",
+     "Werde Kapitän deiner Nationalmannschaft."
+    ],
+    "it-IT": [
+     "Il prescelto della tribù",
+     "Diventa capitano della tua nazionale."
+    ],
+    "fr-FR": [
+     "L'élu de la tribu",
+     "Deviens capitaine de ta sélection."
+    ]
+   }
+  },
+  {
+   "key": "n_wc",
+   "name": "Cuatro estrellas",
+   "description": "Gana un Mundial.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 205,
+   "icon": "ach_n_wc.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Four stars",
+     "Win a World Cup."
+    ],
+    "de-DE": [
+     "Vier Sterne",
+     "Gewinne eine Weltmeisterschaft."
+    ],
+    "it-IT": [
+     "Quattro stelle",
+     "Vinci un Mondiale."
+    ],
+    "fr-FR": [
+     "Quatre étoiles",
+     "Gagne une Coupe du monde."
+    ]
+   }
+  },
+  {
+   "key": "n_conf",
+   "name": "Viejo continente",
+   "description": "Gana el torneo de selecciones de tu confederación.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 206,
+   "icon": "ach_n_conf.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Old continent",
+     "Win your confederation's national-team tournament."
+    ],
+    "de-DE": [
+     "Alter Kontinent",
+     "Gewinne das Nationenturnier deines Kontinentalverbands."
+    ],
+    "it-IT": [
+     "Vecchio continente",
+     "Vinci il torneo per nazionali della tua confederazione."
+    ],
+    "fr-FR": [
+     "Vieux continent",
+     "Gagne le tournoi des sélections de ta confédération."
+    ]
+   }
+  },
+  {
+   "key": "n_final",
+   "name": "Doblete patrio",
+   "description": "Marca en una final con tu selección.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 207,
+   "icon": "ach_n_final.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Patriotic double",
+     "Score in a final for your national team."
+    ],
+    "de-DE": [
+     "Patriotischer Doppelpack",
+     "Triff in einem Finale für deine Nationalmannschaft."
+    ],
+    "it-IT": [
+     "Doppietta patriottica",
+     "Segna in una finale con la nazionale."
+    ],
+    "fr-FR": [
+     "Doublé patriotique",
+     "Marque en finale avec ta sélection."
+    ]
+   }
+  },
+  {
+   "key": "n_qual",
+   "name": "El héroe del barrio",
+   "description": "Marca en un partido de clasificación que tu selección gana por un gol.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 208,
+   "icon": "ach_n_qual.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Local hero",
+     "Score in a qualifier your national team wins by one goal."
+    ],
+    "de-DE": [
+     "Held des Viertels",
+     "Triff in einem Qualifikationsspiel · das deine Nationalmannschaft mit einem Tor Unterschied gewinnt."
+    ],
+    "it-IT": [
+     "L'eroe del quartiere",
+     "Segna in una qualificazione che la tua nazionale vince di un gol."
+    ],
+    "fr-FR": [
+     "Le héros du quartier",
+     "Marque lors d'un match de qualification que ta sélection gagne d'un but."
+    ]
+   }
+  },
+  {
+   "key": "n_dual",
+   "name": "Más de una bandera",
+   "description": "Elige selección teniendo doble nacionalidad.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 209,
+   "icon": "ach_n_dual.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "More than one flag",
+     "Choose a national team as a dual national."
+    ],
+    "de-DE": [
+     "Mehr als eine Flagge",
+     "Wähle mit doppelter Staatsbürgerschaft deine Nationalmannschaft."
+    ],
+    "it-IT": [
+     "Più di una bandiera",
+     "Scegli una nazionale avendo la doppia cittadinanza."
+    ],
+    "fr-FR": [
+     "Plus d'un drapeau",
+     "Choisis ta sélection en ayant la double nationalité."
+    ]
+   }
+  },
+  {
+   "key": "w_cap",
+   "name": "Has sido elegido",
+   "description": "Que te nombren capitán de tu club.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 210,
+   "icon": "ach_w_cap.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "You have been chosen",
+     "Be named club captain."
+    ],
+    "de-DE": [
+     "Du wurdest auserwählt",
+     "Werde zum Vereinskapitän ernannt."
+    ],
+    "it-IT": [
+     "Sei stato scelto",
+     "Vieni nominato capitano del tuo club."
+    ],
+    "fr-FR": [
+     "Tu as été choisi",
+     "Sois nommé capitaine de ton club."
+    ]
+   }
+  },
+  {
+   "key": "w_pod",
+   "name": "El tercer hombre",
+   "description": "Queda entre los 3 primeros del Balón de Oro.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 211,
+   "icon": "ach_w_pod.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The third man",
+     "Finish in the top 3 of the Ballon d'Or."
+    ],
+    "de-DE": [
+     "Der dritte Mann",
+     "Lande unter den Top 3 beim Ballon d'Or."
+    ],
+    "it-IT": [
+     "Il terzo uomo",
+     "Arriva tra i primi 3 del Pallone d'Oro."
+    ],
+    "fr-FR": [
+     "Le troisième homme",
+     "Termine dans le top 3 du Ballon d'Or."
+    ]
+   }
+  },
+  {
+   "key": "w_bdo3",
+   "name": "El señor de los balones",
+   "description": "Gana 3 Balones de Oro.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 212,
+   "icon": "ach_w_bdo3.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Lord of the balls",
+     "Win 3 Ballons d'Or."
+    ],
+    "de-DE": [
+     "Der Herr der Bälle",
+     "Gewinne 3 Ballons d'Or."
+    ],
+    "it-IT": [
+     "Il signore dei palloni",
+     "Vinci 3 Palloni d'Oro."
+    ],
+    "fr-FR": [
+     "Le seigneur des ballons",
+     "Gagne 3 Ballons d'Or."
+    ]
+   }
+  },
+  {
+   "key": "w_bdo5",
+   "name": "Más que leyenda",
+   "description": "Gana 5 Balones de Oro.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 213,
+   "icon": "ach_w_bdo5.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "More than a legend",
+     "Win 5 Ballons d'Or."
+    ],
+    "de-DE": [
+     "Mehr als eine Legende",
+     "Gewinne 5 Ballons d'Or."
+    ],
+    "it-IT": [
+     "Più che leggenda",
+     "Vinci 5 Palloni d'Oro."
+    ],
+    "fr-FR": [
+     "Plus qu'une légende",
+     "Gagne 5 Ballons d'Or."
+    ]
+   }
+  },
+  {
+   "key": "w_boot3",
+   "name": "Bota de diamante",
+   "description": "Gana 3 Botas de Oro europeas.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 214,
+   "icon": "ach_w_boot3.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Diamond boot",
+     "Win 3 European Golden Shoes."
+    ],
+    "de-DE": [
+     "Diamantschuh",
+     "Gewinne 3 Goldene Schuhe."
+    ],
+    "it-IT": [
+     "Scarpa di diamante",
+     "Vinci 3 Scarpe d'Oro europee."
+    ],
+    "fr-FR": [
+     "Soulier de diamant",
+     "Gagne 3 Soulier d'or européens."
+    ]
+   }
+  },
+  {
+   "key": "w_young",
+   "name": "El chico de oro",
+   "description": "Gana un premio al mejor jugador joven.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 215,
+   "icon": "ach_w_young.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The golden boy",
+     "Win a best young player award."
+    ],
+    "de-DE": [
+     "Der Goldjunge",
+     "Gewinne eine Auszeichnung als bester junger Spieler."
+    ],
+    "it-IT": [
+     "Il ragazzo d'oro",
+     "Vinci un premio come miglior giovane."
+    ],
+    "fr-FR": [
+     "Le golden boy",
+     "Remporte un prix de meilleur jeune joueur."
+    ]
+   }
+  },
+  {
+   "key": "w_pom10",
+   "name": "Mes tras mes",
+   "description": "Gana 10 premios al jugador del mes.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 216,
+   "icon": "ach_w_pom10.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Month after month",
+     "Win 10 player of the month awards."
+    ],
+    "de-DE": [
+     "Monat für Monat",
+     "Werde 10-mal Spieler des Monats."
+    ],
+    "it-IT": [
+     "Mese dopo mese",
+     "Vinci 10 premi di giocatore del mese."
+    ],
+    "fr-FR": [
+     "Mois après mois",
+     "Remporte 10 trophées de joueur du mois."
+    ]
+   }
+  },
+  {
+   "key": "w_xi",
+   "name": "El once ideal",
+   "description": "Entra en el once mundial del año.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 217,
+   "icon": "ach_w_xi.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Dream team",
+     "Make the world team of the year."
+    ],
+    "de-DE": [
+     "Die Elf des Jahres",
+     "Schaff es in die Weltelf des Jahres."
+    ],
+    "it-IT": [
+     "L'undici ideale",
+     "Entra nell'undici mondiale dell'anno."
+    ],
+    "fr-FR": [
+     "Le onze idéal",
+     "Intègre l'équipe type mondiale de l'année."
+    ]
+   }
+  },
+  {
+   "key": "w_all",
+   "name": "Un trofeo para gobernarlos",
+   "description": "Gana 4 títulos en una misma temporada.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 218,
+   "icon": "ach_w_all.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "One trophy to rule them all",
+     "Win 4 titles in a single season."
+    ],
+    "de-DE": [
+     "Ein Pokal · sie zu knechten",
+     "Gewinne 4 Titel in einer Saison."
+    ],
+    "it-IT": [
+     "Un trofeo per domarli",
+     "Vinci 4 titoli nella stessa stagione."
+    ],
+    "fr-FR": [
+     "Un trophée pour les gouverner tous",
+     "Remporte 4 titres en une seule saison."
+    ]
+   }
+  },
+  {
+   "key": "d_peace",
+   "name": "Mediador",
+   "description": "Pon paz en una pelea del vestuario.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 219,
+   "icon": "ach_d_peace.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Peacemaker",
+     "Break up a dressing-room fight."
+    ],
+    "de-DE": [
+     "Schlichter",
+     "Schlichte einen Streit in der Kabine."
+    ],
+    "it-IT": [
+     "Mediatore",
+     "Riporta la pace in una lite nello spogliatoio."
+    ],
+    "fr-FR": [
+     "Médiateur",
+     "Apaise une bagarre dans le vestiaire."
+    ]
+   }
+  },
+  {
+   "key": "d_mentor",
+   "name": "Mentor",
+   "description": "Ayuda a 3 novatos que te pidan consejo.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 220,
+   "icon": "ach_d_mentor.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Mentor",
+     "Help 3 rookies who ask you for advice."
+    ],
+    "de-DE": [
+     "Mentor",
+     "Hilf 3 Neulingen · die dich um Rat bitten."
+    ],
+    "it-IT": [
+     "Mentore",
+     "Aiuta 3 giovani che ti chiedono consiglio."
+    ],
+    "fr-FR": [
+     "Mentor",
+     "Aide 3 jeunes qui te demandent conseil."
+    ]
+   }
+  },
+  {
+   "key": "d_cover",
+   "name": "Lealtad ciega",
+   "description": "Cubre a un compañero tres veces.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 221,
+   "icon": "ach_d_cover.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Blind loyalty",
+     "Cover for a teammate three times."
+    ],
+    "de-DE": [
+     "Blinde Loyalität",
+     "Deck einen Mitspieler dreimal."
+    ],
+    "it-IT": [
+     "Lealtà cieca",
+     "Copri un compagno tre volte."
+    ],
+    "fr-FR": [
+     "Loyauté aveugle",
+     "Couvre un coéquipier trois fois."
+    ]
+   }
+  },
+  {
+   "key": "d_boss",
+   "name": "Aquí mando yo",
+   "description": "Pide el balón en un penalti siendo suplente de lanzador y márcalo.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 222,
+   "icon": "ach_d_boss.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "I'm the boss here",
+     "Demand the ball for a penalty when you're not first taker · and score it."
+    ],
+    "de-DE": [
+     "Hier bestimme ich",
+     "Fordere den Ball beim Elfmeter · obwohl du nicht erster Schütze bist · und verwandle."
+    ],
+    "it-IT": [
+     "Qui comando io",
+     "Chiedi il pallone per un rigore pur non essendo il rigorista e segnalo."
+    ],
+    "fr-FR": [
+     "C'est moi qui commande",
+     "Réclame le ballon pour un penalty sans être le tireur désigné et marque-le."
+    ]
+   }
+  },
+  {
+   "key": "d_liar",
+   "name": "¡Pinocho!",
+   "description": "Miente a la prensa y que te pillen.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 223,
+   "icon": "ach_d_liar.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Pinocchio!",
+     "Lie to the press and get caught."
+    ],
+    "de-DE": [
+     "Pinocchio!",
+     "Lüg die Presse an und flieg auf."
+    ],
+    "it-IT": [
+     "Pinocchio!",
+     "Mentisci alla stampa e fatti scoprire."
+    ],
+    "fr-FR": [
+     "Pinocchio !",
+     "Mens à la presse et fais-toi prendre."
+    ]
+   }
+  },
+  {
+   "key": "d_last",
+   "name": "Hasta el último aliento",
+   "description": "Juega tocado una final y ganadla.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 224,
+   "icon": "ach_d_last.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "To the last breath",
+     "Play a final while carrying a knock and win it."
+    ],
+    "de-DE": [
+     "Bis zum letzten Atemzug",
+     "Spiel angeschlagen ein Finale und gewinne es."
+    ],
+    "it-IT": [
+     "Fino all'ultimo respiro",
+     "Gioca una finale acciaccato e vincetela."
+    ],
+    "fr-FR": [
+     "Jusqu'au dernier souffle",
+     "Joue une finale diminué et gagnez-la."
+    ]
+   }
+  },
+  {
+   "key": "d_party",
+   "name": "Fiesta · fiesta…",
+   "description": "Sal de fiesta la víspera de un partido y marca dos goles.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 225,
+   "icon": "ach_d_party.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Party · party…",
+     "Go partying the night before a match and score twice."
+    ],
+    "de-DE": [
+     "Party · Party…",
+     "Feier am Vorabend eines Spiels und erziele zwei Tore."
+    ],
+    "it-IT": [
+     "Festa · festa…",
+     "Esci a far festa la sera prima di una partita e segna due gol."
+    ],
+    "fr-FR": [
+     "La fête · la fête…",
+     "Fais la fête la veille d'un match et marque deux buts."
+    ]
+   }
+  },
+  {
+   "key": "d_loyal",
+   "name": "Fichaje del verano",
+   "description": "Rechaza la oferta de un grande por lealtad a tu club.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 226,
+   "icon": "ach_d_loyal.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Summer signing",
+     "Turn down a giant's offer out of loyalty to your club."
+    ],
+    "de-DE": [
+     "Transfer des Sommers",
+     "Lehne aus Treue zu deinem Verein das Angebot eines Topklubs ab."
+    ],
+    "it-IT": [
+     "Colpo dell'estate",
+     "Rifiuta l'offerta di un grande club per lealtà al tuo."
+    ],
+    "fr-FR": [
+     "Transfert de l'été",
+     "Refuse l'offre d'un grand club par loyauté envers le tien."
+    ]
+   }
+  },
+  {
+   "key": "d_house",
+   "name": "Doctor House",
+   "description": "Sigue el consejo del fisio frente al del médico y acierta.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 227,
+   "icon": "ach_d_house.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Doctor House",
+     "Follow the physio's advice over the doctor's and be proved right."
+    ],
+    "de-DE": [
+     "Doktor House",
+     "Folge dem Rat des Physios statt dem des Arztes und behalte recht."
+    ],
+    "it-IT": [
+     "Dottor House",
+     "Segui il consiglio del fisioterapista invece del medico e indovina."
+    ],
+    "fr-FR": [
+     "Docteur House",
+     "Suis le conseil du kiné plutôt que celui du médecin et vois juste."
+    ]
+   }
+  },
+  {
+   "key": "d_dance",
+   "name": "El último baile",
+   "description": "Juega tu partido homenaje.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 228,
+   "icon": "ach_d_dance.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The last dance",
+     "Play your testimonial match."
+    ],
+    "de-DE": [
+     "Der letzte Tanz",
+     "Bestreite dein Abschiedsspiel."
+    ],
+    "it-IT": [
+     "L'ultimo ballo",
+     "Gioca la tua partita d'addio."
+    ],
+    "fr-FR": [
+     "La dernière danse",
+     "Joue ton match jubilé."
+    ]
+   }
+  },
+  {
+   "key": "r_ref",
+   "name": "¡Váyase · señor árbitro!",
+   "description": "Ve 3 tarjetas rojas en una temporada.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 229,
+   "icon": "ach_r_ref.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Off you go · referee!",
+     "Get 3 red cards in a season."
+    ],
+    "de-DE": [
+     "Gehen Sie · Herr Schiedsrichter!",
+     "Sieh 3 Rote Karten in einer Saison."
+    ],
+    "it-IT": [
+     "Se ne vada · signor arbitro!",
+     "Prendi 3 cartellini rossi in una stagione."
+    ],
+    "fr-FR": [
+     "Allez-vous-en · monsieur l'arbitre !",
+     "Prends 3 cartons rouges en une saison."
+    ]
+   }
+  },
+  {
+   "key": "r_inf",
+   "name": "Influencer",
+   "description": "Llega a 10 millones de seguidores.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 230,
+   "icon": "ach_r_inf.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Influencer",
+     "Reach 10 million followers."
+    ],
+    "de-DE": [
+     "Influencer",
+     "Erreiche 10 Millionen Follower."
+    ],
+    "it-IT": [
+     "Influencer",
+     "Arriva a 10 milioni di follower."
+    ],
+    "fr-FR": [
+     "Influenceur",
+     "Atteins 10 millions d'abonnés."
+    ]
+   }
+  },
+  {
+   "key": "r_fans",
+   "name": "La grada es mía",
+   "description": "Mantén a la afición entregada durante toda una temporada.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 231,
+   "icon": "ach_r_fans.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The stands are mine",
+     "Keep the fans fully behind you for an entire season."
+    ],
+    "de-DE": [
+     "Die Tribüne gehört mir",
+     "Halte die Fans eine ganze Saison lang voll hinter dir."
+    ],
+    "it-IT": [
+     "La curva è mia",
+     "Tieni i tifosi dalla tua parte per un'intera stagione."
+    ],
+    "fr-FR": [
+     "Les tribunes sont à moi",
+     "Garde les supporters derrière toi pendant toute une saison."
+    ]
+   }
+  },
+  {
+   "key": "r_boo",
+   "name": "Pitada monumental",
+   "description": "Que te pite tu propia afición.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 232,
+   "icon": "ach_r_boo.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Monumental booing",
+     "Get booed by your own fans."
+    ],
+    "de-DE": [
+     "Gellendes Pfeifkonzert",
+     "Werde von den eigenen Fans ausgepfiffen."
+    ],
+    "it-IT": [
+     "Fischi monumentali",
+     "Fatti fischiare dai tuoi tifosi."
+    ],
+    "fr-FR": [
+     "Sifflets monumentaux",
+     "Fais-toi siffler par tes propres supporters."
+    ]
+   }
+  },
+  {
+   "key": "r_kid",
+   "name": "Ídolo infantil",
+   "description": "Visita a un niño hospitalizado.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 233,
+   "icon": "ach_r_kid.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Children's idol",
+     "Visit a child in hospital."
+    ],
+    "de-DE": [
+     "Kinderidol",
+     "Besuche ein Kind im Krankenhaus."
+    ],
+    "it-IT": [
+     "Idolo dei bambini",
+     "Fai visita a un bambino in ospedale."
+    ],
+    "fr-FR": [
+     "Idole des enfants",
+     "Rends visite à un enfant hospitalisé."
+    ]
+   }
+  },
+  {
+   "key": "r_cover",
+   "name": "Titular de portada",
+   "description": "Protagoniza 20 grandes titulares.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 234,
+   "icon": "ach_r_cover.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Front-page headline",
+     "Star in 20 big headlines."
+    ],
+    "de-DE": [
+     "Schlagzeile auf Seite eins",
+     "Sorge für 20 große Schlagzeilen."
+    ],
+    "it-IT": [
+     "Titolo da prima pagina",
+     "Sii protagonista di 20 grandi titoli."
+    ],
+    "fr-FR": [
+     "À la une",
+     "Fais 20 grands titres."
+    ]
+   }
+  },
+  {
+   "key": "r_ex",
+   "name": "Celebra con tu ex",
+   "description": "Celebra un gol ante uno de tus ex clubes.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 235,
+   "icon": "ach_r_ex.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Celebrate in front of your ex",
+     "Celebrate a goal against one of your former clubs."
+    ],
+    "de-DE": [
+     "Jubel vor dem Ex",
+     "Bejubel ein Tor gegen einen deiner Ex-Vereine."
+    ],
+    "it-IT": [
+     "Esulta davanti all'ex",
+     "Esulta dopo un gol contro uno dei tuoi ex club."
+    ],
+    "fr-FR": [
+     "Célèbre devant ton ex",
+     "Célèbre un but contre un de tes anciens clubs."
+    ]
+   }
+  },
+  {
+   "key": "r_tongue",
+   "name": "Sin pelos en la lengua",
+   "description": "Responde con dureza a la crítica de un exjugador.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 236,
+   "icon": "ach_r_tongue.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "No filter",
+     "Hit back hard at a former player's criticism."
+    ],
+    "de-DE": [
+     "Kein Blatt vor dem Mund",
+     "Antworte scharf auf die Kritik eines Ex-Profis."
+    ],
+    "it-IT": [
+     "Senza peli sulla lingua",
+     "Rispondi duramente alla critica di un ex giocatore."
+    ],
+    "fr-FR": [
+     "Sans langue de bois",
+     "Réponds sèchement à la critique d'un ancien joueur."
+    ]
+   }
+  },
+  {
+   "key": "pt_wish",
+   "name": "Pide un deseo",
+   "description": "Que tu mascota celebre contigo 100 goles.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 237,
+   "icon": "ach_pt_wish.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Make a wish",
+     "Have your pet celebrate 100 goals with you."
+    ],
+    "de-DE": [
+     "Wünsch dir was",
+     "Lass dein Haustier 100 Tore mit dir feiern."
+    ],
+    "it-IT": [
+     "Esprimi un desiderio",
+     "Fai festeggiare al tuo animale 100 gol con te."
+    ],
+    "fr-FR": [
+     "Fais un vœu",
+     "Fais célébrer 100 buts à ton animal avec toi."
+    ]
+   }
+  },
+  {
+   "key": "pt_bff",
+   "name": "Mejores amigos para siempre",
+   "description": "Llega al vínculo máximo con tu mascota.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 238,
+   "icon": "ach_pt_bff.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Best friends forever",
+     "Reach the maximum bond with your pet."
+    ],
+    "de-DE": [
+     "Beste Freunde für immer",
+     "Erreiche die maximale Bindung zu deinem Haustier."
+    ],
+    "it-IT": [
+     "Migliori amici per sempre",
+     "Raggiungi il legame massimo con il tuo animale."
+    ],
+    "fr-FR": [
+     "Meilleurs amis pour la vie",
+     "Atteins le lien maximal avec ton animal."
+    ]
+   }
+  },
+  {
+   "key": "pt_circus",
+   "name": "El circo del sol",
+   "description": "Tu mascota domina todos sus trucos.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 239,
+   "icon": "ach_pt_circus.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Circus of the sun",
+     "Your pet masters all its tricks."
+    ],
+    "de-DE": [
+     "Zirkus der Sonne",
+     "Dein Haustier beherrscht alle Tricks."
+    ],
+    "it-IT": [
+     "Il circo del sole",
+     "Il tuo animale padroneggia tutti i trucchi."
+    ],
+    "fr-FR": [
+     "Le cirque du soleil",
+     "Ton animal maîtrise tous ses tours."
+    ]
+   }
+  },
+  {
+   "key": "pt_queen",
+   "name": "Reina del desfile",
+   "description": "Gana un concurso nacional de mascotas.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 240,
+   "icon": "ach_pt_queen.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Queen of the parade",
+     "Win a national pet contest."
+    ],
+    "de-DE": [
+     "Königin der Parade",
+     "Gewinne einen nationalen Haustierwettbewerb."
+    ],
+    "it-IT": [
+     "Regina della sfilata",
+     "Vinci un concorso nazionale per animali."
+    ],
+    "fr-FR": [
+     "Reine du défilé",
+     "Gagne un concours national d'animaux."
+    ]
+   }
+  },
+  {
+   "key": "pt_walk",
+   "name": "Paseante incansable",
+   "description": "Sal de paseo 100 veces con tu mascota.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 241,
+   "icon": "ach_pt_walk.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Tireless walker",
+     "Go on 100 walks with your pet."
+    ],
+    "de-DE": [
+     "Unermüdlicher Spaziergänger",
+     "Geh 100-mal mit deinem Haustier spazieren."
+    ],
+    "it-IT": [
+     "Passeggiatore instancabile",
+     "Porta a spasso il tuo animale 100 volte."
+    ],
+    "fr-FR": [
+     "Promeneur infatigable",
+     "Promène ton animal 100 fois."
+    ]
+   }
+  },
+  {
+   "key": "pt_fashion",
+   "name": "Fashion week",
+   "description": "Reúne 15 accesorios distintos para tu mascota.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 242,
+   "icon": "ach_pt_fashion.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Fashion week",
+     "Collect 15 different accessories for your pet."
+    ],
+    "de-DE": [
+     "Fashion Week",
+     "Sammle 15 verschiedene Accessoires für dein Haustier."
+    ],
+    "it-IT": [
+     "Fashion week",
+     "Raccogli 15 accessori diversi per il tuo animale."
+    ],
+    "fr-FR": [
+     "Fashion week",
+     "Réunis 15 accessoires différents pour ton animal."
+    ]
+   }
+  },
+  {
+   "key": "pt_mascot",
+   "name": "Mascota oficial",
+   "description": "Tu mascota se convierte en la mascota del club.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 243,
+   "icon": "ach_pt_mascot.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Official mascot",
+     "Your pet becomes the club mascot."
+    ],
+    "de-DE": [
+     "Offizielles Maskottchen",
+     "Dein Haustier wird zum Vereinsmaskottchen."
+    ],
+    "it-IT": [
+     "Mascotte ufficiale",
+     "Il tuo animale diventa la mascotte del club."
+    ],
+    "fr-FR": [
+     "Mascotte officielle",
+     "Ton animal devient la mascotte du club."
+    ]
+   }
+  },
+  {
+   "key": "pt_ad",
+   "name": "Estrella de anuncio",
+   "description": "Rueda un anuncio con tu mascota.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 244,
+   "icon": "ach_pt_ad.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Advert star",
+     "Shoot an advert with your pet."
+    ],
+    "de-DE": [
+     "Werbestar",
+     "Dreh einen Werbespot mit deinem Haustier."
+    ],
+    "it-IT": [
+     "Star della pubblicità",
+     "Gira uno spot con il tuo animale."
+    ],
+    "fr-FR": [
+     "Star de la pub",
+     "Tourne une pub avec ton animal."
+    ]
+   }
+  },
+  {
+   "key": "pt_puddle",
+   "name": "Directo al charco",
+   "description": "Tu mascota salta en 10 charcos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 245,
+   "icon": "ach_pt_puddle.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Straight into the puddle",
+     "Your pet jumps into 10 puddles."
+    ],
+    "de-DE": [
+     "Direkt in die Pfütze",
+     "Dein Haustier springt in 10 Pfützen."
+    ],
+    "it-IT": [
+     "Dritto nella pozzanghera",
+     "Il tuo animale salta in 10 pozzanghere."
+    ],
+    "fr-FR": [
+     "Droit dans la flaque",
+     "Ton animal saute dans 10 flaques."
+    ]
+   }
+  },
+  {
+   "key": "mi_target",
+   "name": "Rey de la escuadra",
+   "description": "Acierta 20 dianas en el entrenamiento.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 246,
+   "icon": "ach_mi_target.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "King of the top corner",
+     "Hit 20 targets in training."
+    ],
+    "de-DE": [
+     "König des Winkels",
+     "Triff im Training 20 Zielscheiben."
+    ],
+    "it-IT": [
+     "Re dell'incrocio",
+     "Colpisci 20 bersagli in allenamento."
+    ],
+    "fr-FR": [
+     "Roi de la lucarne",
+     "Touche 20 cibles à l'entraînement."
+    ]
+   }
+  },
+  {
+   "key": "mi_pulse",
+   "name": "Pulso de cirujano",
+   "description": "Marca 5 penaltis seguidos en el entrenamiento.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 247,
+   "icon": "ach_mi_pulse.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Surgeon's hand",
+     "Score 5 penalties in a row in training."
+    ],
+    "de-DE": [
+     "Chirurgenhand",
+     "Verwandle im Training 5 Elfmeter in Folge."
+    ],
+    "it-IT": [
+     "Mano da chirurgo",
+     "Segna 5 rigori di fila in allenamento."
+    ],
+    "fr-FR": [
+     "Main de chirurgien",
+     "Marque 5 penaltys d'affilée à l'entraînement."
+    ]
+   }
+  },
+  {
+   "key": "mi_wall",
+   "name": "Barrera humana",
+   "description": "Para 5 faltas seguidas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 248,
+   "icon": "ach_mi_wall.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Human wall",
+     "Save 5 free kicks in a row."
+    ],
+    "de-DE": [
+     "Menschliche Mauer",
+     "Halte 5 Freistöße in Folge."
+    ],
+    "it-IT": [
+     "Barriera umana",
+     "Para 5 punizioni di fila."
+    ],
+    "fr-FR": [
+     "Mur humain",
+     "Arrête 5 coups francs d'affilée."
+    ]
+   }
+  },
+  {
+   "key": "mi_final",
+   "name": "Héroe de la final",
+   "description": "Para un penalti en una final.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 249,
+   "icon": "ach_mi_final.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Final hero",
+     "Save a penalty in a final."
+    ],
+    "de-DE": [
+     "Held des Finals",
+     "Halte einen Elfer in einem Finale."
+    ],
+    "it-IT": [
+     "Eroe della finale",
+     "Para un rigore in una finale."
+    ],
+    "fr-FR": [
+     "Héros de la finale",
+     "Arrête un penalty en finale."
+    ]
+   }
+  },
+  {
+   "key": "mi_ch",
+   "name": "Reto superado",
+   "description": "Supera los 5 retos de balón parado.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 250,
+   "icon": "ach_mi_ch.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Challenge complete",
+     "Complete the 5 set-piece challenges."
+    ],
+    "de-DE": [
+     "Herausforderung gemeistert",
+     "Meistere die 5 Standard-Herausforderungen."
+    ],
+    "it-IT": [
+     "Sfida superata",
+     "Supera le 5 sfide su palla inattiva."
+    ],
+    "fr-FR": [
+     "Défi relevé",
+     "Relève les 5 défis de coups de pied arrêtés."
+    ]
+   }
+  },
+  {
+   "key": "mi_postin",
+   "name": "Palo y dentro",
+   "description": "Marca después de tocar el poste.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 251,
+   "icon": "ach_mi_postin.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Post and in",
+     "Score after hitting the post."
+    ],
+    "de-DE": [
+     "Pfosten und drin",
+     "Triff nach Pfostenkontakt."
+    ],
+    "it-IT": [
+     "Palo e dentro",
+     "Segna dopo aver colpito il palo."
+    ],
+    "fr-FR": [
+     "Poteau rentrant",
+     "Marque après avoir touché le poteau."
+    ]
+   }
+  },
+  {
+   "key": "mi_posts",
+   "name": "Al palo · otra vez",
+   "description": "Da 10 veces al palo en penaltis o faltas.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 252,
+   "icon": "ach_mi_posts.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Off the post · again",
+     "Hit the woodwork 10 times from penalties or free kicks."
+    ],
+    "de-DE": [
+     "Schon wieder Pfosten",
+     "Triff bei Elfmetern oder Freistößen 10-mal Pfosten oder Latte."
+    ],
+    "it-IT": [
+     "Palo · di nuovo",
+     "Colpisci 10 volte il legno su rigori o punizioni."
+    ],
+    "fr-FR": [
+     "Encore le poteau",
+     "Touche 10 fois les montants sur penaltys ou coups francs."
+    ]
+   }
+  },
+  {
+   "key": "mi_speed",
+   "name": "Speedrunner",
+   "description": "Supera a la primera un reto de falta directa.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 253,
+   "icon": "ach_mi_speed.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Speedrunner",
+     "Complete a free-kick challenge at the first attempt."
+    ],
+    "de-DE": [
+     "Speedrunner",
+     "Meistere eine Freistoß-Herausforderung im ersten Versuch."
+    ],
+    "it-IT": [
+     "Speedrunner",
+     "Supera al primo tentativo una sfida su punizione."
+    ],
+    "fr-FR": [
+     "Speedrunner",
+     "Réussis un défi de coup franc du premier coup."
+    ]
+   }
+  },
+  {
+   "key": "sh_first",
+   "name": "Primera compra",
+   "description": "Compra tu primera pieza de equipamiento.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 254,
+   "icon": "ach_sh_first.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "First purchase",
+     "Buy your first piece of gear."
+    ],
+    "de-DE": [
+     "Erster Kauf",
+     "Kauf dein erstes Ausrüstungsteil."
+    ],
+    "it-IT": [
+     "Primo acquisto",
+     "Compra il tuo primo pezzo di equipaggiamento."
+    ],
+    "fr-FR": [
+     "Premier achat",
+     "Achète ta première pièce d'équipement."
+    ]
+   }
+  },
+  {
+   "key": "sh_set",
+   "name": "De punta en blanco",
+   "description": "Lleva un conjunto completo de una misma línea.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 255,
+   "icon": "ach_sh_set.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Dressed to the nines",
+     "Wear a complete set from the same line."
+    ],
+    "de-DE": [
+     "Wie aus dem Ei gepellt",
+     "Trag ein komplettes Set derselben Linie."
+    ],
+    "it-IT": [
+     "Tirato a lucido",
+     "Indossa un set completo della stessa linea."
+    ],
+    "fr-FR": [
+     "Tiré à quatre épingles",
+     "Porte un ensemble complet d'une même gamme."
+    ]
+   }
+  },
+  {
+   "key": "sh_leg",
+   "name": "Elegido por los dioses",
+   "description": "Consigue una pieza de tier Leyenda.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 256,
+   "icon": "ach_sh_leg.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Chosen by the gods",
+     "Get a Legend-tier piece."
+    ],
+    "de-DE": [
+     "Von den Göttern erwählt",
+     "Ergattere ein Teil der Stufe Legende."
+    ],
+    "it-IT": [
+     "Scelto dagli dei",
+     "Ottieni un pezzo di livello Leggenda."
+    ],
+    "fr-FR": [
+     "Élu des dieux",
+     "Obtiens une pièce de rang Légende."
+    ]
+   }
+  },
+  {
+   "key": "sh_gold",
+   "name": "Dorado de pies a cabeza",
+   "description": "Equipa todas tus ranuras con piezas Oro o superiores.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 257,
+   "icon": "ach_sh_gold.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Gold from head to toe",
+     "Fill every slot with Gold-tier or better pieces."
+    ],
+    "de-DE": [
+     "Von Kopf bis Fuß in Gold",
+     "Belege alle Plätze mit Teilen der Stufe Gold oder höher."
+    ],
+    "it-IT": [
+     "Dorato dalla testa ai piedi",
+     "Equipaggia tutti gli slot con pezzi Oro o superiori."
+    ],
+    "fr-FR": [
+     "Doré de la tête aux pieds",
+     "Équipe tous tes emplacements avec des pièces Or ou mieux."
+    ]
+   }
+  },
+  {
+   "key": "sh_deal",
+   "name": "Ganga",
+   "description": "Compra algo en oferta.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 258,
+   "icon": "ach_sh_deal.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Bargain",
+     "Buy something on offer."
+    ],
+    "de-DE": [
+     "Schnäppchen",
+     "Kauf etwas im Angebot."
+    ],
+    "it-IT": [
+     "Affare",
+     "Compra qualcosa in offerta."
+    ],
+    "fr-FR": [
+     "Bonne affaire",
+     "Achète un article en promotion."
+    ]
+   }
+  },
+  {
+   "key": "sh_boots",
+   "name": "Coleccionista de botas",
+   "description": "Consigue 10 botas distintas.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 259,
+   "icon": "ach_sh_boots.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Boot collector",
+     "Get 10 different boots."
+    ],
+    "de-DE": [
+     "Schuhsammler",
+     "Ergattere 10 verschiedene Schuhe."
+    ],
+    "it-IT": [
+     "Collezionista di scarpe",
+     "Ottieni 10 scarpe diverse."
+    ],
+    "fr-FR": [
+     "Collectionneur de crampons",
+     "Obtiens 10 paires de crampons différentes."
+    ]
+   }
+  },
+  {
+   "key": "sh_up",
+   "name": "Mejora continua",
+   "description": "Mejora 10 veces el tier de una pieza.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 260,
+   "icon": "ach_sh_up.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Constant improvement",
+     "Upgrade a piece's tier 10 times."
+    ],
+    "de-DE": [
+     "Ständige Verbesserung",
+     "Verbessere 10-mal die Stufe eines Teils."
+    ],
+    "it-IT": [
+     "Miglioramento continuo",
+     "Migliora 10 volte il livello di un pezzo."
+    ],
+    "fr-FR": [
+     "Amélioration continue",
+     "Améliore 10 fois le rang d'une pièce."
+    ]
+   }
+  },
+  {
+   "key": "sh_eye",
+   "name": "Ojo de halcón",
+   "description": "Compra el destacado del día en 7 días distintos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 261,
+   "icon": "ach_sh_eye.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Hawk-eye",
+     "Buy the daily featured item on 7 different days."
+    ],
+    "de-DE": [
+     "Falkenauge",
+     "Kauf an 7 verschiedenen Tagen das Tagesangebot."
+    ],
+    "it-IT": [
+     "Occhio di falco",
+     "Compra l'articolo in evidenza del giorno in 7 giorni diversi."
+    ],
+    "fr-FR": [
+     "Œil de faucon",
+     "Achète l'article vedette du jour sur 7 jours différents."
+    ]
+   }
+  },
+  {
+   "key": "o_sparta",
+   "name": "Esto es Esparta",
+   "description": "Gana un partido decisivo en el que te han expulsado.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": true,
+   "order": 262,
+   "icon": "ach_o_sparta.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "This is Sparta",
+     "Win a decisive match in which you were sent off."
+    ],
+    "de-DE": [
+     "Das ist Sparta",
+     "Gewinne ein entscheidendes Spiel · in dem du vom Platz geflogen bist."
+    ],
+    "it-IT": [
+     "Questa è Sparta",
+     "Vinci una partita decisiva in cui sei stato espulso."
+    ],
+    "fr-FR": [
+     "C'est Sparte",
+     "Gagne un match décisif dans lequel tu as été expulsé."
+    ]
+   }
+  },
+  {
+   "key": "o_zero",
+   "name": "¡Multiplícate por cero!",
+   "description": "Pierde un partido 0-5.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 263,
+   "icon": "ach_o_zero.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Multiply yourself by zero!",
+     "Lose a match 0-5."
+    ],
+    "de-DE": [
+     "Multiplizier dich mit null!",
+     "Verlier ein Spiel 0:5."
+    ],
+    "it-IT": [
+     "Moltiplicati per zero!",
+     "Perdi una partita 0-5."
+    ],
+    "fr-FR": [
+     "Multiplie-toi par zéro !",
+     "Perds un match 0-5."
+    ]
+   }
+  },
+  {
+   "key": "o_rain",
+   "name": "Aquí no hay quien juegue",
+   "description": "Juega 7 partidos seguidos con lluvia.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 264,
+   "icon": "ach_o_rain.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Unplayable",
+     "Play 7 matches in a row in the rain."
+    ],
+    "de-DE": [
+     "Hier kann keiner spielen",
+     "Spiel 7 Partien in Folge im Regen."
+    ],
+    "it-IT": [
+     "Qui non si può giocare",
+     "Gioca 7 partite di fila sotto la pioggia."
+    ],
+    "fr-FR": [
+     "Injouable",
+     "Joue 7 matchs d'affilée sous la pluie."
+    ]
+   }
+  },
+  {
+   "key": "o_lost",
+   "name": "4 · 8 · 15 · 16 · 23 · 42",
+   "description": "Lleva todos esos dorsales a lo largo de tu carrera.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": true,
+   "order": 265,
+   "icon": "ach_o_lost.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "4 · 8 · 15 · 16 · 23 · 42",
+     "Wear all those shirt numbers over your career."
+    ],
+    "de-DE": [
+     "4 · 8 · 15 · 16 · 23 · 42",
+     "Trag im Laufe deiner Karriere all diese Rückennummern."
+    ],
+    "it-IT": [
+     "4 · 8 · 15 · 16 · 23 · 42",
+     "Indossa tutti questi numeri durante la carriera."
+    ],
+    "fr-FR": [
+     "4 · 8 · 15 · 16 · 23 · 42",
+     "Porte tous ces numéros au cours de ta carrière."
+    ]
+   }
+  },
+  {
+   "key": "o_ghost",
+   "name": "Gol fantasma",
+   "description": "Marca un gol que confirma la tecnología de gol.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": true,
+   "order": 266,
+   "icon": "ach_o_ghost.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Ghost goal",
+     "Score a goal confirmed by goal-line technology."
+    ],
+    "de-DE": [
+     "Phantomtor",
+     "Erziele ein Tor · das die Torlinientechnik bestätigt."
+    ],
+    "it-IT": [
+     "Gol fantasma",
+     "Segna un gol confermato dalla goal-line technology."
+    ],
+    "fr-FR": [
+     "But fantôme",
+     "Marque un but validé par la technologie sur la ligne."
+    ]
+   }
+  },
+  {
+   "key": "o_invis",
+   "name": "El amigo invisible",
+   "description": "Termina un partido con una nota de 4 ·5 o menos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 267,
+   "icon": "ach_o_invis.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "The invisible friend",
+     "Finish a match with a rating of 4.5 or lower."
+    ],
+    "de-DE": [
+     "Der unsichtbare Freund",
+     "Beende ein Spiel mit einer Note von 4 ·5 oder schlechter."
+    ],
+    "it-IT": [
+     "L'amico invisibile",
+     "Chiudi una partita con un voto di 4 ·5 o meno."
+    ],
+    "fr-FR": [
+     "L'ami invisible",
+     "Termine un match avec une note de 4 ·5 ou moins."
+    ]
+   }
+  },
+  {
+   "key": "o_party",
+   "name": "Doble fiesta",
+   "description": "Marca en tu partido oficial número 100.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 268,
+   "icon": "ach_o_party.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Double celebration",
+     "Score in your 100th official match."
+    ],
+    "de-DE": [
+     "Doppelt feiern",
+     "Triff in deinem 100. Pflichtspiel."
+    ],
+    "it-IT": [
+     "Doppia festa",
+     "Segna nella tua 100ª partita ufficiale."
+    ],
+    "fr-FR": [
+     "Double fête",
+     "Marque lors de ton 100e match officiel."
+    ]
+   }
+  },
+  {
+   "key": "o_zombie",
+   "name": "Noche de muertos vivientes",
+   "description": "Empata un partido que perdíais por tres goles al descanso.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": true,
+   "order": 269,
+   "icon": "ach_o_zombie.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Night of the living dead",
+     "Draw a match you were losing by three goals at half-time."
+    ],
+    "de-DE": [
+     "Die Nacht der lebenden Toten",
+     "Hol ein Unentschieden in einem Spiel · in dem ihr zur Pause mit drei Toren hinten lagt."
+    ],
+    "it-IT": [
+     "La notte dei morti viventi",
+     "Pareggia una partita che perdevate di tre gol all'intervallo."
+    ],
+    "fr-FR": [
+     "La nuit des morts-vivants",
+     "Arrache le nul dans un match où vous étiez menés de trois buts à la pause."
+    ]
+   }
+  },
+  {
+   "key": "o_redeb",
+   "name": "Cosas que pasan",
+   "description": "Que te expulsen en tu debut.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 270,
+   "icon": "ach_o_redeb.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "These things happen",
+     "Get sent off on your debut."
+    ],
+    "de-DE": [
+     "Kann passieren",
+     "Flieg bei deinem Debüt vom Platz."
+    ],
+    "it-IT": [
+     "Sono cose che capitano",
+     "Fatti espellere al debutto."
+    ],
+    "fr-FR": [
+     "Ça arrive",
+     "Fais-toi expulser lors de tes débuts."
+    ]
+   }
+  },
+  {
+   "key": "o_ahfutbol",
+   "name": "Ah · el fútbol",
+   "description": "Pierde una final con un gol tuyo en propia puerta.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 271,
+   "icon": "ach_o_ahfutbol.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Ah · football",
+     "Lose a final with an own goal of yours."
+    ],
+    "de-DE": [
+     "Ach · Fußball",
+     "Verlier ein Finale mit einem Eigentor von dir."
+    ],
+    "it-IT": [
+     "Ah · il calcio",
+     "Perdi una finale con un tuo autogol."
+    ],
+    "fr-FR": [
+     "Ah · le football",
+     "Perds une finale avec un but contre ton camp."
+    ]
+   }
+  },
+  {
+   "key": "m_self",
+   "name": "Hecho a sí mismo",
+   "description": "Gana una liga con un equipo recién ascendido.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 272,
+   "icon": "ach_m_self.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Self-made",
+     "Win a league with a newly promoted side."
+    ],
+    "de-DE": [
+     "Selfmade",
+     "Gewinne eine Liga mit einem Aufsteiger."
+    ],
+    "it-IT": [
+     "Fatto da sé",
+     "Vinci un campionato con una neopromossa."
+    ],
+    "fr-FR": [
+     "Self-made",
+     "Remporte un championnat avec un promu."
+    ]
+   }
+  },
+  {
+   "key": "m_youth",
+   "name": "La cantera de mi barrio",
+   "description": "Haz debutar a 20 canteranos.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 273,
+   "icon": "ach_m_youth.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "My neighbourhood academy",
+     "Hand debuts to 20 academy players."
+    ],
+    "de-DE": [
+     "Die Jugend aus meinem Viertel",
+     "Lass 20 Jugendspieler debütieren."
+    ],
+    "it-IT": [
+     "Il vivaio del mio quartiere",
+     "Fai debuttare 20 giovani del vivaio."
+    ],
+    "fr-FR": [
+     "Le centre de formation de mon quartier",
+     "Fais débuter 20 jeunes du centre de formation."
+    ]
+   }
+  },
+  {
+   "key": "m_europe",
+   "name": "Rey del continente",
+   "description": "Gana 3 títulos continentales como míster.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 274,
+   "icon": "ach_m_europe.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "King of the continent",
+     "Win 3 continental titles as a manager."
+    ],
+    "de-DE": [
+     "König des Kontinents",
+     "Gewinne als Trainer 3 kontinentale Titel."
+    ],
+    "it-IT": [
+     "Re del continente",
+     "Vinci 3 titoli continentali da allenatore."
+    ],
+    "fr-FR": [
+     "Roi du continent",
+     "Remporte 3 titres continentaux en tant qu'entraîneur."
+    ]
+   }
+  },
+  {
+   "key": "m_where",
+   "name": "¿Dónde está mi equipo?",
+   "description": "Gana un partido de liga con 5 jugadores fuera de su línea natural.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": true,
+   "order": 275,
+   "icon": "ach_m_where.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Where's my team?",
+     "Win a league match with 5 players out of their natural line."
+    ],
+    "de-DE": [
+     "Wo ist mein Team?",
+     "Gewinne ein Ligaspiel mit 5 Spielern außerhalb ihrer gewohnten Reihe."
+    ],
+    "it-IT": [
+     "Dov'è la mia squadra?",
+     "Vinci una partita di campionato con 5 giocatori fuori dal loro reparto naturale."
+    ],
+    "fr-FR": [
+     "Où est mon équipe ?",
+     "Gagne un match de championnat avec 5 joueurs hors de leur ligne naturelle."
+    ]
+   }
+  },
+  {
+   "key": "m_change",
+   "name": "El cambio perfecto",
+   "description": "Gana un partido en directo tras hacer tres cambios.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 276,
+   "icon": "ach_m_change.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "The perfect substitution",
+     "Win a live match after making three substitutions."
+    ],
+    "de-DE": [
+     "Der perfekte Wechsel",
+     "Gewinne ein Live-Spiel nach drei Wechseln."
+    ],
+    "it-IT": [
+     "Il cambio perfetto",
+     "Vinci una partita in diretta dopo aver fatto tre cambi."
+    ],
+    "fr-FR": [
+     "Le changement parfait",
+     "Gagne un match en direct après trois changements."
+    ]
+   }
+  },
+  {
+   "key": "m_arms",
+   "name": "Brazos cruzados",
+   "description": "Dirige 100 partidos.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": false,
+   "order": 277,
+   "icon": "ach_m_arms.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Arms folded",
+     "Manage 100 matches."
+    ],
+    "de-DE": [
+     "Verschränkte Arme",
+     "Betreue 100 Spiele."
+    ],
+    "it-IT": [
+     "Braccia conserte",
+     "Dirigi 100 partite."
+    ],
+    "fr-FR": [
+     "Bras croisés",
+     "Dirige 100 matchs."
+    ]
+   }
+  },
+  {
+   "key": "m_storm",
+   "name": "Bronca histórica",
+   "description": "Pierde 3 partidos seguidos por tres goles o más.",
+   "points": 5,
+   "rarity": "b",
+   "hidden": true,
+   "order": 278,
+   "icon": "ach_m_storm.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Historic dressing-down",
+     "Lose 3 matches in a row by three goals or more."
+    ],
+    "de-DE": [
+     "Historische Standpauke",
+     "Verlier 3 Spiele in Folge mit drei oder mehr Toren Unterschied."
+    ],
+    "it-IT": [
+     "Strigliata storica",
+     "Perdi 3 partite di fila con tre o più gol di scarto."
+    ],
+    "fr-FR": [
+     "Savon historique",
+     "Perds 3 matchs d'affilée par trois buts d'écart ou plus."
+    ]
+   }
+  },
+  {
+   "key": "m_sky",
+   "name": "Del banquillo al cielo",
+   "description": "Asciende dos temporadas seguidas.",
+   "points": 10,
+   "rarity": "g",
+   "hidden": false,
+   "order": 279,
+   "icon": "ach_m_sky.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "From the dugout to the sky",
+     "Win promotion in two consecutive seasons."
+    ],
+    "de-DE": [
+     "Von der Bank in den Himmel",
+     "Steig zwei Saisons in Folge auf."
+    ],
+    "it-IT": [
+     "Dalla panchina al cielo",
+     "Ottieni due promozioni consecutive."
+    ],
+    "fr-FR": [
+     "Du banc au septième ciel",
+     "Monte deux saisons de suite."
+    ]
+   }
+  },
+  {
+   "key": "m_same",
+   "name": "Mismo vestuario · otra silla",
+   "description": "Entrena a un club en el que jugaste.",
+   "points": 5,
+   "rarity": "s",
+   "hidden": false,
+   "order": 280,
+   "icon": "ach_m_same.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Same dressing room · different chair",
+     "Manage a club you played for."
+    ],
+    "de-DE": [
+     "Gleiche Kabine · anderer Stuhl",
+     "Trainiere einen Verein · für den du gespielt hast."
+    ],
+    "it-IT": [
+     "Stesso spogliatoio · altra sedia",
+     "Allena un club in cui hai giocato."
+    ],
+    "fr-FR": [
+     "Même vestiaire · autre chaise",
+     "Entraîne un club où tu as joué."
+    ]
+   }
+  },
+  {
+   "key": "plat_p",
+   "name": "Leyenda total",
+   "description": "Consigue todos los trofeos de jugador.",
+   "points": 50,
+   "rarity": "p",
+   "hidden": false,
+   "order": 281,
+   "icon": "ach_plat_p.png",
+   "group": "p",
+   "translations": {
+    "en-US": [
+     "Total legend",
+     "Earn every player trophy."
+    ],
+    "de-DE": [
+     "Totale Legende",
+     "Hol dir alle Spielertrophäen."
+    ],
+    "it-IT": [
+     "Leggenda totale",
+     "Ottieni tutti i trofei da giocatore."
+    ],
+    "fr-FR": [
+     "Légende totale",
+     "Obtiens tous les trophées de joueur."
+    ]
+   }
+  },
+  {
+   "key": "plat_m",
+   "name": "Mister Universo",
+   "description": "Consigue todos los trofeos de entrenador.",
+   "points": 50,
+   "rarity": "p",
+   "hidden": false,
+   "order": 282,
+   "icon": "ach_plat_m.png",
+   "group": "m",
+   "translations": {
+    "en-US": [
+     "Mister Universe",
+     "Earn every manager trophy."
+    ],
+    "de-DE": [
+     "Mister Universum",
+     "Hol dir alle Trainertrophäen."
+    ],
+    "it-IT": [
+     "Mister Universo",
+     "Ottieni tutti i trofei da allenatore."
+    ],
+    "fr-FR": [
+     "Mister Univers",
+     "Obtiens tous les trophées d'entraîneur."
+    ]
+   }
+  }
+ ]
+}

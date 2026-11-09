@@ -105,11 +105,11 @@
   /* aviso al desbloquear: se comprueba después de cada pintado */
   U.add("after", function () {
     if (!S || UIX.ui().view !== "game") return;
-    var nw = achCheck();
+    var raw = achCheck(), nw = raw.filter(function (a) { return !achSeenEver(a[0]); }); /* solo se avisa la primera vez en el dispositivo */
     if (S.achN0 != null) { var n0 = S.achN0; delete S.achN0; gSync(); if (n0) setTimeout(function () { U.toast(trn(n0, "Ya tienes {n} logro: míralo en «Más».", "Ya tienes {n} logros: míralos en «Más».")); }, 400); U.persist(); return; }
-    if (gSync() && !nw.length) return;
+    gSync();
+    if (raw.length) U.persist();
     if (!nw.length) return;
-    U.persist();
     if (U.gxNotify) { U.gxNotify(); return; }
     nw.forEach(function (a, i) { U.toast(a[1] + " " + tr("Logro: {n}", {n: tr(a[2])})); if (i === 0) U.edgeFlash(true); });
   });

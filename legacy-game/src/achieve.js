@@ -181,6 +181,8 @@ function achList(showAllEra) {
   return l;
 }
 function achCtx() { return {t: S.mode === "mgr" ? achMgrTot() : achPlayerTot()}; }
+/* logros ya conseguidos alguna vez en este dispositivo (en cualquier partida): solo se avisa la primera vez */
+function achSeenEver(id) { try { var g = JSON.parse(localStorage.getItem("camino.achG") || "{}"); return !!(g && g[id]); } catch (e) { return false; } }
 /* comprueba y devuelve los logros nuevos; la primera vez en una partida antigua no avisa */
 function achCheck() {
   if (!S || (S.mode === "mgr" ? !S.m : !S.p)) return [];
