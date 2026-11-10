@@ -17,6 +17,7 @@
     table: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 9v11"/></svg>',
     trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8M9.5 18h5"/></svg>',
     globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>',
+    bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>',
     swap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14l-4-4M20 16H6l4 4"/></svg>',
     board: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 4v13M8 21l2-4M16 21l-2-4"/><circle cx="12" cy="10.5" r="2"/></svg>'
   };
@@ -38,7 +39,7 @@
   /* ---------- extensiones: módulos de interfaz en ficheros aparte (ui-*.js) se enganchan aquí ----------
      UIX.actions[accion] = function (boton, valor, id) · UIX.sheets[k] = function (sheet) → html
      UIX.pend[k] = function (x) → html de la decisión · UIX.slots[sitio] = [function () → html]
-     sitios: home, mainhome, menu, carrera, jugador, club, plantilla, mercado, hist, histM, create, after (tras cada render) */
+     sitios: home, mainhome, modes, menu, carrera, jugador, club, plantilla, mercado, hist, histM, create, after (tras cada render) */
   var UIX = window.UIX = {actions: {}, sheets: {}, pend: {}, slots: {}, hk: {}};
   UIX.getSheet = function () { return UI.sheet; };
   UIX.setSheet = function (sheet) { UI.sheet = sheet; renderSheet(); };
@@ -68,6 +69,61 @@
   function repTier(r) { return r >= 80 ? "e" : r >= 60 ? "g" : r >= 40 ? "s" : "b"; }
   function barCls(v) { return v < 35 ? "lo" : v < 60 ? "mid" : "hi"; }
   function isMgr() { return !!S && S.mode === "mgr"; }
+  function syncSelectedLanguage() {
+    var selected = savedLang();
+    if (selected && selected !== LANG) setLang(selected);
+  }
+  var RATE_STATE_KEY = "camino.rating-prompt.v1";
+  var RATE_AFTER_PLAY_MS = 15 * 60 * 1000;
+  var RATE_SNOOZE_MS = 14 * 24 * 60 * 60 * 1000;
+  var RATE_MAX_PROMPTS = 3;
+  var ratePromptTimer = null, ratePlayTimer = null;
+  function loadRateState() {
+    try {
+      var saved = JSON.parse(localStorage.getItem(RATE_STATE_KEY) || "null");
+      return saved && typeof saved === "object" ? {
+        playedMs: Math.max(0, Number(saved.playedMs) || 0),
+        snoozeUntil: Math.max(0, Number(saved.snoozeUntil) || 0),
+        prompts: Math.max(0, Math.floor(Number(saved.prompts) || 0)),
+        done: saved.done === true
+      } : {playedMs: 0, snoozeUntil: 0, prompts: 0, done: false};
+    } catch (e) { return {playedMs: 0, snoozeUntil: 0, prompts: 0, done: false}; }
+  }
+  var rateState = loadRateState();
+  function saveRateState() {
+    try { localStorage.setItem(RATE_STATE_KEY, JSON.stringify(rateState)); } catch (e) {}
+  }
+  function ratePromptDue() {
+    return !rateState.done && rateState.prompts < RATE_MAX_PROMPTS && rateState.playedMs >= RATE_AFTER_PLAY_MS && Date.now() >= rateState.snoozeUntil;
+  }
+  function queueRatePrompt(delay) {
+    if (!ratePromptDue() || !window.AndroidBridge || UI.view !== "home" || UI.sheet || document.visibilityState !== "visible") {
+      clearTimeout(ratePromptTimer); ratePromptTimer = null; return;
+    }
+    if (ratePromptTimer) return;
+    ratePromptTimer = setTimeout(function () {
+      ratePromptTimer = null;
+      syncSelectedLanguage();
+      if (!ratePromptDue() || !window.AndroidBridge || UI.view !== "home" || UI.sheet || document.visibilityState !== "visible") return;
+      try {
+        if (window.AndroidBridge.isFullScreenAdShowing && window.AndroidBridge.isFullScreenAdShowing()) {
+          queueRatePrompt(5000); return;
+        }
+      } catch (e) { queueRatePrompt(5000); return; }
+      rateState.prompts++;
+      rateState.snoozeUntil = Date.now() + RATE_SNOOZE_MS;
+      saveRateState();
+      UI.sheet = {k: "rate"};
+      renderSheet();
+    }, Math.max(1000, delay || 2500));
+  }
+  function countActivePlaytime() {
+    if (window.AndroidBridge && document.visibilityState === "visible" && UI.view === "game" && S && !UI.sheet) {
+      rateState.playedMs = Math.min(rateState.playedMs + 15000, 365 * 24 * 60 * 60 * 1000);
+      saveRateState();
+    }
+    if (UI.view === "home" && !UI.sheet) queueRatePrompt();
+  }
   function myClub() { return isMgr() ? S.m.club : S.p.club; }
   function myNat() { return isMgr() ? -1 : S.p.inat; }
   /* avisos breves en cola: nunca se pisan dos a la vez; los repetidos seguidos se descartan */
@@ -144,7 +200,7 @@
     flush: function () {
       var self = this;
       clearTimeout(this.ptimer);
-      if (!S) return Promise.resolve();
+      if (!S || (S.era && S.era.active)) return Promise.resolve();
       if (this.busy) { this.again = true; return this.busyP; }
       this.busy = true; this.again = false;
       var json = serialize(), id = S.uid, ts = S.ts || Date.now();
@@ -286,7 +342,7 @@
   }
 
   /* ---------- acciones del juego ---------- */
-  function persist() { Store.saveLocal(); }
+  function persist() { if (S && S.era && typeof EraStore !== "undefined") { EraStore.save(); return; } Store.saveLocal(); }
   /* ---------- efectos: bordes de color y confeti ---------- */
   var LANG_FLAG = {es: "ES", en: "GB", de: "DE", it: "IT", fr: "FR"};
   function calm() { if (typeof Anim !== "undefined") return Anim.reduced(); try { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
@@ -332,6 +388,11 @@
     var mgr = isMgr();
     return {tro: mgr ? S.m.trophies.length : (S.p ? S.p.trophies.length : 0), bdo: !mgr && S.p ? S.p.awards.filter(function (a) { return a.k === "bdo"; }).length : 0};
   }
+  function trophyCompName(t) { return typeof eraTrophyName === "function" ? eraTrophyName(t) : t.n; }
+  function leagueNameForSeason(li, year) {
+    if (S && S.era && S.era.active && W.lg[li] && typeof eraLeagueName === "function") return eraLeagueName(W.lg[li].id, W.lg[li].n, year);
+    return lgName(li);
+  }
   /* celebración de un título: ventana con el trofeo, la temporada y lo que gana el club */
   function trophyModal() {
     if (!S || !S.troQ || !S.troQ.length || document.getElementById("tromod")) return;
@@ -353,7 +414,7 @@
     var who = mgr ? clubName(t.club) : t.nat >= 0 ? natName(t.nat) : clubName(t.team);
     var el = document.createElement("div"); el.id = "tromod"; el.className = "tromod"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
     el.innerHTML = '<div class="tropanel"><div class="trorays" aria-hidden="true"></div><div class="trokick">' + h(tr("¡Campeones!")) + '</div><div class="troimg">' + (typeof trophySVG === "function" ? trophySVG(t.k, 132) : "🏆") + "</div>" +
-      "<h2>" + h(trComp(t.n)) + '</h2><div class="troseason">' + h(t.s || "") + " · " + h(who) + '</div><div class="chips">' + chips.join("") + '</div><button class="go" data-a="troclose">' + h(tr("¡A celebrarlo!")) + "</button></div>";
+      "<h2>" + h(trComp(trophyCompName(t))) + '</h2><div class="troseason">' + h(t.s || "") + " · " + h(who) + '</div><div class="chips">' + chips.join("") + '</div><button class="go" data-a="troclose">' + h(tr("¡A celebrarlo!")) + "</button></div>";
     document.body.appendChild(el);
     if (typeof Anim !== "undefined") Anim.haptic("big");
     confetti(true);
@@ -365,21 +426,47 @@
     if (a.bdo > b.bdo) { confetti(true); setTimeout(function () { confetti(true); }, 700); }
     else if (a.tro > b.tro) confetti(false);
   }
-  function doAdvance() {
+  function waitForPreMatchAd(matchState, phase) {
+    var startedAt = Date.now(), sawAd = false;
+    function check() {
+      var showing = false, bridge = window.AndroidBridge;
+      try { showing = !!(bridge && bridge.isFullScreenAdShowing && bridge.isFullScreenAdShowing()); } catch (e) {}
+      if (showing) sawAd = true;
+      var elapsed = Date.now() - startedAt;
+      if ((sawAd && !showing) || (!sawAd && elapsed >= 900) || elapsed >= 120000) {
+        if (S === matchState && UI.view === "game" && S.ph === phase) {
+          UI.busy = false;
+          doAdvance(true);
+        } else UI.busy = false;
+        return;
+      }
+      setTimeout(check, 100);
+    }
+    setTimeout(check, 100);
+  }
+  function doAdvance(matchAdWaited) {
     if (UI.busy) return;
     UI.busy = true;
-    var before = S.feed[0] ? S.feed[0].id : null, snap = snapshot();
+    var before = S.feed[0] ? S.feed[0].id : null, snap = snapshot(), wasRetired = S.ph === "ret";
+    /* Keep the fixture screen visible until any launched interstitial is dismissed. */
+    if (!matchAdWaited && (S.ph === "pre" || S.ph === "gap") && !S.pend.length && showAd("match_start")) {
+      waitForPreMatchAd(S, S.ph);
+      return;
+    }
     try { advance(); } catch (e) { console.error(e); toast(tr("Algo ha fallado al simular. Tu partida sigue guardada.")); }
     UI.busy = false;
     UI.flash = S.feed[0] && S.feed[0].id !== before ? S.feed[0].id : null;
+    var retiredNow = !wasRetired && S.ph === "ret";
     if (S.ph === "ret") onRetire();
     persist(); UI.tab = isMgr() ? "club" : "carrera"; render(true);
     celebrate(snap);
+    if (retiredNow) showAdLater("retire", 1400, function () { return !!(S && UI.view === "game" && S.ph === "ret" && !UI.sheet && !document.getElementById("tromod")); });
   }
   function doChoose(i) {
-    var before = S.feed[0] ? S.feed[0].id : null, inSheet = !!(UI.sheet && UI.sheet.k === "pend"), card = null, snap = snapshot();
+    var before = S.feed[0] ? S.feed[0].id : null, inSheet = !!(UI.sheet && UI.sheet.k === "pend"), card = null, snap = snapshot(), wasRetired = S.ph === "ret";
     try { card = resolvePending(i); } catch (e) { console.error(e); toast(tr("No se pudo aplicar la decisión.")); }
     UI.flash = S.feed[0] && S.feed[0].id !== before ? S.feed[0].id : null;
+    var retiredNow = !wasRetired && S.ph === "ret";
     if (S.ph === "ret") onRetire();
     persist();
     if (inSheet) {
@@ -390,8 +477,10 @@
     if (card) edgeFlash(card.good);
     celebrate(snap);
     if (S && S.liveReq != null) openLive();
+    if (retiredNow) showAdLater("retire", 1400, function () { return !!(S && UI.view === "game" && S.ph === "ret" && !UI.sheet && !document.getElementById("tromod")); });
   }
   function onRetire() {
+    if (S && S.era) return; // El Salón de la fama moderno no absorbe carreras de Épocas.
     if (isMgr()) {
       var m = S.m, r = S.mretired; if (!r) return;
       Store.addHof({id: S.uid + "m" + (S.dyn && S.dyn.g > 1 ? "g" + S.dyn.g : ""), n: m.fn + " " + m.ln, nat: W.ctry[m.nat].code, pos: "DT", g: "DT", peak: Math.round(m.peakRep), club: clubName(r.main), y0: m.y0, y1: r.y,
@@ -438,6 +527,7 @@
     UI.vkey = key; UI.vback = false;
     if (UI.view === "game" && !calm2()) setTimeout(flushNtf, 60);
     slot("after");
+    queueRatePrompt();
   }
   function calm2() { return !!document.querySelector(".mg-ov"); }
   function musicButton() {
@@ -481,21 +571,34 @@
     return '<div class="xiwarn" role="alert"><div class="xwt"><span class="xwi">!</span>' + trn(u.length, "{n} baja en tu once", "{n} bajas en tu once") + '</div><p>' + why + '</p><p class="xws">' + tr("Si juegas así, entrará un suplente de urgencia, el equipo rendirá peor y el vestuario perderá moral.") + '</p><div class="xwb"><button class="btn" data-a="fixxi">' + tr("Corregir automáticamente") + "</button>" + (UI.tab !== "plantilla" ? '<button class="btn" data-a="tab" data-t="plantilla">' + tr("Ver el once") + "</button>" : "") + "</div></div>";
   }
   /* navegación: cuatro pestañas; lo demás vive en «Más» */
-  function subTabs() { return isMgr() ? ["comp", "red", "hist", "yo"] : ["red", "hist", "mundo"]; }
+  function eraSocialAvailable() {
+    if (!S || !S.era || typeof eraInfoForYear !== "function") return true;
+    var info = eraInfoForYear(S.yr);
+    return !info || !!info.media.socialMedia;
+  }
+  function subTabs() {
+    var tabs = isMgr() ? ["comp", "red", "hist", "yo"] : ["red", "hist", "mundo"];
+    return eraSocialAvailable() ? tabs : tabs.filter(function (tab) { return tab !== "red"; });
+  }
   function tabsNav() {
     var t = isMgr() ? [["club", tr("Inicio"), ICON.home], ["plantilla", tr("Equipo"), ICON.shirt], ["mercado", tr("Mercado"), ICON.swap], ["mas", tr("Más"), ICON.grid]]
       : [["carrera", tr("Inicio"), ICON.home], ["jugador", tr("Yo"), ICON.shirt], ["comp", tr("Liga"), ICON.table], ["mas", tr("Más"), ICON.grid]];
-    var unread = socUnread(), cur = subTabs().indexOf(UI.tab) >= 0 ? "mas" : UI.tab;
+    var unread = eraSocialAvailable() ? socUnread() : 0, cur = subTabs().indexOf(UI.tab) >= 0 ? "mas" : UI.tab;
     return '<nav class="tabs four" aria-label="' + h(tr("Secciones")) + '">' + t.map(function (x) {
       return '<button data-a="tab" data-t="' + x[0] + '"' + (cur === x[0] ? ' aria-current="page"' : "") + ">" + x[2] + "<span>" + x[1] + "</span>" + (x[0] === "mas" && unread && UI.tab !== "red" ? '<span class="nbadge">' + (unread > 9 ? "9+" : unread) + "</span>" : "") + (x[0] === "jugador" && UIX.petNeed && UIX.petNeed() ? '<span class="nbadge pet" aria-label="' + h(tr("Tu mascota necesita atención")) + '">🐾</span>' : "") + "</button>";
     }).join("") + "</nav>";
   }
   /* «Más»: el resto del juego en una lista clara */
   function tabMas() {
-    var unread = socUnread(), mgr = isMgr(), rows = [];
+    var unread = eraSocialAvailable() ? socUnread() : 0, mgr = isMgr(), rows = [];
+    var noticeHistory = S && Array.isArray(S.ntfHistory) ? S.ntfHistory : [];
+    var noticeUnread = Math.max(0, Number(S && S.ntfUnread) || 0);
+    rows.push(["ntfcenter", "", ICON.bell, tr("Notificaciones"), noticeHistory.length
+      ? trn(noticeHistory.length, "{n} aviso guardado", "{n} avisos guardados")
+      : tr("Tus avisos de partidos, mercado y carrera")]);
     if (mgr) { var pos = S.m.club >= 0 ? posInLeague(S.m.club) : 0; rows.push(["tab", "comp", ICON.table, tr("Competición"), pos > 0 ? tr("Vais {pos} en {lg}", {pos: ord(pos), lg: lgName(S.cl[S.m.club])}) : tr("Clasificaciones y calendario")]); }
     if (mgr && UIX.mgrYo) rows.push(["tab", "yo", ICON.shirt, tr("Tu míster"), tr("Ropa, estadísticas, vitrina y mascota")]);
-    rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
+    if (eraSocialAvailable()) rows.push(["tab", "red", ICON.at, tr("Red social"), unread ? trn(unread, "{n} publicación nueva", "{n} publicaciones nuevas") : tr("Lo que dicen de ti")]);
     rows.push(["tab", "hist", ICON.trophy, tr("Historial"), tr("Temporadas, títulos y premios")]);
     if (!mgr) rows.push(["tab", "mundo", ICON.globe, tr("Mundo"), tr("Otras ligas, selecciones y rivales")]);
     if (UIX.achG) { achCheck(); var ac = UIX.achG(); rows.push(["ach", "", ICON.medal, tr("Logros"), tr("{n} de {m} conseguidos", {n: ac[0], m: ac[1]})]); }
@@ -504,7 +607,7 @@
     rows.push(["guide", "", ICON.book, tr("Guía del juego"), tr("Cómo funciona cada parte")]);
     rows.push(["menu", "", ICON.gear, tr("Ajustes y partidas"), tr("Idioma, ritmo, guardar y cargar")]);
     return '<div class="stack"><h2 class="scrt">' + tr("Más") + '</h2><div class="mlist">' + rows.map(function (r) {
-      return '<button class="mrow" data-a="' + r[0] + '"' + (r[1] ? ' data-t="' + r[1] + '"' : "") + '><span class="mic">' + r[2] + '</span><span class="mtx"><b>' + h(r[3]) + "</b><small>" + h(r[4]) + "</small></span>" + (r[1] === "red" && unread ? '<span class="nbadge in">' + (unread > 9 ? "9+" : unread) + "</span>" : "") + '<span class="chev" aria-hidden="true">›</span></button>';
+      return '<button class="mrow" data-a="' + r[0] + '"' + (r[1] ? ' data-t="' + r[1] + '"' : "") + '><span class="mic">' + r[2] + '</span><span class="mtx"><b>' + h(r[3]) + "</b><small>" + h(r[4]) + "</small></span>" + (r[1] === "red" && unread ? '<span class="nbadge in">' + (unread > 9 ? "9+" : unread) + "</span>" : "") + (r[0] === "ntfcenter" && noticeUnread ? '<span class="nbadge in">' + (noticeUnread > 9 ? "9+" : noticeUnread) + "</span>" : "") + '<span class="chev" aria-hidden="true">›</span></button>';
     }).join("") + "</div></div>";
   }
 
@@ -594,7 +697,7 @@
   }
   function inCont() {
     var c = null, me = myClub();
-    ["UCL", "UEL", "UECL", "LIB", "SUD", "ACL", "CAF", "CCC"].some(function (k) { var x = S.C[k]; if (x && x.teams && x.teams.indexOf(me) >= 0) { c = x.n; return true; } return false; });
+    ["UCL", "UEL", "UECL", "LIB", "SUD", "ACL", "CAF", "CCC", "UCWC", "CCMB"].some(function (k) { var x = S.C[k]; if (x && x.teams && x.teams.indexOf(me) >= 0) { c = x.n; return true; } return false; });
     return c;
   }
   function objRow(o) {
@@ -725,10 +828,27 @@
     o += '<p class="muted" style="font-size:var(--fs-xs);margin:8px 0 0">' + trn(x.tries, "{n} oferta hecha.", "{n} ofertas hechas.") + " " + tr("Ofertas muy bajas los enfadan más.") + "</p>";
     return o + "</section>";
   }
+  var MAX_NTF_HISTORY = 60;
+  function openNtfCenter() {
+    if (!S) return;
+    S.ntfUnread = 0;
+    persist();
+    UI.sheet = {k: "ntfcenter"};
+    renderSheet();
+  }
   /* avisos temporales que manda el motor: lesiones, rojas, mercado, resultados */
   function flushNtf() {
     if (!S || !S.ntf || !S.ntf.length || LV) return; /* durante el partido en directo se guardan para después */
     var q = S.ntf; S.ntf = [];
+    var history = Array.isArray(S.ntfHistory) ? S.ntfHistory : (S.ntfHistory = []);
+    var createdAt = Date.now();
+    q.forEach(function (n, index) {
+      if (!n || !n.t) return;
+      history.push({t: String(n.t).slice(0, 500), k: String(n.k || "info"), r: n.r == null ? null : n.r,
+        at: createdAt + index});
+    });
+    if (history.length > MAX_NTF_HISTORY) history.splice(0, history.length - MAX_NTF_HISTORY);
+    S.ntfUnread = Math.min(99, (Number(S.ntfUnread) || 0) + q.length);
     var res = q.filter(function (n) { return n.k === "res"; }), rest = q.filter(function (n) { return n.k !== "res"; });
     var wrap = document.getElementById("ntfs");
     if (!wrap) { wrap = document.createElement("div"); wrap.id = "ntfs"; wrap.className = "ntfs"; wrap.setAttribute("aria-live", "polite"); document.body.appendChild(wrap); }
@@ -737,8 +857,11 @@
       var tm = null, gone = false;
       var close = function () { if (gone) return; gone = true; el.classList.add("out"); setTimeout(function () { el.remove(); }, 400); };
       var arm = function (t) { clearTimeout(tm); tm = setTimeout(close, t); };
-      /* tocar la lista o desplazarla la mantiene abierta; tocar fuera de la lista la cierra */
-      el.addEventListener("click", function (e) { if (el._nodrop && Date.now() - el._nodrop < 300) return; if (!(e.target.closest && e.target.closest(".ntfl"))) close(); });
+      /* tocar un aviso abre el historial; deslizar por su lista solo reinicia el temporizador */
+      el.addEventListener("click", function () {
+        if (el._nodrop && Date.now() - el._nodrop < 300) return;
+        close(); openNtfCenter();
+      });
       var keep = function () { arm(4000); };
       /* deslizar a la derecha para quitarla */
       var sx = null, sy = null, dx = 0, drag = false;
@@ -826,6 +949,7 @@
 
   /* ---------- chips y tarjetas del feed ---------- */
   var MCHIP = {board: N_("Directiva"), fans: N_("Afición"), rep: N_("Prestigio"), chem: N_("Química"), sqMor: N_("Moral del vestuario"), sfit: N_("Físico de la plantilla"), pts: N_("Puntos en liga"), rel: N_("Relación")};
+  window.UIX = window.UIX || {}; window.UIX.chipHtml = function (c) { return chip(c); };
   function chip(c) {
     var k = c[0], v = c[1], ex = c[2], cls = "", t;
     switch (k) {
@@ -977,7 +1101,7 @@
   function seasonEndCard(c, fl) {
     var r = c.row, champ = c.pos === 1;
     var o = '<article class="card' + fl + '"><div class="head"><span class="tag ' + (champ ? "real" : "") + '">' + tr("Balance {season}", {season: seasonLabel(c.y)}) + '</span><span class="eyebrow">' + h(clubName(c.club)) + "</span></div>";
-    o += "<h3>" + (champ ? tr("¡Campeón de {lg}!", {lg: h(lgName(c.lg))}) : tr("{pos} en {lg}", {pos: ord(c.pos), lg: h(lgName(c.lg))})) + "</h3>";
+    o += "<h3>" + (champ ? tr("¡Campeón de {lg}!", {lg: h(leagueNameForSeason(c.lg, c.y))}) : tr("{pos} en {lg}", {pos: ord(c.pos), lg: h(leagueNameForSeason(c.lg, c.y))})) + "</h3>";
     var gkRow = r.gc != null && W.pos[S.p.pos] && W.pos[S.p.pos].g === "POR";
     o += '<div class="statline"><div class="stat"><b>' + r.apps + '</b><span>' + tr("Partidos") + '</span></div>' + (gkRow
       ? '<div class="stat"><b>' + r.cs + '</b><span>' + tr("Port. a cero") + '</span></div><div class="stat"><b>' + r.gc + '</b><span>' + tr("Encajados") + '</span></div>'
@@ -985,20 +1109,21 @@
     if (gkRow && r.apps) o += '<p class="muted" style="font-size:var(--fs-sm);margin:8px 0 0">' + tr("{cs} porterías a cero y {gc} goles encajados ({avg} por partido).", {cs: r.cs, gc: r.gc, avg: fmtDec(r.gc / Math.max(1, r.apps), 2)}) + "</p>";
     if (c.objs && c.objs.length) o += '<div style="margin-top:10px">' + c.objs.map(function (ob) { return '<div class="obj"><div><span>' + h(objName(ob)) + '</span><span class="' + (ob.met ? "pos" : "neg") + '">' + (ob.met ? tr("Cumplido") : tr("No cumplido")) + "</span></div></div>"; }).join("") + "</div>";
     var tro = S.p.trophies.filter(function (t) { return t.s === seasonLabel(c.y); });
-    if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(t.n)); }).join("") + "</div>";
+    if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(trophyCompName(t))); }).join("") + "</div>";
     var news = (c.news || []).slice();
-    (r.tro || []).forEach(function (t) { if (!news.some(function (n) { return n.x.indexOf(t) >= 0; })) news.push({t: "trophy", x: tr("Título: {t}", {t: trComp(t)})}); });
+    var trophyNames = tro.length ? tro.map(function (t) { return trComp(trophyCompName(t)); }) : (r.tro || []);
+    trophyNames.forEach(function (t) { if (!news.some(function (n) { return n.x.indexOf(t) >= 0; })) news.push({t: "trophy", x: tr("Título: {t}", {t: t})}); });
     if (news.length) o += '<ul class="news">' + news.map(function (n) { return '<li class="' + n.t + '">' + h(n.x) + "</li>"; }).join("") + "</ul>";
     return o + "</article>";
   }
   function mSeasonEndCard(c, fl) {
     var r = c.row, champ = c.pos === 1;
     var o = '<article class="card' + fl + '"><div class="head"><span class="tag ' + (champ ? "real" : "") + '">' + tr("Balance {season}", {season: seasonLabel(c.y)}) + '</span><span class="eyebrow">' + h(clubName(c.club)) + "</span></div>";
-    o += "<h3>" + (champ ? tr("¡Campeones de {lg}!", {lg: h(lgName(c.lg))}) : tr("{pos} en {lg}", {pos: ord(c.pos), lg: h(lgName(c.lg))})) + "</h3>";
+    o += "<h3>" + (champ ? tr("¡Campeones de {lg}!", {lg: h(leagueNameForSeason(c.lg, c.y))}) : tr("{pos} en {lg}", {pos: ord(c.pos), lg: h(leagueNameForSeason(c.lg, c.y))})) + "</h3>";
     o += '<div class="statline"><div class="stat"><b>' + r.w + "</b><span>" + tr("Victorias") + '</span></div><div class="stat"><b>' + r.d + "</b><span>" + tr("Empates") + '</span></div><div class="stat"><b>' + r.l + "</b><span>" + tr("Derrotas") + '</span></div><div class="stat"><b>' + r.gf + ":" + r.ga + "</b><span>" + tr("Goles") + '</span></div><div class="stat"><b>' + c.board + "</b><span>" + tr("Directiva") + "</span></div></div>";
     if (c.objs && c.objs.length) o += '<div style="margin-top:10px">' + c.objs.map(function (ob) { return '<div class="obj"><div><span>' + h(objName(ob)) + '</span><span class="' + (ob.met ? "pos" : "neg") + '">' + (ob.met ? tr("Cumplido") : tr("No cumplido")) + "</span></div></div>"; }).join("") + "</div>";
     var tro = S.m.trophies.filter(function (t) { return t.s === seasonLabel(c.y); });
-    if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(t.n)); }).join("") + "</div>";
+    if (tro.length) o += '<div class="trorow">' + tro.map(function (t) { return trophySVG(t.k, 44, trComp(trophyCompName(t))); }).join("") + "</div>";
     if (c.news && c.news.length) o += '<ul class="news">' + c.news.map(function (n) { return '<li class="' + n.t + '">' + h(n.x) + "</li>"; }).join("") + "</ul>";
     return o + "</article>";
   }
@@ -1187,7 +1312,7 @@
   /* ---------- vitrina ---------- */
   function vitrina(list, emptyTxt) {
     var grp = {};
-    list.forEach(function (t) { var k = trComp(t.n.replace(/ \d{4}$/, "")); (grp[k] = grp[k] || []).push(t); });
+    list.forEach(function (t) { var k = trComp(trophyCompName(t).replace(/ \d{4}$/, "")); (grp[k] = grp[k] || []).push(t); });
     var keys = Object.keys(grp).sort(function (a, b) { return grp[b][0].w - grp[a][0].w || grp[b].length - grp[a].length; });
     if (!keys.length) return '<p class="empty">' + h(emptyTxt) + "</p>";
     return '<div class="tgrid">' + keys.map(function (k) {
@@ -1262,11 +1387,11 @@
   }
   function aheadCardM() {
     var m = S.m, li = S.cl[m.club], pos = posInLeague(m.club), inj = mActive().filter(function (p) { return p.inj > S.tw; }).length;
-    var win = m.mk.open ? '<span class="tag ok"><span class="dot"></span>' + tr("Mercado abierto") + "</span>" : '<span class="tag ok"><span class="dot"></span>' + tr("Siguiente") + "</span>";
+    var yearRound = !!(S.era && eraRulesForYear(S.yr) && !eraRulesForYear(S.yr).transferWindows), win = m.mk.open ? '<span class="tag ok"><span class="dot"></span>' + tr("Mercado abierto") + (yearRound ? ' · ' + eraText("Todo el año") : "") + "</span>" : '<span class="tag ok"><span class="dot"></span>' + tr("Siguiente") + "</span>";
     var o = '<section class="card"><div class="head">' + win + '<span class="eyebrow">' + tr("Nivel {n}", {n: Math.round(mTeamRating(m.xi))}) + "</span></div>";
     o += "<h3>" + (S.ph === "pre" ? tr("Pretemporada en el {club}", {club: h(clubName(m.club))}) : tr("Tramo {n} de 5: {blk}", {n: S.bi + 1, blk: tr(BLOCKS[S.bi][2])})) + "</h3>";
     o += '<p class="lead">' + (S.ph === "pre" ? tr("Revisa el once y la táctica, y aprovecha el mercado de verano antes de empezar.") : (pos > 0 ? tr("{pos} en {lg}.", {pos: ord(pos), lg: h(lgName(li))}) + " " : "") + (inj ? trn(inj, "{n} lesionado.", "{n} lesionados.") : tr("Sin lesionados."))) +
-      (m.mk.open ? " " + tr("El mercado cierra cuando empiece el tramo.") : "") + "</p>";
+      (m.mk.open ? " " + (yearRound ? eraText("Las transferencias se permiten durante todo el año.") : tr("El mercado cierra cuando empiece el tramo.")) : "") + "</p>";
     if (m.objs.length) o += '<div style="margin-top:10px">' + m.objs.map(function (ob) {
       var pr = mgrObjProgress(ob);
       return '<div class="obj"><div><span>' + h(objName(ob)) + objPill(ob) + '</span><span class="num ' + (pr.met ? "pos" : "") + '">' + h(pr.txt) + '</span></div><div class="bar"><i class="' + (pr.met ? "hi" : "mid") + '" style="width:' + Math.round(pr.pct) + '%"></i></div></div>';
@@ -1346,10 +1471,11 @@
   function tabMercado() {
     var m = S.m;
     if (m.club < 0) return '<div class="stack"><p class="empty">' + tr("Sin equipo no hay mercado.") + '</p></div>';
-    var open = !!m.mk.open, bill = mWageBill();
-    var s = '<div class="stack"><section class="card"><div class="head"><h3>' + tr("Mercado") + '</h3>' + (open ? '<span class="tag ok"><span class="dot"></span>' + tr("Abierto") + " · " + h(tr(m.mk.open)) + "</span>" : '<span class="tag">' + tr("Cerrado") + "</span>") + "</div>";
+    var open = !!m.mk.open, bill = mWageBill(), yearRound = !!(S.era && eraRulesForYear(S.yr) && !eraRulesForYear(S.yr).transferWindows);
+    var openLabel = yearRound ? eraText("Todo el año") : tr(m.mk.open);
+    var s = '<div class="stack"><section class="card"><div class="head"><h3>' + tr("Mercado") + '</h3>' + (open ? '<span class="tag ok"><span class="dot"></span>' + tr("Abierto") + " · " + h(openLabel) + "</span>" : '<span class="tag">' + tr("Cerrado") + "</span>") + "</div>";
     s += '<div class="statline"><div class="stat"><b>' + fmtMoney(m.bud) + '</b><span>' + tr("Presupuesto") + '</span></div><div class="stat"><b class="' + (bill > m.wcap ? "neg" : "") + '">' + fmtMoney(bill) + '</b><span>' + tr("Masa salarial") + '</span></div><div class="stat"><b>' + fmtMoney(m.wcap) + "</b><span>" + tr("Tope salarial") + "</span></div></div>";
-    s += '<p class="muted" style="font-size:var(--fs-sm);margin:10px 0 0">' + (open ? tr("Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.") : tr("Puedes estudiar la lista, pero solo se ficha en verano (pretemporada) y en invierno (antes del tramo Feb–Mar).")) + "</p></section>";
+    s += '<p class="muted" style="font-size:var(--fs-sm);margin:10px 0 0">' + (open ? (yearRound ? eraText("Puedes fichar, vender o ceder durante todo el año.") : tr("Ficha jugadores de la lista, vende o cede desde la ficha de cada jugador en Plantilla. El mercado cierra al empezar el siguiente tramo.")) : tr("Puedes estudiar la lista, pero solo se ficha en verano (pretemporada) y en invierno (antes del tramo Feb–Mar).")) + "</p></section>";
     var list = (m.mk.list || []).filter(function (t) { return UI.mkF === "ALL" || W.pos[t.pos].g === UI.mkF; });
     s += '<section class="card"><div class="head"><h3>' + tr("Informes de ojeadores") + '</h3><span class="eyebrow">' + trn((m.mk.list || []).length, "{n} jugador", "{n} jugadores") + "</span></div>";
     s += '<div class="seg" style="margin-bottom:6px">' + [[tr("Todos"), "ALL"], ["POR", "POR"], ["DEF", "DEF"], ["MED", "MED"], ["DEL", "DEL"]].map(function (x) { return '<button data-a="mkf" data-v="' + x[1] + '" aria-pressed="' + (UI.mkF === x[1]) + '">' + x[0] + "</button>"; }).join("") + "</div>";
@@ -1406,13 +1532,21 @@
   }
   function slotsNow() { return UI.slots || Store.index(); }
   function homeView() {
-    var n = slotsNow().length;
-    var s = '<main id="main"><div class="stack">' + updBanner(false) + '<section class="hero"><div class="eyebrow">' + tr("Jugador, míster o tu propio club") + "</div>" + titleHTML() +
+    var n = slotsNow().length, mainHomeExtras = slot("mainhome");
+    var s = '<main id="main"><div class="stack home-stack">' + updBanner(false) + '<section class="hero"><div class="eyebrow">' + tr("Jugador, míster o tu propio club") + "</div>" + titleHTML() +
       "<p>" + tr("{n} ligas de los cinco continentes, todas las selecciones del mundo, copas, Champions, Libertadores, Mundiales y el Balón de Oro.", {n: W.lg.length}) + "</p>" +
       '<div class="scoreline"><span>' + tr("{n} LIGAS", {n: W.lg.length}) + "</span><span>" + tr("{n} CLUBES", {n: W.clubs.length - 2}) + "</span><span>" + tr("{n} SELECCIONES", {n: W.ctry.length}) + "</span></div></section>";
-    s += '<div class="opts"><button class="go" data-a="goload"' + (n ? "" : " disabled") + ">" + tr("Cargar partida") + (n ? " · " + n : "") + " " + ICON.play + '</button><button class="go ghost" data-a="newgame">' + tr("Nueva partida") + '</button><button class="btn wide gde-open" data-a="guide">📖 ' + tr("Guía del juego") + "</button></div>" +
-      '<div class="opts">' + slot("mainhome") + "</div>";
-    s += '<div class="opts"><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ": " + h(langName()) + '</button><button class="btn wide" data-a="ach">🏅 ' + tr("Logros") + (UIX.achG ? " · " + UIX.achG()[0] + "/" + UIX.achG()[1] : "") + '</button><button class="btn wide" data-a="a11y">' + tr("Accesibilidad") + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + "</div></div></main>";
+    s += '<section class="home-play"><div class="eyebrow">' + tr("Jugar") + '</div><div class="home-main-actions' + (n ? "" : " solo") + '">' +
+      (n ? '<button class="go ghost" data-a="goload">' + tr("Cargar partida") + " · " + n + " " + ICON.play + '</button>' : "") +
+      '<button class="go" data-a="newgame">' + tr("Nueva partida") + " " + ICON.play + '</button></div></section>';
+    if (mainHomeExtras) s += '<div class="home-mainhome-slot">' + mainHomeExtras + '</div>';
+    s += '<div class="home-groups">' +
+      '<details class="fold home-group"><summary><span class="home-group-icon">' + ICON.gear + '</span><span class="home-group-copy"><b>' + tr("Ajustes y partidas") + '</b><small>' + tr("Idioma") + ' · ' + tr("Accesibilidad") + ' · ' + tr("Cargar una partida con código") + '</small></span><span class="home-group-chevron" aria-hidden="true">›</span></summary><div class="home-group-body"><div class="opts">' +
+      '<button class="btn wide" data-a="import">' + tr("Cargar una partida con código") + '</button><button class="btn wide" data-a="golang">' + tr("Idioma") + ': ' + h(langName()) + '</button><button class="btn wide" data-a="a11y">' + tr("Accesibilidad") + '</button><button class="linkbtn" data-a="privacy">' + tr("Política de privacidad") + '</button>' + (adPrivacyRequired() ? '<button class="linkbtn" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + '</button>' : "") +
+      '</div></div></details>' +
+      '<details class="fold home-group"><summary><span class="home-group-icon">' + ICON.grid + '</span><span class="home-group-copy"><b>' + tr("Más") + '</b><small>' + tr("Guía del juego") + ' · ' + tr("Salón de la fama") + ' · ' + tr("Logros") + '</small></span><span class="home-group-chevron" aria-hidden="true">›</span></summary><div class="home-group-body"><div class="opts">' +
+      '<button class="btn wide gde-open" data-a="guide">' + ICON.book + ' ' + tr("Guía del juego") + '</button><button class="btn wide" data-a="hof">' + ICON.trophy + ' ' + tr("Salón de la fama") + '</button><button class="btn wide" data-a="ach">' + ICON.medal + ' ' + tr("Logros") + (UIX.achG ? " · " + UIX.achG()[0] + "/" + UIX.achG()[1] : "") + '</button>' +
+      '</div></div></details></div></div></main>';
     return s;
   }
   function fmtWhen(ts) {
@@ -1447,6 +1581,7 @@
     s += '<div class="seg gseg">' + [["m", N_("Fútbol masculino")], ["f", N_("Fútbol femenino")]].map(function (x) { return '<button data-a="gsel" data-v="' + x[0] + '" aria-pressed="' + ((UI.gsel || "m") === x[0]) + '">' + h(tr(x[1])) + "</button>"; }).join("") + "</div>";
     s += '<div class="opts">';
     s += modes.map(function (x) { return '<button class="pickrow modec" data-a="pickmode" data-v="' + x[0] + '"><span class="micon">' + x[1] + '</span><div class="grow"><b>' + h(tr(x[2])) + "</b><small>" + h(tr(x[3])) + "</small></div></button>"; }).join("");
+    s += slot("modes");
     return s + '</div><button class="btn wide" data-a="gohome">' + tr("Atrás") + "</button></div></main>";
   }
   var POS_XY = {DC: [50, 12], EI: [18, 21], ED: [82, 21], MCO: [50, 31], MI: [17, 44], MC: [50, 47], MD: [83, 44], MCD: [50, 61], LI: [15, 72], DFC: [50, 77], LD: [85, 72], POR: [50, 92]};
@@ -1454,6 +1589,13 @@
     var list = W.ctry.map(function (c, i) { return i; }).filter(natLive).sort(function (a, b) { return natName(a).localeCompare(natName(b), LANG); });
     return (allowNone ? '<option value="">' + tr("Ninguna") + "</option>" : "") + list.map(function (i) { var c = W.ctry[i]; return '<option value="' + c.code + '"' + (c.code === sel ? " selected" : "") + ">" + c.flag + " " + h(natName(i)) + "</option>"; }).join("");
   }
+  /* Modo Épocas: el mismo formulario de creación, con los clubes y ligas que existían ese año y su nombre de época */
+  function crEra() { return UI.cr && UI.cr.era && typeof eraClubExists === "function" ? UI.cr.era : null; }
+  function crClubOk(ci) { var e = crEra(); return !e || eraClubExists(W.clubs[ci].n, e.year); }
+  function crLgOk(i) { var e = crEra(); return !e || (eraLeagueExists(W.lg[i].id, e.year) && W.lg[i].cl0.some(crClubOk)); }
+  function crClub(ci) { var e = crEra(); return e ? eraClubName(W.clubs[ci].n, e.year) : W.clubs[ci].n; }
+  function crLg(i) { var e = crEra(); return e ? eraLeagueName(W.lg[i].id, lgName(i), e.year) : lgName(i); }
+  function crOffers(list) { return crEra() ? list.filter(crClubOk) : list; }
   function createPlayerView() {
     var c = UI.cr, st = c.step, s = '<main id="main"><div class="stack"><div class="steps">' + [0, 1, 2, 3].map(function (i) { return '<i class="' + (i <= st ? "on" : "") + '"></i>'; }).join("") + "</div>";
     if (st === 0) {
@@ -1480,28 +1622,30 @@
       s += '<div class="seg"><button data-a="cset" data-k="mode" data-v="rand" aria-pressed="' + (c.mode === "rand") + '">' + tr("Cantera de mi país") + '</button><button data-a="cset" data-k="mode" data-v="pick" aria-pressed="' + (c.mode === "pick") + '">' + tr("Elegir club") + "</button></div>";
       if (c.mode === "rand") {
         var pb = (TALENT[c.talent].ovr || 59) + ({16: -3, 17: -1.5, 18: 0, 19: 1.5}[c.age] || 0);
-        if (!c.offers || c.offKey !== c.nat) { c.offers = startOffersPlayer(c.nat, pb); c.offKey = c.nat; if (c.offers.indexOf(c.club) < 0) c.club = -1; }
+        if (!c.offers || c.offKey !== c.nat) { c.offers = crOffers(startOffersPlayer(c.nat, pb)); c.offKey = c.nat; if (c.offers.indexOf(c.club) < 0) c.club = -1; }
         s += '<p class="lead">' + tr("Tres clubes modestos quieren subirte de la cantera. Elige dónde debutar.") + '</p><div class="list">' + offerRows(c, pb) + "</div>";
         s += '<button class="btn wide" data-a="reoffer">' + tr("Buscar otras ofertas") + "</button>";
       }
+      else if (c.mode === "none") { /* Épocas: sin elegir club; lo explica UIX.eraCreateExtra */ }
       else {
-        if (c.lg == null) c.lg = (W.byCountry[W.cIdx[c.nat]] || [W.lgIdx.ESP1])[0];
+        if (c.lg == null || !crLgOk(+c.lg)) c.lg = ((W.byCountry[W.cIdx[c.nat]] || []).filter(crLgOk)[0]) != null ? (W.byCountry[W.cIdx[c.nat]] || []).filter(crLgOk)[0] : W.lg.map(function (l, i) { return i; }).filter(crLgOk)[0];
         s += '<div><label class="lbl" for="clg">' + tr("Liga") + '</label><select id="clg" data-f="lg">';
         W.confs.forEach(function (cf) {
-          var ls = W.lg.map(function (l, i) { return i; }).filter(function (i) { return W.lg[i].conf === cf; });
-          if (ls.length) s += '<optgroup label="' + h(tr(cf)) + '">' + ls.map(function (i) { return '<option value="' + i + '"' + (i === +c.lg ? " selected" : "") + ">" + W.ctry[W.lg[i].ci].flag + " " + h(lgName(i)) + "</option>"; }).join("") + "</optgroup>";
+          var ls = W.lg.map(function (l, i) { return i; }).filter(function (i) { return W.lg[i].conf === cf && crLgOk(i); });
+          if (ls.length) s += '<optgroup label="' + h(tr(cf)) + '">' + ls.map(function (i) { return '<option value="' + i + '"' + (i === +c.lg ? " selected" : "") + ">" + W.ctry[W.lg[i].ci].flag + " " + h(crLg(i)) + "</option>"; }).join("") + "</optgroup>";
         });
         s += '</select></div><div class="list">';
         var base = TALENT[c.talent].ovr || 59;
         base += {16: -3, 17: -1.5, 18: 0, 19: 1.5}[c.age] || 0;
-        W.lg[+c.lg].cl0.forEach(function (ci) {
+        W.lg[+c.lg].cl0.filter(crClubOk).forEach(function (ci) {
           var r = W.clubs[ci].r0, role = roleFor(base - r, c.age);
-          s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + tr("Rol esperado: {role}", {role: h(tr(role))}) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
+          s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(crClub(ci)) + "</b><small>" + tr("Rol esperado: {role}", {role: h(tr(role))}) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
         });
         s += '</div><p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Un grande te da prestigio, pero quizá no minutos. Un club pequeño, el escaparate para crecer.") + "</p>";
       }
     }
-    var canNext = st === 0 ? (c.fn.trim() && c.ln.trim()) : st === 3 ? c.club >= 0 : true;
+    if (st === 3 && crEra() && UIX.eraCreateExtra) s += UIX.eraCreateExtra(c);
+    var canNext = st === 0 ? (c.fn.trim() && c.ln.trim()) : st === 3 ? (c.club >= 0 || (crEra() && c.mode === "none")) : true;
     s += '<div class="row2" style="margin-top:6px"><button class="btn wide" data-a="cback">' + (st === 0 ? tr("Cancelar") : tr("Atrás")) + '</button><button class="btn pri wide" data-a="cnext"' + (canNext ? "" : " disabled") + ">" + (st === 3 ? tr("Empezar carrera") : tr("Siguiente")) + "</button></div>";
     if (st === 0 && !canNext) s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
     return s + "</div></main>";
@@ -1535,19 +1679,19 @@
     return s;
   }
   function leagueField(c) {
-    if (c.lg == null) c.lg = (W.byCountry[W.cIdx[c.nat]] || [W.lgIdx.ESP1])[0];
+    if (c.lg == null || !crLgOk(+c.lg)) c.lg = ((W.byCountry[W.cIdx[c.nat]] || []).filter(crLgOk)[0]) != null ? (W.byCountry[W.cIdx[c.nat]] || []).filter(crLgOk)[0] : W.lg.map(function (l, i) { return i; }).filter(crLgOk)[0];
     var s = '<div><label class="lbl" for="clg">' + tr("Liga") + '</label><select id="clg" data-f="lg">';
     W.confs.forEach(function (cf) {
-      var ls = W.lg.map(function (l, i) { return i; }).filter(function (i) { return W.lg[i].conf === cf; });
-      if (ls.length) s += '<optgroup label="' + cf + '">' + ls.map(function (i) { return '<option value="' + i + '"' + (i === +c.lg ? " selected" : "") + ">" + W.ctry[W.lg[i].ci].flag + " " + h(lgName(i)) + "</option>"; }).join("") + "</optgroup>";
+      var ls = W.lg.map(function (l, i) { return i; }).filter(function (i) { return W.lg[i].conf === cf && crLgOk(i); });
+      if (ls.length) s += '<optgroup label="' + cf + '">' + ls.map(function (i) { return '<option value="' + i + '"' + (i === +c.lg ? " selected" : "") + ">" + W.ctry[W.lg[i].ci].flag + " " + h(crLg(i)) + "</option>"; }).join("") + "</optgroup>";
     });
     return s + "</select></div>";
   }
   /* tarjetas de oferta para empezar (jugador: rol esperado; míster: liga y nivel) */
   function offerRows(c, base) {
     return c.offers.map(function (ci) {
-      var cl = W.clubs[ci], li = cl.lg0, sub = base != null ? tr("{lg} · rol esperado: {role}", {lg: h(lgName(li)), role: h(tr(roleFor(base - cl.r0, c.age)))}) : flag(cl.ci) + " " + h(lgName(li));
-      return '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(cl.n) + "</b><small>" + sub + '</small></div><span class="lvl">' + Math.round(cl.r0) + "</span></button>";
+      var cl = W.clubs[ci], li = cl.lg0, sub = base != null ? tr("{lg} · rol esperado: {role}", {lg: h(crLg(li)), role: h(tr(roleFor(base - cl.r0, c.age)))}) : flag(cl.ci) + " " + h(crLg(li));
+      return '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(crClub(ci)) + "</b><small>" + sub + '</small></div><span class="lvl">' + Math.round(cl.r0) + "</span></button>";
     }).join("");
   }
   function createMgrView() {
@@ -1556,10 +1700,10 @@
     else if (st === 1) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_M); }
     else {
       s += stepHead(st, n, tr("Tu banquillo"));
-      s += '<div class="seg"><button data-a="cset" data-k="mmode" data-v="off" aria-pressed="' + (c.mmode === "off") + '">' + tr("Empezar desde abajo") + '</button><button data-a="cset" data-k="mmode" data-v="pick" aria-pressed="' + (c.mmode === "pick") + '">' + tr("Elegir club") + '</button>' + (typeof CHAL !== "undefined" ? '<button data-a="cset" data-k="mmode" data-v="chal" aria-pressed="' + (c.mmode === "chal") + '">' + tr("Desafío") + "</button>" : "") + "</div>";
+      s += '<div class="seg"><button data-a="cset" data-k="mmode" data-v="off" aria-pressed="' + (c.mmode === "off") + '">' + tr("Empezar desde abajo") + '</button><button data-a="cset" data-k="mmode" data-v="pick" aria-pressed="' + (c.mmode === "pick") + '">' + tr("Elegir club") + '</button>' + (typeof CHAL !== "undefined" && !crEra() ? '<button data-a="cset" data-k="mmode" data-v="chal" aria-pressed="' + (c.mmode === "chal") + '">' + tr("Desafío") + "</button>" : "") + "</div>";
       if (c.mmode === "chal" && UIX.chalCreate) s += UIX.chalCreate(c);
       if (c.mmode === "off") {
-        if (!c.offers) { c.offers = startOffersMgr(); if (c.offers.indexOf(c.club) < 0) c.club = -1; }
+        if (!c.offers) { c.offers = crOffers(startOffersMgr()); if (c.offers.indexOf(c.club) < 0) c.club = -1; }
         s += '<p class="lead">' + tr("Tres clubes de ligas menos potentes te ofrecen su banquillo. Gana allí y llamarán los grandes.") + '</p><div class="list">' + offerRows(c, null) + "</div>";
         s += '<button class="btn wide" data-a="reoffer">' + tr("Buscar otras ofertas") + "</button>";
       }
@@ -1567,12 +1711,13 @@
     if (st === 2 && c.mmode === "pick") {
       s += leagueField(c) + '<div class="list">';
       var maxR = 61 + DIFF_REP[c.diff] * 0.32;
-      W.lg[+c.lg].cl0.slice().sort(function (a, b) { return W.clubs[b].r0 - W.clubs[a].r0; }).forEach(function (ci) {
+      W.lg[+c.lg].cl0.filter(crClubOk).sort(function (a, b) { return W.clubs[b].r0 - W.clubs[a].r0; }).forEach(function (ci) {
         var r = W.clubs[ci].r0, big = r > maxR + 2;
-        s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + (big ? tr("Un grande: la afición no tendrá paciencia") : tr("Nivel adecuado para empezar")) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
+        s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(crClub(ci)) + "</b><small>" + (big ? tr("Un grande: la afición no tendrá paciencia") : tr("Nivel adecuado para empezar")) + '</small></div><span class="lvl">' + Math.round(r) + "</span></button>";
       });
       s += '</div><p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Puedes empezar en cualquier club. Si ganas, llegarán ofertas de clubes más grandes.") + "</p>";
     }
+    if (st === 2 && crEra() && UIX.eraCreateExtra) s += UIX.eraCreateExtra(c);
     var canNext = st === 0 ? !!(c.fn.trim() && c.ln.trim()) : st === 2 ? c.club >= 0 : true;
     s += navRow(st, n, canNext, tr("Empezar"));
     if (st === 0 && !canNext) s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Escribe nombre y apellido para seguir.") + "</p>";
@@ -1634,8 +1779,17 @@
     if (c.kind === "club") Object.assign(c, {cn: "", ab: "", col: ["#c8102e", "#ffffff"], lg: W.lgIdx.ESP1, crest: {shape: "shield", pat: "band"}, kit: {pat: "plain", col3: "#ffffff"}});
     UI.cr = c; UI.view = "create"; render(true);
   }
+  /* Épocas: abre el formulario normal con el año elegido; al terminar crea la carrera histórica */
+  UIX.startCreate = function (kind, extra) { startCreate(kind); Object.assign(UI.cr, extra || {}); if (UI.cr.era) {
+    var ch = UI.cr.era.challenge && window.EraLegends ? EraLegends.challengeById(UI.cr.era.challenge) : null, ci = ch && W.cName[ch.club] != null ? W.cName[ch.club] : -1;
+    UI.cr.club = ci; UI.cr.offers = null; UI.cr.lg = ci >= 0 ? W.clubs[ci].lg0 : null; if (ci >= 0) { if (UI.cr.kind === "p") UI.cr.mode = "pick"; else UI.cr.mmode = "pick"; }
+  } render(true); };
   function finishCreate() {
     var c = UI.cr;
+    if (c.era && typeof eraStartFromCreate === "function") {
+      try { eraStartFromCreate(c); } catch (e) { console.error(e); toast(tr("No se pudo crear la partida.")); }
+      return;
+    }
     switchGame(function () {
       try {
         if (c.kind === "mgr") newManagerCareer({quick: !!c.quick, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, club: c.club, g: c.g, chal: c.mmode === "chal" ? c.chal : null});
@@ -1644,7 +1798,8 @@
       } catch (e) { console.error(e); toast(tr("No se pudo crear la partida.")); return; }
       UI.cr = null; UI.exp = {}; UI.wl = null; UI.flash = null; UI.sheet = null;
       UI.view = S.ph === "draft" ? "draft" : "game"; UI.tab = isMgr() ? "club" : "carrera";
-      persist(); refreshSlots(); render(true); showAd("start");
+      persist(); refreshSlots(); render(true);
+      if (c.kind !== "club") showAdLater("career_start", 1200, function () { return !!(S && UI.view !== "create" && UI.view !== "modes"); });
     });
   }
   /* ---------- paneles ---------- */
@@ -1671,6 +1826,22 @@
   function sheetHTML() {
     var t = UI.sheet;
     if (UIX.sheets[t.k]) return UIX.sheets[t.k](t);
+    if (t.k === "ntfcenter") {
+      var notices = S && Array.isArray(S.ntfHistory) ? S.ntfHistory.slice().reverse() : [];
+      var noticeRows = notices.map(function (notice) {
+        var kind = /^(res|good|bad|info|red|amber)$/.test(notice.k) ? notice.k : "info";
+        var date = Number(notice.at) > 0 ? new Date(notice.at).toLocaleString() : "";
+        return '<article class="ntf-history-item ' + kind + '"><p>' + h(notice.t) + '</p>' +
+          (date ? '<small>' + h(date) + '</small>' : "") + '</article>';
+      }).join("");
+      return '<h2>' + tr("Notificaciones") + '</h2><p class="muted ntf-history-intro">' +
+        tr("Se guardan aquí tus avisos recientes de esta carrera.") + '</p>' +
+        (noticeRows ? '<div class="ntf-history-list">' + noticeRows + '</div>' :
+          '<p class="ntf-history-empty">' + tr("Todavía no hay notificaciones.") + '</p>') +
+        '<div class="row2 ntf-history-actions"><button class="btn wide" data-a="close">' + tr("Cerrar") +
+        '</button><button class="btn wide" data-a="ntfclear"' + (notices.length ? "" : " disabled") + '>' +
+        tr("Borrar historial") + '</button></div>';
+    }
     if (t.k === "statinfo") {
       var it = statusItems();
       return "<h2>" + (isMgr() ? tr("Estado del club") : tr("Tu estado")) + '</h2><div class="stack"><div class="stlist">' + it.map(function (x) { var w = lvlWord(x[1]), v = Math.round(x[1]); return '<div class="stli"><div class="stlt"><span>' + h(x[0]) + '</span><b class="' + w[1] + '">' + h(w[0]) + " · " + v + '</b></div><div class="bar"><i class="' + barCls(v) + '" style="width:' + v + '%"></i></div></div>'; }).join("") + "</div>" +
@@ -1710,6 +1881,12 @@
         P[7], P[8], P[9]];
       if (window.GoatLadder) P.push([N_("GOAT LADDER"), window.GoatLadder.t("privacy")]);
       return "<h2>" + tr("Política de privacidad") + '</h2><p class="muted" style="margin:-6px 0 10px;font-size:var(--fs-sm)">' + tr("Última actualización: {d}", {d: "10/10/2026"}) + '</p><div class="policy">' + P.map(function (x) { return "<h3>" + h(tr(x[0])) + "</h3><p>" + h(tr(x[1])) + "</p>"; }).join("") + '</div><button class="btn wide" style="margin-top:12px" data-a="close">' + tr("Cerrar") + "</button>";
+    }
+    if (t.k === "rate") {
+      return '<div class="rate-mark" aria-hidden="true">★</div><h2>' + tr("¿Te está gustando Camino a la Leyenda?") + '</h2><p class="lead">' +
+        tr("Si disfrutas del juego, déjanos una valoración en Google Play. Tu opinión nos ayuda a seguir mejorándolo.") + "</p>" +
+        '<div class="row2" style="margin-top:14px"><button class="btn wide" data-a="ratelater">' + tr("Ahora no") +
+        '</button><button class="btn pri wide" data-a="rateapp">' + tr("Valorar en Google Play") + "</button></div>";
     }
     if (t.k === "update") {
       return '<div class="upd">' + ICON.play + '</div><h2>' + tr("¡Nueva versión disponible!") + '</h2><p class="lead">' + tr("Hay una actualización de Camino a la Leyenda con novedades y mejoras. Tus partidas se conservan.") + "</p>" +
@@ -1848,24 +2025,41 @@
   /* guardar la partida actual antes de cambiar; si el guardado tarda o falla, se sigue igualmente (antes se quedaba esperando) */
   function switchGame(fn) {
     var done = false, go = function () { if (done) return; done = true; fn(); };
-    var pr; try { pr = S ? Store.flush() : null; } catch (e) { pr = null; }
+    var pr; try { if (S && S.era && typeof EraStore !== "undefined") { EraStore.save(); pr = null; } else pr = S ? Store.flush() : null; } catch (e) { pr = null; }
     if (pr && typeof pr.then === "function") { pr.then(go, go); setTimeout(go, 1500); } else go();
   }
   function enterGame() {
     UI.exp = {}; UI.wl = null; UI.flash = null; UI.sheet = null; UI.cr = null;
     UI.view = S.ph === "draft" ? "draft" : "game"; UI.tab = isMgr() ? "club" : "carrera";
   }
-  /* ---------- anuncios (solo en la app de Android; en la web no hay) ----------
-     Se muestran en las transiciones: empezar partida, volver al menú, cargar partida y pasar de jugador a entrenador.
-     Mínimo 60 s entre anuncios para no encadenarlos (p. ej. menú → cargar). */
-  var AD_GAP = 60000, lastAd = 0;
-  var NO_ADS = false; /* build.py lo pone a true en la versión sin anuncios */
+  /* ---------- anuncios (Android; la web mantiene NO_ADS=true) ----------
+     El host nativo solo admite ubicaciones de transición explícitas, nunca durante
+     un partido, y aplica además un límite independiente de cinco minutos. */
+  var NO_ADS = false; /* la compilación web lo pone a true; Android usa AndroidBridge */
   var WEB_ADS = false; /* build_web.py lo pone a true en la web pública, que lleva anuncios de AdSense fuera del juego */
   function showAd(where) {
     var B = window.AndroidBridge;
-    if (NO_ADS || !B || !B.showAd || Date.now() - lastAd < AD_GAP) return;
-    try { if (B.showAd(String(where))) lastAd = Date.now(); } catch (e) {}
+    if (NO_ADS || !B || !B.showAd) return false;
+    try {
+      /* Android aplica el límite de cinco minutos al anuncio realmente mostrado. No
+         bloquear aquí: el puente devuelve void, y una carga fallida no debe consumirlo. */
+      B.showAd(String(where));
+      return true;
+    } catch (e) { return false; }
   }
+  function showAdLater(where, delay, isSafe) {
+    var retries = 0;
+    function attempt() {
+      if (isSafe && !isSafe()) {
+        if (retries++ < 8) setTimeout(attempt, 750);
+        return;
+      }
+      showAd(where);
+    }
+    setTimeout(attempt, Math.max(250, delay || 1200));
+  }
+  UIX.showAd = showAd;
+  UIX.showAdLater = showAdLater;
   function adPrivacyRequired() {
     var B = window.AndroidBridge;
     try { return !!(B && B.privacyOptionsRequired && B.privacyOptionsRequired()); } catch (e) { return false; }
@@ -1873,6 +2067,7 @@
   /* aviso de actualización: la app de Android pregunta a Google Play y llama a caminoUpdate(versión) */
   window.caminoUpdate = function (code, name) {
     if (!code) return;
+    syncSelectedLanguage();
     UI.upd = {code: +code, name: name ? String(name).replace(/[^0-9.]/g, "").slice(0, 12) : ""};
     if (UI.view === "home") render(false);
     if (UI.updShown) return;
@@ -1884,11 +2079,11 @@
     return '<section class="updbar' + (inMenu ? " inmenu" : "") + '"><div class="ui">' + ICON.play + '</div><div class="grow"><b>' + (UI.upd.name ? tr("Versión {v} disponible", {v: h(UI.upd.name)}) : tr("Nueva versión disponible")) + "</b><small>" + tr("Actualiza desde Google Play. Tus partidas se conservan.") + '</small></div><button class="btn pri sm" data-a="doupdate">' + tr("Actualizar") + "</button></section>";
   }
   function loadSlot(id) {
-    if (S && S.uid === id) { enterGame(); render(true); showAd("load"); return; }
+        if (S && S.uid === id) { enterGame(); render(true); return; }
     switchGame(function () {
       Store.load(id).then(function (json) {
         if (!json) throw new Error("vacía");
-        restore(json); enterGame(); persist(); render(true); showAd("load");
+        restore(json); enterGame(); persist(); render(true);
       }).catch(function (e) { console.error(e); toast(tr("No se pudo cargar esa partida.")); refreshSlots(); });
     });
   }
@@ -1960,6 +2155,7 @@
   }
   function fmtCount(n) { return n >= 1e6 ? fmtDec(n / 1e6, 1) + "M" : n >= 1e3 ? fmtDec(n / 1e3, 1) + "k" : String(n); }
   function tabRed() {
+    if (!eraSocialAvailable()) return '<div class="stack"><p class="empty">' + eraText("Las redes sociales todavía no están disponibles en este año.") + '</p></div>';
     var soc = socInit(), prof = soc.prof, fol = socFollowers();
     soc.seen = soc.posts.length;
     var usedThisBlock = soc.customPeriod === socCustomPeriod();
@@ -2423,11 +2619,18 @@
       case "bgm": if (typeof Pitch !== "undefined" && Pitch.musicToggle) Pitch.musicToggle(); render(false); break;
       case "menu": UI.sheet = {k: "menu"}; renderSheet(); break;
       case "close": closeSheet(); render(false); break;
+      case "ntfcenter": openNtfCenter(); break;
+      case "ntfclear": S.ntfHistory = []; S.ntfUnread = 0; persist(); renderSheet(); break;
       case "setev": S.set.ev = +v; persist(); renderSheet(); break;
       case "setlang": setLangUI(v); break;
       case "golang": UI.view = "lang"; render(true); break;
       case "privacy": UI.sheet = {k: "privacy"}; renderSheet(); break;
       case "doupdate": try { window.AndroidBridge.openStore(); } catch (err) {} closeSheet(); render(false); break;
+      case "ratelater": closeSheet(); render(false); break;
+      case "rateapp":
+        rateState.done = true; saveRateState(); closeSheet(); render(false);
+        try { window.AndroidBridge.openStore(); } catch (err) {}
+        break;
       case "adprivacy": try { window.AndroidBridge.showPrivacyOptions(); } catch (err) {} break;
       case "gohome": var fromDraft = UI.view === "draft"; UI.vback = true; UI.view = "home"; UI.cr = null; render(true); if (fromDraft) showAd("menu"); break;
       case "goload": UI.view = "load"; render(true); refreshSlots(); break;
@@ -2439,6 +2642,7 @@
       /* tras retirarte: empezar otra carrera de jugador/a desde cero (la retirada queda guardada) */
       case "newcareer":
         UI.sheet = null; closeLive(true);
+        if (S && S.era && S.era.active) { persist(); S = null; UI.cr = null; UI.exp = {}; UI.view = "home"; render(true); showAd("menu"); break; }
         try { persist(); Store.flush && Store.flush(); } catch (err) {}
         /* con el máximo de partidas, la carrera terminada deja su hueco (ya está en el Salón de la fama) */
         if (slotsNow().length >= MAX_SLOTS && S && S.ph === "ret") { var oldId = S.uid; try { Store.remove(oldId); } catch (err) {} UI.slots = slotsNow().filter(function (x) { return x.id !== oldId; }); }
@@ -2446,7 +2650,7 @@
         UI.gsel = S && S.g === "f" ? "f" : UI.gsel;
         S = null;
         UI.tab = null; UI.exp = {}; UI.flash = null;
-        startCreate("p"); showAd("menu");
+        startCreate("p");
         break;
       case "gsel": UI.gsel = v === "f" ? "f" : "m"; render(false); break;
       case "loadslot": loadSlot(v); break;
@@ -2470,11 +2674,11 @@
       case "doImport": importCode((document.getElementById("incode") || {}).value); break;
       case "hof": UI.sheet = {k: "hof", list: null}; renderSheet(); Store.hof().then(function (l) { if (UI.sheet && UI.sheet.k === "hof") { UI.sheet.list = l.sort(function (x, y) { return y.sc - x.sc; }); renderSheet(); } }); break;
       case "hoff": UI.hofF = v; renderSheet(); break;
-      case "home": UI.sheet = null; Store.flush(); UI.view = "home"; refreshSlots(); render(true); showAd("menu"); break;
-      case "continue": enterGame(); render(true); showAd("load"); break;
+      case "home": UI.sheet = null; if (S && S.era && typeof EraStore !== "undefined") { EraStore.save(); S = null; } else Store.flush(); UI.view = "home"; refreshSlots(); render(true); showAd("menu"); break;
+      case "continue": enterGame(); render(true); break;
       case "startmgr":
         try { startManager(); } catch (err) { console.error(err); toast(tr("No se pudo empezar la carrera de entrenador.")); break; }
-        UI.tab = "club"; UI.exp = {}; UI.wl = null; persist(); render(true); showAd("manager"); break;
+        UI.tab = "club"; UI.exp = {}; UI.wl = null; persist(); render(true); showAd("manager_start"); break;
       case "jobpick": UI.sheet = {k: "pickclub", lg: null}; renderSheet(); break;
       case "takejob":
         if (mgrTakeJob(+v)) { UI.sheet = null; UI.tab = "club"; persist(); render(true); } else toast(tr("No puedes fichar por ese club ahora."));
@@ -2541,13 +2745,14 @@
       /* minijuego */
       case "mini": doMini(+b.getAttribute("data-i"), b.getAttribute("data-m")); break;
       /* red social */
-      case "soccompose": UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k}; renderSheet(); break;
+      case "soccompose": if (eraSocialAvailable()) { UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k}; renderSheet(); } break;
       case "socreplay":
         var replyIdx = +b.getAttribute("data-i"), replyPost = S.soc && S.soc.posts[replyIdx];
         if (replyPost) UI.sheet = {k: "soccompose", pick: SOC_CUSTOM_OPTIONS[0].k, reply: {id: replyPost.id || null, target: socPostAuthor(replyPost), text: socText(replyPost).slice(0, 180)}};
         renderSheet(); break;
       case "socpick": if (UI.sheet && UI.sheet.k === "soccompose") { UI.sheet.pick = v; renderSheet(); } break;
       case "socsend":
+        if (!eraSocialAvailable()) break;
         var sendReply = UI.sheet && UI.sheet.k === "soccompose" && UI.sheet.reply;
         var sendResult = socCustomSend(v, sendReply || "");
         if (sendResult.ok) { persist(); UI.sheet = null; render(false); toast(tr(sendResult.reply ? "Respuesta enviada." : "Publicación enviada.")); }
@@ -2585,7 +2790,7 @@
       case "redraft": clubRedraft(); persist(); render(false); toast(tr("Plantilla nueva generada")); break;
       case "startclub":
         try { clubStart(); } catch (err) { console.error(err); toast(tr("No se pudo empezar la temporada.")); break; }
-        enterGame(); persist(); render(true); break;
+        enterGame(); persist(); render(true); showAdLater("career_start", 1200, function () { return !!(S && UI.view !== "create" && UI.view !== "modes"); }); break;
     }
   });
   document.addEventListener("toggle", function (e) {
@@ -2635,7 +2840,12 @@
     }
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && UI.sheet) { closeSheet(); render(false); } });
-  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") { try { Store.flush(); } catch (err) {} } });
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      saveRateState();
+      try { if (S && S.era && typeof EraStore !== "undefined") EraStore.save(); else Store.flush(); } catch (err) {}
+    } else queueRatePrompt();
+  });
 
   /* ---------- deslizar a la derecha para descartar tarjetas ---------- */
   (function () {
@@ -2691,6 +2901,7 @@
       try { restore(data.save); enterGame(); if (data.tab) UI.tab = data.tab; } catch (e) { S = null; UI.view = "home"; }
     } else UI.view = l ? "home" : "lang";
     render(true);
+    if (window.AndroidBridge && !ratePlayTimer) ratePlayTimer = setInterval(countActivePlaytime, 15000);
     try { var AB = window.AndroidBridge; if (AB && AB.updateAvailable && AB.updateAvailable() > 0) window.caminoUpdate(AB.updateAvailable(), AB.updateName ? AB.updateName() : ""); } catch (e) {}
     Store.init().then(function () {
       if (!Store.cloud) return;

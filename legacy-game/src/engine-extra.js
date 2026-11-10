@@ -72,7 +72,7 @@ function mgrObjChoices() {
     });
     cats.push({n: N_("Copa"), list: uniqObjs(cl)});
   }
-  ["UCL", "LIB", "UEL", "ACL", "CAF", "CCC", "SUD", "UECL"].forEach(function (k) {
+  ["UCL", "LIB", "UEL", "ACL", "CAF", "CCC", "SUD", "UECL", "UCWC", "CCMB"].forEach(function (k) {
     var c = S.C[k];
     if (!c || !compHas(c, m.club)) return;
     var rank = c.teams && c.teams.length ? c.teams.slice().sort(byRating).indexOf(m.club) + 1 : 10;

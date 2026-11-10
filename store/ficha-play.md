@@ -43,3 +43,10 @@ Live a whole football career, offline and at your own pace.
 • Guided first season, one step at a time
 • Large text and colour-blind mode
 • Plays offline; only connects for ads
+
+## Capturas (5.18)
+
+Ocho capturas de 1080×1920 por idioma, en orden: inicio, decisiones, partido en 3D, plantilla, tu futbolista, Modo Épocas, momentos de leyenda y penalti.
+
+- Inglés (ficha principal y otros idiomas sin capturas propias): `store/screenshot-1.png` … `screenshot-8.png`
+- Español (es-ES): `store/es/screenshot-1.png` … `screenshot-8.png`

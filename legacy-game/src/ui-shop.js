@@ -59,6 +59,7 @@
     if (lk.k === "tro") { var n = (S.mode === "mgr" ? m : p).trophies.length; return [tr("Títulos {a} / {b}", {a: n, b: lk.v}), n / lk.v]; }
     if (lk.k === "cap") return [tr("Necesitas ser capitán"), 0];
     if (lk.k === "ch" && typeof GXC !== "undefined") { var pr = GXC.prog(lk.v); return [tr(GXC.name(lk.v)) + " · " + pr[0] + " / " + pr[1], pr[0] / pr[1]]; }
+    if (lk.k === "era" && typeof eraLockText === "function") return [eraLockText(lk), 0];
     return [tr("Bloqueado"), 0];
   }
   var TABS = [["feat", N_("Destacados")], ["p", N_("Jugador")], ["m", N_("Entrenador")], ["pet", N_("Mascota")], ["chal", N_("Retos")]];

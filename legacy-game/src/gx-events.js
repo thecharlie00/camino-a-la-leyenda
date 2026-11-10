@@ -64,7 +64,21 @@ var GXE = (function () {
     });
     g.later = keep;
   };
-  function vars() { var o = {club: X.club, nat: X.nat, lg: X.lg}; try { o.opp = X.opp(); } catch (e) { o.opp = tr("rival"); } try { var L = S.p.life; o.pet = L && L.pet ? L.pet.n || tr("tu mascota") : tr("tu mascota"); } catch (e) {} return o; }
+  function vars() {
+    var o = {club: X.club, nat: X.nat, lg: X.lg};
+    try { o.opp = X.opp(); } catch (e) { o.opp = tr("rival"); }
+    try {
+      var L = S.p.life, pt = L && L.pet, name = "";
+      if (pt) {
+        if (typeof pt.nm === "string") name = pt.nm;
+        else if (typeof pt.name === "string") name = pt.name;
+        /* In pet v2, `n` is the needs object, not the pet's name. */
+        else if (typeof pt.n === "string") name = pt.n;
+      }
+      o.pet = name.trim() ? name.trim() : tr("tu mascota");
+    } catch (e) { o.pet = tr("tu mascota"); }
+    return o;
+  }
   function outc(o, id) {
     if (!o) return null;
     var r = {txt: tr(o.txt, vars()), fx: o.fx || {}};

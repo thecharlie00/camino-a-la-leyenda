@@ -250,6 +250,19 @@ var Pitch3DAssets = (function () {
       matMetallic: matMetallic, matRoughness: matRoughness, triangles: positions.length / 9};
   }
 
+  function loadEmbedded() {
+    var pack = typeof P3D_ASSET_PACK !== "undefined" ? P3D_ASSET_PACK : null;
+    if (!pack && typeof document !== "undefined") {
+      var node = document.getElementById("pitch3d-asset-pack");
+      if (node) {
+        try { pack = JSON.parse((node.content && node.content.textContent || node.textContent) || "{}"); }
+        catch (e) { warn("paquete GLB no válido: " + (e && e.message ? e.message : e)); }
+        if (node.parentNode) node.parentNode.removeChild(node);
+      }
+    }
+    return load(pack);
+  }
+
   function load(pack) {
     var out = {players: {}, static: {}, ok: 0, errors: []};
     if (!pack) return out;
@@ -272,5 +285,5 @@ var Pitch3DAssets = (function () {
     return out;
   }
 
-  return {load: load, keys: {players: PLAYER_KEYS, statics: STATIC_KEYS}};
+  return {load: load, loadEmbedded: loadEmbedded, keys: {players: PLAYER_KEYS, statics: STATIC_KEYS}};
 })();

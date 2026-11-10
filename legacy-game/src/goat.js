@@ -1,15 +1,13 @@
 /* Envío voluntario del resumen de partido/temporada a GOAT LADDER. */
 (function (root) {
   "use strict";
-  /* Origen del servicio. Se normaliza para que una URL mal copiada (esquema duplicado,
-     espacios, barra final o un «/api» de más) no acabe en un fetch imposible que el
-     navegador solo puede resolver con «Failed to fetch». */
   var apiOrigin = normalizeOrigin(typeof GOAT_API_URL === "string" ? GOAT_API_URL : "");
   var memoryDeleteTokens = {};
   var TOKEN_STORAGE_KEY = "camino.goat.deleteTokens";
   var REQUEST_TIMEOUT = 15000;
   var CAREER_TIMEOUT = 25000;
-  var TEXT_CACHE_LIMIT = 100000;
+  var SIMPLE_CONTENT_TYPE = "text/plain;charset=UTF-8";
+  var MAX_CAREER_BYTES = 100000;
 
   function normalizeOrigin(value) {
     var raw = String(value == null ? "" : value).replace(/^\s+|\s+$/g, "");
@@ -26,31 +24,6 @@
     var base = (parsed.origin + parsed.pathname).replace(/\/+$/, "");
     if (/\/api$/i.test(base)) base = base.replace(/\/api$/i, "");
     return base;
-  }
-  /* Textos del servicio, con variante femenina si la partida la usa. */
-  function text(key) {
-    var language = typeof LANG === "string" ? LANG : "es";
-    var fem = typeof FEM !== "undefined" && FEM && root.GOAT_FEM_TEXT ? root.GOAT_FEM_TEXT[language] : null;
-    if (fem && fem[key]) return fem[key];
-    var tables = root.GOAT_TEXT || {};
-    var table = tables[language] || tables.es || {};
-    return table[key] || (tables.es || {})[key] || key;
-  }
-  function failure(kind, extra) {
-    var error = new Error(text(kind));
-    error.goatKind = kind;
-    if (extra && extra.status != null) error.status = extra.status;
-    if (extra && extra.cause) error.cause = extra.cause;
-    return error;
-  }
-  function delay(ms) { return new Promise(function (resolve) { setTimeout(resolve, ms); }); }
-  function isNetworkFailure(error) {
-    if (!error || error.goatKind || error.name === "AbortError") return false;
-    if (typeof TypeError === "function" && error instanceof TypeError) return true;
-    return /load failed|failed to fetch|networkerror|network request failed/i.test(String(error.message || ""));
-  }
-  function utf8Size(value) {
-    try { return new TextEncoder().encode(value).length; } catch (error) { return value.length * 2; }
   }
 
   function safeName(name) {
@@ -132,7 +105,7 @@
       assists: active ? player.ss.a || 0 : row.a || 0,
       clean_sheets: active ? player.ss.cs || 0 : row.cs || 0,
       rating: active || row.rt == null ? null : roundedOrNull(row.rt * 10) / 10,
-      overall: active ? player.ovr : row.ovr1,
+      overall: roundedOrNull(active ? player.ovr : row.ovr1),
       international_caps: active ? player.ns.apps || 0 : row.caps || 0,
       international_goals: active ? player.ns.g || 0 : row.ig || 0
     };
@@ -237,7 +210,7 @@
   }
   function rememberSeason() {
     if (!S || !S.m || !S.m.seasons || !S.m.seasons.length) return;
-    var row = S.m.seasons[S.m.seasons.length - 1], league = W.lg[row.lg];
+    var row = S.m.seasons[S.m.seasons.length - 1], league = row && W.lg[row.lg];
     if (!row || !league) return;
     remember({
       event_type: "season", game_mode: "manager", title: titleFor("manager", "season", row, "", league.n),
@@ -251,6 +224,43 @@
       division_depth: depthOfLeague(row.lg), trophies_count: (row.tro || []).length,
       goal_difference: row.gf - row.ga
     });
+  }
+  function rememberPlayerSeason() {
+    if (!S || !S.p || !Array.isArray(S.p.seasons) || !S.p.seasons.length) return;
+    var row = S.p.seasons[S.p.seasons.length - 1], league = row && W.lg[row.lg];
+    if (!row || !league) return;
+    remember({
+      event_type: "season", game_mode: "player", title: titleFor("player", "season", row, "", league.n),
+      club_name: safeName(clubName(row.club)), competition_name: safeName(league.n), opponent_name: null,
+      season: row.y, goals: row.g || 0, assists: row.a || 0, match_rating: row.rt,
+      minutes_played: row.min || 0, key_passes: null, possession: null, xg: null, decisive_goal_minute: null,
+      own_score: null, opponent_score: null, goals_for: null, goals_against: null,
+      halftime_own_score: 0, halftime_opponent_score: 0, opponent_strength: null,
+      team_strength: row.ovr1, importance: 2, is_final: false, league_position: row.pos,
+      trophies_count: (row.tro || []).length, awards_count: (row.aw || []).length
+    });
+  }
+  function text(key) {
+    var language = typeof LANG === "string" ? LANG : "es";
+    var tables = root.GOAT_TEXT || {};
+    var table = tables[language] || tables.es || {};
+    return table[key] || (tables.es || {})[key] || key;
+  }
+  function delay(ms) { return new Promise(function (resolve) { setTimeout(resolve, ms); }); }
+  function failure(kind, extra) {
+    var error = new Error(text(kind));
+    error.goatKind = kind;
+    if (extra && extra.status != null) error.status = extra.status;
+    if (extra && extra.cause) error.cause = extra.cause;
+    return error;
+  }
+  function isNetworkFailure(error) {
+    if (!error || error.goatKind || error.name === "AbortError") return false;
+    if (typeof TypeError === "function" && error instanceof TypeError) return true;
+    return /load failed|failed to fetch|networkerror|network request failed/i.test(String(error.message || ""));
+  }
+  function isContentTypeRejection(error) {
+    return !!(error && !error.goatKind && (error.status === 415 || error.status === 400 || error.status === 405));
   }
   function timedFetch(url, options, timeout) {
     var controller = typeof AbortController === "function" ? new AbortController() : null;
@@ -270,6 +280,45 @@
       throw error;
     });
   }
+  /* The Android game is served from file:// (an opaque CORS origin), so use its
+     HTTPS bridge for career POSTs. Browsers keep using fetch below. */
+  var nativeRequestSequence = 0;
+  var nativeRequests = {};
+  function nativeCareerFetch(body, contentType, timeout) {
+    var bridge = root.AndroidBridge;
+    if (!bridge || typeof bridge.goatCareerPost !== "function") return null;
+    return new Promise(function (resolve, reject) {
+      var id = "goat_" + Date.now() + "_" + (++nativeRequestSequence);
+      var timer = setTimeout(function () {
+        delete nativeRequests[id];
+        reject(failure("timeoutError"));
+      }, timeout);
+      nativeRequests[id] = {resolve: resolve, reject: reject, timer: timer};
+      if (!root.__caminoGoatNativeComplete) {
+        root.__caminoGoatNativeComplete = function (requestId, status, responseBody) {
+          var pending = nativeRequests[requestId];
+          if (!pending) return;
+          delete nativeRequests[requestId];
+          clearTimeout(pending.timer);
+          if (status === -1) {
+            pending.reject(failure("timeoutError"));
+          } else if (status === 0) {
+            pending.reject(new TypeError("Failed to fetch"));
+          } else {
+            pending.resolve({ok: status >= 200 && status < 300, status: status,
+              text: function () { return Promise.resolve(responseBody || ""); }});
+          }
+        };
+      }
+      try {
+        bridge.goatCareerPost(id, body, contentType || "application/json");
+      } catch (error) {
+        delete nativeRequests[id];
+        clearTimeout(timer);
+        reject(error);
+      }
+    });
+  }
   function readResponse(response) {
     return response.text().then(function (body) {
       var data;
@@ -283,15 +332,11 @@
       return data;
     });
   }
-  /* Petición al ranking. Se intenta primero como siempre (JSON con su petición previa de
-     CORS); si la red falla se reintenta enviando el mismo JSON como texto, que no dispara
-     ese preflight y evita el «Failed to fetch» cuando el servicio no responde a OPTIONS. */
   function request(path, options, config) {
     config = config || {};
     if (!apiOrigin) return Promise.reject(failure("unavailable"));
     if (root.navigator && root.navigator.onLine === false) return Promise.reject(failure("offlineError"));
-    var url = apiOrigin + path;
-    var timeout = config.timeout || REQUEST_TIMEOUT;
+    var url = apiOrigin + path, timeout = config.timeout || REQUEST_TIMEOUT;
     var body = options && typeof options.body === "string" ? options.body : null;
     function attempt(contentType) {
       var copy = {};
@@ -304,38 +349,41 @@
       copy.mode = "cors";
       copy.credentials = "omit";
       copy.cache = "no-store";
-      return timedFetch(url, copy, timeout).then(readResponse);
+      var isCareerPost = body != null && copy.method === "POST" && /\/api\/goat-ladder\/careers$/.test(path);
+      var nativeFetch = isCareerPost ? nativeCareerFetch(body, contentType, timeout) : null;
+      return (nativeFetch || timedFetch(url, copy, timeout)).then(readResponse);
     }
-    function retryAsSimple(error) {
-      if (!body || !isNetworkFailure(error)) throw error;
-      return delay(700).then(function () { return attempt("text/plain;charset=UTF-8"); })
-        .catch(function (rejected) {
-          /* si el servicio exige JSON, se vuelve a ese tipo antes de darse por vencido */
-          if (body && rejected && (rejected.status === 415 || rejected.status === 400 || rejected.status === 405)) {
-            return attempt("application/json");
-          }
-          throw rejected;
-        });
+    function send(contentType) {
+      return attempt(contentType).catch(function (error) {
+        if (body != null && contentType !== "application/json" && isContentTypeRejection(error)) return attempt("application/json");
+        throw error;
+      });
     }
-    return attempt(body != null ? "application/json" : null).catch(retryAsSimple).catch(function (error) {
-      if (error && error.goatKind) throw error;
-      if (isNetworkFailure(error)) {
-        try { console.error("GOAT LADDER request failed", url, error); } catch (logError) {}
-        throw failure("networkError", {cause: error});
-      }
-      if (error && error.status >= 500) throw failure("serverError", {status: error.status});
-      throw error;
+    return Promise.resolve().then(function () {
+      return send(body != null ? "application/json" : null);
+    }).catch(function (error) {
+      if (!isNetworkFailure(error)) throw error;
+      return delay(config.retryDelay == null ? 700 : config.retryDelay).then(function () {
+        return send(SIMPLE_CONTENT_TYPE);
+      }).catch(function (second) {
+        if (!isNetworkFailure(second)) throw second;
+        try { console.error("GOAT LADDER request failed", url, second); } catch (logError) {}
+        throw failure("networkError", {cause: second});
+      });
     });
   }
-  /* Si una carrera es enorme se recortan las temporadas más antiguas: el ranking solo
-     necesita el resumen y las métricas agregadas no cambian. */
-  function careerPayload(career) {
+  function utf8Size(value) {
+    try { return new TextEncoder().encode(value).length; } catch (error) { return value.length * 2; }
+  }
+  function careerPayload(career, displayName, title) {
     var payload = {};
-    Object.keys(career).forEach(function (key) { payload[key] = career[key]; });
+    Object.keys(career || {}).forEach(function (key) { payload[key] = career[key]; });
+    payload.display_name = safeName(displayName);
+    payload.title = safeName(title);
     if (!Array.isArray(payload.history)) return payload;
     var history = payload.history.slice();
     payload.history = history;
-    while (history.length > 1 && utf8Size(JSON.stringify(payload)) > TEXT_CACHE_LIMIT) history.shift();
+    while (history.length > 1 && utf8Size(JSON.stringify(payload)) > MAX_CAREER_BYTES) history.shift();
     return payload;
   }
   function storedDeleteTokens() {
@@ -377,7 +425,17 @@
     latest: function () { return S && S.goatLatest ? S.goatLatest : null; },
     career: careerSnapshot,
     canDelete: function (id) { return !!(memoryDeleteTokens[id] || storedDeleteTokens()[id]); },
-    t: text,
+    /* Texto de interfaz; admite marcadores («{q}», «{n}»…) para los mensajes con datos. */
+    t: function (key, params) {
+      var language = typeof LANG === "string" ? LANG : "es";
+      var fem = typeof FEM !== "undefined" && FEM && root.GOAT_FEM_TEXT ? root.GOAT_FEM_TEXT[language] : null;
+      var value = fem && fem[key] ? fem[key]
+        : ((root.GOAT_TEXT[language] || root.GOAT_TEXT.es)[key] || root.GOAT_TEXT.es[key] || key);
+      if (params) value = String(value).replace(/\{(\w+)\}/g, function (match, name) {
+        return params[name] == null ? match : String(params[name]);
+      });
+      return value;
+    },
     list: function (mode, timeframe) {
       if (!apiOrigin) return Promise.reject(failure("unavailable"));
       return Promise.resolve().then(function () {
@@ -387,13 +445,15 @@
     },
     submit: function (latest, displayName, title) {
       if (!apiOrigin) return Promise.reject(failure("unavailable"));
-      if (!latest || !latest.event_key) return Promise.reject(failure("noLatest"));
+      if (!latest || !latest.event_key) return Promise.reject(new Error("No match or season is ready to publish"));
       var payload = {};
       Object.keys(latest).forEach(function (key) { payload[key] = latest[key]; });
       payload.display_name = safeName(displayName);
       payload.title = safeName(title);
       return Promise.resolve().then(function () {
-        return request("/api/goat-ladder", {method: "POST", body: JSON.stringify(payload)});
+        return request("/api/goat-ladder", {
+          method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)
+        });
       }).then(function (data) {
         data.delete_token_saved = keepDeleteToken(data.id, data.delete_token);
         return data;
@@ -409,13 +469,12 @@
     },
     submitCareer: function (career, displayName, title) {
       if (!apiOrigin) return Promise.reject(failure("unavailable"));
-      if (!career || !career.event_key) return Promise.reject(failure("careerNoData"));
-      var payload = careerPayload(career);
-      payload.display_name = safeName(displayName);
-      payload.title = safeName(title);
+      if (!career || !career.event_key) return Promise.reject(new Error("No career is ready to publish"));
+      var payload = careerPayload(career, displayName, title);
       return Promise.resolve().then(function () {
-        return request("/api/goat-ladder/careers", {method: "POST", body: JSON.stringify(payload)},
-          {timeout: CAREER_TIMEOUT});
+        return request("/api/goat-ladder/careers", {
+          method: "POST", body: JSON.stringify(payload)
+        }, {timeout: CAREER_TIMEOUT});
       }).then(function (data) {
         data.delete_token_saved = keepDeleteToken(data.id, data.delete_token);
         return data;
@@ -423,8 +482,7 @@
     },
     deleteEntry: function (id) {
       var token = memoryDeleteTokens[id] || storedDeleteTokens()[id];
-      if (!apiOrigin) return Promise.reject(failure("unavailable"));
-      if (!token) return Promise.reject(failure("deleteMissing"));
+      if (!apiOrigin || !token) return Promise.reject(new Error("No deletion token is available on this device"));
       return request("/api/goat-ladder?id=" + encodeURIComponent(id), {
         method: "DELETE", headers: {Authorization: "Bearer " + token}
       }).then(function (data) {
@@ -434,8 +492,7 @@
     },
     deleteCareer: function (id) {
       var token = memoryDeleteTokens[id] || storedDeleteTokens()[id];
-      if (!apiOrigin) return Promise.reject(failure("unavailable"));
-      if (!token) return Promise.reject(failure("deleteMissing"));
+      if (!apiOrigin || !token) return Promise.reject(new Error("No deletion token is available on this device"));
       return request("/api/goat-ladder/careers?id=" + encodeURIComponent(id), {
         method: "DELETE", headers: {Authorization: "Bearer " + token}
       }).then(function (data) {
@@ -465,6 +522,15 @@
       if (S && S.blog && S.blog.length > before) capture(function () {
         rememberMatch(fixture, "manager", S.blog[S.blog.length - 1]);
       });
+      return result;
+    };
+  }
+  if (typeof seasonEnd === "function") {
+    var originalPlayerSeasonEnd = seasonEnd;
+    seasonEnd = function () {
+      var before = S && S.p && S.p.seasons ? S.p.seasons.length : 0;
+      var result = originalPlayerSeasonEnd.apply(this, arguments);
+      if (S && S.p && S.p.seasons && S.p.seasons.length > before) capture(rememberPlayerSeason);
       return result;
     };
   }

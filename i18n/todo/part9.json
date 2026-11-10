@@ -179,8 +179,8 @@
   "ctx": "{by: \"memefut\", t: N_(\"Cuando ganas y todo el grupo de WhatsApp se llena de audios de 3 minutos 🗣️🗣️🗣️\")},",
   "where": "social-data.js:54"
  },
- "Another three points for {club}. Not bad at all, not bad at all.": {
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Another three points for {club}. Not bad at all, not bad at all.\")},",
+ "Tres puntos más para el {club}. Nada mal, nada mal.": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Tres puntos más para el {club}. Nada mal, nada mal.\")},",
   "where": "social-data.js:55"
  },
  "¡Tres puntos que valen oro! Gracias a la afición por empujar hasta el final 💪 {score}": {
@@ -667,8 +667,8 @@
   "ctx": "{by: \"rival\", mood: -1, t: N_(\"Hay que reconocerlo: un triplete es un triplete. Respeto, aunque duela.\")},",
   "where": "social-data.js:192"
  },
- "Hat-trick! The ball goes home with {name}. Lovely stuff.": {
-  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"Hat-trick! The ball goes home with {name}. Lovely stuff.\")},",
+ "¡Triplete! El balón se va a casa con {name}. ¡Qué maravilla!": {
+  "ctx": "{by: \"linekker\", mood: 1, t: N_(\"¡Triplete! El balón se va a casa con {name}. ¡Qué maravilla!\")},",
   "where": "social-data.js:193"
  },
  "TRIPLETE DE {name}. ¿Alguien tiene un pulso? Yo no. Qué barbaridad.": {

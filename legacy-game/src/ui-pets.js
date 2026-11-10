@@ -92,7 +92,14 @@
     var i = document.getElementById("petnm"), r = petAdopt(U.ui().petPick, i ? i.value : "");
     if (r.noName) { U.toast(tr("Ponle un nombre a tu mascota.")); return; }
     if (r.poor) { U.toast(tr("No tienes dinero suficiente.")); return; }
-    if (r.ok) { U.edgeFlash(true); U.toast(tr("¡{pet} ya está en casa!", {pet: petOf().nm})); U.ui().petPick = null; U.ui().petView = "care"; rer(); }
+    if (r.ok) {
+      U.edgeFlash(true); U.toast(tr("¡{pet} ya está en casa!", {pet: petOf().nm}));
+      U.ui().petPick = null; U.ui().petView = "care";
+      U.closeSheet(); U.persist(); U.render(false);
+      if (typeof PetWorld !== "undefined" && PetWorld && PetWorld.open()) return;
+      /* Fallback only when WebGL/3D is unavailable on the device. */
+      U.open("lpet");
+    }
   };
   var CARE_TXT = {
     pat: N_("{pet} se acurruca a tu lado: el vínculo crece."), walk: N_("Paseo largo con {pet}: los dos volvéis con energía."), play: N_("Tarde de juegos con {pet}: no paráis de reír."),
@@ -142,7 +149,7 @@
       if (c.fame || c.photo) eff.push(tr("Fama"));
       return '<button class="petact' + (done ? " done" : "") + '" data-a="petact" data-v="' + c.k + '"' + (dis ? " disabled" : "") + '><span class="pai" aria-hidden="true">' + (done ? "✓" : c.ico) + '</span><b>' + h(tr(c.n)) + "</b><small>" + h(tr(c.d)) + '</small><small class="paf">' + h(eff.join(" · ")) + (cost ? " · " + fmtMoney(cost) : "") + "</small></button>";
     }).join("") + "</div>";
-    if (pt.tricks) s += '<p class="muted lfhint">🎓 ' + trn(pt.tricks, "Sabe {n} truco", "Sabe {n} trucos") + "</p>";
+    if (pt.tricks) s += '<p class="muted lfhint">💡 ' + trn(pt.tricks, "Sabe {n} truco", "Sabe {n} trucos") + "</p>";
     s += '<div class="chips">' + chips(d) + "</div>";
     s += '<p class="muted lfhint">' + tr("Gasto anual: {v}. Esperanza de vida: {a}–{b} años.", {v: fmtMoney(d.year), a: d.life[0], b: d.life[1]}) + "</p>";
     s += '<div class="petrn"><input id="petrn" maxlength="16" value="' + h(pt.nm) + '" aria-label="' + h(tr("Nombre")) + '"><button class="btn" data-a="petname">' + tr("Cambiar nombre") + "</button></div>";

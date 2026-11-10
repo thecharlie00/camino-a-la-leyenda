@@ -1,0 +1,101 @@
+import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.TaskAction
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
+plugins {
+    id 'com.android.application'
+}
+
+abstract class PrepareGameAssetsTask extends DefaultTask {
+    @InputFile
+    abstract RegularFileProperty getGameHtml()
+
+    @OutputDirectory
+    abstract DirectoryProperty getOutputDirectory()
+
+    @TaskAction
+    void copyGameHtml() {
+        File destination = outputDirectory.get().file('jugar/juego.html').asFile
+        destination.parentFile.mkdirs()
+        Files.copy(gameHtml.get().asFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING)
+    }
+}
+
+def gameHtmlFile = rootProject.file('../dist/android/jugar/juego.html')
+
+def envOr = { String key, String fallback ->
+    def value = System.getenv(key)
+    value == null || value.trim().isEmpty() ? fallback : value
+}
+
+android {
+    namespace 'com.caminoleyenda.app'
+    compileSdk 37
+    buildToolsVersion '37.0.0'
+
+    defaultConfig {
+        applicationId 'com.caminoleyenda.app'
+        minSdk 24
+        targetSdk 36
+        versionCode envOr('VERSION_CODE', '82').toInteger()
+        versionName envOr('VERSION_NAME', '5.32')
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile '../AndroidManifest.xml'
+            java.srcDirs = ['../src']
+            res.srcDirs = ['../res']
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(envOr('CAMINO_KEYSTORE', "${rootProject.projectDir}/camino.keystore"))
+            storePassword envOr('CAMINO_KS_PASS', '')
+            keyAlias envOr('CAMINO_KEY_ALIAS', 'camino')
+            keyPassword envOr('CAMINO_KS_PASS', '')
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
+}
+
+androidComponents {
+    onVariants(selector().all(), { variant ->
+        def prepareVariantGameAssets = tasks.register("prepare${variant.name.capitalize()}GameAssets", PrepareGameAssetsTask) {
+            gameHtml.set(gameHtmlFile)
+            outputDirectory.set(layout.buildDirectory.dir("generated/game-assets/${variant.name}"))
+        }
+        variant.sources.assets?.addGeneratedSourceDirectory(
+            prepareVariantGameAssets,
+            PrepareGameAssetsTask::getOutputDirectory
+        )
+    })
+}
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-ads:24.7.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.2.0'
+    implementation 'com.google.android.play:app-update:2.1.0'
+    implementation 'com.google.android.gms:play-services-games-v2:22.1.0'
+}

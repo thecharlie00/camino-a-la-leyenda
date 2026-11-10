@@ -227,21 +227,30 @@ async function offline() {
 }
 
 async function retryOnNetwork() {
-  const types = [];
-  const {board} = loadBoard({fetch: (url, init, n) => {
-    types.push(init.method);
-    return n === 1 ? Promise.reject(new TypeError("Failed to fetch")) : json({entries: []});
-  }});
-  await board.select({});
+  const {board, calls} = loadBoard({fetch: (url, init, n) =>
+    n === 1 ? Promise.reject(new TypeError("Failed to fetch")) : json({entries: []})});
   await board.refresh();
   check("la lectura reintenta una vez tras un corte de red", () => {
-    assert.equal(types.length, 2);
+    assert.equal(calls.length, 2);
+    assert.equal(calls[0].init.method, "GET");
+  });
+}
+
+async function noRetryOnServerError() {
+  const {board, calls} = loadBoard({fetch: () => Promise.resolve({
+    ok: false, status: 503, text: () => Promise.resolve('{"error":"caído"}')
+  })});
+  await board.refresh();
+  check("un error del servicio no se reintenta y muestra su aviso", () => {
+    assert.equal(calls.length, 1);
+    assert.equal(board.state().error === undefined, true);
   });
 }
 
 await boot();
 await offline();
 await retryOnNetwork();
+await noRetryOnServerError();
 
 console.log(failures.length ? `\n${failures.length} comprobaciones fallidas` : "\nTodo correcto");
 process.exit(failures.length ? 1 : 0);

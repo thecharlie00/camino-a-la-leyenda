@@ -24,6 +24,11 @@ var Minigame = (function () {
     IDEAL0 = 0.55 - hw; IDEAL1 = 0.55 + hw;
   }
   function withPress(fn) { return function (opt, done) { setPress(opt && opt.press); return fn(opt, done); }; }
+  /* En faltas, la ventana de potencia es más amplia para que sea más fácil ajustar el golpe. */
+  function setFreeKickPowerZone() {
+    var hw = 0.21 * (1 - 0.25 * PRESS);
+    IDEAL0 = 0.55 - hw; IDEAL1 = 0.55 + hw;
+  }
 
   /* ---------- utilidades ---------- */
   function t(s, p) {
@@ -422,6 +427,9 @@ var Minigame = (function () {
     hv("span", "", pl, o.barTitle || t("Potencia"));
     ui.powv = hv("span", "mg-powv", pl, "");
     ui.bar = hv("div", "mg-bar", ui.pow);
+    if (o.cls === "mg-fk") {
+      ui.bar.style.background = "linear-gradient(90deg,#f4f6f0 0%,#cfe9d7 24%,var(--grass,#3fcf7c) " + (IDEAL0 * 100).toFixed(1) + "%,var(--grass,#3fcf7c) " + (IDEAL1 * 100).toFixed(1) + "%,var(--led,#ffb21e) 80%,var(--red,#ff5b66) 92%)";
+    }
     var zone = hv("i", "mg-zone", ui.bar);
     zone.style.left = (IDEAL0 * 100).toFixed(1) + "%"; zone.style.width = ((IDEAL1 - IDEAL0) * 100).toFixed(1) + "%";
     ui.press = PRESS;
@@ -823,6 +831,7 @@ var Minigame = (function () {
 
   function freekick(opt, done) {
     opt = opt || {};
+    setFreeKickPowerZone();
     var skill = num(opt.skill, 70), gk = num(opt.gk, 70), dist = clamp(num(opt.dist, 22), 16, 35), pressure = clamp(num(opt.pressure, 0.4), 0, 1);
     var rand = typeof opt.rand === "function" ? opt.rand : Math.random;
     var LBL = N_("Probabilidad: {p} %");
@@ -880,17 +889,18 @@ var Minigame = (function () {
     function evaluate(pts) {
       var sm = chaikin(pts, 2), rs = resample(sm, 90), P = rs.pts, E = P[P.length - 1];
       var o = {pts: P, len: rs.len, E: E};
-      if (rs.len < 60 || E.y > wy) { o.ok = false; return o; }
+      if (rs.len < 48 || E.y > wy + 8) { o.ok = false; return o; }
       o.ok = true;
       var sw = (BALL_Y - wy) / (BALL_Y - gy1), iw = Math.round(sw * (P.length - 1)), Pw = P[iw];
       o.iw = iw; o.Pw = Pw;
-      o.inside = E.x > gx0 + pst * 0.5 && E.x < gx1 - pst * 0.5 && E.y > gy0 + pst * 0.5 && E.y < gy1;
+      /* Margen de error: los tiros que rozan los postes o el larguero cuentan como dirigidos a puerta. */
+      o.inside = E.x > gx0 - gw * 0.10 && E.x < gx1 + gw * 0.10 && E.y > gy0 - gh * 0.06 && E.y < gy1 + gh * 0.06;
       o.overM = wTop - Pw.y;
       o.sideM = Math.max(wx0 - Pw.x, Pw.x - wx1);
-      o.clearsOver = o.overM > 3;
-      o.around = o.sideM > 7;
+      o.clearsOver = o.overM > -8;
+      o.around = o.sideM > -4;
       o.blocked = !(o.clearsOver || o.around);
-      var u = (E.x - gx0) / gw, v = (gy1 - E.y) / gh;
+      var u = clamp((E.x - gx0) / gw, 0, 1), v = clamp((gy1 - E.y) / gh, 0, 1);
       o.u = u; o.v = v;
       /* curva: desviación máxima respecto a la cuerda */
       var dx = E.x - 180, dy = E.y - BALL_Y, cl = Math.sqrt(dx * dx + dy * dy) || 1, maxDev = 0, j, dv;
@@ -901,15 +911,15 @@ var Minigame = (function () {
       var kd2 = Math.pow((u - ku) * 1.6, 2) + Math.pow(v - 0.4, 2), sg = 0.3 + 0.12 * gN;
       o.save = clamp((0.1 + 0.1 * gN) + (0.5 + 0.3 * gN) * Math.exp(-kd2 / (2 * sg * sg)), 0, 0.93);
       var edge = Math.min(u, 1 - u, 1 - v);
-      o.edge = clamp(1 - edge / 0.14, 0, 1) * (0.45 - 0.3 * sN);
-      o.wallF = o.blocked ? 0.04 : o.clearsOver ? clamp(0.72 + o.overM / 45, 0.72, 1) : clamp(0.8 + o.sideM / 50, 0.8, 1);
+      o.edge = clamp(1 - edge / 0.14, 0, 1) * (0.36 - 0.24 * sN);
+      o.wallF = o.blocked ? 0.04 : o.clearsOver ? clamp(0.78 + o.overM / 45, 0.78, 1) : clamp(0.84 + o.sideM / 50, 0.84, 1);
       if (o.clearsOver && o.around) o.wallF = Math.max(o.wallF, clamp(0.8 + o.sideM / 50, 0.8, 1));
       var cd = Math.min(Math.sqrt(u * u + Math.pow(1 - v, 2)), Math.sqrt(Math.pow(1 - u, 2) + Math.pow(1 - v, 2)));
       var bonus = cd < 0.38 ? (0.38 - cd) / 0.38 * 0.07 * (o.curve > 0.06 ? 1.6 : 1) : 0;
       var p;
       if (!o.inside) p = 0.02;
       else if (o.blocked) p = 0.03;
-      else p = (0.45 + 0.55 * sN) * distF * (1 - o.save) * (1 - o.edge) * o.wallF * (1 - 0.05 * pressure) + bonus;
+      else p = (0.50 + 0.50 * sN) * distF * (1 - o.save) * (1 - o.edge) * o.wallF * (1 - 0.05 * pressure) + bonus;
       o.p = clamp(p, 0.01, 0.95);
       return o;
     }

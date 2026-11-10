@@ -1,0 +1,23 @@
+name = "camino-goat-ladder"
+main = "worker.mjs"
+compatibility_date = "2025-01-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://futbolroadtolegend.com,https://thecharlie00.github.io,null"
+
+[[d1_databases]]
+binding = "GOAT_DB"
+database_name = "camino-goat-ladder"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[[unsafe.bindings]]
+name = "GOAT_READ_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 120, period = 60 }
+
+[[unsafe.bindings]]
+name = "GOAT_SUBMIT_LIMITER"
+type = "ratelimit"
+namespace_id = "1002"
+simple = { limit = 10, period = 60 }

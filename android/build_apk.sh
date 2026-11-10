@@ -1,17 +1,35 @@
-#!/bin/bash
-. "$(dirname "$0")/signing.env" 2>/dev/null; : "${CAMINO_KS_PASS:?Falta la contraseña: crea android/signing.env con CAMINO_KS_PASS=...}"
-# Compila la APK firmada a partir de dist/index.html
-set -e
-cd "$(dirname "$0")"
-SDK=/usr/lib/android-sdk/platforms/android-23/android.jar
-rm -rf build && mkdir -p build/gen build/obj build/apk assets
-cp ../dist/index-noads.html assets/index.html
-aapt package -f -m -J build/gen -M AndroidManifest.xml -S res -I "$SDK"
-javac -nowarn -source 8 -target 8 -bootclasspath "$SDK" -classpath "$SDK" -d build/obj build/gen/com/caminoleyenda/app/R.java src/com/caminoleyenda/app/MainActivity.java src/com/caminoleyenda/app/Remind.java 2>&1 | grep -v "warning" || true
-dalvik-exchange --dex --min-sdk-version=24 --output=build/apk/classes.dex build/obj
-aapt package -f -M AndroidManifest.xml -S res -A assets -I "$SDK" -F build/unsigned.apk
-(cd build/apk && aapt add ../unsigned.apk classes.dex >/dev/null)
-zipalign -f -p 4 build/unsigned.apk build/aligned.apk
-[ -f camino.keystore ] || keytool -genkeypair -keystore camino.keystore -storepass $CAMINO_KS_PASS -keypass $CAMINO_KS_PASS -alias camino -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Camino a la Leyenda, O=Camino, C=ES" 2>/dev/null
-apksigner sign --ks camino.keystore --ks-pass pass:"$CAMINO_KS_PASS" --key-pass pass:"$CAMINO_KS_PASS" --ks-key-alias camino --out ../dist/CaminoALaLeyenda.apk build/aligned.apk
-apksigner verify ../dist/CaminoALaLeyenda.apk && echo "APK firmada: $(du -h ../dist/CaminoALaLeyenda.apk | cut -f1)"
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+: "${CAMINO_KS_PASS:?Set CAMINO_KS_PASS to the signing-key password}"
+KEYSTORE="${CAMINO_KEYSTORE:-$ROOT/android/camino.keystore}"
+KEY_ALIAS="${CAMINO_KEY_ALIAS:-camino}"
+BUNDLETOOL_VERSION="${BUNDLETOOL_VERSION:-1.18.3}"
+
+if [[ ! -s "$KEYSTORE" ]]; then
+  echo "Keystore not found or empty: $KEYSTORE" >&2
+  exit 1
+fi
+if [[ ! -f "${BUNDLETOOL_JAR:-}" ]]; then
+  BUNDLETOOL_JAR="$ROOT/.cache/bundletool-all-$BUNDLETOOL_VERSION.jar"
+  mkdir -p "$(dirname "$BUNDLETOOL_JAR")"
+  curl -fsSL -o "$BUNDLETOOL_JAR" \
+    "https://github.com/google/bundletool/releases/download/$BUNDLETOOL_VERSION/bundletool-all-$BUNDLETOOL_VERSION.jar"
+fi
+
+bash "$ROOT/android/build_aab.sh"
+
+APKS="$ROOT/dist/CaminoALaLeyenda.apks"
+java -jar "$BUNDLETOOL_JAR" build-apks \
+  --bundle="$ROOT/dist/CaminoALaLeyenda.aab" \
+  --output="$APKS" \
+  --mode=universal \
+  --ks="$KEYSTORE" \
+  --ks-pass="pass:$CAMINO_KS_PASS" \
+  --ks-key-alias="$KEY_ALIAS" \
+  --key-pass="pass:$CAMINO_KS_PASS" \
+  --overwrite
+unzip -p "$APKS" universal.apk > "$ROOT/dist/CaminoALaLeyenda.apk"
+echo "APK universal firmada: $ROOT/dist/CaminoALaLeyenda.apk ($(du -h "$ROOT/dist/CaminoALaLeyenda.apk" | cut -f1))"

@@ -27,3 +27,7 @@ __pycache__/
 *.pyc
 work/
 .DS_Store
+.aistudio/
+.cache/
+public/assets/aistudio/
+build/

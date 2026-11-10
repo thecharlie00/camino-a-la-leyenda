@@ -1,1 +1,2 @@
-google.com, pub-3919867907492197, DIRECT, f08c47fec0942fa0
+# Web ads use bauval.org tags.
+# Add the seller records supplied by the network before monetized launch.

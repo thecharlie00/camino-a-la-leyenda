@@ -100,8 +100,8 @@ var GXV = (function () {
   var KICK = {b: N_("Trofeo de bronce"), s: N_("Trofeo de plata"), g: N_("Trofeo de oro"), p: N_("Trofeo de platino")};
   function rarName(r) { return tr(GX_RAR[r] ? GX_RAR[r].n : "Bronce"); }
   function money(n) { return typeof fmtMoney === "function" ? fmtMoney(n) : n + " €"; }
-  function nameOf(id) { var m = GX.meta(id); if (m.n) return tr(m.n); var a = (typeof achList === "function" ? achList() : []).filter(function (x) { return x[0] === id; })[0]; return a ? tr(a[2]) : id; }
-  function descOf(id) { var m = GX.meta(id); if (m.d) return tr(m.d); var a = (typeof achList === "function" ? achList() : []).filter(function (x) { return x[0] === id; })[0]; return a ? tr(a[3]) : ""; }
+  function nameOf(id) { var m = GX.meta(id); if (m.n) return tr(m.n); var a = (typeof achList === "function" ? achList(true) : []).filter(function (x) { return x[0] === id; })[0]; return a ? (typeof achTranslate === "function" ? achTranslate(a[2]) : tr(a[2])) : id; }
+  function descOf(id) { var m = GX.meta(id); if (m.d) return tr(m.d); var a = (typeof achList === "function" ? achList(true) : []).filter(function (x) { return x[0] === id; })[0]; return a ? (typeof achTranslate === "function" ? achTranslate(a[3]) : tr(a[3])) : ""; }
   function ease(t) { return 1 - Math.pow(1 - t, 3); }
   function back(t) { var c = 1.70158 * 1.3; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); }
 
@@ -195,7 +195,7 @@ var GXV = (function () {
   var old = U.sheets.ach;
   function mode() { return S && S.mode === "mgr" ? "m" : "p"; }
   function all() {
-    var md = mode(), l = achList().map(function (a) { var m = GX.meta(a[0]); return {id: a[0], cat: m.cat, rar: m.rar, hide: !!(m.hide || a[5]), n: tr(a[2]), d: tr(a[3])}; });
+    var md = mode(), l = achList(true).map(function (a) { var m = GX.meta(a[0]); return {id: a[0], cat: m.cat, rar: m.rar, hide: !!(m.hide || a[5]), n: typeof achTranslate === "function" ? achTranslate(a[2]) : tr(a[2]), d: typeof achTranslate === "function" ? achTranslate(a[3]) : tr(a[3])}; });
     return l;
   }
   U.sheets.ach = function () {
@@ -208,6 +208,7 @@ var GXV = (function () {
     s += '<div class="gxs-top"><div class="gxs-pct" data-gxpct="' + pct + '"><b>0</b><small>%</small></div><div class="grow"><div class="gxs-bar"><i style="--w:' + pct + '%"></i></div><small class="muted">' +
       h(tr("{n} de {t} trofeos de esta carrera", {n: got.length, t: L.length})) + "</small>" +
       '<div class="gxs-rar">' + ["p", "g", "s", "b"].map(function (r) { return '<button data-a="gxrar" data-v="' + r + '" class="gxr gx-' + r + (F.rar === r ? " on" : "") + '" aria-pressed="' + (F.rar === r) + '"><img src="' + GXV.img(r, 48) + '" alt="" width="24" height="24"><span>' + byR[r][0] + "/" + byR[r][1] + "</span></button>"; }).join("") + "</div></div></div>";
+    if (typeof PGS !== "undefined" && PGS.available()) s += '<button class="btn ghost pgs-btn" data-a="pgsshow">🎮 ' + h(tr("Logros de Google Play Juegos")) + "</button>";
     s += '<div class="seg gxs-st">' + [["all", N_("Todos")], ["on", N_("Conseguidos")], ["off", N_("Pendientes")]].map(function (x) { return '<button data-a="gxst" data-v="' + x[0] + '" aria-pressed="' + (F.st === x[0]) + '">' + h(tr(x[1])) + "</button>"; }).join("") + "</div>";
     /* categorías con barra de progreso */
     var cats = GX_CATS.filter(function (c) { return L.some(function (x) { return x.cat === c[0]; }); });

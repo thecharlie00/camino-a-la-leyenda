@@ -1,0 +1,47 @@
+CREATE TABLE IF NOT EXISTS goat_ladder_entries (
+  id TEXT PRIMARY KEY,
+  event_key_hash TEXT NOT NULL UNIQUE,
+  game_mode TEXT NOT NULL CHECK (game_mode IN ('player', 'manager')),
+  event_type TEXT NOT NULL CHECK (event_type IN ('match', 'season')),
+  display_name TEXT NOT NULL,
+  title TEXT NOT NULL,
+  club_name TEXT NOT NULL,
+  competition_name TEXT NOT NULL,
+  opponent_name TEXT,
+  season INTEGER,
+  created_at TEXT NOT NULL,
+  goat_score INTEGER NOT NULL CHECK (goat_score BETWEEN 0 AND 1000),
+  score_breakdown_json TEXT NOT NULL,
+  metrics_json TEXT NOT NULL,
+  delete_token_hash TEXT NOT NULL,
+  goals INTEGER,
+  assists INTEGER,
+  match_rating REAL,
+  minutes_played INTEGER,
+  key_passes INTEGER,
+  possession REAL,
+  xg REAL,
+  decisive_goal_minute INTEGER,
+  own_score INTEGER,
+  opponent_score INTEGER,
+  goals_for INTEGER,
+  goals_against INTEGER,
+  division_depth INTEGER,
+  opponent_strength INTEGER,
+  team_strength INTEGER,
+  importance INTEGER,
+  is_final INTEGER,
+  is_win INTEGER,
+  comeback INTEGER,
+  wins INTEGER,
+  draws INTEGER,
+  losses INTEGER,
+  goal_difference INTEGER,
+  league_position INTEGER,
+  trophies_count INTEGER
+);
+
+CREATE INDEX IF NOT EXISTS goat_ladder_rank
+  ON goat_ladder_entries (game_mode, goat_score DESC, created_at ASC);
+CREATE INDEX IF NOT EXISTS goat_ladder_created
+  ON goat_ladder_entries (created_at DESC);

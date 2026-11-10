@@ -1,0 +1,118 @@
+{
+ "schema": 1,
+ "pitch": {
+  "mud-winter": {
+   "grassMix": [
+    0.24,
+    0.17,
+    0.08,
+    0.3
+   ],
+   "grassMul": [
+    0.92,
+    0.9,
+    0.86
+   ]
+  },
+  "hybrid-emerging": {
+   "grassMix": [
+    0.22,
+    0.2,
+    0.1,
+    0.12
+   ]
+  },
+  "hybrid": null,
+  "hybrid-heated": null
+ },
+ "ball": {
+  "heavy-leather": {
+   "colors": [
+    [
+     0.55,
+     0.36,
+     0.18
+    ],
+    [
+     0.33,
+     0.2,
+     0.09
+    ]
+   ],
+   "dur": 1.12
+  },
+  "leather-synthetic": {
+   "colors": [
+    [
+     0.95,
+     0.95,
+     0.9
+    ],
+    [
+     0.1,
+     0.1,
+     0.1
+    ]
+   ],
+   "dur": 1.06
+  },
+  "leather-synthetic-hybrid": {
+   "colors": [
+    [
+     0.95,
+     0.95,
+     0.9
+    ],
+    [
+     0.1,
+     0.1,
+     0.1
+    ]
+   ],
+   "dur": 1.03
+  }
+ },
+ "tv": {
+  "grainy-4:3": "grainy",
+  "sd-4:3-first-gen-eng": "sd43",
+  "sd-16:9": "sd169"
+ },
+ "staticBoards": [
+  "static"
+ ],
+ "referee": {
+  "blackUntil": 1993,
+  "colours": [
+   [
+    0.95,
+    0.82,
+    0.08
+   ],
+   [
+    0.1,
+    0.62,
+    0.3
+   ],
+   [
+    0.85,
+    0.15,
+    0.18
+   ]
+  ],
+  "src": "El negro fue el color del árbitro hasta el Mundial de 1994, donde se introdujeron camisetas de colores",
+  "doubtful": false
+ },
+ "numbers": {
+  "src": "Dorsales del 1 al 11 por posición mientras rules.fixedShirtNumbers es false (rules-timeline)"
+ },
+ "minigames": {
+  "gkStillUntil": 1996,
+  "gkAdj": -3,
+  "gkSrc": "Hasta 1997 el portero debía quedarse quieto sobre la línea hasta el lanzamiento (Reglas de Juego, IFAB)",
+  "gkDoubtful": true,
+  "ballSkill": {
+   "heavy-leather": -2
+  },
+  "ballSrc": "Balón de cuero que se empapaba y pesaba más; ajuste de juego, no medido"
+ }
+}
