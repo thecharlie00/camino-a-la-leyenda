@@ -1,4 +1,5 @@
-/* Pruebas del cliente del ranking GOAT LADDER (publicación de gestas y carreras).
+/* Pruebas del cliente del ranking GOAT LADDER que va dentro del juego
+   (legacy-game/src/goat.js): publicación de gestas y carreras.
    Se ejecutan sin navegador:  node test/goat-client.js  */
 import fs from "node:fs";
 import path from "node:path";
@@ -37,7 +38,7 @@ function loadService(options) {
     fetch: function (url, init) { calls.push({url: url, init: init}); return options.fetch(url, init, calls.length); }
   };
   env.window = env;
-  var source = fs.readFileSync(path.join(root, "src/goat.js"), "utf8");
+  var source = fs.readFileSync(path.join(root, "legacy-game", "src", "goat.js"), "utf8");
   /* El módulo usa variables globales del juego (S, W, LANG, GOAT_TEXT, GOAT_API_URL). */
   var factory = new Function("window", "GOAT_API_URL", "GOAT_TEXT", "LANG", "navigator",
     "localStorage", "fetch", "TextEncoder", "AbortController", source);

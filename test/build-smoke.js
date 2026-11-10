@@ -25,6 +25,11 @@ assert.match(html, /var Pitch3D = \(function \(\)/, '3D match renderer is missin
 assert.match(html, /var PetWorld = \(function \(\)/, '3D pet world is missing');
 assert.match(html, /var PetAudio = \(function \(\)/, 'Pet audio system is missing');
 assert.match(html, /var Music = \(function \(\)/, 'Background music system is missing');
+/* ranking online: sin servicio configurado la app no puede publicar ni consultar nada */
+assert.match(html, /var GOAT_API_URL = "https:\/\/[a-z0-9.-]+/i,
+  'The game must be configured with the GOAT LADDER service (web/config.json)');
+assert.match(html, /connect-src https:\/\/camino-goat-ladder\./i,
+  'The game CSP must allow requests to the GOAT LADDER service');
 assert.match(html, /data-a="bgm"/, 'Background music control is missing');
 assert.match(html, /var LIFE_KIT_CATALOG = \[\]/, 'Expanded wearable kit catalog is missing');
 const lifeSource = readFileSync('legacy-game/src/life.js', 'utf8');
@@ -48,6 +53,23 @@ assert.match(html, /var PLAYER_DECISION_THEMES = \[/, 'Post-migration player dec
 assert.match(html, /shirtPattern/, 'Custom kit patterns are not connected to the 3D player rig');
 assert.doesNotMatch(html, /<script\s+[^>]*src=/i, 'Game must be self-contained for WebView/offline use');
 assert.ok(!existsSync(join(output, 'camino-engine.js')), 'Stale v5.2 engine bundle must not be published');
+
+/* GOAT LADDER online: el tablero debe publicarse con su script y en los cinco idiomas. */
+const boardRuntime = join(output, 'goat-ladder.js');
+assert.ok(existsSync(boardRuntime), 'Missing GOAT LADDER board runtime (goat-ladder.js)');
+const boardSource = readFileSync(boardRuntime, 'utf8');
+assert.match(boardSource, /GoatBoard/, 'GOAT LADDER board API is missing');
+for (const [folder, lang] of [['goat-ladder', 'es'], ['en/goat-ladder', 'en'], ['de/goat-ladder', 'de'], ['it/goat-ladder', 'it'], ['fr/goat-ladder', 'fr']]) {
+  const page = join(output, folder, 'index.html');
+  assert.ok(existsSync(page), `Missing GOAT LADDER page: ${folder}`);
+  const source = readFileSync(page, 'utf8');
+  assert.match(source, new RegExp(`data-lang="${lang}"`), `GOAT LADDER page ${folder} must declare language ${lang}`);
+  assert.match(source, /goat-ladder\.js/, `GOAT LADDER page ${folder} must load the board runtime`);
+  assert.match(source, /GOAT_API_URL/, `GOAT LADDER page ${folder} must configure the service URL`);
+  /* scripts que ya no existen en el repositorio rompían el ranking con un 404 */
+  assert.doesNotMatch(source, /src="[^"]*trophies\.js"/, `GOAT LADDER page ${folder} still loads a deleted script`);
+  assert.doesNotMatch(source, /src="[^"]*pixel\.js"/, `GOAT LADDER page ${folder} still loads a deleted script`);
+}
 
 const assets = join(output, 'assets');
 assert.ok(existsSync(assets), 'Vite assets directory is missing');

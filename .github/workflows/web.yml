@@ -36,6 +36,9 @@ jobs:
       - name: Comprobar los archivos publicados
         run: npm run test:build
 
+      - name: Pruebas del ranking online
+        run: npm run test:online
+
       - name: Preparar sitio
         run: |
           mkdir -p web-output/site
