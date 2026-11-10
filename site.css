@@ -910,6 +910,62 @@ body.play { min-height: 100vh; display: flex; flex-direction: column; }
 .goat-hon-i svg { flex: none; image-rendering: pixelated; }
 .goat-hon-i b { font-size: 13px; color: var(--chalk); overflow-wrap: anywhere; }
 .goat-hon-i em { font-style: normal; color: var(--led); font-weight: 800; margin-left: 4px; }
+/* GOAT LADDER online: buscador, estados, acciones y esqueletos de carga */
+.goat-search {
+  min-height: 38px; flex: 1 1 220px; max-width: 320px; padding: 8px 12px;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--stand); color: var(--chalk);
+  font: 500 13px/1.2 var(--f-body);
+}
+.goat-search::placeholder { color: var(--dim); }
+.goat-search:focus-visible { outline: 2px solid var(--led); outline-offset: 2px; }
+.goat-howto {
+  max-width: 920px; margin: 14px 0 0; padding: 12px 14px; border: 1px solid var(--line);
+  border-left: 3px solid var(--led); border-radius: 10px; background: rgba(8, 15, 16, .55);
+  color: var(--mist); font-size: 13px; line-height: 1.5;
+}
+.goat-howto b { color: var(--chalk); }
+.goat-howto .btn { margin-left: 10px; }
+.goat-howto-top { margin: 0 0 18px; }
+.goat-howto-host { max-width: 920px; }
+.goat-card { transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+.goat-card:hover { border-color: rgba(72, 214, 122, .45); }
+.goat-card.is-selected { border-color: var(--led); box-shadow: 0 0 0 1px var(--led), 0 16px 34px rgba(0, 0, 0, .45); }
+.goat-actions { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; }
+.goat-share, .goat-remove { padding: 0; border: 0; background: none; color: var(--mist); font: 700 12px/1.4 var(--f-body); cursor: pointer; }
+.goat-share:hover { color: var(--led); }
+.goat-remove:hover { color: #ff7a7a; }
+.goat-honour {
+  display: inline-flex; align-items: center; gap: 4px; margin: 0 8px 4px 0; padding: 2px 8px;
+  border: 1px solid var(--line); border-radius: 6px; color: var(--chalk); font-size: 12px;
+}
+.goat-honour em { font-style: normal; color: var(--led); font-weight: 800; }
+.goat-empty { padding: 26px 8px; text-align: center; color: var(--mist); }
+.goat-empty .goat-howto { margin-top: 16px; text-align: left; }
+.goat-empty .btn { margin-top: 14px; }
+.goat-error-state { padding: 22px; border: 1px solid rgba(255, 122, 122, .35); border-radius: 12px; background: rgba(46, 12, 12, .35); text-align: center; }
+.goat-error-state p { color: #ffb4b4; }
+.goat-error-state .btn { margin-top: 12px; }
+.goat-more { margin-top: 4px; }
+.goat-skeleton { display: grid; gap: 10px; }
+.goat-skeleton .sk { display: block; height: 14px; border-radius: 6px; background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.12), rgba(255,255,255,.05)); background-size: 200% 100%; animation: goatSk 1.4s ease-in-out infinite; }
+.goat-skeleton .sk-a { width: 32%; }
+.goat-skeleton .sk-b { width: 68%; height: 22px; }
+.goat-skeleton .sk-c { width: 46%; }
+.goat-skeleton .sk-d { width: 100%; height: 44px; }
+@keyframes goatSk { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.goat-toast {
+  position: fixed; left: 50%; bottom: 22px; z-index: 60; max-width: min(92vw, 420px);
+  padding: 10px 16px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--standing, #10201f); color: var(--chalk); font: 700 13px/1.35 var(--f-body);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .5); opacity: 0; transform: translate(-50%, 12px);
+  transition: opacity .2s ease, transform .2s ease; pointer-events: none;
+}
+.goat-toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) {
+  .goat-card, .goat-toast { transition: none; }
+  .goat-skeleton .sk { animation: none; }
+}
+
 /* iconos pixelados (pixel.js): siempre del tamaño del texto */
 .pxi { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -0.2em; line-height: 0; }
 .pxi svg { width: 100%; height: 100%; display: block; }

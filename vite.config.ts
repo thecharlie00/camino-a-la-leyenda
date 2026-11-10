@@ -18,7 +18,7 @@ function copyLegacySiteFiles() {
       for (const directory of ['en', 'de', 'fr', 'it', 'goat-ladder', 'fonts']) {
         cpSync(resolve(root, directory), resolve(outDir, directory), { recursive: true });
       }
-      for (const file of ['404.html', 'CNAME', '.nojekyll', 'ads.txt', 'site.css', 'site.js']) {
+      for (const file of ['404.html', 'CNAME', '.nojekyll', 'ads.txt', 'site.css', 'site.js', 'goat-ladder.js']) {
         copyFileSync(resolve(root, file), resolve(outDir, file));
       }
       const sourceImages = resolve(root, 'img');

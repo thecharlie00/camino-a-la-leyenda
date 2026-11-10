@@ -23,7 +23,13 @@ Aplicación web React moderna de carrera futbolística: carrera de jugador o jug
 - `src/components/Footer.tsx`: Pie de página y enlaces rápidos.
 - `src/translations.ts`: Diccionario de traducciones en 5 idiomas.
 - `public/camino-engine.js`: Motor de simulación y bases de datos parodiadas de clubes y jugadores.
+- `legacy-game/src/goat.js` y `legacy-game/src/ui-goat.js`: cliente e interfaz del ranking online GOAT LADDER.
+- `goat-ladder.js`: tablero público del ranking (buscador, enlaces compartidos y borrado).
+- `web/config.json`: origen del servicio del ranking que se incrusta en cada compilación.
 - `public/img/`: Recursos gráficos, iconos y capturas.
+
+El funcionamiento del ranking online —servicio, API, qué se publica y cómo se prueba— está en
+[`docs/GOAT_LADDER.md`](docs/GOAT_LADDER.md).
 
 ## Ejecución en Desarrollo
 
