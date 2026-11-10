@@ -304,6 +304,22 @@
     var value = metrics[key];
     return value == null ? "" : (key === "win_percentage" ? value + "%" : value);
   }
+  /* Iconos de trofeo/premio de una temporada (pixel.js); sin pixel.js, el nombre. */
+  function SeasonHonours(names, keys, individual, label) {
+    var PXm = window.PX;
+    var items = (names || []).map(function (name, index) {
+      var text = compName(name);
+      if (!PXm || typeof PXm.trophy !== "function") return '<span class="goat-hon-ico is-text">' + esc(text) + "</span>";
+      var key = keys && typeof keys[index] === "string" && keys[index] ? keys[index]
+        : (PXm.guessKey ? PXm.guessKey(name, !!individual) : "");
+      try {
+        return '<span class="goat-hon-ico" title="' + esc(text) + '">' + PXm.trophy(key, 22, text) + "</span>";
+      } catch (error) {
+        return '<span class="goat-hon-ico is-text">' + esc(text) + "</span>";
+      }
+    }).join("");
+    return '<span class="goat-season-honours"><small>' + esc(label) + "</small>" + items + "</span>";
+  }
   function CareerSeasonHistory(entry) {
     var rows = (entry.history || []).slice().reverse().map(function (season) {
       var heading = [season.season, season.club, compName(season.competition)].filter(Boolean).join(" · ");
@@ -328,10 +344,10 @@
       if (season.promoted) summary.push(tr("careerPromoted"));
       return '<p class="goat-season"><b>' + esc(heading) + '</b><span>' +
         esc(summary.join(" · ")) + "</span>" +
-        (season.trophies && season.trophies.length ? '<span>' +
-          esc(tr("careerTrophies") + ": " + season.trophies.map(compName).join(", ")) + "</span>" : "") +
-        (season.awards && season.awards.length ? '<span>' +
-          esc(tr("careerAwards") + ": " + season.awards.map(compName).join(", ")) + "</span>" : "") + "</p>";
+        (season.trophies && season.trophies.length
+          ? SeasonHonours(season.trophies, season.trophy_keys, false, tr("careerTrophies")) : "") +
+        (season.awards && season.awards.length
+          ? SeasonHonours(season.awards, season.award_keys, true, tr("careerAwards")) : "") + "</p>";
     }).join("");
     return '<details class="goat-history"><summary>' + esc(tr("careerHistory")) +
       "</summary>" + rows + "</details>";

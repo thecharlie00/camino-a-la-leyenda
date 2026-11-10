@@ -390,6 +390,34 @@
     var value = metrics ? metrics[key] : null;
     return key === "win_percentage" && value != null ? value + "%" : value;
   }
+  /* Icono pixelado del trofeo/premio (pixel.js). Sin pixel.js se muestra el nombre. */
+  function honourIcon(name, key, individual) {
+    var label = String(name == null ? "" : name);
+    var item = node("span", "goat-hon-ico");
+    item.title = label;
+    if (root.PX && typeof root.PX.trophy === "function") {
+      try {
+        var useKey = typeof key === "string" && key ? key : (root.PX.guessKey ? root.PX.guessKey(label, !!individual) : "");
+        var holder = doc.createElement("span");
+        holder.innerHTML = root.PX.trophy(useKey, 22, label);
+        if (holder.firstChild) {
+          item.appendChild(holder.firstChild);
+          return item;
+        }
+      } catch (error) { /* se cae al texto */ }
+    }
+    item.className = "goat-hon-ico is-text";
+    item.textContent = label;
+    return item;
+  }
+  function honourList(names, keys, individual, label) {
+    var wrap = node("div", "goat-season-honours");
+    wrap.appendChild(node("span", "goat-hon-label", label));
+    (names || []).forEach(function (name, index) {
+      wrap.appendChild(honourIcon(name, keys ? keys[index] : "", individual));
+    });
+    return wrap;
+  }
   function seasonHistory(entry) {
     var details = node("details", "goat-career-history");
     var summary = node("summary", "", T.history);
@@ -413,10 +441,10 @@
       if (season.promoted) values.push(T.promoted);
       row.appendChild(node("span", "", values.join(" · ")));
       if (season.trophies && season.trophies.length) {
-        row.appendChild(node("span", "goat-season-honors", T.trophies + ": " + season.trophies.join(", ")));
+        row.appendChild(honourList(season.trophies, season.trophy_keys, false, T.trophies));
       }
       if (season.awards && season.awards.length) {
-        row.appendChild(node("span", "goat-season-honors", T.awards + ": " + season.awards.join(", ")));
+        row.appendChild(honourList(season.awards, season.award_keys, true, T.awards));
       }
       details.appendChild(row);
     });

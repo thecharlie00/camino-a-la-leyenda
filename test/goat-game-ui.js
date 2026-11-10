@@ -97,6 +97,13 @@ function build(options = {}) {
       removeItem: (k) => { delete store[k]; }
     },
     navigator: {clipboard: {writeText: (value) => { copied.push(value); return Promise.resolve(); }}},
+    /* pixel.js solo existe dentro del juego; aquí se simula con un svg mínimo */
+    PX: options.px ? {
+      trophy: (key, size, label) => '<svg class="tro" width="' + size + '" aria-label="' + label + '"></svg>',
+      guessKey: () => "goblet",
+      honours: (history) => (history || []).flatMap((season) =>
+        (season.trophies || []).map((name) => ({name, key: "goblet", n: 1, years: [season.season], ind: false})))
+    } : undefined,
     confirm: () => true,
     document
   };
@@ -263,6 +270,40 @@ async function main() {
     check("cambiar de periodo sí recarga", () => {
       assert.equal(env.calls.listCareers, before + 1);
       assert.equal(sheet.timeframe, "7d");
+    });
+  }
+
+  console.log("Historial con trofeos");
+  {
+    const career = {
+      event_key: "career:2", game_mode: "player", title: "Carrera de Nerea", current_club: "Atlas",
+      started_season: 2080, latest_season: 2082, metrics: {seasons: 3, appearances: 120},
+      history: [{season: 2082, club: "Atlas", competition: "Liga", trophies: ["Liga", "Copa"],
+        trophy_keys: ["league", "cup"], awards: ["MVP"], award_keys: ["mvp"], appearances: 40}]
+    };
+    const env = build({ px: true, career });
+    env.UIX.setSheet({k: "goatCareerPublish", career});
+    const html = env.UIX.sheets.goatCareerPublish(env.UIX.getSheet());
+    check("el historial desplegable muestra el icono de cada trofeo", () => {
+      const history = html.slice(html.indexOf("<details"), html.indexOf("</details>"));
+      assert.match(history, /goat-season-honours/);
+      assert.equal((history.match(/<svg class="tro"/g) || []).length, 3, "dos títulos y un premio");
+    });
+    check("el palmarés de la carrera también lleva sus trofeos", () => {
+      const honours = html.slice(html.indexOf("goat-honours"), html.indexOf("<details"));
+      assert.equal((honours.match(/<svg class="tro"/g) || []).length, 2);
+    });
+    check("los iconos llevan el nombre del trofeo", () => {
+      assert.match(html, /aria-label="Liga"/);
+      assert.match(html, /aria-label="MVP"/);
+    });
+
+    const plain = build({ career });
+    plain.UIX.setSheet({k: "goatCareerPublish", career});
+    const plainHtml = plain.UIX.sheets.goatCareerPublish(plain.UIX.getSheet());
+    check("sin pixel.js los trofeos se leen como texto", () => {
+      assert.match(plainHtml, /goat-hon-ico is-text[^>]*>Liga/);
+      assert.doesNotMatch(plainHtml, /<svg class="tro"/);
     });
   }
 
