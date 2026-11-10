@@ -1,9 +1,57 @@
 /* Envío voluntario del resumen de partido/temporada a GOAT LADDER. */
 (function (root) {
   "use strict";
-  var apiOrigin = typeof GOAT_API_URL === "string" ? GOAT_API_URL.replace(/\/+$/, "") : "";
+  /* Origen del servicio. Se normaliza para que una URL mal copiada (esquema duplicado,
+     espacios, barra final o un «/api» de más) no acabe en un fetch imposible que el
+     navegador solo puede resolver con «Failed to fetch». */
+  var apiOrigin = normalizeOrigin(typeof GOAT_API_URL === "string" ? GOAT_API_URL : "");
   var memoryDeleteTokens = {};
   var TOKEN_STORAGE_KEY = "camino.goat.deleteTokens";
+  var REQUEST_TIMEOUT = 15000;
+  var CAREER_TIMEOUT = 25000;
+  var TEXT_CACHE_LIMIT = 100000;
+
+  function normalizeOrigin(value) {
+    var raw = String(value == null ? "" : value).replace(/^\s+|\s+$/g, "");
+    if (!raw) return "";
+    var secure = !/^http:\/\//i.test(raw);
+    var host = raw.replace(/^(?:https?:)?[:\/]+/i, "");
+    while (/^https?[:\/]/i.test(host)) host = host.replace(/^https?[:\/]+/i, "");
+    host = host.replace(/\/+$/, "");
+    if (!/^[a-z0-9.-]+(:\d+)?(\/[^\s]*)?$/i.test(host)) return "";
+    var hostname = host.split(/[\/:]/)[0];
+    if (!hostname || (hostname !== "localhost" && hostname.indexOf(".") < 0)) return "";
+    var parsed;
+    try { parsed = new URL((secure ? "https://" : "http://") + host); } catch (error) { return ""; }
+    var base = (parsed.origin + parsed.pathname).replace(/\/+$/, "");
+    if (/\/api$/i.test(base)) base = base.replace(/\/api$/i, "");
+    return base;
+  }
+  /* Textos del servicio, con variante femenina si la partida la usa. */
+  function text(key) {
+    var language = typeof LANG === "string" ? LANG : "es";
+    var fem = typeof FEM !== "undefined" && FEM && root.GOAT_FEM_TEXT ? root.GOAT_FEM_TEXT[language] : null;
+    if (fem && fem[key]) return fem[key];
+    var tables = root.GOAT_TEXT || {};
+    var table = tables[language] || tables.es || {};
+    return table[key] || (tables.es || {})[key] || key;
+  }
+  function failure(kind, extra) {
+    var error = new Error(text(kind));
+    error.goatKind = kind;
+    if (extra && extra.status != null) error.status = extra.status;
+    if (extra && extra.cause) error.cause = extra.cause;
+    return error;
+  }
+  function delay(ms) { return new Promise(function (resolve) { setTimeout(resolve, ms); }); }
+  function isNetworkFailure(error) {
+    if (!error || error.goatKind || error.name === "AbortError") return false;
+    if (typeof TypeError === "function" && error instanceof TypeError) return true;
+    return /load failed|failed to fetch|networkerror|network request failed/i.test(String(error.message || ""));
+  }
+  function utf8Size(value) {
+    try { return new TextEncoder().encode(value).length; } catch (error) { return value.length * 2; }
+  }
 
   function safeName(name) {
     return String(name == null ? "" : name).replace(/^\s+|\s+$/g, "");
@@ -204,15 +252,91 @@
       goal_difference: row.gf - row.ga
     });
   }
-  function request(path, options) {
-    return fetch(apiOrigin + path, options).then(function (response) {
-      return response.text().then(function (body) {
-        var data;
-        try { data = body ? JSON.parse(body) : {}; } catch (error) { throw new Error("Invalid GOAT LADDER response"); }
-        if (!response.ok) throw new Error(data.error || ("GOAT LADDER HTTP " + response.status));
-        return data;
-      });
+  function timedFetch(url, options, timeout) {
+    var controller = typeof AbortController === "function" ? new AbortController() : null;
+    var copy = {};
+    Object.keys(options || {}).forEach(function (key) { copy[key] = options[key]; });
+    var timer = null;
+    if (controller) {
+      copy.signal = controller.signal;
+      timer = setTimeout(function () { controller.abort(); }, timeout);
+    }
+    return fetch(url, copy).then(function (response) {
+      if (timer) clearTimeout(timer);
+      return response;
+    }, function (error) {
+      if (timer) clearTimeout(timer);
+      if (error && error.name === "AbortError") throw failure("timeoutError", {cause: error});
+      throw error;
     });
+  }
+  function readResponse(response) {
+    return response.text().then(function (body) {
+      var data;
+      try { data = body ? JSON.parse(body) : {}; } catch (error) { throw failure("responseError", {status: response.status}); }
+      if (!response.ok) {
+        var rejected = new Error(data && typeof data.error === "string" && data.error
+          ? data.error : "GOAT LADDER HTTP " + response.status);
+        rejected.status = response.status;
+        throw rejected;
+      }
+      return data;
+    });
+  }
+  /* Petición al ranking. Se intenta primero como siempre (JSON con su petición previa de
+     CORS); si la red falla se reintenta enviando el mismo JSON como texto, que no dispara
+     ese preflight y evita el «Failed to fetch» cuando el servicio no responde a OPTIONS. */
+  function request(path, options, config) {
+    config = config || {};
+    if (!apiOrigin) return Promise.reject(failure("unavailable"));
+    if (root.navigator && root.navigator.onLine === false) return Promise.reject(failure("offlineError"));
+    var url = apiOrigin + path;
+    var timeout = config.timeout || REQUEST_TIMEOUT;
+    var body = options && typeof options.body === "string" ? options.body : null;
+    function attempt(contentType) {
+      var copy = {};
+      Object.keys(options || {}).forEach(function (key) { copy[key] = options[key]; });
+      var headers = {};
+      Object.keys(copy.headers || {}).forEach(function (key) { headers[key] = copy.headers[key]; });
+      headers.Accept = "application/json";
+      if (body != null && contentType) headers["Content-Type"] = contentType;
+      copy.headers = headers;
+      copy.mode = "cors";
+      copy.credentials = "omit";
+      copy.cache = "no-store";
+      return timedFetch(url, copy, timeout).then(readResponse);
+    }
+    function retryAsSimple(error) {
+      if (!body || !isNetworkFailure(error)) throw error;
+      return delay(700).then(function () { return attempt("text/plain;charset=UTF-8"); })
+        .catch(function (rejected) {
+          /* si el servicio exige JSON, se vuelve a ese tipo antes de darse por vencido */
+          if (body && rejected && (rejected.status === 415 || rejected.status === 400 || rejected.status === 405)) {
+            return attempt("application/json");
+          }
+          throw rejected;
+        });
+    }
+    return attempt(body != null ? "application/json" : null).catch(retryAsSimple).catch(function (error) {
+      if (error && error.goatKind) throw error;
+      if (isNetworkFailure(error)) {
+        try { console.error("GOAT LADDER request failed", url, error); } catch (logError) {}
+        throw failure("networkError", {cause: error});
+      }
+      if (error && error.status >= 500) throw failure("serverError", {status: error.status});
+      throw error;
+    });
+  }
+  /* Si una carrera es enorme se recortan las temporadas más antiguas: el ranking solo
+     necesita el resumen y las métricas agregadas no cambian. */
+  function careerPayload(career) {
+    var payload = {};
+    Object.keys(career).forEach(function (key) { payload[key] = career[key]; });
+    if (!Array.isArray(payload.history)) return payload;
+    var history = payload.history.slice();
+    payload.history = history;
+    while (history.length > 1 && utf8Size(JSON.stringify(payload)) > TEXT_CACHE_LIMIT) history.shift();
+    return payload;
   }
   function storedDeleteTokens() {
     try {
@@ -253,37 +377,30 @@
     latest: function () { return S && S.goatLatest ? S.goatLatest : null; },
     career: careerSnapshot,
     canDelete: function (id) { return !!(memoryDeleteTokens[id] || storedDeleteTokens()[id]); },
-    t: function (key) {
-      var language = typeof LANG === "string" ? LANG : "es";
-      var fem = typeof FEM !== "undefined" && FEM && root.GOAT_FEM_TEXT ? root.GOAT_FEM_TEXT[language] : null;
-      if (fem && fem[key]) return fem[key];
-      return (root.GOAT_TEXT[language] || root.GOAT_TEXT.es)[key] || root.GOAT_TEXT.es[key] || key;
-    },
+    t: text,
     list: function (mode, timeframe) {
-      if (!apiOrigin) return Promise.reject(new Error("GOAT API is not configured"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
       return Promise.resolve().then(function () {
         return request("/api/goat-ladder?mode=" + encodeURIComponent(mode) + "&timeframe=" +
           encodeURIComponent(timeframe), {method: "GET"});
       }).then(function (data) { return data.entries || []; });
     },
     submit: function (latest, displayName, title) {
-      if (!apiOrigin) return Promise.reject(new Error("GOAT API is not configured"));
-      if (!latest || !latest.event_key) return Promise.reject(new Error("No match or season is ready to publish"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
+      if (!latest || !latest.event_key) return Promise.reject(failure("noLatest"));
       var payload = {};
       Object.keys(latest).forEach(function (key) { payload[key] = latest[key]; });
       payload.display_name = safeName(displayName);
       payload.title = safeName(title);
       return Promise.resolve().then(function () {
-        return request("/api/goat-ladder", {
-          method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)
-        });
+        return request("/api/goat-ladder", {method: "POST", body: JSON.stringify(payload)});
       }).then(function (data) {
         data.delete_token_saved = keepDeleteToken(data.id, data.delete_token);
         return data;
       });
     },
     listCareers: function (mode, timeframe, metric) {
-      if (!apiOrigin) return Promise.reject(new Error("GOAT API is not configured"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
       return Promise.resolve().then(function () {
         return request("/api/goat-ladder/careers?mode=" + encodeURIComponent(mode) +
           "&timeframe=" + encodeURIComponent(timeframe) + "&metric=" + encodeURIComponent(metric),
@@ -291,16 +408,14 @@
       }).then(function (data) { return data.entries || []; });
     },
     submitCareer: function (career, displayName, title) {
-      if (!apiOrigin) return Promise.reject(new Error("GOAT API is not configured"));
-      if (!career || !career.event_key) return Promise.reject(new Error("No career is ready to publish"));
-      var payload = {};
-      Object.keys(career).forEach(function (key) { payload[key] = career[key]; });
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
+      if (!career || !career.event_key) return Promise.reject(failure("careerNoData"));
+      var payload = careerPayload(career);
       payload.display_name = safeName(displayName);
       payload.title = safeName(title);
       return Promise.resolve().then(function () {
-        return request("/api/goat-ladder/careers", {
-          method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)
-        });
+        return request("/api/goat-ladder/careers", {method: "POST", body: JSON.stringify(payload)},
+          {timeout: CAREER_TIMEOUT});
       }).then(function (data) {
         data.delete_token_saved = keepDeleteToken(data.id, data.delete_token);
         return data;
@@ -308,7 +423,8 @@
     },
     deleteEntry: function (id) {
       var token = memoryDeleteTokens[id] || storedDeleteTokens()[id];
-      if (!apiOrigin || !token) return Promise.reject(new Error("No deletion token is available on this device"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
+      if (!token) return Promise.reject(failure("deleteMissing"));
       return request("/api/goat-ladder?id=" + encodeURIComponent(id), {
         method: "DELETE", headers: {Authorization: "Bearer " + token}
       }).then(function (data) {
@@ -318,7 +434,8 @@
     },
     deleteCareer: function (id) {
       var token = memoryDeleteTokens[id] || storedDeleteTokens()[id];
-      if (!apiOrigin || !token) return Promise.reject(new Error("No deletion token is available on this device"));
+      if (!apiOrigin) return Promise.reject(failure("unavailable"));
+      if (!token) return Promise.reject(failure("deleteMissing"));
       return request("/api/goat-ladder/careers?id=" + encodeURIComponent(id), {
         method: "DELETE", headers: {Authorization: "Bearer " + token}
       }).then(function (data) {
