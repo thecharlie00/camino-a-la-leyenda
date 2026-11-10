@@ -180,6 +180,39 @@ assert.doesNotMatch(html, /<script\s+[^>]*src=/i, 'Web game must remain self-con
 assert.doesNotMatch(androidHtml, /<script\s+[^>]*src=/i, 'Android game must remain self-contained');
 assert.ok(!existsSync(join(output, 'camino-engine.js')), 'Stale v5.2 engine bundle must not be published');
 
+/* Ranking online: las cinco páginas publicadas, su script y el servicio configurado. */
+const goatRuntime = join(output, 'goat-ladder.js');
+assert.ok(existsSync(goatRuntime), 'Missing build output: goat-ladder.js');
+const goatBoard = readFileSync(goatRuntime, 'utf8');
+new Script(goatBoard, {filename: 'goat-ladder.js'});
+assert.match(goatBoard, /window\.GoatBoard|root\.GoatBoard/, 'The ranking board must expose its API');
+for (const lang of ['', 'en/', 'de/', 'it/', 'fr/']) {
+  const pagePath = join(output, lang, 'goat-ladder', 'index.html');
+  assert.ok(existsSync(pagePath), `Missing GOAT LADDER page: ${pagePath}`);
+  const page = readFileSync(pagePath, 'utf8');
+  assert.match(page, /goat-ladder\.js/, `${pagePath} must load the board script`);
+  assert.match(page, /id="goat-entries"/, `${pagePath} must contain the ranking container`);
+  assert.match(page, /data-board="careers"/, `${pagePath} must contain the board filters`);
+  assert.match(page, /window\.GOAT_API_URL = "https:\/\/camino-goat-ladder\./,
+    `${pagePath} must point at the GOAT LADDER service`);
+  for (const [, src] of page.matchAll(/<script[^>]+src="([^"]+)"/g)) {
+    const target = join(pagePath, '..', src);
+    assert.ok(existsSync(target), `${pagePath} references a missing script: ${src}`);
+  }
+}
+assert.match(html, /connect-src https:\/\/camino-goat-ladder\.httpscamino-goat-ladderworkersdev\.workers\.dev/,
+  'The game CSP must allow the GOAT LADDER service');
+/* assert.ok con includes: si falla no vuelca los 10 MB del juego en el log */
+for (const [needle, message] of [
+  ['data-goat-q', 'The in-game ranking must offer the search field'],
+  ['data-a="goatshare"', 'The in-game ranking must offer sharing entries'],
+  ['data-a="goatclearq"', 'The in-game ranking must be able to clear the search'],
+  ['camino.goat.alias', 'The in-game ranking must remember the alias'],
+  ['href="../goat-ladder/" target="_top"', 'The in-game ranking must link to the public board']
+]) {
+  assert.ok(gameSource.includes(needle), message);
+}
+
 const assets = join(output, 'assets');
 assert.ok(existsSync(assets), 'Vite assets directory is missing');
 assert.ok(readdirSync(assets).some((name) => name.endsWith('.css')), 'No website CSS bundle was emitted');

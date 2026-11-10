@@ -1,0 +1,4 @@
+{
+  "_comment": "Ajustes de la web publicada. goat_api_url es el servicio GOAT LADDER (Cloudflare Worker): debe ser un origen HTTPS sin ruta. Si está vacío, el ranking online queda desactivado en la web y en la app.",
+  "goat_api_url": "https://camino-goat-ladder.httpscamino-goat-ladderworkersdev.workers.dev"
+}

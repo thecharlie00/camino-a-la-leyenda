@@ -3,6 +3,11 @@
   "use strict";
   var TEXT = {
     es: {
+      search: "Buscar por alias o club", searchLabel: "Buscar", noResults: "Ningún resultado con «{q}».",
+      counted: "{n} de {total}", clearSearch: "Ver todo", refreshing: "Actualizando ranking…",
+      share: "Compartir", shareCopied: "Enlace copiado", copyFailed: "No se pudo copiar el enlace.",
+      retrySubmit: "Reintentar envío", aliasSaved: "Alias recordado en este dispositivo.",
+      webBoard: "Abrir el ranking completo en la web",
       honours: "Palmarés", honoursTeam: "Títulos colectivos", honoursInd: "Títulos individuales",
       boardCareers: "Carreras", boardAchievements: "Gestas", careerTitlePlayer: "Carrera de Jugador",
       careerTitleManager: "Carrera de Míster", publishCareer: "Publicar carrera completa",
@@ -42,6 +47,11 @@
       deleteSaved: "Puedes eliminar esta entrada desde este dispositivo.", deleteNotSaved: "No se pudo guardar la clave de eliminación en este dispositivo."
     },
     en: {
+      search: "Search by alias or club", searchLabel: "Search", noResults: "No results for “{q}”.",
+      counted: "{n} of {total}", clearSearch: "Show all", refreshing: "Refreshing ranking…",
+      share: "Share", shareCopied: "Link copied", copyFailed: "The link could not be copied.",
+      retrySubmit: "Retry sending", aliasSaved: "Alias remembered on this device.",
+      webBoard: "Open the full ranking on the web",
       honours: "Honours", honoursTeam: "Team titles", honoursInd: "Individual awards",
       boardCareers: "Careers", boardAchievements: "Achievements", careerTitlePlayer: "Player career",
       careerTitleManager: "Manager career", publishCareer: "Publish complete career",
@@ -81,6 +91,11 @@
       deleteSaved: "You can delete this entry from this device.", deleteNotSaved: "The deletion key could not be saved on this device."
     },
     de: {
+      search: "Nach Alias oder Verein suchen", searchLabel: "Suchen", noResults: "Keine Treffer für „{q}“.",
+      counted: "{n} von {total}", clearSearch: "Alle anzeigen", refreshing: "Rangliste wird aktualisiert…",
+      share: "Teilen", shareCopied: "Link kopiert", copyFailed: "Der Link konnte nicht kopiert werden.",
+      retrySubmit: "Erneut senden", aliasSaved: "Alias auf diesem Gerät gemerkt.",
+      webBoard: "Die vollständige Rangliste im Web öffnen",
       honours: "Erfolge", honoursTeam: "Mannschaftstitel", honoursInd: "Einzelauszeichnungen",
       boardCareers: "Karrieren", boardAchievements: "Erfolge", careerTitlePlayer: "Spielerkarriere",
       careerTitleManager: "Managerkarriere", publishCareer: "Komplette Karriere veröffentlichen",
@@ -120,6 +135,11 @@
       deleteSaved: "Du kannst diesen Eintrag auf diesem Gerät löschen.", deleteNotSaved: "Der Löschschlüssel konnte auf diesem Gerät nicht gespeichert werden."
     },
     it: {
+      search: "Cerca per alias o club", searchLabel: "Cerca", noResults: "Nessun risultato per «{q}».",
+      counted: "{n} di {total}", clearSearch: "Mostra tutto", refreshing: "Aggiornamento classifica…",
+      share: "Condividi", shareCopied: "Link copiato", copyFailed: "Impossibile copiare il link.",
+      retrySubmit: "Riprova invio", aliasSaved: "Alias ricordato su questo dispositivo.",
+      webBoard: "Apri la classifica completa sul web",
       honours: "Palmarès", honoursTeam: "Titoli di squadra", honoursInd: "Premi individuali",
       boardCareers: "Carriere", boardAchievements: "Imprese", careerTitlePlayer: "Carriera da giocatore",
       careerTitleManager: "Carriera da mister", publishCareer: "Pubblica la carriera completa",
@@ -159,6 +179,11 @@
       deleteSaved: "Puoi eliminare questa voce da questo dispositivo.", deleteNotSaved: "Impossibile salvare la chiave di eliminazione su questo dispositivo."
     },
     fr: {
+      search: "Rechercher un alias ou un club", searchLabel: "Rechercher", noResults: "Aucun résultat pour « {q} ».",
+      counted: "{n} sur {total}", clearSearch: "Tout afficher", refreshing: "Actualisation du classement…",
+      share: "Partager", shareCopied: "Lien copié", copyFailed: "Impossible de copier le lien.",
+      retrySubmit: "Renvoyer", aliasSaved: "Alias mémorisé sur cet appareil.",
+      webBoard: "Ouvrir le classement complet sur le web",
       honours: "Palmarès", honoursTeam: "Titres collectifs", honoursInd: "Distinctions individuelles",
       boardCareers: "Carrières", boardAchievements: "Exploits", careerTitlePlayer: "Carrière de joueur",
       careerTitleManager: "Carrière de manager", publishCareer: "Publier la carrière complète",
@@ -329,6 +354,13 @@
     };
     return '<div class="goat-honours"><div class="goat-hon-t">' + esc(tr("honours")) + "</div>" + block(false) + block(true) + "</div>";
   }
+  function cardActions(entry, deleteAction, deleteLabel) {
+    return '<div class="goat-card-actions"><button class="btn wide" data-a="goatshare" data-v="' +
+      esc(entry.id) + '">🔗 ' + esc(tr("share")) + "</button>" +
+      (deleteAction && service.canDelete(entry.id)
+        ? '<button class="btn wide" data-a="' + deleteAction + '" data-v="' + esc(entry.id) + '">' +
+          esc(deleteLabel) + "</button>" : "") + "</div>";
+  }
   function CareerLadderCard(entry, index, metric) {
     var metrics = entry.metrics || {};
     var metricName = METRICS[entry.game_mode].filter(function (item) { return item[0] === metric; })[0];
@@ -340,9 +372,7 @@
       esc(entry.current_club) + " · " + esc(entry.started_season + "–" + entry.latest_season) +
       "</p>" + CareerStatsSummary(metrics, entry.game_mode) + CareerHonours(entry) + CareerSeasonHistory(entry) +
       '<p class="goat-unverified">' + esc(tr("verified")) + "</p>" +
-      (service.canDelete(entry.id) ? '<button class="btn wide" data-a="goatcareerdelete" data-v="' +
-        esc(entry.id) + '"' + (entry.id === window.__goatSheet.deletingCareer ? " disabled" : "") +
-        ">" + esc(tr("deleteCareer")) + "</button>" : "") + "</article>";
+      cardActions(entry, "goatcareerdelete", tr("deleteCareer")) + "</article>";
   }
   function GoatLadderCard(entry, index) {
     var opponent = entry.opponent_name ? " · " + tr("opponent") + ": " + entry.opponent_name : "";
@@ -351,11 +381,9 @@
       esc(entry.goat_score) + '</strong></div><h3>' + esc(entry.title) + '</h3><p class="goat-meta">' +
       esc(entry.display_name) + " · " + esc(entry.club_name) + " · " + esc(compName(entry.competition_name)) +
       esc(opponent) + '</p>' + MatchStatsSummary(entry) + '<p class="goat-unverified">' +
-      esc(tr("verified")) + "</p>" + (service.canDelete(entry.id)
-        ? '<button class="btn wide" data-a="goatdelete" data-v="' + esc(entry.id) + '">' +
-          esc(tr("delete")) + "</button>" : "") + "</article>";
+      esc(tr("verified")) + "</p>" + cardActions(entry, "goatdelete", tr("delete")) + "</article>";
   }
-  function GoatFilterTabs(board, mode, timeframe, metric) {
+  function GoatFilterTabs(board, mode, timeframe, metric, query) {
     var metrics = METRICS[mode];
     return '<div class="seg goat-board"><button data-a="goatboard" data-v="careers" aria-pressed="' +
       (board === "careers") + '">' + esc(tr("boardCareers")) + '</button><button data-a="goatboard" data-v="achievements" aria-pressed="' +
@@ -371,7 +399,62 @@
       metrics.map(function (item) {
         return '<option value="' + item[0] + '"' + (metric === item[0] ? " selected" : "") +
           ">" + esc(tr(item[1])) + "</option>";
-      }).join("") + "</select></label>";
+      }).join("") + "</select></label>" +
+      /* El buscador filtra en el dispositivo al confirmar (Enter o al salir del campo). */
+      '<label class="lbl goat-search">' + esc(tr("searchLabel")) +
+      '<input class="goat-input" type="search" maxlength="40" autocomplete="off" data-goat-q value="' +
+      esc(query || "") + '" placeholder="' + esc(tr("search")) + '"></label>';
+  }
+  function filterEntries(list, query) {
+    var needle = String(query == null ? "" : query).replace(/^\s+|\s+$/g, "").toLowerCase();
+    if (!needle) return (list || []).slice();
+    return (list || []).filter(function (entry) {
+      var fields = [entry.display_name, entry.title, entry.current_club, entry.club_name,
+        entry.competition_name, entry.opponent_name];
+      for (var i = 0; i < fields.length; i++) {
+        if (fields[i] != null && String(fields[i]).toLowerCase().indexOf(needle) >= 0) return true;
+      }
+      return false;
+    });
+  }
+  function rememberedAlias() {
+    try { return window.localStorage.getItem("camino.goat.alias") || ""; } catch (error) { return ""; }
+  }
+  function rememberAlias(alias) {
+    var value = String(alias == null ? "" : alias).replace(/^\s+|\s+$/g, "").slice(0, 32);
+    if (!value) return;
+    try { window.localStorage.setItem("camino.goat.alias", value); } catch (error) {}
+  }
+  /* Aviso propio del módulo: ui.js guarda su toast en un cierre privado. */
+  var toastTimer = 0;
+  function goatToast(message) {
+    if (!message) return;
+    var box = document.getElementById("goat-toast");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "goat-toast";
+      box.className = "toast";
+      box.setAttribute("role", "status");
+      box.setAttribute("aria-live", "polite");
+      (document.querySelector(".sheet") || document.body || document.documentElement).appendChild(box);
+    }
+    box.textContent = message;
+    box.classList.add("is-on");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      box.classList.remove("is-on");
+      if (box.parentNode) box.parentNode.removeChild(box);
+    }, 2600);
+  }
+  function shareEntry(id) {
+    var url = "https://futbolroadtolegend.com/goat-ladder/?entry=" + encodeURIComponent(id);
+    var clipboard = window.navigator && window.navigator.clipboard;
+    if (clipboard && clipboard.writeText) {
+      clipboard.writeText(url).then(function () { goatToast(tr("shareCopied")); },
+        function () { goatToast(tr("copyFailed") + " " + url); });
+      return;
+    }
+    goatToast(tr("copyFailed") + " " + url);
   }
   function load(sheet) {
     if (!service.available()) { sheet.loading = false; sheet.entries = []; return; }
@@ -424,6 +507,9 @@
     window.UIX.renderSheet();
     service.submit(latest, alias, title).then(function (result) {
       sheet.submitting = false;
+      sheet.submitFailed = false;
+      rememberAlias(alias);
+      sheet.aliasSaved = alias === rememberedAlias();
       sheet.submitSuccess = result.goat_score;
       sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
       load(sheet);
@@ -433,6 +519,7 @@
     }).catch(function (error) {
       console.error("GOAT LADDER submission failed", error);
       sheet.submitting = false;
+      sheet.submitFailed = true;
       sheet.submitError = error.message || tr("error");
       window.UIX.renderSheet();
     });
@@ -455,6 +542,9 @@
     window.UIX.renderSheet();
     service.submitCareer(career, alias, title).then(function (result) {
       sheet.submitting = false;
+      sheet.submitFailed = false;
+      rememberAlias(alias);
+      sheet.aliasSaved = alias === rememberedAlias();
       sheet.submitSuccess = tr("careerPublished");
       sheet.deleteNotice = result.delete_token_saved ? tr("deleteSaved") : tr("deleteNotSaved");
       window.UIX.renderSheet();
@@ -464,6 +554,7 @@
     }).catch(function (error) {
       console.error("GOAT LADDER career submission failed", error);
       sheet.submitting = false;
+      sheet.submitFailed = true;
       sheet.submitError = error.message || tr("error");
       window.UIX.renderSheet();
     });
@@ -488,7 +579,8 @@
     return '<h2>' + esc(tr("publishCareer")) + '</h2><p class="goat-meta">' +
       esc(career.current_club) + " · " + esc(career.started_season + "–" + career.latest_season) +
       "</p>" + CareerStatsSummary(career.metrics, career.game_mode) + CareerHonours(career) +
-      CareerSeasonHistory(career) + careerInputLabel("alias", "alias", sheet.careerAlias || "") +
+      CareerSeasonHistory(career) +
+      careerInputLabel("alias", "alias", sheet.careerAlias || rememberedAlias()) +
       careerInputLabel("title", "title", sheet.careerTitle || career.title) +
       '<label class="goat-consent"><input type="checkbox" data-career-consent> ' +
       esc(tr("careerConsent")) + '</label><p class="goat-privacy">' +
@@ -498,7 +590,7 @@
       (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
       '<button class="btn pri wide" data-a="goatcareerpublish"' +
       (sheet.submitting ? " disabled" : "") + ">" +
-      esc(sheet.submitting ? tr("loading") : tr("publishCareer")) +
+      esc(sheet.submitting ? tr("loading") : (sheet.submitFailed ? tr("retrySubmit") : tr("publishCareer"))) +
       '</button><button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
   }
   function careerPublishCard() {
@@ -535,23 +627,34 @@
   window.UIX.actions.goatcareeropen = function () { openCareerPublish(); };
   window.UIX.sheets.goatCareerPublish = careerPublishSheet;
   window.UIX.actions.goatmode = function (button, mode) {
-    var sheet = window.UIX.getSheet();
-    if (!sheet || sheet.k !== "goat") return;
-    sheet.mode = mode === "manager" ? "manager" : "player";
+    var sheet = window.UIX.getSheet(), wanted = mode === "manager" ? "manager" : "player";
+    if (!sheet || sheet.k !== "goat" || sheet.mode === wanted) return;
+    sheet.mode = wanted;
     if (sheet.board === "careers") sheet.metric = METRICS[sheet.mode][0][0];
+    /* las filas del modo anterior no valen: se vacían antes de pedir las nuevas */
+    sheet.entries = [];
     load(sheet);
   };
   window.UIX.actions.goatboard = function (button, board) {
-    var sheet = window.UIX.getSheet();
-    if (!sheet || sheet.k !== "goat") return;
-    sheet.board = board === "achievements" ? "achievements" : "careers";
+    var sheet = window.UIX.getSheet(), wanted = board === "achievements" ? "achievements" : "careers";
+    if (!sheet || sheet.k !== "goat" || sheet.board === wanted) return;
+    sheet.board = wanted;
+    sheet.entries = [];
     load(sheet);
   };
   window.UIX.actions.goatperiod = function (button, timeframe) {
+    var sheet = window.UIX.getSheet(), wanted = timeframe === "7d" || timeframe === "30d" ? timeframe : "all-time";
+    if (!sheet || sheet.k !== "goat" || sheet.timeframe === wanted) return;
+    sheet.timeframe = wanted;
+    sheet.entries = [];
+    load(sheet);
+  };
+  window.UIX.actions.goatshare = function (button, id) { shareEntry(id); };
+  window.UIX.actions.goatclearq = function () {
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat") return;
-    sheet.timeframe = timeframe === "7d" || timeframe === "30d" ? timeframe : "all-time";
-    load(sheet);
+    sheet.q = "";
+    window.UIX.renderSheet();
   };
   window.UIX.actions.goatrefresh = function () { var sheet = window.UIX.getSheet(); if (sheet && sheet.k === "goat") load(sheet); };
   window.UIX.actions.goatsubmit = function (button) { submit(button); };
@@ -587,25 +690,62 @@
     });
   };
   document.addEventListener("change", function (event) {
-    var select = event.target;
-    if (!select || !select.matches || !select.matches("[data-goat-metric]")) return;
+    var field = event.target;
+    if (!field || !field.matches) return;
+    if (field.matches("[data-goat-alias]")) {
+      var aliasSheet = window.UIX.getSheet();
+      if (aliasSheet && aliasSheet.k === "goat") {
+        aliasSheet.alias = String(field.value || "");
+        aliasSheet.aliasTouched = true;
+      }
+      return;
+    }
+    /* el buscador filtra al confirmar (Enter o salir del campo), no en cada tecla */
+    if (field.matches("[data-goat-q]")) {
+      var searchSheet = window.UIX.getSheet();
+      if (!searchSheet || searchSheet.k !== "goat") return;
+      searchSheet.q = String(field.value || "").slice(0, 40);
+      window.UIX.renderSheet();
+      return;
+    }
+    var select = field;
+    if (!select.matches("[data-goat-metric]")) return;
     var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat" || sheet.board !== "careers") return;
     var allowed = METRICS[sheet.mode].map(function (item) { return item[0]; });
     sheet.metric = allowed.indexOf(select.value) >= 0 ? select.value : METRICS[sheet.mode][0][0];
     load(sheet);
   });
+  document.addEventListener("keydown", function (event) {
+    if (event.key !== "Enter" || !event.target || !event.target.matches) return;
+    if (!event.target.matches("[data-goat-q]")) return;
+    var sheet = window.UIX.getSheet();
+    if (!sheet || sheet.k !== "goat") return;
+    event.preventDefault();
+    sheet.q = String(event.target.value || "").slice(0, 40);
+    window.UIX.renderSheet();
+  });
   window.UIX.sheets.goat = function (sheet) {
     var latest = service.latest(), title = latest ? latest.title : "";
+    var shown = filterEntries(sheet.entries, sheet.q);
+    var refreshing = sheet.loading && sheet.entries.length
+      ? '<p class="muted goat-refreshing">' + esc(tr("refreshing")) + "</p>" : "";
+    var counted = sheet.q && sheet.entries.length
+      ? '<p class="muted goat-counted">' + esc(tr("counted", {n: shown.length, total: sheet.entries.length})) +
+        '</p><button class="btn wide" data-a="goatclearq">' + esc(tr("clearSearch")) + "</button>" : "";
     var list = !service.available() ? "" :
-      sheet.loading ? '<p class="muted">' + esc(tr("loading")) + "</p>" :
+      sheet.loading && !sheet.entries.length ? '<p class="muted">' + esc(tr("loading")) + "</p>" :
       sheet.error ? '<p class="goat-error" role="alert">' + esc(sheet.error) +
         '</p><button class="btn wide" data-a="goatrefresh">' + esc(tr("retry")) + "</button>" :
-      sheet.entries.length ? sheet.entries.map(function (entry, index) {
+      shown.length ? refreshing + counted + shown.map(function (entry) {
+        var index = sheet.entries.indexOf(entry);
         return sheet.board === "careers"
           ? CareerLadderCard(entry, index, sheet.metric) : GoatLadderCard(entry, index);
       }).join("") :
-      '<p class="muted">' + esc(tr(sheet.board === "careers" ? "emptyCareers" : "empty")) + "</p>";
+      refreshing + (sheet.q && sheet.entries.length
+        ? '<p class="muted">' + esc(tr("noResults", {q: sheet.q})) + "</p>" +
+          '<button class="btn wide" data-a="goatclearq">' + esc(tr("clearSearch")) + "</button>"
+        : '<p class="muted">' + esc(tr(sheet.board === "careers" ? "emptyCareers" : "empty")) + "</p>");
     var publish = !service.available()
       ? '<div class="card goat-notice"><b>' + esc(tr("unavailable")) + '</b><p class="muted">' +
         esc(tr("setup")) + "</p></div>"
@@ -620,16 +760,22 @@
           '<label class="goat-consent"><input type="checkbox" data-goat-consent> ' + esc(tr("consent")) +
           '</label><p class="goat-privacy">' + esc(tr("privacy")) + "</p>" +
           (sheet.submitError ? '<p class="goat-error" role="alert">' + esc(sheet.submitError) + "</p>" : "") +
+          (sheet.alias && sheet.aliasSaved ? '<p class="muted goat-alias-note">' + esc(tr("aliasSaved")) + "</p>" : "") +
           (sheet.submitSuccess != null ? '<p class="pos">' + esc(tr("submitted")) + " · " +
             esc(sheet.submitSuccess) + " " + esc(tr("score")) + "</p>" : "") +
           (sheet.deleteNotice ? '<p class="muted">' + esc(sheet.deleteNotice) + "</p>" : "") +
           '<button class="btn pri wide" data-a="goatsubmit"' + (sheet.submitting ? " disabled" : "") + ">" +
-          esc(sheet.submitting ? tr("loading") : tr("publish")) + "</button></section>"
+          esc(sheet.submitting ? tr("loading") : (sheet.submitFailed ? tr("retrySubmit") : tr("publish"))) +
+          "</button></section>"
         : '<div class="card goat-notice"><p class="muted">' + esc(tr("noLatest")) + "</p></div>";
+    if (!sheet.q) sheet.q = "";
+    if (!sheet.alias && !sheet.aliasTouched) sheet.alias = rememberedAlias();
     return '<h2>🏆 ' + esc(tr("home")) + '</h2><p class="muted">' + esc(tr("login")) + "</p>" +
-      GoatFilterTabs(sheet.board, sheet.mode, sheet.timeframe, sheet.metric) +
+      GoatFilterTabs(sheet.board, sheet.mode, sheet.timeframe, sheet.metric, sheet.q) +
       (sheet.board === "careers" ? careerPublishCard() : publish) +
       '<div class="stack goat-list">' + list + "</div>" +
+        (window.GOAT_WEB_BUILD ? '<a class="btn wide" href="../goat-ladder/" target="_top">🌐 ' +
+          esc(tr("webBoard")) + "</a>" : "") +
         '<button class="btn wide" data-a="close">' + esc(tr("close")) + "</button>";
   };
 })();

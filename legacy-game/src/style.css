@@ -158,6 +158,12 @@ main { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling
 .goat-history summary { cursor: pointer; color: var(--sky); font-weight: 700; }
 .goat-season { display: flex; flex-direction: column; gap: 3px; border-top: 1px solid var(--line); padding: 8px 0 0; }
 .goat-season b { color: var(--chalk); }
+.goat-search { margin-top: 10px; }
+.goat-search .goat-input { margin-top: 5px; }
+.goat-refreshing { margin: 6px 0 2px; font-size: var(--fs-2xs); color: var(--led); }
+.goat-card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.goat-card-actions .btn { flex: 1 1 auto; }
+.goat-alias-note { font-size: var(--fs-2xs); margin: 0; }
 .lead { font-size: var(--fs-base); color: var(--chalk); margin: 8px 0 0; max-width: 62ch; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .chip { font: 700 var(--fs-xs)/1 var(--f-body); padding: 6px 8px; border-radius: 3px; background: var(--tunnel); }

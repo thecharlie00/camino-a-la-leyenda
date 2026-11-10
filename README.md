@@ -15,15 +15,20 @@ Aplicación web React moderna de carrera futbolística: carrera de jugador o jug
 
 - `src/main.tsx`: Punto de entrada de la aplicación React.
 - `src/App.tsx`: Enrutador de pestañas y gestor global de estado e idioma.
-- `src/components/Header.tsx`: Barra superior con selector de idioma, navegación y pantalla completa.
 - `src/components/GameContainer.tsx`: Contenedor del motor de juego completo y barra rápida de guardado.
 - `src/components/PitchDemo.tsx`: Simulador 2D interactivo con 22 jugadores, pases dinámicos, disparos y comentarios en vivo.
-- `src/components/GoatLadderView.tsx`: Salón de la Fama y Clasificación GOAT con filtros (carreras/gestas, jugador/míster, periodos) y publicación de carreras guardadas.
+- `src/components/Header.tsx`: Barra superior con selector de idioma, navegación, pantalla completa y enlace a la página GOAT LADDER del idioma elegido (el ranking vive en `goat-ladder.js`).
 - `src/components/GuideView.tsx`: Manual de estrategia y guía de tácticas, atributos y modos.
 - `src/components/Footer.tsx`: Pie de página y enlaces rápidos.
 - `src/translations.ts`: Diccionario de traducciones en 5 idiomas.
 - `public/camino-engine.js`: Motor de simulación y bases de datos parodiadas de clubes y jugadores.
+- `legacy-game/src/goat.js` y `legacy-game/src/ui-goat.js`: cliente e interfaz del ranking online GOAT LADDER.
+- `goat-ladder.js`: tablero público del ranking (palmarés, historial, buscador, paginación, enlaces compartidos y borrado).
+- `web/config.json`: origen del servicio del ranking que se incrusta en cada compilación.
 - `public/img/`: Recursos gráficos, iconos y capturas.
+
+El funcionamiento del ranking online —servicio, API, qué se publica y cómo se prueba— está en
+[`docs/GOAT_LADDER.md`](docs/GOAT_LADDER.md).
 
 ## Ejecución en Desarrollo
 

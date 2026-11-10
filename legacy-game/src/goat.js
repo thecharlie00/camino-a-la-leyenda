@@ -425,11 +425,16 @@
     latest: function () { return S && S.goatLatest ? S.goatLatest : null; },
     career: careerSnapshot,
     canDelete: function (id) { return !!(memoryDeleteTokens[id] || storedDeleteTokens()[id]); },
-    t: function (key) {
+    /* Texto de interfaz; admite marcadores («{q}», «{n}»…) para los mensajes con datos. */
+    t: function (key, params) {
       var language = typeof LANG === "string" ? LANG : "es";
       var fem = typeof FEM !== "undefined" && FEM && root.GOAT_FEM_TEXT ? root.GOAT_FEM_TEXT[language] : null;
-      if (fem && fem[key]) return fem[key];
-      return (root.GOAT_TEXT[language] || root.GOAT_TEXT.es)[key] || root.GOAT_TEXT.es[key] || key;
+      var value = fem && fem[key] ? fem[key]
+        : ((root.GOAT_TEXT[language] || root.GOAT_TEXT.es)[key] || root.GOAT_TEXT.es[key] || key);
+      if (params) value = String(value).replace(/\{(\w+)\}/g, function (match, name) {
+        return params[name] == null ? match : String(params[name]);
+      });
+      return value;
     },
     list: function (mode, timeframe) {
       if (!apiOrigin) return Promise.reject(failure("unavailable"));
