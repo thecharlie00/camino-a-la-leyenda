@@ -8,6 +8,7 @@ import { JSDOM } from "jsdom";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const script = readFileSync(join(root, "goat-ladder.js"), "utf8");
+const pixelSource = readFileSync(join(root, "pixel.js"), "utf8");
 
 const failures = [];
 function check(name, fn) {
@@ -15,6 +16,18 @@ function check(name, fn) {
   catch (error) { failures.push(name); console.log("  FAIL " + name + " · " + error.message); }
 }
 const pause = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const CAREER_WITH_TROPHIES = {
+  id: "c9", game_mode: "player", title: "Carrera de Nerea", display_name: "Nerea", current_club: "Atlas",
+  started_season: 2080, latest_season: 2082,
+  metrics: {seasons: 3, appearances: 120, goals: 44, trophies: 3, awards: 1},
+  history: [
+    {season: 2082, club: "Atlas", competition: "Liga", trophies: ["Liga", "Copa"], trophy_keys: ["league", "cup"],
+      awards: ["MVP de la temporada"], award_keys: ["mvp"], appearances: 40, goals: 18},
+    {season: 2081, club: "Atlas", competition: "Liga", trophies: ["Liga"], trophy_keys: ["league"],
+      awards: [], appearances: 40, goals: 14}
+  ]
+};
 
 const CAREER = (id, name, club) => ({
   id, game_mode: "player", title: "Carrera de " + name, display_name: name, current_club: club,
@@ -76,6 +89,7 @@ async function boot(options = {}) {
     window.setTimeout = (callback, delay, ...args) =>
       native(callback, delay >= 10000 ? options.timeoutMs : delay, ...args);
   }
+  if (options.pixel) window.eval(pixelSource);   /* iconos de trofeo reales */
   window.eval(script);
   await pause(20);
   return { dom, window, document: window.document, calls, copied };
@@ -209,6 +223,53 @@ async function pagination() {
     assert.match(card.className, /is-selected/);
   });
   deep.window.close();
+}
+
+async function trophyIcons() {
+  console.log("Trofeos del historial");
+  const withIcons = await boot({ pixel: true, fetch: () => ({ entries: [CAREER_WITH_TROPHIES] }) });
+  const details = withIcons.document.querySelector(".goat-career-history");
+  check("el historial de temporadas está desplegable", () => {
+    assert.ok(details, "sin bloque de historial");
+    assert.equal(details.querySelectorAll(".goat-season-row").length, 2);
+  });
+  check("cada temporada muestra el icono de los trofeos ganados", () => {
+    const rows = details.querySelectorAll(".goat-season-row");
+    /* el historial se pinta de la temporada más antigua a la más reciente */
+    assert.equal(rows[0].querySelectorAll(".goat-season-honours svg").length, 1, "2081: un título");
+    assert.equal(rows[1].querySelectorAll(".goat-season-honours svg").length, 3, "2082: dos títulos y un premio");
+    assert.equal(rows[1].querySelectorAll(".goat-season-honours").length, 2, "títulos y premios van separados");
+  });
+  check("los iconos llevan el nombre del trofeo accesible", () => {
+    const icon = details.querySelector(".goat-hon-ico");
+    assert.ok(icon, "sin contenedor de icono");
+    assert.match(icon.getAttribute("title"), /Liga|Copa|MVP/);
+    assert.ok(details.querySelector("svg[aria-label]"), "el icono no tiene etiqueta");
+  });
+  check("el palmarés de la carrera también lleva trofeos", () => {
+    assert.ok(withIcons.document.querySelector(".goat-honours svg"), "palmarés sin iconos");
+  });
+  withIcons.window.close();
+
+  const plain = await boot({ pixel: true, fetch: () => ({ entries: [{
+    id: "c1", game_mode: "player", title: "Carrera de Leire", display_name: "Leire", current_club: "PSG",
+    started_season: 2082, latest_season: 2100, metrics: {seasons: 1, appearances: 40},
+    history: [{season: 2100, club: "PSG", competition: "Liga", trophies: [], awards: [], appearances: 40}]
+  }] }) });
+  check("una temporada sin trofeos no pinta la fila de honores", () => {
+    const row = plain.document.querySelector(".goat-season-row");
+    assert.ok(row, "sin fila de temporada");
+    assert.equal(row.querySelector(".goat-season-honours"), null);
+  });
+  plain.window.close();
+
+  const withoutPixel = await boot({ fetch: () => ({ entries: [CAREER_WITH_TROPHIES] }) });
+  check("sin pixel.js los trofeos se leen como texto", () => {
+    const text = withoutPixel.document.querySelector(".goat-season-honours .goat-hon-ico.is-text");
+    assert.ok(text, "no hay respaldo en texto");
+    assert.match(text.textContent, /Liga/);
+  });
+  withoutPixel.window.close();
 }
 
 async function failure() {
@@ -348,6 +409,7 @@ async function main() {
   await search();
   await filters();
   await pagination();
+  await trophyIcons();
   await failure();
   await sharing();
   await caching();

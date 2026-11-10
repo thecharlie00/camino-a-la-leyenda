@@ -183,6 +183,7 @@ assert.ok(!existsSync(join(output, 'camino-engine.js')), 'Stale v5.2 engine bund
 /* Ranking online: las cinco páginas publicadas, su script y el servicio configurado. */
 const goatRuntime = join(output, 'goat-ladder.js');
 assert.ok(existsSync(goatRuntime), 'Missing build output: goat-ladder.js');
+assert.ok(existsSync(join(output, 'pixel.js')), 'Missing build output: pixel.js (trophy icons)');
 const goatBoard = readFileSync(goatRuntime, 'utf8');
 new Script(goatBoard, {filename: 'goat-ladder.js'});
 assert.match(goatBoard, /window\.GoatBoard|root\.GoatBoard/, 'The ranking board must expose its API');
@@ -193,6 +194,7 @@ for (const lang of ['', 'en/', 'de/', 'it/', 'fr/']) {
   assert.match(page, /goat-ladder\.js/, `${pagePath} must load the board script`);
   assert.match(page, /id="goat-entries"/, `${pagePath} must contain the ranking container`);
   assert.match(page, /data-board="careers"/, `${pagePath} must contain the board filters`);
+  assert.match(page, /src="[^"]*pixel\.js"/, `${pagePath} must load pixel.js for the trophy icons`);
   assert.match(page, /window\.GOAT_API_URL = "https:\/\/camino-goat-ladder\./,
     `${pagePath} must point at the GOAT LADDER service`);
   for (const [, src] of page.matchAll(/<script[^>]+src="([^"]+)"/g)) {

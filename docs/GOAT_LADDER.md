@@ -21,8 +21,12 @@ paginación (el HTML no necesita repetirlos).
 ## Cómo se ve el tablero
 
 - Tarjetas con la misma ficha que en el juego: puesto, métrica elegida, alias y club, métricas
-  agregadas, palmarés con los trofeos de `pixel.js` (si la página los carga) e historial de
-  temporadas desplegable.
+  agregadas, palmarés y historial de temporadas desplegable.
+- **Trofeos con su icono**: el palmarés y cada temporada del historial pintan el trofeo pixelado de
+  `pixel.js` (clave `trophy_keys`/`award_keys` del servicio o deducida del nombre). Sin `pixel.js`
+  los nombres se muestran como texto, así que la página nunca se queda sin información.
+- Las cinco páginas cargan `pixel.js` antes de `goat-ladder.js` (`trophies.js` no hace falta: los
+  iconos los dibuja pixel).
 - Filtros por tablero (carreras/gestas), modo (jugador/míster), periodo (todo/30/7 días) y métrica.
 - Buscador en el dispositivo por alias, club, título, competición o rival. No hace ninguna petición:
   filtra lo que ya está cargado y muestra «n de total» mientras hay búsqueda.
@@ -105,7 +109,8 @@ npm run test:build      # build completo (incluye estas suites)
 - `test/goat-player-season.js`: captura de la temporada de jugador.
 - `test/goat-page.js`: la página publicada con jsdom (reintento, timeout, filtros, pintado real).
 - `test/goat-web.js`: lógica del tablero (estado en la URL, rutas, caché, traducciones).
-- `test/goat-web-dom.js`: pintado, buscador, filtros, paginación, enlaces compartidos, borrado y caché.
+- `test/goat-web-dom.js`: pintado, buscador, filtros, paginación, enlaces compartidos, borrado, caché
+  y los iconos de trofeo del historial (carga el `pixel.js` real).
 - `test/goat-game-ui.js`: ficha dentro del juego (buscador, compartir, alias recordado, reintentos de
   envío y aviso cuando el servicio no está configurado).
 
