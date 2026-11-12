@@ -46,7 +46,11 @@
     L({id: "BRA2", c: "BR", n: "Brasileirão Série B", t: 2, top: 70, bot: 62, w: 0.5, gs: 1},
       "Goiás|Novorizontino|Cuiabá|Atlético Goianiense|Avaí|CRB|Chapecoense|Vila Nova|América Mineiro|Operário Ferroviário|Ponte Preta|Criciúma|Botafogo-SP|Athletic Club|Ferroviária|Londrina|Náutico|Paysandu|Amazonas FC|Sport Recife|Juventude|Ceará|Fortaleza"),
     L({id: "JPN2", c: "JP", n: "J2 League", t: 2, top: 65, bot: 58, w: 0.4, gs: 1, po: [3, 6]},
-      "Yokohama FC|Shonan Bellmare|Albirex Niigata|Vegalta Sendai|JEF United Chiba|Montedio Yamagata|Ventforet Kofu|Oita Trinita|Tokushima Vortis|Ehime FC|Fujieda MYFC|Iwaki FC|V-Varen Nagasaki|Roasso Kumamoto|Mito HollyHock|Blaublitz Akita|Renofa Yamaguchi|Kataller Toyama|Imabari FC|Sagan Tosu")
+      "Yokohama FC|Shonan Bellmare|Albirex Niigata|Vegalta Sendai|JEF United Chiba|Montedio Yamagata|Ventforet Kofu|Oita Trinita|Tokushima Vortis|Ehime FC|Fujieda MYFC|Iwaki FC|V-Varen Nagasaki|Roasso Kumamoto|Mito HollyHock|Blaublitz Akita|Renofa Yamaguchi|Kataller Toyama|Imabari FC|Sagan Tosu"),
+    L({id: "AZ1", c: "AZ", n: "Premyer Liqası", t: 1, top: 69, bot: 54, cup: "Copa de Azerbaiyán", eu: [1, 1, 2], down: "AZ2", rel: 1, w: 0.65, gs: 1.1},
+      "Qarabağ FK|Sabah FK|Zirə FK|Neftçi PFK|Turan Tovuz|Sumqayıt FK|Araz-Naxçıvan PFK|Şamaxı FK|İmişli FK|Kəpəz PFK|Qəbələ FK|Karvan-Yevlax"),
+    L({id: "AZ2", c: "AZ", n: "I Liqa", t: 2, top: 55, bot: 43, upN: 1, w: 0.18, gs: 0.5},
+      "Baku Sporting|Cəbrayıl|Difai Ağsu|Mingəçevir|MOİK|Səbail|Şəfa|Şahdağ Qusar|Şimal|Zaqatala")
   ].map(function (o) {
     /* cada liga nueva, con el número de clubes que le toca (lo que sobre de la lista se descarta) */
     var want = {ENG4: 24, GER3: 20, ITA301: 20, ITA302: 20, ITA303: 20, FRA3: 17, POR2: 18, NED2: 20, BEL2: 16, TUR2: 20, SCO2: 10, ARG2: 20, BRA2: 20, JPN2: 20}[o.id];
