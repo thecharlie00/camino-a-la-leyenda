@@ -16,10 +16,12 @@ evalúa cuando hace falta:
 | Paquete 3D (GLB) | `var P3D_ASSET_PACK = {...}` | plantilla `pitch3d-asset-pack`, se parsea al abrir el 3D |
 
 Medido en jsdom sobre el mismo equipo: el código que el motor compila al arrancar
-baja de **10,61 MB a 5,84 MB** (y a 4,28 MB con el paquete 3D fuera), la compilación
-de 54 a **25-30 ms** y el heap estable tras el arranque de 65 a **56 MB**. El tiempo
-de arranque completo en jsdom baja de ~2,9 s a ~2,7 s (el resto es trabajo del DOM
-de jsdom, no del motor).
+baja de **10,61 MB a 5,84 MB** (y a **4,28 MB** con el paquete 3D fuera), la
+compilación de 54 a **25-30 ms** y el heap estable tras el arranque (con dos GC
+completos) de 65 a **56 MB**. El tiempo de arranque completo en jsdom baja de
+~2,9 s a ~2,7 s tanto en frío como en caliente (el resto es trabajo del DOM de
+jsdom, no del motor). El HTML completo pesa 11,7 MB y no crece: los catálogos y los
+modelos ya estaban en el fichero, solo cambia cuándo se evalúan.
 
 Regla: los catálogos de idioma y los modelos no deben volver al código ejecutable.
 `test/build-smoke.js` comprueba que siguen siendo plantillas y que los cinco idiomas
@@ -55,10 +57,21 @@ cierre de temporada.
 
 ## 3. Una sola copia del código
 
-`legacy-game/src` es la única fuente del juego. La antigua copia de 91 módulos en
-`src/` se eliminó porque ni Vite ni TypeScript la importaban; los tests leen ya
-`legacy-game/src`. Cualquier módulo nuevo del motor va solo ahí y en `ORDER` de
-`build_legacy_game.py`.
+`legacy-game/src` es la única fuente del juego:
+
+- la antigua copia de 91 módulos en `src/` se eliminó porque ni Vite ni TypeScript la
+  importaban;
+- la app React legada (`src/App.tsx`, `src/components/*`, `src/analytics/*`,
+  `src/translations.ts`) tampoco se compilaba ni se servía: el sitio publicado es
+  estático (`index.html`, `site.css`, `site.js`) y su `GameContainer` cargaba
+  `/camino-engine.js`, un bundle de 6,5 MB que el build ya no publicaba, así que esa
+  vista estaba rota en producción. Se retiró junto con el bundle y con las
+  dependencias `react`, `react-dom`, `lucide-react`, `three` y `@vitejs/plugin-react`.
+- los tests leen ya `legacy-game/src`.
+
+Cualquier módulo nuevo del motor va solo en `legacy-game/src` y en `ORDER` de
+`build_legacy_game.py`. `vite build` se limita a copiar el sitio estático y las
+páginas de juego; el motor lo genera `build_legacy_game.py`.
 
 ## 4. Cómo comprobarlo
 
