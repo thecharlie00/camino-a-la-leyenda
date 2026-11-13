@@ -15,6 +15,14 @@ var PET_DEF = [
     d: N_("Vivirá más que tu carrera: paciencia y temple.")},
   {k: "hamster", ex: false, ico: ["🐹", "🐹", "🐹", "🐹"], n: N_("Hámster"), price: 40, year: 150, life: [2, 3], att: {}, gk: {}, mor: 1.2,
     d: N_("Pequeño y divertido, pero vive muy poco.")},
+  {k: "guinea", ex: false, ico: ["🐹", "🐹", "🐹", "🐹"], n: N_("Cobaya"), price: 120, year: 420, life: [5, 8], att: {}, gk: {}, mor: 1.5,
+    d: N_("Curiosa y sociable: disfruta de un rincón tranquilo y compañía.")},
+  {k: "budgie", ex: false, ico: ["🐦", "🐦", "🦜", "🦜"], n: N_("Periquito rescatado"), price: 260, year: 720, life: [6, 10], att: {}, gk: {}, mor: 1.1, fame: 0.4,
+    d: N_("Un compañero vivaz que aprende sonidos y anima el vestuario.")},
+  {k: "ferret", ex: false, ico: ["🦦", "🦦", "🦦", "🦦"], n: N_("Hurón doméstico"), price: 380, year: 900, life: [5, 9], att: {}, gk: {}, mor: 1.4,
+    d: N_("Juguetón y curioso: necesita un hogar seguro y estímulos diarios opcionales.")},
+  {k: "rescuecat", ex: false, ico: ["🐈", "🐈", "🐈", "🐈"], n: N_("Gato de refugio"), price: 220, year: 840, life: [12, 18], att: {}, gk: {}, mor: 1.3,
+    d: N_("Un compañero tranquilo que encuentra un hogar y una nueva rutina.")},
   /* exóticas */
   {k: "macaw", ex: true, ico: ["🦜", "🦜", "🦜", "🦜"], n: N_("Guacamayo"), price: 4000, year: 3000, life: [40, 60], att: {}, gk: {}, mor: 1, fame: 1.5, risk: 0.04,
     d: N_("Repite tu nombre en los vídeos: más seguidores.")},
@@ -66,12 +74,12 @@ function petAdopt(k, nm) {
 function petRename(nm) { var pt = petOf(); nm = petCleanName(nm); if (!pt || !nm) return false; pt.nm = nm; return true; }
 /* ---------- cariño (versión 3.7): varias formas de cuidarla, hasta dos por tramo ---------- */
 var PET_ACT_MAX = 2;
-var PET_FUR = ["dog", "cat", "rabbit", "hamster", "hedgehog", "fennec", "capybara"];
+var PET_FUR = ["dog", "cat", "rabbit", "hamster", "hedgehog", "fennec", "capybara", "guinea", "ferret", "rescuecat"];
 var PET_CARE = [
   {k: "pat", ico: "🤲", n: N_("Mimos"), d: N_("Caricias y rascarle justo donde le gusta."), bond: 8, mor: 1, no: ["fish", "tarantula"]},
   {k: "walk", ico: "🦮", n: N_("Salir a pasear"), d: N_("Un buen paseo: también te pone en forma."), bond: 12, form: 1, sp: ["dog", "fennec", "capybara"]},
-  {k: "play", ico: "🎾", n: N_("Jugar juntos"), d: N_("Su juguete favorito y un rato de risas."), bond: 10, mor: 2, sp: ["dog", "cat", "rabbit", "hamster", "hedgehog", "fennec", "macaw"]},
-  {k: "trick", ico: "💡", n: N_("Enseñarle un truco"), d: N_("Cuesta, pero cuando lo aprende es un vídeo viral."), bond: 7, sp: ["dog", "cat", "rabbit", "macaw", "fennec"]},
+  {k: "play", ico: "🎾", n: N_("Jugar juntos"), d: N_("Su juguete favorito y un rato de risas."), bond: 10, mor: 2, sp: ["dog", "cat", "rabbit", "hamster", "hedgehog", "fennec", "macaw", "guinea", "budgie", "ferret", "rescuecat"]},
+  {k: "trick", ico: "💡", n: N_("Enseñarle un truco"), d: N_("Cuesta, pero cuando lo aprende es un vídeo viral."), bond: 7, sp: ["dog", "cat", "rabbit", "macaw", "fennec", "guinea", "budgie", "ferret", "rescuecat"]},
   {k: "home", ico: "🫧", n: N_("Limpiar su hogar"), d: N_("Acuario o terrario impecable: vive más feliz."), bond: 10, sp: ["fish", "turtle", "iguana", "python", "tarantula", "hamster"]},
   {k: "watch", ico: "🧘", n: N_("Contemplarla un rato"), d: N_("Mirarla sin prisas te baja las pulsaciones."), bond: 6, mor: 2, calm: 1, sp: ["fish", "turtle", "iguana", "python", "tarantula", "capybara"]},
   {k: "treat", ico: "🍖", n: N_("Darle un premio"), d: N_("Su comida favorita: vínculo rápido."), bond: 7, cost: 0.02},
@@ -155,7 +163,13 @@ var PET_ACC = [
   {k: "teddy", s: "t", ico: "🧸", n: N_("Peluche"), price: 120},
   {k: "cup", s: "t", ico: "🏆", n: N_("Copa en miniatura"), un: "league", ud: N_("Gana una liga.")},
   {k: "boot", s: "t", ico: "👟", n: N_("Bota dorada"), un: "scorer", ud: N_("Gana un trofeo de máximo goleador.")},
-  {k: "glove", s: "t", ico: "🧤", n: N_("Guante de oro"), un: "gk", ud: N_("Gana un premio al mejor portero.")}
+  {k: "glove", s: "t", ico: "🧤", n: N_("Guante de oro"), un: "gk", ud: N_("Gana un premio al mejor portero.")},
+  {k: "visor", s: "h", ico: "🧢", n: N_("Visera de entrenamiento"), price: 180},
+  {k: "flower", s: "h", ico: "🌼", n: N_("Flor de celebración"), price: 130},
+  {k: "headphones", s: "f", ico: "🎧", n: N_("Auriculares de viaje"), price: 240},
+  {k: "rosette", s: "n", ico: "🎗️", n: N_("Escarapela del club"), price: 170},
+  {k: "medal_blue", s: "n", ico: "🏅", n: N_("Medalla de compañerismo"), price: 320},
+  {k: "toy_flag", s: "t", ico: "🚩", n: N_("Banderín para animar"), price: 210}
 ];
 var PET_SLOT = [["h", N_("Cabeza")], ["f", N_("Cara")], ["n", N_("Cuello")], ["t", N_("Juguete")]];
 function petAccDef(k) { for (var i = 0; i < PET_ACC.length; i++) if (PET_ACC[i].k === k) return PET_ACC[i]; return null; }

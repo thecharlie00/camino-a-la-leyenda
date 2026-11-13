@@ -1,0 +1,512 @@
+{
+  "AUT2": {
+    "season": "2026/27",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026–27 Austrian Football Second League",
+      "url": "https://en.wikipedia.org/wiki/2026%E2%80%9327_Austrian_Football_Second_League",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article states that sixteen teams take part and lists each club's stadium.",
+      "Retrieved on 2026-10-27; the article's statistics were last updated on 2026-09-20."
+    ],
+    "participants": [
+      "Admira Wacker",
+      "SKU Amstetten",
+      "Blau-Weiß Linz",
+      "SW Bregenz",
+      "Floridsdorfer AC",
+      "First Vienna",
+      "Rapid Wien II",
+      "Austria Wien II",
+      "Kapfenberger SV",
+      "FC Liefering",
+      "Sturm Graz II",
+      "SKN St. Pölten",
+      "FC Hertha Wels",
+      "SV Austria Salzburg",
+      "ASK Voitsberg",
+      "Wacker Innsbruck"
+    ],
+    "gameParticipants": [
+      "Admira Wacker",
+      "SKU Amstetten",
+      "SW Bregenz",
+      "Floridsdorfer AC",
+      "First Vienna",
+      "Rapid Viena II",
+      "Austria Viena II",
+      "Kapfenberger SV",
+      "FC Liefering",
+      "Sturm Graz II",
+      "SKN St. Pölten",
+      "FC Hertha Wels",
+      "SV Austria Salzburg",
+      "ASK Voitsberg",
+      "Wacker Innsbruck"
+    ],
+    "limitations": [
+      "The season article is a secondary, collaboratively edited source, not a federation document.",
+      "It records the 2026/27 participant list only: it does not publish the club-strength values used by the game, which remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "Blau-Weiß Linz is left out of the game pool because the game's Austrian first division already contains that club, so the game pool is not a complete season roster."
+    ]
+  },
+  "SUI2": {
+    "season": "2026/27",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026–27 Swiss Challenge League",
+      "url": "https://en.wikipedia.org/wiki/2026%E2%80%9327_Swiss_Challenge_League",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article lists the ten clubs of the 2026/27 Challenge League and their stadiums.",
+      "Retrieved on 2026-10-27; the article's statistics were last updated on 2026-08-24."
+    ],
+    "participants": [
+      "FC Aarau",
+      "SC Kriens",
+      "Étoile Carouge",
+      "FC Winterthur",
+      "Neuchâtel Xamax",
+      "Yverdon-Sport",
+      "FC Wil",
+      "FC Rapperswil-Jona",
+      "Stade Nyonnais",
+      "Stade Lausanne Ouchy"
+    ],
+    "gameParticipants": [
+      "FC Aarau",
+      "SC Kriens",
+      "Étoile Carouge",
+      "Neuchâtel Xamax",
+      "Yverdon-Sport",
+      "FC Wil",
+      "FC Rapperswil-Jona",
+      "Stade Nyonnais",
+      "Stade Lausanne Ouchy"
+    ],
+    "limitations": [
+      "The season article is a secondary, collaboratively edited source, not a federation document.",
+      "It records the 2026/27 participant list only: it does not publish the club-strength values used by the game, which remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "FC Winterthur is left out of the game pool because the game's Swiss first division already contains that club, so the game pool is not a complete season roster.",
+      "A nine-club pool is smaller than the real ten-club league: the calendar adapts with a double round-robin and does not reproduce the official fixture list."
+    ]
+  },
+  "DEN2": {
+    "season": "2026/27",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026–27 Danish 1st Division",
+      "url": "https://en.wikipedia.org/wiki/2026%E2%80%9327_Danish_1st_Division",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article lists the twelve clubs of the 2026/27 1st Division with their stadiums and coaches."
+    ],
+    "participants": [
+      "AaB",
+      "Aarhus Fremad",
+      "Akademisk Boldklub",
+      "Esbjerg fB",
+      "FC Fredericia",
+      "Hillerød Fodbold",
+      "Hobro IK",
+      "Hvidovre IF",
+      "Kolding IF",
+      "HB Køge",
+      "Vejle Boldklub",
+      "Vendsyssel FF"
+    ],
+    "gameParticipants": [
+      "AaB",
+      "Aarhus Fremad",
+      "AB Gladsaxe",
+      "Esbjerg fB",
+      "Hillerød",
+      "Hobro IK",
+      "Hvidovre IF",
+      "Kolding IF",
+      "HB Køge",
+      "Vendsyssel FF"
+    ],
+    "limitations": [
+      "The season article is a secondary, collaboratively edited source, not a federation document.",
+      "It records the 2026/27 participant list only: it does not publish the club-strength values used by the game, which remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "Vejle Boldklub and FC Fredericia are left out of the game pool because the game's Danish first division already contains both clubs."
+    ]
+  },
+  "NOR2": {
+    "season": "2026",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026 Norwegian First Division",
+      "url": "https://en.wikipedia.org/wiki/2026_Norwegian_First_Division",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article lists the sixteen clubs of the 2026 First Division with their home grounds."
+    ],
+    "participants": [
+      "Bryne FK",
+      "Egersunds IK",
+      "FK Haugesund",
+      "IL Hødd",
+      "Kongsvinger",
+      "Lyn",
+      "Moss FK",
+      "Odds BK",
+      "Ranheim",
+      "Raufoss",
+      "Sandnes Ulf",
+      "Sogndal",
+      "Stabæk",
+      "Strømmen",
+      "Strømsgodset",
+      "Åsane"
+    ],
+    "gameParticipants": [
+      "Bryne FK",
+      "Egersunds IK",
+      "FK Haugesund",
+      "IL Hødd",
+      "Kongsvinger",
+      "Lyn",
+      "Moss FK",
+      "Odds BK",
+      "Ranheim",
+      "Raufoss",
+      "Sandnes Ulf",
+      "Sogndal",
+      "Stabæk",
+      "Strømmen",
+      "Strømsgodset",
+      "Åsane"
+    ],
+    "limitations": [
+      "The season article is a secondary, collaboratively edited source, not a federation document.",
+      "It records the 2026/27 participant list only: it does not publish the club-strength values used by the game, which remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "Norway plays a calendar-year season, so this is the 2026 edition and not a 2026/27 edition."
+    ]
+  },
+  "SWE2": {
+    "season": "2026",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026 Superettan",
+      "url": "https://en.wikipedia.org/wiki/2026_Superettan",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article lists the sixteen clubs of the 2026 Superettan with their stadiums.",
+      "The article states that the top two clubs are promoted directly and the next two enter a promotion play-off."
+    ],
+    "participants": [
+      "Falkenbergs FF",
+      "GIF Sundsvall",
+      "Helsingborgs IF",
+      "IFK Norrköping",
+      "IFK Värnamo",
+      "IK Brage",
+      "IK Oddevold",
+      "Landskrona BoIS",
+      "Ljungskile SK",
+      "Nordic United",
+      "Norrby IF",
+      "Sandvikens IF",
+      "Varbergs BoIS",
+      "Örebro SK",
+      "Östers IF",
+      "Östersunds FK"
+    ],
+    "gameParticipants": [
+      "Falkenbergs FF",
+      "GIF Sundsvall",
+      "Helsingborgs IF",
+      "IFK Norrköping",
+      "IFK Värnamo",
+      "IK Brage",
+      "IK Oddevold",
+      "Landskrona BoIS",
+      "Ljungskile SK",
+      "Nordic United",
+      "Norrby IF",
+      "Sandvikens IF",
+      "Varbergs BoIS",
+      "Örebro SK",
+      "Östers IF",
+      "Östersunds FK"
+    ],
+    "limitations": [
+      "The season article is a secondary, collaboratively edited source, not a federation document.",
+      "It records the 2026/27 participant list only: it does not publish the club-strength values used by the game, which remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "Sweden plays a calendar-year season, so this is the 2026 edition.",
+      "The game keeps two direct promotion places and does not reproduce the Swedish promotion play-off format."
+    ]
+  },
+  "CZE2": {
+    "season": "2026/27",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026–27 Czech National Football League",
+      "url": "https://en.wikipedia.org/wiki/2026%E2%80%9327_Czech_National_Football_League",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article lists the sixteen clubs of the 2026/27 National Football League with their stadiums.",
+      "The article documents administrative relegations and the resulting replacements for this season."
+    ],
+    "participants": [
+      "MFK Karviná",
+      "FK Dukla Prague",
+      "FC Silon Táborsko",
+      "FK Viagem Ústí nad Labem",
+      "Baník Ostrava B",
+      "FK Příbram",
+      "SFC Opava",
+      "Viktoria Žižkov",
+      "Sellier & Bellot Vlašim",
+      "Slavia Prague B",
+      "Hanácká Slavia Kroměříž",
+      "1. SK Prostějov",
+      "Vysočina Jihlava",
+      "SK Kladno",
+      "Arsenal Česká Lípa",
+      "FK Třinec"
+    ],
+    "gameParticipants": [
+      "FC Silon Táborsko",
+      "FK Viagem Ústí nad Labem",
+      "Baník Ostrava B",
+      "FK Příbram",
+      "SFC Opava",
+      "Viktoria Žižkov",
+      "Sellier & Bellot Vlašim",
+      "Slavia Praga B",
+      "Hanácká Slavia Kroměříž",
+      "1. SK Prostějov",
+      "Vysočina Jihlava",
+      "SK Kladno",
+      "Arsenal Česká Lípa",
+      "FK Třinec"
+    ],
+    "limitations": [
+      "The season article is a secondary, collaboratively edited source, not a federation document.",
+      "It records the 2026/27 participant list only: it does not publish the club-strength values used by the game, which remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "MFK Karviná and FK Dukla Prague are left out of the game pool because the game's Czech first division already contains both clubs (as MFK Karviná and Dukla Praga)."
+    ]
+  },
+  "FI1": {
+    "season": "2026",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026 Veikkausliiga",
+      "url": "https://en.wikipedia.org/wiki/2026_Veikkausliiga",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article states that the league consists of twelve teams and lists each club's stadium.",
+      "The article documents the two promoted and two relegated clubs for the season."
+    ],
+    "participants": [
+      "AC Oulu",
+      "FC Inter",
+      "FC Lahti",
+      "FF Jaro",
+      "HJK",
+      "IF Gnistan",
+      "IFK Mariehamn",
+      "Ilves",
+      "KuPS",
+      "SJK",
+      "TPS",
+      "VPS"
+    ],
+    "gameParticipants": [
+      "HJK",
+      "KuPS",
+      "Ilves",
+      "SJK",
+      "VPS",
+      "FC Inter",
+      "FC Lahti",
+      "IF Gnistan",
+      "IFK Mariehamn",
+      "AC Oulu",
+      "FF Jaro",
+      "TPS"
+    ],
+    "limitations": [
+      "The source is a secondary, collaboratively edited page, not a federation document.",
+      "It records the participant list of one season only; the game's club-strength values remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "The game lists clubs in estimated strength order, not in the source order; the pool order is a simulation choice."
+    ]
+  },
+  "IS1": {
+    "season": "2026",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026 Besta deild karla",
+      "url": "https://en.wikipedia.org/wiki/2026_Besta_deild_karla",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article states that the league consists of twelve teams and lists the clubs and managers.",
+      "The article records that Víkingur Reykjavík entered as defending champions."
+    ],
+    "participants": [
+      "Breiðablik",
+      "FH",
+      "Fram",
+      "KA",
+      "Keflavík",
+      "KR",
+      "Stjarnan",
+      "Valur",
+      "Víkingur Reykjavík",
+      "ÍA",
+      "ÍBV",
+      "Þór Akureyri"
+    ],
+    "gameParticipants": [
+      "Víkingur Reykjavík",
+      "Breiðablik",
+      "Valur",
+      "KR",
+      "Stjarnan",
+      "FH",
+      "Fram",
+      "KA",
+      "ÍA",
+      "Keflavík",
+      "ÍBV",
+      "Þór Akureyri"
+    ],
+    "limitations": [
+      "The source is a secondary, collaboratively edited page, not a federation document.",
+      "It records the participant list of one season only; the game's club-strength values remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "The game lists clubs in estimated strength order, not in the source order; the pool order is a simulation choice."
+    ]
+  },
+  "WAL1": {
+    "season": "2026/27",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026–27 Cymru Premier",
+      "url": "https://en.wikipedia.org/wiki/2026%E2%80%9327_Cymru_Premier",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article states that the league expanded to sixteen teams for 2026–27 and lists them with their grounds.",
+      "The article documents the six promoted clubs and the two relegated clubs."
+    ],
+    "participants": [
+      "Airbus UK Broughton",
+      "Ammanford",
+      "Barry Town United",
+      "Briton Ferry Llansawel",
+      "Caernarfon Town",
+      "Cambrian United",
+      "Cardiff Met",
+      "Colwyn Bay",
+      "Connah's Quay Nomads",
+      "Flint Town United",
+      "Haverfordwest County",
+      "Holywell Town",
+      "Llandudno",
+      "Penybont",
+      "The New Saints",
+      "Trefelin BGC"
+    ],
+    "gameParticipants": [
+      "The New Saints",
+      "Cardiff Met",
+      "Barry Town United",
+      "Caernarfon Town",
+      "Connah's Quay Nomads",
+      "Penybont",
+      "Haverfordwest County",
+      "Colwyn Bay",
+      "Briton Ferry Llansawel",
+      "Flint Town United",
+      "Llandudno",
+      "Airbus UK Broughton",
+      "Holywell Town",
+      "Cambrian United",
+      "Ammanford",
+      "Trefelin BGC"
+    ],
+    "limitations": [
+      "The source is a secondary, collaboratively edited page, not a federation document.",
+      "It records the participant list of one season only; the game's club-strength values remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "The game lists clubs in estimated strength order, not in the source order; the pool order is a simulation choice."
+    ]
+  },
+  "NIR1": {
+    "season": "2026/27",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026–27 NIFL Premiership",
+      "url": "https://en.wikipedia.org/wiki/2026%E2%80%9327_NIFL_Premiership",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article states that the league consists of twelve teams and lists them with their grounds and managers.",
+      "The article documents the promoted club (Limavady United) and the relegated club (Glenavon)."
+    ],
+    "participants": [
+      "Ballymena United",
+      "Bangor",
+      "Carrick Rangers",
+      "Cliftonville",
+      "Coleraine",
+      "Crusaders",
+      "Dungannon Swifts",
+      "Glentoran",
+      "Larne",
+      "Limavady United",
+      "Linfield",
+      "Portadown"
+    ],
+    "gameParticipants": [
+      "Linfield",
+      "Larne",
+      "Glentoran",
+      "Cliftonville",
+      "Crusaders",
+      "Coleraine",
+      "Portadown",
+      "Ballymena United",
+      "Dungannon Swifts",
+      "Carrick Rangers",
+      "Bangor",
+      "Limavady United"
+    ],
+    "limitations": [
+      "The source is a secondary, collaboratively edited page, not a federation document.",
+      "It records the participant list of one season only; the game's club-strength values remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "The game lists clubs in estimated strength order, not in the source order; the pool order is a simulation choice."
+    ]
+  }
+}

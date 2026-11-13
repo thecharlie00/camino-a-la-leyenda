@@ -815,6 +815,19 @@ function mgrSeasonEnd() {
   }
   var tro = m.trophies.filter(function (t) { return t.s === seasonLabel(S.yr); });
   m.seasons.push({y: S.yr, club: m.club, lg: li, pos: pos, w: m.ss.w, d: m.ss.d, l: m.ss.l, gf: m.ss.gf, ga: m.ss.ga, tro: tro.map(function (t) { return t.n; }), r: Math.round(S.cr[m.club]), board: Math.round(m.board), mid: !!m.ss.mid, exp: exp});
+  /* Leyendas del universo: una noticia la primera vez que el banquillo supera una marca. */
+  if (typeof GoatLegends !== "undefined" && GoatLegends.careerNews) {
+    try {
+      var lgTot = {seasons: m.seasons.length, wins: 0, draws: 0, losses: 0, trophies: m.trophies.length, clubs: 1};
+      var lgClubs = {};
+      m.seasons.forEach(function (r) {
+        lgTot.wins += r.w || 0; lgTot.draws += r.d || 0; lgTot.losses += r.l || 0;
+        if (r.club != null) lgClubs[r.club] = 1;
+      });
+      lgTot.clubs = Object.keys(lgClubs).length;
+      GoatLegends.careerNews({mode: "manager", club: m.club, metrics: lgTot, flags: m.flags}).forEach(function (n) { news.push(n); });
+    } catch (legendError) { console.error("GOAT legends manager record failed", legendError); }
+  }
   seasonEndWorld();
   pruneComps([m.club]);
   var after = mgrSquadSeasonEnd();

@@ -80,6 +80,37 @@ var PET_ACC2 = [
   {id: "sash_nat", s: "b", n: N_("Banda de campeón nacional"), r: "l", un: "cont_nac", ud: N_("Gana un concurso nacional de mascotas."), tags: ["regal", "shiny"], gen: "sash", glow: 1},
   {id: "laurel", s: "h", n: N_("Corona de laurel"), r: "e", un: "cont_com", ud: N_("Gana un concurso comarcal de mascotas."), tags: ["regal"], rec: [["box", -5, 0, -4, 4, 0, 4, "N", "ring"], ["box", -5, 1, -4, 4, 1, 4, "n", "beads"]]}
 ];
+PET_ACC2 = PET_ACC2.concat([
+{id: "visor", s: "h", n: N_("Visera de entrenamiento"), r: "c", price: 180, tags: ["sporty"], ico: "🧢", rec: [["box", -4, 2, -4, 3, 3, 4, "T1"], ["box", -4, 2, 4, 3, 2, 6, "T2"]]},
+  {id: "flower", s: "h", n: N_("Flor de celebración"), r: "c", price: 130, tags: ["cute"], ico: "🌼", rec: [["box", -3, 2, 0, -2, 3, 0, "Y"], ["box", 0, 3, 0, 1, 4, 0, "R"], ["box", -2, 4, 0, 0, 5, 0, "W"]]},
+  {id: "headphones", s: "f", n: N_("Auriculares de viaje"), r: "c", price: 240, tags: ["cozy"], ico: "🎧", rec: [["box", -5, 1, 0, -4, 3, 1, "P"], ["box", 3, 1, 0, 4, 3, 1, "P"], ["box", -4, 3, 0, 4, 3, 0, "p"]]},
+  {id: "rosette", s: "n", n: N_("Escarapela del club"), r: "c", price: 170, tags: ["sporty"], ico: "🎗️", rec: [["box", -2, 0, 4, 1, 2, 5, "T1"], ["box", -1, -2, 5, 0, -1, 5, "T2"]]},
+  {id: "medal_blue", s: "n", n: N_("Medalla de compañerismo"), r: "r", price: 320, tags: ["shiny", "sporty"], ico: "🏅", rec: [["box", -4, 0, -4, 3, 0, 4, "B", "ring"], ["box", -1, -2, 5, 1, -1, 5, "W"]]},
+  {id: "toy_flag", s: "t", n: N_("Banderín para animar"), r: "c", price: 210, tags: ["sporty", "cute"], ico: "🚩", model: "pennant"},
+
+  {id: "rainhood", s: "h", n: N_("Capucha impermeable"), r: "c", price: 190, tags: ["cozy"], ico: "🌧️", rec: [["box", -5, 0, -5, 4, 1, 4, "B"], ["box", -4, 2, -4, 3, 3, 3, "T1"]]},
+  {id: "captain_band", s: "h", n: N_("Banda de capitán"), r: "r", price: 280, tags: ["sporty"], ico: "🎖️", rec: [["box", -5, -2, -4, 4, -1, 4, "T1", "ring"], ["box", -1, 0, 4, 0, 1, 5, "T2"]]},
+  {id: "pom", s: "h", n: N_("Pompón de grada"), r: "c", price: 150, tags: ["cute"], ico: "🎊", rec: [["box", -2, 3, -1, 1, 5, 2, "R"], ["box", -4, 4, 0, -3, 5, 1, "Y"], ["box", 2, 4, 0, 3, 5, 1, "B"]]},
+  {id: "whisker_mask", s: "f", n: N_("Pintura de bigotes"), r: "c", price: 110, tags: ["silly"], ico: "🐾", rec: [["box", -5, 0, 0, -3, 1, 0, "W"], ["box", 2, 0, 0, 4, 1, 0, "W"], ["box", -4, -2, 0, -2, -1, 0, "T1"], ["box", 1, -2, 0, 3, -1, 0, "T2"]]},
+  {id: "reversible_scarf", s: "n", n: N_("Bufanda reversible"), r: "r", price: 260, tags: ["sporty", "cozy"], gen: "scarf"},
+  {id: "captain_neckerchief", s: "n", n: N_("Pañuelo de capitán"), r: "r", price: 240, tags: ["sporty"], rec: [["box", -5, 0, -4, 4, 1, 4, "T1", "ring"], ["box", -2, -2, 5, 1, -1, 6, "T2"], ["box", -1, -3, 6, 0, -3, 6, "T1"]]},
+  {id: "raincoat", s: "b", n: N_("Chubasquero de club"), r: "r", price: 360, tags: ["cozy", "sporty"], gen: "vest", colors: ["T1", "T2"]},
+  {id: "captain_sash", s: "b", n: N_("Banda de capitán"), r: "r", price: 300, tags: ["sporty"], rec: [["box", -4, 3, -5, -2, 3, 5, "T1"], ["box", -2, 3, -5, 0, 3, 5, "T2"]]},
+  {id: "keeper_vest", s: "b", n: N_("Peto de portero"), r: "c", price: 220, tags: ["brave", "sporty"], gen: "bib", colors: ["#c6f432", "#1b1d1f"]},
+  {id: "club_backpack", s: "k", n: N_("Mochila del club"), r: "r", price: 260, tags: ["cozy", "sporty"], rec: [["box", -4, 0, -3, 3, 4, 2, "T1"], ["box", -3, 1, 3, 2, 3, 4, "T2"], ["box", -1, 2, 4, 0, 3, 4, "W"]]},
+  {id: "celebration_wings", s: "k", n: N_("Alas de celebración"), r: "e", price: 920, tags: ["cute", "silly"], gen: "wings"},
+  {id: "club_badge", s: "b", n: N_("Escudo bordado"), r: "c", price: 150, tags: ["sporty"], rec: [["box", -2, 1, 5, 1, 3, 6, "T1", "ring"], ["box", -1, 1, 6, 0, 2, 6, "T2"]]},
+  {id: "cleats", s: "p", n: N_("Botas de fútbol sala"), r: "c", price: 290, tags: ["sporty"], gen: "boots", c: "#406d9c", c2: "#f4f1df"},
+  {id: "ankle_bands", s: "p", n: N_("Cintas para las patas"), r: "c", price: 120, tags: ["sporty"], gen: "wrist"},
+  {id: "tail_ribbon", s: "l", n: N_("Lazo de celebración"), r: "c", price: 100, tags: ["cute"], gen: "tailbow"},
+  {id: "tail_flag", s: "l", n: N_("Cinta de cola del club"), r: "r", price: 190, tags: ["sporty"], gen: "tailrings"},
+  {id: "mini_ball", s: "t", n: N_("Balón miniatura"), r: "c", price: 140, tags: ["sporty"], ico: "⚽", model: "ball"},
+  {id: "foam_finger", s: "t", n: N_("Dedo gigante de afición"), r: "c", price: 180, tags: ["silly", "sporty"], ico: "☝️", model: "foam_finger"},
+  {id: "training_cone", s: "t", n: N_("Cono de entrenamiento"), r: "c", price: 130, tags: ["sporty"], ico: "🔺", model: "cone"},
+  {id: "mini_trophy", s: "t", n: N_("Trofeo de vestuario"), r: "e", price: 560, tags: ["regal", "shiny"], ico: "🏆", model: "cup"}
+
+]);
+
 var PET_DECOR = [
   {id: "bed", n: N_("Cama mullida"), price: 300, model: "bed", fixed: 1},
   {id: "bowl_food", n: N_("Comedero"), price: 0, model: "bowl_food", fixed: 1},

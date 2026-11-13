@@ -64,6 +64,14 @@
       out += '<section class="eras-summary"><b>' + esc(def ? EL.challengeName(def) : ch.id) + '</b><p class="eras-lead" style="margin:6px 0 0">' +
         (ch.done ? t("Desafío conseguido en {y}.", {y: ch.done}) : ch.failed ? t("No llegó a tiempo. La carrera sigue igual.") : t("En juego hasta la temporada {y}.", {y: typeof seasonLabel === "function" ? seasonLabel(ch.by) : ch.by})) + "</p></section>";
     }
+    /* Leyendas del GOAT Ladder de la misma época: mismo universo, mismos clubes ficticios. */
+    if (typeof GoatLegends !== "undefined" && S.era && S.era.year) {
+      var eraLegends = GoatLegends.forEra(S.era.year);
+      if (eraLegends.length) out += '<section class="eras-summary"><b>' + t("Leyendas del universo en {year}", {year: S.era.year}) + "</b>" +
+        eraLegends.map(function (legend) {
+          return '<p class="eras-lead" style="margin:4px 0 0">' + esc(GoatLegends.fullName(legend) + " · " + GoatLegends.recordText(legend) + " · " + legend.club) + "</p>";
+        }).join("") + '<p class="eras-lead" style="margin:6px 0 0">' + t("Figuras ficticias del mismo universo que tu carrera; sus marcas no son récords históricos.") + "</p></section>";
+    }
     if (duel) out += '<section class="eras-summary"><b>' + t("Leyenda rival: {n} ({club})", {n: esc(duel.name), club: esc(duel.club)}) + '</b><p class="eras-lead" style="margin:6px 0 0">' +
       t("Títulos desde que empezó el duelo: tu equipo {a}, el suyo {b}.", {a: duel.mine, b: duel.theirs}) + (duel.retired ? " " + t("Ya colgó las botas o cambió de aires.") : "") + "</p></section>";
     if (dyn && dyn.prev && dyn.prev.length) out += '<section class="eras-summary"><b>' + t("Dinastía · generación {n}", {n: dyn.gen}) + "</b>" +

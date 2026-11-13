@@ -681,7 +681,8 @@ function pushMgrEvents(ctx, n) {
       if (e.once && cd != null) return false;
       try { return !e.when || e.when(Y); } catch (err) { return false; }
     });
-    var ev = wpick(pool, function (e) { return e.w || 1; });
+    /* Sesgo de novedad, igual que en la carrera de jugador: lo nunca visto pesa más. */
+    var ev = wpick(pool, function (e) { return (e.w || 1) * (m.evCd[e.id] == null ? 2.6 : 1); });
     if (!ev) break;
     used[ev.id] = 1;
     var item = mp("mev", {id: ev.id});

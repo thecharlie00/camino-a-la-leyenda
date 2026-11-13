@@ -43,7 +43,7 @@ function quickLeft() { if (!quickOn()) return -1; var n = S.mode === "mgr" ? S.m
       return _ms.apply(this, arguments);
     };
   }
-  function q(o) { if (o && o.quick) { S.quick = {n: 10}; S.set.ev = 0; } }
+  function q(o) { if (o && o.quick) { S.quick = {n: 10}; S.set.ev = 0; S.set.jm = 0; } }
   if (typeof newCareer === "function") { var _nc = newCareer; newCareer = function (o) { var r = _nc.apply(this, arguments); q(o); return r; }; }
   if (typeof newManagerCareer === "function") { var _nm = newManagerCareer; newManagerCareer = function (o) { var r = _nm.apply(this, arguments); q(o); return r; }; }
   if (typeof newClubCareer === "function") { var _nk = newClubCareer; newClubCareer = function (o) { var r = _nk.apply(this, arguments); q(o); return r; }; }

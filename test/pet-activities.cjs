@@ -1,0 +1,18 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const s = fs.readFileSync('legacy-game/src/pet-world.js', 'utf8');
+const between = (a, b) => s.slice(s.indexOf(a), s.indexOf(b, s.indexOf(a)));
+const menu = between('function miniMenu()', 'function miniStart');
+for (const id of ['seek', 'ball', 'photo', 'cones']) assert.ok(menu.includes(`"${id}"`), `${id} is offered in the activity menu`);
+for (const fn of ['miniSeekPanel', 'miniPick', 'miniConeNext', 'miniDone']) assert.ok(s.includes(`function ${fn}(`), `${fn} is wired into the activity flow`);
+assert.match(s, /if \(W\.activity && W\.activity\.kind === "ball"\) miniDone\("ball"\)/, 'the ball challenge completes after the pet retrieves it');
+assert.match(s, /if \(W\.activity && W\.activity\.kind === "photo"\) miniDone\("photo"\)/, 'the photo challenge completes only after an album save');
+assert.match(s, /A\.stage >= 3\) return miniDone\("seek"\)/, 'the search challenge needs three finds');
+assert.match(s, /A\.stage >= A\.targets\.length\) miniDone\("cones"\)/, 'the cone challenge needs all three waypoints');
+const reward = between('function miniDone(kind)', 'function playView()');
+assert.doesNotMatch(reward, /PetSim\.bond\(/, 'activity rewards cannot raise existing pets’ football bonuses through bond');
+assert.match(reward, /PetSim\.first\(W\.pt, "mini_" \+ kind\)/, 'completion becomes a save-compatible pet memory');
+assert.doesNotMatch(reward, /att\s*\+\+|gk\s*\+\+|S\.p\.|S\.m\./, 'activities do not grant money or football-stat boosts');
+assert.match(s, /if \(k === "activityCancel" \|\| k === "back"\).*?return playView\(\)/, 'leaving an activity returns safely without a failure state');
+assert.match(s, /data-pw=\"activityThrow\"/, 'ball activity has a no-drag launch control');
+console.log('Pet activity checks passed: four optional 3D activities, non-punitive exits, saved memories and no competitive reward.');

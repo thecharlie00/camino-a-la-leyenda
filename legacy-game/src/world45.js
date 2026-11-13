@@ -1,6 +1,6 @@
 /* world45.js — «Mundo vivo» (versión 4.5), motor.
-   1) Play-off de ascenso: en las ligas con po: [desde, hasta], los clasificados en ese tramo juegan semifinales y final
-      a partido único (en casa el mejor clasificado; la final en campo neutral). El ganador ocupa la última plaza de ascenso.
+   1) Play-off de ascenso: en las ligas con po: [desde, hasta], los clasificados en ese tramo juegan semifinales y final.
+      Por defecto son a partido único; poLegs: 2 habilita ida y vuelta, con desempate por mejor clasificación. El ganador ocupa la última plaza de ascenso.
    2) Torneo de verano: en la pretemporada tu club juega un cuadrangular (semifinal y final o tercer puesto).
    3) Competiciones juveniles: el jugador de 19 años o menos juega con el juvenil cuando apenas tiene minutos;
       el míster ve a su cantera en la Copa juvenil al final de cada temporada.
@@ -22,6 +22,17 @@ function poMatch(a, b, neutral) {
   m.w = m.pen ? (m.pen[0] > m.pen[1] ? a : b) : (g[0] > g[1] ? a : b);
   return m;
 }
+/* RFEF-style two-leg tie: lower seed hosts leg one, higher seed hosts leg two;
+   aggregate ties go to the higher regular-season seed (no away-goals rule). */
+function poMatchTwoLeg(a, b, preferred) {
+  var lower = preferred === a ? b : a;
+  var first = simGoals(S.cr[lower], S.cr[preferred], 1);
+  var second = simGoals(S.cr[preferred], S.cr[lower], 1);
+  var preferredGoals = first[1] + second[0], lowerGoals = first[0] + second[1];
+  var g = preferred === a ? [preferredGoals, lowerGoals] : [lowerGoals, preferredGoals];
+  var legs = preferred === a ? [[first[1], first[0]], [second[0], second[1]]] : [[first[0], first[1]], [second[1], second[0]]];
+  return {a: a, b: b, g: g, legs: legs, et: false, pen: null, w: g[0] === g[1] ? preferred : g[0] > g[1] ? a : b};
+}
 /* se juega una vez por temporada (la primera vez que hace falta: fin de temporada del jugador o del mundo) */
 function poEnsure() {
   if (!S.last) return;
@@ -29,10 +40,15 @@ function poEnsure() {
   S.last.po = {}; S.last.poY = S.yr;
   W.lg.forEach(function (l, li) {
     var t = poTeams(li); if (t.length < 2) return;
+    var seed = {}; t.forEach(function (c, i) { seed[c] = i; });
     var rounds = [], cur = t.slice();
     while (cur.length > 1) {
       var next = [], ms = [], fin = cur.length === 2;
-      for (var i = 0; i < cur.length / 2; i++) { var m = poMatch(cur[i], cur[cur.length - 1 - i], fin); ms.push(m); next.push(m.w); }
+      for (var i = 0; i < cur.length / 2; i++) {
+        var a = cur[i], b = cur[cur.length - 1 - i];
+        var m = l.poLegs === 2 ? poMatchTwoLeg(a, b, seed[a] < seed[b] ? a : b) : poMatch(a, b, fin);
+        ms.push(m); next.push(m.w);
+      }
       rounds.push(ms); cur = next;
     }
     S.last.po[li] = {w: cur[0], t: t, r: rounds};

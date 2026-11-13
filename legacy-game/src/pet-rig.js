@@ -13,7 +13,7 @@ var PetRig = (function () {
   Spring.prototype.step = function (target, dt) { var a = (target - this.x) * this.k - this.v * this.d; this.v += a * dt; this.x += this.v * dt; return this.x; };
   var RK = ["y", "rx", "ry", "rz", "s", "sy", "ox", "oz"];  /* campos de la raíz que se funden entre clips */
   var WET = {m: [0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.78], o: [0, 0.01, 0.03]};
-  var SMALL = {hamster: 1, hedgehog: 1, rabbit: 1, cat: 1, fennec: 1, tarantula: 1, macaw: 1, iguana: 1, turtle: 1, python: 1};
+  var SMALL = {guinea: 1, budgie: 1, rescuecat: 1, ferret: 1, hamster: 1, hedgehog: 1, rabbit: 1, cat: 1, fennec: 1, tarantula: 1, macaw: 1, iguana: 1, turtle: 1, python: 1};
 
   function Actor(o) {
     this.o = o || {};

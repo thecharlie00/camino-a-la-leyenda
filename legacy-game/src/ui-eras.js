@@ -14,7 +14,7 @@
   function theme() {
     if (!document.getElementById("eras-style")) {
       var style = document.createElement("style"); style.id = "eras-style";
-      style.textContent = ".eras-hud{position:fixed;z-index:58;top:6px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;max-width:calc(100vw - 16px);padding:5px 7px;border:1px solid rgba(220,190,108,.65);border-radius:12px;background:rgba(7,14,17,.94);box-shadow:0 4px 14px #0008;color:#f3e8c8;font:700 11px/1.2 system-ui,sans-serif}#app.era-active header.top{flex-wrap:wrap}header.top .eras-hud{position:static;transform:none;flex:1 0 100%;order:9;max-width:none;justify-content:center;margin:2px 0 0;box-shadow:none}.eras-paper{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(220,190,108,.35);border-radius:12px;background:rgba(255,255,255,.03)}.eras-paper-head{display:flex;flex-direction:column;gap:2px;margin:0 0 8px}.eras-paper-head span{font-size:12px;opacity:.75;letter-spacing:.08em;text-transform:uppercase}.eras-paper-head b{font-size:15px;line-height:1.3}.eras-book{list-style:none;margin:0;padding:0;font-size:13px;text-align:left}.eras-book li{display:flex;flex-direction:column;gap:1px;padding:6px 0;border-top:1px solid rgba(255,255,255,.08)}.eras-book li span{font-weight:600}.eras-book li small{opacity:.85}.eras-book li.diff small:last-child{color:#f0c96a}.eras-book li.mine span{color:#f0c96a}.eras-hud span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.eras-hud button{border:0;border-radius:8px;padding:5px 7px;background:#24343a;color:#fff;font:inherit}.eras-overlay{position:fixed;z-index:1000;inset:0;background:rgba(3,8,10,.88);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px 10px 30px}.eras-dialog{width:min(680px,100%);margin:auto;background:#101c20;color:#e9eee7;border:1px solid rgba(220,190,108,.48);border-radius:18px;padding:18px;box-shadow:0 18px 60px #000b}.eras-dialog h2,.eras-dialog h3{margin:0 0 7px}.eras-kicker{color:#e0bf67;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.eras-lead{color:#b9c7c2;line-height:1.45}.eras-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.eras-field{display:flex;flex-direction:column;gap:5px;min-width:0}.eras-field label{font-size:.78rem;color:#b9c7c2}.eras-field input,.eras-field select{box-sizing:border-box;width:100%;min-height:42px;border:1px solid #42545a;border-radius:10px;padding:8px 10px;background:#091316;color:#f4f4ee;font:inherit}.eras-summary{margin:14px 0;padding:12px;border-radius:12px;background:#0a1316;border-left:3px solid #d0ae5d}.eras-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.eras-tag{border:1px solid #34474c;border-radius:99px;padding:4px 8px;color:#d8e1da;font-size:.72rem}.eras-actions{display:flex;gap:8px;margin-top:14px}.eras-actions button,.eras-save button{min-height:40px;border:1px solid #43565b;border-radius:10px;padding:8px 12px;background:#1b2a2f;color:#f5f5ee;font:700 .9rem system-ui,sans-serif}.eras-actions .primary{background:#b7913c;color:#141414;border-color:#d7b45f}.eras-save{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #26363a}.eras-save small{display:block;color:#b9c7c2}.eras-saves{max-height:210px;overflow:auto}.eras-history{margin:8px 0 0;padding-left:22px;color:#d8e1da}.eras-history li{padding:6px 0;border-bottom:1px solid #26363a}.eras-history li span{display:block}.eras-history li small{display:block;color:#b9c7c2;margin-top:2px}.era-skin-teletext .top{border-bottom:2px solid #4ad65a}.era-skin-teletext .top .name,.era-skin-teletext .tag{font-family:ui-monospace,monospace}.era-skin-teletext .card{border-radius:2px}.era-skin-print-scoreboard .top{border-top:3px solid #b58e3f}@media(max-width:520px){.eras-dialog{padding:14px}.eras-grid{grid-template-columns:1fr}.eras-hud{font-size:10px}.eras-hud button{padding:5px}}";
+      style.textContent = ".eras-hud{position:fixed;z-index:58;top:6px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;max-width:calc(100vw - 16px);padding:5px 7px;border:1px solid rgba(220,190,108,.65);border-radius:12px;background:rgba(7,14,17,.94);box-shadow:0 4px 14px #0008;color:#f3e8c8;font:700 11px/1.2 system-ui,sans-serif}#app.era-active header.top{flex-wrap:wrap}header.top .eras-hud{position:static;transform:none;flex:1 0 100%;order:9;max-width:none;justify-content:center;margin:2px 0 0;box-shadow:none}.eras-paper{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(220,190,108,.35);border-radius:12px;background:rgba(255,255,255,.03)}.eras-paper-head{display:flex;flex-direction:column;gap:2px;margin:0 0 8px}.eras-paper-head span{font-size:12px;opacity:.75;letter-spacing:.08em;text-transform:uppercase}.eras-paper-head b{font-size:15px;line-height:1.3}.eras-book{list-style:none;margin:0;padding:0;font-size:13px;text-align:left}.eras-book li{display:flex;flex-direction:column;gap:1px;padding:6px 0;border-top:1px solid rgba(255,255,255,.08)}.eras-book li span{font-weight:600}.eras-book li small{opacity:.85}.eras-book li.diff small:last-child{color:#f0c96a}.eras-book li.mine span{color:#f0c96a}.eras-hud span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.eras-hud .era-cover-tag{flex:0 0 auto;padding:2px 6px;border:1px solid #c98b4b;border-radius:99px;background:#3a2410;color:#ffd9a8;font-size:10px;letter-spacing:.04em;text-transform:uppercase}.eras-hud button{border:0;border-radius:8px;padding:5px 7px;background:#24343a;color:#fff;font:inherit}.eras-overlay{position:fixed;z-index:1000;inset:0;background:rgba(3,8,10,.88);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px 10px 30px}.eras-dialog{width:min(680px,100%);margin:auto;background:#101c20;color:#e9eee7;border:1px solid rgba(220,190,108,.48);border-radius:18px;padding:18px;box-shadow:0 18px 60px #000b}.eras-dialog h2,.eras-dialog h3{margin:0 0 7px}.eras-kicker{color:#e0bf67;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.eras-lead{color:#b9c7c2;line-height:1.45}.eras-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.eras-field{display:flex;flex-direction:column;gap:5px;min-width:0}.eras-field label{font-size:.78rem;color:#b9c7c2}.eras-field input,.eras-field select{box-sizing:border-box;width:100%;min-height:42px;border:1px solid #42545a;border-radius:10px;padding:8px 10px;background:#091316;color:#f4f4ee;font:inherit}.eras-summary{margin:14px 0;padding:12px;border-radius:12px;background:#0a1316;border-left:3px solid #d0ae5d}.eras-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.eras-tag{border:1px solid #34474c;border-radius:99px;padding:4px 8px;color:#d8e1da;font-size:.72rem}.eras-actions{display:flex;gap:8px;margin-top:14px}.eras-actions button,.eras-save button{min-height:40px;border:1px solid #43565b;border-radius:10px;padding:8px 12px;background:#1b2a2f;color:#f5f5ee;font:700 .9rem system-ui,sans-serif}.eras-actions .primary{background:#b7913c;color:#141414;border-color:#d7b45f}.eras-save{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #26363a}.eras-save small{display:block;color:#b9c7c2}.eras-saves{max-height:210px;overflow:auto}.eras-history{margin:8px 0 0;padding-left:22px;color:#d8e1da}.eras-history li{padding:6px 0;border-bottom:1px solid #26363a}.eras-history li span{display:block}.eras-history li small{display:block;color:#b9c7c2;margin-top:2px}.era-skin-teletext .top{border-bottom:2px solid #4ad65a}.era-skin-teletext .top .name,.era-skin-teletext .tag{font-family:ui-monospace,monospace}.era-skin-teletext .card{border-radius:2px}.era-skin-print-scoreboard .top{border-top:3px solid #b58e3f}@media(max-width:520px){.eras-dialog{padding:14px}.eras-grid{grid-template-columns:1fr}.eras-hud{font-size:10px}.eras-hud button{padding:5px}}";
       document.head.appendChild(style);
     }
   }
@@ -49,6 +49,49 @@
         '<div><button type="button" data-era-act="load" data-era-id="' + eraEscape(entry.id) + '">' + t("Continuar") + '</button> <button type="button" data-era-act="delete" data-era-id="' + eraEscape(entry.id) + '" aria-label="' + t("Borrar guardado") + '">×</button></div></div>';
     }).join("");
   }
+  /* Las partidas de Épocas aparecen también en el menú normal de carga, con su etiqueta y su año. */
+  function menuCard(entry) {
+    var label = entry.player || t("Carrera"), when = [entry.decade, entry.startYear].filter(Boolean).join(" · ");
+    return '<section class="card slotc"><div class="head"><span class="tag ok"><span class="dot"></span>' + t("Modo Épocas") + '</span><span class="eyebrow">' + eraEscape(when) + '</span></div>' +
+      '<div class="slotrow"><div class="grow"><h3>' + eraEscape(label) + '</h3><div class="muted" style="font-size:var(--fs-sm)">' + eraEscape(entry.club || t("Sin club")) + " · " + t("Guardada en este dispositivo") + '</div></div></div>' +
+      '<div class="row2" style="margin-top:12px"><button class="btn wide danger" data-a="eradel" data-id="' + eraEscape(entry.id) + '">' + t("Borrar guardado") + '</button><button class="btn pri wide" data-a="eraload" data-id="' + eraEscape(entry.id) + '">' + t("Continuar") + "</button></div></section>";
+  }
+  UIX.saveExtras = function () { return EraStore.getIndex().length; };
+  UIX.add("load", function () {
+    var list = EraStore.getIndex();
+    if (!list.length) return "";
+    return '<section><div class="eyebrow">' + t("Modo Épocas") + '</div><h2 class="vtitle">' + t("Partidas de Épocas") + "</h2></section>" + list.map(menuCard).join("");
+  });
+  function loadFromMenu(id) {
+    function apply() {
+      try {
+        var json = EraStore.read(id);
+        if (!json) throw new Error("Guardado no disponible");
+        restore(json);
+        var ui = window.UIX.ui(); ui.view = S.ph === "draft" ? "draft" : "game"; ui.tab = S.mode === "mgr" ? "club" : "carrera"; ui.cr = null; ui.sheet = null;
+        close(); window.UIX.render(true);
+      } catch (e) {
+        console.error(e);
+        if (window.UIX.toast) window.UIX.toast(t("No se pudo cargar la carrera histórica."));
+      }
+    }
+    try {
+      if (S && S.era) { EraStore.save(); apply(); return; }
+      if (S && window.UIX.persist) {
+        window.UIX.persist();
+        var store = window.UIX.store, flushed = store && typeof store.flush === "function" ? store.flush() : null;
+        if (flushed && typeof flushed.then === "function") { flushed.then(apply); return; }
+      }
+      apply();
+    } catch (e) { console.error(e); }
+  }
+  UIX.actions["eraload"] = function (button, value, id) { loadFromMenu(id); };
+  UIX.actions["eradel"] = function (button, value, id) {
+    if (!id) return;
+    EraStore.remove(id);
+    if (S && S.era && String(S.uid) === String(id)) { S = null; var ui = window.UIX.ui(); ui.view = "home"; }
+    window.UIX.render(true);
+  };
   function recentDecisions() {
     var history = S && S.era && Array.isArray(S.era.decisionLog) ? S.era.decisionLog.slice(-8).reverse() : [];
     if (!history.length) return '<h3>' + t("Decisiones recientes") + '</h3><p class="eras-lead">' + t("Aún no has tomado decisiones de época.") + '</p>';
@@ -92,6 +135,9 @@
     var pack = eraPackForYear(S.yr), oldPack = state.packId, oldYear = state.year;
     state.packId = pack.id; state.year = S.yr;
     var details = profileSummary(eraInfoForYear(S.yr).profile);
+    var cover = eraCoverageNotice(S.yr);
+    if (cover) details += '<p class="eras-lead" style="margin:8px 0 0"><b>' + t("Sin referencia histórica") + ":</b> " +
+      t("desde {year} no hay campeones reales registrados; se mantienen las reglas congeladas de la última temporada documentada ({last}) y la competición es una simulación.", {year: cover.lastSeason + 1, last: cover.lastSeason}) + "</p>";
     state.packId = oldPack; state.year = oldYear;
     layer.setAttribute("data-era-decade", pack.id);
     layer.setAttribute("data-era-year", S.yr);
@@ -259,8 +305,11 @@
     layer = document.getElementById("era-overlay");
     if (!layer) { layer = document.createElement("div"); layer.id = "era-overlay"; layer.className = "eras-overlay"; document.body.appendChild(layer); }
     var pack = eraPackForYear(S.yr), retired = S.ph === "ret" || !!S.retired || !!S.retiredP;
+    var cover = eraCoverageNotice(S.yr);
     var body = '<div class="eras-summary"><b>' + t("Divergencia: {n} %", {n: book.divergence}) + '</b><p class="eras-lead" style="margin:6px 0 0">' +
-      (book.compared ? t("{c} de {n} títulos han cambiado respecto a la historia real.", {c: book.changed, n: book.compared}) : t("Juega una temporada completa para comparar tu historia con la real.")) + "</p></div>";
+      (book.compared ? t("{c} de {n} títulos han cambiado respecto a la historia real.", {c: book.changed, n: book.compared}) : t("Juega una temporada completa para comparar tu historia con la real.")) + "</p>" +
+      (cover ? '<p class="eras-lead" style="margin:8px 0 0"><b>' + t("Sin referencia histórica") + ":</b> " +
+        t("la historia real registrada en el juego llega hasta {last}; las temporadas posteriores se simulan y no se comparan con ningún campeón real.", {last: cover.lastSeason}) + "</p>" : "") + "</div>";
     if (window.UIX.eraBookExtra) body += window.UIX.eraBookExtra(retired);
     if (retired) {
       var mineRows = [], rewritten = 0;
@@ -309,7 +358,11 @@
     hud.setAttribute("data-era-decade", eraPackForYear(S.yr).id);
     hud.setAttribute("data-era-year", S.yr);
     var currentChannel = channelLabel(eraMediaChannel(S.yr, S.yr + "|" + S.bi));
-    hud.innerHTML = '<span>' + t("{decade} · {year}", {decade: eraEscape(S.era.startDecade), year: S.yr}) + ' · ' + t("{n} pts/victoria", {n: rules.winPoints}) + ' · ' + eraEscape(currentChannel) + '</span><button type="button" data-a="era-book">' + t("Anuario") + '</button><button type="button" data-a="era-rules">' + t("Reglas") + '</button><button type="button" data-a="era-exit">' + t("Salir") + '</button>';
+    var cover = eraCoverageNotice(S.yr);
+    hud.classList.toggle("era-undocumented", !!cover);
+    hud.innerHTML = '<span>' + t("{decade} · {year}", {decade: eraEscape(S.era.startDecade), year: S.yr}) + ' · ' + t("{n} pts/victoria", {n: rules.winPoints}) + ' · ' + eraEscape(currentChannel) + '</span>' +
+      (cover ? '<span class="era-cover-tag" title="' + eraEscape(t("La historia real registrada en el juego llega hasta {last}. Esta temporada se simula.", {last: cover.lastSeason})) + '">' + t("Sin referencia histórica") + '</span>' : "") +
+      '<button type="button" data-a="era-book">' + t("Anuario") + '</button><button type="button" data-a="era-rules">' + t("Reglas") + '</button><button type="button" data-a="era-exit">' + t("Salir") + '</button>';
   });
   document.addEventListener("change", function (event) {
     var field = event.target && event.target.getAttribute("data-era-field");

@@ -26,6 +26,9 @@ assert.match(erasUiSource, /rules\.backPassBanned/, 'the setup explains the back
 assert.match(erasUiSource, /no simulan una red de contactos/, 'media channels must be described as HUD context, not a functional contact network');
 assert.match(erasUiSource, /UIX\.actions\["era-open"\]/, 'The Era Mode option must open its existing setup flow');
 assert.match(erasUiSource, /layer\.setAttribute\("data-era-decade", pack\.id\)/, 'Era screens must expose the selected decade to their visual theme');
+assert.match(erasUiSource, /era-cover-tag/, 'the Era HUD must mark seasons beyond the documented history');
+assert.match(erasUiSource, /eraCoverageNotice\(S\.yr\)/, 'the Era UI must derive the coverage notice from the shared helper');
+assert.match(erasUiSource, /la historia real registrada en el juego llega hasta \{last\}/, 'the yearbook must explain where documented history ends');
 assert.match(erasUiSource, /app\.setAttribute\("data-era-decade", eraPackForYear\(S\.yr\)\.id\)/, 'The shared game interface must track the active Era decade');
 for (const decade of ['1970s', '1980s', '1990s', '2000s', '2010s', '2020s']) {
   assert.ok(gameCss.includes(`data-era-decade="${decade}"`), `the art direction must define a visual treatment for ${decade}`);
@@ -442,6 +445,42 @@ assert.equal(context.eraTrophyName({k: 'L:ESP1', n: 'LaLiga EA Sports', s: '1970
 context.S = {yr: 2026, era: {active: true}};
 assert.equal(context.eraLeagueExists('MLS', 1990), false, 'MLS began in 1996');
 assert.equal(context.eraLeagueExists('MLS', 1996), true);
+/* Ligas fundadas después de 1970: una carrera no puede empezar en ellas antes de existir. */
+assert.equal(context.eraLeagueExists('CZE1', 1992), false, 'the Czech First League began in 1993');
+assert.equal(context.eraLeagueExists('CZE1', 1993), true);
+assert.equal(context.eraLeagueName('CZE1', 'Chance Liga', 1995), 'Czech First League');
+assert.equal(context.eraLeagueExists('SVK1', 1992), false, 'the Slovak league began in 1993');
+assert.equal(context.eraLeagueExists('SVK1', 1993), true);
+assert.equal(context.eraLeagueExists('CRO1', 1991), false, 'the Croatian league began in 1992');
+assert.equal(context.eraLeagueExists('SRB1', 2004), false, 'the Serbian SuperLiga began in 2005');
+assert.equal(context.eraLeagueExists('UKR1', 1990), false, 'the Ukrainian league began in 1991');
+assert.equal(context.eraLeagueName('UKR1', 'Premier League ucraniana', 2000), 'Vyshcha Liha');
+assert.equal(context.eraLeagueName('UKR1', 'Premier League ucraniana', 2010), 'Ukrainian Premier League');
+assert.equal(context.eraLeagueExists('RUS1', 1991), false, 'the Russian championship began in 1992');
+assert.equal(context.eraLeagueName('RUS1', 'Premier League rusa', 1995), 'Russian Football Championship');
+assert.equal(context.eraLeagueExists('KAZ1', 1991), false, 'the Kazakh league began in 1992');
+assert.equal(context.eraLeagueExists('AZ1', 1991), false, 'the Azerbaijani league began in 1992');
+assert.equal(context.eraLeagueName('AZ1', 'Premyer Liqası', 2000), 'Yüksək Liqa');
+assert.equal(context.eraLeagueExists('THA1', 1995), false, 'the Thai league began in 1996');
+assert.equal(context.eraLeagueName('THA1', 'Thai League 1', 2000), 'Thailand Premier League');
+assert.equal(context.eraLeagueName('THA1', 'Thai League 1', 2020), 'Thai League 1');
+assert.equal(context.eraLeagueExists('MYS1', 2003), false, 'the Malaysia Super League began in 2004');
+assert.equal(context.eraLeagueExists('NGA1', 1971), false, 'the Nigerian league began in 1972');
+assert.equal(context.eraLeagueExists('IDN1', 2007), false, 'the current Indonesian top flight began in 2008');
+assert.equal(context.eraLeagueExists('VIE1', 1979), false, 'the Vietnamese league began in 1980');
+assert.equal(context.eraLeagueName('VIE1', 'V.League 1', 1985), 'National A1 League');
+assert.equal(context.eraLeagueName('VIE1', 'V.League 1', 1992), 'National Elite Football Championship');
+assert.equal(context.eraLeagueName('VIE1', 'V.League 1', 2005), 'V-League');
+assert.equal(context.eraLeagueName('VIE1', 'V.League 1', 2015), 'V.League 1');
+assert.equal(context.eraLeagueExists('NIR1', 1889), false, 'the Irish League began in 1890');
+assert.equal(context.eraLeagueExists('ENG1', 1970), true, 'long-standing leagues remain available');
+/* Cobertura declarada: la historia real registrada termina en 2024 y lo posterior se simula. */
+assert.equal(context.eraHistoryLastSeason(), 2024, 'the last documented club season comes from history.json');
+assert.equal(context.eraUndocumentedSeason(2024), false);
+assert.equal(context.eraUndocumentedSeason(2025), true, 'a season without real champions cannot be compared with history');
+assert.equal(context.eraUndocumentedSeason(2030), true);
+assert.deepEqual(JSON.parse(JSON.stringify(context.eraCoverageNotice(2025))), {lastSeason: 2024, year: 2025});
+assert.equal(context.eraCoverageNotice(2024), null);
 for (const [name, entry] of Object.entries(clubsHistory.clubs)) assert.ok(entry.src, `${name} needs a source or 'memory'`);
 const decisionText = JSON.stringify(decisions);
 for (const realName of ['Paolo Rossi', 'Michel Platini', 'Diego Maradona', 'David Trezeguet']) assert.ok(!decisionText.includes(realName), `historical decisions must use a versioned name instead of ${realName}`);

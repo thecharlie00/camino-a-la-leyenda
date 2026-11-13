@@ -1,1645 +1,1943 @@
 {
- "schema": 1,
- "note": "Fundación y nombres de época de clubes y ligas del mundo del juego. src = URL o 'memory' (pendiente de verificar); doubtful = dato dudoso. Un club sin entrada se considera existente con su nombre actual.",
- "leagues": {
-  "ENG1": {
-   "names": [
-    [
-     1888,
-     "Football League First Division"
-    ],
-    [
-     1992,
-     "Premier League"
-    ]
-   ],
-   "src": "https://en.wikipedia.org/wiki/Premier_League"
+  "schema": 1,
+  "note": "Fundación y nombres de época de clubes y ligas del mundo del juego. src = URL o 'memory' (pendiente de verificar); doubtful = dato dudoso. Un club sin entrada se considera existente con su nombre actual.",
+  "leagues": {
+    "ENG1": {
+      "names": [
+        [
+          1888,
+          "Football League First Division"
+        ],
+        [
+          1992,
+          "Premier League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Premier_League"
+    },
+    "ESP1": {
+      "names": [
+        [
+          1929,
+          "Primera División"
+        ],
+        [
+          2016,
+          "LaLiga"
+        ]
+      ],
+      "src": "memory",
+      "doubtful": true
+    },
+    "FRA1": {
+      "names": [
+        [
+          1932,
+          "Division 1"
+        ],
+        [
+          2002,
+          "Ligue 1"
+        ]
+      ],
+      "src": "memory"
+    },
+    "POR1": {
+      "names": [
+        [
+          1934,
+          "Primeira Divisão"
+        ],
+        [
+          1999,
+          "Primeira Liga"
+        ]
+      ],
+      "src": "memory",
+      "doubtful": true
+    },
+    "SCO1": {
+      "names": [
+        [
+          1890,
+          "Scottish Division One"
+        ],
+        [
+          1975,
+          "Scottish Premier Division"
+        ],
+        [
+          1998,
+          "Scottish Premier League"
+        ],
+        [
+          2013,
+          "Scottish Premiership"
+        ]
+      ],
+      "src": "memory"
+    },
+    "GER1": {
+      "since": 1963,
+      "src": "memory"
+    },
+    "NED1": {
+      "since": 1956,
+      "src": "memory"
+    },
+    "MLS": {
+      "since": 1996,
+      "note": "Antes no había liga profesional estable en EE. UU. tras la NASL (1968-1984)",
+      "src": "memory"
+    },
+    "AUS1": {
+      "since": 2005,
+      "names": [
+        [
+          1977,
+          "National Soccer League"
+        ],
+        [
+          2005,
+          "A-League"
+        ]
+      ],
+      "src": "memory"
+    },
+    "IND1": {
+      "since": 2014,
+      "src": "memory"
+    },
+    "JPN1": {
+      "names": [
+        [
+          1965,
+          "Japan Soccer League"
+        ],
+        [
+          1993,
+          "J1 League"
+        ]
+      ],
+      "src": "memory"
+    },
+    "KSA1": {
+      "since": 1976,
+      "src": "memory",
+      "doubtful": true
+    },
+    "CHN1": {
+      "since": 1994,
+      "names": [
+        [
+          1994,
+          "Jia-A League"
+        ],
+        [
+          2004,
+          "Chinese Super League"
+        ]
+      ],
+      "src": "memory"
+    },
+    "KOR1": {
+      "since": 1983,
+      "src": "memory"
+    },
+    "ENG2": {
+      "names": [
+        [
+          1892,
+          "Football League Second Division"
+        ],
+        [
+          1992,
+          "Football League First Division"
+        ],
+        [
+          2004,
+          "EFL Championship"
+        ]
+      ],
+      "src": "memory"
+    },
+    "ENG3": {
+      "names": [
+        [
+          1958,
+          "Football League Third Division"
+        ],
+        [
+          1992,
+          "Football League Second Division"
+        ],
+        [
+          2004,
+          "EFL League One"
+        ]
+      ],
+      "src": "memory"
+    },
+    "ENG4": {
+      "names": [
+        [
+          1958,
+          "Football League Fourth Division"
+        ],
+        [
+          1992,
+          "Football League Third Division"
+        ],
+        [
+          2004,
+          "EFL League Two"
+        ]
+      ],
+      "src": "memory"
+    },
+    "ESP2": {
+      "names": [
+        [
+          1929,
+          "Segunda División"
+        ],
+        [
+          2016,
+          "LaLiga Hypermotion"
+        ]
+      ],
+      "src": "memory",
+      "doubtful": true
+    },
+    "FRA2": {
+      "names": [
+        [
+          1933,
+          "Division 2"
+        ],
+        [
+          2002,
+          "Ligue 2"
+        ]
+      ],
+      "src": "memory"
+    },
+    "GER2": {
+      "since": 1974,
+      "src": "memory",
+      "note": "2. Bundesliga desde 1974 (regional hasta 1981)"
+    },
+    "GER3": {
+      "since": 2008,
+      "src": "memory"
+    },
+    "FI1": {
+      "since": 1930,
+      "names": [
+        [
+          1930,
+          "Mestaruussarja"
+        ],
+        [
+          1990,
+          "Veikkausliiga"
+        ]
+      ],
+      "women": [
+        [
+          1974,
+          "Naisten SM-sarja"
+        ],
+        [
+          2006,
+          "Naisten Liiga"
+        ],
+        [
+          2020,
+          "Kansallinen Liiga"
+        ]
+      ],
+      "sinceWomen": 1974,
+      "src": "https://en.wikipedia.org/wiki/Veikkausliiga",
+      "womenSrc": "https://en.wikipedia.org/wiki/Kansallinen_Liiga"
+    },
+    "IS1": {
+      "since": 1912,
+      "names": [
+        [
+          1912,
+          "Úrvalsdeild karla"
+        ],
+        [
+          2022,
+          "Besta deild karla"
+        ]
+      ],
+      "women": [
+        [
+          1972,
+          "Úrvalsdeild kvenna"
+        ],
+        [
+          2022,
+          "Besta deild kvenna"
+        ]
+      ],
+      "sinceWomen": 1972,
+      "src": "https://en.wikipedia.org/wiki/Besta_deild_karla",
+      "womenSrc": "https://en.wikipedia.org/wiki/Besta_deild_kvenna"
+    },
+    "WAL1": {
+      "since": 1992,
+      "names": [
+        [
+          1992,
+          "League of Wales"
+        ],
+        [
+          2002,
+          "Welsh Premier League"
+        ],
+        [
+          2019,
+          "Cymru Premier"
+        ]
+      ],
+      "women": [
+        [
+          2009,
+          "Welsh Premier Women's League"
+        ],
+        [
+          2021,
+          "Adran Premier"
+        ]
+      ],
+      "sinceWomen": 2009,
+      "src": "https://en.wikipedia.org/wiki/Cymru_Premier",
+      "womenSrc": "https://en.wikipedia.org/wiki/Adran_Premier",
+      "doubtful": true
+    },
+    "NIR1": {
+      "names": [
+        [
+          1890,
+          "Irish League"
+        ],
+        [
+          2003,
+          "Irish Premier League"
+        ],
+        [
+          2008,
+          "IFA Premiership"
+        ],
+        [
+          2014,
+          "NIFL Premiership"
+        ]
+      ],
+      "women": [
+        [
+          2016,
+          "Women's Premiership"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/NIFL_Premiership",
+      "womenSrc": "https://en.wikipedia.org/wiki/Women%27s_Premiership_(Northern_Ireland)",
+      "doubtful": true,
+      "note": "Pre-2003 men's naming and pre-2016 women's naming are not modelled; the fallback is the current competition name.",
+      "since": 1890
+    },
+    "CZE1": {
+      "since": 1993,
+      "names": [
+        [
+          1993,
+          "Czech First League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Czech_First_League"
+    },
+    "CRO1": {
+      "since": 1992,
+      "names": [
+        [
+          1992,
+          "Croatian First Football League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/1992_Croatian_First_Football_League"
+    },
+    "SRB1": {
+      "since": 2005,
+      "names": [
+        [
+          2005,
+          "Serbian SuperLiga"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Serbian_SuperLiga"
+    },
+    "UKR1": {
+      "since": 1991,
+      "names": [
+        [
+          1991,
+          "Vyshcha Liha"
+        ],
+        [
+          2008,
+          "Ukrainian Premier League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Ukrainian_Premier_League"
+    },
+    "RUS1": {
+      "since": 1992,
+      "names": [
+        [
+          1992,
+          "Russian Football Championship"
+        ],
+        [
+          2002,
+          "Russian Premier League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Russian_Premier_League"
+    },
+    "KAZ1": {
+      "since": 1992,
+      "names": [
+        [
+          1992,
+          "Kazakhstan Premier League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Kazakhstan_Premier_League"
+    },
+    "SVK1": {
+      "since": 1993,
+      "names": [
+        [
+          1993,
+          "Slovak First Football League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Slovak_First_Football_League"
+    },
+    "UAE1": {
+      "since": 1973,
+      "names": [
+        [
+          1973,
+          "UAE Football League"
+        ],
+        [
+          2007,
+          "UAE Pro League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/UAE_Pro_League"
+    },
+    "AZ1": {
+      "since": 1992,
+      "names": [
+        [
+          1992,
+          "Yüksək Liqa"
+        ],
+        [
+          2007,
+          "Azerbaijan Premier League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Azerbaijan_Premier_League"
+    },
+    "THA1": {
+      "since": 1996,
+      "names": [
+        [
+          1996,
+          "Thailand Premier League"
+        ],
+        [
+          2017,
+          "Thai League 1"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Thai_League_1"
+    },
+    "MYS1": {
+      "since": 2004,
+      "names": [
+        [
+          2004,
+          "Malaysia Super League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Malaysia_Super_League"
+    },
+    "NGA1": {
+      "since": 1972,
+      "names": [
+        [
+          1972,
+          "Nigeria Premier Football League"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/Nigeria_Premier_Football_League"
+    },
+    "IDN1": {
+      "since": 2008,
+      "names": [
+        [
+          2008,
+          "Indonesia Super League"
+        ],
+        [
+          2017,
+          "Liga 1"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/2017_Liga_1_(Indonesia)"
+    },
+    "VIE1": {
+      "since": 1980,
+      "names": [
+        [
+          1980,
+          "National A1 League"
+        ],
+        [
+          1990,
+          "National Elite Football Championship"
+        ],
+        [
+          1997,
+          "National First Division"
+        ],
+        [
+          2001,
+          "V-League"
+        ],
+        [
+          2012,
+          "V.League 1"
+        ]
+      ],
+      "src": "https://en.wikipedia.org/wiki/V.League_1"
+    }
   },
-  "ESP1": {
-   "names": [
-    [
-     1929,
-     "Primera División"
-    ],
-    [
-     2016,
-     "LaLiga"
-    ]
-   ],
-   "src": "memory",
-   "doubtful": true
-  },
-  "FRA1": {
-   "names": [
-    [
-     1932,
-     "Division 1"
-    ],
-    [
-     2002,
-     "Ligue 1"
-    ]
-   ],
-   "src": "memory"
-  },
-  "POR1": {
-   "names": [
-    [
-     1934,
-     "Primeira Divisão"
-    ],
-    [
-     1999,
-     "Primeira Liga"
-    ]
-   ],
-   "src": "memory",
-   "doubtful": true
-  },
-  "SCO1": {
-   "names": [
-    [
-     1890,
-     "Scottish Division One"
-    ],
-    [
-     1975,
-     "Scottish Premier Division"
-    ],
-    [
-     1998,
-     "Scottish Premier League"
-    ],
-    [
-     2013,
-     "Scottish Premiership"
-    ]
-   ],
-   "src": "memory"
-  },
-  "GER1": {
-   "since": 1963,
-   "src": "memory"
-  },
-  "NED1": {
-   "since": 1956,
-   "src": "memory"
-  },
-  "MLS": {
-   "since": 1996,
-   "note": "Antes no había liga profesional estable en EE. UU. tras la NASL (1968-1984)",
-   "src": "memory"
-  },
-  "AUS1": {
-   "since": 2005,
-   "names": [
-    [
-     1977,
-     "National Soccer League"
-    ],
-    [
-     2005,
-     "A-League"
-    ]
-   ],
-   "src": "memory"
-  },
-  "IND1": {
-   "since": 2014,
-   "src": "memory"
-  },
-  "JPN1": {
-   "names": [
-    [
-     1965,
-     "Japan Soccer League"
-    ],
-    [
-     1993,
-     "J1 League"
-    ]
-   ],
-   "src": "memory"
-  },
-  "KSA1": {
-   "since": 1976,
-   "src": "memory",
-   "doubtful": true
-  },
-  "CHN1": {
-   "since": 1994,
-   "names": [
-    [
-     1994,
-     "Jia-A League"
-    ],
-    [
-     2004,
-     "Chinese Super League"
-    ]
-   ],
-   "src": "memory"
-  },
-  "KOR1": {
-   "since": 1983,
-   "src": "memory"
-  },
-  "ENG2": {
-   "names": [
-    [
-     1892,
-     "Football League Second Division"
-    ],
-    [
-     1992,
-     "Football League First Division"
-    ],
-    [
-     2004,
-     "EFL Championship"
-    ]
-   ],
-   "src": "memory"
-  },
-  "ENG3": {
-   "names": [
-    [
-     1958,
-     "Football League Third Division"
-    ],
-    [
-     1992,
-     "Football League Second Division"
-    ],
-    [
-     2004,
-     "EFL League One"
-    ]
-   ],
-   "src": "memory"
-  },
-  "ENG4": {
-   "names": [
-    [
-     1958,
-     "Football League Fourth Division"
-    ],
-    [
-     1992,
-     "Football League Third Division"
-    ],
-    [
-     2004,
-     "EFL League Two"
-    ]
-   ],
-   "src": "memory"
-  },
-  "ESP2": {
-   "names": [
-    [
-     1929,
-     "Segunda División"
-    ],
-    [
-     2016,
-     "LaLiga Hypermotion"
-    ]
-   ],
-   "src": "memory",
-   "doubtful": true
-  },
-  "FRA2": {
-   "names": [
-    [
-     1933,
-     "Division 2"
-    ],
-    [
-     2002,
-     "Ligue 2"
-    ]
-   ],
-   "src": "memory"
-  },
-  "GER2": {
-   "since": 1974,
-   "src": "memory",
-   "note": "2. Bundesliga desde 1974 (regional hasta 1981)"
-  },
-  "GER3": {
-   "since": 2008,
-   "src": "memory"
+  "clubs": {
+    "Inter Miami": {
+      "founded": 2018,
+      "src": "memory",
+      "note": "MLS desde 2020"
+    },
+    "Los Angeles FC": {
+      "founded": 2014,
+      "src": "memory",
+      "note": "MLS desde 2018"
+    },
+    "Columbus Crew": {
+      "founded": 1994,
+      "src": "memory",
+      "names": [
+        [
+          1994,
+          "Columbus Crew"
+        ],
+        [
+          2015,
+          "Columbus Crew SC"
+        ],
+        [
+          2021,
+          "Columbus Crew"
+        ]
+      ]
+    },
+    "FC Cincinnati": {
+      "founded": 2015,
+      "src": "memory"
+    },
+    "Philadelphia Union": {
+      "founded": 2008,
+      "src": "memory"
+    },
+    "Seattle Sounders": {
+      "founded": 2007,
+      "src": "memory",
+      "doubtful": true,
+      "note": "Club de la MLS; el Sounders de la NASL (1974-1983) es otra entidad"
+    },
+    "Vancouver Whitecaps": {
+      "founded": 2009,
+      "src": "memory",
+      "doubtful": true,
+      "note": "Whitecaps de la NASL desde 1974; entidad actual de 2009"
+    },
+    "LA Galaxy": {
+      "founded": 1994,
+      "src": "memory"
+    },
+    "Charlotte FC": {
+      "founded": 2019,
+      "src": "memory"
+    },
+    "Nashville SC": {
+      "founded": 2016,
+      "src": "memory"
+    },
+    "Orlando City": {
+      "founded": 2010,
+      "src": "memory"
+    },
+    "New York City FC": {
+      "founded": 2013,
+      "src": "memory"
+    },
+    "New York Red Bulls": {
+      "founded": 1994,
+      "src": "memory",
+      "names": [
+        [
+          1994,
+          "NY/NJ MetroStars"
+        ],
+        [
+          2006,
+          "New York Red Bulls"
+        ]
+      ]
+    },
+    "Minnesota United": {
+      "founded": 2010,
+      "src": "memory"
+    },
+    "San Diego FC": {
+      "founded": 2023,
+      "src": "memory"
+    },
+    "Atlanta United": {
+      "founded": 2014,
+      "src": "memory"
+    },
+    "Austin FC": {
+      "founded": 2018,
+      "src": "memory"
+    },
+    "Portland Timbers": {
+      "founded": 2009,
+      "src": "memory",
+      "doubtful": true,
+      "note": "Timbers de la NASL desde 1975; entidad actual de 2009"
+    },
+    "Real Salt Lake": {
+      "founded": 2004,
+      "src": "memory"
+    },
+    "Houston Dynamo": {
+      "founded": 2005,
+      "src": "memory"
+    },
+    "FC Dallas": {
+      "founded": 1995,
+      "src": "memory",
+      "names": [
+        [
+          1995,
+          "Dallas Burn"
+        ],
+        [
+          2004,
+          "FC Dallas"
+        ]
+      ]
+    },
+    "Colorado Rapids": {
+      "founded": 1995,
+      "src": "memory"
+    },
+    "St. Louis City": {
+      "founded": 2019,
+      "src": "memory"
+    },
+    "New England Revolution": {
+      "founded": 1994,
+      "src": "memory"
+    },
+    "Chicago Fire": {
+      "founded": 1997,
+      "src": "memory"
+    },
+    "Toronto FC": {
+      "founded": 2006,
+      "src": "memory"
+    },
+    "CF Montréal": {
+      "founded": 1992,
+      "src": "memory",
+      "names": [
+        [
+          1992,
+          "Montreal Impact"
+        ],
+        [
+          2021,
+          "CF Montréal"
+        ]
+      ]
+    },
+    "Sporting Kansas City": {
+      "founded": 1995,
+      "src": "memory",
+      "names": [
+        [
+          1995,
+          "Kansas City Wiz"
+        ],
+        [
+          1997,
+          "Kansas City Wizards"
+        ],
+        [
+          2011,
+          "Sporting Kansas City"
+        ]
+      ]
+    },
+    "D.C. United": {
+      "founded": 1994,
+      "src": "memory"
+    },
+    "San Jose Earthquakes": {
+      "founded": 1994,
+      "src": "memory",
+      "names": [
+        [
+          1994,
+          "San Jose Clash"
+        ],
+        [
+          2000,
+          "San Jose Earthquakes"
+        ]
+      ]
+    },
+    "Melbourne City": {
+      "founded": 2009,
+      "src": "memory",
+      "names": [
+        [
+          2009,
+          "Melbourne Heart"
+        ],
+        [
+          2014,
+          "Melbourne City"
+        ]
+      ]
+    },
+    "Auckland FC": {
+      "founded": 2024,
+      "src": "memory"
+    },
+    "Western Sydney Wanderers": {
+      "founded": 2012,
+      "src": "memory"
+    },
+    "Melbourne Victory": {
+      "founded": 2004,
+      "src": "memory"
+    },
+    "Sydney FC": {
+      "founded": 2004,
+      "src": "memory"
+    },
+    "Adelaide United": {
+      "founded": 2003,
+      "src": "memory"
+    },
+    "Central Coast Mariners": {
+      "founded": 2004,
+      "src": "memory"
+    },
+    "Macarthur FC": {
+      "founded": 2017,
+      "src": "memory"
+    },
+    "Wellington Phoenix": {
+      "founded": 2007,
+      "src": "memory"
+    },
+    "Brisbane Roar": {
+      "founded": 1957,
+      "src": "memory",
+      "names": [
+        [
+          1957,
+          "Hollandia Inala"
+        ],
+        [
+          2005,
+          "Queensland Roar"
+        ],
+        [
+          2009,
+          "Brisbane Roar"
+        ]
+      ],
+      "doubtful": true
+    },
+    "Newcastle Jets": {
+      "founded": 2000,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Perth Glory": {
+      "founded": 1995,
+      "src": "memory"
+    },
+    "FC Goa": {
+      "founded": 2014,
+      "src": "memory"
+    },
+    "Bengaluru FC": {
+      "founded": 2013,
+      "src": "memory"
+    },
+    "Mumbai City": {
+      "founded": 2014,
+      "src": "memory"
+    },
+    "Kerala Blasters": {
+      "founded": 2014,
+      "src": "memory"
+    },
+    "Jamshedpur FC": {
+      "founded": 2017,
+      "src": "memory"
+    },
+    "NorthEast United": {
+      "founded": 2014,
+      "src": "memory"
+    },
+    "Odisha FC": {
+      "founded": 2014,
+      "src": "memory",
+      "names": [
+        [
+          2014,
+          "Delhi Dynamos"
+        ],
+        [
+          2019,
+          "Odisha FC"
+        ]
+      ]
+    },
+    "Chennaiyin FC": {
+      "founded": 2014,
+      "src": "memory"
+    },
+    "Punjab FC": {
+      "founded": 2005,
+      "src": "memory",
+      "names": [
+        [
+          2005,
+          "Minerva Punjab"
+        ],
+        [
+          2020,
+          "Punjab FC"
+        ]
+      ],
+      "doubtful": true
+    },
+    "Inter Kashi": {
+      "founded": 2023,
+      "src": "memory"
+    },
+    "Mohun Bagan SG": {
+      "founded": 1889,
+      "src": "memory",
+      "names": [
+        [
+          1889,
+          "Mohun Bagan"
+        ],
+        [
+          2020,
+          "ATK Mohun Bagan"
+        ],
+        [
+          2023,
+          "Mohun Bagan SG"
+        ]
+      ]
+    },
+    "RB Leipzig": {
+      "founded": 2009,
+      "src": "memory"
+    },
+    "Red Bull Salzburgo": {
+      "founded": 1933,
+      "src": "memory",
+      "names": [
+        [
+          1933,
+          "Austria Salzburgo"
+        ],
+        [
+          2005,
+          "Red Bull Salzburgo"
+        ]
+      ]
+    },
+    "Paris Saint-Germain": {
+      "founded": 1970,
+      "src": "memory"
+    },
+    "Paris FC": {
+      "founded": 1969,
+      "src": "memory"
+    },
+    "Union Berlin": {
+      "founded": 1966,
+      "src": "memory"
+    },
+    "SV Elversberg": {
+      "founded": 1907,
+      "src": "memory"
+    },
+    "Başakşehir": {
+      "founded": 1990,
+      "src": "memory",
+      "names": [
+        [
+          1990,
+          "İstanbul BB"
+        ],
+        [
+          2014,
+          "Başakşehir"
+        ]
+      ]
+    },
+    "Eyüpspor": {
+      "founded": 1919,
+      "src": "memory"
+    },
+    "FC Krasnodar": {
+      "founded": 2008,
+      "src": "memory"
+    },
+    "Akhmat Grozny": {
+      "founded": 1946,
+      "src": "memory",
+      "names": [
+        [
+          1946,
+          "Terek Grozni"
+        ],
+        [
+          2017,
+          "Akhmat Grozny"
+        ]
+      ]
+    },
+    "Shakhtar Donetsk": {
+      "founded": 1936,
+      "src": "memory"
+    },
+    "Polissya Zhytomyr": {
+      "founded": 2016,
+      "src": "memory",
+      "doubtful": true
+    },
+    "LNZ Cherkasy": {
+      "founded": 2005,
+      "src": "memory",
+      "doubtful": true
+    },
+    "FC Kudrivka": {
+      "founded": 2019,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Metalist 1925": {
+      "founded": 2016,
+      "src": "memory",
+      "note": "Heredero del Metalist Járkov"
+    },
+    "Epitsentr": {
+      "founded": 2013,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Akron Togliatti": {
+      "founded": 2018,
+      "src": "memory"
+    },
+    "Pari Nizhny Novgorod": {
+      "founded": 2015,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Union Saint-Gilloise": {
+      "founded": 1897,
+      "src": "memory"
+    },
+    "Amedspor": {
+      "founded": 1972,
+      "src": "memory",
+      "doubtful": true
+    },
+    "RB Bragantino": {
+      "founded": 1928,
+      "src": "memory",
+      "names": [
+        [
+          1928,
+          "Bragantino"
+        ],
+        [
+          2020,
+          "RB Bragantino"
+        ]
+      ]
+    },
+    "Defensa y Justicia": {
+      "founded": 1935,
+      "src": "memory"
+    },
+    "Barracas Central": {
+      "founded": 1904,
+      "src": "memory"
+    },
+    "Deportivo Riestra": {
+      "founded": 1931,
+      "src": "memory"
+    },
+    "Estudiantes de Río Cuarto": {
+      "founded": 1912,
+      "src": "memory"
+    },
+    "Al-Duhail": {
+      "founded": 1938,
+      "src": "memory",
+      "names": [
+        [
+          1938,
+          "Lekhwiya"
+        ],
+        [
+          2017,
+          "Al-Duhail"
+        ]
+      ],
+      "doubtful": true,
+      "note": "Fundado como Lekhwiya en 1938 según el club; profesional en 2009"
+    },
+    "Shabab Al-Ahli": {
+      "founded": 2017,
+      "src": "memory",
+      "note": "Fusión de Al-Ahli, Al-Shabab y Dubai CSC"
+    },
+    "Neom SC": {
+      "founded": 1980,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Wuhan Three Towns": {
+      "founded": 2013,
+      "src": "memory"
+    },
+    "Chengdu Rongcheng": {
+      "founded": 2018,
+      "src": "memory"
+    },
+    "Shanghai Port": {
+      "founded": 2005,
+      "src": "memory",
+      "names": [
+        [
+          2005,
+          "Shanghai SIPG"
+        ],
+        [
+          2021,
+          "Shanghai Port"
+        ]
+      ],
+      "doubtful": true
+    },
+    "Ulsan HD": {
+      "founded": 1983,
+      "src": "memory"
+    },
+    "Jeonbuk Hyundai": {
+      "founded": 1994,
+      "src": "memory"
+    },
+    "FC Seoul": {
+      "founded": 1983,
+      "src": "memory",
+      "names": [
+        [
+          1983,
+          "Lucky-Goldstar Hwangso"
+        ],
+        [
+          2004,
+          "FC Seoul"
+        ]
+      ],
+      "doubtful": true
+    },
+    "Gangwon FC": {
+      "founded": 2008,
+      "src": "memory"
+    },
+    "Gimcheon Sangmu": {
+      "founded": 1984,
+      "src": "memory",
+      "doubtful": true
+    },
+    "FC Anyang": {
+      "founded": 2013,
+      "src": "memory"
+    },
+    "Bucheon FC 1995": {
+      "founded": 2007,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Buriram United": {
+      "founded": 1970,
+      "src": "memory",
+      "doubtful": true
+    },
+    "BG Pathum United": {
+      "founded": 2006,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Machida Zelvia": {
+      "founded": 1989,
+      "src": "memory"
+    },
+    "Mito HollyHock": {
+      "founded": 1994,
+      "src": "memory"
+    },
+    "V-Varen Nagasaki": {
+      "founded": 2004,
+      "src": "memory"
+    },
+    "Kashima Antlers": {
+      "founded": 1947,
+      "src": "memory",
+      "names": [
+        [
+          1947,
+          "Sumitomo Metal"
+        ],
+        [
+          1991,
+          "Kashima Antlers"
+        ]
+      ]
+    },
+    "Urawa Red Diamonds": {
+      "founded": 1950,
+      "src": "memory",
+      "names": [
+        [
+          1950,
+          "Mitsubishi Motors"
+        ],
+        [
+          1991,
+          "Urawa Red Diamonds"
+        ]
+      ]
+    },
+    "Yokohama F. Marinos": {
+      "founded": 1972,
+      "src": "memory",
+      "names": [
+        [
+          1972,
+          "Nissan Motors"
+        ],
+        [
+          1991,
+          "Yokohama Marinos"
+        ],
+        [
+          1999,
+          "Yokohama F. Marinos"
+        ]
+      ]
+    },
+    "Nagoya Grampus": {
+      "founded": 1939,
+      "src": "memory",
+      "names": [
+        [
+          1939,
+          "Toyota Motors"
+        ],
+        [
+          1991,
+          "Nagoya Grampus Eight"
+        ],
+        [
+          2008,
+          "Nagoya Grampus"
+        ]
+      ]
+    },
+    "Tokyo Verdy": {
+      "founded": 1969,
+      "src": "memory",
+      "names": [
+        [
+          1969,
+          "Yomiuri"
+        ],
+        [
+          1991,
+          "Verdy Kawasaki"
+        ],
+        [
+          2001,
+          "Tokyo Verdy"
+        ]
+      ]
+    },
+    "Gamba Osaka": {
+      "founded": 1980,
+      "src": "memory",
+      "names": [
+        [
+          1980,
+          "Matsushita Electric"
+        ],
+        [
+          1991,
+          "Gamba Osaka"
+        ]
+      ]
+    },
+    "Kashiwa Reysol": {
+      "founded": 1940,
+      "src": "memory",
+      "names": [
+        [
+          1940,
+          "Hitachi"
+        ],
+        [
+          1992,
+          "Kashiwa Reysol"
+        ]
+      ]
+    },
+    "Sanfrecce Hiroshima": {
+      "founded": 1938,
+      "src": "memory",
+      "names": [
+        [
+          1938,
+          "Toyo Kogyo"
+        ],
+        [
+          1981,
+          "Mazda"
+        ],
+        [
+          1992,
+          "Sanfrecce Hiroshima"
+        ]
+      ]
+    },
+    "Shimizu S-Pulse": {
+      "founded": 1991,
+      "src": "memory"
+    },
+    "Kawasaki Frontale": {
+      "founded": 1955,
+      "src": "memory",
+      "names": [
+        [
+          1955,
+          "Fujitsu"
+        ],
+        [
+          1997,
+          "Kawasaki Frontale"
+        ]
+      ]
+    },
+    "Vissel Kobe": {
+      "founded": 1966,
+      "src": "memory",
+      "names": [
+        [
+          1966,
+          "Kawasaki Steel"
+        ],
+        [
+          1995,
+          "Vissel Kobe"
+        ]
+      ]
+    },
+    "Cerezo Osaka": {
+      "founded": 1957,
+      "src": "memory",
+      "names": [
+        [
+          1957,
+          "Yanmar Diesel"
+        ],
+        [
+          1993,
+          "Cerezo Osaka"
+        ]
+      ]
+    },
+    "FC Tokyo": {
+      "founded": 1935,
+      "src": "memory",
+      "names": [
+        [
+          1935,
+          "Tokyo Gas"
+        ],
+        [
+          1999,
+          "FC Tokyo"
+        ]
+      ]
+    },
+    "JEF United Chiba": {
+      "founded": 1946,
+      "src": "memory",
+      "names": [
+        [
+          1946,
+          "Furukawa Electric"
+        ],
+        [
+          1991,
+          "JEF United Ichihara"
+        ],
+        [
+          2005,
+          "JEF United Chiba"
+        ]
+      ]
+    },
+    "Unionistas de Salamanca CF": {
+      "founded": 2013,
+      "src": "memory"
+    },
+    "AFC Wimbledon": {
+      "founded": 2002,
+      "src": "memory"
+    },
+    "MK Dons": {
+      "founded": 2004,
+      "src": "memory",
+      "note": "Heredero del Wimbledon FC trasladado a Milton Keynes"
+    },
+    "Salford City": {
+      "founded": 1940,
+      "src": "memory"
+    },
+    "Fleetwood Town": {
+      "founded": 1997,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Harrogate Town": {
+      "founded": 1914,
+      "src": "memory"
+    },
+    "Bromley": {
+      "founded": 1892,
+      "src": "memory"
+    },
+    "Stevenage": {
+      "founded": 1976,
+      "src": "memory"
+    },
+    "Burton Albion": {
+      "founded": 1950,
+      "src": "memory"
+    },
+    "Crawley Town": {
+      "founded": 1896,
+      "src": "memory"
+    },
+    "FC Copenhague": {
+      "founded": 1992,
+      "src": "memory"
+    },
+    "FC Midtjylland": {
+      "founded": 1999,
+      "src": "memory"
+    },
+    "FC Nordsjælland": {
+      "founded": 1991,
+      "src": "memory",
+      "names": [
+        [
+          1991,
+          "FC Farum"
+        ],
+        [
+          2003,
+          "FC Nordsjælland"
+        ]
+      ]
+    },
+    "Sønderjyske": {
+      "founded": 2004,
+      "src": "memory"
+    },
+    "Randers FC": {
+      "founded": 2003,
+      "src": "memory"
+    },
+    "Ludogorets": {
+      "founded": 2001,
+      "src": "memory"
+    },
+    "CSKA 1948": {
+      "founded": 1948,
+      "src": "memory",
+      "doubtful": true,
+      "note": "Club refundado en 2016"
+    },
+    "Arda Kardzhali": {
+      "founded": 1924,
+      "src": "memory"
+    },
+    "Septemvri Sofía": {
+      "founded": 1944,
+      "src": "memory"
+    },
+    "Dobrudzha": {
+      "founded": 1919,
+      "src": "memory"
+    },
+    "FCSB": {
+      "founded": 1947,
+      "src": "memory",
+      "names": [
+        [
+          1947,
+          "Steaua Bucarest"
+        ],
+        [
+          2017,
+          "FCSB"
+        ]
+      ]
+    },
+    "FC Hermannstadt": {
+      "founded": 2015,
+      "src": "memory"
+    },
+    "FC Botoșani": {
+      "founded": 2001,
+      "src": "memory"
+    },
+    "FK Csíkszereda": {
+      "founded": 2008,
+      "src": "memory"
+    },
+    "Metaloglobus": {
+      "founded": 1923,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Unirea Slobozia": {
+      "founded": 1956,
+      "src": "memory"
+    },
+    "Puskás Akadémia": {
+      "founded": 2005,
+      "src": "memory"
+    },
+    "Kisvárda": {
+      "founded": 1911,
+      "src": "memory"
+    },
+    "FC Astana": {
+      "founded": 2009,
+      "src": "memory"
+    },
+    "Ulytau": {
+      "founded": 2010,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Turan": {
+      "founded": 2016,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Zhenis": {
+      "founded": 2000,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Elimai": {
+      "founded": 1963,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Dinamo Zagreb": {
+      "founded": 1945,
+      "src": "memory",
+      "names": [
+        [
+          1945,
+          "Dinamo Zagreb"
+        ],
+        [
+          1991,
+          "HAŠK Građanski"
+        ],
+        [
+          1993,
+          "Croatia Zagreb"
+        ],
+        [
+          2000,
+          "Dinamo Zagreb"
+        ]
+      ]
+    },
+    "NK Istra 1961": {
+      "founded": 1961,
+      "src": "memory"
+    },
+    "HNK Gorica": {
+      "founded": 2009,
+      "src": "memory"
+    },
+    "NK Vukovar 1991": {
+      "founded": 2012,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Lokomotiva Zagreb": {
+      "founded": 1914,
+      "src": "memory"
+    },
+    "TSC Bačka Topola": {
+      "founded": 1913,
+      "src": "memory"
+    },
+    "IMT Novi Beograd": {
+      "founded": 1951,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Radnički 1923": {
+      "founded": 1923,
+      "src": "memory"
+    },
+    "Pafos FC": {
+      "founded": 2014,
+      "src": "memory"
+    },
+    "AEK Larnaca": {
+      "founded": 1994,
+      "src": "memory"
+    },
+    "Krasava": {
+      "founded": 2012,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Akritas Chlorakas": {
+      "founded": 1971,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Volos NFC": {
+      "founded": 2017,
+      "src": "memory"
+    },
+    "AO Kifisia": {
+      "founded": 2012,
+      "src": "memory",
+      "doubtful": true
+    },
+    "KRC Genk": {
+      "founded": 1988,
+      "src": "memory",
+      "note": "Fusión de Waterschei y Winterslag"
+    },
+    "OH Leuven": {
+      "founded": 2002,
+      "src": "memory"
+    },
+    "Zulte Waregem": {
+      "founded": 2001,
+      "src": "memory"
+    },
+    "RAAL La Louvière": {
+      "founded": 2009,
+      "src": "memory",
+      "doubtful": true
+    },
+    "FCV Dender": {
+      "founded": 1943,
+      "src": "memory"
+    },
+    "Club NXT": {
+      "founded": 2020,
+      "src": "memory"
+    },
+    "RSCA Futures": {
+      "founded": 2022,
+      "src": "memory"
+    },
+    "Jong Genk": {
+      "founded": 2022,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Jong Gent": {
+      "founded": 2023,
+      "src": "memory",
+      "doubtful": true
+    },
+    "RWDM Brussels": {
+      "founded": 2015,
+      "src": "memory"
+    },
+    "Lierse Kempenzonen": {
+      "founded": 1972,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Francs Borains": {
+      "founded": 1910,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Olympic Charleroi": {
+      "founded": 1912,
+      "src": "memory"
+    },
+    "Patro Eisden Maasmechelen": {
+      "founded": 1942,
+      "src": "memory"
+    },
+    "FC Groningen": {
+      "founded": 1971,
+      "src": "memory"
+    },
+    "FC Twente": {
+      "founded": 1965,
+      "src": "memory"
+    },
+    "FC Utrecht": {
+      "founded": 1970,
+      "src": "memory"
+    },
+    "AZ Alkmaar": {
+      "founded": 1967,
+      "src": "memory"
+    },
+    "Almere City FC": {
+      "founded": 2001,
+      "src": "memory"
+    },
+    "FC Emmen": {
+      "founded": 1925,
+      "src": "memory"
+    },
+    "Jong Ajax": {
+      "founded": 2013,
+      "src": "memory",
+      "note": "Filial en el fútbol profesional desde 2013"
+    },
+    "Jong PSV": {
+      "founded": 2013,
+      "src": "memory"
+    },
+    "Jong AZ": {
+      "founded": 2013,
+      "src": "memory"
+    },
+    "Jong FC Utrecht": {
+      "founded": 2016,
+      "src": "memory"
+    },
+    "Getafe CF": {
+      "founded": 1983,
+      "src": "memory"
+    },
+    "SD Eibar": {
+      "founded": 1940,
+      "src": "memory"
+    },
+    "FC Andorra": {
+      "founded": 1942,
+      "src": "memory"
+    },
+    "Real Sociedad B": {
+      "founded": 1951,
+      "src": "memory"
+    },
+    "Celta Fortuna": {
+      "founded": 1927,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Südtirol": {
+      "founded": 1995,
+      "src": "memory"
+    },
+    "Parma": {
+      "founded": 1913,
+      "src": "memory",
+      "doubtful": true,
+      "note": "Refundado en 2015"
+    },
+    "Alcione Milano": {
+      "founded": 1952,
+      "src": "memory"
+    },
+    "Inter U23": {
+      "founded": 2025,
+      "src": "memory"
+    },
+    "Union Brescia": {
+      "founded": 2025,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Dolomiti Bellunesi": {
+      "founded": 2023,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Arzignano Valchiampo": {
+      "founded": 2011,
+      "src": "memory",
+      "doubtful": true
+    },
+    "1. FC Heidenheim": {
+      "founded": 2007,
+      "src": "memory"
+    },
+    "SC Paderborn": {
+      "founded": 1985,
+      "src": "memory"
+    },
+    "Greuther Fürth": {
+      "founded": 1996,
+      "src": "memory"
+    },
+    "1. FC Magdeburg": {
+      "founded": 1965,
+      "src": "memory"
+    },
+    "Energie Cottbus": {
+      "founded": 1966,
+      "src": "memory"
+    },
+    "FC Ingolstadt 04": {
+      "founded": 2004,
+      "src": "memory"
+    },
+    "Viktoria Köln": {
+      "founded": 1904,
+      "src": "memory"
+    },
+    "TSG Hoffenheim II": {
+      "founded": 1899,
+      "src": "memory",
+      "doubtful": true
+    },
+    "SpVgg Unterhaching": {
+      "founded": 1925,
+      "src": "memory"
+    },
+    "ESTAC Troyes": {
+      "founded": 1986,
+      "src": "memory"
+    },
+    "Clermont Foot": {
+      "founded": 1990,
+      "src": "memory"
+    },
+    "Grenoble Foot": {
+      "founded": 1997,
+      "src": "memory"
+    },
+    "Le Mans FC": {
+      "founded": 1985,
+      "src": "memory"
+    },
+    "FC Annecy": {
+      "founded": 1927,
+      "src": "memory"
+    },
+    "Rodez AF": {
+      "founded": 1929,
+      "src": "memory"
+    },
+    "Paris 13 Atletico": {
+      "founded": 1969,
+      "src": "memory",
+      "doubtful": true
+    },
+    "FC Versailles": {
+      "founded": 1989,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Quevilly-Rouen": {
+      "founded": 1902,
+      "src": "memory"
+    },
+    "Aubagne FC": {
+      "founded": 1924,
+      "src": "memory",
+      "doubtful": true
+    },
+    "FC Fleury 91": {
+      "founded": 1991,
+      "src": "memory"
+    },
+    "Estrela da Amadora": {
+      "founded": 2020,
+      "src": "memory",
+      "note": "Heredero del CF Estrela da Amadora (1932-2011)"
+    },
+    "FC Vizela": {
+      "founded": 1939,
+      "src": "memory"
+    },
+    "FC Felgueiras 1932": {
+      "founded": 2006,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Lusitânia de Lourosa": {
+      "founded": 1924,
+      "src": "memory"
+    },
+    "Gaziantep FK": {
+      "founded": 1988,
+      "src": "memory"
+    },
+    "Erzurumspor": {
+      "founded": 2005,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Çorum FK": {
+      "founded": 1997,
+      "src": "memory"
+    },
+    "Esenler Erokspor": {
+      "founded": 2015,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Iğdır FK": {
+      "founded": 2017,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Bodrum FK": {
+      "founded": 1931,
+      "src": "memory"
+    },
+    "Pendikspor": {
+      "founded": 1950,
+      "src": "memory"
+    },
+    "Hatayspor": {
+      "founded": 1967,
+      "src": "memory"
+    },
+    "Ümraniyespor": {
+      "founded": 1938,
+      "src": "memory"
+    },
+    "Manisa FK": {
+      "founded": 1994,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Vanspor FK": {
+      "founded": 1974,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Serikspor": {
+      "founded": 1948,
+      "src": "memory",
+      "doubtful": true
+    },
+    "FC Sochi": {
+      "founded": 2018,
+      "src": "memory"
+    },
+    "Baltika Kaliningrado": {
+      "founded": 1954,
+      "src": "memory"
+    },
+    "Dinamo Makhachkala": {
+      "founded": 1927,
+      "src": "memory",
+      "doubtful": true
+    },
+    "Sarpsborg 08": {
+      "founded": 2008,
+      "src": "memory"
+    },
+    "KFUM Oslo": {
+      "founded": 1939,
+      "src": "memory"
+    },
+    "IF Brommapojkarna": {
+      "founded": 1942,
+      "src": "memory"
+    },
+    "Mjällby AIF": {
+      "founded": 1939,
+      "src": "memory"
+    },
+    "BK Häcken": {
+      "founded": 1940,
+      "src": "memory"
+    },
+    "Västerås SK": {
+      "founded": 1904,
+      "src": "memory"
+    },
+    "Ross County": {
+      "founded": 1929,
+      "src": "memory"
+    }
   }
- },
- "clubs": {
-  "Inter Miami": {
-   "founded": 2018,
-   "src": "memory",
-   "note": "MLS desde 2020"
-  },
-  "Los Angeles FC": {
-   "founded": 2014,
-   "src": "memory",
-   "note": "MLS desde 2018"
-  },
-  "Columbus Crew": {
-   "founded": 1994,
-   "src": "memory",
-   "names": [
-    [
-     1994,
-     "Columbus Crew"
-    ],
-    [
-     2015,
-     "Columbus Crew SC"
-    ],
-    [
-     2021,
-     "Columbus Crew"
-    ]
-   ]
-  },
-  "FC Cincinnati": {
-   "founded": 2015,
-   "src": "memory"
-  },
-  "Philadelphia Union": {
-   "founded": 2008,
-   "src": "memory"
-  },
-  "Seattle Sounders": {
-   "founded": 2007,
-   "src": "memory",
-   "doubtful": true,
-   "note": "Club de la MLS; el Sounders de la NASL (1974-1983) es otra entidad"
-  },
-  "Vancouver Whitecaps": {
-   "founded": 2009,
-   "src": "memory",
-   "doubtful": true,
-   "note": "Whitecaps de la NASL desde 1974; entidad actual de 2009"
-  },
-  "LA Galaxy": {
-   "founded": 1994,
-   "src": "memory"
-  },
-  "Charlotte FC": {
-   "founded": 2019,
-   "src": "memory"
-  },
-  "Nashville SC": {
-   "founded": 2016,
-   "src": "memory"
-  },
-  "Orlando City": {
-   "founded": 2010,
-   "src": "memory"
-  },
-  "New York City FC": {
-   "founded": 2013,
-   "src": "memory"
-  },
-  "New York Red Bulls": {
-   "founded": 1994,
-   "src": "memory",
-   "names": [
-    [
-     1994,
-     "NY/NJ MetroStars"
-    ],
-    [
-     2006,
-     "New York Red Bulls"
-    ]
-   ]
-  },
-  "Minnesota United": {
-   "founded": 2010,
-   "src": "memory"
-  },
-  "San Diego FC": {
-   "founded": 2023,
-   "src": "memory"
-  },
-  "Atlanta United": {
-   "founded": 2014,
-   "src": "memory"
-  },
-  "Austin FC": {
-   "founded": 2018,
-   "src": "memory"
-  },
-  "Portland Timbers": {
-   "founded": 2009,
-   "src": "memory",
-   "doubtful": true,
-   "note": "Timbers de la NASL desde 1975; entidad actual de 2009"
-  },
-  "Real Salt Lake": {
-   "founded": 2004,
-   "src": "memory"
-  },
-  "Houston Dynamo": {
-   "founded": 2005,
-   "src": "memory"
-  },
-  "FC Dallas": {
-   "founded": 1995,
-   "src": "memory",
-   "names": [
-    [
-     1995,
-     "Dallas Burn"
-    ],
-    [
-     2004,
-     "FC Dallas"
-    ]
-   ]
-  },
-  "Colorado Rapids": {
-   "founded": 1995,
-   "src": "memory"
-  },
-  "St. Louis City": {
-   "founded": 2019,
-   "src": "memory"
-  },
-  "New England Revolution": {
-   "founded": 1994,
-   "src": "memory"
-  },
-  "Chicago Fire": {
-   "founded": 1997,
-   "src": "memory"
-  },
-  "Toronto FC": {
-   "founded": 2006,
-   "src": "memory"
-  },
-  "CF Montréal": {
-   "founded": 1992,
-   "src": "memory",
-   "names": [
-    [
-     1992,
-     "Montreal Impact"
-    ],
-    [
-     2021,
-     "CF Montréal"
-    ]
-   ]
-  },
-  "Sporting Kansas City": {
-   "founded": 1995,
-   "src": "memory",
-   "names": [
-    [
-     1995,
-     "Kansas City Wiz"
-    ],
-    [
-     1997,
-     "Kansas City Wizards"
-    ],
-    [
-     2011,
-     "Sporting Kansas City"
-    ]
-   ]
-  },
-  "D.C. United": {
-   "founded": 1994,
-   "src": "memory"
-  },
-  "San Jose Earthquakes": {
-   "founded": 1994,
-   "src": "memory",
-   "names": [
-    [
-     1994,
-     "San Jose Clash"
-    ],
-    [
-     2000,
-     "San Jose Earthquakes"
-    ]
-   ]
-  },
-  "Melbourne City": {
-   "founded": 2009,
-   "src": "memory",
-   "names": [
-    [
-     2009,
-     "Melbourne Heart"
-    ],
-    [
-     2014,
-     "Melbourne City"
-    ]
-   ]
-  },
-  "Auckland FC": {
-   "founded": 2024,
-   "src": "memory"
-  },
-  "Western Sydney Wanderers": {
-   "founded": 2012,
-   "src": "memory"
-  },
-  "Melbourne Victory": {
-   "founded": 2004,
-   "src": "memory"
-  },
-  "Sydney FC": {
-   "founded": 2004,
-   "src": "memory"
-  },
-  "Adelaide United": {
-   "founded": 2003,
-   "src": "memory"
-  },
-  "Central Coast Mariners": {
-   "founded": 2004,
-   "src": "memory"
-  },
-  "Macarthur FC": {
-   "founded": 2017,
-   "src": "memory"
-  },
-  "Wellington Phoenix": {
-   "founded": 2007,
-   "src": "memory"
-  },
-  "Brisbane Roar": {
-   "founded": 1957,
-   "src": "memory",
-   "names": [
-    [
-     1957,
-     "Hollandia Inala"
-    ],
-    [
-     2005,
-     "Queensland Roar"
-    ],
-    [
-     2009,
-     "Brisbane Roar"
-    ]
-   ],
-   "doubtful": true
-  },
-  "Newcastle Jets": {
-   "founded": 2000,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Perth Glory": {
-   "founded": 1995,
-   "src": "memory"
-  },
-  "FC Goa": {
-   "founded": 2014,
-   "src": "memory"
-  },
-  "Bengaluru FC": {
-   "founded": 2013,
-   "src": "memory"
-  },
-  "Mumbai City": {
-   "founded": 2014,
-   "src": "memory"
-  },
-  "Kerala Blasters": {
-   "founded": 2014,
-   "src": "memory"
-  },
-  "Jamshedpur FC": {
-   "founded": 2017,
-   "src": "memory"
-  },
-  "NorthEast United": {
-   "founded": 2014,
-   "src": "memory"
-  },
-  "Odisha FC": {
-   "founded": 2014,
-   "src": "memory",
-   "names": [
-    [
-     2014,
-     "Delhi Dynamos"
-    ],
-    [
-     2019,
-     "Odisha FC"
-    ]
-   ]
-  },
-  "Chennaiyin FC": {
-   "founded": 2014,
-   "src": "memory"
-  },
-  "Punjab FC": {
-   "founded": 2005,
-   "src": "memory",
-   "names": [
-    [
-     2005,
-     "Minerva Punjab"
-    ],
-    [
-     2020,
-     "Punjab FC"
-    ]
-   ],
-   "doubtful": true
-  },
-  "Inter Kashi": {
-   "founded": 2023,
-   "src": "memory"
-  },
-  "Mohun Bagan SG": {
-   "founded": 1889,
-   "src": "memory",
-   "names": [
-    [
-     1889,
-     "Mohun Bagan"
-    ],
-    [
-     2020,
-     "ATK Mohun Bagan"
-    ],
-    [
-     2023,
-     "Mohun Bagan SG"
-    ]
-   ]
-  },
-  "RB Leipzig": {
-   "founded": 2009,
-   "src": "memory"
-  },
-  "Red Bull Salzburgo": {
-   "founded": 1933,
-   "src": "memory",
-   "names": [
-    [
-     1933,
-     "Austria Salzburgo"
-    ],
-    [
-     2005,
-     "Red Bull Salzburgo"
-    ]
-   ]
-  },
-  "Paris Saint-Germain": {
-   "founded": 1970,
-   "src": "memory"
-  },
-  "Paris FC": {
-   "founded": 1969,
-   "src": "memory"
-  },
-  "Union Berlin": {
-   "founded": 1966,
-   "src": "memory"
-  },
-  "SV Elversberg": {
-   "founded": 1907,
-   "src": "memory"
-  },
-  "Başakşehir": {
-   "founded": 1990,
-   "src": "memory",
-   "names": [
-    [
-     1990,
-     "İstanbul BB"
-    ],
-    [
-     2014,
-     "Başakşehir"
-    ]
-   ]
-  },
-  "Eyüpspor": {
-   "founded": 1919,
-   "src": "memory"
-  },
-  "FC Krasnodar": {
-   "founded": 2008,
-   "src": "memory"
-  },
-  "Akhmat Grozny": {
-   "founded": 1946,
-   "src": "memory",
-   "names": [
-    [
-     1946,
-     "Terek Grozni"
-    ],
-    [
-     2017,
-     "Akhmat Grozny"
-    ]
-   ]
-  },
-  "Shakhtar Donetsk": {
-   "founded": 1936,
-   "src": "memory"
-  },
-  "Polissya Zhytomyr": {
-   "founded": 2016,
-   "src": "memory",
-   "doubtful": true
-  },
-  "LNZ Cherkasy": {
-   "founded": 2005,
-   "src": "memory",
-   "doubtful": true
-  },
-  "FC Kudrivka": {
-   "founded": 2019,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Metalist 1925": {
-   "founded": 2016,
-   "src": "memory",
-   "note": "Heredero del Metalist Járkov"
-  },
-  "Epitsentr": {
-   "founded": 2013,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Akron Togliatti": {
-   "founded": 2018,
-   "src": "memory"
-  },
-  "Pari Nizhny Novgorod": {
-   "founded": 2015,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Union Saint-Gilloise": {
-   "founded": 1897,
-   "src": "memory"
-  },
-  "Amedspor": {
-   "founded": 1972,
-   "src": "memory",
-   "doubtful": true
-  },
-  "RB Bragantino": {
-   "founded": 1928,
-   "src": "memory",
-   "names": [
-    [
-     1928,
-     "Bragantino"
-    ],
-    [
-     2020,
-     "RB Bragantino"
-    ]
-   ]
-  },
-  "Defensa y Justicia": {
-   "founded": 1935,
-   "src": "memory"
-  },
-  "Barracas Central": {
-   "founded": 1904,
-   "src": "memory"
-  },
-  "Deportivo Riestra": {
-   "founded": 1931,
-   "src": "memory"
-  },
-  "Estudiantes de Río Cuarto": {
-   "founded": 1912,
-   "src": "memory"
-  },
-  "Al-Duhail": {
-   "founded": 1938,
-   "src": "memory",
-   "names": [
-    [
-     1938,
-     "Lekhwiya"
-    ],
-    [
-     2017,
-     "Al-Duhail"
-    ]
-   ],
-   "doubtful": true,
-   "note": "Fundado como Lekhwiya en 1938 según el club; profesional en 2009"
-  },
-  "Shabab Al-Ahli": {
-   "founded": 2017,
-   "src": "memory",
-   "note": "Fusión de Al-Ahli, Al-Shabab y Dubai CSC"
-  },
-  "Neom SC": {
-   "founded": 1980,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Wuhan Three Towns": {
-   "founded": 2013,
-   "src": "memory"
-  },
-  "Chengdu Rongcheng": {
-   "founded": 2018,
-   "src": "memory"
-  },
-  "Shanghai Port": {
-   "founded": 2005,
-   "src": "memory",
-   "names": [
-    [
-     2005,
-     "Shanghai SIPG"
-    ],
-    [
-     2021,
-     "Shanghai Port"
-    ]
-   ],
-   "doubtful": true
-  },
-  "Ulsan HD": {
-   "founded": 1983,
-   "src": "memory"
-  },
-  "Jeonbuk Hyundai": {
-   "founded": 1994,
-   "src": "memory"
-  },
-  "FC Seoul": {
-   "founded": 1983,
-   "src": "memory",
-   "names": [
-    [
-     1983,
-     "Lucky-Goldstar Hwangso"
-    ],
-    [
-     2004,
-     "FC Seoul"
-    ]
-   ],
-   "doubtful": true
-  },
-  "Gangwon FC": {
-   "founded": 2008,
-   "src": "memory"
-  },
-  "Gimcheon Sangmu": {
-   "founded": 1984,
-   "src": "memory",
-   "doubtful": true
-  },
-  "FC Anyang": {
-   "founded": 2013,
-   "src": "memory"
-  },
-  "Bucheon FC 1995": {
-   "founded": 2007,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Buriram United": {
-   "founded": 1970,
-   "src": "memory",
-   "doubtful": true
-  },
-  "BG Pathum United": {
-   "founded": 2006,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Machida Zelvia": {
-   "founded": 1989,
-   "src": "memory"
-  },
-  "Mito HollyHock": {
-   "founded": 1994,
-   "src": "memory"
-  },
-  "V-Varen Nagasaki": {
-   "founded": 2004,
-   "src": "memory"
-  },
-  "Kashima Antlers": {
-   "founded": 1947,
-   "src": "memory",
-   "names": [
-    [
-     1947,
-     "Sumitomo Metal"
-    ],
-    [
-     1991,
-     "Kashima Antlers"
-    ]
-   ]
-  },
-  "Urawa Red Diamonds": {
-   "founded": 1950,
-   "src": "memory",
-   "names": [
-    [
-     1950,
-     "Mitsubishi Motors"
-    ],
-    [
-     1991,
-     "Urawa Red Diamonds"
-    ]
-   ]
-  },
-  "Yokohama F. Marinos": {
-   "founded": 1972,
-   "src": "memory",
-   "names": [
-    [
-     1972,
-     "Nissan Motors"
-    ],
-    [
-     1991,
-     "Yokohama Marinos"
-    ],
-    [
-     1999,
-     "Yokohama F. Marinos"
-    ]
-   ]
-  },
-  "Nagoya Grampus": {
-   "founded": 1939,
-   "src": "memory",
-   "names": [
-    [
-     1939,
-     "Toyota Motors"
-    ],
-    [
-     1991,
-     "Nagoya Grampus Eight"
-    ],
-    [
-     2008,
-     "Nagoya Grampus"
-    ]
-   ]
-  },
-  "Tokyo Verdy": {
-   "founded": 1969,
-   "src": "memory",
-   "names": [
-    [
-     1969,
-     "Yomiuri"
-    ],
-    [
-     1991,
-     "Verdy Kawasaki"
-    ],
-    [
-     2001,
-     "Tokyo Verdy"
-    ]
-   ]
-  },
-  "Gamba Osaka": {
-   "founded": 1980,
-   "src": "memory",
-   "names": [
-    [
-     1980,
-     "Matsushita Electric"
-    ],
-    [
-     1991,
-     "Gamba Osaka"
-    ]
-   ]
-  },
-  "Kashiwa Reysol": {
-   "founded": 1940,
-   "src": "memory",
-   "names": [
-    [
-     1940,
-     "Hitachi"
-    ],
-    [
-     1992,
-     "Kashiwa Reysol"
-    ]
-   ]
-  },
-  "Sanfrecce Hiroshima": {
-   "founded": 1938,
-   "src": "memory",
-   "names": [
-    [
-     1938,
-     "Toyo Kogyo"
-    ],
-    [
-     1981,
-     "Mazda"
-    ],
-    [
-     1992,
-     "Sanfrecce Hiroshima"
-    ]
-   ]
-  },
-  "Shimizu S-Pulse": {
-   "founded": 1991,
-   "src": "memory"
-  },
-  "Kawasaki Frontale": {
-   "founded": 1955,
-   "src": "memory",
-   "names": [
-    [
-     1955,
-     "Fujitsu"
-    ],
-    [
-     1997,
-     "Kawasaki Frontale"
-    ]
-   ]
-  },
-  "Vissel Kobe": {
-   "founded": 1966,
-   "src": "memory",
-   "names": [
-    [
-     1966,
-     "Kawasaki Steel"
-    ],
-    [
-     1995,
-     "Vissel Kobe"
-    ]
-   ]
-  },
-  "Cerezo Osaka": {
-   "founded": 1957,
-   "src": "memory",
-   "names": [
-    [
-     1957,
-     "Yanmar Diesel"
-    ],
-    [
-     1993,
-     "Cerezo Osaka"
-    ]
-   ]
-  },
-  "FC Tokyo": {
-   "founded": 1935,
-   "src": "memory",
-   "names": [
-    [
-     1935,
-     "Tokyo Gas"
-    ],
-    [
-     1999,
-     "FC Tokyo"
-    ]
-   ]
-  },
-  "JEF United Chiba": {
-   "founded": 1946,
-   "src": "memory",
-   "names": [
-    [
-     1946,
-     "Furukawa Electric"
-    ],
-    [
-     1991,
-     "JEF United Ichihara"
-    ],
-    [
-     2005,
-     "JEF United Chiba"
-    ]
-   ]
-  },
-  "Unionistas de Salamanca CF": {
-   "founded": 2013,
-   "src": "memory"
-  },
-  "AFC Wimbledon": {
-   "founded": 2002,
-   "src": "memory"
-  },
-  "MK Dons": {
-   "founded": 2004,
-   "src": "memory",
-   "note": "Heredero del Wimbledon FC trasladado a Milton Keynes"
-  },
-  "Salford City": {
-   "founded": 1940,
-   "src": "memory"
-  },
-  "Fleetwood Town": {
-   "founded": 1997,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Harrogate Town": {
-   "founded": 1914,
-   "src": "memory"
-  },
-  "Bromley": {
-   "founded": 1892,
-   "src": "memory"
-  },
-  "Stevenage": {
-   "founded": 1976,
-   "src": "memory"
-  },
-  "Burton Albion": {
-   "founded": 1950,
-   "src": "memory"
-  },
-  "Crawley Town": {
-   "founded": 1896,
-   "src": "memory"
-  },
-  "FC Copenhague": {
-   "founded": 1992,
-   "src": "memory"
-  },
-  "FC Midtjylland": {
-   "founded": 1999,
-   "src": "memory"
-  },
-  "FC Nordsjælland": {
-   "founded": 1991,
-   "src": "memory",
-   "names": [
-    [
-     1991,
-     "FC Farum"
-    ],
-    [
-     2003,
-     "FC Nordsjælland"
-    ]
-   ]
-  },
-  "Sønderjyske": {
-   "founded": 2004,
-   "src": "memory"
-  },
-  "Randers FC": {
-   "founded": 2003,
-   "src": "memory"
-  },
-  "Ludogorets": {
-   "founded": 2001,
-   "src": "memory"
-  },
-  "CSKA 1948": {
-   "founded": 1948,
-   "src": "memory",
-   "doubtful": true,
-   "note": "Club refundado en 2016"
-  },
-  "Arda Kardzhali": {
-   "founded": 1924,
-   "src": "memory"
-  },
-  "Septemvri Sofía": {
-   "founded": 1944,
-   "src": "memory"
-  },
-  "Dobrudzha": {
-   "founded": 1919,
-   "src": "memory"
-  },
-  "FCSB": {
-   "founded": 1947,
-   "src": "memory",
-   "names": [
-    [
-     1947,
-     "Steaua Bucarest"
-    ],
-    [
-     2017,
-     "FCSB"
-    ]
-   ]
-  },
-  "FC Hermannstadt": {
-   "founded": 2015,
-   "src": "memory"
-  },
-  "FC Botoșani": {
-   "founded": 2001,
-   "src": "memory"
-  },
-  "FK Csíkszereda": {
-   "founded": 2008,
-   "src": "memory"
-  },
-  "Metaloglobus": {
-   "founded": 1923,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Unirea Slobozia": {
-   "founded": 1956,
-   "src": "memory"
-  },
-  "Puskás Akadémia": {
-   "founded": 2005,
-   "src": "memory"
-  },
-  "Kisvárda": {
-   "founded": 1911,
-   "src": "memory"
-  },
-  "FC Astana": {
-   "founded": 2009,
-   "src": "memory"
-  },
-  "Ulytau": {
-   "founded": 2010,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Turan": {
-   "founded": 2016,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Zhenis": {
-   "founded": 2000,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Elimai": {
-   "founded": 1963,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Dinamo Zagreb": {
-   "founded": 1945,
-   "src": "memory",
-   "names": [
-    [
-     1945,
-     "Dinamo Zagreb"
-    ],
-    [
-     1991,
-     "HAŠK Građanski"
-    ],
-    [
-     1993,
-     "Croatia Zagreb"
-    ],
-    [
-     2000,
-     "Dinamo Zagreb"
-    ]
-   ]
-  },
-  "NK Istra 1961": {
-   "founded": 1961,
-   "src": "memory"
-  },
-  "HNK Gorica": {
-   "founded": 2009,
-   "src": "memory"
-  },
-  "NK Vukovar 1991": {
-   "founded": 2012,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Lokomotiva Zagreb": {
-   "founded": 1914,
-   "src": "memory"
-  },
-  "TSC Bačka Topola": {
-   "founded": 1913,
-   "src": "memory"
-  },
-  "IMT Novi Beograd": {
-   "founded": 1951,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Radnički 1923": {
-   "founded": 1923,
-   "src": "memory"
-  },
-  "Pafos FC": {
-   "founded": 2014,
-   "src": "memory"
-  },
-  "AEK Larnaca": {
-   "founded": 1994,
-   "src": "memory"
-  },
-  "Krasava": {
-   "founded": 2012,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Akritas Chlorakas": {
-   "founded": 1971,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Volos NFC": {
-   "founded": 2017,
-   "src": "memory"
-  },
-  "AO Kifisia": {
-   "founded": 2012,
-   "src": "memory",
-   "doubtful": true
-  },
-  "KRC Genk": {
-   "founded": 1988,
-   "src": "memory",
-   "note": "Fusión de Waterschei y Winterslag"
-  },
-  "OH Leuven": {
-   "founded": 2002,
-   "src": "memory"
-  },
-  "Zulte Waregem": {
-   "founded": 2001,
-   "src": "memory"
-  },
-  "RAAL La Louvière": {
-   "founded": 2009,
-   "src": "memory",
-   "doubtful": true
-  },
-  "FCV Dender": {
-   "founded": 1943,
-   "src": "memory"
-  },
-  "Club NXT": {
-   "founded": 2020,
-   "src": "memory"
-  },
-  "RSCA Futures": {
-   "founded": 2022,
-   "src": "memory"
-  },
-  "Jong Genk": {
-   "founded": 2022,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Jong Gent": {
-   "founded": 2023,
-   "src": "memory",
-   "doubtful": true
-  },
-  "RWDM Brussels": {
-   "founded": 2015,
-   "src": "memory"
-  },
-  "Lierse Kempenzonen": {
-   "founded": 1972,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Francs Borains": {
-   "founded": 1910,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Olympic Charleroi": {
-   "founded": 1912,
-   "src": "memory"
-  },
-  "Patro Eisden Maasmechelen": {
-   "founded": 1942,
-   "src": "memory"
-  },
-  "FC Groningen": {
-   "founded": 1971,
-   "src": "memory"
-  },
-  "FC Twente": {
-   "founded": 1965,
-   "src": "memory"
-  },
-  "FC Utrecht": {
-   "founded": 1970,
-   "src": "memory"
-  },
-  "AZ Alkmaar": {
-   "founded": 1967,
-   "src": "memory"
-  },
-  "Almere City FC": {
-   "founded": 2001,
-   "src": "memory"
-  },
-  "FC Emmen": {
-   "founded": 1925,
-   "src": "memory"
-  },
-  "Jong Ajax": {
-   "founded": 2013,
-   "src": "memory",
-   "note": "Filial en el fútbol profesional desde 2013"
-  },
-  "Jong PSV": {
-   "founded": 2013,
-   "src": "memory"
-  },
-  "Jong AZ": {
-   "founded": 2013,
-   "src": "memory"
-  },
-  "Jong FC Utrecht": {
-   "founded": 2016,
-   "src": "memory"
-  },
-  "Getafe CF": {
-   "founded": 1983,
-   "src": "memory"
-  },
-  "SD Eibar": {
-   "founded": 1940,
-   "src": "memory"
-  },
-  "FC Andorra": {
-   "founded": 1942,
-   "src": "memory"
-  },
-  "Real Sociedad B": {
-   "founded": 1951,
-   "src": "memory"
-  },
-  "Celta Fortuna": {
-   "founded": 1927,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Südtirol": {
-   "founded": 1995,
-   "src": "memory"
-  },
-  "Parma": {
-   "founded": 1913,
-   "src": "memory",
-   "doubtful": true,
-   "note": "Refundado en 2015"
-  },
-  "Alcione Milano": {
-   "founded": 1952,
-   "src": "memory"
-  },
-  "Inter U23": {
-   "founded": 2025,
-   "src": "memory"
-  },
-  "Union Brescia": {
-   "founded": 2025,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Dolomiti Bellunesi": {
-   "founded": 2023,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Arzignano Valchiampo": {
-   "founded": 2011,
-   "src": "memory",
-   "doubtful": true
-  },
-  "1. FC Heidenheim": {
-   "founded": 2007,
-   "src": "memory"
-  },
-  "SC Paderborn": {
-   "founded": 1985,
-   "src": "memory"
-  },
-  "Greuther Fürth": {
-   "founded": 1996,
-   "src": "memory"
-  },
-  "1. FC Magdeburg": {
-   "founded": 1965,
-   "src": "memory"
-  },
-  "Energie Cottbus": {
-   "founded": 1966,
-   "src": "memory"
-  },
-  "FC Ingolstadt 04": {
-   "founded": 2004,
-   "src": "memory"
-  },
-  "Viktoria Köln": {
-   "founded": 1904,
-   "src": "memory"
-  },
-  "TSG Hoffenheim II": {
-   "founded": 1899,
-   "src": "memory",
-   "doubtful": true
-  },
-  "SpVgg Unterhaching": {
-   "founded": 1925,
-   "src": "memory"
-  },
-  "ESTAC Troyes": {
-   "founded": 1986,
-   "src": "memory"
-  },
-  "Clermont Foot": {
-   "founded": 1990,
-   "src": "memory"
-  },
-  "Grenoble Foot": {
-   "founded": 1997,
-   "src": "memory"
-  },
-  "Le Mans FC": {
-   "founded": 1985,
-   "src": "memory"
-  },
-  "FC Annecy": {
-   "founded": 1927,
-   "src": "memory"
-  },
-  "Rodez AF": {
-   "founded": 1929,
-   "src": "memory"
-  },
-  "Paris 13 Atletico": {
-   "founded": 1969,
-   "src": "memory",
-   "doubtful": true
-  },
-  "FC Versailles": {
-   "founded": 1989,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Quevilly-Rouen": {
-   "founded": 1902,
-   "src": "memory"
-  },
-  "Aubagne FC": {
-   "founded": 1924,
-   "src": "memory",
-   "doubtful": true
-  },
-  "FC Fleury 91": {
-   "founded": 1991,
-   "src": "memory"
-  },
-  "Estrela da Amadora": {
-   "founded": 2020,
-   "src": "memory",
-   "note": "Heredero del CF Estrela da Amadora (1932-2011)"
-  },
-  "FC Vizela": {
-   "founded": 1939,
-   "src": "memory"
-  },
-  "FC Felgueiras 1932": {
-   "founded": 2006,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Lusitânia de Lourosa": {
-   "founded": 1924,
-   "src": "memory"
-  },
-  "Gaziantep FK": {
-   "founded": 1988,
-   "src": "memory"
-  },
-  "Erzurumspor": {
-   "founded": 2005,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Çorum FK": {
-   "founded": 1997,
-   "src": "memory"
-  },
-  "Esenler Erokspor": {
-   "founded": 2015,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Iğdır FK": {
-   "founded": 2017,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Bodrum FK": {
-   "founded": 1931,
-   "src": "memory"
-  },
-  "Pendikspor": {
-   "founded": 1950,
-   "src": "memory"
-  },
-  "Hatayspor": {
-   "founded": 1967,
-   "src": "memory"
-  },
-  "Ümraniyespor": {
-   "founded": 1938,
-   "src": "memory"
-  },
-  "Manisa FK": {
-   "founded": 1994,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Vanspor FK": {
-   "founded": 1974,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Serikspor": {
-   "founded": 1948,
-   "src": "memory",
-   "doubtful": true
-  },
-  "FC Sochi": {
-   "founded": 2018,
-   "src": "memory"
-  },
-  "Baltika Kaliningrado": {
-   "founded": 1954,
-   "src": "memory"
-  },
-  "Dinamo Makhachkala": {
-   "founded": 1927,
-   "src": "memory",
-   "doubtful": true
-  },
-  "Sarpsborg 08": {
-   "founded": 2008,
-   "src": "memory"
-  },
-  "KFUM Oslo": {
-   "founded": 1939,
-   "src": "memory"
-  },
-  "IF Brommapojkarna": {
-   "founded": 1942,
-   "src": "memory"
-  },
-  "Mjällby AIF": {
-   "founded": 1939,
-   "src": "memory"
-  },
-  "BK Häcken": {
-   "founded": 1940,
-   "src": "memory"
-  },
-  "Västerås SK": {
-   "founded": 1904,
-   "src": "memory"
-  },
-  "Ross County": {
-   "founded": 1929,
-   "src": "memory"
-  }
- }
 }

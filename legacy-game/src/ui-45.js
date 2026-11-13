@@ -102,8 +102,10 @@
     po.r.forEach(function (ms) {
       o += '<p class="lbl" style="margin:8px 0 4px">' + h(tr(poRoundName(ms.length * 2))) + "</p>";
       ms.forEach(function (mt) {
-        var sc = mt.g[0] + "-" + mt.g[1] + (mt.pen ? " (" + mt.pen[0] + "-" + mt.pen[1] + " " + tr("pen.") + ")" : mt.et ? " " + tr("(prór.)") : "");
-        o += '<div class="pomatch"><span class="' + (mt.w === mt.a ? "w" : "") + (mt.a === me ? " me" : "") + '">' + h(clubName(mt.a)) + '</span><b class="num">' + sc + '</b><span class="' + (mt.w === mt.b ? "w" : "") + (mt.b === me ? " me" : "") + '">' + h(clubName(mt.b)) + "</span></div>";
+        var sc = mt.legs ? tr("Ida: {first}; vuelta: {second}; global: {total}.", {
+          first: mt.legs[0][0] + "-" + mt.legs[0][1], second: mt.legs[1][0] + "-" + mt.legs[1][1], total: mt.g[0] + "-" + mt.g[1]
+        }) : mt.g[0] + "-" + mt.g[1] + (mt.pen ? " (" + mt.pen[0] + "-" + mt.pen[1] + " " + tr("pen.") + ")" : mt.et ? " " + tr("(prór.)") : "");
+        o += '<div class="pomatch"><span class="' + (mt.w === mt.a ? "w" : "") + (mt.a === me ? " me" : "") + '">' + h(clubName(mt.a)) + '</span><b class="num">' + h(sc) + '</b><span class="' + (mt.w === mt.b ? "w" : "") + (mt.b === me ? " me" : "") + '">' + h(clubName(mt.b)) + "</span></div>";
       });
     });
     return o + '<p class="muted" style="font-size:var(--fs-sm);margin:8px 0 0">' + tr("Sube a {lg}: {club}.", {lg: h(trComp(lgDivRaw(L.upI))), club: h(clubName(po.w))}) + "</p></section>";

@@ -895,9 +895,25 @@
     rest.slice(-4).forEach(function (n, i) { setTimeout(function () { add(n.k, h(n.t), n.k === "red" ? 5200 : 4200); }, 140 * (i + (res.length ? 1 : 0))); });
     persist();
   }
+  /* Jugada Maestra en modo jugador: el partido se detiene en una ocasión ya sellada */
+  function jmPendCard(x) {
+    var f = S.cur && S.cur.pm ? S.cur.pm[x.fi] : null, jm = f && f.jm;
+    if (!jm) return "";
+    var sc = scoreAt(f, jm.min), us = f.isNat ? W.ctry[f.us].code : W.clubs[f.us].ab, op = f.isNat ? W.ctry[f.opp].code : W.clubs[f.opp].ab;
+    var board = {min: jm.min + "'", l: f.home ? [us, sc[0]] : [op, sc[1]], r: f.home ? [op, sc[1]] : [us, sc[0]]};
+    var name = S.p.fn + " " + S.p.ln;
+    var o = '<section class="card decision hotc"><div class="head"><span class="tag hot"><span class="dot"></span>' + tr("Momento clave") + '</span><span class="eyebrow">' + h(momLabel(f)) + "</span></div>";
+    o += "<h3>" + tr("Jugada Maestra") + "</h3>" + boardHTML(board);
+    o += '<p class="lead">' + tr("El partido se detiene en una ocasión para {name}. Dibuja la jugada: si acaba en gol, el tanto es tuyo, y solo se resuelve una vez.", {name: h(name)}) + "</p>";
+    o += '<div class="opts"><button class="btn pri wide" data-a="jmplay">' + tr("Jugar la jugada") + "</button>" +
+      '<button class="btn wide" data-a="jmauto">' + tr("Dejar que decida el equipo") + "</button></div>";
+    o += '<p class="muted" style="font-size:var(--fs-xs);margin:8px 0 0">' + tr("Tu ocasión ya estaba en el partido: la jugada decide si acaba en gol, parada, despeje o pérdida.") + "</p>";
+    return o + "</section>";
+  }
   function pendingCard(x) {
     var o = "";
     if (x.k === "objs") return objsCard(x);
+    if (x.k === "jmm") return jmPendCard(x);
     if (x.k === "nego") return negoCard(x);
     if (UIX.pend[x.k]) return UIX.pend[x.k](x);
     if (x.k === "focus") {
@@ -1532,7 +1548,7 @@
   }
   function slotsNow() { return UI.slots || Store.index(); }
   function homeView() {
-    var n = slotsNow().length, mainHomeExtras = slot("mainhome");
+    var n = slotsNow().length + (typeof UIX.saveExtras === "function" ? UIX.saveExtras() : 0), mainHomeExtras = slot("mainhome");
     var s = '<main id="main"><div class="stack home-stack">' + updBanner(false) + '<section class="hero"><div class="eyebrow">' + tr("Jugador, míster o tu propio club") + "</div>" + titleHTML() +
       "<p>" + tr("{n} ligas de los cinco continentes, todas las selecciones del mundo, copas, Champions, Libertadores, Mundiales y el Balón de Oro.", {n: W.lg.length}) + "</p>" +
       '<div class="scoreline"><span>' + tr("{n} LIGAS", {n: W.lg.length}) + "</span><span>" + tr("{n} CLUBES", {n: W.clubs.length - 2}) + "</span><span>" + tr("{n} SELECCIONES", {n: W.ctry.length}) + "</span></div></section>";
@@ -1566,10 +1582,10 @@
       '<div class="row2" style="margin-top:12px"><button class="btn wide danger" data-a="askdel" data-v="' + h(e.id) + '">' + tr("Borrar") + '</button><button class="btn pri wide" data-a="loadslot" data-v="' + h(e.id) + '">' + (cur ? tr("Continuar") : tr("Jugar")) + "</button></div></section>";
   }
   function loadView() {
-    var l = slotsNow();
+    var l = slotsNow(), extra = typeof UIX.saveExtras === "function" ? UIX.saveExtras() : 0, eraSaves = slot("load");
     var s = '<main id="main"><div class="stack"><section><div class="eyebrow">' + tr("Tus partidas") + '</div><h2 class="vtitle">' + tr("Cargar partida") + "</h2></section>";
-    if (!l.length) s += '<p class="empty">' + tr("Todavía no tienes partidas guardadas.") + "</p>";
-    s += l.map(slotCard).join("");
+    if (!l.length && !extra) s += '<p class="empty">' + tr("Todavía no tienes partidas guardadas.") + "</p>";
+    s += l.map(slotCard).join("") + eraSaves;
     s += '<div class="row2"><button class="btn wide" data-a="gohome">' + tr("Atrás") + '</button><button class="btn wide" data-a="import">' + tr("Cargar con código") + "</button></div>";
     return s + "</div></main>";
   }
@@ -1616,7 +1632,7 @@
       s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 3}) + '</div><h2 style="font-size:var(--fs-score);text-transform:uppercase">' + tr("Tu talento") + '</h2></section><div class="opts">';
       var desc = {promesa: tr("Empiezas con 58 de media. Nadie da un duro por ti: hasta dónde llegues depende de ti."), joya: tr("Empiezas con 62. Los grandes ya te vigilan. Tus decisiones dirán si llegas arriba."), elegido: tr("Empiezas con 65. Todos esperan mucho de ti, y eso también pesa."), misterio: tr("Tu media inicial es una sorpresa. Nadie sabe qué futbolista puedes llegar a ser.")};
       Object.keys(TALENT).forEach(function (k) { s += '<button class="pickrow" data-a="cset" data-k="talent" data-v="' + k + '" aria-pressed="' + (c.talent === k) + '"><div class="grow"><b>' + h(TALENT[k].n) + "</b><small>" + h(desc[k]) + "</small></div></button>"; });
-      s += '</div><div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[tr("Tranquilo"), 0], [tr("Normal"), 1], [tr("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + x[0] + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + evDesc(c.ev, false) + "</p></div>" + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
+      s += '</div><div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[tr("Tranquilo"), 0], [tr("Normal"), 1], [tr("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + x[0] + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + evDesc(c.ev, false) + "</p></div>" + jmField(c, "cset", true) + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
     } else {
       s += '<section><div class="eyebrow">' + tr("Paso {n} de 4", {n: 4}) + '</div><h2 style="font-size:var(--fs-score);text-transform:uppercase">' + tr("Tu primer club") + "</h2></section>";
       s += '<div class="seg"><button data-a="cset" data-k="mode" data-v="rand" aria-pressed="' + (c.mode === "rand") + '">' + tr("Cantera de mi país") + '</button><button data-a="cset" data-k="mode" data-v="pick" aria-pressed="' + (c.mode === "pick") + '">' + tr("Elegir club") + "</button></div>";
@@ -1673,9 +1689,19 @@
     if (ev === 0) return tr("Tranquilo: pocas decisiones; la carrera avanza rápido.");
     return tr("Normal: un equilibrio entre decisiones y partidos.");
   }
-  function diffFields(c, desc) {
+  /* Jugada Maestra en el partido: optativa y solo donde hay partido (directo o simulado) */
+  function jmField(c, act, player) {
+    var on = +c.jm === 1, a = act || "cset", attrs = a === "cset" ? ' data-k="jm"' : "";
+    var desc = player
+      ? (on ? tr("En una ocasión por partido el juego se detiene y dibujas la jugada: si acaba en gol, el tanto es tuyo, sin repetirla.") : tr("Tus partidos se resuelven como hasta ahora, sin interrupciones."))
+      : (on ? tr("En una o dos ocasiones claras el partido se pausa y dibujas la jugada: su resultado pasa al marcador y a las estadísticas, sin repetirla.") : tr("El partido se juega minuto a minuto como hasta ahora, sin interrupciones."));
+    return '<div><label class="lbl">' + tr("Jugada Maestra en el partido") + '</label><div class="seg">' + [[N_("No"), 0], [N_("Sí"), 1]].map(function (x) { return '<button data-a="' + a + '"' + attrs + ' data-v="' + x[1] + '" aria-pressed="' + (on === (x[1] === 1)) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + desc + "</p></div>";
+  }
+  function diffFields(c, desc, opt) {
     var s = '<div class="opts">' + DIFFS.map(function (n, i) { return '<button class="pickrow" data-a="cset" data-k="diff" data-v="' + i + '" aria-pressed="' + (c.diff === i) + '"><div class="grow"><b>' + h(tr(n)) + "</b><small>" + h(tr(desc[i])) + "</small></div></button>"; }).join("") + "</div>";
-    s += '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + evDesc(c.ev, true) + "</p></div>" + '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
+    s += '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="cset" data-k="ev" data-v="' + x[1] + '" aria-pressed="' + (c.ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + evDesc(c.ev, true) + "</p></div>";
+    if (opt && opt.jm) s += jmField(c);
+    s += '<div><label class="lbl">' + tr("Duración") + '</label><div class="seg"><button data-a="cset" data-k="quick" data-v="" aria-pressed="' + !c.quick + '">' + tr("Carrera completa") + '</button><button data-a="cset" data-k="quick" data-v="1" aria-pressed="' + !!c.quick + '">' + tr("Rápida: 10 temporadas") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (c.quick ? tr("Pocas decisiones y fin a las 10 temporadas, para ratos cortos.") : tr("Juegas hasta que tú decidas retirarte.")) + "</p></div>";
     return s;
   }
   function leagueField(c) {
@@ -1697,7 +1723,7 @@
   function createMgrView() {
     var c = UI.cr, st = c.step, n = 3, s = '<main id="main"><div class="stack">' + stepsBar(st, n);
     if (st === 0) { s += stepHead(st, n, tr("¿Quién eres?")) + whoFields(c, [30, 35, 40, 45, 50, 55]); }
-    else if (st === 1) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_M); }
+    else if (st === 1) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_M, {jm: c.ev === 2}); }
     else {
       s += stepHead(st, n, tr("Tu banquillo"));
       s += '<div class="seg"><button data-a="cset" data-k="mmode" data-v="off" aria-pressed="' + (c.mmode === "off") + '">' + tr("Empezar desde abajo") + '</button><button data-a="cset" data-k="mmode" data-v="pick" aria-pressed="' + (c.mmode === "pick") + '">' + tr("Elegir club") + '</button>' + (typeof CHAL !== "undefined" && !crEra() ? '<button data-a="cset" data-k="mmode" data-v="chal" aria-pressed="' + (c.mmode === "chal") + '">' + tr("Desafío") + "</button>" : "") + "</div>";
@@ -1743,7 +1769,7 @@
       s += '<p class="muted" style="font-size:var(--fs-sm);margin:0">' + tr("Tu club ocupará la plaza de uno de estos equipos, que desaparece de la liga.") + '</p><div class="list">';
       cl.forEach(function (ci) { s += '<button class="pickrow" data-a="cclub" data-v="' + ci + '" aria-pressed="' + (c.club === ci) + '">' + crest(ci, true) + '<div class="grow"><b>' + h(W.clubs[ci].n) + "</b><small>" + (c.club === ci ? tr("Tu club ocupa su plaza") : tr("Sustituir a este club")) + '</small></div><span class="lvl">' + Math.round(W.clubs[ci].r0) + "</span></button>"; });
       s += "</div>";
-    } else if (st === 2) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_C); }
+    } else if (st === 2) { s += stepHead(st, n, tr("Dificultad")) + diffFields(c, DIFF_DESC_C, {jm: c.ev === 2 && c.role !== "pres"}); }
     else {
       s += stepHead(st, n, c.role === "pres" ? tr("Tú, el presidente") : tr("Tú, el míster")) + '<div><label class="lbl">' + tr("Tu papel") + '</label><div class="seg"><button data-a="cset" data-k="role" data-v="pm" aria-pressed="' + (c.role !== "pres") + '">' + tr("Presidente y míster") + '</button><button data-a="cset" data-k="role" data-v="pres" aria-pressed="' + (c.role === "pres") + '">' + tr("Solo presidente") + '</button></div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + (c.role === "pres" ? tr("Fichas a un entrenador que dirige los partidos. Tú llevas las cuentas, el estadio y los fichajes, y respondes ante la afición.") : tr("Lo haces todo: alineación, táctica, fichajes y las cuentas del club.")) + "</p></div>" + whoFields(c, [30, 35, 40, 45, 50, 55]);
     }
@@ -1774,8 +1800,8 @@
   }
   function startCreate(kind) {
     var c = {step: 0, kind: kind || "p", fn: "", ln: "", nat: "ES", ev: 1, lg: null, club: -1, g: UI.gsel === "f" ? "f" : "m"};
-    if (c.kind === "p") Object.assign(c, {nat2: "", pos: "DC", foot: "Diestro", age: 17, talent: "joya", mode: "rand"});
-    else Object.assign(c, {age: 40, diff: 1, mmode: "off"});
+    if (c.kind === "p") Object.assign(c, {nat2: "", pos: "DC", foot: "Diestro", age: 17, talent: "joya", mode: "rand", jm: 0});
+    else Object.assign(c, {age: 40, diff: 1, mmode: "off", jm: 0});
     if (c.kind === "club") Object.assign(c, {cn: "", ab: "", col: ["#c8102e", "#ffffff"], lg: W.lgIdx.ESP1, crest: {shape: "shield", pat: "band"}, kit: {pat: "plain", col3: "#ffffff"}});
     UI.cr = c; UI.view = "create"; render(true);
   }
@@ -1792,9 +1818,9 @@
     }
     switchGame(function () {
       try {
-        if (c.kind === "mgr") newManagerCareer({quick: !!c.quick, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, club: c.club, g: c.g, chal: c.mmode === "chal" ? c.chal : null});
-        else if (c.kind === "club") newClubCareer({quick: !!c.quick, role: c.role, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, cn: c.cn.trim(), ab: (c.ab || clubAbbr(c.cn)).toUpperCase().slice(0, 4), col: c.col, repl: c.club, g: c.g, crest: c.crest, kit: c.kit});
-        else newCareer({quick: !!c.quick, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, nat2: c.nat2 || null, pos: c.pos, foot: c.foot, age: c.age, talent: c.talent, club: c.club, ev: c.ev, g: c.g});
+        if (c.kind === "mgr") newManagerCareer({quick: !!c.quick, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, jm: c.ev === 2 ? (c.jm ? 1 : 0) : 0, club: c.club, g: c.g, chal: c.mmode === "chal" ? c.chal : null});
+        else if (c.kind === "club") newClubCareer({quick: !!c.quick, role: c.role, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, age: c.age, diff: c.diff, ev: c.ev, jm: c.ev === 2 && c.role !== "pres" ? (c.jm ? 1 : 0) : 0, cn: c.cn.trim(), ab: (c.ab || clubAbbr(c.cn)).toUpperCase().slice(0, 4), col: c.col, repl: c.club, g: c.g, crest: c.crest, kit: c.kit});
+        else newCareer({quick: !!c.quick, fn: c.fn.trim(), ln: c.ln.trim(), nat: c.nat, nat2: c.nat2 || null, pos: c.pos, foot: c.foot, age: c.age, talent: c.talent, club: c.club, ev: c.ev, jm: c.jm ? 1 : 0, g: c.g});
       } catch (e) { console.error(e); toast(tr("No se pudo crear la partida.")); return; }
       UI.cr = null; UI.exp = {}; UI.wl = null; UI.flash = null; UI.sheet = null;
       UI.view = S.ph === "draft" ? "draft" : "game"; UI.tab = isMgr() ? "club" : "carrera";
@@ -1851,6 +1877,7 @@
       var ev = S ? S.set.ev : 1;
       return '<h2>' + tr("Menú") + '</h2><div class="stack">' + updBanner(true) + slot("menu") + '<div><label class="lbl">' + tr("Idioma") + '</label><div class="seg langseg">' + LANGS.map(function (l) { return '<button data-a="setlang" data-v="' + l[0] + '" lang="' + l[0] + '" aria-pressed="' + (LANG === l[0]) + '" title="' + h(l[1]) + '"><span class="lflag sm" aria-hidden="true">' + flagOf(LANG_FLAG[l[0]]) + "</span>" + l[0].toUpperCase() + "</button>"; }).join("") + "</div></div>" +
         '<div><label class="lbl">' + tr("Ritmo de decisiones") + '</label><div class="seg">' + [[N_("Tranquilo"), 0], [N_("Normal"), 1], [N_("Intenso"), 2]].map(function (x) { return '<button data-a="setev" data-v="' + x[1] + '" aria-pressed="' + (ev === x[1]) + '">' + h(tr(x[0])) + "</button>"; }).join("") + '</div><p class="muted" style="font-size:var(--fs-sm);margin:6px 0 0">' + evDesc(ev, isMgr()) + "</p></div>" +
+        (isMgr() ? (ev === 2 && !(typeof presOn === "function" && presOn()) ? jmField({jm: S.set.jm}, "setjm") : "") : jmField({jm: S.set.jm}, "setjm", true)) +
         '<p class="muted" style="margin:0;font-size:var(--fs-sm)">' + (Store.cloud ? tr("Tu partida se guarda sola en tu cuenta y en este dispositivo.") : tr("Tu partida se guarda sola en este dispositivo. Usa el código para pasarla a otro móvil.")) + "</p>" +
         '<button class="btn wide" data-a="home">' + tr("Menú principal") + '</button><button class="btn wide" data-a="export">' + tr("Copiar código de partida") + '</button><button class="btn wide" data-a="import">' + tr("Cargar partida con código") + '</button><button class="btn wide" data-a="hof">' + tr("Salón de la fama") + "</button>" +
         '<button class="btn wide" data-a="privacy">' + tr("Política de privacidad") + "</button>" + (adPrivacyRequired() ? '<button class="btn wide" data-a="adprivacy">' + tr("Opciones de privacidad de anuncios") + "</button>" : "") + '<button class="btn wide" data-a="close">' + tr("Cerrar") + "</button></div>";
@@ -2250,6 +2277,7 @@
   }
   function closeLive(silent) {
     if (LV && LV.timer) clearTimeout(LV.timer);
+    if (UIX.jmMatch) UIX.jmMatch.close(false);
     if (typeof Pitch !== "undefined") Pitch.destroy();
     var el = document.getElementById("live"); if (el) el.remove();
     LV = null;
@@ -2300,6 +2328,18 @@
   function pitchCinema() {
     try { return typeof Pitch !== "undefined" && Pitch.cinema ? !!Pitch.cinema() : false; } catch (e) { return false; }
   }
+  /* el partido se detiene con la ocasión sellada: se avisa en el comentario y se abre el panel */
+  function pauseJM() {
+    if (!LV || !S.live || !S.live.jm || S.live.jm.done) return;
+    LV.run = false;
+    if (!S.live.jm.seen) {
+      S.live.jm.seen = true;
+      S.live.ev.unshift({t: "jm", us: 1, min: S.live.min, k: "shot", big: !!S.live.jm.big,
+        txt: tr("Jugada Maestra en el {club}: el partido se detiene en una ocasión clara.", {club: clubName(S.m.club)})});
+    }
+    if (UIX.jmMatch) UIX.jmMatch.open();
+    liveRender();
+  }
   function liveTick() {
     if (!LV) return;
     if (LV.timer) clearTimeout(LV.timer);
@@ -2310,10 +2350,14 @@
     if (pitchCinema()) wait = Math.min(wait || 420, 420);
     LV.timer = setTimeout(function () {
       if (!LV || !S.live) return;
+      /* una ocasión sellada pendiente (recién creada o recuperada de un guardado) detiene el
+         partido antes de simular: la secuencia se juega, nunca se resuelve sola al mirarla */
+      if (S.live.jm && !S.live.jm.done) { pauseJM(); return; }
       var pb = typeof Pitch !== "undefined" ? Pitch.busy() : 0;
       if (pitchCinema() || pb > 0) { liveRender(); liveTick(); return; }
       var ev = liveStep();
       livePitchFeed(ev);
+      if (S.live && S.live.jm && !S.live.jm.done) pauseJM();
       if (ev.some(function (e) { return e.t === "half"; })) LV.run = false;
       if (ev.some(function (e) { return e.t === "goal" || e.t === "red" || e.t === "inj"; }) && LV.speed > 1) LV.run = LV.speed < 4;
       liveRender();
@@ -2345,6 +2389,11 @@
       '<span class="lwx-name"><b>' + tr("Clima") + "</b> " + h(w.name) + "</span>" +
       '<span class="lwx-fx">' + h(w.effect) + " · " + tr("Fatiga") + " ×" + mul + "</span></div>";
   }
+  /* el desenlace de la Jugada Maestra entra en el campo 3D al cerrar el panel */
+  function liveAfterJM() {
+    var L = S.live;
+    if (L && L.jm && L.jm.evOut) { livePitchFeed(L.jm.evOut); L.jm.evOut = null; }
+  }
   function liveRender() {
     if (!LV || !S.live) return;
     var L = S.live, f = S.cur.pm[L.fi], m = S.m, tot = (L.poss[0] + L.poss[1]) || 1, pu = Math.round(L.poss[0] / tot * 100);
@@ -2370,7 +2419,7 @@
     var st = function (lab, a, b) { return '<div><span>' + lab + '</span><b class="num">' + (f.home ? a + " – " + b : b + " – " + a) + "</b></div>"; };
     s += '<div class="lstats three">' + st(tr("Tiros"), L.shots[0], L.shots[1]) + st(tr("A puerta"), L.on[0], L.on[1]) + st(tr("Ocasiones claras"), (L.big || [0, 0])[0], (L.big || [0, 0])[1]) + "</div>";
     if (UIX.hk && UIX.hk.liveX) s += UIX.hk.liveX(L, f, cu);
-    var ICO = {goal: "⚽", save: "🧤", miss: "💨", post: "🥅", com: "🎙️", yellow: "🟨", red: "🟥", inj: "🚑", sub: "🔁", tac: "📋", half: "⏱️", end: "🏁"};
+    var ICO = {goal: "⚽", save: "🧤", miss: "💨", post: "🥅", jm: "🎯", com: "🎙️", yellow: "🟨", red: "🟥", inj: "🚑", sub: "🔁", tac: "📋", half: "⏱️", end: "🏁"};
     s += '<div class="lbl" style="margin-top:12px">' + tr("Comentarios") + '</div><div class="lfeed">' + L.ev.slice(0, 18).map(function (e) { return '<div class="lev ' + e.t + (e.us === 1 ? " us" : e.us === 0 ? " them" : "") + '"' + (e.us === 1 ? ' style="--tc:' + cu[0] + '"' : e.us === 0 ? ' style="--tc:' + cu[1] + '"' : "") + '><span class="num">' + e.min + "'</span><span class=\"li\">" + (ICO[e.t] || "•") + "</span><span class=\"lt\">" + h(e.txt) + "</span></div>"; }).join("") + "</div>";
     var dyn = s; s = "";
     if (!L.done) {
@@ -2439,6 +2488,7 @@
     if (typeof Pitch === "undefined" || !S.live) return;
     var L = S.live, f = S.cur.pm[L.fi], me = f.home ? 0 : 1;
     ev.forEach(function (e) {
+      if (e.t === "jm") return; /* la pausa de Jugada Maestra no se anima en el campo */
       if (e.us == null && e.t !== "half" && e.t !== "end") return;
       var side = e.us === 1 ? me : e.us === 0 ? 1 - me : 0, who = null;
       if (e.us === 1 && e.pid != null) { who = L.xi.indexOf(e.pid); if (who < 0) who = null; }
@@ -2614,6 +2664,15 @@
     switch (a) {
       case "advance": UI.feedAll = false; doAdvance(); break;
       case "choose": doChoose(+b.getAttribute("data-i")); break;
+      case "jmplay": if (S.pend[0] && S.pend[0].k === "jmm" && UIX.jmMatch) { UIX.jmMatch.open(); } break;
+      case "jmauto":
+        if (S.pend[0] && S.pend[0].k === "jmm") {
+          var jmc = null; try { jmc = jmPlayerAuto(); } catch (err) { console.error(err); }
+          persist();
+          if (jmc) toast(jmc.txt);
+          render(true);
+        }
+        break;
       case "tab": UI.tab = b.getAttribute("data-t"); render(true); break;
       case "more": UI.exp[id] = !UI.exp[id]; render(false); break;
       case "bgm": if (typeof Pitch !== "undefined" && Pitch.musicToggle) Pitch.musicToggle(); render(false); break;
@@ -2622,6 +2681,7 @@
       case "ntfcenter": openNtfCenter(); break;
       case "ntfclear": S.ntfHistory = []; S.ntfUnread = 0; persist(); renderSheet(); break;
       case "setev": S.set.ev = +v; persist(); renderSheet(); break;
+      case "setjm": S.set.jm = +v ? 1 : 0; persist(); renderSheet(); break;
       case "setlang": setLangUI(v); break;
       case "golang": UI.view = "lang"; render(true); break;
       case "privacy": UI.sheet = {k: "privacy"}; renderSheet(); break;
@@ -2723,7 +2783,7 @@
       case "mscout": var mk = S.m.mk; if (mk.open && !mk.ref) { mk.ref = true; mk.list = mk.list.filter(function (t) { return t.done; }).concat(mgrScoutList(12)); persist(); render(false); toast(tr("Nuevo informe de ojeadores")); } break;
       /* creación */
       case "cpos": UI.cr.pos = v; render(false); break;
-      case "cset": var k = b.getAttribute("data-k"); if ((k === "mode" || k === "mmode") && UI.cr[k] !== v) UI.cr.club = -1; UI.cr[k] = (k === "age" || k === "ev" || k === "diff") ? +v : v; render(false); break;
+      case "cset": var k = b.getAttribute("data-k"); if ((k === "mode" || k === "mmode") && UI.cr[k] !== v) UI.cr.club = -1; UI.cr[k] = (k === "age" || k === "ev" || k === "diff" || k === "jm") ? +v : v; render(false); break;
       case "reoffer": UI.cr.offers = null; UI.cr.offKey = null; UI.cr.club = -1; render(false); break;
       case "ccol": if (b.getAttribute("data-k") === "2") UI.cr.kit.col3 = v; else UI.cr.col[+b.getAttribute("data-k")] = v; render(false); break;
       case "ccrest": UI.cr.crest[b.getAttribute("data-k")] = v; render(false); break;
@@ -2778,7 +2838,7 @@
       case "lsubok": if (LV && LV.sel != null && LV.pin != null) { liveSub(LV.sel, LV.pin); LV.sel = LV.pin = null; subDone(); liveRender(); } break;
       case "lsubx": if (LV) { LV.sel = LV.pin = null; subDone(); liveRender(); } break;
       case "ltac": liveSet(b.getAttribute("data-k"), +v); liveRender(); break;
-      case "lsim": liveSimRest(); if (typeof Pitch !== "undefined") Pitch.reset(); liveRender(); if (typeof Pitch !== "undefined") Pitch.event({t: "end", side: 0}); break;
+      case "lsim": if (UIX.jmMatch) UIX.jmMatch.close(false); liveSimRest(); if (typeof Pitch !== "undefined") Pitch.reset(); liveRender(); if (typeof Pitch !== "undefined") Pitch.event({t: "end", side: 0}); break;
       case "lend": liveEnd(); break;
       case "cclub": UI.cr.club = +v; render(false); break;
       case "cback": UI.vback = true; if (UI.cr.step === 0) { UI.view = "modes"; UI.cr = null; render(true); } else { UI.cr.step--; render(true); } break;
@@ -2887,6 +2947,9 @@
   /* helpers para los módulos ui-*.js */
   Object.assign(UIX, {h: h, render: render, persist: persist, store: Store, toast: toast, renderSheet: renderSheet, closeSheet: closeSheet, crest: crest, crestRaw: crestRaw, flag: flag, team: team, pack: function (j) { return pack(j); }, importCode: function (t) { UI.sheet = {k: "import"}; importCode(t); }, b64: function (u) { return b64(u); }, leagueField: function (c) { return leagueField(c); }, miniTable: miniTable, involved: involved, myClub: myClub, myNat: myNat,
     chip: chip, edgeFlash: edgeFlash, confetti: confetti, openLive: function () { openLive(); }, isMgr: isMgr, ui: function () { return UI; }, icon: ICON,
+    liveResume: function () { if (!LV) return; LV.run = true; liveAfterJM(); liveRender(); liveTick(); },
+    playerJMResume: function () { render(true); },
+    liveRefresh: function () { if (LV) { liveAfterJM(); liveRender(); } },
     open: function (k, d) { UI.sheet = Object.assign({k: k}, d || {}); renderSheet(); }, slot: slot, choose: function (i) { doChoose(i); }});
 
   /* ---------- arranque ---------- */
