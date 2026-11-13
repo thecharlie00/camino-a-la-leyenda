@@ -203,6 +203,7 @@ var PetProps = (function () {
       case "brush": g.box(-1, 0, -6, 0, 1, 2, rgb(PAL.wood)); g.box(-2, 0, 3, 1, 1, 7, rgb(PAL.wood2)); for (var bi = -2; bi <= 1; bi++) for (var bk = 3; bk <= 7; bk++) g.set(bi, -1, bk, rgb("#f4f4f0")); piv = [0, 0, 0]; break;
       case "shower": g.box(-1, 0, -1, 0, 8, 0, rgb("#cfd8dc")); g.box(-3, 9, -3, 2, 10, 2, rgb("#b0bcc2")); piv = [0, 10, 0]; break;
       case "leash": g.box(0, 0, 0, 0, 0, 0, rgb("#e2403a")); break;
+      case "foam_finger": vs = VB; g.box(-3, 0, -2, 2, 5, 1, rgb("#f6c83a")); g.box(-1, 5, -2, 0, 15, 1, rgb("#f6c83a")); g.box(-2, 1, 2, -1, 3, 2, rgb("#e2403a")); g.box(0, 1, 2, 1, 3, 2, rgb("#e2403a")); g.box(-2, -2, -2, 1, -1, 1, rgb("#f6c83a")); piv = [0, 6, 0]; break;
       case "cone": vs = VB; g.box(-2, 0, -2, 1, 0, 1, rgb("#ff7a1a")); g.box(-1, 1, -1, 0, 5, 0, function (i, j) { return j === 3 ? rgb(PAL.W) : rgb("#ff7a1a"); }); break;
       case "hurdle": vs = VB; g.box(-6, 0, 0, -6, 6, 0, rgb(PAL.W)); g.box(5, 0, 0, 5, 6, 0, rgb(PAL.W)); g.box(-6, 6, 0, 5, 6, 0, function (i) { return i % 2 ? rgb("#e2403a") : rgb(PAL.W); }); break;
       case "tunnel": vs = VB; g.fill(-5, 0, -9, 4, 9, 8, function (x, y, z) { var r = Math.hypot(x + 0.5, y - 0.5); return r <= 5.2 && r >= 4.2 && y >= 0.5 ? ((Math.floor((z + 20) / 3)) % 2 ? rgb("#3a7ad8") : rgb("#f6c83a")) : null; }); break;

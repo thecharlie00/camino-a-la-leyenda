@@ -83,8 +83,36 @@ function eraNameAt(names, year, fallback) {
 }
 function eraClubExists(name, year) { var h = eraHistory().clubs[name]; return !h || h.founded <= year; }
 function eraClubName(name, year) { var h = eraHistory().clubs[name]; return h ? eraNameAt(h.names, year, name) : name; }
-function eraLeagueExists(id, year) { var h = eraHistory().leagues[id]; return !h || h.since == null || h.since <= year; }
-function eraLeagueName(id, fallback, year) { var h = eraHistory().leagues[id]; return h ? eraNameAt(h.names, year, fallback) : fallback; }
+/* Los dos mundos femeninos reutilizan los identificadores de liga del masculino, así que el
+   historial puede declarar nombres y año de creación propios de las mujeres (women/sinceWomen). */
+function eraWomenWorld() {
+  if (typeof W !== "undefined" && W && (W.wk === "f" || W.wk === "f2")) return true;
+  return !!(typeof S !== "undefined" && S && S.g === "f");
+}
+function eraLeagueNames(entry) { return eraWomenWorld() && entry.women ? entry.women : entry.names; }
+function eraLeagueExists(id, year) {
+  var h = eraHistory().leagues[id];
+  if (!h) return true;
+  var since = eraWomenWorld() && h.sinceWomen != null ? h.sinceWomen : h.since;
+  return since == null || since <= year;
+}
+function eraLeagueName(id, fallback, year) {
+  var h = eraHistory().leagues[id];
+  return h ? eraNameAt(eraLeagueNames(h), year, fallback) : fallback;
+}
+/* Última temporada con campeones reales documentados en el juego. A partir del año siguiente
+   las temporadas se simulan: no hay referencia histórica que comparar ni se presenta como tal. */
+function eraHistoryLastSeason() {
+  var seasons = ERAS_DATA && ERAS_DATA.history && ERAS_DATA.history.seasons || {}, max = 0;
+  Object.keys(seasons).forEach(function (year) { var y = +year; if (y > max && isFinite(y)) max = y; });
+  return max || 2024;
+}
+function eraUndocumentedSeason(year) { return (+year || 0) > eraHistoryLastSeason(); }
+/* Fallo de cobertura explícito para la interfaz: no es un error, es el límite declarado. */
+function eraCoverageNotice(year) {
+  var last = eraHistoryLastSeason();
+  return eraUndocumentedSeason(year) ? {lastSeason: last, year: +year} : null;
+}
 function eraTrophyName(trophy) {
   if (!trophy || !trophy.n || !eraIsActive() || typeof trophy.k !== "string" || trophy.k.indexOf("L:") !== 0) return trophy && trophy.n;
   var seasonYear = parseInt(String(trophy.s || ""), 10);
@@ -429,7 +457,7 @@ function eraStartCareer(mode, year, identity) {
   ERA_CREATE_CONTEXT = {active: true, startYear: year, mode: mode};
   START_YEAR = year;
   try {
-    var common = {fn: identity.firstName || "Alex", ln: identity.lastName || "Leyenda", nat: identity.nat || "ES", ev: identity.ev != null ? +identity.ev : 1, g: "m"};
+    var common = {fn: identity.firstName || "Alex", ln: identity.lastName || "Leyenda", nat: identity.nat || "ES", ev: identity.ev != null ? +identity.ev : 1, jm: identity.jm ? 1 : 0, g: "m"};
     if (mode === "manager") {
       /* el míster elige su club entre todos los que existían ese año: ya no hay uno impuesto */
       var chosenClub = selectedClubName && W.cName[selectedClubName] != null ? W.cName[selectedClubName] : -1;
@@ -468,7 +496,7 @@ function eraStartWithContext(mode, year, identity) {
 function eraStartFromCreateNow(c) {
   var mode = c.kind === "mgr" ? "manager" : "player";
   eraStartWithContext(mode, c.era.year, {firstName: (c.fn || "").trim(), lastName: (c.ln || "").trim(), nat: c.nat, nat2: c.nat2 || null,
-    position: c.pos, foot: c.foot, age: c.age, talent: c.talent, ev: c.ev, diff: c.diff,
+    position: c.pos, foot: c.foot, age: c.age, talent: c.talent, ev: c.ev, jm: c.jm, diff: c.diff,
     clubName: c.club >= 0 && W.clubs[c.club] ? W.clubs[c.club].n : null});
 }
 /* Antes de la ley Bosman: límite de extranjeros alineados en las ligas UEFA. Un extranjero que no es de los mejores de su

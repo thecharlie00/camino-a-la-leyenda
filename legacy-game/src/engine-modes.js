@@ -259,7 +259,7 @@ function clubAbbr(n) { var a = abbr(n || ""); return a || String(n || "").slice(
 /* ---------- carreras nuevas: míster y club propio ---------- */
 function baseMgrState(o) {
   buildWorld(o.g === "f" ? "f2" : "m"); resetCustom();
-  S = {v: 1, rng: (o.seed != null ? o.seed : (Date.now() ^ Math.floor(Math.random() * 1e9))) | 0, set: {ev: o.ev != null ? o.ev : 1},
+  S = {v: 1, rng: (o.seed != null ? o.seed : (Date.now() ^ Math.floor(Math.random() * 1e9))) | 0, set: {ev: o.ev != null ? o.ev : 1, jm: o.jm ? 1 : 0},
     yr: START_YEAR - 1, tw: 0, w: 0, ph: "mjob", bi: 0, pend: [], feed: [], q: {}, cur: null, blog: [], bnews: [], uid: Date.now().toString(36) + Math.floor(Math.random() * 90 + 10),
     mode: "mgr", p: null, kind: o.kind, g: o.g === "f" ? "f" : "m", wk: o.g === "f" ? "f2" : "m"};
   setFem(S.g === "f");
@@ -274,7 +274,7 @@ function newMgrState(o) {
 }
 /* o: {fn, ln, nat, age, diff, ev, club, seed} */
 function newManagerCareer(o) {
-  baseMgrState({seed: o.seed, ev: o.ev, kind: "mgr", g: o.g});
+  baseMgrState({seed: o.seed, ev: o.ev, jm: o.jm, kind: "mgr", g: o.g});
   setupRivals();
   S.m = newMgrState(o);
   mgrJoinClub(o.club, {sal: mgrSalary(o.club)});
@@ -289,7 +289,7 @@ function customRating(li, id, diff) {
 }
 /* o: {fn, ln, nat, age, diff, ev, seed, cn (nombre del club), ab, col: [c1, c2], repl (club al que sustituye)} */
 function newClubCareer(o) {
-  baseMgrState({seed: o.seed, ev: o.ev, kind: "club", g: o.g});
+  baseMgrState({seed: o.seed, ev: o.ev, jm: o.jm, kind: "club", g: o.g});
   var id = o.repl, li = S.cl[id], d = o.diff != null ? o.diff : 1;
   var r = customRating(li, id, d);
   S.custom = {id: id, n: o.cn, ab: o.ab || clubAbbr(o.cn), col: (o.col || ["#c8102e", "#ffffff"]).slice(0, 2), r0: r, crest: o.crest || null, kit: o.kit || null};

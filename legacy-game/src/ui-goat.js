@@ -259,6 +259,36 @@
     });
   }
   function compName(value) { return typeof trComp === "function" ? trComp(value) : value; }
+  /* Leyendas del universo: módulo opcional para que la ficha siga funcionando sin él. */
+  var legends = window.GoatLegends || null;
+  function legendText(key, params) {
+    if (legends && typeof legends.text === "function") return legends.text(key, params);
+    return key === "boardLegends" ? "Leyendas" : key;
+  }
+  function LegendCard(legend, index, metric, career) {
+    var metricName = METRICS[legend.mode].filter(function (item) { return item[0] === metric; })[0];
+    var metricLabel = tr(metricName ? metricName[1] : "careerSeasons");
+    var comparison = legends.compare(career, legend);
+    var cmp;
+    if (comparison.state === "ahead") cmp = legendText("cmpAhead", {value: comparison.careerValue});
+    else if (comparison.state === "equal") cmp = legendText("cmpEqual", {value: comparison.careerValue});
+    else if (comparison.state === "behind") cmp = legendText("cmpBehind", {gap: comparison.gap, value: comparison.legendValue});
+    else if (comparison.state === "other-club") cmp = legendText("cmpOtherClub");
+    else cmp = legendText("cmpNone");
+    var stats = METRICS[legend.mode].map(function (item) {
+      var value = legend.metrics[item[0]];
+      return stat(tr(item[1]), value == null ? "" : (item[0] === "win_percentage" ? value + "%" : value));
+    }).join("");
+    return '<article class="card goat-card legend-card"><div class="head"><span class="tag rand">#' +
+      (index + 1) + " · " + esc(legendText("badge")) + '</span><strong class="goat-score">' +
+      esc(legends.metricValue(legend, metric)) + " " + esc(metricLabel) + '</strong></div><h3>' +
+      (typeof flag === "function" ? flag(legend.nat) + " " : "") + esc(legends.fullName(legend)) +
+      '</h3><p class="goat-meta">' + esc(legendText("clubLine", {club: legend.club, from: legend.from, to: legend.to})) +
+      " · " + esc(legendText("eraLine", {year: legend.era})) + '</p><p class="legend-story">' +
+      esc(legends.story(legend)) + '</p><p class="legend-record"><b>' + esc(legends.recordText(legend)) +
+      '</b></p><div class="goat-stats">' + stats + '</div><p class="legend-compare">' +
+      esc(legendText("yourCareer") + ": " + cmp) + "</p></article>";
+  }
   function stat(label, value) {
     if (value == null || value === "") return "";
     return '<span class="goat-stat"><small>' + esc(label) + '</small><b>' + esc(value) + "</b></span>";
@@ -403,7 +433,9 @@
     var metrics = METRICS[mode];
     return '<div class="seg goat-board"><button data-a="goatboard" data-v="careers" aria-pressed="' +
       (board === "careers") + '">' + esc(tr("boardCareers")) + '</button><button data-a="goatboard" data-v="achievements" aria-pressed="' +
-      (board === "achievements") + '">' + esc(tr("boardAchievements")) + '</button></div>' +
+      (board === "achievements") + '">' + esc(tr("boardAchievements")) + "</button>" +
+      (legends ? '<button data-a="goatboard" data-v="legends" aria-pressed="' +
+        (board === "legends") + '">' + esc(legendText("boardLegends")) + "</button>" : "") + '</div>' +
       '<div class="seg goat-mode"><button data-a="goatmode" data-v="player" aria-pressed="' +
       (mode === "player") + '">' + esc(tr("player")) + '</button><button data-a="goatmode" data-v="manager" aria-pressed="' +
       (mode === "manager") + '">' + esc(tr("manager")) + '</button></div><div class="seg goat-period">' +
@@ -411,15 +443,16 @@
         return '<button data-a="goatperiod" data-v="' + period[0] + '" aria-pressed="' +
           (timeframe === period[0]) + '">' + esc(tr(period[1])) + "</button>";
       }).join("") + '</div><label class="lbl goat-metric">' + esc(tr("careerMetric")) +
-      '<select data-goat-metric' + (board === "careers" ? "" : " disabled") + ">" +
+      '<select data-goat-metric' + (board === "achievements" ? " disabled" : "") + ">" +
       metrics.map(function (item) {
         return '<option value="' + item[0] + '"' + (metric === item[0] ? " selected" : "") +
           ">" + esc(tr(item[1])) + "</option>";
       }).join("") + "</select></label>" +
-      /* El buscador filtra en el dispositivo al confirmar (Enter o al salir del campo). */
-      '<label class="lbl goat-search">' + esc(tr("searchLabel")) +
+      /* El buscador filtra en el dispositivo al confirmar (Enter o al salir del campo).
+         Las leyendas son un catálogo cerrado: no necesitan buscador. */
+      (board === "legends" ? "" : '<label class="lbl goat-search">' + esc(tr("searchLabel")) +
       '<input class="goat-input" type="search" maxlength="40" autocomplete="off" data-goat-q value="' +
-      esc(query || "") + '" placeholder="' + esc(tr("search")) + '"></label>';
+      esc(query || "") + '" placeholder="' + esc(tr("search")) + '"></label>');
   }
   function filterEntries(list, query) {
     var needle = String(query == null ? "" : query).replace(/^\s+|\s+$/g, "").toLowerCase();
@@ -473,6 +506,13 @@
     goatToast(tr("copyFailed") + " " + url);
   }
   function load(sheet) {
+    if (sheet.board === "legends" && legends) {
+      sheet.entries = [];
+      sheet.loading = false;
+      sheet.error = "";
+      window.UIX.renderSheet();
+      return;
+    }
     if (!service.available()) { sheet.loading = false; sheet.entries = []; return; }
     sheet.requestId = (sheet.requestId || 0) + 1;
     var requestId = sheet.requestId;
@@ -498,9 +538,9 @@
       }
     });
   }
-  function open() {
-    var sheet = {k: "goat", board: "careers", mode: "player", timeframe: "all-time",
-      metric: "appearances", entries: [], loading: false, error: ""};
+  function open(board) {
+    var sheet = {k: "goat", board: board === "legends" && legends ? "legends" : "careers",
+      mode: "player", timeframe: "all-time", metric: "appearances", entries: [], loading: false, error: ""};
     window.__goatSheet = sheet;
     window.UIX.setSheet(sheet);
     load(sheet);
@@ -635,27 +675,40 @@
   });
   window.UIX.hk.retGoat = function () {
     var career = service.career();
-    return career ? '<button class="btn wide" data-a="goatcareeropen">' +
-      esc(tr("publishCareer")) + "</button>" : "";
+    if (!career) return "";
+    var hook = "";
+    if (legends && typeof legends.closest === "function") {
+      var near = legends.closest(career);
+      if (near) hook = '<p class="goat-meta legend-hook">' + esc(legendText("careerLegacy", {
+        name: legends.fullName(near.legend), record: legends.recordText(near.legend)
+      })) + "</p>";
+    }
+    return hook + '<button class="btn wide" data-a="goatcareeropen">' + esc(tr("publishCareer")) +
+      '</button><button class="btn wide" data-a="goatlegends">' + esc(legendText("openLegends")) + "</button>";
   };
   window.UIX.actions.goat = open;
   window.UIX.actions.goatcareerpublish = function (button) { submitCareer(button); };
   window.UIX.actions.goatcareeropen = function () { openCareerPublish(); };
+  window.UIX.actions.goatlegends = function () { open("legends"); };
   window.UIX.sheets.goatCareerPublish = careerPublishSheet;
   window.UIX.actions.goatmode = function (button, mode) {
     var sheet = window.UIX.getSheet(), wanted = mode === "manager" ? "manager" : "player";
     if (!sheet || sheet.k !== "goat" || sheet.mode === wanted) return;
     sheet.mode = wanted;
-    if (sheet.board === "careers") sheet.metric = METRICS[sheet.mode][0][0];
+    var validMetric = METRICS[sheet.mode].some(function (item) { return item[0] === sheet.metric; });
+    if (sheet.board !== "achievements" && !validMetric) sheet.metric = METRICS[sheet.mode][0][0];
     /* las filas del modo anterior no valen: se vacían antes de pedir las nuevas */
     sheet.entries = [];
     load(sheet);
   };
   window.UIX.actions.goatboard = function (button, board) {
-    var sheet = window.UIX.getSheet(), wanted = board === "achievements" ? "achievements" : "careers";
+    var wanted = board === "legends" && legends ? "legends"
+      : board === "achievements" ? "achievements" : "careers";
+    var sheet = window.UIX.getSheet();
     if (!sheet || sheet.k !== "goat" || sheet.board === wanted) return;
     sheet.board = wanted;
     sheet.entries = [];
+    if (wanted !== "achievements") sheet.metric = METRICS[sheet.mode][0][0];
     load(sheet);
   };
   window.UIX.actions.goatperiod = function (button, timeframe) {
@@ -727,7 +780,7 @@
     var select = field;
     if (!select.matches("[data-goat-metric]")) return;
     var sheet = window.UIX.getSheet();
-    if (!sheet || sheet.k !== "goat" || sheet.board !== "careers") return;
+    if (!sheet || sheet.k !== "goat" || sheet.board === "achievements") return;
     var allowed = METRICS[sheet.mode].map(function (item) { return item[0]; });
     sheet.metric = allowed.indexOf(select.value) >= 0 ? select.value : METRICS[sheet.mode][0][0];
     load(sheet);
@@ -743,13 +796,21 @@
   });
   window.UIX.sheets.goat = function (sheet) {
     var latest = service.latest(), title = latest ? latest.title : "";
+    var legendIntro = sheet.board === "legends" && legends
+      ? '<p class="muted">' + esc(legendText("legendsIntro")) + '</p><p class="goat-unverified">' +
+        esc(legendText("fictional")) + "</p>"
+      : "";
     var shown = filterEntries(sheet.entries, sheet.q);
     var refreshing = sheet.loading && sheet.entries.length
       ? '<p class="muted goat-refreshing">' + esc(tr("refreshing")) + "</p>" : "";
     var counted = sheet.q && sheet.entries.length
       ? '<p class="muted goat-counted">' + esc(tr("counted", {n: shown.length, total: sheet.entries.length})) +
         '</p><button class="btn wide" data-a="goatclearq">' + esc(tr("clearSearch")) + "</button>" : "";
-    var list = !service.available() ? "" :
+    var list = sheet.board === "legends" && legends
+      ? legends.sorted(sheet.mode, sheet.metric).map(function (legend, index) {
+        return LegendCard(legend, index, sheet.metric, service.career ? service.career() : null);
+      }).join("")
+      : !service.available() ? "" :
       sheet.loading && !sheet.entries.length ? '<p class="muted">' + esc(tr("loading")) + "</p>" :
       sheet.error ? '<p class="goat-error" role="alert">' + esc(sheet.error) +
         '</p><button class="btn wide" data-a="goatrefresh">' + esc(tr("retry")) + "</button>" :
@@ -787,8 +848,8 @@
     if (!sheet.q) sheet.q = "";
     if (!sheet.alias && !sheet.aliasTouched) sheet.alias = rememberedAlias();
     return '<h2>🏆 ' + esc(tr("home")) + '</h2><p class="muted">' + esc(tr("login")) + "</p>" +
-      GoatFilterTabs(sheet.board, sheet.mode, sheet.timeframe, sheet.metric, sheet.q) +
-      (sheet.board === "careers" ? careerPublishCard() : publish) +
+      GoatFilterTabs(sheet.board, sheet.mode, sheet.timeframe, sheet.metric, sheet.q) + legendIntro +
+      (sheet.board === "careers" ? careerPublishCard() : sheet.board === "achievements" ? publish : "") +
       '<div class="stack goat-list">' + list + "</div>" +
         (window.GOAT_WEB_BUILD ? '<a class="btn wide" href="../goat-ladder/" target="_top">🌐 ' +
           esc(tr("webBoard")) + "</a>" : "") +

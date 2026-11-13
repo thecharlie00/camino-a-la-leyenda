@@ -31,7 +31,7 @@ var PetAudio = (function () {
     s.connect(f); f.connect(g); g.connect(out); env(g, t, 0.01, peak, dur); s.start(t, Math.random() * 0.5); s.stop(t + dur + 0.05);
   }
   /* voces: [forma, tono base, caída, duración, filtro] según la especie y la etapa (las crías, más agudas) */
-  var VOICE = {dog: ["sawtooth", 520, 0.62, 0.13, 1400], cat: ["triangle", 640, 1.35, 0.32, 2400], rabbit: ["sine", 1500, 1.2, 0.06, 0], hamster: ["square", 2200, 1.3, 0.05, 3200],
+  var VOICE = {dog: ["sawtooth", 520, 0.62, 0.13, 1400], cat: ["triangle", 640, 1.35, 0.32, 2400], rabbit: ["sine", 1500, 1.2, 0.06, 0], guinea: ["sine", 980, 1.1, 0.08, 0], ferret: ["triangle", 760, 1.1, 0.1, 1800], rescuecat: ["triangle", 610, 1.3, 0.3, 2200], budgie: ["triangle", 1800, 1.3, 0.09, 2600], hamster: ["square", 2200, 1.3, 0.05, 3200],
     hedgehog: ["triangle", 1300, 0.9, 0.07, 2200], fennec: ["sawtooth", 900, 1.4, 0.12, 2200], capybara: ["sine", 260, 0.9, 0.18, 800], macaw: ["square", 1100, 1.5, 0.12, 2600],
     iguana: ["noise", 900, 1, 0.2, 0], python: ["noise", 3200, 1, 0.45, 0], turtle: ["sine", 330, 0.9, 0.08, 0], fish: ["sine", 900, 1.6, 0.05, 0], tarantula: ["noise", 5000, 1, 0.08, 0]};
   var api = {};

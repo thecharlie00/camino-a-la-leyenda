@@ -1,0 +1,20 @@
+{
+  "measured": "2026-10-27",
+  "pacing": "5 bloques por temporada, 4 huecos, 2–3 decisiones por hueco, dificultad normal, sesgo de novedad 2,6× para familias nunca vistas",
+  "families": {
+    "player": 36,
+    "manager": 36,
+    "club": 36
+  },
+  "eligible": {
+    "player": 36,
+    "manager": 34,
+    "club": 34
+  },
+  "exposedInTwoSeasons": {
+    "player": 22,
+    "manager": 21,
+    "club": 21
+  },
+  "minimumExposure": 21
+}

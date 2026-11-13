@@ -558,18 +558,29 @@ function liveAdvance(L, adv) { L.bx = clamp(L.bx + (L.own === 0 ? adv : -adv), 4
 function liveShotX(us, d) { return us === 1 ? 100 - d * 100 / 105 : d * 100 / 105; }
 function liveShotKind(d) { return d <= 13 ? "oneone" : d >= 18 ? "long" : "volley"; }
 function liveRestart(L, own, bx) { L.own = own; L.bx = clamp(bx, 4, 96); L.phase = "build"; L.seq++; }
-/* un tiro: el origen ya lo ha fijado liveStep con la distancia real del balón */
+/* un tiro: el origen ya lo ha fijado liveStep con la distancia real del balón.
+   La resolución se separa del sorteo para que la Jugada Maestra optativa pueda reutilizar
+   exactamente el mismo alta de estadísticas, comentario y reanudación. */
 function liveShot(L, out, us, big, d, sh, tp, hs) {
   var idx = us === 1 ? 0 : 1;
   L.shots[idx]++;
   if (big) L.big[idx]++;
-  var xn = us === 0 ? liveOppPick(L, true) : null, ox = L._ox;
-  var sn = us === 1 ? (sh ? plShort(sh) : clubName(S.m.club)) : xn;
+  /* el rival que chuta se elige antes del xG, como siempre: mismo consumo de azar */
+  var pre = us === 0 ? liveOppPick(L, true) : null;
   var xs = typeof mxShotXG === "function" ? mxShotXG(L, us, sh, big, d) : {xg: big ? 0.36 : 0.12, d: d, y: 0, zn: 0};
   if (xs.d == null) xs.d = d;
   var x = R(), mk = typeof mxMissKind === "function" ? mxMissKind(x, xs.xg) : null;
   var res = x < xs.xg ? "goal" : mk || (x < 0.55 ? "save" : x < 0.62 ? "post" : "miss");
-  var e = {t: res, us: us, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, k: liveShotKind(d), big: !!big};
+  return liveShotResolve(L, out, us, big, d, sh, xs, res, pre, tp, hs);
+}
+/* res: goal | save | post | miss (motor) | block | lost (Jugada Maestra) */
+function liveShotResolve(L, out, us, big, d, sh, xs, res, pre, tp, hs) {
+  var idx = us === 1 ? 0 : 1;
+  var xn = us === 0 ? (pre != null ? pre : liveOppPick(L, true)) : null, ox = L._ox;
+  var sn = us === 1 ? (sh ? plShort(sh) : clubName(S.m.club)) : xn;
+  if (xs.d == null) xs.d = d;
+  var e = {t: res === "block" || res === "lost" ? "miss" : res, us: us, xg: xs.xg, zn: xs.zn, d: xs.d, ly: xs.y, k: liveShotKind(d), big: !!big};
+  if (res === "block" || res === "lost") e.jmk = res;
   if (us === 0) e.ox = ox;
   /* los tiros lejanos siempre llevan asistencia para que el texto no diga que se asiste a sí mismo */
   var as = us === 1 && (d >= 18 || !chance(0.25)) ? liveAssist(L, sh && sh.id) : "";
@@ -589,6 +600,15 @@ function liveShot(L, out, us, big, d, sh, tp, hs) {
     /* tras el gol saca de centro el equipo que lo encajó */
     L.bx = 50; L.own = us === 1 ? 1 : 0; L.phase = "kickoff";
     L.mo = clamp(L.mo + (us === 1 ? 10 : -10), 18, 82);
+  } else if (res === "block" || res === "lost") {
+    /* La Jugada Maestra no regala ni esconde nada: el tiro ya estaba en el modelo,
+       así que cuenta como tiro y el balón sigue su curso con el rival. */
+    e.txt = pref + (res === "block"
+      ? tr("La defensa despeja el balón y el {opp} recupera.", {opp: clubName(S.cur.pm[L.fi].opp)})
+      : tr("Pérdida: el {opp} corta la jugada y sale con el balón.", {opp: clubName(S.cur.pm[L.fi].opp)}));
+    L.ch.push({us: us, min: L.min, k: big ? "big" : "shot"});
+    liveRestart(L, 1, res === "block" ? 60 : 55);
+    L.mo = clamp(L.mo + (res === "block" ? -2 : -4), 18, 82);
   } else {
     if (res === "save") { L.on[idx]++; e.txt = pref + liveSay(us === 1 ? LIVE_COM.saveUs : LIVE_COM.saveThem, us === 1 ? tp({s: sn}) : tp({x: sn})); }
     else if (res === "post") { e.txt = liveSay(us === 1 ? LIVE_COM.postUs : LIVE_COM.postThem, us === 1 ? tp({s: sn}) : tp({x: sn})); }
@@ -604,10 +624,99 @@ function liveShot(L, out, us, big, d, sh, tp, hs) {
   L.seq++;
   return e;
 }
+/* ============ Jugada Maestra dentro del partido (optativa) ============
+   Con S.set.jm activo, una o dos ocasiones claras del equipo se resuelven con la
+   secuencia de Jugada Maestra en lugar de con una tirada. El tiro ya estaba decidido
+   por el modelo: la secuencia no añade ocasiones, ni dinero, ni atributos; solo
+   reparte ese mismo tiro entre gol, parada, despeje o pérdida. La semilla se sella
+   al aparecer la ocasión y se resuelve una sola vez (nunca se reintenta). */
+var JMLIVE = {cap: 2, min: 8, max: 88, xg: 0.1};
+function jmLiveOn() { return !!(S && S.set && S.set.jm && S.mode === "mgr"); }
+function jmLiveSeed(L) {
+  var str = [S.yr || "", S.tw || 0, S.uid || "", L.fi, L.min, (L.jmN || 0), "jm"].join("|"), h0 = 2166136261;
+  for (var i = 0; i < str.length; i++) h0 = Math.imul(h0 ^ str.charCodeAt(i), 16777619);
+  return h0 >>> 0;
+}
+function jmLiveRoll(seed, salt) {
+  var x = (seed ^ Math.imul(salt | 0, 2654435761)) >>> 0;
+  x = Math.imul(x ^ (x >>> 15), 2246822507); x = Math.imul(x ^ (x >>> 13), 3266489909);
+  return ((x ^ (x >>> 16)) >>> 0) / 4294967296;
+}
+/* ¿este tiro puede jugarse? Devuelve la ocasión sellada o null. No consume azar. */
+function jmLiveStart(L, us, big, d, sh) {
+  if (!jmLiveOn() || us !== 1 || !L || L.done) return null;
+  if (typeof JugadaMaestra === "undefined" || !JugadaMaestra.moment) return null;
+  if ((L.jmN || 0) >= JMLIVE.cap || L.min < JMLIVE.min || L.min > JMLIVE.max) return null;
+  var xs = typeof mxShotXG === "function" ? mxShotXG(L, us, sh, big, d) : {xg: big ? 0.36 : 0.12, d: d, y: 0, zn: 0};
+  if (!(xs.xg >= JMLIVE.xg)) return null;
+  var seed = jmLiveSeed(L), st = JugadaMaestra.moment(seed, {xg: xs.xg});
+  if (!st) return null;
+  if (xs.d == null) xs.d = d;
+  L.shots[0]++;
+  if (big) L.big[0]++;
+  L.jm = {seed: seed, xg: xs.xg, xs: xs, big: !!big, d: d, sh: sh || null, min: L.min, done: false, res: null, st: st, y0: L.min};
+  L.jmN = (L.jmN || 0) + 1;
+  return L.jm;
+}
+function jmLiveTp(L) {
+  var f = S.cur.pm[L.fi], club = clubName(S.m.club), opp = clubName(f.opp);
+  return function (o) {
+    var x = Object.assign({club: club, opp: opp, k: liveMyGK(L)}, o || {});
+    x.g1 = f.home ? L.gu : L.gt; x.g2 = f.home ? L.gt : L.gu;
+    return x;
+  };
+}
+function jmLiveHs(L) { var f = S.cur.pm[L.fi]; return f.home ? [L.gu, L.gt] : [L.gt, L.gu]; }
+/* aplica el desenlace al partido con el mismo alta que un tiro normal */
+function jmLiveApply(L, res) {
+  var jm = L.jm;
+  if (!jm || jm.done) return null;
+  jm.done = true; jm.res = res; jm.at = L.min;
+  /* el tablero queda cerrado con su desenlace: se puede volver a mirar, nunca a jugar */
+  if (jm.st) { jm.st.done = true; jm.st.won = res === "goal"; if (res === "goal") jm.st.ball = [95, 50]; }
+  var out = [];
+  liveShotResolve(L, out, 1, !!jm.big, jm.d, jm.sh, jm.xs, res, null, jmLiveTp(L), function () { return jmLiveHs(L); });
+  out.forEach(function (x) { if (x.min == null) x.min = L.min; });
+  L.ev = out.filter(function (x) { return x.t !== "pass" && x.t !== "tackle"; }).reverse().concat(L.ev).slice(0, 80);
+  jm.evOut = out.slice();   /* la interfaz los manda al campo 3D al volver del panel */
+  return jm;
+}
+/* la secuencia se abandona: la resuelve el equipo con el mismo xG, sin repetirla */
+function jmLiveAuto() {
+  var L = S && S.live;
+  if (!L || !L.jm || L.jm.done) return null;
+  if (typeof JugadaMaestra === "undefined") return null;
+  var out = JugadaMaestra.momentAuto(L.jm.seed, L.jm.xg);
+  return jmLiveApply(L, out === "goal" ? "goal" : out === "save" ? "save" : out === "post" ? "post" : "miss");
+}
+/* trazo del usuario: se resuelve en el acto y, si la jugada termina, pasa al partido */
+function jmLiveResolve(x, y) {
+  var L = S && S.live;
+  if (!L || !L.jm || L.jm.done || typeof JugadaMaestra === "undefined") return null;
+  var r = JugadaMaestra.resolve(L.jm.st, x, y);
+  if (!r || !r.ok) return {ok: false, pending: false, msg: (r && r.msg) || "", res: r};
+  if (!L.jm.st.done) return {ok: true, pending: true, msg: r.msg, res: r};
+  var st = L.jm.st, last = st.log[st.log.length - 1], res;
+  if (st.won) res = "goal";
+  else if (last && last.k === "shot") {
+    if (last.lane != null && last.lane < 9) res = "block";
+    else { var roll = jmLiveRoll(L.jm.seed, 7); res = roll < 0.62 ? "save" : roll < 0.8 ? "post" : "miss"; }
+  } else res = "lost";
+  jmLiveApply(L, res);
+  return {ok: true, pending: false, msg: r.msg, outcome: res, res: r};
+}
+function jmLiveState() {
+  var L = S && S.live;
+  return L && L.jm ? L.jm : null;
+}
 /* un minuto: devuelve los acontecimientos para el comentario */
 function liveStep() {
-  var L = S.live, f = S.cur.pm[L.fi];
+  var L = S.live;
   if (!L || L.done) return [];
+  /* una ocasión de Jugada Maestra pendiente nunca bloquea la simulación: si no se está
+     jugando (simular, cargar, salir), se resuelve sola una única vez. */
+  if (L.jm && !L.jm.done) jmLiveAuto();
+  var f = S.cur.pm[L.fi];
   L.min++;
   if (L.mo == null) { L.mo = 50; L.bx = 50; L.big = [0, 0]; L.gl = []; L.ch = []; L.oxi = liveOppXI(f.opp); }
   if (L.phase == null) L.phase = "build";
@@ -680,7 +789,10 @@ function liveStep() {
       d = Math.round(d * 10) / 10;
       /* el origen del tiro sale de la posición física actual: nunca desde nuestro campo */
       L.bx = liveShotX(us, d);
-      liveShot(L, out, us, big, d, sh, tp, hs);
+      var jm = jmLiveStart(L, us, big, d, sh);
+      /* la ocasión queda en pausa: solo la interfaz del partido anuncia el parón y abre la
+         secuencia. Un partido simulado resuelve la ocasión sin narrar una pausa que no existe. */
+      if (!jm) liveShot(L, out, us, big, d, sh, tp, hs);
     }
   }
   if (!shot && chance(0.025)) {
@@ -783,6 +895,7 @@ function liveSimRest() { var g = 0; while (S.live && !S.live.done && g++ < 200) 
 /* pasar el resultado al partido real */
 function liveFinish() {
   var L = S.live; if (!L) return;
+  if (L.jm && !L.jm.done) jmLiveAuto();
   if (!L.done) liveSimRest();
   var f = S.cur.pm[L.fi];
   f.gu = L.gu; f.gt = L.gt; f.gmu = L.gmu.map(function (x) { return Math.min(90, x); }); f.gmt = L.gmt.map(function (x) { return Math.min(90, x); });

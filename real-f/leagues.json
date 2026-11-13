@@ -19,24 +19,24 @@
   ]
  },
  "ESP2": {
-  "league": "Primera Federación femenina",
+  "league": "Primera Federación Fútbol Femenino",
   "top": 66,
   "bot": 54,
   "clubs": [
-   "FC Barcelona B",
+   "Alhama CF",
+   "Athletic Club \"B\"",
+   "Cacereño Femenino",
+   "CD Alba Femenino",
+   "CD Filial de Fundación Club Atlético Osasuna",
+   "CD Tenerife Femenino \"B\"",
+   "Club Atlético de Madrid \"B\"",
+   "FC Barcelona \"B\"",
    "Levante UD",
-   "Real Madrid B",
-   "Alhama",
-   "Villarreal CF",
-   "Atlético de Madrid B",
-   "CD Tenerife B",
-   "CA Osasuna",
-   "Athletic Club B",
-   "Real Sociedad B",
-   "Albacete BP",
-   "CP Cacereño",
-   "Real Unión Tenerife",
-   "Sport Extremadura"
+   "Real Madrid CF \"B\"",
+   "Real Sociedad de Fútbol \"B\"",
+   "Real Unión de Tenerife Santa Cruz",
+   "Sportextremadura CD",
+   "Villarreal CF"
   ]
  },
  "GER2": {

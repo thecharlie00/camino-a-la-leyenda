@@ -1,0 +1,421 @@
+{
+  "AZ1": {
+    "season": "2025/26",
+    "source": {
+      "organization": "Association of Football Federations of Azerbaijan (AFFA)",
+      "title": "The draw for the new season in Top Girls League has been made (photos)",
+      "published": "2025-10-03",
+      "url": "https://www.affa.az/index.php/news/the-draw-for-the-new-season-in-top-girls-league-has-been-made-photos/79122"
+    },
+    "coverage": [
+      "The source states that 12 teams participate in the 2025/26 AFFA Top Girls League.",
+      "The source states a two-round, home-and-away round-robin format and gives the opening-round draw."
+    ],
+    "participants": [
+      "Gabala",
+      "Araz-Nakhchivan",
+      "Sabah",
+      "Shafa",
+      "Baku Juniors",
+      "Zagatala",
+      "Sumgayit",
+      "Tehsil",
+      "Dirchelish",
+      "Liman",
+      "Neftchi",
+      "Umid (Ganja)"
+    ],
+    "limitations": [
+      "This is opening-season participant and format evidence, not a final standings table or a source for club-strength ordering.",
+      "The game's team-strength values are simulation estimates, not ratings published by AFFA.",
+      "This record applies only to the 2025/26 season; it does not assign a season to the game's broader league pool, provide a modern roster update, or constitute an Era historical snapshot."
+    ]
+  },
+  "ESP1": {
+    "source": {
+      "organization": "Real Federación Española de Fútbol (RFEF)",
+      "title": "TEMPORADA 2025/2026 CIRCULAR N.º 38 — Normas Reguladoras y Bases de Competición del Campeonato Nacional de Liga de Primera División de Fútbol Femenino",
+      "published": "2025-11-20",
+      "url": "https://rfef.es/sites/default/files/pdf/circulares/Circular_38___Anexos.pdf"
+    },
+    "coverage": [
+      "Official competition denomination and one-group, 16-club format for 2025/26.",
+      "The regulations distinguish the national women’s league from Copa de la Reina and Supercopa de España Femenina."
+    ],
+    "limitations": [
+      "This record supports Spanish competition names and format only; it does not validate the clubs currently stored in the game or assign a season to that game data.",
+      "It is a 2025/26 modern competition source, not an Era historical snapshot."
+    ]
+  },
+  "ESP2": {
+    "season": "2026/27",
+    "source": {
+      "organization": "Real Federación Española de Fútbol (RFEF)",
+      "title": "Primera Federación Fútbol Femenino 2026/2027 — official calendar",
+      "published": "2026-06",
+      "url": "https://rfef.es/sites/default/files/2026-06/Calendario_Primera_Federacion_Futbol_Femenino.pdf"
+    },
+    "coverage": [
+      "The official 2026/27 calendar lists 14 teams and publishes the fixture schedule.",
+      "Participant names below are transcribed from the official calendar; ordering is alphabetical for auditability, not a sporting ranking."
+    ],
+    "participants": [
+      "Alhama CF",
+      "Athletic Club \"B\"",
+      "Cacereño Femenino",
+      "CD Alba Femenino",
+      "CD Filial de Fundación Club Atlético Osasuna",
+      "CD Tenerife Femenino \"B\"",
+      "Club Atlético de Madrid \"B\"",
+      "FC Barcelona \"B\"",
+      "Levante UD",
+      "Real Madrid CF \"B\"",
+      "Real Sociedad de Fútbol \"B\"",
+      "Real Unión de Tenerife Santa Cruz",
+      "Sportextremadura CD",
+      "Villarreal CF"
+    ],
+    "previousSeasonEvidence": {
+      "season": "2025/26",
+      "title": "Primera Federación Fútbol Femenino 2025/2026 — official calendar",
+      "url": "https://rfef.es/sites/default/files/2025-07/Primera_Federacion_Futbol_Femenino.pdf",
+      "note": "This earlier calendar is retained as provenance only; its 14 participants differ from 2026/27."
+    },
+    "limitations": [
+      "This record establishes the named competition and 2026/27 calendar participants only; it does not establish standings, club strength, ratings, or rules beyond what is published in the calendar.",
+      "The official spellings differ from the game's short display names; the shipped ESP2 participant pool matches, but team-strength values remain simulation estimates.",
+      "The game simulates direct promotion for the champion and a play-off among positions 2–5, but has no source-validated lower-tier route yet; relegation is intentionally disabled rather than dropping clubs into an invented division.",
+      "This is a modern competition source, not an Era historical snapshot.",
+      "Promotion and relegation are season-specific: the 2026/27 rules include a transition to a redesigned 2027/28 pyramid, which this game does not model as a season-by-season historical structure."
+    ],
+    "formatSource": {
+      "organization": "Real Federación Española de Fútbol (RFEF)",
+      "title": "Circular n.º 93 — Primera Federación de Fútbol Femenino, rules for 2026/27",
+      "published": "2026-06-30",
+      "url": "https://rfef.es/sites/default/files/pdf/circulares/2._Circular_93_-_CNL_Primera_Federacion_FF___Anexo.pdf",
+      "coverage": [
+        "Official competition name and 14-club, single-group format for 2026/27.",
+        "The regular season has 26 double round-robin matchdays.",
+        "The league winner earns direct promotion; positions 2–5 play two knockout rounds for a second promotion place.",
+        "The team finishing 14th is relegated to Segunda Federación."
+      ]
+    }
+  },
+  "SWE2": {
+    "season": "2026",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026 Elitettan",
+      "url": "https://en.wikipedia.org/wiki/2026_Elitettan",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article lists the fourteen clubs of the 2026 Elitettan with their home grounds."
+    ],
+    "participants": [
+      "Alingsås IF",
+      "IF Elfsborg",
+      "Enskede IK",
+      "Gamla Upsala SK",
+      "IFK Göteborg",
+      "BK Häcken II",
+      "Husqvarna FF",
+      "Jitex BK",
+      "Linköping FC",
+      "KIF Örebro",
+      "Örebro SK",
+      "Sandvikens IF",
+      "Trelleborgs FF",
+      "Umeå IK"
+    ],
+    "gameParticipants": [
+      "Alingsås IF",
+      "IF Elfsborg",
+      "Enskede IK",
+      "Gamla Upsala SK",
+      "IFK Göteborg",
+      "BK Häcken II",
+      "Husqvarna FF",
+      "Jitex BK",
+      "Linköping FC",
+      "KIF Örebro",
+      "Örebro SK",
+      "Sandvikens IF",
+      "Trelleborgs FF",
+      "Umeå IK"
+    ],
+    "limitations": [
+      "The season article is a secondary source, not a Swedish FA document.",
+      "It records the 2026 participant list only; the game's club-strength values remain simulation estimates.",
+      "Sweden plays a calendar-year season, so this is the 2026 edition and not a 2026/27 edition.",
+      "It is a modern competition record, not an Era historical snapshot."
+    ]
+  },
+  "AUT2": {
+    "season": null,
+    "status": "curated-pool",
+    "source": {
+      "organization": "Pool curado para el juego",
+      "title": "2. Liga femenina austriaca",
+      "url": "https://www.oefb.at/",
+      "retrieved": "2026-10-27"
+    },
+    "basis": "Pool de clubes femeninos austríacos que compiten por debajo de la primera división (Carintia, Salzburgo, Alta Austria, Viena, Vorarlberg, Tirol).",
+    "coverage": [
+      "No se ha verificado una plantilla oficial de la temporada 2026/27 para esta competición."
+    ],
+    "limitations": [
+      "This is not a verified 2026/27 roster: the pool is a curated name list used to build a simulated second tier.",
+      "No official participant list was checked, so club membership must not be read as a factual season snapshot.",
+      "The game's club-strength values are simulation estimates, not ratings published by any federation.",
+      "It is a modern competition record, not an Era historical snapshot."
+    ]
+  },
+  "SUI2": {
+    "season": null,
+    "status": "curated-pool",
+    "source": {
+      "organization": "Pool curado para el juego",
+      "title": "Women's Challenge League",
+      "url": "https://www.football.ch/",
+      "retrieved": "2026-10-27"
+    },
+    "basis": "Equipos filiales identificados con el sufijo II de los clubes que ya existen en la primera división femenina suiza del juego; el segundo nivel suizo se organiza por regiones y admite filiales.",
+    "coverage": [
+      "No se ha verificado una plantilla oficial de la temporada 2026/27 para esta competición."
+    ],
+    "limitations": [
+      "This is not a verified 2026/27 roster: the pool is a curated name list used to build a simulated second tier.",
+      "No official participant list was checked, so club membership must not be read as a factual season snapshot.",
+      "The game's club-strength values are simulation estimates, not ratings published by any federation.",
+      "It is a modern competition record, not an Era historical snapshot."
+    ]
+  },
+  "DEN2": {
+    "season": null,
+    "status": "curated-pool",
+    "source": {
+      "organization": "Pool curado para el juego",
+      "title": "Kvinde 1. division",
+      "url": "https://www.dbu.dk/",
+      "retrieved": "2026-10-27"
+    },
+    "basis": "Pool de clubes daneses de fútbol femenino fuera de la primera división del juego (Copenhague, Jutlandia, Fionia).",
+    "coverage": [
+      "No se ha verificado una plantilla oficial de la temporada 2026/27 para esta competición."
+    ],
+    "limitations": [
+      "This is not a verified 2026/27 roster: the pool is a curated name list used to build a simulated second tier.",
+      "No official participant list was checked, so club membership must not be read as a factual season snapshot.",
+      "The game's club-strength values are simulation estimates, not ratings published by any federation.",
+      "It is a modern competition record, not an Era historical snapshot."
+    ]
+  },
+  "NOR2": {
+    "season": null,
+    "status": "curated-pool",
+    "source": {
+      "organization": "Pool curado para el juego",
+      "title": "1. divisjon femenina noruega",
+      "url": "https://www.fotball.no/",
+      "retrieved": "2026-10-27"
+    },
+    "basis": "Pool de clubes noruegos de fútbol femenino fuera de la primera división del juego (Rogaland, Hordaland, Trøndelag, Agder).",
+    "coverage": [
+      "No se ha verificado una plantilla oficial de la temporada 2026/27 para esta competición."
+    ],
+    "limitations": [
+      "This is not a verified 2026/27 roster: the pool is a curated name list used to build a simulated second tier.",
+      "No official participant list was checked, so club membership must not be read as a factual season snapshot.",
+      "The game's club-strength values are simulation estimates, not ratings published by any federation.",
+      "It is a modern competition record, not an Era historical snapshot."
+    ]
+  },
+  "CZE2": {
+    "season": null,
+    "status": "curated-pool",
+    "source": {
+      "organization": "Pool curado para el juego",
+      "title": "2. liga femenina checa",
+      "url": "https://www.fotbal.cz/",
+      "retrieved": "2026-10-27"
+    },
+    "basis": "Equipos filiales identificados con el sufijo II de los clubes que ya existen en la primera división femenina checa del juego.",
+    "coverage": [
+      "No se ha verificado una plantilla oficial de la temporada 2026/27 para esta competición."
+    ],
+    "limitations": [
+      "This is not a verified 2026/27 roster: the pool is a curated name list used to build a simulated second tier.",
+      "No official participant list was checked, so club membership must not be read as a factual season snapshot.",
+      "The game's club-strength values are simulation estimates, not ratings published by any federation.",
+      "It is a modern competition record, not an Era historical snapshot."
+    ]
+  },
+  "FI1": {
+    "season": "2026",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "Kansallinen Liiga — Teams 2026",
+      "url": "https://en.wikipedia.org/wiki/Kansallinen_Liiga",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The league article publishes a 2026 teams table with eight clubs and their head coaches, citing the official league site and the Finnish FA results service.",
+      "The competition was renamed Kansallinen Liiga in 2020; the article documents the previous names."
+    ],
+    "participants": [
+      "HJK",
+      "KuPS",
+      "HPS",
+      "Åland United",
+      "PK-35 Vantaa",
+      "Ilves",
+      "IF Gnistan",
+      "Vasa IFK"
+    ],
+    "gameParticipants": [
+      "HJK",
+      "KuPS",
+      "HPS",
+      "Åland United",
+      "PK-35 Vantaa",
+      "Ilves",
+      "IF Gnistan",
+      "Vasa IFK"
+    ],
+    "limitations": [
+      "The source is a secondary, collaboratively edited page, not a federation document.",
+      "It records the participant list of one season only; the game's club-strength values remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "The game lists clubs in estimated strength order, not in the source order; the pool order is a simulation choice."
+    ]
+  },
+  "IS1": {
+    "season": "2026",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors (Icelandic Wikipedia)",
+      "title": "Besta deild kvenna í knattspyrnu 2026",
+      "url": "https://is.wikipedia.org/wiki/Besta_deild_kvenna_%C3%AD_knattspyrnu_2026",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The Icelandic Wikipedia season article lists the ten clubs of the 2026 Besta deild kvenna with their grounds.",
+      "It also states each club's 2025 finishing position."
+    ],
+    "participants": [
+      "Breiðablik",
+      "FH",
+      "Fram",
+      "Grindavík/Njarðvík",
+      "ÍBV",
+      "Stjarnan",
+      "Valur",
+      "Víkingur Reykjavík",
+      "Þór/KA",
+      "Þróttur Reykjavík"
+    ],
+    "gameParticipants": [
+      "Breiðablik",
+      "Valur",
+      "Stjarnan",
+      "FH",
+      "Þór/KA",
+      "Þróttur R.",
+      "Fram",
+      "Víkingur R.",
+      "ÍBV",
+      "Grindavík/Njarðvík"
+    ],
+    "limitations": [
+      "The source is a secondary, collaboratively edited page, not a federation document.",
+      "It records the participant list of one season only; the game's club-strength values remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "Club short names in the game pool are abbreviated screen names (Víkingur R., Þróttur R.), not the source's full names.",
+      "The game lists clubs in estimated strength order, not in the source order; the pool order is a simulation choice."
+    ]
+  },
+  "WAL1": {
+    "season": "2026/27",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026–27 Adran Premier",
+      "url": "https://en.wikipedia.org/wiki/2026%E2%80%9327_Adran_Premier",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article lists the eight clubs of the 2026–27 Adran Premier with their grounds and previous finish.",
+      "The article documents the promoted club (Cardiff Met) and the relegated club (Pontypridd United)."
+    ],
+    "participants": [
+      "Aberystwyth Town",
+      "Barry Town United",
+      "Briton Ferry Llansawel",
+      "Cardiff City",
+      "Cardiff Met",
+      "Swansea City",
+      "The New Saints",
+      "Wrexham"
+    ],
+    "gameParticipants": [
+      "Wrexham",
+      "Cardiff City",
+      "Swansea City",
+      "Cardiff Met",
+      "The New Saints",
+      "Briton Ferry Llansawel",
+      "Barry Town United",
+      "Aberystwyth Town"
+    ],
+    "limitations": [
+      "The source is a secondary, collaboratively edited page, not a federation document.",
+      "It records the participant list of one season only; the game's club-strength values remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "The game lists clubs in estimated strength order, not in the source order; the pool order is a simulation choice."
+    ]
+  },
+  "NIR1": {
+    "season": "2026",
+    "status": "verified-season-participants",
+    "source": {
+      "organization": "Wikipedia contributors",
+      "title": "2026 Women's Premiership (Northern Ireland)",
+      "url": "https://en.wikipedia.org/wiki/2026_Women%27s_Premiership_(Northern_Ireland)",
+      "retrieved": "2026-10-27"
+    },
+    "coverage": [
+      "The season article lists the eight clubs that make up the 2026 season with their grounds.",
+      "The article notes that teams are listed in alphabetical order, so the game's order is a simulation estimate, not a table."
+    ],
+    "participants": [
+      "Cliftonville",
+      "Crusaders Strikers",
+      "Derry City",
+      "Glentoran",
+      "Larne",
+      "Linfield",
+      "Lisburn Ladies",
+      "Lisburn Rangers"
+    ],
+    "gameParticipants": [
+      "Cliftonville",
+      "Glentoran",
+      "Crusaders Strikers",
+      "Linfield",
+      "Lisburn Rangers",
+      "Lisburn Ladies",
+      "Derry City Ladies",
+      "Larne"
+    ],
+    "limitations": [
+      "The source is a secondary, collaboratively edited page, not a federation document.",
+      "It records the participant list of one season only; the game's club-strength values remain simulation estimates.",
+      "It is a modern competition record, not an Era historical snapshot and not evidence about any other season.",
+      "The game pool names the club \"Derry City Ladies\" to avoid an exact-name clash with the women's League of Ireland club already in the same world.",
+      "The game lists clubs in estimated strength order, not in the source order; the pool order is a simulation choice."
+    ]
+  }
+}

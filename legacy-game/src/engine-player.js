@@ -84,7 +84,7 @@ function pnat() { return S.p.inat >= 0 ? S.p.inat : S.p.nat; }
 /* ---------- nueva carrera ---------- */
 function newCareer(o) {
   buildWorld(o.g === "f" ? "f2" : "m"); resetCustom();
-  S = {v: 1, rng: (o.seed != null ? o.seed : (Date.now() ^ Math.floor(Math.random() * 1e9))) | 0, set: {ev: o.ev != null ? o.ev : 1},
+  S = {v: 1, rng: (o.seed != null ? o.seed : (Date.now() ^ Math.floor(Math.random() * 1e9))) | 0, set: {ev: o.ev != null ? o.ev : 1, jm: o.jm ? 1 : 0},
     yr: START_YEAR, tw: 0, w: 0, ph: "pre", bi: 0, pend: [], feed: [], q: {}, cur: null, blog: [], bnews: [], uid: Date.now().toString(36), g: o.g === "f" ? "f" : "m", wk: o.g === "f" ? "f2" : "m"};
   setFem(S.g === "f");
   initWorld();
@@ -404,6 +404,94 @@ function selection(f, c, tr, or, nat) {
   var pSub = clamp(0.2 + sigmoid(x + 1.6) * 0.6, 0.1, 0.85);
   return chance(pSub) ? "sub" : "bench";
 }
+/* ============ Jugada Maestra dentro de un partido (modo jugador, optativa) ============
+   Con S.set.jm activo, en un partido en el que el modelo ya ha marcado un gol del equipo
+   una de esas ocasiones se juega con la secuencia de Jugada Maestra. El tiro ya estaba en
+   el partido: la secuencia decide si ese gol es tuyo o acaba en parada, palo, despeje o
+   pérdida. No añade goles, ni dinero, ni atributos: convierte exactamente con la misma
+   probabilidad que el modelo daba a que ese gol fuera tuyo, y se sella con semilla para
+   resolverse una sola vez. Apagada, el partido y sus estadísticas siguen igual que antes. */
+var JMP = {min: 4, xg: 0.05, minXg: 0.04};
+function jmPlayerOn() { return !!(S && S.set && S.set.jm && S.mode !== "mgr" && S.p); }
+function jmPlayerFixture() { return S && S.cur && S.cur.pm ? S.cur.pm[S.cur.pi] : null; }
+function jmPlayerState() { var f = jmPlayerFixture(); return f && f.jm ? f.jm : null; }
+function jmPlayerSeed(f) {
+  var str = [S.yr || "", S.tw || 0, S.uid || "", S.cur && S.cur.pi, f.us, f.opp, f.mg || 0, f.ma || 0, "jmp"].join("|"), h0 = 2166136261;
+  for (var i = 0; i < str.length; i++) h0 = Math.imul(h0 ^ str.charCodeAt(i), 16777619);
+  return h0 >>> 0;
+}
+/* la cuota del modelo para este partido: probabilidad de que un gol del equipo sea tuyo */
+function pGoalShare(f) {
+  var p = S.p, at = attrs(), frac = Math.min(1, Math.max(0, f.min) / 90), eff = pEff();
+  var q = clamp(1 + (eff - f.tr) * 0.025, 0.5, 1.45);
+  var gS = GOAL_SHARE[p.pos] * q * (isGK() ? 0 : 1 + ((at.TIR || p.ovr) - p.ovr) / 80) + (p.flags.pens && !isGK() ? 0.035 : 0);
+  var aS = AST_SHARE[p.pos] * q * (1 + ((at.PAS || p.ovr) - p.ovr) / 80);
+  return {gS: clamp(gS, 0, 0.5), aS: clamp(aS, 0, 0.42), frac: frac};
+}
+/* ¿esta ocasión se puede jugar? Si sí, la sella y deja el partido en pausa. */
+function jmPlayerChance(f) {
+  if (!jmPlayerOn() || !f || f.jmTried) return null;
+  f.jmTried = true;
+  if (f.jm || !(f.min > 0) || isGK() || f.mom || f.et) return null;   /* una sola pausa por partido; la prórroga queda fuera */
+  var min = Math.min(90, Math.round(f.min));
+  if (min < JMP.min) return null;
+  var free = Math.max(0, (f.gu || 0) - (f.mg || 0) - (f.ma || 0));
+  if (free < 1) return null;                                  /* sin gol del equipo que jugar */
+  var lo = f.role === "sub" ? Math.max(1, 90 - f.min) : 1, hi = f.role === "sub" ? 90 : Math.max(1, min);
+  var cands = (f.gmu || []).filter(function (m) { return m >= lo && m <= hi; });
+  if (!cands.length) return null;                             /* el gol no fue mientras jugabas */
+  var sh = pGoalShare(f), xg = clamp(sh.gS * sh.frac, 0, 0.9);
+  if (xg < JMP.minXg) return null;
+  var seed = jmPlayerSeed(f), st = typeof JugadaMaestra !== "undefined" ? JugadaMaestra.moment(seed, {xg: xg}) : null;
+  if (!st) return null;
+  f.jm = {seed: seed, xg: xg, min: cands[0], done: false, res: null, st: st, share: sh};
+  S.pend.push({k: "jmm", fi: S.cur.pi});
+  return f.jm;
+}
+/* desenlace incorporado al partido; se resuelve una única vez */
+function jmPlayerApply(f, res) {
+  var jm = f && f.jm;
+  if (!jm || jm.done) return null;
+  jm.done = true; jm.res = res;
+  if (jm.st) { jm.st.done = true; jm.st.won = res === "goal"; if (res === "goal") jm.st.ball = [95, 50]; }
+  f.jmGoal = res === "goal" ? 1 : 0;
+  for (var i = 0; i < S.pend.length; i++) if (S.pend[i].k === "jmm" && S.pend[i].fi === S.cur.pi) { S.pend.splice(i, 1); break; }
+  cleanPendPlayer();
+  var last = jm.st && jm.st.log && jm.st.log.length ? jm.st.log[jm.st.log.length - 1] : null;
+  var txt = res === "goal" ? tr("Gol: el tanto es tuyo y cuenta en tus estadísticas.")
+    : res === "block" ? tr("La defensa despeja el balón. La jugada no se repite.")
+    : res === "lost" ? tr("Pérdida: el rival corta la jugada y se lleva el balón.")
+    : res === "save" ? tr("El portero llega: parada y el juego sigue.")
+    : res === "post" ? tr("Al palo: la jugada se queda ahí.")
+    : tr("El disparo se marcha fuera. El partido continúa.");
+  var card = {t: "moment", tipo: "real", cat: tr("Jugada Maestra"), title: tr("Jugada Maestra"), ctx: momLabel(f),
+    choice: last && last.k === "shot" ? tr("Tirar a puerta") : tr("Jugada de pases"), txt: txt, good: res === "goal", pct: Math.round(jm.xg * 100), chips: [], y: S.yr};
+  feed(card);
+  return card;
+}
+/* el equipo decide la ocasión sin dibujar: mismo xG, sin premio ni castigo */
+function jmPlayerAuto() {
+  var f = jmPlayerFixture(), jm = f && f.jm;
+  if (!jm || jm.done || typeof JugadaMaestra === "undefined") return null;
+  var out = JugadaMaestra.momentAuto(jm.seed, jm.xg);
+  return jmPlayerApply(f, out === "goal" ? "goal" : out === "save" ? "save" : out === "post" ? "post" : "miss");
+}
+/* trazo del usuario: se resuelve en el acto y, al terminar, pasa al partido */
+function jmPlayerResolve(x, y) {
+  var f = jmPlayerFixture(), jm = f && f.jm;
+  if (!jm || jm.done || typeof JugadaMaestra === "undefined") return null;
+  var r = JugadaMaestra.resolve(jm.st, x, y);
+  if (!r || !r.ok) return {ok: false, pending: false, msg: (r && r.msg) || "", res: r};
+  if (!jm.st.done) return {ok: true, pending: true, msg: r.msg, res: r};
+  var st = jm.st, last = st.log[st.log.length - 1], res;
+  if (st.won) res = "goal";
+  else if (last && last.k === "shot") {
+    if (last.lane != null && last.lane < 9) res = "block";
+    else { var roll = jmLiveRoll(jm.seed, 7); res = roll < 0.62 ? "save" : roll < 0.8 ? "post" : "miss"; }
+  } else res = "lost";
+  jmPlayerApply(f, res);
+  return {ok: true, pending: false, msg: r.msg, outcome: res, res: r};
+}
 function playPlayerFixture(f) {
   if (f.st == null) {
     prePlayer(f); f.st = 1;
@@ -422,6 +510,8 @@ function playPlayerFixture(f) {
     if (f.needPens && f.onEnd && !f.pens) { S.pend.push({k: "so", fi: S.cur.pi}); f.st = 3; return "pause"; }
   }
   if (f.st === 2 || f.st === 3) {
+    /* Jugada Maestra optativa: la ocasión sellada detiene el partido antes de cerrarlo */
+    if (jmPlayerChance(f)) return "pause";
     if (f.needPens && !f.pens) { var so = shootout(0.76, 0.76); f.pens = [so[0], so[1]]; }
     finishPlayer(f); f.st = 4;
   }
@@ -477,16 +567,17 @@ function finishPlayer(f) {
   var gu = f.gu + (f.etu || 0), gt = f.gt + (f.ett || 0);
   var pg = 0, pa = 0, rating = null, cs = false;
   if (f.min > 0) {
-    var frac = Math.min(1, f.min / 90), eff = pEff(), at = attrs();
-    var q = clamp(1 + (eff - f.tr) * 0.025, 0.5, 1.45);
-    var gS = GOAL_SHARE[p.pos] * q * (isGK() ? 0 : 1 + ((at.TIR || p.ovr) - p.ovr) / 80) + (p.flags.pens && !isGK() ? 0.035 : 0);
-    var aS = AST_SHARE[p.pos] * q * (1 + ((at.PAS || p.ovr) - p.ovr) / 80);
-    gS = clamp(gS, 0, 0.5); aS = clamp(aS, 0, 0.42);
+    var eff = pEff(), sh = pGoalShare(f), frac = sh.frac, gS = sh.gS, aS = sh.aS;
     pg = f.mg + (f.etg || 0); pa = f.ma;
-    var others = Math.max(0, f.gu - f.mg - f.ma);
+    var others = Math.max(0, f.gu - f.mg - f.ma), jmDone = !!(f.jm && f.jm.done);
     for (var i = 0; i < others; i++) {
       var x = R();
-      if (x < gS * frac) pg++;
+      /* la ocasión de Jugada Maestra sustituye el sorteo de ese gol: adivina lo mismo
+         (gol del jugador con la cuota del modelo) y deja el resto del partido intacto */
+      if (i === 0 && jmDone) {
+        if (f.jmGoal) pg++;
+        else if (x < aS * 0.78 * frac) pa++;
+      } else if (x < gS * frac) pg++;
       else if (x < (gS + aS * 0.78) * frac) pa++;
     }
     var res = gu > gt ? 1 : gu === gt ? 0 : -1;
@@ -550,7 +641,8 @@ function finishPlayer(f) {
   if (f.kind === "nq") qualRecord(f, res3);
   else recordFixture(f, res3);
   S.blog.push({c: logLabel(f), r: roundLabel(f), o: f.opp, nat: f.isNat ? 1 : 0, h: f.home ? 1 : 0, gu: gu, gt: gt, p: f.pens || null, et: f.et ? 1 : 0,
-    rt: rating, g: pg, a: pa, m: f.min, ro: f.role, x: f.imp, w: S.w, mom: f.mom ? 1 : 0, red: f.red ? 1 : 0});
+    rt: rating, g: pg, a: pa, m: f.min, ro: f.role, x: f.imp, w: S.w, mom: f.mom ? 1 : 0, red: f.red ? 1 : 0,
+    jm: f.jm && f.jm.done ? f.jm.res : null});
   koNews(f, c);
 }
 function injure(forced) {
@@ -642,6 +734,10 @@ function queueBetween(nextBi) {
   pushRandomEvents("temporada", n);
   maybePress();
 }
+/* Sesgo de novedad: una decisión que la carrera nunca ha visto pesa más que una
+   reciente, para que la variedad no dependa del azar. No añade estado al guardado:
+   reaprovecha el registro de cooldown ya existente. */
+function novelty(lastSeen) { return lastSeen == null ? 2.6 : 1; }
 function pushRandomEvents(ctx, n) {
   var used = {};
   S.pend.forEach(function (x) { if (x.k === "ev") used[x.id] = 1; });
@@ -657,7 +753,7 @@ function pushRandomEvents(ctx, n) {
       try { return !e.when || e.when(X); } catch (err) { return false; }
     });
     if (want) { var pf = pool.filter(function (e) { return e.tipo === want; }); if (pf.length) pool = pf; }
-    var ev = wpick(pool, function (e) { return typeof e.w === "function" ? e.w(X) : (e.w || 1); });
+    var ev = wpick(pool, function (e) { return (typeof e.w === "function" ? e.w(X) : (e.w || 1)) * novelty(S.p.evCd[e.id]); });
     if (!ev) break;
     used[ev.id] = 1;
     S.pend.push({k: "ev", id: ev.id, s: ri(1, 999999999)});
@@ -688,6 +784,19 @@ function seasonEnd() {
     yc: ss.yc, rc: ss.rc, motm: ss.motm, lgApps: ss.lg.apps, lgG: ss.lg.g, lgA: ss.lg.a, ovr0: Math.round(ss.ovr0), ovr1: ovrInt(), age: p.age, loan: !!p.loan,
     caps: p.ns.apps, ig: p.ns.g, tro: trophies, aw: aw.map(function (a) { return a.n; }), comp: ss.comp, val: marketValue()};
   p.seasons.push(row);
+  /* Leyendas del universo: aviso una sola vez cuando la carrera supera una marca. */
+  if (typeof GoatLegends !== "undefined" && GoatLegends.careerNews) {
+    try {
+      var lgTot = {seasons: p.seasons.length, appearances: 0, goals: 0, assists: 0, trophies: p.trophies.length, clubs: 1};
+      var lgClubs = {};
+      p.seasons.forEach(function (r) {
+        lgTot.appearances += r.apps || 0; lgTot.goals += r.g || 0; lgTot.assists += r.a || 0;
+        if (r.club != null) lgClubs[r.club] = 1;
+      });
+      lgTot.clubs = Object.keys(lgClubs).length;
+      GoatLegends.careerNews({mode: "player", club: p.club, metrics: lgTot, flags: p.flags}).forEach(function (n) { news.push(n); });
+    } catch (legendError) { console.error("GOAT legends player record failed", legendError); }
+  }
   maybeNickPlayer();
   seasonEndWorld();
   pruneComps(ss.clubs);
@@ -1062,7 +1171,7 @@ function cleanPendPlayer() {
       if (!keep) { S.pend.shift(); continue; }
     }
     if (x.k === "offers" && !x.forced && !x.list.length) { S.pend.shift(); continue; }
-    if ((x.k === "moment" || x.k === "so") && (!S.cur || !S.cur.pm || !S.cur.pm[x.fi])) { S.pend.shift(); continue; }
+    if ((x.k === "moment" || x.k === "so" || x.k === "jmm") && (!S.cur || !S.cur.pm || !S.cur.pm[x.fi])) { S.pend.shift(); continue; }
     break;
   }
 }
@@ -1243,6 +1352,10 @@ function restore(json) {
   S = s;
   if (S.g !== "f") S.g = "m";
   setFem(S.g === "f");
+  /* ajustes nuevos: las partidas antiguas no los traen y deben seguir igual que antes */
+  if (!S.set || typeof S.set !== "object") S.set = {ev: 1};
+  if (S.set.ev == null) S.set.ev = 1;
+  if (S.set.jm == null) S.set.jm = 0;
   if (!S.uid) S.uid = Date.now().toString(36);
   /* partidas de antes de añadir divisiones: completar clubes y ligas nuevas */
   for (var i = S.cr.length; i < W.clubs.length; i++) { S.cr[i] = W.clubs[i].r0; S.cl[i] = W.clubs[i].lg0; }

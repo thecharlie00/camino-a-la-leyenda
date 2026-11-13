@@ -533,7 +533,7 @@ var PetWorld = (function () {
           var cam = camEye(), dx = cam[0] - a.x, dz = cam[2] - a.z, d = Math.hypot(dx, dz) || 1;
           a.moveTo(cl(a.x + dx / d * Math.max(0, d - 0.55), -1, 1), cl(a.z + dz / d * Math.max(0, d - 0.55), -0.8, 0.8), true, function () {
             a.mouth = null; b.show = true; var f = a.anchor("face"); b.x = f[0]; b.z = f[2]; b.y = 0.05; b.vx = b.vy = b.vz = 0; b.state = "rest";
-            var r = PetSim.play(pt, W.toyId, true); faceCam(a); a.lookAt(camEye(), 1); a.say("excited", 1.2); a.play("happy"); fx("heart", null, r.fav ? 3 : 1); hud(); persist();
+            var r = PetSim.play(pt, W.toyId, true); faceCam(a); a.lookAt(camEye(), 1); a.say("excited", 1.2); a.play("happy"); fx("heart", null, r.fav ? 3 : 1); hud(); persist(); if (W.activity && W.activity.kind === "ball") miniDone("ball");
           });
         }
       }
@@ -550,7 +550,18 @@ var PetWorld = (function () {
       if (sp < 0.3) { b.vx = -Math.sin(yaw) * 1.2; b.vz = -Math.cos(yaw) * 1.2; b.vy = 1.4; }
       b.state = "fly"; sfx("kick"); W.actor.say("excited", 1); W.actor.lookAt([b.x, b.y, b.z], 1);
     },
-    tapGround: MODES.home.tapGround, longPress: MODES.home.longPress, onLand: MODES.home.onLand,
+    tapGround: function (g) {
+      var W = cur, A = W.activity;
+      if (A && A.kind === "seek") {
+        for (var si = 0; si < A.targets.length; si++) if (Math.hypot(g[0] - A.targets[si][0], g[2] - A.targets[si][1]) < 0.42) return miniPick(si);
+        cap(tr("Toca uno de los tres conos o elige un botón.")); return;
+      }
+      if (A && A.kind === "cones") {
+        var target = A.targets[A.stage]; if (target && Math.hypot(g[0] - target[0], g[2] - target[1]) < 0.48) return miniConeNext();
+        cap(tr("Toca el cono señalado o usa el botón accesible.")); return;
+      }
+      MODES.home.tapGround(g);
+    }, longPress: MODES.home.longPress, onLand: MODES.home.onLand,
     act: function (k, v) {
       var W = cur, a = W.actor;
       if (k === "toy") {
@@ -561,12 +572,94 @@ var PetWorld = (function () {
         cap(tr("Arrastra el juguete y suéltalo para lanzarlo")); return;
       }
       if (k === "photo") return photo();
+      if (k === "activities") return miniMenu();
+      if (k === "activityStart") return miniStart(v);
+      if (k === "activityPick") return miniPick(+v);
+      if (k === "activityThrow") {
+        if (W.ball && W.activity && W.activity.kind === "ball" && W.ball.state === "rest") {
+          var cam0 = W.E.cam; W.ball.vx = -Math.sin(cam0.yaw) * 1.2; W.ball.vz = -Math.cos(cam0.yaw) * 1.2; W.ball.vy = 1.8; W.ball.state = "fly";
+          sfx("kick"); a.say("excited", 1); a.lookAt([W.ball.x, W.ball.y, W.ball.z], 1);
+        }
+        return;
+      }
+      if (k === "activityNext") return miniConeNext();
+      if (k === "activityPose") { a.clip = null; a.play(v); return; }
+      if (k === "activityPhoto") return photo();
+      if (k === "activityCancel" || k === "back") { W.activity = null; W.ball = null; W.props = []; return playView(); }
       if (k === "shop") return setMode("shop", "play");
     }
   };
+  function miniMenu() {
+    var W = cur; if (!W) return; W.activity = null; W.ball = null; W.props = [];
+    panel('<div class="pw-h">' + esc(tr("Microactividades")) + '</div><p class="pw-hint">' + esc(tr("Cuatro juegos breves y opcionales. Sin premios deportivos ni obligación diaria.")) + '</p><div class="pw-grid">' +
+      [["seek", "🔎", "Buscar el juguete", "Encuentra el balón escondido bajo uno de tres conos."], ["ball", "⚽", "Sigue el balón", "Lanza una pelota suave para que tu mascota la persiga y la devuelva."], ["photo", "📷", "Foto de celebración", "Elige una pose y guarda una foto en el álbum."], ["cones", "🔺", "Circuito de conos", "Guía a tu mascota por tres conos al ritmo que quieras."]].map(function (x) {
+        var disabled = x[0] === "ball" && W.actor.plan === "fish";
+        return '<button class="pw-item" data-pw="activityStart" data-v="' + x[0] + '"' + (disabled ? " disabled" : "") + '><b>' + x[1] + ' ' + esc(tr(x[2])) + '</b><small>' + esc(tr(disabled ? "Esta actividad no está disponible para esta especie." : x[3])) + '</small></button>';
+      }).join("") + '</div><button class="btn wide" data-pw="back">' + esc(tr("Volver a jugar")) + '</button>');
+  }
+  function miniStart(kind) {
+    var W = cur; if (!W) return; var a = W.actor;
+    if (kind === "ball" && a.plan === "fish") return;
+    W.activity = {kind: kind, stage: 0, targets: [], busy: false}; W.ball = null; W.props = []; a.clip = null; a.goal = null; a.x = 0; a.z = 0; a.lookAt(camEye(), 0.6);
+    if (kind === "seek") {
+      W.activity.targets = [[-0.62, -0.12], [0, -0.12], [0.62, -0.12]];
+      W.activity.answer = Math.floor(Math.random() * 3);
+      W.activity.targets.forEach(function (p, i) { W.props.push({id: "mini-cone-" + i, m: PetProps.prop("cone"), x: p[0], y: 0, z: p[1]}); });
+      miniSeekPanel();
+    } else if (kind === "ball") {
+      W.toyId = "toy_ball"; a.toyHide = true;
+      W.ball = {m: PetProps.prop("ball"), kind: "ball", x: 0.1, z: -0.25, y: 0.05, vx: 0, vy: 0, vz: 0, r: 0.05, show: true, state: "rest"};
+      panel('<div class="pw-h">' + esc(tr("Sigue el balón")) + '</div><p class="pw-hint" role="status" aria-live="polite">' + esc(tr("Arrastra el balón y suéltalo. Tu mascota lo perseguirá y te lo traerá de vuelta.")) + '</p><button class="go wide" data-pw="activityThrow">' + esc(tr("Lanzar suave")) + '</button>' + miniCancel());
+    } else if (kind === "photo") {
+      a.play("happy");
+      panel('<div class="pw-h">' + esc(tr("Foto de celebración")) + '</div><p class="pw-hint">' + esc(tr("Elige una pose y guarda una foto en el álbum.")) + '</p><div class="pw-row"><button class="pw-chip" data-pw="activityPose" data-v="happy">' + esc(tr("Posar con alegría")) + '</button><button class="pw-chip" data-pw="activityPose" data-v="stretch">' + esc(tr("Estirarse")) + '</button><button class="pw-chip" data-pw="activityPose" data-v="sit">' + esc(tr("Sentarse")) + '</button></div><button class="go wide" data-pw="activityPhoto">📷 ' + esc(tr("Hacer la foto")) + '</button>' + miniCancel());
+    } else if (kind === "cones") {
+      W.activity.targets = [[-0.62, 0.24], [0.12, -0.32], [0.62, 0.22]];
+      W.activity.targets.forEach(function (p, i) { W.props.push({id: "mini-route-" + i, m: PetProps.prop("cone"), x: p[0], y: 0, z: p[1]}); });
+      miniConePanel();
+    }
+  }
+  function miniSeekPanel() {
+    var W = cur, A = W && W.activity; if (!A) return;
+    panel('<div class="pw-h">' + esc(tr("Buscar el juguete")) + '</div><p class="pw-hint" role="status" aria-live="polite">' + esc(tr("Pelota {n} de 3. Elige bajo qué cono está escondida; puedes probar sin penalización.", {n: A.stage + 1})) + '</p><div class="pw-row">' + [0, 1, 2].map(function (i) { return '<button class="pw-chip" data-pw="activityPick" data-v="' + i + '">' + esc(tr("Cono {n}", {n: i + 1})) + '</button>'; }).join("") + '</div>' + miniCancel());
+  }
+  function miniCancel() { return '<button class="btn wide" data-pw="activityCancel">' + esc(tr("Salir sin terminar")) + '</button>'; }
+  function miniConePanel() {
+    var W = cur, A = W.activity; if (!A) return;
+    panel('<div class="pw-h">' + esc(tr("Circuito de conos")) + '</div><p class="pw-hint" role="status" aria-live="polite">' + esc(tr("Cono {n} de 3. Toca el cono en el campo o usa el botón para guiar a tu mascota.", {n: A.stage + 1})) + '</p><button class="go wide" data-pw="activityNext">' + esc(tr("Ir al siguiente cono")) + '</button>' + miniCancel());
+  }
+  function miniConeNext() {
+    var W = cur, A = W && W.activity; if (!A || A.kind !== "cones" || A.busy) return;
+    var pos = A.targets[A.stage]; if (!pos) return;
+    A.busy = true; W.actor.clip = null; W.actor.moveTo(pos[0], pos[1], false, function () {
+      if (!cur || cur !== W || W.activity !== A) return;
+      A.busy = false; A.stage++; W.actor.play("happy");
+      if (A.stage >= A.targets.length) miniDone("cones"); else miniConePanel();
+    });
+  }
+  function miniPick(i) {
+    var W = cur, A = W && W.activity; if (!A || A.kind !== "seek" || A.done || i < 0 || i > 2) return;
+    if (i !== A.answer) { W.actor.play("sniff"); cap(tr("Aquí no está. Prueba otra vez, sin penalización.")); return; }
+    W.props = W.props.filter(function (p) { return p.id !== "mini-cone-" + i; });
+    W.props.push({id: "mini-ball-found", m: PetProps.prop("ball"), x: A.targets[i][0], y: 0.08, z: A.targets[i][1]});
+    W.actor.play("happy"); A.stage++;
+    if (A.stage >= 3) return miniDone("seek");
+    cap(tr("¡Encontrado! {n} de 3. Se ha escondido otro balón.", {n: A.stage}));
+    W.props = W.props.filter(function (p) { return p.id !== "mini-ball-found"; });
+    A.targets.forEach(function (p, j) { W.props.push({id: "mini-cone-" + j, m: PetProps.prop("cone"), x: p[0], y: 0, z: p[1]}); });
+    A.answer = (A.answer + 1 + Math.floor(Math.random() * 2)) % 3; miniSeekPanel();
+  }
+  function miniDone(kind) {
+    var W = cur, A = W && W.activity; if (!A || A.done) return;
+    A.done = true; W.ball = null; PetSim.first(W.pt, "mini_" + kind);
+    W.actor.say("love", 1.1); fx("heart", null, 2); persist(); hud();
+    var title = kind === "seek" ? tr("Buscar el juguete") : kind === "ball" ? tr("Sigue el balón") : kind === "photo" ? tr("Foto de celebración") : tr("Circuito de conos");
+    panel('<div class="pw-h">' + esc(tr("¡Buen trabajo!")) + '</div><p class="pw-hint" role="status" aria-live="polite">' + esc(tr("Reto completado: {activity}. El recuerdo queda guardado; no cambia el rendimiento deportivo.", {activity: title})) + '</p><button class="go wide" data-pw="activities">' + esc(tr("Elegir otra actividad")) + '</button><button class="btn wide" data-pw="activityCancel">' + esc(tr("Volver a jugar")) + '</button>');
+  }
+
   function playView() {
     var toys = PET_TOYS.filter(function (t) { return owned(t.id) || t.id === "toy_ball"; });
-    panel('<div class="pw-h">' + esc(tr("Jugar")) + '</div><div class="pw-row">' + toys.map(function (t) { return '<button class="pw-chip" data-pw="toy" data-v="' + t.id + '">' + esc(tr(t.n)) + "</button>"; }).join("") + '<button class="pw-chip" data-pw="photo">📷 ' + esc(tr("Foto")) + '</button><button class="pw-chip" data-pw="shop">🛍️ ' + esc(tr("Más juguetes")) + "</button></div>");
+    panel('<div class="pw-h">' + esc(tr("Jugar")) + '</div><div class="pw-row">' + toys.map(function (t) { return '<button class="pw-chip" data-pw="toy" data-v="' + t.id + '">' + esc(tr(t.n)) + "</button>"; }).join("") + '<button class="pw-chip" data-pw="photo">📷 ' + esc(tr("Foto")) + '</button>' + '<button class="pw-chip" data-pw="activities">⭐ ' + esc(tr("Microactividades")) + '</button>' + '<button class="pw-chip" data-pw="shop">🛍️ ' + esc(tr("Más juguetes")) + "</button></div>");
   }
 
   /* trucos: orden (botón o gesto en pantalla), intento con resultado y premio a tiempo */
@@ -802,7 +895,7 @@ var PetWorld = (function () {
     w.stop = 1.6; a.goal = null;
     if (e.k === "find") { a.play("sniff"); var f = PetSim.walkFind(pt, e.s); W.props = W.props.filter(function (p) { return !(p.id === "ev" && Math.abs(p.z - e.z) < 0.01 && Math.abs(p.x - e.x) < 0.01); });
       var t = f.k === "acc" ? tr("¡Ha encontrado algo! {x}", {x: tr(petItem(f.id).n)}) : f.k === "treat" ? tr("¡Ha encontrado una chuche!") : f.k === "coin" ? tr("¡Ha encontrado unas monedas!") : tr("Ha encontrado un palo. Muy orgulloso."); say(t, 2.6); w.log.push(t); fx("star", null, 3); sfx(f.k === "coin" ? "coin" : "sparkle"); }
-    else if (e.k === "pet") { var other = new PetRig.Actor({k: ["dog", "cat", "rabbit", "fennec", "capybara"][e.s % 5], stage: 2}); other.x = e.x + 0.3; other.z = e.z - 0.1; other.yaw = -PI / 2; W.npc = other; a.lookAt([other.x, 0.1, other.z], 1); a.play("happy"); a.say("excited", 1.5); say(tr("¡Un nuevo amigo!")); w.log.push(tr("Ha hecho un amigo nuevo.")); PetSim.bond(pt, 1, "friend"); w.stop = 2.6; }
+    else if (e.k === "pet") { var other = new PetRig.Actor({k: ["dog", "cat", "rabbit", "fennec", "capybara", "guinea", "budgie", "ferret", "rescuecat"][e.s % 9], stage: 2}); other.x = e.x + 0.3; other.z = e.z - 0.1; other.yaw = -PI / 2; W.npc = other; a.lookAt([other.x, 0.1, other.z], 1); a.play("happy"); a.say("excited", 1.5); say(tr("¡Un nuevo amigo!")); w.log.push(tr("Ha hecho un amigo nuevo.")); PetSim.bond(pt, 1, "friend"); w.stop = 2.6; }
     else if (e.k === "fan") { w.fans++; say(tr("«¡Qué mascota más bonita!»"), 2.4); a.play("happy"); w.log.push(tr("Unos aficionados se han parado a saludar.")); }
     else if (e.k === "sniff") { a.play("sniff"); }
     else if (e.k === "puddle") { a.play("jump"); fx("drop", [a.x, 0.02, a.z], 20); sfx("splash"); w.mud = true; a.dirt = Math.max(a.dirt, 2); say(tr("¡Directo al charco!")); if (typeof GX !== "undefined") GX.ev("pet", {k: "puddle"}); w.log.push(tr("Ha saltado en un charco.")); }
@@ -926,7 +1019,7 @@ var PetWorld = (function () {
         var url = c.toDataURL("image/jpeg", 0.72), al = albumGet(); al.push({t: PetSim.clock(), u: url, n: W.pt.nm}); while (al.length > 24) al.shift();
         try { localStorage.setItem(ALB, JSON.stringify(al)); } catch (e) { al.shift(); try { localStorage.setItem(ALB, JSON.stringify(al)); } catch (e2) {} }
         PetSim.photo(W.pt, {expr: a.curExpr(), scene: W.modeK}); persist();
-        cap(tr("¡Foto guardada en el álbum!"));
+        cap(tr("¡Foto guardada en el álbum!")); if (W.activity && W.activity.kind === "photo") miniDone("photo");
       } catch (e) { cap(tr("No se ha podido guardar la foto")); }
     };
   }
@@ -938,6 +1031,7 @@ var PetWorld = (function () {
   /* recuerdos: las primeras veces, con fecha */
   var MEM_TXT = {adopt: N_("Llegó a casa"), meal: N_("Primera comida"), bath: N_("Primer baño"), favzone: N_("Descubriste dónde le encantan los mimos"), favtoy: N_("Encontró su juguete favorito"), trick: N_("Dominó su primer truco"),
     walk_park: N_("Primer paseo por el parque"), walk_barrio: N_("Primer paseo por el barrio"), walk_training: N_("Visitó la ciudad deportiva"), walk_stadium: N_("Paseó junto al estadio"), photo: N_("Primera foto"),
+    mini_seek: N_("Encontró el juguete en un juego"), mini_ball: N_("Devolvió el balón en un juego"), mini_photo: N_("Posó en una microactividad"), mini_cones: N_("Completó el circuito de conos"),
     win_local: N_("Ganó su primer concurso"), win_com: N_("Campeón comarcal"), win_nac: N_("Campeón nacional"), lovedacc: N_("Estrenó un accesorio que le encanta"), stage1: N_("Se hizo joven"), stage2: N_("Llegó a adulto"), stage3: N_("Ya es senior"), migr: N_("Empezó una nueva etapa contigo")};
   function memView() {
     var W = cur, m = W.pt.mem.filter(function (x) { return MEM_TXT[x.k]; });
