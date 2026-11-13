@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const {JSDOM} = require('jsdom');
 
-for (const source of ['src/minigame.js', 'legacy-game/src/minigame.js']) {
+for (const source of ['legacy-game/src/minigame.js']) {
   const dom = new JSDOM('<!doctype html><html><body></body></html>', {
     runScripts: 'outside-only',
     pretendToBeVisual: true,

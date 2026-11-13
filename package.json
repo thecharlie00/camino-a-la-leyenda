@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "python3 build_legacy_game.py && vite --host 0.0.0.0 --port 3000",
-    "build": "tsc && vite build && python3 build_legacy_game.py",
+    "build": "vite build && python3 build_legacy_game.py",
     "test:build": "node test/jugada-maestra.cjs && node test/jugada-maestra-ui.cjs && node test/jugada-maestra-match.cjs && node test/jugada-maestra-localization.cjs && node test/events-universo.cjs && node test/womens-league-provenance.cjs && node test/womens-league-playoff.cjs && node test/goat-legends.cjs && node test/decision-balance.cjs && node test/league-expansion.cjs && node test/pet-expansion.cjs && node test/pet-activities.cjs && node test/universo-localization.cjs && node test/season-viva.cjs && node test/season-viva-localization.cjs && node test/build-smoke.js && node test/pet-event-names.cjs && node test/pet-adoption-world.cjs && node test/web-links.cjs && node test/web-startup.js && node test/social-replies.js && node test/social-localization.js && node test/android-api36.js && node test/rating-prompt.js && node test/web-ad-consent.cjs && node test/freekick-difficulty.cjs && node test/web-publishing.js && node test/eras-mode.js && node test/eras-coverage.cjs && node test/eras-competitions.js && node test/eras-moments.js && node test/eras-legends.js && node test/eras-scene.js && node test/runtime-smoke.js && node test/goat-client.js && node test/goat-worker.cjs && node test/goat-player-season.js && node test/goat-page.js && node test/goat-web.js && node test/goat-web-dom.js && node test/goat-game-ui.js",
     "preview": "vite preview --host 0.0.0.0 --port 3000",
     "test:online": "node test/goat-client.js && node test/goat-page.js && node test/goat-player-season.js && node test/goat-web.js && node test/goat-web-dom.js && node test/goat-game-ui.js",
@@ -13,19 +13,9 @@
     "test:goat-web-dom": "node test/goat-web-dom.js",
     "test:goat-game-ui": "node test/goat-game-ui.js"
   },
-  "dependencies": {
-    "@types/three": "^0.186.0",
-    "lucide-react": "^1.16.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "three": "^0.186.1"
-  },
   "devDependencies": {
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.1.0",
-    "typescript": "~5.7.2",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "typescript": "~5.7.2"
   }
 }

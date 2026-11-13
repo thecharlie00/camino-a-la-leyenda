@@ -1,5 +1,7 @@
 # Revisión de novedades del juego
 
+> **Nota (2026-10-27):** este informe describe el estado en su commit de referencia. La antigua app React (`src/`) y el bundle `public/camino-engine.js` se retiraron después: el sitio publicado es estático (`index.html`, `site.css`, `site.js`) y el juego vive en `dist/jugar/juego.html`, generado desde `legacy-game/src`.
+
 **Fecha:** 2026-10-28  
 **Rama:** `arena/888e77f9-camino-a-la-leyenda`  
 **Build del juego:** 5.8 / código 58  

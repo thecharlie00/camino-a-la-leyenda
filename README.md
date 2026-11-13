@@ -5,23 +5,16 @@ Aplicación web React moderna de carrera futbolística: carrera de jugador o jug
 ## Tecnologías
 
 - **Framework:** React 19 + TypeScript
-- **Bundler:** Vite
-- **Iconografía:** Lucide React
+- **Bundler:** Vite (solo compila el sitio estático y la página del juego)
 - **Estilos:** Dark stadium night theme (Big Shoulders Display, Archivo, Doto)
 - **Persistencia:** LocalStorage (compatible con importación/exportación de copias de seguridad en JSON)
 - **Idiomas:** Español (ES), English (EN), Deutsch (DE), Italiano (IT), Français (FR)
 
 ## Estructura del Proyecto
 
-- `src/main.tsx`: Punto de entrada de la aplicación React.
-- `src/App.tsx`: Enrutador de pestañas y gestor global de estado e idioma.
-- `src/components/GameContainer.tsx`: Contenedor del motor de juego completo y barra rápida de guardado.
-- `src/components/PitchDemo.tsx`: Simulador 2D interactivo con 22 jugadores, pases dinámicos, disparos y comentarios en vivo.
-- `src/components/Header.tsx`: Barra superior con selector de idioma, navegación, pantalla completa y enlace a la página GOAT LADDER del idioma elegido (el ranking vive en `goat-ladder.js`).
-- `src/components/GuideView.tsx`: Manual de estrategia y guía de tácticas, atributos y modos.
-- `src/components/Footer.tsx`: Pie de página y enlaces rápidos.
-- `src/translations.ts`: Diccionario de traducciones en 5 idiomas.
-- `public/camino-engine.js`: Motor de simulación y bases de datos parodiadas de clubes y jugadores.
+- `index.html`, `site.css` y `site.js`: portada estática por idioma (`en/`, `de/`, `it/`, `fr/`), sin framework.
+- `jugar/index.html` y `jugar/juego.html`: página de juego que carga el motor en un iframe; `juego.html` es la única página del motor.
+- `legacy-game/src/`: **única fuente** del motor (motores de carrera, Épocas, 3D, interfaz y textos). `build_legacy_game.py` la empaqueta en un solo HTML.
 - `legacy-game/src/goat.js` y `legacy-game/src/ui-goat.js`: cliente e interfaz del ranking online GOAT LADDER.
 - `goat-ladder.js`: tablero público del ranking (palmarés, historial, buscador, paginación, enlaces compartidos y borrado).
 - `web/config.json`: origen del servicio del ranking que se incrusta en cada compilación.

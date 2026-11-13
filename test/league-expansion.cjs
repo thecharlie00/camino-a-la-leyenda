@@ -15,9 +15,9 @@ const NEW = [...SECOND, ...TOPS];
 /* Diez competiciones nuevas por mundo: seis segundas divisiones y cuatro primeras. */
 const EXPECTED = {men: 109 + 10, women: 88 + 10, women2: 93 + 10};
 
-/* 1. Los dos paquetes de datos deben ser idénticos (juego y copia de src). */
-assert.equal(fs.readFileSync('legacy-game/src/data-49.js', 'utf8'), fs.readFileSync('src/data-49.js', 'utf8'),
-  'the game bundle and the src copy keep the same league expansion');
+/* 1. El paquete de datos del juego es la única fuente: ya no hay copia en src/. */
+assert.match(fs.readFileSync('legacy-game/src/data-49.js', 'utf8'), /AUT2|SUI2/,
+  'the game bundle keeps the league expansion');
 assert.match(fs.readFileSync('build_legacy_game.py', 'utf8'), /"data-48\.js", "data-49\.js", "names\.js"/,
   'the Android and web bundles load data-49.js right after data-48.js');
 
@@ -158,7 +158,9 @@ const route = {
   },
   S: {last: {final: [[0, 1, 2, 3], [4, 5, 6, 7]]}, cl: {0: 0, 1: 0, 2: 0, 3: 0, 4: 1, 5: 1, 6: 1, 7: 1}, cr: {}},
   promoList: (li, k) => route.S.last.final[li].slice(0, k),
-  shuffle: (list) => list
+  shuffle: (list) => list,
+  /* El cierre de temporada debe tirar el índice de plantillas: los clubes cambian de división. */
+  teamsOfLeagueReset: () => { route.resetCount = (route.resetCount || 0) + 1; }
 };
 vm.createContext(route);
 vm.runInContext(promotionLoop, route);
@@ -166,6 +168,7 @@ assert.equal(route.S.cl[3], 1, 'the last club of the first tier is relegated int
 assert.equal(route.S.cl[4], 0, 'the champion of the new second tier is promoted into the first tier');
 assert.equal(route.S.cl[0], 0, 'a first-tier club that did not finish last stays put');
 assert.equal(route.S.cl[7], 1, 'a second-tier club that did not win stays put');
+assert.ok(route.resetCount > 0, 'the season end invalidates the cached league pool after promotion and relegation');
 
 /* 4d. Épocas no hereda estas ligas modernas: sus paquetes son snapshots aparte. */
 const eraFiles = fs.readdirSync('legacy-game/erascene/packs').map((file) => `legacy-game/erascene/packs/${file}`);

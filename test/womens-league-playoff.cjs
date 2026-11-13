@@ -37,6 +37,6 @@ const localized = {
 };
 for (const [locale, value] of Object.entries(localized)) {
   assert.equal(JSON.parse(fs.readFileSync(`i18n/${locale}/extra.json`, 'utf8'))[key], value, `${locale} two-leg score line is translated`);
-  for (const root of ['legacy-game/src', 'src']) assert.ok(fs.readFileSync(`${root}/lang-${locale}.js`, 'utf8').includes(`${JSON.stringify(key)}:${JSON.stringify(value)}`), `${root} ${locale} runtime dictionary includes the translation`);
+  for (const root of ['legacy-game/src']) assert.ok(fs.readFileSync(`${root}/lang-${locale}.js`, 'utf8').includes(`${JSON.stringify(key)}:${JSON.stringify(value)}`), `${root} ${locale} runtime dictionary includes the translation`);
 }
 console.log('Women’s promotion play-off tests passed: two legs, host order, aggregate score, seed tiebreak and five-locale score copy.');

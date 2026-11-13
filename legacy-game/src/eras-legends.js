@@ -148,6 +148,7 @@ var EraLegends = (function () {
   if (typeof simGoals === "function") {
     var baseGoals = simGoals;
     simGoals = function (ra, rb, home) {
+      if (!eraIsActive()) return baseGoals.apply(this, arguments);
       if (!eraContextForYear(S && S.yr)) return baseGoals.apply(this, arguments);
       var sig = EraLegends.signature(S.yr), g = baseGoals.call(this, ra, rb, (home || 0) * sig.home / 0.1);
       if (sig.thin < 1) g = [EraLegends.thin(g[0], sig.thin), EraLegends.thin(g[1], sig.thin)];

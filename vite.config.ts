@@ -2,7 +2,6 @@ import { cpSync, copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync 
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, type ViteDevServer } from 'vite';
-import react from '@vitejs/plugin-react';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 
@@ -55,7 +54,7 @@ function serveBuiltGameInDev() {
 // the WebView entry point packaged into the Android App Bundle.
 export default defineConfig({
   base: './',
-  plugins: [react(), copyLegacySiteFiles(), serveBuiltGameInDev()],
+  plugins: [copyLegacySiteFiles(), serveBuiltGameInDev()],
   build: {
     rollupOptions: {
       input: {

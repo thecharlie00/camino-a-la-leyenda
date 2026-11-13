@@ -69,7 +69,7 @@ assert.equal(esp1.n, 'Liga F');
 assert.equal(esp1.cup, 'Copa de la Reina');
 assert.equal(esp1.sc, 'Supercopa de España Femenina');
 assert.equal(esp2.n, 'Primera Federación Fútbol Femenino');
-for (const file of ['src/data-f.js', 'public/camino-engine.js']) {
+for (const file of ['legacy-game/src/data-f.js']) {
   const text = fs.readFileSync(file, 'utf8');
   assert.match(text, /"id":"ESP1","c":"ES","n":"Liga F"/);
   assert.ok(text.includes('"id":"ESP1","c":"ES","n":"Liga F"'));
@@ -77,7 +77,7 @@ for (const file of ['src/data-f.js', 'public/camino-engine.js']) {
   assert.ok(text.includes('"id":"ESP2","c":"ES","n":"Primera Federación Fútbol Femenino"'));
   assert.ok(text.includes('"id":"ESP2","c":"ES","n":"Primera Federación Fútbol Femenino","t":2,"top":66,"bot":54,"w":0.8,"gs":1,"clubs":"Alhama CF|Athletic Club B|CP Cacereño|CD Alba Femenino|Osasuna B|CD Tenerife B|Atlético de Madrid B|FC Barcelona B|Levante UD|Real Madrid B|Real Sociedad B|Real Unión de Tenerife Santa Cruz|Sportextremadura CD|Villarreal CF","rel":0,"po":[2,5]'), `${file} ships the sourced ESP2 participant pool and its modeled play-off`);
 }
-for (const file of ['legacy-game/src/data-f.js', 'src/data-f.js']) {
+for (const file of ['legacy-game/src/data-f.js']) {
   assert.ok(fs.readFileSync(file, 'utf8').includes('"rel":0,"po":[2,5],"poLegs":2'), `${file} models the 2026/27 two-leg promotion playoff`);
 }
 console.log('Women’s competition provenance passed: AFFA 2025/26 evidence and RFEF 2026/27 ESP2 participants, format and limits.');

@@ -580,6 +580,9 @@ function finishPlayer(f) {
       } else if (x < gS * frac) pg++;
       else if (x < (gS + aS * 0.78) * frac) pa++;
     }
+    /* la fixture queda coherente para el resumen y el diario: un gol ganado en la Jugada
+       Maestra (o una asistencia) cuenta como gol del partido, no solo en las estadísticas */
+    f.mg = pg - (f.etg || 0); f.ma = pa;
     var res = gu > gt ? 1 : gu === gt ? 0 : -1;
     var r = 6.45 + clamp((eff - f.tr0) * 0.05, -0.6, 0.6) + clamp((eff - f.or) * 0.015, -0.4, 0.4) + clamp((eff - 75) * 0.015, -0.3, 0.3)
       + gauss() * 0.5 + pg * 0.9 + pa * 0.5 + res * 0.25 + f.mr;
@@ -1359,6 +1362,7 @@ function restore(json) {
   if (!S.uid) S.uid = Date.now().toString(36);
   /* partidas de antes de añadir divisiones: completar clubes y ligas nuevas */
   for (var i = S.cr.length; i < W.clubs.length; i++) { S.cr[i] = W.clubs[i].r0; S.cl[i] = W.clubs[i].lg0; }
+  if (typeof teamsOfLeagueReset === "function") teamsOfLeagueReset();
   W.lg.forEach(function (l, li) {
     if (S.last && S.last.final && !S.last.final[li]) S.last.final[li] = teamsOfLeague(li).sort(function (a, b) { return S.cr[b] - S.cr[a]; });
     if (S.L && !S.L[li]) S.L[li] = newLeagueSeason(li);
