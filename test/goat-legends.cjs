@@ -298,6 +298,5 @@ for (const key of ['Leyendas del universo en {year}',
 const build = fs.readFileSync('build_legacy_game.py', 'utf8');
 assert.ok(build.indexOf('"goat.js"') < build.indexOf('"goat-legends.js"'), 'the legends load after the GOAT client');
 assert.ok(build.indexOf('"goat-legends.js"') < build.indexOf('"ui-goat.js"'), 'the legends load before the GOAT sheet');
-assert.equal(fs.readFileSync('legacy-game/src/goat-legends.js', 'utf8'), fs.readFileSync('src/goat-legends.js', 'utf8'), 'both source copies stay in sync');
 
 console.log('GOAT legends tests passed: fourteen fictional in-universe legends, five locales, club/era provenance, record comparison, one-off career news and an offline legends board.');

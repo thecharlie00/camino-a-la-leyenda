@@ -584,7 +584,7 @@ for (const ev of universe) {
 for (const lang of ['en', 'de', 'it', 'fr']) {
   const catalog = {};
   for (const f of fs.readdirSync(`i18n/${lang}`).filter((x) => x.endsWith('.json'))) Object.assign(catalog, JSON.parse(fs.readFileSync(`i18n/${lang}/${f}`, 'utf8')));
-  for (const root of ['legacy-game/src', 'src']) {
+  for (const root of ['legacy-game/src']) {
     const ctx = {I18N: {[lang]: {}}};
     vm.createContext(ctx);
     vm.runInContext(fs.readFileSync(`${root}/lang-${lang}.js`, 'utf8'), ctx, {filename: `${root}/lang-${lang}.js`});

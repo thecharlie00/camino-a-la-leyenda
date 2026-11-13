@@ -1,5 +1,7 @@
 # QA_AUDIT_REPORT.md — Camino a la Leyenda
 
+> **Nota (2026-10-27):** este informe describe el estado en su commit de referencia. La antigua app React (`src/`) y el bundle `public/camino-engine.js` se retiraron después: el sitio publicado es estático (`index.html`, `site.css`, `site.js`) y el juego vive en `dist/jugar/juego.html`, generado desde `legacy-game/src`.
+
 **Fecha:** 2026-10-28
 **Estado:** Fase 1 parcial; smoke interactivo móvil completado para creación e inicio de los tres modos, con cobertura posterior aún incompleta. No se inicia Fase 2 hasta recibir aprobación explícita de hallazgos.
 **Build/commit de referencia:** Android `5.8` / `versionCode 58`; workspace en `9ad5a99`.

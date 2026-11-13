@@ -339,8 +339,15 @@ source_files = [(name, (SRC / name).read_text(encoding="utf-8")) for name in ORD
 runtime_prefix = "var GOAT_API_URL = " + json.dumps(goat_api_url) + ";\n" + build_js + "var GOAT_WEB_BUILD = false;\n"
 common_prefix = runtime_prefix + ERAS_DATA_JS
 
-# The public web build stays as one self-contained page with its existing startup behavior.
-web_js = "var P3D_ASSET_PACK = " + json.dumps(asset_pack, separators=(",", ":")) + ";\n" + common_prefix + "\n".join(source for _, source in source_files)
+# The public web build stays as one self-contained page. Los idiomas viajan como texto
+# inerte (#camino-i18n-xx) y solo se evalúa el que el usuario tiene activo: antes se
+# compilaban los cinco en cada arranque aunque solo se usara uno.
+web_sources = [(name, source) for name, source in source_files if name not in LANG_FILES]
+if len(web_sources) + len(LANG_FILES) != len(source_files):
+    raise SystemExit("Web build must split every locale module out of the executable payload")
+# El paquete 3D viaja como plantilla inerte, igual que en Android: Pitch3DAssets.loadEmbedded()
+# lo parsea la primera vez que hace falta un modelo, no en cada arranque.
+web_js = common_prefix + "\n".join(source for _, source in web_sources)
 for old, new in (
     ("var WEB_BUILD = false;", "var WEB_BUILD = true;"),
     ("var NO_ADS = false;", "var NO_ADS = true;"),
@@ -464,7 +471,9 @@ WEB_BOOTSTRAP = """(function () {
 
 web_html = html_head + f"""<body>
 <div id="app">{LOADING_SCREEN}</div>
+{asset_markup}
 <script type="text/plain" id="web-game-source">{web_js}</script>
+{LANG_MARKUP}
 <script>
 {WEB_BOOTSTRAP}
 </script>
@@ -489,12 +498,6 @@ web_page.write_text(web_html, encoding="utf-8")
 mobile_page = ROOT / "dist" / "android" / "jugar" / "juego.html"
 mobile_page.parent.mkdir(parents=True, exist_ok=True)
 mobile_page.write_text(mobile_html, encoding="utf-8")
-
-# Do not ship the stale v5.2 bundle from public/; the generated v5.32/82 game
-# is now the only engine used by the Web page and Android WebView.
-stale_bundle = ROOT / "dist" / "camino-engine.js"
-if stale_bundle.exists():
-    stale_bundle.unlink()
 
 print("web game.html", round(len(web_html) / 1024), "KB · build", _vn, "(code", _vc, ")")
 print("Android game.html", round(len(mobile_html) / 1024), "KB ·", len(module_ids), "yielded modules")

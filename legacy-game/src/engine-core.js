@@ -160,7 +160,20 @@ function initWorld() {
   S.hist = {};
   W.lg.forEach(function (l, li) { S.last.final[li] = teamsOfLeague(li).sort(function (a, b) { return S.cr[b] - S.cr[a]; }); });
 }
-function teamsOfLeague(li) { var out = []; for (var c = 0; c < S.cl.length; c++) if (S.cl[c] === li) out.push(c); return out; }
+/* Clubes de una división. Construye el índice una vez por estado de la liga y devuelve una
+   copia del grupo (varios llamadores la ordenan en el sitio): antes cada llamada recorría
+   los ~2.000 clubes del mundo. */
+var TOL_CACHE = null;
+function teamsOfLeagueReset() { TOL_CACHE = null; }
+function teamsOfLeague(li) {
+  var cache = TOL_CACHE;
+  if (!cache || cache.s !== S || cache.cl !== S.cl) {
+    cache = TOL_CACHE = {s: S, cl: S.cl, list: {}};
+    for (var i = 0; i < S.cl.length; i++) { var l = S.cl[i]; (cache.list[l] = cache.list[l] || []).push(i); }
+  }
+  var bucket = cache.list[li];
+  return bucket ? bucket.slice() : [];
+}
 function natsOfConf(conf) { var out = []; W.ctry.forEach(function (c, i) { if (c.conf === conf) out.push(i); }); return out; }
 function histPush(k, yr, t, extra) { (S.hist[k] = S.hist[k] || []).push(extra ? [yr, t, extra] : [yr, t]); if (S.hist[k].length > 40) S.hist[k].shift(); }
 
@@ -759,6 +772,7 @@ function seasonEndWorld() {
     top.slice(-k).forEach(function (c) { S.cl[c] = l.downI; S.cr[c] -= 1.4; });
     promoList(l.downI, k).forEach(function (c) { S.cl[c] = li; S.cr[c] += 1.1; });
   });
+  teamsOfLeagueReset();
   W.clubs.forEach(function (cl, i) {
     var li = S.cl[i]; if (li < 0) return;
     var L = W.lg[li], mid = (L.top + L.bot) / 2;

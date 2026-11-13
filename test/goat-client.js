@@ -47,7 +47,7 @@ function loadService(options, sourcePath) {
     fetch: function (url, init) { calls.push({url: url, init: init}); return options.fetch(url, init, calls.length); }
   };
   env.window = env;
-  var source = fs.readFileSync(path.join(root, sourcePath || "src/goat.js"), "utf8");
+  var source = fs.readFileSync(path.join(root, sourcePath || "legacy-game/src/goat.js"), "utf8");
   /* El módulo usa variables globales del juego (S, W, LANG, GOAT_TEXT, GOAT_API_URL). */
   var factory = new Function("window", "GOAT_API_URL", "GOAT_TEXT", "LANG", "navigator",
     "localStorage", "fetch", "TextEncoder", "AbortController", "console", source);
@@ -219,7 +219,7 @@ function loadService(options, sourcePath) {
   }
 
   console.log("Envío Android nativo (sin CORS de origen file://)");
-  for (var nativeSource of ["src/goat.js", "legacy-game/src/goat.js"]) {
+  for (var nativeSource of ["legacy-game/src/goat.js"]) {
     var nativeEnv;
     var nativeCalls = [];
     nativeEnv = loadService({url: "https://api.test", bridge: {

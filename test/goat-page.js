@@ -1,4 +1,4 @@
-/* Pruebas de la página GOAT LADDER publicada: enlaces desde la app React y
+/* Pruebas de la página GOAT LADDER publicada: enlaces desde el sitio estático y
    comportamiento del tablero (reintento, timeout, filtros y pintado real).
    Se ejecutan sin navegador:  node test/goat-page.js  */
 import assert from 'node:assert/strict';
@@ -7,15 +7,22 @@ import { JSDOM } from 'jsdom';
 
 const html = readFileSync('goat-ladder/index.html', 'utf8');
 const script = readFileSync('goat-ladder.js', 'utf8');
-const appSource = readFileSync('src/App.tsx', 'utf8');
-const headerSource = readFileSync('src/components/Header.tsx', 'utf8');
-assert.match(headerSource, /const goatLadderHref = lang === 'es' \? '\/goat-ladder\/' : `\/\$\{lang\}\/goat-ladder\/`;/,
-  'The React app should link to the canonical GOAT page for the selected language');
-assert.match(headerSource, /href=\{goatLadderHref\}/);
-assert.doesNotMatch(headerSource, /setActiveView\('goat'\)/,
-  'The GOAT navigation must not open the disconnected local demo');
-assert.doesNotMatch(appSource, /GoatLadderView/,
-  'The React app must not render the old fake GOAT leaderboard');
+/* Cada página publicada enlaza a la página GOAT canónica de su idioma. */
+for (const [page, href] of [
+  ['index.html', 'https://futbolroadtolegend.com/goat-ladder/'],
+  ['en/index.html', 'https://futbolroadtolegend.com/en/goat-ladder/'],
+  ['de/index.html', 'https://futbolroadtolegend.com/de/goat-ladder/'],
+  ['it/index.html', 'https://futbolroadtolegend.com/it/goat-ladder/'],
+  ['fr/index.html', 'https://futbolroadtolegend.com/fr/goat-ladder/'],
+  ['jugar/index.html', 'https://futbolroadtolegend.com/goat-ladder/'],
+  ['en/jugar/index.html', 'https://futbolroadtolegend.com/en/goat-ladder/'],
+]) {
+  const source = readFileSync(page, 'utf8');
+  assert.ok(source.includes(`class="goat-tab" href="${href}"`),
+    `${page} should link to the canonical GOAT page for its language`);
+  assert.doesNotMatch(source, /local-demo|fake-goat/,
+    `${page} must not ship a disconnected local leaderboard demo`);
+}
 
 const dom = new JSDOM(html, {runScripts: 'outside-only', url: 'https://example.test/goat-ladder/'});
 const {window} = dom;

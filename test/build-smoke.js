@@ -43,7 +43,7 @@ assert.match(html, /max-height: calc\(100dvh - 96px/, 'In-game notices must stay
 assert.match(html, /\.ntfs \{[\s\S]*?overflow-y: auto/, 'The in-game notice stack must remain scrollable when several notices are visible');
 assert.match(androidHtml, /ntf-history-list/);
 for (const translation of ['Notifications', 'Benachrichtigungen', 'Notifiche', 'Alertes de match']) {
-  assert.ok(gameSource.includes(translation), `Missing localized notifications UI text: ${translation}`);
+  assert.ok(html.includes(translation), `Missing localized notifications UI text: ${translation}`);
 }
 assert.match(gameSource, /var WEB_BUILD = true;/);
 assert.match(gameSource, /var NO_ADS = true;/);
@@ -51,15 +51,19 @@ assert.doesNotMatch(html, /camino-module-\d+/, 'Web build must retain its existi
 assert.match(androidHtml, /class="boot-screen"[\s\S]*?data-boot-status/, 'Android page must show the shared loading screen');
 assert.match(androidHtml, /boot-track/, 'Android loading screen should include the progress animation');
 
-const webPackMatch = gameSource.match(/var P3D_ASSET_PACK = (\{[^;]+\});/);
-assert.ok(webPackMatch, 'Web build must retain its existing embedded 3D asset pack');
+/* La web, igual que Android, guarda modelos e idiomas en texto inerte: solo se evalúa lo que
+   el jugador usa (el idioma activo y los modelos la primera vez que abre el 3D). */
+const webPackMatch = html.match(/<template id="pitch3d-asset-pack">(\{[\s\S]*?)<\/template>/);
+assert.ok(webPackMatch, 'Web build must keep the embedded 3D asset pack in an inert template');
 const modelPack = JSON.parse(webPackMatch[1]);
 for (const model of ['male_lod1', 'female_lod1', 'goalkeeper_lod1', 'ball_lod1']) {
   assert.ok(modelPack[model]?.length > 1000, `Missing web model: ${model}`);
 }
-for (const language of ['en', 'de', 'it', 'fr']) {
-  assert.match(gameSource, new RegExp(`I18N\\.${language} = \\{`), `Web ${language} translations must remain inline`);
+for (const language of ['en', 'de', 'it', 'fr', 'fem']) {
+  assert.match(html, new RegExp(`id="camino-i18n-${language}"`), `Missing web lazy locale ${language}`);
+  assert.doesNotMatch(gameSource, new RegExp(`I18N\\.${language} = \\{`), `Web ${language} catalog must stay out of executable startup code`);
 }
+assert.doesNotMatch(gameSource, /var P3D_ASSET_PACK = /, 'Web models must not be compiled as part of the startup script');
 
 const loaderMatch = androidHtml.match(/<script>\s*([\s\S]*?)<\/script>/);
 assert.ok(loaderMatch, 'Android game loader script is missing');

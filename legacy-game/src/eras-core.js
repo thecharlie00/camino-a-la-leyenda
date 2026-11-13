@@ -68,6 +68,9 @@ function eraProfileForYear(year, ctx) {
 }
 function eraContextForYear(year, ctx) {
   if (!ERAS_MODE) return null;
+  /* Carrera moderna: ninguna regla de época que aplicar. Sin esta salida rápida, cada
+     partido simulado de la liga pagaba el cálculo de alcance y el perfil de época. */
+  if (!ERA_CREATE_CONTEXT && !eraIsActive()) return null;
   var scope = ctx || ERA_SCOPE || eraCareerScope();
   if (scope && scope.year != null) year = scope.year;
   if (S && S.era && S.era.active) return eraProfileForYear(year == null ? S.yr : year, scope);
@@ -609,6 +612,7 @@ function eraYearbook() {
     var original = window[name];
     window[name] = function (f) {
       var self = this, args = arguments;
+      if (!eraIsActive()) return original.apply(self, args);
       if (!eraContextForYear(S && S.yr)) return original.apply(self, args);
       return eraWithScope(eraScopeOfFixture(f), function () { return original.apply(self, args); });
     };
@@ -731,6 +735,7 @@ function eraYearbook() {
   if (typeof tblAdd === "function") {
     var oldTblAdd = tblAdd;
     tblAdd = function (row, gf, ga) {
+      if (!eraIsActive()) return oldTblAdd.apply(this, arguments);
       if (!eraContextForYear(S && S.yr)) return oldTblAdd.apply(this, arguments);
       row[0]++; row[4] += gf; row[5] += ga;
       if (gf > ga) { row[1]++; row[6] += eraRulesForYear(S.yr).winPoints; }
