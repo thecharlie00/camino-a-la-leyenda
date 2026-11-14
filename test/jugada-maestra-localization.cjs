@@ -19,7 +19,23 @@ const keys = [
   'Combina con un apoyo y busca la devolución.', 'Tiro colocado',
   'Abre el ángulo y apunta a un lado de la portería.', 'Centro desde la banda',
   'Supera la presión y encuentra el remate en el área.', 'Contraataque',
-  'Avanza con decisión: tienes pocas acciones antes del repliegue.'
+  'Avanza con decisión: tienes pocas acciones antes del repliegue.',
+  /* vista 3D con trazos dibujados */
+  "¡Cortado!",
+  "¡GOL!",
+  "¡Parada!",
+  "¡Larguero!",
+  "¡Al palo!",
+  "¡Fuera!",
+  "¡Bloqueado!",
+  "Desliza desde el balón: hacia un compañero para pasar o hacia la portería para tirar.",
+  "Siguiente jugada",
+  "Menos acciones, más estrellas.",
+  "La defensa tapa el disparo. Dibuja el tiro rodeando a los rivales.",
+  "El portero la atrapa: apunta más cerca de los postes.",
+  "El portero la atrapa: acércate más o busca la escuadra.",
+  "Fuera. Apunta dentro de la portería.",
+  "¡Al palo! Por muy poco."
 ];
 /* cadenas de la integración de Jugada Maestra en el partido (panel y comentario) */
 const matchKeys = [

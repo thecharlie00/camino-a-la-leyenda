@@ -690,10 +690,10 @@ function jmLiveAuto() {
   return jmLiveApply(L, out === "goal" ? "goal" : out === "save" ? "save" : out === "post" ? "post" : "miss");
 }
 /* trazo del usuario: se resuelve en el acto y, si la jugada termina, pasa al partido */
-function jmLiveResolve(x, y) {
+function jmLiveResolve(x, y, path) {
   var L = S && S.live;
   if (!L || !L.jm || L.jm.done || typeof JugadaMaestra === "undefined") return null;
-  var r = JugadaMaestra.resolve(L.jm.st, x, y);
+  var r = JugadaMaestra.resolve(L.jm.st, x, y, path);
   if (!r || !r.ok) return {ok: false, pending: false, msg: (r && r.msg) || "", res: r};
   if (!L.jm.st.done) return {ok: true, pending: true, msg: r.msg, res: r};
   var st = L.jm.st, last = st.log[st.log.length - 1], res;

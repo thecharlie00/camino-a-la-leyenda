@@ -751,5 +751,20 @@
  "En una ocasión por partido el juego se detiene y dibujas la jugada: si acaba en gol, el tanto es tuyo, sin repetirla.": "Einmal pro Spiel hält das Spiel an und du zeichnest den Zug: Endet er im Tor, gehört das Tor dir – ohne Wiederholung.",
  "Tus partidos se resuelven como hasta ahora, sin interrupciones.": "Deine Spiele werden wie bisher ohne Unterbrechungen entschieden.",
  "Jugada de pases": "Passspielzug",
- "Gol: el tanto es tuyo y cuenta en tus estadísticas.": "Tor: Das Tor gehört dir und zählt in deiner Statistik."
+ "Gol: el tanto es tuyo y cuenta en tus estadísticas.": "Tor: Das Tor gehört dir und zählt in deiner Statistik.",
+ "¡Cortado!": "Abgefangen!",
+ "¡GOL!": "TOR!",
+ "¡Parada!": "Gehalten!",
+ "¡Larguero!": "Latte!",
+ "¡Al palo!": "Pfosten!",
+ "¡Fuera!": "Daneben!",
+ "¡Bloqueado!": "Geblockt!",
+ "Desliza desde el balón: hacia un compañero para pasar o hacia la portería para tirar.": "Wische vom Ball aus: zu einem Mitspieler für einen Pass oder zum Tor für einen Schuss.",
+ "Siguiente jugada": "Nächster Spielzug",
+ "Menos acciones, más estrellas.": "Weniger Aktionen, mehr Sterne.",
+ "La defensa tapa el disparo. Dibuja el tiro rodeando a los rivales.": "Die Abwehr blockt den Schuss. Zieh den Schuss um die Gegner herum.",
+ "El portero la atrapa: apunta más cerca de los postes.": "Der Torwart hält: ziele näher an die Pfosten.",
+ "El portero la atrapa: acércate más o busca la escuadra.": "Der Torwart hält: komm näher heran oder ziele in den Winkel.",
+ "Fuera. Apunta dentro de la portería.": "Daneben. Ziele ins Tor.",
+ "¡Al palo! Por muy poco.": "Pfosten! Ganz knapp."
 }

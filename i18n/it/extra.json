@@ -751,5 +751,20 @@
  "En una ocasión por partido el juego se detiene y dibujas la jugada: si acaba en gol, el tanto es tuyo, sin repetirla.": "Una volta a partita il gioco si ferma e disegni l'azione: se finisce in gol, il gol è tuo, senza ripeterla.",
  "Tus partidos se resuelven como hasta ahora, sin interrupciones.": "Le tue partite si risolvono come prima, senza interruzioni.",
  "Jugada de pases": "Azione di passaggio",
- "Gol: el tanto es tuyo y cuenta en tus estadísticas.": "Gol: il gol è tuo e conta nelle tue statistiche."
+ "Gol: el tanto es tuyo y cuenta en tus estadísticas.": "Gol: il gol è tuo e conta nelle tue statistiche.",
+ "¡Cortado!": "Intercettato!",
+ "¡GOL!": "GOL!",
+ "¡Parada!": "Parata!",
+ "¡Larguero!": "Traversa!",
+ "¡Al palo!": "Palo!",
+ "¡Fuera!": "Fuori!",
+ "¡Bloqueado!": "Respinto!",
+ "Desliza desde el balón: hacia un compañero para pasar o hacia la portería para tirar.": "Trascina dal pallone: verso un compagno per passare o verso la porta per tirare.",
+ "Siguiente jugada": "Prossima azione",
+ "Menos acciones, más estrellas.": "Meno azioni, più stelle.",
+ "La defensa tapa el disparo. Dibuja el tiro rodeando a los rivales.": "La difesa respinge il tiro. Disegna il tiro aggirando gli avversari.",
+ "El portero la atrapa: apunta más cerca de los postes.": "Il portiere blocca: mira più vicino ai pali.",
+ "El portero la atrapa: acércate más o busca la escuadra.": "Il portiere blocca: avvicinati o cerca l'incrocio.",
+ "Fuera. Apunta dentro de la portería.": "Fuori. Mira dentro la porta.",
+ "¡Al palo! Por muy poco.": "Palo! Per un soffio."
 }

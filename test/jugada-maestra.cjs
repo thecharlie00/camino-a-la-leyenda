@@ -33,3 +33,30 @@ const after = JSON.stringify(terminal);
 assert.equal(ctx.JugadaMaestra.resolve(terminal, 94, 50).ok, false, 'completed moves cannot be replayed');
 assert.equal(JSON.stringify(terminal), after);
 console.log('Jugada Maestra tests passed: deterministic gestures, 30 scenarios, five chapters, invalid inputs and terminal state.');
+
+// Retos dibujados (sin azar): el trazo decide como en los juegos de jugadas dibujadas.
+const J = ctx.JugadaMaestra;
+function bend(a, b, off) { const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy), c = [mx - dy / L * off, my + dx / L * off], out = []; for (let i = 1; i < 8; i++) { const t = i / 8; out.push([(1 - t) * (1 - t) * a[0] + 2 * (1 - t) * t * c[0] + t * t * b[0], (1 - t) * (1 - t) * a[1] + 2 * (1 - t) * t * c[1] + t * t * b[1]]); } return out; }
+{
+  const s = J.fresh('jm-04', 9);                     // balón en [66,50], rivales en [69,43], [81,55], [87,44]
+  const blocked = J.resolve(JSON.parse(JSON.stringify(s)), 96, 56.5, [[75, 52], [85, 55]], 1.5);
+  assert.equal(blocked.how, 'block', 'a shot drawn through a defender is blocked');
+  const curved = J.resolve(JSON.parse(JSON.stringify(s)), 96, 43, bend([66, 50], [96, 43], 8), 2.0);
+  assert.equal(curved.how, 'goal', 'a shot curved around the defenders into the corner scores');
+  const centre = J.resolve(JSON.parse(JSON.stringify(s)), 96, 50, [[80, 50.2]], 1.0);
+  assert.ok(['save', 'block'].includes(centre.how), 'a shot at the keeper does not score');
+  const wide = J.resolve(JSON.parse(JSON.stringify(s)), 96, 43, bend([66, 50], [96, 43], 8), 3.0);
+  assert.equal(wide.how, 'miss', 'a shot over the bar misses');
+  const again = J.resolve(JSON.parse(JSON.stringify(s)), 96, 43, bend([66, 50], [96, 43], 8), 2.0);
+  assert.equal(again.how, curved.how, 'campaign outcomes do not depend on luck');
+  const far = J.fresh('jm-01', 3);                   // 40 m de la portería
+  for (const y of [43, 57]) for (const off of [-15, 0, 15]) assert.notEqual(J.resolve(JSON.parse(JSON.stringify(far)), 96, y, bend(far.ball, [96, y], off), 2).how, 'goal', 'shots from 40 m never score');
+  const pass = J.fresh('jm-01', 3), cut = J.fresh('jm-01', 3);
+  const ok = J.resolve(pass, 59, 61, [[30, 60], [45, 64]]);
+  assert.equal(ok.completed, true, 'a pass drawn around the defenders arrives');
+  const bad = J.resolve(cut, 59, 61, [[34, 55], [52, 50]]);
+  assert.equal(bad.completed, false, 'a pass drawn through a defender is cut');
+  assert.equal(cut.done, true, 'a cut pass ends a drawn challenge');
+  for (const l of J.levels()) { const p = J.par(l.id); assert.ok(p >= 1 && p <= l.max, `${l.id} can be solved within its actions`); }
+}
+console.log('Jugada Maestra drawn-play tests passed: blocks, curves, corners, misses, long shots, cut passes and par.');

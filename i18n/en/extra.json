@@ -753,5 +753,20 @@
  "En una ocasión por partido el juego se detiene y dibujas la jugada: si acaba en gol, el tanto es tuyo, sin repetirla.": "Once per match the game pauses and you draw the move: if it ends in a goal, the goal is yours, with no retries.",
  "Tus partidos se resuelven como hasta ahora, sin interrupciones.": "Your matches are resolved as before, with no interruptions.",
  "Jugada de pases": "Passing move",
- "Gol: el tanto es tuyo y cuenta en tus estadísticas.": "Goal: the goal is yours and counts in your stats."
+ "Gol: el tanto es tuyo y cuenta en tus estadísticas.": "Goal: the goal is yours and counts in your stats.",
+ "¡Cortado!": "Intercepted!",
+ "¡GOL!": "GOAL!",
+ "¡Parada!": "Saved!",
+ "¡Larguero!": "Off the bar!",
+ "¡Al palo!": "Off the post!",
+ "¡Fuera!": "Wide!",
+ "¡Bloqueado!": "Blocked!",
+ "Desliza desde el balón: hacia un compañero para pasar o hacia la portería para tirar.": "Swipe from the ball: towards a teammate to pass or towards the goal to shoot.",
+ "Siguiente jugada": "Next move",
+ "Menos acciones, más estrellas.": "Fewer moves, more stars.",
+ "La defensa tapa el disparo. Dibuja el tiro rodeando a los rivales.": "The defence blocks the shot. Curve your shot around the defenders.",
+ "El portero la atrapa: apunta más cerca de los postes.": "The keeper holds it: aim closer to the posts.",
+ "El portero la atrapa: acércate más o busca la escuadra.": "The keeper holds it: get closer or go for the top corner.",
+ "Fuera. Apunta dentro de la portería.": "Wide. Aim inside the goal.",
+ "¡Al palo! Por muy poco.": "Off the post! So close."
 }

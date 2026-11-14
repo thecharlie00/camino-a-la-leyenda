@@ -34,6 +34,7 @@
       ".jml-res.good{background:#e6f6e9;color:#174528}.jml-res.try{background:#fff1df;color:#5c3614}" +
       ".jml-go{min-height:48px}" +
       ".jml-box .jm-field{max-height:min(46vh,340px);border:1px solid rgba(255,255,255,.14)}" +
+      ".jml-hero{height:min(54vh,460px);min-height:260px;border-radius:14px;border:1px solid rgba(255,255,255,.14)}" +
       "@media(max-height:560px){.jml-box .jm-field{max-height:34vh}.jml-intro{display:none}}";
     document.head.appendChild(st);
   }
@@ -66,7 +67,7 @@
     return [sc[0], sc[1]];
   }
   function matchOver() { return isLive() ? !!S.live.done : false; }
-  function shotAt(x, y) { return isLive() ? jmLiveResolve(x, y) : jmPlayerResolve(x, y); }
+  function shotAt(x, y, path) { return isLive() ? jmLiveResolve(x, y, path) : jmPlayerResolve(x, y, path); }
   function autoShot() { return isLive() ? jmLiveAuto() : jmPlayerAuto(); }
   function refreshView() { if (isLive() && U.liveRefresh) U.liveRefresh(); }
   function resumeView() { if (isLive()) { if (U.liveResume) U.liveResume(); } else if (U.playerJMResume) U.playerJMResume(); }
@@ -122,7 +123,7 @@
       '<h2>' + h(who) + "</h2>" +
       '<div class="jml-score"><span>' + h(left) + "</span><b>" + a + " – " + b + "</b><span>" + h(right) + "</span><b style=\"font-size:var(--fs-md)\">" + (matchOver() ? h(tr2("Final")) : (m && m.min != null ? m.min : 0) + "'") + "</b></div></div>" +
       '<p class="jml-intro">' + h(done ? tr2("La jugada ya está resuelta. Vuelve al partido cuando quieras.") : tr2("El partido está en pausa. Dibuja desde el balón hacia un compañero o hacia la portería: la jugada se resuelve una sola vez.")) + "</p>" +
-      '<div class="jml-field-wrap">' + field(s) + (done ? "" : '<span class="jml-turn">' + h(tr2("Acciones: {n}/{max}", {n: s.turn, max: s.max})) + "</span>") + "</div>" +
+      '<div class="jml-field-wrap">' + (ui && ui.view ? '<div class="jml-hero-slot"></div>' : field(s)) + (done ? "" : '<span class="jml-turn">' + h(tr2("Acciones: {n}/{max}", {n: s.turn, max: s.max})) + "</span>") + "</div>" +
       '<p class="jml-status" role="status" aria-live="polite">' + h(statusText(s)) + "</p>";
     if (!done) {
       out += '<div class="jml-tools"><div class="jml-tool-label">' + h(tr2("O elige un pase asistido")) + '</div><div class="jml-pass-list">' +
@@ -139,7 +140,10 @@
     if (!ui) return;
     var s = jm();
     if (!s) { close(true); return; }
+    if (ui.host && ui.host.parentNode) ui.host.parentNode.removeChild(ui.host);
     ui.box.innerHTML = panel();
+    var slot = ui.view && ui.box.querySelector(".jml-hero-slot");
+    if (slot) slot.parentNode.replaceChild(ui.host, slot);
     if (s.done || resolved()) { var g = ui.ov.querySelector('[data-jml="back"]'); if (g) try { g.focus(); } catch (e) {} }
   }
   function open() {
@@ -154,12 +158,24 @@
     ov.appendChild(box);
     ui = {ov: ov, box: box};
     document.body.appendChild(ov);
+    /* vista 3D: cámara detrás del balón y trazos con el dedo (si hay WebGL) */
+    if (typeof JMHero !== "undefined" && JMHero && JMHero.ok()) {
+      var host = document.createElement("div"); host.className = "jml-hero";
+      box.appendChild(host);
+      var view = JMHero.mount(host, {
+        get: jm,
+        resolve: function (x, y, path) { var r = shotAt(x, y, path); if (!r) return null; return Object.assign({}, r.res || {}, {ok: r.ok, outcome: r.outcome, msg: r.msg}); },
+        after: function (r) { after({pending: !r.outcome, outcome: r.outcome}, true); },
+        mine: !isLive(), press: 0.7
+      });
+      if (view) { ui.view = view; ui.host = host; } else if (host.parentNode) host.parentNode.removeChild(host);
+    }
     render();
     var first = ov.querySelector('[data-jml="pass"]:not([disabled])') || ov.querySelector('[data-jml="shot"]');
     if (first) try { first.focus(); } catch (e) {}
   }
   function close(resume) {
-    if (ui) { try { ui.ov.remove(); } catch (e) {} ui = null; drawing = null; }
+    if (ui) { if (ui.view) try { ui.view.dispose(); } catch (e) {} try { ui.ov.remove(); } catch (e) {} ui = null; drawing = null; }
     if (resume) resumeView();
   }
   function act(kind, v) {
@@ -167,6 +183,7 @@
     var s = jm();
     if (!s || s.done || resolved()) return;
     if (kind === "auto") { autoShot(); render(); refreshView(); return; }
+    if (ui.view && (kind === "pass" || kind === "shot")) { ui.view.act(kind, v); return; }
     if (kind === "pass") {
       var mate = s.mates[+v];
       if (!mate || !mate.open) return;
@@ -176,8 +193,9 @@
       after(shotAt(g[0], g[1]));
     }
   }
-  function after(r) {
+  function after(r, fromHero) {
     if (!r) return;
+    if (ui && ui.view && !fromHero && ui.view.busy0()) return;
     render();
     refreshView();
     try { if (typeof Sfx !== "undefined" && Sfx.play) Sfx.play(r.pending ? "tap" : r.outcome === "goal" ? "big" : r.outcome ? "meh" : "choose"); } catch (e) {}

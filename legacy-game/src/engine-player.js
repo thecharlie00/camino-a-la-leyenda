@@ -477,10 +477,10 @@ function jmPlayerAuto() {
   return jmPlayerApply(f, out === "goal" ? "goal" : out === "save" ? "save" : out === "post" ? "post" : "miss");
 }
 /* trazo del usuario: se resuelve en el acto y, al terminar, pasa al partido */
-function jmPlayerResolve(x, y) {
+function jmPlayerResolve(x, y, path) {
   var f = jmPlayerFixture(), jm = f && f.jm;
   if (!jm || jm.done || typeof JugadaMaestra === "undefined") return null;
-  var r = JugadaMaestra.resolve(jm.st, x, y);
+  var r = JugadaMaestra.resolve(jm.st, x, y, path);
   if (!r || !r.ok) return {ok: false, pending: false, msg: (r && r.msg) || "", res: r};
   if (!jm.st.done) return {ok: true, pending: true, msg: r.msg, res: r};
   var st = jm.st, last = st.log[st.log.length - 1], res;

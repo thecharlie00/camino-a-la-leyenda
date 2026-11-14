@@ -35,6 +35,26 @@ var JugadaMaestra = (function () {
   function level(id) { for (var i = 0; i < LEVELS.length; i++) if (LEVELS[i].id === id) return LEVELS[i]; return null; }
   function dist(a, b) { return Math.hypot(a[0] - b[0], a[1] - b[1]); }
   function segDist(p, a, b) { var dx = b[0] - a[0], dy = b[1] - a[1], d = dx * dx + dy * dy || 1; var t = Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / d)); return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy); }
+  /* distancia de un punto a un trazo (lista de puntos): así un pase o tiro con rosca puede rodear a un rival */
+  function pathDist(p, pts) { var d = 1e9; for (var i = 1; i < pts.length; i++) d = Math.min(d, segDist(p, pts[i - 1], pts[i])); return pts.length > 1 ? d : 1e9; }
+  function cleanPath(path, start, end) {
+    var out = [start.slice()];
+    (path || []).forEach(function (q) { if (q && isFinite(q[0]) && isFinite(q[1])) { var last = out[out.length - 1]; if (Math.hypot(q[0] - last[0], q[1] - last[1]) > 1.5) out.push([Math.max(0, Math.min(100, +q[0])), Math.max(0, Math.min(100, +q[1]))]); } });
+    out.push(end.slice());
+    return out;
+  }
+  /* punto del trazo más cercano a p, y lo que se ha recorrido hasta él (0..1) */
+  function nearestOnPath(p, pts) {
+    var best = pts[0], bd = 1e9, total = 0, at = 0, run = 0, i;
+    for (i = 1; i < pts.length; i++) total += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+    for (i = 1; i < pts.length; i++) {
+      var a = pts[i - 1], b = pts[i], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy), d2 = dx * dx + dy * dy || 1;
+      var k = Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / d2)), q = [a[0] + k * dx, a[1] + k * dy], d = Math.hypot(p[0] - q[0], p[1] - q[1]);
+      if (d < bd) { bd = d; best = q; at = (run + k * L) / (total || 1); }
+      run += L;
+    }
+    return {p: best, d: bd, k: at};
+  }
   function noise(seed, turn, x, y) { var s = (seed ^ Math.imul(turn + 1, 0x45d9f3b) ^ Math.imul(Math.round(x * 10) + 1, 0x27d4eb2d) ^ Math.imul(Math.round(y * 10) + 7, 0x165667b1)) >>> 0; s ^= s >>> 16; s = Math.imul(s, 0x7feb352d); s ^= s >>> 15; s = Math.imul(s, 0x846ca68b); s ^= s >>> 16; return (s >>> 0) / 4294967296; }
   function fresh(id, seed) { var l = level(id); if (!l) return null; return {id: id, seed: ((seed >>> 0) ^ l.seedOffset) >>> 0, ball: l.ball.slice(), mates: l.mates.map(function (p, i) { return {p: p.slice(), i: i, open: true}; }), rivals: l.rivals.map(function (p) { return p.slice(); }), turn: 0, max: l.max, done: false, won: false, log: []}; }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
@@ -84,13 +104,39 @@ var JugadaMaestra = (function () {
     var rest = (roll - xg) / Math.max(0.001, 1 - xg);
     return rest < 0.62 ? "save" : rest < 0.8 ? "post" : "miss";
   }
-  function resolve(s, x, y) {
+  /* Retos (no partido), al estilo de los juegos de jugadas dibujadas: nada de azar. El trazo decide.
+     Portería: postes a 9,15 unidades del centro (7,32 m con 0,4 m por unidad) y larguero a 2,44 m. */
+  var POST = 9.15, BAR = 2.44;
+  function campaignShot(s, start, y, pts, h) {
+    var off = Math.abs(y - 50), far = 97 - start[0], lane = s.rivals.reduce(function (v, r) { return Math.min(v, pathDist(r, pts)); }, 99);
+    var hh = h == null ? 1 : +h, how;
+    if (lane < 3.5) how = "block";
+    else if (off > POST || hh > BAR) how = "miss";
+    else if (off > POST - 0.6 || (hh > BAR - 0.12 && off > 1)) how = off > POST - 0.6 ? "post" : "bar";
+    else if (far > 50) how = "save";                                   /* más de 25 m: el portero la ve venir */
+    else if (far > 34 && !(off >= 5.5 && hh >= 1.5)) how = "save";     /* de 17 a 25 m: solo a la escuadra */
+    else if (off < 2.6 && hh < 1.9) how = "save";                      /* al centro: al portero */
+    else how = "goal";
+    return {how: how, lane: lane, scored: how === "goal"};
+  }
+  function resolve(s, x, y, path, h) {
     if (!s || s.done) return {ok: false, reason: "done"};
     x = Math.max(5, Math.min(96, +x || 0)); y = Math.max(7, Math.min(93, +y || 0));
     var start = s.ball.slice(), turn = s.turn++, shot = s.match ? (x >= 87 && y > 26 && y < 74) : (x > 83 && y > 28 && y < 72);
+    /* en los retos todo va por trazo; sin trazo (botones accesibles) cuenta como una línea recta */
+    var drawn = path && path.length ? path : (s.match ? null : []);
+    if (shot && !s.match && drawn) {
+      var pts0 = cleanPath(drawn, start, [96, y]), cs = campaignShot(s, start, y, pts0, h);
+      s.done = true; s.won = cs.scored; s.ball = [95, y];
+      var m0 = cs.how === "goal" ? "¡Gol! La jugada termina en la red." : cs.how === "block" ? "La defensa tapa el disparo. Dibuja el tiro rodeando a los rivales." :
+        cs.how === "save" ? (97 - start[0] > 34 ? "El portero la atrapa: acércate más o busca la escuadra." : "El portero la atrapa: apunta más cerca de los postes.") : cs.how === "miss" ? "Fuera. Apunta dentro de la portería." : "¡Al palo! Por muy poco.";
+      s.log.push({k: "shot", ok: cs.scored, msg: m0, how: cs.how, to: [96, y], from: start, path: pts0, h: h == null ? null : +h, lane: cs.lane});
+      return {ok: true, shot: true, scored: cs.scored, how: cs.how, msg: m0, state: s};
+    }
     if (shot) {
       var goalTarget = Math.abs(y - 50), pressure = s.rivals.reduce(function (v, r) { return Math.min(v, dist(r, start)); }, 99);
-      var lane = s.rivals.reduce(function (v, r) { return Math.min(v, segDist(r, start, [96, y])); }, 99);
+      var shotPts = drawn ? cleanPath(drawn, start, [96, y]) : null;
+      var lane = s.rivals.reduce(function (v, r) { return Math.min(v, shotPts ? pathDist(r, shotPts) : segDist(r, start, [96, y])); }, 99);
       var quality = Math.max(0.13, Math.min(0.91, 0.82 - goalTarget * 0.012 - Math.max(0, 18 - lane) * 0.018 - Math.max(0, 15 - pressure) * 0.009));
       /* Momento de partido: mismo gesto y misma física, pero la conversión se ancla en el xG
          del modelo. Un intento neutro convierte como el tiro automático; acercarse y abrir
@@ -105,7 +151,7 @@ var JugadaMaestra = (function () {
       var scored = noise(s.seed, turn, x, y) < quality;
       s.done = true; s.won = scored; s.ball = [95, y];
       var msg = scored ? "¡Gol! La jugada termina en la red." : lane < 9 ? "La defensa tapa el disparo. Busca primero una línea de tiro." : "El portero llega a tu disparo. Prueba con más espacio o cambia el ángulo.";
-      s.log.push({k: "shot", ok: scored, msg: msg, quality: quality, to: [x, y], lane: lane});
+      s.log.push({k: "shot", ok: scored, msg: msg, quality: quality, to: [x, y], from: start, path: shotPts, h: h == null ? null : +h, lane: lane});
       return {ok: true, shot: true, scored: scored, quality: quality, msg: msg, state: s};
     }
     var target = [x, y], best = null, bd = 1e9;
@@ -113,10 +159,20 @@ var JugadaMaestra = (function () {
     if (!best || bd > 25) {
       s.turn--; return {ok: false, reason: "target", msg: "Busca un espacio o apunta a un compañero o compañera."};
     }
-    var laneDist = s.rivals.reduce(function (v, r) { return Math.min(v, segDist(r, start, best.p)); }, 99);
+    var passPts = drawn ? cleanPath(drawn, start, best.p) : null, cut = null;
+    var laneDist = s.rivals.reduce(function (v, r) { return Math.min(v, passPts ? pathDist(r, passPts) : segDist(r, start, best.p)); }, 99);
     var closeness = s.rivals.reduce(function (v, r) { return Math.min(v, dist(r, best.p)); }, 99);
     var qualityPass = Math.max(0.18, Math.min(0.96, 0.84 - Math.max(0, 10 - laneDist) * 0.05 - Math.max(0, 10 - closeness) * 0.025 - bd * 0.006));
-    var success = noise(s.seed, turn, x, y) < qualityPass;
+    var success;
+    if (!s.match && passPts) {
+      /* reto dibujado: el pase llega si el trazo esquiva a todos los rivales; si pasa cerca de uno, lo corta */
+      success = laneDist >= 4 && closeness >= 2.5;
+      if (!success) {
+        var hit = null, hd = 1e9;
+        s.rivals.forEach(function (r) { var n = nearestOnPath(r, passPts); if (n.d < 4 && n.k < (hit ? hit.k : 2)) { hit = n; hd = n.d; } else if (!hit && n.d < hd) { hd = n.d; cut = n; } });
+        cut = hit || cut || nearestOnPath(best.p, passPts);
+      }
+    } else success = noise(s.seed, turn, x, y) < qualityPass;
     if (success) {
       s.ball = best.p.slice(); best.open = false; s.chain = (s.chain || 0) + 1;
       /* tras el pase, la defensa repliega hacia el balón y el resto del equipo ofrece apoyos.
@@ -124,17 +180,46 @@ var JugadaMaestra = (function () {
       s.rivals = s.rivals.map(function (r, i) { var k = i === 0 ? (s.match ? 0.12 : 0.24) : (s.match ? 0.07 : 0.13); return [r[0] + (s.ball[0] - r[0]) * k, r[1] + (s.ball[1] - r[1]) * k]; });
       s.mates.forEach(function (m) { if (m !== best && m.open) { m.p[0] = Math.min(90, m.p[0] + 2.5); m.p[1] += (50 - m.p[1]) * 0.06; } });
     } else {
-      s.ball = [start[0] + (best.p[0] - start[0]) * 0.56, start[1] + (best.p[1] - start[1]) * 0.56];
+      s.ball = cut ? cut.p.slice() : [start[0] + (best.p[0] - start[0]) * 0.56, start[1] + (best.p[1] - start[1]) * 0.56];
       var near = s.rivals.slice().sort(function (a, b) { return dist(a, s.ball) - dist(b, s.ball); })[0];
       if (near) { near[0] = s.ball[0] + 2; near[1] = s.ball[1]; }
     }
     var message = success ? "Pase completado: el equipo conserva la posesión." : "Pase interceptado. Aún puedes reaccionar si te queda otra acción.";
-    s.log.push({k: "pass", ok: success, msg: message, quality: qualityPass, from: start, to: best.p.slice()});
-    if (!success && s.turn >= s.max) s.done = true;
+    s.log.push({k: "pass", ok: success, msg: message, quality: qualityPass, from: start, to: best.p.slice(), mate: best.i, path: passPts, cut: cut ? cut.k : null});
+    if (!success && (s.turn >= s.max || (!s.match && passPts))) s.done = true; /* en los retos dibujados, un pase cortado acaba la jugada */
     if (s.turn >= s.max && !s.won) s.done = true;
     return {ok: true, shot: false, completed: success, quality: qualityPass, msg: message, state: s};
   }
-  function result(s) { if (!s) return null; return {done: !!s.done, won: !!s.won, actions: s.turn, medal: s.won ? (s.turn <= 2 ? 3 : s.turn <= 3 ? 2 : 1) : 0}; }
+  /* par de cada reto: las acciones mínimas con las que se puede marcar (búsqueda pequeña y memorizada) */
+  var PAR = {};
+  function bend(a, b, off) {
+    var mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1, c = [mx - dy / L * off, my + dx / L * off], pts = [];
+    for (var i = 1; i < 8; i++) { var t = i / 8; pts.push([(1 - t) * (1 - t) * a[0] + 2 * (1 - t) * t * c[0] + t * t * b[0], (1 - t) * (1 - t) * a[1] + 2 * (1 - t) * t * c[1] + t * t * b[1]]); }
+    return pts;
+  }
+  function par(id) {
+    if (PAR[id] != null) return PAR[id];
+    var l = level(id); if (!l) return 3;
+    var OFF = [0, -8, 8, -15, 15], layer = [fresh(id, 1)], d, found = 0;
+    function copy(o) { return JSON.parse(JSON.stringify(o)); }
+    for (d = 1; d <= Math.min(l.max, 4) && !found; d++) {
+      var next = [];
+      layer.forEach(function (st) {
+        if (found) return;
+        [43, 44.5, 55.5, 57].forEach(function (y) { OFF.forEach(function (o) { [1, 2].forEach(function (hh) { if (found) return; var c = copy(st), r = resolve(c, 96, y, bend(c.ball, [96, y], o), hh); if (r.ok && r.scored) found = d; }); }); });
+        if (found || d >= l.max) return;
+        st.mates.forEach(function (m) { if (!m.open) return; OFF.forEach(function (o) { var c = copy(st), r = resolve(c, Math.min(m.p[0], 83), m.p[1], bend(c.ball, m.p, o)); if (r.ok && r.completed && !c.done) next.push(c); }); });
+      });
+      layer = next.slice(0, 400);
+    }
+    PAR[id] = found || l.max;
+    return PAR[id];
+  }
+  function result(s) {
+    if (!s) return null;
+    var p = s.match ? 2 : par(s.id);
+    return {done: !!s.done, won: !!s.won, actions: s.turn, par: p, medal: s.won ? (s.turn <= p ? 3 : s.turn <= p + 1 ? 2 : 1) : 0};
+  }
   function levels() { return LEVELS.map(function (l) { return {id: l.id, chapter: l.chapter, chapterTitle: l.chapterTitle, title: l.title, goal: l.goal, max: l.max}; }); }
-  return {levels: levels, level: level, chapters: CHAPTERS.slice(), fresh: fresh, moment: moment, momentAuto: momentAuto, resolve: resolve, result: result, dist: dist, segDist: segDist};
+  return {POST: POST, BAR: BAR, levels: levels, level: level, chapters: CHAPTERS.slice(), fresh: fresh, moment: moment, momentAuto: momentAuto, resolve: resolve, result: result, par: par, dist: dist, segDist: segDist};
 })();

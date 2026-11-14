@@ -751,5 +751,20 @@
  "En una ocasión por partido el juego se detiene y dibujas la jugada: si acaba en gol, el tanto es tuyo, sin repetirla.": "Une fois par match, le jeu s'arrête et tu dessines l'action : si elle finit en but, le but est à toi, sans la rejouer.",
  "Tus partidos se resuelven como hasta ahora, sin interrupciones.": "Tes matchs se résolvent comme avant, sans interruptions.",
  "Jugada de pases": "Action de passe",
- "Gol: el tanto es tuyo y cuenta en tus estadísticas.": "But : le but est à toi et compte dans tes statistiques."
+ "Gol: el tanto es tuyo y cuenta en tus estadísticas.": "But : le but est à toi et compte dans tes statistiques.",
+ "¡Cortado!": "Intercepté !",
+ "¡GOL!": "BUT !",
+ "¡Parada!": "Arrêt !",
+ "¡Larguero!": "Barre transversale !",
+ "¡Al palo!": "Poteau !",
+ "¡Fuera!": "À côté !",
+ "¡Bloqueado!": "Contré !",
+ "Desliza desde el balón: hacia un compañero para pasar o hacia la portería para tirar.": "Glisse depuis le ballon : vers un coéquipier pour passer ou vers le but pour tirer.",
+ "Siguiente jugada": "Action suivante",
+ "Menos acciones, más estrellas.": "Moins d'actions, plus d'étoiles.",
+ "La defensa tapa el disparo. Dibuja el tiro rodeando a los rivales.": "La défense contre le tir. Dessine un tir qui contourne les adversaires.",
+ "El portero la atrapa: apunta más cerca de los postes.": "Le gardien capte : vise plus près des poteaux.",
+ "El portero la atrapa: acércate más o busca la escuadra.": "Le gardien capte : rapproche-toi ou vise la lucarne.",
+ "Fuera. Apunta dentro de la portería.": "À côté. Vise dans le but.",
+ "¡Al palo! Por muy poco.": "Poteau ! Si près."
 }
