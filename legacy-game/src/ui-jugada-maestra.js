@@ -61,9 +61,11 @@
       '<div class="jmh-moves" aria-label="' + h(tr("Acciones: {n}/{max}", {n: active.turn, max: active.max})) + '">' + dots + "</div></div>" +
       '<p class="jmh-goal">' + h(tr(l.goal)) + "</p>";
     var foot = hero.ov.querySelector(".jmh-foot");
-    foot.innerHTML = active.done ? "" : '<div class="jmh-assist" aria-label="' + h(tr("O elige un pase asistido")) + '">' + active.mates.map(function (m, i) {
+    var openA = !!(hero && hero.assist);
+    foot.innerHTML = active.done ? "" : '<div class="jmh-assist">' + (openA ? active.mates.map(function (m, i) {
       return '<button class="jmh-chip" data-jmh="pass" data-v="' + i + '"' + (m.open ? "" : " disabled") + ">" + h(tr("Pase {n}", {n: i + 1})) + "</button>"; }).join("") +
-      '<button class="jmh-chip shot" data-jmh="shot">' + h(tr("Tirar a puerta")) + "</button></div>";
+      '<button class="jmh-chip shot" data-jmh="shot">' + h(tr("Tirar a puerta")) + "</button>" : "") +
+      '<button class="jmh-chip ghost" data-jmh="assist" aria-expanded="' + openA + '">' + h(openA ? tr("Ocultar") : tr("O elige un pase asistido")) + "</button></div>";
     var res = hero.ov.querySelector(".jmh-res");
     if (!active.done) { res.hidden = true; return; }
     var won = !!active.won, md = JugadaMaestra.result(active).medal, nx = lv[at + 1], canNext = won && nx;
@@ -86,7 +88,8 @@
       get: function () { return active; },
       resolve: function (x, y, path, hh) { return JugadaMaestra.resolve(active, x, y, path, hh); },
       after: function (r) { record(r); heroHud(); },
-      mine: true, press: Math.min(0.9, 0.2 + (l ? l.chapter : 1) * 0.14)
+      mine: true, press: Math.min(0.9, 0.2 + (l ? l.chapter : 1) * 0.14),
+      ghost: (function () { var lv = JugadaMaestra.levels(), at = lv.findIndex(function (x) { return x.id === active.id; }); return at < 3 && !progress().done[active.id]; })()
     });
     if (!view) { ov.remove(); U.open("jugadamaestra"); U.renderSheet(); return; }
     hero = {ov: ov, view: view};
@@ -102,6 +105,7 @@
       if (k === "list") { heroClose(); active = null; U.open("jugadamaestra"); return; }
       if (k === "retry") { active = JugadaMaestra.fresh(active.id, hashSeed(active.id, Date.now())); heroOpen(); return; }
       if (k === "next") { var lv = JugadaMaestra.levels(), at = lv.findIndex(function (x) { return x.id === active.id; }), nx = lv[at + 1]; if (nx && unlocked(nx.id, progress())) { active = JugadaMaestra.fresh(nx.id, hashSeed(nx.id, Date.now())); heroOpen(); } return; }
+      if (k === "assist") { hero.assist = !hero.assist; heroHud(); return; }
       if (k === "pass") { hero.view.act("pass", v); return; }
       if (k === "shot") { hero.view.act("shot"); }
     });
@@ -117,7 +121,7 @@
       ".jmh-goal{margin:6px 0 0;font:600 var(--fs-sm)/1.35 var(--f-body);opacity:.9;text-shadow:0 1px 2px #000}" +
       ".jmh-foot{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:10px 12px max(12px,env(safe-area-inset-bottom));pointer-events:none}" +
       ".jmh-assist{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;pointer-events:auto}" +
-      ".jmh-chip{min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(6,12,14,.6);color:#fff;font:700 var(--fs-xs)/1 var(--f-body)}.jmh-chip.shot{border-color:#ffd23f;color:#ffd23f}.jmh-chip:disabled{opacity:.35}" +
+      ".jmh-chip{min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(6,12,14,.6);color:#fff;font:700 var(--fs-xs)/1 var(--f-body)}.jmh-chip.shot{border-color:#ffd23f;color:#ffd23f}.jmh-chip.ghost{opacity:.7;border-style:dashed}.jmh-chip:disabled{opacity:.35}" +
       ".jmh-res[hidden]{display:none}.jmh-res{position:absolute;inset:0;z-index:5;display:flex;align-items:flex-end;justify-content:center;padding:16px 16px max(18px,env(safe-area-inset-bottom));background:linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,.65))}" +
       ".jmh-card{width:100%;max-width:440px;padding:18px;border-radius:20px;background:rgba(12,22,18,.94);border:2px solid rgba(255,210,63,.55);text-align:center;animation:jmhUp .35s cubic-bezier(.2,1.3,.4,1)}" +
       ".jmh-card.try{border-color:rgba(255,255,255,.25)}.jmh-card b{display:block;font:800 var(--fs-xl)/1.1 var(--f-disp);text-transform:uppercase}.jmh-card p{margin:8px 0 14px;opacity:.85}" +

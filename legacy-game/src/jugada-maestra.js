@@ -184,7 +184,7 @@ var JugadaMaestra = (function () {
       var near = s.rivals.slice().sort(function (a, b) { return dist(a, s.ball) - dist(b, s.ball); })[0];
       if (near) { near[0] = s.ball[0] + 2; near[1] = s.ball[1]; }
     }
-    var message = success ? "Pase completado: el equipo conserva la posesión." : "Pase interceptado. Aún puedes reaccionar si te queda otra acción.";
+    var message = success ? "Pase completado: el equipo conserva la posesión." : (!s.match && passPts ? "Pase cortado: el trazo pasaba demasiado cerca de un rival." : "Pase interceptado. Aún puedes reaccionar si te queda otra acción.");
     s.log.push({k: "pass", ok: success, msg: message, quality: qualityPass, from: start, to: best.p.slice(), mate: best.i, path: passPts, cut: cut ? cut.k : null});
     if (!success && (s.turn >= s.max || (!s.match && passPts))) s.done = true; /* en los retos dibujados, un pase cortado acaba la jugada */
     if (s.turn >= s.max && !s.won) s.done = true;

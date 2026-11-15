@@ -35,7 +35,10 @@ const keys = [
   "El portero la atrapa: apunta más cerca de los postes.",
   "El portero la atrapa: acércate más o busca la escuadra.",
   "Fuera. Apunta dentro de la portería.",
-  "¡Al palo! Por muy poco."
+  "¡Al palo! Por muy poco.",
+  "Ocultar",
+  "Termina el trazo en un compañero libre (anillo verde) o en la portería.",
+  "Pase cortado: el trazo pasaba demasiado cerca de un rival."
 ];
 /* cadenas de la integración de Jugada Maestra en el partido (panel y comentario) */
 const matchKeys = [
