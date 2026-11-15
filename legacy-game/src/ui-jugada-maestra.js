@@ -38,6 +38,7 @@
     active.lastMsg = r.msg;
     if (active.done && active.won) {
       var p = progress(), old = p.medals[active.id] || 0, now = JugadaMaestra.result(active).medal;
+      active.record = now > old && old > 0;
       p.done[active.id] = true; p.medals[active.id] = Math.max(old, now); save(p);
     }
     if (U.persist) U.persist();
@@ -69,12 +70,21 @@
     var res = hero.ov.querySelector(".jmh-res");
     if (!active.done) { res.hidden = true; return; }
     var won = !!active.won, md = JugadaMaestra.result(active).medal, nx = lv[at + 1], canNext = won && nx;
+    if (!res.hidden) return;
     res.hidden = false;
     res.innerHTML = '<div class="jmh-card ' + (won ? "good" : "try") + '"><b>' + h(won ? tr("¡Jugada completada!") : tr("La defensa gana esta vez")) + "</b>" +
       '<div class="jmh-stars" aria-label="' + h(won ? tr("Medalla conseguida: {medal}", {medal: md}) : "") + '">' + stars(won ? md : 0) + "</div>" +
+      (active.record ? '<span class="jmh-rec">' + h(tr("¡Nuevo récord!")) + "</span>" : "") +
       "<p>" + h(won ? tr("Menos acciones, más estrellas.") : tr(active.lastMsg || "Puedes intentarlo otra vez sin coste ni penalización.")) + "</p>" +
       '<div class="jmh-btns">' + (canNext ? '<button class="go" data-jmh="next">' + h(tr("Siguiente jugada")) + "</button>" : "") +
       '<button class="' + (canNext ? "btn" : "go") + '" data-jmh="retry">' + h(tr("Volver a intentarlo")) + '</button><button class="btn" data-jmh="list">' + h(tr("Retos")) + "</button></div></div>";
+    /* las estrellas entran una a una, con sonido y vibración */
+    var on = res.querySelectorAll(".jmh-star.on"), AUx = typeof SpModes !== "undefined" && SpModes && SpModes.AU;
+    Array.prototype.forEach.call(on, function (el, i) {
+      el.style.animationDelay = (0.35 + i * 0.28) + "s"; el.classList.add("pop");
+      setTimeout(function () { try { if (AUx) AUx.fx("post", 0.6 + i * 0.25); } catch (e) {} try { Anim.haptic(i === on.length - 1 ? "big" : "ok"); } catch (e) {} }, 350 + i * 280);
+    });
+    if (!won) { var card = res.querySelector(".jmh-card"); if (card) card.classList.add("shake"); }
   }
   function heroClose() { if (!hero) return; try { hero.view.dispose(); } catch (e) {} try { hero.ov.remove(); } catch (e) {} hero = null; }
   function heroOpen() {
@@ -89,6 +99,7 @@
       resolve: function (x, y, path, hh) { return JugadaMaestra.resolve(active, x, y, path, hh); },
       after: function (r) { record(r); heroHud(); },
       mine: true, press: Math.min(0.9, 0.2 + (l ? l.chapter : 1) * 0.14),
+      intro: {kicker: tr("Jugada {n} de 30", {n: JugadaMaestra.levels().findIndex(function (x) { return x.id === active.id; }) + 1}), title: h(tr(l.title))},
       ghost: (function () { var lv = JugadaMaestra.levels(), at = lv.findIndex(function (x) { return x.id === active.id; }); return at < 3 && !progress().done[active.id]; })()
     });
     if (!view) { ov.remove(); U.open("jugadamaestra"); U.renderSheet(); return; }
@@ -110,6 +121,9 @@
       if (k === "shot") { hero.view.act("shot"); }
     });
     document.addEventListener("keydown", function (e) { if (hero && e.key === "Escape") { heroClose(); active = null; U.open("jugadamaestra"); } });
+    /* botón atrás de Android: cierra la jugada en vez de salir de la app */
+    var prevBack = window.caminoBack;
+    window.caminoBack = function () { if (hero) { heroClose(); active = null; U.open("jugadamaestra"); return true; } return prevBack ? prevBack() : false; };
     var hcss = document.createElement("style"); hcss.id = "jmh-ov-css";
     hcss.textContent = ".jmh-ov{position:fixed;inset:0;z-index:2147483000;background:#050b09;color:#fff;overscroll-behavior:contain}" +
       ".jmh-stage{position:absolute;inset:0}" +
@@ -125,9 +139,12 @@
       ".jmh-res[hidden]{display:none}.jmh-res{position:absolute;inset:0;z-index:5;display:flex;align-items:flex-end;justify-content:center;padding:16px 16px max(18px,env(safe-area-inset-bottom));background:linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,.65))}" +
       ".jmh-card{width:100%;max-width:440px;padding:18px;border-radius:20px;background:rgba(12,22,18,.94);border:2px solid rgba(255,210,63,.55);text-align:center;animation:jmhUp .35s cubic-bezier(.2,1.3,.4,1)}" +
       ".jmh-card.try{border-color:rgba(255,255,255,.25)}.jmh-card b{display:block;font:800 var(--fs-xl)/1.1 var(--f-disp);text-transform:uppercase}.jmh-card p{margin:8px 0 14px;opacity:.85}" +
-      ".jmh-stars{margin-top:12px;display:flex;justify-content:center;gap:10px}.jmh-star{width:42px;height:40px;background:rgba(255,255,255,.16);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}.jmh-star.on{background:#ffd23f}" +
+      ".jmh-stars{margin-top:12px;display:flex;justify-content:center;gap:10px}.jmh-star{width:42px;height:40px;background:rgba(255,255,255,.16);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}.jmh-star.on{background:#ffd23f}.jmh-star.pop{transform:scale(0);animation:jmhStar .45s cubic-bezier(.2,1.8,.4,1) forwards}@keyframes jmhStar{to{transform:scale(1)}}" +
+      ".jmh-rec{display:inline-block;margin-top:8px;padding:3px 10px;border-radius:999px;background:#ffd23f;color:#111;font:800 var(--fs-xs)/1.3 var(--f-body);text-transform:uppercase;animation:jmhStar .4s 1.2s both}" +
+      ".jmh-card.shake{animation:jmhUp .35s cubic-bezier(.2,1.3,.4,1),jmhShake .4s .35s}@keyframes jmhShake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}" +
+      ".jmh-dot{transition:transform .25s,background .25s}.jmh-dot:not(.on){transform:scale(.7)}" +
       ".jmh-btns{display:grid;gap:8px}.jmh-btns button{min-height:46px}" +
-      "@keyframes jmhUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}";
+      "@keyframes jmhUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}@media (prefers-reduced-motion:reduce){.jmh-star.pop{transform:none;animation:none}.jmh-card,.jmh-card.shake,.jmh-rec{animation:none}}";
     (document.head || document.documentElement).appendChild(hcss);
   }
   function field(s) {

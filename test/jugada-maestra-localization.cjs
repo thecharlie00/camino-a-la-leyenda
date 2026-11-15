@@ -38,7 +38,11 @@ const keys = [
   "¡Al palo! Por muy poco.",
   "Ocultar",
   "Termina el trazo en un compañero libre (anillo verde) o en la portería.",
-  "Pase cortado: el trazo pasaba demasiado cerca de un rival."
+  "Pase cortado: el trazo pasaba demasiado cerca de un rival.",
+  "¡Al hueco!",
+  "¡Pase largo!",
+  "¡Pase!",
+  "¡Nuevo récord!"
 ];
 /* cadenas de la integración de Jugada Maestra en el partido (panel y comentario) */
 const matchKeys = [

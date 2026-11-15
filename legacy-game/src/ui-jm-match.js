@@ -174,6 +174,8 @@
     var first = ov.querySelector('[data-jml="pass"]:not([disabled])') || ov.querySelector('[data-jml="shot"]');
     if (first) try { first.focus(); } catch (e) {}
   }
+  /* botón atrás de Android con la ocasión abierta: no sale de la app (la jugada se decide aquí) */
+  if (typeof window !== "undefined") { var prevBackJ = window.caminoBack; window.caminoBack = function () { if (ui) return true; return prevBackJ ? prevBackJ() : false; }; }
   function close(resume) {
     if (ui) { if (ui.view) try { ui.view.dispose(); } catch (e) {} try { ui.ov.remove(); } catch (e) {} ui = null; drawing = null; }
     if (resume) resumeView();

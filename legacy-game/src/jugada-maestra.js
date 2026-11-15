@@ -154,7 +154,9 @@ var JugadaMaestra = (function () {
       s.log.push({k: "shot", ok: scored, msg: msg, quality: quality, to: [x, y], from: start, path: shotPts, h: h == null ? null : +h, lane: lane});
       return {ok: true, shot: true, scored: scored, quality: quality, msg: msg, state: s};
     }
-    var target = [x, y], best = null, bd = 1e9;
+    /* con trazo, el receptor es el compañero más cercano a la punta del trazo (así un pase a quien está pegado al área no se confunde) */
+    var tip = drawn && drawn.length ? drawn[drawn.length - 1] : null;
+    var target = tip && isFinite(tip[0]) && isFinite(tip[1]) ? [+tip[0], +tip[1]] : [x, y], best = null, bd = 1e9;
     s.mates.forEach(function (m) { if (!m.open) return; var d = dist(m.p, target); if (d < bd) { bd = d; best = m; } });
     if (!best || bd > 25) {
       s.turn--; return {ok: false, reason: "target", msg: "Busca un espacio o apunta a un compañero o compañera."};

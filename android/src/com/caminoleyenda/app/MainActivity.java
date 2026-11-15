@@ -884,7 +884,7 @@ public final class MainActivity extends Activity {
     private void handleBack() {
         if (webView != null) {
             webView.evaluateJavascript(
-                "(function(){if(document.querySelector('.sheet')){document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}));return 1;}return 0;})()",
+                "(function(){try{if(window.caminoBack&&window.caminoBack())return 1;}catch(e){}if(document.querySelector('.sheet')){document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}));return 1;}return 0;})()",
                 new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String val) {
