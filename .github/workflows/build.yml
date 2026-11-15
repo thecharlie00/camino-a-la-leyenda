@@ -1,5 +1,6 @@
 # Builds and signs the Android App Bundle from the self-contained WebView game.
 # Run on demand, for [compilar] commits to main, or when a vX.Y tag is pushed.
+# Every build also leaves the .aab in a draft release, so it can be downloaded without the artifact storage.
 # Required repository secrets:
 #   CAMINO_KEYSTORE_B64  the signing keystore, base64 encoded
 #   CAMINO_KS_PASS       the keystore/key password
@@ -99,3 +100,17 @@ jobs:
         run: |
           gh release create "${GITHUB_REF_NAME}" "dist/CaminoALaLeyenda-${{ steps.ver.outputs.name }}.aab" \
             --draft --title "Versión ${{ steps.ver.outputs.name }}" --notes "Código de versión ${{ steps.ver.outputs.code }}."
+
+      - name: Release en borrador con el .aab (compilaciones de main)
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="build-v${{ steps.ver.outputs.name }}-${{ steps.ver.outputs.code }}"
+          AAB="dist/CaminoALaLeyenda-${{ steps.ver.outputs.name }}.aab"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$AAB" --clobber
+          else
+            gh release create "$TAG" "$AAB" --draft --target "$GITHUB_SHA" \
+              --title "Compilación ${{ steps.ver.outputs.name }} (${{ steps.ver.outputs.code }})" --notes "Código de versión ${{ steps.ver.outputs.code }}."
+          fi
