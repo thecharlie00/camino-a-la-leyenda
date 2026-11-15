@@ -719,7 +719,7 @@
     var badge = sure ? '<span class="pct sure">' + tr("Seguro") + '</span>' : '<span class="pct ' + (gp >= 0.67 ? "hi" : gp >= 0.4 ? "mid" : "lo") + '">' + h(o.badge || tr("Bien")) + " " + gpc + " %</span>";
     if (o.blind) return '<button class="opt" data-a="choose" data-i="' + i + '"><span class="ot"><b>' + h(o.t) + "</b></span>" + (o.ref ? '<span class="oref">' + h(o.ref) + "</span>" : "") + "</button>";
     if (o.mini) badge = '<span class="pct mid">🎯 ' + h(tr("Tú decides")) + "</span>";
-    var s = '<button class="opt" data-a="' + (o.so && UIX.actions.so ? "so" : o.mini && typeof Minigame !== "undefined" ? "mini" : "choose") + '" data-i="' + i + '"' + (o.mini ? ' data-m="' + h(o.mini) + '"' : "") + (o.dis ? " disabled" : "") + '><span class="ot"><b>' + h(o.t) + "</b>" + badge + "</span>";
+    var s = '<button class="opt" data-a="' + (o.so && UIX.actions.so ? "so" : o.mini && typeof Minigame !== "undefined" && (o.mini !== "jm" || (window.UIX && window.UIX.jmMini && window.UIX.jmMini.ok())) ? "mini" : "choose") + '" data-i="' + i + '"' + (o.mini ? ' data-m="' + h(o.mini) + '"' : "") + (o.dis ? " disabled" : "") + '><span class="ot"><b>' + h(o.t) + "</b>" + badge + "</span>";
     if (o.d) s += "<small>" + h(o.d) + "</small>";
     if (o.dis) s += '<small class="neg">' + h(o.dis) + "</small>";
     var lines = "";
@@ -2244,6 +2244,17 @@
       Minigame.setBoard({h: home ? us : op, a: home ? op : us, gh: home ? f.gu : f.gt, ga: home ? f.gt : f.gu, min: f.mom ? f.mom.min : null, us: home ? "h" : "a"});
     }
     var opts = {skill: clamp(skill + cf, 40, 95), gk: clamp(gk, 40, 95), pressure: clamp(imp / 3, 0.1, 1), dist: 22, rand: R};
+    /* Jugada Maestra: la ocasión se juega dibujando; la probabilidad de la opción es el xG de la jugada */
+    if (kind === "jm") {
+      var mo = typeof MOMENT_BY_ID !== "undefined" && MOMENT_BY_ID[x.id], op = mo && f ? mo.opts(momCtx(f))[i] : null;
+      if (!(window.UIX.jmMini && window.UIX.jmMini.ok())) { doChoose(i); return; }
+      window.UIX.jmMini({xg: op ? op.p : 0.3, seed: Math.floor(R() * 2147483646) + 1, title: mo ? tr(mo.title) : tr("Jugada Maestra"), min: f && f.mom ? f.mom.min : null, pressure: opts.pressure}, function (res) {
+        if (typeof GX !== "undefined") GX.ev("mini", {kind: "jm", scored: !!res.scored, min: f && f.mom ? f.mom.min : 0});
+        MINI_GOAL = res.scored && res.passes ? (res.passes === 1 ? {goal: "assist", txt: tr("¡Jugada de manual! Tu pase acaba en gol de un compañero.")} : {goal: "team", txt: tr("¡Jugada colectiva perfecta! El equipo la mete tras varios pases.")}) : null;
+        FORCE_OUT = !!res.scored; doChoose(i);
+      });
+      return;
+    }
     if (kind === "gkpen" || kind === "gkfk") {
       var me = Math.round(((at.REF || p.ovr) + (at.EST || at.COL || p.ovr)) / 2);
       var gopts = {gk: clamp(me + cf, 40, 95), skill: clamp(gk, 40, 95), pressure: opts.pressure, dist: 18 + Math.floor(R() * 10), rand: R};

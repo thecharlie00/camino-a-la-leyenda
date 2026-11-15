@@ -773,5 +773,22 @@
  "¡Al hueco!": "In die Tiefe!",
  "¡Pase largo!": "Langer Ball!",
  "¡Pase!": "Pass!",
- "¡Nuevo récord!": "Neuer Rekord!"
+ "¡Nuevo récord!": "Neuer Rekord!",
+ "Jugarla tú: dibuja la contra": "Spiel ihn selbst: zeichne den Konter",
+ "¡La contra acaba en la red! Jugada de manual.": "Der Konter landet im Netz! Wie aus dem Lehrbuch.",
+ "La defensa llega a tiempo y la jugada muere en el área.": "Die Abwehr ist rechtzeitig zurück und der Angriff verpufft im Strafraum.",
+ "Ataque en la frontal": "Angriff an der Strafraumgrenze",
+ "Minuto {min}. Tu equipo encierra al {opp} y el balón te llega en la frontal, con compañeros desmarcándose.": "Minute {min}. Dein Team schnürt {opp} ein und der Ball kommt an der Strafraumgrenze zu dir, während Mitspieler sich freilaufen.",
+ "Jugarla tú: dibuja la jugada": "Spiel ihn selbst: zeichne den Spielzug",
+ "¡Golazo tras una jugada trenzada! La grada se pone en pie.": "Traumtor nach einer schönen Kombination! Die Fans springen auf.",
+ "La defensa cierra todos los caminos. Se pierde la ocasión.": "Die Abwehr macht alle Wege zu. Die Chance ist dahin.",
+ "¡Zapatazo a la escuadra!": "Ein Hammer in den Winkel!",
+ "Se marcha alto.": "Er geht drüber.",
+ "Abrir a la banda": "Auf den Flügel spielen",
+ "Centro preciso y tu compañero remata a gol.": "Präzise Flanke und dein Mitspieler vollendet.",
+ "El centro se queda en el primer defensa.": "Die Flanke bleibt am ersten Verteidiger hängen.",
+ "¡Jugada de manual! Tu pase acaba en gol de un compañero.": "Wie aus dem Lehrbuch! Dein Pass führt zum Tor eines Mitspielers.",
+ "¡Jugada colectiva perfecta! El equipo la mete tras varios pases.": "Perfekter Mannschaftsspielzug! Das Team trifft nach mehreren Pässen.",
+ "Dibuja la jugada: pasa y remata antes de que cierre la defensa.": "Zeichne den Spielzug: passe und schieße, bevor die Abwehr zumacht.",
+ "Ocasión perdida": "Chance vergeben"
 }

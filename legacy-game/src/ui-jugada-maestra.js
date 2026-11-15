@@ -107,6 +107,71 @@
     heroHud();
     view.say(tr("Desliza desde el balón: hacia un compañero para pasar o hacia la portería para tirar."), 4200);
   }
+  /* ---------- Jugada Maestra dentro de un momento de la carrera (como los penaltis y las faltas) ---------- */
+  var mini = null;
+  function miniHud() {
+    if (!mini) return;
+    var st = mini.st, left = Math.max(0, st.max - st.turn), dots = "";
+    for (var i = 0; i < st.max; i++) dots += '<span class="jmh-dot' + (i < left ? " on" : "") + '"></span>';
+    mini.ov.querySelector(".jmh-hud").innerHTML = '<div class="jmh-row"><div class="grow"><small>' + h(tr("Momento clave")) + (mini.o.min ? " · " + h(mini.o.min) + "'" : "") + "</small><b>" + h(mini.o.title) + "</b></div>" +
+      '<div class="jmh-moves" aria-label="' + h(tr("Acciones: {n}/{max}", {n: st.turn, max: st.max})) + '">' + dots + "</div></div>" +
+      '<p class="jmh-goal">' + h(tr("Dibuja la jugada: pasa y remata antes de que cierre la defensa.")) + "</p>";
+    var foot = mini.ov.querySelector(".jmh-foot"), openA = !!mini.assist;
+    foot.innerHTML = st.done ? "" : '<div class="jmh-assist">' + (openA ? st.mates.map(function (m, i) {
+      return '<button class="jmh-chip" data-jmm="pass" data-v="' + i + '"' + (m.open ? "" : " disabled") + ">" + h(tr("Pase {n}", {n: i + 1})) + "</button>"; }).join("") +
+      '<button class="jmh-chip shot" data-jmm="shot">' + h(tr("Tirar a puerta")) + "</button>" : "") +
+      '<button class="jmh-chip ghost" data-jmm="assist" aria-expanded="' + openA + '">' + h(openA ? tr("Ocultar") : tr("O elige un pase asistido")) + "</button></div>";
+    var res = mini.ov.querySelector(".jmh-res");
+    if (!st.done || !res.hidden) return;
+    var last = st.log[st.log.length - 1] || {};
+    res.hidden = false;
+    res.innerHTML = '<div class="jmh-card ' + (st.won ? "good" : "try") + '"><b>' + h(st.won ? tr("¡GOL!") : tr("Ocasión perdida")) + "</b><p>" + h(tr(last.msg || "")) + "</p>" +
+      '<div class="jmh-btns"><button class="go" data-jmm="done">' + h(tr("Continuar")) + "</button></div></div>";
+    if (!st.won) { var card = res.querySelector(".jmh-card"); if (card) card.classList.add("shake"); }
+    setTimeout(function () { var b = res.querySelector("[data-jmm=done]"); if (b) try { b.focus(); } catch (e) {} }, 60);
+  }
+  function miniClose() {
+    if (!mini) return;
+    var m = mini; mini = null;
+    try { m.view.dispose(); } catch (e) {} try { m.ov.remove(); } catch (e) {}
+    var passes = m.st.log.filter(function (l) { return l.k === "pass" && l.ok; }).length;
+    if (m.cb) m.cb({scored: !!m.st.won, passes: passes});
+  }
+  U.jmMini = function (o, cb) {
+    if (mini) return;
+    var st = JugadaMaestra.moment(o.seed || 7, {xg: o.xg, id: "carrera"});
+    var ov = document.createElement("div");
+    ov.className = "jmh-ov"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", o.title || tr("Jugada Maestra"));
+    ov.innerHTML = '<div class="jmh-stage"></div><div class="jmh-hud"></div><div class="jmh-foot"></div><div class="jmh-res" hidden></div>';
+    document.body.appendChild(ov);
+    mini = {ov: ov, st: st, o: o, cb: cb};
+    var view = JMHero.mount(ov.querySelector(".jmh-stage"), {
+      get: function () { return mini ? mini.st : st; },
+      resolve: function (x, y, path, hh) { return JugadaMaestra.resolve(st, x, y, path, hh); },
+      after: function () { miniHud(); },
+      mine: true, press: o.pressure == null ? 0.6 : o.pressure,
+      intro: {kicker: tr("Momento clave") + (o.min ? " · " + o.min + "'" : ""), title: h(o.title || tr("Jugada Maestra"))}
+    });
+    if (!view) { ov.remove(); mini = null; var auto = JugadaMaestra.momentAuto(o.seed || 7, o.xg); if (cb) cb({scored: auto === "goal", passes: 0}); return; }
+    mini.view = view;
+    miniHud();
+    view.say(tr("Desliza desde el balón: hacia un compañero para pasar o hacia la portería para tirar."), 3800);
+  };
+  U.jmMini.ok = function () { return heroOn(); };
+  if (typeof document !== "undefined") {
+    document.addEventListener("click", function (e) {
+      if (!mini) return;
+      var b = e.target.closest ? e.target.closest("[data-jmm]") : null;
+      if (!b || !mini.ov.contains(b)) return;
+      var k = b.getAttribute("data-jmm");
+      if (k === "done") { miniClose(); return; }
+      if (k === "assist") { mini.assist = !mini.assist; miniHud(); return; }
+      if (k === "pass") { mini.view.act("pass", b.getAttribute("data-v")); return; }
+      if (k === "shot") mini.view.act("shot");
+    });
+    var prevBackM = window.caminoBack;
+    window.caminoBack = function () { if (mini) { if (mini.st.done) miniClose(); return true; } return prevBackM ? prevBackM() : false; };
+  }
   if (typeof document !== "undefined") {
     document.addEventListener("click", function (e) {
       if (!hero) return;

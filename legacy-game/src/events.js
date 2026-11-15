@@ -7,6 +7,8 @@
 var EVENTS = [], EVENT_BY_ID = {}, MOMENTS = [], MOMENT_BY_ID = {};
 /* minijuego de penaltis y faltas: fuerza que el siguiente desenlace sea bueno (true) o malo (false) */
 var FORCE_OUT = null;
+/* Jugada Maestra en un momento de carrera: quién marca según cómo acabó la jugada (tú, tras tu pase o el equipo) */
+var MINI_GOAL = null;
 
 /* ---------- desenlaces ---------- */
 function outcomesOf(o) {
@@ -23,9 +25,10 @@ function outcomesOf(o) {
 }
 function rollOutcome(list) {
   if (FORCE_OUT != null) {
-    var want = FORCE_OUT; FORCE_OUT = null;
-    for (var j = 0; j < list.length; j++) if (!!list[j].good === want) return list[j];
+    var want = FORCE_OUT, mg = MINI_GOAL; FORCE_OUT = null; MINI_GOAL = null;
+    for (var j = 0; j < list.length; j++) if (!!list[j].good === want) return want && mg && list[j].goal === "me" ? Object.assign({}, list[j], mg) : list[j];
   }
+  MINI_GOAL = null;
   var r = R();
   for (var i = 0; i < list.length; i++) { r -= list[i].p; if (r < 0) return list[i]; }
   return list[list.length - 1];
@@ -974,9 +977,19 @@ MO({id: "contra", title: "Contragolpe", w: 1.4,
   when: function () { return S.p.pos !== "POR" && S.p.pos !== "DFC"; },
   text: function (c) { return tr("Minuto {min}. Robo en el centro del campo y salís tres contra dos.", {min: c.min}); },
   opts: function (c) { var d = att(c, "REG"), ps = att(c, "PAS"), t = att(c, "TIR"); return [
+    {t: tr("Jugarla tú: dibuja la contra"), mini: "jm", p: pr(0.4 + (ps - 75) * 0.004 + (d - 75) * 0.002), ok: {txt: tr("¡La contra acaba en la red! Jugada de manual."), goal: "me", rating: 0.4, fx: {fame: 1}}, ko: {txt: tr("La defensa llega a tiempo y la jugada muere en el área."), rating: -0.1}},
     {t: tr("Encarar al central"), p: pr(0.32 + (d - 75) * 0.005), ok: {txt: tr("Le rompes la cintura y la cruzas. ¡Gol!"), goal: "me", rating: 0.3}, ko: {txt: tr("El central te gana el cuerpo a cuerpo."), rating: -0.2}},
     {t: tr("Pase al hueco"), p: pr(0.38 + (ps - 75) * 0.005), ok: {txt: tr("Pase milimétrico y tu compañero define."), goal: "assist", rating: 0.3}, ko: {txt: tr("El pase se marcha largo."), rating: -0.1}},
     {t: tr("Disparo lejano"), p: pr(0.16 + (t - 75) * 0.005), ok: {txt: tr("¡Zapatazo desde 30 metros!"), goal: "me", rating: 0.4}, ko: {txt: tr("Se va a las nubes."), rating: -0.2}}
+  ]; }});
+
+MO({id: "asedio", title: "Ataque en la frontal", w: 1.1,
+  when: function () { return ATT_POS[S.p.pos] || S.p.pos === "MC"; },
+  text: function (c) { return tr("Minuto {min}. Tu equipo encierra al {opp} y el balón te llega en la frontal, con compañeros desmarcándose.", {min: c.min, opp: c.opp}); },
+  opts: function (c) { var ps = att(c, "PAS"), t = att(c, "TIR"), q = (c.eff - c.oppR) * 0.004; return [
+    {t: tr("Jugarla tú: dibuja la jugada"), mini: "jm", p: pr(0.3 + (ps - 75) * 0.004 + q), ok: {txt: tr("¡Golazo tras una jugada trenzada! La grada se pone en pie."), goal: "me", rating: 0.4, fx: {fame: 1}}, ko: {txt: tr("La defensa cierra todos los caminos. Se pierde la ocasión."), rating: -0.1}},
+    {t: tr("Disparo desde fuera"), p: pr(0.14 + (t - 75) * 0.005 + q), ok: {txt: tr("¡Zapatazo a la escuadra!"), goal: "me", rating: 0.4}, ko: {txt: tr("Se marcha alto."), rating: -0.1}},
+    {t: tr("Abrir a la banda"), p: pr(0.26 + (ps - 75) * 0.004 + q), ok: {txt: tr("Centro preciso y tu compañero remata a gol."), goal: "assist", rating: 0.3}, ko: {txt: tr("El centro se queda en el primer defensa."), rating: 0}}
   ]; }});
 
 MO({id: "chilena", title: "Balón en el aire", w: 0.4,
