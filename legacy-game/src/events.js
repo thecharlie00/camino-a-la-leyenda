@@ -973,7 +973,7 @@ MO({id: "falta_directa", title: "Falta en la frontal", w: 1.2,
     {t: tr("Centro al área"), p: pr(0.24 + (ps - 75) * 0.005), ok: {txt: tr("Centro perfecto y cabezazo a la red."), goal: "assist", rating: 0.3}, ko: {txt: tr("El portero sale y despeja."), rating: 0}}
   ]; }});
 
-MO({id: "contra", title: "Contragolpe", w: 1.4,
+MO({id: "contra", title: "Contragolpe", w: 1.6,
   when: function () { return S.p.pos !== "POR" && S.p.pos !== "DFC"; },
   text: function (c) { return tr("Minuto {min}. Robo en el centro del campo y salís tres contra dos.", {min: c.min}); },
   opts: function (c) { var d = att(c, "REG"), ps = att(c, "PAS"), t = att(c, "TIR"); return [
@@ -983,7 +983,7 @@ MO({id: "contra", title: "Contragolpe", w: 1.4,
     {t: tr("Disparo lejano"), p: pr(0.16 + (t - 75) * 0.005), ok: {txt: tr("¡Zapatazo desde 30 metros!"), goal: "me", rating: 0.4}, ko: {txt: tr("Se va a las nubes."), rating: -0.2}}
   ]; }});
 
-MO({id: "asedio", title: "Ataque en la frontal", w: 1.1,
+MO({id: "asedio", title: "Ataque en la frontal", w: 1.6,
   when: function () { return ATT_POS[S.p.pos] || S.p.pos === "MC"; },
   text: function (c) { return tr("Minuto {min}. Tu equipo encierra al {opp} y el balón te llega en la frontal, con compañeros desmarcándose.", {min: c.min, opp: c.opp}); },
   opts: function (c) { var ps = att(c, "PAS"), t = att(c, "TIR"), q = (c.eff - c.oppR) * 0.004; return [
@@ -1017,6 +1017,7 @@ MO({id: "pase_filtrado", title: "Hueco entre líneas", w: 1.5,
   when: function () { return S.p.pos === "MC" || S.p.pos === "MCO" || S.p.pos === "MCD" || S.p.pos === "MD" || S.p.pos === "MI"; },
   text: function (c) { return tr("Minuto {min}. Levantas la cabeza: un compañero desmarcado a la espalda de la defensa.", {min: c.min}); },
   opts: function (c) { var ps = att(c, "PAS"), p1 = pr(0.4 + (ps - 75) * 0.006); return [
+    {t: tr("Jugarla tú: dibuja la jugada"), mini: "jm", p: pr(0.32 + (ps - 75) * 0.005), ok: {txt: tr("¡Golazo tras una jugada trenzada! La grada se pone en pie."), goal: "me", rating: 0.4, fx: {fame: 1}}, ko: {txt: tr("La defensa cierra todos los caminos. Se pierde la ocasión."), rating: -0.1}},
     {t: tr("Pase filtrado arriesgado"), out: [
       {p: p1, good: true, txt: tr("Pase de tiralíneas. Gol de tu compañero."), goal: "assist", rating: 0.4},
       {p: 0.2, txt: tr("Lo interceptan y la contra acaba en gol rival."), concede: 1, rating: -0.6},
@@ -1057,6 +1058,7 @@ MO({id: "subida_lateral", title: "Te sumas al ataque", w: 1.2,
   when: function () { return S.p.pos === "LD" || S.p.pos === "LI"; },
   text: function (c) { return tr("Minuto {min}. El extremo se mete por dentro y te deja toda la banda libre.", {min: c.min}); },
   opts: function (c) { var ps = att(c, "PAS"); return [
+    {t: tr("Jugarla tú: dibuja la jugada"), mini: "jm", p: pr(0.26 + (ps - 75) * 0.005), ok: {txt: tr("¡Golazo tras una jugada trenzada! La grada se pone en pie."), goal: "me", rating: 0.4, fx: {fame: 1}}, ko: {txt: tr("La defensa cierra todos los caminos. Se pierde la ocasión."), rating: -0.1}},
     {t: tr("Centro al segundo palo"), p: pr(0.32 + (ps - 75) * 0.005), ok: {txt: tr("Centro tenso y remate a la red. ¡Asistencia!"), goal: "assist", rating: 0.4}, ko: {txt: tr("El centro se lo queda el portero."), rating: 0}},
     {t: tr("Diagonal y tiro"), p: 0.14, ok: {txt: tr("¡Golazo del lateral! Nadie lo esperaba."), goal: "me", rating: 0.6}, ko: {txt: tr("Disparo blando."), rating: 0}},
     {t: tr("Volver a tu posición"), ok: {txt: tr("Prudencia: no dejas la espalda descubierta."), rating: 0.05}}
