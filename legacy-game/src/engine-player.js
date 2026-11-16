@@ -521,11 +521,11 @@ function pickMoment(f) {
   var lim = [1, 2, 2][S.set.ev] + (S.cur.summer ? 1 : 0);
   if ((S.momN || 0) >= lim) return null;
   var pool = MOMENTS.filter(function (m) { try { return m.when(f); } catch (e) { return false; } });
-  /* La primera Jugada Maestra de la carrera llega pronto (al tercer partido como mucho) para que se descubra */
-  var jmPool = !S.jmFirst ? pool.filter(function (m) { return m.jm; }) : [];
+  /* Jugada Maestra frecuente: la primera llega al tercer partido como mucho y después nunca pasan más de 3 partidos seguidos sin una */
+  var jmPool = pool.filter(function (m) { return m.jm; });
   if (jmPool.length) {
     S.jmTry = (S.jmTry || 0) + 1;
-    if (S.jmTry >= 3 || chance(0.35)) { var mj = wpick(jmPool, function (m) { return m.w || 1; }); S.jmFirst = 1; return {id: mj.id, min: f.role === "sub" ? Math.max(70, Math.min(90, 90 - f.min + ri(2, 8))) : ri(25, 85), ml: null}; }
+    if (S.jmTry >= 3 || chance(S.jmFirst ? 0.3 : 0.35)) { var mj = wpick(jmPool, function (m) { return m.w || 1; }); S.jmFirst = 1; S.jmTry = 0; return {id: mj.id, min: f.role === "sub" ? Math.max(70, Math.min(90, 90 - f.min + ri(2, 8))) : ri(25, 85), ml: null}; }
   }
   var pr = [0.025, 0.06, 0.16, 0.45][f.imp] * [0.7, 1, 1.25][S.set.ev];
   if (!chance(pr)) return null;
