@@ -520,9 +520,15 @@ function playPlayerFixture(f) {
 function pickMoment(f) {
   var lim = [1, 2, 2][S.set.ev] + (S.cur.summer ? 1 : 0);
   if ((S.momN || 0) >= lim) return null;
+  var pool = MOMENTS.filter(function (m) { try { return m.when(f); } catch (e) { return false; } });
+  /* La primera Jugada Maestra de la carrera llega pronto (al tercer partido como mucho) para que se descubra */
+  var jmPool = !S.jmFirst ? pool.filter(function (m) { return m.jm; }) : [];
+  if (jmPool.length) {
+    S.jmTry = (S.jmTry || 0) + 1;
+    if (S.jmTry >= 3 || chance(0.35)) { var mj = wpick(jmPool, function (m) { return m.w || 1; }); S.jmFirst = 1; return {id: mj.id, min: f.role === "sub" ? Math.max(70, Math.min(90, 90 - f.min + ri(2, 8))) : ri(25, 85), ml: null}; }
+  }
   var pr = [0.025, 0.06, 0.16, 0.45][f.imp] * [0.7, 1, 1.25][S.set.ev];
   if (!chance(pr)) return null;
-  var pool = MOMENTS.filter(function (m) { try { return m.when(f); } catch (e) { return false; } });
   var m = wpick(pool, function (m) { return m.w || 1; });
   if (!m) return null;
   var min = m.minR ? ri(m.minR[0], m.minR[1]) : f.imp >= 3 ? ri(62, 89) : ri(18, 88);

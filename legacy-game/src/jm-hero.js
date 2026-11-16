@@ -24,8 +24,11 @@ var JMHero = (function () {
     return {shirt: c[0], shorts: c[1] || "#f2f2f2", socks: c[0], trim: c[1], num: [7, 10, 11, 8, 9, 6][i % 6], skin: SKINS[(i * 3 + 1) % 5], hair: ["#1a1410", "#3a2414", "#c9a35a", "#0d0d0d"][i % 4], hairStyle: (i * 2) % 5, boots: "#141414"};
   }
   function rivalKits() {
-    var c = I.colsNow(), alt = [["#2a5bd7", "#111827"], ["#f4f4f0", "#1f2a44"], ["#111111", "#f2f2f2"], ["#e2c23a", "#1b3a8a"]], pick = alt[0];
-    for (var i = 0; i < alt.length; i++) if (alt[i][0].toLowerCase() !== String(c[0]).toLowerCase()) { pick = alt[i]; break; }
+    /* el rival viste lo que más se distinga de tu camiseta */
+    var c = I.colsNow(), alt = [["#f4f4f0", "#1f2a44"], ["#d62828", "#f4f4f0"], ["#e2c23a", "#1b3a8a"], ["#2a5bd7", "#f4f4f0"], ["#111111", "#f2f2f2"], ["#1f9d55", "#f4f4f0"]], pick = alt[0], bestD = -1;
+    function rgb(hx) { hx = String(hx || "#888").replace("#", ""); if (hx.length === 3) hx = hx.replace(/(.)/g, "$1$1"); var n = parseInt(hx, 16) || 0; return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+    var mine = rgb(c[0]);
+    alt.forEach(function (a) { var o = rgb(a[0]), d = Math.pow(o[0] - mine[0], 2) * 0.3 + Math.pow(o[1] - mine[1], 2) * 0.59 + Math.pow(o[2] - mine[2], 2) * 0.11; if (d > bestD) { bestD = d; pick = a; } });
     return function (i) { return {shirt: pick[0], shorts: pick[1], socks: pick[0], num: [4, 5, 3, 2, 6][i % 5], skin: SKINS[(i * 2) % 5], hair: "#1a1410", hairStyle: (i + 1) % 5, boots: "#141414"}; };
   }
   /* suaviza y reparte un trazo en puntos equidistantes */
