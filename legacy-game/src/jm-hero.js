@@ -208,6 +208,14 @@ var JMHero = (function () {
         return true;
       });
     }
+    /* chispas en pantalla (punta del trazo, gol, palo) */
+    V.sparks = [];
+    function sparkAt(x, y, n, rgb, sp) { if (red()) return; for (var i = 0; i < n; i++) { var a = Math.random() * PI * 2, v = (sp || 160) * (0.4 + Math.random()) * dpr; V.sparks.push({x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 60 * dpr, t: 0, d: 0.35 + Math.random() * 0.4, rgb: rgb || "255,255,255", r: (1.5 + Math.random() * 2.5) * dpr}); } if (V.sparks.length > 220) V.sparks.splice(0, V.sparks.length - 220); }
+    function drawSparks(dt) {
+      V.sparks = V.sparks.filter(function (q) { q.t += dt; if (q.t >= q.d) return false; q.x += q.vx * dt; q.y += q.vy * dt; q.vy += 520 * dpr * dt; q.vx *= 0.97; var a = 1 - q.t / q.d; g.fillStyle = "rgba(" + q.rgb + "," + a + ")"; g.beginPath(); g.arc(q.x, q.y, q.r * (0.5 + a * 0.5), 0, PI * 2); g.fill(); return true; });
+    }
+    function sparkWorld(x, y, z, n, rgb, sp) { var q = projL(x, y, z); sparkAt(q[0], q[1], n, rgb, sp); }
+    V.combo = 0;
     /* estela del balón cuando va rápido */
     V.btrail = [];
     function drawBallTrail(dt) {
@@ -215,7 +223,7 @@ var JMHero = (function () {
       V.btrail.forEach(function (q) { q.a -= dt * 3.2; }); V.btrail = V.btrail.filter(function (q) { return q.a > 0; });
       for (var i = 1; i < V.btrail.length; i++) {
         var a = V.btrail[i - 1], b = V.btrail[i], pa = projL(a.x, a.y, a.z), pb = projL(b.x, b.y, b.z);
-        g.strokeStyle = "rgba(255,255,255," + 0.55 * b.a + ")"; g.lineCap = "round"; g.lineWidth = (1.5 + 4.5 * (i / V.btrail.length)) * dpr * b.a;
+        g.strokeStyle = "rgba(" + (V.trailRGB || "255,255,255") + "," + 0.6 * b.a + ")"; g.lineCap = "round"; g.lineWidth = (1.5 + 4.5 * (i / V.btrail.length)) * dpr * b.a;
         g.beginPath(); g.moveTo(pa[0], pa[1]); g.lineTo(pb[0], pb[1]); g.stroke();
       }
     }
@@ -255,8 +263,10 @@ var JMHero = (function () {
         if (kind !== "none" && V.draw.bad) kind = "bad";
         strokePath(lp, 1, 7, kind);
         var tp = lp[lp.length - 1], rgb2 = COL[kind].join(","); g.fillStyle = "rgba(" + rgb2 + ",.35)"; g.beginPath(); g.arc(tp[0], tp[1], (14 + 3 * Math.sin(clock * 12)) * dpr, 0, PI * 2); g.fill();
+        if (kind !== "none" && Math.random() < dt * 22) sparkAt(tp[0], tp[1], 1, rgb2, 70);
       }
       drawFloats(dt);
+      drawSparks(dt);
       if (V.trail) { V.trail.a -= dt * (V.trail.w ? 0.8 : 1.6); if (V.trail.a <= 0) V.trail = null; else strokePath(V.trail.w ? V.trail.w.map(function (q) { return projL(q[0], q[1], q[2]); }) : V.trail.pts, Math.min(1, V.trail.a), 6, V.trail.kind); }
     });
     /* ---------- pista de la primera jugada: un trazo fantasma hacia el mejor pase ---------- */
@@ -342,8 +352,10 @@ var JMHero = (function () {
         V.draw.bad = !stD.match && a.kind !== "none" && V.draw.hot.some(Boolean);
         if (V.draw.bad && !wasBad) hap("tap");
         V.draw.read = a.kind === "shot" ? shotRead(stD, a.z, a.h) : null;
-        if (a.kind === "pass" && (!prev || prev.i !== a.i)) { var mm = V.mates[a.i]; V.snapT = clock; if (mm && (!mm.clip || mm.clip.n === "idle")) mm.play("point", {side: 0.3}); hap("tap"); try { AU.fx("bounce", 0.12); } catch (e2) {} }
-        if (a.kind === "shot" && (!prev || prev.kind !== "shot")) { hap("tap"); try { AU.fx("bounce", 0.18); } catch (e3) {} }
+        if (a.kind === "pass" && (!prev || prev.i !== a.i)) { var mm = V.mates[a.i]; V.snapT = clock; if (mm && (!mm.clip || mm.clip.n === "idle")) mm.play("point", {side: 0.3}); hap("tap"); try { AU.fx("tick"); } catch (e2) {} if (mm) { var sp0 = gpos(mm); sparkWorld(sp0[0], 0.3, sp0[1], 8, "91,227,122", 120); } }
+        if (a.kind === "shot" && (!prev || prev.kind !== "shot")) { hap("tap"); try { AU.fx("tick"); } catch (e3) {} }
+        if (a.kind === "shot" && prev && prev.kind === "shot" && V.draw.read !== V.draw.read0) { try { AU.fx("tick"); } catch (e4) {} }
+        V.draw.read0 = V.draw.read;
       }
       e.preventDefault();
     }
@@ -452,16 +464,25 @@ var JMHero = (function () {
         if (r.completed && recv) { if (V.ex.indexOf(passer) < 0) V.ex.push(passer); V.holder = recv; layout(st, dur * 1.05, [recv]); }
         else layout(st, dur * 1.05, [passer, cutter]);
         if (cutter) { var cp = route[route.length - 1]; moveTo(cutter, cp[0] - 0.2, cp[1], dur * 0.9, "ball"); }
+        V.trailRGB = "255,255,255"; try { if (L > 18) AU.fx("whoosh", 0.6); } catch (e) {}
+        /* la cámara acompaña el balón sin perder el plano */
+        if (!red()) S3.follow = function (c, dt) { var tg = S3.L(SP3.GLX - S3.ball.x, 0.8, -S3.ball.z), a = Math.min(1, dt * 2.2); for (var q = 0; q < 3; q++) c.tgt[q] += (tg[q] - c.tgt[q]) * a * 0.5; };
         fly(route, dur, function (k) { return BR + loft * 4 * k * (1 - k); }, function () {
+          S3.follow = null;
           if (r.completed && recv) {
-            S3.ball.sq = 0.6; try { AU.fx("bounce", 0.35); } catch (e) {}
+            S3.ball.sq = 0.6; try { AU.fx("trap"); } catch (e) {}
             S3.fx("grass", S3.ball.x, 0, S3.ball.z, 8); hap("ok");
+            V.combo++;
             floatAt(dest[0], 2.4, dest[1], laneM > 3.2 ? tt("¡Al hueco!") : L > 22 ? tt("¡Pase largo!") : tt("¡Pase!"), "91,227,122", laneM > 3.2);
+            if (V.combo >= 2) { floatAt(dest[0], 3.3, dest[1], "x" + V.combo + (V.combo >= 3 ? " · " + tt("¡Olé!") : ""), "255,210,63", V.combo >= 3); try { AU.fx("chime", 1 + (V.combo - 2) * 0.19); } catch (e) {} }
+            sparkWorld(dest[0], 0.4, dest[1], 10, "91,227,122", 140);
+            try { AU.crowd(cl(0.2 + V.combo * 0.12 + cl((30 - dest[0]) / 30, 0, 1) * 0.35, 0.15, 0.85)); } catch (e) {}
             var hs = holderSpot(dest); moveTo(recv, hs[0], hs[1], 0.25, true, false);
             ballAt(dest[0], dest[1]);
-            camFor(st, 0.75);
+            camFor(st, 0.5);
             wait(red() ? 60 : 520, fin);
           } else {
+            V.combo = 0; try { AU.crowd(0.15); } catch (e) {}
             if (cutter) cutter.play("slide");
             try { AU.fx("wall"); AU.fx("ooh"); } catch (e) {}
             shout(tt("¡Cortado!"), "bad"); hap("bad"); S3.kick(0.3); S3.hitstop(80); flashOn("rgba(255,60,60,.35)");
@@ -495,30 +516,35 @@ var JMHero = (function () {
       if (how === "goal" && Math.abs(z) > 2.6) reach = Math.max(0.6, reach - 1.1);
       var side = z > 0 ? -1 : 1;
       kickThen(V.holder, "laces", function () {
-        S3.kick(0.22); V.btrail = []; V.trail = null;
+        S3.kick(0.22 + Math.min(0.25, L * 0.008)); S3.hitstop(red() ? 0 : 55); V.btrail = []; V.trail = null; V.trailRGB = "255,226,120";
+        try { AU.fx("whoosh", 1); } catch (e) {} var fovK = red() ? 0 : 9;
         if (blocker) { var bp = route[route.length - 1]; moveTo(blocker, bp[0], bp[1], dur * 0.8, "ball"); }
         /* cámara que persigue al balón */
         S3.follow = function (c, dt) {
           var b = [S3.ball.x, S3.ball.y, S3.ball.z], want = S3.L(Math.max(11, SP3.GLX - b[0] + 7), 3 + S3.ball.y * 0.3, -b[2] * 0.6 + side * 2.4), tg = S3.L(0, 1.1, z * 0.4), a = Math.min(1, dt * 5);
           for (var q = 0; q < 3; q++) { c.eye[q] += (want[q] - c.eye[q]) * a; c.tgt[q] += (tg[q] - c.tgt[q]) * a; }
-          c.fov += (44 - c.fov) * a;
+          c.fov += (44 + fovK - c.fov) * a; fovK *= Math.pow(0.12, dt);
         };
         S3.cam.k = 1;
         fly(route, dur, function (k) { return BR + (hEnd - BR) * Math.pow(k, 1.15) + Math.min(1.2, L * 0.03) * 4 * k * (1 - k) * (how === "block" ? 0.3 : 1); }, function () {
           S3.follow = null;
           if (how === "goal") {
             S3.net.hit(S3.ball.x, S3.ball.y, S3.ball.z, 9); try { AU.fx("net"); AU.fx("cheer"); AU.crowd(1); } catch (e) {}
-            S3.kick(0.55); hap("big"); shout(tt("¡GOL!"), "good"); flashOn("rgba(255,255,255,.85)");
+            var far0 = start[0], curl = 0; (aim.path || []).forEach(function (q) { curl = Math.max(curl, Math.abs(q[1] - (start[1] + (z - start[1]) * (1 - q[0] / Math.max(1, start[0]))))); });
+            var tag = h >= 1.5 && Math.abs(z) >= 2.2 ? tt("¡A la escuadra!") : far0 > 22 ? tt("¡Desde lejos!") : curl > 1.6 ? tt("¡Con rosca!") : h < 0.8 && Math.abs(z) >= 2.2 ? tt("¡Raso y al palo!") : "";
+            S3.kick(tag ? 0.75 : 0.55); hap("big"); shout(tag ? tt("¡GOLAZO!") : tt("¡GOL!"), "good"); flashOn("rgba(255,255,255,.85)");
+            if (tag) { floatAt(0.5, GH + 0.6, z, tag, "255,210,63", true); try { AU.fx("roar"); } catch (e) {} }
+            sparkWorld(0, S3.ball.y, z, tag ? 40 : 22, "255,226,120", 260); sparkWorld(0, S3.ball.y, z, 14, "255,255,255", 200);
             S3.fx("confetti", 3, 5, 0, S3.ctx === "final" || S3.ctx === "big" ? 80 : 36);
             var c = I.celebOf(); V.holder.play(c === "silence" || c === "slide" || c === "plane" || c === "jump" || c === "flip" ? c : "arms");
             V.ex.concat(V.mates).forEach(function (m, i) { if (m !== V.holder) setTimeout(function () { m.play(i % 2 ? "jump" : "arms"); }, 200 + i * 120); });
             setTimeout(function () { V.gk.play("crouchsad"); }, 600);
             var hp = gpos(V.holder); S3.camTo([hp[0] + 4.5, 2.2, hp[1] + side * 3], [hp[0], 1.1, hp[1]], 38, 1.1);
           } else if (how === "save") {
-            try { AU.fx("catch"); AU.fx("ooh"); } catch (e) {} S3.hitstop(90); S3.kick(0.3); hap("ok"); shout(tt("¡Parada!"), "bad"); flashOn("rgba(255,255,255,.25)");
+            try { AU.fx(Math.abs(z) > 2 ? "parry" : "catch"); AU.fx("ooh"); } catch (e) {} sparkWorld(0.3, S3.ball.y, z, 10, "255,255,255", 150); S3.hitstop(90); S3.kick(0.3); hap("ok"); shout(tt("¡Parada!"), "bad"); flashOn("rgba(255,255,255,.25)");
             V.holder.play("headhands");
           } else if (how === "post" || how === "bar") {
-            try { AU.fx("post"); AU.fx("ooh"); } catch (e) {} S3.fx("spark", S3.ball.x, S3.ball.y, S3.ball.z, 10); S3.kick(0.6); S3.hitstop(70); hap("big"); shout(tt(how === "bar" ? "¡Larguero!" : "¡Al palo!"), "bad"); flashOn("rgba(255,255,255,.4)");
+            try { AU.fx("post"); AU.fx("ooh"); } catch (e) {} S3.fx("spark", S3.ball.x, S3.ball.y, S3.ball.z, 10); sparkWorld(0, S3.ball.y, z, 16, "255,240,180", 220); S3.kick(0.6); S3.hitstop(70); hap("big"); shout(tt(how === "bar" ? "¡Larguero!" : "¡Al palo!"), "bad"); flashOn("rgba(255,255,255,.4)");
             fly([[0.3, z], [6, z * 0.6 - sgn * 1.5]], 0.6, function (k) { return Math.max(BR, h * (1 - k) + 1.2 * 4 * k * (1 - k)); }, null);
             V.holder.play("punch");
           } else if (how === "miss") {
@@ -531,6 +557,7 @@ var JMHero = (function () {
           wait(red() ? 120 : 1650, fin);
         }, function (k) {
           if (how === "goal" && !slowed && k > 0.72 && !red() && !V.fast) { slowed = true; S3.slow(0.32, 0.55); }
+          if ((how === "save" || how === "post" || how === "bar") && !slowed && k > 0.8 && !red() && !V.fast) { slowed = true; S3.slow(0.45, 0.32); }
           if (!gkGo && k > (how === "goal" ? 0.45 : 0.3) && how !== "block") {
             gkGo = true; try { AU.fx("dive"); } catch (e) {}
             if (Math.abs(z) < 1.1 && how !== "goal") V.gk.play(h > 1.7 ? "gkjump" : "gkstay", {h: h, d: dur * 0.5});
@@ -579,7 +606,7 @@ var JMHero = (function () {
     V.snap = function () { return {holder: V.holder, ex: V.ex.slice(), steps: V.steps || 0}; };
     V.restore = function (sv, fresh) {
       if (V.busy) return;
-      V.holder = sv.holder; V.ex = sv.ex.slice(); V.steps = sv.steps; V.moves = []; V.waits = []; V.trail = null; V.floats = []; V.btrail = []; V.hintA = null; S3.follow = null;
+      V.holder = sv.holder; V.ex = sv.ex.slice(); V.steps = sv.steps; V.combo = 0; V.sparks = []; try { AU.crowd(0.15); } catch (e0) {} V.moves = []; V.waits = []; V.trail = null; V.floats = []; V.btrail = []; V.hintA = null; S3.follow = null;
       if (fresh) { S3.rec = null; V.steps = 0; }
       allMen().forEach(function (m) { m.play("idle"); });
       S3.place(V.gk, 0.6, 0, false); V.gk.play("gkready", {amp: 0.05});

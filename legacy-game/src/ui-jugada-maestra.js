@@ -49,7 +49,7 @@
       active.bits = res.bits; active.newBits = res.bits & ~old; active.record = !!active.newBits && old > 0;
       p.stars[id] = old | res.bits; p.medals[id] = nStars(p.stars[id]);
       p.best[id] = Math.min(p.best[id] || 99, active.turn);
-      if (/^jm-/.test(id)) p.done[id] = true;
+      if (/^jm-/.test(id)) { if (!p.done[id]) justDone = {id: id}; else if (active.newBits) justDone = {id: id, starsOnly: true}; p.done[id] = true; }
       if (active.daily) { var dn = dayNum(); if (!p.daily || p.daily.last !== dn) { var st = p.daily && p.daily.last === dn - 1 ? (p.daily.streak || 0) + 1 : 1; p.daily = {last: dn, streak: st, best: Math.max(st, p.daily && p.daily.best || 0)}; active.streak = st; } }
       save(p);
     }
@@ -61,7 +61,7 @@
   }
 
   /* ---------- vista 3D a pantalla completa (si el dispositivo tiene WebGL) ---------- */
-  var hero = null, map = null;
+  var hero = null, map = null, justDone = null;
   function heroOn() { return typeof JMHero !== "undefined" && !!JMHero && JMHero.ok() && typeof document !== "undefined"; }
   function stars(n, of) { var o = ""; for (var i = 0; i < (of || 3); i++) o += '<span class="jmh-star' + (i < n ? " on" : "") + '"></span>'; return o; }
   function sfx(k, v) { try { if (typeof SpModes !== "undefined" && SpModes && SpModes.AU) SpModes.AU.fx(k, v); } catch (e) {} }
@@ -72,7 +72,7 @@
   }
   /* los tres objetivos de estrella, visibles antes de jugar */
   function objectives(id, bits, have) {
-    var I0 = lvInfo(id), list = [tr("Marca gol"), tr("Hazlo en {n} acciones o menos", {n: I0.par}), I0.bonus ? tr(I0.bonus.label) : ""];
+    var I0 = lvInfo(id), list = [tr("Marca gol"), (I0.par === 1 ? tr("Hazlo en una sola acción") : tr("Hazlo en {n} acciones o menos", {n: I0.par})), I0.bonus ? tr(I0.bonus.label) : ""];
     return '<ul class="jmh-obj">' + list.map(function (t, i) {
       var got = bits != null ? !!(bits & (1 << i)) : false, old = !!((have | 0) & (1 << i));
       return '<li class="' + (got ? "got" : old ? "old" : "") + '"><span class="jmh-star mini' + (got || old ? " on" : "") + '"></span><span>' + h(t) + "</span></li>";
@@ -82,7 +82,8 @@
     if (!hero || !active) return;
     var I0 = lvInfo(active.id), l = I0.l, p = progress();
     var left = Math.max(0, active.max - active.turn), dots = "";
-    for (var i = 0; i < active.max; i++) dots += '<span class="jmh-dot' + (i < left ? " on" : "") + '"></span>';
+    for (var i = 0; i < active.max; i++) dots += '<span class="jmh-dot' + (i < left ? " on" : "") + (i === left && hero.spent !== active.turn ? " spent" : "") + '"></span>';
+    hero.spent = active.turn;
     var kick = I0.daily ? tr("Jugada del día") : tr("Jugada {n} de 30", {n: I0.at + 1}) + " · " + tr("Capítulo {n}: {title}", {n: l.chapter, title: tr(l.chapterTitle)});
     hero.ov.querySelector(".jmh-hud").innerHTML = '<div class="jmh-row"><button class="jmh-back" data-jmh="list" aria-label="' + h(tr("Volver a retos")) + '">‹</button>' +
       '<div class="grow"><small>' + h(kick) + "</small><b>" + h(tr(l.title)) + "</b></div>" +
@@ -104,6 +105,7 @@
     res.hidden = false;
     res.innerHTML = '<div class="jmh-card ' + (won ? "good" : "try") + '"><b>' + h(won ? tr("¡Jugada completada!") : tr("La defensa gana esta vez")) + "</b>" +
       (won ? '<div class="jmh-stars" aria-label="' + h(tr("Estrellas: {n} de 3", {n: nStars(bits)})) + '">' + [0, 1, 2].map(function (i) { return '<span class="jmh-star' + (bits & (1 << i) ? " on" : "") + '"></span>'; }).join("") + "</div>" : "") +
+      (won && bits === 7 ? '<span class="jmh-rec perfect">' + h(tr("¡Jugada perfecta!")) + "</span>" : "") +
       (active.record ? '<span class="jmh-rec">' + h(tr("¡Nuevo récord!")) + "</span>" : "") +
       (chapterDone ? '<span class="jmh-rec ch">' + h(tr("¡Capítulo completado!")) + "</span>" : "") +
       (active.streak ? '<span class="jmh-rec">' + h(tr("Racha diaria: {n}", {n: active.streak})) + "</span>" : "") +
@@ -117,8 +119,23 @@
       el.style.animationDelay = (0.35 + i * 0.3) + "s"; el.classList.add("pop");
       setTimeout(function () { sfx("post", 0.6 + i * 0.25); hapt(i === on.length - 1 ? "big" : "ok"); }, 350 + i * 300);
     });
+    if (won) {
+      Array.prototype.forEach.call(res.querySelectorAll(".jmh-obj li"), function (li, i) {
+        li.style.animationDelay = (0.5 + i * 0.3) + "s"; li.classList.add("in");
+        if (li.classList.contains("got")) setTimeout(function () { sfx("chime", 1 + i * 0.26); }, 520 + i * 300);
+      });
+      if (bits === 7 || active.newBits & 4) confetti(res, bits === 7 ? 70 : 34);
+    }
     if (!won) { var card = res.querySelector(".jmh-card"); if (card) card.classList.add("shake"); }
     setTimeout(function () { var b = res.querySelector(".go"); if (b) try { b.focus({preventScroll: true}); } catch (e) {} }, 80);
+  }
+  /* confeti de papel en la tarjeta de resultado */
+  function confetti(host, n) {
+    try { if (matchMedia("(prefers-reduced-motion: reduce)").matches) return; } catch (e) {}
+    var box = document.createElement("div"); box.className = "jmh-conf"; box.setAttribute("aria-hidden", "true");
+    var cols = ["#ffd23f", "#5be37a", "#ffffff", "#ff6b6b", "#6bc5ff"];
+    for (var i = 0; i < n; i++) { var c = document.createElement("i"); c.style.left = (Math.random() * 100) + "%"; c.style.background = cols[i % cols.length]; c.style.animationDelay = (0.3 + Math.random() * 0.6) + "s"; c.style.animationDuration = (1.6 + Math.random() * 1.2) + "s"; c.style.setProperty("--dx", (Math.random() * 120 - 60) + "px"); c.style.setProperty("--r", (Math.random() * 900 - 450) + "deg"); box.appendChild(c); }
+    host.appendChild(box); setTimeout(function () { try { box.remove(); } catch (e) {} }, 3600);
   }
   function heroClose() { if (!hero) return; try { hero.view.dispose(); } catch (e) {} try { hero.ov.remove(); } catch (e) {} hero = null; }
   function heroOpen() {
@@ -156,7 +173,7 @@
     var p = progress(), lv = JugadaMaestra.levels(), tot = totalStars(p), did = dailyNow(p), dl = JugadaMaestra.level(did), dDone = p.daily && p.daily.last === dayNum();
     var o = '<div class="jmm-head"><button class="jmh-back" data-jmp="close" aria-label="' + h(tr("Cerrar")) + '">‹</button><div class="grow"><small>' + h(tr("Dibuja pases y tiros, y resuelve la jugada.")) + "</small><b>" + h(tr("Jugada Maestra")) + '</b></div><span class="jmm-tot"><span class="jmh-star mini on"></span>' + tot + "/90</span></div>";
     o += '<div class="jmm-scroll">';
-    o += '<button class="jmm-daily' + (dDone ? " done" : "") + '" data-jmp="daily"><span class="jmm-cal" aria-hidden="true">' + (dDone ? "✓" : "★") + '</span><span class="grow"><b>' + h(tr("Jugada del día")) + "</b><small>" + h(dDone ? tr("Hecha hoy. Vuelve mañana para otra.") : tr("Una jugada en espejo cada día. ¡Mantén la racha!")) + "</small></span>" + (p.daily && p.daily.streak ? '<span class="jmm-streak">🔥 ' + p.daily.streak + "</span>" : "") + "</button>";
+    o += '<button class="jmm-daily' + (dDone ? " done" : "") + '" data-jmp="daily"><span class="jmm-cal" aria-hidden="true">' + (dDone ? "✓" : '<span class="jmh-star"></span>') + '</span><span class="grow"><b>' + h(tr("Jugada del día")) + "</b><small>" + h(dDone ? tr("Hecha hoy. Vuelve mañana para otra.") : tr("Una jugada en espejo cada día. ¡Mantén la racha!")) + "</small></span>" + (p.daily && p.daily.streak ? '<span class="jmm-streak">🔥 ' + p.daily.streak + "</span>" : "") + "</button>";
     for (var c = 0; c < 5; c++) {
       var ls = lv.slice(c * 6, c * 6 + 6), cs = ls.reduce(function (v, l) { return v + nStars(p.stars[l.id]); }, 0), openC = unlocked(ls[0].id, p);
       o += '<section class="jmm-ch c' + (c + 1) + (openC ? "" : " locked") + '"><div class="jmm-ban"><span class="jmm-n">' + (c + 1) + '</span><span class="grow"><small>' + h(tr("Capítulo {n}", {n: c + 1})) + "</small><b>" + h(tr(ls[0].chapterTitle)) + '</b></span><span class="jmm-cs"><span class="jmh-star mini on"></span>' + cs + "/18</span></div><div class=\"jmm-grid\">";
@@ -176,6 +193,14 @@
     map.innerHTML = mapHtml(); document.body.appendChild(map);
     var p = progress(), lv = JugadaMaestra.levels(), cur = focusId || (lv.filter(function (l) { return unlocked(l.id, p) && !p.done[l.id]; })[0] || lv[lv.length - 1]).id;
     var el = map.querySelector('[data-v="' + cur + '"]'); if (el) setTimeout(function () { try { el.scrollIntoView({block: "center"}); } catch (e) {} }, 30);
+    sfx("swoosh");
+    if (justDone) {
+      var jd = justDone; justDone = null;
+      var dn = map.querySelector('[data-v="' + jd.id + '"]');
+      if (dn) { dn.classList.add("just"); Array.prototype.forEach.call(dn.querySelectorAll(".jmh-star.on"), function (s0, i) { s0.style.animationDelay = (0.35 + i * 0.18) + "s"; s0.classList.add("pop"); }); }
+      var at = lv.findIndex(function (l) { return l.id === jd.id; }), nx = !jd.starsOnly && lv[at + 1], nn = nx && map.querySelector('[data-v="' + nx.id + '"]');
+      if (nn) { nn.classList.add("unlock"); setTimeout(function () { sfx("chime", 1.5); hapt("ok"); }, 900); }
+    }
   }
   function mapDetail(id) {
     if (!map) return;
@@ -263,7 +288,7 @@
       if (map) {
         var q = e.target.closest ? e.target.closest("[data-jmp]") : null;
         if (q && map.contains(q)) {
-          var kq = q.getAttribute("data-jmp"), vq = q.getAttribute("data-v");
+          var kq = q.getAttribute("data-jmp"), vq = q.getAttribute("data-v"); sfx("tick");
           if (kq === "close") { mapClose(); return; }
           if (kq === "lv") { mapDetail(vq); return; }
           if (kq === "daily") { mapDetail(dailyNow(progress())); return; }
@@ -276,7 +301,7 @@
       if (!hero) return;
       var b = e.target.closest ? e.target.closest("[data-jmh]") : null;
       if (!b || !hero.ov.contains(b)) return;
-      var k = b.getAttribute("data-jmh"), v = b.getAttribute("data-v");
+      var k = b.getAttribute("data-jmh"), v = b.getAttribute("data-v"); sfx("tick");
       if (k === "list") { var back = active && !active.daily ? active.id : null; heroClose(); active = null; mapOpen(back); return; }
       if (k === "retry" || k === "restart") { heroRetry(); return; }
       if (k === "next") { var I0 = lvInfo(active.id), nx = JugadaMaestra.levels()[I0.at + 1]; if (nx && unlocked(nx.id, progress())) startLevel(nx.id); return; }
@@ -341,6 +366,16 @@
       ".jmm-det[hidden]{display:none}.jmm-det{position:absolute;inset:0;z-index:5;display:flex;align-items:flex-end;justify-content:center;padding:16px 16px max(18px,env(safe-area-inset-bottom));background:rgba(0,0,0,.55)}" +
       ".jmm-k{display:inline-block;margin-bottom:6px;padding:3px 10px;border-radius:999px;background:#ffd23f;color:#111;font:800 11px/1.3 var(--f-body);text-transform:uppercase;letter-spacing:.06em}.jmm-meta{font:600 var(--fs-xs)/1.3 var(--f-body);opacity:.7;margin:0 0 12px!important}" +
       "@media (prefers-reduced-motion:reduce){.jmm-node.cur{animation:none}}" +
+      ".jmh-dot.spent{animation:jmhSpent .45s ease-out}@keyframes jmhSpent{0%{transform:scale(1.5);background:#fff;box-shadow:0 0 14px #fff}100%{transform:scale(.7)}}" +
+      ".jmh-btns button,.jmh-ic,.jmh-chip,.jmm-node,.jmm-daily,.jmh-back{transition:transform .08s ease-out,filter .08s}.jmh-btns button:active,.jmh-ic:active,.jmh-chip:active,.jmm-node:active,.jmm-daily:active,.jmh-back:active{transform:scale(.94);filter:brightness(1.15)}" +
+      ".jmh-btns .go{position:relative;overflow:hidden}.jmh-btns .go::after{content:'';position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);animation:jmhShine 2.6s 1.2s infinite}@keyframes jmhShine{0%{left:-60%}35%,100%{left:130%}}" +
+      ".jmh-obj li.in{animation:jmhObj .35s backwards cubic-bezier(.2,1.4,.4,1)}@keyframes jmhObj{from{opacity:0;transform:translateX(-14px)}}" +
+      ".jmh-rec.perfect{background:linear-gradient(90deg,#ffd23f,#ff9f1c,#ffd23f);background-size:200% 100%;color:#111;animation:jmhUp .35s .9s backwards,jmhGrad 1.6s linear infinite}@keyframes jmhGrad{to{background-position:200% 0}}" +
+      ".jmh-conf{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:6}.jmh-conf i{position:absolute;top:-12px;width:8px;height:13px;border-radius:2px;opacity:0;animation:jmhConf linear forwards}@keyframes jmhConf{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:1;transform:translate(var(--dx),105vh) rotate(var(--r))}}" +
+      ".jmh-ov{animation:jmhFade .3s ease-out}@keyframes jmhFade{from{opacity:0}}.jmh-stage{animation:jmhFade .6s ease-out}.jmm-det .jmh-card{animation:jmhUp .3s cubic-bezier(.2,1.3,.4,1)}" +
+      ".jmm-node.just{animation:jmhJust .6s .2s backwards cubic-bezier(.2,1.6,.4,1)}@keyframes jmhJust{from{transform:scale(.8)}}.jmm-node .jmh-star.pop{transform:none;animation:jmhPop .45s backwards cubic-bezier(.2,1.8,.4,1)}@keyframes jmhPop{from{transform:scale(0) rotate(-40deg)}}" +
+      ".jmm-node.unlock{animation:jmhUnlock 1s .5s backwards}@keyframes jmhUnlock{0%{transform:scale(.85);filter:grayscale(1) brightness(.6)}30%{transform:rotate(-6deg) scale(.9)}45%{transform:rotate(6deg) scale(.9)}60%{transform:rotate(0) scale(1.15);filter:none;box-shadow:0 0 0 8px rgba(91,227,122,.45)}100%{transform:none}}" +
+      "@media (prefers-reduced-motion:reduce){.jmh-dot.spent,.jmh-obj li.in,.jmh-btns .go::after,.jmh-rec.perfect,.jmh-ov,.jmh-stage,.jmm-node.just,.jmm-node.unlock,.jmm-node .jmh-star.pop{animation:none}}" +
       "@keyframes jmhUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}@media (prefers-reduced-motion:reduce){.jmh-star.pop{transform:none;animation:none}.jmh-card,.jmh-card.shake,.jmh-rec{animation:none}}";
     (document.head || document.documentElement).appendChild(hcss);
   }

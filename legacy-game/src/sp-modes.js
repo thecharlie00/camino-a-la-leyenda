@@ -50,6 +50,12 @@ var SpModes = (function () {
         else if (n === "cheer") { hiss(1.6, 1100, 0.4, 0.4); hiss(1.3, 2400, 0.6, 0.2, 0.1); }
         else if (n === "ooh") { hiss(1.0, 700, 0.8, 0.3); tone("sine", 220, 180, 0.8, 0.05); }
         else if (n === "spray") { hiss(0.5, 4500, 0.8, 0.1); }
+        else if (n === "whoosh") { hiss(0.28, 900, 0.6, 0.22 * k, 0, "lowpass"); hiss(0.22, 3200, 0.9, 0.08 * k, 0.03); }
+        else if (n === "trap") { tone("sine", 150, 95, 0.07, 0.4); hiss(0.04, 900, 1.2, 0.18); }
+        else if (n === "chime") { tone("triangle", 660 * k, 660 * k, 0.22, 0.14); tone("sine", 990 * k, 990 * k, 0.3, 0.07, 0.04); }
+        else if (n === "tick") { tone("sine", 1500, 1100, 0.035, 0.06); }
+        else if (n === "swoosh") { hiss(0.22, 1800, 0.7, 0.07); }
+        else if (n === "roar") { hiss(2.4, 900, 0.35, 0.5); hiss(2.0, 2200, 0.5, 0.25, 0.08); tone("sine", 110, 90, 1.2, 0.05, 0.1); }
       },
       crowd: function (level) { if (!ok()) return; if (!crowdG) { var s = ac.createBufferSource(); s.buffer = noise; s.loop = true; crowdF = ac.createBiquadFilter(); crowdF.type = "bandpass"; crowdF.frequency.value = 700; crowdF.Q.value = 0.5; crowdG = ac.createGain(); crowdG.gain.value = 0; s.connect(crowdF); crowdF.connect(crowdG); crowdG.connect(out); s.start(); } crowdG.gain.setTargetAtTime(level * 0.22, ac.currentTime, 0.3); crowdF.frequency.setTargetAtTime(600 + level * 500, ac.currentTime, 0.3); },
       heart: function (dt, on, rate) { if (!on) return; beatT -= dt; if (beatT <= 0) { beatT = 60 / rate; this.fx("beat"); } },
