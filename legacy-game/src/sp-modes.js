@@ -53,6 +53,8 @@ var SpModes = (function () {
         else if (n === "whoosh") { hiss(0.28, 900, 0.6, 0.22 * k, 0, "lowpass"); hiss(0.22, 3200, 0.9, 0.08 * k, 0.03); }
         else if (n === "trap") { tone("sine", 150, 95, 0.07, 0.4); hiss(0.04, 900, 1.2, 0.18); }
         else if (n === "chime") { tone("triangle", 660 * k, 660 * k, 0.22, 0.14); tone("sine", 990 * k, 990 * k, 0.3, 0.07, 0.04); }
+        else if (n === "jingle") { var nt = [523, 659, 784, 1047]; for (var ji = 0; ji < 2 + Math.round(k); ji++) tone("triangle", nt[Math.min(3, ji)], nt[Math.min(3, ji)], 0.18 + (ji === 1 + Math.round(k) ? 0.3 : 0), 0.12, ji * 0.11); }
+        else if (n === "sting") { tone("triangle", 392, 370, 0.2, 0.1); tone("triangle", 311, 290, 0.45, 0.1, 0.18); }
         else if (n === "tick") { tone("sine", 1500, 1100, 0.035, 0.06); }
         else if (n === "swoosh") { hiss(0.22, 1800, 0.7, 0.07); }
         else if (n === "roar") { hiss(2.4, 900, 0.35, 0.5); hiss(2.0, 2200, 0.5, 0.25, 0.08); tone("sine", 110, 90, 1.2, 0.05, 0.1); }

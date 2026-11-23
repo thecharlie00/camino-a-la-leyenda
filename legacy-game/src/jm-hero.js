@@ -230,6 +230,15 @@ var JMHero = (function () {
     var clock = 0;
     S3.extra.push(function (E2, dt) {
       clock += dt;
+      /* el portero se perfila hacia donde apuntas; vuelve al centro al soltar */
+      if (!V.busy && !V.replaying) {
+        var stK = o.get(), aimK = V.draw && V.draw.aim, wantZ = aimK && aimK.kind === "shot" ? cl(aimK.z * 0.2, -0.9, 0.9) : 0;
+        V.gkZ = (V.gkZ || 0) + (wantZ - (V.gkZ || 0)) * Math.min(1, dt * 5);
+        if (stK && !stK.done && Math.abs(V.gkZ) + Math.abs(wantZ) > 0.002) S3.place(V.gk, 0.6, V.gkZ, false);
+        /* si no tocas nada en un rato, el tutorial fantasma vuelve a enseñar el gesto */
+        if (stK && !stK.done && !V.draw && !V.hintA && !stK.match) { V.idle = (V.idle || 0) + dt; if (V.idle > 9 && !V.nudged) { V.nudged = true; V.ghost = true; say(tt("Desliza desde el balón: hacia un compañero para pasar o hacia la portería para tirar."), 3500); } }
+        else V.idle = 0;
+      } else V.idle = 0;
       if (S3.rec && !S3.rec.done && !V.replaying) { V.recN = (V.recN || 0) + 1; V.recT = (V.recT || 0) + dt; }
       if (V.waits.length) { var due = V.waits.filter(function (w) { return clock >= w.t; }); V.waits = V.waits.filter(function (w) { return clock < w.t; }); due.forEach(function (w) { try { w.fn(); } catch (e) {} }); }
       if (cv.width !== Math.round(cv.getBoundingClientRect().width * dpr)) fit();
@@ -333,7 +342,7 @@ var JMHero = (function () {
       if (!V.alive || V.busy || !st || st.done) return;
       var bg0 = ballG(), bs = S3.project(bg0[0], BR, bg0[1]);
       V.draw = {id: e.pointerId, pts: [{x: bs.x, y: bs.y}, {x: e.clientX, y: e.clientY}], aim: null, gp: [o.get().ball.slice()], hot: []};
-      V.ghost = false; V.hintA = null;
+      V.ghost = false; V.hintA = null; V.idle = 0; V.nudged = true;
       try { cv.setPointerCapture(e.pointerId); } catch (err) {}
       say(""); e.preventDefault();
     }
@@ -537,9 +546,15 @@ var JMHero = (function () {
             sparkWorld(0, S3.ball.y, z, tag ? 40 : 22, "255,226,120", 260); sparkWorld(0, S3.ball.y, z, 14, "255,255,255", 200);
             S3.fx("confetti", 3, 5, 0, S3.ctx === "final" || S3.ctx === "big" ? 80 : 36);
             var c = I.celebOf(); V.holder.play(c === "silence" || c === "slide" || c === "plane" || c === "jump" || c === "flip" ? c : "arms");
-            V.ex.concat(V.mates).forEach(function (m, i) { if (m !== V.holder) setTimeout(function () { m.play(i % 2 ? "jump" : "arms"); }, 200 + i * 120); });
+            var sp1 = gpos(V.holder);
+            V.ex.concat(V.mates).filter(function (m, i, arr) { return m !== V.holder && arr.indexOf(m) === i; }).forEach(function (m, i) {
+              var a0 = i * 2.1 + 0.6, tx = sp1[0] + Math.cos(a0) * 1.6, tz = sp1[1] + Math.sin(a0) * 1.6, far1 = Math.hypot(m.gx - tx, m.gz - tz);
+              if (far1 < 22 && !red()) { setTimeout(function () { if (!V.alive) return; moveTo(m, tx, tz, cl(far1 / 7, 0.6, 1.8), "ball"); setTimeout(function () { if (V.alive) m.play(i % 2 ? "jump" : "arms"); }, cl(far1 / 7, 0.6, 1.8) * 1000 + 60); }, 250 + i * 110); }
+              else setTimeout(function () { m.play(i % 2 ? "jump" : "arms"); }, 200 + i * 120);
+            });
             setTimeout(function () { V.gk.play("crouchsad"); }, 600);
             var hp = gpos(V.holder); S3.camTo([hp[0] + 4.5, 2.2, hp[1] + side * 3], [hp[0], 1.1, hp[1]], 38, 1.1);
+            setTimeout(function () { if (V.alive && !V.replaying) S3.camTo([hp[0] + 7, 3.6, hp[1] + side * 5], [hp[0], -0.5, hp[1]], 48, 1.4); }, red() ? 0 : 1300);
           } else if (how === "save") {
             try { AU.fx(Math.abs(z) > 2 ? "parry" : "catch"); AU.fx("ooh"); } catch (e) {} sparkWorld(0.3, S3.ball.y, z, 10, "255,255,255", 150); S3.hitstop(90); S3.kick(0.3); hap("ok"); shout(tt("¡Parada!"), "bad"); flashOn("rgba(255,255,255,.25)");
             V.holder.play("headhands");

@@ -50,6 +50,8 @@ keys.push(...["Al espacio", "Busca el pase que rompa la línea y llega al área.
 keys.push(...["¡Olé!", "¡A la escuadra!", "¡Desde lejos!", "¡Con rosca!", "¡Raso y al palo!", "¡GOLAZO!", "¡Jugada perfecta!"]);
 /* pulido: mapa, objetivos de estrella, jugadas nuevas */
 keys.push(...["Hazlo en una sola acción"]);
+/* pulido: mapa, objetivos de estrella, jugadas nuevas */
+keys.push(...["Mínimo posible: {n}"]);
 /* cadenas de la integración de Jugada Maestra en el partido (panel y comentario) */
 const matchKeys = [
   "¡Arranca el partido! {us} contra {opp}.",

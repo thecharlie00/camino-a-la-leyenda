@@ -61,7 +61,7 @@
   }
 
   /* ---------- vista 3D a pantalla completa (si el dispositivo tiene WebGL) ---------- */
-  var hero = null, map = null, justDone = null;
+  var hero = null, map = null, justDone = null, mapTot = null;
   function heroOn() { return typeof JMHero !== "undefined" && !!JMHero && JMHero.ok() && typeof document !== "undefined"; }
   function stars(n, of) { var o = ""; for (var i = 0; i < (of || 3); i++) o += '<span class="jmh-star' + (i < n ? " on" : "") + '"></span>'; return o; }
   function sfx(k, v) { try { if (typeof SpModes !== "undefined" && SpModes && SpModes.AU) SpModes.AU.fx(k, v); } catch (e) {} }
@@ -109,6 +109,7 @@
       (active.record ? '<span class="jmh-rec">' + h(tr("¡Nuevo récord!")) + "</span>" : "") +
       (chapterDone ? '<span class="jmh-rec ch">' + h(tr("¡Capítulo completado!")) + "</span>" : "") +
       (active.streak ? '<span class="jmh-rec">' + h(tr("Racha diaria: {n}", {n: active.streak})) + "</span>" : "") +
+ (won ? '<p class="jmh-stat">' + h(tr("Acciones: {n}/{max}", {n: active.turn, max: active.max})) + " · " + h(tr("Mínimo posible: {n}", {n: I0.par})) + "</p>" : "") +
       (won ? objectives(active.id, bits, progress().stars[active.id]) : "<p>" + h(tr(active.lastMsg || "Puedes intentarlo otra vez sin coste ni penalización.")) + "</p>") +
       '<div class="jmh-btns">' + (canNext ? '<button class="go" data-jmh="next">' + h(tr("Siguiente jugada")) + "</button>" : "") +
       (canRew ? '<button class="go" data-jmh="rewind">' + h(tr("Rebobinar la última acción")) + "</button>" : "") +
@@ -126,6 +127,7 @@
       });
       if (bits === 7 || active.newBits & 4) confetti(res, bits === 7 ? 70 : 34);
     }
+    setTimeout(function () { sfx(won ? "jingle" : "sting", won ? Math.max(0, nStars(bits) - 1) : 1); }, won ? 150 : 250);
     if (!won) { var card = res.querySelector(".jmh-card"); if (card) card.classList.add("shake"); }
     setTimeout(function () { var b = res.querySelector(".go"); if (b) try { b.focus({preventScroll: true}); } catch (e) {} }, 80);
   }
@@ -194,6 +196,12 @@
     var p = progress(), lv = JugadaMaestra.levels(), cur = focusId || (lv.filter(function (l) { return unlocked(l.id, p) && !p.done[l.id]; })[0] || lv[lv.length - 1]).id;
     var el = map.querySelector('[data-v="' + cur + '"]'); if (el) setTimeout(function () { try { el.scrollIntoView({block: "center"}); } catch (e) {} }, 30);
     sfx("swoosh");
+    var tot0 = mapTot, tot1 = totalStars(p), te = map.querySelector(".jmm-tot"); mapTot = tot1;
+    if (tot0 != null && tot1 > tot0 && te) {
+      var cur0 = tot0; te.classList.add("up");
+      var tick = setInterval(function () { if (!map || cur0 >= tot1) { clearInterval(tick); if (te) te.classList.remove("up"); return; } cur0++; te.lastChild.nodeValue = cur0 + "/90"; sfx("tick"); }, 140);
+      te.lastChild.nodeValue = tot0 + "/90";
+    }
     if (justDone) {
       var jd = justDone; justDone = null;
       var dn = map.querySelector('[data-v="' + jd.id + '"]');
@@ -376,6 +384,8 @@
       ".jmm-node.just{animation:jmhJust .6s .2s backwards cubic-bezier(.2,1.6,.4,1)}@keyframes jmhJust{from{transform:scale(.8)}}.jmm-node .jmh-star.pop{transform:none;animation:jmhPop .45s backwards cubic-bezier(.2,1.8,.4,1)}@keyframes jmhPop{from{transform:scale(0) rotate(-40deg)}}" +
       ".jmm-node.unlock{animation:jmhUnlock 1s .5s backwards}@keyframes jmhUnlock{0%{transform:scale(.85);filter:grayscale(1) brightness(.6)}30%{transform:rotate(-6deg) scale(.9)}45%{transform:rotate(6deg) scale(.9)}60%{transform:rotate(0) scale(1.15);filter:none;box-shadow:0 0 0 8px rgba(91,227,122,.45)}100%{transform:none}}" +
       "@media (prefers-reduced-motion:reduce){.jmh-dot.spent,.jmh-obj li.in,.jmh-btns .go::after,.jmh-rec.perfect,.jmh-ov,.jmh-stage,.jmm-node.just,.jmm-node.unlock,.jmm-node .jmh-star.pop{animation:none}}" +
+      ".jmh-stat{margin:8px 0 0!important;font:700 var(--fs-xs)/1.3 var(--f-body);opacity:.75}" +
+      ".jmm-tot.up{animation:jmhTot .3s ease-out infinite alternate}@keyframes jmhTot{to{transform:scale(1.12);box-shadow:0 0 16px rgba(255,210,63,.6)}}" +
       "@keyframes jmhUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}@media (prefers-reduced-motion:reduce){.jmh-star.pop{transform:none;animation:none}.jmh-card,.jmh-card.shake,.jmh-rec{animation:none}}";
     (document.head || document.documentElement).appendChild(hcss);
   }
