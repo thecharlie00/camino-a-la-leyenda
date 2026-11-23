@@ -512,7 +512,7 @@ var JMHero = (function () {
       else if (how === "miss") { if (Math.abs(z) <= HW + 0.4 && h <= GH + 0.2) { if (h > 1.8) h = GH + 0.7; else z = sgn * (HW + 0.9); } }
       else if (how === "save") { z = cl(z, -HW + 0.6, HW - 0.6); h = cl(h, 0.3, 2.0); }
       var mid = (aim.path || []).slice(1).filter(function (q) { return q[0] > 2 && q[0] < start[0] - 0.5; });
-      var endX = how === "goal" ? -1.4 : how === "miss" ? -3.5 : 0.3, end = [endX, z];
+      var endX = how === "goal" ? -0.45 : how === "miss" ? -3.5 : 0.3, end = [endX, z];
       var blocker = null, route;
       var full = resample(chaikin(routeFrom(start, mid, [0, z]), 3), 60);
       if (how === "block") {
@@ -538,7 +538,7 @@ var JMHero = (function () {
         fly(route, dur, function (k) { return BR + (hEnd - BR) * Math.pow(k, 1.15) + Math.min(1.2, L * 0.03) * 4 * k * (1 - k) * (how === "block" ? 0.3 : 1); }, function () {
           S3.follow = null;
           if (how === "goal") {
-            S3.net.hit(S3.ball.x, S3.ball.y, S3.ball.z, 9); try { AU.fx("net"); AU.fx("cheer"); AU.crowd(1); } catch (e) {}
+            if (S3.netBallStart) S3.netBallStart(); else S3.net.hit(S3.ball.x, S3.ball.y, S3.ball.z, 9); try { AU.fx("net"); AU.fx("cheer"); AU.crowd(1); } catch (e) {}
             var far0 = start[0], curl = 0; (aim.path || []).forEach(function (q) { curl = Math.max(curl, Math.abs(q[1] - (start[1] + (z - start[1]) * (1 - q[0] / Math.max(1, start[0]))))); });
             var tag = h >= 1.5 && Math.abs(z) >= 2.2 ? tt("¡A la escuadra!") : far0 > 22 ? tt("¡Desde lejos!") : curl > 1.6 ? tt("¡Con rosca!") : h < 0.8 && Math.abs(z) >= 2.2 ? tt("¡Raso y al palo!") : "";
             S3.kick(tag ? 0.75 : 0.55); hap("big"); shout(tag ? tt("¡GOLAZO!") : tt("¡GOL!"), "good"); flashOn("rgba(255,255,255,.85)");
@@ -600,7 +600,7 @@ var JMHero = (function () {
     V.canReplay = function () { return !!(S3.rec && S3.rec.f && S3.rec.f.length > 20) && !V.busy; };
     V.replay = function (done) {
       if (!V.canReplay()) { if (done) done(); return; }
-      V.busy = true; V.replaying = true; V.trail = null; V.floats = []; V.btrail = []; rep.classList.add("on");
+      if (S3.netBallStop) S3.netBallStop(); V.busy = true; V.replaying = true; V.trail = null; V.floats = []; V.btrail = []; rep.classList.add("on");
       var side = -1, n = S3.rec.f.length, base = cl((V.recN || 60) / Math.max(0.2, V.recT || 1) / 60, 0.3, 1.3) * 0.85;
       S3.follow = function (c) {
         var P = S3.play; if (P) P.rate = P.i > n - 70 * base / 0.85 ? base * 0.5 : base;
@@ -621,7 +621,7 @@ var JMHero = (function () {
     V.snap = function () { return {holder: V.holder, ex: V.ex.slice(), steps: V.steps || 0}; };
     V.restore = function (sv, fresh) {
       if (V.busy) return;
-      V.holder = sv.holder; V.ex = sv.ex.slice(); V.steps = sv.steps; V.combo = 0; V.sparks = []; try { AU.crowd(0.15); } catch (e0) {} V.moves = []; V.waits = []; V.trail = null; V.floats = []; V.btrail = []; V.hintA = null; S3.follow = null;
+      if (S3.netBallStop) S3.netBallStop(); V.holder = sv.holder; V.ex = sv.ex.slice(); V.steps = sv.steps; V.combo = 0; V.sparks = []; try { AU.crowd(0.15); } catch (e0) {} V.moves = []; V.waits = []; V.trail = null; V.floats = []; V.btrail = []; V.hintA = null; S3.follow = null;
       if (fresh) { S3.rec = null; V.steps = 0; }
       allMen().forEach(function (m) { m.play("idle"); });
       S3.place(V.gk, 0.6, 0, false); V.gk.play("gkready", {amp: 0.05});

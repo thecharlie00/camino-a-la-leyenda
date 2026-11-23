@@ -65,44 +65,79 @@ var SP3 = (function () {
   }
 
   /* ---------- red de muelles (fondo y techo) ---------- */
+  /* ---------- red de la portería: tela con física (verlet) ----------
+     fondo + techo + dos laterales; el balón la empuja (también en repeticiones y en todos los modos)
+     y, si se pide, el balón sigue con física dentro de la portería hasta quedar en la bolsa */
   function Net() {
-    var cols = 17, rows = 9, N = {cols: cols, rows: rows, p: [], pp: [], r: [], pin: [], e: [], len: []};
-    for (var j = 0; j < rows; j++) for (var i = 0; i < cols; i++) {
-      var z = -HW + 2 * HW * i / (cols - 1), u = j / (rows - 1), x, y;
-      /* fila 0: suelo del fondo → hasta 1.9 (fondo), luego el techo hasta el larguero */
-      if (u <= 0.6) { x = 2.0; y = 1.9 * u / 0.6; } else { var w = (u - 0.6) / 0.4; x = 2.0 * (1 - w); y = 1.9 + (BAR - 1.9) * w; }
-      N.r.push(x, y, z); N.p.push(x, y, z); N.pp.push(x, y, z);
-      N.pin.push(j === 0 || j === rows - 1 || i === 0 || i === cols - 1 ? 1 : 0);
+    var N = {p: [], r: [], pin: [], e: [], len: []};
+    function grid(cols, rows, fn) {
+      var base = N.r.length / 3;
+      for (var j = 0; j < rows; j++) for (var i = 0; i < cols; i++) { var q = fn(i / (cols - 1), j / (rows - 1), i, j); N.r.push(q[0], q[1], q[2]); N.pin.push(q[3] ? 1 : 0); }
+      for (j = 0; j < rows; j++) for (i = 0; i < cols; i++) { var a = base + j * cols + i; if (i < cols - 1) N.e.push(a, a + 1); if (j < rows - 1) N.e.push(a, a + cols); }
     }
-    for (j = 0; j < rows; j++) for (i = 0; i < cols; i++) { var a = j * cols + i; if (i < cols - 1) N.e.push(a, a + 1); if (j < rows - 1) N.e.push(a, a + cols); }
+    var C0 = 21, R0 = 11;
+    grid(C0, R0, function (u, w, i, j) {
+      var z = -HW + 2 * HW * u, x, y;
+      if (w <= 0.6) { x = 2.0; y = 1.9 * w / 0.6; } else { var k = (w - 0.6) / 0.4; x = 2.0 * (1 - k); y = 1.9 + (BAR - 1.9) * k; }
+      return [x, y, z, j === 0 || j === R0 - 1 || i === 0 || i === C0 - 1];
+    });
+    [-1, 1].forEach(function (sd) {
+      grid(6, 7, function (u, w, i, j) { var x = 2.0 * u, top = 1.9 + (BAR - 1.9) * (1 - u); return [x, top * w, sd * HW, i === 0 || j === 0 || i === 5 || j === 6]; });
+    });
     for (var q = 0; q < N.e.length; q += 2) { var A = N.e[q] * 3, B = N.e[q + 1] * 3; N.len.push(Math.hypot(N.r[B] - N.r[A], N.r[B + 1] - N.r[A + 1], N.r[B + 2] - N.r[A + 2])); }
-    N.p = new Float32Array(N.p); N.pp = new Float32Array(N.pp); N.r = new Float32Array(N.r);
-    this.N = N; this.live = false; this.acc = 0;
+    N.r = new Float32Array(N.r); N.p = new Float32Array(N.r); N.pp = new Float32Array(N.r);
+    this.N = N; this.live = false; this.acc = 0; this.ball = null;
   }
-  /* golpe del balón en la red: x,y,z en marco de juego (x negativo = dentro de la portería) */
+  /* golpe seco en la red (modos que no simulan el balón dentro): x,y,z en marco de juego (x negativo = dentro) */
   Net.prototype.hit = function (x, y, z, v) {
     var N = this.N; this.live = true;
-    for (var i = 0; i < N.cols * N.rows; i++) {
+    for (var i = 0; i < N.pin.length; i++) {
       if (N.pin[i]) continue; var k = i * 3, dx = (N.r[k] - (-x)) * 0.5, dy = N.r[k + 1] - y, dz = N.r[k + 2] + z, d = Math.sqrt(dx * dx + dy * dy + dz * dz), w = Math.max(0, 1 - d / 1.4); w *= w;
-      if (!w) continue; var push = Math.min(0.6, v * 0.022) * w, back = N.r[k + 1] < 1.95;
+      if (!w) continue; var push = Math.min(0.6, v * 0.022) * w, back = N.r[k] > 1.95;
       N.pp[k] = N.p[k] - push * (back ? 1 : 0.4); N.pp[k + 1] = N.p[k + 1] + (back ? 0 : push * 0.6);
     }
   };
+  /* posición del balón en el marco de la red (o null si está lejos de la portería) */
+  Net.prototype.touch = function (x, y, z) {
+    if (x > -0.4 && x < 3 && Math.abs(z) < HW + 0.5 && y < BAR + 0.6) { this.ball = [x, y, z]; this.live = true; } else this.ball = null;
+  };
   Net.prototype.step = function (dt) {
     if (!this.live) return; var N = this.N; this.acc = Math.min(this.acc + dt, 0.1);
+    var bl = this.ball, RB = 0.28;      /* radio de arrastre: la malla es más ancha que el balón */
     while (this.acc >= 1 / 60) {
-      this.acc -= 1 / 60; var p = N.p, pp = N.pp, r = N.r, cnt = N.cols * N.rows, en = 0;
-      for (var i = 0; i < cnt; i++) { if (N.pin[i]) continue; var k = i * 3; for (var c = 0; c < 3; c++) { var v = (p[k + c] - pp[k + c]) * 0.96; pp[k + c] = p[k + c]; p[k + c] += v + (r[k + c] - p[k + c]) * 0.02; en += Math.abs(v); } }
-      for (var it = 0; it < 3; it++) for (var q = 0; q < N.e.length; q += 2) {
-        var a = N.e[q] * 3, b = N.e[q + 1] * 3, dx = p[b] - p[a], dy = p[b + 1] - p[a + 1], dz = p[b + 2] - p[a + 2], d = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1e-6, Lq = N.len[q / 2] * 1.18;
-        if (d <= Lq) continue; var f = (d - Lq) / d, wa = N.pin[N.e[q]] ? 0 : N.pin[N.e[q + 1]] ? 1 : 0.5, wb = N.pin[N.e[q + 1]] ? 0 : N.pin[N.e[q]] ? 1 : 0.5;
-        p[a] += dx * f * wa; p[a + 1] += dy * f * wa; p[a + 2] += dz * f * wa; p[b] -= dx * f * wb; p[b + 1] -= dy * f * wb; p[b + 2] -= dz * f * wb;
+      this.acc -= 1 / 60; var p = N.p, pp = N.pp, r = N.r, cnt = N.pin.length, en = 0;
+      for (var i = 0; i < cnt; i++) { if (N.pin[i]) continue; var k = i * 3; for (var c = 0; c < 3; c++) { var v = (p[k + c] - pp[k + c]) * 0.965; pp[k + c] = p[k + c]; p[k + c] += v + (r[k + c] - p[k + c]) * 0.018; en += Math.abs(v); } p[k + 1] -= 0.00025; }
+      for (var it = 0; it < 4; it++) {
+        for (var q = 0; q < N.e.length; q += 2) {
+          var a = N.e[q] * 3, b = N.e[q + 1] * 3, dx = p[b] - p[a], dy = p[b + 1] - p[a + 1], dz = p[b + 2] - p[a + 2], d = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1e-6, Lq = N.len[q / 2] * 1.22;
+          if (d <= Lq) continue; var f = (d - Lq) / d, wa = N.pin[N.e[q]] ? 0 : N.pin[N.e[q + 1]] ? 1 : 0.5, wb = N.pin[N.e[q + 1]] ? 0 : N.pin[N.e[q]] ? 1 : 0.5;
+          p[a] += dx * f * wa; p[a + 1] += dy * f * wa; p[a + 2] += dz * f * wa; p[b] -= dx * f * wb; p[b + 1] -= dy * f * wb; p[b + 2] -= dz * f * wb;
+        }
+        /* el balón aparta la malla: cada nudo queda fuera de la esfera */
+        if (bl) for (i = 0; i < cnt; i++) {
+          if (N.pin[i]) continue; k = i * 3; var ex = p[k] - bl[0], ey = p[k + 1] - bl[1], ez = p[k + 2] - bl[2], dd = ex * ex + ey * ey + ez * ez;
+          if (dd < RB * RB) { var s0 = Math.sqrt(dd) || 1e-4, m = RB / s0; if (s0 < 1e-3) { ex = 1; ey = 0; ez = 0; m = RB; } p[k] = bl[0] + ex * m; p[k + 1] = bl[1] + ey * m; p[k + 2] = bl[2] + ez * m; en += 0.01; }
+        }
       }
-      if (en < 0.002) { p.set(r); pp.set(r); this.live = false; break; }
+      if (en < 0.002 && !bl) { p.set(r); pp.set(r); this.live = false; break; }
     }
   };
+  /* balón con física dentro de la portería: la red lo frena como un muelle y cae a la bolsa (marco de la red) */
+  Net.prototype.ballStep = function (b, h) {
+    var RB = 0.115, K = 520, D = 48, x = b.x, y = b.y, z = b.z;
+    b.vy -= 9.8 * h;
+    if (x > 0) {
+      var pen = x + RB - 2.0; if (pen > 0) { b.vx += (-K * pen - D * b.vx) * h; b.vy *= 1 - 2.5 * h; b.vz *= 1 - 2.5 * h; }
+      var yr = BAR - (BAR - 1.9) * Math.min(1, x / 2), pr = y + RB - yr; if (pr > 0) b.vy += (-K * pr - D * b.vy) * h;
+      var ps = Math.abs(z) + RB - HW; if (ps > 0) b.vz += (-K * ps * (z > 0 ? 1 : -1) - D * b.vz) * h;
+    }
+    b.x += b.vx * h; b.y += b.vy * h; b.z += b.vz * h;
+    if (b.y < RB) { b.y = RB; if (b.vy < 0) b.vy = b.vy < -1 ? -b.vy * 0.35 : 0; b.vx *= 0.97; b.vz *= 0.97; }
+    if (b.x > 2.7) { b.x = 2.7; b.vx = Math.min(0, b.vx); }
+    if (b.x < 0.15 && b.vx < 0) b.vx *= 0.9;              /* la red devuelve poco: el balón se queda dentro */
+  };
   /* punto de la red más cercano (para que el balón quede en la bolsa) */
-  Net.prototype.pocket = function (y, z) { var N = this.N, best = 0, bd = 1e9; for (var i = 0; i < N.cols * N.rows; i++) { var k = i * 3, d = Math.abs(N.r[k + 1] - y) + Math.abs(N.r[k + 2] - z) + (N.r[k + 1] > 1.95 ? 1 : 0); if (d < bd) { bd = d; best = i; } } return [-N.p[best * 3], N.p[best * 3 + 1], -N.p[best * 3 + 2]]; };
+  Net.prototype.pocket = function (y, z) { var N = this.N, best = 0, bd = 1e9; for (var i = 0; i < N.pin.length; i++) { var k = i * 3, d = Math.abs(N.r[k + 1] - y) + Math.abs(N.r[k + 2] - z) + (N.r[k + 1] > 1.95 ? 1 : 0); if (d < bd) { bd = d; best = i; } } return [-N.p[best * 3], N.p[best * 3 + 1], -N.p[best * 3 + 2]]; };
   Net.prototype.draw = function (m) {
     var N = this.N, p = N.p, c = [0.86, 0.88, 0.86], w = 0.008; m.code = C.MAT.MATTE;
     for (var q = 0; q < N.e.length; q += 2) {
@@ -156,6 +191,9 @@ var SP3 = (function () {
     /* ---------- utilidades ---------- */
     S.L = L;
     S.man = function (mo) { var m = new SpRig.Man(mo); S.men.push(m); return m; };
+    /* el balón sigue con física dentro de la portería desde su velocidad actual (o la dada, en marco L) */
+    S.netBallStart = function (v) { var bv = v || S.bv || [-20, 0, 0]; S.netBall = {vx: bv[0], vy: bv[1], vz: bv[2], t: 0}; };
+    S.netBallStop = function () { S.netBall = null; };
     S.place = function (m, x, z, faceGoal) { var p = L(x, 0, z); m.x = p[0]; m.z = p[2]; m.yaw = faceGoal === false ? -PI / 2 : faceGoal === true || faceGoal == null ? PI / 2 : faceGoal; };
     S.faceTo = function (m, x, z) { var p = L(x, 0, z); m.yaw = Math.atan2(p[0] - m.x, p[2] - m.z); };
     S.project = function (x, y, z) { return E.project(L(x, y, z)); };
@@ -247,10 +285,21 @@ var SP3 = (function () {
           if (P.i >= P.f.length - 1) { var d = P.done; S.play = null; if (d) setTimeout(d, 0); }
         } else {
           if (S.onFrame) S.onFrame(dt);
+          var B0 = S.ball;
+          if (S.netBall) {
+            var nb = S.netBall, sub = Math.max(1, Math.ceil(dt / (1 / 300))), hh = dt / sub, nbb = {x: B0.x - GLX, y: B0.y, z: B0.z, vx: nb.vx, vy: nb.vy, vz: nb.vz};
+            for (var si = 0; si < sub; si++) S.net.ballStep(nbb, hh);
+            B0.x = nbb.x + GLX; B0.y = nbb.y; B0.z = nbb.z; nb.vx = nbb.vx; nb.vy = nbb.vy; nb.vz = nbb.vz; nb.t += dt;
+            var spd = Math.hypot(nb.vx, nb.vy, nb.vz);
+            if (S.ballSpin) S.ballSpin(nb.vz / 0.11 * 0.4, 0, -nb.vx / 0.11 * 0.4, dt);
+            if ((spd < 0.12 && nbb.y < 0.13) || nb.t > 5) S.netBall = null;
+          } else if (dt > 0) { if (S.bp) { S.bv = [(B0.x - S.bp[0]) / dt, (B0.y - S.bp[1]) / dt, (B0.z - S.bp[2]) / dt]; } }
+          S.bp = [B0.x, B0.y, B0.z];
           S.men.forEach(function (m) { m.update(dt); });
           if (S.rec && !S.rec.done) { S.rec.f.push(snap()); if (S.rec.f.length > 600) S.rec.f.shift(); }
         }
         camApply(rdt);
+        S.net.touch(S.ball.x - GLX, S.ball.y, S.ball.z);
         S.net.step(dt);
         S.men.forEach(function (m) { m.draw(E); });
         drawBall();
