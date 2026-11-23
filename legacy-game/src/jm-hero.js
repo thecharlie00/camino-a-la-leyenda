@@ -61,7 +61,7 @@ var JMHero = (function () {
     var E = S3.E, rk = rivalKits(), V = {S3: S3, busy: false, moves: [], trail: null, alive: true, aim: null};
     var st0 = o.get();
     var mineKit = o.mine ? I.myKit() : teamKit(0);
-    V.holder = S3.man(Object.assign({}, mineKit));
+    V.holder = V.holder0 = S3.man(Object.assign({}, mineKit));
     V.mates = st0.mates.map(function (m, i) { return S3.man(teamKit(i + 1)); });
     V.rivals = st0.rivals.map(function (r, i) { return S3.man(rk(i)); });
     V.gk = S3.man(Object.assign(I.rivalKit(true), {num: 1}));
@@ -131,7 +131,35 @@ var JMHero = (function () {
     function say(msg, ms) { tip.textContent = msg || ""; tip.classList.toggle("on", !!msg); clearTimeout(V.tipT); if (msg && ms) V.tipT = setTimeout(function () { tip.classList.remove("on"); }, ms); }
     function shout(txt, cls) { big.textContent = txt; big.className = "jmh-big on " + (cls || ""); clearTimeout(V.bigT); V.bigT = setTimeout(function () { big.className = "jmh-big"; }, 1600); }
     V.say = say;
-    var COL = {pass: [91, 227, 122], shot: [255, 210, 63], none: [255, 255, 255]};
+    var COL = {pass: [91, 227, 122], shot: [255, 210, 63], none: [255, 255, 255], bad: [255, 86, 86], hint: [140, 220, 255]};
+    /* esperas en tiempo de juego (se aceleran al tocar la pantalla durante la animación) */
+    V.waits = [];
+    function wait(ms, fn) { V.waits.push({t: clock + ms / 1000, fn: fn}); }
+    /* zonas de corte: el radio con el que un rival corta un pase o tapa un tiro (unidades del motor) */
+    function pdist(p, pts) { var d = 1e9; for (var i = 1; i < pts.length; i++) d = Math.min(d, JugadaMaestra.segDist(p, pts[i - 1], pts[i])); return d; }
+    function zone(r, thr, hot) {
+      var m = toM(r), n = 22, pul = hot ? 1 + 0.07 * Math.sin(clock * 14) : 1;
+      g.beginPath();
+      for (var i = 0; i <= n; i++) { var a = i / n * PI * 2, q = projL(m[0] + Math.cos(a) * thr * UX * pul, 0.03, m[1] + Math.sin(a) * thr * UZ * pul); if (i) g.lineTo(q[0], q[1]); else g.moveTo(q[0], q[1]); }
+      g.fillStyle = hot ? "rgba(255,70,70,.34)" : "rgba(255,90,90,.12)"; g.fill();
+      g.strokeStyle = hot ? "rgba(255,90,90,.95)" : "rgba(255,120,120,.45)"; g.lineWidth = (hot ? 3 : 1.5) * dpr; g.setLineDash(hot ? [] : [6 * dpr, 6 * dpr]); g.stroke(); g.setLineDash([]);
+    }
+    /* diana del tiro en la portería: verde si entra, amarilla si va al portero, roja si se va fuera */
+    function shotRead(st, z, h) {
+      var y = 50 - z / UZ, off = Math.abs(y - 50), far = GOALX - st.ball[0], P = JugadaMaestra.POST, B = JugadaMaestra.BAR;
+      if (off > P || h > B) return "out";
+      if (st.match) return "in";
+      if (off > P - 0.6 || (h > B - 0.12 && off > 1)) return "edge";
+      if (far > 50 || (far > 34 && !(off >= 5.5 && h >= 1.5)) || (off < 2.6 && h < 1.9)) return "gk";
+      return "in";
+    }
+    function reticle(z, h, kind) {
+      var c = projL(0, cl(h, 0.05, GH + 1.2), z), e = projL(0, cl(h, 0.05, GH + 1.2) + 0.32, z), r = Math.max(7 * dpr, Math.abs(c[1] - e[1]));
+      var rgb = kind === "in" ? "91,227,122" : kind === "out" ? "255,86,86" : kind === "edge" ? "255,160,60" : "255,210,63", pul = 1 + 0.12 * Math.sin(clock * 10);
+      g.save(); g.strokeStyle = "rgba(" + rgb + ",1)"; g.lineWidth = 3 * dpr; g.beginPath(); g.arc(c[0], c[1], r * pul, 0, PI * 2); g.stroke();
+      g.beginPath(); g.moveTo(c[0] - r * 1.6, c[1]); g.lineTo(c[0] - r * 0.5, c[1]); g.moveTo(c[0] + r * 0.5, c[1]); g.lineTo(c[0] + r * 1.6, c[1]); g.moveTo(c[0], c[1] - r * 1.6); g.lineTo(c[0], c[1] - r * 0.5); g.moveTo(c[0], c[1] + r * 0.5); g.lineTo(c[0], c[1] + r * 1.6); g.stroke();
+      g.fillStyle = "rgba(" + rgb + ",.25)"; g.beginPath(); g.arc(c[0], c[1], r * 0.45, 0, PI * 2); g.fill(); g.restore();
+    }
     function strokePath(pts, alpha, w, kind, dash) {
       if (pts.length < 2) return;
       var c = COL[kind || "none"], rgb = c[0] + "," + c[1] + "," + c[2];
@@ -161,6 +189,8 @@ var JMHero = (function () {
       g.beginPath(); g.moveTo(p[0], p[1] + s); g.lineTo(p[0] - s, p[1] - s * 0.4); g.lineTo(p[0] + s, p[1] - s * 0.4); g.closePath(); g.fill(); g.stroke();
     }
     var flash = document.createElement("div"); flash.className = "jmh-flash"; host.appendChild(flash);
+    var ff = document.createElement("div"); ff.className = "jmh-ff"; ff.setAttribute("aria-hidden", "true"); ff.textContent = "▶▶"; host.appendChild(ff);
+    var rep = document.createElement("div"); rep.className = "jmh-rep"; rep.setAttribute("aria-hidden", "true"); rep.innerHTML = "<i></i><i></i><b>" + tt("Repetición") + "</b><small>" + tt("Toca para saltar") + "</small>"; host.appendChild(rep);
     function flashOn(col) { flash.style.background = col || "#fff"; flash.classList.remove("on"); void flash.offsetWidth; flash.classList.add("on"); }
     /* textos que flotan sobre el campo (¡Pase!, ¡Al hueco!...) */
     V.floats = [];
@@ -192,6 +222,8 @@ var JMHero = (function () {
     var clock = 0;
     S3.extra.push(function (E2, dt) {
       clock += dt;
+      if (S3.rec && !S3.rec.done && !V.replaying) { V.recN = (V.recN || 0) + 1; V.recT = (V.recT || 0) + dt; }
+      if (V.waits.length) { var due = V.waits.filter(function (w) { return clock >= w.t; }); V.waits = V.waits.filter(function (w) { return clock < w.t; }); due.forEach(function (w) { try { w.fn(); } catch (e) {} }); }
       if (cv.width !== Math.round(cv.getBoundingClientRect().width * dpr)) fit();
       g.clearRect(0, 0, cv.width, cv.height);
       var st = o.get(); if (!st) return;
@@ -208,8 +240,10 @@ var JMHero = (function () {
         var aim = V.draw && V.draw.aim;
         st.mates.forEach(function (m, i) { var man = V.mates[i]; if (!man || !m.open || man === V.holder) return; var p = gpos(man), hot = aim && aim.kind === "pass" && aim.i === i; ring(p[0], p[1], "91,227,122", clock + i, hot); if (hot) marker(p[0], p[1], "91,227,122", clock); });
         var bm = ballG(); ring(bm[0], bm[1], "255,210,63", clock * 1.3, false);
-        if (aim && aim.kind === "shot") { var gl = projL(0, GH + 0.6, aim.z || 0); g.fillStyle = "rgba(255,210,63,.95)"; g.font = "800 " + 13 * dpr + "px sans-serif"; g.textAlign = "center"; g.fillText("▼", gl[0], gl[1]); }
-        if (V.ghost && !V.draw) ghost();
+        if (V.draw) { var thr = aim && aim.kind === "shot" ? 3.5 : 4, gp = V.draw.gp || []; st.rivals.forEach(function (r, ri) { zone(r, thr, gp.length > 1 && aim && aim.kind !== "none" && V.draw.hot && V.draw.hot[ri]); }); }
+        if (aim && aim.kind === "shot") reticle(aim.z || 0, aim.h == null ? 1 : aim.h, V.draw && V.draw.read || "in");
+        if (V.hintA && !V.draw) hintDraw(V.hintA);
+        else if (V.ghost && !V.draw) ghost();
       }
       /* el balón se ve siempre: punto blanco con contorno encima del balón real */
       (function () { var bg = ballG(), c = projL(bg[0], S3.ball.y, bg[1]), e = projL(bg[0], S3.ball.y + BR * 2, bg[1]), r = Math.max(3.2 * dpr, Math.abs(c[1] - e[1]) * 0.6);
@@ -218,6 +252,7 @@ var JMHero = (function () {
       drawBallTrail(dt);
       if (V.draw && V.draw.pts.length > 1) {
         var lp = V.draw.pts.map(local), kind = V.draw.aim ? V.draw.aim.kind : "none";
+        if (kind !== "none" && V.draw.bad) kind = "bad";
         strokePath(lp, 1, 7, kind);
         var tp = lp[lp.length - 1], rgb2 = COL[kind].join(","); g.fillStyle = "rgba(" + rgb2 + ",.35)"; g.beginPath(); g.arc(tp[0], tp[1], (14 + 3 * Math.sin(clock * 12)) * dpr, 0, PI * 2); g.fill();
       }
@@ -241,6 +276,16 @@ var JMHero = (function () {
       g.strokeStyle = "rgba(0,0,0,.35)"; g.lineWidth = 2 * dpr; g.stroke();
     }
     V.ghost = !!o.ghost;
+    /* pista: dibuja la siguiente acción de una solución (la calcula el motor) */
+    function hintDraw(a) {
+      var st = o.get(), J = JugadaMaestra, to = a.k === "shot" ? [96, a.y] : (st.mates.filter(function (m) { return m.i === a.mate; })[0] || {}).p;
+      if (!to) return;
+      var raw = [st.ball].concat(J.bend(st.ball, to, a.off)).concat([to]), n0 = raw.length, pts = raw.map(function (q, i) {
+        var m = toM(q), y = a.k === "shot" ? 0.05 + (a.h - 0.05) * Math.pow(i / (n0 - 1), 1.3) : 0.05; return projL(m[0], y, m[1]); });
+      var k = (clock * 0.5) % 1, n = Math.max(2, Math.round(pts.length * Math.min(1, k * 1.3)));
+      strokePath(pts.slice(0, n), 0.85 * (k > 0.85 ? (1 - k) / 0.15 : 1), 6, "hint", true);
+      if (a.k === "shot") reticle((50 - a.y) * UZ, a.h, "in");
+    }
 
     /* ---------- trazo del usuario ---------- */
     function goalRect() {
@@ -273,10 +318,12 @@ var JMHero = (function () {
     }
     function down(e) {
       var st = o.get();
+      if (V.replaying) { try { S3.stopReplay(); } catch (e2) {} e.preventDefault(); return; }
+      if (V.busy && !V.fast && V.alive) { V.fast = true; S3.ts = 2.6; S3.slowT = 60; ff.classList.add("on"); e.preventDefault(); return; }
       if (!V.alive || V.busy || !st || st.done) return;
       var bg0 = ballG(), bs = S3.project(bg0[0], BR, bg0[1]);
-      V.draw = {id: e.pointerId, pts: [{x: bs.x, y: bs.y}, {x: e.clientX, y: e.clientY}], aim: null};
-      V.ghost = false;
+      V.draw = {id: e.pointerId, pts: [{x: bs.x, y: bs.y}, {x: e.clientX, y: e.clientY}], aim: null, gp: [o.get().ball.slice()], hot: []};
+      V.ghost = false; V.hintA = null;
       try { cv.setPointerCapture(e.pointerId); } catch (err) {}
       say(""); e.preventDefault();
     }
@@ -287,6 +334,14 @@ var JMHero = (function () {
         V.draw.pts.push({x: e.clientX, y: e.clientY});
         var prev = V.draw.aim, a = classify({x: e.clientX, y: e.clientY});
         V.draw.aim = a;
+        var gq = ground({x: e.clientX, y: e.clientY}); if (gq && gq[0] > 1) { var gj = toJ(gq[0], gq[1]); V.draw.gp.push(gj); }
+        var stD = o.get(), thr0 = a.kind === "shot" ? 3.5 : 4, gpp = V.draw.gp, wasBad = V.draw.bad;
+        if (a.kind === "pass") { var mp = stD.mates[a.i].p; gpp = gpp.concat([mp]); }
+        else if (a.kind === "shot") gpp = gpp.concat([[96, cl(50 - a.z / UZ, 7, 93)]]);
+        V.draw.hot = stD.rivals.map(function (r) { return gpp.length > 1 && pdist(r, gpp) < thr0; });
+        V.draw.bad = !stD.match && a.kind !== "none" && V.draw.hot.some(Boolean);
+        if (V.draw.bad && !wasBad) hap("tap");
+        V.draw.read = a.kind === "shot" ? shotRead(stD, a.z, a.h) : null;
         if (a.kind === "pass" && (!prev || prev.i !== a.i)) { var mm = V.mates[a.i]; V.snapT = clock; if (mm && (!mm.clip || mm.clip.n === "idle")) mm.play("point", {side: 0.3}); hap("tap"); try { AU.fx("bounce", 0.12); } catch (e2) {} }
         if (a.kind === "shot" && (!prev || prev.kind !== "shot")) { hap("tap"); try { AU.fx("bounce", 0.18); } catch (e3) {} }
       }
@@ -340,7 +395,9 @@ var JMHero = (function () {
     function play(before, r, aim) {
       var st = o.get(), last = st.log[st.log.length - 1];
       V.busy = true;
-      var fin = function () { V.busy = false; if (V.alive && o.after) o.after(r); };
+      if (!V.steps) { S3.record(true); V.recN = 0; V.recT = 0; } else if (S3.rec) S3.rec.done = false;
+      V.steps = (V.steps || 0) + 1;
+      var fin = function () { V.busy = false; if (S3.rec) S3.rec.done = true; if (V.fast) { V.fast = false; S3.ts = 1; S3.slowT = 0; ff.classList.remove("on"); } if (V.alive && o.after) o.after(r); };
       if (last && last.k === "shot") shotAnim(before, st, r, last, aim, fin);
       else passAnim(before, st, r, last, aim, fin);
     }
@@ -403,14 +460,14 @@ var JMHero = (function () {
             var hs = holderSpot(dest); moveTo(recv, hs[0], hs[1], 0.25, true, false);
             ballAt(dest[0], dest[1]);
             camFor(st, 0.75);
-            setTimeout(fin, red() ? 60 : 520);
+            wait(red() ? 60 : 520, fin);
           } else {
             if (cutter) cutter.play("slide");
             try { AU.fx("wall"); AU.fx("ooh"); } catch (e) {}
             shout(tt("¡Cortado!"), "bad"); hap("bad"); S3.kick(0.3); S3.hitstop(80); flashOn("rgba(255,60,60,.35)");
             var cp2 = route[route.length - 1];
             fly([cp2, [cp2[0] + 2.5, cp2[1] + (cp2[1] > 0 ? 1.5 : -1.5)]], 0.45, function (k) { return BR + 0.4 * 4 * k * (1 - k); }, null);
-            setTimeout(fin, red() ? 80 : 1250);
+            wait(red() ? 80 : 1250, fin);
           }
         });
       });
@@ -471,9 +528,9 @@ var JMHero = (function () {
             var e0 = route[route.length - 1];
             fly([e0, [e0[0] + 4, e0[1] + (e0[1] > 0 ? 2 : -2)]], 0.5, function (k) { return BR + 0.8 * 4 * k * (1 - k); }, null);
           }
-          setTimeout(fin, red() ? 120 : 1650);
+          wait(red() ? 120 : 1650, fin);
         }, function (k) {
-          if (how === "goal" && !slowed && k > 0.72 && !red()) { slowed = true; S3.slow(0.32, 0.55); }
+          if (how === "goal" && !slowed && k > 0.72 && !red() && !V.fast) { slowed = true; S3.slow(0.32, 0.55); }
           if (!gkGo && k > (how === "goal" ? 0.45 : 0.3) && how !== "block") {
             gkGo = true; try { AU.fx("dive"); } catch (e) {}
             if (Math.abs(z) < 1.1 && how !== "goal") V.gk.play(h > 1.7 ? "gkjump" : "gkstay", {h: h, d: dur * 0.5});
@@ -495,7 +552,42 @@ var JMHero = (function () {
       return commit(96, best.y, [], best.h, {z: (50 - best.y) * UZ, h: best.h, path: []});
     };
     V.busy0 = function () { return V.busy; };
-    V.dispose = function () { V.alive = false; clearTimeout(V.tipT); clearTimeout(V.bigT); S3.follow = null; try { S3.dispose(); } catch (e) {} [cv, tip, big, flash, intro].forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); }); host.classList.remove("sp3-host", "jmh-host"); };
+    V.st = function () { return o.get(); };
+    V.hint = function (a) { V.hintA = a || null; V.ghost = false; };
+    /* repetición de toda la jugada con cámara de televisión (toca para saltarla) */
+    V.canReplay = function () { return !!(S3.rec && S3.rec.f && S3.rec.f.length > 20) && !V.busy; };
+    V.replay = function (done) {
+      if (!V.canReplay()) { if (done) done(); return; }
+      V.busy = true; V.replaying = true; V.trail = null; V.floats = []; V.btrail = []; rep.classList.add("on");
+      var side = -1, n = S3.rec.f.length, base = cl((V.recN || 60) / Math.max(0.2, V.recT || 1) / 60, 0.3, 1.3) * 0.85;
+      S3.follow = function (c) {
+        var P = S3.play; if (P) P.rate = P.i > n - 70 * base / 0.85 ? base * 0.5 : base;
+        var b = ballG(), near = cl(b[0] / 22, 0, 1);
+        var eye = S3.L(b[0] + lerp(7, 8, near), lerp(2.6, 8, near), b[1] * 0.4 + side * lerp(6.5, 19, near)), tg = S3.L(Math.max(-0.5, b[0] - lerp(2.5, 4, near)), lerp(1.0, 0.6, near), b[1] * 0.85), a = 0.12;
+        for (var q = 0; q < 3; q++) { c.eye[q] += (eye[q] - c.eye[q]) * a; c.tgt[q] += (tg[q] - c.tgt[q]) * a; }
+        c.fov += (lerp(34, 44, near) - c.fov) * a;
+      };
+      var b0 = S3.rec.f[0].b, g0 = [SP3.GLX - b0[0], -b0[2]];
+      S3.replay([{eye: [g0[0] + 7, 8, g0[1] + side * 19], tgt: [g0[0] - 4, 0.6, g0[1] * 0.85], fov: 44}], base, function () {
+        S3.follow = null; V.replaying = false; V.busy = false; rep.classList.remove("on");
+        if (V.alive) { var st = o.get(); if (st && st.won) { try { AU.fx("cheer"); } catch (e) {} } var hp = gpos(V.holder); S3.camTo([hp[0] + 5, 2.6, hp[1] + 3.5], [hp[0], 1.1, hp[1]], 40, 0.9); }
+        if (done) done();
+      });
+      if (o.get() && o.get().won) try { AU.crowd(0.8); } catch (e) {}
+    };
+    /* rebobinar y reintentar sin volver a montar el estadio */
+    V.snap = function () { return {holder: V.holder, ex: V.ex.slice(), steps: V.steps || 0}; };
+    V.restore = function (sv, fresh) {
+      if (V.busy) return;
+      V.holder = sv.holder; V.ex = sv.ex.slice(); V.steps = sv.steps; V.moves = []; V.waits = []; V.trail = null; V.floats = []; V.btrail = []; V.hintA = null; S3.follow = null;
+      if (fresh) { S3.rec = null; V.steps = 0; }
+      allMen().forEach(function (m) { m.play("idle"); });
+      S3.place(V.gk, 0.6, 0, false); V.gk.play("gkready", {amp: 0.05});
+      var st = o.get(); layout(st, red() ? 0 : 0.45); ballAt(toM(st.ball)[0], toM(st.ball)[1]); S3.ball.show = true;
+      camFor(st, red() ? 0 : 0.7); try { AU.fx("whistle"); } catch (e) {}
+    };
+    V.restart = function () { V.restore({holder: V.holder0, ex: [], steps: 0}, true); };
+    V.dispose = function () { V.alive = false; clearTimeout(V.tipT); clearTimeout(V.bigT); S3.follow = null; try { S3.dispose(); } catch (e) {} [cv, tip, big, flash, intro, ff, rep].forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); }); host.classList.remove("sp3-host", "jmh-host"); };
     S3.start();
     api.last = V;
     return V;
@@ -517,7 +609,12 @@ var JMHero = (function () {
       ".jmh-intro.on{transform:none}.jmh-intro.off{transform:translateX(-110%);transition:transform .3s ease-in}" +
       ".jmh-intro small{display:inline-block;padding:4px 12px;border-radius:999px;background:#ffd23f;color:#111;font:800 12px/1.2 var(--f-body,sans-serif);letter-spacing:.08em;text-transform:uppercase}" +
       ".jmh-intro b{display:block;margin-top:8px;padding:10px 0;background:linear-gradient(90deg,transparent,rgba(0,0,0,.65) 15%,rgba(0,0,0,.65) 85%,transparent);font:800 clamp(26px,8vw,44px)/1.05 var(--f-disp,sans-serif);text-transform:uppercase;text-shadow:0 3px 0 #000}" +
-      "@media (prefers-reduced-motion:reduce){.jmh-big,.jmh-tip,.jmh-intro{transition:none;animation:none}.jmh-flash.on{animation:none}}";
+      ".jmh-ff{position:absolute;right:14px;top:50%;z-index:3;padding:6px 10px;border-radius:10px;background:rgba(0,0,0,.55);color:#ffd23f;font:800 14px/1 var(--f-body,sans-serif);opacity:0;transition:opacity .15s;pointer-events:none}.jmh-ff.on{opacity:1}" +
+      ".jmh-rep{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .25s}.jmh-rep.on{opacity:1}" +
+      ".jmh-rep i{position:absolute;left:0;right:0;height:9%;background:#000}.jmh-rep i:first-child{top:0}.jmh-rep i:nth-child(2){bottom:0}" +
+      ".jmh-rep b{position:absolute;left:14px;top:calc(9% + 10px);padding:4px 10px;border-radius:6px;background:#d62828;color:#fff;font:800 13px/1.2 var(--f-body,sans-serif);letter-spacing:.1em;text-transform:uppercase;animation:jmhBlink 1.2s infinite}" +
+      ".jmh-rep small{position:absolute;right:14px;bottom:calc(9% + 10px);color:rgba(255,255,255,.75);font:700 12px/1 var(--f-body,sans-serif)}@keyframes jmhBlink{50%{opacity:.55}}" +
+      "@media (prefers-reduced-motion:reduce){.jmh-big,.jmh-tip,.jmh-intro{transition:none;animation:none}.jmh-flash.on{animation:none}.jmh-rep b{animation:none}}";
     (document.head || document.documentElement).appendChild(s);
   })();
   var api = {ok: ok, mount: mount, toM: toM, toJ: toJ, last: null};

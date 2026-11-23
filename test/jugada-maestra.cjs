@@ -60,3 +60,23 @@ function bend(a, b, off) { const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2,
   for (const l of J.levels()) { const p = J.par(l.id); assert.ok(p >= 1 && p <= l.max, `${l.id} can be solved within its actions`); }
 }
 console.log('Jugada Maestra drawn-play tests passed: blocks, curves, corners, misses, long shots, cut passes and par.');
+
+// Cada reto trae su par y su objetivo de tercera estrella comprobados por el buscador de soluciones.
+{
+  for (const l of J.levels()) {
+    const s = J.fresh(l.id, 5), r = J.solve(JSON.parse(JSON.stringify(s)));
+    assert.ok(r, `${l.id} has a solution`);
+    assert.equal(r.depth, J.par(l.id), `${l.id} stored par matches the solver`);
+    assert.ok(J.solve(JSON.parse(JSON.stringify(s)), (x) => J.bonusTest(l.bonus, x), 400), `${l.id} bonus objective ${l.bonus} is achievable`);
+  }
+  const s = J.fresh('jm-04', 3), h = J.hint(s);
+  assert.ok(h && h.k === 'shot', 'hint suggests the next action');
+  const won = JSON.parse(JSON.stringify(s)); J.resolve(won, 96, h.y, J.bend(won.ball, [96, h.y], h.off), h.h);
+  assert.equal(won.won, true, 'following the hint scores');
+  const res = J.result(won); assert.ok(res.bits & 1 && res.bits & 2, 'scoring at par earns the first two stars');
+  for (let dd = 20000; dd < 20400; dd++) assert.ok(J.level(J.dailyId(dd, 13)), 'every day has a valid daily play');
+  const d = J.dailyId(20260, 30), dl = J.level(d), base = J.level('jm-' + String(+d.slice(4) + 1).padStart(2, '0'));
+  assert.ok(dl && dl.daily && dl.ball[1] === 100 - base.ball[1], 'daily challenge mirrors a campaign play');
+  assert.ok(J.solve(J.fresh(d, 1)), 'daily challenge is solvable');
+}
+console.log('Jugada Maestra solver tests passed: par, third-star objectives, hints and daily challenge.');
