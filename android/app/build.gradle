@@ -42,8 +42,8 @@ android {
         applicationId 'com.caminoleyenda.app'
         minSdk 24
         targetSdk 36
-        versionCode envOr('VERSION_CODE', '89').toInteger()
-        versionName envOr('VERSION_NAME', '5.39')
+        versionCode envOr('VERSION_CODE', '90').toInteger()
+        versionName envOr('VERSION_NAME', '5.40')
     }
 
     sourceSets {
