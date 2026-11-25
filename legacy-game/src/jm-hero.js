@@ -134,6 +134,8 @@ var JMHero = (function () {
     var COL = {pass: [91, 227, 122], shot: [255, 210, 63], none: [255, 255, 255], bad: [255, 86, 86], hint: [140, 220, 255]};
     /* esperas en tiempo de juego (se aceleran al tocar la pantalla durante la animación) */
     V.waits = [];
+    /* al terminar la jugada el público se calma: nada de ruido de estadio de fondo en la tarjeta de resultado */
+    function calm() { var st = o.get(); if (!st || !st.done) return; clearTimeout(V.calmT); V.calmT = setTimeout(function () { if (V.alive && !V.busy && o.get() && o.get().done) try { AU.stop(); } catch (e) {} }, st.won ? 2600 : 900); }
     function wait(ms, fn) { V.waits.push({t: clock + ms / 1000, fn: fn}); }
     /* zonas de corte: el radio con el que un rival corta un pase o tapa un tiro (unidades del motor) */
     function pdist(p, pts) { var d = 1e9; for (var i = 1; i < pts.length; i++) d = Math.min(d, JugadaMaestra.segDist(p, pts[i - 1], pts[i])); return d; }
@@ -418,7 +420,7 @@ var JMHero = (function () {
       V.busy = true;
       if (!V.steps) { S3.record(true); V.recN = 0; V.recT = 0; } else if (S3.rec) S3.rec.done = false;
       V.steps = (V.steps || 0) + 1;
-      var fin = function () { V.busy = false; if (S3.rec) S3.rec.done = true; if (V.fast) { V.fast = false; S3.ts = 1; S3.slowT = 0; ff.classList.remove("on"); } if (V.alive && o.after) o.after(r); };
+      var fin = function () { V.busy = false; if (S3.rec) S3.rec.done = true; if (V.fast) { V.fast = false; S3.ts = 1; S3.slowT = 0; ff.classList.remove("on"); } if (V.alive && o.after) o.after(r); calm(); };
       if (last && last.k === "shot") shotAnim(before, st, r, last, aim, fin);
       else passAnim(before, st, r, last, aim, fin);
     }
@@ -612,7 +614,7 @@ var JMHero = (function () {
       var b0 = S3.rec.f[0].b, g0 = [SP3.GLX - b0[0], -b0[2]];
       S3.replay([{eye: [g0[0] + 7, 8, g0[1] + side * 19], tgt: [g0[0] - 4, 0.6, g0[1] * 0.85], fov: 44}], base, function () {
         S3.follow = null; V.replaying = false; V.busy = false; rep.classList.remove("on");
-        if (V.alive) { var st = o.get(); if (st && st.won) { try { AU.fx("cheer"); } catch (e) {} } var hp = gpos(V.holder); S3.camTo([hp[0] + 5, 2.6, hp[1] + 3.5], [hp[0], 1.1, hp[1]], 40, 0.9); }
+        if (V.alive) { var st = o.get(); if (st && st.won) { try { AU.fx("cheer"); } catch (e) {} } calm(); var hp = gpos(V.holder); S3.camTo([hp[0] + 5, 2.6, hp[1] + 3.5], [hp[0], 1.1, hp[1]], 40, 0.9); }
         if (done) done();
       });
       if (o.get() && o.get().won) try { AU.crowd(0.8); } catch (e) {}
@@ -629,7 +631,7 @@ var JMHero = (function () {
       camFor(st, red() ? 0 : 0.7); try { AU.fx("whistle"); } catch (e) {}
     };
     V.restart = function () { V.restore({holder: V.holder0, ex: [], steps: 0}, true); };
-    V.dispose = function () { V.alive = false; clearTimeout(V.tipT); clearTimeout(V.bigT); S3.follow = null; try { S3.dispose(); } catch (e) {} [cv, tip, big, flash, intro, ff, rep].forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); }); host.classList.remove("sp3-host", "jmh-host"); };
+    V.dispose = function () { V.alive = false; clearTimeout(V.calmT); try { AU.stop(); } catch (e0) {} clearTimeout(V.tipT); clearTimeout(V.bigT); S3.follow = null; try { S3.dispose(); } catch (e) {} [cv, tip, big, flash, intro, ff, rep].forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); }); host.classList.remove("sp3-host", "jmh-host"); };
     S3.start();
     api.last = V;
     return V;

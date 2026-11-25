@@ -29,6 +29,8 @@ var SpModes = (function () {
       try { ac = new A(); out = ac.createGain(); out.gain.value = vol() * 0.6; out.connect(ac.destination); var n = ac.sampleRate * 2, b = ac.createBuffer(1, n, ac.sampleRate), d = b.getChannelData(0); for (var i = 0; i < n; i++) d[i] = Math.random() * 2 - 1; noise = b; } catch (e) { ac = null; return false; }
       return true;
     }
+    /* con la app en segundo plano no suena nada (ni el murmullo del estadio) */
+    try { document.addEventListener("visibilitychange", function () { if (!ac) return; try { if (document.hidden) ac.suspend(); else if (crowdG && crowdG.gain.value > 0.001) ac.resume(); } catch (e) {} }); } catch (e) {}
     function ok() { if (!vol() || !init()) return false; if (ac.state === "suspended") { try { ac.resume(); } catch (e) {} } return true; }
     function env(g, t0, a, p, d) { g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(p, t0 + a); g.gain.exponentialRampToValueAtTime(0.0001, t0 + a + d); }
     function tone(type, f0, f1, dur, p, dl) { var t0 = ac.currentTime + (dl || 0), o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.setValueAtTime(f0, t0); o.frequency.exponentialRampToValueAtTime(Math.max(20, f1), t0 + dur); o.connect(g); g.connect(out); env(g, t0, 0.005, p, dur); o.start(t0); o.stop(t0 + dur + 0.05); }
